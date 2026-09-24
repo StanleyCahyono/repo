@@ -1,0 +1,518 @@
+{
+  "batch_id": "B08",
+  "theme": "autonomy C2 and robotics interoperability",
+  "companies": [
+    {
+      "name": "Auterion",
+      "aka": "Auterion Inc. / Auterion AG (ETH Zurich spin-off); products AuterionOS, Skynode, Nemyx, MAVSDK",
+      "founding_year": 2017,
+      "headquarters": "Arlington, Virginia (US HQ); Munich (EU HQ); engineering in Zurich; personnel in Kyiv",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient in this batch (company describes itself as 'a little company that's growing really fast', Sept 2025).",
+      "founders": ["Lorenz Meier (CEO; original author of PX4)", "Kevin Sartori (co-founder)"],
+      "founder_backgrounds": "FACT: Lorenz Meier created the open-source PX4 autopilot (credited as original author on the PX4 GitHub repo) and the company is an ETH Zurich spin-off. Kevin Sartori is a co-founder quoted at MAVSDK launch (2019). Confidence HIGH.",
+      "total_disclosed_funding_usd": "$195M raised to date after the Sept 2025 Series B (Meier to Bloomberg via Taipei Times, 2025-09-28). Series B = $130M incl. $25M non-dilutive from Rochefort backed by DoD Office of Strategic Capital.",
+      "latest_valuation": "'North of $600M' at Series B (Sept 23, 2025). Meier said revenue was 'close to' $100M and cash-flow positive (Sept 2025) - company statement, not audited.",
+      "major_investors": ["Bessemer Venture Partners (Series B lead; Alex Ferrara joined board)", "Lakestar", "Mosaic Ventures", "Costanoa Ventures", "Rochefort Asset Management (OSC-backed non-dilutive)"],
+      "c4isr_products": [
+        {"name": "AuterionOS", "description": "Commercial distribution of the open-source PX4 autopilot plus containerized app framework; positioned as an OS that unifies fleets from multiple manufacturers so one operator can control many vehicles.", "input_process_output_user": "Input: sensors, autopilot telemetry, operator commands. Process: flight control, onboard vision/AI apps (ROS 2 SDK). Output: vehicle control, telemetry to GCS/C2. User: drone OEMs and military operators."},
+        {"name": "Skynode S / Skynode X", "description": "Skynode S: 38 g onboard AI computer combining flight controller, vision processing and encrypted radio that converts manually flown FPV drones into autonomous terminal-guidance systems (locks and tracks moving targets to ~1 km under GPS/comms jamming). Skynode X: all-in-one autopilot + mission computer.", "input_process_output_user": "Input: camera video, IMU, RF link. Process: onboard target lock/track and navigation in denied environments. Output: autonomous terminal guidance. User: FPV strike crews (Ukraine), allied forces."},
+        {"name": "Nemyx", "description": "Swarm/mission-autonomy engine built on AuterionOS: one operator selects targets and the software handles navigation, formation control, deconfliction and terminal guidance across many heterogeneous drones; reassigns targets if a drone is lost.", "input_process_output_user": "Input: operator mission parameters and weapons-release authorization; drone telemetry. Process: multi-vehicle task allocation and coordination. Output: coordinated strikes/ISR. User: small units (one operator, many drones)."},
+        {"name": "MAVSDK / Auterion SDK / px4-ros2-interface-lib", "description": "Open-source (BSD-3) MAVLink API (C++, Python, Swift, Java, JS, Rust, C#) using gRPC/protobuf; ROS 2-based SDK for onboard apps; library for external flight modes from a companion computer.", "input_process_output_user": "Input: MAVLink telemetry/commands. Process: high-level API abstraction. Output: apps and GCS integrations. User: third-party developers and integrators."}
+      ],
+      "exact_problem_solved": "Makes cheap mass-produced drones from many manufacturers autonomous and interoperable (target lock in jammed/GPS-denied conditions) and lets a single operator command many of them (swarming) without changing airframes. Company claim: raises FPV effectiveness from ~20% to ~90% in jammed environments (not independently audited).",
+      "primary_users": ["Ukrainian Armed Forces FPV/strike units", "U.S. Army units in experimentation (JPMRC 26-1)", "Drone OEMs (HEIGHT Technologies, Skyfall, Airlogix, NCSIST partners)"],
+      "primary_buyers": ["U.S. DoD (Ukraine security assistance; DIU)", "German federal government (JV production orders)", "Taiwan MND/NCSIST (MoU + multi-year software deal)", "Drone manufacturers (flight-stack orders)"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "PROCESS", "IDENTIFY", "DECIDE", "TASK"],
+      "mission_layer": ["fires (one-way attack / FPV strike)", "ISR", "maneuver (small-unit UAS)", "multi-domain (air/land/sea claimed)"],
+      "segment_ids": [],
+      "hw_sw_mix": "both - software company whose defense revenue is delivered largely via the Skynode compute module (hardware) bundled with AuterionOS/Nemyx.",
+      "market_posture": "dual-use (open-source/commercial origins) now self-described as a defense software company",
+      "contracts": [
+        {"title": "33,000 Skynode S strike kits for Ukraine", "customer": "Ukraine Armed Forces (U.S.-funded)", "contracting_org": "U.S. Department of Defense (specific contracting activity not disclosed; INFERENCE: Ukraine security assistance channel)", "vehicle_type": "FAR", "ceiling": "n/a", "obligated": "Public evidence insufficient", "awarded_value": "$50M", "funded_amount": "$50M (reported as contract value)", "task_orders": "n/a", "date": "2025-07-28", "period_of_performance": "Shipments beginning 2025; Meier told Reuters (July 2026) the 33,000 units had been delivered", "prime_or_sub": "prime", "prototype_or_production": "production delivery (>10x prior volumes)", "source_url": "https://www.usnews.com/news/world/articles/2025-07-28/auterion-says-it-will-provide-ukraine-with-33-000-ai-drone-guidance-kits", "pub_date": "2025-07-28", "confidence": "HIGH"},
+        {"title": "DIU Project Artemis long-range one-way attack drone prototype", "customer": "DIU / OSD", "contracting_org": "Defense Innovation Unit", "vehicle_type": "OTA prototype", "ceiling": "Not disclosed", "obligated": "Public evidence insufficient", "awarded_value": "Not disclosed", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2025-03 (selection); 2025-10 (completion announced)", "period_of_performance": "Mar-Oct 2025", "prime_or_sub": "prime (with unnamed Ukrainian airframe partner)", "prototype_or_production": "prototype; operational testing in Ukraine reported", "source_url": "https://thedefensepost.com/2025/10/16/auterion-artemis-drone-diu-us/", "pub_date": "2025-10-16", "confidence": "MEDIUM (value undisclosed; follow-on production not evidenced)"},
+        {"title": "Auterion-Skyfall 50,000 FPV (Shrike) drones with Skynode S", "customer": "Ukraine Armed Forces", "contracting_org": "Funded by German government (reported ~EUR 90M / ~$100M)", "vehicle_type": "foreign", "ceiling": "n/a", "obligated": "Public evidence insufficient", "awarded_value": "~EUR 90M (CNBC/Nasdaq); ~$100M (Ars Technica)", "funded_amount": "Reported as funded", "task_orders": "n/a", "date": "2026-07-13", "period_of_performance": "Deliveries began mid-July 2026; 'coming months'", "prime_or_sub": "co-prime with Skyfall", "prototype_or_production": "production", "source_url": "https://breakingdefense.com/2026/07/auterion-ukrainian-drone-maker-skyfall-to-supply-50000-fpvs/", "pub_date": "2026-07", "confidence": "HIGH on existence; MEDIUM on value"},
+        {"title": "Auterion Airlogix JV first German production contract (Seth X, Anubis strike systems; >5,000 units)", "customer": "Ukraine Armed Forces", "contracting_org": "German federal government (cooperation agreement Berlin-Kyiv)", "vehicle_type": "foreign", "ceiling": "n/a", "obligated": "Public evidence insufficient", "awarded_value": "Not disclosed ('largest German production order for heavy autonomous strike drones to date')", "funded_amount": "Described as funded", "task_orders": "n/a", "date": "2026-04-14", "period_of_performance": "Serial production started 2026", "prime_or_sub": "JV prime", "prototype_or_production": "production", "source_url": "https://auterion.com/auterion-airlogix-joint-venture-receives-first-contract-from-germany/", "pub_date": "2026-04-17", "confidence": "HIGH on existence; value unknown"},
+        {"title": "HEIGHT Technologies flight-stack order (>500 ISR systems)", "customer": "HEIGHT Technologies (OEM)", "contracting_org": "commercial", "vehicle_type": "FAR", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "Not disclosed", "funded_amount": "n/a", "task_orders": "n/a", "date": "2025-08", "period_of_performance": "n/a", "prime_or_sub": "supplier", "prototype_or_production": "production", "source_url": "https://www.startupticker.ch/en/news/auterion-maintains-growth-momentum", "pub_date": "2025-08-07", "confidence": "MEDIUM"},
+        {"title": "Taiwan multi-year software deal and NCSIST MoU (AuterionOS + Nemyx into new UxVs)", "customer": "Taiwan MND / NCSIST", "contracting_org": "NCSIST", "vehicle_type": "foreign", "ceiling": "n/a", "obligated": "Public evidence insufficient", "awarded_value": "Not disclosed", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2025-06", "period_of_performance": "multi-year", "prime_or_sub": "prime", "prototype_or_production": "MoU/roadmap ('hundreds of thousands of drones' aspiration) - NOT a production order", "source_url": "https://www.taipeitimes.com/News/biz/archives/2025/09/28", "pub_date": "2025-09-28", "confidence": "MEDIUM"}
+      ],
+      "operational_deployments": [
+        {"what": "Combat use of Skynode strike kits in Ukraine (tens of thousands of units; ~40,000 prior to the Skyfall order)", "evidence": "Reuters (via US News) and Breaking Defense; Meier confirmed 33,000-unit delivery to Reuters", "source_url": "https://www.usnews.com/news/world/articles/2025-07-28/auterion-says-it-will-provide-ukraine-with-33-000-ai-drone-guidance-kits"},
+        {"what": "Company claim: autonomy software supplied to at least 100,000 drones in 2026 funded by several Western governments", "evidence": "Meier statement July 13, 2026 (company claim, not independently verified)", "source_url": "https://www.techtimes.com/"}
+      ],
+      "exercises_demos": [
+        {"event": "U.S. Army JPMRC 26-1 (Hawaii): Nemyx controlled a 20-UAV swarm", "year": "2025-2026", "note": "Reported by Janes via Inside Unmanned Systems; architecture claimed to scale to hundreds", "source_url": "https://insideunmannedsystems.com/"},
+        {"event": "Dept. of War 'Swarm Forge' video (Jan 2026): FPV drones striking targets with Nemyx on Skynode", "year": "2026", "note": "Government-released video", "source_url": "https://www.straitstimes.com/"},
+        {"event": "Florida live-fire: one operator, multiple simultaneous strikes (Skynode + Nemyx)", "year": "2026-01", "note": "Company demonstration", "source_url": "https://insideunmannedsystems.com/"},
+        {"event": "DIU Artemis operational testing in Ukraine", "year": "2025", "note": "Prototype completion", "source_url": "https://thedefensepost.com/2025/10/16/auterion-artemis-drone-diu-us/"}
+      ],
+      "integration_partners": ["Rheinmetall (interoperable drone standards, 2024)", "Lockheed Martin (company-claimed partnership)", "Skyfall (Shrike FPV)", "Airlogix (JV GmbH)", "HEIGHT Technologies", "NCSIST (Taiwan)", "PX4 / Dronecode Foundation ecosystem"],
+      "apis_sdks_open_interfaces": "FACT: MAVSDK (BSD-3, gRPC/proto, multi-language), px4-ros2-interface-lib (BSD-3, external flight modes via ROS 2), libmav; AuterionOS apps are ROS 2-based containers; 88 public repos in the Auterion GitHub org. PX4 itself is BSD-3 under Dronecode/Linux Foundation governance (12.7k stars). Nemyx is closed (no public repo).",
+      "security_classification_requirements": "Public evidence insufficient. Products are exported to Ukraine/Taiwan/Germany, implying ITAR/EAR handling; U.S. HQ in Arlington. No facility-clearance evidence found in this batch.",
+      "allied_international_activity": "Strong: Ukraine (combat), Germany (JV, government-funded orders), Taiwan (NCSIST MoU, multi-year software deal), Rheinmetall partnership; offices in Munich and Zurich.",
+      "technical_differentiator": "Open-architecture OS on the dominant open-source autopilot (PX4), enabling heterogeneous-fleet interoperability and swarming with a tiny, cheap compute module; combat-derived terminal-guidance models.",
+      "suspected_moat": "INFERENCE: ecosystem/standards moat (PX4/MAVLink lineage and OEM adoption), combat data and iteration loop in Ukraine, and government-funded volume that competitors lack. Confidence MEDIUM.",
+      "major_competitors": ["Anduril (Lattice)", "Shield AI (Hivemind)", "Skydio", "ModalAI (VOXL)", "Helsing (Altra)", "Quantum Systems", "Ukrainian autonomy firms (The Fourth Law, Swarmer)", "Red Cat/Teal", "Palladyne AI"],
+      "obvious_weaknesses": "Revenue concentration in Ukraine-related, government-funded orders; U.S. domestic program-of-record adoption thin relative to overseas; hardware supply chain (Skynode) exposure; open-source base lowers switching costs for OEMs; efficacy claims not independently audited.",
+      "evidence_user_adoption": "Strong: tens of thousands of strike kits in combat use in Ukraine; OEM flight-stack orders (HEIGHT); U.S. Army JPMRC swarm use. Confidence HIGH.",
+      "evidence_repeat_procurement": "Strong: 33,000-unit U.S.-funded order followed by 50,000-unit German-funded Skyfall order and Airlogix JV production order (2025-2026). Confidence HIGH.",
+      "evidence_prototype_to_production": "Mixed: production at scale for Ukraine; DIU Artemis prototype completed but no U.S. production follow-on evidenced. Confidence MEDIUM.",
+      "whitespace_cells": [
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "TRANSPORT", "echelon": "individual_platform"},
+        {"chain_step": "COLLECT", "echelon": "individual_platform"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (from public GitHub, not job postings; careers page unreachable): C++/Python/ROS 2/MAVLink/gRPC/protobuf, containerized onboard apps, PX4 uORB/DDS, embedded ARM Cortex-M tooling, JSBSim/Gazebo simulation. Confidence MEDIUM.",
+      "confidence_notes": "Contract facts HIGH (multiple Tier 3 outlets incl. Reuters). Values for Skyfall/Airlogix orders MEDIUM. Employee count, Nemyx C2 integration specifics (ATAK/Delta), and U.S. Army procurement quantities: public evidence insufficient (company site and several outlets blocked by egress proxy).",
+      "sources": [
+        {"url": "https://www.usnews.com/news/world/articles/2025-07-28/auterion-says-it-will-provide-ukraine-with-33-000-ai-drone-guidance-kits", "title": "Auterion Says It Will Provide Ukraine With 33,000 AI Drone Guidance Kits (Reuters)", "pub_date": "2025-07-28", "type": "independent"},
+        {"url": "https://auterion.com/auterion-raises-130-million-series-b-as-their-ai-enabled-software-powering-low-cost-commercial-hardware-at-scale-transforms-warfare/", "title": "Auterion raises $130 Million Series B", "pub_date": "2025-09-23", "type": "company"},
+        {"url": "https://www.citybiz.co/article/750109/bessemer-venture-partners-leads-130m-series-b-for-drone-software-maker-auterion/", "title": "Bessemer leads $130M Series B (valuation north of $600M)", "pub_date": "2025-09", "type": "financial"},
+        {"url": "https://thedefensepost.com/2025/10/16/auterion-artemis-drone-diu-us/", "title": "Auterion Wraps Up Artemis Long-Range Drone Under DIU Project", "pub_date": "2025-10-16", "type": "independent"},
+        {"url": "https://breakingdefense.com/2026/07/auterion-ukrainian-drone-maker-skyfall-to-supply-50000-fpvs/", "title": "Auterion, Skyfall to supply 50,000 FPVs", "pub_date": "2026-07", "type": "independent"},
+        {"url": "https://auterion.com/auterion-airlogix-joint-venture-receives-first-contract-from-germany/", "title": "Auterion Airlogix JV receives first contract from Germany", "pub_date": "2026-04-17", "type": "company"},
+        {"url": "https://www.startupticker.ch/en/news/auterion-maintains-growth-momentum", "title": "Auterion maintains growth momentum (HEIGHT order, NCSIST MoU)", "pub_date": "2025-08-07", "type": "independent"},
+        {"url": "https://github.com/Auterion/MAVSDK", "title": "MAVSDK GitHub", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/PX4/PX4-Autopilot", "title": "PX4 Autopilot GitHub", "pub_date": "n/a", "type": "independent"},
+        {"url": "https://insideunmannedsystems.com/", "title": "Auterion Demonstrates One-Operator Drone Swarm Strike in U.S. Live-Fire Test (JPMRC 26-1 via Janes)", "pub_date": "2026-01-21", "type": "independent"}
+      ]
+    },
+    {
+      "name": "AeroVironment (Tomahawk Robotics / Kinesis)",
+      "aka": "AV (NASDAQ: AVAV); Tomahawk Robotics product line; Kinesis common control software; Tomahawk GCS/Grip controller",
+      "founding_year": 2018,
+      "headquarters": "AeroVironment: Arlington, Virginia. Tomahawk Robotics: Melbourne, Florida (acquired Aug 2023)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "Public evidence insufficient for the Tomahawk product line; AV corporate headcount not in scope.",
+      "founders": ["Tomahawk Robotics founders reported as Brad Truesdell (CEO) and Matt Summer (CTO) - not re-verified in this batch (LOW)"],
+      "founder_backgrounds": "Public evidence insufficient in this batch (acquisition press release on avinc.com and SEC exhibit unreachable via proxy). HYPOTHESIS: defense-robotics engineering backgrounds. LOW.",
+      "total_disclosed_funding_usd": "Acquired by AeroVironment for $120M (cash and stock), announced 2023-08-22. Prior venture funding not retrieved.",
+      "latest_valuation": "$120M acquisition price (Aug 2023). AV market data not in scope.",
+      "major_investors": ["AeroVironment (100% owner since 2023)"],
+      "c4isr_products": [
+        {"name": "Kinesis", "description": "AI-enhanced, open-architecture common control system that puts multiple unmanned ground/air vehicles, sensors and third-party software onto a 'single pane of glass'; tactical mission planning and C2 software selected for Army HMIF Increment 1.", "input_process_output_user": "Input: telemetry/video from heterogeneous robots (e.g., GDLS SMET, Skydio X2D, Teal Golden Eagle, FLIR ION M440, Parrot ANAFI) and sensors. Process: common control, mission planning, AI assistance. Output: unified robot tasking and shared situational picture. User: dismounted soldiers/Marines and armored crews."},
+        {"name": "Tomahawk GCS / Grip controller", "description": "Handheld/tactical ground control hardware paired with Kinesis (company product page; details unreachable).", "input_process_output_user": "Input: operator inputs. Process: control of multiple unmanned systems. Output: robot commands. User: small-unit operators."}
+      ],
+      "exact_problem_solved": "Eliminates the one-controller-per-robot burden by giving small units a single common controller/software that can task many air and ground robots from different vendors and share what they see.",
+      "primary_users": ["U.S. Army infantry and armored formations (HMIF Inc 1)", "U.S. Marine Corps (MCWL experiments)", "SOF users (HYPOTHESIS; not evidenced in this batch)"],
+      "primary_buyers": ["U.S. Army RCCTO (HMIF Increment 1)", "USMC Warfighting Lab via ATI consortium", "AeroVironment platform programs (Switchblade/Puma/Jump 20 integration - INFERENCE)"],
+      "technical_layer": ["INGEST", "NORMALIZE", "FUSE", "VISUALIZE", "DECIDE", "TASK"],
+      "mission_layer": ["maneuver (human-machine integrated formations)", "ISR", "fires (Launched Effects with Applied Intuition)"],
+      "segment_ids": [],
+      "hw_sw_mix": "both - Kinesis software plus controller hardware; AV is primarily a hardware prime.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {"title": "Army RCCTO award for Kinesis; AV named Lead Software & Systems Integrator for HMIF Increment 1", "customer": "U.S. Army", "contracting_org": "Army Rapid Capabilities and Critical Technologies Office (RCCTO)", "vehicle_type": "OTA prototype (INFERENCE from RCCTO practice; vehicle not confirmed)", "ceiling": "Not disclosed", "obligated": "Public evidence insufficient", "awarded_value": "Not disclosed in retrieved sources", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2025-09-29", "period_of_performance": "HMIF Inc 1 spans FY24-FY27; first formations targeted 2027", "prime_or_sub": "prime/lead integrator (partners Neya Systems, Parry Labs, QinetiQ)", "prototype_or_production": "prototype/integration (not production)", "source_url": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/", "pub_date": "2025-09-29", "confidence": "HIGH on award; LOW on value/vehicle"},
+        {"title": "Common controller for DoD tactical robotic systems (Tomahawk product line)", "customer": "U.S. Marine Corps Warfighting Lab", "contracting_org": "Advanced Technology International (consortium manager) for MCWL", "vehicle_type": "OTA prototype (via consortium; INFERENCE)", "ceiling": "n/a", "obligated": "Public evidence insufficient", "awarded_value": "$2.67M", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2024-02-08", "period_of_performance": "Not disclosed", "prime_or_sub": "prime", "prototype_or_production": "prototype", "source_url": "https://www.businesswire.com/news/home/20240208880027/en", "pub_date": "2024-02-08", "confidence": "MEDIUM"},
+        {"title": "AV-Applied Intuition Mayhem 10 collaborative-autonomy drone pitched to Army Launched Effects", "customer": "U.S. Army (prospective)", "contracting_org": "n/a (industry teaming, no award evidenced)", "vehicle_type": "subcontract", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "None evidenced", "funded_amount": "n/a", "task_orders": "n/a", "date": "2026-07-29", "period_of_performance": "n/a", "prime_or_sub": "AV prime / Applied Intuition autonomy", "prototype_or_production": "pre-award", "source_url": "https://defensescoop.com/2026/07/29/av-applied-intuition-collaborative-autonomy-mayhem-10-drone/", "pub_date": "2026-07-29", "confidence": "HIGH that teaming exists; no contract"}
+      ],
+      "operational_deployments": [
+        {"what": "Fielded use of Kinesis in operational units", "evidence": "Public evidence insufficient in this batch; HMIF fielding not planned before 2027", "source_url": "https://breakingdefense.com/2025/04/army-eyeing-first-human-machine-integrated-formations-in-2027-common-controller-for-robotics/"}
+      ],
+      "exercises_demos": [
+        {"event": "Army HMIF experimentation (common controller for ground and aerial drones; Nett Warrior-like device for dismounts, AMPV-integrated for armor)", "year": "2025-2026", "note": "Army article on HMI tests with combat units; vendor-specific results not retrieved", "source_url": "https://www.army.mil/article/280910/army_advances_human_machine_integration_tests_to_enhance_fight_with_combat_units"},
+        {"event": "USMC MCWL common-controller experimentation", "year": "2024", "note": "Under ATI-managed contract", "source_url": "https://www.businesswire.com/news/home/20240208880027/en"}
+      ],
+      "integration_partners": ["Neya Systems", "Parry Labs", "QinetiQ", "Applied Intuition (Mayhem 10)", "General Dynamics Land Systems (SMET integration)", "Skydio", "Teal/Red Cat", "Teledyne FLIR", "Parrot"],
+      "apis_sdks_open_interfaces": "Company describes Kinesis as open-architecture integrating third-party software; no public SDK/API documentation was reachable. INFERENCE: likely aligns with Army IOP/RAS-G interoperability profiles and MOSA expectations for HMIF; not verified. Confidence LOW.",
+      "security_classification_requirements": "Public evidence insufficient. INFERENCE: RCCTO integrator role implies CUI/ITAR handling and likely cleared personnel. LOW.",
+      "allied_international_activity": "Public evidence insufficient for Kinesis specifically (AV exports platforms widely).",
+      "technical_differentiator": "Vendor-agnostic common control with AI assistance already integrated with multiple fielded UGV/UAS types, now backed by a prime with Army program access (HMIF lead integrator).",
+      "suspected_moat": "INFERENCE: program position (HMIF Inc 1 lead software/systems integrator) plus AV's installed base of Army UAS; integration breadth across third-party robots. MEDIUM.",
+      "major_competitors": ["Anduril (Lattice)", "Palantir (RCV software integration)", "Kutta Technologies", "Textron Systems", "L3Harris", "Forterra (Robotic Research)", "Auterion", "Parry Labs (also partner)"],
+      "obvious_weaknesses": "Kinesis contract values undisclosed; no evidence of production-scale fielding; dependence on Army HMIF schedule (2027); as a hardware prime, AV may be seen as less neutral by other OEMs.",
+      "evidence_user_adoption": "Moderate: multi-service prototyping (Army RCCTO, MCWL) and integrations with fielded robots; no fielded-unit counts. MEDIUM.",
+      "evidence_repeat_procurement": "Weak-to-moderate: ATI/MCWL award described as extending prior DoD work; RCCTO award follows. MEDIUM.",
+      "evidence_prototype_to_production": "Not evidenced; HMIF is pre-production. HIGH confidence that no production award is public.",
+      "whitespace_cells": [
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "FUSE", "echelon": "tactical_unit"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "individual_platform"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: not retrievable (careers pages blocked). HYPOTHESIS: Android/Linux tactical controller software, ROS/JAUS-style robot interfaces, video/telemetry pipelines. LOW.",
+      "confidence_notes": "HMIF award and partner list HIGH (AV press release echoed by Soldier Systems/USUBC). All values, vehicle types, and production status LOW-MEDIUM. Founder details not verified.",
+      "sources": [
+        {"url": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/", "title": "AV Awarded U.S. Army RCCTO Contract for Kinesis; Lead Software & Systems Integrator for HMIF", "pub_date": "2025-09-29", "type": "company"},
+        {"url": "https://breakingdefense.com/2025/04/army-eyeing-first-human-machine-integrated-formations-in-2027-common-controller-for-robotics/", "title": "Army eyeing first HMIF in 2027, common controller for robotics", "pub_date": "2025-04", "type": "independent"},
+        {"url": "https://www.sec.gov/Archives/edgar/data/1368622/000110465923094121/tm2324229d1_ex99-1.htm", "title": "AV to acquire Tomahawk Robotics (8-K exhibit 99.1)", "pub_date": "2023-08-22", "type": "financial"},
+        {"url": "https://www.businesswire.com/news/home/20240208880027/en", "title": "Tomahawk product line awarded $2.67M ATI/MCWL common controller contract", "pub_date": "2024-02-08", "type": "company"},
+        {"url": "https://www.army-technology.com/news/signal-aerovironment-acquires-tomahawk-robotics/", "title": "AeroVironment acquires Tomahawk Robotics for $120m", "pub_date": "2023-08", "type": "independent"},
+        {"url": "https://defensescoop.com/2026/07/29/av-applied-intuition-collaborative-autonomy-mayhem-10-drone/", "title": "AV and Applied Intuition team up on Mayhem 10", "pub_date": "2026-07-29", "type": "independent"},
+        {"url": "https://www.army.mil/article/280910/army_advances_human_machine_integration_tests_to_enhance_fight_with_combat_units", "title": "Army advances human-machine integration tests", "pub_date": "2025", "type": "gov"}
+      ]
+    },
+    {
+      "name": "Applied Intuition (defense, incl. EpiSci)",
+      "aka": "Applied Intuition Defense; EpiSys Science, Inc. (EpiSci) acquired Feb 2025",
+      "founding_year": 2017,
+      "headquarters": "Mountain View, California (EpiSci: Poway/San Diego, California)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient for defense unit; company-wide >1,000 (INFERENCE, LOW).",
+      "founders": ["Qasar Younis (CEO)", "Peter Ludwig (CTO)"],
+      "founder_backgrounds": "FACT (general knowledge, not re-fetched): Younis ex-Y Combinator COO/Google; Ludwig ex-Google Android. EpiSci founded 2012 by Bo Ryu (CEO). MEDIUM.",
+      "total_disclosed_funding_usd": "Series F $600M (June 2025) on top of prior rounds; cumulative estimated >$1.1B (INFERENCE from Series D $175M 2021, Series E $250M 2024, Series F $600M 2025). MEDIUM.",
+      "latest_valuation": "$15B post-money at Series F (June 2025), up from $6B (2024). Sacra estimates ~$830M ARR in 2025 (Tier 4 estimate).",
+      "major_investors": ["BlackRock-managed funds (Series F co-lead)", "Kleiner Perkins (co-lead)", "Andreessen Horowitz", "Lux Capital", "General Catalyst", "Elad Gil", "Porsche/Mercedes-linked strategics (LOW)"],
+      "c4isr_products": [
+        {"name": "Applied Intuition Defense autonomy stack (ground/air/sea) incl. EpiSci tactical AI", "description": "Vehicle autonomy software plus simulation/validation/data tooling; EpiSci brings tactical AI used in the first AI-vs-human dogfight (DARPA ACE), maritime tracking and battle-management C2 software.", "input_process_output_user": "Input: platform sensors, mission tasking. Process: perception, planning, collaborative behaviors, simulation-based validation. Output: autonomous platform behavior and operator-facing mission tools. User: Army RCV/ISV/Launched Effects programs, Air Force CCA-type efforts, Navy."},
+        {"name": "Simulation, validation and data-management suite (defense-adapted)", "description": "Commercial-grade sim/validation tooling reused for defense autonomy development and test.", "input_process_output_user": "Input: logs, scenarios. Process: scenario generation, regression testing. Output: validated autonomy releases. User: program engineering teams."}
+      ],
+      "exact_problem_solved": "Supplies a software-defined autonomy stack and the tooling to validate it, letting DoD ground vehicles, launched effects and aircraft operate with less crew and coordinate collaboratively.",
+      "primary_users": ["Army RCV program", "Army Launched Effects/ISV experiments", "Air Force autonomy test units (via EpiSci lineage)", "Navy surface warfare (EpiSci)"],
+      "primary_buyers": ["DIU", "U.S. Army (PEO GCS / RCCTO)", "Air Force/DARPA (EpiSci)", "Primes as integrators (AV, AEVEX)"],
+      "technical_layer": ["PROCESS", "FUSE", "DECIDE", "TASK", "ASSESS"],
+      "mission_layer": ["maneuver (ground autonomy)", "fires (Launched Effects)", "air (collaborative combat aircraft AI)", "maritime (EpiSci)"],
+      "segment_ids": [],
+      "hw_sw_mix": "software",
+      "market_posture": "dual-use (automotive core; defense as major new line of business)",
+      "contracts": [
+        {"title": "DIU/Army RCV machine-learning & autonomy pipeline vendor (one of two)", "customer": "U.S. Army RCV program", "contracting_org": "Defense Innovation Unit", "vehicle_type": "OTA prototype", "ceiling": "Not disclosed", "obligated": "Public evidence insufficient", "awarded_value": "Not disclosed (Tier 4 report of a $49M 'RCV contract' unverified)", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2024 (per DefenseScoop coverage)", "period_of_performance": "Not disclosed", "prime_or_sub": "prime", "prototype_or_production": "prototype", "source_url": "https://defensescoop.com/2024/04/03/anduril-palantir-diu-army-contract-robotic-combat-vehicle-software/", "pub_date": "2024-04-03", "confidence": "MEDIUM"},
+        {"title": "Reported $171.1M Pentagon production contract and $249M Army BPA", "customer": "DoD / U.S. Army", "contracting_org": "Not identified", "vehicle_type": "BPA", "ceiling": "$249M BPA (ceiling, not revenue) per Tier 4 source", "obligated": "Public evidence insufficient", "awarded_value": "$171.1M 'production contract' per Tier 4 source", "funded_amount": "Unknown", "task_orders": "Unknown", "date": "2025 (reported)", "period_of_performance": "Unknown", "prime_or_sub": "Unknown", "prototype_or_production": "reported as production - UNVERIFIED", "source_url": "https://tsginvest.com/applied-intuition/", "pub_date": "2025", "confidence": "LOW (single Tier 4 source; primary documents unreachable)"},
+        {"title": "Acquisition of EpiSci (tactical AI; DARPA ACE lineage)", "customer": "n/a", "contracting_org": "n/a", "vehicle_type": "FAR", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "Undisclosed", "funded_amount": "n/a", "task_orders": "n/a", "date": "2025-02-06", "period_of_performance": "n/a", "prime_or_sub": "n/a", "prototype_or_production": "n/a", "source_url": "https://www.defensenews.com/air/2025/02/06/applied-intuition-acquires-ai-software-firm-episci/", "pub_date": "2025-02-06", "confidence": "HIGH"}
+      ],
+      "operational_deployments": [
+        {"what": "Fielded operational use of Applied Intuition defense autonomy", "evidence": "Public evidence insufficient; deployments described only in company year-in-review (unreachable)", "source_url": "https://www.appliedintuition.com/blog/2025-year-in-review"}
+      ],
+      "exercises_demos": [
+        {"event": "Autonomous Launched Effects demonstration for U.S. Army with AEVEX Aerospace", "year": "2025", "note": "Company-reported", "source_url": "https://www.appliedintuition.com/blog/2025-year-in-review"},
+        {"event": "Mayhem 10 collaborative-autonomy drone with AV for Army Launched Effects", "year": "2026", "note": "Industry teaming; DefenseScoop", "source_url": "https://defensescoop.com/2026/07/29/av-applied-intuition-collaborative-autonomy-mayhem-10-drone/"},
+        {"event": "EpiSci AI pilot in first AI-vs-human dogfight (USAF/DARPA ACE)", "year": "2024", "note": "Pre-acquisition heritage", "source_url": "https://breakingdefense.com/2025/02/applied-intuition-takes-flight-sets-sail-in-acquiring-episci/"}
+      ],
+      "integration_partners": ["AeroVironment (Mayhem 10)", "AEVEX Aerospace", "DIU", "Army RCV integrators (Anduril/Palantir hold the software-integration role)"],
+      "apis_sdks_open_interfaces": "No public SDK/API; GitHub org has no public repos. EpiSci's GitHub shows MAVLink and ROS 2 forks and RL/uncertainty libraries (SafeAI, SoCRATES). Interoperability claims (e.g., IOP/MOSA) not retrievable. LOW.",
+      "security_classification_requirements": "Public evidence insufficient; EpiSci lineage (DARPA ACE, Navy work) implies cleared facilities. INFERENCE, MEDIUM.",
+      "allied_international_activity": "Public evidence insufficient for defense unit (commercial automotive business is global incl. Germany/Japan/Korea).",
+      "technical_differentiator": "Automotive-grade autonomy tooling and simulation scale applied to defense, combined with EpiSci's tactical AI and multi-domain (air/sea) heritage.",
+      "suspected_moat": "INFERENCE: engineering scale and capital ($15B valuation, ~$830M est. ARR) plus sim/validation tooling that programs adopt as infrastructure. MEDIUM.",
+      "major_competitors": ["Anduril", "Shield AI", "Forterra", "Overland AI", "Kodiak Robotics", "Palantir", "Scale AI (data pipelines)", "Neya Systems", "Auterion"],
+      "obvious_weaknesses": "Defense contract values and production status unverifiable from primary sources; defense is a small share of a commercial-first company; RCV program funding uncertainty; integration role on RCV held by others.",
+      "evidence_user_adoption": "Moderate but weakly evidenced: DIU/Army RCV pipeline award, Army Launched Effects demos, EpiSci heritage. MEDIUM-LOW.",
+      "evidence_repeat_procurement": "Public evidence insufficient beyond Tier 4 claims of multiple awards. LOW.",
+      "evidence_prototype_to_production": "Claimed ($171.1M 'production contract') but not verified against a primary source. LOW.",
+      "whitespace_cells": [
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "DECIDE", "echelon": "individual_platform"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: careers pages unreachable; from EpiSci GitHub: Python/TensorFlow/Keras, deep RL, ROS 2, MAVLink, 5G/LTE proxies. LOW.",
+      "confidence_notes": "Valuation/funding HIGH (company + PRNewswire). EpiSci acquisition HIGH. Contract values LOW (Tier 4 only). Company site and Breaking Defense/DefenseScoop pages blocked by egress proxy.",
+      "sources": [
+        {"url": "https://www.prnewswire.com/in/news-releases/applied-intuition-closes-series-f-at-15-billion-valuation-accelerating-vehicle-intelligence-across-all-moving-machines-302483698.html", "title": "Applied Intuition Closes Series F at $15B Valuation", "pub_date": "2025-06", "type": "company"},
+        {"url": "https://www.defensenews.com/air/2025/02/06/applied-intuition-acquires-ai-software-firm-episci/", "title": "Applied Intuition acquires AI software firm EpiSci", "pub_date": "2025-02-06", "type": "independent"},
+        {"url": "https://breakingdefense.com/2025/02/applied-intuition-takes-flight-sets-sail-in-acquiring-episci/", "title": "Applied Intuition takes flight, sets sail in acquiring EpiSci", "pub_date": "2025-02", "type": "independent"},
+        {"url": "https://sacra.com/research/applied-intuition-at-830m-year/", "title": "Applied Intuition at $830M/year (estimate)", "pub_date": "2025", "type": "financial"},
+        {"url": "https://tsginvest.com/applied-intuition/", "title": "Applied Intuition Stock: $15B Valuation (contract claims)", "pub_date": "2025", "type": "financial"},
+        {"url": "https://defensescoop.com/2026/07/29/av-applied-intuition-collaborative-autonomy-mayhem-10-drone/", "title": "AV and Applied Intuition team up on Mayhem 10", "pub_date": "2026-07-29", "type": "independent"},
+        {"url": "https://github.com/EpiSci", "title": "EpiSys Science GitHub", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Tangram Flex",
+      "aka": "Tangram Flex, Inc.; Tangram Pro; Flex specification language; CSI (Component Software Interface)",
+      "founding_year": null,
+      "headquarters": "Dayton, Ohio",
+      "public_private": "private",
+      "employee_count_approx": "~73 (2024, GetLatka estimate; Tier 4, LOW)",
+      "founders": [],
+      "founder_backgrounds": "Public evidence insufficient in this batch (company site and 'The Tangram Story' blog unreachable). Company originated from AFRL-funded SBIR/STTR work in Dayton.",
+      "total_disclosed_funding_usd": "$6.5M venture (Series A $4.5M Dec 2018; $2M Sept 2023) plus SBIR/STTR (USAF listed as investor). Revenue ~$11M in 2024 (GetLatka estimate, LOW).",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": ["Hale Capital Partners", "U.S. Air Force (SBIR/STTR)"],
+      "c4isr_products": [
+        {"name": "Tangram Pro", "description": "Model-based integration toolchain: author Flex interface specs, model-check architectures (Kind2/SMT), generate Component Software Interfaces (message definitions + serialization) and transform code between standards (e.g., STANAG-4586 to LMCP), and verify components against design.", "input_process_output_user": "Input: interface specs/ICDs (STANAG-4586, LMCP, custom). Process: code generation, transforms, formal checks, assurance. Output: verified adapter/bridge software ('bump-in-the-line' transformers). User: program integration teams for UAS, mission systems, airborne networks."}
+      ],
+      "exact_problem_solved": "Cuts the cost and risk of integrating heterogeneous mission-system components by generating and verifying the interface/translation code between standards instead of hand-coding it.",
+      "primary_users": ["AFRL Information Directorate and Air Force UAS/Agility Prime communities", "Airborne-network integrators (Skydweller/Nokia Federal)"],
+      "primary_buyers": ["AFRL (SBIR/STTR Phase II/III)", "Air Force program offices", "Primes as subcontractor"],
+      "technical_layer": ["TRANSPORT", "INGEST", "NORMALIZE"],
+      "mission_layer": ["ISR/UAS mission systems", "airborne networking", "joint (standards translation)"],
+      "segment_ids": [],
+      "hw_sw_mix": "software",
+      "market_posture": "defense-native",
+      "contracts": [
+        {"title": "SBIR Phase III: software integration and software assurance (Tangram Pro transition)", "customer": "AFRL Information Directorate", "contracting_org": "AFRL/RI", "vehicle_type": "SBIR", "ceiling": "$95M (ceiling; NOT revenue)", "obligated": "Public evidence insufficient (usaspending unreachable)", "awarded_value": "$95M ceiling", "funded_amount": "Unknown", "task_orders": "Unknown", "date": "2020-08-11", "period_of_performance": "Not disclosed", "prime_or_sub": "prime", "prototype_or_production": "Phase III (commercialization) - not a fielded production program", "source_url": "https://halecapital.com/media_archive/news_releases/2020_Aug11_Tangram_Flex_95M_AFRL.pdf", "pub_date": "2020-08-11", "confidence": "HIGH on ceiling; LOW on spend"},
+        {"title": "AFRL Direct-to-Phase II SBIR: rapidly deployable airborne private 5G network (Skydweller prime; Nokia Federal; Tangram Flex interoperability software)", "customer": "AFRL", "contracting_org": "AFRL", "vehicle_type": "SBIR", "ceiling": "Not disclosed", "obligated": "Not disclosed", "awarded_value": "Not disclosed", "funded_amount": "Not disclosed", "task_orders": "n/a", "date": "2026-01-14 (announced); PoP Aug 2025-Aug 2027", "period_of_performance": "2025-08 to 2027-08", "prime_or_sub": "sub", "prototype_or_production": "prototype", "source_url": "https://www.asdnews.com/news/defense/2026/01/14/usaf-contracts-skydweller-aero-nokia-federal-tangram-flex-rapiddeployment-airborne-network", "pub_date": "2026-01-14", "confidence": "HIGH"},
+        {"title": "STTR Phase II from U.S. Air Force", "customer": "USAF", "contracting_org": "AFRL", "vehicle_type": "SBIR", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "Not disclosed", "funded_amount": "n/a", "task_orders": "n/a", "date": "Unknown", "period_of_performance": "Unknown", "prime_or_sub": "prime", "prototype_or_production": "R&D", "source_url": "https://www.airforce-technology.com/news/tangram-flex-sttr/", "pub_date": "n/a", "confidence": "MEDIUM"},
+        {"title": "Support to Air Force UAS and Agility Prime community", "customer": "USAF (AFWERX/Agility Prime)", "contracting_org": "AFWERX", "vehicle_type": "SBIR", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "Not disclosed", "funded_amount": "n/a", "task_orders": "n/a", "date": "2021-09", "period_of_performance": "n/a", "prime_or_sub": "prime", "prototype_or_production": "R&D", "source_url": "https://www.prnewswire.com/news-releases/tangram-flex-inc-to-support-air-force-unmanned-aerial-systems-and-agility-prime-community-301366446.html", "pub_date": "2021-09", "confidence": "MEDIUM"}
+      ],
+      "operational_deployments": [
+        {"what": "Operational fielding of Tangram-generated components", "evidence": "Public evidence insufficient", "source_url": "https://tangramflex.com/"}
+      ],
+      "exercises_demos": [
+        {"event": "Public demos on GitHub: STANAG-4586 to LMCP transformer feeding OpenAMASE; OpenUxAS integration", "year": "n/a", "note": "Developer demos, not military exercises", "source_url": "https://github.com/tangramflex/transformer-app-demo"}
+      ],
+      "integration_partners": ["Skydweller Aero", "Nokia Federal Solutions", "AFRL OpenUxAS/OpenAMASE ecosystem"],
+      "apis_sdks_open_interfaces": "FACT: 24 public GitHub repos (OpenUxAS fork, ZeroMQ proxy, MAVLink/PX4 tutorials, Kind2 model checker, SysML v2 VS Code support, demos using Tangram-generated LMCP and STANAG-4586 CSIs). Tangram Pro itself is proprietary; OMS/UCI/FACE support not evidenced in retrieved material.",
+      "security_classification_requirements": "Public evidence insufficient; AFRL/RI work implies CUI handling. LOW.",
+      "allied_international_activity": "None found.",
+      "technical_differentiator": "Formal-methods-backed interface code generation and translation between military message standards, packaged as a repeatable toolchain rather than bespoke integration services.",
+      "suspected_moat": "INFERENCE: niche expertise and AFRL relationships; weak commercial moat given small scale and reliance on SBIR vehicles. LOW-MEDIUM.",
+      "major_competitors": ["Parry Labs", "Real-Time Innovations (DDS/Connext)", "Skayl", "Kutta Technologies", "Collins Aerospace / RTX (OMS/UCI tooling)", "MOSA integration services from primes", "Anduril Lattice SDK (as an integration layer)"],
+      "obvious_weaknesses": "Tiny funding base ($6.5M) and ~70 staff; revenue tied to SBIR/STTR and a Phase III ceiling with unknown obligations; no evidenced program-of-record production role; limited public traction since 2021.",
+      "evidence_user_adoption": "Weak-to-moderate: repeated AFRL engagements and sub role on an active D2P2 effort; no fielded-user evidence. LOW-MEDIUM.",
+      "evidence_repeat_procurement": "Moderate within AFRL SBIR/STTR (multiple awards 2018-2026). MEDIUM.",
+      "evidence_prototype_to_production": "None evidenced. HIGH confidence in absence of public production award.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "individual_platform"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "TRANSPORT", "echelon": "tactical_unit"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (from GitHub, not jobs): C++, Scala/sbt, Python, ZeroMQ, Lustre/Kind2 formal verification, SysML v2, Ubuntu; Flex DSL and 'code-gen-3' generation pipeline. MEDIUM.",
+      "confidence_notes": "Contract existence HIGH; obligations LOW (sbir.gov/usaspending blocked). Founder/founding-year fields left null pending primary-source access.",
+      "sources": [
+        {"url": "https://halecapital.com/media_archive/news_releases/2020_Aug11_Tangram_Flex_95M_AFRL.pdf", "title": "Tangram Flex Awarded $95M Contract (AFRL Information Directorate)", "pub_date": "2020-08-11", "type": "company"},
+        {"url": "https://www.asdnews.com/news/defense/2026/01/14/usaf-contracts-skydweller-aero-nokia-federal-tangram-flex-rapiddeployment-airborne-network", "title": "USAF Contracts Skydweller, Nokia Federal, Tangram Flex for Rapid-Deployment Airborne Network", "pub_date": "2026-01-14", "type": "independent"},
+        {"url": "https://app.dealroom.co/companies/tangram_flex", "title": "Tangram Flex funding (Dealroom)", "pub_date": "2026", "type": "financial"},
+        {"url": "https://getlatka.com/companies/tangram-flex", "title": "Tangram Flex revenue estimate", "pub_date": "2024", "type": "financial"},
+        {"url": "https://github.com/orgs/tangramflex/repositories", "title": "Tangram Flex GitHub repositories", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/tangramflex/transformer-app-demo", "title": "Transformer App Demo (STANAG-4586 to LMCP)", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Saronic",
+      "aka": "Saronic Technologies, Inc.; vessels Spyglass, Cutlass, Corsair, Marauder; Port Alpha shipyard",
+      "founding_year": 2022,
+      "headquarters": "Austin, Texas (facilities: Franklin, Louisiana shipyard; San Diego test/training; planned Port Alpha, Brownsville, Texas)",
+      "public_private": "private",
+      "employee_count_approx": "Several hundred (approx. 200 employees attended SecDef event at Austin HQ, Sept 18 2026; shipyard staff additional). MEDIUM.",
+      "founders": ["Dino Mavrookas (CEO; former Navy SEAL)", "Rob Lehman", "Vibhav Altekar (reported also as 'Mehul Altekar' in one outlet)", "Doug Lambert"],
+      "founder_backgrounds": "FACT: Mavrookas is a former Navy SEAL (NDIA Forrestal Award profile). Other founders' backgrounds not re-verified in this batch. MEDIUM.",
+      "total_disclosed_funding_usd": "~$2.58B disclosed (Series B $175M Jul 2024 at $1B; Series C $600M Feb 2025 at $4B; Series D $1.75B Mar 31 2026 at $9.25B; earlier Series A ~$55M).",
+      "latest_valuation": "$9.25B post-money (Series D, March 31, 2026).",
+      "major_investors": ["Kleiner Perkins (Series D lead)", "Andreessen Horowitz", "8VC", "Caffeinated Capital", "Elad Gil", "Franklin Templeton", "Advent International", "Bessemer Venture Partners", "DFJ Growth", "BAM Elevate", "IMM Investment"],
+      "c4isr_products": [
+        {"name": "Corsair (24 ft ASV) with Saronic autonomy stack", "description": "Autonomous surface vessel with autonomous navigation and position-finding; military variants used for ISR, rescue and strike; >400 built by Sept 2026.", "input_process_output_user": "Input: onboard sensors (EO/IR, radar, GNSS), Starlink/RF links. Process: onboard autonomy (Rust-based inference/state estimation, INFERENCE) and swarm coordination. Output: autonomous maritime missions and shared picture. User: Navy Task Force 59 / fleet units."},
+        {"name": "Marauder (180 ft MUSV)", "description": "Medium unmanned surface vessel; first hull in <6 months; competing in Navy MUSV Marketplace at-sea tests through Oct 2026.", "input_process_output_user": "Input: mission tasking. Process: long-range autonomous transit and payload ops. Output: cargo/payload delivery, ISR. User: Navy."},
+        {"name": "Autonomy/networking software (inferred from GitHub)", "description": "Rust libraries: libinfer (inference), libsbf (state/bias filtering), PID, iroh P2P networking, swarm-discovery (bandwidth-bounded mDNS), Starlink gRPC client, zencan (CANopen), NixOS builds.", "input_process_output_user": "Input: sensor streams. Process: perception/estimation, peer discovery, mesh networking. Output: coordinated multi-vessel behavior. User: internal autonomy platform."}
+      ],
+      "exact_problem_solved": "Delivers attritable, mass-producible autonomous surface vessels with integrated autonomy and swarm networking so the Navy can add distributed maritime ISR/strike/logistics capacity quickly, and rebuilds domestic shipbuilding capacity around software-defined production.",
+      "primary_users": ["U.S. Navy (Task Force 59, 5th Fleet)", "U.S. Navy amphibious/logistics (LCU)", "Allied navies (stated demand; no named customers)"],
+      "primary_buyers": ["U.S. Navy (PEO/contracting office not identified; SECNAV announced)", "Navy MUSV Marketplace", "NAVSEA (LCU 1700 procurement, INFERENCE)"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "PROCESS", "DECIDE", "TASK"],
+      "mission_layer": ["maritime ISR", "maritime strike", "amphibious logistics", "search and rescue"],
+      "segment_ids": [],
+      "hw_sw_mix": "both - vertically integrated vessel builder with in-house autonomy software.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {"title": "Corsair production contract", "customer": "U.S. Navy", "contracting_org": "U.S. Navy (announced by SECNAV at RNDF; office not disclosed)", "vehicle_type": "OTA production", "ceiling": "$392M (later described by company as >$400M production OTA)", "obligated": "~$200M 'immediately put on contract' (company statement)", "awarded_value": "$392M", "funded_amount": "~$200M initially", "task_orders": "n/a", "date": "2025-12-06 (RNDF)", "period_of_performance": "Not disclosed", "prime_or_sub": "prime", "prototype_or_production": "production (prototype-to-production in <12 months)", "source_url": "https://www.navalnews.com/naval-news/2025/12/saronic-wins-contract-for-corsair-autonomous-surface-vessel-production/", "pub_date": "2025-12-15", "confidence": "HIGH"},
+        {"title": "MUSV Marketplace at-sea testing (Marauder; one of seven designs)", "customer": "U.S. Navy", "contracting_org": "U.S. Navy MUSV Marketplace", "vehicle_type": "OTA prototype", "ceiling": "$15M award for designs completing at-sea testing plus follow-on production eligibility", "obligated": "Unknown", "awarded_value": "Up to $15M", "funded_amount": "Unknown", "task_orders": "n/a", "date": "2026-05 (selection); testing to 2026-10", "period_of_performance": "to Oct 2026", "prime_or_sub": "prime", "prototype_or_production": "prototype/competition", "source_url": "https://www.navylookout.com/us-built-saronic-marauder-medium-uncrewed-surface-vessel-delivered-at-pace/", "pub_date": "2026", "confidence": "MEDIUM"},
+        {"title": "Landing Craft Utility (LCU 1700) construction at Port Alpha", "customer": "U.S. Navy", "contracting_org": "U.S. Navy (part of $280.5M procurement to Saronic, Conrad Shipyard, Master Boat Builders)", "vehicle_type": "OTA production", "ceiling": "$280.5M total across three yards; Saronic share undisclosed", "obligated": "Undisclosed", "awarded_value": "Undisclosed (firm fixed price via OTA)", "funded_amount": "Undisclosed", "task_orders": "n/a", "date": "2026-09-17", "period_of_performance": "Construction from 2028; deliveries from 2029", "prime_or_sub": "prime", "prototype_or_production": "production (crewed vessels)", "source_url": "https://www.benzinga.com/markets/private-markets/26/09/61853175/saronic-expands-beyond-autonomous-ships-with-us-navy-landing-craft-deal", "pub_date": "2026-09-17", "confidence": "HIGH on award; LOW on value"}
+      ],
+      "operational_deployments": [
+        {"what": "Corsair used in rescue of two downed U.S. Army Apache pilots off Oman/Strait of Hormuz - first publicly disclosed Navy USV rescue", "evidence": "Multiple outlets (Edaily, NBC San Diego); SecDef publicly credited Saronic (Stars and Stripes, 2026-09-18)", "source_url": "https://www.stripes.com/"},
+        {"what": "Military-variant Corsairs used in first U.S. autonomous combat strike (Iranian submarine maintenance base)", "evidence": "Military-released video; company confirmation on X; NBC San Diego and Tech Times (July 2026)", "source_url": "https://www.nbcsandiego.com/"},
+        {"what": "Corsairs delivered to Navy; Saronic joined Task Force 59 (March 2026); >400 Corsairs built", "evidence": "Company statements reported by Benzinga/Texas Border Business (Sept 2026)", "source_url": "https://www.benzinga.com/markets/private-markets/26/09/61853175/saronic-expands-beyond-autonomous-ships-with-us-navy-landing-craft-deal"}
+      ],
+      "exercises_demos": [
+        {"event": "Navy MUSV Marketplace at-sea demonstrations (Marauder)", "year": "2026", "note": "Through Oct 2026", "source_url": "https://www.navylookout.com/us-built-saronic-marauder-medium-uncrewed-surface-vessel-delivered-at-pace/"},
+        {"event": "Task Force 59 operations", "year": "2026", "note": "Operational, not exercise", "source_url": "https://www.stripes.com/"}
+      ],
+      "integration_partners": ["Samsung Heavy Industries (shipbuilding automation partnership, Jul 2026)", "Starlink (connectivity; INFERENCE from public client library)", "Port of Brownsville / State of Texas (Port Alpha)"],
+      "apis_sdks_open_interfaces": "No public product API. 55 GitHub repos show open-source Rust networking/autonomy building blocks (iroh, swarm-discovery Apache-2.0). C2/COP integration standard (e.g., UMAA) not evidenced. LOW.",
+      "security_classification_requirements": "Public evidence insufficient; combat and TF-59 integration imply cleared facilities/personnel. INFERENCE, MEDIUM.",
+      "allied_international_activity": "Stated allied demand; Samsung Heavy Industries partnership (Korea); Korean investor IMM. No allied government contracts evidenced.",
+      "technical_differentiator": "Vertical integration of hull design, mass production and in-house autonomy plus demonstrated combat/rescue use; speed from design to water (<12 months) and shipyard capacity investments.",
+      "suspected_moat": "INFERENCE: capital and industrial capacity (Franklin, Port Alpha), Navy operational track record, and production OTA position. HIGH on capital/industrial; MEDIUM on software moat.",
+      "major_competitors": ["Anduril (maritime autonomy)", "HavocAI", "Blue Water Autonomy", "BlackSea Technologies", "Textron Systems", "L3Harris", "Leidos", "Austal USA", "Ocean Aero"],
+      "obvious_weaknesses": "Capital intensity and execution risk of $3.2B shipyard; concentration on U.S. Navy demand; autonomy software claims less transparent than hardware milestones; expansion into crewed shipbuilding dilutes focus.",
+      "evidence_user_adoption": "Strong: operational combat and rescue use by Navy; TF-59 membership; >400 hulls built. HIGH.",
+      "evidence_repeat_procurement": "Strong: Corsair production OTA followed by MUSV selection and LCU award. HIGH.",
+      "evidence_prototype_to_production": "Strong: Corsair moved to a $392M production OTA within 12 months. HIGH.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "individual_platform"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "TRANSPORT", "echelon": "tactical_unit"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (from GitHub, careers unreachable): Rust-dominant autonomy/edge software, Nix/NixOS reproducible builds, iroh P2P/QUIC networking, mDNS swarm discovery, gRPC (Starlink), CANopen, C++ image debayering, Kotlin. MEDIUM.",
+      "confidence_notes": "Funding and Navy contracts HIGH (multiple independent outlets + SEC N-CSRS mention). Contracting offices and obligations beyond ~$200M unknown. Autonomy/C2 architecture details not public.",
+      "sources": [
+        {"url": "https://www.prnewswire.com/news-releases/saronic-closes-1-75b-series-d-at-9-25b-valuation-to-accelerate-a-new-era-of-maritime-autonomy-302729238.html", "title": "Saronic Closes $1.75B Series D at $9.25B Valuation", "pub_date": "2026-03-31", "type": "company"},
+        {"url": "https://www.navalnews.com/naval-news/2025/12/saronic-wins-contract-for-corsair-autonomous-surface-vessel-production/", "title": "Saronic wins contract for Corsair ASV production", "pub_date": "2025-12-15", "type": "independent"},
+        {"url": "https://gcaptain.com/u-s-navy-awards-saronic-392m-contract-for-autonomous-vessels-in-under-12-month-turnaround/", "title": "U.S. Navy Awards Saronic $392M Contract", "pub_date": "2025-12", "type": "independent"},
+        {"url": "https://www.benzinga.com/markets/private-markets/26/09/61853175/saronic-expands-beyond-autonomous-ships-with-us-navy-landing-craft-deal", "title": "Saronic Expands Beyond Autonomous Ships With U.S. Navy Landing Craft Deal", "pub_date": "2026-09-17", "type": "financial"},
+        {"url": "https://www.navylookout.com/us-built-saronic-marauder-medium-uncrewed-surface-vessel-delivered-at-pace/", "title": "Saronic Marauder MUSV delivered at pace", "pub_date": "2026", "type": "independent"},
+        {"url": "https://www.stripes.com/", "title": "'You did that,' Hegseth tells company's workers after its drones used in naval operations", "pub_date": "2026-09-18", "type": "independent"},
+        {"url": "https://github.com/saronic-technologies", "title": "Saronic Technologies GitHub", "pub_date": "n/a", "type": "company"},
+        {"url": "https://sacra.com/c/saronic/", "title": "Saronic revenue, valuation & funding (Sacra)", "pub_date": "2026", "type": "financial"}
+      ]
+    },
+    {
+      "name": "BigBear.ai",
+      "aka": "BigBear.ai Holdings, Inc. (NYSE: BBAI); products ConductorOS, VANE, ProModel, Pangiam, Ask Sage (acquired)",
+      "founding_year": 2020,
+      "headquarters": "McLean, Virginia (7950 Jones Branch Dr; formerly Columbia, Maryland)",
+      "public_private": "public",
+      "employee_count_approx": "579 full-time (FMP profile, 2026)",
+      "founders": ["Formed 2020 by AE Industrial Partners via merger of PCI, NuWave, ProModel and Open Solutions; SPAC listing via GigCapital4 (Dec 2021)"],
+      "founder_backgrounds": "FACT: private-equity roll-up (AE Industrial). CEO Kevin McAleenan (former Acting DHS Secretary; ex-Pangiam CEO) since Jan 2025. HIGH.",
+      "total_disclosed_funding_usd": "Public company; market cap ~$1.34B at $2.81/share (Sept 24, 2026; 52-week range $2.59-$9.39). Acquisitions: Pangiam (2024, stock), Ask Sage (announced 2025; ~$250M reported - not re-verified, MEDIUM).",
+      "latest_valuation": "~$1.34B market capitalization (FMP, 2026-09-24).",
+      "major_investors": ["AE Industrial Partners (sponsor/large holder)", "public shareholders"],
+      "c4isr_products": [
+        {"name": "ConductorOS", "description": "Edge AI orchestration platform for distributed/DDIL environments: deploys and manages AI models and sensor data flows across edge nodes; demonstrated at RDER T-REX 24-2, Navy Mission Autonomy Proving Ground (2024) and Army exercises.", "input_process_output_user": "Input: sensor feeds and models. Process: orchestration, model deployment, data routing at the edge. Output: AI outputs to C2/COP consumers. User: experimentation units; no program-of-record evidenced."},
+        {"name": "GFIM-OE (Global Force Information Management - Objective Environment)", "description": "Army enterprise force-structure and employment data system replacing 15 legacy systems; supports force-management decisions for HQDA and combatant commanders.", "input_process_output_user": "Input: authoritative force structure data. Process: integration, automation, analytics. Output: transactional force data for planning/programming. User: Army force managers, senior leaders, CCMDs."},
+        {"name": "Decision-support/analytics (VANE, Orion-type platforms; ProModel)", "description": "Predictive analytics and simulation for operations, logistics and shipyard planning; Joint Staff decision-support work (Orion, ~$13.2M, 2024 - not re-verified).", "input_process_output_user": "Input: OSINT, operational and logistics data. Process: forecasting/simulation. Output: courses of action and readiness insights. User: Joint Staff, Navy, Army."}
+      ],
+      "exact_problem_solved": "Provides government-tailored AI/analytics and data-system modernization (force management, decision support, edge AI orchestration) delivered largely as services/solutions to DoD and DHS.",
+      "primary_users": ["Army force-management community (GFIM)", "Joint Staff planners", "Navy/NAVAIR and shipyard planners", "DHS/CBP (Pangiam vision AI)"],
+      "primary_buyers": ["U.S. Army (GFIM production contract)", "U.S. Navy (SeaPort NxG prime IDIQ; NAVAIR)", "Joint Staff", "DHS"],
+      "technical_layer": ["INGEST", "NORMALIZE", "STORE", "PROCESS", "FUSE", "DECIDE", "MONITOR"],
+      "mission_layer": ["force management (joint/theater)", "logistics", "ISR edge processing", "maritime"],
+      "segment_ids": [],
+      "hw_sw_mix": "software - largely services/solutions with platform products.",
+      "market_posture": "defense-native (federal services)",
+      "contracts": [
+        {"title": "GFIM-OE Production Services (5-year, sole-source prime)", "customer": "U.S. Army", "contracting_org": "U.S. Army (contracting activity not stated)", "vehicle_type": "OTA production", "ceiling": "$165.15M (5-year value; not revenue)", "obligated": "Public evidence insufficient", "awarded_value": "$165.15M", "funded_amount": "Unknown", "task_orders": "n/a", "date": "2024-10-14", "period_of_performance": "5 years from Q4 2024", "prime_or_sub": "prime", "prototype_or_production": "production (follow-on to Phase 1 $14.8M OTA, Sept 2022, and Phase 2 $17.9M extension)", "source_url": "https://www.businesswire.com/news/home/20241014237345/en/", "pub_date": "2024-10-14", "confidence": "HIGH"},
+        {"title": "GFIM Phase 1 OTA", "customer": "U.S. Army", "contracting_org": "U.S. Army", "vehicle_type": "OTA prototype", "ceiling": "n/a", "obligated": "Unknown", "awarded_value": "$14.8M", "funded_amount": "Unknown", "task_orders": "n/a", "date": "2022-09-29", "period_of_performance": "Not disclosed", "prime_or_sub": "prime", "prototype_or_production": "prototype", "source_url": "https://www.businesswire.com/news/home/20220929005136/en/", "pub_date": "2022-09-29", "confidence": "HIGH"},
+        {"title": "SeaPort Next Generation prime IDIQ", "customer": "U.S. Navy", "contracting_org": "NAVSEA", "vehicle_type": "IDIQ", "ceiling": "Multiple-award vehicle; no guaranteed value", "obligated": "Unknown", "awarded_value": "n/a", "funded_amount": "n/a", "task_orders": "None evidenced", "date": "2025", "period_of_performance": "n/a", "prime_or_sub": "prime", "prototype_or_production": "vehicle only", "source_url": "https://ir.bigbear.ai/news-events/press-releases/detail/97/bigbear-ai-awarded-prime-idiq-contract-for-u-s-department", "pub_date": "2025", "confidence": "MEDIUM"},
+        {"title": "Q2 2026: >20 new contracts with values up to $5M each (company statement)", "customer": "various", "contracting_org": "various", "vehicle_type": "FAR", "ceiling": "n/a", "obligated": "Unknown", "awarded_value": "Individually up to $5M", "funded_amount": "Unknown", "task_orders": "n/a", "date": "2026-Q2", "period_of_performance": "n/a", "prime_or_sub": "mixed", "prototype_or_production": "mixed", "source_url": "https://finance.yahoo.com/technology/ai/articles/bigbear-ai-keep-expanding-government-172500579.html", "pub_date": "2026", "confidence": "MEDIUM"}
+      ],
+      "operational_deployments": [
+        {"what": "GFIM in Army enterprise use (transition to production since 2021 work)", "evidence": "Production contract award; user counts not disclosed", "source_url": "https://www.businesswire.com/news/home/20241014237345/en/"},
+        {"what": "ConductorOS operational fielding", "evidence": "Public evidence insufficient - only exercise demonstrations found", "source_url": "https://finance.yahoo.com/technology/ai/articles/bigbear-ai-keep-expanding-government-172500579.html"}
+      ],
+      "exercises_demos": [
+        {"event": "RDER T-REX 24-2 (ConductorOS)", "year": "2024", "note": "OSD experimentation event", "source_url": "https://finance.yahoo.com/technology/ai/articles/bigbear-ai-keep-expanding-government-172500579.html"},
+        {"event": "Navy Mission Autonomy Proving Ground series (ConductorOS)", "year": "2024", "note": "Navy experimentation", "source_url": "https://finance.yahoo.com/technology/ai/articles/bigbear-ai-keep-expanding-government-172500579.html"},
+        {"event": "U.S. Army exercises - ConductorOS interoperability demonstration", "year": "2025-2026", "note": "Exercise not named in retrieved sources", "source_url": "https://www.foreignpolicyjournal.com/2026/09/10/bigbear-ai-nyse-bbai-builds-government-pipeline-but-faces-stiff-competition-from-palantir-and-c3-ai/"}
+      ],
+      "integration_partners": ["C Speed (AI-enabled radar threat detection)", "Palantir (historical reseller/partner)", "Amazon Web Services (INFERENCE)", "Ask Sage (acquired GenAI platform)"],
+      "apis_sdks_open_interfaces": "No public SDK/API; GitHub org has no public repos. ConductorOS marketed as vendor-agnostic orchestration (company claim). LOW.",
+      "security_classification_requirements": "INFERENCE: cleared workforce (Cyber & Engineering segment supports IC/DoD); classified work implied by segment descriptions. MEDIUM.",
+      "allied_international_activity": "Pangiam biometrics work with international airports (commercial); no allied-military C4ISR evidence found in this batch.",
+      "technical_differentiator": "Enterprise data-system modernization track record (GFIM) plus an edge AI orchestration layer positioned for DDIL environments; public-company access to capital.",
+      "suspected_moat": "INFERENCE: incumbency on GFIM (sole-source production) and cleared services relationships; limited product moat. MEDIUM.",
+      "major_competitors": ["Palantir", "C3.ai", "Anduril (Lattice)", "Booz Allen / Leidos / CACI (services)", "Govini", "Scale AI"],
+      "obvious_weaknesses": "Services-heavy revenue with thin margins and persistent losses; ConductorOS traction confined to demos; customer concentration in a few Army/DHS programs; volatile equity (52-week $2.59-$9.39); critical press (Hunterbrook) on competitive position.",
+      "evidence_user_adoption": "Moderate: GFIM in Army enterprise use; ConductorOS only in experiments. MEDIUM.",
+      "evidence_repeat_procurement": "Strong on GFIM (Phase 1 -> Phase 2 extension -> 5-year production). HIGH.",
+      "evidence_prototype_to_production": "Strong for GFIM (OTA prototype to sole-source production, 2022-2024); none for ConductorOS. HIGH/LOW respectively.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "joint"},
+        {"chain_step": "DECIDE", "echelon": "joint"},
+        {"chain_step": "PROCESS", "echelon": "tactical_unit"},
+        {"chain_step": "FUSE", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: careers pages unreachable; ConductorOS described publicly as containerized/Kubernetes-style edge orchestration (HYPOTHESIS, LOW).",
+      "confidence_notes": "GFIM contract chain HIGH (BusinessWire/company IR). Financial statements not retrievable (FMP plan-gated; IR site blocked) - FY2025 revenue not stated here. Ask Sage terms MEDIUM.",
+      "sources": [
+        {"url": "https://www.businesswire.com/news/home/20241014237345/en/", "title": "BigBear.ai Awarded 5-Year Production Contract Valued at $165M (GFIM-OE)", "pub_date": "2024-10-14", "type": "company"},
+        {"url": "https://www.businesswire.com/news/home/20220929005136/en/", "title": "BigBear.ai Awarded $14.8M Army GFIM Contract", "pub_date": "2022-09-29", "type": "company"},
+        {"url": "https://bigbear.ai/newsroom/bigbear-ai-awarded-17-9m-extension-on-phase-2-of-u-s-army-gfim-ota-enhancing-the-data-layer-and-critical-functionality/", "title": "BigBear.ai Awarded $17.9M Extension on Phase 2 of GFIM OTA", "pub_date": "2023", "type": "company"},
+        {"url": "https://ir.bigbear.ai/news-events/press-releases/detail/97/bigbear-ai-awarded-prime-idiq-contract-for-u-s-department", "title": "BigBear.ai Awarded Prime IDIQ for Navy SeaPort NxG", "pub_date": "2025", "type": "company"},
+        {"url": "https://finance.yahoo.com/technology/ai/articles/bigbear-ai-keep-expanding-government-172500579.html", "title": "Can BigBear.ai Keep Expanding Its Government Customer Base?", "pub_date": "2026", "type": "financial"},
+        {"url": "https://hntrbrk.com/big-bear/", "title": "Did The Pentagon-OpenAI Deal Kill BigBear? (Hunterbrook)", "pub_date": "2025-2026", "type": "independent"},
+        {"url": "https://www.govconwire.com/articles/bigbearai-c-speed-ai-threat-detection", "title": "BigBear.ai, C Speed Partner on AI Threat Detection", "pub_date": "2025", "type": "independent"},
+        {"url": "https://financialmodelingprep.com/", "title": "FMP company profile BBAI (employees 579; market cap)", "pub_date": "2026-09-24", "type": "financial"}
+      ]
+    },
+    {
+      "name": "Accelint (formerly Hypergiant)",
+      "aka": "Accelint (Trive Capital platform: Systems Innovation Engineering, SoarTech, Forward Slope, Highbury Defense Group, Hypergiant Industries); merged with Vitesse Systems to form Lyntris (May 11, 2026)",
+      "founding_year": 2023,
+      "headquarters": "Public evidence insufficient for Accelint/Lyntris HQ (Hypergiant was Austin/Dallas, Texas; SoarTech Ann Arbor, Michigan; Forward Slope San Diego, California)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient; Lyntris claims active roles on >200 defense programs.",
+      "founders": ["Trive Capital (private-equity sponsor) assembled Accelint; Hypergiant founded 2018 by Ben Lamm"],
+      "founder_backgrounds": "FACT: PE roll-up under Trive Capital; Lyntris CEO Brian Morrison. Hypergiant's founder Ben Lamm (serial entrepreneur, later Colossal) - general knowledge, MEDIUM.",
+      "total_disclosed_funding_usd": "Not disclosed (PE-owned). Hypergiant raised venture funding pre-2024 (amount not re-verified).",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": ["Trive Capital (owner of both Accelint and Vitesse Systems)"],
+      "c4isr_products": [
+        {"name": "Neo mission interface", "description": "UX/mission-command interface for tactical users (Accelint 'mission-tactical' solution page; details unreachable).", "input_process_output_user": "Input: track/mission data from C2 systems. Process: operator-centric visualization and workflow. Output: mission command displays. User: tactical operators."},
+        {"name": "AI-enabled decision support, autonomy and C2 engineering (SoarTech, Forward Slope, Highbury, SIE heritage)", "description": "Mission systems and C2 software/engineering services: SoarTech (AI/autonomy, training), Forward Slope (Navy C2 software), Highbury (Navy tactical data link engineering), SIE (systems engineering) - constituent specializations are INFERENCE from general knowledge; program specifics not retrievable.", "input_process_output_user": "Input: sensor/track data, tactical data links. Process: fusion, decision aids, C2 software development. Output: decision support and C2 capabilities. User: Navy, Air Force, Army program offices."},
+        {"name": "Hypergiant space/satellite mission software (Common Mission Software Baseline lineage)", "description": "Hypergiant collaborated with the Air Force on reconfigurable constellation software (2020) and has been associated with the Space Force/AFRL Common Mission Software Baseline; contract specifics could not be verified. LOW.", "input_process_output_user": "Input: satellite telemetry/tasking. Process: mission software baseline. Output: constellation C2. User: Space Force/AFRL."}
+      ],
+      "exact_problem_solved": "Sells 'sense-to-act' integration: combining sensing hardware (Vitesse RF/antennas) with mission software, AI decision support and C2 engineering across >200 programs, mostly as a services-plus-products defense contractor.",
+      "primary_users": ["Navy C2 and data-link communities", "Air Force/Space Force mission software users", "Army AI/autonomy experimenters"],
+      "primary_buyers": ["U.S. Navy (NAVWAR/NIWC - INFERENCE)", "Air Force/Space Force (AFRL, SSC)", "Army"],
+      "technical_layer": ["COLLECT", "FUSE", "VISUALIZE", "DECIDE", "DISSEMINATE"],
+      "mission_layer": ["joint C2", "maritime", "space", "air"],
+      "segment_ids": [],
+      "hw_sw_mix": "both - after Lyntris merger (Vitesse sensing hardware + Accelint software/services).",
+      "market_posture": "defense-native",
+      "contracts": [
+        {"title": "Constituent-company program portfolio (>200 programs claimed)", "customer": "DoD (multiple)", "contracting_org": "various", "vehicle_type": "FAR", "ceiling": "Public evidence insufficient", "obligated": "Public evidence insufficient", "awarded_value": "Public evidence insufficient", "funded_amount": "Public evidence insufficient", "task_orders": "Public evidence insufficient", "date": "n/a", "period_of_performance": "n/a", "prime_or_sub": "mixed", "prototype_or_production": "mixed", "source_url": "https://www.satellitetoday.com/government-military/2026/05/11/vitesse-systems-and-accelint-become-part-of-new-defense-tech-company-lyntris/", "pub_date": "2026-05-11", "confidence": "LOW (company claim only)"},
+        {"title": "Hypergiant - U.S. Air Force reconfigurable constellation collaboration", "customer": "USAF", "contracting_org": "AFRL (INFERENCE)", "vehicle_type": "SBIR", "ceiling": "n/a", "obligated": "Unknown", "awarded_value": "Not disclosed", "funded_amount": "Unknown", "task_orders": "n/a", "date": "2020-07", "period_of_performance": "n/a", "prime_or_sub": "prime", "prototype_or_production": "R&D", "source_url": "https://www.satellitetoday.com/government-military/2020/07/07/hypergiant-collaborates-with-u-s-air-force-on-reconfigurable-constellation/", "pub_date": "2020-07-07", "confidence": "MEDIUM"},
+        {"title": "Vitesse Systems L-band antennas for SDA Tranche 1 and Tranche 2 Transport Layer satellites", "customer": "SDA primes", "contracting_org": "n/a", "vehicle_type": "subcontract", "ceiling": "n/a", "obligated": "n/a", "awarded_value": "Not disclosed", "funded_amount": "n/a", "task_orders": "n/a", "date": "2023-2026", "period_of_performance": "n/a", "prime_or_sub": "sub", "prototype_or_production": "production hardware", "source_url": "https://www.satellitetoday.com/government-military/2026/05/11/vitesse-systems-and-accelint-become-part-of-new-defense-tech-company-lyntris/", "pub_date": "2026-05-11", "confidence": "MEDIUM"}
+      ],
+      "operational_deployments": [
+        {"what": "Fielded Accelint C2/decision-support products", "evidence": "Public evidence insufficient (company sites blocked; no independent deployment reporting found)", "source_url": "https://www.accelint.com/"}
+      ],
+      "exercises_demos": [
+        {"event": "None retrieved", "year": "n/a", "note": "Public evidence insufficient", "source_url": "https://www.accelint.com/"}
+      ],
+      "integration_partners": ["Vitesse Systems (now merged)", "SDA transport-layer primes (via Vitesse hardware)"],
+      "apis_sdks_open_interfaces": "None public; Hypergiant GitHub has no public repos. LOW.",
+      "security_classification_requirements": "INFERENCE: constituent firms (Forward Slope, Highbury, SIE) perform cleared Navy C2/data-link work, implying facility clearances. MEDIUM.",
+      "allied_international_activity": "Lyntris states support to 'US and allied' programs; no specific allied contracts evidenced.",
+      "technical_differentiator": "Breadth across sensing hardware, tactical data links, AI decision support and mission UX under one PE-backed platform; claimed >200 program footholds.",
+      "suspected_moat": "INFERENCE: incumbency/relationships in Navy C2 and data-link engineering and SDA hardware supply; weak product-level moat. LOW-MEDIUM.",
+      "major_competitors": ["Parsons", "SAIC", "Leidos", "CACI", "Booz Allen", "Anduril", "Palantir", "Sierra Nevada Corp"],
+      "obvious_weaknesses": "Brand churn (Hypergiant -> Accelint -> Lyntris) and PE roll-up integration risk; little independently verifiable contract data; product traction opaque; services-dependent revenue.",
+      "evidence_user_adoption": "Unknown - public evidence insufficient beyond company program-count claims. LOW.",
+      "evidence_repeat_procurement": "Unknown. LOW.",
+      "evidence_prototype_to_production": "Unknown for software; Vitesse hardware in SDA production tranches (MEDIUM).",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "joint"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "COLLECT", "echelon": "individual_platform"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: not retrievable (careers pages blocked). HYPOTHESIS: Link 16/TDL engineering, Navy C2 (e.g., MTC2/GCCS-M-adjacent) software, ML decision aids. LOW.",
+      "confidence_notes": "Corporate structure and Lyntris merger HIGH (Via Satellite, Defense Post). Nearly all contract, product and traction fields are LOW: primary company pages and government award data were unreachable, and no CMSB award to Hypergiant could be verified.",
+      "sources": [
+        {"url": "https://www.satellitetoday.com/government-military/2026/05/11/vitesse-systems-and-accelint-become-part-of-new-defense-tech-company-lyntris/", "title": "Vitesse Systems and Accelint Become Part of New Defense Tech Company Lyntris", "pub_date": "2026-05-11", "type": "independent"},
+        {"url": "https://thedefensepost.com/2026/05/13/accelint-vitesse-merge-lyntris/", "title": "Accelint, Vitesse Merge to Build Faster AI-Enabled Battlefield Decision Systems", "pub_date": "2026-05-13", "type": "independent"},
+        {"url": "https://www.hypergiant.com/2024/05/08/hypergiant-industries-is-now-an-accelint-company/", "title": "Hypergiant Industries is now an Accelint Company", "pub_date": "2024-05-08", "type": "company"},
+        {"url": "https://www.satellitetoday.com/government-military/2020/07/07/hypergiant-collaborates-with-u-s-air-force-on-reconfigurable-constellation/", "title": "Hypergiant Collaborates with US Air Force on Reconfigurable Constellation", "pub_date": "2020-07-07", "type": "independent"},
+        {"url": "https://accelint.com/solutions/mission-tactical/neo-mission-interface/", "title": "Accelint Neo mission interface", "pub_date": "n/a", "type": "company"},
+        {"url": "https://defensescoop.com/2026/04/10/space-force-contract-andromeda-program-vendors/", "title": "Space Force brings 14 vendors into $1.8B Andromeda program (vendor list not retrievable)", "pub_date": "2026-04-10", "type": "independent"}
+      ]
+    }
+  ],
+  "search_log": [
+    {"query": "Auterion contract Army OR DIU 2025 2026 Skynode drone autonomy", "useful": true},
+    {"query": "Auterion funding round Series B 2025 valuation", "useful": true},
+    {"query": "Tomahawk Robotics Kinesis AeroVironment Army contract SMET OR common controller", "useful": true},
+    {"query": "Applied Intuition defense EpiSci acquisition Army contract autonomy 2025", "useful": true},
+    {"query": "Tangram Flex Tangram Pro Air Force contract SBIR OR Phase III 2025", "useful": true},
+    {"query": "Saronic Navy contract Corsair OR Marauder autonomous surface vessel award 2025 2026", "useful": true},
+    {"query": "BigBear.ai Army contract Global Force Information Management OR GFIM 2025 2026", "useful": true},
+    {"query": "Accelint Hypergiant rebrand Space Force Common Mission Software Baseline OR CMSB contract", "useful": true},
+    {"query": "Auterion Nemyx AuterionOS SDK API open interface MAVSDK developers", "useful": true},
+    {"query": "Auterion Germany Bundeswehr order Airlogix Taiwan contract 2026", "useful": true},
+    {"query": "AeroVironment Kinesis common controller Army Human Machine Integration OR Soldier Borne OR Robotic Combat Vehicle 2025 2026", "useful": true},
+    {"query": "Applied Intuition Series F $15 billion valuation 2025 defense revenue", "useful": true},
+    {"query": "Applied Intuition Defense contract award Army OR Air Force OR Navy OR DIU 2025 2026 site:defensescoop.com OR site:breakingdefense.com", "useful": true},
+    {"query": "Tangram Flex funding investors Series A Tangram Pro component software interface OMS UCI FACE", "useful": true},
+    {"query": "Saronic funding Series D 2026 valuation investors", "useful": true},
+    {"query": "BigBear.ai ConductorOS Army OR Navy OR Air Force demonstration contract 2025 2026", "useful": true},
+    {"query": "Auterion Taiwan Skynode tens of thousands OR Blue UAS OR Army contract 2025 2026 (WebSearch budget exhausted)", "useful": false},
+    {"query": "Applied Intuition $171.1 million OR $249 million BPA OR $49 million Army contract (WebSearch budget exhausted)", "useful": false},
+    {"query": "Tangram Flex site:sbir.gov OR site:sam.gov OR site:usaspending.gov (WebSearch budget exhausted)", "useful": false},
+    {"query": "Saronic mission autonomy C2 integration Navy exercise (WebSearch budget exhausted)", "useful": false},
+    {"query": "BigBear.ai 2025 annual revenue 10-K Ask Sage Pangiam backlog (WebSearch budget exhausted)", "useful": false},
+    {"query": "Hypergiant Common Mission Software Baseline Space Force contract (WebSearch budget exhausted)", "useful": false},
+    {"query": "Accelint SoarTech Forward Slope Highbury contract 2025 (WebSearch budget exhausted)", "useful": false},
+    {"query": "Lyntris Accelint Vitesse merger investors (WebSearch budget exhausted)", "useful": false},
+    {"query": "Saronic $392M Corsair contract obligated OTA details (WebSearch budget exhausted)", "useful": false},
+    {"query": "Bigdata.com smart: Applied Intuition defense contracts 2025-2026 ($171.1M, $249M BPA, RCV)", "useful": false},
+    {"query": "Bigdata.com smart: Auterion contracts and deployments 2025-2026 (Taiwan, Army, Ukraine, Nemyx)", "useful": true},
+    {"query": "Bigdata.com smart: Saronic Navy contracts 2026 (LCU, Port Alpha, MUSV, $392M Corsair)", "useful": true},
+    {"query": "Bigdata.com smart: BigBear.ai FY2025 results, Ask Sage, ConductorOS", "useful": false},
+    {"query": "Bigdata.com smart: Accelint/Vitesse Lyntris merger and constituent contracts", "useful": true},
+    {"query": "Bigdata.com smart: Tangram Flex contracts 2024-2026", "useful": true},
+    {"query": "Bigdata.com smart: AeroVironment Kinesis RCCTO HMIF contract", "useful": false},
+    {"query": "Bigdata.com fast (7 queries: Applied Intuition, BigBear.ai, Kinesis, Accelint constituents, Tangram Flex, Auterion exercises, Saronic software) - out of credits", "useful": false},
+    {"query": "FMP profile-symbol BBAI", "useful": true},
+    {"query": "FMP income-statement / press-releases / sec filings BBAI (plan-gated)", "useful": false},
+    {"query": "WebFetch: avinc.com, soldiersystems.net, breakingdefense.com, defensescoop.com, appliedintuition.com, techcrunch.com, auterion.com, thedefensepost.com, prnewswire.com, gcaptain.com, navylookout.com, benzinga.com, ir.bigbear.ai, hntrbrk.com, hypergiant.com, asdnews.com, tangramflex.com, en.wikipedia.org, docs.auterion.com, api.www.sbir.gov, api.usaspending.gov, www.sbir.gov, sec.gov (all EGRESS_BLOCKED)", "useful": false},
+    {"query": "WebFetch GitHub: Auterion org, Auterion/MAVSDK, Auterion/px4-ros2-interface-lib, PX4/PX4-Autopilot, tangramflex org + transformer-app-demo + uas-communication-component, saronic-technologies org + swarm-discovery, EpiSci org, applied-intuition org (empty), BigBearAI (empty), hypergiant (empty)", "useful": true}
+  ],
+  "notes": "Environment constraints materially limited this batch: the session-wide WebSearch budget was exhausted after 16 queries; Bigdata.com ran out of credits after 6 queries; FMP financial statements/news/filings are plan-gated; and the egress proxy blocked every non-GitHub WebFetch target (company sites, defense trade press, sam.gov/sbir.gov/usaspending.gov/sec.gov). Consequently: (1) obligated amounts vs ceilings could not be pulled from USAspending for any company; (2) Applied Intuition's reported $171.1M production contract, $249M Army BPA and $49M RCV award rest on a single Tier 4 source and are LOW confidence; (3) AV's RCCTO Kinesis award value/vehicle and BigBear.ai FY2025 financials were not retrievable; (4) Accelint/Lyntris contract data are essentially absent from public sources reachable here, and no Hypergiant CMSB award could be verified; (5) Tangram Flex founders/founding year left null. segment_ids were left empty because the S01-S14 segment taxonomy definitions were not provided to this agent; technical_layer and mission_layer fields are populated so the orchestrator can map them. Traction summary: Saronic strong; Auterion strong (overseas-weighted); BigBear.ai moderate (GFIM strong, ConductorOS weak); AV/Kinesis moderate (program position, values undisclosed); Applied Intuition defense moderate-unverified; Tangram Flex weak; Accelint/Lyntris unknown."
+}

@@ -1,0 +1,2011 @@
+{
+  "batch_id": "B07",
+  "theme": "ISR PED and geospatial analytics",
+  "companies": [
+    {
+      "name": "Synthetaic, Inc.",
+      "aka": "RAIC Labs (rebranded from Synthetaic; company X account styled 'RAIC Labs (formerly Synthetaic)' by Dec 2024). FACT that rebrand occurred; exact rebrand date not verified (MEDIUM).",
+      "founding_year": 2019,
+      "headquarters": "Delafield, Wisconsin, USA",
+      "public_private": "private",
+      "employee_count_approx": "~14-29 (LinkedIn-derived figures in a third-party scrape; INFERENCE, LOW)",
+      "founders": [
+        "Corey Jaskolski (founder and CEO)"
+      ],
+      "founder_backgrounds": "Corey Jaskolski is identified as founder/CEO in press (The Register, Fox11). Background details not verified in this session. Public evidence insufficient.",
+      "total_disclosed_funding_usd": "~$32.5M disclosed equity: $1M pre-seed + $3.5M seed (Oct 2020), $13M Series A (Mar 2022), $15M Series B (Feb 2024). FACT (press releases via BusinessWire/SpaceNews).",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Lupa Systems (led seed, Series A; co-led Series B)",
+        "TitletownTech (co-led Series B)",
+        "Betaworks",
+        "Booz Allen Hamilton / Booz Allen Ventures (strategic; invested Mar 2022)",
+        "Esri (Series A)",
+        "IBM Ventures (Series B)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "RAIC (Rapid Automatic Image Categorization)",
+          "description": "AI platform that lets a non-expert search, label and build object detectors across very large unlabeled imagery/video sets from a single example (few-shot / embedding-similarity search), avoiding months of manual labeling. Marketed for satellite, drone, ISR video and industrial inspection.",
+          "input_process_output_user": "Input: satellite/aerial/drone imagery and FMV (e.g., Planet imagery). Process: imagery embeddings, unsupervised clustering, similarity search, rapid detector creation. Output: detections, labels, searchable imagery, change detection. User: GEOINT/ISR analysts, imagery scientists."
+        },
+        {
+          "name": "RAIC Foundry",
+          "description": "Newer product announced by RAIC Labs (mkestartup.news); positioning and technical scope not verified in this session. Public evidence insufficient.",
+          "input_process_output_user": "Public evidence insufficient."
+        }
+      ],
+      "exact_problem_solved": "Broad-area search and automatic target detection/recognition (ATD/ATR) in unlabeled imagery where no trained model or labeled training set exists; collapses the label-train-deploy loop from months to minutes so analysts can find rare objects (e.g., the Feb 2023 Chinese balloon back-track in Planet imagery).",
+      "primary_users": [
+        "GEOINT/imagery analysts (USAF, IC, national labs)",
+        "ISR PED cells",
+        "commercial EO/insurance/inspection analysts"
+      ],
+      "primary_buyers": [
+        "AFWERX/AFRL (SBIR)",
+        "OSD Strategic Capabilities Office (SBIR Phase I 2024, contract HQ003424P0146)",
+        "systems integrators (Booz Allen)",
+        "commercial enterprises"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE"
+      ],
+      "mission_layer": [
+        "ISR",
+        "space/launch indications and warning",
+        "joint"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - cloud SaaS/AI platform; no hardware",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "AFWERX SBIR Phase I - synthetic data and AI-powered object detection",
+          "customer": "US Air Force",
+          "contracting_org": "AFWERX/AFRL",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2021-05 (announced 2021-05-20)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (R&D)",
+          "source_url": "https://www.businesswire.com/news/home/20210520005363/en/Synthetaic-Awarded-AFWERX-Contract-to-Leverage-Synthetic-Data-and-AI-Powered-Object-Detection",
+          "pub_date": "2021-05-20",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "RAIC - Next Generation AI Automation and ATR using Rapid Automatic Image Categorization (SBIR Phase II)",
+          "customer": "US Air Force",
+          "contracting_org": "AFWERX/AFRL",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Amount not captured. Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2022 (award year per SBIR record)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (R&D)",
+          "source_url": "https://legacy.www.sbir.gov/node/2323065",
+          "pub_date": "n/a (SBIR.gov record)",
+          "confidence": "HIGH that award exists; LOW on amount"
+        },
+        {
+          "title": "Visual Data Machine Learning Via Generative AI (SBIR Phase I)",
+          "customer": "OSD / Strategic Capabilities Office (contract HQ003424P0146)",
+          "contracting_org": "Washington Headquarters Services (HQ0034) per contract number",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$150,000",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (feasibility)",
+          "source_url": "https://github.com/SantaJordan/CTOx (third-party scrape of SBIR.gov record; original SBIR.gov not reachable in session)",
+          "pub_date": "2024",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Analyzing Commercial Satellite Imagery with AI/ML to Provide Indications of Foreign Launch Activity (SBIR Phase II)",
+          "customer": "US Air Force / Space Force (branch not verified)",
+          "contracting_org": "AFWERX/AFRL (not verified)",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Amount not captured. Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (R&D)",
+          "source_url": "https://github.com/SantaJordan/CTOx (third-party scrape of SBIR.gov record)",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "DoD contract award W50S8523P0037 listed on USAspending",
+          "customer": "DoD (contracting office not verified)",
+          "contracting_org": "Unknown (W50S85 office code)",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "FY2023",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "unknown",
+          "source_url": "https://www.usaspending.gov/award/CONT_AWD_W50S8523P0037_9700_-NONE-_-NONE-",
+          "pub_date": "n/a",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Back-tracked the Chinese high-altitude balloon across the CONUS using Planet imagery (Feb 2023) - an independent demonstration, not a government tasking",
+          "evidence": "Independent press (The Register 2023-04-08; SpaceNews Feb 2023); company blog",
+          "source_url": "https://www.theregister.com/2023/04/08/synthetaic_ceo_chinese_spy_balloon/"
+        },
+        {
+          "what": "Government/defense deployment at scale",
+          "evidence": "Public evidence insufficient. Only SBIR-stage awards are on the public record.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "AFWERX Phase I/II demonstrations (ATD/ATR)",
+          "year": "2021-2022",
+          "note": "Company completed Phase I and II per Potomac Officers Club / company statements; no named exercise",
+          "source_url": "https://www.potomacofficersclub.com/news/synthetaic-to-demonstrate-ai-powered-geospatial-labeling-under-afwerx-contract/"
+        }
+      ],
+      "integration_partners": [
+        "Planet Labs (imagery source for balloon analysis)",
+        "Booz Allen Hamilton (investor/integrator partner, Mar 2022)",
+        "Esri (investor; ArcGIS ecosystem)",
+        "IBM (investor)"
+      ],
+      "apis_sdks_open_interfaces": "No public SDK, API docs or GitHub org found in session (GitHub code search for synthetaic/raiclabs returned nothing). Company says the platform 'plugs into existing workflows'. Public evidence insufficient.",
+      "security_classification_requirements": "No public evidence of IL-level accreditation, ATO or classified deployment. Public evidence insufficient.",
+      "allied_international_activity": "Public evidence insufficient.",
+      "technical_differentiator": "Few-shot/unsupervised object search over unlabeled imagery via embeddings and rapid detector creation (company claim, partially corroborated by the independently reported balloon back-track).",
+      "suspected_moat": "Weak-to-moderate: speed-to-detector workflow and imagery embedding IP (patents not verified); competing foundation-model approaches (e.g., open vision-language models, Esri/Maxar/Planet native tools) erode differentiation. INFERENCE.",
+      "major_competitors": [
+        "Blackshark.ai ORCA HUNTR",
+        "Picterra",
+        "Danti (search layer)",
+        "Vantor/Maxar and Planet native analytics",
+        "Palantir/Maven-style ATR pipelines",
+        "Ursa Space analytics"
+      ],
+      "obvious_weaknesses": "Small team; revenue not disclosed; only SBIR-tier government awards found; rebrand suggests repositioning; no evidence of program-of-record or production transition; 'Project Maven'-style incumbents already own the ATR pipeline.",
+      "evidence_user_adoption": "Independent press coverage of analyst-style use (balloon). Government user adoption beyond SBIR performers: Public evidence insufficient.",
+      "evidence_repeat_procurement": "Repeat SBIR awards: USAF Phase I (2021), Phase II (2022), SCO Phase I (2024), USAF/USSF Phase II (2025). MEDIUM confidence that these are separate awards (third-party scrape of SBIR.gov).",
+      "evidence_prototype_to_production": "None found. Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: no live job postings captured (third-party scrape shows 'no jobs data found'); LinkedIn specialties list imagery embeddings, semantic clustering, similarity search, change detection, drone video, computer vision - implying a Python/ML embedding-search stack. LOW confidence.",
+      "confidence_notes": "Funding history HIGH (press releases). Contracts: award existence MEDIUM-HIGH, amounts mostly missing. Deployment/production evidence LOW. Session constraints: web fetch blocked; findings rely on search snippets and a third-party SBIR/USAspending scrape.",
+      "sources": [
+        {
+          "url": "https://www.businesswire.com/news/home/20210520005363/en/",
+          "title": "Synthetaic Awarded AFWERX Contract",
+          "pub_date": "2021-05-20",
+          "type": "company"
+        },
+        {
+          "url": "https://legacy.www.sbir.gov/node/2323065",
+          "title": "SBIR award: RAIC-Next Generation AI Automation and ATR",
+          "pub_date": "2022",
+          "type": "gov"
+        },
+        {
+          "url": "https://www.businesswire.com/news/home/20220315005386/en/",
+          "title": "Synthetaic Secures $13M Series A",
+          "pub_date": "2022-03-15",
+          "type": "company"
+        },
+        {
+          "url": "https://www.businesswire.com/news/home/20220322005192/en/",
+          "title": "Booz Allen Invests in Synthetaic",
+          "pub_date": "2022-03-22",
+          "type": "company"
+        },
+        {
+          "url": "https://www.businesswire.com/news/home/20240206389024/en/",
+          "title": "Synthetaic Raises $15M Series B",
+          "pub_date": "2024-02-06",
+          "type": "company"
+        },
+        {
+          "url": "https://spacenews.com/ai-startup-synthetaic-raises-15-million-in-series-b-funding/",
+          "title": "AI startup Synthetaic raises $15 million in Series B",
+          "pub_date": "2024-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://techcrunch.com/2024/02/06/synthetaic-claims-synthetic-data-is-as-good-as-the-real-thing-when-it-comes-to-ai/",
+          "title": "TechCrunch on Synthetaic",
+          "pub_date": "2024-02-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.theregister.com/2023/04/08/synthetaic_ceo_chinese_spy_balloon/",
+          "title": "How an AI startup tracked that Chinese spy balloon",
+          "pub_date": "2023-04-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://spacenews.com/ai-startup-using-satellite-imagery-to-trace-the-path-of-chinese-balloon/",
+          "title": "AI startup using satellite imagery to trace the path of Chinese balloon",
+          "pub_date": "2023-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://raiclabs.com/about-us/",
+          "title": "RAIC Labs About Us",
+          "pub_date": "n/a",
+          "type": "company"
+        },
+        {
+          "url": "https://x.com/RAICLabs/status/1870197257531789372",
+          "title": "RAIC Labs (formerly Synthetaic) - X",
+          "pub_date": "2024-12",
+          "type": "company"
+        },
+        {
+          "url": "https://github.com/SantaJordan/CTOx",
+          "title": "Third-party evidence pack (SBIR/USAspending scrape)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Edgybees",
+      "aka": "Edgybees Ltd. (Israel) / Edgybees Inc. (US entity announced May 2023)",
+      "founding_year": 2016,
+      "headquarters": "Gaithersburg, Maryland, USA (US entity) with R&D in Israel (Crunchbase/ExecutiveBiz). MEDIUM.",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient.",
+      "founders": [
+        "Adam Kaplan",
+        "Menashe Haskin",
+        "Nitay Megides"
+      ],
+      "founder_backgrounds": "Names per Crunchbase/Tracxn. Backgrounds not verified in session (Haskin is generally reported as ex-Amazon Prime Air engineering lead; LOW). Public evidence insufficient.",
+      "total_disclosed_funding_usd": "~$15M disclosed: $5.5M seed (Nov 2017) + $9.5M Series A (Feb 17, 2021). FACT per Tracxn/TechNexus/Crunchbase. Any later rounds: Public evidence insufficient.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Seraphim Space (led Series A)",
+        "8VC",
+        "LG Technology Ventures",
+        "Refinery Ventures",
+        "Kodem Growth",
+        "Verizon Ventures",
+        "OurCrowd",
+        "Motorola Solutions Venture Capital",
+        "TechNexus"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Argus (real-time FMV georegistration / AR overlay)",
+          "description": "Software that georegisters live full-motion video from UAS/manned ISR platforms to map data and overlays geospatial layers (roads, names, blue-force, POIs) on the video in real time to improve situational awareness. Janes: awarded by USAF (17 March) for integration with USAF systems incl. MQ-9 Reaper.",
+          "input_process_output_user": "Input: live FMV stream + platform metadata (KLV) + reference imagery/DEM/vector layers. Process: image-to-map registration and metadata error correction, AR rendering. Output: accurately georegistered video with overlays, corrected coordinates. User: sensor operators, JTACs/TOC watch officers, ISR analysts."
+        },
+        {
+          "name": "Satellite imagery georegistration software",
+          "description": "Released April 2022: improves positional accuracy of satellite imagery by registering it to reference data (SatNews).",
+          "input_process_output_user": "Input: satellite imagery. Process: automated georegistration. Output: accuracy-improved imagery for analysis/targeting workflows. User: GEOINT analysts."
+        }
+      ],
+      "exact_problem_solved": "Platform metadata on aerial video is often wrong by tens to hundreds of meters; Edgybees corrects it and fuses map data onto live video so users can derive accurate coordinates and context from FMV without manual mensuration.",
+      "primary_users": [
+        "USAF RPA sensor operators and DGS/ISR analysts",
+        "US Army soldiers at AEWE (experimentation)",
+        "public safety / first responders (commercial)"
+      ],
+      "primary_buyers": [
+        "US Air Force (AFLCMC / AFWERX SBIR Phase III vehicles)",
+        "US Army (experimentation)"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "NORMALIZE",
+        "PROCESS",
+        "FUSE",
+        "VISUALIZE"
+      ],
+      "mission_layer": [
+        "ISR",
+        "fires/targeting support",
+        "joint (JADC2 alignment)"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - runs on ground stations/edge compute; no hardware",
+      "market_posture": "dual-use (public safety origin; now defense-led)",
+      "contracts": [
+        {
+          "title": "USAF IDIQ for maturation, demonstration and proliferation of FMV georegistration capability across platforms/domains to enable JADC2",
+          "customer": "US Air Force",
+          "contracting_org": "US Air Force (contracting office not verified; reported as SBIR Phase III-type IDIQ)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$950,000,000 ceiling (FACT per company/Shephard). Ceiling is NOT revenue.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2022 (month not verified)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "capability maturation/demonstration (prototype-leaning)",
+          "source_url": "https://www.shephardmedia.com/news/digital-battlespace/edgybees-usaf-transition-jadc2/",
+          "pub_date": "2022",
+          "confidence": "HIGH on ceiling; LOW on obligations"
+        },
+        {
+          "title": "USAF multiple-award contract for augmented-reality situational awareness platform (21 companies tentatively selected)",
+          "customer": "US Air Force",
+          "contracting_org": "US Air Force (not verified)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$550,000,000 potential, 4-year, shared across 21 awardees (ceiling not revenue)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "not verified (reported by ExecutiveBiz)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime (one of 21)",
+          "prototype_or_production": "unknown",
+          "source_url": "https://www.executivebiz.com/articles/edgybees-to-supply-augmented-reality-tool-to-air-force-under-potential-550m-contract",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "USAF award for Argus AR software integration (incl. MQ-9)",
+          "customer": "US Air Force",
+          "contracting_org": "US Air Force (not verified)",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "17 March (year not verified; likely 2023)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "integration/demonstration",
+          "source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/us-air-force-awards-edgybees-contract-for-argus-augmented-reality-software",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM on award; LOW on date/value"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Integration of Argus with USAF UAV systems such as MQ-9 Reaper",
+          "evidence": "Janes report of USAF award; operational fielding status not confirmed",
+          "source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/us-air-force-awards-edgybees-contract-for-argus-augmented-reality-software"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Army Expeditionary Warrior Experiments (AEWE) 2022, Fort Benning",
+          "year": "2022",
+          "note": "Soldier testing of FMV georegistration for aerial vehicle video (company blog)",
+          "source_url": "https://edgybees.com/edgybees-supports-army-expeditionary-warrior-experiments-aewe-2022/"
+        }
+      ],
+      "integration_partners": [
+        "USAF MQ-9 ground systems (per Janes)",
+        "Motorola Solutions (investor; public-safety channel)",
+        "Verizon (investor)",
+        "Cesium-based 3D visualization (INFERENCE from public 'cesium-share' repo in edgybees GitHub org)"
+      ],
+      "apis_sdks_open_interfaces": "No public API/SDK docs found. GitHub org 'edgybees' contains only small utilities (websockets-tester, cesium-share). Company e-book cites open systems design. Public evidence insufficient.",
+      "security_classification_requirements": "Not public. Israeli-origin company with US entity created (May 2023) to serve US government - FOCI mitigation/ITAR considerations likely; requires specialist review. Public evidence insufficient.",
+      "allied_international_activity": "Israeli origin (Edgybees Ltd.); no other allied contracts found. Public evidence insufficient.",
+      "technical_differentiator": "Real-time, low-latency georegistration of live FMV (not post-mission), with AR overlays; applied to both aerial video and satellite imagery.",
+      "suspected_moat": "Moderate: hard computer-vision registration problem with platform-specific integration knowledge and an existing USAF IDIQ position; but primes (e.g., L3Harris, Northrop, PAR Government's FMV tools) and TAK ecosystem plugins can replicate. INFERENCE.",
+      "major_competitors": [
+        "PAR Government (PAR Vision/FMV tools)",
+        "Kitware (FMV analytics)",
+        "L3Harris and Northrop Grumman ISR PED suites",
+        "TAK-ecosystem georegistration plugins",
+        "Vantor/Maxar georegistration (satellite)"
+      ],
+      "obvious_weaknesses": "Only ~$15M raised through 2021 with no later round found; IDIQ ceilings are unfunded; no public obligated dollars; no 2024-2026 news captured (staleness); foreign-origin ownership complicates US defense growth.",
+      "evidence_user_adoption": "AEWE 2022 soldier use; USAF Argus award for MQ-9 integration (Janes). Sustained user adoption: Public evidence insufficient.",
+      "evidence_repeat_procurement": "Two separate USAF vehicle positions ($950M IDIQ; $550M multi-award) plus Argus award suggest repeat engagement by USAF, but task-order history is not public. MEDIUM.",
+      "evidence_prototype_to_production": "No evidence of production program of record. Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "FUSE",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: no job postings captured. Public GitHub utilities (C# websockets tester, Python Cesium share tool) suggest C#/Python services and CesiumJS 3D visualization. LOW confidence.",
+      "confidence_notes": "Funding HIGH; $950M IDIQ ceiling HIGH; obligations/task orders LOW; Argus award date and year LOW; current (2025-2026) status unknown - no news surfaced in session; company website unreachable due to proxy policy.",
+      "sources": [
+        {
+          "url": "https://www.shephardmedia.com/news/digital-battlespace/edgybees-usaf-transition-jadc2/",
+          "title": "Edgybees to USAF transition to JADC2 ($950M IDIQ)",
+          "pub_date": "2022",
+          "type": "independent"
+        },
+        {
+          "url": "https://blog.ourcrowd.com/edgybees-receives-950-million-idiq-award-from-u-s-air-force/",
+          "title": "Edgybees Receives $950 Million IDIQ Award from U.S. Air Force",
+          "pub_date": "2022",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.janes.com/defence-intelligence-insights/defence-news/us-air-force-awards-edgybees-contract-for-argus-augmented-reality-software",
+          "title": "US Air Force awards Edgybees contract for Argus AR software",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.executivebiz.com/articles/edgybees-to-supply-augmented-reality-tool-to-air-force-under-potential-550m-contract",
+          "title": "Edgybees holds spot on potential $550M USAF contract",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://blog.executivebiz.com/2023/05/edgybees-unveils-us-entity-to-offer-georegistration-software-to-govt-clients",
+          "title": "Edgybees Unveils US Entity",
+          "pub_date": "2023-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://edgybees.com/edgybees-supports-army-expeditionary-warrior-experiments-aewe-2022/",
+          "title": "Edgybees Supports AEWE 2022",
+          "pub_date": "2022",
+          "type": "company"
+        },
+        {
+          "url": "https://satnews.com/2022/04/25/edgybees-enhances-the-accuracy-of-satellite-imagery-with-the-release-of-satellite-software/",
+          "title": "Edgybees satellite georegistration software release",
+          "pub_date": "2022-04-25",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.technexus.com/edgybees-raises-9-5m-in-series-a/",
+          "title": "Edgybees Raises $9.5M in Series A",
+          "pub_date": "2021-02",
+          "type": "financial"
+        },
+        {
+          "url": "https://tracxn.com/d/companies/edgybees/__jTa-o-ETrLpzljZKZVsBraRQSC4tTSc2a95M24fJ9BA/funding-and-investors",
+          "title": "Edgybees funding rounds (Tracxn)",
+          "pub_date": "2025",
+          "type": "financial"
+        },
+        {
+          "url": "https://github.com/edgybees",
+          "title": "Edgybees GitHub org (utilities only)",
+          "pub_date": "n/a",
+          "type": "company"
+        }
+      ]
+    },
+    {
+      "name": "Reveal Technology, Inc.",
+      "aka": "Reveal",
+      "founding_year": null,
+      "headquarters": "Bozeman, Montana, USA",
+      "public_private": "private",
+      "employee_count_approx": "~119 (LinkedIn per third-party scrape, 2026; INFERENCE). Company states team is ~50% active military/veterans.",
+      "founders": [
+        "Former U.S. Marine Corps officers and Stanford technologists (names not captured in session)"
+      ],
+      "founder_backgrounds": "Veteran-founded (USMC officers) with Stanford technical co-founders per company press releases. Individual names: Public evidence insufficient.",
+      "total_disclosed_funding_usd": "At least $30M Series B (2025) plus undisclosed earlier rounds; total: Public evidence insufficient.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Ballistic Ventures (led Series B; Kevin Mandia joined board)",
+        "Booz Allen Ventures",
+        "Shield Capital",
+        "a16z American Dynamism (LOW - inferred from portfolio-source tag in third-party scrape)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Farsight",
+          "description": "Tactical-edge software that converts drone video/imagery into 2D/3D maps on a smartphone/EUD without connectivity, with line-of-sight, terrain, AI best-route, vertical measurement and HLZ analytics; multi-drone fusion (Teal) and Maxar satellite imagery enrichment; integrated with ATAK and Army Nett Warrior.",
+          "input_process_output_user": "Input: sUAS video/imagery (Teal, Parrot ANAFI USA, others), optional satellite imagery. Process: on-device photogrammetry/3D reconstruction and terrain analytics. Output: 3D models, maps, route/LOS/HLZ products shared via ATAK. User: small-unit leaders, SOF teams, recon Marines."
+        },
+        {
+          "name": "Identifi",
+          "description": "Biometric capture and verification tool for operators; company announced adoption as a Program of Record for USSOCOM (May 2026 press item on company site; company claim).",
+          "input_process_output_user": "Input: face/biometric captures at point of contact. Process: on-device matching/verification. Output: identity verification for operators. User: SOF and tactical units."
+        },
+        {
+          "name": "Anomaly Six capabilities (acquired)",
+          "description": "Reveal announced acquisition of Anomaly Six (commercial device-location/telemetry intelligence) to expand operator-focused intelligence (PRNewswire, early 2026).",
+          "input_process_output_user": "Input: commercial telemetry/location data. Process: pattern-of-life analytics. Output: location intelligence for operators. User: SOF/intel analysts."
+        }
+      ],
+      "exact_problem_solved": "Small units at the tactical edge cannot wait for reach-back GEOINT; Farsight lets them build and analyze 3D terrain from their own drones offline within minutes, and Identifi lets them verify identities on-device in comms-denied environments.",
+      "primary_users": [
+        "USSOCOM operators (since 2021 per company)",
+        "US Army units via Nett Warrior/ATAK",
+        "USMC units and MCWL",
+        "law enforcement",
+        "Ukrainian Defense Forces, UK MoD, IDF (per company)"
+      ],
+      "primary_buyers": [
+        "USSOCOM",
+        "AFWERX/AFVentures (STRATFI)",
+        "Marine Corps Warfighting Laboratory",
+        "US Army (Nett Warrior program integration)",
+        "allied MoDs"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "FUSE",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DECIDE"
+      ],
+      "mission_layer": [
+        "maneuver",
+        "ISR",
+        "special operations",
+        "fires support (terrain/route)"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - edge/mobile software; runs on fielded EUDs and drones",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "STRATFI (Strategic Funding Increase) award selection to scale Farsight",
+          "customer": "US Air Force / joint customers",
+          "contracting_org": "AFWERX / AFVentures",
+          "vehicle_type": "SBIR",
+          "ceiling": "$33.6M (STRATFI totals blend SBIR funds with matching government-customer and private funds; split not public)",
+          "obligated": "",
+          "awarded_value": "$33.6M selection notification (Apr 2024); Option Year 1 exercised (company post 2025-08-20)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024-04 (selection); 2025-08-20 (Option Year 1)",
+          "period_of_performance": "Base plus option years (details Public evidence insufficient.)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype-to-scale (STRATFI bridges SBIR to production)",
+          "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html",
+          "pub_date": "2024-04",
+          "confidence": "HIGH on selection; MEDIUM on structure"
+        },
+        {
+          "title": "Marine Corps Warfighting Laboratory RDT&E contract to enhance Farsight",
+          "customer": "US Marine Corps",
+          "contracting_org": "MCWL",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$3.2M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024-03-28",
+          "period_of_performance": "12 months",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (RDT&E)",
+          "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-inc-receives-3-2m-award-with-us-marine-corps-warfighting-laboratory-mcwl-302102592.html",
+          "pub_date": "2024-03-28",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Identifi adoption as Program of Record for USSOCOM (company announcement)",
+          "customer": "USSOCOM",
+          "contracting_org": "USSOCOM (contracting details not public)",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026-05",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (program of record, per company)",
+          "source_url": "https://www.revealtech.ai/press",
+          "pub_date": "2026-05",
+          "confidence": "MEDIUM (company claim only; no government confirmation found)"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Farsight deployed with USSOCOM since 2021; in use with Army, Marines, law enforcement and partners incl. Ukraine, UK MoD, IDF",
+          "evidence": "Company press releases (Series B, Aug 2025); UK use partially corroborated by reseller Coptrz (British Army creating 3D maps in 10 minutes, Sep 2023)",
+          "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-raises-30-million-series-b-led-by-ballistic-ventures-302515511.html"
+        },
+        {
+          "what": "Farsight integrated with Army Nett Warrior and Marine Corps units",
+          "evidence": "Company claim in Series B release; Network Certified / ATO stated on product page (per third-party scrape)",
+          "source_url": "https://www.revealtech.ai/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Multi-drone mapping demonstration to US Army Special Operations Command near Fort Bragg (with Teal Drones)",
+          "year": "2022",
+          "note": "Red Cat/Teal press release Aug 2022; Defense Post coverage",
+          "source_url": "https://thedefensepost.com/2022/08/23/reveal-technology-mapping-army/"
+        },
+        {
+          "event": "BattleLab defense-tech testing series on VET Tv",
+          "year": "2025",
+          "note": "Marketing/testing series; PRNewswire",
+          "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-launches-defense-tech-testing-series-battlelab-on-vet-tv-302637122.html"
+        }
+      ],
+      "integration_partners": [
+        "Teal Drones / Red Cat (multi-drone mapping)",
+        "Parrot ANAFI USA (via Coptrz, UK)",
+        "Maxar/Vantor (satellite imagery enrichment)",
+        "ATAK / Nett Warrior (Army EUD ecosystem)",
+        "Booz Allen (investor)"
+      ],
+      "apis_sdks_open_interfaces": "No public API/SDK found; integration is via ATAK plugin/EUD workflows. Public evidence insufficient.",
+      "security_classification_requirements": "Product page reportedly states 'Network Certified, With Authority To Operate (ATO)' (third-party scrape of revealtech.ai). Specific network/IL not verified.",
+      "allied_international_activity": "Company reports use by Ukrainian Defense Forces, UK MoD and IDF; UK reseller Coptrz markets Farsight to British Army; open role 'Department of Navy BD Lead' listed in Gold Coast, Australia (INFERENCE: AUKUS/Australia expansion).",
+      "technical_differentiator": "Offline on-device 3D reconstruction and terrain analytics from sUAS on standard EUDs, tuned for SOF/small-unit workflows; expanding into on-device biometrics and commercial telemetry intelligence.",
+      "suspected_moat": "Moderate-to-strong: fielded with USSOCOM, ATO/network certification, Nett Warrior integration and a STRATFI runway create switching costs; veteran-heavy team gives operator access. INFERENCE.",
+      "major_competitors": [
+        "Skydio 3D Scan / drone-native mapping",
+        "Pix4D / DroneDeploy (commercial photogrammetry)",
+        "Farsight Vision (Ukraine, similar edge mapping)",
+        "Anduril Lattice (edge fusion)",
+        "TAK-native mapping plugins"
+      ],
+      "obvious_weaknesses": "Revenue and founder details not public; program-of-record claim is company-only; dependence on SBIR/STRATFI funding path; consolidation of adjacent capabilities (biometrics, telemetry) risks focus dilution.",
+      "evidence_user_adoption": "Multi-service use claims (SOCOM since 2021, Army, USMC) plus reseller-corroborated British Army use; tenfold YoY revenue growth claim (company, 2025). MEDIUM.",
+      "evidence_repeat_procurement": "STRATFI base then Option Year 1 exercised (2025-08); separate MCWL award (2024); USSOCOM POR adoption (2026, company). MEDIUM-HIGH.",
+      "evidence_prototype_to_production": "STRATFI option exercise and stated USSOCOM program-of-record adoption for Identifi indicate transition; government-side confirmation not found. MEDIUM.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "DECIDE",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: only captured live role is a BD lead (Australia); product facts imply Android/ATAK plugin development, on-device photogrammetry/computer vision (C++/mobile), and offline-first architecture. LOW confidence.",
+      "confidence_notes": "Series B and MCWL HIGH; STRATFI HIGH (structure MEDIUM); deployments MEDIUM (company claims, partial independent corroboration); Identifi POR MEDIUM; founding year and founders not captured.",
+      "sources": [
+        {
+          "url": "https://www.prnewswire.com/news-releases/reveal-technology-raises-30-million-series-b-led-by-ballistic-ventures-302515511.html",
+          "title": "Reveal Technology Raises $30 Million Series B",
+          "pub_date": "2025 (approx. Jul/Aug)",
+          "type": "company"
+        },
+        {
+          "url": "https://www.defensedaily.com/software-company-reveal-technology-raises-30-million/business-financial/",
+          "title": "Software Company Reveal Technology Raises $30 Million",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html",
+          "title": "Reveal $33.6M STRATFI selection",
+          "pub_date": "2024-04",
+          "type": "company"
+        },
+        {
+          "url": "https://www.revealtech.ai/stratfi-update",
+          "title": "Reveal Extends STRATFI with Option Year 1",
+          "pub_date": "2025-08-20",
+          "type": "company"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/reveal-technology-inc-receives-3-2m-award-with-us-marine-corps-warfighting-laboratory-mcwl-302102592.html",
+          "title": "Reveal $3.2M MCWL award",
+          "pub_date": "2024-03-28",
+          "type": "company"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/reveal-technology-acquires-anomaly-six-expanding-operator-focused-intelligence-capabilities-302673445.html",
+          "title": "Reveal Technology Acquires Anomaly Six",
+          "pub_date": "2026 (approx. Jan/Feb)",
+          "type": "company"
+        },
+        {
+          "url": "https://thedefensepost.com/2022/08/23/reveal-technology-mapping-army/",
+          "title": "Reveal Technology Demonstrates Multi-Drone Mapping for US Army",
+          "pub_date": "2022-08-23",
+          "type": "independent"
+        },
+        {
+          "url": "https://ir.redcatholdings.com/news-events/press-releases/detail/70/",
+          "title": "Reveal and Teal Drones demonstrate multi-drone mapping",
+          "pub_date": "2022-08",
+          "type": "company"
+        },
+        {
+          "url": "https://www.linkedin.com/posts/coptrz_parrot-anafi-usa-reveal-farsight-activity-7110907069607600128-HD1i",
+          "title": "Coptrz: British Army uses Farsight",
+          "pub_date": "2023-09",
+          "type": "company"
+        },
+        {
+          "url": "https://www.revealtech.ai/press",
+          "title": "Reveal press page (Identifi POR for USSOCOM)",
+          "pub_date": "2026-05",
+          "type": "company"
+        },
+        {
+          "url": "https://github.com/SantaJordan/CTOx",
+          "title": "Third-party evidence pack (press scrape)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Danti",
+      "aka": "Danti, Inc.",
+      "founding_year": 2023,
+      "headquarters": "Atlanta, Georgia, USA",
+      "public_private": "private",
+      "employee_count_approx": "~36 (LinkedIn per third-party scrape, 2026; INFERENCE)",
+      "founders": [
+        "Jesse Kallman (founder and CEO)"
+      ],
+      "founder_backgrounds": "Jesse Kallman named as founder/CEO by SpaceNews and Federal Times. Prior roles not verified in session. Public evidence insufficient.",
+      "total_disclosed_funding_usd": "$5M seed (reported by CTOL Digital / Hypepotamus, ~2024). Later rounds: Public evidence insufficient.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Shield Capital (LOW - inferred from portfolio-source tag in third-party scrape)",
+        "Other seed investors: Public evidence insufficient."
+      ],
+      "c4isr_products": [
+        {
+          "name": "Danti Earth data search engine / AI knowledge engine",
+          "description": "Natural-language search and fusion across satellite imagery, drone data, analytics feeds, social media and other location-linked sources; answers questions about a place or event and returns relevant imagery/data. Rebranded in 2025 as an AI knowledge engine for military intelligence (DefenseScoop).",
+          "input_process_output_user": "Input: natural-language question; indexed EO/SAR imagery catalogs, drone data, OSINT, analytic products. Process: semantic/NLP retrieval, geospatial fusion, LLM summarization. Output: ranked imagery/data, summaries, shareable answers. User: Guardians/Airmen, GEOINT analysts, SOF and COCOM staff."
+        },
+        {
+          "name": "TacSRT automated analysis (Direct-to-Phase II)",
+          "description": "SpaceWERX D2P2 ($1.25M, Sept 2025) to provide the Space Force Tactical Surveillance, Reconnaissance and Tracking (TacSRT) program with automated analysis.",
+          "input_process_output_user": "Input: commercial space-derived data ordered via TacSRT. Process: automated retrieval/analysis. Output: analytic products for tactical users. User: USSF TacSRT consumers/COCOMs."
+        }
+      ],
+      "exact_problem_solved": "Analysts and non-expert operators cannot find the right imagery/data across many silos quickly; Danti provides a Google-like natural-language layer over multi-source Earth data so answers arrive in seconds instead of hours (company SBIR abstract: takes years to train a new geospatial analyst).",
+      "primary_users": [
+        "USSF Guardians / TacSRT users",
+        "NGA analysts",
+        "SOCOM and combatant command staffs (company/press claims)",
+        "commercial users"
+      ],
+      "primary_buyers": [
+        "SpaceWERX / AFWERX (SBIR D2P2, TACFI)",
+        "US Space Force (TacSRT)",
+        "US Air Force (contract reported by Tectonic Defense, details Public evidence insufficient.)"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "NORMALIZE",
+        "PROCESS",
+        "FUSE",
+        "VISUALIZE",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "ISR",
+        "space (TacSRT)",
+        "joint/COCOM intelligence support"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - web/SaaS, also deployable inside organizational firewalls (company site)",
+      "market_posture": "dual-use (defense-led)",
+      "contracts": [
+        {
+          "title": "Danti Semantic/NLP Search System for Earth Observation Data (SBIR Phase II, Direct-to-Phase II)",
+          "customer": "US Space Force",
+          "contracting_org": "AFWERX/SpaceWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1,203,750 (~$1.2M)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2023-10 (announced 2023-10-18)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://spacenews.com/danti-gets-u-s-space-force-contract-for-data-search-engine/",
+          "pub_date": "2023-10",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "TACFI (Tactical Funding Increase) to expand USSF operations",
+          "customer": "US Space Force",
+          "contracting_org": "SpaceWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1.9M (TACFI blends SBIR and matching funds)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024-08-22",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype expansion",
+          "source_url": "https://danti.ai/danti-secures-1-9m-tacfi-contract-to-boost-u-s-space-force-operations/",
+          "pub_date": "2024-08-22",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Direct-to-Phase II for USSF TacSRT automated analysis",
+          "customer": "US Space Force (TacSRT)",
+          "contracting_org": "SpaceWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1.25M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-09-04",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://danti.ai/danti-awarded-a-1-25m-direct-to-phase-ii-contract-to-provide-the-u-s-space-forces-tacsrt-with-automated-analysis/",
+          "pub_date": "2025-09-04",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "US Air Force contract (reported alongside 2025 rebrand)",
+          "customer": "US Air Force",
+          "contracting_org": "Public evidence insufficient.",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-2026",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "unknown",
+          "source_url": "https://www.tectonicdefense.com/exclusive-danti-gets-a-makeover-scores-us-air-force-contract/",
+          "pub_date": "2025-2026",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Used by Space Force and NGA; company says it is used across SOCOM, NGA, USSF, USAF and nearly all combatant commands",
+          "evidence": "DefenseScoop (2025-04-02) and Tectonic Defense reporting of company statements; no government confirmation of scale",
+          "source_url": "https://defensescoop.com/2025/04/02/danti-ai-startup-knowledge-engine-military-intelligence/"
+        },
+        {
+          "what": "Deployment model: web-accessible or inside organizational firewalls; no public ATO/IL statement",
+          "evidence": "Company website language (via third-party scrape)",
+          "source_url": "https://danti.ai/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "SOCEUR Trojan Footprint 2026",
+          "year": "2026",
+          "note": "Danti reported as used during the exercise (Tectonic Defense)",
+          "source_url": "https://www.tectonicdefense.com/exclusive-danti-gets-a-makeover-scores-us-air-force-contract/"
+        },
+        {
+          "event": "NSIN GSearch challenge with NGA (winner announcement)",
+          "year": "2023",
+          "note": "NSIN article 'Venture Solves Geospatial-Intelligence Information Challenge with NGA' surfaced in Danti search; attribution to Danti MEDIUM",
+          "source_url": "https://nsin.mil/news/2023-04-07-gsearch-winner/"
+        }
+      ],
+      "integration_partners": [
+        "Commercial imagery providers indexed by the search engine (specific partners Public evidence insufficient.)",
+        "USSF TacSRT marketplace"
+      ],
+      "apis_sdks_open_interfaces": "No public API documentation or GitHub presence found (code search for danti.ai returned nothing). Public evidence insufficient.",
+      "security_classification_requirements": "Company mentions on-prem/inside-firewall deployment; no public ATO, IL level or classified-network deployment evidence. Public evidence insufficient.",
+      "allied_international_activity": "Public evidence insufficient.",
+      "technical_differentiator": "LLM/NLP retrieval layer purpose-built for location-centric multi-source data; usable by non-experts; repeat SpaceWERX funding suggests USSF pull.",
+      "suspected_moat": "Weak-to-moderate: data-connector breadth and government workflow integration; but hyperscalers, Palantir/Maven, and Esri could add NL search over GEOINT catalogs. INFERENCE.",
+      "major_competitors": [
+        "Palantir (Gaia/Maven Smart System search)",
+        "Esri ArcGIS AI assistants",
+        "Blackshark.ai ORCA HUNTR (different layer)",
+        "Synthetaic/RAIC (imagery search)",
+        "Vantor/Maxar and Planet platforms",
+        "Primer and other LLM intel tools"
+      ],
+      "obvious_weaknesses": "All public government revenue is SBIR-tier (~$4.4M across three awards); usage claims are company-sourced; hiring skew toward GTM roles; seed-stage capital; no ATO/IL evidence.",
+      "evidence_user_adoption": "Multi-organization usage claims (SOCOM, NGA, USSF, USAF, COCOMs) and exercise use (Trojan Footprint 2026) via press; MEDIUM.",
+      "evidence_repeat_procurement": "Three sequential SpaceWERX/AFWERX awards (D2P2 2023, TACFI 2024, D2P2 2025) - repeat SBIR-track funding, not production procurement. HIGH.",
+      "evidence_prototype_to_production": "No Phase III, IDIQ or program-of-record evidence found. Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "FUSE",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: live roles captured (2026) are all go-to-market - Head of Growth Public Sector, Commercial Sales Manager, Marketing Manager, Senior Solutions Engineer Public Sector - implying a commercialization phase rather than core platform build-out; no engineering stack signals. LOW.",
+      "confidence_notes": "SBIR awards HIGH (company releases + SBIR record via scrape). Seed $5M MEDIUM (secondary press). Investor names LOW. Deployment breadth MEDIUM (press relaying company claims).",
+      "sources": [
+        {
+          "url": "https://spacenews.com/danti-gets-u-s-space-force-contract-for-data-search-engine/",
+          "title": "Danti gets U.S. Space Force contract for data search engine",
+          "pub_date": "2023-10",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/danti-secures-1-2-million-contract-from-afwerx-to-empower-u-s-space-force-with-ai-powered-data-search-capabilities-301956683.html",
+          "title": "Danti Secures $1.2 Million Contract from AFWERX",
+          "pub_date": "2023-10",
+          "type": "company"
+        },
+        {
+          "url": "https://danti.ai/danti-secures-1-9m-tacfi-contract-to-boost-u-s-space-force-operations/",
+          "title": "Danti Selected for a $1.9M TACFI Contract",
+          "pub_date": "2024-08-22",
+          "type": "company"
+        },
+        {
+          "url": "https://danti.ai/danti-awarded-a-1-25m-direct-to-phase-ii-contract-to-provide-the-u-s-space-forces-tacsrt-with-automated-analysis/",
+          "title": "Danti Awarded $1.25M Direct to Phase II for TacSRT",
+          "pub_date": "2025-09-04",
+          "type": "company"
+        },
+        {
+          "url": "https://defensescoop.com/2025/04/02/danti-ai-startup-knowledge-engine-military-intelligence/",
+          "title": "AI startup wants to give troops the power of career intel professionals",
+          "pub_date": "2025-04-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.tectonicdefense.com/exclusive-danti-gets-a-makeover-scores-us-air-force-contract/",
+          "title": "Exclusive: Danti Gets a Makeover, Scores US Air Force Contract",
+          "pub_date": "2025-2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.federaltimes.com/it-networks/ai/2024/05/03/danti-search-engine-answers-space-force-location-questions-with-images/",
+          "title": "Danti search engine answers Space Force location questions",
+          "pub_date": "2024-05-03",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.ctol.digital/news/danti-raises-5m-ai-powered-earth-data-search-engine/",
+          "title": "Danti Raises $5M",
+          "pub_date": "2024",
+          "type": "financial"
+        },
+        {
+          "url": "https://nsin.mil/news/2023-04-07-gsearch-winner/",
+          "title": "NSIN GSearch winner with NGA",
+          "pub_date": "2023-04-07",
+          "type": "gov"
+        },
+        {
+          "url": "https://github.com/SantaJordan/CTOx",
+          "title": "Third-party evidence pack (SBIR abstract, jobs scrape)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Blackshark.ai GmbH",
+      "aka": "blackshark.ai",
+      "founding_year": 2020,
+      "headquarters": "Graz, Austria",
+      "public_private": "private",
+      "employee_count_approx": "100+ (third-party directory; LOW)",
+      "founders": [
+        "Michael Putz (CEO)",
+        "Thomas Richter",
+        "Brad Young"
+      ],
+      "founder_backgrounds": "Spun out of Austrian game/simulation studio Bongfish; team built the AI-generated global 3D world for Microsoft Flight Simulator (TechCrunch 2021). MEDIUM.",
+      "total_disclosed_funding_usd": "$20M Series A (Nov 2021). A third-party directory cites ~$35M total (LOW). Later rounds: Public evidence insufficient.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "M12 (Microsoft venture fund; co-led Series A)",
+        "Point72 Ventures (co-led Series A)",
+        "i5invest / Markus Wagner (existing investor)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "SYNTH3D (planet-scale synthetic 3D digital twin)",
+          "description": "AI extracts buildings, vegetation, infrastructure and semantics from 2D satellite/aerial imagery and reconstructs a photorealistic global 3D terrain; delivered into BISim VBS4 and Lockheed Martin Prepar3D Fuse for mission planning, rehearsal and training.",
+          "input_process_output_user": "Input: satellite/aerial imagery, DEM. Process: semantic segmentation, procedural 3D reconstruction. Output: 3D terrain/city tiles for simulators and mission planning. User: simulation/training commands, mission planners (via primes)."
+        },
+        {
+          "name": "ORCA HUNTR",
+          "description": "No-code SaaS (AWS) for building object-detection/semantic-segmentation models from a single image in minutes; GA announced ~Nov 2023.",
+          "input_process_output_user": "Input: satellite/aerial imagery. Process: interactive few-shot model training and validation. Output: detections/segmentation layers and reusable models. User: GEOINT analysts, mapping teams."
+        },
+        {
+          "name": "VEOS / REPLIKA (platform names cited by third parties)",
+          "description": "Platform branding cited by a third-party directory; scope not verified. Public evidence insufficient.",
+          "input_process_output_user": "Public evidence insufficient."
+        }
+      ],
+      "exact_problem_solved": "Producing current, planet-scale 3D terrain for simulation, mission rehearsal and planning is manual and slow; Blackshark automates it from imagery, and HUNTR lowers the barrier to building imagery detectors.",
+      "primary_users": [
+        "Simulation/training users (VBS4, Prepar3D Fuse)",
+        "Mission planners",
+        "GEOINT analysts (HUNTR)"
+      ],
+      "primary_buyers": [
+        "Primes and simulation vendors (Lockheed Martin, BISim)",
+        "Microsoft (Flight Simulator)",
+        "Government buyers via partners (direct US DoD contracts: Public evidence insufficient.)"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE"
+      ],
+      "mission_layer": [
+        "training/simulation",
+        "mission planning",
+        "ISR"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - cloud SaaS and data products",
+      "market_posture": "commercial (dual-use through simulation primes)",
+      "contracts": [
+        {
+          "title": "Direct US DoD / USAF / NGA / Army contract",
+          "customer": "n/a",
+          "contracting_org": "n/a",
+          "vehicle_type": "subcontract",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "n/a",
+          "period_of_performance": "",
+          "prime_or_sub": "sub/partner (via Lockheed Martin Prepar3D Fuse and BISim VBS4 integrations)",
+          "prototype_or_production": "commercial product integration",
+          "source_url": "https://militaryembedded.com/ai/big-data/image-generator-for-military-training-using-unreal-engine-introduced-by-lockheed-martin-blacksharkai",
+          "pub_date": "n/a",
+          "confidence": "LOW - no direct government award found in session"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "SYNTH3D terrain available inside BISim VBS4 (widely used military simulation)",
+          "evidence": "Geo Week News / OneArc coverage of BISim partnership",
+          "source_url": "https://www.geoweeknews.com/news/blackshark-ai-synth3d-terrain-data-bisim-vbs4-3d"
+        },
+        {
+          "what": "Lockheed Martin Prepar3D Fuse image generator with Blackshark full-earth globe, 1,000+ geo-referenced airports and city models",
+          "evidence": "Military Embedded Systems / Defence Industry Europe reporting",
+          "source_url": "https://militaryembedded.com/ai/big-data/image-generator-for-military-training-using-unreal-engine-introduced-by-lockheed-martin-blacksharkai"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Military exercises or DoD demonstrations",
+          "year": "n/a",
+          "note": "Public evidence insufficient.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Microsoft (Flight Simulator; Azure)",
+        "Lockheed Martin (Prepar3D Fuse)",
+        "Bohemia Interactive Simulations (VBS4)",
+        "AWS (HUNTR hosting)",
+        "Unreal Engine ecosystem"
+      ],
+      "apis_sdks_open_interfaces": "HUNTR is a SaaS app; SYNTH3D delivered as data tiles into simulators. No public API/SDK documentation or GitHub org found. Public evidence insufficient.",
+      "security_classification_requirements": "Austrian company; US defense work appears to flow through US primes. Export-control (EAR/ITAR), FOCI and data-residency constraints need specialist review. Public evidence insufficient.",
+      "allied_international_activity": "EU/Austria-based; partners with UK/Australia-linked BISim; no allied government contracts found. Public evidence insufficient.",
+      "technical_differentiator": "Proven planet-scale procedural 3D reconstruction pipeline (Microsoft Flight Simulator heritage) plus few-shot detector authoring (HUNTR).",
+      "suspected_moat": "Moderate in synthetic terrain generation (data pipeline scale, Microsoft relationship); weak in HUNTR object detection (crowded field). INFERENCE.",
+      "major_competitors": [
+        "Vantor/Maxar Precision3D and Vricon heritage",
+        "Cesium / Bentley 3D tiles",
+        "Esri 3D content",
+        "Synthetaic/RAIC and Picterra (HUNTR)",
+        "One World Terrain (Army program)"
+      ],
+      "obvious_weaknesses": "No verified direct DoD contracts; revenue claims only from unreliable aggregators; foreign ownership limits classified work; simulation-terrain buyers are prime-dominated.",
+      "evidence_user_adoption": "Adoption via simulation vendors (VBS4, Prepar3D Fuse) and consumer scale via Microsoft Flight Simulator; direct military user adoption: Public evidence insufficient.",
+      "evidence_repeat_procurement": "Public evidence insufficient.",
+      "evidence_prototype_to_production": "Commercial products shipping (VBS4 integration, Flight Simulator); no DoD prototype-to-production path evidenced.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: no job postings captured; product facts imply Python/ML segmentation pipelines, procedural 3D generation, Unreal Engine and AWS/Azure cloud. LOW.",
+      "confidence_notes": "Series A HIGH; founders/HQ MEDIUM-HIGH; defense contracts LOW (none found); partnerships MEDIUM-HIGH (independent trade press). Company site unreachable in session.",
+      "sources": [
+        {
+          "url": "https://techcrunch.com/2021/11/10/blackshark-ai-digital-twin-of-earth-microsoft-funding/",
+          "title": "Blackshark.ai digital twin of Earth attracts $20M",
+          "pub_date": "2021-11-10",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.geoweeknews.com/news/blackshark-ai-synth3d-terrain-data-bisim-vbs4-3d",
+          "title": "SYNTH3D Terrain Data Now Available in BISim VBS4",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/ai/big-data/image-generator-for-military-training-using-unreal-engine-introduced-by-lockheed-martin-blacksharkai",
+          "title": "Lockheed Martin and Blackshark.ai Prepar3D Fuse",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.exterrajsc.com/p/orca-huntr-general-availability-announced",
+          "title": "ORCA HUNTR General Availability Announced",
+          "pub_date": "2023-11",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.auganix.org/xr-news-bisim-and-blackshark-ai-partner-to-provide-metaverse-solutions-for-the-military/",
+          "title": "BISim and blackshark.ai partner",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.blackshark.ai/",
+          "title": "Blackshark.ai website",
+          "pub_date": "n/a",
+          "type": "company"
+        },
+        {
+          "url": "https://getlatka.com/companies/blackshark.ai",
+          "title": "Latka revenue estimate (unreliable)",
+          "pub_date": "2024",
+          "type": "financial"
+        }
+      ]
+    },
+    {
+      "name": "Ursa Space Systems, Inc.",
+      "aka": "Ursa Space",
+      "founding_year": 2014,
+      "headquarters": "Ithaca, New York, USA",
+      "public_private": "private",
+      "employee_count_approx": "~75 (LinkedIn per third-party scrape, 2026; INFERENCE)",
+      "founders": [
+        "Adam Maher (founder and CEO)"
+      ],
+      "founder_backgrounds": "Adam Maher identified as founder/CEO (API Evangelist profile / general press). Background not verified in session. Public evidence insufficient.",
+      "total_disclosed_funding_usd": "~$66M across ~14 rounds (Tracxn), including $10M venture loan from Horizon Technology Finance (2024-11-07) and an undisclosed round (2025-08-20). MEDIUM.",
+      "latest_valuation": "Not disclosed; Dealroom estimated enterprise value $25-37M (older estimate, LOW).",
+      "major_investors": [
+        "Paladin Capital Group",
+        "RRE Ventures",
+        "S&P Global",
+        "Citi",
+        "Razor's Edge Ventures (LOW - portfolio-source tag)",
+        "Horizon Technology Finance (debt)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Ursa Platform (multi-source satellite tasking, ordering and analytics)",
+          "description": "Vendor-neutral platform aggregating SAR, EO, RF and AIS/ground-truth data from many commercial constellations with AI/ML analytics (change detection, object detection, dark-vessel detection, oil-storage measurement, site monitoring). 2026 positioning: AI-native geospatial insights platform with AI agents.",
+          "input_process_output_user": "Input: commercial SAR/EO/RF imagery from partner constellations, AIS, open data. Process: multi-vendor tasking brokerage, SAR processing, computer-vision analytics, report generation. Output: analytic reports, alerts, data via API/ArcGIS toolbox. User: NGA and IC analysts, USINDOPACOM/USSF, commodity and finance analysts."
+        },
+        {
+          "name": "TrueSight (NGA Luno B task order)",
+          "description": "$21M first Luno B award (Jul 2025) for commercial analytic services; content of TrueSight not fully public.",
+          "input_process_output_user": "Input: commercial GEOINT. Process: unclassified analytics. Output: recurring analytic products to NGA. User: NGA/IC."
+        }
+      ],
+      "exact_problem_solved": "Government analysts need persistent, weather-independent monitoring of facilities and maritime activity without owning satellites; Ursa brokers multi-vendor SAR/EO collection and turns it into recurring, explained analytics (its tagline: change explained).",
+      "primary_users": [
+        "NGA analysts",
+        "USINDOPACOM (via USSF SSC task order)",
+        "DIU-sponsored users",
+        "commercial energy/finance analysts"
+      ],
+      "primary_buyers": [
+        "NGA (GEOINT data services contract; Luno A task order; Luno B IDIQ)",
+        "US Space Force Space Systems Command (Commercial Space Office)",
+        "Defense Innovation Unit",
+        "Missile Defense Agency (SHIELD IDIQ pool)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "TASK",
+        "INGEST",
+        "NORMALIZE",
+        "PROCESS",
+        "FUSE",
+        "IDENTIFY",
+        "MONITOR",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maritime",
+        "space (commercial ISR)",
+        "joint/theater"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - data brokerage and analytics; no owned satellites",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "NGA GEOINT data services multi-year option contract (SAR augmentation with AI/ML analytics)",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "FAR",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "~2020 (NGA first commercial GEOINT contracts, Breaking Defense Apr 2020)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production data/analytic services",
+          "source_url": "https://ursaspace.com/blog/national-geospatial-intelligence-agency-enhancing-mission-with-ursa-space/",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NGA Luno A task order - unclassified commercial GEOINT analytics of petroleum production and storage facilities",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$13.8M task order",
+          "funded_amount": "",
+          "task_orders": "1 (Luno A)",
+          "date": "2024 (SpaceNews)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production analytics",
+          "source_url": "https://spacenews.com/ursa-university-of-illinois-and-palantir-win-luno-a-contracts/",
+          "pub_date": "2024",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA Luno B multiple-award IDIQ (13 vendors)",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$200M shared ceiling, 5-year base ordering period (not revenue)",
+          "obligated": "",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-01-16",
+          "period_of_performance": "",
+          "prime_or_sub": "prime (one of 13)",
+          "prototype_or_production": "production analytic services",
+          "source_url": "https://www.nga.mil/news/NGA_announces_selectees_for_$200M_Luno_B_IDIQ.html",
+          "pub_date": "2025-01-16",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Luno B first award - TrueSight",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$21M task order (Ursa and NV5 received first Luno B awards)",
+          "funded_amount": "",
+          "task_orders": "1",
+          "date": "2025-07 (Defense Daily 2025-07-02)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://www.defensedaily.com/ursa-space-nv5-nab-first-luno-b-awards-by-nga/intelligence-community/",
+          "pub_date": "2025-07-02",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "USSF Space Systems Command task order - analytics for USINDOPACOM after Japan natural disaster (Noto earthquake)",
+          "customer": "US Space Force / USINDOPACOM",
+          "contracting_org": "SSC Commercial Space Office",
+          "vehicle_type": "IDIQ",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "1 (completed)",
+          "date": "2024 (PRNewswire, ~June 2024)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational tactical support",
+          "source_url": "https://www.prnewswire.com/news-releases/space-force-tasks-ursa-space-to-provide-usindopacom-with-analytics-following-japanese-natural-disaster-302170070.html",
+          "pub_date": "2024-06",
+          "confidence": "HIGH on existence; LOW on value"
+        },
+        {
+          "title": "MDA SHIELD IDIQ (Scalable Homeland Innovative Enterprise Layered Defense) - selected in pool",
+          "customer": "Missile Defense Agency",
+          "contracting_org": "MDA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$151B program ceiling shared by >1,000 awardees; 1,086 additional companies selected 2025-12-18 (pool position only, no funded work implied)",
+          "obligated": "",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-12-19 (company release)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime (pool)",
+          "prototype_or_production": "unknown",
+          "source_url": "https://satnews.com/2025/12/22/mda-taps-sidus-ursa-space-for-151-billion-golden-dome-shield-contract/",
+          "pub_date": "2025-12-22",
+          "confidence": "HIGH on selection; value meaningless as revenue"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Recurring NGA analytics on petroleum storage/production sites (Luno A) and TrueSight (Luno B)",
+          "evidence": "SpaceNews, Defense Daily, NGA announcements",
+          "source_url": "https://spacenews.com/ursa-university-of-illinois-and-palantir-win-luno-a-contracts/"
+        },
+        {
+          "what": "USINDOPACOM disaster-response analytics delivered via USSF SSC task order",
+          "evidence": "Company press release (PRNewswire)",
+          "source_url": "https://www.prnewswire.com/news-releases/space-force-tasks-ursa-space-to-provide-usindopacom-with-analytics-following-japanese-natural-disaster-302170070.html"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Named military exercises",
+          "year": "n/a",
+          "note": "Public evidence insufficient.",
+          "source_url": ""
+        },
+        {
+          "event": "Break Through Tech AI Studio university projects (SAR iceberg/vessel classification; cloud detection in VHR optical imagery)",
+          "year": "2025-2026",
+          "note": "Public student repos show Ursa sponsoring applied ML projects - R&D pipeline evidence, not deployment",
+          "source_url": "https://github.com/Break-Through-Tech/Ursa-Space-Systems-1C-cloud-detection-in-very-high-resolution-optical-satellite-imagery"
+        }
+      ],
+      "integration_partners": [
+        "Multiple SAR/EO/RF constellation operators (vendor-neutral brokerage; specific 2026 partner list Public evidence insufficient.)",
+        "Esri ArcGIS Pro (public Python toolbox for Ursa Platform APIs, Jan 2023)",
+        "S&P Global (investor/commercial channel)",
+        "NV5 Geospatial (co-awardee Luno B)"
+      ],
+      "apis_sdks_open_interfaces": "Ursa Platform exposes REST APIs; public GitHub 'ursaspace/ursa-arcgis-toolbox' (Python, 2023) wraps them for ArcGIS Pro. API Evangelist (2026) reports the platform is in beta with no public developer portal, OpenAPI spec, SDK or self-service signup - engagement is sales-led. FACT/INFERENCE mix, MEDIUM.",
+      "security_classification_requirements": "Luno work is explicitly unclassified commercial GEOINT; classified delivery not evidenced. Public evidence insufficient.",
+      "allied_international_activity": "Analytics for Japan disaster response (for USINDOPACOM); allied government customers: Public evidence insufficient.",
+      "technical_differentiator": "Vendor-neutral multi-constellation SAR/EO brokerage plus mature SAR analytics (oil storage, maritime) with a decade of NGA/IC delivery history.",
+      "suspected_moat": "Moderate: NGA contract incumbency (Luno A and first Luno B award), multi-vendor data agreements and SAR analytic track record; but constellation owners (Capella, ICEYE, Umbra) and Vantor increasingly sell analytics directly. INFERENCE.",
+      "major_competitors": [
+        "BlackSky Spectra",
+        "Vantor/Maxar",
+        "Planet",
+        "ICEYE / Capella / Umbra analytics",
+        "NV5 Geospatial",
+        "Palantir (Luno A co-awardee)",
+        "Orbital Insight (now part of Privateer)"
+      ],
+      "obvious_weaknesses": "No owned sensors (margin and priority dependent on suppliers); reliance on NGA vehicles; recent venture debt suggests capital constraints; API surface not self-serve; SHIELD selection is a pool, not revenue.",
+      "evidence_user_adoption": "NGA repeat tasking, USSF task order for USINDOPACOM, DIU customer (company). MEDIUM-HIGH.",
+      "evidence_repeat_procurement": "NGA: GEOINT data services (multi-year options) -> Luno A $13.8M TO (2024) -> Luno B IDIQ (Jan 2025) -> first Luno B TO $21M (Jul 2025). HIGH.",
+      "evidence_prototype_to_production": "Already delivering production analytic services to NGA; SHIELD/MDA path unproven.",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "FUSE",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: live role 'Sr. Data Engineer' (Ithaca); public Python ArcGIS toolbox; student projects use Jupyter/Python CV. Implies Python data-engineering and CV stack with REST APIs. MEDIUM-LOW.",
+      "confidence_notes": "Contract chain HIGH (gov and Tier-3 press). Funding total MEDIUM (aggregators). Founders/backgrounds LOW. Company website and NGA site unreachable in session; relied on snippets, GitHub and third-party scrapes.",
+      "sources": [
+        {
+          "url": "https://www.nga.mil/news/NGA_announces_selectees_for_$200M_Luno_B_IDIQ.html",
+          "title": "NGA announces selectees for $200M Luno B IDIQ",
+          "pub_date": "2025-01-16",
+          "type": "gov"
+        },
+        {
+          "url": "https://www.nga.mil/assets/files/25-02_LunoB.pdf",
+          "title": "NGA Luno B release (PDF)",
+          "pub_date": "2025-01",
+          "type": "gov"
+        },
+        {
+          "url": "https://spacenews.com/ursa-university-of-illinois-and-palantir-win-luno-a-contracts/",
+          "title": "Ursa Space, University of Illinois and Palantir win NGA Luno A contracts",
+          "pub_date": "2024",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.defensedaily.com/ursa-space-nv5-nab-first-luno-b-awards-by-nga/intelligence-community/",
+          "title": "Ursa Space, NV5 Nab First Luno B Awards By NGA",
+          "pub_date": "2025-07-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/space-force-tasks-ursa-space-to-provide-usindopacom-with-analytics-following-japanese-natural-disaster-302170070.html",
+          "title": "Space Force Tasks Ursa Space to Provide USINDOPACOM with Analytics",
+          "pub_date": "2024-06",
+          "type": "company"
+        },
+        {
+          "url": "https://ursaspace.com/blog/ursa-space-systems-selected-for-200m-luno-b-idiq/",
+          "title": "Ursa Space Systems selected for $200M Luno B IDIQ",
+          "pub_date": "2025-01-16",
+          "type": "company"
+        },
+        {
+          "url": "https://satnews.com/2025/12/22/mda-taps-sidus-ursa-space-for-151-billion-golden-dome-shield-contract/",
+          "title": "MDA Taps Sidus, Ursa Space for $151B SHIELD",
+          "pub_date": "2025-12-22",
+          "type": "independent"
+        },
+        {
+          "url": "https://breakingdefense.com/2020/04/nga-plans-first-commercial-contracts-for-military-geoint/",
+          "title": "NGA To Tap Commercial Data On Military Targets",
+          "pub_date": "2020-04",
+          "type": "independent"
+        },
+        {
+          "url": "https://github.com/ursaspace/ursa-arcgis-toolbox",
+          "title": "Ursa ArcGIS Pro Python toolbox for Ursa Platform APIs",
+          "pub_date": "2023-01",
+          "type": "company"
+        },
+        {
+          "url": "https://github.com/api-evangelist/ursa-space-systems",
+          "title": "API Evangelist profile of Ursa Space public API surface",
+          "pub_date": "2026-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://tracxn.com/d/companies/ursaspace/__nAnU3O2uj2044O-FZUid-ziF4j25cTFcKiRpNUWhI4M/funding-and-investors",
+          "title": "Ursa Space funding rounds (Tracxn)",
+          "pub_date": "2026",
+          "type": "financial"
+        },
+        {
+          "url": "https://github.com/SantaJordan/CTOx",
+          "title": "Third-party evidence pack (press scrape)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Cognitive Space, Inc.",
+      "aka": "CNTIENT (product family)",
+      "founding_year": 2018,
+      "headquarters": "Houston, Texas, USA (with Northern Virginia / National Capital Region presence since 2025)",
+      "public_private": "private",
+      "employee_count_approx": "~18-24 (LinkedIn per third-party scrape, 2025-2026; INFERENCE)",
+      "founders": [
+        "Guy de Carufel (founder and CEO)"
+      ],
+      "founder_backgrounds": "Guy de Carufel: former Firefly Space Systems engineer; International Space University (NASA Ames 2009); Techstars and Creative Destruction Lab alumni (company founder blog, Nov 2022). CTO: Dax Garner.",
+      "total_disclosed_funding_usd": "$10M total to date per company (Oct 2023), including $4M seed+ closed Q2 2023.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "York IE",
+        "Draper Associates",
+        "Dolby Family Ventures",
+        "Grit Ventures (early lead)",
+        "Argon Ventures (early lead)",
+        "Techstars"
+      ],
+      "c4isr_products": [
+        {
+          "name": "CNTIENT.Optimize",
+          "description": "AI/ML (reinforcement-learning based) constellation mission planning and scheduling SaaS: payload tasking, link/contact scheduling and prioritization; company states TRL 9 operating on-orbit spacecraft; commercial deployment with Terran Orbital (Mar 2023). Company-reported 87% operator time savings and 4x over greedy heuristics.",
+          "input_process_output_user": "Input: order stacks/collection requests, ephemerides (TLEs), ground-station availability, constraints. Process: AI optimization of collection and contact plans. Output: executable schedules via API. User: satellite operators, USSF/AFRL/SDA/NOAA mission ops."
+        },
+        {
+          "name": "CNTIENT.Orchestrate",
+          "description": "Multi-provider commercial satellite tasking orchestration for analysts and COCOMs (announced around GEOINT 2024).",
+          "input_process_output_user": "Input: collection needs. Process: cross-vendor tasking planning/ordering. Output: orders across multiple commercial constellations. User: GEOINT analysts, COCOM collection managers."
+        },
+        {
+          "name": "CNTIENT GOV-GS",
+          "description": "Automated ground-station antenna scheduling for aging government networks (AFSCN context), from AFRL work.",
+          "input_process_output_user": "Input: pass requests, antenna states. Process: real-time scheduling. Output: antenna schedules. User: government ground-segment operators."
+        },
+        {
+          "name": "CNTIENT.Earth",
+          "description": "Satellite Data-as-a-Service offering (API Evangelist/company site).",
+          "input_process_output_user": "Public evidence insufficient."
+        }
+      ],
+      "exact_problem_solved": "Once constellations exceed a handful of spacecraft, human planners cannot keep up with dynamic tasking, link management and priority conflicts; CNTIENT automates collection and contact planning, and Orchestrate extends this to tasking across many commercial providers for government users.",
+      "primary_users": [
+        "Commercial constellation operators (Terran Orbital)",
+        "AFRL, USSF, SDA and DARPA program teams (SBIR/OTA-level)",
+        "NOAA ground-system evaluators",
+        "GEOINT collection managers (Orchestrate)"
+      ],
+      "primary_buyers": [
+        "AFRL / AFWERX (SBIR Phase I/II, IDC)",
+        "Space Development Agency",
+        "NOAA",
+        "commercial operators"
+      ],
+      "technical_layer": [
+        "TASK",
+        "COLLECT",
+        "DECIDE",
+        "MONITOR",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "space (satellite C2 and tasking)",
+        "ISR collection management",
+        "joint"
+      ],
+      "segment_ids": [],
+      "hw_sw_mix": "software - cloud SaaS with APIs",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "AFRL SBIR Phase II - AI-driven satellite tasking software",
+          "customer": "US Air Force (AFRL)",
+          "contracting_org": "AFRL/AFWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1.5M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2020",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://spacenews.com/cognitive-space-gets-1-2-million-u-s-air-force-contract-extension-for-satellite-tasking-software/",
+          "pub_date": "2021-2022",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "AFRL contract extension - tailored CNTIENT via cloud API for dynamic satellite scheduling",
+          "customer": "US Air Force (AFRL)",
+          "contracting_org": "AFRL",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1.2M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2021-2022 (SpaceNews)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://spacenews.com/cognitive-space-gets-1-2-million-u-s-air-force-contract-extension-for-satellite-tasking-software/",
+          "pub_date": "2021-2022",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "USAF Indefinite Delivery Contract FA861221D0113 (tied to Advanced Battle Management System per third-party contract database)",
+          "customer": "US Air Force",
+          "contracting_org": "AFRL/AFWERX (FA8612)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2021",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (SBIR-derived IDC)",
+          "source_url": "https://www.highergov.com/idv/FA861221D0113/",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Dynamic ISR planning with multi-level security access for space asset tasking (SBIR Phase II)",
+          "customer": "US Air Force / Space Force",
+          "contracting_org": "AFWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1,695,909",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2022",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.sbir.gov/portfolio/1458759",
+          "pub_date": "2022",
+          "confidence": "MEDIUM-HIGH (SBIR record via third-party scrape)"
+        },
+        {
+          "title": "CNTIENT for Topology and Link Management of a Dynamic Satellite Network (SBIR Phase II)",
+          "customer": "US Air Force / Space Force",
+          "contracting_org": "AFWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$1,249,731",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2023",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.sbir.gov/portfolio/1458759",
+          "pub_date": "2023",
+          "confidence": "MEDIUM-HIGH"
+        },
+        {
+          "title": "SDA SBIR Phase I - intelligent space mesh network routing algorithms (with Southwest Research Institute)",
+          "customer": "Space Development Agency",
+          "contracting_org": "SDA",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Part of $1.5M combined AFRL+SDA awards (PRWeb)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "~2022",
+          "period_of_performance": "",
+          "prime_or_sub": "prime (SwRI partner)",
+          "prototype_or_production": "feasibility",
+          "source_url": "https://www.prweb.com/releases/afrl-and-sda-contracts-total-1-5-million-in-new-awards-for-cognitive-space-897268303.html",
+          "pub_date": "~2022",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Two SDA awards (~$5M combined) reported by SpaceNews",
+          "customer": "Space Development Agency",
+          "contracting_org": "SDA",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "~$5M combined (third-party summary of SpaceNews, Mar 2025)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-03",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://github.com/SantaJordan/CTOx",
+          "pub_date": "2025-03",
+          "confidence": "LOW"
+        },
+        {
+          "title": "NOAA Ground Processing Demonstrations (BAA-NOAA-GPD-2023) using CNTIENT.Optimize",
+          "customer": "NOAA",
+          "contracting_org": "NOAA",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$900K",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024-04-10",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "demonstration",
+          "source_url": "https://www.cognitivespace.com/news/cognitive-space-wins-NOAA-contract/",
+          "pub_date": "2024-04-10",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "USAspending contract record FA254125CB007",
+          "customer": "US Air Force / Space Force (FA2541 = Space Systems Command?)",
+          "contracting_org": "not verified",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "FY2025",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "unknown",
+          "source_url": "https://github.com/SantaJordan/CTOx",
+          "pub_date": "2025",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Commercial SaaS AI-driven EO satellite operations with Terran Orbital (world-first claim)",
+          "evidence": "Company press release 2023-03-20; Terran Orbital testimonial on company site",
+          "source_url": "https://www.cognitivespace.com/news/"
+        },
+        {
+          "what": "CNTIENT.Optimize stated at TRL 9 operating on-orbit spacecraft; completed/ongoing work with USAF, AFRL, USSF, DARPA, SDA",
+          "evidence": "Company NOAA release (2024-04-10) - company claim",
+          "source_url": "https://www.cognitivespace.com/news/cognitive-space-wins-NOAA-contract/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "GEOINT 2024 symposium (Orchestrate demos)",
+          "year": "2024",
+          "note": "Company blog recap",
+          "source_url": "https://www.cognitivespace.com/blog/"
+        },
+        {
+          "event": "MissionLink 2023 cohort graduate",
+          "year": "2023",
+          "note": "National-security accelerator community",
+          "source_url": "https://www.cognitivespace.com/news/"
+        }
+      ],
+      "integration_partners": [
+        "Terran Orbital",
+        "Southwest Research Institute (SDA mesh routing)",
+        "AFRL (first customer)",
+        "Space-Track (TLE ingestion utility)",
+        "commercial EO/SAR providers (Orchestrate; specific list Public evidence insufficient.)"
+      ],
+      "apis_sdks_open_interfaces": "Company states integration 'through well defined APIs and engineering support'; CNTIENT delivered as cloud API. Public GitHub org has infrastructure libraries (graphene-luna GraphQL/ASGI for Django, warpzone Kubernetes pipelines, tle-download) but no public product SDK. API Evangelist (2026) profiles a company-level API surface without a public developer portal. MEDIUM.",
+      "security_classification_requirements": "SBIR Phase II on multi-level security access for space tasking (2022) indicates classified-adjacent work; a 'DevSecOps Engineer - Clearance' role (Washington) indicates accreditation work in progress. No public ATO/IL evidence. INFERENCE.",
+      "allied_international_activity": "CGO mandate includes 'US Government and Allies' (Jul 2025); no allied contracts found. Public evidence insufficient.",
+      "technical_differentiator": "RL/AI-based dynamic constellation scheduling proven on commercial on-orbit assets, extended to multi-provider tasking orchestration and government ground-network scheduling.",
+      "suspected_moat": "Weak-to-moderate: operational scheduling know-how and government SBIR pipeline; competitors include operator in-house tools and larger ground-segment vendors. INFERENCE.",
+      "major_competitors": [
+        "Kayhan Space",
+        "Orbit Logic",
+        "Antaris / Quindar",
+        "Planet/BlackSky in-house tasking",
+        "Rhea / KSAT / Viasat ground scheduling",
+        "Palantir Apollo/space C2 offerings"
+      ],
+      "obvious_weaknesses": "Small team and modest capital ($10M); revenue dominated by SBIR-scale awards; cloud-hosted planner may be constrained in contested ground-link scenarios (third-party analytical critique); aging public web presence.",
+      "evidence_user_adoption": "Commercial adoption by Terran Orbital; government evaluations by AFRL, SDA, NOAA; SDA official testimonial on company site. MEDIUM.",
+      "evidence_repeat_procurement": "AFRL SBIR Phase II (2020) -> extension (2021-22) -> IDC (2021) -> two further USAF Phase IIs (2022, 2023) -> SDA awards (2022, 2025) -> NOAA (2024). Repeat R&D-tier procurement, HIGH; production, none.",
+      "evidence_prototype_to_production": "No program-of-record or production contract found; TRL 9 claim is commercial. Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: open roles (2025-2026) - Senior AI/ML Engineer (Reinforcement Learning), AI/ML Engineer (RL), DevSecOps Engineer with clearance - plus public repos (Python, Django, GraphQL/ASGI, Kubernetes job pipelines) imply a Python/Django/GraphQL cloud stack with RL-based optimization and a move toward accredited government hosting. MEDIUM.",
+      "confidence_notes": "Funding and NOAA/Terran facts HIGH (company site source repo). SBIR Phase II titles/amounts MEDIUM-HIGH (third-party scrape of SBIR.gov). 2025 SDA award value LOW. Company site itself unreachable; used its public website source repository on GitHub.",
+      "sources": [
+        {
+          "url": "https://spacenews.com/cognitive-space-gets-1-2-million-u-s-air-force-contract-extension-for-satellite-tasking-software/",
+          "title": "Cognitive Space gets $1.2 million USAF contract extension",
+          "pub_date": "2021-2022",
+          "type": "independent"
+        },
+        {
+          "url": "https://payloadspace.com/cognitive-space-wins-two-dod-contracts/",
+          "title": "Cognitive Space Wins Two DoD Contracts",
+          "pub_date": "~2022",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prweb.com/releases/afrl-and-sda-contracts-total-1-5-million-in-new-awards-for-cognitive-space-897268303.html",
+          "title": "AFRL and SDA contracts total $1.5 million",
+          "pub_date": "~2022",
+          "type": "company"
+        },
+        {
+          "url": "https://www.sbir.gov/portfolio/1458759",
+          "title": "SBIR.gov firm portfolio: Cognitive Space",
+          "pub_date": "n/a",
+          "type": "gov"
+        },
+        {
+          "url": "https://www.cognitivespace.com/news/cognitive-space-raises-4million/",
+          "title": "Cognitive Space Raises $4M seed+",
+          "pub_date": "2023-10-16",
+          "type": "company"
+        },
+        {
+          "url": "https://www.cognitivespace.com/news/cognitive-space-wins-NOAA-contract/",
+          "title": "Cognitive Space Wins NOAA Contract",
+          "pub_date": "2024-04-10",
+          "type": "company"
+        },
+        {
+          "url": "https://github.com/cognitive-space/cspace-web",
+          "title": "Cognitive Space website source (news/blog content)",
+          "pub_date": "2023-2026",
+          "type": "company"
+        },
+        {
+          "url": "https://github.com/api-evangelist/cognitive-space",
+          "title": "API Evangelist profile of Cognitive Space",
+          "pub_date": "2026-07",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.highergov.com/idv/FA861221D0113/",
+          "title": "IDC FA861221D0113 Cognitive Space (HigherGov)",
+          "pub_date": "n/a",
+          "type": "independent"
+        },
+        {
+          "url": "https://github.com/SantaJordan/CTOx",
+          "title": "Third-party evidence pack (SBIR/USAspending scrape)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    }
+  ],
+  "search_log": [
+    {
+      "query": "Synthetaic RAIC Air Force contract",
+      "useful": true
+    },
+    {
+      "query": "Synthetaic funding round investors",
+      "useful": true
+    },
+    {
+      "query": "Edgybees Army contract georegistration full motion video",
+      "useful": true
+    },
+    {
+      "query": "Edgybees funding round Series",
+      "useful": true
+    },
+    {
+      "query": "Reveal Technology Farsight Army contract 3D mapping",
+      "useful": true
+    },
+    {
+      "query": "Danti AI search engine Earth data Space Force contract",
+      "useful": true
+    },
+    {
+      "query": "Blackshark.ai SYNTH3D Air Force contract",
+      "useful": true
+    },
+    {
+      "query": "Ursa Space Systems SAR analytics contract NGA OR Space Force OR NRO",
+      "useful": true
+    },
+    {
+      "query": "Cognitive Space CNTIENT Space Force contract SBIR",
+      "useful": true
+    },
+    {
+      "query": "Synthetaic RAIC NGA OR National Geospatial OR Special Operations OR DIU deployment 2024 2025",
+      "useful": false
+    },
+    {
+      "query": "Edgybees $950 million Air Force SBIR Phase III IDIQ georegistration ceiling",
+      "useful": true
+    },
+    {
+      "query": "Reveal Technology Series B $30 million Farsight STRATFI Marine Corps Warfighting Lab",
+      "useful": true
+    },
+    {
+      "query": "Danti raises Series A 2025 OR 2026 geospatial search NGA Army",
+      "useful": true
+    },
+    {
+      "query": "Blackshark.ai funding Series A $20 million investors Point72 M12",
+      "useful": true
+    },
+    {
+      "query": "Ursa Space Systems funding round investors valuation",
+      "useful": true
+    },
+    {
+      "query": "Cognitive Space funding round investors CNTIENT satellite tasking 2025",
+      "useful": true
+    },
+    {
+      "query": "Ursa Space Luno B IDIQ $200 million NGA award list vendors 2025",
+      "useful": true
+    },
+    {
+      "query": "Blackshark.ai ORCA HUNTR NGA OR USAF OR Space Force OR Army contract 2024 2025",
+      "useful": true
+    },
+    {
+      "query": "RAIC Labs Synthetaic rebrand 2025 OR 2026",
+      "useful": true
+    },
+    {
+      "query": "Synthetaic RAIC Chinese spy balloon Planet imagery tracked",
+      "useful": true
+    },
+    {
+      "query": "Edgybees 2025 OR 2026 news acquired OR acquisition OR contract OR Argus",
+      "useful": true
+    },
+    {
+      "query": "Reveal Technology founders Marine Corps Stanford Farsight founded headquarters",
+      "useful": true
+    },
+    {
+      "query": "[GitHub repo search] ursaspace / cognitivespace / edgybees / blackshark / danti / reveal / synthetaic",
+      "useful": true
+    },
+    {
+      "query": "[GitHub code search] repo:SantaJordan/CTOx danti|ursa|synthetaic|reveal|cognitive-space (third-party press/SBIR scrape fragments)",
+      "useful": true
+    },
+    {
+      "query": "[GitHub code search] repo:cognitive-space/cspace-web news/funding/NOAA/SDA/Terran",
+      "useful": true
+    },
+    {
+      "query": "[GitHub code search] repo:api-evangelist/ursa-space-systems and cognitive-space API profiles",
+      "useful": true
+    },
+    {
+      "query": "[GitHub code search] edgybees / blackshark / reveal API SDK evidence",
+      "useful": false
+    }
+  ],
+  "notes": "ENVIRONMENT LIMITS: the shared session WebSearch budget was exhausted after 22 successful searches; WebFetch and curl were blocked for every external host by the egress proxy policy (including .gov/.mil, company sites and trade press); Bigdata.com MCP was out of credits. Remaining evidence was gathered via GitHub (public company repos, a company website source repo for Cognitive Space, API Evangelist API profiles, and a third-party 'CTOx' research-pack repo containing scraped press releases, SBIR abstracts and job listings). Third-party-scrape items are labeled and rated MEDIUM/LOW. SEGMENT IDS: the S01-S14 segment taxonomy was not included in this agent's brief, so segment_ids are left empty for the orchestrator to assign; all seven companies fall under the batch theme ISR PED / geospatial analytics, with Cognitive Space and Ursa also touching space tasking/collection management. DATA GAPS: Edgybees post-2023 status, obligations under its USAF IDIQs, and Argus award year; Blackshark.ai direct DoD contracts (none found) and later funding; Reveal founders/founding year and Series B exact date; Danti seed investors; Ursa founder background and exact funding; Synthetaic 2022/2025 Phase II amounts; Cognitive Space 2025 SDA award details. CONTRACT-DATA DISCIPLINE: IDIQ ceilings (Edgybees $950M/$550M, Ursa Luno B $200M shared, MDA SHIELD $151B pool) are explicitly recorded as ceilings/pools, not revenue; STRATFI/TACFI figures blend SBIR and matching funds."
+}

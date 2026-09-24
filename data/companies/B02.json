@@ -1,0 +1,969 @@
+{
+  "batch_id": "B02",
+  "theme": "C2 applications and AI workflow startups",
+  "companies": [
+    {
+      "name": "Onebrief, Inc.",
+      "aka": "Onebrief",
+      "founding_year": 2019,
+      "headquarters": "Honolulu, Hawaii, USA",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): several hundred employees given $200M Series D and acquisition of Battle Road Digital; not verified.",
+      "founders": ["Grant Demaree (CEO)"],
+      "founder_backgrounds": "Grant Demaree is a former U.S. Army officer who built the product around Army staff planning workflows (INFERENCE from public profile knowledge; MEDIUM). Co-founder identities not verified in this session: Public evidence insufficient.",
+      "total_disclosed_funding_usd": "At least $220M across the Series C extension ($20M, late 2025) and Series D ($200M, Jan 2026); earlier rounds (Seed/A/B/C) not retrieved this session. Cumulative likely ~$300M (INFERENCE, LOW).",
+      "latest_valuation": "$2.15B post-money at Series D (announced 2026-01-13); up from $1.1B at Series C extension (~Q4 2025) and $650M at Series C (~Q3 2025). FACT per company PR and Yahoo Finance/Built In coverage.",
+      "major_investors": ["Battery Ventures (co-lead Series D)", "Sapphire Ventures (co-lead Series D)", "Salesforce Ventures (new, Series D)", "General Catalyst", "Insight Partners"],
+      "c4isr_products": [
+        {
+          "name": "Onebrief platform (unified command workspace / AI-powered planning software)",
+          "description": "Web-based collaborative military planning and staff-workflow platform. Live, synchronized operational data is held in reusable 'Cards' that produce C2 charts, maps and briefs so staffs plan against a single live picture rather than static slides (description per api-evangelist third-party API-surface profile, 2026-07-31, and company PRs). Marketed as the 'planning layer' inside the Army's NGC2 prototype. AI features: drafting, summarization and plan-generation assistance (company claims; not independently verified).",
+          "input_process_output_user": "INPUT: staff planning inputs (mission, running estimates, task organization, live data from integrated C2/data-layer systems such as Anduril Lattice, Palantir, Striveworks, Govini, ICE, RII, Microsoft). PROCESS: real-time collaborative editing on synchronized data objects; AI drafting/summarization; automatic regeneration of charts/briefs. OUTPUT: plans, orders, sync-matrix and C2 charts, briefs, map overlays. USER: division/corps/joint staffs (G3/G5/J3/J5), air operations/mission command cells (ACC EMC3 project)."
+        }
+      ],
+      "exact_problem_solved": "Military staffs spend hours re-building PowerPoint/Excel planning products from disconnected data; Onebrief collapses the staff-planning cycle (MDMP/JPP) into one synchronized workspace so plan changes propagate to every product. Company-reported result: division planning cycles compressed from hours to 30-40 minutes during 4th ID Ivy Sting (company claim, not independently verified).",
+      "primary_users": ["Army division and corps staffs (4th Infantry Division NGC2 prototype)", "Air Combat Command Agile Battle Lab / EMC3 project users", "Joint/combatant-command planners (company claims; not independently verified this session)"],
+      "primary_buyers": ["U.S. Army Contracting Command (enterprise IDIQ W9128Z-26-D-A014)", "Air Mobility Command / AFWERX (SBIR Phase III IDIQ FA440723D0003)", "Air Combat Command (ABL EMC3 project)", "Navy (SBIR Phase II N68335-23-C-0585)", "Any DoD warranted contracting officer via the Army enterprise IDIQ"],
+      "technical_layer": ["VISUALIZE", "DECIDE", "COLLABORATE", "DISSEMINATE", "TASK"],
+      "mission_layer": ["joint", "maneuver", "fires (via NGC2 partner integration)", "air operations (ACC)"],
+      "segment_ids": ["S03", "S04"],
+      "hw_sw_mix": "software - SaaS/web planning and collaboration platform; no hardware",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Enterprise IDIQ for commercial software platforms (W9128Z-26-D-A014)",
+          "customer": "U.S. Army (usable department-wide by any warranted contracting officer)",
+          "contracting_org": "U.S. Army Contracting Command",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$20,000,000 (firm-fixed-price IDIQ ceiling; NOT revenue)",
+          "obligated": "Public evidence insufficient; funding is determined per task/delivery order",
+          "awarded_value": "$20M ceiling",
+          "funded_amount": "Unknown at award; orders funded individually",
+          "task_orders": "None disclosed as of 2026-09-17",
+          "date": "2026-09-11 (award); announced 2026-09-17",
+          "period_of_performance": "Five-year ordering period stated by Onebrief; separate reporting lists estimated completion 2027-09-10 (discrepancy noted; verify on sam.gov/DoD contracts announcement)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (commercial software procurement vehicle)",
+          "source_url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software",
+          "pub_date": "2026-09-17",
+          "confidence": "HIGH (existence/ceiling); LOW (obligations)"
+        },
+        {
+          "title": "NGC2 prototype - planning layer within Team Anduril (subcontractor)",
+          "customer": "U.S. Army (4th Infantry Division prototype)",
+          "contracting_org": "Army Contracting Command / PEO C3N via OTA to Anduril (prime, $99.6M OTA, July 2025)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Prime OTA $99.6M to Anduril (Onebrief share undisclosed)",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "Undisclosed (sub)",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2025-07 (prime award); Onebrief role publicized 2026-06-26",
+          "period_of_performance": "~11 months prototype (prime OTA) with follow-on production ecosystem planned for a division in FY27 (Breaking Defense, 2026-02)",
+          "prime_or_sub": "sub",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.businesswire.com/news/home/20260626590172/en/Onebrief-Compresses-Army-Planning-Timelines-from-Hours-to-Minutes-as-Next-Generation-Command-and-Control-Scales-to-a-Full-Division",
+          "pub_date": "2026-06-26",
+          "confidence": "MEDIUM-HIGH"
+        },
+        {
+          "title": "SBIR Phase III IDIQ FA440723D0003",
+          "customer": "U.S. Air Force",
+          "contracting_org": "Air Mobility Command (per HigherGov listing)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Public evidence insufficient",
+          "obligated": "Public evidence insufficient (at least one SBIR III task order reported by OrangeSlices)",
+          "awarded_value": "Unknown",
+          "funded_amount": "Unknown",
+          "task_orders": "At least one task order reported (value undisclosed)",
+          "date": "2023-09-20",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (Phase III = non-SBIR-funded follow-on)",
+          "source_url": "https://www.highergov.com/idv/FA440723D0003/",
+          "pub_date": "2023-09-20",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Navy SBIR Phase II N68335-23-C-0585",
+          "customer": "U.S. Navy",
+          "contracting_org": "NAVAIR (N68335 = Naval Air Warfare Center Aircraft Division, Lakehurst) (INFERENCE from DODAAC)",
+          "vehicle_type": "SBIR",
+          "ceiling": "$1,658,607",
+          "obligated": "$1,658,607 (SBIR Phase II total amount per sbir.gov)",
+          "awarded_value": "$1,658,607",
+          "funded_amount": "$1,658,607",
+          "task_orders": "n/a",
+          "date": "2023",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (R&D)",
+          "source_url": "https://www.sbir.gov/awards/211906",
+          "pub_date": "2023",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Air Combat Command Agile Battle Lab - Enabling Mission Command, Control and Communication (EMC3) project",
+          "customer": "Air Combat Command",
+          "contracting_org": "Unknown (company PR)",
+          "vehicle_type": "FAR",
+          "ceiling": "Undisclosed",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "Rollout beginning 2025-01",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "pilot",
+          "source_url": "https://www.onebrief.com/content-hub/acc-pr",
+          "pub_date": "2025 (exact date not retrieved)",
+          "confidence": "MEDIUM (company source only)"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Planning layer inside the Army NGC2 prototype as 4th Infantry Division scaled from battalion to full division (Ivy Sting experimentation series)",
+          "evidence": "Company PR (2026-06-26) picked up by Defense Post and Interesting Engineering; corroborated by Breaking Defense reporting on NGC2 scaling and Anduril prime award. Performance claims (hours to 30-40 min) are company-reported only.",
+          "source_url": "https://thedefensepost.com/2026/06/30/onebrief-us-armys-command-control/"
+        },
+        {
+          "what": "Air Combat Command pilot as foundation of the Agile Battle Lab EMC3 project (rollout from Jan 2025)",
+          "evidence": "Company PR only; independent confirmation not retrieved.",
+          "source_url": "https://www.onebrief.com/content-hub/acc-pr"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Ivy Sting (4th Infantry Division NGC2 experimentation series)", "year": "2025-2026", "note": "Onebrief used as planning layer; battalion to division scaling. Company-reported timing results.", "source_url": "https://finance.yahoo.com/technology/ai/articles/onebrief-compresses-army-planning-timelines-130000704.html"}
+      ],
+      "integration_partners": ["Anduril (Lattice / NGC2 prime)", "Palantir", "Striveworks", "Govini", "Instant Connect Enterprise", "Rune", "Research Innovations, Inc. (RII)", "Microsoft", "Battle Road Digital (acquired Jan 2026; function not verified this session)"],
+      "apis_sdks_open_interfaces": "INFERENCE (MEDIUM): a documented public API surface exists - api-evangelist published an independent API profile of Onebrief (2026-07-31) and multiple candidate take-home repos on GitHub reference an 'Onebrief API test', implying API-centric engineering hiring. No public SDK found. Company states it integrates with partner NGC2 systems 'rather than replacing them'.",
+      "security_classification_requirements": "Public evidence insufficient (this session). Use inside NGC2 and by ACC implies operation on DoD networks up to at least Secret/SIPR-class enclaves (INFERENCE, LOW). Facility clearance / IL levels not verified.",
+      "allied_international_activity": "Public evidence insufficient (this session).",
+      "technical_differentiator": "Workflow-native design around military staff processes (MDMP/JPP) with live-synchronized data objects that regenerate planning products; positioned as an application layer atop other vendors' data layers rather than a competing data fabric. Differentiation claims about speed are company-sourced.",
+      "suspected_moat": "Process lock-in once a staff's planning artifacts live in Onebrief; incumbent position as NGC2 planning layer during the prototype-to-production transition; an enterprise IDIQ that lets any DoD contracting officer order without a new competition (lower buyer friction); growing capital base for classified-network accreditation. HYPOTHESIS: moat is moderate - the Army could re-compete the planning layer in NGC2 production.",
+      "major_competitors": ["Palantir (Maven Smart System / Gotham planning tools)", "Anduril (Lattice C2 - partner today, potential competitor)", "Microsoft Office/SharePoint/Teams (incumbent staff workflow)", "Scale AI Thunderforge (DIU AI planning for INDOPACOM/EUCOM)", "Vannevar Labs (agentic AI for staffs)", "Immersive Wisdom (collaboration in DDIL)", "BigBear.ai / Ask Sage (GenAI staff tools)"],
+      "obvious_weaknesses": "Key performance claims are company-reported; NGC2 role depends on the prime integrator (Anduril) and Army production decisions; $20M IDIQ ceiling is small relative to a $2.15B valuation (ARR not disclosed); revenue concentration in U.S. Army/USAF; rapid valuation step-ups (2025-2026) create expectations that require large production awards.",
+      "evidence_user_adoption": "MEDIUM: division-scale use in NGC2 prototype (4th ID), ACC pilot, and multiple service contracting vehicles. Independent user-count or renewal data not public.",
+      "evidence_repeat_procurement": "MEDIUM-HIGH: Navy SBIR Phase II (2023) -> USAF SBIR Phase III IDIQ (Sept 2023) with task orders -> ACC pilot (2025) -> Army enterprise IDIQ (Sept 2026). Multiple services buying repeatedly, though dollar values mostly undisclosed.",
+      "evidence_prototype_to_production": "MEDIUM: SBIR -> Phase III IDIQ is a formal transition; NGC2 subcontract (prototype) followed by an Army enterprise IDIQ as prime for commercial software (production-type vehicle). Note: IDIQ ceiling is not obligations; NGC2 production ecosystem decisions for FY27 not yet public.",
+      "whitespace_cells": [
+        {"chain_step": "DECIDE", "echelon": "division_corps"},
+        {"chain_step": "DECIDE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "joint"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "division_corps"},
+        {"chain_step": "FUSE", "echelon": "division_corps"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW-MEDIUM): TypeScript/React web front-end and API-first services (candidate take-home repos are TypeScript and reference an Onebrief API); real-time collaborative sync architecture; deployable to government cloud and classified enclaves. Job postings were not retrievable this session.",
+      "confidence_notes": "Contract existence and funding facts HIGH (multiple outlets). Product performance claims are company marketing (not independent). Founder list incomplete. Employee count, ARR, classification levels and allied use are gaps.",
+      "sources": [
+        {"url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software", "title": "Onebrief Awarded Enterprise Contract by U.S. Army Contracting Command", "pub_date": "2026-09-17", "type": "company"},
+        {"url": "https://orangeslices.ai/us-army-inks-20m-idiq-with-onebrief/", "title": "US Army inks $20M IDIQ with Onebrief", "pub_date": "2026-09", "type": "independent"},
+        {"url": "https://finance.yahoo.com/news/onebrief-closes-200m-series-d-140300613.html", "title": "Onebrief Closes $200M Series D at $2.15B Valuation, Acquires Battle Road Digital", "pub_date": "2026-01-13", "type": "financial"},
+        {"url": "https://builtin.com/articles/onebrief-raises-200m-series-d-2b-valuation-20260113", "title": "Onebrief Achieves $2B Valuation Following $200M Series D", "pub_date": "2026-01-13", "type": "independent"},
+        {"url": "https://www.onebrief.com/content-hub/unicorn-valuation", "title": "Onebrief Reaches $1.1 Billion Valuation with $20 Million Series C Extension", "pub_date": "2025 (Q4)", "type": "company"},
+        {"url": "https://thedefensepost.com/2026/06/30/onebrief-us-armys-command-control/", "title": "Onebrief Joins US Army's Next-Gen Command-and-Control Program", "pub_date": "2026-06-30", "type": "independent"},
+        {"url": "https://thedefensepost.com/2025/07/21/anduril-us-army-ngc2-prototype/", "title": "Anduril Scores Nearly $100M US Army Deal for Next-Gen C2 Prototype", "pub_date": "2025-07-21", "type": "independent"},
+        {"url": "https://breakingdefense.com/2026/02/army-plans-for-division-to-receive-ngc2-production-ecosystem-in-fy27/", "title": "Army plans for division to receive NGC2 production ecosystem in FY27", "pub_date": "2026-02", "type": "independent"},
+        {"url": "https://www.highergov.com/idv/FA440723D0003/", "title": "ONEBRIEF SBIR III (FA440723D0003)", "pub_date": "2023-09-20", "type": "gov"},
+        {"url": "https://www.sbir.gov/awards/211906", "title": "SBIR Award - Onebrief Navy Phase II", "pub_date": "2023", "type": "gov"},
+        {"url": "https://www.onebrief.com/content-hub/acc-pr", "title": "Air Combat Command Pilots Onebrief", "pub_date": "2025", "type": "company"},
+        {"url": "https://github.com/api-evangelist/onebrief", "title": "Onebrief - independent third-party profile of a public API surface (API Evangelist)", "pub_date": "2026-07-31", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Vannevar Labs, Inc.",
+      "aka": "Vannevar",
+      "founding_year": 2019,
+      "headquarters": "Palo Alto, California, USA (with Washington, DC-area presence) - MEDIUM confidence",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): several hundred given ~$80M revenue scale.",
+      "founders": ["Brett Granberg (CEO)", "Nini Hamrick (President)"],
+      "founder_backgrounds": "Granberg previously worked at In-Q-Tel; Hamrick was an intelligence analyst (U.S. intelligence community). Both backgrounds from prior public profiles, MEDIUM confidence; not re-verified this session.",
+      "total_disclosed_funding_usd": "$75M Series B (Jan 2023) plus earlier rounds; cumulative disclosed approx $100M+ (Series A size not retrieved; LOW on total).",
+      "latest_valuation": "Not disclosed. Contrary Research implies a Series B valuation of roughly $576M via a ~7.2x multiple on $80M revenue (Tier 3 inference; LOW).",
+      "major_investors": ["Felicis (Series B lead)", "DFJ Growth", "Aloft VC", "General Catalyst", "Point72 Ventures", "Costanoa Ventures", "Shield Capital"],
+      "c4isr_products": [
+        {
+          "name": "Decrypt",
+          "description": "Foreign-language open-source intelligence and document-exploitation platform that helps military and government users understand foreign actors; launched Jan 2021 and, per Series B coverage, deployed to more than a dozen public-sector organizations.",
+          "input_process_output_user": "INPUT: multilingual open-source web/social/document data. PROCESS: collection, translation, NLP enrichment, search and analysis. OUTPUT: analyst-ready intelligence products and alerts. USER: intelligence analysts at combatant commands and service intelligence centers."
+        },
+        {
+          "name": "Agent Orchestration platform (mission-focused AI agents)",
+          "description": "Per a third-party API profile (api-evangelist, 2026-08-02), Vannevar now markets an agent-orchestration platform fusing defense-grade foundational data, mission requirements and reasoning into mission-focused AI agents. Additional product names (Serra, TIE, others) appear in the profile but functions not verified. Topics tagged include maritime domain awareness and information operations, suggesting sensing/IO product lines (INFERENCE, LOW).",
+          "input_process_output_user": "INPUT: mission data, OSINT, sensor-derived data (unverified). PROCESS: agentic workflows over foundational data. OUTPUT: analytic products, recommendations. USER: intel and operations staffs (INDOPACOM, SOCOM, AFSOC, NASIC per Contrary Research)."
+        }
+      ],
+      "exact_problem_solved": "Analysts lack scalable tools to exploit foreign-language open-source and document data about adversaries; Vannevar packages collection, translation and AI analysis into deployable products and, more recently, agents that automate analytic workflows.",
+      "primary_users": ["Intelligence analysts at INDOPACOM, SOCOM, AFSOC, NASIC (per Contrary Research; MEDIUM)", "Joint force and federal agency users following FedRAMP High authorization (2026; per Built In; MEDIUM)"],
+      "primary_buyers": ["Defense Innovation Unit (production OTA HQ08452490025)", "SOCOM / AFSOC", "INDOPACOM", "Air Force (NASIC)", "SBIR-funded components (sbir.gov portfolio)"],
+      "technical_layer": ["COLLECT", "INGEST", "NORMALIZE", "PROCESS", "IDENTIFY", "VISUALIZE", "DECIDE"],
+      "mission_layer": ["ISR", "joint", "information operations", "maritime (claimed; unverified)"],
+      "segment_ids": ["S07", "S04"],
+      "hw_sw_mix": "software primarily; some public signals of sensing/maritime domain awareness products (hardware involvement INFERENCE, LOW - not verified)",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "DIU production other transaction agreement to transition data-analysis solution into production (HQ08452490025)",
+          "customer": "Department of Defense (joint users via DIU)",
+          "contracting_org": "Defense Innovation Unit (Washington Headquarters Services contracting, HQ0845)",
+          "vehicle_type": "OTA production",
+          "ceiling": "Up to $99M (potential value; NOT revenue)",
+          "obligated": "Initial award $16M (Defense Daily); subsequent obligations not retrieved",
+          "awarded_value": "$99M potential",
+          "funded_amount": "$16M initial",
+          "task_orders": "n/a",
+          "date": "2024-11",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (follow-on to DIU prototype)",
+          "source_url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/",
+          "pub_date": "2024-11",
+          "confidence": "HIGH (existence); MEDIUM (dollar split)"
+        },
+        {
+          "title": "SBIR/STTR awards (portfolio)",
+          "customer": "DoD components",
+          "contracting_org": "Various (sbir.gov portfolio 1655947)",
+          "vehicle_type": "SBIR",
+          "ceiling": "Public evidence insufficient (portfolio page not retrievable this session)",
+          "obligated": "Unknown",
+          "awarded_value": "Unknown",
+          "funded_amount": "Unknown",
+          "task_orders": "n/a",
+          "date": "2020-2024 (approx.)",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.sbir.gov/portfolio/1655947",
+          "pub_date": "n/a",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Decrypt deployed to more than a dozen public-sector organizations (as of Series B, Jan 2023); customers named by Contrary Research include INDOPACOM, AFSOC, SOCOM, NASIC",
+          "evidence": "Series B press coverage (ExecutiveBiz) and Contrary Research report; not independently verified via government sources this session.",
+          "source_url": "https://research.contrary.com/company/vannevar-labs"
+        },
+        {
+          "what": "Transition of DIU-prototyped data-analysis solution into production across DoD",
+          "evidence": "DIU production OTA (Nov 2024) is direct evidence of a prototype-to-production transition; scale of fielding not public.",
+          "source_url": "https://www.vannevarlabs.com/media-coverage/vannevar-labs-awarded-diu-production-contract/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient (this session)", "year": "", "note": "No specific exercise participation retrieved.", "source_url": ""}
+      ],
+      "integration_partners": ["Public evidence insufficient (this session)"],
+      "apis_sdks_open_interfaces": "INFERENCE (LOW-MEDIUM): third-party API profiles (api-evangelist, May and Aug 2026) indicate a documented public API surface; no public SDK or open-source repos found under a Vannevar org.",
+      "security_classification_requirements": "FedRAMP High authorization reported for 2026 (Built In; MEDIUM). Work with SOCOM/NASIC/INDOPACOM implies classified-network deployments (INFERENCE). Specific IL levels not verified.",
+      "allied_international_activity": "Public evidence insufficient (this session). ITAR tag on third-party profile suggests export-controlled products (INFERENCE, LOW).",
+      "technical_differentiator": "Mission-pretrained foreign-language OSINT/document exploitation with in-house collection, now extended into agentic workflows; early DIU production transition and FedRAMP High reduce buyer friction.",
+      "suspected_moat": "Proprietary multilingual collection/enrichment pipelines and mission-specific training data; production OTA and FedRAMP High authorizations; embedded analyst workflows at COCOMs. HYPOTHESIS: moat is data/accreditation-based rather than architectural.",
+      "major_competitors": ["Palantir (Gotham/AIP)", "Primer AI (Command/Delta)", "Babel Street", "Dataminr (A2 PAI alerting, $318M DoD award Aug 2026)", "Recorded Future", "Scale AI (Thunderforge)", "Anduril (maritime sensing, if Vannevar hardware claims hold)"],
+      "obvious_weaknesses": "Crowded OSINT/PED market with well-funded incumbents; LLM commoditization pressures NLP-centric differentiation; classified customer base limits public proof of scale; revenue figures come from Tier 3/4 sources; product portfolio expansion (agents, sensing) raises execution risk.",
+      "evidence_user_adoption": "MEDIUM: named COCOM and service-intel users; reported $80M revenue (2024) and $80M ACV entering 2026 (Tier 3/4; not audited); 2,848% three-year growth claim (Tier 4).",
+      "evidence_repeat_procurement": "MEDIUM: DIU prototype -> production OTA; one incumbent recompete tracked in next 24 months (HigherGov); SBIR portfolio. Task-order-level repeat data not public.",
+      "evidence_prototype_to_production": "HIGH (event) / MEDIUM (scale): DIU explicitly awarded a production OT to transition the prototype; only $16M initial funding confirmed against a $99M ceiling.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "theater"},
+        {"chain_step": "PROCESS", "echelon": "theater"},
+        {"chain_step": "PROCESS", "echelon": "joint"},
+        {"chain_step": "DECIDE", "echelon": "joint"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW): job postings not retrievable this session. Product profile implies Python/ML pipelines for multilingual NLP, data-engineering at scale, and cloud deployment to FedRAMP High/IL environments.",
+      "confidence_notes": "DIU production OTA and Series B are HIGH. Customer list, revenue, valuation and hardware/sensing claims are MEDIUM to LOW (Tier 3/4 sources). Founders MEDIUM (prior knowledge).",
+      "sources": [
+        {"url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/", "title": "DIU Awards Vannevar Labs Contract To Transition Data Analysis Solution Into Production", "pub_date": "2024-11", "type": "independent"},
+        {"url": "https://www.vannevarlabs.com/media-coverage/vannevar-labs-awarded-diu-production-contract/", "title": "Vannevar Labs Awarded DIU Production Contract", "pub_date": "2024-11", "type": "company"},
+        {"url": "https://govtribe.com/award/federal-contract-award/other-transaction-agreement-hq08452490025", "title": "Other Transaction Agreement HQ08452490025", "pub_date": "2024-11", "type": "gov"},
+        {"url": "https://www.usaspending.gov/recipient/a64f2e97-4b5d-6456-f4dd-66d545cd6956-C/latest", "title": "VANNEVAR LABS INC - USAspending recipient profile", "pub_date": "n/a", "type": "gov"},
+        {"url": "https://www.sbir.gov/portfolio/1655947", "title": "Vannevar Labs SBIR portfolio", "pub_date": "n/a", "type": "gov"},
+        {"url": "https://blog.executivebiz.com/2023/01/vannevar-labs-raises-75m-series-b-fund-to-advance-defense-tech-development/", "title": "Vannevar Labs Raises $75M in Series B Financing", "pub_date": "2023-01", "type": "independent"},
+        {"url": "https://research.contrary.com/company/vannevar-labs", "title": "Contrary Research: Vannevar Labs business breakdown", "pub_date": "2025-12 (approx.)", "type": "independent"},
+        {"url": "https://builtin.com/company/vannevar-labs/faq/stability-growth", "title": "Vannevar Company Growth, Stability & Outlook 2026", "pub_date": "2026", "type": "independent"},
+        {"url": "https://www.highergov.com/awardee/vannevar-labs-inc-10048398/", "title": "Vannevar Labs Profile (HigherGov)", "pub_date": "n/a", "type": "gov"},
+        {"url": "https://github.com/api-evangelist/vannevar", "title": "Vannevar Labs - third-party public API surface profile (API Evangelist)", "pub_date": "2026-08-02", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Rebellion Defense, Inc.",
+      "aka": "Rebellion",
+      "founding_year": 2019,
+      "headquarters": "Washington, DC, USA",
+      "public_private": "private",
+      "employee_count_approx": "~40 (Feb 2026, per Tracxn; Tier 4) - down from several hundred at 2021-2022 peak",
+      "founders": ["Chris Lynch (co-founder, former CEO; departed)", "Nicole Camarillo (co-founder)", "Oliver Lewis (co-founder)"],
+      "founder_backgrounds": "Lynch led the Pentagon's Defense Digital Service; Lewis came from the UK Ministry of Defence; Camarillo from the U.S. Army Cyber Command talent programs (prior public profiles; MEDIUM). Current CEO Ben FitzGerald (former DoD strategy official) - MEDIUM, not re-verified this session.",
+      "total_disclosed_funding_usd": "Approximately $213M disclosed (Series A ~$63M in 2019-2020; Series B $150M in Sept 2021) - MEDIUM (prior knowledge; not re-verified this session)",
+      "latest_valuation": ">$1B at Series B (Sept 2021); current valuation unknown and likely far lower given 2023-2024 downturn (INFERENCE).",
+      "major_investors": ["Insight Partners (Series B lead)", "Venrock", "Declaration Partners", "Kleiner Perkins", "Lupa Systems", "Innovation Endeavors"],
+      "c4isr_products": [
+        {
+          "name": "Iris",
+          "description": "AI software for target recognition and battlespace awareness: advanced tracking, predictive analytics and adaptive planning; sits on top of existing infrastructure to help sailors spot, track, predict and assign weapons to targets (e.g., discriminating an airliner from an armed drone). Contracted by Navy PEO IWS via CDAO Tradewinds (May 2024; expanded April 2025).",
+          "input_process_output_user": "INPUT: shipboard sensor tracks (radar/EO/ESM) and existing combat-system data. PROCESS: AI classification, track prediction, weapon-target pairing recommendations. OUTPUT: enhanced tracks, target identification and engagement recommendations to watchstanders. USER: ship combat information center watchstanders; PEO IWS software pipeline."
+        },
+        {
+          "name": "Intelligence shield for critical assets (ARGUS/SPECTRUM radar + AI track fusion)",
+          "description": "Per company homepage as summarized by a third-party API profile (Aug 2026), Rebellion now positions an 'intelligence shield' combining multi-band AESA radar sensing (ARGUS/SPECTRUM) with AI track fusion for protecting critical infrastructure and military assets. INFERENCE (LOW-MEDIUM): a pivot toward base/asset defense and counter-UAS with a hardware component; details not verified.",
+          "input_process_output_user": "INPUT: radar returns and other sensor feeds. PROCESS: track fusion and classification. OUTPUT: fused threat picture and alerts. USER: base defense / critical-infrastructure security operators."
+        },
+        {
+          "name": "Nova (legacy)",
+          "description": "Automated cyber adversary-emulation product from Rebellion's earlier portfolio (prior public knowledge, MEDIUM); current status unverified.",
+          "input_process_output_user": "INPUT: target network. PROCESS: automated attack emulation. OUTPUT: exposure findings. USER: cyber defenders."
+        }
+      ],
+      "exact_problem_solved": "Shipboard operators must classify and prioritize ambiguous air/surface tracks faster than legacy combat-system logic allows; Iris adds AI-based recognition, prediction and weapon-target assignment support on top of existing infrastructure. Newer positioning targets fused threat detection for fixed critical assets.",
+      "primary_users": ["U.S. Navy surface-ship watchstanders (Iris pilots on two ships planned 2026)", "Critical-infrastructure / base-defense operators (claimed; unverified)"],
+      "primary_buyers": ["Navy PEO Integrated Warfare Systems via CDAO Tradewinds Solutions Marketplace"],
+      "technical_layer": ["INGEST", "FUSE", "IDENTIFY", "DECIDE", "MONITOR"],
+      "mission_layer": ["maritime", "air defense", "base defense / critical infrastructure (claimed)"],
+      "segment_ids": ["S05", "S04"],
+      "hw_sw_mix": "both (claimed) - software (Iris) historically; radar sensing (ARGUS/SPECTRUM) now marketed per 2026 profile (hardware sourcing unverified)",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Expansion of U.S. Navy contract to enhance target recognition (Iris)",
+          "customer": "U.S. Navy PEO Integrated Warfare Systems",
+          "contracting_org": "CDAO Tradewinds Solutions Marketplace (Navy PEO IWS)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Undisclosed",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2025-04-01",
+          "period_of_performance": "14-month extension; Iris to be integrated on two ships via the IWS software pipeline with shipboard testing in 2026",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (pre-production pilot)",
+          "source_url": "https://www.defenseone.com/technology/2025/04/navy-expands-use-ai-target-spotting-tracking/404280/",
+          "pub_date": "2025-04",
+          "confidence": "MEDIUM-HIGH"
+        },
+        {
+          "title": "Competitive U.S. Navy contract to enhance target recognition (initial award)",
+          "customer": "U.S. Navy PEO IWS",
+          "contracting_org": "CDAO Tradewinds",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Undisclosed",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2024-05-01",
+          "period_of_performance": "~12 months (inferred from April 2025 extension)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.businesswire.com/news/home/20240501390509/en/Rebellion-Defense-Wins-Competitive-U.S.-Navy-Contract-to-Enhance-Target-Recognition",
+          "pub_date": "2024-05-01",
+          "confidence": "HIGH (existence)"
+        },
+        {
+          "title": "CDAO Tradewinds Solutions Marketplace 'Awardable' designation",
+          "customer": "DoD (any component may procure via Tradewinds)",
+          "contracting_org": "CDAO",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "n/a (designation, not a contract)",
+          "obligated": "n/a",
+          "awarded_value": "n/a",
+          "funded_amount": "n/a",
+          "task_orders": "n/a",
+          "date": "2025-02",
+          "period_of_performance": "n/a",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "n/a",
+          "source_url": "https://tracxn.com/d/companies/rebelliondefense/__O4hs5NVKy1GCPggg63lIoPNqCn8EpoiJ6aPTtLlAits",
+          "pub_date": "2025-02",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Iris shipboard integration on two Navy ships with testing planned for 2026 (not yet an operational fielding)",
+          "evidence": "Defense One reporting on April 2025 extension; no public evidence of completed at-sea operational use as of this session.",
+          "source_url": "https://www.defenseone.com/technology/2025/04/navy-expands-use-ai-target-spotting-tracking/404280/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient (this session)", "year": "", "note": "", "source_url": ""}
+      ],
+      "integration_partners": ["Navy PEO IWS software pipeline (integration target)", "Public evidence insufficient for commercial partners"],
+      "apis_sdks_open_interfaces": "Public evidence insufficient. A third-party API-surface profile exists (api-evangelist, Aug 2026) but no public SDK or developer docs were found.",
+      "security_classification_requirements": "Navy combat-system integration implies Secret-level work (INFERENCE, LOW). No public FedRAMP/IL data found.",
+      "allied_international_activity": "UK subsidiary (Rebellion Defence Ltd) dissolved Sept 2024 per Companies House filings (Dealroom summary); no current allied activity found.",
+      "technical_differentiator": "Software-only AI overlay on existing combat-system infrastructure (Iris) for classification and weapon-target pairing; claims of adaptive planning. New radar-plus-AI positioning is unproven publicly.",
+      "suspected_moat": "Weak/uncertain. Prior brand and DC network eroded by 2023 layoffs and founder departure; Navy PEO IWS incumbency on a small pilot is the main asset. HYPOTHESIS: moat depends on securing a program-of-record integration through the IWS pipeline in 2026.",
+      "major_competitors": ["Anduril (Lattice; counter-UAS and base defense)", "Palantir (Maven / Navy analytics)", "Lockheed Martin and RTX (Aegis combat-system incumbents)", "BigBear.ai (Navy analytics)", "Vannevar Labs", "Applied Intuition/EpiSci (Navy autonomy and tactical AI)", "Shield AI (Hivemind)"],
+      "obvious_weaknesses": "Severe headcount reduction (~40 staff), founder/CEO turnover, missed major DoD award (Forbes, Dec 2023), UK exit; contract values undisclosed and small; strategic pivot to radar/critical-asset protection is unverified; funding since 2021 not evident.",
+      "evidence_user_adoption": "LOW: Navy pilot on two ships pending 2026 testing; no broad user base evidenced.",
+      "evidence_repeat_procurement": "MEDIUM-LOW: three Navy wins in roughly a year (May 2024 - April 2025) per company, all via Tradewinds prototype-type vehicles; no program-of-record.",
+      "evidence_prototype_to_production": "LOW: no production award found; integration through IWS software pipeline is a step toward production but not yet achieved.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "individual_platform"},
+        {"chain_step": "DECIDE", "echelon": "individual_platform"},
+        {"chain_step": "FUSE", "echelon": "tactical_unit"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW): job postings not retrievable. Iris implies ML classification/tracking services deployable into Navy software pipeline (containerized, likely Kubernetes-based per IWS practices); radar signal-processing skills implied by 2026 positioning.",
+      "confidence_notes": "Navy contract facts MEDIUM-HIGH via Defense One/Business Wire. Funding history and founders from prior knowledge (MEDIUM). Current product pivot and headcount are LOW-MEDIUM (Tier 4 / third-party profile).",
+      "sources": [
+        {"url": "https://www.defenseone.com/technology/2025/04/navy-expands-use-ai-target-spotting-tracking/404280/", "title": "Navy expands use of AI for target spotting, tracking", "pub_date": "2025-04", "type": "independent"},
+        {"url": "https://finance.yahoo.com/news/rebellion-defense-announces-expansion-u-200000997.html", "title": "Rebellion Defense Announces Expansion of U.S. Navy Contract to Enhance Target Recognition", "pub_date": "2025-04-01", "type": "company"},
+        {"url": "https://www.businesswire.com/news/home/20240501390509/en/Rebellion-Defense-Wins-Competitive-U.S.-Navy-Contract-to-Enhance-Target-Recognition", "title": "Rebellion Defense Wins Competitive U.S. Navy Contract to Enhance Target Recognition", "pub_date": "2024-05-01", "type": "company"},
+        {"url": "https://www.forbes.com/sites/davidjeans/2023/12/22/how-rebellion-defense-the-1-billion-military-ai-startup-hyped-by-silicon-valley-wound-up-in-a-nosedive/", "title": "How Rebellion Defense Wound Up In A Nosedive", "pub_date": "2023-12-22", "type": "independent"},
+        {"url": "https://app.dealroom.co/news/note/rebellion-defense-slides-after-missing-key-dod-win", "title": "Rebellion Defense Slides After Missing Key DoD Win", "pub_date": "2024-2025", "type": "financial"},
+        {"url": "https://tracxn.com/d/companies/rebelliondefense/__O4hs5NVKy1GCPggg63lIoPNqCn8EpoiJ6aPTtLlAits", "title": "Rebellion Defense - Tracxn profile", "pub_date": "2026", "type": "financial"},
+        {"url": "https://github.com/api-evangelist/rebellion-defense", "title": "Rebellion Defense - third-party public API surface profile (API Evangelist)", "pub_date": "2026-08-01", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Primer Technologies, Inc.",
+      "aka": "Primer AI; Primer.ai",
+      "founding_year": 2015,
+      "headquarters": "San Francisco, California, USA (MEDIUM; prior knowledge)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): ~150-250 after 2023-2024 restructuring.",
+      "founders": ["Sean Gourley (founder; former CEO)"],
+      "founder_backgrounds": "Sean Gourley is a physicist and former Quid co-founder. CEO since 2022 is Sean Moriarty (ex-Leaf Group, Ticketmaster, Metacloud) - FACT per Primer PR.",
+      "total_disclosed_funding_usd": "~$237M over 6 rounds (Tracxn; Tier 4). Includes Series D first close $69M (June 2023) led by Addition with U.S. Innovative Technology Fund; earlier Series C ~$110M (2022) - MEDIUM.",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": ["Addition", "U.S. Innovative Technology Fund (Thomas Tull)", "In-Q-Tel (prior knowledge; MEDIUM)", "Lux Capital (prior knowledge; MEDIUM)", "DCVC (prior knowledge; MEDIUM)"],
+      "c4isr_products": [
+        {
+          "name": "Primer Command",
+          "description": "Real-time monitoring of news, social media and open sources with NLP (entity extraction, clustering, summarization, dis/misinformation flags) for situational awareness of unfolding events.",
+          "input_process_output_user": "INPUT: open-source news/social streams and licensed feeds. PROCESS: NLP enrichment, clustering, summarization, narrative detection. OUTPUT: live event dashboards and briefs. USER: operations and intel watch floors, information-operations cells."
+        },
+        {
+          "name": "Primer Delta",
+          "description": "Document-analysis workspace for analysts: ingestion of reports/documents with search, summarization, entity relationship extraction.",
+          "input_process_output_user": "INPUT: internal document corpora. PROCESS: NLP/LLM summarization and entity graphs. OUTPUT: analyst reports. USER: intelligence analysts."
+        },
+        {
+          "name": "Primer Engines / research assets",
+          "description": "NLP APIs (summarization, NER, classification). Public GitHub org PrimerAI hosts research code (e.g., BLANC summary-quality estimator, 97 stars, archived), a 'primer-research' repo (active to Apr 2026) and several archived engineering repos - INFERENCE: reduced open-source activity since 2023.",
+          "input_process_output_user": "INPUT: text. PROCESS: model inference via API. OUTPUT: structured NLP outputs. USER: developers/integrators."
+        }
+      ],
+      "exact_problem_solved": "Watch officers and analysts cannot read the volume of open-source and internal text; Primer automates monitoring, summarization and narrative detection to surface what changed and why for situational awareness and intelligence.",
+      "primary_users": ["Air Force and Army intelligence/operations analysts (historical SBIR-funded users; specifics not retrieved this session)", "Special operations information-operations cells (prior public claims; LOW)"],
+      "primary_buyers": ["U.S. Air Force (SBIR/AFWERX historically)", "U.S. Army (historical)", "Commercial enterprises"],
+      "technical_layer": ["COLLECT", "INGEST", "NORMALIZE", "PROCESS", "IDENTIFY", "VISUALIZE"],
+      "mission_layer": ["ISR", "information operations", "joint"],
+      "segment_ids": ["S07", "S04"],
+      "hw_sw_mix": "software - SaaS/on-prem NLP platform",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "Historical USAF SBIR/AFWERX Phase II awards for NLP situational-awareness tools (2019-2021)",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFWERX / AFRL",
+          "vehicle_type": "SBIR",
+          "ceiling": "Public evidence insufficient (this session)",
+          "obligated": "Unknown",
+          "awarded_value": "Unknown",
+          "funded_amount": "Unknown",
+          "task_orders": "n/a",
+          "date": "2019-2021 (approx.)",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.primer.ai/blog/advancing-ai-in-defense",
+          "pub_date": "n/a",
+          "confidence": "LOW (prior knowledge; not verified this session)"
+        },
+        {
+          "title": "2025-2026 defense awards",
+          "customer": "n/a",
+          "contracting_org": "n/a",
+          "vehicle_type": "FAR",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "n/a",
+          "date": "n/a",
+          "period_of_performance": "n/a",
+          "prime_or_sub": "n/a",
+          "prototype_or_production": "n/a",
+          "source_url": "https://defensescoop.com/2025/03/05/diu-thunderforge-scale-ai-combatant-commands-indopacom-eucom/",
+          "pub_date": "2025-03-05",
+          "confidence": "LOW - searches of DefenseScoop/Breaking Defense/C4ISRNET and an ExecutiveGov FY2025 top-AI-contracts list surfaced no Primer award; absence is not proof of none."
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Public evidence insufficient (this session) for named current operational deployments; company blog asserts defense customers without independent corroboration retrieved.",
+          "evidence": "Company marketing only.",
+          "source_url": "https://www.primer.ai/blog/advancing-ai-in-defense"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient (this session)", "year": "", "note": "", "source_url": ""}
+      ],
+      "integration_partners": ["Public evidence insufficient (this session)"],
+      "apis_sdks_open_interfaces": "Primer Engines NLP APIs (company). Public GitHub org 'PrimerAI' with research/tutorial repos (primer-hierarchical-tagger 'Tutorial demonstrating Primer Engines'); most repos archived by 2023-2025 (FACT from GitHub metadata).",
+      "security_classification_requirements": "Public evidence insufficient (this session); prior public claims of deployment on classified networks not re-verified.",
+      "allied_international_activity": "Public evidence insufficient (this session).",
+      "technical_differentiator": "Mature NLP pipeline for real-time multi-source text monitoring and summarization with narrative/disinformation detection (Yonder acquisition, 2022 - prior knowledge, MEDIUM).",
+      "suspected_moat": "Weak-to-moderate: proprietary models and data pipelines face commoditization by frontier LLMs; installed analyst workflows and government accreditations are the main retention factors. HYPOTHESIS.",
+      "major_competitors": ["Dataminr (won $318M DoD A2 PAI alerting contract, Aug 2026)", "Vannevar Labs", "Palantir (AIP)", "Babel Street", "Recorded Future", "Ask Sage / BigBear.ai", "Frontier-lab government offerings (OpenAI, Anthropic, Google)"],
+      "obvious_weaknesses": "No visible 2025-2026 defense awards in trade press; funding stalled since 2023 first close; competitor Dataminr captured the marquee DoD OSINT alerting award; LLM commoditization of core NLP; leadership transition from founder; shrinking open-source footprint suggests reduced R&D publicity.",
+      "evidence_user_adoption": "LOW (this session): no independent user or deployment evidence retrieved.",
+      "evidence_repeat_procurement": "LOW (this session): Public evidence insufficient.",
+      "evidence_prototype_to_production": "LOW (this session): Public evidence insufficient.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "theater"},
+        {"chain_step": "PROCESS", "echelon": "theater"},
+        {"chain_step": "PROCESS", "echelon": "joint"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW-MEDIUM): GitHub shows Python ML research code and Go microservice utilities (go-micro-utils-public, hydros-public) - Go/Kubernetes-style microservices with Python NLP models. Job postings not retrievable this session.",
+      "confidence_notes": "Corporate/funding facts MEDIUM (company PR + Tracxn). Defense contract picture is a major gap: this session found no 2025-2026 award evidence, but search coverage was limited by tool outages; treat as unknown rather than negative.",
+      "sources": [
+        {"url": "https://www.primer.ai/news/primer-announces-69m-in-funding-to-accelerate-ai-enabled-information-advantage", "title": "Primer announces $69M in funding", "pub_date": "2023-06", "type": "company"},
+        {"url": "https://tracxn.com/d/companies/primer/__g6MPVkVAWZlX_HCKaDxjM5ynGw2sfkmSR5WZm1gFPpk", "title": "Primer - Tracxn profile", "pub_date": "2026", "type": "financial"},
+        {"url": "https://www.primer.ai/blog/advancing-ai-in-defense", "title": "Advancing AI in Defense (Primer blog)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/PrimerAI", "title": "PrimerAI GitHub organization (research and engineering repos)", "pub_date": "2026", "type": "company"},
+        {"url": "https://defensescoop.com/2026/08/27/pentagon-awards-dataminr-318m-contract/", "title": "Pentagon awards $318M contract for Dataminr alerting services technology", "pub_date": "2026-08-27", "type": "independent"},
+        {"url": "https://www.executivegov.com/articles/biggest-ai-defense-contracts-fy-2025", "title": "5 Biggest Defense AI Contracts in FY 2025", "pub_date": "2025", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Immersive Wisdom, Inc.",
+      "aka": "Immersive Wisdom",
+      "founding_year": null,
+      "headquarters": "Boca Raton, Florida, USA (MEDIUM; prior knowledge)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): small (<50).",
+      "founders": [],
+      "founder_backgrounds": "Public evidence insufficient (this session).",
+      "total_disclosed_funding_usd": "Public evidence insufficient; no venture rounds found. Appears funded through SBIR/STRATFI and contract revenue (INFERENCE, LOW).",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": [],
+      "c4isr_products": [
+        {
+          "name": "Immersive Wisdom Digital War Room / real-time geospatial collaboration platform",
+          "description": "Software for shared, real-time geospatial situational awareness and collaboration (maps, 3D, video, chat, whiteboarding) engineered for no-bandwidth and ultra-low-bandwidth DDIL conditions, including operation over tactical radios with aggressive video compression; company claims TRL-9 and use across three DoD commands (STRATFI matching funds).",
+          "input_process_output_user": "INPUT: geospatial layers, live sensor/video feeds, user annotations. PROCESS: bandwidth-adaptive synchronization and compression across disaggregated nodes. OUTPUT: shared operational picture and collaborative planning space usable at kilobit-class links. USER: SOF teams, joint operations centers, air operations cells operating disconnected from enterprise networks."
+        }
+      ],
+      "exact_problem_solved": "Distributed command posts and SOF elements lose shared situational awareness when bandwidth is denied or degraded; Immersive Wisdom keeps a synchronized collaborative picture alive over tactical radios and intermittent links.",
+      "primary_users": ["SOF units (SOF Week announcements)", "Air Force and other DoD commands (three commands provided STRATFI matching funds; names not public)"],
+      "primary_buyers": ["U.S. Air Force (AFWERX SBIR Phase II, STRATFI, and the DoD-wide sole-source ordering contract)", "Any DoD component via the DoD-wide ordering contract (SOF, Army, USAF, USSF, Navy, USMC)"],
+      "technical_layer": ["TRANSPORT", "VISUALIZE", "COLLABORATE", "DISSEMINATE"],
+      "mission_layer": ["SOF", "joint", "air operations"],
+      "segment_ids": ["S06", "S03"],
+      "hw_sw_mix": "software - runs on existing hardware and tactical radios",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "DoD-wide five-year sole-source ordering contract for TRL-9 no-/low-bandwidth communications software (through GFY2029)",
+          "customer": "DoD-wide (SOF, Army, Air Force, Space Force, Navy, Marines eligible to order)",
+          "contracting_org": "U.S. Air Force (AFWERX / SBIR Phase III authority - INFERENCE)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$25,000,000 (ordering ceiling; NOT revenue)",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "$25M ceiling",
+          "funded_amount": "Unknown; orders funded individually",
+          "task_orders": "Unknown",
+          "date": "2024-05 (announced at SOF Week 2024)",
+          "period_of_performance": "Five years through GFY2029",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (sole-source ordering vehicle for ready-now software)",
+          "source_url": "https://www.prnewswire.com/news-releases/sof-week-2024-immersive-wisdom-awarded-dod-wide-five-year-sole-source-25mm-ordering-contract-through-gfy-2029-by-the-us-air-force-for-groundbreaking-trl-9-no-bandwidth-and-low-bandwidth-communications-software-302136254.html",
+          "pub_date": "2024-05",
+          "confidence": "HIGH (existence/ceiling); LOW (obligations)"
+        },
+        {
+          "title": "AFWERX STRATFI award with matching funds from three DoD commands for worldwide ultra-low-bandwidth Digital War Room software",
+          "customer": "U.S. Air Force / three DoD commands (unnamed)",
+          "contracting_org": "AFWERX (AFRL)",
+          "vehicle_type": "SBIR",
+          "ceiling": "Undisclosed (STRATFI awards typically pair SBIR funds with customer matching funds)",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2024-11-12",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype-to-production bridge (STRATFI)",
+          "source_url": "https://www.immersivewisdom.com/news/2024/11/11/immersive-wisdom-awarded-major-air-force-stratfi-contract-across-three-dod-commands-for-worldwide-ultra-low-bandwidth-digital-war-room-software",
+          "pub_date": "2024-11-11",
+          "confidence": "MEDIUM-HIGH"
+        },
+        {
+          "title": "AFWERX Phase II SBIR with Entegra Systems to deliver real-time geospatial collaboration platform to USAF",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "Undisclosed ('major' Phase II)",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "circa 2021-2022 (date not retrieved)",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime (with Entegra Systems as partner)",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.mcadcafe.com/nbc/articles/1/1717607/Immersive-Wisdom-Entegra-Systems-win-Major-AFWERX-Phase-II-SBIR-Contract-Deliver-Immersive-Wisdom-Real-Time-Geospatial-Collaboration-Platform-U.S.-Air-Force",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Advanced Battle Management System (ABMS) IDIQ vendor pool",
+          "customer": "U.S. Air Force",
+          "contracting_org": "Air Force Life Cycle Management Center",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$950M shared ceiling across many vendors (NOT company-specific)",
+          "obligated": "Unknown for Immersive Wisdom (likely minimal)",
+          "awarded_value": "Pool membership only",
+          "funded_amount": "Unknown",
+          "task_orders": "Unknown",
+          "date": "2020-06",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime (pool)",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.potomacofficersclub.com/news/immersive-wisdom-has-secured-a-25-million-u-s-air-force-contract-to-provide-its-denied-degraded-intermittent-and-limited-bandwidth-software-platform-to-the-service/",
+          "pub_date": "2024",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Company states software is in use by three DoD commands (STRATFI matching funds) and marketed as 'ready-now' TRL-9",
+          "evidence": "Company press releases and trade-press restatements only; no government primary source retrieved this session.",
+          "source_url": "https://intelligencecommunitynews.com/immersive-wisdom-secures-air-force-stratfi-contract-for-digital-war-room-software/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "SOF Week 2024 (Tampa) - demonstration of video compression over tactical radios", "year": "2024", "note": "Trade-press coverage (Military Embedded Systems).", "source_url": "https://militaryembedded.com/comms/communications/video-compression-tactical-radios-showcased-at-sof-week-by-immersive-wisdom"}
+      ],
+      "integration_partners": ["Entegra Systems (SBIR Phase II partner)", "Tactical radio vendors (unspecified)"],
+      "apis_sdks_open_interfaces": "Public evidence insufficient (this session).",
+      "security_classification_requirements": "Public evidence insufficient (this session); SOF and air-ops use implies classified-network operation (INFERENCE, LOW).",
+      "allied_international_activity": "Public evidence insufficient (this session).",
+      "technical_differentiator": "Ultra-low/no-bandwidth synchronization and compression enabling collaborative geospatial SA over tactical radios (company-claimed TRL-9); sole-source DoD-wide ordering vehicle lowers procurement friction.",
+      "suspected_moat": "Narrow technical niche (DDIL collaboration) plus a sole-source vehicle; HYPOTHESIS: moat is modest because TAK/ATAK ecosystem and larger C2 vendors (Anduril Lattice Mesh) are adding DDIL sync.",
+      "major_competitors": ["TAK ecosystem (ATAK/WinTAK/TAK Server - government-owned)", "Anduril (Lattice Mesh)", "Onebrief (staff collaboration)", "Palantir (Edge/Apollo)", "Mattermost / Microsoft Teams (enterprise collab)", "goTenna / Somewear (mesh comms with SA apps)"],
+      "obvious_weaknesses": "Very small company with no disclosed venture funding; revenue rests on SBIR/STRATFI and an unobligated $25M ceiling; deployment scale unverified; free government-owned TAK alternative; founder/leadership information not public in retrieved sources.",
+      "evidence_user_adoption": "LOW-MEDIUM: three commands provided STRATFI matching funds (a real demand signal), but scale unknown.",
+      "evidence_repeat_procurement": "MEDIUM: SBIR Phase II -> STRATFI -> sole-source ordering contract shows continued Air Force buying across 2021-2024.",
+      "evidence_prototype_to_production": "MEDIUM: STRATFI and a sole-source 'ready-now' ordering contract are transition mechanisms; obligated production dollars not public.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW): job postings not retrievable. Product implies custom delta-sync protocols, video codec/compression tuning, and cross-platform 2D/3D geospatial clients.",
+      "confidence_notes": "Contract announcements HIGH/MEDIUM (PRNewswire, trade press). Corporate facts (founding year, founders, funding, headcount) are gaps. No government primary sources retrievable this session.",
+      "sources": [
+        {"url": "https://www.prnewswire.com/news-releases/sof-week-2024-immersive-wisdom-awarded-dod-wide-five-year-sole-source-25mm-ordering-contract-through-gfy-2029-by-the-us-air-force-for-groundbreaking-trl-9-no-bandwidth-and-low-bandwidth-communications-software-302136254.html", "title": "SOF Week 2024: Immersive Wisdom awarded DoD-wide five-year sole-source $25MM ordering contract", "pub_date": "2024-05", "type": "company"},
+        {"url": "https://www.potomacofficersclub.com/news/immersive-wisdom-has-secured-a-25-million-u-s-air-force-contract-to-provide-its-denied-degraded-intermittent-and-limited-bandwidth-software-platform-to-the-service/", "title": "Immersive Wisdom Secures New US Air Force Software Contract", "pub_date": "2024", "type": "independent"},
+        {"url": "https://www.immersivewisdom.com/news/2024/11/11/immersive-wisdom-awarded-major-air-force-stratfi-contract-across-three-dod-commands-for-worldwide-ultra-low-bandwidth-digital-war-room-software", "title": "Immersive Wisdom Awarded Major Air Force STRATFI Contract", "pub_date": "2024-11-11", "type": "company"},
+        {"url": "https://intelligencecommunitynews.com/immersive-wisdom-secures-air-force-stratfi-contract-for-digital-war-room-software/", "title": "Immersive Wisdom secures Air Force STRATFI contract", "pub_date": "2024-11-12", "type": "independent"},
+        {"url": "https://militaryembedded.com/comms/communications/video-compression-tactical-radios-showcased-at-sof-week-by-immersive-wisdom", "title": "No- and low-bandwidth comms software contract won by Immersive Wisdom", "pub_date": "2024-05", "type": "independent"},
+        {"url": "https://www.mcadcafe.com/nbc/articles/1/1717607/Immersive-Wisdom-Entegra-Systems-win-Major-AFWERX-Phase-II-SBIR-Contract-Deliver-Immersive-Wisdom-Real-Time-Geospatial-Collaboration-Platform-U.S.-Air-Force", "title": "Immersive Wisdom and Entegra Systems win Major AFWERX Phase II SBIR Contract", "pub_date": "n/a", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Ask Sage, Inc.",
+      "aka": "Ask Sage (BigBear.ai subsidiary since late 2025)",
+      "founding_year": 2023,
+      "headquarters": "Washington, DC metro area, USA (LOW; not verified this session)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): <100 at acquisition.",
+      "founders": ["Nicolas Chaillan (founder, CEO)"],
+      "founder_backgrounds": "Nicolas Chaillan was the first Chief Software Officer of the U.S. Air Force and Space Force (FACT, widely reported); serial entrepreneur.",
+      "total_disclosed_funding_usd": "$17M Series A (Dec 2024) led by Sapphire Ventures with Mucker Capital (FACT). Prior bootstrapping/seed not disclosed.",
+      "latest_valuation": "Acquired by BigBear.ai (NYSE: BBAI), announced 2025-11-10 per Latka/Tracxn-type sources (Tier 4). Deal consideration not verified this session (recollection of a ~$250M headline value is LOW confidence; verify via BBAI 8-K). BigBear.ai market cap ~$1.35B as of 2026-09-24 (FMP).",
+      "major_investors": ["Sapphire Ventures", "Mucker Capital", "BigBear.ai (acquirer)"],
+      "c4isr_products": [
+        {
+          "name": "Ask Sage GenAI platform",
+          "description": "Model-agnostic generative-AI platform giving government users access to a catalog of commercial and open LLMs (OpenAI, Anthropic, Google, Cohere, Llama) behind a compliance boundary (FedRAMP High, DoD IL5; IL6 claimed), with retrieval over user documents, agents, plug-ins and a documented REST API (official 'AskSage-Open-Source-Community' GitHub repo for API examples, created May 2024).",
+          "input_process_output_user": "INPUT: user prompts, uploaded documents, enterprise data connectors. PROCESS: routing to selected LLM, RAG, agent workflows within accredited cloud (Azure Government / AI Foundry). OUTPUT: drafts, summaries, code, analyses. USER: staff officers, acquisition and intel professionals across Army, OSD, Joint Staff, combatant commands."
+        },
+        {
+          "name": "Army Enterprise LLM Workspace (Ask Sage-based)",
+          "description": "Enterprise-wide GenAI workspace procured by the U.S. Army ($49M/5 years, May 2025) and expanded by CDAO/Army ($10M first year, June 2025) to OSD, Joint Staff and combatant commands; IL5 environment built with Microsoft Azure (announced 2025-06-30).",
+          "input_process_output_user": "INPUT: Army/OSD user prompts and CUI documents. PROCESS: LLM inference at IL5. OUTPUT: staff products. USER: Army enterprise users and joint staffs."
+        }
+      ],
+      "exact_problem_solved": "Government teams need secure access to multiple frontier LLMs and RAG over CUI/classified-adjacent data without building their own accredited stack; Ask Sage packages accreditation, model choice and workflow tooling as a subscription.",
+      "primary_users": ["U.S. Army enterprise users", "OSD, Joint Staff and combatant command staffs (CDAO expansion)", "Company claims >100,000 users across 16,000 government teams (unverified)"],
+      "primary_buyers": ["U.S. Army (Enterprise LLM Workspace)", "DoD Chief Digital and AI Office (CDAO)", "U.S. Air Force (small STTR/SBIR and purchase orders)", "Commercial and civilian agencies"],
+      "technical_layer": ["INGEST", "PROCESS", "DECIDE", "COLLABORATE"],
+      "mission_layer": ["joint", "enterprise staff functions (acquisition, planning support)"],
+      "segment_ids": ["S04"],
+      "hw_sw_mix": "software - SaaS on Azure Government / on-prem options",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "Army Enterprise Large Language Model Workspace",
+          "customer": "U.S. Army",
+          "contracting_org": "U.S. Army (contracting office not retrieved)",
+          "vehicle_type": "FAR",
+          "ceiling": "$49M over five years (reported; treat as ceiling/potential, not obligated)",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "$49M / 5 years (reported)",
+          "funded_amount": "Unknown",
+          "task_orders": "Unknown",
+          "date": "2025-05",
+          "period_of_performance": "Five years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (enterprise subscription)",
+          "source_url": "https://breakingdefense.com/2025/06/pentagon-ai-office-army-award-ask-sage-10m-for-genai-expansion/",
+          "pub_date": "2025-06",
+          "confidence": "MEDIUM-HIGH (vehicle type uncertain)"
+        },
+        {
+          "title": "CDAO and Army strategic partnership expanding Enterprise LLM Workspace to OSD, Joint Staff and combatant commands",
+          "customer": "DoD CDAO / U.S. Army",
+          "contracting_org": "CDAO with Army contracting (details not retrieved)",
+          "vehicle_type": "FAR",
+          "ceiling": "$10M first year",
+          "obligated": "$10M first-year value reported (obligation not confirmed)",
+          "awarded_value": "$10M (year 1)",
+          "funded_amount": "Unknown",
+          "task_orders": "n/a",
+          "date": "2025-06",
+          "period_of_performance": "First year; options unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://www.asksage.ai/press-release/ask-sage-partners-with-dod-cdao-and-u-s-army-to-provide-unlimited-access-to-generative-ai-across-combatant-commands-joint-staff-and-office-of-the-secretary-of-defense/",
+          "pub_date": "2025-06",
+          "confidence": "MEDIUM-HIGH"
+        },
+        {
+          "title": "USAF STTR 'Generative AI Acquisition Accelerator' (FA864924P0058)",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFWERX",
+          "vehicle_type": "SBIR",
+          "ceiling": "Small (Phase I-class; amount not retrieved)",
+          "obligated": "Unknown",
+          "awarded_value": "Unknown",
+          "funded_amount": "Unknown",
+          "task_orders": "n/a",
+          "date": "2024",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.highergov.com/contract/FA864924P0058/",
+          "pub_date": "2024",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "GAO bid protests against GSA OneGov $1 AI agreements with OpenAI and Anthropic",
+          "customer": "n/a (protest, not award)",
+          "contracting_org": "GSA (protested)",
+          "vehicle_type": "FAR",
+          "ceiling": "n/a",
+          "obligated": "n/a",
+          "awarded_value": "n/a",
+          "funded_amount": "n/a",
+          "task_orders": "n/a",
+          "date": "2025-08 (filed)",
+          "period_of_performance": "n/a",
+          "prime_or_sub": "n/a",
+          "prototype_or_production": "n/a",
+          "source_url": "https://federalnewsnetwork.com/contractsawards/2025/08/gsas-1-awards-for-ai-tools-come-under-protest/",
+          "pub_date": "2025-08",
+          "confidence": "HIGH (filing); outcome not retrieved"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Enterprise GenAI workspace deployed for U.S. Army and expanded to OSD/Joint Staff/COCOMs at IL5 (Azure)",
+          "evidence": "Breaking Defense (June 2025), company PRs; user counts are company-reported.",
+          "source_url": "https://breakingdefense.com/2025/06/pentagon-ai-office-army-award-ask-sage-10m-for-genai-expansion/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient (this session)", "year": "", "note": "", "source_url": ""}
+      ],
+      "integration_partners": ["Microsoft (Azure Government, AI Foundry)", "OpenAI, Anthropic, Google, Cohere, Meta (model providers)", "BigBear.ai (parent; a BBAI-affiliated developer published an Ask Sage Dify plugin in Apr 2026 - INFERENCE of integration)", "Mattermost (community bot)", "Microsoft Power Apps (official examples repo, Aug 2025)"],
+      "apis_sdks_open_interfaces": "FACT: documented REST API for paid subscribers with an official GitHub org (Ask-Sage) hosting API examples (AskSage-Open-Source-Community, 36 stars), Power Apps examples, a NIST 800-53 automation tool (55 stars) and a coding accelerator; third-party OpenAI-compatible proxy and CLI exist. Strong developer-facing surface relative to peers.",
+      "security_classification_requirements": "FedRAMP High and DoD IL5 (FACT via Azure-based IL5 deployment, June 2025); IL6/secret-level offerings claimed by company (unverified); CMMC alignment claimed.",
+      "allied_international_activity": "Public evidence insufficient (this session).",
+      "technical_differentiator": "Accreditation-first, model-agnostic GenAI layer with broad model catalog, RAG, agents and API - sold as a subscription that lets DoD orgs avoid building their own accredited LLM stack.",
+      "suspected_moat": "Accreditations (FedRAMP High/IL5), enterprise footprint in Army/CDAO, and founder's DoD network. HYPOTHESIS: moat is eroding as frontier labs sell direct to government at near-zero prices (GSA OneGov $1 deals, Aug 2025) and DoD stands up its own GenAI portals; BigBear.ai acquisition provides distribution but also integration risk.",
+      "major_competitors": ["Frontier labs direct (OpenAI for Government, Anthropic Claude Gov, Google Gemini for Government)", "Microsoft (Azure OpenAI in Government)", "Palantir AIP", "Scale AI (Donovan)", "Army CamoGPT / Air Force NIPRGPT (government-built)", "EdgeRunner AI (edge/on-device)", "Vannevar Labs (agents)"],
+      "obvious_weaknesses": "Commoditization from $1 frontier-lab deals; reliance on third-party models and cloud; protest posture against GSA may strain relationships; founder-centric brand now inside a public company with its own execution challenges (BBAI stock range $2.59-$9.39 over past year); user/revenue figures are company or Tier 4 sourced ($25M 2025 revenue per Latka, LOW).",
+      "evidence_user_adoption": "MEDIUM: Army enterprise contract plus CDAO expansion to joint users; company claims >100k users and 16k gov teams (unverified).",
+      "evidence_repeat_procurement": "MEDIUM-HIGH: STTR (2024) -> Army $49M (May 2025) -> CDAO/Army $10M expansion (June 2025) -> small USAF orders; acquisition by BigBear.ai (Nov 2025) validates commercial traction (not military demand per se).",
+      "evidence_prototype_to_production": "MEDIUM-HIGH: enterprise-wide Army production subscription reached within ~2 years of founding; obligated dollars vs $49M reported total not public.",
+      "whitespace_cells": [
+        {"chain_step": "PROCESS", "echelon": "joint"},
+        {"chain_step": "DECIDE", "echelon": "joint"},
+        {"chain_step": "DECIDE", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (MEDIUM from GitHub, not jobs): Python-centric API and examples; Azure Government / AI Foundry hosting; OpenAI-compatible API semantics (third-party proxy); Power Platform integration.",
+      "confidence_notes": "Contracts and Series A HIGH/MEDIUM-HIGH via Breaking Defense and company PR. BigBear.ai acquisition FACT that it was announced (Nov 2025) is MEDIUM (Tier 4 snippet plus BBAI-linked GitHub activity); terms LOW. GAO protest outcome and HQ are gaps.",
+      "sources": [
+        {"url": "https://breakingdefense.com/2025/06/pentagon-ai-office-army-award-ask-sage-10m-for-genai-expansion/", "title": "Pentagon AI office, Army award Ask Sage $10M for GenAI expansion", "pub_date": "2025-06", "type": "independent"},
+        {"url": "https://www.asksage.ai/press-release/ask-sage-partners-with-dod-cdao-and-u-s-army-to-provide-unlimited-access-to-generative-ai-across-combatant-commands-joint-staff-and-office-of-the-secretary-of-defense/", "title": "Ask Sage Partners with DoD CDAO and U.S. Army", "pub_date": "2025-06", "type": "company"},
+        {"url": "https://intelligencecommunitynews.com/ask-sage-launches-generative-ai-army-enterprise-offering/", "title": "Ask Sage launches Generative AI Army enterprise offering", "pub_date": "2025", "type": "independent"},
+        {"url": "https://technical.ly/entrepreneurship/ask-sage-department-of-defense-partnership/", "title": "Ask Sage nabs more funding from the Department of Defense", "pub_date": "2025", "type": "independent"},
+        {"url": "https://federalnewsnetwork.com/contractsawards/2025/08/gsas-1-awards-for-ai-tools-come-under-protest/", "title": "GSA's $1 awards for AI tools come under protest", "pub_date": "2025-08", "type": "independent"},
+        {"url": "https://executivebiz.com/2024/12/ask-sage-series-a-investment-generative-ai/", "title": "Ask Sage Completes Series A Funding Round", "pub_date": "2024-12", "type": "independent"},
+        {"url": "https://getlatka.com/companies/asksage.ai", "title": "Ask Sage, Inc. Revenue & Valuation (2025) - notes BigBear.ai acquisition 2025-11-10", "pub_date": "2025-2026", "type": "financial"},
+        {"url": "https://www.highergov.com/contract/FA864924P0058/", "title": "STTR Ask Sage: Generative AI Acquisition Accelerator", "pub_date": "2024", "type": "gov"},
+        {"url": "https://github.com/Ask-Sage/AskSage-Open-Source-Community", "title": "AskSage Open Source Community (official API examples)", "pub_date": "2024-05 (created)", "type": "company"},
+        {"url": "https://github.com/jlayman-BBAI/asksage-dify-plugin", "title": "AskSage AI model provider plugin for Dify (BBAI-affiliated developer)", "pub_date": "2026-04-18", "type": "company"}
+      ]
+    },
+    {
+      "name": "EdgeRunner AI, Inc.",
+      "aka": "EdgeRunner",
+      "founding_year": 2024,
+      "headquarters": "Seattle, Washington, USA (MEDIUM; Madrona-led, prior knowledge)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient (this session). INFERENCE (LOW): 15-40.",
+      "founders": ["Tyler Saltsman (CEO)"],
+      "founder_backgrounds": "Public evidence insufficient (this session) for detailed background; co-founders not verified.",
+      "total_disclosed_funding_usd": "$17.5M total: $5.5M seed (June 2024, Four Rivers Ventures lead) + $12M Series A (announced 2025-05-01, Madrona lead; Four Rivers, HP Tech Ventures, Alumni Ventures) - FACT (Business Wire).",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": ["Madrona Ventures", "Four Rivers Ventures", "HP Tech Ventures", "Alumni Ventures"],
+      "c4isr_products": [
+        {
+          "name": "EdgeRunner on-device / air-gapped AI agents",
+          "description": "Small, military-specialized language models and agents that run fully offline on laptops and edge devices (air-gapped), aimed at warfighters in DDIL environments; marketed as 'military-specific' AI with task/MOS-tailored agents. Available via CDAO Tradewinds as an 'Awardable' vendor.",
+          "input_process_output_user": "INPUT: local documents, doctrine, mission data on the device. PROCESS: on-device LLM inference and agent workflows without network connectivity. OUTPUT: answers, drafts, checklists, decision aids. USER: tactical-unit leaders and staff at the edge; acquisition staff (Space Force use case)."
+        },
+        {
+          "name": "EdgeRunner-Camo",
+          "description": "Open-weight large language model developed specifically for the U.S. Army in collaboration with the Army Artificial Intelligence Integration Center (AI2C), announced 2026-08-18.",
+          "input_process_output_user": "INPUT: Army-specific prompts and documents. PROCESS: Army-tuned open-weight LLM inference (on-device or enterprise). OUTPUT: Army-domain responses. USER: Army soldiers/staffs via AI2C-supported deployments (scale unknown)."
+        }
+      ],
+      "exact_problem_solved": "Cloud-hosted GenAI is unavailable or prohibited at the disconnected tactical edge and in air-gapped enclaves; EdgeRunner delivers small domain-tuned models and agents that run locally on commodity hardware.",
+      "primary_users": ["U.S. Army units/AI2C (EdgeRunner-Camo)", "U.S. Space Force Space Systems Command acquisition/modernization staff (Tradewinds contract)"],
+      "primary_buyers": ["U.S. Space Force Space Systems Command via CDAO Tradewinds Solutions Marketplace", "U.S. Army AI2C (collaboration; vehicle not public)"],
+      "technical_layer": ["PROCESS", "DECIDE"],
+      "mission_layer": ["tactical edge (Army)", "space (acquisition support, not operational C2)"],
+      "segment_ids": ["S04", "S06"],
+      "hw_sw_mix": "software - on-device models; hardware partnership signal via HP Tech Ventures investment",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "U.S. Space Force Space Systems Command contract for specialized AI agents to accelerate modernization/acquisition",
+          "customer": "U.S. Space Force / Space Systems Command",
+          "contracting_org": "CDAO Tradewinds Solutions Marketplace",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Undisclosed",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2026-04",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.startupresearcher.com/news/edgerunner-ai-to-deploy-military-specific-ai-for-us-space-force",
+          "pub_date": "2026-04",
+          "confidence": "MEDIUM (secondary sources only)"
+        },
+        {
+          "title": "Collaboration with Army AI2C on EdgeRunner-Camo open-weight LLM",
+          "customer": "U.S. Army AI2C",
+          "contracting_org": "Unknown (possibly CRADA or OTA; not public)",
+          "vehicle_type": "CRADA",
+          "ceiling": "Undisclosed",
+          "obligated": "Undisclosed",
+          "awarded_value": "Undisclosed",
+          "funded_amount": "Undisclosed",
+          "task_orders": "n/a",
+          "date": "2026-08-18",
+          "period_of_performance": "Unknown",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://intelligencecommunitynews.com/edgerunner-and-u-s-army-ai2c-collaborate/",
+          "pub_date": "2026-08-18",
+          "confidence": "MEDIUM (vehicle type is a guess)"
+        },
+        {
+          "title": "CDAO Tradewinds Solutions Marketplace 'Awardable' designation",
+          "customer": "DoD-wide",
+          "contracting_org": "CDAO",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "n/a (designation)",
+          "obligated": "n/a",
+          "awarded_value": "n/a",
+          "funded_amount": "n/a",
+          "task_orders": "n/a",
+          "date": "2025 (approx.)",
+          "period_of_performance": "n/a",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "n/a",
+          "source_url": "https://www.edgerunnerai.com/news",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Public evidence insufficient for operational fielding; Army AI2C collaboration and Space Force acquisition-support contract are development/pilot-stage.",
+          "evidence": "Company and secondary trade coverage only.",
+          "source_url": "https://www.edgerunnerai.com/news"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient (this session)", "year": "", "note": "", "source_url": ""}
+      ],
+      "integration_partners": ["U.S. Army AI2C", "HP (investor; on-device hardware - INFERENCE)", "Public evidence insufficient for others"],
+      "apis_sdks_open_interfaces": "EdgeRunner-Camo is described as open-weight (Aug 2026), implying downloadable model weights; no public GitHub org or SDK found in searches this session (FACT: GitHub search returned no EdgeRunner AI repos).",
+      "security_classification_requirements": "Air-gapped operation is the design premise; specific accreditations not public (Public evidence insufficient).",
+      "allied_international_activity": "Public evidence insufficient (this session).",
+      "technical_differentiator": "Small domain-tuned open-weight models and agents engineered for offline, on-device execution; Army-specific open-weight model co-developed with AI2C.",
+      "suspected_moat": "Thin: open-weight small models are commoditizing (Llama, Mistral, Phi, Gemma); potential moat lies in Army-specific tuning data, AI2C relationship, and edge deployment tooling. HYPOTHESIS.",
+      "major_competitors": ["Ask Sage / BigBear.ai", "Palantir (AIP at the edge)", "Scale AI", "Defense Unicorns (air-gap software delivery)", "Anduril (edge AI on Lattice)", "Army CamoGPT (government-built)", "Open-weight model providers (Meta, Mistral, Microsoft, Google)"],
+      "obvious_weaknesses": "Very early (2024 founding, $17.5M raised); no disclosed contract values; Space Force use case is acquisition support, not operational C2; open-weight strategy risks commoditization and limits pricing power; small team competing against well-funded platforms.",
+      "evidence_user_adoption": "LOW: pilots/collaborations only; no user counts.",
+      "evidence_repeat_procurement": "LOW: two distinct DoD customers (USSF SSC, Army AI2C) within 2026, but no follow-on orders evidenced.",
+      "evidence_prototype_to_production": "LOW: no production award found.",
+      "whitespace_cells": [
+        {"chain_step": "PROCESS", "echelon": "tactical_unit"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (LOW): job postings not retrievable. Product implies model fine-tuning/quantization (llama.cpp/ONNX/NPU targets), local RAG, and cross-platform on-device runtimes.",
+      "confidence_notes": "Funding facts HIGH (Business Wire). Contract facts MEDIUM (secondary outlets; company site blocked). Founder background, headcount, and contract values are gaps.",
+      "sources": [
+        {"url": "https://www.businesswire.com/news/home/20250501050946/en/EdgeRunner-Raises-$17.5M-to-Develop-Air-Gapped-On-Device-AI-for-the-Warfighter", "title": "EdgeRunner Raises $17.5M to Develop Air-Gapped, On-Device AI for the Warfighter", "pub_date": "2025-05-01", "type": "company"},
+        {"url": "https://intelligencecommunitynews.com/edgerunner-and-u-s-army-ai2c-collaborate/", "title": "EdgeRunner and U.S. Army AI2C collaborate (EdgeRunner-Camo)", "pub_date": "2026-08-18", "type": "independent"},
+        {"url": "https://www.startupresearcher.com/news/edgerunner-ai-to-deploy-military-specific-ai-for-us-space-force", "title": "EdgeRunner AI Wins US Space Force AI Modernization Deal", "pub_date": "2026-04", "type": "independent"},
+        {"url": "https://www.rswebsols.com/news/edgerunner-secures-contract-with-u-s-space-force-for-development-of-specialized-ai-agents/", "title": "EdgeRunner Wins U.S. Space Force Contract for AI Agents Development", "pub_date": "2026-04", "type": "independent"},
+        {"url": "https://www.edgerunnerai.com/news", "title": "EdgeRunner AI newsroom", "pub_date": "2026", "type": "company"},
+        {"url": "https://tracxn.com/d/companies/edgerunnerai/__o8dUdnmh9nM_WQL7bckrXXBVngYRcSkKHwZ78o7wCqw", "title": "EdgeRunner AI - Tracxn profile", "pub_date": "2026", "type": "financial"}
+      ]
+    }
+  ],
+  "search_log": [
+    {"query": "Onebrief Army contract 2025 OR 2026", "useful": true},
+    {"query": "Onebrief funding round valuation", "useful": true},
+    {"query": "Vannevar Labs contract OR award 2025 OR 2026", "useful": true},
+    {"query": "Rebellion Defense 2025 OR 2026 contract OR acquisition OR layoffs", "useful": true},
+    {"query": "Primer AI defense contract 2025 OR 2026", "useful": false},
+    {"query": "Immersive Wisdom contract OR award Air Force OR Space Force", "useful": true},
+    {"query": "Ask Sage contract OR award DoD 2025 OR 2026", "useful": true},
+    {"query": "EdgeRunner AI funding OR contract Army 2025 OR 2026", "useful": true},
+    {"query": "Onebrief NGC2 Anduril subcontractor 4th Infantry Division Next Generation Command and Control", "useful": true},
+    {"query": "Onebrief SBIR Phase III award site:sbir.gov OR site:highergov.com OR site:govtribe.com", "useful": true},
+    {"query": "Vannevar Labs Series B funding valuation Decrypt product Grayhawk sensor", "useful": true},
+    {"query": "Rebellion Defense Navy contract target recognition April 2025 Nova Iris product", "useful": true},
+    {"query": "Primer AI funding 2025 OR 2026 Sean Moriarty Primer Command Primer Delta", "useful": true},
+    {"query": "Primer AI Air Force OR Army OR INDOPACOM contract award site:defensescoop.com OR site:breakingdefense.com OR site:c4isrnet.com", "useful": false},
+    {"query": "Ask Sage funding round investors Nicolas Chaillan revenue users", "useful": true},
+    {"query": "EdgeRunner AI Space Force Space Systems Command Tradewinds contract April 2026 details (budget exhausted - not executed)", "useful": false},
+    {"query": "GitHub repo search: asksage / user:Ask-Sage (API/SDK footprint)", "useful": true},
+    {"query": "GitHub repo search: user:PrimerAI (open-source footprint)", "useful": true},
+    {"query": "GitHub repo search: api-evangelist profiles onebrief / vannevar / rebellion-defense / ask-sage", "useful": true},
+    {"query": "GitHub repo search: edgerunner / vannevar / immersivewisdom (company orgs)", "useful": false},
+    {"query": "FMP profile-symbol BBAI (BigBear.ai corporate profile)", "useful": true}
+  ],
+  "notes": "TOOLING LIMITS: Only 16 WebSearch queries executed before the session-wide WebSearch budget (200/200, shared across agents) was exhausted; every WebFetch (approx. 45 attempts across .gov/.mil, company, trade-press, Wikipedia, SEC EDGAR, Yahoo Finance domains) was blocked by the network egress proxy; Bigdata.com returned out-of-credits; FMP news/SEC/M&A endpoints were plan-gated (only the BBAI profile returned); GitHub file reads are restricted to the session repo (repository metadata/search was available). Consequently: (1) contract obligations (vs. ceilings) were not verifiable on usaspending.gov/sam.gov for any company; (2) Primer AI's 2025-2026 defense contract status is an open gap (no awards surfaced in trade-press searches, which is not evidence of none); (3) Immersive Wisdom founders/founding year/funding not retrieved; (4) BigBear.ai-Ask Sage deal terms and the GAO protest outcome not verified (recommend pulling BBAI 8-K/10-K and GAO decision); (5) founder lists for Onebrief/Vannevar/EdgeRunner are incomplete; (6) job-posting-based tech-stack inference relies on GitHub metadata rather than postings. SEGMENT IDS ARE PROVISIONAL: mapped as S03=planning/mission-command workflow and collaboration, S04=AI/GenAI decision-support and agents, S05=sensor fusion/track management and targeting, S06=tactical-edge/DDIL comms and collaboration, S07=intelligence/OSINT PED - the orchestrator should reconcile against the master segment list. WHITESPACE: 'COLLABORATE' is not a chain_step enum value; collaboration-centric products (Onebrief, Immersive Wisdom) are mapped to DECIDE/DISSEMINATE_TASK cells. TRACTION SUMMARY: Onebrief strong (division-scale NGC2 use, cross-service vehicles, enterprise IDIQ, $2.15B valuation); Vannevar strong-to-moderate (DIU production OTA up to $99M with $16M initial, reported ~$80M revenue, FedRAMP High); Ask Sage moderate-to-strong (Army $49M/5yr, CDAO $10M, acquired by BigBear.ai); Immersive Wisdom moderate (SBIR->STRATFI->$25M sole-source ceiling, obligations unknown); Rebellion Defense weak (Navy pilot on two ships, ~40 staff, missed major award); EdgeRunner AI weak/early (two 2026 DoD engagements, $17.5M raised, no production award); Primer AI unknown (no 2025-2026 awards found; funding stalled since 2023)."
+}
