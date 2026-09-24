@@ -824,7 +824,7 @@ route('companies', (r) => {
   const cols = [
     { key: 'name', title: 'Company', render: (c) => h('div', null, h('a', { href: '#companies/' + c.slug }, h('b', null, c.name)), h('span', { class: 'cell-sub' }, [c.headquarters_short, c.founding_year].filter(Boolean).join(' · '))), sort: (c) => c.name.toLowerCase(), width: '220px' },
     { key: 'market_posture', title: 'Posture', render: (c) => (c.market_posture ? h('span', { title: c.market_posture_note }, postureChip(c.market_posture)) : '—') },
-    { key: 'hw_sw_mix', title: 'HW/SW', render: (c) => (c.hw_sw_mix || '—').split(' - ')[0].split(' (')[0] },
+    { key: 'hw_sw_mix', title: 'HW/SW', render: (c) => h('span', { style: { whiteSpace: 'nowrap' } }, (c.hw_sw_mix || '—').split(' - ')[0].split(' (')[0].split(';')[0].slice(0, 14)) },
     { key: 'segment_ids', title: 'Segments', render: (c) => h('div', { class: 'chips' }, arr(c.segment_ids).map((s) => h('a', { class: 'chip mono', href: '#segments/' + s, title: segName(s) }, s))), width: '150px' },
     { key: 'technical_layer', title: 'Chain steps', render: (c) => { const l = arr(c.technical_layer).map((x) => String(x).toLowerCase()); return h('div', { class: 'chips' }, l.slice(0, 5).map((x) => chip(x, 'mono')), l.length > 5 ? chip('+' + (l.length - 5), 'mono outline') : null); }, width: '200px' },
     { key: 'total_disclosed_funding_usd', title: 'Disclosed funding', render: (c) => h('span', { title: c.total_disclosed_funding_usd || '' }, c.funding_short || '—'), sort: (c) => moneyNum(c.funding_short) },
