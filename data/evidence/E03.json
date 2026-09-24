@@ -1,0 +1,2042 @@
+{
+ "evidence_id": "E03",
+ "name": "Exercise and experimentation evidence of operational pain",
+ "summary": "Research constraints: the session's WebSearch budget was exhausted before this sweep began and the egress proxy blocked every primary and trade-press domain (army.mil, dvidshub.net, gao.gov, congress.gov, defensescoop.com, breakingdefense.com, csis.org, rusi.org, etc.); the only reachable host was GitHub, so evidence was recovered from GitHub-mirrored congressional transcripts, posture statements, DoD budget books, think-tank mirrors and third-party captures of Army.mil/DVIDS/vendor articles (about 60 searches, 35 documents read). Within those limits the picture is consistent: the Army's NGC2 experimentation campaign (Ivy Sting 1-5, Ivy Mass, Lightning Surge 1-3, PC-C6 in July 2026) is the richest public source of exercise pain, and it shows prototype immaturity rather than doctrinal failure - overheating hardware, semi-frequent connectivity loss and incomplete displays at PC-C6, an Army CTO memo rating the prototype 'very high risk' for lacking access control, logging and app vetting, legacy fires chains that need bridging, and code being fixed between events - while the Army nonetheless locked in Anduril/Palantir/Raft as the common data layer. Coalition pain is the second strong cluster: Balikatan 2026's first eight-nation COP took more than eight years and still runs on JICOs and foreign-disclosure officers hand-tagging data for cross-domain solutions, INDOPACOM had to hand-build the Joint Fires Network from experimentation kits because service C2 programs did not interoperate, U.S.-Japan space sharing is 'largely emails and PDFs', and wargames still fall back on liaison officers. Operations-derived pain (CENTCOM's operator-developer pairing and 'friction points', Scarlet Dragon's 743-minute baseline versus a 20-person AI-enabled cell, WSJ's report that analysts examine at most 4% of collected intelligence in the 2026 Iran campaign, Ukraine's not-fully-integrated Delta/Kropyva stack under intermittent connectivity) points to human-throughput and integration limits that persist beyond exercises. No public after-action shortfall list exists for any 2024-2026 exercise; Northern Edge 2025, RIMPAC, Yama Sakura/Keen Edge, CWIX 24/25, Steadfast Defender 2024, MCWL, Overmatch fleet experiments and Space Force exercises returned only headline-level material and are marked 'Public evidence insufficient'. For founders, the durable, software-tractable pains are releasability/ICAM tooling for open app ecosystems and coalition data, legacy/format bridging into the data layers, DDIL-tolerant collaboration and PED triage, but each sits next to entrenched incumbents and accreditation regimes, and the practical sales channel is exercise participation via prime self-teaming rather than solicitations.",
+ "findings": [
+  {
+   "id": "E03-F1",
+   "title": "PC-C6 (July 2026): division-scale NGC2 validation produced overheating hardware, incomplete data displays and semi-frequent connectivity drops; Army says some components will be cut",
+   "detail": "Project Convergence Capstone 6 at Fort Irwin (approx. 10 days, ~10,000 soldiers of 4th ID, 90+ technologies) was the first division-scale, force-on-force NGC2 validation. Army officials called it a success and said core stack components will next go to I Corps, but explicitly said individual components (redundant applications, sub-par hardware) may be dropped; reporting cited hardware overheating, incomplete data displays and semi-frequent connectivity problems. The NY Post (2026-08-05) framed the event as 'all didn't go according to plan'. Evidence caveat: the DefenseScoop article body was not opened (egress-blocked); its content is taken from a dated third-party summary that cites the article URL, plus the NY Post headline/summary.",
+   "quote_or_paraphrase": "Paraphrase of DefenseScoop 2026-07-31 ('Ready, but not done'): officials said NGC2 will scale beyond the two pilot divisions, but some individual components might not move forward; hardware overheating, incomplete data displays and semi-frequent connectivity problems were reported during the 10-day Fort Irwin event.",
+   "source_title": "'Ready, but not done': The Army will start scaling parts of its new C2 ecosystem to more units, but some of it might not move forward (DefenseScoop) / US Army tested the AI future of warfare in the California desert - but all didn't go according to plan (NY Post)",
+   "source_url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units",
+   "pub_date": "2026-07-31",
+   "event_date": "2026-07 (PC-C6, Fort Irwin)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S01",
+    "S02",
+    "S05",
+    "S06"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "PROCESS",
+    "VISUALIZE"
+   ],
+   "pain_keywords": [
+    "connectivity",
+    "overheating",
+    "incomplete data display",
+    "redundant applications",
+    "sub-par hardware"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Exercise-only pain, but it is the Army's own admission that the prototype ecosystem still has transport and edge-hardware reliability gaps and duplicative apps; the stated intent to cut redundant apps means third-party app makers must prove unique value inside the NGC2 data layer rather than replicate incumbents."
+  },
+  {
+   "id": "E03-F2",
+   "title": "Army CTO memo (Sept 2025) rated the NGC2 prototype 'very high risk': no control over who sees what, no user-activity logging, unvetted third-party apps",
+   "detail": "An early-September 2025 memo by Gabrielle Chiulli (Army CTO authorizing official), reported by Breaking Defense and Reuters and summarised by CNBC on 2025-10-03, said the Anduril/Palantir-led NGC2 prototype should be treated as 'very high risk' because of the 'likelihood of an adversary gaining persistent undetectable access'. Findings: any authorized user could access all applications and data regardless of clearance or need, with no logging; third-party applications hosted without Army security assessment; one app had 25 high-severity code vulnerabilities and three others had over 200 vulnerabilities each. Army CIO Leonel Garciga said the memo was part of a triage process to mitigate vulnerabilities. This is prototype-phase evidence, not evidence of a fielded system's state.",
+   "quote_or_paraphrase": "Memo quoted by CNBC: 'We cannot control who sees what, we cannot see what users are doing, and we cannot verify that the software itself is secure.'",
+   "source_title": "Anduril and Palantir battlefield communication system has deep flaws, Army memo says (CNBC, citing Reuters; first reported by Breaking Defense)",
+   "source_url": "https://www.cnbc.com/2025/10/03/anduril-palantir-army-memo-ngc2.html",
+   "pub_date": "2025-10-03",
+   "event_date": "2025-09 (memo)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S10",
+    "S09",
+    "S02",
+    "S01"
+   ],
+   "chain_steps": [
+    "STORE",
+    "DISSEMINATE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "access control",
+    "logging",
+    "vulnerabilities",
+    "third-party applications",
+    "security assessment"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Directly evidences an unmet need inside the NGC2 ecosystem for attribute-based access control, data tagging/releasability, audit logging and automated vetting of third-party apps; these are software-tractable, unclassified-at-the-tool-level problems (segments S10/S09) where a small team could plausibly sell into the primes' self-teaming structure. Legal caveat: ICAM/CDS work may hit accreditation and FOCI constraints requiring specialist review."
+  },
+  {
+   "id": "E03-F3",
+   "title": "Balikatan 2026: first eight-nation common operating picture took 'more than eight years' of integration work and still depends on JICOs and foreign-disclosure officers hand-tagging data for cross-domain solutions",
+   "detail": "DVIDS reporting on Balikatan 2026 (20 Apr-8 May 2026) says Philippine, U.S. and allied forces operated for the first time with a COP accessible to eight nations, enabled by the INDOPACOM Mission Network, USINDOPACOM J7 PMTEC and joint interface control officers. Scott Senerius (USINDOPACOM J6 C4/cyber exercise branch chief) said the tools and technical integration were 'more than eight years in the making' and that changing national participation 'really exceeds the networks that we traditionally support'; he works with JICOs, M&S staff and foreign disclosure officers 'to make sure data is tagged appropriately to make it through the associated networks and cross domain solutions'. Amb. Alphonse La Porta: the challenge is giving allies 'enough information ... to make it worthwhile'.",
+   "quote_or_paraphrase": "'The progression of the multinational COP has been dependent on a constant change of participation in countries in BK and evolving participation that really exceeds the networks that we traditionally support.' - Scott Senerius, USINDOPACOM J6 (DVIDS, May 2026)",
+   "source_title": "Balikatan 2026 Debuts Groundbreaking Common Operating Picture (DVIDS)",
+   "source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "pub_date": "2026-05 (approx.)",
+   "event_date": "2026-04-20 to 2026-05-08",
+   "source_tier": 1,
+   "segment_ids": [
+    "S08",
+    "S10",
+    "S07"
+   ],
+   "chain_steps": [
+    "NORMALIZE",
+    "DISSEMINATE",
+    "VISUALIZE"
+   ],
+   "pain_keywords": [
+    "cross domain",
+    "data tagging",
+    "foreign disclosure",
+    "JICO",
+    "multi-classification",
+    "networks we traditionally support"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Strongest exercise evidence that coalition COP sharing is gated by manual releasability tagging and per-partner network plumbing; tooling that automates data labelling/releasability for changing partner sets (S10/S08) addresses a named, recurring workflow burden, although CDS accreditation itself is a heavily regulated layer."
+  },
+  {
+   "id": "E03-F4",
+   "title": "INDOPACOM Mission Network (IMN) was tested for the first time at Balikatan 2026 as a zero-trust replacement for a stack of separate partner-nation networks",
+   "detail": "Naval News (8-11 May 2026) reported the INDOPACOM commander saying the IMN, a U.S.-led zero-trust network to integrate allied operations during crises, was tested for the first time during Balikatan 2026, and that a new Combined Coordination Center at Camp Aguinaldo would serve as a C2 hub with the AFP for real-time information sharing and a COP. A secondary research file (Anguijm/research-vault, citing a 2026-05-12 DefenseScoop piece and an SOSi release) states the IMN replaces a stack of partner-nation networks with a single zero-trust data-centric platform, is engineered/operated by SOSi as a managed service under the MPE Network Engineering Services IDIQ, and connected U.S., Philippine, Australian, Japanese, New Zealand and Canadian forces. Contract details are unverified here.",
+   "quote_or_paraphrase": "Paraphrase: the IMN 'was tested for the first time during the recently concluded Balikatan exercises, according to a top US commander' (Naval News).",
+   "source_title": "New INDOPACOM Mission Network links allies during Balikatan (Naval News)",
+   "source_url": "https://www.navalnews.com/naval-news/2026/05/new-indopacom-mission-network-links-allies-during-balikatan/",
+   "pub_date": "2026-05-11",
+   "event_date": "2026-05-08 (closing ceremony)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S08",
+    "S10",
+    "S05"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "DISSEMINATE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "separate partner networks",
+    "zero trust",
+    "first time"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Confirms that until 2026 INDOPACOM ran multiple bilateral partner networks (the pain), and that the MPE layer is being consolidated under a prime-managed service; startup entry is through the prime/managed-service operator or through applications riding on IMN, not by building the network."
+  },
+  {
+   "id": "E03-F5",
+   "title": "Army established the NGC2 common data layer baseline after 'ten months of feedback' from Ivy Sting/Ivy Mass and Lightning Surge; Ivy Mass (May 2026) fought through cyber and electromagnetic attack",
+   "detail": "Army.mil (article 293409, published between the May 2026 events and PC-C6 in July 2026) announced the NGC2 common data layer baseline, led by Anduril with Palantir (Lattice + Foundry data mesh and deployment tools) and Raft (data/services registries, transformation tools, data federation). It states the baseline was informed by ten months of feedback from 4th ID and 25th ID; Ivy Mass (May 2026) 'stressed every element of NGC2 at division scale' across Fort Carson and Pinon Canyon 'including fighting through cyber and electromagnetic attacks based on real-world threats'; Lightning Surge 3 during Balikatan 2026 integrated sensors, fires and airspace management simultaneously from Hawaii, CONUS and the Philippines through a unified data platform; PC-C6 (July 2026) was to be the culminating division-scale force-on-force validation. Operational implementation leads tailor apps, edge compute, private 5G and EMS effectors per division.",
+   "quote_or_paraphrase": "'We are already moving out with the converged data layer architecture.' - Joseph Welch, Portfolio Acquisition Executive for C2/Counter-C2; 'We continue to encourage industry self-teaming and collaboration.' - Brig. Gen. Shane Taylor, CPE C2IN",
+   "source_title": "Army and industry align on common data baseline, as Next Generation Command and Control moves from prototyping to delivery (Army.mil)",
+   "source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+   "pub_date": "2026-06 (approx.)",
+   "event_date": "2026-05 (Ivy Mass, Lightning Surge 3); 2026-07 (PC-C6)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S02",
+    "S01",
+    "S06",
+    "S05",
+    "S12"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "NORMALIZE",
+    "STORE",
+    "FUSE"
+   ],
+   "pain_keywords": [
+    "cyber attack",
+    "electromagnetic attack",
+    "division scale",
+    "data federation",
+    "self-teaming"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Fixes who owns the NGC2 data layer (Anduril/Palantir/Raft) and signals the entry route: 'industry self-teaming' under division implementation leads. A startup would sell an application, algorithm or edge/EMS integration on top of this layer, not a competing fabric."
+  },
+  {
+   "id": "E03-F6",
+   "title": "Ivy Sting 5 / Lightning Surge 2 (early 2026): division commander says industry partners are 'fixing the code in almost real time' during exercises; NGC2 framed as eliminating stovepiped systems",
+   "detail": "DVIDS (30 Mar 2026) reports 4th ID completed Ivy Sting 5 employing NGC2 across 35 mission threads while 25th ID executed Lightning Surge 2 focused on the digital kill chain. Maj. Gen. Patrick Ellis (CG 4th ID) described continuous iteration with industry in which partners fix code between events; a 25th ID commander said running two divisions in different environments is 'de-risking this effort for the entire Army'. A colonel described the new system as sensor-agnostic, pulling data into a data layer and hitting devices at echelon. The article says NGC2 is 'eliminating stovepiped warfighting systems' and that program offices are working to reuse applications across divisions.",
+   "quote_or_paraphrase": "'A lot of times, the industry partners are going home and fixing the code in almost real time.' - Maj. Gen. Patrick Ellis, CG 4th Infantry Division (DVIDS, 2026-03-30)",
+   "source_title": "Two divisions team up to transform Army (DVIDS 561532)",
+   "source_url": "https://www.dvidshub.net/news/561532/two-divisions-team-up-transform-army",
+   "pub_date": "2026-03-30",
+   "event_date": "2026-Q1 (Ivy Sting 5, Lightning Surge 2)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S02",
+    "S09"
+   ],
+   "chain_steps": [
+    "PROCESS",
+    "FUSE",
+    "DECIDE",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "stovepiped",
+    "code fixes",
+    "mission threads",
+    "reuse applications"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Demonstrates the soldier-touchpoint cadence a vendor must sustain (monthly-ish events, live code fixes, 35 mission threads) and that application reuse across divisions is an explicit Army goal; a small team can only participate through a prime team or CPE C2IN channel, and must staff forward-deployed engineers."
+  },
+  {
+   "id": "E03-F7",
+   "title": "Lightning Surge (25th ID, Apr 2026): private 5G carried the call-for-fire path for the first time, EW data demand cuts across warfighting functions, and the Pacific 'tyranny of distance' drives transport choices",
+   "detail": "Army.mil (21 Apr 2026) on 25th ID's NGC2 prototyping: for the first time in the Army, private 5G was the primary path from the fires direction officer to the guns, with satellite radios as secondary; Lt. Col. Clarke Brown (PM Network Modernization, CPE C2IN) said lessons came from 4th ID viewing the fires chain over 5G in an earlier Ivy Sting; a captain said 'Almost all warfighting functions need access to EW data'; a major said 'We are now at a place where we are feeding all the data into the data platform'; the article frames NGC2 as tailoring commercial solutions to the Pacific theater's 'tyranny of distance'.",
+   "quote_or_paraphrase": "'Pushing the capability to actually transport the call for fires down to the field artillery Soldiers was an exciting accomplishment for the unit.' - Lt. Col. Clarke Brown, CPE C2IN (Army.mil, 2026-04-21)",
+   "source_title": "Accelerating transformative technologies aids commanders' readiness across the Pacific (Army.mil 291863)",
+   "source_url": "https://www.army.mil/article/291863/accelerating_transformative_technologies_aids_commanders_readiness_across_the_pacific",
+   "pub_date": "2026-04-21",
+   "event_date": "2026-Q1/Q2 (Lightning Surge series)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05",
+    "S12",
+    "S02",
+    "S01"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "COLLECT",
+    "DISSEMINATE"
+   ],
+   "pain_keywords": [
+    "5G",
+    "satellite radios",
+    "EW data",
+    "tyranny of distance",
+    "data platform"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Shows transport-layer experimentation (private 5G plus SATCOM fallback) is live inside NGC2 and that EW/spectrum data is wanted by non-EW functions; software that brokers EW data into fires/maneuver apps (S12/S02) has a stated user need. Hardware/RF work requires deeper expertise and ITAR review."
+  },
+  {
+   "id": "E03-F8",
+   "title": "C5ISR Center (May 2026): first end-to-end simulated fires mission on an M777 over private 5G, explicitly to bridge 'legacy platforms' lacking modern communications pathways",
+   "detail": "Army.mil (22 May 2026) describes 25th ID and the C5ISR Center completing the first end-to-end simulated fires mission on an M777 howitzer over a private 5G network, with data and soldier feedback feeding Lightning Surge 3 in the Philippines and the Ivy Sting series. A C5ISR senior engineer (Emanuel Merulla) said the effort demonstrated 'a tangible method for modernizing legacy platforms by bridging them with next-generation communication pathways' and that on-site feedback allowed rapid CONOPS refinement so the capability was 'operationally trusted and understood by the end user'.",
+   "quote_or_paraphrase": "'...a tangible method for modernizing legacy platforms by bridging them with next-generation communication pathways...' - Emanuel Merulla, C5ISR Center (Army.mil, 2026-05-22)",
+   "source_title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2 (Army.mil 292356)",
+   "source_url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+   "pub_date": "2026-05-22",
+   "event_date": "2026-04/05 (Hawaii live-fire event)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05",
+    "S06",
+    "S02"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "legacy platforms",
+    "bridging",
+    "5G",
+    "feedback loop"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Confirms legacy weapon platforms (M777/AFATDS-era chains) still need gateway/bridging software to join the data layer; protocol-bridging and edge-node software for legacy systems is a recurring, unglamorous need (S02/S06)."
+  },
+  {
+   "id": "E03-F9",
+   "title": "Ivy Sting 4 (early 2026) deliberately tested C2 of maneuver from division to battalion under 'denied network conditions', an airspace-management app for manned/unmanned aircraft, and joint/multinational integration",
+   "detail": "A CPE C2IN LinkedIn post (captured by a third-party research repository) states 4th ID's Ivy Sting 4 built on Ivy Sting 3, focused on C2 of maneuver forces from division to battalion, integrated an airspace management application for manned and unmanned aircraft, operated under denied network conditions, and included joint and multinational participation; each event 'has progressed in tactical and technical complexity to obtain user feedback'. Other captures show Shift5 vehicle telemetry (via a 'data translation layer converting proprietary formats') and Kraus K1000ULE UAS integrated into Lattice at Ivy Sting 4/5 within roughly two months.",
+   "quote_or_paraphrase": "Paraphrase: Ivy Sting 4 focused on C2 of maneuver forces from division to battalion, integrating an airspace management application for manned and unmanned aircraft, operating under denied network conditions, with joint and multinational participation (CPE C2IN post).",
+   "source_title": "4th Infantry Division Leads NGC2 Prototyping with Ivy Sting 4 (CPE C2IN LinkedIn post)",
+   "source_url": "https://www.linkedin.com/posts/cpec2in_ngc2-futuresandconceptscommand-armyt2com-activity-7425616767848448000-BI2u",
+   "pub_date": "2026-02 (approx.)",
+   "event_date": "2026-01/02 (Ivy Sting 4)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S13",
+    "S05",
+    "S08",
+    "S14"
+   ],
+   "chain_steps": [
+    "TASK",
+    "MONITOR",
+    "TRANSPORT",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "denied network",
+    "airspace management",
+    "manned-unmanned",
+    "proprietary formats",
+    "translation layer"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Evidence that DDIL operation and airspace deconfliction for UAS are explicit NGC2 test objectives, and that third parties (Shift5, Kraus) onboarded via Lattice in ~2 months; a startup with a narrow app (e.g., UAS airspace deconfliction, sustainment telemetry) can enter through the prime's partner program."
+  },
+  {
+   "id": "E03-F10",
+   "title": "Ivy Sting 1 (Sept 2025): vendor account of 26 live M777 missions run side-by-side with legacy crews, with the legacy team 'struggling with delays'",
+   "detail": "Anduril corporate content states that eight weeks after its $99.6M NGC2 prototype OTA, 4th ID became the first unit to use NGC2 in live fire at Ivy Sting 1: soldiers fired 26 live M777 missions running a division-level targeting process on Lattice Mesh and Palantir Target Workbench, with a new fires app (AXS) run alongside legacy crews; Anduril says the contrast was visible, with the legacy team struggling with delays. Anduril also characterises AFATDS as 'slow to set up and unable to interface easily with other systems'. These are vendor claims (not independent proof); the fact of the live-fire event is corroborated by Army/DVIDS reporting on the Ivy Sting series and by CNBC's summary of Anduril's description.",
+   "quote_or_paraphrase": "Vendor text: 'one team struggling with delays, the other firing digitally in seconds' (Anduril).",
+   "source_title": "Anduril mission/brand content on Ivy Sting 1 and AFATDS (captured corpus) and Anduril blog 'How NGC2 Is Expanding the Battlefield Network at Ivy Sting 2'",
+   "source_url": "https://www.anduril.com/news/how-ngc2-is-expanding-the-battlefield-network-at-ivy-sting-2",
+   "pub_date": "2025-11-19 (Ivy Sting 2 blog); Ivy Sting 1 content 2025-09/10",
+   "event_date": "2025-09 (Ivy Sting 1); 2025-11 (Ivy Sting 2)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S01",
+    "S02"
+   ],
+   "chain_steps": [
+    "DECIDE",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "legacy",
+    "delays",
+    "unable to interface",
+    "slow to set up"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "The legacy-fires pain (AFATDS interfacing, setup time) is plausible and consistent with RUSI's 2022 finding, but the only quantified comparison is vendor marketing; treat as a hypothesis to validate with soldiers, not as proof."
+  },
+  {
+   "id": "E03-F11",
+   "title": "Ivy Sting series (vendor claim): planning cycles compressed from hours to ~30 minutes inside 'displaced, low-bandwidth command posts', replacing static briefings",
+   "detail": "Onebrief (planning software vendor inside the Anduril NGC2 team) states that across 4th ID's Ivy Sting series planners compressed operational planning cycles 'from hours to as few as 30 minutes, including inside displaced, low-bandwidth command posts', replaced static briefings with shared live-map planning, and that 4ID compressed MDMP into 24 hours when required; it names co-resident partner systems (Anduril, Palantir, Striveworks, Govini, Instant Connect Enterprise, Rune, RII, Microsoft). Vendor claim; no independent measurement found.",
+   "quote_or_paraphrase": "Vendor text: 'planners using Onebrief compressed operational planning cycles from hours to as few as 30 minutes, including inside displaced, low-bandwidth command posts.'",
+   "source_title": "Onebrief LinkedIn post on NGC2 planning layer (captured in third-party corpus)",
+   "source_url": "https://www.linkedin.com/posts/cpec2in_army-and-industry-align-on-common-data-baseline-activity-7474924486115487744-MMUC",
+   "pub_date": "2026-06 (approx.)",
+   "event_date": "2025-09 to 2026-05 (Ivy Sting/Ivy Mass)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S01",
+    "S05"
+   ],
+   "chain_steps": [
+    "DECIDE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "low-bandwidth",
+    "displaced command post",
+    "static briefings",
+    "planning cycle"
+   ],
+   "label": "INFERENCE",
+   "confidence": "LOW",
+   "startup_relevance": "Indicates that collaborative planning under low bandwidth is a workflow the Army is buying inside NGC2 (Onebrief holds that slot); a new entrant would need an adjacent workflow (e.g., rehearsal, wargaming, logistics sync) rather than a competing planning tool."
+  },
+  {
+   "id": "E03-F12",
+   "title": "Lightning Surge 1-2 (Raft release, Mar 2026): calls for fire were 'a soldier intensive process' compressed into an automated workflow; EW targeting, drone video, position feeds and BDA fused into one COP",
+   "detail": "Raft's 11 Mar 2026 release says its data platform and AI mission system enabled 25th ID's Lightning Surge 1 and 2 with Lockheed Martin, Accelint and Rune: ingesting EW targeting data, live drone video, positional feeds and BDA reports into a unified COP; during Lightning Surge 2 division artillery soldiers demonstrated live calls for fire 'compressing a soldier intensive process into an automated workflow'; the architecture is described as MOSA-compliant, hardware/data-agnostic and persistent 'when transport degrades'. Vendor claims.",
+   "quote_or_paraphrase": "Vendor text: '...ingesting live calls for fires and compressing a soldier intensive process into an automated workflow.' (Raft, 2026-03-11)",
+   "source_title": "Raft Validates the Future of Command and Control at Army's Lightning Surge Exercises (PRNewswire)",
+   "source_url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html",
+   "pub_date": "2026-03-11",
+   "event_date": "2026-Q1 (Lightning Surge 1-2, Hawaii)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S02",
+    "S04",
+    "S07",
+    "S12"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "FUSE",
+    "VISUALIZE",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "soldier intensive",
+    "automated workflow",
+    "transport degrades",
+    "data-agnostic"
+   ],
+   "label": "INFERENCE",
+   "confidence": "LOW",
+   "startup_relevance": "Shows the 25th ID stack's data layer is held by Raft (now also in the Army-wide common data baseline); the named pain (manual call-for-fire handling, multi-source fusion) is being addressed by incumbents, so whitespace is narrower than the marketing implies."
+  },
+  {
+   "id": "E03-F13",
+   "title": "INDOPACOM (Mar 2024): Joint Fires Network had to be built from 15 experimentation kits in eight months and scaled from 8 to 20 nodes across Northern Edge 23-1/23-2; commander says service C2 efforts and NSA data must be 'pulled together fast'",
+   "detail": "Adm. John Aquilino's HASC posture statement (Mar 2024) says INDOPACOM 'developed and deployed fifteen JFN experimentation kits in 2023 in eight months', scaled from eight nodes in Northern Edge 23-1 to twenty in Northern Edge 23-2, integrated with GIDE 8 (Dec 2023), and planned a JFN live-fire at Valiant Shield 2024 to deliver an 'initial JFN combat credible capability' in CY24; the IMN (formerly MPE) is described as a zero-trust data-centric environment for sharing a COP with allies. In the hearing he said the theater must pull together data 'whether it be Convergence, Overmatch, or ABMS, along with the data that is coming from NSA'.",
+   "quote_or_paraphrase": "'We need to pull that together fast and deliver a capability. And we are going to demonstrate the first version of that, of JFN, in Valiant Shield in 2024.' - Adm. John Aquilino, HASC hearing (H.A.S.C. No. 118-62), March 2024",
+   "source_title": "U.S. Military Posture and National Security Challenges in the Indo-Pacific Region (HASC hearing transcript and INDOPACOM posture statement)",
+   "source_url": "https://www.congress.gov/event/118th-congress/house-event/LC73165",
+   "pub_date": "2024-03-20",
+   "event_date": "2023 (NE 23-1/23-2, GIDE 8); 2024-06 (Valiant Shield)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S02",
+    "S01",
+    "S08",
+    "S04"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "NORMALIZE",
+    "FUSE",
+    "DECIDE"
+   ],
+   "pain_keywords": [
+    "service stovepipes",
+    "experimentation kits",
+    "nodes",
+    "pull together"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "A combatant command had to hand-build a fires network because service C2 programs did not interoperate; JFN now has an Air Force integrated program office (per sibling source, DefenseScoop 2025-09-23), so the integration layer is becoming a program with its own vendor base (SAIC/Lockheed cited) rather than open whitespace."
+  },
+  {
+   "id": "E03-F14",
+   "title": "Valiant Shield 2024 (June 2024): first test of the initial JFN prototype; Lockheed Martin integrated digital C2 and claims 'actual tasking orders at combat-relevant speed'",
+   "detail": "Lockheed Martin's 20 Jun 2024 release and its Q2 2024 earnings call (23 Jul 2024) say it integrated digital C2 with the first version of the Pentagon's Joint Fires Network during INDOPACOM's Valiant Shield 2024, using live data to produce joint tasking orders; LM states 'Valiant Shield marks the first test of the initial Joint Fires Network prototype'. L3Harris separately claims its DiSCO EMSO architecture shared RF data between Hawaii and San Diego payloads at the same exercise. Vendor descriptions; the exercise's independent after-action results are not public.",
+   "quote_or_paraphrase": "'Our operational planning data fusion engine was employed to coordinate joint operations using live real-time data producing actual tasking orders at combat-relevant speed.' - Jim Taiclet, Lockheed Martin Q2 2024 earnings call",
+   "source_title": "Lockheed Martin Integrates Command and Control Capabilities with First Joint Fires Network Prototype",
+   "source_url": "https://news.lockheedmartin.com/2024-06-20-Lockheed-Martin-Integrates-Command-and-Control-Capabilities-with-First-Joint-Fires-Network-Prototype",
+   "pub_date": "2024-06-20",
+   "event_date": "2024-06 (Valiant Shield 2024)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S01",
+    "S02",
+    "S12"
+   ],
+   "chain_steps": [
+    "FUSE",
+    "DECIDE",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "first test",
+    "tasking orders",
+    "live data"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Prime-dominated layer; shows large primes use joint exercises as product showcases, which raises the bar for a startup to get exercise slots without a prime sponsor."
+  },
+  {
+   "id": "E03-F15",
+   "title": "Northern Edge 2023: JFN digital C2 demonstrated with F-35 and third-party platforms; 'first time joint force synchronization has been demonstrated at this scale' (Lockheed)",
+   "detail": "On its Q2 2023 call (18 Jul 2023) Lockheed Martin said that in May 2023, as part of INDOPACOM's JFN, it demonstrated digital C2 synchronizing joint all-domain operations during Northern Edge, integrating LM and third-party platforms including F-35s, and first use of AI on a Stalker UAS for ship recognition. A 2023 HASC written statement also notes a gateway 'chosen by USINDOPACOM to fly in exercise Northern Edge 2023 ... to uniquely integrate and connect coalition 5th gen F-35 and E-7A' - evidence that datalink translation gateways were still required to connect coalition platforms. Northern Edge 2025 (Aug 2025, 6,400+ personnel) is documented only at headline level; no C2 lessons were found.",
+   "quote_or_paraphrase": "'This is the first time joint force synchronization has been demonstrated at this scale.' - Lockheed Martin Q2 2023 earnings call",
+   "source_title": "Lockheed Martin Q2 2023 earnings call transcript; HASC FY2024 NDAA hearing statement (H.A.S.C. No. 118-33)",
+   "source_url": "https://www.congress.gov/event/118th-congress/house-event/LC71200",
+   "pub_date": "2023-07-18",
+   "event_date": "2023-05 (Northern Edge 23-1)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S01",
+    "S02",
+    "S08",
+    "S05"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "NORMALIZE",
+    "FUSE"
+   ],
+   "pain_keywords": [
+    "gateway",
+    "translation",
+    "5th gen",
+    "coalition",
+    "synchronization"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Datalink/gateway translation between 5th-gen, legacy and coalition platforms remains a live problem set in exercises, but it sits in ITAR-heavy, prime-owned territory; the software-tractable adjacent problem is track/format normalization above the link layer (S02)."
+  },
+  {
+   "id": "E03-F16",
+   "title": "Project Convergence Capstone 4 (Feb-Mar 2024): Army Futures Command told the Senate it tested joint C2, fires integration, contested logistics and human-machine integration with all services and six allies, with GIDE integrated 'for the first time'",
+   "detail": "In the FY2025 posture hearing record (S. Hrg. 118-741, Pt. 4), Gen. James Rainey (AFC) said PC-C4 in February-March 2024 was Army-hosted but 'wholly joint and combined', with all services, six allies/partners, and 'for the first time incorporated OSD's GIDE experimentation effort', hosted at Camp Pendleton and NTC, testing offensive/defensive fires integration, joint C2, contested logistics and human-machine integration; written testimony cites 99 technologies. The Army also embeds experimentation objectives in Northern Edge, Valiant Shield, Balikatan and Avenger Triad with FVEY, NATO and Pacific partners. Specific shortfalls found at PC-C4 were not disclosed in the record.",
+   "quote_or_paraphrase": "'...for the first time incorporated OSD's guide [GIDE] experimentation effort, wholly integrated into Project Convergence.' - Gen. James Rainey, Senate hearing, 2024",
+   "source_title": "Department of Defense Authorization Request for FY2025 (S. Hrg. 118-741, Part 4) - Army modernization testimony",
+   "source_url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000",
+   "pub_date": "2024 (hearing; FY2025 posture cycle)",
+   "event_date": "2024-02/03 (PC-C4)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S08",
+    "S13",
+    "S14"
+   ],
+   "chain_steps": [
+    "DECIDE",
+    "TASK",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "joint C2",
+    "contested logistics",
+    "human-machine integration",
+    "coalition",
+    "first time"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Establishes PC as the Army's main joint/coalition experimentation venue; the record documents scope but not shortfalls, so founders should expect that specific PC-C4/C5 gap lists are not public (evidence insufficient)."
+  },
+  {
+   "id": "E03-F17",
+   "title": "CENTCOM (Mar 2024): 'CJADC2 ... is a daily activity we are improving with each exercise'; operators paired with software developers; task forces 59/99/179 built around unmanned MDA, low-cost UAS and 'target information sharing', with residents hired to 'tackle the friction points'",
+   "detail": "Gen. Michael Kurilla's HASC posture statement (Mar 2024) says CENTCOM runs quarterly CJADC2 exercises nested under GIDE, pairing operators with software developers to improve situational awareness, targeting, planning and sustainment 'with live data' and 'the centrality of robust networks'. Task Force 59 is credited with daily contributions to maritime security and Operation GATEKEEPER (continuous unmanned MDA across 18,000 sq km of the North Arabian Sea); Task Force 99 tests long-endurance ISR and 3D-printed UAS ('as little as $3,000 in eight hours') and ways to detect and counter jamming; TF 179 develops digital solutions for ISR and 'target information sharing'. CENTCOM hired a Chief Data Officer and created a Technology Residency to 'tackle the friction points we encounter in our experimentation'. This is operational-command evidence, not just exercise evidence.",
+   "quote_or_paraphrase": "'CJADC2 is more than just a concept for us, it is a daily activity that we are improving with each exercise. By pairing operators with software developers...' - Gen. Michael Kurilla, CENTCOM posture statement, March 2024",
+   "source_title": "HASC testimony from U.S. Central Command Commander Kurilla (posture statement)",
+   "source_url": "https://www.centcom.mil/ABOUT-US/POSTURE-STATEMENT/",
+   "pub_date": "2024-03-21",
+   "event_date": "2023-2024 (quarterly CJADC2 exercises; TF 59/99 operations)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S04",
+    "S13",
+    "S01",
+    "S12",
+    "S05"
+   ],
+   "chain_steps": [
+    "COLLECT",
+    "FUSE",
+    "DECIDE",
+    "TASK"
+   ],
+   "pain_keywords": [
+    "friction points",
+    "live data",
+    "jamming",
+    "target information sharing",
+    "unmanned"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "CENTCOM is a validated buyer of operator-developer pairing and low-cost unmanned/ISR integration (later formalised as a rapid-employment JTF in Sept 2025 per sibling sources); a small team with a deployable software prototype can plausibly get a 'friction point' problem via the CTO/residency channel, subject to clearance and citizenship constraints."
+  },
+  {
+   "id": "E03-F18",
+   "title": "GIDE series: Palantir reported Gotham use at CENTCOM's Digital Falcon Oasis and GIDE 6 (2023); INDOPACOM tied JFN to GIDE 8 (Dec 2023); GIDE 12 ran in Sept 2024; think tanks now propose GIDE as the venue for testing AI-era staff designs",
+   "detail": "Palantir's Q2 2023 call says Gotham 'performed excellently at CENTCOM's Digital Falcon Oasis and other exercises across combatant commands, including GIDE 6'. INDOPACOM's posture statement links JFN integration to GIDE 8 (Dec 2023) and Army testimony says PC-C4 integrated GIDE. A sibling agent captured DefenseScoop's 2024-09-12 preview of GIDE 12. CSIS (Jensen and Strohmeyer, 17 Jul 2025) recommends CDAO run iterative wargames 'building on GIDE' that pit competing staff designs against common threat scenarios, arguing the 200-year-old Napoleonic staff model is too slow for agentic warfare. No public GIDE after-action shortfalls were found.",
+   "quote_or_paraphrase": "'...the latest investments in Gotham performed excellently at CENTCOM's Digital Falcon Oasis and other exercises across combatant commands, including Global Information Dominance experiment series 6.' - Palantir Q2 2023 earnings call (2023-08-08)",
+   "source_title": "Palantir Q2 2023 earnings transcript; CSIS 'Rethink Napoleonic Staff' (2025-07-17); DefenseScoop GIDE 12 preview (2024-09-12)",
+   "source_url": "https://defensescoop.com/2024/09/12/whats-unique-cdao-upcoming-global-information-dominance-experiment-gide-12/",
+   "pub_date": "2023-08-08 / 2024-09-12 / 2025-07-17",
+   "event_date": "2023 (GIDE 6-8); 2024-09 (GIDE 12)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S04",
+    "S01",
+    "S09"
+   ],
+   "chain_steps": [
+    "FUSE",
+    "DECIDE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "staff process",
+    "wargame",
+    "experimentation cadence"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "GIDE is the OSD-level venue where Maven/Palantir is entrenched (Maven became a program of record and CJADC2 'cornerstone' in 2026 per sibling sources); startup whitespace is in staff-workflow tooling around the AI layer, not in the core COP."
+  },
+  {
+   "id": "E03-F19",
+   "title": "Scarlet Dragon (18th Airborne Corps, 2020-2025): the first AI-enabled live-fire targeting run took 743 minutes; by 2024 a 20-person cell using Maven reportedly reached ~80 targets/hour versus ~30 without, matching a 2,000-person OIF targeting cell",
+   "detail": "Multiple secondary sources (a Wikipedia mirror citing press coverage; a March 2026 essay; WSJ reporting citing CSET's Emelia Probasco, author of CSET's Aug 2024 'Building the Tech Coalition') describe Scarlet Dragon starting in 2020 as a tabletop exercise at Fort Bragg and growing through 10+ iterations into a multi-state joint live-fire series with Palantir 'forward-deployed engineers' embedded. Reported metrics: first strike process 743 minutes (2020); by 2024 Maven performed 4 of 6 kill-chain steps, a senior targeting officer estimated ~80 targets/hour with Maven vs ~30 without, decision time under a minute, and 20 staff versus roughly 2,000 in the 2003 Iraq theater targeting process; a 2024 goal of 1,000 targeting decisions per hour. Scarlet Dragon Oasis (Jan-Feb 2023) fed a B-52 strike via JREAP-A through an AOC. Numbers are as reported by secondary sources; CSET's primary report was not opened.",
+   "quote_or_paraphrase": "Paraphrase (via WSJ, 2026-03-07, citing Emelia Probasco/CSET): the corps matched its Iraq-era record as the military's most efficient targeting operation with only 20 people, compared with more than 2,000 staffers in Iraq.",
+   "source_title": "Building the Tech Coalition (CSET, Aug 2024) as cited in WSJ 'How AI Is Turbocharging the War in Iran' (2026-03-07) and mirrored Wikipedia/essay sources",
+   "source_url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/",
+   "pub_date": "2024-08 (CSET); 2026-03-07 (WSJ)",
+   "event_date": "2020-2025 (Scarlet Dragon iterations)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S04",
+    "S01",
+    "S02"
+   ],
+   "chain_steps": [
+    "IDENTIFY",
+    "DECIDE",
+    "TASK",
+    "ASSESS"
+   ],
+   "pain_keywords": [
+    "manual targeting",
+    "hours",
+    "staff headcount",
+    "JREAP",
+    "AFATDS"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Quantifies the baseline pain (manual targeting is slow and staff-intensive) and shows the corps-level targeting layer is captured by Maven/Palantir with embedded engineers; residual whitespace is in feeding Maven (sensor onboarding, BDA, deconfliction) rather than replacing it."
+  },
+  {
+   "id": "E03-F20",
+   "title": "Operations (Iran, March 2026): AI-enabled targeting used at scale; U.S. officers say human analysts can examine 'at most 4%' of collected intelligence",
+   "detail": "WSJ (7 Mar 2026) reports the U.S. struck more than 3,000 targets in Iran in the first week using Maven-derived workflows, that '[h]uman analysts can examine at most 4% of the intelligence material that is typically collected', that AI use 'remains limited' with high cost of badly informed decisions, and quotes Lt. Gen. (ret.) Jack Shanahan that DoD 'was built as a hardware company in the industrial age, and it has struggled to become a digital company'. A Wikipedia mirror adds the (unverified) claim that Maven enabled over 1,000 targets on day one. This is operational, not exercise, evidence.",
+   "quote_or_paraphrase": "'The Department of Defense was built as a hardware company in the industrial age, and it has struggled to become a digital company in a software-centric era.' - Jack Shanahan, quoted in WSJ, 2026-03-07",
+   "source_title": "How AI Is Turbocharging the War in Iran (Wall Street Journal)",
+   "source_url": "https://www.wsj.com/tech/ai/how-ai-is-turbocharging-the-war-in-iran-aca59002",
+   "pub_date": "2026-03-07",
+   "event_date": "2026-03 (Iran strikes)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S04",
+    "S03"
+   ],
+   "chain_steps": [
+    "PROCESS",
+    "IDENTIFY",
+    "ASSESS"
+   ],
+   "pain_keywords": [
+    "4% of intelligence",
+    "analyst overload",
+    "targets per day"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Operational demand for PED automation and analyst-triage tooling is real and current; but classification and the Maven/Palantir incumbency mean an early-stage team is more likely to sell narrow exploitation models or data-reduction tools through existing pipelines (S04) than a standalone product."
+  },
+  {
+   "id": "E03-F21",
+   "title": "NATO exercises 2025: Maven Smart System NATO used at Steadfast Deterrence (May 2025) and as the 'primary platform for warfighting integration' at Steadfast Duel (Oct 2025); Maven COP at SETAF-AF's Lion DRE (Nov 2025)",
+   "detail": "A mirrored Wikipedia article (citing NATO Joint Warfare Centre statements) says JWC described MSS NATO as NATO's first AI-enabled warfighting C2 system, deployed across Allied Command Operations, incorporated into Steadfast Deterrence 2025 with broader use planned in 2026, and used at Steadfast Duel 2025 as the primary integration platform; Maven COP was used in SETAF-AF's Lion Deployment Readiness Exercise in Nov 2025. Palantir claimed 'production-level' status across most combatant commands in 2025. Tier-4 aggregation; primary NATO pages were not reachable.",
+   "quote_or_paraphrase": "Paraphrase: NATO's JWC said MSS NATO had been deployed across Allied Command Operations and incorporated into Steadfast Deterrence 2025, and was later used at Steadfast Duel 2025 as the primary platform for warfighting integration.",
+   "source_title": "Project Maven (Wikipedia mirror citing NATO JWC and press reports)",
+   "source_url": "https://en.wikipedia.org/wiki/Project_Maven",
+   "pub_date": "2025-2026 (page revisions)",
+   "event_date": "2025-05 (Steadfast Deterrence); 2025-10 (Steadfast Duel); 2025-11 (Lion DRE)",
+   "source_tier": 4,
+   "segment_ids": [
+    "S08",
+    "S04",
+    "S07"
+   ],
+   "chain_steps": [
+    "FUSE",
+    "VISUALIZE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "NATO",
+    "warfighting integration",
+    "COP"
+   ],
+   "label": "FACT",
+   "confidence": "LOW",
+   "startup_relevance": "Coalition COP/AI layer at NATO operational level is being filled by Palantir via NCIA; European founders (e.g., a German co-founder) might find allied-market entry through NATO/FMN-conformant apps rather than the core platform; verify with primary NATO sources before use."
+  },
+  {
+   "id": "E03-F22",
+   "title": "Project Convergence 2020 (RUSI, 2022): sensor-to-shooter time fell from ~14 minutes to seconds, but the experiment 'revealed that many of the systems in service ... could not pass data to each other in compatible forms'",
+   "detail": "RUSI's Nov 2022 paper on JADO capacity states that PC's first iteration (2020) cut sensor-to-shooter time from an average of 14 minutes to a few seconds, while revealing that many in-service U.S. systems could not exchange data in compatible forms, 'leading to the realisation that the network that facilitates the flow of information is the centre of gravity', after which PC expanded to seven use cases and the Joint Systems Integration Lab was created to practise moving data between systems. Dated but foundational.",
+   "quote_or_paraphrase": "'...it also revealed that many of the systems in service with the US armed forces could not pass data to each other in compatible forms...' - RUSI, Nov 2022",
+   "source_title": "The Capacity to Conduct Joint All-Domain Operations (RUSI)",
+   "source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/capacity-conduct-joint-all-domain-operations",
+   "pub_date": "2022-11-23",
+   "event_date": "2020 (Project Convergence 20)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S02",
+    "S05"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "NORMALIZE",
+    "INGEST"
+   ],
+   "pain_keywords": [
+    "incompatible",
+    "data formats",
+    "network centre of gravity"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "The original pain that spawned the data-fabric/NGC2 agenda; today largely being addressed by the common data layer vendors, but the same format-incompatibility problem recurs with every new sensor/coalition partner (S02/S08)."
+  },
+  {
+   "id": "E03-F23",
+   "title": "Project Convergence 22: a U.S. Army officer described a junior soldier in a moving Bradley 'quickly overwhelmed' trying to manage uncrewed systems on a tablet; some experiments needed three soldiers per UGS",
+   "detail": "RUSI's Oct 2023 paper on uncrewed ground systems (author a serving officer who deployed to PC22) reports that at PC22 an Army officer spoke of the difficulty for a junior soldier managing uncrewed systems on a tablet in the back of a moving Bradley, who quickly became overwhelmed, possibly because systems required operator inputs/verification or because the incoming information was hard to digest; it notes experiments where three soldiers were needed to manage one UGS and warns of cognitive overload from screens and notifications.",
+   "quote_or_paraphrase": "'They quickly became overwhelmed.' - RUSI (Oct 2023), reporting a U.S. Army officer's account from Project Convergence 22",
+   "source_title": "Uncrewed Ground Systems: A Human-Machine Teaming Perspective (RUSI)",
+   "source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+   "pub_date": "2023-10-26",
+   "event_date": "2022 (Project Convergence 22)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S13",
+    "S01",
+    "S06"
+   ],
+   "chain_steps": [
+    "TASK",
+    "MONITOR"
+   ],
+   "pain_keywords": [
+    "overwhelmed",
+    "cognitive load",
+    "tablet",
+    "operator ratio"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Operator cognitive load in autonomy C2 (S13) is a documented exercise pain; UI/alerting and task-level autonomy that reduce inputs per vehicle are software problems accessible to a small team, but they must integrate with government control-station standards (IOP, RCC)."
+  },
+  {
+   "id": "E03-F24",
+   "title": "Ukraine operations (CSIS, Dec 2024): Delta and Kropyva are both top-3 systems but 'not fully integrated'; cloud-hosted Delta depends on Starlink where connectivity is limited",
+   "detail": "CSIS's 'CJADC2 for Ukraine' (Kateryna Bondar, 11 Dec 2024) says DOD 'has struggled to make meaningful progress' toward CJADC2 for decades while Ukraine's Delta evolved into a functional platform. Kropyva (popular with artillery) and Delta share data across levels of command 'although the two systems are not fully integrated'. Delta's cloud architecture (servers abroad) is resilient against strikes but 'can present challenges for users in areas with limited internet connectivity', mitigated by Starlink. Delta's data is synthesised by situational-awareness centres in eight front-line cities. Operational (wartime) evidence.",
+   "quote_or_paraphrase": "'Delta and Kropyva complement each other by sharing data across various levels of command in different operational contexts, although the two systems are not fully integrated.' - CSIS, 2024-12-11",
+   "source_title": "CJADC2 for Ukraine: Does Ukraine Already Have Functional CJADC2 Technology? (CSIS)",
+   "source_url": "https://www.csis.org/analysis/cjadc2-ukraine",
+   "pub_date": "2024-12-11",
+   "event_date": "2022-2024 (Ukraine operations)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S02",
+    "S07",
+    "S05"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "FUSE",
+    "VISUALIZE",
+    "TRANSPORT"
+   ],
+   "pain_keywords": [
+    "not fully integrated",
+    "limited connectivity",
+    "cloud dependence",
+    "Starlink"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Real-war validation that (a) bottom-up SA apps win adoption over official programs and (b) app-to-app integration and disconnected operation remain unsolved even for the most battle-tested stack; supports a DDIL-sync/integration wedge (S02/S05) but Ukraine procurement is outside U.S. buyer paths."
+  },
+  {
+   "id": "E03-F25",
+   "title": "Ukraine (CSIS, Nov 2024): volunteer-built situational-awareness systems reached near-universal adoption while the official system (Dzvin) failed; unifying heterogeneous data sources is 'a challenge even for the United States military'",
+   "detail": "CSIS's 'Ukraine's Military AI Ecosystem' (12 Nov 2024) documents that volunteer systems (Delta from Aerorozvidka, started 2016, transferred to MoD 2023) achieved adoption 'vastly exceeding' official initiatives that 'usually failed', that an officially sanctioned system, Dzvin, promised similar capability but lost out, that Delta integrates NATO ISTAR standards and even digitises informant reports via chatbots, and that bringing these sources into one platform 'is a challenge even for the United States military'.",
+   "quote_or_paraphrase": "'Bringing all these different data sources together in a unified software platform is a challenge even for the United States military, but Delta achieves this and enjoys high user satisfaction among Ukrainian forces.' - CSIS, 2024-11-12",
+   "source_title": "Ukraine's Military AI Ecosystem (CSIS)",
+   "source_url": "https://www.csis.org/analysis/ukraines-military-ai-ecosystem",
+   "pub_date": "2024-11-12",
+   "event_date": "2014-2024",
+   "source_tier": 3,
+   "segment_ids": [
+    "S07",
+    "S02",
+    "S04"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "NORMALIZE",
+    "FUSE",
+    "VISUALIZE"
+   ],
+   "pain_keywords": [
+    "adoption",
+    "official system failed",
+    "unified platform"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Adoption is driven by front-line usability and direct user feedback loops, the same pattern the Army is now copying with Ivy Sting/Lightning Surge; product teams that cannot get soldier touchpoints will lose to those that can."
+  },
+  {
+   "id": "E03-F26",
+   "title": "U.S.-Japan space operations (CSIS, Aug 2024): officials on both sides say the current information-sharing paradigm is 'largely emails and PDFs', not operational data either side can analyse",
+   "detail": "CSIS's 'From Earth to Uchu' (23 Aug 2024) reports that U.S. and Japanese officials 'shared observations that the current information-sharing paradigm is largely emails and PDFs, not space threat information or operational data that both sides can access, analyze, and use', contrasts this with real-time trilateral DPRK missile-warning data sharing, and notes no concrete plans to share SDA data from a USSF payload hosted on a Japanese QZSS satellite. It also points to INDOPACOM Mission Network and BICES as the relevant sharing systems. Operational coalition pain, space domain.",
+   "quote_or_paraphrase": "'...the current information-sharing paradigm is largely emails and PDFs, not space threat information or operational data that both sides can access, analyze, and use.' - CSIS, 2024-08-23",
+   "source_title": "From Earth to Uchu: U.S.-Japan Space Cooperation (CSIS)",
+   "source_url": "https://www.csis.org/analysis/earth-uchu",
+   "pub_date": "2024-08-23",
+   "event_date": "2024",
+   "source_tier": 3,
+   "segment_ids": [
+    "S08",
+    "S10",
+    "S03"
+   ],
+   "chain_steps": [
+    "DISSEMINATE",
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "emails and PDFs",
+    "manual sharing",
+    "releasability"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "A concrete 'system A cannot ingest system B' coalition case with a policy/releasability root cause; software for machine-readable, releasability-tagged data exchange with allies (S08/S10) has a named gap, but disclosure policy, not technology, is the binding constraint."
+  },
+  {
+   "id": "E03-F27",
+   "title": "Allied cloud-interoperability wargame (CSIS, Nov 2025): participants deployed liaison officers 'as a stopgap' for coordination, treated identity federation as the key to interoperability, and regretted not pre-negotiating with hyperscalers",
+   "detail": "CSIS's 5 Nov 2025 report on an allied cloud/interoperability exercise says one group 'began by deploying liaison officers to each country as a stopgap solution for operational coordination', relied on PACE plans, focused on identity federation to preserve sovereignty, and was willing to lower classifications when time-sensitive; participants judged current national and coalition contingency planning 'insufficient' and wished they had negotiated with hyperscalers and partners before the crisis. Wargame-derived, not a live exercise.",
+   "quote_or_paraphrase": "'Group Two began by deploying liaison officers to each country as a stopgap solution for operational coordination...' - CSIS, 2025-11-05",
+   "source_title": "Allied cloud interoperability wargame report (CSIS)",
+   "source_url": "https://www.csis.org/analysis/allies-cloud-interoperability",
+   "pub_date": "2025-11-05",
+   "event_date": "2025 (wargame)",
+   "source_tier": 3,
+   "segment_ids": [
+    "S08",
+    "S10",
+    "S09"
+   ],
+   "chain_steps": [
+    "COLLABORATE",
+    "DISSEMINATE",
+    "STORE"
+   ],
+   "pain_keywords": [
+    "liaison officer",
+    "stopgap",
+    "identity federation",
+    "classification"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Reinforces that the liaison-officer workaround persists because identity/access federation across nations is unsolved; mission-partner ICAM tooling (S10) is a repeatedly named gap, subject to heavy accreditation."
+  },
+  {
+   "id": "E03-F28",
+   "title": "Air Force department-level exercises 2025 (Bamboo Eagle 25-1/25-3, REFORPAC): distributed and coalition C2 in contested environments was the stated test object; TOC-L pathfinders use Red Flag, Bamboo Eagle and PC to refine requirements",
+   "detail": "Cached DoD news indexes (bodies not opened) list: 'TACP conduct Target Acquisition, Distributed C2 Operations during exercise Bamboo Eagle 25-1' (USAF, 15 Feb 2025; 93d AGOW TACP teams enabled C2 and sensing across America and Pacific islands, 10-14 Feb); 'Allies unite in tactical, operational C2 during Bamboo Eagle 25-3' (USAF, 10 Sep 2025; U.S. and allied forces across continents practised tactical and operational C2 in a contested environment, 27 Jul-9 Aug); 'Building a more agile, integrated force: DAF cements inaugural DLE' (21 Aug 2025) and 'Exercising at scale: What we're learning' (26 Sep 2025) on the month-long DLE series (REFORPAC, Resolute Space, Mobility Guardian, Emerald Warrior, BE 25-3) that provided 'critical lessons learned'. AFLCMC (15 Dec 2025) says the 752nd OSS, ACC's TOC-L pathfinder, experiments in Red Flag, Bamboo Eagle and Project Convergence to refine requirements and shape prototypes. Specific C2 shortfalls are not in the visible text.",
+   "quote_or_paraphrase": "Paraphrase (af.mil, 2025-09-10): Bamboo Eagle 25-3 united U.S. and allied forces across multiple continents to practice tactical and operational command and control in a contested environment, testing joint and coalition responses to short-notice threats.",
+   "source_title": "Allies unite in tactical, operational C2 during Bamboo Eagle 25-3 (af.mil); Exercising at scale: What we're learning (af.mil); Pathfinders drive TOC-L innovation (AFLCMC)",
+   "source_url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/",
+   "pub_date": "2025-02-15 / 2025-09-10 / 2025-09-26 / 2025-12-15",
+   "event_date": "2025-02 (BE 25-1); 2025-07/08 (BE 25-3, DLE)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S05",
+    "S08"
+   ],
+   "chain_steps": [
+    "DECIDE",
+    "TASK",
+    "TRANSPORT"
+   ],
+   "pain_keywords": [
+    "distributed C2",
+    "contested environment",
+    "coalition C2",
+    "lessons learned"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "DAF's battle-management modernization (TOC-L, CBC2, DAF Battle Network) is exercised through pathfinder units; entry is via AFWERX/ACC pathfinder channels, and the public record describes intent more than measured pain."
+  },
+  {
+   "id": "E03-F29",
+   "title": "Low-bandwidth cross-site collaboration on SIPRNet is a recurring exercise requirement: Immersive Wisdom claims 'ultra-low bandwidth digital war rooms' used at Bamboo Eagle 25-1 and PC-C5 and an 8 kbit/s SIPR-cloud-to-DDIL-edge test (Dec 2025), with repeat SOF renewals and an ACC IDIQ",
+   "detail": "Immersive Wisdom press items (captured in a third-party research pack) state that in Feb-Mar 2025 Army, ACC, PACAF and AFSOC units collaborated in 'Ultra-Low Bandwidth Digital War Rooms on SIPRNet' during Bamboo Eagle 25-1 and Project Convergence Capstone 5 with 'leave-behind' capability; that a Dec 2025 SATCOM interoperability test connected edge users to SIPR cloud at 8 kbit/s; that a U.S. SOF customer renewed for a third consecutive year (Sep 2025); and that ACC holds a ~$25M sole-source IDIQ through 2029 for the software. Vendor claims; contract figures unverified.",
+   "quote_or_paraphrase": "Vendor text: 'Army, Air Combat Command, PACAF, and AFSOC units can now seamlessly collaborate in Ultra-Low Bandwidth Digital War Rooms on SIPRNet...' (2025-03-30)",
+   "source_title": "Immersive Wisdom news items (company site), captured in third-party research pack",
+   "source_url": "https://immersivewisdom.com",
+   "pub_date": "2025-03-30; 2025-09-15; 2025-12-02",
+   "event_date": "2025-02/03 (BE 25-1, PC-C5)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S05",
+    "S01",
+    "S06"
+   ],
+   "chain_steps": [
+    "COLLABORATE",
+    "TRANSPORT"
+   ],
+   "pain_keywords": [
+    "ultra-low bandwidth",
+    "SIPRNet",
+    "DDIL",
+    "kbit/s"
+   ],
+   "label": "INFERENCE",
+   "confidence": "LOW",
+   "startup_relevance": "Repeat renewals and a sole-source IDIQ (if accurate) are stronger demand evidence than exercise participation alone; suggests a viable niche for small vendors in bandwidth-frugal collaboration/replication software (S05/S06), though this niche already has an incumbent."
+  },
+  {
+   "id": "E03-F30",
+   "title": "Talisman Sabre 2025 (Jul 2025): commercial RF (HawkEye 360) data integrated into operational military platforms 'for the first time'; MRF-D exercised mobile, multimodal C2 across thousands of kilometres; USAF air-defense sectors integrated with the RAAF",
+   "detail": "A captured news item (5 Aug 2025) says HawkEye 360's RF data was integrated into operational military platforms for the first time during Talisman Sabre 2025 to enhance situational awareness among the U.S., Australia and partners. Marines.mil (Aug 2025) summarises that MRF-D 25.3 achieved 'multimodal and mobile command and control across thousands of kilometers of simulated contested terrain' and synchronized fires with the U.S. Army and ADF. A sibling agent captured USAF WADS/PADS integration with the RAAF (28 Jul 2025) and the Navy's exercise wrap (4 Aug 2025). No public after-action detail on C2 shortfalls was found.",
+   "quote_or_paraphrase": "Paraphrase: HawkEye 360's radio-frequency data is being integrated into operational military platforms for the first time during Talisman Sabre 2025 (company announcement, 2025-08-05).",
+   "source_title": "HawkEye 360 RF Data Powers Military Platforms in Talisman Sabre Exercise Integration; Talisman Sabre 25: MRF-D Marines and Sailors conclude multinational exercise (marines.mil)",
+   "source_url": "https://www.marines.mil/News/News-Display/Article/4263474/talisman-sabre-25-mrf-d-marines-and-sailors-conclude-multinational-exercise-in-the-top-end/",
+   "pub_date": "2025-08-01 / 2025-08-05",
+   "event_date": "2025-07 (Talisman Sabre 25)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S03",
+    "S04",
+    "S08",
+    "S05"
+   ],
+   "chain_steps": [
+    "COLLECT",
+    "INGEST",
+    "FUSE"
+   ],
+   "pain_keywords": [
+    "first time",
+    "commercial RF",
+    "mobile C2",
+    "coalition"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Commercial ISR feeds are still being wired into operational C2 one exercise at a time (an integration-services pain), and Australia is the most accessible allied venue for U.S./AUKUS-aligned startups; specifics of the pain are not public (evidence insufficient)."
+  },
+  {
+   "id": "E03-F31",
+   "title": "Bold Quest and CWIX are the institutional venues where coalition 'interoperability gaps and integration shortfalls' are formally measured; Joint Staff budget books show Bold Quest assessing MPE/FMN, DACAS and coalition ISR, and translation gateways (5th-gen to Link-16) funded as JCTDs",
+   "detail": "Joint Staff RDT&E justification books (PB2018-PB2020) describe Bold Quest analysis as producing 'detailed analysis of interoperability gaps and integration shortfalls' in joint fires, coalition ISR, digitally-aided CAS and joint CAS, with Bold Quest 2020 adding Mission Partner Environment/Federated Mission Networking development and assessments, counter-UAS and cyber effects; CWIX 2013 assessments covered coalition fires, ISR and BMD; a JCTD ('Jetpack fifth to fourth') translated 5th-generation datalink messages into Link-16 for 4th-gen aircraft. Sibling agents captured NATO ACT's CWIX25 wrap-up (Jun 2025), a Bold Quest 2025 (Italy-led) report and a DVIDS Bold Quest coalition-interoperability item, none opened here. The budget text is dated; the venues persist.",
+   "quote_or_paraphrase": "'BOLD Quest Exercise Analysis - Conducted evaluations of demonstrated Joint/Coalition capabilities, resulting in detailed analysis of interoperability gaps and integration shortfalls...' - Joint Staff RDT&E Justification Book, PB2018",
+   "source_title": "Joint Staff RDT&E Justification Books PB2018/PB2019/PB2020 (mirrored on GitHub, 540co/dod-jbook-pdf-xml); NATO ACT CWIX25 wrap-up",
+   "source_url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "pub_date": "2017-2019 (J-books); 2025-06 (CWIX25)",
+   "event_date": "2018-2020 (Bold Quest); 2025 (CWIX25, Bold Quest 25)",
+   "source_tier": 1,
+   "segment_ids": [
+    "S08",
+    "S02",
+    "S05"
+   ],
+   "chain_steps": [
+    "NORMALIZE",
+    "TRANSPORT",
+    "ASSESS"
+   ],
+   "pain_keywords": [
+    "interoperability gaps",
+    "integration shortfalls",
+    "DACAS",
+    "FMN",
+    "translation"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Bold Quest/CWIX are the cheapest legitimate way for a small vendor (including allied vendors) to get an interoperability assessment against FMN/MPE standards; for a German co-founder, CWIX (Bydgoszcz) and FMN conformance are natural allied-market entry points."
+  },
+  {
+   "id": "E03-F32",
+   "title": "GAO (Apr 2025): DOD lacks a framework to guide CJADC2 investments; services pursue separate data-integration efforts that risk new silos",
+   "detail": "GAO-25-106454, 'Combined Joint All-Domain Command and Control: DOD Needs a Framework to Guide Investments' (Apr 2025), is cited by sibling agents and secondary sources as finding that DOD has struggled to establish a comprehensive, enterprise-wide framework, so military branches pursue distinct data-integration projects in isolation, risking sophisticated new silos. GAO's earlier GAO-23-105495 (Jan 2023) made similar points about ABMS and JADC2 definition. The 2025 report text was not opened (egress-blocked); characterisation is via secondary summary.",
+   "quote_or_paraphrase": "Secondary paraphrase of GAO-25-106454: DOD has struggled to establish a comprehensive, enterprise-wide framework to guide CJADC2 investments; services have pursued distinct data integration projects in isolation.",
+   "source_title": "Combined Joint All-Domain Command and Control: DOD Needs a Framework to Guide Investments (GAO-25-106454)",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025",
+   "source_tier": 1,
+   "segment_ids": [
+    "S02",
+    "S01"
+   ],
+   "chain_steps": [
+    "NORMALIZE",
+    "STORE",
+    "FUSE"
+   ],
+   "pain_keywords": [
+    "silos",
+    "framework",
+    "investment guidance"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Explains why cross-service data plumbing keeps being rebuilt exercise by exercise; a startup should assume there is no single DOD-wide integration standard to target and pick one service's data layer (NGC2, JFN, Overmatch) as home."
+  },
+  {
+   "id": "E03-F33",
+   "title": "NGC2 acquisition churn: the program's home office was renamed three times in ~12 months and there were zero NGC2-related SAM.gov notices in the 90 days before late April 2026; access runs through two OTA primes and TEMs",
+   "detail": "A small vendor's internal overture document (Apr 2026) records that NGC2's home was renamed PEO C3T -> PEO C3N -> CPE C3N -> CPE C2IN within about 12 months (consistent with sibling-captured Army.mil/DefenseScoop reporting on the Oct 2024 rename and Dec 2025 PEO C3N reorganization) and that a SAM.gov sweep on 2026-04-25 found zero NGC2/Lightning Surge/Ivy Sting/CPE C2IN notices in the prior 90 days, concluding that industry engagement happens 'through TEMs and the published PAO/Operations channels, not through SAM solicitations' while Lockheed Martin and Anduril hold the two OTAs. A consulting piece (BCE, 2026) frames NGC2 as an acquisition-reform story: program of record Apr 2025, prototypes in formations within months, 4th ID live fire by Sept 2025, 25th ID evaluating Lockheed's prototype in early 2026. Tier-4 sources, corroborated by Tier-1 sibling sources on the renames.",
+   "quote_or_paraphrase": "'SAM.gov sweep result (2026-04-25): zero NGC2-, Lightning-Surge-, Ivy-Sting-, CPE-C2IN-, or PEO-C3N-related notices in the last 90 days.' - vendor overture document (GitHub)",
+   "source_title": "SHIELD/ATLAS NGC2 capability overture (ISS LLC, GitHub); BCE Consulting 'NGC2 Part I: Acquisition Transformation as the Real Story'",
+   "source_url": "https://bceconsulting.com/insights/acquisition-transformation-as-the-real-story",
+   "pub_date": "2026-04-25 / 2026",
+   "event_date": "2024-10 to 2026-04",
+   "source_tier": 4,
+   "segment_ids": [
+    "S01",
+    "S09"
+   ],
+   "chain_steps": [
+    "COLLABORATE"
+   ],
+   "pain_keywords": [
+    "program office churn",
+    "no solicitations",
+    "OTA primes",
+    "TEM"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Exercise participation, not solicitations, is the NGC2 sales channel; founders must plan for prime self-teaming, TEM attendance and a moving org chart, which favours teams with a defense BD partner."
+  },
+  {
+   "id": "E03-F34",
+   "title": "Vendor and consultant narratives (2026) still describe the baseline as a 'swivel chair' model (manual re-entry between domain systems), with over-classification and 'incompatible data formats' across coalitions as the persistent frictions",
+   "detail": "A MAG Aerospace explainer (2026) describes the CJADC2 objective as eliminating the 'swivel chair' model in which analysts 'manually receive data from one specialized, domain-specific system, physically or cognitively pivot, and manually enter that data into a separate command-and-control system', and names over-classification as 'a profound barrier'. Azymmetric (2026) says coalition C2 efforts (AUKUS Pillar II, NATO federated interoperability) 'confront the same friction: divergent acquisition cycles and incompatible data formats' and that 'the persistent bottleneck is the time required to generate fielding evidence: readiness data, interoperability analysis, and mission-fit validation'. Vendor framing, not measured evidence.",
+   "quote_or_paraphrase": "'Historically, intelligence analysts were forced to manually receive data from one specialized, domain-specific system, physically or cognitively pivot, and manually enter that data into a separate command-and-control system.' - MAG Aerospace, 2026",
+   "source_title": "Interoperability in Defense Technology (MAG Aerospace); C2 Modernization at Mission Speed (Azymmetric)",
+   "source_url": "https://www.magaero.com/interoperability-in-defense-technology-enhancing-warfighting-abilities/",
+   "pub_date": "2026",
+   "event_date": "2024-2026",
+   "source_tier": 2,
+   "segment_ids": [
+    "S02",
+    "S08",
+    "S10"
+   ],
+   "chain_steps": [
+    "INGEST",
+    "NORMALIZE",
+    "ASSESS"
+   ],
+   "pain_keywords": [
+    "swivel chair",
+    "manual re-entry",
+    "over-classification",
+    "incompatible data formats",
+    "fielding evidence"
+   ],
+   "label": "HYPOTHESIS",
+   "confidence": "LOW",
+   "startup_relevance": "Useful as a statement of the pain vocabulary buyers use; the Azymmetric claim that interoperability/mission-fit evidence generation is the bottleneck is an unvalidated hypothesis for an 'exercise evidence pipeline' product that founders could test with T2COM/PMTEC."
+  },
+  {
+   "id": "E03-F35",
+   "title": "Prime and vendor participation at PC-C6 (Jul-Aug 2026): L3Harris continued NGC2 collaboration at Fort Irwin; QuSecure reached TRL-7 for post-quantum crypto on tactical networks",
+   "detail": "L3Harris editorial (5 Aug 2026) says it 'continued its collaboration with the U.S. Army on NGC2 through participation in the Project Convergence Capstone 6 experiment at Fort Irwin'. QuSecure (2 Sep 2026) says QuProtect R3 reached TRL-7 at PC-C6, providing quantum-resistant communications and crypto-agility for Army tactical networks. An Army.mil item (via a 19 Aug 2026 digest) reported AI-assisted maintenance validated at PC-C6. These are participation/marketing claims rather than pain evidence, but they show PC-C6 spanned network security and sustainment as well as C2.",
+   "quote_or_paraphrase": "Vendor text: 'L3Harris continued its collaboration with the U.S. Army on NGC2 through participation in the Project Convergence Capstone 6 experiment at Fort Irwin, California.' (2026-08-05)",
+   "source_title": "A Collaborative Capstone: L3Harris at Project Convergence; QuSecure Delivers Field-Ready Post-Quantum Cryptography at PC-C6",
+   "source_url": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence",
+   "pub_date": "2026-08-05 / 2026-09-02",
+   "event_date": "2026-07 (PC-C6)",
+   "source_tier": 2,
+   "segment_ids": [
+    "S05",
+    "S10",
+    "S14"
+   ],
+   "chain_steps": [
+    "TRANSPORT",
+    "STORE"
+   ],
+   "pain_keywords": [
+    "post-quantum",
+    "tactical network",
+    "maintenance"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "PC-C6 gave small vendors (QuSecure) a TRL-7 milestone alongside primes; the Capstone series remains a viable maturation path for niche security/sustainment software if a sponsor is secured."
+  },
+  {
+   "id": "E03-F36",
+   "title": "Exercise-only versus operational pain: the strongest operationally reported pains are analyst overload and staff-intensive targeting (CENTCOM/Iran, Scarlet Dragon), coalition sharing by 'emails and PDFs' (U.S.-Japan) and app-to-app non-integration under intermittent connectivity (Ukraine); exercise-only pains are prototype reliability, cyber posture and network denial (NGC2 series)",
+   "detail": "Synthesis across findings F1, F2, F5-F12 (exercise-derived, NGC2) versus F17, F19, F20, F24-F26 (operations-derived). Exercise reporting emphasises immaturity of prototype stacks (overheating, connectivity, cyber gaps, code fixed between events) and deliberate DDIL/EW stress; operational reporting emphasises human throughput limits (4% of intelligence examined; 2,000-person targeting cells), policy-bound coalition sharing, and connectivity-dependent cloud C2. Both converge on data normalization/integration and releasability tagging as the common denominator. No public after-action report with a ranked shortfall list was found for any 2024-2026 exercise.",
+   "quote_or_paraphrase": "Synthesis (this agent).",
+   "source_title": "Synthesis of E03 findings",
+   "source_url": "",
+   "pub_date": "2026-09-24",
+   "event_date": "2020-2026",
+   "source_tier": 3,
+   "segment_ids": [
+    "S02",
+    "S04",
+    "S08",
+    "S10",
+    "S05"
+   ],
+   "chain_steps": [
+    "NORMALIZE",
+    "FUSE",
+    "DISSEMINATE"
+   ],
+   "pain_keywords": [
+    "analyst overload",
+    "releasability",
+    "integration",
+    "connectivity",
+    "prototype maturity"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "For founders: operational pains (PED triage, releasability tagging, disconnected sync) are more durable demand signals than exercise pains that vendors fix between events; but the operational layers are also where incumbents (Palantir/Maven, Anduril/Lattice) and classification barriers are densest."
+  }
+ ],
+ "structured": {
+  "exercises": [
+   {
+    "event": "Project Convergence Capstone 4",
+    "dates": "2024-02/03",
+    "venue": "Camp Pendleton / NTC Fort Irwin",
+    "c2_focus": "joint C2, fires integration, contested logistics, human-machine integration, GIDE integration, six allies",
+    "pain_public": "Public evidence insufficient (scope only).",
+    "sources": [
+     "E03-F16"
+    ]
+   },
+   {
+    "event": "Project Convergence Capstone 5",
+    "dates": "2025-03/04",
+    "venue": "Fort Irwin (+ Pacific)",
+    "c2_focus": "joint/coalition (UK, AU, CA, NZ, FR, JP) experimentation; low-bandwidth SIPR collaboration; NZ Army participation reported 2025-03-31",
+    "pain_public": "Public evidence insufficient beyond vendor claims.",
+    "sources": [
+     "E03-F29"
+    ]
+   },
+   {
+    "event": "Project Convergence Capstone 6",
+    "dates": "2026-07 (approx. 10 days)",
+    "venue": "Fort Irwin",
+    "c2_focus": "first division-scale force-on-force NGC2 validation; 90+ technologies",
+    "pain_public": "hardware overheating, incomplete data displays, semi-frequent connectivity problems; redundant apps to be cut",
+    "sources": [
+     "E03-F1",
+     "E03-F5",
+     "E03-F35"
+    ]
+   },
+   {
+    "event": "Ivy Sting 1-5 and Ivy Mass (4th ID, Fort Carson)",
+    "dates": "2025-09 to 2026-05",
+    "venue": "Fort Carson / Pinon Canyon",
+    "c2_focus": "live-fire digital fires chain, expanding network, denied-network ops, airspace mgmt, 35 mission threads, cyber/EM attack at division scale",
+    "pain_public": "legacy fires delays (vendor), code fixed between events, cyber memo 'very high risk'",
+    "sources": [
+     "E03-F2",
+     "E03-F5",
+     "E03-F6",
+     "E03-F9",
+     "E03-F10",
+     "E03-F11"
+    ]
+   },
+   {
+    "event": "Lightning Surge 1-3 (25th ID)",
+    "dates": "2026-Q1 to 2026-05",
+    "venue": "Hawaii; Philippines (Balikatan 2026)",
+    "c2_focus": "digital kill chain, private 5G fires path, EW data to all functions, unified data platform across Hawaii/CONUS/Philippines",
+    "pain_public": "soldier-intensive call-for-fire process (vendor); legacy platforms need bridging",
+    "sources": [
+     "E03-F5",
+     "E03-F7",
+     "E03-F8",
+     "E03-F12"
+    ]
+   },
+   {
+    "event": "Balikatan 2026",
+    "dates": "2026-04-20 to 2026-05-08",
+    "venue": "Philippines",
+    "c2_focus": "first eight-nation COP; IMN first test; Lightning Surge 3",
+    "pain_public": "8+ years to build COP; manual data tagging via JICOs/FDOs; changing partner sets exceed traditional networks",
+    "sources": [
+     "E03-F3",
+     "E03-F4"
+    ]
+   },
+   {
+    "event": "Valiant Shield 2024",
+    "dates": "2024-06",
+    "venue": "Indo-Pacific",
+    "c2_focus": "first JFN prototype test; digital C2 producing tasking orders; DiSCO EMSO data sharing",
+    "pain_public": "Public evidence insufficient (vendor claims only).",
+    "sources": [
+     "E03-F13",
+     "E03-F14"
+    ]
+   },
+   {
+    "event": "Northern Edge 23-1/23-2 and Northern Edge 2025",
+    "dates": "2023-05/08; 2025-08",
+    "venue": "Alaska",
+    "c2_focus": "JFN kits scaled 8 to 20 nodes; 5th-gen/E-7 gateway integration; NE25 6,400+ personnel",
+    "pain_public": "gateway translation still required (2023); NE25: Public evidence insufficient.",
+    "sources": [
+     "E03-F13",
+     "E03-F15"
+    ]
+   },
+   {
+    "event": "Talisman Sabre 2025",
+    "dates": "2025-07",
+    "venue": "Australia",
+    "c2_focus": "commercial RF data into operational platforms; mobile multimodal MAGTF C2; WADS/PADS-RAAF integration",
+    "pain_public": "Public evidence insufficient.",
+    "sources": [
+     "E03-F30"
+    ]
+   },
+   {
+    "event": "Bamboo Eagle 25-1 / 25-3 and DAF DLE",
+    "dates": "2025-02; 2025-07/08",
+    "venue": "CONUS + Pacific",
+    "c2_focus": "distributed and coalition tactical/operational C2 in contested environment; TOC-L pathfinding",
+    "pain_public": "Public evidence insufficient (titles/leads only).",
+    "sources": [
+     "E03-F28",
+     "E03-F29"
+    ]
+   },
+   {
+    "event": "GIDE 6-12",
+    "dates": "2023-2024",
+    "venue": "CDAO / combatant commands",
+    "c2_focus": "COCOM-level AI-enabled C2 with Maven; JFN and PC integration",
+    "pain_public": "Public evidence insufficient.",
+    "sources": [
+     "E03-F18"
+    ]
+   },
+   {
+    "event": "Scarlet Dragon (incl. Scarlet Dragon Oasis 2023)",
+    "dates": "2020-2025",
+    "venue": "XVIII Airborne Corps, multi-state",
+    "c2_focus": "AI-enabled targeting; Maven; JREAP/AFATDS integration",
+    "pain_public": "743-minute first run; manual targeting staff-intensive",
+    "sources": [
+     "E03-F19"
+    ]
+   },
+   {
+    "event": "CENTCOM quarterly CJADC2 exercises / Digital Falcon Oasis / TF 59, 99, 179",
+    "dates": "2023-2024",
+    "venue": "CENTCOM AOR",
+    "c2_focus": "operator-developer pairing; unmanned MDA; low-cost UAS; target information sharing",
+    "pain_public": "'friction points' in experimentation; jamming",
+    "sources": [
+     "E03-F17",
+     "E03-F18"
+    ]
+   },
+   {
+    "event": "Steadfast Deterrence 2025 / Steadfast Duel 2025 / SETAF-AF Lion DRE",
+    "dates": "2025-05; 2025-10; 2025-11",
+    "venue": "NATO / Europe",
+    "c2_focus": "MSS NATO as integration platform; Maven COP",
+    "pain_public": "Public evidence insufficient (Tier-4 pointer).",
+    "sources": [
+     "E03-F21"
+    ]
+   },
+   {
+    "event": "Bold Quest / CWIX",
+    "dates": "annual; CWIX25 2025-06",
+    "venue": "Camp Atterbury etc. / Bydgoszcz",
+    "c2_focus": "formal coalition interoperability assessment (MPE/FMN, DACAS, coalition ISR)",
+    "pain_public": "'interoperability gaps and integration shortfalls' (dated J-book language); 2024-2025 detail not opened",
+    "sources": [
+     "E03-F31"
+    ]
+   },
+   {
+    "event": "Steadfast Defender 2024, RIMPAC 2024/2026, Yama Sakura, Keen Edge, MCWL experiments, Navy Overmatch fleet experiments, Space Force exercises",
+    "dates": "2024-2026",
+    "venue": "various",
+    "c2_focus": "n/a",
+    "pain_public": "Public evidence insufficient. No C2-pain content reachable through available channels; sibling files hold only headline-level pointers.",
+    "sources": []
+   }
+  ],
+  "themes": [
+   {
+    "theme": "Prototype-stack immaturity surfaces in exercises (overheating hardware, connectivity drops, incomplete displays, code fixed between events)",
+    "segment_ids": [
+     "S01",
+     "S05",
+     "S06"
+    ],
+    "findings": [
+     "E03-F1",
+     "E03-F6"
+    ]
+   },
+   {
+    "theme": "Security/ICAM gaps in open app ecosystems (no ABAC, no logging, unvetted third-party apps)",
+    "segment_ids": [
+     "S10",
+     "S09"
+    ],
+    "findings": [
+     "E03-F2"
+    ]
+   },
+   {
+    "theme": "Coalition sharing gated by manual releasability tagging, liaison officers and per-partner networks",
+    "segment_ids": [
+     "S08",
+     "S10"
+    ],
+    "findings": [
+     "E03-F3",
+     "E03-F4",
+     "E03-F26",
+     "E03-F27",
+     "E03-F31"
+    ]
+   },
+   {
+    "theme": "Legacy platforms and incompatible formats require bridging/translation at every new integration",
+    "segment_ids": [
+     "S02",
+     "S05"
+    ],
+    "findings": [
+     "E03-F8",
+     "E03-F9",
+     "E03-F15",
+     "E03-F22"
+    ]
+   },
+   {
+    "theme": "Human throughput limits in PED and targeting (analyst overload, staff-intensive kill chain)",
+    "segment_ids": [
+     "S04",
+     "S01"
+    ],
+    "findings": [
+     "E03-F17",
+     "E03-F19",
+     "E03-F20"
+    ]
+   },
+   {
+    "theme": "DDIL/denied-network and EW stress is now a deliberate test condition",
+    "segment_ids": [
+     "S05",
+     "S12",
+     "S06"
+    ],
+    "findings": [
+     "E03-F5",
+     "E03-F7",
+     "E03-F9",
+     "E03-F29"
+    ]
+   },
+   {
+    "theme": "Operator cognitive load in autonomy C2",
+    "segment_ids": [
+     "S13"
+    ],
+    "findings": [
+     "E03-F23"
+    ]
+   },
+   {
+    "theme": "Bottom-up, user-fed systems win adoption (Ukraine Delta; Army soldier touchpoints)",
+    "segment_ids": [
+     "S07",
+     "S01"
+    ],
+    "findings": [
+     "E03-F24",
+     "E03-F25",
+     "E03-F6"
+    ]
+   }
+  ],
+  "exercise_vs_operations": {
+   "exercise_only": [
+    "E03-F1",
+    "E03-F2",
+    "E03-F3",
+    "E03-F5",
+    "E03-F6",
+    "E03-F7",
+    "E03-F8",
+    "E03-F9",
+    "E03-F10",
+    "E03-F11",
+    "E03-F12",
+    "E03-F13",
+    "E03-F14",
+    "E03-F15",
+    "E03-F16",
+    "E03-F18",
+    "E03-F21",
+    "E03-F22",
+    "E03-F23",
+    "E03-F27",
+    "E03-F28",
+    "E03-F29",
+    "E03-F30",
+    "E03-F31"
+   ],
+   "operations": [
+    "E03-F17",
+    "E03-F19",
+    "E03-F20",
+    "E03-F24",
+    "E03-F25",
+    "E03-F26"
+   ],
+   "note": "Scarlet Dragon (F19) is an exercise series whose outputs were then used operationally (CENTCOM 2023-2026); Balikatan IMN (F4) is exercise use of a network intended for crisis operations."
+  },
+  "gaps_not_found": [
+   "Northern Edge 2025 C2 lessons",
+   "RIMPAC 2024/2026 C2 lessons",
+   "Yama Sakura 85-89 and Keen Edge 24/26 bilateral data-sharing detail",
+   "CWIX 2024/2025 test results and Bold Quest 24/25 findings",
+   "Steadfast Defender 2024 C2/FMN lessons",
+   "Marine Corps MCWL experiment results",
+   "Navy Project Overmatch fleet experiment results (Trident Warrior/Fleet Battle Problem)",
+   "Space Force Space Flag / Schriever Wargame C2 findings",
+   "Task Force 59 Red Sea operational C2 detail",
+   "GIDE 9-12 after-action detail",
+   "Transformation in Contact brigade network/command-post lessons (101st, 10th Mountain, 25th ID)",
+   "Any primary PC-C4/PC-C5/PC-C6 after-action shortfall list"
+  ]
+ },
+ "search_log": [
+  {
+   "query": "WebSearch: Project Convergence Capstone 4 2024 lessons learned data interoperability manual workaround",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Project Convergence Capstone 5 2025 command and control findings",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Ivy Sting 4th Infantry Division NGC2 experiment Fort Carson soldiers feedback",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Next Generation Command and Control 25th Infantry Division prototype Anduril soldiers 2026",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Talisman Sabre 2025 command and control interoperability lessons learned Mission Partner Environment",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Valiant Shield 2024 JADC2 lessons learned data sharing common operating picture",
+   "useful": false
+  },
+  {
+   "query": "WebFetch probes (all egress-blocked): defensescoop.com, breakingdefense.com, army.mil, gao.gov, dvidshub.net, c4isrnet.com, rand.org, congress.gov, csis.org, diu.mil, defense.gov, wikipedia.org, af.mil, warontherocks.com, sbir.gov, web.archive.org, arxiv.org, apps.dtic.mil, huggingface.co, govinfo.gov, media.defense.gov, nationaldefensemagazine.org, federalnewsnetwork.com, mwi.westpoint.edu, armed-services.senate.gov, semanticscholar.org, reuters.com",
+   "useful": false
+  },
+  {
+   "query": "curl search engines (duckduckgo html/lite, bing) via proxy",
+   "useful": false
+  },
+  {
+   "query": "Bigdata.com search: Ivy Sting NGC2 soldier feedback / PC-C5 lessons / Talisman Sabre 2025 MPE (out of credits)",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Ivy Sting\" NGC2",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Project Convergence Capstone\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Global Information Dominance Experiment\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Joint Fires Network\" \"Valiant Shield\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Talisman Sabre\" \"command and control\" interoperability",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Scarlet Dragon\" targeting \"18th Airborne\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Task Force 59\" unmanned \"5th Fleet\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Bamboo Eagle\" \"Air Force\" exercise",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Mission Partner Environment\" exercise \"liaison\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Joint All-Domain Command and Control\" GAO interoperability",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Bold Quest\" coalition \"digitally aided\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Northern Edge\" JADC2 OR \"command and control\" exercise Alaska",
+   "useful": true
+  },
+  {
+   "query": "GitHub repos: GAO reports dataset / CRS reports mirror / DVIDS scraper",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:agorahub/pen0 \"Project Convergence\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:immutafab/defence-podcast-reports NGC2",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Ivy Mass\" OR \"Lightning Surge\" NGC2 division",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Steadfast Defender\" 2024 interoperability \"command and control\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Task Force 59\" OR \"Task Force 99\" \"Red Sea\" unmanned CENTCOM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"RIMPAC 2024\" \"command and control\" OR \"Project Overmatch\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Yama Sakura\" OR \"Keen Edge\" \"command and control\" bilateral data",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Northern Edge 2025\" OR \"Northern Edge 25\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Balikatan\" \"Mission Network\" OR \"IMN\" INDOPACOM partner data sharing",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"CWIX 2025\" OR \"CWIX 2024\" interoperability",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"swivel chair\" \"command and control\" OR JADC2",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Ukraine \"Delta\" \"Kropyva\" OR \"GIS Arta\" command control lessons",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Transformation in Contact\" \"command post\" OR \"C2 Fix\" network",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"GAO-25-106454\" OR \"CJADC2: DOD Needs a Framework\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Marine Corps Warfighting Laboratory\" experiment \"command and control\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Digital Falcon Oasis\" / \"Desert Guardian\" CENTCOM Maven",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: NGC2 \"very high risk\" OR Garciga cybersecurity memo",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Project Convergence\" \"liaison officer\" OR \"workaround\" OR \"manually\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Capstone 6\" OR \"PC-C6\" NGC2 soldiers connectivity OR overheating",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Talisman Sabre 2025\" HIMARS OR \"Mission Partner\" OR data OR network",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Bold Quest\" 2024 OR 2025 coalition DACAS interoperability assessment",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Steadfast Deterrence\" OR \"Steadfast Duel\" Maven NATO JWC",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Red Sea\" Houthi Aegis \"kill chain\" lessons 2024 Navy",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Lightning Surge 3\" OR \"Lightning Surge 2\" 25th Infantry",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Bamboo Eagle 25-3\" OR \"Bamboo Eagle 25-1\" C2 allies",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Exercising at scale\" OR \"Department-Level Exercise\" lessons REFORPAC",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Trident Warrior\" OR \"Fleet Battle Problem\" OR \"Project Overmatch\" 2025 experiment",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Schriever Wargame\" OR \"Space Flag\" 2025/2026 command and control",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Maven Smart System\" \"combatant commands\" 2025 GIDE NATO CENTCOM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"command post\" Army PowerPoint OR chat OR phone \"transformation in contact\" NGC2",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:agorahub/pen0 Ukraine Delta situational awareness Kropyva battle management",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:sanlee-ys/defense-news-classifier NGC2 OR Project Convergence OR Talisman Sabre",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Pathfinders drive TOC-L innovation\" OR \"Allies unite in tactical, operational C2\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Yama Sakura 87\" OR \"Keen Edge 24\" OR \"Keen Edge 26\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"CWIX\" \"Federated Mission Networking\" 2025 tests",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Scarlet Dragon\" 2025 OR 2026 \"18th Airborne Corps\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Ivy Sting\" latency OR bandwidth OR disconnected OR legacy",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Project Convergence Capstone 5\" / \"Capstone 4\" joint coalition lessons",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"GIDE 12\" OR \"GIDE 11\" experiment combatant commands CDAO",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:agorahub/pen0 \"Red Sea\" Houthi command and control Prosperity Guardian",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:agorahub/pen0 \"liaison officers\" coalition data interoperability exercise",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Ivy Mass\" Fort Carson OR NGC2",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Balikatan 2025\" command and control OR common operating picture",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:jameswong2011/InvestmentVault NGC2 OR Project Convergence OR Ivy Sting",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: repo:api-evangelist/anduril NGC2",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:agorahub/pen0 \"Talisman Sabre\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Trident Warrior\" 2025 Navy",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Northern Edge\" 2025 Alaska exercise",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Marine Corps Warfighting Laboratory\" 2025 experiment",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: GIDE 2025 CDAO experiment minimum viable combatant command Maven",
+   "useful": false
+  },
+  {
+   "query": "raw.githubusercontent fetches: congressional transcripts (CHRG-118shrg62232, CHRG-118hhrg57566, CHRG-118hhrg52383, CHRG-118hhrg53337), INDOPACOM/CENTCOM posture statements, Army.mil/DVIDS/LinkedIn captures, CSIS/RUSI mirrors, CNBC memo article, Raft/Anduril/Onebrief/Immersive Wisdom captures, WSJ copy",
+   "useful": true
+  }
+ ],
+ "saturation_statement": "Saturation was reached relative to the reachable channel, not relative to the public record. GitHub code search stopped yielding new exercise-specific material after roughly 60 queries; repeated variants for Northern Edge 2025, RIMPAC, Yama Sakura, Keen Edge, CWIX 2024/25, Steadfast Defender, MCWL, Overmatch and Space Force exercises returned nothing substantive. Congressional transcripts and posture statements were mined fully for exercise keywords. Key primary pages (DefenseScoop PC-C6 story, Breaking Defense NGC2 memo story, GAO-25-106454, NATO ACT CWIX25, DVIDS Balikatan article) are cited from captured copies or summaries and should be re-opened by an agent with web access before investment use; several URLs are reconstructed from captured slugs and are flagged as such in source titles.",
+ "sources": [
+  {
+   "url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units",
+   "title": "'Ready, but not done': The Army will start scaling parts of its new C2 ecosystem to more units (DefenseScoop) - via secondary summary",
+   "pub_date": "2026-07-31",
+   "tier": 3
+  },
+  {
+   "url": "https://nypost.com/2026/08/05/us-news/us-army-tests-ai-weapons-in-mojave-desert-to-modernize-warfare/",
+   "title": "US Army tested the AI future of warfare in the California desert - but all didn't go according to plan (NY Post)",
+   "pub_date": "2026-08-05",
+   "tier": 4
+  },
+  {
+   "url": "https://www.cnbc.com/2026/10/03/anduril-palantir-army-memo-ngc2.html",
+   "title": "Anduril and Palantir battlefield communication system has deep flaws, Army memo says (CNBC; URL path reconstructed, article dated 2025-10-03)",
+   "pub_date": "2025-10-03",
+   "tier": 3
+  },
+  {
+   "url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "title": "Balikatan 2026 Debuts Groundbreaking Common Operating Picture (DVIDS; slug reconstructed from captured copy)",
+   "pub_date": "2026-05",
+   "tier": 1
+  },
+  {
+   "url": "https://www.navalnews.com/naval-news/2026/05/new-indopacom-mission-network-links-allies-during-balikatan/",
+   "title": "New INDOPACOM Mission Network links allies during Balikatan (Naval News; captured copy)",
+   "pub_date": "2026-05-11",
+   "tier": 3
+  },
+  {
+   "url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+   "title": "Army and industry align on common data baseline (Army.mil)",
+   "pub_date": "2026-06 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/561532/two-divisions-team-up-transform-army",
+   "title": "Two divisions team up to transform Army (DVIDS)",
+   "pub_date": "2026-03-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/291863/accelerating_transformative_technologies_aids_commanders_readiness_across_the_pacific",
+   "title": "Accelerating transformative technologies aids commanders' readiness across the Pacific (Army.mil)",
+   "pub_date": "2026-04-21",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+   "title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2 (Army.mil)",
+   "pub_date": "2026-05-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.linkedin.com/posts/cpec2in_ngc2-futuresandconceptscommand-armyt2com-activity-7425616767848448000-BI2u",
+   "title": "4th Infantry Division Leads NGC2 Prototyping with Ivy Sting 4 (CPE C2IN LinkedIn)",
+   "pub_date": "2026-02 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.anduril.com/news/how-ngc2-is-expanding-the-battlefield-network-at-ivy-sting-2",
+   "title": "How NGC2 Is Expanding the Battlefield Network at Ivy Sting 2 (Anduril)",
+   "pub_date": "2025-11-19",
+   "tier": 2
+  },
+  {
+   "url": "https://www.anduril.com/news/ngc2-at-scale-how-team-anduril-and-the-army-took-lattice-across-the-4th-infantry-division",
+   "title": "NGC2 at Scale: How Team Anduril and the Army Took Lattice Across the 4th Infantry Division (Anduril)",
+   "pub_date": "2026-05-21",
+   "tier": 2
+  },
+  {
+   "url": "https://www.linkedin.com/posts/tomwkeane_owntheedge-dontworkatanduril-activity-7439833123854639104-AP0-",
+   "title": "Anduril post on Ivy Sting 5 (dozens of Lattice nodes, Voyager edge compute)",
+   "pub_date": "2026-03 (approx.)",
+   "tier": 2
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html",
+   "title": "Raft Validates the Future of Command and Control at Army's Lightning Surge Exercises",
+   "pub_date": "2026-03-11",
+   "tier": 2
+  },
+  {
+   "url": "https://www.lockheedmartin.com/en-us/products/next-generation-command-and-control.html",
+   "title": "Next Generation Command and Control (Lockheed Martin product page)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.congress.gov/event/118th-congress/house-event/LC73165",
+   "title": "HASC hearing: U.S. Military Posture and National Security Challenges in the Indo-Pacific Region (H.A.S.C. No. 118-62) - transcript mirrored on GitHub (weiaiwayne/commDAAF)",
+   "pub_date": "2024-03-20",
+   "tier": 1
+  },
+  {
+   "url": "https://www.pacom.mil/Media/Speeches-Testimony/",
+   "title": "INDOPACOM Commander Aquilino posture statement to HASC (Targeted News Service capture, 2024-03-29)",
+   "pub_date": "2024-03-20",
+   "tier": 1
+  },
+  {
+   "url": "https://www.centcom.mil/ABOUT-US/POSTURE-STATEMENT/",
+   "title": "CENTCOM Commander Kurilla posture statement to HASC (Targeted News Service capture, 2024-03-29)",
+   "pub_date": "2024-03-21",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000",
+   "title": "S. Hrg. 118-741 Pt. 4, DoD Authorization Request for FY2025 (Army modernization; Gen. Rainey) - transcript mirrored on GitHub",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/event/118th-congress/house-event/LC71200",
+   "title": "HASC FY2024 NDAA hearings (H.A.S.C. No. 118-22 and 118-33) - transcripts mirrored on GitHub (lxguan1)",
+   "pub_date": "2023",
+   "tier": 1
+  },
+  {
+   "url": "https://news.lockheedmartin.com/2024-06-20-Lockheed-Martin-Integrates-Command-and-Control-Capabilities-with-First-Joint-Fires-Network-Prototype",
+   "title": "Lockheed Martin Integrates C2 Capabilities with First Joint Fires Network Prototype",
+   "pub_date": "2024-06-20",
+   "tier": 2
+  },
+  {
+   "url": "https://www.lockheedmartin.com/en-us/news/features/2024/lockheed-martin-all-in-in-the-indo-pacific.html",
+   "title": "Lockheed Martin All In in the Indo-Pacific (feature, Valiant Shield 2024)",
+   "pub_date": "2024",
+   "tier": 2
+  },
+  {
+   "url": "https://investors.lockheedmartin.com/",
+   "title": "Lockheed Martin Q2 2023 (2023-07-18) and Q2 2024 (2024-07-23) earnings call transcripts (mirrored on GitHub)",
+   "pub_date": "2023-07-18 / 2024-07-23",
+   "tier": 2
+  },
+  {
+   "url": "https://investors.palantir.com/",
+   "title": "Palantir Q2 2023 earnings call transcript (Digital Falcon Oasis, GIDE 6) (mirrored on GitHub)",
+   "pub_date": "2023-08-08",
+   "tier": 2
+  },
+  {
+   "url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/",
+   "title": "Building the Tech Coalition: How Project Maven and the U.S. 18th Airborne Corps Operationalized Software and AI (CSET, Probasco)",
+   "pub_date": "2024-08",
+   "tier": 3
+  },
+  {
+   "url": "https://www.wsj.com/tech/ai/how-ai-is-turbocharging-the-war-in-iran-aca59002",
+   "title": "How AI Is Turbocharging the War in Iran (WSJ)",
+   "pub_date": "2026-03-07",
+   "tier": 3
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Project_Maven",
+   "title": "Project Maven (Wikipedia mirror; Scarlet Dragon metrics, NATO exercise use)",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/capacity-conduct-joint-all-domain-operations",
+   "title": "The Capacity to Conduct Joint All-Domain Operations (RUSI; mirrored on GitHub agorahub/pen0)",
+   "pub_date": "2022-11-23",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+   "title": "Uncrewed Ground Systems (RUSI; mirrored on GitHub)",
+   "pub_date": "2023-10-26",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rusi.org/",
+   "title": "The UK's Digital Targeting Web (RUSI; mirrored on GitHub)",
+   "pub_date": "2025-10-13",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/cjadc2-ukraine",
+   "title": "CJADC2 for Ukraine (CSIS, Bondar; mirrored on GitHub)",
+   "pub_date": "2024-12-11",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/ukraines-military-ai-ecosystem",
+   "title": "Ukraine's Military AI Ecosystem (CSIS, Bondar; mirrored on GitHub)",
+   "pub_date": "2024-11-12",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/earth-uchu",
+   "title": "From Earth to Uchu: U.S.-Japan Space Cooperation (CSIS; mirrored on GitHub)",
+   "pub_date": "2024-08-23",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/allies-cloud-interoperability",
+   "title": "Allied cloud interoperability wargame report (CSIS; mirrored on GitHub)",
+   "pub_date": "2025-11-05",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/rethink-napoleonic-staff",
+   "title": "Rethink Napoleonic Staff: Agentic Warfare and the Future of Military Operations (CSIS, Jensen and Strohmeyer; mirrored on GitHub)",
+   "pub_date": "2025-07-17",
+   "tier": 3
+  },
+  {
+   "url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/",
+   "title": "Pathfinders drive TOC-L innovation (AFLCMC)",
+   "pub_date": "2025-12-15",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/",
+   "title": "af.mil items via cached index: 'TACP conduct Target Acquisition, Distributed C2 Operations during Bamboo Eagle 25-1' (2025-02-15); 'Building a more agile, integrated force: DAF cements inaugural DLE' (2025-08-21); 'Allies unite in tactical, operational C2 during Bamboo Eagle 25-3' (2025-09-10); 'Exercising at scale: What we're learning' (2025-09-26)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://immersivewisdom.com",
+   "title": "Immersive Wisdom news items (Bamboo Eagle 25-1 and PC-C5; 8 kbit/s SIPR test; SOF renewal)",
+   "pub_date": "2025-03-30 / 2025-12-02",
+   "tier": 2
+  },
+  {
+   "url": "https://www.marines.mil/News/News-Display/Article/4263474/talisman-sabre-25-mrf-d-marines-and-sailors-conclude-multinational-exercise-in-the-top-end/",
+   "title": "Talisman Sabre 25: MRF-D Marines and Sailors conclude multinational exercise in the Top End (marines.mil)",
+   "pub_date": "2025-08-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.he360.com/",
+   "title": "HawkEye 360 RF Data Powers Military Platforms in Talisman Sabre Exercise Integration (company announcement captured in news dataset)",
+   "pub_date": "2025-08-05",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/540co/dod-jbook-pdf-xml",
+   "title": "Joint Staff RDT&E Justification Books PB2014-PB2020 (mirrored DoD budget books; Bold Quest, CWIX, JCTD text)",
+   "pub_date": "2013-2019",
+   "tier": 1
+  },
+  {
+   "url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "title": "CWIX25 Delivers Digital Interoperability for NATO & Nations (NATO ACT; sibling-captured, not opened)",
+   "pub_date": "2025-06",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "Combined Joint All-Domain Command and Control: DOD Needs a Framework to Guide Investments (GAO-25-106454; not opened)",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105495",
+   "title": "Battle Management: DOD and Air Force Continue to Define Joint Command and Control Efforts (GAO-23-105495; sibling-cached summary)",
+   "pub_date": "2023-01-13",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2024/09/12/whats-unique-cdao-upcoming-global-information-dominance-experiment-gide-12/",
+   "title": "What's unique about the CDAO's upcoming GIDE 12 (DefenseScoop; sibling-captured, not opened)",
+   "pub_date": "2024-09-12",
+   "tier": 3
+  },
+  {
+   "url": "https://bceconsulting.com/insights/acquisition-transformation-as-the-real-story",
+   "title": "NGC2 Part I: Acquisition Transformation as the Real Story (BCE Consulting)",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/ISS-LLC22/shield-atlas",
+   "title": "SHIELD/ATLAS NGC2 capability overture (vendor internal document, GitHub)",
+   "pub_date": "2026-04-25",
+   "tier": 4
+  },
+  {
+   "url": "https://www.magaero.com/interoperability-in-defense-technology-enhancing-warfighting-abilities/",
+   "title": "Interoperability in Defense Technology (MAG Aerospace)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.azymmetric.com/blog/accelerate-c2-modernization-prioritization",
+   "title": "C2 Modernization at Mission Speed (Azymmetric)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.afcea.org/signal-media/tactical-edge-global-reach-armys-next-generation-command-and-control-and-its-role",
+   "title": "From Tactical Edge to Global Reach: The Army's NGC2 and Its Role in CJADC2 (AFCEA Signal)",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence",
+   "title": "A Collaborative Capstone: L3Harris at Project Convergence (L3Harris)",
+   "pub_date": "2026-08-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.qusecure.com/qusecure-army-project-convergence-capstone-6-trl-7/",
+   "title": "QuSecure Delivers Field-Ready Post-Quantum Cryptography at PC-C6 (QuSecure)",
+   "pub_date": "2026-09-02",
+   "tier": 2
+  },
+  {
+   "url": "https://defence-industry.eu/u-s-army-tests-next-generation-command-network-at-project-convergence-to-shape-future-battlefield-decisions-and-modernization",
+   "title": "U.S. Army tests next-generation command network at Project Convergence (defence-industry.eu; via secondary summary)",
+   "pub_date": "2026-07 (approx.)",
+   "tier": 3
+  }
+ ]
+}

@@ -1,0 +1,1941 @@
+{
+ "batch_id": "B09",
+ "theme": "PNT, spectrum awareness and zero-trust security",
+ "companies": [
+  {
+   "name": "SandboxAQ (AQNav)",
+   "aka": "SandboxAQ, Inc.; AQNav (quantum magnetic-anomaly navigation, 'MagNav'); formerly Alphabet's Sandbox unit",
+   "founding_year": 2022,
+   "headquarters": "Palo Alto, California, USA",
+   "public_private": "private",
+   "employee_count_approx": "Roughly 200-350 (third-party estimates, mid-2025; company cites 87+ PhDs and 110+ engineers). LOW confidence.",
+   "founders": [
+    "Jack Hidary (CEO; led the unit inside Alphabet before the March 2022 spin-out)",
+    "Eric Schmidt (chairman and investor, not an operating founder)"
+   ],
+   "founder_backgrounds": "Hidary: serial entrepreneur (EarthWeb, Vista Research) and Alphabet executive; Schmidt: former Google/Alphabet CEO. FACT (multiple reports). Defense-domain operating experience comes from hires rather than founders.",
+   "total_disclosed_funding_usd": "More than $950M primary capital through the April 2025 Series E close (company statement); ~$1.1B including a ~$95M July 2025 secondary (aggregator figures, LOW). Includes >$300M Dec 2024 tranche and $450M Series E total (Apr 2025).",
+   "latest_valuation": "$5.3B pre-money (Dec 18, 2024 round, company/PRNewswire); $5.75B reported after the April 2025 close (TIME, Apr 2025).",
+   "major_investors": [
+    "T. Rowe Price",
+    "Breyer Capital",
+    "Eric Schmidt",
+    "Guggenheim",
+    "Marc Benioff",
+    "Fred Alger Management",
+    "Mumtalakat",
+    "Rizvi Traverse",
+    "S32",
+    "Ray Dalio",
+    "Horizon Kinetics",
+    "BNP Paribas",
+    "Google",
+    "NVIDIA"
+   ],
+   "c4isr_products": [
+    {
+     "name": "AQNav",
+     "description": "GPS-independent navigation that samples Earth's crustal magnetic-anomaly field with a quantum magnetometer and uses AI models to strip platform noise and match the signal against magnetic anomaly maps; passive, emits nothing, cannot be jammed or spoofed in the RF sense. Company claims >200 flight hours, >40 sorties, four aircraft types and RNP-2 accuracy for 100% of en-route time (company claims, not independently verified).",
+     "input_process_output_user": "Input: quantum magnetometer time series + IMU/air data + crustal magnetic anomaly map. Process: ML denoising/compensation + map-matching filter fused with inertial dead reckoning. Output: real-time position/velocity fix to the aircraft navigation system as a GPS alternate. User: aircrew and mission systems on manned aircraft (C-17 tested) and, under the 2024 TACFI, unmanned aircraft."
+    },
+    {
+     "name": "AQtive Guard (adjacent, not PNT)",
+     "description": "Cryptographic asset discovery / crypto-agility platform; subject of a five-year agreement with the Department of War CIO announced December 2025 (value undisclosed). Included only because it shows SandboxAQ's DoD enterprise access; it is a zero-trust/PQC product, not a C2 product.",
+     "input_process_output_user": "Input: network/crypto inventory telemetry. Output: cryptographic posture inventory and PQC migration plan. User: DoD CIO / enterprise security teams."
+    }
+   ],
+   "exact_problem_solved": "Keeps aircraft (and, prospectively, UAS and other platforms) navigating with bounded error when GPS is jammed, spoofed or unavailable, without emitting signals and without relying on satellite infrastructure; targeted at the en-route phase where tens-of-meters accuracy is acceptable.",
+   "primary_users": [
+    "Air Mobility Command aircrews (C-17 test flights)",
+    "AFRL/AFWERX test and evaluation teams",
+    "DIU Transition of Quantum Sensing (TQS) program evaluators",
+    "Commercial aviation R&D (Boeing, Airbus/Acubed)"
+   ],
+   "primary_buyers": [
+    "AFWERX / Air Force Research Laboratory (SBIR D2P2 and TACFI)",
+    "Defense Innovation Unit (TQS program)",
+    "Department of War CIO (AQtive Guard, non-PNT)"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "PROCESS",
+    "FUSE"
+   ],
+   "mission_layer": [
+    "air mobility / joint air operations",
+    "ISR platforms (prospective)",
+    "autonomous systems (prospective, per TACFI scope)"
+   ],
+   "segment_ids": [
+    "S11"
+   ],
+   "hw_sw_mix": "both - AI/software navigation engine is the core IP; requires a magnetometer sensor package integrated on the platform (sensor sourcing partly external).",
+   "market_posture": "dual-use",
+   "contracts": [
+    {
+     "title": "AQNav SBIR Direct-to-Phase II",
+     "customer": "U.S. Air Force",
+     "contracting_org": "AFWERX / AFRL (INFERENCE on office)",
+     "vehicle_type": "SBIR",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-01 (per third-party report citing company)",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://github.com/vibewatch/startup (reports/20260529182536-sandboxaq/06-customers.yaml; cites company releases)",
+     "pub_date": "2026-05-29",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "AQNav SBIR Phase 2B Tactical Funding Increase (TACFI) - extends AQNav development to broader aircraft including UAS",
+     "customer": "U.S. Air Force",
+     "contracting_org": "AFWERX (SBIR program office)",
+     "vehicle_type": "SBIR",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed (TACFI awards are typically up to ~$2M SBIR + match; INFERENCE)",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2024-08-16 (announced)",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://www.sandboxaq.com/press/u-s-air-force-extends-contract-with-sandboxaq-to-further-develop-aqnav-technology-to-address-gps-jamming-and-spoofing",
+     "pub_date": "2024-08-16",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Agreement to join DIU Transition of Quantum Sensing (TQS) program - magnetic navigation",
+     "customer": "Defense Innovation Unit (Department of War)",
+     "contracting_org": "DIU (Commercial Solutions Opening; OTA vehicle is INFERENCE)",
+     "vehicle_type": "OTA prototype",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2025-11-18 (announced)",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype (DIU frames TQS as transition-to-production pathway; no production order announced)",
+     "source_url": "https://www.defenseone.com/technology/2025/11/pentagon-expands-partnership-quantum-sensing-startup/409597/",
+     "pub_date": "2025-11-18",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Five-year AQtive Guard cryptographic discovery agreement (non-PNT context)",
+     "customer": "Department of War CIO",
+     "contracting_org": "Public evidence insufficient.",
+     "vehicle_type": "FAR",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2025-12",
+     "period_of_performance": "5 years",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "production/enterprise service",
+     "source_url": "https://github.com/vibewatch/startup (04-financials.yaml, citing SandboxAQ Dec 2025 release)",
+     "pub_date": "2026-05-29",
+     "confidence": "MEDIUM"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "No operational fielding of AQNav found; activity is flight test and exercise participation only.",
+     "evidence": "DIU TQS entry (Nov 2025) explicitly framed as evaluation; third-party report notes 'production procurement not yet announced'.",
+     "source_url": "https://www.sandboxaq.com/press/sandboxaq-partners-with-dows-defense-innovation-unit-to-advance-development-of-magnetic-navigation-systems"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Exercise Golden Phoenix (USAF)",
+     "year": "2023",
+     "note": "AQNav flown during the exercise (company statement).",
+     "source_url": "https://www.gpsworld.com/us-air-force-and-sandboxaq-address-gps-jamming-and-spoofing/"
+    },
+    {
+     "event": "Exercise Mobility Guardian (Air Mobility Command)",
+     "year": "2023",
+     "note": "AQNav tested on C-17 Globemaster III during AMC's largest exercise; Defense One later confirmed C-17 testing.",
+     "source_url": "https://www.defenseone.com/technology/2025/11/pentagon-expands-partnership-quantum-sensing-startup/409597/"
+    },
+    {
+     "event": "AFRL/AFWERX flight test campaign",
+     "year": "2023-2024",
+     "note": ">200 flight hours, >40 sorties, four aircraft types (company claim, Aug 2024).",
+     "source_url": "https://www.prnewswire.com/news-releases/us-air-force-extends-contract-with-sandboxaq-to-further-develop-aqnav-technology-to-address-gps-jamming-and-spoofing-302224057.html"
+    }
+   ],
+   "integration_partners": [
+    "Boeing (AQNav co-development for aerospace platforms; stage undisclosed)",
+    "Acubed / Airbus Silicon Valley (flight-test partner)",
+    "AFRL / AFWERX",
+    "Defense Innovation Unit"
+   ],
+   "apis_sdks_open_interfaces": "No public AQNav API/SDK or ICD found. SandboxAQ's GitHub org (sandbox-quantum) publishes open-source cryptography (Sandwich), chemistry (Tangelo) and AI tooling but nothing for AQNav. Integration with aircraft nav systems is bespoke (INFERENCE).",
+   "security_classification_requirements": "Public evidence insufficient on classification of AQNav work. Magnetic anomaly map quality/density is a stated limiter; some high-resolution government map data may be controlled (INFERENCE). Third-party report flags CMMC 2.0 and CNSA 2.0 compliance exposure for DoD revenue.",
+   "allied_international_activity": "Airbus/Acubed test partnership (France/US). No allied government PNT contracts found. Public evidence insufficient.",
+   "technical_differentiator": "AI denoising that makes magnetometer map-matching usable on metal, electrically noisy aircraft; large accumulated flight dataset (200+ hours); passive/unjammable by construction; funded by one of the largest private balance sheets in the sector.",
+   "suspected_moat": "Proprietary ML models trained on flight data, platform-specific calibration know-how, and capital to run long flight-test campaigns. Weak moat on the physics (Q-CTRL, AFRL MagNav, Northrop are all pursuing MagNav) and dependency on third-party anomaly maps.",
+   "major_competitors": [
+    "Q-CTRL (Ironstone Opal MagNav; DARPA contracts; Lockheed/AOSense TQS team)",
+    "AFRL in-house MagNav program",
+    "Northrop Grumman (MagNav with Q-CTRL)",
+    "Infleqtion (quantum inertial/clocks)",
+    "Anello Photonics (optical gyro INS)",
+    "Vermeer / visual-terrain navigation vendors",
+    "Honeywell and Safran (INS/alt-PNT)"
+   ],
+   "obvious_weaknesses": "No production procurement after ~3 years of SBIR funding; accuracy (RNP 2, tens of meters) unsuitable for approach/landing or precision weapons; dependence on map coverage; all performance figures are company-claimed; AQNav is a small line inside a company whose revenue base is cybersecurity and life-science AI, raising prioritisation risk.",
+   "evidence_user_adoption": "Exercise participation (Golden Phoenix, Mobility Guardian 2023) and C-17 flights show operator exposure; no unit-level adoption or sustainment contract found. Rating: weak-to-moderate.",
+   "evidence_repeat_procurement": "Sequential awards from the same customer family (AF SBIR D2P2 Jan 2023 -> TACFI Aug 2024 -> DIU TQS Nov 2025) show repeat R&D funding, not repeat procurement of a product. MEDIUM confidence.",
+   "evidence_prototype_to_production": "None. DIU TQS is the intended transition vehicle; no production order, program-of-record insertion or airworthiness certification found as of Sept 2026.",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "PROCESS",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "FUSE",
+     "echelon": "individual_platform"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE: an AQNav machine-learning engineer's public profile and the company's materials indicate a Python/ML stack (large-scale model training on cloud TPU/GPU for the company's 'Large Quantitative Models') with on-aircraft inference of denoising/filtering models; no evidence of a distributed-systems or C2-integration engineering team for AQNav.",
+   "confidence_notes": "Award existence and dates: HIGH (multiple press and trade sources). All dollar values for AQNav contracts: undisclosed. Flight-hour and accuracy claims: company-sourced, unverified. Funding/valuation: HIGH (company releases, Reuters/TechCrunch coverage). Headcount and revenue: LOW (aggregators). Primary company/press URLs could not be opened in this session (egress restrictions); they were recovered from a GitHub-hosted diligence pack that cites them.",
+   "sources": [
+    {
+     "url": "https://www.sandboxaq.com/press/u-s-air-force-extends-contract-with-sandboxaq-to-further-develop-aqnav-technology-to-address-gps-jamming-and-spoofing",
+     "title": "U.S. Air Force Extends Contract with SandboxAQ to Further Develop AQNav (TACFI)",
+     "pub_date": "2024-08-16",
+     "type": "company"
+    },
+    {
+     "url": "https://www.gpsworld.com/us-air-force-and-sandboxaq-address-gps-jamming-and-spoofing/",
+     "title": "US Air Force and SandboxAQ address GPS jamming and spoofing",
+     "pub_date": "2024-08-14",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.defenseone.com/technology/2025/11/pentagon-expands-partnership-quantum-sensing-startup/409597/",
+     "title": "Pentagon expands partnership with quantum sensing startup (DIU TQS)",
+     "pub_date": "2025-11-18",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.sandboxaq.com/press/sandboxaq-partners-with-dows-defense-innovation-unit-to-advance-development-of-magnetic-navigation-systems",
+     "title": "SandboxAQ joins DIU Transition of Quantum Sensing program",
+     "pub_date": "2025-11-18",
+     "type": "company"
+    },
+    {
+     "url": "https://www.prnewswire.com/news-releases/sandboxaq-announces-more-than-300-million-of-funding-to-drive-next-era-of-ai-302335182.html",
+     "title": "SandboxAQ announces more than $300M funding at $5.3B pre-money",
+     "pub_date": "2024-12-18",
+     "type": "financial"
+    },
+    {
+     "url": "https://www.sandboxaq.com/press/sandboxaq-closes-450m-series-e-round-with-expanded-investor-base",
+     "title": "SandboxAQ closes $450M Series E",
+     "pub_date": "2025-04-04",
+     "type": "company"
+    },
+    {
+     "url": "https://github.com/vibewatch/startup/tree/7fdaf393f6616dca743b727daa3fba7fe418e650/reports/20260529182536-sandboxaq",
+     "title": "Third-party diligence pack on SandboxAQ (evidence.yaml lists primary URLs)",
+     "pub_date": "2026-05-29",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/sandbox-quantum",
+     "title": "SandboxAQ GitHub organization (no AQNav code)",
+     "pub_date": "2026-09",
+     "type": "company"
+    }
+   ]
+  },
+  {
+   "name": "Infleqtion",
+   "aka": "Infleqtion, Inc. (NYSE: INFQ); formerly ColdQuanta (rebranded late 2022); Infleqtion UK; Infleqtion Australia",
+   "founding_year": 2007,
+   "headquarters": "Boulder / Louisville, Colorado, USA (UK hub in Oxford and NQCC Harwell)",
+   "public_private": "public",
+   "employee_count_approx": "Public evidence insufficient. (several hundred implied by $43M revenue guidance and multi-site footprint; INFERENCE, LOW)",
+   "founders": [
+    "Dana Z. Anderson (founder, Chief Science Officer; University of Colorado Boulder / JILA; NAE member)"
+   ],
+   "founder_backgrounds": "Anderson: atomic-physics professor, cold-atom pioneer. Current CEO Matthew Kinsella (former Maverick Ventures investor; CEO since ~2023, MEDIUM). Government-affairs VP Chris Cook; advisory board includes retired Gen. Paul Funk (Army), Maj. Gen. Cameron Holt (USAF acquisition) and Maj. Gen. Kim Crider (USSF). UK MD Colin Sullivan MBE (former RAF).",
+   "total_disclosed_funding_usd": "~$550M gross proceeds from the SPAC combination with Churchill Capital Corp X (incl. ~$125M PIPE), closed Feb 2026; prior private rounds (incl. a reported ~$110M 2022 Series B as ColdQuanta - from memory, LOW) not verified in-session.",
+   "latest_valuation": "$1.8B pre-money at SPAC announcement (Sept 8, 2025); listed NYSE: INFQ on Feb 17, 2026 (public market cap thereafter).",
+   "major_investors": [
+    "Churchill Capital Corp X (SPAC sponsor)",
+    "PIPE investors (unnamed here)",
+    "Maverick Ventures (seed 2018)"
+   ],
+   "c4isr_products": [
+    {
+     "name": "Tiqker optical atomic clock",
+     "description": "Rack-mounted rubidium optical clock (company: 10^-15 short-term instability, ~100x better frequency stability than legacy clocks). Subject of an $11M DoD APFIT award (2024) for 'Rack-Mounted Optical Clocks'; tested on UK flights, U.S. Army ground vehicles in New Mexico and an autonomous submarine (world-first optical clock underwater, Royal Navy-related trial). First UK commercial sale 2024.",
+     "input_process_output_user": "Input: none external (self-contained atomic reference). Output: precise time/frequency (PTP/1PPS/10 MHz, INFERENCE) for holdover when GNSS timing is denied. User: network/timing engineers on ships, vehicles, comms nodes and datalinks."
+    },
+    {
+     "name": "Quantum inertial sensors (atom-interferometer accelerometers/gyros) and cold-atom gravimeters",
+     "description": "GPS-denied positioning sensors; flight-trialed on a customised aircraft at a UK military test site in 2024 (UK MOD 'un-jammable quantum tech takes flight'); newer continuous-beam generation first tested Oct 2025. Australian Army Phase II 'Quantum Technology Exploit' contract.",
+     "input_process_output_user": "Input: atom-interferometer phase measurements. Output: low-drift acceleration/rotation for INS. User: platform navigation integrators (aircraft, submarines, ground vehicles)."
+    },
+    {
+     "name": "Quantum Spectrum (Rydberg-atom RF receiver)",
+     "description": "Antenna-less RF sensing spanning MHz to THz; demonstrated at U.S. Army C5ISR NetModX23 and UK-led Defence Cyber Marvel 3; co-developed with L3Harris.",
+     "input_process_output_user": "Input: ambient RF fields. Output: wideband spectrum/signal detection data. User: EW/spectrum-awareness and comms experimenters."
+    },
+    {
+     "name": "Contextual ML for assured navigation and timing",
+     "description": "$2M U.S. Army contract for 'contextual machine learning for assured navigation and timing' (software layer fusing sensors).",
+     "input_process_output_user": "Input: multi-sensor PNT data. Output: assured PNT solution/integrity. User: Army PNT program offices (INFERENCE)."
+    }
+   ],
+   "exact_problem_solved": "Provides timing holdover and navigation sensing that keep networks, datalinks and platforms synchronised and localised when GPS is jammed or spoofed, plus wideband RF sensing without conventional antennas.",
+   "primary_users": [
+    "Army C5ISR and PNT experimenters",
+    "Navy/submarine and Royal Navy trial units",
+    "UK MOD / RAF test organisations",
+    "Australian Army"
+   ],
+   "primary_buyers": [
+    "OUSD(R&E) APFIT program office",
+    "U.S. Army (CCDC/C5ISR; PEO IEW&S INFERENCE)",
+    "U.S. Navy (ONR/NIWC INFERENCE)",
+    "AFWERX (TACFI)",
+    "DARPA",
+    "UK MOD/Dstl",
+    "Australian Army"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "PROCESS"
+   ],
+   "mission_layer": [
+    "joint (timing for networks and datalinks)",
+    "maritime/undersea",
+    "air",
+    "ground maneuver",
+    "EW/spectrum (Rydberg)"
+   ],
+   "segment_ids": [
+    "S11",
+    "S12"
+   ],
+   "hw_sw_mix": "both - hardware sensors and clocks are the revenue core; Superstaq/Contextual ML are software.",
+   "market_posture": "dual-use",
+   "contracts": [
+    {
+     "title": "APFIT award - Rack-Mounted Optical Clocks (Tiqker) for defense deployment",
+     "customer": "Department of Defense (OUSD(R&E) APFIT)",
+     "contracting_org": "APFIT via Air Force (per third-party dataset)",
+     "vehicle_type": "SBIR",
+     "ceiling": "$11M (reported as $10.9M APFIT + $0.75M TACFI in one dataset)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$11M (procurement funding, not ceiling)",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2024",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "APFIT is explicitly procurement/fielding funding (bridge to production); units fielded not disclosed",
+     "source_url": "https://infleqtion.com/infleqtion-secures-11-million-dod-apfit-award-to-accelerate-deployment-of-quantum-timing-for-defense-applications/",
+     "pub_date": "2024",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Contextual Machine Learning for Assured Navigation and Timing",
+     "customer": "U.S. Army",
+     "contracting_org": "Public evidence insufficient.",
+     "vehicle_type": "SBIR (INFERENCE; could be OTA)",
+     "ceiling": "$2M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$2M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "Public evidence insufficient.",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://infleqtion.com/newsroom/announcements/",
+     "pub_date": "Public evidence insufficient.",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "Quantum-Accelerated AI Software for Radio Signal Processing",
+     "customer": "U.S. Navy",
+     "contracting_org": "Public evidence insufficient.",
+     "vehicle_type": "SBIR (INFERENCE)",
+     "ceiling": "$1M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$1M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "Public evidence insufficient.",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://infleqtion.com/infleqtion-awarded-1m-u-s-navy-contract-to-advance-quantum-accelerated-ai-software-for-radio-signal-processing/",
+     "pub_date": "Public evidence insufficient.",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "DARPA HARQ - Multistaq heterogeneous quantum software (not PNT)",
+     "customer": "DARPA",
+     "contracting_org": "DARPA",
+     "vehicle_type": "FAR",
+     "ceiling": "$2M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$2M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2026-04 (reported)",
+     "period_of_performance": "24 months",
+     "prime_or_sub": "prime (with UChicago)",
+     "prototype_or_production": "research",
+     "source_url": "https://infleqtion.com/infleqtion-selected-by-darpa-to-advance-next-generation-heterogeneous-quantum-software/",
+     "pub_date": "2026-04",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "Quantum Technology Exploit - Phase II",
+     "customer": "Australian Army",
+     "contracting_org": "Australian Department of Defence",
+     "vehicle_type": "foreign",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "Public evidence insufficient.",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://infleqtion.com/newsroom/announcements/",
+     "pub_date": "Public evidence insufficient.",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "UK quantum navigation flight trials (aircraft at UK military test site) and Royal Navy optical-clock trials",
+     "customer": "UK MOD / Dstl / Royal Navy (partners incl. BAE Systems and QinetiQ per memory, MEDIUM)",
+     "contracting_org": "UK MOD",
+     "vehicle_type": "foreign",
+     "ceiling": "Undisclosed",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2024 (flight trial); 2024-2025 (submarine/clock trials)",
+     "period_of_performance": "",
+     "prime_or_sub": "prime/consortium",
+     "prototype_or_production": "prototype/demonstration",
+     "source_url": "https://infleqtion.com/un-jammable-quantum-tech-takes-flight-to-boost-uks-resilience-against-hostile-actors/",
+     "pub_date": "2024",
+     "confidence": "MEDIUM"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "Tiqker clocks sold/delivered to government and commercial customers; company claims 'hundreds of quantum sensors' and three quantum computers sold to customers including NVIDIA, DoD, NASA and the UK government (SPAC announcement).",
+     "evidence": "Company statement in Sept 2025 SPAC materials; APFIT $11M is fielding-oriented funding. No unit/platform-level fielding named publicly.",
+     "source_url": "https://quantumcomputingreport.com/infleqtion-to-go-public-through-merger-with-churchill-capital-corp-x-at-1-8-billion-valuation/"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "U.S. Army C5ISR NetModX23",
+     "year": "2023",
+     "note": "Quantum Spectrum Rydberg RF receiver demonstrated.",
+     "source_url": "https://infleqtion.com/newsroom/announcements/"
+    },
+    {
+     "event": "Defence Cyber Marvel 3 (UK-led multinational exercise)",
+     "year": "2023-2024",
+     "note": "Quantum Spectrum demonstrated; Infleqtion also publishes a DCM-26 quantum-computing exercise repo on GitHub (2026).",
+     "source_url": "https://github.com/Infleqtion/DCM-26"
+    },
+    {
+     "event": "UK MOD quantum navigation flight trial",
+     "year": "2024",
+     "note": "Quantum inertial sensors and Tiqker flown on a customised aircraft at a UK military test site ('un-jammable quantum tech takes flight').",
+     "source_url": "https://infleqtion.com/un-jammable-quantum-tech-takes-flight-to-boost-uks-resilience-against-hostile-actors/"
+    },
+    {
+     "event": "Autonomous submarine optical-clock trial (Royal Navy-linked)",
+     "year": "2024-2025",
+     "note": "World's first quantum optical clock operated on an underwater autonomous vehicle (company claim).",
+     "source_url": "https://infleqtion.com/newsroom/announcements/"
+    }
+   ],
+   "integration_partners": [
+    "L3Harris (Rydberg RF receivers)",
+    "Safran (optical clock collaboration)",
+    "QinetiQ (quantum logistics optimisation)",
+    "NVIDIA (CUDA-Q / NVQLink)",
+    "NASA / DOE / Voyager (America's Quantum Space Initiative)",
+    "UK NQCC",
+    "Eaton (grid resilience, non-defense)"
+   ],
+   "apis_sdks_open_interfaces": "Superstaq quantum-software SDK is open source on GitHub (Infleqtion/client-superstaq, 131 stars, active 2026); Oqtant cloud platform. No public SDK/ICD for Tiqker or inertial sensors found; clocks presumably expose standard timing interfaces (INFERENCE).",
+   "security_classification_requirements": "Public evidence insufficient. Quantum inertial sensors and military clocks are plausibly ITAR/EAR-controlled (INFERENCE); UK work handled through Infleqtion UK subsidiary.",
+   "allied_international_activity": "Strong: UK subsidiary (Oxford manufacturing hub, NQCC Harwell 100-qubit system), UK MOD flight and naval trials, Australian Army contract and Infleqtion Australia, Japan Moonshot selection, participation in UK-led Defence Cyber Marvel.",
+   "technical_differentiator": "Vertically integrated cold-atom platform (lasers, photonics, vacuum cells) reused across clocks, inertial sensors, RF receivers and computers; among the few vendors with a rack-mount optical clock that has survived vehicle, flight and underwater trials.",
+   "suspected_moat": "Deep atomic-physics IP and manufacturing know-how, public-company balance sheet after the SPAC, and multi-government trial history; risk that timing becomes commoditised (Vector Atomic/IonQ, Safran, Microchip) and that inertial sensors remain pre-production.",
+   "major_competitors": [
+    "Vector Atomic (now IonQ) - optical clocks",
+    "AOSense (quantum IMU; Lockheed TQS team)",
+    "Q-CTRL",
+    "SandboxAQ (AQNav)",
+    "Safran Federal Systems",
+    "Microchip / Orolia (timing)",
+    "Exail (gravimeters)",
+    "QuEra / Pasqal / Atom Computing (computing side)"
+   ],
+   "obvious_weaknesses": "Revenue still small ($43M FY2026 guidance) and split across computing, sensing and software; defense contracts are mostly sub-$3M SBIR-class except APFIT; no named program-of-record insertion for Tiqker; public-company disclosure burden; sensor products remain at prototype/trial TRL.",
+   "evidence_user_adoption": "Demonstrations with Army C5ISR, UK MOD, Royal Navy, Australian Army; first UK commercial Tiqker sale (2024); APFIT fielding funding. Moderate.",
+   "evidence_repeat_procurement": "Multiple sequential U.S. awards (SBIR -> TACFI -> APFIT) and repeat UK/Australian engagements; no multi-unit production order disclosed. MEDIUM.",
+   "evidence_prototype_to_production": "APFIT ($11M, 2024) is the strongest transition signal; fielded quantities undisclosed. Inertial sensors: none. Rating: partial.",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "PROCESS",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "COLLECT",
+     "echelon": "tactical_unit"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE (from public repos and product docs, not job posts): Python-centric quantum software (Cirq/Qiskit integrations in Superstaq), FPGA/embedded control for sensor hardware, ML for the Army contextual-navigation work; UK-based hardware manufacturing engineering.",
+   "confidence_notes": "SPAC/listing facts HIGH (multiple sources). APFIT $11M HIGH (company release, CSIS-style report, DARPA success-story dataset). Army $2M, Navy $1M, Australian contract dates: MEDIUM (titles from company newsroom archive; dates not captured). UK flight-trial partner names (BAE/QinetiQ) from memory: MEDIUM. Employee count: insufficient. Primary infleqtion.com URLs could not be opened in-session; recovered via GitHub-hosted newsroom index.",
+   "sources": [
+    {
+     "url": "https://infleqtion.com/infleqtion-secures-11-million-dod-apfit-award-to-accelerate-deployment-of-quantum-timing-for-defense-applications/",
+     "title": "Infleqtion Secures $11 Million DoD APFIT Award",
+     "pub_date": "2024",
+     "type": "company"
+    },
+    {
+     "url": "https://www.darpa.mil/sites/default/files/attachment/2026-02/infleqtion-success-story.pdf",
+     "title": "DARPA/DoD SBIR success story on Infleqtion APFIT+TACFI (cited by sbir-analytics dataset)",
+     "pub_date": "2026-02",
+     "type": "gov"
+    },
+    {
+     "url": "https://www.citybiz.co/article/741457/infleqtion-to-go-public-through-merger-with-churchill-capital-corp-x/",
+     "title": "Infleqtion to Go Public Through Merger with Churchill Capital Corp X",
+     "pub_date": "2025-09-08",
+     "type": "independent"
+    },
+    {
+     "url": "https://quantumcomputingreport.com/infleqtion-to-go-public-through-merger-with-churchill-capital-corp-x-at-1-8-billion-valuation/",
+     "title": "Infleqtion SPAC at $1.8B valuation; sensors sold to DoD/NASA/UK",
+     "pub_date": "2025-09-08",
+     "type": "independent"
+    },
+    {
+     "url": "https://infleqtion.com/un-jammable-quantum-tech-takes-flight-to-boost-uks-resilience-against-hostile-actors/",
+     "title": "Un-Jammable Quantum Tech Takes Flight (UK trial)",
+     "pub_date": "2024",
+     "type": "company"
+    },
+    {
+     "url": "https://github.com/Infleqtion/client-superstaq",
+     "title": "Superstaq open-source client SDK",
+     "pub_date": "2026-09",
+     "type": "company"
+    },
+    {
+     "url": "https://github.com/donutloop/donutloop-genesis/blob/2e037ccae741b03a3f35e83a99bb55f6c6e05810/child_papers/infleqtion.md",
+     "title": "Third-party index of 176 Infleqtion newsroom releases (defense contracts, revenue)",
+     "pub_date": "2026-08-12",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/hollomancer/sbir-analytics",
+     "title": "SBIR transition ground-truth dataset (Infleqtion APFIT+TACFI row)",
+     "pub_date": "2026",
+     "type": "independent"
+    }
+   ]
+  },
+  {
+   "name": "Xona Space Systems",
+   "aka": "Xona; PULSAR LEO PNT service; Xona Space Systems UK Ltd",
+   "founding_year": 2019,
+   "headquarters": "Burlingame, California, USA (earlier San Mateo); satellite manufacturing facility opened in Burlingame April 2026",
+   "public_private": "private",
+   "employee_count_approx": "Public evidence insufficient. (Ashby job board active; likely 100+ after $170M Series C; INFERENCE, LOW)",
+   "founders": [
+    "Brian Manning (co-founder, CEO)",
+    "Tyler Reid (co-founder, CTO)",
+    "additional Stanford-trained aerospace engineer co-founders (names not verified in-session)"
+   ],
+   "founder_backgrounds": "Stanford GPS/aerospace lab lineage (Reid: PhD navigation researcher, ex-Ford/Google-adjacent PNT work; Manning: aerospace engineer, ex-SpaceX-adjacent per memory, MEDIUM). Original motivation was autonomous-vehicle-grade positioning, pivoted toward resilience/defense as jamming grew (MIT Technology Review, 2025).",
+   "total_disclosed_funding_usd": "~$320M+ equity: $1M pre-seed (May 14, 2020), ~$15M (2022), $19M Series A (May 8, 2024), $92M Series B (Jun 26, 2025; total then $150M), $170M Series C (Mar 26, 2026); plus $20M non-dilutive SpaceWERX award and NSF SBIR. PitchBook-derived dataset shows $205M raised as of Jun 2025 including grants.",
+   "latest_valuation": "Public evidence insufficient.",
+   "major_investors": [
+    "Craft Ventures (Series B lead)",
+    "Mohari Ventures Natural Capital (reported Series C lead, LOW)",
+    "Lockheed Martin Ventures",
+    "Seraphim Space",
+    "Toyota Ventures",
+    "Future Ventures",
+    "Stellar Ventures",
+    "First Spark Ventures",
+    "Industrious Ventures",
+    "NGP Capital",
+    "Trimble Ventures",
+    "Murata",
+    "Space Capital",
+    "1517 Fund",
+    "MaC Venture Capital",
+    "Trucks VC",
+    "SpaceWERX (non-dilutive)",
+    "U.S. National Science Foundation (SBIR)"
+   ],
+   "c4isr_products": [
+    {
+     "name": "PULSAR LEO PNT service",
+     "description": "Planned 258-satellite constellation at ~1,080 km broadcasting L-band navigation signals ~100x stronger than GPS at the ground, with encrypted/authenticated ranging ('watermark'; world-first authenticated pseudorange from orbit claimed from July 2025 Pulsar-0 transmissions) and centimeter-class accuracy with corrections. FCC authorised full deployment Aug 3, 2026 (16 sats initially; milestones 2032/2035). Existing GNSS chipsets adopt via firmware through 'Pulsar Verified' partners.",
+     "input_process_output_user": "Input (user side): Pulsar + GNSS RF signals. Process: multi-constellation receiver firmware from partners (Trimble, Septentrio, Topcon, Furuno, Murata, Locus Lock). Output: position/timing with anti-jam margin and spoof detection. Users: any GNSS-dependent platform; defense timing/navigation users are one of eight target verticals."
+    },
+    {
+     "name": "Pulsar-0 in-orbit validation satellite",
+     "description": "149 kg spacecraft (Aerospacelab bus) launched June 23, 2025 on SpaceX Transporter-14 to ~500 km; >350 live passes over four continents by Aug 2026; used to map GPS jamming across Europe and the Middle East (space.com, Jun 2026).",
+     "input_process_output_user": "Output: live Pulsar test signals and GNSS-interference observations. Users: receiver partners, timing customers, Xona engineers."
+    },
+    {
+     "name": "PNT algorithms supplied to Astranis (subcontract)",
+     "description": "Xona provides PNT algorithms for Astranis's GPS-redundancy satellite effort (Astranis is a Space Force Resilient GPS awardee) - Xona as partner/subcontractor.",
+     "input_process_output_user": "Output: navigation signal/algorithm design for a MEO/GEO PNT payload. User: Astranis / Space Force R-GPS (INFERENCE on program)."
+    }
+   ],
+   "exact_problem_solved": "Replaces or augments weak, easily jammed MEO GPS signals with strong, authenticated LEO signals so receivers keep accurate position and time in jammed, spoofed, urban or indoor conditions.",
+   "primary_users": [
+    "GNSS receiver and timing OEM partners",
+    "Space Force / SpaceWERX evaluators",
+    "Astranis R-GPS program (via subcontract)",
+    "Commercial autonomy, agriculture, telecom-timing customers"
+   ],
+   "primary_buyers": [
+    "SpaceWERX / Space Force (SBIR-derived $20M non-dilutive)",
+    "NSF (SBIR Phase I, 2020)",
+    "Astranis (subcontract)",
+    "Commercial receiver/timing OEMs"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "DISSEMINATE"
+   ],
+   "mission_layer": [
+    "joint (PNT infrastructure)",
+    "space",
+    "maritime",
+    "air",
+    "ground"
+   ],
+   "segment_ids": [
+    "S11"
+   ],
+   "hw_sw_mix": "both - satellites, payload and signal design (hardware) plus receiver firmware/SDK and ground software.",
+   "market_posture": "dual-use",
+   "contracts": [
+    {
+     "title": "SpaceWERX non-dilutive award(s) for Pulsar (cumulative $20M as of June 2025)",
+     "customer": "U.S. Space Force",
+     "contracting_org": "SpaceWERX (AFWERX Space) - SBIR/STTR office",
+     "vehicle_type": "SBIR (STRATFI/TACFI structure is INFERENCE)",
+     "ceiling": "$20M reported",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$20M (company statement in Series B release)",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "by 2025-06-26",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://www.prnewswire.com/news-releases/xona-raises-92m-to-rebuild-satellite-navigation-for-a-new-era-302491586.html",
+     "pub_date": "2025-06-26",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "NSF SBIR Phase I - LEO navigation (award 2015140)",
+     "customer": "National Science Foundation",
+     "contracting_org": "NSF SBIR",
+     "vehicle_type": "SBIR",
+     "ceiling": "~$0.25M (standard NSF Phase I; INFERENCE)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2020",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "research",
+     "source_url": "https://github.com/eduardomtz20171/GlobantChallenge/blob/3d96d4945c0c1e045fbd328090356cc341fdb01c/data/raw/2015140.xml (NSF award XML mirror)",
+     "pub_date": "2020",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "PNT algorithms for Astranis GPS-redundancy satellite (Space Force Resilient GPS context)",
+     "customer": "Astranis (prime) / U.S. Space Force",
+     "contracting_org": "Astranis",
+     "vehicle_type": "subcontract",
+     "ceiling": "Public evidence insufficient.",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2025-2026 (reported Mar 2026)",
+     "period_of_performance": "",
+     "prime_or_sub": "sub",
+     "prototype_or_production": "prototype",
+     "source_url": "https://github.com/MajorDigest/majordigest.github.io/blob/c7bd227fe5b5b57b6004150a19974069c352e55f/tech/2026/03/24/defense-tech-most-innovative-companies-2026/index.html",
+     "pub_date": "2026-03-24",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "FCC authorization for Pulsar constellation (regulatory, not a contract)",
+     "customer": "n/a",
+     "contracting_org": "FCC",
+     "vehicle_type": "FAR",
+     "ceiling": "n/a",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "n/a",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2026-08-03",
+     "period_of_performance": "",
+     "prime_or_sub": "n/a",
+     "prototype_or_production": "licence for 258-sat commercial operation; 16 initial",
+     "source_url": "https://github.com/ntutangyun/wireless_comm_knowledge_base/blob/f427cda53b12bc476d1a2ac2f314dd97c30e2ed1/entries/2026-08-28_xona-pulsar-fcc-full-constellation-authorization.md",
+     "pub_date": "2026-08-28",
+     "confidence": "MEDIUM"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "No operational service; Pulsar-0 IOV satellite live since June 2025 with 350+ test passes; six production satellites planned for launch Oct 2026; basic PNT service targeted early 2027.",
+     "evidence": "space.com (Jun 20, 2026) and FCC authorization summary (Aug 2026).",
+     "source_url": "https://www.space.com/space-exploration/satellites/its-quite-a-bit-more-than-we-expected-satellite-reveals-immense-scale-of-gps-signal-tampering"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Huginn hosted-payload demo (Transporter-5)",
+     "year": "2022",
+     "note": "First on-orbit test of Xona signal as hosted payload on Sherpa-AC1.",
+     "source_url": "https://github.com/vsinha/launchdata (launchdata-2022.json)"
+    },
+    {
+     "event": "Pulsar-0 authenticated ranging from orbit",
+     "year": "2025",
+     "note": "arXiv 2509.21601 (Sept 25, 2025) documents watermark authentication validated with July 2025 orbital transmissions recorded at Burlingame.",
+     "source_url": "https://arxiv.org/abs/2509.21601"
+    },
+    {
+     "event": "Pulsar-0 GNSS-interference mapping over Europe/Middle East",
+     "year": "2026",
+     "note": "Up to 30 dB GPS signal degradation observed from 500 km; used as a demonstration of LEO-PNT value.",
+     "source_url": "https://www.space.com/space-exploration/satellites/its-quite-a-bit-more-than-we-expected-satellite-reveals-immense-scale-of-gps-signal-tampering"
+    }
+   ],
+   "integration_partners": [
+    "Trimble",
+    "Septentrio",
+    "Topcon",
+    "Furuno",
+    "Murata",
+    "Locus Lock",
+    "Astranis",
+    "Aerospacelab (Pulsar-0 bus)",
+    "NRC Canada (collaboration)",
+    "Lockheed Martin Ventures (strategic investor)"
+   ],
+   "apis_sdks_open_interfaces": "No public developer API or portal as of July 2026 (API Evangelist profile); access via 'Pulsar Verified' partner program under direct contact. A Software Development Kit for other satellite providers to host/transmit Pulsar-compatible signals was announced in early 2026 (Fast Company-type coverage). Signal ICD not public (encrypted/authenticated service).",
+   "security_classification_requirements": "Public evidence insufficient. Commercial encrypted signal; any M-code-like or military-only service tier and the Astranis/R-GPS work would bring ITAR/EAR and possibly classified program requirements (INFERENCE).",
+   "allied_international_activity": "Xona Space Systems UK Ltd (UK entity), NRC Canada collaboration, Seraphim (UK) investor, Japanese partners (Murata, Furuno, Topcon). No allied government contracts found.",
+   "technical_differentiator": "Purpose-built LEO navigation signal (not repurposed comms downlink), cryptographic ranging authentication demonstrated from orbit, and a receiver-ecosystem strategy that avoids new user hardware.",
+   "suspected_moat": "Spectrum licence and FCC authorization, first-mover receiver-partner integrations, patents on signal design; but capital intensity and constellation execution risk are the dominant uncertainties, and Starlink/Iridium/TrustPoint/Chinese LEO-PNT entrants could compress pricing.",
+   "major_competitors": [
+    "TrustPoint (LEO PNT; five Phase II SBIRs, $4M Space Force TACFI 2026)",
+    "Iridium STL / Satelles",
+    "Astranis, Axient, L3Harris, Sierra Space (Space Force R-GPS awardees)",
+    "ESA LEO-PNT demonstrator (GMV/Thales)",
+    "Geely Geespace / CentiSpace (China)",
+    "NextNav (terrestrial)",
+    "Starlink (potential PNT)"
+   ],
+   "obvious_weaknesses": "Service not available before 2027; only one test satellite in orbit; LEO signals are still jammable (stronger but not immune); revenue dependent on partner receiver firmware adoption; large future capex; defense buyers have not yet signed procurement contracts.",
+   "evidence_user_adoption": "Receiver OEMs testing Pulsar-0 in products; timing-company agreements reported; no defense unit adoption. Weak-to-moderate.",
+   "evidence_repeat_procurement": "Cumulative $20M SpaceWERX funding implies multiple sequential SBIR-family awards (MEDIUM); no procurement of service yet.",
+   "evidence_prototype_to_production": "Transition is to commercial service (FCC licence, production satellites, factory) rather than to a DoD program; no DoD production contract.",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "theater"
+    },
+    {
+     "chain_step": "COLLECT",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "DISSEMINATE_TASK",
+     "echelon": "joint"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE: Ashby-hosted job board; hiring historically for RF/GNSS signal processing, satellite GNC, ground segment software and receiver firmware (C/C++, Python); no evidence of a C2/battle-management software team.",
+   "confidence_notes": "Funding rounds and dates: HIGH (PRNewswire, TechCrunch, Via Satellite via GitHub-hosted citations). SpaceWERX $20M: MEDIUM (company release wording). Astranis subcontract: MEDIUM (trade press). FCC authorization: MEDIUM (secondary summary). Founders' detailed backgrounds: MEDIUM. Series C lead investor: LOW. Company site and press wires could not be opened directly in-session.",
+   "sources": [
+    {
+     "url": "https://www.prnewswire.com/news-releases/xona-raises-92m-to-rebuild-satellite-navigation-for-a-new-era-302491586.html",
+     "title": "Xona Raises $92M Series B; $20M SpaceWERX award",
+     "pub_date": "2025-06-26",
+     "type": "company"
+    },
+    {
+     "url": "https://techcrunch.com/2024/05/08/xona-space-systems-closes-19m-series-a-to-build-out-ultra-accurate-gps-alternative/",
+     "title": "Xona closes $19M Series A",
+     "pub_date": "2024-05-08",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.satellitetoday.com/finance/2025/06/26/xona-raises-close-to-100m-in-new-funding-round/",
+     "title": "Xona raises close to $100M",
+     "pub_date": "2025-06-26",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.xonaspace.com/news/series-c",
+     "title": "$170M Series C to Accelerate Pulsar's Path to Scale",
+     "pub_date": "2026-03-26",
+     "type": "company"
+    },
+    {
+     "url": "https://arxiv.org/abs/2509.21601",
+     "title": "World's First Authenticated Satellite Pseudorange from Orbit (Xona, Pulsar-0)",
+     "pub_date": "2025-09-25",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.space.com/space-exploration/satellites/its-quite-a-bit-more-than-we-expected-satellite-reveals-immense-scale-of-gps-signal-tampering",
+     "title": "Satellite reveals immense scale of GPS signal tampering (Pulsar-0)",
+     "pub_date": "2026-06-20",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/CKalitin/mcdowell-dataset-analysis",
+     "title": "McDowell launch dataset: 'Pulsar IOV' 149 kg, Falcon 9, 2025-06-23",
+     "pub_date": "2025",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/api-evangelist/xona-space-systems",
+     "title": "API Evangelist profile: no public API; Pulsar Verified partners",
+     "pub_date": "2026-07",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/18kimn/pitchbook-tools/blob/123db106f5488794279dc7f6b1645f096833bf1f/defense.csv",
+     "title": "PitchBook-derived defense dataset row for Xona ($205M raised, investors incl. SpaceWERX, NSF, LM Ventures)",
+     "pub_date": "2025-06-26",
+     "type": "financial"
+    }
+   ]
+  },
+  {
+   "name": "TRX Systems",
+   "aka": "TRX Systems, Inc.; NEON; DAPS / DAPS GEN II (Dismounted Assured PNT System)",
+   "founding_year": 2004,
+   "headquarters": "Greenbelt, Maryland, USA (6411 Ivy Lane)",
+   "public_private": "private",
+   "employee_count_approx": "~56 on LinkedIn (2026 third-party pack); true headcount likely higher for a production program of record (INFERENCE). One aggregator states TRX was acquired by 'ACR Group' in Jan 2022 - unverified, LOW.",
+   "founders": [
+    "Carole Teolis (co-founder, CTO; signal processing/controls)",
+    "Carol Politi (CEO since ~2011; may be an early hire rather than founder)",
+    "Benjamin Funk (co-founder per memory, LOW)"
+   ],
+   "founder_backgrounds": "University of Maryland-linked engineering team; Teolis secured early DoD/TSWG and Maryland Fire & Rescue development funding for GPS-denied tracking; Politi came from telecom (2011 CTOs-on-the-move record). 2013 ACA Luis Villalobos Award for innovation.",
+   "total_disclosed_funding_usd": "Minimal venture capital: ~$3M Series A (pack) / $2.9M lifetime per aggregator (LOW); growth funded by Army SBIR (~$4M Phase I/II 2008-2020) and production revenue.",
+   "latest_valuation": "Public evidence insufficient.",
+   "major_investors": [
+    "Angel/ACA-affiliated investors (2013 award)",
+    "Army SBIR / xTechSearch (non-dilutive)"
+   ],
+   "c4isr_products": [
+    {
+     "name": "DAPS GEN II (Dismounted Assured PNT System, Generation II)",
+     "description": "Soldier-worn assured-PNT hub replacing the DAGR: M-Code GPS, inertial sensors, multi-GNSS, dead reckoning, timing holdover and threat (jamming/spoofing) monitoring; MIL-STD-810G, IP67, CBRNE/HEMP hardened, hot-swap batteries, DAGR-J2-compatible connector and DS-101 keyfill; feeds ATAK/Nett Warrior end-user devices. Company: 'the only proven production system being fielded to deliver M-code GPS to dismounted warfighters' (company claim).",
+     "input_process_output_user": "Input: M-code/multi-GNSS RF, IMU, barometer, timing. Process: sensor fusion with integrity/threat monitoring. Output: assured position/time to Nett Warrior/ATAK, radios and weapons systems. User: dismounted soldiers and leaders; Army PM PNT (PEO IEW&S) as program office."
+    },
+    {
+     "name": "NEON Personnel Tracker / Signal Mapper",
+     "description": "Infrastructure-free 3D indoor/GPS-denied tracking for first responders and SOF, with Android API (NEON Location Service; docs.trxsystems.com); used in DoD/SOCOM exercises per pack.",
+     "input_process_output_user": "Input: body-worn IMU/baro/ranging + map data. Output: 3D location/heading/floor to an Android app or command display. User: fire/rescue, SOF, security teams."
+    }
+   ],
+   "exact_problem_solved": "Gives dismounted soldiers trusted position and time when GPS is jammed/spoofed or unavailable (indoors, urban, under canopy), distributing it to their end-user devices and radios.",
+   "primary_users": [
+    "Dismounted soldiers and small-unit leaders (Army BCTs)",
+    "Nett Warrior/ATAK users",
+    "SOF and first responders (NEON)"
+   ],
+   "primary_buyers": [
+    "U.S. Army PEO IEW&S / PM PNT (Assured PNT program)",
+    "Army Contracting Command (ordering activity)",
+    "Public-safety agencies (NEON)"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "PROCESS",
+    "FUSE",
+    "DISSEMINATE"
+   ],
+   "mission_layer": [
+    "ground maneuver",
+    "fires (assured position/time for targeting)",
+    "SOF",
+    "public safety"
+   ],
+   "segment_ids": [
+    "S11",
+    "S07"
+   ],
+   "hw_sw_mix": "both - ruggedised hardware with proprietary navigation-fusion software; NEON is software-led.",
+   "market_posture": "defense-native",
+   "contracts": [
+    {
+     "title": "DAPS GEN II production IDIQ (Army program of record replacing DAGR)",
+     "customer": "U.S. Army (PEO IEW&S / PM PNT)",
+     "contracting_org": "Army Contracting Command (INFERENCE on office)",
+     "vehicle_type": "IDIQ",
+     "ceiling": "$402M",
+     "obligated": "Public evidence insufficient. (USAspending not reachable in-session)",
+     "awarded_value": "$402M ceiling, seven years",
+     "funded_amount": "Delivery orders: $9.9M (Mar 8, 2024); a third delivery order reported Apr 2025 (value undisclosed)",
+     "task_orders": "At least three delivery orders reported by Apr 2025",
+     "date": "2023-05-04",
+     "period_of_performance": "7 years (to ~2030)",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "production (full-rate production program of record per Army SBIR transition story)",
+     "source_url": "https://armysbir.army.mil/news/xtech-winner-delivers-program-of-record-technology-for-gps-denied-soldiers/",
+     "pub_date": "2024",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "DAPS GEN II delivery order",
+     "customer": "U.S. Army",
+     "contracting_org": "Army Contracting Command",
+     "vehicle_type": "IDIQ",
+     "ceiling": "n/a (order under $402M IDIQ)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$9.9M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2024-03-08",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "production",
+     "source_url": "https://www.trxsystems.com/blog/us-army-contract-award",
+     "pub_date": "2024-03-08",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "Army SBIR Phase II - Distributed Navigation Solutions (A11-097)",
+     "customer": "U.S. Army",
+     "contracting_org": "Army (W15P7T = CECOM/ACC-APG)",
+     "vehicle_type": "SBIR",
+     "ceiling": "Standard Phase II (~$1M; INFERENCE)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2013",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://github.com/hollomancer/sbir-analytics (contract W15P7T-13-C-A405)",
+     "pub_date": "2026",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Air Force SBIR Phase I - Mobile activity tracking for training assessment (AF171-033)",
+     "customer": "U.S. Air Force",
+     "contracting_org": "AFRL (FA8650)",
+     "vehicle_type": "SBIR",
+     "ceiling": "Phase I",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2017",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "research",
+     "source_url": "https://github.com/hollomancer/sbir-analytics (contract FA8650-17-P-6851)",
+     "pub_date": "2026",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "DAPS Gen 1 / Gen 1.1 / Gen 1.2 awards and fielding (2018-2021)",
+     "customer": "U.S. Army PM PNT",
+     "contracting_org": "Army",
+     "vehicle_type": "FAR",
+     "ceiling": "Public evidence insufficient.",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2018-2021 (from memory)",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "low-rate production/fielding (2nd Cavalry Regiment in Europe ~2019-2020 per memory)",
+     "source_url": "Public evidence insufficient.",
+     "pub_date": "Public evidence insufficient.",
+     "confidence": "LOW"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "DAPS GEN II fielding to Army units under the program of record; DAPS Gen 1.x fielded earlier (incl. 2CR in Europe, from memory).",
+     "evidence": "Army SBIR transition story ('program-of-record technology for GPS-denied soldiers'), repeated delivery orders, Joint Navigation Conference 2026 showing.",
+     "source_url": "https://armysbir.army.mil/news/xtech-winner-delivers-program-of-record-technology-for-gps-denied-soldiers/"
+    },
+    {
+     "what": "NEON used by public-safety agencies and in DoD/SOCOM exercises.",
+     "evidence": "Third-party pack channel notes; NEON API samples public since 2018.",
+     "source_url": "https://github.com/trxsystems/NEON-API-Samples"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Joint Navigation Conference (JNC) 2026",
+     "year": "2026",
+     "note": "DAPS GEN II shown as Army program-of-record assured PNT.",
+     "source_url": "https://github.com/geobabbler/neptune (geofeeds briefing 2026-05-30)"
+    },
+    {
+     "event": "Army xTechSearch 3",
+     "year": "2019",
+     "note": "Winner; Army SBIR credits xTech + SBIR for the DAPS transition.",
+     "source_url": "https://armysbir.army.mil/news/xtech-winner-delivers-program-of-record-technology-for-gps-denied-soldiers/"
+    }
+   ],
+   "integration_partners": [
+    "ATAK / TAK ecosystem",
+    "Nett Warrior (PEO Soldier)",
+    "M-code receiver suppliers (MGUE vendors; INFERENCE)",
+    "Garmin devices in DAPS ensembles (per wiki, LOW)"
+   ],
+   "apis_sdks_open_interfaces": "NEON Android API with public sample apps (GitHub trxsystems/NEON-API-Samples, 2018-2024) and docs.trxsystems.com; subscription-licensed. DAPS uses standard DAGR J2/DE-15 and DS-101 keyfill interfaces and ATAK integration; no public DAPS SDK.",
+   "security_classification_requirements": "M-code/MGUE integration and keyfill imply CUI/ITAR handling and COMSEC accountability; company staff likely need clearances for program work (INFERENCE).",
+   "allied_international_activity": "Public evidence insufficient. (NEON has been marketed internationally; no allied DAPS sales found).",
+   "technical_differentiator": "Only vendor publicly credited with a fielded M-code dismounted assured-PNT program of record; soldier-borne sensor-fusion IP (patent family on mapping/tracking) proven across DAPS generations.",
+   "suspected_moat": "Incumbency on a seven-year Army IDIQ, M-code integration experience, and soldier-system interface compliance; but Gen III re-compete risk and hardware commoditisation.",
+   "major_competitors": [
+    "Collins Aerospace (MAPS mounted assured PNT; M-code)",
+    "L3Harris",
+    "BAE Systems (M-code modules)",
+    "Safran Federal Systems",
+    "Honeywell",
+    "Anello Photonics",
+    "TrustPoint / Xona (future LEO-PNT signals)",
+    "Garmin (soldier devices)"
+   ],
+   "obvious_weaknesses": "Single-customer concentration; small company relative to program scale; IDIQ ceiling far above obligations seen so far (~$10M-scale orders); hardware margins; limited visibility into ownership (possible 2022 acquisition) and funding.",
+   "evidence_user_adoption": "Strong: program of record with fielding to Army units; repeat delivery orders.",
+   "evidence_repeat_procurement": "Strong: DAPS Gen 1 -> Gen 1.1/1.2 -> Gen II recompete win (2023) and at least three Gen II delivery orders (2024-2025).",
+   "evidence_prototype_to_production": "Strong: documented SBIR/xTech -> program-of-record transition (Army SBIR case study).",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "FUSE",
+     "echelon": "individual_platform"
+    },
+    {
+     "chain_step": "DISSEMINATE_TASK",
+     "echelon": "tactical_unit"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE: embedded C/C++ firmware, Android (Java/Kotlin) for NEON and ATAK plugins, sensor-fusion/estimation engineering; small-team, hardware-centric organisation; no evidence of cloud/distributed-systems hiring.",
+   "confidence_notes": "$402M IDIQ and program-of-record status: HIGH (Army SBIR site, Defense News, company). Award date 2023-05-04 and $9.9M order: MEDIUM (company blog dates via third-party pack). Gen 1 history and 2CR fielding: LOW-MEDIUM (memory, not verified in-session). ACR Group acquisition: LOW. USAspending obligations could not be pulled.",
+   "sources": [
+    {
+     "url": "https://armysbir.army.mil/news/xtech-winner-delivers-program-of-record-technology-for-gps-denied-soldiers/",
+     "title": "xTech winner delivers program-of-record technology for GPS-denied soldiers (DAPS GEN II)",
+     "pub_date": "2024",
+     "type": "gov"
+    },
+    {
+     "url": "https://www.trxsystems.com/blog/daps-gen-ii",
+     "title": "TRX Systems DAPS GEN II award blog",
+     "pub_date": "2023-05-04",
+     "type": "company"
+    },
+    {
+     "url": "https://www.trxsystems.com/blog/us-army-contract-award",
+     "title": "TRX Systems $9.9M Army delivery order",
+     "pub_date": "2024-03-08",
+     "type": "company"
+    },
+    {
+     "url": "https://www.defensenews.com/",
+     "title": "Defense News: 'TRX Systems wins $402 million deal for jam-resistant navigation gear' (quoted in third-party pack; exact URL not captured)",
+     "pub_date": "2023-05",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/trxsystems/NEON-API-Samples",
+     "title": "NEON Android API sample apps",
+     "pub_date": "2024-07",
+     "type": "company"
+    },
+    {
+     "url": "https://github.com/hollomancer/sbir-analytics",
+     "title": "SBIR analytics ground-truth dataset (TRX transition and SBIR contract IDs)",
+     "pub_date": "2026",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/SantaJordan/CTOx/tree/96620f69c9e0ec11e9e27f846825eef324a5d453/prospecting-barry/research",
+     "title": "Third-party prospecting pack on TRX Systems (quotes company site and Defense News)",
+     "pub_date": "2026",
+     "type": "independent"
+    }
+   ]
+  },
+  {
+   "name": "Distributed Spectrum",
+   "aka": "Distributed Spectrum, Inc.; 'The World's First AI Signals Expert'",
+   "founding_year": 2020,
+   "headquarters": "New York, New York, USA (99 Madison Ave)",
+   "public_private": "private",
+   "employee_count_approx": "~14 in early 2025 (job post: 'a few months ago we were 7 engineers... more than doubled to 14'); ~36-38 on LinkedIn by 2026 (third-party pack).",
+   "founders": [
+    "Alex Wulff (co-founder, CEO)",
+    "Ben Harpe (co-founder, COO)",
+    "Isaac Struhl (co-founder, CTO)"
+   ],
+   "founder_backgrounds": "Wulff: circuit design, signal processing and radio communications; prior work at Raytheon and Lockheed Martin; author of a radio-systems textbook. Harpe: strategy/operations at a multi-billion-dollar startup, consulting-firm CEO, Microsoft and Bridgewater. Struhl: computational biology/ML research, Google, lead developer at a media startup. (Company 'about' page via pack.)",
+   "total_disclosed_funding_usd": "$29M+ total: $25M Series A closed Mar 18, 2025 (oversubscribed) plus earlier seed rounds.",
+   "latest_valuation": "Public evidence insufficient.",
+   "major_investors": [
+    "Conviction (Sarah Guo) - co-lead",
+    "Shield Capital - co-lead",
+    "Nat Friedman (NFDG) - co-lead",
+    "Felicis",
+    "XFund",
+    "Angels: Gen. Stanley McChrystal, Eric Glyman, Chris Re, Arash Ferdowsi, Matt MacInnis, Zak Stone, Palantir executives"
+   ],
+   "c4isr_products": [
+    {
+     "name": "Edge-AI RF sensors + signal-identification software",
+     "description": "Small, low-cost sensors built from hot-swappable commercial components that run on-device AI to detect and identify emitters (tactical radios, GPS jammers, drone links, etc.), map threats and form a distributed 'detection mesh'; positioned between $100 COTS SDRs and $1M+ legacy EW systems and usable without trained RF operators.",
+     "input_process_output_user": "Input: wideband RF I/Q from COTS SDR front-ends. Process: on-sensor ML classification/identification, geolocation across the mesh (INFERENCE). Output: real-time alerts and emitter maps to a web/ops UI and 'downstream integrations'. Users: tactical units, EW/ES cells, security forces, intelligence-agency collectors."
+    }
+   ],
+   "exact_problem_solved": "Lets non-specialist units see and identify what is emitting around them (radios, jammers, drones) cheaply and at scale, instead of depending on scarce, expensive EW systems and expert operators.",
+   "primary_users": [
+    "Air Force units via AFRL/AFWERX pilots",
+    "Intelligence-community collectors (contracts referenced, details undisclosed)",
+    "Army/SOF spectrum-awareness experimenters (INFERENCE)"
+   ],
+   "primary_buyers": [
+    "AFRL / AFWERX (SBIR Phase II; FA8649 purchase order FY2024)",
+    "Undisclosed DoD and IC customers ($7M+ in awards claimed)",
+    "Picogrid (channel partner on an Air Force contract, 2023)"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "PROCESS",
+    "IDENTIFY",
+    "VISUALIZE"
+   ],
+   "mission_layer": [
+    "EW / spectrum awareness",
+    "force protection / counter-UAS",
+    "ISR (SIGINT-adjacent)"
+   ],
+   "segment_ids": [
+    "S12",
+    "S03"
+   ],
+   "hw_sw_mix": "both - proprietary software on commodity sensor hardware.",
+   "market_posture": "defense-native",
+   "contracts": [
+    {
+     "title": "AFRL SBIR Phase II (RF sensing)",
+     "customer": "U.S. Air Force",
+     "contracting_org": "AFRL / AFWERX",
+     "vehicle_type": "SBIR",
+     "ceiling": "Undisclosed (standard Phase II up to ~$1.25-1.8M; INFERENCE)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-2024",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://www.distributedspectrum.com/series-a-announcement",
+     "pub_date": "2025-03-18",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "AFWERX purchase order FA864924P0746 (UEI VJHHQK99CRH3, CAGE 8QXL9)",
+     "customer": "U.S. Air Force",
+     "contracting_org": "AFWERX (FA8649)",
+     "vehicle_type": "SBIR",
+     "ceiling": "Public evidence insufficient.",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "FY2024",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://www.usaspending.gov/ (contract FA864924P0746; not retrievable in-session)",
+     "pub_date": "2024",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "Air Force contract secured with Picogrid as partner",
+     "customer": "U.S. Air Force",
+     "contracting_org": "Public evidence insufficient.",
+     "vehicle_type": "SBIR (INFERENCE)",
+     "ceiling": "Public evidence insufficient.",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-10-03 (announced)",
+     "period_of_performance": "",
+     "prime_or_sub": "partner/sub (INFERENCE)",
+     "prototype_or_production": "prototype",
+     "source_url": "https://picogrid.com/newsroom/picogrid-partners-with-distributed-spectrum-securing-an-air-force-contract",
+     "pub_date": "2023-10-03",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "'$7M in DoD and IC contracts closed in 60 days' (company claim, early 2025)",
+     "customer": "Undisclosed DoD and intelligence-community customers",
+     "contracting_org": "Public evidence insufficient.",
+     "vehicle_type": "SBIR",
+     "ceiling": "Public evidence insufficient.",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$7M+ aggregate (company claim)",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "early 2025",
+     "period_of_performance": "",
+     "prime_or_sub": "Public evidence insufficient.",
+     "prototype_or_production": "prototype (INFERENCE)",
+     "source_url": "https://www.distributedspectrum.com/series-a-announcement",
+     "pub_date": "2025-03-18",
+     "confidence": "LOW"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "Company/pack describe sensors as 'fielded' under DoD and IC contracts; no named unit, theater or quantity.",
+     "evidence": "Series A announcement and third-party pack; no independent confirmation.",
+     "source_url": "https://www.distributedspectrum.com/series-a-announcement"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Public evidence insufficient.",
+     "year": "",
+     "note": "No named exercise (e.g., NetModX, Project Convergence, EDGE) found in reachable sources.",
+     "source_url": ""
+    }
+   ],
+   "integration_partners": [
+    "Picogrid (edge data/C2 platform)"
+   ],
+   "apis_sdks_open_interfaces": "Marketing cites 'unlimited downstream integrations'; no public API, SDK or developer program (API Evangelist, Jul 2026). No evidence of TAK/CoT or Lattice integration.",
+   "security_classification_requirements": "IC contracts imply cleared staff and possibly classified signal libraries (INFERENCE). Public evidence insufficient on CMMC/ATO status.",
+   "allied_international_activity": "Public evidence insufficient.",
+   "technical_differentiator": "Edge-AI signal identification on commodity hardware designed for untrained users and meshed deployment; emphasises cost and scale over sensitivity.",
+   "suspected_moat": "Labeled signal datasets and classifier models accumulated from deployments; speed of iteration; investor network (Shield, Conviction, McChrystal). Weak hardware moat; large primes and Anduril can replicate.",
+   "major_competitors": [
+    "Hidden Level (passive RF sensing)",
+    "CRFS",
+    "Guardian RF",
+    "Anduril (EW/Pulsar)",
+    "Dedrone/Axon and other counter-UAS RF vendors",
+    "KrakenSDR / open-source SDR tooling",
+    "L3Harris, BAE, Leonardo DRS, Sierra Nevada (legacy ES systems)"
+   ],
+   "obvious_weaknesses": "Very small team; contract base is SBIR-scale and mostly undisclosed; no program of record; performance in dense/DDIL RF environments unproven publicly; New York location far from most user communities.",
+   "evidence_user_adoption": "Weak-to-moderate: company-claimed fielding under DoD/IC contracts; no independent user testimony.",
+   "evidence_repeat_procurement": "Multiple awards across AF and IC in a short window (company claim); no repeat production orders. LOW-MEDIUM.",
+   "evidence_prototype_to_production": "None found.",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "tactical_unit"
+    },
+    {
+     "chain_step": "PROCESS",
+     "echelon": "tactical_unit"
+    },
+    {
+     "chain_step": "FUSE",
+     "echelon": "battalion_brigade"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE: job posts (Paraform/company) emphasise signal processing, machine learning and embedded systems; a 'Mission Operations Engineer' role suggests deployed-support model; likely Python/PyTorch models compiled to edge accelerators on SDR-based sensors with a web ops console.",
+   "confidence_notes": "Series A (date, size, investors): HIGH (multiple independent confirmations). Contract details: MEDIUM-LOW (company statements; USAspending record ID captured but not opened). Founders/backgrounds: MEDIUM (company about page via pack). Deployment claims: LOW.",
+   "sources": [
+    {
+     "url": "https://www.distributedspectrum.com/series-a-announcement",
+     "title": "Distributed Spectrum Announces $25M Series A",
+     "pub_date": "2025-03-18",
+     "type": "company"
+    },
+    {
+     "url": "https://www.trysignalbase.com/news/funding/distributed-spectrum-secures-25m-in-series-a-funding-to-revolutionize-radio-spectrum-sensing",
+     "title": "Distributed Spectrum Secures $25M in Series A Funding",
+     "pub_date": "2025-03-18",
+     "type": "financial"
+    },
+    {
+     "url": "https://defensetechsignals.beehiiv.com/p/distributedspectrum",
+     "title": "Distributed Spectrum: Small Sensors and the Future of EW",
+     "pub_date": "2025-03",
+     "type": "independent"
+    },
+    {
+     "url": "https://picogrid.com/newsroom/picogrid-partners-with-distributed-spectrum-securing-an-air-force-contract",
+     "title": "Picogrid Partners with Distributed Spectrum, Securing an Air Force Contract",
+     "pub_date": "2023-10-03",
+     "type": "company"
+    },
+    {
+     "url": "https://github.com/SantaJordan/CTOx/tree/96620f69c9e0ec11e9e27f846825eef324a5d453/prospecting-barry/research",
+     "title": "Third-party prospecting pack on Distributed Spectrum (USAspending IDs, AFRL SBIR)",
+     "pub_date": "2026",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/api-evangelist/providers/blob/cd266f0514aaa1dcd74e9f261f6f7dbd0d19c31e/_providers/distributedspectrum.md",
+     "title": "API Evangelist profile (no public API)",
+     "pub_date": "2026-07-17",
+     "type": "independent"
+    }
+   ]
+  },
+  {
+   "name": "Aurora Insight",
+   "aka": "Aurora Insight Inc.; Maxar Intelligence RF Solutions (2023); now part of HawkEye 360 (since Dec 18, 2023) - brand discontinued",
+   "founding_year": 2016,
+   "headquarters": "Denver, Colorado, USA (with Washington, DC presence) - historical",
+   "public_private": "subsidiary",
+   "employee_count_approx": "Not applicable as a standalone company; pre-acquisition headcount not verified (LOW).",
+   "founders": [
+    "Jennifer Alvarez (co-founder, CEO/CTO; now CTO of EnduroSat US and advisor to TrustPoint)",
+    "other co-founder(s): Public evidence insufficient."
+   ],
+   "founder_backgrounds": "Alvarez: RF/space systems engineer; post-Aurora she leads EnduroSat's U.S. arm and advises LEO-PNT startup TrustPoint. Company held early patents on measuring terrestrial spectrum from space (priority 2016-03-08).",
+   "total_disclosed_funding_usd": "~$18M Series A (Oct 22, 2019, emerging from stealth; Alsop Louie Partners and True Ventures per TechCrunch/VentureBeat); total pre-acquisition ~$18M+ (aggregator lists Maxar, ValueStream, Promus Ventures as investors). Acquisition prices (Maxar Jan 2023; HawkEye 360 Dec 2023) undisclosed.",
+   "latest_valuation": "Public evidence insufficient. (acquired; terms undisclosed)",
+   "major_investors": [
+    "Alsop Louie Partners",
+    "True Ventures",
+    "ValueStream Ventures",
+    "Promus Ventures",
+    "Maxar (strategic, then acquirer)"
+   ],
+   "c4isr_products": [
+    {
+     "name": "Space-, air- and ground-based RF spectrum measurement service",
+     "description": "Fleet of small satellites (THEA 3U demo Dec 2018 via SpaceQuest; Bravo 2021; Charlie 10 kg on Transporter-1 Jan 24, 2021; Delta) plus aircraft and vehicle sensors producing a multi-year 1.4-40 GHz spectrum database, frequency-by-location heatmaps, signal-strength layers and wireless-infrastructure maps; historical REST API for spectrum queries. Capability now folded into HawkEye 360's wideband scanning.",
+     "input_process_output_user": "Input: wideband RF power/occupancy measurements from orbit/air/ground. Process: geolocated aggregation and analytics ('bin-wise' processing patent). Output: spectrum-occupancy maps and interference/usage intelligence via API/portal. Users: telecom operators, regulators, and (via NRO SCE) intelligence-community spectrum analysts."
+    }
+   ],
+   "exact_problem_solved": "Measured actual RF spectrum use and interference across geography from space and air so operators and government could see occupancy, interference and infrastructure without ground surveys.",
+   "primary_users": [
+    "Telecom/spectrum planners (commercial)",
+    "NRO and IC spectrum analysts (study contracts)",
+    "Satellite operators"
+   ],
+   "primary_buyers": [
+    "National Reconnaissance Office (Strategic Commercial Enhancements BAA, 2022)",
+    "Commercial telecom customers",
+    "Maxar / HawkEye 360 (acquirers)"
+   ],
+   "technical_layer": [
+    "COLLECT",
+    "PROCESS",
+    "VISUALIZE"
+   ],
+   "mission_layer": [
+    "space",
+    "EW / spectrum awareness",
+    "ISR"
+   ],
+   "segment_ids": [
+    "S12",
+    "S03"
+   ],
+   "hw_sw_mix": "both - satellites/sensors plus analytics platform.",
+   "market_posture": "dual-use",
+   "contracts": [
+    {
+     "title": "NRO Strategic Commercial Enhancements (SCE) BAA - commercial RF remote sensing study contract",
+     "customer": "National Reconnaissance Office",
+     "contracting_org": "NRO Commercial Systems Program Office",
+     "vehicle_type": "FAR",
+     "ceiling": "Undisclosed (SCE RF awards were small study/evaluation contracts)",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Public evidence insufficient.",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2022 (Aurora was one of six RF awardees with HawkEye 360, Kleos, PredaSAR, Spire, Umbra)",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "study/evaluation",
+     "source_url": "https://github.com/NegativeBounce/api-library/blob/d7c049b91b3d0ee36141c73957507a4921571094/apis/rf-intelligence-feeds/aurora-insight.md",
+     "pub_date": "2026",
+     "confidence": "MEDIUM"
+    },
+    {
+     "title": "Acquisition by Maxar Technologies (rebranded Maxar Intelligence RF Solutions)",
+     "customer": "n/a (M&A)",
+     "contracting_org": "n/a",
+     "vehicle_type": "FAR",
+     "ceiling": "n/a",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-01",
+     "period_of_performance": "",
+     "prime_or_sub": "n/a",
+     "prototype_or_production": "n/a",
+     "source_url": "https://spacenews.com/hawkeye-360-acquires-maxars-rf-solutions-business-unit/",
+     "pub_date": "2023-12-18",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Sale of RF Solutions (former Aurora Insight) by Maxar to HawkEye 360",
+     "customer": "n/a (M&A)",
+     "contracting_org": "n/a",
+     "vehicle_type": "FAR",
+     "ceiling": "n/a",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "Undisclosed",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-12-18",
+     "period_of_performance": "",
+     "prime_or_sub": "n/a",
+     "prototype_or_production": "n/a",
+     "source_url": "https://www.prnewswire.com/news-releases/hawkeye-360-expands-spectrum-scanning-through-the-acquisition-of-rf-solutions-from-maxar-intelligence-302017009.html",
+     "pub_date": "2023-12-18",
+     "confidence": "HIGH"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "Satellites Charlie and Delta and the multi-year RF database continue operating under HawkEye 360 (26-40 GHz coverage was new to HawkEye's constellation).",
+     "evidence": "HawkEye 360 acquisition release and SpaceNews.",
+     "source_url": "https://spacenews.com/hawkeye-360-acquires-maxars-rf-solutions-business-unit/"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Public evidence insufficient.",
+     "year": "",
+     "note": "No military exercise participation found.",
+     "source_url": ""
+    }
+   ],
+   "integration_partners": [
+    "SpaceQuest (THEA host)",
+    "Maxar (2023)",
+    "HawkEye 360 (owner since Dec 2023)",
+    "Satellite Industry Association (associate member)"
+   ],
+   "apis_sdks_open_interfaces": "Historically offered a REST API for spectrum measurement queries and heatmaps; discontinued under the Aurora brand; capability accessible only through HawkEye 360 contracts/Mission Space.",
+   "security_classification_requirements": "NRO SCE work implies cleared personnel/facilities at the time (INFERENCE); otherwise commercial.",
+   "allied_international_activity": "Public evidence insufficient.",
+   "technical_differentiator": "Wideband (up to 40 GHz) spectrum-occupancy measurement from small satellites rather than emitter geolocation; early patents (US20170264381A1; US11546784B2).",
+   "suspected_moat": "None remaining as an independent entity; value transferred to HawkEye 360's data moat.",
+   "major_competitors": [
+    "HawkEye 360 (now owner)",
+    "Spire",
+    "Kleos Space (insolvent 2023)",
+    "Umbra",
+    "Unseenlabs",
+    "Slingshot Aerospace (PNT-SENTINEL interference detection)",
+    "CRFS (terrestrial)"
+   ],
+   "obvious_weaknesses": "Failed to reach scale independently; commercial spectrum-mapping demand insufficient to fund a constellation; two ownership changes in 12 months.",
+   "evidence_user_adoption": "Limited: NRO study participation and commercial pilots; no operational military users found.",
+   "evidence_repeat_procurement": "None found.",
+   "evidence_prototype_to_production": "Not applicable; company exited via acquisition before any DoD production.",
+   "whitespace_cells": [
+    {
+     "chain_step": "COLLECT",
+     "echelon": "theater"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE (historical, Lever job board): satellite RF payload engineering, cloud data pipelines and geospatial analytics; no current hiring under the brand.",
+   "confidence_notes": "Acquisition chain and NRO SCE participation: HIGH/MEDIUM (PRNewswire, SpaceNews, multiple datasets). Series A: HIGH (TechCrunch/VentureBeat Oct 22, 2019). Founder list beyond Alvarez, headcount and revenue: insufficient. Included per assignment even though it no longer operates independently.",
+   "sources": [
+    {
+     "url": "https://www.prnewswire.com/news-releases/hawkeye-360-expands-spectrum-scanning-through-the-acquisition-of-rf-solutions-from-maxar-intelligence-302017009.html",
+     "title": "HawkEye 360 expands spectrum scanning through acquisition of RF Solutions from Maxar",
+     "pub_date": "2023-12-18",
+     "type": "company"
+    },
+    {
+     "url": "https://spacenews.com/hawkeye-360-acquires-maxars-rf-solutions-business-unit/",
+     "title": "HawkEye 360 acquires Maxar's RF Solutions business unit",
+     "pub_date": "2023-12-18",
+     "type": "independent"
+    },
+    {
+     "url": "https://techcrunch.com/2019/10/22/aurora-insight-emerges-from-stealth-with-18m-and-a-new-take-on-measuring-wireless-spectrum/",
+     "title": "Aurora Insight emerges from stealth with $18M",
+     "pub_date": "2019-10-22",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/NegativeBounce/api-library/blob/d7c049b91b3d0ee36141c73957507a4921571094/apis/rf-intelligence-feeds/aurora-insight.md",
+     "title": "API library entry: Aurora Insight history, NRO SCE, discontinuation",
+     "pub_date": "2026",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/CKalitin/mcdowell-dataset-analysis",
+     "title": "McDowell dataset: Aurora Insight Charlie, Falcon 9, 2021-01-24",
+     "pub_date": "2025",
+     "type": "independent"
+    },
+    {
+     "url": "https://patents.google.com/patent/US20170264381A1/en",
+     "title": "Systems and methods for measuring terrestrial spectrum from space (Aurora Insight patent)",
+     "pub_date": "2017-09-14",
+     "type": "company"
+    }
+   ]
+  },
+  {
+   "name": "Xage Security",
+   "aka": "Xage Security, Inc.; Xage Fabric Platform",
+   "founding_year": 2017,
+   "headquarters": "Palo Alto, California, USA (engineering also in Emeryville CA, Lincoln NE and Malaysia)",
+   "public_private": "private",
+   "employee_count_approx": "~112 on LinkedIn (2026 pack); company range 51-200.",
+   "founders": [
+    "Duncan Greatwood (co-founder, CEO)",
+    "Susanto Irwan (co-founder; from memory, MEDIUM)"
+   ],
+   "founder_backgrounds": "Greatwood: founder/CEO of PostPath (acquired by Cisco, 2008) and CEO of Topsy (acquired by Apple, 2013); earlier Madge and Virata. Xage began (2017-2018) as a blockchain-based identity/security fabric for industrial IoT and utilities, later repositioned to zero-trust access for OT/IT/cloud.",
+   "total_disclosed_funding_usd": "More than $80M reported: $12M Series A (2018, TechCrunch), later Series A extension(s), $30M Series B (2022 per pack), further growth capital (details unverified).",
+   "latest_valuation": "Public evidence insufficient.",
+   "major_investors": [
+    "Piva Capital",
+    "Chevron Technology Ventures",
+    "SCF Partners",
+    "Valor Equity Partners",
+    "March Capital",
+    "(list from memory/aggregators; MEDIUM-LOW)"
+   ],
+   "c4isr_products": [
+    {
+     "name": "Xage Fabric Platform",
+     "description": "Distributed, identity-based zero-trust mesh that sits in front of OT/IT/cloud assets: multi-layer identity and access management, privileged access management, secure remote access/VPN replacement, zero-trust data exchange, multi-monitor remote operations, and (Sept 2025) 'Unified Zero Trust for AI' agents. Designed to operate in low-connectivity or air-gapped environments via distributed nodes (relevant to DDIL). Deployed for Space Force Space Systems Command under a $17M contract (Sept 2023) and evaluated by the Navy for zero-trust security of battle networks (SBIR).",
+     "input_process_output_user": "Input: user/device/service identities, access policies, asset inventories. Process: policy enforcement at distributed fabric nodes with local caching. Output: authenticated, least-privilege sessions to assets and audited data flows. Users: OT/space ground-segment operators, network defenders, mission-system administrators."
+    }
+   ],
+   "exact_problem_solved": "Enforces zero-trust identity and access control across legacy OT, mission systems and cloud - including sites with poor connectivity - so that adversaries cannot move laterally after compromising a network, meeting DoD Zero Trust Strategy targets.",
+   "primary_users": [
+    "Space Systems Command network/ground-segment operators",
+    "Navy battle-network security teams (SBIR evaluation)",
+    "Critical-infrastructure OT operators (Kinder Morgan, Ornua, Pacific Canbriam)"
+   ],
+   "primary_buyers": [
+    "U.S. Space Force Space Systems Command",
+    "U.S. Navy (SBIR Sequential Phase II)",
+    "AFWERX/SpaceWERX (SBIR Phase II FA8802 contract)",
+    "Energy, utility and manufacturing enterprises"
+   ],
+   "technical_layer": [
+    "TRANSPORT",
+    "MONITOR"
+   ],
+   "mission_layer": [
+    "space (ground segment)",
+    "joint (network security / zero trust)",
+    "maritime (Navy battle networks, evaluation)"
+   ],
+   "segment_ids": [
+    "S10",
+    "S09"
+   ],
+   "hw_sw_mix": "software - deployed as software/virtual nodes (optionally on rugged hardware).",
+   "market_posture": "dual-use",
+   "contracts": [
+    {
+     "title": "Zero-trust access-management contract for Space Force networks",
+     "customer": "U.S. Space Force, Space Systems Command",
+     "contracting_org": "Space Systems Command (FA8802 contracting activity; INFERENCE)",
+     "vehicle_type": "SBIR (reported as SBIR-derived/Phase III-type award; vehicle not confirmed - MEDIUM)",
+     "ceiling": "$17M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$17M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023-09-27 (announced)",
+     "period_of_performance": "Public evidence insufficient.",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "production deployment for SSC networks (Defense One: 'contracts for new zero-trust data protection'); scale undisclosed",
+     "source_url": "https://spacenews.com/cybersecurity-firm-xage-gets-17-million-contract-to-protect-space-force-networks/",
+     "pub_date": "2023-09-27",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "SBIR Phase II - Enabling Zero Trust for Space Systems (FA880223C0002)",
+     "customer": "U.S. Space Force / Air Force",
+     "contracting_org": "Space Systems Command (FA8802)",
+     "vehicle_type": "SBIR",
+     "ceiling": "$3.9M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$3.9M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://www.sbir.gov/awards/205974",
+     "pub_date": "2023",
+     "confidence": "HIGH"
+    },
+    {
+     "title": "Navy SBIR Sequential Phase II - Zero Trust security of battle networks",
+     "customer": "U.S. Navy",
+     "contracting_org": "Navy SBIR (NAVSEA/NIWC; INFERENCE)",
+     "vehicle_type": "SBIR",
+     "ceiling": "$1.5M",
+     "obligated": "Public evidence insufficient.",
+     "awarded_value": "$1.5M",
+     "funded_amount": "Public evidence insufficient.",
+     "task_orders": "",
+     "date": "2023 (per pack)",
+     "period_of_performance": "",
+     "prime_or_sub": "prime",
+     "prototype_or_production": "prototype",
+     "source_url": "https://xage.com/press/xage-security-awarded-1-5-million-contract-by-united-states-navy-to-advance-zero-trust-initiatives/",
+     "pub_date": "2023",
+     "confidence": "MEDIUM"
+    }
+   ],
+   "operational_deployments": [
+    {
+     "what": "Zero-trust access control deployed on Space Systems Command networks under the $17M award (extent, sites and user counts undisclosed).",
+     "evidence": "SpaceNews, Defense One, SiliconANGLE coverage Sept 27, 2023; SSC Col. Craig Frank quoted in company materials.",
+     "source_url": "https://www.defenseone.com/technology/2023/09/space-force-contracts-new-zero-trust-data-protection/390671/"
+    },
+    {
+     "what": "Enterprise OT deployments (Kinder Morgan, Ornua, Pacific Canbriam) - commercial, not military.",
+     "evidence": "Customer testimonials on company site (via pack).",
+     "source_url": "https://xage.com/"
+    }
+   ],
+   "exercises_demos": [
+    {
+     "event": "Public evidence insufficient.",
+     "year": "",
+     "note": "No named DoD exercise participation found.",
+     "source_url": ""
+    }
+   ],
+   "integration_partners": [
+    "SAIC (partner; Lauren Knausenberger endorsement)",
+    "Advantech (industrial hardware, Sept 2022)",
+    "OT/IT ecosystem (Cisco, Rockwell-class environments; INFERENCE)"
+   ],
+   "apis_sdks_open_interfaces": "No public SDK or open-source repositories found (no GitHub org identified); platform integrates via standard identity protocols (SAML/OIDC/LDAP, INFERENCE) and REST APIs (INFERENCE). Product docs gated.",
+   "security_classification_requirements": "Works within DoD zero-trust and RMF/ATO frameworks; Space Force deployment implies IL4/IL5-type accreditation and cleared support staff (INFERENCE). FedRAMP status: Public evidence insufficient.",
+   "allied_international_activity": "Malaysia engineering office; commercial customers in Ireland (Ornua) and Canada (Pacific Canbriam). No allied-government defense contracts found.",
+   "technical_differentiator": "Distributed, resilient policy-enforcement fabric able to keep enforcing access when disconnected from central identity services - a fit for space ground segments and tactical/DDIL networks; unified IT/OT/cloud coverage.",
+   "suspected_moat": "OT-protocol coverage and reference customers in energy; Space Force incumbency; but the zero-trust access market is crowded with far larger vendors and DoD's Thunderdome/enterprise ICAM choices could sideline niche vendors.",
+   "major_competitors": [
+    "Zscaler (Thunderdome incumbent)",
+    "Palo Alto Networks",
+    "Cisco",
+    "Cyolo",
+    "Claroty and Nozomi (OT security)",
+    "Dragos",
+    "Fortinet",
+    "Okta / Ping (identity)",
+    "Appgate",
+    "Everfox (cross-domain)"
+   ],
+   "obvious_weaknesses": "DoD footprint concentrated in one SSC award plus SBIRs; enterprise-first roadmap; limited public evidence of accreditation status or scale; crowded market.",
+   "evidence_user_adoption": "Moderate: SSC deployment and Navy evaluation; strong commercial OT references.",
+   "evidence_repeat_procurement": "Sequential Space Force awards (SBIR Phase II $3.9M -> $17M contract, 2023) indicate follow-on buying from the same customer. MEDIUM.",
+   "evidence_prototype_to_production": "Partial: SBIR Phase II to a $17M deployment contract within 2023 is a transition signal; program-of-record status not documented.",
+   "whitespace_cells": [
+    {
+     "chain_step": "TRANSPORT",
+     "echelon": "theater"
+    },
+    {
+     "chain_step": "TRANSPORT",
+     "echelon": "joint"
+    }
+   ],
+   "tech_stack_inference_from_jobs": "INFERENCE: postings for Senior Backend Engineer (Lincoln NE, Palo Alto), Software Engineer - Network Security, Full Stack Engineer and Presales Solutions Architect; implies Go/Java-type backend services, networking/protocol engineering, web front-end, and a distributed-node architecture (consistent with the 'fabric' design).",
+   "confidence_notes": "$17M SSC contract: HIGH (SpaceNews, Defense One, SiliconANGLE, company). SBIR FA880223C0002 $3.9M: HIGH (sbir.gov award ID via pack). Navy $1.5M: MEDIUM (company release title). Funding total and investors: MEDIUM-LOW (aggregators/memory). No primary xage.com page could be opened in-session.",
+   "sources": [
+    {
+     "url": "https://spacenews.com/cybersecurity-firm-xage-gets-17-million-contract-to-protect-space-force-networks/",
+     "title": "Cybersecurity firm Xage gets $17 million contract to protect Space Force networks",
+     "pub_date": "2023-09-27",
+     "type": "independent"
+    },
+    {
+     "url": "https://www.defenseone.com/technology/2023/09/space-force-contracts-new-zero-trust-data-protection/390671/",
+     "title": "Space Force contracts for new 'zero-trust' data protection",
+     "pub_date": "2023-09-27",
+     "type": "independent"
+    },
+    {
+     "url": "https://xage.com/press/xage-awarded-17-million-cybersecurity-contract-by-u-s-space-forces-space-forces-space-systems-command/",
+     "title": "Xage Awarded $17 Million Cybersecurity Contract by U.S. Space Force's SSC",
+     "pub_date": "2023-09-27",
+     "type": "company"
+    },
+    {
+     "url": "https://www.sbir.gov/awards/205974",
+     "title": "SBIR award: Enabling Zero Trust for Space Systems (FA880223C0002, $3.9M)",
+     "pub_date": "2023",
+     "type": "gov"
+    },
+    {
+     "url": "https://xage.com/press/xage-security-awarded-1-5-million-contract-by-united-states-navy-to-advance-zero-trust-initiatives/",
+     "title": "Xage awarded $1.5M contract by U.S. Navy to advance zero trust",
+     "pub_date": "2023",
+     "type": "company"
+    },
+    {
+     "url": "https://techcrunch.com/2018/",
+     "title": "TechCrunch: Xage secures $12M Series A (2018) and emerges from stealth (2017) - via apachecn mirror",
+     "pub_date": "2018",
+     "type": "independent"
+    },
+    {
+     "url": "https://github.com/SantaJordan/CTOx/tree/96620f69c9e0ec11e9e27f846825eef324a5d453/prospecting-barry/research",
+     "title": "Third-party prospecting pack on Xage Security (contract IDs, customers, jobs)",
+     "pub_date": "2026",
+     "type": "independent"
+    }
+   ]
+  }
+ ],
+ "search_log": [
+  {
+   "query": "WebSearch: SandboxAQ AQNav Air Force contract magnetic navigation 2025 2026",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Infleqtion quantum navigation contract Army OR Air Force 2025 2026",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Xona Space Systems Pulsar PNT contract Space Force OR AFWERX OR Army",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: TRX Systems dismounted assured PNT DAPS Army production contract",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Distributed Spectrum RF sensing Army contract OR SBIR",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Aurora Insight spectrum monitoring defense contract",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Xage Security Navy OR Space Force zero trust contract",
+   "useful": false
+  },
+  {
+   "query": "Bigdata.com smart search x7 (one per company) - out of credits",
+   "useful": false
+  },
+  {
+   "query": "sbir.gov public API ?firm=<each company> (curl) - egress blocked",
+   "useful": false
+  },
+  {
+   "query": "api.usaspending.gov spending_by_award recipient_search_text=<each company> - egress blocked",
+   "useful": false
+  },
+  {
+   "query": "WebFetch company sites (sandboxaq.com, infleqtion.com, xonaspace.com, trxsystems.com, distributedspectrum.com, aurorainsight.com, xage.com) - egress blocked",
+   "useful": false
+  },
+  {
+   "query": "WebFetch sbir.gov, defensescoop.com, breakingdefense.com, insidegnss.com, gao.gov, usaspending.gov, defense.gov, prnewswire, businesswire, sec.gov, arxiv.org, wikipedia - egress blocked",
+   "useful": false
+  },
+  {
+   "query": "GitHub repo search: Infleqtion in:name,description,readme",
+   "useful": true
+  },
+  {
+   "query": "GitHub repo search: user:sandbox-quantum",
+   "useful": true
+  },
+  {
+   "query": "GitHub repo search: 'Xona Space' / 'Distributed Spectrum' / 'Aurora Insight' / xage security / 'TRX Systems'",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"TRX Systems\" DAPS",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Xona Space Systems\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Aurora Insight\" spectrum",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"AQNav\" OR \"SandboxAQ\" magnetic navigation",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Infleqtion \"Churchill Capital\" SPAC",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Distributed Spectrum\" Struhl OR distributedspectrum.com",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Xage Security\" OR \"Xage Fabric\" Navy OR \"Space Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"TRX Systems\" ACR OR acquired OR \"DAPS GEN II\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Aurora Insight\" Maxar acquired OR NRO",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: AQNav \"Air Force\" OR DIU OR TACFI OR \"C-17\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: repo:hollomancer/sbir-analytics TRX",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: repo:vibewatch/startup Infleqtion",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: Xona AFWERX",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Infleqtion APFIT",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Xage \"$17 million\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Aurora Insight\" Jennifer",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"TRX Systems\" fielded Army",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Xona Astranis PNT",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Xona \"Pulsar-0\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Xona Space\" SBIR",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Infleqtion \"BAe 146\" / \"HMS Pursuer\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: \"TRX Systems\" \"ACR\" / DAGR / Politi",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Distributed Spectrum\" $25M",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Xage \"Series B\" / Xage Greatwood",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: AQNav Acubed",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: \"Transition of Quantum Sensing\" DIU vendors",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Infleqtion \"quantum navigation\" flight trial",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Xona \"Series B\" Craft",
+   "useful": true
+  },
+  {
+   "query": "WebFetch raw.githubusercontent.com: CTOx packs (trx-systems, distributed-spectrum, xage-security, trustpoint), vibewatch SandboxAQ report (06-customers, evidence, 04-financials), api-evangelist xona llms.txt, NegativeBounce aurora-insight.md, HN summary of space.com Pulsar-0 article, donutloop infleqtion.md, crxi qni infleqtion.yaml, trxsystems NEON-API-Samples README, Infleqtion DCM-26 README, hollomancer non_navy_stories.csv, ericries seedlist xona-space-systems.md",
+   "useful": true
+  }
+ ],
+ "notes": "ENVIRONMENT CONSTRAINTS (material): the session-wide WebSearch budget was already exhausted (200/200) before this batch started, so zero web searches ran; the egress proxy blocked every non-GitHub host (company sites, sam.gov/sbir.gov/usaspending.gov APIs, sec.gov, gao.gov, defense.gov, trade press, press wires, arXiv, Wikipedia); Bigdata.com was out of credits. The only reachable channels were GitHub code/repo search (authenticated MCP) and raw.githubusercontent.com. Evidence was therefore recovered from GitHub-hosted third-party research packs, datasets and news mirrors that quote and link primary sources (Army SBIR site, PRNewswire, SpaceNews, Defense One, TechCrunch, company releases). Where a primary URL is listed it was NOT opened in-session; its content is known only through those secondary files. Consequences: (1) no USAspending obligation figures for any company - ceilings and announced values only; (2) TRX's DAPS Gen 1 history, ACR Group ownership and 2CR fielding rest on memory/aggregators (LOW); (3) Infleqtion's Army $2M, Navy $1M and Australian contract dates were not captured; UK flight-trial partners (BAE/QinetiQ) are from memory; (4) Xona's SpaceWERX $20M is a company-stated cumulative figure with no award breakdown, and no Space Force/Army evaluation contract was found; (5) Distributed Spectrum's contract base is company-claimed ($7M+) beyond one AFWERX purchase-order ID; (6) Aurora Insight no longer exists as a brand (Maxar Jan 2023 -> HawkEye 360 Dec 2023) and is recorded for completeness; (7) Xage's $17M SSC award vehicle (SBIR Phase III vs other) is unconfirmed. TRACTION SUMMARY: TRX Systems strong (program of record, $402M IDIQ, repeat delivery orders); Infleqtion moderate-to-strong (APFIT $11M fielding funding, public company, multi-nation trials, but sensors still pre-production); SandboxAQ/AQNav moderate (sequential AF SBIR -> TACFI -> DIU TQS, exercises, no procurement); Xona moderate (large private funding, $20M SpaceWERX, Astranis R-GPS subcontract, FCC licence; service not before 2027); Xage moderate (one $17M SSC deployment + SBIRs); Distributed Spectrum weak-to-moderate (SBIR-scale, claims unverified); Aurora Insight unknown/weak (acquired). Segment mapping uses the S01-S14 taxonomy found in the workflow script: S11 PNT, S12 EW/spectrum awareness, S10 identity/zero trust, S09 cloud/ATO, S07 SA/track, S03 ISR collection."
+}

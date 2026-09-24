@@ -31,6 +31,22 @@ def copy_research(src):
 
 TRACTION_WORDS = ('strong', 'moderate', 'weak', 'unknown')
 
+# Editorial segment classification for company records whose research agent left segment_ids empty
+# or used an inconsistent numbering (the taxonomy names were not in that agent's prompt).
+SEGMENT_OVERRIDES = {
+    'anduril-industries': ['S01', 'S02', 'S03', 'S06', 'S13'], 'palantir-technologies': ['S01', 'S02', 'S04', 'S14'],
+    'scale-ai': ['S01', 'S04', 'S06'], 'shield-ai': ['S03', 'S13'], 'skydio': ['S03', 'S13'], 'govini': ['S02', 'S14'], 'c3-ai': ['S04', 'S14'],
+    'onebrief-inc': ['S01'], 'onebrief': ['S01'], 'vannevar-labs-inc': ['S03', 'S04', 'S12'], 'vannevar-labs': ['S03', 'S04', 'S12'],
+    'rebellion-defense-inc': ['S01', 'S09', 'S10'], 'rebellion-defense': ['S01', 'S09', 'S10'], 'primer-technologies-inc': ['S04'], 'primer-ai': ['S04'],
+    'immersive-wisdom-inc': ['S01', 'S07'], 'immersive-wisdom': ['S01', 'S07'], 'ask-sage-inc': ['S04', 'S09'], 'ask-sage': ['S04', 'S09'],
+    'edgerunner-ai-inc': ['S04', 'S06'], 'edgerunner-ai': ['S04', 'S06'],
+    'synthetaic-inc': ['S04'], 'synthetaic': ['S04'], 'edgybees': ['S04', 'S07'], 'reveal-technology-inc': ['S04', 'S06', 'S07'], 'reveal-technology': ['S04', 'S06', 'S07'],
+    'danti': ['S04', 'S07'], 'blackshark-ai-gmbh': ['S04', 'S07'], 'blackshark-ai': ['S04', 'S07'], 'ursa-space-systems-inc': ['S03', 'S04'], 'ursa-space-systems': ['S03', 'S04'],
+    'cognitive-space-inc': ['S03', 'S04'], 'cognitive-space': ['S03', 'S04'],
+    'auterion': ['S06', 'S13'], 'aerovironment-tomahawk-robotics-kinesis': ['S01', 'S13'], 'applied-intuition-defense-incl-episci': ['S13'],
+    'tangram-flex': ['S02', 'S13'], 'saronic': ['S03', 'S13'], 'bigbear-ai': ['S01', 'S06', 'S14'], 'accelint-formerly-hypergiant': ['S01', 'S13'],
+}
+
 def traction_of(c):
     t = str(c.get('traction') or '').lower()
     for w in TRACTION_WORDS:
@@ -86,10 +102,39 @@ def build_data():
             if key in seen: continue
             c['batch_id'] = b.get('batch_id'); c['batch_theme'] = b.get('theme', 'discovered'); c['discovered_via'] = b.get('discovery_id')
             seen[key] = c; companies.append(c)
+    def norm_posture(v):
+        t = str(v or '').lower()
+        if 'defense' in t or 'defence' in t: return 'defense-native'
+        if 'dual' in t: return 'dual-use'
+        if 'commercial' in t: return 'commercial'
+        return ''
+    def first_money(t):
+        t = str(t or '')
+        if re.search(r'insufficient|not disclosed|undisclosed', t, re.I) and '$' not in t: return 'Undisclosed'
+        m = re.search(r'(?:~|≈|c\.\s?|about\s|approx\.?\s|at least\s|>)?[$€£]\s?[\d.,]+\s?(?:billion|million|bn|mn|B|M|K|k)?\+?', t)
+        if m: return m.group(0).replace('  ', ' ').strip()
+        if re.search(r'public', t, re.I): return 'Public company'
+        return t[:24]
+    def first_num(t):
+        t = str(t or '')
+        m = re.search(r'(?:~|≈|>|about\s|approx\.?\s)?\d[\d,]*\s?(?:\+|-\d[\d,]*|–\d[\d,]*)?', t)
+        return m.group(0).strip() if m else (t[:16] if t else '')
+    def short_hq(v):
+        t = str(v or '').strip()
+        t = re.split(r'\s*[\(;]|\s+-\s+|\s+\u2014\s+', t)[0]
+        return t[:48]
     for c in companies:
         c['slug'] = slug(c['name'])
+        c['market_posture_note'] = c.get('market_posture') or ''
+        c['market_posture'] = norm_posture(c.get('market_posture'))
+        c['headquarters_short'] = short_hq(c.get('headquarters'))
+        c['funding_short'] = first_money(c.get('total_disclosed_funding_usd'))
+        c['employees_short'] = first_num(c.get('employee_count_approx'))
         c['traction'] = traction_of(c)
-        c['segment_ids'] = sorted({str(x).strip().upper() for x in (c.get('segment_ids') or []) if re.match(r'^S\d\d$', str(x).strip().upper())})
+        ids = {str(x).strip().upper() for x in (c.get('segment_ids') or []) if re.match(r'^S\d\d$', str(x).strip().upper())}
+        if c['slug'] in SEGMENT_OVERRIDES:
+            ids = set(SEGMENT_OVERRIDES[c['slug']]); c['segment_ids_note'] = 'editorial classification'
+        c['segment_ids'] = sorted(ids)
     companies.sort(key=lambda c: c['name'].lower())
     d['companies'] = companies
     d['discovery'] = [load(f) for f in sorted(glob.glob(os.path.join(DATA, 'companies', 'D*-discovery.json'))) if load(f)]

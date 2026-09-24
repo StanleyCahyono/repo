@@ -1,0 +1,2115 @@
+{
+ "segment_id": "S00",
+ "segment_name": "C4ISR information/decision chain and architecture",
+ "chain_steps": [
+  {
+   "step": "COLLECT",
+   "what_happens": "Sensors and humans generate raw observations: EO/IR and SAR imagery, full-motion video, GMTI radar, SIGINT/ESM intercepts, air-defense radar plots, acoustic, HUMINT reports, blue-force position reports, logistics status. Collection is tasked by collection managers but much is continuous (radars, SATCOM ISR, ADS-B-like tracks).",
+   "who_performs": "ISR crews (RC-135, MQ-9, E-2D, P-8), satellite operators (NRO, SDA tracking layer, commercial EO), radar operators (Patriot/THAAD/AN-TPQ-53 crews), small-UAS operators at platoon-company (Ghost-X class), scouts/forward observers, SIGINT teams; echelons from squad to national agencies.",
+   "hardware": "Satellites (NRO Starshield-based constellation; SDA tracking layer), aircraft sensors, ground radars (AN/TPQ-53, TPY-6), sUAS (Ghost-X named in NGC2 Ivy Sting feeds), soldier devices (ATAK end-user devices), vehicle sensors.",
+   "software": "Sensor firmware and payload controllers; MISB KLV metadata encoders for FMV; radar plot extractors; collection management tools (e.g., within DCGS family, Maven Smart System collection views - inferred).",
+   "data_formats_protocols": [
+    "STANAG 4609 / MISB ST 0601 KLV (FMV metadata) - verified via open-source parsers (paretech/klvdata, QGISFMV)",
+    "STANAG 4607 (NATO GMTI format) - verified (MITRE paper; pentlandedge/s4607)",
+    "NITF / STANAG 4545 (still imagery) - verified via codice/alliance, bradh/jim",
+    "STANAG 4658 (ESM) - single snippet only, LOW confidence",
+    "Cursor on Target (CoT) XML for sUAS/soldier reports - verified (MITRE Event.xsd v2.0, 2003)",
+    "Proprietary radar plot formats"
+   ],
+   "human_in_loop": "Sensor operators steer payloads; collection managers prioritize; FMV/GMTI mostly machine-generated, HUMINT fully human.",
+   "latency_sources": "Sensor revisit rate, satellite downlink windows (mitigated by laser crosslinks - NRO says minutes-to-seconds), aircraft datalink availability, operator queueing.",
+   "comms_dependencies": "Downlink/backhaul (SATCOM, CDL, line-of-sight datalinks, mesh radios) to move raw data off the sensor.",
+   "when_connectivity_disappears": "Sensor continues recording locally (store-and-forward); tactical sensors publish to local mesh/TAK server; national/airborne ISR products become unavailable to disconnected units.",
+   "interoperability_requirements": "Standard container/metadata formats (KLV, 4607, NITF) so downstream PED tools can ingest; CoT for tactical SA.",
+   "security_domain": "Ranges from Unclassified/CUI (sUAS FMV) through S and TS/SCI (national ISR, SIGINT). Coalition releasability determined at collection tagging.",
+   "owning_organizations": "NRO/NGA/NSA (national), SDA (space transport/tracking), service ISR wings (ACC ISR, Navy VP/VQ, Army MI brigades), PEO IEW&S (Army sensors), PEO Aviation; Marine MIGs.",
+   "incumbent_systems": [
+    {
+     "name": "TITAN (Advanced/Basic ground station)",
+     "service": "Army",
+     "vendor": "Palantir prime; Anduril hardware; L3Harris, SNC, WWT",
+     "note": "Accesses space/high-altitude/aerial/terrestrial sensors; moved to production Sept 1, 2026 ($192M; 8 systems over 18 months; 9 prototypes fielded). FACT."
+    },
+    {
+     "name": "SDA Proliferated Warfighter Space Architecture (Tracking + Transport)",
+     "service": "Space Force",
+     "vendor": "York, Lockheed, Northrop",
+     "note": "Tranche 1 Transport half deployed (63/126) by July 16, 2026 after a months-long pause; tracking layer not yet launched as of July 2026. FACT."
+    },
+    {
+     "name": "Starshield / NRO proliferated constellation",
+     "service": "NRO/USSF",
+     "vendor": "SpaceX",
+     "note": "Laser crosslinks; NRO Director cited 'minutes to seconds' time-to-insight (Apr 2025). FACT (statement), performance unverified."
+    },
+    {
+     "name": "AN/TPQ-53 radar, Ghost-X sUAS",
+     "service": "Army",
+     "vendor": "Lockheed / Anduril",
+     "note": "Named as feeds integrated into NGC2 Ivy Sting events (Anduril PR, June 2026)."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/A5CC10CA3DDBA5824178F6075DB814AE",
+     "pub_date": "2026-06-23"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/3EAA3D4A0EFB0C64D27718E187769C4D",
+     "pub_date": "2026-09-02"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+     "pub_date": "2026-07-16"
+    },
+    {
+     "url": "https://www.mitre.org/sites/default/files/pdf/05_0164.pdf",
+     "pub_date": "2005"
+    },
+    {
+     "url": "https://github.com/All4Gis/QGISFMV",
+     "pub_date": "2026-09-15"
+    }
+   ]
+  },
+  {
+   "step": "TRANSPORT",
+   "what_happens": "Moving bits between sensors, edge nodes, command posts, cloud regions and shooters across tactical radios, SATCOM (GEO/MEO/LEO), line-of-sight datalinks, tactical data links (Link 16), fiber/DISN, and increasingly commercial LEO mesh (Starshield, SDA transport layer). Includes routing across multiple transports (PACE plans), gateways between waveforms, and range extension (JREAP over IP/SATCOM).",
+   "who_performs": "Signal/communications units (Army signal battalions, ESB, 'G6/S6'), Air Force comm squadrons, Navy combat systems/IT, DISA (DISN, MPE transport), Space Force (SATCOM, SDA), commercial SATCOM operators.",
+   "hardware": "MIDS JTRS / Link 16 terminals (Data Link Solutions: 9,000+ delivered to 50+ nations; $248M Navy production Jan 2026), tactical radios (L3Harris, Collins, Silvus, TrellisWare - the latter two not verified in this run), SATCOM terminals (Viasat, Starshield/Starlink), TSM/MANET mesh, private 5G (named in NGC2 lead responsibilities), SDA transport satellites with laser crosslinks, Ka downlinks and Link 16 antennas, JREAP gateways.",
+   "software": "Network management, transport-agnostic routing/PACE orchestration (Viasat NetAgility, MOJO Next gateway at PC-C6), Link 16 network design tools, JREAP/SIMPLE gateway software, mesh sync layers (Ditto).",
+   "data_formats_protocols": [
+    "MIL-STD-6016 / STANAG 5516 (Link 16 J-series) - verified",
+    "JREAP (MIL-STD-3011) A/B/C over serial/SATCOM/IP - verified via secondary",
+    "STANAG 5602 SIMPLE - verified via secondary",
+    "IP/TCP/UDP multicast (TAK default multicast 239.2.3.1:6969) - verified via secondary",
+    "MQTT/DDS as transport middleware - DDS (RTI Connext) confirmed in defense use; MQTT usage in DoD C2 not verified in this run",
+    "Optical inter-satellite links (SDA, Starshield) - verified"
+   ],
+   "human_in_loop": "Network planners build Link 16 network designs and PACE plans; operators manually re-key/re-route when links fail; largely machine-executed once configured.",
+   "latency_sources": "Link 16 time-slot allocation and ~300 mi LOS limit (extended by JREAP with added latency), SATCOM hops (GEO ~500+ ms round trip, LEO tens of ms), gateway translation, congestion on low-bandwidth radios, jamming-induced retransmits. SDA laser mesh not yet operating cross-vendor (July 2026).",
+   "comms_dependencies": "This IS the dependency; everything above and below assumes some transport. Spectrum availability and host-nation restrictions constrain it.",
+   "when_connectivity_disappears": "Fallback to PACE alternates (HF, courier, runner); units revert to local mesh; store-and-forward queues; commanders act on last-known picture. PC-C6 (July 2026) reported intermittent connectivity and overheating gear - FACT (secondary reports citing Axios).",
+   "interoperability_requirements": "Waveform and crypto commonality (Link 16, SATURN, coalition waveforms), FMN-compliant coalition transport, JREAP/SIMPLE gateways, IP everywhere.",
+   "security_domain": "Crypto-separated enclaves by classification; Link 16 is Secret-level; coalition networks (CENTRIXS/BICES/SABRE) separately keyed.",
+   "owning_organizations": "Army PEO C3N (now Capability Program Executive C3N under Brig. Gen. Shane Taylor per June 2026 statement), DISA, Space Force SSC/SDA, Navy PEO C4I/NAVWAR, Air Force PAE C3BM, NSA (crypto).",
+   "incumbent_systems": [
+    {
+     "name": "Link 16 / MIDS JTRS",
+     "service": "Joint/NATO",
+     "vendor": "Data Link Solutions (BAE/Collins JV); L3Harris (bought Viasat Link 16 TDL business 2023)",
+     "note": "$248M Navy production Jan 28, 2026; four-channel SDR; fielded on F-15/F-16/F/A-18/F-22, ships, ground C2. FACT."
+    },
+    {
+     "name": "SDA Transport Layer (Tranche 1)",
+     "service": "Space Force",
+     "vendor": "York, Lockheed, Northrop",
+     "note": "63 of 126 satellites on orbit July 16, 2026; launches paused months; Space Force Spring 2026 budget restructured Transport Layer (per class-action notices - LOW confidence). FACT/LOW."
+    },
+    {
+     "name": "MILNET / Space Data Network backbone",
+     "service": "Space Force",
+     "vendor": "SpaceX (Starshield)",
+     "note": "$2.29B award May 26, 2026 for LEO backhaul; ceiling/obligation split not public."
+    },
+    {
+     "name": "Army Integrated Tactical Network / unified network",
+     "service": "Army",
+     "vendor": "multiple",
+     "note": "Public evidence insufficient in this run for 2026 ITN status; NGC2 transport layer includes commercial SATCOM and private 5G (INFERENCE from Army statement of lead responsibilities)."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/C3590048D385A1E39877C2D5FD514C51",
+     "pub_date": "2026-01-28"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+     "pub_date": "2026-07-16"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/037FB6896768BCA8CE54698E1176AD60",
+     "pub_date": "2026-05-26"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/EEEC1B454127FCA4E8976200B9318AAA",
+     "pub_date": "2026-07-14"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/SIMPLE_(military_communications_protocol)",
+     "pub_date": "n/a"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/F9DA422DA60413FB06FD30A01E7FFCD1",
+     "pub_date": "2026-09-10"
+    }
+   ]
+  },
+  {
+   "step": "INGEST",
+   "what_happens": "Data enters a processing/data platform: message gateways parse J-series/VMF/USMTF/CoT, video/KLV demuxers, imagery catalogs register NITF, APIs pull from sensors and databases. In NGC2 this is now the 'common data layer' (Lattice at tactical edge, Foundry in cloud, Raft data/service registries). In Maven Smart System it is the enterprise ingestion into NGA/CDAO-run environments across three security domains.",
+   "who_performs": "Data engineers and integration teams (vendor forward-deployed engineers, government software factories), S6/G6 and intelligence systems maintainers, NGA/CDAO data teams.",
+   "hardware": "Edge servers/kits (TITAN Advanced on tactical trucks, Basic on JLTV; TOC-L kits in Air Force), command-post servers, cloud regions (IL5/IL6 - not verified this run), tactical cross-domain devices.",
+   "software": "Lattice (Anduril), Foundry (Palantir), Raft Data Platform (registries/transformation/federation), Maven Smart System, TAK Server, JREAP/Link 16 gateway software, Kafka/Confluent-style streaming (vendor-claimed DoD use), DDS (RTI Connext).",
+   "data_formats_protocols": [
+    "Link 16 J-series via JREAP/SIMPLE",
+    "MIL-STD-6017 VMF - verified (spatialillusions/vmf-parser, VMFCat)",
+    "MIL-STD-6040 USMTF and XML-MTF; ADatP-3/APP-11 - verified (Systematic pages; NIEM-based USMTF-XML repos)",
+    "OTH-Gold (naval) - verified via secondary only",
+    "CoT XML and TAK Protocol v1 protobuf (TakMessage{CotEvent}) - verified in TAK-Product-Center/Server proto files",
+    "Lattice entity model (mil_view.disposition, MilStd2525C, mode5) - verified in anduril/lattice-sdk-python",
+    "STANAG 4607/4609/4676, NITF - verified"
+   ],
+   "human_in_loop": "Integration engineers write/maintain adapters; analysts validate feeds; 'swivel-chair' re-entry persists where no adapter exists (INFERENCE from AFA/FDD critiques).",
+   "latency_sources": "Adapter parsing, schema mapping, cross-domain transfer queues, batch vs streaming design, cloud round-trips from the edge.",
+   "comms_dependencies": "Requires transport to reach the ingest node; edge ingest nodes (TITAN, Lattice edge) reduce dependence on reach-back.",
+   "when_connectivity_disappears": "Edge ingest continues on local nodes; cloud ingest stalls; divergence between edge and cloud copies must be reconciled later (see STORE).",
+   "interoperability_requirements": "Adapters for every legacy message standard plus modern APIs; registries so apps can discover data services; schema governance (the June 2026 CDL baseline is precisely this).",
+   "security_domain": "Ingest occurs per enclave (U/CUI, S, TS/SCI); Maven operates in three security domains; cross-domain ingest requires accredited CDS.",
+   "owning_organizations": "Army CPE C3N / PAE C2-CC2 (NGC2), NGA + CDAO (Maven), Navy PEO C4I (Overmatch), Air Force PAE C3BM (DAF Battle Network), DISA (MPE).",
+   "incumbent_systems": [
+    {
+     "name": "NGC2 common data layer baseline",
+     "service": "Army",
+     "vendor": "Anduril (lead) + Palantir Foundry + Raft",
+     "note": "Baseline established June 22, 2026 after ~10 months of 4ID/25ID events; falls under Anduril 10-yr enterprise agreement with $20B ceiling (ceiling, not obligation). FACT."
+    },
+    {
+     "name": "Maven Smart System",
+     "service": "Joint (NGA/CDAO)",
+     "vendor": "Palantir",
+     "note": "IDIQ $480M May 2024 raised to ~$1.3B ceiling through 2029 (May 2025); deployed at all COCOMs by Sept 2025; DoD directed component transition on an 'aggressive' timeline (Apr 2026). 25,000 builders per Palantir Q2 2026 call. FACT (ceilings are not revenue)."
+    },
+    {
+     "name": "DCGS-A (legacy) / DCGS-N / DCGS-AF / DCGS-MC",
+     "service": "Army/Navy/AF/USMC",
+     "vendor": "multiple (Raytheon, Leidos, GD, etc. historically)",
+     "note": "Public evidence insufficient in this run for 2025-26 status; TITAN is the Army successor for deep-sensing ground stations. INFERENCE."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/7DAAE9E9194E7EE6F7AF238913C5E512",
+     "pub_date": "2026-06-23"
+    },
+    {
+     "url": "https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase/",
+     "pub_date": "2025-05-23"
+    },
+    {
+     "url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/",
+     "pub_date": "2026-04-15"
+    },
+    {
+     "url": "https://github.com/anduril/lattice-sdk-python",
+     "pub_date": "2026-09-22"
+    },
+    {
+     "url": "https://github.com/TAK-Product-Center/Server",
+     "pub_date": "2026-09-22"
+    },
+    {
+     "url": "https://systematic.com/us/industries/defense/products/domains/interoperability/usmtf/",
+     "pub_date": "n/a"
+    }
+   ]
+  },
+  {
+   "step": "NORMALIZE",
+   "what_happens": "Translating heterogeneous inputs into common entity/track/event models with shared identifiers, time references, coordinate systems and symbology; deduplicating; attaching provenance, classification and releasability labels; converting legacy message formats to APIs. The NGC2 CDL baseline's stated tools are 'data registries, transformation, and federation' (Raft).",
+   "who_performs": "Platform vendors' engineers; government data stewards (Army Unified Data Reference Architecture - not verified this run); coalition data-centric-security teams.",
+   "hardware": "Runs on the same edge/cloud compute as ingest.",
+   "software": "Raft transformation tools, Foundry ontology, Lattice entity model, TAK Server, Systematic SitaWare/IRIS message tooling, NIEM-based USMTF-XML mappers, milsymbol (MIL-STD-2525/APP-6 renderer).",
+   "data_formats_protocols": [
+    "MIL-STD-2525 / APP-6 symbology - verified (spatialillusions/milsymbol, stanag-app6)",
+    "CoT type taxonomy (e.g., a-f-G-U-C) - verified",
+    "STANAG 4676 track schema - verified",
+    "Data-centric security labels (NATO DCS, IC ISM) - DCS referenced in Thales HexaForce PR; details not verified",
+    "GeoJSON/KML/OGC for exchange - common but not verified in this run for specific programs"
+   ],
+   "human_in_loop": "Analysts resolve entity conflicts; disposition overrides (Lattice SDK exposes override_entity on mil_view.disposition - FACT); labeling decisions for releasability remain human.",
+   "latency_sources": "Correlation windows, human adjudication of conflicts, label review.",
+   "comms_dependencies": "Federation between edge and cloud copies needs intermittent connectivity.",
+   "when_connectivity_disappears": "Local normalization continues; global identifiers may collide when re-connected (INFERENCE: this is the CRDT/merge problem Ditto and similar target).",
+   "interoperability_requirements": "Common data baseline across vendor stacks (the June 2026 CDL decision was driven by two divergent stacks); coalition schema alignment (UK LOSA/Land Data Model, NATO FMN).",
+   "security_domain": "Per-enclave; labeling is the precondition for cross-domain and coalition release.",
+   "owning_organizations": "Army C2/CC2 portfolio (Joseph Welch), CDAO (Open DAGIR ecosystem), NATO NCIA, UK MOD (LOSA).",
+   "incumbent_systems": [
+    {
+     "name": "Raft Data Platform (registries, transformation, federation)",
+     "service": "Army NGC2",
+     "vendor": "Raft",
+     "note": "Named in June 2026 CDL baseline. FACT; dollar value not disclosed."
+    },
+    {
+     "name": "Open DAGIR",
+     "service": "OSD CDAO",
+     "vendor": "ecosystem",
+     "note": "Referenced as aligning architecture for COTS onboarding (Legion Intelligence PR, Jul 2025). Status 2026: Public evidence insufficient."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/7DAAE9E9194E7EE6F7AF238913C5E512",
+     "pub_date": "2026-06-23"
+    },
+    {
+     "url": "https://github.com/spatialillusions/milsymbol",
+     "pub_date": "2026-09-21"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/5669A41DA923C9CB61D4A94645FE06A1",
+     "pub_date": "2026-09-21"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/038EA42EACCB566F867A56CE1965E4CD",
+     "pub_date": "2025-07-08"
+    }
+   ]
+  },
+  {
+   "step": "STORE",
+   "what_happens": "Persisting raw and normalized data at edge nodes, command-post servers and cloud, with replication/synchronization between them. The architecture is explicitly 'edge-to-cloud data mesh' (Lattice tactical + Foundry cloud). Enterprise analytics store: Advana (CDAO) - status not verified this run.",
+   "who_performs": "Platform operators, S6/G6, cloud service providers under DoD contracts (JWCC - not verified this run), NGA/CDAO.",
+   "hardware": "Edge compute kits (TITAN, TOC-L, command-post servers), commercial cloud regions at IL levels, disconnected 'tactical cloud' nodes.",
+   "software": "Foundry, Lattice, Raft, Maven; Ditto (peer-to-peer sync over Bluetooth/P2P Wi-Fi/MANET, under evaluation by USMC Project Dynamis, July 2026).",
+   "data_formats_protocols": [
+    "Object stores/parquet-style analytics formats (assumed; not verified)",
+    "Protobuf/gRPC (Lattice, TAK streaming) - verified",
+    "CRDT-style sync (Ditto) - vendor description"
+   ],
+   "human_in_loop": "Data retention/classification decisions; otherwise automated.",
+   "latency_sources": "Replication lag edge<->cloud; conflict resolution; bandwidth-constrained backhaul.",
+   "comms_dependencies": "Sync needs intermittent links; local stores must be self-sufficient.",
+   "when_connectivity_disappears": "Edge stores keep serving local apps; reconciliation on reconnect; risk of stale or conflicting pictures across echelons (the core DDIL problem).",
+   "interoperability_requirements": "Common schemas and APIs so apps from different vendors read the same store; export controls on data rights (Aviation Week Sept 2026 warns about single-vendor gateways).",
+   "security_domain": "Stores are per enclave; Maven spans three domains via separate instances (FACT: 'three security domains').",
+   "owning_organizations": "Army CPE C3N; CDAO; NGA; service cloud offices.",
+   "incumbent_systems": [
+    {
+     "name": "Palantir Foundry (NGC2 cloud data layer)",
+     "service": "Army",
+     "vendor": "Palantir",
+     "note": "Designated cloud data layer June 22, 2026. Palantir Q2 2026 gross margin note: took on cloud hosting for one government customer. FACT."
+    },
+    {
+     "name": "Anduril Lattice (NGC2 tactical data layer)",
+     "service": "Army",
+     "vendor": "Anduril",
+     "note": "Designated tactical data layer June 22, 2026. FACT."
+    },
+    {
+     "name": "Advana",
+     "service": "OSD CDAO",
+     "vendor": "Booz Allen (historically)",
+     "note": "Public evidence insufficient in this run for 2026 status."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/8BDE782D101A098DA8B21183B7EF9CF3",
+     "pub_date": "2026-06-22"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/11ACE716209B15C448881851CCF27F64",
+     "pub_date": "2026-07-21"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/31AE4EC0CBCC838647F3DE89E15BA345",
+     "pub_date": "2026-08-03"
+    }
+   ]
+  },
+  {
+   "step": "PROCESS",
+   "what_happens": "Turning raw data into exploitable products: image formation (SAR), video stabilization, radar plot-to-track, signal demodulation/geolocation, AI object detection (computer vision on FMV/imagery; 'AI-based target recognition' added in Ivy Sting), NLP on reports. Historically the P in PED at DCGS sites; now increasingly on edge nodes (TITAN runs Maven-derived algorithms on trucks - secondary claim, MEDIUM).",
+   "who_performs": "Imagery/GEOINT analysts (NGA, service DCGS), SIGINT analysts (NSA/service), all-source at G2/S2; ML engineers building models (Maven/AWCFT, Striveworks named in NGC2 partner list).",
+   "hardware": "GPU edge servers (TITAN Advanced 'large-scale sensor processing units' - secondary), DCGS ground sites, cloud GPU.",
+   "software": "Maven Smart System CV models, Lattice perception pipelines, Striveworks MLOps, SciTec data fusion (selected for CBC2 in Q2 2026 as 'operational data fusion system'), open-source klv/gmti parsers.",
+   "data_formats_protocols": [
+    "ONNX/containerized models (assumed)",
+    "STANAG 4609 KLV in -> detections/CoT out",
+    "STANAG 4607 GMTI -> 4676 tracks"
+   ],
+   "human_in_loop": "Analysts validate detections; model retraining loops; NGA planned fully machine-generated intelligence products to COCOMs by June 2026 (Whitworth statement - FACT that it was stated; delivery unverified).",
+   "latency_sources": "Model inference time, backhaul of full-rate video, analyst queue depth, cross-domain transfer of products.",
+   "comms_dependencies": "Edge processing reduces backhaul need; enterprise processing needs full data reach-back.",
+   "when_connectivity_disappears": "Edge models keep running (TITAN, Lattice edge); enterprise-scale models and model updates unavailable.",
+   "interoperability_requirements": "Model-output schemas compatible with track/entity models; provenance metadata; classification of model outputs.",
+   "security_domain": "Follows source data; SIGINT/national imagery products are TS/SCI and need downgrade for tactical use (a recurring bottleneck - INFERENCE supported by GAO 'overly restrictive classification' finding).",
+   "owning_organizations": "NGA (Maven executive agent), CDAO, Army PEO IEW&S (TITAN), AF PAE C3BM, NRO.",
+   "incumbent_systems": [
+    {
+     "name": "Maven Smart System (AI/CV)",
+     "service": "Joint",
+     "vendor": "Palantir (platform) + model providers",
+     "note": "20,000+ users across 35+ tools in three domains (NGA, 2025). FACT (user counts as stated by NGA)."
+    },
+    {
+     "name": "TITAN",
+     "service": "Army",
+     "vendor": "Palantir/Anduril",
+     "note": "Deep sensing PED at the edge; production Sept 2026."
+    },
+    {
+     "name": "SciTec operational data fusion for CBC2",
+     "service": "Air Force",
+     "vendor": "Firefly Aerospace (SciTec)",
+     "note": "Contract option awarded Q2 2026 after multi-year competition (Firefly Q2 2026 call). FACT; value not disclosed."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/7EEA47601AAC5265ECD90F7F62F6F82F",
+     "pub_date": "2026-08-11"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/53F63C3F5D3956CDB96AC74FE0990034",
+     "pub_date": "2026-09-04"
+    },
+    {
+     "url": "https://www.csis.org/analysis/what-maven-smart-system-and-what-does-it-do",
+     "pub_date": "2025"
+    }
+   ]
+  },
+  {
+   "step": "FUSE",
+   "what_happens": "Correlating detections/tracks from multiple sensors into a single track per object with fire-control quality where needed (air and missile defense), and building a single integrated air/ground/maritime picture. Two distinct grades: fire-control fusion (IBCS 'fire control quality data', Aegis, Link 16 track management with track-number deconfliction) and situational-awareness fusion (COP entity merge in Lattice/Foundry/TAK). Also multi-INT fusion for targeting (TITAN, Maven).",
+   "who_performs": "Air defense fire-control crews and battle managers (Army ADA, Navy TAO/CIC, AF CRC/AWACS), track supervisors on Link 16 networks, intelligence targeting cells; algorithms do most correlation.",
+   "hardware": "IBCS Engagement Operations Centers and Integrated Fire Control Network relays; Aegis; AWACS/E-2D mission computers; TITAN.",
+   "software": "IBCS (Northrop), Aegis, Lockheed CommandIQ (demonstrated at Valiant Shield 2026 with Aegis Guam and TPY-6 at multiple classification levels), Lattice entity fusion ('merged_from' field in SDK), Foundry ontology, TAK Server.",
+   "data_formats_protocols": [
+    "Link 16 J3.x track messages with track numbers - verified",
+    "STANAG 4676 - verified",
+    "IBCS Integrated Fire Control Network (proprietary/open per vendor) - vendor claim",
+    "Lattice Entity with merged_from - verified in SDK"
+   ],
+   "human_in_loop": "Track supervisors resolve dual tracks; ID/disposition overrides; engagement authority stays human.",
+   "latency_sources": "Correlation gating windows, network update rates (Link 16 slot allocation), cross-vendor track handoff, multi-classification merging.",
+   "comms_dependencies": "Fire-control fusion needs low-latency, jam-resistant links (Link 16, IFCN); SA fusion tolerates delay.",
+   "when_connectivity_disappears": "Local sensor-only tracks; loss of composite picture; risk of duplicate tracks and fratricide - the DDIL fusion problem.",
+   "interoperability_requirements": "Track number management across networks, common ID doctrine, coalition track exchange (Link 16/22), IFF Mode 5.",
+   "security_domain": "Secret (Link 16) and above; coalition track sharing via releasable networks.",
+   "owning_organizations": "Army PEO Missiles & Space (IBCS), Navy PEO IWS (Aegis), AF PAE C3BM, MDA/Golden Dome (C2 not yet clear - Public evidence insufficient).",
+   "incumbent_systems": [
+    {
+     "name": "IBCS",
+     "service": "Army (+Poland)",
+     "vendor": "Northrop Grumman",
+     "note": "Full-rate production began Nov 2025; $1.4B LRIP/FRP contract Dec 2021; Poland WISLA FOC Dec 2025; $481M 5-yr software development award Feb 2025 ($133.7M US/Guam); 34th consecutive successful flight test July 2026; ~12 nations requested export. FACT."
+    },
+    {
+     "name": "Aegis / Aegis Guam",
+     "service": "Navy/MDA",
+     "vendor": "Lockheed Martin",
+     "note": "Demonstrated with CommandIQ at Valiant Shield 2026 (vendor release, Jul 2026)."
+    },
+    {
+     "name": "Link 16 track management",
+     "service": "Joint",
+     "vendor": "multiple",
+     "note": "Backbone of fire-control-quality track exchange; FDD (Aug 2026) calls Link 16 and C2BMC 'narrow, purpose-built workarounds' rather than unified C2."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/712690C151716D678C3797503B2E4A19",
+     "pub_date": "2026-03-18"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/EE13545D13ED8A3A2B31764C516385F8",
+     "pub_date": "2025-02-12"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/CD81F9C430AC9A7B45837079B3781115",
+     "pub_date": "2026-07-08"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/F4A484EB74822F10B071FA4B37A6C5AB",
+     "pub_date": "2026-07-08"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/86ED7C4AAB1D767DF728650C64A147EF",
+     "pub_date": "2026-08-18"
+    }
+   ]
+  },
+  {
+   "step": "IDENTIFY/INTERPRET",
+   "what_happens": "Assigning identity, disposition (friend/hostile/neutral/unknown), intent and significance to fused objects; target development (positive identification, collateral estimation, target nomination); pattern-of-life; threat assessment. Includes automated target nomination and 'common intelligence picture' in TITAN.",
+   "who_performs": "Intelligence analysts (S2/G2, targeting cells, JIOC), identification authorities in air defense, JAG for collateral review, commanders for target approval.",
+   "hardware": "Analyst workstations, TITAN, Maven-enabled terminals.",
+   "software": "Maven Smart System, TITAN software, Lattice (disposition), Foundry, DCGS family analyst tools; Legion Intelligence GenAI at USSOCOM (Jul 2025).",
+   "data_formats_protocols": [
+    "MIL-STD-2525 disposition/identity codes",
+    "IFF Mode 5 (Lattice 'mode5' type) - verified in SDK",
+    "USMTF targeting messages (e.g., target nominations) - existence verified, program use not verified",
+    "STIX/TAXII for cyber threat intel - not verified in this run"
+   ],
+   "human_in_loop": "Strongest human control point: PID and target approval are human by policy; AI assists nomination. NGA states machine-generated products are coming (2026) - a shift to watch.",
+   "latency_sources": "Human review queues, legal review, cross-domain movement of national intelligence, ambiguity requiring more collection.",
+   "comms_dependencies": "Needs access to enterprise intelligence holdings; degraded links force reliance on organic collection.",
+   "when_connectivity_disappears": "Local identification only; higher-echelon target approval may be impossible - mission command/pre-delegated authorities needed (Casey Miller, AFC: flexible authorities when comms disrupted).",
+   "interoperability_requirements": "Shared ID doctrine and symbology; releasable target data for coalition fires.",
+   "security_domain": "Frequently TS/SCI at source; must be sanitized to S or REL for tactical action.",
+   "owning_organizations": "NGA, service intelligence centers, COCOM J2, targeting boards.",
+   "incumbent_systems": [
+    {
+     "name": "Maven Smart System",
+     "service": "Joint",
+     "vendor": "Palantir",
+     "note": "Primary enterprise targeting/ID environment at COCOMs. FACT."
+    },
+    {
+     "name": "TITAN",
+     "service": "Army",
+     "vendor": "Palantir",
+     "note": "Automated target nomination and common intelligence picture (secondary description)."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/18191315E6B65C2291D2BA92551C9806",
+     "pub_date": "2026-09-23"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/380C880A26B925AC1435EA653456AE33",
+     "pub_date": "2026-09-16"
+    },
+    {
+     "url": "https://github.com/anduril/lattice-sdk-python",
+     "pub_date": "2026-09-22"
+    }
+   ]
+  },
+  {
+   "step": "VISUALIZE",
+   "what_happens": "Rendering the common operating picture (COP): friendly/enemy positions, tracks, overlays, airspace, fires, logistics status on maps and dashboards at every echelon, from ATAK on a handheld to division main command posts and COCOM operations centers. PC-C6 leaders called 'common visualization' a clear success (secondary).",
+   "who_performs": "Every operator and staff section; battle captains, JOC watch floors, pilots and vehicle crews.",
+   "hardware": "End-user devices (ATAK phones/tablets), command-post displays, vehicle displays, TOC-L kits.",
+   "software": "TAK family (ATAK/WinTAK/iTAK/TAK Server; large open-source ecosystem: TAK Server 692 GitHub stars, FreeTAKServer 961, OpenTAKServer 382, pytak 255), Lattice UI, Foundry/Maven apps, CPCE (legacy Army), GCCS-J (joint, legacy), CommandIQ, SitaWare (Systematic), Thales HexaForce (NATO market), C2Core Air (Parsons).",
+   "data_formats_protocols": [
+    "MIL-STD-2525 / APP-6 symbology - verified",
+    "CoT / TAK protocol - verified",
+    "KML/GeoJSON/OGC WMS/WMTS for overlays - common, not program-verified",
+    "JREAP feed into COP - verified via secondary"
+   ],
+   "human_in_loop": "Fully human consumption; configuration of layers/filters; cognitive-load management is an explicit Army evaluation criterion for NGC2 (BI, Jul 2026).",
+   "latency_sources": "Refresh rates, map tile availability offline, rendering thousands of entities on low-power devices.",
+   "comms_dependencies": "Needs a feed; TAK operates over mesh/multicast locally.",
+   "when_connectivity_disappears": "Last-known picture with stale indicators (CoT 'stale' attribute); local mesh keeps blue-force tracking among nearby nodes.",
+   "interoperability_requirements": "Shared symbology and overlays; app portability across NGC2 vendor stacks (Army says divisions will 'reuse applications').",
+   "security_domain": "Any; coalition COP requires REL data feeds (SABRE/MPE).",
+   "owning_organizations": "TAK Product Center (government-owned), Army CPE C3N, DISA (GCCS-J), AF PAE C3BM.",
+   "incumbent_systems": [
+    {
+     "name": "TAK / ATAK / TAK Server",
+     "service": "Joint, DHS, allies",
+     "vendor": "TAK Product Center (government) + ecosystem",
+     "note": "De facto tactical SA standard; protobuf TAK Protocol v1 verified in public repo. FACT."
+    },
+    {
+     "name": "GCCS-J",
+     "service": "Joint (DISA)",
+     "vendor": "legacy integrators",
+     "note": "Public evidence insufficient in this run for JPES/replacement status."
+    },
+    {
+     "name": "CPCE / Command Post Computing Environment",
+     "service": "Army",
+     "vendor": "legacy",
+     "note": "Being superseded by NGC2 stack; divestment via 30-month replacement strategy per GAO Aug 2026 (which cites transport/infrastructure legacy divestment). INFERENCE for CPCE specifically."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://github.com/FreeTAKTeam/FreeTakServer",
+     "pub_date": "2026-09-23"
+    },
+    {
+     "url": "https://github.com/snstac/pytak",
+     "pub_date": "2026-09-22"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/262AF5132D1320C08257B5648C3A9F09",
+     "pub_date": "2026-07-29"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/EF80C35C92B34B2F7CDD34B169B63845",
+     "pub_date": "2026-09-21"
+    }
+   ]
+  },
+  {
+   "step": "DECIDE",
+   "what_happens": "Commanders and delegated authorities choose courses of action, approve targets, allocate fires and assets; increasingly supported by AI decision aids (Lockheed 'AI decision aid' at Lightning Surge 4; AF DASH human-machine teaming sprints; 'game theory' experiments). Doctrine emphasizes mission command with pre-delegated authorities for disconnected operations.",
+   "who_performs": "Commanders at every echelon; fires and air defense engagement authorities; JFACC/AOC for air tasking; COCOM commanders for joint targeting.",
+   "hardware": "Command-post displays, TOC-L, AOC systems.",
+   "software": "Onebrief (planning layer in 4ID NGC2, integrated with Anduril, Palantir, Striveworks, Govini, ICE, Rune, RII, Microsoft), Maven Smart System, IBCS engagement software, AFATDS/JADOCS (fires - status not verified this run), Lattice/Foundry decision apps.",
+   "data_formats_protocols": [
+    "USMTF orders (OPORD, ATO, ACO) - format verified; usage in named programs not verified",
+    "VMF fire mission messages - format verified",
+    "Onebrief/other proprietary planning schemas"
+   ],
+   "human_in_loop": "By policy the decision is human; DASH experiments explicitly test where machines handle data processing so humans decide faster; ROK-US forum raised 'can commander refuse AI recommendation' (Sept 2026).",
+   "latency_sources": "Staff planning cycles (Onebrief claims hours-to-minutes, vendor claim), approval chains, legal review, waiting for PID.",
+   "comms_dependencies": "Higher-echelon approval needs connectivity; otherwise pre-delegation.",
+   "when_connectivity_disappears": "Mission command: subordinates act on intent; risk of uncoordinated fires and airspace conflicts.",
+   "interoperability_requirements": "Plans and orders must flow into execution systems ('rather than stalling across disconnected tools' - Onebrief claim), coalition C2 relationships.",
+   "security_domain": "Typically Secret; coalition decision cycles need REL products.",
+   "owning_organizations": "Combatant commands, service component commands, division/corps commanders; Army C2 CFT.",
+   "incumbent_systems": [
+    {
+     "name": "Onebrief",
+     "service": "Army NGC2 (4ID) + others",
+     "vendor": "Onebrief",
+     "note": "Planning layer at division scale (vendor PR June 26, 2026); contract values not disclosed. Vendor claim, MEDIUM."
+    },
+    {
+     "name": "AFATDS / JADOCS / Joint Fires Network",
+     "service": "Army/Joint",
+     "vendor": "L3Harris (AFATDS historically) / others",
+     "note": "Public evidence insufficient in this run for 2026 status."
+    },
+    {
+     "name": "DAF DASH sprints (ABMS CFT + AFRL)",
+     "service": "Air Force/Space Force",
+     "vendor": "industry software developers",
+     "note": "Sept 2026 two-week sprint at ShOC-N; capabilities validated then transitioned to classified networks. FACT."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/829AD92ED79ACAF420F88752F1F879E4",
+     "pub_date": "2026-06-26"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/F4AB40CDA0A70FA20C299227E5924326",
+     "pub_date": "2026-09-08"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/7D13D0CAB3FD59C745C3821A9034453A",
+     "pub_date": "2026-07-01"
+    }
+   ]
+  },
+  {
+   "step": "COLLABORATE",
+   "what_happens": "Staffs, echelons, services and coalition partners work the same plan/picture together: chat, voice, shared documents, planning boards, video, with releasability control. Coalition collaboration runs through Mission Partner Environments (MPE), SABRE and FMN-compliant networks.",
+   "who_performs": "Staff officers, liaison officers, coalition cells; DISA (MPE), COCOM J6.",
+   "hardware": "Command-post networks, coalition enclaves, radios/voice (Instant Connect Enterprise named as NGC2 partner - push-to-talk over IP inferred).",
+   "software": "Onebrief, Microsoft (named in NGC2 partner list), MPE/SABRE services, chat (details not verified), TAK chat, Thales HexaForce (FMN/DCS).",
+   "data_formats_protocols": [
+    "FMN spirals (NATO) - referenced",
+    "Data-centric security labels",
+    "XMPP/other chat - not verified"
+   ],
+   "human_in_loop": "Entirely human, with policy gates for release.",
+   "latency_sources": "Releasability review, network separation (US-only vs REL), manual re-entry between enclaves ('swivel chair' - INFERENCE, consistent with AFA panel: policy not technology impedes sharing).",
+   "comms_dependencies": "High: collaboration tools need persistent connectivity; degraded modes fall back to voice/text.",
+   "when_connectivity_disappears": "Local-only collaboration; coalition partners drop out first (separate enclaves).",
+   "interoperability_requirements": "MPE/FMN compliance, common labeling, identity federation (ICAM/zero trust) across partners.",
+   "security_domain": "Secret-REL enclaves (SABRE), CENTRIXS/BICES families; US-only Secret separate.",
+   "owning_organizations": "DISA (MPE), Joint Staff (CJCSI 6290.01A), INDOPACOM/EUCOM J6, NATO NCIA.",
+   "incumbent_systems": [
+    {
+     "name": "Mission Partner Environment / SABRE",
+     "service": "Joint (DISA)",
+     "vendor": "GDIT, SAIC and others",
+     "note": "INDOPACOM MPE cited as blueprint (2024); DISA evolving to data-centric/zero trust. Contract values: Public evidence insufficient."
+    },
+    {
+     "name": "Thales HexaForce",
+     "service": "NATO/allied",
+     "vendor": "Thales",
+     "note": "Launched Sept 2026; tested at CWIX 2026; FMN/DCS native. Vendor claim."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://federalnewsnetwork.com/commentary/2024/06/usindopacom-mission-partner-environment-success-a-blueprint-for-cjadc2-path-forward/",
+     "pub_date": "2024-06"
+    },
+    {
+     "url": "https://www.jcs.mil/Portals/36/Documents/Library/Instructions/CJCSI%206290.01A.pdf",
+     "pub_date": "n/a"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/9E2BEB2082C239A81F57548C33E2B4C6",
+     "pub_date": "2026-09-21"
+    }
+   ]
+  },
+  {
+   "step": "DISSEMINATE",
+   "what_happens": "Pushing decisions, orders, target data and intelligence products to executors and partners: fire missions to guns/launchers, ATO/ACO to wings, track data to shooters, intelligence to units, across security domains and to coalition. Cross-domain solutions and releasability gates sit here.",
+   "who_performs": "Fires cells, AOC, intelligence dissemination cells, CDS administrators, coalition release authorities.",
+   "hardware": "Cross-domain solution appliances (NCDSMO-baselined; specifics not verified), Link 16 terminals, tactical radios, SATCOM.",
+   "software": "AFATDS/fires chain (unverified 2026 status), Maven product dissemination, TAK data packages, JREAP gateways, Lattice tasking APIs.",
+   "data_formats_protocols": [
+    "VMF (fire missions) - verified format",
+    "Link 16 J-series (J12 mission assignment etc.) - verified via secondary",
+    "USMTF ATO/ACO - verified format",
+    "CoT tasking - verified"
+   ],
+   "human_in_loop": "Release authorities and CDS reviewers; automated for machine-to-machine fires once approved.",
+   "latency_sources": "Cross-domain transfer approval, format translation across generations of systems, retransmission over degraded links.",
+   "comms_dependencies": "Total; the 'last tactical mile' to the shooter is the critical link.",
+   "when_connectivity_disappears": "Orders do not arrive; pre-planned fires and standing orders execute; couriers.",
+   "interoperability_requirements": "Every shooter's native message format must be supported (VMF, Link 16, proprietary); coalition release.",
+   "security_domain": "Crossing from TS/SCI or S to S-REL or tactical U is the bottleneck GAO flagged ('overly restrictive data classification').",
+   "owning_organizations": "NSA/NCDSMO (CDS policy), DISA, service fires/air C2 PEOs.",
+   "incumbent_systems": [
+    {
+     "name": "Cross-domain solutions (various)",
+     "service": "Joint",
+     "vendor": "multiple",
+     "note": "Public evidence insufficient in this run for 2025-26 procurement; policy-driven bottleneck confirmed by GAO Apr 2025 and AFA panel Sept 2026."
+    },
+    {
+     "name": "Link 16 / JREAP dissemination",
+     "service": "Joint",
+     "vendor": "multiple",
+     "note": "Fire-control-quality dissemination to shooters."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://www.gao.gov/products/gao-25-106454",
+     "pub_date": "2025-04-08"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/9E2BEB2082C239A81F57548C33E2B4C6",
+     "pub_date": "2026-09-21"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Variable_Message_Format",
+     "pub_date": "n/a"
+    }
+   ]
+  },
+  {
+   "step": "TASK",
+   "what_happens": "Converting decisions into executable tasking of sensors, shooters, autonomous systems and units: fire missions to howitzers (Ivy Sting: 26 live-fire M777 missions run through an artillery suite on Lattice, Sept 2025, sensor-to-shooter under one minute - vendor claim), air tasking orders, ISR collection requests, drone/robot mission assignment (Replicator autonomous collaborative teaming C2), counter-UAS engagements.",
+   "who_performs": "Fire direction centers, AOC, collection managers, UAS operators, autonomy supervisors.",
+   "hardware": "Weapon platforms' fire-control computers, ground control stations, IBCS EOCs, drone controllers.",
+   "software": "Artillery suite on Lattice (NGC2), AFATDS (legacy), IBCS engagement, Swarm Aero Legion, L3Harris-led Replicator C2 prototype, Tesseract NOMAD, Anduril Lattice autonomy, Parsons DroneArmor (C-UAS C2), XTEND XOS / Quantum MOSAIC (allied).",
+   "data_formats_protocols": [
+    "VMF fire missions - verified format",
+    "Link 16 J-series tasking - verified via secondary",
+    "MAVLink for sUAS (open standard) - not verified for named programs",
+    "Lattice tasking API - SDK verified"
+   ],
+   "human_in_loop": "Human authorizes lethal tasking; autonomy handles routing/formation; 'one operator to dozens of platforms' is a vendor goal (Swarm Aero) not an independently verified operational fact.",
+   "latency_sources": "Format translation between C2 app and weapon, human approval, weapon readiness, drone C2 link limits. Replicator lesson: software could not command large heterogeneous drone sets (CRS via secondary, MEDIUM).",
+   "comms_dependencies": "Control links to platforms; loss forces autonomy or abort.",
+   "when_connectivity_disappears": "Pre-planned fires only; autonomous systems continue per onboard mission logic; UAS return-to-base behaviors.",
+   "interoperability_requirements": "Weapon-specific interfaces (ICDs); heterogeneous drone C2 standards; coalition fires (UK Digital Targeting Web link demonstrated at PC-C6 via Viasat).",
+   "security_domain": "Secret typically; some sUAS control unclassified.",
+   "owning_organizations": "Army fires community (Fires CoE), IBCS PEO, DIU/DAWG for autonomy (per July 2026 memo naming DIU primary liaison - secondary), AF AOC weapon systems.",
+   "incumbent_systems": [
+    {
+     "name": "AFATDS",
+     "service": "Army/USMC",
+     "vendor": "L3Harris (historically)",
+     "note": "Public evidence insufficient in this run for 2026 status or NGC2 replacement path."
+    },
+    {
+     "name": "Replicator ACT C2 (DIU)",
+     "service": "OSD/DIU",
+     "vendor": "L3Harris-led team, Swarm Aero, others (three C2 vendors)",
+     "note": "Prototype awards Nov 2024; Replicator delivered 'hundreds' not thousands by Aug 2025. FACT via secondary."
+    },
+    {
+     "name": "IBCS",
+     "service": "Army",
+     "vendor": "Northrop",
+     "note": "Engagement tasking for air/missile defense; FRP."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/A5CC10CA3DDBA5824178F6075DB814AE",
+     "pub_date": "2026-06-23"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/D6545A884AA0F9F8A05AD7F15149905F",
+     "pub_date": "2026-07-16"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/B35E1B5C8D3ABE60D076935FECB78A05",
+     "pub_date": "2026-09-14"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/73D08B952AA837103C7D31F871C67A31",
+     "pub_date": "2025-01-30"
+    }
+   ]
+  },
+  {
+   "step": "MONITOR",
+   "what_happens": "Tracking execution status: friendly force positions (blue force tracking), mission progress, weapon status, network health, sustainment levels (fuel, water, ammunition - explicitly an NGC2 app use case), spectrum/EW picture.",
+   "who_performs": "Battle captains, current-operations cells, logisticians, network operations centers, EW officers.",
+   "hardware": "Blue force tracking transceivers, vehicle telematics, network monitoring appliances.",
+   "software": "TAK/ATAK PLI, NGC2 sustainment apps (Air 'Enterprise Readiness' extended June 2026), logistics systems (details not verified), EMBM tools (Public evidence insufficient).",
+   "data_formats_protocols": [
+    "CoT position/status reports - verified",
+    "VMF K-series position reports - format verified",
+    "Logistics data standards - not verified"
+   ],
+   "human_in_loop": "Watch officers interpret; automated alerts increasingly.",
+   "latency_sources": "Reporting intervals, bandwidth reserved for PLI, manual status reporting (still common - INFERENCE).",
+   "comms_dependencies": "Continuous low-rate links.",
+   "when_connectivity_disappears": "Blue picture goes stale; risk of fratricide; logistics status unknown.",
+   "interoperability_requirements": "Common PLI formats across services and coalition (a chronic issue - INFERENCE).",
+   "security_domain": "U/CUI to Secret.",
+   "owning_organizations": "Army CPE C3N, sustainment community (CASCOM), service NOSCs.",
+   "incumbent_systems": [
+    {
+     "name": "Air (Enterprise Readiness) on NGC2",
+     "service": "Army",
+     "vendor": "Air",
+     "note": "Partnership extended June 29, 2026; sustainment layer; value not disclosed. Vendor claim."
+    },
+    {
+     "name": "EMBM tools",
+     "service": "Joint",
+     "vendor": "unknown",
+     "note": "Public evidence insufficient in this run."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/95371ABDA4735A58AE1805F0783BC4A6",
+     "pub_date": "2026-06-29"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/68A34B40A620EDF69041AB2A67ADE6EB",
+     "pub_date": "2026-07-30"
+    }
+   ]
+  },
+  {
+   "step": "ASSESS",
+   "what_happens": "Battle damage assessment, measures of effectiveness, after-action analysis, and feedback into collection and targeting; at enterprise level, assessment of C2 modernization itself (GAO found DoD lacks a framework to measure CJADC2 progress; Army lacks NGC2 lifecycle cost estimate and unit fielding schedule).",
+   "who_performs": "Targeting cells (BDA), J3/J5 assessment cells, operations research/systems analysis, Army Futures & Concepts Command (PC-C6 analysis), GAO/DoD IG.",
+   "hardware": "Analyst workstations; exercise instrumentation at NTC.",
+   "software": "Maven (imagery-based BDA - inferred), Foundry analytics, exercise instrumentation and data collection systems (not verified).",
+   "data_formats_protocols": [
+    "Imagery/FMV standards for BDA",
+    "Exercise data formats - not verified"
+   ],
+   "human_in_loop": "Predominantly human judgment.",
+   "latency_sources": "Re-collection for BDA, analysis cycles, classification of assessments.",
+   "comms_dependencies": "Moderate; assessment can be delayed.",
+   "when_connectivity_disappears": "Assessment deferred.",
+   "interoperability_requirements": "Feedback loops into collection management and targeting systems.",
+   "security_domain": "Secret and above.",
+   "owning_organizations": "COCOM J2/J3, AFC, GAO/IG for program assessment.",
+   "incumbent_systems": [
+    {
+     "name": "Project Convergence / Ivy Sting / Lightning Surge / DASH / GIDE experimentation",
+     "service": "Army / AF / OSD",
+     "vendor": "government-led",
+     "note": "Army moving to cadence of smaller experiments plus capstones; CDAO GIDE every 90 days with GIDE X for integration issues (Mar 2025). FACT."
+    }
+   ],
+   "sources": [
+    {
+     "url": "https://app.bigdata.com/documents/6EF0A68FA80C7860ACEF42821A327507",
+     "pub_date": "2026-08-20"
+    },
+    {
+     "url": "https://app.bigdata.com/documents/02E33D83F9A90D1102856C023EFB07C6",
+     "pub_date": "2025-03-31"
+    },
+    {
+     "url": "https://www.gao.gov/products/gao-25-106454",
+     "pub_date": "2025-04-08"
+    }
+   ]
+  }
+ ],
+ "architecture_graph": {
+  "nodes": [
+   {
+    "id": "s_space",
+    "label": "National/SDA/commercial satellites (EO, SIGINT, tracking)",
+    "layer": "sensor",
+    "echelon": "national/strategic"
+   },
+   {
+    "id": "s_air",
+    "label": "Airborne ISR and AEW (E-2D, RC-135, MQ-9)",
+    "layer": "sensor",
+    "echelon": "operational"
+   },
+   {
+    "id": "s_radar",
+    "label": "Ground/ship radars (AN/TPQ-53, TPY-6, Aegis SPY)",
+    "layer": "sensor",
+    "echelon": "tactical/operational"
+   },
+   {
+    "id": "s_suas",
+    "label": "sUAS and soldier reports (Ghost-X, ATAK EUD)",
+    "layer": "sensor",
+    "echelon": "tactical (platoon-brigade)"
+   },
+   {
+    "id": "t_link16",
+    "label": "Link 16 / MIDS JTRS network",
+    "layer": "transport",
+    "echelon": "tactical/operational"
+   },
+   {
+    "id": "t_jreap",
+    "label": "JREAP / SIMPLE gateways",
+    "layer": "transport",
+    "echelon": "operational"
+   },
+   {
+    "id": "t_satcom",
+    "label": "SATCOM: GEO/MEO + Starshield/MILNET + SDA transport (laser mesh)",
+    "layer": "transport",
+    "echelon": "all"
+   },
+   {
+    "id": "t_radio",
+    "label": "Tactical radios / MANET / private 5G / mesh",
+    "layer": "transport",
+    "echelon": "tactical"
+   },
+   {
+    "id": "t_disn",
+    "label": "DISN / MPE / SABRE coalition enclaves",
+    "layer": "transport",
+    "echelon": "strategic/operational"
+   },
+   {
+    "id": "d_edge",
+    "label": "Tactical data layer: Anduril Lattice (NGC2 edge), TITAN, TOC-L",
+    "layer": "data",
+    "echelon": "division and below"
+   },
+   {
+    "id": "d_cloud",
+    "label": "Cloud data layer: Palantir Foundry (NGC2), Maven Smart System (NGA/CDAO)",
+    "layer": "data",
+    "echelon": "corps to COCOM"
+   },
+   {
+    "id": "d_reg",
+    "label": "Registries/transformation/federation: Raft Data Platform",
+    "layer": "data",
+    "echelon": "enterprise"
+   },
+   {
+    "id": "d_tak",
+    "label": "TAK Server (CoT/protobuf) federation",
+    "layer": "data",
+    "echelon": "tactical"
+   },
+   {
+    "id": "d_sync",
+    "label": "DDIL sync/replication (Ditto - USMC evaluation)",
+    "layer": "data",
+    "echelon": "tactical"
+   },
+   {
+    "id": "p_ai",
+    "label": "AI processing: CV/ATR (Maven models, Striveworks MLOps, SciTec fusion for CBC2)",
+    "layer": "processing",
+    "echelon": "edge and enterprise"
+   },
+   {
+    "id": "p_fc",
+    "label": "Fire-control fusion: IBCS, Aegis, CommandIQ",
+    "layer": "processing",
+    "echelon": "tactical/operational"
+   },
+   {
+    "id": "p_sa",
+    "label": "SA fusion/entity merge (Lattice merged_from, Foundry ontology)",
+    "layer": "processing",
+    "echelon": "all"
+   },
+   {
+    "id": "a_plan",
+    "label": "Planning/collaboration apps (Onebrief, Microsoft)",
+    "layer": "application",
+    "echelon": "division/corps/COCOM"
+   },
+   {
+    "id": "a_fires",
+    "label": "Fires/airspace apps (artillery suite on Lattice; AFATDS/JADOCS legacy - status unverified)",
+    "layer": "application",
+    "echelon": "battalion-corps"
+   },
+   {
+    "id": "a_sust",
+    "label": "Sustainment apps (Air Enterprise Readiness)",
+    "layer": "application",
+    "echelon": "brigade-division"
+   },
+   {
+    "id": "a_auto",
+    "label": "Autonomy C2 (Lattice, Swarm Legion, L3Harris ACT, Tesseract NOMAD)",
+    "layer": "application",
+    "echelon": "tactical"
+   },
+   {
+    "id": "a_cop",
+    "label": "COP/visualization (ATAK/WinTAK, Lattice UI, Foundry apps, GCCS-J legacy, HexaForce/SitaWare abroad)",
+    "layer": "application",
+    "echelon": "all"
+   },
+   {
+    "id": "u_cdr",
+    "label": "Commanders and staffs (mission command)",
+    "layer": "user",
+    "echelon": "all"
+   },
+   {
+    "id": "u_shooter",
+    "label": "Shooters: howitzers, launchers, aircraft, ships, drones",
+    "layer": "user",
+    "echelon": "tactical"
+   },
+   {
+    "id": "u_coal",
+    "label": "Coalition partners (UK DTW, NATO FMN)",
+    "layer": "user",
+    "echelon": "operational"
+   },
+   {
+    "id": "sec_cds",
+    "label": "Cross-domain solutions and releasability labeling (DCS)",
+    "layer": "security",
+    "echelon": "enterprise"
+   },
+   {
+    "id": "sec_icam",
+    "label": "ICAM / zero trust / cATO",
+    "layer": "security",
+    "echelon": "enterprise"
+   }
+  ],
+  "edges": [
+   {
+    "from": "s_space",
+    "to": "t_satcom",
+    "label": "imagery/tracks over laser crosslinks and Ka downlink",
+    "note": ""
+   },
+   {
+    "from": "s_air",
+    "to": "t_link16",
+    "label": "J-series tracks; FMV via CDL/SATCOM",
+    "note": ""
+   },
+   {
+    "from": "s_radar",
+    "to": "p_fc",
+    "label": "plots/tracks (IFCN, Aegis)",
+    "note": ""
+   },
+   {
+    "from": "s_radar",
+    "to": "d_edge",
+    "label": "AN/TPQ-53 feed into NGC2 (Ivy Sting)",
+    "note": ""
+   },
+   {
+    "from": "s_suas",
+    "to": "d_tak",
+    "label": "CoT XML / TAK protobuf over multicast/TCP",
+    "note": ""
+   },
+   {
+    "from": "s_suas",
+    "to": "d_edge",
+    "label": "Ghost-X feed; KLV FMV",
+    "note": ""
+   },
+   {
+    "from": "t_link16",
+    "to": "t_jreap",
+    "label": "J-series encapsulated over IP/SATCOM (JREAP-C)",
+    "note": ""
+   },
+   {
+    "from": "t_jreap",
+    "to": "d_edge",
+    "label": "parsed J-series into entities",
+    "note": ""
+   },
+   {
+    "from": "t_jreap",
+    "to": "a_cop",
+    "label": "track feed to COP",
+    "note": ""
+   },
+   {
+    "from": "t_satcom",
+    "to": "d_cloud",
+    "label": "backhaul edge->cloud; MILNET/SDA as future backbone",
+    "note": ""
+   },
+   {
+    "from": "t_radio",
+    "to": "d_edge",
+    "label": "tactical transport (DDIL)",
+    "note": ""
+   },
+   {
+    "from": "t_disn",
+    "to": "u_coal",
+    "label": "REL enclave access (SABRE/MPE)",
+    "note": ""
+   },
+   {
+    "from": "d_edge",
+    "to": "d_cloud",
+    "label": "edge-to-cloud data mesh (Lattice<->Foundry)",
+    "note": "Baseline set June 22, 2026"
+   },
+   {
+    "from": "d_reg",
+    "to": "d_edge",
+    "label": "data/service registry, schema transforms",
+    "note": ""
+   },
+   {
+    "from": "d_reg",
+    "to": "d_cloud",
+    "label": "federation",
+    "note": ""
+   },
+   {
+    "from": "d_tak",
+    "to": "a_cop",
+    "label": "CoT events to ATAK/WinTAK",
+    "note": ""
+   },
+   {
+    "from": "d_sync",
+    "to": "d_edge",
+    "label": "peer-to-peer replication over BT/Wi-Fi/MANET (vendor description)",
+    "note": ""
+   },
+   {
+    "from": "d_edge",
+    "to": "p_ai",
+    "label": "sensor data to edge models (TITAN)",
+    "note": ""
+   },
+   {
+    "from": "d_cloud",
+    "to": "p_ai",
+    "label": "enterprise models (Maven)",
+    "note": ""
+   },
+   {
+    "from": "p_ai",
+    "to": "p_sa",
+    "label": "detections -> entities",
+    "note": ""
+   },
+   {
+    "from": "p_fc",
+    "to": "t_link16",
+    "label": "fire-control-quality tracks to network",
+    "note": ""
+   },
+   {
+    "from": "p_sa",
+    "to": "a_cop",
+    "label": "fused entities",
+    "note": ""
+   },
+   {
+    "from": "p_sa",
+    "to": "a_fires",
+    "label": "target data",
+    "note": ""
+   },
+   {
+    "from": "d_cloud",
+    "to": "a_plan",
+    "label": "plans/orders data",
+    "note": ""
+   },
+   {
+    "from": "a_plan",
+    "to": "a_fires",
+    "label": "plan to execution (Onebrief claim)",
+    "note": ""
+   },
+   {
+    "from": "a_fires",
+    "to": "u_shooter",
+    "label": "VMF/Link 16 fire missions; sub-minute sensor-to-shooter in Ivy Sting (vendor claim)",
+    "note": ""
+   },
+   {
+    "from": "a_auto",
+    "to": "u_shooter",
+    "label": "drone/robot tasking (MAVLink/Lattice)",
+    "note": ""
+   },
+   {
+    "from": "a_sust",
+    "to": "u_cdr",
+    "label": "fuel/water/ammo status",
+    "note": ""
+   },
+   {
+    "from": "a_cop",
+    "to": "u_cdr",
+    "label": "common visualization",
+    "note": ""
+   },
+   {
+    "from": "u_cdr",
+    "to": "a_fires",
+    "label": "approval/engagement authority (human)",
+    "note": ""
+   },
+   {
+    "from": "sec_cds",
+    "to": "d_cloud",
+    "label": "TS/SCI -> S -> REL transfers (bottleneck)",
+    "note": ""
+   },
+   {
+    "from": "sec_cds",
+    "to": "u_coal",
+    "label": "releasable products",
+    "note": ""
+   },
+   {
+    "from": "sec_icam",
+    "to": "d_edge",
+    "label": "identity/policy enforcement",
+    "note": ""
+   },
+   {
+    "from": "sec_icam",
+    "to": "t_disn",
+    "label": "zero-trust access for partners",
+    "note": ""
+   },
+   {
+    "from": "u_shooter",
+    "to": "p_sa",
+    "label": "BDA/assessment feedback (weak loop)",
+    "note": ""
+   }
+  ]
+ },
+ "cross_cutting_observations": [
+  {
+   "observation": "The Army has converged NGC2's ingest/normalize/store layers on a two-vendor baseline (Lattice tactical, Foundry cloud) plus Raft registries; every future NGC2 app is expected to run on it.",
+   "evidence": "Army statement June 22, 2026; Palantir and Anduril releases; Raft named by MeriTalk.",
+   "source_url": "https://app.bigdata.com/documents/7DAAE9E9194E7EE6F7AF238913C5E512",
+   "label": "FACT"
+  },
+  {
+   "observation": "NGC2 cost is large and unbounded publicly: >$1B for 4ID full stack; potentially several $B per year; $3.3B identified through FY26; ~$904M FY27 RDT&E requested; no lifecycle cost estimate or unit-by-year schedule; goal 11 divisions and 4 corps by FY2032.",
+   "evidence": "GAO report Aug 20, 2026; Military Times Aug 4, 2026.",
+   "source_url": "https://app.bigdata.com/documents/6EF0A68FA80C7860ACEF42821A327507",
+   "label": "FACT"
+  },
+  {
+   "observation": "Contract ceilings dominate headlines and must not be read as revenue: Anduril's Army enterprise agreement carries a $20B ceiling; Maven ceiling ~$1.3B through 2029; TITAN actual production obligation is $192M for 8 systems.",
+   "evidence": "Benzinga/Anduril June 23, 2026; DefenseScoop May 2025; Military Times Sept 2, 2026.",
+   "source_url": "https://app.bigdata.com/documents/3EAA3D4A0EFB0C64D27718E187769C4D",
+   "label": "FACT"
+  },
+  {
+   "observation": "Field results at PC-C6 (July 20-29, 2026; ~9,000-10,000 personnel, six brigades, 90+ technologies) showed 'common visualization' success but intermittent connectivity and equipment overheating; the Army's evaluation criteria include kill-chain speed, survivability, jamming effects, cognitive load and allied interoperability.",
+   "evidence": "Secondary reports citing Axios; Business Insider July 29-30, 2026; National Defense Aug 18, 2026.",
+   "source_url": "https://app.bigdata.com/documents/262AF5132D1320C08257B5648C3A9F09",
+   "label": "FACT"
+  },
+  {
+   "observation": "Policy, not technology, is the binding constraint on cross-service and coalition data sharing, per GAO (overly restrictive classification) and an industry panelist at AFA 2026 ('not actually a technological impediment... policy impediments').",
+   "evidence": "GAO-25-106454 (Apr 8, 2025); af.mil AFA panel Sept 21, 2026.",
+   "source_url": "https://app.bigdata.com/documents/9E2BEB2082C239A81F57548C33E2B4C6",
+   "label": "FACT"
+  },
+  {
+   "observation": "Fire-control-grade fusion remains a separate, hardware-coupled world (IBCS in full-rate production since Nov 2025, Aegis, Link 16) from the software COP world; Link 16 and C2BMC are described by FDD as purpose-built workarounds rather than unified C2.",
+   "evidence": "Northrop releases; FDD Aug 18, 2026.",
+   "source_url": "https://app.bigdata.com/documents/86ED7C4AAB1D767DF728650C64A147EF",
+   "label": "FACT"
+  },
+  {
+   "observation": "Space transport is arriving but late: SDA Tranche 1 Transport had 63/126 satellites on orbit by July 16, 2026 after a months-long pause; cross-vendor laser mesh not yet demonstrated; SpaceX won a $2.29B LEO backbone award (May 2026).",
+   "evidence": "SpaceNews July 16 and May 26, 2026; Tech Times July 14, 2026.",
+   "source_url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+   "label": "FACT"
+  },
+  {
+   "observation": "Autonomy C2 is a demonstrated failure point: Replicator delivered hundreds, not thousands, of systems by Aug 2025, hobbled partly by software unable to command large heterogeneous drone sets; DIU issued C2/ACT software prototype awards to seven companies (Nov 2024).",
+   "evidence": "Tech Times citing CRS, July 16, 2026; Aviation Today Sept 4, 2025.",
+   "source_url": "https://app.bigdata.com/documents/D6545A884AA0F9F8A05AD7F15149905F",
+   "label": "FACT (secondary)"
+  },
+  {
+   "observation": "The app layer on the new data platforms is where non-prime startups are visibly winning slots: Onebrief (planning), Air (sustainment), Striveworks (MLOps), Govini, Rune, RII, Instant Connect, Ditto (DDIL sync, USMC).",
+   "evidence": "Vendor releases June-July 2026 naming NGC2 partner sets.",
+   "source_url": "https://app.bigdata.com/documents/829AD92ED79ACAF420F88752F1F879E4",
+   "label": "FACT (vendor-stated participation; contract values undisclosed)"
+  },
+  {
+   "observation": "Anduril publishes Lattice SDKs in six languages (since Aug 2024) with an entity model including MIL-STD-2525C and mil_view.disposition overrides, and an AI-skills repo (July 2026); technical openness of the API is real, but commercial terms, data rights and government-side licensing are not public.",
+   "evidence": "GitHub anduril/lattice-sdk-* repos.",
+   "source_url": "https://github.com/anduril/lattice-sdk-python",
+   "label": "FACT + INFERENCE"
+  },
+  {
+   "observation": "TAK/CoT is a government-owned, open de facto standard with a large OSS ecosystem (TAK Server, FreeTAKServer, OpenTAKServer, pytak, Meshtastic ATAK plugin), which lowers barriers for SA integrations but also commoditizes the COP layer.",
+   "evidence": "GitHub star counts Sept 2026; TAK protobuf verified.",
+   "source_url": "https://github.com/TAK-Product-Center/Server",
+   "label": "FACT"
+  },
+  {
+   "observation": "Maven is positioning as the joint developer platform (25,000 builders; a program of record chose to run on Maven) and DoD directed component transition on an aggressive timeline; Palantir's DoW TTM revenue is still <25 bps of the Pentagon budget.",
+   "evidence": "Palantir Q2 2026 earnings call Aug 3, 2026; DefenseScoop Apr 15, 2026.",
+   "source_url": "https://app.bigdata.com/documents/31AE4EC0CBCC838647F3DE89E15BA345",
+   "label": "FACT (company statements)"
+  },
+  {
+   "observation": "Two divergent prototype stacks (Lockheed/25ID vs Anduril/4ID) forced the Army to declare a common baseline within a year; app portability and cross-stack data sharing were the real pain, and the Army now explicitly wants divisions to 'reuse applications'.",
+   "evidence": "Defense One June 24, 2026 Army statement.",
+   "source_url": "https://app.bigdata.com/documents/BB75C6915637E81A62AAEFECCD85B83F",
+   "label": "INFERENCE"
+  },
+  {
+   "observation": "Sensor-to-shooter timelines are quoted in vendor materials (under one minute for 26 M777 missions; 'minutes to seconds') but no independent, exercise-published measurement was found; treat as unverified.",
+   "evidence": "Anduril and Lockheed releases 2026.",
+   "source_url": "https://app.bigdata.com/documents/7D13D0CAB3FD59C745C3821A9034453A",
+   "label": "HYPOTHESIS (vendor-claimed)"
+  },
+  {
+   "observation": "Assessment (ASSESS) is the weakest step publicly: no named systems, GAO says DoD cannot measure CJADC2 progress, and lessons-learned sharing is limited.",
+   "evidence": "GAO-25-106454.",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "label": "FACT"
+  },
+  {
+   "observation": "The DAF side is converging on the same pattern: PAE C3BM owns the DAF Battle Network; CBC2 fusion vendor (SciTec) selected; TOC-L MR2 kits due by end 2026; DASH sprints test human-machine teaming and then transition to classified networks.",
+   "evidence": "af.mil Sept 8 and Aug 24, 2026; Air & Space Forces Magazine Sept 22, 2026; Firefly Q2 2026 call.",
+   "source_url": "https://app.bigdata.com/documents/A7F5D7575B240312F3702F1867286026",
+   "label": "FACT"
+  },
+  {
+   "observation": "Allied markets are deliberately multi-vendor: NATO NCIA reportedly selected Palantir, Anduril and Athea for next-gen air C2 (July 2026) 'to avoid dependence on a specific supplier'; Thales launched HexaForce (Sept 2026) with FMN/DCS.",
+   "evidence": "Global Economic Sept 22, 2026 (secondary); Thales release.",
+   "source_url": "https://app.bigdata.com/documents/205484E9AE85C228B7FDB9BDBE6787E4",
+   "label": "FACT (LOW confidence on NCIA details)"
+  }
+ ],
+ "where_value_is_moving": "From monolithic programs of record (CPCE, DCGS-A, AFATDS-era) toward a commercially owned two-layer data platform (Lattice edge + Foundry cloud, Maven at joint level) with an app ecosystem on top. Value is moving (1) up into warfighting-function apps and workflows on those platforms (planning, sustainment, fires, airspace, C-UAS), (2) down into DDIL-tolerant sync, transport-agnostic networking and edge compute hardware integration (TITAN shelters, TOC-L kits), (3) sideways into data-centric security/releasability for coalition and cross-domain (policy-bound but underserved), (4) into test/instrumentation, EW emulation and human-machine-teaming evaluation, and (5) into commercial LEO transport (Starshield/MILNET, SDA). The platform layer itself is consolidating under enterprise agreements with very large ceilings (not obligations), which shrinks greenfield for new middleware startups but raises the number of integration points that need third-party software.",
+ "crowded_layers": [
+  "COP/visualization and geospatial SA (TAK ecosystem, Lattice UI, Foundry apps, CommandIQ, SitaWare, HexaForce)",
+  "Core data platform/middleware (Foundry, Lattice, Raft, Striveworks, Govini plus prime integration platforms)",
+  "Autonomy/swarm C2 orchestration (Lattice, Swarm Legion, L3Harris ACT team, Tesseract NOMAD, XTEND XOS, Quantum MOSAIC)",
+  "Counter-UAS C2 (Parsons DroneArmor and many others)",
+  "Fire-control C2 (IBCS, Aegis - closed, prime-owned)"
+ ],
+ "fragmented_layers": [
+  "DDIL synchronization/edge replication (Ditto plus few named vendors)",
+  "Data-centric security, labeling and releasability tooling for coalition and cross-domain",
+  "Assessment/BDA and effects analytics",
+  "Sustainment/logistics data at the tactical edge (Air; otherwise thin)",
+  "Electromagnetic battle management (no public 2026 evidence found)",
+  "Test instrumentation, EW/threat emulation and C2 experimentation tooling",
+  "Legacy message-format translation (USMTF/VMF/Link 16/OTH-Gold to modern APIs) - small vendors, Systematic, Corvus-type"
+ ],
+ "taxonomy_critique": {
+  "keep": [
+   "ISR collection",
+   "tactical comms (with the split noted below)",
+   "cloud/DevSecOps/ATO",
+   "identity/zero trust/cross-domain (merged with releasability)",
+   "PNT",
+   "EW/spectrum awareness",
+   "autonomy C2",
+   "sustainment/logistics C2"
+  ],
+  "change": [
+   {
+    "segment": "C2 apps",
+    "recommendation": "Split into (a) planning/collaboration/workflow apps, (b) execution apps by warfighting function (fires, airspace, protection, sustainment) that run on the data layer, and (c) fire-control C2 (IBCS/Aegis class) as a separate, hardware-coupled sub-segment.",
+    "why": "Evidence shows very different buyers, certification regimes and incumbents: Onebrief-type planning apps enter via OTA partner sets; fire control is in full-rate production under primes with safety certification; lumping them hides the accessible part."
+   },
+   {
+    "segment": "data fabric/middleware",
+    "recommendation": "Rename to 'data layer and adjacent services' and scope to registries, schema transformation, federation, DDIL sync and cross-stack app portability - not new core platforms.",
+    "why": "The core platform decision has been made for Army (Lattice/Foundry, June 2026) and joint (Maven directed transition, Apr 2026); the surviving startup space is services around those platforms (Raft, Ditto)."
+   },
+   {
+    "segment": "ISR PED",
+    "recommendation": "Split into 'enterprise PED' (Maven/NGA) and 'edge PED/targeting nodes' (TITAN, TOC-L), and treat edge PED jointly with 'edge compute/AI'.",
+    "why": "TITAN production (Sept 2026) shows edge PED is now a hardware-plus-software integration market distinct from enterprise analytics."
+   },
+   {
+    "segment": "geospatial/SA/track mgmt",
+    "recommendation": "Separate 'track management/fusion' (belongs with FUSE; fire-control-adjacent, Link 16/IBCS) from 'geospatial SA/COP' (commoditized by TAK and platform UIs).",
+    "why": "They have different technical difficulty, buyers and standards (STANAG 4676/Link 16 vs CoT/2525)."
+   },
+   {
+    "segment": "coalition interop",
+    "recommendation": "Treat as cross-cutting requirement plus a concrete product category: releasability labeling, data-centric security, FMN gateways and translators; merge governance with identity/zero-trust/cross-domain into 'data-centric security and releasability'.",
+    "why": "GAO and AFA panel evidence shows the blocker is policy/labeling, which is where tooling can help; pure 'interop' is not a product."
+   },
+   {
+    "segment": "tactical comms",
+    "recommendation": "Split into 'transport hardware/waveforms/SATCOM' (capital-intensive, prime and SpaceX dominated) and 'network orchestration/PACE/transport-agnostic routing software'.",
+    "why": "Software-only entrants (NetAgility-type, mesh sync) can play in the second; not in the first."
+   },
+   {
+    "segment": "edge compute/AI",
+    "recommendation": "Add 'MLOps for classified/edge and model assurance' as the startup-accessible sub-slice; keep hardware kits with edge PED.",
+    "why": "Striveworks and SciTec wins indicate MLOps/fusion algorithms are procured separately from platforms."
+   }
+  ],
+  "added_segments": [
+   "Platform app ecosystem and developer tooling (apps on Maven/Lattice/Foundry, SDK integrations, marketplaces)",
+   "Test, evaluation, instrumentation and EW/threat emulation for C2 experimentation (Ivy Sting cadence, DASH, GIDE X, NTC instrumentation)",
+   "Assessment/BDA and effects analytics (weakest step in chain, no incumbents found)",
+   "Human-machine teaming and decision support (explicit DAF DASH focus; cognitive load is an Army NGC2 metric)",
+   "C2 resilience/counter-C2 and cyber for C2 stacks (Army now names its portfolio 'Command and Control/Counter Command and Control')"
+  ]
+ },
+ "glossary": [
+  {
+   "term": "C2",
+   "definition": "Command and control: exercise of authority and direction by a commander over assigned forces."
+  },
+  {
+   "term": "C4ISR",
+   "definition": "Command, control, communications, computers, intelligence, surveillance, reconnaissance."
+  },
+  {
+   "term": "CJADC2/JADC2",
+   "definition": "(Combined) Joint All-Domain Command and Control: DoD concept to connect sensors and shooters across services and partners."
+  },
+  {
+   "term": "NGC2",
+   "definition": "Army Next Generation Command and Control: program of record (Apr 2025) with four layers - application, data, infrastructure, transport."
+  },
+  {
+   "term": "Common data layer (CDL)",
+   "definition": "NGC2 baseline of Lattice (tactical), Foundry (cloud), Raft (registries) set June 22, 2026."
+  },
+  {
+   "term": "Maven Smart System",
+   "definition": "Palantir-built AI/data platform run by NGA/CDAO used across COCOMs for targeting and C2."
+  },
+  {
+   "term": "TITAN",
+   "definition": "Tactical Intelligence Targeting Access Node: Army AI-enabled ground station accessing space/air/ground sensors; in production Sept 2026."
+  },
+  {
+   "term": "IBCS",
+   "definition": "Integrated Battle Command System: Army/Poland air and missile defense fire-control network (Northrop)."
+  },
+  {
+   "term": "COP",
+   "definition": "Common operating picture."
+  },
+  {
+   "term": "PED",
+   "definition": "Processing, exploitation and dissemination of ISR data."
+  },
+  {
+   "term": "DDIL",
+   "definition": "Denied, degraded, intermittent, limited (connectivity)."
+  },
+  {
+   "term": "Link 16 / J-series",
+   "definition": "Jam-resistant tactical data link; messages per MIL-STD-6016/STANAG 5516."
+  },
+  {
+   "term": "JREAP",
+   "definition": "Joint Range Extension Applications Protocol (MIL-STD-3011) carrying TDL messages over IP/SATCOM/serial."
+  },
+  {
+   "term": "SIMPLE",
+   "definition": "STANAG 5602 standard interface for multiple platform link evaluation; TDL over IP."
+  },
+  {
+   "term": "VMF",
+   "definition": "Variable Message Format, MIL-STD-6017 bit-oriented tactical messages (fire missions, position reports)."
+  },
+  {
+   "term": "USMTF / ADatP-3 / APP-11",
+   "definition": "US Message Text Format (MIL-STD-6040) and NATO equivalent for orders and reports (ATO, ACO, OPORD)."
+  },
+  {
+   "term": "OTH-Gold",
+   "definition": "Over-the-horizon targeting Gold naval message format."
+  },
+  {
+   "term": "CoT / TAK",
+   "definition": "Cursor on Target XML event schema (MITRE) and Team Awareness Kit apps/servers; TAK Protocol v1 is protobuf."
+  },
+  {
+   "term": "STANAG 4607/4609/4676",
+   "definition": "NATO formats for GMTI radar, motion imagery (with MISB KLV), and ISR tracks."
+  },
+  {
+   "term": "NITF",
+   "definition": "National Imagery Transmission Format for still imagery (STANAG 4545)."
+  },
+  {
+   "term": "MIL-STD-2525 / APP-6",
+   "definition": "US/NATO military symbology standards."
+  },
+  {
+   "term": "MPE / SABRE / FMN",
+   "definition": "Mission Partner Environment, Secret and Below Releasable Environment, NATO Federated Mission Networking."
+  },
+  {
+   "term": "CDS",
+   "definition": "Cross-domain solution: accredited device/software moving data between classification domains."
+  },
+  {
+   "term": "DCS",
+   "definition": "Data-centric security: labeling and enforcing access at the data object level."
+  },
+  {
+   "term": "OTA",
+   "definition": "Other Transaction Authority agreement, common for prototypes; ceilings are not obligations."
+  },
+  {
+   "term": "IDIQ ceiling",
+   "definition": "Maximum value of an indefinite-delivery contract; not revenue."
+  },
+  {
+   "term": "PACE",
+   "definition": "Primary, alternate, contingency, emergency communications plan."
+  },
+  {
+   "term": "DAF Battle Network / ABMS / CBC2 / TOC-L",
+   "definition": "Air Force C2 system-of-systems, its ABMS program, Cloud-Based C2, and Tactical Operations Center-Light kits."
+  },
+  {
+   "term": "SDA PWSA",
+   "definition": "Space Development Agency Proliferated Warfighter Space Architecture transport and tracking layers."
+  }
+ ],
+ "search_log": [
+  {
+   "query": "WS: JADC2 CJADC2 GAO report 2025 2026 command and control data integration challenges",
+   "useful": true
+  },
+  {
+   "query": "WS: Army NGC2 2026 Anduril Lockheed 25th ID 4th ID status",
+   "useful": true
+  },
+  {
+   "query": "WS: Maven Smart System NGA Palantir 2025 2026 contract ceiling users combatant commands",
+   "useful": true
+  },
+  {
+   "query": "WS: TITAN Army Palantir 2025 2026 fielding DCGS-A replacement",
+   "useful": true
+  },
+  {
+   "query": "WS: Link 16 J-series JREAP tactical data link limitations track management",
+   "useful": true
+  },
+  {
+   "query": "WS: Cursor on Target CoT TAK ATAK protocol schema",
+   "useful": true
+  },
+  {
+   "query": "WS: STANAG 4607 4609 4676 NITF ISR data standards",
+   "useful": true
+  },
+  {
+   "query": "WS: USMTF ADatP-3 OTH-Gold VMF MIL-STD-2525 MIL-STD-6017",
+   "useful": true
+  },
+  {
+   "query": "WS: Project Convergence Capstone 5 lessons learned manually workaround latency bandwidth",
+   "useful": false
+  },
+  {
+   "query": "WS: DDIL tactical edge C2 data synchronization NGC2 disconnected",
+   "useful": true
+  },
+  {
+   "query": "WS: Mission Partner Environment coalition releasability CJADC2 Secret REL",
+   "useful": true
+  },
+  {
+   "query": "WS: Navy Project Overmatch 2026 status carrier strike group",
+   "useful": true
+  },
+  {
+   "query": "WS: AFATDS JADOCS JFN 2026 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: IBCS 2025 2026 production Poland (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: CPCE CPI2 sunset NGC2 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: GCCS-J JPES DISA (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: DCGS-N/AF/MC modernization (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: DAF Battle Network ABMS CBC2 TOC-L (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: CDAO Advana Open DAGIR GIDE (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WS: cross domain solution NCDSMO Raise 2.0 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "BD: NGC2 common data layer baseline Anduril June 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: NGC2 FY27 budget production full stack Lockheed 25ID Anduril 4ID",
+   "useful": true
+  },
+  {
+   "query": "BD: Maven Smart System transition memo Feinberg April 2026",
+   "useful": false
+  },
+  {
+   "query": "BD: TITAN production Palantir Anduril eight systems Sept 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: Northrop IBCS production fielding Army Poland 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: DAF Battle Network ABMS CBC2 FY26/27 status",
+   "useful": true
+  },
+  {
+   "query": "BD: GAO April 2025 CJADC2 framework findings",
+   "useful": false
+  },
+  {
+   "query": "BD: DoD IG CJADC2 line of effort evaluation 2025",
+   "useful": true
+  },
+  {
+   "query": "BD: Palantir Q2 2026 earnings call Maven TITAN NGC2 (transcripts)",
+   "useful": true
+  },
+  {
+   "query": "BD: CDAO Advana Open DAGIR GIDE 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: Army tactical network transport Starshield unified network 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: Project Convergence Capstone 6 2026 NTC NGC2 results",
+   "useful": true
+  },
+  {
+   "query": "BD: Talisman Sabre / Valiant Shield coalition C2 interoperability MPE",
+   "useful": true
+  },
+  {
+   "query": "BD: Replicator autonomous systems integrated C2 DIU 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: SDA transport layer Link 16 from space tranche 1 2026",
+   "useful": true
+  },
+  {
+   "query": "BD: 18 follow-up queries (Maven memo, JFN/AFATDS, GCCS-J/JPES, DCGS, Overmatch 2026, CDS/zero trust, EMBM, logistics C2, Dynamis, NGC2 security memo, Ivy Sting EW, PC-C6 coalition, Lattice SDK, NCIA air C2, TOC-L, Golden Dome C2, SBIR C2, PNT) - credits exhausted",
+   "useful": false
+  },
+  {
+   "query": "GH: STANAG 4607/4609/4676 repositories",
+   "useful": true
+  },
+  {
+   "query": "GH: cursor on target / takproto / TAK Server repositories",
+   "useful": true
+  },
+  {
+   "query": "GH: MIL-STD-2525 milsymbol APP-6",
+   "useful": true
+  },
+  {
+   "query": "GH: JREAP repositories",
+   "useful": true
+  },
+  {
+   "query": "GH: USMTF repositories",
+   "useful": true
+  },
+  {
+   "query": "GH: MIL-STD-6017 VMF repositories",
+   "useful": true
+  },
+  {
+   "query": "GH: anduril lattice-sdk repositories",
+   "useful": true
+  },
+  {
+   "query": "GH code: mil_view disposition in lattice-sdk-python",
+   "useful": true
+  },
+  {
+   "query": "GH code: TakMessage CotEvent proto in TAK Server",
+   "useful": true
+  },
+  {
+   "query": "GH code: CoT Event.xsd schema",
+   "useful": true
+  },
+  {
+   "query": "WF: 30+ WebFetch attempts to gao.gov, dodig.mil, army.mil, defensescoop, breakingdefense, csis, crsreports, wikipedia, dvidshub, mitre, diu.mil, tak.gov, takproto - all egress-blocked",
+   "useful": false
+  }
+ ],
+ "saturation_statement": "Three channels were used: 12 WebSearch queries (session budget then exhausted), 15 Bigdata.com queries (credits then exhausted, 13 productive), and 10 GitHub repository/code searches; every WebFetch attempt (30+, including gao.gov, dodig.mil, army.mil, mitre.org, tak.gov and trade press) was blocked by the network egress proxy, so primary documents were read only via search snippets, Bigdata.com-indexed full-text chunks (including U.S. GAO, af.mil, earnings transcripts and SEC filings) and public GitHub code. Coverage is strong and recent (June-Sept 2026) for NGC2, TITAN, Maven, IBCS, DAF Battle Network, SDA transport, Replicator C2, PC-C6 and the TAK/CoT/Lattice data models. Coverage is thin or absent for: fires C2 (AFATDS/JADOCS/JFN 2026 status), GCCS-J/JPES, DCGS-N/AF/MC, cross-domain solution procurement, EMBM, logistics C2 systems, PNT, Navy Overmatch 2026 specifics, the April 2026 Maven transition memo text, the reported 2025 NGC2 security-risk memo, SBIR/DIU C2 solicitations, and comptroller budget justification line items; these are marked 'Public evidence insufficient' and should be closed by the S01/S05/S09/S10/S12/S14 segment agents. Contract figures are labeled as ceiling vs obligated where known; sensor-to-shooter timing claims are vendor-sourced only.",
+ "sources": [
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454 Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dodig.mil/reports.html/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+   "title": "DODIG-2025-126 Evaluation of a Line of Effort in DoD's Implementation of the CJADC2 Strategy",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/6EF0A68FA80C7860ACEF42821A327507",
+   "title": "U.S. GAO: Army Modernization: Better Schedule and Cost Information Needed to Support Scaling Battlefield Network (NGC2) [via Bigdata.com]",
+   "pub_date": "2026-08-20",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award",
+   "title": "Army announces NGC2 prototype award",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article-amp/292999/ivy_mass_exercises_ngc2_at_division_scale",
+   "title": "Ivy Mass exercises NGC2 at division scale",
+   "pub_date": "2026-06-03",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/570684/project-convergence-capstone-6-begins-advancing-army-experimentation",
+   "title": "DVIDS: Project Convergence Capstone 6 begins",
+   "pub_date": "2026-07-24",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/571002/simulated-threat-environment-pushes-armys-ngc2-network-its-limits-pc-c6",
+   "title": "DVIDS: Simulated threat environment pushes NGC2 network to its limits at PC-C6",
+   "pub_date": "2026-07-29",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/F4AB40CDA0A70FA20C299227E5924326",
+   "title": "af.mil: DAF accelerates joint C2 with AI, Space Force integration in latest DASH experiment [via Bigdata.com]",
+   "pub_date": "2026-09-08",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/9E2BEB2082C239A81F57548C33E2B4C6",
+   "title": "af.mil: Connecting the fight: AFA 2026 panel explores next-generation DAF battle management [via Bigdata.com]",
+   "pub_date": "2026-09-21",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/ED577485D3184B7676B5F8E2D76C305D",
+   "title": "af.mil: Air Force awards production contract for ARES (PAE C3BM manages DAF Battle Network) [via Bigdata.com]",
+   "pub_date": "2026-08-24",
+   "tier": 1
+  },
+  {
+   "url": "https://www.jcs.mil/Portals/36/Documents/Library/Instructions/CJCSI%206290.01A.pdf",
+   "title": "CJCSI 6290.01A Mission Partner Environment",
+   "pub_date": "n/a",
+   "tier": 1
+  },
+  {
+   "url": "https://www.pacom.mil/Media/News/News-Articles/Article/4163276/project-convergence-capstone-5-delivering-future-capabilities-through-multi-dom/",
+   "title": "INDOPACOM: PC-C5 Delivering Future Capabilities",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/31AE4EC0CBCC838647F3DE89E15BA345",
+   "title": "Palantir Q2 2026 earnings call transcript [via Bigdata.com]",
+   "pub_date": "2026-08-03",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/51BD8A7BF60914CF6A6BBD8F8283377A",
+   "title": "Palantir: Palantir to Deliver Eight TITAN Systems to the U.S. Army (press release)",
+   "pub_date": "2026-09-01",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/8BDE782D101A098DA8B21183B7EF9CF3",
+   "title": "Palantir: Palantir Secures Foundational Role in NGC2 Data Layer (press release)",
+   "pub_date": "2026-06-22",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A5CC10CA3DDBA5824178F6075DB814AE",
+   "title": "Anduril press release via Benzinga: Army selects Anduril to lead NGC2 common data baseline",
+   "pub_date": "2026-06-23",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/829AD92ED79ACAF420F88752F1F879E4",
+   "title": "Onebrief press release: planning layer within NGC2 at 4ID",
+   "pub_date": "2026-06-26",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/95371ABDA4735A58AE1805F0783BC4A6",
+   "title": "Air press release: Army extends partnership on NGC2",
+   "pub_date": "2026-06-29",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/7D13D0CAB3FD59C745C3821A9034453A",
+   "title": "Lockheed Martin: Lightning Surge 4 with 25th ID",
+   "pub_date": "2026-07-01",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/F4A484EB74822F10B071FA4B37A6C5AB",
+   "title": "Lockheed Martin: CommandIQ at Valiant Shield 2026",
+   "pub_date": "2026-07-08",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/712690C151716D678C3797503B2E4A19",
+   "title": "Defense Post: Northrop Grumman accelerates IBCS delivery (FRP Nov 2025)",
+   "pub_date": "2026-03-18",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/EE13545D13ED8A3A2B31764C516385F8",
+   "title": "Northrop Grumman: $1.4B IBCS contracts (US Army/Poland)",
+   "pub_date": "2025-02-12",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/CD81F9C430AC9A7B45837079B3781115",
+   "title": "Northrop Grumman: IBCS 34th consecutive flight test",
+   "pub_date": "2026-07-08",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/822EAA4EF5ACB49CEAF943A0B75436CF",
+   "title": "Northrop Grumman conference transcript (IBCS FRP, ~12 nations)",
+   "pub_date": "2026-05-28",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/C3590048D385A1E39877C2D5FD514C51",
+   "title": "BAE/Data Link Solutions: $248M MIDS JTRS Navy contract",
+   "pub_date": "2026-01-28",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/7EEA47601AAC5265ECD90F7F62F6F82F",
+   "title": "Firefly Aerospace Q2 2026 call (SciTec CBC2 data fusion option)",
+   "pub_date": "2026-08-11",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/EEEDBE7703833EB3D0FF095A31A87BFE",
+   "title": "York Space Systems FY2025 10-K (Link 16 from space)",
+   "pub_date": "2026-03-20",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/1FC0126F1C41941353AC98E774F99A2D",
+   "title": "SpaceX Form S-1 (Starshield description)",
+   "pub_date": "2026-05-20",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/anduril/lattice-sdk-python",
+   "title": "Anduril Lattice Python SDK (entity model, mil_view, MilStd2525C)",
+   "pub_date": "2026-09-22",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/TAK-Product-Center/Server",
+   "title": "TAK Server (takmessage.proto / cotevent.proto)",
+   "pub_date": "2026-09-22",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/w3c/exi-testsuite/blob/master/data/JTLM/schemas/Event.xsd",
+   "title": "MITRE Cursor-on-Target Event schema v2.0 (2003)",
+   "pub_date": "2003-06-13",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/spatialillusions/milsymbol",
+   "title": "milsymbol MIL-STD-2525/APP-6 renderer",
+   "pub_date": "2026-09-21",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/spatialillusions/vmf-parser",
+   "title": "VMF parser (MIL-STD-6017)",
+   "pub_date": "2026-07-14",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/pentlandedge/s4607",
+   "title": "STANAG 4607 library",
+   "pub_date": "2026-02-21",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/FreeTAKTeam/FreeTakServer",
+   "title": "FreeTAKServer",
+   "pub_date": "2026-09-23",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/",
+   "title": "DefenseScoop: Army taps Anduril as lead for NGC2 common data layer baseline",
+   "pub_date": "2026-06-22",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/",
+   "title": "DefenseScoop: DOD components face aggressive timeline for Maven transition",
+   "pub_date": "2026-04-15",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase/",
+   "title": "DefenseScoop: DOD raises Maven contract ceiling to >$1B",
+   "pub_date": "2025-05-23",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units/",
+   "title": "DefenseScoop: Ready, but not done: Army will start scaling parts of NGC2",
+   "pub_date": "2026-07-31",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/02/army-plans-for-division-to-receive-ngc2-production-ecosystem-in-fy27/",
+   "title": "Breaking Defense: Army plans for division to receive NGC2 production ecosystem in FY27",
+   "pub_date": "2026-02",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/BB75C6915637E81A62AAEFECCD85B83F",
+   "title": "Defense One: Army aims to sync two divisions using next-gen C2 by year's end",
+   "pub_date": "2026-06-24",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/7DAAE9E9194E7EE6F7AF238913C5E512",
+   "title": "MeriTalk: Army taps Anduril to lead data layer for NGC2 (Raft, Taylor, Welch quotes)",
+   "pub_date": "2026-06-23",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/4D72C36629C91D7CEB5E3295C2971C1F",
+   "title": "MeriTalk: GAO: Army lacks cost, schedule detail for NGC2",
+   "pub_date": "2026-08-21",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/56035C1D976867A53F7093C5638A8C02",
+   "title": "Military Times: Army's new battlefield command system ready to scale ($904M FY27; I Corps next)",
+   "pub_date": "2026-08-04",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/3EAA3D4A0EFB0C64D27718E187769C4D",
+   "title": "Military Times: Army awards $192M to Palantir, Anduril for TITAN production",
+   "pub_date": "2026-09-02",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/262AF5132D1320C08257B5648C3A9F09",
+   "title": "Business Insider: The US Army's networked battlefield is taking shape. Spotty connections show the work ahead.",
+   "pub_date": "2026-07-29",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/68A34B40A620EDF69041AB2A67ADE6EB",
+   "title": "Business Insider: Army deciding what isn't making the cut after PC-C6",
+   "pub_date": "2026-07-30",
+   "tier": 3
+  },
+  {
+   "url": "https://www.nationaldefensemagazine.org/articles/2026/8/18/just-in-army-puts-its-nextgen-command-control-system-through-the-wringer",
+   "title": "National Defense: Army puts NGC2 through the wringer (9,000 personnel, six brigades)",
+   "pub_date": "2026-08-18",
+   "tier": 3
+  },
+  {
+   "url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/us-army-eyes-project-convergence-for-major-ngc2-milestone",
+   "title": "Janes: US Army eyes Project Convergence for major NGC2 milestone",
+   "pub_date": "2026-06-23",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/86ED7C4AAB1D767DF728650C64A147EF",
+   "title": "FDD (Montgomery): Modern War Demands a Data-Centric, Cloud-Based C2 Architecture",
+   "pub_date": "2026-08-18",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/DB710C0951BBD86DAE8B93E5256089E2",
+   "title": "Aviation Week: Unlocking the Force: The Real Stakes of JADC2 (MOSA, data rights)",
+   "pub_date": "2026-09-14",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A7F5D7575B240312F3702F1867286026",
+   "title": "Air & Space Forces Magazine: Air Force to get first next-gen tactical C2 centers (TOC-L MR2) by year's end",
+   "pub_date": "2026-09-22",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+   "title": "SpaceNews: SpaceX launches 21 satellites for military data network (63/126)",
+   "pub_date": "2026-07-16",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/037FB6896768BCA8CE54698E1176AD60",
+   "title": "SpaceNews: SpaceX wins $2.29B Space Force contract for military data network",
+   "pub_date": "2026-05-26",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A8ED2B09BE59D41D209D2BCF022EEB0F",
+   "title": "Federal News Network: SDA pushes for two more launches, aims to complete Tranche 1 by 2027",
+   "pub_date": "2026-09-21",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/02E33D83F9A90D1102856C023EFB07C6",
+   "title": "Defense News: New DoD experimentation series (GIDE X) targets data integration",
+   "pub_date": "2025-03-31",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/11ACE716209B15C448881851CCF27F64",
+   "title": "Defense Post: US Marines to evaluate Ditto platform under Project Dynamis",
+   "pub_date": "2026-07-21",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/D6545A884AA0F9F8A05AD7F15149905F",
+   "title": "Tech Times: Tesseract NOMAD selected; Replicator delivered hundreds (cites CRS)",
+   "pub_date": "2026-07-16",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/4E3350C5700A42F9300C353D3A111AC1",
+   "title": "Aviation Today: Hundreds of Switchblades delivered in first Replicator tranche; DIU C2/ACT software awards",
+   "pub_date": "2025-09-04",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/EF80C35C92B34B2F7CDD34B169B63845",
+   "title": "Thales HexaForce launch (FMN/DCS, CWIX 2026)",
+   "pub_date": "2026-09-21",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/205484E9AE85C228B7FDB9BDBE6787E4",
+   "title": "Global Economic: Thales HexaForce; NCIA selects Palantir, Anduril, Athea for air C2 (secondary)",
+   "pub_date": "2026-09-22",
+   "tier": 4
+  },
+  {
+   "url": "https://app.bigdata.com/documents/F9DA422DA60413FB06FD30A01E7FFCD1",
+   "title": "Viasat: Inside PC-C6 (British Army separate secure environment, NetAgility, MOJO Next)",
+   "pub_date": "2026-09-10",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/5669A41DA923C9CB61D4A94645FE06A1",
+   "title": "Gov.UK: Land Open Systems Architecture guidance",
+   "pub_date": "2026-09-21",
+   "tier": 1
+  },
+  {
+   "url": "https://federalnewsnetwork.com/commentary/2024/06/usindopacom-mission-partner-environment-success-a-blueprint-for-cjadc2-path-forward/",
+   "title": "Federal News Network: USINDOPACOM MPE success as CJADC2 blueprint",
+   "pub_date": "2024-06",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/what-maven-smart-system-and-what-does-it-do",
+   "title": "CSIS: What Is Maven Smart System",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.mitre.org/sites/default/files/pdf/05_0164.pdf",
+   "title": "MITRE: The STANAG 4607 NATO GMTI Format",
+   "pub_date": "2005",
+   "tier": 3
+  },
+  {
+   "url": "https://systematic.com/us/industries/defense/products/domains/interoperability/usmtf/",
+   "title": "Systematic: USMTF / APP-11 interoperability",
+   "pub_date": "n/a",
+   "tier": 2
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/SIMPLE_(military_communications_protocol)",
+   "title": "Wikipedia: SIMPLE (STANAG 5602)",
+   "pub_date": "n/a",
+   "tier": 4
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Variable_Message_Format",
+   "title": "Wikipedia: Variable Message Format",
+   "pub_date": "n/a",
+   "tier": 4
+  }
+ ]
+}

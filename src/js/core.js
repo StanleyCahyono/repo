@@ -80,7 +80,7 @@ function sourceLine(o) {
 }
 function labelTag(l) { if (!l) return null; const k = String(l).toLowerCase(); const cls = k.includes('fact') ? 'fact' : k.includes('infer') ? 'inference' : k.includes('hypo') ? 'hypothesis' : ''; return h('span', { class: 'label ' + cls }, l); }
 function confTag(c) { if (!c) return null; const k = String(c).toLowerCase(); const cls = k.startsWith('high') ? 'high' : k.startsWith('med') ? 'medium' : k.startsWith('low') ? 'low' : ''; return h('span', { class: 'label ' + cls, title: 'Confidence' }, 'conf ' + c); }
-function chip(text, cls = '') { return h('span', { class: 'chip ' + cls }, text); }
+function chip(text, cls = '') { const t = String(text ?? ''); return h('span', { class: 'chip ' + cls + (t.length > 26 ? ' wrap' : '') }, t); }
 function chips(list, cls = '') { return h('div', { class: 'chips' }, arr(list).map((x) => chip(x, cls))); }
 function kv(pairs) { return h('dl', { class: 'kv' }, pairs.filter(([, v]) => v !== undefined).map(([k, v]) => [h('dt', null, k), h('dd', null, v instanceof Node ? v : val(v))])); }
 function card(title, ...body) { return h('section', { class: 'card' }, title ? (isStr(title) ? h('h3', null, title) : title) : null, ...body); }

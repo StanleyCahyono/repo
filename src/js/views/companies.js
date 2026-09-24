@@ -8,15 +8,15 @@ route('companies', (r) => {
   const cos = arr(D.companies);
   const segName = (id) => arr(D.segments).find((s) => s.segment_id === id)?.segment_name || id;
   const cols = [
-    { key: 'name', title: 'Company', render: (c) => h('div', null, h('a', { href: '#companies/' + c.slug }, h('b', null, c.name)), h('span', { class: 'cell-sub' }, [c.headquarters, c.founding_year].filter(Boolean).join(' · '))), sort: (c) => c.name.toLowerCase() },
-    { key: 'market_posture', title: 'Posture', render: (c) => postureChip(c.market_posture) || '—' },
+    { key: 'name', title: 'Company', render: (c) => h('div', null, h('a', { href: '#companies/' + c.slug }, h('b', null, c.name)), h('span', { class: 'cell-sub' }, [c.headquarters_short, c.founding_year].filter(Boolean).join(' · '))), sort: (c) => c.name.toLowerCase(), width: '220px' },
+    { key: 'market_posture', title: 'Posture', render: (c) => (c.market_posture ? h('span', { title: c.market_posture_note }, postureChip(c.market_posture)) : '—') },
     { key: 'hw_sw_mix', title: 'HW/SW', render: (c) => (c.hw_sw_mix || '—').split(' - ')[0].split(' (')[0] },
-    { key: 'segment_ids', title: 'Segments', render: (c) => h('div', { class: 'chips' }, arr(c.segment_ids).map((s) => h('a', { class: 'chip mono', href: '#segments/' + s, title: segName(s) }, s))) },
-    { key: 'technical_layer', title: 'Chain steps', render: (c) => chips(arr(c.technical_layer).map((x) => x.toLowerCase()), 'mono') },
-    { key: 'total_disclosed_funding_usd', title: 'Disclosed funding', render: (c) => c.total_disclosed_funding_usd || '—', sort: (c) => num(c.total_disclosed_funding_usd) },
+    { key: 'segment_ids', title: 'Segments', render: (c) => h('div', { class: 'chips' }, arr(c.segment_ids).map((s) => h('a', { class: 'chip mono', href: '#segments/' + s, title: segName(s) }, s))), width: '150px' },
+    { key: 'technical_layer', title: 'Chain steps', render: (c) => { const l = arr(c.technical_layer).map((x) => String(x).toLowerCase()); return h('div', { class: 'chips' }, l.slice(0, 5).map((x) => chip(x, 'mono')), l.length > 5 ? chip('+' + (l.length - 5), 'mono outline') : null); }, width: '200px' },
+    { key: 'total_disclosed_funding_usd', title: 'Disclosed funding', render: (c) => h('span', { title: c.total_disclosed_funding_usd || '' }, c.funding_short || '—'), sort: (c) => moneyNum(c.funding_short) },
     { key: 'contracts', title: 'Contracts', num: true, render: (c) => String(arr(c.contracts).length), sort: (c) => arr(c.contracts).length },
     { key: 'traction', title: 'Traction', render: (c) => tractionChip(c.traction) },
-    { key: 'employee_count_approx', title: 'Employees', render: (c) => c.employee_count_approx || '—', sort: (c) => num(c.employee_count_approx) },
+    { key: 'employee_count_approx', title: 'Employees', render: (c) => h('span', { title: c.employee_count_approx || '' }, c.employees_short || '—'), sort: (c) => num(c.employees_short) },
   ];
   const facets = [
     { title: 'Segment', get: (c) => c.segment_ids },
@@ -30,8 +30,16 @@ route('companies', (r) => {
   return h('div', { class: 'page' },
     pageHead('Deliverable 4 · Competitive database', cos.length + ' companies across the C4ISR chain', 'Startups and incumbents, each with a 40-field record: founders and funding, products and the exact problem solved, users and buyers, contracts with ceiling and obligation separated, deployments, exercises, interfaces, moat, weaknesses, and evidence of adoption, repeat procurement and prototype-to-production transition. Sort any column; filter by segment, posture, chain step or echelon.'),
     h('div', { class: 'callout amber' }, h('p', { class: 'small' }, h('b', null, 'Contract-data discipline: '), 'an IDIQ ceiling is not revenue; a prototype OTA is not a program of record; a selected vendor is not a production award. Every contract row keeps ceiling, obligated and awarded amounts separate and carries a confidence level.')),
-    dataTable(cos, cols, { facets, sortKey: 'name', id: 'companies', pageSize: 100, placeholder: 'Filter by name, product, investor, customer…' }));
+    dataTable(cos, cols, { facets, sortKey: 'name', id: 'companies', pageSize: 100, placeholder: 'Filter by name, product, investor, customer…' }),
+    discoveredTable());
 });
+function discoveredTable() {
+  const found = arr(D.discovery).flatMap((d) => arr(d.new_companies).map((c) => ({ ...c, via: d.discovery_id })));
+  if (!found.length) return null;
+  const profiled = new Set(arr(D.companies).map((c) => c.slug));
+  const rows = found.filter((c) => !profiled.has(slug(c.name)));
+  return card('Additional companies surfaced by award and portfolio mining (' + rows.length + ', not yet given a full profile)', h('p', { class: 'small muted' }, 'Found in SBIR, xTech, AFWERX, DIU, program vendor rosters, prime teaming announcements and venture portfolios. Priority 5 = most relevant to the gaps under study.'), dataTable(rows, [{ key: 'name', title: 'Company', render: (c) => h('div', null, h('b', null, c.name), h('span', { class: 'cell-sub' }, [c.hq, c.founding_year].filter(Boolean).join(' · '))) }, { key: 'relevance', title: 'C4ISR relevance' }, { key: 'segment_ids', title: 'Segments', render: (c) => h('div', { class: 'chips' }, arr(c.segment_ids).map((s) => h('a', { class: 'chip mono', href: '#segments/' + s }, s))) }, { key: 'priority', title: 'Priority', num: true, render: (c) => scorePill(c.priority ?? 0) }, { key: 'evidence', title: 'Evidence', render: (c) => (arr(c.evidence).length ? h('ul', { class: 'small' }, arr(c.evidence).map((e) => h('li', null, e.what, e.date ? ' (' + e.date + ')' : '', e.source_url ? [' ', h('a', { href: e.source_url, target: '_blank', rel: 'noopener' }, '↗')] : null))) : '—') }, { key: 'via', title: 'Via', render: (c) => h('span', { class: 'mono' }, c.via || '') }], { facets: [{ title: 'Segment', get: (c) => c.segment_ids }], sortKey: 'priority', desc: true, id: 'discovered', pageSize: 50 }));
+}
 
 function companyDetail(r) {
   const c = arr(D.companies).find((x) => x.slug === r.id) || arr(D.companies).find((x) => slug(x.name) === r.id);
@@ -55,3 +63,5 @@ function companyDetail(r) {
   ];
   return h('div', { class: 'page' }, crumbs([{ text: 'Companies', href: '#companies' }, { text: c.name }]), pageHead('Company record', c.name, c.exact_problem_solved ? c.exact_problem_solved.slice(0, 240) : null, [postureChip(c.market_posture), tractionChip(c.traction), c.public_private ? chip(c.public_private, 'outline') : null, c.founding_year ? chip('Founded ' + c.founding_year, 'mono') : null, c.headquarters ? chip(c.headquarters, 'outline') : null]), tabs(tabDefs, tabIndexFor(tabDefs, r.sub)));
 }
+
+function moneyNum(s) { const m = String(s || '').match(/([\d.,]+)\s?(billion|million|bn|mn|B|M|K|k)?/i); if (!m) return 0; const v = parseFloat(m[1].replace(/,/g, '')) || 0; const u = (m[2] || '').toLowerCase(); return v * (u.startsWith('b') ? 1e9 : u.startsWith('m') ? 1e6 : u === 'k' ? 1e3 : 1); }

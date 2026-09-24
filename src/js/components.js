@@ -12,7 +12,7 @@ function dataTable(rows, cols, opts = {}) {
   if (opts.filterable !== false) { const inp = h('input', { type: 'search', placeholder: opts.placeholder || 'Filter rows…', 'aria-label': 'Filter rows', id: opts.id ? opts.id + '-filter' : null }); inp.addEventListener('input', () => { state.filter = inp.value.toLowerCase(); state.page = 0; render(); }); toolbar.append(inp); }
   for (const f of opts.facets || []) {
     const values = Array.from(new Set(rows.flatMap((r) => arr(f.get(r)).filter(Boolean)))).sort();
-    const sel = h('select', { 'aria-label': f.title, id: opts.id ? opts.id + '-' + slug(f.title) : null }, h('option', { value: '' }, f.title + ': all'), values.map((v) => h('option', { value: v }, v)));
+    const sel = h('select', { 'aria-label': f.title, id: opts.id ? opts.id + '-' + slug(f.title) : null }, h('option', { value: '' }, f.title + ': all'), values.map((v) => h('option', { value: v }, String(v).length > 42 ? String(v).slice(0, 40) + '…' : v)));
     sel.addEventListener('change', () => { state.filters[f.title] = sel.value; state.page = 0; render(); });
     f._sel = sel; toolbar.append(sel);
   }

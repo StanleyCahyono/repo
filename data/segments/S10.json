@@ -1,0 +1,2061 @@
+{
+ "segment_id": "S10",
+ "segment_name": "Identity / Security / Zero Trust / Cross-Domain Infrastructure",
+ "what_it_does": "This layer decides WHO (person or non-person entity) may touch WHICH data or service, under WHAT policy, and HOW data may cross security or national boundaries. It spans: (1) identity, credential and access management (DoD PKI/CAC, enterprise directories such as DISA's Global Federated User Directory, Army Enterprise ICAM, MFA, non-person-entity certificates); (2) zero-trust access and enforcement (policy decision/enforcement points, ZTNA/SASE, micro-segmentation; DoD's 7 pillars, 45 capabilities and 152 activities of which 91 are 'target level' due by FY27); (3) authorization and policy engines (RBAC to ABAC using user, device and data attributes); (4) data-centric security and tagging (classification/releasability labels, IC-TDF -> OpenTDF/ZTDF, ACP-240 coalition labels, key-access services) so protection travels with the object; (5) cross-domain solutions (NSA/NCDSMO-baselined transfer and access guards, one-way transfer devices, tactical CDS) that move data between classification levels or coalition enclaves; and (6) coalition identity federation and foreign-disclosure/releasability enforcement in Mission Partner Environments. In the C4ISR chain it is cross-cutting: it gates every TRANSPORT, PROCESS, FUSE and DISSEMINATE_TASK hop, and it is the reason 'the data exists but cannot be shared' is the most common C4ISR failure mode documented in exercises.",
+ "sub_taxonomy": [
+  {
+   "name": "Enterprise ICAM (PKI/CAC/PIV, derived credentials, MFA, directories, NPE identity, federation)",
+   "note": "DoD PKI + DISA GFUD/DEAS + service ICAM programs (Army EICAM, Navy Flank Speed/Entra). Largely commoditized by Microsoft/hyperscaler identity stacks; still manual for coalition/guest identities. Restructured from the assignment's 'credentialing' bullet to include NPE (machine) identity because ZT strategy and NGC2 make device/sensor identity the growth edge."
+  },
+  {
+   "name": "Zero-trust access/network enforcement (ZTNA, SASE, segmentation, policy enforcement points)",
+   "note": "Thunderdome (DISA/Fourth Estate), Flank Speed (Navy), service SD-WAN/SASE deployments; production stage; dominated by Booz Allen, Microsoft, Zscaler-class vendors. Not startup whitespace."
+  },
+  {
+   "name": "Authorization / policy engines (PDP, ABAC, dynamic and risk-based access)",
+   "note": "The DoD ZT 'Data' and 'User' pillars require ABAC; DAU webinars from 2023 (ABAC) to 2026 (ICAM powers ZT) show components still migrating from RBAC to ABAC. Accessible to software startups (OPA/Cedar/OpenTDF-style engines) but integration-heavy."
+  },
+  {
+   "name": "Data-centric security and tagging/labeling (TDF/ZTDF/OpenTDF, IC-TDF, ACP-240, markings, key access services)",
+   "note": "Recurring DoD CIO ZT PfMO topic (data tagging webinars Apr 2024, Sep 2025). Open standards exist (OpenTDF spec, ZTDF for Five Eyes/NATO) but tagging of live C2 data at source is nascent. Most accessible sub-problem for an unclassified prototype."
+  },
+  {
+   "name": "Cross-domain solutions (transfer/access guards, one-way transfer, tactical/low-SWaP CDS, CDS-as-a-service)",
+   "note": "Governed by DoDI 8540.01, CNSSI 1253 CDS overlay and NSA/NCDSMO 'Raise the Bar'; only NCDSMO-listed products may be used (NIST AC-4(20)). Incumbent oligopoly (Everfox, Owl, GDMS, Northrop, Lockheed Radiant Mercury); immediately classified and export-controlled."
+  },
+  {
+   "name": "Coalition identity federation and releasability enforcement (MPE ICAM, foreign disclosure workflow, NOFORN/REL handling)",
+   "note": "Joint Staff J6 and DISA are still demonstrating ZT + data-centric security for partners beyond FVEY (FY27 justification book); MPE remains 'network-centric' until ~2027 per DISA. Policy-bound and classified at the edges but with unclassified workflow/tooling openings."
+  },
+  {
+   "name": "Tactical / DDIL zero trust (edge PDP, offline credential validation, data-in-use protection)",
+   "note": "Added because DEVCOM C5ISR's 2025 'Tactical Data in Use Security' RFI explicitly asks for ZT Data-pillar capabilities that work in DDIL; enterprise ZT designs assume connectivity to identity providers and key servers."
+  },
+  {
+   "name": "ZT assessment, evidence and continuous-authorization tooling (ZT Overlays, 91 target activities, cATO evidence)",
+   "note": "Program offices must prove target-level ZT by 30 Sep 2027; DoD CIO cATO guide and NSA ZIGs (Jan 2026) create a compliance-evidence workload. Accessible but crowded with integrators and GRC vendors."
+  }
+ ],
+ "users": [
+  {
+   "role": "Every credentialed user (soldier/sailor/airman/civilian) authenticating with CAC or derived credential",
+   "echelon": "individual_platform through joint",
+   "what_they_do": "Log on to NIPR/SIPR/cloud services; request access to applications and data; increasingly use BYOD virtual workspaces (Army BYOD, DAF Workspace Anywhere via Hypori)."
+  },
+  {
+   "role": "Unit S6/G6 and enterprise system administrators, ISSM/ISSO",
+   "echelon": "battalion_brigade to theater",
+   "what_they_do": "Provision accounts and attributes, manage PKI/NPE certificates, configure policy enforcement points and segmentation, maintain ATO evidence and ZT activity status."
+  },
+  {
+   "role": "Cross-domain solution operators / CDES engineers (DISA) and unit CDS technicians",
+   "echelon": "division_corps, theater, joint",
+   "what_they_do": "Configure filters and data-format descriptions, review failed transfers, run manual or removable-media transfers when automated CDS paths are unavailable."
+  },
+  {
+   "role": "Foreign disclosure officers and intelligence analysts producing REL/NOFORN products",
+   "echelon": "division_corps, theater, coalition",
+   "what_they_do": "Decide releasability, re-mark or regenerate products on lower enclaves (documented workaround at WFX 24-03), push products across CDS or via liaison officers."
+  },
+  {
+   "role": "Coalition liaison officers and mission-partner users on MPE/CENTRIXS/BICES",
+   "echelon": "tactical_unit to coalition",
+   "what_they_do": "Obtain partner identities, operate on separate coalition enclaves, swivel-chair between national and coalition networks."
+  },
+  {
+   "role": "DoD CIO Zero Trust Portfolio Management Office, service CIOs, ZT program leads",
+   "echelon": "joint",
+   "what_they_do": "Set the 152-activity execution roadmap, assess component plans, certify systems (Flank Speed target-level Oct 2024; Thunderdome all 152 outcomes Apr 2025), publish overlays and NSA ZIGs."
+  },
+  {
+   "role": "Program managers and developers of C2/ISR applications",
+   "echelon": "joint",
+   "what_they_do": "Integrate CAC/PKI and enterprise identity, tag data, obtain CDS approvals to move data between enclaves, and evidence ZT activities for ATO/cATO."
+  }
+ ],
+ "buyers": [
+  {
+   "organization": "DoD CIO (Zero Trust Portfolio Management Office)",
+   "service": "OSD",
+   "role": "budget owner",
+   "note": "Owns the ZT Strategy (Nov 2022), ZT Overlays (Feb 2024), Capability Execution Roadmap, assessment of components; funds cross-cutting efforts; announces webinars via DAU. Not a direct product buyer for startups but the policy gate."
+  },
+  {
+   "organization": "DISA (Thunderdome PMO; ICAM/GFUD; Cross Domain Enterprise Service; Mission Partner Environment)",
+   "service": "DISA/Fourth Estate",
+   "role": "program office",
+   "note": "Awarded Thunderdome prototype OTA to Booz Allen (Jan 2022) and follow-on production OTA (Sept 2023, base + 4 option years); operates enterprise directory (GFUD/DEAS) and CDES; proving out MPE capabilities in Indo-Pacific (2026)."
+  },
+  {
+   "organization": "Army CIO/G-6, Army Cyber Command, PEO EIS (Enterprise ICAM) and PEO C3T/NGC2 (tactical identity/data layer)",
+   "service": "Army",
+   "role": "program office",
+   "note": "LTG Stanton told the Senate (2025) that Enterprise ICAM (EICAM) is 'a central component to the effective employment of a zero trust environment'. The specific EICAM contract vehicle and vendor were not verifiable through accessible sources (Public evidence insufficient). PEO assignment is INFERENCE."
+  },
+  {
+   "organization": "DEVCOM C5ISR Center",
+   "service": "Army",
+   "role": "operational sponsor",
+   "note": "Issued 'Tactical Data in Use Security' RFI (2025) for ZT Data-pillar capabilities that operate in DDIL; the natural S&T entry point for a tactical data-centric security startup."
+  },
+  {
+   "organization": "Department of the Navy CIO / PEO Digital (Flank Speed) and NAVSEA/PEO IWS via NSWC Crane (Tactical Edge Nodes)",
+   "service": "Navy",
+   "role": "program office",
+   "note": "Flank Speed met all 91 target-level ZT activities in Oct 2024; NSWC Crane awarded an $89M IDIQ (Nov 2025) for Tactical Edge Nodes including cross domain solutions for the Maritime Targeting Cell."
+  },
+  {
+   "organization": "Department of the Air Force CIO (Workspace Anywhere), AFRL Rome (cross-domain R&D), SAF Concepts Development and Management (BICES)",
+   "service": "Air Force",
+   "role": "contracting",
+   "note": "AFRL Rome awarded Owl Cyber Defense a $150M ceiling sole-source SBIR Phase III IDIQ (Jul 2025) for voice/video and full-motion-video CDS; SAF/CDM awarded GDMS a $239.3M ceiling IDIQ (Mar 2024) for the BICES trusted network environment CDS."
+  },
+  {
+   "organization": "NSA National Cross Domain Strategy and Management Office (NCDSMO) and CSfC Program Office",
+   "service": "NSA",
+   "role": "operational sponsor",
+   "note": "Not a buyer but the accreditation gate: NCDSMO baseline listing and Raise the Bar requirements apply to all CDS protecting classified data and all CDS sold for export; CSfC lists components and trusted integrators."
+  },
+  {
+   "organization": "Joint Staff J6 (coalition interoperability, Bold Quest, CJADC2 assessments)",
+   "service": "Joint",
+   "role": "budget owner",
+   "note": "FY2027 RDT&E justification: 'Continue to demonstrate and assess Zero Trust and Data Centric Security via virtual machines and cloud to support integration of mission partners beyond FVEYs' and testing standards 'ACP-240, ICAM, and Zero Trust'."
+  },
+  {
+   "organization": "USINDOPACOM / USEUCOM (Mission Partner Environment users)",
+   "service": "Combatant Commands",
+   "role": "operational sponsor",
+   "note": "Operational demand signal for coalition identity and releasability; DISA reports MPE will remain network-centric until roughly 2027."
+  }
+ ],
+ "current_architecture": {
+  "description": "Enterprise identity is anchored on DoD PKI (CAC/PIV, NPE certificates) and enterprise directories (DISA GFUD/DEAS; service Active Directory/Entra tenants such as Navy Flank Speed). Zero-trust enforcement is delivered as SASE/ZTNA overlays (Thunderdome for DISA and the Fourth Estate; hyperscaler-native conditional access for Flank Speed) with policy decision points that are still largely role-based and network-centric outside the leading programs. Data-centric security exists as standards (IC-TDF, OpenTDF, ZTDF, ACP-240) and pilots rather than as enterprise-wide tagging at source. Movement across classification levels and to coalition partners runs through a small set of NCDSMO-baselined cross-domain solutions (enterprise CDES at DISA; program-specific guards such as BICES TNE; tactical CDS on aircraft, vehicles and expeditionary nodes), with manual review, removable media and liaison officers as the fallback. Coalition access uses separate enclaves (CENTRIXS, BICES, MPE/Coalition Information Environment) rather than federated identity with attribute-based release.",
+  "major_systems": [
+   {
+    "name": "DoD PKI / CAC / NPE certificates",
+    "owner": "DISA and DMDC under DoD CIO",
+    "function": "Person and non-person authentication credentials for NIPR/SIPR",
+    "vendor": "Government-operated; commercial HSM/CA components",
+    "status": "Production; historic ISSP budget lines funded NPE detection and CA tech refresh (FY2014-2017 exhibits)"
+   },
+   {
+    "name": "Global Federated User Directory (GFUD) / DEAS enterprise ICAM portal",
+    "owner": "DISA",
+    "function": "Enterprise directory, self-service distribution lists, federation for DoD users (portal.apps.deas.mil)",
+    "vendor": "Public evidence insufficient (integrator not identified in accessible sources)",
+    "status": "Production (referenced in 2024-2026 user guides and Navy portals)"
+   },
+   {
+    "name": "Army Enterprise ICAM (EICAM)",
+    "owner": "Army CIO/G-6 (execution office INFERENCE: PEO EIS)",
+    "function": "Army-wide identity, credential and access management supporting zero trust",
+    "vendor": "Public evidence insufficient",
+    "status": "In implementation per 2025 Senate testimony (LTG Stanton)"
+   },
+   {
+    "name": "Thunderdome",
+    "owner": "DISA",
+    "function": "Zero trust network access, SASE/SD-WAN, segmentation and application security for DISA, Fourth Estate and mission partners on classified and unclassified networks",
+    "vendor": "Booz Allen Hamilton (prime); commercial components reported to include Zscaler, Palo Alto Networks and Appgate (INFERENCE, LOW confidence on exact component set)",
+    "status": "Prototype Jan 2022; production OTA Sept 2023; 15 sites in 2023 and planned 60+ in 2024 (House testimony); credited with meeting all 152 ZT outcomes Apr 2025; DAU webinar Jan 2026 'achieves advanced zero-trust goals'"
+   },
+   {
+    "name": "Flank Speed (Navy M365/Azure Government environment)",
+    "owner": "Department of the Navy / PEO Digital",
+    "function": "Cloud collaboration and identity boundary with conditional access (CAC, device compliance, location, MFA)",
+    "vendor": "Microsoft",
+    "status": "Met all 91 target-level ZT activities Oct 2024 (151/152 total); 560,000+ identities; being extended to ships via hyper-converged infrastructure plus LEO SATCOM"
+   },
+   {
+    "name": "Army BYOD and DAF Workspace Anywhere (virtual mobile infrastructure)",
+    "owner": "Army CIO/G-6; DAF CIO",
+    "function": "Zero-trust mobile access streaming pixels only, keeping CUI off personal devices",
+    "vendor": "Hypori",
+    "status": "Production programs (Hypori FedRAMP High, IL5 PA, NSA CSfC listing per vendor profile)"
+   },
+   {
+    "name": "Cross Domain Enterprise Service (CDES)",
+    "owner": "DISA",
+    "function": "Enterprise-hosted and mission-specific CDS for file and email transfer between NIPRNet and SIPRNet; consolidates point-to-point CDS; 'automated alternatives to removable media and manual cross-domain transfers'",
+    "vendor": "NCDSMO-baselined products (Everfox, Owl, others)",
+    "status": "Production; procurement lines were small (about $1.0-1.6M per year FY2014-2017)"
+   },
+   {
+    "name": "BICES Trusted Network Environment cross domain solution",
+    "owner": "SAF Concepts Development and Management (US BICES)",
+    "function": "Secret-releasable coalition information sharing on disparate networks simultaneously",
+    "vendor": "General Dynamics Mission Systems",
+    "status": "$239.3M ceiling IDIQ awarded Mar 1, 2024 (sole source), through Feb 2029"
+   },
+   {
+    "name": "Tactical Cross Domain Solution (TACDS) and platform CDS",
+    "owner": "Army/Air Force platform programs (e.g., HH-60W, F-35 mission planning)",
+    "function": "Low-SWaP guards on vehicles, aircraft and expeditionary nodes",
+    "vendor": "General Dynamics Mission Systems (TACDS), Lockheed Martin (F-35 exportable CDS), Sikorsky integration",
+    "status": "Fielded; TACDS 3.0 filter industry day (NEWT/IWRP) Dec 2025"
+   },
+   {
+    "name": "AFRL 'Minerva' cross domain software (Voice and Video CDS, XD Vision, Cross Domain Full Motion Video)",
+    "owner": "AFRL Rome",
+    "function": "Cross-domain voice, video and FMV for the Minerva user community",
+    "vendor": "Owl Cyber Defense Solutions",
+    "status": "$150M ceiling sole-source SBIR Phase III IDIQ (Jul 29, 2025) with only $10,000 obligated at award"
+   },
+   {
+    "name": "Tactical Edge Nodes (TEN) incl. cross domain solutions for Maritime Targeting Cell-Afloat/eXpeditionary",
+    "owner": "PEO IWS via NSWC Crane",
+    "function": "Small tactical edge nodes, servers, CDS, workstations for targeting cells",
+    "vendor": "Programs Management Analytics & Technologies Inc.",
+    "status": "$89M IDIQ follow-on production OT (Nov 2025), $23,245 obligated at award"
+   },
+   {
+    "name": "OpenTDF / Virtru Data Security Platform (TDF, ZTDF, IC-TDF conversion)",
+    "owner": "Open-source project stewarded by Virtru; government adopters not verifiable",
+    "function": "Attribute-tagged, encrypted objects with key-access-server-enforced ABAC",
+    "vendor": "Virtru and community",
+    "status": "Standards and SDKs mature (opentdf/platform active through Sept 2026); DoD production adoption: Public evidence insufficient"
+   },
+   {
+    "name": "Mattermost Zero Trust Channel Access / Mission Partner Environment deployment",
+    "owner": "Commercial product used in DoD collaboration",
+    "function": "ABAC channel access rules (CEL) evaluating clearances, device posture and network attributes; guest accounts for partners",
+    "vendor": "Mattermost",
+    "status": "Documented product capability (2026 docs); deployment scale not verified"
+   },
+   {
+    "name": "NSA Commercial Solutions for Classified (CSfC) capability packages",
+    "owner": "NSA",
+    "function": "Layered commercial encryption solutions for classified data in transit (Mobile Access CP 2.7.1 dated 12 June 2025)",
+    "vendor": "Listed components and trusted integrators",
+    "status": "Production program"
+   }
+  ],
+  "data_formats_protocols": [
+   "X.509 PKI / CAC-PIV (FIPS 201)",
+   "SAML 2.0, OIDC/OAuth 2.0, SCIM",
+   "LDAP/Active Directory, Entra ID",
+   "NIST SP 800-207 PDP/PEP model; DoD ZT Reference Architecture v2 (2022)",
+   "NIST SP 800-53 rev5 AC-4 information-flow enhancements (AC-4(20) approved CDS list; AC-4(24)-(32) filter pipeline requirements)",
+   "IC-TDF (XML), OpenTDF (JSON manifest), ZTDF (Five Eyes/NATO assertions), NanoTDF",
+   "ACP-240 (CCEB/NATO data labeling), NATO STANAG labeling standards",
+   "ISM/IC classification markings (CAPCO), DoDM 5200.01",
+   "NSA Raise the Bar CDS Design and Implementation Requirements (2021 baseline v4.1, July 2022; RAIN: redundant, always invoked, independent, non-bypassable)",
+   "Data Format Description Language (DFDL) filters used by TACDS",
+   "CNSA 2.0 post-quantum crypto migration"
+  ],
+  "security_domain": "Spans unclassified (NIPR/IL2-IL5), Secret (SIPR/IL6), TS/SCI and coalition Secret-REL enclaves; the segment's core products (CDS, CSfC) are by definition multi-domain and immediately classified/export-controlled, while tagging, policy and observability tooling can be built unclassified.",
+  "connectivity_dependency": "Enterprise ZT and ICAM assume reachability of identity providers, policy decision points, certificate revocation services and key access servers; Flank Speed and Thunderdome are cloud/enterprise-hosted. Tactical CDS are local hardware, but their filter updates and audit offload assume periodic connectivity.",
+  "what_breaks_when_disconnected": "Token/certificate validation, attribute retrieval and key release fail or fall back to cached trust; users lose access to cloud identity services; data tagged for ABAC cannot be decrypted without key servers; cross-domain transfers revert to manual/removable-media processes. DEVCOM C5ISR's 2025 RFI for 'Tactical Data in Use Security' in DDIL is direct government acknowledgement of this gap."
+ },
+ "incumbents": [
+  {
+   "name": "Booz Allen Hamilton",
+   "products": "Thunderdome prime integrator (prototype 2022, production OTA 2023); ZT assessments; 2026 partnership with Anduril to deploy ZT on Lattice/Menace",
+   "position": "Dominant ZT integrator for DISA/Fourth Estate; owns the reference implementation and the customer relationship."
+  },
+  {
+   "name": "Microsoft",
+   "products": "Entra ID, M365/Azure Government (Flank Speed), conditional access, Azure Government Secret/Top Secret",
+   "position": "De facto enterprise identity and ZT platform for the Navy and much of DoD; first DoD environment certified target-level ZT."
+  },
+  {
+   "name": "Zscaler, Palo Alto Networks, Appgate, Illumio, Cisco (ZT network components)",
+   "products": "SASE/ZTNA, SD-WAN, micro-segmentation, identity-aware proxies",
+   "position": "Component suppliers inside Thunderdome and service ZT deployments (component attribution INFERENCE, LOW)."
+  },
+  {
+   "name": "General Dynamics Information Technology and other large integrators (Leidos, SAIC, CACI, Peraton, Deloitte)",
+   "products": "ZT deployments (reported $120M Air Force ZT deployment across 187 bases, LOW), ICAM integration, MPE/coalition networks",
+   "position": "Win the services and integration dollars; ZT is a 'technology accelerator' in GD earnings commentary (2023)."
+  },
+  {
+   "name": "Everfox (formerly Forcepoint Federal; integrated Garrison and Deep Secure)",
+   "products": "Cross domain solutions (guards, high-speed transfer, trusted thin client), hardware-enforced browsing/isolation ('Hardsec'), insider risk",
+   "position": "Leading CDS vendor; sponsored 2026 research claiming more than half of national security organizations still move sensitive data through manual processes."
+  },
+  {
+   "name": "Owl Cyber Defense Solutions",
+   "products": "Data diodes, cross-domain guards, voice/video and FMV CDS (Minerva), tactical CDS",
+   "position": "$150M ceiling AFRL sole-source Phase III IDIQ (2025); SBIR-to-Phase-III path shows how CDS incumbency is created."
+  },
+  {
+   "name": "General Dynamics Mission Systems",
+   "products": "TACDS tactical cross domain solution, BICES trusted network environment CDS, TACLANE encryptors",
+   "position": "Owns tactical/platform CDS and the coalition BICES guard ($239.3M ceiling, 2024)."
+  },
+  {
+   "name": "Northrop Grumman, Lockheed Martin (Radiant Mercury; F-35 exportable CDS), Sikorsky",
+   "products": "Next-generation and international CDS (CHORD), platform-integrated CDS",
+   "position": "Program-embedded CDS suppliers on major weapon systems."
+  },
+  {
+   "name": "Hypori",
+   "products": "Virtual mobile infrastructure for Army BYOD and DAF Workspace Anywhere",
+   "position": "Incumbent for zero-trust mobile access; FedRAMP High, IL5, CSfC-listed (vendor claims)."
+  },
+  {
+   "name": "SailPoint, Okta, Ping Identity, Radiant Logic, CyberArk (ICAM software)",
+   "products": "Identity governance, SSO/federation, virtual directories, privileged access",
+   "position": "Component vendors in service ICAM programs; specific DoD awards not verifiable in accessible sources (LOW)."
+  },
+  {
+   "name": "Fortra (Titus/Boldon James), Virtru, Microsoft Purview",
+   "products": "Data classification and labeling, TDF-based protection",
+   "position": "Labeling incumbents for office documents/email; weak on machine-generated C2/ISR data streams (INFERENCE)."
+  }
+ ],
+ "startups": [
+  {
+   "name": "Virtru",
+   "product": "Data Security Platform built on TDF/OpenTDF; ZTDF and IC-TDF conversion APIs; steward of OpenTDF open source",
+   "funding": "$29M Series A led by Bessemer (Aug 2016, TechCrunch); later rounds reported but not verified in this session (LOW). Founder Will Ackerly is ex-NSA (TDF originator).",
+   "traction_evidence": "OpenTDF spec and platform actively maintained (commits through Sept 2026); ZTDF cited as used in Five Eyes/NATO contexts; named in DAU 'interoperable data tagging' webinar (Sept 2025). Specific DoD production contracts: Public evidence insufficient.",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Hypori",
+   "product": "Hypori Halo virtual mobile device for BYOD",
+   "funding": "Venture-backed, service-disabled veteran-owned; round sizes not verified (LOW)",
+   "traction_evidence": "Runs Army BYOD and DAF Workspace Anywhere programs; FedRAMP High, DoD IL5 PA, NIAP, CSfC listing (vendor profile Aug 2026). Strongest deployment evidence among startups in this segment.",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Second Front Systems",
+   "product": "Game Warden accredited DevSecOps/ATO hosting (FedRAMP High, IL5; first authorized software platform on AWS Marketplace for JWCC, Feb 2026; NATO UNCLASSIFIED ATO via DIANA in 17 days, May 2026)",
+   "funding": "Reported $70M Series C (builtin.com, Tier 4, date unverified)",
+   "traction_evidence": "Authorizations and marketplace listings are real but are not revenue; relevant here as the hosting/ATO path an S10 startup would use.",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Xage Security",
+   "product": "Identity-based zero trust access and segmentation for OT/IT, 'zero trust for battle networks'",
+   "funding": "Reported over $80M total including $30M Series B (2022) (secondary source, LOW)",
+   "traction_evidence": "$1.5M Navy Sequential Phase II SBIR for zero trust security of battle networks (vendor press release); Air Force SBIR Phase II (2023); Space Force OT claims unverified.",
+   "confidence": "LOW"
+  },
+  {
+   "name": "Anchor Defense",
+   "product": "Cross-tagging and attribution controls for multi-level data release (content/consulting)",
+   "funding": "Public evidence insufficient",
+   "traction_evidence": "Technical articles only; no contract evidence found",
+   "confidence": "LOW"
+  },
+  {
+   "name": "Arkavo and other OpenTDF ecosystem builders (opentdf-rs, OpenTDFKit, c2pa-opentdf)",
+   "product": "Rust/Swift OpenTDF implementations, C2PA provenance + TDF encryption",
+   "funding": "Public evidence insufficient",
+   "traction_evidence": "Open-source activity only; no government traction found. Shows the standard is buildable by small teams.",
+   "confidence": "LOW"
+  },
+  {
+   "name": "QuSecure",
+   "product": "Post-quantum crypto orchestration (QuProtect R3)",
+   "funding": "Venture-backed (amount not verified)",
+   "traction_evidence": "Reported TRL-7 at Army Project Convergence Capstone 6 (Sept 2026 trade press headline); adjacent to this segment's crypto-modernization sub-problem.",
+   "confidence": "LOW"
+  },
+  {
+   "name": "Radius Method (Crystal Tower) and similar 'secure software factory' entrants",
+   "product": "Governed agent workflows in IL5+/disconnected pipelines",
+   "funding": "SBIR/AFWERX (self-reported)",
+   "traction_evidence": "Self-reported fielding at 5GAT, PEO STRI UnITE, Kessel Run (accelerator cohort data; vendor claims, unverified).",
+   "confidence": "LOW"
+  }
+ ],
+ "government_programs": [
+  {
+   "name": "DoD Zero Trust Strategy and Capability Execution Roadmap (ZT PfMO)",
+   "owner": "DoD CIO",
+   "description": "7 pillars, 45 capabilities, 152 activities; 'DoD Components shall achieve Target Level Zero Trust by FY27 and shall plan to achieve Advanced Level Zero Trust capabilities by FY32'; target level = 91 activities; ZT Overlays (Feb 2024) map NIST 800-53 controls; cATO implementation guide.",
+   "status_2026": "Deadline (30 Sep 2027) unchanged as of mid-2026; Navy Flank Speed (target, Oct 2024), DISA Thunderdome (all 152, Apr 2025) and a Dell environment ('Project Zero', target) reported as certified; NSA released Zero Trust Implementation Guidelines Primer/Discovery (14 Jan 2026) and Phase One/Two (30 Jan 2026) to reach target level; ZT for OT blueprint early 2026; Breaking Defense webinar 'progress toward target level' Aug 2026 signals the FY27 crunch.",
+   "budget_evidence": "No single ZT appropriation; funded through component IT/cyber lines (DISA ISSP historically; TMF funded 11 ZT efforts government-wide per House testimony). Public evidence insufficient for a consolidated FY26/FY27 ZT figure in accessible sources.",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf"
+  },
+  {
+   "name": "DISA Thunderdome",
+   "owner": "DISA",
+   "description": "Zero trust network access and application security architecture (SASE, SD-WAN, segmentation, ICAM integration) for DISA, Fourth Estate and mission partners.",
+   "status_2026": "Production deployment under Booz Allen follow-on OTA (Sept 2023; one-year base + four options); 15 sites in 2023, 60+ planned for 2024; all 152 ZT outcomes Apr 2025; 'advanced' goals per DAU Jan 2026 webinar; Senate 2025 testimony cites Thunderdome and FCI integration across 10 DISA IAPs by 30 Sep 2025.",
+   "budget_evidence": "Prototype award was described by analysts as 'modest' (BAH Q3 FY22 call); production OTA value not verifiable in accessible sources (Public evidence insufficient).",
+   "source_url": "https://disa.mil/en/About/Thunderdome"
+  },
+  {
+   "name": "Navy Flank Speed zero trust",
+   "owner": "DON CIO / PEO Digital",
+   "description": "Navy M365/Azure Government environment designed on ZT principles (NAVADMIN 030/22); 91/91 target activities and 60/61 advanced activities achieved Oct 2024.",
+   "status_2026": "Extending to tactical edge (shipboard HCI + LEO SATCOM pilots); 'Nautilus' next phase; positioned as the boundary for Navy data/AI platforms.",
+   "budget_evidence": "DON unclassified IT roughly $6.1B/yr (secondary summary); Flank Speed-specific line not verified.",
+   "source_url": "https://www.microsoft.com/en-us/security/blog/2024/11/11/dod-zero-trust-strategy-proves-security-benchmark-years-ahead-of-schedule-with-microsoft-collaboration/"
+  },
+  {
+   "name": "Army Enterprise ICAM (EICAM) and Army zero trust",
+   "owner": "Army CIO/G-6; Army Cyber Command",
+   "description": "Enterprise identity, credential and access management as 'a central component to the effective employment of a zero trust environment' (LTG Stanton, Senate 2025).",
+   "status_2026": "In implementation; vendor/vehicle not verifiable through accessible sources (Public evidence insufficient).",
+   "budget_evidence": "Public evidence insufficient",
+   "source_url": "https://www.govinfo.gov/content/pkg/CHRG-119shrg61611/html/CHRG-119shrg61611.htm"
+  },
+  {
+   "name": "DISA enterprise ICAM (Global Federated User Directory / DEAS)",
+   "owner": "DISA",
+   "description": "Enterprise directory and self-service identity portal used across DoD (portal.apps.deas.mil); referenced in Thunderdome webinar as 'DISA enterprise ICAM'.",
+   "status_2026": "Production; mission-partner/foreign identity federation still being worked (Thunderdome Jan 2026 webinar discusses foreign mission partners and ICAM).",
+   "budget_evidence": "Public evidence insufficient",
+   "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2024-11-21-zero-trust-transforming-cybersecurity-thunderdome-disas-zero-trust-solution.json"
+  },
+  {
+   "name": "NSA NCDSMO 'Raise the Bar' and CDS baseline",
+   "owner": "NSA National Cross Domain Strategy and Management Office",
+   "description": "Strategy and requirements (CDS Design and Implementation Requirements: 2021 RTB Baseline v4.1, 11 Jul 2022) for all CDS protecting USG classified information and all CDS sold for export; NCDSMO publishes standards on Intelink and maintains the approved list required by NIST AC-4(20).",
+   "status_2026": "Active (NSA page captured 14 Sep 2026); lab-based security assessment remains the gate for any new CDS product.",
+   "budget_evidence": "n/a (regulatory function)",
+   "source_url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/"
+  },
+  {
+   "name": "NSA Commercial Solutions for Classified (CSfC)",
+   "owner": "NSA",
+   "description": "Layered commercial solutions for classified data; capability packages (Mobile Access CP 2.7.1, 12 Jun 2025), components list, trusted integrator list; 'fielded in months, not years'.",
+   "status_2026": "Active; tactical CSfC components exist (small-business RAP radio access point listed for tactical capability per accelerator data, LOW).",
+   "budget_evidence": "n/a",
+   "source_url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/"
+  },
+  {
+   "name": "DISA Cross Domain Enterprise Service (CDES)",
+   "owner": "DISA",
+   "description": "Enterprise, enterprise-hosted and mission-specific CDS for DoD and agencies; supports C&A and O&M across the CDS lifecycle.",
+   "status_2026": "Production; small procurement lines (FY2015 $1.111M; FY2017 $1.559M) indicate low volume, high assurance economics.",
+   "budget_evidence": "DISA Procurement, Defense-Wide ISSP exhibits FY2016-FY2017 (mirrored dataset)",
+   "source_url": "https://comptroller.defense.gov/Budget-Materials/Budget2017/"
+  },
+  {
+   "name": "Joint Staff J6 coalition interoperability / CJADC2 assessments (Bold Quest, GIDE support)",
+   "owner": "Joint Staff J6",
+   "description": "FY2027 RDT&E justification: demonstrate and assess Zero Trust and Data Centric Security for mission partners beyond FVEY; test standards ACP-240, ICAM and Zero Trust; Fully Informed Simulation Environment developing a cross-domain simulation architecture from TS/SCI to SECRET//REL.",
+   "status_2026": "Ongoing annual demonstrations; no production program of record identified.",
+   "budget_evidence": "FY2027 PB Joint Staff RDT&E (C5 Capability Development; JOTG lines about $63-105M/yr per excerpt, not all security-related)",
+   "source_url": "https://comptroller.defense.gov/Budget-Materials/"
+  },
+  {
+   "name": "DISA Mission Partner Environment / Coalition Information Environment",
+   "owner": "DISA (with Joint Staff J6, USINDOPACOM)",
+   "description": "Consolidating vertically integrated partner networks (CFBLNet, Pegasus, CENTRIXS) toward a data-centric MPE.",
+   "status_2026": "'Starting small' in Indo-Pacific proof-outs (2026); DISA says MPE stays network-centric until about 2027.",
+   "budget_evidence": "DISA PE 0301144K Joint/Allied Coalition Information Sharing (historic exhibit); MPE O&M sources sought (2023)",
+   "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/"
+  },
+  {
+   "name": "DEVCOM C5ISR 'Tactical Data in Use Security' RFI",
+   "owner": "Army DEVCOM C5ISR Center",
+   "description": "Market survey for solutions integrating DoD ZT capabilities focused on the Data Pillar that operate within DDIL contested environments.",
+   "status_2026": "RFI stage (2025); no award identified.",
+   "budget_evidence": "Public evidence insufficient",
+   "source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view"
+  },
+  {
+   "name": "Army Next Generation C2 (NGC2) data layer and identity implications",
+   "owner": "Army PEO C3T / Army Futures Command",
+   "description": "Declared 'ready to scale' after Project Convergence Capstone 6 (Jul 2026); 60+ companies on a common data layer baseline; a tactical identity/attribute and tagging substrate is implied but not publicly specified.",
+   "status_2026": "Scaling to I Corps; security architecture details: Public evidence insufficient (INFERENCE that ABAC/tagging will be required).",
+   "budget_evidence": "See Army NGC2 lines in S08/S09 files",
+   "source_url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6"
+  },
+  {
+   "name": "AFRL Minerva cross-domain software (Owl) and BICES TNE CDS (GDMS)",
+   "owner": "AFRL Rome; SAF/CDM",
+   "description": "Program-specific CDS sustainment and development vehicles.",
+   "status_2026": "IDIQs in place through 2029-2030; sole-source.",
+   "budget_evidence": "Owl: $150M ceiling, $10K obligated at award (Jul 2025); GDMS: $239.3M ceiling plus $39.97M task order with $25.7M obligated (Mar 2024)",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/"
+  },
+  {
+   "name": "TACDS Version 3.0 filter (Navy/Marine NEWT via IWRP industry day)",
+   "owner": "Navy (NIWC/IWRP consortium)",
+   "description": "Industry day for tactical CDS filter development.",
+   "status_2026": "Industry day Dec 2025; follow-on unknown.",
+   "budget_evidence": "Public evidence insufficient",
+   "source_url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view"
+  }
+ ],
+ "contracts": [
+  {
+   "vendor": "Booz Allen Hamilton",
+   "customer": "DISA",
+   "vehicle": "Thunderdome prototype OTA",
+   "ceiling": "Public evidence insufficient",
+   "obligated": "Public evidence insufficient",
+   "awarded_value": "Described by analysts as 'seemingly modest' (BAH Q3 FY22 earnings call)",
+   "date": "2022-01",
+   "prototype_or_production": "prototype",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.disa.mil.apps.gcds.disa.mil/en/NewsandEvents/2022/ThunderdomeContractAnnouncement",
+   "confidence": "HIGH (event) / LOW (value)"
+  },
+  {
+   "vendor": "Booz Allen Hamilton",
+   "customer": "DISA",
+   "vehicle": "Thunderdome follow-on production OTA, one-year base + four one-year options",
+   "ceiling": "Public evidence insufficient (press reports not reachable in this session)",
+   "obligated": "Public evidence insufficient",
+   "awarded_value": "Not stated in release",
+   "date": "2023-09",
+   "prototype_or_production": "production",
+   "prime_or_sub": "prime",
+   "source_url": "https://github.com/BTTAI-1A-Accenture/Technology-News-Insights/blob/main/data/scraped/4426715.txt",
+   "confidence": "HIGH (event) / LOW (value)"
+  },
+  {
+   "vendor": "General Dynamics Mission Systems",
+   "customer": "Secretary of the Air Force, Concepts Development and Management (US BICES)",
+   "vehicle": "IDIQ FA7146-24-D-0001 (sole source) for BICES trusted network environment cross domain solution; plus task order FA7146-24-F-0012",
+   "ceiling": "$239,300,000",
+   "obligated": "$25,732,356 RDT&E on the $39,972,491 development task order at award",
+   "awarded_value": "$239.3M ceiling; $39.97M task order",
+   "date": "2024-03-01",
+   "prototype_or_production": "production/sustainment plus development",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Owl Cyber Defense Solutions LLC",
+   "customer": "Air Force Research Laboratory, Rome NY",
+   "vehicle": "IDIQ FA8750-25-D-B003, sole source SBIR Phase III; Voice and Video CDS, XD Vision, Cross Domain FMV for Minerva users",
+   "ceiling": "$150,000,000",
+   "obligated": "$10,000 FY25 RDT&E at award",
+   "awarded_value": "$150M maximum",
+   "date": "2025-07-29",
+   "prototype_or_production": "R&D with transition/sustainment at existing customer sites",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Programs Management Analytics & Technologies Inc.",
+   "customer": "Naval Surface Warfare Center Crane / PEO IWS (Maritime Targeting Cell-Afloat/eXpeditionary)",
+   "vehicle": "IDIQ N0016426DJW79, follow-on production OT under 10 USC 4022(f)(2); Tactical Edge Nodes incl. cross domain solutions",
+   "ceiling": "$89,000,000",
+   "obligated": "$23,245 at award",
+   "awarded_value": "$89M ceiling",
+   "date": "2025-11",
+   "prototype_or_production": "production follow-on to a competed prototype OT",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Sikorsky Aircraft Corp.",
+   "customer": "Air Force Life Cycle Management Center",
+   "vehicle": "Modification P00254 to FA8629-14-C-2403 for implementation of the Tactical Cross Domain Solution",
+   "ceiling": "n/a (cumulative contract face value $5.10B)",
+   "obligated": "FY22 RDT&E (amount not stated)",
+   "awarded_value": "$11,990,629",
+   "date": "2023",
+   "prototype_or_production": "production integration",
+   "prime_or_sub": "prime (CDS vendor is a sub)",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3348502/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Lockheed Martin Aeronautics",
+   "customer": "NAVAIR (F-35 Joint Program Office)",
+   "vehicle": "UCA modification P00006 to N0001921F0849: U.S. and exportable cross domain solution and inline file encryption for F-35 NextGen Mission Planning",
+   "ceiling": "NTE $107,475,142",
+   "obligated": "$5,502,238 at award (USAF, USN and partner funds)",
+   "awarded_value": "NTE $107.5M",
+   "date": "2024",
+   "prototype_or_production": "development",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3627836/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Anduril Industries",
+   "customer": "AFWERX",
+   "vehicle": "IDIQ FA2280-25-D-0001 'Thunderdome Small Business Innovation Phase III' (Lattice rapid prototyping; NOTE: Air Force naming collision, not DISA's ZT Thunderdome)",
+   "ceiling": "$99,000,000",
+   "obligated": "$8,400,000 FY24 RDT&E",
+   "awarded_value": "$99M",
+   "date": "2025-02-14",
+   "prototype_or_production": "prototype",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4068227/",
+   "confidence": "HIGH"
+  },
+  {
+   "vendor": "Xage Security",
+   "customer": "U.S. Navy",
+   "vehicle": "Sequential Phase II SBIR, zero trust security of battle networks",
+   "ceiling": "n/a",
+   "obligated": "n/a",
+   "awarded_value": "$1.5M (vendor release)",
+   "date": "2023 (approx.)",
+   "prototype_or_production": "prototype",
+   "prime_or_sub": "prime",
+   "source_url": "https://xage.com/press/xage-security-awarded-1-5-million-contract-by-united-states-navy-to-advance-zero-trust-initiatives/",
+   "confidence": "MEDIUM"
+  },
+  {
+   "vendor": "Hypori",
+   "customer": "Army (BYOD) and Department of the Air Force (Workspace Anywhere)",
+   "vehicle": "Program subscriptions (vehicle not identified)",
+   "ceiling": "Public evidence insufficient",
+   "obligated": "Public evidence insufficient",
+   "awarded_value": "Public evidence insufficient",
+   "date": "2023-2026",
+   "prototype_or_production": "production programs (vendor-stated)",
+   "prime_or_sub": "prime",
+   "source_url": "https://www.hypori.com/resources/dod-faqs",
+   "confidence": "MEDIUM"
+  },
+  {
+   "vendor": "Trace Systems",
+   "customer": "DISA (MPE-S)",
+   "vehicle": "Mission Partner Environment services contract",
+   "ceiling": "$998M ceiling (2019)",
+   "obligated": "Public evidence insufficient",
+   "awarded_value": "ceiling only",
+   "date": "2019-10-16",
+   "prototype_or_production": "services",
+   "prime_or_sub": "prime",
+   "source_url": "https://app.bigdata.com/documents/8F3B0E4100D8F100F3F8DE73DCEC0D8E",
+   "confidence": "MEDIUM (from S08 file)"
+  }
+ ],
+ "technical_difficulty": {
+  "summary": "Bimodal. The enterprise half (SSO, ZTNA, conditional access, directories) is commodity engineering assembled from hyperscaler and vendor components; the differentiator is integration, accreditation and scale, not novel technology. The hard half is (a) high-assurance cross-domain filtering that must satisfy Raise the Bar (redundant, independent, always-invoked, non-bypassable filter pipelines, normalized-format regeneration) and pass NSA lab assessment; (b) consistent attribute semantics across federated authorities (DoD, services, coalition) so that ABAC decisions are the same everywhere; (c) automated releasability decisions where markings do not aggregate by dominance (any NOFORN element blocks foreign release); and (d) making ZT work when the identity provider, PDP and key server are unreachable (DDIL).",
+  "required_expertise": [
+   "PKI and X.509/OIDC/SAML federation internals",
+   "Policy engines and ABAC modeling (OPA/Rego, Cedar, XACML lineage)",
+   "Cryptography and key management (TDF/ZTDF key access services, HSMs, CNSA 2.0)",
+   "High-assurance systems engineering, formal methods and separation kernels for CDS",
+   "Content filtering, data format descriptions (DFDL), USMTF/CoT/Link-16 message schemas",
+   "Classification and foreign disclosure policy (DoDM 5200.01, CAPCO, ACP-240, NATO STANAG labels)",
+   "DevSecOps and cATO evidence automation (NIST 800-53 rev5, ZT Overlays)",
+   "Tactical networking and offline-first distributed systems"
+  ],
+  "hardest_problem": "Getting an automated, policy-consistent releasability and access decision on machine-generated tactical data (tracks, reports, video) across US-only, coalition and partner enclaves without a human in the loop, while satisfying NCDSMO assurance requirements and surviving disconnection. Today this is solved by people, liaison officers and regeneration workarounds.",
+  "commodity_parts": "Identity providers, MFA, ZTNA/SASE, SIEM, OPA/Cedar policy engines, OpenTDF SDKs and key access server, Kubernetes with policy-as-code, FedRAMP/IL5 hosting via Game Warden or hyperscalers."
+ },
+ "capital_intensity": {
+  "proof_of_concept_usd": "$50k-$200k",
+  "credible_military_demo_usd": "$0.5M-$2.5M",
+  "first_production_deployment_usd": "$3M-$15M for software tooling (tagging/policy/observability); $10M-$40M and 3-5 years if the product itself must become an NCDSMO-baselined CDS",
+  "assumptions": "PoC assumes two founders building on OpenTDF/OPA with synthetic or unclassified C2 data (CoT, USMTF samples). Credible demo assumes an SBIR Phase I/II or xTech award, IL4/IL5 hosting through an accredited intermediary, DoD PKI test credentials, and participation in an Army/Joint experiment (T-REX, Project Convergence, Bold Quest) with a government sponsor such as DEVCOM C5ISR. First production assumes ATO/cATO on a service enclave, FedRAMP High or IL5 reciprocity, 3-6 cleared or clearable staff, and 18-36 months. CDS route assumes NSA lab-based security assessment, hardware/software development to RTB, and export-control compliance; incumbents' sole-source IDIQs show the buyer will not run new competitions frequently."
+ },
+ "regulatory_access": {
+  "prototype_with_commercial_unclassified_data": "yes for data tagging, policy engines, ZT observability and ICAM integration tooling (OpenTDF, synthetic CoT/USMTF); no for cross-domain solutions and CSfC-type products, which have no meaningful unclassified market and require NSA processes",
+  "government_data_required": "Not for a first prototype; needed for credibility: DoD PKI test certificates, sample marked data and access to a service enclave, typically via SBIR/OTA sponsor or an exercise.",
+  "itar_ear": "CDS and high-assurance guards are treated as export-controlled (NSA RTB explicitly covers 'all cross domain solutions being sold for export'); encryption products fall under EAR Cat. 5 Part 2 and may be USML-controlled when designed for military use; tagging/policy software built on open standards can be EAR99 or 5D002 depending on crypto. Needs export-control counsel before any foreign-national access to controlled technical data.",
+  "cui_likely": "yes; any real customer data (attributes, network topology, marking rules) will be CUI at minimum and drive CMMC Level 2 obligations",
+  "classified_integration_eventually": "yes for anything touching SIPR, coalition Secret-REL or CDS; the segment's value concentrates at classification boundaries",
+  "cleared_personnel_at_mvp": "no for unclassified tooling MVP; yes (Secret at minimum, often TS/SCI) for CDS, CSfC integration, coalition MPE work and most production deployments",
+  "overall": "high",
+  "non_us_person_founder_note": "An Indonesian citizen without U.S. person status cannot hold a U.S. security clearance and generally may not access ITAR-controlled technical data or export-controlled encryption source without licenses; a company with a foreign owner/officer may raise FOCI questions in facility clearance and some SBIR eligibility contexts. A German founder who becomes a lawful permanent resident is a 'U.S. person' for ITAR/EAR deemed-export purposes but still cannot hold a clearance until naturalized. Practical implication: structure the company so the non-U.S.-person founder owns product/business functions on unclassified, non-export-controlled work, keep controlled technical data segregated, and obtain specialist immigration, export-control and FOCI legal review before pursuing CDS, CSfC or classified integration. This is a description of constraints, not legal advice."
+ },
+ "unsolved_pain": [
+  {
+   "pain": "Zero-trust data protections assume enterprise connectivity; tactical data-in-use protection inside DDIL is an open requirement",
+   "evidence": "DEVCOM C5ISR RFI surveys the market for ZT Data-pillar capabilities that 'operate within a denied, degraded, intermittent, or limited (DDIL) contested communications, logistics, and information environment'; DAU ZT webinar (27 Aug 2025) raises DDIL.",
+   "source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view",
+   "pub_date": "2025",
+   "label": "FACT"
+  },
+  {
+   "pain": "Interoperable data tagging for ABAC is still being socialized, not fielded, five years after the ZT strategy",
+   "evidence": "DoD CIO ZT PfMO ran dedicated DAU webinars on data tagging (18 Apr 2024) and 'Interoperable Data Tagging' (Jordan Gottlieb, 18 Sep 2025) discussing ZTDF and ABAC; Joint Staff FY27 justification still lists ACP-240/ICAM/ZT as 'testing standards'.",
+   "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json",
+   "pub_date": "2025-09-18",
+   "label": "FACT (webinar existence) / INFERENCE (fielding status)"
+  },
+  {
+   "pain": "Officials cannot readily share classified information with allies and mission partners integral to CJADC2",
+   "evidence": "GAO-25-106454 reports several officials cited this inability; DISA says MPE remains network-centric until about 2027.",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025",
+   "label": "FACT"
+  },
+  {
+   "pain": "Intelligence produced at collateral Secret is regenerated by hand on a lower enclave with REL NATO markings; BICES does not talk to mission command systems",
+   "evidence": "MIPB article on WFX 24-03 multinational intelligence sharing.",
+   "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "pub_date": "2025",
+   "label": "FACT"
+  },
+  {
+   "pain": "Cross-domain movement is still substantially manual; CDES exists to replace 'removable media and manual cross-domain transfers'",
+   "evidence": "DISA CDES budget exhibit language (FY2016-17); Everfox-sponsored 2026 research claims more than half of national security organizations still move sensitive data through manual processes (vendor claim, not independent proof).",
+   "source_url": "https://thehackernews.com/2026/04/why-secure-data-movement-is-zero-trust.html",
+   "pub_date": "2026-04",
+   "label": "FACT (CDES purpose) / HYPOTHESIS (vendor survey prevalence)"
+  },
+  {
+   "pain": "Releasability markings do not aggregate by dominance, so guards must apply the most restrictive constraint and fused products become unreleasable",
+   "evidence": "Anchor Defense technical article on cross-tagging and attribution controls.",
+   "source_url": "https://anchor-defense.com/articles/cds-cross-tagging-attribution-controls-multi-level-data-release/",
+   "pub_date": "undated (2025-2026)",
+   "label": "FACT (policy rule) / INFERENCE (operational impact)"
+  },
+  {
+   "pain": "Program offices must evidence 91 target-level activities by 30 Sep 2027 while most systems are brownfield and under-funded for architectural change",
+   "evidence": "DAU DevSecOps office hour (26 Mar 2026): programs 'need to at least hit 91 target levels'; DAU 'Operationalizing ZT leveraging RMF and AI' (13 May 2026); practitioner commentary that the roadmap assumes 'fiscal flexibility that many organizations simply do not have' (May 2026).",
+   "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2026-03-26-devsecops-open-office-hour.json",
+   "pub_date": "2026-03-26",
+   "label": "FACT (statements) / INFERENCE (breadth)"
+  },
+  {
+   "pain": "Coalition and foreign mission-partner identities do not fit enterprise ICAM; foreign partners must 'adhere to' DoD ICAM constructs",
+   "evidence": "DISA Thunderdome DAU webinar (15 Jan 2026) segment on foreign mission partners and ICAM; Army 2CR built its own Mission Partner Kit and relies on trained liaison officers for brigade-and-below sharing.",
+   "source_url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies",
+   "pub_date": "2025-03-25",
+   "label": "FACT"
+  },
+  {
+   "pain": "Non-person entity (sensor, autonomy, service) identity at scale is required by the ZT strategy and by NGC2's 60-vendor common data layer but has no visible tactical solution",
+   "evidence": "ZT strategy webinar (Dec 2022) on NPEs; NGC2 declared ready to scale with 60+ companies on a common data layer (Aug 2026); DISA PKI NPE detection lines date to FY2014.",
+   "source_url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6",
+   "pub_date": "2026-08-04",
+   "label": "INFERENCE"
+  },
+  {
+   "pain": "New CDS capability is gated by NSA assessment and delivered through sole-source incumbents, so users wait years for new data types (voice, video, FMV, new filters)",
+   "evidence": "Owl $150M sole-source Phase III IDIQ for voice/video/FMV CDS (2025); GDMS sole-source BICES CDS (2024); TACDS 3.0 filter industry day (Dec 2025); NIST AC-4(20) restricts use to NCDSMO-approved solutions.",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "pub_date": "2025-07-29",
+   "label": "FACT (awards) / INFERENCE (wait times)"
+  }
+ ],
+ "why_not_solved": [
+  {
+   "reason": "certification",
+   "explanation": "Any product that moves data across classification boundaries must pass NSA/NCDSMO lab-based assessment against Raise the Bar and be listed before use (NIST AC-4(20)); CSfC components need NIAP validation and a trusted integrator. This takes years and specialized staff, which is why the CDS market is an oligopoly."
+  },
+  {
+   "reason": "classification",
+   "explanation": "The highest-value use cases (SIPR, coalition Secret-REL, TS/SCI) require cleared people, facilities and government-furnished environments; startups cannot iterate with real data."
+  },
+  {
+   "reason": "proprietary incumbent architecture",
+   "explanation": "Everfox, Owl, GDMS, Northrop and Lockheed hold program-embedded CDS and sole-source IDIQs; Booz Allen and Microsoft hold the ZT reference deployments. The buyer rarely re-competes."
+  },
+  {
+   "reason": "integration complexity",
+   "explanation": "ABAC only works if attributes mean the same thing across DoD PKI, service directories, cloud tenants and coalition authorities; every service runs its own ICAM and ZT program, so semantics and APIs diverge."
+  },
+  {
+   "reason": "buyer fragmentation",
+   "explanation": "DoD CIO sets policy but does not buy; DISA, each service CIO, PEOs and combatant commands each own pieces; coalition sharing additionally depends on national policies (NATO ACCS integration took over two decades)."
+  },
+  {
+   "reason": "technology only recently possible",
+   "explanation": "OpenTDF (2021-2024), ZTDF, NSA ZIGs (Jan 2026), cATO guidance and policy-as-code engines make source-tagging and continuous evidence practical only now; Flank Speed's target-level certification (Oct 2024) is the first proof that the enterprise half is achievable."
+  },
+  {
+   "reason": "economics",
+   "explanation": "CDS procurement lines are small (CDES roughly $1-2M/yr) and unit volumes low; the money is in integration services and platform programs, not in software licenses, which discourages venture-backed entrants."
+  },
+  {
+   "reason": "it actually HAS been solved",
+   "explanation": "Enterprise ZTNA/identity for connected users is largely solved by Thunderdome and Flank Speed using commercial stacks; that sub-layer is not startup whitespace."
+  },
+  {
+   "reason": "nobody has solved it",
+   "explanation": "Automated, dominance-aware releasability on machine-generated tactical data and ZT enforcement in DDIL remain open; demonstrations recur annually (Bold Quest, CWIX, JS J6 assessments) without a program of record."
+  }
+ ],
+ "attractiveness": {
+  "bull": "The FY27 target-level deadline, NSA's Jan 2026 implementation guidelines, NGC2's scale-up and Joint Staff's coalition data-centric-security demos create a 2026-2028 window where every program office needs data tagging, ABAC policy and ZT evidence tooling. Open standards (OpenTDF/ZTDF, ACP-240) let a two-person team build an unclassified prototype in weeks; DEVCOM C5ISR has issued a named RFI for tactical data-in-use security; accredited hosting (Game Warden, JWCC marketplace) shortens ATO; and the pain is documented in GAO, Army journals and DAU webinars rather than only vendor marketing.",
+  "bear": "The layer's value concentrates exactly where a student startup cannot go: classified enclaves, NSA-assessed CDS, coalition policy. Enterprise ZT and ICAM are already delivered by Booz Allen, Microsoft and large integrators with sole-source follow-ons; ZT compliance tooling is crowded; data tagging demand is real but the buyer has been 'demonstrating' it since 2022 without a program of record; one non-U.S.-person founder blocks clearances and complicates export control and FOCI; and revenue in CDS is low-volume and services-heavy.",
+  "verdict": "Selectively attractive: pursue only the unclassified, standards-based sub-problems (interoperable tagging/labeling automation for C2 data, offline-capable policy/key enforcement for DDIL, ZT evidence automation) as a wedge, with an explicit plan to partner with an accredited CDS or ZT integrator rather than becoming one. Avoid building a CDS, CSfC product or enterprise ICAM competitor."
+ },
+ "market_stage": {
+  "stage": "Transitioning",
+  "signal_sequence": [
+   {
+    "year": "2020",
+    "event": "DoD ICAM Strategy (Mar 2020) and Digital Modernization Strategy call for enterprise ICAM (policy/RFI-equivalent)",
+    "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Cyber/DoD-ICAM-Strategy.pdf"
+   },
+   {
+    "year": "2022-01",
+    "event": "Prototype award: DISA Thunderdome prototype OTA to Booz Allen",
+    "source_url": "https://www.disa.mil.apps.gcds.disa.mil/en/NewsandEvents/2022/ThunderdomeContractAnnouncement"
+   },
+   {
+    "year": "2022-11",
+    "event": "DoD Zero Trust Strategy (152 activities; target level by FY27)",
+    "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf"
+   },
+   {
+    "year": "2023-09",
+    "event": "Follow-on production OTA: Thunderdome at-scale deployment (15 sites 2023, 60+ planned 2024)",
+    "source_url": "https://www.govinfo.gov/content/pkg/CHRG-118hhrg56900/html/CHRG-118hhrg56900.htm"
+   },
+   {
+    "year": "2024-02",
+    "event": "DoD Zero Trust Overlays published (compliance mapping)",
+    "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/ZeroTrustOverlays-2024Feb.pdf"
+   },
+   {
+    "year": "2024-03",
+    "event": "Production/sustainment IDIQ: GDMS BICES trusted network environment CDS ($239.3M ceiling, sole source)",
+    "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/"
+   },
+   {
+    "year": "2024-10",
+    "event": "Production milestone: Navy Flank Speed meets all 91 target-level ZT activities, three years early",
+    "source_url": "https://www.microsoft.com/en-us/security/blog/2024/11/11/dod-zero-trust-strategy-proves-security-benchmark-years-ahead-of-schedule-with-microsoft-collaboration/"
+   },
+   {
+    "year": "2025-04",
+    "event": "Production milestone: DISA Thunderdome credited with all 152 ZT outcomes",
+    "source_url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-disas-thunderdome-achieves-advanced-zero-trust-goals-0"
+   },
+   {
+    "year": "2025",
+    "event": "RFI: DEVCOM C5ISR Tactical Data in Use Security (ZT Data pillar in DDIL)",
+    "source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view"
+   },
+   {
+    "year": "2025-07",
+    "event": "Repeat/sole-source follow-on: Owl Cyber Defense $150M ceiling SBIR Phase III IDIQ for voice/video/FMV CDS",
+    "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/"
+   },
+   {
+    "year": "2025-09",
+    "event": "Policy socialization: DoD CIO ZT PfMO webinar on interoperable data tagging (ZTDF, ABAC)",
+    "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json"
+   },
+   {
+    "year": "2025-11",
+    "event": "Follow-on production OT: PMAT Tactical Edge Nodes incl. CDS ($89M IDIQ)",
+    "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/"
+   },
+   {
+    "year": "2025-12",
+    "event": "Industry day: TACDS Version 3.0 filter (NEWT/IWRP)",
+    "source_url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view"
+   },
+   {
+    "year": "2026-01",
+    "event": "NSA Zero Trust Implementation Guidelines (Primer, Discovery, Phase One, Phase Two) to reach DoW-defined target level",
+    "source_url": "https://www.globalsecurity.org/security/library/news/2026/01/sec-260130-nsa-css01.htm"
+   },
+   {
+    "year": "2026 (FY27 PB)",
+    "event": "Budget: Joint Staff J6 continues to 'demonstrate and assess Zero Trust and Data Centric Security' for partners beyond FVEY (no production program)",
+    "source_url": "https://comptroller.defense.gov/Budget-Materials/"
+   },
+   {
+    "year": "2026-08",
+    "event": "DISA 'starting small' proving MPE capabilities; MPE network-centric until ~2027",
+    "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/"
+   }
+  ],
+  "rationale": "Enterprise ZT/ICAM has moved through prototype -> production -> repeat within four years and is Mature; cross-domain hardware/guards are Mature-to-Stagnant (sole-source follow-ons, small budgets); data-centric security, coalition ZT and tactical/DDIL ZT are in the RFI/demonstration phase with no production program of record, hence Transitioning overall."
+ },
+ "proto_purgatory": {
+  "observed": true,
+  "notes": "Coalition data-centric security and interoperable tagging have been 'demonstrated and assessed' annually (Bold Quest, CWIX, Joint Staff J6 CJADC2 assessments, DAU webinars since Dec 2022) without a fielded standard or program of record; MPE consolidation is still 'starting small' in 2026 and expected to stay network-centric until ~2027. By contrast, enterprise ZT (Thunderdome, Flank Speed) escaped purgatory quickly because a single owner (DISA, DON) controlled budget, network and ATO. Tactical CDS shows the opposite pattern: SBIR Phase II to sole-source Phase III IDIQ (Owl) and prototype OT to production OT (PMAT), i.e., transition happens but only for incumbents already inside the accreditation moat.",
+  "opportunity_or_warning": "Warning for coalition/releasability products (policy-bound, multi-owner); opportunity for tooling that a single program office can buy and deploy on its own authority (tagging at source, ZT evidence, offline policy enforcement), provided it attaches to a funded program (NGC2, Flank Speed edge, DEVCOM C5ISR S&T) rather than to the multinational demonstration circuit."
+ },
+ "exercise_evidence": [
+  {
+   "exercise": "Warfighter Exercise 24-03 (multinational)",
+   "year": "2024",
+   "quote_or_paraphrase": "Intelligence generated at collateral Secret 'precluded sharing with allied partners'; staff regenerated products on the lower-enclave MPE with REL NATO markings using a different tool; BICES 'does not communicate with mission command systems'.",
+   "pain_keywords": [
+    "workaround",
+    "re-enter",
+    "incompatible",
+    "disconnected",
+    "releasability"
+   ],
+   "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/"
+  },
+  {
+   "exercise": "Saber Strike 24 / DEFENDER 24 (2nd Cavalry Regiment Mission Partner Kit)",
+   "year": "2024",
+   "quote_or_paraphrase": "Brigade-and-below U.S. and NATO units lacked a fast way to share SA, chat and voice; the regiment built a cloud-hosted kit at SBU and relies on trained liaison officers.",
+   "pain_keywords": [
+    "workaround",
+    "swivel-chair",
+    "liaison",
+    "denied"
+   ],
+   "source_url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies"
+  },
+  {
+   "exercise": "Thunderdome prototype with real users (2022-2023)",
+   "year": "2023",
+   "quote_or_paraphrase": "Booz Allen: prototype demonstrated 'with real users, that they will work together to deliver the tenets of zero trust on both classified and unclassified networks'; DISA testified to 15 sites in 2023 and 60+ in 2024.",
+   "pain_keywords": [
+    "single pane",
+    "segmentation"
+   ],
+   "source_url": "https://www.govinfo.gov/content/pkg/CHRG-118hhrg56900/html/CHRG-118hhrg56900.htm"
+  },
+  {
+   "exercise": "Navy Flank Speed shipboard pilot (HCI + LEO SATCOM)",
+   "year": "2024-2025",
+   "quote_or_paraphrase": "DON CIO said the Navy is pushing Flank Speed to the tactical edge, piloting hyper-converged infrastructure with LEO satellite links aboard a ship to reach the ZT-certified environment.",
+   "pain_keywords": [
+    "bandwidth",
+    "latency",
+    "disconnected"
+   ],
+   "source_url": "https://federalnewsnetwork.com/ask-the-cio/2024/12/navy-looking-at-cloud-as-gfe-to-reduce-cmmc-burden/"
+  },
+  {
+   "exercise": "Bold Quest coalition interoperability demonstrations (Joint Staff J6)",
+   "year": "2025-2027 (FY27 PB)",
+   "quote_or_paraphrase": "J6 plans to 'continue to demonstrate and assess Zero Trust and Data Centric Security via virtual machines and cloud to support integration of mission partners beyond FVEYs' and to test 'ACP-240, ICAM, and Zero Trust' standards.",
+   "pain_keywords": [
+    "coalition",
+    "releasability",
+    "demonstrate"
+   ],
+   "source_url": "https://comptroller.defense.gov/Budget-Materials/"
+  },
+  {
+   "exercise": "Project Convergence Capstone 6 (NGC2 scale decision)",
+   "year": "2026",
+   "quote_or_paraphrase": "Army declared NGC2 ready to scale after a division-level prototype campaign with 60+ companies on a common data layer; a PQC vendor reported TRL-7 at the same event; security/identity architecture not disclosed.",
+   "pain_keywords": [
+    "duplicate",
+    "integration",
+    "identity"
+   ],
+   "source_url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6"
+  },
+  {
+   "exercise": "DISA Mission Partner Environment Indo-Pacific proof-outs",
+   "year": "2026",
+   "quote_or_paraphrase": "DISA is 'starting small' proving MPE capabilities; partner networks were built 'out of necessity' as stovepipes and MPE stays network-centric until about 2027.",
+   "pain_keywords": [
+    "disconnected",
+    "incompatible",
+    "stovepipe"
+   ],
+   "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/"
+  },
+  {
+   "exercise": "Valiant Shield 2024 (L3Harris project with Everfox CDS)",
+   "year": "2024",
+   "quote_or_paraphrase": "A contractor portfolio states Everfox cross domain solutions were implemented for L3Harris' Valiant Shield 2024 project (LOW: personal website).",
+   "pain_keywords": [
+    "cross domain"
+   ],
+   "source_url": "https://github.com/jphill19/john-site"
+  }
+ ],
+ "whitespace_placements": [
+  {
+   "company_or_product": "DISA Thunderdome (Booz Allen)",
+   "chain_steps": [
+    "TRANSPORT",
+    "PROCESS"
+   ],
+   "echelons": [
+    "theater",
+    "joint"
+   ]
+  },
+  {
+   "company_or_product": "Navy Flank Speed (Microsoft)",
+   "chain_steps": [
+    "PROCESS",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "joint",
+    "theater"
+   ]
+  },
+  {
+   "company_or_product": "DoD PKI / GFUD / Army EICAM",
+   "chain_steps": [
+    "TRANSPORT",
+    "PROCESS",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "individual_platform",
+    "tactical_unit",
+    "battalion_brigade",
+    "division_corps",
+    "theater",
+    "joint"
+   ]
+  },
+  {
+   "company_or_product": "Everfox / Owl / DISA CDES enterprise guards",
+   "chain_steps": [
+    "TRANSPORT",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "division_corps",
+    "theater",
+    "joint",
+    "coalition"
+   ]
+  },
+  {
+   "company_or_product": "GDMS TACDS / Sikorsky and F-35 platform CDS",
+   "chain_steps": [
+    "TRANSPORT"
+   ],
+   "echelons": [
+    "individual_platform",
+    "tactical_unit"
+   ]
+  },
+  {
+   "company_or_product": "GDMS BICES trusted network environment CDS",
+   "chain_steps": [
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "coalition"
+   ]
+  },
+  {
+   "company_or_product": "PMAT Tactical Edge Nodes (Navy MTC-A/X)",
+   "chain_steps": [
+    "TRANSPORT",
+    "PROCESS",
+    "FUSE"
+   ],
+   "echelons": [
+    "tactical_unit",
+    "theater"
+   ]
+  },
+  {
+   "company_or_product": "OpenTDF / Virtru DSP (ZTDF, IC-TDF)",
+   "chain_steps": [
+    "PROCESS",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "joint",
+    "coalition"
+   ]
+  },
+  {
+   "company_or_product": "Hypori (Army BYOD, DAF Workspace Anywhere)",
+   "chain_steps": [
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "individual_platform"
+   ]
+  },
+  {
+   "company_or_product": "Mattermost ABAC channel access for MPE",
+   "chain_steps": [
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "battalion_brigade",
+    "coalition"
+   ]
+  },
+  {
+   "company_or_product": "Second Front Game Warden (accredited hosting)",
+   "chain_steps": [
+    "PROCESS"
+   ],
+   "echelons": [
+    "joint"
+   ]
+  },
+  {
+   "company_or_product": "Xage Security (OT/battle network ZT)",
+   "chain_steps": [
+    "TRANSPORT"
+   ],
+   "echelons": [
+    "individual_platform",
+    "tactical_unit"
+   ]
+  },
+  {
+   "company_or_product": "Army NGC2 common data layer (Anduril/Palantir ecosystem)",
+   "chain_steps": [
+    "PROCESS",
+    "FUSE",
+    "DECIDE"
+   ],
+   "echelons": [
+    "battalion_brigade",
+    "division_corps"
+   ]
+  },
+  {
+   "company_or_product": "2CR Mission Partner Kit",
+   "chain_steps": [
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "tactical_unit",
+    "battalion_brigade",
+    "coalition"
+   ]
+  },
+  {
+   "company_or_product": "WHITESPACE: tactical/DDIL policy and key enforcement for tagged data",
+   "chain_steps": [
+    "PROCESS",
+    "FUSE",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "tactical_unit",
+    "battalion_brigade"
+   ]
+  },
+  {
+   "company_or_product": "WHITESPACE: source tagging/labeling of machine-generated C2 data with dominance-aware release",
+   "chain_steps": [
+    "COLLECT",
+    "PROCESS",
+    "DISSEMINATE_TASK"
+   ],
+   "echelons": [
+    "battalion_brigade",
+    "division_corps",
+    "coalition"
+   ]
+  }
+ ],
+ "expertise_matrix": {
+  "software": {
+   "distributed_systems": "important",
+   "backend": "critical",
+   "data_engineering": "important",
+   "networking": "important",
+   "cybersecurity": "critical",
+   "geospatial": "optional",
+   "ml": "optional",
+   "cv": "n/a",
+   "embedded_software": "optional",
+   "frontend_hmi": "important",
+   "devsecops": "critical"
+  },
+  "hardware": {
+   "electrical": "n/a",
+   "rf": "n/a",
+   "fpga": "optional",
+   "sensors": "n/a",
+   "embedded_systems": "optional",
+   "mechanical": "n/a",
+   "ruggedization": "optional",
+   "manufacturing": "n/a"
+  },
+  "defense_domain": {
+   "tactical_networks": "important",
+   "isr": "optional",
+   "intelligence_analysis": "important",
+   "command_post_operations": "important",
+   "logistics": "n/a",
+   "spectrum": "n/a",
+   "acquisition": "critical",
+   "security_architecture": "critical"
+  },
+  "business": {
+   "government_sales": "critical",
+   "federal_contracting": "critical",
+   "partnerships": "critical",
+   "capture": "important",
+   "fundraising": "important",
+   "program_management": "important"
+  }
+ },
+ "candidate_gaps": [
+  {
+   "id": "S10-G1",
+   "title": "Offline-capable policy and key enforcement for tagged data at the tactical edge (ZT Data pillar in DDIL)",
+   "problem_one_sentence": "Zero-trust access and TDF-style data protection stop working when the identity provider, policy decision point or key server is unreachable, so tactical units either fall back to implicit trust or lose access to protected data.",
+   "categories": [
+    "A",
+    "D",
+    "F",
+    "I"
+   ],
+   "user": "Battalion/brigade S6 and data managers, NGC2/tactical cloud node operators, expeditionary targeting cells",
+   "current_workflow": "1) Users authenticate to enterprise IdP when connected; 2) data is protected by network enclave rather than object tags; 3) when disconnected, applications run on cached credentials or local accounts with static role permissions; 4) tagged/encrypted objects cannot be opened without the enterprise key service; 5) on reconnection, audit logs are backfilled manually.",
+   "current_solution": "Enterprise ZT (Thunderdome, Flank Speed) plus shipboard/edge extensions that assume periodic SATCOM; local ACLs; no fielded edge PDP/KAS with attribute caching and delegated key release.",
+   "failure_point": "Enforcement is either bypassed (local accounts) or blocks the mission (no key release); attributes go stale; no revocation while disconnected.",
+   "evidence": [
+    {
+     "claim": "DEVCOM C5ISR surveys the market for ZT Data-pillar solutions that operate in DDIL",
+     "source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view",
+     "source_type": "gov",
+     "pub_date": "2025",
+     "event_date": "2025",
+     "label": "FACT"
+    },
+    {
+     "claim": "Navy is piloting shipboard hyper-converged infrastructure plus LEO SATCOM to extend Flank Speed ZT to the tactical edge (connectivity-dependent design)",
+     "source_url": "https://federalnewsnetwork.com/ask-the-cio/2024/12/navy-looking-at-cloud-as-gfe-to-reduce-cmmc-burden/",
+     "source_type": "independent",
+     "pub_date": "2024-12-23",
+     "event_date": "2024",
+     "label": "FACT"
+    },
+    {
+     "claim": "DoD ZT Strategy requires target-level ZT by FY27 for all components including tactical systems",
+     "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf",
+     "source_type": "gov",
+     "pub_date": "2022-11",
+     "event_date": "2027-09-30",
+     "label": "FACT"
+    },
+    {
+     "claim": "NGC2 declared ready to scale with 60+ vendors on a common data layer, implying tactical attribute/identity and tagging needs",
+     "source_url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6",
+     "source_type": "independent",
+     "pub_date": "2026-08-04",
+     "event_date": "2026-07",
+     "label": "INFERENCE"
+    },
+    {
+     "claim": "OpenTDF/ZTDF provide an open object format and key-access model that could be extended with offline key release",
+     "source_url": "https://github.com/opentdf/spec",
+     "source_type": "company",
+     "pub_date": "2026",
+     "event_date": "n/a",
+     "label": "FACT"
+    }
+   ],
+   "why_startups_havent_solved": "Requires crypto/key-management rigor plus tactical networking knowledge; incumbents sell connectivity-dependent enterprise ZT; the sponsor (DEVCOM C5ISR) is S&T, not a PEO with production dollars.",
+   "companies_near": [
+    "Virtru/OpenTDF",
+    "Xage Security",
+    "Anduril (Lattice ZT with Booz Allen)",
+    "Microsoft (Flank Speed edge)",
+    "Mattermost"
+   ],
+   "incumbent_response_risk": "Medium: Microsoft/Anduril could add offline policy caching; Virtru could extend KAS; but none has a fielded tactical product today.",
+   "technical_wedge_hypothesis": "An edge PDP/KAS node that caches signed attribute bundles and time-boxed key grants, enforces ABAC on OpenTDF/ZTDF objects offline, and reconciles audit and revocation on reconnect.",
+   "mvp_sketch": "Two-node demo: enterprise KAS + edge KAS on a laptop; CoT/USMTF messages tagged and encrypted at source; cut the link and show continued policy-correct access and denial; reconnect and replay audit. Unclassified, synthetic data.",
+   "data_requirement": "Synthetic tactical messages; DoD PKI test certificates for realism; later, government-furnished attributes.",
+   "integration_requirement": "OpenTDF SDKs, OIDC IdP, Kubernetes at edge (UDS/Zarf style), NGC2 or TAK ecosystem APIs.",
+   "entry_vehicle": "Army SBIR/xTech, DEVCOM C5ISR CRADA or OTA via a consortium, T-REX/Project Convergence experimentation slot.",
+   "why_now": "FY27 ZT deadline, NSA ZIGs (2026), NGC2 scale-up and Flank Speed edge pilots all force the DDIL question in 2026-2028.",
+   "killer_risk": "Government decides DDIL ZT is 'good enough' with cached Entra/Active Directory plus network enclaves, or an integrator bundles it into NGC2 for free.",
+   "initial_attractiveness": "high",
+   "confidence": "MEDIUM"
+  },
+  {
+   "id": "S10-G2",
+   "title": "Interoperable security labeling automation for machine-generated C2/ISR data (ACP-240/ZTDF/IC-TDF conformance, dominance-aware release computation)",
+   "problem_one_sentence": "Tracks, reports and video are produced without machine-readable, interoperable classification/releasability tags, so ABAC and cross-domain filters cannot make automated decisions and staff regenerate products by hand.",
+   "categories": [
+    "A",
+    "B",
+    "I",
+    "F",
+    "G"
+   ],
+   "user": "Intelligence and fires staff producing REL products, foreign disclosure officers, CDS filter engineers, NGC2/data-layer integrators",
+   "current_workflow": "1) Producer creates product in a national system at collateral Secret; 2) FDO reviews and re-marks; 3) product is recreated on the lower enclave or MPE with REL markings using a different tool; 4) CDS transfer with manual review of failures; 5) partner receives hours later.",
+   "current_solution": "Document-centric labeling tools (Titus/Boldon James, Purview), manual marking guides, vendor-specific CDS filters; standards exist (ACP-240, ZTDF) but are tested in demos.",
+   "failure_point": "Labels are absent or inconsistent at source; fused objects inherit the most restrictive marking and become unreleasable; humans become the throughput limit.",
+   "evidence": [
+    {
+     "claim": "DoD CIO ZT PfMO ran webinars on data tagging (Apr 2024) and interoperable data tagging (Sep 2025) covering ZTDF and ABAC",
+     "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json",
+     "source_type": "gov",
+     "pub_date": "2025-09-18",
+     "event_date": "2025-09-18",
+     "label": "FACT"
+    },
+    {
+     "claim": "Joint Staff J6 FY27 justification lists ACP-240, ICAM and Zero Trust as coalition 'testing standards' and continues to demonstrate data-centric security for partners beyond FVEY",
+     "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+     "source_type": "gov",
+     "pub_date": "2026",
+     "event_date": "FY2025-FY2027",
+     "label": "FACT"
+    },
+    {
+     "claim": "At WFX 24-03 collateral-Secret intelligence had to be regenerated on the MPE with REL NATO markings using a different tool",
+     "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+     "source_type": "gov",
+     "pub_date": "2025",
+     "event_date": "2024",
+     "label": "FACT"
+    },
+    {
+     "claim": "Releasability markings do not aggregate by dominance; guards must apply the most restrictive constraint",
+     "source_url": "https://anchor-defense.com/articles/cds-cross-tagging-attribution-controls-multi-level-data-release/",
+     "source_type": "company",
+     "pub_date": "undated",
+     "event_date": "n/a",
+     "label": "FACT"
+    },
+    {
+     "claim": "ZTDF is an OpenTDF profile used in Five Eyes/NATO contexts mandating cryptographic assertions (open, buildable standard)",
+     "source_url": "https://github.com/opentdf/docs",
+     "source_type": "company",
+     "pub_date": "2026",
+     "event_date": "n/a",
+     "label": "FACT"
+    },
+    {
+     "claim": "GAO: officials cannot readily share classified information with allies integral to CJADC2",
+     "source_url": "https://www.gao.gov/products/gao-25-106454",
+     "source_type": "gov",
+     "pub_date": "2025",
+     "event_date": "2025",
+     "label": "FACT"
+    }
+   ],
+   "why_startups_havent_solved": "Marking policy is arcane and partly classified; incumbents focus on office documents; C2 message schemas (USMTF, CoT, Link-16 J-series) are niche; buyers have treated tagging as a policy exercise run through demos rather than a product purchase.",
+   "companies_near": [
+    "Virtru",
+    "Fortra (Titus/Boldon James)",
+    "Microsoft Purview",
+    "Anchor Defense",
+    "Everfox (CDS filters)",
+    "Mattermost (ABAC channels)"
+   ],
+   "incumbent_response_risk": "Medium-high: Virtru and Everfox are natural owners; a labeling library could be absorbed into NGC2 data layer vendors (Palantir/Anduril).",
+   "technical_wedge_hypothesis": "A 'label compiler' service: ingests C2/ISR messages, derives ISM/ACP-240 labels from schema fields and source attributes via declarative rules, emits ZTDF/IC-TDF assertions, computes dominance/releasability sets per partner, and produces CDS-filter-ready metadata plus a conformance linter for exercises.",
+   "mvp_sketch": "Open-source linter + rules engine over synthetic CoT/USMTF feeds that outputs ZTDF-tagged objects and a releasability matrix; validate at a coalition interoperability event (CWIX/Bold Quest) or with an NGC2 vendor.",
+   "data_requirement": "Public marking guides (DoDM 5200.01, CAPCO), ACP-240 spec access, synthetic message sets; later government marking rules (CUI/Secret).",
+   "integration_requirement": "OpenTDF SDK, message brokers (Kafka/NiFi), CDS filter metadata formats, TAK/NGC2 APIs.",
+   "entry_vehicle": "Joint Staff J6/Bold Quest participation, Army xTech, SBIR topic under DoD CIO/DISA, subcontract to an NGC2 integrator.",
+   "why_now": "ZTDF/OpenTDF maturity, NSA ZIGs, CJADC2 coalition push and NGC2 scale create demand for machine-readable labels in 2026-2028.",
+   "killer_risk": "Marking policy changes or DoD mandates a single vendor format; buyers keep tagging in the demo circuit (proto-purgatory) without funding a product.",
+   "initial_attractiveness": "high",
+   "confidence": "MEDIUM"
+  },
+  {
+   "id": "S10-G3",
+   "title": "Mission-partner identity federation and dominance-aware release decision service for MPE/CENTRIXS/BICES",
+   "problem_one_sentence": "Coalition users are managed as guests on separate enclaves and release decisions are made by people and liaison officers because no service federates partner identities with attribute-based releasability across enclaves.",
+   "categories": [
+    "B",
+    "F",
+    "C",
+    "E"
+   ],
+   "user": "Combatant command MPE managers, DISA MPE program, coalition LNOs, foreign disclosure officers",
+   "current_workflow": "1) Partner receives national-issued account on a coalition enclave; 2) U.S. users swivel between national and coalition terminals; 3) products cross via CDS or manual transfer after FDO review; 4) identity changes propagate by email/ticket.",
+   "current_solution": "CENTRIXS/BICES/MPE enclaves, Trace Systems MPE-S services, Mattermost guest accounts, Thunderdome extensions to mission partners.",
+   "failure_point": "Identity and attribute semantics differ by nation; releasability cannot be computed automatically; MPE remains network-centric until ~2027.",
+   "evidence": [
+    {
+     "claim": "DISA: MPE will stay network-centric until about 2027; partner networks are consolidated stovepipes",
+     "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+     "source_type": "independent",
+     "pub_date": "2026-08-13",
+     "event_date": "2026-2027",
+     "label": "FACT"
+    },
+    {
+     "claim": "Thunderdome Jan 2026 DAU webinar discusses foreign mission partners needing to adhere to DoD ICAM constructs",
+     "source_url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-disas-thunderdome-achieves-advanced-zero-trust-goals-0",
+     "source_type": "gov",
+     "pub_date": "2026-01-15",
+     "event_date": "2026-01-15",
+     "label": "FACT (topic) / INFERENCE (content detail)"
+    },
+    {
+     "claim": "GAO-25-106454: inability to share classified information with allies and mission partners",
+     "source_url": "https://www.gao.gov/products/gao-25-106454",
+     "source_type": "gov",
+     "pub_date": "2025",
+     "event_date": "2025",
+     "label": "FACT"
+    },
+    {
+     "claim": "2CR built its own Mission Partner Kit and relies on trained LNOs at brigade and below",
+     "source_url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies",
+     "source_type": "gov",
+     "pub_date": "2025-03-25",
+     "event_date": "2024",
+     "label": "FACT"
+    },
+    {
+     "claim": "Mattermost ships ABAC channel access and an MPE deployment pattern (partial commercial solution)",
+     "source_url": "https://docs.mattermost.com/security-guide/zero-trust.html",
+     "source_type": "company",
+     "pub_date": "2026",
+     "event_date": "n/a",
+     "label": "FACT"
+    }
+   ],
+   "why_startups_havent_solved": "Requires classified enclaves, foreign disclosure policy authority and multinational agreements; buyers are DISA/CCMDs with large integrator contracts (Trace Systems MPE-S $998M ceiling).",
+   "companies_near": [
+    "Trace Systems",
+    "GDIT",
+    "SAIC",
+    "Mattermost",
+    "Microsoft (Entra B2B)",
+    "GDMS (BICES)"
+   ],
+   "incumbent_response_risk": "High: MPE integrators and Microsoft Entra federation own the terrain.",
+   "technical_wedge_hypothesis": "A releasability decision API (attributes in, allowed partner set and required transforms out) that integrators embed in MPE chat/COP tools, built on ACP-240 and NATO labels.",
+   "mvp_sketch": "Unclassified demo with synthetic partner attribute authorities and marking rules; integrate with Mattermost or TAK in a coalition exercise sandbox.",
+   "data_requirement": "Partner attribute schemas, disclosure policy encodings (mostly classified/controlled).",
+   "integration_requirement": "SAML/OIDC federation, MPE application APIs, CDS metadata.",
+   "entry_vehicle": "Subcontract to MPE integrator; Bold Quest/CWIX; NATO DIANA (Second Front hosts DIANA at NATO UNCLASSIFIED).",
+   "why_now": "CJADC2 coalition emphasis and MPE data-centric transition target ~2027.",
+   "killer_risk": "Policy, not technology, is the bottleneck; a student startup cannot influence national disclosure policy.",
+   "initial_attractiveness": "medium",
+   "confidence": "MEDIUM"
+  },
+  {
+   "id": "S10-G4",
+   "title": "Zero-trust evidence and continuous-authorization automation for program offices (91 target activities, ZT Overlays, NSA ZIG phases)",
+   "problem_one_sentence": "Program offices must prove target-level ZT by 30 Sep 2027 against 91 activities and 400 pages of overlays, but evidence is assembled manually from heterogeneous tools.",
+   "categories": [
+    "C",
+    "E",
+    "G",
+    "H"
+   ],
+   "user": "ISSMs, program ZT leads, authorizing officials, DoD CIO ZT PfMO assessors",
+   "current_workflow": "1) Map system controls to ZT Overlays in spreadsheets/eMASS; 2) collect screenshots and logs from IdP, EDR, SIEM; 3) self-assess activity status; 4) PfMO review; 5) repeat annually.",
+   "current_solution": "Integrator assessments (Booz Allen, Deloitte, GDIT), GRC tools (Xacta, RegScale), eMASS; Navy and DISA built their own evidence pipelines.",
+   "failure_point": "Manual, non-continuous, inconsistent across components; brownfield systems lack telemetry.",
+   "evidence": [
+    {
+     "claim": "DAU office hour (Mar 2026): programs 'need to at least hit 91 target levels'",
+     "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2026-03-26-devsecops-open-office-hour.json",
+     "source_type": "gov",
+     "pub_date": "2026-03-26",
+     "event_date": "2026-03-26",
+     "label": "FACT"
+    },
+    {
+     "claim": "NSA ZIGs (Jan 2026) decompose target level into Discovery 14 + Phase One 36 + Phase Two 41 activities",
+     "source_url": "https://www.globalsecurity.org/security/library/news/2026/01/sec-260130-nsa-css01.htm",
+     "source_type": "gov",
+     "pub_date": "2026-01-30",
+     "event_date": "2026-01-30",
+     "label": "FACT"
+    },
+    {
+     "claim": "DoD CIO cATO implementation guide ties continuous authorization to ZT target levels and calls out AI/ML-driven assessment automation",
+     "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoDCIO-ContinuousAuthorizationImplementationGuide.pdf",
+     "source_type": "gov",
+     "pub_date": "2024-2025",
+     "event_date": "n/a",
+     "label": "FACT (document) / INFERENCE (automation emphasis)"
+    },
+    {
+     "claim": "Only a handful of environments (Flank Speed, Thunderdome, one Dell environment) are reported certified as of 2026",
+     "source_url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-disas-thunderdome-achieves-advanced-zero-trust-goals-0",
+     "source_type": "gov",
+     "pub_date": "2026-01-15",
+     "event_date": "2025-04",
+     "label": "INFERENCE"
+    }
+   ],
+   "why_startups_havent_solved": "It is being solved, by integrators and GRC vendors; the buyer prefers services; differentiation is thin.",
+   "companies_near": [
+    "RegScale",
+    "Xacta (Telos)",
+    "Booz Allen",
+    "GDIT",
+    "Deloitte",
+    "Evidentia-type OSCAL tools"
+   ],
+   "incumbent_response_risk": "High.",
+   "technical_wedge_hypothesis": "Open telemetry-to-ZT-activity mapping (OSCAL) with connectors to Entra/Okta, EDR and SIEM producing continuous activity status.",
+   "mvp_sketch": "OSCAL-based ZT activity tracker with a few connectors, piloted with one program office.",
+   "data_requirement": "Program telemetry (CUI).",
+   "integration_requirement": "eMASS/Xacta, IdP/EDR/SIEM APIs.",
+   "entry_vehicle": "SBIR under DoD CIO/DISA, subcontract to assessment integrator.",
+   "why_now": "FY27 deadline.",
+   "killer_risk": "Commoditized by integrators; low willingness to pay for software vs services.",
+   "initial_attractiveness": "low",
+   "confidence": "MEDIUM"
+  },
+  {
+   "id": "S10-G5",
+   "title": "Low-SWaP 'cross domain at the edge' / software-defined CDS for tactical units (J-rated for this founding team)",
+   "problem_one_sentence": "Tactical units need faster, cheaper cross-domain movement of new data types (voice, video, FMV, ML outputs) than the current NCDSMO-baselined guards provide.",
+   "categories": [
+    "F",
+    "E",
+    "H",
+    "J"
+   ],
+   "user": "Tactical CDS operators, platform program offices, expeditionary targeting cells",
+   "current_workflow": "1) Program identifies new data type; 2) requests filter from CDS vendor; 3) vendor develops and NSA assesses; 4) years later the filter fields via sole-source modification.",
+   "current_solution": "GDMS TACDS, Owl voice/video/FMV CDS, Everfox guards, PMAT Tactical Edge Nodes; DISA CDES for enterprise.",
+   "failure_point": "Accreditation throughput and vendor lock; new filters arrive via sole-source IDIQs.",
+   "evidence": [
+    {
+     "claim": "AFRL sole-source $150M ceiling SBIR Phase III IDIQ to Owl for voice/video/FMV CDS (2025) with $10K obligated",
+     "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+     "source_type": "gov",
+     "pub_date": "2025-07-29",
+     "event_date": "2025-07-29",
+     "label": "FACT"
+    },
+    {
+     "claim": "TACDS 3.0 filter industry day (Dec 2025) indicates continued demand for new tactical filters",
+     "source_url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view",
+     "source_type": "gov",
+     "pub_date": "2025-12",
+     "event_date": "2025-12",
+     "label": "FACT"
+    },
+    {
+     "claim": "NSA RTB applies to all CDS protecting classified information and all CDS sold for export; only NCDSMO-listed solutions may be used (NIST AC-4(20))",
+     "source_url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/",
+     "source_type": "gov",
+     "pub_date": "2026-09-14 (capture)",
+     "event_date": "2022-07-11 (RTB v4.1)",
+     "label": "FACT"
+    },
+    {
+     "claim": "PMAT follow-on production OT for Tactical Edge Nodes incl. CDS ($89M) shows prototype-to-production is possible for incumbents inside the moat",
+     "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+     "source_type": "gov",
+     "pub_date": "2025-11",
+     "event_date": "2025-11",
+     "label": "FACT"
+    }
+   ],
+   "why_startups_havent_solved": "Certification, classification, export control, hardware assurance and incumbent sole-source vehicles; venture economics do not fit 3-5 year accreditation cycles.",
+   "companies_near": [
+    "Everfox",
+    "Owl Cyber Defense",
+    "General Dynamics Mission Systems",
+    "Northrop Grumman",
+    "Lockheed Martin (Radiant Mercury)",
+    "PMAT"
+   ],
+   "incumbent_response_risk": "Very high.",
+   "technical_wedge_hypothesis": "None recommended for a two-student team with a non-U.S.-person founder; the only plausible adjacency is supplying filter/data-format descriptions (DFDL) or tagging metadata to incumbents.",
+   "mvp_sketch": "Not recommended.",
+   "data_requirement": "Classified.",
+   "integration_requirement": "NSA assessment, vendor SDKs.",
+   "entry_vehicle": "Subcontract/filter authoring for incumbents only.",
+   "why_now": "n/a",
+   "killer_risk": "Cannot obtain NCDSMO listing or clearances.",
+   "initial_attractiveness": "low",
+   "confidence": "HIGH"
+  }
+ ],
+ "search_log": [
+  {
+   "query": "WebSearch: DoD zero trust strategy target level FY2027 status 2026 (budget exhausted, not executed)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: DISA Thunderdome zero trust 2026 status contract Booz Allen (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Army Enterprise ICAM AE-ICAM contract award 2025 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: NCDSMO cross domain solution baseline Raise the Bar 2025 2026 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: tactical cross domain solution edge Army prototype (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Trusted Data Format ZTDF Virtru DoD Army contract 2025 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: site:gao.gov zero trust DoD report 2025 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: DISA mission partner environment ICAM coalition identity (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebFetch probes: dodcio.defense.gov, disa.mil, nsa.gov, gao.gov, sam.gov, army.mil, dvidshub.net, defensescoop.com, breakingdefense.com, c4isrnet.com, federalnewsnetwork.com, nextgov.com, govconwire.com, executivegov.com, fedscoop.com, meritalk.com, everfox.com, owlcyberdefense.com, virtru.com, hypori.com, garrison.com, opentdf.io, dodig.mil (all EGRESS_BLOCKED)",
+   "useful": false
+  },
+  {
+   "query": "Bash curl: api.www.sbir.gov awards keyword zero trust / cross domain (proxy 403); domain probe of 80 hosts (all unreachable)",
+   "useful": false
+  },
+  {
+   "query": "Bigdata.com smart search: DoD zero trust FY27; Thunderdome; NCDSMO/Everfox/Owl/Garrison; Virtru TDF (out of credits)",
+   "useful": false
+  },
+  {
+   "query": "Sibling scratchpad mining: S08/S09/E02/buyers for ICAM, CDS, releasability, Thunderdome, Second Front",
+   "useful": true
+  },
+  {
+   "query": "GitHub repos: opentdf; gao reports dataset; sam.gov opportunities dataset; sbir awards dataset",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Zero Trust\" \"FY27\" \"target level\" DoD",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Thunderdome\" DISA \"zero trust\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Army Enterprise ICAM\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Raise the Bar\" NCDSMO \"cross domain\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Trusted Data Format\" ZTDF attribute",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"cross domain solution\" \"sources sought\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Mission Partner Environment\" ICAM \"zero trust\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Commercial Solutions for Classified\" \"trusted integrator\" \"capability package\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"gao_id\" \"zero trust\" / GovHawkDC gaoreports DoD ZT, JADC2, cross-domain",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Zero Trust Overlays\" DoD CIO",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"tactical cross domain\" / TACDS Army; \"0303140K\" \"zero trust\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: kc0bfv/waru-webevent-search 'cross domain', 'data tagging', Thunderdome SIPR/sites, ICAM mission partners, 'target level', ZTDF, 'Global Federated', 'non-person', swivel, ACP, Gottlieb, ABAC, Zscaler, DDIL, 'Portfolio Management Office', 'policy decision', Okta, SailPoint, NATO label, manually tagging",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Anguijm/research-vault FY2027 justification book (ICAM, Zero Trust, cross domain, MPE)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: OpenRAE/rae NSA cross-domain capture (NCDSMO, RTB)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: toole-brendan contract-announcement cache: 'cross domain', 'zero trust', Forcepoint, Thunderdome, ICAM, 'identity, credential'",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: weiaiwayne/commDAAF hearings: Thunderdome, EICAM, 'zero trust' Army, 'cross domain', ICAM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: opentdf/docs NATO; opentdf/spec ZTDF lineage",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"NGC2\" \"zero trust\"/ICAM/ABAC; \"Flank Speed\" \"zero trust\" Navy; \"Army Unified Network\" \"zero trust\" ICAM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Zero Trust Implementation Guidelines\" NSA target; \"DODIG-2025\" zero trust; \"Thunderdome\" \"1.86\" billion",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Hypori\" Army BYOD; \"Hypori\" raised Series; \"Virtru\" million Series; \"Xage Security\" Navy; \"Immuta\" DoD; \"Everfox\" Garrison acquisition; \"Everfox\" \"cross domain\"; \"Owl Cyber Defense\" acquisition/Talon",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Project Convergence\" \"zero trust\"; \"Talisman Sabre\" \"cross domain\"; \"Bold Quest\" ICAM; \"cross domain\" \"Project Convergence\"/\"Bold Quest\"/\"Talisman Sabre\" manual",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Global Federated User Directory\"; \"GFUD\" DISA ICAM; \"mission partner\" ICAM DISA federation prototype",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Cross Domain Enterprise Service\" DISA (ISSP budget exhibits)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"cross domain\" SBIR \"Phase II\" tactical; \"Sources Sought\" zero trust/cross domain/ICAM 2025 2026; \"cross domain\" \"Sources Sought\"/RFI Army Navy DISA",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"NCDSMO\" baseline vendors list; \"TACDS\" \"General Dynamics\"; billqhan/sam_ai_platform DiSCO cross domain",
+   "useful": true
+  }
+ ],
+ "saturation_statement": "Research appears near saturation for the sources reachable in this session, but the reachable set was unusually constrained: the WebSearch quota was already exhausted (200/200) when this agent started, every WebFetch and curl to government, news and vendor domains was blocked by the egress proxy, and the Bigdata.com connector was out of credits. All findings therefore come from (a) GitHub-mirrored primary documents and datasets (defense.gov contract announcements, DAU/WARU webinar transcripts, congressional hearing transcripts, DoD budget-exhibit datasets, NSA page captures, OpenTDF specs, vendor press releases) and (b) sibling segment files S08/S09/E02 that captured sam.gov, GAO, Army and DISA sources earlier in the study. Repeated queries on Thunderdome, NCDSMO/RTB, OpenTDF/ZTDF, Flank Speed, ICAM and contract announcements began returning the same fragments, indicating saturation within that corpus. Known evidence gaps to red-team: (1) Army EICAM and DISA ICAM contract vehicles/vendors and values; (2) Thunderdome production OTA ceiling and obligations; (3) any GAO or DoD IG audit of DoD ZT progress published 2024-2026; (4) current sam.gov RFIs/sources sought on ICAM, ZT and CDS in FY26; (5) startup funding rounds (Virtru later rounds, Hypori, Xage) and Everfox/Garrison transaction terms; (6) exercise after-action language from Project Convergence, Talisman Sabre and Northern Edge specific to identity/CDS. Claims marked LOW or 'Public evidence insufficient' should be verified with direct web access before investment decisions.",
+ "sources": [
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf",
+   "title": "DoD Zero Trust Strategy (Target Level ZT by FY27; Advanced by FY32) - quoted via mirrors",
+   "pub_date": "2022-11-07",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/ZeroTrustOverlays-2024Feb.pdf",
+   "title": "DoD Zero Trust Overlays",
+   "pub_date": "2024-02",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoDCIO-ContinuousAuthorizationImplementationGuide.pdf",
+   "title": "DoD CIO Continuous Authorization Implementation Guide",
+   "pub_date": "2024-2025",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Cyber/DoD-ICAM-Strategy.pdf",
+   "title": "DoD ICAM Strategy",
+   "pub_date": "2020-03-30",
+   "tier": 1
+  },
+  {
+   "url": "https://disa.mil/en/About/Thunderdome",
+   "title": "DISA: Unlocking the Power of Thunderdome",
+   "pub_date": "2022-2024",
+   "tier": 1
+  },
+  {
+   "url": "https://www.disa.mil.apps.gcds.disa.mil/en/NewsandEvents/2022/ThunderdomeContractAnnouncement",
+   "title": "DISA announces contract award for Thunderdome prototype",
+   "pub_date": "2022-01",
+   "tier": 1
+  },
+  {
+   "url": "https://github.com/BTTAI-1A-Accenture/Technology-News-Insights/blob/main/data/scraped/4426715.txt",
+   "title": "Booz Allen release (mirror): follow-on production OTA for at-scale Thunderdome deployment, base + four option years",
+   "pub_date": "2023-09",
+   "tier": 2
+  },
+  {
+   "url": "https://www.govinfo.gov/content/pkg/CHRG-118hhrg56900/html/CHRG-118hhrg56900.htm",
+   "title": "House hearing transcript: DISA deployed Thunderdome to 15 sites in 2023 on classified and unclassified terrain; 60+ sites planned",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://www.govinfo.gov/content/pkg/CHRG-119shrg61611/html/CHRG-119shrg61611.htm",
+   "title": "Senate hearing transcript: LTG Stanton on Enterprise ICAM (EICAM) as central to zero trust; Thunderdome; FCI across 10 DISA IAPs by 30 Sep 2025",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.globalsecurity.org/security/library/news/2026/01/sec-260114-nsa-css01.htm",
+   "title": "NSA releases first in series of Zero Trust Implementation Guidelines (mirror of NSA release)",
+   "pub_date": "2026-01-14",
+   "tier": 1
+  },
+  {
+   "url": "https://www.globalsecurity.org/security/library/news/2026/01/sec-260130-nsa-css01.htm",
+   "title": "NSA releases Phase One and Phase Two ZIGs to achieve DoW-defined target-level ZT (mirror)",
+   "pub_date": "2026-01-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/",
+   "title": "NSA NCDSMO cross domain solutions page (captured 2026-09-14 in OpenRAE/rae): Raise the Bar scope, standards on Intelink",
+   "pub_date": "2026-09-14",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nsa.gov/Resources/Commercial-Solutions-for-Classified-Program/",
+   "title": "NSA CSfC program: capability packages (MA CP 2.7.1, 12 Jun 2025), components list, trusted integrators (mirrored copy)",
+   "pub_date": "2025-06-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "title": "DoD Contracts for July 29, 2025: Owl Cyber Defense $150M IDIQ (FA8750-25-D-B003)",
+   "pub_date": "2025-07-29",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+   "title": "DoD Contracts Nov 2025: PMAT $89M Tactical Edge Nodes incl. cross domain solutions (N0016426DJW79)",
+   "pub_date": "2025-11",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/",
+   "title": "DoD Contracts Mar 2024: GDMS $239.3M BICES trusted network environment CDS IDIQ (FA7146-24-D-0001)",
+   "pub_date": "2024-03",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/3627836/",
+   "title": "DoD Contracts 2024: Lockheed Martin F-35 NextGen Mission Planning U.S. and exportable cross domain solution (NTE $107.5M)",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/3348502/",
+   "title": "DoD Contracts 2023: Sikorsky $11.99M modification for Tactical Cross Domain Solution",
+   "pub_date": "2023",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/4068227/",
+   "title": "DoD Contracts Feb 14, 2025: Anduril $99M 'Thunderdome' SBIR Phase III IDIQ (AFWERX; naming collision)",
+   "pub_date": "2025-02-14",
+   "tier": 1
+  },
+  {
+   "url": "https://comptroller.defense.gov/Budget-Materials/",
+   "title": "FY2027 President's Budget, Joint Staff RDT&E justification (C5 Capability Development; coalition ZT/DCS; ACP-240/ICAM/ZT testing; FISE cross-domain simulation) - excerpt via research-vault mirror",
+   "pub_date": "2026-05",
+   "tier": 1
+  },
+  {
+   "url": "https://comptroller.defense.gov/Budget-Materials/Budget2017/",
+   "title": "DISA Procurement, Defense-Wide ISSP exhibits FY2016-FY2017: CDES, PKI NPE lines (540co dataset mirror)",
+   "pub_date": "2016",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view",
+   "title": "DEVCOM C5ISR Tactical Data in Use Security RFI (from E02)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view",
+   "title": "TACDS Version 3.0 Filter; NEWT (IWRP industry day) (from E02)",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454 (CJADC2): officials cited inability to share classified information with allies (from S08)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-106065",
+   "title": "GAO Science & Tech Spotlight: Zero Trust Architecture",
+   "pub_date": "2022-11-18",
+   "tier": 1
+  },
+  {
+   "url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "title": "MIPB: Multinational intelligence sharing at WFX 24-03 (regeneration workaround; BICES does not communicate with mission command)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies",
+   "title": "Army: Mission Partner Kit advancing multinational interoperability with NATO allies",
+   "pub_date": "2025-03-25",
+   "tier": 1
+  },
+  {
+   "url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-disas-thunderdome-achieves-advanced-zero-trust-goals-0",
+   "title": "DAU Zero Trust webinar: DISA's Thunderdome Achieves Advanced Zero-Trust Goals (transcript mirrored in kc0bfv/waru-webevent-search)",
+   "pub_date": "2026-01-15",
+   "tier": 1
+  },
+  {
+   "url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-thunderdome-disas-zero-trust-solution",
+   "title": "DAU Zero Trust webinar: Thunderdome - DISA's Zero Trust Solution (mentions DISA enterprise ICAM, mission partners, data tagging)",
+   "pub_date": "2024-11-21",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json",
+   "title": "DAU Zero Trust webinar: Interoperable Data Tagging (Jordan Gottlieb, DoD CIO ZT PfMO) - ZTDF, ABAC",
+   "pub_date": "2025-09-18",
+   "tier": 1
+  },
+  {
+   "url": "https://www.waru.edu/events/zero-trust-transforming-cybersecurity-data-tagging",
+   "title": "DAU Zero Trust webinar: Data Tagging",
+   "pub_date": "2024-04-18",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2026-06-25-how-icam-powers-zero-trust.json",
+   "title": "DAU webinar: How ICAM Powers Zero Trust (target level, data tagging, Army/Navy, MPE)",
+   "pub_date": "2026-06-25",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2026-03-26-devsecops-open-office-hour.json",
+   "title": "DAU DevSecOps open office hour: 'needs to at least hit 91 target levels'; ZT PfMO",
+   "pub_date": "2026-03-26",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-05-22-zero-trust-transforming-cyber-security-navys-zt-journey-on-achieving-zero-trust-.json",
+   "title": "DAU webinar: Navy's ZT journey on achieving zero trust at Flank Speed",
+   "pub_date": "2025-05-22",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/site/static/llms.txt",
+   "title": "Index of DAU/WARU webinar transcripts (ZT series 2022-2026 incl. ABAC Oct 2023, ICAM Jun 2024, ZT for OT Feb 2026, 2026 ZT playbook Apr 2026)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.microsoft.com/en-us/security/blog/2024/11/11/dod-zero-trust-strategy-proves-security-benchmark-years-ahead-of-schedule-with-microsoft-collaboration/",
+   "title": "Microsoft: DoD ZT strategy target level by Sept 30, 2027; Navy Flank Speed 560,000+ identities",
+   "pub_date": "2024-11-11",
+   "tier": 2
+  },
+  {
+   "url": "https://federalnewsnetwork.com/ask-the-cio/2024/12/navy-looking-at-cloud-as-gfe-to-reduce-cmmc-burden/",
+   "title": "Federal News Network: Flank Speed met all 91 target ZT activities (Oct 2024), 60 of 61 advanced; pushing to tactical edge (mirrored)",
+   "pub_date": "2024-12-23",
+   "tier": 3
+  },
+  {
+   "url": "https://federalnewsnetwork.com/ask-the-cio/2025/02/navy-peo-digitals-goals-riding-on-flank-speeds-success/",
+   "title": "Federal News Network: Flank Speed met 151 of 152 ZT requirements (mirrored)",
+   "pub_date": "2025-02-04",
+   "tier": 3
+  },
+  {
+   "url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+   "title": "Federal News Network: DISA starting small in proving out MPE; network-centric until ~2027 (from S08)",
+   "pub_date": "2026-08-13",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/08/the-state-of-dod-zero-trust-progress-toward-target-level/",
+   "title": "Breaking Defense webinar: The state of DoD Zero Trust - progress toward target level",
+   "pub_date": "2026-08",
+   "tier": 3
+  },
+  {
+   "url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6",
+   "title": "ExecutiveGov: Army eyes broad NGC2 rollout after Project Convergence Capstone 6 (60+ companies on common data layer)",
+   "pub_date": "2026-08-04",
+   "tier": 3
+  },
+  {
+   "url": "https://www.globalsecurity.org/security/library/news/2025/02/mil-250226-dodnews01.htm",
+   "title": "DoD News (mirror): 'Zero Trust' architecture could prevent adversary data theft, protect warfighters",
+   "pub_date": "2025-02-26",
+   "tier": 1
+  },
+  {
+   "url": "https://github.com/opentdf/spec",
+   "title": "OpenTDF specification: lineage from IC-TDF; ZTDF developed within Five Eyes contexts",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/opentdf/docs",
+   "title": "OpenTDF docs: ZTDF used in NATO contexts; reference implementation",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/opentdf/platform",
+   "title": "OpenTDF platform (Go) - active repo, 51 stars, updated 2026-09-24",
+   "pub_date": "2026-09-24",
+   "tier": 2
+  },
+  {
+   "url": "https://techcrunch.com/2016/08/22/email-and-file-encryption-service-virtru-built-by-ex-nsa-engineer-raises-29-million/",
+   "title": "TechCrunch: Virtru raises $29M Series A (Bessemer)",
+   "pub_date": "2016-08-22",
+   "tier": 4
+  },
+  {
+   "url": "https://www.hypori.com/resources/dod-faqs",
+   "title": "Hypori DoD FAQs: Army BYOD and DAF Workspace Anywhere programs",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://xage.com/press/xage-security-awarded-1-5-million-contract-by-united-states-navy-to-advance-zero-trust-initiatives/",
+   "title": "Xage: $1.5M Navy Sequential Phase II SBIR for zero trust of battle networks",
+   "pub_date": "2023 (approx.)",
+   "tier": 2
+  },
+  {
+   "url": "https://gdmissionsystems.com/cross-domain-solutions/tactical-cross-domain-solutions-tacds",
+   "title": "General Dynamics Mission Systems: Tactical Cross Domain Solutions (TACDS); filters driven by data format descriptions",
+   "pub_date": "n/a",
+   "tier": 2
+  },
+  {
+   "url": "https://thehackernews.com/2026/04/why-secure-data-movement-is-zero-trust.html",
+   "title": "Everfox-sponsored article: layered ZT + data-centric security + CDS; claim that more than half of national security organizations move sensitive data manually",
+   "pub_date": "2026-04",
+   "tier": 2
+  },
+  {
+   "url": "https://www.everfox.com/",
+   "title": "Everfox (formerly Forcepoint Federal; integrated Garrison and Deep Secure) DSEI profile",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://docs.mattermost.com/security-guide/zero-trust.html",
+   "title": "Mattermost security guide: Zero Trust Channel Access (ABAC/CEL) and Mission Partner Environments deployment",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://anchor-defense.com/articles/cds-cross-tagging-attribution-controls-multi-level-data-release/",
+   "title": "Anchor Defense: CDS cross-tagging and attribution controls; releasability does not aggregate by dominance",
+   "pub_date": "undated",
+   "tier": 2
+  },
+  {
+   "url": "https://www.secondfront.com/resources/news/second-front-systems-game-warden-becomes-first-authorized-software-platform-on-aws-marketplace-for-dow-jwcc/",
+   "title": "Second Front: Game Warden first authorized software platform on AWS Marketplace for DoW JWCC (from S09)",
+   "pub_date": "2026-02-12",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/8F3B0E4100D8F100F3F8DE73DCEC0D8E",
+   "title": "Trace Systems wins MPE-S contract with $998M ceiling (from S08)",
+   "pub_date": "2019-10-16",
+   "tier": 3
+  },
+  {
+   "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/854001p.pdf",
+   "title": "DoDI 8540.01 Cross Domain Policy",
+   "pub_date": "2015 (with changes)",
+   "tier": 1
+  },
+  {
+   "url": "https://fed-spend.com/blog/federal-ai-cybersecurity-contract-awards-2026",
+   "title": "Fed-Spend blog: GDIT $120M Air Force zero trust deployment across 187 bases (unverified)",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/la83la/earnings-call-transcripts",
+   "title": "Booz Allen Q3 FY2022 earnings call: Thunderdome prototype award 'seemingly modest' (mirror)",
+   "pub_date": "2022-01",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/xu-chris/ai-setup",
+   "title": "NSA ZIG framework reference: 152 activities / 45 capabilities; Target = 14 + 36 + 41 = 91 activities; DoW secondary title per EO 14347 (secondary summary)",
+   "pub_date": "2026",
+   "tier": 4
+  }
+ ]
+}

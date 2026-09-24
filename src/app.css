@@ -207,6 +207,9 @@ table.data tbody tr:hover td { background: color-mix(in oklab, var(--accent) 6%,
 table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
 table.data tr.clickable { cursor: pointer; }
 table.data td .cell-sub { display: block; color: var(--muted); font-size: 12px; }
+.chip.wrap { white-space: normal; text-align: left; }
+table.data td { max-width: 420px; overflow-wrap: anywhere; }
+.toolbar select { max-width: 260px; }
 .pager { display: flex; gap: 8px; align-items: center; padding: 8px 10px; font-size: 13px; color: var(--muted); }
 
 /* Score bars */

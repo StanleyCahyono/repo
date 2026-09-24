@@ -1,0 +1,941 @@
+{
+  "batch_id": "B10",
+  "theme": "cross-domain, coalition C2 and European defense software",
+  "companies": [
+    {
+      "name": "Everfox",
+      "aka": "Forcepoint Federal; Forcepoint Global Governments and Critical Infrastructure (G2CI) business; heritage Raytheon Cyber Products / Websense government unit",
+      "founding_year": 2024,
+      "headquarters": "Herndon, Virginia, USA (analyst recall, MEDIUM; DSEI 2025 exhibitor profile lists country as United States)",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient. Analyst estimate roughly 1,000 or more given the carve-out scale (LOW).",
+      "founders": [],
+      "founder_backgrounds": "Not a founder-led company. Everfox is the January 2024 rebrand of Forcepoint's government-and-critical-infrastructure business after its carve-out to TPG; leadership is professional management from the Forcepoint/Raytheon cyber lineage. FACT (rebrand/carve-out per third-party structured notes); exact executive backgrounds: public evidence insufficient in this session.",
+      "total_disclosed_funding_usd": "Not venture funded. Carve-out acquisition by TPG from Francisco Partners reported at approximately $2.45B (announced July 2023, closed Q4 2023) - analyst recall, not verified in this session (MEDIUM).",
+      "latest_valuation": "Approximately $2.45B implied by the 2023 TPG transaction (MEDIUM, unverified in-session).",
+      "major_investors": ["TPG (owner)", "Francisco Partners (prior owner of Forcepoint)"],
+      "c4isr_products": [
+        {
+          "name": "Cross Domain Solutions (Trusted Thin Client, Trusted Gateway System, Trusted Print Delivery, High Speed Guard, Data Guard family)",
+          "description": "NCDSMO-baseline, Raise-the-Bar compliant access and transfer solutions. Trusted Thin Client gives one endpoint simultaneous access to multiple classified/sensitive networks; guards move structured and unstructured data between security domains under policy. Forrester TEI study (commissioned) on a DoD intelligence unit running Trusted Thin Client, Trusted Gateway System and Trusted Print Delivery claimed 268% five-year ROI. FACT that these products and claims exist (May 2024 partnership release mirrored on GitHub); performance claims are vendor-sourced.",
+          "input_process_output_user": "Input: files, messages, streaming data and user sessions from one security domain. Process: hardware/software policy enforcement, content inspection and filtering, protocol break. Output: accredited transfer or display on the other domain. Users: DoD, IC, NATO/allied government IT and mission networks."
+        },
+        {
+          "name": "Everfox Hardsec (Garrison and Deep Secure technologies)",
+          "description": "Hardware-enforced isolation (Garrison hardsec browser/desktop isolation) and content transformation (Deep Secure) integrated into the CDS portfolio; DSEI UK 2025 profile lists Cross Domain Solutions, Hardsec, Threat Protection and Insider Risk as the four solution lines. FACT.",
+          "input_process_output_user": "Input: untrusted web/content or high-side user session. Process: hardware-logic rendering to pixels or content rebuild. Output: safe view or safe document on the trusted side. Users: government secure users, high-assurance enterprises."
+        },
+        {
+          "name": "High-assurance cloud (Microsoft Azure partnership)",
+          "description": "May 2024 partnership integrating Everfox CDS into Azure Government to deliver on-demand multi-level cloud desktop services to federal agencies; 2025-05-22 item titled 'Microsoft Azure and Everfox High Assurance Cloud Solutions' describes near-real-time access across classification levels. FACT (announcement), deployment scale unknown.",
+          "input_process_output_user": "Input: user identity and session on Azure Gov. Process: CDS-mediated multi-level desktop. Output: access to multiple classification levels from one cloud desktop. Users: federal civilian/defense agencies."
+        }
+      ],
+      "exact_problem_solved": "Moving data and user access across classification boundaries (Unclassified/Secret/TS, US/coalition enclaves) with accredited, policy-enforced guards and hardware isolation so that mission data can be shared without exposing high-side networks.",
+      "primary_users": ["DoD and IC network and mission-system operators", "Coalition/allied government secure users", "Critical infrastructure operators"],
+      "primary_buyers": ["DoD components via program offices and DISA", "Intelligence agencies", "NATO and Five Eyes governments", "Defense integrators embedding CDS in programs"],
+      "technical_layer": ["TRANSPORT", "DISSEMINATE", "MONITOR"],
+      "mission_layer": ["joint", "coalition", "intelligence", "enterprise IT"],
+      "segment_ids": ["S10", "S08", "S09"],
+      "hw_sw_mix": "both - software guards and virtual appliances plus hardware-enforced (FPGA/hardsec) devices from the Garrison line",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Cross Domain Solutions work supporting L3Harris on Valiant Shield 2024 (contractor portfolio claim)",
+          "customer": "L3Harris / Valiant Shield 2024 exercise",
+          "contracting_org": "Public evidence insufficient",
+          "vehicle_type": "subcontract",
+          "ceiling": "Public evidence insufficient",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "Public evidence insufficient",
+          "funded_amount": "Public evidence insufficient",
+          "task_orders": "Public evidence insufficient",
+          "date": "2024",
+          "period_of_performance": "Public evidence insufficient",
+          "prime_or_sub": "sub (individual contractor states he implemented Everfox CDS for L3Harris)",
+          "prototype_or_production": "exercise support",
+          "source_url": "https://github.com/jphill19/john-site/blob/main/pages/works.js",
+          "pub_date": "undated (repo)",
+          "confidence": "LOW"
+        },
+        {
+          "title": "Microsoft Azure Government partnership for multi-level cloud desktop services",
+          "customer": "US federal agencies (via Microsoft)",
+          "contracting_org": "Commercial partnership, not a government award",
+          "vehicle_type": "subcontract",
+          "ceiling": "n/a",
+          "obligated": "n/a",
+          "awarded_value": "n/a",
+          "funded_amount": "n/a",
+          "task_orders": "n/a",
+          "date": "2024-05 (announcement); 2025-05-22 follow-on item",
+          "period_of_performance": "n/a",
+          "prime_or_sub": "partner",
+          "prototype_or_production": "production offering (scale of adoption unknown)",
+          "source_url": "https://github.com/imjeson/byteai/blob/main/posts/2024-05-27-auto3-Pdjdik.md",
+          "pub_date": "2024-05-27 (mirror of announcement)",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Trusted Thin Client / Trusted Gateway System / Trusted Print Delivery deployed at a DoD intelligence unit (subject of Forrester TEI study)",
+          "evidence": "Vendor-commissioned Forrester study cited in May 2024 release; FACT that the deployment is claimed, ROI figure is vendor-sourced.",
+          "source_url": "https://github.com/imjeson/byteai/blob/main/posts/2024-05-27-auto3-Pdjdik.md"
+        },
+        {
+          "what": "Accredited CDS products on the NCDSMO baseline used across DoD/IC (sibling segment research lists Everfox/Forcepoint among the fielded accredited CDS oligopoly)",
+          "evidence": "INFERENCE from segment S08 research and Raise-the-Bar baseline status; specific site counts not public.",
+          "source_url": "https://www.everfox.com/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Valiant Shield 2024 (via L3Harris)", "year": "2024", "note": "Contractor-claimed CDS implementation; LOW confidence.", "source_url": "https://github.com/jphill19/john-site/blob/main/pages/works.js"},
+        {"event": "DSEI UK 2025 exhibitor", "year": "2025", "note": "Profile lists CDS, Hardsec, Threat Protection, Insider Risk; notes integration of Garrison and Deep Secure.", "source_url": "https://github.com/Thaarak/project-odyssey-companies/blob/main/data/raw/dsei/profiles/everfox.html"},
+        {"event": "CYBERUK 2024 sponsor/exhibitor", "year": "2024", "note": "UK NCSC conference presence (both Everfox and Garrison listed separately).", "source_url": "https://github.com/caatdata/arms-and-security-fair-exhibitors/blob/master/data/cyberuk-2024.json"}
+      ],
+      "integration_partners": ["Microsoft (Azure Government)", "L3Harris (exercise integration, LOW)", "Garrison (acquired)", "Deep Secure (acquired by Forcepoint 2021, now Everfox)"],
+      "apis_sdks_open_interfaces": "No public developer API or SDK found. Guards are configured through policy/filter definitions; integration is via standard protocols (file, mail, web, streaming) at accredited boundaries. Public evidence insufficient on any partner SDK.",
+      "security_classification_requirements": "Products live on the NSA NCDSMO baseline and must satisfy Raise-the-Bar requirements; deployments require accreditation by the owning authorizing official; company work is largely US-person, cleared-facility work (constraint to be reviewed by specialist counsel for any partnership).",
+      "allied_international_activity": "Everfox exhibits at DSEI UK and CYBERUK; Garrison acquisition adds a London engineering base and UK government customers; Everfox states NATO and allied governments as customers (structured third-party notes). FACT/INFERENCE mix, MEDIUM.",
+      "technical_differentiator": "Broadest accredited CDS portfolio (access + transfer + print) combined with hardware-enforced hardsec isolation, plus a cloud multi-level desktop offering with Microsoft.",
+      "suspected_moat": "Accreditation (NCDSMO baseline, RTB) and installed base at DoD/IC sites; switching a CDS is a multi-year re-accreditation event. INFERENCE, HIGH.",
+      "major_competitors": ["Owl Cyber Defense", "General Dynamics Mission Systems (TACDS)", "Northrop Grumman (CHORD)", "BAE Systems (XTS Guard line)", "Boeing (eXmeritus HardwareWall)", "Advenica / infodas (European guards)", "Menlo Security / Zscaler (commercial isolation)"],
+      "obvious_weaknesses": "Private-equity carve-out with limited public disclosure; enterprise/IT-centric rather than tactical-edge form factors; dependence on slow accreditation cycles; no public contract values found in this session (usaspending unreachable).",
+      "evidence_user_adoption": "Vendor-cited DoD intelligence-unit deployment (Forrester TEI); NCDSMO baseline listing; NATO/allied customers claimed. MEDIUM (mostly vendor-sourced).",
+      "evidence_repeat_procurement": "Public evidence insufficient in this session (usaspending.gov and sam.gov unreachable). Long-lived Forcepoint Federal CDS installed base implies recurring maintenance, INFERENCE MEDIUM.",
+      "evidence_prototype_to_production": "Products are production-accredited; the Azure multi-level desktop is a newer production offering with unknown scale. MEDIUM.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "TRANSPORT", "echelon": "theater"},
+        {"chain_step": "TRANSPORT", "echelon": "coalition"},
+        {"chain_step": "TRANSPORT", "echelon": "division_corps"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "coalition"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: A September 2026 job digest lists Everfox openings for 'Software Engineer 1' and 'Embedded Systems Engineer 1' (US), consistent with mixed embedded/hardware (hardsec) and application software work; no stack details visible.",
+      "confidence_notes": "Rebrand and product lines are FACT (DSEI profile, partnership release). TPG transaction size/date and HQ are analyst recall, unverified this session (MEDIUM). Garrison acquisition is FACT (multiple sources say Garrison is 'now part of Everfox') but the announcement/close dates were not verified (MEDIUM). Contract values: public evidence insufficient because government data portals were unreachable.",
+      "sources": [
+        {"url": "https://github.com/Thaarak/project-odyssey-companies/blob/main/data/raw/dsei/profiles/everfox.html", "title": "DSEI UK 2025 exhibitor profile: Everfox", "pub_date": "2025", "type": "company"},
+        {"url": "https://github.com/imjeson/byteai/blob/main/posts/2024-05-27-auto3-Pdjdik.md", "title": "Mirror of Everfox-Microsoft partnership announcement (Trusted Thin Client, Forrester TEI)", "pub_date": "2024-05-27", "type": "company"},
+        {"url": "https://github.com/codekiln/logseq-encode-garden/blob/main/pages/Everfox.md", "title": "Structured notes: Everfox (formerly Forcepoint Federal)", "pub_date": "undated", "type": "independent"},
+        {"url": "https://github.com/cacelass/Stock-Market-Prediction/blob/main/data/raw/news_MSFT_live.csv", "title": "News item: Microsoft Azure and Everfox High Assurance Cloud Solutions", "pub_date": "2025-05-22", "type": "independent"},
+        {"url": "https://github.com/caatdata/arms-and-security-fair-exhibitors/blob/master/data/cyberuk-2024.json", "title": "CYBERUK 2024 exhibitor list (Everfox, Garrison)", "pub_date": "2024", "type": "independent"},
+        {"url": "https://www.everfox.com/", "title": "Everfox corporate site (unreachable in-session)", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Owl Cyber Defense",
+      "aka": "Owl Cyber Defense Solutions, LLC; formerly Owl Computing Technologies (1998) and Tresys Technology (merged 2019)",
+      "founding_year": 1998,
+      "headquarters": "Columbia, Maryland, USA (GitHub org location and DFDL spec author affiliation); legacy engineering site in Danbury, Connecticut (401(k) filing)",
+      "public_private": "private",
+      "employee_count_approx": "Roughly 230-300. FACT: 2023 Form 5500 for the Danbury CT entity's plan shows 233 participants; a second Columbia MD entity exists (EIN 815180632).",
+      "founders": [],
+      "founder_backgrounds": "Owl Computing Technologies was founded in 1998 (Connecticut) as a data-diode pioneer; acquired by DC Capital Partners in 2017 and renamed Owl Cyber Defense; merged with Tresys Technology (SELinux/DFDL specialists, Columbia MD) in 2019. Ownership by DC Capital Partners is analyst recall (MEDIUM); the Tresys lineage is FACT (OGF DFDL specification lists 'Owl Cyber Defense (formerly known as Tresys Technology), Columbia, MD').",
+      "total_disclosed_funding_usd": "Private-equity owned; no disclosed venture rounds. Public evidence insufficient.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": ["DC Capital Partners (analyst recall, MEDIUM)"],
+      "c4isr_products": [
+        {
+          "name": "Talon and OPDS data diodes",
+          "description": "Hardware-enforced one-way transfer devices (Talon protocol-filtering diodes; Owl Perimeter Defense Solution) used for OT and government network segmentation; third-party vendor comparisons cite up to 100 Gbps and 'first to commercialize data diodes'. FACT that products exist; throughput claims are vendor/third-party marketing.",
+          "input_process_output_user": "Input: TCP/UDP streams, files, historian/OPC data from a low or high side. Process: optical one-way transfer with protocol break and filtering. Output: replicated data on the receiving side. Users: DoD/IC network operators, nuclear and utility operators."
+        },
+        {
+          "name": "Cross Domain Solutions (government CDS, XD Air kiosk, rugged/tactical multi-domain units)",
+          "description": "NCDSMO-baseline transfer and access solutions for classified environments, plus XD Air removable-media scanning kiosk; company blog (2025-04-02) describes secure data sharing over high-threat networks with protocol break. FACT (products), scale of DoD fielding: public evidence insufficient.",
+          "input_process_output_user": "Input: files/messages/structured data at one classification. Process: policy filtering, content validation (DFDL-described formats), one-way or bidirectional guard. Output: released data on the other domain. Users: DoD, IC, coalition network operators."
+        },
+        {
+          "name": "Open-source data-format tooling (nifi-daffodil, DFDL schemas for MIL-STD-2045/VMF, NITF, envelope-payload; CLIP; SELinux refpolicy stewardship)",
+          "description": "Owl publishes Apache NiFi processors that use Apache Daffodil to parse/validate binary military formats, and maintains DFDL schemas including MIL-STD-2045 (VMF header) and NITF, plus the Certifiable Linux Integration Platform. FACT (GitHub). This is directly relevant to filtering tactical message formats inside a CDS.",
+          "input_process_output_user": "Input: binary tactical message or imagery file. Process: DFDL parse to XML/JSON for validation and filtering. Output: validated/normalized data for guard release or downstream processing. Users: CDS engineers, data-pipeline integrators."
+        }
+      ],
+      "exact_problem_solved": "Enforcing one-way or tightly filtered data flow between networks of different trust or classification, including validating structured tactical formats before release.",
+      "primary_users": ["DoD and IC network operators", "Critical infrastructure (nuclear, power, oil and gas) OT operators", "Defense integrators"],
+      "primary_buyers": ["DoD components and agencies (accredited CDS)", "Utilities and nuclear operators (NERC CIP)", "Integrators embedding diodes in programs"],
+      "technical_layer": ["TRANSPORT", "NORMALIZE", "DISSEMINATE"],
+      "mission_layer": ["joint", "coalition", "critical infrastructure", "intelligence"],
+      "segment_ids": ["S10", "S08", "S02"],
+      "hw_sw_mix": "both - hardware diodes with software filtering and validation stacks",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "US government and DoD CDS/diode sales (aggregate; specific awards not retrievable this session)",
+          "customer": "US DoD and civilian agencies",
+          "contracting_org": "Public evidence insufficient",
+          "vehicle_type": "FAR",
+          "ceiling": "Public evidence insufficient",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "Public evidence insufficient",
+          "funded_amount": "Public evidence insufficient",
+          "task_orders": "Public evidence insufficient",
+          "date": "ongoing",
+          "period_of_performance": "Public evidence insufficient",
+          "prime_or_sub": "both",
+          "prototype_or_production": "production",
+          "source_url": "https://owlcyberdefense.com/",
+          "pub_date": "n/a",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Data diodes deployed at a US public power authority across 10 plants for NRC/NERC CIP compliance (vendor use case)",
+          "evidence": "Owl use-case page cited by a third-party research file; vendor-sourced.",
+          "source_url": "https://owlcyberdefense.com/resource/use-case-power-authority/"
+        },
+        {
+          "what": "Claimed use across 'all major US DoD branches' and '90%+ of US nuclear plants'",
+          "evidence": "Third-party vendor-comparison document; unverified marketing-grade claim (LOW).",
+          "source_url": "https://github.com/Planet9V/website-oxot-v6/blob/main/content/hyperscale-design/Datacenter_Vendor_Research/24_Vendor_Database_Networking.md.docx.md"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Public evidence insufficient", "year": "", "note": "No exercise participation found through reachable sources.", "source_url": ""}
+      ],
+      "integration_partners": ["Apache NiFi / Apache Daffodil ecosystem", "OPSWAT and Waterfall are competitors rather than partners", "Integrators embedding diodes (unspecified)"],
+      "apis_sdks_open_interfaces": "Open-source NiFi processors and DFDL schemas on GitHub (OwlCyberDefense org: nifi-daffodil, clip; DFDLSchemas org: mil-std-2045, NITF, MagVar, envelope-payload). No public product API for the diodes themselves. Owl also has a registered PCI vendor ID (0x19a4) for its hardware cards.",
+      "security_classification_requirements": "Government CDS products require NCDSMO baseline listing and Raise-the-Bar compliance; sales into classified networks require cleared personnel and accreditation; commercial OT diodes have no such requirement.",
+      "allied_international_activity": "Public evidence insufficient beyond commercial OT sales; Owl appears in European/Asian market lists of diode vendors (LOW).",
+      "technical_differentiator": "Long-standing hardware diode lineage combined with Tresys-derived assurance expertise (SELinux, DFDL-based format validation) that lets structured military formats be validated inside the guard.",
+      "suspected_moat": "Accreditation history and installed base in DoD and nuclear sectors; DFDL/format expertise is rare. INFERENCE, MEDIUM.",
+      "major_competitors": ["Everfox", "General Dynamics Mission Systems", "Northrop Grumman (CHORD)", "Waterfall Security (now Tenable OT)", "OPSWAT (MetaDefender Diode, Fend)", "Fox-IT DataDiode", "Advenica", "BAE Systems"],
+      "obvious_weaknesses": "Small private company with no public financials; hardware-centric with slow refresh cycles; commercial OT diode market is commoditizing (OPSWAT, Waterfall); limited public evidence of tactical-edge or coalition-specific fielding.",
+      "evidence_user_adoption": "Vendor use cases and industry lists; 401(k) filing confirms a ~230-person operating business. MEDIUM for existence of adoption, LOW for scale.",
+      "evidence_repeat_procurement": "Public evidence insufficient (government portals unreachable).",
+      "evidence_prototype_to_production": "Products are production/accredited; no prototype programs identified.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "TRANSPORT", "echelon": "theater"},
+        {"chain_step": "TRANSPORT", "echelon": "coalition"},
+        {"chain_step": "TRANSPORT", "echelon": "division_corps"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE from public repos rather than jobs: Java (NiFi processors), Scala/Java (Daffodil), Python (CLIP, SELinux tools), C (setools); assurance-oriented Linux engineering.",
+      "confidence_notes": "Corporate lineage (Owl Computing + Tresys) HIGH; DC Capital ownership MEDIUM (recall); product family names MEDIUM (vendor-derived); DoD scale claims LOW. Government contract data unavailable this session.",
+      "sources": [
+        {"url": "https://github.com/OwlCyberDefense", "title": "Owl Cyber Defense GitHub organization (Columbia, MD)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/OpenGridForum/DFDL-1.05r28-test/blob/main/25.-authors-and-contributors.md", "title": "DFDL specification authors: Owl Cyber Defense (formerly Tresys Technology)", "pub_date": "2020-09", "type": "independent"},
+        {"url": "https://github.com/multifol-io/financial-variables/blob/main/data/employers/plans/O/OWL%20CYBER%20DEFENSE%20SOLUTIONS%2C%20LLC%20522195633.txt", "title": "Form 5500 summary: Owl Cyber Defense Solutions LLC retirement plan, 233 participants (2023)", "pub_date": "2024-10-11", "type": "financial"},
+        {"url": "https://github.com/DFDLSchemas/mil-std-2045", "title": "DFDL schema for MIL-STD-2045 (Owl copyright 2014-2025)", "pub_date": "2025", "type": "company"},
+        {"url": "https://owlcyberdefense.com/blog/secure-data-sharing-over-high-threat-networks/", "title": "Owl blog: Secure data sharing over high-threat networks (protocol break)", "pub_date": "2025-04-02", "type": "company"},
+        {"url": "https://github.com/Planet9V/website-oxot-v6/blob/main/content/hyperscale-design/Datacenter_Vendor_Research/24_Vendor_Database_Networking.md.docx.md", "title": "Third-party vendor comparison including Owl (Talon, OPDS-5, CDS)", "pub_date": "undated", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Garrison Technology",
+      "aka": "Garrison; Garrison Technology Ltd; now part of Everfox (Everfox Hardsec)",
+      "founding_year": 2014,
+      "headquarters": "London, United Kingdom",
+      "public_private": "subsidiary",
+      "employee_count_approx": "Public evidence insufficient; analyst estimate 100-200 pre-acquisition (LOW).",
+      "founders": ["Henry Harrison", "David Garfield"],
+      "founder_backgrounds": "Analyst recall (MEDIUM): Henry Harrison (CTO) and David Garfield (CEO) are UK cybersecurity veterans (BAE Detica lineage) who founded Garrison in 2014 around hardware-enforced ('hardsec') browser isolation.",
+      "total_disclosed_funding_usd": "More than $50M per company job advertisement; Series A GBP 12M (~$14.6M) March 2017 led by Touchstone Innovations with BGF Ventures and NM Capital (FACT); later rounds included Dawn Capital and IP Group (company statement).",
+      "latest_valuation": "Public evidence insufficient; acquired by Everfox (terms undisclosed).",
+      "major_investors": ["Touchstone Innovations (IP Group)", "Dawn Capital", "NM Capital", "BGF"],
+      "c4isr_products": [
+        {
+          "name": "Garrison SAVR / Isolation Appliance (hardsec)",
+          "description": "On-premises hardware appliance that renders untrusted web content on isolated hardware and passes only pixels to the user, enforcing separation in hardware logic rather than software; marketed as high-assurance for government. FACT (product), assurance claims vendor-sourced.",
+          "input_process_output_user": "Input: user browsing/remote access request from a sensitive network. Process: content executed on isolated hardware, converted to video-like pixel stream. Output: safe rendered view; no code crosses. Users: government and regulated-enterprise users on sensitive networks."
+        },
+        {
+          "name": "Garrison ULTRA cloud platform",
+          "description": "Cloud-delivered hardsec remote browsing service; has an official Microsoft Sentinel solution and data connector ('Garrison ULTRA Remote Logs', REST pull API) in the Azure-Sentinel repository. FACT.",
+          "input_process_output_user": "Input: user sessions and audit logs. Process: cloud-hosted hardware isolation. Output: isolated browsing plus SIEM-ready logs. Users: enterprise and government SOC/IT."
+        }
+      ],
+      "exact_problem_solved": "Letting users on high-side or sensitive networks reach untrusted internet content or cross-domain resources without risk of code execution crossing the boundary.",
+      "primary_users": ["UK government secure users", "US federal users (via Everfox)", "Large enterprises in banking, insurance, media, telco, law"],
+      "primary_buyers": ["UK government departments and agencies", "Everfox channel into DoD/IC", "Enterprise CISOs"],
+      "technical_layer": ["TRANSPORT", "MONITOR"],
+      "mission_layer": ["enterprise IT", "intelligence", "joint"],
+      "segment_ids": ["S10", "S09"],
+      "hw_sw_mix": "both - FPGA/hardware isolation appliances and a cloud service",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "UK government and large-enterprise deployments (aggregate, company statement)",
+          "customer": "UK government and enterprises averaging 50,000+ employees",
+          "contracting_org": "Public evidence insufficient",
+          "vehicle_type": "foreign",
+          "ceiling": "Public evidence insufficient",
+          "obligated": "Public evidence insufficient",
+          "awarded_value": "Public evidence insufficient",
+          "funded_amount": "Public evidence insufficient",
+          "task_orders": "Public evidence insufficient",
+          "date": "2019-2023 (job advertisement period)",
+          "period_of_performance": "Public evidence insufficient",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production ('deploying at scale in both the government and commercial space')",
+          "source_url": "https://github.com/kayaFatih99/WebScraper-Scrapy-Selenium-Python-LinkedinJobAds/blob/main/output_desc/london%20mobile%20jobs/318-ExperiencedTestAutomationEngineerMobileAndroidiOSDesktop.txt",
+          "pub_date": "undated scrape (c. 2022)",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Hardsec isolation deployed at scale in UK government and commercial customers",
+          "evidence": "Company job advertisement text; independent 2026 comparison article says 'Garrison (Everfox) owns hardware-grade high assurance for government'.",
+          "source_url": "https://github.com/zarguell/tia-n-list/blob/main/engine/data/events/mf:163671.md"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "CYBERUK 2024 exhibitor", "year": "2024", "note": "NCSC conference presence.", "source_url": "https://github.com/caatdata/arms-and-security-fair-exhibitors/blob/master/data/cyberuk-2024.json"}
+      ],
+      "integration_partners": ["Microsoft Sentinel (official solution)", "Everfox (parent)"],
+      "apis_sdks_open_interfaces": "Garrison ULTRA exposes remote logs through a REST pull API consumed by the Microsoft Sentinel connector; no general developer SDK found.",
+      "security_classification_requirements": "Positioned for UK OFFICIAL/SECRET-type environments and US government via Everfox; specific NCSC/NSA approvals not verified this session (public evidence insufficient).",
+      "allied_international_activity": "UK-origin company now inside a US-owned (TPG) group; gives Everfox a UK/Five Eyes footprint. FACT that Garrison is 'now part of Everfox'; acquisition date unverified (MEDIUM).",
+      "technical_differentiator": "Hardware-logic ('hardsec') enforcement of isolation rather than software sandboxing; cloud delivery of the same model.",
+      "suspected_moat": "Patented hardware approach and government assurance track record; now bundled with Everfox CDS accreditation. INFERENCE MEDIUM.",
+      "major_competitors": ["Menlo Security", "Zscaler / Cloudflare browser isolation", "Authentic8 Silo", "Kasm", "Goldilock (hardware isolation)"],
+      "obvious_weaknesses": "Niche high-assurance segment with commercial RBI commoditizing; hardware cost per seat; now a product line inside a PE-owned parent with limited independent disclosure.",
+      "evidence_user_adoption": "Company statements of at-scale deployment; Microsoft Sentinel marketplace presence indicates real enterprise use. MEDIUM.",
+      "evidence_repeat_procurement": "Public evidence insufficient.",
+      "evidence_prototype_to_production": "Products in production; the ULTRA cloud platform is a production service.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "TRANSPORT", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: former engineer CV lists C++, C#, Qt, Android, Python (2017-2018); job ads for test automation across Android/iOS/desktop clients; FPGA/hardware engineering implied by hardsec architecture.",
+      "confidence_notes": "Founding year, London HQ and 2017 Series A are FACT (multiple mirrors of the funding announcement). Founder names are analyst recall (MEDIUM). Everfox acquisition FACT, date/terms unverified (MEDIUM). No government contract values found.",
+      "sources": [
+        {"url": "https://github.com/thestumbler/vc-scraper/blob/master/data/2017-02-27-thru-2017-03-10.html", "title": "StrictlyVC mirror: Garrison Technology raises GBP 12M Series A led by Touchstone Innovations", "pub_date": "2017-03-08", "type": "financial"},
+        {"url": "https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Garrison%20ULTRA", "title": "Microsoft Sentinel solution: Garrison ULTRA (data connector)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/kayaFatih99/WebScraper-Scrapy-Selenium-Python-LinkedinJobAds/blob/main/output_desc/london%20mobile%20jobs/318-ExperiencedTestAutomationEngineerMobileAndroidiOSDesktop.txt", "title": "Garrison job advertisement: founded 2014, raised >$50M (Dawn Capital, IP Group, NM Capital, BGF)", "pub_date": "c. 2022", "type": "company"},
+        {"url": "https://github.com/zarguell/tia-n-list/blob/main/engine/data/events/mf:163671.md", "title": "GBHackers comparison of browser isolation vendors (Garrison/Everfox)", "pub_date": "2026-09-15", "type": "independent"},
+        {"url": "https://www.garrison.com/", "title": "Garrison corporate site (unreachable in-session)", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Systematic",
+      "aka": "Systematic A/S; Systematic Inc. (US subsidiary, Centreville, Virginia - analyst recall); SitaWare",
+      "founding_year": 1985,
+      "headquarters": "Aarhus, Denmark",
+      "public_private": "private",
+      "employee_count_approx": "Approximately 1,200-1,300 group-wide (analyst recall, MEDIUM); public evidence insufficient this session.",
+      "founders": ["Michael Holm"],
+      "founder_backgrounds": "Michael Holm founded Systematic in 1985 and remains CEO/owner; the company is founder-controlled and has grown organically into defense C2, healthcare and library software (analyst recall, MEDIUM).",
+      "total_disclosed_funding_usd": "Bootstrapped/founder-owned; no venture funding disclosed.",
+      "latest_valuation": "Not applicable (private, no disclosed rounds).",
+      "major_investors": [],
+      "c4isr_products": [
+        {
+          "name": "SitaWare Headquarters",
+          "description": "Headquarters-level C2 for planning and conducting land (and joint) operations with native NATO interoperability (MIP/JC3IEDM, NFFI, NVG, ADatP-3, VMF, Link 16 per company interoperability page). NATO selected it in April 2024 as its standard system for planning/conducting land operations; French Army 3rd Division adopted it in January 2026. FACT (euro-sd reporting).",
+          "input_process_output_user": "Input: unit positions, orders, overlays, intelligence and fires data from national and allied systems. Process: COP building, planning, order production, standards translation. Output: shared COP, plans and orders to subordinate systems. Users: brigade-to-corps and NATO staffs."
+        },
+        {
+          "name": "SitaWare Frontline",
+          "description": "Vehicle-mounted battle management system; used as the German Army's C2 system in the ErzUntGlas UAS-integration project (2019-2021) and fielded by several NATO armies. FACT (German AI-in-defence report).",
+          "input_process_output_user": "Input: own position, radio data links, sensor feeds. Process: BFT, messaging, tactical planning. Output: mounted COP and orders. Users: company/battalion vehicle crews and commanders."
+        },
+        {
+          "name": "SitaWare Edge",
+          "description": "Dismounted/handheld C2 client cited alongside ATAK and Ukraine's Delta as a frontline C2 platform on end-user devices (2026 discovery interview). FACT (third-party).",
+          "input_process_output_user": "Input: soldier position, reports. Process: lightweight COP and messaging. Output: shared tactical picture. Users: dismounted leaders."
+        },
+        {
+          "name": "SitaWare Insight",
+          "description": "Intelligence/big-data analysis add-on; company is hiring 'agentic AI and Java' engineers for it (2026 posting). FACT (job posting); capability claims vendor-sourced.",
+          "input_process_output_user": "Input: intelligence reports and structured data. Process: analytics, AI-assisted assessment. Output: intelligence products for the COP. Users: G2/S2 staffs."
+        },
+        {
+          "name": "SitaWare BattleCloud",
+          "description": "Cloud-native extension announced July 2025 to extend SitaWare capabilities to tactical-edge mobile users. FACT (company release cited by MilUX profile).",
+          "input_process_output_user": "Input: SitaWare data services. Process: cloud/edge hosting and synchronization. Output: SitaWare services on mobile/edge. Users: deployed HQs and mobile users."
+        }
+      ],
+      "exact_problem_solved": "Giving national land forces and NATO headquarters an interoperable C2/battle-management suite that natively speaks allied data standards, so multinational formations can share a common picture and orders.",
+      "primary_users": ["Land force headquarters staffs (brigade to corps)", "Mounted and dismounted tactical units", "NATO command structure staffs"],
+      "primary_buyers": ["Ministries of defence in 50+ countries (company claim)", "NATO (NCIA/ACT)", "US Army PEO C3T (2017 licence)", "Prime integrators of national C2 programs"],
+      "technical_layer": ["INGEST", "NORMALIZE", "FUSE", "VISUALIZE", "DECIDE", "COLLABORATE", "DISSEMINATE"],
+      "mission_layer": ["maneuver", "fires coordination", "joint", "coalition", "intelligence"],
+      "segment_ids": ["S01", "S08", "S07", "S02"],
+      "hw_sw_mix": "software - COTS C2 software licensed per seat/site",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "U.S. Army Mission Command awards contract to Systematic Inc. (SitaWare Headquarters licence for the Command Post Computing Environment)",
+          "customer": "U.S. Army PEO C3T / PM Mission Command",
+          "contracting_org": "U.S. Army (via CPCE effort)",
+          "vehicle_type": "FAR",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2017-02",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime for licence; component of integrator-led CPCE",
+          "prototype_or_production": "production licence (CPCE component)",
+          "source_url": "https://www.prnewswire.com/news-releases/us-army-mission-command-awards-contract-to-systematic-inc-300402141.html",
+          "pub_date": "2017-02",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NATO selects SitaWare Headquarters as standard system for planning and conducting land operations",
+          "customer": "NATO",
+          "contracting_org": "NATO (NCIA) - contracting details not public",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2024-04",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production selection",
+          "source_url": "https://euro-sd.com/2024/04/major-news/37625/nato-selects-sitaware-hg/",
+          "pub_date": "2024-04",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "French Army 3rd Division adopts SitaWare Headquarters",
+          "customer": "French Army (3e Division)",
+          "contracting_org": "French MoD/DGA - details not public",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2026-01",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational adoption",
+          "source_url": "https://euro-sd.com/2026/01/major-news/48619/french-army-adopts-sitaware-hq/",
+          "pub_date": "2026-01",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {"what": "Danish Army preferred battle management system (SitaWare Suite)", "evidence": "Independent Danish defence-AI report cites SitaWare as the Danish Army's preferred BMS.", "source_url": "https://github.com/Juanesillo/codefest-ad-astra-2026/blob/main/lib/data/processed/DOC-0425.txt"},
+        {"what": "German Army C2 (SitaWare Frontline) used to integrate UAS-derived recognized picture in ErzUntGlas (2019-2021)", "evidence": "Independent German defence-AI report.", "source_url": "https://github.com/Juanesillo/codefest-ad-astra-2026/blob/main/lib/data/processed/DOC-0419.txt"},
+        {"what": "Fielded across many NATO armies; '50+ countries' (company claim); described by third parties as the de facto BMS for a large share of NATO land forces", "evidence": "Company claim plus independent characterizations; sibling segment S08 research treats SitaWare as the most-cited allied C2 incumbent.", "source_url": "https://systematic.com/us/industries/defense/products/domains/interoperability/"}
+      ],
+      "exercises_demos": [
+        {"event": "NATO CWIX (annual interoperability exercise)", "year": "recurring", "note": "Sibling S08 research identifies CWIX as the proving ground where SitaWare competes on interoperability; specific-year participation not verified here (INFERENCE).", "source_url": "https://systematic.com/us/industries/defense/products/domains/interoperability/"}
+      ],
+      "integration_partners": ["Quantum Systems (Vector integrates with SitaWare)", "Maxar/Vantor-derived positioning software integrates with SitaWare workflows", "Radio and vehicle integrators (L3Harris, Thales, Rheinmetall - INFERENCE)", "TAK ecosystem bridges (per S08 gap analysis)"],
+      "apis_sdks_open_interfaces": "SitaWare exposes standards-based interfaces (MIP/JC3IEDM, NFFI, NVG, ADatP-3, VMF, Link 16/JREAP) and a partner SDK/plug-in model (company documentation; specifics not retrievable this session). Third-party products (Quantum Systems, positioning software) advertise SitaWare integration, indicating usable integration points.",
+      "security_classification_requirements": "Deployed on national Secret and NATO Secret networks; US work runs through Systematic Inc. under FOCI mitigation (analyst recall, MEDIUM - requires verification).",
+      "allied_international_activity": "Core business is allied: NATO selection (2024), France (2026), Denmark, Germany, and many other NATO/partner armies; US Army CPCE licence (2017). HIGH that the company is the leading allied C2 vendor; individual country lists MEDIUM.",
+      "technical_differentiator": "Native, mature implementation of NATO data-exchange standards inside a single C2 suite spanning HQ to dismounted echelons, now extending to cloud/edge (BattleCloud) and AI-assisted intelligence (Insight).",
+      "suspected_moat": "Installed base across NATO armies plus NATO's own selection; standards conformance track record at CWIX; long procurement cycles favor incumbents. HIGH.",
+      "major_competitors": ["Elbit Systems (TORCH-X)", "Thales", "Rheinmetall / Atos (Bundeswehr TaWAN/BMS)", "Leonardo", "HAVELSAN", "Terma", "Anduril (Lattice)", "Palantir", "Saab"],
+      "obvious_weaknesses": "Traditional thick-client architecture now being retrofitted for cloud/edge; limited public visibility into US Army follow-on usage after the 2017 CPCE licence; smaller AI/autonomy investment than venture-backed rivals; no public financial disclosure.",
+      "evidence_user_adoption": "Strong: NATO standard selection, multiple national armies, third-party descriptions as de facto NATO BMS. HIGH.",
+      "evidence_repeat_procurement": "Multiple sequential national adoptions (Denmark, Germany, NATO 2024, France 2026) indicate repeat procurement across customers; per-customer renewals not public. MEDIUM-HIGH.",
+      "evidence_prototype_to_production": "Products are long in production; BattleCloud (2025) is the newest capability with unknown fielding status.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "battalion_brigade"},
+        {"chain_step": "FUSE", "echelon": "division_corps"},
+        {"chain_step": "DECIDE", "echelon": "battalion_brigade"},
+        {"chain_step": "DECIDE", "echelon": "division_corps"},
+        {"chain_step": "DECIDE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "coalition"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "battalion_brigade"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "coalition"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: 2026 Copenhagen posting 'Software Engineer - Agentic AI & Java, SitaWare Insight' indicates a Java back end with LLM/agent features being added; SitaWare clients historically Windows/.NET (analyst recall, LOW).",
+      "confidence_notes": "NATO 2024 selection, France 2026 adoption and BattleCloud 2025 are FACT via euro-sd/company releases cited by a UK exhibitor database (not read directly). US Army 2017 licence FACT via PRNewswire (from sibling research). Employee count, US subsidiary/FOCI status and founder details are analyst recall (MEDIUM/LOW). Reports of Australian or UK selections were NOT verified and are omitted.",
+      "sources": [
+        {"url": "https://www.prnewswire.com/news-releases/us-army-mission-command-awards-contract-to-systematic-inc-300402141.html", "title": "U.S. Army Mission Command Awards Contract to Systematic Inc.", "pub_date": "2017-02", "type": "company"},
+        {"url": "https://euro-sd.com/2024/04/major-news/37625/nato-selects-sitaware-hg/", "title": "NATO selects SitaWare Headquarters", "pub_date": "2024-04", "type": "independent"},
+        {"url": "https://euro-sd.com/2026/01/major-news/48619/french-army-adopts-sitaware-hq/", "title": "French Army adopts SitaWare HQ", "pub_date": "2026-01", "type": "independent"},
+        {"url": "https://systematic.com/us/industries/defense/news-knowledge/news/systematic-introduces-cutting-edge-cloud-enabled-c4isr-enhancements-to-the-acclaimed-sitaware-suite/", "title": "Systematic introduces cloud-enabled C4ISR enhancements (SitaWare BattleCloud)", "pub_date": "2025-07-15", "type": "company"},
+        {"url": "https://systematic.com/us/industries/defense/products/domains/interoperability/", "title": "Systematic: Military interoperability (standards supported)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://github.com/MilUX-Ltd/tally/blob/main/Companies/S-T/Systematic.md", "title": "MilUX tally profile: Systematic (verified 2026-06-29)", "pub_date": "2026-06-29", "type": "independent"},
+        {"url": "https://github.com/Juanesillo/codefest-ad-astra-2026/blob/main/lib/data/processed/DOC-0425.txt", "title": "Danish defence AI report excerpt citing SitaWare as Danish Army preferred BMS", "pub_date": "2023", "type": "independent"},
+        {"url": "https://github.com/LorenzoLaCorte/internship-scraper/blob/main/output/output-new-grads/results.csv", "title": "Job posting: Systematic, Software Engineer - Agentic AI & Java, SitaWare Insight", "pub_date": "2026", "type": "company"}
+      ]
+    },
+    {
+      "name": "Helsing",
+      "aka": "Helsing SE (formerly Helsing GmbH); Helsing Limited (UK, Companies House 13447361)",
+      "founding_year": 2021,
+      "headquarters": "Munich, Germany (offices in London, Paris, Berlin, Stockholm; Plymouth UK factory)",
+      "public_private": "private",
+      "employee_count_approx": "Approximately 900 (2025) per third-party report; other sources range 400-1,000+ (MEDIUM).",
+      "founders": ["Torsten Reil", "Gundbert Scherf", "Niklas Koehler"],
+      "founder_backgrounds": "Torsten Reil (co-CEO; founder of NaturalMotion, games/AI), Gundbert Scherf (co-CEO; former German MoD official and McKinsey partner), Niklas Koehler (President/CPO; AI researcher). FACT for names/roles (Unicorn-Germany dataset citing company releases); backgrounds analyst recall (MEDIUM).",
+      "total_disclosed_funding_usd": "Approximately $3.3B: Series A EUR 102.5M (Nov 2021), Series B EUR 209M (Sep 2023), Series C EUR 450M (Jul 2024), Series D EUR 600M (Jun 17 2025), Series E $1.8B (Jul 13 2026). FACT (company releases as cited in dataset).",
+      "latest_valuation": "$18B post-money at Series E (July 13 2026, company release); EUR 12B at Series D (June 2025).",
+      "major_investors": ["Prima Materia (Daniel Ek; led Series A and D)", "General Catalyst (led Series B, co-led C)", "Accel", "Lightspeed Venture Partners", "Saab (strategic, ~5%)", "Plural", "Greenoaks", "Elad Gil"],
+      "c4isr_products": [
+        {
+          "name": "Altra",
+          "description": "Reconnaissance-strike software layer that connects dissimilar drones and sensors on a unified data layer, fuses sensor data and coordinates strikes; used in Helsing deployments, standalone availability unconfirmed. Company-described; third-party corroboration limited (MEDIUM).",
+          "input_process_output_user": "Input: video/IR/RF feeds from drones and ground sensors. Process: AI detection, fusion, target nomination, strike coordination. Output: targeting picture and tasking to effectors. Users: Ukrainian and German land units (claimed)."
+        },
+        {
+          "name": "HX-2 and HF-1 strike drones",
+          "description": "HF-1 loitering munition (4,000 units to Ukraine, Germany-financed, 2024) and HX-2 AI strike drone (6,000 announced for Ukraine, Feb 2025; Resilience Factory >1,000/month). Bloomberg (Jan 19 2026) reported Ukraine paused new HX-2 orders citing performance problems; Helsing disputed. FACT (TechCrunch/Bloomberg as cited).",
+          "input_process_output_user": "Input: mission area, target cues. Process: onboard AI navigation/targeting in GPS-denied conditions, swarm coordination. Output: strike. Users: Ukrainian forces; German trials."
+        },
+        {
+          "name": "Eurofighter EK electronic-warfare AI (with Saab) and Centaur AI pilot",
+          "description": "June 2024 Bundeswehr selection of Helsing and Saab for the Eurofighter EK EW suite (Helsing AI for emitter analysis); Centaur AI pilot flown on Saab Gripen E in Project Beyond (May-June 2025). FACT (Defense News, company).",
+          "input_process_output_user": "Input: radar/EW emissions. Process: real-time classification and countermeasure recommendation. Output: pilot decision support / autonomous maneuvering. Users: Luftwaffe (EK), Saab test program."
+        },
+        {
+          "name": "SG-1 Fathom underwater glider with Lura acoustic AI; CA-1 Europa / CA-1 Electronic Attack combat aircraft; KIRK JV (space recon with OHB); RX-1 robotics platform",
+          "description": "Portfolio expansion 2025-2026: Plymouth 'Resilience Factory' for SG-1 (Nov 2025), CA-1 Electronic Attack (Jun 2026), KIRK joint venture with OHB for tactical space-based reconnaissance (May 19 2026), Area 9 research division and RX-1 (Jun 1 2026), EURENCO partnership for sovereign strike drone (Jun 17 2026). FACT (company newsroom items as mirrored).",
+          "input_process_output_user": "Various; mostly platform/collection layers feeding Altra-type software."
+        }
+      ],
+      "exact_problem_solved": "Providing European militaries with sovereign AI software (and increasingly hardware) for sensor fusion, reconnaissance-strike coordination, electronic warfare and autonomous platforms.",
+      "primary_users": ["Ukrainian ground forces (HF-1/HX-2/Altra)", "Bundeswehr (Eurofighter EK, drone programs)", "Saab/Airbus programs", "UK Royal Navy (SG-1 trials)"],
+      "primary_buyers": ["German Federal Ministry of Defence / BAAINBw", "Ukraine MoD (Germany-financed)", "Airbus Defence and Space, Saab (prime partners)", "UK MoD"],
+      "technical_layer": ["COLLECT", "PROCESS", "FUSE", "IDENTIFY", "DECIDE", "TASK"],
+      "mission_layer": ["ISR", "fires/recon-strike", "air", "electronic warfare", "maritime", "space"],
+      "segment_ids": ["S13", "S04", "S12", "S01", "S03", "S06"],
+      "hw_sw_mix": "both - originally software-only, now vertically integrated into drones, aircraft and undersea vehicles",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Eurofighter EK electronic warfare AI (with Saab)",
+          "customer": "German Bundeswehr (Luftwaffe)",
+          "contracting_org": "German MoD / BAAINBw via Airbus/Saab consortium",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2024-06",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "sub (to Saab/Airbus)",
+          "prototype_or_production": "production program",
+          "source_url": "https://www.defensenews.com/global/europe/2024/06/26/germany-selects-helsing-saab-for-eurofighter-electronic-warfare-ai/",
+          "pub_date": "2024-06-26",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "HX-2 strike drones for Ukraine (6,000) following 4,000 HF-1 (Germany-financed)",
+          "customer": "Ukraine Armed Forces (financed largely by Germany)",
+          "contracting_org": "German MoD financing; Ukrainian MoD",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2024 (HF-1), 2025-02 (HX-2 announcement)",
+          "period_of_performance": "2024-2026",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/combat use; Jan 2026 reports of paused new orders (disputed)",
+          "source_url": "https://techcrunch.com/2025/02/13/",
+          "pub_date": "2025-02-13",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "FCAS 'AI backbone' contract",
+          "customer": "FCAS consortium (Airbus/Dassault/Indra)",
+          "contracting_org": "Consortium",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2024-09 (reported)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "sub",
+          "prototype_or_production": "development",
+          "source_url": "https://www.theguardian.com/technology/article/2024/sep/07/helsing-defence-ai-startup-contract-future-combat-air-system",
+          "pub_date": "2024-09-07",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Airbus Wingman exclusive AI partnership",
+          "customer": "Airbus Defence and Space",
+          "contracting_org": "Commercial partnership",
+          "vehicle_type": "subcontract",
+          "ceiling": "n/a",
+          "obligated": "n/a",
+          "awarded_value": "n/a",
+          "funded_amount": "n/a",
+          "task_orders": "n/a",
+          "date": "2024-06",
+          "period_of_performance": "development",
+          "prime_or_sub": "sub",
+          "prototype_or_production": "development (no in-service aircraft)",
+          "source_url": "https://www.cnbc.com/2024/06/17/",
+          "pub_date": "2024-06-17",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {"what": "HF-1 and HX-2 combat use in Ukraine; Altra used in deployments", "evidence": "TechCrunch 2025-02-13; Bloomberg 2026-01-19 (setbacks, disputed).", "source_url": "https://www.bloomberg.com/news/articles/2026-01-19/ukraine-holds-off-on-new-helsing-drone-orders-after-setbacks"},
+        {"what": "Plymouth Resilience Factory building SG-1 Fathom for UK", "evidence": "Company release 2025-11-19 (mirrored in MilUX profile).", "source_url": "https://helsing.ai/newsroom/helsing-opens-its-first-uk-resilience-factory-in-plymouth-to-build-ai-enabled-submarine-hunters"}
+      ],
+      "exercises_demos": [
+        {"event": "Project Beyond - Centaur AI on Saab Gripen E", "year": "2025", "note": "Combat-trial flights May-June 2025; no production commitment confirmed.", "source_url": "https://github.com/vibewatch/startup/blob/main/reports/20260518002022-helsing/05-product-tech.yaml"},
+        {"event": "Airbus/Quantum Systems/Helsing formation and Altra demonstrations", "year": "2024", "note": "Sibling research notes an Aug 2024 Airbus/Quantum Systems formation flight demo; Helsing-Quantum Altra integration partnership announced 2024 (analyst recall, MEDIUM).", "source_url": "https://helsing.ai/"}
+      ],
+      "integration_partners": ["Saab", "Airbus Defence and Space", "Quantum Systems (Vector + Altra)", "Mistral AI (Feb 2025)", "OHB (KIRK JV)", "EURENCO (Jun 2026)", "Ukrainian drone manufacturers (HF-1)"],
+      "apis_sdks_open_interfaces": "Altra offers API-based third-party integration per company description (details not public). Public GitHub (helsing-ai) releases Rust tooling: buffrs (protobuf package management), sguaba (rigid-body transforms), dson (delta-based CRDT), atmosphere (SQL framework) - open infrastructure, not product APIs.",
+      "security_classification_requirements": "German and NATO Secret programs (Eurofighter EK, FCAS); UK facility for Royal Navy work; company positions itself as a sovereign European supplier, which constrains non-European ownership/personnel.",
+      "allied_international_activity": "Germany, Ukraine, UK (Plymouth factory, Helsing Limited), France (Paris; Area 9), Sweden (Saab; Stockholm office), FCAS partners. HIGH.",
+      "technical_differentiator": "Combat-derived training data from Ukraine, GPS/comms-denied autonomy, multi-sensor fusion, and an end-to-end European supply chain from software to airframes.",
+      "suspected_moat": "Sovereignty positioning with European governments, prime partnerships (Airbus, Saab), capital scale (~$3.3B raised), and operational data from Ukraine. HIGH for positioning; product-level moat MEDIUM (Bloomberg-reported quality issues).",
+      "major_competitors": ["Anduril", "Quantum Systems", "STARK Defence", "Rheinmetall", "Palantir", "Comand AI", "Tekever", "Auterion"],
+      "obvious_weaknesses": "Undisclosed revenue versus $18B valuation; reported HX-2 performance problems and paused Ukrainian orders (disputed); dependence on German government financing; rapid portfolio sprawl (drones, aircraft, undersea, space, robotics); minimal US presence.",
+      "evidence_user_adoption": "Combat use of HF-1/HX-2 in Ukraine and Bundeswehr production program (Eurofighter EK) are strong; software-only adoption (Altra) is mostly company-reported. MEDIUM-HIGH.",
+      "evidence_repeat_procurement": "Sequential Ukraine orders (HF-1 then HX-2) and expanding Bundeswehr relationship (EW, FCAS, drone evaluations); Jan 2026 pause signals repeat-order risk. MEDIUM.",
+      "evidence_prototype_to_production": "HF-1/HX-2 moved to serial production (>1,000/month claim); Centaur, SG-1, CA-1 remain development/trial. MEDIUM.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "tactical_unit"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "FUSE", "echelon": "tactical_unit"},
+        {"chain_step": "FUSE", "echelon": "battalion_brigade"},
+        {"chain_step": "DECIDE", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "battalion_brigade"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: Rust-centric engineering (all major public repos are Rust: protobuf tooling, CRDT sync, spatial math), consistent with edge software that must synchronize under DDIL conditions; London 'Legal Counsel' and Munich 'Associate Director, space-based STA programme (KIRK)' postings (2026) indicate program-management build-out for space and UK expansion.",
+      "confidence_notes": "Funding rounds and 2025-2026 corporate events are FACT (company releases as cited by structured datasets and independent mirrors). Contract values are undisclosed. Altra deployment breadth is company-reported (MEDIUM). Quality controversy is reported by Bloomberg and disputed by the company. FCAS 'backbone' framing is press-derived (MEDIUM).",
+      "sources": [
+        {"url": "https://raw.githubusercontent.com/LW7776/Unicorn-Germany/main/data/companies/helsing.json", "title": "Unicorn-Germany dataset: Helsing funding rounds with company-release citations", "pub_date": "2026", "type": "financial"},
+        {"url": "https://helsing.ai/newsroom/helsing-raises-1-8bn-in-series-e", "title": "Helsing raises US$1.8bn in Series E (valuing company at $18bn)", "pub_date": "2026-07-13", "type": "company"},
+        {"url": "https://helsing.ai/newsroom/helsing-raises-eur600m-to-invest-in-european-technological-sovereignty", "title": "Helsing raises EUR 600m Series D", "pub_date": "2025-06-17", "type": "company"},
+        {"url": "https://www.defensenews.com/global/europe/2024/06/26/germany-selects-helsing-saab-for-eurofighter-electronic-warfare-ai/", "title": "Germany selects Helsing, Saab for Eurofighter electronic warfare AI", "pub_date": "2024-06-26", "type": "independent"},
+        {"url": "https://techcrunch.com/2025/02/13/", "title": "Germany's Helsing doubles down on drones for Ukraine (HX-2, 6,000 units)", "pub_date": "2025-02-13", "type": "independent"},
+        {"url": "https://www.bloomberg.com/news/articles/2026-01-19/ukraine-holds-off-on-new-helsing-drone-orders-after-setbacks", "title": "Ukraine holds off on new Helsing drone orders after setbacks", "pub_date": "2026-01-19", "type": "independent"},
+        {"url": "https://github.com/MilUX-Ltd/tally/blob/main/Companies/E-H/Helsing.md", "title": "MilUX tally profile: Helsing (2026 newsroom items: CA-1 EA, RX-1/Area 9, KIRK JV, Plymouth factory)", "pub_date": "2026-06-29", "type": "independent"},
+        {"url": "https://github.com/vibewatch/startup/tree/main/reports/20260518002022-helsing", "title": "Third-party diligence report on Helsing (customers, product, evidence)", "pub_date": "2026-05-18", "type": "independent"},
+        {"url": "https://github.com/helsing-ai", "title": "Helsing GitHub organization (Rust open-source tooling)", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Quantum Systems",
+      "aka": "Quantum-Systems GmbH; Quantum-Systems Inc. (US subsidiary, Moorpark, California - analyst recall); Quantum Systems USA",
+      "founding_year": 2015,
+      "headquarters": "Gilching (Munich), Bavaria, Germany",
+      "public_private": "private",
+      "employee_count_approx": "Approximately 700-750 (Tracxn: 724 as of Aug 2026; older sources say ~400-500). MEDIUM.",
+      "founders": ["Florian Seibel", "Sven Kruck"],
+      "founder_backgrounds": "Florian Seibel (co-CEO) is a former Bundeswehr helicopter pilot and aerospace engineer; Sven Kruck (co-CEO) leads operations and commercialization. FACT (api-evangelist profile, third-party report). Additional co-founders from the 2015 founding team not verified this session.",
+      "total_disclosed_funding_usd": "More than $1.7B equity plus EUR 150M debt: Series B EUR 63.6M (Oct 2023), Series C EUR 160M (May 2025, unicorn), Series C extension EUR 180M (Nov 2025, ~EUR 3B valuation), EUR 150M debt (Feb 2026), Series D $1.2B (Jul 2 2026). FACT (company releases as cited).",
+      "latest_valuation": "Approximately $8B post-money at Series D (July 2, 2026; company release, CNBC).",
+      "major_investors": ["Balderton Capital (led Series C extension)", "Blackstone, Noteus, Airbus, Advent (Series D co-leads)", "BOND, Fidelity, Wellington, A.P. Moller (Series D participants)", "HV Capital", "Thiel Capital", "DTCP", "Project A", "Airbus Ventures", "Omnes Capital"],
+      "c4isr_products": [
+        {
+          "name": "Vector / Vector AI",
+          "description": "Electric VTOL fixed-wing tactical ISR UAS sold only to governments; onboard edge AI ('Vector AI'); Bundeswehr primary supplier; 619+ Vectors delivered by April 2025; selected by the US Army for Company-Level sUAS Directed Requirement 2 (Apr 15 2026). FACT.",
+          "input_process_output_user": "Input: EO/IR video, GNSS-denied navigation cues. Process: onboard detection/tracking, resilient datalink. Output: geo-referenced video and targets into ATAK, SitaWare, Kropyva, FacNav. Users: company-to-brigade reconnaissance units."
+        },
+        {
+          "name": "Twister",
+          "description": "Backpackable short-range ISR sUAS for GNSS-denied/EW environments; won Bundeswehr ALADIN-successor tender (Dec 2025: 147 systems with options for up to 600 more). FACT (DroneLife, sUAS News as cited).",
+          "input_process_output_user": "Input: EO/IR. Process: short-range ISR. Output: video and positions to C2. Users: platoon/company."
+        },
+        {
+          "name": "Reliant, Scorpion, Trinity Pro, Sparta",
+          "description": "Reliant: Group 2 long-endurance heavy-fuel VTOL for the US market (10+ h); Scorpion: selected with Vector for Australia DEF129-SUAS; Trinity Pro: mapping/survey; Sparta: Ukraine-manufactured FPV carrier. FACT (company/third-party).",
+          "input_process_output_user": "Collection platforms feeding the same software stack."
+        },
+        {
+          "name": "MOSAIC UXS, QBase 3D / QBase Tactical, Ground Autonomy Kit and MANDRILL UGV",
+          "description": "MOSAIC UXS is described as the software backbone connecting platforms and sensors across air/land/sea; QBase is the Windows-based mission planning/control interface (no public API); Ground Autonomy Kit and MANDRILL ground robot announced March 2026. Company-described (MEDIUM); maturity of multi-domain orchestration unverified.",
+          "input_process_output_user": "Input: platform telemetry and sensor feeds. Process: mission planning, control, multi-platform orchestration. Output: tasking and data to C2 systems. Users: UAS operators and small-unit staffs."
+        }
+      ],
+      "exact_problem_solved": "Giving tactical units affordable, EW-resilient organic aerial reconnaissance whose products flow directly into existing battle-management systems, produced at scale in Europe, the US and Ukraine.",
+      "primary_users": ["Bundeswehr reconnaissance units", "Ukrainian forces (19,000+ missions in 2025 claimed)", "US Army company-level sUAS units", "Australian, Spanish, New Zealand, Romanian forces", "US Department of State"],
+      "primary_buyers": ["BAAINBw (Germany)", "US Army PEO Aviation / PM UAS (DR2)", "Australian Department of Defence (DEF129)", "Spanish MoD", "Ukraine MoD with German financing", "US Department of State (contract 19AQMM25F0190)"],
+      "technical_layer": ["COLLECT", "PROCESS", "IDENTIFY", "TRANSPORT", "DISSEMINATE"],
+      "mission_layer": ["ISR", "maneuver", "fires (target acquisition)", "counter-UAS (STRILA interceptors via JV)"],
+      "segment_ids": ["S03", "S13", "S06", "S07"],
+      "hw_sw_mix": "both - airframes and payloads with in-house mission software and edge AI",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "U.S. Army selects Quantum-Systems' Vector AI for Company-Level sUAS Directed Requirement 2",
+          "customer": "U.S. Army",
+          "contracting_org": "U.S. Army (program office not stated in mirrored headline; PEO Aviation/PM UAS - INFERENCE)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed ($15M figure reported by a third-party analytics site, LOW)",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2026-04-15",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime (Quantum-Systems Inc.)",
+          "prototype_or_production": "selection for a directed requirement; production quantities not public",
+          "source_url": "https://www.prnewswire.com/news-releases/us-army-selects-quantum-systems-vector-ai-for-company-level-suas-directed-requirement-2-302739451.html",
+          "pub_date": "2026-04-15",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Quantum-Systems Inc. awarded two contracts by Commonwealth of Australia for DEF129-SUAS totaling AUD 90 million",
+          "customer": "Australian Defence Force",
+          "contracting_org": "Australian Department of Defence (LAND 129 Phase 4B / DEF129)",
+          "vehicle_type": "foreign",
+          "ceiling": "AUD 90M (two contracts, total)",
+          "obligated": "Not disclosed",
+          "awarded_value": "AUD 90M",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2024-07-14",
+          "period_of_performance": "multi-year support reported through 2031 (inferred)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (Vector and Scorpion)",
+          "source_url": "https://www.prnewswire.com/news-releases/quantum-systems-inc-awarded-two-contracts-by-commonwealth-of-australia-for-def129-suas-totaling-aud-90-million-302196166.html",
+          "pub_date": "2024-07-14",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Bundeswehr tender win: Twister as ALADIN successor (147 systems, options up to 600)",
+          "customer": "Bundeswehr",
+          "contracting_org": "BAAINBw",
+          "vehicle_type": "foreign",
+          "ceiling": "147 systems plus options for up to 600 (value not disclosed)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "options",
+          "date": "2025-12",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://dronelife.com/2025/12/12/bundeswehr-reconnaissance-drones-quantum-systems-twister/",
+          "pub_date": "2025-12-12",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Spanish Armed Forces: two tenders won for Vector and Twister",
+          "customer": "Spanish Army",
+          "contracting_org": "Spanish MoD",
+          "vehicle_type": "foreign",
+          "ceiling": "Not disclosed (EUR 27M reported by third party, LOW)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2025",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (Spanish Army first to deploy both types)",
+          "source_url": "https://quantum-systems.com/news/quantum-wins-two-tender-in-spain/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "US Department of State order for Vector systems and upgrades (contract 19AQMM25F0190)",
+          "customer": "U.S. Department of State",
+          "contracting_org": "DoS Office of Acquisitions",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "19AQMM25F0190 under 19AQMM25D0182",
+          "date": "2025",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production order",
+          "source_url": "https://www.highergov.com/contract/19AQMM25D0182-19AQMM25F0190/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "German Army agreement reported at EUR 246M and Romanian Armed Forces contracts via EU SAFE",
+          "customer": "German Army; Romanian Armed Forces",
+          "contracting_org": "BAAINBw; Romanian MoD",
+          "vehicle_type": "foreign",
+          "ceiling": "EUR 246M (Germany, as reported by analytics site)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2025-12 (Germany); 2025 (Romania)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://droneintelligence.ai/companies/quantum-systems",
+          "pub_date": "2026-09-24",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {"what": "Vector in combat use in Ukraine; more than 19,000 missions in 2025 (company-derived figure)", "evidence": "Resilience Media (2026-07-02) and company 'Operator insights: Vector in Ukraine' (2025-10-08).", "source_url": "https://resiliencemedia.co/quantum-systems-valued-at-8bn-after-landmark-1-2bn-funding-round/"},
+        {"what": "Bundeswehr Vector fleet (primary supplier) and Twister procurement", "evidence": "Third-party profiles and Dec 2025 tender reporting.", "source_url": "https://defence-industry.eu/quantum-systems-wins-bundeswehr-contract-to-supply-twister-drones-as-aladin-successor-system/"},
+        {"what": "German-Ukrainian joint ventures (Frontline Robotics; Quantum WIY Industries; Quantum Tencore Industries) and 15,000 STRILA interceptors funded by Germany for Ukraine's National Guard", "evidence": "Multiple trade outlets, March 26-27 2026.", "source_url": "https://euro-sd.com/2026/03/articles/armed-forces/50128/quantum-systems-strengthens-ukraines-air-defence-capabilities/"}
+      ],
+      "exercises_demos": [
+        {"event": "Airbus/Quantum Systems formation flight demonstration", "year": "2024", "note": "Cited in sibling research (Aug 2024); manned-unmanned teaming demo.", "source_url": "https://quantum-systems.com/"},
+        {"event": "Spanish Army first deployment of Vector and Twister", "year": "2025", "note": "Army Recognition report of first operational deployment.", "source_url": "https://www.armyrecognition.com/news/army-news/2025/spanish-army-becomes-first-to-deploy-german-made-vector-and-twister-drones-from-quantum-systems"}
+      ],
+      "integration_partners": ["Helsing (Altra integration; investor-adjacent)", "Airbus (Series D co-lead; demos)", "Systematic SitaWare, ATAK, Kropyva, FacNav (C2 integrations)", "Frontline Robotics (Ukraine JV)", "Sysgration (Taiwan localization, Sep 2025)", "AirRobot (acquired Mar 2025)"],
+      "apis_sdks_open_interfaces": "No public developer API, SDK or REST endpoint for QBase or the platforms (api-evangelist audit); integration is via C2-system connectors (ATAK, SitaWare, Kropyva, FacNav) and standard geospatial file exchange. quantum-systems GitHub org has no public repositories.",
+      "security_classification_requirements": "Vector is government-only; US work via Quantum-Systems Inc. (Blue UAS lineage - analyst recall MEDIUM); US job postings for a Security Operations Manager (2026) suggest facility-security build-out (INFERENCE).",
+      "allied_international_activity": "Germany, Ukraine, US, Australia, Spain, New Zealand, Romania, Netherlands (customers); UK expansion with up to EUR 50M investment over five years (Sep 8 2025); Taiwan localization partnership (Sep 2025); Huntsville, Alabama R&D office (Aug 24 2026). HIGH.",
+      "technical_differentiator": "EW-resilient eVTOL ISR with onboard AI, iterated against Ukrainian combat feedback, produced at scale on multiple continents, with direct connectors into allied and Ukrainian C2 systems.",
+      "suspected_moat": "Combat-proven fleet, multi-national production footprint, government-only Vector channel and growing installed base across NATO armies; software layer (MOSAIC) is still emerging. HIGH for hardware franchise, LOW-MEDIUM for software.",
+      "major_competitors": ["AeroVironment", "Skydio", "Teal/Red Cat", "Anduril (Ghost)", "Tekever", "Helsing (software layer)", "Shield AI (V-BAT)", "Baykar"],
+      "obvious_weaknesses": "Hardware-dominant revenue with unaudited margins; excluded from strike/loitering-munition budgets; software (MOSAIC/QBase) lacks open APIs; heavy dependence on German and Ukrainian demand; export-control exposure of a German OEM in US programs.",
+      "evidence_user_adoption": "Strong: named government customers on four continents, combat use in Ukraine, Bundeswehr and US Army selections. HIGH.",
+      "evidence_repeat_procurement": "Sequential Bundeswehr buys (Vector then Twister), Australia two contracts, US DoS follow-on order, Ukraine repeat demand. HIGH.",
+      "evidence_prototype_to_production": "Vector moved from 2022 Bundeswehr trials to serial deliveries (619+ by Apr 2025); US Army DR2 selection is a newer step whose production scale is not yet public. MEDIUM-HIGH.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "tactical_unit"},
+        {"chain_step": "COLLECT", "echelon": "battalion_brigade"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "FUSE", "echelon": "tactical_unit"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: 2025-2026 'Quantum Systems USA' postings (manufacturing engineer, senior GNC engineer, quality, kitting, planning/control, supply-chain director, security operations manager, software engineer, director of product, field support) indicate a full US production and sustainment line plus product/software staffing in the US; Windows-based QBase suggests a .NET/C++ ground-control lineage (LOW).",
+      "confidence_notes": "Funding rounds and Series D valuation FACT (company releases, CNBC). Australia AUD 90M FACT (PRNewswire). US Army DR2 selection FACT (PRNewswire headline), value unknown. German EUR 246M and US $15M figures LOW (single analytics site). Founders beyond Seibel/Kruck and Moorpark HQ are recall. Revenue estimates ($124M 2024, $330M 2025) are third-party estimates, not disclosures.",
+      "sources": [
+        {"url": "https://www.prnewswire.com/news-releases/us-army-selects-quantum-systems-vector-ai-for-company-level-suas-directed-requirement-2-302739451.html", "title": "U.S. Army Selects Quantum-Systems Vector AI for Company-Level sUAS Directed Requirement 2", "pub_date": "2026-04-15", "type": "company"},
+        {"url": "https://www.prnewswire.com/news-releases/quantum-systems-inc-awarded-two-contracts-by-commonwealth-of-australia-for-def129-suas-totaling-aud-90-million-302196166.html", "title": "Quantum-Systems Inc. awarded two contracts by Commonwealth of Australia for DEF129-SUAS (AUD 90M)", "pub_date": "2024-07-14", "type": "company"},
+        {"url": "https://quantum-systems.com/news/quantum-systems-raises-1-2bn-series-d-to-accelerate-growth-and-scale-software-defined-autonomous-systems-across-air-land-and-sea/", "title": "Quantum Systems raises $1.2bn Series D", "pub_date": "2026-07-02", "type": "company"},
+        {"url": "https://www.cnbc.com/2026/07/02/autonomous-defense-startup-quantum-systems.html", "title": "CNBC: Quantum Systems Series D", "pub_date": "2026-07-02", "type": "independent"},
+        {"url": "https://quantum-systems.com/news/quantum-systems-raises-euro160m/", "title": "Quantum Systems raises EUR 160M Series C", "pub_date": "2025-05-06", "type": "company"},
+        {"url": "https://dronelife.com/2025/12/12/bundeswehr-reconnaissance-drones-quantum-systems-twister/", "title": "Bundeswehr reconnaissance drones: Quantum Systems Twister (147 + up to 600 options)", "pub_date": "2025-12-12", "type": "independent"},
+        {"url": "https://www.highergov.com/contract/19AQMM25D0182-19AQMM25F0190/", "title": "HigherGov: DoS contract 19AQMM25F0190 Quantum-Systems", "pub_date": "2025", "type": "gov"},
+        {"url": "https://github.com/MilUX-Ltd/tally/blob/main/Companies/O-R/Quantum%20Systems.md", "title": "MilUX tally profile: Quantum Systems (Series C extension, AirRobot, Twister)", "pub_date": "2026-07-05", "type": "independent"},
+        {"url": "https://github.com/vibewatch/startup/tree/main/reports/20260924062710-quantum-systems", "title": "Third-party diligence report on Quantum Systems (customers, financials, evidence)", "pub_date": "2026-09-24", "type": "independent"},
+        {"url": "https://raw.githubusercontent.com/api-evangelist/providers/main/_providers/quantum-systems.md", "title": "API Evangelist profile: Quantum Systems (no public API; 619+ Vectors delivered Apr 2025)", "pub_date": "2026", "type": "independent"},
+        {"url": "https://github.com/api-evangelist/quantum-systems/tree/main/blogs", "title": "Mirrored Quantum Systems news/job feed (UK EUR 50M expansion, Huntsville office, US job postings)", "pub_date": "2025-2026", "type": "company"}
+      ]
+    },
+    {
+      "name": "Arondite",
+      "aka": "Arondite Ltd",
+      "founding_year": 2023,
+      "headquarters": "London, United Kingdom",
+      "public_private": "private",
+      "employee_count_approx": "Public evidence insufficient; likely 20-60 (seed-stage, hiring via Workable) - LOW.",
+      "founders": ["Will Blyth"],
+      "founder_backgrounds": "Will Blyth (CEO) is a former British Army officer who later worked at Palantir and Helsing (Wikipedia-derived text citing Tech Funding News, 2025-05-01). Other co-founders: public evidence insufficient.",
+      "total_disclosed_funding_usd": "More than $12M seed (approximately EUR 10.5M) announced 1 May 2025, led by Index Ventures with Concept Ventures. FACT (EU-Startups, Tech Funding News, company LinkedIn).",
+      "latest_valuation": "Not disclosed.",
+      "major_investors": ["Index Ventures (lead)", "Concept Ventures"],
+      "c4isr_products": [
+        {
+          "name": "Cobalt",
+          "description": "AI-powered mission-orchestration platform that integrates sensors, data, crewed assets and autonomous platforms for planning, command and decision support; features sighting reports, real-time alerts, mapping and visualisation, task management/kanban workflows, and observation/monitoring; use cases listed as Hybrid Navy, C-UAS, Recce-Strike and Site Security. Company-described (FACT that it is offered; performance unverified).",
+          "input_process_output_user": "Input: sensor feeds, reports and autonomous-platform telemetry. Process: fusion, alerting, tasking and human-machine coordination. Output: shared operational picture and tasks to people and machines. Users: British Army brigade staff and Royal Navy experimental units."
+        }
+      ],
+      "exact_problem_solved": "Letting small military headquarters orchestrate mixed crewed and uncrewed assets and their data in one workflow, filling communication gaps between legacy C2 and new robotic systems.",
+      "primary_users": ["British Army 16 Air Assault Brigade (Global Response Force)", "Royal Navy experimental units", "Allied units (aspirational)"],
+      "primary_buyers": ["UK Ministry of Defence / Army programme offices", "Royal Navy experimentation bodies", "Allied defence ministries (target)"],
+      "technical_layer": ["INGEST", "FUSE", "VISUALIZE", "DECIDE", "COLLABORATE", "TASK"],
+      "mission_layer": ["maneuver", "recce-strike", "counter-UAS", "maritime", "site security"],
+      "segment_ids": ["S13", "S01", "S07"],
+      "hw_sw_mix": "software - platform plus forward-deployed engineering and mission-partner support",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Multi-million pound contract to partner with the British Army's Global Response Force (16 Air Assault Brigade) on next-generation mission orchestration",
+          "customer": "British Army (16 Air Assault Brigade / Global Response Force)",
+          "contracting_org": "UK MoD (specific route not disclosed)",
+          "vehicle_type": "foreign",
+          "ceiling": "'multi-million pound' (undisclosed)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "n/a",
+          "date": "2025 (exact date not verified)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "experimentation/partnership contract; production status unknown",
+          "source_url": "https://www.arondite.com/newsrooms/arondite-awarded-multi-million-pound-contract-to-partner-with-british-armys-global-response-force-on-next-generation-mission-orchestration",
+          "pub_date": "2025 (approx.)",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {"what": "Cobalt used with 16 Air Assault Brigade and in Royal Navy experimental deployments", "evidence": "Company announcements only (first-party); UK minister quoted per third-party index. No independent verification found.", "source_url": "https://github.com/Daniellayeghi/Daniellayeghi.github.io/blob/main/robotics-index/data/companies/co-39.json"}
+      ],
+      "exercises_demos": [
+        {"event": "Royal Navy experimental deployments (unspecified)", "year": "2025", "note": "Company-claimed.", "source_url": "https://www.arondite.com/cobalt"}
+      ],
+      "integration_partners": ["Public evidence insufficient (company states it connects autonomous systems 'at scale'; named platform partners not found)"],
+      "apis_sdks_open_interfaces": "No public API, developer portal or SDK (API Evangelist audit, 2026-07). Integration presumably bespoke via forward-deployed engineers (INFERENCE).",
+      "security_classification_requirements": "UK MoD work implies UK security clearances and OFFICIAL-SENSITIVE/SECRET handling; specifics not public.",
+      "allied_international_activity": "UK-only evidence so far; states ambition for 'autonomy-native allied operations'. LOW.",
+      "technical_differentiator": "Founder-operator credibility (ex-Army, ex-Palantir, ex-Helsing) applied to a lightweight orchestration layer for human-machine teams, positioned between legacy BMS and autonomy stacks.",
+      "suspected_moat": "None yet beyond early UK user access and Index Ventures backing; incumbents (Anduril, Helsing, Systematic, Palantir) can replicate the feature set. LOW.",
+      "major_competitors": ["Helsing (Altra)", "Anduril (Lattice)", "Palantir (UK MoD contracts)", "Systematic (SitaWare Edge/Frontline)", "Hadean", "Adarga", "Comand AI", "Auterion"],
+      "obvious_weaknesses": "Single seed round; single named customer; first-party-only deployment evidence; no public API; UK-only footprint; conflicting founding-year data (2018 in a Sifted list vs 2023 elsewhere).",
+      "evidence_user_adoption": "One named British Army formation and Royal Navy experiments, company-reported. LOW-MEDIUM.",
+      "evidence_repeat_procurement": "Public evidence insufficient.",
+      "evidence_prototype_to_production": "Public evidence insufficient; contract appears to be an experimentation partnership.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "tactical_unit"},
+        {"chain_step": "DECIDE", "echelon": "battalion_brigade"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "tactical_unit"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "battalion_brigade"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE: Hiring runs through Workable (apply.workable.com/arondite); no role descriptions retrieved, so stack unknown. Product description (kanban, mapping, alerts) suggests a modern web application with geospatial front end.",
+      "confidence_notes": "Seed round, lead investor and founder background are FACT via multiple independent mirrors of May 2025 coverage. Contract and deployments are company-reported (MEDIUM/LOW). Founding year 2023 is the majority view; one dataset says 2018. Company website unreachable in-session.",
+      "sources": [
+        {"url": "https://www.eu-startups.com/2025/05/connecting-the-battlefield-british-startup-arondite-raises-over-10-5-million-to-link-defence-systems-with-ai/", "title": "EU-Startups: Arondite raises over EUR 10.5M to link defence systems with AI", "pub_date": "2025-05-05", "type": "independent"},
+        {"url": "https://www.linkedin.com/posts/arondite_today-arondite-is-pleased-to-announce-the-activity-7323610497474301953-Yzwf", "title": "Arondite seed funding announcement (LinkedIn)", "pub_date": "2025-05-01", "type": "company"},
+        {"url": "https://www.arondite.com/newsrooms/arondite-awarded-multi-million-pound-contract-to-partner-with-british-armys-global-response-force-on-next-generation-mission-orchestration", "title": "Arondite awarded multi-million pound contract with British Army Global Response Force", "pub_date": "2025", "type": "company"},
+        {"url": "https://github.com/Daniellayeghi/Daniellayeghi.github.io/blob/main/robotics-index/data/companies/co-39.json", "title": "Robotics index audit record for Arondite (funding, customers, evidence gaps)", "pub_date": "2026-09-03", "type": "independent"},
+        {"url": "https://raw.githubusercontent.com/api-evangelist/providers/main/_providers/arondite.md", "title": "API Evangelist profile: Arondite (Cobalt description; no public API)", "pub_date": "2026-07-17", "type": "independent"},
+        {"url": "https://github.com/ArpitChhabra23306/RAG_prac/blob/main/docs/palantir.txt", "title": "Wikipedia-derived text: Arondite founded by Will Blyth (ex-British Army, Palantir, Helsing)", "pub_date": "2025", "type": "independent"}
+      ]
+    }
+  ],
+  "search_log": [
+    {"query": "WebSearch: Everfox cross domain solution contract Army 2025 2026 (budget exhausted, not executed)", "useful": false},
+    {"query": "WebSearch: Owl Cyber Defense data diode contract award 2025 2026 (budget exhausted)", "useful": false},
+    {"query": "WebSearch: Garrison Technology hardsec browser isolation UK MOD contract (budget exhausted)", "useful": false},
+    {"query": "WebSearch: Systematic SitaWare contract award 2025 2026 army (budget exhausted)", "useful": false},
+    {"query": "WebSearch: Helsing funding round valuation 2025 2026 (budget exhausted)", "useful": false},
+    {"query": "WebSearch: Quantum Systems Vector drone Bundeswehr contract 2025 2026 (budget exhausted)", "useful": false},
+    {"query": "WebSearch: Arondite defense AI startup funding Cobalt (budget exhausted)", "useful": false},
+    {"query": "Bigdata.com smart search x7 (Everfox, Helsing, Quantum Systems, Systematic, Owl, Arondite, Garrison) - out of credits", "useful": false},
+    {"query": "WebFetch company/wikipedia/news domains (everfox.com, owlcyberdefense.com, garrison.com, systematic.com, helsing.ai, quantum-systems.com, arondite.com, wikipedia, defensescoop, breakingdefense, defensenews, gao.gov) - egress blocked", "useful": false},
+    {"query": "curl usaspending.gov API and sbir.gov API for all seven firms - proxy 403", "useful": false},
+    {"query": "Domain reachability probe (60 domains) - only github.com / api.github.com / raw.githubusercontent.com reachable", "useful": true},
+    {"query": "Sibling scratchpad grep: B01/B08/S08/S09 mentions of target companies", "useful": true},
+    {"query": "GitHub code search: \"Helsing\" \"Series D\" \"Prima Materia\"", "useful": true},
+    {"query": "GitHub code search: \"Everfox\" \"Garrison\"", "useful": true},
+    {"query": "GitHub code search: \"SitaWare\" Army contract", "useful": true},
+    {"query": "GitHub code search: \"Quantum Systems\" \"Series C\" Vector", "useful": true},
+    {"query": "GitHub code search: \"Arondite\" Cobalt defence", "useful": true},
+    {"query": "GitHub code search: \"Owl Cyber Defense\"", "useful": true},
+    {"query": "GitHub code search: \"SitaWare\" Bundeswehr", "useful": true},
+    {"query": "GitHub code search: \"Garrison Technology\" funding", "useful": true},
+    {"query": "GitHub code search: \"Quantum Systems\" Bundeswehr Vector", "useful": true},
+    {"query": "GitHub code search: \"Helsing\" \"KIRK\" OHB", "useful": true},
+    {"query": "GitHub code search: \"Helsing\" \"HX-2\" Bundeswehr order", "useful": true},
+    {"query": "GitHub code search: \"Arondite\" Blyth", "useful": true},
+    {"query": "GitHub code search: \"Quantum-Systems\" \"U.S. Army\" Vector", "useful": true},
+    {"query": "GitHub code search: \"Everfox\" \"Trusted Thin Client\"", "useful": true},
+    {"query": "GitHub code search: \"Owl Cyber Defense\" \"Raise the Bar\"", "useful": true},
+    {"query": "GitHub code search: \"Garrison ULTRA\"", "useful": true},
+    {"query": "GitHub code search: \"Arondite\" \"Series A\"", "useful": true},
+    {"query": "GitHub code search: \"Owl Cyber Defense\" Tresys", "useful": true},
+    {"query": "GitHub code search: \"Garrison\" \"NM Capital\"", "useful": true},
+    {"query": "GitHub code search: \"SitaWare\" Ukraine", "useful": true},
+    {"query": "GitHub code search: \"Everfox\" \"cross domain\" contract", "useful": true},
+    {"query": "GitHub code search: \"SitaWare\" \"British Army\" / \"Marine Corps\" / \"Command Post Computing Environment\" (no results)", "useful": false},
+    {"query": "GitHub code search: \"Everfox\" TPG / \"Francisco Partners\" (noise or rate-limited)", "useful": false},
+    {"query": "GitHub code search: \"Owl Cyber Defense\" \"DC Capital\" (no results)", "useful": false},
+    {"query": "GitHub code search: \"Arondite\" \"16 Air Assault\" / \"multi-million\" (no results)", "useful": false},
+    {"query": "GitHub code search: \"Everfox\" Garrison acquisition completes (no results)", "useful": false},
+    {"query": "WebFetch GitHub: helsing-ai org, quantum-systems org, OwlCyberDefense org, garrison-technology org, everfox user", "useful": true},
+    {"query": "WebFetch GitHub: LW7776/Unicorn-Germany helsing.json (funding rounds with company-release citations)", "useful": true},
+    {"query": "WebFetch GitHub: vibewatch/startup Helsing report (06-customers, 05-product-tech, evidence)", "useful": true},
+    {"query": "WebFetch GitHub: vibewatch/startup Quantum Systems reports 2026-05-12 and 2026-09-24 (customers, financials, evidence, product, overview)", "useful": true},
+    {"query": "WebFetch GitHub: MilUX-Ltd/tally profiles (Quantum Systems, Helsing, Systematic) and folder listings", "useful": true},
+    {"query": "WebFetch GitHub: api-evangelist profiles (helsing, quantum-systems, arondite) and quantum-systems blogs listing", "useful": true},
+    {"query": "WebFetch GitHub: Thaarak/project-odyssey-companies DSEI 2025 everfox.html; codekiln Everfox.md; robotics-index co-39.json; sugaroverflow/lobbycat helsing.json", "useful": true}
+  ],
+  "notes": "TOOLING CONSTRAINTS: The session's WebSearch budget was already exhausted (200/200) before this batch began, Bigdata.com was out of credits, and the egress proxy blocked every non-GitHub domain (company sites, Wikipedia, news, sam.gov, usaspending.gov, sbir.gov, gao.gov). Research therefore relied on (a) GitHub-hosted mirrors, datasets and third-party diligence files that cite primary sources with dates, (b) sibling batch/segment files in the scratchpad, and (c) clearly labelled analyst recall. Consequences: no usaspending/sam.gov contract values for Everfox, Owl or Systematic Inc.; no SBIR checks (none of these firms is expected to be SBIR-dependent); company web pages were not read directly, so product-name details for Everfox and Owl are MEDIUM confidence. Strongest-evidence records: Quantum Systems (many dated primary/secondary citations incl. PRNewswire and company releases), Helsing (company releases mirrored in structured datasets), Systematic (euro-sd/company releases). Weakest: Owl Cyber Defense and Garrison (contract data absent), Arondite (first-party only). Items explicitly NOT verified and omitted or flagged: Australian/UK SitaWare selections, Everfox-Garrison acquisition date and TPG deal terms, Owl ownership by DC Capital, Quantum-Systems Inc. Moorpark HQ, Helsing Grob Aircraft acquisition. Segment IDs follow the sweep.js taxonomy (S01 C2 apps, S02 data fabric, S03 ISR collection, S04 PED, S06 edge, S07 geospatial/SA, S08 coalition interoperability, S09 cloud/DevSecOps/ATO, S10 identity/zero trust/CDS, S12 EW, S13 autonomy C2). Recommendation for the orchestrator: re-run usaspending (recipient names: 'FORCEPOINT FEDERAL LLC', 'EVERFOX', 'OWL CYBER DEFENSE SOLUTIONS LLC', 'SYSTEMATIC INC', 'QUANTUM-SYSTEMS INC') and sam.gov once the proxy or search budget allows."
+}

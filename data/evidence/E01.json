@@ -1,0 +1,2623 @@
+{
+ "evidence_id": "E01",
+ "name": "GAO and DoD Inspector General findings on C2, interoperability, networks, data and software",
+ "summary": "Across 2019-2026, GAO and the DoD Inspector General document a consistent pattern in the C4ISR ecosystem: the joint C2 concept (JADC2/CJADC2) was launched in 2019 without defined contributing systems, a resourced/authoritative coordinating body, or (as of April 2025) any framework to guide investments or measure progress, so the services continue to build C2 'largely in isolation' while 'overly restrictive data classification' blocks data sharing and no DOD entity owns that problem (GAO-23-105495, GAO-25-106454). Domain programs show the same shape: ABMS began without a plan or cost estimate (GAO-20-389); Space C2 replacement has been late and over budget 'for decades' with SPADOC still in use in 2023 (GAO-20-146, GAO-22-104685, GAO-23-105920); GPS M-code and alternative PNT lag with proprietary receivers that 'cannot be upgraded affordably' (GAO-21-320SP, GAO-24-106841); EMSO governance was found deficient (GAO-21-64). Cross-cutting enablers are repeatedly flagged: weapon programs still use waterfall despite the 2020 software pathway (GAO-23-105867); IT programs miss zero-trust and metrics requirements (GAO-24-106912, GAO-25-107649); MOSA is legally required but rarely planned or enforced and vendor licensing practices restrict cloud portability (GAO-25-106931, GAO-23-106290); AI acquisition lacks usable data, skilled staff, guidance and lessons-learned capture (GAO-22-104765 through GAO April 2026); and enterprise data/AI governance is unstable (DODIG-2025-039 on CDAO, DoD IG 2026 Advana audit with 10 of 12 recommendations rejected, Advana's recompete cancellation and split into the War Data Platform). GAO's 2026 annual assessment says average capability delivery now exceeds 12 years while acquisition staffing shrank in 2025. DoD leadership itself now names ATOs, data sharing and classification as 'blockers' to be eliminated (Jan 2026 AI strategy memo), and DoD CIO's 2025 DevSecOps study records authorizing officials 'biased to caution' and unclear reciprocity. Evidence is thin or unretrievable for DCGS, Project Overmatch, NGC2, JWCC performance, contested-logistics C2 and the substantive findings of DODIG-2025-126 on mission-partner sharing; absence of reports there is not evidence of absence of problems. For founders, the oversight record validates persistent demand for interoperability/translation, classification-aware data handling, ATO/compliance acceleration, open-architecture PNT/fusion software and data-quality tooling, but also shows that buyers are fragmented, under-staffed, and prone to program restructuring, so revenue evidence must come from repeat orders rather than from prototype awards or contract ceilings.",
+ "findings": [
+  {
+   "id": "E01-F1",
+   "title": "GAO-25-106454: six years into CJADC2, DOD still has no framework to guide investments or track progress; services build C2 in isolation",
+   "detail": "GAO's April 8, 2025 report (requested by a House report) found DOD 'has attempted to define and guide CJADC2 efforts since its inception' in 2019 but 'has yet to build a framework that can guide CJADC2-related investments across DOD or track progress toward its goals.' Military departments and other DOD entities 'have concurrently pursued their own independent data integration capabilities.' GAO interviewed all 11 combatant commands and the CJADC2 cross-functional team. CJADC2 is described as 'not itself a system' but a way to use data and analytics; the target is moving from a 'swivel chair' model (analyst manually re-keys data between systems) to an integrated model.",
+   "quote_or_paraphrase": "In the absence of clear direction, warfighting entities will continue to pursue their command and control projects largely in isolation, which will likely result in achieving CJADC2 much more slowly and inefficiently, if at all.",
+   "source_title": "Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework (GAO-25-106454)",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04-08",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S03"
+   ],
+   "chain_steps": [
+    "CJADC2 launched 2019",
+    "GAO-23-105495 Jan 2023 found details undefined",
+    "GAO-25-106454 Apr 2025 finds no framework, isolated service efforts",
+    "DOD concurred with 2 of 3 recs, partially with 1"
+   ],
+   "pain_keywords": [
+    "swivel chair",
+    "largely in isolation",
+    "has yet to build a framework",
+    "independent data integration capabilities",
+    "track progress"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Strongest single public statement that the joint C2 data-integration problem remains unsolved and fragmented by service; a startup selling integration/translation between service-specific C2 data models is selling into a documented, unowned gap, but the same fragmentation means there is no single enterprise buyer."
+  },
+  {
+   "id": "E01-F2",
+   "title": "GAO-25-106454: overly restrictive data classification is a 'significant hindrance' to sharing C2 data, and no DOD entity owns the fix",
+   "detail": "GAO found 'several critical challenges to achieving CJADC2 that DOD has yet to formally identify and address.' The example given is 'overly restrictive data classification' as 'a significant hindrance to sharing command and control data.' Officials 'were not aware of an entity working on a solution to this or several other critical challenges,' and CJADC2 leadership told GAO 'addressing these challenges was beyond their purview.' GAO recommended the Secretary of Defense 'identify, comprehensively assess, and address key challenges.' MeriTalk (Apr 8, 2025) confirms the quotes and that DOD 'mostly concurred.'",
+   "quote_or_paraphrase": "Overly restrictive data classification is a significant hindrance to sharing command and control data. Further, officials GAO spoke with were not aware of an entity working on a solution to this or several other critical challenges.",
+   "source_title": "GAO-25-106454 (Highlights) and MeriTalk coverage 'GAO Pushes DoD to Create Framework for CJADC2 Investments'",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04-08",
+   "source_tier": 1,
+   "segment_ids": [
+    "S03",
+    "S06",
+    "S09"
+   ],
+   "chain_steps": [
+    "Data classified at system level",
+    "Cross-domain sharing blocked",
+    "No owner for classification reform",
+    "GAO rec 3 (Apr 2025) open"
+   ],
+   "pain_keywords": [
+    "overly restrictive data classification",
+    "beyond their purview",
+    "not aware of an entity working on a solution",
+    "cross-domain"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Points to demand for classification-aware data handling, automated tagging/downgrade workflows and cross-domain solutions; however, CDS is an NSA/NCDSMO-accredited, ITAR/clearance-heavy niche that is hard for a two-student, non-U.S.-person-founder team to enter directly."
+  },
+  {
+   "id": "E01-F3",
+   "title": "GAO-25-106454: no mechanism to share lessons learned from CJADC2 experimentation, risking duplicative efforts",
+   "detail": "GAO found DOD 'is conducting activities aimed at demonstrating selected capabilities, but there is limited awareness of experimentation lessons learned that could lead to duplicative efforts and slower progress toward CJADC2 goals.' Three recommendations: (1) a framework to evaluate whether military organization investments align with CJADC2 goals, with clear guidance for C2 investments and a means to track progress; (2) an approach to consolidate and share lessons learned from experimentation and real-world activities; (3) identify and address key challenges. DOD concurred with two and partially concurred with one.",
+   "quote_or_paraphrase": "DOD is conducting activities aimed at demonstrating selected capabilities, but there is limited awareness of experimentation lessons learned that could lead to duplicative efforts and slower progress toward CJADC2 goals.",
+   "source_title": "GAO-25-106454 Recommendations for Executive Action",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04-08",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S14"
+   ],
+   "chain_steps": [
+    "Service experiments (Project Convergence, Overmatch, ABMS, GIDE) run separately",
+    "Lessons not consolidated",
+    "GAO rec 2 (Apr 2025)"
+   ],
+   "pain_keywords": [
+    "duplicative efforts",
+    "lessons learned",
+    "experimentation"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Suggests an unmet need for experimentation data capture, after-action analytics and cross-exercise knowledge management; low-barrier software niche but the buyer (Joint Staff J6 / CFT) is under-resourced (see F4)."
+  },
+  {
+   "id": "E01-F4",
+   "title": "GAO-23-105495: JADC2 details undefined; the JADC2 Cross-Functional Team lacked personnel and authority to direct other offices",
+   "detail": "GAO's January 13, 2023 report found DOD 'has not yet defined the details, such as which existing systems will contribute to JADC2 and what future capabilities need to be developed.' Bloomberg (Jan 13 and Jan 17, 2023) reported that the Pentagon told GAO the cross-functional team it established to coordinate JADC2 and set priorities 'lacks the personnel to complete its task,' that GAO 'determined the team lacks authority to direct other offices,' and that an Air Force review recommended 10 additional personnel to be included in the Joint Staff's FY2024 budget request. DOD had a Dec. 31, 2022 deadline for a tools/cost/schedule response.",
+   "quote_or_paraphrase": "The Pentagon told GAO that a cross-functional team it established to coordinate the effort and set priorities lacks the personnel to complete its task, and GAO determined the team lacks authority to direct other offices.",
+   "source_title": "Battle Management: DOD and Air Force Continue to Define Joint Command and Control Efforts (GAO-23-105495); Bloomberg News 'DOD Admits Delay, Deficiencies Hamstringing Joint Command Plan'",
+   "source_url": "https://www.gao.gov/products/gao-23-105495",
+   "pub_date": "2023-01-13",
+   "event_date": "2023-01-13",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01"
+   ],
+   "chain_steps": [
+    "JADC2 strategy signed 2021, summary released Mar 2022",
+    "GAO Jan 2023: systems contributing undefined, CFT under-resourced",
+    "GAO Apr 2025: still no framework (persists)"
+   ],
+   "pain_keywords": [
+    "has not yet defined",
+    "lacks the personnel",
+    "lacks authority",
+    "delays and setbacks"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Evidence that the joint-level 'customer' for JADC2 integration has weak authority and budget; startups should expect service-level (Army/USAF/USN) rather than joint-level procurement of C2 software."
+  },
+  {
+   "id": "E01-F5",
+   "title": "GAO-23-105495: ABMS re-scoped into discrete efforts (Capability Release 1 for F-35-to-C2 connectivity) with prototypes planned for 2024",
+   "detail": "The same report states the Air Force defined two ABMS efforts, with Capability Release 1 intended to enable F-35 data connectivity with command and control centers and prototypes planned for delivery in 2024. GAO's topic tags include 'Systems interoperability', 'Cost estimates' and 'Acquisition planning'. ABMS is described as the Air Force's contribution to the joint effort, 'a secure communications network that allows commanders and warfighters' to share information. Whether CR1 prototypes were delivered on schedule is not established here.",
+   "quote_or_paraphrase": "The Air Force has defined two ABMS efforts: Capability Release 1 intends to enable F-35 data connectivity with command and control centers, and the Air Force plans to deliver prototypes in 2024.",
+   "source_title": "GAO-23-105495 (search summary and GovHawkDC GAO metadata mirror record)",
+   "source_url": "https://www.gao.gov/products/gao-23-105495",
+   "pub_date": "2023-01-13",
+   "event_date": "2023-01-13",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01",
+    "S04"
+   ],
+   "chain_steps": [
+    "ABMS 2019 broad concept",
+    "GAO-20-389 Apr 2020 no plan",
+    "2021-2023 narrowed to Capability Releases / DAF Battle Network",
+    "CR1 prototypes planned 2024"
+   ],
+   "pain_keywords": [
+    "interoperability",
+    "data connectivity",
+    "prototype"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Illustrates the pattern of large C2 concepts being cut down into narrow, gateway-style deliverables (platform-to-C2 data links); gateway/translation products are a recurring procurement shape."
+  },
+  {
+   "id": "E01-F6",
+   "title": "GAO-20-389: Air Force had no complete plan, cost estimate or affordability analysis for ABMS; management structure and decision authority not formalized",
+   "detail": "GAO's April 16, 2020 report found the Air Force 'hasn't developed a complete plan for the system - like identifying which technologies would be' matured. GAO recommended the Air Force develop and brief Congress quarterly on a plan to mature technologies, a cost estimate and an affordability analysis, and formalize the ABMS management structure and decision-making authorities. ABMS was described as a cloud-based data-sharing network connecting sensors on drones, aircraft, ships and other weapon systems to produce a real-time operational picture across domains.",
+   "quote_or_paraphrase": "We found the Air Force hasn't developed a complete plan for the system - like identifying which technologies would be [matured] ... GAO recommended ... a plan to mature technologies, a cost estimate, and an affordability analysis, and ... formalize the ABMS management structure and decision-making authorities.",
+   "source_title": "Defense Acquisitions: Action Is Needed to Provide Clarity and Mitigate Risks of the Air Force's Planned Advanced Battle Management System (GAO-20-389)",
+   "source_url": "https://www.gao.gov/products/gao-20-389",
+   "pub_date": "2020-04-16",
+   "event_date": "2020-04-16",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01"
+   ],
+   "chain_steps": [
+    "ABMS conceived 2018-19 as JSTARS recap replacement",
+    "GAO May 2019 testimony: capabilities undetermined",
+    "GAO Apr 2020: no plan/cost/affordability",
+    "Congress fenced ABMS funds FY21 (context, not verified here)"
+   ],
+   "pain_keywords": [
+    "no complete plan",
+    "cost estimate",
+    "affordability",
+    "decision-making authorities"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Shows how oversight forces 'internet of military things' visions into accountable, narrowly-scoped programs; startups pitching broad 'battle network' platforms face the same credibility problem in front of program offices."
+  },
+  {
+   "id": "E01-F7",
+   "title": "GAO-19-456T: in 2019 the Air Force was still determining what capabilities ABMS should provide",
+   "detail": "In May 2, 2019 testimony on the F-35 and ABMS, GAO noted ABMS was intended to replace systems that track air, land and sea targets and that the Air Force was still determining the exact capabilities it would like ABMS to provide.",
+   "quote_or_paraphrase": "The Air Force was still determining the exact capabilities it would like ABMS to provide.",
+   "source_title": "Defense Acquisitions: Observations on the F-35 and Air Force's Advanced Battle Management System (GAO-19-456T)",
+   "source_url": "https://www.gao.gov/products/gao-19-456t",
+   "pub_date": "2019-05-02",
+   "event_date": "2019-05-02",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01"
+   ],
+   "chain_steps": [
+    "ABMS start 2018",
+    "GAO-19-456T May 2019",
+    "GAO-20-389 Apr 2020",
+    "GAO-23-105495 Jan 2023"
+   ],
+   "pain_keywords": [
+    "still determining",
+    "capabilities"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Baseline for the 2019-2025 persistence chain on air-domain battle management requirements instability."
+  },
+  {
+   "id": "E01-F8",
+   "title": "DODIG-2025-126: DoD IG evaluated the CJADC2 line of effort for modernizing mission partner information sharing (report released July 18, 2025); findings not publicly retrievable here",
+   "detail": "DoD OIG announced Project No. D2024-DEV0SI-0130.000 on July 15, 2024 with the objective 'to assess the effectiveness with which the DoD developed and implemented the CJADC2 line of effort to modernize mission partner information sharing.' The resulting report, DODIG-2025-126, 'Evaluation of a Line of Effort in the DoD's Implementation of the Combined Joint All Domain Command and Control (CJADC2) Strategy,' was released July 18, 2025. The dodig.mil pages were blocked by the research environment's egress proxy, so the specific findings, recommendations and management responses could not be read. Public evidence insufficient on findings. Context: the CJADC2 strategy's five lines of effort include modernizing mission-partner information sharing (SIGNAL Magazine, Aug 2025).",
+   "quote_or_paraphrase": "Objective: assess the effectiveness with which the DoD developed and implemented the Combined Joint All-Domain Command and Control (CJADC2) line of effort to modernize mission partner information sharing.",
+   "source_title": "DoD OIG, Evaluation of a Line of Effort in the DoD's Implementation of the CJADC2 Strategy (Report No. DODIG-2025-126)",
+   "source_url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+   "pub_date": "2025-07-18",
+   "event_date": "2025-07-18",
+   "source_tier": 1,
+   "segment_ids": [
+    "S06",
+    "S01"
+   ],
+   "chain_steps": [
+    "Project announced 2024-07-15",
+    "Report released 2025-07-18",
+    "Findings: public evidence insufficient (site unreachable from this environment)"
+   ],
+   "pain_keywords": [
+    "mission partner information sharing",
+    "Mission Partner Environment",
+    "coalition"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Existence of a dedicated IG evaluation signals sustained oversight interest in MPE; a downstream agent with dodig.mil access should extract the findings, since MPE is the segment most relevant to a German-founder allied-interoperability angle."
+  },
+  {
+   "id": "E01-F9",
+   "title": "GAO-20-146: three prior space C2 programs ran late and over budget; legacy SPADOC operates on a mainframe discontinued in 1998; Space C2 adopted Agile before DOD guidance existed",
+   "detail": "GAO's October 30, 2019 report on Space Command and Control found 'the past three programs to attempt this have ended up significantly behind schedule and over budget' and 'deferred more difficult work.' SPADOC 'is now significantly beyond its estimated end-of-life, and is operating on an outdated computer mainframe - production of which was discontinued in 1998.' A 2026 systems-engineering knowledge pack summarizing GAO's Agile work describes Space C2 as 'one of the first DOD software-intensive programs to move from Waterfall into an Agile framework while the governing acquisition guidance did not yet cover Agile' (guidance lag).",
+   "quote_or_paraphrase": "SPADOC is now significantly beyond its estimated end-of-life, and is operating on an outdated computer mainframe - production of which was discontinued in 1998.",
+   "source_title": "Space Command and Control: Comprehensive Planning and Oversight Could Help DOD Acquire Critical Capabilities and Address Challenges (GAO-20-146)",
+   "source_url": "https://www.gao.gov/products/gao-20-146",
+   "pub_date": "2019-10-30",
+   "event_date": "2019-10-30",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05",
+    "S13"
+   ],
+   "chain_steps": [
+    "JMS/ISC2 predecessors failed (per GAO)",
+    "Space C2 program 2018 Agile pivot",
+    "GAO-20-146 Oct 2019",
+    "GAO-22-104685 Dec 2021",
+    "GAO-23-105920 Jun 2023: SPADOC still in use"
+   ],
+   "pain_keywords": [
+    "significantly behind schedule and over budget",
+    "deferred more difficult work",
+    "beyond end-of-life",
+    "guidance lag"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Space domain awareness C2 is a documented decade-plus failure zone; commercial SSA data/analytics vendors have entered, but the core C2 replacement is a Space Force program of record with entrenched integrators."
+  },
+  {
+   "id": "E01-F10",
+   "title": "GAO-22-104685: 'for decades' space C2 efforts have gone over budget, been late and left key capabilities undelivered; annual reporting could be enhanced",
+   "detail": "GAO's December 22, 2021 report states DOD relies on space- and ground-based systems for C2 of satellites; 'for decades, efforts to improve space command and control have gone over budget, been late, and left key capabilities undelivered.' Congress in 2019 required annual Air Force reports; GAO found opportunities to enhance them.",
+   "quote_or_paraphrase": "For decades, efforts to improve space command and control have gone over budget, been late, and left key capabilities undelivered.",
+   "source_title": "Space Command and Control: Opportunities Exist to Enhance Annual Reporting (GAO-22-104685)",
+   "source_url": "https://www.gao.gov/products/gao-22-104685",
+   "pub_date": "2021-12-22",
+   "event_date": "2021-12-22",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05"
+   ],
+   "chain_steps": [
+    "Congress mandates annual reports 2019",
+    "GAO Dec 2021 reporting gaps",
+    "GAO Jun 2023 persistent delays"
+   ],
+   "pain_keywords": [
+    "over budget",
+    "late",
+    "key capabilities undelivered"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Persistence evidence for S05; buyer (USSF/Space Systems Command) has a congressional reporting burden that favors vendors who can show measurable increments."
+  },
+  {
+   "id": "E01-F11",
+   "title": "GAO-23-105920: Space C2 replacement reports lack context and consistent metrics; ~90 FTE on ATLAS/messaging in mid-2022; users still relied on SPADOC as of June 2023",
+   "detail": "GAO's June 8, 2023 report found reports on the Space C2 program 'don't include context, consistent metrics, or other information' to convey progress 'amid persistent delays.' Search-result excerpts of the report state Space C2 reported 90 full-time-equivalent personnel supporting ATLAS and messaging development during program increment 15 (May-July 2022), and that users continued reliance on SPADOC as of June 2023. The full report body could not be retrieved from this environment.",
+   "quote_or_paraphrase": "Reports on the system replacement program within DOD and to Congress don't include context, consistent metrics, or other information that would give a [clear picture of progress] ... amid persistent delays.",
+   "source_title": "Space Command and Control: Improved Tracking and Reporting Would Clarify Progress amid Persistent Delays (GAO-23-105920)",
+   "source_url": "https://www.gao.gov/products/gao-23-105920",
+   "pub_date": "2023-06-08",
+   "event_date": "2023-06-08",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05",
+    "S13"
+   ],
+   "chain_steps": [
+    "ATLAS development in Agile increments",
+    "PI 15 May-Jul 2022: ~90 FTE",
+    "Jun 2023 SPADOC still operational",
+    "Later status: public evidence insufficient here"
+   ],
+   "pain_keywords": [
+    "persistent delays",
+    "consistent metrics",
+    "SPADOC reliance",
+    "ATLAS"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Agile-program measurement and reporting is itself a pain point GAO repeatedly flags; tooling that turns sprint data into oversight-grade metrics has a plausible government buyer but small TAM."
+  },
+  {
+   "id": "E01-F12",
+   "title": "GAO-21-105298 and GAO-23-105611: DOD stood up the software acquisition pathway but had not collected data on it, and further actions were needed for modernization",
+   "detail": "GAO's September 30, 2021 report found DOD 'established a software acquisition pathway emphasizing rapid delivery and user engagement, for example, through Agile software development,' that programs such as F-35 had begun using it, 'but DOD has yet to collect the' data needed to assess it. GAO-23-105611 (2023), 'Software Acquisition: Additional Actions Needed to Help DOD Implement Future Modernization Efforts,' was located by title; its body could not be retrieved (public evidence insufficient on specifics).",
+   "quote_or_paraphrase": "DOD has yet to collect the [data on the software acquisition pathway].",
+   "source_title": "DOD Software Acquisition: Status of and Challenges Related to Reform Efforts (GAO-21-105298); Software Acquisition: Additional Actions Needed to Help DOD Implement Future Modernization Efforts (GAO-23-105611)",
+   "source_url": "https://www.gao.gov/products/gao-21-105298",
+   "pub_date": "2021-09-30",
+   "event_date": "2021-09-30",
+   "source_tier": 1,
+   "segment_ids": [
+    "S13"
+   ],
+   "chain_steps": [
+    "DODI 5000.87 software pathway Oct 2020",
+    "GAO Sep 2021: no data collected",
+    "GAO Jul 2023: weapon programs still waterfall",
+    "DoD CIO Mar 2025 DevSecOps study"
+   ],
+   "pain_keywords": [
+    "software acquisition pathway",
+    "rapid delivery",
+    "user engagement",
+    "yet to collect"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "The software pathway (DODI 5000.87) is the most startup-friendly acquisition route; GAO's finding that DOD lacked data on it implies immature but real adoption."
+  },
+  {
+   "id": "E01-F13",
+   "title": "GAO-23-105867: DOD weapon programs largely have not implemented Agile; still using waterfall despite 2020 pathway reforms",
+   "detail": "GAO's July 20, 2023 report found DOD's ability to respond to threats 'is increasingly determined by its ability to rapidly develop and deploy software,' but changes made in 2020 'have largely not been implemented in some weapons programs' (Bloomberg, Jul 21, 2023). DOD 'is relying on an outdated waterfall system of software development and hasn't moved to the more iterative Agile system.' GAO called for changes to requirements, oversight and tools; the report's topic tags include 'Command and control systems.'",
+   "quote_or_paraphrase": "The Pentagon is failing to apply its own updated software development processes in weapons programs, increasing failure risk and potentially setting its efforts back by years.",
+   "source_title": "Defense Software Acquisitions: Changes to Requirements, Oversight, and Tools Needed for Weapon Programs (GAO-23-105867); Bloomberg 'Pentagon Weapons Software Built Using Obsolete Systems, GAO Says'",
+   "source_url": "https://www.gao.gov/products/gao-23-105867",
+   "pub_date": "2023-07-20",
+   "event_date": "2023-07-20",
+   "source_tier": 1,
+   "segment_ids": [
+    "S13",
+    "S01"
+   ],
+   "chain_steps": [
+    "2020 adaptive acquisition framework",
+    "GAO Jul 2023 waterfall persists",
+    "GAO IT assessments 2024-2025: 11 of 24 business programs Agile"
+   ],
+   "pain_keywords": [
+    "waterfall",
+    "Agile",
+    "requirements",
+    "oversight",
+    "tools"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "C2 software embedded in weapon programs is still procured waterfall-style; a startup's fast iteration is a mismatch with the program office's oversight cadence unless it enters via a software-pathway or OTA prototype."
+  },
+  {
+   "id": "E01-F14",
+   "title": "GAO-25-107649 (June 2025): of 24 major DOD IT business programs ($10.9B FY23-25), 2 had no cybersecurity strategy, 4 had no zero-trust plan for the 2027 deadline, and only 11 used Agile",
+   "detail": "GAO's June 12, 2025 IT Systems Annual Assessment reviewed 24 programs. Two 'didn't have a strategy in place to reduce cybersecurity threats'; four 'hadn't developed plans to implement ... zero trust architecture by the 2027 deadline'; 22 of 24 reported an approved cybersecurity strategy and 20 of 24 reported implementing zero trust. Eleven of 24 used Agile, but 3 of those 11 did not use required metrics/tools for customer satisfaction and progress. Fourteen programs reported cost and/or schedule changes since Jan 2023 (cost increases $6.1M-$815.5M, median $173.5M; delays 3-48 months, median 15 months). Persistence: GAO's June 2022 assessment found 10 programs without an approved cybersecurity strategy; by March 2025 two still lacked one. The Washington Post (Sep 17, 2026) cited this report while describing 'cybersecurity modernization debt that the Pentagon has never fully paid.'",
+   "quote_or_paraphrase": "Four programs had not developed plans to implement zero trust architecture in their cybersecurity frameworks by DOD's 2027 deadline. GAO will continue to monitor the department's progress.",
+   "source_title": "IT Systems Annual Assessment: DOD Needs to Improve Performance Reporting and Cybersecurity Planning (GAO-25-107649); MeriTalk, TechRadar, The Register coverage",
+   "source_url": "https://www.gao.gov/products/gao-25-107649",
+   "pub_date": "2025-06-12",
+   "event_date": "2025-06-12",
+   "source_tier": 1,
+   "segment_ids": [
+    "S09",
+    "S13"
+   ],
+   "chain_steps": [
+    "DoD Zero Trust Strategy Nov 2022 (target FY2027)",
+    "GAO Jul 2024 (GAO-24-106912): metrics and cyber gaps",
+    "GAO Jun 2025: 4 programs no ZT plan",
+    "WaPo Sep 2026: modernization debt"
+   ],
+   "pain_keywords": [
+    "zero trust",
+    "2027 deadline",
+    "cybersecurity strategy",
+    "Agile metrics",
+    "schedule delays"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Zero-trust compliance tooling and continuous-monitoring products have a dated, mandated demand signal (FY2027); but the buyers are large IT programs served by incumbents, and the assessment covers business systems, not tactical C2."
+  },
+  {
+   "id": "E01-F15",
+   "title": "GAO-24-106912 (July 2024): $9.1B on 21 IT business programs FY22-24; software metrics weak and cybersecurity/reporting gaps continued",
+   "detail": "GAO's July 11, 2024 annual assessment reviewed 21 programs; 10 were developing software with Agile. GAO titled the report 'DOD Needs to Strengthen Software Metrics and Address Continued Cybersecurity and Reporting Gaps' and reviewed DOD's efforts to adopt zero trust cybersecurity principles pursuant to the FY2022 NDAA direction to develop a zero trust strategy and model architecture.",
+   "quote_or_paraphrase": "DOD spent, or planned to spend, $9.1 billion on IT business programs in FYs 2022-24 ... we reviewed 21 of those programs and found 10 are developing software and using an Agile approach.",
+   "source_title": "IT Systems Annual Assessment: DOD Needs to Strengthen Software Metrics and Address Continued Cybersecurity and Reporting Gaps (GAO-24-106912)",
+   "source_url": "https://www.gao.gov/products/gao-24-106912",
+   "pub_date": "2024-07-11",
+   "event_date": "2024-07-11",
+   "source_tier": 1,
+   "segment_ids": [
+    "S09",
+    "S13"
+   ],
+   "chain_steps": [
+    "FY2022 NDAA zero trust direction",
+    "GAO Jul 2024",
+    "GAO Jun 2025 persists"
+   ],
+   "pain_keywords": [
+    "software metrics",
+    "cybersecurity gaps",
+    "reporting gaps"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Confirms multi-year persistence of the same software-measurement and cyber-planning gaps."
+  },
+  {
+   "id": "E01-F16",
+   "title": "GAO-23-106247 (Sept 2023): DOD committed ~$3B to cloud contracts in FY2022 but cannot track data egress fees department-wide (JWCC context)",
+   "detail": "GAO found DOD 'does not have the capability to track and report on data egress fees' and that 'DOD's contract-specific tools do not track cloud expenditures, including data egress fees department-wide.' JWCC is described as DISA's enterprise cloud contract with four commercial providers at all security levels. A separate GAO bid-protest decision (B-423967, G2 Ops) concerned a JWCC task order to AWS.",
+   "quote_or_paraphrase": "The department does not have the capability to track and report on data egress fees, and DOD's contract-specific tools do not track cloud expenditures, including data egress fees department-wide.",
+   "source_title": "Cloud Computing: DOD Needs to Improve Tracking of Data User Fees (GAO-23-106247)",
+   "source_url": "https://www.gao.gov/products/gao-23-106247",
+   "pub_date": "2023-09-12",
+   "event_date": "2023-09-12",
+   "source_tier": 1,
+   "segment_ids": [
+    "S10"
+   ],
+   "chain_steps": [
+    "JEDI canceled 2021",
+    "JWCC awarded Dec 2022 (4 CSPs)",
+    "GAO Sep 2023 egress-fee tracking gap"
+   ],
+   "pain_keywords": [
+    "data egress fees",
+    "cloud expenditures",
+    "cannot track"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Cloud cost visibility/FinOps for DOD tenants is a concrete, unglamorous gap; hyperscaler partners and FinOps vendors already compete, so differentiation would need IL5/IL6 specificity."
+  },
+  {
+   "id": "E01-F17",
+   "title": "GAO-23-106290 (Sept 2023): restrictive software-license practices (e.g., extra fees to run software on third-party clouds) limit DOD cloud migration",
+   "detail": "GAO found 'software licenses and restrictive vendor practices can limit or prevent' moving data and software to the cloud; 'some vendors charge extra fees to use their software with third-party cloud providers.' DOD officials said restrictive practices generally affected [migration]; GAO called for better guidance and plans to mitigate them. Topic tags include 'Systems interoperability' and 'License agreements.'",
+   "quote_or_paraphrase": "Software licenses and restrictive vendor practices can limit or prevent such efforts. For example, some vendors charge extra fees to use their software with third-party cloud providers.",
+   "source_title": "DOD Software Licenses: Better Guidance and Plans Needed to Ensure Restrictive Practices Are Mitigated (GAO-23-106290)",
+   "source_url": "https://www.gao.gov/products/gao-23-106290",
+   "pub_date": "2023-09-12",
+   "event_date": "2023-09-12",
+   "source_tier": 1,
+   "segment_ids": [
+    "S10",
+    "S13"
+   ],
+   "chain_steps": [
+    "Cloud-first mandates",
+    "Vendor licensing restrictions",
+    "GAO Sep 2023 rec for guidance"
+   ],
+   "pain_keywords": [
+    "restrictive vendor practices",
+    "vendor lock-in",
+    "software licenses",
+    "third-party cloud"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Official documentation of vendor lock-in as a live DOD problem; a startup with permissive licensing and cloud-portable deployment can use this as a selling point, and GAO-25-106931 (MOSA) reinforces it."
+  },
+  {
+   "id": "E01-F18",
+   "title": "GAO-25-106931 (Jan 2025): only 14 of 20 programs implemented MOSA to some extent; none analyzed MOSA costs vs. benefits; 14 recommendations; GAO official says MOSA implementation still lagging (June 2026)",
+   "detail": "GAO reviewed 20 programs started after 2016 MOSA legislation. 'GAO found that 14 of the 20 programs it reviewed reported implementing a MOSA to at least some extent. Other programs cited barriers ... such as added cost and time.' 'None of the 20 programs GAO reviewed conducted a formal analysis of costs and benefits for a MOSA because DOD's policy does not explicitly require one.' 'Most programs did not address all key MOSA planning elements.' GAO made 14 recommendations; DOD concurred. Defense Daily (Jun 10, 2026) reported a GAO official saying that although MOSA has been required for MDAPs since Jan 2019 and other acquisitions since Jan 2021, 'few programs are implementing the standard.' An HII executive (Nov 2025) argued acquisition 'continues to prioritize closed, proprietary architectures' and warned venture-backed startups could 'replace one proprietary problem with another.'",
+   "quote_or_paraphrase": "None of the 20 programs GAO reviewed conducted a formal analysis of costs and benefits for a MOSA because DOD's policy does not explicitly require one ... DOD's process for coordinating MOSAs across portfolios does not ensure the level of collaboration needed.",
+   "source_title": "Weapon Systems Acquisition: DOD Needs Better Planning to Attain Benefits of Modular Open Systems (GAO-25-106931); Defense Daily 'MOSA Implementation By Pentagon Lagging, GAO Official Says'",
+   "source_url": "https://www.gao.gov/products/gao-25-106931",
+   "pub_date": "2025-01-22",
+   "event_date": "2025-01-22",
+   "source_tier": 1,
+   "segment_ids": [
+    "S13",
+    "S01",
+    "S02"
+   ],
+   "chain_steps": [
+    "10 USC 4401 MOSA requirement 2016-2019",
+    "GAO Jan 2025: planning gaps",
+    "GAO official Jun 2026: still lagging",
+    "Army NGC2 and interceptor programs mandate MOSA (2025-2026 press)"
+   ],
+   "pain_keywords": [
+    "modular open systems",
+    "vendor lock-in",
+    "closed, proprietary architectures",
+    "interface specifications",
+    "costs and benefits"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Open-interface compliance is both a policy tailwind and a trap: programs say they want MOSA but rarely enforce it, and incumbents 'resist sharing interface specifications,' which is exactly the moat a small integrator must penetrate."
+  },
+  {
+   "id": "E01-F19",
+   "title": "GAO-21-68 and GAO-22-104695: Cyber Command's Joint Cyber Warfighting Architecture had no defined interoperability goals (2020); by 2022 governance improved but metrics still lacking",
+   "detail": "GAO's November 19, 2020 report: officials said 'the main feature of the JCWA concept is interoperability, or the ability to share information among its systems. But Cyber Command has not defined JCWA interoperability goals for the systems.' GAO's March 30, 2022 follow-up found DOD implemented prior recommendations by enhancing governance 'to ensure the JCWA systems work together' and started evaluating systems, 'but doesn't yet' have metrics to assess warfighting capabilities.",
+   "quote_or_paraphrase": "Command officials told us that the main feature of the JCWA concept is interoperability ... But Cyber Command has not defined JCWA interoperability goals for the systems.",
+   "source_title": "Defense Acquisitions: Joint Cyber Warfighting Architecture Would Benefit from Defined Goals and Governance (GAO-21-68); Defense Acquisitions: Cyber Command Needs to Develop Metrics to Assess Warfighting Capabilities (GAO-22-104695)",
+   "source_url": "https://www.gao.gov/products/gao-21-68",
+   "pub_date": "2020-11-19",
+   "event_date": "2020-11-19",
+   "source_tier": 1,
+   "segment_ids": [
+    "S09",
+    "S03"
+   ],
+   "chain_steps": [
+    "JCWA concept 2019",
+    "GAO Nov 2020: no interoperability goals",
+    "GAO Mar 2022: governance fixed, metrics missing"
+   ],
+   "pain_keywords": [
+    "interoperability goals",
+    "governance",
+    "metrics",
+    "systems work together"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "A second, non-JADC2 example of the same failure mode (architecture-by-vision without interoperability definitions); recurring across domains, which supports demand for interoperability test/verification tooling."
+  },
+  {
+   "id": "E01-F20",
+   "title": "GAO-21-99 (Jan 2021): close-air-support digital communications and friendly-force tracking had guidance gaps",
+   "detail": "GAO found DOD 'has faced challenges with the technology initiatives and training efforts it relies on to mitigate risk' in close air support; 'it has identified changes to improve its digital communications systems but gaps in existing guidance and' [evaluation] remained. Topic tags include 'Systems interoperability', 'Digital communications' and 'Military communication'.",
+   "quote_or_paraphrase": "It has identified changes to improve its digital communications systems but gaps in existing guidance and [training evaluation remain].",
+   "source_title": "Close Air Support: Actions Needed to Enhance Friendly Force Tracking Capabilities and Fully Evaluate Training (GAO-21-99)",
+   "source_url": "https://www.gao.gov/products/gao-21-99",
+   "pub_date": "2021-01-21",
+   "event_date": "2021-01-21",
+   "source_tier": 1,
+   "segment_ids": [
+    "S04",
+    "S02"
+   ],
+   "chain_steps": [
+    "Digitally-aided CAS initiatives",
+    "GAO Jan 2021 guidance gaps"
+   ],
+   "pain_keywords": [
+    "friendly force tracking",
+    "digital communications",
+    "interoperability"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Blue-force tracking / digitally-aided fires remains a documented interoperability seam between air and ground C2; relevant to sensor-to-shooter startups."
+  },
+  {
+   "id": "E01-F21",
+   "title": "GAO-21-320SP (May 2021): alternative PNT is not prioritized, has no central program office, unclear requirements, and closed proprietary PNT systems leave 'few opportunities to integrate' new sources",
+   "detail": "GAO's technology assessment (full text retrieved via a GitHub mirror of the PDF) found: 'Officials from across DOD and experts told GAO that alternative PNT solutions are not prioritized within DOD. For example, there is no central program office responsible for developing the variety of alternative PNT technologies.' 'DOD's continued reliance on GPS, despite known GPS vulnerabilities ... presents a challenge for obtaining sufficient support to develop viable alternatives.' 'Challenges in establishing clear PNT performance requirements hinder technology development.' An official said that 'because of this proprietary nature, there are few opportunities to integrate alternative PNT technologies'; DOD's PNT open-architecture (MOSA) initiative and the Army's PNT Operating System fusion engine aim to standardize interfaces. GAO offered six policy options (collaboration, resiliency focus, clarify requirements, coordinate with industry, etc.).",
+   "quote_or_paraphrase": "There is no central program office responsible for developing the variety of alternative PNT technologies across DOD ... The official stated that, because of this proprietary nature, there are few opportunities to integrate alternative PNT technologies.",
+   "source_title": "Defense Navigation Capabilities: DOD is Developing Positioning, Navigation, and Timing Technologies to Complement GPS (GAO-21-320SP)",
+   "source_url": "https://www.gao.gov/products/gao-21-320sp",
+   "pub_date": "2021-05-10",
+   "event_date": "2021-05-10",
+   "source_tier": 1,
+   "segment_ids": [
+    "S07",
+    "S02"
+   ],
+   "chain_steps": [
+    "GPS jamming demonstrated in Ukraine/Middle East",
+    "GAO May 2021: alt-PNT deprioritized, proprietary receivers",
+    "GAO Aug 2022 public report: receivers cannot be upgraded affordably",
+    "GAO Sep 2024: M-code delays continue"
+   ],
+   "pain_keywords": [
+    "not prioritized",
+    "no central program office",
+    "proprietary nature",
+    "open architecture",
+    "requirements",
+    "GPS-denied"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Software-defined PNT fusion engines conforming to DOD's open architecture are an entry point for a small team, but the market is hardware-adjacent, export-controlled and dominated by Collins/L3Harris/BAE receiver incumbents."
+  },
+  {
+   "id": "E01-F22",
+   "title": "GAO August 2022 PNT report (public version of an April 2022 report): 'even with these upgrades, vulnerabilities will remain'; current receivers 'cannot be upgraded affordably'",
+   "detail": "European Security (May 5, 2025) summarized a GAO report published August 2022 (public version of a report issued April 2022 that omitted 'sensitive details about seven of the 11 alternative PNT technology and product development efforts'). GAO warned that despite M-code and anti-jam antennas 'even with these upgrades, vulnerabilities will remain,' and that 'current PNT receivers are not designed to easily add in new sources of PNT information... these systems cannot be upgraded affordably.' GAO report number not captured in this sweep.",
+   "quote_or_paraphrase": "Current PNT receivers are not designed to easily add in new sources of PNT information... these systems cannot be upgraded affordably.",
+   "source_title": "European Security, 'GPS under threat' (citing GAO August 2022 report)",
+   "source_url": "https://app.bigdata.com/documents/A25A25BB74B0A0B608729B5688F4A9FF",
+   "pub_date": "2025-05-05",
+   "event_date": "2022-08-01",
+   "source_tier": 3,
+   "segment_ids": [
+    "S07"
+   ],
+   "chain_steps": [
+    "GAO April 2022 sensitive report",
+    "GAO August 2022 public version",
+    "European Security May 2025 recap"
+   ],
+   "pain_keywords": [
+    "vulnerabilities will remain",
+    "cannot be upgraded affordably",
+    "multi-PNT receivers",
+    "anti-jam"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Reinforces the open-architecture PNT receiver/fusion opportunity and the retrofit problem for the installed base."
+  },
+  {
+   "id": "E01-F23",
+   "title": "GAO-24-106841 (Sept 2024): GPS M-code delays continue across ground, space and user-equipment segments",
+   "detail": "GAO found DOD 'has been working for years to upgrade GPS with a military-specific signal known as M-code that resists interference or jamming. Amid ongoing delays, DOD has made some progress ... But DOD faces challenges with all 3 segments.' Ground segment modernization finished some key testing but more testing and demonstration are needed. Topic tags include 'Radio receiver' and 'Software'.",
+   "quote_or_paraphrase": "Amid ongoing delays, DOD has made some progress developing the necessary ground, space, and user equipment to use M-code. But DOD faces challenges with all 3 segments.",
+   "source_title": "GPS Modernization: Delays Continue in Delivering More Secure Capability for the Warfighter (GAO-24-106841)",
+   "source_url": "https://www.gao.gov/products/gao-24-106841",
+   "pub_date": "2024-09-09",
+   "event_date": "2024-09-09",
+   "source_tier": 1,
+   "segment_ids": [
+    "S07"
+   ],
+   "chain_steps": [
+    "OCX ground segment delays (long-running)",
+    "MGUE user equipment",
+    "GAO Sep 2024 all segments challenged"
+   ],
+   "pain_keywords": [
+    "delays continue",
+    "M-code",
+    "user equipment",
+    "jamming"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Persistence evidence for PNT resilience demand through 2024; a startup cannot fix M-code but can sell around it (alt-PNT, jamming detection, PNT assurance software)."
+  },
+  {
+   "id": "E01-F24",
+   "title": "GAO-21-64 / GAO-21-440T: DOD electromagnetic spectrum operations suffer governance and oversight gaps; 'U.S. risks losing control of the battlefield'; Russia's EW forces 'world class'",
+   "detail": "GAO's December 10, 2020 report and March 19, 2021 testimony: 'The U.S. risks losing control of the battlefield if it doesn't control the electromagnetic spectrum, according to the Defense Department ... Russian electromagnetic warfare forces, described by the Defense Intelligence Agency as world class, have demonstrated effectiveness in real-world applications against U.S. and foreign militaries. China also has advanced capabilities. Earlier strategies' had not been fully implemented. GAO recommended DOD address governance and oversight issues; Forbes (Dec 2022) noted the Pentagon largely concurred. A narrower GAO report (June 5, 2026) on DOD-NTIA spectrum coordination found DOD 'generally follows leading collaboration practices' for frequency assignments, so the later report does not show the 2020 governance findings resolved or persisting.",
+   "quote_or_paraphrase": "The U.S. risks losing control of the battlefield if it doesn't control the electromagnetic spectrum, according to the Defense Department.",
+   "source_title": "Electromagnetic Spectrum Operations: DOD Needs to Address Governance and Oversight Issues to Help Ensure Superiority (GAO-21-64); testimony GAO-21-440T",
+   "source_url": "https://www.gao.gov/products/gao-21-64",
+   "pub_date": "2020-12-10",
+   "event_date": "2020-12-10",
+   "source_tier": 1,
+   "segment_ids": [
+    "S08",
+    "S02"
+   ],
+   "chain_steps": [
+    "2013 and 2017 EMS strategies unimplemented",
+    "Oct 2020 EMS Superiority Strategy",
+    "GAO Dec 2020 governance gaps",
+    "GAO Jun 2026 spectrum coordination report (narrower scope)"
+   ],
+   "pain_keywords": [
+    "electromagnetic spectrum",
+    "governance and oversight",
+    "losing control of the battlefield",
+    "world class",
+    "congested, contested, constrained"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "EMSO planning/management software (EMBM) is an underdeveloped C2 sub-market with documented leadership gaps; however, much of the relevant data is classified and the customer set (Joint EMSO Center, service EW cells) is small."
+  },
+  {
+   "id": "E01-F25",
+   "title": "GAO AI series (2022-2023): DOD AI acquisition hampered by long acquisition processes, staff shortages and insufficient usable training data; strategies and inventory incomplete; no department-wide AI acquisition guidance",
+   "detail": "GAO-22-104765 (Feb 17, 2022): 'DOD's efforts to acquire AI come with some challenges that DOD usually faces, such as DOD's long acquisition processes and shortages of skilled staff, as well as AI-specific challenges like having enough usable data to train the AI.' GAO-22-105834 (Mar 30, 2022): 'DOD's AI-related strategies could be more comprehensive ... In addition, DOD has not yet issued' [collaboration guidance]; recommended improving strategies, inventory process and collaboration guidance. GAO-23-105850 (Jun 29, 2023): 'DOD Needs Department-Wide Guidance to Inform Acquisitions'; 13 private companies stressed intellectual property and data rights in AI contracts. Note: one third-party GitHub whitepaper mis-cites GAO-22-105834 as a JADC2 report; the GAO metadata mirror confirms it is the AI strategies/inventory report.",
+   "quote_or_paraphrase": "DOD's efforts to acquire AI come with some challenges that DOD usually faces, such as DOD's long acquisition processes and shortages of skilled staff, as well as AI-specific challenges like having enough usable data to train the AI.",
+   "source_title": "Artificial Intelligence: Status of Developing and Acquiring Capabilities for Weapon Systems (GAO-22-104765); GAO-22-105834; GAO-23-105850",
+   "source_url": "https://www.gao.gov/products/gao-22-104765",
+   "pub_date": "2022-02-17",
+   "event_date": "2022-02-17",
+   "source_tier": 1,
+   "segment_ids": [
+    "S11",
+    "S03"
+   ],
+   "chain_steps": [
+    "JAIC 2018",
+    "CDAO stood up 2022",
+    "GAO Feb/Mar 2022 strategy and inventory gaps",
+    "GAO Jun 2023 acquisition guidance gap",
+    "GAO Dec 2023 workforce gap"
+   ],
+   "pain_keywords": [
+    "usable data to train the AI",
+    "long acquisition processes",
+    "shortages of skilled staff",
+    "data rights",
+    "inventory"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "The 'not enough usable data' finding is the root cause that data-labeling, data-fabric and synthetic-data startups sell against; IP/data-rights clauses are the contracting battleground."
+  },
+  {
+   "id": "E01-F26",
+   "title": "GAO-24-105645 (Dec 2023): DOD cannot fully identify its AI workforce or which positions need AI skills",
+   "detail": "GAO found DOD 'has invested billions of dollars to integrate artificial intelligence into its operations,' including analyzing ISR data, but 'DOD can't fully identify who is part of its AI workforce or which positions require personnel with AI skills. As a result, DOD can't effectively assess the state of its AI' workforce. Epoch Times (May 2025) also summarized a GAO finding that DOD had almost $2B budgeted for AI in 2024 but 'couldn't fully identify' how it planned to use the money (report not verified in this sweep).",
+   "quote_or_paraphrase": "DOD can't fully identify who is part of its AI workforce or which positions require personnel with AI skills.",
+   "source_title": "Artificial Intelligence: Actions Needed to Improve DOD's Workforce Management (GAO-24-105645)",
+   "source_url": "https://www.gao.gov/products/gao-24-105645",
+   "pub_date": "2023-12-14",
+   "event_date": "2023-12-14",
+   "source_tier": 1,
+   "segment_ids": [
+    "S11"
+   ],
+   "chain_steps": [
+    "CDAO created 2022",
+    "GAO Dec 2023 workforce gap",
+    "DoD AI strategy Jan 2026 'AI-first' push"
+   ],
+   "pain_keywords": [
+    "AI workforce",
+    "can't fully identify",
+    "ISR data"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Skills scarcity inside government favors vendors that deliver turnkey analytics rather than toolkits requiring in-house data scientists."
+  },
+  {
+   "id": "E01-F27",
+   "title": "GAO April 2026: DOD and three other agencies are not systematically collecting lessons learned from AI acquisitions (13 acquisitions, 44 contracts reviewed); all four recommendations concurred",
+   "detail": "GAO's April 2026 report 'Artificial Intelligence Acquisitions: Agencies Should Collect and Apply Lessons Learned to Improve Future Procurements' reviewed 13 AI acquisitions at DOD, DHS, GSA and VA and analyzed 44 AI contracts/agreements (Sept 2018-Feb 2025). Agencies 'were not yet systematically collecting lessons learned ... a necessary first step to share knowledge'; officials said 'their agency policies did not require them to collect lessons learned,' so agencies miss best practices 'such as contract terms related to data rights or testing requirements.' Officials reported difficulty accessing AI technical experts to evaluate proposals and understanding AI-related costs. Federal AI use reportedly more than doubled 2023-2024. GAO report number not captured.",
+   "quote_or_paraphrase": "The agencies are missing opportunities to identify and apply best practices - such as contract terms related to data rights or testing requirements - or to avoid mistakes as agencies increasingly acquire AI.",
+   "source_title": "GAO, Artificial Intelligence Acquisitions: Agencies Should Collect and Apply Lessons Learned to Improve Future Procurements (April 2026); FedScoop, HSToday, BiometricUpdate coverage",
+   "source_url": "https://app.bigdata.com/documents/21ED375018D421CE91738AA048DEE5F2",
+   "pub_date": "2026-04-13",
+   "event_date": "2026-04-13",
+   "source_tier": 1,
+   "segment_ids": [
+    "S11"
+   ],
+   "chain_steps": [
+    "OMB AI acquisition guidance",
+    "GAO Apr 2026: no lessons-learned collection",
+    "4 recs concurred"
+   ],
+   "pain_keywords": [
+    "lessons learned",
+    "data rights",
+    "testing requirements",
+    "AI-related costs",
+    "technical experts"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Government-side evaluation capacity for AI is thin; startups that bring their own test-and-evaluation evidence and clear data-rights terms reduce friction for buyers."
+  },
+  {
+   "id": "E01-F28",
+   "title": "DODIG-2025-039 (Nov 14, 2024): CDAO operated without a charter or implementation plan; CDAO and DoD CIO disputed boundaries over cloud/IT infrastructure",
+   "detail": "Per an independent blog (revised July 17, 2026) that cites the redacted report and DoDD 5105.89: the DoD OIG found CDAO 'was still operating without several foundational documents needed to make its responsibilities clear'; as of June 2024 the implementation plan for the 2023 Data, Analytics and AI Adoption Strategy and the chartering directive/instruction 'remained in draft.' 'CDAO and the DoD CIO disagreed about parts of the boundary around digital infrastructure, information technology, cloud systems, and related responsibilities.' OIG made two recommendations (implementation plan with performance measures; complete directive/instruction); one closed, one resolved-open. DoD issued DoDD 5105.89 on Nov 18, 2024. CDAO was later realigned under USD(R&E) (Aug 2025). The dodig.mil report page could not be fetched directly.",
+   "quote_or_paraphrase": "CDAO and the DoD Chief Information Officer disagreed about parts of the boundary around digital infrastructure, information technology, cloud systems, and related responsibilities. Both offices were concerned about overlap.",
+   "source_title": "DoD OIG, Evaluation of the Effectiveness of the Chief Digital and Artificial Intelligence Office's AI Governance and Acquisition Process (DODIG-2025-039), as summarized by Bruce B. A. West, 'The CDAO evaluation was really about decision rights'",
+   "source_url": "https://media.defense.gov/2024/Nov/18/2003585216/-1/-1/1/DODIG-2025-039_REDACTED.PDF",
+   "pub_date": "2024-11-14",
+   "event_date": "2024-11-14",
+   "source_tier": 1,
+   "segment_ids": [
+    "S11",
+    "S10",
+    "S03"
+   ],
+   "chain_steps": [
+    "CDAO merges JAIC/CDO/DDS/Advana 2022",
+    "OIG evaluation announced early 2024",
+    "DODIG-2025-039 Nov 2024",
+    "DoDD 5105.89 Nov 18 2024",
+    "CDAO to USD(R&E) Aug 2025"
+   ],
+   "pain_keywords": [
+    "decision rights",
+    "overlap",
+    "charter",
+    "implementation plan",
+    "boundary"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Explains why enterprise data/AI buying authority at OSD is unstable; startups should target service-level program offices or combatant-command pilots rather than CDAO-centric enterprise deals."
+  },
+  {
+   "id": "E01-F29",
+   "title": "DoD IG Advana audit (May 2026): CDAO did not implement NIST interface controls; 78 of 387 source systems connected without data-sharing agreements; 10 of 12 recommendations rejected",
+   "detail": "MeriTalk (May 18, 2026) reported a DoD IG audit finding that OCDAO 'did not implement effective interface controls between Advana and non-financial source systems' per NIST SP 800-53, leaving 'limited assurance' that data transferred are accurate and complete, with the warning that 'inaccurate or incomplete data could lead DOD leaders to make misinformed decisions affecting operations.' Specifics: no data sharing agreements with 78 of 387 source systems before connection; privileged access for 26 of 29 privileged users not based on accurate/complete request forms; no effective user-access monitoring, validation checks, or error notification to system owners. Officials cited beliefs that NIST did not apply to all source systems, high staff turnover and personnel shortages. Twelve recommendations; the deputy under secretary for R&E (for OCDAO) agreed with two and disagreed with ten, including immediate data-sharing agreements. Advana aggregates data from 437 systems. Report number not captured.",
+   "quote_or_paraphrase": "Without effective interface controls, OCDAO has limited assurance that data transferred between source systems and Advana are accurate and complete.",
+   "source_title": "MeriTalk, 'DOD IG Flags Advana Interface Control Weaknesses, Raising Data Accuracy Issues' (summarizing DoD OIG audit)",
+   "source_url": "https://app.bigdata.com/documents/1F783F795157BFDEF5770939D9DD34A6",
+   "pub_date": "2026-05-18",
+   "event_date": "2026-05-01",
+   "source_tier": 3,
+   "segment_ids": [
+    "S03",
+    "S12",
+    "S09"
+   ],
+   "chain_steps": [
+    "Advana launched 2021 (Comptroller)",
+    "72,000+ users by 2023",
+    "Development paused Jun 2024",
+    "IG audit May 2026: interface controls, DSAs missing",
+    "WDP restructuring 2026"
+   ],
+   "pain_keywords": [
+    "interface controls",
+    "data sharing agreements",
+    "accurate and complete",
+    "misinformed decisions",
+    "staff turnover",
+    "personnel shortages"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "The enterprise data platform's data-quality plumbing (ingest validation, lineage, agreements, access governance) is officially deficient; data-quality/observability tooling for government data lakes is a credible wedge, though the CDAO's non-concurrence shows resistance to added process."
+  },
+  {
+   "id": "E01-F30",
+   "title": "Advana instability 2024-2026: development paused (June 2024), $15B AAMAC recompete canceled (July 2025), 80% contractor cuts reported, split into the War Data Platform (Jan 2026), $821M Accenture integration award (July 2026)",
+   "detail": "Defense One (Aug 20, 2025): Advana, launched 2021 with a five-year $674M Booz Allen contract, reached ~20,000 users in 42 organizations within months and 72,000+ users by 2023; CDAO paused development in June 2024 to strengthen architecture; a defense official said 'you cut contracted staff by 80 percent and you have a turnover of close to ... 60 percent? Things are going to break.' The article notes DoD IG in July 2022 'chided elements of the military for not adopting it fast enough' and that Advana became the key data platform for operational logistics and Joint Staff planning, including 'contested logistics' wargames. Washington Technology/MeriTalk (Jul 24, 2025): the $15B Advancing AI Multiple Award Contract draft solicitation was canceled, 'program is currently on hold.' MeriTalk (Jan 16, 2026): Secretary Hegseth directed splitting Advana, whose growth produced a 'complex technical architecture' requiring 'rationalization,' into a War Data Platform. MeriTalk (Jul 10, 2026): Accenture received $821M for War Data Platform integration. AEI (Sep 11, 2026) notes the WDP 'endures acquisition strategy confusion.'",
+   "quote_or_paraphrase": "You tell this organization to do 'A.' Then you cut contracted staff by 80 percent and you have a turnover of close to what, 60 percent? Things are going to break. Things are going to get delayed.",
+   "source_title": "Defense One, 'Pentagon reductions set back critical AI-data platform'; Washington Technology; MeriTalk; AEI 'Advancing the War Data Platform'",
+   "source_url": "https://app.bigdata.com/documents/C67C25CDAC8086E193A9AEF1DE2579B2",
+   "pub_date": "2025-08-20",
+   "event_date": "2025-07-23",
+   "source_tier": 3,
+   "segment_ids": [
+    "S03",
+    "S12"
+   ],
+   "chain_steps": [
+    "Advana 2021",
+    "IG Jul 2022 slow adoption",
+    "Jun 2024 pause",
+    "Jul 2025 AAMAC canceled",
+    "Jan 2026 WDP split",
+    "Jul 2026 Accenture $821M"
+   ],
+   "pain_keywords": [
+    "contested logistics",
+    "acquisition strategy confusion",
+    "complex technical architecture",
+    "rationalization",
+    "on hold"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Enterprise data-platform contracting is in flux and being consolidated with large integrators; small vendors are more likely to enter as plug-ins/data products than as platform owners. Contract values cited are awards/ceilings, not revenue."
+  },
+  {
+   "id": "E01-F31",
+   "title": "GAO weapon systems annual assessments 2021-2026: delivery keeps slowing (average >12 years), new pathways not clearly faster, workforce losses (40 of 48 programs) after 2025 deferred-resignation program",
+   "detail": "GAO-21-222 (Jun 2021) 'Updated Program Oversight Approach Needed'; GAO-22-105230 (Jun 2022) 'Challenges to Fielding Capabilities Faster Persist'; GAO-23-106059 (Jun 2023): delays driven by 'supplier, software, and design problems,' recommended updating MOSA policy; GAO-24-106831 (Jun 17, 2024) 'DOD Is Not Yet Well-Positioned to Field Systems with Speed' - 'some programs in the new pathways likely won't deliver much faster than traditional programs' (DoD CIO's March 2025 DevSecOps study cites this report as finding 75-80% of 40 MDAPs adopted modern practices and almost half deliver software in under four months); GAO-25-107569 (2025) 'DOD Leaders Should Ensure That Newer Programs Are Structured for Speed and Innovation'; July 2, 2026 assessment (per MeriTalk/NewsMax/PubT): average time to deliver a capability has grown to more than 12 years; 40 of 48 programs reported workforce issues; 37 reported staffing reductions; 48,000+ DOD employees (6.3%) approved for the deferred resignation program Jan-Jun 2025; DOD plans at least $49B across 23 middle-tier programs; MTA policy does not require mature technologies at start (DOD concurred).",
+   "quote_or_paraphrase": "Despite years of acquisition reform, the DoW still struggles to field new capabilities rapidly ... the average time required to deliver a capability has grown to more than 12 years.",
+   "source_title": "GAO Weapon Systems Annual Assessments (GAO-21-222, GAO-22-105230, GAO-23-106059, GAO-24-106831, GAO-25-107569, and the July 2, 2026 assessment as reported by MeriTalk)",
+   "source_url": "https://www.gao.gov/products/gao-24-106831",
+   "pub_date": "2026-07-02",
+   "event_date": "2026-07-02",
+   "source_tier": 1,
+   "segment_ids": [
+    "S13",
+    "S01"
+   ],
+   "chain_steps": [
+    "AAF pathways 2020",
+    "GAO 2021-2024: speed not achieved",
+    "DRP staffing cuts 2025",
+    "GAO Jul 2026: >12 years average"
+   ],
+   "pain_keywords": [
+    "not yet well-positioned",
+    "field systems with speed",
+    "workforce issues",
+    "loss of institutional knowledge",
+    "middle tier acquisition"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Program-office capacity is shrinking while mandates to go faster grow; this creates demand for vendor-provided integration and test capacity, but also lengthens government decision cycles that a bootstrapped startup must survive."
+  },
+  {
+   "id": "E01-F32",
+   "title": "GAO-23-105008 (Feb 2023): middle-tier rapid prototyping/fielding requires changes to oversight and development approaches",
+   "detail": "GAO's February 7, 2023 report on Middle-Tier Defense Acquisitions found rapid prototyping and fielding 'requires changes to oversight and development approaches.' The 2026 annual assessment reiterates that DOD policy 'does not clearly require programs entering the middle tier acquisition pathway to begin with mature technologies.'",
+   "quote_or_paraphrase": "Rapid prototyping and fielding requires changes to oversight and development approaches.",
+   "source_title": "Middle-Tier Defense Acquisitions: Rapid Prototyping and Fielding Requires Changes to Oversight and Development Approaches (GAO-23-105008)",
+   "source_url": "https://www.gao.gov/products/gao-23-105008",
+   "pub_date": "2023-02-07",
+   "event_date": "2023-02-07",
+   "source_tier": 1,
+   "segment_ids": [
+    "S13"
+   ],
+   "chain_steps": [
+    "Section 804 MTA 2016",
+    "GAO Feb 2023",
+    "GAO Jul 2026 rec on technology maturity"
+   ],
+   "pain_keywords": [
+    "rapid prototyping",
+    "rapid fielding",
+    "oversight",
+    "mature technologies"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "MTA and OTA prototyping are the routes most NGC2/ABMS vendors used; GAO's persistent critique implies continued policy churn around these routes."
+  },
+  {
+   "id": "E01-F33",
+   "title": "GAO-24-107566 (July 2024): Army fielded 6 new equipment priorities ($46.5B) but sometimes fielded before support was in place",
+   "detail": "GAO found that since FY2021 the Army used new approaches to rapidly develop equipment, fielded six new priorities including upgraded air and missile defenses, and 'invested $46.5 billion in these efforts. But sometimes, the Army has put new equipment into the field' before maintenance/support, training and other enablers were ready; actions needed to support fielding. This is the only 2019-2026 GAO report on Army modernization fielding located; no GAO or DoD IG report specifically on the Integrated Tactical Network / Capability Sets was found in this sweep (public evidence insufficient).",
+   "quote_or_paraphrase": "It has invested $46.5 billion in these efforts. But sometimes, the Army has put new equipment into the field [before support was ready].",
+   "source_title": "Army Modernization: Actions Needed to Support Fielding New Equipment (GAO-24-107566)",
+   "source_url": "https://www.gao.gov/products/gao-24-107566",
+   "pub_date": "2024-07-15",
+   "event_date": "2024-07-15",
+   "source_tier": 1,
+   "segment_ids": [
+    "S02",
+    "S01"
+   ],
+   "chain_steps": [
+    "Army 2018 modernization priorities incl. network",
+    "Capability Sets 21/23/25",
+    "GAO Jul 2024 fielding support gaps"
+   ],
+   "pain_keywords": [
+    "fielding",
+    "sustainment",
+    "training",
+    "new equipment"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Fielding-support gaps (training, sustainment, help desk) around new network kit are a services/software opportunity adjacent to NGC2 scaling."
+  },
+  {
+   "id": "E01-F34",
+   "title": "Army tactical network: GAO documented 'nearly 20 years' of limited success (2013-2014); no 2019-2026 GAO/IG ITN report found; NGC2 now absorbs the effort with mixed field reports (Sept 2026)",
+   "detail": "GAO-13-179 (Jan 2013): 'For nearly 20 years, the Army has had limited success in developing an information network with sensors, software, and radios'; GAO-13-711 (Aug 2013): the network was the Army's number one modernization priority at roughly $3 billion per year indefinitely; GAO-14-460 (May 2014) on competition. The GAO metadata mirror shows no 2019-2026 GAO report on ITN or Capability Sets, and DoD IG audits on ITN were not locatable (Public evidence insufficient). Persistence signals from non-GAO sources: Army FY2027 request includes $904M NGC2 R&D (Defense News, May 2026); Anduril-led NGC2 prototype OTA $99.6M (Jul 2025); Persistent Systems MANET orders $34M (Oct 2025) + $87.5M (Feb 2026); L3Harris $24M gateway manpacks; Army established NGC2 common data layer baseline on Palantir Foundry (cloud) and Anduril Lattice (tactical) (Jun 2026); at Project Convergence Capstone (Sept 2026) one soldier told Business Insider that connection issues 'either problems with the NGC2 system or the result of electronic warfare and jamming, had left it mostly unusable.' Contract figures are awards/orders, not revenue or proof of scaled deployment.",
+   "quote_or_paraphrase": "For nearly 20 years, the Army has had limited success in developing an information network with sensors, software, and radios to give soldiers needed information.",
+   "source_title": "GAO-13-179 Army Networks: Size and Scope of Modernization Investment Merit Increased Oversight; Business Insider (Sep 5, 2026) on NGC2 at Project Convergence",
+   "source_url": "https://www.gao.gov/products/gao-13-179",
+   "pub_date": "2013-01-10",
+   "event_date": "2026-09-05",
+   "source_tier": 1,
+   "segment_ids": [
+    "S02",
+    "S01",
+    "S03"
+   ],
+   "chain_steps": [
+    "WIN-T/JTRS era failures (GAO 2013)",
+    "ITN Capability Sets 2021-2025",
+    "NGC2 prototypes 2025-2026 (4ID, 25ID)",
+    "PC-C6 Sept 2026 mixed results",
+    "FY27 $904M request"
+   ],
+   "pain_keywords": [
+    "limited success",
+    "DDIL",
+    "jamming",
+    "mostly unusable",
+    "data layer",
+    "transport layer"
+   ],
+   "label": "INFERENCE",
+   "confidence": "MEDIUM",
+   "startup_relevance": "NGC2 is structured as an ecosystem with named data-layer (Palantir/Anduril) and transport-layer (Persistent, L3Harris) incumbents; entry for a two-person team is via the application layer on top of the common data layer, or via EW-resilience/DDIL tooling that the field reports show is still weak."
+  },
+  {
+   "id": "E01-F35",
+   "title": "DoD CIO 'State of DevSecOps' (March 2025): authorizing officials are 'biased to caution,' reciprocity is lacking or unclear, software factories face funding-model limits, and cloud utilization data is hard to obtain",
+   "detail": "The DoD CIO study (Distribution A) states barriers to continuous ATO include that 'too often, cybersecurity teams, IT infrastructure teams, development teams, leadership, AOs, and DoD Component CISOs don't engage in a collaborative manner'; 'it is a common refrain that AOs are biased to caution rather than biased to action resulting in delays of software capabilities'; on reciprocity, 'common discussion points included lack of reciprocity and cases in which reciprocity guidance was unclear.' It also reports 'software factories face challenges with consistent funding and business models that limit large scale expansion' and that the variety of cloud purchasing mechanisms 'presents a challenge to obtaining utilization data.' The study cites GAO-24-106831 for 75-80% of 40 MDAPs adopting modern practices. A NAVSEA example delivered 13 updates in 9 months to a production cloud.",
+   "quote_or_paraphrase": "It is a common refrain that AOs are 'biased to caution' rather than 'biased to action' resulting in delays of software capabilities.",
+   "source_title": "DoD CIO, The State of DevSecOps within the Department of Defense (March 2025)",
+   "source_url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "pub_date": "2025-03-01",
+   "event_date": "2025-03-01",
+   "source_tier": 1,
+   "segment_ids": [
+    "S09",
+    "S13"
+   ],
+   "chain_steps": [
+    "cATO memo Feb 2022",
+    "cATO evaluation criteria and implementation guide",
+    "Jun 2024 Software Factory Coalition Summit",
+    "Mar 2025 study"
+   ],
+   "pain_keywords": [
+    "biased to caution",
+    "reciprocity",
+    "continuous ATO",
+    "software factory",
+    "color of money",
+    "utilization data"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "ATO friction is the most-cited go-to-market blocker for defense software startups; compliance-automation (evidence collection, control inheritance, cATO dashboards) is a real niche, and Onebrief's NGC2 ATO (Jun 2026) shows the path exists but is effortful."
+  },
+  {
+   "id": "E01-F36",
+   "title": "DoD AI Strategy memo (Jan 2026): directs a 'wartime approach' to eliminate blockers to data sharing, ATOs, test and certification; federated data catalogs due within 30 days; models deployed within 30 days of release",
+   "detail": "The Secretary's AI strategy memorandum (published Jan 13, 2026 per Bigdata timestamp) directs: 'We must eliminate blockers to data sharing, Authorizations to Operate (ATOs), test and evaluation and certification, contracting, hiring and talent management'; CDAO to act as 'Wartime CDAO' with the CIO to leverage 'cross-domain data access and rapid ATO reciprocity'; Components to deliver federated data catalogs 'exposing their system interfaces, data assets, and access mechanisms across all classification levels' within 30 days, enforcing the 'DoD Data Decrees' and the May 2021 'Creating Data Advantage' memo; a vendor cadence enabling frontier models 'within 30 days of public release' as a primary procurement criterion; 'any lawful use' contract language within 180 days; deployment velocity metrics reported monthly.",
+   "quote_or_paraphrase": "We must eliminate blockers to data sharing, Authorizations to Operate (ATOs), test and evaluation and certification, contracting, hiring and talent management, and other policies that inhibit rapid experimentation and fielding.",
+   "source_title": "Department of War, Artificial Intelligence Strategy memorandum (Jan 2026)",
+   "source_url": "https://app.bigdata.com/documents/436A22707097BC785DBBBEAF29E8E80E",
+   "pub_date": "2026-01-13",
+   "event_date": "2026-01-13",
+   "source_tier": 1,
+   "segment_ids": [
+    "S11",
+    "S09",
+    "S03"
+   ],
+   "chain_steps": [
+    "Creating Data Advantage memo May 2021",
+    "Data Decrees",
+    "CDAO to USD(R&E) Aug 2025",
+    "Jan 2026 AI strategy",
+    "FY27 $46B AI/compute request (May 2026)"
+   ],
+   "pain_keywords": [
+    "blockers",
+    "ATO reciprocity",
+    "cross-domain data access",
+    "federated data catalogs",
+    "any lawful use",
+    "deployment velocity"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Top-down policy now names the exact frictions GAO/IG documented (ATO, data sharing, classification); this raises demand for data-catalog, model-integration and ATO-acceleration products but also favors frontier-model vendors and large integrators with existing accreditations."
+  },
+  {
+   "id": "E01-F37",
+   "title": "CRS JADC2 products: IF11493 (In Focus, John R. Hoehn; updated through at least Jan 2025) and R46725 (Background and Issues for Congress) frame service programs (ABMS, Project Convergence, Project Overmatch) and questions on cost, interoperability and requirements",
+   "detail": "CRS In Focus IF11493 'Joint All-Domain Command and Control (JADC2)' and CRS Report R46725 'Joint All-Domain Command and Control: Background and Issues for Congress' (both by John R. Hoehn) describe JADC2 as DOD's concept to connect sensors from all services into a single network and discuss ABMS, Project Convergence and Project Overmatch. Version 13 of IF11493 exists on congress.gov; a third-party citation gives an update date of January 21, 2025 (MEDIUM confidence). The documents could not be opened from this environment (congress.gov, everycrsreport.com and sgp.fas.org blocked), so the specific 'issues for Congress' text is not quoted. No CRS report dedicated to the Army tactical network/ITN was located; a January 2026 CRS report on tanker tactical data links was cited by Defense One (see F38).",
+   "quote_or_paraphrase": "JADC2 is DOD's concept to connect sensors from all of the military services - Air Force, Army, Marine Corps, Navy, and Space Force - into a single network.",
+   "source_title": "CRS IF11493 and CRS R46725 (John R. Hoehn)",
+   "source_url": "https://www.congress.gov/crs-product/IF11493",
+   "pub_date": "2025-01-21",
+   "event_date": "2021-01-01",
+   "source_tier": 1,
+   "segment_ids": [
+    "S01"
+   ],
+   "chain_steps": [
+    "IF11493 first issued 2020",
+    "R46725 Jan 2021",
+    "IF11493 updated through v13 (~2025)"
+   ],
+   "pain_keywords": [
+    "single network",
+    "issues for Congress",
+    "interoperability",
+    "cost"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Congressional framing document set; useful for founders' policy literacy but adds no new technical pain evidence beyond GAO."
+  },
+  {
+   "id": "E01-F38",
+   "title": "CRS (Jan 2026): tanker aircraft lack tactical data-link access; connectivity would improve survivability and could serve as a backup information conduit in degraded communications",
+   "detail": "Defense One (Mar 23, 2026), after a KC-135 crash in Iraq, quoted a January 2026 CRS report: 'the tankers' ability to access tactical data links could increase mission success in contested environments by improving survivability, agility, and situational awareness for command-and-control elements and aircrews ... tanker aircraft could serve as a backup information conduit for other aircraft in a degraded communications environment.' Air Mobility leaders had requested upgraded communications before the crash.",
+   "quote_or_paraphrase": "Tanker aircraft could serve as a backup information conduit for other aircraft in a degraded communications environment.",
+   "source_title": "Defense One, 'KC-135 crash in Iraq spurs calls for communications upgrades' (citing January 2026 CRS report)",
+   "source_url": "https://app.bigdata.com/documents/A4A5DDD0A78283BA94C5BC43D3215F6C",
+   "pub_date": "2026-03-23",
+   "event_date": "2026-01-01",
+   "source_tier": 3,
+   "segment_ids": [
+    "S02",
+    "S04"
+   ],
+   "chain_steps": [
+    "Mobility fleet lacks Link 16",
+    "CRS Jan 2026",
+    "KC-135 crash Mar 2026 raises urgency"
+   ],
+   "pain_keywords": [
+    "tactical data links",
+    "degraded communications",
+    "situational awareness",
+    "backup conduit"
+   ],
+   "label": "FACT",
+   "confidence": "MEDIUM",
+   "startup_relevance": "Retrofit connectivity for large legacy fleets (tankers, airlifters) is an identifiable, congressionally visible gap; the products are radios/gateways (hardware-heavy, ITAR) more than pure software."
+  },
+  {
+   "id": "E01-F39",
+   "title": "Oversight gaps: no 2019-2026 GAO/DoD IG report specific to DCGS, Project Overmatch, NGC2, JWCC performance, contested logistics C2, or Mission Partner Environment findings could be retrieved",
+   "detail": "DCGS: GAO's public record found in this sweep consists of bid-protest decisions (Palantir USG, B-412746, 2016, describing DCGS-A2; General Dynamics Mission Systems, B-416181, 2018) and GAO-15-282 (2015); GAO-10-500T (2010) noted the Army would not have a fully functional DCGS until 2016. Project Overmatch: GAO's March 2025 Navy unmanned-systems report was classified per Maritime Executive/IndexBox (Jun 2026); the DoD CIO DevSecOps study lists Project Overmatch among DevSecOps-enabled capabilities; no GAO/IG Overmatch findings found. NGC2: no GAO/IG report found (program began 2024-2025). GCCS-J: DODIG-2020-068 'Audit of Security Controls Over the DoD's GCCS-J IT System' exists (2020) but findings were not retrievable. GAO-25-108043 (2025) 'Space Operations: DOD Is Pursuing Efforts to Collaborate with Allies' was located by title only. Public evidence insufficient for all of these; absence of reports is not evidence of absence of problems.",
+   "quote_or_paraphrase": "Public evidence insufficient.",
+   "source_title": "GAO bid protest B-412746 (Palantir USG, Inc.); DODIG-2020-068; GAO-25-108043 (titles only)",
+   "source_url": "https://www.gao.gov/products/b-412746",
+   "pub_date": "2016-06-01",
+   "event_date": "2016-06-01",
+   "source_tier": 1,
+   "segment_ids": [
+    "S04",
+    "S01",
+    "S06",
+    "S10",
+    "S12"
+   ],
+   "chain_steps": [
+    "Coverage gap identified",
+    "Downstream agents with gao.gov/dodig.mil access should fill"
+   ],
+   "pain_keywords": [
+    "DCGS",
+    "Project Overmatch",
+    "NGC2",
+    "GCCS-J",
+    "Mission Partner Environment"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Flags where this evidence file is thin so the study does not over-weight the well-documented programs (JADC2, ABMS, Space C2) relative to programs that are simply less audited."
+  },
+  {
+   "id": "E01-F40",
+   "title": "GAO-26-107085 (Jan 2026): Space Development Agency missile-warning constellation risks late delivery; readiness of critical parts overestimated",
+   "detail": "GAO found DOD 'is developing a new system - a large constellation of satellites - to detect and track missile threats. But its current efforts risk not delivering needed capabilities as quickly as planned. DOD is overestimating the readiness of some parts critical to this system, such as the spacecraft,' causing unplanned work; DOD relies on contractors' schedules to track progress. Relevant to space-based sensing feeding C2/Golden Dome.",
+   "quote_or_paraphrase": "DOD is overestimating the readiness of some parts critical to this system, such as the spacecraft. This has resulted in unplanned work - adding time to contractors' schedules.",
+   "source_title": "Missile Warning Satellites: Space Development Agency Should Be More Realistic and Transparent About Risks to Capability Delivery (GAO-26-107085)",
+   "source_url": "https://www.gao.gov/products/gao-26-107085",
+   "pub_date": "2026-01-28",
+   "event_date": "2026-01-28",
+   "source_tier": 1,
+   "segment_ids": [
+    "S05",
+    "S04"
+   ],
+   "chain_steps": [
+    "SDA Tranche 0/1 tracking layer",
+    "GAO Jan 2026 readiness overestimated"
+   ],
+   "pain_keywords": [
+    "overestimating readiness",
+    "unplanned work",
+    "contractor schedules"
+   ],
+   "label": "FACT",
+   "confidence": "HIGH",
+   "startup_relevance": "Space-sensor data volume for C2 is arriving later than planned; ground-segment fusion/processing vendors depend on these schedules."
+  }
+ ],
+ "structured": {
+  "segment_mapping_assumption": "The orchestrator's S01-S14 taxonomy was not provided to this agent. IDs are assigned under this working mapping and should be remapped if the study's taxonomy differs: S01 joint/service C2 and battle-management software (JADC2/ABMS/NGC2/COP); S02 tactical transport and networks (ITN, MANET, SATCOM, DDIL, radios, data links); S03 data fabric/data mesh, integration, standards, classification-aware sharing; S04 ISR processing/PED, sensor fusion, track management, friendly-force tracking; S05 space C2 and space-based sensing (SPADOC/ATLAS, SDA); S06 coalition/Mission Partner Environment/cross-domain; S07 PNT; S08 EMSO/EW; S09 cybersecurity, zero trust, ATO/RMF; S10 cloud/edge compute (JWCC); S11 AI/ML decision support and CDAO enterprise AI; S12 logistics/sustainment C2 and enterprise data (Advana/WDP); S13 software acquisition, DevSecOps, MOSA, program oversight; S14 experimentation, test and lessons-learned.",
+  "access_constraints_methodology": "The research environment's egress proxy blocked gao.gov, files.gao.gov, dodig.mil, media.defense.gov, congress.gov, everycrsreport.com, sgp.fas.org, web.archive.org and all defense news sites; the shared WebSearch budget was exhausted after 12 successful queries and Bigdata.com credits after ~12 useful queries. Report-level facts were therefore triangulated from (a) WebSearch result snippets of gao.gov/dodig.mil pages, (b) the GovHawkDC/gaoreports GitHub mirror of GAO product metadata (title, dates, summary, topics; coverage 2001-early 2026 with gaps), (c) Bigdata.com-indexed copies of GAO product pages and trade-press coverage, (d) a GitHub mirror of the full GAO-21-320SP PDF text, and (e) the DoD CIO State of DevSecOps 2025 text mirrored on GitHub. Where only a title was retrievable the finding says so.",
+  "report_index": [
+   {
+    "number": "GAO-19-456T",
+    "title": "Defense Acquisitions: Observations on the F-35 and Air Force's Advanced Battle Management System",
+    "date": "2019-05-02",
+    "problem": "ABMS capabilities undetermined",
+    "segments": [
+     "S01"
+    ],
+    "recommendation": "Testimony; none",
+    "persists": "Yes - GAO-20-389, GAO-23-105495"
+   },
+   {
+    "number": "GAO-20-146",
+    "title": "Space Command and Control: Comprehensive Planning and Oversight Could Help DOD Acquire Critical Capabilities and Address Challenges",
+    "date": "2019-10-30",
+    "problem": "Three prior programs late/over budget; SPADOC on 1998-discontinued mainframe; Agile without guidance",
+    "segments": [
+     "S05",
+     "S13"
+    ],
+    "recommendation": "Comprehensive planning and oversight",
+    "persists": "Yes - GAO-22-104685, GAO-23-105920"
+   },
+   {
+    "number": "GAO-20-389",
+    "title": "Defense Acquisitions: Action Is Needed to Provide Clarity and Mitigate Risks of the Air Force's Planned ABMS",
+    "date": "2020-04-16",
+    "problem": "No complete plan, cost estimate, affordability analysis; management structure unformalized",
+    "segments": [
+     "S01"
+    ],
+    "recommendation": "Plan, cost estimate, affordability analysis briefed quarterly; formalize management/decision authority",
+    "persists": "Partly - ABMS restructured; JADC2-level gaps persist (GAO-25-106454)"
+   },
+   {
+    "number": "GAO-21-68",
+    "title": "Defense Acquisitions: Joint Cyber Warfighting Architecture Would Benefit from Defined Goals and Governance",
+    "date": "2020-11-19",
+    "problem": "No defined interoperability goals for JCWA",
+    "segments": [
+     "S09",
+     "S03"
+    ],
+    "recommendation": "Define goals and governance",
+    "persists": "Governance fixed; metrics gap in GAO-22-104695"
+   },
+   {
+    "number": "GAO-21-64",
+    "title": "Electromagnetic Spectrum Operations: DOD Needs to Address Governance and Oversight Issues to Help Ensure Superiority",
+    "date": "2020-12-10",
+    "problem": "Prior EMS strategies not implemented; governance/oversight gaps",
+    "segments": [
+     "S08"
+    ],
+    "recommendation": "Address governance and oversight",
+    "persists": "Unknown - later GAO (Jun 2026) covers only NTIA coordination"
+   },
+   {
+    "number": "GAO-21-99",
+    "title": "Close Air Support: Actions Needed to Enhance Friendly Force Tracking Capabilities and Fully Evaluate Training",
+    "date": "2021-01-21",
+    "problem": "Digital communications/FFT guidance gaps",
+    "segments": [
+     "S04",
+     "S02"
+    ],
+    "recommendation": "Enhance FFT capabilities; evaluate training",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-21-179",
+    "title": "Weapon Systems Cybersecurity: Guidance Would Help DOD Programs Better Communicate Requirements to Contractors",
+    "date": "2021-03-04",
+    "problem": "Programs not putting cybersecurity requirements in contracts",
+    "segments": [
+     "S09"
+    ],
+    "recommendation": "Guidance for contract language",
+    "persists": "Related gaps in GAO IT assessments 2024-2025"
+   },
+   {
+    "number": "GAO-21-320SP",
+    "title": "Defense Navigation Capabilities: DOD is Developing PNT Technologies to Complement GPS",
+    "date": "2021-05-10",
+    "problem": "Alt-PNT not prioritized; no central office; unclear requirements; proprietary systems block integration",
+    "segments": [
+     "S07"
+    ],
+    "recommendation": "Six policy options",
+    "persists": "Yes - Aug 2022 GAO, GAO-24-106841"
+   },
+   {
+    "number": "GAO-21-105298",
+    "title": "DOD Software Acquisition: Status of and Challenges Related to Reform Efforts",
+    "date": "2021-09-30",
+    "problem": "No data collected on software pathway",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Collect data",
+    "persists": "Yes - GAO-23-105867"
+   },
+   {
+    "number": "GAO-22-104685",
+    "title": "Space Command and Control: Opportunities Exist to Enhance Annual Reporting",
+    "date": "2021-12-22",
+    "problem": "Decades of overruns; reporting gaps",
+    "segments": [
+     "S05"
+    ],
+    "recommendation": "Enhance annual reporting",
+    "persists": "Yes - GAO-23-105920"
+   },
+   {
+    "number": "GAO-22-104765",
+    "title": "Artificial Intelligence: Status of Developing and Acquiring Capabilities for Weapon Systems",
+    "date": "2022-02-17",
+    "problem": "Long acquisition, staff shortages, insufficient usable training data",
+    "segments": [
+     "S11"
+    ],
+    "recommendation": "Status report",
+    "persists": "Yes - GAO-23-105850, GAO-24-105645, Apr 2026 AI acquisitions"
+   },
+   {
+    "number": "GAO-22-105834",
+    "title": "Artificial Intelligence: DOD Should Improve Strategies, Inventory Process, and Collaboration Guidance",
+    "date": "2022-03-30",
+    "problem": "AI strategies incomplete; inventory; collaboration guidance not issued",
+    "segments": [
+     "S11"
+    ],
+    "recommendation": "Improve strategies, inventory, guidance",
+    "persists": "Partly - DODIG-2025-039 charter gaps"
+   },
+   {
+    "number": "GAO-22-104695",
+    "title": "Defense Acquisitions: Cyber Command Needs to Develop Metrics to Assess Warfighting Capabilities",
+    "date": "2022-03-30",
+    "problem": "No metrics for JCWA",
+    "segments": [
+     "S09"
+    ],
+    "recommendation": "Develop metrics",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-22-105230",
+    "title": "Weapon Systems Annual Assessment: Challenges to Fielding Capabilities Faster Persist",
+    "date": "2022-06-08",
+    "problem": "Delays; missing information at decision points",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Clarify knowledge at decision points",
+    "persists": "Yes - 2023-2026 assessments"
+   },
+   {
+    "number": "GAO-22-104070",
+    "title": "Cloud Computing: DOD Needs to Improve Workforce Planning and Software Application Modernization",
+    "date": "2022-06-29",
+    "problem": "Cloud workforce and app modernization gaps vs OMB requirements",
+    "segments": [
+     "S10"
+    ],
+    "recommendation": "Improve workforce planning and modernization",
+    "persists": "Related - GAO-23-106247, GAO-23-106290"
+   },
+   {
+    "number": "GAO-23-105495",
+    "title": "Battle Management: DOD and Air Force Continue to Define Joint Command and Control Efforts",
+    "date": "2023-01-13",
+    "problem": "JADC2 systems/capabilities undefined; CFT lacks staff and authority",
+    "segments": [
+     "S01"
+    ],
+    "recommendation": "Define contributing systems, tools, cost, schedule",
+    "persists": "Yes - GAO-25-106454"
+   },
+   {
+    "number": "GAO-23-105008",
+    "title": "Middle-Tier Defense Acquisitions: Rapid Prototyping and Fielding Requires Changes to Oversight and Development Approaches",
+    "date": "2023-02-07",
+    "problem": "MTA oversight/development approach gaps",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Change oversight approaches",
+    "persists": "Yes - Jul 2026 assessment on technology maturity"
+   },
+   {
+    "number": "GAO-23-106059",
+    "title": "Weapon Systems Annual Assessment: Programs Are Not Consistently Implementing Practices That Can Help Accelerate Acquisitions",
+    "date": "2023-06-08",
+    "problem": "Supplier, software, design delays",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Update MOSA policy",
+    "persists": "Yes - GAO-25-106931"
+   },
+   {
+    "number": "GAO-23-105920",
+    "title": "Space Command and Control: Improved Tracking and Reporting Would Clarify Progress amid Persistent Delays",
+    "date": "2023-06-08",
+    "problem": "Persistent delays; inconsistent metrics; SPADOC still in use",
+    "segments": [
+     "S05"
+    ],
+    "recommendation": "Improve tracking/reporting",
+    "persists": "Unknown after 2023"
+   },
+   {
+    "number": "GAO-23-105850",
+    "title": "Artificial Intelligence: DOD Needs Department-Wide Guidance to Inform Acquisitions",
+    "date": "2023-06-29",
+    "problem": "No department-wide AI acquisition guidance",
+    "segments": [
+     "S11"
+    ],
+    "recommendation": "Issue guidance",
+    "persists": "Partly - Apr 2026 lessons-learned gap"
+   },
+   {
+    "number": "GAO-23-105867",
+    "title": "Defense Software Acquisitions: Changes to Requirements, Oversight, and Tools Needed for Weapon Programs",
+    "date": "2023-07-20",
+    "problem": "Weapon programs still waterfall",
+    "segments": [
+     "S13",
+     "S01"
+    ],
+    "recommendation": "Change requirements, oversight, tools",
+    "persists": "Yes - GAO-25-107649 (Agile 11 of 24)"
+   },
+   {
+    "number": "GAO-23-106247",
+    "title": "Cloud Computing: DOD Needs to Improve Tracking of Data User Fees",
+    "date": "2023-09-12",
+    "problem": "Cannot track egress fees dept-wide",
+    "segments": [
+     "S10"
+    ],
+    "recommendation": "Track egress fees",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-23-106290",
+    "title": "DOD Software Licenses: Better Guidance and Plans Needed to Ensure Restrictive Practices Are Mitigated",
+    "date": "2023-09-12",
+    "problem": "Restrictive vendor licensing limits cloud migration",
+    "segments": [
+     "S10",
+     "S13"
+    ],
+    "recommendation": "Guidance and plans",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-24-105645",
+    "title": "Artificial Intelligence: Actions Needed to Improve DOD's Workforce Management",
+    "date": "2023-12-14",
+    "problem": "AI workforce unidentified",
+    "segments": [
+     "S11"
+    ],
+    "recommendation": "Identify AI workforce",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-24-106831",
+    "title": "Weapon Systems Annual Assessment: DOD Is Not Yet Well-Positioned to Field Systems with Speed",
+    "date": "2024-06-17",
+    "problem": "New pathways not faster",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Leading product development practices",
+    "persists": "Yes - 2025, 2026"
+   },
+   {
+    "number": "GAO-24-106912",
+    "title": "IT Systems Annual Assessment: DOD Needs to Strengthen Software Metrics and Address Continued Cybersecurity and Reporting Gaps",
+    "date": "2024-07-11",
+    "problem": "Software metrics, cyber, reporting gaps",
+    "segments": [
+     "S09",
+     "S13"
+    ],
+    "recommendation": "Strengthen metrics",
+    "persists": "Yes - GAO-25-107649"
+   },
+   {
+    "number": "GAO-24-107566",
+    "title": "Army Modernization: Actions Needed to Support Fielding New Equipment",
+    "date": "2024-07-15",
+    "problem": "Fielding before support ready",
+    "segments": [
+     "S02"
+    ],
+    "recommendation": "Support fielding",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-24-106841",
+    "title": "GPS Modernization: Delays Continue in Delivering More Secure Capability for the Warfighter",
+    "date": "2024-09-09",
+    "problem": "M-code delays all segments",
+    "segments": [
+     "S07"
+    ],
+    "recommendation": "Testing/demonstration",
+    "persists": "Yes (long-running)"
+   },
+   {
+    "number": "DODIG-2025-039",
+    "title": "Evaluation of the Effectiveness of the CDAO's AI Governance and Acquisition Process",
+    "date": "2024-11-14",
+    "problem": "No charter/implementation plan; CDAO-CIO boundary disputes",
+    "segments": [
+     "S11",
+     "S10"
+    ],
+    "recommendation": "Publish implementation plan; complete directive",
+    "persists": "DoDD 5105.89 Nov 2024; CDAO realigned Aug 2025"
+   },
+   {
+    "number": "GAO-25-106931",
+    "title": "Weapon Systems Acquisition: DOD Needs Better Planning to Attain Benefits of Modular Open Systems",
+    "date": "2025-01-22",
+    "problem": "MOSA planning and cost-benefit gaps",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "14 recs (method, planning, coordination, policy)",
+    "persists": "Yes - GAO official Jun 2026"
+   },
+   {
+    "number": "GAO-25-106454",
+    "title": "Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework",
+    "date": "2025-04-08",
+    "problem": "No CJADC2 framework; isolated service efforts; classification barrier; lessons not shared",
+    "segments": [
+     "S01",
+     "S03",
+     "S06"
+    ],
+    "recommendation": "Framework, lessons-learned mechanism, address key challenges",
+    "persists": "Open (2025)"
+   },
+   {
+    "number": "GAO-25-107649",
+    "title": "IT Systems Annual Assessment: DOD Needs to Improve Performance Reporting and Cybersecurity Planning",
+    "date": "2025-06-12",
+    "problem": "Zero trust plans missing (4), cyber strategy missing (2), metrics gaps",
+    "segments": [
+     "S09",
+     "S13"
+    ],
+    "recommendation": "Report performance metrics",
+    "persists": "Yes (from 2022)"
+   },
+   {
+    "number": "DODIG-2025-126",
+    "title": "Evaluation of a Line of Effort in the DoD's Implementation of the CJADC2 Strategy (mission partner information sharing)",
+    "date": "2025-07-18",
+    "problem": "Public evidence insufficient",
+    "segments": [
+     "S06"
+    ],
+    "recommendation": "Public evidence insufficient",
+    "persists": "Unknown"
+   },
+   {
+    "number": "GAO-26-107085",
+    "title": "Missile Warning Satellites: SDA Should Be More Realistic and Transparent About Risks to Capability Delivery",
+    "date": "2026-01-28",
+    "problem": "Readiness overestimated; schedule risk",
+    "segments": [
+     "S05"
+    ],
+    "recommendation": "Realistic risk reporting",
+    "persists": "Open"
+   },
+   {
+    "number": "GAO AI Acquisitions (number not captured)",
+    "title": "Artificial Intelligence Acquisitions: Agencies Should Collect and Apply Lessons Learned to Improve Future Procurements",
+    "date": "2026-04-13",
+    "problem": "No lessons-learned collection; expertise and cost-understanding gaps",
+    "segments": [
+     "S11"
+    ],
+    "recommendation": "Require lessons-learned collection (4 recs concurred)",
+    "persists": "Open"
+   },
+   {
+    "number": "DoD IG Advana audit (number not captured)",
+    "title": "Audit of Advana interface controls (OCDAO)",
+    "date": "2026-05",
+    "problem": "NIST interface controls not implemented; 78/387 systems without DSAs; access management",
+    "segments": [
+     "S03",
+     "S12"
+    ],
+    "recommendation": "12 recs; 10 non-concurred",
+    "persists": "Open/disputed"
+   },
+   {
+    "number": "GAO Weapon Systems Annual Assessment 2026 (number not captured)",
+    "title": "Weapon Systems Annual Assessment (July 2, 2026)",
+    "date": "2026-07-02",
+    "problem": ">12 years average delivery; workforce losses; MTA technology maturity",
+    "segments": [
+     "S13"
+    ],
+    "recommendation": "Require mature technologies for rapid pathways (DOD concurred)",
+    "persists": "Open"
+   }
+  ],
+  "crs_reports": [
+   {
+    "number": "IF11493",
+    "title": "Joint All-Domain Command and Control (JADC2)",
+    "author": "John R. Hoehn",
+    "dates": "2020 through v13; third-party citation says updated 2025-01-21",
+    "url": "https://www.congress.gov/crs-product/IF11493",
+    "note": "Text not retrievable from this environment"
+   },
+   {
+    "number": "R46725",
+    "title": "Joint All-Domain Command and Control: Background and Issues for Congress",
+    "author": "John R. Hoehn",
+    "dates": "2021 (v1)",
+    "url": "https://www.congress.gov/crs-product/R46725",
+    "note": "Text not retrievable from this environment"
+   },
+   {
+    "number": "CRS (Jan 2026, number unknown)",
+    "title": "Report discussing tanker tactical data link access (cited by Defense One, Mar 23, 2026)",
+    "author": "CRS",
+    "dates": "2026-01",
+    "url": "https://app.bigdata.com/documents/A4A5DDD0A78283BA94C5BC43D3215F6C",
+    "note": "Secondary citation only"
+   },
+   {
+    "number": "CRS Army tactical network",
+    "title": "Public evidence insufficient - no CRS product dedicated to ITN/Army tactical network located",
+    "author": "",
+    "dates": "",
+    "url": "",
+    "note": ""
+   }
+  ],
+  "pain_phrases": [
+   "swivel chair analysis",
+   "largely in isolation",
+   "has yet to build a framework",
+   "overly restrictive data classification",
+   "beyond their purview",
+   "duplicative efforts",
+   "lacks the personnel",
+   "lacks authority to direct other offices",
+   "has not yet defined which existing systems will contribute",
+   "no complete plan / cost estimate / affordability analysis",
+   "significantly behind schedule and over budget",
+   "deferred more difficult work",
+   "beyond its estimated end-of-life",
+   "persistent delays",
+   "consistent metrics",
+   "waterfall",
+   "not yet well-positioned to field systems with speed",
+   "average time to deliver more than 12 years",
+   "workforce issues / loss of institutional knowledge",
+   "zero trust by 2027 deadline",
+   "no approved cybersecurity strategy",
+   "data egress fees",
+   "restrictive vendor practices",
+   "closed, proprietary architectures",
+   "resist sharing interface specifications",
+   "vendor-locked systems",
+   "no central program office",
+   "proprietary nature / few opportunities to integrate",
+   "cannot be upgraded affordably",
+   "vulnerabilities will remain",
+   "delays continue (M-code)",
+   "risks losing control of the battlefield",
+   "world class (Russian EW)",
+   "not enough usable data to train the AI",
+   "long acquisition processes",
+   "shortages of skilled staff",
+   "can't fully identify AI workforce",
+   "not systematically collecting lessons learned",
+   "decision rights / overlap (CDAO vs CIO)",
+   "limited assurance data are accurate and complete",
+   "misinformed decisions",
+   "data sharing agreements missing",
+   "high staff turnover",
+   "cut contracted staff by 80 percent",
+   "program is currently on hold",
+   "complex technical architecture requiring rationalization",
+   "acquisition strategy confusion",
+   "biased to caution",
+   "lack of reciprocity",
+   "eliminate blockers to data sharing, ATOs",
+   "cross-domain data access",
+   "mostly unusable (NGC2 connection issues under jamming)",
+   "degraded communications environment",
+   "backup information conduit"
+  ],
+  "persistence_chains": [
+   {
+    "theme": "Joint C2 definition and governance",
+    "chain": [
+     "GAO-19-456T 2019",
+     "GAO-20-389 2020",
+     "GAO-23-105495 2023",
+     "GAO-25-106454 2025",
+     "DODIG-2025-126 2025"
+    ],
+    "status": "Persists; framework recommendation open"
+   },
+   {
+    "theme": "Space C2 replacement",
+    "chain": [
+     "GAO-20-146 2019",
+     "GAO-22-104685 2021",
+     "GAO-23-105920 2023"
+    ],
+    "status": "Persisted through 2023; later status unknown"
+   },
+   {
+    "theme": "Software acquisition speed",
+    "chain": [
+     "GAO-21-105298 2021",
+     "GAO-23-105867 2023",
+     "GAO-24-106831 2024",
+     "GAO-25-107649 2025",
+     "GAO 2026 annual assessment"
+    ],
+    "status": "Persists"
+   },
+   {
+    "theme": "Zero trust / cyber planning",
+    "chain": [
+     "GAO IT assessment 2022 (10 programs no strategy)",
+     "GAO-24-106912 2024",
+     "GAO-25-107649 2025 (2 programs)"
+    ],
+    "status": "Improving but incomplete vs FY2027 deadline"
+   },
+   {
+    "theme": "PNT resilience",
+    "chain": [
+     "GAO-21-320SP 2021",
+     "GAO Aug 2022",
+     "GAO-24-106841 2024"
+    ],
+    "status": "Persists"
+   },
+   {
+    "theme": "Vendor lock-in / MOSA",
+    "chain": [
+     "GAO-23-106059 2023",
+     "GAO-23-106290 2023",
+     "GAO-25-106931 2025",
+     "GAO official Jun 2026"
+    ],
+    "status": "Persists"
+   },
+   {
+    "theme": "Enterprise data/AI governance",
+    "chain": [
+     "GAO-22-105834 2022",
+     "GAO-23-105850 2023",
+     "GAO-24-105645 2023",
+     "DODIG-2025-039 2024",
+     "DoD IG Advana audit 2026",
+     "GAO AI acquisitions Apr 2026"
+    ],
+    "status": "Persists; organizational churn 2025-2026"
+   }
+  ]
+ },
+ "search_log": [
+  {
+   "query": "site:gao.gov Joint All Domain Command and Control JADC2 report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Advanced Battle Management System ABMS Air Force report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Army tactical network modernization Integrated Tactical Network report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Space Command and Control ATLAS SPADOC report",
+   "useful": true
+  },
+  {
+   "query": "site:dodig.mil audit Joint All-Domain Command and Control",
+   "useful": true
+  },
+  {
+   "query": "site:dodig.mil audit Mission Partner Environment coalition information sharing",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov defense software acquisition pathway weapon programs report 2023 2024",
+   "useful": true
+  },
+  {
+   "query": "Congressional Research Service JADC2 report Hoehn IF11493 R46725",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Distributed Common Ground System DCGS intelligence report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Mission Partner Environment coalition information sharing report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov Joint Warfighting Cloud Capability JWCC cloud computing DOD report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov DOD zero trust cybersecurity implementation report",
+   "useful": true
+  },
+  {
+   "query": "site:gao.gov positioning navigation timing GPS alternative PNT DOD report (WebSearch budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov electromagnetic spectrum operations superiority DOD report (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov contested logistics Indo-Pacific DOD report (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov artificial intelligence DOD CDAO acquisition report (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:dodig.mil Advana audit data analytics (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov DOD authority to operate ATO RMF software delays (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:dodig.mil audit Army Integrated Tactical Network / Capability Set (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov Project Overmatch Navy command and control report (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov Next Generation Command and Control NGC2 Army (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "CRS Army network modernization tactical network report (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "site:gao.gov modular open systems approach vendor lock-in data rights 2025 (budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO April 2025 Defense Command and Control CJADC2 comprehensive framework",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: DoD IG July 2025 CJADC2 mission partner information sharing DODIG-2025-126",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO Jan 2023 battle management joint command and control ABMS",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO Space Command and Control ATLAS SPADOC delays",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO Army tactical network modernization ITN",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO defense software acquisitions July 2023",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO DoD zero trust IT systems annual assessment",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO DoD AI acquisition CDAO inventory workforce",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO DoD electromagnetic spectrum operations",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO PNT GPS alternative DOD",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: GAO contested logistics Indo-Pacific",
+   "useful": false
+  },
+  {
+   "query": "Bigdata smart: DoD IG Advana audit",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO Army NGC2 prototype Anduril oversight",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO MOSA better planning 2025 vendor lock-in",
+   "useful": true
+  },
+  {
+   "query": "Bigdata smart: GAO DoD cloud JWCC egress fees",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: CJADC2 + GAO Apr-Jul 2025",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: Inspector General + mission partner Jul-Dec 2025",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: SPADOC / Space C2 + GAO 2019-2026",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO software Agile Jul-Sep 2023",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO zero trust DOD 2024-2025",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO Integrated Tactical Network / Unified Network",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO PNT positioning navigation",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO electromagnetic spectrum",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO contested logistics",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO JWCC Joint Warfighting Cloud",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO artificial intelligence DOD 2022-2025",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: Inspector General Army tactical network",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO Overmatch",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO ABMS 2020-2021",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: GAO authority to operate ATO",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: Mission Partner Environment GAO/IG",
+   "useful": false
+  },
+  {
+   "query": "Bigdata fast: Congressional Research Service tactical network / JADC2",
+   "useful": true
+  },
+  {
+   "query": "Bigdata fast: GAO DCGS",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: GAO-25-106454",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: GAO-23-105495",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: DODIG-2025-126",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: IF11493 OR R46725",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: GAO-23-105920 OR GAO-20-146",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: GAO-21-64 electromagnetic spectrum",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: GAO-22-104765 etc.",
+   "useful": false
+  },
+  {
+   "query": "GitHub gaoreports mirror: Space Command and Control",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: software Defense Agile",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: artificial intelligence Defense",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: interoperability Defense (2 pages)",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: battle management",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: positioning, navigation, and timing",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: cloud DOD",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: Army network modernization",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: weapon systems cybersecurity DOD",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: data DOD management decision 2023",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: GAO-25-106931 / GAO-24-106912 / GAO-24-107566",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: Mission Partner / contested logistics / coalition",
+   "useful": false
+  },
+  {
+   "query": "GitHub gaoreports mirror: electromagnetic spectrum",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: Advanced Battle Management System",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: Space Development Agency",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: software DOD modernization 2024",
+   "useful": true
+  },
+  {
+   "query": "GitHub gaoreports mirror: tactical data / Link 16",
+   "useful": false
+  },
+  {
+   "query": "GitHub gaoreports mirror: GAO-25/GAO-26 command and control, Golden Dome, JWCC",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: swivel chair CJADC2 GAO",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: Highlights of GAO-25-106454 etc.",
+   "useful": false
+  },
+  {
+   "query": "GitHub code search: Project Overmatch GAO annual assessment",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: DODIG-2025 Inspector General report title",
+   "useful": true
+  },
+  {
+   "query": "GitHub code search: DODIG-2025-039 / Advana DODIG",
+   "useful": false
+  },
+  {
+   "query": "Raw fetch: DeepBlueDynamics/research GAO-21-320SP full text",
+   "useful": true
+  },
+  {
+   "query": "Raw fetch: jgs-se-knowledge-packs GAO Agile chapter (Space C2 case)",
+   "useful": true
+  },
+  {
+   "query": "Raw fetch: DoD CIO State of DevSecOps 2025 markdown",
+   "useful": true
+  },
+  {
+   "query": "Raw fetch: BruceBAWest blog on DODIG-2025-039",
+   "useful": true
+  },
+  {
+   "query": "Raw fetch: hack4rva C4 gaps and VitalPointAI Bastion notes citing GAO-25-106454",
+   "useful": true
+  }
+ ],
+ "saturation_statement": "Saturation was reached for GAO products on JADC2/CJADC2, ABMS, Space C2, software acquisition, IT/zero-trust assessments, cloud, MOSA, PNT, EMSO and AI (titles, dates, summaries and key quotes triangulated from at least two independent captures each). Not saturated: full findings of DoD IG reports (DODIG-2025-126 on mission-partner sharing, DODIG-2020-068 on GCCS-J, the 2026 Advana audit's report number), GAO-23-105920's body, GAO-23-105611, GAO-25-108043, CRS report texts, and any GAO/IG coverage of DCGS, Project Overmatch, NGC2, JWCC performance or contested logistics C2 (2019-2026). These gaps are caused by the research environment's network egress blocks on gao.gov, dodig.mil, congress.gov and news domains plus exhausted WebSearch/Bigdata budgets, not by exhaustive negative searching; a follow-on agent with direct access should fetch the primary PDFs to close them.",
+ "sources": [
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework (GAO-25-106454)",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105495",
+   "title": "Battle Management: DOD and Air Force Continue to Define Joint Command and Control Efforts (GAO-23-105495)",
+   "pub_date": "2023-01-13",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-20-389",
+   "title": "Defense Acquisitions: Action Is Needed to Provide Clarity and Mitigate Risks of the Air Force's Planned ABMS (GAO-20-389)",
+   "pub_date": "2020-04-16",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-19-456t",
+   "title": "Defense Acquisitions: Observations on the F-35 and Air Force's ABMS (GAO-19-456T)",
+   "pub_date": "2019-05-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+   "title": "DoD OIG DODIG-2025-126 Evaluation of a Line of Effort in the DoD's Implementation of the CJADC2 Strategy",
+   "pub_date": "2025-07-18",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dodig.mil/reports.html/Article/3838306/project-announcement-evaluation-of-the-dods-implementation-of-combined-joint-al/",
+   "title": "DoD OIG Project Announcement D2024-DEV0SI-0130.000",
+   "pub_date": "2024-07-15",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-20-146",
+   "title": "Space Command and Control: Comprehensive Planning and Oversight Could Help (GAO-20-146)",
+   "pub_date": "2019-10-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-104685",
+   "title": "Space Command and Control: Opportunities Exist to Enhance Annual Reporting (GAO-22-104685)",
+   "pub_date": "2021-12-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105920",
+   "title": "Space Command and Control: Improved Tracking and Reporting Would Clarify Progress amid Persistent Delays (GAO-23-105920)",
+   "pub_date": "2023-06-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-105298",
+   "title": "DOD Software Acquisition: Status of and Challenges Related to Reform Efforts (GAO-21-105298)",
+   "pub_date": "2021-09-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105867",
+   "title": "Defense Software Acquisitions: Changes to Requirements, Oversight, and Tools Needed for Weapon Programs (GAO-23-105867)",
+   "pub_date": "2023-07-20",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105611",
+   "title": "Software Acquisition: Additional Actions Needed to Help DOD Implement Future Modernization Efforts (GAO-23-105611)",
+   "pub_date": "2023-01-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-107649",
+   "title": "IT Systems Annual Assessment: DOD Needs to Improve Performance Reporting and Cybersecurity Planning (GAO-25-107649)",
+   "pub_date": "2025-06-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-24-106912",
+   "title": "IT Systems Annual Assessment: DOD Needs to Strengthen Software Metrics (GAO-24-106912)",
+   "pub_date": "2024-07-11",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-106247",
+   "title": "Cloud Computing: DOD Needs to Improve Tracking of Data User Fees (GAO-23-106247)",
+   "pub_date": "2023-09-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-106290",
+   "title": "DOD Software Licenses: Better Guidance and Plans Needed to Ensure Restrictive Practices Are Mitigated (GAO-23-106290)",
+   "pub_date": "2023-09-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-104070",
+   "title": "Cloud Computing: DOD Needs to Improve Workforce Planning and Software Application Modernization (GAO-22-104070)",
+   "pub_date": "2022-06-29",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106931",
+   "title": "Weapon Systems Acquisition: DOD Needs Better Planning to Attain Benefits of Modular Open Systems (GAO-25-106931)",
+   "pub_date": "2025-01-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-68",
+   "title": "Defense Acquisitions: Joint Cyber Warfighting Architecture Would Benefit from Defined Goals and Governance (GAO-21-68)",
+   "pub_date": "2020-11-19",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-104695",
+   "title": "Defense Acquisitions: Cyber Command Needs to Develop Metrics to Assess Warfighting Capabilities (GAO-22-104695)",
+   "pub_date": "2022-03-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-99",
+   "title": "Close Air Support: Actions Needed to Enhance Friendly Force Tracking Capabilities (GAO-21-99)",
+   "pub_date": "2021-01-21",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-320sp",
+   "title": "Defense Navigation Capabilities: DOD is Developing PNT Technologies to Complement GPS (GAO-21-320SP)",
+   "pub_date": "2021-05-10",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-24-106841",
+   "title": "GPS Modernization: Delays Continue in Delivering More Secure Capability for the Warfighter (GAO-24-106841)",
+   "pub_date": "2024-09-09",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-64",
+   "title": "Electromagnetic Spectrum Operations: DOD Needs to Address Governance and Oversight Issues (GAO-21-64)",
+   "pub_date": "2020-12-10",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-440t",
+   "title": "Electromagnetic Spectrum Operations: DOD Needs to Take Action to Help Ensure Superiority (GAO-21-440T)",
+   "pub_date": "2021-03-19",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-104765",
+   "title": "Artificial Intelligence: Status of Developing and Acquiring Capabilities for Weapon Systems (GAO-22-104765)",
+   "pub_date": "2022-02-17",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-105834",
+   "title": "Artificial Intelligence: DOD Should Improve Strategies, Inventory Process, and Collaboration Guidance (GAO-22-105834)",
+   "pub_date": "2022-03-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105850",
+   "title": "Artificial Intelligence: DOD Needs Department-Wide Guidance to Inform Acquisitions (GAO-23-105850)",
+   "pub_date": "2023-06-29",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-24-105645",
+   "title": "Artificial Intelligence: Actions Needed to Improve DOD's Workforce Management (GAO-24-105645)",
+   "pub_date": "2023-12-14",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/21ED375018D421CE91738AA048DEE5F2",
+   "title": "GAO: Artificial Intelligence Acquisitions: Agencies Should Collect and Apply Lessons Learned (Bigdata-indexed GAO page)",
+   "pub_date": "2026-04-13",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2024/Nov/18/2003585216/-1/-1/1/DODIG-2025-039_REDACTED.PDF",
+   "title": "DoD OIG DODIG-2025-039 Evaluation of the Effectiveness of the CDAO's AI Governance and Acquisition Process",
+   "pub_date": "2024-11-14",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/BruceBAWest/brucebawest.github.io/master/blog/evaluating-the-effectiveness-of-pentagons-cdao-updates-from-the-ig-office/index.html",
+   "title": "Bruce B. A. West, 'The CDAO evaluation was really about decision rights' (blog summarizing DODIG-2025-039)",
+   "pub_date": "2026-07-17",
+   "tier": 4
+  },
+  {
+   "url": "https://app.bigdata.com/documents/1F783F795157BFDEF5770939D9DD34A6",
+   "title": "MeriTalk: DOD IG Flags Advana Interface Control Weaknesses, Raising Data Accuracy Issues",
+   "pub_date": "2026-05-18",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/C67C25CDAC8086E193A9AEF1DE2579B2",
+   "title": "Defense One: Pentagon reductions set back critical AI-data platform",
+   "pub_date": "2025-08-20",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/6A988D412B27AEAE085746AB8617886B",
+   "title": "Washington Technology: Pentagon halts $15B Advana recompete draft solicitation",
+   "pub_date": "2025-07-24",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/516297BBDE4F85027A764595AFF20CF5",
+   "title": "MeriTalk: Pentagon to Split Advana Data Platform",
+   "pub_date": "2026-01-16",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/9DA074327DB1A42197A5DA7ADAC4209E",
+   "title": "MeriTalk: Accenture Lands $821M for War Data Platform Integration",
+   "pub_date": "2026-07-10",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/B9AB663F88AB0E7569FC8DA7476D62B9",
+   "title": "AEI: Advancing the War Data Platform",
+   "pub_date": "2026-09-11",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/6620FF7FF51620E308A9808CC4FCF692",
+   "title": "Bloomberg News: DOD Admits Delay, Deficiencies Hamstringing Joint Command Plan",
+   "pub_date": "2023-01-13",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/FC720C4BA5C37139FEAB567DB6911524",
+   "title": "Bloomberg News: Pentagon Weapons Software Built Using Obsolete Systems, GAO Says",
+   "pub_date": "2023-07-21",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/02A9259916BF17B87BB5C7CCB5D1979A",
+   "title": "MeriTalk: GAO Pushes DoD to Create Framework for CJADC2 Investments",
+   "pub_date": "2025-04-08",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/1B62788B26CE87662CEF23787085F18A",
+   "title": "MeriTalk: GAO Flags Cyber, Data Metrics Failures in DoD IT Projects",
+   "pub_date": "2025-06-13",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/F223ECE66324E2DD2F38E68A7D63995A",
+   "title": "TechRadar: US Department of Defense urged to address serious IT systems flaws",
+   "pub_date": "2025-06-13",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/97F490DC7E4497B01143654DA6A09FBD",
+   "title": "The Register: US auditors beg Pentagon to pay attention to latest report about IT system flaws",
+   "pub_date": "2025-06-12",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/B79ED0091A58A1E43D7AA95E78387BCE",
+   "title": "The Washington Post: AI has transformed the Pentagon's aging networks into a national security risk",
+   "pub_date": "2026-09-17",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A25A25BB74B0A0B608729B5688F4A9FF",
+   "title": "European Security: GPS under threat (citing GAO Aug 2022)",
+   "pub_date": "2025-05-05",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/F72AF21ECB7FAB9BCFC3FD6F6858ADFC",
+   "title": "Forbes: The Pentagon's $45 Billion 140 MHz Spectrum Blindspot (citing GAO-21-64)",
+   "pub_date": "2022-12-19",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/12B9551949EC77C5608425D00A602F06",
+   "title": "GAO: Spectrum Management: DOD and NTIA Should Improve External Collaboration",
+   "pub_date": "2026-06-05",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/419D73666BC7B2591199AA1EBCDF3E97",
+   "title": "Defense Daily: MOSA Implementation By Pentagon Lagging, GAO Official Says",
+   "pub_date": "2026-06-10",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/606464D826475D3413472FE412CE7EB3",
+   "title": "HII (Andy Green) op-ed: The Pentagon must activate this powerful, underused approach to acquisition",
+   "pub_date": "2025-11-07",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/01249F7929B104D4BE26E43AC854BF81",
+   "title": "MeriTalk: GAO: DOD Weapons Acquisition Continues to Face Delays (2026 annual assessment)",
+   "pub_date": "2026-07-06",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/AA8A0E05A66DC41DE7B33A19901A40F5",
+   "title": "Telesat op-ed citing GAO July 2, 2026 annual assessment",
+   "pub_date": "2026-08-11",
+   "tier": 2
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-24-106831",
+   "title": "Weapon Systems Annual Assessment: DOD Is Not Yet Well-Positioned to Field Systems with Speed (GAO-24-106831)",
+   "pub_date": "2024-06-17",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-106059",
+   "title": "Weapon Systems Annual Assessment 2023 (GAO-23-106059)",
+   "pub_date": "2023-06-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-22-105230",
+   "title": "Weapon Systems Annual Assessment 2022 (GAO-22-105230)",
+   "pub_date": "2022-06-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-107569",
+   "title": "Weapon Systems Annual Assessment 2025 (GAO-25-107569)",
+   "pub_date": "2025-06-11",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105008",
+   "title": "Middle-Tier Defense Acquisitions (GAO-23-105008)",
+   "pub_date": "2023-02-07",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-24-107566",
+   "title": "Army Modernization: Actions Needed to Support Fielding New Equipment (GAO-24-107566)",
+   "pub_date": "2024-07-15",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-13-179",
+   "title": "Army Networks: Size and Scope of Modernization Investment Merit Increased Oversight (GAO-13-179)",
+   "pub_date": "2013-01-10",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-13-711",
+   "title": "Army Networks: Opportunities Exist to Better Utilize Results from Network Integration Evaluations (GAO-13-711)",
+   "pub_date": "2013-08-22",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/71DED107B7C7B478D5EB0FC3C2244D1E",
+   "title": "Business Insider: US soldiers stormed a desert city ... (NGC2 at Project Convergence Capstone)",
+   "pub_date": "2026-09-05",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/6728B0EA220C6BF81EFDEBA094CC6F48",
+   "title": "Defense News: Here's what's behind the US Army's $2.1B R&D funding increase ($904M NGC2)",
+   "pub_date": "2026-05-06",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/5821BD9AAC35320A95C78A9D338E7800",
+   "title": "Persistent Systems press release: $87.5M NGC2 transport-layer order (total $121.5M)",
+   "pub_date": "2026-02-04",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/63512F246E1FAEF81BAF03CE397A3778",
+   "title": "Palantir statement on NGC2 common data layer baseline (Foundry cloud layer, Lattice tactical layer)",
+   "pub_date": "2026-06-22",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/829AD92ED79ACAF420F88752F1F879E4",
+   "title": "Onebrief press release: ATO within NGC2 and division-scale planning",
+   "pub_date": "2026-06-26",
+   "tier": 2
+  },
+  {
+   "url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "title": "DoD CIO: The State of DevSecOps within the Department of Defense (March 2025) - GitHub mirror",
+   "pub_date": "2025-03-01",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/436A22707097BC785DBBBEAF29E8E80E",
+   "title": "Department of War: Artificial Intelligence Strategy memorandum",
+   "pub_date": "2026-01-13",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/crs-product/IF11493",
+   "title": "CRS IF11493 Joint All-Domain Command and Control (JADC2)",
+   "pub_date": "2025-01-21",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/crs-product/R46725",
+   "title": "CRS R46725 Joint All-Domain Command and Control: Background and Issues for Congress",
+   "pub_date": "2021-01-01",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A4A5DDD0A78283BA94C5BC43D3215F6C",
+   "title": "Defense One: KC-135 crash in Iraq spurs calls for communications upgrades (citing Jan 2026 CRS report)",
+   "pub_date": "2026-03-23",
+   "tier": 3
+  },
+  {
+   "url": "https://app.bigdata.com/documents/C993D23C5CC26CC1A6F400C105B7FBDA",
+   "title": "SIGNAL Magazine: From Tactical Edge to Global Reach: The Army's NGC2 and Its Role in CJADC2",
+   "pub_date": "2025-08-01",
+   "tier": 3
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-26-107085",
+   "title": "Missile Warning Satellites: SDA Should Be More Realistic and Transparent About Risks (GAO-26-107085)",
+   "pub_date": "2026-01-28",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/b-412746",
+   "title": "GAO bid protest decision B-412746, Palantir USG, Inc. (DCGS-A2)",
+   "pub_date": "2016-06-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/2119334/audit-of-security-controls-over-the-department-of-defenses-global-command-and-c/",
+   "title": "DoD OIG DODIG-2020-068 Audit of Security Controls Over GCCS-J",
+   "pub_date": "2020-03-01",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/E282E426884DEA005A8959D059158476",
+   "title": "Maritime Executive: GAO: U.S. Navy's Unmanned Systems Programs Needed Restructuring (Project Overmatch context)",
+   "pub_date": "2026-06-17",
+   "tier": 3
+  },
+  {
+   "url": "https://raw.githubusercontent.com/DeepBlueDynamics/research/main/docs/F/F3_GAO-21-320SP_Defense_Navigation.md",
+   "title": "GitHub mirror of GAO-21-320SP full text (pymupdf extraction)",
+   "pub_date": "2026-08-26",
+   "tier": 4
+  },
+  {
+   "url": "https://raw.githubusercontent.com/jgsystemsconsulting/jgs-se-knowledge-packs/main/packs/gao-agile/chapters/ch02-gao-agile-adoption-challenges-federal-response.md",
+   "title": "jgs-se-knowledge-packs: Federal Agile adoption challenges (GAO-12-681 / GAO-20-146 case study)",
+   "pub_date": "2026-01-01",
+   "tier": 4
+  },
+  {
+   "url": "https://api.github.com/repositories/701045986",
+   "title": "GovHawkDC/gaoreports GAO product metadata mirror (used for titles, dates, summaries)",
+   "pub_date": "2026-01-01",
+   "tier": 4
+  }
+ ]
+}

@@ -1,0 +1,1846 @@
+{
+ "service": "Department of the Air Force (Air Force + related)",
+ "research_run_caveat": "TOOLING CAVEAT: In this run the session-wide WebSearch budget was already exhausted (200/200, shared across agents) before this agent's first query; every WebFetch to .mil/.gov/news/wikipedia domains was blocked by the network egress proxy; and the Bigdata.com news connector returned out-of-credits. All evidence below was therefore gathered through ~45 GitHub code-search queries against public repositories that mirror or excerpt primary documents (congressional hearing transcripts, DoD/USAF news-release indexes, DoD contract announcements, parsed RDT&E justification-book text, SAM.gov notice scrapes, earnings-call transcripts, NIH/SBA SBIR notices) plus defense-newsletter archives. Snippets were read, not full documents, so quotations are partial and dates were taken from the mirrors. Fields marked 'Public evidence insufficient' mean not retrievable in THIS run, not absent in reality. Several items rest on Tier-4 compilations (e.g., the '~$951M FY26 ABMS' figure and 'BG Jason Voorheis as PAE C3BM' both come from a hobbyist PEO-tracker repo) and are labeled LOW/MEDIUM accordingly. Recommend a re-run with live fetch access to af.mil, aflcmc.af.mil, sam.gov, comptroller.war.gov (FY26/FY27 DAF RDT&E Vol II PE 0604003F), gao.gov and defensescoop.com before investment-grade use.",
+ "organizations": [
+  {
+   "name": "Department of the Air Force Portfolio Acquisition Executive for Command, Control, Communications and Battle Management (formerly DAF PEO C3BM)",
+   "acronym": "DAF PAE C3BM (ex-PEO C3BM)",
+   "parent": "Office of the Assistant Secretary of the Air Force for Acquisition, Technology and Logistics (SAF/AQ) as acquisition executive; hosted/organizationally supported by Air Force Life Cycle Management Center (AFLCMC), Hanscom AFB, MA (C3BM pages live at aflcmc.af.mil/C3BM/)",
+   "role": "program office",
+   "portfolio": "Acquisition lead for the DAF BATTLE NETWORK (ABMS successor framing): ABMS division (digital infrastructure, aerial networking, software/apps incl. CBC2, deployable systems incl. TOC-L), Kessel Run division (now inside an Air Operations Center Program Office, symbol PAE C3BM/C3C), Operational Response Team division, Airspace Mission Planning (C3BM/C3M, 'Conjure' branch), and from Feb 2026 an integrated program office for the Joint Fires Network. Publicly described as spanning 50+ programs (INFERENCE from Tier-4 tracker and press summaries).",
+   "current_status_2026": "FACT: PEO C3BM stood up Sept 2022 (Sept 24, 2025 AF release: 'three years leading the DAF BATTLE NETWORK effort'). FACT: Feb 20, 2025 adopted an Integrated Product Team construct; July 30, 2025 announced new 'strategic anchors'; Dec 18, 2025 'Engagement Day' drew ~1,500 registered industry participants (afmc.af.mil article 4365588). FACT: Under SecWar's 'Warfighting Acquisition System' (DoD Acquisition Transformation Strategy, Nov 10, 2025) the DAF implemented Portfolio Acquisition Executives; DAF release Jan 8, 2026 'DAF puts acquisition on wartime footing' (af.mil/jbsa.mil article 4374497). By Feb 2026 official releases use 'Portfolio Acquisition Executive for C3BM' (Feb 3, 2026 'Cropsey reflects on C3BM, future' - Cropsey departed; Feb 9, 2026 'C3BM takes lead on Joint Fires Network'). FACT (MEDIUM): March 2026 SAM.gov sources-sought signed 'Air Operations Center Program Office, Kessel Run Division, PAE C3BM/C3C'. FACT: Breaking Defense May 29, 2026: DAF 'still working' to sort space programs into portfolios, final PAE structure 'in days'. Leader after Cropsey: a Tier-4 tracker lists 'BG Jason Voorheis, PAE (Feb 2026)' - NOT independently verified in this run (LOW). Military Deputy for Space: Raj Agrawal (SPIE program, April 27, 2026).",
+   "leader_title": "Portfolio Acquisition Executive (general officer; Brig. Gen. Luke Cropsey led Sept 2022-Feb 2026; successor unverified - see status). Military Deputy for Space: Raj Agrawal (2026).",
+   "key_programs": [
+    "DAF BATTLE NETWORK / ABMS (PE 0604003F)",
+    "Cloud-Based Command and Control (CBC2)",
+    "Tactical Operations Center-Light (TOC-L)",
+    "ABMS Digital Infrastructure (DI) incl. DBMN, SD-WAN, Deployable DI",
+    "Kessel Run / KRADOS AOC software (Air Operations Center Program Office)",
+    "Joint Fires Network integrated program office (Feb 2026)",
+    "Airspace Mission Planning (C3M)",
+    "Software developer student pipeline (1D7X4P) launched early 2026"
+   ],
+   "startup_relevance": "HIGH. This is the single acquisition front door for DAF C2/battle-management software. Its own FY24 justification text lists the vehicles it uses: JADC2 MA-MLS IDIQ, JADC2 BAA (with a CRADA call), JADC2 Commercial Solutions Opening (FA8612-21-S-C001, open to Nov 9, 2026 per SAM scrape), SBIR Phase III, and existing vehicles. Realistic entry for a two-founder startup is (a) the JADC2 CSO or Kessel Run DevSecOps CSO with a narrowly scoped prototype, (b) AFWERX SBIR with a C3BM-signed customer memo, or (c) subcontracting to an ABMS DI Consortium member. Engagement Day (Dec 2025) is the documented industry-access event.",
+   "source_url": "https://www.afmc.af.mil/News/Article-Display/Article/4397448/cropsey-reflects-on-c3bm-future",
+   "pub_date": "2026-02-03 (Cropsey departure); 2026-02-09 (JFN IPO); 2025-12-18 (Engagement Day); 2025-09-24 (3-year mark)",
+   "confidence": "HIGH on rename/dates; LOW on named successor"
+  },
+  {
+   "name": "Advanced Battle Management System Cross-Functional Team",
+   "acronym": "ABMS CFT",
+   "parent": "Headquarters Air Force (operational-requirements side); works with PEO/PAE C3BM",
+   "role": "requirement owner",
+   "portfolio": "Operational lead for DAF BATTLE NETWORK development; defines/validates C2 and battle-management requirements and aligns USAF and USSF C2 modernization.",
+   "current_status_2026": "FACT: DAF FY2025 posture statement to SASC: 'DAF PEO C3BM is the acquisition lead alongside the ABMS Cross-Functional Team which is the operational lead for the development of the DAF BATTLE NETWORK, which aligns USAF and USSF command, control...'. FACT: Aug 2025 AF three-part series on AI for the DAF Battle Network was based on interviews with the 805th Combat Training Squadron and the ABMS CFT. 2026 leadership/structure after the PAE reorganization: Public evidence insufficient.",
+   "leader_title": "CFT lead (general officer; name not retrieved in this run)",
+   "key_programs": [
+    "DAF BATTLE NETWORK requirements",
+    "AI experimentation with 805th CTS/ShOC-N (2025)"
+   ],
+   "startup_relevance": "MEDIUM. Not a contracting entity; it is where operational need is articulated. Startups reach it indirectly through ShOC-N experiments, C3BM Engagement Days and ACC pathfinder units.",
+   "source_url": "https://www.armed-services.senate.gov/ (FY2025 DAF posture hearing, S.Hrg. 118-... CHRG-118shrg62232, mirrored on GitHub weiaiwayne/commDAAF)",
+   "pub_date": "2024 (FY25 posture); 2025-08-29 (AI series)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Air Combat Command (incl. A2/6 ISR-and-cyber staff, USAF Warfare Center, 505th Command and Control Wing / 805th Combat Training Squadron 'ShOC-N', 752nd Operations Support Squadron TOC-L pathfinder, Point Defense Task Force)",
+   "acronym": "ACC",
+   "parent": "Headquarters U.S. Air Force (MAJCOM, JB Langley-Eustis, VA)",
+   "role": "user command",
+   "portfolio": "Lead MAJCOM and requirements sponsor for combat air forces C2 and ISR. ACC Mission Directive 505 (dated 2025-08-18) charges the 505th CCW to 'develop, execute, and assess Combined JADC2 (CJADC2), DAF Battle Network, or other C2 experiments as directed by ACC or requested by another MAJCOM or PEO'. 805th CTS = Shadow Operations Center-Nellis (ShOC-N); 705th CTS = Distributed Mission Operations Center (Kirtland). USAFWC (ACCMD100, 2025-08-14) is HQ for 57th Wing, 53d Wing, 99th ABW, 350th Spectrum Warfare Wing and 505th CCW. 752 OSS (Tinker AFB) is ACC's designated TOC-L pathfinder unit (AFLCMC release Dec 15, 2025) experimenting at Red Flag, Bamboo Eagle and Project Convergence. ACC's Point Defense Task Force (counter-sUAS) is supported by a Point Defense Battle Lab led by the 319th Reconnaissance Wing, Grand Forks (selected Oct 2025). AF/A2/6 at HAF is the DCS for ISR and Cyber Effects Operations; ACC mirrors this as ACC/A2/6.",
+   "current_status_2026": "FACT: The 2024 'Re-optimization' plan to move requirements from MAJCOMs to a new Integrated Capabilities Command was SHELVED by SecAF Meink/CSAF Wilsbach in a Dec 2, 2025 memo (af.mil article 4346040 'Update on recent DAF efforts'): of 19 DAF/USAF changes, 8 continue, 10 terminated, 1 unaddressed; ICC functions folded into HQ AF A5/7; elevation of AFCENT/AFSOUTH out of ACC also shelved (Air & Space Forces Magazine summary, Nov-Dec 2025). INFERENCE: ACC therefore remains the C2/ISR requirements owner for the combat air forces in 2026. FACT: ACC runs a Commercial Solutions Opening, solicitation FA4890-CSO-0001-24 (a vendor white paper references '13 topics of interest' including counter-UAS and target-custody data; the 'AMIC' label used by that vendor is unexpanded - LOW). FACT: ACC posted counter-sUAS radar lease sources-sought/solicitations June 23 and Aug 13, 2026 (SAM.gov via war-brief mirror). FACT: Breaking Defense Aug 28, 2026: after Operation Epic Fury (Iran campaign begun Feb 28, 2026; ceasefire Apr 8, 2026) the Air Force is seeking a more portable C2/comms approach - one-person-carriable, two-person-operable C2 - no solicitation yet.",
+   "leader_title": "Commander, ACC (general); Director of Intelligence/Cyber (ACC/A2/6); Commander, 505th CCW",
+   "key_programs": [
+    "ShOC-N C2 experimentation (CJADC2 / DAF Battle Network)",
+    "TOC-L pathfinder (752 OSS)",
+    "ACC CSO FA4890-CSO-0001-24",
+    "Point Defense Task Force (counter-sUAS)",
+    "Post-Epic Fury portable C2 requirement (2026)"
+   ],
+   "startup_relevance": "HIGH for validation, MEDIUM for money. ShOC-N and the 752 OSS are where a prototype gets operator feedback that acquisition then cites; the ACC CSO is a direct small-OT path; the post-Epic Fury portable-C2 need is an open requirement signal as of Aug-Sep 2026.",
+   "source_url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/",
+   "pub_date": "2025-12-15 (TOC-L pathfinder); 2025-08-18 (ACCMD505); 2025-12-02 (re-opt memo); 2026-08-28 (portable C2)",
+   "confidence": "HIGH on structure; MEDIUM on CSO details"
+  },
+  {
+   "name": "Air Force Life Cycle Management Center (contracting activities at Hanscom AFB FA8730/FA8726, Wright-Patterson AFB FA8612/FA8600, JBSA-Lackland FA8307; C3I & Networks Directorate AFLCMC/HN incl. Platform One (HNC) and Cloud One)",
+   "acronym": "AFLCMC",
+   "parent": "Air Force Materiel Command (AFMC)",
+   "role": "contracting",
+   "portfolio": "Executes contracts, OTs and CSOs for C3BM, PEO Digital and enterprise IT. Contract numbers seen in this run: Istari Federal FA8612-24-C-B004 ($9.1M FFP, AFLCMC WPAFB, June 2024, 'Air Force Battle Network support/Internet of Models'); JADC2 CSO FA8612-21-S-C001; Kessel Run DevSecOps CSO FA8730-22-S-C001 (open to Nov 29, 2027); AFLCMC Data Operations CSO FA8600-23-S-C056 (open to Feb 8, 2028); Platform One Solutions Marketplace CSO FA8307-24-S-C001 (announcement v1.3 dated 2026-01-28; mailbox AFLCMC.HNCKP.PlatformOneCTR@us.af.mil).",
+   "current_status_2026": "FACT: AFLCMC remains the contracting home even as PEOs become PAEs (Jan 2026). FACT: Cloud One Next Architecture and Common Shared Services awarded to Leidos, six-year, $455M (Leidos Q4-2025 earnings call, Feb 17, 2026; company statement - ceiling/obligation split not disclosed). FACT: Platform One's Big Bang Technical Oversight Committee lists Platform One chair members appointed Aug 2025 and Aug 2026 (GitHub DoD-Platform-One/bbtoc README) - i.e., Platform One is operating in 2026. INFERENCE (LOW): P1SM is described by a Tier-4 tracker as 'up to $5M per prototype OT'.",
+   "leader_title": "Commander, AFLCMC (Lt Gen); Director, AFLCMC/HN; Contracting officers per solicitation",
+   "key_programs": [
+    "JADC2 CSO",
+    "Kessel Run DevSecOps CSO",
+    "AFLCMC Data Operations CSO",
+    "Platform One Solutions Marketplace (P1SM) CSO",
+    "Cloud One Next (Leidos, $455M/6 yr)",
+    "Party Bus operations consolidation notice"
+   ],
+   "startup_relevance": "HIGH. Three standing CSOs (JADC2, Kessel Run DevSecOps, P1SM) are the most realistic first-award vehicles: rolling submissions, 10 USC 4022 prototype OTs, no full FAR proposal.",
+   "source_url": "https://sam.gov/opp/e2b751b1e9d9463b98fca430558e6331/view",
+   "pub_date": "2026-01-28 (P1SM v1.3); 2026-02-17 (Leidos call); 2024-06 (Istari award)",
+   "confidence": "HIGH on vehicles' existence; MEDIUM on values"
+  },
+  {
+   "name": "Kessel Run (Air Operations Center Program Office, Kessel Run Division, PAE C3BM/C3C; formerly AFLCMC Detachment 12)",
+   "acronym": "KR",
+   "parent": "DAF PAE C3BM",
+   "role": "program office",
+   "portfolio": "AOC weapon system software: Kessel Run All Domain Operations Suite (KRADOS) - AOC Block 20 backbone replacing TBMCS/ATOMS at selected AOCs; All Domain Common Platform (ADCP) IaaS/PaaS (federal program inventory line 'Kessel Run All Domain Common Platform', DAF); Kessel Run Air Domain entered the Software Acquisition Pathway execution phase Oct 2021 (RDT&E PE 0207431F projects 675307/675309 per FY24 jbook text). Runs the Kessel Run DevSecOps CSO FA8730-22-S-C001 and co-issues the P1SM CSO with Platform One (SAM listing 'Dept of the Air Force (Platform One / Kessel Run)').",
+   "current_status_2026": "FACT: By March 2026 Kessel Run is a 'Division' of an 'Air Operations Center Program Office' under PAE C3BM (SAM.gov sources sought 051d031ca57c48b48b360b9cbec34e40, response deadline 2026-03-20). FACT: af.mil early-2026 release on the C3BM software-developer pipeline names 'C3BM's Kessel Run division'. FACT/INFERENCE: independent commentary (War on the Rocks, Oct 2025, 'The Air Force is Kneecapping Software Innovation'; Rise8 'Kessel Run post-mortem'; DoD CIO State of DevSecOps, Mar 2025 noting Kessel Run drew funds from 5+ program elements) describes a contraction of the original software-factory model into a conventional program office - treat as MEDIUM.",
+   "leader_title": "Division chief / AOC program manager (name not retrieved)",
+   "key_programs": [
+    "KRADOS (AOC Block 20)",
+    "ADCP",
+    "Kessel Run DevSecOps CSO FA8730-22-S-C001",
+    "P1SM CSO (with Platform One)"
+   ],
+   "startup_relevance": "HIGH for AOC planning/ATO, targeting-enterprise and DevSecOps tools; its CSO is one of the few DAF C2 doors explicitly built for commercial software prototypes.",
+   "source_url": "https://sam.gov/opp/051d031ca57c48b48b360b9cbec34e40/view",
+   "pub_date": "2026-03 (sources sought); 2025-10 (WOTR)",
+   "confidence": "HIGH on org placement; MEDIUM on health"
+  },
+  {
+   "name": "Platform One",
+   "acronym": "P1",
+   "parent": "AFLCMC/HNC (C3I & Networks Directorate), Department of the Air Force DevSecOps managed service",
+   "role": "program office",
+   "portfolio": "DoD-wide DevSecOps platform: Iron Bank hardened container registry (~1,200 images per DoD CIO State of DevSecOps, Mar 2025), Big Bang, Party Bus PaaS, P1 Solutions Marketplace (P1SM). Several AF software factories (BESPIN, Tron, Rogue One) are customers of Platform One.",
+   "current_status_2026": "FACT: P1SM/CSO FA8307-24-S-C001 active (announcement v1.3 dated Jan 28, 2026; listing closes Dec 29, 2026 per aggregator). FACT: commercial vendors report P1SM listings (e.g., Acuity 'Helios', Nov 3, 2025). FACT: Platform One chairs on the Big Bang TOC appointed Aug 2025 and Aug 2026. INFERENCE: P1 continues as a marketplace/platform rather than a builder of mission apps.",
+   "leader_title": "Platform One director / chief (not retrieved)",
+   "key_programs": [
+    "P1SM CSO",
+    "Iron Bank",
+    "Big Bang",
+    "Party Bus"
+   ],
+   "startup_relevance": "HIGH for infrastructure/DevSecOps/data tooling: a P1SM listing is both an award path (prototype OT) and a distribution channel to every DoD program that consumes P1. Iron Bank hardening of your container is a near-mandatory credential for DAF software delivery.",
+   "source_url": "https://sam.gov/workspace/contract/opp/f36d565bb941494c8e40a331836bca52/view",
+   "pub_date": "2026-01-28",
+   "confidence": "HIGH"
+  },
+  {
+   "name": "AFLCMC ISR & Special Operations Forces Directorate (AFLCMC/WI) - DCGS-AF program office",
+   "acronym": "AFLCMC/WI",
+   "parent": "AFLCMC / (historically) PEO ISR & SOF; PAE alignment after Jan 2026: Public evidence insufficient",
+   "role": "program office",
+   "portfolio": "Distributed Common Ground System-Air Force (DCGS-AF; procurement lines 0305208F/0305240F, older RDT&E funding under PE 0305159F; 'Agile ISR' RDT&E PE 0305206F project 672002 funds agile ISR software), 'Open Architecture DCGS' modernization, ISR PED tools.",
+   "current_status_2026": "Public evidence insufficient in this run for 2025-2026 DCGS-AF modernization awards, the directorate's PAE placement, or open-architecture vendor list. FACT (historical): DCGS-AF budget exhibits state 'Detailed information on DCGS-AF remains classified ... contact AF/A2RM'.",
+   "leader_title": "Director / PEO ISR & SOF (not verified for 2026)",
+   "key_programs": [
+    "DCGS-AF",
+    "Open Architecture DCGS",
+    "Agile ISR (PE 0305206F)"
+   ],
+   "startup_relevance": "MEDIUM-UNKNOWN. ISR PED/analytics startups should expect a classified-heavy program with limited public on-ramps; treat AFRL/RI BAAs and AFWERX topics as the realistic front door until primary evidence is retrieved.",
+   "source_url": "https://github.com/540co/dod-president-budget-procurement-rdte-data (mirror of DAF P-1 exhibits)",
+   "pub_date": "FY2013-FY2016 exhibits (historical)",
+   "confidence": "LOW"
+  },
+  {
+   "name": "AFWERX (Air Force Research Laboratory innovation arm; divisions: AFVentures/SBIR-STTR incl. Open Topic and STRATFI/TACFI, Prime (Autonomy Prime, Agility Prime), Spark, SpaceWERX)",
+   "acronym": "AFWERX",
+   "parent": "AFRL (AFMC); director dual-hatted as DAF Chief Commercialization Officer",
+   "role": "innovation org",
+   "portfolio": "DAF SBIR/STTR (Open Topic, Specific Topic, STRATFI/TACFI), Prime innovative-capabilities openings (AFWERX PRIME ICO FA228024R0007 cited with a 2026-04-20 response date by a Tier-4 tracker - unverified), Spark cells, SpaceWERX. A Tier-4 scout note claims ~1,400 SBIR/STTR awards per year (~$1.4B) citing the 2024 AFWERX/SpaceWERX annual report - LOW.",
+   "current_status_2026": "FACT: Col. Nathan Stuckey became AFWERX director and DAF chief commercialization officer June 17, 2025 (afrl.af.mil article 4219581). FACT: SBIR/STTR authority lapsed at end of FY2025 (Sept 30/Oct 1, 2025); AFWERX paused new SBIR activity while STRATFI/TACFI stayed active; programs reauthorized by the Small Business Innovation and Economic Security Act (S.3971) signed April 13, 2026, through Sept 30, 2031, with new per-company application caps and expanded foreign-risk due diligence. FACT (MEDIUM, Tier-4 trackers): AFWERX 26.1 Phase I closed Mar 6, 2026; cycle 26.2 closed Apr 6, 2026; 26.3 expected Sept 2026; Open Topic Phase I ~$75K SBIR / ~$110K STTR. FACT: SecWar Hegseth (Jan 12, 2026 remarks at SpaceX) directed service secretaries to brief the DoW CTO within 90 days on plans to consolidate, streamline and refocus labs, experimental units and rapid-capability offices around three innovation outcomes - AFWERX's resulting structure: Public evidence insufficient.",
+   "leader_title": "Director, AFWERX / DAF Chief Commercialization Officer (Col. Nathan Stuckey since 2025-06-17)",
+   "key_programs": [
+    "SBIR/STTR Open Topic",
+    "STRATFI ($3M-$15M) / TACFI ($375K-$1.7M) with matching funds",
+    "AFWERX Prime / Autonomy Prime",
+    "SpaceWERX"
+   ],
+   "startup_relevance": "HIGH - the canonical first dollar for a two-founder startup, but SBIR ownership rules (>50% U.S. citizens or permanent residents) and the 2026 foreign-risk screening make the Indonesian founder's equity share a threshold issue requiring counsel.",
+   "source_url": "https://www.afrl.af.mil/News/Article-Display/Article/4219581/afwerx-welcomes-new-director-during-change-of-leadership-ceremony/",
+   "pub_date": "2025-06-17; 2026-04-13 (reauthorization)",
+   "confidence": "HIGH on leadership/reauth; MEDIUM on cycle dates"
+  },
+  {
+   "name": "Air Force Research Laboratory Information Directorate (Rome, NY)",
+   "acronym": "AFRL/RI",
+   "parent": "AFRL (AFMC)",
+   "role": "lab",
+   "portfolio": "C2, information systems, autonomy, cyber, extreme/edge computing research; standing open BAA (white paper first), 'Extreme Computing' BAA FA875023S7004, Joint All Domain Persistent Adaptive Collaborative Technologies II (JADPACT II) Call 02 'DASH' posted May 26, 2026; hosts 'Future Flag' experimentation (26-1 held June 1-5, 2026, upstate NY per Tier-4 tracker).",
+   "current_status_2026": "FACT: JADPACT II Call 02 posted to SAM.gov 2026-05-26. FACT (Tier-4): AFRL/RI FY27 white papers due Sept 2, 2026. Typical BAA cadence reported by applicants: white paper -> 60-90 days -> invited proposal -> 90-180 days to award (INFERENCE, LOW).",
+   "leader_title": "Director, AFRL/RI",
+   "key_programs": [
+    "AFRL/RI open BAA",
+    "JADPACT II",
+    "Extreme Computing BAA",
+    "Future Flag"
+   ],
+   "startup_relevance": "MEDIUM-HIGH for early-TRL C2/data-fabric/edge-compute research; contracts are R&D, not fielding, but AFRL/RI is the traditional feeder into ABMS/C3BM.",
+   "source_url": "https://sam.gov/workspace/contract/opp/25ac2a7832cd4b3f8e87c444e1bf4885/view",
+   "pub_date": "2026-05-26",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Air Force Research Laboratory Sensors Directorate (Wright-Patterson AFB) and Munitions Directorate (Eglin; Golden Horde Vanguard)",
+   "acronym": "AFRL/RY, AFRL/RW",
+   "parent": "AFRL",
+   "role": "lab",
+   "portfolio": "RY: RF/EO sensors, sensor open systems architecture. RW: Golden Horde = USAF Vanguard on networked collaborative weapons (software-defined datalinks, 'Colosseum' simulation environment); AFRL 'Weapons Open Communications Architecture' (WOCA) with AFLCMC Emerging Technologies Branch (EBZ).",
+   "current_status_2026": "Golden Horde still appears as a line in the FY26 AFRL justification book (jbook parser log). Relevance to a C2-software startup is tangential (weapon-to-weapon C2 and swarm mission management), evidenced only via SBIR abstracts (Unmanned Experts, 2022-2023). AFRL/RY 2026 programs: Public evidence insufficient in this run.",
+   "leader_title": "Directors, AFRL/RY and AFRL/RW",
+   "key_programs": [
+    "Golden Horde / Colosseum",
+    "WOCA"
+   ],
+   "startup_relevance": "LOW-MEDIUM; only for collaborative-weapons or sensor-fusion niches.",
+   "source_url": "https://github.com/ethanmurray/dod-jbook-analysis (FY26 AFRL jbook parse log)",
+   "pub_date": "2025-09-28 (log)",
+   "confidence": "LOW"
+  },
+  {
+   "name": "Department of the Air Force Chief Data and Artificial Intelligence Office",
+   "acronym": "DAF CDAO",
+   "parent": "SAF (reports within DAF headquarters; works with SAF/AQ and SAF/CN)",
+   "role": "policy",
+   "portfolio": "DAF data/AI policy, enterprise standards, AI workforce; partner to the DoD CDAO (Tradewinds marketplace: >$3.26B in awards as of Feb 2026, ~51-day lead time per a Tier-4 report).",
+   "current_status_2026": "FACT: DAF approved a comprehensive AI-workforce strategy in April 2026 (af.mil article 4472626, Apr 28, 2026). Eileen Vidrine was DAF CDAO in 2023 (MeriTalk); 2026 incumbent: Public evidence insufficient. 'Air Force Nexus': no evidence found in this run that a DAF C2/AI program by that name exists - treat as UNVERIFIED (the only 'Nexus' hits were UK IAMD and unrelated).",
+   "leader_title": "DAF Chief Data and AI Officer",
+   "key_programs": [
+    "DAF AI workforce plan (Apr 2026)",
+    "Data/AI policy"
+   ],
+   "startup_relevance": "LOW-MEDIUM: policy, not buying; useful for ATO/data-standards alignment.",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/4472626/daf-launches-plan-to-bolster-ai-workforce/",
+   "pub_date": "2026-04-28",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Headquarters Air Force A5/7 (Air Force Futures) - requirements after the shelving of Integrated Capabilities Command",
+   "acronym": "HAF A5/7",
+   "parent": "Chief of Staff of the Air Force",
+   "role": "requirement owner",
+   "portfolio": "Force design, capability development guidebook, requirements adjudication; absorbed the functions that the 2024 re-optimization had planned to give the Integrated Capabilities Command.",
+   "current_status_2026": "FACT: ICC 'folded into HQ AF A5/7' and the MAJCOM-to-ICC requirements shift 'shelved' per the Dec 2, 2025 Meink/Wilsbach memo and subsequent press. USAJobs agency-code records show 'Integrated Capabilities Command' created Dec 2024 and 'Air Force Cyber and Intelligence Command' Mar 2025 - the latter's survival after the memo: Public evidence insufficient.",
+   "leader_title": "Deputy Chief of Staff, Air Force Futures (Lt Gen)",
+   "key_programs": [
+    "Capability Development Guidebook",
+    "Operational Imperatives follow-on"
+   ],
+   "startup_relevance": "LOW directly; determines which C2 gaps become funded requirements.",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/4346040/update-on-recent-daf-efforts/",
+   "pub_date": "2025-12-02",
+   "confidence": "MEDIUM"
+  },
+  {
+   "name": "Assistant Secretary of the Air Force (Acquisition, Technology & Logistics) / Service Acquisition Executive",
+   "acronym": "SAF/AQ",
+   "parent": "Secretary of the Air Force (Troy Meink, 2025-)",
+   "role": "budget owner",
+   "portfolio": "Approves acquisition strategies (e.g., ABMS AN CR#1 approved 15 Jun 2021; CBC2 SWP strategy May 2022; ABMS Consortium Nov 2021), owns PAE structure implementation.",
+   "current_status_2026": "FACT: Jan 8, 2026 DAF implemented the Warfighting Acquisition System (PAEs, direct-reporting PMs, tech areas); Breaking Defense Jan 9, 2026 'How the Air Force is revamping its acquisition shop with new portfolios'; May 2026 (Ainsworth) space portfolios still being sorted. FACT: CSAF Gen. Wilsbach (July 2026) said Operation Epic Fury forced the Air Force to stop spending on other lines and pushed for a supplemental and a $1.5T defense budget - INFERENCE: FY26 execution and FY27 C2 lines are under wartime reprioritization pressure.",
+   "leader_title": "ASAF(AT&L) / SAE",
+   "key_programs": [
+    "PAE structure",
+    "Software Acquisition Pathway programs (CBC2, Kessel Run Air Domain, IDCS)"
+   ],
+   "startup_relevance": "LOW directly.",
+   "source_url": "https://www.jbsa.mil/News/News/Article/4374497/daf-puts-acquisition-on-wartime-footing-implementing-secwars-warfighting-acquis/",
+   "pub_date": "2026-01-08",
+   "confidence": "HIGH"
+  },
+  {
+   "name": "North American Aerospace Defense Command / U.S. Northern Command (external operational sponsor for CBC2)",
+   "acronym": "NORAD/USNORTHCOM",
+   "parent": "Combatant command (not DAF) - included because it is the user/sponsor of the DAF-acquired CBC2",
+   "role": "user command",
+   "portfolio": "Homeland air-defense C2: CBC2 replaces Battle Control System-Fixed to produce a single fused air picture; developed with Royal Canadian Air Force participation.",
+   "current_status_2026": "FACT (Tier 3/4 mirrors): CBC2 fielded and 'replaced legacy NORAD systems'; 'CBC2+' in development (Tier-4, LOW). Prime integrator SAIC (Reston, VA) per AFMC-derived summaries (MEDIUM).",
+   "leader_title": "Commander NORAD/USNORTHCOM",
+   "key_programs": [
+    "CBC2"
+   ],
+   "startup_relevance": "MEDIUM: air-domain-awareness analytics can ride CBC2's cloud-native architecture, but entry is via the ABMS/C3BM office or SAIC, not NORAD.",
+   "source_url": "https://www.aflcmc.af.mil/NEWS/Article-Display/Article/3792745/understanding-advanced-battle-management-system-abms-podcast/",
+   "pub_date": "2024 (podcast); 2025-03 (AFMC ABMS article)",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "programs": [
+  {
+   "name": "DAF BATTLE NETWORK / Advanced Battle Management System (ABMS) - RDT&E PE 0604003F, Project 640141",
+   "owner": "DAF PAE C3BM (acquisition) with ABMS CFT (operational)",
+   "description": "Portfolio of acquisition efforts, 'not a monolithic program' (FY24 jbook): Aerial Networking CR#1 (ACAT II), CBC2 (Software Pathway), ABMS Digital Infrastructure (DI) incl. DBMN, SD-WAN, Deployable DI (MTA rapid prototyping approved Oct 2022/Jan 2023), DI Networks and DI Nodes. Architecture-first, open-standards, CI/CD delivery with 'traditional and non-traditional' contractors. Space integration emphasized (USSF release Dec 3, 2025).",
+   "status_2026": "FACT: FY2025 PB requested $743.8M 'within the ABMS PE' (DAF posture statement to SASC). FY2026 request: only a Tier-4 tracker figure of '~$951M FY26' was found - UNVERIFIED (LOW); official FY26/FY27 R-2 exhibits not retrievable in this run. FACT: C3BM leader said the network is 'as lethal as ever' (Sept 24, 2025). FACT: SecAF Meink announced a 'Ringleader' exercise series to test the DAF Battle Network in a simulated environment (Air & Space Forces Magazine, early 2026). FACT: three TOC-L kits positioned at three locations during Resolute Force Pacific 2025 (DefenseScoop Oct 3, 2025).",
+   "vendors": [
+    "ABMS Digital Infrastructure Consortium members (multiple-award IDIQ, up to ~$950M ceiling to ~27 companies, 2022) incl. Northrop Grumman (confirmed Sept 2022)",
+    "L3Harris (self-described prime for ABMS DI - Tier 4)",
+    "Anduril (selected on the 2020 ABMS IDIQ, ~$950M ceiling, 50+ vendors)",
+    "SAIC (CBC2 prime - MEDIUM)",
+    "Istari Federal (Internet of Models, $9.1M, 2024)",
+    "Raft, Leidos, Booz Allen, Palantir: named in the tasking but NO contract evidence retrieved in this run - Public evidence insufficient"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "Istari Federal LLC",
+     "vehicle": "FA8612-24-C-B004 sole-source firm-fixed-price contract, 'Air Force Battle Network support' (Internet of Models)",
+     "ceiling": "$9,100,386",
+     "obligated": "$9,100,386 FY24 RDT&E at award",
+     "awarded_value": "$9,100,386",
+     "date": "2024-06 (work through 2026-06-17)",
+     "prototype_or_production": "prototype/R&D",
+     "source_url": "https://www.defense.gov/News/Contracts/ (announcement id 3811149, mirrored)"
+    },
+    {
+     "vendor": "Northrop Grumman (and ~26 others)",
+     "vehicle": "ABMS Digital Infrastructure Consortium multiple-award IDIQ",
+     "ceiling": "up to ~$950M shared (MEDIUM; 2026 secondary summary says 'up to $950 million to 27 companies')",
+     "obligated": "Public evidence insufficient",
+     "awarded_value": "IDIQ - no guaranteed value",
+     "date": "2022-09 (Northrop Q3-2022 earnings call: 'last month we were selected')",
+     "prototype_or_production": "prototype/consortium",
+     "source_url": "Northrop Grumman Q3 2022 earnings transcript (mirrored on GitHub Ngafney/garda-spring26)"
+    },
+    {
+     "vendor": "Anduril + 50 others",
+     "vehicle": "2020 ABMS IDIQ",
+     "ceiling": "up to $950M (shared)",
+     "obligated": "Public evidence insufficient",
+     "awarded_value": "IDIQ",
+     "date": "2020",
+     "prototype_or_production": "prototype",
+     "source_url": "https://en.wikipedia.org/wiki/Anduril_Industries (mirrored)"
+    }
+   ],
+   "budget": {
+    "appropriation": "RDT&E",
+    "pe_number_or_line": "PE 0604003F Advanced Battle Management System (BA-4), Project 640141; related: PE 0207431F (Kessel Run Air Domain projects), PE 0208088F (IDCS, integrates with C3BM/ABMS)",
+    "fy26_request": "Public evidence insufficient (Tier-4 tracker: ~$951M - unverified)",
+    "fy27_request": "Public evidence insufficient (PB2027 released ~April 2026)",
+    "source_url": "https://www.armed-services.senate.gov/ (FY25 DAF posture, CHRG-118shrg62232) and FY24 USAF RDT&E Vol II parsed text (GitHub ethanmurray/dod-jbook-analysis)"
+   },
+   "third_party_software_openness": "HIGH by design: jbook language mandates modular components integrated through open standards/open architecture; DAF Battle Network architect Bryan Tipton: a system 'that emphasizes architectural capability over individual capability performance ... if you can't pull in new capability quickly and integrate it, you lose' (AFMC, Mar 2025). Vehicles include a CSO and a CRADA call specifically for non-traditionals. Caveat: 'vendor-agnostic' is a government claim; actual integration is gated by the DI Consortium primes and by classified interfaces."
+  },
+  {
+   "name": "Cloud-Based Command and Control (CBC2)",
+   "owner": "PAE C3BM ABMS division (software & applications product line)",
+   "description": "Software Acquisition Pathway program (strategy approved by SAE May 2022) replacing Battle Control System-Fixed for NORAD/USNORTHCOM air defense sectors; single fused C2 air picture; developed with the Royal Canadian Air Force; first joint all-service C2 solution fielded by the USAF for ABMS (Hypergiant built the 'JERIC2O' interface).",
+   "status_2026": "FACT (MEDIUM): fielded and replacing legacy NORAD systems; 'CBC2+' follow-on in development (Tier-4). Contract values: Public evidence insufficient.",
+   "vendors": [
+    "SAIC (prime, Reston VA) - MEDIUM",
+    "Hypergiant (UI/UX subcontract) - MEDIUM",
+    "Kessel Run / government developers (early builds) - INFERENCE"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "SAIC",
+     "vehicle": "Public evidence insufficient",
+     "ceiling": "Public evidence insufficient",
+     "obligated": "Public evidence insufficient",
+     "awarded_value": "Public evidence insufficient",
+     "date": "2023 (INFERENCE)",
+     "prototype_or_production": "software pathway (continuous delivery)",
+     "source_url": "https://www.aflcmc.af.mil/C3BM/"
+    }
+   ],
+   "budget": {
+    "appropriation": "RDT&E",
+    "pe_number_or_line": "within PE 0604003F",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": "FY24 USAF RDT&E Vol II (parsed)"
+   },
+   "third_party_software_openness": "MEDIUM: cloud-native microservice architecture intended to onboard third-party apps, but the integration path runs through the prime (SAIC) and government product owners; no public app-onboarding process found."
+  },
+  {
+   "name": "Tactical Operations Center-Light (TOC-L)",
+   "owner": "PAE C3BM ABMS division (deployable systems product line); ACC 752 OSS pathfinder",
+   "description": "Compact, modular deployable C2/battle-management node for forward battle managers supporting Agile Combat Employment; a 'real, current (2025) USAF portable C2/sensor-fusion kit'. Acquired via Middle Tier of Acquisition rapid prototyping (Deployable DI strategies approved Oct 2022/Jan 2023).",
+   "status_2026": "FACT: Major Release 2 (MR2) prototype announced July 22, 2025 (af.mil article 4253207). FACT: three kits deployed to three Pacific locations in REFORPAC (summer 2025). FACT: 752 OSS designated ACC pathfinder (Dec 2025). Tier-4 tracker: 'MR2 (40+ systems)' - LOW. Vendor awards and values: Public evidence insufficient in this run.",
+   "vendors": [
+    "Public evidence insufficient (prototype kit integrators not retrievable in this run)"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "Public evidence insufficient",
+     "vehicle": "MTA rapid prototyping / OT (INFERENCE)",
+     "ceiling": "",
+     "obligated": "",
+     "awarded_value": "",
+     "date": "2023-2025",
+     "prototype_or_production": "prototype (MR2)",
+     "source_url": "https://www.af.mil/News/Article-Display/Article/4253207/next-gen-toc-l-systems-announced-to-boost-agile-c2-capabilities/"
+    }
+   ],
+   "budget": {
+    "appropriation": "RDT&E",
+    "pe_number_or_line": "within PE 0604003F (Deployable DI)",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": "FY24 USAF RDT&E Vol II (parsed)"
+   },
+   "third_party_software_openness": "MEDIUM-HIGH: modular kit built to host multiple apps; the post-Epic Fury demand for one-person-carriable C2 (Aug 2026) suggests a lighter follow-on where new software could be pulled in, but no solicitation had appeared as of Aug 28, 2026."
+  },
+  {
+   "name": "Air Operations Center weapon system software - Kessel Run / KRADOS / ADCP",
+   "owner": "Air Operations Center Program Office, Kessel Run Division (PAE C3BM/C3C)",
+   "description": "KRADOS (Kessel Run All Domain Operations Suite) - cloud-based AOC Block 20 backbone replacing TBMCS/ATOMS at selected AOCs; ADCP hosting platform; targeting-enterprise and geospatial software projects (PE 0207431F projects 675307/675309); Kessel Run Air Domain in Software Acquisition Pathway execution since Oct 2021.",
+   "status_2026": "FACT: March 2026 sources-sought issued by the AOC Program Office, Kessel Run Division. FACT: Kessel Run DevSecOps CSO FA8730-22-S-C001 active until Nov 29, 2027. INFERENCE (MEDIUM): organic development capacity has contracted; external commercial software is increasingly sought through the CSO.",
+   "vendors": [
+    "Government (Kessel Run organic) - FACT",
+    "Rise8 / commercial DevSecOps contractors historically - MEDIUM",
+    "2025-2026 KRADOS contractors: Public evidence insufficient"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "various (CSO awards not enumerated)",
+     "vehicle": "Kessel Run DevSecOps CSO FA8730-22-S-C001 (prototype OTs, 10 USC 4022)",
+     "ceiling": "per-award; Tier-4 tracker says $500K-$5M typical (LOW)",
+     "obligated": "Public evidence insufficient",
+     "awarded_value": "",
+     "date": "open 2022-2027",
+     "prototype_or_production": "prototype OT",
+     "source_url": "https://sam.gov/ (FA8730-22-S-C001)"
+    }
+   ],
+   "budget": {
+    "appropriation": "RDT&E (plus O&M for sustainment)",
+    "pe_number_or_line": "PE 0207431F (projects 675307 Targeting Enterprise Research, 675309 GEO Info & Serv Software) per FY24 jbook; other Kessel Run PEs not enumerated",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": "FY24 USAF RDT&E Vol IV BA-7 (parsed, GitHub ethanmurray/dod-jbook-analysis)"
+   },
+   "third_party_software_openness": "HIGH in form (CSO explicitly for commercial DevSecOps/mission software), MEDIUM in practice (ATO on ADCP, Iron Bank hardening, classified data)."
+  },
+  {
+   "name": "Joint Fires Network (JFN) - DAF integrated program office",
+   "owner": "PAE C3BM (IPO stood up Feb 2026); originating sponsor USINDOPACOM",
+   "description": "INDOPACOM initiative to connect any sensor to any shooter for joint fires; 'combat-representative 1.0' targeted end-2024; Lockheed Martin integrated its C2 with the first JFN prototype at Valiant Shield 2024 (LM release June 20, 2024); L3Harris integrated its DiSCO EW architecture with JFN at Valiant Shield 24 (Tier-4 summary).",
+   "status_2026": "FACT: Feb 9, 2026 'C3BM takes lead on Joint Fires Network' - PAE C3BM stood up an integrated program office (aflcmc.af.mil article 4400021). Budget line and contract vehicles for the DAF-led phase: Public evidence insufficient.",
+   "vendors": [
+    "Lockheed Martin (prototype integrator, 2024) - FACT",
+    "L3Harris (EW integration) - MEDIUM"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "Lockheed Martin",
+     "vehicle": "Public evidence insufficient (prototype effort, likely OT)",
+     "ceiling": "",
+     "obligated": "",
+     "awarded_value": "",
+     "date": "2024-06",
+     "prototype_or_production": "prototype",
+     "source_url": "https://news.lockheedmartin.com/2024-06-20-Lockheed-Martin-Integrates-Command-and-Control-Capabilities-with-First-Joint-Fires-Network-Prototype"
+    }
+   ],
+   "budget": {
+    "appropriation": "RDT&E (INFERENCE)",
+    "pe_number_or_line": "Public evidence insufficient",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": ""
+   },
+   "third_party_software_openness": "Claimed open architecture by the prime (Tier-4 red-team note); practical entry is subcontract to the LM-led team or via C3BM's IPO - MEDIUM."
+  },
+  {
+   "name": "Cloud One / Cloud One Next",
+   "owner": "AFLCMC/HN (Enterprise IT / C3I&N Directorate)",
+   "description": "DAF enterprise multi-cloud (AWS, Azure, Oracle government regions) hosting mission and business systems; 'Cloud One Next Architecture and Common Shared Services' follow-on emphasizes zero trust, automation and multi-cloud brokering.",
+   "status_2026": "FACT (company statement): Leidos won a six-year $455M Cloud One Next program (Q4 2025; Leidos earnings call Feb 17, 2026). Ceiling vs obligated split not disclosed.",
+   "vendors": [
+    "Leidos (Cloud One Next)",
+    "SAIC (prior Cloud One environment operator) - MEDIUM"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "Leidos",
+     "vehicle": "Cloud One Next Architecture and Common Shared Services (vehicle type not disclosed)",
+     "ceiling": "$455M (company-stated total)",
+     "obligated": "Public evidence insufficient",
+     "awarded_value": "$455M over six years (company statement)",
+     "date": "Q4 2025 (announced 2026-02-17)",
+     "prototype_or_production": "production services",
+     "source_url": "Leidos Q4 2025 earnings call transcript (mirrored, GitHub kwartler/vienna-genai-finance-course LDOS_2026-02-17.csv)"
+    }
+   ],
+   "budget": {
+    "appropriation": "O&M / RDT&E (mixed)",
+    "pe_number_or_line": "Public evidence insufficient",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": ""
+   },
+   "third_party_software_openness": "Platform, not app buyer: relevant as the hosting/ATO substrate startups must deploy onto; subcontract to Leidos possible."
+  },
+  {
+   "name": "Platform One Solutions Marketplace (P1SM) CSO",
+   "owner": "Platform One (AFLCMC/HNC) with Kessel Run",
+   "description": "Commercial Solutions Opening (10 USC 4022) for commercial software that integrates with the DoD DevSecOps ecosystem (CI/CD, containers, compliance, AI tooling); listed products become available to DoD software factories.",
+   "status_2026": "FACT: solicitation FA8307-24-S-C001, announcement v1.3 dated Jan 28, 2026; rolling submissions, listing closes Dec 29, 2026 (aggregators). Tier-4: up to $5M per prototype OT (LOW).",
+   "vendors": [
+    "Acuity (Helios, listed Nov 2025) - company statement",
+    "others not enumerated"
+   ],
+   "contract_evidence": [
+    {
+     "vendor": "Acuity",
+     "vehicle": "P1SM listing",
+     "ceiling": "",
+     "obligated": "",
+     "awarded_value": "Public evidence insufficient",
+     "date": "2025-11-03",
+     "prototype_or_production": "marketplace listing / prototype OT",
+     "source_url": "https://executivebiz.com/ (mirrored in GitHub Newsoid/news-ai 2025-11-03)"
+    }
+   ],
+   "budget": {
+    "appropriation": "other (working-capital / customer-funded)",
+    "pe_number_or_line": "n/a",
+    "fy26_request": "n/a",
+    "fy27_request": "n/a",
+    "source_url": ""
+   },
+   "third_party_software_openness": "HIGH - purpose-built for third-party commercial software."
+  },
+  {
+   "name": "'MEGATRON' JADC2 follow-on IDIQ (UNVERIFIED)",
+   "owner": "Attributed by Tier-4 sources to the Air Force / 'DoD CIO-JADC2 CFT residual org'",
+   "description": "HYPOTHESIS: a ~$4.5B multiple-award IDIQ described by a small-business capture file as the follow-on to an 'LM-led JADC2 integration effort', with seven sourcing categories (open-architecture C2/COP, multi-sensor fusion and track custody, kill-chain orchestration/decision aids, DDIL/alt-PNT resilience, trust/governance/audit, transport/waveforms, effector integration), pre-solicitation industry day targeted July 2026 and RFP September 2026.",
+   "status_2026": "LOW CONFIDENCE. Only two Tier-4 sources reference it (an SDVOSB's internal capture plan dated Apr 19, 2026 which itself labels the figures 'pre-RFP intelligence, not the official solicitation', and an AI-generated intelligence brief calling it an 'Air Force Megatron IDIQ to fast-track DAF Battle Network work'). No SAM.gov notice, no press coverage retrieved. Include on a watch list only.",
+   "vendors": [
+    "none awarded"
+   ],
+   "contract_evidence": [],
+   "budget": {
+    "appropriation": "other",
+    "pe_number_or_line": "Public evidence insufficient",
+    "fy26_request": "",
+    "fy27_request": "",
+    "source_url": "https://github.com/ISS-LLC22/shield-atlas (docs/megatron-2026/) - Tier 4"
+   },
+   "third_party_software_openness": "If real as described, lot-based categories would be startup-friendly; unverifiable."
+  },
+  {
+   "name": "DCGS-AF / Open Architecture DCGS / AF ISR modernization",
+   "owner": "AFLCMC ISR & SOF Directorate (AFLCMC/WI)",
+   "description": "Air Force ISR processing-exploitation-dissemination weapon system; modernization toward open architecture and agile ISR software (PE 0305206F 'Agile ISR').",
+   "status_2026": "Public evidence insufficient in this run (no 2025-2026 award, vendor or PAE-placement evidence retrievable).",
+   "vendors": [
+    "Public evidence insufficient"
+   ],
+   "contract_evidence": [],
+   "budget": {
+    "appropriation": "Procurement (P-1 lines 0305208F, 0305240F) and RDT&E (PE 0305206F Agile ISR; historically PE 0305159F)",
+    "pe_number_or_line": "0305208F / 0305240F / 0305206F",
+    "fy26_request": "Public evidence insufficient",
+    "fy27_request": "Public evidence insufficient",
+    "source_url": "https://github.com/540co/dod-president-budget-procurement-rdte-data"
+   },
+   "third_party_software_openness": "Unknown in 2026; historically closed/classified."
+  }
+ ],
+ "procurement_pathways": [
+  {
+   "pathway": "SBIR/STTR",
+   "how_it_works_here": "AFWERX runs the DAF SBIR/STTR program with three avenues: Open Topic (any dual-use idea; a DAF customer memo/endorsement strongly improves Phase II odds), Specific Topics (published per cycle; e.g., DAF26BZ01-NV008 'AF Runtime Assured Autonomy', DAF26BX02-NV502 'Project ATOM Auth-on-the-Move' closing June 3, 2026 under DoW SBIR FY26 Release 1), and STRATFI/TACFI. Proposals submitted via DSIP (dodsbirsttr.mil). Program lapsed Oct 1, 2025 - Apr 13, 2026; reauthorized through FY2031 with per-company application caps and mandatory foreign-risk due diligence (S.3971).",
+   "typical_award_size": "Phase I ~$75K (SBIR) / ~$110K (STTR) for Open Topic per Feb 2026 tracker (LOW); Phase II typically ~$1.25M-$1.8M (INFERENCE from DAF norms; 2026 caps not retrieved).",
+   "timeline": "Cycles roughly three per year (26.1 closed Mar 6, 2026; 26.2 closed Apr 6, 2026; 26.3 expected Sept 2026 - Tier 4). Phase I 3-6 months; Phase II 12-24 months.",
+   "recent_examples": [
+    {
+     "company": "Unmanned Experts Inc.",
+     "what": "AXIS Autonomous Intelligent Swarmer (AF SBIR)",
+     "amount": "$1,227,070",
+     "date": "2023",
+     "source_url": "https://www.sbir.gov/ (award data mirrored in GitHub SantaJordan/CTOx)"
+    },
+    {
+     "company": "Unmanned Experts Inc.",
+     "what": "WEB WEASELS autonomous swarming AI munitions (AF SBIR Phase II)",
+     "amount": "$1,833,687",
+     "date": "2022",
+     "source_url": "https://www.sbir.gov/ (mirrored)"
+    }
+   ],
+   "fit_for_two_founder_startup": "BEST FIRST DOLLAR for the software-only C2 startup: low proposal burden, no past performance, AFWERX culturally receptive. But it funds R&D, not fielding, and 2026 rules add application caps and foreign-affiliation screening.",
+   "eligibility_notes": "For-profit U.S. small business (<=500 employees), >50% owned and controlled by U.S. citizens or permanent residents (or by other eligible small businesses); PI's primary employment (>50%) with the firm; work performed in the U.S. The German founder qualifies once a permanent resident; an Indonesian non-U.S.-person founder can hold equity only within the minority share and must be disclosed under the 2026 foreign-risk due-diligence regime (denial triggers include 'foreign country of concern' ties - Indonesia is not one, but disclosure is mandatory). Needs SBA/SBIR counsel review."
+  },
+  {
+   "pathway": "Direct-to-Phase-II",
+   "how_it_works_here": "DAF/AFWERX has historically offered Direct-to-Phase-II (D2P2) topics letting firms with demonstrated feasibility skip Phase I; status of D2P2 in the 26.x cycles after reauthorization: Public evidence insufficient (MEDIUM that it persists, since S.3971 references 'Direct to Phase II' applications in agency caps).",
+   "typical_award_size": "Up to Phase II ceiling (~$1.25M-$1.8M, INFERENCE).",
+   "timeline": "Per cycle; 6-9 months from submission to award (INFERENCE).",
+   "recent_examples": [],
+   "fit_for_two_founder_startup": "MEDIUM: requires an existing product with a DAF customer willing to sign a memorandum.",
+   "eligibility_notes": "Same as SBIR."
+  },
+  {
+   "pathway": "STRATFI/TACFI",
+   "how_it_works_here": "AFWERX bridge funding for companies with a Phase II award: TACFI ($375K-$1.7M) and STRATFI ($3M-$15M), each requiring matching funds from a DAF/DoW program office and/or private investors (roughly 1:1 government match with additional private match for STRATFI). Air Force-specific; no Army/Navy analog. Remained active during the FY26 SBIR lapse.",
+   "typical_award_size": "TACFI $375K-$1.7M; STRATFI $3M-$15M (SBIR dollars) plus matching.",
+   "timeline": "Annual/semi-annual calls; 6-12 months.",
+   "recent_examples": [
+    {
+     "company": "Public evidence insufficient (2025-2026 awardee lists not retrieved)",
+     "what": "",
+     "amount": "",
+     "date": "",
+     "source_url": "https://afwerx.com/divisions/sbir-sttr/"
+    }
+   ],
+   "fit_for_two_founder_startup": "HIGH once a Phase II exists and a program office (e.g., C3BM or ACC) will commit matching funds - this is the DAF's designed 'valley of death' bridge.",
+   "eligibility_notes": "Requires prior DAF SBIR/STTR Phase II; matching-fund letters; SBIR ownership rules apply."
+  },
+  {
+   "pathway": "prototype OT",
+   "how_it_works_here": "Commercial Solutions Openings issued under 10 USC 4022: JADC2 CSO FA8612-21-S-C001 (AFLCMC/ABMS; open to Nov 9, 2026), Kessel Run DevSecOps CSO FA8730-22-S-C001 (to Nov 29, 2027), AFLCMC Data Operations CSO FA8600-23-S-C056 (to Feb 8, 2028), Platform One P1SM CSO FA8307-24-S-C001 (to Dec 29, 2026), ACC CSO FA4890-CSO-0001-24. Process: short solution brief/white paper -> pitch -> prototype OT negotiated in weeks-months. ABMS DI efforts also use MTA rapid prototyping.",
+   "typical_award_size": "$500K-$5M per prototype OT (Tier-4 trackers; LOW-MEDIUM).",
+   "timeline": "Rolling; 2-6 months from white paper to award (INFERENCE).",
+   "recent_examples": [
+    {
+     "company": "Istari Federal LLC",
+     "what": "Battle Network 'Internet of Models' (sole-source FFP contract, not OT)",
+     "amount": "$9,100,386",
+     "date": "2024-06",
+     "source_url": "https://www.defense.gov/News/Contracts/"
+    }
+   ],
+   "fit_for_two_founder_startup": "HIGH - the most realistic route to a first C2-specific award; non-traditional status is an advantage; 1/3 cost share or nontraditional participation satisfies OT conditions.",
+   "eligibility_notes": "No SBIR ownership test. Foreign-national founders/employees raise ITAR/EAR and CUI-access issues (deemed exports, NIST 800-171/CMMC L2 for CUI), and a later facility clearance would trigger FOCI review - specialist legal review required, not a bar to a prototype OT per se."
+  },
+  {
+   "pathway": "production OT",
+   "how_it_works_here": "Follow-on production OT is available after a successful prototype OT if the solicitation reserved that option (10 USC 4022(f)). C3BM's ABMS strategy plans production via DI Networks/DI Nodes acquisitions; specific production OTs: Public evidence insufficient.",
+   "typical_award_size": "Public evidence insufficient",
+   "timeline": "After prototype completion",
+   "recent_examples": [],
+   "fit_for_two_founder_startup": "LOW near-term; relevant only after a prototype succeeds.",
+   "eligibility_notes": "Requires successfully completed prototype OT with production option."
+  },
+  {
+   "pathway": "consortium OTA",
+   "how_it_works_here": "The ABMS Digital Infrastructure Consortium (multiple-award IDIQ, 2022, ~27 members incl. Northrop; ceiling ~ $950M shared) is the standing industry body for DI architecture/prototyping. Membership was set at award; new entrants join by subcontracting to members or via later on-ramps (none found in this run).",
+   "typical_award_size": "Task orders under the IDIQ (values not public).",
+   "timeline": "Per task order.",
+   "recent_examples": [
+    {
+     "company": "Northrop Grumman",
+     "what": "Selected as ABMS DI Consortium member",
+     "amount": "IDIQ share of ~$950M ceiling",
+     "date": "2022-09",
+     "source_url": "Northrop Q3 2022 earnings call (mirrored)"
+    }
+   ],
+   "fit_for_two_founder_startup": "LOW as prime; MEDIUM as sub to a member.",
+   "eligibility_notes": "Member firms carry facility clearances; subs may need cleared personnel for some tasks."
+  },
+  {
+   "pathway": "BAA",
+   "how_it_works_here": "AFRL/RI (Rome) standing open BAA (white paper -> invited proposal), AFRL/RI 'Extreme Computing' BAA FA875023S7004, JADPACT II Call 02 'DASH' (May 26, 2026), AFRL 'Future Flag' experimentation, and C3BM's JADC2 BAA with calls (including a CRADA call). AFRL/RI FY27 white papers reportedly due Sept 2, 2026 (Tier 4).",
+   "typical_award_size": "$0.5M-$5M R&D contracts (INFERENCE).",
+   "timeline": "White paper -> 60-90 days -> invited proposal -> 90-180 days to award (Tier-4 applicant note; LOW).",
+   "recent_examples": [
+    {
+     "company": "n/a",
+     "what": "JADPACT II Call 02 posted",
+     "amount": "",
+     "date": "2026-05-26",
+     "source_url": "https://sam.gov/workspace/contract/opp/25ac2a7832cd4b3f8e87c444e1bf4885/view"
+    }
+   ],
+   "fit_for_two_founder_startup": "MEDIUM: good for algorithmic/fusion/edge-compute research; slower and R&D-flavored.",
+   "eligibility_notes": "Open to all; foreign nationals may work unclassified fundamental research subject to export control review."
+  },
+  {
+   "pathway": "CRADA",
+   "how_it_works_here": "C3BM's JADC2 BAA includes a call soliciting CRADA participants for ABMS architecture/interface work (FY24 jbook); AFRL directorates also sign CRADAs. No funds flow to the company; grants access to government interfaces, data and test events.",
+   "typical_award_size": "$0 (in-kind access)",
+   "timeline": "Months to negotiate",
+   "recent_examples": [],
+   "fit_for_two_founder_startup": "MEDIUM as a de-risking step (access to DAF Battle Network interface specs) if the company can self-fund.",
+   "eligibility_notes": "Requires U.S. entity; foreign-national participation controlled by the CRADA's export-control terms."
+  },
+  {
+   "pathway": "subcontract",
+   "how_it_works_here": "Team with ABMS DI Consortium members (Northrop, L3Harris, others), the CBC2 prime (SAIC), the JFN integrator (Lockheed), Cloud One Next (Leidos) or Kessel Run support contractors. C3BM Engagement Day (Dec 2025, ~1,500 registrants) and AFCEA/AFA events are where primes scout software subs.",
+   "typical_award_size": "Six- to low-seven-figure subcontracts (INFERENCE).",
+   "timeline": "3-9 months",
+   "recent_examples": [
+    {
+     "company": "Hypergiant",
+     "what": "JERIC2O interface for CBC2 (sub to SAIC/ABMS)",
+     "amount": "Public evidence insufficient",
+     "date": "2022-2023",
+     "source_url": "Hypergiant product page (mirrored in GitHub jemccarthy13/mysite)"
+    }
+   ],
+   "fit_for_two_founder_startup": "HIGH probability, lower control; the fastest way to touch real DAF Battle Network interfaces.",
+   "eligibility_notes": "Primes will flow down DFARS 7012/CMMC and export-control clauses; foreign-national founders need an export-control plan."
+  },
+  {
+   "pathway": "DIU CSO",
+   "how_it_works_here": "DIU's always-open CSO (HQ0845-20-S-C001) takes DAF-sponsored problems; Hegseth's Jan 12, 2026 direction makes DIU the office that 'helps program offices adopt what industry has already built'. DAF units can sponsor DIU projects that transition to AFLCMC follow-on OTs.",
+   "typical_award_size": "$1M-$10M prototype OTs (INFERENCE from DIU norms).",
+   "timeline": "60-90 days to award (DIU stated goal).",
+   "recent_examples": [],
+   "fit_for_two_founder_startup": "MEDIUM-HIGH when a DAF sponsor exists.",
+   "eligibility_notes": "Foreign-owned firms generally may participate subject to review (verify)."
+  },
+  {
+   "pathway": "commercial sale",
+   "how_it_works_here": "P1SM marketplace listing (containerized product on Iron Bank) enables consumption by any DoD software factory; DoD CDAO Tradewinds marketplace 'awardable' status is a parallel channel. Enterprise license deals (e.g., Dell $9.7B Microsoft BPA, May 2026) show DoD appetite for consolidated software buys but are prime-scale.",
+   "typical_award_size": "Consumption-based; small.",
+   "timeline": "Weeks to list; months to first buyer.",
+   "recent_examples": [
+    {
+     "company": "Acuity",
+     "what": "Helios listed on P1SM",
+     "amount": "",
+     "date": "2025-11-03",
+     "source_url": "https://executivebiz.com/ (mirrored)"
+    }
+   ],
+   "fit_for_two_founder_startup": "MEDIUM: cheap distribution, but P1SM listing is not revenue until a program pulls it.",
+   "eligibility_notes": "Product must pass Iron Bank hardening; CUI/IL levels per hosting."
+  },
+  {
+   "pathway": "allied",
+   "how_it_works_here": "CBC2 developed with the Royal Canadian Air Force; DAF Battle Network is framed as the USAF/USSF contribution to CJADC2 with coalition data-sharing goals. NATO's 2026 decision to buy up to 10 Saab GlobalEyes (E-3 replacement) and Canada's GlobalEye talks show allied AEW/C2 markets diverging from U.S. platforms.",
+   "typical_award_size": "Varies",
+   "timeline": "Long",
+   "recent_examples": [],
+   "fit_for_two_founder_startup": "LOW near-term for U.S. entry; MEDIUM for a German founder's EU/NATO C2 angle (outside this file's scope).",
+   "eligibility_notes": "ITAR/EAR on U.S.-origin C2 software; German founder cannot receive ITAR technical data without authorization until U.S. person status."
+  },
+  {
+   "pathway": "FAR",
+   "how_it_works_here": "Traditional contracts/IDIQs (e.g., JADC2 MA-MLS IDIQ, NETCENTS-2 task orders used by AOC-adjacent programs like DCAPES, GSA schedules, SEWP) - mostly for services and sustainment; sole-source FFP used for Istari.",
+   "typical_award_size": "Task-order dependent",
+   "timeline": "6-18 months",
+   "recent_examples": [
+    {
+     "company": "Leidos",
+     "what": "Cloud One Next Architecture and Common Shared Services",
+     "amount": "$455M / 6 years (company-stated)",
+     "date": "Q4 2025",
+     "source_url": "Leidos Q4-2025 earnings call"
+    }
+   ],
+   "fit_for_two_founder_startup": "LOW as prime.",
+   "eligibility_notes": "SAM registration, CMMC per solicitation."
+  }
+ ],
+ "chains": [
+  {
+   "problem_area": "Deployable/expeditionary C2 node for Agile Combat Employment (TOC-L; post-Epic Fury 'one-person-carriable' C2)",
+   "user": "Forward battle managers / air battle managers, 752 OSS operators, wing-level C2 teams",
+   "requirement_owner": "ACC (752 OSS pathfinder; ACC A3/A5) and ABMS CFT",
+   "program_office": "PAE C3BM ABMS division (deployable systems)",
+   "contracting_office": "AFLCMC (Hanscom/WPAFB) via MTA rapid prototyping, JADC2 CSO FA8612-21-S-C001",
+   "budget_line": "RDT&E PE 0604003F (Deployable DI)",
+   "contract_vehicle": "MTA rapid prototyping OTs; JADC2 CSO",
+   "current_vendors": [
+    "Public evidence insufficient (TOC-L kit integrators)"
+   ],
+   "confidence": "MEDIUM"
+  },
+  {
+   "problem_area": "AOC planning/ATO/targeting software (KRADOS, targeting enterprise)",
+   "user": "AOC strategy/combat plans/combat ops division staff, targeteers",
+   "requirement_owner": "ACC (AOC weapon system lead command) and component AOCs",
+   "program_office": "Air Operations Center Program Office, Kessel Run Division (PAE C3BM/C3C)",
+   "contracting_office": "AFLCMC Hanscom (FA8730)",
+   "budget_line": "RDT&E PE 0207431F projects (plus other Kessel Run lines)",
+   "contract_vehicle": "Kessel Run DevSecOps CSO FA8730-22-S-C001; P1SM CSO",
+   "current_vendors": [
+    "Government organic",
+    "Commercial DevSecOps subs (not enumerated)"
+   ],
+   "confidence": "MEDIUM"
+  },
+  {
+   "problem_area": "Homeland air-domain awareness / air defense C2 (CBC2)",
+   "user": "NORAD air defense sector battle managers (US and Canadian)",
+   "requirement_owner": "NORAD/USNORTHCOM with ABMS CFT",
+   "program_office": "PAE C3BM ABMS division (software & applications)",
+   "contracting_office": "AFLCMC",
+   "budget_line": "RDT&E PE 0604003F",
+   "contract_vehicle": "Software Acquisition Pathway contract to SAIC (vehicle unverified)",
+   "current_vendors": [
+    "SAIC (MEDIUM)",
+    "Hypergiant (sub)"
+   ],
+   "confidence": "MEDIUM"
+  },
+  {
+   "problem_area": "Digital infrastructure / data fabric / cloud & DevSecOps substrate (ABMS DI, Cloud One, Platform One)",
+   "user": "All DAF C2 app teams; network operators (comm squadrons); coalition partners",
+   "requirement_owner": "ABMS CFT; SAF/CN (DAF CIO) for enterprise IT",
+   "program_office": "PAE C3BM (ABMS DI) and AFLCMC/HN (Cloud One, Platform One)",
+   "contracting_office": "AFLCMC (FA8612/FA8730/FA8307)",
+   "budget_line": "PE 0604003F; enterprise IT O&M/RDT&E lines (not retrieved)",
+   "contract_vehicle": "ABMS DI Consortium IDIQ; Cloud One Next (Leidos); P1SM CSO; AFLCMC Data Ops CSO",
+   "current_vendors": [
+    "Northrop Grumman and ~26 DI Consortium members",
+    "L3Harris (Tier 4)",
+    "Leidos (Cloud One Next)",
+    "Istari Federal"
+   ],
+   "confidence": "MEDIUM-HIGH"
+  },
+  {
+   "problem_area": "Joint fires / kill-chain orchestration (Joint Fires Network)",
+   "user": "Joint fires cells at INDOPACOM/JTF and component AOCs",
+   "requirement_owner": "USINDOPACOM (originating), DAF via ABMS CFT after Feb 2026",
+   "program_office": "PAE C3BM Joint Fires Network integrated program office (Feb 2026)",
+   "contracting_office": "AFLCMC (INFERENCE)",
+   "budget_line": "Public evidence insufficient",
+   "contract_vehicle": "Prototype OT to Lockheed-led team (2024) - INFERENCE",
+   "current_vendors": [
+    "Lockheed Martin",
+    "L3Harris (EW integration, Tier 4)"
+   ],
+   "confidence": "LOW-MEDIUM"
+  },
+  {
+   "problem_area": "Counter-sUAS base-defense sensing and C2",
+   "user": "Security forces / base defense operations centers; Point Defense Task Force",
+   "requirement_owner": "ACC Point Defense Task Force (battle lab at Grand Forks, 319 RW)",
+   "program_office": "PAE/PEO for base defense (not retrieved); Leidos award via Air Force",
+   "contracting_office": "ACC contracting (FA4890) for leases; AFLCMC/others for the Leidos passive-radar award",
+   "budget_line": "Public evidence insufficient",
+   "contract_vehicle": "Leidos five-year $2.2B passive radar base-defense contract (company statement, Q4 2025); ACC C-sUAS radar leases (2026 SAM notices); ACC CSO FA4890-CSO-0001-24",
+   "current_vendors": [
+    "Leidos (ALPS/Mirador passive radar)"
+   ],
+   "confidence": "MEDIUM"
+  },
+  {
+   "problem_area": "ISR PED and analyst tools (DCGS-AF)",
+   "user": "DCGS-AF intelligence analysts (480th ISR Wing etc.)",
+   "requirement_owner": "ACC/A2/6 and AF/A2/6",
+   "program_office": "AFLCMC/WI ISR & SOF Directorate",
+   "contracting_office": "AFLCMC WPAFB",
+   "budget_line": "P-1 0305208F/0305240F; RDT&E PE 0305206F Agile ISR",
+   "contract_vehicle": "Public evidence insufficient",
+   "current_vendors": [
+    "Public evidence insufficient"
+   ],
+   "confidence": "LOW"
+  },
+  {
+   "problem_area": "C2 experimentation and AI decision-support evaluation (ShOC-N, Ringleader exercises)",
+   "user": "805th CTS/ShOC-N operators; exercise battle staffs",
+   "requirement_owner": "ACC 505th CCW under USAFWC; SecAF 'Ringleader' series",
+   "program_office": "PAE C3BM (Operational Response Team division) with ABMS CFT",
+   "contracting_office": "n/a (experiment participation via CRADA/CSO)",
+   "budget_line": "O&M/RDT&E (exercise funding)",
+   "contract_vehicle": "CRADA; JADC2 CSO; ACC CSO",
+   "current_vendors": [
+    "Industry participants (2025 AI series) not enumerated"
+   ],
+   "confidence": "MEDIUM"
+  }
+ ],
+ "org_chart": {
+  "nodes": [
+   {
+    "id": "u_bm",
+    "label": "Battle managers / AOC staff / NORAD sector operators",
+    "type": "user"
+   },
+   {
+    "id": "u_isr",
+    "label": "DCGS-AF analysts (ACC/A2/6 community)",
+    "type": "user"
+   },
+   {
+    "id": "u_shocn",
+    "label": "805th CTS ShOC-N / 752 OSS pathfinders (experimentation users)",
+    "type": "user"
+   },
+   {
+    "id": "r_acc",
+    "label": "Air Combat Command (lead MAJCOM; 505th CCW)",
+    "type": "requirement"
+   },
+   {
+    "id": "r_cft",
+    "label": "ABMS Cross-Functional Team (operational lead, DAF Battle Network)",
+    "type": "requirement"
+   },
+   {
+    "id": "r_a57",
+    "label": "HAF A5/7 Air Force Futures (ICC functions absorbed Dec 2025)",
+    "type": "requirement"
+   },
+   {
+    "id": "r_norad",
+    "label": "NORAD/USNORTHCOM (CBC2 sponsor)",
+    "type": "requirement"
+   },
+   {
+    "id": "r_indopacom",
+    "label": "USINDOPACOM (JFN originator)",
+    "type": "requirement"
+   },
+   {
+    "id": "p_c3bm",
+    "label": "DAF PAE C3BM (ex-PEO C3BM), Hanscom AFB",
+    "type": "program"
+   },
+   {
+    "id": "p_abms",
+    "label": "ABMS division (DI, CBC2, TOC-L)",
+    "type": "program"
+   },
+   {
+    "id": "p_kr",
+    "label": "AOC Program Office / Kessel Run Division (C3C)",
+    "type": "program"
+   },
+   {
+    "id": "p_jfn",
+    "label": "Joint Fires Network IPO (Feb 2026)",
+    "type": "program"
+   },
+   {
+    "id": "p_hn",
+    "label": "AFLCMC/HN: Platform One (HNC), Cloud One",
+    "type": "program"
+   },
+   {
+    "id": "p_wi",
+    "label": "AFLCMC/WI ISR & SOF Directorate (DCGS-AF)",
+    "type": "program"
+   },
+   {
+    "id": "c_aflcmc",
+    "label": "AFLCMC contracting (FA8612 WPAFB, FA8730 Hanscom, FA8307 JBSA)",
+    "type": "contracting"
+   },
+   {
+    "id": "c_acc",
+    "label": "ACC contracting FA4890 (ACC CSO)",
+    "type": "contracting"
+   },
+   {
+    "id": "b_saf",
+    "label": "SAF/AQ (SAE) and SAF/FM - RDT&E PE 0604003F etc.",
+    "type": "budget"
+   },
+   {
+    "id": "b_congress",
+    "label": "Congress (FY25 ABMS request $743.8M; FY26/27 not retrieved)",
+    "type": "budget"
+   },
+   {
+    "id": "l_afrlri",
+    "label": "AFRL/RI Rome (BAA, JADPACT II, Future Flag)",
+    "type": "lab"
+   },
+   {
+    "id": "l_afrlry",
+    "label": "AFRL/RY Sensors, AFRL/RW Munitions (Golden Horde)",
+    "type": "lab"
+   },
+   {
+    "id": "i_afwerx",
+    "label": "AFWERX (SBIR Open Topic, STRATFI/TACFI, Prime, SpaceWERX)",
+    "type": "innovation"
+   },
+   {
+    "id": "i_diu",
+    "label": "DIU CSO (DAF-sponsored problems)",
+    "type": "innovation"
+   },
+   {
+    "id": "pol_cdao",
+    "label": "DAF CDAO / SAF/CN (data, AI, ATO policy)",
+    "type": "policy"
+   },
+   {
+    "id": "pol_secwar",
+    "label": "SecWar Warfighting Acquisition System (Nov 2025) -> DAF PAEs (Jan 2026)",
+    "type": "policy"
+   }
+  ],
+  "edges": [
+   {
+    "from": "u_bm",
+    "to": "r_acc",
+    "label": "operational gaps via lead MAJCOM"
+   },
+   {
+    "from": "u_shocn",
+    "to": "r_acc",
+    "label": "experiment findings (ACCMD505)"
+   },
+   {
+    "from": "u_isr",
+    "to": "r_acc",
+    "label": "ISR requirements (A2/6)"
+   },
+   {
+    "from": "r_acc",
+    "to": "r_cft",
+    "label": "C2/BM requirements alignment"
+   },
+   {
+    "from": "r_acc",
+    "to": "r_a57",
+    "label": "requirements adjudication (post-ICC)"
+   },
+   {
+    "from": "r_norad",
+    "to": "p_abms",
+    "label": "CBC2 need"
+   },
+   {
+    "from": "r_indopacom",
+    "to": "p_jfn",
+    "label": "JFN transferred to DAF lead (Feb 2026)"
+   },
+   {
+    "from": "r_cft",
+    "to": "p_c3bm",
+    "label": "operational lead <-> acquisition lead"
+   },
+   {
+    "from": "p_c3bm",
+    "to": "p_abms",
+    "label": "division"
+   },
+   {
+    "from": "p_c3bm",
+    "to": "p_kr",
+    "label": "division (AOC PO)"
+   },
+   {
+    "from": "p_c3bm",
+    "to": "p_jfn",
+    "label": "IPO"
+   },
+   {
+    "from": "p_abms",
+    "to": "c_aflcmc",
+    "label": "JADC2 CSO FA8612-21-S-C001; DI Consortium IDIQ; MTA OTs"
+   },
+   {
+    "from": "p_kr",
+    "to": "c_aflcmc",
+    "label": "Kessel Run DevSecOps CSO FA8730-22-S-C001"
+   },
+   {
+    "from": "p_hn",
+    "to": "c_aflcmc",
+    "label": "P1SM CSO FA8307-24-S-C001; Cloud One Next ($455M Leidos)"
+   },
+   {
+    "from": "p_wi",
+    "to": "c_aflcmc",
+    "label": "DCGS-AF contracts (not retrieved)"
+   },
+   {
+    "from": "r_acc",
+    "to": "c_acc",
+    "label": "ACC CSO FA4890-CSO-0001-24; C-sUAS radar leases"
+   },
+   {
+    "from": "b_saf",
+    "to": "p_c3bm",
+    "label": "PE 0604003F funding; PAE authority"
+   },
+   {
+    "from": "b_congress",
+    "to": "b_saf",
+    "label": "appropriations / NDAA"
+   },
+   {
+    "from": "pol_secwar",
+    "to": "p_c3bm",
+    "label": "PEO -> PAE (Jan 2026)"
+   },
+   {
+    "from": "l_afrlri",
+    "to": "p_abms",
+    "label": "tech transition (JADPACT, Future Flag)"
+   },
+   {
+    "from": "l_afrlry",
+    "to": "p_abms",
+    "label": "sensor/weapon-network tech (tangential)"
+   },
+   {
+    "from": "i_afwerx",
+    "to": "p_c3bm",
+    "label": "SBIR Phase II/III + STRATFI matching from program office"
+   },
+   {
+    "from": "i_afwerx",
+    "to": "r_acc",
+    "label": "customer memos from ACC units"
+   },
+   {
+    "from": "i_diu",
+    "to": "c_aflcmc",
+    "label": "follow-on production OT after DIU prototype"
+   },
+   {
+    "from": "pol_cdao",
+    "to": "p_hn",
+    "label": "data/AI standards; ATO policy"
+   }
+  ]
+ },
+ "recent_changes": [
+  {
+   "change": "PEO C3BM adopts Integrated Product Team construct for DAF Battle Network delivery",
+   "date": "2025-02-20",
+   "source_url": "https://www.af.mil/ (USAF release 'C3BM adopts Integrated Product Team construct', mirrored index)"
+  },
+  {
+   "change": "AFWERX change of leadership: Col. Nathan Stuckey becomes director and DAF chief commercialization officer",
+   "date": "2025-06-17",
+   "source_url": "https://www.afrl.af.mil/News/Article-Display/Article/4219581/afwerx-welcomes-new-director-during-change-of-leadership-ceremony/"
+  },
+  {
+   "change": "TOC-L Major Release 2 prototype announced",
+   "date": "2025-07-22",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/4253207/next-gen-toc-l-systems-announced-to-boost-agile-c2-capabilities/"
+  },
+  {
+   "change": "PEO C3BM unveils new strategic anchors/framework",
+   "date": "2025-07-30",
+   "source_url": "https://www.af.mil/ (release 'DAF PEO C3BM unveils new strategic framework', mirrored index 2025-07-31)"
+  },
+  {
+   "change": "AF three-part series on AI experimentation for the DAF Battle Network (805th CTS, ABMS CFT)",
+   "date": "2025-08-29",
+   "source_url": "https://www.af.mil/ (mirrored in GitHub Newsoid/news-ai 2025-08-29)"
+  },
+  {
+   "change": "ACC Mission Directive 505 reissued: 505th CCW to run CJADC2 / DAF Battle Network experiments",
+   "date": "2025-08-18",
+   "source_url": "https://reggie.bot/usaf/pub/accmd505/ (mirror of ACCMD505)"
+  },
+  {
+   "change": "SBIR/STTR authority lapses at end of FY2025; AFWERX pauses new SBIR activity, STRATFI/TACFI continue",
+   "date": "2025-10-01",
+   "source_url": "https://github.com/adam567/forge (research/dod-procurement-pathways.md) and https://sgeos.github.io/ 2026-06-15"
+  },
+  {
+   "change": "Three TOC-L kits deployed across three Pacific sites in Resolute Force Pacific; C2 prototyping scales up",
+   "date": "2025-10-03",
+   "source_url": "https://defensescoop.com/2025/10/03/air-force-c2-prototyping-experimentation-efforts-scale-up/"
+  },
+  {
+   "change": "War on the Rocks: 'The Air Force is Kneecapping Software Innovation' (Kessel Run decline narrative)",
+   "date": "2025-10",
+   "source_url": "https://warontherocks.com/2025/10/the-air-force-is-kneecapping-software-innovation/"
+  },
+  {
+   "change": "SecWar Acquisition Transformation Strategy: Portfolio Acquisition Executives replace PEOs",
+   "date": "2025-11-10",
+   "source_url": "https://media.defense.gov/2025/Nov/10/2003819441/-1/-1/1/ACQUISITION-TRANSFORMATION-STRATEGY.PDF"
+  },
+  {
+   "change": "Meink/Wilsbach memo discards more than half of the 2024 re-optimization: Integrated Capabilities Command shelved, functions to HQ AF A5/7",
+   "date": "2025-12-02",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/4346040/update-on-recent-daf-efforts/"
+  },
+  {
+   "change": "USSF release: Space-Air Force integration powers DAF Battle Network",
+   "date": "2025-12-03",
+   "source_url": "https://www.spaceforce.mil/ (mirrored index 2025-12-03)"
+  },
+  {
+   "change": "752 OSS named ACC pathfinder for TOC-L",
+   "date": "2025-12-15",
+   "source_url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/"
+  },
+  {
+   "change": "C3BM Engagement Day: ~1,500 registered industry participants",
+   "date": "2025-12-18",
+   "source_url": "https://www.afmc.af.mil/News/Article-Display/Article/4365588/c3bms-engagement-day-strengthens-collaboration"
+  },
+  {
+   "change": "DAF implements the 'Warfighting Acquisition System' - acquisition 'on wartime footing', PAE structure",
+   "date": "2026-01-08",
+   "source_url": "https://www.jbsa.mil/News/News/Article/4374497/daf-puts-acquisition-on-wartime-footing-implementing-secwars-warfighting-acquis/"
+  },
+  {
+   "change": "SecWar directs services to consolidate labs, experimental units and rapid-capability offices; brief CTO within 90 days",
+   "date": "2026-01-12",
+   "source_url": "Remarks by Secretary of War at SpaceX, Jan 12, 2026 (transcript mirrored in GitHub Dahc-Dragyn/TinyTruce)"
+  },
+  {
+   "change": "P1SM CSO announcement v1.3 published",
+   "date": "2026-01-28",
+   "source_url": "https://sam.gov/opp/e2b751b1e9d9463b98fca430558e6331/view"
+  },
+  {
+   "change": "Brig. Gen. Luke Cropsey departs C3BM ('Cropsey reflects on C3BM, future'); title now Portfolio Acquisition Executive",
+   "date": "2026-02-03",
+   "source_url": "https://www.afmc.af.mil/News/Article-Display/Article/4397448/cropsey-reflects-on-c3bm-future"
+  },
+  {
+   "change": "PAE C3BM stands up integrated program office to lead the Joint Fires Network",
+   "date": "2026-02-09",
+   "source_url": "https://www.aflcmc.af.mil/NEWS/Article/4400021/c3bm-takes-lead-on-joint-fires-network/"
+  },
+  {
+   "change": "Leidos discloses six-year $455M Cloud One Next award and $2.2B passive-radar base-defense award",
+   "date": "2026-02-17",
+   "source_url": "Leidos Q4-2025 earnings call (mirrored)"
+  },
+  {
+   "change": "Operation Epic Fury (Iran) begins; later drives DAF demand for portable C2 and forces reprioritization of spending",
+   "date": "2026-02-28 (ceasefire 2026-04-08)",
+   "source_url": "https://breakingdefense.com/2026/08/air-force-seeks-more-portable-c2-comms-approach-after-studying-epic-fury/"
+  },
+  {
+   "change": "AOC Program Office, Kessel Run Division (PAE C3BM/C3C) issues sources sought",
+   "date": "2026-03 (deadline 2026-03-20)",
+   "source_url": "https://sam.gov/opp/051d031ca57c48b48b360b9cbec34e40/view"
+  },
+  {
+   "change": "SBIR/STTR reauthorized through FY2031 (S.3971, Small Business Innovation and Economic Security Act) with application caps and foreign-risk due diligence",
+   "date": "2026-04-13",
+   "source_url": "https://www.congress.gov/bill/119th-congress/senate-bill/3971"
+  },
+  {
+   "change": "DAF approves AI-workforce strategy",
+   "date": "2026-04-28",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/4472626/daf-launches-plan-to-bolster-ai-workforce/"
+  },
+  {
+   "change": "AFRL posts JADPACT II Call 02 'DASH'",
+   "date": "2026-05-26",
+   "source_url": "https://sam.gov/workspace/contract/opp/25ac2a7832cd4b3f8e87c444e1bf4885/view"
+  },
+  {
+   "change": "DAF still sorting space programs into acquisition portfolios; final PAE structure 'in days' (Ainsworth)",
+   "date": "2026-05-29",
+   "source_url": "https://breakingdefense.com/2026/05/dept-of-air-force-still-working-to-sort-space-programs-into-acquisition-portfolios-ainsworth/"
+  },
+  {
+   "change": "CSAF Wilsbach: Epic Fury forced the Air Force to stop spending on other lines; pushes supplemental",
+   "date": "2026-07",
+   "source_url": "https://breakingdefense.com/2026/07/as-gop-debates-defense-spending-air-force-chief-pushes-for-supplemental-1-5t-budget/"
+  },
+  {
+   "change": "Air Force seeks one-person-carriable, two-person-operable C2 after Epic Fury (no solicitation yet)",
+   "date": "2026-08-28",
+   "source_url": "https://breakingdefense.com/2026/08/air-force-seeks-more-portable-c2-comms-approach-after-studying-epic-fury/"
+  },
+  {
+   "change": "SecAF Meink announces 'Ringleader' exercise series to test the DAF Battle Network",
+   "date": "2026 (Q1-Q2; exact date not retrieved)",
+   "source_url": "https://www.airandspaceforces.com/meink-ringleader-exercise-series-daf-battle-network/"
+  }
+ ],
+ "how_a_startup_gets_in": "Sequenced plan for a two-founder, ~$250k C2-software startup targeting the DAF in FY2026-27. STEP 0 (month 0-1, prerequisites): register in SAM.gov, get a CAGE, resolve SBIR eligibility now (>50% ownership by U.S. citizens/permanent residents; document the Indonesian founder's share and the German founder's status), start an Iron Bank/containerization plan, and adopt NIST 800-171 practices because every DAF door flows down CUI/CMMC clauses. STEP 1 (month 1-3, find the operator): pick one DAF problem with a named unit - the 752 OSS TOC-L pathfinder (Tinker), the 805th CTS/ShOC-N (Nellis), an AOC using KRADOS, or the ACC Point Defense Task Force - and get a written customer memo. Attend the next C3BM Engagement Day (last held Dec 18, 2025, ~1,500 registrants) and AFA Warfare Symposium/AFCEA events where PAE C3BM's ABMS, Kessel Run and ORT divisions brief. STEP 2 (month 2-6, first dollar): submit to the AFWERX SBIR Open Topic in cycle 26.3 (expected Sept 2026; reauthorized Apr 13, 2026) with the customer memo, OR submit a solution brief to the JADC2 CSO (FA8612-21-S-C001, open to Nov 9, 2026), the Kessel Run DevSecOps CSO (FA8730-22-S-C001, open to Nov 29, 2027) or the ACC CSO (FA4890-CSO-0001-24); list a containerized product on the P1SM CSO (FA8307-24-S-C001, open to Dec 29, 2026) for distribution. Send AFRL/RI a white paper against the open BAA or JADPACT II if the work is research-grade (FY27 white papers reportedly due Sept 2, 2026). STEP 3 (month 6-12, prove it in an exercise): use a CRADA under C3BM's JADC2 BAA to get interface access and get onto a ShOC-N experiment, Bamboo Eagle, Red Flag or the new 'Ringleader' series; the post-Epic Fury portable-C2 requirement (Aug 2026) is an explicit open lane. STEP 4 (month 12-24, bridge): convert Phase II into TACFI ($375K-$1.7M) or STRATFI ($3M-$15M) with matching funds from PAE C3BM or ACC and/or private investors; in parallel subcontract to an ABMS DI Consortium member (Northrop, L3Harris) or the CBC2/JFN primes (SAIC, Lockheed) so the product touches fielded interfaces. STEP 5 (month 18-36, scale): pursue a prototype OT with a production option through AFLCMC, a DIU-sponsored transition, or a task order under the DI Consortium IDIQ; watch for the rumored 'Megatron' JADC2 follow-on IDIQ (unverified) and for the FY27 DAF Battle Network lines. Throughout: the DAF is mid-reorganization (PEO->PAE Jan 2026; ICC shelved Dec 2025; Kessel Run folded into an AOC program office; wartime reprioritization after Epic Fury), so verify office symbols and points of contact on every solicitation before submitting.",
+ "search_log": [
+  {
+   "query": "WebSearch: PEO C3BM DAF Battle Network 2026 (blocked: session search budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Cloud-Based Command and Control CBC2 contract award vendors 2025 2026 (blocked)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Tactical Operations Center-Light TOC-L Air Force contract 2025 2026 (blocked)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: ABMS Digital Infrastructure consortium IDIQ ceiling vendors (blocked)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: DAF Battle Network FY2026 budget request program element (blocked)",
+   "useful": false
+  },
+  {
+   "query": "WebSearch: Kessel Run 2026 Air Force software factory status (blocked)",
+   "useful": false
+  },
+  {
+   "query": "WebFetch x16: hanscom.af.mil, afwerx.af.mil, defensescoop.com, saffm.hq.af.mil, breakingdefense.com, gao.gov, wikipedia, af.mil, sbir.gov, sam.gov, crsreports.congress.gov, airandspaceforces.com, c4isrnet.com, usaspending.gov, dvidshub.net, github.com/search (all egress-blocked or auth-walled)",
+   "useful": false
+  },
+  {
+   "query": "Bigdata.com news search x6 (out of credits)",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"DAF Battle Network\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"PEO C3BM\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Cloud-Based Command and Control\" CBC2",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Tactical Operations Center-Light\" OR \"TOC-L\" \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Advanced Battle Management System\" \"0207\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"AFWERX\" \"Open Topic\" STRATFI",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Kessel Run\" \"Platform One\" \"Cloud One\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Portfolio Acquisition Executive\" C3BM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Megatron IDIQ \"Battle Network\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Kessel Run\" 2026 \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"0604003F\" ABMS",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Joint Fires Network\" C3BM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"TOC-L\" Anduril OR Lattice OR Northrop OR award",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Platform One\" 2026 \"Air Force\" P1SM OR \"Big Bang\" OR \"Iron Bank\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"DCGS-AF\" OR \"Open Architecture DCGS\" OR \"ISR & SOF Directorate\"",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: AFWERX \"Open Topic\" 2026",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: STRATFI TACFI AFWERX 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: SBIR reauthorization 2026 lapse \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Shadow Operations Center\" OR \"ShOC-N\" OR \"805th Combat Training Squadron\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Ringleader\" \"Battle Network\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Air Force Research Laboratory\" \"Information Directorate\" BAA 2026 Rome",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Integrated Capabilities Command\" 2025 \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Advanced Battle Management System\" 2026 request million budget",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Anduril \"Air Force\" \"battle management\" contract 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Palantir \"Air Force\" enterprise contract 2025 OR 2026",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"Golden Horde\" AFRL Vanguard",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"DAF CDAO\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Cloud One\" \"Air Force\" 2025 OR 2026 award OR \"Cloud One Next\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"kneecapping software innovation\" OR \"Kessel Run\" \"War on the Rocks\" 2025",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:weiaiwayne/commDAAF \"BATTLE NETWORK\" / \"743.8\" / ABMS (FY25 posture hearing)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:bedwards/hex-index Battle Network / Kessel Run / AFWERX / Ringleader / warfighting acquisition",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:toole-brendan/ooxml_build_pipelines_light C3BM / \"Battle Network\" (USAF release index + DoD contract announcement cache)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:gabrielkinast/editalfinder C3BM / afmc.af.mil (AFMC news scrape)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:ISS-LLC22/shield-atlas MEGATRON / \"Battle Network\" / AMIC CSO / \"LM-led\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:VM-CodeRock/VM2-P-Taskers \"Kessel Run\" (SAM.gov scrape)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:carlosmsanchezm/aegis-platform \"Air Force\" (CSO/BAA list)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:byte-pipe/tech-news STRATFI (DoW contracting for startups 101, Apr 2026)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:olexprutza/war-brief \"Air Force\" C2 (2026 Breaking Defense/SAM digests)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:Dahc-Dragyn/TinyTruce \"Air Force\" (Hegseth Jan 12 2026 remarks)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:likeich/reggie-website \"505th Command and Control Wing\" (ACCMD505/ACCMD100)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: repo:caseyrtalbot/DEF_CMD C3BM / 951 (Tier-4 PEO tracker)",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: Cropsey 2026",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: CBC2 SAIC",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"ACC/A2/6\" ; \"A2/6\" \"Air Combat Command\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"FA8612-21-S-C001\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"ABMS Digital Infrastructure\" consortium",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"wartime footing\" DAF acquisition",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"P1SM\" \"Platform One\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"AFRL/RI\" BAA 2026",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Epic Fury\" \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Major Release 2\" TOC-L",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: AFWERX Stuckey director",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: SBIR reauthorized 2026 signed law",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"bolster AI workforce\" DAF",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: KRADOS \"Kessel Run\" AOC",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"JADPACT\" AFRL",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Joint Fires Network\" 2026 INDOPACOM",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"fiscal 2027\" \"Air Force\" budget request",
+   "useful": true
+  },
+  {
+   "query": "GitHub code: \"Nexus\" \"Air Force\" AI platform 2025 (no DAF 'Nexus' C2 program found)",
+   "useful": false
+  },
+  {
+   "query": "GitHub code: \"DAF Battle Network\" GAO (rate-limited 429)",
+   "useful": false
+  }
+ ],
+ "saturation_statement": "NOT SATURATED - constrained by tooling, not by the topic. Roughly 45 productive GitHub code-search queries (plus ~28 blocked web/news attempts) were run; zero full primary documents were read. HIGH-confidence items: PEO C3BM -> PAE C3BM rename under the Jan 8, 2026 Warfighting Acquisition System; Cropsey's Feb 2026 departure; the Feb 9, 2026 Joint Fires Network IPO; Kessel Run's placement as a division of an AOC Program Office (PAE C3BM/C3C, Mar 2026); the Dec 2, 2025 shelving of Integrated Capabilities Command; the FY25 request of $743.8M within the ABMS PE (0604003F); the ABMS contracting menu (MA-MLS IDIQ, JADC2 BAA/CRADA, JADC2 CSO, SBIR III); the SBIR lapse (Oct 2025) and reauthorization (Apr 13, 2026); AFWERX leadership (Stuckey, June 2025); TOC-L MR2 (July 2025) and 752 OSS pathfinder (Dec 2025); Leidos' $455M Cloud One Next (company statement); the standing CSOs (JADC2, Kessel Run, AFLCMC Data Ops, P1SM, ACC). MEDIUM: CBC2 prime = SAIC; DI Consortium size/ceiling; 505th CCW/ShOC-N experimentation role; STRATFI/TACFI ranges. LOW / UNVERIFIED: FY26 ABMS request (~$951M from a Tier-4 tracker), FY27 request, Cropsey's successor (BG Jason Voorheis per Tier-4), TOC-L kit vendors and values, 'Megatron' IDIQ, DCGS-AF/AFLCMC-WI 2026 status, AFRL/RY programs, DAF CDAO 2026 leadership, 'Air Force Nexus' (no evidence found). Next-run priorities: fetch FY26 and FY27 DAF RDT&E Vol II R-2 for PE 0604003F; C3BM leadership page at aflcmc.af.mil/C3BM; SAM.gov records for FA8612-21-S-C001 awards and TOC-L OTs; GAO reports on ABMS since GAO-23-105495; AFWERX 26.3 solicitation instructions; DAF service innovation plan submitted to the DoW CTO (spring 2026).",
+ "sources": [
+  {
+   "url": "https://www.afmc.af.mil/News/Article-Display/Article/4397448/cropsey-reflects-on-c3bm-future",
+   "title": "Cropsey reflects on C3BM, future (AFMC; PAE C3BM title; Cropsey departs)",
+   "pub_date": "2026-02-03",
+   "tier": 1
+  },
+  {
+   "url": "https://www.aflcmc.af.mil/NEWS/Article/4400021/c3bm-takes-lead-on-joint-fires-network/",
+   "title": "C3BM takes lead on Joint Fires Network (AFLCMC)",
+   "pub_date": "2026-02-09",
+   "tier": 1
+  },
+  {
+   "url": "https://www.afmc.af.mil/News/Article-Display/Article/4365588/c3bms-engagement-day-strengthens-collaboration",
+   "title": "C3BM's Engagement Day strengthens collaboration (~1,500 registrants)",
+   "pub_date": "2025-12-18",
+   "tier": 1
+  },
+  {
+   "url": "https://www.jbsa.mil/News/News/Article/4374497/daf-puts-acquisition-on-wartime-footing-implementing-secwars-warfighting-acquis/",
+   "title": "DAF puts acquisition on wartime footing, implementing SECWAR's Warfighting Acquisition System",
+   "pub_date": "2026-01-08",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2025/Nov/10/2003819441/-1/-1/1/ACQUISITION-TRANSFORMATION-STRATEGY.PDF",
+   "title": "DoD Acquisition Transformation Strategy (PAEs)",
+   "pub_date": "2025-11-10",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/Article-Display/Article/4346040/update-on-recent-daf-efforts/",
+   "title": "Update on recent DAF efforts (Meink/Wilsbach memo discarding re-optimization changes; ICC shelved)",
+   "pub_date": "2025-12-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/Article-Display/Article/4253207/next-gen-toc-l-systems-announced-to-boost-agile-c2-capabilities/",
+   "title": "Next-gen TOC-L systems announced to boost agile C2 capabilities (Major Release 2)",
+   "pub_date": "2025-07-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/",
+   "title": "Pathfinders drive TOC-L innovation (752 OSS, ACC pathfinder)",
+   "pub_date": "2025-12-15",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/Article-Display/Article/4408184/c3bm-launches-software-developer-student-pipeline/",
+   "title": "C3BM launches software developer student pipeline (names Kessel Run, ORT, C3M divisions)",
+   "pub_date": "2026 (Q1)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.aflcmc.af.mil/C3BM/Our-Divisions/",
+   "title": "C3BM Our Divisions (AFLCMC)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.aflcmc.af.mil/NEWS/Article/4414757/warfighting-acquisition-transformation-to-bolster-daf-battle-network-delivery/",
+   "title": "Warfighting acquisition transformation to bolster DAF Battle Network delivery (AFLCMC)",
+   "pub_date": "2026 (Q1-Q2)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/Article-Display/Article/4472626/daf-launches-plan-to-bolster-ai-workforce/",
+   "title": "DAF launches plan to bolster AI workforce",
+   "pub_date": "2026-04-28",
+   "tier": 1
+  },
+  {
+   "url": "https://www.afrl.af.mil/News/Article-Display/Article/4219581/afwerx-welcomes-new-director-during-change-of-leadership-ceremony/",
+   "title": "AFWERX welcomes new director (Col. Nathan Stuckey)",
+   "pub_date": "2025-06-17",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3971",
+   "title": "S.3971 Small Business Innovation and Economic Security Act (SBIR/STTR reauthorization through FY2031, signed Apr 13, 2026)",
+   "pub_date": "2026-04-13",
+   "tier": 1
+  },
+  {
+   "url": "https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-074.html",
+   "title": "NIH notice implementing S.3971 foreign-risk due diligence and application caps (describes the Act)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.armed-services.senate.gov/ (S.Hrg. CHRG-118shrg62232)",
+   "title": "DAF FY2025 posture hearing: $743.8M requested within the ABMS PE; PEO C3BM acquisition lead, ABMS CFT operational lead",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://comptroller.defense.gov/ (FY2024 USAF RDT&E Vol II, PE 0604003F Project 640141; Vol IV PE 0207431F, 0208088F, 0305206F) mirrored at https://github.com/ethanmurray/dod-jbook-analysis",
+   "title": "USAF RDT&E justification text: ABMS acquisition/contracting strategy; Kessel Run Air Domain SWP; IDCS; Agile ISR",
+   "pub_date": "2023-03 (FY24 PB)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/ (announcement 3811149)",
+   "title": "Istari Federal LLC $9,100,386 FFP sole-source for Air Force Battle Network support (FA8612-24-C-B004)",
+   "pub_date": "2024-06",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/051d031ca57c48b48b360b9cbec34e40/view",
+   "title": "Sources Sought - Air Operations Center Program Office, Kessel Run Division, PAE C3BM/C3C",
+   "pub_date": "2026-03 (deadline 2026-03-20)",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/e2b751b1e9d9463b98fca430558e6331/view",
+   "title": "Platform One Solutions Marketplace (P1SM)/CSO FA8307-24-S-C001 (announcement v1.3, 2026-01-28)",
+   "pub_date": "2026-01-28",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/ (FA8612-21-S-C001)",
+   "title": "JADC2 Commercial Solutions Opening (AFLCMC/ABMS), open to 2026-11-09",
+   "pub_date": "2021 (amended)",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/ (FA8730-22-S-C001)",
+   "title": "Kessel Run DevSecOps CSO, open to 2027-11-29",
+   "pub_date": "2022 (amended)",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/ (FA8600-23-S-C056)",
+   "title": "AFLCMC Data Operations CSO, open to 2028-02-08",
+   "pub_date": "2023",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/ (FA4890-CSO-0001-24)",
+   "title": "Air Combat Command Commercial Solutions Opening",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/25ac2a7832cd4b3f8e87c444e1bf4885/view",
+   "title": "AFRL Call 02 DASH - JADPACT II",
+   "pub_date": "2026-05-26",
+   "tier": 1
+  },
+  {
+   "url": "https://reggie.bot/usaf/pub/accmd505/",
+   "title": "ACC Mission Directive 505 - 505th Command and Control Wing (mirror)",
+   "pub_date": "2025-08-18",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-23-105495",
+   "title": "GAO: Battle Management - DOD and Air Force Continue to Define Joint C2 Efforts",
+   "pub_date": "2023-01-13",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DevSecOpsStateOf.pdf",
+   "title": "DoD CIO State of DevSecOps (Platform One, Kessel Run funding from 5+ PEs)",
+   "pub_date": "2025-03",
+   "tier": 1
+  },
+  {
+   "url": "Remarks by Secretary of War Pete Hegseth at SpaceX (transcript mirrored in GitHub Dahc-Dragyn/TinyTruce)",
+   "title": "Service innovation-ecosystem consolidation directive; MEIA; DIU role",
+   "pub_date": "2026-01-12",
+   "tier": 1
+  },
+  {
+   "url": "https://news.lockheedmartin.com/2024-06-20-Lockheed-Martin-Integrates-Command-and-Control-Capabilities-with-First-Joint-Fires-Network-Prototype",
+   "title": "Lockheed integrates C2 with first JFN prototype (Valiant Shield 2024)",
+   "pub_date": "2024-06-20",
+   "tier": 2
+  },
+  {
+   "url": "Northrop Grumman Q3 2022 earnings call transcript",
+   "title": "Northrop selected for ABMS Digital Infrastructure Consortium",
+   "pub_date": "2022-10-27",
+   "tier": 2
+  },
+  {
+   "url": "Leidos Q4 2025 earnings call transcript (2026-02-17)",
+   "title": "Leidos: $455M six-year Cloud One Next; $2.2B five-year passive radar base defense",
+   "pub_date": "2026-02-17",
+   "tier": 2
+  },
+  {
+   "url": "https://afwerx.com/divisions/sbir-sttr/sbir-sttr-overview/",
+   "title": "AFWERX SBIR/STTR overview (Open Topic, Specific Topic, STRATFI/TACFI; eligibility)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/DoD-Platform-One/bbtoc",
+   "title": "Big Bang Technical Oversight Committee (Platform One chairs appointed Aug 2025 / Aug 2026)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2025/10/03/air-force-c2-prototyping-experimentation-efforts-scale-up/",
+   "title": "Air Force C2 prototyping, experimentation efforts scale up (three TOC-L kits at REFORPAC)",
+   "pub_date": "2025-10-03",
+   "tier": 3
+  },
+  {
+   "url": "https://www.airandspaceforces.com/meink-ringleader-exercise-series-daf-battle-network/",
+   "title": "New 'Ringleader' exercise series to test DAF Battle Network",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.airandspaceforces.com/new-air-force-leaders-re-optimization-whats-in-whats-out/",
+   "title": "New Air Force leaders' re-optimization: what's in, what's out",
+   "pub_date": "2025-12",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/01/how-the-air-force-is-revamping-its-acquisition-shop-with-new-portfolios/",
+   "title": "How the Air Force is revamping its acquisition shop with new portfolios",
+   "pub_date": "2026-01-09",
+   "tier": 3
+  },
+  {
+   "url": "https://www.defensenews.com/air/2026/01/09/air-force-outlines-acquisition-changes-supporting-hegseth-mandate/",
+   "title": "Air Force outlines acquisition changes supporting Hegseth mandate",
+   "pub_date": "2026-01-09",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/05/dept-of-air-force-still-working-to-sort-space-programs-into-acquisition-portfolios-ainsworth/",
+   "title": "DAF still working to sort space programs into acquisition portfolios (PAE structure 'in days')",
+   "pub_date": "2026-05-29",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/08/air-force-seeks-more-portable-c2-comms-approach-after-studying-epic-fury/",
+   "title": "Air Force seeks more portable C2, comms approach after studying Epic Fury",
+   "pub_date": "2026-08-28",
+   "tier": 3
+  },
+  {
+   "url": "https://breakingdefense.com/2026/07/as-gop-debates-defense-spending-air-force-chief-pushes-for-supplemental-1-5t-budget/",
+   "title": "Air Force chief pushes for supplemental; Epic Fury forced spending stops",
+   "pub_date": "2026-07",
+   "tier": 3
+  },
+  {
+   "url": "https://warontherocks.com/2025/10/the-air-force-is-kneecapping-software-innovation/",
+   "title": "The Air Force is Kneecapping Software Innovation",
+   "pub_date": "2025-10",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rise8.us/resources/kessel-run-post-mortem-how-the-usaf-paved-the-way-for-modern-software-development-in-the-dod",
+   "title": "Kessel Run post-mortem (Rise8)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rand.org/pubs/research_reports/RRA550-1.html",
+   "title": "RAND: Personnel Needs for DAF Digital Talent - software factories",
+   "pub_date": "2022-03-30",
+   "tier": 3
+  },
+  {
+   "url": "https://www.soldiersystems.net/2026/02/14/air-force-portfolio-acquisition-executive-for-command-control-communications-and-battle-management-takes-lead-on-joint-fires-network/",
+   "title": "PAE C3BM takes lead on JFN (repost)",
+   "pub_date": "2026-02-14",
+   "tier": 3
+  },
+  {
+   "url": "https://defenseacquisition.substack.com/p/warfighting-acquisition-system",
+   "title": "Unleashing the Warfighting Acquisition System (Modigliani) and follow-on 'Rolling out PAEs, DRPMs and Tech Areas'",
+   "pub_date": "2025-11-17",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/caseyrtalbot/DEF_CMD (src/lib/peo-data/airforce.ts)",
+   "title": "Tier-4 PEO tracker: 'ABMS ~$951M FY26', 'BG Jason Voorheis PAE (Feb 2026)', 'TOC-L MR2 (40+ systems)', 'CBC2+ in dev'",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/ISS-LLC22/shield-atlas (docs/megatron-2026/)",
+   "title": "SDVOSB capture files describing a rumored $4.5B 'MEGATRON' JADC2 follow-on IDIQ (pre-RFP, unverified)",
+   "pub_date": "2026-04-19",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/byte-pipe/tech-news (tldr-dow-contracting-for-startups-101, 2026-04-26)",
+   "title": "DoW contracting for startups 101 (STRATFI $3M-$15M; TACFI $375K-$1.7M; 2026 SBIR reauth caps)",
+   "pub_date": "2026-04-26",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/carlosmsanchezm/aegis-platform (docs/business/sbir-ota-opportunities.md)",
+   "title": "Verified-on-SAM list of DAF CSOs/BAAs with closing dates (Mar 21, 2026)",
+   "pub_date": "2026-03-21",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/olexprutza/war-brief",
+   "title": "Daily defense-news digests (Breaking Defense/Defense News/SAM.gov) May-Aug 2026",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/bedwards/hex-index (library/defenseacquisition/)",
+   "title": "Defense Tech and Acquisition newsletter archive (re-opt rollback; Ringleader; C3BM pipeline; JFN)",
+   "pub_date": "2025-2026",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/yufei96/llm-wiki (wiki/sources/AFMC ABMS distributed connectivity, Mar 2025)",
+   "title": "Summary of AFMC March 2025 ABMS article (Col. Bai Lan Zhu SML; Bryan Tipton architecture quote; SAIC CBC2 prime)",
+   "pub_date": "2025-03",
+   "tier": 4
+  },
+  {
+   "url": "https://github.com/540co/dod-president-budget-procurement-rdte-data",
+   "title": "DAF P-1/R-1 exhibits mirror (DCGS-AF lines 0305208F/0305240F)",
+   "pub_date": "FY2013-2016",
+   "tier": 4
+  }
+ ]
+}
