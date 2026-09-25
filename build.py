@@ -146,6 +146,21 @@ def build_data():
     e07 = d['evidence'].get('E07') or {}
     st = e07.get('structured') or {}
     d['regulatoryMatrix'] = st.get('regulatory_matrix') or st.get('matrix') or []
+    # canonical segment re-tagging (evidence agents used their own numbering)
+    retag = load(os.path.join(DATA, 'evidence', 'retag.json')) or {}
+    fmap = retag.get('findings') or {}
+    for e in d['evidence'].values():
+        for f in e.get('findings') or []:
+            if f.get('id') in fmap:
+                f['segment_ids_original'] = f.get('segment_ids'); f['segment_ids'] = fmap[f['id']]
+            else:
+                f['segment_ids'] = [x for x in (f.get('segment_ids') or []) if re.match(r'^S\d\d$', str(x))]
+    rmap = retag.get('regulatory_rows') or {}
+    segname = {s['segment_id']: s['segment_name'] for s in segs}
+    for i, row in enumerate(d['regulatoryMatrix']):
+        row['original_segment_id'] = row.get('segment_id')
+        row['segment_id'] = rmap.get(str(i), row.get('segment_id'))
+        row['segment_name'] = segname.get(row['segment_id'], row.get('assumed_segment_label', ''))
     d['founderAnalysis'] = st.get('founder_analysis') or st.get('founder_specific_analysis') or None
     # gaps
     d['registry'] = load(os.path.join(DATA, 'gaps', 'registry.json')) or {'gaps': []}
