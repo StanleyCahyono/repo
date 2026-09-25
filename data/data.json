@@ -79896,6 +79896,260 @@
      "C3 AI"
     ],
     "notes": "Chain steps: INGEST through DISSEMINATE (whole-layer platform); echelons: all. Included so later stages red-team the 'data fabric startup' idea explicitly: S02 rated it J with HIGH confidence - no buyer, the Army just chose, the joint level chose Maven, the enterprise chose an integrator, and Anduril (~$61B valuation) and Palantir can outspend any startup on the layer (financial evidence). The residual opportunities are the component gaps G02, G05, G07 and G17, not a platform."
+   },
+   {
+    "id": "G29",
+    "title": "Vendor-neutral DDIL test and conformance harness for tactical software (link emulation, multi-node TAK/CoT sync scoring, pre-Jailbreak API contract tests, TAK plugin RBAC/audit conformance)",
+    "problem": "Program offices, primes and the 50+ small vendors that must plug into NGC2, TAK and the Army API marketplace have no independent, reproducible way to prove how their software behaves under 1 Mbps to 1 kbps links, partition and reconnect storms, or against the government-baselined interfaces, so integration is proven only at expensive live events (Jailbreak, Ivy Sting, NetModX).",
+    "categories": [
+     "D",
+     "B",
+     "E",
+     "H"
+    ],
+    "segment_ids": [
+     "S05",
+     "S06",
+     "S02",
+     "S09"
+    ],
+    "parent_ids": [
+     "G17",
+     "G10",
+     "G07",
+     "G14"
+    ],
+    "user": "Program-office and prime T&E engineers; small sensor/vehicle/app vendors preparing for Jailbreak-series and NGC2 onboarding; DEVCOM C5ISR Center and CTC network cells",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G17",
+     "G10",
+     "G07",
+     "G14"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G30",
+    "title": "NATO/FMN-first security-label conformance linter, releasability-derivation simulator and coalition-format adapter kit (STANAG 4774/4778, ACP-240/ZTDF, NFFI/NVG/MIP) built on public standards and synthetic data",
+    "problem": "Allied C2 vendors and nations test label and message conformance essentially once a year at CWIX, and coalition units still hand-tag or regenerate products because no vendor-neutral, unclassified tool computes and checks releasability labels and coalition formats before data leaves a national system.",
+    "categories": [
+     "F",
+     "B",
+     "I",
+     "E"
+    ],
+    "segment_ids": [
+     "S08",
+     "S10",
+     "S02"
+    ],
+    "parent_ids": [
+     "G01",
+     "G12",
+     "G24",
+     "G23",
+     "G02"
+    ],
+    "user": "Allied C2 vendors (Isode, archTIS, Systematic, national integrators), CWIX/TIDE Sprint and Bundeswehr CIHBw program staff, coalition interoperability cells; later U.S. MPE/CIE integrators",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G01",
+     "G12",
+     "G24",
+     "G23",
+     "G02"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G31",
+    "title": "Drone-agnostic sensor-to-map TAK plugin (MISB KLV to georegistered footprints, incremental 3D Tiles and change-vs-baseline overlays on a commodity edge box) with bandwidth-budgeted delta distribution of terrain and basemap packages across TAK federations",
+    "problem": "Small units and public-safety TAK users cannot turn drone video into georegistered overlays, 3D models and change alerts without reach-back, and still sideload maps and 3D terrain by hand because no open, vendor-neutral service prioritizes and delta-syncs geospatial data across TAK Server federations outside the NGC2 stack.",
+    "categories": [
+     "A",
+     "C",
+     "D",
+     "I",
+     "H"
+    ],
+    "segment_ids": [
+     "S07",
+     "S04",
+     "S06"
+    ],
+    "parent_ids": [
+     "G13",
+     "G03"
+    ],
+    "user": "Company/battalion S2 and UAS operators on ATAK; public-safety SAR, wildfire and infrastructure-inspection TAK users; USSOCOM/USMC/DHS/allied TAK federations",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G13",
+     "G03"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G32",
+    "title": "Software-only multi-node TDOA/AoA interference and rogue-emitter geolocation engine on commodity SDR nodes, plus an offline-first spectrum-management workflow client (JRFL/SFAF assignments, interference tickets) for installation, range and shared-band spectrum managers",
+    "problem": "Installation spectrum managers, range control and shared-band (CBRS/5G) operators lack affordable geolocation of interference and rogue emitters and fall back to spreadsheets, email and reach-back to legacy Spectrum XXI, while cheap SDR hardware exists but the calibration, fusion and false-alarm-suppression software does not.",
+    "categories": [
+     "A",
+     "C",
+     "D",
+     "H",
+     "I"
+    ],
+    "segment_ids": [
+     "S12",
+     "S03"
+    ],
+    "parent_ids": [
+     "G21",
+     "G11"
+    ],
+    "user": "Installation and range spectrum managers (25E), DoD and civil shared-band operators, brigade spectrum managers working disconnected",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G21",
+     "G11"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G33",
+    "title": "Independent track-provenance and after-action audit tool for C-UAS and unit drone operations, with a friendly-flight declaration adapter (MAVLink/GCS to CoT flight-intent extension) and an offline-first UAS operator/airframe qualification and readiness ledger",
+    "problem": "Units and C-UAS task forces cannot reconstruct which sensor said what, when, and why a track was labelled friend or unknown after an engagement, friendly drones are still hand-marked because their intent never reaches the COP, and squads fielding thousands of multi-vendor drones track operator qualification and airframe readiness on paper.",
+    "categories": [
+     "B",
+     "C",
+     "G",
+     "I"
+    ],
+    "segment_ids": [
+     "S13",
+     "S07",
+     "S03"
+    ],
+    "parent_ids": [
+     "G05",
+     "G09",
+     "G20"
+    ],
+    "user": "JIATF-401 and JICO oversight staff, CTC observer-controllers, range control, battalion UAS master trainers and S3 air cells",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G05",
+     "G09",
+     "G20"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G34",
+    "title": "Offline-first, EAR99-by-design structured orders, tasks, reports and LOGSTAT object layer with CRDT merge for TAK-CIV, sold first to public-safety incident command, National Guard and allied light units, with the merge model licensable to HQ planning and C2 platform owners",
+    "problem": "Below battalion, orders, reports and sustainment status still move as voice, chat and free-text graphics that do not survive displaced, low-bandwidth command posts, while incident commanders and Guard units on unclassified networks have no structured, offline-tolerant alternative to paper ICS forms and spreadsheets.",
+    "categories": [
+     "C",
+     "D",
+     "G",
+     "I"
+    ],
+    "segment_ids": [
+     "S01",
+     "S14"
+    ],
+    "parent_ids": [
+     "G18",
+     "G06"
+    ],
+    "user": "Company and battalion staffs on ATAK, public-safety incident commanders, National Guard battalions, allied light units, sustainment sections",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G18",
+     "G06"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G35",
+    "title": "Autonomy and PNT conformance and test-and-evaluation tooling: machine-to-machine conformance suites for MAVLink/STANAG 4586/UMAA/FANTOM-style interfaces, DDIL scenario replay, and an ASPN synthetic-measurement generator with pntOS plug-in conformance checks scored against the DHS Resilient PNT framework",
+    "problem": "Government labs and the vendors that must plug into whichever orchestrator or PNT architecture wins have no independent conformance and replay tooling for the government reference architectures, so integration is proven only at prize events and live tests.",
+    "categories": [
+     "B",
+     "E",
+     "A",
+     "H"
+    ],
+    "segment_ids": [
+     "S13",
+     "S11"
+    ],
+    "parent_ids": [
+     "G25",
+     "G19"
+    ],
+    "user": "SOFWERX and autonomy proving-ground T&E staff, Drone Dominance and alt-PNT vendors, PM PNT and NAVWAR test engineers, civil critical-infrastructure timing operators",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G25",
+     "G19"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
+   },
+   {
+    "id": "G36",
+    "title": "ATO-evidence tooling: open-source evidence graph (SBOM, scans, attestations to OSCAL assessment results with content-addressed provenance) and TAK/marketplace plugin conformance tester, offered as a vendor-neutral component to hosting platforms and app pipelines rather than as a GRC product",
+    "problem": "Vendors onboarding apps to NGC2, TAK, Overmatch Armory or Game Warden reassemble the same authorization evidence for each authorizing official by hand because pipeline artifacts, SBOMs and control inheritance are not turned into reciprocally reusable, machine-readable packages.",
+    "categories": [
+     "E",
+     "C",
+     "H",
+     "F"
+    ],
+    "segment_ids": [
+     "S09",
+     "S10",
+     "S01"
+    ],
+    "parent_ids": [
+     "G15",
+     "G16",
+     "G14"
+    ],
+    "user": "Small software vendors and their DevSecOps leads, platform owners (Defense Unicorns UDS, Second Front, Platform One), TAK plugin developers, ISSMs and assessors",
+    "generation": 2,
+    "initial_attractiveness": "second-generation",
+    "merged_from": [
+     "G15",
+     "G16",
+     "G14"
+    ],
+    "evidence_forms": null,
+    "companies_near": [],
+    "notes": "Second-generation candidate: the narrower survivable form the three skeptics converged on for the parent gap(s). Evaluated on its own merits, including whether it is venture-scale or a consultancy/feature."
    }
   ],
   "dropped": [
@@ -79936,7 +80190,8 @@
     "reason": "Post-EBS-C ERP integration/data layer: systems-integrator territory dominated by Accenture Federal, IBM, Deloitte, Leidos and the Palantir EA; S14 rated J with HIGH confidence. The EBS-C non-renewal is retained as evidence under G06."
    }
   ],
-  "coverage_notes": "Registry: 28 entries consolidating 62 of 71 candidates (9 dropped with reasons; every candidate id appears exactly once in merged_from or dropped). Segments: every segment S01-S14 has at least one surviving candidate; S00 is an architecture overview with no candidate_gaps. Information chain coverage - COLLECT: G04 (PNT sensors), G09 (sUAS), G21 (passive sensors), G22 (commercial tasking); TRANSPORT: G10, G17, G23; INGEST/NORMALIZE: G07, G08, G23, G28; STORE: G02, G03, G17; PROCESS: G13, G16; FUSE/IDENTIFY: G04, G05, G11, G20, G21; VISUALIZE: G03, G06, G11, G12, G18; DECIDE: G04, G06, G08, G25, G26; COLLABORATE: G12, G18; DISSEMINATE: G01, G02, G03, G12, G27; TASK: G08, G09, G25; MONITOR: G10, G14, G15, G16; ASSESS: G14, G15, G19, G24. Echelon coverage - individual platform: G04, G10, G19, G23; tactical unit/squad: G03, G09, G18, G21; battalion/brigade: G02, G06, G10, G11, G13, G17; division/corps: G05, G08, G14, G16; theater/joint: G20, G22, G25, G26, G28; coalition: G01, G12, G24, G27; enterprise/program office: G14, G15. Categories A-J are all represented; J-rated or deliberately weak entries kept for the red team: G22, G23, G24, G25, G26, G27, G28 (seven, exceeding the minimum of four), plus G17 flagged 'feature not product'. Evidence weighting: 18 entries have 5-6 distinct FACT-backed evidence forms; G24 (3) and G26 (2) are the thinnest. Absence signals recorded: no MPE/coalition RFI or SBIR topic surfaced (affects G12), no unit-level sUAS fleet/collection requirement or budget line found (G09), no contested-logistics C2 software budget line found (G06). Cross-cutting constraints not repeated per entry: SBIR/STTR >50% U.S.-citizen/permanent-resident ownership test (E07-F3), ITAR deemed-export and FOCI treatment of non-citizens (E07-F17/F19), clearances require U.S. citizenship (E07-F21), OTA/CSO routes have no statutory ownership test (E07-F22) - all require counsel, not founder judgement. Method limits: sam.gov, gao.gov and most news domains were egress-blocked in earlier stages, so several RFI pointers are FACT on existence but their text was not read directly; no fresh WebSearch/WebFetch calls were made in this consolidation, so nothing here is newer than the segment and evidence sweeps."
+  "coverage_notes": "Registry: 28 entries consolidating 62 of 71 candidates (9 dropped with reasons; every candidate id appears exactly once in merged_from or dropped). Segments: every segment S01-S14 has at least one surviving candidate; S00 is an architecture overview with no candidate_gaps. Information chain coverage - COLLECT: G04 (PNT sensors), G09 (sUAS), G21 (passive sensors), G22 (commercial tasking); TRANSPORT: G10, G17, G23; INGEST/NORMALIZE: G07, G08, G23, G28; STORE: G02, G03, G17; PROCESS: G13, G16; FUSE/IDENTIFY: G04, G05, G11, G20, G21; VISUALIZE: G03, G06, G11, G12, G18; DECIDE: G04, G06, G08, G25, G26; COLLABORATE: G12, G18; DISSEMINATE: G01, G02, G03, G12, G27; TASK: G08, G09, G25; MONITOR: G10, G14, G15, G16; ASSESS: G14, G15, G19, G24. Echelon coverage - individual platform: G04, G10, G19, G23; tactical unit/squad: G03, G09, G18, G21; battalion/brigade: G02, G06, G10, G11, G13, G17; division/corps: G05, G08, G14, G16; theater/joint: G20, G22, G25, G26, G28; coalition: G01, G12, G24, G27; enterprise/program office: G14, G15. Categories A-J are all represented; J-rated or deliberately weak entries kept for the red team: G22, G23, G24, G25, G26, G27, G28 (seven, exceeding the minimum of four), plus G17 flagged 'feature not product'. Evidence weighting: 18 entries have 5-6 distinct FACT-backed evidence forms; G24 (3) and G26 (2) are the thinnest. Absence signals recorded: no MPE/coalition RFI or SBIR topic surfaced (affects G12), no unit-level sUAS fleet/collection requirement or budget line found (G09), no contested-logistics C2 software budget line found (G06). Cross-cutting constraints not repeated per entry: SBIR/STTR >50% U.S.-citizen/permanent-resident ownership test (E07-F3), ITAR deemed-export and FOCI treatment of non-citizens (E07-F17/F19), clearances require U.S. citizenship (E07-F21), OTA/CSO routes have no statutory ownership test (E07-F22) - all require counsel, not founder judgement. Method limits: sam.gov, gao.gov and most news domains were egress-blocked in earlier stages, so several RFI pointers are FACT on existence but their text was not read directly; no fresh WebSearch/WebFetch calls were made in this consolidation, so nothing here is newer than the segment and evidence sweeps.",
+  "second_generation_note": "G29-G36 are second-generation candidates consolidated from the narrower survivable forms proposed by the red team for killed parent gaps; they are evaluated with the same card, bear-case and scoring template."
  },
  "gaps": {
   "G01": {
@@ -104644,6 +104899,46 @@
      "narrower_survivable_version": "An unclassified, open-standards DDIL sync/catalog component demonstrated on commercial hardware with synthetic data, entered through the TAK plugin pipeline or a Tradewinds awardable video, with the non-U.S.-person founder kept on the commercial/NATO-EU product line while counsel resolves FOCI and SBIR eligibility."
     }
    ]
+  },
+  "G29": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G30": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G31": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G32": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G33": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G34": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G35": {
+   "card": null,
+   "score": null,
+   "verdicts": []
+  },
+  "G36": {
+   "card": null,
+   "score": null,
+   "verdicts": []
   }
  },
  "survivors": {},
@@ -106728,17 +107023,17 @@
    {
     "name": "Gap registry consolidation (71 candidates to a scored registry)",
     "done": true,
-    "detail": "28 registry gaps"
+    "detail": "36 registry gaps"
    },
    {
     "name": "Gap Evidence Cards with fresh web verification",
-    "done": true,
-    "detail": "28 of 28 cards"
+    "done": false,
+    "detail": "28 of 36 cards"
    },
    {
     "name": "Three-lens adversarial red team and 18-criterion scoring",
-    "done": true,
-    "detail": "28 of 28 scored"
+    "done": false,
+    "detail": "28 of 36 scored"
    },
    {
     "name": "Survivor deep dives: architecture, MVP, capital map, expertise, money map, customer discovery, 90-day plan",
@@ -106755,7 +107050,7 @@
    "companies": 84,
    "segments": 14,
    "findings": 257,
-   "gaps": 28,
+   "gaps": 36,
    "survivors": 0,
    "scored_gaps": 28,
    "sources": 2625,
