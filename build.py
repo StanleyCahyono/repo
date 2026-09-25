@@ -223,7 +223,7 @@ def build_data():
         {'name': 'Survivor deep dives: architecture, MVP, capital map, expertise, money map, customer discovery, 90-day plan', 'done': len(d['survivorsOrder']) > 0, 'detail': f"{len(d['survivorsOrder'])} survivors"},
         {'name': 'Syntheses: executive landscape, white-space test, money map, founder fit, completeness audit', 'done': all(k in d for k in ('executive', 'whitespace', 'money', 'founderfit')), 'detail': ', '.join(k for k in ('executive', 'whitespace', 'money', 'founderfit', 'critic') if k in d) or 'none yet'},
     ]
-    d['meta'] = {'generated': d['generated'], 'stages': stages, 'counts': {'companies': len(companies), 'segments': len(segs), 'findings': findings, 'gaps': len(d['registry'].get('gaps') or []), 'survivors': len(d['survivorsOrder']), 'sources': len(srcs), 'buyers': len(d['buyers']), 'evidence_sweeps': len(d['evidence'])}}
+    d['meta'] = {'generated': d['generated'], 'stages': stages, 'counts': {'companies': len(companies), 'segments': len(segs), 'findings': findings, 'gaps': len(d['registry'].get('gaps') or []), 'survivors': len(d['survivorsOrder']), 'scored_gaps': n_scores, 'sources': len(srcs), 'buyers': len(d['buyers']), 'evidence_sweeps': len(d['evidence'])}}
     return d
 
 def build_html(data):
