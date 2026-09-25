@@ -1,0 +1,51 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G26",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "The Air Force treats ACE logistics under attack as a doctrine, tactics, authorities and manning problem; software is at best a later enabler. There is no program office, no RDT&E/O&M line and no RFI for spoke-level logistics C2; the money that exists (PDI prepositioning, RSO analytics, one Phase I SBIR) either buys physical stock or already has a vendor. In peacetime the pain appears a few times a year in exercises, which is precisely the pattern that produces AFWERX point tools that never transition. A two-founder company would drift into paid exercise support and tactics consulting.",
+  "strongest_single_argument": "No PROGRAM OFFICE -> BUDGET -> VEHICLE path exists: the requirement owners (AF/A4, ACC A4, PACAF A4) do not control a software budget for this, and the data-owning offices (AFLCMC RSO, Kessel Run) have not stood up a program for it.",
+  "evidence": [
+   "https://www.acc.af.mil/News/Article-Display/Article/4169508/inaugural-caf-logtac-advances-combat-logistics-readiness/ (2025) - tactics forum, not procurement",
+   "https://media.defense.gov/2025/May/05/2003703742/-1/-1/1/D2025-DEV0PE-0108.000_REDACTED.PDF (2025-05-05) - IG evaluation of logistics requirements, no software program named",
+   "https://www.businesswire.com/news/home/20260730697969/en/Rune-Technologies-Selected-by-U.S.-Air-Force-to-Advance-AI-Enabled-Logistics-for-Agile-Combat-Employment (2026-07-30) - only funded vehicle is a Phase I SBIR",
+   "https://www.iiss.org/online-analysis/military-balance/2026/03/shuffling-the-deck-realising-ace-in-the-indo-pacific/ (2026-03) - PDI funds go to prepositioning and infrastructure"
+  ],
+  "what_would_change_my_mind": "A DAF RFI or sources-sought, a Kessel Run/RSO or PEO line item, or a DoD IG final report recommendation that explicitly calls for spoke-level logistics C2 software with a named office and funding.",
+  "narrower_survivable_version": "None that is venture-shaped; a conditional-authorities decision-aid experiment funded by a Spark cell is a project, not a company."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G26",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "The exact wedge is occupied. Rune Technologies' TyrOS was designed for denied/degraded logistics C2, is fielded with the Army (1st Cav, $99M IDIQ ceiling), is the sole logistics C2 provider on USMC Project Dynamis, and won the AFWERX Phase I for ACE logistics C2 in July 2026. Behind it, Palantir can extend an existing Air Force Foundry deployment to spoke logistics objects with forward-deployed engineers in months, Anduril's Lattice Mesh already handles degraded-network data movement, C3 AI/RSO PANDA owns predictive maintenance, and the 505th CCW's Logistics C2 hackathon shows the government will prototype the workflow itself. The interfaces to maintenance and supply data are government-controlled and would be handed to whichever vendor the sponsor prefers; switching cost is near zero for the government and near total for the startup.",
+  "strongest_single_argument": "Rune already has the AFWERX award for this precise problem, a product built for degraded comms, $24M and two other services' vehicles; a new entrant cannot offer the sponsor anything Rune cannot deliver sooner.",
+  "evidence": [
+   "https://www.runetech.co/news/afwerx-award (2026-07-30)",
+   "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform (2026-06-18) - IDIQ ceiling, not revenue",
+   "https://www.businesswire.com/news/home/20260521176599/en/Rune-Technologies-Joins-Project-Dynamis-to-Deliver-Predictive-Logistics-for-the-Marine-Corps (2026-05-21)",
+   "https://soldiersystems.net/2026/06/04/air-force-forges-decision-advantage-through-logistics-c2-hackathon/ (2026-06-04) - government in-house prototyping",
+   "https://www.af.mil/News/Article-Display/Article/3382513/rapid-sustainment-offices-cbm-artificial-intelligence-toolkit-earns-air-force-s/ - RSO owns maintenance analytics"
+  ],
+  "what_would_change_my_mind": "Public evidence that Rune's Phase I did not proceed to Phase II and that ACC A4 or PACAF A4 is seeking a different, spoke-native tool; or a sponsor asking for a narrowly scoped authorities engine that Rune declines to build.",
+  "narrower_survivable_version": "Become the conditional-authorities rules layer that plugs into TyrOS, Foundry or a Kessel Run app as a subcontractor - a feature, not a company."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G26",
+  "refuted": true,
+  "strength": 3,
+  "bear_case": "The software is easy and can start unclassified on synthetic data, which is the gap's best feature. Everything after the synthetic demo is hard for this team: real maintenance, munitions and fuels status are CUI in legacy systems with no public APIs; the LOGTAC authority matrices are not public; an exercise demo requires a sponsoring wing and an IL4 environment; SBIR ownership rules and CUI/munitions data access are complicated by an Indonesian non-U.S.-person co-founder and must go to counsel; neither founder has maintenance or logistics experience, and the ex-maintenance-officer hire is fatal if absent. Even if all of that is solved, the path from Phase II to production has no owning office, so the procurement horizon is not five years, it is undefined.",
+  "strongest_single_argument": "The team cannot obtain the two things that make the product real - CUI unit status data and the government's conditional-authority content - without a sponsor that has already chosen another vendor, and the non-U.S.-person co-founder makes even the SBIR entry point uncertain.",
+  "evidence": [
+   "SBIR ownership/control requirement (>50% U.S. citizens or permanent residents) - general rule, RECALL, counsel required",
+   "https://www.acc.af.mil/News/Article-Display/Article/4169508/inaugural-caf-logtac-advances-combat-logistics-readiness/ - authority frameworks are government products, not public",
+   "https://www.airandspaceforces.com/air-force-ace-rand-report/ - RAND: airmen confused and understaffed for ACE (adoption/manning risk)",
+   "https://www.rand.org/pubs/research_reports/RRA999-3.html - sortie-rate modeling shows the problem is posture and manning as much as information"
+  ],
+  "what_would_change_my_mind": "A recruited former MXG/LRS commander as co-founder, a signed wing sponsor letter with exercise access, and an SBIR-eligibility opinion that the cap table works with the Indonesian co-founder; plus a data-access agreement with RSO.",
+  "narrower_survivable_version": "Synthetic-data ACE logistics wargaming/training tool sold to Air University or a MAJCOM training shop (no CUI, no sponsor data) - small, but demonstrable with $250k; still not venture-scale."
+ }
+]

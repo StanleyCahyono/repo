@@ -1,0 +1,141 @@
+{
+ "id": "G26",
+ "title": "ACE dispersed-base sortie-generation logistics C2 under degraded communications (decentralized fuel, munitions, spares and airmen decisions at hub-and-spoke locations)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Doctrine (AFDN 1-21), RAND sortie-rate modeling, a DoD IG evaluation and CAF LOGTAC all say dispersed sortie generation under degraded C2 is a real problem; but in peacetime the pain is felt mainly during exercises (REFORPAC) and the primary remedies pursued are tactics, authorities and manning, not software."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 2,
+   "rationale": "Day-to-day wing operations remain connected to enterprise maintenance/supply systems; the disconnected-spoke condition recurs a few times a year per wing in ACE exercises and DLE rotations (INFERENCE)."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score of 1 because no RDT&E or O&M line, no program of record and no RFI for spoke-level logistics C2 software was found; the only money on the exact problem is one AFWERX Phase I SBIR (to Rune, Jul 2026), which is a feasibility study, and PDI prepositioning funds buy fuel, munitions and infrastructure, not software."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "AFWERX Open Topic is reachable in principle, but SBIR ownership rules complicate a non-U.S.-person co-founder, and beyond Phase II there is no owner to transition into (RSO and Kessel Run own adjacent systems, not this one)."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "Offline-first sync, a rules engine for conditional authorities and a hub reconciliation dashboard are well-understood engineering; the hard parts are data access and adoption, not technology."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 3,
+   "rationale": "A synthetic-data proof of concept costs well under $100k; a credible military demo needs a sponsor, exercise access and CUI handling that $250k can barely cover; production is out of reach without $3-8M and a program office that does not exist."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "3-5 months to a convincing synthetic vignette; 9-15 months to an exercise demo because it depends on a sponsoring wing's calendar (DLE/REFORPAC-class events)."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 2,
+   "rationale": "Maintenance, munitions and fuels status are CUI held in government-controlled legacy systems; LOGTAC authority matrices are not public; everything real is gated by a sponsor and RSO data owners; only synthetic data is available at the start."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "Unclassified start and no ITAR hardware, but CUI, IL4/5 ATO, CMMC and potential munitions-data export-control questions apply; the non-U.S.-person co-founder adds SBIR-eligibility and data-access friction that counsel must resolve."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "The entire wedge can be built and demonstrated unclassified with simulated data; classification only enters with real theater posture data later."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 2,
+   "rationale": "Rune Technologies (venture-backed, Army $99M IDIQ ceiling, USMC Project Dynamis) has just been funded by AFWERX for exactly this ACE logistics C2 use case; Palantir, C3 AI/RSO PANDA, Kessel Run and the 505th CCW hackathon crowd the adjacent space."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 3,
+   "rationale": "Enterprise systems are centralized and pull-based, which is the gap; but the most relevant incumbent-in-waiting is a nimble startup, not a slow prime, and government software factories can build the workflow in-house."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "Legacy maintenance/supply systems have no public APIs; interfaces and data are brokered by AFLCMC/RSO, a different organization from the tactics owners; the airlift/resupply C2 chain is a further separate integration."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "The encoded conditional authorities belong to the government; sync and rules engines are commodity; no data network effects at spoke scale; relationships would be built from zero against a competitor who already has them."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 2,
+   "rationale": "Offline field-operations apps exist commercially with entrenched vendors; the military-specific decision content does not transfer."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "Plausible extension to USMC EABO, Army contested logistics and allied ACE (NATO, RAAF), but each is a different system landscape and Rune is already in two of the three U.S. services."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "If it became a per-wing license under an enterprise vehicle it would be recurring; today the realistic pattern is episodic SBIR/exercise funding."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 2,
+   "rationale": "Neither founder has Air Force maintenance or logistics experience, which is fatal without a recruited maintenance officer; the non-U.S.-person co-founder collides with SBIR ownership and CUI data access; the direct competitor is founded by Anduril alumni with $24M and existing contracts. Strengths: the software itself is within a strong engineer's reach."
+  }
+ ],
+ "market_attractiveness": 2.4,
+ "founder_fit": 2.8,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No budget owner: the problem is owned by tactics forums (CAF LOGTAC), evaluators (DoD IG) and exercises (REFORPAC), none of which buy software; no RFI, no PoR, no budget line; the pain is exercise-episodic in peacetime and the Air Force's chosen remedies are authorities, training and prepositioning. The only money on the problem is a single Phase I SBIR to a competitor. PROBLEM -> USER -> REQUIREMENT OWNER (AF/A4, ACC A4) exists, but PROGRAM OFFICE -> BUDGET -> VEHICLE breaks: major penalty applied."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "Rune Technologies' TyrOS is built for denied/degraded logistics C2, is on Army and USMC vehicles, and received the AFWERX Phase I for ACE logistics C2 in July 2026; Palantir could extend Foundry to spoke objects in months; Anduril's Lattice Mesh covers degraded transport; government software factories (Kessel Run, RSO, 505th CCW hackathon) can build the workflow in-house and control the maintenance-data interfaces. A new entrant offers nothing the sponsor cannot get from an existing awardee."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 3,
+   "summary": "The software is feasible and can start unclassified on synthetic data (the strongest point for this gap), but a credible demo requires a sponsoring wing, CUI data and an exercise slot; SBIR ownership rules and CUI/munitions data access complicate a non-U.S.-person co-founder; the team lacks the maintenance-officer expertise that is fatal if absent; and the path from Phase II to production has no owner, so the five-year procurement risk is total, not partial."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill: the PROBLEM -> USER -> REQUIREMENT OWNER chain is real (AFDN 1-21, LOGTAC, AF/A4, ACC A4, PACAF A4) but the PROGRAM OFFICE -> BUDGET -> VEHICLE chain does not exist for spoke-level logistics C2 software, and the one vehicle that does exist (AFWERX Phase I, Jul 2026) has just been awarded to Rune Technologies, a venture-backed startup with Army and USMC contracts and a product built for exactly this. Market attractiveness 2.4 and founder fit 2.8 confirm the registry's LOW pre-rating; the new evidence gathered this session (Rune's AFWERX award, the 505th CCW hackathon, the DoD IG evaluation) makes the gap more validated as a problem and less available as a company.",
+ "narrower_version_if_borderline": "Not recommended as a company. If pursued at all: a conditional-authorities decision-aid module offered to an existing awardee (Rune) or a Spark cell as a subcontract/experiment, or an allied-only (RAAF/NATO ACE) variant once a founder has U.S. permanent residency - both are consultancy-shaped, not venture-shaped.",
+ "most_important_question_answer": "With $250,000 today the founders should not build this. If they did, the only sensible first build is a 4-spoke, 72-hour synthetic ACE vignette in an offline-first app that encodes a published-style conditional-authority matrix and reconciles decisions on reconnect; they would show it to a PACAF or USAFE Spark cell and to the ACC A4 officers who ran the LOGTAC Conditional Authorities working group, and the demo would prove that decentralized decisions with an audit trail beat escalation-by-radio and merge conflict-free with hub records. The customer would care because doctrine, RAND, the DoD IG and REFORPAC all say dispersed sortie generation under degraded C2 is unsolved. But an incumbent can trivially crush them: Rune already holds the AFWERX Phase I for ACE logistics C2 with a product built for denied comms and $24M in the bank, Palantir can add spoke objects to an existing Air Force Foundry deployment, and the Air Force can build the workflow itself in Kessel Run or the 505th CCW. The milestone that would justify $2-5M - a Phase II tied to an exercise with a named transition sponsor and RSO data access - is one Rune is better placed to reach first, and even Rune has no program of record to transition into. It fails on second-mover position plus no budget path, not on technology.",
+ "bear_case_summary": "Validated problem, no buyer: doctrine and exercises prove the pain, but no PoR, no budget line, government-controlled data interfaces, a better-funded startup already awarded the only relevant SBIR, in-house government prototyping, SBIR-ownership and CUI friction for a non-U.S.-person co-founder, and no founder domain expertise.",
+ "bull_case_summary": "ACE is doctrine, REFORPAC scaled it, LOGTAC produced decision frameworks that beg to be encoded in software, the DoD IG is auditing ACE logistics, and the wedge can be built unclassified in months on commodity tech; a team with a recruited maintenance officer and a wing sponsor could ride AFWERX Open Topic into an exercise demo and extend to USMC EABO and allied ACE. This bull case is materially weakened by Rune's July 2026 AFWERX award.",
+ "confidence": "MEDIUM"
+}

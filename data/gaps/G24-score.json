@@ -1,0 +1,141 @@
+{
+ "id": "G24",
+ "title": "Continuous FMN/NATO-standards conformance testing as a service for allied C2 vendors and nations (year-round CWIX-style harness)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 2,
+   "rationale": "Real but tolerated pain: defects surface late (C2IS could not pass geometries in a warfighter exercise; CWIX 'try, fail, fix'), yet nations have lived with the annual cadence for 15+ years and no operator describes it as mission-blocking."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 2,
+   "rationale": "Felt at spiral/release boundaries and around one June event plus TIDE sprints - a few times a year for a test engineer, not a daily workflow pain."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "Money exists only for participation labor (Bundeswehr CWIX 2025/2026 tender) and for NATO's own INSPECT/CWIX and JS J6 Bold Quest; no budget line, RFI, or SBIR topic for a commercial conformance harness was found (E02-F41, E04-F31)."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 3,
+   "rationale": "Commercial B2B sale to vendors needs no government vehicle and a German GmbH can enter TIDE/CWIX Innovation Sandbox via a sponsor; but government buyers (BAAINBw, NCIA) have no identified requirement, so the accessible path is the consultancy-shaped one."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "Validators and regression tooling over published NATO formats are well within a two-engineer team's reach; the hard part is not technology but keeping rules authoritative against restricted, changing spiral profiles."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 4,
+   "rationale": "Software-only, unclassified, public standards, commercial compute; $60-120k reaches a PoC and $250k reaches a TIDE/CWIX-sandbox showing - the money is sufficient, the market is not."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 4,
+   "rationale": "A validator plus regression dashboard over 2-3 public standards is demonstrable in 3-6 months; the credible venue (TIDE Hackathon, CWIX Innovation Sandbox) requires a national sponsor, which adds calendar time rather than build time."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "NISP and many STANAGs are public; FMN spiral profiles and CWIX test cases are affiliate/NATO-controlled and partly restricted, so authoritative rule sets need a sponsor and cleared NATO-national staff."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 4,
+   "rationale": "No ATO, CDS or ITAR for NATO-standards tooling; German entity is DIANA/NIF-eligible; constraints only on NATO RESTRICTED access and German military-end-use export rules (needs counsel)."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "Everything up to a sandbox demo is unclassified / NATO UNCLASSIFIED on synthetic data; some spiral documents and exercise enclaves are restricted, which is why this is 4 rather than 5."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 3,
+   "rationale": "Few commercial competitors (Corvus, AIC UK consultancies), but the field is occupied by government tooling (INSPECT, CWIX, JITC/CIAV precedent) and vendor in-house test teams; thin competition here reflects thin demand, not whitespace."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 1,
+   "rationale": "Score 1 because the incumbent is NATO ACT itself: INSPECT is government-owned, free to affiliates and authoritative by definition, and Systematic/HAVELSAN/Terma already own in-house conformance capability; a commercial harness cannot displace the registry that decides compliance."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 3,
+   "rationale": "Plugging into vendor CI pipelines is easy; integrating with what matters (CWIX test-case catalog, INSPECT, FMN spiral profiles) depends on NATO-controlled, partly restricted material - public evidence insufficient on any INSPECT API."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score 1 because validators over public standards are commoditizable, NATO owns the authoritative test cases and can open-source or field its own (it is doing so), and the customers are also the parties most able to replicate the tool; only thin relationship/workflow assets remain."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 1,
+   "rationale": "Score 1 because FMN/STANAG conformance has no civilian customer and generic protocol-conformance tooling markets (telecom, HL7, FIX) are crowded and unrelated."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Expansion means changing business (STANAG-native gateway/translation, Tangram/TRAX-like tooling, data-fabric adapters); within conformance testing the ceiling is a few dozen vendors and national cells."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "If bought at all, purchase recurs per spiral/year as a subscription or annual support - structurally recurring, but the per-customer value is low five figures."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 3,
+   "rationale": "The German founder gives a legitimate NATO-nation domicile and channel, the engineer can build the tool, and the sale is small B2B - but neither founder has FMN/CWIX or NATO-standards experience, the non-NATO co-founder cannot front restricted material, and the founders' stated primary interest is the U.S. market, where this gap has no buyer."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 3.7,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "The PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> VEHICLE chain breaks at REQUIREMENT OWNER: NATO ACT owns the requirement and is satisfying it with INSPECT; no national program office has a documented requirement for a commercial harness."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "NATO ACT's INSPECT is the year-round CWIX-style harness this gap proposes, built by the party that owns the only registry that counts."
+  },
+  "feasibility": {
+   "refuted": false,
+   "strength": 2,
+   "summary": "Everything can be built and shown unclassified with $250k - and that ease is itself evidence that nothing here is defensible."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill. Decisive reason: the year-round conformance harness is being built by the requirement owner itself (NATO ACT's INSPECT, near-fielded June 2025), so no PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> VEHICLE path exists for a commercial product (major penalty applied). Even setting INSPECT aside, the addressable market is a few dozen allied C2 vendors and national test cells that already treat conformance as in-house or contractor labor, the artifact (validators over public standards) has no moat and no dual use, and the founders' primary interest is the U.S. market where this gap has no buyer at all. High feasibility with $250k does not rescue a business with no budget owner. Confidence MEDIUM: the web-search quota was exhausted and act.nato.int was egress-blocked this session, so INSPECT's 2026 fielding status and CWIX 2026 outcomes were not re-verified; the kill does not depend on them.",
+ "narrower_version_if_borderline": "Not applicable as a company. The only survivable use is tactical: release an open-source validator for two or three public NATO formats, enter a TIDE Hackathon under a German sponsor, and use the resulting credibility and relationships to sell a different product (STANAG/FMN-native gateway or data-fabric adapters built to Systematic's and NATO's published interfaces).",
+ "most_important_question_answer": "With $250,000 today the founders should not build this as a company. If they insisted on touching it, the right move is a two-month, sub-$40k open-source validator for ADatP-3/NVG/JDSS with a regression dashboard, entered at a TIDE Hackathon through a German sponsor and shown to one vendor interoperability lead (Systematic, HAVELSAN or Terma) and the Bundeswehr CWIX cell; the demo would prove it catches spiral-profile regressions before CWIX. The customer would care mildly - late-surfacing defects are annoying - but not enough to pay, because NATO ACT's INSPECT does the authoritative version for free and the vendor already has scripts. An incumbent does not need to crush them; Systematic could publish an equivalent in a quarter and NATO already is. There is no milestone that justifies $2-5M: two paid pilots at EUR 100k each would still describe a consultancy, not a venture. It fails on market, not on feasibility, and the founders should redirect any allied-market interest toward an interoperability product that uses conformance tooling as an on-ramp.",
+ "bear_case_summary": "Government-owned incumbent (INSPECT/CWIX), no budget owner or requirement for a commercial harness, customers are the competitors, commoditizable artifact, tiny consultancy-shaped market, no dual use, and no U.S. buyer for a team whose primary interest is the U.S. market.",
+ "bull_case_summary": "Cheapest and least regulated way for the German founder to enter the NATO interoperability community: unclassified, public standards, $60-120k PoC, TIDE/CWIX sandbox and DIANA channels open to a German GmbH, rising allied budgets and the Rapid Adoption Action Plan; the validator can be a free credibility asset for an adjacent integration/gateway business.",
+ "confidence": "MEDIUM"
+}

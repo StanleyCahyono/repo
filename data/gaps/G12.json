@@ -1,0 +1,632 @@
+{
+ "id": "G12",
+ "title": "Brigade-and-below multinational SA/C2 bridge and releasability-aware coalition COP federation (productized Mission Partner Kit with partner-specific views and federated partner identity across TAK, SitaWare and national systems)",
+ "problem": "U.S. and allied units at brigade and below cannot quickly and lawfully share positions, geometries, chat and voice across national C2 systems, so regiments build ad hoc cloud kits, partners are managed as guests on separate enclaves, and release decisions still run through liaison officers, translation gateways and manual sanitization rather than releasability-tagged objects and federated partner identities.",
+ "categories": [
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "I"
+ ],
+ "segment_ids": [
+  "S01",
+  "S07",
+  "S08",
+  "S10"
+ ],
+ "chain_steps": [
+  "TRANSPORT",
+  "PROCESS",
+  "FUSE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "battalion",
+  "brigade/regiment",
+  "division/JTF",
+  "combatant command / coalition HQ",
+  "NATO FMN node"
+ ],
+ "user": {
+  "exact_role": "Battalion/brigade S3 battle captain and S6 network officer; coalition liaison officer (LNO); foreign disclosure officer (FDO); joint interface control officer (JICO); MPE/mission-network administrator",
+  "echelon": "Brigade and below for the bridge; division/JTF/COCOM for the federation and identity sub-scope",
+  "organization_examples": [
+   "2nd Cavalry Regiment (USAREUR-AF)",
+   "V Corps and multinational division HQs in Poland/Romania",
+   "USINDOPACOM J6 and the INDOPACOM Mission Network team",
+   "NATO Multinational Corps/Division HQs running SitaWare (Project DEMETER)",
+   "Bundeswehr brigades under NATO FMN",
+   "Philippine, Australian, Japanese partners at Balikatan/Talisman Sabre",
+   "Joint Staff J6 JDAT (Bold Quest) and NATO ACT (CWIX)"
+  ]
+ },
+ "current_workflow": [
+  "Allied unit arrives with its national BMS (SitaWare, FC BISA, TOPAZ, national fire-control system) and national radios; U.S. unit runs TAK/Nett Warrior, CPCE/SitaWare HQ and national Secret enclaves.",
+  "A U.S. LNO physically embeds with the partner carrying a Mission Partner Kit laptop/phone or TAK device; a partner LNO reciprocates.",
+  "If cloud/commercial connectivity exists, positions and chat are exchanged through a cloud-hosted SBU kit or a mission-partner network; if not, by voice and radio relay.",
+  "Battlefield geometries and fire-support coordination measures are re-entered by hand in each national system because geometry discipline and C2IS-to-fire-control interfaces differ.",
+  "Products generated on U.S. collateral Secret systems are reviewed by an FDO, regenerated or re-marked REL on the MPE lower enclave with a different tool, and pushed through an accredited cross-domain solution.",
+  "Partner users receive nationally issued guest accounts on each coalition enclave; account changes propagate by email/ticket; U.S. staff swivel between national and coalition terminals.",
+  "At exercise start (Bold Quest, CWIX, Balikatan, Warfighter) integrators spend weeks configuring ASCA/NFFI/NVG gateways and JICOs hand-tag data so it can pass the CDS; the configuration decays after the event."
+ ],
+ "current_solution": "Government-owned TAK (ATAK/WinTAK/TAK Server with federation), Systematic SitaWare HQ/Frontline/Edge (native NFFI/NVG/MIP, NATO DEMETER incumbent), Army CPCE built on SitaWare, unit-built 2CR Mission Partner Kit (SBU, commercial cloud, COTS), Army Coalition Interoperability Solution (ACIS, 2018 urgent need), ASCA fires gateways, DISA MPE enclaves (CENTRIXS, Pegasus, CFBLNet, APAN) run by Trace Systems under MPE-S and by SOSi/GDIT under network-engineering task orders, INDOPACOM Mission Network (zero-trust, first tested May 2026), Booz Allen Sit(x) bridging Lattice to TAK/partner systems, Mattermost with ABAC channels as MPE chat, Microsoft Entra B2B guest identities, accredited CDS from Everfox/Owl/GDMS, and human LNOs and FDOs as the actual release mechanism.",
+ "failure": "Releasability is not a first-class attribute on COP objects and partner identity is not federated, so enforcement happens by enclave (network) rather than by object; anything produced on a national Secret system without REL markings cannot flow and is regenerated or re-keyed; geometry and fires data break at national interfaces; kits are cloud-dependent and unit-owned rather than programs of record; DISA itself says MPE stays network-centric until about 2027 and that partner networks are 'consolidated stovepipes'.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "GAO found that six years into CJADC2 DoD has no framework to guide investments and that several officials cited the inability to readily share classified information with allies and mission partners integral to CJADC2.",
+   "source_title": "GAO-25-106454, Combined Joint All-Domain Command and Control: DOD Needs a Framework to Guide Investments (GAO)",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04-08",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "2nd Cavalry Regiment built its own commercial-cloud, COTS Mission Partner Kit so U.S. and NATO brigade-and-below units could share SA, chat, voice and collaboration at SBU during Saber Strike 24 / Defender 24; it depends on trained liaison officers and is not a program of record.",
+   "source_title": "Mission Partner Kit: Advancing Multinational Interoperability with NATO Allies (army.mil); corroborated by AUSA 'The Language of War' (2024-10-23)",
+   "source_url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies",
+   "pub_date": "2025-03-25",
+   "event_date": "2024",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "During Warfighter Exercise 24-03 intelligence generated at collateral Secret 'precluded sharing with allied partners'; staff regenerated it on the MPE lower enclave with REL NATO markings using a different tool, and the article states BICES does not communicate with mission command systems, calling an MPE-BICES bridge critical.",
+   "source_title": "Multinational Intelligence Sharing and Interoperability (Military Intelligence Professional Bulletin)",
+   "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "pub_date": "2025",
+   "event_date": "2024",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "At Balikatan 2026 the first eight-nation COP took 'more than eight years' of integration work and still depends on JICOs, M&S staff and foreign disclosure officers making sure data is tagged appropriately to pass the networks and cross-domain solutions; the changing set of participating nations 'exceeds the networks that we traditionally support'.",
+   "source_title": "Balikatan 2026 Debuts Groundbreaking Common Operating Picture (DVIDS)",
+   "source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "pub_date": "2026-05",
+   "event_date": "2026-04-20 to 2026-05-08",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DISA says the Mission Partner Environment will remain network-centric until about 2027, that existing partner networks are consolidated stovepipes, and that it is 'starting small' in Indo-Pacific proof-outs of Coalition Information Environment capabilities.",
+   "source_title": "DISA starting small in proving out Mission Partner Environment capabilities (Federal News Network, Ask the CIO)",
+   "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+   "pub_date": "2026-08-13",
+   "event_date": "2026-2027",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "The FY2027 DISA O&M justification funds the Coalition Information Environment as 'a secure, unified hybrid cloud mission partner environment for both Command and Control (C2) and collaboration at the Secret and below levels' and Thunderdome zero-trust access to the Secret fabric for combatant commands; dollar values for the CIE line were not extracted. Joint Staff FY27 RDT&E separately lists demonstrating zero trust and data-centric security for mission partners beyond FVEY and testing ACP-240/ICAM standards (Bold Quest lines).",
+   "source_title": "Department of War FY2027 Budget Estimates, O&M Volume 1 Part 1 (DISA); Joint Staff RDT&E justification FY2027",
+   "source_url": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/budget_justification/pdfs/01_Operation_and_Maintenance/O_M_VOL_1_PART_1/OM_Volume1_Part1.pdf",
+   "pub_date": "2026-04",
+   "event_date": "2026-04-21",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "The same brigade-level coalition position-sharing need has been bought or built repeatedly without becoming a program of record: USAREUR urgent need -> ACIS test (2018), USAREUR secret-releasable bridge for Polish/UK units (2020), 2CR Mission Partner Kit (2024), EMITS 2 task order to GDIT including 'mature its mission partner network' (Sept 2025, $1.25B ceiling - ceiling, not obligation), INDOPACOM Mission Network first test (May 2026).",
+   "source_title": "Army to test new data-sharing equipment at upcoming exercise (C4ISRNET) plus later items in the segment timeline",
+   "source_url": "https://www.c4isrnet.com/it-networks/2018/04/17/army-to-test-new-data-sharing-equipment-at-upcoming-exercise/",
+   "pub_date": "2018-04-17",
+   "event_date": "2018-2026",
+   "tier": 3,
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Several vendors each solve a slice: Booz Allen Sit(x) on Menace claims to connect Lattice users with TAK-based and partner systems 'without requiring a common architecture' (company claim, 2026-05-18); Systematic reported that Bold Quest 2025 SA exchange among TAK, SitaWare and FC BISA required ASCA translation under network challenges (company report captured by an earlier stage; RECALL - not re-verified this session because systematic.com is egress-blocked); Mattermost ships ABAC channel access and an MPE deployment pattern; TAK Server federation provides connectivity only. None ships per-object releasability with partner-specific views plus federated partner identity as one product.",
+   "source_title": "Booz Allen Sit(x) release (Bigdata.com document A14E00B9748CF07E4B82F680D66AEA31); Systematic Bold Quest 2025 news; Mattermost zero-trust docs",
+   "source_url": "https://docs.mattermost.com/security-guide/zero-trust.html",
+   "pub_date": "2026-05-18",
+   "event_date": "2025-2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "In a 2025 coalition Warfighter exercise interoperability was hindered by unenforced battlefield-geometry guidelines and some nations' C2IS could not pass data to their national fire-control systems; in CSIS's Nov 2025 allied cloud-interoperability wargame participants deployed liaison officers 'as a stopgap' and treated identity federation as the unsolved key to interoperability.",
+   "source_title": "Interoperability: Winning Happens in the Off-Season (Small Wars Journal); Allies and cloud interoperability (CSIS)",
+   "source_url": "https://smallwarsjournal.com/2025/11/19/interoperability-warfighter-exercises/",
+   "pub_date": "2025-11-19",
+   "event_date": "2025",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD IG released DODIG-2025-126 evaluating the CJADC2 line of effort to modernize mission partner information sharing (objective: assess effectiveness of development and implementation). The findings could not be read (dodig.mil egress-blocked), so the existence of the evaluation is FACT but its verdict is unknown - Public evidence insufficient.",
+   "source_title": "Evaluation of a Line of Effort in the DoD's Implementation of the CJADC2 Strategy (DODIG-2025-126)",
+   "source_url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+   "pub_date": "2025-07-18",
+   "event_date": "2025-07-18",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "No Mission Partner Environment, coalition-interoperability or releasability-tagging RFI, sources sought, SBIR, DIU or AFWERX topic surfaced in the earlier sweeps (E02-F41, E04-F31); the closest items are the 2023 MPE O&M sources sought (services, not product) and a PM Mission Command 'Operational Mission Command Suite' notice asking for a common data model and DDIL-robust TAK data services. Absence of a demand signal is evidence against a near-term U.S. product buy, not evidence of opportunity. Web-search quota was exhausted this session, so this could not be re-checked.",
+   "source_title": "MPE Operations, Maintenance and Sustainment sources sought (SAM.gov); PM Mission Command OMCS notice (SAM.gov)",
+   "source_url": "https://sam.gov/opp/c6e8de9278fc4004a42c66e24cd65786/view",
+   "pub_date": "2023-07-07",
+   "event_date": "2023-2026",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  }
+ ],
+ "why_existing_startups_havent_solved": "The binding constraints are policy and accreditation, not code: data created on national Secret systems without REL markings cannot legally flow, so the release decision is owned by FDOs and national disclosure policy; every enclave and guard needs its own accreditation (NCDSMO Raise-the-Bar) and the accredited CDS market is an oligopoly (Everfox, Owl, GDMS, Northrop). On the unclassified/SBU side the substrate is free and government-owned (TAK, with federation built in), the allied incumbent (Systematic SitaWare) already speaks NFFI/NVG/MIP natively and is NATO's DEMETER land C2, and the services layer is locked up in large IDIQs (Trace Systems MPE-S $998M ceiling, GDIT EMITS 2 $1.25B ceiling, SOSi mission-network engineering) where bridges are delivered as labor, not product. No single buyer owns brigade-level coalition interoperability (units, USAREUR-AF, DISA, Joint Staff J6, NATO ACT/NCIA and national MoDs each own a piece), so urgent-need kits (ACIS 2018, MPK 2024) never became programs of record and there is no SBIR/RFI demand signal for a product. Startups that came close (Hadean, Immersive Wisdom, Raft, Second Front) sell adjacent layers (wargaming, DDIL collaboration, data federation, ATO hosting) rather than the releasability/identity core, which requires cleared U.S. staff and multinational agreements a small team cannot obtain.",
+ "why_not_solved_reasons": [
+  "classification",
+  "certification",
+  "buyer fragmentation",
+  "procurement fragmentation",
+  "proprietary incumbent architecture",
+  "insufficient commercial market",
+  "integration complexity"
+ ],
+ "technical_wedge": "An unclassified-first, DDIL-tolerant 'coalition edge broker' that runs on a laptop or phone without cloud dependency and (1) federates TAK Server / ATAK feeds with SitaWare-compatible NFFI/NVG/ADatP-3 and MIP-lite outputs with store-and-forward sync, (2) attaches a NATO-label-style releasability attribute (ACP-240 / STANAG 4774-4778 confidentiality metadata) to every CoT/COP object at creation and computes partner-specific COP views from a policy file an FDO can read and sign, (3) validates battlefield-geometry conformance before export so fires geometries survive national interfaces, and (4) brokers partner identity through SAML/OIDC federation with attribute mapping so guest accounts are not hand-provisioned per enclave. It deliberately stops at the SBU/Secret-releasable boundary and hands objects to an accredited CDS via well-formed metadata, positioning as the offline, product-shaped counterpart to unit-built Mission Partner Kits and to labor-delivered MPE bridges.",
+ "mvp": {
+  "what": "Two simulated 'nations' each running a TAK Server (nation A) and a SitaWare-compatible NFFI/NVG endpoint or open MIP-style emulator (nation B) connected through the broker over an intermittent link; every object carries a releasability label; each nation sees only its permitted view; an FDO console shows the policy, an audit log and what was withheld; geometry conformance checks flag malformed fire-support coordination measures before export.",
+  "demonstrable_in_3_6_months": "Yes for the TAK-to-TAK federation with labels, per-partner views, DDIL store-and-forward and audit; the SitaWare side can only be emulated from public STANAG/NFFI/NVG schemas unless Systematic or an allied MoD grants interface access; identity federation via Keycloak/Entra test tenants is feasible in the window.",
+  "what_it_must_prove": "That per-object releasability plus partner-specific views can be set up in hours instead of weeks, survive a disconnected period without leaking or losing objects, produce an audit an FDO accepts, and pass a CWIX Innovation Sandbox or Bold Quest-style conformance test against real national systems - not just that two TAK servers can talk (they already can).",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Public NATO/FMN standards (NFFI STANAG 5527, NVG, ADatP-3, MIP/JC3IEDM and MIM, ACP-240 and STANAG 4774/4778 labeling), the open-source ATAK-CIV/TAK Server code and CoT schema, synthetic multinational scenarios, and later CUI exercise data (partner attribute schemas, disclosure-policy encodings) obtained through an exercise sponsor.",
+  "legally_realistically_obtainable": "Standards and ATAK-CIV are public (TAK-GOV/MIL builds are distribution-controlled); synthetic data is unlimited; real disclosure-policy encodings and partner attribute schemas are mostly controlled or classified and only obtainable inside a sponsored exercise (CWIX Innovation Sandbox, Bold Quest, Bundeswehr/NATO battle lab). A non-U.S.-person founder can work on the public/synthetic tier; access to U.S. CUI or export-controlled interface data requires counsel review.",
+  "sources": [
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "https://www.act.nato.int (FMN spiral specifications, CWIX)",
+   "NATO STANAG catalogue via national MoD standardization offices",
+   "Exercise sponsors: Joint Staff J6 JDAT (Bold Quest), NATO ACT/JFTC (CWIX), USAREUR-AF G6, Bundeswehr Cyber Innovation Hub"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "TAK Server / ATAK / WinTAK (incl. federation hub)",
+   "Systematic SitaWare HQ/Frontline/Edge",
+   "Army CPCE / Mission Command suite and NGC2 common data layer (Lattice Mesh, Foundry, Raft)",
+   "National fire-control systems via ASCA",
+   "MPE enclaves (CENTRIXS, Pegasus, CFBLNet, APAN) and INDOPACOM Mission Network",
+   "Mattermost/Teams coalition chat",
+   "Accredited cross-domain solutions (Everfox, Owl, GDMS TACDS)",
+   "Tactical radios and MANET (TSM, Wave Relay, Silvus) over IP"
+  ],
+  "interfaces_protocols": [
+   "Cursor-on-Target (CoT) and TAK federation protocol",
+   "NFFI (STANAG 5527), NVG, ADatP-3, MIP/JC3IEDM, MIM",
+   "ACP-240 and STANAG 4774/4778 confidentiality labels and binding",
+   "ASCA for fires",
+   "SAML 2.0 / OIDC / SCIM for identity federation",
+   "VMF / MIL-STD-2045 where CDS filters require structured formats",
+   "NATO Core Data Framework / FMN Spiral 4 and 5 service profiles"
+  ],
+  "who_controls_the_interface": "The TAK Product Center (government) controls TAK and its federation protocol (ATAK-CIV is open source); Systematic controls SitaWare interfaces beyond the NATO standards it implements; NATO ACT owns FMN spirals and CWIX conformance; the Army NGC2 common data layer is controlled by the government-approved APIs and in practice by the team leads (Anduril, Lockheed) and their platform partners; DISA and the MPE integrators control enclave and identity policies; FDOs and national disclosure authorities control the release rules themselves."
+ },
+ "customer": {
+  "user": "Brigade/regiment S3/S6 staff, LNOs and FDOs of U.S. Europe- and Pacific-based formations and of allied brigades",
+  "champion": "A formation-level G6/S6 or LNO cell that already built a kit (e.g., 2CR, V Corps, USAREUR-AF G6) or an INDOPACOM J6 exercise branch; on the allied side a Bundeswehr/NATO CWIX capability owner",
+  "contract_signer": "For a U.S. unit trial: the supporting contracting activity (ACC-APG for CPE C2IN, or the USAREUR-AF/409th CSB for theater buys); for a product buy: CPE C2IN (PL C2 Enablers / PM I2S lineage) or DISA via DITCO; for allied: NCIA/NSPA or a national MoD procurement office",
+  "requirement_owner": "Joint Staff J6 (MPE requirements, CJCSI 6290.01A), Army T2COM / C2 CFT lineage for NGC2 and CPCE, NATO ACT for FMN",
+  "program_office": "DISA MPE/Partner Access Environment portfolio (Coalition Information Environment); Army CPE C2IN (formerly PEO C3T/C3N, PM Mission Command and PM I2S); NATO NCIA for DEMETER/FMN",
+  "contracting_office": "DISA DITCO; ACC-APG; USAREUR-AF contracting; NCIA Acquisition; note that none of these has issued a product RFI for this capability (Public evidence insufficient)"
+ },
+ "budget": {
+  "program_or_line": "DISA O&M Coalition Information Environment / Mission Partner Environment (historically PE 0301144K Joint/Allied Coalition Information Sharing); Joint Staff RDT&E C5 capability development (Bold Quest coalition assessments, ACP-240/ICAM/ZT testing); Army NGC2 layer lines (FY2026 C2 Applications ~$488M RDT&E, C2 Data ~$306M, reported) where coalition views would be a feature; USAREUR-AF EMITS 2 task order (GDIT, $1.25B ceiling); NATO DEMETER and national FMN participation budgets",
+  "evidence": "FY2027 DISA O&M text funds CIE as a hybrid-cloud MPE for C2 and collaboration at Secret and below (FACT, HIGH); Joint Staff FY27 RDT&E describes mission-partner zero-trust/data-centric-security demonstrations (FACT, MEDIUM); the FY27 request seeks >$2B for CJADC2 largely as Maven/JFN licenses (FACT, MEDIUM) - none of these is a product line a two-founder startup can bill against directly; unit kits are bought with unit funds. Dollar values for the CIE line and any brigade-level bridge line: Public evidence insufficient.",
+  "source_url": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/budget_justification/pdfs/01_Operation_and_Maintenance/O_M_VOL_1_PART_1/OM_Volume1_Part1.pdf",
+  "confidence": "MEDIUM"
+ },
+ "entry_vehicle": {
+  "primary": "Allied-first: NATO DIANA challenge cohort or CWIX Innovation Sandbox participation with a Bundeswehr or NATO sponsor, using the Rapid Adoption Action Plan (June 2025) path from prototype to procurement; U.S. entry as a TAK plugin / team-member app rather than a prime",
+  "sequence": [
+   "0-3 months: counsel on entity structure (U.S. Inc. vs German GmbH vs dual), export classification, SBIR ownership test, and a written plan for the non-U.S.-person founder's data access",
+   "0-6 months: build the unclassified TAK-to-TAK labeled federation MVP on ATAK-CIV; register SAM/CAGE; submit a Tradewinds video for 'awardable' status",
+   "3-9 months: apply to NATO DIANA (next challenge call) and request CWIX Innovation Sandbox or Bundeswehr Cyber Innovation Hub sponsorship; approach Systematic or a national C2 vendor for interface access as a partner",
+   "6-12 months: pursue an Army xTech (xTechSearch/xTechPacific) entry if the cap table meets the SBIR test, and a USAREUR-AF or INDOPACOM J6 exercise trial through an existing integrator (GDIT EMITS 2, SOSi, Booz Allen) as a subcontracted product",
+   "12-24 months: Bold Quest / CWIX conformance evidence -> NCIA or national MoD procurement via Rapid Adoption Service; U.S. follow-on as a CPE C2IN C2-Enablers or DISA CIE plug-in via prototype OT/CSO",
+   "24+ months: only then consider a facility clearance and FOCI mitigation to touch Secret-releasable enclaves"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% ownership and control by U.S. citizens or permanent residents (13 CFR 121.702); the German founder counts only once a green card is granted and the Indonesian founder does not, so SBIR is closed until the cap table is restructured (counsel). AFWERX open topics restrict foreign-national participation to public-domain work and require U.S. performance. OTA/CSO/xTech prize routes have no statutory ownership test but export-controlled CUI and ITAR technical data are effectively U.S.-person-only, and any facility clearance triggers FOCI review where a permanent resident is still a 'foreign interest' (32 CFR 117.11). NATO DIANA and German channels are open to the German founder; EU EDF/EDIP instruments are constrained by third-country control rules. None of this is a legal determination - it requires export-control and immigration counsel."
+ },
+ "competition": [
+  {
+   "company": "Systematic (SitaWare HQ/Frontline/Edge, BattleCloud)",
+   "how_close": "Very close on the bridge: native NFFI/NVG/MIP, NATO DEMETER land C2 incumbent (IOC Mar 2025, FOC Mar 2026), backbone of Army CPCE; does not itself federate partner identity or compute releasability views across foreign systems, but can add label-aware filtering faster than a startup",
+   "evidence": "Janes on DEMETER FOC (2025); Army CPCE award (PRNewswire 2017-02); Bold Quest 2025 ASCA report (company, RECALL - not re-verified this session)"
+  },
+  {
+   "company": "TAK Product Center (government) and Booz Allen (Sit(x), TAK federation services; PAR Government acquisition)",
+   "how_close": "TAK Server federation is free and already used by 500k+ users across partner nations; Sit(x) on Menace claims to bridge Lattice to TAK and partner systems",
+   "evidence": "Breaking Defense on TAK evolution (2025-11); Booz Allen Sit(x) release (2026-05-18, company claim - deployment scale unknown)"
+  },
+  {
+   "company": "Anduril (Lattice Mesh, NGC2 common data baseline lead) and Palantir (Maven Smart System NATO, Foundry)",
+   "how_close": "Own the U.S. tactical data layer and the NATO theater-level C2 platform; coalition views would be a feature they add under existing ELAs; MSS NATO bought sole-source in six months (Mar 2025)",
+   "evidence": "Army NGC2 common data baseline (army.mil 2026-06); DefenseScoop on NCIA-Palantir (2025-04-14)"
+  },
+  {
+   "company": "Trace Systems, GDIT, SOSi, SAIC, Leidos (MPE and mission-network integrators)",
+   "how_close": "Deliver MPE bridges and enclaves as services under large IDIQs; the natural channel and the natural threat (they can hire the capability)",
+   "evidence": "MPE-S IDIQ $998M ceiling (2019); EMITS 2 $1.25B ceiling (Sept 2025); IMN engineered by SOSi (secondary source, unverified)"
+  },
+  {
+   "company": "Everfox, Owl Cyber Defense, General Dynamics Mission Systems (TACDS), Northrop (CHORD)",
+   "how_close": "Own the accredited cross-domain gate; any automated release path must terminate in their guards; Owl publishes open DFDL schemas for VMF/NITF filtering",
+   "evidence": "Company index B10 records; CDES/CDS accreditation context (E-sweeps)"
+  },
+  {
+   "company": "Mattermost and Microsoft (Entra B2B)",
+   "how_close": "Solve the collaboration/identity slice: ABAC channels with an MPE deployment pattern; Entra B2B guest identity federation",
+   "evidence": "Mattermost zero-trust docs (2026)"
+  },
+  {
+   "company": "Hadean (UK), Immersive Wisdom, Raft, Second Front Systems, Arondite, Accelint, CodeMettle",
+   "how_close": "Adjacent: coalition wargaming/C2 on Foundry (Hadean, GBP 20M UK MOD EA claimed), DDIL collaborative war room (Immersive Wisdom, USAF sole-source), data federation (Raft, NGC2), NATO UNCLASSIFIED ATO hosting in 17 days (Second Front via DIANA), small-HQ orchestration (Arondite), NetOps (CodeMettle Terminus IDIQ Aug 2026)",
+   "evidence": "Segment S08 startup records; company statements are Tier 2 and revenue is unverified"
+  },
+  {
+   "company": "Anchor Defense and small NATO-interop consultancies (Corvus Intelligence, AIC UK)",
+   "how_close": "Talk about CDS cross-tagging and FMN certification; no contract evidence found",
+   "evidence": "Technical articles only (LOW)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes for the U.S. side: Anduril (NGC2 data layer lead) and Palantir (Maven NATO, Army EA) can add releasability attributes and partner views inside their platforms and already sit in the coalition exercises (PCC6 with NZ/AUS/UK/CA partners, Maven at Steadfast exercises); Systematic can do the same on the allied side; the MPE integrators can hire the capability under existing task orders. The one piece they do not want to own is the cross-vendor, cross-nation neutral broker plus the FDO-facing policy workflow, because each incumbent wants its own platform to be the spine.",
+  "why_startup_still_wins_or_reject": "A startup wins only if it is the neutral, standards-native, DDIL-tolerant broker that allied nations and NATO bodies trust precisely because it is not Anduril, Palantir or Systematic, and if it enters through NATO/German channels where the incumbents' U.S. ELAs do not reach. In the U.S. market alone the honest call is REJECT as a standalone company: the government-owned TAK plus unit-built kits are 'good enough' at SBU, the valuable Secret-releasable and cross-domain part is closed to a non-cleared, mixed-nationality team, and there is no product demand signal. As an allied-first product with a later U.S. plug-in path it is a defensible but narrow business."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "150,000-250,000 (HYPOTHESIS): two founders plus one contract TAK/NFFI engineer for 6 months on commercial laptops, ATAK-CIV, open standards and synthetic data",
+  "credible_military_demo_usd": "1,000,000-2,500,000 (HYPOTHESIS): 4-6 people for 12-18 months, two exercise cycles (CWIX Innovation Sandbox, Bold Quest or a Bundeswehr battle lab), SitaWare/ASCA interface work with a partner vendor, third-party security assessment and SWFT/NATO UNCLASSIFIED ATO artifacts (possibly via Second Front-style hosting), travel and integration labor",
+  "first_production_deployment_usd": "5,000,000-12,000,000 (HYPOTHESIS): FMN conformance and JITC-style certification, identity federation hardening, 24/7 support for a first formation or NATO node, CDS metadata integration with an accredited vendor, and either a facility clearance with FOCI mitigation or a cleared U.S. partner to touch Secret-releasable enclaves",
+  "assumptions": "Assumes unclassified-first scope, no hardware, exercise access granted by a sponsor, and no classified work by the founders; the founders' $250k covers only the proof of concept, so a credible demo requires DIANA-type grants, an allied MoD pilot or seed capital, and any U.S. Secret-level deployment adds cleared-staff and accreditation costs that are not estimated here. Ceilings of incumbent IDIQs are not evidence of available budget."
+ },
+ "expertise_required": [
+  {
+   "role": "Former coalition LNO / FDO or brigade S6 with recent NATO or INDOPACOM exercise experience (ideally German or U.S. veteran)",
+   "why": "Defines the releasability workflow, geometry discipline and what an FDO will accept; opens exercise sponsors",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "TAK and NATO-standards integration engineer (CoT, TAK federation, NFFI/NVG/ADatP-3, MIP, ACP-240 labeling)",
+   "why": "The product is the standards plumbing; mistakes fail CWIX/Bold Quest conformance",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Identity and zero-trust engineer (SAML/OIDC/SCIM, ABAC policy engines, DoD ICAM and Entra/Keycloak federation)",
+   "why": "Partner identity federation is the second half of the gap and the part DISA says is unsolved",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Export-control, FOCI and SBIR-eligibility counsel (U.S. and German)",
+   "why": "Mixed-nationality team, dual-jurisdiction structure, ITAR/EAR classification and CFIUS exposure on foreign investment",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Cross-domain and accreditation advisor (ex-NCDSMO/CDS vendor or NATO CIS security)",
+   "why": "Designs the hand-off to accredited guards and NATO/DoD authorization evidence without the startup owning a CDS",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Defense business development with NATO DIANA/NCIA/Bundeswehr and Army CPE C2IN relationships",
+   "why": "Buyer is fragmented; entry depends on sponsorship into exercises and rapid-adoption paths",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "high",
+  "explanation": "Unclassified TAK/standards work carries only DFARS 252.204-7012/CMMC and possibly EAR 5D002 encryption obligations, but any move to Secret-releasable data, MPE enclaves or cross-domain hand-off requires accredited hosting (IL5/IL6 or NATO Secret), authorization evidence (SWFT/cATO or NATO ATO), FMN/JITC conformance, and cleared staff; the release policy itself is government-owned, so the company depends on FDO/disclosure-authority acceptance it cannot control. Foreign investment into an ITAR/600-series product can trigger mandatory CFIUS declarations. These are descriptions of constraints, not legal conclusions - counsel required.",
+  "non_us_person_founder_note": "The Indonesian founder (not a U.S. person) can lawfully work on public-domain standards, open-source ATAK-CIV and synthetic data; access to ITAR technical data or export-controlled CUI would need a license/TAA or must be walled off; a German lawful permanent resident is a U.S. person for ITAR (22 CFR 120.62) but still a 'foreign interest' for FOCI and cannot hold a clearance without citizenship; SBIR's >50% U.S.-person ownership test likely fails on the current cap table; a dual U.S./German structure raises German AWG/EU dual-use obligations in the other direction. Counsel must design the entity, data-segregation plan and hiring policy before any U.S. government engagement."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "The same label-aware, DDIL-tolerant federation and partner-identity brokering applies to multinational disaster response and humanitarian coordination (TAK is widely used by civil agencies), cross-agency public safety, border and coast-guard cooperation, and critical-infrastructure operators sharing incident pictures under NDA-like rules; the commercial market is real but thin and lower-priced, and the releasability semantics are specifically military."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "workflow",
+   "accreditation",
+   "government relationships",
+   "deployment footprint"
+  ],
+  "explanation": "Nothing algorithmic is defensible (labels, federation and policy engines are standards-based); the moat would be the tested adapter set against dozens of national systems, exercise-proven conformance evidence, FDO-accepted policy workflow, authorizations that others must repeat, and the trust of being neutral across Anduril/Palantir/Systematic spines. That moat is slow to build and easily undercut by incumbents bundling a 'good enough' bridge for free."
+ },
+ "why_now": "Since 2023 the coalition C2 problem moved from theater HQs to brigade level and from talk to funded programs: NGC2 fielding with multinational partners at PCC6 (2026), Army Jailbreak expansion to foreign partners (planned 2026), DISA's Coalition Information Environment and INDOPACOM Mission Network proof-outs (2026) with a stated network-centric-to-data-centric pivot by ~2027, Thunderdome extension to mission partners, the DoD zero-trust target date (FY2027) forcing data tagging and ICAM, NATO's DEMETER (SitaWare FOC 2026), Maven NATO (2025) and the Rapid Adoption Action Plan (June 2025) plus DIANA's Rapid Adoption Service (Dec 2025), the 5%-of-GDP pledge lifting allied C4ISR budgets, and TAK's spread to 500k+ users across partner nations creating a common substrate. At the same time the FY27 request steers joint C2 money into Maven/JFN licenses, which narrows the startup's U.S. lane to plug-ins.",
+ "killer_risk": "Policy, not technology, is the bottleneck and the technology part is already commoditized: national disclosure rules and FDO judgment decide what can be shared, the SBU bridge is handled 'well enough' by free government TAK plus unit kits and by SitaWare's native standards, the valuable Secret-releasable and cross-domain layer is closed to a non-cleared mixed-nationality team, no buyer has issued a product RFI or SBIR topic in eight years of recurring urgent needs, and incumbents (Anduril/Palantir in NGC2 and Maven, Systematic in NATO, MPE integrators under $1B-ceiling IDIQs) can bundle the capability for free the moment a customer asks - leaving a thin, exercise-dependent services business rather than a product company.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2017",
+   "event": "Production: U.S. Army selects Systematic SitaWare as CPCE basis",
+   "source_url": "https://www.prnewswire.com/news-releases/us-army-mission-command-awards-contract-to-systematic-inc-300402141.html"
+  },
+  {
+   "year": "2018",
+   "event": "Urgent need / prototype: Army Coalition Interoperability Solution tested in Europe to share position data among coalition systems",
+   "source_url": "https://www.c4isrnet.com/it-networks/2018/04/17/army-to-test-new-data-sharing-equipment-at-upcoming-exercise/"
+  },
+  {
+   "year": "2019",
+   "event": "Production services: DISA awards Trace Systems MPE-S single-award IDIQ ($998M ceiling; ceiling is not revenue)",
+   "source_url": "https://app.bigdata.com/documents/8F3B0E4100D8F100F3F8DE73DCEC0D8E"
+  },
+  {
+   "year": "2020",
+   "event": "Production: USAREUR secret-releasable network bridges Polish and UK units before Defender Europe",
+   "source_url": "https://www.c4isrnet.com/yahoo-syndication/2020/07/29/how-army-network-modernization-efforts-ensure-equipment-works-with-allies/"
+  },
+  {
+   "year": "2023",
+   "event": "Sources sought: MPE Operations, Maintenance and Sustainment (services)",
+   "source_url": "https://sam.gov/opp/c6e8de9278fc4004a42c66e24cd65786/view"
+  },
+  {
+   "year": "2024",
+   "event": "Unit prototype: 2CR Mission Partner Kit at Saber Strike 24; WFX 24-03 intel-sharing workaround; CJCSI 6290.01A on MPE CIAV support (July 2024); DoD IG opens mission-partner-sharing evaluation (July 2024)",
+   "source_url": "https://www.ausa.org/articles/language-war-new-gear-improves-communication-partner-forces"
+  },
+  {
+   "year": "2025",
+   "event": "Oversight and allied buys: GAO-25-106454 (Apr); NCIA buys Maven NATO sole-source (Mar); DEMETER SitaWare IOC (Mar); DODIG-2025-126 released (Jul); Bold Quest 25 and CWIX25 (Jun); GDIT EMITS 2 incl. mission partner network (Sep, $1.25B ceiling); NATO Rapid Adoption Action Plan (Jun)",
+   "source_url": "https://www.gao.gov/products/gao-25-106454"
+  },
+  {
+   "year": "2026",
+   "event": "Proof-outs, not products: DISA CIE testing in INDOPACOM (Jun) and 'network-centric until ~2027' (Aug); INDOPACOM Mission Network first test and eight-nation COP at Balikatan (May); NGC2 common data baseline (Jun) and PCC6 with NZ/AUS/UK/CA partners (Aug); FY27 budget funds CIE hybrid-cloud MPE (Apr)",
+   "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/"
+  }
+ ],
+ "allied_extension": "Yes - this is the one gap in the study where the allied market is more open than the U.S. market. NATO and European nations run SitaWare/FMN-native C2, buy through NCIA/NSPA and national MoDs that are reforming for speed (Rapid Adoption Action Plan 2025, DIANA Rapid Adoption Service, Allied Innovation Procurement Forum 2026), fund CWIX participation, and lack the U.S. classified-enclave lock-in; a German founder can enter via DIANA, the CWIX Innovation Sandbox and the Bundeswehr Cyber Innovation Hub without SBIR ownership problems, and the AUKUS ITAR exemption and Five Eyes Overmatch agreement create additional bilateral lanes. The counterweights are that Systematic already owns the allied land-C2 spine, Palantir owns NATO's theater platform, EU EDF/EDIP instruments are constrained by third-country control, and multinational disclosure policy is even more fragmented than U.S. policy; the allied version of this business is more compelling but still an integration-and-conformance business rather than a scalable product.",
+ "search_log": [
+  {
+   "query": "\"Mission Partner Kit\" 2nd Cavalry Regiment NATO interoperability army.mil 2025",
+   "useful": false
+  },
+  {
+   "query": "DISA \"mission partner environment\" \"Coalition Information Environment\" network-centric 2027 2026",
+   "useful": false
+  },
+  {
+   "query": "Booz Allen \"Sit(x)\" TAK Lattice Menace partner systems 2026",
+   "useful": false
+  },
+  {
+   "query": "\"mission partner environment\" OR \"coalition interoperability\" sources sought OR RFI sam.gov 2025 2026 DISA Army",
+   "useful": false
+  },
+  {
+   "query": "DODIG-2025-126 CJADC2 \"mission partner information sharing\" evaluation findings",
+   "useful": false
+  },
+  {
+   "query": "WebFetch systematic.com Bold Quest 2025 news page (EGRESS_BLOCKED)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454: Combined Joint All-Domain Command and Control - DOD Needs a Framework to Guide Investments",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/283999/mission_partner_kit_advancing_multinational_interoperability_with_nato_allies",
+   "title": "Mission Partner Kit: Advancing Multinational Interoperability with NATO Allies (army.mil)",
+   "pub_date": "2025-03-25",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ausa.org/articles/language-war-new-gear-improves-communication-partner-forces",
+   "title": "The Language of War: New Gear Improves Communication With Partner Forces (AUSA)",
+   "pub_date": "2024-10-23",
+   "tier": 3
+  },
+  {
+   "url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "title": "Multinational Intelligence Sharing and Interoperability (MIPB)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "title": "Balikatan 2026 Debuts Groundbreaking Common Operating Picture (DVIDS)",
+   "pub_date": "2026-05",
+   "tier": 1
+  },
+  {
+   "url": "https://www.navalnews.com/naval-news/2026/05/new-indopacom-mission-network-links-allies-during-balikatan/",
+   "title": "New INDOPACOM Mission Network links allies during Balikatan (Naval News)",
+   "pub_date": "2026-05-11",
+   "tier": 3
+  },
+  {
+   "url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+   "title": "DISA starting small in proving out Mission Partner Environment capabilities (Federal News Network)",
+   "pub_date": "2026-08-13",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/03/disa-testing-mission-partner-environment-capabilities-indo-pacific/",
+   "title": "DISA testing Mission Partner Environment capabilities in Indo-Pacific (DefenseScoop)",
+   "pub_date": "2026-06-03",
+   "tier": 3
+  },
+  {
+   "url": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/budget_justification/pdfs/01_Operation_and_Maintenance/O_M_VOL_1_PART_1/OM_Volume1_Part1.pdf",
+   "title": "Department of War FY2027 Budget Estimates - O&M Volume 1 Part 1 (DISA CIE/Thunderdome)",
+   "pub_date": "2026-04",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+   "title": "DOD wants more than $2B in fiscal 2027 to move beyond 'fragmented' CJADC2 deployments (DefenseScoop)",
+   "pub_date": "2026-05-28",
+   "tier": 3
+  },
+  {
+   "url": "https://www.c4isrnet.com/it-networks/2018/04/17/army-to-test-new-data-sharing-equipment-at-upcoming-exercise/",
+   "title": "Army to test new data-sharing equipment at upcoming exercise (C4ISRNET)",
+   "pub_date": "2018-04-17",
+   "tier": 3
+  },
+  {
+   "url": "https://www.c4isrnet.com/yahoo-syndication/2020/07/29/how-army-network-modernization-efforts-ensure-equipment-works-with-allies/",
+   "title": "How Army network modernization efforts ensure equipment works with allies (C4ISRNET)",
+   "pub_date": "2020-07-29",
+   "tier": 3
+  },
+  {
+   "url": "https://smallwarsjournal.com/2025/11/19/interoperability-warfighter-exercises/",
+   "title": "Interoperability: Winning Happens in the Off-Season (Small Wars Journal)",
+   "pub_date": "2025-11-19",
+   "tier": 3
+  },
+  {
+   "url": "https://www.csis.org/analysis/allies-cloud-interoperability",
+   "title": "Allies and cloud interoperability wargame report (CSIS)",
+   "pub_date": "2025-11-05",
+   "tier": 3
+  },
+  {
+   "url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+   "title": "DODIG-2025-126: Evaluation of a Line of Effort in the DoD's Implementation of the CJADC2 Strategy",
+   "pub_date": "2025-07-18",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/c6e8de9278fc4004a42c66e24cd65786/view",
+   "title": "MPE Operations, Maintenance and Sustainment - sources sought (SAM.gov)",
+   "pub_date": "2023-07-07",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/340689e568d74d08bb0c5c8cbebd42a6/view",
+   "title": "PM Mission Command Operational Mission Command Suite notice (SAM.gov)",
+   "pub_date": "2025-2026 (inferred)",
+   "tier": 1
+  },
+  {
+   "url": "https://systematic.com/us/industries/defense/news-knowledge/news/systematic-experts-support-coalition-forces-during-bold-quest-2025/",
+   "title": "Systematic experts support coalition forces during Bold Quest 2025 (company; RECALL - not re-verified this session)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/A14E00B9748CF07E4B82F680D66AEA31",
+   "title": "Booz Allen Sit(x) on Menace connects Lattice with TAK and partner systems (Bigdata.com document)",
+   "pub_date": "2026-05-18",
+   "tier": 2
+  },
+  {
+   "url": "https://docs.mattermost.com/security-guide/zero-trust.html",
+   "title": "Mattermost zero-trust and ABAC documentation",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://breakingdefense.com/2025/11/evolution-and-future-of-the-tactical-assault-kit-for-soldiers-and-special-operators/",
+   "title": "Evolution and future of the Tactical Assault Kit (Breaking Defense)",
+   "pub_date": "2025-11",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "title": "ATAK-CIV open-source repository (DoD)",
+   "pub_date": "ongoing",
+   "tier": 1
+  },
+  {
+   "url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026",
+   "title": "NATO confirms SitaWare Headquarters C2 system to reach FOC by March 2026 (Janes)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2025/04/14/nato-palantir-maven-smart-system-contract/",
+   "title": "NATO buys Palantir Maven Smart System (DefenseScoop)",
+   "pub_date": "2025-04-14",
+   "tier": 3
+  },
+  {
+   "url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan",
+   "title": "Summary of NATO's Rapid Adoption Action Plan",
+   "pub_date": "2025-06-25",
+   "tier": 1
+  },
+  {
+   "url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "title": "CWIX25 concludes (NATO ACT)",
+   "pub_date": "2025-06",
+   "tier": 1
+  },
+  {
+   "url": "https://app.bigdata.com/documents/2D6000DCBC9681A7D5A33BF75916DE97",
+   "title": "GDIT EMITS 2 task order for USAREUR-AF including mission partner network (Bigdata.com document)",
+   "pub_date": "2025-10-02",
+   "tier": 2
+  },
+  {
+   "url": "https://app.bigdata.com/documents/8F3B0E4100D8F100F3F8DE73DCEC0D8E",
+   "title": "DISA MPE-S IDIQ award to Trace Systems (Bigdata.com document)",
+   "pub_date": "2019-10-16",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+   "title": "Army and industry align on common data baseline as NGC2 moves from prototyping to delivery (army.mil)",
+   "pub_date": "2026-06",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "title": "13 CFR 121.702 SBIR/STTR ownership and control eligibility (eCFR)",
+   "pub_date": "current",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11",
+   "title": "32 CFR 117.11 Foreign Ownership, Control or Influence (eCFR)",
+   "pub_date": "current",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62",
+   "title": "22 CFR 120.62 U.S. person definition under ITAR (eCFR)",
+   "pub_date": "current",
+   "tier": 1
+  }
+ ]
+}

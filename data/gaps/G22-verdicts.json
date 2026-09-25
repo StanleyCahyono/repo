@@ -1,0 +1,50 @@
+[
+  {
+    "lens": "market",
+    "gap_id": "G22",
+    "refuted": false,
+    "strength": 5,
+    "bear_case": "No budget owner exists for a neutral discovery/tasking/delivery layer. TacSRT has been a pilot on congressional adds; the FY26 request was $0 and the FY27 parent line is ~$23.7M. JCO's $76.8M of marketplace spend (Jan 2023-Sep 2025) went to data vendors through a government-owned, contractor-operated marketplace, not to software. NGA's Luno money goes to analytics vendors, and its integration problem is handled by its own staff, integrators and Maven onboarding. The user population is on the order of dozens of TacSRT operators plus CoCom cells. Whatever layer emerges will be a government program feature or a vendor feature; a startup here drifts into SBIR-funded consultancy.",
+    "strongest_single_argument": "HASC had to legislate a Title 10 requirement and a program of record for TacSRT because no requirement owner and no funded line existed - and the executive still requested $0; a startup cannot sell a layer to a program whose own existence is unfunded.",
+    "evidence": [
+      "https://www.satellitetoday.com/government-military/2025/07/16/hasc-bill-would-make-tacsrt-a-program-of-record/ (2025-07-16, FACT, MEDIUM)",
+      "https://www.airandspaceforces.com/lawmakers-space-force-commercial-surveillance-vleo/ (2026, FY27 line ~$23.7M, FACT, MEDIUM)",
+      "https://www.gao.gov/products/gao-26-107959 (2026-08-27, JCO $76.8M via GDM, FACT, HIGH)",
+      "Danti release citing 32+ active TacSRT users (company figure, LOW)"
+    ],
+    "what_would_change_my_mind": "An enacted FY27 appropriation funding TacSRT as a program of record at >$100M with a distinct operator-tooling or data-management line, or an NGA/JCO solicitation explicitly for a vendor-neutral license/delivery layer.",
+    "narrower_survivable_version": "A subcontracted component (license-metadata schema + TAK delivery) inside a Luno/TacSRT vendor's task order, or an allied MoD pilot - a revenue line, not a company."
+  },
+  {
+    "lens": "competition",
+    "gap_id": "G22",
+    "refuted": false,
+    "strength": 4,
+    "bear_case": "Every layer of the stack is already owned. The marketplace is JCO's Global Data Marketplace (government-owned, contractor-operated). Licenses are negotiated by NRO/NGA/JCO with vendors that ship their own tasking/delivery apps (BlackSky Spectra, Planet Insights, Vantor, Capella Console, Umbra Canopy). Multi-vendor brokering already exists commercially (Ursa, SkyFi, SkyWatch, UP42). Enterprise integration is Palantir's MSS/NGA Maven with Open DAGIR onboarding, backed by a ~$1.3B ceiling and a $28M NGA access award. The SBIR-funded search/automation seat on the JCO floor is Danti's ($1.25M D2P2 + $1.9M TACFI). Adding license tags and a TAK export to any of these is a release, not a program.",
+    "strongest_single_argument": "The only proprietary asset a neutral broker could accumulate - knowledge of what the government already licensed and on what terms - is government data that JCO and NGA will keep inside the GDM and Maven, so the startup can never own the thing that makes it valuable.",
+    "evidence": [
+      "https://www.gao.gov/products/gao-26-107959 (GDM as JCO's e-commerce site, FACT, HIGH)",
+      "https://www.sbir.gov/portfolio/2286427 (Danti SBIR portfolio, FACT, HIGH)",
+      "https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase/ (MSS ceiling, FACT, HIGH)",
+      "https://spacenews.com/pentagon-boosts-budget-for-palantirs-ai-software-in-major-expansion-of-project-maven/ (NGA $28M MSS access, FACT, MEDIUM)"
+    ],
+    "what_would_change_my_mind": "JCO or NGA mandating an open, vendor-neutral product/license metadata standard that vendors must implement and that the GDM contractor and Palantir do not control; or evidence that vendors are actively resisting TAK/edge delivery and units are paying third parties for it.",
+    "narrower_survivable_version": "Be the maintainer of an open license-metadata/STAC profile and an ATAK-CIV plugin that vendors adopt because it is cheaper than building their own - defensible only as a standards niche with services revenue."
+  },
+  {
+    "lens": "feasibility",
+    "gap_id": "G22",
+    "refuted": true,
+    "strength": 2,
+    "bear_case": "The feasibility objections are the weakest here. The product is unclassified by design (TacSRT is scoped to unclassified, partner-shareable products; Luno buys unclassified analytics), it is EAR-jurisdiction commercial software rather than ITAR, an MVP on Umbra/Sentinel open data with an ATAK-CIV plugin costs well under $100K, and the Indonesian co-founder can work on the codebase. What remains true: the data that matters (license tiers, what the government already bought, GDM access) is inside JCO/NGA and partly CUI, a credible demo needs a sponsor, hosted CUI products need an IL4/IL5 ATO the team cannot afford, and SBIR ownership rules force the German founder to become a permanent resident and cap the Indonesian founder's stake before the primary vehicle is usable (counsel required).",
+    "strongest_single_argument": "The team can build the demo but cannot obtain the one dataset that makes it useful - the government's own record of licensed products - without a sponsor that has no funded program.",
+    "evidence": [
+      "https://www.nga.mil/news/NGA_USSF_Sign_TacSRT_Agreenment.html (unclassified scope, 2025-05-21, FACT, HIGH)",
+      "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (open plugin SDK, FACT, HIGH)",
+      "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export (EAR deemed-export rule, FACT, HIGH)",
+      "https://www.highergov.com/sbir-opportunity/commercial-derived-insights-for-novel-ta-daf26bx04-nv506-sbir-2026-275d526e/ (SBIR topic, Phase I $175K, FACT, MEDIUM)"
+    ],
+    "what_would_change_my_mind": "Nothing on feasibility would change the kill verdict; a JCO letter of support granting GDM sandbox access and license-tier documentation would make the demo credible but would not create a budget.",
+    "narrower_survivable_version": "An open-source STAC + license-tag + ATAK-CIV delivery toolkit released publicly to build reputation and relationships for a different, better-funded gap (edge/DDIL data delivery), rather than as this company's product."
+  }
+]

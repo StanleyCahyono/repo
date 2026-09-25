@@ -1,0 +1,49 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G23",
+  "refuted": false,
+  "strength": 5,
+  "bear_case": "There is no budget owner for a standalone translator. Gateway money is spent as hardware (V2X GMR $48.5M reported 2024; ABMS pods; BATS-D terminals) or as incumbent-held data-layer baselines (NGC2, June 2026 with Raft transformation). The documented pain lives mostly in exercises (Bold Quest, CWIX, Project Convergence) where vendors and government cells build the bridge themselves; DIU buys the drone-connectivity problem as network topology (ORIENT), not translation. A translator company converges on integration consultancy.",
+  "strongest_single_argument": "No RFI, sources sought, SBIR topic or budget line for a standalone message-translation service surfaced in the E02/E04 sweeps or in this session's searches, while every adjacent buy went to a terminal, gateway box or data-layer prime.",
+  "evidence": [
+   "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery (2026-06-22)",
+   "https://s202.q4cdn.com/296309594/files/doc_news/V2X-Secures-48.5-Million-U.S.-Army-Contract-to-Enhance-Battlefield-Communications-with-Versatile-Gateway-Mission-Router-2024.pdf (2024)",
+   "https://secure.businesswire.com/news/home/20241210097336/en/Aalyria-selected-by-Defense-Innovation-Unit-to-enhance-swarm-connectivity-for-defense-applications. (2024-12-10)",
+   "https://systematic.com/int/industries/defence/news-knowledge/news/systematic-experts-support-coalition-forces-during-bold-quest-2025/ (2025)"
+  ],
+  "what_would_change_my_mind": "A PEO C3N, C3BM or DISA solicitation (RFI/CSO/SBIR topic) explicitly for a software-only, terminal-agnostic CoT/VMF/J-series translation service with a named requirement owner and funded line, or an NGC2 baseline change removing transformation from the prime team.",
+  "narrower_survivable_version": "Unclassified CoT-to-open-coalition-format adapter and conformance kit for drone OEMs/allied units as a feature of an edge-bridge product; not a standalone business."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G23",
+  "refuted": false,
+  "strength": 5,
+  "bear_case": "Incumbents already have it: Ultra ADSI (CoT-to-JREAP-C, 21 instances unified), L3Harris BATS-D (handheld Link 16 with ATAK/CoT), Curtiss-Wright TDL gateway, V2X GMR, Systematic SitaWare with USMTF/ADatP-3/MIP/NVG/ASCA and a CoT gateway, Raft/Anduril transformation and federation in the NGC2 baseline, Fuse/Northrop/Collins airborne gateways, BSI VMF gateway, and government-owned ATAK-MIL Link 16 radio drivers. The interfaces (MIDS terminals, JREAP, TAK-MIL adapters, NGC2 data layer) are incumbent- or government-controlled; switching cost is certification, which transfers to no newcomer. An LLM mapping editor is a quarter's feature work for any of them.",
+  "strongest_single_argument": "The Army assigned 'common models and semantics, registries, transformation mechanisms, interfaces, federation' to the Anduril/Palantir/Raft team on 2026-06-22 - the exact function this gap proposes is now an incumbent-held program baseline.",
+  "evidence": [
+   "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery (2026-06-22)",
+   "https://www.l3harris.com/sites/default/files/2022-12/cs-bcs-bats-d-battlefield-awareness-targeting-system-dismounted-brochure.pdf (2022-12)",
+   "https://corvusintell.com/blog/interoperability/tactical-data-link-gateway-software/ (undated)",
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (ongoing)"
+  ],
+  "what_would_change_my_mind": "Evidence that ADSI/BATS-D/SitaWare/Raft cannot serve a specific high-volume endpoint class (e.g., Replicator ADA2 swarms) and that DIU or a program office is soliciting a software-only bridge for it from non-incumbents.",
+  "narrower_survivable_version": "Conformance-test tooling (INSPECT/CWIX-style) that incumbents are certified against rather than a competing gateway - still a niche, likely government-owned in the end."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G23",
+  "refuted": false,
+  "strength": 5,
+  "bear_case": "MIL-STD-6016 is Distribution C with AECA/ITAR export restrictions and allied release requires foreign disclosure authorization; MIL-STD-6017 (VMF) is controlled; a credible demo needs a certified terminal, crypto and JITC conformance testing, none of which a prime-less student team can obtain with $250k. The Indonesian co-founder, not assumed a U.S. person, would likely have to be excluded from the core technical data (deemed-export), removing the product/business founder from the product. Procurement through a prime and a program of record is a multi-year path. Only the unclassified CoT/open-format half is demonstrable in 3-6 months for under $100k, and that half is not where the pain or the money is.",
+  "strongest_single_argument": "The team cannot legally hold the primary specification of the product it would sell (MIL-STD-6016, Distribution C/ITAR) while including its non-U.S.-person co-founder, and cannot demo the Link 16 side without a sponsor it has no path to.",
+  "evidence": [
+   "https://everyspec.com/MIL-STD/MIL-STD-3000-9999/MIL-STD-6016C_NOTICE-2_22648/ (standard listing)",
+   "https://quicksearch.dla.mil/Transient/2235F3ED4C35425483CD4E67732C0AC6.pdf (2023-01-24, USMTF public by contrast)",
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (ongoing)"
+  ],
+  "what_would_change_my_mind": "A U.S.-person cleared TDL engineer joining as a co-founder, a prime offering terminal access and JITC sponsorship, counsel confirming a workable export-control structure for the non-U.S.-person founder, and a funded requirement for the unclassified half - all four together.",
+  "narrower_survivable_version": "Open-standards (CoT/MIP/NVG/USMTF/ASCA/STANAG 4586) adapter and conformance kit built entirely from public specifications, sold to allied drone OEMs or as a feature of an edge-bridge product; no Link 16/VMF content."
+ }
+]

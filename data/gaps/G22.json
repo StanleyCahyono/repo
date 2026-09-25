@@ -1,0 +1,519 @@
+{
+  "id": "G22",
+  "title": "Tactical access to commercial ISR/GEOINT: license-aware discovery, tasking, delivery and productionization of commercial analytics for units below the CoCom J2 (TacSRT/Luno outputs into unit and enterprise systems)",
+  "problem": "Units below the combatant-command J2 and NGA's own enterprise underuse commercial imagery and analytics because licensing cost/terms are opaque, products arrive in per-vendor cloud portals rather than unit systems, the pilot marketplace that fixes this (TacSRT) lacks a stable budget owner, and NGA must bespoke-integrate 23 Luno vendors' outputs into enterprise systems.",
+  "categories": [
+    "B",
+    "C",
+    "E",
+    "F",
+    "H",
+    "I"
+  ],
+  "segment_ids": [
+    "S03",
+    "S04"
+  ],
+  "chain_steps": [
+    "COLLECT",
+    "PROCESS",
+    "DISSEMINATE_TASK"
+  ],
+  "echelons": [
+    "battalion/brigade collection cells (aspirational)",
+    "division/corps and MDTF G2",
+    "combatant command J2 / JCO customer",
+    "NGA enterprise analysts",
+    "allied partners consuming unclassified products"
+  ],
+  "user": {
+    "exact_role": "Collection manager / GEOINT cell lead at a CoCom J2 or division G2 requesting commercial operational planning products; JCO floor operator fulfilling TacSRT requests; NGA Luno program-office integration lead",
+    "echelon": "Combatant command J2 down to division/MDTF (brigade and below is aspirational, not evidenced)",
+    "organization_examples": [
+      "USSF Joint Commercial Operations (JCO) cell and System Delta 810",
+      "AFRICOM, SOUTHCOM, SOCOM, INDOPACOM J2 (TacSRT customers per DefenseScoop 2025-04-09)",
+      "NGA Commercial Operations / Luno program office",
+      "Army Multi-Domain Task Force G2 (INFERENCE)",
+      "Allied MoDs consuming unclassified TacSRT products (e.g., Australia at Talisman Sabre 2025)"
+    ]
+  },
+  "current_workflow": [
+    "1. Unit or CoCom identifies a monitoring/planning need that national assets will not cover in time.",
+    "2. Request routed to NGA (national tasking channels) or, if eligible, to JCO/TacSRT, which posts it on the contractor-operated Global Data Marketplace (GDM).",
+    "3. Vendors bid; JCO buys an operational planning product under GSA-approved routine/urgent/emergency categories (Dec 2025 price ceilings).",
+    "4. Product is delivered to the vendor portal or JCO floor; an operator (increasingly Danti-assisted) assembles the product.",
+    "5. Analyst checks license tier before onward sharing, especially with allies.",
+    "6. Product is downloaded over enterprise network, re-hosted locally, and (sometimes) pushed into Maven/TITAN/TAK by hand; repeat per vendor portal.",
+    "7. At NGA, each Luno vendor's analytics output is mapped into enterprise data models by integration staff, one vendor at a time."
+  ],
+  "current_solution": "USSF JCO / TacSRT via the Global Data Marketplace (contractor-operated e-commerce site), NGA EOCL imagery and Luno A/B analytics delivered through vendor portals (BlackSky Spectra, Planet Insights, Vantor, Ursa Platform, Capella Console, Umbra Canopy), commercial aggregators (SkyFi, SkyWatch, UP42), Danti natural-language search on the JCO floor, and NGA/CDAO Maven Smart System plus Open DAGIR onboarding as the enterprise integration target.",
+  "failure": "There is no license-aware, unit-level discovery/tasking/delivery layer with a budget owner: GAO-26-107959 (Aug 2026) documents underuse from licensing costs, perceived restrictions, long-term-access doubts and lack of awareness of data already bought; TacSRT was omitted from the FY2026 request and its FY2027 line is ~$23.7M; NGA schedules Luno awards early specifically because enterprise integration and production transition are slow; Space Force COMSO names requirements, classification and operational integration as the three barriers.",
+  "evidence": [
+    {
+      "form": "government document",
+      "claim": "GAO found some DoD officials are missing opportunities to use commercial space data because of licensing costs, perceived use restrictions, concerns over long-term data access and limited awareness of data other organizations already purchased; JCO spent $76.8M (62% of tracked spend) through the Global Data Marketplace Jan 2023-Sep 2025 and System Delta 810 $35.6M (29%).",
+      "source_title": "GAO-26-107959, National Security Space: DOD Has Opportunities to Improve Its Use of Commercial Data and Related Services",
+      "source_url": "https://www.gao.gov/products/gao-26-107959",
+      "pub_date": "2026-08-27",
+      "event_date": "FY2021-FY2025 review period",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "GSA in Dec 2025 approved three purchasing categories for TacSRT operational planning products (routine: existing/free imagery; urgent: 1-20 images within 72 h; emergency: >20 images within 24 h) with pre-set price ceilings to speed purchases - a procedural workaround for slow buying rather than a delivery/integration fix.",
+      "source_title": "GAO-26-107959 as summarized by Defense One",
+      "source_url": "https://www.defenseone.com/technology/2026/08/us-military-bought-commercial-satellite-images-alleged-narco-airstrips-chinese-naval-fleet/415684/",
+      "pub_date": "2026-08",
+      "event_date": "2025-12",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "budget",
+      "claim": "The FY2026 request omitted TacSRT funding although Space Force called it critical; the HASC FY26 NDAA directed a Title 10 requirement and a program of record; the FY27 line in which TacSRT sits is budgeted at only ~$23.7M and the pilot has run on congressional adds.",
+      "source_title": "HASC Bill Would Make TacSRT a 'Program of Record' (Via Satellite); Lawmakers Tell Space Force to Invest in Commercial Surveillance (Air & Space Forces Magazine)",
+      "source_url": "https://www.satellitetoday.com/government-military/2025/07/16/hasc-bill-would-make-tacsrt-a-program-of-record/",
+      "pub_date": "2025-07-16 / 2026",
+      "event_date": "FY2026-FY2027 budget cycle",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Space Force expanded TacSRT after the pilot, serving AFRICOM, SOUTHCOM, SOCOM and INDOPACOM from 20+ vendors; NGA and USSF signed an MOA on 2025-05-21 delineating commercial ISR buying roles, ending a two-year turf dispute; TacSRT is scoped to unclassified products shareable with uncleared partners.",
+      "source_title": "Space Force continues expansion of commercial surveillance program (DefenseScoop); NGA, USSF Sign TacSRT Agreement (NGA)",
+      "source_url": "https://www.nga.mil/news/NGA_USSF_Sign_TacSRT_Agreenment.html",
+      "pub_date": "2025-04-09 / 2025-05-21",
+      "event_date": "2025-04 / 2025-05-21",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "repeated procurement",
+      "claim": "NGA Luno A ($290M ceiling, 10 vendors, Sep 2024) and Luno B ($200M ceiling, 13 vendors, Jan 2025) are five-year IDIQs; 2025-2026 task orders include BlackSky (up to $24.4M, Luno A), Ursa ($13.8M), Vantor ($5M Luno B, Feb 2026), NV5 and Planet. Ceilings are not revenue; disclosed orders are tens of millions.",
+      "source_title": "NGA Awards Vantor $5 Million for Global Change Detection Under Luno B Contract (Via Satellite); NGA announces new Luno A and Luno B delivery order awards (NGA)",
+      "source_url": "https://www.satellitetoday.com/government-military/2026/02/05/nga-awards-vantor-5-million-for-global-change-detection-under-luno-b-contract/",
+      "pub_date": "2026-02-05",
+      "event_date": "2024-09 to 2026-03",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "NGA aimed to award the bulk of Luno task orders by early 2026 'to provide more time for ensuring the new capabilities are properly integrated into government enterprise systems and transitioning them into production and use' - an explicit statement that integration/transition is the bottleneck.",
+      "source_title": "NGA hopes to award up to 10 Luno commercial analytics task orders this year (Breaking Defense)",
+      "source_url": "https://breakingdefense.com/2025/05/nga-hopes-to-award-up-to-10-luno-commercial-analytics-task-orders-this-year/",
+      "pub_date": "2025-05",
+      "event_date": "2025-05",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "operator workaround",
+      "claim": "Space Force officials say the service struggles to integrate commercial data into daily operations; acquisition and operational units 'just don't talk to each other'; SSC COMSO chief Col. Tim Trimailo names three barriers: requirements, classification and operational integration.",
+      "source_title": "Space Force struggling to integrate commercial space data: Officials (Breaking Defense)",
+      "source_url": "https://breakingdefense.com/2026/08/space-force-struggling-to-integrate-commercial-space-data-officials/",
+      "pub_date": "2026-08",
+      "event_date": "2026-08",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "SpaceWERX SBIR topic DAF26BX04-NV506 'Commercial-Derived Insights for Novel TacSRT Capabilities' (Phase I, $175K, closed 2026-08-19) sought sensing/analytic pipelines delivering commercially derived insights; Danti separately won a $1.25M Direct-to-Phase II for TacSRT automated analysis and a $1.9M TACFI, and states its search tool runs on the JCO floor for '32+ active TacSRT users'.",
+      "source_title": "SBIR topic DAF26BX04-NV506 (HigherGov listing); Danti press release",
+      "source_url": "https://www.highergov.com/sbir-opportunity/commercial-derived-insights-for-novel-ta-daf26bx04-nv506-sbir-2026-275d526e/",
+      "pub_date": "2026 / Danti release date not captured",
+      "event_date": "2026-08-19 close",
+      "tier": 3,
+      "label": "FACT (topic and awards); the '32+ users' figure is company marketing, not verified",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "At Talisman Sabre 2025 commercial RF (HawkEye 360) data was integrated into operational platforms 'for the first time' - commercial feeds are still wired into C2 one exercise at a time.",
+      "source_title": "Talisman Sabre 25: MRF-D Marines and Sailors conclude multinational exercise (Marines.mil)",
+      "source_url": "https://www.marines.mil/News/News-Display/Article/4263474/talisman-sabre-25-mrf-d-marines-and-sailors-conclude-multinational-exercise-in-the-top-end/",
+      "pub_date": "2025-08",
+      "event_date": "2025-07",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Earlier GAO work (GAO-22-106106; GAO-23-106042) flagged commercial-imagery strategy and access gaps, so the problem has persisted 2022-2026 across three reports.",
+      "source_title": "GAO-22-106106",
+      "source_url": "https://www.gao.gov/products/gao-22-106106",
+      "pub_date": "2022",
+      "event_date": "2022-2023",
+      "tier": 1,
+      "label": "FACT (RECALL for GAO-23-106042 - not re-verified this session)",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "why_existing_startups_havent_solved": "The neutral layer is being built by the government itself (JCO's contractor-operated Global Data Marketplace, TacSRT operator tooling, NGA Maven/Open DAGIR onboarding), imagery licenses are negotiated by NRO/NGA/JCO rather than by any broker, the big vendors (BlackSky, Planet, Vantor, Ursa) each ship their own tasking/delivery app and have no incentive to standardize, commercial aggregators (SkyFi, SkyWatch, UP42) already exist for the civil market, Danti already occupies the 'search/automation on the JCO floor' SBIR slot, and the addressable user population is tiny (Danti cites 32+ active TacSRT users; JCO data spend ~$77M over 33 months goes to imagery vendors, not to a software layer).",
+  "why_not_solved_reasons": [
+    "buyer fragmentation",
+    "procurement fragmentation",
+    "insufficient commercial market",
+    "proprietary incumbent architecture",
+    "integration complexity",
+    "economics"
+  ],
+  "technical_wedge": "A license-metadata-aware, STAC/OGC-based multi-vendor catalog and tasking broker with an offline product cache and Cursor-on-Target/TAK delivery so a division or CoCom cell can see what commercial products the government already owns (and under which license tier), request new collection through vendor tasking APIs or the GDM, and receive products into ATAK/TAK Server and Maven/TITAN ingest without per-vendor portals; the NGA-side variant is a vendor-agnostic 'Luno output normalizer' (schema + provenance/confidence adapters) sold to Luno vendors as an onboarding accelerator.",
+  "mvp": {
+    "what": "Open-standards catalog (STAC) federating Umbra open data, Sentinel/Landsat and commercial samples from 2-3 vendors, with per-product license tags (EOCL/Luno-like tiers modeled from public license summaries), a tasking-request router to vendor APIs, and an ATAK-CIV plugin that delivers products and alerts into the map.",
+    "demonstrable_in_3_6_months": "Yes for the software: catalog + license tags + ATAK-CIV plugin on open data and vendor sandbox APIs is 3-6 months for one strong engineer; a live vendor tasking round-trip requires a paid commercial account (low thousands of dollars) or vendor sandbox access.",
+    "what_it_must_prove": "That a non-GEOINT collection manager can discover already-licensed products, avoid re-buying, task new collection and receive it in a unit system in one workflow, and that vendors will expose license metadata through the broker; and, critically, that a named JCO/NGA/Army office will fund it - which the MVP itself cannot prove.",
+    "uses": [
+      "public/open data",
+      "commercial hardware",
+      "unclassified architecture",
+      "commercial compute",
+      "open standards"
+    ]
+  },
+  "data_requirement": {
+    "what": "Vendor catalog/tasking API access and sample imagery; government license-tier definitions (EOCL, Luno, GDM purchase categories); records of what products the government already owns; unit tasking histories.",
+    "legally_realistically_obtainable": "Open data and vendor sandbox/commercial accounts: yes. License-tier definitions: partly public, partly CUI/contract-specific and negotiated by NRO/NGA/JCO. 'What the government already bought' and tasking histories: not obtainable without a government sponsor; this is exactly the data the GAO says officials lack, and it sits inside JCO/NGA.",
+    "sources": [
+      "Umbra Open Data Program",
+      "Copernicus Sentinel / USGS Landsat",
+      "Planet, BlackSky, Capella, Umbra commercial APIs (paid or sandbox)",
+      "STAC/OGC community specs",
+      "GAO-26-107959 and GSA purchasing-category descriptions (public)",
+      "JCO Global Data Marketplace (contractor-operated; access requires sponsor)"
+    ]
+  },
+  "integration_requirement": {
+    "systems": [
+      "JCO Global Data Marketplace",
+      "Vendor tasking/delivery APIs (BlackSky Spectra, Planet, Vantor, Capella, Umbra Canopy, Ursa)",
+      "ATAK / TAK Server",
+      "Maven Smart System / NGA enterprise (Open DAGIR onboarding)",
+      "Army TITAN / AIDP ingest",
+      "IL4/IL5 cloud hosting for CUI products"
+    ],
+    "interfaces_protocols": [
+      "STAC / OGC API",
+      "Cursor-on-Target (CoT) and TAK plugin SDK",
+      "Vendor REST APIs (proprietary)",
+      "GDM ordering interface (contractor-controlled)",
+      "Maven/Open DAGIR onboarding APIs (government/Palantir-controlled)"
+    ],
+    "who_controls_the_interface": "Vendors control tasking APIs; the GDM contractor and JCO control the marketplace; CDAO/NGA and Palantir control Maven ingest; the Army PM IS&A and Palantir/Anduril control TITAN; only ATAK-CIV is an open, government-owned plugin interface a startup can build on without permission."
+  },
+  "customer": {
+    "user": "CoCom J2 / division G2 collection manager; JCO floor operator; NGA analyst",
+    "champion": "SSC Commercial Space Office (COMSO) / JCO leadership; NGA Commercial Operations Luno program office",
+    "contract_signer": "Space Systems Command contracting (via SpaceWERX/AFWERX for SBIR; GDM contractor for marketplace tooling) or NGA contracting (Luno task orders go to vendors, not to a broker)",
+    "requirement_owner": "Not established: HASC directed the CJCS to set a Title 10 requirement for TacSRT (FY26 NDAA language); until enacted and resourced no requirement owner exists for a unit-level layer",
+    "program_office": "SSC Space Domain Awareness and Combat Power / COMSO for TacSRT (pilot, not a PoR as of last verified evidence); NGA Commercial Operations for Luno",
+    "contracting_office": "SpaceWERX/AFWERX SBIR (Phase I $175K topics; D2P2 up to ~$1.25M as Danti received); NGA contracting for Luno; ACC-APG for Army AIDP/TITAN"
+  },
+  "budget": {
+    "program_or_line": "TacSRT (Space Force, pilot funded by congressional adds; FY26 request $0; FY27 parent line ~$23.7M); JCO/GDM data purchases ($76.8M Jan 2023-Sep 2025, spent on data not software); NGA Luno A/B ($490M combined ceiling, obligations at task-order level)",
+    "evidence": "FACT: FY26 request omitted TacSRT (SpaceNews/Via Satellite 2025); FACT: FY27 line only $23.7M (Air & Space Forces Magazine, 2026); FACT: JCO GDM spend $76.8M (GAO-26-107959). INFERENCE: none of these lines funds a neutral discovery/delivery layer; a startup would be paid out of SBIR or out of a vendor's task order.",
+    "source_url": "https://www.airandspaceforces.com/lawmakers-space-force-commercial-surveillance-vleo/",
+    "confidence": "MEDIUM"
+  },
+  "entry_vehicle": {
+    "primary": "SpaceWERX/AFWERX SBIR (TacSRT topic family, e.g., DAF26BX04-NV506) leading to a D2P2/TACFI with JCO as the customer",
+    "sequence": [
+      "1. ATAK-CIV plugin + STAC catalog demo on open data (self-funded)",
+      "2. Subcontract or partnership with a Luno B or TacSRT vendor (Ursa, BlackSky, Danti) to expose license metadata through the broker",
+      "3. SpaceWERX Open Topic or TacSRT-specific SBIR Phase I/D2P2 with JCO letter of support",
+      "4. Allied MoD pilot (Australia/UK/Germany) for unclassified commercial product delivery",
+      "5. Only if TacSRT becomes a funded PoR: compete for operator-tooling task orders under the GDM contractor or SSC"
+    ],
+    "eligibility_notes": "SBIR requires >50% ownership by U.S. citizens or permanent residents and U.S. principal place of business; the German founder qualifies only once a permanent resident, and the Indonesian founder's stake must stay within the limit - structure needs counsel. The product itself is EAR-jurisdiction commercial software (imagery is commercial), so a non-U.S.-person founder can work on the unclassified codebase; CUI-bearing license terms and GDM access would still require a U.S.-person to hold the government-facing accounts. Not a legal judgment - counsel required."
+  },
+  "competition": [
+    {
+      "company": "JCO Global Data Marketplace (government, contractor-operated)",
+      "how_close": "Is the tasking/purchase layer for TacSRT today",
+      "evidence": "GAO-26-107959 (2026-08-27) describes GDM as the e-commerce site through which JCO bought $76.8M of data and services"
+    },
+    {
+      "company": "Danti",
+      "how_close": "Already deployed on the JCO floor for TacSRT queries; $1.25M D2P2 + $1.9M TACFI",
+      "evidence": "Danti press releases and SBIR.gov portfolio (company marketing for deployment claim; awards are FACT)"
+    },
+    {
+      "company": "BlackSky (Spectra), Planet (Insights Platform), Vantor, Capella, Umbra (Canopy)",
+      "how_close": "Each offers its own tasking/delivery app and holds EOCL/Luno contracts; they are the license holders",
+      "evidence": "Company records B06 in companies index; Luno/EOCL awards (NGA/NRO)"
+    },
+    {
+      "company": "Ursa Space Systems",
+      "how_close": "Multi-vendor tasking/ordering broker with a Luno B task order (TrueSight)",
+      "evidence": "companies/B07 record; NGA Luno B delivery orders"
+    },
+    {
+      "company": "SkyFi, SkyWatch, UP42",
+      "how_close": "Commercial multi-vendor imagery aggregators/marketplaces; SkyFi markets to government",
+      "evidence": "S03 companies_near; RECALL - not re-verified this session (MEDIUM)"
+    },
+    {
+      "company": "Palantir (Maven Smart System / NGA Maven, Open DAGIR)",
+      "how_close": "Designated enterprise integration layer for commercial GEOINT at NGA and CoComs",
+      "evidence": "NGA $28M MSS access award (SpaceNews 2025); MSS ceiling ~$1.3B through 2029 (DefenseScoop 2025-05-23)"
+    },
+    {
+      "company": "Booz Allen / SAIC / CACI (integrators)",
+      "how_close": "Provide the bespoke Luno-to-enterprise integration labor today",
+      "evidence": "S04 companies_near; INFERENCE from NGA integration statements"
+    }
+  ],
+  "incumbent_response": {
+    "could_anduril_palantir_l3harris_add_it": "Yes. Palantir already positions MSS/Open DAGIR as the commercial-GEOINT onboarding layer; Anduril Lattice ingests commercial feeds; the GDM contractor can add license-tag and TAK-delivery features under its existing contract; BlackSky/Planet can add ATAK delivery to their own apps in one release cycle. None of them needs new data or new relationships to do so.",
+    "why_startup_still_wins_or_reject": "Reject for the general version: the only durable asset a neutral broker could hold - knowledge of what the government already licensed and on what terms - is government data that JCO/NGA will keep inside the GDM or Maven. A startup could win only a narrow, vendor-neutral standards niche (license-metadata schema and TAK/edge delivery) that the incumbents consider too small to bother with, which is also why it is too small to build a company on."
+  },
+  "capital_required": {
+    "proof_of_concept_usd": "$40,000-$80,000 (two founders' time, open data, one commercial imagery account, cloud)",
+    "credible_military_demo_usd": "$150,000-$300,000 (SBIR Phase I scale: vendor API integrations, ATAK plugin hardening, IL2/IL4-ready hosting, travel to JCO/CoCom exercise, a paid tasking round-trip)",
+    "first_production_deployment_usd": "$1.5M-$4M (D2P2/TACFI scale: IL4/IL5 ATO, GDM/Maven integration under sponsor control, sustainment staff; assumes TacSRT becomes a funded PoR - not yet true)",
+    "assumptions": "Software-only; no satellites, no classified environment; costs dominated by accreditation and by paying vendors for data during demos; all dollar figures are HYPOTHESIS-level estimates, not quotes."
+  },
+  "expertise_required": [
+    {
+      "role": "Former JCO / NGA commercial operations or collection-management officer",
+      "why": "Knows license tiers, GDM purchase categories and who inside JCO/NGA could sponsor; without this the team cannot even describe the workflow accurately",
+      "fatal_if_absent": true
+    },
+    {
+      "role": "Geospatial software engineer (STAC/OGC, imagery pipelines, TAK plugin development)",
+      "why": "Core build; the founding engineer can cover this",
+      "fatal_if_absent": false
+    },
+    {
+      "role": "Imagery licensing / federal contracts specialist (fractional)",
+      "why": "License terms and SBIR ownership rules determine whether the product may redistribute products at all",
+      "fatal_if_absent": true
+    },
+    {
+      "role": "DoD cloud accreditation (IL4/IL5) engineer (fractional, later)",
+      "why": "Needed only if the product hosts CUI-bearing products for government users",
+      "fatal_if_absent": false
+    }
+  ],
+  "regulatory_burden": {
+    "level": "medium",
+    "explanation": "Commercial satellite imagery is commercial (EAR-jurisdiction) data, and a discovery/delivery broker is plain software, so ITAR is unlikely to apply to the product (not a legal judgment). Burdens are: NOAA remote-sensing license conditions bind the operators, not brokers; government purchase/license terms (EOCL, Luno, GDM) restrict redistribution and are partly CUI; any hosted government-facing service needs an ATO (IL4/IL5 for CUI) and CMMC once DoD contracts carry CUI; SBIR ownership rules.",
+    "non_us_person_founder_note": "For an EAR99-type commercial software product the Indonesian founder is largely unconstrained (EAR deemed-export rule applies only to controlled technology - see E07-F17). Constraints arise from SBIR ownership limits, from government account/CUI access (U.S.-person often required by the sponsor), and from any future ITAR-controlled interfaces (e.g., TITAN ingest). Counsel needed before accepting any CUI or signing an SBIR."
+  },
+  "classification_dependence": "eventually",
+  "dual_use_potential": {
+    "level": "medium",
+    "explanation": "Multi-vendor imagery discovery/tasking has civil buyers (insurance, agriculture, energy, disaster response) but that market is already served by UP42, SkyWatch, SkyFi and the vendors' own platforms; the differentiating parts (government license tiers, TAK delivery, Maven/TITAN ingest) have no civil analogue. The NGA-side output-normalizer variant is purely government."
+  },
+  "defensibility": {
+    "what_becomes_proprietary": [
+      "integrations",
+      "workflow",
+      "government relationships",
+      "accreditation"
+    ],
+    "explanation": "Nothing structural: license metadata belongs to the government and vendors, vendor APIs are open to any integrator, STAC is a public standard, and an ATO can be obtained by any funded competitor. The only moats would be an early JCO sponsor relationship and being the schema that Luno vendors adopt - both fragile and both already contested by Danti and by Palantir's Open DAGIR."
+  },
+  "why_now": "GAO-26-107959 (Aug 2026) put licensing confusion and underuse on the record with recommendations; the NGA-USSF MOA (May 2025) settled who buys what; GSA's Dec 2025 purchase categories made TacSRT buying faster; commercial SAR reached operational NRO contracts (RCA, Aug 2026); Luno task orders peaked 2025-2026 creating integration backlog; HASC directed a TacSRT program of record. Against this, the executive branch requested $0 for TacSRT in FY26 and the FY27 parent line is ~$23.7M, so 'why now' is congressional and GAO pressure, not a funded requirement.",
+  "killer_risk": "No buyer with money for a neutral layer: TacSRT is a pilot living on congressional adds with an executive request of zero, the government already owns the marketplace (GDM) and the enterprise integration layer (Maven/Open DAGIR), the license holders are the vendors, the total active TacSRT user population is on the order of dozens, and the one startup seat on the JCO floor is already taken by Danti - so the most likely outcomes for this product are 'feature inside a vendor app' or 'contractor task under the GDM', neither of which is a venture-scale company.",
+  "market_stage": "Prototyping",
+  "procurement_signal_timeline": [
+    {
+      "year": "2022",
+      "event": "NRO EOCL awards to Planet, BlackSky, Maxar (5-year base, options to 2032); GAO-22-106106 flags commercial imagery strategy gaps",
+      "source_url": "https://www.nro.gov/News-and-Media/News-Articles/Article/3135765/nro-announces-largest-award-of-commercial-imagery-contracts/"
+    },
+    {
+      "year": "2023",
+      "event": "Space Force TacSRT pilot begins; JCO starts Global Data Marketplace purchases; NGA issues Luno A RFP ($290M)",
+      "source_url": "https://www.nga.mil/news/NGA_announces_$290M_Luno_A_commercial_data_RFP.html"
+    },
+    {
+      "year": "2024",
+      "event": "NGA selects 10 Luno A vendors (Sep 2024); Luno B 13 vendors follow (Jan 2025)",
+      "source_url": "https://www.nga.mil/news/NGA_announces_selectees_for_$200M_Luno_B_IDIQ.html"
+    },
+    {
+      "year": "2025",
+      "event": "TacSRT expanded (Apr); NGA-USSF MOA on commercial ISR roles (May 21); NGA plans to award up to 10 Luno TOs to leave integration time (May); FY26 request omits TacSRT; HASC FY26 NDAA directs PoR (Jul); GSA approves TacSRT purchase categories (Dec)",
+      "source_url": "https://www.nga.mil/news/NGA_USSF_Sign_TacSRT_Agreenment.html"
+    },
+    {
+      "year": "2026",
+      "event": "Vantor $5M Luno B order (Feb); BlackSky Luno A renewal (Mar); FY27 request - parent line ~$23.7M; SpaceWERX SBIR topic DAF26BX04-NV506 closes (Aug 19); GAO-26-107959 issued (Aug 27); Space Force officials describe commercial integration struggle (Aug)",
+      "source_url": "https://www.gao.gov/products/gao-26-107959"
+    }
+  ],
+  "allied_extension": "Somewhat more compelling with allies, not enough to change the verdict. TacSRT products are unclassified by design and were meant to be shareable with uncleared partners; Australia integrated commercial RF at Talisman Sabre 2025 and the German co-founder could open Bundeswehr/NATO conversations. But allied MoDs buy commercial imagery through their own national programs and through the same vendors, license terms differ per country, and NATO's enterprise layer is already Palantir MSS NATO (E06-F7). An allied pilot could be a first paying customer for an unclassified TAK delivery plugin, but it does not create a U.S. budget owner.",
+  "search_log": [
+    {
+      "query": "GAO-26-107959 commercial space data licensing costs \"use restrictions\" Joint Commercial Operations Global Data Marketplace 2026",
+      "useful": true
+    },
+    {
+      "query": "\"TacSRT\" Space Force FY2027 budget \"program of record\" 2026",
+      "useful": true
+    },
+    {
+      "query": "NGA Luno task order 2026 award \"Luno A\" OR \"Luno B\" integration enterprise",
+      "useful": true
+    },
+    {
+      "query": "Danti TacSRT SpaceWERX \"Direct-to-Phase II\" SBIR automated analysis",
+      "useful": true
+    },
+    {
+      "query": "\"Global Data Marketplace\" Joint Commercial Operations JCO commercial imagery 2026 Space Force",
+      "useful": true
+    },
+    {
+      "query": "Space Force NGA agreement commercial ISR purchasing TacSRT NGA \"commercial\" 2025 2026 memorandum",
+      "useful": true
+    },
+    {
+      "query": "breakingdefense.com 2026/08 \"Space Force struggling to integrate commercial space data\" officials",
+      "useful": true
+    },
+    {
+      "query": "\"DAF26BX04-NV506\" OR \"Commercial-Derived Insights for Novel Tactical Surveillance\" SBIR TacSRT topic 2026",
+      "useful": true
+    },
+    {
+      "query": "WebFetch https://www.bwcoconsulting.com/fod/daf26bx04-nv506 (EGRESS_BLOCKED, not retried)",
+      "useful": false
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.gao.gov/products/gao-26-107959",
+      "title": "GAO-26-107959: DOD Has Opportunities to Improve Its Use of Commercial Data and Related Services",
+      "pub_date": "2026-08-27",
+      "tier": 1
+    },
+    {
+      "url": "https://www.defenseone.com/technology/2026/08/us-military-bought-commercial-satellite-images-alleged-narco-airstrips-chinese-naval-fleet/415684/",
+      "title": "US military bought commercial satellite images of alleged narco airstrips, Chinese naval fleet (Defense One)",
+      "pub_date": "2026-08",
+      "tier": 2
+    },
+    {
+      "url": "https://breakingdefense.com/2026/08/space-force-struggling-to-integrate-commercial-space-data-officials/",
+      "title": "Space Force struggling to integrate commercial space data: Officials (Breaking Defense)",
+      "pub_date": "2026-08",
+      "tier": 2
+    },
+    {
+      "url": "https://www.airandspaceforces.com/lawmakers-space-force-commercial-surveillance-vleo/",
+      "title": "Lawmakers Tell Space Force to Invest in Commercial Surveillance (Air & Space Forces Magazine)",
+      "pub_date": "2026",
+      "tier": 2
+    },
+    {
+      "url": "https://www.satellitetoday.com/government-military/2025/07/16/hasc-bill-would-make-tacsrt-a-program-of-record/",
+      "title": "HASC Bill Would Make TacSRT a 'Program of Record' (Via Satellite)",
+      "pub_date": "2025-07-16",
+      "tier": 2
+    },
+    {
+      "url": "https://spacenews.com/congress-to-push-pentagon-to-fund-commercial-satellite-intelligence-program/",
+      "title": "Congress to push Pentagon to fund commercial satellite intelligence program (SpaceNews)",
+      "pub_date": "2025",
+      "tier": 2
+    },
+    {
+      "url": "https://defensescoop.com/2025/04/09/space-force-tacsrt-expansion-additional-funding/",
+      "title": "Space Force continues expansion of commercial surveillance, data analytics program (DefenseScoop)",
+      "pub_date": "2025-04-09",
+      "tier": 2
+    },
+    {
+      "url": "https://www.nga.mil/news/NGA_USSF_Sign_TacSRT_Agreenment.html",
+      "title": "NGA, USSF Sign TacSRT Agreement (NGA)",
+      "pub_date": "2025-05-21",
+      "tier": 1
+    },
+    {
+      "url": "https://defensescoop.com/2025/05/22/space-force-nga-agreement-commercial-isr-purchasing-power/",
+      "title": "Space Force, NGA reach agreement on purchasing power for commercial ISR (DefenseScoop)",
+      "pub_date": "2025-05-22",
+      "tier": 2
+    },
+    {
+      "url": "https://breakingdefense.com/2025/05/nga-hopes-to-award-up-to-10-luno-commercial-analytics-task-orders-this-year/",
+      "title": "NGA hopes to award up to 10 Luno commercial analytics task orders this year (Breaking Defense)",
+      "pub_date": "2025-05",
+      "tier": 2
+    },
+    {
+      "url": "https://www.satellitetoday.com/government-military/2026/02/05/nga-awards-vantor-5-million-for-global-change-detection-under-luno-b-contract/",
+      "title": "NGA Awards Vantor $5 Million for Global Change Detection Under Luno B Contract (Via Satellite)",
+      "pub_date": "2026-02-05",
+      "tier": 2
+    },
+    {
+      "url": "https://www.nga.mil/news/NGA_announces_new_Luno_A_and_Luno_B_delivery_order.html",
+      "title": "NGA announces new Luno A and Luno B delivery order awards (NGA)",
+      "pub_date": "2025",
+      "tier": 1
+    },
+    {
+      "url": "https://www.nga.mil/news/NGA_announces_selectees_for_$200M_Luno_B_IDIQ.html",
+      "title": "NGA announces selectees for $200M Luno B IDIQ (NGA)",
+      "pub_date": "2025-01",
+      "tier": 1
+    },
+    {
+      "url": "https://www.highergov.com/sbir-opportunity/commercial-derived-insights-for-novel-ta-daf26bx04-nv506-sbir-2026-275d526e/",
+      "title": "SBIR topic DAF26BX04-NV506 Commercial-Derived Insights for Novel TacSRT Capabilities (HigherGov listing)",
+      "pub_date": "2026",
+      "tier": 3
+    },
+    {
+      "url": "https://danti.ai/danti-awarded-a-1-25m-direct-to-phase-ii-contract-to-provide-the-u-s-space-forces-tacsrt-with-automated-analysis/",
+      "title": "Danti Awarded a $1.25M Direct to Phase II Contract for TacSRT automated analysis (company release)",
+      "pub_date": "not captured",
+      "tier": 4
+    },
+    {
+      "url": "https://www.sbir.gov/portfolio/2286427",
+      "title": "Danti AI Inc - SBIR.gov portfolio",
+      "pub_date": "ongoing",
+      "tier": 1
+    },
+    {
+      "url": "https://www.marines.mil/News/News-Display/Article/4263474/talisman-sabre-25-mrf-d-marines-and-sailors-conclude-multinational-exercise-in-the-top-end/",
+      "title": "Talisman Sabre 25: MRF-D Marines and Sailors conclude multinational exercise (Marines.mil)",
+      "pub_date": "2025-08",
+      "tier": 1
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-22-106106",
+      "title": "GAO-22-106106 (commercial imagery)",
+      "pub_date": "2022",
+      "tier": 1
+    },
+    {
+      "url": "https://www.nro.gov/News-and-Media/News-Articles/Article/3135765/nro-announces-largest-award-of-commercial-imagery-contracts/",
+      "title": "NRO announces largest award of commercial imagery contracts (EOCL)",
+      "pub_date": "2022-05",
+      "tier": 1
+    },
+    {
+      "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+      "title": "ATAK-CIV open-source repository (DoD)",
+      "pub_date": "ongoing",
+      "tier": 1
+    }
+  ]
+}

@@ -1,0 +1,411 @@
+{
+ "id": "G24",
+ "title": "Continuous FMN/NATO-standards conformance testing as a service for allied C2 vendors and nations (year-round CWIX-style harness)",
+ "problem": "Allied C2 vendors and national program offices verify FMN/NATO-standards interoperability mostly once a year at CWIX, so conformance defects surface late in the spiral cycle and there is no vendor-side, year-round regression harness aligned to FMN spiral profiles.",
+ "categories": [
+  "B",
+  "E",
+  "I",
+  "J"
+ ],
+ "segment_ids": [
+  "S08"
+ ],
+ "chain_steps": [
+  "TRANSPORT",
+  "PROCESS",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "coalition/NATO ACT-JFTC",
+  "national C2 program office",
+  "allied C2 vendor engineering"
+ ],
+ "user": {
+  "exact_role": "FMN implementation / interoperability test engineer at an allied C2 vendor or national C2 program office (the person who registers a capability for CWIX and works the test-case list during the exercise)",
+  "echelon": "National program office / vendor engineering (coalition proving ground is NATO ACT-JFTC CWIX)",
+  "organization_examples": [
+   "Bundeswehr CWIX participation cell (BAAINBw / CIR)",
+   "Systematic (SitaWare, NATO DEMETER)",
+   "HAVELSAN",
+   "Terma",
+   "NATO ACT FMN Secretariat / JFTC CWIX team",
+   "Joint Staff J6 JDAT (Bold Quest) and CIAV (U.S. side, RECALL)"
+  ]
+ },
+ "current_workflow": [
+  "1. Nation/affiliate implements the current FMN spiral specification (Spiral 4; Spiral 5 in development) in its C2 systems, using service interface profiles and STANAG message sets (ADatP-3, MIP/JC3IEDM, NVG, JDSS/STANAG 4677, Link 16).",
+  "2. Vendor and national test team run in-house validators and pairwise tests with partner systems during TIDE Sprints/Hackathon (winter) and in preparation for CWIX.",
+  "3. Nation registers capabilities and test cases for CWIX (three weeks in June at JFTC Bydgoszcz); some nations hire contractors just to staff participation (Bundeswehr tender).",
+  "4. During CWIX, capabilities test against other nations' live systems; results logged per test case ('try, fail, fix, try again').",
+  "5. Failures that cannot be fixed on site are deferred to the next TIDE/CWIX cycle; results feed the FMN compliance picture and vendor marketing ('passed NATO's exam').",
+  "6. NATO ACT is fielding INSPECT to move conformance checks toward a continuous, year-round automated service."
+ ],
+ "current_solution": "CWIX (annual), TIDE Sprint and TIDE Hackathon (interim), vendor in-house validators and test rigs, contractor support for participation (e.g., Bundeswehr CWIX 2025/2026 tender), consultancies that sell CWIX preparation guidance (Corvus Intelligence, AIC UK), and NATO ACT's own INSPECT automated conformance platform described as near-fielded in June 2025. On the U.S. side, JITC joint interoperability certification and the Joint Staff J6 CIAV process play the equivalent government-owned role (RECALL - not re-verified this session).",
+ "failure": "Cadence and ownership: verification is concentrated in one June event, defects are discovered against live partner systems rather than in the vendor's build pipeline, and the authoritative test cases/spiral profiles are controlled by NATO (partly restricted), so a commercial harness can only ever be advisory, never authoritative.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "CWIX25 (2-20 June 2025) ran more than 25,000 tests across roughly 600 capabilities from about 40 nations; NATO ACT described its INSPECT tool as near-fielded for continuous conformance checks, i.e., the government is building the year-round harness itself.",
+   "source_title": "CWIX25 concludes (NATO ACT)",
+   "source_url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "pub_date": "2025-06",
+   "event_date": "2025-06-02 to 2025-06-20",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH (carried from S08 research; WebFetch to act.nato.int returned EGRESS_BLOCKED this session)"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "The Bundeswehr procured contractor support for CWIX 2025/2026 participation, showing nations budget for participation labor rather than for a commercial conformance product.",
+   "source_title": "Public procurement notice: Bundeswehr CWIX 2025/2026 support (TED / op.europa.eu)",
+   "source_url": "https://op.europa.eu/en/web/public-procurement/procurement-details/-/procurement/ab92bdf7-6f80-4542-b373-57d012adb1d6",
+   "pub_date": "n/a (notice 2025)",
+   "event_date": "2025-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Vendors treat CWIX outcomes as marketing (Terma intelligence platform 'passes NATO exam'; HAVELSAN six capabilities), and consultancies (Corvus Intelligence guide, 2026-05-29; AIC UK) sell CWIX preparation guidance - the market that exists is services-shaped and tiny.",
+   "source_title": "Terma blog: Danish intelligence platform passes NATO's coalition data sharing exam; Corvus Intelligence CWIX certification guide",
+   "source_url": "https://corvusintell.com/blog/interoperability/nato-cwix-certification-guide/",
+   "pub_date": "2026-05-29",
+   "event_date": "2025-06",
+   "tier": 3,
+   "label": "FACT (as described by vendors; not proof any product works)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "NATO Rapid Adoption Action Plan (Hague, 25 June 2025) sets a 24-month adoption goal and allows prototype-to-procurement without further competition; a CWIX-demonstrated prototype has a formal path to a buy.",
+   "source_title": "Summary of NATO's Rapid Adoption Action Plan",
+   "source_url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan",
+   "pub_date": "2025-06-25",
+   "event_date": "2025-06-25",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "In a coalition warfighter exercise some nations' C2IS could not pass battlefield geometries to their national fire-control systems - interoperability defects still surface only in exercises.",
+   "source_title": "Small Wars Journal: Interoperability in warfighter exercises",
+   "source_url": "https://smallwarsjournal.com/2025/11/19/interoperability-warfighter-exercises/",
+   "pub_date": "2025-11-19",
+   "event_date": "2025",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "NATO Project DEMETER (Future Land C2) uses Systematic SitaWare HQ, FMN Spiral 4 compliant, IOC March 2025 / FOC March 2026 - the NATO-level interoperability layer is a vendor product with an in-house conformance track record, not a gap.",
+   "source_title": "Janes: NATO confirms SitaWare Headquarters C2 system to reach FOC by March 2026",
+   "source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026",
+   "pub_date": "2025",
+   "event_date": "2025-03 (IOC)",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "Joint Staff J-books (FY2017-FY2019) show Bold Quest assessing MPE/FMN, DACAS and coalition ISR interoperability; the U.S. government funds its own coalition interoperability assessment venue rather than buying a commercial harness.",
+   "source_title": "E03-F31 (evidence index) citing Joint Staff budget justification books and CWIX25 article",
+   "source_url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "pub_date": "2017-2019 (J-books); 2025-06",
+   "event_date": "annual",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "Absence signal: no Mission Partner Environment or coalition-interoperability conformance-testing RFI/sources sought or SBIR/DIU/AFWERX topic surfaced in the E02/E04 sweeps; absence of demand signals is not opportunity.",
+   "source_title": "E02-F41 and E04-F31 (evidence index)",
+   "source_url": "https://sam.gov/opp/d4cfa6871d8148cc91cc9177720a2eac/view",
+   "pub_date": "2026-09-24",
+   "event_date": "2026",
+   "tier": 2,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  },
+  {
+   "form": "government document",
+   "claim": "Government-owned conformance functions already exist on both sides of the Atlantic: NATO MSG-134 produced an open-source Interoperability Verification and Certification Tool (IVCT) for simulation federations, the MIP community historically ran its own test reference system, and the U.S. JITC certifies joint interoperability - precedent that NATO/DoD build and give away their own harnesses.",
+   "source_title": "RECALL - not re-verified this session",
+   "source_url": "",
+   "pub_date": "",
+   "event_date": "",
+   "tier": 4,
+   "label": "FACT (recall) / INFERENCE (applicability)",
+   "confidence": "LOW"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Three reasons, all structural rather than technical: (1) the authoritative harness is government-owned - NATO ACT runs CWIX and is fielding INSPECT, and only NATO's registry counts for FMN compliance, so a commercial tool is at best a pre-check; (2) the paying population is a few dozen allied C2 vendors and perhaps 20-30 national program offices, most of which already have in-house validators and treat CWIX support as staff labor procured from local contractors; (3) the FMN spiral profiles and CWIX test-case catalog are partly NATO-restricted and change per spiral, so an outside firm without affiliate access cannot keep a validator authoritative. The companies that exist (Corvus Intelligence, AIC UK) are consultancies, which is what the demand shape actually supports.",
+ "why_not_solved_reasons": [
+  "insufficient commercial market",
+  "it HAS been solved",
+  "data inaccessible",
+  "buyer fragmentation",
+  "economics"
+ ],
+ "technical_wedge": "A vendor-side CI/CD conformance harness: message and schema validators for public NATO formats (ADatP-3 / APP-11, NVG, JDSS STANAG 4677, MIP/JC3IEDM-MIM, NISP profile linting), scenario replay against recorded federated exchanges, and a hosted regression service that flags spiral-profile regressions on every build - positioned explicitly as complementary to INSPECT/CWIX, not a substitute. Realistically this is a reputation-building open-source asset and an on-ramp into a different product (STANAG-native gateway/translation or data-fabric adapters), not a standalone business.",
+ "mvp": {
+  "what": "Open-source-core validator for two or three public message standards (e.g., ADatP-3, NVG, JDSS) plus a hosted regression dashboard that a vendor plugs into its build pipeline; demo on synthetic federated exchanges.",
+  "demonstrable_in_3_6_months": "Yes - validators and a regression UI over public specs are a few engineer-months of work; entry at a TIDE Hackathon or the CWIX Innovation Sandbox (via a national sponsor) is the natural showcase.",
+  "what_it_must_prove": "That it catches real spiral-profile regressions a vendor would otherwise only discover at CWIX, and that a vendor or national test cell will pay for it rather than wait for INSPECT or run its own scripts.",
+  "uses": [
+   "open standards",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute"
+  ]
+ },
+ "data_requirement": {
+  "what": "Current FMN spiral specification and service interface profiles, NISP standards list, STANAG message specs and sample message sets, and (ideally) the CWIX test-case catalog and INSPECT rule set.",
+  "legally_realistically_obtainable": "Partly. NISP is public; many STANAGs are available through the NATO Standardization Office; FMN spiral documents are distributed to affiliates and are partly NATO UNCLASSIFIED-releasable / NATO RESTRICTED, so a national sponsor (e.g., a German MoD or vendor partner) is needed; CWIX test cases and INSPECT internals are government-controlled. A non-NATO-national co-founder should not be assumed to receive NATO RESTRICTED material - needs counsel and sponsor clarification.",
+  "sources": [
+   "NATO Interoperability Standards and Profiles (NISP)",
+   "NATO Standardization Office public STANAGs",
+   "FMN spiral specifications via a national affiliate sponsor",
+   "TIDE Sprint / Hackathon materials",
+   "Vendor-provided sample message logs under NDA"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "Vendor C2 build pipelines (Systematic SitaWare, HAVELSAN, Terma, national systems)",
+   "CWIX capability registration and test-case catalog",
+   "INSPECT (if NATO exposes an API - public evidence insufficient)"
+  ],
+  "interfaces_protocols": [
+   "ADatP-3 / APP-11",
+   "MIP / JC3IEDM / MIM",
+   "NVG",
+   "JDSS STANAG 4677",
+   "Link 16 STANAG 5516 (RECALL)",
+   "FMN service interface profiles"
+  ],
+  "who_controls_the_interface": "NATO ACT (FMN Secretariat, CWIX, INSPECT) controls the authoritative profiles and test cases; each vendor controls its own pipeline. The startup controls nothing that matters."
+ },
+ "customer": {
+  "user": "Interoperability/FMN test engineer at an allied C2 vendor or national program office",
+  "champion": "National CWIX capability lead or vendor head of interoperability (e.g., Systematic interoperability product owner; Bundeswehr CWIX cell)",
+  "contract_signer": "Vendor procurement (commercial B2B) or a national MoD procurement office (e.g., BAAINBw) under a services framework",
+  "requirement_owner": "NATO ACT FMN Secretariat / national FMN affiliate lead - none of whom has a requirement for a commercial harness",
+  "program_office": "National C2 program office (e.g., BAAINBw for Bundeswehr C2) or NATO ACT/JFTC for CWIX - INSPECT is ACT's answer",
+  "contracting_office": "Vendor purchasing; BAAINBw; NCIA acquisition (for NATO enterprise) - no identified contracting office with a requirement for this product"
+ },
+ "budget": {
+  "program_or_line": "No dedicated line. Adjacent money: national CWIX participation budgets (Bundeswehr contractor-support tender), NATO ACT's own INSPECT/CWIX funding, Joint Staff J6 Bold Quest/JDAT lines on the U.S. side (J-books, RECALL for current years).",
+  "evidence": "Bundeswehr CWIX 2025/2026 support tender (op.europa.eu); CWIX25 article naming INSPECT; E03-F31 J-book references. No budget line for a commercial conformance service was found in the evidence sweeps.",
+  "source_url": "https://op.europa.eu/en/web/public-procurement/procurement-details/-/procurement/ab92bdf7-6f80-4542-b373-57d012adb1d6",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Direct commercial sale to allied C2 vendors (no government contract needed), showcased via TIDE Hackathon / CWIX Innovation Sandbox under a national sponsor",
+  "sequence": [
+   "Open-source validator release and TIDE Hackathon entry (needs a NATO-nation sponsor/affiliation)",
+   "Paid pilot with one allied vendor or national test cell before CWIX 2027",
+   "CWIX Innovation Sandbox demonstration",
+   "If demand exists: national framework/services contract (e.g., German MoD) or NATO DIANA challenge if a relevant topic appears; Rapid Adoption Action Plan path in theory"
+  ],
+  "eligibility_notes": "U.S. SBIR/STTR is irrelevant here (no U.S. buyer identified) and would in any case require majority U.S. ownership and control; a German GmbH is NATO DIANA / NIF eligible regardless of founder nationality but NATO RESTRICTED material and JFTC access are handled per nation - the Indonesian co-founder's access to restricted spiral documents is not assured and needs sponsor/counsel clarification. No ITAR issue for NATO-origin standards work; German export rules apply to any software with military end use (needs counsel)."
+ },
+ "competition": [
+  {
+   "company": "NATO ACT INSPECT (government)",
+   "how_close": "Direct: the authoritative, free-to-affiliates continuous conformance platform described as near-fielded in June 2025",
+   "evidence": "CWIX25 article (act.nato.int, 2025-06); fielding status in 2026 not verified this session"
+  },
+  {
+   "company": "Systematic",
+   "how_close": "Has in-house FMN conformance capability (SitaWare FMN Spiral 4 compliant; NATO DEMETER); a would-be customer that already owns the capability",
+   "evidence": "Janes 2025 DEMETER; B10 company record"
+  },
+  {
+   "company": "Corvus Intelligence / AIC UK",
+   "how_close": "Consultancies selling CWIX preparation guidance - the existing commercial form of this demand",
+   "evidence": "Corvus CWIX certification guide 2026-05-29 (company source)"
+  },
+  {
+   "company": "Tangram Flex / SNC TRAX (interface-generation and translation tools)",
+   "how_close": "Adjacent: verify/generate interface code between standards rather than test conformance; where a startup would drift if it pivots",
+   "evidence": "B08/B11 company records"
+  },
+  {
+   "company": "U.S. JITC / Joint Staff J6 CIAV; NATO MSG-134 IVCT",
+   "how_close": "Government-owned certification and open-source verification tooling precedents",
+   "evidence": "RECALL - not re-verified this session"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "They would not bother - the market is too small for them - but the relevant incumbent is NATO ACT itself, which is already building INSPECT, and Systematic/HAVELSAN/Terma, which have in-house test teams. Any of them could publish a validator or open-source it in months.",
+  "why_startup_still_wins_or_reject": "Reject as a standalone company: the authoritative harness is government-owned, the customers are also the competitors, and the artifact (validators over public standards) is commoditizable. A startup could only 'win' by using the validator as a free credibility asset while selling something else."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "60,000-120,000",
+  "credible_military_demo_usd": "250,000-500,000",
+  "first_production_deployment_usd": "1,000,000-2,000,000",
+  "assumptions": "PoC = two engineers for 4-6 months building validators for 2-3 public standards and a regression UI; credible demo = CWIX Innovation Sandbox/TIDE participation under a national sponsor including travel, JFTC logistics, a security-cleared NATO-national engineer and legal setup of a German entity; production = a paid multi-vendor subscription plus on-site support that is mostly labor (consultancy economics). All figures are INFERENCE, LOW confidence."
+ },
+ "expertise_required": [
+  {
+   "role": "FMN/CWIX veteran (former national CWIX capability lead or NATO ACT/JFTC interoperability staff)",
+   "why": "Knows the spiral process, test-case catalog, affiliate politics and who at each nation owns participation; without this the team cannot get restricted spiral material or a sponsor",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "NATO message-standards engineer (ADatP-3, MIP/JC3IEDM, NVG, JDSS, Link 16)",
+   "why": "The validators must reflect the authoritative interpretations vendors get tested against; textbook parsing is not enough",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Software engineer for CI/CD tooling and hosted regression service",
+   "why": "Core product build; one of the founders can cover this",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Allied defense B2B sales/BD with vendor relationships (Systematic, HAVELSAN, Terma, Rheinmetall)",
+   "why": "The only paying customers are a few dozen vendors and national test cells",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "low",
+  "explanation": "Unclassified to NATO UNCLASSIFIED/RESTRICTED work on NATO-origin standards; no ATO, no CDS, no ITAR exposure for standards tooling. Burden appears only at the edges: access to restricted spiral documents and JFTC/CWIX badging require a NATO-nation sponsor and, for some material, cleared NATO-national personnel; German/EU export controls apply to software with military end use. Describe constraints only - needs counsel.",
+  "non_us_person_founder_note": "The Indonesian co-founder is not a NATO national either; NATO RESTRICTED handling and exercise access are nation-by-nation decisions, so assume the German founder and a NATO-national hire front all restricted material. The German founder's planned U.S. permanent residency is irrelevant here (no U.S. buyer). Not a legal judgment - needs counsel."
+ },
+ "classification_dependence": "none",
+ "dual_use_potential": {
+  "level": "low",
+  "explanation": "FMN/STANAG conformance has no civilian analogue; general protocol-conformance-testing tooling exists commercially (telecom, healthcare HL7, finance FIX) and is crowded, so the military-specific validators do not transfer."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "workflow",
+   "government relationships"
+  ],
+  "explanation": "Validators over public standards are commoditizable and NATO can (and, via INSPECT, does) build the authoritative version; test-case knowledge from CWIX belongs to NATO; the only durable assets would be relationships with a handful of vendors and a curated corpus of real-world message edge cases, which is thin."
+ },
+ "why_now": "FMN spirals keep advancing (Spiral 4 current, Spiral 5 in development), CWIX reached record scale in 2025 (>25,000 tests, ~40 nations), NATO's Rapid Adoption Action Plan (June 2025) created a prototype-to-procurement path, and allied budgets are rising toward the 3.5%/5% Hague targets. But the same period saw NATO ACT build INSPECT, which is the single most important 'why not now' fact: the government is closing this gap itself.",
+ "killer_risk": "NATO ACT's INSPECT (near-fielded June 2025) makes a commercial year-round harness redundant, and even without INSPECT the total addressable market - a few dozen allied C2 vendors and national test cells that already treat conformance as in-house or contractor labor - cannot support a venture-scale company; the business would drift into consultancy within a year.",
+ "market_stage": "Mature",
+ "procurement_signal_timeline": [
+  {
+   "year": "2017-2019",
+   "event": "Joint Staff J-books fund Bold Quest assessing MPE/FMN interoperability (U.S. government-owned assessment venue)",
+   "source_url": "https://www.act.nato.int/article/cwix25-concludes/"
+  },
+  {
+   "year": "2024",
+   "event": "NATO selects Systematic SitaWare HQ (FMN Spiral 4 compliant) for Project DEMETER",
+   "source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026"
+  },
+  {
+   "year": "2025",
+   "event": "CWIX25 record scale; INSPECT near-fielded; Innovation Sandbox introduced; Bundeswehr tenders contractor support for CWIX 2025/2026",
+   "source_url": "https://www.act.nato.int/article/cwix25-concludes/"
+  },
+  {
+   "year": "2025",
+   "event": "NATO Rapid Adoption Action Plan endorsed at The Hague (24-month adoption, prototype-to-procurement)",
+   "source_url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan"
+  },
+  {
+   "year": "2026",
+   "event": "Corvus Intelligence publishes CWIX certification guide (consultancy-shaped demand); CWIX 2026 outcomes and INSPECT fielding status: public evidence insufficient this session",
+   "source_url": "https://corvusintell.com/blog/interoperability/nato-cwix-certification-guide/"
+  }
+ ],
+ "allied_extension": "This gap is allied-only by construction: the buyer set is NATO ACT, national FMN affiliates and European C2 vendors, and the German co-founder gives a legitimate NATO-nation domicile. That is exactly why the registry kept it. But allied framing does not enlarge the market - it just relocates a tiny one - and NATO's own INSPECT is the incumbent. The compelling allied version is a different product: a STANAG/FMN-native integration or gateway layer built to Systematic's and NATO's published interfaces, for which a conformance validator is a free on-ramp.",
+ "search_log": [
+  {
+   "query": "NATO ACT INSPECT interoperability conformance tool continuous FMN CWIX 2026",
+   "useful": false
+  },
+  {
+   "query": "\"Federated Mission Networking\" Spiral 5 specification compliance verification \"TIDE\" 2026",
+   "useful": false
+  },
+  {
+   "query": "\"CWIX 2026\" results tests capabilities nations Innovation Sandbox",
+   "useful": false
+  },
+  {
+   "query": "Corvus Intelligence CWIX preparation service OR \"AIC UK\" CWIX interoperability consultancy FMN",
+   "useful": false
+  },
+  {
+   "query": "NCIA \"interoperability\" test tool contract award STANAG conformance \"test and validation\" 2025 OR 2026",
+   "useful": false
+  },
+  {
+   "query": "Bundeswehr CWIX Unterstützung Vergabe 2025 2026 \"CWIX\" Ausschreibung Dienstleistung",
+   "useful": false
+  },
+  {
+   "query": "WebFetch https://www.act.nato.int/article/cwix25-concludes/ (EGRESS_BLOCKED)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.act.nato.int/article/cwix25-concludes/",
+   "title": "CWIX25 concludes (NATO ACT)",
+   "pub_date": "2025-06",
+   "tier": 1
+  },
+  {
+   "url": "https://op.europa.eu/en/web/public-procurement/procurement-details/-/procurement/ab92bdf7-6f80-4542-b373-57d012adb1d6",
+   "title": "Bundeswehr CWIX 2025/2026 support procurement notice (op.europa.eu)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan",
+   "title": "Summary of NATO's Rapid Adoption Action Plan",
+   "pub_date": "2025-06-25",
+   "tier": 1
+  },
+  {
+   "url": "https://corvusintell.com/blog/interoperability/nato-cwix-certification-guide/",
+   "title": "Corvus Intelligence: NATO CWIX certification guide",
+   "pub_date": "2026-05-29",
+   "tier": 3
+  },
+  {
+   "url": "https://blog.terma.com/danish-intelligence-platform-passes-natos-coalition-data-sharing-exam",
+   "title": "Terma blog: Danish intelligence platform passes NATO's coalition data sharing exam",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026",
+   "title": "Janes: NATO confirms SitaWare Headquarters C2 system to reach FOC by March 2026",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://smallwarsjournal.com/2025/11/19/interoperability-warfighter-exercises/",
+   "title": "Small Wars Journal: Interoperability in warfighter exercises",
+   "pub_date": "2025-11-19",
+   "tier": 3
+  },
+  {
+   "url": "https://sam.gov/opp/d4cfa6871d8148cc91cc9177720a2eac/view",
+   "title": "SSC Model Interoperability RFI (absence-signal anchor from E02)",
+   "pub_date": "unknown",
+   "tier": 1
+  },
+  {
+   "url": "https://www.diana.nato.int/challenges.html",
+   "title": "NATO DIANA challenge programme",
+   "pub_date": "2025-2026",
+   "tier": 1
+  }
+ ]
+}

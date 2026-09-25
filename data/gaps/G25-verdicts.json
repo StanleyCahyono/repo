@@ -1,0 +1,52 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G25",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "There is a budget owner (DAWG, SOCOM, Navy PMS 406) and a requirement, but the FY27 request of $54.6B was marked at ~$1.0B by HASC, SASC and House appropriators; the AVO $100M is a prize ceiling with no public awards found; the obligated dollars located ($86M SOCOM, $87M Army task order) all went to Anduril; and the pain is still largely experimentation-stage (exercises, SOF trials, Gauntlet fielding). A startup's realistic revenue here is challenge/SBIR prototype money - consultancy drift into integration services for a prime.",
+  "strongest_single_argument": "Every budget line that touches vehicle-agnostic orchestration is already routed either to Anduril through existing vehicles or to government-owned software (FANTOM Core, A-GRA, UMAA); there is no line a new entrant can address.",
+  "evidence": [
+   "https://www.defense-aerospace.com/dawg-54b-requested-1b-written-down/ (2026-06, FACT, MEDIUM)",
+   "https://www.congress.gov/crs-product/IN12703 (2026-06, FACT)",
+   "https://defensescoop.com/2025/03/26/anduril-socom-contract-award-autonomy-software-86m/ (2025-03-26, FACT)",
+   "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view (2026-06-26, FACT)",
+   "https://breakingdefense.com/2026/01/diu-offers-100m-in-prizes-for-voice-controlled-ai-enabled-drone-swarm-orchestrator/ (2026-01, FACT)"
+  ],
+  "what_would_change_my_mind": "Public AVO awards or a follow-on DAWG OTA going to a small non-incumbent vendor, or a FY27 appropriation with a dedicated vehicle-agnostic C2 line open to new entrants.",
+  "narrower_survivable_version": "None within G25; adjacent autonomy conformance/T&E tooling sold to SOFWERX UxSAI, the JATF Autonomous Warfare Proving Ground or Drone Dominance vendors is a separate gap."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G25",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "Anduril Lattice is already the selected orchestration layer for DIU/Replicator (Nov 2024), SOCOM ($86M, Mar 2025) and the Army (enterprise agreement, Mar 2026), and holds a CCA mission-autonomy production option; Shield AI, Auterion (multi-manufacturer swarm demos, Gauntlet award), Applied Intuition/EpiSci, Collins, Palantir, AeroVironment and reportedly SpaceX/xAI compete for the same slot; the government's own kernels (FANTOM Core, A-GRA, UMAA, TAK) occupy the vendor-neutral position; every API a neutral layer needs is controlled by those vendors or the government; and switching cost for buyers already on Lattice is high while switching cost away from a startup adapter is zero.",
+  "strongest_single_argument": "Incumbents do not need six months to add this - they already are it, and the neutral alternative is government-owned software that no one will pay a startup to replace.",
+  "evidence": [
+   "https://thedefensepost.com/2026/03/16/us-anduril-ai-contract/ (2026-03-16, FACT)",
+   "https://www.anduril.com/news/diu-selects-anduril-to-enable-collaborative-autonomy-for-replicator-systems (2024-11, FACT company-reported)",
+   "https://auterion.com/auterion-performs-worlds-first-multi-manufacturer-swarm-strike-demonstration/ (2025-12, vendor claim)",
+   "https://shield.ai/shield-ai-awarded-u-s-air-force-production-contract/ (2026-06-17, FACT)",
+   "https://www.aicerts.ai/news/spacex-joins-dod-drone-swarms-orchestrator-contest/ (2026-02, LOW)"
+  ],
+  "what_would_change_my_mind": "A formal DoD policy or NDAA provision mandating a government-owned, openly licensed orchestration interface with a funded third-party conformance program that explicitly procures from small vendors.",
+  "narrower_survivable_version": "None for the orchestrator; a conformance/adapter tooling vendor that primes and government labs both use could coexist with incumbents but is not G25."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G25",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "A credible demo requires live heterogeneous vehicles across two domains, DDIL radio behavior, a DoDD 3000.09-compatible safety case and government interface specs (FANTOM Core, A-GRA, UMAA) that are CUI/ITAR; the product's core code is likely ITAR technical data or EAR 600-series, so the Indonesian non-U.S.-person co-founder may be unable to work on it without a licence and neither founder can be cleared today; $250k funds a simulation only (credible demo est. $2-5M); the AVO submission window closed 25 Jan 2026 and the challenge is described as for U.S.-based firms with production-approaching prototypes; and common-controller efforts have taken over a decade without reaching production.",
+  "strongest_single_argument": "The thing that must be built to be credible - DDIL-tolerant multi-vehicle orchestration with lethal-tasking accountability - is exactly the thing this team cannot legally staff, cannot afford to test and cannot demo without military access.",
+  "evidence": [
+   "S13 regulatory_access and technical_difficulty assessments (segment file, INFERENCE, MEDIUM)",
+   "https://www.executivegov.com/articles/diu-dawg-navy-challenge-av-orchestrator (2026-01, eligibility, MEDIUM)",
+   "https://sam.gov/opp/dd0c44c75b90428ab037c4780d5e6013/view (UCC sources sought, date not captured)",
+   "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems (2023-10-26, FACT)"
+  ],
+  "what_would_change_my_mind": "Export counsel opining that an open, simulation-first conformance kernel is EAR99/publicly available, plus a cleared U.S.-person co-founder or advisor with a SOCOM/Navy unmanned sponsor and access to range time.",
+  "narrower_survivable_version": "Simulation-first, openly published conformance and T&E tooling (potentially publicly available and therefore outside ITAR - counsel) sold to labs and vendors; a different gap, and still LOW founder fit until a cleared U.S. lead joins."
+ }
+]

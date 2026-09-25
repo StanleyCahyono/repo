@@ -1,0 +1,49 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G24",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "There is no budget owner for a commercial conformance harness. Nations pay for CWIX participation labor (Bundeswehr tender), NATO ACT pays for its own INSPECT and CWIX, and the U.S. pays JS J6 for Bold Quest; none of them has a requirement, RFI or line item for a vendor product. The pain is exercise-only in cadence, the paying population is a few dozen vendors and national cells, per-seat value is low five figures, and the existing commercial expression of the demand is two consultancies. This is consultancy drift by construction: the first 'customer' will ask for on-site CWIX support staff, not software.",
+  "strongest_single_argument": "The PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> VEHICLE chain breaks at REQUIREMENT OWNER: NATO ACT owns the requirement and is satisfying it with INSPECT; no national program office has a documented requirement for a commercial harness.",
+  "evidence": [
+   "Bundeswehr CWIX 2025/2026 support tender - money buys labor, not tooling (op.europa.eu)",
+   "CWIX25 article - ACT building INSPECT (act.nato.int, 2025-06)",
+   "E02-F41 / E04-F31 - no MPE/coalition conformance RFI or SBIR topic surfaced",
+   "Corvus Intelligence guide (2026-05-29) - demand shape is consultancy"
+  ],
+  "what_would_change_my_mind": "A national MoD or NCIA tender explicitly for a commercial continuous-conformance service, or two allied C2 vendors signing paid pilots above EUR 100k/year each before CWIX 2027.",
+  "narrower_survivable_version": "Not a company: an open-source validator used as a credibility asset to enter the allied interoperability community, monetized through a different product (STANAG-native gateway/adapters)."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G24",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "The incumbent is the government. NATO ACT runs CWIX, controls the FMN spiral profiles and test cases, and described INSPECT as near-fielded for continuous conformance in June 2025; whatever INSPECT's 2026 status (public evidence insufficient this session), it is free to affiliates and authoritative by definition. The would-be customers - Systematic (FMN Spiral 4 compliant SitaWare, NATO DEMETER), HAVELSAN, Terma - already run in-house conformance and advertise CWIX results. Anduril/Palantir/L3Harris will not bother, but Systematic or NATO could publish a validator in months, and government-owned software (INSPECT, JITC/CIAV precedent, MSG-134 IVCT) covers the function. Switching cost is zero because nobody has switched to anything.",
+  "strongest_single_argument": "NATO ACT's INSPECT is the year-round CWIX-style harness this gap proposes, built by the party that owns the only registry that counts.",
+  "evidence": [
+   "CWIX25 article naming INSPECT (act.nato.int, 2025-06)",
+   "Janes: SitaWare HQ FMN Spiral 4 compliant for DEMETER (2025)",
+   "B10 Systematic record: conformance track record at CWIX as moat",
+   "RECALL: JITC certification, JS J6 CIAV, MSG-134 IVCT open-source tool - government builds and gives away conformance tooling"
+  ],
+  "what_would_change_my_mind": "Evidence that INSPECT stalled or is limited to a narrow subset of profiles, plus NATO ACT publicly inviting industry to provide complementary vendor-side harnesses (e.g., an Innovation Sandbox call specifically for conformance tooling).",
+  "narrower_survivable_version": "Vendor-side pre-check tooling explicitly complementary to INSPECT, sold as part of an integration/gateway product rather than as a standalone conformance service."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G24",
+  "refuted": false,
+  "strength": 2,
+  "bear_case": "Feasibility is the one lens that does not kill it: no classified data, no ATO, no CDS, no ITAR, an unclassified MVP under $120k, and a German GmbH that can legitimately enter TIDE/CWIX channels and DIANA. The residual barriers are real but modest: FMN spiral documents and CWIX test cases are affiliate/NATO-controlled and partly restricted, so a national sponsor and a NATO-national cleared engineer are needed; the Indonesian co-founder should not be assumed to receive NATO RESTRICTED material; and a credible demo venue depends on a nation's sponsorship calendar (one CWIX per year). None of that stops a demo - it just does not matter, because feasibility without a buyer is a hobby.",
+  "strongest_single_argument": "Everything can be built and shown unclassified with $250k - and that ease is itself evidence that nothing here is defensible.",
+  "evidence": [
+   "E06-F11: standards stack public or obtainable via national MoDs",
+   "E06-F1/F2: DIANA accepts NATO-domiciled companies regardless of founder nationality",
+   "E07-F34: allied channels open to the German founder; dual-jurisdiction cost"
+  ],
+  "what_would_change_my_mind": "Nothing on this lens changes the verdict; feasibility is not the constraint.",
+  "narrower_survivable_version": "Same as above - open-source validator as an on-ramp, with restricted material fronted by the German founder and a NATO-national hire."
+ }
+]

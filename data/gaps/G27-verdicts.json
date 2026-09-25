@@ -1,0 +1,51 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G27",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "Ceilings look large ($150M Owl, $239M GDMS, $89M PMAT, $998M Trace) but obligations at award were $10K, $25.7M and $23K; DISA CDES procurement lines are ~$1-2M/yr; the money is in sustainment services and program integration, not licences. Low-to-high promotion is absorbed by Platform One and factory budgets (free to programs). The BICES-MPE bridge has no vendor budget line - it is a NATO BGX / DISA accreditation and policy decision. Exercise-only evidence (WFX, Balikatan, Bold Quest) shows pain but purgatory: coalition data-centric security has been 'demonstrated and assessed' annually since 2022 without a program of record. Consultancy drift is the realistic outcome for any small entrant.",
+  "strongest_single_argument": "No budget line exists that a new, unlisted vendor can be paid from: AC-4(20) forbids using unlisted CDS, and the listed vendors hold sole-source vehicles through 2029-2030.",
+  "evidence": [
+   "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "https://www.defense.gov/News/Contracts/Contract/Article/3696684/",
+   "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+   "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+   "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/"
+  ],
+  "what_would_change_my_mind": "A competed (not sole-source) DoD solicitation for automated low-to-high promotion or a software-defined tactical CDS explicitly open to non-listed vendors with a funded transition line, or a DISA/J6 program of record for a BICES-MPE bridge that buys commercial software.",
+  "narrower_survivable_version": "None as a company; subcontract filter/evidence content to a listed vendor."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G27",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "Incumbents already have it. Owl holds the only listed voice/video/FMV guards and a $150M-ceiling Phase III IDIQ and authors DFDL; GDMS holds TACDS and the BICES TNE CDS IDIQ; Everfox, Lockheed (Radiant Mercury) and Northrop hold enterprise and program guards; Defense Unicorns (Zarf/UDS, $136M Series B, Jan 2026) owns air-gap and one-way low-to-high delivery; Second Front and Palantir (PFCS Forward IL6) own classified hosting; Platform One Secret is government-owned and free. Every interface - NSA assessment, filter SDKs, high-side registries, classified eMASS, DISA MPE - is controlled by government or a listed vendor. Switching cost for programs is a re-accreditation, so nobody switches. Government-owned software (Platform One, Big Bang, Zarf) already covers the unclassified layer for free.",
+  "strongest_single_argument": "The only unclassified surface a startup could build on is open source or vendor-owned, so any useful contribution is absorbed at zero cost by the listed vendor that controls the interface and the sole-source vehicle.",
+  "evidence": [
+   "https://owlcyberdefense.com/news/owl-cyber-defense-awarded-150-million-idiq-contract-to-support-air-force-research-laboratory/",
+   "https://siliconangle.com/2026/01/13/defense-unicorns-bags-136-million-funding-deliver-secure-military-software-updates/",
+   "https://govciomedia.com/air-forces-software-factory-is-moving-iron-bank-to-classified-levels-2/",
+   "https://www.nsa.gov/Resources/Cross-Domain-Solutions/"
+  ],
+  "what_would_change_my_mind": "Evidence that NCDSMO or DISA is opening a software-defined, vendor-neutral filter framework where third parties can publish assessed filter content independently of the guard vendor, with a payment mechanism.",
+  "narrower_survivable_version": "Open-source contribution to Zarf/UDS/OpenTDF for credibility only; not a business."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G27",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "Classification dependence is immediate: real filter specs, ATO packages and BICES/MPE product formats are gated. The product cannot be demonstrated credibly without classified access, an NCDSMO-listed guard and an authorizing official. NCDSMO listing takes years; CDS are export-controlled (RTB covers CDS sold for export); FOCI (32 CFR 117.11) treats the non-citizen owners as foreign interests; personnel clearances require U.S. citizenship, so the Indonesian founder can never work on the core and the German founder not for years; SBIR's >50% U.S.-citizen/PR ownership test fails a 50/50 split. A credible military demo costs $3-8M (cleared staff, FCL, sponsor) versus $250k available; the $50-150k MVP proves nothing an AO or CDS buyer needs. Procurement to a first program insertion is a 3-5 year path (Owl SBIR II to Phase III; PMAT prototype OT to production OT). All of this needs export-control and security counsel, but no plausible legal structure makes the founders able to do the work.",
+  "strongest_single_argument": "The founding team cannot legally or practically work on the product's core, and the parts they can work on are open source.",
+  "evidence": [
+   "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11",
+   "https://www.nsa.gov/Resources/Cross-Domain-Solutions/",
+   "https://www.dcsa.mil"
+  ],
+  "what_would_change_my_mind": "Both founders become U.S. citizens with clearances and recruit a cleared CDS engineer with prior NCDSMO assessment experience plus $10M+ of patient capital - at which point it is a different company and team.",
+  "narrower_survivable_version": "None for this team; redirect effort to unclassified DevSecOps evidence tooling (G2-type gaps) where the same policy tailwinds apply without the classification gate."
+ }
+]

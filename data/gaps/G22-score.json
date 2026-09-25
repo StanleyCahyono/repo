@@ -1,0 +1,141 @@
+{
+  "id": "G22",
+  "title": "Tactical access to commercial ISR/GEOINT: license-aware discovery, tasking, delivery and productionization of commercial analytics for units below the CoCom J2 (TacSRT/Luno outputs into unit and enterprise systems)",
+  "scores": [
+    {
+      "n": 1,
+      "criterion": "severity_of_user_pain",
+      "score": 2,
+      "rationale": "GAO-26-107959 documents 'missed opportunities', not mission failure: users have workarounds (national tasking, GDM, vendor portals) and the pain is friction and cost, not inability to operate. Score 2 (moderate) not lower because three GAO reports 2022-2026 and Space Force officials (Aug 2026) confirm it persists."
+    },
+    {
+      "n": 2,
+      "criterion": "frequency_of_pain",
+      "score": 3,
+      "rationale": "Recurs on every commercial tasking cycle for JCO operators and CoCom cells and on every Luno onboarding at NGA; but the population that experiences it is small (Danti cites 32+ active TacSRT users - company figure, unverified)."
+    },
+    {
+      "n": 3,
+      "criterion": "budget_evidence",
+      "score": 2,
+      "rationale": "Money exists for data (JCO $76.8M via GDM Jan 2023-Sep 2025; Luno ceilings $490M, obligations at task-order level) but none is earmarked for a neutral discovery/delivery layer; TacSRT's FY26 request was $0 and its FY27 parent line ~$23.7M. Only SBIR Phase I/D2P2 dollars are reachable."
+    },
+    {
+      "n": 4,
+      "criterion": "procurement_accessibility",
+      "score": 2,
+      "rationale": "A TacSRT SBIR topic family exists (DAF26BX04-NV506, Phase I $175K; Danti got a D2P2 and TACFI) so a door exists, but the requirement owner (CJCS Title 10 requirement) and program of record are not established and three organizations (JCO, NGA, Army) split the buy."
+    },
+    {
+      "n": 5,
+      "criterion": "technical_feasibility",
+      "score": 4,
+      "rationale": "STAC catalogs, license metadata tagging, vendor API brokering and ATAK-CIV plugins are commodity engineering; the hard parts (CUI license terms, GDM/Maven interfaces) are access problems, not technical ones."
+    },
+    {
+      "n": 6,
+      "criterion": "feasibility_with_250k",
+      "score": 3,
+      "rationale": "An open-data MVP and ATAK plugin cost well under $100K; but $250K cannot fund IL4/IL5 accreditation, meaningful imagery purchases, or the year-plus of relationship-building JCO/NGA sponsorship requires."
+    },
+    {
+      "n": 7,
+      "criterion": "time_to_credible_demo",
+      "score": 3,
+      "rationale": "3-6 months to a working demo on Umbra/Sentinel open data and vendor sandboxes; a demo that is credible to JCO needs a sponsor, GDM access and a real tasking round-trip, which the team cannot schedule on its own."
+    },
+    {
+      "n": 8,
+      "criterion": "availability_of_required_data",
+      "score": 3,
+      "rationale": "Open imagery, STAC specs and commercial API sandboxes are available; the decisive data (what the government already licensed, license tiers, tasking histories) sits inside JCO/NGA and is partly CUI."
+    },
+    {
+      "n": 9,
+      "criterion": "regulatory_accessibility",
+      "score": 4,
+      "rationale": "Commercial imagery brokering software is EAR-jurisdiction commercial software; no ITAR, no clearances for the MVP. Burdens are SBIR ownership rules, CUI/ATO for hosted government products and per-contract license restrictions (not a legal judgment)."
+    },
+    {
+      "n": 10,
+      "criterion": "ability_to_start_unclassified",
+      "score": 5,
+      "rationale": "Score 5: TacSRT's entire premise is unclassified, partner-shareable products (NGA-USSF MOA, May 2025), Luno buys unclassified commercial analytics, and ATAK-CIV is open source - this gap is among the most unclassified-friendly in C4ISR; only NGA enterprise schemas and eventual Maven/TITAN ingest are CUI/classified."
+    },
+    {
+      "n": 11,
+      "criterion": "competitive_intensity",
+      "score": 2,
+      "rationale": "Crowded: government-owned GDM, Danti on the JCO floor, five vendor tasking apps (BlackSky, Planet, Vantor, Capella, Umbra), Ursa as multi-vendor broker, civil aggregators (SkyFi, SkyWatch, UP42), and Palantir Open DAGIR as the enterprise onboarding layer."
+    },
+    {
+      "n": 12,
+      "criterion": "incumbent_vulnerability",
+      "score": 2,
+      "rationale": "Incumbents are not vulnerable: the GDM contractor and Palantir can add license tags and TAK delivery under existing contracts; vendors control the licenses; Danti already holds the SBIR seat. No incumbent is failing a stated requirement."
+    },
+    {
+      "n": 13,
+      "criterion": "integration_feasibility",
+      "score": 2,
+      "rationale": "Vendor APIs are open to integrators and ATAK-CIV is open, but the interfaces that matter (GDM ordering, Maven/Open DAGIR ingest, TITAN/AIDP) are controlled by the government, Palantir and the GDM contractor and require sponsorship and IL4/IL5 hosting."
+    },
+    {
+      "n": 14,
+      "criterion": "potential_moat",
+      "score": 2,
+      "rationale": "No structural moat: license metadata is government/vendor data, STAC is public, an ATO is purchasable; only a sponsor relationship or a schema adopted by Luno vendors would be proprietary, and both are contested."
+    },
+    {
+      "n": 15,
+      "criterion": "dual_use_potential",
+      "score": 3,
+      "rationale": "Civil imagery discovery/tasking is a real market but already served by UP42/SkyWatch/SkyFi and vendor platforms; the differentiators (license tiers, TAK/Maven delivery) have no civil analogue."
+    },
+    {
+      "n": 16,
+      "criterion": "expansion_potential",
+      "score": 2,
+      "rationale": "Expansion depends on TacSRT becoming a funded PoR (not yet) and on allied pilots; the natural expansion path is to be absorbed as a feature of a vendor app or the GDM."
+    },
+    {
+      "n": 17,
+      "criterion": "repeat_purchase_potential",
+      "score": 3,
+      "rationale": "If adopted, a subscription/operator-tooling model recurs with each task order and each new vendor onboarding; Luno and TacSRT purchases are recurring by design."
+    },
+    {
+      "n": 18,
+      "criterion": "founder_team_fit",
+      "score": 2,
+      "rationale": "Software-only and unclassified suits the engineer, but neither founder has collection-management, imagery-licensing or JCO/NGA relationships; the business founder would spend the first year recruiting a former JCO/NGA officer just to describe the workflow, and SBIR ownership rules constrain the Indonesian co-founder's stake."
+    }
+  ],
+  "market_attractiveness": 2.4,
+  "founder_fit": 3.3,
+  "red_team": {
+    "mode": "single-agent light path",
+    "market": {
+      "refuted": false,
+      "strength": 5,
+      "summary": "No budget owner for a neutral layer: TacSRT requested at $0 for FY26, FY27 parent line ~$23.7M, pilot living on congressional adds; JCO's $76.8M went to data vendors via a government-owned marketplace; user population is dozens; the layer is either a government program (GDM/TacSRT PoR) or a vendor feature. Argument stands."
+    },
+    "competition": {
+      "refuted": false,
+      "strength": 4,
+      "summary": "Government owns the marketplace (GDM) and the enterprise integration layer (Maven/Open DAGIR); vendors own the licenses and ship their own tasking apps; Danti already holds the SBIR/JCO-floor seat; Ursa and civil aggregators broker multi-vendor tasking. Incumbents can add license tags and TAK delivery in one release. Argument stands."
+    },
+    "feasibility": {
+      "refuted": true,
+      "strength": 2,
+      "summary": "Feasibility objections mostly fail: the work is unclassified by design, EAR-jurisdiction commercial software, buildable on open data and ATAK-CIV for under $100K, and the non-U.S.-person co-founder can contribute to the codebase. Remaining true obstacles are access (GDM, CUI license terms, sponsor) and SBIR ownership structure, not technology or classification."
+    }
+  },
+  "verdict": "kill",
+  "verdict_rationale": "The PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> VEHICLE chain breaks at REQUIREMENT OWNER and BUDGET: HASC had to direct the CJCS to create a Title 10 requirement for TacSRT, the executive requested $0 for FY26 and ~$23.7M for the FY27 parent line, and no line funds a neutral discovery/delivery layer. The problem is real (three GAO reports, Space Force officials, NGA statements) but the government is solving it as a government program (GDM purchase categories, NGA-USSF MOA, Maven/Open DAGIR onboarding) and vendors are solving it as app features; the addressable user base is dozens of operators; the startup seat on the JCO floor is already Danti's. Market attractiveness 2.4 with the major no-path penalty applied. Kill as a company thesis; retain the ATAK-CIV commercial-product delivery plugin as a possible feature inside a stronger edge/DDIL or allied gap.",
+  "narrower_version_if_borderline": "Not borderline, but the only survivable fragment is a vendor-neutral 'commercial product to TAK/edge' delivery plugin plus a license-metadata schema, sold to one Luno/TacSRT vendor or one allied MoD as a component - a feature or a consulting engagement, not a venture.",
+  "most_important_question_answer": "With $250,000 today the founders should NOT build this as a company. If forced to test it cheaply: build in 8-10 weeks a STAC catalog over Umbra open data, Sentinel and one paid commercial account with per-product license tags and an ATAK-CIV plugin that pulls products and alerts into the map, and show it to SSC's Commercial Space Office/JCO and to one Luno B vendor (Ursa or BlackSky) as a delivery accelerator. The demo would prove that a non-expert can find already-licensed products, avoid re-buying and receive new collection in a unit system in one workflow - which the GAO says officials cannot do today. The customer cares because GAO-26-107959 recommendations and HASC pressure force them to show better commercial utilization. But an incumbent can trivially crush it: the GDM contractor, Palantir (Open DAGIR/MSS) and any vendor can add license tags and TAK delivery under contracts they already hold, and the government keeps the only proprietary asset (what it already licensed) inside JCO/NGA. The milestone that would justify $2-5M - a funded TacSRT program of record with an operator-tooling task order or a multi-vendor license-metadata standard mandated by JCO/NGA - is outside the founders' control and, as of September 2026, does not exist; therefore it fails on buyer absence, not on technology.",
+  "bear_case_summary": "A real but modest friction problem inside a tiny, government-owned marketplace with a zeroed executive budget request, dozens of users, license holders who are the vendors themselves, a designated enterprise integration layer (Maven/Open DAGIR), and a startup (Danti) already in the one SBIR-funded seat. The best case for a founder is a small SBIR and absorption as a feature.",
+  "bull_case_summary": "Three GAO reports, a Space Force MOA with NGA, HASC program-of-record language, GSA purchase categories and peaking Luno task orders all point the same direction; if Congress funds TacSRT as a PoR at scale and JCO mandates a vendor-neutral license/delivery standard, an early standards-and-plugin player could become the operator tooling vendor and extend to allies who need unclassified, shareable commercial products. Public evidence insufficient that any of these conditions is met as of 2026-09.",
+  "confidence": "MEDIUM"
+}

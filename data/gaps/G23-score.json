@@ -1,0 +1,141 @@
+{
+ "id": "G23",
+ "title": "Message-format and datalink translation gateway (commercial mesh/TAK to Link 16/VMF for small units and drones; LLM/ontology translation between USMTF, ADatP-3, MIP, VMF, NVG and CoT)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Voice/chat relay of drone and dismount tracks into fires and air C2 is real and produces latency and transcription error (Bold Quest 2025 bridging, C5ISR M777 bridging May 2026, GAO-21-99 DACAS gaps), but certified handheld and gateway bridges already exist, so the pain is friction, not an unserved life-safety hole."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "Recurs at every coalition exercise (CWIX, Bold Quest, Project Convergence) and daily in CENTCOM task forces using low-cost UAS, but the recurring form is 'stand up the bridge again', which vendors and government cells already absorb."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score 1 because no discrete line, RFI, sources sought or SBIR topic for a standalone message-translation service was found; adjacent money (NGC2 ~$3.3B through FY26, ABMS ~$1B/yr) buys hardware gateways and an incumbent-held data-layer baseline."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 1,
+   "rationale": "Score 1 because the only path is a subcontract under a terminal/gateway or data-layer prime that already has the capability; MIL-STD-6016 access requires a government POC on a sponsored effort and JITC conformance is program-sponsored."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "Deterministic format translation is decades-old, well-understood engineering (ADSI, Curtiss-Wright, SitaWare gateways prove it); the hard parts are access and certification, not technology; not 5 because the Link 16/crypto side cannot be engineered without controlled data."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 2,
+   "rationale": "$250k covers the unclassified CoT/USMTF/MIP/NVG adapter and an ATAK-CIV plugin, but cannot buy a cleared TDL engineer, terminal access, JITC lab time or a prime sponsorship for the half of the gap that matters."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 2,
+   "rationale": "A lab demo of the open-format half takes 3-4 months; a credible military demo (real terminal, real J-series traffic, conformance evidence) is gated by prime sponsorship and spec access with no clear timeline."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 2,
+   "rationale": "USMTF, MIP/JC3IEDM, NVG and CoT are public; MIL-STD-6016 is Distribution C and ITAR-restricted, MIL-STD-6017 is controlled, ADatP-3 is NATO-controlled, and live Link 16 traffic is unobtainable without a sponsor."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 1,
+   "rationale": "Score 1 because Link 16 technical data is AECA/ITAR-restricted, allied release requires foreign disclosure authorization, gateways need crypto handling and JITC certification, and a non-U.S.-person co-founder would likely have to be walled off from the core product (counsel required)."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 3,
+   "rationale": "The TAK/CoT/MIP/NVG side is fully unclassified and open source; the Link 16 network-design and crypto side is not, and the mission-relevant demo needs it."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 because the category is saturated by certified incumbents: ADSI (21 instances unified), BATS-D, Curtiss-Wright, V2X GMR ($48.5M award 2024), Systematic gateways, Raft/Anduril in the NGC2 baseline, Fuse/Northrop/Collins airborne gateways, BSI VMF gateway, plus a graveyard of SBIR translators."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 1,
+   "rationale": "Score 1 because incumbents own the terminals, the crypto, the certifications and (since June 2026) the Army's transformation baseline; nothing about their position is decaying, and safety-critical fires messaging favors their deterministic, certified products."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "Every interface that matters (MIDS terminals, JREAP gateways, TAK-MIL adapters, NGC2 data layer, SitaWare gateways) is controlled by an incumbent or program office; only ATAK-CIV plugins are open."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score 1 because mappings are commodity, LLM-drafted mappings are trivially replicable, and the only durable assets (conformance certification, program-of-record position) accrue to the terminal/gateway owner."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 1,
+   "rationale": "Score 1 because Link 16/VMF/USMTF/ADatP-3 have no civilian users and the generic schema-translation engine competes with mature commercial iPaaS/ETL tooling."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Could extend to allied FMN adapters and drone-OEM conformance tooling, but S08 evidence says no buyer exists for a translator alone and Systematic/NATO INSPECT occupy the allied slot."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "Per-node gateway licensing exists as a model (ADSI, GMR) but purchases are lumpy program buys through primes, not recurring startup revenue."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1 because the team has no cleared TDL engineer, no fires/JTAC operator, a non-U.S.-person co-founder facing deemed-export exclusion from the core product, and $250k cannot bridge those gaps; only the German founder's allied channel is a partial fit for the weaker allied variant."
+  }
+ ],
+ "market_attractiveness": 1.8,
+ "founder_fit": 1.8,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": false,
+   "strength": 5,
+   "summary": "No budget owner or vehicle exists for a standalone translator: the money is in hardware gateways (V2X GMR, ABMS pods, BATS-D) and in the incumbent-held NGC2 data-layer baseline; the pain shows up mainly at exercises where vendors and government cells bridge it themselves; a translator business drifts into integration consultancy."
+  },
+  "competition": {
+   "refuted": false,
+   "strength": 5,
+   "summary": "Incumbents do not need six months - they already ship it: ADSI, BATS-D, Curtiss-Wright, Systematic gateways, Raft/Anduril transformation in NGC2; APIs (terminals, TAK-MIL adapters, data layer) are incumbent-controlled and switching cost is certification, which a newcomer must pay and cannot transfer."
+  },
+  "feasibility": {
+   "refuted": false,
+   "strength": 5,
+   "summary": "MIL-STD-6016 is Distribution C/ITAR and allied release needs foreign disclosure authorization; the non-U.S.-person co-founder would likely be excluded from the core product; a credible demo needs a certified terminal, crypto and JITC conformance that $250k and a prime-less team cannot obtain; the unclassified half is demonstrable but is not the gap."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill: no PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING OFFICE->BUDGET->VEHICLE path exists for a standalone message/datalink translator (major penalty applied); the chain breaks at requirement owner because translation is bought as a feature of terminals, gateways, C2 suites and the NGC2 data layer, all incumbent-held. The Link 16/VMF half is legally and practically closed to a two-student team with a non-U.S.-person co-founder and $250k (ITAR/Distribution C technical data, crypto, JITC certification), and the LLM/ontology half addresses schema mapping, which was never the bottleneck (releasability, accreditation and interface access are) and would introduce non-determinism into safety-critical fires messages. All three skeptic lenses stand at strength 5. Market attractiveness 1.8 and founder fit 1.8 confirm the registry's LOW rating; the gap is eliminated explicitly.",
+ "narrower_version_if_borderline": "Not borderline. For the record, the only survivable sliver is an unclassified, deterministic CoT/TAK-to-open-coalition-format adapter and conformance-test kit (MIP/NVG/USMTF/ASCA/STANAG 4586) for drone OEMs and allied units, delivered as a feature inside an edge-bridge product (S08-G2 lineage) or as NATO INSPECT-style conformance tooling - never as a Link 16 gateway and never as an LLM translation company.",
+ "most_important_question_answer": "Two exceptionally capable founders with $250,000 should not build this. If forced, the first thing to build would be an ATAK-CIV plugin plus TAK Server bridge that deterministically maps CoT to public coalition formats (USMTF, MIP/JC3IEDM, NVG, ASCA) with schema validation and an LLM-assisted mapping editor for human review, shown to an NGC2 operational implementation lead, a JDAT/Bold Quest assessor and a European drone OEM needing STANAG/FMN conformance; the demo would prove zero silent field loss and correct releasability marking across a live mesh. The customer cares only marginally, because SitaWare, Raft/Anduril's NGC2 transformation layer, ADSI and BATS-D already cover the seam and any of them can add an LLM mapping editor in a quarter with spec access the founders cannot legally obtain (MIL-STD-6016 Distribution C/ITAR, with a non-U.S.-person co-founder). There is no milestone that justifies $2-5M because there is no requirement owner, program office or budget line for a standalone translator, no interface the founders control, and no proprietary data; the realistic end state is a small integration consultancy or an acqui-hire into a gateway vendor. It fails on the buyer, not the technology.",
+ "bear_case_summary": "A saturated, certification-gated, ITAR-bound gateway category where the government and its primes already own every interface and the Army just assigned data transformation to Raft/Anduril; translation is a feature, LLMs solve a non-bottleneck, and the team's composition (non-U.S.-person co-founder, no cleared TDL engineer, $250k) cannot reach the half of the problem that has any money.",
+ "bull_case_summary": "Replicator and NGC2 are multiplying non-Link 16 endpoints, coalition exercises still hand-assemble bridges every year, GAO says services build C2 in isolation, allied formats are public and CWIX/Bold Quest offer cheap assessments, and LLMs make mapping drafts nearly free - so a deterministic open-format adapter kit could win small allied/OEM integration work and become an acquisition target for a gateway vendor. Even in the bull case it is a feature or a services shop, not a venture-scale company.",
+ "confidence": "HIGH"
+}

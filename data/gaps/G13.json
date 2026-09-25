@@ -1,0 +1,688 @@
+{
+ "id": "G13",
+ "title": "Autonomous DDIL edge PED node with sensor-to-map exploitation (georegistered drone video, minute-scale 3D and change overlays without reach-back) and resilient reconciliation to AIDP/Maven",
+ "problem": "Brigade-and-below intelligence nodes and small-unit drone operators cannot exploit organic sensor data locally for 72+ hours while disconnected (detect, georegister, build 3D/change overlays on the TAK map) and then reconcile those products conflict-free with AIDP/Maven Smart System when links return, so today they either wait for reach-back or hand-plot and re-enter data.",
+ "categories": [
+  "A",
+  "B",
+  "C",
+  "D",
+  "I"
+ ],
+ "segment_ids": [
+  "S04",
+  "S07"
+ ],
+ "chain_steps": [
+  "PROCESS",
+  "FUSE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "platoon/company (drone operators, CoIST)",
+  "battalion/brigade S2 and geospatial cell",
+  "division/MDTF intelligence nodes (TITAN Basic, AIDP edge kits)",
+  "SOF teams"
+ ],
+ "user": {
+  "exact_role": "Brigade/battalion S2 intelligence analyst (35F) and brigade geospatial engineer (12Y), plus company-level sUAS operators and company intelligence support teams who own the drone video; SOF team intelligence NCOs as a second user class",
+  "echelon": "Battalion and brigade (primary); company (sensor-to-map half); division/MDTF (AIDP/TITAN Basic edge node half)",
+  "organization_examples": [
+   "XVIII Airborne Corps units running Scarlet Dragon (82nd, 101st Airborne)",
+   "Transformation-in-Contact brigades at NTC/JRTC rotations (e.g., NTC 26-02 per MIPB)",
+   "Multi-Domain Task Forces (3rd MDTF, Talisman Sabre 25)",
+   "USSOCOM PEO SOF Warrior elements (Farsight users)",
+   "Theater Army ACE nodes using AIDP as the common intelligence picture"
+  ]
+ },
+ "current_workflow": [
+  "Organic sensors (sUAS such as Skydio X10D, ground sensors, radios) record locally; CoT position/telemetry streams to ATAK on the local multicast network.",
+  "When a link exists, raw FMV/imagery is pushed up to brigade/division AIDP edge kit, TITAN, or enterprise AIDP cloud / Maven Smart System; enterprise models and analysts detect, annotate and build products.",
+  "Products (overlays, 3D, change reports) come back down hours to days later over the same congested link; at company level 3D/2D products are often built on the drone or ground station (Skydio Onboard Modeling, Reveal Farsight) and shared by screenshot, voice or file.",
+  "When disconnected, analysts screen video manually, hand-plot on ATAK or PowerPoint, and 'swivel chair' data between NIPR/SIPR and between intel, C2 and fires systems (MIPB 'Swivel Chair War', NTC 26-02).",
+  "When links return, locally produced data is re-uploaded or re-entered by hand; there is no documented conflict-free reconciliation of the local store with AIDP/MSS."
+ ],
+ "current_solution": "AIDP (Palantir) enterprise cloud with limited edge kits; TITAN Advanced/Basic ground stations (Palantir prime, Anduril hardware) at division/corps; Maven Smart System at theater/joint; TurbineOne Frontline Perception System for edge object recognition (Army IDIQ Sept 2025, JIOP April 2026); Reveal Farsight for offline drone 3D (STRATFI, SOCOM use); Edgybees Argus for FMV georegistration (USAF multi-award); Skydio X10D onboard 3D modeling and offline ATAK streaming; Vantor OWT 3D Tiles in ATAK and Luno B change detection at enterprise; manual screening and hand-plotting as the universal fallback.",
+ "failure": "Two seams fail: (1) between the local edge store and the enterprise (AIDP/MSS) there is no fielded, vendor-neutral store-and-forward reconciliation for 72-hour disconnection - the AIDP Call for Solutions (July 2026) writes this as a new requirement rather than citing an existing capability; (2) between heterogeneous drone feeds and the TAK map there is no standard MISB-KLV-driven pipeline that yields georegistered overlays, incremental 3D and change alerts against a baseline in minutes offline - current products are tied to a specific drone (Skydio), a specific vendor workflow (Reveal), or need GPU/cloud (Vantor/Luno).",
+ "evidence": [
+  {
+   "form": "RFI/sources sought",
+   "claim": "Army Contracting Command-APG issued an AIDP-Next Call for Solutions under the Army Open Solicitation CSO requiring a single-foundation software continuum from enterprise cloud to tactical edge devices, including 72-hour autonomous operation on tactical edge nodes in DDIL environments and bi-directional data exchange with Maven Smart System; responses due 12 Aug 2026, four-step selection, initial prototype phase 9-12 months.",
+   "source_title": "Army issues AIDP solutions call (Intelligence Community News); Call for Solutions - Army Intelligence Data Platform (SweetSpot mirror of SAM notice)",
+   "source_url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/",
+   "pub_date": "2026-07-24",
+   "event_date": "2026-07-24",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "AIDP RFI #4 (PM IS&A) frames the next AIDP as intelligence capability from enterprise cloud to tactical edge including DDIL environments; an AIDP-Next Industry Day slide deck was released for public use on cpeisw.army.mil (March 2026) and a SAM notice titled 'AIDP Cloud to Edge (CtoE)' exists (content not readable this session).",
+   "source_title": "PM IS&A AIDP RFI #4 (BidNet mirror); AIDP-NEXT Industry Day slides (CPE ISW); AIDP Cloud to Edge (SAM.gov)",
+   "source_url": "https://cpeisw.army.mil/wp-content/uploads/2026/03/AIDP-Next_-Industry-Day-Slides_for-Public-Release-1.pdf",
+   "pub_date": "2026-03",
+   "event_date": "2026-07-15",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "During NTC Rotation 26-02 brigade analysts resorted to 'swivel chair' workarounds between NIPR and SIPR networks and between disconnected systems; the authors (MAJ Killian, SSG Griggs) argue modernization without unified protocols is creating intelligence gaps at brigade level.",
+   "source_title": "The Swivel Chair War: How Disconnected Systems are Failing the Modern Soldier (Military Intelligence Professional Bulletin, Jan-Jun 2026)",
+   "source_url": "https://www.lineofdeparture.army.mil/Journals/Military-Intelligence/Military-Intelligence-Archive/2026-January-June/The-Swivel-Chair-War/",
+   "pub_date": "2026 (Jan-Jun issue)",
+   "event_date": "2025-2026 (NTC 26-02)",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "CDAO's Open DAGIR six-month update lists 'edge data integration services' as a distinct line of effort, i.e., the department treats edge integration with Maven/enterprise data as unfinished work.",
+   "source_title": "CDAO highlights progress in scaling data and AI capabilities at six-month mark (ai.mil)",
+   "source_url": "https://www.ai.mil/Latest/News-Press/PR-View/Article/4026085/cdao-highlights-progress-in-scaling-data-and-ai-capabilities-at-six-month-mark/",
+   "pub_date": "2024-11",
+   "event_date": "2024-11",
+   "tier": 1,
+   "label": "FACT (RECALL from earlier stage - not re-verified this session)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "Army FY2027 RDT&E Budget Activity 5D (PM IS&A) requests $34.830M for development, integration and delivery of AIDP capabilities in the cloud (AIDP described as enabling intelligence 'from strategic and operational echelons to the tactical edge' and as the common intelligence picture for all Theater Armies), plus $14.764M for Army Geospatial modernization (Army Geo Data Fabric and NextGen GEOINT Workstation). These are request figures, not obligations, and the PDF itself was not opened this session.",
+   "source_title": "Army FY2027 RDT&E Justification Book, Budget Activity 5D (asafm.army.mil)",
+   "source_url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205D.pdf",
+   "pub_date": "2026-04",
+   "event_date": "FY2027",
+   "tier": 1,
+   "label": "FACT (figures from search-engine summary of the PDF)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Army moved TITAN to production on 1 Sept 2026 with $192M initial delivery orders (Palantir $127M, Anduril $65M) for eight systems including four TITAN Basic variants chosen for mobility and faster deployment - the Army is paying for lighter forward intelligence nodes.",
+   "source_title": "Army announces move to production for TITAN (CPE ISW); DefenseScoop coverage",
+   "source_url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/",
+   "pub_date": "2026-09-01",
+   "event_date": "2026-09-01",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Army awarded TurbineOne a five-year IDIQ with a $98.9M ceiling (Sept 2025) to deliver its edge-first Frontline Perception System (automated object recognition, operator-retrainable models, works in degraded comms) as part of Army Intelligence Enterprise modernization after Scarlet Dragon soldier touchpoints, followed by a further Army contract via the Gavin Joint Innovation Outpost at Fort Bragg (April 2026). Ceiling is not revenue; but this shows the edge-inference half of G13 already has a funded vendor.",
+   "source_title": "Army Awards TurbineOne Contract for AI-Powered Edge Target Recognition (BusinessWire); TurbineOne Awarded Army Contract Through Joint Innovation Outpost (BusinessWire)",
+   "source_url": "https://www.businesswire.com/news/home/20250904941690/en/Army-Awards-TurbineOne-Contract-for-AI-Powered-Edge-Target-Recognition",
+   "pub_date": "2025-09-04",
+   "event_date": "2025-09 and 2026-04-16",
+   "tier": 3,
+   "label": "FACT (company press release; contract existence corroborated by Soldier Systems Daily)",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Reveal Technology received a $33.6M STRATFI selection (AFVentures, April 2024) to scale Farsight near-real-time edge 3D modeling with USSOCOM PEO SOF Warrior, AFSOC and AFRL; the company states Farsight has been deployed with USSOCOM since 2021 and is used by Army, Marines, UK and Ukraine; Edgybees Argus (FMV georegistration) holds a spot on a USAF multi-award AR contract and formed a U.S. entity; Skydio X10D generates textured 3D models on the drone in minutes and streams CoT to ATAK offline. Each covers one piece (3D, georegistration, single-OEM mapping); none is documented as a drone-agnostic, TAK-standard pipeline with change detection and enterprise reconciliation.",
+   "source_title": "Reveal Technology $33.6M STRATFI (PR Newswire); Edgybees USAF Argus award (Janes); Skydio Onboard Modeling and ATAK integration (Skydio blog)",
+   "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html",
+   "pub_date": "2024-04",
+   "event_date": "2021-2026",
+   "tier": 3,
+   "label": "FACT (awards) / INFERENCE (no integrated pipeline)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "DIU 'Project G.I.' (PROJ00598) sought ready-now uncrewed systems (UAS, EW, UGV) to improve how small, dispersed targeting-strike cells sense, decide and strike under DDIL conditions independent of consistent communications, with a $20M prize pool and submissions through 31 Dec 2025. This is a second buyer voicing the DDIL small-team need, but it is a platform/UxS challenge, not a software PED solicitation - weak direct fit.",
+   "source_title": "DIU Submission Opportunity - Project G.I.; DIU $20M Project G.I. announcement",
+   "source_url": "https://www.diu.mil/latest/usd20m-diu-project-g-i-challenge-targets-next-generation-uas-solutions",
+   "pub_date": "2025-06",
+   "event_date": "2025-06 to 2025-12-31",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "U.S. officers told the WSJ that human analysts can examine 'at most 4%' of collected intelligence during the March 2026 Iran operations, and CSIS (Dec 2024) documents that Ukraine's cloud-hosted Delta system depends on Starlink connectivity while Kropyva runs locally and the two are 'not fully integrated' - operational evidence that connectivity-dependent PED breaks and local tools proliferate.",
+   "source_title": "How AI is turbocharging the war in Iran (WSJ); CJADC2 in Ukraine (CSIS)",
+   "source_url": "https://www.csis.org/analysis/cjadc2-ukraine",
+   "pub_date": "2024-12-11 / 2026-03-07",
+   "event_date": "2024-2026",
+   "tier": 2,
+   "label": "FACT (RECALL from earlier stage - not re-verified this session)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "NGA awarded Vantor a $5.3M Luno B task order for automated global change detection (Feb 2026) and the Army awarded Vantor up to $217M (ceiling) for One World Terrain 3D data (Feb 2026), showing paid demand for change detection and 3D terrain at the enterprise level - which is where incumbents will try to serve the tactical need from, via pre-computed products rather than edge processing.",
+   "source_title": "NGA awards Vantor $5 million for global change detection under Luno B (Via Satellite); Vantor OWT award (BusinessWire)",
+   "source_url": "https://www.satellitetoday.com/government-military/2026/02/05/nga-awards-vantor-5-million-for-global-change-detection-under-luno-b-contract/",
+   "pub_date": "2026-02-05",
+   "event_date": "2026-02",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "No public test report, DOT&E entry, GAO finding or exercise after-action documents a named product failing the 72-hour DDIL edge or reconciliation requirement; the only signal is that the AIDP-Next CfS writes the requirement fresh and the MIPB article documents manual workarounds. Public evidence insufficient.",
+   "source_title": "n/a",
+   "source_url": "",
+   "pub_date": "",
+   "event_date": "",
+   "tier": 4,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  }
+ ],
+ "why_existing_startups_havent_solved": "The problem is being solved piecewise by better-funded, earlier-arriving firms: TurbineOne (edge inference, $98.9M-ceiling Army IDIQ), Reveal (edge 3D, $33.6M STRATFI, SOCOM use since 2021), Edgybees (georegistration), Skydio (on-drone 3D, offline ATAK) and Palantir (AIDP edge kits, TITAN, MSS). What remains unsolved is the glue - drone-agnostic MISB/KLV-to-TAK pipeline, edge change detection against OWT/commercial baselines, and conflict-free reconciliation with AIDP/MSS - and that glue is unattractive to each incumbent because (a) the reconciliation target (AIDP/MSS data model and APIs) is controlled by the AIDP-Next winner and Open DAGIR onboarding, (b) integration work across dozens of formats (MISB, STANAG 4609/4676, CoT, NITF) earns little venture credit, (c) validating against military FMV requires being inside a program, and (d) buyers are split across PM IS&A (AIDP/TITAN), PEO Soldier/PM UAS (drones), PEO STRI (OWT), CDAO (MSS) and SOCOM, so no single office owns 'company drone to brigade intel to enterprise' end-to-end.",
+ "why_not_solved_reasons": [
+  "proprietary incumbent architecture",
+  "integration complexity",
+  "buyer fragmentation",
+  "data inaccessible",
+  "classification",
+  "technology only recently possible",
+  "procurement fragmentation"
+ ],
+ "technical_wedge": "Not the whole node (already occupied). The defensible slice is a vendor-neutral 'edge intel sync and sensor-to-map' middleware: (1) a local conflict-free store (CRDT/log-based) for detections, tracks, chips, overlays and 3D tiles with prioritized, bandwidth-aware store-and-forward and provable reconciliation against a mock AIDP/MSS/STAC endpoint after 72h; (2) a drone-agnostic ingest that takes any MISB 0601 KLV feed (Skydio, Teal, Parrot, Group 2/3 UAS) and produces georegistered footprints, incremental orthos/3D Tiles and change alerts versus an OWT/Cesium baseline on Jetson-class hardware, published to ATAK/TAK Server via standard CoT and data packages. Ship as a TAK plugin plus a headless edge service, with an adapter layer that the AIDP-Next prime or TITAN ecosystem partners can onboard.",
+ "mvp": {
+  "what": "Laptop/Jetson Orin edge box running: KLV-driven georegistration of commercial drone video, incremental 3D Tiles and change-vs-baseline overlays into ATAK-CIV within minutes offline; a local CRDT store of detections/overlays; simulated 72-hour disconnection with bandwidth capped at ~5% then reconciliation into a mock enterprise (PostGIS/STAC) with zero duplicate or lost records.",
+  "demonstrable_in_3_6_months": "Yes for the unclassified pipeline on commercial drones and open terrain: georegistration accuracy benchmarked against RTK ground truth, time-to-overlay, and a scripted DDIL reconciliation test; not yet integration with AIDP/MSS (requires program access).",
+  "what_it_must_prove": "(a) Georegistration error and time-to-overlay on unmodified commercial drones without cloud; (b) change alerts against an OWT-like baseline with acceptable false-alarm rate; (c) 72-hour disconnected operation with deterministic reconciliation and provenance; (d) that an S2 or drone operator adopts it in a soldier touchpoint without a field service engineer.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "MISB-tagged drone video with accurate metadata across several airframes; baseline terrain/imagery (3D Tiles, orthos); labeled detections for the edge models (or reuse third-party models); for a credible demo, military FMV samples and the AIDP/MSS data model and API specifications.",
+  "legally_realistically_obtainable": "Commercial drone video and open terrain are freely obtainable; MISB sample streams exist publicly; military FMV, AIDP/MSS schemas and TITAN interfaces are obtainable only inside an SBIR Phase II/OTA, CRADA, or as an onboarded ecosystem partner, and may carry export-control markings that constrain a non-U.S.-person founder's access (needs counsel).",
+  "sources": [
+   "Own flights with Skydio/Parrot/PX4 drones producing MISB 0601 KLV",
+   "Cesium ion / OpenStreetMap / USGS 3DEP / Copernicus open terrain and imagery",
+   "Public MISB sample data and STANAG 4609 test streams",
+   "Open detection datasets (VisDrone, xView, DOTA) for bootstrapping models",
+   "TAK Product Center ATAK-CIV and TAK Server public releases for integration testing",
+   "Government data only via SBIR/xTech/CRADA/OTA once awarded"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "ATAK/TAKX and TAK Server",
+   "AIDP (current and Next) edge kits and cloud",
+   "Maven Smart System (Open DAGIR onboarding)",
+   "TITAN Basic/Advanced (Palantir prime, HYDRA government-owned API)",
+   "Skydio/other sUAS ground stations",
+   "One World Terrain / Cesium 3D Tiles baselines",
+   "Frontline Perception System or other edge detectors as upstream sources"
+  ],
+  "interfaces_protocols": [
+   "Cursor-on-Target (CoT) and TAK data packages",
+   "MISB ST 0601 KLV / STANAG 4609 FMV",
+   "STANAG 4676 tracks",
+   "OGC 3D Tiles, GeoPackage, STAC",
+   "NITF/GeoTIFF",
+   "AIDP/MSS REST or data-model APIs (vendor-controlled)",
+   "HYDRA API (CPE ISW; specification not public)"
+  ],
+  "who_controls_the_interface": "TAK Product Center controls CoT/TAK (government-owned, open enough for plugins); Palantir controls AIDP/MSS data models and app onboarding today, with CDAO's Open DAGIR and CPE ISW's HYDRA as the government-owned counterweights whose specifications are not public; the AIDP-Next winner (award pending after Aug 2026 responses) will control the edge-to-enterprise sync seam; drone OEMs control ground-station interfaces."
+ },
+ "customer": {
+  "user": "Brigade/battalion S2 analysts, brigade geospatial cells, company sUAS operators and CoISTs; SOF intelligence NCOs",
+  "champion": "XVIII Airborne Corps / Gavin Joint Innovation Outpost and Scarlet Dragon leads (demonstrated route for TurbineOne); USAICoE / MIPB authors documenting the swivel-chair pain; Army Applications Laboratory",
+  "contract_signer": "Army Contracting Command - Aberdeen Proving Ground (for PM IS&A / AIDP-Next CSO) or Army SBIR|STTR contracting for SBIR/xTech; AFWERX/AFRL for STRATFI-type awards; SOCOM contracting for SOF pilots",
+  "requirement_owner": "Army G-2 and USAICoE (intelligence requirements); T2COM/Futures and Concepts for NGC2-related edge requirements; PEO Soldier for sUAS/SBMC-side needs",
+  "program_office": "PM Intelligence Systems & Analytics (PM IS&A) under CPE ISW for AIDP/TITAN; PEO STRI for OWT baselines; TAK Product Center for TAK integration; CDAO for MSS/Open DAGIR",
+  "contracting_office": "ACC-APG (AIDP-Next Call for Solutions via Army Open Solicitation CSO); Army SBIR|STTR program office; DIU (CSO) for joint pilots"
+ },
+ "budget": {
+  "program_or_line": "Army RDT&E Budget Activity 5D, PM IS&A: AIDP development ($34.830M FY27 request) and Army Geospatial modernization / AGDF-NGWS ($14.764M FY27 request); TITAN production delivery orders ($192M initial, Sept 2026); Maven Smart System license ceiling (~$1.3B through 2029, ceiling not obligation); CJADC2 FY27 request >$2B for MSS/JFN expansion",
+  "evidence": "FY27 request figures for AIDP and geospatial lines come from a search summary of the ASA(FM&C) BA 5D justification book (PDF not opened); TITAN production orders reported by DefenseScoop and CPE ISW; MSS ceiling reported by DefenseScoop. No dedicated line item for an 'edge PED node' exists; funding would flow through AIDP-Next prototype/production, TITAN ecosystem subcontracts, SBIR/STRATFI or unit O&M.",
+  "source_url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205D.pdf",
+  "confidence": "MEDIUM"
+ },
+ "entry_vehicle": {
+  "primary": "Army xTech competition -> SBIR Direct-to-Phase-II (or AFWERX open topic) for the sensor-to-map/TAK plugin, run in parallel with a soldier touchpoint at a JIOP/Scarlet Dragon-type venue; then position as an onboarded component of the AIDP-Next prime or a TITAN ecosystem partner for the reconciliation adapter",
+  "sequence": [
+   "Build unclassified MVP on commercial drones and ATAK-CIV (months 0-6)",
+   "Enter xTechSearch/xTechOverwatch or AFWERX open topic; pursue a TAK Product Center plugin review (months 3-9)",
+   "SBIR D2P2 or DIU CSO pilot with an XVIII Airborne Corps or SOF unit; get MISB military FMV and HYDRA/AIDP interface access under the award (months 9-24)",
+   "Subcontract/onboard to the AIDP-Next prime, TITAN ecosystem, or Open DAGIR for the sync adapter; pursue IL5/SIPR hosting through a Game Warden-type accredited platform (months 18-36)",
+   "STRATFI/TACFI or production sub-award; only then consider allied variants"
+  ],
+  "eligibility_notes": "SBIR/STTR requires a U.S. small business more than 50% owned and controlled by U.S. citizens or permanent residents (armysbir.army.mil eligibility page); with one founder not assumed to be a U.S. person, the cap table must be structured so U.S.-person ownership/control exceeds 50% at award time (needs SBIR counsel). DIU CSOs and OTAs do not carry the SBIR ownership test but may apply FOCI-style review; any classified follow-on (SIPR data, TITAN integration) requires a facility clearance, where foreign ownership/control/influence mitigation and personnel clearances are assessed by DCSA - the non-U.S.-person founder would likely be excluded from classified work and from certain export-controlled technical data absent licenses. These are constraints to scope with counsel, not legal conclusions."
+ },
+ "competition": [
+  {
+   "company": "Palantir Technologies",
+   "how_close": "Very close - AIDP incumbent with edge kits, TITAN prime, MSS owner; the AIDP-Next CfS requirement (72h DDIL edge, MSS exchange) will be met by whoever wins, most likely Palantir or a team including it",
+   "evidence": "AIDP CfS July 2026; TITAN production $127M Sept 2026; MSS >100K users Sept 2026 (DefenseScoop)"
+  },
+  {
+   "company": "Anduril Industries",
+   "how_close": "Close - Lattice edge nodes, TITAN hardware ($65M), Klas Voyager tactical compute, NGC2 team lead at 4ID; can bundle an edge PED node into Lattice/NGC2",
+   "evidence": "TITAN production award Sept 2026; NGC2 prototype OTA (buyer file)"
+  },
+  {
+   "company": "TurbineOne",
+   "how_close": "Very close on the edge-inference half - Frontline Perception System is an edge-first, operator-retrainable object recognition platform for degraded comms, under a $98.9M-ceiling Army IDIQ (Sept 2025) and a JIOP contract (Apr 2026)",
+   "evidence": "BusinessWire 2025-09-04 and 2026-04-16; Soldier Systems Daily 2025-09-05"
+  },
+  {
+   "company": "Reveal Technology",
+   "how_close": "Very close on the edge 3D half - Farsight offline drone 3D at the edge, $33.6M STRATFI (Apr 2024), company claims SOCOM deployment since 2021 and Army/USMC/UK/Ukraine use; $30M Series B (2025)",
+   "evidence": "PR Newswire 2024-04; revealtech.ai/stratfi-update; Tectonic Defense Series B note"
+  },
+  {
+   "company": "Edgybees",
+   "how_close": "Close on georegistration - Argus corrects FMV metadata error and overlays map data; USAF multi-award AR contract; new U.S. entity",
+   "evidence": "Janes; ExecutiveBiz; ~$15M raised (company index)"
+  },
+  {
+   "company": "Skydio",
+   "how_close": "Close on company-level sensor-to-map - X10D Onboard Modeling produces textured 3D in minutes on the drone; streams CoT to ATAK offline; Army replacing RQ-28A with X10D",
+   "evidence": "Skydio blog posts; Wikipedia X10 page (Army adoption 2025)"
+  },
+  {
+   "company": "Vantor (ex-Maxar Intelligence)",
+   "how_close": "Adjacent - OWT 3D Tiles baseline in ATAK (up to $217M), Luno B automated change detection ($5.3M TO) - enterprise, not edge",
+   "evidence": "Via Satellite 2026-02-05; BusinessWire 2026-02-25"
+  },
+  {
+   "company": "Picogrid / Sigma Defense / Immersive Wisdom",
+   "how_close": "Adjacent - DDIL sensor integration (Picogrid ECN), tactical video transport over DDIL (Sigma/Aries), low-bandwidth collaboration (Immersive Wisdom USAF sole source); none does exploitation-to-map",
+   "evidence": "Company index B02/B03/B12"
+  },
+  {
+   "company": "Latent AI / Overwatch Imaging / Blackshark.ai / Synthetaic",
+   "how_close": "Partial - edge model optimization, on-platform imaging processing, synthetic 3D and broad-area search respectively; no evidence found this session of 2025-2026 Army edge-PED contracts",
+   "evidence": "Public evidence insufficient this session (search returned no relevant awards)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes, and the AIDP-Next CfS effectively obliges the winner to. Palantir already ships AIDP edge kits and TITAN Basic; Anduril has Lattice Mesh and Klas compute; both can bundle an edge PED node and treat sync as internal plumbing. L3Harris (TITAN sub, DCGS lineage) can do the same via the HYDRA API. The sensor-to-map half is being absorbed by drone OEMs (Skydio) and STRATFI-funded Reveal.",
+  "why_startup_still_wins_or_reject": "Largely reject as a standalone company thesis. A startup wins only in the narrow, unglamorous seam: a vendor-neutral, standards-based (CoT/KLV/3D Tiles/STAC) reconciliation and sensor-to-map layer that works with any drone and any enterprise, which incumbents have little incentive to make vendor-neutral. That is a subcontract/onboarded-component business (TAK plugin, AIDP-Next team member, TITAN ecosystem partner), not a prime; it can be a good acqui-hire or feature business but not obviously a venture-scale one."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "150,000-300,000 (2 founders + 1 CV/geospatial engineer, 2 drones, Jetson kit, 6 months)",
+  "credible_military_demo_usd": "1,500,000-3,000,000 (SBIR D2P2 or DIU pilot: cleared or clearable field engineer, MISB military FMV integration, soldier touchpoints, TAK plugin certification, 12-18 months)",
+  "first_production_deployment_usd": "8,000,000-20,000,000 (IL5/SIPR accreditation via an accredited hosting partner, facility clearance, forward-deployed engineers, AIDP/TITAN adapter maintenance, 24-36 months)",
+  "assumptions": "Assumes commercial-hardware MVP, non-dilutive SBIR/STRATFI covering most of the demo phase, and entry as a component rather than prime; excludes the cost of losing the non-U.S.-person founder's access to classified integration work. Figures are INFERENCE from comparable startups' rounds (Reveal $30M Series B, TurbineOne $36M round, EdgeRunner $17.5M) and typical SBIR sizes; not verified."
+ },
+ "expertise_required": [
+  {
+   "role": "Photogrammetry / SLAM / neural 3D reconstruction engineer (KLV georegistration, Gaussian splatting or fast MVS on Jetson)",
+   "why": "Minute-scale 3D and georegistration accuracy on edge hardware is the core technical claim",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Distributed-systems engineer with CRDT/sync and DDIL networking experience",
+   "why": "Conflict-free 72-hour reconciliation is the differentiating half of the wedge",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Former Army 35F/35D S2 or 12Y geospatial engineer, or SOF intel NCO, with recent NTC/JRTC or TiC experience",
+   "why": "Defines the workflow, opens soldier touchpoints, provides credibility with USAICoE/JIOP champions",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "TAK plugin and MISB/STANAG integration engineer",
+   "why": "CoT/TAK data packages, KLV parsing and STANAG 4676 tracks are where point solutions fail",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Defense contracting/SBIR and export-control counsel (fractional)",
+   "why": "SBIR ownership test, ITAR/EAR classification of the software, FOCI planning for a non-U.S.-person founder",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Cleared field engineer (Secret) for demo and pilot phases",
+   "why": "Any integration with AIDP/TITAN/SIPR data requires cleared personnel the founders cannot supply",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "The unclassified MVP (commercial drones, ATAK-CIV, open terrain) carries low burden. Moving to military FMV, AIDP/MSS/TITAN integration and SIPR hosting raises burden to high: software specially designed for military ISR exploitation may fall under USML Category XI or EAR 600-series controls (classification requires counsel), an IL5 or SIPR ATO is needed, cleared staff and a facility clearance are needed for classified integration, and TAK plugin distribution to military users goes through TAK Product Center review.",
+  "non_us_person_founder_note": "SBIR/STTR eligibility requires >50% U.S.-citizen/permanent-resident ownership and control; a non-U.S.-person founder may be unable to access ITAR-controlled technical data or military FMV without a license or exemption, cannot hold a U.S. security clearance, and could trigger FOCI mitigation for a facility clearance. Structuring options (ownership percentages, role limits, proxy/mitigation agreements, timing relative to a green card) must be reviewed with export-control and DCSA counsel before approaching Army customers; this card makes no legal determination."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "Drone-agnostic georegistration, incremental 3D and change detection with offline sync have commercial analogues in public safety (wildfire, SAR, disaster response using ATAK-CIV/TAK), infrastructure inspection and mining, and allied civil protection; however commercial buyers already have Skydio/DJI/DroneDeploy/Pix4D cloud workflows, so the DDIL/reconciliation feature is only strongly valued by defense, public-safety and remote-industrial users."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "workflow",
+   "deployment footprint",
+   "accreditation",
+   "government relationships"
+  ],
+  "explanation": "Algorithms (splatting, CRDTs, change detection) are largely open; defensibility would come from validated adapters to AIDP/MSS/TITAN/HYDRA, a TAK-certified plugin footprint on fielded devices, an IL5/SIPR accreditation, and soldier-validated workflow. Each of these is also exactly what the AIDP-Next prime can reproduce or gate, so defensibility is weak unless the government designates the sync layer as a government-owned or open interface the startup implements first."
+ },
+ "why_now": "In the last three years: AIDP rolled out globally (Oct 2024) and the Army wrote a 72-hour DDIL edge and MSS-exchange requirement into the AIDP-Next CfS (July 2026); TITAN entered production with a lighter Basic variant (Sept 2026); MSS became the mandated joint layer (>100K users, aggressive transition timeline, April-Sept 2026); Open DAGIR opened an onboarding path (2024); the Army standardized on Skydio X10D at company level (2025-2026) with MISB/CoT outputs; Jetson Orin-class edge compute and neural reconstruction (Gaussian splatting, 2023+) made minute-scale 3D on portable hardware feasible; NTC 26-02 and Iran/Ukraine operations documented that disconnected units fall back to manual workarounds.",
+ "killer_risk": "Both halves of the gap already have funded occupants, and the seam between them is owned by the AIDP-Next winner: TurbineOne holds a $98.9M-ceiling Army IDIQ for edge object recognition, Reveal holds a $33.6M STRATFI and SOCOM use for edge 3D, Skydio ships on-drone 3D and offline ATAK streaming, and Palantir/Anduril will deliver the 72-hour DDIL edge node and MSS sync as part of AIDP-Next/TITAN. A two-founder team with a non-U.S.-person co-founder cannot get military FMV, AIDP/HYDRA interface specs or SIPR access fast enough to beat them, so the most likely outcome is a subcontract-sized feature business or an acqui-hire, not a company.",
+ "market_stage": "Transitioning",
+ "procurement_signal_timeline": [
+  {
+   "year": "2021",
+   "event": "Reveal Farsight deployed with USSOCOM (company claim; RECALL)",
+   "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html"
+  },
+  {
+   "year": "2024-03",
+   "event": "TITAN prototype OTA to Palantir ($178M)",
+   "source_url": "https://www.army.mil/article/274301/army_tactical_intelligence_targeting_access_node_titan_ground_station_prototype_award"
+  },
+  {
+   "year": "2024-04",
+   "event": "Reveal $33.6M STRATFI selection (AFVentures) for edge 3D",
+   "source_url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html"
+  },
+  {
+   "year": "2024-09",
+   "event": "NGA Luno A ($290M ceiling) and Luno B ($200M ceiling) commercial analytics IDIQs",
+   "source_url": "https://www.nga.mil/news/NGA_awards_$290_million_Luno_A_commercial_data_con.html"
+  },
+  {
+   "year": "2024-10",
+   "event": "AIDP (Palantir) rolls out to Army intelligence units globally",
+   "source_url": "https://cpeisw.army.mil/2024/10/09/277811/"
+  },
+  {
+   "year": "2024-11",
+   "event": "CDAO Open DAGIR lists edge data integration services line of effort",
+   "source_url": "https://www.ai.mil/Latest/News-Press/PR-View/Article/4026085/cdao-highlights-progress-in-scaling-data-and-ai-capabilities-at-six-month-mark/"
+  },
+  {
+   "year": "2025-01",
+   "event": "Army introduces Skydio X10D to replace RQ-28A at company level",
+   "source_url": "https://en.wikipedia.org/wiki/Skydio_X10"
+  },
+  {
+   "year": "2025-06",
+   "event": "DIU Project G.I. $20M challenge for UxS supporting small dispersed strike cells under DDIL",
+   "source_url": "https://www.diu.mil/latest/usd20m-diu-project-g-i-challenge-targets-next-generation-uas-solutions"
+  },
+  {
+   "year": "2025-09",
+   "event": "TurbineOne $98.9M-ceiling Army IDIQ for edge automated target recognition (Frontline Perception System)",
+   "source_url": "https://www.businesswire.com/news/home/20250904941690/en/Army-Awards-TurbineOne-Contract-for-AI-Powered-Edge-Target-Recognition"
+  },
+  {
+   "year": "2026-02",
+   "event": "Vantor Luno B change-detection task order ($5.3M) and OWT award (up to $217M)",
+   "source_url": "https://www.satellitetoday.com/government-military/2026/02/05/nga-awards-vantor-5-million-for-global-change-detection-under-luno-b-contract/"
+  },
+  {
+   "year": "2026-03",
+   "event": "AIDP-Next Industry Day slides released by CPE ISW",
+   "source_url": "https://cpeisw.army.mil/wp-content/uploads/2026/03/AIDP-Next_-Industry-Day-Slides_for-Public-Release-1.pdf"
+  },
+  {
+   "year": "2026-04",
+   "event": "TurbineOne second Army contract via Gavin Joint Innovation Outpost; DoD components told to transition to MSS on aggressive timeline",
+   "source_url": "https://www.businesswire.com/news/home/20260416363459/en/TurbineOne-Awarded-Army-Contract-Through-Joint-Innovation-Outpost"
+  },
+  {
+   "year": "2026-07",
+   "event": "AIDP RFI #4 and Call for Solutions with 72-hour DDIL edge and MSS bi-directional exchange requirements (responses due 12 Aug 2026)",
+   "source_url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/"
+  },
+  {
+   "year": "2026-09",
+   "event": "TITAN production decision; $192M initial orders incl. four TITAN Basic; MSS >100K users",
+   "source_url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling with allies, but not enough to change the verdict. NATO bought MSS NATO sole-source (2025) and allied land forces (UK Digital Targeting Web, Germany D-LBO/TaWAN, Ukraine Delta/Kropyva) face the same disconnected-edge problem with fewer entrenched U.S. incumbents at the edge; Reveal already claims UK and Ukraine users and Quantum Systems/Helsing/ARX occupy German drone-to-C2 ground. A TAK/CoT-standard, drone-agnostic sensor-to-map layer is exportable to allies who use ATAK (UK, NATO SOF) and the German founder could pursue Bundeswehr/DIANA routes, but export licensing of a U.S.-developed ISR exploitation product and the non-U.S.-person founder's role would need counsel; allied sales are a later-stage add-on, not a reason to start.",
+ "search_log": [
+  {
+   "query": "\"Army Intelligence Data Platform\" \"Call for Solutions\" 2026 tactical edge \"72\" hours disconnected Maven Smart System",
+   "useful": true
+  },
+  {
+   "query": "\"Reveal Technology\" Farsight STRATFI $33.6 million edge 3D mapping Army",
+   "useful": true
+  },
+  {
+   "query": "Edgybees Argus georegistration Army contract 2025 OR 2026 full motion video",
+   "useful": true
+  },
+  {
+   "query": "DIU solicitation 2025 \"DDIL\" targeting \"small\" dispersed teams minimal reliance external data links PROJ00598",
+   "useful": true
+  },
+  {
+   "query": "Army SBIR OR xTech 2025 2026 topic small UAS video \"3D\" OR \"change detection\" OR georegistration ATAK edge processing disconnected",
+   "useful": false
+  },
+  {
+   "query": "GAO report 2025 OR 2026 Army tactical intelligence \"Maven Smart System\" OR TITAN OR \"DCGS-A\" data integration edge findings recommendations",
+   "useful": false
+  },
+  {
+   "query": "\"Swivel Chair War\" Military Intelligence Professional Bulletin 2026 disconnected systems soldier",
+   "useful": true
+  },
+  {
+   "query": "Army FY2027 OR FY2026 budget justification \"Army Intelligence Data Platform\" OR \"DCGS-A\" OR \"Intelligence Systems and Analytics\" RDT&E procurement line million",
+   "useful": true
+  },
+  {
+   "query": "TurbineOne \"Frontline Perception\" OR \"Latent AI\" OR \"Overwatch Imaging\" Army OR Marine Corps edge AI contract 2025 OR 2026 disconnected",
+   "useful": true
+  },
+  {
+   "query": "Skydio X10D \"3D Scan\" OR mapping ATAK offline Army 2025 OR 2026 company-level drone georeferenced",
+   "useful": true
+  },
+  {
+   "query": "WebFetch https://console.sweetspotgov.com/federal-contracts/8bb88d94-5717-5185-915b-35d001825a09 (AIDP CfS mirror) - EGRESS_BLOCKED",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/",
+   "title": "Army issues AIDP solutions call",
+   "pub_date": "2026-07-24",
+   "tier": 2
+  },
+  {
+   "url": "https://console.sweetspotgov.com/federal-contracts/8bb88d94-5717-5185-915b-35d001825a09",
+   "title": "Call for Solutions - Army Intelligence Data Platform (AIDP) (SAM mirror)",
+   "pub_date": "2026-07",
+   "tier": 2
+  },
+  {
+   "url": "https://cpeisw.army.mil/wp-content/uploads/2026/03/AIDP-Next_-Industry-Day-Slides_for-Public-Release-1.pdf",
+   "title": "AIDP-NEXT Industry Day slides (CPE ISW)",
+   "pub_date": "2026-03",
+   "tier": 1
+  },
+  {
+   "url": "https://www.bidnetdirect.com/not-stated/solicitations/open-bids/statewide/Project-Manager-Intelligence-Systems-Analytics-PM-IS-A-Army-Intelligence-Data-Platform-AIDP-RFI-4/2705173667",
+   "title": "PM IS&A AIDP RFI #4 (BidNet mirror)",
+   "pub_date": "2026-07",
+   "tier": 2
+  },
+  {
+   "url": "https://www.lineofdeparture.army.mil/Journals/Military-Intelligence/Military-Intelligence-Archive/2026-January-June/The-Swivel-Chair-War/",
+   "title": "The Swivel Chair War: How Disconnected Systems are Failing the Modern Soldier (MIPB)",
+   "pub_date": "2026 (Jan-Jun)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ai.mil/Latest/News-Press/PR-View/Article/4026085/cdao-highlights-progress-in-scaling-data-and-ai-capabilities-at-six-month-mark/",
+   "title": "CDAO highlights progress in scaling data and AI capabilities at six-month mark",
+   "pub_date": "2024-11",
+   "tier": 1
+  },
+  {
+   "url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205D.pdf",
+   "title": "Army FY2027 RDT&E Justification Book, Budget Activity 5D",
+   "pub_date": "2026-04",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/",
+   "title": "Army TITAN platform production awards to Palantir and Anduril (DefenseScoop)",
+   "pub_date": "2026-09-01",
+   "tier": 2
+  },
+  {
+   "url": "https://cpeisw.army.mil/2026/09/01/army-announces-move-to-production-for-titan/",
+   "title": "Army announces move to production for TITAN (CPE ISW)",
+   "pub_date": "2026-09-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20250904941690/en/Army-Awards-TurbineOne-Contract-for-AI-Powered-Edge-Target-Recognition",
+   "title": "Army Awards TurbineOne Contract for AI-Powered Edge Target Recognition",
+   "pub_date": "2025-09-04",
+   "tier": 3
+  },
+  {
+   "url": "https://soldiersystems.net/2025/09/05/army-awards-turbineone-contract-for-ai-powered-edge-target-recognition/",
+   "title": "Army Awards TurbineOne Contract for AI-Powered Edge Target Recognition (Soldier Systems Daily)",
+   "pub_date": "2025-09-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260416363459/en/TurbineOne-Awarded-Army-Contract-Through-Joint-Innovation-Outpost",
+   "title": "TurbineOne Awarded Army Contract Through Joint Innovation Outpost",
+   "pub_date": "2026-04-16",
+   "tier": 3
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/reveal-technology-receives-selection-notification-for-33-6m-stratfi-award-through-the-afventures-program-302125198.html",
+   "title": "Reveal Technology Receives Selection Notification for $33.6M STRATFI Award Through the AFVentures Program",
+   "pub_date": "2024-04",
+   "tier": 3
+  },
+  {
+   "url": "https://www.revealtech.ai/stratfi-update",
+   "title": "Reveal Extends Joint Focused STRATFI Contract with Option Year 1",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://www.janes.com/defence-intelligence-insights/defence-news/us-air-force-awards-edgybees-contract-for-argus-augmented-reality-software",
+   "title": "US Air Force awards Edgybees contract for Argus augmented reality software (Janes)",
+   "pub_date": "not captured (RECALL: 2021)",
+   "tier": 2
+  },
+  {
+   "url": "https://geospatialworld.net/news/edgybees-u-s-entity-georegistration-solutions/",
+   "title": "Edgybees Establishes U.S. Entity to Provide Georegistration Solutions",
+   "pub_date": "not captured",
+   "tier": 2
+  },
+  {
+   "url": "https://www.skydio.com/blog/a-new-dimension-for-3d-scanning-with-onboard-modeling",
+   "title": "A new dimension for 3D scanning with Onboard Modeling (Skydio)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://www.skydio.com/blog/skydio-x10d-integrates-with-atak-for-tactical-isr",
+   "title": "Skydio X10D Integrates with ATAK for Tactical ISR",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Skydio_X10",
+   "title": "Skydio X10 (Wikipedia) - Army RQ-28A replacement",
+   "pub_date": "2025",
+   "tier": 4
+  },
+  {
+   "url": "https://www.diu.mil/work-with-us/submit-solution/PROJ00598",
+   "title": "DIU Submission Opportunity - Project G.I.",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.diu.mil/latest/usd20m-diu-project-g-i-challenge-targets-next-generation-uas-solutions",
+   "title": "$20M Project G.I. Challenge Targets Next-Gen UAS Solutions Across Domains (DIU)",
+   "pub_date": "2025-06",
+   "tier": 1
+  },
+  {
+   "url": "https://www.satellitetoday.com/government-military/2026/02/05/nga-awards-vantor-5-million-for-global-change-detection-under-luno-b-contract/",
+   "title": "NGA awards Vantor $5 million for global change detection under Luno B contract",
+   "pub_date": "2026-02-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260225394227/en/Vantor-Awarded-Contract-Worth-up-to-$217M-to-Power-Immersive-Global-3D-Terrain-for-U.S.-Army-Training-and-Mission-Rehearsal",
+   "title": "Vantor Awarded Contract Worth up to $217M for One World Terrain",
+   "pub_date": "2026-02-25",
+   "tier": 3
+  },
+  {
+   "url": "https://www.wsj.com/tech/ai/how-ai-is-turbocharging-the-war-in-iran-aca59002",
+   "title": "How AI is turbocharging the war in Iran (WSJ)",
+   "pub_date": "2026-03-07",
+   "tier": 2
+  },
+  {
+   "url": "https://www.csis.org/analysis/cjadc2-ukraine",
+   "title": "CJADC2 in Ukraine (CSIS)",
+   "pub_date": "2024-12-11",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/09/22/maven-smart-system-ai-james-mazol-cameron-stanley-defensetalks/",
+   "title": "More than 100K personnel use Maven Smart System (DefenseScoop)",
+   "pub_date": "2026-09-22",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/",
+   "title": "DOD components face aggressive timeline for Maven Smart System transition (DefenseScoop)",
+   "pub_date": "2026-04-15",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+   "title": "DOD wants more than $2B in fiscal 2027 for CJADC2 / Maven (DefenseScoop)",
+   "pub_date": "2026-05-28",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/274301/army_tactical_intelligence_targeting_access_node_titan_ground_station_prototype_award",
+   "title": "Army TITAN ground station prototype award",
+   "pub_date": "2024-03",
+   "tier": 1
+  },
+  {
+   "url": "https://cpeisw.army.mil/2024/10/09/277811/",
+   "title": "Cloud-based intel tool AIDP rolls out to Army units globally (CPE ISW)",
+   "pub_date": "2024-10-09",
+   "tier": 1
+  },
+  {
+   "url": "https://armysbir.army.mil/eligibility/",
+   "title": "Army SBIR|STTR eligibility",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nga.mil/news/NGA_awards_$290_million_Luno_A_commercial_data_con.html",
+   "title": "NGA awards $290 million Luno A commercial data contract",
+   "pub_date": "2024-09",
+   "tier": 1
+  }
+ ]
+}

@@ -1,0 +1,734 @@
+{
+ "id": "G15",
+ "title": "Authorization-evidence automation for SWFT, CSRMC, FedRAMP 20x and Zero Trust target-level (turning pipeline artifacts, SBOMs and control inheritance into AO-acceptable, reciprocally reusable packages)",
+ "problem": "DoD programs, software factories and commercial ISVs still assemble authorization and zero-trust evidence by hand into eMASS/Xacta/spreadsheets while the target regimes (SWFT since May 2025, CSRMC since Sept 2025, FedRAMP 20x mandatory Jan 2027, ZT target level by 30 Sep 2027) all demand machine-readable, continuously refreshed, reciprocally reusable evidence - and no tool is yet proven to turn pipeline artifacts (SBOMs, scans, STIG/InSpec results, inherited controls, IdP/EDR telemetry) into packages a second authorizing official will accept without re-work.",
+ "categories": [
+  "A",
+  "C",
+  "E",
+  "F",
+  "G",
+  "H"
+ ],
+ "segment_ids": [
+  "S09",
+  "S10"
+ ],
+ "chain_steps": [
+  "PROCESS",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "program office / PEO",
+  "software factory / enterprise platform",
+  "DoD CIO / component CISO and AO staff",
+  "commercial ISV (supplier tier)"
+ ],
+ "user": {
+  "exact_role": "ISSM/ISSO and Security Control Assessor (SCA) staff who build and validate the authorization package; software-factory compliance leads; program zero-trust leads reporting to the DoD CIO ZT PfMO; ISV compliance engineers preparing SWFT attestations, SBOMs and FedRAMP 20x KSI evidence",
+  "echelon": "Program office / enterprise platform / supplier (not the warfighting chain)",
+  "organization_examples": [
+   "Army PEO EIS and PEO C3N program ISSMs",
+   "Platform One / Kessel Run / cArmy software-factory compliance teams",
+   "DoD CIO Zero Trust Portfolio Management Office assessors",
+   "DISA and Fourth Estate AO staffs",
+   "Commercial SaaS/ISVs onboarding via Second Front Game Warden, UDS Army or Palantir FedStart",
+   "FedRAMP 20x applicants (cloud ISVs selling to DoD and civilian agencies)"
+  ]
+ },
+ "current_workflow": [
+  "1. Engineers export scanner, STIG/CKL, InSpec, SBOM and signing outputs from the CI/CD pipeline (Big Bang, UDS, Game Warden, GitLab) as files.",
+  "2. Compliance staff map those artifacts to NIST SP 800-53 controls, ZT Overlay activities and (for suppliers) NIST SP 800-218/SWFT risk characteristics in spreadsheets or a GRC tool (eMASS, Xacta, RegScale).",
+  "3. Narratives (SSP, POA&M, control implementation statements) are written by hand or with generic LLM help and uploaded to eMASS; screenshots and logs from IdP/EDR/SIEM are attached as ZT evidence.",
+  "4. An SCA validates manually; the AO reviews PDFs and signs a 1-3 year ATO or a cATO with conditions.",
+  "5. A second component's AO usually re-reviews the package rather than accepting it (reciprocity fails); FedRAMP packages are re-expressed separately for 20x KSIs.",
+  "6. Re-assessment repeats annually, on major change, and again when the regime changes (cATO 2022 -> SWFT 2025 -> CSRMC 2025 -> ZT deadline 2027)."
+ ],
+ "current_solution": "eMASS (DISA) as system of record; Telos Xacta 360 and RegScale/Paramify-class GRC platforms (OSCAL-native); Vanta/Drata for FedRAMP-oriented ISVs; Ask Sage 'ATO In a Box' and similar LLM narrative generators; Anchore/Sonatype/Chainguard for SBOM generation and vulnerability evidence; MITRE SAF, Heimdall, Vulcan, compliance-trestle and GSA fedramp-automation as open-source utilities; Defense Unicorns UDS and Second Front Game Warden for inherited-control hosting; Booz Allen, GDIT, Deloitte and SecureStrux-type assessment services; NSA ZIG phase checklists for ZT.",
+ "failure": "The tools produce data and documents, not acceptance: (a) the mapping layer between pipeline artifacts and the target regime is rebuilt by hand each time the regime changes, and the SWFT/CSRMC evidence formats are still not fully published; (b) reciprocity fails at the AO-to-AO handoff (DoD CIO's own 2025 study says AOs are 'biased to caution' and reciprocity guidance is unclear), so a machine-generated package is still re-adjudicated; (c) OSCAL, the intended interchange format, proved too heavy for most teams (Lula retired on that basis) while eMASS ingests OSCAL only in narrow demonstrations; (d) ZT activity status must be evidenced from heterogeneous IdP/EDR/SIEM telemetry that brownfield systems do not emit.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "DoD CIO 'Accelerating Secure Software' memo (24 Apr 2025) launched SWFT to replace point-in-time ATO/RMF for software with third-party assessment of vendor posture, third-party-certified SBOMs and AI-assisted back-end review; three RFIs were issued to industry.",
+   "source_title": "Inside the Pentagon CIO's push to overhaul antiquated software acquisition practices (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/",
+   "pub_date": "2025-06-09",
+   "event_date": "2025-04-24",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "DoD CIO published a combined summary of the three SWFT RFIs (Dec 2025) reporting 500+ industry responses; the tools RFI found companies concerned about inconsistent attestation requirements and that 'the amount of evidence required for NIST SP 800-218 compliance would likely require automation and integration of multiple tools within existing infrastructure'; a separate 'SWFT External Assessment Methodologies' RFI was posted on SAM.gov.",
+   "source_title": "SWFT RFI Combined Summary (DoD CIO); SWFT External Assessment Methodologies RFI (SAM.gov); Industry flags DoD's lack of standardized software attestation processes (FNN)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/SWFT-RFI-Combined-Summary.pdf",
+   "pub_date": "2025-12",
+   "event_date": "2025-05 to 2025-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM (summary quoted via search-result excerpts; primary PDF not fetched - .gov blocked)"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "DoD CIO issued an RFI (June 2025) to inform a revamp of the 'cumbersome' RMF, which became the CSRMC announced 24 Sep 2025 with ten tenets including automation, reciprocity, enterprise services and inheritance, continuous monitoring/ATO and DevSecOps.",
+   "source_title": "DOD CIO solicits industry to inform revamp of 'cumbersome' cybersecurity risk framework (DefenseScoop); DoD CIO CSRMC document (media.defense.gov)",
+   "source_url": "https://media.defense.gov/2025/Sep/24/2003808112/-1/-1/1/DOD-CIO-CYBER-SECURITY-RISK-MANAGEMENT-CONSTRUCT.PDF",
+   "pub_date": "2025-09-24",
+   "event_date": "2025-06-25 (RFI) / 2025-09-24 (CSRMC)",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD CIO 'State of DevSecOps' (Mar 2025) states it is 'a common refrain that AOs are biased to caution rather than biased to action', that reciprocity is lacking or its guidance unclear, and that software factories face funding-model limits - i.e., the failure is at acceptance, not artifact generation.",
+   "source_title": "The State of DevSecOps within the Department of Defense (DoD CIO, Distribution A; mirrored markdown)",
+   "source_url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "pub_date": "2025-03-01",
+   "event_date": "2025-03",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD Cybersecurity Reciprocity Playbook (2 Jan 2024) exists precisely because reciprocity under DoDI 8510.01 was not happening in practice; an NPS acquisition symposium paper (2025) records GAO finding DoD only partially implemented its recommendation to create a DoD-wide ATO reciprocity process.",
+   "source_title": "DoD Cybersecurity Reciprocity Playbook (DoD CIO); Unpacking the Authority to Operate (ATO) Process (NPS SYM-AM-25-342)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/(U)%202024-01-02%20DoD%20Cybersecurity%20Reciprocity%20Playbook.pdf",
+   "pub_date": "2024-01-02",
+   "event_date": "2024-01-02",
+   "tier": 1,
+   "label": "FACT (playbook) / INFERENCE (GAO partial-implementation via NPS paper)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD IG found authorizing officials did not review all required documentation when granting and reassessing ATOs for commercial cloud services and did not consider risks identified in FedRAMP/DoD authorization packages - evidence that package quality and AO review, not just package production, is the weak link.",
+   "source_title": "DODIG-2023-052 (Audit of DoD cloud authorizations)",
+   "source_url": "https://media.defense.gov/2023/Feb/16/2003163086/-1/-1/1/DODIG-2023-052.PDF",
+   "pub_date": "2023-02-16",
+   "event_date": "2023-02",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM (title/finding from search excerpt; PDF not opened)"
+  },
+  {
+   "form": "budget",
+   "claim": "Air Force SBIR D2P2 topic AF254-D0802 'AI/ML-Enhanced Risk Management Framework' (open 7 May - 25 Jun 2025) seeks software that automates the RMF process because it 'relies heavily on manual efforts and human expertise, which can result in delays, inconsistencies, and potential oversights', with Phase III aimed at cATO plus continuous monitoring - a funded government demand signal at SBIR scale (no program-of-record line found).",
+   "source_title": "AI/ML-Enhanced Risk Management Framework (SBIR D2P2, AF254-D0802) - GrantedAI mirror; SBIR.gov topic 12032",
+   "source_url": "https://www.sbir.gov/topics/12032",
+   "pub_date": "2025-05-07",
+   "event_date": "2025-05-07 to 2025-06-25",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH (topic) / MEDIUM (topic-number match to sbir.gov 12032 not independently confirmed)"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-25-107649 (12 Jun 2025): of 24 major DoD IT business programs ($10.9B FY23-25), 4 had no plan to implement zero trust by the 2027 deadline and 2 had no cybersecurity strategy; the same gaps persisted from GAO's 2022 and 2024 assessments.",
+   "source_title": "IT Systems Annual Assessment: DOD Needs to Improve Performance Reporting and Cybersecurity Planning (GAO-25-107649)",
+   "source_url": "https://www.gao.gov/products/gao-25-107649",
+   "pub_date": "2025-06-12",
+   "event_date": "2025-06-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "NSA released Zero Trust Implementation Guidelines (Primer and Discovery 8-14 Jan 2026; Phase One 36 activities and Phase Two 41 activities on 30 Jan 2026) decomposing DoD Target-level ZT into concrete, measurable activities that components must evidence by FY27 - the evidence workload for program ZT leads is now enumerated and dated.",
+   "source_title": "NSA Releases Phase One and Phase Two of the Zero Trust Implementation Guidelines; CTR ZIG Phase Two (media.defense.gov)",
+   "source_url": "https://media.defense.gov/2026/Jan/30/2003868302/-1/-1/0/CTR_ZIG_PHASE_TWO.PDF",
+   "pub_date": "2026-01-30",
+   "event_date": "2026-01-30",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "The Department's AI Strategy memorandum (Jan 2026) directs a 'wartime approach' to eliminate blockers including Authorizations to Operate and calls for 'rapid ATO reciprocity' - top-level policy pressure on exactly this workflow.",
+   "source_title": "Artificial Intelligence Strategy for the Department of War (memorandum, media.defense.gov)",
+   "source_url": "https://media.defense.gov/2026/Jan/12/2003855671/-1/-1/0/ARTIFICIAL-INTELLIGENCE-STRATEGY-FOR-THE-DEPARTMENT-OF-WAR.PDF",
+   "pub_date": "2026-01-12",
+   "event_date": "2026-01-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "FedRAMP 20x: the 2026 consolidated rules become mandatory 1 Jan 2027, new Rev5 applications end 11 Jun 2027, existing Rev5 authorizations are expected to sunset by end-2028, and machine-readable packages are expected from Sept 2026 - every cloud ISV must re-express evidence as KSIs with machine-readable, continuously validated evidence.",
+   "source_title": "FedRAMP 2026 timeline (FedRAMP GitHub markdown); vendor summaries (Secureframe, Paramify, Workstreet)",
+   "source_url": "https://raw.githubusercontent.com/FedRAMP/2026-markdown/main/timeline.md",
+   "pub_date": "2026",
+   "event_date": "2027-01-01 / 2027-06-11 / 2028-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH (mandatory date) / MEDIUM (Sept 2026 machine-readable milestone and 2028 sunset are from vendor summaries)"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "The commercial layer is crowded and moving fast: Paramify reports FedRAMP 20x Class C (Moderate) certification in Cohort 1 (Dec 2025), Vanta Government Cloud in Cohort 2 (Apr 2026), Drata a 20x Low pilot authorization (late 2025); RegScale, Xacta and Paramify are OSCAL-native; Telos markets Xacta as CSRMC-ready (Dec 2025); Ask Sage markets 'ATO In a Box' for SWFT/RMF narrative generation; Anchore and Sonatype market SBOM pipelines for SWFT. All are vendor claims of capability, not evidence of AO acceptance.",
+   "source_title": "Paramify vs. Vanta (Paramify blog); CSRMC Compliance: Why Xacta's Continuous ATO Platform Excels (Telos, 2025-12-16); The DoD SWFT Initiative and the Promise of cATO Fulfilled (Anchore); Ask Sage 'In a Box' (Carahsoft)",
+   "source_url": "https://www.telos.com/blog/2025/12/16/csrmc-compliance-why-xactas-continuous-ato-platform-excels-in-the-new-dow-framework/",
+   "pub_date": "2025-12-16",
+   "event_date": "2025-2026",
+   "tier": 3,
+   "label": "FACT (products exist) / HYPOTHESIS (that they satisfy DoD AOs)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "Open-source attempts to make authorization evidence-as-code remain small or abandoned: Defense Unicorns retired Lula 1 after concluding OSCAL was too complex for most teams; GovReady continuous-ato-kit is dormant; MITRE SAF/Vulcan are utilities rather than an authorization system - programs fall back to spreadsheets and eMASS uploads.",
+   "source_title": "defenseunicorns/lula (GitHub)",
+   "source_url": "https://github.com/defenseunicorns/lula",
+   "pub_date": "2026",
+   "event_date": "2024-2026",
+   "tier": 2,
+   "label": "FACT (repo status) / INFERENCE (fallback to manual)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "The DoD keeps buying the path-to-ATO rather than the package tool: Rise8 selected for AFWERX/SpaceWERX PY2025 STRATFI for continuous delivery of mission-critical applications (19 Mar 2025); Defense Unicorns raised a $136M Series B (Jan 2026) and launched UDS Army with DEVCOM C5ISR (Feb 2026) claiming ATO time from 12-18 months to as little as 2 weeks via inheritance; Second Front Game Warden hosts ISVs at IL4-IL6 with inherited ATO. Inheritance hosts, not evidence tools, are where the money has gone.",
+   "source_title": "AFWERX and SpaceWERX Select Rise8 for PY2025 STRATFI (GlobeNewswire); Defense Unicorns company record (study file B03)",
+   "source_url": "https://www.globenewswire.com/news-release/2025/03/19/3045477/0/en/AFWERX-and-SpaceWERX-Select-Rise8-for-Program-Year-2025-STRATFI-under-U-S-Air-Force-SBIR-to-Enable-Rapid-Continuous-Delivery-of-Mission-Critical-Applications.html",
+   "pub_date": "2025-03-19",
+   "event_date": "2025-03 to 2026-02",
+   "tier": 2,
+   "label": "FACT (awards) / INFERENCE (where money flows)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Army CIO Leo Garciga (DoD Modernization Exchange, Apr 2026) presented continuous ATO as a lever to speed tools to warfighters, and a DAU DevSecOps office hour (26 Mar 2026) told programs they 'need to at least hit 91 target levels' - senior leaders and program staff are still explaining the basics in 2026, indicating adoption is early and uneven.",
+   "source_title": "DoD Modernization Exchange 2026: Army's Leo Garciga on unified network, continuous ATO (Federal News Network); DAU DevSecOps open office hour 2026-03-26 (mirror)",
+   "source_url": "https://federalnewsnetwork.com/defense-main/2026/04/dod-modernization-exchange-2026-armys-leo-garciga-on-unified-network-continuous-ato-speeding-tools-to-warfighters/",
+   "pub_date": "2026-04",
+   "event_date": "2026-03 / 2026-04",
+   "tier": 2,
+   "label": "FACT (events) / INFERENCE (uneven adoption)",
+   "confidence": "MEDIUM (article not fetched - domain blocked)"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "eMASS ingests OSCAL only in narrow demonstrations (Microsoft translated Azure Government SSPs to OSCAL for eMASS ingestion) while remaining the system of record; CSRMC has not replaced it and 'current DoD issuances and component guidance continue to reference established RMF processes while CSRMC implementation details evolve' - the government-furnished tool does not yet consume pipeline evidence natively.",
+   "source_title": "Accelerating authorization: DoD mission owners can now coordinate with Microsoft on eMASS (Azure Government blog); eMASS explained (Knox Systems, 2026)",
+   "source_url": "https://devblogs.microsoft.com/azuregov/accelerating-authorization-dod-mission-owners-can-now-coordinate-with-microsoft-on-emass/",
+   "pub_date": "not captured (Azure blog) / 2026 (Knox)",
+   "event_date": "2023-2026",
+   "tier": 3,
+   "label": "FACT (OSCAL demo) / INFERENCE (native ingestion gap)",
+   "confidence": "LOW-MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Three structural reasons. (1) The paying customer and the accepting authority are different people: ISVs and program offices pay, but AOs decide, and AOs are 'biased to caution' and have no budget line for tools that make their job riskier-looking; a startup cannot sell acceptance, only artifacts. (2) The target moved three times in four years (cATO 2022, SWFT 2025, CSRMC 2025) and the SWFT/CSRMC evidence schemas are still being defined via RFIs, so any mapping engine built in 2024-2025 is partly obsolete and vendors have rationally stayed generic (OSCAL/800-53) rather than DoD-regime-specific. (3) The money went to inheritance hosts (Game Warden, UDS, FedStart, Platform One) that make the package problem disappear for tenants by absorbing it, and to GRC incumbents (Xacta has USAF-wide deployment via AWS; RegScale/Paramify/Vanta/Drata already hold FedRAMP 20x positions) who can add SBOM/AI features faster than a new entrant can win an AO's trust. What remains genuinely unsolved - a cross-regime, provenance-carrying evidence compiler that a second AO accepts - is blocked by policy (reciprocity practice) more than by technology.",
+ "why_not_solved_reasons": [
+  "buyer fragmentation",
+  "procurement fragmentation",
+  "certification",
+  "economics",
+  "proprietary incumbent architecture",
+  "technology only recently possible"
+ ],
+ "technical_wedge": "An 'evidence compiler' rather than another GRC dashboard: a signed, content-addressed evidence graph that ingests pipeline artifacts once (Syft/Grype/Trivy SBOM+vuln, cosign attestations, InSpec/CKL STIG results, Kubernetes policy state from UDS/Big Bang, IdP/EDR/SIEM control telemetry) and emits regime-specific views with full provenance: eMASS-importable 800-53 evidence, SWFT vendor attestation plus certified-SBOM diff (vendor SBOM vs third-party SBOM), CSRMC phase evidence, FedRAMP 20x KSI machine-readable package, and NSA ZIG activity status. The defensible piece is the crosswalk plus the 'AO acceptance record': logging which evidence forms which AO accepted, so packages can be re-presented to a second AO with a precedent trail. Sell first to ISVs already on an accredited host (they have budget, urgency from SWFT Phase 2 third-party assessment and FedRAMP 20x, and need no SBIR eligibility), then to software factories. Do not build a hosting platform, a scanner or an LLM narrative generator - all three are crowded.",
+ "mvp": {
+  "what": "CLI plus small web review app: takes SBOM (SPDX/CycloneDX), Grype/Trivy scan JSON, InSpec/CKL results and cosign attestations from a UDS or Big Bang pipeline; produces (a) an eMASS-importable control-evidence bundle, (b) a SWFT-style attestation with vendor-vs-assessor SBOM diff, and (c) a FedRAMP 20x KSI evidence JSON, each item carrying a provenance link back to the originating artifact hash; includes a reviewer workflow that records accept/reject per evidence item.",
+  "demonstrable_in_3_6_months": "Yes for a strong engineer: all inputs are open formats with open tooling; a reference pipeline can be built on UDS Core / Big Bang open source and public FedRAMP 20x KSI definitions; demo target is an unclassified ISV app on a commercial Kubernetes cluster.",
+  "what_it_must_prove": "That one SCA/ISSM at a software factory or one 3PAO/assessor accepts the generated bundle with materially less re-work than today (measured hours), and that at least one evidence item is reused across two regimes without re-collection. If no assessor will review it, the gap is not real for a startup.",
+  "uses": [
+   "open standards",
+   "public/open data",
+   "commercial compute",
+   "unclassified architecture",
+   "commercial hardware"
+  ]
+ },
+ "data_requirement": {
+  "what": "Pipeline artifacts (SBOMs, scan results, STIG/InSpec results, signatures), control catalogs and crosswalks (NIST SP 800-53 r5, 800-171, 800-218/SSDF, FedRAMP 20x KSIs, DoD ZT Overlays, NSA ZIG activity lists, SWFT 12 risk characteristics once published), sample accepted packages and AO feedback for calibration.",
+  "legally_realistically_obtainable": "Artifacts and catalogs: yes, all open or generated from open-source apps. SWFT/CSRMC schemas: partially - only what DoD CIO publishes. Real DoD system packages are CUI and generally unobtainable pre-contract; ISV-side packages are obtainable under NDA from pilot customers. Accepted-package exemplars are the scarce asset.",
+  "sources": [
+   "NIST OSCAL catalogs and GSA fedramp-automation repo",
+   "FedRAMP 20x KSI definitions (FedRAMP GitHub)",
+   "DoD ZT Overlays (Feb 2024) and NSA ZIG Phase One/Two PDFs (Jan 2026)",
+   "DoD CIO SWFT memo and RFI combined summary",
+   "DISA STIG library and MITRE SAF/InSpec profiles",
+   "Pilot ISV pipelines on Game Warden / UDS (under NDA)"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "eMASS (DISA)",
+   "Xacta 360 / RegScale where already licensed",
+   "GitLab CI / Platform One Big Bang / Defense Unicorns UDS / Second Front Game Warden pipelines",
+   "Anchore/Sonatype/Chainguard SBOM tooling",
+   "IdP/EDR/SIEM (Entra/Okta, CrowdStrike/Defender, Splunk/Sentinel) for ZT activity evidence",
+   "FedRAMP 20x submission channel"
+  ],
+  "interfaces_protocols": [
+   "OSCAL (SSP/AP/AR/POA&M)",
+   "SPDX and CycloneDX SBOM",
+   "in-toto/SLSA attestations and cosign signatures",
+   "CKL/XCCDF STIG results, InSpec JSON",
+   "eMASS API (restricted, requires DISA-issued API access)",
+   "FedRAMP 20x KSI machine-readable package schema",
+   "REST/gRPC to GRC tools"
+  ],
+  "who_controls_the_interface": "DISA (eMASS API access is gated), DoD CIO (SWFT/CSRMC evidence schemas, not yet fully published), GSA FedRAMP PMO (20x schema, published openly), NIST (OSCAL), and the hosting platforms (Game Warden/UDS control which pipeline hooks tenants may use). The startup controls none of them."
+ },
+ "customer": {
+  "user": "ISSM/ISSO/SCA staff; ISV compliance engineers; program ZT leads",
+  "champion": "Software-factory or hosting-platform compliance lead (Platform One, cArmy, UDS Army, Game Warden) or an ISV's head of compliance facing SWFT Phase 2 / FedRAMP 20x; alternatively a component CISO office pushing reciprocity",
+  "contract_signer": "For ISVs: the ISV itself (commercial SaaS license). For government: program office contracting via the software factory's vehicle, AFWERX (SBIR D2P2), or a prime/assessment integrator subcontract",
+  "requirement_owner": "DoD CIO (SWFT, CSRMC, ZT strategy) and GSA FedRAMP PMO (20x); component CIO/CISO offices for implementation",
+  "program_office": "No single program of record; nearest: DoD CIO SWFT initiative office, DoD CIO ZT PfMO, DISA (eMASS), Army CIO/G-6 and PEO EIS software factories, AFWERX for SBIR",
+  "contracting_office": "AFWERX/AFRL (SBIR D2P2 AF254-D0802), Army Contracting Command for PEO EIS, DISA DITCO for enterprise tools; commercial contracts for ISVs"
+ },
+ "budget": {
+  "program_or_line": "No dedicated appropriation found. Government demand is funded from component IT/cyber O&M lines, software-factory budgets and SBIR (AF254-D0802 D2P2, FY25). ISV demand is funded from vendors' own compliance/GTM budgets (FedRAMP 20x and SWFT third-party assessment costs).",
+  "evidence": "AF SBIR D2P2 topic AF254-D0802 (open 7 May - 25 Jun 2025) targets RMF automation with Phase III cATO+ConMon; GAO-25-107649 shows $10.9B (FY23-25) across 24 IT programs that must plan ZT by 2027; DoD CIO SWFT and CSRMC budgets: Public evidence insufficient. IDIQ ceilings for hosting/cloud (JWCC, Cloud One) are not revenue for this gap.",
+  "source_url": "https://www.sbir.gov/topics/12032",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Commercial SaaS sale to ISVs already hosted on an accredited platform (Game Warden, UDS Army, FedStart) or preparing FedRAMP 20x - no SBIR eligibility test, real budgets, dated deadlines (SWFT third-party assessment phase, 20x Jan 2027).",
+  "sequence": [
+   "1. Build open-source core (evidence graph + crosswalks) to earn software-factory and 3PAO trust; publish FedRAMP 20x KSI and SWFT crosswalks.",
+   "2. Pilot with 2-3 hosted ISVs and one 3PAO/assessor; measure re-work hours saved and record first assessor acceptance.",
+   "3. Partner with a hosting platform (Game Warden/UDS) or GRC incumbent as a plug-in rather than compete.",
+   "4. If cap table permits, AFWERX D2P2 / open-topic SBIR for the government-side (eMASS/ZT) connectors; otherwise subcontract to an assessment integrator (Booz Allen, GDIT, SecureStrux-type) on a program ZT assessment.",
+   "5. Pursue Tradewinds/CSO or a software-factory task order for a program-office deployment once one AO has accepted packages."
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% U.S. ownership and control by U.S. citizens or permanent residents; with one German founder expected to become a permanent resident and one Indonesian founder who is not a U.S. person, the cap table would need U.S.-person majority (e.g., U.S. co-founder/investors) - counsel required. The commercial-ISV entry path avoids this. Handling DoD-system CUI (SSPs, vulnerability data) triggers DFARS 252.204-7012 / NIST SP 800-171 and, for export-controlled CUI, ITAR/EAR access questions for the non-U.S.-person founder; ISV-side SBOM and commercial pipeline data is generally not controlled. No clearance needed for the MVP; program deployments at IL5+ and any classified enclave work would require cleared U.S.-person staff."
+ },
+ "competition": [
+  {
+   "company": "Telos (Xacta 360)",
+   "how_close": "Very close - DoD GRC incumbent with automated ingestion of scanner results, USAF enterprise deployment, FedRAMP High, marketed as CSRMC-ready (Dec 2025).",
+   "evidence": "https://www.telos.com/blog/2025/12/16/csrmc-compliance-why-xactas-continuous-ato-platform-excels-in-the-new-dow-framework/ (company); AWS Public Sector blog on USAF Xacta 360 (company/partner)"
+  },
+  {
+   "company": "RegScale",
+   "how_close": "Very close - OSCAL-native, continuous-monitoring GRC, publishes CSRMC positioning; targets DoD and FedRAMP.",
+   "evidence": "https://regscale.com/blog/understanding-dod-cyber-security-risk-management-construct-csrmc/ (company)"
+  },
+  {
+   "company": "Paramify",
+   "how_close": "Close on the FedRAMP 20x side - FedRAMP 20x Class C (Moderate) certification Cohort 1 (Dec 2025), machine-readable outputs, DoD IL2-6 coverage claimed.",
+   "evidence": "https://www.paramify.com/fedramp-20x (company)"
+  },
+  {
+   "company": "Vanta / Drata",
+   "how_close": "Close for ISVs - Vanta Government Cloud 20x Class C (Apr 2026), Drata 20x Low pilot; strong commercial distribution, weak on DoD eMASS/ZT specifics.",
+   "evidence": "https://www.paramify.com/blog/paramify-vs-vanta (competitor blog); https://drata.com/blog/partner-pov-paramify (company)"
+  },
+  {
+   "company": "Ask Sage ('ATO In a Box')",
+   "how_close": "Close on narrative generation - LLM-generated SSPs/controls for COCOMs, IL5; claims 95% time savings (marketing, unverified).",
+   "evidence": "https://www.carahsoft.com/ask-sage/features/in-a-box (reseller/company)"
+  },
+  {
+   "company": "Anchore / Sonatype / Chainguard",
+   "how_close": "Adjacent - SBOM generation, vulnerability evidence and SWFT positioning; they supply inputs to the package rather than the package.",
+   "evidence": "https://anchore.com/blog/dod-swft-initiative-and-promise-of-cato-fulfilled/ (company); https://www.sonatype.com/resources/whitepapers/decoding-swft (company)"
+  },
+  {
+   "company": "Second Front Systems (Game Warden) / Defense Unicorns (UDS) / Palantir FedStart",
+   "how_close": "Substitutes - inheritance hosts absorb the package problem for tenants; UDS Army (Feb 2026) claims ATO in as little as 2 weeks; could add evidence export natively.",
+   "evidence": "Study company records B03 (Defense Unicorns, Second Front); https://github.com/defenseunicorns/lula (open source)"
+  },
+  {
+   "company": "Booz Allen / GDIT / Deloitte / SecureStrux-type assessment services",
+   "how_close": "Substitutes - services labor is how most programs actually get ZT assessments and packages done today.",
+   "evidence": "S10 segment file; https://securestrux.com/resources/insights/the-dows-new-approach-to-cybersecurity-risk-management/ (company)"
+  },
+  {
+   "company": "MITRE SAF / Heimdall / Vulcan, compliance-trestle, GSA fedramp-automation, Lula (open source)",
+   "how_close": "Partial - utilities and validators, no acceptance workflow; Lula 1 retired.",
+   "evidence": "https://github.com/defenseunicorns/lula"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes, easily, but the relevant incumbents are not the C4ISR primes - they are Telos, RegScale, Paramify, Vanta/Drata, Ask Sage, and the hosting platforms (Second Front, Defense Unicorns, Palantir FedStart). Palantir already sells FedStart inheritance; Defense Unicorns has open-source compliance tooling history (Lula) and $136M of new capital; Xacta already ingests scanner output. Any of them can ship a SWFT/CSRMC/20x crosswalk in one or two quarters once DoD CIO publishes schemas. The government itself may furnish SWFT back-end tooling, which would collapse the government-side market.",
+  "why_startup_still_wins_or_reject": "A startup wins only if it (a) owns the cross-regime evidence graph with provenance as open infrastructure that hosts and GRC tools embed rather than rebuild, and (b) accumulates the first AO/3PAO acceptance precedents before incumbents bother. That is plausible as a niche, cash-flowing business selling to ISVs (dual-use with FedRAMP 20x), but the moat is thin and the ceiling is a GRC feature, not a platform. Honest verdict: viable as a focused compliance-automation company or as an acquisition target for a host/GRC vendor; weak as a venture-scale C4ISR thesis."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "150,000-300,000",
+  "credible_military_demo_usd": "1,000,000-2,000,000",
+  "first_production_deployment_usd": "3,000,000-6,000,000",
+  "assumptions": "PoC: two founders plus one contractor for 6 months on open-source pipelines, no accreditation. Credible demo: pilot with 2-3 hosted ISVs and one assessor, a part-time former SCA/ISSM adviser, IL4 hosting via a partner platform (tenant fees), 12-18 months. First production: obtaining an own FedRAMP 20x Low/Moderate or IL4 authorization for the SaaS (or riding a host), eMASS API integration, a cleared U.S.-person compliance lead, sales cycle of 9-18 months into a software factory or program office; excludes any classified-enclave variant. All figures are analyst estimates (INFERENCE, LOW confidence)."
+ },
+ "expertise_required": [
+  {
+   "role": "Former DoD SCA / ISSM or AO-staff practitioner (ideally from a software factory or component CISO office)",
+   "why": "Knows what an AO actually accepts, how eMASS is used in practice, and who to call; without this the product is a data tool with no acceptance path.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Supply-chain/DevSecOps engineer fluent in SBOM (SPDX/CycloneDX), in-toto/SLSA attestations, cosign, Kubernetes policy and OSCAL",
+   "why": "Builds the evidence graph and pipeline connectors; the strong engineer founder can cover this.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "FedRAMP 20x / 3PAO-experienced assessor (advisor)",
+   "why": "Needed to make the ISV-side output assessor-acceptable and to sell the dual-use path.",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Government-contracts and export-control counsel (fractional)",
+   "why": "SBIR eligibility with non-U.S.-person founder, CUI handling under DFARS 7012, and any ITAR/EAR exposure when handling program data.",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Federal sales lead with GRC/host partnerships",
+   "why": "Distribution through Game Warden/UDS/GRC vendors matters more than direct government sales.",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "The MVP is unclassified commercial software on open formats. Burden rises when the product touches real DoD system packages (CUI: DFARS 252.204-7012, NIST SP 800-171, possibly CMMC Level 2 for the company), when it is hosted as SaaS for DoD users (IL4/IL5 or FedRAMP 20x authorization for the product itself - the same burden it helps others with), and when eMASS API access is needed (DISA-gated). No ITAR is inherent to the software, but program data it processes may be export-controlled.",
+  "non_us_person_founder_note": "A non-U.S.-person founder can build and sell the ISV-facing product. Access to DoD CUI (SSPs, vulnerability findings of DoD systems) is governed by contract clauses and, where the CUI is export-controlled, by ITAR/EAR deemed-export rules; this needs counsel and likely role separation (the non-U.S.-person founder stays off government-CUI environments). Any IL5/classified deployment work requires U.S.-person, cleared staff. SBIR/STTR needs a U.S.-person-majority cap table. These are constraints to design around, not definitive legal judgments."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "high",
+  "explanation": "FedRAMP 20x (all federal cloud vendors), StateRAMP/GovRAMP, CMMC and SSDF attestations use the same pipeline-artifact-to-evidence problem; the ISV market is commercial and larger than the DoD program market. The DoD-specific crosswalks (SWFT, CSRMC, ZT overlays, eMASS) are the differentiator but not the only market."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "workflow",
+   "integrations",
+   "accreditation",
+   "government relationships",
+   "data"
+  ],
+  "explanation": "Proprietary value would be the maintained crosswalks between regimes, the connectors into gated interfaces (eMASS API, hosts' pipelines), the product's own authorization, and above all the accumulated record of which evidence forms were accepted by which AOs/assessors (precedent data). Algorithms are not defensible (mapping and LLM summarization are commodity); network effects are weak unless AOs adopt the acceptance record as a shared reciprocity ledger - which would need DoD CIO sponsorship."
+ },
+ "why_now": "In ~18 months the rules changed from narrative-based, point-in-time authorization to evidence-based continuous authorization on three fronts at once: SWFT (Apr/May 2025, 500+ RFI responses, moving from pilot to requirement in 2026 with third-party SBOM certification), CSRMC (Sep 2025, automation and reciprocity as tenets), FedRAMP 20x (2026 rules mandatory 1 Jan 2027, Rev5 intake ends 11 Jun 2027) and the ZT target-level deadline (30 Sep 2027) with NSA's Jan 2026 ZIGs enumerating the activities. The Jan 2026 AI strategy names ATO blockers explicitly. Meanwhile, SBOM/attestation tooling (Syft, cosign, SLSA, CycloneDX 1.6) and LLM summarization became commodity, so the evidence-generation side is cheap; the unsolved part is acceptance and reuse.",
+ "killer_risk": "The acceptance problem is a policy and incentive problem the startup cannot fix: AOs remain 'biased to caution', reciprocity is unenforced, and DoD CIO may furnish or mandate its own SWFT/CSRMC tooling (or anoint Xacta/RegScale-class incumbents), leaving a startup with a commodity artifact converter in a crowded GRC market where Paramify, Vanta, Drata, RegScale and Telos already hold FedRAMP 20x/DoD positions and hosts like Game Warden/UDS make the problem disappear for exactly the ISVs the startup would target. Low willingness to pay for software versus services (S10) compounds this.",
+ "market_stage": "Transitioning",
+ "procurement_signal_timeline": [
+  {
+   "year": "2022",
+   "event": "DoD CIO continuous ATO memo (4 Feb 2022) and DoD Zero Trust Strategy (Nov 2022; target level by FY27)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/20220204-cATO-memo.PDF"
+  },
+  {
+   "year": "2023",
+   "event": "DoDIG-2023-052 finds AOs did not review required documentation for cloud authorizations",
+   "source_url": "https://media.defense.gov/2023/Feb/16/2003163086/-1/-1/1/DODIG-2023-052.PDF"
+  },
+  {
+   "year": "2024",
+   "event": "DoD Cybersecurity Reciprocity Playbook (2 Jan 2024); ZT Overlays (Feb 2024); GAO-24-106912 on IT programs' cyber gaps (Jul 2024)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/(U)%202024-01-02%20DoD%20Cybersecurity%20Reciprocity%20Playbook.pdf"
+  },
+  {
+   "year": "2025",
+   "event": "State of DevSecOps report (Mar); SWFT memo (24 Apr) and three RFIs (May-Jun); AF SBIR D2P2 AF254-D0802 AI/ML-enhanced RMF (May-Jun); RMF revamp RFI (Jun); GAO-25-107649 (Jun); CSRMC tenets (24 Sep); SWFT RFI combined summary (Dec); Paramify 20x Class C (Dec)",
+   "source_url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/"
+  },
+  {
+   "year": "2026",
+   "event": "AI Strategy memo names ATO blockers (Jan); NSA ZIG Primer/Discovery and Phase One/Two (Jan); SWFT reported moving from pilot to requirement (Jan, vendor-reported); UDS Army launch (Feb); Vanta 20x Class C (Apr); machine-readable FedRAMP packages expected (Sep, vendor-reported)",
+   "source_url": "https://media.defense.gov/2026/Jan/30/2003868302/-1/-1/0/CTR_ZIG_PHASE_TWO.PDF"
+  },
+  {
+   "year": "2027",
+   "event": "FedRAMP 2026 rules mandatory (1 Jan); Rev5 intake ends (11 Jun); DoD ZT target level due (30 Sep); SWFT third-party assessment phase (vendor-reported Nov 2026 date, LOW confidence - may be conflated with CMMC)",
+   "source_url": "https://raw.githubusercontent.com/FedRAMP/2026-markdown/main/timeline.md"
+  }
+ ],
+ "allied_extension": "Moderately more compelling. The same evidence-once-reuse-many problem exists for UK (Secure by Design / Cyber Essentials Plus), Germany (BSI C5, which Game Warden already lists), NATO (NIAS/NCIA accreditation) and Australia (IRAP), and ISVs selling to several allied governments must re-express the same pipeline evidence per regime - a natural extension of the crosswalk engine. A German founder helps with BSI C5/EU markets. Counter: allied accreditation authorities are even more manual and relationship-driven than DoD AOs, crosswalks between national schemes are not officially recognized, and the startup would need in-country presence and counsel for each. Allied value is real for the ISV-facing product, weak for the DoD-program-facing product.",
+ "search_log": [
+  {
+   "query": "\"Software Fast Track\" SWFT DoD CIO 2026 status SBOM third-party assessment enterprise requirement",
+   "useful": true
+  },
+  {
+   "query": "\"Cybersecurity Risk Management Construct\" CSRMC implementation 2026 DoD CIO automation reciprocity",
+   "useful": true
+  },
+  {
+   "query": "FedRAMP 20x Rev5 sunset 2027 \"Key Security Indicators\" machine-readable timeline",
+   "useful": true
+  },
+  {
+   "query": "SBIR topic \"Risk Management Framework\" automation AI machine learning ATO continuous monitoring 2025 2026 site:sbir.gov OR site:dodsbirsttr.mil OR site:navysbir.com",
+   "useful": true
+  },
+  {
+   "query": "eMASS replacement OR modernization OR successor 2026 DISA \"eMASS\" OSCAL",
+   "useful": true
+  },
+  {
+   "query": "RegScale OR Paramify OR Vanta OR Drata \"FedRAMP 20x\" OR \"SWFT\" DoD OSCAL SBOM 2026 product",
+   "useful": true
+  },
+  {
+   "query": "\"AI for ATO\" OR \"Pentagon seeks AI\" \"authorization to operate\" 2025 2026 Breaking Defense OR DefenseScoop OR Federal News Network",
+   "useful": true
+  },
+  {
+   "query": "NSA \"Zero Trust Implementation\" guidance Phase Two January 2026 DoD target level FY2027 progress components 2026",
+   "useful": true
+  },
+  {
+   "query": "GAO OR \"Inspector General\" 2026 report DoD \"authorization to operate\" reciprocity OR \"continuous ATO\" software delays findings",
+   "useful": true
+  },
+  {
+   "query": "SWFT 2026 \"Kirsten Davies\" OR \"Software Fast Track\" pilot results vendors \"third-party assessor\" OR \"SBOM\" tool Anchore OR Sonatype OR \"Ask Sage\" OR Xacta ATO automation DoD",
+   "useful": true
+  },
+  {
+   "query": "WebFetch federalnewsnetwork.com 2025/12 industry-flags-dods-lack-of-standardized-software-attestation-processes (EGRESS_BLOCKED)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/",
+   "title": "Inside the Pentagon CIO's push to overhaul antiquated software acquisition practices",
+   "pub_date": "2025-06-09",
+   "tier": 2
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/SWFT-RFI-Combined-Summary.pdf",
+   "title": "SWFT RFI Combined Summary (DoD CIO)",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/4a79c3e777c24d14a69d6c090950a755/view",
+   "title": "SWFT External Assessment Methodologies RFI (SAM.gov)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2025/06/25/dod-cio-risk-management-framework-rmf-revamp-rfi/",
+   "title": "DOD CIO solicits industry to inform revamp of 'cumbersome' cybersecurity risk framework",
+   "pub_date": "2025-06-25",
+   "tier": 2
+  },
+  {
+   "url": "https://media.defense.gov/2025/Sep/24/2003808112/-1/-1/1/DOD-CIO-CYBER-SECURITY-RISK-MANAGEMENT-CONSTRUCT.PDF",
+   "title": "DoD CIO Cybersecurity Risk Management Construct",
+   "pub_date": "2025-09-24",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2025/Sep/24/2003808111/-1/-1/1/DOD-CIO-CYBER-SECURITY-RISK-MANAGEMENT-CONSTRUCT-STRATEGIC-TENETS.PDF",
+   "title": "DoD CIO CSRMC Strategic Tenets",
+   "pub_date": "2025-09-24",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/In-the-News/Article/4367432/department-of-war-announces-new-cybersecurity-risk-management-construct",
+   "title": "Department of War announces new Cybersecurity Risk Management Construct",
+   "pub_date": "2025-09-24",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "title": "The State of DevSecOps within the Department of Defense (DoD CIO, mirrored)",
+   "pub_date": "2025-03",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/(U)%202024-01-02%20DoD%20Cybersecurity%20Reciprocity%20Playbook.pdf",
+   "title": "DoD Cybersecurity Reciprocity Playbook",
+   "pub_date": "2024-01-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dair.nps.edu/bitstream/123456789/5375/1/SYM-AM-25-342.pdf",
+   "title": "Unpacking the Authority to Operate (ATO) Process (NPS Acquisition Research Symposium)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://media.defense.gov/2023/Feb/16/2003163086/-1/-1/1/DODIG-2023-052.PDF",
+   "title": "DODIG-2023-052",
+   "pub_date": "2023-02-16",
+   "tier": 1
+  },
+  {
+   "url": "https://www.sbir.gov/topics/12032",
+   "title": "SBIR topic 12032 (AI/ML-enhanced RMF)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://grantedai.com/grants/ai-ml-enhanced-risk-management-framework-sbir-d2p2-af-number-af254-d0802-department-of-the-air-force-dod-afwerx-08b17c85",
+   "title": "AI/ML-Enhanced Risk Management Framework (SBIR D2P2, AF254-D0802) - mirror",
+   "pub_date": "2025-05-07",
+   "tier": 3
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-107649",
+   "title": "IT Systems Annual Assessment: DOD Needs to Improve Performance Reporting and Cybersecurity Planning",
+   "pub_date": "2025-06-12",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2026/Jan/30/2003868302/-1/-1/0/CTR_ZIG_PHASE_TWO.PDF",
+   "title": "NSA Zero Trust Implementation Guideline Phase Two",
+   "pub_date": "2026-01-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.globalsecurity.org/security/library/news/2026/01/sec-260130-nsa-css01.htm",
+   "title": "NSA Releases Phase One and Phase Two of the Zero Trust Implementation Guidelines",
+   "pub_date": "2026-01-30",
+   "tier": 2
+  },
+  {
+   "url": "https://media.defense.gov/2026/Jan/12/2003855671/-1/-1/0/ARTIFICIAL-INTELLIGENCE-STRATEGY-FOR-THE-DEPARTMENT-OF-WAR.PDF",
+   "title": "Artificial Intelligence Strategy for the Department of War",
+   "pub_date": "2026-01-12",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/FedRAMP/2026-markdown/main/timeline.md",
+   "title": "FedRAMP 2026 timeline (FedRAMP GitHub)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://secureframe.com/blog/fedramp-20x",
+   "title": "FedRAMP 20x: Goals, Timeline, and the 2026 Consolidated Rules",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.paramify.com/blog/rev-5-sunset-deadlines",
+   "title": "Prepare for Rev 5 FedRAMP Sunset: Important Timeline Updates",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.paramify.com/blog/paramify-vs-vanta",
+   "title": "Paramify vs. Vanta: An Honest Comparison (2026)",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://drata.com/blog/partner-pov-paramify",
+   "title": "FedRAMP 20x and the Future of Federal Compliance: Drata x Paramify",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://regscale.com/blog/understanding-dod-cyber-security-risk-management-construct-csrmc/",
+   "title": "NIST RMF Tiers: The Hidden Foundation of DoD's New CSRMC Construct (RegScale)",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.telos.com/blog/2025/12/16/csrmc-compliance-why-xactas-continuous-ato-platform-excels-in-the-new-dow-framework/",
+   "title": "CSRMC Compliance: Why Xacta's Continuous ATO Platform Excels (Telos)",
+   "pub_date": "2025-12-16",
+   "tier": 3
+  },
+  {
+   "url": "https://aws.amazon.com/blogs/publicsector/the-united-states-air-force-turns-to-xacta-360-from-telos-corporation-to-automate-risk-management-and-continuously-monitor-systems-enterprise-wide/",
+   "title": "USAF turns to Xacta 360 (AWS Public Sector blog)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://www.carahsoft.com/ask-sage/features/in-a-box",
+   "title": "Ask Sage 'In a Box' document automation (Carahsoft)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://anchore.com/blog/dod-swft-initiative-and-promise-of-cato-fulfilled/",
+   "title": "The DoD SWFT Initiative and the Promise of cATO Fulfilled (Anchore)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.sonatype.com/resources/whitepapers/decoding-swft",
+   "title": "Decoding SWFT: How It Redefines Secure Acquisition (Sonatype)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.reversinglabs.com/blog/dod-secure-software-with-sboms-and-automation-required",
+   "title": "DoD issues new orders on secure software and SBOMs (ReversingLabs)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://govciomedia.com/pentagon-swft-rfis-back-shift-to-continuous-software-authorization/",
+   "title": "Pentagon SWFT Responses Back Shift to Continuous Software Authorization (GovCIO Media)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://www.afcea.org/signal-media/cyber-edge/swft-initiative-makes-progress-collects-information-industry",
+   "title": "SWFT Initiative Makes Progress, Collects Information From Industry (AFCEA Signal)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://federalnewsnetwork.com/defense-main/2025/12/industry-flags-dods-lack-of-standardized-software-attestation-processes/",
+   "title": "Industry flags DoD's lack of standardized software attestation processes (FNN) - not fetched, domain blocked",
+   "pub_date": "2025-12",
+   "tier": 2
+  },
+  {
+   "url": "https://federalnewsnetwork.com/defense-main/2026/04/dod-modernization-exchange-2026-armys-leo-garciga-on-unified-network-continuous-ato-speeding-tools-to-warfighters/",
+   "title": "DoD Modernization Exchange 2026: Army's Leo Garciga on continuous ATO (FNN) - not fetched",
+   "pub_date": "2026-04",
+   "tier": 2
+  },
+  {
+   "url": "https://devblogs.microsoft.com/azuregov/accelerating-authorization-dod-mission-owners-can-now-coordinate-with-microsoft-on-emass/",
+   "title": "Accelerating authorization: DoD mission owners can now coordinate with Microsoft on eMASS",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://knoxsystems.com/resources/what-is-emass",
+   "title": "What Is eMASS? (Knox Systems)",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/defenseunicorns/lula",
+   "title": "defenseunicorns/lula (GitHub)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.globenewswire.com/news-release/2025/03/19/3045477/0/en/AFWERX-and-SpaceWERX-Select-Rise8-for-Program-Year-2025-STRATFI-under-U-S-Air-Force-SBIR-to-Enable-Rapid-Continuous-Delivery-of-Mission-Critical-Applications.html",
+   "title": "AFWERX and SpaceWERX Select Rise8 for PY2025 STRATFI",
+   "pub_date": "2025-03-19",
+   "tier": 2
+  },
+  {
+   "url": "https://cset.georgetown.edu/publication/outpaced-ai-and-policys-role-in-transforming-cybersecurity-compliance/",
+   "title": "Outpaced: AI and Policy's Role in Transforming Cybersecurity Compliance (CSET)",
+   "pub_date": "2025-2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.carahsoft.com/blog/second-front-systems-modernizing-dod-authorization-to-operate-process-for-agility-blog-2025",
+   "title": "Modernizing the DoD's ATO Process for Agility (Second Front via Carahsoft)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/20220204-cATO-memo.PDF",
+   "title": "DoD CIO Continuous ATO memo",
+   "pub_date": "2022-02-04",
+   "tier": 1
+  }
+ ]
+}

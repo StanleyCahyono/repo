@@ -1,0 +1,626 @@
+{
+ "id": "G09",
+ "title": "Squad-to-battalion small-UAS fleet control, registry, deconfliction, tasking and collection forwarding for Drone Dominance mass (multi-vendor drones into company/battalion C2, S2 and training pipelines)",
+ "problem": "Tens of thousands of multi-vendor Gauntlet/SRR small drones are reaching squads faster than companies and battalions can register who is flying what where, deconflict them procedurally with manned aviation and fires, task them from the S2/S3, and forward what they collect, so units fall back on radio calls, hand-marked airspace measures and vendor apps while the Army's fusion node (TITAN) stops at division/corps.",
+ "categories": [
+  "B",
+  "C",
+  "D",
+  "G",
+  "I"
+ ],
+ "segment_ids": [
+  "S03",
+  "S13"
+ ],
+ "chain_steps": [
+  "COLLECT",
+  "TRANSPORT",
+  "FUSE",
+  "DECIDE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "squad/platoon",
+  "company",
+  "battalion",
+  "brigade (ADAM/BAE cell as airspace authority)"
+ ],
+ "user": {
+  "exact_role": "Company drone team leader / battalion UAS master trainer and S3 air (airspace) NCO; battalion S2 collection manager; brigade ADAM/BAE cell; battalion S6 for TAK feeds",
+  "echelon": "company to battalion, with brigade ADAM/BAE as the airspace authority",
+  "organization_examples": [
+   "2-35 Infantry (25th ID) at JPMRC 26-01 (Transformation in Contact)",
+   "3rd Combat Aviation Brigade (3rd ID) airspace management initiative tested at JMRC April 2026",
+   "4ID / 25ID NGC2 prototype divisions (Ivy Sting/Ivy Mass, Lightning Surge)",
+   "Any BCT receiving Gauntlet 1/2 one-way-attack drones and SRR X10D/Teal drones in FY26-27"
+  ]
+ },
+ "current_workflow": [
+  "1. Squad receives Gauntlet or SRR drones with the vendor's own controller/app; battalion tracks tail numbers, batteries and operator qualifications in spreadsheets or unit SOP binders.",
+  "2. Before a mission the company requests airspace by radio/chat; the battalion S3 air and brigade ADAM/BAE publish procedural measures (altitude blocks, ROZs, launch points, loiter areas) via the Airspace Control Order because communications are assumed limited (CALL Handbook 25-14).",
+  "3. During flight the operator watches the vendor feed; the drone's position is not automatically on the common operating picture, so units mark it by hand (e.g., BARS: bearing, altitude, range, speed) or verbally to aviation and fires.",
+  "4. Observations are passed by voice/screenshot to the platoon leader and S2; video stays on the controller or vendor cloud; post-mission SD-card offload if at all.",
+  "5. Training and readiness (who is qualified on which airframe, flight hours, EW-contested training) are tracked per unit in ad hoc tools; leadership says training at scale is the remaining gap."
+ ],
+ "current_solution": "Procedural airspace control per CALL Handbook 25-14 (altitude blocks, ROZs, ACMs via the ACO) managed by the brigade ADAM/BAE and battalion S3; vendor controllers and clouds (Skydio Cloud fleet health and flight logs, AuterionOS/Nemyx with CoT-to-ATAK feeds, AeroVironment Kinesis for AV/Tomahawk-linked robots); ATAK/TAK Server with video and UAS plugins where a network exists; radio calls, spreadsheets and hand-marked overlays elsewhere; TITAN at division/corps for fused targeting.",
+ "failure": "Between the vendor controller and the TAK/COP layer: multi-vendor drone positions, intent and status do not populate the unit picture automatically, so deconfliction is procedural and manual; there is no unit-owned registry of airframes/operators/qualifications across vendors; S2 tasking and collection return are voice/screenshot; and no fusion node exists below division (TITAN: 17 systems).",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "Army published CALL Handbook 25-14 'Small Unmanned Aircraft System Airspace Management and Control: A Handbook for Army Leaders' (Sept 2025), drawn from Transformation in Contact exercises and CTC rotations; it emphasizes procedural controls (altitude blocks, ROZs, ACMs) over positive control because communications are often limited - i.e., the Army's institutional answer today is procedure, not a fleet-control tool.",
+   "source_title": "Small Unmanned Aircraft System Airspace Management and Control (army.mil)",
+   "source_url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control",
+   "pub_date": "2025-09",
+   "event_date": "2025-09",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "3rd Combat Aviation Brigade built an airspace management plan for sUAS/rotary-wing integration using designated launch points, loiter areas, altitudes and launch target lines as minimum control measures, and unit marking of UAS by BARS (bearing, altitude, range, speed) because drone location does not automatically populate on common operating systems; the plan was to be stressed at the April 2026 JMRC rotation under degraded comms. (Quote taken from search-engine summary; primary army.mil/DVIDS pages blocked this session.)",
+   "source_title": "3rd Combat Aviation Brigade Innovates Airspace Management for Congested Battlespace (army.mil / DVIDS)",
+   "source_url": "https://www.army.mil/article/290694/3rd_combat_aviation_brigade_innovates_airspace_management_for_congested_battlespace_advancing_army_2030_readiness",
+   "pub_date": "2026 (before April 2026 JMRC rotation; exact date not captured)",
+   "event_date": "2026-04",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Army accepted 12,080 Gauntlet 1 drones by mid-Sept 2026 with 30,000 more inbound and >200,000 targeted by 2027; leadership said the remaining work is getting everybody trained at the appropriate level, especially in contested EMS; the experimental drone battalion ended with the push to every squad.",
+   "source_title": "As experimental drone battalion ends, Army aims to push drones to every squad (Military Times / Army Times)",
+   "source_url": "https://www.militarytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "pub_date": "2026-09-18",
+   "event_date": "2026-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Army says it can outfit small drones to each unit but now needs the training to use them, especially in contested electromagnetic spectrum, with the FY26 squad-fielding deadline at end of September 2026.",
+   "source_title": "Army can outfit small drones to each unit, but needs the training to do so (Breaking Defense)",
+   "source_url": "https://breakingdefense.com/2026/09/army-has-enough-drones-for-each-unit-now-it-needs-to-train-soldiers-to-use-them/",
+   "pub_date": "2026-09",
+   "event_date": "2026-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "2-35 Infantry (25th ID) at JPMRC 26-01 reported rifle companies using SRR and FPV drones (5:1 favorable attrition) but a critical gap between materiel change and the doctrine needed to guide tactical execution - a battalion-level, first-hand account of tooling/doctrine lagging drone issue.",
+   "source_title": "Battalion Perspectives in Contact: Bridging Tactical Gaps During Transformation (Small Wars Journal)",
+   "source_url": "http://smallwarsjournal.com/2026/09/16/battalion-perspectives-in-contact-bridging-tactical-gaps-during-transformation/",
+   "pub_date": "2026-09-16",
+   "event_date": "2025-2026 (JPMRC 26-01)",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Following Gauntlet I the department ordered roughly 1,500-2,560 drones each from 11 companies; Gauntlet 2 top performers may share ~60,000 platforms expected from that round - multi-vendor mass is a design feature of the program, so heterogeneity at the squad is structural.",
+   "source_title": "Pentagon unveils top performers in latest 'Gauntlet' for Drone Dominance Program (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2026/09/18/drone-dominance-program-gauntlet-2-results/",
+   "pub_date": "2026-09-18",
+   "event_date": "2026-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Army ordered 2,500+ Skydio X10D for over $52M (March 2026) on top of the SRR program and set a SkyFoundry goal of 10,000 drones/month - ISR-class sUAS volume also rising alongside one-way-attack mass.",
+   "source_title": "Army small drones / SkyFoundry (DefenseScoop); X10D order (DroneXL)",
+   "source_url": "https://defensescoop.com/2025/10/14/army-small-drones-skyfoundry/",
+   "pub_date": "2025-10-14",
+   "event_date": "2026-03",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Drone Dominance is a formal Department of War program with a public site, a first order and Gauntlet II announced by the department.",
+   "source_title": "Drone Dominance Program Receives First Order, Gauntlet II Gets Underway (war.gov)",
+   "source_url": "https://www.war.gov/News/News-Stories/Article/Article/4520698/drone-dominance-program-receives-first-order-gauntlet-ii-gets-underway/",
+   "pub_date": "2026 (exact date not captured)",
+   "event_date": "2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "FY2027 request includes $53.6B for the wider Drone Dominance effort ($39.2B autonomous systems procurement/production/advanced capabilities; $14.4B counter-UAS), requested as mandatory spending via reconciliation - a request, not appropriated funds; no line for unit-level fleet/airspace software is identified.",
+   "source_title": "DoD Details Massive Drone, Industrial Base Investment In FY '27, Explains Reconciliation Outlook (Defense Daily)",
+   "source_url": "https://www.defensedaily.com/dod-details-massive-drone-industrial-base-investment-in-fy-27-explains-reconciliation-outlook/budget/",
+   "pub_date": "2026",
+   "event_date": "2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "The small-drone Drone Dominance program is described by secondary sources as roughly $1.1B cumulative across its phased acquisition with a 200,000-platform target by 2027 (figure not verified against a budget document).",
+   "source_title": "US Defence Drone Procurement Market 2026 Forecast (Drone Intelligence)",
+   "source_url": "https://droneintelligence.ai/intelligence/us-defence-drone-procurement-market",
+   "pub_date": "2026",
+   "event_date": "2026",
+   "tier": 4,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "TITAN production is 8 systems over 18 months for a 17-system fleet including prototypes - a division/corps fusion node, so company/battalion sUAS collection has no organic fusion/ingest node.",
+   "source_title": "Army TITAN platform production awards (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/",
+   "pub_date": "2026-09-01",
+   "event_date": "2026-09-01",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Auterion Nemyx (Sept 2025) coordinates drones from different manufacturers running AuterionOS, with live feeds and mission data integrated into ATAK as CoT; the first multi-manufacturer find-fix-finish swarm was demonstrated Dec 2025 and Auterion won a Gauntlet production award in 2026 - vendor claims; coverage limited to AuterionOS-equipped airframes.",
+   "source_title": "Auterion's 'Nemyx' Unifies Different Drone Fleets (The Defense Post); Auterion product page",
+   "source_url": "https://thedefensepost.com/2025/09/05/auterion-nemyx-drone-swarm/",
+   "pub_date": "2025-09-05",
+   "event_date": "2025-09",
+   "tier": 3,
+   "label": "FACT (vendor claim on capability)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Skydio Cloud provides fleet health status, propeller/battery telemetry synced after every mission and live-stream coordination - fleet management exists but is single-vendor and connectivity-dependent.",
+   "source_title": "Skydio Cloud, DFR Command and Remote Ops release notes (Skydio support)",
+   "source_url": "https://support.skydio.com/hc/en-us/articles/35583768187291-Skydio-Cloud-DFR-Command-and-Remote-Ops-3-April-2025",
+   "pub_date": "2025-04-03",
+   "event_date": "2025-04",
+   "tier": 4,
+   "label": "FACT (vendor documentation)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "AeroVironment (Tomahawk Robotics Kinesis) received an Army RCCTO award and was named lead software/systems integrator for Human-Machine Integrated Formations Increment 1 (Sept 2025) - the Army is buying a common-controller layer for HMIF, but as a prototype/integration effort with first formations targeted 2027.",
+   "source_title": "AV awarded U.S. Army RCCTO contract for Kinesis (AeroVironment release)",
+   "source_url": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/",
+   "pub_date": "2025-09-29",
+   "event_date": "2025-09-29",
+   "tier": 4,
+   "label": "FACT",
+   "confidence": "HIGH on award; LOW on value"
+  },
+  {
+   "form": "government document",
+   "claim": "CRS In Focus IF12668 (updated 2026) notes Congress's interest in DOD's ability to develop, acquire and integrate sUAS into tactical units and describes the SRR (platoon), MRR (company, >=10 km) and LRR (battalion, 40-60 km) tiers - three echelon-specific airframe programs, none of which is a cross-tier fleet/airspace layer.",
+   "source_title": "U.S. Army Small Uncrewed Aircraft Systems Programs (CRS IF12668)",
+   "source_url": "https://www.congress.gov/crs-product/IF12668",
+   "pub_date": "2026-05 (update)",
+   "event_date": "2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "No RFI or sources-sought specifically for a unit-level multi-vendor sUAS fleet registry/deconfliction/collection-forwarding layer was found; adjacent notices exist only for hardware tiers (PM UAS Company Level SUAS challenge via One Nation Innovation; RPUAS) and for counter-UAS software (JIATF-401 web-accessible mission planning / EMS management RFI). Public evidence insufficient for a demand signal in this exact form.",
+   "source_title": "Company Level Small Uncrewed Aircraft System (SUAS) challenge (SAM.gov)",
+   "source_url": "https://sam.gov/workspace/contract/opp/c930003cc58c4d7bbe4d2c4c45aa3ac1/view",
+   "pub_date": "2026 (date not captured)",
+   "event_date": "2026",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "JIATF-401 published a 2026 C-sUAS Quick Reference Guide with drone TTPs and a catalogue of drones and C-UAS systems in the inventory; FAAD C2 presented as the Army's C-sUAS C2 with all C2 platforms intended to be interoperable - but nothing found describing an automated blue-drone feed from unit fleets into C-UAS C2 (fratricide-avoidance data path). Public evidence insufficient.",
+   "source_title": "JIATF-401 2026 Counter-Small UAS Quick Reference Guide (media.defense.gov)",
+   "source_url": "https://media.defense.gov/2026/Sep/08/2003992822/-1/-1/1/JOINT-INTERAGENCY-TASK-FORCE-401-2026-COUNTER-SMALL-UNMANNED-AIRCRAFT-SYSTEMS-QUICK-REFERENCE-GUIDE.PDF",
+   "pub_date": "2026-09-08",
+   "event_date": "2026-09",
+   "tier": 1,
+   "label": "FACT (guide); HYPOTHESIS (blue-drone feed gap)",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Each vendor's incentive is to own its own controller/app/cloud (Skydio Cloud, AuterionOS/Nemyx, Kinesis), so cross-vendor coverage only exists where a vendor's OS is on the airframe; the Army's institutional response so far is procedural (CALL 25-14 control measures via the ADAM/BAE) plus TAK, which needs no purchased software; there is no requirement document, RFI or budget line for a unit-level fleet/airspace/collection layer (units buy drones, not software); Gauntlet one-way-attack drones are expendable, which lowers the value of per-airframe registry compared with ISR drones; the common-controller lineage (BCT Common Controller, URC study, PMA-263 UCC) shows the government repeatedly restarting rather than fielding this layer; and network/DDIL realities at company level make any live fleet picture unreliable.",
+ "why_not_solved_reasons": [
+  "procurement fragmentation",
+  "proprietary incumbent architecture",
+  "buyer fragmentation",
+  "integration complexity",
+  "economics",
+  "technology only recently possible"
+ ],
+ "technical_wedge": "A vendor-agnostic battalion edge service plus ATAK plugin that (a) ingests telemetry from any drone with an open path (MAVLink/PX4/ArduPilot, Auterion CoT, Skydio Cloud API, Remote-ID broadcast where present) and publishes blue-drone CoT tracks and intent (launch point, altitude block, loiter area, time window) into TAK and, later, C-UAS C2; (b) keeps a unit-owned registry of airframes, batteries, operators and qualifications that works offline and syncs opportunistically; (c) checks planned flights against the ACO/ACMs and flags conflicts before launch; (d) captures MISB/KLV-tagged clips and observations to an S2 inbox with a geospatial index and forwards them up the TAK Server chain. It does not replace any vendor controller.",
+ "mvp": {
+  "what": "ATAK-CIV plugin + small Linux edge service (laptop/Jetson) demonstrating a unit fleet board, procedural-deconfliction warnings against user-entered airspace measures, an offline registry/flight-training log, and a clip-forwarding inbox for three heterogeneous commercial drones (one PX4/MAVLink, one ArduPilot, one Skydio via Cloud API or a Remote-ID receiver).",
+  "demonstrable_in_3_6_months": "Live demo in a field with 3 drones: all three appear as CoT tracks with altitude blocks in ATAK; a planned flight that violates a ROZ/altitude block is flagged; an operator's flight and qualification log updates without connectivity and syncs later; a clip with KLV metadata lands in an S2 inbox on a second device via TAK Server.",
+  "what_it_must_prove": "That cross-vendor track ingestion is actually obtainable without vendor cooperation (the load-bearing assumption), that it works with intermittent networks, and that a battalion S3 air/UAS master trainer sees enough value over CALL 25-14 procedures plus spreadsheets to sponsor a CTC-rotation trial.",
+  "uses": [
+   "commercial hardware",
+   "open standards",
+   "unclassified architecture",
+   "simulated military data",
+   "commercial compute"
+  ]
+ },
+ "data_requirement": {
+  "what": "Drone telemetry (position, altitude, battery, mode) and video with KLV; unit airspace control measures/ACO (CUI in real units, synthetic for MVP); operator/airframe/qualification records; later C-UAS track formats.",
+  "legally_realistically_obtainable": "Telemetry from commercial PX4/ArduPilot airframes is self-collectable and EAR99-level; Skydio requires Cloud API access; Auterion CoT feeds require a partnership; real ACOs and unit records are CUI and only reachable through a sponsoring unit or CTC; Gauntlet vendor telemetry formats are not public. Realistic for an MVP, hard for a fielded product without a unit sponsor and vendor agreements.",
+  "sources": [
+   "PX4/ArduPilot MAVLink streams from owned commercial drones",
+   "Skydio Cloud API (partner access)",
+   "Auterion Mission Control CoT output (partner access)",
+   "Remote ID broadcast (ASTM F3411) where enabled",
+   "Synthetic ACO/ACM data built from public doctrine (FM 3-52, CALL 25-14)",
+   "TAK Server / ATAK-CIV open-source SDK"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "ATAK / TAK Server (unit COP)",
+   "Vendor controllers and clouds (Skydio, Auterion, Red Cat/Teal, Gauntlet vendors)",
+   "AeroVironment Kinesis (HMIF) where present",
+   "FAAD C2 / Lattice C-UAS C2 (blue-drone feed, later)",
+   "TITAN / NGC2 data layer (upstream consumer, later)"
+  ],
+  "interfaces_protocols": [
+   "Cursor-on-Target (CoT) / TAK plugin SDK",
+   "MAVLink (PX4/ArduPilot)",
+   "Skydio Cloud API",
+   "STANAG 4609 / MISB KLV for video metadata",
+   "ASTM F3411 Remote ID",
+   "STANAG 4586 (Group 2-3 GCS interoperability, optional)"
+  ],
+  "who_controls_the_interface": "TAK Product Center (Army C5ISR Center) controls TAK/CoT and plugin signing for government users; each drone vendor controls its telemetry/API access (the main gatekeeper); JIATF-401/Army controls C-UAS C2 interfaces; PEO IEW&S/Palantir control TITAN ingest. The startup controls none of them."
+ },
+ "customer": {
+  "user": "Company drone team leaders, battalion UAS master trainers, S3 air NCOs, S2 collection managers, brigade ADAM/BAE cells",
+  "champion": "Battalion/brigade commanders in Transformation-in-Contact units and the CTC/CALL community that wrote Handbook 25-14; division innovation cells (4ID, 25ID, 101st/82nd)",
+  "contract_signer": "Army Contracting Command (e.g., ACC-APG for C5ISR/TAK-adjacent work; ACC-Redstone for PM UAS) or a division's unit-level purchase authority for small pilots; xTech/SBIR through Army Applications Laboratory / Army SBIR office",
+  "requirement_owner": "Army Transformation and Training Command (T2COM) via the Maneuver Center of Excellence and Aviation Center (airspace/UAS doctrine); DRPM-UxS/Drone Dominance office for the drone side (INFERENCE)",
+  "program_office": "PEO Aviation PM UAS (SRR/MRR/LRR and UAS marketplace); Army TAK Product Center (C5ISR Center) for plugins; RCCTO (HMIF/Kinesis) as an alternative host",
+  "contracting_office": "Army Contracting Command - Redstone (PM UAS) and ACC-APG (C5ISR); Public evidence insufficient on which office would execute a software-only fleet layer"
+ },
+ "budget": {
+  "program_or_line": "No dedicated program or budget line for a unit-level sUAS fleet/airspace/collection software layer identified. Adjacent money: FY2027 Drone Dominance request ($53.6B via reconciliation, unappropriated), Army sUAS procurement lines (SRR/MRR/LRR), Drone Dominance program (~$1.1B cumulative per secondary sources), HMIF/Kinesis (RCCTO).",
+  "evidence": "Requests and press figures only; obligations for software of this kind not disclosed; the Army's fielded answer is doctrine (CALL 25-14) which costs nothing. Public evidence insufficient for a software line.",
+  "source_url": "https://www.defensedaily.com/dod-details-massive-drone-industrial-base-investment-in-fy-27-explains-reconciliation-outlook/budget/",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "TAK plugin (ATAK-CIV open source) piloted with a Transformation-in-Contact battalion or a National Guard unit, then Army xTech / DIU CSO / OTA once a unit sponsor exists",
+  "sequence": [
+   "Build on ATAK-CIV SDK and PX4/ArduPilot with commercial drones (no government paperwork)",
+   "Partner with one Gauntlet or SRR vendor (Auterion CoT, Skydio Cloud API) for telemetry access",
+   "Field trial with a TiC battalion or CTC (JPMRC/JMRC/NTC) via unit invitation or xTech prize",
+   "TAK.gov plugin submission/signing for government users; DCMA Blue UAS Framework software listing if applicable",
+   "OTA/CSO through Army Applications Lab, DIU or a division's innovation cell; SBIR only after the German founder's PR and a compliant ownership structure"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% U.S. citizen/PR ownership - not met while both founders are foreign persons; becomes possible after the German founder's PR if the cap table meets the test. TAK plugins, OTAs/CSOs and xTech prizes have no citizenship test but data access to CUI ACOs/unit records and to 600-series drone technical data would need a deemed-export review for the Indonesian founder (needs counsel). Commercial-drone tooling (MAVLink/PX4) is EAR99-level per E07; specially-designed military UAS software may fall under 9D610 (needs counsel)."
+ },
+ "competition": [
+  {
+   "company": "Auterion (AuterionOS / Nemyx / Mission Control)",
+   "how_close": "Very close for AuterionOS-equipped drones: multi-manufacturer fleet coordination with CoT-to-ATAK feeds; Gauntlet production award 2026; 33,000+ Skynode kits delivered to Ukraine.",
+   "evidence": "https://thedefensepost.com/2025/09/05/auterion-nemyx-drone-swarm/ (2025-09-05); https://auterion.com/product/nemyx/"
+  },
+  {
+   "company": "AeroVironment / Tomahawk Robotics (Kinesis)",
+   "how_close": "Close: common controller/software tasking many robots from different vendors; lead SW/systems integrator for Army HMIF Inc 1 (RCCTO, Sept 2025); coverage depends on vendor integrations.",
+   "evidence": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/ (2025-09-29)"
+  },
+  {
+   "company": "Anduril (Lattice)",
+   "how_close": "Adjacent-dominant: JIATF-401 common C-UAS C2 ($87M task order, Mar 2026) and NGC2 for 4ID; could absorb blue-drone tracks and fleet views as a Lattice feature.",
+   "evidence": "https://defensescoop.com/2026/03/14/anduril-20-billion-dollar-army-contract/ (2026-03-14)"
+  },
+  {
+   "company": "Skydio (Skydio Cloud)",
+   "how_close": "Close for its own fleet: fleet health, telemetry sync, live-stream coordination; single-vendor and connectivity-dependent; largest SRR vendor (2,500+ X10D, $52M+).",
+   "evidence": "https://support.skydio.com/hc/en-us/articles/35583768187291-Skydio-Cloud-DFR-Command-and-Remote-Ops-3-April-2025 (2025-04-03)"
+  },
+  {
+   "company": "TAK Product Center (government) and TAK plugin developers",
+   "how_close": "The likely default: UAS Tool and video plugins already exist in the TAK ecosystem; a government-built fleet/airspace plugin would make a startup product redundant.",
+   "evidence": "E07-F25 (ATAK-CIV open-sourced; plugin architecture); RECALL on specific UAS plugins - not re-verified this session"
+  },
+  {
+   "company": "Palantir (TITAN) / NGC2 data-layer teams (Anduril, Lockheed/Raft)",
+   "how_close": "Upstream: fused targeting at division/corps and division data layers; could extend downward but have no company-level footprint today.",
+   "evidence": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/ (2026-09-01)"
+  },
+  {
+   "company": "Red Cat/Teal, Getac (CommandCore), Quantum Systems, Edgybees, Picogrid, Applied Intuition",
+   "how_close": "Partial: vendor controllers, rugged GCS software, video georegistration, sensor/effector integration APIs; none found selling a unit-level multi-vendor registry/deconfliction layer. Public evidence insufficient this session on CommandCore/Red Cat fleet software in Army units.",
+   "evidence": "Companies index (B03 Picogrid, B10 Quantum Systems); search returned no Army-unit evidence for CommandCore/Red Cat fleet software"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes. Anduril can expose blue-drone tracks and fleet status inside Lattice (already the JIATF-401 C-UAS C2 and 4ID NGC2 layer); Auterion and AV are already selling the multi-vendor layer for their ecosystems; the TAK Product Center can ship a government plugin. Palantir could extend TITAN/Gotham views downward but has no company-level footprint; L3Harris is least positioned.",
+  "why_startup_still_wins_or_reject": "A startup wins only if it stays vendor-neutral where Auterion/AV/Anduril cannot be (each is a drone or C2 vendor with its own ecosystem) and targets the unglamorous unit-owned pieces (registry, qualification/training ledger, procedural-deconfliction checks, offline-first S2 inbox) that incumbents treat as features. That is a thin moat: the honest expectation is acquisition or displacement by a TAK-native tool unless the team reaches a CTC-validated, unit-adopted workflow first."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$60k-$120k (3 commercial drones incl. one Skydio, laptop/Jetson, TAK Server instance, 2 engineers 4-6 months)",
+  "credible_military_demo_usd": "$400k-$900k (CTC/TiC field trial, vendor API partnerships, ruggedization, a former UAS master trainer/S3 air on staff, travel, 9-12 months)",
+  "first_production_deployment_usd": "$2M-$5M (TAK.gov plugin signing and cyber/ATO support, integrations with 3-5 Gauntlet/SRR vendors, C-UAS C2 feed, support for a brigade set, 18-24 months)",
+  "assumptions": "Software-only, unclassified; no clearances needed until C-UAS/targeting integration; OTA/CSO or xTech funds part of the demo; the $250k founder capital covers the PoC but not the military demo without a prize or vendor partner."
+ },
+ "expertise_required": [
+  {
+   "role": "Former battalion S3 air / brigade ADAM-BAE officer or UAS master trainer with CTC rotation experience",
+   "why": "Defines the procedural-deconfliction workflow, ACO/ACM semantics and what a battalion will actually adopt over CALL 25-14 procedures; opens unit doors.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "ATAK plugin / TAK Server engineer",
+   "why": "The product lives inside TAK; plugin SDK, CoT schemas and TAK.gov signing are the delivery path.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Drone systems engineer (PX4/ArduPilot/MAVLink, Skydio/Auterion APIs, MISB KLV)",
+   "why": "Cross-vendor telemetry and video ingestion is the load-bearing technical assumption.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Export-control / FOCI counsel (fractional)",
+   "why": "Deemed-export exposure for the Indonesian founder once military UAS technical data enters the company; SBIR ownership planning.",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Defense BD with PM UAS / C5ISR Center / xTech relationships",
+   "why": "No requirement exists; someone must convert unit pull into a vehicle.",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "Unclassified, software-only MVP on open-source TAK and commercial drones is low-burden; burden rises with government plugin signing/ATO, CUI handling of ACOs and unit records, Blue UAS Framework listing, and any C-UAS C2 or targeting integration (classification and 600-series exposure). Kinetic/EW mitigation is out of scope and legally restricted.",
+  "non_us_person_founder_note": "Both founders are foreign persons today: SBIR/STTR not viable; TAK-CIV plugins, OTAs/CSOs and xTech are viable; CUI access requires unit sponsorship and likely a TCP; 9D610-type technical data from Gauntlet vendors would need a BIS deemed-export license for the Indonesian founder (per E07 - describe, do not conclude; needs counsel). The German founder's PR later enables SBIR ownership counting and ITAR/EAR U.S.-person status but not clearance eligibility."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "Public-safety drone units (DFR programs), wildfire/disaster response and critical-infrastructure operators need the same multi-vendor registry, airspace-check and evidence-forwarding workflow on ATAK-CIV/TAK; but commercial fleet-management software (Skydio Cloud, DroneDeploy-type tools, UTM providers) already serves those buyers, so dual-use is a proving ground more than a large revenue line."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "workflow",
+   "deployment footprint",
+   "government relationships",
+   "data"
+  ],
+  "explanation": "Vendor telemetry adapters, TAK-native workflow validated at a CTC, a unit-adopted registry/training ledger and a corpus of KLV-indexed unit collection become sticky; none is a hard moat, and the TAK Product Center or Anduril can replicate the workflow. Accreditation (plugin signing, ATO) and unit relationships are the realistic barriers."
+ },
+ "why_now": "July 2025 Drone Dominance directive and Gauntlet rounds put >12,000 multi-vendor drones in squads by Sept 2026 with 30,000 more inbound and 60,000 expected from Gauntlet 2; the Army's own doctrine response (CALL 25-14, Sept 2025) is procedural and units document hand workarounds (BARS marking) because drone tracks do not populate the COP; ATAK-CIV and its SDK are open source; multi-manufacturer coordination only became demonstrable in late 2025; TITAN entered production but only at division/corps; DCMA now runs Blue UAS as a marketplace including software.",
+ "killer_risk": "The Army does not buy this as a product: its answer to unit-level deconfliction is doctrine plus TAK (free), its answer to fleet control is whichever vendor OS is on the airframe (Auterion, AV Kinesis, Skydio) or Lattice, and no RFI, requirement or budget line for a vendor-neutral unit layer exists; the mass drones are expendable one-way-attack systems where per-airframe registry adds little; so the best case is a TAK plugin feature that a government team or Anduril absorbs, not a company.",
+ "market_stage": "Emerging",
+ "procurement_signal_timeline": [
+  {
+   "year": "2022",
+   "event": "Skydio selected for SRR program of record under 5-year OTA (Feb 2022)",
+   "source_url": "https://www.congress.gov/crs-product/IF12668"
+  },
+  {
+   "year": "2023",
+   "event": "AeroVironment acquires Tomahawk Robotics/Kinesis ($120M) - common-controller layer consolidates into a drone OEM",
+   "source_url": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/"
+  },
+  {
+   "year": "2025",
+   "event": "Drone Dominance directive (Jul); Auterion Nemyx launch (Sep); CALL Handbook 25-14 on sUAS airspace management (Sep); AV Kinesis RCCTO/HMIF award (Sep); SkyFoundry 10,000/month goal (Oct); Blue UAS moves to DCMA (Dec); first multi-manufacturer swarm demo (Dec)",
+   "source_url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control"
+  },
+  {
+   "year": "2026",
+   "event": "Anduril $87M JIATF-401 C-UAS C2 task order (Mar); Skydio $52M+ X10D order (Mar); 3rd CAB airspace plan tested at JMRC (Apr); CRS IF12668 update (May); TITAN production $192M (Sep 1); JIATF-401 C-sUAS guide (Sep 8); Gauntlet 2 results and 12,080 drones accepted, experimental drone battalion ends (Sep 18); FY27 $53.6B Drone Dominance reconciliation request",
+   "source_url": "https://defensescoop.com/2026/09/18/drone-dominance-program-gauntlet-2-results/"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling with allies: Germany (Quantum Systems, Helsing, Auterion EU HQ), the UK and Poland are buying multi-vendor sUAS mass and NATO/France (Arcadia) explicitly want interoperable, sensor-agnostic drone C2 modeled on Ukraine's Delta; ATAK/TAK is widely used by allies and a German founder eases EU sales. But allied armies face the same 'doctrine plus TAK plus vendor OS' substitution, and Ukraine's Delta/Brave1 ecosystem already produced unit-level drone coordination tools that European buyers cite. Allied demand improves the story for a vendor-neutral layer but does not remove the killer risk.",
+ "search_log": [
+  {
+   "query": "Army Gauntlet drones \"12,080\" squad Drone Dominance September 2026",
+   "useful": true
+  },
+  {
+   "query": "sam.gov RFI \"small UAS\" fleet management software 2026 Army sources sought \"unmanned aircraft\" registry deconfliction battalion",
+   "useful": true
+  },
+  {
+   "query": "Army small UAS airspace deconfliction company battalion \"Transformation in Contact\" drones airspace coordination 2026",
+   "useful": true
+  },
+  {
+   "query": "Drone Dominance budget FY2027 request SkyFoundry funding reconciliation small drones billion 2026",
+   "useful": true
+  },
+  {
+   "query": "Auterion Nemyx OR \"Kinesis\" OR \"Skydio Cloud\" multi-vendor drone fleet command Army 2026 TAK plugin",
+   "useful": true
+  },
+  {
+   "query": "3rd Combat Aviation Brigade airspace management small UAS \"does not automatically populate\" BARS CALL Handbook 25-14 airspace management control",
+   "useful": true
+  },
+  {
+   "query": "\"Battalion Perspectives in Contact\" Small Wars Journal September 2026 drones tactical gaps",
+   "useful": true
+  },
+  {
+   "query": "GAO report 2026 Army small unmanned aircraft systems drone fielding training oversight Drone Dominance",
+   "useful": false
+  },
+  {
+   "query": "friendly drone identification \"blue force\" small UAS counter-UAS fratricide JIATF-401 OR \"FAAD C2\" Remote ID Army 2026",
+   "useful": false
+  },
+  {
+   "query": "Army drone fleet management software unit readiness flight log sUAS \"Skydio Cloud\" OR \"CommandCore\" OR \"Red Cat\" OR \"PDW\" battalion 2026",
+   "useful": true
+  },
+  {
+   "query": "WebFetch dvidshub.net 3rd CAB article (EGRESS_BLOCKED)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control",
+   "title": "Small Unmanned Aircraft System Airspace Management and Control (CALL Handbook 25-14 announcement)",
+   "pub_date": "2025-09",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/290694/3rd_combat_aviation_brigade_innovates_airspace_management_for_congested_battlespace_advancing_army_2030_readiness",
+   "title": "3rd Combat Aviation Brigade Innovates Airspace Management for Congested Battlespace",
+   "pub_date": "2026 (pre-April)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/558719/3rd-combat-aviation-brigade-innovates-airspace-management-congested-battlespace-advancing-army-2030-readiness",
+   "title": "DVIDS mirror of 3rd CAB airspace management article (blocked this session)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.militarytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "title": "As experimental drone battalion ends, Army aims to push drones to every squad",
+   "pub_date": "2026-09-18",
+   "tier": 2
+  },
+  {
+   "url": "https://breakingdefense.com/2026/09/army-has-enough-drones-for-each-unit-now-it-needs-to-train-soldiers-to-use-them/",
+   "title": "Army can outfit small drones to each unit, but needs the training to do so",
+   "pub_date": "2026-09",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/09/18/drone-dominance-program-gauntlet-2-results/",
+   "title": "Pentagon unveils top performers in latest 'Gauntlet' for Drone Dominance Program",
+   "pub_date": "2026-09-18",
+   "tier": 2
+  },
+  {
+   "url": "https://www.war.gov/News/News-Stories/Article/Article/4520698/drone-dominance-program-receives-first-order-gauntlet-ii-gets-underway/",
+   "title": "Drone Dominance Program Receives First Order, Gauntlet II Gets Underway",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "http://smallwarsjournal.com/2026/09/16/battalion-perspectives-in-contact-bridging-tactical-gaps-during-transformation/",
+   "title": "Battalion Perspectives in Contact: Bridging Tactical Gaps During Transformation",
+   "pub_date": "2026-09-16",
+   "tier": 3
+  },
+  {
+   "url": "https://smallwarsjournal.com/2026/04/14/transforming-in-contact-the-army-needs-an-unmanned-systems-command-now/",
+   "title": "Transforming in Contact: The Army Needs an Unmanned Systems Command Now",
+   "pub_date": "2026-04-14",
+   "tier": 3
+  },
+  {
+   "url": "https://www.congress.gov/crs-product/IF12668",
+   "title": "U.S. Army Small Uncrewed Aircraft Systems Programs (CRS IF12668)",
+   "pub_date": "2026-05",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/04/army-battalions-facing-reconnaissance-security-gaps-service-wants-new-drone-close-them/",
+   "title": "The Army wants a new drone to close 'reconnaissance and security gaps' for its battalions",
+   "pub_date": "2026-05-04",
+   "tier": 2
+  },
+  {
+   "url": "https://www.defensedaily.com/dod-details-massive-drone-industrial-base-investment-in-fy-27-explains-reconciliation-outlook/budget/",
+   "title": "DoD Details Massive Drone, Industrial Base Investment In FY '27, Explains Reconciliation Outlook",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://droneintelligence.ai/intelligence/us-defence-drone-procurement-market",
+   "title": "US Defence Drone Procurement Market 2026 Forecast",
+   "pub_date": "2026",
+   "tier": 4
+  },
+  {
+   "url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/",
+   "title": "Army TITAN platform production awards to Palantir, Anduril",
+   "pub_date": "2026-09-01",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2025/10/14/army-small-drones-skyfoundry/",
+   "title": "Army small drones / SkyFoundry",
+   "pub_date": "2025-10-14",
+   "tier": 2
+  },
+  {
+   "url": "https://thedefensepost.com/2025/09/05/auterion-nemyx-drone-swarm/",
+   "title": "Auterion's 'Nemyx' Unifies Different Drone Fleets Into AI-Coordinated Swarms",
+   "pub_date": "2025-09-05",
+   "tier": 3
+  },
+  {
+   "url": "https://auterion.com/product/nemyx/",
+   "title": "Auterion Nemyx product page",
+   "pub_date": "2025-2026",
+   "tier": 4
+  },
+  {
+   "url": "https://support.skydio.com/hc/en-us/articles/35583768187291-Skydio-Cloud-DFR-Command-and-Remote-Ops-3-April-2025",
+   "title": "Skydio Cloud, DFR Command and Remote Ops release notes",
+   "pub_date": "2025-04-03",
+   "tier": 4
+  },
+  {
+   "url": "https://www.avinc.com/2025/09/29/av-awarded-u-s-army-rccto-contract-for-kinesis-named-lead-software-systems-integrator-for-hmif/",
+   "title": "AV awarded U.S. Army RCCTO contract for Kinesis; named lead SW/systems integrator for HMIF",
+   "pub_date": "2025-09-29",
+   "tier": 4
+  },
+  {
+   "url": "https://defensescoop.com/2026/03/14/anduril-20-billion-dollar-army-contract/",
+   "title": "Anduril Army enterprise agreement and $87M JIATF-401 C-UAS C2 task order",
+   "pub_date": "2026-03-14",
+   "tier": 2
+  },
+  {
+   "url": "https://media.defense.gov/2026/Sep/08/2003992822/-1/-1/1/JOINT-INTERAGENCY-TASK-FORCE-401-2026-COUNTER-SMALL-UNMANNED-AIRCRAFT-SYSTEMS-QUICK-REFERENCE-GUIDE.PDF",
+   "title": "JIATF-401 2026 Counter-Small UAS Quick Reference Guide",
+   "pub_date": "2026-09-08",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/c930003cc58c4d7bbe4d2c4c45aa3ac1/view",
+   "title": "Company Level Small Uncrewed Aircraft System (SUAS) challenge (SAM.gov)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://mwi.westpoint.edu/who-owns-the-drones-why-modernization-of-army-small-unmanned-aircraft-systems-should-be-a-maneuver-responsibility/",
+   "title": "Who Owns the Drones? Why Modernization of Army sUAS Should Be a Maneuver Responsibility (MWI)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+   "title": "RUSI: Uncrewed Ground Systems (Project Convergence 22 operator overload)",
+   "pub_date": "2023-10-26",
+   "tier": 3
+  }
+ ]
+}

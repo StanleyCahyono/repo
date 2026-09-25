@@ -1,0 +1,651 @@
+{
+ "id": "G19",
+ "title": "Government-reference-architecture conformance, synthetic-scenario and T&E harness for autonomy and PNT plug-ins (A-GRA, FANTOM Core, UMAA, IOP; pntOS/ASPN and NAVWAR-compliance evidence)",
+ "problem": "Services now assert government-owned reference architectures for autonomy (A-GRA, FANTOM Core, UMAA, IOP) and PNT (pntOS/ASPN) and require NAVWAR compliance at every milestone, but the conformance toolkits, synthetic-scenario generators and T&E capacity that would let vendors and program offices prove conformance quickly are thin, government-internal or program-by-program, so every integration is re-tested bespoke.",
+ "categories": [
+  "A",
+  "B",
+  "E",
+  "H",
+  "I"
+ ],
+ "segment_ids": [
+  "S11",
+  "S13"
+ ],
+ "chain_steps": [
+  "PROCESS",
+  "FUSE",
+  "DECIDE"
+ ],
+ "echelons": [
+  "platform",
+  "program office",
+  "vendor engineering"
+ ],
+ "user": {
+  "exact_role": "Autonomy/PNT integration and T&E engineers: (a) at program offices (CCA autonomy evaluation team, SOCOM PEO-SDA UxSAI assessment team, PMS 406 UMAA board, Army PM PNT / C5ISR Center pntOS team, NAVWAR-compliance reviewers under DoDI 4650.08); (b) at vendors who must show conformance (CCA autonomy competitors, SOCOM loitering-munition and mission-autonomy bidders, USV/UUV autonomy vendors, alt-PNT plug-in vendors).",
+  "echelon": "Program office / vendor engineering (not tactical units)",
+  "organization_examples": [
+   "AFLCMC/RCO CCA program office and AFRL autonomy T&E",
+   "USSOCOM PEO-SDA / SOFWERX (UxSAI Mission Autonomy Systems Assessment Events)",
+   "NAVSEA PMS 406 and the UMAA board (UMAAB)",
+   "Army C5ISR Center / PM PNT (pntOS, ASPN, PNTAX/APEX)",
+   "Vendors: Shield AI, Collins Aerospace, Anduril, Applied Intuition/EpiSci, small USV/UUV autonomy firms, DIU TQS alt-PNT cohort, TRX, IS4S"
+  ]
+ },
+ "current_workflow": [
+  "Vendor obtains the architecture specification (UMAA ICDs and IDL are public via AUVSI; ASPN-ICD and pntOS-C are public on GitHub since 2026; A-GRA and FANTOM Core interfaces are government-controlled and shared with selected performers only).",
+  "Vendor writes its autonomy behaviors or PNT plug-in against the interface using ad hoc, vendor-built simulation and test data (PX4/Gazebo, Unreal, MATLAB, in-house rigs, RF simulators for PNT).",
+  "Vendor waits for a government evaluation slot: CCA semi-autonomous flight tests (Feb 2026 onward), SOFWERX/UxSAI assessment events (Aug-Dec 2026), PMS 406 UMAA reviews, PNTAX/APEX field experiment (annual, White Sands).",
+  "Government runs limited M&S and field tests; alt-PNT M&S fidelity is lower than GNSS models; issues surface late.",
+  "For PNT-using programs, the MDA requires NAVWAR-compliance evidence at each milestone; the evidence package is assembled manually from test reports.",
+  "Repeat per vendor and per software drop; each program (air, SOF, maritime, ground, PNT) re-creates its own harness."
+ ],
+ "current_solution": "Vendor in-house simulation (Applied Intuition Axion/Acuity for autonomy; MATLAB/Simulink; PX4/Gazebo; Unreal-based sims), government testbeds (AFRL/AFTC for CCA, SOFWERX assessment events, PMS 406 UMAA board, Army MDQDA/GIANT/CIGNM M&S and PNTAX/APEX), MITRE's low-cost UMAA compliance reference implementation, RTI Connext DDS tooling for UMAA, Spirent/Safran Skydel RF simulators for PNT, and manual NAVWAR-compliance evidence assembly.",
+ "failure": "There is no shared, architecture-conformant, software-only harness that (1) emits pass/fail conformance reports against the government interface contracts, (2) generates synthetic multi-source scenarios with DDIL/EW and jamming/spoofing conditions, and (3) auto-produces milestone evidence (NAVWAR compliance, safety-case artifacts). Government toolkits were planned (Army pntOS compliance toolkit, GAO 2021) but their release is not publicly evidenced; the M&S fidelity for alternative PNT is 'poorer'; A-GRA and FANTOM Core are not public, so third parties cannot validate a harness without being inside a program.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "GAO reported the Army planned 'a compliance toolkit that can automatically verify that plug-ins for the PNT Operating System comply with its architecture', that alternative-PNT M&S fidelity is poorer than GNSS models, that engagement-level trade tools 'do not yet exist', that field tests need civil airspace closures, and that DoD's MOSA/open-architecture PNT initiative was funded at only $17M FY2020-2024 and may 'peter out'.",
+   "source_title": "GAO-21-320SP, Defense Navigation Capabilities: DOD is Developing PNT Technologies to Complement GPS",
+   "source_url": "https://www.gao.gov/products/gao-21-320sp",
+   "pub_date": "2021-05-10",
+   "event_date": "2021-05-10",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DoDI 4650.08 requires NAVWAR compliance to be determined and reported to the milestone decision authority at each milestone, with T&E plans sufficient to validate it; OPNAVINST 9420.1C requires fleet PNT systems certified as-designed and as-installed.",
+   "source_title": "DoDI 4650.08 Positioning, Navigation, and Timing (PNT) and Navigation Warfare (NAVWAR), Change 1",
+   "source_url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/465008p.pdf",
+   "pub_date": "2020-12-30",
+   "event_date": "2020-12-30",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "In February 2026 the Air Force achieved the first official government validation of the Autonomy Government Reference Architecture (A-GRA), integrating third-party mission autonomy (Collins Sidekick, Shield AI Hivemind) onto both GA-ASI YFQ-42A and Anduril YFQ-44A prototypes; five companies compete on CCA autonomy software, with a downselect expected in 2027.",
+   "source_title": "DefenseScoop: Air Force begins testing mission autonomy package for CCA prototypes; FlightGlobal: USAF demonstrates interoperable autonomy architecture across competing CCAs; The Aviationist",
+   "source_url": "https://defensescoop.com/2026/02/12/air-force-testing-mission-autonomy-package-cca-drone-prototypes/",
+   "pub_date": "2026-02-12",
+   "event_date": "2026-02",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "USSOCOM's June 2026 loitering-munition notice requires the system to support government-owned FANTOM Core collaborative mission autonomy to command the flight controller via an M2M API and/or BMS integration; a separate SOCOM Collaborative Autonomy Integration RFI exists; SOCOM officials said in May 2026 that collaborative-autonomy development is 'not moving fast enough'.",
+   "source_title": "sam.gov notice 9d16ce1cfc254b448e0584c9b88a4fb1; SOFX summary; DefenseScoop 2026-05-18",
+   "source_url": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view",
+   "pub_date": "2026-06-26",
+   "event_date": "2026-06-26",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "SOFWERX and PEO-SDA are running a UxSAI Mission Autonomy Systems Assessment Event series (whitepapers due 2026-09-08; downselects, one-on-one assessments, T&E of selected solutions, final downselect Aug-Dec 2026) for decentralized collaborative autonomy that must integrate into the government's Collaborative Heterogeneous Autonomy Operations Software, and separately a UxSAI Synthetic Data Modeler assessment event (June 2026) for a self-service synthetic-data platform - the government is procuring its own T&E and synthetic-data pipeline rather than a vendor harness.",
+   "source_title": "DefenseScoop: SOCOM planning to test new mission autonomy software for unmanned systems program; Soldier Systems Daily; sam.gov UxSAI Synthetic Data Modeler AE",
+   "source_url": "https://defensescoop.com/2026/08/18/mission-autonomy-software-unmanned-systems-special-operations/",
+   "pub_date": "2026-08-18",
+   "event_date": "2026-08 to 2026-12",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "UMAA 6.0 (Dec 2023) ships a Compliance Specification with ICDs/IDL; MITRE publishes a 'low-cost solution for UMAA compliance' (a reference implementation for small USVs); RTI presented adapting MOOS-IvP to UMAA (MOOS-DAWG 2024); a small firm (Weathergage Tech) markets 'UMAA compliance with far less effort'; PMS 406 posted a UMAA-compliant software solicitation in 2023 - several partial, mostly free or government-funded compliance aids exist for the maritime architecture.",
+   "source_title": "MITRE: A Low-Cost Solution for the U.S. Navy's UMAA Compliance; AUVSI UMAA ICDs; RTI MOOS-DAWG 2024 paper; sam.gov UMAA compliant software",
+   "source_url": "https://www.mitre.org/our-impact/intellectual-property/low-cost-solution-us-navys-unmanned-maritime-autonomy-architecture",
+   "pub_date": "2024-2025",
+   "event_date": "2023-12 (UMAA 6.0); 2024 (MOOS-DAWG)",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "Navy SBIR 26.5 open topic DON26BX05-NP004 (NAVWAR, GPNTS transition owner) accepts synthetic ASPN/pntOS data for Phase I and states 'innovation required on the ingestion of disparate types of APNT data sources and how to standardize those types of data' - i.e., a synthetic ASPN scenario source is a recognized need.",
+   "source_title": "Navy SBIR DON26BX05-NP004 topic and Q&A",
+   "source_url": "https://www.navysbir.com/n26_5/DON26BX05-NP004.htm",
+   "pub_date": "2026-08-08",
+   "event_date": "2026-08-08",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "pntOS-C and the ASPN-ICD (ASPN 2023, 53 sensor message definitions) are public; in 2026 ISTO announced the PNT Standards Consortium founded by Leidos, IS4S and TRX Systems to govern pntOS and ASPN and 'simplify the use of standards to encourage implementation' - the standards are open but no public conformance test suite is evidenced.",
+   "source_title": "ISTO announces formation of PNT Standards Consortium; pntstandards.org; Open-PNT/pntOS-C GitHub",
+   "source_url": "https://pntstandards.org/",
+   "pub_date": "2026",
+   "event_date": "2026",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "PNTAX (sixth annual, hosted by AFC All-Domain Sensing CFT at White Sands) was to be renamed the All-domain Persistent Experiment (APEX) from FY25 Q4 with an expanded scope (sensor/comms architectures, data transport, edge processing under a realistic threat environment) - the government's own field-assessment venue for PNT/autonomy remains an annual, capacity-limited event.",
+   "source_title": "army.mil: Sixth annual PNT Assessment Experiment aligns Army priorities, capabilities",
+   "source_url": "https://www.army.mil/article/281520/sixth_annual_pnt_assessment_experiment_aligns_army_priorities_capabilities",
+   "pub_date": "2024-11 (approx.)",
+   "event_date": "FY2025 Q4 (planned rename)",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-25-106931: only 14 of 20 reviewed programs implemented MOSA to some extent, none analyzed MOSA costs and benefits, and a GAO official said in June 2026 that MOSA implementation is still lagging - the policy driver for conformance tooling is real but weakly enforced.",
+   "source_title": "GAO-25-106931 Weapon Systems Acquisition: DOD Needs Better Planning to Attain Benefits of Modular Open Systems",
+   "source_url": "https://www.gao.gov/products/gao-25-106931",
+   "pub_date": "2025-01-22",
+   "event_date": "2025-01-22",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "CCA Increment 1 FY2027 request is reported at about $2.5B (about $1B procurement), up from $891M enacted in FY2026; autonomy T&E is funded inside the program, not as a standalone line.",
+   "source_title": "Shephard CCA programme page; Air & Space Forces Magazine: Air Force wants nearly $1 billion to start buying CCAs in 2027",
+   "source_url": "https://www.airandspaceforces.com/air-force-nearly-1-billion-to-start-buying-ccas-2027/",
+   "pub_date": "2026",
+   "event_date": "2026-04 (PB27 release)",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "Applied Intuition markets Axion as an end-to-end autonomy platform that 'unifies developers and operators in a shared digital environment, accelerating testing, integration, and deployment across all domains' and acquired EpiSci (Jan 2025); this is company marketing, not proof of A-GRA/UMAA conformance tooling, but it shows the best-funded adjacent vendor is aiming at the same T&E/integration slot.",
+   "source_title": "Applied Intuition press: Axion and Acuity; Applied Intuition acquires EpiSci",
+   "source_url": "https://www.appliedintuition.com/press-releases/axion-and-acuity",
+   "pub_date": "2025",
+   "event_date": "2025-01 (EpiSci); 2025 (Axion)",
+   "tier": 4,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Three structural reasons. (1) Access: A-GRA and FANTOM Core are government-owned and only shared with selected performers; the full government ASPN message set requires citizenship/contractor verification; only UMAA and the public ASPN/pntOS-C subsets are open, so an outsider cannot validate a harness against the architectures that matter most. (2) The government is building the tooling itself: the Army planned an automatic pntOS plug-in compliance toolkit (GAO 2021), MITRE publishes a UMAA compliance reference implementation, and SOCOM is procuring its own UxSAI assessment events and synthetic-data modeler - free or government-funded substitutes suppress a paid market. (3) Small, fragmented customer base: a few dozen autonomy and alt-PNT vendors plus five program offices each owning a different architecture; T&E money sits inside programs (CCA, PMS 406, PM PNT) rather than in a standalone line, so nobody has a budget object called 'conformance harness'. Applied Intuition (well funded, EpiSci lineage) is the closest commercial player and has so far sold platform-level simulation rather than architecture-specific conformance.",
+ "why_not_solved_reasons": [
+  "proprietary incumbent architecture",
+  "procurement fragmentation",
+  "insufficient commercial market",
+  "data inaccessible",
+  "classification",
+  "economics",
+  "buyer fragmentation"
+ ],
+ "technical_wedge": "Narrow to the open sub-problem: a software-only 'PNT and autonomy interface digital twin' that (a) generates synthetic ASPN 2023 measurement streams (GNSS, IMU, clock, magnetic, vision, RF-ranging) and multi-vehicle mission-message traffic under scripted degradation (jamming, spoofing, link loss, latency) using public schemas (ASPN-ICD YAML, pntOS-C API, UMAA IDL, MAVLink/STANAG 4586); (b) runs a vendor's plug-in or autonomy container against those streams in CI and scores schema conformance, behavioral conformance (DHS Resilient PNT Conformance Framework levels 0-4, UMAA compliance specification) and mission-outcome metrics; and (c) exports a structured evidence package mapped to DoDI 4650.08 NAVWAR-compliance questions and MOSA planning elements. Sell first to vendors preparing for PNTAX/APEX, SOFWERX UxSAI and PMS 406 reviews; later license to program offices as the shared harness. Restricted architectures (A-GRA, FANTOM Core) are added only inside a government-sponsored effort with cleared US-person staff.",
+ "mvp": {
+  "what": "Open-core CLI/CI harness: ASPN synthetic scenario generator + pntOS-C plug-in conformance suite + UMAA/MAVLink message-contract checker, with a hosted report that renders DHS-CF resilience level and a draft NAVWAR-compliance evidence table.",
+  "demonstrable_in_3_6_months": "Run a public pntOS-C example plug-in and an open-source USV/UAV autonomy stack (MOOS-IvP or PX4) through 20+ scripted degradation scenarios (TEXBAT-class spoofing, jamming ramps, link dropouts) and publish pass/fail conformance reports and resilience-level scoring; show a 20-vehicle Gazebo scenario with link-loss injection and automated UMAA/MAVLink contract checks.",
+  "what_it_must_prove": "That schema-plus-behavior conformance findings from the harness predict real integration failures (validated with at least two vendors' plug-ins under NDA), that the synthetic ASPN streams are accepted as Phase I evidence by NAVWAR/PM PNT reviewers, and that a vendor will pay (pilot fee) rather than wait for the government's free toolkit.",
+  "uses": [
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards",
+   "commercial hardware"
+  ]
+ },
+ "data_requirement": {
+  "what": "Interface specifications (ASPN-ICD, pntOS-C API, UMAA ICDs/IDL, MAVLink, STANAG 4586 public parts), open navigation datasets for scenario grounding, public spoofing/jamming test datasets, and (later) government threat conditions and restricted architecture documents.",
+  "legally_realistically_obtainable": "Yes for the open subset: ASPN-ICD and pntOS-C are Distribution A on GitHub; UMAA ICDs are public via AUVSI; DHS Resilient PNT Conformance Framework, PNT Integrity Library and NIST IR 8323r1 are public; MagNav open flight data (DAF-MIT) and TEXBAT spoofing datasets are public. No for the government ASPN message set (citizenship/contractor verification), JNWC threat conditions (CUI/classified), A-GRA and FANTOM Core interface documents (government-controlled, program access only).",
+  "sources": [
+   "https://github.com/Open-PNT/pntOS-C",
+   "https://www.auvsi.org/advocacy/advocacy-initiatives/unmanned-maritime-autonomy-architecture/",
+   "https://www.dhs.gov/publication/st-resilient-pnt-conformance-framework",
+   "https://pntstandards.org/",
+   "MagNav open dataset (DAF-MIT AI Accelerator, 2020) - RECALL, not re-verified this session",
+   "TEXBAT GPS spoofing dataset (UT Austin) - RECALL, not re-verified this session"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "Vendor pntOS plug-ins (C API) and PNT fusion engines",
+   "Vendor autonomy containers for CCA/SOCOM/USV programs",
+   "Government simulation environments (AFSIM, OneSAF, NGTS; Army MDQDA) for program-office use",
+   "CI pipelines (GitLab/GitHub) and Iron Bank/Platform One for government hosting",
+   "RF simulators (Spirent, Safran Skydel) for hardware-in-the-loop extensions"
+  ],
+  "interfaces_protocols": [
+   "ASPN 2023 YAML message definitions",
+   "pntOS-C plug-in API",
+   "UMAA ICDs over DDS (RTI Connext)",
+   "MAVLink / PX4 and STANAG 4586 (public parts)",
+   "A-GRA and FANTOM Core M2M APIs (government-controlled; access only inside a program)",
+   "DHS Resilient PNT Conformance Framework v2.0 levels; DoDI 4650.08 NAVWAR compliance reporting"
+  ],
+  "who_controls_the_interface": "Government: Army C5ISR Center/PM PNT (pntOS, now with the ISTO PNT Standards Consortium for governance), NAVSEA PMS 406 UMAA board (UMAA), AFLCMC/AFRL (A-GRA), USSOCOM PEO-SDA (FANTOM Core / CHAOS), Army GVSC (RAS-G IOP). None is controlled by the startup; A-GRA and FANTOM Core are not public."
+ },
+ "customer": {
+  "user": "Vendor integration/T&E engineers and program-office autonomy/PNT T&E leads",
+  "champion": "Chief engineer of an alt-PNT or autonomy vendor preparing for a government assessment; at government, the C5ISR Center pntOS lead, the PMS 406 UMAA board chair, or the SOFWERX/PEO-SDA UxSAI technical lead",
+  "contract_signer": "Vendor procurement (B2B pilot) initially; later a contracting officer at NAVWAR (SBIR/OT), Army Contracting Command-APG (PM PNT), AFLCMC (CCA) or USSOCOM SOF AT&L-K (PEO-SDA CSO)",
+  "requirement_owner": "DoD CIO/USSPACECOM-JNWC (NAVWAR compliance policy), Army AFC All-Domain Sensing CFT (APNT requirements), AFLCMC CCA program office (A-GRA), PMS 406 (UMAA), USSOCOM PEO-SDA (UxSAI)",
+  "program_office": "Army PM PNT (CPE ISW), NAVWAR/GPNTS, NAVSEA PMS 406, AFLCMC CCA / AFRL, USSOCOM PEO-SDA",
+  "contracting_office": "NAVWAR (Navy SBIR/CSO), ACC-APG, AFLCMC/AFRL (AFWERX), USSOCOM SOF AT&L-K via SOFWERX; DIU for DAWG-related orchestrator/autonomy efforts"
+ },
+ "budget": {
+  "program_or_line": "No standalone line. Funded inside programs: DAF CCA Increment 1 (FY27 request ~$2.5B reported, ~$1B procurement; autonomy T&E embedded); Army APNT/MAPS/DAPS RDT&E and procurement lines (values not verified this session); NAVWAR GPNTS SBIR (Phase I <= $200k base + $115k option; Phase II up to $2M); SOCOM MFP-11 RDT&E for UxSAI (values not public); DoD PNT MOSA initiative was only $17M FY2020-2024 (GAO).",
+  "evidence": "Shephard and Air & Space Forces Magazine report the CCA FY27 request; GAO-21-320SP documents the $17M MOSA integration line; NP004 topic sets SBIR ceilings. Army PM PNT and SOCOM UxSAI line values: Public evidence insufficient this session.",
+  "source_url": "https://www.airandspaceforces.com/air-force-nearly-1-billion-to-start-buying-ccas-2027/",
+  "confidence": "MEDIUM for CCA and SBIR figures; LOW for PNT and SOCOM lines"
+ },
+ "entry_vehicle": {
+  "primary": "Vendor-paid pilots (B2B) with alt-PNT and small autonomy vendors preparing for PNTAX/APEX, SOFWERX UxSAI assessments and PMS 406 reviews - no SBIR ownership test applies.",
+  "sequence": [
+   "Open-source the ASPN/pntOS conformance suite and UMAA/MAVLink contract checker to earn community and consortium standing (ISTO PNT Standards Consortium membership).",
+   "2-4 paid vendor pilots (scenario packs, hosted reports) ahead of APEX FY26/FY27 and UxSAI downselects.",
+   "Team with an eligible US small business or prime (IS4S, TRX, Leidos are consortium founders) as subcontractor on an Army/Navy SBIR or CSO topic once the German founder holds permanent residence and the cap table passes the >50% US-citizen/PR test.",
+   "Government license of the harness to a program office (PM PNT, PMS 406 or PEO-SDA) via SBIR Phase II/III or a PEO-SDA CSO OT.",
+   "Extension to restricted architectures (A-GRA, FANTOM Core) only under a government-sponsored effort with cleared US-person staff."
+  ],
+  "eligibility_notes": "SBIR requires >50% ownership and control by US citizens or permanent residents (13 CFR 121.702); the Indonesian founder's shares never count and the German founder's count only after the green card. AFWERX open topics limit foreign-national participation to public-domain/fundamental research and require work in the US. DoD SBIR proposals require foreign-national identification and export-control compliance. B2B sales to vendors carry none of these barriers, which is why the vendor-first sequence is proposed. Needs counsel: SBIR ownership, ITAR status of autonomy-interface work, deemed-export controls for the Indonesian founder."
+ },
+ "competition": [
+  {
+   "company": "Applied Intuition (Axion, Acuity; EpiSci)",
+   "how_close": "Closest: all-domain autonomy development, simulation and T&E platform sold to DoD; EpiSci lineage in DARPA ACE; aims at the same 'shared digital environment for testing, integration and deployment'.",
+   "evidence": "Company press (2025) - marketing, not proof of architecture-specific conformance tooling; https://www.appliedintuition.com/press-releases/axion-and-acuity"
+  },
+  {
+   "company": "MITRE (UMAA Compliance Solution)",
+   "how_close": "Free FFRDC reference implementation enabling low-cost USV controllers to be UMAA-compliant; a direct substitute for the maritime conformance wedge.",
+   "evidence": "https://www.mitre.org/our-impact/intellectual-property/low-cost-solution-us-navys-unmanned-maritime-autonomy-architecture"
+  },
+  {
+   "company": "RTI (Real-Time Innovations)",
+   "how_close": "Connext DDS underlies UMAA; RTI publishes UMAA adaptation work (MOOS-IvP to UMAA, MOOS-DAWG 2024) and tooling.",
+   "evidence": "https://oceanai.mit.edu/moos-dawg24/docs/17-rti-schmitt.pdf"
+  },
+  {
+   "company": "IS4S / TRX Systems / Leidos (PNT Standards Consortium founders)",
+   "how_close": "IS4S is the de facto engineering house behind pntOS/ASPN and author of the DHS PNT Integrity Library; the consortium could publish an official conformance suite.",
+   "evidence": "https://pntstandards.org/ ; https://www.is4s.com/pnt"
+  },
+  {
+   "company": "Government in-house: Army C5ISR Center (planned pntOS compliance toolkit, MDQDA), SOFWERX/PEO-SDA (UxSAI assessment events, synthetic data modeler), AFRL/AFTC (CCA autonomy T&E)",
+   "how_close": "Direct: the buyers are building or procuring their own harnesses and synthetic-data pipelines.",
+   "evidence": "GAO-21-320SP (2021); https://defensescoop.com/2026/08/18/mission-autonomy-software-unmanned-systems-special-operations/ ; https://sam.gov/opp/bfc6ca92f0f84a0192f29c4cc09aaa30/view"
+  },
+  {
+   "company": "Spirent, Safran Federal Systems (Skydel), CAST Navigation",
+   "how_close": "PNT RF/HIL simulation incumbents; could add ASPN-formatted outputs and conformance scoring.",
+   "evidence": "Segment S11 incumbents list (RECALL; not re-verified this session)"
+  },
+  {
+   "company": "Weathergage Tech (small firm)",
+   "how_close": "Markets 'UMAA compliance with far less effort' - evidence that the maritime niche already has small entrants.",
+   "evidence": "https://weathergagetech.blogspot.com/ (vendor blog, tier 4)"
+  },
+  {
+   "company": "MathWorks, Ansys, Epic (Unreal) and the PX4/Gazebo community",
+   "how_close": "General-purpose simulation substrates vendors already use; not architecture-specific conformance.",
+   "evidence": "Segment S13 companies_near (RECALL)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes, easily for their own stacks: Anduril (Lattice simulation), Shield AI and Collins already run in-house A-GRA test rigs as CCA autonomy competitors; Applied Intuition can extend Axion; primes and FFRDCs (MITRE) can publish free reference implementations; the ISTO consortium or C5ISR Center can release an official pntOS conformance suite that resets the market to zero price.",
+  "why_startup_still_wins_or_reject": "A startup wins only if it is the vendor-neutral, open-core arbiter that program offices prefer over any competitor's rig (a competitor cannot credibly grade its rivals), and if it moves first on the open ASPN/pntOS/UMAA subset before the consortium ships an official suite. Reject if the government publishes its toolkit or Applied Intuition bundles conformance scoring for free; both are plausible within 12-24 months. Net: defensibility is weak; the win case depends on speed and neutrality, not technology."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$100k-$200k (two founders plus one contractor, 4-6 months, open data and commercial cloud)",
+  "credible_military_demo_usd": "$1M-$2.5M (a PNT/autonomy T&E engineer with program experience, two vendor pilots under NDA, participation in APEX or a SOFWERX assessment, CMMC-level cyber hygiene, possibly HIL rig time)",
+  "first_production_deployment_usd": "$4M-$8M (government license via SBIR Phase II/III or CSO, IL4/IL5 hosting, Iron Bank hardening, cleared US-person staff for restricted-architecture extensions)",
+  "assumptions": "Software-only; no hardware; vendors pay $25k-$100k pilots; government revenue arrives 18-30 months in; figures are INFERENCE (LOW confidence) benchmarked on Navy SBIR ceilings ($200k Phase I, $2M Phase II) and AFWERX TACFI/STRATFI sizes."
+ },
+ "expertise_required": [
+  {
+   "role": "Navigation/estimation engineer who has built or integrated a pntOS/ASPN plug-in or a multi-sensor PNT fusion filter",
+   "why": "Synthetic ASPN streams and behavioral conformance scoring are meaningless without correct sensor error models and filter behavior; reviewers will detect toy models.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Autonomy T&E / systems engineer with program-office experience (CCA, PMS 406, SOCOM or Army PNT)",
+   "why": "Knows how milestone evidence, NAVWAR compliance reports and UMAA compliance reviews are actually judged; opens doors at the five program offices.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Simulation/DevOps engineer (Gazebo/PX4, DDS, CI, containers)",
+   "why": "Builds the harness, scenario injection and CI integration; the strong engineering founder can cover this.",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Export-control and SBIR counsel (fractional)",
+   "why": "Determines whether autonomy-interface work is ITAR technical data, structures the Indonesian founder's role and a technology control plan, and validates SBIR eligibility timing.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "US-person cleared engineer (later)",
+   "why": "Required for any A-GRA/FANTOM Core or JNWC-threat-condition work.",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "The open ASPN/pntOS/UMAA/DHS-CF subset is Distribution A or public and can be built as EAR99-style commercial software; but the moment the product ingests military autonomy interfaces (A-GRA, FANTOM Core), JNWC threat conditions or real NAVWAR test data it becomes CUI/ITAR-adjacent (USML Cat VIII(h)/XI(d) technical data is likely for military UAS autonomy - INFERENCE, needs counsel). Government use requires DFARS 252.204-7012/NIST SP 800-171 and CMMC self-assessment, IL4/IL5 hosting and probably Iron Bank hardening. No clearances are needed for the vendor-pilot phase.",
+  "non_us_person_founder_note": "The Indonesian founder can work on the open, public-standard core; must be walled off (technology control plan, possibly BIS deemed-export licence or DDTC TAA - counsel required) from any ITAR/600-series technical data such as restricted autonomy interfaces or government ASPN message sets that require citizenship verification. The German founder's constraints ease at permanent residence (ITAR treats an LPR as a US person, 22 CFR 120.62). SBIR eligibility requires the post-PR German founder plus US-citizen/PR holders to exceed 50% ownership and control."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "The PNT half has a civil twin: DHS Resilient PNT Conformance Framework, NIST IR 8323r1 and EO 13905 push critical-infrastructure operators (telecom timing, aviation, maritime, power) toward resilient-PNT conformance, and DOT/DHS complementary-PNT programs need scenario-based testing. The autonomy half (UMAA/MAVLink contract testing, multi-vehicle DDIL scenarios) maps to commercial USV/UAV fleet operators and drone-delivery certification but that market is nascent. Military reference-architecture conformance itself has no civil buyer."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "workflow",
+   "accreditation",
+   "government relationships",
+   "data"
+  ],
+  "explanation": "Proprietary value would be the library of scenario packs and degradation models, per-architecture conformance rules validated against real program findings, an accredited (IL4/IL5, Iron Bank) hosted evidence service, and a neutral-arbiter reputation with program offices. None of this is a strong moat: the standards are open, the government can publish free suites, and simulation incumbents can replicate the models. Network effects are weak because the vendor population is small."
+ },
+ "why_now": "Between 2025 and 2026 the government-owned-architecture model went from policy to practice: A-GRA received its first official validation with five autonomy competitors on two CCA airframes (Feb 2026); SOCOM mandated FANTOM Core integration in solicitations (Jun 2026) and stood up UxSAI assessment events with T&E phases (Aug-Dec 2026); UMAA 6.0 added a compliance specification (Dec 2023) and ICDs are public; ASPN-ICD (Jan 2026) and pntOS-C (Apr 2026) became public and the ISTO PNT Standards Consortium formed (2026); NAVWAR accepts synthetic ASPN/pntOS data as SBIR evidence (Aug 2026); GAO (Jan 2025, Jun 2026) keeps pressing MOSA enforcement. Simultaneously the vendor population that must prove conformance grew (CCA autonomy competitors, DIU TQS alt-PNT cohort, LEO-PNT, SOCOM munition bidders).",
+ "killer_risk": "The buyers are the builders: the Army planned its own pntOS compliance toolkit, MITRE already publishes a free UMAA compliance reference, and SOCOM is procuring its own assessment events and synthetic-data modeler - so the paid market is a few dozen vendors buying a stopgap until free government or consortium tooling arrives, while the highest-value architectures (A-GRA, FANTOM Core) are inaccessible to an outsider and ITAR-adjacent, and Applied Intuition can bundle conformance scoring into Axion at any time.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2018",
+   "event": "PMS 406 charters UMAA; Army PNT Reference Architecture v1.0; DoDI 4650.08 NAVWAR compliance policy issued (Dec 2018)",
+   "source_url": "https://www.dsp.dla.mil/Portals/26/Documents/Conference/2020-StateofDSPConf_Rothgeb.pdf"
+  },
+  {
+   "year": "2020",
+   "event": "DoDI 4650.08 Change 1 (Dec 2020) reaffirms milestone NAVWAR-compliance reporting; DHS Resilient PNT Conformance Framework published",
+   "source_url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/465008p.pdf"
+  },
+  {
+   "year": "2021",
+   "event": "GAO-21-320SP: Army plans automatic pntOS plug-in compliance toolkit; alt-PNT M&S fidelity poorer; MOSA initiative only $17M FY20-24",
+   "source_url": "https://www.gao.gov/products/gao-21-320sp"
+  },
+  {
+   "year": "2023",
+   "event": "UMAA 6.0 with Compliance Specification released (Dec); PMS 406 UMAA-compliant software solicitation (May)",
+   "source_url": "https://sam.gov/opp/a1d9437a6fdb63cc0721af145c49b70d/view"
+  },
+  {
+   "year": "2025",
+   "event": "GAO-25-106931 finds MOSA implementation lagging (Jan); Applied Intuition acquires EpiSci (Jan) and launches Axion/Acuity; PNTAX to become APEX (FY25 Q4)",
+   "source_url": "https://www.gao.gov/products/gao-25-106931"
+  },
+  {
+   "year": "2026-01/04",
+   "event": "ASPN-ICD (Jan) and pntOS-C (Apr) published on GitHub; ISTO PNT Standards Consortium formed (Leidos, IS4S, TRX)",
+   "source_url": "https://pntstandards.org/"
+  },
+  {
+   "year": "2026-02",
+   "event": "First official government validation of A-GRA: Collins and Shield AI autonomy flown on GA-ASI and Anduril CCA prototypes",
+   "source_url": "https://defensescoop.com/2026/02/12/air-force-testing-mission-autonomy-package-cca-drone-prototypes/"
+  },
+  {
+   "year": "2026-06",
+   "event": "SOCOM loitering-munition notice requires FANTOM Core M2M integration; SOCOM UxSAI Synthetic Data Modeler assessment event; CCA production contracts awarded",
+   "source_url": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view"
+  },
+  {
+   "year": "2026-08/09",
+   "event": "NAVWAR SBIR NP004 accepts synthetic ASPN/pntOS data (Q&A 2026-08-08); SOFWERX UxSAI Mission Autonomy Systems Assessment Event whitepapers due 2026-09-08 with T&E through Dec 2026",
+   "source_url": "https://www.navysbir.com/n26_5/DON26BX05-NP004.htm"
+  },
+  {
+   "year": "2027 (expected)",
+   "event": "CCA autonomy downselect (summer 2027); CCA FY27 request ~$2.5B",
+   "source_url": "https://plus.shephardmedia.com/programmes/detail/collaborative-combat-aircraft-cca-usa/"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling for the PNT half and less for the autonomy half. Allies face the same GNSS-denial problem and NATO/AUKUS navies are converging on UMAA/STANAG 4586-style uncrewed C2 interfaces (AUKUS Maritime Big Play 2025), so an open ASPN/UMAA conformance harness could serve UK, Australian and German vendors; the ISTO consortium is industry-governed, not US-government-restricted. But A-GRA and FANTOM Core are US-only, allied autonomy stacks (Helsing, ARX, Quantum Systems) are closed vertical stacks, and exporting or servicing a harness for a foreign military may constitute an ITAR defense service (needs counsel). A German-domiciled entity would be NATO Innovation Fund-eligible but would then face US-side FOCI/ITAR friction for the US program-office sale.",
+ "search_log": [
+  {
+   "query": "\"Autonomy Government Reference Architecture\" A-GRA CCA mission autonomy conformance test 2026",
+   "useful": true
+  },
+  {
+   "query": "\"FANTOM Core\" SOCOM collaborative autonomy sam.gov 2026",
+   "useful": true
+  },
+  {
+   "query": "UMAA \"Unmanned Maritime Autonomy Architecture\" conformance test tool OR compliance verification PMS 406 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "pntOS ASPN \"PNT Standards Consortium\" OR \"compliance toolkit\" OR \"conformance\" 2026",
+   "useful": true
+  },
+  {
+   "query": "Army \"Interoperability Profile\" IOP RAS-A conformance test \"Ground Vehicle Systems Center\" 2025 OR 2026",
+   "useful": false
+  },
+  {
+   "query": "Applied Intuition defense simulation \"EpiSci\" OR \"Axion\" CCA autonomy government reference architecture 2026",
+   "useful": true
+  },
+  {
+   "query": "SOCOM \"UxSAI\" OR \"Unmanned Systems Autonomy and Interoperability\" SOFWERX mission autonomy test evaluation 2026",
+   "useful": true
+  },
+  {
+   "query": "\"PNTAX\" 2025 OR 2026 Army PNT Assessment Exercise White Sands industry pntOS",
+   "useful": true
+  },
+  {
+   "query": "SBIR topic \"UMAA\" OR \"A-GRA\" OR \"pntOS\" autonomy conformance simulation test harness 2025 2026 navysbir OR afwerx OR armysbir",
+   "useful": false
+  },
+  {
+   "query": "FY2027 budget request \"Collaborative Combat Aircraft\" RDT&E autonomy Air Force 2026 billion",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.gao.gov/products/gao-21-320sp",
+   "title": "GAO-21-320SP Defense Navigation Capabilities: DOD is Developing PNT Technologies to Complement GPS",
+   "pub_date": "2021-05-10",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106931",
+   "title": "GAO-25-106931 Weapon Systems Acquisition: DOD Needs Better Planning to Attain Benefits of Modular Open Systems",
+   "pub_date": "2025-01-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/465008p.pdf",
+   "title": "DoDI 4650.08 PNT and NAVWAR, Change 1",
+   "pub_date": "2020-12-30",
+   "tier": 1
+  },
+  {
+   "url": "https://www.navysbir.com/n26_5/DON26BX05-NP004.htm",
+   "title": "Navy SBIR 26.5 DON26BX05-NP004 NAVWAR Open Topic: Unified Assured PNT Operational Awareness and Decision Support (topic and Q&A)",
+   "pub_date": "2026-08-08",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view",
+   "title": "USSOCOM loitering munition notice requiring FANTOM Core integration",
+   "pub_date": "2026-06-26",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/89ac0e053941403d9c038b02c3d5d404/view",
+   "title": "SOCOM Collaborative Autonomy Integration RFI",
+   "pub_date": "2026 (date not captured)",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/bfc6ca92f0f84a0192f29c4cc09aaa30/view",
+   "title": "PEO-SDA UxSAI Synthetic Data Modeler Assessment Event",
+   "pub_date": "2026-06",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/a1d9437a6fdb63cc0721af145c49b70d/view",
+   "title": "Unmanned Maritime Autonomy Architecture (UMAA) Compliant Software solicitation",
+   "pub_date": "2023-05",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/281520/sixth_annual_pnt_assessment_experiment_aligns_army_priorities_capabilities",
+   "title": "Sixth annual PNT Assessment Experiment aligns Army priorities, capabilities (PNTAX to become APEX)",
+   "pub_date": "2024-11 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dsp.dla.mil/Portals/26/Documents/Conference/2020-StateofDSPConf_Rothgeb.pdf",
+   "title": "UMAA briefing, DoD Standardization Program conference",
+   "pub_date": "2020",
+   "tier": 1
+  },
+  {
+   "url": "https://www.auvsi.org/advocacy/advocacy-initiatives/unmanned-maritime-autonomy-architecture/",
+   "title": "AUVSI UMAA specifications (ICDs, IDL, compliance specification)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://www.mitre.org/our-impact/intellectual-property/low-cost-solution-us-navys-unmanned-maritime-autonomy-architecture",
+   "title": "MITRE: A Low-Cost Solution for the U.S. Navy's UMAA Compliance",
+   "pub_date": "2024-2025 (undated page)",
+   "tier": 2
+  },
+  {
+   "url": "https://oceanai.mit.edu/moos-dawg24/docs/17-rti-schmitt.pdf",
+   "title": "RTI: Adapting MOOS-IvP to the Navy's UMAA (MOOS-DAWG 2024)",
+   "pub_date": "2024",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/02/12/air-force-testing-mission-autonomy-package-cca-drone-prototypes/",
+   "title": "DefenseScoop: Air Force begins testing mission autonomy package for CCA prototypes",
+   "pub_date": "2026-02-12",
+   "tier": 2
+  },
+  {
+   "url": "https://www.flightglobal.com/military-uavs/2026/02/usaf-demonstrates-interoperable-autonomy-architecture-across-competing-ccas/",
+   "title": "FlightGlobal: USAF demonstrates interoperable autonomy architecture across competing CCAs",
+   "pub_date": "2026-02",
+   "tier": 2
+  },
+  {
+   "url": "https://theaviationist.com/2026/02/14/usaf-integrates-a-gra-architecture-mission-autonomy-ccas/",
+   "title": "The Aviationist: USAF integrates open architecture for mission autonomy on CCAs (five autonomy competitors)",
+   "pub_date": "2026-02-14",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/08/18/mission-autonomy-software-unmanned-systems-special-operations/",
+   "title": "DefenseScoop: SOCOM planning to test new mission autonomy software for unmanned systems program (UxSAI)",
+   "pub_date": "2026-08-18",
+   "tier": 2
+  },
+  {
+   "url": "https://soldiersystems.net/2026/08/21/sofwerx-uxsai-mission-autonomy-systems-assessment-event/",
+   "title": "Soldier Systems Daily: SOFWERX UxSAI Mission Autonomy Systems Assessment Event",
+   "pub_date": "2026-08-21",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/18/collaborative-autonomy-development-socom-acquisition/",
+   "title": "DefenseScoop: Collaborative autonomy development not moving fast enough for SOCOM",
+   "pub_date": "2026-05-18",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/09/socom-seeks-synthetic-data-generation-computer-vision/",
+   "title": "DefenseScoop: SOCOM seeks self-service synthetic data generation platform",
+   "pub_date": "2026-06-09",
+   "tier": 2
+  },
+  {
+   "url": "https://pntstandards.org/",
+   "title": "PNT Standards Consortium (ISTO) - pntOS and ASPN governance",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://finance.yahoo.com/sectors/technology/articles/isto-announces-formation-pnt-standards-110000672.html",
+   "title": "ISTO Announces Formation of PNT Standards Consortium (Leidos, IS4S, TRX Systems)",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/Open-PNT/pntOS-C",
+   "title": "Open-PNT/pntOS-C public repository",
+   "pub_date": "2026-04-23",
+   "tier": 3
+  },
+  {
+   "url": "https://www.dhs.gov/publication/st-resilient-pnt-conformance-framework",
+   "title": "DHS S&T Resilient PNT Conformance Framework",
+   "pub_date": "2022-05-31 (v2.0)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.appliedintuition.com/press-releases/axion-and-acuity",
+   "title": "Applied Intuition launches all-domain autonomy products Axion and Acuity",
+   "pub_date": "2025",
+   "tier": 4
+  },
+  {
+   "url": "https://www.appliedintuition.com/news/applied-intuition-acquires-episci",
+   "title": "Applied Intuition acquires EpiSci",
+   "pub_date": "2025-01",
+   "tier": 4
+  },
+  {
+   "url": "https://plus.shephardmedia.com/programmes/detail/collaborative-combat-aircraft-cca-usa/",
+   "title": "Shephard: Collaborative Combat Aircraft (CCA) Increment 1 programme profile (FY27 request)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.airandspaceforces.com/air-force-nearly-1-billion-to-start-buying-ccas-2027/",
+   "title": "Air & Space Forces Magazine: Air Force wants nearly $1 billion to start buying CCAs in 2027",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/293795/u_s_army_uas_interoperability",
+   "title": "army.mil: U.S. Army UAS Interoperability (UAS PO interoperability profiles)",
+   "pub_date": "2025-2026",
+   "tier": 1
+  },
+  {
+   "url": "https://weathergagetech.blogspot.com/",
+   "title": "Weathergage Tech: UMAA compliance with far less effort (vendor blog)",
+   "pub_date": "undated",
+   "tier": 4
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "title": "13 CFR 121.702 SBIR/STTR ownership and control eligibility",
+   "pub_date": "current eCFR",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62",
+   "title": "22 CFR 120.62 ITAR definition of U.S. person",
+   "pub_date": "current eCFR",
+   "tier": 1
+  }
+ ]
+}

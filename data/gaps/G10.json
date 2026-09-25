@@ -1,0 +1,305 @@
+{
+  "id": "G10",
+  "title": "Vendor-agnostic automated PACE/multi-path transport orchestration and single-pane tactical NetOps for S6/G6 at brigade and below (MANET, pLEO, GEO, private 5G, HF)",
+  "problem": "Brigade-and-below units now carry three to five transports (MANET, pLEO, GEO, private 5G, HF) but path selection/failover and network status are still executed by signal soldiers through separate vendor consoles and paper PACE plans, so applications stall during jamming or movement and link/spectrum/cyber awareness is manual and slow.",
+  "categories": ["A", "B", "C", "D", "E", "G"],
+  "segment_ids": ["S05"],
+  "chain_steps": ["TRANSPORT", "DISSEMINATE_TASK"],
+  "echelons": ["platform", "company/battalion", "brigade", "division (G6 NetOps)"],
+  "user": {
+    "exact_role": "Battalion/brigade S6 (signal officer) and the brigade/division NetOps cell (25-series signal soldiers, network technicians 255A/255N), plus platform/vehicle crews who physically switch transports; NGC2 transport-layer integrators on the vendor side",
+    "echelon": "Battalion through division, with the operational pain concentrated at brigade and below where signal staff are smallest",
+    "organization_examples": ["4th Infantry Division (NGC2 prototype, Ivy Sting/Ivy Mass)", "25th Infantry Division (NGC2/C2 Fix, Lightning Surge)", "III Armored Corps and I Corps (baseline NGC2 recipients 2026)", "Expeditionary Signal Battalions-Enhanced (ESB-E) and division signal companies", "NETCOM / Army CIO-G6 (Unified Network Plan 2.0 owner)", "USSOCOM (TACLAN/SDN 'King for a Day' RFI, May 2026)", "ACC AMIC expeditionary air units (Deployable Tactical Communications RFI, 2026)"]
+  },
+  "current_workflow": [
+    "S6 writes the PACE plan for each echelon/net in an OPORD Annex H or spreadsheet before the mission; transport priorities are static and by-hand",
+    "Each transport is configured in its own tool: MANET radios (Silvus StreamCaster / Persistent MPU5 / L3Harris Falcon) in vendor managers or INB2, SATCOM terminals in the terminal vendor GUI, Starlink/pLEO in the provider app, private 5G in the core vendor console, crypto and routers separately",
+    "During operations a link degrades (jamming, terrain, movement, weather); the first indicator is usually user complaints (chat, voice, stalled COP/TAK sync) rather than an alert",
+    "A soldier diagnoses by checking consoles one by one or by radio call, then manually switches to the alternate transport: re-routes, re-keys, re-addresses, re-registers services",
+    "Applications (fires, COP, logistics, chat) re-sync or the data is re-entered by hand; some state is lost",
+    "Network status is transcribed into PowerPoint/Excel for the commander's update; spectrum deconfliction with S2/EW is done manually and after the fact"
+  ],
+  "current_solution": "Manual PACE plus a patchwork: CodeMettle INB2 (fielded battalion-and-below NetOps on the RAP-TR platform, monitoring tactical radios and waveforms); UNO/TNO prototypes (RII with CodeMettle, QinetiQ US, via the C5 consortium) for enterprise-to-tactical DODIN ops; Army 'Seeker' Auto-PACE software installed by PM Tactical Network to aggregate and fail over SATCOM/troposcatter/TRILOS/cellular links at higher echelons; vendor-native tools (Persistent Cloud Relay hub router, Silvus management, Anduril Lattice Mesh on Klas Voyager hardware); SD-WAN appliances; DARPA MINC research prototypes (Peraton Labs, BAE) for autonomous heterogeneous network control.",
+  "failure": "No fielded, radio-vendor-agnostic controller at brigade and below that sees all transports (MANET from several vendors, pLEO, GEO, 5G, HF), measures per-link quality, and moves application flows by policy; Seeker-class Auto-PACE lives at the SATCOM/hub layer and does not reach into MANET vendors' management planes; INB2/UNO consolidate status views but do not automate failover across new commercial transports; each vendor fix (Persistent, Anduril/Klas, Silvus) re-creates single-vendor lock-in; DDIL-tolerant status collection and automated status reporting remain manual.",
+  "evidence": [
+    {
+      "form": "government document",
+      "claim": "The Army's own UNO program goal is to 'simplify and reduce the number of network management tools' G6s/S6s use to manage and defend the tactical network and to ease Signal Soldier workload - a direct government statement of the tool-sprawl pain.",
+      "source_title": "PEO C3T I2S - Unified Network Operations (UNO)",
+      "source_url": "https://peoc3t.army.mil/i2s/uno.php",
+      "pub_date": "2024-2025 (page; exact date not shown)",
+      "event_date": "2024-2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "repeated procurement",
+      "claim": "UNO has been procured repeatedly in pieces: RFIs for a multiple-award IDIQ (2023-2024, PdM TCNO), OTA prototypes through the C5 consortium (QinetiQ US award reported 2024-12-30; RII prime with CodeMettle Phase II subcontract 2025-10) - and the MA IDIQ award itself could not be confirmed as of 2026-09 (Public evidence insufficient).",
+      "source_title": "QinetiQ US Awarded OTA to Support Unified Network Operation (UNO) Prototypes (ASDNews); CodeMettle UNO OT Phase II subcontract (PRNewswire)",
+      "source_url": "https://www.asdnews.com/news/defense/2024/12/30/qinetiq-us-awarded-ota-support-unified-network-operation-uno-prototypes",
+      "pub_date": "2024-12-30",
+      "event_date": "2024-12 to 2025-10",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "Battalion-and-below NetOps already has an incumbent product: CodeMettle INB2 is 'currently fielded and deployed as part of the RAP-TR program' and the Army posted a May-2025 sources-sought/solicitation for Army-wide enterprise licenses and PDSS, alongside a notice of intent to synopsize CodeMettle INB2 software (i.e., sole-source intent). The single-pane half of G10 is therefore incumbent-held, not empty.",
+      "source_title": "INB2 PEO C3N PM I2S solicitation (SAM mirror, 30-May-2025) and 'Notice of intent to synopsize CodeMettle INB2 software'",
+      "source_url": "https://www.fbodaily.com/archive/2025/05-May/30-May-2025/FBO-07458594.htm",
+      "pub_date": "2025-05-30",
+      "event_date": "2025-05/06",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "PM Tactical Network installed an Auto-PACE software capability called 'Seeker' during its HT/LL multi-orbit SATCOM assessment: it aggregates links, detects outages quickly and self-heals, merging satellite, troposcatter, TRILOS and cellular transports. This shows automated PACE exists at the SATCOM/hub layer (vendor of Seeker not identified in retrieved snippets), but it is not described as reaching MANET vendors' management planes or brigade-and-below radios.",
+      "source_title": "Multi-orbit SATCOM to boost Army network resiliency, capability in Large Scale Combat Operations (army.mil article 274494)",
+      "source_url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations",
+      "pub_date": "unknown (2024 inferred from article number; not re-verified)",
+      "event_date": "2023-2024",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Army network strategy has explicitly called for 'multi-path transport-agnostic' capabilities and 'automated agnostic transport diversity' since late 2022 - the requirement pre-dates NGC2 and has persisted for ~4 years without a fielded cross-vendor solution at brigade and below.",
+      "source_title": "Army network plan will offset contested comms with multi-path transport-agnostic capabilities (Breaking Defense); Army using Europe and Pacific operational landscapes as 'laboratories' to enhance network resiliency (army.mil)",
+      "source_url": "https://breakingdefense.com/2022/12/army-network-plan-will-offset-contested-comms-with-multi-path-transport-agnostic-capabilities/",
+      "pub_date": "2022-12",
+      "event_date": "2022-12",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "operator workaround",
+      "claim": "PC-C6 (July 2026), the division-scale NGC2 validation, produced overheating hardware, incomplete data displays and 'semi-frequent connectivity drops'; the Army said some components would be cut - transport reliability remained a live problem at the end of the prototyping phase.",
+      "source_title": "Army NGC2 to start scaling parts to more units (DefenseScoop)",
+      "source_url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units",
+      "pub_date": "2026-07-31",
+      "event_date": "2026-07",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "DARPA's MINC program exists precisely to replace 'manual, static configuration of individual tactical networks' with software that autonomously configures networks-of-networks regardless of device, via a single secure SDN control overlay; Peraton Labs held a contract worth up to $20M over 42 months (reported completion ~Feb 2025) and BAE Systems was also a performer. Transition to a program of record: Public evidence insufficient.",
+      "source_title": "MINC | DARPA; Peraton Labs secures contract under DARPA's MINC programme (Army Technology)",
+      "source_url": "https://www.darpa.mil/research/programs/mission-integrated-network-control",
+      "pub_date": "2021 (program launch); Peraton award report 2021-2022 (not re-verified)",
+      "event_date": "2021-2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "Second and third buyers voice the same need: USSOCOM's TACLAN/SDN 'King for a Day' RFI (posted 2026-05-15) asks for a modular C2 network with edge compute, SD-WAN and EW resilience; ACC AMIC's Deployable Tactical Communications RFI (responses due 2026-02-25) asks for routing, edge compute and application-level QoS in contested forward environments.",
+      "source_title": "USSOCOM TACLAN and SDN 'King for a Day' RFI (GovDash mirror); ACC AMIC Deployable Tactical Communications RFI (SAM.gov)",
+      "source_url": "https://discover.govdash.com/solicitations/019e2c45-0ea1-7629-8f59-8b2664474496--tactical-local-area-network-taclan-and-satellite-deployable-node-sdn-king-for-a",
+      "pub_date": "2026-05-15",
+      "event_date": "2026-02 to 2026-05",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "repeated procurement",
+      "claim": "DIU's ORIENT project (connect robust long-haul comms to redundant local mesh so ADA2 systems keep operating in disconnected, disrupted, low-bandwidth, intermittent environments) drew 130 proposals from 119 companies; DIU awarded prototype OTs to Viasat, Aalyria, Higher Ground and IoT/AI on 2024-11-20 - a prototype award, not deployment.",
+      "source_title": "Pentagon unveils winners of Replicator software contracts (DefenseScoop); DIU announcement",
+      "source_url": "https://defensescoop.com/2024/11/20/replicator-software-contract-awards-winners-diu-pentagon/",
+      "pub_date": "2024-11-20",
+      "event_date": "2024-11-20",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "Vendors are vertically integrating rather than opening up: Anduril announced (2025-05-05) and closed (July 2025) the acquisition of Klas, pairing Lattice Mesh networking software with Klas Voyager compute/network hardware; Persistent Systems expanded Cloud Relay (a 'platform, transport and data-agnostic' hub router that joins MANET bubbles) to Microsoft Azure (2025-09/10). Both are company claims of capability, not independent proof of cross-vendor orchestration.",
+      "source_title": "Anduril to Acquire Klas to Build the Future of Tactical Compute and Communications (ASDNews); Persistent Systems Expands Cloud Relay to Microsoft Azure (PRNewswire)",
+      "source_url": "https://www.asdnews.com/news/defense/2025/05/05/anduril-acquire-klas-build-future-tactical-compute-communications",
+      "pub_date": "2025-05-05",
+      "event_date": "2025-05 to 2025-10",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "budget",
+      "claim": "Money exists but is prime-channelled: FY2026 NGC2 request included ~$1.36B for the C2 Transport layer (RDT&E+Procurement) within ~$3B-3.3B total; FY27 NGC2 request ~$3.78B; the FY26 NDAA capped obligation at 50% pending a report and the HASC FY27 mark would cut $710M. GAO-26-108019 (2026-08-20) found the Army lacks a life-cycle cost estimate despite ~$3.3B identified through FY2026.",
+      "source_title": "Army next-gen C2 budget 2026 request $3 billion (DefenseScoop); GAO-26-108019",
+      "source_url": "https://defensescoop.com/2025/07/02/army-next-gen-command-and-control-budget-2026-request-3-billion/",
+      "pub_date": "2025-07-02",
+      "event_date": "FY2026-FY2027",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "product fails requirement",
+      "claim": "Exercise reporting shows the multi-transport reality: at PC-C6 L3Harris radios formed part of the transport layer with 'PACE communications planning options' (vendor account); at Lightning Surge (25th ID, 2026-04) private 5G carried the call-for-fire path for the first time and 'tyranny of distance' drove transport choices - PACE is still 'planning options', i.e., human-executed, per the vendor's own wording.",
+      "source_title": "A Collaborative Capstone: L3Harris at Project Convergence (L3Harris editorial, 2026-08); Accelerating transformative technologies aids commanders' readiness across the Pacific (army.mil 2026-04-21)",
+      "source_url": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence",
+      "pub_date": "2026-08",
+      "event_date": "2026-04 to 2026-07",
+      "tier": 3,
+      "label": "INFERENCE",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "why_existing_startups_havent_solved": "Three structural reasons. (1) The management planes a controller needs are owned by radio vendors (Silvus/Motorola, Persistent, L3Harris, TrellisWare) who monetise their own controllers and, for PoR radios, sit behind Type-1 crypto and ITAR technical data; startups without radios, clearances and U.S.-person staff cannot even collect the telemetry. (2) The buyer has already chosen owners for each half: CodeMettle INB2 is the fielded battalion-and-below NetOps product with a 2025 sole-source-style license/PDSS action, UNO/TNO prototypes went to RII/CodeMettle and QinetiQ US through the C5 consortium, Seeker-style Auto-PACE is run by PM Tactical Network, and NGC2 transport is integrated by Anduril (now owning Klas) and Lockheed teams - the Army's stated preference is for the team lead to own integration. (3) Prior attempts stalled in prototype purgatory: DARPA MINC (Peraton, BAE) has no public transition, DIU ORIENT awardees (Aalyria, Viasat, Higher Ground, IoT/AI) hold prototype OTs, and the UNO MA IDIQ promised for 2025-2026 still cannot be confirmed - accreditation of anything in the encrypted path (CSfC/ATO) and exercise-slot scarcity slow every entrant to program timelines.",
+  "why_not_solved_reasons": ["proprietary incumbent architecture", "certification", "procurement fragmentation", "integration complexity", "classification", "insufficient commercial market", "it HAS been solved"],
+  "technical_wedge": "Not the orchestrator itself (incumbent-held) but the missing open glue beneath it: a radio-agnostic transport telemetry and policy adapter layer - a small Linux/container agent on the existing edge box that speaks each transport's northbound interface (SNMP/REST/CLI for MANET radios and SATCOM modems, Starlink and 5G CPE APIs, HF ALE controllers), normalises per-link latency/loss/jitter/RSSI/SNR into one open schema, evaluates a declarative 'PACE-as-code' policy, and exposes NGC2-style non-proprietary APIs that INB2/TNO, Lattice Mesh or an SD-WAN can consume. Sold as a component to UNO/NGC2 teams and as a DDIL-tolerant telemetry/store-and-forward collector with auto-generated network status reporting for S6 cells. A second, lower-risk variant is the DDIL network emulation/test harness the Army is already funding through SBIR (Generative AI Enabled Tactical Network topic), which needs no ITAR radio data.",
+  "mvp": {
+    "what": "Container-based transport telemetry + PACE policy agent with adapters for four commercial transports (Doodle Labs or Rajant mesh radio, Starlink terminal, a private 5G CPE, an HF ALE modem or a second mesh), a per-flow path-selection policy engine, a DDIL-tolerant local time-series store that syncs when connected, and a browser HMI that renders link health and an auto-generated network status slide; TAK/CoT and a video stream as the applications.",
+    "demonstrable_in_3_6_months": "8-10 node field test on commercial hardware with induced degradation (attenuators, antenna shading, vehicle movement, RF interference within FCC rules) showing sub-second detection and automated flow migration versus manual switching, with published telemetry schema and adapter SDK; plus a network-emulation mode replaying recorded link traces.",
+    "what_it_must_prove": "That a vendor-agnostic adapter layer can be written against public/commercial interfaces without vendor cooperation, that automated failover measurably beats manual PACE on time-to-recover and packet loss, that it runs inside a 100-200 W edge box footprint, and that a signal NCO can author policy without the vendor - and, critically, that at least one PoR radio vendor or NGC2/UNO team is willing to expose a northbound interface.",
+    "uses": ["commercial hardware", "public/open data", "simulated military data", "unclassified architecture", "commercial compute", "open standards"]
+  },
+  "data_requirement": {
+    "what": "Per-link telemetry (latency, loss, jitter, throughput, RSSI/SNR, neighbor tables) from each transport; realistic tactical traffic profiles (TAK/CoT, VoIP, video, fires messages); recorded link-outage traces from movement/jamming; spectrum plans and PACE plans (typically CUI); management-interface documentation for PoR radios (ITAR-controlled for many).",
+    "legally_realistically_obtainable": "Commercial-radio telemetry (Doodle Labs, Rajant, Starlink, 5G CPE, HF ALE) is obtainable by purchase and public docs. PoR radio management docs (Silvus, Persistent, L3Harris Falcon) generally require NDAs, U.S.-person handling and often ITAR licensing - a non-U.S.-person founder cannot lawfully receive that technical data without an export authorization; needs export counsel. Real jamming performance and Army spectrum/PACE plans are CUI or classified and are not obtainable pre-award; use synthetic traces and open network emulators.",
+    "sources": ["Commercial mesh radio vendor APIs (Doodle Labs, Rajant, goTenna) - public docs", "Starlink terminal telemetry (gRPC/local API) - public community docs", "Open-source 5G cores (Open5GS, srsRAN) and CPE SNMP", "Army SBIR 'Generative AI Enabled Tactical Network' DDIL emulation environment (armysbir.army.mil) - topic public", "NetModX / C5ISR Center persistent network experimentation campaign (data from participation only)", "PoR radio management interfaces - NDA/ITAR, U.S.-person only"]
+  },
+  "integration_requirement": {
+    "systems": ["CodeMettle INB2 / RAP-TR (battalion-and-below NetOps)", "UNO/TNO prototype stack (RII, CodeMettle, QinetiQ US)", "NGC2 transport and integration layers (Anduril Lattice Mesh/Klas Voyager; Lockheed data layer; Persistent Wave Relay)", "MANET radios: Silvus StreamCaster, Persistent MPU5, L3Harris AN/PRC-163/158C", "SATCOM: pLEO (Starlink/Starshield via pLEO IDIQ), GEO terminals, Kymeta multi-orbit", "Private 5G cores fielded under C5ISR/NGC2 experiments", "HF ALE radios", "Routers/SD-WAN and crypto (CSfC/HAIPE placement)", "TAK Server and NGC2 applications as traffic sources"],
+    "interfaces_protocols": ["SNMP v3 and vendor REST/gRPC northbound APIs", "NETCONF/YANG where supported", "Starlink local API", "3GPP/5G core management APIs", "IP routing/PBR, VRF, IPsec tunnels; QoS/DSCP marking", "CoT/TAK, DDS or MQTT for status dissemination", "NGC2 'government-approved non-proprietary APIs' (schemas still being co-defined per NGC2 RFI)", "DODIN-A/UNO data standards (not public)"],
+    "who_controls_the_interface": "Radio and terminal vendors control device APIs (Silvus/Motorola, Persistent, L3Harris, SpaceX); CPE C2IN and the NGC2 team leads (Anduril, Lockheed) control the NGC2 layer APIs; PdM TCNO and its UNO prototype primes control TNO/INB2 integration points; NSA/CSfC governs anything in the encrypted path. A startup controls none of these."
+  },
+  "customer": {
+    "user": "Battalion/brigade S6 sections and division G6 NetOps cells; platform crews",
+    "champion": "PdM Tactical Cyber and Network Operations (UNO/INB2 owner) and PM Tactical Network (transport/Auto-PACE) inside CPE C2IN; division G6s of NGC2 units (4ID, 25ID, III Corps, I Corps) as operational advocates - post-Dec-2025 reorg PM names not verified",
+    "contract_signer": "Army Contracting Command - Aberdeen Proving Ground (FAR/IDIQ) or Consortium Management Group for C5 consortium OTAs (INFERENCE from UNO OTA routing; not verified for 2026)",
+    "requirement_owner": "Army CIO/G-6 (Unified Network Plan 2.0) and the C2 Cross-Functional Team / T2COM for NGC2 characteristics of need (INFERENCE)",
+    "program_office": "Capability Program Executive Command and Control Information Network (CPE C2IN, formerly PEO C3T/C3N): PdM TCNO under PM I2S for UNO/INB2; PM C2 Infrastructure / transport PMs for NGC2 transport (post-reorg names unverified)",
+    "contracting_office": "ACC-APG (historical contracting activity for PEO C3T programs; INB2 May-2025 action attributed to PEO C3N PM I2S) and the C5 consortium (CMG) for UNO prototype OTAs"
+  },
+  "budget": {
+    "program_or_line": "NGC2 C2 Transport sub-line (~$1.36B FY26 RDT&E+Procurement request) and C2 Infrastructure (~$1.36B), inside NGC2 totals of ~$3B-3.3B FY26 and ~$3.78B FY27 request; UNO/INB2 O&M/licensing amounts not public; PE numbers not verified this session",
+    "evidence": "DefenseScoop (2025-07-02) layer breakdown of the FY26 NGC2 request; Breaking Defense (2026-04) FY27 ~$3.78B; Federal News Network (2026-02) FY26 NDAA 50% obligation cap; Inside Defense (2026) HASC mark cutting $710M; GAO-26-108019 (2026-08-20) ~$3.3B identified through FY26 without a life-cycle cost estimate. Ceilings and requests are not obligations, and Congress has constrained the line.",
+    "source_url": "https://defensescoop.com/2025/07/02/army-next-gen-command-and-control-budget-2026-request-3-billion/",
+    "confidence": "MEDIUM"
+  },
+  "entry_vehicle": {
+    "primary": "Team-member subcontract to a UNO prototype prime (RII, QinetiQ US) or an NGC2 team lead (Anduril, Lockheed Martin) for a specific transport-telemetry/PACE-policy component, entered via the C5 consortium and xTech",
+    "sequence": ["xTechSearch / xTechPacific submission with the commercial-hardware MVP for soldier feedback and a Phase I/D2P2 invitation (resolve SBIR eligibility first)", "C5 consortium membership and response to PdM TCNO UNO white-paper calls; NetModX / C5ISR persistent network experimentation participation", "Subcontract to an NGC2 or UNO prime for Ivy Sting-class events or the I Corps / III Corps baseline fielding", "DIU CSO if an ORIENT-style follow-on appears; USSOCOM TACLAN/SDN or ACC AMIC as second buyers", "Position for the UNO MA IDIQ (still unconfirmed) as a sub"],
+    "eligibility_notes": "SBIR/STTR requires a U.S. small business more than 50% owned and controlled by U.S. citizens or permanent residents; with one Indonesian founder not assumed to be a U.S. person, the cap table must be structured so U.S. persons hold >50% before an SBIR/xTech-SBIR award (needs counsel). OTAs through consortia have no such ownership rule but the work involves ITAR technical data on military radios and CUI network data; a non-U.S.-person founder would need to be walled off or an export license obtained - describe, do not assume; needs export counsel. Facility/personnel clearances are likely needed for TNO/UNO integration at SIPR level, which the non-U.S.-person founder cannot hold."
+  },
+  "competition": [
+    {"company": "CodeMettle (INB2, UNO/TNO sub under RII)", "how_close": "Incumbent for the single-pane NetOps half: INB2 fielded on RAP-TR for battalion-and-below radio/waveform monitoring; May-2025 Army license/PDSS action with sole-source intent; Phase II UNO TNO subcontract (2025-10).", "evidence": "https://www.fbodaily.com/archive/2025/05-May/30-May-2025/FBO-07458594.htm ; https://www.prnewswire.com/news-releases/codemettle-awarded-unified-network-operations-uno-other-transaction-ot-phase-ii-sub-contract-to-advance-the-us-armys-unified-network-302580853.html"},
+    {"company": "Research Innovations Inc. (RII)", "how_close": "UNO OT prime for the TNO prototype MVP; also a named Team Anduril NGC2 member.", "evidence": "CodeMettle PRNewswire 2025-10 (above); army.mil article 287180 (NGC2 team list)"},
+    {"company": "QinetiQ US", "how_close": "Holds a UNO prototype OTA via C5 consortium for PdM TCNO (reported 2024-12-30).", "evidence": "https://www.asdnews.com/news/defense/2024/12/30/qinetiq-us-awarded-ota-support-unified-network-operation-uno-prototypes"},
+    {"company": "Anduril (Lattice Mesh + Klas Voyager)", "how_close": "NGC2 4ID team lead and common-data-layer baseline lead; acquired Klas (closed July 2025) giving it the edge network/compute box; Lattice Mesh markets decentralized data distribution over degraded links. Could bundle transport orchestration into the NGC2 stack.", "evidence": "https://www.asdnews.com/news/defense/2025/05/05/anduril-acquire-klas-build-future-tactical-compute-communications ; https://www.anduril.com/lattice/lattice-mesh (company marketing, not proof)"},
+    {"company": "Persistent Systems (Wave Relay, Cloud Relay)", "how_close": "Selected for NGC2 network (2025-10); reported $87.5M NGC2 prototype support award (2026-02, not re-verified); Cloud Relay hub router positions as transport-agnostic joining of MANET bubbles, now on Azure - but centred on its own MPU5/Wave Relay ecosystem.", "evidence": "https://www.prnewswire.com/news-releases/persistent-systems-expands-cloud-relay-to-microsoft-azure-to-unlock-global-distributed-networking-for-joint-operations-302556444.html ; https://www.asdnews.com/news/defense/2026/02/04/us-army-awards-persistent-systems-contract-875m-supporting-ngc2-prototype"},
+    {"company": "Army PM Tactical Network 'Seeker' Auto-PACE (vendor not identified)", "how_close": "Government-installed Auto-PACE that aggregates and self-heals across SATCOM/troposcatter/TRILOS/cellular at hub/upper echelons.", "evidence": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations"},
+    {"company": "Peraton Labs and BAE Systems (DARPA MINC)", "how_close": "Built autonomous heterogeneous network-control prototypes (Peraton up to $20M, 42 months, reported completion ~Feb 2025); transition status unknown; Peraton also runs large Army/DISA networks.", "evidence": "https://www.army-technology.com/news/peraton-labs-contract-darpa-minc/ ; https://www.darpa.mil/research/programs/mission-integrated-network-control"},
+    {"company": "Aalyria (Spacetime), Viasat, Higher Ground, IoT/AI (DIU ORIENT)", "how_close": "Prototype OTs (2024-11-20) to bridge long-haul and local mesh for Replicator; Aalyria's Spacetime is a temporospatial SDN controller for directional/space links - closest conceptual competitor for cross-transport orchestration, prototype stage.", "evidence": "https://defensescoop.com/2024/11/20/replicator-software-contract-awards-winners-diu-pentagon/"},
+    {"company": "Silvus Technologies (Motorola Solutions)", "how_close": "Dominant MANET radio with its own management/spectrum tools; owner of the interface a controller would need; Motorola closed acquisition 2025-08.", "evidence": "https://www.sec.gov/Archives/edgar/data/68505/000119312525174512/d88358dex991.htm"},
+    {"company": "L3Harris and General Dynamics Mission Systems", "how_close": "PoR radio and network-management incumbents; L3Harris radios formed part of the PC-C6 transport layer with PACE planning options.", "evidence": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence (vendor account)"},
+    {"company": "REDCOM (Auto-PACE for voice)", "how_close": "Commercial product marketing 'Auto-PACE' for redundant voice interoperability - a narrow partial solution.", "evidence": "https://www.redcom.com/auto-pace/ (company marketing, not proof of fielding)"},
+    {"company": "Ditto, Immersive Wisdom, Sigma Defense", "how_close": "Adjacent DDIL data-sync / low-bandwidth collaboration / edge data movement vendors; they mitigate the symptom (app state loss) rather than orchestrate transport.", "evidence": "company index B03/B02/B12; AFLCMC Ditto $28M ceiling (DoD announcement 2025) - ceiling not obligation"}
+  ],
+  "incumbent_response": {
+    "could_anduril_palantir_l3harris_add_it": "Yes, easily. Anduril now owns both the NGC2 data-layer baseline and, via Klas, the edge network box; Lattice Mesh already claims multi-path data distribution and Anduril could expose a PACE policy layer as a Lattice feature. L3Harris and GDMS own PoR radio management planes and could extend them across transports. Motorola/Silvus and Persistent can extend proprietary controllers. CodeMettle/RII can add automation to INB2/TNO under existing UNO OTAs. None needs a startup's help to do it.",
+    "why_startup_still_wins_or_reject": "Mostly REJECT as a standalone company. The only defensible startup position is a neutral, open adapter/telemetry layer that vendors will not build because it commoditises their controllers - and that neutrality is exactly what incumbents and the buyer's prime-led model do not reward. A narrow win is possible only if CPE C2IN enforces its 'government-approved non-proprietary API' rule on the transport layer and buys the adapter layer separately, or if a second buyer (USSOCOM, ACC AMIC, an ally) wants freedom from the Army stack; neither is evidenced yet."
+  },
+  "capital_required": {
+    "proof_of_concept_usd": "$150k-$350k (HYPOTHESIS): commercial mesh radios, Starlink terminals, 5G CPE/core, HF modem, edge compute, two founders plus one contractor for 6 months",
+    "credible_military_demo_usd": "$1.5M-$3M (HYPOTHESIS): PoR-class radios (Silvus/MPU5 units cost five figures each - RECALL, LOW), cleared U.S.-person engineers, NetModX/xTech/consortium participation, CSfC-aware architecture review, exercise travel over 12-18 months",
+    "first_production_deployment_usd": "$8M-$15M (HYPOTHESIS): ATO/RMF and possible CSfC registration, integration with INB2/TNO or an NGC2 team, sustainment for one division set, 24-36 months",
+    "assumptions": "Assumes a component/subcontract path rather than a standalone program; assumes at least one radio vendor grants API access; excludes any radio hardware development. All figures are founder-grade estimates, not sourced; the founders' ~$250k covers only the proof of concept."
+  },
+  "expertise_required": [
+    {"role": "Former Army signal officer / warrant officer (255N/255A) or ESB-E network technician with recent NGC2/ITN/C2 Fix experience", "why": "Defines the real PACE workflow, knows INB2/TNO, radio quirks and the exercise calendar; opens doors to G6s and PdM TCNO", "fatal_if_absent": true},
+    {"role": "Tactical RF/MANET networking engineer (Linux networking, SDN/SD-WAN, policy routing, QoS, IPsec, radio northbound APIs)", "why": "Builds the adapter and policy engine and understands why per-link metrics from mesh radios are not comparable to SATCOM metrics", "fatal_if_absent": true},
+    {"role": "U.S.-person cleared engineer with ITAR/export-controlled data handling experience", "why": "Only a U.S. person can receive PoR radio technical data and CUI network plans; the Indonesian founder cannot; this role gates all military integration", "fatal_if_absent": true},
+    {"role": "DoD cybersecurity/ATO and CSfC specialist", "why": "Anything touching the encrypted path or DODIN-A needs RMF/ATO and possibly NSA CSfC compliance; timeline killer if absent", "fatal_if_absent": false},
+    {"role": "Consortium/OTA and SBIR capture lead with CPE C2IN relationships", "why": "Entry runs through C5 consortium white papers, xTech and prime teaming rather than open competition", "fatal_if_absent": false}
+  ],
+  "regulatory_burden": {
+    "level": "high",
+    "explanation": "Software that manages military radios and encrypted transports touches ITAR technical data (radio management interfaces, waveform behaviour), CUI (network and spectrum plans), RMF/ATO on DODIN-A, potential NSA CSfC requirements, and usually SIPR-level integration requiring facility and personnel clearances. Commercial-hardware MVPs avoid most of this until the first PoR integration, after which the burden arrives all at once.",
+    "non_us_person_founder_note": "A non-U.S.-person co-founder cannot receive ITAR technical data without an export license, cannot hold a security clearance, and can trigger FOCI mitigation if holding significant ownership or control; SBIR requires >50% U.S.-citizen/permanent-resident ownership. These are constraints to design around with export, immigration and government-contracts counsel, not a definitive legal judgment here."
+  },
+  "classification_dependence": "eventually",
+  "dual_use_potential": {
+    "level": "medium",
+    "explanation": "Multi-transport failover and single-pane monitoring have commercial analogues in public safety (FirstNet + LMR + satellite), mining/energy (Rajant-class mesh + LTE + SATCOM), maritime and disaster response, and commercial SD-WAN already solves the wired/cellular/SATCOM version. The specifically military parts (MANET vendor adapters, PACE-as-code, EW awareness, DDIL reporting) have a thin commercial market, so dual-use exists for the platform but not for the differentiating features."
+  },
+  "defensibility": {
+    "what_becomes_proprietary": ["integrations", "accreditation", "workflow", "government relationships", "data"],
+    "explanation": "The adapter library for many radios/terminals and its accreditation footprint are the only durable assets; algorithms for path selection are well known (MINC, SD-WAN). Telemetry datasets from exercises could become valuable for DDIL emulation but are typically government-owned. Defensibility is weak against vendors who own the interfaces."
+  },
+  "why_now": "Since 2023: commercial pLEO became a fielded Army transport (pLEO IDIQ 2023, ceiling raised to $13B Oct 2024, SpaceX SDN Backbone $2.29B May 2026); private 5G carried a live call-for-fire path at Lightning Surge (2026-04) and a simulated M777 mission at C5ISR Center (2026-05); NGC2 codified a distinct transport layer with government-approved non-proprietary APIs and moved from prototype OTAs (July/Sept 2025) to baseline fielding to I Corps and III Armored Corps (2026-09); UNO moved to OTA prototypes (2024-12, 2025-10) and INB2 was re-competed as a license/PDSS action (2025-05); PC-C6 still logged semi-frequent connectivity drops (2026-07). The multi-transport problem now exists at scale for the first time, but the buyer is simultaneously locking in who solves it.",
+  "killer_risk": "The slot is already taken and gated: CodeMettle INB2 (fielded, sole-source-style 2025 action) and the RII/CodeMettle/QinetiQ UNO prototypes own NetOps; PM Tactical Network already runs Seeker Auto-PACE; Anduril (with Klas) and Lockheed own NGC2 transport integration and the Army wants team leads to own integration; radio vendors own the APIs and have every incentive to keep them closed. A two-founder team with one non-U.S.-person founder cannot legally access the ITAR radio data needed to build cross-vendor adapters, so the MVP would be confined to commercial radios that the Army does not field at scale - producing a demo the buyer cannot use.",
+  "market_stage": "Transitioning",
+  "procurement_signal_timeline": [
+    {"year": "2021", "event": "DARPA MINC program launched: autonomous heterogeneous tactical network control; Peraton Labs and BAE performers (Peraton up to $20M/42 months)", "source_url": "https://www.darpa.mil/research/programs/mission-integrated-network-control"},
+    {"year": "2022", "event": "Army network plan calls for multi-path, transport-agnostic capabilities; CodeMettle selected to continue INB2 work (Oct 2022)", "source_url": "https://breakingdefense.com/2022/12/army-network-plan-will-offset-contested-comms-with-multi-path-transport-agnostic-capabilities/"},
+    {"year": "2023-2024", "event": "PM Tactical Network installs 'Seeker' Auto-PACE during HT/LL multi-orbit SATCOM assessment; UNO MA IDIQ RFIs from PdM TCNO; pLEO IDIQ ceiling raised to $13B (Oct 2024)", "source_url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations"},
+    {"year": "2024-11", "event": "DIU ORIENT prototype OTs to Viasat, Aalyria, Higher Ground, IoT/AI (130 proposals)", "source_url": "https://defensescoop.com/2024/11/20/replicator-software-contract-awards-winners-diu-pentagon/"},
+    {"year": "2024-12", "event": "QinetiQ US UNO prototype OTA via C5 consortium for PdM TCNO", "source_url": "https://www.asdnews.com/news/defense/2024/12/30/qinetiq-us-awarded-ota-support-unified-network-operation-uno-prototypes"},
+    {"year": "2025-05", "event": "INB2 Army-wide enterprise license/PDSS solicitation (PEO C3N PM I2S) with intent to synopsize CodeMettle INB2; Anduril announces Klas acquisition (closed July 2025)", "source_url": "https://www.fbodaily.com/archive/2025/05-May/30-May-2025/FBO-07458594.htm"},
+    {"year": "2025-07/09", "event": "NGC2 prototype OTAs to Team Anduril (4ID, $99.6M reported) and Team Lockheed Martin (25ID); Persistent selected for NGC2 network (Oct 2025); CodeMettle UNO Phase II subcontract under RII (Oct 2025)", "source_url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award"},
+    {"year": "2026-01/05", "event": "ACC AMIC Deployable Tactical Communications RFI (due 2026-02-25); Lightning Surge private-5G call-for-fire (Apr); USSOCOM TACLAN/SDN 'King for a Day' RFI (May 15)", "source_url": "https://discover.govdash.com/solicitations/019e2c45-0ea1-7629-8f59-8b2664474496--tactical-local-area-network-taclan-and-satellite-deployable-node-sdn-king-for-a"},
+    {"year": "2026-07/09", "event": "PC-C6 division-scale validation with semi-frequent connectivity drops (Jul 31); GAO-26-108019 on NGC2 cost/schedule (Aug 20); baseline NGC2 to I Corps and III Armored Corps (Sep 21)", "source_url": "https://defensescoop.com/2026/09/21/iii-armored-corps-receiving-baseline-ngc2-capabilities/"}
+  ],
+  "allied_extension": "Somewhat more compelling with allies, for a specific reason: allied land forces (Germany D-LBO/TaWAN LBO with Rheinmetall/blackned, UK LE TacCIS/TRINITY, Nordic Bittium framework, Japan ATLA mobile comms prototype) are each buying new multi-transport tactical networks in 2025-2029 and are less locked to U.S. radio vendors, so a radio-agnostic adapter layer has more open interfaces to work against, and a German founder has a natural route into the Bundeswehr ecosystem (blackned, Rheinmetall) where ITAR does not gate the commercial radios used. Counterpoints: the allied 'integration layer' slot is also incumbent-held (Rheinmetall/blackned, Systematic, Thales), coalition interoperability is measured at CWIX/Bold Quest around FMN standards rather than PACE automation, and allied budgets for NetOps software are smaller and slower. Net: allied extension improves feasibility of building the product (interface access) more than it improves the market size.",
+  "search_log": [
+    {"query": "Army \"Unified Network Operations\" UNO IDIQ award 2026 PEO C3N", "useful": true},
+    {"query": "DARPA \"Mission-Integrated Network Control\" MINC tactical network automated multi-path 2024 2025", "useful": true},
+    {"query": "Army SBIR OR xTech \"PACE\" automated transport \"multi-transport\" OR \"transport agnostic\" tactical network 2025 OR 2026", "useful": true},
+    {"query": "\"Integrated Network Operations Battalion and Below\" INB2 solicitation PM I2S", "useful": true},
+    {"query": "Persistent Systems \"Cloud Relay\" OR Silvus \"Spectrum Dominance\" OR Aalyria ORIENT multi-path transport failover tactical 2025 2026", "useful": true},
+    {"query": "NGC2 transport layer \"PACE\" OR \"multiple transports\" Starlink MANET 5G soldiers signal S6 Ivy Sting OR \"Project Convergence\" 2026 network drops", "useful": true},
+    {"query": "Army \"Auto-PACE\" Seeker software multi-orbit SATCOM transport aggregation self-healing vendor", "useful": true},
+    {"query": "\"Unified Network Operations\" OR \"Tactical Network Operations\" Research Innovations OTA prototype PdM TCNO 2025 OR 2026 award", "useful": true},
+    {"query": "DIU ORIENT Aalyria award Replicator \"long-haul\" mesh connectivity prototype 2025", "useful": true},
+    {"query": "Anduril Klas acquisition \"Lattice Mesh\" tactical network transport 2025", "useful": true}
+  ],
+  "sources": [
+    {"url": "https://peoc3t.army.mil/i2s/uno.php", "title": "PEO C3T I2S - Unified Network Operations (UNO)", "pub_date": "2024-2025", "tier": 1},
+    {"url": "https://www.darpa.mil/research/programs/mission-integrated-network-control", "title": "MINC | DARPA", "pub_date": "2021 (program page)", "tier": 1},
+    {"url": "https://www.army-technology.com/news/peraton-labs-contract-darpa-minc/", "title": "Peraton Labs secures contract under DARPA's MINC programme", "pub_date": "2021-2022 (not re-verified)", "tier": 2},
+    {"url": "https://www.army.mil/article/274494/multi_orbit_satcom_to_boost_army_network_resiliency_capability_in_large_scale_combat_operations", "title": "Multi-orbit SATCOM to boost Army network resiliency, capability in Large Scale Combat Operations", "pub_date": "2024 (inferred; not re-verified)", "tier": 1},
+    {"url": "https://www.army.mil/article/263451/army_using_europe_and_pacific_operational_landscapes_as_laboratories_to_enhance_network_resiliency", "title": "Army using Europe and Pacific operational landscapes as 'laboratories' to enhance network resiliency", "pub_date": "2023 (inferred; not re-verified)", "tier": 1},
+    {"url": "https://breakingdefense.com/2022/12/army-network-plan-will-offset-contested-comms-with-multi-path-transport-agnostic-capabilities/", "title": "Army network plan will offset contested comms with multi-path transport-agnostic capabilities", "pub_date": "2022-12", "tier": 2},
+    {"url": "https://www.fbodaily.com/archive/2025/05-May/30-May-2025/FBO-07458594.htm", "title": "INB2 PEO C3N PM I2S sources sought (SAM mirror)", "pub_date": "2025-05-30", "tier": 2},
+    {"url": "https://usfcr.com/search/opportunities/?oppId=c374b3016d0e4de5a3ff3a765c4dcc7e", "title": "Notice of intent to synopsize CodeMettle INB2 software", "pub_date": "2025 (not re-verified)", "tier": 2},
+    {"url": "https://www.prnewswire.com/news-releases/codemettle-selected-by-us-army-to-continue-critical-work-on-inb2-contract-301644322.html", "title": "CodeMettle Selected by U.S. Army to Continue Critical Work on INB2 Contract", "pub_date": "2022-10", "tier": 3},
+    {"url": "https://www.asdnews.com/news/defense/2024/12/30/qinetiq-us-awarded-ota-support-unified-network-operation-uno-prototypes", "title": "QinetiQ US Awarded OTA to Support Unified Network Operation (UNO) Prototypes", "pub_date": "2024-12-30", "tier": 2},
+    {"url": "https://www.prnewswire.com/news-releases/codemettle-awarded-unified-network-operations-uno-other-transaction-ot-phase-ii-sub-contract-to-advance-the-us-armys-unified-network-302580853.html", "title": "CodeMettle Awarded UNO OT Phase II Sub-Contract", "pub_date": "2025-10", "tier": 3},
+    {"url": "https://orangeslices.ai/u-s-army-rfi-peo-c3t-unified-network-operations-uno-multiple-award-idiq/", "title": "U.S. Army RFI: PEO C3T Unified Network Operations (UNO) Multiple-Award IDIQ", "pub_date": "2023-2024", "tier": 2},
+    {"url": "https://federalnewsnetwork.com/ask-the-cio/2024/07/with-uno-army-intends-to-stop-battling-its-own-network/", "title": "With UNO, Army intends to stop battling its own network", "pub_date": "2024-07", "tier": 2},
+    {"url": "https://defensescoop.com/2024/11/20/replicator-software-contract-awards-winners-diu-pentagon/", "title": "Pentagon unveils winners of Replicator software contracts", "pub_date": "2024-11-20", "tier": 2},
+    {"url": "https://www.asdnews.com/news/defense/2025/05/05/anduril-acquire-klas-build-future-tactical-compute-communications", "title": "Anduril to Acquire Klas to Build the Future of Tactical Compute and Communications", "pub_date": "2025-05-05", "tier": 2},
+    {"url": "https://www.prnewswire.com/news-releases/persistent-systems-expands-cloud-relay-to-microsoft-azure-to-unlock-global-distributed-networking-for-joint-operations-302556444.html", "title": "Persistent Systems Expands Cloud Relay to Microsoft Azure", "pub_date": "2025-09/10", "tier": 3},
+    {"url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units", "title": "Army NGC2 to start scaling parts to more units", "pub_date": "2026-07-31", "tier": 2},
+    {"url": "https://defensescoop.com/2026/09/21/iii-armored-corps-receiving-baseline-ngc2-capabilities/", "title": "III Armored Corps receiving baseline NGC2 capabilities", "pub_date": "2026-09-21", "tier": 2},
+    {"url": "https://www.army.mil/article/294099/soldiers_employ_ngc2_during_project_convergence_capstone_6", "title": "Soldiers employ NGC2 during Project Convergence Capstone 6", "pub_date": "2026-07/08", "tier": 1},
+    {"url": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence", "title": "A Collaborative Capstone: L3Harris at Project Convergence", "pub_date": "2026-08", "tier": 3},
+    {"url": "https://www.army.mil/article/291863/accelerating_transformative_technologies_aids_commanders_readiness_across_the_pacific", "title": "Accelerating transformative technologies aids commanders' readiness across the Pacific (Lightning Surge private 5G)", "pub_date": "2026-04-21", "tier": 1},
+    {"url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2", "title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2", "pub_date": "2026-05-22", "tier": 1},
+    {"url": "https://www.gao.gov/products/gao-26-108019", "title": "GAO-26-108019: Army battlefield network / NGC2 cost and schedule", "pub_date": "2026-08-20", "tier": 1},
+    {"url": "https://defensescoop.com/2025/07/02/army-next-gen-command-and-control-budget-2026-request-3-billion/", "title": "Army next-gen C2 budget 2026 request ~$3 billion (layer breakdown)", "pub_date": "2025-07-02", "tier": 2},
+    {"url": "https://breakingdefense.com/2026/04/army-unveils-sweeping-xm30-push-4b-bet-on-ngc2-in-newly-released-budget-materials/", "title": "Army unveils sweeping XM30 push, $4B bet on NGC2 in newly released budget materials", "pub_date": "2026-04", "tier": 2},
+    {"url": "https://federalnewsnetwork.com/army/2026/02/lawmakers-cap-ngc2-funding-army-warns-industry-not-to-bring-negativity-to-congress/", "title": "Lawmakers cap NGC2 funding", "pub_date": "2026-02", "tier": 2},
+    {"url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view", "title": "ACC AMIC Deployable Tactical Communications RFI", "pub_date": "2026-01", "tier": 1},
+    {"url": "https://discover.govdash.com/solicitations/019e2c45-0ea1-7629-8f59-8b2664474496--tactical-local-area-network-taclan-and-satellite-deployable-node-sdn-king-for-a", "title": "USSOCOM TACLAN and SDN 'King for a Day' RFI", "pub_date": "2026-05-15", "tier": 2},
+    {"url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award", "title": "Army announces NGC2 prototype award (Team Anduril)", "pub_date": "2025-07", "tier": 1},
+    {"url": "https://www.asdnews.com/news/defense/2026/02/04/us-army-awards-persistent-systems-contract-875m-supporting-ngc2-prototype", "title": "US Army awards Persistent Systems contract $87.5M supporting NGC2 prototype", "pub_date": "2026-02-04", "tier": 2},
+    {"url": "https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/", "title": "Army SBIR topic: Generative AI Enabled Tactical Network (DDIL emulation for NGC2)", "pub_date": "2025", "tier": 1},
+    {"url": "https://armysbir.army.mil/eligibility/", "title": "Army SBIR|STTR eligibility (US ownership rule)", "pub_date": "2025", "tier": 1},
+    {"url": "https://www.redcom.com/auto-pace/", "title": "REDCOM Auto-PACE for Redundant Tactical Communications Interoperability (vendor page)", "pub_date": "unknown", "tier": 3},
+    {"url": "https://www.nationaldefensemagazine.org/articles/2025/4/22/army-combining-next-gen-command-and-control-transforming-in-contact-efforts", "title": "Army combining next-gen command and control, transforming in contact efforts", "pub_date": "2025-04-22", "tier": 2},
+    {"url": "https://www.sec.gov/Archives/edgar/data/68505/000119312525174512/d88358dex991.htm", "title": "Motorola Solutions to acquire Silvus Technologies (8-K exhibit)", "pub_date": "2025-05-27", "tier": 1}
+  ]
+}

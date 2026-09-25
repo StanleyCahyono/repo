@@ -1,0 +1,572 @@
+{
+ "id": "G23",
+ "title": "Message-format and datalink translation gateway (commercial mesh/TAK to Link 16/VMF for small units and drones; LLM/ontology translation between USMTF, ADatP-3, MIP, VMF, NVG and CoT)",
+ "problem": "Small units and Replicator-class drones on commercial MANET/TAK cannot push tracks and targets into Link 16/VMF-based fires and air C2 without a hardware gateway, a handheld Link 16 radio or voice relay, and coalition systems speaking USMTF/ADatP-3/MIP/VMF/NVG/CoT are re-bridged with one-off translators at every exercise.",
+ "categories": [
+  "A",
+  "B",
+  "F",
+  "H",
+  "I",
+  "J"
+ ],
+ "segment_ids": [
+  "S05",
+  "S08"
+ ],
+ "chain_steps": [
+  "TRANSPORT",
+  "PROCESS",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "platform",
+  "tactical unit (company/battalion fires cell, JTAC)",
+  "coalition/exercise integration cell"
+ ],
+ "user": {
+  "exact_role": "Fires cell NCO / fire support officer, JTAC, small-UAS operator and air battle manager who must move a track from a TAK/mesh screen into AFATDS, a VMF-capable terminal or the Link 16 picture; and the C2 integration engineer at Bold Quest/CWIX/Project Convergence who stands up the bridge",
+  "echelon": "Company to brigade fires; air component battle management; coalition exercise integration",
+  "organization_examples": [
+   "Army BCT fires cells and TiC brigades (4th ID, 25th ID NGC2 units)",
+   "USAF/USMC JTACs using ATAK as a DACAS toolkit",
+   "CENTCOM Task Forces 59/99/179 (low-cost UAS, target information sharing)",
+   "Joint Staff J6/JDAT Bold Quest, NATO CWIX integration cells",
+   "Replicator ADA2 system integrators under DIU ORIENT"
+  ]
+ },
+ "current_workflow": [
+  "1. Drone or dismount track appears as a CoT event in ATAK/TAK Server over commercial MANET (Persistent, Silvus, Doodle).",
+  "2. Operator reads grid/track and passes it by voice or chat to the fires cell or air battle manager.",
+  "3. Fires cell re-enters the target in AFATDS or composes a VMF nine-line on a VMF-capable terminal; air C2 re-enters it into the Link 16 picture via a terminal or ADSI-class gateway.",
+  "4. Where a hardware bridge exists (BACN aircraft, BATS-D handheld, ADSI/JRE gateway, V2X Gateway Mission Router) the translation is done by that box, which is scarce, program-owned and crypto-keyed.",
+  "5. At coalition events an integration cell configures point-to-point translators (ASCA, CoT gateway for SitaWare, MIP/NVG/ADatP-3 adapters) per exercise; results are not retained as a product."
+ ],
+ "current_solution": "Government-owned and commercial gateways already exist at every layer: Ultra I&C ADSI (CoT-to-JREAP-C translation, 21 legacy instances unified into one baseline - company claim), L3Harris BATS-D handheld Link 16 radio with ATAK/ADSI/CoT support, Curtiss-Wright TDL translation gateway, V2X Gateway Mission Router (Army, $48.5M award 2024, company PR), BSI VMF Gateway plugin for MACE, Northrop BACN aircraft, Fuse Integration ABMS networking pods, ATAK-MIL radio drivers for Link 16 gateways, Systematic SitaWare with built-in USMTF/ADatP-3/MIP/NVG/ASCA support and a CoT gateway, and Raft Data Platform transformation/federation inside the NGC2 common data layer baseline (June 2026).",
+ "failure": "It fails at the seam, not in translation logic: (a) the translator must sit behind a certified Link 16/MIDS terminal with crypto, and the terminal owner (prime/program office) controls that interface; (b) MIL-STD-6016 is Distribution C and AECA/ITAR-restricted, so a non-cleared, partly non-U.S.-person team cannot legally obtain the message standard; (c) at coalition level the bottleneck is releasability, accreditation and interface access, so translators demonstrated at CWIX/Bold Quest do not transition; (d) no program office buys 'a translator' - it is bought as a feature of a terminal, a gateway box, a C2 suite or the NGC2 data layer.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "MIL-STD-6016 (Link 16 message standard) contains technical data whose export is restricted under the Arms Export Control Act; distribution is C (federal government and contractors only); allied release requires foreign disclosure authorization; contractors obtain it through a government POC via ASSIST.",
+   "source_title": "MIL-STD-6016C Notice 2 (EverySpec listing)",
+   "source_url": "https://everyspec.com/MIL-STD/MIL-STD-3000-9999/MIL-STD-6016C_NOTICE-2_22648/",
+   "pub_date": "n/a (standard notice; listing undated)",
+   "event_date": "n/a",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "L3Harris BATS-D is a handheld Link 16 radio marketed with ATAK/TAK support, ADSI integration, Link 16 CMI compliance and Cursor on Target capability - i.e., the dismount-to-Link 16 bridge already exists as certified hardware.",
+   "source_title": "Battlefield Awareness and Targeting System - Dismounted (BATS-D) brochure",
+   "source_url": "https://www.l3harris.com/sites/default/files/2022-12/cs-bcs-bats-d-battlefield-awareness-targeting-system-dismounted-brochure.pdf",
+   "pub_date": "2022-12",
+   "event_date": "2022",
+   "tier": 3,
+   "label": "FACT (company brochure; performance not independently verified)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Software TDL gateways translating Link 16 J-series, VMF K-series and CoT for ATAK are an established product category (ADSI CoT-to-JREAP-C translation; HUNTR-class gateways; Curtiss-Wright TDL translation gateway).",
+   "source_title": "Software gateways for tactical data link translation: Link 16, VMF, CoT, NFFI (Corvus Intelligence blog) and Curtiss-Wright gateway announcement (Military Aerospace)",
+   "source_url": "https://corvusintell.com/blog/interoperability/tactical-data-link-gateway-software/",
+   "pub_date": "n/a (blog undated; Curtiss-Wright item RECALL - not re-verified this session)",
+   "event_date": "n/a",
+   "tier": 3,
+   "label": "FACT (category exists) / INFERENCE (maturity)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "V2X reported a $48.5M U.S. Army contract for the Gateway Mission Router that 'integrates information and assured communications across multiple domains' - the Army buys gateway capability as hardware from an established vendor, not as a standalone translation service.",
+   "source_title": "V2X Secures $48.5 Million U.S. Army Contract to Enhance Battlefield Communications with Versatile Gateway Mission Router",
+   "source_url": "https://s202.q4cdn.com/296309594/files/doc_news/V2X-Secures-48.5-Million-U.S.-Army-Contract-to-Enhance-Battlefield-Communications-with-Versatile-Gateway-Mission-Router-2024.pdf",
+   "pub_date": "2024",
+   "event_date": "2024",
+   "tier": 3,
+   "label": "FACT (company PR; award value as reported, not obligation)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "The Army's NGC2 common data layer baseline (June 22, 2026) explicitly includes 'common models and semantics, registries, transformation mechanisms, interfaces, federation' with Raft providing data transformation tools and data federation under Anduril's lead - the Army's translation layer is already assigned to an incumbent team.",
+   "source_title": "Army and industry align on common data baseline, as Next Generation Command and Control moves from prototyping to delivery",
+   "source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+   "pub_date": "2026-06-22",
+   "event_date": "2026-06-22",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "At Bold Quest 2025 (Fort Pickett, VA) SitaWare, FC BISA and TAK shared SA and target/gun-target-line data through the ASCA standard and a CoT gateway for SitaWare, with vendor SMEs on site; network problems limited activity during the short window - the coalition bridge was assembled per exercise by the C2 vendor, not bought as a product.",
+   "source_title": "Systematic experts support coalition forces during Bold Quest 2025",
+   "source_url": "https://systematic.com/int/industries/defence/news-knowledge/news/systematic-experts-support-coalition-forces-during-bold-quest-2025/",
+   "pub_date": "2025",
+   "event_date": "2025",
+   "tier": 3,
+   "label": "FACT (company-reported)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "C5ISR Center ran the first end-to-end simulated fires mission on an M777 over private 5G (May 2026) explicitly to bridge 'legacy platforms' lacking modern communications pathways - the government lab, not a vendor, is doing the legacy bridging work inside NGC2.",
+   "source_title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2",
+   "source_url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+   "pub_date": "2026-05-22",
+   "event_date": "2026-05",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-25-106454: six years into CJADC2 the services pursue C2 projects largely in isolation without a DOD framework; cross-service link translation is therefore rebuilt per program (inference from the finding).",
+   "source_title": "GAO-25-106454 Combined Joint All-Domain Command and Control",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "DIU's ORIENT commercial solutions opening (119-130 responses; Aalyria selected Dec 2024) targets connecting long-haul comms to local mesh so Replicator ADA2 systems keep operating in DDIL - the drone-swarm connectivity problem is being bought as network topology software, not as a TDL translator.",
+   "source_title": "Aalyria selected by Defense Innovation Unit to enhance swarm connectivity for defense applications",
+   "source_url": "https://secure.businesswire.com/news/home/20241210097336/en/Aalyria-selected-by-Defense-Innovation-Unit-to-enhance-swarm-connectivity-for-defense-applications.",
+   "pub_date": "2024-12-10",
+   "event_date": "2024-12",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "Multiple SBIR projects across the 2000s-2020s targeted C2 message translation and semantic interoperability (registry pointer: sbir.gov detail 302953 and the S08 list Quik-Speak, C2OSIF, BattleFish, NOVA, RTI) with no fielded standalone product - a search this session for a 2024-2025 SBIR topic on LLM-based USMTF/VMF/Link 16 translation found none.",
+   "source_title": "SBIR award detail 302953 (registry pointer) and Army SBIR 24.4 solicitation instructions",
+   "source_url": "https://www.sbir.gov/sbirsearch/detail/302953",
+   "pub_date": "various (2000s-2020s); Army SBIR 24.4 pre-release 2024-04-16",
+   "event_date": "2000s-2024",
+   "tier": 2,
+   "label": "FACT (repeated SBIRs) / HYPOTHESIS (no fielded product - absence not fully verified)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "ATAK-CIV and its SDK are open-source government-owned software with a plugin architecture, while ATAK-MIL carries classified adapters and radio drivers for Link 16 gateways - the unclassified TAK side is open to anyone, the Link 16 side is not.",
+   "source_title": "AndroidTacticalAssaultKit-CIV (GitHub, deptofdefense)",
+   "source_url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "pub_date": "ongoing (repository)",
+   "event_date": "n/a",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "USMTF (MIL-STD-6040B Notice 2, Jan 2023) is publicly downloadable from DLA Quick Search, and MIP/JC3IEDM, NVG and CoT schemas are public - the coalition-format half of the gap has no data-access barrier, which means data access was never the reason translators did not transition.",
+   "source_title": "MIL-STD-6040B Notice 2 (DLA Quick Search)",
+   "source_url": "https://quicksearch.dla.mil/Transient/2235F3ED4C35425483CD4E67732C0AC6.pdf",
+   "pub_date": "2023-01-24",
+   "event_date": "2023-01-24",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Breaking Defense (Dec 2024) reported DoD authorized its first C2 gateway to modernize and update on its own for CJADC2 - gateway software is moving to a continuous-ATO model inside an existing program rather than opening a new buyer.",
+   "source_title": "DoD authorizes first C2 gateway to modernize and update on its own for CJADC2",
+   "source_url": "https://breakingdefense.com/2024/12/dod-authorizes-first-c2-gateway-to-modernize-and-update-on-its-own-for-cjadc2/",
+   "pub_date": "2024-12",
+   "event_date": "2024-12",
+   "tier": 2,
+   "label": "FACT (headline-level; article body not read this session)",
+   "confidence": "LOW"
+  }
+ ],
+ "why_existing_startups_havent_solved": "They have, repeatedly, at the prototype level, and the market absorbed the capability into terminals (BATS-D), gateway boxes (ADSI, GMR, Curtiss-Wright), C2 suites (SitaWare) and the NGC2 data layer (Raft). A standalone translator has no requirement owner: the Link 16 side needs a certified terminal, crypto and JITC MIL-STD-6016 conformance testing that only the terminal/gateway program can sponsor; the coalition side stalls on releasability, accreditation and interface access rather than schema mapping. LLM/ontology mapping lowers a cost that was never the constraint, and introduces non-determinism into safety-critical fires messages that JITC conformance testing would reject.",
+ "why_not_solved_reasons": [
+  "it HAS been solved",
+  "proprietary incumbent architecture",
+  "certification",
+  "classification",
+  "buyer fragmentation",
+  "insufficient commercial market"
+ ],
+ "technical_wedge": "Honest answer: none as a standalone product. The only sliver a two-founder team could build is the unclassified half - a CoT/TAK-side adapter and conformance-test kit (CoT <-> MIP/JC3IEDM, NVG, ADatP-3/USMTF, ASCA, STANAG 4586 for drone OEMs) with deterministic, schema-verified mapping and an LLM used only to draft mappings for human review - and that sliver belongs inside another gap's edge-bridge product (S08-G2) or inside NATO INSPECT-style continuous conformance tooling, not as a gateway business.",
+ "mvp": {
+  "what": "Open-standards adapter service: ATAK-CIV plugin + TAK Server bridge that converts CoT events to/from public coalition formats (USMTF/MIL-STD-6040, MIP/JC3IEDM, NVG, ADatP-3 subset) with schema-validated deterministic transforms and an offline LLM-assisted mapping editor; Link 16 represented only by a synthetic, non-controlled J-series-like schema (no MIL-STD-6016 content).",
+  "demonstrable_in_3_6_months": "Yes for the unclassified half: live TAK clients on a commercial mesh exchanging tracks with an open MIP/NVG consumer (e.g., an FMN-style test harness) with round-trip fidelity metrics. No for the Link 16/VMF half, which cannot be demonstrated credibly without a certified terminal and controlled specs.",
+  "what_it_must_prove": "That a deterministic adapter reaches conformance-grade fidelity (zero silent field loss, correct classification/releasability markings carried) and that any program office or allied OEM would pay for it separately from SitaWare/Raft/ADSI - the second proof is the one that has historically failed.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Message standards (MIL-STD-6016 Link 16 - Distribution C/ITAR; MIL-STD-6017 VMF - distribution-controlled; MIL-STD-6040 USMTF - public; ADatP-3 - NATO controlled; MIP/JC3IEDM, NVG, CoT - public), Link 16 network design and crypto interfaces, and representative message traffic for testing.",
+  "legally_realistically_obtainable": "Public formats (CoT, USMTF, MIP, NVG) yes. MIL-STD-6016/6017 only via a government POC for a U.S. contractor on a sponsored effort; allied release requires foreign disclosure authorization. A non-U.S.-person co-founder would likely need to be walled off from 6016 technical data (export-control counsel required). Live Link 16 traffic: not obtainable without a program sponsor.",
+  "sources": [
+   "https://quicksearch.dla.mil (MIL-STD-6040B USMTF)",
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (CoT/TAK)",
+   "MIP/JC3IEDM and NVG public specifications (NATO/MIP community)",
+   "ASSIST via government POC (MIL-STD-6016C, 6017) - controlled"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "ATAK/WinTAK and TAK Server",
+   "AFATDS / fires networks",
+   "MIDS/JTIDS Link 16 terminals and JRE/JREAP-C gateways (ADSI)",
+   "BATS-D handheld",
+   "SitaWare HQ/Frontline",
+   "NGC2 common data layer (Lattice/Foundry/Raft Data Platform)",
+   "Coalition C2IS via FMN Spiral 4/5 profiles"
+  ],
+  "interfaces_protocols": [
+   "CoT XML/Protobuf",
+   "VMF (MIL-STD-6017, K-series)",
+   "Link 16 J-series (MIL-STD-6016) via JREAP-C/SIMPLE",
+   "USMTF (MIL-STD-6040)",
+   "ADatP-3",
+   "MIP/JC3IEDM",
+   "NVG",
+   "ASCA",
+   "STANAG 4586 (UAS)"
+  ],
+  "who_controls_the_interface": "Terminal and gateway vendors (L3Harris, Ultra I&C, Collins, Viasat, Curtiss-Wright, V2X) and their program offices control the Link 16/VMF side; TAK Product Center controls TAK-GOV/MIL adapters; the NGC2 data-layer baseline team (Anduril/Palantir/Raft) controls Army transformation; Systematic controls SitaWare gateways; NATO FMN/CWIX controls coalition profiles."
+ },
+ "customer": {
+  "user": "Fires cell NCOs, JTACs, sUAS operators, air battle managers, exercise integration engineers",
+  "champion": "Brigade/division S6-S3 or fires chief in a TiC unit; JDAT/Bold Quest assessment lead; NGC2 operational implementation lead",
+  "contract_signer": "Prime or data-layer lead (Anduril/Raft, Lockheed team) as a subcontract; or PEO C3N/PEO C3T contracting via OTA - no evidence of a direct signer for a standalone translator",
+  "requirement_owner": "Not identified for a standalone translator; requirements for gateways sit with the terminal/gateway programs (Army PM Tactical Radios / PdM TDL-class offices, DAF C3BM for ABMS gateways) and with the NGC2 data-layer baseline",
+  "program_office": "Army PEO C3N (NGC2 data layer; tactical radios), DAF C3BM/ABMS (gateway pods, BACN successor), Joint Staff J6/JDAT (assessment only, no procurement)",
+  "contracting_office": "Army Contracting Command - Aberdeen Proving Ground (PEO C3N/C3T); AFLCMC (ABMS); DIU (ORIENT CSO) - none currently soliciting a translator"
+ },
+ "budget": {
+  "program_or_line": "No discrete line. Adjacent lines: Army NGC2 (~$3.3B identified through FY2026 per GAO-26-108019, data layer included); DAF ABMS RDT&E (~$1,040.5M FY26 request) which funds gateway pods; DISA Coalition Information Environment (FY27 O&M) for MPE.",
+  "evidence": "Gateway money is spent on hardware and on incumbent-held data-layer baselines; no RFI, sources sought, SBIR topic or budget line for a standalone message-translation service was found this session (E02-F41, E04-F31 absence signals).",
+  "source_url": "https://www.gao.gov/products/gao-26-108019",
+  "confidence": "MEDIUM (that no standalone line exists); HIGH (that adjacent programs exist)"
+ },
+ "entry_vehicle": {
+  "primary": "Subcontract to an NGC2 or ABMS gateway prime, or an AFWERX/Army SBIR Phase I if a matching topic appears (none found for FY24-25)",
+  "sequence": [
+   "1. ATAK-CIV plugin and open-format adapter released to TAK community (no contract)",
+   "2. CWIX/Bold Quest participation via an allied nation or a prime to obtain an interoperability assessment",
+   "3. SBIR Phase I/II or OTA subcontract under a data-layer/gateway prime",
+   "4. Only then any Link 16-side work, through the prime's terminal and government POC access to MIL-STD-6016"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% U.S.-citizen/permanent-resident ownership and control; the German founder becoming a U.S. permanent resident helps, the Indonesian founder's stake and role constrain ownership tests and, more decisively, access to ITAR-restricted Link 16 technical data (deemed-export rules) - export-control and immigration counsel required; no definitive legal judgment made here."
+ },
+ "competition": [
+  {
+   "company": "Ultra Intelligence & Communications (ADSI)",
+   "how_close": "Direct incumbent: CoT-to-JREAP-C/Link 16 gateway, 21 instances unified into one baseline (company claim)",
+   "evidence": "Search summary this session; product page not fetched - MEDIUM"
+  },
+  {
+   "company": "L3Harris (BATS-D, ex-Viasat TDL business)",
+   "how_close": "Direct: certified handheld Link 16 with ATAK/CoT/ADSI support",
+   "evidence": "L3Harris brochure 2022-12 (company)"
+  },
+  {
+   "company": "V2X (Gateway Mission Router)",
+   "how_close": "Direct at vehicle/TOC level; $48.5M Army award reported 2024",
+   "evidence": "V2X PR 2024 (company; award value as stated)"
+  },
+  {
+   "company": "Curtiss-Wright (TDL translation gateway)",
+   "how_close": "Direct product category",
+   "evidence": "Military Aerospace article (RECALL - date not re-verified)"
+  },
+  {
+   "company": "Systematic (SitaWare + CoT gateway, ASCA, USMTF/ADatP-3/MIP/NVG)",
+   "how_close": "Direct on the coalition-format half; NATO DEMETER standard system",
+   "evidence": "Bold Quest 2025 company report; USMTF product page (marketing)"
+  },
+  {
+   "company": "Raft (NGC2 data transformation/federation) with Anduril/Palantir",
+   "how_close": "Direct on Army data-layer translation; holds the baseline",
+   "evidence": "army.mil 2026-06-22"
+  },
+  {
+   "company": "Fuse Integration / Northrop Grumman (BACN) / Collins / Viasat",
+   "how_close": "Airborne and pod gateways under ABMS",
+   "evidence": "BusinessWire 2023-03-21 (Fuse ABMS IDIQ seat); BACN RECALL"
+  },
+  {
+   "company": "BSI (VMF Gateway plugin for MACE), MVRsimulation",
+   "how_close": "VMF/DACAS gateway in training/simulation ecosystem",
+   "evidence": "MVRsimulation DACAS page"
+  },
+  {
+   "company": "Cougaar Software, Securboration, Machina Cognita and other SBIR translators",
+   "how_close": "Prior SBIR attempts at semantic translation; none fielded standalone (registry)",
+   "evidence": "sbir.gov pointer; HYPOTHESIS on non-fielding"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "They already have it: L3Harris owns the certified handheld terminal; Anduril/Raft own the NGC2 transformation baseline and Lattice Mesh; Systematic ships multi-standard gateways; ADSI is the joint standard gateway. Adding an LLM-assisted mapping editor to any of these is a quarter's work for an incumbent team with spec access.",
+  "why_startup_still_wins_or_reject": "REJECT. There is no interface a startup controls, no data it uniquely holds, and the safety-critical nature of fires messages favors deterministic, certified incumbents over an LLM-based newcomer."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$40k-$100k (two founders, 3-4 months: ATAK-CIV plugin + open-format adapter + synthetic Link 16-like schema)",
+  "credible_military_demo_usd": "$1M-$2.5M (prime partnership, cleared TDL engineer, JITC lab/ATC-Gen conformance runs, terminal loan, CWIX/Bold Quest participation)",
+  "first_production_deployment_usd": "$5M-$12M (MIL-STD-6016/6017 conformance certification, crypto integration, ATO under a program of record, sustainment)",
+  "assumptions": "HYPOTHESIS, LOW confidence: figures are analyst estimates by analogy to gateway and TAK-plugin efforts, not sourced; the middle and late tiers assume a sponsoring prime that has no evident reason to sponsor."
+ },
+ "expertise_required": [
+  {
+   "role": "Cleared U.S.-person tactical data link engineer (Link 16/MIDS/JREAP, MIL-STD-6016/6017)",
+   "why": "Only a cleared U.S. person can hold and work the controlled standards and terminal interfaces",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "TAK/CoT and MIP/NVG/ADatP-3 integration engineer",
+   "why": "Builds the unclassified half and FMN-profile conformance",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Former fires/JTAC or air battle manager",
+   "why": "Defines message semantics, safety checks and workflow; without them the product is a schema toy",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Export-control and FOCI counsel",
+   "why": "Deemed-export exposure of the non-U.S.-person founder; ITAR registration if any 6016-specific code is written",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Prime/program business development lead",
+   "why": "There is no direct buyer; the only route is a subcontract",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "high",
+  "explanation": "Link 16 message standards and network designs are AECA/ITAR-controlled technical data with Distribution C; gateways require JITC MIL-STD-6016 conformance testing, crypto handling and an ATO under a program of record; VMF is distribution-controlled; coalition releases require foreign disclosure authorization.",
+  "non_us_person_founder_note": "An Indonesian co-founder who is not a U.S. person would very likely need to be excluded from all Link 16/VMF technical data (deemed-export), which removes the business/product founder from the core product; SBIR ownership tests and any future FOCI mitigation add further constraints. Requires export-control and immigration counsel; no legal determination made here."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "low",
+  "explanation": "Link 16, VMF, USMTF and ADatP-3 have no civilian users; the generic schema-translation engine competes with mature commercial iPaaS/ETL tools where an LLM mapping assistant is a feature, not a company. Only the CoT/TAK side (public safety, SAR, wildfire) has a thin civilian analogue."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "accreditation",
+   "government relationships",
+   "integrations"
+  ],
+  "explanation": "The only durable assets in this category are conformance certifications and program-of-record positions, both of which accrue to the terminal/gateway owner and the data-layer prime rather than to a translation-software vendor; mappings themselves are commodity."
+ },
+ "why_now": "Replicator/NGC2 multiply non-Link 16 endpoints (commercial MANET drones and TAK clients) and NGC2 moved to a common data layer in June 2026, so there is more traffic to bridge; LLMs make schema-mapping drafts cheap. But the constraint moved with it: the Army assigned transformation to Raft/Anduril, DIU is buying network topology (ORIENT), and the Link 16 side remains hardware-and-certification bound - so 'why now' is stronger for the incumbents than for a new entrant.",
+ "killer_risk": "No PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING OFFICE->BUDGET->VEHICLE path exists for a standalone translator; the Link 16 half is legally closed to this team (ITAR/Distribution C plus a non-U.S.-person founder) and the unclassified half is already covered by government-owned TAK adapters, SitaWare and the NGC2 baseline, leaving an LLM ontology layer that solves a non-bottleneck and would fail deterministic conformance testing.",
+ "market_stage": "Mature",
+ "procurement_signal_timeline": [
+  {
+   "year": "2021",
+   "event": "GAO-21-99 finds guidance gaps in digitally-aided CAS and friendly-force tracking (air-ground seam persists)",
+   "source_url": "https://www.gao.gov/products/gao-21-99"
+  },
+  {
+   "year": "2022-2023",
+   "event": "ABMS $950M IDIQ pool includes Fuse Integration for networking pods (BusinessWire 2023-03-21); L3Harris markets BATS-D with ATAK/CoT (brochure 2022-12)",
+   "source_url": "https://www.businesswire.com/news/home/20230321005856/en"
+  },
+  {
+   "year": "2023",
+   "event": "USMTF MIL-STD-6040B Notice 2 published (Jan 2023) - public coalition text format remains maintained",
+   "source_url": "https://quicksearch.dla.mil/Transient/2235F3ED4C35425483CD4E67732C0AC6.pdf"
+  },
+  {
+   "year": "2024",
+   "event": "V2X reports $48.5M Army Gateway Mission Router award; DIU ORIENT selects vendors incl. Aalyria for Replicator mesh-to-long-haul connectivity (Dec 2024); DoD authorizes first continuously-updating C2 gateway (Dec 2024)",
+   "source_url": "https://secure.businesswire.com/news/home/20241210097336/en/Aalyria-selected-by-Defense-Innovation-Unit-to-enhance-swarm-connectivity-for-defense-applications."
+  },
+  {
+   "year": "2025",
+   "event": "GAO-25-106454 (Apr): services build C2 in isolation; Bold Quest 2025: SitaWare/FC BISA/TAK bridged via ASCA by vendor SMEs",
+   "source_url": "https://www.gao.gov/products/gao-25-106454"
+  },
+  {
+   "year": "2026",
+   "event": "C5ISR Center bridges M777 over 5G (May); Army sets NGC2 common data layer baseline with Anduril lead and Raft transformation/federation (Jun 22)",
+   "source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery"
+  }
+ ],
+ "allied_extension": "Marginally more compelling but still not a company: allied formats (ADatP-3, MIP, NVG, ASCA, STANAG 4586) are public or obtainable via national MoDs and CWIX/Bold Quest give cheap assessments, and a German founder can reach NATO DIANA/Bundeswehr channels. But Systematic already holds the NATO land C2 interoperability slot (DEMETER, FMN Spiral 4) and NATO is building INSPECT for continuous conformance, so the allied version collapses to 'adapter/conformance tooling for drone OEMs', which is a feature of an edge-bridge product (S08-G2), not a translation gateway business; Link 16 access is even harder for allied-release reasons.",
+ "search_log": [
+  {
+   "query": "TAK \"Link 16\" Cursor on Target gateway ADSI plugin ATAK J-series translation",
+   "useful": true
+  },
+  {
+   "query": "\"Bold Quest 2025\" Systematic SitaWare ASCA TAK interoperability coalition fires",
+   "useful": true
+  },
+  {
+   "query": "SBIR topic 2024 OR 2025 \"USMTF\" OR \"VMF\" OR \"Link 16\" message translation \"large language model\" OR \"AI\" interoperability gateway",
+   "useful": true
+  },
+  {
+   "query": "Anduril Lattice \"Link 16\" integration 2025 OR 2026 gateway tactical data link",
+   "useful": false
+  },
+  {
+   "query": "\"MIL-STD-6016\" Link 16 export controlled \"distribution\" access JITC interoperability certification tactical data link software",
+   "useful": true
+  },
+  {
+   "query": "ATAK \"VMF\" OR \"JTAC\" digitally aided close air support \"Cursor on Target\" gateway AFATDS 2025",
+   "useful": true
+  },
+  {
+   "query": "DIU ORIENT Replicator Aalyria prototype long-haul mesh 2025",
+   "useful": true
+  },
+  {
+   "query": "Raft NGC2 data layer transformation federation Anduril Palantir June 2026",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://everyspec.com/MIL-STD/MIL-STD-3000-9999/MIL-STD-6016C_NOTICE-2_22648/",
+   "title": "MIL-STD-6016C Notice 2 listing (distribution and export restriction)",
+   "pub_date": "n/a",
+   "tier": 2
+  },
+  {
+   "url": "https://www.l3harris.com/sites/default/files/2022-12/cs-bcs-bats-d-battlefield-awareness-targeting-system-dismounted-brochure.pdf",
+   "title": "L3Harris BATS-D brochure",
+   "pub_date": "2022-12",
+   "tier": 3
+  },
+  {
+   "url": "https://corvusintell.com/blog/interoperability/tactical-data-link-gateway-software/",
+   "title": "Software gateways for tactical data link translation: Link 16, VMF, CoT, NFFI",
+   "pub_date": "n/a",
+   "tier": 3
+  },
+  {
+   "url": "https://www.militaryaerospace.com/communications/article/14040130/tactical-data-link-translation-gateway-command-and-control",
+   "title": "Curtiss-Wright tactical data link translation gateway (RECALL - not re-verified)",
+   "pub_date": "n/a",
+   "tier": 3
+  },
+  {
+   "url": "https://s202.q4cdn.com/296309594/files/doc_news/V2X-Secures-48.5-Million-U.S.-Army-Contract-to-Enhance-Battlefield-Communications-with-Versatile-Gateway-Mission-Router-2024.pdf",
+   "title": "V2X $48.5M Army Gateway Mission Router contract",
+   "pub_date": "2024",
+   "tier": 3
+  },
+  {
+   "url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+   "title": "Army NGC2 common data baseline (Anduril, Palantir, Raft)",
+   "pub_date": "2026-06-22",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/",
+   "title": "Army taps Anduril as lead for NGC2 common data layer baseline",
+   "pub_date": "2026-06-22",
+   "tier": 2
+  },
+  {
+   "url": "https://systematic.com/int/industries/defence/news-knowledge/news/systematic-experts-support-coalition-forces-during-bold-quest-2025/",
+   "title": "Systematic experts support coalition forces during Bold Quest 2025",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+   "title": "C5ISR Center M777 fires over 5G",
+   "pub_date": "2026-05-22",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454 CJADC2",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-26-108019",
+   "title": "GAO-26-108019 Army C2 Fix/NGC2 cost estimate",
+   "pub_date": "2026-08-20",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-21-99",
+   "title": "GAO-21-99 digitally-aided CAS guidance gaps",
+   "pub_date": "2021-01-21",
+   "tier": 1
+  },
+  {
+   "url": "https://secure.businesswire.com/news/home/20241210097336/en/Aalyria-selected-by-Defense-Innovation-Unit-to-enhance-swarm-connectivity-for-defense-applications.",
+   "title": "Aalyria selected by DIU (ORIENT)",
+   "pub_date": "2024-12-10",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2024/11/20/replicator-software-contract-awards-winners-diu-pentagon/",
+   "title": "Pentagon unveils winners of Replicator software contracts",
+   "pub_date": "2024-11-20",
+   "tier": 2
+  },
+  {
+   "url": "https://www.sbir.gov/sbirsearch/detail/302953",
+   "title": "SBIR award detail (C2 translation lineage, registry pointer)",
+   "pub_date": "various",
+   "tier": 2
+  },
+  {
+   "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "title": "ATAK-CIV repository",
+   "pub_date": "ongoing",
+   "tier": 1
+  },
+  {
+   "url": "https://quicksearch.dla.mil/Transient/2235F3ED4C35425483CD4E67732C0AC6.pdf",
+   "title": "MIL-STD-6040B Notice 2 (USMTF)",
+   "pub_date": "2023-01-24",
+   "tier": 1
+  },
+  {
+   "url": "https://breakingdefense.com/2024/12/dod-authorizes-first-c2-gateway-to-modernize-and-update-on-its-own-for-cjadc2/",
+   "title": "DoD authorizes first C2 gateway to modernize and update on its own for CJADC2",
+   "pub_date": "2024-12",
+   "tier": 2
+  },
+  {
+   "url": "https://www.mvrsimulation.com/technology/dacas.html",
+   "title": "MVRsimulation DACAS / BSI VMF Gateway plugin",
+   "pub_date": "n/a",
+   "tier": 3
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20230321005856/en",
+   "title": "Fuse Integration ABMS IDIQ seat",
+   "pub_date": "2023-03-21",
+   "tier": 3
+  },
+  {
+   "url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026",
+   "title": "NATO DEMETER SitaWare FOC (Janes)",
+   "pub_date": "2025",
+   "tier": 2
+  }
+ ]
+}

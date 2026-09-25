@@ -1,0 +1,292 @@
+{
+  "id": "G01",
+  "title": "Machine-readable security labeling and releasability at the point of production (born-releasable C2/ISR objects: tracks, reports, video, AI detections)",
+  "problem": "Tracks, reports, video and AI-derived products are created on U.S. Secret systems without interoperable, machine-enforceable classification/releasability labels (ACP-240/ZTDF/IC-TDF/STANAG 4774-4778), so ABAC engines and cross-domain guards cannot decide automatically and staff regenerate, re-key or hand-carry products to partner enclaves after days-to-weeks of human negotiation.",
+  "categories": ["F", "I", "A", "B", "C"],
+  "segment_ids": ["S02", "S04", "S08", "S10"],
+  "chain_steps": ["PROCESS", "FUSE", "DISSEMINATE_TASK"],
+  "echelons": ["division_corps", "theater", "joint", "coalition"],
+  "user": {
+    "exact_role": "Intelligence and fires staff who produce REL products (Army 35F/35G analysts, targeting officers, ISR PED analysts), foreign disclosure officers (FDOs), multinational intelligence cell analysts, cross-domain-solution filter engineers, and data-layer integrators on NGC2/Overmatch/MPE",
+    "echelon": "Division/corps G2 and fires cells, theater/COCOM J2/J3 and JICO cells, coalition CJTF and Mission Partner Environment operators",
+    "organization_examples": ["III Corps / I Corps G2 during Warfighter Exercises (WFX 24-03 documented)", "USINDOPACOM J2/J6 and INDOPACOM Mission Network", "USEUCOM / NATO Federated Mission Networking nodes", "DISA MPE / Coalition Information Environment program office", "Joint Staff J6 JDAT (Bold Quest) and NATO CWIX participants"]
+  },
+  "current_workflow": [
+    "Producer (analyst, sensor operator, AI service) creates a track, report, detection or video clip inside a national system at collateral Secret; the object inherits the system-level classification, not a content-derived label (GAO-25-106454; MIPB WFX 24-03).",
+    "A partner needs the product; the release question is negotiated by phone, email and information-exchange requirements between the producer, the FDO and the receiving enclave's administrators (DoD CIO ZT PfMO webinar Sept 2025: 'phone calls, IERs, weeks of negotiation').",
+    "The FDO reviews and re-marks by hand against classification guides and disclosure policy; combined or fused objects default to the most restrictive caveat (NOFORN dominates), so the object is often unreleasable as-is.",
+    "Staff re-create a sanitized copy on the MPE/REL enclave with a different tool (WFX 24-03: intel regenerated on the lower enclave with REL NATO markings), or move it through an accredited CDS whose static filters reject or quarantine it, or carry it on removable media (INDOPACOM 2024).",
+    "Partner receives the product hours to days later, often stripped of provenance; the same negotiation is repeated for the next product type or the next exercise (Balikatan 2026 COP took 'more than eight years' of integration and still depends on JICOs and FDOs)."
+  ],
+  "current_solution": "Human FDO review against classification guides; document-centric marking tools (Fortra Titus/Boldon James, Microsoft Purview) that label office files and email but not tactical message objects; accredited CDS guards (Everfox, Owl, GDMS TACDS, Northrop CHORD) with hand-written filters; producing at the lowest classification by policy; DISA MPE lower enclaves and separate coalition networks (CENTRIXS, BICES, Pegasus); commercial unclassified GEOINT as a releasability workaround (NGA Luno); and early data-centric-security stacks (Virtru/OpenTDF ZTDF, Isode and archTIS STANAG 4774/4778 labelers) that are being piloted for enterprise documents and MPE messaging rather than fielded for machine-generated C2/ISR objects.",
+  "failure": "Labels are absent or system-inherited at the moment of creation; there is no controlled vocabulary shared across mission domains so machine rules cannot interoperate; fused/aggregated objects cannot compute a dominance-aware releasability set, so the most-restrictive caveat wins; every new automated release path needs NSA/NCDSMO-style accreditation; and disclosure authority remains a human decision by regulation, so even where a format (ZTDF/ACP-240) exists, the producer-side derivation of the label for tracks, CoT, detections and video is still manual or missing.",
+  "evidence": [
+    {
+      "form": "government document",
+      "claim": "GAO found 'overly restrictive data classification' is 'a significant hindrance to sharing command and control data' with allies and across services, and officials were not aware of any DoD entity working on a solution; DoD mostly concurred with the recommendations.",
+      "source_title": "GAO-25-106454, Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework",
+      "source_url": "https://www.gao.gov/products/gao-25-106454",
+      "pub_date": "2025-04-08",
+      "event_date": "2024-2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "documented manual workaround",
+      "claim": "During Warfighter Exercise 24-03, intelligence produced at collateral Secret could not be shared with allies and had to be regenerated on the MPE lower enclave with REL NATO markings using a different tool; BICES did not communicate with mission command systems.",
+      "source_title": "Military Intelligence Professional Bulletin, 'Multinational Intelligence Sharing' (Continuous Transformation 2025 issue)",
+      "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+      "pub_date": "2025",
+      "event_date": "2024",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "operator workaround",
+      "claim": "DoD CIO Zero Trust PfMO subject-matter expert described current cross-domain tagging coordination as 'phone calls, IERs, weeks of negotiation' with incompatible local definitions and named ZTDF/ABAC and a controlled vocabulary as the target; the ZT target-level deadline is 30 Sept 2027.",
+      "source_title": "DoD CIO Zero Trust PfMO / DAU webinar 'Interoperable Data Tagging' (J. Gottlieb), mirrored transcript",
+      "source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json",
+      "pub_date": "2025-09-18",
+      "event_date": "2025-09-18",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "The director of DoD's Zero Trust PfMO (Randy Resnick) said data tagging and labeling is a 'big hurdle' to reaching the FY2027 target and that DoD is running pilots (18 pilots, about 20 vendors) to arrive at a standard approach to data tags and labels - i.e., the problem is acknowledged but unsolved at the department level.",
+      "source_title": "MeriTalk, 'DoD Running Data Tagging Pilots to Address Zero Trust Pillar'",
+      "source_url": "https://meritalk.com/articles/dod-running-data-tagging-pilots-to-address-zero-trust-pillar/",
+      "pub_date": "not captured (2024-2025; verify)",
+      "event_date": "2024-2025",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "operator workaround",
+      "claim": "Balikatan 2026 fielded the first eight-nation common operating picture after 'more than eight years' of integration work, and the flow still depends on JICOs and foreign-disclosure officers - release remains a human bottleneck even in the flagship coalition exercise.",
+      "source_title": "DVIDS, 'Balikatan 2026 debuts groundbreaking common operating picture'",
+      "source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+      "pub_date": "2026-05",
+      "event_date": "2026-04/05",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "documented manual workaround",
+      "claim": "INDOPACOM Mission Network officials said partner data still moved by 'thumb drives or CDs, or sometimes people looking at two different monitors' and that even after consolidation 'you can't send an attachment' to some allies for lack of data-sharing policy.",
+      "source_title": "Defense One, 'INDOPACOM is replacing a pile of partner-nation networks with just one'",
+      "source_url": "https://www.defenseone.com/defense-systems/2024/11/indopacom-replacing-pile-partner-nation-networks-just-one/401129/",
+      "pub_date": "2024-11-18",
+      "event_date": "2024",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "DEVCOM C5ISR Center issued the 'Tactical Data in Use Security' (DUCES) RFI surveying industry for DoD Zero Trust Data-Pillar capabilities that must operate inside DDIL tactical networks; the deadline was later extended - a direct government statement that tactical object-level data protection (which presupposes machine-readable labels) is not available today.",
+      "source_title": "Breaking Defense, 'Army says DUCES to cyber hackers: New RFI looks for tactical edge zero trust solutions'; SAM.gov notice 784528d45bcc4bcaa163a33e6562bef2",
+      "source_url": "https://breakingdefense.com/2025/02/army-says-duces-to-cyber-hackers-new-rfi-looks-for-tactical-edge-zero-trust-solutions/",
+      "pub_date": "2025-02",
+      "event_date": "2025-02",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "NAVWAR open SBIR topic 'Data Integrity and Control in DDIL Environments' asks for data protected as an object independent of network or application using ICDF/ZTDF formats that function in DDIL conditions and recover on reconnection - a service-level solicitation for exactly the born-labeled object model.",
+      "source_title": "SBIR.gov topic 10735 (NAVWAR)",
+      "source_url": "https://www.sbir.gov/topics/10735",
+      "pub_date": "2024-2025",
+      "event_date": "2024-2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "budget",
+      "claim": "Joint Staff J6 FY2027 RDT&E justification lists ACP-240, ICAM and Zero Trust as coalition 'testing standards' and continues demonstrating data-centric security for partners beyond FVEY (Bold Quest-type events) - funding exists for demonstration and assessment, not for a production labeling product.",
+      "source_title": "FY2027 President's Budget, The Joint Staff RDT&E justification (C5 capability development / JOTG lines)",
+      "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+      "pub_date": "2026",
+      "event_date": "FY2025-FY2027",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "ACP-240 (CCEB data-centric security publication built on ZTDF) was reported adopted by FVEY and other allied nations in Oct 2025; Everfox and Virtru announced a partnership (16 Oct 2025) to pair ZTDF labeling with accredited cross-domain guards; NSA's Zero Trust Implementation Guideline Phase Two (Apr 2026) references ZTDF/IC-TDF for data rights management. The format/wrapper layer is therefore being claimed by incumbents; the producer-side derivation of labels for tactical objects is not evidenced as solved.",
+      "source_title": "BusinessWire, 'Everfox and Virtru Partner to Improve Zero Trust Interoperability Among National Security Agencies'; Virtru newsroom on ACP 240 adoption; GlobeNewswire on NSA ZT guideline",
+      "source_url": "https://www.businesswire.com/news/home/20251016209492/en/Everfox-and-Virtru-Partner-to-Improve-Zero-Trust-Interoperability-Among-National-Security-Agencies",
+      "pub_date": "2025-10-16",
+      "event_date": "2025-10 to 2026-04",
+      "tier": 3,
+      "label": "FACT (announcements are vendor-issued; adoption scope and deployment status are INFERENCE)",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "product fails requirement",
+      "claim": "Releasability markings do not aggregate by dominance: any NOFORN element in a combined object blocks release to all foreign nationals, so guards must apply the most restrictive constraint and fused C2/ISR products become unreleasable - existing labelers and guards enforce this but do not compute a releasable subset at creation time.",
+      "source_title": "Anchor Defense, 'Cross Domain Solution Cross-Tagging and Attribution Controls for Multi-Level Data Release' and 'Cross Domain Solution Data Labeling and Marking Automation for Mission Systems'",
+      "source_url": "https://anchor-defense.com/articles/cds-cross-tagging-attribution-controls-multi-level-data-release/",
+      "pub_date": "undated (2025-2026)",
+      "event_date": "n/a",
+      "tier": 3,
+      "label": "FACT (policy rule) / INFERENCE (operational impact)",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "DISA says the Mission Partner Environment remains network-centric and will move to data-centric with zero trust by about early 2027, 'starting small' with Indo-Pacific proof-outs - the buyer's own timeline confirms object-level labeling is not yet operational in the coalition environment.",
+      "source_title": "Federal News Network, 'DISA starting small in proving out Mission Partner Environment capabilities'",
+      "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+      "pub_date": "2026-08-13",
+      "event_date": "2026-2027",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "HIGH"
+    }
+  ],
+  "why_existing_startups_havent_solved": "The format layer has been taken by standards-body-backed vendors: Virtru stewards OpenTDF/ZTDF and now markets ACP-240 conformance with Everfox's accredited guards (Oct 2025), Isode and archTIS sell STANAG 4774/4778 labelers for FMN messaging, and XQ Message claims ACP-240 delivery. None of them, on public evidence, derives labels from the content and provenance of machine-generated tactical objects (CoT/VMF/Link-16 J-series tracks, STANAG 4676 tracks, AI detections, FMV clips) or computes dominance-aware releasable subsets at creation time, because (a) that requires access to classified security classification guides and FDO policy that a startup cannot obtain without a sponsor; (b) the buyers (DoD CIO ZT PfMO, DISA MPE, Joint Staff J6) have treated tagging as a pilot-and-demonstration activity (18 pilots, Bold Quest 'testing standards') rather than a funded product line; (c) every automated release path must pass NSA/NCDSMO-style assessment, which exceeds startup runway; and (d) the C2 message schemas are niche and controlled by program offices and standards bodies, so a labeler needs integration rights that only NGC2/Overmatch/MPE integrators hold.",
+  "why_not_solved_reasons": ["technology only recently possible", "procurement fragmentation", "classification", "certification", "buyer fragmentation", "integration complexity", "insufficient commercial market"],
+  "technical_wedge": "A 'label compiler' for machine-generated C2/ISR objects: a rules engine and SDK that ingests tactical message streams (CoT, VMF/MIL-STD-2045, Link-16 J-series via JREAP, STANAG 4676 tracks, NVG overlays, AI detection JSON, KLV-tagged FMV segments), derives a STANAG 4774 confidentiality label from schema fields, source attributes and a declarative policy (sensor type, geography, source nationality, aggregation rules), emits ACP-240/ZTDF or IC-TDF assertions via the OpenTDF SDK, computes per-partner releasability sets with dominance-aware aggregation, and produces (i) CDS-filter-ready metadata for Everfox/Owl/GDMS guards and (ii) an auditable 'would this pass' simulator plus conformance linter for exercise data. The startup owns the derivation rules, schema bindings and the audit/explanation layer; it does not own the wrapper (OpenTDF), the guard (CDS incumbents) or the release authority (FDO).",
+  "mvp": {
+    "what": "Open-source conformance linter and rules engine that takes synthetic CoT/VMF/STANAG 4676 feeds and AI-detection outputs, attaches STANAG 4774 labels bound per STANAG 4778, wraps them as ZTDF using OpenTDF, computes releasable subsets for a configurable partner matrix (e.g., REL FVEY, REL NATO, NOFORN), and shows FDO review time saved on a simulated coalition COP.",
+    "demonstrable_in_3_6_months": "Yes for an unclassified demo: TAK Server plug-in that labels CoT objects at ingest, a policy console for the partner matrix, an audit log, and an open-source guard-simulation (e.g., NiFi with Owl's open DFDL schemas) showing which objects pass to a simulated MPE enclave; measurable metrics: fraction of objects auto-labeled, false-release rate against a hand-marked test set, time to produce a REL subset.",
+    "what_it_must_prove": "That labels derived by rules from message content and provenance match human FDO decisions on an unclassified test corpus at a false-release rate low enough for a disclosure authority to accept machine pre-decisions (human-on-the-loop), that the output is consumable by at least one accredited guard's filter format and one ABAC engine, and that dominance-aware aggregation yields materially more releasable objects than system-level inheritance.",
+    "uses": ["commercial hardware", "public/open data", "simulated military data", "unclassified architecture", "commercial compute", "open standards"]
+  },
+  "data_requirement": {
+    "what": "Public marking policy (DoDM 5200.01 volumes, CAPCO/ISM register, DoDM 5230.09 disclosure policy at the unclassified level), STANAG 4774/4778 and ACP-240 specifications, OpenTDF/ZTDF schemas, C2 message schemas (CoT, MIL-STD-2045/VMF via Owl's public DFDL schemas, STANAG 4676, NVG), synthetic tactical message corpora, and later a sponsor-provided hand-marked unclassified or CUI exercise corpus; real security classification guides and REL decisions are classified or CUI and require a government sponsor.",
+    "legally_realistically_obtainable": "Partially. Specifications and open schemas are obtainable (ACP-240 Ed A text availability should be verified; some CCEB/NATO documents are limited distribution). Synthetic corpora can be generated. Hand-marked real exercise data is CUI or classified and available only under a sponsor agreement; export-controlled CUI is effectively U.S.-person-only, so the Indonesian founder could not handle it - needs counsel.",
+    "sources": ["https://www.jedi-sec.us/downloads/MISC_PDF/ADatP-4778%20EDA%20V1%20E.pdf", "https://github.com/opentdf/docs", "https://xmlspif.org/", "https://www.isode.com/whitepaper/data-centric-security-and-federated-mission-networking/", "https://datacentricsecurity.org/documents/nato-stanags/", "TAK Server / CoT public schemas; Owl nifi-daffodil DFDL schemas for MIL-STD-2045"]
+  },
+  "integration_requirement": {
+    "systems": ["TAK Server / ATAK (CoT)", "NGC2 common data layer (Anduril Lattice / Palantir / Lockheed data layer prototypes)", "Maven Smart System (CDAO program of record)", "DISA MPE / Coalition Information Environment and INDOPACOM Mission Network", "Accredited CDS guards (Everfox, Owl, GDMS TACDS, Northrop CHORD)", "SitaWare / NATO FMN nodes (STANAG 4774/4778 profiles)", "Virtru/OpenTDF Key Access Servers and ABAC PDPs"],
+    "interfaces_protocols": ["CoT XML/protobuf", "MIL-STD-2045 / VMF", "Link-16 J-series over JREAP-C", "STANAG 4676 (NATO ISR tracking standard)", "STANAG 4774 confidentiality label XML / STANAG 4778 metadata binding (XML DSig)", "ACP-240 / ZTDF (OpenTDF manifest, KAS, ABAC policy)", "IC-TDF / ISM markings", "NVG 2.0", "MISB KLV metadata for FMV", "Kafka / NiFi brokers"],
+    "who_controls_the_interface": "Fragmented: NSA (TDF/ZTDF policy, NCDSMO CDS approval), CCEB (ACP-240), NATO (STANAGs), TAK Product Center (CoT), program offices (NGC2 PEO C3T/PAE, CDAO MSS PO, DISA MPE), and the CDS vendors who own filter formats; the startup controls none of them and must plug into at least one platform owner's extension model."
+  },
+  "customer": {
+    "user": "Division/corps G2 analysts, FDOs, coalition J2 cells, JICOs, CDS filter engineers",
+    "champion": "DoD CIO Zero Trust PfMO (data pillar lead), DISA MPE/CIE program lead, Joint Staff J6 JDAT (Bold Quest), Army G2/INSCOM multinational intelligence sharing proponents (MIPB authors), NGC2 data-layer integrator security leads",
+    "contract_signer": "Contracting officers at DISA DITCO (MPE/CIE task orders), Army Contracting Command (NGC2 OTAs via the CSO; xTech/SBIR), CDAO/WHS AD (Tradewinds OTs), NAVWAR (SBIR topic 10735 line)",
+    "requirement_owner": "Joint Staff J6 (MPE requirements; CJADC2), DoD CIO (ZT strategy and MPE policy), Army PEO C3T/PAE for NGC2 data-layer security; disclosure policy owned by USD(P) / service foreign disclosure offices",
+    "program_office": "DISA Mission Partner Environment / Coalition Information Environment; Army NGC2 (PEO C3T); CDAO Maven Smart System PO; Navy Project Overmatch (NAVWAR DRPM)",
+    "contracting_office": "DISA DITCO; ACC-APG (NGC2 CSO); NAVWAR HQ (SBIR); WHS Acquisition Directorate (CDAO OTs)"
+  },
+  "budget": {
+    "program_or_line": "No dedicated production line found. Nearest lines: Joint Staff RDT&E C5 capability development / JOTG (Bold Quest 'testing standards' incl. ACP-240, ICAM, ZT); DISA PE 0301144K Joint/Allied Coalition Information Sharing (historic MPE line; current amount not extracted); Army NGC2 prototype OTAs ($99.6M Anduril team Jul 2025, $26M Lockheed team Sep 2025 - ceilings/awards, not labeling-specific); NAVWAR SBIR topic 10735.",
+    "evidence": "FY2027 Joint Staff justification names ACP-240/ICAM/ZT as coalition testing standards (JOTG lines about $63-105M/yr per excerpt, not all security-related); DISA MPE current-year line: public evidence insufficient; DoD CIO says 18 ZT pilots with ~20 vendors but pilot dollar values are not public. Labeling would be funded as a component of NGC2/MPE/Maven integrator budgets, not as its own program.",
+    "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+    "confidence": "MEDIUM for existence of demo/assessment funding; LOW for any product-scale budget"
+  },
+  "entry_vehicle": {
+    "primary": "Exercise-first: participate in Bold Quest / CWIX / NATO TIDE Sprint as a conformance-tooling provider, then a NAVWAR or Army SBIR/xTech topic on ZTDF/ICDF object security in DDIL, in parallel with a subcontract to an NGC2 or MPE integrator (Anduril/Palantir/Lockheed team, GDIT EMITS 2, Trace Systems MPE-S) as the labeling component.",
+    "sequence": ["Open-source linter/rules engine on synthetic CoT/STANAG 4676 data; publish conformance results (months 0-6)", "CWIX / Bold Quest / TIDE Sprint participation as a tool provider; Tradewinds video submission (months 6-12)", "NAVWAR SBIR topic 10735-class Phase I or Army xTech (US-owned entity required; months 9-15)", "Subcontract to NGC2 data-layer or DISA CIE task-order holder for a pilot at one division or one COCOM mission network (months 12-24)", "NATO DIANA / Bundeswehr / FMN-nation pilot via the German founder for the STANAG 4774/4778 profile (parallel track)"],
+    "eligibility_notes": "SBIR/STTR requires a U.S. small business more than 50% owned and controlled by U.S. citizens or permanent residents; the German founder qualifies only after obtaining permanent residency, and the Indonesian founder's equity would count against the ownership test - the cap table must be structured with counsel. Neither Germany nor Indonesia is a 'foreign country of concern' for the SBIR foreign-disclosure form (E07-F4), but foreign affiliations must be disclosed. Any work touching classification guides, REL decisions or export-controlled CUI is effectively U.S.-person-only (E07-F30) and the DDTC/ITAR question (labeling of defense-article data is likely not itself a defense article, but the surrounding data may be) needs export-control counsel; a FOCI mitigation may be triggered even on unclassified contracts (DoDI 5205.87, E07-F20). Do not treat these as settled - obtain counsel before incorporation."
+  },
+  "competition": [
+    {"company": "Virtru / OpenTDF", "how_close": "Very close on the wrapper: stewards OpenTDF/ZTDF, markets ACP-240 conformance and MPE solutions; enterprise/email/file heritage; producer-side tactical label derivation not evidenced.", "evidence": "Virtru newsroom on ACP 240 adoption (Oct 2025); Everfox partnership (BusinessWire 2025-10-16); GlobeNewswire on NSA ZT guideline (2026-04-08) - vendor announcements, MEDIUM."},
+    {"company": "Everfox (with Garrison/Deep Secure)", "how_close": "Owns the accredited guard and now pairs with Virtru for ZTDF; would be the natural absorber of a labeling component.", "evidence": "BusinessWire 2025-10-16; company record B10."},
+    {"company": "Isode", "how_close": "Sells STANAG 4774/4778 labeling and FMN data-centric security for messaging (XMPP/email); not tactical track/detection objects.", "evidence": "Isode whitepapers on DCS and FMN (undated)."},
+    {"company": "archTIS (NC Protect / Kojensi)", "how_close": "Australian ABAC/data-centric security vendor marketing STANAG 4774/4778 and ZTDF compliance for documents and collaboration.", "evidence": "archtis.com STANAG and ZTDF pages (undated) - marketing, LOW-MEDIUM."},
+    {"company": "XQ Message", "how_close": "Small U.S. vendor claiming ACP-240 delivery with zero-trust data; scope appears message/file-level.", "evidence": "xqmsg.co blog (undated) - marketing, LOW."},
+    {"company": "Anchor Defense", "how_close": "Publishes detailed guidance on label taxonomies, cross-tagging and marking automation upstream of guards; appears to be a consultancy/content-led firm rather than a fielded product (public evidence insufficient on products).", "evidence": "anchor-defense.com articles (undated)."},
+    {"company": "Fortra (Titus/Boldon James) and Microsoft Purview", "how_close": "Document/email classification labeling incumbents in DoD; do not handle C2 message schemas.", "evidence": "RECALL - not re-verified this session; MEDIUM."},
+    {"company": "Owl Cyber Defense / GDMS / Northrop (CHORD)", "how_close": "CDS guards and filter formats; Owl's open DFDL schemas for VMF/NITF are the de facto structured-format validation layer at the guard.", "evidence": "Company record B10; DoD contract 4258695 (2025-07-29)."},
+    {"company": "Palantir and Anduril", "how_close": "Implement marking-aware access controls inside Foundry/Gotham/Maven and Lattice; a Dec 2024 consortium statement references 'labeling and preparation of defense data ... at all levels of classification'; cross-vendor, standards-based labeling is not their product.", "evidence": "BusinessWire 2024-12-06; segment S02 inference, MEDIUM."},
+    {"company": "Immuta / Mattermost (ABAC)", "how_close": "Enterprise policy enforcement on databases/chat; adjacent, not producers of labels for C2 objects.", "evidence": "Registry companies_near; not re-verified."}
+  ],
+  "incumbent_response": {
+    "could_anduril_palantir_l3harris_add_it": "Yes for their own platforms: Palantir and Anduril already enforce markings inside their data layers and could emit ZTDF via OpenTDF in a quarter; Everfox+Virtru have publicly assembled the label+guard stack (Oct 2025); L3Harris/GDMS/Owl control the guard filters. What they are structurally poor at is a cross-vendor, standards-based derivation layer that works identically across Lattice, Maven, SitaWare and TAK - each incumbent prefers labels bound to its own object model.",
+    "why_startup_still_wins_or_reject": "Conditional win: the only defensible position is the neutral 'label compiler' plus conformance/audit tooling that program offices and JITC/CWIX can use to test every vendor's output, sold first to exercise and integrator budgets. If DoD instead mandates a single vendor format and buys labeling inside NGC2/MPE integrator contracts, or if FDO policy never accepts machine pre-decisions, the startup is reduced to a feature. For this specific team (one non-U.S.-person founder, no classified access) the odds tilt toward reject unless the company is built around the NATO/FMN allied profile first.",
+    "note": "INFERENCE, MEDIUM."
+  },
+  "capital_required": {
+    "proof_of_concept_usd": "150,000-300,000 (two founders plus one contractor, 6 months, unclassified synthetic data, OpenTDF-based)",
+    "credible_military_demo_usd": "1.5M-3M (CWIX/Bold Quest participation, a hand-marked sponsor corpus, one integrator subcontract, security engineer with clearance, FDO advisor, 18 months)",
+    "first_production_deployment_usd": "8M-15M (accreditation support for at least one guard integration, cleared facility or sponsor-hosted enclave, 24-36 months, program-office pilot at one division or mission network)",
+    "assumptions": "HYPOTHESIS, LOW confidence: assumes the wrapper (OpenTDF) and guard (incumbent CDS) are not rebuilt; assumes an SBIR Phase II or integrator subcontract covers roughly half of demo costs; assumes no ITAR registration beyond baseline; excludes the cost of restructuring ownership to satisfy SBIR/FOCI rules."
+  },
+  "expertise_required": [
+    {"role": "Former foreign disclosure officer / security classification policy specialist (DoDM 5200.01, 5230.09, CAPCO/ISM, NATO security policy)", "why": "Label derivation rules must encode real disclosure policy; without this the product is a toy and no FDO will trust it", "fatal_if_absent": true},
+    {"role": "Cross-domain / data-centric security engineer with ZTDF/OpenTDF, STANAG 4774/4778 and CDS filter experience (ideally ex-NSA/NCDSMO or Everfox/Owl)", "why": "Bindings, signatures and guard filter formats are unforgiving; accreditation-aware design from day one", "fatal_if_absent": true},
+    {"role": "Tactical data-format engineer (CoT, VMF/MIL-STD-2045, Link-16/JREAP, STANAG 4676, MISB KLV)", "why": "The wedge is derivation from message content; schema fluency is the core IP", "fatal_if_absent": true},
+    {"role": "Cleared U.S.-person defense BD lead with MPE/Joint Staff J6/NGC2 relationships", "why": "Buyers are pilot-driven; access to Bold Quest/CWIX/NGC2 integrators determines whether the tool is ever tested on real data", "fatal_if_absent": false},
+    {"role": "Export-control and FOCI counsel (advisor)", "why": "Non-U.S.-person founder and CUI/ITAR exposure must be structured before any sponsor data is touched", "fatal_if_absent": true}
+  ],
+  "regulatory_burden": {
+    "level": "high",
+    "explanation": "The product sits on classification policy (human disclosure authority by regulation), NSA/NCDSMO cross-domain assessment for any automated release path (NIST AC-4(20) restricts to approved CDS), DoD ZT/RMF authorization (SWFT/cATO evidence), CUI and export-control handling of marking guides and exercise data, and possible FOCI mitigation. The unclassified conformance-tooling wedge lowers the burden for the first 12-18 months but every step toward real REL decisions raises it sharply.",
+    "non_us_person_founder_note": "The Indonesian founder (not assumed a U.S. person) cannot lawfully access export-controlled CUI, classified marking guides or most sponsor exercise data, and would count against SBIR U.S.-ownership thresholds; the German founder needs permanent residency before SBIR eligibility and a clearance path. This is a direct conflict with the mission of the product, not a peripheral issue: the company would need a U.S.-person-only technical enclave and possibly a mitigated structure. Describe constraints only - requires immigration, export-control and FOCI counsel; no legal judgment made here."
+  },
+  "classification_dependence": "eventually",
+  "dual_use_potential": {
+    "level": "medium",
+    "explanation": "Attribute-based labeling and releasability computation for structured, machine-generated data has analogues in regulated data sharing (health, financial, critical infrastructure OT telemetry, multi-party industrial consortia), and the OpenTDF ecosystem is commercial. However, the dominance-aware military marking logic and coalition partner matrices are defense-specific; a commercial pivot would be a different product on the same engine. Allied/NATO defense is the more realistic 'second market' than commercial."
+  },
+  "defensibility": {
+    "what_becomes_proprietary": ["algorithms", "integrations", "accreditation", "workflow", "government relationships", "data"],
+    "explanation": "Defensibility comes from (1) validated derivation rule sets and hand-marked test corpora that show agreement with FDO decisions (data + algorithms), (2) bindings to each message schema and each guard's filter format (integrations), (3) any assessment/accreditation artifacts that let an automated path be reused across programs (accreditation), and (4) being the conformance tool used at CWIX/Bold Quest/JITC (workflow and relationships). The wrapper itself (OpenTDF) is open and not defensible; if the startup only builds a ZTDF emitter it has nothing."
+  },
+  "why_now": "Three things changed in 2023-2026: (1) the standards converged - ZTDF was ratified through the CCEB and ACP-240 was reported adopted by FVEY and other allies in Oct 2025, ACP-240 supplements were aligned with STANAG 4774/4778, and NSA's ZT Implementation Guideline Phase Two (Apr 2026) named ZTDF/IC-TDF, so for the first time a producer can emit one label that U.S., FVEY and NATO systems are supposed to consume; (2) the deadlines arrived - DoD ZT target level by 30 Sept 2027 with data tagging publicly called the biggest hurdle, DISA moving MPE to data-centric by early 2027, and Maven made the CJADC2 cornerstone (Mar-Apr 2026) with coalition users; (3) the object volume exploded - NGC2 declared ready to scale with 60+ vendors on a common data layer (Jul 2026), AI detections and AI-enabled coalition exercises (Talisman Sabre 2025, Balikatan 2026) generate machine products faster than FDOs can review, making producer-side labeling a throughput problem rather than a policy nicety. Labels: FACT for the standards and deadlines (MEDIUM, partly vendor-reported), INFERENCE for the volume argument.",
+  "killer_risk": "Disclosure is a legally human decision and the buyers have kept tagging in the pilot-and-demonstration circuit for five years (18 ZT pilots, Bold Quest 'testing standards', 14% of ZT target activities complete in early 2025); meanwhile the format layer is now owned by Virtru/OpenTDF with Everfox's guards, and Palantir/Anduril will label inside their own data layers - so the remaining 'label compiler' niche may be too small and too policy-gated to fund a company, and this particular team cannot legally touch the data that would make the rules real. INFERENCE, MEDIUM-HIGH.",
+  "market_stage": "Prototyping",
+  "procurement_signal_timeline": [
+    {"year": "2022", "event": "DoD Zero Trust Strategy sets target level by FY2027 with a data pillar requiring tagging/labeling", "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTExecutionRoadmap.pdf"},
+    {"year": "2024", "event": "DoD CIO ZT PfMO webinar on data tagging (Apr); NAVWAR SBIR topic on ICDF/ZTDF object control in DDIL; INDOPACOM Mission Network consolidation with thumb-drive workarounds reported (Nov)", "source_url": "https://www.sbir.gov/topics/10735"},
+    {"year": "2025", "event": "DEVCOM C5ISR DUCES RFI for ZT data-pillar in DDIL (Feb); GAO-25-106454 names restrictive classification a significant hindrance with no owner (Apr); MIPB documents WFX 24-03 regeneration workaround; DoD CIO 'Interoperable Data Tagging' webinar (Sep); ACP-240 reported adopted by FVEY/allies and Everfox-Virtru partnership (Oct)", "source_url": "https://breakingdefense.com/2025/02/army-says-duces-to-cyber-hackers-new-rfi-looks-for-tactical-edge-zero-trust-solutions/"},
+    {"year": "2026", "event": "NSA ZT Implementation Guideline Phase Two references ZTDF/IC-TDF (Apr, vendor-reported); Balikatan eight-nation COP still FDO-dependent (May); FY2027 Joint Staff justification lists ACP-240/ICAM/ZT as coalition testing standards; DISA says MPE data-centric by early 2027 (Aug); NGC2 declared ready to scale (Jul-Aug)", "source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/"},
+    {"year": "2027", "event": "DoD ZT target-level deadline (30 Sep 2027) and DISA MPE data-centric target - expected forcing function; no production labeling procurement identified yet", "source_url": "https://www.govinfosecurity.com/pentagons-zero-trust-push-faces-2027-reality-check-a-31305"}
+  ],
+  "allied_extension": "Yes, materially. NATO already has the label standards (STANAG 4774/4778) baked into Federated Mission Networking profiles and tests conformance annually at CWIX, ACP-240 now bridges those to ZTDF, and European nations (Bundeswehr, Nordic and Baltic FMN affiliates) buy from smaller vendors (Isode, archTIS, Systematic partners) with lower accreditation walls than NSA/NCDSMO. The German founder can pursue NATO DIANA, Bundeswehr Cyber Innovation Hub and FMN spiral participation without the U.S.-person problem, and a NATO-first conformance tool could later be brought into U.S. coalition programs (MPE/CIE) as the 'allied-proven' labeler. Caveat: European budgets for this niche are small and fragmented by nation, and NATO's own timelines (ACCS took two decades) are slow - INFERENCE, MEDIUM.",
+  "search_log": [
+    {"query": "Virtru OpenTDF ZTDF \"Zero Trust Data Format\" Department of Defense NATO 2025 2026", "useful": true},
+    {"query": "\"Anchor Defense\" data tagging cross domain releasability product", "useful": true},
+    {"query": "STANAG 4774 4778 confidentiality metadata label binding Federated Mission Networking ACP-240 data centric security", "useful": true},
+    {"query": "\"Bold Quest\" 2025 OR 2026 \"data centric security\" OR \"ACP-240\" OR \"ZTDF\" coalition demonstration", "useful": true},
+    {"query": "DoD CIO zero trust \"data tagging\" \"data labeling\" target level 2027 ZTDF interoperable tagging standard", "useful": true},
+    {"query": "site:meritalk.com DoD \"data tagging\" pilots zero trust Resnick", "useful": true},
+    {"query": "DEVCOM C5ISR \"Tactical Data in Use\" RFI zero trust data pillar DDIL 2025", "useful": true},
+    {"query": "\"ACP 240\" OR \"ACP-240\" CCEB \"HIGHMAST\" OR \"Carrier Strike Group\" OR \"Five Eyes\" data centric security adoption 2025 (virtru.com blocked)", "useful": true},
+    {"query": "Palantir OR Anduril \"attribute-based access control\" OR \"classification markings\" OR \"releasability\" Lattice OR Foundry coalition \"mission partner\" 2025 2026", "useful": false},
+    {"query": "SBIR OR AFWERX OR xTech topic \"data tagging\" OR \"security labeling\" OR \"ZTDF\" OR \"ICDF\" tactical zero trust 2025 2026 site:sbir.gov OR site:afwerx.com OR site:sam.gov", "useful": false}
+  ],
+  "sources": [
+    {"url": "https://www.gao.gov/products/gao-25-106454", "title": "GAO-25-106454 Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework", "pub_date": "2025-04-08", "tier": 1},
+    {"url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/", "title": "MIPB: Multinational Intelligence Sharing (WFX 24-03)", "pub_date": "2025", "tier": 1},
+    {"url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json", "title": "DoD CIO ZT PfMO webinar: Interoperable Data Tagging (mirrored transcript)", "pub_date": "2025-09-18", "tier": 2},
+    {"url": "https://meritalk.com/articles/dod-running-data-tagging-pilots-to-address-zero-trust-pillar/", "title": "MeriTalk: DoD Running Data Tagging Pilots to Address Zero Trust Pillar", "pub_date": "not captured (2024-2025)", "tier": 2},
+    {"url": "https://www.govinfosecurity.com/pentagons-zero-trust-push-faces-2027-reality-check-a-31305", "title": "GovInfoSecurity: Pentagon's Zero Trust Push Faces a 2027 Reality Check (14% of target activities complete, early 2025)", "pub_date": "2025", "tier": 2},
+    {"url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture", "title": "DVIDS: Balikatan 2026 debuts groundbreaking common operating picture", "pub_date": "2026-05", "tier": 1},
+    {"url": "https://www.defenseone.com/defense-systems/2024/11/indopacom-replacing-pile-partner-nation-networks-just-one/401129/", "title": "Defense One: INDOPACOM is replacing a pile of partner-nation networks with just one", "pub_date": "2024-11-18", "tier": 2},
+    {"url": "https://breakingdefense.com/2025/02/army-says-duces-to-cyber-hackers-new-rfi-looks-for-tactical-edge-zero-trust-solutions/", "title": "Breaking Defense: Army says DUCES to cyber hackers: New RFI looks for tactical edge zero trust solutions", "pub_date": "2025-02", "tier": 2},
+    {"url": "https://intelligencecommunitynews.com/army-extends-deadline-for-tactical-data-in-use-security-rfi/", "title": "Intelligence Community News: Army extends deadline for Tactical Data in Use Security RFI", "pub_date": "2025", "tier": 2},
+    {"url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view", "title": "SAM.gov: Tactical Data in Use Security RFI (DEVCOM C5ISR)", "pub_date": "2025", "tier": 1},
+    {"url": "https://www.sbir.gov/topics/10735", "title": "SBIR.gov topic 10735: Data Integrity and Control in DDIL Environments (NAVWAR)", "pub_date": "2024-2025", "tier": 1},
+    {"url": "https://comptroller.defense.gov/Budget-Materials/", "title": "FY2027 President's Budget justification materials (Joint Staff RDT&E)", "pub_date": "2026", "tier": 1},
+    {"url": "https://www.businesswire.com/news/home/20251016209492/en/Everfox-and-Virtru-Partner-to-Improve-Zero-Trust-Interoperability-Among-National-Security-Agencies", "title": "BusinessWire: Everfox and Virtru Partner to Improve Zero Trust Interoperability Among National Security Agencies", "pub_date": "2025-10-16", "tier": 3},
+    {"url": "https://www.virtru.com/newsroom/virtru-data-security-platform-enables-acp-240-adoption-among-allied-nations-and-technology-partners", "title": "Virtru newsroom: Virtru Data Security Platform Enables ACP 240 Adoption Among Allied Nations (vendor)", "pub_date": "2025-10", "tier": 3},
+    {"url": "https://www.globenewswire.com/news-release/2026/04/08/3270234/0/en/Trusted-Data-Format-Highlighted-as-Interoperability-Standard-in-NSA-Zero-Trust-Implementation-Guideline.html", "title": "GlobeNewswire: Trusted Data Format Highlighted as Interoperability Standard in NSA Zero Trust Implementation Guideline (vendor release)", "pub_date": "2026-04-08", "tier": 3},
+    {"url": "https://www.isode.com/whitepaper/data-centric-security-and-federated-mission-networking/", "title": "Isode whitepaper: Data Centric Security and Federated Mission Networking", "pub_date": "undated", "tier": 3},
+    {"url": "https://www.archtis.com/achieving-nato-stanag-4774-and-4778-compliance/", "title": "archTIS: Achieving NATO STANAG 4774 and 4778 Compliance (vendor)", "pub_date": "undated", "tier": 3},
+    {"url": "https://www.jedi-sec.us/downloads/MISC_PDF/ADatP-4778%20EDA%20V1%20E.pdf", "title": "NATO Standard ADatP-4778 Metadata Binding Mechanism Edition A Version 1 (mirror)", "pub_date": "undated", "tier": 1},
+    {"url": "https://datacentricsecurity.org/documents/nato-stanags/", "title": "Data-Centric Security on AWS: NATO STANAGs and ACP-240 supplements (ZTDF defined in Supplements 3 and 4)", "pub_date": "undated", "tier": 3},
+    {"url": "https://xqmsg.co/xq-blog/how-xq-uniquely-delivers-on-acp240-with-zero-trust-data", "title": "XQ Message: How XQ Uniquely Delivers on ACP 240 with Zero Trust Data (vendor)", "pub_date": "undated", "tier": 3},
+    {"url": "https://anchor-defense.com/articles/cds-cross-tagging-attribution-controls-multi-level-data-release/", "title": "Anchor Defense: Cross Domain Solution Cross-Tagging and Attribution Controls for Multi-Level Data Release", "pub_date": "undated", "tier": 3},
+    {"url": "https://anchor-defense.com/articles/cross-domain-solution-data-labeling-automation/", "title": "Anchor Defense: Cross Domain Solution Data Labeling and Marking Automation for Mission Systems", "pub_date": "undated", "tier": 3},
+    {"url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/", "title": "Federal News Network: DISA starting small in proving out Mission Partner Environment capabilities", "pub_date": "2026-08-13", "tier": 2},
+    {"url": "https://www.businesswire.com/news/home/20241206684306/en/Anduril-and-Palantir-to-Accelerate-AI-Capabilities-for-National-Security", "title": "BusinessWire: Anduril and Palantir to Accelerate AI Capabilities for National Security", "pub_date": "2024-12-06", "tier": 3},
+    {"url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/", "title": "DoD contract announcement: Owl Cyber Defense $150M sole-source IDIQ (voice/video/FMV CDS)", "pub_date": "2025-07-29", "tier": 1},
+    {"url": "https://executivegov.com/articles/army-ngc2-scale-force-project-convergence-capstone-6", "title": "ExecutiveGov: Army NGC2 ready to scale after Project Convergence Capstone 6", "pub_date": "2026-08-04", "tier": 2},
+    {"url": "https://www.sbir.gov/foreign_disclosures", "title": "SBIR.gov: Foreign disclosure requirements", "pub_date": "n.d.", "tier": 1},
+    {"url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/520587p.pdf", "title": "DoDI 5205.87 FOCI mitigation on unclassified contracts", "pub_date": "n.d.", "tier": 1}
+  ]
+}

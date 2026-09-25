@@ -1,0 +1,556 @@
+{
+ "id": "G25",
+ "title": "Vehicle-agnostic autonomous-systems orchestration layer (the AVO problem: tasking and coordinating heterogeneous multi-vendor uncrewed vehicles across domains)",
+ "problem": "No fielded, vendor-neutral or government-owned layer can take a commander's intent and task/coordinate heterogeneous uncrewed vehicles from multiple vendors across air, sea and ground domains, so operators run several vendor controllers side by side and DIU/DAWG/Navy are paying a prize challenge to get one.",
+ "categories": [
+  "A",
+  "B",
+  "E",
+  "J"
+ ],
+ "segment_ids": [
+  "S13"
+ ],
+ "chain_steps": [
+  "DECIDE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "joint/OSD (DAWG)",
+  "USSOCOM component and TSOC planners",
+  "Navy unmanned task unit / TF-59-style units",
+  "Army brigade/battalion launched-effects and drone cells"
+ ],
+ "user": {
+  "exact_role": "Autonomous-systems mission commander / unmanned task unit watch officer who must task and monitor several vendor fleets at once (with the vehicle operators who run each vendor GCS)",
+  "echelon": "joint task force to battalion",
+  "organization_examples": [
+   "Defense Autonomous Warfare Group (DAWG)",
+   "USSOCOM PEO SOF Digital Applications / UxSAI program",
+   "Navy unmanned task units (TF-59 lineage, PMS 406 customers)",
+   "Army Transformation-in-Contact brigades and launched-effects cells",
+   "JIATF-401 (blue/red drone deconfliction interface)"
+  ]
+ },
+ "current_workflow": [
+  "Each vehicle family arrives with its own vendor ground control station or app (AuterionOS/Mission Control, Kinesis, Shield AI, Lattice, Navy CCS).",
+  "Operators run several controllers side by side on separate laptops/tablets; one operator per vehicle family.",
+  "Tasks are coordinated verbally, over radio nets or via TAK chat; there is no single intent-to-task interface.",
+  "Tracks and status are manually re-entered into the COP, or bridged by a vendor gateway (Lattice SDK, TAK CoT plugin) where one has been integrated.",
+  "Engagement approval and airspace deconfliction run in separate fires / C-UAS / airspace systems (FAAD C2, IBCS, TAK airspace apps).",
+  "After action, logs are collected per vendor and reconciled by hand for T&E and training."
+ ],
+ "current_solution": "Anduril Lattice for Mission Autonomy (selected by DIU for Replicator in Nov 2024; SOCOM autonomy integration; Army enterprise agreement), Auterion Nemyx for multi-manufacturer small drones running AuterionOS/Skynode, Shield AI Hivemind for multi-aircraft, and government-owned reference stacks (USAF A-GRA for CCA, SOCOM FANTOM Core, Navy UMAA/CCS) plus TAK as the lowest-common-denominator bridge; the DIU/DAWG/Navy Autonomous Vehicle Orchestrator prize challenge (Jan 2026) is the current attempt to buy a vehicle-agnostic layer.",
+ "failure": "Vendor lock at the controller: each new vehicle needs a bespoke integration, cross-domain (air-sea-ground) tasking is not vendor-neutral, DDIL behavior differs per stack, and no layer has been accepted that turns intent into coordinated multi-vendor execution; Replicator was dissolved into DAWG without fielding such software and SOCOM says collaborative-autonomy development 'is not moving fast enough'.",
+ "evidence": [
+  {
+   "form": "RFI/sources sought",
+   "claim": "DIU, DAWG and the U.S. Navy launched the Autonomous Vehicle Orchestrator prize challenge on 13 Jan 2026 (max prize pool $100M) seeking vehicle-agnostic software that translates commander intent (voice/text/haptic) into coordinated execution of heterogeneous autonomous fleets; iterative sprints, submissions due 25 Jan 2026, Sprint 1 within 10 days of selection, challenge runs to 31 Dec 2026",
+   "source_title": "DIU offers $100M in prizes for voice-controlled AI-enabled drone swarm 'orchestrator' (Breaking Defense) and DIU press release",
+   "source_url": "https://breakingdefense.com/2026/01/diu-offers-100m-in-prizes-for-voice-controlled-ai-enabled-drone-swarm-orchestrator/",
+   "pub_date": "2026-01",
+   "event_date": "2026-01-13",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "The AVO challenge is described as open to U.S.-based technology companies, defense contractors and research organizations with software prototypes approaching production readiness; a $100M prize pool is a ceiling on possible awards, not obligated funds, and no public list of winners beyond reported invitations to SpaceX/xAI (Feb 2026, low-tier source) was found - Public evidence insufficient on awards",
+   "source_title": "DIU, DAWG & Navy Launch $100M Prize Challenge for Autonomous Vehicle Orchestrator (ExecutiveGov); SpaceX joins DoD drone swarms orchestrator contest (AI CERTs)",
+   "source_url": "https://www.executivegov.com/articles/diu-dawg-navy-challenge-av-orchestrator",
+   "pub_date": "2026-01",
+   "event_date": "2026-01 to 2026-02",
+   "tier": 3,
+   "label": "FACT (eligibility) / INFERENCE (participants)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "USSOCOM Air Loitering Munition notice (26 Jun 2026) requires the platform to support government-owned FANTOM Core collaborative mission autonomy via a machine-to-machine API and/or C2 integration via the Battle Management System - i.e., SOCOM's answer to orchestration is a government-owned kernel that vendors plug into",
+   "source_title": "USSOCOM Air Loitering Munition (ALM) - SAM.gov; Air commandos seek 'SOF-peculiar' attack drones (DefenseScoop)",
+   "source_url": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view",
+   "pub_date": "2026-06-26",
+   "event_date": "2026-06-26",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "SOCOM officials said development of a connected collaborative-autonomy architecture 'is not moving fast enough', citing inability to share one ATR algorithm between a small UAS and a USV; SOCOM seeks decentralized, collaborative mission autonomy for heterogeneous multi-domain unmanned systems and (Aug 2026) plans SOFWERX T&E of mission-autonomy software under the UxSAI program",
+   "source_title": "'Collaborative autonomy' development not moving fast enough for SOCOM; SOCOM planning to test new mission autonomy software (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2026/05/18/collaborative-autonomy-development-socom-acquisition/",
+   "pub_date": "2026-05-18",
+   "event_date": "2026-05 to 2026-08",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "FY2027 request for DAWG was $54.6B (vs ~$225M in FY2026), most of it via reconciliation; HASC (H.R. 8800) and SASC (S. 4784) marks reported 15 Jun 2026 and House appropriators each wrote $1.0B for DAWG - a request is not an appropriation and the enacted level is likely near the $1B base",
+   "source_title": "DAWG Asked for $54.6B. Three Committees Wrote Down $1B (defense-aerospace.com); FY2027 NDAA: Summary of Funding Authorizations (CRS IN12703); InsideDefense",
+   "source_url": "https://www.defense-aerospace.com/dawg-54b-requested-1b-written-down/",
+   "pub_date": "2026-06",
+   "event_date": "2026-04 to 2026-06",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "DIU selected Anduril Lattice for Mission Autonomy (Nov 2024) to coordinate thousands of Replicator assets in comms/GNSS-denied environments; SOCOM awarded Anduril $86M for autonomy software integration (Mar 2025); the Army signed a 10-year up-to-$20B enterprise agreement for Lattice (Mar 2026, $87M first task order) - the incumbent already holds the orchestration role with several buyers; ceilings are not revenue",
+   "source_title": "DIU selects Anduril (company release); SOCOM awards Anduril $86M (DefenseScoop); US Army Awards Anduril $20B AI Integration Contract (Defense Post)",
+   "source_url": "https://defensescoop.com/2025/03/26/anduril-socom-contract-award-autonomy-software-86m/",
+   "pub_date": "2025-03-26",
+   "event_date": "2024-11 to 2026-03",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "CRS (Aug 2025) documents Replicator's goal of fielding thousands of attritable autonomous systems by Aug 2025; Replicator was dissolved into DAWG in late 2025 and critics argue the promised mass and orchestration software did not materialize",
+   "source_title": "DOD Replicator Initiative: Background and Issues for Congress (CRS IF12611); DoD promised a 'swarm' of attack drones. We're still waiting (Responsible Statecraft)",
+   "source_url": "https://www.congress.gov/crs-product/IF12611",
+   "pub_date": "2025-08",
+   "event_date": "2023-08 to 2025-12",
+   "tier": 1,
+   "label": "FACT (CRS) / INFERENCE (critique)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "At Project Convergence 22 a single soldier attempting to manage multiple uncrewed systems from a moving Bradley was overwhelmed - cognitive overload from per-vehicle control",
+   "source_title": "Uncrewed Ground Systems (RUSI occasional paper)",
+   "source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+   "pub_date": "2023-10-26",
+   "event_date": "2022-10",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Auterion claims the first multi-manufacturer drone swarm to complete a find-fix-finish chain (Dec 2025) and a single-operator live-fire swarm strike in the U.S. (2026); Shield AI Hivemind, Anduril Lattice, Applied Intuition/EpiSci, Collins and Palantir compete for the same layer - vendor claims, not proof of fielded capability",
+   "source_title": "Auterion Performs World's First Multi-Manufacturer Swarm Strike Demonstration (company)",
+   "source_url": "https://auterion.com/auterion-performs-worlds-first-multi-manufacturer-swarm-strike-demonstration/",
+   "pub_date": "2025-12",
+   "event_date": "2025-12",
+   "tier": 3,
+   "label": "INFERENCE (vendor claim)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Common-controller efforts have cycled for over a decade without a universal fielded controller: BCT Common Controller, Army Universal Robotic Controller study, NAVAIR PMA-263 Unmanned Common Controller sources sought, Navy CCS/UMAA; USAF A-GRA (CCA) and SOCOM FANTOM Core are the newest government-owned attempts",
+   "source_title": "NAVAIR Unmanned Common Controller sources sought (SAM.gov); Shield AI CCA production option (A-GRA)",
+   "source_url": "https://sam.gov/opp/dd0c44c75b90428ab037c4780d5e6013/view",
+   "pub_date": "Not captured (UCC); 2026-06-17 (A-GRA)",
+   "event_date": "2010s-2026",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Army accepted 12,080 Gauntlet 1 drones by mid-Sept 2026 with >200,000 targeted by 2027 across multiple vendors, and leadership says training and contested-EMS operation remain the gap - multi-vendor mass is arriving faster than any orchestration layer",
+   "source_title": "As experimental drone battalion ends, Army aims to push drones to every squad (Army Times)",
+   "source_url": "https://www.armytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "pub_date": "2026-09-18",
+   "event_date": "2026-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  }
+ ],
+ "why_existing_startups_havent_solved": "It is not that nobody has tried - the best-capitalized new primes (Anduril ~$86M SOCOM, up-to-$20B Army vehicle; Shield AI; Auterion $130M Series B) have attacked exactly this layer, and each has an incentive to make its own stack the orchestrator rather than build a neutral one. Success requires cleared staff, dozens of vehicle integrations whose APIs vendors control, DDIL-hardened distributed engineering, safety cases under DoDD 3000.09 and government trust; the government keeps re-scoping the problem (Replicator to DAWG to the AVO challenge) and simultaneously builds its own kernels (A-GRA, FANTOM Core, UMAA) that commoditize the neutral layer a startup would sell. Where partial solutions exist (C-UAS C2, CCA mission autonomy) the government has already picked production vendors.",
+ "why_not_solved_reasons": [
+  "proprietary incumbent architecture",
+  "procurement fragmentation",
+  "integration complexity",
+  "certification",
+  "classification",
+  "technology only recently possible",
+  "it HAS been solved"
+ ],
+ "technical_wedge": "Not the orchestrator itself. The only defensible startup-sized wedge is a thin, open protocol-translation and task-allocation kernel (MAVLink / STANAG 4586 / UMAA / CoT / FANTOM-style M2M adapters) with conformance tests, offered to government labs and primes as the reference plumbing under whichever orchestrator wins - but that is a tooling business adjacent to G25, not G25.",
+ "mvp": {
+  "what": "Adapter framework plus simple task-allocation engine demonstrating one mission (relay + area search + re-task) across three vehicle stacks (PX4/MAVLink, ArduPilot, a ROS 2 ground robot) in simulation, then live with two Blue UAS airframes, published against public UMAA/STANAG-like interfaces with a conformance test suite.",
+  "demonstrable_in_3_6_months": "Simulation-only (Gazebo/AirSim + SITL) heterogeneous mission with intent-to-task allocation and DDIL link-drop behavior; live two-airframe demo only if range access and Blue UAS hardware (~$30-60k) are secured.",
+  "what_it_must_prove": "That a vendor-neutral layer can task vehicles from three different stacks with deterministic, auditable behavior under link loss, with lower operator load than parallel GCS - and, critically, that a government lab or prime will adopt it, since the AVO challenge itself demands production-approaching prototypes from U.S.-based firms.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Vehicle telemetry, mission logs and interface specifications for many vendor stacks; tasking doctrine and CONOPS; datalink and DDIL parameters; later, government reference architecture specs and range data.",
+  "legally_realistically_obtainable": "Partially: PX4/ArduPilot/MAVLink logs and simulators are open; UMAA design descriptions are partly public via AUVSI; Lattice SDK access requires Anduril partnership; FANTOM Core and A-GRA specs are government-controlled and CUI; realistic CONOPS, threat behaviors and datalink parameters are CUI/ITAR - the non-U.S.-person founder likely cannot receive them without licensing (counsel).",
+  "sources": [
+   "PX4/ArduPilot open-source stacks and SITL logs",
+   "MAVLink and CoT/TAK public schemas",
+   "AUVSI-published UMAA documents",
+   "Vendor SDKs under partnership (Lattice SDK, AuterionOS)",
+   "Government specs (FANTOM Core, A-GRA) only under contract/CUI"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "Anduril Lattice (SDK)",
+   "TAK / CoT",
+   "AuterionOS / Mission Control / Nemyx",
+   "AeroVironment Kinesis",
+   "Navy CCS / UMAA services",
+   "SOCOM FANTOM Core and BMS",
+   "USAF A-GRA (CCA)",
+   "FAAD C2 / IBCS / airspace deconfliction",
+   "tactical radios and mesh networks"
+  ],
+  "interfaces_protocols": [
+   "MAVLink",
+   "STANAG 4586",
+   "UMAA (DDS)",
+   "CoT/TAK",
+   "FANTOM Core M2M API",
+   "Lattice SDK/API",
+   "vendor GCS APIs",
+   "Link 16 / VMF for C2 integration"
+  ],
+  "who_controls_the_interface": "Platform vendors control their controller APIs (Anduril, Auterion, Shield AI, AV); the government controls the reference kernels (FANTOM Core, A-GRA, UMAA, TAK); a startup controls none of them."
+ },
+ "customer": {
+  "user": "Unmanned task unit / autonomous-systems mission commanders and vehicle operators",
+  "champion": "DIU autonomy portfolio directors; DAWG; SOCOM PEO SOF Digital Applications (UxSAI); Navy PMS 406",
+  "contract_signer": "DIU (prize challenge / CSO OTA), USSOCOM contracting, NAVSEA/NAVAIR contracting, Army Contracting Command (via enterprise agreements)",
+  "requirement_owner": "DAWG / OSD for joint mass; USSOCOM for SOF; OPNAV N9 / PMS 406 for Navy unmanned; Army PEO Aviation (Launched Effects) and Army Transformation for small UAS",
+  "program_office": "DIU Autonomy portfolio; DAWG; PEO SOF Digital Applications; PMS 406 Unmanned Maritime Systems; NAVAIR PMA-263/PMA-281; Army PM UAS",
+  "contracting_office": "DIU contracting (Commercial Solutions Openings / prize authority), USSOCOM Procurement Directorate, NAVSEA/NAVAIR, Army Contracting Command"
+ },
+ "budget": {
+  "program_or_line": "DAWG (FY26 ~$225M; FY27 request $54.6B, committees marked $1.0B); AVO prize pool up to $100M (prize authority, not obligated); SOCOM autonomy integration ($86M Anduril award, Mar 2025); Army-Anduril enterprise agreement (ceiling up to $20B, $87M first task order)",
+  "evidence": "Budget exists and is large, but the enacted DAWG level is likely ~$1B rather than $54.6B, the prize pool is a ceiling with no public awards found, and the obligated flows to date go to Anduril and other incumbents; no line item is addressable by a startup outside the AVO challenge or SBIR/OTA prototype money",
+  "source_url": "https://www.defense-aerospace.com/dawg-54b-requested-1b-written-down/",
+  "confidence": "MEDIUM"
+ },
+ "entry_vehicle": {
+  "primary": "DIU/DAWG/Navy Autonomous Vehicle Orchestrator prize challenge (already past its Jan 2026 submission window; a later sprint or follow-on challenge would be the entry)",
+  "sequence": [
+   "AFWERX / Army xTech / SOCOM SBIR Phase I on autonomy conformance or adapter tooling (requires U.S. ownership/control thresholds)",
+   "DIU CSO or SOFWERX assessment event (UxSAI T&E, JATF Autonomous Warfare Proving Ground)",
+   "Subcontract to a Drone Dominance / Launched Effects / CCA vendor as integration tooling",
+   "Only then an OTA prototype for orchestration under DAWG or a service"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% U.S. citizen or permanent-resident ownership and control; the German founder is expected to become a permanent resident but the Indonesian founder is not assumed to be a U.S. person, so cap-table and control structure need counsel. The AVO challenge is described as open to U.S.-based entities (MEDIUM confidence on exact terms). Autonomy control software for military vehicles is likely ITAR technical data (USML VIII(h)/XI(d)) or EAR 600-series - a non-U.S.-person co-founder would need a DDTC/BIS licence or a technology-control plan to touch the core code; this is a constraint to be structured with export counsel, not a legal conclusion here."
+ },
+ "competition": [
+  {
+   "company": "Anduril (Lattice for Mission Autonomy / Lattice C2)",
+   "how_close": "Already selected as the layer: DIU/Replicator (Nov 2024), SOCOM $86M autonomy integration (Mar 2025), Army up-to-$20B enterprise agreement with $87M C-UAS C2 task order (Mar 2026), CCA mission autonomy production option",
+   "evidence": "https://defensescoop.com/2025/03/26/anduril-socom-contract-award-autonomy-software-86m/ ; https://thedefensepost.com/2026/03/16/us-anduril-ai-contract/ (FACT, HIGH)"
+  },
+  {
+   "company": "Auterion (AuterionOS / Nemyx)",
+   "how_close": "Multi-manufacturer swarm demos (Dec 2025, 2026 live fire), Gauntlet production award, 33,000+ Skynode units delivered to Ukraine; strongest small-UAS multi-vendor claim",
+   "evidence": "https://auterion.com/auterion-performs-worlds-first-multi-manufacturer-swarm-strike-demonstration/ (vendor claim, MEDIUM)"
+  },
+  {
+   "company": "Shield AI (Hivemind Enterprise)",
+   "how_close": "CCA Increment 1 mission-autonomy production option (Jun 2026) under A-GRA; multi-aircraft autonomy",
+   "evidence": "https://shield.ai/shield-ai-awarded-u-s-air-force-production-contract/ (company, FACT for award)"
+  },
+  {
+   "company": "SpaceX / xAI",
+   "how_close": "Reported as invited to the AVO challenge (Feb 2026) - low-tier source",
+   "evidence": "https://www.aicerts.ai/news/spacex-joins-dod-drone-swarms-orchestrator-contest/ (INFERENCE, LOW)"
+  },
+  {
+   "company": "Applied Intuition (incl. EpiSci), Palantir, Collins Aerospace, AeroVironment (Kinesis), Saronic, Helsing, Arondite",
+   "how_close": "Each offers a partial or domain-specific orchestration/controller product; Collins holds a CCA autonomy option; AV pitched Mayhem 10 collaborative autonomy to Launched Effects (Jul 2026)",
+   "evidence": "Company index B-records; S13 segment file (MEDIUM)"
+  },
+  {
+   "company": "Government-owned stacks: SOCOM FANTOM Core, USAF A-GRA, Navy UMAA/CCS, TAK",
+   "how_close": "Directly substitute the neutral layer; SOCOM mandates FANTOM Core M2M integration (Jun 2026)",
+   "evidence": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view (FACT, HIGH)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "They do not need to add it - Anduril's Lattice is already the selected orchestration layer for DIU/DAWG, SOCOM and Army C-UAS, Palantir/Anduril hold the NGC2 data layer, and the government's own kernels (FANTOM Core, A-GRA, UMAA) occupy the neutral position. Any startup adapter that gains traction can be absorbed by a Lattice SDK release or a government reference implementation within months.",
+  "why_startup_still_wins_or_reject": "Reject for the orchestrator itself. A startup could only win as a neutral, open, government-adoptable kernel - which is precisely what the government is building in-house or buying via the AVO challenge from production-ready U.S. firms; the neutral position has no owner willing to pay a startup for it."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$150k-$250k (simulation-only heterogeneous mission, 2 founders + 1 contractor, 6-9 months)",
+  "credible_military_demo_usd": "$2M-$5M (3+ real airframes across two domains, range time, DDIL radio testing, one cleared U.S.-person lead, CMMC L2 posture, safety case)",
+  "first_production_deployment_usd": "$15M-$40M (cleared team, integrations with 5-10 vendor stacks and government kernels, ATO/accreditation, sustained T&E) - and that assumes a program of record chooses a non-incumbent",
+  "assumptions": "Based on S13 capital-intensity assessment and comparable spend by Auterion ($130M Series B, 2025) and Anduril awards; INFERENCE, LOW-MEDIUM confidence."
+ },
+ "expertise_required": [
+  {
+   "role": "Distributed-systems / autonomy engineer with DDIL consensus and task-allocation experience",
+   "why": "The hard problem is deterministic multi-vehicle behavior under partition, not UI or MAVLink plumbing",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Cleared U.S.-person former autonomous-systems operator or program lead (SOCOM/Navy unmanned)",
+   "why": "Needed to obtain CONOPS, CUI interface specs and a sponsor; required for any classified integration",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Tactical datalink / mesh radio engineer",
+   "why": "Orchestration lives or dies on link behavior under EW",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Safety assurance / T&E specialist (DoDD 3000.09, airworthiness, range safety)",
+   "why": "Every vehicle integration re-triggers T&E; lethal-effects delegation needs a safety case",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Export-control and government-contracts counsel",
+   "why": "ITAR/EAR classification of autonomy software and non-U.S.-person founder structuring",
+   "fatal_if_absent": true
+  }
+ ],
+ "regulatory_burden": {
+  "level": "high",
+  "explanation": "Military multi-vehicle autonomy C2 software is very likely ITAR-controlled technical data (USML VIII(h)/XI(d)) or EAR 600-series once designed for military use; CUI and CMMC Level 2 apply as soon as government interfaces are touched; DoDD 3000.09 policy on autonomy in weapon systems applies to lethal tasking; airworthiness/range approvals for live demos; SECRET-level integration for CCA, Navy fleets and fires. Needs specialist counsel - not a legal judgment.",
+  "non_us_person_founder_note": "An Indonesian founder who is not a U.S. person likely cannot access ITAR technical data or CUI-marked government interface specs without a licence/technology-control plan, and cannot hold a clearance; the German founder is not a U.S. person until permanent residency is obtained. For this gap the controlled code is the product itself, so the constraint is structural rather than peripheral. Counsel required."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "low",
+  "explanation": "Commercial multi-vendor fleet orchestration exists (inspection, delivery, public safety) but is a thin, price-sensitive market already served by MAVLink fleet-management products (Auterion Mission Control, FlytBase-class tools), and the defense-specific parts (DDIL, lethal tasking, STANAG/UMAA) have no commercial buyer."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "accreditation",
+   "government relationships",
+   "deployment footprint"
+  ],
+  "explanation": "Whoever holds many certified vehicle integrations, an ATO and a program-of-record footprint is defensible - which is exactly why Anduril and the government-owned kernels are defensible and a new entrant is not; an open neutral kernel is by design low-moat."
+ },
+ "why_now": "Replicator (2023) failed to field orchestration software and was dissolved into DAWG (late 2025); the FY27 request ($54.6B) and the Jan 2026 AVO prize challenge show explicit demand for a vehicle-agnostic layer; Drone Dominance is delivering tens of thousands of multi-vendor small drones (12,080 accepted by Sept 2026); open flight stacks, cheap edge compute and mesh radios made multi-manufacturer coordination demonstrable only in late 2025; and government reference architectures (A-GRA, FANTOM Core, UMAA) are being asserted against vendor lock. All of this raises demand - but it also means the buyer has already organized its answer around incumbents and government-owned kernels.",
+ "killer_risk": "The government has already decided who solves this: either Anduril Lattice (selected by DIU, SOCOM and the Army with an enterprise vehicle) or a government-owned kernel (FANTOM Core, A-GRA, UMAA), with the only open door (AVO challenge) restricted to U.S.-based firms with production-approaching prototypes - and the budget that would fund a new entrant was written down from $54.6B to about $1B. A two-student team with $250k and a non-U.S.-person co-founder cannot enter that door, cannot legally hold the core code and cannot safely field DDIL-grade multi-vehicle autonomy.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2019-2021",
+   "event": "Navy UMAA RFI/design descriptions; TF-59 stood up (Sept 2021)",
+   "source_url": "https://seapowermagazine.org/navy-requests-information-for-unmanned-maritime-autonomy-architecture/"
+  },
+  {
+   "year": "2023",
+   "event": "Replicator announced (Aug 2023) to field thousands of attritable autonomous systems within 18-24 months",
+   "source_url": "https://www.congress.gov/crs-product/IF12611"
+  },
+  {
+   "year": "2024",
+   "event": "DIU selects Anduril Lattice for Mission Autonomy for Replicator collaborative autonomy (Nov 2024)",
+   "source_url": "https://www.anduril.com/news/diu-selects-anduril-to-enable-collaborative-autonomy-for-replicator-systems"
+  },
+  {
+   "year": "2025",
+   "event": "SOCOM $86M Anduril autonomy integration (Mar); Auterion Nemyx launch / $130M Series B (Sep); Replicator dissolved into DAWG (late 2025); Auterion multi-manufacturer swarm demo (Dec)",
+   "source_url": "https://defensescoop.com/2025/03/26/anduril-socom-contract-award-autonomy-software-86m/"
+  },
+  {
+   "year": "2026",
+   "event": "AVO prize challenge launched 13 Jan (submissions due 25 Jan, runs to 31 Dec); Army-Anduril enterprise agreement (Mar); FY27 DAWG request $54.6B (Apr); SOCOM 'not moving fast enough' (May); HASC/SASC mark $1.0B for DAWG (15 Jun); SOCOM ALM notice mandates FANTOM Core (26 Jun); SOCOM UxSAI mission-autonomy T&E (Aug); 12,080 Gauntlet drones accepted (Sep)",
+   "source_url": "https://breakingdefense.com/2026/01/diu-offers-100m-in-prizes-for-voice-controlled-ai-enabled-drone-swarm-orchestrator/"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling in principle - AUKUS Maritime Big Play (2025) and the UK Digital Targeting Web show allied demand for common uncrewed-systems C2 interfaces, and European buyers (Bundeswehr, Ukraine) are more open to non-Anduril stacks (Auterion, Helsing, Arondite). But the same structure repeats: allied navies are shaping the software through primes and government labs, Helsing/Auterion/Arondite already occupy the European neutral-orchestration position, and a U.S.-ITAR-tainted product would complicate allied sales. Allies do not rehabilitate G25; they would at most host an adjacent conformance/adapter tooling business.",
+ "search_log": [
+  {
+   "query": "DIU \"Autonomous Vehicle Orchestrator\" prize challenge DAWG Navy 2026",
+   "useful": true
+  },
+  {
+   "query": "\"Autonomous Vehicle Orchestrator\" challenge winners OR selected OR phase 2026",
+   "useful": true
+  },
+  {
+   "query": "SOCOM \"FANTOM Core\" collaborative mission autonomy government-owned 2026",
+   "useful": true
+  },
+  {
+   "query": "GAO report 2025 OR 2026 Replicator autonomous systems DoD challenges software integration",
+   "useful": true
+  },
+  {
+   "query": "DAWG FY2027 budget request $54.6 billion autonomous warfare congress appropriations markup 2026",
+   "useful": true
+  },
+  {
+   "query": "defensescoop SOCOM mission autonomy software test unmanned systems August 2026 collaborative autonomy \"not moving fast enough\"",
+   "useful": true
+  },
+  {
+   "query": "Anduril Lattice DAWG 2026 orchestration thousands autonomous systems contract OR Auterion Nemyx multi-manufacturer swarm 2026 Army",
+   "useful": true
+  },
+  {
+   "query": "DAWG \"$1 billion\" HASC SASC FY2027 NDAA markup Defense Autonomous Warfare Group funding cut",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://breakingdefense.com/2026/01/diu-offers-100m-in-prizes-for-voice-controlled-ai-enabled-drone-swarm-orchestrator/",
+   "title": "DIU offers $100M in prizes for voice-controlled AI-enabled drone swarm 'orchestrator'",
+   "pub_date": "2026-01",
+   "tier": 2
+  },
+  {
+   "url": "https://www.diu.mil/latest/diu-and-dawg-launch-autonomous-vehicle-orchestrator-prize-challenge",
+   "title": "DIU and DAWG launch Autonomous Vehicle Orchestrator prize challenge (DIU press release; page not fetched - .mil blocked)",
+   "pub_date": "2026-01-13",
+   "tier": 1
+  },
+  {
+   "url": "https://www.executivegov.com/articles/diu-dawg-navy-challenge-av-orchestrator",
+   "title": "DIU, DAWG & Navy Launch $100M Prize Challenge for Autonomous Vehicle Orchestrator",
+   "pub_date": "2026-01",
+   "tier": 3
+  },
+  {
+   "url": "https://www.defensedaily.com/diu-dawg-navy-launch-100-million-challenge-for-autonomous-system-control/uncategorized/",
+   "title": "DIU, DAWG, Navy Launch $100 Million Challenge For Autonomous System Control",
+   "pub_date": "2026-01",
+   "tier": 2
+  },
+  {
+   "url": "https://www.aicerts.ai/news/spacex-joins-dod-drone-swarms-orchestrator-contest/",
+   "title": "SpaceX Joins DoD Drone Swarms Orchestrator Contest",
+   "pub_date": "2026-02",
+   "tier": 3
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/9d16ce1cfc254b448e0584c9b88a4fb1/view",
+   "title": "USSOCOM Air Loitering Munition (ALM) notice",
+   "pub_date": "2026-06-26",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/07/17/air-commandos-attack-drones-automatic-target-recognition/",
+   "title": "Air commandos seek 'SOF-peculiar' attack drones with automatic target recognition capabilities",
+   "pub_date": "2026-07-17",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/18/collaborative-autonomy-development-socom-acquisition/",
+   "title": "'Collaborative autonomy' development not moving fast enough for SOCOM",
+   "pub_date": "2026-05-18",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/08/18/mission-autonomy-software-unmanned-systems-special-operations/",
+   "title": "SOCOM planning to test new mission autonomy software for unmanned systems program",
+   "pub_date": "2026-08-18",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/05/27/socom-seeks-autonomous-warfare-proving-ground/",
+   "title": "SOCOM seeks autonomous warfare proving ground",
+   "pub_date": "2026-05-27",
+   "tier": 2
+  },
+  {
+   "url": "https://www.congress.gov/crs-product/IF12611",
+   "title": "DOD Replicator Initiative: Background and Issues for Congress (CRS)",
+   "pub_date": "2025-08",
+   "tier": 1
+  },
+  {
+   "url": "https://responsiblestatecraft.org/replicator/",
+   "title": "DoD promised a 'swarm' of attack drones. We're still waiting.",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.defense-aerospace.com/dawg-54b-requested-1b-written-down/",
+   "title": "DAWG Asked for $54.6B. Three Committees Wrote Down $1B",
+   "pub_date": "2026-06",
+   "tier": 2
+  },
+  {
+   "url": "https://www.congress.gov/crs-product/IN12703",
+   "title": "FY2027 NDAA: Summary of Funding Authorizations (CRS)",
+   "pub_date": "2026-06",
+   "tier": 1
+  },
+  {
+   "url": "https://insidedefense.com/daily-news/funding-new-autonomous-drone-warfare-group-slated-skyrocket-546b-fy-27",
+   "title": "Funding for new autonomous drone warfare group slated to skyrocket to $54.6B in FY-27",
+   "pub_date": "2026-04",
+   "tier": 2
+  },
+  {
+   "url": "https://www.defenseone.com/ideas/2026/05/pentagons-54-billion-bet-autonomous-warfare/413735/",
+   "title": "The Pentagon's $54 billion bet on autonomous warfare",
+   "pub_date": "2026-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.anduril.com/news/diu-selects-anduril-to-enable-collaborative-autonomy-for-replicator-systems",
+   "title": "DIU selects Anduril to enable collaborative autonomy for Replicator systems",
+   "pub_date": "2024-11",
+   "tier": 3
+  },
+  {
+   "url": "https://defensescoop.com/2025/03/26/anduril-socom-contract-award-autonomy-software-86m/",
+   "title": "SOCOM awards Anduril $86M contract for autonomy software integration",
+   "pub_date": "2025-03-26",
+   "tier": 2
+  },
+  {
+   "url": "https://thedefensepost.com/2026/03/16/us-anduril-ai-contract/",
+   "title": "US Army Awards Anduril $20B AI Integration Contract",
+   "pub_date": "2026-03-16",
+   "tier": 2
+  },
+  {
+   "url": "https://auterion.com/auterion-performs-worlds-first-multi-manufacturer-swarm-strike-demonstration/",
+   "title": "Auterion Performs World's First Multi-Manufacturer Swarm Strike Demonstration",
+   "pub_date": "2025-12",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+   "title": "Uncrewed Ground Systems (RUSI occasional paper)",
+   "pub_date": "2023-10-26",
+   "tier": 2
+  },
+  {
+   "url": "https://sam.gov/opp/dd0c44c75b90428ab037c4780d5e6013/view",
+   "title": "NAVAIR Unmanned Common Controller sources sought",
+   "pub_date": "Not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://shield.ai/shield-ai-awarded-u-s-air-force-production-contract/",
+   "title": "Shield AI awarded U.S. Air Force production contract (CCA mission autonomy, A-GRA)",
+   "pub_date": "2026-06-17",
+   "tier": 3
+  },
+  {
+   "url": "https://www.armytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "title": "As experimental drone battalion ends, Army aims to push drones to every squad",
+   "pub_date": "2026-09-18",
+   "tier": 2
+  },
+  {
+   "url": "https://www.royalnavy.mod.uk/news/2025/august/11/20250811-aukus-maritime-big-play-ex-talisman-sabre",
+   "title": "AUKUS Maritime Big Play (Talisman Sabre 2025)",
+   "pub_date": "2025-08-11",
+   "tier": 1
+  }
+ ]
+}

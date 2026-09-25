@@ -1,0 +1,302 @@
+{
+  "id": "G08",
+  "title": "Cross-system swivel-chair elimination: provenance-tracked translation of plans, targets and intelligence products between planning, fires, airspace, intel and briefing systems (Onebrief/COP graphics to AFATDS/AXS, TAIS, IBCS-M; AIDP/DCGS-A to MSS, chat and slides)",
+  "problem": "Plans, targets and intelligence products are authored in one environment (Onebrief, PowerPoint, MSS/AIDP, chat) and re-keyed by staff officers and analysts into the specialized systems that execute or brief them (AFATDS/AXS, TAIS, IBCS-M, COP, INTSUM slides), so every battle-rhythm cycle burns staff hours on manual reconciliation and the resulting products carry no machine-readable provenance or releasability lineage.",
+  "categories": ["B", "C", "G", "I"],
+  "segment_ids": ["S01", "S04"],
+  "chain_steps": ["PROCESS", "DECIDE", "DISSEMINATE_TASK"],
+  "echelons": ["battalion", "brigade", "division", "corps", "COCOM J2/J3", "joint task force"],
+  "user": {
+    "exact_role": "Fires cell (FSO/FSNCO, 13A/13J), ADAM/BAE airspace cell, current-operations battle captain, and 35F/35G all-source analysts and targeting officers who today hand-carry data between planning, fires, airspace, intel and briefing systems",
+    "echelon": "Brigade through corps, with a second user population at COCOM J2/J3 targeting cells",
+    "organization_examples": ["4th Infantry Division and 25th Infantry Division (NGC2 prototype divisions)", "XVIII Airborne Corps (Scarlet Dragon targeting cell)", "III Armored Corps / I Corps (next NGC2 recipients)", "CENTCOM and INDOPACOM J2/J3 targeting cells using Maven Smart System", "Army National Guard division/brigade staffs using AFATDS/TAIS with legacy CPCE"]
+  },
+  "current_workflow": [
+    "1. Planners build the scheme of maneuver, fire support plan and airspace coordination measures in Onebrief and/or PowerPoint/Excel; intel builds the enemy picture in MSS/AIDP and slides.",
+    "2. The fires cell re-enters targets, target lists and fire support coordination measures into AFATDS (or the new AXS microservices) by hand from the plan graphics.",
+    "3. The ADAM/BAE cell re-enters airspace coordination measures into TAIS and coordinates changes with aviation and air defense (IBCS-M) by chat and phone.",
+    "4. Analysts receive cues from Maven/AIDP, chat and email, verify in an imagery tool, then manually build target graphics and INTSUM slides and re-type entity data into fires C2 and the COP.",
+    "5. Any change in one system is re-keyed into the others; sustainment status arrives by spreadsheet/LOGSTAT.",
+    "6. Discrepancies between systems are discovered at rehearsals, during live fire, or when a target nomination is rejected; provenance of who changed what and from which source is reconstructed from chat logs after the fact."
+  ],
+  "current_solution": "Humans plus liaison officers plus chat (Teams/Mattermost/mIRC) plus contractor field service engineers; inside the NGC2 prototypes the data layer (Anduril Lattice, Palantir Foundry, Raft registries/transformation/federation) and Raft's voice/AI workflows, a Lockheed/Accelint unified airspace interface and Maven's target workbench routing to AFATDS/JREAP are being demonstrated exercise-by-exercise; Onebrief claims its plans are 'pushed into the specialized systems that execute them' (vendor claim); OSD is forcing analytic tools onto MSS as the top-down consolidation answer.",
+  "failure": "The seam fails at the semantic and safety boundary: fires and airspace systems require validated, doctrinally checked, auditable message content (VMF/USMTF/JREAP semantics, fire support coordination measures, ACMs), legacy programs of record exposed usable APIs only in May 2026 (Operation Jailbreak), the NGC2 integrations are prototype-specific to one division's vendor stack, and the intel-to-briefing side loses provenance and releasability markings the moment a product becomes a slide or a chat message.",
+  "evidence": [
+    {
+      "form": "government document",
+      "claim": "MIPB (Jan-Jun 2026) article 'The Swivel-Chair War: How Disconnected Systems are Failing the Modern Soldier' documents analysts receiving inputs from and manually re-entering data across disconnected intelligence, C2 and fires systems.",
+      "source_title": "The Swivel-Chair War - Military Intelligence Professional Bulletin",
+      "source_url": "https://www.lineofdeparture.army.mil/Journals/Military-Intelligence/Military-Intelligence-Archive/2026-January-June/The-Swivel-Chair-War/",
+      "pub_date": "2026 (Jan-Jun issue)",
+      "event_date": "2025-2026",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM (cited by earlier study stage; RECALL - not re-verified this session because .mil fetch is blocked and the search budget was exhausted)"
+    },
+    {
+      "form": "documented manual workaround",
+      "claim": "Scarlet Dragon (XVIII Airborne Corps): the first AI-enabled live-fire targeting run took 743 minutes; by 2024 a 20-person cell using Maven reportedly reached ~80 targets/hour versus ~30 without - the staff-intensive, multi-system targeting baseline is quantified.",
+      "source_title": "Building the Tech Coalition (CSET)",
+      "source_url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/",
+      "pub_date": "2024-08",
+      "event_date": "2020-2024",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Operation Jailbreak / 'Right to Integrate' hackathon at Fort Carson (May 2026) exposed and documented APIs across more than 70 Army capabilities (including IBCS-M per the Red Hat account) with ~80 vendors; the Army's stated rationale was that legacy systems could not share data - i.e., machine-to-machine plan-to-execution integration was not previously available.",
+      "source_title": "Army advances historic first 'Right to Integrate' hackathon accelerating data sharing on the battlefield",
+      "source_url": "https://www.army.mil/article/292898/army_advances_historic_first_right_to_integrate_hackathon_accelerating_data_sharing_on_the_battlefield",
+      "pub_date": "2026-05",
+      "event_date": "2026-05",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM (army.mil article cited by earlier stage; Red Hat corroboration at https://www.redhat.com/en/blog/inside-operation-jailbreak-red-hats-participation-us-armys-open-integration-sprint returned EGRESS_BLOCKED this session)"
+    },
+    {
+      "form": "government document",
+      "claim": "GAO-21-99 (Jan 2021) found guidance gaps in digitally-aided close air support communications and friendly-force tracking between air and ground C2 - the same air-ground fires/airspace seam this gap sits on.",
+      "source_title": "GAO-21-99",
+      "source_url": "https://www.gao.gov/products/gao-21-99",
+      "pub_date": "2021-01-21",
+      "event_date": "2020",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Joint Staff PB2017 RDT&E justification reported 12 interoperability discrepancies in digitally-aided fire support at a Bold Quest event, 11 reported to program offices and one resolved - coalition/joint fires message interoperability defects are a long-standing, formally measured problem.",
+      "source_title": "Joint Staff RDT&E J-book PB2017 (mirrored in 540co/dod-president-budget-procurement-rdte-data)",
+      "source_url": "",
+      "pub_date": "2016",
+      "event_date": "2015",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM (dated; no direct URL captured - Public evidence insufficient for a live link)"
+    },
+    {
+      "form": "government document",
+      "claim": "GAO-25-106454 (Apr 2025): six years into CJADC2 DoD still has no framework to guide investments; services pursue separate data-integration efforts that risk new silos - the cross-system translation problem is not being solved top-down.",
+      "source_title": "GAO-25-106454 Defense Command and Control",
+      "source_url": "https://www.gao.gov/products/gao-25-106454",
+      "pub_date": "2025-04-08",
+      "event_date": "2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "AIDP Call for Solutions (24 Jul 2026, responses due 12 Aug 2026) requires bi-directional data exchange with Maven Smart System and 72-hour autonomous DDIL edge operation - a requirement written because intel products do not currently flow machine-to-machine between the Army intel platform and the joint targeting platform.",
+      "source_title": "Army issues AIDP solutions call (Intelligence Community News)",
+      "source_url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/",
+      "pub_date": "2026-07-24",
+      "event_date": "2026-07",
+      "tier": 2,
+      "label": "FACT (requirement) / INFERENCE (current shortfall)",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "operator workaround",
+      "claim": "Balikatan 2026: the first eight-nation COP took 'more than eight years' of integration work and still depends on JICOs and foreign-disclosure officers hand-tagging data for cross-domain release - provenance/releasability tagging is done by humans.",
+      "source_title": "Balikatan 2026 debuts groundbreaking common operating picture (DVIDS)",
+      "source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+      "pub_date": "2026-05 (approx.)",
+      "event_date": "2026-04/05",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "Raft (25th ID data layer) states operators 'manually move data between systems' and claims Lightning Surge 2 'eliminated manual cross-system reconciliation' and compressed the 'soldier intensive' call-for-fire process into an automated workflow; Lockheed/Accelint demonstrated a unified airspace interface; Maven's target workbench routes to AFATDS/JREAP; Onebrief claims plan push into execution systems - four vendors each cover a slice inside a prototype.",
+      "source_title": "Raft validates the future of command and control at Army's Lightning Surge exercises (PR Newswire)",
+      "source_url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html",
+      "pub_date": "2026-03-11",
+      "event_date": "2026-02",
+      "tier": 4,
+      "label": "INFERENCE (vendor marketing is proof of the problem statement, not of a working product)",
+      "confidence": "LOW"
+    },
+    {
+      "form": "repeated procurement",
+      "claim": "Buyers repeatedly pay for analyst/staff workflow automation: DIU transitioned Vannevar Labs' analysis solution to production (Jan 2026; reported ~$99M potential, $16M initial - ceiling not revenue); Army Contracting Command awarded Onebrief a $20M-ceiling enterprise IDIQ (Sept 2026); MSS ceiling raised to ~$1.3B (May 2025) and made a program of record (Mar 2026).",
+      "source_title": "DIU awards Vannevar Labs contract to transition data analysis solution into production (Defense Daily)",
+      "source_url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/",
+      "pub_date": "2026-01",
+      "event_date": "2026-01-12",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "C5ISR Center (May 2026) ran the first end-to-end simulated fires mission on an M777 over private 5G explicitly to bridge 'legacy platforms' lacking modern communications pathways - the legacy fires chain (AFATDS-era) still needs gateway/bridging software to join the NGC2 data layer.",
+      "source_title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2 (army.mil)",
+      "source_url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+      "pub_date": "2026-05-22",
+      "event_date": "2026-04/05",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "OSD directed components to migrate C2/analytic tools onto Maven Smart System on an 'aggressive' timeline (Apr 2026) - the government acknowledges duplication and disconnection of analytic tools, and defines MSS as the API target any translation product must speak.",
+      "source_title": "Pentagon sets aggressive timeline for components to transition onto Maven Smart System (DefenseScoop)",
+      "source_url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/",
+      "pub_date": "2026-04-15",
+      "event_date": "2026-04",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "product fails requirement",
+      "claim": "An AI decision-support study (mirrored copy, original publisher unconfirmed) states that interfacing MSS directly with AFATDS would eliminate 'slow and error-prone manual re-entry of target information' - i.e., as of 2025 that interface was not fielded.",
+      "source_title": "AI-DSS report DOC-000355 (public mirror)",
+      "source_url": "",
+      "pub_date": "2025 (approx.)",
+      "event_date": "2025",
+      "tier": 4,
+      "label": "INFERENCE",
+      "confidence": "LOW (Public evidence insufficient for provenance of the document)"
+    }
+  ],
+  "why_existing_startups_havent_solved": "Three structural reasons. (1) Until Operation Jailbreak (May 2026) the programs of record on the execution side (AFATDS, TAIS, IBCS-M, GCSS-Army) had no documented, vendor-accessible APIs; interface control documents and VMF/USMTF/JREAP implementations are CUI/export-controlled, so only the fires-C2 developer (Leidos on AFATDS; the AXS microservice vendors) and the NGC2 team leads could touch the seam. (2) The seam is now explicitly assigned: the Army's June 2026 NGC2 common data baseline gives Anduril/Palantir/Raft the registries, transformation and federation layer, Onebrief holds the planning layer, and OSD's April 2026 MSS directive gives Palantir the intel-product target - the 'translation' job is on the incumbents' roadmap and funded through their OTAs and enterprise agreements. (3) The fires/airspace side requires safety-authority acceptance (a wrong ACM or FSCM translation is a fratricide risk), and the intel side requires classified data to make products realistic; both are gated for a small uncleared team. Startups that got close (Raft, Onebrief, Vannevar) did so as team members inside a prime's OTA, not as standalone translation products.",
+  "why_not_solved_reasons": ["proprietary incumbent architecture", "data inaccessible", "integration complexity", "certification", "classification", "technology only recently possible", "procurement fragmentation"],
+  "technical_wedge": "Not the whole seam. The only defensible slice for a newcomer is a narrow, auditable transformation-and-provenance service for ONE mission thread: e.g., (a) plan/COP graphics (Onebrief JSON, MIL-STD-2525 overlays, ACO/ATO products) to validated airspace coordination measures and fire support coordination measures with doctrinal conflict detection, human approval gates and a per-object provenance ledger; or (b) an intel-product generator that turns structured detections/tracks plus chat into standard, machine-readable products (USMTF/VMF messages, CoT, INTSUM sections, target packets) with per-claim source lineage and releasability markings. Packaged as a registered service/app in the NGC2 registry or an Open DAGIR/MSS app rather than as a competing platform.",
+  "mvp": {
+    "what": "An unclassified 'translation with receipts' service: ingest an Onebrief-style plan export or 2525 overlay plus simulated detections and chat, emit validated ACM/FSCM sets and target nominations as CoT and mock VMF/USMTF messages into a TAK server and a mock AFATDS message endpoint, with a provenance graph (who/what/when/source) and doctrinal conflict flags; round-trip changes back to the plan.",
+    "demonstrable_in_3_6_months": "Yes for the unclassified simulation: open TAK/CoT, public MIL-STD-2525 and public USMTF/ADatP-3 structure, synthetic exercise data; measurable analyst/fires-cell time saved with 3-5 veteran 13A/35F advisors on a scripted scenario; cannot demonstrate against real AFATDS/TAIS/IBCS-M without a government sponsor and CUI interface docs.",
+    "what_it_must_prove": "That (1) automated translation reduces re-keying time and error rate versus the manual baseline on realistic products, (2) every emitted object carries verifiable lineage and releasability, (3) conflict detection catches seeded ACM/FSCM errors, and (4) the government sponsor (a fires or intel cell) will accept the human-approval workflow as safe enough to try at an exercise.",
+    "uses": ["public/open data", "simulated military data", "unclassified architecture", "commercial compute", "open standards"]
+  },
+  "data_requirement": {
+    "what": "Plan and product templates (OPORD annexes, fire support plans, ACO/ACM formats, INTSUM/target packet templates), message-format specifications (VMF, USMTF, JREAP-C, CoT), unit SOPs and realistic chat logs for evaluation; eventually PoR interface control documents.",
+    "legally_realistically_obtainable": "Partially. MIL-STD-2525, CoT/TAK and public STANAG/ADatP-3 structures are open; USMTF/VMF and AFATDS/TAIS/IBCS-M ICDs are CUI and export-controlled (needs a government sponsor, a U.S.-person team for the controlled portion, and counsel on ITAR/EAR handling); realistic chat logs and INTSUMs are CUI or classified, so evaluation data must be synthetic or sponsor-provided.",
+    "sources": ["MIL-STD-2525 and open TAK/CoT schemas", "public NATO ADatP-3/APP-11 structure and FMN Spiral documentation", "Army doctrinal publications (ATP 3-09.42, FM 3-52, ATP 3-52.1 airspace control) for rules", "sponsor-provided exercise data under an OTA/CRADA", "Jailbreak API marketplace access (vendor invitation required)"]
+  },
+  "integration_requirement": {
+    "systems": ["Onebrief", "AFATDS 7.x / Artillery Execution Suite (AXS)", "TAIS", "IBCS-M", "Maven Smart System / Open DAGIR", "AIDP / DCGS-A", "TAK (ATAK/WinTAK/TAK Server)", "NGC2 data layer (Lattice / Foundry / Raft registries)", "chat (Mattermost/Teams) and PowerPoint"],
+    "interfaces_protocols": ["Cursor-on-Target", "VMF (MIL-STD-6017)", "USMTF / MTF", "JREAP-C / Link 16 J-series (fires and air picture)", "MIL-STD-2525 symbology", "NGC2 registry / API marketplace APIs (Jailbreak)", "Onebrief API (availability to third parties unverified)", "MSS/Open DAGIR onboarding APIs"],
+    "who_controls_the_interface": "The Army program offices and their developers control the PoR interfaces (CPE C2IN for NGC2/registries; PM Mission Command for AFATDS/AXS/TAIS; PEO Missiles and Space / Northrop Grumman for IBCS-M); the NGC2 team leads (Anduril with Palantir and Raft) control the data-layer baseline; Palantir/CDAO control MSS onboarding; Onebrief controls its own API. A newcomer controls none of them."
+  },
+  "customer": {
+    "user": "Fires cell, ADAM/BAE cell, battle captains and G2 analysts at brigade-corps in NGC2 divisions and corps",
+    "champion": "Division/corps innovation cell or G3/G2 in an NGC2 unit (4th ID, 25th ID, XVIII Airborne Corps, I Corps); alternatively the Army CTO office that runs Jailbreak",
+    "contract_signer": "CPE C2IN agreements officer (inferred ACC-APG) via NGC2 CSO/OTA, or the NGC2 team lead (Anduril/Lockheed) as a subcontract; DIU for a joint variant",
+    "requirement_owner": "T2COM / C2 Cross-Functional Team (placement unverified) for NGC2; Army G-2 / PM IS&A for the intel-product side",
+    "program_office": "CPE C2IN (NGC2 applications/data), PM Mission Command (AFATDS/AXS/TAIS), CPE ISW / PM IS&A (AIDP), CDAO (MSS/Open DAGIR)",
+    "contracting_office": "ACC-APG (INFERENCE, not verified); Army Contracting Command for enterprise IDIQs; DIU/CDAO for joint OTAs"
+  },
+  "budget": {
+    "program_or_line": "Army NGC2 portfolio - FY2026 'C2 Applications' ~$488.4M RDT&E and 'C2 Data' ~$306.1M (PE numbers not verified); joint FY27 request >$2B to expand Maven Smart System and Joint Fires Network; AFATDS/AXS lines under PM Mission Command not isolated.",
+    "evidence": "Buyer map (buyers/army.json chain 0) records the NGC2 sub-lines from PB2026 documentation; DefenseScoop (2026-05-28) reports the FY27 MSS/JFN request; GAO-26-108019 (2026-08-20) notes the Army has no unit-by-year NGC2 schedule or life-cycle cost estimate. No budget line is specific to cross-system translation - the money is inside the platform/data-layer awards.",
+    "source_url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+    "confidence": "MEDIUM"
+  },
+  "entry_vehicle": {
+    "primary": "Component/app proposal under an NGC2 team lead (Anduril or Lockheed) or a Jailbreak 1.5 vendor slot, funded through the team lead's OTA - not a direct prime award",
+    "sequence": ["Unclassified MVP on TAK/CoT with veteran advisors", "Jailbreak 1.5 / API-marketplace access and an NGC2 CSO white paper as a component vendor", "Subcontract or CRADA with a division innovation cell for one exercise (Ivy Sting / Lightning Surge / Scarlet Dragon)", "SBIR/xTech only if the cap table meets the >50% U.S.-citizen/permanent-resident test; otherwise OTA/CSO path", "Open DAGIR onboarding for the intel-product variant", "Allied variant via NATO DIANA / CWIX interoperability testing"],
+    "eligibility_notes": "SBIR requires >50% ownership and control by U.S. citizens or permanent residents (13 CFR 121.702) - the German founder qualifies only after obtaining permanent residency, and the Indonesian founder's stake counts against the threshold; foreign-affiliation disclosure is mandatory. OTAs/CSOs have no statutory ownership test. Export-controlled CUI (message-format ICDs) is effectively U.S.-person-only, so the non-U.S.-person founder may be walled off from the core interface work; FOCI treats any non-citizen, including a permanent resident, as a foreign interest for facility clearance. All of this needs export-control and government-contracts counsel before the first sponsor conversation."
+  },
+  "competition": [
+    {"company": "Raft (25th ID data layer; now in the Army-wide NGC2 common data baseline)", "how_close": "Closest - owns registries/transformation/federation in the baseline and markets automated call-for-fire and airspace deconfliction workflows", "evidence": "army.mil 293409 (2026-06) baseline designation; Raft PR Newswire release 2026-03-11 (vendor claim)"},
+    {"company": "Palantir (Maven Smart System, Foundry in NGC2, TITAN, AIDP lineage)", "how_close": "Owns the intel-product side end to end and the target workbench routing to fires; OSD directive makes MSS the mandatory target", "evidence": "DefenseScoop 2026-04-15; DefenseScoop 2026-09-22 (>100K MSS users)"},
+    {"company": "Onebrief", "how_close": "Owns the planning layer at 4th ID and now an Army enterprise IDIQ ($20M ceiling, Sept 2026); claims plan push into execution systems", "evidence": "BusinessWire 2026-09-17; Onebrief posts (vendor claim)"},
+    {"company": "Anduril (Lattice, NGC2 team lead)", "how_close": "Controls the 4th ID stack and baseline; can absorb any translation function into Lattice", "evidence": "Breaking Defense 2025-07 ($99.6M OTA); army.mil 293409"},
+    {"company": "Lockheed Martin / Accelint-Lyntris", "how_close": "25th ID team lead with a demonstrated unified airspace interface (TAIS/IBCS-M adjacent)", "evidence": "army.mil 288233 (2025-09-02); Lightning Surge reporting"},
+    {"company": "Leidos (AFATDS developer) and the AXS microservice vendors", "how_close": "Control the fires-C2 interface itself; AXS is designed as a modular microservice suite", "evidence": "army.mil 286967 (AFATDS 7.0/AXS)"},
+    {"company": "Vannevar Labs, Primer, BigBear.ai, Scale AI (Donovan), Ask Sage", "how_close": "Adjacent - analyst-workflow and LLM product generation; Vannevar has a DIU production transition", "evidence": "Defense Daily 2026-01; company records B02/B08"},
+    {"company": "Research Innovations Inc. (RII)", "how_close": "Team Anduril subcontractor on NGC2 with fires/targeting workflow heritage", "evidence": "Breaking Defense 2025-07 team list (RECALL - not re-verified this session)"},
+    {"company": "Systematic (SitaWare, NATO DEMETER)", "how_close": "Allied-market incumbent for FMN/MIP-native C2; relevant only to the allied extension", "evidence": "Janes (2025) DEMETER FOC by March 2026"}
+  ],
+  "incumbent_response": {
+    "could_anduril_palantir_l3harris_add_it": "Yes, easily and they are already doing it: Anduril/Palantir/Raft hold the NGC2 transformation layer, Palantir holds MSS and the intel side, Onebrief holds the plan; the Army's Jailbreak program lowers their integration cost every quarter. Leidos/AXS vendors can expose the fires interface natively.",
+    "why_startup_still_wins_or_reject": "Mostly reject as a standalone company. The only credible residual is a narrow, safety-auditable transformation/provenance service that the primes have little incentive to build well (validation rules, lineage, releasability), sold as a component inside the baseline or as an Open DAGIR app - a feature-sized business with thin margins, not a platform. A startup wins only if it becomes the neutral, government-owned-data-rights 'audit and validation' layer that the Army wants to keep independent of any one prime; that is a plausible but unproven procurement preference."
+  },
+  "capital_required": {
+    "proof_of_concept_usd": "150,000-300,000",
+    "credible_military_demo_usd": "1,500,000-3,000,000",
+    "first_production_deployment_usd": "6,000,000-12,000,000",
+    "assumptions": "PoC: 2 founders plus 1-2 veteran advisors, unclassified TAK/CoT simulation, 6 months. Demo: 5-8 people including a cleared U.S.-person integration lead and a former FSO/35F, one exercise cycle under a team-lead subcontract, CUI-capable environment, 12-18 months. Production: IL5/SIPR hosting or Open DAGIR onboarding, security assessment (the NGC2 CTO memo of Sept 2025 shows third-party apps get audited), sustained field-service engineers at two divisions, 24-36 months. Figures are INFERENCE from comparable C2-app startups; no public evidence for this specific product."
+  },
+  "expertise_required": [
+    {"role": "Former Army fire support officer or 13A/13J with AFATDS/AXS and JADOCS experience", "why": "Defines the doctrinal validation rules and is the only credible voice with fires safety authorities", "fatal_if_absent": true},
+    {"role": "Former 35F/35G all-source analyst or targeting officer with MSS/AIDP exposure", "why": "Owns the intel-product side templates, INTSUM/target packet workflow and releasability practice", "fatal_if_absent": true},
+    {"role": "U.S.-person (ideally cleared) integration engineer with VMF/USMTF/JREAP/Link 16 message experience", "why": "Handles the export-controlled interface work the non-U.S.-person founder cannot touch", "fatal_if_absent": true},
+    {"role": "Airspace/ADAM-BAE subject matter expert (TAIS, ACO/ACM)", "why": "Airspace coordination measures are the second high-safety translation thread", "fatal_if_absent": false},
+    {"role": "Government-contracts and export-control counsel", "why": "SBIR eligibility, ITAR/EAR handling of ICDs, FOCI structuring for a mixed-nationality founding team", "fatal_if_absent": true},
+    {"role": "DevSecOps/ATO engineer (Open DAGIR, IL5, NGC2 security assessment)", "why": "Third-party apps in NGC2 were audited and found deficient in 2025; accreditation is the gate to any real deployment", "fatal_if_absent": false}
+  ],
+  "regulatory_burden": {
+    "level": "high",
+    "explanation": "The product's value depends on CUI/export-controlled interface specifications for fires and air-defense C2 (VMF/USMTF ICDs, AFATDS/TAIS/IBCS-M APIs) and on realistic data that is CUI or classified; fires automation triggers safety-authority review; deployment requires NGC2 security assessment or Open DAGIR/IL5 onboarding; ITAR 'specially designed' analysis is needed once the software is built for USML-controlled fire-control/air-defense systems (describe, do not conclude - counsel required).",
+    "non_us_person_founder_note": "The Indonesian founder (not a U.S. person) cannot receive export-controlled technical data or CUI marked export-controlled without a license/TAA, would be walled off from the core integration work, counts against the SBIR >50% U.S.-ownership test, and is a 'foreign interest' for any facility clearance under 32 CFR 117.11; the German founder is treated as a U.S. person under ITAR only after lawful permanent residency (22 CFR 120.62) but remains a foreign interest for FOCI purposes. Company structure, role separation and a technology control plan need counsel before sponsor engagement."
+  },
+  "classification_dependence": "eventually",
+  "dual_use_potential": {
+    "level": "low",
+    "explanation": "The doctrinal semantics (FSCMs, ACMs, VMF/USMTF, target packets) have no commercial analogue; the generic pieces (provenance ledgers, schema translation, LLM product generation) are commoditized in the enterprise market. Only the allied-military market (FMN/STANAG-native translation for NATO land forces, where the German founder has access) is a second market, and it is military, not commercial."
+  },
+  "defensibility": {
+    "what_becomes_proprietary": ["integrations", "workflow", "accreditation", "government relationships", "data"],
+    "explanation": "Defensibility would come from validated, accredited transformation rules per mission thread and from being the registered service inside the NGC2/Open DAGIR baselines that units have trained on; none of this is protected by IP, all of it is contestable by the baseline holders, and government-purpose data rights on OTA-funded adapters limit lock-in. Weak."
+  },
+  "why_now": "(1) Legacy Army PoRs exposed documented APIs for the first time in May 2026 (Operation Jailbreak, >70 capabilities, ~80 vendors) with an API marketplace and Jailbreak 1.5 planned; (2) the Army set a common NGC2 data baseline in June 2026 and plans reuse of apps across 11 divisions and 4 corps by FY2032; (3) OSD's April 2026 MSS directive defines a single API target for intel products; (4) AXS re-architects fires C2 as microservices and demonstrated live fire in 2026; (5) LLM-based structured-product generation with citations became credible in 2025-2026. Together these make provenance-tracked translation technically possible and procurable for the first time - but they benefit incumbents at least as much as newcomers.",
+  "killer_risk": "The seam is already assigned and funded: Anduril/Palantir/Raft own the NGC2 transformation layer, Onebrief owns the plan, Palantir owns MSS, Leidos/AXS vendors own the fires interface, and the Army's own Jailbreak program is doing the API plumbing - so a two-student startup with one non-U.S.-person founder, no clearances and no access to export-controlled ICDs would be building a feature the baseline holders can ship first, for a customer who has just consolidated onto their platforms.",
+  "market_stage": "Transitioning",
+  "procurement_signal_timeline": [
+    {"year": "2016", "event": "Joint Staff PB2017 J-book reports 12 digitally-aided fire support interoperability discrepancies at Bold Quest (problem formally measured)", "source_url": ""},
+    {"year": "2021", "event": "GAO-21-99 finds digitally-aided CAS / friendly-force tracking guidance gaps", "source_url": "https://www.gao.gov/products/gao-21-99"},
+    {"year": "2024", "event": "Maven Smart System $480M award; Scarlet Dragon/CSET quantify manual targeting baseline; Open DAGIR launched", "source_url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/"},
+    {"year": "2025", "event": "GAO-25-106454 (Apr); NGC2 prototype OTAs to Team Anduril $99.6M (Jul) and Lockheed $26M (Sep); MSS ceiling to ~$1.3B (May); Palantir Army enterprise agreement (Jul/Aug); NGC2 third-party app security memo (Sep)", "source_url": "https://www.gao.gov/products/gao-25-106454"},
+    {"year": "2026-01", "event": "DIU transitions Vannevar Labs analyst-workflow product to production", "source_url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/"},
+    {"year": "2026-03", "event": "MSS designated program of record; Raft/Lockheed Lightning Surge 2 claims automated call-for-fire", "source_url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html"},
+    {"year": "2026-04", "event": "OSD sets aggressive timeline for components to transition tools onto MSS; FY27 PB requests >$2B for MSS/JFN", "source_url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/"},
+    {"year": "2026-05", "event": "Operation Jailbreak exposes APIs across >70 Army capabilities; C5ISR M777 fires over 5G to bridge legacy platforms", "source_url": "https://www.army.mil/article/292898/army_advances_historic_first_right_to_integrate_hackathon_accelerating_data_sharing_on_the_battlefield"},
+    {"year": "2026-06", "event": "Army sets NGC2 common data baseline (Anduril with Palantir and Raft)", "source_url": "https://www.army.mil/article/293409"},
+    {"year": "2026-07", "event": "AIDP Call for Solutions requires bi-directional exchange with MSS", "source_url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/"},
+    {"year": "2026-08", "event": "GAO-26-108019: Army has no unit-by-year NGC2 schedule or life-cycle cost estimate", "source_url": "https://www.gao.gov/products/gao-26-108019"},
+    {"year": "2026-09", "event": "Onebrief Army enterprise IDIQ ($20M ceiling); TITAN production orders $192M", "source_url": "https://www.businesswire.com/news/home/20260917440642/en/"}
+  ],
+  "allied_extension": "Somewhat more compelling, for a different reason: allied land forces run on FMN Spiral 4/5, MIP/JC3IEDM, ADatP-3 and STANAG 4677, which are published or obtainable standards, and NATO DEMETER (Systematic SitaWare) plus MSS NATO create the same plan-to-execution and intel-to-product seams with less classification friction and a German founder who can access national and NATO DIANA channels. Balikatan 2026 shows coalition COP releasability is still hand-tagged, which is exactly the provenance/releasability feature. But the allied 'interoperability layer' slot is held by Systematic and Palantir, CWIX/Bold Quest are the proving grounds (cheap to enter, slow to monetize), and an EU-only instrument may be constrained by third-country control with an Indonesian co-founder. Net: allied market improves access and reduces classification dependence but does not change the feature-not-company verdict.",
+  "search_log": [
+    {"query": "\"Swivel-Chair War\" Military Intelligence Professional Bulletin 2026 disconnected systems analysts", "useful": false},
+    {"query": "Army \"Operation Jailbreak\" \"Right to Integrate\" APIs AFATDS IBCS-M Fort Carson May 2026", "useful": false},
+    {"query": "Onebrief NGC2 AFATDS integration \"fire support\" plan push execution systems 2026", "useful": false},
+    {"query": "Army \"Artillery Execution Suite\" AXS AFATDS 7.0 live fire 2026 PM Mission Command fires C2", "useful": false},
+    {"query": "Maven Smart System AFATDS target nomination integration \"Joint Fires Network\" digital fires 2025 OR 2026", "useful": false},
+    {"query": "WebFetch https://www.redhat.com/en/blog/inside-operation-jailbreak-red-hats-participation-us-armys-open-integration-sprint (EGRESS_BLOCKED)", "useful": false}
+  ],
+  "sources": [
+    {"url": "https://www.lineofdeparture.army.mil/Journals/Military-Intelligence/Military-Intelligence-Archive/2026-January-June/The-Swivel-Chair-War/", "title": "The Swivel-Chair War (MIPB)", "pub_date": "2026", "tier": 1},
+    {"url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/", "title": "Building the Tech Coalition (CSET)", "pub_date": "2024-08", "tier": 2},
+    {"url": "https://www.army.mil/article/292898/army_advances_historic_first_right_to_integrate_hackathon_accelerating_data_sharing_on_the_battlefield", "title": "Army advances historic first Right to Integrate hackathon", "pub_date": "2026-05", "tier": 1},
+    {"url": "https://www.redhat.com/en/blog/inside-operation-jailbreak-red-hats-participation-us-armys-open-integration-sprint", "title": "Inside Operation Jailbreak (Red Hat blog)", "pub_date": "2026-08-06", "tier": 4},
+    {"url": "https://www.gao.gov/products/gao-21-99", "title": "GAO-21-99", "pub_date": "2021-01-21", "tier": 1},
+    {"url": "https://www.gao.gov/products/gao-25-106454", "title": "GAO-25-106454 Defense Command and Control", "pub_date": "2025-04-08", "tier": 1},
+    {"url": "https://www.gao.gov/products/gao-26-108019", "title": "GAO-26-108019 Army NGC2", "pub_date": "2026-08-20", "tier": 1},
+    {"url": "https://intelligencecommunitynews.com/army-issues-aidp-solutions-call/", "title": "Army issues AIDP solutions call", "pub_date": "2026-07-24", "tier": 2},
+    {"url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture", "title": "Balikatan 2026 debuts groundbreaking common operating picture", "pub_date": "2026-05", "tier": 1},
+    {"url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html", "title": "Raft validates the future of command and control at Lightning Surge", "pub_date": "2026-03-11", "tier": 4},
+    {"url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/", "title": "DIU awards Vannevar Labs production contract", "pub_date": "2026-01", "tier": 2},
+    {"url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2", "title": "Technical firsts in INDOPACOM prove viability of Army 5G for NGC2", "pub_date": "2026-05-22", "tier": 1},
+    {"url": "https://www.army.mil/article/293409", "title": "Army and industry align on common data baseline as NGC2 moves from prototyping to delivery", "pub_date": "2026-06", "tier": 1},
+    {"url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/", "title": "Pentagon sets aggressive timeline for MSS transition", "pub_date": "2026-04-15", "tier": 2},
+    {"url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/", "title": "FY27 budget: >$2B for MSS and Joint Fires Network", "pub_date": "2026-05-28", "tier": 2},
+    {"url": "https://www.businesswire.com/news/home/20260917440642/en/", "title": "Onebrief awarded enterprise contract by Army Contracting Command", "pub_date": "2026-09-17", "tier": 4},
+    {"url": "https://breakingdefense.com/2025/07/army-awards-team-anduril-nearly-100m-to-lead-ngc2-prototype-for-4th-infantry-division/", "title": "Army awards Team Anduril nearly $100M to lead NGC2 prototype", "pub_date": "2025-07", "tier": 2},
+    {"url": "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts", "title": "Army announces additional NGC2 award (Lockheed, 25th ID)", "pub_date": "2025-09-02", "tier": 1},
+    {"url": "https://www.army.mil/article/286967", "title": "AFATDS 7.0 / Artillery Execution Suite (army.mil)", "pub_date": "2025", "tier": 1},
+    {"url": "https://finance.yahoo.com/news/anduril-palantir-battlefield-communication-system-223314840.html", "title": "Army CTO memo on NGC2 third-party app security (Reuters via Yahoo)", "pub_date": "2025-10-03", "tier": 2},
+    {"url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702", "title": "13 CFR 121.702 SBIR ownership and control", "pub_date": "current", "tier": 1},
+    {"url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62", "title": "22 CFR 120.62 U.S. person (ITAR)", "pub_date": "current", "tier": 1},
+    {"url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11", "title": "32 CFR 117.11 FOCI", "pub_date": "current", "tier": 1},
+    {"url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026", "title": "NATO confirms SitaWare HQ (DEMETER) FOC by March 2026", "pub_date": "2025", "tier": 2}
+  ]
+}

@@ -1,0 +1,562 @@
+{
+ "id": "G27",
+ "title": "Low-to-high software and model promotion with reusable accreditation, low-SWaP software-defined cross-domain at the edge, and bridging BICES intelligence to MPE mission-command networks",
+ "problem": "Moving containerized applications, ML models and intelligence products across classification and coalition boundaries (unclassified factories to Secret/TS, tactical guards for voice/video/ML outputs, BICES to MPE) depends on approved media, NCDSMO-baselined guards and per-program re-accreditation, so every classified update or cross-enclave product is slow, manual and program-specific.",
+ "categories": [
+  "A",
+  "D",
+  "E",
+  "F",
+  "H",
+  "J"
+ ],
+ "segment_ids": [
+  "S08",
+  "S09",
+  "S10"
+ ],
+ "chain_steps": [
+  "TRANSPORT",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "enterprise software factory (AFLCMC/Platform One, service factories)",
+  "program office / ISSM on SIPR-JWICS enclaves",
+  "tactical CDS operator (platform, expeditionary targeting cell)",
+  "coalition intelligence cell (G2/J2, US BICES, MPE)"
+ ],
+ "user": {
+  "exact_role": "Software-factory release engineer / ISSM promoting builds to a classified enclave; tactical CDS operator or platform program office needing a new data-type filter; multinational intelligence analyst (G2/J2) re-posting BICES products onto MPE mission-command tools",
+  "echelon": "Enterprise (AFLCMC, DISA, SAF/CDM) down to division/corps G2 and platform-level tactical CDS",
+  "organization_examples": [
+   "Platform One / Iron Bank (AFLCMC/HNCK)",
+   "DISA Cross Domain Enterprise Service (CDES) and MPE/CIE portfolio",
+   "SAF Concepts Development and Management (US BICES / BICES-X)",
+   "AFRL Rome (Minerva cross-domain software)",
+   "NSWC Crane / PEO IWS (Tactical Edge Nodes)",
+   "Army corps/division G2 in WFX 24-03 (MIPB case)"
+  ]
+ },
+ "current_workflow": [
+  "Build and harden on the low side (Iron Bank / Platform One / service factory).",
+  "Package (e.g., Zarf bundle) and either burn to approved media or submit through an NCDSMO-listed CDS with content inspection.",
+  "Manually import on the high side, re-scan, re-run STIG/compliance checks, re-register images in a high-side registry.",
+  "Update the classified ATO/eMASS package for the enclave; repeat for every release.",
+  "For a new tactical data type (voice, video, FMV, ML output): program requests a filter from the CDS vendor, vendor develops, NSA/NCDSMO assesses, filter fields later via sole-source IDIQ modification.",
+  "For coalition intelligence: analyst views BICES separately, then re-creates or re-marks relevant products on the MPE (REL NATO) network using a different tool."
+ ],
+ "current_solution": "Platform One / Iron Bank replicated to Secret (2023) with TS planned; Second Front Game Warden and Palantir PFCS Forward / FedStart for classified hosting; hyperscaler Secret/TS regions under JWCC; Zarf / UDS (Defense Unicorns) for air-gap packaging; NCDSMO-listed guards from Everfox, Owl (V2CDS, XD Vision, CDFMV), GDMS (TACDS, BICES TNE CDS), Northrop, Lockheed (Radiant Mercury); PMAT Tactical Edge Nodes; DISA CDES; for BICES-MPE, no automated bridge - human re-posting and LNOs.",
+ "failure": "Every hop is a human-mediated transfer with duplicated scanning and re-accreditation; new cross-domain data types wait on vendor filter development and NSA lab assessment delivered through sole-source vehicles; BICES and MPE are separately governed and accredited (NATO BICES Group Executive vs DISA), so intelligence never reaches mission-command tools automatically.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "NSA NCDSMO 'Raise the Bar' (first published 2018; RTB baseline v4.1 dated 2022-07-11) applies to all CDS protecting classified information; NIST SP 800-53 AC-4(20) requires use of solutions on the NCDSMO baseline list, i.e., only listed CDS may be used - a structural gate for any new entrant.",
+   "source_title": "NSA Cross Domain Solutions resource page; CSF Tools AC-4(20); NIST CSRC glossary 'cross domain baseline list'",
+   "source_url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/",
+   "pub_date": "2022-07-11 (RTB v4.1); page captured 2026-09-14",
+   "event_date": "2018-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "AFRL Rome awarded Owl Cyber Defense a sole-source SBIR Phase III IDIQ (FA8750-25-D-B003) with a $150M ceiling for Voice and Video CDS, XD Vision and Cross Domain FMV; only $10K obligated at award (DoD announcement 2025-07-29; company release 2025-08-05). Ceiling is not revenue.",
+   "source_title": "DoD Contracts announcement; Owl press release",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "pub_date": "2025-07-29",
+   "event_date": "2025-07-29",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "GDMS holds a sole-source IDIQ FA7146-24-D-0001 ($239.3M ceiling) for the US BICES trusted network environment cross-domain solution, with a $39.97M development task order and $25.7M obligated at award (Mar 2024) - the BICES boundary is already contracted to a listed incumbent.",
+   "source_title": "DoD Contracts announcement (S10 segment file)",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/",
+   "pub_date": "2024-03-01",
+   "event_date": "2024-03-01",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "MIPB (2025): BICES 'does not communicate with mission command systems'; with MPE now accredited for NATO Secret intelligence, 'bridging the MPE and BICES networks is critical'; in WFX 24-03 collateral-Secret intelligence had to be regenerated on the lower MPE enclave with REL NATO markings using a different tool.",
+   "source_title": "Multinational Intelligence Sharing and Interoperability (MIPB, Continuous Transformation 2025 issue; also Line of Departure PDF)",
+   "source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "pub_date": "2025",
+   "event_date": "2024 (WFX 24-03)",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-25-106454 (Apr 2025): officials cited an inability to readily share classified information with allies and mission partners integral to CJADC2; overly restrictive classification is a 'significant hindrance' and no DoD entity owns the fix.",
+   "source_title": "GAO-25-106454",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2024-2025",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Platform One moved Iron Bank to the Secret level in 2023 and targeted TS by end FY2024 but declined to confirm TS status as of Feb 2025 - the government's own answer to low-to-high promotion is to replicate the factory on the high side rather than automate promotion.",
+   "source_title": "GovCIO Media: Air Force's Software Factory is Moving Iron Bank to Classified Levels; AFCEA Signal: Platform One Goes Secret",
+   "source_url": "https://govciomedia.com/air-forces-software-factory-is-moving-iron-bank-to-classified-levels-2/",
+   "pub_date": "2025-02 (GovCIO); AFCEA date not captured",
+   "event_date": "2023-2025",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Defense Unicorns (Zarf/UDS, air-gap delivery incl. one-way low-to-high transfer) raised a $136M Series B led by Bain Capital (Jan 2026) and claims a $300M DoD-wide contract for classified/air-gap software and GenAI delivery (company claim; ceiling not revenue) - the venture-backed version of this gap is already funded and is a cleared, U.S. company.",
+   "source_title": "SiliconANGLE: Defense Unicorns bags $136 million; Defense Unicorns company pages",
+   "source_url": "https://siliconangle.com/2026/01/13/defense-unicorns-bags-136-million-funding-deliver-secure-military-software-updates/",
+   "pub_date": "2026-01-13",
+   "event_date": "2026-01",
+   "tier": 2,
+   "label": "FACT (funding) / HYPOTHESIS (contract value as revenue)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "PMAT received an $89M-ceiling follow-on production OT (N0016426DJW79) for Tactical Edge Nodes including cross-domain solutions, with $23,245 obligated at award (Nov 2025) - prototype-to-production exists but for a cleared incumbent; ceiling is not revenue.",
+   "source_title": "DoD Contracts announcement",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+   "pub_date": "2025-11",
+   "event_date": "2025-11",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "TACDS v3.0 filter industry day (Navy/Marine NEWT via IWRP, Dec 2025) indicates continuing demand for new tactical cross-domain filters; follow-on unknown.",
+   "source_title": "sam.gov TACDS 3.0 industry day notice (primary page blocked from this environment)",
+   "source_url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view",
+   "pub_date": "2025-12",
+   "event_date": "2025-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "DISA FY27 O&M justification funds Thunderdome zero-trust access to the Secret fabric and a Coalition Information Environment hybrid-cloud MPE for C2 at Secret-and-below; DISA unveiled the CIE-centred MPE strategy at TechNet Cyber 2026, is testing in INDOPACOM (Olympus Fires) and says the MPE stays network-centric until about 2027; US BICES-X is to be part of the new MPE.",
+   "source_title": "DISA FY2027 O&M Vol 1 Part 1; DefenseScoop 2026-06-03; Federal News Network 2026-08-13; ExecutiveGov",
+   "source_url": "https://defensescoop.com/2026/06/03/disa-testing-mission-partner-environment-capabilities-indo-pacific/",
+   "pub_date": "2026-06-03 (DefenseScoop); 2026-04 (budget); 2026-08-13 (FNN)",
+   "event_date": "2026-2027",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD CIO 'State of DevSecOps' (Mar 2025): authorizing officials are 'biased to caution', reciprocity is lacking or unclear, 50+ software factories duplicate platforms - the accreditation-reuse half of this gap is institutional, not technical.",
+   "source_title": "DoD CIO State of DevSecOps 2025 (mirror)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DevSecOpsStateOf.pdf",
+   "pub_date": "2025-03",
+   "event_date": "2024-2025",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Balikatan 2026 eight-nation COP took 'more than eight years' of integration and still depends on JICOs and foreign-disclosure officers hand-tagging data for cross-domain solutions.",
+   "source_title": "DVIDS: Balikatan 2026 debuts groundbreaking common operating picture",
+   "source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "pub_date": "2026-05 (approx.)",
+   "event_date": "2026-05",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  }
+ ],
+ "why_existing_startups_havent_solved": "The core product (a guard or promotion path that moves data across classification boundaries) must pass NSA/NCDSMO lab assessment against Raise the Bar and be baseline-listed before any DoD site may use it (AC-4(20)); that takes years, cleared U.S.-citizen staff, a facility clearance and a sponsoring program, and the resulting market is small (DISA CDES procurement lines historically ~$1-2M/yr) and served through sole-source IDIQs (Owl, GDMS, Everfox, Lockheed, Northrop). The venture-scale adjacent slot (air-gap packaging and classified hosting) is already held by cleared U.S. firms - Defense Unicorns ($136M Series B, Jan 2026), Second Front, Palantir - and by government-owned Platform One. The BICES-MPE bridge is an inter-governmental (NATO BGX vs DISA) accreditation and policy decision, not a product gap. Startups have not solved it because the parts that are solvable by software are commoditised or government-owned, and the parts that are not are legally gated.",
+ "why_not_solved_reasons": [
+  "certification",
+  "classification",
+  "proprietary incumbent architecture",
+  "economics",
+  "insufficient commercial market",
+  "integration complexity",
+  "procurement fragmentation"
+ ],
+ "technical_wedge": "No credible standalone wedge for this team. The only defensible adjacencies are (a) low-side 'promotion-ready' packaging and attestation content (SBOM, OSCAL evidence, signed Zarf/OCI bundles with policy metadata) that a high-side operator or CDS filter consumes, and (b) authoring filter/data-format descriptions (e.g., DFDL schemas, ACP-240/ZTDF tagging profiles) as a subcontractor to a listed CDS vendor. Both are content or services, not a product with pricing power, and both are already served by open source (Zarf, UDS, Lula, OpenTDF) or by the vendors themselves.",
+ "mvp": {
+  "what": "An unclassified reference pipeline that emits signed, policy-annotated container/model bundles with machine-readable evidence (SBOM, STIG results, OSCAL component definitions) and a simulated one-way transfer to a mock 'high side' registry that verifies provenance and re-imports without human re-scan.",
+  "demonstrable_in_3_6_months": "Yes as a demo; it proves nothing that a CDS buyer or AO needs, because acceptance depends on an NCDSMO-listed guard and an AO's risk decision, neither of which the MVP can exercise.",
+  "what_it_must_prove": "That a high-side operator would accept low-side evidence in lieu of re-scanning (a policy decision, not a technical one) and that a listed CDS vendor would adopt the bundle format as a filter target - both require access the team does not have.",
+  "uses": [
+   "commercial hardware",
+   "unclassified architecture",
+   "open standards",
+   "commercial compute",
+   "simulated military data"
+  ]
+ },
+ "data_requirement": {
+  "what": "Real CDS filter specifications (on Intelink/NCDSMO, classified or CUI), enclave ATO packages, actual BICES/MPE product formats and releasability rules.",
+  "legally_realistically_obtainable": "No for the core: NCDSMO requirements and vendor SDKs are not public and access requires clearance and sponsorship; public STIG, OSCAL, DFDL, ACP-240 and OpenTDF material is obtainable for the adjacency only.",
+  "sources": [
+   "NIST SP 800-53 AC-4(20) and OSCAL (public)",
+   "DISA STIGs and Iron Bank public images (public)",
+   "Open DFDL schemas and Apache Daffodil (public, Owl-authored)",
+   "OpenTDF / ZTDF specifications (public)",
+   "NCDSMO RTB requirements (Intelink, gated)",
+   "CDS vendor filter SDKs (gated, NDA/clearance)"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "NCDSMO-listed guards (Everfox, Owl V2CDS/XD Vision, GDMS TACDS, Radiant Mercury)",
+   "Platform One Iron Bank / Big Bang (low and Secret instances)",
+   "High-side registries and classified eMASS instances",
+   "US BICES / BICES-X TNE CDS (GDMS)",
+   "DISA MPE / CIE, Thunderdome Secret fabric",
+   "Zarf / UDS bundles"
+  ],
+  "interfaces_protocols": [
+   "OCI registries and Zarf packages",
+   "OSCAL, SBOM (SPDX/CycloneDX)",
+   "DFDL filter schemas",
+   "ACP-240 / ZTDF data tagging",
+   "CDS transfer APIs (vendor-proprietary)"
+  ],
+  "who_controls_the_interface": "NSA/NCDSMO (assessment gate), the CDS vendors (proprietary filter SDKs), AFLCMC/HNCK for Platform One, DISA for CDES/MPE, SAF/CDM and NATO BGX for BICES - none controlled by a startup."
+ },
+ "customer": {
+  "user": "Release engineers/ISSMs on classified enclaves; tactical CDS operators; G2/J2 multinational intelligence analysts",
+  "champion": "Software-factory leads (Platform One, service factories) and CDS program engineers frustrated by re-scan cycles; J2/G2 interoperability officers",
+  "contract_signer": "AFLCMC/HNCK (Platform One), AFRL Rome (Minerva CDS), SAF/CDM (US BICES), DISA (CDES/MPE), NSWC Crane (Tactical Edge Nodes)",
+  "requirement_owner": "NSA NCDSMO for CDS standards; DoD CIO for cATO/reciprocity; Joint Staff J6 and DISA for MPE; NATO BICES Group Executive for BICES",
+  "program_office": "DISA CDES and MPE/CIE portfolio; AFLCMC/HNCK; AFRL Rome; SAF/CDM; PEO IWS/NSWC Crane",
+  "contracting_office": "AFRL/RIK (Rome), AFLCMC, DISA/DITCO, NSWC Crane, IWRP consortium"
+ },
+ "budget": {
+  "program_or_line": "DISA CDES (small procurement lines); AFRL Minerva CDS IDIQ (Owl, $150M ceiling); US BICES TNE CDS IDIQ (GDMS, $239.3M ceiling); DISA FY27 O&M Thunderdome Secret fabric and Coalition Information Environment; Joint Staff J6 RDT&E for coalition data-centric security assessments",
+  "evidence": "Ceilings are large but obligations at award were small ($10K Owl; $25.7M GDMS TO; $23K PMAT); CDES procurement historically ~$1-2M/yr; MPE/CIE is funded FY27 O&M but delivered through incumbent services contracts (Trace MPE-S). No line funds a startup product for low-to-high promotion; that is absorbed by Platform One and factory budgets.",
+  "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+  "confidence": "MEDIUM"
+ },
+ "entry_vehicle": {
+  "primary": "None for the core; only subcontract/filter-content work for a listed CDS vendor or an integrator, or open-source contributions to Zarf/UDS/OpenTDF as credibility-building.",
+  "sequence": [
+   "Contribute to open-source air-gap/tagging tooling (Zarf, OpenTDF) to build reputation",
+   "Subcontract DFDL/ACP-240 filter content to a listed CDS vendor (requires NDA, likely U.S.-person staff)",
+   "Only with cleared U.S. leadership and FCL: SBIR Phase III or OT with an existing sponsor - not realistic for this team"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% ownership by U.S. citizens or permanent residents (13 CFR 121.702); the Indonesian founder's shares never count and the German founder's only after the green card issues. CDS work is export-controlled (NSA RTB covers all CDS sold for export) and classified-dependent; personnel clearances require U.S. citizenship (E07-F21), so neither founder can work on the product's core. FOCI (32 CFR 117.11) treats any non-citizen owner as a foreign interest; a facility clearance would need cleared U.S.-citizen key management and FOCI mitigation. All of this needs export-control and security counsel; no legal judgment is made here."
+ },
+ "competition": [
+  {
+   "company": "Owl Cyber Defense",
+   "how_close": "Owns the listed voice/video/FMV guards and the AFRL Phase III IDIQ; authors DFDL",
+   "evidence": "$150M-ceiling IDIQ (Jul/Aug 2025); NCDSMO listings for V2CDS (2022) and XD Vision (May 2025)"
+  },
+  {
+   "company": "General Dynamics Mission Systems",
+   "how_close": "Holds TACDS and the US BICES TNE CDS sole-source IDIQ",
+   "evidence": "FA7146-24-D-0001, $239.3M ceiling (Mar 2024); TACDS 3.0 filter industry day (Dec 2025)"
+  },
+  {
+   "company": "Everfox (ex-Forcepoint Federal)",
+   "how_close": "Enterprise and coalition guards, hardware isolation",
+   "evidence": "Company record B10; vendor-sponsored 2026 survey on manual data movement (marketing, not proof)"
+  },
+  {
+   "company": "Defense Unicorns",
+   "how_close": "Direct: air-gap and one-way low-to-high delivery (Zarf/UDS), classified GenAI delivery",
+   "evidence": "$136M Series B (Jan 2026); claimed $300M DoD-wide contract (company claim)"
+  },
+  {
+   "company": "Second Front Systems / Palantir (PFCS Forward, FedStart)",
+   "how_close": "Classified hosting and accredited deployment paths (IL5/IL6)",
+   "evidence": "S09 segment file; PFCS Forward IL6 on-prem/edge (Feb 2026)"
+  },
+  {
+   "company": "Platform One (government)",
+   "how_close": "Direct: Iron Bank replicated to Secret (2023), TS planned",
+   "evidence": "GovCIO Media (Feb 2025)"
+  },
+  {
+   "company": "PMAT, Trace Systems, GDIT, Lockheed (Radiant Mercury), Northrop",
+   "how_close": "Program-embedded CDS and MPE services incumbents",
+   "evidence": "PMAT $89M production OT (Nov 2025); Trace MPE-S $998M ceiling (2019)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "They largely already have it or are inside the moat: Palantir runs PFCS Forward/FedStart at IL6; L3Harris and GDMS/Lockheed/Northrop hold listed guards; Defense Unicorns and Second Front own the air-gap and hosting slots; Platform One is government-owned and free to programs. Anduril would partner with a listed CDS vendor rather than build one.",
+  "why_startup_still_wins_or_reject": "REJECT. There is no unlisted, unclassified surface where a startup can accumulate an advantage; any progress a startup made in filter content or packaging would be absorbed by the listed vendor that owns the interface and the sole-source vehicle."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$50k-$150k for an unclassified packaging/attestation demo (does not de-risk the core)",
+  "credible_military_demo_usd": "$3M-$8M: cleared U.S. engineering team, FCL sponsorship, NSA assessment preparation and a sponsoring program - several years",
+  "first_production_deployment_usd": "$15M-$40M plus 3-5 years to reach NCDSMO listing and a first program insertion (INFERENCE from the Owl SBIR II-to-Phase III and PMAT prototype-to-production timelines)",
+  "assumptions": "Assumes assessment timelines of 2-4 years per RTB product, cleared staff at $250k-$350k fully loaded, and that a program sponsor exists; numbers are order-of-magnitude estimates, LOW confidence."
+ },
+ "expertise_required": [
+  {
+   "role": "Cleared U.S.-citizen CDS/high-assurance engineer with prior NCDSMO assessment experience",
+   "why": "Only such a person can read the requirements, build to them and interact with the assessors",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Facility Security Officer and cleared key management personnel (FCL)",
+   "why": "Without an FCL the company cannot hold classified requirements or test in classified enclaves",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Former ISSM/AO staff (RMF, cATO, reciprocity)",
+   "why": "Accreditation reuse is an institutional negotiation, not code",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Coalition data-centric security specialist (ACP-240, ZTDF, releasability rules)",
+   "why": "BICES/MPE bridging is governed by releasability policy",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Export-control and FOCI counsel",
+   "why": "CDS products are export-controlled and the cap table includes foreign persons",
+   "fatal_if_absent": true
+  }
+ ],
+ "regulatory_burden": {
+  "level": "high",
+  "explanation": "NSA/NCDSMO lab assessment and baseline listing (AC-4(20)); NIAP/CSfC where applicable; classified enclave ATOs; ITAR/EAR treatment of CDS (RTB explicitly covers CDS sold for export); FOCI under 32 CFR 117.11 and DoDI 5205.87; personnel clearances requiring U.S. citizenship. Every element is a hard gate, not a compliance cost.",
+  "non_us_person_founder_note": "The non-U.S.-person co-founder could not access CDS technical data, filter SDKs or classified requirements; the German founder is not clearance-eligible until citizenship. A permanent-resident owner is still a 'foreign interest' for FOCI. Product-core work would have to be done entirely by cleared U.S.-citizen hires the founders cannot supervise on technical substance. Needs export-control and security counsel; no legal judgment is made here."
+ },
+ "classification_dependence": "immediate",
+ "dual_use_potential": {
+  "level": "low",
+  "explanation": "Cross-domain guards and classified promotion have no meaningful commercial market; the nearest analogues (OT data diodes, regulated-industry air-gap delivery) are small and already served by Owl, Waterfall and cloud vendors. Air-gap packaging tooling is open source (Zarf)."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "accreditation",
+   "government relationships",
+   "integrations",
+   "deployment footprint"
+  ],
+  "explanation": "For whoever holds it, an NCDSMO listing plus program-embedded deployments is one of the strongest moats in defense IT (sole-source IDIQs, decade-long sustainment). For this team the moat is unreachable, so defensibility scores well as a property of the gap and zero as a property of the founders."
+ },
+ "why_now": "2022 cATO memo, 2025 CSRMC tenets (reciprocity, inheritance, automation), Platform One's Secret expansion (2023-2025), DISA's data-centric MPE/CIE strategy (2026) and MPE accreditation for NATO Secret intelligence (2024-2025) all make automated promotion and coalition bridging conceivable; Defense Unicorns' $136M raise (Jan 2026) shows investors agree - but every 'why now' factor benefits cleared incumbents and government-owned platforms rather than a new, non-cleared entrant.",
+ "killer_risk": "The founding team cannot legally or practically work on the product's core: NCDSMO listing, classified enclave access, export-control on CDS and U.S.-citizenship clearance rules exclude both founders, and the parts that remain unclassified (packaging, tagging content) are open source or owned by the listed vendor that controls the interface and the sole-source vehicle.",
+ "market_stage": "Transitioning",
+ "procurement_signal_timeline": [
+  {
+   "year": "2018",
+   "event": "NSA NCDSMO publishes Raise the Bar (policy gate)",
+   "source_url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/"
+  },
+  {
+   "year": "2019",
+   "event": "DISA awards Trace Systems MPE-S single-award IDIQ ($998M ceiling)",
+   "source_url": "https://www.prnewswire.com/news-releases/trace-systems-wins-mpe-s-contract-with-ceiling-value-of-998-million-300939991.html"
+  },
+  {
+   "year": "2022",
+   "event": "DoD CIO cATO memo (Feb); RTB baseline v4.1 (Jul); Owl V2CDS NCDSMO listing (Apr)",
+   "source_url": "https://www.globenewswire.com/news-release/2022/04/12/2421005/0/en/Owl-Cyber-Defense-Announces-NCDSMO-Baseline-Listing-for-New-Version-of-Voice-and-Video-Cross-Domain-Solution-V2CDS.html"
+  },
+  {
+   "year": "2023",
+   "event": "Platform One moves Iron Bank to Secret; Sikorsky TACDS integration mod ($12M)",
+   "source_url": "https://govciomedia.com/air-forces-software-factory-is-moving-iron-bank-to-classified-levels-2/"
+  },
+  {
+   "year": "2024",
+   "event": "GDMS sole-source US BICES TNE CDS IDIQ ($239.3M ceiling, Mar); Lockheed F-35 exportable CDS mod (NTE $107.5M)",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/"
+  },
+  {
+   "year": "2025",
+   "event": "GAO-25-106454 (Apr); Owl XD Vision NCDSMO certification (May); Owl AFRL Phase III IDIQ ($150M ceiling, Jul/Aug); CSRMC tenets (Sep); PMAT production OT ($89M ceiling, Nov); TACDS 3.0 filter industry day (Dec)",
+   "source_url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/"
+  },
+  {
+   "year": "2026",
+   "event": "Defense Unicorns $136M Series B (Jan); DISA CIE-centred MPE strategy unveiled and INDOPACOM testing (Jun); DISA says MPE network-centric until ~2027 (Aug)",
+   "source_url": "https://defensescoop.com/2026/06/03/disa-testing-mission-partner-environment-capabilities-indo-pacific/"
+  }
+ ],
+ "allied_extension": "Marginally: allied CDS markets (UK, Germany, NATO) have their own national accreditation bodies and incumbents (Garrison, Everfox, secunet, Rohde & Schwarz - RECALL, not re-verified this session), and NATO's Rapid Adoption Action Plan (Jun 2025) eases prototype-to-buy for demonstrated software. A German founder could in principle pursue a German-accredited product for Bundeswehr or NATO use, but that is a different company with the same certification economics, and it would not transfer to the U.S. market (RTB also governs CDS sold for export). The BICES-MPE bridge is decided by NATO BGX and DISA, not by vendors.",
+ "search_log": [
+  {
+   "query": "NSA NCDSMO \"Raise the Bar\" cross domain solution baseline list required \"AC-4(20)\"",
+   "useful": true
+  },
+  {
+   "query": "Owl Cyber Defense AFRL Rome \"Phase III\" \"cross domain\" voice video FMV $150,000,000 July 2025",
+   "useful": true
+  },
+  {
+   "query": "MIPB \"multinational intelligence sharing\" BICES \"mission partner environment\" mission command bridge 2025",
+   "useful": true
+  },
+  {
+   "query": "\"Platform One\" Secret level expansion SIPR software factory Iron Bank classified 2024 2025",
+   "useful": true
+  },
+  {
+   "query": "Defense Unicorns Zarf air-gapped \"cross domain\" low-to-high software delivery classified 2025 funding",
+   "useful": true
+  },
+  {
+   "query": "DISA \"Mission Partner Environment\" 2026 BICES data-centric \"Coalition Information Environment\"",
+   "useful": true
+  },
+  {
+   "query": "SBIR topic \"cross domain\" tactical \"low SWaP\" OR \"software-defined\" edge solution Army OR \"Air Force\" OR Navy 2025 2026 (NOT PERFORMED - session search budget exhausted)",
+   "useful": false
+  },
+  {
+   "query": "\"Second Front\" \"Game Warden\" Secret classified IL6 OR \"Palantir\" \"FedStart\" IL6 edge 2026 (NOT PERFORMED - session search budget exhausted)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.nsa.gov/Resources/Cross-Domain-Solutions/",
+   "title": "NSA Cross Domain Solutions / NCDSMO Raise the Bar",
+   "pub_date": "2022-07-11 (RTB v4.1); captured 2026-09-14",
+   "tier": 1
+  },
+  {
+   "url": "https://csf.tools/reference/nist-sp-800-53/r5/ac/ac-4/ac-4-20/",
+   "title": "AC-4(20) Approved Solutions - CSF Tools",
+   "pub_date": "n.d.",
+   "tier": 2
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/4258695/",
+   "title": "DoD Contracts: AFRL sole-source SBIR Phase III IDIQ to Owl Cyber Defense",
+   "pub_date": "2025-07-29",
+   "tier": 1
+  },
+  {
+   "url": "https://owlcyberdefense.com/news/owl-cyber-defense-awarded-150-million-idiq-contract-to-support-air-force-research-laboratory/",
+   "title": "Owl Cyber Defense Awarded $150 Million IDIQ Contract to Support AFRL",
+   "pub_date": "2025-08-05",
+   "tier": 3
+  },
+  {
+   "url": "https://www.globenewswire.com/news-release/2025/05/07/3076220/0/en/Owl-Cyber-Defense-Announces-XD-Vision-has-Achieved-Certification-by-the-U-S-Government-s-National-Cross-Domain-Strategy-and-Management-Office.html",
+   "title": "Owl XD Vision NCDSMO certification",
+   "pub_date": "2025-05-07",
+   "tier": 3
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/3696684/",
+   "title": "DoD Contracts: GDMS US BICES TNE CDS IDIQ",
+   "pub_date": "2024-03-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defense.gov/News/Contracts/Contract/Article/4339288/",
+   "title": "DoD Contracts: PMAT Tactical Edge Nodes follow-on production OT",
+   "pub_date": "2025-11",
+   "tier": 1
+  },
+  {
+   "url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+   "title": "Multinational Intelligence Sharing and Interoperability (MIPB)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.lineofdeparture.army.mil/Portals/144/PDF/Journals/Intelligence/2025/MISI_PDF-UA.pdf",
+   "title": "Multinational Intelligence Sharing and Interoperability by Major Robert Deitz (PDF)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454 CJADC2 data sharing",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://govciomedia.com/air-forces-software-factory-is-moving-iron-bank-to-classified-levels-2/",
+   "title": "Air Force's Software Factory is Moving Iron Bank to Classified Levels",
+   "pub_date": "2025-02",
+   "tier": 2
+  },
+  {
+   "url": "https://www.afcea.org/signal-media/cyber-edge/platform-one-goes-secret",
+   "title": "Platform One Goes Secret (AFCEA Signal)",
+   "pub_date": "not captured",
+   "tier": 2
+  },
+  {
+   "url": "https://siliconangle.com/2026/01/13/defense-unicorns-bags-136-million-funding-deliver-secure-military-software-updates/",
+   "title": "Defense Unicorns bags $136 million in funding",
+   "pub_date": "2026-01-13",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/03/disa-testing-mission-partner-environment-capabilities-indo-pacific/",
+   "title": "DISA testing Mission Partner Environment capabilities in Indo-Pacific",
+   "pub_date": "2026-06-03",
+   "tier": 2
+  },
+  {
+   "url": "https://federalnewsnetwork.com/ask-the-cio/2026/08/disa-starting-small-in-proving-out-mission-partner-environment-capabilities/",
+   "title": "DISA starting small in proving out MPE capabilities",
+   "pub_date": "2026-08-13",
+   "tier": 2
+  },
+  {
+   "url": "https://www.executivegov.com/articles/disa-coalition-info-sharing-mpe-strategy",
+   "title": "DISA to Develop Coalition Data-Sharing Capability Under New MPE Strategy",
+   "pub_date": "2026 (date not captured)",
+   "tier": 2
+  },
+  {
+   "url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view",
+   "title": "TACDS v3.0 filter industry day notice",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DevSecOpsStateOf.pdf",
+   "title": "DoD CIO State of DevSecOps",
+   "pub_date": "2025-03",
+   "tier": 1
+  },
+  {
+   "url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+   "title": "Balikatan 2026 debuts groundbreaking common operating picture",
+   "pub_date": "2026-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "title": "13 CFR 121.702 SBIR/STTR ownership eligibility",
+   "pub_date": "current eCFR",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11",
+   "title": "32 CFR 117.11 FOCI",
+   "pub_date": "current eCFR",
+   "tier": 1
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/trace-systems-wins-mpe-s-contract-with-ceiling-value-of-998-million-300939991.html",
+   "title": "Trace Systems Wins MPE-S Contract With Ceiling Value of $998 Million",
+   "pub_date": "2019-10",
+   "tier": 3
+  }
+ ]
+}

@@ -1,0 +1,496 @@
+{
+ "id": "G26",
+ "title": "ACE dispersed-base sortie-generation logistics C2 under degraded communications (decentralized fuel, munitions, spares and airmen decisions at hub-and-spoke locations)",
+ "problem": "Air Force wings executing Agile Combat Employment (ACE) from hub-and-spoke locations must make fuel, munitions, spares, maintenance and airmen allocation decisions while cut off from centralized, pull-based maintenance and supply systems, and no fielded software encodes those decentralized (conditional-authority) decisions or reconciles them when links return.",
+ "categories": [
+  "C",
+  "D",
+  "G"
+ ],
+ "segment_ids": [
+  "S14"
+ ],
+ "chain_steps": [
+  "COLLECT",
+  "PROCESS",
+  "DECIDE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "wing",
+  "air expeditionary wing / mission generation force element",
+  "spoke (squadron/flight)",
+  "component MAJCOM A4 (PACAF/USAFE/ACC)"
+ ],
+ "user": {
+  "exact_role": "Maintenance Group / Logistics Readiness Squadron leaders and Wing A4 staff (mission generation force element commander, production superintendent, fuels and munitions flight chiefs, multi-capable airmen team leads) at ACE spokes",
+  "echelon": "Wing / spoke (tactical-operational seam)",
+  "organization_examples": [
+   "Pacific Air Forces wings (e.g., 18th Wing Kadena, 35th FW Misawa)",
+   "USAFE-AFAFRICA wings (e.g., 48th FW Lakenheath; 48th MXG cited by LOA on speed of maintenance decisions)",
+   "Air Combat Command 505th Command and Control Wing (Logistics C2 experimentation)",
+   "ACC A4 / CAF LOGTAC participants"
+  ]
+ },
+ "current_workflow": [
+  "Before dispersal: wing plans spokes, pre-positions fuel/munitions/spares kits; status lives in enterprise systems (maintenance information systems such as IMDS/G081-class and supply ILS-S-class, accessed over NIPRNet) - system names RECALL, not re-verified this session",
+  "At the spoke: multi-capable airmen generate sorties; status is tracked on whiteboards, spreadsheets and radio/chat reports when connectivity is intermittent (INFERENCE from LOGTAC and REFORPAC reporting)",
+  "Decisions that exceed local authority (cannibalization, munitions cross-load, fuel rationing, deferring maintenance) are escalated to the hub or MAJCOM via whatever comms exist; 2025 CAF LOGTAC built 'conditional authorities' frameworks so lower echelons can decide without escalation",
+  "When links return, spoke status is manually reconciled into enterprise systems; airlift/resupply requests flow through separate logistics C2 channels (the 505th CCW's 2026 Logistics C2 Hackathon targeted the unit-requirement-to-airlift-execution seam)"
+ ],
+ "current_solution": "Doctrine (AFDN 1-21 ACE) plus tactics development (CAF LOGTAC 2025 conditional authorities), enterprise analytics for maintenance (RSO PANDA/CBM+ toolkit; BLADE - RECALL), government experimentation (505th CCW Logistics C2 Hackathon, June 2026), exercise-driven workarounds during REFORPAC 2025, and now an AFWERX Phase I SBIR to Rune Technologies (July 2026) to adapt its TyrOS logistics C2 platform to ACE. No product of record found at the spoke.",
+ "failure": "The enterprise maintenance/supply stack is centralized and pull-based and assumes connectivity; at a disconnected spoke there is no tool that (a) holds an authoritative local picture of fuel, munitions, spares and airmen, (b) encodes the conditional authorities/decision thresholds developed at LOGTAC, and (c) syncs and reconciles with hub systems when a link returns. Decisions therefore stall on escalation or are made on whiteboards without an audit trail.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "AFDN 1-21 Agile Combat Employment names logistics under attack as a key ACE element and describes a shift from pull-based to push-based, dispersed sustainment.",
+   "source_title": "Air Force Doctrine Note 1-21, Agile Combat Employment (1 Dec 2021; reissued 23 Aug 2022)",
+   "source_url": "https://www.doctrine.af.mil/Portals/61/documents/AFDN_1-21/AFDN%201-21%20ACE.pdf",
+   "pub_date": "2022-08-23",
+   "event_date": "2021-12-01",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "The inaugural Combat Air Forces Logistics Tactical Conference (Nellis AFB, April 2025) stood up a Conditional Authorities working group that developed frameworks for decentralized, risk-informed decision-making in sortie generation under degraded C2; the next LOGTAC is planned for spring 2027 (tactics development, not a procurement).",
+   "source_title": "CAF LOGTAC: Forging Lethal Logistics for the Future Fight (Logistics Officer Association); Inaugural CAF LOGTAC advances combat logistics, readiness (ACC)",
+   "source_url": "https://www.acc.af.mil/News/Article-Display/Article/4169508/inaugural-caf-logtac-advances-combat-logistics-readiness/",
+   "pub_date": "2025",
+   "event_date": "2025-04",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "The DoD Inspector General announced (5 May 2025) an evaluation of the extent to which the Air Force implemented logistics requirements for ACE in the Indo-Pacific (fieldwork at PACAF and ACC). Final report not located this session - Public evidence insufficient on findings.",
+   "source_title": "Project Announcement D2025-DEV0PE-0108.000, Evaluation of the U.S. Air Force's Implementation of Logistics Requirements for ACE in the Indo-Pacific Region",
+   "source_url": "https://media.defense.gov/2025/May/05/2003703742/-1/-1/1/D2025-DEV0PE-0108.000_REDACTED.PDF",
+   "pub_date": "2025-05-05",
+   "event_date": "2025-05",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "AFWERX selected Rune Technologies for a Phase I SBIR to apply its TyrOS platform to AI-enabled logistics command and control for ACE (announced 30 Jul 2026). A Phase I award is a feasibility study, not a deployment; but it shows the Air Force is already funding a venture-backed startup on exactly this gap.",
+   "source_title": "Rune Technologies Selected by U.S. Air Force to Advance AI-Enabled Logistics for Agile Combat Employment (Business Wire)",
+   "source_url": "https://www.businesswire.com/news/home/20260730697969/en/Rune-Technologies-Selected-by-U.S.-Air-Force-to-Advance-AI-Enabled-Logistics-for-Agile-Combat-Employment",
+   "pub_date": "2026-07-30",
+   "event_date": "2026-07",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Rune Technologies closed a $24M Series A (Jul 2025), won a five-year $99M Army IDIQ for TyrOS (Jun 2026; IDIQ ceiling, not revenue), joined USMC Project Dynamis as sole logistics C2 provider (May 2026) and received $4.1M from the Army for 1st Cavalry Division autonomous resupply (Sep 2026) - a well-funded competitor already occupies contested-logistics C2 across three services.",
+   "source_title": "Business Wire / Defense Post coverage of Rune Technologies (2025-2026)",
+   "source_url": "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform",
+   "pub_date": "2026-06-18",
+   "event_date": "2025-07 to 2026-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "REFORPAC (10 Jul - 8 Aug 2025) put roughly 300-400 aircraft across ~25 locations and, per PACAF's commander, forced planners to innovate around ACE logistics and C2 at a scale not previously tried; DLA described it as stress-testing ACE logistics and 'the friction of distribution'.",
+   "source_title": "What PACAF Boss Took Away from REFORPAC Exercise (Air & Space Forces Magazine); Stars and Stripes 2025-07-21; DLA 'REFORPAC 2025 and the friction of distribution'",
+   "source_url": "https://www.airandspaceforces.com/pacaf-boss-schneider-reforpac-exercise-lessons/",
+   "pub_date": "2025-08",
+   "event_date": "2025-07",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "ACC's 505th Command and Control Wing hosted a Logistics C2 Hackathon (reported 4 Jun 2026) to accelerate decision timelines from unit-level logistics requirement generation to tactical airlift execution - government-led experimentation on the same seam (article text not fetched; egress blocked).",
+   "source_title": "Air Force Forges Decision Advantage Through Logistics C2 Hackathon (Soldier Systems Daily)",
+   "source_url": "https://soldiersystems.net/2026/06/04/air-force-forges-decision-advantage-through-logistics-c2-hackathon/",
+   "pub_date": "2026-06-04",
+   "event_date": "2026-05",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "RAND (PAF) modeled how distributed maintenance postures affect PACAF sortie-rate potential under ACE, and separately found airmen are confused about ACE roles and combat-support staffing is short - independent, government-sponsored evidence that dispersed sortie generation is a live analytic and manning problem, not only a software problem.",
+   "source_title": "RAND RRA999-3 Assessing ACE for PACAF: Distributed Maintenance Postures and Sortie Rate Potential; RAND RRA3169-1 Developing Combat Support Mission Ready Airmen for ACE",
+   "source_url": "https://www.rand.org/pubs/research_reports/RRA999-3.html",
+   "pub_date": "date not verified this session (2023-2025 range)",
+   "event_date": "",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Mitchell Institute (Mar 2025) argues logistics while under attack is central to CCA force design; Air University research describes institutional obstacles to flexible logistics and degraded resupply.",
+   "source_title": "Logistics While Under Attack: Key to a CCA Force Design (Mitchell Institute); Flexible Logistics and Degraded Resupply (Air University)",
+   "source_url": "https://www.mitchellaerospacepower.org/app/uploads/2025/03/Logistics-While-Under-Attack-Key-to-a-CCA-Force-Design-WEB.pdf",
+   "pub_date": "2025-03",
+   "event_date": "",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "No discrete DAF budget line for ACE spoke-level logistics C2 software was found; the FY2026 DAF O&M justification exists but was not parsed for an ACE logistics IT line this session. Public evidence insufficient.",
+   "source_title": "Department of the Air Force FY2026 Budget Estimates, O&M Vol I (June 2025)",
+   "source_url": "https://www.saffm.hq.af.mil/Portals/84/documents/FY26/FY26%20Air%20Force%20Operations%20and%20Maintenance%20Vol%20I.pdf",
+   "pub_date": "2025-06",
+   "event_date": "",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Until mid-2026 no startup had a funded Air Force entry point: the pain surfaced in doctrine, RAND studies and exercises, none of which are buyers, and the maintenance/supply data needed to make a spoke tool useful sits in government-controlled legacy systems under a different program office (AFLCMC / RSO) than the tactics owners (ACC A4, PACAF A4). Rune Technologies (Anduril alumni, $24M Series A) has now taken the obvious position via an AFWERX Phase I (July 2026) after first winning Army and USMC vehicles - i.e., the gap was reachable only by a team with existing logistics-C2 product, service relationships and capital, and it is being addressed by exactly such a team (FACT for the awards; INFERENCE for the causal story).",
+ "why_not_solved_reasons": [
+  "procurement fragmentation",
+  "proprietary incumbent architecture",
+  "data inaccessible",
+  "integration complexity",
+  "insufficient commercial market",
+  "buyer fragmentation"
+ ],
+ "technical_wedge": "An offline-first, edge-synchronized 'sortie-generation logistics board' for a spoke: local ledger of fuel, munitions, spares/cann candidates and airmen availability; a rules layer that encodes CAF LOGTAC-style conditional authorities (who may decide what, at which thresholds, with what risk flags); CRDT-style reconciliation to hub systems when links return; and an export of decisions and requests into the airlift/resupply C2 chain. Technically ordinary; the value is in the encoded authorities and the integration, not the software.",
+ "mvp": {
+  "what": "Tablet/laptop app plus small sync service: spoke status ledger, conditional-authority decision aid with audit trail, store-and-forward sync over intermittent links (simulated with network impairment), and a hub dashboard that merges N spokes.",
+  "demonstrable_in_3_6_months": "Yes with simulated data: a 4-spoke, 72-hour synthetic ACE vignette showing decisions made locally under link loss, reconciled without conflicts on reconnect, and a resupply request generated; could be shown at a PACAF/USAFE Spark cell or an AFWERX Spark Collider-type event.",
+  "what_it_must_prove": "That decentralized decisions with encoded authorities are faster and better audited than escalation-by-radio, that reconciliation with hub records is conflict-free, and that maintainers will actually enter status into it under field conditions (adoption is the real risk).",
+  "uses": [
+   "commercial hardware",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Unit-level status: aircraft maintenance status and parts (from maintenance information systems), fuel on hand and burn rates, munitions inventory and build status, airmen qualifications and duty status; plus the authority matrices produced at LOGTAC (likely CUI or FOUO).",
+  "legally_realistically_obtainable": "Initially only as synthetic data; real feeds require a government sponsor, CUI handling and, for maintenance data, cooperation from the AFLCMC/RSO data owners. Conditional-authority matrices from LOGTAC are not public. Realistic for a SBIR awardee with a sponsoring wing; not obtainable for an unsponsored two-student team.",
+  "sources": [
+   "Synthetic vignettes built from AFDN 1-21 and open RAND ACE studies",
+   "Sponsoring wing's exercise data under a SBIR/CRADA",
+   "Maintenance information system exports (IMDS/G081-class, RECALL) via RSO data environments - CUI",
+   "Munitions/fuels accountability systems (CAS/FMIS-class, RECALL - not verified)"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "Air Force maintenance information systems (IMDS/G081-class; RECALL)",
+   "Supply/ILS-S-class and munitions/fuels accountability systems (RECALL)",
+   "RSO PANDA / CBM+ data environment",
+   "BLADE analytics (RECALL)",
+   "Logistics C2 / airlift request chain (505th CCW Logistics C2 experimentation)",
+   "DAF cloud (Cloud One / Platform One) at IL4/IL5"
+  ],
+  "interfaces_protocols": [
+   "No public APIs for legacy maintenance systems; batch exports and RSO data lake access are government-brokered",
+   "Store-and-forward sync over tactical comms (SATCOM, mesh, HF) - transport-agnostic",
+   "JSON/REST for hub dashboard; possible alignment with DAF data standards"
+  ],
+  "who_controls_the_interface": "AFLCMC (Rapid Sustainment Office and the maintenance-system program offices) and Kessel Run control the data and platform interfaces; the tactics owners (ACC A4/LOGTAC, PACAF A4) do not control the interfaces they would need a tool to use."
+ },
+ "customer": {
+  "user": "Spoke mission generation force element leaders, production superintendents, LRS fuels/munitions flight chiefs, multi-capable airmen",
+  "champion": "ACC A4 / CAF LOGTAC conditional-authorities working group leads; a PACAF or USAFE wing MXG/LRS commander; 505th CCW logistics C2 experimenters",
+  "contract_signer": "AFWERX (AFRL contracting) for SBIR; a MAJCOM contracting squadron for a Spark-cell purchase",
+  "requirement_owner": "AF/A4 (Logistics, Engineering and Force Protection) and ACC A4 for CAF tactics; PACAF A4 for theater ACE logistics",
+  "program_office": "None of record for spoke-level logistics C2; nearest are AFLCMC Rapid Sustainment Office (maintenance analytics), Kessel Run (C2 software), and AFWERX (SBIR)",
+  "contracting_office": "AFWERX/AFRL for SBIR; AFLCMC for any transition"
+ },
+ "budget": {
+  "program_or_line": "No discrete line found. Nearest: AFWERX SBIR/STTR (Rune Phase I, July 2026), RSO CBM+/PANDA sustainment analytics, Pacific Deterrence Initiative logistics/prepositioning funds (FY24 ~USD 917M per IISS - infrastructure, not software).",
+  "evidence": "Only a Phase I SBIR to a competitor and unspecified O&M/exercise funding; no PoR, no RDT&E line identified for ACE spoke logistics C2 software.",
+  "source_url": "https://www.businesswire.com/news/home/20260730697969/en/Rune-Technologies-Selected-by-U.S.-Air-Force-to-Advance-AI-Enabled-Logistics-for-Agile-Combat-Employment",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "AFWERX SBIR Open Topic Phase I/II with a sponsoring wing or ACC A4 memorandum",
+  "sequence": [
+   "Spark cell / Spark Collider demo with synthetic vignette",
+   "AFWERX Open Topic Phase I with wing sponsor letter",
+   "Phase II tied to an ACE exercise (e.g., PACAF DLE series, REFORPAC follow-ons)",
+   "Transition attempt via RSO or Kessel Run - no established path"
+  ],
+  "eligibility_notes": "SBIR requires >50% ownership and control by U.S. citizens or permanent residents; the German founder as a future permanent resident may qualify, but an Indonesian non-U.S.-person co-founder's equity and control must be structured carefully (needs SBIR-eligibility counsel). CUI/IL4 handling and potential ITAR exposure (munitions data) may restrict a non-U.S.-person's access to the very data the product needs - describe to counsel; no legal judgment made here."
+ },
+ "competition": [
+  {
+   "company": "Rune Technologies (TyrOS)",
+   "how_close": "Direct: AFWERX Phase I specifically for AI-enabled logistics C2 for ACE (Jul 2026); already fielded/contracted with Army ($99M IDIQ ceiling, Jun 2026; $4.1M 1st Cav) and USMC Project Dynamis; designed for denied/degraded comms.",
+   "evidence": "https://www.runetech.co/news/afwerx-award ; https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform"
+  },
+  {
+   "company": "Air Force government software (Kessel Run, RSO PANDA/CBM+ toolkit, BLADE, 505th CCW Logistics C2 experimentation)",
+   "how_close": "Adjacent: owns the maintenance data and the C2 platforms; hackathon suggests government-built logistics C2 workflows are being prototyped in-house.",
+   "evidence": "https://www.af.mil/News/Article-Display/Article/3382513/rapid-sustainment-offices-cbm-artificial-intelligence-toolkit-earns-air-force-s/ ; https://soldiersystems.net/2026/06/04/air-force-forges-decision-advantage-through-logistics-c2-hackathon/"
+  },
+  {
+   "company": "Palantir",
+   "how_close": "Adjacent: Army Vantage / EA for readiness and logistics data; Air Force footprint (RECALL); could extend Foundry ontology to spoke workflows via forward-deployed engineers.",
+   "evidence": "S14 contracts: Vantage $618.9M (2024-12-18); Army EA $10B ceiling (2025-07-31) - ceilings are not revenue"
+  },
+  {
+   "company": "C3 AI (PANDA at RSO)",
+   "how_close": "Adjacent: predictive maintenance analytics for the Air Force; enterprise rather than spoke-level.",
+   "evidence": "RECALL - not re-verified this session; confidence LOW"
+  },
+  {
+   "company": "Anduril (Lattice Mesh) / Onebrief",
+   "how_close": "Peripheral: degraded-network data distribution (Anduril) and planning collaboration (Onebrief, ACC Agile Battle Lab pilot per registry) could host a logistics module.",
+   "evidence": "companies index B01; registry G26 companies_near"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes. Palantir can add spoke-level logistics objects to an existing Air Force Foundry deployment in months; Anduril's Lattice Mesh already solves the degraded-transport half; Rune is a startup incumbent that has the product and is now funded for this exact use case. Government software factories can also build the workflow in-house (hackathon).",
+  "why_startup_still_wins_or_reject": "Reject. A new entrant offers no data, no interface control, no service relationships and no product lead; the defensible piece (encoded conditional authorities) is government intellectual property produced at LOGTAC that any awardee would receive from the sponsor."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "40,000-80,000 (two founders, synthetic vignette, offline-first app, 3-5 months)",
+  "credible_military_demo_usd": "250,000-600,000 (requires a sponsoring wing or Phase I/II SBIR, exercise participation, CUI handling, an ex-maintenance-officer advisor, IL4 hosting)",
+  "first_production_deployment_usd": "3,000,000-8,000,000 (Phase II/III, ATO on DAF cloud, integration with maintenance and supply data via RSO, multi-wing rollout) - and no program office of record to fund it",
+  "assumptions": "Assumes AFWERX SBIR eligibility is resolved; assumes RSO grants data access; assumes ACC A4 sponsors; all three are unproven. INFERENCE."
+ },
+ "expertise_required": [
+  {
+   "role": "Former Air Force aircraft maintenance officer or senior maintenance/LRS SNCO with ACE exercise experience",
+   "why": "Defines the real decision thresholds, knows IMDS/G081 realities and who decides what at a spoke; without this the product is a generic checklist app",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Offline-first distributed-systems engineer",
+   "why": "Conflict-free sync over intermittent tactical links is the technical core",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "DAF software acquisition / AFWERX navigator (ex-Kessel Run, RSO or Spark cell)",
+   "why": "Finds the sponsor, the memorandum and the transition path that does not currently exist",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Security/compliance lead (CUI, IL4/5, later CMMC)",
+   "why": "Maintenance and munitions data are CUI; ATO on Cloud One/Platform One is the gate to any real data",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "Unclassified start; CUI handling and IL4/IL5 ATO required for any real data; munitions-related technical data may carry ITAR/EAR implications; CMMC Level 2 likely for follow-on contracts. No classified data needed for the wedge.",
+  "non_us_person_founder_note": "A non-U.S.-person co-founder cannot be assumed eligible to access CUI munitions/maintenance data or to count toward SBIR ownership; corporate structure (control, board, ownership) must be reviewed by SBIR and export-control counsel. Not a legal judgment."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "low",
+  "explanation": "Offline-first field operations logging exists commercially (mining, utilities, disaster response) with entrenched vendors; the differentiator here (conditional military authorities, sortie generation) has no commercial analog."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "workflow",
+   "integrations",
+   "government relationships"
+  ],
+  "explanation": "Weak: the encoded authorities are government-derived; integrations are brokered by AFLCMC and could be handed to any vendor; no data network effects at spoke scale. Rune's early relationships and multi-service vehicles are the kind of moat a new entrant would be trying to build from zero."
+ },
+ "why_now": "ACE became doctrine (2021-2022), REFORPAC 2025 scaled it to hundreds of aircraft and dozens of sites, CAF LOGTAC (Apr 2025) produced the first conditional-authority frameworks, the DoD IG opened an ACE-logistics evaluation (May 2025), the 505th CCW ran a Logistics C2 hackathon (2026) and AFWERX funded Rune for ACE logistics C2 (Jul 2026). The window for a first mover opened in 2025 and is already being filled.",
+ "killer_risk": "There is no requirement owner with a budget line, no program office of record, and the only funded vehicle (AFWERX Phase I) has just been awarded to a venture-backed startup with $24M and multi-service contracts for exactly this use case; a two-student team would be entering as a second-mover on a government-controlled data problem with a customer whose main pain relief comes from tactics and manning changes, not software.",
+ "market_stage": "Emerging",
+ "procurement_signal_timeline": [
+  {
+   "year": "2021",
+   "event": "AFDN 1-21 ACE published (1 Dec 2021; updated Aug 2022) naming logistics under attack",
+   "source_url": "https://www.doctrine.af.mil/Portals/61/documents/AFDN_1-21/AFDN%201-21%20ACE.pdf"
+  },
+  {
+   "year": "2023",
+   "event": "RSO CBM+ AI toolkit (PANDA) designated Air Force System of Record - enterprise predictive maintenance, not spoke C2",
+   "source_url": "https://www.af.mil/News/Article-Display/Article/3382513/rapid-sustainment-offices-cbm-artificial-intelligence-toolkit-earns-air-force-s/"
+  },
+  {
+   "year": "2025",
+   "event": "CAF LOGTAC (Apr) conditional authorities; DoD IG ACE logistics evaluation announced (May); REFORPAC (Jul-Aug) stress-tests ACE logistics; Rune $24M Series A (Jul)",
+   "source_url": "https://media.defense.gov/2025/May/05/2003703742/-1/-1/1/D2025-DEV0PE-0108.000_REDACTED.PDF"
+  },
+  {
+   "year": "2026",
+   "event": "Kessel Run Next-Gen AOC program launched (Feb); Rune joins USMC Project Dynamis (May) and wins $99M Army IDIQ (Jun); 505th CCW Logistics C2 Hackathon (Jun); AFWERX Phase I to Rune for ACE logistics C2 (Jul); next CAF LOGTAC set for spring 2027",
+   "source_url": "https://www.businesswire.com/news/home/20260730697969/en/Rune-Technologies-Selected-by-U.S.-Air-Force-to-Advance-AI-Enabled-Logistics-for-Agile-Combat-Employment"
+  }
+ ],
+ "allied_extension": "Somewhat: NATO air forces and Australia are adopting ACE-like dispersal (JAPCC writes on ACE; RAAF and USAFE partners exercise it), and allied buyers are less locked into U.S. maintenance systems, which could make a spoke tool easier to integrate. But allied procurement is slower, each air force has its own maintenance IT, and the founders' German/Indonesian mix does not by itself open Bundeswehr or RAAF doors. It does not rescue the U.S. case.",
+ "search_log": [
+  {
+   "query": "\"Agile Combat Employment\" logistics command and control software AFWERX SBIR \"degraded\" 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "\"Rune Technologies\" TyrOS contested logistics Air Force OR Marine Corps 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "GAO report \"Agile Combat Employment\" Air Force 2025 logistics recommendations",
+   "useful": true
+  },
+  {
+   "query": "\"CAF LOGTAC\" OR \"Logistics Tactical Conference\" Air Force \"conditional authorities\" 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "Air Force \"Rapid Sustainment Office\" OR \"Kessel Run\" BLADE maintenance data ACE \"expeditionary\" 2025 OR 2026",
+   "useful": false
+  },
+  {
+   "query": "PACAF \"Agile Combat Employment\" exercise \"sortie generation\" \"spoke\" communications degraded logistics lessons 2025 OR 2026 REFORPAC",
+   "useful": true
+  },
+  {
+   "query": "DoD Inspector General \"Agile Combat Employment\" Indo-Pacific logistics requirements evaluation May 2025 findings prepositioned fuel munitions",
+   "useful": true
+  },
+  {
+   "query": "Air Force A4 \"logistics command and control\" OR \"LogC2\" modernization ACE 2025 OR 2026 \"mission generation\" software app wing",
+   "useful": true
+  },
+  {
+   "query": "WebFetch soldiersystems.net Logistics C2 Hackathon article",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.doctrine.af.mil/Portals/61/documents/AFDN_1-21/AFDN%201-21%20ACE.pdf",
+   "title": "AFDN 1-21 Agile Combat Employment",
+   "pub_date": "2022-08-23",
+   "tier": 1
+  },
+  {
+   "url": "https://www.acc.af.mil/News/Article-Display/Article/4169508/inaugural-caf-logtac-advances-combat-logistics-readiness/",
+   "title": "Inaugural CAF LOGTAC advances combat logistics, readiness (ACC)",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://atloa.org/caf-logtac-forging-lethal-logistics-for-the-future-fight/",
+   "title": "CAF LOGTAC: Forging Lethal Logistics for the Future Fight (LOA)",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://media.defense.gov/2025/May/05/2003703742/-1/-1/1/D2025-DEV0PE-0108.000_REDACTED.PDF",
+   "title": "DoD OIG Project Announcement D2025-DEV0PE-0108.000 (ACE logistics, Indo-Pacific)",
+   "pub_date": "2025-05-05",
+   "tier": 1
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260730697969/en/Rune-Technologies-Selected-by-U.S.-Air-Force-to-Advance-AI-Enabled-Logistics-for-Agile-Combat-Employment",
+   "title": "Rune Technologies Selected by U.S. Air Force (AFWERX Phase I) for ACE logistics",
+   "pub_date": "2026-07-30",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform",
+   "title": "U.S. Army Awards Rune Technologies $99M IDIQ",
+   "pub_date": "2026-06-18",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260521176599/en/Rune-Technologies-Joins-Project-Dynamis-to-Deliver-Predictive-Logistics-for-the-Marine-Corps",
+   "title": "Rune Technologies Joins Project Dynamis (USMC)",
+   "pub_date": "2026-05-21",
+   "tier": 2
+  },
+  {
+   "url": "https://thedefensepost.com/2026/09/21/us-army-rune-autonomous-resupply/",
+   "title": "US Army Taps Rune Tech for Autonomous Resupply ($4.1M, 1st Cav)",
+   "pub_date": "2026-09-21",
+   "tier": 3
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20250721838717/en/Rune-Technologies-Closes-$24M-Series-A-to-Deploy-AI-Enabled-Software-for-Military-Logistics",
+   "title": "Rune Technologies Closes $24M Series A",
+   "pub_date": "2025-07-21",
+   "tier": 2
+  },
+  {
+   "url": "https://www.airandspaceforces.com/pacaf-boss-schneider-reforpac-exercise-lessons/",
+   "title": "What PACAF Boss Took Away from REFORPAC Exercise",
+   "pub_date": "2025-08",
+   "tier": 2
+  },
+  {
+   "url": "https://www.stripes.com/branches/air_force/2025-07-21/air-force-ace-resolute-force-pacific-18505037.html",
+   "title": "With 400 aircraft across 3,000 miles, Air Force puts agile combat strategy to the test",
+   "pub_date": "2025-07-21",
+   "tier": 2
+  },
+  {
+   "url": "https://www.dla.mil/About-DLA/News/News-Article-View/Article/4431053/reforpac-2025-and-the-friction-of-distribution-stress-testing-agile-combat-empl/",
+   "title": "REFORPAC 2025 and the friction of distribution (DLA)",
+   "pub_date": "2025 (not verified)",
+   "tier": 1
+  },
+  {
+   "url": "https://soldiersystems.net/2026/06/04/air-force-forges-decision-advantage-through-logistics-c2-hackathon/",
+   "title": "Air Force Forges Decision Advantage Through Logistics C2 Hackathon (505th CCW)",
+   "pub_date": "2026-06-04",
+   "tier": 3
+  },
+  {
+   "url": "https://www.rand.org/pubs/research_reports/RRA999-3.html",
+   "title": "RAND RRA999-3 Assessing ACE for PACAF: distributed maintenance postures and sortie rate",
+   "pub_date": "not verified",
+   "tier": 1
+  },
+  {
+   "url": "https://www.airandspaceforces.com/air-force-ace-rand-report/",
+   "title": "Airmen Confused and Understaffed for ACE, Report Says (RAND RRA3169-1 coverage)",
+   "pub_date": "not verified",
+   "tier": 2
+  },
+  {
+   "url": "https://www.mitchellaerospacepower.org/app/uploads/2025/03/Logistics-While-Under-Attack-Key-to-a-CCA-Force-Design-WEB.pdf",
+   "title": "Logistics While Under Attack: Key to a CCA Force Design (Mitchell Institute)",
+   "pub_date": "2025-03",
+   "tier": 2
+  },
+  {
+   "url": "https://www.airuniversity.af.edu/Office-of-Sponsored-Programs/Research/Article-Display/Article/2679548/flexible-logistics-and-degraded-resupply-institutional-challenges-under-attack/",
+   "title": "Flexible Logistics and Degraded Resupply: Institutional Challenges Under Attack (Air University)",
+   "pub_date": "2021 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.af.mil/News/Article-Display/Article/3382513/rapid-sustainment-offices-cbm-artificial-intelligence-toolkit-earns-air-force-s/",
+   "title": "RSO CBM+ AI toolkit earns Air Force System of Record designation",
+   "pub_date": "2023 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/02/19/air-force-kessel-run-program-modernize-air-operations-centers/",
+   "title": "Air Force launches program to modernize Air Operations Centers (Kessel Run)",
+   "pub_date": "2026-02-19",
+   "tier": 2
+  },
+  {
+   "url": "https://www.iiss.org/online-analysis/military-balance/2026/03/shuffling-the-deck-realising-ace-in-the-indo-pacific/",
+   "title": "Shuffling the deck: realising ACE in the Indo-Pacific (IISS)",
+   "pub_date": "2026-03",
+   "tier": 2
+  },
+  {
+   "url": "https://www.saffm.hq.af.mil/Portals/84/documents/FY26/FY26%20Air%20Force%20Operations%20and%20Maintenance%20Vol%20I.pdf",
+   "title": "DAF FY2026 Budget Estimates, O&M Vol I",
+   "pub_date": "2025-06",
+   "tier": 1
+  }
+ ]
+}

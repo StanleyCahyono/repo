@@ -1,0 +1,141 @@
+{
+ "id": "G25",
+ "title": "Vehicle-agnostic autonomous-systems orchestration layer (the AVO problem: tasking and coordinating heterogeneous multi-vendor uncrewed vehicles across domains)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "Severe and documented: Project Convergence 22 operator overload (RUSI 2023), Replicator dissolved without orchestration software (CRS/RS), SOCOM says collaborative-autonomy development 'is not moving fast enough' (May 2026), and the government is paying up to $100M in prizes for the layer. Not 5 because the pain is mostly felt in experimentation and SOF/Navy task units, not yet in daily conventional operations."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "Recurs every time multi-vendor systems are fielded together (exercises, Drone Dominance deliveries, SOF operations), but cross-domain multi-vendor tasking is still an experimentation-stage activity rather than a daily wartime workflow for most U.S. units."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 3,
+   "rationale": "Money exists and is traceable (DAWG ~$225M FY26, committees marked ~$1.0B FY27 against a $54.6B request; AVO up-to-$100M prize pool; $86M SOCOM and $87M Army awards to Anduril), but the request-to-enacted haircut is ~98%, the prize pool is a ceiling with no public awards found, and every obligated dollar located so far went to an incumbent."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 1,
+   "rationale": "Score 1 because the only open door (AVO challenge) closed submissions on 25 Jan 2026, is described as limited to U.S.-based firms with production-approaching prototypes and demands Sprint 1 within 10 days of selection; SOCOM mandates its government-owned FANTOM Core; the Army buys Lattice through an enterprise agreement that consolidates 120+ actions; SBIR needs U.S. ownership/control. No addressable path for this team."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 2,
+   "rationale": "Commodity pieces (MAVLink control, CoT, mission UI, simulation) are easy; the actual gap - deterministic multi-vehicle behavior under DDIL, cross-domain tasking with a human accountable for lethal effects, dozens of vendor integrations whose APIs the startup does not control - is rated High difficulty in S13 and has defeated a decade of common-controller efforts."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 1,
+   "rationale": "Score 1: $250k buys a simulation-only proof of concept; a credible military demo needs multiple airframes across domains, range time, DDIL radio testing and a cleared U.S.-person lead (est. $2-5M), and the core code is likely export-controlled so half the founding team may be unable to work on it without licensing."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 2,
+   "rationale": "A sim demo in 6 months is plausible, but a demo a DAWG/SOCOM/Navy buyer would find credible (live heterogeneous vehicles, link loss, safety case) is 18+ months away and depends on range and hardware access the team does not have."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "Open flight stacks, MAVLink/CoT schemas, simulators and partly public UMAA documents allow an unclassified start; but vendor SDKs require partnerships, and CONOPS, datalink parameters, FANTOM Core and A-GRA specs are government-controlled CUI/ITAR."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 1,
+   "rationale": "Score 1: the product itself is likely ITAR technical data or EAR 600-series once designed for military vehicles, CUI/CMMC L2 apply at first government integration, DoDD 3000.09 governs lethal tasking, and classified integration is required for CCA, Navy fleets and fires; with a non-U.S.-person co-founder the controlled code is the company's core asset (counsel required)."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 3,
+   "rationale": "A PX4/ArduPilot/ROS 2 simulation and Blue UAS live demo can be entirely unclassified; anything a real buyer would accept (government kernel integration, realistic threat/datalink behavior) moves to CUI and then SECRET."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1: Anduril (selected by DIU, SOCOM, Army; CCA option), Shield AI (CCA production option), Auterion (multi-manufacturer swarm demos, Gauntlet award), Applied Intuition/EpiSci, Collins, Palantir, AeroVironment, plus reported SpaceX/xAI entry into AVO, plus government-owned FANTOM Core/A-GRA/UMAA/TAK - the most crowded layer in the study, all better capitalized and cleared."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "The government is visibly hedging against Lattice lock-in (AVO challenge, FANTOM Core mandate, A-GRA, UMAA), which is real vulnerability - but the hedge is government-owned software or a production-ready challenge winner, not room for a two-person startup."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "Every interface that matters is controlled by a vendor (Lattice SDK, AuterionOS, Kinesis) or the government (FANTOM Core M2M API, A-GRA, UMAA, TAK); each integration is bespoke, re-triggers T&E and is often CUI."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "Integrations, accreditation and program footprint would be the moat - which incumbents already hold; the only startup-sized version (an open neutral kernel) is low-moat by construction."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 2,
+   "rationale": "Commercial multi-vendor drone fleet orchestration exists but is thin and already served by MAVLink fleet-management products; DDIL and lethal-tasking features have no commercial buyer."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "If a vendor-neutral layer were ever adopted it would expand across domains, services and AUKUS/NATO allies (UK DTW, AUKUS Maritime Big Play), but the conditional is doing all the work."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "Orchestration software is licensed and sustained continuously (enterprise agreements, task orders), so recurrence is structurally good - for whoever holds the position."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1: two students with $250k, no cleared personnel, no vehicle integrations, no U.S.-based production-ready prototype, and a non-U.S.-person co-founder in a business whose core code is likely export-controlled; the AVO eligibility profile and the DDIL/safety engineering bar are both beyond the team as described."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 1.8,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "The market skeptic wins: the pain and the demand signal are real (AVO challenge, SOCOM 'not moving fast enough'), but the budget owner is DAWG/SOCOM/Navy and each has already chosen how to solve it - an incumbent (Lattice) or a government-owned kernel (FANTOM Core, A-GRA, UMAA); the $54.6B request was marked at ~$1.0B by HASC, SASC and House appropriators, the $100M prize pool is a ceiling with no public awards found, and a startup's only realistic revenue here is challenge or SBIR prototype money, i.e. consultancy drift."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "The competition skeptic wins decisively: Anduril does not need six months to add this - it is the selected layer for DIU/Replicator, SOCOM and the Army, with an enterprise vehicle that makes additional Lattice work administratively trivial; Shield AI, Auterion, Applied Intuition, Collins, Palantir and reportedly SpaceX/xAI compete for the same position; every API a neutral layer would need is controlled by those vendors or by the government; and government-owned software already occupies the vendor-neutral slot."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "The feasibility skeptic wins: the credible demo requires live heterogeneous vehicles, DDIL radio behavior, a safety case and government interface specs that are CUI/ITAR; the core code is likely export-controlled, so the non-U.S.-person co-founder may be unable to work on the product without licensing and neither founder can be cleared today; $250k funds a simulation only; the AVO window has closed and requires U.S.-based, production-approaching entrants; and the path from prototype to program of record has taken common-controller efforts over a decade without success."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL - decisive reason: the PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> VEHICLE path exists, but every node on it is already occupied by Anduril Lattice or a government-owned kernel, the only open vehicle (AVO challenge) is closed to this team by timing, U.S.-basing and production-readiness, the FY27 budget that would have funded new entrants was written down from $54.6B to ~$1.0B, and the product's core code is likely export-controlled in a way that structurally excludes the non-U.S.-person co-founder. Market attractiveness 2.3 and founder fit 1.8 confirm the registry's LOW rating; the gap is evidence-rich but structurally closed. Explicitly eliminated.",
+ "narrower_version_if_borderline": "Not borderline. For the record, the only adjacent survivable idea is NOT G25: an open autonomy-conformance / adapter and T&E tooling product (MAVLink/STANAG 4586/UMAA/FANTOM-style M2M conformance suites, DDIL scenario replay) sold to government labs (SOFWERX UxSAI T&E, JATF Autonomous Warfare Proving Ground) and to Drone Dominance vendors who must plug into whichever orchestrator wins - a different gap that should be assessed on its own merits and still carries the export-control constraint.",
+ "most_important_question_answer": "If two exceptionally capable founders had $250,000 today they should NOT build an orchestrator. The most they could build first is a simulation-only heterogeneous-mission kernel (PX4 + ArduPilot + ROS 2 ground robot, intent-to-task allocation, link-loss behavior) with a public conformance test suite; they would show it to SOFWERX (UxSAI T&E), DIU's autonomy portfolio and a Drone Dominance vendor; the demo would prove that three stacks can be tasked from one intent with auditable behavior under partition and lower operator load than parallel GCS. The customer cares because SOCOM says collaborative autonomy is not moving fast enough and DAWG paid up to $100M in prizes for exactly this. But an incumbent can crush it trivially: Anduril already holds the role with DIU, SOCOM and the Army, Auterion has demonstrated multi-manufacturer swarms, and SOCOM's FANTOM Core occupies the government-owned neutral slot - a Lattice SDK release or a government reference implementation absorbs any adapter that gains traction. The milestone that would justify $2-5M - a government lab adopting the kernel as its conformance reference plus a paid OTA to integrate it with a fielded fleet - requires cleared U.S.-person staff, CUI/ITAR interface access and a live multi-domain range demo the team cannot legally or financially reach; and even that milestone would make it a tooling vendor, not the orchestrator. It fails on structural closure, not on lack of pain.",
+ "bear_case_summary": "Real pain, wrong entrant: the buyer has organized its solution around Anduril Lattice and government-owned kernels, the AVO door is closed to a non-production, non-U.S.-based team, the DAWG budget was cut ~98% from request in committee, common controllers have been in proto-purgatory for a decade, and ITAR/CUI make the core code untouchable for the non-U.S.-person co-founder. $250k buys a simulation nobody with budget will accept.",
+ "bull_case_summary": "The government is visibly unhappy with vendor lock (AVO challenge, FANTOM Core mandate, A-GRA, UMAA), Replicator failed to deliver orchestration, SOCOM says progress is too slow, Drone Dominance is delivering tens of thousands of multi-vendor drones, and even at ~$1B DAWG plus SOCOM/Navy autonomy lines the budget is large; a genuinely neutral, open kernel adopted by a government lab could ride that hedge and later be acquired by a prime. This bull case requires a cleared U.S. team, several million dollars and a government sponsor the founders do not have.",
+ "confidence": "MEDIUM"
+}

@@ -1,0 +1,305 @@
+{
+  "id": "G17",
+  "title": "Bandwidth-aware prioritized sync and store-and-forward data movement between edge applications and the NGC2/TAK data layer (policy-driven 'what leaves first, at what fidelity' and COP-edit reconciliation on reconnect)",
+  "problem": "NGC2/TAK applications assume a coherent data layer, but tactical links are intermittent and thin (DARPA frames the regime as 1 Mbps down to 1 kbps), so edge nodes need a mission-policy-driven way to decide which data leaves first and at what fidelity, and how conflicting COP edits are reconciled on reconnection - today this is done by vendor-specific mesh/sync engines (Lattice Mesh, Ditto, TAK Server missions), per-application code and manual deconfliction.",
+  "categories": ["A", "C", "D", "I"],
+  "segment_ids": ["S05", "S06"],
+  "chain_steps": ["TRANSPORT", "PROCESS", "DISSEMINATE_TASK"],
+  "echelons": ["tactical unit / company", "battalion", "brigade", "division", "expeditionary air base / contingency response element"],
+  "user": {
+    "exact_role": "Primary: NGC2/TAK application developers and the data-layer integrator engineers who must make apps behave under DDIL; secondary: division/brigade G6/S6 and hub operators who decide which products get the link, and fires/intel/logistics cell users who reconcile duplicate or conflicting COP objects after partitions",
+    "echelon": "Brigade and division (NGC2 hub-and-spoke), down to battalion/company nodes; Air Force expeditionary units for the AFLCMC/ACC variant",
+    "organization_examples": ["4th Infantry Division (NGC2 prototype, Ivy Sting / Ivy Mass)", "25th Infantry Division (NGC2 prototype, Lightning Surge)", "I Corps / III Armored Corps (early operational NGC2 fielding per press)", "Team Anduril / Team Lockheed NGC2 integrators and their app vendors", "AFLCMC Business and Enterprise Systems Directorate (Ditto sync buyer)", "ACC contingency response / expeditionary comms units (AMIC Deployable Tactical Communications RFI)", "TAK Product Center and TAK Server operators (ATAK/WinTAK missions)"]
+  },
+  "current_workflow": [
+    "Application writes to its local database / TAK client cache at the edge node (hub or spoke).",
+    "Link degrades or drops (jamming, terrain, movement, cloud loss); apps keep local state, some queue outbound updates, some silently drop them.",
+    "Operators keep fighting on the local picture; large products (imagery, FMV, mission packages) are pushed opportunistically, by hand, or not at all.",
+    "On reconnect, the sync engine (Lattice Mesh, Ditto CRDT sync, TAK Server mission change feed) replicates whatever it can, typically in arrival order rather than mission priority; large backlogs can saturate the thin link.",
+    "Operators and staff deconflict duplicate or conflicting tracks, graphics and edits by hand; some data is re-entered.",
+    "G6/S6 tune network QoS at the transport layer (radio priority, VLAN/QoS classes) because there is no application-level 'what leaves first' policy exposed to them."
+  ],
+  "current_solution": "Inside NGC2: the Anduril-led common data layer baseline (Lattice + Palantir Foundry edge-to-cloud data mesh, Raft registries/federation) with hub-and-spoke edge nodes chosen specifically to cope with DDIL bandwidth/latency. Inside the TAK ecosystem: TAK Server missions / Data Sync plugin (clients subscribe and re-sync missed changes on reconnect; missions propagate across federation) plus commercial add-ons such as Ditto's Edge Sync plugin for ATAK. Air Force: Ditto cloud-to-edge sync platform (AFLCMC sole-source SBIR Phase II follow-on, $28M ceiling). Navy: DIU Common Operational Database prototypes (Ditto, Syntiant, HarperDB) for unmanned systems in DDIL. Collaboration: Immersive Wisdom 'ultra-low bandwidth' war rooms. Research: DARPA FLUID (2025) funding message re-encoding/suppression to cut C5ISRT transmission load under 1 Mbps-1 kbps. Workarounds: bespoke per-app queuing code, manual mission-package pushes, manual deconfliction.",
+  "failure": "Two residual failures are evidenced or reasonably inferred: (1) prioritization is link-level or engine-default, not mission-phase policy ('send the fires target update before the imagery; downsample FMV; hold the logistics report') exposed to G6/S6 or the commander - DARPA had to launch FLUID in 2025 precisely because application/network messages are not yet intelligently reduced under DDIL (FACT that the program exists; INFERENCE that the gap is not closed operationally); (2) conflict-resolution semantics for C2 objects (tracks, graphics, orders edited on both sides of a partition) are engine-specific (CRDT last-writer-wins style in Ditto, opaque in Lattice/Foundry, mission change-log in TAK Server) and not auditable by operators, so duplicates/conflicts are reconciled by hand (INFERENCE from segment agents; no public government document quantifies this). The store-and-forward / re-sync primitive itself is NOT unsolved: Ivy Mass (May 2026) publicly demonstrated local tracking and later synchronization after losing the division cloud.",
+  "evidence": [
+    {
+      "form": "repeated procurement",
+      "claim": "AFLCMC (Business and Enterprise Systems Directorate) awarded DittoLive a ceiling $28,000,000 sole-source FFP contract (SBIR Phase II extension) for the full Ditto cloud-to-edge sync platform, with $4,188,712 FY25 RDT&E and $1,097,000 FY25 O&M obligated at award; work through July 10, 2028. Ceiling is not revenue; only ~$5.3M obligated at award.",
+      "source_title": "DoD Contracts for July 11, 2025 (GlobalSecurity mirror of DoD announcement)",
+      "source_url": "https://www.globalsecurity.org/military/library/news/2025/07/dod-contracts_4242075.htm",
+      "pub_date": "2025-07-11",
+      "event_date": "2025-07-10",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "DARPA's FLUID program (posted March 28, 2025; abstracts due April 21, 2025) seeks software that intercepts, reasons over and manipulates control-plane and data-plane messages to reduce C5ISRT transmission load under DDIL network capacities from 1 Mbps down to 1 kbps without losing application utility - i.e., the government treats application-aware load reduction as an open research problem.",
+      "source_title": "FLUID: Flexible Networking Using Intelligent Dialecting (DARPA program page; special notice DARPA-SN-25-66)",
+      "source_url": "https://www.darpa.mil/research/programs/fluid",
+      "pub_date": "2025-03-28",
+      "event_date": "2025-04",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "Ivy Mass (May 2026) tested NGC2 at division scale under simulated cyberattack, EMI and degraded communications; units continued tracking the battle locally after losing division-cloud access and synchronized once connectivity returned - proving the requirement and that a baseline store-and-forward/re-sync capability already exists inside the prime's stack.",
+      "source_title": "Ivy Mass exercises NGC2 at division scale (army.mil)",
+      "source_url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale",
+      "pub_date": "2026-06",
+      "event_date": "2026-05",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "DIU's Common Operational Database project with Project Overmatch and NIWC Pacific awarded prototype agreements to Ditto, Syntiant and HarperDB for databases that let unmanned systems operate in DDIL; DIU reported all three met project goals and that the Navy was awarding success memos and moving toward production contracts - prototype success, not evidenced production scale.",
+      "source_title": "Defense Innovation Unit Announces Results of Maritime AI Project (ExecutiveGov)",
+      "source_url": "https://executivegov.com/2024/09/diu-project-cod-results-artificial-intelligence/",
+      "pub_date": "2024-09",
+      "event_date": "2024-09",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "TAK Server already stores mission data server-side; clients subscribe to a mission to receive dynamic updates or to synchronize data missed while disconnected, and missions propagate across federation boundaries - the reconnect re-sync primitive exists in the government-owned TAK baseline, but there is no mission-priority or fidelity policy in that mechanism.",
+      "source_title": "Mission API / Data Sync - OpenTAKServer documentation (mirrors TAK Server Mission API behaviour)",
+      "source_url": "https://docs.opentakserver.io/mission_api.html",
+      "pub_date": "2025",
+      "event_date": "ongoing",
+      "tier": 3,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "multiple partial solutions",
+      "claim": "Anduril markets Lattice Mesh as a decentralized mesh that bi-directionally transports data in DDIL environments; CDAO awarded Anduril a three-year production agreement to scale a tactical Edge Data Mesh (Dec 2024) and opened it to third-party developers - vendor marketing is not proof the prioritization/reconciliation problem is solved, but it is proof the incumbent owns the interface.",
+      "source_title": "Decentralizing battle data: CDAO, Anduril open tactical 'mesh' to third-party developers (Breaking Defense)",
+      "source_url": "https://breakingdefense.com/2024/12/decentralizing-battle-data-cdao-anduril-open-tactical-mesh-to-third-party-developers/",
+      "pub_date": "2024-12",
+      "event_date": "2024-12",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "Army established the NGC2 common data layer baseline (June 2026) with Anduril lead; Lattice + Palantir Foundry provide the edge-to-cloud data mesh and Raft the registries/transformation/federation - the sync/prioritization function sits inside a prime-owned layer, so an outside vendor must integrate through the prime.",
+      "source_title": "Army and industry align on common data baseline, as NGC2 moves from prototyping to delivery (army.mil)",
+      "source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+      "pub_date": "2026-06-22",
+      "event_date": "2026-06",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "Hub-and-spoke NGC2 architecture was chosen specifically to address bandwidth and latency in DDIL, and 4ID reported it 'drastically eliminated lag time' after PC-C5 lessons - implying material latency/bandwidth problems in the prior iteration.",
+      "source_title": "Army's 4th Infantry Division kicks off Ivy Sting exercises to scale NGC2 prototype (Federal News Network)",
+      "source_url": "https://federalnewsnetwork.com/federal-insights/2025/10/armys-4th-infantry-division-kicks-off-ivy-sting-exercises-to-scale-ngc2-prototype/",
+      "pub_date": "2025-10",
+      "event_date": "2025-10",
+      "tier": 2,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "ACC AMIC 'Deployable Tactical Communications' RFI asks for routing, edge compute, application-level QoS and cross-domain data sharing for expeditionary operations in contested forward environments (responses due Feb 25, 2026) - an Air Force ask for application-level prioritization, though as part of a comms kit, not a standalone software line.",
+      "source_title": "ACC AMIC Deployable Tactical Communications RFI (sam.gov; primary page blocked this session, from earlier stage E02-F24)",
+      "source_url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view",
+      "pub_date": "2026-01",
+      "event_date": "2026-02-25",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "RFI/sources sought",
+      "claim": "Army SBIR topic 'Generative AI Enabled Tactical Network' (2025) asks for a modeling environment reflecting a realistic DDIL tactical network with multiple data access and delivery demands, simulating limited bandwidth as data is exchanged producer-to-consumer for NGC2 - the Army is still funding tooling to even measure the prioritization problem.",
+      "source_title": "Generative AI Enabled Tactical Network - Army SBIR|STTR Program",
+      "source_url": "https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/",
+      "pub_date": "2025",
+      "event_date": "2025",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "government document",
+      "claim": "WPL VERBENA SBIR (2025-2026) proposes autonomous publish-subscribe data collection effective in DIL environments - government still funding the primitive at SBIR stage (RECALL from earlier stage; not re-verified this session).",
+      "source_title": "SBIR award 215791 (sbir.gov)",
+      "source_url": "https://www.sbir.gov/awards/215791",
+      "pub_date": "2025",
+      "event_date": "2025-2026",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "MEDIUM"
+    },
+    {
+      "form": "government document",
+      "claim": "GAO-26-108019 (Aug 20, 2026): Army identified ~$3.3B in NGC2 costs through FY2026 but has no life-cycle cost estimate or detailed fielding schedule for the 2032 goal; FY26 NDAA caps obligation of NGC2 portfolio funds at 50% until a report is delivered - budget exists but flows through the program, not to a sync line item.",
+      "source_title": "GAO: Army Modernization - Better Schedule and Cost Information Needed to Support Scaling Battlefield Network",
+      "source_url": "https://www.gao.gov/products/gao-26-108019",
+      "pub_date": "2026-08-20",
+      "event_date": "2026-08",
+      "tier": 1,
+      "label": "FACT",
+      "confidence": "HIGH"
+    },
+    {
+      "form": "documented manual workaround",
+      "claim": "Operators reconcile duplicate/conflicting tracks and graphics by hand after partitions and re-push large products manually; this is asserted by both segment agents from exercise reporting patterns but no public government document quantifies it. Public evidence insufficient.",
+      "source_title": "Segment S06 analysis (internal, derived from Ivy Mass / Ivy Sting reporting)",
+      "source_url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale",
+      "pub_date": "2026",
+      "event_date": "2026",
+      "tier": 3,
+      "label": "INFERENCE",
+      "confidence": "LOW"
+    }
+  ],
+  "why_existing_startups_havent_solved": "It largely has been solved at the primitive level and by well-funded players: Ditto (~$136M raised; AFLCMC $28M-ceiling sole-source; DIU COD success memo; ATAK Edge Sync plugin) sells exactly 'sync that survives intermittent links'; Anduril's Lattice Mesh has a CDAO production agreement and now leads the NGC2 data layer with Palantir Foundry; TAK Server's Mission API re-syncs missed changes for free in government-owned software. What remains - mission-phase policy for ordering/fidelity and auditable C2-object conflict resolution - is a thin layer that lives inside those engines' APIs, and the engines' owners (Anduril/Palantir for NGC2, Ditto for the Air Force, TAK Product Center for TAK) control the interface. A standalone startup would be selling a policy layer to the very companies that would rather build it, with no independent government buyer evidenced for 'prioritization policy' as a product; DARPA FLUID (2025) shows the government is instead funding this as research through performers.",
+  "why_not_solved_reasons": ["it HAS been solved", "proprietary incumbent architecture", "insufficient commercial market", "integration complexity"],
+  "technical_wedge": "If pursued at all: an engine-agnostic 'mission data QoS' sidecar/SDK that (a) scores every outbound object by mission phase, echelon, object type and age against live link telemetry (MANET/LEO throughput, loss, latency) and emits an ordered, fidelity-degraded queue (track deltas before imagery; tiled/downsampled imagery; FMV keyframes only), (b) exposes explicit, auditable merge rules per C2 object type (track, graphic, order, mission-package) with a reconcile log operators can review, and (c) plugs into TAK Server missions, Ditto's SDK or Lattice/Foundry APIs rather than replacing them. The defensible IP is the policy language plus measured link models, not the sync engine. Alternative, narrower wedge with clearer buyer: a DDIL network-emulation and sync-behaviour test harness (the Army's own SBIR/xTech ask) that scores any vendor stack on 'what arrived first and at what fidelity' - a tooling business, not a data-layer business.",
+  "mvp": {
+    "what": "Open-source-friendly sidecar + policy DSL that sits between an ATAK/WinTAK-CIV client or a sample logistics/fires app and TAK Server (and optionally Ditto SDK), with a netem/Linux tc link shaper reproducing 1 Mbps to 1 kbps, 30-minute partitions and reconnect storms across ~10 simulated nodes.",
+    "demonstrable_in_3_6_months": "Side-by-side demo: naive TAK/Ditto replication vs. policy-driven replication over identical shaped links, showing time-to-arrival of priority objects (e.g., fires target updates, medevac requests) cut by a measured factor, zero duplicate tracks after partition, and an operator-readable reconcile log; run on commercial laptops/SBCs and Wi-Fi/LTE plus a throttled Starlink or a pair of commercial mesh radios.",
+    "what_it_must_prove": "That mission-policy ordering and fidelity degradation deliver a measurable operational benefit (priority objects arrive first, link not saturated on reconnect) that the incumbent engine defaults do not, AND that an integrator or the TAK Product Center is willing to consume it via an API - the second is the real test.",
+    "uses": ["commercial hardware", "public/open data", "simulated military data", "unclassified architecture", "commercial compute", "open standards"]
+  },
+  "data_requirement": {
+    "what": "Cursor-on-Target/TAK object schemas and mission-package formats; representative message mixes per mission phase (volume, size, object types); tactical link telemetry traces (MANET/LEO throughput, loss, latency over time); later, exercise data on partition events and reconciliation actions (likely CUI).",
+    "legally_realistically_obtainable": "CoT schemas, ATAK-CIV and TAK Server docs are public (ATAK-CIV/SDK open-sourced on GitHub; TAK-GOV/MIL distribution-controlled). Message mixes and link traces can be synthesized or measured on commercial mesh radios/Starlink. Real exercise partition data requires being inside an NGC2 team or a CRADA with C5ISR Center - not obtainable as an outsider, and CUI/ITAR questions need counsel if a non-US-person founder touches it.",
+    "sources": ["https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV", "https://docs.opentakserver.io/mission_api.html", "Commercial mesh radio / Starlink link measurements (self-collected)", "DARPA FLUID program materials for DDIL capacity regimes (https://www.darpa.mil/research/programs/fluid)", "DEVCOM C5ISR Center CRADA (aspirational)"]
+  },
+  "integration_requirement": {
+    "systems": ["TAK Server (missions, federation) and ATAK/WinTAK clients", "NGC2 common data layer: Anduril Lattice / Lattice Mesh SDK, Palantir Foundry edge, Raft registries/federation", "Ditto SDK / Edge Sync (Air Force, Navy COD)", "Transport telemetry from Persistent Systems Wave Relay / Silvus MANET and pLEO terminals", "Prime Kubernetes environment (Big Bang / Platform One style) for deployment inside NGC2 hubs"],
+    "interfaces_protocols": ["Cursor-on-Target (CoT) XML/protobuf", "TAK Server Mission API / Data Sync change feed", "Lattice SDK (gRPC/REST APIs opened to third parties)", "Ditto SDK query/subscription APIs", "DTN/Bundle Protocol concepts (RFC 9171) and MQTT/pub-sub patterns", "Radio management APIs / SNMP for link telemetry"],
+    "who_controls_the_interface": "TAK Product Center (government) for TAK; Anduril (with Palantir and Raft) for the NGC2 data layer under the Army-established baseline; Ditto for its SDK; PEO C3N as the government owner of the NGC2 layers. The startup controls none of them."
+  },
+  "customer": {
+    "user": "NGC2 app developers and hub operators; G6/S6; fires/intel/logistics cell staff; Air Force expeditionary comms teams",
+    "champion": "Most plausible: an NGC2 integrator's data-layer lead (Team Anduril / Team Lockheed) or the TAK Product Center; alternatively an AFLCMC BES or AFWERX program manager already funding Ditto; DEVCOM C5ISR Center tactical-network S&T leads",
+    "contract_signer": "For Army: PEO C3N / Capability PEO C2 Information Network via OTA to the prime team (startup would be a subcontractor); for Air Force: AFLCMC (BES Directorate) via SBIR Phase II/III or AFWERX; for Navy: NIWC Pacific / Project Overmatch via DIU CSO",
+    "requirement_owner": "Army Futures Command / Network CFT and T2COM for NGC2 characteristics of need; ACC for expeditionary comms; Project Overmatch for Navy DDIL data",
+    "program_office": "PEO C3N (NGC2 data and transport layers); AFLCMC BES (Ditto contract); DIU with NIWC PAC (COD)",
+    "contracting_office": "Army Contracting Command - Aberdeen Proving Ground (HYPOTHESIS for NGC2 OTAs; not confirmed); AFLCMC Wright-Patterson for the Ditto award (FACT)"
+  },
+  "budget": {
+    "program_or_line": "NGC2 portfolio (Army; ~$3.3B identified through FY2026 across the four layers; FY26 NDAA caps obligation at 50% pending report); Air Force SBIR Phase II/III money via AFLCMC BES (Ditto $28M ceiling, ~$5.3M obligated at award); DARPA FLUID (program budget not retrieved); DIU/Navy COD transition (values not disclosed)",
+    "evidence": "No public budget line is dedicated to edge sync/prioritization; money flows through the NGC2 data-layer prime, Air Force SBIR/STRATFI awards and DARPA. GAO-26-108019 confirms NGC2 scale but flags missing cost/schedule detail.",
+    "source_url": "https://www.gao.gov/products/gao-26-108019",
+    "confidence": "MEDIUM"
+  },
+  "entry_vehicle": {
+    "primary": "Subcontract/partnership with an NGC2 integrator or the TAK ecosystem (TAK plugin), funded initially by AFWERX/Army SBIR or xTech prize money",
+    "sequence": ["xTech competition entry or AFWERX open-topic SBIR Phase I (DDIL sync/prioritization or DDIL test harness)", "CRADA or informal pilot with DEVCOM C5ISR Center / TAK Product Center; publish TAK plugin", "SBIR Phase II with an NGC2 integrator or PEO C3N letter of support; demonstrate at Project Convergence Capstone 6 / Ivy Sting-type sprint via the prime", "Phase III or task order under the prime's OTA / enterprise agreement, or acquisition by Ditto/Anduril/Raft"],
+    "eligibility_notes": "SBIR/STTR requires a U.S. small business more than 50% owned and controlled by U.S. citizens or permanent residents (armysbir.army.mil eligibility); the Indonesian founder cannot be counted toward that majority and the German founder only once permanent residency is granted - a >50% U.S.-person cap-table structure and counsel review are prerequisites. SBIR/STTR authority lapsed Sep 30, 2025 and was being reauthorized in 2026 (DefenseScoop Apr 29, 2026) - timing risk. OTAs via a prime avoid SBIR ownership rules but bring FOCI/CUI/ITAR access questions for a non-U.S.-person founder (needs counsel; no legal judgment made here)."
+  },
+  "competition": [
+    {"company": "Ditto (DittoLive Inc.)", "how_close": "Direct: cloud-to-edge CRDT sync platform; ATAK Edge Sync plugin; AFLCMC $28M-ceiling sole-source FFP (Jul 2025); DIU COD success (2024); ~$136M raised including $82M in Mar 2025", "evidence": "https://www.globalsecurity.org/military/library/news/2025/07/dod-contracts_4242075.htm ; https://techcrunch.com/2025/03/12/ditto-lands-82m-to-synchronize-data-from-the-edge-to-the-cloud"},
+    {"company": "Anduril (Lattice Mesh / NGC2 data layer lead)", "how_close": "Direct at the data-layer level: DDIL-optimized mesh, CDAO Edge Data Mesh production agreement, NGC2 common data layer baseline lead (Jun 2026), SDK opened to third parties", "evidence": "https://breakingdefense.com/2024/12/decentralizing-battle-data-cdao-anduril-open-tactical-mesh-to-third-party-developers/ ; https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery"},
+    {"company": "Palantir (Foundry edge / Apollo)", "how_close": "Direct inside NGC2: provides the edge-to-cloud data mesh with Anduril; edge deployment/sync behaviour not publicly documented", "evidence": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/"},
+    {"company": "TAK Product Center (government-owned TAK Server)", "how_close": "Direct for the re-sync primitive: Mission API/Data Sync lets disconnected clients catch up; federation propagates missions; no mission-priority policy", "evidence": "https://docs.opentakserver.io/mission_api.html"},
+    {"company": "Raft", "how_close": "Adjacent: registries, transformation and federation in the NGC2 data baseline; positioned to add policy features", "evidence": "https://breakingdefense.com/2026/06/army-picks-anduril-to-lead-next-gen-c2-common-data-layer-baseline/"},
+    {"company": "DARPA FLUID performers (names not retrieved)", "how_close": "Direct research on message re-encoding/suppression under 1 Mbps-1 kbps; will generate government-funded IP in 2025-2028", "evidence": "https://www.darpa.mil/research/programs/fluid"},
+    {"company": "Immersive Wisdom", "how_close": "Adjacent: ultra-low-bandwidth collaboration/COP; DoD-wide $25M sole-source ordering vehicle (ceiling, not revenue) and AFWERX STRATFI", "evidence": "https://immersivewisdom.com (company claims; RECALL from company record, not re-verified)"},
+    {"company": "HarperDB, Syntiant (DIU COD)", "how_close": "Adjacent: DDIL-capable edge databases for Navy unmanned systems; prototype success memos", "evidence": "https://executivegov.com/2024/09/diu-project-cod-results-artificial-intelligence/"},
+    {"company": "WPL Inc. (VERBENA SBIR)", "how_close": "Adjacent SBIR-stage pub-sub for DIL environments", "evidence": "https://www.sbir.gov/awards/215791 (RECALL - not re-verified this session)"},
+    {"company": "goTenna (Forterra), Persistent Systems, Silvus", "how_close": "Transport-layer mesh vendors with their own store-and-forward and QoS logic; own the link telemetry a policy layer would need", "evidence": "Company records B-series (earlier stage); Persistent Systems NGC2 network selection 2025-10 (MEDIUM)"},
+    {"company": "Open-source local-first stacks (PowerSync, ElectricSQL, Couchbase Lite, RxDB) and DTN implementations (ION, HDTN)", "how_close": "Commodity building blocks; lower the barrier for primes to build in-house", "evidence": "Ditto competitor list in company record (earlier stage)"}
+  ],
+  "incumbent_response": {
+    "could_anduril_palantir_l3harris_add_it": "Yes, easily. Anduril/Palantir own the NGC2 data mesh and its APIs, already sell 'DDIL-optimized' as a headline feature, and hold a CDAO production agreement; Ditto's engine is the natural place to add mission-priority queues and merge policies; TAK Product Center can extend the Mission API. Adding a policy scheduler and merge-rule engine is weeks-to-months of work for teams that already own the sync loop and the link telemetry.",
+    "why_startup_still_wins_or_reject": "Reject as a standalone company. The only credible startup positions are (a) a plugin/tooling vendor inside the TAK ecosystem or an NGC2 team, or (b) an acqui-hire target for Ditto/Raft/Anduril after proving a measurably better prioritization/merge layer. Neither supports venture-scale independence; the 'policy above vendor meshes' idea has no evidenced independent buyer, and the government is funding the research path through DARPA FLUID instead."
+  },
+  "capital_required": {
+    "proof_of_concept_usd": "$150k-$300k (2 engineers, 4-6 months, commercial radios/SBCs, netem test bed, TAK-CIV integration)",
+    "credible_military_demo_usd": "$1M-$2.5M (SBIR Phase I/II or xTech + prime partnership; Lattice/Ditto SDK integration; participation in an integrator-led sprint; CUI handling and facility basics)",
+    "first_production_deployment_usd": "$5M-$10M (Phase III/OTA task order, ATO inheritance inside the prime's Kubernetes environment, sustainment, cleared staff) - and realistically only as a subcontractor",
+    "assumptions": "HYPOTHESIS based on comparable SBIR-track software companies (Ditto's $28M ceiling with ~$5.3M obligated at award; Immersive Wisdom STRATFI); no direct public data for this niche. Founder capital of ~$250k covers proof of concept only."
+  },
+  "expertise_required": [
+    {"role": "Distributed-systems engineer with CRDT / eventually-consistent replication and DTN/bundle-protocol experience", "why": "The merge semantics and queueing under partitions are the core; getting them wrong causes data loss or silent conflicts", "fatal_if_absent": true},
+    {"role": "TAK / NGC2 integration engineer (CoT, TAK Server plugins, Lattice or Ditto SDK)", "why": "Product only exists as an integration into engines the startup does not own", "fatal_if_absent": true},
+    {"role": "Former Army signal (S6/G6) or NGC2 exercise participant / fires-cell operator", "why": "Mission-phase priority policies must reflect real staff workflows or nobody will trust them", "fatal_if_absent": true},
+    {"role": "Tactical RF/link engineer (MANET, pLEO telemetry)", "why": "Prioritization is only as good as the link model feeding it", "fatal_if_absent": false},
+    {"role": "Federal BD / SBIR-OTA navigator with prime relationships", "why": "The buyer is reached only through primes, TAK Product Center or AFWERX", "fatal_if_absent": false},
+    {"role": "Export-control / FOCI counsel (advisory)", "why": "Non-U.S.-person founder plus CUI/ITAR-adjacent tactical data and SBIR ownership rules", "fatal_if_absent": true}
+  ],
+  "regulatory_burden": {
+    "level": "medium",
+    "explanation": "The MVP is unclassified, uses open TAK-CIV software and commercial radios. Beyond MVP: TAK-GOV/MIL are distribution-controlled; NGC2 exercise data and link performance data are typically CUI; deploying inside a prime's environment requires ATO inheritance and possibly cleared staff; radio integrations may touch ITAR-controlled technical data. Sale of the software itself is likely EAR territory but this needs counsel - no legal determination made.",
+    "non_us_person_founder_note": "SBIR/STTR >50% U.S.-citizen/permanent-resident ownership and control rule means the Indonesian founder cannot be part of the qualifying majority; access to CUI/ITAR technical data by a non-U.S. person may require an export license or exclusion from that work (deemed-export rules); a FOCI mitigation may be needed for any facility clearance. Requires export-control and immigration counsel; the German founder's path to permanent residency changes but does not remove these questions."
+  },
+  "classification_dependence": "eventually",
+  "dual_use_potential": {
+    "level": "medium",
+    "explanation": "Bandwidth-aware prioritized sync has real commercial analogues (Ditto's commercial base in aviation, retail and maritime; IoT fleets; disaster response with TAK-CIV users such as CBP, FEMA, wildland fire). But the specific mission-phase policy and C2-object merge semantics are military; commercial buyers want generic sync, which Ditto and open-source local-first stacks already supply."
+  },
+  "defensibility": {
+    "what_becomes_proprietary": ["algorithms", "workflow", "integrations", "data"],
+    "explanation": "Possible moat: a validated library of mission-phase priority policies and measured link models, plus reconcile-rule sets per C2 object type, and the exercise-derived data to tune them. Weak in practice because the engine owners see all the same data, control the APIs and can replicate a scheduler; no network effects or accreditation moat accrue to a sidecar."
+  },
+  "why_now": "NGC2 moved from prototypes to a common data-layer baseline (Jun 2026) with division-scale exercises (Ivy Mass May 2026, Lightning Surge Mar 2026) that create measurable partition events; Anduril opened Lattice Mesh to third-party developers (Dec 2024); DARPA launched FLUID (Mar 2025) explicitly for application-aware load reduction under 1 Mbps-1 kbps; the Air Force converted Ditto's SBIR into a $28M-ceiling sole-source platform buy (Jul 2025); commercial pLEO and MANET transport are proliferating, so the mismatch between app assumptions and thin links is now visible at scale rather than hypothetical.",
+  "killer_risk": "Feature, not product. The store-and-forward/re-sync primitive already works inside Lattice/Foundry, Ditto and TAK Server (Ivy Mass demonstrated it), the residual policy/merge layer is a modest extension for the engine owners, the government funds the research path through DARPA FLUID performers rather than buying a product, and no independent buyer for a 'prioritization policy layer' is evidenced anywhere in public procurement - so the startup either becomes a plugin shop dependent on a prime or is acqui-hired at a small multiple.",
+  "market_stage": "Transitioning",
+  "procurement_signal_timeline": [
+    {"year": "2022", "event": "Ditto (and many others) seated on the $950M ABMS Digital Infrastructure IDIQ - vehicle only, no orders evidenced", "source_url": "https://www.lightreading.com/the-edge-network/ditto-touts-950m-air-force-contract"},
+    {"year": "2023-2024", "event": "DIU Common Operational Database prototypes (Ditto, Syntiant, HarperDB) with Project Overmatch/NIWC PAC; DIU reports goals met and Navy moving to production contracts (Sep 2024)", "source_url": "https://executivegov.com/2024/09/diu-project-cod-results-artificial-intelligence/"},
+    {"year": "2024-12", "event": "CDAO three-year production agreement to scale Anduril's tactical Edge Data Mesh (Lattice Mesh) and open it to third-party developers", "source_url": "https://breakingdefense.com/2024/12/decentralizing-battle-data-cdao-anduril-open-tactical-mesh-to-third-party-developers/"},
+    {"year": "2025-03", "event": "DARPA posts FLUID program (DDIL message re-encoding/suppression, 1 Mbps-1 kbps); Ditto raises $82M", "source_url": "https://www.darpa.mil/research/programs/fluid"},
+    {"year": "2025-07", "event": "Army awards NGC2 prototype OTA to Team Anduril ($99.6M, 4th ID); AFLCMC awards DittoLive $28M-ceiling sole-source sync platform contract", "source_url": "https://www.globalsecurity.org/military/library/news/2025/07/dod-contracts_4242075.htm"},
+    {"year": "2025-10", "event": "Ivy Sting sprints begin; hub-and-spoke architecture chosen for DDIL bandwidth/latency", "source_url": "https://federalnewsnetwork.com/federal-insights/2025/10/armys-4th-infantry-division-kicks-off-ivy-sting-exercises-to-scale-ngc2-prototype/"},
+    {"year": "2026-02", "event": "ACC AMIC Deployable Tactical Communications RFI asks for application-level QoS in contested forward environments", "source_url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view"},
+    {"year": "2026-05", "event": "Ivy Mass: division-scale NGC2 under degraded comms; local tracking and later sync demonstrated", "source_url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale"},
+    {"year": "2026-06", "event": "Army establishes NGC2 common data layer baseline, Anduril lead with Palantir and Raft", "source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery"},
+    {"year": "2026-08", "event": "GAO-26-108019 flags missing NGC2 cost estimate and fielding schedule for the 2032 goal", "source_url": "https://www.gao.gov/products/gao-26-108019"}
+  ],
+  "allied_extension": "Somewhat more compelling with allies, but not enough to change the verdict. TAK is used widely by NATO and partner forces, so a TAK plugin has a natural allied channel; Germany's D-LBO/TaWAN LBO (Rheinmetall, blackned) and the UK's Project Asgard (where Anduril UK demonstrated an edge data mesh) face the same DDIL sync problem without an Anduril/Palantir-owned data layer yet, and a German founder could credibly sell into the Bundeswehr ecosystem. However, allied programs also have their own incumbents (blackned, Systematic SitaWare, Thales) and the U.S. export-control posture of a U.S.-based product complicates the allied route; the more realistic allied play is a policy/sync layer built on TAK for NATO users, which is a niche service business.",
+  "search_log": [
+    {"query": "Ditto AFLCMC contract 2025 \"$28\" edge sync Air Force cloud-to-edge", "useful": true},
+    {"query": "TAK Server federation \"mission packages\" data sync disconnected DDIL tak.gov documentation", "useful": true},
+    {"query": "Anduril \"Lattice Mesh\" DDIL synchronization intermittent connectivity \"edge\" data documentation", "useful": true},
+    {"query": "SBIR topic 2025 2026 \"DDIL\" data prioritization \"store and forward\" tactical edge Army C5ISR OR AFRL OR NAVWAR", "useful": true},
+    {"query": "NGC2 \"Ivy Mass\" degraded communications \"synchronize\" OR \"sync\" division cloud 2026 army.mil", "useful": true},
+    {"query": "DIU \"Common Operational Database\" Project Overmatch DDIL vendors deployed unmanned", "useful": true},
+    {"query": "DARPA FLUID \"Flexible Networking Using Intelligent Dialecting\" DDIL solicitation 2025 transmission load", "useful": true},
+    {"query": "Palantir NGC2 \"edge\" data mesh DDIL \"disconnected\" Apollo OR Foundry Army 2025 2026 sync", "useful": false},
+    {"query": "GAO-26-108019 NGC2 Army C2 Fix report August 2026 findings data layer", "useful": true}
+  ],
+  "sources": [
+    {"url": "https://www.globalsecurity.org/military/library/news/2025/07/dod-contracts_4242075.htm", "title": "DoD Contracts for July 11, 2025 (DittoLive $28M ceiling)", "pub_date": "2025-07-11", "tier": 1},
+    {"url": "https://www.militaryaerospace.com/communications/article/55303000/communications-between-edge-computers-and-cloud-servers", "title": "Air Force chooses DittoLive to link edge computers and cloud servers where communications are limited", "pub_date": "2025-07", "tier": 2},
+    {"url": "https://techcrunch.com/2025/03/12/ditto-lands-82m-to-synchronize-data-from-the-edge-to-the-cloud", "title": "Ditto lands $82M to synchronize data from the edge to the cloud", "pub_date": "2025-03-12", "tier": 2},
+    {"url": "https://www.darpa.mil/research/programs/fluid", "title": "FLUID: Flexible Networking Using Intelligent Dialecting (DARPA)", "pub_date": "2025-03-28", "tier": 1},
+    {"url": "https://intelligencecommunitynews.com/darpa-unveils-fluid-program/", "title": "DARPA unveils FLUID program", "pub_date": "2025-04", "tier": 2},
+    {"url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale", "title": "Ivy Mass exercises NGC2 at division scale", "pub_date": "2026-06", "tier": 1},
+    {"url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery", "title": "Army and industry align on common data baseline as NGC2 moves from prototyping to delivery", "pub_date": "2026-06-22", "tier": 1},
+    {"url": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/", "title": "Army taps Anduril as lead for NGC2 common data layer baseline", "pub_date": "2026-06-22", "tier": 2},
+    {"url": "https://breakingdefense.com/2024/12/decentralizing-battle-data-cdao-anduril-open-tactical-mesh-to-third-party-developers/", "title": "Decentralizing battle data: CDAO, Anduril open tactical 'mesh' to third-party developers", "pub_date": "2024-12", "tier": 2},
+    {"url": "https://www.anduril.com/lattice/lattice-mesh", "title": "Lattice Mesh (Anduril product page - company marketing)", "pub_date": "2025", "tier": 3},
+    {"url": "https://executivegov.com/2024/09/diu-project-cod-results-artificial-intelligence/", "title": "Defense Innovation Unit Announces Results of Maritime AI Project (COD: Ditto, Syntiant, HarperDB)", "pub_date": "2024-09", "tier": 2},
+    {"url": "https://www.diu.mil/latest/department-of-defense-successfully-deploys-commercial-ai-solutions-for", "title": "DIU: DoD successfully deploys commercial AI solutions for COD project", "pub_date": "2024", "tier": 1},
+    {"url": "https://docs.opentakserver.io/mission_api.html", "title": "Mission API / Data Sync - OpenTAKServer documentation", "pub_date": "2025", "tier": 3},
+    {"url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV", "title": "ATAK-CIV open-source repository", "pub_date": "ongoing", "tier": 1},
+    {"url": "https://federalnewsnetwork.com/federal-insights/2025/10/armys-4th-infantry-division-kicks-off-ivy-sting-exercises-to-scale-ngc2-prototype/", "title": "Army's 4th Infantry Division kicks off Ivy Sting exercises to scale NGC2 prototype", "pub_date": "2025-10", "tier": 2},
+    {"url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view", "title": "ACC AMIC Deployable Tactical Communications RFI (sam.gov)", "pub_date": "2026-01", "tier": 1},
+    {"url": "https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/", "title": "Generative AI Enabled Tactical Network - Army SBIR|STTR topic", "pub_date": "2025", "tier": 1},
+    {"url": "https://www.sbir.gov/awards/215791", "title": "SBIR award 215791 - WPL VERBENA (RECALL, not re-verified)", "pub_date": "2025", "tier": 1},
+    {"url": "https://www.gao.gov/products/gao-26-108019", "title": "GAO-26-108019: Army Modernization - Better Schedule and Cost Information Needed to Support Scaling Battlefield Network", "pub_date": "2026-08-20", "tier": 1},
+    {"url": "https://defensescoop.com/2026/08/20/gao-report-army-ngc2-battlefield-network-modernization/", "title": "GAO warns information gaps could hinder Army's battlefield network modernization plans", "pub_date": "2026-08-20", "tier": 2},
+    {"url": "https://federalnewsnetwork.com/army/2026/02/lawmakers-cap-ngc2-funding-army-warns-industry-not-to-bring-negativity-to-congress/", "title": "Lawmakers cap NGC2 funding (FY26 NDAA 50% obligation cap)", "pub_date": "2026-02", "tier": 2},
+    {"url": "https://armysbir.army.mil/eligibility/", "title": "Army SBIR|STTR eligibility (U.S. ownership and control rule)", "pub_date": "2025", "tier": 1},
+    {"url": "https://defensescoop.com/2026/04/29/sbir-sttr-americas-seed-fund-is-being-revamped-for-modern-warfare/", "title": "SBIR/STTR reauthorization status 2026", "pub_date": "2026-04-29", "tier": 2},
+    {"url": "https://defence-industry.eu/anduril-uk-demonstrates-edge-data-mesh-capability-for-british-army-on-project-asgard/", "title": "Anduril UK demonstrates edge data mesh capability for British Army on Project Asgard", "pub_date": "2025", "tier": 2}
+  ]
+}

@@ -1,0 +1,672 @@
+{
+ "id": "G06",
+ "title": "Edge-to-enterprise sustainment status bridge (LOGSTAT-to-COP automation under DDIL) with plan-coupled fuel/ammunition/parts feasibility forecasting",
+ "problem": "Battalion-to-division sustainment status (Class I/III/V, maintenance, medical) is still hand-assembled by the S4/SPO from GCSS-Army extracts, voice reports and LOGSTAT spreadsheets and re-keyed into C2 tools, so the commander's sustainment picture lags hours to a day, collapses when disconnected, and operational plans are not automatically checked against fuel/ammunition/parts reality.",
+ "categories": [
+  "B",
+  "C",
+  "D",
+  "I",
+  "G",
+  "A"
+ ],
+ "segment_ids": [
+  "S01",
+  "S14"
+ ],
+ "chain_steps": [
+  "COLLECT",
+  "TRANSPORT",
+  "PROCESS",
+  "FUSE",
+  "DECIDE"
+ ],
+ "echelons": [
+  "company/battalion",
+  "brigade (BSB/SPO)",
+  "division/corps (G4, DSB)",
+  "theater (TSC/ESC, USAREUR-AF, USINDOPACOM)"
+ ],
+ "user": {
+  "exact_role": "Battalion S4 and BSB support operations officer (SPO) who build and maintain the sustainment COP from LOGSTATs; division G4 planners who produce the sustainment running estimate for each COA",
+  "echelon": "battalion through division, with a theater (TSC/ESC, ASCC G4) variant",
+  "organization_examples": [
+   "4th Infantry Division and 25th Infantry Division (NGC2 prototype divisions) and I Corps (next)",
+   "Division sustainment brigades (DSB) and brigade support battalions (BSB)",
+   "21st Theater Sustainment Command / USAREUR-AF (DIU JSDT Gallatin deployment)",
+   "8th TSC / USINDOPACOM precision-sustainment efforts",
+   "USMC combat logistics battalions and MEU/MLR logistics sections (CLC2S users)"
+  ]
+ },
+ "current_workflow": [
+  "Company XO/1SG estimates on-hand fuel, ammunition, water and maintenance status, or pulls GCSS-Army status when a connected terminal is available",
+  "Battalion S4 fills the LOGSTAT (unit spreadsheet or DA-format template) and sends it by email, JBC-P free text, chat or FM voice",
+  "BSB SPO consolidates LOGSTATs by hand, computes days of supply and builds the brigade sustainment COP (FACT: Army Sustainment Professional Bulletin, summer 2026, describes the S-4 developing and maintaining the sustainment COP by analyzing LOGSTAT data)",
+  "Division G4 re-enters the roll-up into CPCE/NGC2 widgets, a sync matrix or PowerPoint; commander briefs from slides",
+  "For plan changes, G4 re-runs OPLOG-Planner-style consumption factors in spreadsheets against the new COA; the sustainment estimate is a static slide",
+  "On reconnect, requisitions and status captured offline are re-keyed into GCSS-Army; duplicates and stale data are reconciled manually"
+ ],
+ "current_solution": "GCSS-Army (SAP ERP, connectivity-dependent) as the system of record; CPCE sustainment widgets / Logistics Reporting Tool (RECALL - not re-verified this session); Palantir Army Vantage/Army Data Platform dashboards at enterprise level; NGC2 prototype data layer with Rune TyrOS as the sustainment application on both NGC2 teams (Rune's five-year $99M IDIQ, June 2026, is a ceiling not revenue); Onebrief for planning (vendor claims sustainment constraints are integrated into COA development); USMC CLC2S (web app being migrated to cloud under LI2S-MC); DIU JSDT prototypes (ASI, Watchtower Labs, Gallatin AI Navigator) at theater/joint level; and, in practice, Excel, PowerPoint and voice.",
+ "failure": "At the point where unit status (captured on paper, voice or in a spreadsheet at company/battalion) must become structured data in both the ERP and the C2 data layer while the network is degraded: there is no offline-first, doctrinally structured sustainment ledger that syncs deltas in both directions; and at the point where a plan changes: no live link between plan objects (units, tasks, distances, tempo) and consumption/stock models, so feasibility is recomputed by hand. Both failures are acknowledged by the Army (FM 4-0 'predictive logistics' imperative; SBIR PORTAL topic asking for brigade-and-below predictive logistics in contested environments) and are now the object of multiple funded prototypes.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "Army Sustainment Professional Bulletin (summer 2026) still describes the S-4 developing and maintaining the sustainment COP by analyzing LOGSTAT data and communicating requirements to the SPO - i.e., a staff-built, report-driven picture in 2026, even in the modular-brigade concept",
+   "source_title": "Breaking the BSA: Cluster-Based Sustainment in the MBCT (army.mil)",
+   "source_url": "https://www.army.mil/article-amp/293629/breaking_the_bsa_cluster_based_sustainment_in_the_mbct",
+   "pub_date": "2026 (summer 2026 ASPB edition per search summary)",
+   "event_date": "2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Army sustainment authors frame NGC2 as the means to integrate sustainment data streams into a unified environment and to make LOGSTAT collection automatic, and cite FM 4-0's 'predictive logistics' as a doctrinal imperative - the aspiration itself documents that today's LOGSTAT flow is not automatic",
+   "source_title": "NGC2 at the Tactical Edge: Enabling Predictive Logistics for Decision Dominance; The Future of Sustainment: Integrating NGC2; NGC2: Data-Informed Sustainment Decision Making (army.mil)",
+   "source_url": "https://www.army.mil/article/290032/ngc2_at_the_tactical_edge_enabling_predictive_logistics_for_decision_dominance",
+   "pub_date": "2026 (approx.; article numbers 290029-290044, early 2026)",
+   "event_date": "2025-2026",
+   "tier": 1,
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Army acknowledged in 2018 that sustainment brigades must build their own terrain-oriented sustainment COP; the pain has persisted for 8+ years",
+   "source_title": "Developing a common operational picture for sustainment (army.mil)",
+   "source_url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment",
+   "pub_date": "2018",
+   "event_date": "2018",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "Army logistics directorate document (Aug 2025) describes the 'swivel chair' burden of operating multiple logistics systems to order, maintain and inventory (MEDLOG in Campaigning)",
+   "source_title": "Army LG-DA logistics document, 19 Aug 2025 (api.army.mil download)",
+   "source_url": "https://api.army.mil/e2/c/downloads/2025/08/19/5d3af5ba/lg-da-19-aug-25.pdf",
+   "pub_date": "2025-08-19",
+   "event_date": "2025",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "Army SBIR topic PORTAL (Predict, Optimize, Recommend, and Track for Adaptive Logistics) seeks an AI-enabled predictive logistics software solution for brigade level and below, operating in contested environments, with real-time tracking, predictive analysis and AI-generated COAs; Army SBIR|STTR also released $250K and $2M contested-logistics-and-sustainment opportunities and xTech Search 10 (ARM26BX05-NP011, white papers due 2026-08-26) lists Contested Logistics and Sustainment as a priority portfolio",
+   "source_title": "PORTAL topic - Army SBIR|STTR Program; Army SBIR|STTR releases $250K and $2M in contested logistics and sustainment funding opportunities; xTech Search 10",
+   "source_url": "https://armysbir.army.mil/topics/predict-optimize-recommend-and-track-for-adaptive-logistics-portal/",
+   "pub_date": "2025-2026 (exact dates not visible; .mil pages blocked by proxy)",
+   "event_date": "2025-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "Army RCCTO issued a proposal request for AI/ML prototype tools to address capability gaps in current logistics systems, developed with the Contested Logistics CFT under the Human-Machine Integrated Formations initiative; C3 AI announced selection to deliver an AI contested-logistics solution for combat operations (selection is not deployment)",
+   "source_title": "Army Issues Proposal Request for AI/ML Tools (ExecutiveBiz); US Army: C3 AI selected to deliver AI contested logistics solution (c3.ai)",
+   "source_url": "https://www.executivebiz.com/articles/army-rccto-ai-ml-proposal-solicitation",
+   "pub_date": "2025-2026 (exact date not visible in search summary)",
+   "event_date": "2025-2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "DIU Joint Sustainment Decision Tool: launched Aug 2025; prototype OTs to Air Space Intelligence and Watchtower Labs (Jan 2026, announced Feb 2026); third award to Gallatin AI (Navigator) for USAREUR-AF announced 2026-07-15, with Scale AI providing COA validation - three awards in 11 months, all prototypes, none a program of record",
+   "source_title": "Two Contracts Awarded To DIU's Joint Sustainment Decision Tool Project (diu.mil); Gallatin AI Awarded DIU JSDT Contract for USAREUR-AF (PR Newswire)",
+   "source_url": "https://www.diu.mil/latest/two-contracts-awarded-to-modernize-decision-making-for-dows-joint-logistics",
+   "pub_date": "2026-02 / 2026-07-15",
+   "event_date": "2025-08 to 2026-07",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Rune Technologies received a five-year $99M IDIQ from the Army (announced 2026-06-18) as an enterprise vehicle for TyrOS, after a $2M award (2026-03-12) and participation on the Anduril NGC2 team; the IDIQ is a ceiling, obligations unknown - but it shows the Army has already chosen a commercial vendor for the edge sustainment problem",
+   "source_title": "U.S. Army Awards Rune Technologies with $99M Army Contract for AI-Powered Predictive Logistics Platform (BusinessWire); U.S. Army Awards Rune Technologies $2M (BusinessWire via Morningstar)",
+   "source_url": "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform",
+   "pub_date": "2026-06-18",
+   "event_date": "2026-06",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "At least eight vendors hold funded or 'awardable' positions on parts of this problem in 2025-2026: Rune (NGC2 + IDIQ), Gallatin AI (Army PORTAL SBIR + DIU), ASI and Watchtower (DIU), C3 AI (RCCTO), NT Concepts PLANK (Tradewinds 'awardable' tactical data mesh syncing ops and logistics data without constant connectivity), DEFCON AI (theater distribution planning at Talisman Sabre 2025), Palantir Vantage (enterprise), Onebrief (planning) - none verified as fielded at battalion/brigade under DDIL",
+   "source_title": "Gallatin AI Awarded Army PORTAL Contract (PR Newswire); DEFCON AI Talisman Sabre 2025 (BusinessWire); NT Concepts PLANK (Tradewinds, via evidence E02-F36)",
+   "source_url": "https://www.prnewswire.com/news-releases/gallatin-ai-awarded-army-portal-contract-to-bring-predictive-logistics-to-contested-operations-302710753.html",
+   "pub_date": "2025-07-10 to 2026-07",
+   "event_date": "2025-2026",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO issued restricted reports on fuel supply in a contested Indo-Pacific (GAO-25-107216C, 2025-06-26) and on European logistics gaps with NATO (GAO-25-106999C, 2025-08-25), and public readiness reports GAO-25-108104 / GAO-26-108888 flag persistent sustainment challenges - oversight confirms the demand-side urgency (contents of restricted reports not public)",
+   "source_title": "GAO Restricted Reports; GAO-26-108888 Military Readiness",
+   "source_url": "https://www.gao.gov/reports-testimonies/restricted",
+   "pub_date": "2025-06-26 / 2025-08-25 / 2026",
+   "event_date": "2025-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "Army declined the second-year option on the EBS-C ERP consolidation (May 2026), so the ERP side of the edge-to-enterprise bridge (GCSS-Army/LMP/AESIP convergence) remains unresolved",
+   "source_title": "Army walks away from business system consolidation contract (Washington Technology)",
+   "source_url": "https://www.washingtontechnology.com/contracts/2026/05/army-walks-away-business-system-consolidation-contract/413751/",
+   "pub_date": "2026-05-18",
+   "event_date": "2026-05",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "USMC logistics in DDIL documented as unsolved (Marine Corps Gazette, May 2022); CLC2S is a CAC web application that LI2S-MC is migrating to a government cloud and the tactical communications architecture - connectivity dependence persists",
+   "source_title": "Logistics Operations in a DDIL Environment (Marine Corps Gazette); LI2S-MC slicksheet Dec 2025 (PEO MLB)",
+   "source_url": "https://www.mca-marines.org/wp-content/uploads/Logistics-Operations-in-a-DDIL-Environment.pdf",
+   "pub_date": "2022-05 / 2025-12",
+   "event_date": "2022-2025",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Onebrief enterprise IDIQ (W9128Z-26-D-A014, announced 2026-09-11) and NGC2 participation (2026-06-30) make plan objects programmatically available; Onebrief itself claims sustainment constraints are integrated into COA development (vendor claim, not verified) - the plan-coupled forecasting half of this gap may be absorbed by the planning incumbent",
+   "source_title": "Onebrief Awarded Enterprise Contract by U.S. Army Contracting Command (BusinessWire); Foundation for Modern Mission Command: Onebrief in the Army's NGC2 Environment (onebrief.com)",
+   "source_url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software",
+   "pub_date": "2026-09-17 / 2026-06",
+   "event_date": "2026-06 to 2026-09",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "They are now solving it, but only since 2025-2026 and only at prototype scale: the problem sat unowned for years because it is low-glamour, its inputs (GCSS-Army/LIW readiness and stock data, unit locations) are CUI held by different owners (PEO EIS/CPE ES2 for the ERP, PEO C3T/CPE C2IN for C2, AMC/LDAC for data, CL CFT/CASCOM/G-4 for requirements, USTRANSCOM for movement), and the edge network was too unreliable for a connected SaaS model. What changed is NGC2's open data layer, the CL CFT's Precision Sustainment portfolio, RCCTO/DIU/SBIR money and Army willingness to give commercial software enterprise IDIQs. The result is not an unsolved gap but a crowded, early race (Rune, Gallatin, ASI, Watchtower, C3 AI, NT Concepts, DEFCON AI, Palantir, Onebrief) in which no vendor has yet shown a fielded battalion/brigade capability under DDIL - the residual gap is at the very edge (paper/voice/spreadsheet capture and offline-first sync) and in cross-service and allied logistics.",
+ "why_not_solved_reasons": [
+  "buyer fragmentation",
+  "data inaccessible",
+  "proprietary incumbent architecture",
+  "economics",
+  "technology only recently possible",
+  "integration complexity"
+ ],
+ "technical_wedge": "A neutral, offline-first 'sustainment data transport' rather than another dashboard: a CRDT/delta-sync ledger with a doctrinal LOGSTAT/OPLOG schema that captures status at company/battalion from the inputs that actually exist (voice, photo of a whiteboard, spreadsheet, JBC-P free text) using on-device speech/vision extraction, auto-computes days of supply and running estimates, and exposes thin adapters (CoT/JSON to NGC2/CPCE, CSV/PDF LOGSTAT, GCSS-Army report exports, Onebrief plan import) plus a stateless 'feasibility-as-a-service' API (COA in, shortfalls by class of supply and time out, with uncertainty). Positioned to sell into Rune/Onebrief/NGC2 integrators as the capture-and-sync layer, or to USMC/allied units that have no Rune equivalent.",
+ "mvp": {
+  "what": "Tablet/web app plus sync service: ingest simulated GCSS-Army report exports and company-level inputs (voice/photo/spreadsheet) into a doctrinal LOGSTAT schema; compute days of supply and readiness; peer-to-peer delta sync over intermittent links with conflict resolution; export CoT/JSON to a COP (e.g., TAK) and a formatted LOGSTAT; a plan-feasibility endpoint that consumes a COA JSON (units, tasks, distances, tempo) and applies public OPLOG-style planning factors to output shortfalls over time.",
+  "demonstrable_in_3_6_months": "A home-station CPX-style demo with a National Guard/Reserve sustainment unit or a university ROTC/Army Reserve partner using synthetic unit data: show LOGSTAT capture in <2 minutes per company, survival of a 6-hour comms blackout with correct reconciliation on reconnect, live sustainment COP in TAK/ATAK, and a COA feasibility check that updates when the plan changes.",
+  "what_it_must_prove": "(1) Capture friction at company level is lower than the current spreadsheet/voice report; (2) the sync model produces no duplicates or stale-data regressions after blackout; (3) the feasibility engine's shortfall predictions match staff estimates on published exercise scenarios; (4) integration into an existing data layer (TAK/CoT first, NGC2/Onebrief later) works without bespoke engineering.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Doctrinal planning factors and report formats (FM 4-0, ATP 4-90, OPLOG Planner factors, LOGSTAT templates); realistic unit consumption histories; GCSS-Army/LIW extract formats; plan objects (COA JSON or Onebrief export); ITV/telemetry feeds later.",
+  "legally_realistically_obtainable": "Public doctrine and planning factors: yes. Real GCSS-Army/LIW/unit LOGSTAT data: CUI, obtainable only through a sponsoring unit, CFT or program office under a data-use agreement and NIST SP 800-171/CMMC L2 handling; theater OPLAN-linked data is classified. A non-US-person founder's access to CUI/export-controlled logistics technical data needs counsel and likely segregation.",
+  "sources": [
+   "FM 4-0 Sustainment Operations and ATP 4-90 (public)",
+   "CALL newsletters on brigade sustainment (public PDFs)",
+   "Exercise scenario data (Warfighter/CTC) via sponsor",
+   "GCSS-Army report exports (CUI, via sponsor)",
+   "Onebrief plan exports / NGC2 data layer APIs (via ecosystem access)",
+   "USMC CLC2S/GCSS-MC extracts (CUI, via sponsor)"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "GCSS-Army / AESIP (SAP ERP)",
+   "NGC2 integrated data layer (Anduril Lattice / Lockheed data layer) and CPCE",
+   "TAK/ATAK and JBC-P (CoT)",
+   "Onebrief plan objects",
+   "Palantir Vantage/Army Data Platform",
+   "USMC CLC2S / GCSS-MC",
+   "Rune TyrOS and Gallatin Navigator if entering as a sub-component"
+  ],
+  "interfaces_protocols": [
+   "Cursor-on-Target (CoT) / TAK plugins",
+   "REST/JSON and message queues exposed through NGC2's data layer (documented APIs still being created - Operation Jailbreak 2026)",
+   "SAP/GCSS-Army report exports (CSV/XLSX) and, with program office approval, BAPI/IDoc or AESIP data services",
+   "Onebrief integration API (partner program)",
+   "IL4/IL5 hosting, ATO, CMMC L2"
+  ],
+  "who_controls_the_interface": "The Army program offices (CPE C2IN for NGC2/CPCE, CPE ES2 for GCSS-Army/AESIP) and the NGC2 team leads (Anduril, Lockheed) plus Palantir under the Enterprise Agreement control the data-layer interfaces; Onebrief controls its plan API; a startup gets access only as a team member, partner or SBIR performer with a sponsor."
+ },
+ "customer": {
+  "user": "Battalion S4, BSB SPO, division G4 and DSB staff; USMC CLB/MLR logistics sections",
+  "champion": "Contested Logistics CFT (Precision Sustainment portfolio) director or a division G4 / DSB commander in an NGC2 division; CASCOM sustainment concepts staff; Army Sustainment Professional Bulletin authors",
+  "contract_signer": "Army Contracting Command (ACC-APG for C2IN, ACC-Redstone for AMC/CFT-sponsored efforts), Army SBIR contracting officers, DIU agreements officers, or an NGC2 team lead (subcontract)",
+  "requirement_owner": "Army G-4 / CASCOM (sustainment requirements) and T2COM/C2 CFT for the C2 side; HQMC I&L and MCSC LI2S-MC for USMC (INFERENCE on exact offices)",
+  "program_office": "CPE C2IN (NGC2 applications and data), CPE ES2 (GCSS-Army/AESIP), RCCTO (HMIF logistics AI prototypes), PEO MLB / LI2S-MC (USMC)",
+  "contracting_office": "ACC-APG (INFERENCE), ACC-Redstone, Army SBIR (AAL), DIU (OT agreements)"
+ },
+ "budget": {
+  "program_or_line": "No discrete tactical sustainment-C2 software line found; money sits inside NGC2 C2 Applications (FY2026 request ~$488.4M RDT&E, PE not verified) and C2 Data (~$306.1M), RCCTO HMIF prototype funds, Army SBIR/xTech Contested Logistics and Sustainment awards ($250K Phase I / $2M Phase II class), DIU JSDT OT funds, and FY2027 Army RDT&E references to AI-enabled contested logistics support tools (Budget Activity 4B justification book).",
+  "evidence": "FY2027 Army RDT&E justification books reference AI-enabled contested logistics support tools and Joint Concept for Contested Logistics experimentation (search summary; PE number and amounts not retrievable this session - .mil PDFs blocked). NGC2 line figures are from the Army buyer map (E05/buyers/army.json, PE numbers unverified). E05-F30 found no discrete line (HYPOTHESIS/LOW).",
+  "source_url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%202%20-%20Budget%20Activity%204B.pdf",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Army SBIR Contested Logistics and Sustainment topics (PORTAL-type or xTech Search prize-to-Phase-I) sponsored by the CL CFT, or a subcontract/partner slot with an NGC2 team member (Rune, Onebrief) as the edge-capture and sync layer",
+  "sequence": [
+   "Build unclassified PoC on synthetic data and TAK/CoT (founder capital)",
+   "Enter xTech Search / Army SBIR Contested Logistics topic or DIU JSDT follow-on CSO; secure a CL CFT or division G4 sponsor",
+   "Phase II / OT prototype with one NGC2 division or a USMC unit; obtain CUI handling (CMMC L2) and an IL4/IL5 sandbox",
+   "Partner integration with Onebrief (plan API) or Rune (edge capture) and demonstrate at Ivy Sting/PC-C7-type events",
+   "Ride an existing enterprise vehicle (Onebrief or Rune IDIQ task order, Palantir EA co-sell, Tradewinds awardable) rather than seeking a new program of record"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% ownership by US citizens or permanent residents and US-based performance; a German founder who becomes a permanent resident can count toward that, but the Indonesian founder's stake and roles must be structured so the firm meets the ownership test and so no export-controlled logistics technical data or CUI reaches a non-US person without proper authorization (deemed-export and CUI rules) - needs export-control and immigration counsel. DIU OTs and xTech prizes have looser ownership rules but CUI/FOCI questions still arise at prototype stage. Facility/personnel clearances would eventually require a US-person-controlled entity."
+ },
+ "competition": [
+  {
+   "company": "Rune Technologies (TyrOS)",
+   "how_close": "Direct - edge-first tactical logistics platform for DDIL on both NGC2 teams; five-year $99M Army IDIQ (June 2026, ceiling) and $2M award (Mar 2026)",
+   "evidence": "BusinessWire 2026-06-18; Morningstar/BusinessWire 2026-03-12; buyers/army.json chain 4"
+  },
+  {
+   "company": "Gallatin AI (Navigator)",
+   "how_close": "Direct for forecasting/COA half - Army PORTAL SBIR contract for brigade-and-below predictive logistics in contested operations, plus DIU JSDT award for USAREUR-AF (2026-07-15) with Scale AI COA validation",
+   "evidence": "PR Newswire 2026-07-15 and PORTAL award release (2026)"
+  },
+  {
+   "company": "Air Space Intelligence and Watchtower Labs",
+   "how_close": "Adjacent - DIU JSDT prototypes for joint/theater predictive logistics COAs (Jan 2026)",
+   "evidence": "diu.mil, Feb 2026"
+  },
+  {
+   "company": "C3 AI",
+   "how_close": "Adjacent - selected by Army RCCTO for an AI contested-logistics solution for combat operations; enterprise predictive-maintenance incumbent (PANDA)",
+   "evidence": "c3.ai news release; ExecutiveBiz RCCTO solicitation coverage"
+  },
+  {
+   "company": "NT Concepts (PLANK)",
+   "how_close": "Direct on the DDIL sync wedge - tactical data mesh with localized AI agents keeping operations and logistics data synchronized without constant connectivity; Tradewinds 'awardable' (market-research designation, not a contract)",
+   "evidence": "evidence E02-F36 (ExecutiveBiz/Tradewinds)"
+  },
+  {
+   "company": "Onebrief",
+   "how_close": "Direct on plan-coupled feasibility - owns plan objects; enterprise IDIQ (Sept 2026), NGC2 participant; claims sustainment constraints integrated into COA development (vendor claim)",
+   "evidence": "BusinessWire 2026-09-17; onebrief.com content hub 2026"
+  },
+  {
+   "company": "Palantir (Vantage / Army Data Platform)",
+   "how_close": "Adjacent/enterprise - sanctioned readiness and logistics data layer; $10B-ceiling EA (July 2025) lets the Army extend it to any adjacent use case",
+   "evidence": "army.mil EA announcement 2025; BusinessWire 2024-12-18"
+  },
+  {
+   "company": "DEFCON AI",
+   "how_close": "Adjacent - theater distribution planning tool demonstrated at Talisman Sabre 2025",
+   "evidence": "BusinessWire 2025-07-10"
+  },
+  {
+   "company": "Shift5 and Raft",
+   "how_close": "Adjacent - vehicle telemetry into NGC2 (Ivy Sting 4) and ammunition-expenditure-to-sustainment linkage at Lightning Surge 2 (vendor claims)",
+   "evidence": "S01 segment file (LinkedIn mirrors, 2026)"
+  },
+  {
+   "company": "Government: CPCE sustainment widgets / Logistics Reporting Tool; GCSS-Army; USMC CLC2S",
+   "how_close": "Incumbent government tools the bridge must feed",
+   "evidence": "RECALL - not re-verified this session; LI2S-MC slicksheet Dec 2025"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes, easily: Anduril already hosts Rune inside its NGC2 team and could build sustainment widgets on Lattice; Palantir can extend Vantage to edge nodes under the EA; Lockheed's 25th ID data layer can absorb sustainment feeds; Onebrief can add feasibility natively. The Army's stated preference is that sustainment data ride the NGC2 data layer, which the integrators control.",
+  "why_startup_still_wins_or_reject": "Mostly reject as a primary bet: the incumbents and 2025-2026 entrants hold the integration slots, the CUI data and the vehicles. A startup wins only in the residual niche the funded players have not shown: (a) the lowest-echelon capture problem (voice/photo/paper/spreadsheet LOGSTAT to structured data on commodity devices) sold as a component to Rune/Onebrief/NGC2 integrators or TAK users; (b) USMC and allied (NATO/Indo-Pacific partner) units that have no Rune equivalent and where GAO has flagged European logistics gaps; (c) a rigorous, open feasibility engine that planning tools call as a service. None of these has demonstrated a large standalone market."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$50k-$200k",
+  "credible_military_demo_usd": "$500k-$2M",
+  "first_production_deployment_usd": "$5M-$20M",
+  "assumptions": "PoC: two founders plus one contractor, synthetic data conforming to public doctrine formats, TAK/CoT integration, no ATO - within the $250k founder capital. Credible demo: SBIR Phase I/II or DIU OT funded, CUI-capable environment (CMMC L2), IL4/IL5 sandbox, one real integration (GCSS-Army export or NGC2/Onebrief API), participation in an Ivy Sting/PC-C7-type event, 4-8 staff for 12-18 months. Production: ATO, CMMC L2, program-office-approved AESIP/GCSS-Army integration, helpdesk/sustainment, possibly a SIPR instance, 15-30 staff over 2-3 years; task orders on an existing IDIQ are the realistic revenue path, and obligated dollars for this niche are unproven."
+ },
+ "expertise_required": [
+  {
+   "role": "Former Army/USMC logistics officer (S4/SPO/G4, ideally with NGC2 division or CTC observer-coach experience)",
+   "why": "Doctrinal LOGSTAT/running-estimate schema, planning factors, and credibility with the CL CFT and division G4 champions",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Distributed-systems engineer (CRDT/offline-first sync, mobile/edge)",
+   "why": "The wedge is the offline-first bidirectional sync; naive client-server designs fail on reconnect",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Defense integration/ATO engineer (TAK/CoT, NGC2 data layer, IL4/IL5, CMMC L2)",
+   "why": "Access to data layers and hosting is gated by accreditation and integrator APIs",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Operations-research / forecasting engineer",
+   "why": "Feasibility engine must beat staff estimates on published scenarios with quantified uncertainty",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Government BD lead with SBIR/xTech/DIU and NGC2-ecosystem relationships",
+   "why": "Sponsor and vehicle access decide whether a prototype ever gets real data",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Export-control / FOCI counsel (fractional)",
+   "why": "Non-US-person founder and CUI/ITAR-adjacent logistics technical data",
+   "fatal_if_absent": true
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "Generic sustainment software is usually not ITAR-controlled, but maintenance/technical data on specific weapon systems and some military-critical logistics information can be export-controlled; nearly all real inputs (stock levels, readiness, unit locations) are CUI requiring NIST SP 800-171/CMMC Level 2; deployment needs an ATO (IL4/IL5) and, for theater/joint OPLAN-linked use, SIPR and cleared staff. A tactical-echelon product can stay unclassified longer than a joint planning product.",
+  "non_us_person_founder_note": "The Indonesian founder (not assumed a US person) can participate in an unclassified, synthetic-data PoC, but any CUI, export-controlled technical data, SBIR ownership test (>50% US citizens/permanent residents), FOCI review for facility clearance, and personnel-clearance stages require structuring (cap table, roles, access segregation) reviewed by export-control and immigration counsel; this is a constraint to plan for, not a definitive legal judgment."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "Offline-first inventory/consumption capture and sync with plan-feasibility forecasting maps to disaster response (FEMA/NGO field logistics), mining/oil-and-gas remote operations, humanitarian supply chains and wildfire incident logistics - all intermittently connected, spreadsheet-driven fields. The doctrinal schema and NGC2 integrations are defense-specific, and no commercial customer was evidenced this session, so the dual-use path is plausible but unproven (HYPOTHESIS)."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "integrations",
+   "workflow",
+   "data",
+   "accreditation",
+   "government relationships",
+   "deployment footprint"
+  ],
+  "explanation": "If it works, the defensible assets are the accredited integrations into GCSS-Army/NGC2/Onebrief, the doctrinal capture workflow adopted by units, historical consumption datasets that improve forecasting, and sponsor relationships - not the algorithms, which incumbents can replicate. All of these are also exactly what Rune, Gallatin and the NGC2 integrators are accumulating first."
+ },
+ "why_now": "In the last ~3 years: the Contested Logistics CFT formed (Mar 2023) and made predictive logistics a doctrinal imperative (FM 4-0); NGC2 created an open data layer with monthly soldier-touchpoint exercises (Ivy Sting, Ivy Mass, PC-C6) where sustainment data is an intended feed; the Army began paying commercial vendors for exactly this (Rune $99M IDIQ, Gallatin PORTAL, C3 AI RCCTO, DIU JSDT x3); Onebrief's IDIQ and NGC2 role make plan objects programmatically available for the first time; the EBS-C retreat (May 2026) left the ERP side open; and GAO's 2025 restricted reports on Indo-Pacific fuel and European logistics raised oversight pressure. Edge compute, mesh/LEO connectivity and on-device speech/vision models also make offline-first capture feasible on commodity devices.",
+ "killer_risk": "This is no longer an unowned gap: between June 2025 and September 2026 the Army and DIU selected and funded at least six vendors for edge and theater predictive logistics, including a $99M IDIQ for Rune that is embedded in both NGC2 teams, and the planning incumbent (Onebrief) claims to be absorbing sustainment feasibility. A two-student team with no CUI access, no NGC2 slot and a non-US-person founder would be entering after the Army has already chosen its commercial bets, competing for sub-component crumbs in a low-dollar tactical niche whose obligated spend is still unproven - a classic J (no real startup opportunity for this team) with a B/I residual.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2018",
+   "event": "Army acknowledges sustainment brigades must build their own sustainment COP; CALL Newsletter 18-10 on brigade sustainment",
+   "source_url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment"
+  },
+  {
+   "year": "2022",
+   "event": "Marine Corps Gazette documents logistics operations in DDIL as unsolved",
+   "source_url": "https://www.mca-marines.org/wp-content/uploads/Logistics-Operations-in-a-DDIL-Environment.pdf"
+  },
+  {
+   "year": "2023",
+   "event": "Army Contested Logistics CFT formed (March) and reaches FOC; predictive logistics CDD work begins (Class III/V, maintenance, medical)",
+   "source_url": "https://www.army.mil/article/284116/army_futures_commands_contested_logistics_cross_functional_team_transforming_for_future_sustainment"
+  },
+  {
+   "year": "2024",
+   "event": "Project Convergence Capstone 4 tests contested logistics with joint C2; EBS-C award (Oct); Palantir Vantage extension $618.9M (Dec)",
+   "source_url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000"
+  },
+  {
+   "year": "2025",
+   "event": "NGC2 prototype awards (Anduril team incl. Rune, Jul; Lockheed, Sep); Palantir EA (Jul); GAO restricted reports on Indo-Pacific fuel (Jun) and European logistics (Aug); DIU JSDT launched (Aug); Army 'swivel chair' MEDLOG document (Aug); DEFCON AI at Talisman Sabre (Jul); Rune $24M Series A (Jul)",
+   "source_url": "https://www.diu.mil/latest/two-contracts-awarded-to-modernize-decision-making-for-dows-joint-logistics"
+  },
+  {
+   "year": "2026",
+   "event": "DIU JSDT awards to ASI and Watchtower (Jan/Feb); Rune $2M award (Mar) and $99M IDIQ (Jun); Army declines EBS-C option (May); DefenseScoop reports Pentagon turning to AI for contested logistics (Jun); Onebrief joins NGC2 (Jun) and wins enterprise IDIQ (Sep); Gallatin AI PORTAL and DIU USAREUR-AF awards (Jul); xTech Search 10 Contested Logistics portfolio (white papers due Aug 26); ASPB summer 2026 still describes S-4-built sustainment COP",
+   "source_url": "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling with allies, and possibly the only open lane: GAO-25-106999C (Aug 2025, restricted) found significant gaps in DoD-NATO logistics efforts, USAREUR-AF is the first JSDT deployment target, and most NATO land forces run sustainment on national ERPs plus spreadsheets with no Rune equivalent; a German founder could target Bundeswehr/NATO sustainment (Helsing and Quantum Systems do not cover logistics) and Indo-Pacific partners (Australia/Japan/Philippines) where contested-logistics exercises (Talisman Sabre) are growing. Offsetting factors: allied procurement is slower and more fragmented, FMN/NATO data standards (e.g., MIP/JC3IEDM-derived logistics schemas) add integration burden, and the US-Army-specific doctrinal schema would have to be generalized; no allied solicitation for tactical sustainment-C2 software was verified this session (Public evidence insufficient).",
+ "search_log": [
+  {
+   "query": "\"Rune Technologies\" TyrOS Army contract 2026 logistics",
+   "useful": true
+  },
+  {
+   "query": "Army LOGSTAT automation sustainment \"common operating picture\" NGC2 2026 site:army.mil",
+   "useful": true
+  },
+  {
+   "query": "GAO contested logistics Army report 2025 2026 site:gao.gov",
+   "useful": true
+  },
+  {
+   "query": "Army SBIR xTech \"contested logistics\" topic 2025 2026 sustainment software",
+   "useful": true
+  },
+  {
+   "query": "Onebrief logistics sustainment feasibility planning integration Govini 2026",
+   "useful": true
+  },
+  {
+   "query": "Marine Corps CLC2S LOGSTAT DDIL \"logistics command and control\" 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "\"Gallatin\" AI Army Europe sustainment planning DIU 2026",
+   "useful": true
+  },
+  {
+   "query": "Army FY2027 budget \"contested logistics\" cross functional team predictive logistics funding",
+   "useful": true
+  },
+  {
+   "query": "\"NGC2 at the Tactical Edge\" \"predictive logistics\" army.mil LOGSTAT manual GCSS-Army sustainment data 4th Infantry Division",
+   "useful": true
+  },
+  {
+   "query": "\"AI Enabled Contested Logistics Support Tools\" Army RDT&E FY2027 program element",
+   "useful": true
+  },
+  {
+   "query": "WebFetch https://www.runetech.co/news/army-enterprise-contract (EGRESS_BLOCKED - not retried)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.army.mil/article-amp/293629/breaking_the_bsa_cluster_based_sustainment_in_the_mbct",
+   "title": "Breaking the BSA: Cluster-Based Sustainment in the MBCT (Army Sustainment Professional Bulletin)",
+   "pub_date": "2026 (summer)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/290032/ngc2_at_the_tactical_edge_enabling_predictive_logistics_for_decision_dominance",
+   "title": "NGC2 at the Tactical Edge: Enabling Predictive Logistics for Decision Dominance",
+   "pub_date": "2026 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/290044/the_future_of_sustainment_integrating_next_generation_command_and_control",
+   "title": "The Future of Sustainment: Integrating Next Generation Command and Control",
+   "pub_date": "2026 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/290029/ngc2_data_informed_sustainment_decision_making",
+   "title": "NGC2: Data-Informed Sustainment Decision Making",
+   "pub_date": "2026 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment",
+   "title": "Developing a common operational picture for sustainment",
+   "pub_date": "2018",
+   "tier": 1
+  },
+  {
+   "url": "https://api.army.mil/e2/c/downloads/2025/08/19/5d3af5ba/lg-da-19-aug-25.pdf",
+   "title": "Army LG-DA logistics document (MEDLOG in Campaigning / swivel chair)",
+   "pub_date": "2025-08-19",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/284116/army_futures_commands_contested_logistics_cross_functional_team_transforming_for_future_sustainment",
+   "title": "Army Futures Command's Contested Logistics Cross-Functional Team: Transforming for Future Sustainment",
+   "pub_date": "2025 (approx.)",
+   "tier": 1
+  },
+  {
+   "url": "https://armysbir.army.mil/topics/predict-optimize-recommend-and-track-for-adaptive-logistics-portal/",
+   "title": "Predict, Optimize, Recommend, and Track for Adaptive Logistics (PORTAL) - Army SBIR|STTR",
+   "pub_date": "2025-2026 (not visible)",
+   "tier": 1
+  },
+  {
+   "url": "https://armysbir.army.mil/announcement/army-sbirsttr-releases-250k-and-2m-in-contested-logistics-and-sustainment-funding-opportunities/",
+   "title": "Army SBIR|STTR releases $250K and $2M in contested logistics and sustainment funding opportunities",
+   "pub_date": "2025-2026 (not visible)",
+   "tier": 1
+  },
+  {
+   "url": "https://armysbir.army.mil/topics/xtechsearch-10-competition/",
+   "title": "xTech|Search 10 Competition - Army SBIR|STTR Program",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.executivebiz.com/articles/army-rccto-ai-ml-proposal-solicitation",
+   "title": "Army Issues Proposal Request for AI/ML Tools (RCCTO, logistics)",
+   "pub_date": "2025-2026 (not visible)",
+   "tier": 2
+  },
+  {
+   "url": "https://c3.ai/news/us-army-c3-ai-selected-to-deliver-ai-contested-logistics-solution-for-combat-operations",
+   "title": "US Army: C3 AI selected to deliver AI contested logistics solution for combat operations",
+   "pub_date": "2025-2026 (not visible)",
+   "tier": 3
+  },
+  {
+   "url": "https://www.diu.mil/latest/two-contracts-awarded-to-modernize-decision-making-for-dows-joint-logistics",
+   "title": "Two Contracts Awarded To DIU's Joint Sustainment Decision Tool Project",
+   "pub_date": "2026-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/gallatin-ai-awarded-diu-joint-sustainment-decision-tool-contract-for-usareur-af-302826211.html",
+   "title": "Gallatin AI Awarded DIU Joint Sustainment Decision Tool Contract for USAREUR-AF",
+   "pub_date": "2026-07-15",
+   "tier": 3
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/gallatin-ai-awarded-army-portal-contract-to-bring-predictive-logistics-to-contested-operations-302710753.html",
+   "title": "Gallatin AI Awarded Army PORTAL Contract to Bring Predictive Logistics to Contested Operations",
+   "pub_date": "2026 (approx.)",
+   "tier": 3
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260618861036/en/U.S.-Army-Awards-Rune-Technologies-with-$99M-Army-Contract-for-AI-Powered-Predictive-Logistics-Platform",
+   "title": "U.S. Army Awards Rune Technologies with $99M Army Contract for AI-Powered Predictive Logistics Platform",
+   "pub_date": "2026-06-18",
+   "tier": 3
+  },
+  {
+   "url": "https://www.morningstar.com/news/business-wire/20260312242681/us-army-awards-rune-technologies-2m-for-predictive-logistics-platform",
+   "title": "U.S. Army Awards Rune Technologies $2M for Predictive Logistics Platform",
+   "pub_date": "2026-03-12",
+   "tier": 3
+  },
+  {
+   "url": "https://thedefensepost.com/2026/06/26/us-army-ai-logistics-rune-tyros/",
+   "title": "From Planning to Resupply: US Army Expands AI Logistics With $99M Deal",
+   "pub_date": "2026-06-26",
+   "tier": 2
+  },
+  {
+   "url": "https://techcrunch.com/2025/07/21/anduril-alums-raise-24m-series-a-to-bring-military-logistics-out-of-the-excel-spreadsheet-era/",
+   "title": "Anduril alums raise $24M Series A to bring military logistics out of the Excel spreadsheet era",
+   "pub_date": "2025-07-21",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software",
+   "title": "Onebrief Awarded Enterprise Contract by U.S. Army Contracting Command",
+   "pub_date": "2026-09-17",
+   "tier": 3
+  },
+  {
+   "url": "https://www.onebrief.com/content-hub/foundation-for-modern-mission-command-onebrief-in-the-armys-ngc2-environment",
+   "title": "Foundation for Modern Mission Command: Onebrief in the Army's NGC2 Environment",
+   "pub_date": "2026 (approx.)",
+   "tier": 3
+  },
+  {
+   "url": "https://thedefensepost.com/2026/06/30/onebrief-us-armys-command-control/",
+   "title": "Onebrief Joins US Army's Next-Gen Command-and-Control Program",
+   "pub_date": "2026-06-30",
+   "tier": 2
+  },
+  {
+   "url": "https://www.gao.gov/reports-testimonies/restricted",
+   "title": "GAO Restricted Reports (incl. GAO-25-107216C Indo-Pacific fuel, GAO-25-106999C European Logistics)",
+   "pub_date": "2025-06-26 / 2025-08-25",
+   "tier": 1
+  },
+  {
+   "url": "https://files.gao.gov/reports/GAO-26-108888/index.html",
+   "title": "GAO-26-108888 Military Readiness: DOD Should Take Further Actions to Address Challenges Across the Air, Sea, Ground, and Space Domains",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.washingtontechnology.com/contracts/2026/05/army-walks-away-business-system-consolidation-contract/413751/",
+   "title": "Army walks away from business system consolidation contract",
+   "pub_date": "2026-05-18",
+   "tier": 2
+  },
+  {
+   "url": "https://www.mca-marines.org/wp-content/uploads/Logistics-Operations-in-a-DDIL-Environment.pdf",
+   "title": "Logistics Operations in a DDIL Environment (Marine Corps Gazette)",
+   "pub_date": "2022-05",
+   "tier": 2
+  },
+  {
+   "url": "https://www.peomlb.navy.mil/Portals/97/Documents/LI2S%20Slicksheet%20December%202025.pdf",
+   "title": "Marine Corps Logistics Integrated Information Solutions (LI2S-MC) slicksheet",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://www.marines.mil/News/Messages/Messages-Display/Article/894564/logistics-modernization-logmod-and-feeds-to-magtf-command-and-control-c2-interi/",
+   "title": "MARADMIN: Logistics Modernization (LOGMOD) and feeds to MAGTF C2 - interim guidance",
+   "pub_date": "not visible",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/06/03/military-technology-contested-logistics/",
+   "title": "Pentagon looks to AI, other tech to help tackle contested logistics challenges",
+   "pub_date": "2026-06-03",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20250710145356/en/DEFCON-AI-Achieves-Major-RD-Milestone-with-Launch-of-Advanced-Theater-Distribution-Planning-Tool-for-Talisman-Sabre-2025",
+   "title": "DEFCON AI launches theater distribution planning tool for Talisman Sabre 2025",
+   "pub_date": "2025-07-10",
+   "tier": 3
+  },
+  {
+   "url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%202%20-%20Budget%20Activity%204B.pdf",
+   "title": "Army FY2027 RDT&E Justification Book, Budget Activity 4B",
+   "pub_date": "2026-04",
+   "tier": 1
+  },
+  {
+   "url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000",
+   "title": "Senate hearing: Army Futures Command on Project Convergence Capstone 4 (contested logistics)",
+   "pub_date": "2024",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/286563/practice_makes_perfect_training_sustainment_in_the_era_of_contested_logistics",
+   "title": "Practice Makes Perfect: Training Sustainment in the Era of Contested Logistics",
+   "pub_date": "2025-07-16",
+   "tier": 1
+  }
+ ]
+}

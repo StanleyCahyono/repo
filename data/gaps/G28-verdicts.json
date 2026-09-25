@@ -1,0 +1,53 @@
+[
+  {
+    "lens": "market",
+    "gap_id": "G28",
+    "refuted": true,
+    "strength": 5,
+    "bear_case": "There is no budget owner for a second general-purpose fabric. NGC2 funding (~$3.78B FY27 request) executes through the June 2026 common data-layer baseline team; joint CJADC2 funding (>$2B FY27) buys Maven licenses under a program of record; the enterprise layer went to a cost-plus integrator (AFS, up to $821M). The pain that is real - swivel-chair reconciliation, coalition thumb drives, undocumented APIs, classification-blocked sharing - is exercise- and staff-level pain at the seams that the designated vendors are contractually funded to close. Market research (CDAO data-mesh RFI 2023, DIA CDF RFI 2024) ended in awards to Anduril and Palantir, not in an open competition. A startup pitching a platform would drift into integration consultancy under a team lead, which is a services business, not a product company.",
+    "strongest_single_argument": "The Army designated Anduril (with Palantir and Raft) to lead the NGC2 common data-layer baseline on June 22 2026 and executes the work under a 10-year, up-to-$20B enterprise agreement; the buying moment for this layer has passed for roughly a program generation.",
+    "evidence": [
+      "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery (2026-06-22, FACT, HIGH)",
+      "https://www.army.mil/article/291074/u_s_army_awards_enterprise_contract_for_it_commercial_solutions (2026-03, FACT, HIGH; ceiling not obligation)",
+      "https://www.army.mil/article/287506/u_s_army_awards_enterprise_service_agreement_to_enhance_military_readiness_and_drive_operational_efficiency (2025-07-31, FACT, HIGH; ceiling not obligation)",
+      "https://breakingdefense.com/2026/04/army-unveils-sweeping-xm30-push-4b-bet-on-ngc2-in-newly-released-budget-materials/ (2026-04, FACT, HIGH)",
+      "https://defensescoop.com/2023/10/26/pentagons-cdao-queries-industry-about-commercial-data-mesh-capabilities/ (2023-10-26, FACT, HIGH)"
+    ],
+    "what_would_change_my_mind": "A published Army or CDAO solicitation to recompete the common data layer or to onboard a second fabric vendor; a GAO/IG finding that leads Congress to direct a competitive alternative; or evidence that a service other than the Army (Navy Overmatch, DAF Battle Network) is running an open competition for a general-purpose fabric that a small firm could win outright.",
+    "narrower_survivable_version": "A seam component with a named budget line inside an existing program: e.g., a UDRA-conformant tactical-echelon data-product catalog sold as a third-party capability under an NGC2 team lead or as a TAK plugin, with an explicit licensing/acquisition exit."
+  },
+  {
+    "lens": "competition",
+    "gap_id": "G28",
+    "refuted": true,
+    "strength": 5,
+    "bear_case": "Anduril, Palantir and Raft do not have to add this capability in six months; they are the designated capability. Every third-party app onboards through Lattice SDK or Palantir OSDK, so the incumbents control the APIs a challenger would need; program-of-record APIs exposed at Jailbreak remain prime-controlled; government-owned TAK, Open DAGIR and UDRA commoditize the interface layer so there is no price point between 'free standard' and 'bundled by the platform owner'. Switching cost rises with every division fielded (4th ID, 25th ID, I Corps next) and with every ATO granted. Ditto, Picogrid, Tangram Flex, XRDefense, PLANK and Striveworks already occupy the component niches, mostly at SBIR scale, which shows how hard it is to grow past a Phase III in this layer. L3Harris (ABMS DI), Northrop (IBCS) and Systematic (SitaWare) hold the domain and coalition fabrics.",
+    "strongest_single_argument": "The incumbents own the interfaces a challenger would have to integrate with (Lattice SDK, Foundry OSDK, the government-approved NGC2 API baseline executed under their vehicles), so any feature a startup demonstrates can be absorbed within a release cycle while the startup cannot even reach the data without their permission.",
+    "evidence": [
+      "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery (2026-06-22, FACT, HIGH)",
+      "https://defensescoop.com/2024/12/03/anduril-awarded-100m-deal-cdao-scale-edge-data-mesh-capabilities-ota/ (2024-12-03, FACT, HIGH)",
+      "https://media.defense.gov/2024/Mar/15/2003414274/-1/-1/0/dmra_paper.PDF (2024-03-15, FACT, HIGH)",
+      "https://defensescoop.com/2026/05/29/operation-jailbreak-the-armys-massive-push-to-hack-its-own-systems-and-make-them-talk-to-each-other/ (2026-05-29, FACT, HIGH)",
+      "https://orangeslices.ai/contract-award-5m-air-force-sbir-phase-iii-zero-trust-data-fabric/ (2025, FACT, MEDIUM - shows Phase III scale ceiling for standalone fabric startups)"
+    ],
+    "what_would_change_my_mind": "Evidence that the Army enforces vendor-neutral, government-owned APIs strongly enough that a second fabric can plug in without Anduril/Palantir consent (e.g., a published, non-CUI NGC2 API baseline with open conformance tests), or an incumbent exit/termination for cause that reopens the layer.",
+    "narrower_survivable_version": "Conformance and contract-test tooling for the government-approved NGC2 API baseline and Jailbreak API marketplace, positioned as something the government (not the platform owners) wants to own and that reduces the incumbents' onboarding burden rather than competing with them."
+  },
+  {
+    "lens": "feasibility",
+    "gap_id": "G28",
+    "refuted": true,
+    "strength": 5,
+    "bear_case": "A competing fabric cannot be credibly demonstrated without Secret-level exercise access (division data layers run at Secret; Maven feeds involve SCI), an ATO, cleared U.S.-citizen engineers and a facility clearance. Neither founder can currently hold a clearance; a non-U.S.-person co-founder with equity or control triggers FOCI review, may bar SBIR/STTR eligibility, and complicates deemed-export handling of interface control documents (constraints to review with counsel, not legal conclusions). The government's own prototype OTAs for the layer were $99.6M and $26M, so a $250k MVP demonstrates a lab toy that no program office would treat as evidence, and the path to a task order under a team-lead vehicle is realistically 18-36 months and $2-5M away even for a component. Building the platform itself would consume $30M-$100M+ before a first production deployment.",
+    "strongest_single_argument": "Classification dependence is immediate and every meaningful integration requires CUI/Secret access, an ATO and cleared staff, none of which a two-student team with a non-U.S.-person co-founder and $250k can obtain in the timeframe of the money.",
+    "evidence": [
+      "S02.regulatory_access (this study): division data layers at Secret, Maven/TITAN SCI, CUI ICDs, CMMC L2 expected (INFERENCE from public program descriptions, MEDIUM-HIGH)",
+      "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award (2025-07, FACT, HIGH; $99.6M prototype OTA size)",
+      "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts (2025-09-02, FACT, HIGH; $26M prototype OTA size)",
+      "https://finance.yahoo.com/news/anduril-palantir-battlefield-communication-system-223314840.html (2025-10-03, FACT on memo existence, MEDIUM; shows security controls are the gating issue even for the incumbents)",
+      "https://www.gao.gov/products/gao-26-108019 (2026-08-20, FACT, HIGH; fielding schedule undefined, so even a sub's timeline is uncertain)"
+    ],
+    "what_would_change_my_mind": "A restructured cap table with U.S.-person control and a cleared technical co-founder or early hire, a sponsored unclassified sandbox (e.g., a TAK or Open DAGIR reference environment with published schemas) sufficient for a credible demo, and a team-lead letter of intent to onboard the component into an exercise within 12 months.",
+    "narrower_survivable_version": "An unclassified, open-standards DDIL sync/catalog component demonstrated on commercial hardware with synthetic data, entered through the TAK plugin pipeline or a Tradewinds awardable video, with the non-U.S.-person founder kept on the commercial/NATO-EU product line while counsel resolves FOCI and SBIR eligibility."
+  }
+]
