@@ -1,0 +1,140 @@
+{
+ "id": "G12",
+ "title": "Brigade-and-below multinational SA/C2 bridge and releasability-aware coalition COP federation (productized Mission Partner Kit with partner-specific views and federated partner identity across TAK, SitaWare and national systems)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "FACT/HIGH: GAO-25-106454 (2025-04-08) cites inability to share classified data with partners as integral to CJADC2; WFX 24-03 staff regenerated intel on the MPE enclave with a different tool (MIPB 2025); Balikatan 2026 eight-nation COP still depends on JICOs/FDOs hand-tagging (DVIDS 2026-05). Real and recurring, but absorbed by LNOs/FDOs/unit kits rather than mission-stopping, so 4 not 5."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: pain recurs at every multinational exercise and rotation (Saber Strike 24, WFX 24-03, Bold Quest 25, CWIX25, Balikatan 26, PCC6) and for forward formations (2CR, V Corps) continuously, but it is exercise-cadence and episodic at brigade level, not daily operational tempo for most U.S. units."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "FACT/MEDIUM: FY2027 DISA O&M funds the Coalition Information Environment and Joint Staff RDT&E funds Bold Quest ACP-240/ICAM/ZT demos (comptroller.war.gov, 2026-04), but no dollar value for a brigade bridge or a product line was retrievable ('Public evidence insufficient'); every dollar figure in the space is a services ceiling (Trace MPE-S $998M 2019; GDIT EMITS 2 $1.25B 2025; GDIT AF MPE O&M&S $5.6B Nov 2024 per skeptic, RECALL - not re-verified this session), and ceilings are not obligations. Unit kits are bought with unit funds."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 1,
+   "rationale": "Score 1 explained: FACT/LOW-MEDIUM: across two prior sweeps (E02-F41, E04-F31) no MPE/coalition-interoperability/releasability RFI, sources sought, SBIR, DIU or AFWERX topic surfaced in eight years of recurring urgent needs (ACIS 2018, USAREUR bridge 2020, 2CR MPK 2024); the only notices are services (2023 MPE O&M&S sources sought). Requirement ownership is split across Joint Staff J6, Army C2 CFT/CPE C2IN, DISA, NATO ACT/NCIA and national MoDs, so the PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING->BUDGET->VEHICLE chain has no product-shaped link. The NATO Rapid Adoption Action Plan (2025-06-25, FACT/HIGH) and DIANA Rapid Adoption Service are the only partial doors and they are allied, not U.S."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "FACT/HIGH: everything needed is standards-based and public (ATAK-CIV open source, CoT, TAK federation, NFFI STANAG 5527, NVG, ADatP-3, ACP-240/STANAG 4774-4778, SAML/OIDC, Keycloak/Entra). Label-aware federation, partner views, DDIL store-and-forward and an FDO policy console are ordinary distributed-systems engineering. Not 5 because the SitaWare side beyond published standards is Systematic-controlled and can only be emulated, and the CDS hand-off cannot be tested without an accredited partner."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 2,
+   "rationale": "HYPOTHESIS/MEDIUM: the card's own PoC estimate ($150k-250k, two founders plus one contract TAK/NFFI engineer for 6 months) consumes all founder capital before any exercise cycle; a credible military demo is estimated at $1M-2.5M and requires sponsored CWIX Innovation Sandbox/Bold Quest/Bundeswehr battle-lab participation with travel and conformance work the founders cannot self-fund. $250k buys a lab demo, nothing a buyer can act on."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: a TAK-to-TAK labeled federation with per-partner views and audit is demonstrable in 3-6 months, but the card is explicit that 'credible' means passing a CWIX Innovation Sandbox or Bold Quest-style conformance test against real national systems (two TAK servers talking proves nothing new). Exercise calendars (CWIX annually in June, Bold Quest annually) plus sponsorship lead times put a credible demo at 12-24 months."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "FACT/HIGH for the public tier (STANAGs via national standardization offices, ATAK-CIV code and CoT schema, synthetic multinational scenarios are unlimited); the differentiating inputs - real disclosure-policy encodings, partner attribute schemas, TAK-GOV/MIL builds, SitaWare interface details - are controlled/CUI/vendor-held and obtainable only inside a sponsored exercise. Mixed availability, so 3."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 1,
+   "rationale": "Score 1 explained: the card rates burden 'high' and classification dependence 'eventually'. The unclassified tier carries DFARS 7012/CMMC and possible EAR 5D002 obligations; anything beyond SBU requires IL5/IL6 or NATO Secret hosting, SWFT/cATO or NATO ATO evidence, FMN/JITC conformance, accredited CDS integration with an oligopoly (Everfox/Owl/GDMS/Northrop) and cleared U.S.-citizen staff. Even a green-card holder is a 'foreign interest' for FOCI (32 CFR 117.11) and the Indonesian founder is not a U.S. person, so a facility clearance needs FOCI mitigation; the release policy itself is government-owned. These are constraint descriptions, not legal conclusions - export-control, FOCI and immigration counsel required."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "FACT/HIGH: the MVP is fully unclassified (ATAK-CIV, public STANAGs, synthetic data, Keycloak/Entra test tenants, commercial laptops) and a non-U.S.-person founder can lawfully work on the public/synthetic tier. Not 5 because the card itself says the product's value 'eventually' lives at Secret-releasable and cross-domain, i.e., the unclassified start does not reach the monetizable layer."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 explained: the substrate is free and government-owned (TAK federation, 500k+ users); the allied land-C2 spine is Systematic SitaWare with native NFFI/NVG/MIP and NATO DEMETER FOC (Janes 2025, FOC March 2026); Booz Allen Sit(x) on Menace already markets Lattice-to-TAK/partner bridging (2026-05-18, company claim); Anduril holds a NATO eAirC2 Data Platform contract (2026, company newsroom via skeptic, RECALL - not re-verified this session) and leads the NGC2 common data baseline (army.mil 2026-06); Palantir owns Maven NATO (DefenseScoop 2025-04-14); Mattermost/Entra cover chat and guest identity; MPE integrators (Trace, GDIT, SOSi) deliver bridges as labor under IDIQs; the CDS gate is an accredited oligopoly; micro-consultancies (Corvus, Anchor Defense) already publish on CoT-to-NATO bridging. Every layer is occupied."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: the card correctly identifies the one thing incumbents do not want to own - a neutral cross-vendor, cross-nation broker plus an FDO-facing policy workflow - and DISA still calls partner networks 'consolidated stovepipes' with MPE network-centric until ~2027 (FNN 2026-08-13). But the card and all three skeptics agree incumbents can bundle a 'good enough' bridge for free the moment a customer asks, and Systematic can add label-aware filtering faster than a startup. Vulnerability exists on neutrality only."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "FACT/MEDIUM: TAK integration is open (TAK Product Center, ATAK-CIV), but SitaWare beyond NATO standards is Systematic-controlled, NGC2 data-layer APIs are controlled in practice by Anduril/Lockheed teams, MPE enclave and identity policies by DISA and its integrators, fires by ASCA, and the accredited CDS hand-off by the guard vendors; FDOs and national disclosure authorities control the release rules. The card admits the SitaWare side 'can only be emulated' without vendor or MoD access - the credible demo depends on a competitor opening a door."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: the card concedes 'nothing algorithmic is defensible' (labels, federation, policy engines are standards-based); the only moat is a tested adapter set, exercise conformance evidence, FDO-accepted workflow, authorizations and neutrality - slow to build and 'easily undercut by incumbents bundling a good enough bridge for free'."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: label-aware DDIL federation and partner-identity brokering transfer to multinational disaster response, public safety, coast-guard/border cooperation and critical-infrastructure incident sharing (TAK is widely used by civil agencies), but the commercial market is thin, lower-priced and the releasability semantics are specifically military - the card rates it 'medium'."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: if a neutral broker earned trust it could expand across NATO FMN nodes, national brigades and Indo-Pacific partners (Balikatan, Talisman Sabre), and the allied market is genuinely more open than the U.S. one (Rapid Adoption Action Plan 2025-06-25; DIANA Rapid Adoption Service). Expansion is real but each nation is a separate disclosure-policy and procurement negotiation, so it scales like a services firm."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: eight years of urgent-need kits never became a program of record, exercise gateway configurations 'decay after the event', and the FY27 request steers joint C2 money into Maven/JFN licenses (DefenseScoop 2026-05-28). Recurring revenue would come only from a formation or NATO node adopting the broker as sustained software with support - no such buyer or line exists in public evidence."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1 explained: the card lists four fatal-if-absent roles (former coalition LNO/FDO or brigade S6; TAK/NATO-standards engineer; identity/zero-trust engineer; export/FOCI/SBIR counsel) and the two students hold at most one (a strong engineer who could become the TAK/standards engineer). The German founder has a legitimate allied lane (DIANA, CWIX Innovation Sandbox, Bundeswehr Cyber Innovation Hub), but SBIR's >50% U.S.-person ownership/control test (13 CFR 121.702) fails on the current cap table and, per the feasibility skeptic's DIANA FAQ synthesis (RECALL - not re-verified this session, MEDIUM), DIANA requires majority ownership/control by NATO-nation nationals, so a roughly equal German-Indonesian split fails both on-ramps at once; the differentiating Secret-releasable layer requires citizenship-gated clearances (~2031-2032 at the earliest for the German founder) and FOCI mitigation. Not legal determinations - counsel required."
+  }
+ ],
+ "market_attractiveness": 2.4,
+ "founder_fit": 2.2,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No budget owner buys a product: CIE/MPE money flows as O&M and Bold Quest demos with no retrievable dollar line for a brigade bridge, while every real figure is a services ceiling to a prime (Trace MPE-S $998M 2019, GDIT EMITS 2 $1.25B 2025, GDIT AF MPE O&M&S $5.6B Nov 2024 - ceilings, not obligations). Zero product RFI/SBIR/DIU/AFWERX topic in eight years of recurring urgent needs is revealed preference for 'hire an integrator'. Analyst assessment: accepted; the strongest of the three arguments and consistent with the evidence card and E02/E04 absence findings."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Every layer is occupied: free government TAK federation, Systematic SitaWare as NATO DEMETER incumbent with native NFFI/NVG/MIP, Booz Allen Sit(x)/Anduril Lattice already marketing the Lattice-to-TAK/partner bridge and holding a NATO eAirC2 data-platform contract (company claims, Tier 2), Palantir Maven NATO, Mattermost/Entra for chat and identity, MPE integrators delivering bridges as labor, and an accredited CDS oligopoly at the release gate. Analyst assessment: accepted with one caveat - no incumbent is shown to ship per-object releasability plus FDO-signable policy plus federated partner identity as one product, but the card and skeptic agree they can bundle a good-enough version on request, so the caveat does not rescue a standalone company."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Founder-fit failure: SBIR (>50% U.S.-person ownership, 13 CFR 121.702) and NATO DIANA (majority NATO-national ownership per DIANA FAQ, RECALL - not re-verified this session) both fail on a near-equal German-Indonesian cap table, forcing restructuring before any grant or sponsored exercise slot; the monetizable Secret-releasable/CDS layer needs clearances the founders cannot hold for most of a decade; $250k covers only the lab PoC ($150k-250k HYPOTHESIS) while a credible demo costs $1M-2.5M and depends on Systematic or an MoD opening SitaWare interface access. Analyst assessment: accepted; the DIANA ownership rule should be confirmed by counsel but the SBIR and clearance constraints alone are sufficient."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL. Three independent skeptics refute at strength 4 and the analyst agrees with all three; nothing in the evidence card or the compact indexes contradicts them. Decisive reason: there is no identifiable product path through PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> CONTRACT VEHICLE. The problem and user are real (GAO-25-106454 2025-04-08; MIPB 2025 WFX 24-03 workaround; DVIDS Balikatan 2026 COP; FACT/HIGH), but requirement ownership is split across Joint Staff J6, Army C2 CFT/CPE C2IN, DISA CIE, NATO ACT/NCIA and national MoDs; no program office has issued a product-shaped RFI, sources sought or SBIR/DIU/AFWERX topic in eight years of recurring urgent needs (ACIS 2018, USAREUR bridge 2020, 2CR MPK 2024; E02-F41/E04-F31 absence findings, INFERENCE/LOW-MEDIUM); the only budget evidence is undollared DISA O&M CIE text and Joint Staff demo lines (FACT/MEDIUM); and the only contract vehicles are services IDIQs to primes whose ceilings are not obligations. That is the major penalty applied to criteria 3, 4 and 17. Compounding it: the technology layer a $250k team can build (unclassified TAK/standards federation) is commoditized and free (TAK federation; SitaWare native standards; Sit(x) company claims), while the scarce, monetizable layer (Secret-releasable release, FDO policy, CDS hand-off) is government- and oligopoly-owned and closed to a non-cleared, mixed-nationality team for most of a decade (32 CFR 117.11 FOCI; citizenship-gated clearances - constraint descriptions, not legal conclusions). The one honest counter-argument - that the neutral cross-vendor broker plus FDO policy workflow is the piece incumbents do not want to own and that NATO's Rapid Adoption Action Plan (2025-06-25) opens an allied door for the German founder - yields, on the card's own words, 'an integration-and-conformance business rather than a scalable product'. Market attractiveness 2.4 and founder fit 2.2 are both below the threshold at which a narrower survivable form would be worth the founders' only $250k. Confidence MEDIUM: the DODIG-2025-126 findings and DISA CIE dollar values could not be read this session and could sharpen but are unlikely to reverse the verdict.",
+ "narrower_version_if_borderline": "Not recommended as a company, but for completeness the only surviving remnant is: a single, unclassified, TAK.gov-listable plugin (ACP-240/STANAG 4774-4778 label attachment plus NFFI/NVG export and a battlefield-geometry/FSCM conformance checker) built and majority-owned by the German founder, with the Indonesian founder confined to the public/synthetic tier under a written technology control plan, entered via CWIX Innovation Sandbox or the Bundeswehr Cyber Innovation Hub, and sold as subcontract labor or a certified adapter to an existing integrator (GDIT EMITS 2, SOSi, Trace) or national C2 vendor. This is a consultancy-shaped outcome that all three skeptics and the card itself describe as non-venture-scale; it should only be pursued as a paid learning vehicle toward a different gap, not as the founders' primary bet.",
+ "most_important_question_answer": "If two exceptionally capable founders had $250,000 today and insisted on G12, the only defensible first build is a 'coalition edge broker' TAK Server plugin: every CoT object gets an ACP-240/STANAG 4774-4778 releasability label at creation, a policy file an FDO can read and sign computes partner-specific COP views, store-and-forward sync survives a disconnected period without leaking or losing objects, an NFFI/NVG/ADatP-3 exporter with a geometry-conformance check feeds a SitaWare-standards emulator, and a Keycloak/Entra SAML/OIDC broker maps partner attributes so guest accounts are not hand-provisioned - all on ATAK-CIV, commercial laptops and synthetic data, six months, roughly the whole $250k. They would show it to the 2nd Cavalry Regiment or USAREUR-AF G6 cell that built the 2024 Mission Partner Kit (army.mil 2025-03-25), a Joint Staff J6 JDAT Bold Quest assessor, and a Bundeswehr Cyber Innovation Hub or NATO ACT CWIX capability owner. The demonstration would have to prove that per-object releasability plus partner views can be configured in hours instead of the weeks integrators spend on ASCA/NFFI gateways, that a disconnected partner rejoins without leakage, and that the audit trail is one an FDO will accept - not that two TAK servers can talk. The customer would care because Balikatan 2026 still depended on JICOs and FDOs hand-tagging data to pass CDS after 'more than eight years' of integration (DVIDS 2026-05) and WFX 24-03 staff regenerated intelligence by hand on the MPE enclave (MIPB 2025). Why an incumbent cannot trivially crush them is the weakest link: the honest answer is that they can - TAK federation is free, Systematic already speaks the standards, Booz Allen/Anduril market the bridge, and any of them can bundle label-aware filtering under an existing ELA; the startup's only shield is being the neutral broker no spine vendor wants to be, which is a positioning, not a moat. The milestone that would justify the next $2-5M is a CWIX or Bold Quest conformance result against real national systems plus a signed, funded pilot with obligated dollars from a NATO node, national MoD (via the Rapid Adoption Action Plan) or a U.S. formation through an OT/CSO - and that milestone is gated by three doors the founders do not control (Systematic/MoD interface access, an exercise sponsor willing to host a pre-seed team, and a cap-table restructuring that satisfies either SBIR or DIANA ownership tests). Because those doors are held by others, because reaching the milestone costs $1M-2.5M before any revenue, and because success still yields a services-shaped business, G12 fails the $250k test; the founders should redirect the same skills (label-aware DDIL sync, ABAC policy, identity federation) toward a gap with an identifiable product buyer.",
+ "bear_case_summary": "Revealed preference over eight years is 'hire an integrator, build a unit kit, deploy an LNO', not 'buy a product'; the buildable layer is free and commoditized, the valuable layer is policy- and clearance-gated, every competitor tier is occupied (TAK, Systematic, Booz Allen/Anduril, Palantir, MPE integrators, CDS oligopoly), the two non-dilutive on-ramps (SBIR, DIANA) fail on the founders' cap table, and $250k does not reach a demo any buyer can act on.",
+ "bull_case_summary": "The pain is real, documented by GAO, DoD IG, Army journals and every 2024-2026 coalition exercise; DISA says MPE stays network-centric until ~2027 and DoD zero-trust deadlines force data tagging and ICAM; the FY27 budget funds CIE and Bold Quest ACP-240/ICAM demos; NATO's Rapid Adoption Action Plan and DIANA Rapid Adoption Service let an exercise-proven prototype become a non-competed buy; no incumbent ships per-object releasability plus FDO policy plus federated partner identity as one neutral product; and the German founder has a legitimate allied lane the incumbents' U.S. ELAs do not reach. Even so, the bull case terminates in an integration-and-conformance business, not a venture-scale product company.",
+ "confidence": "MEDIUM"
+}

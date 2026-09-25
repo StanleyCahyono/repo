@@ -1,0 +1,140 @@
+{
+  "id": "G14",
+  "title": "Third-party C2 app assurance and onboarding pipeline (continuous security assessment, RBAC/audit-logging conformance, SBOM, accreditation-as-code) for NGC2, TAK, Overmatch Armory and the Jailbreak API marketplace",
+  "scores": [
+    {
+      "n": 1,
+      "criterion": "severity_of_user_pain",
+      "score": 4,
+      "rationale": "FACT/HIGH: the Army CTO/authorizing official memo (signed 2025-09-05; CNBC/Reuters 2025-10-03, https://www.cnbc.com/2025/10/03/anduril-palantir-ngc2-deep-flaws-army.html) rated the NGC2 prototype 'very high risk' because any user could reach all apps/data, no user-activity logging, and hosted third-party apps had not been assessed - an AO-level failure that threatened authorization of the Army's flagship C2 prototype. Not a 5 because the Army CIO said the issues were triaged and mitigated by Oct 2025 (same source) and no second buyer has independently articulated the requirement (skeptic 1, point 3)."
+    },
+    {
+      "n": 2,
+      "criterion": "frequency_of_pain",
+      "score": 3,
+      "rationale": "INFERENCE/MEDIUM: onboarding recurs per exercise (Anduril claims 20+ apps at Ivy Sting 5, company-reported, tier 4), per ecosystem (TAK, Armory, API marketplace, NGC2) and per app version, and GAO-26-108019 (2026-08-20) implies scaling to 11 divisions/4 corps makes acceptance a standing workflow. But in the public record the pain surfaces episodically from one memo; the frequency for a paying customer (a program office, not operators) is a few review cycles per year, not daily."
+    },
+    {
+      "n": 3,
+      "criterion": "budget_evidence",
+      "score": 2,
+      "rationale": "FACT/MEDIUM on portfolio, LOW on line: NGC2 is funded (~$2.95-3.3B FY2026 request/identified per DefenseScoop 2025-07-02 and GAO-26-108019; ~$3.78B FY27 request incl. C2 Applications ~$488.4M RDT&E per Breaking Defense 2026-04 as cited by skeptic 1 - RECALL, not re-verified this session), but no line item for app assurance/pipeline exists in any document reviewed ('Public evidence insufficient'), FY26 NDAA caps NGC2 obligation at 50% pending a report and the HASC FY27 mark cuts $710M (Federal News Network 2026-02, skeptic 1). Money exists only inside a prime-led host program; ceiling and request are not obligation."
+    },
+    {
+      "n": 4,
+      "criterion": "procurement_accessibility",
+      "score": 2,
+      "rationale": "FACT/MEDIUM: the only concrete vehicle, C2APPSRFI-1 (posted 2026-05-12, responses due 2026-05-27, HigherGov mirror), states no award is expected and describes a lead-entity 'teaming' model for onboarding/integration/delivery (skeptic 1 search summary; full text not retrieved). The chain PROBLEM->AO (Army CIO/CTO)->PM C2 Applications->ACC-APG->C2 Applications line->storefront/pipeline award exists but terminates in a prime/integrator award where a startup is at best a subcontractor; the contracting office for NGC2 OTA execution is inferred, not verified. TAK's third-party pipeline is open to anyone (tak.gov/pages/our-process, FACT/HIGH) but is a free government service, not a procurement."
+    },
+    {
+      "n": 5,
+      "criterion": "technical_feasibility",
+      "score": 4,
+      "rationale": "INFERENCE/HIGH: the SDK (ABAC hooks + OpenTelemetry/OCSF audit events), synthetic-user conformance tester and OSCAL assessment-results output all use open standards and open SDKs (ATAK-CIV, Lattice SDK sandbox, OSCAL, SPDX/CycloneDX, OPA); Lula/RegScale already ingest OSCAL (github.com/defenseunicorns/lula). Not a 5 because proving in-app need-to-know behaviour across four heterogeneous app models (Lattice, Foundry/Apollo, ATAK plugin, Armory container) is genuinely hard and partly bespoke per ecosystem."
+    },
+    {
+      "n": 6,
+      "criterion": "feasibility_with_250k",
+      "score": 3,
+      "rationale": "HYPOTHESIS/LOW (card capital table): proof of concept $60k-$150k fits founder capital; credible military demo $400k-$900k (cleared/experienced RMF hire, team-lead-sponsored exercise slot) does not, and the standard SBIR bridge is doubtful for this cap table (E07-F3, 13 CFR 121.702, FACT/HIGH). $250k buys an open-source tool and a pilot conversation, not a demonstration an AO would act on."
+    },
+    {
+      "n": 7,
+      "criterion": "time_to_credible_demo",
+      "score": 3,
+      "rationale": "INFERENCE/MEDIUM: an unclassified end-to-end demo (two ATAK plugins + one Lattice sandbox app, denial of a no-need-to-know user visible in an AO viewer, OSCAL bundle ingested by Lula) is plausible in 3-6 months. A demo the actual customer treats as credible requires a team lead to sponsor participation in an Ivy Sting/Lightning Surge-class event and access to a likely-CUI submission format, which pushes credibility to 9-15 months and depends on third parties."
+    },
+    {
+      "n": 8,
+      "criterion": "availability_of_required_data",
+      "score": 4,
+      "rationale": "FACT/HIGH for MVP: no operational data needed; Lattice SDK docs/sandbox, ATAK-CIV source and plugin SDK, RAISE guidance and DoD CIO cATO evaluation criteria are public; TAK pipeline open to non-Denied-Parties-List developers. Not a 5 because the NGC2 storefront pipeline submission format (the primary integration target) is likely CUI with need-to-know restrictions (card data_requirement; E07-F30)."
+    },
+    {
+      "n": 9,
+      "criterion": "regulatory_accessibility",
+      "score": 3,
+      "rationale": "FACT/MEDIUM: MVP is unclassified and the software is at most EAR-controlled commercial security tooling (E07-F32 on encryption). Production requires CUI handling, DFARS 252.204-7012/CMMC Level 2 readiness and AO acceptance of the evidence format; FOCI (32 CFR 117.11, E07-F19) treats any non-citizen as a foreign interest once cleared work is pursued; DoDI 5205.87 (E07-F20) extends FOCI review to some unclassified contracts. Medium burden, not extreme, and no ITAR technical data is inherent. Needs counsel; no legal judgment made here."
+    },
+    {
+      "n": 10,
+      "criterion": "ability_to_start_unclassified",
+      "score": 5,
+      "rationale": "FACT/HIGH: this is the strongest attribute of the gap and all three skeptics concede it. ATAK-CIV is open source (deptofdefense GitHub), the TAK third-party build-and-sign pipeline is explicitly open to anyone not on the Denied Parties List (tak.gov/pages/our-process), the Lattice SDK sandbox is developer-accessible, and OSCAL/RAISE/cATO criteria are public DoD CIO documents; the entire MVP runs on commercial hardware with synthetic data. Score of 5 justified because nothing in the first two capital stages touches classified or even CUI material."
+    },
+    {
+      "n": 11,
+      "criterion": "competitive_intensity",
+      "score": 1,
+      "rationale": "FACT/HIGH: score of 1 because every adjacent layer is occupied by capitalized vendors and government pipelines: Defense Unicorns (Lula/UDS/UDS Registry, $136M Series B at $1B valuation, GovConWire 2026-01), Second Front (Game Warden), Rise8 (PY2025 STRATFI), Anchore/Chainguard (SBOM/hardened images), RegScale/Paramify (OSCAL GRC; OSCAL Hub open-sourced 2025-12), platform owners Anduril/Palantir, government pipelines (TAK Product Center, Overmatch Software Armory as RAISE Platform of Choice, Platform One), PM C2 Applications' own 'Application Store and Pipeline' function, and the commercial ASPM category (Legit Security, Apiiro, Cycode, OX Security; ~$457M-$687M 2024/25 per Frost & Sullivan store listing cited by skeptic 1 - RECALL, MEDIUM). Only the narrow in-app behaviour-conformance sliver is unoccupied, and absence of a competitor in that sliver is not evidence of demand."
+    },
+    {
+      "n": 12,
+      "criterion": "incumbent_vulnerability",
+      "score": 1,
+      "rationale": "FACT/INFERENCE, HIGH: score of 1 because the incumbents are strongly incentivized and able to close the gap themselves. Anduril and Palantir control the Lattice SDK and Foundry/Apollo app models and were publicly embarrassed by the memo; Anduril's developer documentation reportedly frames least-privilege and audit logging as platform principles (developer.anduril.com, skeptic 2 - RECALL, MEDIUM). Defense Unicorns' Lula is one feature away from app-level conformance. PM C2 Applications is procuring the pipeline itself. The card's own incumbent_response says they 'can add it easily.'"
+    },
+    {
+      "n": 13,
+      "criterion": "integration_feasibility",
+      "score": 2,
+      "rationale": "FACT/HIGH: the startup controls none of the seven interfaces it must plug into (Lattice SDK, Foundry/Apollo, TAK pipeline, Armory/RAISE, Iron Bank/UDS, ADOC API marketplace, NGC2 storefront pipeline), and the highest-value one (NGC2 pipeline submission format) is being defined by PM C2 Applications and is likely CUI. Integration with open ecosystems (TAK, Lattice sandbox) is feasible; integration where the money is depends on a prime's or the government's permission."
+    },
+    {
+      "n": 14,
+      "criterion": "potential_moat",
+      "score": 1,
+      "rationale": "INFERENCE/HIGH: score of 1 because the card itself rates realistic defensibility 'low' - the only durable asset would be an AO-accepted, cross-ecosystem evidence format (a de facto standard), which is not patentable, can be replicated by the platform owner or pipeline winner, and is weakened rather than strengthened by the open-source route the MVP requires for adoption. DoD CIO State of DevSecOps 2025 (2025-03) says AOs are 'biased to caution' and reciprocity is lacking, so even an accepted format in one ecosystem does not transfer."
+    },
+    {
+      "n": 15,
+      "criterion": "dual_use_potential",
+      "score": 3,
+      "rationale": "INFERENCE/MEDIUM: app-level RBAC/audit conformance testing with machine-readable evidence maps to FedRAMP, healthcare/financial app marketplaces and enterprise internal app stores; the tester and OSCAL output are not defense-specific. But commercial buyers already have mature AppSec/ASPM/GRC vendors, so the commercial path is a crowded one (card dual_use_potential: medium)."
+    },
+    {
+      "n": 16,
+      "criterion": "expansion_potential",
+      "score": 2,
+      "rationale": "INFERENCE/MEDIUM: expansion from one ecosystem to NGC2/Armory/API marketplace and to allies (TAK across NATO, Overmatch Five Eyes agreement, Jailbreak extending to partners per army.mil 2026-07) is conceptually available, but each step depends on a different accreditation authority accepting the evidence format, and the card's allied_extension concludes cross-national reciprocity makes the one-format thesis harder, not easier. Expansion is gated by an AO mandate that no evidence shows is coming."
+    },
+    {
+      "n": 17,
+      "criterion": "repeat_purchase_potential",
+      "score": 3,
+      "rationale": "INFERENCE/MEDIUM: if the product existed and were mandated, conformance is inherently recurring (per app, per version, per exercise, per ecosystem) and lends itself to subscription or per-assessment pricing; SWFT (DoD CIO memo 2025-04-24, live 2025-06-01, DefenseScoop 2025-06-09) makes third-party assessment plus SBOM a gating item for provisional ATO. Discounted because the realistic first buyers (NGC2 sub-vendors, team leads) purchase episodically under subcontracts and the government pipelines are free services."
+    },
+    {
+      "n": 18,
+      "criterion": "founder_team_fit",
+      "score": 2,
+      "rationale": "FACT/MEDIUM: the product is pure software, unclassified at MVP, and the TAK pipeline is open to a non-U.S. person, which fits a strong engineer plus a business founder. But three of the card's fatal-if-absent roles (RMF/cATO assessor or former ISSM/AO staff, production appsec engineer with OSCAL/OPA/SBOM depth, hands-on ATAK/Lattice developer) are not present in two university students; the customer is a program office/AO reached through relationships the founders lack; SBIR is unavailable while the Indonesian founder's equity never counts and the German founder's counts only after the green card (E07-F3, FACT/HIGH); AFWERX FAQ limits foreign-national participation on DoD SBIR work to fundamental research (E07-F7, FACT/HIGH); and the primary integration target (NGC2 pipeline specs) is likely CUI where a non-U.S.-person engineer may be excluded (E07-F30, MEDIUM). Describe-and-consult-counsel, not a legal judgment."
+    }
+  ],
+  "market_attractiveness": 2.3,
+  "founder_fit": 3.3,
+  "red_team": {
+    "market": {
+      "refuted": true,
+      "strength": 4,
+      "summary": "No dedicated budget line (only the NGC2 host program, itself under a 50% obligation cap and a $710M HASC cut); C2APPSRFI-1 signals a prime-led teaming buy with no award expected; the demand signal is one Sept 2025 memo already declared mitigated; four different SDKs make it a bespoke-integration services business; commercial ASPM vendors (Legit, Apiiro, Cycode, OX) plus Defense Unicorns/Second Front/RegScale/Anchore crowd every layer; the card itself concedes defensibility is low. Narrower survivable form: TAK/ATAK-CIV-only conformance tester as open-source plus services/training, i.e. a niche consultancy, not a scalable SaaS."
+    },
+    "competition": {
+      "refuted": true,
+      "strength": 4,
+      "summary": "Every interface is owned by Anduril, Palantir, TPC, NAVWAR or PM C2 Applications; Anduril's Lattice docs already frame least-privilege and audit logging as native principles (RECALL, MEDIUM); PM C2 Applications runs a standing Application Store and Pipeline function and is soliciting the capability as an integrated lane open to current NGC2 partners and FFRDCs; Defense Unicorns' Lula is one extension away from app-layer conformance. Most likely outcomes are an incumbent-native fix or an integrator-owned pipeline. Narrower form: a small RMF/cATO assessment and OSCAL-integration shop subcontracting to whoever wins the pipeline lane."
+    },
+    "feasibility": {
+      "refuted": true,
+      "strength": 4,
+      "summary": "No standalone buyer, only a feature request the platform owners can satisfy; no traceable dedicated funding and the champion (Army CIO/CTO as AO) is a policy office that does not sign POs; the one concrete vehicle closed 2026-05-27 and GAO-26-108019 shows the buyer is years from procurement maturity; the highest-value integration target (NGC2 pipeline specs) is likely CUI where the Indonesian founder may be excluded, SBIR eligibility fails under 13 CFR 121.702, and a seed round to bridge PoC to demo risks breaking SBIR eligibility further. Concedes the tech is unclassified and demonstrable near $100k. Narrower form: open-source ATAK/Lattice conformance tester as developer tool, paid testing SaaS for TAK plugin developers, and a credibility/acquihire asset."
+    }
+  },
+  "verdict": "kill",
+  "verdict_rationale": "Kill as a standalone venture. Decisive reason: there is no identifiable buyer with a budget for a neutral third-party app-conformance product, and the party that would have to create one (the Army CIO/CTO as authorizing official) is a policy office that is more likely to mandate government-owned or pipeline-winner tooling than a two-person startup's format (card killer_risk; DoD CIO State of DevSecOps 2025 on AO caution and lacking reciprocity). The PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING OFFICE->BUDGET->CONTRACT VEHICLE chain is nominally traceable (AO memo -> NGC2 team leads -> Army CIO/G-6 with C2 CFT -> PM C2 Applications -> ACC-APG -> C2 Applications RDT&E line -> C2APPSRFI-1 successor), but it terminates in a lead-integrator teaming award (C2APPSRFI-1: no award expected, lead entity oversees onboarding/integration/delivery; RECALL from skeptic search summary, MEDIUM) with no line item for assurance, so the major penalty applies: a startup can only be a subcontractor's subcontractor, and only if the pipeline winner chooses not to build the feature itself. All three skeptics refute at strength 4 and I concur with each; nothing in the card or the evidence files rebuts them - the card's own incumbent_response ('yes, easily'), defensibility ('low') and killer_risk sections reach the same conclusion. The one criterion where the gap scores 5 (ability to start unclassified) is real but is a feature of the problem being cheap to attack, which is precisely why platform owners and Defense Unicorns-class vendors can absorb it as a feature. The three skeptics' narrower versions (TAK-only open-source tester plus services; RMF/OSCAL assessment shop subcontracting to the pipeline winner; developer tool as acquihire asset) are credible as a consultancy, a portfolio project or a route to employment inside an NGC2 sub-vendor, but none is a venture that $250k of founder capital plus a $2-5M raise should be committed to, because each is services-led, low-ceiling, and still dependent on incumbents' permission. Confidence in the kill is HIGH given convergent independent refutations and the card's self-concession; the main uncertainty (whether an AO issues a formal cross-ecosystem evidence mandate in the next 12-18 months) is exactly the 'what would change my mind' condition all three skeptics name, and no public evidence shows it.",
+  "narrower_version_if_borderline": "Not borderline, but for completeness the residual play is: an open-source ATAK-CIV plugin conformance tester (RBAC test matrix, audit-event coverage, SBOM, signed OSCAL assessment results) targeted only at the TAK third-party pipeline (public, open to non-U.S. persons, one owner: TAK Product Center), offered with paid support/training to TAK plugin developers and allied TAK users, and used as a credibility asset to win assessment subcontracts from NGC2 sub-vendors or the eventual pipeline winner. Treat it as a defense-DevSecOps consultancy with an open-source calling card or as a portfolio piece, sized to well under $250k, with no expectation of AO adoption; it is a route to relationships and possibly an acquihire, not a fundable product company.",
+  "most_important_question_answer": "If two exceptionally capable founders had $250,000 today and insisted on this gap, they should NOT try to build the cross-ecosystem AO-facing assurance product. They would spend roughly $60k-$120k over four to six months building an open-source conformance kit for ATAK-CIV plugins and a Lattice-SDK sandbox app: a few-lines-of-code SDK that wires attribute-based access decisions and structured audit events into the app, a tester that drives the app with synthetic roles and synthetic tagged data, and a signed OSCAL assessment-results bundle (RBAC matrix, audit coverage, SBOM) that Lula or RegScale can ingest. They would show it to TAK Product Center's third-party pipeline operators, to two or three NGC2 sub-vendors (Raft, Rune, RII class) whose engineers had to pass team-lead review in 2025, and to Defense Unicorns' Lula maintainers as a contributed integration. The demonstration would prove that a third-party app can be made to pass the three exact failures in the Sept 2025 AO memo (who sees what, what users did, is the code vetted) in days rather than months of vendor effort, and that the evidence is machine-readable in a format an existing compliance-as-code tool already accepts. The customer (a sub-vendor or pipeline operator) would care because the memo made those failures an authorization blocker and SWFT made machine-readable third-party assessment a gating item. The honest answer to 'why can't an incumbent trivially crush them' is that they can: Anduril and Palantir own the SDKs and can bake the same hooks in natively, Defense Unicorns can add app-layer checks to Lula, and PM C2 Applications is buying the pipeline that would mandate any format; the only temporary protection is that none of them is incentivized to build neutral evidence for a competitor's ecosystem, and that protection lasts only until an AO chooses a format. The milestone that would justify the next $2-5 million therefore cannot be a product milestone; it would have to be an external policy event: a written acceptance by an authorizing official (Army CIO/CTO for NGC2, TPC for TAK, or NAVWAR for Armory) that this evidence bundle substitutes for the ecosystem's own re-testing, in at least two ecosystems, plus a line in the NGC2 storefront/pipeline solicitation or a program element that funds third-party app-behaviour conformance separately from container scanning. Because no public evidence suggests that event is coming inside the founders' runway, and because the founders could not be first-choice recipients of it even if it did, the right decision is to bank the open-source work as a credibility asset, use it to get inside an NGC2 sub-vendor or a DevSecOps vendor, and deploy the $250k on a gap where the founders can control the interface and identify a buyer who signs purchase orders.",
+  "bear_case_summary": "The pain is real and AO-grade (Sept 2025 memo, FACT/HIGH) but the fix belongs to the platform owners and the government's own pipeline: Anduril/Palantir control the SDKs and have every incentive to add RBAC and audit natively; PM C2 Applications is procuring the storefront/pipeline through a lead-integrator teaming model with no award expected from the RFI and no line item for assurance; Defense Unicorns ($136M Series B), Second Front, Anchore/Chainguard, RegScale and the commercial ASPM category already cover every adjacent layer; the evidence format cannot be defended, AOs are 'biased to caution' with weak reciprocity; and the founders' cap table fails the SBIR ownership test while the primary integration target is likely CUI. Realistic addressable revenue for an independent entrant before any AO mandate is scattered support contracts and Phase I-scale awards, in the low tens of millions at most. Confidence HIGH.",
+  "bull_case_summary": "The bull case is that the Army is standardizing the onboarding surface right now (PM C2 Applications stood up Dec 2025, C2APPSRFI-1 May 2026, API Marketplace May 2026, common data baseline June 2026), SWFT already mandates machine-readable third-party assessment and SBOM department-wide, GAO says NGC2 must scale to 11 divisions and 4 corps by FY2032 which forces repeatable app acceptance, and no vendor today sells ecosystem-neutral proof that an app enforces need-to-know and emits AO-visible audit events. The MVP is unusually accessible: fully unclassified, open SDKs, commercial hardware, buildable for around $100k, and the TAK pipeline is open to a non-U.S.-person engineer. If an AO adopted a neutral evidence format in the next 12-18 months, the first mover with an OSCAL-native, multi-ecosystem tester and an AO dashboard would hold a small but recurring, mandated niche across NGC2, TAK, Armory and allied TAK users. This case is INFERENCE/LOW because the adoption event it depends on has no public evidence and the likeliest adopters would be government or pipeline-winner tooling.",
+  "confidence": "HIGH"
+}

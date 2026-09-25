@@ -1,0 +1,140 @@
+{
+ "id": "G04",
+ "title": "Unified assured-PNT operational awareness and decision support (single pane for source health, composite confidence, jam/spoof triage, fallback recommendation) with a formation-level PNT interference picture feeding the C2/EW COP",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "FACT/HIGH: Navy's own topic text says fragmented displays 'increase cognitive workload... and slow decision-making' during anomaly triage in contested straits, and OPNAVINST 9420.1C 5.a(11) has demanded operator degradation indication since 2019 (navysbir.com NP004, 2026-08-05; OPNAVINST 9420.1C, 2019-09-30). Wrong fallback under jamming/spoofing is a navigation-safety and mission problem, but it is episodic and mitigated by TTPs/backup fixes, so 4 not 5."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: interference is now routine (NAVCEN listed 12 DoD GPS interference tests Aug-Sep 2026 with radii to 295 NM; MARAD 2026-008 global advisory), but the NP004 Q&A says the ETV mans the nav station mainly during navigation issues or contested transits, so the acute pain is periodic rather than continuous for any one ship."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score 1 explained: the only confirmed money is SBIR/CSO award caps (Phase I $200k+$115k option; Phase II $2M; Navy FY26 Release 5 instructions, 2026-08) - caps, not obligations. No GPNTS RDT&E/OPN line, obligation or Phase III figure for awareness software was found (card budget section, LOW). GPNTS follow-on money reported publicly is a hardware-production IDIQ (skeptic 1, AFCEA, date not captured; ceiling is not revenue). GAO-21-320SP: $17M open-architecture integration vs $783M PNT S&T FY20-24. Army NorthStar OTA (up to $41M, 36 months, IS4S + GPS Source, April 2026; cpeisw.army.mil / gpsworld.com, 2026-04-13/14) funds a mounted MOSA PNT hub, not this software layer. Public evidence insufficient for a program line."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "FACT/HIGH: the one dedicated vehicle (DON26BX05-NP004) closed 2026-09-23; no re-issue, D2P2 or second open solicitation surfaced in this session's search (public evidence insufficient). OT/CSO routes (IWRP, DIU, NavalX) carry no ownership test (E07-F22, MEDIUM) but no published requirement for this capability. Realistic access is subcontracting to a Phase I awardee (multiple awards planned per NP004 Q&A) or the next NAVWAR open-topic cycle - a path, but an indirect and unscheduled one."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "FACT/HIGH: ASPN 2023 schemas (public 2026-01-21), pntOS-C API (2026-04-23), DHS PNT Integrity Library (2020), GNSS-SDR and public spoofing datasets make a source-agnostic integrity engine buildable; the Navy allows synthetic ASPN/pntOS data in Phase I (Q&A 2026-08-28). Held back from 5 because GAO-21-320SP (2021-05-10) calls determination of assurance 'an active research area' and real threat signatures are classified."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 4,
+   "rationale": "INFERENCE/MEDIUM: card estimates $50k-$150k for simulator + integrity engine + ECDIS-like HMI + operator study, all software on commercial compute; leaves runway for a PNT-integrity advisor and counsel. Not 5 because a credible military demo with GPNTS ICDs needs government funding ($0.3M-$2M range, HYPOTHESIS)."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 4,
+   "rationale": "INFERENCE/MEDIUM: a synthetic strait-transit demo with measured operator metrics is plausible in 3-6 months for a strong engineer plus advisor. Not 5 because 'credible' to the GPNTS office requires an ASPN/pntOS-conformant stream and an operator study with former ETVs/QMs, which takes recruiting time."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "MVP data is fully public/synthetic (FACT/HIGH). Deployment data is not: GPNTS ICDs are government-furnished post-award, the government ASPN message set sits behind a citizenship/contractor gate at aspn.us (MEDIUM), and NAVWAR threat signatures are classified (GAO). Split scores to a 3."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "FACT/MEDIUM: the operator layer is CUI work - NP004 carries no ITAR banner, CMMC Level 2 (Self), DFARS 7012, and no facility clearance expected in Phase II (Q&A 2026-08-28, 2026-09-01). Burden climbs to high for M-code/PPS receiver paths, JNWC threat data and the formation-level EW picture (FOCI, clearances). Founder-nationality effects are scored under criterion 18, not here."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "FACT/HIGH: Phase I is explicitly performable on synthetic open-standard data, air-gapped containers, CUI only. Not 5 because the formation-level sub-scope in the gap title drifts into classified EW/JNWC products (card: HYPOTHESIS/LOW) and cannot be started unclassified."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 2,
+   "rationale": "FACT/MEDIUM-HIGH: IS4S (ASPN/pntOS steward, DHS PNT Integrity Library author, Army NorthStar OTA April 2026, AF SDUE/R-EGI design-agent OTAs per skeptic 1), the GPNTS integrator, Safran/Collins/TRX device-level detection, Navy decision-support houses (Accelint-type) and, at formation level, Anduril/Palantir on the NGC2 data layer. NP004 Q&A plans multiple Phase I awards, so several funded teams will exist by early 2027."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: receiver primes are disincentivized to build a vendor-neutral assurance layer (it commoditizes their boxes) and NGC2 integrators lack PNT-integrity depth - real daylight. But IS4S, the GPNTS integrator or the government itself can add a composite screen as a program change, and NAVWAR may keep it GOTS; card rates incumbent response MEDIUM-HIGH (operator) / HIGH (formation)."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "FACT/MEDIUM: government controls every decisive interface (GPNTS ICDs post-award, ASPN/pntOS stewardship moving to ISTO, RAISE/OSA accreditation, CANES hosting via PMW 160); the GPNTS integrator controls day-to-day access. Open ASPN helps the MVP but each Navy/Army/allied customer needs its own ICD-conformance layer (skeptic 1's consultancy-trap point is fair)."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: open standards cut both ways; defensibility rests only on being the validated reference implementation (algorithms + operator-study evidence + scenario/replay library + accredited container + GPNTS/N2N6 relationship). None of these is evidenced yet and the standard-setter (IS4S) already holds the 'reference' position."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: the same composite-assurance engine maps to DHS/CISA Resilient PNT Conformance Framework v2.0 (2022-05-31) behaviors, maritime operators under MARAD 2026-008, ports and CI timing; commercial GNSS-monitoring vendors show civil buyers exist. But civil buyers accept cloud and single-vendor receivers, so the air-gapped multi-source military variant is a distinct product; civil revenue unproven."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: Army MAPS/DAPS/pntOS plug-in path, allied navies (Baltic/Black Sea/Red Sea interference exposure; Overmatch Five Eyes), and the formation-level COP feed are real adjacencies, but each carries different ICDs, and the formation layer is classified-adjacent and absorbable by NGC2 integrators."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "HYPOTHESIS/LOW: per-hull or fleet software licensing with sustainment is plausible if GPNTS adopts it, but the government could take it GOTS after a Phase II, no Phase III dollars are evidenced, and SBIR data-rights protections expire; recurring revenue is unproven."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 2,
+   "rationale": "FACT/HIGH on the rules, INFERENCE on fit: a strong generalist engineer can build the HMI/simulator, but the product IS the assurance analytics, which needs a PNT-integrity engineer and a former Navy watchstander (card: fatal if absent). 13 CFR 121.702 requires >50% U.S.-citizen/PR ownership and control (E07-F3); the Indonesian founder's equity never counts, the German founder's only post-green-card; AFWERX-style guidance limits foreign-national roles on DoD SBIR work (E07-F7, 2025-07-02); aspn.us gates the government message set. OT/CSO has no ownership test (E07-F22) and Germany/Indonesia are not countries of concern (E07-F4). Fixable with a counsel-cleared cap table and specialist hires, but not yet fixed - not a legal judgment."
+  }
+ ],
+ "market_attractiveness": 2.5,
+ "founder_fit": 3.3,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No live buyer (NP004 closed 2026-09-23), GPNTS is a hardware-production program with no evidenced software budget line, five years of GAO restatements without a funded program office, IS4S already inside the government relationship, and SBIR ownership rules likely exclude the team from the only evidenced vehicle. Analyst view: largely accepted; the 'hardware program cannot buy software' point is overstated (GPNTS named itself transition owner for a software topic and planned multiple Phase I awards), but the budget-line gap is real."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "IS4S (standard author) and the GPNTS integrator can add the screen; Safran VersaPNT, Collins MAPS and TRX DAPS already do device-level detection so the residual is aggregation/UI; Anduril/Palantir own the NGC2 data layer for the formation sub-scope; TAM tops out at SBIR caps; founder eligibility is a structural kill switch. Analyst view: accepted for the formation layer (killed here) and for the 'dashboard' version; partially rejected for the assurance-engine version, where device-level detection is single-vendor and no vendor-neutral composite layer is evidenced (card, GAO 'active research area')."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Technically buildable within budget, but the one validated door is shut, IS4S was just awarded up to $41M (Army NorthStar OTA) for adjacent scope, 13 CFR 121.702 and foreign-national work rules collide with the founder pair, aspn.us gates even unclassified data, and the market is a rounding error ($17M vs $783M). Analyst view: NorthStar confirmed this session (April 2026, IS4S + GPS Source/General Dynamics, ACC-APG, MOSA mounted hub, non-RF emphasis; cpeisw.army.mil 2026-04-13, gpsworld.com, executivegov.com) but the claim that it covers PNT situational-awareness/decision software is unverified (MEDIUM); it is an Army mounted-platform hardware-hub prototype, not the Navy shipboard awareness layer. Eligibility and timing points accepted."
+  }
+ },
+ "verdict": "borderline",
+ "verdict_rationale": "The buyer chain exists but its last two links are broken today: PROBLEM (fragmented PNT displays, FACT) -> USER (ETV/nav team, FACT) -> REQUIREMENT OWNER (CNO N2N6 via OPNAVINST 9420.1C 5.a(11), FACT) -> PROGRAM OFFICE (PEO C4I/NAVWAR GPNTS, named transition owner in NP004, FACT) -> CONTRACTING OFFICE (NAVWAR via Navy SBIR/CSO Prototype OT, FACT) -> BUDGET (only SBIR caps; no program line found, LOW) -> CONTRACT VEHICLE (closed 2026-09-23; no second vehicle found). That earns a major penalty and rules out 'survive'. Three skeptics refute at strength 4 and I accept most of their case: the dashboard/single-pane product is absorbable by IS4S or the GPNTS integrator, the formation-level COP sub-scope is classified-adjacent and owned by NGC2 integrators (killed outright), the SBIR ownership test (13 CFR 121.702) and foreign-national work limits are unresolved for this team, and total evidenced money is single-digit millions. I do not issue 'kill' because three things the skeptics under-weight are also FACT: (1) a program of record wrote a dedicated software-only topic, named itself transition owner, accepted synthetic open-standard data and planned multiple Phase I awards - the strongest single demand signal in this segment, and awardees (early 2027) will need exactly the assurance analytics a subcontractor could supply; (2) the OT/CSO route has no statutory ownership test (E07-F22) and DoD is pushing software to CSOs/OTs (E07-F28), so eligibility is a cap-table and hiring problem for counsel, not an absolute bar; (3) the technical wedge is buildable on public data within founder capital, and no vendor-neutral composite-assurance layer is evidenced anywhere (device-level detection in MAPS/DAPS/VersaPNT is single-vendor). NorthStar, verified this session, is an Army mounted-hub hardware prototype (MOSA, non-RF emphasis) and does not by public evidence cover the Navy shipboard awareness layer, so the 'IS4S was just paid to build this' argument is weaker than stated (MEDIUM). Net: survives only in the narrower form below; confidence MEDIUM.",
+ "narrower_version_if_borderline": "Drop the single-pane HMI as the product and drop the formation-level/EW COP sub-scope entirely (classified-adjacent, NGC2-absorbable, clearance-gated until ~2031). Build the vendor-neutral composite-assurance engine only: an ASPN 2023/pntOS-C-conformant plugin that ingests 3-8 heterogeneous PNT sources, produces per-source health, composite confidence with attributed evidence, explainable fault/jam/spoof classification and fallback recommendation, plus a synthetic scenario generator and replay/audit library validated against public recordings (TEXBAT-type) and DHS Resilient PNT Conformance Framework v2.0 behaviors. Go to market three ways in parallel: (a) as a subcontractor/technology supplier to NP004 Phase I awardees (announced ~Q1 2027) and to the GPNTS integrator, and into the next NAVWAR open-topic cycle or a D2P2 once counsel confirms a compliant cap table (German founder as controlling U.S.-person owner post-green-card; Indonesian founder in a non-controlling role and on non-CUI work) - not a legal judgment, needs counsel; (b) OT/CSO channels with no ownership test (IWRP, NavalX/ANTX, DIU) as the DoD fallback; (c) an unclassified civil/allied maritime variant (MARAD 2026-008-type operators, ports, CI timing under the DHS CF; allied navies via the German founder's network) as the first paying beachhead and evidence base. Reject if the team cannot recruit a PNT-integrity engineer and a former Navy watchstander within six months - without them it is a dashboard and the screen will be absorbed.",
+ "most_important_question_answer": "With $250k today the founders should spend roughly $100k-$150k over four to five months building the assurance engine, not the screen: an ASPN 2023/pntOS-C-conformant integrity service that consumes a synthetic strait-transit scenario generator (GNSS jamming and spoofing onset, INS drift, clock holdover, hardware fault, 3-8 sources at 1-10 Hz), emits per-source health, composite confidence with attributed evidence, an explainable fault/jam/spoof classification and a fallback recommendation, records a replayable audit timeline, and runs air-gapped in an OCI container - with a thin ECDIS-style demo HMI only as a window onto it, and a paid advisory board of one PNT-integrity engineer and one former ETV/QM. They should show it, in order, to the NP004 Phase I awardees and the GPNTS integrator (as a subcontract component), to the NAVWAR Small Business Office/NavalX and the NP004 topic authors (as the candidate for the next cycle or a D2P2), to the Open-PNT/ISTO ASPN community (as a reference plugin), and to one allied navy or a commercial maritime operator facing Baltic/Red Sea interference (as an unclassified pilot). The demonstration must prove, against the Navy's own stated metrics, that detection latency is under 1 s, that classification is correct on held-out synthetic and public real-world recordings with a quantified false-alert rate, that former watchstanders reach the correct fallback faster and with fewer errors than with fragmented displays, and that every recommendation is explainable and replayable. The customer cares because NP004 states the problem in the Navy's own words, OPNAVINST 9420.1C has required degradation indication and interference reporting since 2019, and every Phase I awardee will need validated assurance analytics they do not have. An incumbent cannot trivially crush them only if the value sits in validated algorithms, the scenario/replay library and operator-study evidence rather than the UI: receiver primes have no incentive to ship vendor-neutral assurance that commoditizes their hardware, NGC2 integrators lack PNT-integrity depth, and IS4S - the one competitor who could - is committed to Army NorthStar and AF design-agent work and may prefer to license than build; this is a speed-and-evidence defense, not a structural one, which is why the verdict is borderline. The milestone that would justify $2-5M is a funded Navy Phase II or OT (or a subcontract on one) with GPNTS ICDs in hand and a PNTAX or fleet demonstration scheduled, plus one paying civil or allied pilot and a counsel-cleared U.S.-person-controlled cap table; if none of these exists 18 months in, the founders should stop, because the government will have either built it in-house or bought it from the standard-setter.",
+ "bear_case_summary": "The only evidenced buyer path (Navy CSO DON26BX05-NP004, closed 2026-09-23) is shut; no program budget line for awareness software exists (only SBIR caps, LOW); GAO has restated the gap since 2021 without a funded office; IS4S authored the standards, holds AF design-agent OTAs and an Army NorthStar OTA (up to $41M, April 2026) and could add the screen; device-level detection already exists in MAPS/DAPS/VersaPNT; Anduril/Palantir own the formation-level data layer; and 13 CFR 121.702, foreign-national work rules and the aspn.us gate collide with an Indonesian non-U.S.-person co-founder and a pre-green-card German founder. A dashboard company here becomes bespoke integration work or gets absorbed.",
+ "bull_case_summary": "For the first time a program of record (GPNTS/NAVWAR) has published a dedicated software-only topic for this capability, named itself transition owner, accepted synthetic open-standard data and planned multiple Phase I awards; ASPN 2023 and pntOS-C went public in 2026 so the proprietary-interface barrier GAO described is falling; GPS denial is routine (12 DoD tests in Aug-Sep 2026, global maritime advisories) and M-code remains late in all three segments (GAO-24-106841), so assurance software keeps its value regardless of hardware timelines; no vendor-neutral composite-assurance layer is evidenced anywhere; the MVP is buildable on public data within founder capital; OT/CSO vehicles carry no ownership test; and the same engine has an unclassified civil/allied maritime market with no citizenship gates.",
+ "confidence": "MEDIUM"
+}

@@ -1,0 +1,140 @@
+{
+ "id": "G21",
+ "title": "Networked low-cost passive sensing: dismounted acoustic/RF detection of Group 1-2 and RF-silent UAS, and SDR-based interference/rogue-emitter geolocation for installations, ranges and shared bands",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "Score 4: a dismounted unit that cannot detect an RF-silent/fiber-optic drone without radiating faces a lethal, unmitigated threat (INFERENCE from Ukraine reporting; U.S. quantification absent). The Army validated the pain by issuing the C5ISR dismounted-acoustic RFI (DefenseScoop 2026-01-21) and JIATF-401's 2026 Quick Reference Guide names acoustic as a core sensor layer (media.defense.gov 2026-09-08). Not 5 because the installation/spectrum half is friction and cost (technician drives out and triangulates over hours-days), not mission failure. Confidence MEDIUM."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "Score 3: for deployed/forward units the drone threat is continuous, but for the primary U.S. buyer today (CONUS training, southern border, installations) events are episodic; interference complaints at installations are recurring but low-urgency. GAO-26-107873 (2026-06-05) implies sustained monitoring need but does not quantify incident frequency. Confidence MEDIUM."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "Score 2: FACT - no dedicated program line or program of record for dismounted acoustic detection exists (card budget field; RFI only, and this session's search found no follow-on solicitation, OTA or SBIR topic since Feb 2026 - public evidence insufficient). Money that does exist is either aggregate (~$13M first marketplace purchases across sensors/radars/EW, war.gov 2026-04-15), ceiling-type and already awarded to an incumbent (Hidden Level $100M OTA ceiling, PR Newswire 2026-08-05; obligations not public), prize-scale ($800K total, diu.mil 2025-12), or in an adjacent lane already awarded (REWSI ~$196M, DefenseScoop 2026-09-11). Not 1 because the JIATF-401 CSO and marketplace are real, recurring vehicles. Confidence HIGH."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 3,
+   "rationale": "Score 3: on-ramps genuinely exist for non-traditionals - JIATF-401 CSO (Feb 2026), DIU challenges, marketplace listing on the CHS catalog, xTech (RECALL: xTechCounterStrike competition page exists, details not verified this session, LOW) - and the Army has shown it can move from call-for-solutions to production within months (REWSI). But every path is gated by a Falcon Peak/T-REX test slot that requires invitation, and the interfaces (Lattice, FAAD C2) are vendor/government-controlled. Confidence MEDIUM."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 3,
+   "rationale": "Score 3: the software layer (self-calibrating TDOA/AoA fusion, edge classification, CoT output) is feasible on commodity hardware (KrakenSDR at ~EUR 1,063, MEMS arrays), and Ukraine's Sky Fortress (~14,000 nodes, army.mil) proves the network concept at national scale against larger targets. But Group 1 acoustic range of a few hundred meters degrading in wind/battle noise (RECALL, MEDIUM) and platoon-scale false-alarm performance are unproven in public evidence even for funded vendors. Confidence MEDIUM."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 2,
+   "rationale": "Score 2: $250K covers the unclassified proof-of-concept (card estimate $150-300K for 6-8 nodes and field campaigns) but not the $1.5-3M credible-military-demo stage (ruggedized batch, test-slot travel, adapters, counsel), and hardware startups typically need 3-5x software capital (INFERENCE). The team would run out before any government evaluator sees a fieldable node. Confidence MEDIUM."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 2,
+   "rationale": "Score 2: a university-field demo (Part 107 drone in silent flight, cooperative emitter geolocation, tracks in ATAK) is achievable in 3-6 months, but a demo JIATF-401 or C5ISR would find credible requires a Falcon Peak/T-REX/DIU-challenge slot on a roughly annual cycle plus independent Pd/Pfa data - realistically 12-24 months, if invited at all. Confidence MEDIUM."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 2,
+   "rationale": "Score 2: MVP data is self-collectable (Part 107 flights, academic drone-audio corpora - names RECALL, verify licenses; NTIA/ITS recordings), but the data that decides trust - adversary drone signatures in realistic wind, vehicle and gunfire noise, Ukraine field recordings - is held by Guardian RF, Zvook and deployed vendors and reachable only through a CRADA or government test event the team has no path to. Confidence MEDIUM."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 2,
+   "rationale": "Score 2: receive-only SDR use and Part 107 flights are legal and the MVP is EAR-territory, but the product's entire purpose is military adaptation, which the card and E07 evidence say may drift toward USML Category XI / 600-series control, creating deemed-export exposure for the Indonesian founder (BIS deemed-export rule; ITAR has no domestic deemed-export exception); SBIR requires >50% U.S.-citizen/PR ownership (13 CFR 121.702); AFWERX limits foreign-national participation (AFRL-2025-3235, 2025-07-02); domestic RF collection touches pen-register/Wiretap-type concerns flagged in the JIATF-401 guide. All need counsel; no legal judgment made. Confidence MEDIUM."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "Score 4: the whole MVP runs on commercial parts, own drones, public datasets and open CoT/TAK - nothing classified is required to demonstrate Pd/Pfa or emitter CEP. Not 5 because classification dependence is 'eventually' (threat libraries, Falcon Peak CUI data) and the non-U.S.-person founder may be excluded from controlled test data early. Confidence HIGH."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 (explained): the field holds four government-selected, funded vendors that have already passed the exact test gauntlet - Hidden Level ($100M OTA ceiling; DIU $100K; Falcon Peak/T-REX validated), MatrixSpace (DIU $500K winner), Guardian RF (DIU $100K, Picogrid/Space Force integration), Squarehead Discovair (Norwegian contract, DIU finalist at Falcon Peak 25.2 per this session's search, Poland Eastern Shield, DroneShield/UNIFY.C2 U.S. channels) - plus DroneShield (acoustic via Squarehead since 2020), Dedrone/Axon, Teledyne FLIR, Distributed Spectrum ($25M Series A), Research Innovations (REWSI lane), CRFS/R&S/Keysight on spectrum, and Anduril owning the C2 baseline. Not 0 because the specific dismounted low-margin acoustic niche has no announced U.S. winner. Confidence HIGH."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "Score 2: incumbents are freshly capitalized and government-endorsed, not vulnerable; hardware is commodity so they can bolt microphone arrays or SDR channels onto existing nodes (card incumbent_response). The only soft spots are the low-margin dismounted end and the neglected civil installation/shared-band interference niche where C-UAS vendors do not sell. Confidence MEDIUM."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 3,
+   "rationale": "Score 3: CoT/TAK is an open, government-controlled standard and the C5ISR RFI names TAK as the display, so the dismounted output path is achievable; Lattice SDK exists but access is at Anduril's commercial discretion, and FAAD C2 integration is Northrop/Army-gated via JIATF-401. A startup owns none of the interfaces it needs. Confidence MEDIUM."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "Score 2: hardware is copyable; the only compounding asset is a labeled signature corpus, calibrated false-alarm models and evaluator trust - and incumbents already hold Ukraine-derived data and test-event track records, so the flywheel starts behind. Network effects are weak. Confidence MEDIUM."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "Score 3: interference/rogue-emitter geolocation has real civil buyers (installation spectrum managers, CBRS/5G operators, range control, event and critical-infrastructure security; GAO-26-107873 documents monitoring-capacity needs) but the market is thin and price-sensitive; Aurora Insight's exit without independent scale (Maxar 2023, then HawkEye 360 - FACT, MEDIUM) and the never-scaled NTIA/NIST pilot design are direct cautionary precedents. Confidence MEDIUM."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "Score 3: credible adjacencies - allied C-UAS (Poland tested seven acoustic systems under Eastern Shield 2026-04-22; Norway; NATO interest; Romania marketplace access), installations/border, civil spectrum - and a German founder helps in Europe. Counterweights: Squarehead owns the European acoustic lane and a split U.S./EU structure adds export complexity both ways. Confidence MEDIUM."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "Score 3: cheap nodes are consumable and networks scale by count, and a fusion service can be subscription-priced; the JIATF-401 marketplace is designed for repeat orders. But with no program of record, repeat demand is hypothetical and today's recurring orders flow to listed incumbents. Confidence MEDIUM."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1 (explained): the card lists five fatal-if-absent roles - acoustic array/beamforming engineer, coherent-DF/TDOA RF engineer, edge audio/RF ML engineer, a C5ISR/JIATF-401-connected advisor, and export/SBIR counsel - and a two-student team with one generalist engineer holds none of them; the non-U.S.-person Indonesian founder sits on the most export-sensitive technology class in the whole study (military-adapted sensing), breaking SBIR ownership math and creating deemed-export segregation costs from day one; the business founder has no C-UAS test-event network to win a Falcon Peak slot. Not 0 because the PoC is buildable unclassified and the German founder gives a European angle. Confidence HIGH."
+  }
+ ],
+ "market_attractiveness": 2.7,
+ "founder_fit": 2.2,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No budget owner: the card admits no dedicated line for dismounted acoustic detection; the Jan 2026 C5ISR RFI has produced no public follow-on as of 2026-09-25 (re-checked this session: only the original RFI coverage surfaced); marketplace ($13M aggregate), OTA ceiling ($100M to Hidden Level) and prize ($800K) money is not a program of record; three different products/buyers are bundled into one card; Aurora Insight and the never-scaled NTIA/NIST pilot are precedents for the dual-use fallback failing. Argument stands - I found no evidence to rebut it."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Acoustic+RF fusion is not new (DroneShield-Squarehead since 2020); Lattice already exposes a third-party sensor SDK so integration is an incumbent capability, not a startup wedge; four funded, government-selected vendors (Hidden Level, MatrixSpace, Guardian RF, Squarehead - the latter confirmed this session as a DIU finalist tested at Falcon Peak 25.2) plus Anduril's C2 baseline occupy the field; physics caps the dismounted acoustic upside. Argument stands."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "The card's own competitive analysis rejects the hardware-node version; the proposed software/data moat depends on CRADA or Falcon Peak access requiring a C5ISR/JIATF-401 network the students lack; SBIR ownership (13 CFR 121.702) and AFWERX foreign-national limits plus USML/600-series drift create deemed-export segregation costs; $250K covers only the PoC against a $1.5-3M credible-demo bar and $8-20M to first deployment. Argument stands."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill for these two founders. Decisive reason: the PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> CONTRACT VEHICLE chain breaks at PROGRAM OFFICE and BUDGET for the dismounted half (no program of record, no line, RFI with no public follow-on eight months on - re-verified this session, public evidence insufficient beyond that), and for the installation/spectrum half the chain is complete but already occupied: OUSW(R&E) committed a $100M OTA ceiling to Hidden Level (2026-07-30) and the Army committed ~$196M of REWSI spectrum-sensor production to already-selected vendors (2026-09-03). Three independent skeptics refute at strength 4 and I could not find evidence that any of them is wrong: my two searches found no C5ISR follow-on, and confirmed Squarehead Discovair was itself a DIU Low-Cost Sensing finalist at Falcon Peak 25.2, deepening the incumbent crowding. Layered on top, criterion 18 scores 1: the card names five fatal-if-absent roles (acoustic DSP, coherent-DF RF, edge ML, a JIATF-401/C5ISR-connected advisor, export/SBIR counsel) that a two-student team does not hold, and the non-U.S.-person founder sits on the most export-sensitive technology class in this study. Market attractiveness 2.7 and founder fit 2.2 are both below the bar. The narrower software-only interference-geolocation version proposed by all three skeptics is capital-light and avoids the hardware collision, but it is a thin, price-sensitive market with a direct failure precedent (Aurora Insight), competes with Distributed Spectrum and Hidden Level who already sell sensor-plus-software, and needs a defense anchor within 12-18 months that this team has no path to; it is better evaluated as a feature inside a spectrum-management or C-UAS C2 gap than as a standalone company. Treat all scores as heuristics, not facts.",
+ "narrower_version_if_borderline": "Not borderline, but for the record the only survivable-looking fragment (per all three skeptics) is a hardware-free, self-calibrating multi-node TDOA/AoA fusion and false-alarm-suppression engine running on third-party commodity SDR nodes, sold as an interference/rogue-emitter geolocation service to installation spectrum managers, range control and CBRS/5G operators, with a CoT/TAK export as a later upsell and the non-U.S.-person founder kept on the EAR99 fusion/UI layer (needs counsel). I score even this fragment as weak: thin buyer budgets, Aurora Insight precedent, and Distributed Spectrum/Hidden Level adjacency. It should be folded into a spectrum-management or C-UAS C2 gap rather than pursued here.",
+ "most_important_question_answer": "If forced to spend $250,000 on G21 today, the founders should build no hardware: they would write a self-calibrating multi-node TDOA/AoA fusion service with an honest per-track confidence and a false-alarm model, running on 6-8 commodity KrakenSDR-class nodes plus MEMS microphone boards they buy rather than design, and publish emitter geolocations and drone tracks as Cursor-on-Target into an ATAK plugin. They would show it first to one installation spectrum manager and one range control officer at an Army or DAF installation (the civil/dual-use buyer with the lightest export exposure), and second to the DEVCOM C5ISR Center RTI engineers who wrote the January 2026 acoustic RFI. The demonstration would prove that cheap, imperfectly synchronized nodes geolocate a cooperative ISM/amateur emitter to a stated CEP and detect a Part 107 quadcopter and a fixed-wing sUAS in RF-silent pre-programmed flight at a stated range with published Pd/Pfa curves in wind and traffic noise, with the track arriving on a phone. The customer would care because today an interference complaint means a technician driving out with a handheld analyzer for hours to days, and because RF-silent drones defeat every emitter-based detector the installation already owns. The honest answer to why an incumbent cannot trivially crush them is that they can: Hidden Level, Distributed Spectrum and Guardian RF already sell node-plus-software into these exact buyers, Squarehead/DroneShield have sold acoustic+RF fusion since 2020, and Anduril controls the C2 the output must land in; the founders' only asset would be a self-collected signature corpus that starts years behind vendors holding Ukraine field data. That is why the gap fails for this team. The milestone that would justify $2-5M is an invited Falcon Peak/T-REX/DIU-challenge slot producing government-collected Pd/Pfa and CEP data that beats an incumbent node on cost-per-covered-area, plus a paid installation pilot - and securing that slot requires the JIATF-401/C5ISR relationships and specialist hires the founders would need to recruit before, not after, spending the $250K.",
+ "bear_case_summary": "No program office or budget line for dismounted acoustic detection (RFI-only, no public follow-on as of 2026-09-25); installation/spectrum money already committed to Hidden Level ($100M OTA ceiling) and Research Innovations (REWSI ~$96.9M); four funded, government-selected, test-validated vendors plus Anduril's Lattice C2 baseline and DroneShield's six-year-old acoustic+RF integration crowd the field; hardware is commodity so the only moat is data the founders do not have; Group 1 acoustic physics is unproven at platoon scale; the non-U.S.-person founder breaks SBIR ownership and creates deemed-export segregation costs on a military-adapted sensor; $250K funds only a PoC against a $1.5-3M credible-demo bar; the dual-use fallback has a documented failure precedent (Aurora Insight, NTIA/NIST pilot).",
+ "bull_case_summary": "The pain is real and officially recognized (C5ISR RFI 2026-01-14; JIATF-401 guide 2026-09-08 lists acoustic as a core layer; Hidden Level's OTA justified by RF-silent drones); Ukraine proved ~14,000-node acoustic networks at $400-1,000 per node; commodity coherent SDRs and MEMS arrays make sub-$1,500 nodes feasible; JIATF-401's CSO and marketplace and the REWSI precedent show non-traditionals can reach production within months; allied demand (Poland, Norway, NATO) is more concrete than U.S. demand and a German founder helps there; the software/fusion/false-alarm layer is where the value sits and can start fully unclassified; GAO-26-107873 documents a shared-band monitoring-capacity gap for the dual-use leg. None of this overcomes the missing program office, the incumbent set, or the founder-fit gap.",
+ "confidence": "MEDIUM"
+}

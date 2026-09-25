@@ -1,0 +1,140 @@
+{
+ "id": "G08",
+ "title": "Cross-system swivel-chair elimination: provenance-tracked translation of plans, targets and intelligence products between planning, fires, airspace, intel and briefing systems (Onebrief/COP graphics to AFATDS/AXS, TAIS, IBCS-M; AIDP/DCGS-A to MSS, chat and slides)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "FACT/MEDIUM-HIGH: tier-1 MIPB 'Swivel-Chair War' (2026), Scarlet Dragon 743-minute first targeting run (CSET 2024-08), Balikatan 2026 hand-tagged releasability (DVIDS), GAO-21-99 and GAO-25-106454 all document staff-hour burn and error discovery at rehearsal/live fire; not 5 because units tolerate it today with LNOs, FSEs and chat, and incumbents are actively reducing it inside NGC2 prototypes."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 5,
+   "rationale": "Score 5 because the re-keying happens every battle-rhythm cycle and every time any plan, target or ACM changes, at every echelon from battalion to COCOM J2/J3 (card current_workflow steps 2-5; MIPB 2026) - it is continuous rather than episodic. INFERENCE from workflow description, confidence HIGH."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "No budget line is specific to cross-system translation; the money sits inside NGC2 'C2 Applications' ~$488M / 'C2 Data' ~$306M (PE numbers unverified), MSS (~$1.3B ceiling, not revenue) and Onebrief's $20M-ceiling IDIQ; GAO-26-108019 (2026-08-20) finds no unit-by-year NGC2 schedule or life-cycle cost estimate. Adjacent money is real but already committed to platform holders. Confidence MEDIUM."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 1,
+   "rationale": "Score 1 because no direct vehicle exists for an unaffiliated newcomer: entry is only as a subcontract/component inside Anduril's or Lockheed's NGC2 OTA, a sponsor-gated exercise slot, or an API-marketplace listing; SBIR is foreclosed for the current cap table (13 CFR 121.702, >50% U.S.-citizen/LPR ownership and control); ACC-APG contracting office is INFERENCE not verified. The PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING OFFICE->BUDGET->CONTRACT VEHICLE chain breaks at BUDGET (no line) and VEHICLE (subcontract only). Confidence HIGH."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 3,
+   "rationale": "Schema translation, provenance ledgers and citation-carrying LLM product generation are mature (2025-2026); an unclassified TAK/CoT synthetic MVP is feasible in 3-6 months. But the real product requires validated VMF/USMTF/JREAP semantics, doctrinal FSCM/ACM conflict rules and safety-authority acceptance (fratricide risk), which are hard and gated. INFERENCE, confidence MEDIUM."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 2,
+   "rationale": "Card estimates PoC at $150-300K (fits) but a credible military demo at $1.5-3M over 12-18 months and first production at $6-12M; three fatal_if_absent hires (former 13A/13J, former 35F/35G, cleared U.S.-person integration engineer) plus counsel are unfunded at $250K. INFERENCE from comparables, confidence MEDIUM."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 2,
+   "rationale": "Synthetic-data demo in 3-6 months is possible, but a demo a fires or intel cell would accept as credible needs sponsor-provided CUI interface docs, exercise access and a former FSO/35F - 12-18 months minimum per the card and dependent on an invitation the team does not control. Confidence MEDIUM."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 1,
+   "rationale": "Score 1 because the data that gives the product its value - AFATDS/AXS, TAIS, IBCS-M ICDs, VMF/USMTF/JREAP implementations, realistic INTSUMs and chat logs - is CUI/export-controlled or classified and reachable only through a government sponsor or team-lead OTA; only MIL-STD-2525, CoT/TAK and public ADatP-3 structures are open. The API marketplace (launched 2026-05-06, overseen by ADOC per InsideDefense/DefenseScoop 2026) documents interfaces but consumption requires an API credential issued to Army organizations/registered vendors - access terms for an unaffiliated startup: Public evidence insufficient (RECALL - not re-verified; Federal News Network 2026-07 fetch EGRESS_BLOCKED). Confidence HIGH on the constraint."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 1,
+   "rationale": "Score 1 because the burden stacks: export-controlled CUI interface data (ITAR 'specially designed' analysis needed once built for USML fire-control/air-defense systems - counsel required, no legal conclusion made here), NGC2 third-party app security assessment (Army CTO memo Sept 2025 found third-party apps deficient), Open DAGIR/IL5 onboarding, fires safety-authority review, FOCI treatment of both founders as foreign interests (32 CFR 117.11), and SBIR ownership test. Card rates burden 'high'. Confidence HIGH."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 3,
+   "rationale": "Yes for the synthetic MVP: open TAK/CoT, MIL-STD-2525, public USMTF/ADatP-3 structures, veteran advisors on a scripted scenario. But classification_dependence is 'eventually' and the value proposition cannot be proven against real AFATDS/TAIS/IBCS-M without CUI; the unclassified version proves the concept, not the product. Confidence MEDIUM."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 (most intense) because every seam is already held by a funded incumbent: Raft owns registries/transformation/federation in the Army's June 2026 NGC2 common data baseline (army.mil/293409, FACT), Onebrief holds the plan layer and a $20M-ceiling enterprise IDIQ (BusinessWire 2026-09-17), Palantir/MSS is the OSD-mandated intel target (DefenseScoop 2026-04-15), Lockheed/Accelint demonstrated unified airspace, Leidos/AXS own the fires interface (army.mil/286967), plus RII, Vannevar, BigBear, Primer adjacent. Confidence HIGH."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "Incumbents can absorb translation trivially and are doing so; the only crack is that baseline holders have weak incentive to build an independent validation/lineage/releasability audit of their own outputs, and government-purpose data rights plus GAO pressure on CJADC2 oversight (GAO-25-106454) could create a preference for a neutral component. That preference is HYPOTHESIS, unproven in any solicitation. Confidence MEDIUM."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "A newcomer controls none of the interfaces (PM Mission Command, PEO M&S/Northrop for IBCS-M, CPE C2IN registries, Palantir/CDAO for MSS, Onebrief's own API - third-party availability unverified). Jailbreak and the API marketplace lower the barrier, and a small startup (Adyton, via Anduril Lattice) did list on the marketplace in summer 2026 (Tectonic Defense, date approximate; INFERENCE, LOW-MEDIUM), but that is publishing one's own API under a team lead, not consuming fires/airspace PoR interfaces. Confidence MEDIUM."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score 1 because the card's own defensibility assessment is 'Weak': no IP protection, validation rules and accreditation are contestable by baseline holders, OTA-funded adapters carry government-purpose data rights, and the Army's stated Right to Integrate policy (army.mil/293898, 2026) is explicitly designed to prevent interface lock-in. Confidence HIGH."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 1,
+   "rationale": "Score 1 because FSCM/ACM/VMF/USMTF/target-packet semantics have no commercial analogue and the generic pieces (schema translation, provenance ledgers, LLM document generation) are commoditized enterprise features; the only second market is allied militaries (FMN/ADatP-3), which is military not commercial. Card rates 'low'. Confidence HIGH."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "If (and only if) embedded in the NGC2 baseline, the Army plans app reuse across 11 divisions and 4 corps by FY2032 and the allied FMN/NATO DEMETER seam is analogous; the intel-product variant could ride Open DAGIR. But expansion accrues as a feature of someone else's platform. INFERENCE, confidence MEDIUM."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "Per-mission-thread validation rules, sustainment of adapters as PoR versions change, and exercise-by-exercise engagement create recurring demand, but government-purpose rights and absorption by baseline holders cap it at services-like renewals rather than SaaS lock-in. Confidence MEDIUM."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1 because the founding team as specified cannot legally or credibly perform the core work: neither founder is a former 13A/35F or a cleared U.S.-person integration engineer (all three fatal_if_absent), the Indonesian founder cannot receive export-controlled ICDs/CUI without a license/TAA and counts against SBIR ownership, the German founder is a U.S. person under ITAR only after LPR (22 CFR 120.62) and remains a FOCI foreign interest (32 CFR 117.11), and $250K cannot buy the missing roles. The engineer/business split is fine for the synthetic MVP only. Descriptive, not a legal conclusion - counsel required. Confidence HIGH."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 1.7,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "No dedicated budget line; money already committed inside NGC2/MSS/Onebrief platform awards held by named primes; seam contractually assigned in the June 2026 NGC2 common data baseline; API access invitation/credential-gated; entry path is subcontract-inside-OTA services work; Jailbreak lowers incumbents' integration cost faster than a startup can build a moat. Would reconsider only on a named non-prime third party paid for standalone translation/provenance, or open non-gated marketplace access."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "Raft is formally named owner of registries/transformation/federation under Anduril's Lattice in the Army's own June 2026 baseline; Onebrief holds the plan layer and an enterprise IDIQ; Palantir/MSS is the OSD-mandated intel target; Leidos/AXS is natively closing the fires execution gap; interfaces were CUI-locked until May 2026 and remain marketplace/invitation-gated; fratricide-risk translations need safety authorities a two-founder team lacks. Would reconsider on a dedicated independent-auditor solicitation or an exercise AAR showing the primes' delivered coverage still leaves the thread broken."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "Seam assigned and funded to incumbents before this team could reach a demo; core interface data legally closed to the Indonesian founder and clearance-gated for both; achievable MVP is a synthetic demo that cannot address the safety-critical version; credible demo ($1.5-3M) and production ($6-12M) are multiples of $250K; only entry is being invited in by the incumbents who can absorb the function. Would reconsider on a specific solicitation/subcontract slot for an independent provenance layer, third-party write access to fires/airspace interfaces, or a cited case of a two-founder team reaching NGC2/Open DAGIR production within 18 months."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL. All three skeptics refute at strength 5 and I find no evidence that overturns them; the one item every skeptic said would change their mind - open, non-sponsored third-party access to fires/airspace PoR interfaces or a dedicated independent-auditor solicitation - was searched for this session and not found (Public evidence insufficient; access terms behind EGRESS_BLOCKED news domains). Decisive reason: the exact function G08 proposes - registries, data transformation and federation with provenance - was assigned by the Army's June 2026 NGC2 common data baseline to Anduril with Palantir and Raft (army.mil/293409, FACT, HIGH), the plan layer is Onebrief's (Army enterprise IDIQ, $20M ceiling, BusinessWire 2026-09-17; ceiling not revenue), the intel-product target is OSD-mandated MSS (DefenseScoop 2026-04-15), and the fires interface is Leidos/AXS (army.mil/286967). The procurement chain breaks in two places: BUDGET (no line for cross-system translation; GAO-26-108019, 2026-08-20, finds no NGC2 schedule or cost estimate) and CONTRACT VEHICLE (only a subcontract inside a team lead's OTA or a sponsor-issued marketplace credential; SBIR foreclosed by the cap table). Independently, the founder team is structurally excluded from the core work: three fatal_if_absent roles are unfilled, the Indonesian founder cannot receive the export-controlled ICDs that define the product, and $250K cannot close a $1.5-3M demo gap. Market attractiveness (2.3) reflects a real, frequent, well-documented pain that is nonetheless already being closed by the platform holders; founder fit (1.7) reflects legal, clearance and capital barriers that no amount of execution overcomes in the next 18 months. Heuristic scores, not facts.",
+ "narrower_version_if_borderline": "Not applicable - verdict is kill. For the record, the only residual all three skeptics and the card identify is a neutral, government-owned-data-rights provenance/releasability audit app that ingests objects the primes' systems already emit and adds lineage, releasability tags and doctrinal conflict flags for human review (no data movement, no execution), registered on the NGC2/Open DAGIR marketplace, built and sold by U.S.-person staff with the non-U.S.-person founder confined to unclassified product/UX work per counsel, and validated first at CWIX/Bold Quest or an allied FMN exercise. It would become a borderline candidate only if the Army or CDAO publishes a solicitation, CSO topic or subcontract slot explicitly for an independent validation/audit layer - HYPOTHESIS, no public evidence today - and even then it is a $1-5M/year feature business, not a venture-scale company.",
+ "most_important_question_answer": "With $250,000 today, two exceptionally capable founders would build the unclassified 'translation with receipts' MVP for one mission thread: ingest an Onebrief-style plan export or MIL-STD-2525 overlay plus synthetic detections and chat, emit validated airspace and fire-support coordination measures and target nominations as CoT and mock VMF/USMTF messages into a TAK server and a mock fires endpoint, with a per-object provenance graph and seeded-error conflict detection, and measure time and error reduction against a manual baseline run by three to five former 13A/35F advisors. They would show it to a division innovation cell at 4th ID or 25th ID, the ADOC/API-marketplace team, and an integration lead inside Team Anduril or Lockheed's NGC2 team, and it would prove that automated translation cuts re-keying time and catches seeded ACM/FSCM errors while every emitted object carries verifiable lineage and releasability. The customer would care because discrepancies are today discovered at rehearsals or live fire and provenance is reconstructed from chat logs after the fact, and a wrong ACM/FSCM is a fratricide risk. This is exactly where it fails: an incumbent CAN trivially crush them, because Raft/Anduril/Palantir hold the transformation layer in the signed June 2026 baseline, Onebrief already sells plan-to-execution push, Palantir owns the MSS target, Leidos/AXS owns the fires interface, and the Army's own Right to Integrate program is lowering their integration cost every quarter; the founders control no interface, cannot legally receive the CUI ICDs that make the demo real (one founder is not a U.S. person, neither is cleared or a former fires/intel officer), and the synthetic demo cannot satisfy a safety authority. The milestone that would justify the next $2-5M - a signed subcontract or CRADA slot inside a team-lead OTA for one exercise plus a written government preference for an independent, prime-agnostic validation layer - depends on invitations from the very incumbents who can ship the feature themselves, and no public evidence shows such a lane exists. So the team would spend $250K producing a strong portfolio piece and a services pitch, not a company.",
+ "bear_case_summary": "The seam is already assigned and funded: Army June 2026 NGC2 common data baseline gives Anduril/Palantir/Raft registries-transformation-federation (FACT), Onebrief holds the plan layer with an enterprise IDIQ, Palantir/MSS is the OSD-mandated intel target, Leidos/AXS owns the fires interface. No dedicated budget line (GAO-26-108019: no NGC2 schedule or cost estimate). Interfaces were CUI-locked until Operation Jailbreak (May 2026) and marketplace consumption remains credential/sponsor-gated (access terms unverified this session). Entry is subcontract-inside-OTA services work with 'Weak' defensibility and government-purpose data rights. The founding team lacks all three fatal_if_absent roles, one founder is barred from export-controlled ICDs, SBIR is foreclosed by the cap table, and a credible demo costs 6-12x the available capital. Three independent skeptics refute at strength 5.",
+ "bull_case_summary": "The pain is real, frequent, tier-1 documented (MIPB 2026 'Swivel-Chair War', Scarlet Dragon 743 minutes, Balikatan hand-tagged releasability, GAO-21-99, GAO-25-106454) and the Army has now created the preconditions for third-party components: an API marketplace (launched 2026-05-06, ADOC-overseen), a Right to Integrate policy hostile to lock-in, a common NGC2 baseline meant to reuse apps across 11 divisions and 4 corps, and an AIDP Call for Solutions (2026-07) demanding bi-directional MSS exchange. A small startup (Adyton) did list on the marketplace in summer 2026. Baseline holders have weak incentive to independently audit their own outputs, so a neutral provenance/releasability validation app is a plausible government preference, and the allied FMN/ADatP-3 market offers lower classification friction and a German founder's access. None of this is yet a solicitation, and none of it removes the founder-team access barrier; it is a HYPOTHESIS worth monitoring, not a reason to build now.",
+ "confidence": "HIGH"
+}

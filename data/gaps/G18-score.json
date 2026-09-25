@@ -1,0 +1,140 @@
+{
+ "id": "G18",
+ "title": "Battalion-and-below DDIL-native orders, planning and battle-tracking app bridging dismounted TAK and Onebrief-class HQ planning (structured orders, reports and tracking that survive displaced, low-bandwidth command posts)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "FACT/HIGH: Infantry Magazine (Winter 2024-25, lineofdeparture.army.mil, 2025-03-01) documents battalion-and-below orders/reports riding voice, MMC chat, PowerPoint and paper, and Ivy Sting 4 (CPE C2IN, 2026-02) made division-to-battalion C2 under denied networks an explicit test objective; re-keying and lost report history on CP jumps is real, recurring staff pain. Not a 5 because doctrine treats voice/paper 'analog' fallback as an acceptable and even desired degradation mode (the Infantry article frames minimal-connectivity survivability as a goal), so the pain is tolerated rather than mission-stopping."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 4,
+   "rationale": "INFERENCE/MEDIUM: the pain recurs every orders cycle, every CP displacement and every CTC rotation, and DDIL is treated as a standing condition by the Army (GAO-26-108019, 2026-08-20; Ivy Sting objectives). Not 5 because in garrison and in well-connected training the network holds and staffs fall back to familiar tools without much friction."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "SCORE 1 EXPLAINED: the card and all three skeptics agree no dedicated budget line exists. The ~$488.4M FY2026 NGC2 RDT&E figure (buyer map; PE not verified) is architecture-wide, not a bidable line; the SBMC money ($159M Anduril + $195M Rivet prototype OTAs, DefenseScoop 2025-09-08 / 2026-08-17) is already awarded to the vendors who own the adjacent echelon; Onebrief's $20M IDIQ (Business Wire 2026-09-17) is the incumbent's ceiling, not revenue and not a vehicle for a challenger. The only cash a startup could touch is a team-lead subcontract fee, an SBIR/xTech award or GPC-card unit purchases. Not 0 because Immersive Wisdom's DoD-wide $25M sole-source ordering contract (PR Newswire 2024-05; ceiling, obligations unknown) shows a paying buyer exists for the DDIL-collaboration primitive."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 1,
+   "rationale": "SCORE 1 EXPLAINED: the PROBLEM->USER->REQUIREMENT OWNER->PROGRAM OFFICE->CONTRACTING->BUDGET->VEHICLE chain breaks at PROGRAM OFFICE and BUDGET. The user (battalion S3/battle captain) is clear, but the requirement owner is unverified (T2COM/C2 CFT vs PEO Soldier vs MCoE), no program office owns a battalion orders app, the contracting office is only inferred (ACC-APG), and the only vehicles are incumbents' (Onebrief IDIQ, NGC2/SBMC OTAs) or gated by TAK Product Center plugin signing and a government sponsor for TAK-GOV/MIL. Not 0 because OTA/CSO on-ramps have no ownership test (E07-F22, 10 USC 3014) and a team-member subcontract under an NGC2 lead is a real if subordinate path."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "FACT/HIGH: ATAK-CIV and its plugin SDK are open source (github.com/deptofdefense/AndroidTacticalAssaultKit-CIV), CRDT libraries are mature, Meshtastic/goTenna-class radios and community transports (Akita-MeshTAK) exist, and Systematic's tasking function and Ukraine's Delta show offline tasking is buildable. Not 5 because partition-tolerant merge of orders, graphics and reports that reconnect out of order across kilobit links is genuinely hard and unglamorous engineering, and small-screen orders UX is unproven."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 3,
+   "rationale": "HYPOTHESIS/LOW (card estimates): a proof of concept ($150k-$300k, two founders plus one contract Android/TAK engineer, commercial EUDs and mesh radios) fits $250k, but the credible military demo ($1M-$2.5M, TAK-GOV review, security hardening, a Guard/allied field exercise, an ex-S3 on staff) does not, and first production ($5M-$12M) assumes a subcontract or SBIR Phase III that this cap table may not qualify for."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM (5 = fastest): a mesh-partition convergence demo on 3-5 Android EUDs plus a laptop TOC is achievable in 3-6 months on open ATAK-CIV; a demo credible to PM Mission Command or an NGC2 team lead (field exercise with a real battalion staff, TAK-GOV packaging) is 12-18 months per the card, and unit access depends on a sponsor the founders do not yet have."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 4,
+   "rationale": "FACT/HIGH: FM 6-0 / ATP 6-0.5 order and report formats, MIL-STD-2525 symbology, CoT/data-package schemas and ATAK-CIV source are public; no operational or classified data is needed for the MVP. Not 5 because real unit TACSOPs, report data and NGC2 data-baseline schemas need a government sponsor or team-lead partnership and may be CUI."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 2,
+   "rationale": "FACT/MEDIUM (5 = least burdened): development on ATAK-CIV can stay unclassified and plausibly EAR99, but distribution to military users runs through TPC-controlled TAK-GOV/MIL builds, deployment needs RMF/ATO or a team lead's authorization, CMMC applies once CUI flows, and a C2 app 'specially designed' for military use risks drifting into USML Cat XI or 600-series control (E07-F16), which would make sharing code with the non-U.S.-person founder a deemed export issue (E07-F17, F18). SBIR's >50% U.S.-person ownership test (13 CFR 121.702, E07-F3) is a live constraint; FOCI (32 CFR 117.11, E07-F19) binds if work turns classified ('eventually' per the card). All of this needs counsel; no legal judgment made."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "FACT/HIGH: the MVP is unclassified, software-only, built on open source and public doctrine; classification dependence is 'eventually', not at start. Not 5 because the money-bearing integrations (NGC2 data baseline, SBMC, TAK-MIL) sit behind sponsors and CUI."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "SCORE 1 EXPLAINED (5 = least intense): the gap is squeezed from above by Onebrief (NGC2 planning layer, Army enterprise IDIQ W9128Z-26-D-A014 2026-09-17, publicly states offline tactical access is 'underway' per Business Wire 2026-06-26 and its 2026 marketing now claims DDIL-ready/offline-first, unverified), from below by Anduril and Rivet ($354M SBMC prototype OTAs, ATAK-backward-compatible, Anduril in phase two per DefenseScoop 2026-08-17), by the government itself (TAK Product Center owns ATAK/WinTAK/TAK Server; PM Mission Command's Operational Mission Command Suite notice asks for DDIL-robust TAK data services, E02-F8) and in allied markets by Systematic SitaWare Edge/Frontline tasking and Ukraine's free Delta. Not 0 only because no third party has yet shipped a TAK-native structured orders/reports object layer (search this stage found none; absence of a product is not evidence of opportunity)."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: incumbents optimise for their own stacks and treat DDIL as an edge case (practitioner post, RECALL LOW confidence), the Onebrief offline claim is self-reported with no independent verification found by the skeptics (2026-09-25), and the GAO quote is a single soldier's self-report of squadron-level battle tracking in a test, not proof that structured orders and reports merge cleanly after partition. But both incumbents are funded, on enterprise vehicles and spreading (III Armored Corps receiving NGC2 baseline, DefenseScoop 2026-09-21), and the government can direct TAK to add order objects. Vulnerability is a window measured in one prototype cycle, not a structural weakness."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "FACT/MEDIUM: CoT, TAK data packages and the ATAK-CIV plugin SDK are open, so the dismounted side is integrable; but the startup controls none of the six interfaces it must touch (card: TPC controls TAK-GOV/MIL and plugin signing; Anduril controls Lattice SDK; Anduril/Palantir the NGC2 data baseline; Onebrief its export/API, third-party availability unverified; PEO Soldier the SBMC baseline). Integration into the money-bearing stacks is at the incumbents' discretion."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "SCORE 1 EXPLAINED: the card's own defensibility assessment is 'weak': merge/sync algorithms are replicable, ATAK is open and government-owned, incumbents own the surrounding UIs, and unit SOP/report formats vary so the schema is not naturally standardisable by a startup. The only compounding assets (installed base, TAK.gov-approved status, integrations, a schema units adopt in SOPs) all require a government sponsor or incumbent cooperation. Not 0 because a validated order/report object schema plus field-proven merge model would be a real, if small, acquisition asset."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "INFERENCE/MEDIUM: public-safety incident command (wildland fire, SAR, disaster response) already runs on TAK and has the same offline structured-tasking gap (ICS forms), and mining/energy/expedition operations need offline tasking; but the military orders/reports model is the core value and commercial demand for partition-tolerant tasking is niche (card rates dual use 'medium')."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "HYPOTHESIS/LOW: if a TAK-native orders/reports object layer were adopted it could extend to brigade, to Guard and allied light forces and to public safety; but the adjacent surfaces (Onebrief above, SBMC/Lattice below) are owned by incumbents and allied echelon budgets are small (card: allies 'improve pilot access ... rather than the total market')."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: per-unit licensing and sustainment are conceivable, but unit-level budgets are GPC-card sized, the enterprise vehicle at this layer belongs to Onebrief, and the realistic payer is a subcontract fee or SBIR tranche, neither of which is recurring product revenue."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 2,
+   "rationale": "INFERENCE/MEDIUM: the strong engineer maps well to the CRDT/offline-first Android core and the German founder opens Bundeswehr CIHBw/NATO DIANA channels; but the card marks a recent battalion S3/XO/battle captain as fatal-if-absent and neither founder is one, the SBIR path is probably unavailable without restructuring (Indonesian founder's equity never counts; German founder's only after permanent residence, E07-F3), the Indonesian founder may need to be walled off from any controlled work, and the founders have no government sponsor for TAK-GOV access. Recruiting a former S3 and a TAK ecosystem engineer is possible with $250k but consumes most of it."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 3.0,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No budget owner and no program office for a battalion orders app; the only vehicles are incumbents' (Onebrief $20M Army IDIQ 2026-09-17; SBMC $354M prototype OTAs to Anduril/Rivet); GAO-26-108019 already quotes DDIL squadron-level battle tracking in the NGC2 baseline; Onebrief's 2026 marketing claims offline-first/DDIL-ready (unverified); government could direct TAK Product Center to add order objects; market stage is prototyping; SBIR ownership test may exclude this cap table. Narrower survivable form: open TAK-native orders/reports layer for Guard, public-safety ICS and allied light forces, positioned as a feature/acquisition target."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Pincer from above (Onebrief: designated NGC2 planning layer, $200M Series D Jan 2026, enterprise IDIQ, offline collaboration marketed as underway/shipping) and below (Anduril/Rivet SBMC, ATAK-backward-compatible; Anduril phase two Aug 2026; NGC2 baseline spreading to III Armored Corps Sept 2026), plus the government owning TAK and allied incumbents (Systematic SitaWare Edge tasking, Ukraine Delta). Battalion staffs' analog fallback is partly doctrine, not just a gap. Narrower form: interoperability/feature company built to plug into Onebrief export and Lattice SDK with an acquihire exit."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Onebrief and Anduril/Rivet are closing the gap with resources three to four orders of magnitude beyond $250k; no independent confirmation Onebrief's offline mode has shipped, but a stated roadmap item plus enterprise vehicle closes faster than SBIR proposals; TAK-GOV/MIL distribution is gatekept by TAK Product Center; SBIR requires >50% U.S.-person ownership (13 CFR 121.702) which this cap table likely fails; ITAR/600-series drift risk as military integrations are added; FOCI treats even a permanent resident as a foreign interest; credible military demo costs $1M-$2.5M. Narrower form: allied-first, ATAK-CIV-only, EAR99 product for Guard/public safety/allied units sold as licensing/acquisition play."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL as a venture for these two founders in their stated primary market (U.S. defense). Three independent skeptics refute at strength 4 and, after checking their citations against the card and the E07 regulatory findings, I do not find grounds to overrule them. The decisive reason is the broken buyer chain, which the task instructs me to penalise heavily: PROBLEM (FACT, HIGH: Infantry Magazine 2025-03-01; Ivy Sting 4 objectives 2026-02) and USER (battalion S3/battle captain, company XO) are real, but REQUIREMENT OWNER is unverified, no PROGRAM OFFICE owns a battalion-and-below orders app (dismounted C2 sits with PEO Soldier/SBMC, the TOC with CPE C2IN/NGC2, TAK with TAK Product Center), the CONTRACTING OFFICE is only inferred, there is no BUDGET line, and every CONTRACT VEHICLE that touches this layer belongs to an incumbent (Onebrief IDIQ W9128Z-26-D-A014, Business Wire 2026-09-17; SBMC OTAs to Anduril/Rivet, DefenseScoop 2025-09-08) or to a subcontract whose terms the startup does not control. Second, the window is closing from both sides: GAO-26-108019 (2026-08-20, FACT HIGH) already records a soldier battle-tracking at squadron level while cut off from the division cloud on the Anduril-led NGC2 baseline, Anduril is in SBMC phase two (DefenseScoop 2026-08-17), the baseline is spreading to III Armored Corps (DefenseScoop 2026-09-21), and Onebrief publicly says offline tactical access is underway (Business Wire 2026-06-26; its 2026 marketing goes further, but that is company marketing and not proof it works). Third, the card's own authors conclude the standalone U.S. Army wedge is 'likely to be absorbed'. Fourth, for this specific pair, the primary non-dilutive channel (SBIR/xTech) requires >50% U.S.-person ownership (13 CFR 121.702, E07-F3 FACT HIGH), which one non-U.S.-person founder and one not-yet-permanent-resident founder likely cannot meet without restructuring, and a 'specially designed' military C2 app risks ITAR/600-series drift that would complicate the Indonesian founder's access to the codebase (E07-F16/F17/F18; needs counsel). Where I differ from the skeptics: the GAO quote is one soldier's self-report about battle tracking in a prototype test, not evidence that structured orders and reports merge after partition, and the OTA/CSO route carries no ownership test (E07-F22), so the technical white space is somewhat wider and the founder constraints somewhat narrower than they state. Those corrections raise incumbent_vulnerability and regulatory scores by a point but do not create a budget owner, and without one this remains a feature, not a company. Confidence MEDIUM: the strongest counter-evidence would be a documented battalion-level DDIL failure of the NGC2/SBMC stack in a CTC AAR or GAO/IG report after the 2026 rollouts, or a TPC statement declining to add order objects; neither exists in public evidence this session (Public evidence insufficient).",
+ "narrower_version_if_borderline": "Not borderline, but for completeness the residual form all three skeptics converge on is: an open, ATAK-CIV-only, EAR99-by-design structured orders/tasks/reports object layer with CRDT merge, sold first to public-safety incident command (ICS 201/204/209-style forms over Meshtastic-class mesh), Army National Guard battalions on unclassified networks and allied light units via Bundeswehr CIHBw or NATO DIANA, with the explicit business model of licensing or selling the merge model and schema to Onebrief, the Lattice partner program, TAK Product Center or Systematic. I do not rate this as a survivable version of G18 for these founders because it abandons the stated primary market (U.S. defense budget), has small GPC-card-sized budgets, and its realistic exit is an acquihire; if pursued it should be re-registered as a separate public-safety/allied candidate and scored on its own evidence rather than kept alive under G18.",
+ "most_important_question_answer": "If two exceptionally capable founders had $250,000 today and insisted on this gap, the only defensible first build is an open-source ATAK-CIV plugin plus a small TAK Server extension that represents OPORD/FRAGO, tasks, control measures and the standard reports (SITREP, LOGSTAT, PERSTAT, SPOTREP, 9-line) as versioned objects with a CRDT merge model, demonstrated on five Android EUDs and a laptop TOC over a Meshtastic-class mesh with deliberate partitions and a 'CP jump' in the middle, measuring bytes-per-order and convergence time against the same content sent as chat and data packages. They would show it to a National Guard infantry battalion S3 and battle captain (reachable without a program office), a wildland-fire incident management team that already runs TAK, and the TAK Product Center product owner and PM Mission Command TAK lead, and the demonstration would prove that structured orders and reports, not just PLI and chat, can be authored, disseminated and reconciled at kilobit bandwidth with no manual re-keying after reconnection. The customer would care because report history and the running estimate are lost or diverge every time the CP displaces, which Ivy Sting 4 (2026) and the Infantry Magazine mobile-CP authors (2025) both frame as a live problem. But this is exactly where the plan fails: an incumbent can crush them because Onebrief already owns the enterprise vehicle and says offline tactical mode is underway, Anduril and Rivet own the ATAK-compatible SBMC client with $354M of prototype funding and are required to be backward compatible with TAK, and the government owns ATAK itself and can direct TPC to add order objects; the founders control none of the six interfaces the product must plug into, have no former battalion S3 (fatal per the card), and probably cannot use SBIR without restructuring the cap table. The milestone that would justify the next $2-5 million would be a signed, paying unit or agency pilot (Guard, public safety or allied) plus a written commitment from TPC, an NGC2 team lead or Onebrief to adopt or integrate the schema; absent that commitment, the money would buy a feature that the adjacent incumbents can replicate in one prototype cycle, which is why the gap is killed rather than funded.",
+ "bear_case_summary": "No program office, requirement owner or budget line exists for a battalion-and-below orders app; the only vehicles at this layer belong to Onebrief (Army enterprise IDIQ, Sept 2026, offline tactical mode stated as underway) and Anduril/Rivet (SBMC prototype OTAs, ATAK-backward-compatible, Anduril in phase two) while GAO-26-108019 already documents DDIL squadron-level battle tracking on the NGC2 baseline now spreading to III Armored Corps; the government owns TAK and can add order objects itself; allied markets are held by Systematic and Delta; defensibility is weak; and this founder pair likely fails the SBIR ownership test and faces ITAR-drift and TAK-GOV access constraints. The card's own authors expect the wedge to be absorbed.",
+ "bull_case_summary": "The pain is real and recurring (FACT: Infantry Magazine 2025; Ivy Sting 4 2026 objectives), the MVP is unclassified and buildable on open ATAK-CIV with mature CRDT libraries for roughly $150k-$300k, no third party has shipped a TAK-native structured orders/reports layer, Onebrief's offline claims are unverified and the GAO quote covers battle tracking rather than structured orders merge, OTA/CSO on-ramps have no ownership test, and Guard, public-safety ICS and allied light forces are reachable without a program office. A working, field-proven merge model and order schema could be a credible acquisition target for Onebrief, Anduril's partner program, TPC or Systematic, and the German founder can use Bundeswehr CIHBw/NATO DIANA channels.",
+ "confidence": "MEDIUM"
+}

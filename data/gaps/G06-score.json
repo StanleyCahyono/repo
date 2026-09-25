@@ -1,0 +1,140 @@
+{
+ "id": "G06",
+ "title": "Edge-to-enterprise sustainment status bridge (LOGSTAT-to-COP automation under DDIL) with plan-coupled fuel/ammunition/parts feasibility forecasting",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 4,
+   "rationale": "FACT/HIGH-MEDIUM: Army documented staff-built sustainment COP in 2018 (army.mil/194399) and still describes it in the summer-2026 Army Sustainment Professional Bulletin (army.mil/293629); the Aug-2025 LG-DA document names the 'swivel chair' burden; FM 4-0 makes predictive logistics an imperative; GAO restricted reports GAO-25-107216C / GAO-25-106999C (2025) flag contested-logistics gaps. Not a 5: units operate today via spreadsheets, voice and PowerPoint; the pain is lag, labor and brittleness under DDIL, not present-day mission failure (INFERENCE that it would become mission-critical in LSCO)."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 5,
+   "rationale": "Score 5 explained: LOGSTATs are produced daily (often per shift) by every battalion S4 and consolidated by every BSB SPO in every exercise, rotation and deployment across the Army and USMC (FACT via ASPB 2026 workflow description and CLC2S/USMC DDIL documentation); the re-keying and reconciliation recurs at every reconnect. This is the most continuous staff pain in the study, which is why the score is at the ceiling."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "HYPOTHESIS/LOW per E05-F30 and the card: no discrete tactical sustainment-C2 software line; money is embedded in NGC2 C2 Applications (~$488.4M FY26 request) and C2 Data (~$306.1M) lines (PE unverified), RCCTO HMIF prototype funds, Army SBIR/xTech ($250K/$2M class) and DIU JSDT OTs. Real dollars have moved (Rune $2M, Gallatin PORTAL, three DIU OTs), but the Rune $99M and Onebrief $20M IDIQs are ceilings, obligations unknown; score 2 rather than 1 because repeated small awards prove some willingness to pay."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "Entry doors exist and are open (xTech Search 10, Army SBIR Contested Logistics topics, DIU CSO follow-ons, Tradewinds), but the operative vehicles for this problem have already been awarded (Rune IDIQ, Onebrief IDIQ, NGC2 OTs, DIU JSDT x3) and the data-layer interfaces are controlled by CPE C2IN/ES2 and the NGC2 integrators; a new entrant reaches money only as a subcontractor/partner (FACT per card integration_requirement, MEDIUM)."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "Offline-first CRDT/delta sync, on-device speech/vision extraction into a doctrinal schema, days-of-supply computation with public OPLOG-style planning factors and CoT export are all buildable with current commercial tooling (INFERENCE, HIGH). Not 5 because correct bidirectional reconciliation with an SAP ERP (GCSS-Army) and validation of forecasts without real consumption histories remain genuinely hard."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 3,
+   "rationale": "Card estimates PoC at $50k-$200k on synthetic data plus TAK/CoT with no ATO - inside founder capital. But the credible military demo ($500k-$2M: CMMC L2 handling, IL4/IL5 sandbox, one real integration, 4-8 staff) exceeds it, and the three fatal-if-absent hires (logistics officer, CRDT engineer, ATO/integration engineer) are not fundable alongside runway at $250k (INFERENCE, MEDIUM)."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "A synthetic-data CPX-style demo with a Guard/Reserve or ROTC partner is plausible in 3-6 months; a demo the Army would treat as credible (real LOGSTAT/GCSS-Army exports under a data-use agreement, an Ivy Sting/PC-C7-type event slot) needs a sponsor and 12-18 months, behind vendors already on the exercise calendar (INFERENCE, MEDIUM)."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 2,
+   "rationale": "Doctrine, planning factors and LOGSTAT formats are public (FM 4-0, ATP 4-90, CALL newsletters). Everything that makes the product credible - GCSS-Army/LIW extracts, unit readiness, stock levels, consumption histories, unit locations - is CUI obtainable only via a sponsoring unit/CFT/program office under NIST SP 800-171/CMMC L2 handling; OPLAN-linked theater data is classified (FACT per card data_requirement, HIGH)."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "Medium burden: generic sustainment software is usually not ITAR-controlled, but weapon-system maintenance data can be, nearly all real inputs are CUI (DFARS 7012 / NIST 800-171; CMMC Phase 1 live 2025-11-10 per E07), deployment needs an IL4/IL5 ATO, and the SBIR ownership test (13 CFR 121.702) and FOCI (32 CFR 117.11) bite at funding and clearance stages. Constraints, not a definitive legal judgment - needs export-control and immigration counsel."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "The PoC can be fully unclassified: synthetic unit data in public doctrinal formats, commodity tablets, TAK/CoT. Classification dependence is 'eventually' (theater/joint OPLAN-linked use). Not 5 because the first credible validation step already requires CUI (real LOGSTAT/GCSS-Army data)."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 explained: at least eight funded or 'awardable' vendors entered in 14 months - Rune (five-year $99M Army IDIQ 2026-06-18, on both NGC2 teams), Gallatin AI (PORTAL SBIR + DIU JSDT USAREUR-AF 2026-07-15), ASI and Watchtower (DIU JSDT, Feb 2026), C3 AI (RCCTO selection), NT Concepts PLANK/FastSync (Tradewinds awardable on the DDIL sync wedge), Onebrief (enterprise IDIQ 2026-09-17, NGC2 participant claiming sustainment feasibility in COA development), Palantir Vantage ($10B-ceiling EA), DEFCON AI - all FACT/HIGH-MEDIUM. Not 0 only because none is verified as fielded at battalion/brigade under DDIL and the lowest-echelon capture residual is not yet demonstrably won; Rune's offline claims are vendor marketing, not proof."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "Incumbents are young and at prototype stage (none fielded at BN/BDE under DDIL; EBS-C retreat May 2026 leaves the ERP side unsettled), which is the only vulnerability. Against that, they are well capitalized (Rune $24M Series A), hold the vehicles, sit inside the NGC2 data layer and can absorb any capture or feasibility feature; Anduril/Palantir/Onebrief can add it natively (card incumbent_response, INFERENCE MEDIUM)."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "TAK/CoT integration is easy and open. Everything of value is gated: NGC2 data-layer APIs are 'still being created' and controlled by Anduril/Lockheed (Operation Jailbreak 2026), GCSS-Army/AESIP BAPI/IDoc access needs CPE ES2 approval, Onebrief's plan API is a partner program, and hosting needs IL4/IL5 + ATO (FACT per card, MEDIUM)."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 2,
+   "rationale": "The defensible assets (accredited integrations, doctrinal workflow adoption, consumption datasets, sponsor relationships, deployment footprint) are exactly what Rune, Gallatin and the NGC2 integrators are accumulating first; algorithms and CRDT sync are replicable. A component vendor's moat is contractual at best (INFERENCE, MEDIUM)."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "Offline-first field inventory/consumption capture with feasibility forecasting maps to disaster response (FEMA/NGO), wildfire incident logistics, mining/oil-and-gas and humanitarian supply chains - all intermittently connected and spreadsheet-driven. No commercial customer evidenced this session; HYPOTHESIS, LOW-MEDIUM."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 3,
+   "rationale": "If the capture/sync layer worked, it could extend to maintenance and medical status, USMC CLC2S/LI2S-MC, allied (Bundeswehr/NATO, Indo-Pacific partner) sustainment where no Rune equivalent was found, and other classes of supply - but each lane is gated by a separate sponsor and standards (FMN/MIP schemas); allied solicitations not verified (Public evidence insufficient)."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "The Army has shown willingness to buy sustainment/planning software on multi-year enterprise vehicles (Rune and Onebrief IDIQs - ceilings, not revenue), implying recurring subscriptions/task orders if adopted. For a component vendor, recurrence flows through a prime's task orders, and obligated dollars for this niche are unproven (MEDIUM)."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score 1 explained: the card lists a former Army/USMC logistics officer, a CRDT/offline-sync engineer, a defense-integration/ATO engineer and export-control/FOCI counsel as fatal-if-absent - none is on a two-student team; the primary entry vehicle (Army SBIR/xTech) fails the >50% US-citizen/PR ownership test (E07-F3, FACT HIGH) until the German founder's permanent residence issues and the Indonesian founder's stake is structured; DoD SBIR restricts foreign-national technical participation (E07-F7); FOCI review reaches any facility clearance (E07-F19). The only fit signals are the strong engineer (can build the sync core) and the German founder's plausible allied/NATO angle, which keeps this above 0."
+  }
+ ],
+ "market_attractiveness": 2.8,
+ "founder_fit": 2.7,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No discrete budget line (money sits inside NGC2 C2 Applications/C2 Data RDT&E, RCCTO, SBIR/xTech and DIU OT funds) and the data-layer interfaces are controlled by CPE C2IN/ES2, Anduril, Lockheed and Palantir, so a startup can only sell as a sub-component through someone else's vehicle; 6-8 funded vendors are already ahead; SBIR ownership test blocks the cheapest entry path; credible demo ($500k-$2M) exceeds founder capital. Accepted: the card's own budget section (LOW confidence) and interface-control section corroborate every point."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "Rune TyrOS (five-year $99M Army IDIQ 2026-06-18, on both NGC2 teams, Havoc autonomous-resupply integration at Pegasus Charge III Aug 2026) advertises the same edge-first offline/delta-sync architecture the card calls the wedge; NT Concepts PLANK/FastSync targets legacy-tactical-data-to-structured-data at the edge under DDIL (Tradewinds awardable); Onebrief owns plan objects; TAK/CPCE/Palantir cover the rest. Accepted with one caveat: Rune's and NT Concepts' offline capabilities are vendor claims (runetech.co, ExecutiveBiz coverage), not verified fielded performance - but the burden of proof is on the entrant, and the claims plus funding make the wedge occupied in the buyer's eyes."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "Three fatal-if-absent hires missing; real inputs are CUI (DFARS 7012/NIST 800-171/CMMC) obtainable only via a sponsor; NGC2/GCSS-Army/Onebrief interfaces gated; SBIR ownership test (13 CFR 121.702) and foreign-national participation limits (AFWERX FAQ 2025-07-02) exclude the team's current cap table and role split; FOCI (32 CFR 117.11) and DoDI 5205.87 reach the $5M+ range; MVP success criterion #3 (match staff estimates) is unvalidatable on synthetic data. Accepted in full."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL. All three skeptics refute with strength 4, 5 and 5, and the evidence card's own killer_risk reaches the same conclusion ('a classic J ... with a B/I residual'); no evidence found this session contradicts them. Decisive reason: the Army has already chosen its commercial bets for this exact problem inside the last 14 months - Rune Technologies ($2M award 2026-03-12; five-year $99M Army IDIQ 2026-06-18, a ceiling not revenue; embedded as the sustainment application on both NGC2 integrator teams), Gallatin AI (Army PORTAL SBIR for brigade-and-below predictive logistics in contested environments plus DIU JSDT USAREUR-AF, 2026-07-15), ASI and Watchtower (DIU JSDT, Feb 2026), C3 AI (RCCTO), NT Concepts PLANK (Tradewinds awardable on the DDIL sync wedge) and Onebrief (enterprise IDIQ 2026-09-17, NGC2 participant claiming sustainment constraints inside COA development) - all FACT, HIGH/MEDIUM confidence. The PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING -> BUDGET -> VEHICLE chain does exist (S4/SPO -> Army G-4/CASCOM + CL CFT -> CPE C2IN / RCCTO -> ACC-APG / AAL / DIU -> NGC2 C2 Applications and C2 Data lines, SBIR/xTech, DIU OT -> NGC2 OTs, Rune IDIQ, Onebrief IDIQ), but the last three links are owned by program offices and vendors that already control the interfaces, so a new entrant can only pass through it as a subcontractor or SBIR performer with a sponsor; and this specific team cannot use the SBIR link at all until its cap table passes the >50% US-citizen/permanent-resident test (13 CFR 121.702, FACT HIGH). Budget evidence is LOW (no discrete line; ceilings not obligations). Market attractiveness 2.8 and founder fit 2.7 are both dragged down by competitive intensity (1) and founder fit (1) - the two criteria that matter most for a new entrant. Persistence of the pain since 2018 is real and the frequency is maximal, but the incumbents have 12-24 months of head start, the vehicles, the CUI and the exercise slots; absence of a fielded capability is a timing gap that the funded vendors, not a $250k team, are positioned to close. Scores are analytical heuristics, not facts.",
+ "narrower_version_if_borderline": "Not applicable - verdict is kill. For the record, the only residual all three skeptics and the card identify is a component/plugin play, not a company: an unclassified, TAK/CoT-native, offline-first LOGSTAT capture-and-sync module (voice/photo/spreadsheet to a doctrinal schema with CRDT delta sync), explicitly positioned to be OEM'd by Rune/Onebrief/NGC2 integrators or sold to USMC and allied (Bundeswehr/NATO, Indo-Pacific partner) sustainment sections that have no Rune equivalent, with the plan-coupled feasibility half dropped or exposed only as an open API. It is not recommended as this team's primary bet: whether any integrator would buy rather than build such a component is unproven (Public evidence insufficient), no allied solicitation was verified, and it remains a small-ceiling services/component business.",
+ "most_important_question_answer": "If two exceptionally capable founders insisted on this gap with $250,000, the only rational first build is the smallest thing the funded incumbents have not visibly shipped: an offline-first LOGSTAT capture-and-sync plugin for TAK/ATAK - on-device speech/photo/spreadsheet extraction into a doctrinal Class I/III/V/maintenance schema, CRDT delta sync across peers over intermittent links, days-of-supply auto-computed, CoT export to a sustainment overlay - built on synthetic data conforming to public FM 4-0/ATP 4-90/CALL formats for roughly $80k-$150k over 4-6 months with one contracted former S4/SPO as doctrinal advisor. They would show it to a National Guard or Reserve BSB SPO and a division G4 in an NGC2 division (4th ID/25th ID/I Corps) as user-validators, to the Contested Logistics CFT Precision Sustainment portfolio lead as requirement owner, and - most realistically - to Rune's and Onebrief's product teams as a prospective OEM component, because the card and all three skeptics agree a standalone program of record is not available. The demonstration would prove (1) company-level LOGSTAT capture in under two minutes versus the current spreadsheet/voice cycle, (2) survival of a six-hour blackout with zero duplicates or stale-data regressions on reconnect, and (3) a live sustainment overlay in TAK. The customer would care because the summer-2026 ASPB still describes the S4 hand-building the sustainment COP and the Aug-2025 LG-DA document names the swivel-chair burden - the pain is real, daily and eight years old. But here is why it fails: an incumbent can trivially crush it. Rune advertises an edge-first architecture that runs disconnected and syncs deltas over radio/satellite (vendor claim, runetech.co, 2026 - unverified, but it is what the buyer hears), sits inside both NGC2 teams with a five-year $99M IDIQ, and demonstrated third-party integration at Pegasus Charge III in Aug 2026; NT Concepts' FastSync targets the same legacy-input-to-structured-data problem and is Tradewinds awardable; Anduril can put a capture widget on Lattice; Onebrief already owns the plan objects for the feasibility half. The founders would have no CUI access to validate forecasts against real consumption data, no NGC2 or GCSS-Army interface without a sponsor, and no SBIR eligibility until the cap table passes 13 CFR 121.702 - so the milestone that would justify the next $2-5M (a signed OEM/partner agreement with Rune or Onebrief, or a DIU OT / xTech-to-Phase-II award with a named division G4 sponsor granting a data-use agreement and an Ivy Sting/PC-C7 slot) depends on incumbents choosing to buy what they can build and on a sponsor picking a team that cannot yet hold CUI. That is a subcontractor's milestone, not a venture's, and it is why this gap should be rejected for these founders and their capital pointed at a gap where the interfaces and vehicles are not already owned.",
+ "bear_case_summary": "Crowded, already-funded race: at least eight vendors (Rune with a $99M Army IDIQ and NGC2 embedding, Gallatin, ASI, Watchtower, C3 AI, NT Concepts, Onebrief, Palantir) were selected in 2025-2026 for the exact edge and theater sustainment problem; no discrete budget line (LOW confidence) and data-layer interfaces are owned by program offices and NGC2 integrators, so a new entrant is a subcontractor at best; real data is CUI behind sponsors; three fatal-if-absent specialists are missing; the SBIR ownership test and foreign-national participation rules exclude this team's cap table and role split; credible demo ($500k-$2M) exceeds founder capital.",
+ "bull_case_summary": "The pain is real, daily and eight years old (army.mil 2018; ASPB summer 2026; LG-DA Aug 2025), FM 4-0 makes predictive logistics doctrinal, GAO restricted reports (2025) raise oversight pressure, the Army is now paying commercial vendors (Rune, Gallatin, DIU JSDT x3, Onebrief IDIQ), none of them is verified as fielded at battalion/brigade under DDIL, the EBS-C retreat (May 2026) left the ERP side open, and USMC and allied (NATO/Indo-Pacific) sustainment sections have no Rune equivalent - a technically strong, offline-first capture-and-sync component could ride an integrator's vehicle or an allied channel. Rune's and NT Concepts' offline claims are vendor marketing, not proven performance. This bull case describes a component/timing opportunity for a better-positioned team, not a venture for this one.",
+ "confidence": "HIGH"
+}

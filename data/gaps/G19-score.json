@@ -1,0 +1,145 @@
+{
+ "id": "G19",
+ "title": "Government-reference-architecture conformance, synthetic-scenario and T&E harness for autonomy and PNT plug-ins (A-GRA, FANTOM Core, UMAA, IOP; pntOS/ASPN and NAVWAR-compliance evidence)",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Real but non-existential: vendors re-test bespoke per program and issues surface late (GAO-21-320SP, 2021-05-10, FACT/HIGH: alt-PNT M&S fidelity 'poorer', engagement-level trade tools 'do not yet exist'); NAVWAR evidence is assembled manually (DoDI 4650.08, 2020-12-30, FACT/HIGH). But every affected vendor already has a working, if costly, workaround (in-house rigs, government assessment events), so this is a cost-and-schedule pain, not a mission-failure pain. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "Recurs per software drop and per assessment cycle, but the cadence is set by capacity-limited government events (annual PNTAX/APEX per army.mil ~2024-11; SOFWERX UxSAI series Aug-Dec 2026 per DefenseScoop 2026-08-18; CCA flight-test windows from Feb 2026), so the pain is periodic rather than daily. FACT for cadence, INFERENCE for frequency; MEDIUM."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score of 1 because no budget owner for a third-party conformance harness can be identified: the card's own budget section says 'No standalone line'; the only dedicated open-architecture-PNT figure is $17M DoD-wide across FY2020-2024 (GAO-21-320SP, 2021-05-10, FACT/HIGH); Army APNT/MAPS/DAPS lines are 'not verified this session' (evidence E05-F32, HYPOTHESIS/LOW); CCA's ~$2.5B FY27 request (Air & Space Forces Magazine, 2026, FACT/MEDIUM) is a program total whose autonomy T&E is embedded, not purchasable by a harness vendor; SBIR NP004 ceilings ($200k Phase I) are award ceilings, not revenue. Not 0 because SBIR/CSO dollars for adjacent PNT-data work verifiably exist (navysbir.com NP004, 2026-08-08, FACT/HIGH)."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "Vendor-paid B2B pilots need no government vehicle, which keeps this above 1. But the government-side path is narrow: SBIR is closed to this cap table until the German founder holds a green card and US persons exceed 50% (13 CFR 121.702, FACT/HIGH); OT/CSO carries no ownership test (E07-F22) but CDAO has already selected Applied Intuition to underpin the DoD-wide 'Autonomy Factory' shared environment for developing, validating and certifying autonomous systems (PRNewswire/Applied Intuition, announced 2026-05-14; CDAO production contract up to $171.1M/3 yrs reported 2025-01-14 - ceiling, not obligations; FACT on existence, MEDIUM on dates; production status UNVERIFIED per companies/index.json). Program-office T&E money is embedded in platform lines. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 3,
+   "rationale": "Schema/contract checkers against public ASPN-ICD YAML, pntOS-C API, UMAA IDL and MAVLink are straightforward engineering (public repos: github.com/Open-PNT/pntOS-C 2026-04-23; AUVSI UMAA ICDs 2025; FACT/MEDIUM). The hard part is credible behavioral scoring: synthetic alt-PNT measurement streams with realistic error models, which GAO says even the government models poorly (GAO-21-320SP, FACT/HIGH); reviewers will detect toy models (card expertise_required). Feasible for the open subset, unproven for the part that carries value. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 2,
+   "rationale": "An open-subset proof of concept fits ($100k-$200k per card capital_required, INFERENCE/LOW), but the card's credible military demo is $1M-$2.5M and requires two fatal-if-absent senior hires (navigation/estimation engineer with pntOS/ASPN experience; T&E engineer with program-office experience) plus export/SBIR counsel. $250k buys a demo nobody with budget is obliged to look at. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "A public pntOS-C plug-in and PX4/MOOS-IvP stack run through scripted spoofing/jamming/link-loss scenarios is demonstrable in 4-6 months (card mvp; TEXBAT and MagNav datasets RECALL - not re-verified this session). But 'credible' to a reviewer means acceptance at an assessment event, and those are annual (APEX) or downselect-gated (UxSAI Aug-Dec 2026; CCA autonomy downselect expected 2027 per DefenseScoop 2026-02-12), pushing a credible demo to 12-18 months. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "Open subset is genuinely available: ASPN-ICD and pntOS-C are Distribution A on GitHub, UMAA ICDs public via AUVSI, DHS Resilient PNT Conformance Framework v2.0 (2022-05-31) and NIST IR 8323r1 public (FACT/MEDIUM-HIGH). The inaccessible set is exactly what carries value: A-GRA and FANTOM Core interface documents (program access only), the government ASPN message set (citizenship/contractor verification), JNWC threat conditions (CUI/classified). FACT per card data_requirement; MEDIUM."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "The open-standards core can plausibly be built as commercial/EAR99-style software with no clearance (card regulatory_burden 'medium'; needs counsel, not a legal judgment). The moment the product touches military autonomy interfaces or NAVWAR test data it becomes CUI/ITAR-adjacent (INFERENCE: USML Cat VIII(h)/XI(d) possible), the Indonesian founder must be walled off via a technology control plan or licence (E07-F17/F18, FACT/HIGH), and government hosting needs DFARS 7012/NIST 800-171/CMMC (E07-F9/F11, FACT/HIGH). Medium burden, counsel required."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "The MVP uses only public specifications, open datasets and commercial compute (card mvp.uses); card classification_dependence is 'eventually', i.e., clearances are needed only for the A-GRA/FANTOM Core/JNWC extension. FACT/MEDIUM. Not 5 because the extension that reaches the funded programs cannot start unclassified."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score of 1 because the slot is crowded from every side and several competitors price at zero: government in-house (Army planned automatic pntOS compliance toolkit, GAO-21-320SP 2021, FACT/HIGH; SOCOM UxSAI assessment events and Synthetic Data Modeler, DefenseScoop 2026-06-09 and 2026-08-18, FACT/HIGH; AFRL/AFTC CCA T&E), MITRE's free UMAA compliance reference implementation (mitre.org, 2024-2025, FACT/MEDIUM), the ISTO PNT Standards Consortium founded by the pntOS/ASPN authors Leidos, IS4S and TRX (pntstandards.org, 2026, FACT/MEDIUM), RTI's UMAA tooling, Spirent/Safran Skydel for PNT HIL (RECALL), Weathergage Tech (Tier 4), and Applied Intuition now selected by CDAO for the DoD-wide 'Autonomy Factory' shared validate-and-certify environment (PRNewswire 2026-05-14, FACT/MEDIUM). Not 0 because no one publicly ships a cross-architecture PNT+autonomy conformance product today ('Public evidence insufficient' on any official pntOS conformance suite)."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 1,
+   "rationale": "Score of 1 because there is no evidence incumbents are failing their customers in a way a startup can exploit: the buyer has just chosen a $15B-valuation vendor for the enterprise autonomy pipeline (Applied Intuition Series F $600M, June 2025, per companies/index.json; CDAO Autonomy Factory 2026-05-14), FFRDC and consortium substitutes can reset price to zero at will, and CCA autonomy competitors (Shield AI, Collins, Anduril) already run their own A-GRA rigs (DefenseScoop 2026-02-12, FACT/HIGH). The only vulnerability is neutrality (a competitor cannot credibly grade rivals), and CDAO's single-vendor platform choice shows the buyer does not insist on it. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 3,
+   "rationale": "Open interfaces are well documented and CI/container integration is standard (pntOS-C C API, UMAA over DDS, MAVLink/PX4; card integration_requirement, FACT/MEDIUM). But the startup controls none of the interfaces, and the two that matter most (A-GRA, FANTOM Core M2M APIs) are reachable only inside a program; government-side hosting needs Iron Bank/IL4-5 (INFERENCE). Feasible where it matters least."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score of 1 because the card's own defensibility section concludes 'None of this is a strong moat': standards are open, the government or consortium can publish free suites, simulation incumbents can replicate degradation models, and network effects are weak because the vendor population is 'a few dozen'. The only candidate moats (validated scenario library, accredited hosted evidence service, neutral-arbiter reputation) are years away and require program access the team lacks. INFERENCE, MEDIUM-HIGH."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "The PNT half has a real civil twin: DHS Resilient PNT Conformance Framework (2022-05-31, FACT/HIGH), NIST IR 8323r1 and EO 13905 push critical-infrastructure timing/PNT operators toward resilience-level conformance (card dual_use_potential 'medium'). The autonomy half (UMAA/MAVLink contract testing) maps to nascent commercial USV/UAV fleets, and military reference-architecture conformance has no civil buyer. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Expansion paths exist on paper (program-office licence, allied navies converging on UMAA/STANAG 4586-style interfaces per AUKUS Maritime Big Play 2025 in evidence/index, civil PNT), but each architecture has its own schema, degradation model and reviewer expectations, so expansion is bespoke per architecture rather than a reusable SKU, and the restricted architectures are gated by program access and cleared US-person staff. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "In principle a per-software-drop, per-assessment-cycle subscription; in practice the card's killer_risk frames the paid market as 'a few dozen vendors buying a stopgap until free government or consortium tooling arrives', which caps renewal. Program-office licences would be recurring but there is no evidence of one. INFERENCE, MEDIUM."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 1,
+   "rationale": "Score of 1 because two of the card's three fatal-if-absent roles are not covered by two university students: a navigation/estimation engineer who has built a pntOS/ASPN plug-in or PNT fusion filter, and an autonomy T&E engineer with program-office experience who knows how NAVWAR/UMAA/A-GRA evidence is judged and can open doors at five program offices; the third (export/SBIR counsel) is a cash cost. The strong engineering founder credibly covers only the simulation/DevOps role. The team also has no program relationships, SBIR is closed until the German founder's green card and a >50% US-person cap table (13 CFR 121.702, FACT/HIGH), and the Indonesian founder must be walled off from the restricted interfaces that carry the value (E07-F17/F18/F30, FACT/HIGH). Not 0 because the open-core software itself is buildable by the engineer."
+  }
+ ],
+ "market_attractiveness": 2.1,
+ "founder_fit": 2.7,
+ "red_team": {
+  "market": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "No budget owner and no standalone line: the only dedicated open-architecture PNT money was $17M DoD-wide FY2020-2024 (GAO-21-320SP), T&E is embedded in CCA/PMS 406/PM PNT program lines, the buyers are building their own toolkits (Army pntOS toolkit, MITRE UMAA reference, SOCOM UxSAI synthetic-data modeler), the addressable subset is the open UMAA/ASPN/pntOS-C slice already served free, the customer base is a few dozen vendors at $25k-$100k pilots, and Applied Intuition or the ISTO consortium can commoditize the wedge at any time."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "The government already bought a well-funded incumbent for the enterprise slot: Applied Intuition holds a CDAO production contract (up to $171.1M/3 yrs) and was selected in 2026 to underpin the DoD-wide 'Autonomy Factory' shared environment to develop, validate and certify autonomous systems; MITRE gives away UMAA compliance; A-GRA/FANTOM Core are unreachable to outsiders; CCA competitors already run their own rigs; demand is thin, fragmented and non-budgeted."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 5,
+   "summary": "The MVP is structurally confined to the low-value open subset already served by MITRE, RTI and the ISTO consortium; the funded architectures require program access and cleared US-person staff that are 5+ years away for this team; two fatal-if-absent senior roles are uncovered; the credible-demo cost ($1M-$2.5M) exceeds founder capital and a priced round risks the SBIR ownership test; alt-PNT M&S fidelity is an unsolved government problem; and the first real government contract is a five-year-plus runway."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill. All three skeptics refute at strength 5 and this session's verification strengthened rather than weakened them: the competition skeptic's load-bearing claim - that CDAO has already selected Applied Intuition to underpin a DoD-wide 'Autonomy Factory' shared environment to 'develop, validate and certify autonomous systems' (PRNewswire/Applied Intuition press release, announced 2026-05-14; CDAO production contract up to $171.1M over three years reported 2025-01-14; InsideDefense corroborates) - is corroborated by three outlets (FACT on existence and scope language, MEDIUM on dates; ceiling is not obligations and production status is marked UNVERIFIED in the company index). Public evidence is insufficient on whether that platform covers PNT/pntOS/ASPN conformance or NAVWAR evidence, so an adjacent PNT sliver may remain, but that sliver is exactly the one the pntOS/ASPN authors themselves (Leidos, IS4S, TRX via the 2026 ISTO PNT Standards Consortium) are best placed to fill for free. The PROBLEM -> USER -> REQUIREMENT OWNER -> PROGRAM OFFICE -> CONTRACTING OFFICE -> BUDGET -> CONTRACT VEHICLE chain is intact through PROGRAM OFFICE (JNWC/DoD CIO policy, PM PNT, PMS 406, AFLCMC CCA, PEO-SDA are all identifiable) but breaks at BUDGET (no line; $17M FY20-24 MOSA-PNT initiative; Army PNT lines unverified; CCA/SOCOM T&E embedded) and at CONTRACT VEHICLE for this team (SBIR blocked by 13 CFR 121.702 until the German founder's green card and a >50% US-person cap table; the CSO/OT route is open in principle but the enterprise platform award has already gone to a $15B-valuation incumbent). That double break carries the major penalty the assignment requires. Layered on top: the two architectures with growing money (A-GRA, FANTOM Core) are government-controlled and reachable only inside a program with cleared US-person staff; the open subset the team can reach (UMAA, public ASPN/pntOS-C) already has a free MITRE reference implementation, RTI tooling and the consortium; and two fatal-if-absent senior roles are uncovered. Market attractiveness 2.1 and founder fit 2.7 are both below any survive threshold. The bull case (real 2025-2026 policy-to-practice shift, NAVWAR accepting synthetic ASPN data, weak MOSA enforcement creating demand for evidence) does not overcome the fact that the buyer is the builder and has already chosen its platform vendor. Confidence in the kill: HIGH for the venture-scale question; MEDIUM on whether a small services niche exists."
+ ,
+ "narrower_version_if_borderline": "Not applicable (verdict is kill). For completeness, the only sliver all three skeptics and this analyst agree could exist is a non-venture open-core devtools/consulting business: an ASPN-2023 synthetic-measurement generator plus pntOS-C plug-in conformance checker scored against the public DHS Resilient PNT Conformance Framework levels, sold (a) to civil critical-infrastructure timing/PNT operators under EO 13905/NIST IR 8323r1 where no ITAR/FOCI/SBIR barrier applies, and (b) as $25k-$100k pilots to second-tier alt-PNT vendors ahead of APEX and NAVWAR SBIR cycles. This is a low-single-digit-million ARR or acqui-hire outcome, not a company to capitalize with $2-5M, and it is better treated as a feature or credibility project inside a different gap than as G19."
+ ,
+ "most_important_question_answer": "If two exceptionally capable founders insisted on this gap with $250,000, the only defensible first build is a narrow, open-core 'PNT interface digital twin': a generator of synthetic ASPN-2023 measurement streams (GNSS, IMU, clock, magnetometer, RF-ranging) under scripted jamming, spoofing and dropout profiles grounded in public datasets (TEXBAT, MagNav - RECALL, not re-verified), a CI runner that executes a vendor's pntOS-C plug-in against those streams, and a report that scores schema conformance plus DHS Resilient PNT Conformance Framework resilience level and drafts a DoDI 4650.08 NAVWAR-compliance evidence table. They would show it first to the engineers at IS4S and TRX who wrote pntOS/ASPN (via the ISTO PNT Standards Consortium), then to three or four DIU TQS-cohort or NAVWAR-SBIR alt-PNT vendors preparing for APEX or an NP004-style Phase I, and finally to the C5ISR Center pntOS lead. The demonstration would have to prove that harness findings reproduce real integration failures on at least two vendors' plug-ins under NDA and that a NAVWAR or PM PNT reviewer accepts the synthetic streams and evidence table as milestone-grade input (the NP004 Q&A of 2026-08-08 says synthetic ASPN/pntOS data is acceptable for Phase I, which is the one concrete opening). The customer would care because assessment slots are annual and capacity-limited, integration failures surface late, and the evidence package is today assembled by hand. The honest answer to 'why can't an incumbent crush them' is that they mostly can: the standard's authors can publish an official suite, MITRE already gives away the maritime equivalent, and CDAO has selected Applied Intuition for the enterprise validate-and-certify environment; the only protection is neutrality plus being first on the open subset, which is a head start of months, not a moat. The milestone that would justify $2-5M is three or more paid vendor pilots plus a program office (PM PNT, PMS 406 or NAVWAR) licensing the harness under an OT or Phase II, or the ISTO consortium adopting it as the reference conformance suite. Because the consortium's founders are better placed to build that suite themselves and because the funded architectures (A-GRA, FANTOM Core) remain closed to this team for years, that milestone is unlikely to be reached, which is why the gap fails for these founders."
+ ,
+ "bear_case_summary": "The buyer is the builder and has already picked its platform vendor. No budget line exists for a third-party conformance harness (only $17M DoD-wide FY20-24 for open-architecture PNT per GAO-21-320SP; program T&E embedded in CCA/PMS 406/PM PNT lines); the Army planned its own pntOS compliance toolkit in 2021, MITRE gives away UMAA compliance, SOCOM is procuring its own UxSAI assessment events and synthetic-data modeler (DefenseScoop 2026-06-09, 2026-08-18), and CDAO selected Applied Intuition in 2026 to underpin a DoD-wide 'Autonomy Factory' to develop, validate and certify autonomous systems (up to $171.1M/3 yrs ceiling). The architectures with money (A-GRA, FANTOM Core) are program-access-only and ITAR-adjacent; the open subset is served free; the customer base is a few dozen vendors buying a stopgap; the ISTO consortium (Leidos, IS4S, TRX) can publish an official suite; and the team lacks both fatal-if-absent senior roles, SBIR eligibility, and program access."
+ ,
+ "bull_case_summary": "Between 2025 and 2026 government-owned architectures moved from policy to practice: first official A-GRA validation with five autonomy competitors on two CCA airframes (DefenseScoop 2026-02-12), SOCOM mandating FANTOM Core in solicitations (sam.gov 2026-06-26) and standing up UxSAI T&E phases, UMAA 6.0's compliance specification, public ASPN-ICD/pntOS-C and the 2026 ISTO consortium, and NAVWAR accepting synthetic ASPN/pntOS data as SBIR evidence (NP004 Q&A 2026-08-08). GAO keeps finding MOSA implementation lagging (GAO-25-106931, 2025-01-22), and DoDI 4650.08 obliges NAVWAR-compliance reporting at every milestone, so demand for evidence tooling is structural. Public evidence is insufficient on whether Applied Intuition's Autonomy Factory covers PNT conformance, leaving a possible PNT-side sliver, and a vendor-neutral open-core arbiter is something no CCA competitor can credibly be. The civil DHS Resilient PNT Conformance Framework twin offers a barrier-free dual-use market for the Indonesian founder to work in."
+ ,
+ "confidence": "HIGH"
+}

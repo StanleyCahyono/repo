@@ -1,0 +1,140 @@
+{
+  "id": "G07",
+  "title": "Self-service adapter, schema-mapping and conformance kit for onboarding legacy systems, vehicles and third-party sensors/payloads onto the government-baselined data layer (NGC2 common data baseline, TAK, Maven/Open DAGIR, Blue UAS marketplace)",
+  "scores": [
+    {
+      "n": 1,
+      "criterion": "severity_of_user_pain",
+      "score": 4,
+      "rationale": "Real and expensive: onboarding a sensor/vehicle onto NGC2/TAK/Maven still takes weeks-to-months of bespoke adapter work and the Army had to convene ~600 people from 50+ firms at Fort Carson to expose APIs (FACT, DefenseScoop 2026-05-29, HIGH). Not a 5 because the pain is borne by vendor engineers, not warfighters, and is already being absorbed by a working (if manual) sprint process."
+    },
+    {
+      "n": 2,
+      "criterion": "frequency_of_pain",
+      "score": 3,
+      "rationale": "Recurs for every new sensor, vehicle or legacy program and for every new division/team lead (card current_workflow step 5), and Jailbreak is now a series (Falcon Fury with JIATF-401; FACT, LOW-MEDIUM), but demand is episodic and event-clustered rather than continuous."
+    },
+    {
+      "n": 3,
+      "criterion": "budget_evidence",
+      "score": 1,
+      "rationale": "Score of 1: no budget line exists for adapter/conformance tooling. NGC2 'C2 Data' (~$306.1M) and 'C2 Applications' (~$488.4M) FY26 sub-lines are platform money flowing to team leads (FACT, Breaking Defense 2026-04, MEDIUM); the FY26 NDAA capped NGC2 obligation at 50% and the HASC FY27 mark proposed a $710M cut (FACT, MEDIUM). CDAO's $33M Open DAGIR OTA went to the platform owner (Palantir) for onboarding, not to a third party (FACT, ai.mil ~2024-12, HIGH). Any startup revenue would be a sliver through a team lead or an SBIR (INFERENCE, HIGH)."
+    },
+    {
+      "n": 4,
+      "criterion": "procurement_accessibility",
+      "score": 2,
+      "rationale": "Entry vehicles exist (xTech, Army SBIR, TAK.gov third-party signing) but no solicitation for third-party conformance tooling was found this session (one targeted search, 2026-09-25) and the card records zero NGC2-specific SAM.gov notices in the 90 days before April 2026 (FACT, E03). Access to sprints and schemas runs through relationships and team-lead subcontracts; SBIR's >50% U.S.-citizen/PR ownership test (13 CFR 121.702) is a live constraint for this founder pair (constraint, needs counsel)."
+    },
+    {
+      "n": 5,
+      "criterion": "technical_feasibility",
+      "score": 4,
+      "rationale": "Contract testing, OpenAPI/protobuf tooling, property-based fuzzing and code generation are mature; CoT, MAVLink, ATAK-CIV and the Lattice SDK protobufs on buf.build are public (FACT, HIGH). The hard parts (semantic mapping fidelity for VMF/Link 16/STANAG, gated Foundry objects) are access and tacit-knowledge problems, not fundamental technical ones."
+    },
+    {
+      "n": 6,
+      "criterion": "feasibility_with_250k",
+      "score": 3,
+      "rationale": "The card's PoC estimate ($60k-150k, open specs only; INFERENCE) fits, but the 'credible military demo' ($0.7M-1.5M: U.S.-person TAK/VMF engineer, CUI environment, CMMC L2 readiness, sprint participation) is 3-6x the founders' capital and is where the value actually sits."
+    },
+    {
+      "n": 7,
+      "criterion": "time_to_credible_demo",
+      "score": 3,
+      "rationale": "A TAK/CoT plus public-Lattice-schema harness is demonstrable in 4-6 months (card mvp, INFERENCE, MEDIUM), but a demo that a program-side engineer would accept requires a sprint invitation or team-lead relationship, and the Army Software Factory already performs the validation step at Jailbreak (FACT, National Defense Magazine 2026-07-29, MEDIUM), so the credible demo depends on access the founders do not have on day one."
+    },
+    {
+      "n": 8,
+      "criterion": "availability_of_required_data",
+      "score": 2,
+      "rationale": "Open layer (CoT, MAVLink, Lattice SDK schemas, ATAK-CIV) is available to both founders; the value layer (legacy ICDs, VMF, Link 16, STANAG 4676, NGC2/exercise captures, Foundry/Maven objects) is CUI and/or export-controlled or enclave-gated, obtainable only via sponsor or team lead, and GAO-25-106931 (2025-01-22, HIGH) documents that incumbents actively resist sharing interface specifications. Public evidence insufficient on whether API Marketplace entries are visible to unregistered vendors."
+    },
+    {
+      "n": 9,
+      "criterion": "regulatory_accessibility",
+      "score": 3,
+      "rationale": "Medium burden per the card: the open core is on its face commercial/unclassified; the value layer requires CUI handling, likely CMMC Level 2, and puts the company on a path toward FCL/FOCI review; controlled technical data cannot lawfully reach the non-U.S.-person founder without authorization. These are constraints for export-control and SBIR counsel, not legal conclusions."
+    },
+    {
+      "n": 10,
+      "criterion": "ability_to_start_unclassified",
+      "score": 4,
+      "rationale": "Yes: the entire first product (harness, mapper, report generator against CoT/TAK Server and public Lattice schemas, signed via the TAK.gov third-party pipeline) can be built and released with no CUI or classified inputs (FACT on the inputs, HIGH). Not a 5 because the unclassified slice is precisely the low-value slice that Anduril and ADOC can also replicate for free."
+    },
+    {
+      "n": 11,
+      "criterion": "competitive_intensity",
+      "score": 1,
+      "rationale": "Score of 1: the lane is occupied on three sides. Government: ADOC's API Marketplace (launched 2026-05-06), Army Software Factory validation of 'jailbroken' interfaces (FACT, NDM 2026-07-29, MEDIUM), TAK.gov plugin pipelines, DCMA US-X Blue UAS vetting. Platform owners: Anduril (public SDK, Lattice Partner Program), Palantir ($33M CDAO onboarding OTA), Raft (registries/transformation inside the NGC2 baseline, 2026-06-22). Funded adjacent vendors: Tangram Flex ($95M ceiling, ~$11M 2024 revenue, MEDIUM), Picogrid ($9.3M Phase III 2026-02), HERE (Army SBIR integration layer; date/amount not verified). Absence of a pure 'kit' vendor is not evidence of opportunity."
+    },
+    {
+      "n": 12,
+      "criterion": "incumbent_vulnerability",
+      "score": 1,
+      "rationale": "Score of 1: incumbents own the schemas, the credentials and the validation step. Anduril can add a validator to developer.anduril.com in one release (INFERENCE, HIGH); ADOC says it will stay lean and rely on automation (FACT, DefenseScoop 2026-05-28, MEDIUM); the Army Software Factory already judges interface openness at Jailbreak. Nothing in the evidence shows an incumbent failing at this in a way the customer is complaining about."
+    },
+    {
+      "n": 13,
+      "criterion": "integration_feasibility",
+      "score": 2,
+      "rationale": "The startup controls none of the six target interfaces; TAK is open, Lattice is SDK-credential-gated, Foundry/Maven is enclave-gated behind Palantir's paid onboarding, Raft registries are not public, UDRA is non-prescriptive. A vendor-neutral kit is therefore N adapters against N moving, partially closed targets, several untestable without the owner's cooperation (INFERENCE, HIGH)."
+    },
+    {
+      "n": 14,
+      "criterion": "potential_moat",
+      "score": 1,
+      "rationale": "Score of 1: the card itself labels defensibility LOW. The two moat candidates (a verified mapping/test-oracle library; government acceptance of the conformance report as sprint evidence) both depend on decisions outside the startup's control: whether ADOC publishes mappings in the Marketplace and whether ADOC/Anduril build their own validator. Independent conformance authorities in DoD (JITC-style) are government functions."
+    },
+    {
+      "n": 15,
+      "criterion": "dual_use_potential",
+      "score": 3,
+      "rationale": "Medium: API contract testing, protocol gateways and public-safety TAK integration (wildfire, first responders, where Picogrid already sells) are real commercial analogues for the tool; the defensible knowledge (military message formats, sprint acceptance) has no commercial buyer (card dual_use_potential, INFERENCE, MEDIUM)."
+    },
+    {
+      "n": 16,
+      "criterion": "expansion_potential",
+      "score": 2,
+      "rationale": "Expansion paths (become the integration platform, extend to allied/NATO TAK and Maven NATO users, coalition onboarding via Falcon Fury) all run into the same platform owners and national primes; the allied variant is a low-to-medium services niche per the card, and expanding from kit to platform means competing head-on with Picogrid, Raft and Anduril."
+    },
+    {
+      "n": 17,
+      "criterion": "repeat_purchase_potential",
+      "score": 2,
+      "rationale": "A per-sprint readiness package could recur with each Jailbreak-series event and each new vendor, but the government-side conformance function is a one-time feature buy at best, and the open-source positioning the wedge requires undercuts recurring revenue; the closest analogue (Tangram Flex) shows capped, services-like repeat revenue."
+    },
+    {
+      "n": 18,
+      "criterion": "founder_team_fit",
+      "score": 2,
+      "rationale": "The strong engineer can build the open-layer harness and the business founder can run xTech/SBIR and vendor BD, but the card lists three fatal-if-absent roles the team lacks (tactical data-format engineer with sprint experience; contract-testing tooling engineer; U.S.-person ex-program-office/ADOC engineer with CUI handling). The non-U.S.-person Indonesian founder cannot receive CUI/ITAR technical data and their equity does not count toward the SBIR >50% U.S.-person ownership test (13 CFR 121.702; constraints for counsel), forcing an early unbudgeted U.S.-person hire. The German founder's expected permanent residency helps the SBIR test but does not close the CUI-access gap alone."
+    }
+  ],
+  "market_attractiveness": 2.2,
+  "founder_fit": 2.8,
+  "red_team": {
+    "market": {
+      "refuted": true,
+      "strength": 5,
+      "summary": "No budget owner or line (NGC2 sub-lines are platform money to team leads, capped 50% by the FY26 NDAA); demand is episodic and sprint-driven; four government/platform-owner mechanisms already fill the lane; the 'kit' collapses into N per-target adapters (services economics, cf. Tangram Flex $95M ceiling vs ~$11M revenue); founder mix restricts the buildable slice to the low-value open layer. Accepted: consistent with the card's own budget section and the one additional search this session, which found the Army Software Factory already performing the validation step at Jailbreak."
+    },
+    "competition": {
+      "refuted": true,
+      "strength": 5,
+      "summary": "ADOC (API Marketplace), TAK.gov (plugin pipelines), DCMA US-X (Blue UAS vetting) and CDAO-funded Palantir ($33M Maven onboarding) already own each sub-scope; Anduril can ship a Lattice validator in one release; Raft is the transformation layer inside the baseline; Tangram Flex, Picogrid and HERE occupy the paid adjacent space; target schemas are plural and gated so no neutral baseline exists to certify against. Accepted: no counter-evidence found; the two-step 'jailbroken' verification (Army Software Factory then Lattice integration) reported by National Defense Magazine 2026-07-29 confirms the government-plus-platform-owner ownership of conformance."
+    },
+    "feasibility": {
+      "refuted": true,
+      "strength": 5,
+      "summary": "ADOC plans to stay lean and automate the marketplace function (DefenseScoop 2026-05-28); Anduril's Lattice Partner Program already gives away the credibility a conformance kit would sell; the valuable data is CUI/ITAR and reachable only via relationships; SBIR is largely closed to the pair as structured (13 CFR 121.702; AFWERX FAQ AFRL-2025-3235 on foreign nationals); the $250k PoC yields a toy demo while the credible demo costs $0.7-1.5M. Accepted: the card's capital table and expertise list (three fatal-if-absent roles) support every point."
+    }
+  },
+  "verdict": "kill",
+  "verdict_rationale": "KILL. Three independent skeptics refute at strength 5 and the Gap Evidence Card itself concludes 'REJECT as a standalone company' with defensibility LOW; nothing found this session contradicts them and one new fact reinforces them: National Defense Magazine (2026-07-29, MEDIUM) reports that declaring an interface 'jailbroken' already runs through a two-step verification in which the Army Software Factory validates the documented interface against its openness criteria and it is then integrated into Anduril's Lattice, i.e. the conformance function this gap proposes to sell is already performed by the government and the platform owner, and no RFI, SBIR topic or OTA for a third-party conformance tool surfaced (one targeted search, 2026-09-25; Public evidence insufficient beyond that). The PROBLEM -> USER -> REQUIREMENT OWNER chain is intact (vendor/team-lead integration engineers; Army CIO/CTO via Right to Integrate), but it breaks at REQUIREMENT OWNER -> PROGRAM OFFICE -> BUDGET -> CONTRACT VEHICLE: the requirement owner (ADOC/CIO) has chosen to build the function in-house with automation, the program office (CPE C2IN) funds team leads rather than tooling vendors, no budget line exists for conformance tooling, the contracting office is unidentified (Public evidence insufficient), and the only open vehicle (SBIR/xTech) carries a >50% U.S.-person ownership test that the Indonesian founder's equity cannot satisfy (constraint for counsel, not a legal determination). That is the major penalty condition and it applies. Market attractiveness 2.2/5 is driven by competitive intensity 1, incumbent vulnerability 1, moat 1 and budget evidence 1; founder fit 2.8/5 reflects that the founders can build only the open, low-value slice unassisted. Confidence HIGH that this is not a venture-scale company; MEDIUM on the exact figures cited (Tangram revenue, HERE SBIR, ADOC contracting office).",
+  "narrower_version_if_borderline": "Not borderline, but the narrower form all three skeptics converge on is worth recording as a possible first product for a different, larger thesis: a 'pre-Jailbreak readiness' checkout (self-hosted contract-test harness, mock TAK Server/CoT and public-Lattice-schema endpoint, firewall/ATO pre-check checklist, machine-readable readiness report) sold at a fixed fee per sprint cycle to the 50+ small sensor/vehicle vendors who must pass each Jailbreak-series event. It stays entirely on open inputs (CoT, MAVLink, ATAK-CIV, buf.build Lattice schemas) so the non-U.S.-person founder can build it, fits the $60-150k PoC budget, and buys relationships and credibility with ADOC, team leads and vendors. It is a services-adjacent niche with a ceiling well below venture scale and is exposed to being made free by ADOC or Anduril at any time; it should be pursued only as a wedge into a stronger gap, never as the company.",
+  "most_important_question_answer": "If two exceptionally capable founders with $250k insisted on this gap, the only rational first build is the open-source conformance harness: a CLI that ingests an OpenAPI/protobuf spec or a CoT/MAVLink capture, emits contract and property-based tests, generates a human-reviewable mapping to CoT (TAK Server) and to the public Lattice entity protobufs, and prints a machine-readable readiness report, demonstrated on ATAK-CIV with a simulated radar and a MAVLink drone. They would show it to three audiences: two or three small vendors that participated in Jailbreak (MatrixSpace-class companies) facing the next Falcon Fury-style sprint date, an ADOC data broker or Army Software Factory engineer, and a team-lead integration engineer at Anduril or Lockheed. The demonstration would prove that a vendor with no TAK/Lattice experience can produce a passing, machine-verified feed in hours rather than days without a human integrator, and that the report is accepted as pre-sprint evidence. The customer (a vendor engineer with a named sprint date) would care because failing at the sprint costs a fielding window. But this is exactly where it fails: an incumbent can crush it trivially, because Anduril already publishes the schemas and SDK and can ship the same validator in one release, ADOC has said it will automate the marketplace function and the Army Software Factory already performs the validation step, and Palantir is paid by CDAO to do onboarding for Maven; the startup owns no schema, no credential gate and no acceptance authority, and its two founders cannot lawfully touch the CUI/ITAR message standards (VMF, Link 16, legacy ICDs) where the real value and moat would sit without a U.S.-person hire they cannot yet afford. The milestone that would justify $2-5M, namely ADOC or a team lead formally designating the report as accepted conformance evidence and funding it through an OTA or Phase III, is a decision the government has every incentive not to make, and no evidence this session shows it moving that way. That is why the gap is killed: the demo is buildable, the buyer is real, but the value is captured by the parties who own the interfaces, and the residual is a small readiness-services niche that can be useful only as a relationship-building wedge into a different, larger opportunity.",
+  "bear_case_summary": "The customer has already decided to own the lane: ADOC's API Marketplace documents interfaces, the Army Software Factory validates 'jailbroken' interfaces before Lattice integration, TAK.gov signs plugins, DCMA vets Blue UAS components, and CDAO pays Palantir $33M to onboard third parties onto Maven. Anduril can add a Lattice validator in one release and Raft already sits in the baseline as the transformation layer. Target schemas are plural and gated so there is no neutral baseline to certify against, legacy ICDs are CUI/ITAR and actively withheld by primes (GAO-25-106931), and the paid adjacent space (Tangram Flex, Picogrid, HERE) shows capped, services-like economics. No budget line, no solicitation, and an SBIR ownership test the founder pair cannot cleanly meet complete the picture.",
+  "bull_case_summary": "The pain is genuine and now has a named target: UDRA, Open DAGIR, the Lattice SDK schemas and the June 2026 NGC2 common data baseline make conformance concrete for the first time, the AAE's Right to Integrate will push documented-API requirements into future contracts, Jailbreak is becoming a repeated series with 50+ vendors per event who each need to pass, and no vendor-neutral, self-service conformance tool exists. A fast, well-loved open-source harness could become the de facto pre-sprint check, earn ADOC and team-lead trust, and position the company for subcontracts and allied (NATO TAK/Maven NATO) onboarding work. This bull case is credible as a first product and relationship engine but not as a venture-scale company; absence of a kit vendor is not evidence of opportunity.",
+  "confidence": "HIGH"
+}
