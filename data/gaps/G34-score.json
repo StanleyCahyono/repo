@@ -1,0 +1,141 @@
+{
+ "id": "G34",
+ "title": "Offline-first, EAR99-by-design structured orders, tasks, reports and LOGSTAT object layer with CRDT merge for TAK-CIV, sold first to public-safety incident command, National Guard and allied light units, with the merge model licensable to HQ planning and C2 platform owners",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Real but tolerated: paper ICS forms and spreadsheets work well enough that agencies keep using them; the acute failure (divergent pictures after partition) is episodic. Military-side pain is documented (Ivy Sting 4, LG-DA 2025) but that buyer is not this gap's first customer."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 4,
+   "rationale": "Every incident operational period and every Guard/allied order cycle regenerates forms and reports; disconnected multi-writer conflicts are less frequent than the form-filling itself."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 2,
+   "rationale": "HSGP $1.008B FY25 (FACT) and AFG exist but are fragmented across thousands of agencies and not evidenced for this product class; Guard has no line (Public evidence insufficient); licensing buyers unproven; DIANA EUR 100k."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 3,
+   "rationale": "Public-safety direct sales need no SBIR or ATO, which fits this cap table, but SLED buying runs on references, grant cycles and cooperative contracts with 12-24 month cycles; Guard and allied paths are pilots without a program office."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "CRDT libraries, ATAK-CIV SDK and a documented mission API make it buildable; iTAK's no-plugin architecture forces a companion-app/server-side design and doubles mobile work."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 4,
+   "rationale": "PoC $80k-$150k on commercial devices and synthetic data; $250k covers PoC plus one or two exercises but not a sales function."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 4,
+   "rationale": "3-5 months to a partition-and-merge demo on five devices; a credible demo to a buyer (live exercise) adds a season."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 4,
+   "rationale": "ICS forms, doctrinal report formats and TAK schemas are public; only real Guard LOGSTAT data needs a sponsor and is not required for the first product."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 4,
+   "rationale": "Civil, open-source, plausibly EAR99 product with no clearance/ATO for public safety; not 5 because Guard/allied variants bring TAK-GOV gating, possible defense-service and CUI questions that need counsel."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 5,
+   "rationale": "Entirely unclassified by design: public-safety users, ATAK-CIV/TAK Server open builds, public schemas, commercial mesh; no CUI or classified dependency at any stage of the first product - the one criterion where this gap is unambiguously strong."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Every slice is occupied: TPC's free Data Sync (disconnect re-sync), Ditto's funded CRDT ATAK plugin (merge engine), Resgrid/Tablet Command/Intterra/WebEOC/Veoci (ICS forms, Resgrid offline-first), Onebrief/Anduril-Rivet/Systematic (military orders), plus open-source CRDTs; the DHS SAVER 2022 survey shows a mature multi-vendor IMS category."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "TPC can add form objects to missions, Ditto can ship a schema pack, IMS vendors can add multi-writer merge; none is locked into an architecture that prevents it. Slight vulnerability only because none currently combines all three and public-safety vendors are slow."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 3,
+   "rationale": "ATAK-CIV plugin SDK and TAK Server mission API are open and documented; iTAK is closed to plugins, TAK-GOV/MIL gated, and every military HQ platform API (Onebrief, Lattice, SitaWare) is incumbent-controlled."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "CRDT merge is commoditized (Automerge, Yjs, Ditto), the schemas are public NIMS/FM standards, TAK is free government software and switching cost for an agency is near zero; the only conceivable moat (de facto community schema plus installed base) is a standards/community outcome, not proprietary."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 4,
+   "rationale": "Genuinely dual-use core (ICS forms and military orders/LOGSTAT share the object-and-merge engine) and both communities already use TAK; not 5 because both markets are small and fragmented."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Expansion from public safety into the Guard/Army layer runs into the same incumbents that killed G18/G06; the 'license the merge model' expansion is refuted by commoditization; adjacent IMS features would just make it another IMS vendor."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "Per-agency SaaS subscriptions renew annually and grant cycles recur, but ACVs are small (low five figures) and churn to free TAK Data Sync or an incumbent IMS is easy."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 2,
+   "rationale": "Better than the parents: no SBIR, no CUI, non-U.S.-person founder unconstrained on an EAR99/open-source civil product, engineer can build the core. Still 2 because the team lacks the fatal-if-absent incident-command/fire-service domain founder and any SLED sales experience, and the founders' stated goal is the U.S. defense market, which this gap abandons."
+  }
+ ],
+ "market_attractiveness": 2.7,
+ "founder_fit": 3.8,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No budget owner: public-safety money is HSGP/AFG/local budgets spread over thousands of agencies with no evidence of purchases in this product class; the Guard has no program office or line for a battalion orders/reports app (Public evidence insufficient); allied entry is EUR 100k DIANA grants (2027 window closed 2026-07-03) and CIHBw pilots; the 'license the merge model' revenue line has no evidenced buyer and competes with open-source CRDTs and Ditto. TAK Public Safety's own charter says adoption is gated by training, not features. Even a successful outcome is a low-ACV niche SaaS or acquihire - consultancy/feature drift is the base case."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Each component already has an owner: TPC's free Data Sync re-syncs missions after disconnect and TPC could add form objects; Ditto (~$136M) sells CRDT sync for ATAK and claims USSOCOM use; Resgrid IC already markets offline-first ICS-201 and Tablet Command/Intterra/WebEOC/Veoci own agency IMS relationships (DHS SAVER 2022); Onebrief/Anduril-Rivet/Systematic hold the military orders layer. Open-source CRDT libraries and the FreeTAKTeam/Meshtastic community can replicate the rest. Switching cost is near zero and the interfaces that matter (iTAK, TAK-GOV, Onebrief/Lattice/SitaWare APIs) are controlled by others."
+  },
+  "feasibility": {
+   "refuted": false,
+   "strength": 2,
+   "summary": "Not refuted: the product is unclassified, buildable for under $150k on commercial devices with public schemas, needs no ATO/CUI/SBIR for its first customers, and the non-U.S.-person founder can work on an EAR99/open-source civil codebase (counsel still required). Residual weaknesses are iTAK's closed plugin model (doubles mobile work), the missing fatal-if-absent incident-command domain founder and SLED sales capability, and classification/defense-service drift if the Guard or allied variants add military-specific integration."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "KILL as a venture, with an explicit note that it is a legitimate bootstrapped/open-source niche business. Applying the same standard as the parent red teams: the buyer chain exists only in its civil half (PROBLEM -> incident commander -> agency chief -> no program office -> municipal/state procurement -> HSGP/local budget -> direct SaaS sale) and is fragmented across thousands of small buyers with no evidence of purchases in this product class; the Guard half has no requirement owner, program office, budget or vehicle (Public evidence insufficient), which draws the major chain penalty for that segment; the allied half is EUR 100k grants with the 2027 DIANA window already closed. Market attractiveness is 2.7, dragged by competitive intensity (1) and moat (1): TPC's free Data Sync, Ditto's funded CRDT ATAK plugin, Resgrid's offline-first ICS-201 and the mature IMS category (DHS SAVER 2022) occupy every slice, and the 'licensable merge model' - the one piece of the thesis that could have been venture-scale - is refuted by open-source CRDTs and Ditto's existing product. Founder fit is the highest of the family at 3.8 because everything is unclassified, cheap, EAR99-plausible and needs no SBIR, so the feasibility skeptic could not refute it; but strong feasibility of a small business does not make a venture, and the founders' stated primary interest (U.S. defense) is abandoned by this form. Confidence MEDIUM: a signed multi-agency state contract, a TPC statement declining to add form objects, or evidence that Ditto/IMS vendors will not cover offline multi-writer forms would raise it to borderline.",
+ "narrower_version_if_borderline": "Not borderline. For the record, the only form worth keeping alive is as a non-venture: an open-source 'ICS objects for TAK' schema and TAK Server extension (ICS 201/204/209/214 as CRDT-merged mission objects, iOS/Android/web companion) stewarded with TAK Public Safety and WFTAK, monetized through hosting/support to state wildland agencies and IMTs - a lifestyle/open-source business or a path to an acquihire by Ditto, a TPC contractor or an IMS vendor, with the Guard/allied and merge-model-licensing lines dropped.",
+ "most_important_question_answer": "If two exceptionally capable founders had $250,000 today and insisted on G34, the first build is a TAK Server extension plus ATAK-CIV plugin plus a thin iOS/web companion that stores ICS 204 assignments, ICS 209/214 status and a LOGSTAT-style resource ledger as CRDT-merged mission objects, transported as compact deltas over Meshtastic/goTenna/FirstNet - about $100k and four months, entirely unclassified and buildable by the non-U.S.-person founder. They would show it to a state wildland fire technology lead running WFTAK, a Type 2 IMT planning section chief, the TAK Public Safety community and one Guard battalion S3 on a drill weekend; the demo proves that six hours of disconnected multi-writer edits to assignments and quantities merge with zero re-keying on both Android and iOS, and that the next operational period's ICS 204s are produced faster than on paper. The customer cares because forms are re-keyed every period and pictures diverge after every displacement. But an incumbent can crush it: TPC can add form objects to its free Data Sync missions, Ditto already sells CRDT sync for ATAK, Resgrid already markets offline-first ICS-201, and Tablet Command/Intterra own the agency relationships; the schema is a public standard and the merge engine is open source, so nothing becomes proprietary. The milestone that would justify $2-5M - twenty-plus paying agencies or a state-level enterprise contract plus a signed licensing/integration LOI from TPC, Onebrief, Ditto or Systematic - is unlikely to be reached because the licensing buyer has no reason to pay for what it can take from open source, and the agency ACVs are too small to fund a sales team. That is why it fails as a venture while remaining a reasonable open-source niche business or acquihire path.",
+ "bear_case_summary": "Fragmented grant-sized public-safety budgets with no evidence of purchases in this class; no Guard program office, requirement or line; allied channel limited to EUR 100k DIANA grants (2027 window closed) and CIHBw pilots; every technical slice already occupied (TPC Data Sync, Ditto CRDT ATAK plugin, Resgrid offline ICS-201, mature IMS vendors, Onebrief/Anduril/Systematic on the military side); iTAK blocks plugins for the iOS-majority wildland users; CRDT and schemas are commodities so no moat; the licensing thesis has no evidenced buyer; team lacks a fire-service/incident-command founder and SLED sales; realistic upside is an acquihire.",
+ "bull_case_summary": "Public-safety TAK use is real and growing (DHS S&T, WFTAK, TAK Public Safety 2024, FirstNet-paired municipal use 2025), cheap mesh has made disconnected multi-node operation routine, the product is unclassified, EAR99-plausible, buildable for ~$100k with no SBIR/ATO/CUI, the non-U.S.-person founder is unconstrained, NATO DIANA's 2027 challenges name almost exactly this problem, no one has yet combined structured ICS/orders objects with multi-writer merge inside TAK, and an installed base plus a de facto TAK ICS-object schema could make the team an attractive acquihire for Ditto, a TPC contractor, Onebrief or an IMS vendor.",
+ "confidence": "MEDIUM"
+}

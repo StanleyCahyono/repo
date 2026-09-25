@@ -1,0 +1,55 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G36",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "There is no buyer with a budget for a vendor-neutral ATO-evidence component or a TAK plugin conformance tester. DoD CIO is building SWFT review into eMASS and has published no schema; TPC runs its own build-and-sign pipeline and has not asked for a conformance stage; PM C2 Applications is buying an NGC2 pipeline through a lead-entity teaming model (C2APPSRFI-1, May 2026) with no line for assurance tooling and no award found. The only tooling-specific money is a closed AF SBIR D2P2 topic (2025) that this cap table likely cannot use. On the commercial side, ISV compliance budgets exist but already flow to Paramify, Vanta, Drata, RegScale and free 20x harnesses, and hosting platforms absorb evidence assembly for tenants. What is left is support fees from TAK plugin shops and, at best, one embedding deal at a host's discretion: consultancy or feature economics. The payer (ISV/host) is not the acceptor (AO/3PAO), who is documented as 'biased to caution', so even a working tool does not convert into willingness to pay.",
+  "strongest_single_argument": "Nobody in the PROBLEM -> REQUIREMENT OWNER -> PROGRAM OFFICE -> BUDGET -> VEHICLE chain has asked for this component or holds money for it; the requirement owners are building their own pipelines and back-end review.",
+  "evidence": [
+   "SWFT: AI-assisted review inside eMASS, provisional ATO issued by government tooling (DefenseScoop 2025-06-09, FACT HIGH)",
+   "C2APPSRFI-1 lead-entity teaming RFI 2026-05-12; pipeline precedes storefront (FNN 2026-04); no award found (FACT MEDIUM)",
+   "tak.gov/pages/our-process: build-and-sign only, no conformance requirement published (FACT HIGH)",
+   "AF SBIR D2P2 AF254-D0802 sole tooling topic; 13 CFR 121.702 ownership test (FACT HIGH)",
+   "State of DevSecOps 2025: AOs biased to caution, reciprocity lacking (FACT HIGH)",
+   "Lula 1 in maintenance mode after $136M Series B (FACT HIGH)"
+  ],
+  "what_would_change_my_mind": "A TPC, DoD CIO or PM C2 Applications solicitation, roadmap item or budget exhibit that names third-party evidence/conformance tooling as a separately funded scope; or a signed embedding/OEM agreement from Defense Unicorns, Second Front or a GRC vendor with a revenue commitment; or 3+ ISVs paying for the component ahead of the SWFT/20x deadlines.",
+  "narrower_survivable_version": "An under-$50k open-source portfolio piece (ATAK-CIV conformance kit plus a GUAC/OSCAL exporter contribution) used to win DevSecOps assessment subcontracts or an acquihire; explicitly not a fundable company."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G36",
+  "refuted": true,
+  "strength": 5,
+  "bear_case": "The second-generation card assumed the open-source substrate was unbuilt. It is built. GUAC - an OpenSSF incubating project maintained by venture-backed Kusari, co-created with Google, Purdue and Citi - ingests SBOMs, in-toto/SLSA attestations, vulnerability and Scorecard data into a content-addressed, GraphQL-queryable graph and shipped v1.1.0 in March 2026. OSCAL Compass (CNCF sandbox since June 2024, IBM/Red Hat origin, NIST-presented) already converts policy-validation-point results into OSCAL assessment results via C2P. ksi-harness-class projects already emit schema-valid FedRAMP 20x artifacts; RegScale open-sourced an OSCAL Hub in Dec 2025; Iron Bank publishes provenance and compliance reports for 1000+ containers; eMASS hosts the SWFT back-end. Every consumer interface (eMASS/DISA, tak.gov/TPC, UDS admission/Defense Unicorns, Big Bang/Platform One, the NGC2 pipeline lead, GRC vendors) is owned by a party that can adopt any open-source component the startup publishes rather than buy it. Defense Unicorns built the DoD-native version (Lula 1), shelved it, and raised $136M for the delivery layer - the platform owner's revealed preference is that this layer is optional. What remains is crosswalk glue and a TAK developer tool, which Kusari, RegScale, Paramify, Defense Unicorns or TPC can each ship in one release cycle with first look at SWFT/CSRMC schemas the startup does not have.",
+  "strongest_single_argument": "The 'open-source evidence graph with content-addressed provenance' already exists as GUAC and the 'to OSCAL assessment results' step already exists as OSCAL Compass C2P; a startup re-building them competes with free software from better-funded maintainers, and the residual glue has no owner-controlled interface to defend.",
+  "evidence": [
+   "guac.sh and Kusari blog: GUAC OpenSSF incubating, v1.1.0 Mar 2026, ingests SBOM/in-toto/vuln into graph with GraphQL (FACT HIGH, verified this session)",
+   "cncf.io/projects/oscal-compass: accepted 2024-06-21; C2P generates OSCAL assessment results from PVP results (FACT HIGH, verified this session)",
+   "github.com/RootCawsLLC/ksi-harness: open-source 20x artifact emitter (FACT MEDIUM)",
+   "RegScale OSCAL Hub open-sourced Dec 2025 (FACT MEDIUM)",
+   "p1.dso.mil/ironbank: provenance data and compliance reports at scale (FACT HIGH)",
+   "github.com/defenseunicorns/lula: Lula 1 maintenance mode (FACT HIGH)"
+  ],
+  "what_would_change_my_mind": "Evidence that GUAC/OSCAL Compass maintainers have explicitly declined to add DoD/SWFT/20x crosswalks and hosts refuse to build them; a documented case of a 3PAO or AO rejecting incumbent-generated OSCAL packages while accepting a neutral one; or DoD CIO soliciting a neutral cross-vendor evidence broker rather than blessing eMASS or an incumbent tool.",
+  "narrower_survivable_version": "Do not fork a new graph. Contribute an OSCAL assessment-results exporter with hash-linked provenance to GUAC and/or OSCAL Compass, and publish an ATAK-CIV conformance kit; monetize (if at all) through support to TAK plugin shops and an eventual acquihire by Kusari, Defense Unicorns or a GRC vendor."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G36",
+  "refuted": false,
+  "strength": 2,
+  "bear_case": "Feasibility is not the problem. The MVP uses only public artifacts (CycloneDX/SPDX, Grype/Trivy JSON, cosign/in-toto, InSpec/CKL, NIST OSCAL catalogs, FedRAMP 20x KSIs, the open ATAK-CIV SDK, UDS Core/Big Bang/GUAC repos), needs no clearance, CUI, ATO or government system access, and can be built by two engineers for $40-90k in 3-4 months. Open-source EAR99-class software on public standards is legally publishable and sellable by a non-U.S.-person founder (not legal advice), and the TAK third-party pipeline is open to any developer not on a denied-parties list. The real feasibility caveats are secondary: (1) proving assessor acceptance requires real packages and assessor decisions that are CUI and held by programs/3PAOs, so the demo can prove format validity and re-work reduction with a friendly 3PAO but not AO acceptance; (2) the team lacks a fatal-if-absent U.S.-person SCA/ISSM/3PAO adviser and has no assessor relationships; (3) SBIR/STTR is likely unavailable under the >50% U.S.-person ownership and control test, and any government-side integration (eMASS, DoD packages) would require role separation for the Indonesian founder. None of these stops the build; they stop the build from becoming a business. The strongest feasibility-lens point is therefore a founder-fit one: a $250k team with no assessor credibility cannot earn the acceptance precedent that would be the only asset.",
+  "strongest_single_argument": "This is one of the very few gaps in the study that the team can legally and cheaply build and demonstrate today - which is exactly why it is a feature or open-source project rather than a company; the binding constraint is acceptance and buyer, not feasibility.",
+  "evidence": [
+   "github.com/deptofdefense/AndroidTacticalAssaultKit-CIV: open-source SDK with plugin architecture (E07-F25, FACT HIGH)",
+   "tak.gov/pages/our-process: pipeline open to vetted developers, 2-5 day vetting (FACT HIGH)",
+   "guac.sh, oscal-compass.dev, github.com/FedRAMP/2026: all substrates public (FACT HIGH)",
+   "13 CFR 121.702 SBIR ownership test; sbir.gov foreign disclosures - Germany and Indonesia not countries of concern (E07-F3/F4, FACT HIGH)",
+   "State of DevSecOps 2025: acceptance, not tooling, is the blocker (FACT HIGH)"
+  ],
+  "what_would_change_my_mind": "Nothing would make it less feasible; what would make it investable is a U.S.-person former SCA/ISSM or 3PAO principal joining as co-founder with a pilot host and a signed design partnership, plus a written acceptance by two assessors of the generated bundle - which converts the feasibility lens into the market lens's problem.",
+  "narrower_survivable_version": "Treat it as an under-$50k, 3-4 month open-source portfolio project (GUAC/OSCAL Compass contributions plus an ATAK-CIV conformance kit) that both founders can legally build today, used for credibility with Platform One/UDS/TAK communities and as an acquihire hedge while the primary bet goes elsewhere."
+ }
+]

@@ -1,0 +1,56 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G33",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "There is no budget owner for any of the three functions. The Army's answer to unit sUAS records is DTMS (system of record for course completions and individual training) plus the expanding SUAS Master Trainer Course - a training pipeline, not a records product. Its answer to friendly-flight deconfliction is CALL Handbook 25-14's procedural control, written for degraded comms, plus the free TAK UAS Tool that already puts MAVLink-class drones on the picture as CoT; a flight-intent extension is a schema decision for the TAK Product Center and JIATF-401, which nobody pays a vendor for. The after-action audit is exercise-only pain felt by a handful of O/C-T and JIATF-401 staff, institutionally served by government test organizations and FFRDC data-collection teams (RECALL - not re-verified), and the customer's revealed preference on 2026-09-23 was to make Lattice itself the 'baseline standard against which all commercial assets are measured'. Searches on 2026-09-25 found no RFI, SBIR/xTech topic or CSO call for any piece. The only named adjacent money is a $500k DIU prize pool for theater-level blue-object data. The commercial shape that results is a free plugin plus a test-support services engagement - consultancy drift into a single-digit-buyer niche.",
+  "strongest_single_argument": "Every one of the three functions already has a $0 or institutional occupant that the customer chose deliberately - DTMS for records, CALL 25-14 plus the free TAK UAS Tool for friendly flights, and government testers with Lattice as the measurement baseline for after-action assessment - so there is no requirement owner, program office or budget line to attach a product to, which is the major-penalty condition.",
+  "evidence": [
+   "https://www.army.mil/article/205783/dtms_supports_training_and_readiness_reporting (DTMS system of record)",
+   "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control (CALL 25-14, 2025-09)",
+   "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/ (TAK UAS Tool public, 2021-09-22)",
+   "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/ (Lattice as measurement baseline, 2026-09-23)",
+   "https://www.diu.mil/latest/finalists-selected-for-the-diu-blue-object-management-challenge ($500k pool, 2025-12)",
+   "https://armysbir.army.mil/program/xtech/ (no matching topic found, 2026-09-25 search)"
+  ],
+  "what_would_change_my_mind": "A JIATF-401, T2COM, CTC or ATEC solicitation, CSO call or xTech/SBIR topic that explicitly asks for a C2-independent track-provenance/after-action capability or a CoT flight-intent declaration standard with funds attached; or evidence a CTC or battalion paid (not just piloted) a third party for a UAS readiness ledger; or a GAO/IG finding naming the absence of vendor-independent C-UAS engagement records as a risk with directed remediation.",
+  "narrower_survivable_version": "Not a company. Ship the friendly-flight declaration and readiness ledger as a free ATAK-CIV plugin (8-12 weeks, <$30k) purely to earn a CTC/TiC relationship and TAK.gov signing experience, and offer the replay engine as a subcontract to a government test organization or FFRDC data-collection team - explicitly services revenue, not a venture thesis."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G33",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "The bundle is three features, each of which an incumbent or the government already owns or can add in one release. Adapter: the government-owned TAK UAS Tool has published MAVLink-class drone position, telemetry and FMV as CoT since 2021 and the TAK Product Center controls both the CoT schema and plugin signing, so a flight-intent extension is theirs to adopt in a point release; Auterion already feeds ATAK with CoT, and certified micro-IFF hardware (Sagetech MX12B AIMS-certified Mode 5, uAvionix, ACS optical ID) is the funded path for friendly identity that would reduce any software declaration to a consumer of their signal. Ledger: DTMS is the mandated system of record, Skydio Cloud syncs fleet health and battery telemetry after every mission, and AirData/Aloft/DroneSense already track pilot currency across 880+ certificate types and are consolidating into Versaterm's public-safety dispatch platform (2025-26). Audit: Anduril and Northrop own the engagement logs and export formats and can expose lineage and replay as a feature; civil detection vendors (D-Fend 'forensic readiness', SkySafe flight history with Cellebrite) already market forensics; and the government's independent measurement role is staffed by its own test organizations and FFRDCs (RECALL). Switching cost for the customer is zero because the startup would sit beside, not inside, the systems of record; APIs and formats are controlled by TPC, Anduril, Northrop, Skydio, Auterion and Gauntlet vendors.",
+  "strongest_single_argument": "The two buildable pieces compete against a free government plugin (TAK UAS Tool) and a mandated government system (DTMS), and the one piece incumbents would not build - grading their own fusion - is already performed by government testers who on 2026-09-23 made the incumbent's own Lattice the yardstick at Falcon Peak 26.2, leaving no seam a startup can own.",
+  "evidence": [
+   "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/ (TAK UAS Tool)",
+   "https://cotak.gov/pages/news/uas-tool-training-videos (UAS Tool training, 2025-02)",
+   "https://thedefensepost.com/2025/10/31/acs-drone-optical-iff/ (ACS optical IFF, 2025-10-31); Sagetech MX12B (vendor claim)",
+   "https://dronedj.com/2026/02/19/versaterm-aloft-dronesense-acquisition-faa/ (Versaterm/Aloft/DroneSense, 2026-02-19)",
+   "https://www.suasnews.com/2026/08/airdata-surpasses-65-million-drone-flights-as-the-faas-bvlos-rule-awaits-publication/ (AirData currency tracking, 2026-08)",
+   "https://droneintelligence.ai/compare/dedrone-vs-d-fend-solutions (civil forensics, 2026)",
+   "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/ (Lattice baseline standard)"
+  ],
+  "what_would_change_my_mind": "A JIATF-401 or Army policy statement that engagement/provenance records must be held in a government-owned store independent of the C2 vendor with a solicitation to build it; evidence that Lattice/FAAD C2 export formats are open and that TPC has declined to add flight-intent to the UAS Tool by policy; or a documented case of a unit or CTC paying a third party for readiness-ledger or after-action tooling rather than using DTMS and vendor replay.",
+  "narrower_survivable_version": "Only a partner role: build the replay/provenance engine as a component licensed to, or subcontracted under, a government test organization, an FFRDC data-collection team or a C-UAS integrator that needs vendor-neutral scoring at exercises, and contribute the flight-intent CoT extension to the TAK community as an open proposal rather than a product. Services-shaped and small."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G33",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "The parts this team can build cheaply are exactly the parts nobody will pay for, and the part someone might value is the part they cannot build credibly. Adapter and ledger: ATAK-CIV is open source, MAVLink tooling is EAR99-level and synthetic data suffices, so both founders can ship them in 8-12 weeks for under $30k - but that demo proves plumbing, not value, and the government already ships the plumbing free. Audit: its credibility rests on real Lattice/FAAD C2 engagement logs and exercise ground truth, which are CUI at minimum, vendor-formatted and sponsor-gated; export-controlled CUI is effectively US-person-only (E07-F30) and ITAR technical data has no deemed-export exception for domestic foreign-person employees (E07-F18), so the Indonesian co-founder is excluded from the half that matters, a technology control plan and counsel are prerequisites, and neither founder is clearance-eligible for years. No sponsor, CRADA or exercise slot exists; the team lacks the fatal-if-absent O/C-T/JICO insider who would define an acceptable reconstruction; SBIR is unavailable at the current cap table (E07-F3); fielded use requires TPC plugin signing and an ATO under a host system. A credible demo on sponsor data costs $400-900k (2-4x capital) and is 9-15 months away conditional on a sponsor that has not appeared; production is a bespoke integration per unit/CTC. Timeline to any recurring revenue is 3-5 years and services-shaped.",
+  "strongest_single_argument": "The only component with oversight value - the independent after-action audit - can be demonstrated credibly only on export-controlled C-UAS engagement logs that no sponsor has offered, that the non-US-person co-founder cannot legally handle without licensing, and that the founders have no insider to obtain, so $250k buys a plugin the government already gives away and a replay engine tested only on the founders' own range data.",
+  "evidence": [
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (ATAK-CIV open source)",
+   "E07-F30 CUI access by foreign nationals limited by export controls; E07-F18 no ITAR deemed-export exception; E07-F3 SBIR ownership test (eCFR 13 CFR 121.702)",
+   "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/ (free government baseline)",
+   "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/ (exercise data held inside Lattice/exercise control)",
+   "https://www.cnbc.com/2025/10/03/anduril-palantir-army-memo-ngc2.html (audit/logging gap is being fixed inside the incumbent-led data layer)"
+  ],
+  "what_would_change_my_mind": "A signed CRADA or OTA giving the team exported, unclassified-releasable exercise track/engagement logs with ground truth and a named O/C-T or JIATF-401 sponsor; a US-person engineering enclave and export counsel already in place; an unclassified multi-sensor C-UAS dataset with ground truth public enough to validate the audit engine without a sponsor; or confirmation that the 2026 SBIR reauthorization relaxed foreign-founder constraints enough for the current cap table (E07-F2, unverified).",
+  "narrower_survivable_version": "Keep only the unclassified plugin (friendly-flight declaration CoT extension + offline readiness ledger) as a credibility project and point the replay engine at civil C-UAS test sites (DHS/FAA) or ranges where sensor data is unclassified - accepting that this is a small, crowded, services-adjacent market and not a basis for raising $2-5M."
+ }
+]

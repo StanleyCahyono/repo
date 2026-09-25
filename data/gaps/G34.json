@@ -1,0 +1,643 @@
+{
+ "id": "G34",
+ "title": "Offline-first, EAR99-by-design structured orders, tasks, reports and LOGSTAT object layer with CRDT merge for TAK-CIV, sold first to public-safety incident command, National Guard and allied light units, with the merge model licensable to HQ planning and C2 platform owners",
+ "problem": "Incident commanders, National Guard battalion staffs and allied light units that already run TAK on unclassified networks still move orders, assignments, status reports and sustainment/resource status as paper ICS forms, chat, voice and spreadsheets that do not merge cleanly when nodes reconnect after working disconnected, so the picture diverges between the command post, field elements and higher headquarters.",
+ "categories": [
+  "C",
+  "D",
+  "G",
+  "I"
+ ],
+ "segment_ids": [
+  "S01",
+  "S14"
+ ],
+ "chain_steps": [
+  "DISSEMINATE_TASK",
+  "DECIDE",
+  "TRANSPORT",
+  "PROCESS"
+ ],
+ "echelons": [
+  "tactical unit",
+  "battalion/brigade (Guard)",
+  "incident/agency (public safety)",
+  "allied light unit"
+ ],
+ "user": {
+  "exact_role": "Incident commander / planning section chief / resource unit leader on an all-hazards or wildland incident management team; National Guard battalion S3/S4 and battle captain on state active duty or Title 32 domestic missions; allied light-infantry company/battalion staff on ATAK",
+  "echelon": "Incident (Type 1-4) and battalion/company",
+  "organization_examples": [
+   "State wildland fire agencies and interagency IMTs using WFTAK (Colorado CoE, FAM IM Tools)",
+   "Municipal fire departments using TAK with FirstNet (e.g., Green Bay Metro Fire, 2025)",
+   "Army/Air National Guard elements on domestic response (147th ASOS Hurricane Harvey use of ATAK; 2025 wildfire response)",
+   "Bundeswehr light units via Cyber Innovation Hub pilots; NATO DIANA 2027 'operational resilience' challenge cohort"
+  ]
+ },
+ "current_workflow": [
+  "Incident: IC fills ICS 201 briefing and ICS 202/204/209 on paper or Word/PDF templates; assignments are read out at briefings; resources tracked on T-cards/whiteboards or an IMS web app that needs connectivity; TAK shows PLI and markers only",
+  "Field elements report status by radio/phone/chat; planning section re-keys into forms each operational period; disconnected divisions bring paper back to the ICP",
+  "Guard battalion: receives WARNORD/OPORD as PDF/PowerPoint over intermittent links; tracks tasks, SITREP/LOGSTAT/PERSTAT on spreadsheets and chat; ATAK data packages carry graphics; on reconnect, reports are re-typed into higher's format",
+  "Allied light unit: SitaWare Edge/Frontline where fielded, otherwise ATAK plus voice; orders as documents",
+  "After each displacement/reconnect, staff manually reconcile which version of the assignment or report is current"
+ ],
+ "current_solution": "Paper NIMS ICS forms (FEMA ICS forms booklet); TAK Server 'Data Sync' missions (government, free) that re-sync map items, files, logs and chat missed while disconnected but carry no structured order/report/LOGSTAT objects and no CRDT merge; commercial incident-management software (Tablet Command, Resgrid IC with offline-first ICS-201 timeline, Intterra, Juvare WebEOC, Veoci and the 10+ products in the DHS SAVER 2022 market survey); Ditto's Edge Sync plugin for ATAK (company claim) for peer-to-peer CRDT sync of ATAK objects; on the military side Onebrief (offline tactical access 'underway', company statement), SBMC clients (Anduril/Rivet, ATAK-backward-compatible), Systematic SitaWare Edge tasking; Meshtastic/goTenna mesh transports for TAK.",
+ "failure": "Structured content has no object model in TAK: it travels as files, chat and data packages, so two nodes that edited the same assignment or report while partitioned cannot merge and someone re-keys by hand; commercial IMS tools are cloud-first (Resgrid excepted, queue-and-replay not multi-writer merge) and not TAK-native; ~80% of wildland responders carry iOS devices where iTAK accepts no third-party plugins, so an ATAK-CIV plugin alone cannot reach them; the Guard has no program office or budget line for a battalion orders/reports app and the allied path is small pilots.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "DHS S&T states TAK operational use continues to grow across FBI, FEMA/DHS and many states (CO, TX, CA), with iTAK on the Apple App Store, and TAK.gov markets an emergency/public-safety solution page - establishing the unclassified TAK user base this product would target",
+   "source_title": "DHS S&T's Team Awareness Kit Expands Its Reach (HS Today); TAK.gov emergency solutions",
+   "source_url": "https://www.hstoday.us/federal-pages/dhs/dhs-sts-team-awareness-kit-expands-its-reach/",
+   "pub_date": "not captured (DHS S&T announcement; search summary 2026-09)",
+   "event_date": "2023-2025",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Wildland Fire TAK (WFTAK) server was developed by the Colorado Center of Excellence under agreement with FAM IM Tools & Technology for interagency firefighting; wildland firefighters' devices are ~80% iOS, making iTAK critical",
+   "source_title": "What is WFTAK? (wftak.wildfire.gov)",
+   "source_url": "https://wftak.wildfire.gov/pages/what-is-wftak",
+   "pub_date": "not captured (page live 2026-09)",
+   "event_date": "2024-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Green Bay Metro Fire paired TAK with FirstNet for real-time command at the 2025 NFL Draft and a later fire - public-safety TAK use is real but is on connected broadband, not disconnected mesh",
+   "source_title": "Green Bay, WI, Fire Pairs Team Awareness Kit with FirstNet for Real-Time Command (Firehouse)",
+   "source_url": "https://www.firehouse.com/technology/blog/55396422/green-bay-wi-fire-pairs-team-awareness-kit-with-firstnet-for-real-time-command",
+   "pub_date": "2025 (exact date not captured)",
+   "event_date": "2025-04",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "TAK Public Safety, a 501(c)(3) founded in 2024, exists to overcome the barriers that keep agencies from adopting TAK - training, community, events and a path from first install to field-ready operations - i.e., the binding constraint on public-safety TAK is adoption/training, not a missing structured-forms feature",
+   "source_title": "TAK Public Safety - Awareness When It Matters",
+   "source_url": "https://www.takps.org/",
+   "pub_date": "2024-2026 (site)",
+   "event_date": "2024",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "product fails requirement",
+   "claim": "iTAK's architecture does not allow third-party plugins the way ATAK does; workarounds arrived only in Feb 2026 (Meshtastic iOS app with built-in TAK server) - an ATAK-CIV plugin therefore cannot reach the iOS majority of wildland users, forcing a server-side or companion-app design",
+   "source_title": "No Plugins, No Problem: Integrating TAK, Meshtastic, and iOS (Meshtastic blog)",
+   "source_url": "https://meshtastic.org/blog/tak-server-integration-ios/",
+   "pub_date": "2026-02 (per search summary)",
+   "event_date": "2026-02",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "The government-owned TAK Server Data Sync plugin already synchronizes mission map items (CoT), files, logs and chat across ATAK devices and re-syncs data missed while a device was disconnected; it does not carry structured orders, assignments, reports or LOGSTAT objects, nor multi-writer merge",
+   "source_title": "ATAK Plugin: Data Sync (Google Play, TAK Product Center)",
+   "source_url": "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin",
+   "pub_date": "not captured (listing live 2026-09)",
+   "event_date": "2022-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "OpenTAKServer documents an open Mission API / Data Sync implementation, so the mission/sync interface a structured-object layer would extend is publicly documented and not solely controlled by TPC",
+   "source_title": "Mission API/Data Sync - OpenTAKServer 1.7.0 documentation",
+   "source_url": "https://docs.opentakserver.io/mission_api.html",
+   "pub_date": "2025-2026",
+   "event_date": "2025-2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Resgrid IC advertises an offline-first ICS-201 timeline where every action queues locally and replays on reconnect; Tablet Command advertises time-stamped ICS-201 records and an enterprise incident platform - direct public-safety competitors already address the offline forms problem (queue-and-replay, not CRDT merge); company marketing, not proof of field performance",
+   "source_title": "Resgrid IC - Digital Incident Command Board; Tablet Command",
+   "source_url": "https://resgrid.com/apps/ic",
+   "pub_date": "2025-2026 (product pages)",
+   "event_date": "2025-2026",
+   "tier": 3,
+   "label": "FACT (company claims)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "DHS SAVER published an Incident Management Software market survey (Jan 2022) covering WebEOC, Intterra and other IMS products - the public-safety incident-management software market is an established, multi-vendor category, not white space",
+   "source_title": "Incident Management Software for Emergency Response Market Survey Report (DHS SAVER)",
+   "source_url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf",
+   "pub_date": "2022-01-05",
+   "event_date": "2022-01",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "FY2025 Homeland Security Grant Program provides $1.008B (SHSP $373.5M, UASI $553.5M, OPSG $81M) to SLTT governments; software for situational awareness is generally an allowable cost (INFERENCE) but no TAK-forms or offline-IMS purchase under these grants was found this session",
+   "source_title": "FY 2025 Homeland Security Grant Program NOFO (FEMA)",
+   "source_url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo",
+   "pub_date": "2025",
+   "event_date": "FY2025",
+   "tier": 1,
+   "label": "FACT (amounts) / INFERENCE (allowability)",
+   "confidence": "HIGH / LOW"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Ditto (~$136M raised; $82M Series B Mar 2025) sells a CRDT-based edge-sync platform and states it has an Edge Sync plugin for ATAK used by USSOCOM (company claim) - the CRDT-merge-for-TAK layer G34 proposes to license is already occupied by a funded specialist, and open-source CRDT engines (Automerge, Yjs, RxDB, PowerSync) commoditize the merge model",
+   "source_title": "Ditto company record (corpus B03); RxDB 'Ditto alternative'; PowerSync 'Ditto vs PowerSync'",
+   "source_url": "https://rxdb.info/articles/alternatives/ditto-alternative.html",
+   "pub_date": "2025-2026",
+   "event_date": "2025-03",
+   "tier": 3,
+   "label": "FACT (funding, product existence) / INFERENCE (commoditization)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "NATO DIANA announced six 2027 challenges on 2026-06-02 including 'operational resilience in contested environments' (coordination and SA at the tactical edge without assumed connectivity) and 'responsive logistics'; submissions closed 2026-07-03; selected companies get EUR 100k plus test-centre access - a real but small allied on-ramp whose next window is the 2028 cohort",
+   "source_title": "NATO DIANA unveils six new challenges (diana.nato.int)",
+   "source_url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html",
+   "pub_date": "2026-06-02",
+   "event_date": "2026-06-02",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Ivy Sting 4 (Feb 2026) deliberately tested C2 of maneuver from division to battalion under denied-network conditions; Infantry Magazine (2025-03) authors describe mobile command posts losing report history and running estimates on displacement - the military half of the pain is documented (carried from parent G18, FACT MEDIUM)",
+   "source_title": "CPE C2IN Ivy Sting 4 post (Army program office, LinkedIn); parent card G18",
+   "source_url": "https://www.linkedin.com/posts/cpec2in_ngc2-futuresandconceptscommand-armyt2com-activity-7425616767848448000-BI2u",
+   "pub_date": "2026-02",
+   "event_date": "2026-02",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "SBMC awards (Anduril $159M, Rivet $195M prototype OTAs, 2025-09-08) mandate ATAK backward compatibility and Anduril entered SBMC phase two (2026-08-17); Onebrief holds an Army enterprise IDIQ ($20M ceiling, 2026-09-17; ceiling not revenue) and states offline tactical access is 'underway' (2026-06-26, company statement) - the U.S. Army version of this layer is being closed by funded incumbents, which is why G34 retreats to Guard/public safety/allied",
+   "source_title": "DefenseScoop SBMC awards; Business Wire Onebrief IDIQ (parent G18 pointers)",
+   "source_url": "https://defensescoop.com/2025/09/08/army-sbmc-contract-awards-anduril-rivet-soldier-borne-mission-command/",
+   "pub_date": "2025-09-08",
+   "event_date": "2025-09",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "Army logistics directorate documents the 'swivel chair' burden across logistics systems (2025-08-19) and the Army acknowledged in 2018 that sustainment brigades must build their own sustainment COP - LOGSTAT hand-assembly persists (carried from parent G06)",
+   "source_title": "LG-DA 19 Aug 25 (api.army.mil); Developing a COP for sustainment (army.mil, 2018)",
+   "source_url": "https://api.army.mil/e2/c/downloads/2025/08/19/5d3af5ba/lg-da-19-aug-25.pdf",
+   "pub_date": "2025-08-19",
+   "event_date": "2018-2025",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "ATAK-CIV and its SDK are open-source government software with a plugin architecture; TAK-GOV/MIL remain distribution-controlled; EAR deemed-export rules do not constrain an EAR99 codebase for the non-U.S.-person founder (E07-F25, E07-F17)",
+   "source_title": "AndroidTacticalAssaultKit-CIV (GitHub, deptofdefense); BIS deemed exports",
+   "source_url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "pub_date": "ongoing",
+   "event_date": "2020-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "National Guard units used ATAK on domestic missions (Texas ANG 147th ASOS during Hurricane Harvey tracked field personnel; California ANG 163d Attack Wing innovation center applied TAK to wildfire response) and the Guard ran a multi-state 2025 wildfire response - Guard domestic operations are a real TAK user context, but no Guard budget line or requirement for structured offline orders/reports was found",
+   "source_title": "CivTAK National Guard tag; National Guard 2025 Wildfire Response feature",
+   "source_url": "https://www.nationalguard.mil/Features/2025/Wildfire-Response/",
+   "pub_date": "2025",
+   "event_date": "2017-2025",
+   "tier": 2,
+   "label": "FACT (use) / HYPOTHESIS (budget)",
+   "confidence": "MEDIUM / LOW"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "M&A is the dominant visible graduation for SBIR-heritage tactical-networking/C2 software firms in 2025-2026 (Forterra-goTenna, Motorola-D-Fend) - the realistic upside for a TAK-adjacent feature company is acquisition, not independent scale (E04-F25)",
+   "source_title": "White & Case defense tech M&A highlights",
+   "source_url": "https://mergers.whitecase.com/highlights/boots-off-the-ground-defense-tech-ma-skyrockets-in-us-and-europe",
+   "pub_date": "2026",
+   "event_date": "2025-2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Three structural reasons, none of which a new entrant changes. (1) The layer is split across owners who each solve their own slice: the TAK Product Center ships free Data Sync missions for map items/files/chat; Ditto sells the CRDT sync engine for ATAK; public-safety IMS vendors (Tablet Command, Resgrid, Intterra, WebEOC, Veoci) own the ICS forms workflow in web/iOS apps; Onebrief/Anduril/Rivet/Systematic own the military orders layer. Nobody has combined 'structured order/report objects + multi-writer merge + TAK-native' because each owner's customers are satisfied enough by their slice. (2) The public-safety buyer base is thousands of agencies with GPC/grant-sized software budgets, iOS-majority devices (iTAK has no plugin architecture), and adoption barriers that are training and community rather than features (TAK Public Safety 501(c)(3) exists for exactly this). (3) The 'license the merge model' thesis fails on commoditization: CRDT engines are open source (Automerge, Yjs) or already sold (Ditto), and the domain schemas (NIMS ICS forms, FM 6-0/FM 4-0 report formats) are public standards, so the only proprietary asset would be integration work, which is services.",
+ "why_not_solved_reasons": [
+  "buyer fragmentation",
+  "insufficient commercial market",
+  "economics",
+  "integration complexity",
+  "it HAS been solved"
+ ],
+ "technical_wedge": "A TAK-Server-side 'structured objects' service (extending the documented mission/Data Sync API) plus an ATAK-CIV plugin and an iOS/web companion app, that represents ICS 201/204/209/214 (public safety) and WARNORD/FRAGO tasks, SITREP/LOGSTAT/PERSTAT (Guard/allied) as versioned JSON objects with a CRDT merge model tuned to forms (per-field last-writer-wins with causal history, list merges for assignments/resources, explicit conflict surfacing for quantities), transported as compact CoT/mission deltas over Meshtastic/goTenna/FirstNet, so that field elements that edit while disconnected reconcile automatically on reconnect without re-keying.",
+ "mvp": {
+  "what": "Open-source TAK Server extension + ATAK-CIV plugin + iOS/web companion implementing ICS 204/209/214 and a LOGSTAT/SITREP object with CRDT merge, running on commercial Android/iOS devices and Meshtastic radios",
+  "demonstrable_in_3_6_months": "Yes: five EUDs plus a laptop ICP/TOC with deliberate partitions and a command-post jump; measure convergence time, bytes per object, zero manual re-keying; demo at a state wildland exercise or a Guard battalion drill weekend (no program office needed)",
+  "what_it_must_prove": "That multi-writer edits to assignments, resource status and LOGSTAT quantities made during a 6-hour partition merge with no duplicates or lost updates, on iOS as well as Android, and that a planning section produces the next operational period's ICS 204s faster than with paper/Word; and that at least one agency will pay for it rather than use free TAK Data Sync plus its existing IMS",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "NIMS ICS form schemas (public FEMA booklet), doctrinal report formats (FM 6-0 SITREP, FM 4-0/ATP 4-90 LOGSTAT), TAK CoT/mission API schemas, synthetic incident and unit data; no real CUI required for the public-safety product",
+  "legally_realistically_obtainable": "Yes for public safety and synthetic Guard data; real Guard LOGSTAT/unit locations are CUI-like and only via a sponsoring unit; allied data via pilot agreements",
+  "sources": [
+   "FEMA NIMS ICS Forms Booklet (public)",
+   "FM 6-0 / FM 4-0 / ATP 4-90 report formats (public)",
+   "TAK CoT schema and OpenTAKServer Mission API docs (public)",
+   "WFTAK / state fire agency exercise data via MOU",
+   "Guard unit drill-weekend synthetic scenarios"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "TAK Server (Data Sync missions) and OpenTAKServer/FreeTAKServer",
+   "ATAK-CIV (plugin) and iTAK (no plugins - companion app or server-side only)",
+   "WFTAK server (interagency)",
+   "Meshtastic / goTenna / FirstNet transports",
+   "Existing IMS (Tablet Command, WebEOC, Intterra) exports",
+   "Later: Onebrief/Lattice/SitaWare APIs (closed, incumbent-controlled)"
+  ],
+  "interfaces_protocols": [
+   "Cursor-on-Target XML/protobuf",
+   "TAK Server Mission API / Data Sync",
+   "ATAK-CIV plugin SDK",
+   "Meshtastic ATAK forwarder / protobuf",
+   "NIMS ICS form data model (no formal standard; EDXL-DE/EDXL-SitRep partially)",
+   "Optional CRDT library (Automerge/Yjs) or custom"
+  ],
+  "who_controls_the_interface": "TAK Product Center controls ATAK/iTAK/TAK Server (open-source CIV builds; GOV/MIL gated); Apple's app model blocks iTAK plugins; WFTAK is run by Colorado CoE/FAM; IMS vendors control their APIs; military HQ platform APIs are closed to third parties absent partner agreements"
+ },
+ "customer": {
+  "user": "Incident commanders, planning/logistics section chiefs; Guard battalion S3/S4; allied light-unit staffs",
+  "champion": "State fire agency or Colorado-CoE-type TAK center of excellence lead; TAK Public Safety community; a Guard JFHQ J6/J3 innovation lead; Bundeswehr CIHBw pilot sponsor",
+  "contract_signer": "County/municipal or state agency procurement (often via state contract, cooperative purchasing or GSA MAS); NGB/state JFHQ contracting for Guard pilots (unverified); BAAINBw/CIHBw for German pilots",
+  "requirement_owner": "No single owner: each agency/IMT sets its own requirements; NIMS/FEMA sets form standards but does not buy; for the Guard, no validated requirement found (Public evidence insufficient)",
+  "program_office": "None for public safety (DHS S&T TAK program funds TAK development, not agency purchases); TAK Product Center for TAK itself; none for a Guard orders/reports app",
+  "contracting_office": "Thousands of SLTT procurement offices; state HSGP sub-grant administrators; DHS S&T (SBIR, U.S.-ownership test applies); NGB contracting (unverified)"
+ },
+ "budget": {
+  "program_or_line": "No dedicated line. Public safety: FY2025 HSGP $1.008B (SHSP $373.5M, UASI $553.5M) plus AFG and local operating budgets, all fragmented and grant-cycle-driven; Guard: state active duty/O&M funds, no software line found; allied: DIANA EUR 100k grants, CIHBw pilot budgets",
+  "evidence": "FEMA FY25 HSGP NOFO (FACT, HIGH) establishes the grant pool but no evidence of any agency buying TAK-native structured-forms software under it; DHS SAVER 2022 shows agencies already buy IMS products in this category (FACT); Guard and licensing-buyer budgets: Public evidence insufficient.",
+  "source_url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Direct commercial SaaS/licence sales to state fire agencies and IMTs via TAK Public Safety community and WFTAK, with open-source core on TAK.gov/GitHub; parallel NATO DIANA 2028-cohort application and CIHBw pilot via the German founder",
+  "sequence": [
+   "1. Open-source core + paid hosted/enterprise tier; pilot with one state wildland agency or IMT and one Guard battalion on drill weekends (no-cost MOU)",
+   "2. First paid agency contracts via cooperative purchasing/state contract; DHS S&T FRG engagement (no ownership test for CRADA-style collaboration; SBIR would require >50% U.S.-person ownership - needs counsel)",
+   "3. DIANA 2028 cohort or CIHBw pilot for the allied variant; TAK plugin listing on TAK.gov (CIV first)",
+   "4. Only after paying adoption: approach Onebrief, TPC, Ditto or Systematic for integration/licensing or acquisition"
+  ],
+  "eligibility_notes": "Public-safety and allied sales carry no SBIR-style ownership test; the Indonesian founder can work on an EAR99/open-source civil codebase (E07-F17, E07-F25); DHS S&T or Army SBIR requires >50% U.S.-citizen/permanent-resident ownership (13 CFR 121.702) which this cap table likely fails without restructuring; a Guard/military variant that adds military-specific features risks classification drift and any hands-on integration for a foreign military may be an ITAR 'defense service' (E07-F15) - export-control counsel needed before allied pilots; no legal judgment made."
+ },
+ "competition": [
+  {
+   "company": "TAK Product Center (government) - TAK Server Data Sync / missions",
+   "how_close": "Occupies the 'survive disconnect' half for map items, files, logs, chat, free; could add form objects natively",
+   "evidence": "Google Play Data Sync listing; OpenTAKServer Mission API docs (2025-2026)"
+  },
+  {
+   "company": "Ditto (Edge Sync plugin for ATAK)",
+   "how_close": "Occupies the CRDT-merge-for-TAK layer G34 wants to license; ~$136M funded; USSOCOM use claimed (company)",
+   "evidence": "Corpus B03 record; RxDB/PowerSync comparison pages 2025-2026"
+  },
+  {
+   "company": "Resgrid IC",
+   "how_close": "Direct public-safety competitor: offline-first ICS-201 timeline with local queue and replay (company claim)",
+   "evidence": "https://resgrid.com/apps/ic (2025-2026)"
+  },
+  {
+   "company": "Tablet Command / Intterra / Juvare WebEOC / Veoci",
+   "how_close": "Established IMS vendors with ICS forms, resource tracking, enterprise contracts; could add offline merge",
+   "evidence": "DHS SAVER IMS market survey 2022-01-05; tabletcommand.com"
+  },
+  {
+   "company": "Onebrief / Anduril-Rivet (SBMC) / Systematic SitaWare Edge",
+   "how_close": "Own the military orders/tasking layer at echelons above and below; Onebrief offline 'underway' (company); SBMC ATAK-backward-compatible",
+   "evidence": "Business Wire 2026-06-26; DefenseScoop 2025-09-08 and 2026-08-17; systematic.com"
+  },
+  {
+   "company": "Immersive Wisdom",
+   "how_close": "Adjacent low-bandwidth collaboration with a DoD sole-source vehicle ($25M ceiling, not revenue)",
+   "evidence": "E03-F29; corpus B02"
+  },
+  {
+   "company": "Open-source CRDT libraries (Automerge, Yjs, RxDB, PowerSync, ElectricSQL) and community TAK projects (FreeTAKTeam, Meshtastic ATAK forwarder)",
+   "how_close": "Commoditize the merge model; community could build the forms layer as open source",
+   "evidence": "rxdb.info, powersync.com, meshtastic.org blog 2026-02"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes. TPC can add structured form objects to Data Sync missions; Ditto can ship a schema pack on its existing ATAK plugin; Tablet Command/Intterra can add offline multi-writer merge; Onebrief/Anduril already cover the military layer; Motorola/Genasys-class public-safety incumbents could buy any of them. Each could do so within one product cycle; none has a reason to license a merge model they can take from open source.",
+  "why_startup_still_wins_or_reject": "Reject as a venture. The only durable asset would be a large installed base of agencies using an open standard the startup steers (a community/standards play, e.g., a de facto ICS-object schema for TAK), which is a slow, low-margin path better suited to a nonprofit or an open-source-plus-services company. It can win as a small, bootstrapped niche product or as an acquihire by Ditto, TPC contractors (PAR Government), Onebrief or an IMS vendor; that is a feature/acquihire path, not venture scale."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$80k-$150k (two founders, one contract iOS/Android engineer, commercial EUDs and Meshtastic radios, 4-6 months)",
+  "credible_military_demo_usd": "$400k-$900k (12 months: one Guard drill-weekend field test, one state wildland exercise, TAK.gov CIV plugin listing, security hardening, a part-time former IC/planning section chief and a former battalion S3/S4 as advisors)",
+  "first_production_deployment_usd": "$1.5M-$4M (hosted multi-tenant service, FedRAMP-equivalent/StateRAMP or on-prem packaging, CJIS-adjacent security reviews, 12-24 month SLED sales cycle, support for 10-30 agencies; Guard deployment would add ATO/CMMC)",
+  "assumptions": "Software-only, unclassified, EAR99 design; public safety first; no SBIR; analyst estimates (HYPOTHESIS, LOW confidence); lower than parent gaps because no NGC2/CUI environment is needed"
+ },
+ "expertise_required": [
+  {
+   "role": "Former incident commander / planning section chief (Type 1-2 IMT) or state fire technology lead",
+   "why": "ICS forms workflow, operational-period rhythm and agency purchasing are tacit; without this the product mis-models the forms and no agency trusts it",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Mobile/offline-sync engineer (CRDT, Android/iOS, TAK SDK)",
+   "why": "Core build; the engineer co-founder can cover Android/CRDT but iOS companion and TAK Server extension need depth",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Former Guard battalion S3/S4",
+   "why": "Only if the Guard variant is pursued; needed for order/report formats and drill-weekend access",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "SLED/public-safety sales lead with agency references",
+   "why": "Public-safety buying runs on references, conferences and grant cycles; two students have none",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Export-control counsel (part-time)",
+   "why": "Keep the codebase EAR99 and avoid 'defense service' exposure when piloting with Guard or allied units",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "low",
+  "explanation": "A civil incident-management product on open-source ATAK-CIV/TAK Server with public ICS schemas is ordinarily commercial software (EAR99 is plausible but must be confirmed by counsel); no ATO, CUI or clearance is needed for public-safety pilots, though agencies may require CJIS-adjacent and state security reviews and StateRAMP for hosted services. The burden rises to medium for Guard use (Army network ATO, CMMC if CUI flows, TAK-GOV gating) and for allied pilots (possible ITAR defense-service exposure when integrating for a foreign military).",
+  "non_us_person_founder_note": "On the public-safety, EAR99/open-source path the Indonesian founder is largely unconstrained (E07-F17); SBIR/STTR (DHS or Army) would require a >50% U.S.-person-owned cap table (13 CFR 121.702); any Guard/military variant with controlled technical data or a foreign-military integration would need counsel on deemed exports and defense services; no legal judgment made."
+ },
+ "classification_dependence": "none",
+ "dual_use_potential": {
+  "level": "high",
+  "explanation": "The product is dual-use by construction: NIMS ICS forms for public safety and doctrinal orders/reports for Guard/allied units share the same object-and-merge core; TAK itself is used by both communities. The catch is that dual-use here means two small, fragmented markets rather than one large commercial one."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "workflow",
+   "deployment footprint",
+   "integrations"
+  ],
+  "explanation": "Weak. CRDT merge is commoditized (Automerge/Yjs/Ditto); schemas are public standards; TAK is government-owned and free; switching cost for an agency is low. Only an installed base across many agencies and IMTs, plus becoming the de facto TAK ICS-object schema, would create modest lock-in - and that is a community/standards outcome, not a proprietary one."
+ },
+ "why_now": "Public-safety TAK adoption has crossed from pilots to routine use (DHS S&T iTAK release, WFTAK interagency server, TAK Public Safety nonprofit founded 2024, FirstNet-paired municipal use 2025); cheap LoRa mesh (Meshtastic ATAK forwarder; Feb 2026 iOS built-in TAK server) makes disconnected multi-node operation common outside the military; CRDT libraries are production-grade; and the Army's own 2025-2026 DDIL focus (Ivy Sting 4, SBMC ATAK compatibility) has normalized the idea of structured content over tactical links. Against this, the same period saw Ditto, Resgrid and TPC Data Sync ship the adjacent pieces, so the window is for a niche product, not a category.",
+ "killer_risk": "The venture thesis rests on licensing a merge model that is already commoditized (open-source CRDTs; Ditto's funded ATAK sync plugin) into markets that are either fragmented and grant-sized (thousands of public-safety agencies, iOS-majority devices that reject plugins, adoption gated by training) or unfunded at this layer (Guard has no program office or line; allied entry is EUR 100k DIANA grants and CIHBw pilots) - so even success is a small SaaS/open-source-plus-services business or an acquihire, not a venture-scale company, and TPC or an IMS vendor can add structured offline forms in one release.",
+ "market_stage": "Transitioning",
+ "procurement_signal_timeline": [
+  {
+   "year": "2018",
+   "event": "Army acknowledges sustainment brigades must build their own sustainment COP",
+   "source_url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment"
+  },
+  {
+   "year": "2022",
+   "event": "DHS SAVER incident management software market survey (multi-vendor category established)",
+   "source_url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf"
+  },
+  {
+   "year": "2024",
+   "event": "TAK Public Safety 501(c)(3) founded to lower adoption barriers; Immersive Wisdom DoD sole-source low-bandwidth collaboration vehicle ($25M ceiling)",
+   "source_url": "https://www.takps.org/"
+  },
+  {
+   "year": "2025",
+   "event": "FY2025 HSGP $1.008B NOFO; Green Bay Fire TAK+FirstNet at NFL Draft; SBMC prototype OTAs mandate ATAK compatibility (2025-09-08); Ditto $82M Series B (2025-03)",
+   "source_url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo"
+  },
+  {
+   "year": "2026",
+   "event": "Meshtastic iOS built-in TAK server (Feb); Ivy Sting 4 battalion DDIL test (Feb); DIANA 2027 challenges incl. operational resilience and responsive logistics (Jun 2, submissions closed Jul 3); Onebrief offline 'underway' (Jun) and Army enterprise IDIQ (Sep 17)",
+   "source_url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html"
+  }
+ ],
+ "allied_extension": "Somewhat more compelling for access, not for scale: NATO DIANA's 2027 'operational resilience in contested environments' and 'responsive logistics' challenges match the product almost verbatim (FACT, 2026-06-02), the German founder can use CIHBw pilots, and NATO's Rapid Adoption Action Plan (2025-06-25) allows prototype-to-procurement without recompetition; but the 2027 window closed on 2026-07-03 (next cohort 2028), awards are EUR 100k, Systematic SitaWare Edge already offers tasking in NATO armies, Bundeswehr tactical networking is contracted to Rheinmetall/blackned through 2029 (E06-F13), and integrating for a foreign military can trigger ITAR defense-service questions for a U.S. entity (E07-F15) - so allies add a second small channel and credibility, not a large market.",
+ "search_log": [
+  {
+   "query": "Ditto \"Edge Sync\" plugin ATAK CRDT offline 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "\"Team Awareness Kit\" OR \"TAK\" public safety wildland fire \"CAL FIRE\" OR FEMA OR \"DHS S&T\" first responders adoption 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "\"National Guard\" ATAK OR \"Team Awareness Kit\" domestic response hurricane OR wildfire 2025 OR 2026",
+   "useful": true
+  },
+  {
+   "query": "incident command software offline \"ICS 204\" OR \"ICS 201\" \"Tablet Command\" OR Intterra OR Perimeter OR \"WebEOC\" mesh disconnected 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "TAK Server \"Data Sync\" OR \"mission\" ATAK plugin forms \"ICS\" OR \"SITREP\" OR \"9-line\" structured reports plugin 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "NATO DIANA 2027 challenges list \"command and control\" OR \"tactical\" OR \"contested\" June 2026",
+   "useful": true
+  },
+  {
+   "query": "\"Homeland Security Grant Program\" OR \"UASI\" OR \"Assistance to Firefighters\" grant funded \"Team Awareness Kit\" OR \"incident management software\" purchase 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "iTAK plugins support \"iTAK\" \"plugin\" iOS TAK third-party plugins 2025 OR 2026 tak.gov",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.hstoday.us/federal-pages/dhs/dhs-sts-team-awareness-kit-expands-its-reach/",
+   "title": "DHS S&T's Team Awareness Kit Expands Its Reach",
+   "pub_date": "not captured",
+   "tier": 2
+  },
+  {
+   "url": "https://tak.gov/solutions/emergency",
+   "title": "TAK.gov - Good Situational Awareness Saves Lives (emergency solutions)",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://wftak.wildfire.gov/pages/what-is-wftak",
+   "title": "What is WFTAK?",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://www.firehouse.com/technology/blog/55396422/green-bay-wi-fire-pairs-team-awareness-kit-with-firstnet-for-real-time-command",
+   "title": "Green Bay, WI, Fire Pairs Team Awareness Kit with FirstNet",
+   "pub_date": "2025",
+   "tier": 2
+  },
+  {
+   "url": "https://www.takps.org/",
+   "title": "TAK Public Safety",
+   "pub_date": "2024-2026",
+   "tier": 2
+  },
+  {
+   "url": "https://meshtastic.org/blog/tak-server-integration-ios/",
+   "title": "No Plugins, No Problem: Integrating TAK, Meshtastic, and iOS",
+   "pub_date": "2026-02",
+   "tier": 2
+  },
+  {
+   "url": "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin",
+   "title": "ATAK Plugin: Data Sync",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://docs.opentakserver.io/mission_api.html",
+   "title": "Mission API/Data Sync - OpenTAKServer 1.7.0 documentation",
+   "pub_date": "2025-2026",
+   "tier": 2
+  },
+  {
+   "url": "https://resgrid.com/apps/ic",
+   "title": "Resgrid IC - Digital Incident Command Board (ICS)",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.tabletcommand.com/",
+   "title": "Tablet Command - Incident Management Software",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf",
+   "title": "DHS SAVER Incident Management Software for Emergency Response Market Survey Report",
+   "pub_date": "2022-01-05",
+   "tier": 1
+  },
+  {
+   "url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo",
+   "title": "FY 2025 Homeland Security Grant Program NOFO",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://rxdb.info/articles/alternatives/ditto-alternative.html",
+   "title": "RxDB as a Ditto Alternative",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://powersync.com/blog/ditto-vs-powersync",
+   "title": "Ditto vs PowerSync",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html",
+   "title": "NATO DIANA unveils six new challenges",
+   "pub_date": "2026-06-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.diana.nato.int/resources/site1/general/challenges/challenges2027/challenge_pdf/challenge%20statements_2027.pdf",
+   "title": "DIANA 2027 challenge statements (NATO UNCLASSIFIED)",
+   "pub_date": "2026-06",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nationalguard.mil/Features/2025/Wildfire-Response/",
+   "title": "National Guard 2025 Wildfire Response",
+   "pub_date": "2025",
+   "tier": 1
+  },
+  {
+   "url": "https://www.civtak.org/tag/national-guard/",
+   "title": "CivTAK - National Guard archives",
+   "pub_date": "various",
+   "tier": 3
+  },
+  {
+   "url": "https://www.linkedin.com/posts/cpec2in_ngc2-futuresandconceptscommand-armyt2com-activity-7425616767848448000-BI2u",
+   "title": "CPE C2IN Ivy Sting 4 post",
+   "pub_date": "2026-02",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2025/09/08/army-sbmc-contract-awards-anduril-rivet-soldier-borne-mission-command/",
+   "title": "Army SBMC contract awards to Anduril, Rivet",
+   "pub_date": "2025-09-08",
+   "tier": 2
+  },
+  {
+   "url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software",
+   "title": "Onebrief awarded Army enterprise contract",
+   "pub_date": "2026-09-17",
+   "tier": 3
+  },
+  {
+   "url": "https://api.army.mil/e2/c/downloads/2025/08/19/5d3af5ba/lg-da-19-aug-25.pdf",
+   "title": "Army LG-DA 19 Aug 25",
+   "pub_date": "2025-08-19",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment",
+   "title": "Developing a common operational picture for sustainment",
+   "pub_date": "2018",
+   "tier": 1
+  },
+  {
+   "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "title": "AndroidTacticalAssaultKit-CIV",
+   "pub_date": "ongoing",
+   "tier": 1
+  },
+  {
+   "url": "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export",
+   "title": "BIS - What is a deemed export",
+   "pub_date": "current",
+   "tier": 1
+  },
+  {
+   "url": "https://mergers.whitecase.com/highlights/boots-off-the-ground-defense-tech-ma-skyrockets-in-us-and-europe",
+   "title": "Defense tech M&A skyrockets (White & Case)",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan",
+   "title": "NATO Rapid Adoption Action Plan summary",
+   "pub_date": "2025-06-25",
+   "tier": 1
+  }
+ ]
+}

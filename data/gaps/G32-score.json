@@ -1,0 +1,141 @@
+{
+ "id": "G32",
+ "title": "Software-only multi-node TDOA/AoA interference and rogue-emitter geolocation engine on commodity SDR nodes, plus an offline-first spectrum-management workflow client (JRFL/SFAF assignments, interference tickets) for installation, range and shared-band spectrum managers",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Interference at installations and ranges is a recurring operational nuisance that occasionally becomes mission-impacting (range ops halted, GPS interference, unauthorized emitters), and the doctrinal JSIR process exists precisely because of it (CJCSM 3320.02E, FACT MEDIUM); but it is not a survival issue and the funded responses (S2AS 'EMI resolution', Hidden Level base sensing) show the acute end is being addressed. 3."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 3,
+   "rationale": "EMI reporting and assignment work are continuous at every installation (DISA runs a five-year helpdesk contract for Spectrum XXI/JSIRO/JSDR/E2ESS, FACT MEDIUM) and every 25E works JRFL/assignments daily; but the specific event this product serves - an unknown emitter that must be geolocated - is episodic per site (INFERENCE, no frequency data found). 3."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score 1 explained: FACT - no RDT&E/procurement line, program of record, SBIR topic, sources-sought or award exists for third-party installation interference-geolocation software or an offline spectrum-management client (this session's search and corpus E04-F31 both null). All adjacent money is committed to other vendors: Hidden Level $100M OTA ceiling (PR Newswire 2026-08-05), S2AS $350M ceiling (cpeisw 2026-06-01), REWSI ~$196M (DefenseScoop 2026-09-11), DISA EMBM-J recompete and SOSC support. Not 0 only because installation O&M does buy spectrum tools (handhelds, some CRFS/R&S nodes) and civil pilots are possible."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "No CSO/OTA solicits this scope; DISA DSO is a captive buyer with incumbent contractors; installation purchases are micro-purchase/GSA-scale with no enterprise requirement owner; SBIR is closed to this cap table (13 CFR 121.702, FACT HIGH). OTA/CRADA paths exist in principle (E07-F28) and the Army showed non-traditionals can reach production fast (REWSI), which keeps this at 2 rather than 1."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "TDOA/AoA geolocation on low-cost SDR arrays is published and demonstrated (NAVIGATION 2026 paper; R&S white paper; KrakenSDR/RDF Pro; Wavelet Lab), GPSDO timing is cheap, and the offline-first client is conventional engineering (CRDT sync, TAK plugin). Not 5 because calibration drift, multipath in dense installation RF and false-fix suppression at whole-base scale are real engineering risk on commodity nodes (INFERENCE, MEDIUM)."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 4,
+   "rationale": "Software-only with bought-not-built nodes: PoC $40-120k fits founder capital with margin; a CRADA-scale pilot ($0.5-1.5M) does not, but $250k reaches a demonstrable product. 4."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "A campus demo with CEP curves and an offline ticket queue is achievable in 3-6 months; a demo an installation or DISA JSC would credit requires site access and real (CUI) assignment data through a sponsor the founders do not have, pushing a credible demo to 9-15 months (INFERENCE). 3."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 3,
+   "rationale": "RF data is self-collectable on receive-only SDRs and the JSIR/SFAF formats are public enough for synthetic data; but real assignments, JRFL (may be classified) and JSIR records are CUI available only through a sponsor and not to the Indonesian founder (E07-F30, FACT MEDIUM). 3."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "A civil-scoped, receive-only monitoring product is plausibly EAR rather than ITAR, no clearance is needed for the MVP, and encryption is a notification issue (E07-F32); but DF features marketed to military users can drift toward USML Category XI, CUI handling triggers DFARS 7012/CMMC, and SBIR ownership fails - all requiring counsel before design. Medium burden, 3."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "The whole MVP is unclassified on commercial parts, open formats and synthetic assignment data. Not 5 because classification dependence is 'eventually': real JRFL entries can be classified, and installation emitter inventories are CUI from the first pilot."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 1,
+   "rationale": "Score 1 explained: every tier is occupied. Premium: R&S hybrid AOA/TDOA, CRFS RFeye AoA/TDoA/PoA, Keysight KSMS TDoA (vendor pages, FACT MEDIUM on existence). Funded base/range sensing: Hidden Level $100M OTA (FACT HIGH). Low-cost commodity-SDR software: Distributed Spectrum ($29M raised, AFRL SBIRs incl. localization algorithms, FACT MEDIUM), Wavelet Lab (FACT MEDIUM), KrakenSDR RDF Pro. Tactical EMI: 3dB Labs S2AS and REWSI vendors (FACT HIGH). Workflow: DISA JSIRO/Spectrum XXI/EMBM-J with Palantir and the GEMSIS contractor (FACT MEDIUM). Nothing is left uncontested."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "Premium vendors are expensive and DISA's tools are legacy and online-only, which is a real soft spot; but Distributed Spectrum and Wavelet Lab already attack the low-cost seam, Hidden Level is freshly capitalized, and DISA can add offline modes through contractors it already pays. 2."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "File-level SFAF import and CoT/TAK plugin output are open (FACT HIGH), and CBRS SAS interfaces are WInnForum-standard; but the systems of record that make the workflow client real - Spectrum XXI, JSDR, JSIRO, EMBM-J - have DISA-controlled, non-public interfaces, and installation C-UAS dashboards are vendor-controlled. A startup owns none of the military interfaces. 2."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score 1 explained: the algorithms are public (R&S white paper; ION 2026 paper), the hardware is commodity, an open-source floor (KrakenSDR/Heimdall/RDF Pro) exists, and the workflow client is copyable by DISA's or PM EW&C's existing contractors. The only compounding assets - per-site calibration footprint and a government sponsor relationship - are small and government-controlled. No network effects."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "Real civil buyers exist (private-5G/CBRS operators, telcos, airports/ports for GPS interference, regulators) and shared-band policy keeps monitoring salient (NTIA Advanced DSS demonstration; NIST CBRS SEA program, FACT MEDIUM); but the civil market is thin and price-sensitive, CBRS interference is handled by SAS administrators and government labs, premium vendors already serve it, and Aurora Insight is a failure precedent (FACT MEDIUM). 3."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Adjacent expansions run straight into killed or occupied lanes: sensor-agnostic EM COP fusion (parent G11, killed), C-UAS RF layer (Hidden Level/Anduril), enterprise spectrum management (DISA/Palantir), allied regulators (R&S/CRFS home turf). The user base (installation/range spectrum managers plus a few thousand 25Es) is small. 2."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 3,
+   "rationale": "A per-site subscription with recurring ticket volume and node additions is plausible and civil SaaS could renew annually; but per-site contract value is small (tens of thousands at most, INFERENCE) and government sustainment would flow through an integrator's vehicle. 3."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 3,
+   "rationale": "This is the most founder-accessible form in the G21/G11 family: software-only, commercial hardware, plausibly EAR-scoped so the Indonesian founder can work on the core, $250k sufficient for the PoC, and a strong engineer plus a product/finance founder can build it. Missing but recruitable: an RF/DSP array-calibration engineer, a former spectrum-manager advisor and export counsel (three fatal-if-absent roles). SBIR is closed and CUI must be walled off. The fit is good for building the product and poor for reaching a buyer with signature authority. 3."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 3.3,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No requirement owner, program office, line or vehicle exists for this scope; the persistent base/range sensing money went to Hidden Level (OTA), tactical EMI detection to 3dB Labs/REWSI vendors, and the ticket/assignment workflow is owned by DISA DSO (JSIRO, Spectrum XXI, EMBM-J recompete) which can add offline modes via its own contractors; installation spectrum managers are records/compliance staff with micro-purchase authority; the civil shared-band side is served by SAS administrators and NIST/ITS/MITRE measurement programs and carries the Aurora Insight failure precedent. The chain breaks at REQUIREMENT OWNER, PROGRAM OFFICE, BUDGET and VEHICLE - major penalty applies."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "The geolocation engine is commodity: R&S, CRFS and Keysight publish and sell hybrid AOA/TDOA systems; Wavelet Lab and KrakenSDR RDF Pro already sell software-on-commodity-SDR fusion; Distributed Spectrum ($29M, AFRL SBIRs incl. localization algorithms) sits exactly on the low-cost seam with DoD relationships; Hidden Level holds the base/range OTA. The workflow client is copyable by the GEMSIS/EMBM-J contractors (incl. Palantir) or the EWPMT-X integrator on the government's request. No incumbent needs six months - most already have it."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 3,
+   "summary": "The narrow form is genuinely buildable and demonstrable for under $120k on commercial parts, plausibly EAR-scoped so the non-U.S.-person founder can work on the core (counsel required) - so feasibility does not kill it. What refutes it is access: a credible demo needs an installation or DISA sponsor and CUI assignment/JSIR data that the founders cannot obtain and the Indonesian founder cannot touch, SBIR is closed by ownership, and the only reachable buyers (civil pilots, an OEM license) cap the outcome at a small business. Strength 3: it survives as a consultancy/feature path, not as a company."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "Kill as a venture, with the major chain penalty applied: PROBLEM -> USER is intact (interference at installations/ranges is real and the JSIR process is doctrinal), but REQUIREMENT OWNER, PROGRAM OFFICE, BUDGET and VEHICLE do not exist for third-party interference-geolocation software or an offline spectrum client (null search this session; corpus E04-F31 null), and every adjacent funded buyer is already occupied - Hidden Level ($100M OTA ceiling, 2026-07-30) for base/range passive sensing, 3dB Labs S2AS ($350M ceiling, 2026-06-01, explicitly covering EMI resolution) and REWSI vendors (~$196M, Aug-Sep 2026) for tactical spectrum, DISA DSO (JSIRO, Spectrum XXI, EMBM-J SA recompete) for the workflow of record. The technology is commodity (R&S/CRFS/Keysight at the top; Distributed Spectrum, Wavelet Lab and KrakenSDR RDF Pro at the bottom; ION 2026 paper shows the algorithms are public), so potential moat scores 1 and competitive intensity 1. Market attractiveness 2.3 is below the bar even though founder fit 3.3 is the best in the G21/G11 family - the team can build it but nobody with signature authority is set up to buy it, which is the definition of a consultancy/feature path. Decisive reason: no buyer with a budget and vehicle for this scope, and the price-and-usability seam it targets is already contested by funded low-cost vendors. Scores are heuristics, not facts.",
+ "narrower_version_if_borderline": "Not borderline. For the record, the only residual that could pay its way is a services/IP-licensing business: (a) license the self-calibrating TDOA/AoA fusion module to a sensor OEM or integrator that lacks it, or (b) build the offline JSIR/SFAF client as an open ATAK-CIV plugin under a CRADA with one installation or DISA JSC and sell sustainment as a subcontractor - explicitly not venture-scale.",
+ "most_important_question_answer": "If two exceptionally capable founders spent $250,000 on G32 today, they should build nothing custom in hardware: buy six KrakenSDR/RTL-SDR nodes with GPSDO timing, write the self-calibrating TDOA/AoA fusion service with honest per-fix CEP and a false-fix model tuned on a dense campus RF environment, add an SFAF-import authorized/unauthorized classifier and an offline JSIR-format ticket queue as an ATAK-CIV/WinTAK plugin, and spend under $120k doing it. They should show it first to one Air Force base spectrum manager and one Army installation NEC spectrum manager reached through a National Guard or ROTC relationship, and in parallel to one private-5G/CBRS operator and one test-range frequency office, and second to a sensor OEM (Distributed Spectrum, Heaviside, Hidden Level) as a licensable module. The demo would prove that cheap, imperfectly synchronized nodes locate a cooperative emitter to a stated CEP in under 30 minutes versus hours of drive-testing, and that a ticket can be produced offline and synced later. The customer would care because a technician's day is the current cost of every unknown-emitter complaint and because Spectrum XXI/JSIRO are online-only. But the honest answer is that an incumbent does not need to crush them: R&S, CRFS and Keysight already sell the capability and can add a lite tier; Distributed Spectrum and Wavelet Lab already sell the low-cost version; DISA can add offline modes through the contractors it already pays; and the installation spectrum manager who loves the demo cannot sign more than a micro-purchase. The milestone that would justify $2-5M is either an enterprise agreement from IMCOM/AFIMSC or DISA DSO designating the offline client, or an OTA from PM EW&C or OUSW(R&E) naming the fusion module, or more than $1M ARR from civil sites - and none of those owners has signalled the requirement. Absent that signal within 12 months, it fails, and the $250,000 should go to a gap where the founders can own a seam a program office is actually funding.",
+ "bear_case_summary": "No requirement owner, program office, budget line, SBIR topic or vehicle exists for this scope; the adjacent money is committed to Hidden Level (OTA), 3dB Labs (S2AS, which explicitly covers EMI resolution), REWSI vendors and DISA's own tool contractors; the geolocation algorithms are published and sold at every price tier (R&S/CRFS/Keysight; Distributed Spectrum; Wavelet Lab; KrakenSDR RDF Pro); the workflow client is copyable by DISA/EWPMT-X contractors; the installation user has no signature authority; the civil market is thin with the Aurora Insight precedent; the cap table fails SBIR and CUI must be walled from the non-U.S.-person founder; potential moat 1, competitive intensity 1. Three skeptics refute at strengths 4, 4 and 3.",
+ "bull_case_summary": "The pain is real and doctrinal (JSIR process; DISA running a five-year support contract for online-only tools), the user exists at every installation and range, cheap coherent SDRs and a 2026 peer-reviewed low-cost jammer-localization result make the engine buildable, the MVP is fully unclassified and within founder capital, the product can plausibly be scoped to EAR so the Indonesian founder can work on the core, shared-band policy (NTIA Advanced DSS demonstration, NIST CBRS SEA, GAO-26-107873) keeps interference monitoring salient, and the Army proved in 2026 that cheap spectrum sensors get bought at production scale. This adds up to a credible small software business or licensable module, not a venture-scale company.",
+ "confidence": "MEDIUM"
+}

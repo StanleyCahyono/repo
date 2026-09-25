@@ -1,0 +1,141 @@
+{
+ "id": "G33",
+ "title": "Independent track-provenance and after-action audit tool for C-UAS and unit drone operations, with a friendly-flight declaration adapter (MAVLink/GCS to CoT flight-intent extension) and an offline-first UAS operator/airframe qualification and readiness ledger",
+ "scores": [
+  {
+   "n": 1,
+   "criterion": "severity_of_user_pain",
+   "score": 3,
+   "rationale": "Fratricide/hesitation and hand-marked friendly flights are severe (Ukraine ~50% friendly losses pre-DroneID, MWI IFF recommendation), but this narrow form deliberately excludes live identification; the pain it addresses is post-hoc reconstruction (felt by oversight staff a few times per exercise) and administrative readiness tracking (annoying, not mission-critical). Moderate."
+  },
+  {
+   "n": 2,
+   "criterion": "frequency_of_pain",
+   "score": 4,
+   "rationale": "Every flight requires a friendly declaration and an operator-currency check, every CTC serial produces an AAR, and 12,080+ Gauntlet drones plus 2,500+ X10Ds make this daily at unit level. Frequent even if shallow."
+  },
+  {
+   "n": 3,
+   "criterion": "budget_evidence",
+   "score": 1,
+   "rationale": "Score 1 because no program element, RFI, SBIR/xTech topic or CSO call names any of the three functions; the records function is already funded as DTMS, the audit function as government test/oversight labor, and the adapter as a free TAK plugin. The only named money in the vicinity is a $500k DIU prize pool for theater-level blue-object data. Public evidence insufficient for a line."
+  },
+  {
+   "n": 4,
+   "criterion": "procurement_accessibility",
+   "score": 2,
+   "rationale": "Open on-ramps exist (ATAK-CIV plugin, xTech, JIATF-401 CSO and industry demos, OTAs with no citizenship test) but none is attached to a funded requirement for this product; access is by unit invitation and prize money."
+  },
+  {
+   "n": 5,
+   "criterion": "technical_feasibility",
+   "score": 4,
+   "rationale": "All three pieces are commodity software (CoT schema extension, offline sync, log replay/diff, record matching); one strong engineer can build them. The only hard part is data access, which is scored elsewhere."
+  },
+  {
+   "n": 6,
+   "criterion": "feasibility_with_250k",
+   "score": 3,
+   "rationale": "Adapter, ledger and a range-data audit demo cost $40-90k, well inside $250k; but a credible military demo needs sponsor logs, a US-person enclave, counsel and an exercise slot ($400-900k), so the capital buys a PoC and a pilot, not the milestone that matters."
+  },
+  {
+   "n": 7,
+   "criterion": "time_to_credible_demo",
+   "score": 3,
+   "rationale": "Adapter and ledger in 8-12 weeks, range-data replay in 4-6 months; a demo on real exercise logs is 9-15 months away and depends entirely on a sponsor that does not yet exist."
+  },
+  {
+   "n": 8,
+   "criterion": "availability_of_required_data",
+   "score": 2,
+   "rationale": "MVP data is self-generated and open (MAVLink, commercial sensors, Remote ID, synthetic ACMs). The data that would make the audit credible - Lattice/FAAD C2 engagement logs and exercise ground truth - is CUI, vendor-format and sponsor-gated; real training records contain PII and live in DTMS."
+  },
+  {
+   "n": 9,
+   "criterion": "regulatory_accessibility",
+   "score": 3,
+   "rationale": "Two of three pieces are EAR99-level and buildable by both founders on open-source TAK; the audit half touches export-controlled CUI that is effectively US-person-only, needs a TCP and counsel, plus TPC plugin signing and an ATO for fielded use. Medium burden, concentrated in the only valuable piece."
+  },
+  {
+   "n": 10,
+   "criterion": "ability_to_start_unclassified",
+   "score": 4,
+   "rationale": "Yes: ATAK-CIV, PX4/ArduPilot, commercial c-UAS sensors and synthetic data support a fully unclassified start for all three functions; classification enters only with real exercise captures."
+  },
+  {
+   "n": 11,
+   "criterion": "competitive_intensity",
+   "score": 2,
+   "rationale": "Each function already has an occupant: the free government UAS Tool and Auterion CoT feeds (adapter), DTMS plus AirData/Aloft/DroneSense and Skydio Cloud (ledger), Lattice/FAAD C2 logs, civil forensics vendors and government test teams (audit), and certified hardware IFF for friendly ID. Not a 1 only because no single vendor sells the bundle."
+  },
+  {
+   "n": 12,
+   "criterion": "incumbent_vulnerability",
+   "score": 2,
+   "rationale": "Incumbents are structurally unmotivated to grade their own fusion, which is the one genuine opening; but they own the logs, the export formats and the JIATF-401 relationship, and the government already sources independence from its own testers rather than from a vendor."
+  },
+  {
+   "n": 13,
+   "criterion": "integration_feasibility",
+   "score": 2,
+   "rationale": "Every interface is controlled by someone else: CoT schema and plugin signing (TPC), C2 log exports (Anduril, Northrop), drone telemetry (Skydio, Auterion, Gauntlet vendors), training records (DTMS), ACOs (TAIS). A CIV plugin integrates trivially; anything beyond it needs cooperation the startup cannot compel."
+  },
+  {
+   "n": 14,
+   "criterion": "potential_moat",
+   "score": 1,
+   "rationale": "Score 1 because nothing compounds: the data belongs to the government or the C2 vendor, the algorithms are commodity, the interfaces are owned by others, and a TAK plugin can be cloned or superseded by the TAK Product Center. Only a unit workflow and an O/C-T relationship would be proprietary, and neither transfers."
+  },
+  {
+   "n": 15,
+   "criterion": "dual_use_potential",
+   "score": 3,
+   "rationale": "Civil C-UAS incident forensics and public-safety drone compliance are real unclassified markets, but crowded (SkySafe/D-Fend/Dedrone forensics; AirData/Aloft/DroneSense consolidating under Versaterm)."
+  },
+  {
+   "n": 16,
+   "criterion": "expansion_potential",
+   "score": 2,
+   "rationale": "Could grow sideways into exercise data analytics or test-and-evaluation tooling, both services-shaped and small; no path to a platform."
+  },
+  {
+   "n": 17,
+   "criterion": "repeat_purchase_potential",
+   "score": 2,
+   "rationale": "Per-exercise audit support and per-unit ledger seats are plausible but small and services-like; a prize or pilot does not imply recurring purchase."
+  },
+  {
+   "n": 18,
+   "criterion": "founder_team_fit",
+   "score": 2,
+   "rationale": "The engineer can build all of it on ATAK-CIV; but the team lacks the fatal-if-absent O/C-T or JICO insider and export counsel, the non-US-person co-founder is excluded from the audit data, neither founder is clearance-eligible for years, SBIR is unavailable at the current cap table, and the natural business shape (test-support services) does not fit two students seeking a venture-scale company."
+  }
+ ],
+ "market_attractiveness": 2.3,
+ "founder_fit": 2.8,
+ "red_team": {
+  "mode": "single-agent light path",
+  "market": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "No requirement owner, program office, budget line or solicitation exists for any of the three functions (searches 2026-09-25: none found). The records function is already funded as DTMS; the friendly-flight bridge is a free government TAK plugin plus a schema the TAK Product Center owns; the audit function is funded as government test/oversight labor and FFRDC data collection (RECALL), and the customer's revealed preference at Falcon Peak 26.2 (2026-09-23) was to make the incumbent stack the measurement baseline. The natural commercial shape is a test-support/SETA services engagement or a free plugin - consultancy drift, single-digit buyers, exercise-only pain for the audit half. Analyst assessment: sustained; the chain breaks at requirement owner and budget, triggering the major penalty."
+  },
+  "competition": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "Every piece has an occupant: TAK UAS Tool (free, government, MAVLink-class drones into ATAK as CoT since 2021) and Auterion's CoT feed for the adapter; DTMS, Skydio Cloud and mature AirData/Aloft/DroneSense compliance tools (consolidating under Versaterm 2025-26) for the ledger; Lattice/FAAD C2 logs, civil forensics vendors (D-Fend, SkySafe) and government test organizations for the audit; certified micro-IFF hardware (Sagetech MX12B, uAvionix, ACS optical) for friendly identity. Anduril and Northrop own the export formats and can ship replay/lineage as a feature; TPC can add a flight-intent field to the UAS Tool in one release. Analyst assessment: sustained; the only defensible slice (grading the incumbent's fusion) is one the government already staffs itself."
+  },
+  "feasibility": {
+   "refuted": true,
+   "strength": 4,
+   "summary": "The cheap halves (adapter, ledger: <$90k, 3 months, EAR99-level, buildable by both founders) prove nothing an investor or program office would fund; the valuable half (independent audit) depends on export-controlled CUI engagement logs in vendor formats that the non-US-person co-founder cannot handle (E07-F30/F18), that no sponsor has offered, and that the founders have no insider (O/C-T, JICO, T&E) to obtain. SBIR is closed at the current cap table; a credible demo costs $400-900k, 2-4x founder capital; fielded use needs TPC signing and an ATO under a host system. Analyst assessment: sustained; MVP is under $100k but the milestone that matters is unreachable with $250k and no sponsor."
+  }
+ },
+ "verdict": "kill",
+ "verdict_rationale": "All three skeptics refute at strength 4 and the corpus supports them. Evaluated on its own merits (not the parent kill), G33 fails the value-chain test at the same links as its parents: PROBLEM (real) -> USER (real: O/C-Ts, S3 air, master trainers) -> REQUIREMENT OWNER (none for the audit or the CoT extension; T2COM's answer for records is CALL 25-14 plus DTMS) -> PROGRAM OFFICE (none; TPC ships the free UAS Tool; PM UAS buys airframes) -> CONTRACTING OFFICE (unidentified) -> BUDGET (none; adjacent money funds incumbents, exercises and DTMS) -> VEHICLE (only unfunded plugins, prizes and CSO white papers). That is the major-penalty condition. Three findings make the penalty terminal rather than provisional: (1) two of the three functions duplicate free or mandated government artifacts (TAK UAS Tool since 2021; DTMS as system of record) and the third duplicates an institutional role (government testers and FFRDC data collection at events like Falcon Peak, where Lattice itself was made the measurement baseline on 2026-09-23); (2) the only piece with oversight value depends on export-controlled logs the team cannot access and the non-US-person co-founder cannot handle, so the demo that would matter is unreachable with $250k and no sponsor; (3) the bundle's natural commercial form is a services/test-support engagement or a free plugin, which the parent G09 skeptics already conceded 'may not clear the bar for venture-scale outcomes'. Market attractiveness 2.3 and founder fit 2.8 are both below a survivable threshold. Absence of a vendor selling this bundle reflects absence of a buyer. Residual uncertainty: a JIATF-401 or T2COM solicitation explicitly asking for a C2-independent provenance/after-action capability or a CoT flight-intent standard, or a CTC paying for a third-party readiness ledger, would reopen the question; none exists as of 2026-09-25 (public evidence insufficient).",
+ "narrower_version_if_borderline": "Not applicable (verdict is kill). For the record, the only residue worth keeping is not a company: (1) a free ATAK-CIV plugin (friendly-flight declaration CoT extension + offline readiness ledger) built in 8-12 weeks for under $30k as a credibility project that earns one TiC battalion or CTC relationship and TAK.gov signing experience reusable on a different gap; (2) the replay/provenance engine as portable IP offered to a government test organization or FFRDC data-collection team as a subcontract, or to a civil C-UAS test site (DHS/FAA), explicitly sized as services revenue. Neither justifies founder capital beyond a few weeks of effort or a $2-5M raise.",
+ "most_important_question_answer": "If two exceptionally capable founders had $250,000 today they should not build G33 as a company. The rational first build, if they insist on touching this space, is an ATAK-CIV plugin that emits a friendly-flight declaration as a CoT extension from a PX4/ArduPilot GCS, keeps an offline operator/airframe/battery/qualification ledger that syncs through TAK Server, and replays a scripted range serial from two or three commercial sensor feeds with per-source lineage - roughly $40-90k and 3-6 months, buildable by both founders without touching CUI. They would show it to a CTC airspace O/C-T cell (the authors of CALL 25-14), a Transformation-in-Contact battalion S3 air NCO and sUAS master trainer, JIATF-401 technical staff at an open industry demo, and the TAK Product Center. The demo would prove that declared flights can be matched to detected tracks with measurable precision when cooperative signals are removed, that a labelled timeline can be reconstructed after the fact, and that the ledger replaces spreadsheets offline. The customer would care only to the extent that lock-in anxiety about the $20B Lattice enterprise agreement or a fratricide near-miss has made 'government-owned, vendor-independent record' a stated need - and no office has stated it. An incumbent can crush the adapter and ledger trivially (TPC adds a field to the free UAS Tool; Anduril exposes lineage and replay; DTMS already holds the records), and the audit slice they are unmotivated to build is one the government already sources from its own test organizations and FFRDCs while making Lattice the Falcon Peak measurement baseline. The milestone that would justify $2-5M - a JIATF-401, T2COM or CTC solicitation or funded pilot that names a C2-independent provenance/after-action capability or a CoT flight-intent standard, paired with a CRADA granting exported exercise logs to a US-person enclave and an O/C-T or JICO advisor on the team - has no identified owner as of 2026-09-25, so the demo would at best yield an xTech prize, an unfunded pilot or a test-support subcontract. The founders should treat the plugin as a two-month door-opener and redirect the capital to a gap with a named requirement owner and budget line.",
+ "bear_case_summary": "Three features, no buyer: the friendly-flight adapter duplicates the free government TAK UAS Tool and a CoT schema the TAK Product Center controls; the readiness ledger duplicates DTMS, Skydio Cloud and mature commercial compliance tools; the independent audit depends on export-controlled Lattice/FAAD C2 logs the founders cannot access and the non-US-person co-founder cannot handle, and duplicates a role the government already fills with test organizations and FFRDCs (Falcon Peak 26.2 made Lattice itself the measurement baseline). No requirement owner, program office, budget line, RFI or topic exists for any piece; hardware IFF is the funded direction for friendly identity; the natural business shape is a free plugin or a test-support services engagement; founder fit is dragged down by missing fatal-if-absent roles, SBIR ineligibility and CUI exclusion.",
+ "bull_case_summary": "The pain is documented and growing: 12,080+ Gauntlet drones and 2,500+ X10Ds at squads, BARS hand-marking and CALL 25-14 procedural workarounds, Ukraine's ~50% friendly-fire drone losses before DroneID, MWI's friendly-UAS IFF recommendation, GAO's finding that no mechanism captures experimentation lessons, and the Army CTO's own memo that NGC2 lacked activity logging. A $20B single-vendor enterprise agreement and Lattice's 'baseline standard' role create genuine lock-in anxiety that a government-owned, vendor-neutral record answers; incumbents are structurally unmotivated to grade their own fusion; ATAK-CIV, the free UAS Tool and open MAVLink make the plumbing buildable by both founders unclassified in weeks; OTAs, CSOs and xTech carry no citizenship test; and an allied (Bundeswehr/NATO) mixed-fleet customer could value the same ledger and declaration standard. The bull case is a unit-adopted plugin that becomes the reference for a future TPC or JIATF-401 standard and earns an acquisition or a follow-on requirement - it rests on a demand signal that has not appeared.",
+ "confidence": "MEDIUM"
+}

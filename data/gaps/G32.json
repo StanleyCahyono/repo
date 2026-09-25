@@ -1,0 +1,666 @@
+{
+ "id": "G32",
+ "title": "Software-only multi-node TDOA/AoA interference and rogue-emitter geolocation engine on commodity SDR nodes, plus an offline-first spectrum-management workflow client (JRFL/SFAF assignments, interference tickets) for installation, range and shared-band spectrum managers",
+ "problem": "Installation, range and shared-band spectrum managers who receive an interference complaint still locate the source by sending a technician out with a handheld analyzer and then file the ticket by hand into DISA's online JSIR/Spectrum XXI tools, because affordable multi-node geolocation software and an offline-capable ticket/assignment client do not exist below the premium CRFS/Rohde & Schwarz/Keysight price tier.",
+ "categories": [
+  "A",
+  "C",
+  "D",
+  "H",
+  "I"
+ ],
+ "segment_ids": [
+  "S12",
+  "S03"
+ ],
+ "chain_steps": [
+  "COLLECT",
+  "PROCESS",
+  "FUSE",
+  "DECIDE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "installation / garrison (NEC, base communications squadron)",
+  "test and training range frequency management office",
+  "joint spectrum center / DISA DSO (enterprise)",
+  "brigade/division 25E spectrum manager (disconnected workflow use only)",
+  "civil shared-band operator (CBRS/private 5G, telecom, regulator)"
+ ],
+ "user": {
+  "exact_role": "Installation spectrum manager (Army NEC/G6 installation spectrum manager; Air Force base spectrum manager under DAFI 17-221), range frequency manager, and unit 25E spectrum manager filing JSIR interference reports",
+  "echelon": "installation / range / brigade",
+  "organization_examples": [
+   "Army installation Network Enterprise Centers (NETCOM) and Army Spectrum Management Office",
+   "Air Force base communications squadrons (spectrum management per DAFI 17-221)",
+   "Test and training range frequency management offices (e.g., major Army/AF/Navy ranges - names not verified this session)",
+   "DISA Defense Spectrum Organization / Joint Spectrum Center (JSIR process owner)",
+   "CBRS SAS administrators and private-5G operators; FCC/NTIA enforcement (civil)"
+  ]
+ },
+ "current_workflow": [
+  "1. Interference report arrives by phone, email or chat from a unit, tenant or neighbor.",
+  "2. Spectrum manager checks assignments in Spectrum XXI (mandated frequency request tool) and local records to see who is authorized on the frequency.",
+  "3. If the source is unknown, a technician drives out with a handheld analyzer (or a rented/loaned CRFS/R&S node) and manually direction-finds over hours to days.",
+  "4. Manager files or updates a JSIR report in JSIRO (Joint Spectrum Interference Resolution Online) per CJCSM 3320.02E; unresolved cases escalate to the Joint Spectrum Center.",
+  "5. For drone/rogue-emitter cases a separate C-UAS or passive-sensing stack (Hidden Level, Dedrone) with its own dashboard is consulted if the installation has one.",
+  "6. When disconnected (field CP, range, DDIL), assignments/JRFL and EMI tickets are kept in spreadsheets and re-entered later."
+ ],
+ "current_solution": "Handheld analyzers plus drive-testing; premium fixed monitoring networks (CRFS RFeye with AoA/TDoA/PoA, Rohde & Schwarz hybrid AOA/TDOA systems, Keysight KSMS TDoA with three FieldFox units) where funded; Hidden Level passive-sensing networks now scaling over bases/ranges under a $100M-ceiling OTA; for Army tactical units S2AS (3dB Labs) which explicitly supports EMI resolution and warns of unauthorized interference sources; DISA enterprise tools (Spectrum XXI, JSIRO, JSDR, E2ESS, EMBM-J) for assignments and tickets; hobby/low-cost coherent DF (KrakenSDR with RDF Pro multi-station fusion) and small vendors such as Wavelet Lab offering multi-node SDR TDOA/FDOA platforms; spreadsheets when offline.",
+ "failure": "It fails at two points: (a) below the premium tier there is no trusted, self-calibrating multi-node geolocation product an installation can afford for whole-base persistent coverage, so most sites do not geolocate at all and rely on drive tests; (b) the assignment/JRFL/JSIR workflow is enterprise-hosted (Spectrum XXI, JSIRO) and is not usable offline at ranges or field CPs, so data is re-keyed. Neither failure has a named requirement owner or budget line for a third-party software product; the funded responses (Hidden Level OTA, S2AS, REWSI sensors, EMBM-J recompete) are hardware-plus-software buys from already-selected vendors or DISA-captive tools.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "DISA DSO sought sources for a SOSC helpdesk providing Tier I/II technical and EMS operational support for Spectrum XXI, JSIRO (Joint Spectrum Interference Resolution Online), JSDR and E2ESS for Sept 2021-Sept 2026, confirming that interference tickets and assignments run on DISA-hosted online tools with a services support contract, not a tactical/offline client.",
+   "source_title": "SAM.gov - DSO SOSC Helpdesk sources sought",
+   "source_url": "https://sam.gov/opp/94bf869720244451b2ce74110c72a288/view",
+   "pub_date": "2021 (notice date not captured; search-tool summary)",
+   "event_date": "2021-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "CJCSM 3320.02E defines the Joint Spectrum Interference Resolution process: EMI events are resolved at the lowest level and the Joint Spectrum Center is the center for EMI reporting, analysis and tracking from initial report to resolution; spectrum managers consult the Spectrum XXI database to determine EMI causes. Establishes that the ticket workflow is doctrinal and government-owned.",
+   "source_title": "CJCSM 3320.02E Joint Spectrum Interference Resolution (JSIR)",
+   "source_url": "https://www.jcs.mil/Portals/36/Documents/Library/Manuals/CJCSM%203320.02E.pdf",
+   "pub_date": "date not captured",
+   "event_date": "current",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "OUSW(R&E) awarded Hidden Level a $100M-ceiling OTA (announced 2026-07-30/08-05) to scale passive RF/passive-radar sensing over bases, test ranges and border sections - i.e., the persistent installation/range sensing buyer already committed to a sensor-plus-software vendor. Ceiling, not revenue; obligations not public.",
+   "source_title": "PR Newswire - Department of War awards Hidden Level $100M OTA",
+   "source_url": "https://www.prnewswire.com/news-releases/department-of-war-awards-hidden-level-100-million-ota-to-scale-passive-sensing-technology-302839232.html",
+   "pub_date": "2026-08-05",
+   "event_date": "2026-07-30",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Army awarded 3dB Labs a potential five-year $350M-ceiling S2AS production contract (UCA pathway, 2026-06-01); S2AS is described as supporting commanders' EMCON decisions, EMI resolution and warning operations centers of unauthorized or intentional interference sources - the Army's tactical EMI-detection need is being filled by an incumbent. Ceiling, not revenue.",
+   "source_title": "CPE ISW - Army awards production contract for S2AS",
+   "source_url": "https://cpeisw.army.mil/2026/06/01/army-awards-production-contract-for-the-spectrum-situational-awareness-system-s2as/",
+   "pub_date": "2026-06-01",
+   "event_date": "2026-06-01",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "repeated procurement",
+   "claim": "Army moved from a REWSI call for solutions (Apr 2026) to ~$196M of spectrum-sensor production (Heaviside MOTH $99M IDIQ 2026-08-27; RII Dragonfly $96.9M 2026-09-03) in five months - cheap distributed spectrum sensors with their own software are now bought at production scale from already-selected vendors.",
+   "source_title": "DefenseScoop - Army awards $196M for sensors under EW-focused call for solutions",
+   "source_url": "https://defensescoop.com/2026/09/11/army-awards-196m-sensor-production-contracts-electronic-warfare/",
+   "pub_date": "2026-09-11",
+   "event_date": "2026-08-27 / 2026-09-03",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Rohde & Schwarz publishes a hybrid AOA/TDOA spectrum-monitoring white paper and sells modular, scalable TDOA/AOA geolocation systems; Keysight's KSMS performs TDoA with three synchronized FieldFox handhelds; CRFS RFeye arrays geolocate via AoA, TDoA and PoA. The geolocation algorithms are commodity at the premium tier; the gap is price, not capability.",
+   "source_title": "Rohde & Schwarz - TDOA and AOA hybrid geolocation systems; Keysight - Locate interfering signals with TDoA; CRFS guide to RF geolocation",
+   "source_url": "https://www.rohde-schwarz.com/us/solutions/critical-infrastructure/spectrum-monitoring/tdoa-and-aoa-hybrid-geolocation-systems_232792.html",
+   "pub_date": "undated vendor pages (retrieved 2026-09-25)",
+   "event_date": "n/a",
+   "tier": 3,
+   "label": "FACT (existence of products; performance claims are vendor marketing)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Wavelet Lab markets a distributed RF monitoring and geolocation platform combining cyclostationary detection, ML classification and multi-node SDR TDOA/FDOA geolocation - a small vendor already sells the exact software-on-commodity-SDR proposition.",
+   "source_title": "Wavelet Lab - Distributed RF Monitoring & Geolocation Platform case study",
+   "source_url": "https://wavelet-lab.com/distributed-rf-geolocation.html",
+   "pub_date": "undated (retrieved 2026-09-25)",
+   "event_date": "n/a",
+   "tier": 3,
+   "label": "FACT (product exists; performance unverified)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Distributed Spectrum (NYC, founded 2020) raised a $25M Series A in March 2025 (Conviction, Shield Capital; ~$29M total), sells edge-AI RF sensor networks using commodity hardware plus algorithms, held an AFRL SBIR Phase II (~$1.25M ceiling, Apr 2024-Jun 2025) for low-SWaP RF situational awareness, and an SBIR effort to improve RF transmitter localization algorithms on its low-cost SDR sensor network - a funded competitor sits exactly on the low-cost geolocation seam.",
+   "source_title": "CB Insights - Distributed Spectrum; SBIR.gov award record; Defense Tech Signals",
+   "source_url": "https://www.cbinsights.com/company/distributed-spectrum",
+   "pub_date": "2025 (funding); award record date not captured",
+   "event_date": "2024-2025",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Peer-reviewed 2026 work in NAVIGATION (Journal of the Institute of Navigation) demonstrates real-world jammer and spoofer localization using a low-cost array-based software-defined radio, showing the physics and algorithms are public and achievable on cheap hardware.",
+   "source_title": "NAVIGATION vol. 73 no. 1 - Real-World Jammer and Spoofer Localization Using a Low-Cost Array-Based SDR",
+   "source_url": "https://navi.ion.org/content/73/1/navi.735",
+   "pub_date": "2026",
+   "event_date": "2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "KrakenSDR (five phase-coherent channels, ~EUR 1,063) with the Heimdall acquisition library and RDF Pro multi-station bearing fusion is used by hobbyists and reportedly some units for cheap networked DF - the commodity node layer the gap assumes already exists with basic fusion software.",
+   "source_title": "Crowd Supply - KrakenSDR",
+   "source_url": "https://www.crowdsupply.com/krakenrf/krakensdr",
+   "pub_date": "product page undated",
+   "event_date": "n/a",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-26-107873 (2026-06-05) found DoD-NTIA spectrum-sharing studies lacked transparency and collaboration; sharing of federal bands depends on monitoring and interference-resolution capacity (the demand implication is INFERENCE).",
+   "source_title": "GAO-26-107873",
+   "source_url": "https://www.gao.gov/products/gao-26-107873",
+   "pub_date": "2026-06-05",
+   "event_date": "2026-06-05",
+   "tier": 1,
+   "label": "FACT (demand implication INFERENCE)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "NTIA's National Spectrum Strategy calls for an Advanced Dynamic Spectrum Sharing demonstration at 3.1-3.45 GHz that may develop separate or integrated base-station sensors to detect incumbent (DoD) signals, and NIST/ITS/NASA/MITRE run the CBRS Sharing Ecosystem Assessment measurement program under NASCTN sponsored by DISA (NIST news, Sept 2026) - the shared-band sensing work is being done by government labs and FFRDCs, not bought from startups.",
+   "source_title": "NTIA - Advanced DSS demonstration; NIST - Validating spectrum in the CBRS band",
+   "source_url": "https://www.ntia.gov/issues/national-spectrum-strategy/advanced-dynamic-spectrum-sharing-demonstration-in-the-national-spectrum-strategy",
+   "pub_date": "undated (NTIA page); 2026-09 (NIST news)",
+   "event_date": "2024-2026",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "DISA's EMBM-J Situational Awareness recompete lists a base period 2025-07-14 to 2026-07-13 plus four option years; EMBM-J DS (Palantir-built prototype) launched Apr 2025. The enterprise spectrum-management modernization buyer (DISA DSO) has an incumbent path and is not soliciting a tactical offline client.",
+   "source_title": "OrangeSlices - DISA EMBM-J SA recompete presolicitation",
+   "source_url": "https://orangeslices.ai/disa-presolicitation-electromagnetic-battle-management-joint-embm-j-situational-awareness-sa-recompete/",
+   "pub_date": "2025 (exact date not captured)",
+   "event_date": "2025-07-14",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Aurora Insight's commercial RF-mapping business exited to Maxar (Jan 2023) and later to HawkEye 360 without reaching independent scale - a direct precedent that standalone spectrum-data businesses without a defense program anchor struggle.",
+   "source_title": "Sky-brokers supplier profile - Aurora Insight (corpus record, companies/B09)",
+   "source_url": "https://sky-brokers.com/supplier/aurora-insight/",
+   "pub_date": "not captured",
+   "event_date": "2023",
+   "tier": 4,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "No SBIR/STTR, DIU, AFWERX or Army CSO topic specifically for low-cost interference-geolocation software or an offline spectrum-management client was found in this session's search (only a 2026 DARPA SBIR titled 'Novel Radio Frequency Sensing Technologies' and older Navy RF pattern-of-life topics, N221-073 from 2022); the corpus finding E04-F31 reached the same null result. Public evidence insufficient; absence is not opportunity.",
+   "source_title": "DARPA SBIR - Novel RF Sensing Technologies; Navy SBIR N221-073; corpus E04-F31",
+   "source_url": "https://www.darpa.mil/work-with-us/opportunities/dpa26bz06-dv023",
+   "pub_date": "2026 (DARPA topic; content not read); 2022 (Navy)",
+   "event_date": "2026",
+   "tier": 1,
+   "label": "FACT (null search result) / HYPOTHESIS (no topic exists)",
+   "confidence": "LOW"
+  },
+  {
+   "form": "government document",
+   "claim": "Air Force spectrum management is governed by DAFI 17-221, which assigns base-level spectrum managers within communications units - confirming the user role exists at every installation but as a compliance/records function inside the comm squadron, not a procurement authority.",
+   "source_title": "DAFI 17-221 Spectrum Management",
+   "source_url": "https://static.e-publishing.af.mil/production/1/af_a2_6/publication/dafi17-221/dafi17-221.pdf",
+   "pub_date": "date not captured",
+   "event_date": "current",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "why_existing_startups_havent_solved": "They have, at every price point that has a paying buyer: premium vendors (CRFS, R&S, Keysight) sell hybrid AoA/TDoA systems to regulators, ranges and installations that can afford them; Hidden Level took the persistent base/range passive-sensing buyer under a $100M-ceiling OTA; 3dB Labs (S2AS) and the REWSI vendors (Heaviside, RII) took the Army tactical EMI-detection buyer with sensors bundled with software; Distributed Spectrum ($29M raised, AFRL SBIRs incl. localization algorithms) and Wavelet Lab already sell the low-cost-SDR-plus-software version; KrakenSDR ships RDF Pro. What remains - the sub-premium installation buyer with no sensor budget and the offline ticket client - is unsolved because that buyer has no requirement owner, program office or line (installation spectrum managers are records/compliance staff under NEC or the comm squadron), DISA DSO already owns the ticket workflow in JSIRO/EMBM-J, and the civil side is thin and price-sensitive (Aurora Insight precedent; CBRS interference is resolved by SAS administrators and measurement campaigns are run by NIST/ITS/MITRE).",
+ "why_not_solved_reasons": [
+  "it HAS been solved",
+  "insufficient commercial market",
+  "buyer fragmentation",
+  "proprietary incumbent architecture",
+  "economics"
+ ],
+ "technical_wedge": "A hardware-free engine that turns 4-12 commodity coherent/GPSDO-synced SDR nodes (KrakenSDR/RTL-SDR/USRP class) into a self-calibrating TDOA+AoA geolocation service with honest per-fix CEP, multipath/false-alarm suppression tuned for dense installation RF, automatic matching of detections against an imported SFAF assignment list (authorized vs unauthorized), and a JSIR-format ticket generator; plus an offline-first client (web/WinTAK/ATAK-CIV plugin) that holds assignments, JRFL entries and tickets locally under DDIL and syncs to Spectrum XXI/JSIRO exports when connected. Explicitly excludes threat-emitter identification, EW/ES functions and any military-specific DF hardware to stay on the EAR side (needs counsel).",
+ "mvp": {
+  "what": "6-node KrakenSDR/RTL-SDR+GPSDO network on a university campus or private land, a fusion service producing geolocations with CEP and confidence for cooperative ISM/amateur emitters, an SFAF-import authorized/unauthorized classifier using synthetic assignment data, and an offline JSIR-style ticket queue that syncs to a mock JSIRO export.",
+  "demonstrable_in_3_6_months": "Yes: cooperative-emitter CEP curves over 1 km^2, time-to-locate under 30 minutes versus a manual drive test, ticket produced offline and synced after a simulated 60-minute outage.",
+  "what_it_must_prove": "That cheap, imperfectly synchronized nodes reach a stated CEP (e.g., tens of meters) with a low false-fix rate in a dense campus RF environment; that a spectrum manager can produce a JSIR-format ticket offline faster than with spreadsheets; and - the hard part - that a named installation or range office will pay for it rather than wait for Hidden Level/S2AS/enterprise tools.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Multi-node time-synchronized IQ/detection recordings of installation-typical emitters (LMR, Wi-Fi, LTE/CBRS, ISM, GPS-jammer analogs where legal), site calibration data, SFAF-format assignment records, JRFL entries and JSIR ticket samples.",
+  "legally_realistically_obtainable": "RF recordings: yes, self-collected on receive-only SDRs at a campus or with cooperative transmitters (FCC rules on content disclosure apply). SFAF/JSIR formats: public references (CJCSM 3320.02E, ATP 6-02.70) allow synthetic data. Real installation assignments, JRFL (may be classified) and JSIR records are CUI or classified and require a government sponsor; export-controlled CUI is effectively U.S.-person-only (E07-F30), so the Indonesian founder cannot handle it.",
+  "sources": [
+   "Self-collected SDR recordings (campus, private land, cooperative emitters)",
+   "CJCSM 3320.02E / ATP 6-02.70 / DAFI 17-221 public formats and procedures",
+   "NTIA/ITS and NIST NASCTN published measurement methodologies (CBRS SEA program)",
+   "ION/NAVIGATION and other open literature on low-cost SDR jammer localization",
+   "Government-furnished SFAF/JSIR data only under a CRADA/OTA with CUI handling (later, U.S.-person staff)"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "Spectrum XXI / SXXI-Online and JSDR (DISA DSO) - assignment source of truth",
+   "JSIRO (Joint Spectrum Interference Resolution Online) - ticket system of record",
+   "EMBM-J (DISA cloud EMS tool, Palantir-built DS prototype)",
+   "EWPMT-X (Army/USMC TAK-hosted EW/spectrum planning) for the tactical variant",
+   "Installation base-defense / C-UAS dashboards (Hidden Level, Dedrone) if present",
+   "CBRS SAS (WInnForum-standard APIs) for the civil shared-band variant"
+  ],
+  "interfaces_protocols": [
+   "SFAF import/export (documented format)",
+   "JSIR report format per CJCSM 3320.02E",
+   "Cursor-on-Target / TAK plugin API (ATAK-CIV open)",
+   "SigMF for recordings",
+   "WInnForum SAS-CBSD/SAS-SAS interfaces (open, civil)",
+   "JSIRO/Spectrum XXI/JSDR/EMBM-J APIs - not public, DISA-controlled"
+  ],
+  "who_controls_the_interface": "DISA DSO and its GEMSIS sustainment contractor control every system-of-record interface (Spectrum XXI, JSDR, JSIRO, EMBM-J); TAK Product Center controls the TAK plugin API (open); WInnForum/FCC control CBRS interfaces (open); a startup owns none of the military interfaces and can only import/export files unless DISA sponsors it."
+ },
+ "customer": {
+  "user": "Installation/base spectrum managers, range frequency managers, unit 25E spectrum managers; civil: private-5G/CBRS operators, telecom interference-hunting teams",
+  "champion": "An individual installation spectrum manager or range frequency manager frustrated by drive tests (INFERENCE - no named champion found); for the offline client, a division CEMA/25E chief (per G11 corpus)",
+  "contract_signer": "Installation contracting (micro-purchase/GSA schedule) for single sites - INFERENCE; DISA Procurement Services Directorate for anything touching JSIRO/EMBM-J; ACC-APG for PM EW&C actions (both INFERENCE, not verified)",
+  "requirement_owner": "No requirement owner identified for installation interference-geolocation software (public evidence insufficient). Nearest: Army Cyber CoE / NETCOM for spectrum management; SAF/CN via DAFI 17-221 for AF base spectrum management; Joint Staff J6 / DISA DSO for JSIR process",
+  "program_office": "None for this scope. Adjacent owners: DISA DSO (Spectrum XXI/JSIRO/EMBM-J), PM EW&C under CPE ISW (S2AS, EWPMT-X, REWSI), OUSW(R&E) (Hidden Level OTA)",
+  "contracting_office": "DISA PSD; ACC-APG; ACC-Rock Island (Hidden Level precedent); installation contracting offices - all INFERENCE, confirm on SAM.gov"
+ },
+ "budget": {
+  "program_or_line": "No RDT&E/procurement line or program of record for third-party installation interference-geolocation software or an offline spectrum-management client. Adjacent money: Hidden Level OTA ($100M ceiling, bases/ranges/border), S2AS ($350M ceiling, tactical EMI resolution), REWSI IDIQs (~$196M ceilings), DISA SOSC helpdesk support (services, value not captured), EMBM-J SA recompete (value not captured); installation O&M for handheld analyzers (not itemized).",
+  "evidence": "FACT: the adjacent ceilings above (PR Newswire 2026-08-05; cpeisw.army.mil 2026-06-01; DefenseScoop 2026-09-11; SAM.gov SOSC notice; OrangeSlices EMBM-J). FACT (null): no topic, sources-sought or award for this scope found this session; corpus E04-F31 same null. All ceilings are not revenue and all are committed to other vendors.",
+  "source_url": "https://cpeisw.army.mil/2026/06/01/army-awards-production-contract-for-the-spectrum-situational-awareness-system-s2as/",
+  "confidence": "MEDIUM (HIGH that adjacent money is committed elsewhere; LOW that any hidden line exists)"
+ },
+ "entry_vehicle": {
+  "primary": "No direct vehicle exists. Realistic paths are (a) a paid civil pilot with a private-5G/CBRS operator, range or airport GPS-interference team, (b) a CRADA with an installation NEC/comm squadron or with DISA DSO/JSC for the offline JSIR client, (c) a subcontract to a sensor OEM (Hidden Level, Heaviside, RII, Distributed Spectrum) or the GEMSIS/EMBM-J contractor as a software feature.",
+  "sequence": [
+   "Build the 6-node campus demo and publish CEP/false-fix results and an open SFAF/JSIR toolkit (0-6 months, founder capital)",
+   "Land 2-3 paid civil pilots (CBRS/private-5G operator, test range, event venue) to refute the Aurora Insight precedent",
+   "Secure a CRADA or OTA-funded pilot with one installation or DISA JSC for the offline JSIR client, with U.S.-person staff handling CUI",
+   "Pitch the geolocation engine as a licensed module to a sensor OEM or the EMBM-J/EWPMT-X integrator",
+   "Only if an enterprise owner (IMCOM/AFIMSC/DISA DSO) issues a requirement: compete on a CSO/OTA"
+  ],
+  "eligibility_notes": "SBIR/STTR require >50% ownership and control by U.S. citizens or permanent residents (13 CFR 121.702; corpus E07-F3): the Indonesian founder's shares never count and the German founder's count only after the green card, so a 50/50 team fails unless the cap table is restructured (counsel). OTA/CSO/CRADA carry no citizenship test, but export-controlled CUI (assignments, JRFL, JSIR records) is effectively U.S.-person-only (E07-F30), so the Indonesian founder must be walled off from government data. Receive-only civil spectrum-monitoring software is plausibly EAR (5A001/5D001 or EAR99) rather than ITAR if it is not specially designed for military EW/DF - a commodity jurisdiction/classification review by counsel is required before design; ITAR treats the German founder as a U.S. person only on permanent residence (22 CFR 120.62)."
+ },
+ "competition": [
+  {
+   "company": "Rohde & Schwarz / CRFS / Keysight",
+   "how_close": "Direct at the premium tier: hybrid AOA/TDOA systems, RFeye AoA/TDoA/PoA arrays, KSMS TDoA with FieldFox; sell to regulators, ranges, installations and can cut price or ship a lite tier",
+   "evidence": "Vendor pages and R&S white paper (undated, retrieved 2026-09-25); army-technology.com CRFS contractor profile"
+  },
+  {
+   "company": "Hidden Level",
+   "how_close": "Direct on persistent base/range passive sensing (drones and aircraft; RF-silent focus), $100M-ceiling OTA, DIU challenge top performer",
+   "evidence": "PR Newswire 2026-08-05; diu.mil 2025-12-15"
+  },
+  {
+   "company": "Distributed Spectrum",
+   "how_close": "Very close: commodity-hardware edge-AI RF sensor network, $25M Series A (Mar 2025), AFRL SBIR Phase II and an SBIR on transmitter-localization algorithms; can undercut and already holds DoD relationships",
+   "evidence": "CB Insights profile; sbir.gov award record; Defense Tech Signals 2025"
+  },
+  {
+   "company": "Wavelet Lab",
+   "how_close": "Direct on software-on-commodity-SDR multi-node TDOA/FDOA geolocation platform",
+   "evidence": "wavelet-lab.com case study (undated)"
+  },
+  {
+   "company": "KrakenRF (KrakenSDR + RDF Pro)",
+   "how_close": "Supplies the node and basic multi-station fusion; a free/low-cost floor under any software-only engine",
+   "evidence": "Crowd Supply product page"
+  },
+  {
+   "company": "3dB Labs (S2AS)",
+   "how_close": "Occupies Army tactical EMI resolution/unauthorized-interference warning; $350M-ceiling production",
+   "evidence": "cpeisw.army.mil 2026-06-01"
+  },
+  {
+   "company": "Heaviside Industries / Research Innovations Inc. (REWSI)",
+   "how_close": "Occupy Army distributed spectrum sensing with bundled software; ~$196M ceilings",
+   "evidence": "DefenseScoop 2026-09-11"
+  },
+  {
+   "company": "DISA DSO tools (Spectrum XXI, JSIRO, EMBM-J) and GEMSIS/EMBM-J contractors incl. Palantir (EMBM-J DS)",
+   "how_close": "Own the assignment and interference-ticket workflow of record; any offline client must sync to them and DISA can add offline modes itself",
+   "evidence": "SAM.gov SOSC notice; OrangeSlices EMBM-J SA recompete; corpus G11"
+  },
+  {
+   "company": "EWPMT-X integrator (not public) / TAK RF plugins (Parsons TEMS, CTIC TAKX-RF, ATAKRR)",
+   "how_close": "Natural home for a tactical offline spectrum client inside the Army's TAK-hosted EW/spectrum tool",
+   "evidence": "army.mil article 275843 (2024); corpus G11 evidence"
+  },
+  {
+   "company": "Aurora Insight (historical)",
+   "how_close": "Failure precedent for a standalone commercial spectrum-data business",
+   "evidence": "corpus companies/B09; sky-brokers profile"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes, and mostly they need not bother: R&S/CRFS/Keysight already sell the geolocation capability and can add a low-cost tier; Distributed Spectrum and Hidden Level can license their fusion to run on cheaper nodes; Palantir (EMBM-J DS) and the GEMSIS contractor can add an offline/sync mode to DISA's tools on DISA's request; the EWPMT-X integrator can absorb an offline JRFL/JSIR client as a TAK capability drop; Anduril and L3Harris have no reason to enter a sub-$50k-per-site market.",
+  "why_startup_still_wins_or_reject": "Reject as a standalone venture. The only argument for a startup is price and usability at the neglected installation tier, but that tier has no procurement authority and buys handhelds, and the two funded routes into it (Hidden Level's OTA and DISA's tools) are already occupied. A startup could win only as a feature/licensed module inside an OEM or integrator product, or as a small civil SaaS - a consultancy/feature path, not a venture-scale outcome."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$40,000-120,000 (6-8 KrakenSDR/RTL-SDR+GPSDO nodes ~$10-15k, laptops/cloud, two founders for 6 months, one RF/DSP contractor, initial counsel opinion)",
+  "credible_military_demo_usd": "$0.5M-1.5M (12-18 months: a CRADA or OTA pilot on one installation/range with U.S.-person staff handling CUI, DFARS 7012/NIST 800-171 posture, export classification, TAK plugin packaging, 20-30 ruggedized COTS nodes bought not built)",
+  "first_production_deployment_usd": "$3M-8M (multi-installation enterprise agreement or DISA/EWPMT-X integration, RMF/ATO for a connected service, sustainment and training, 90-180 day payment cycles)",
+  "assumptions": "Software-only, hardware bought off the shelf; assumes a sponsor supplies site access; excludes classified JRFL handling. INFERENCE from the G11/G21 parent estimates and Distributed Spectrum's ~$29M to reach SBIR-scale fielding."
+ },
+ "expertise_required": [
+  {
+   "role": "RF/DSP engineer with coherent-array and TDOA/AoA calibration experience",
+   "why": "Self-calibration, time-sync error handling and multipath rejection on cheap hardware are the entire technical product",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Former installation/range spectrum manager or 25E (JSIR/SFAF/Spectrum XXI practitioner) as advisor or hire",
+   "why": "Workflow fidelity to CJCSM 3320.02E/DAFI 17-221 and access to the first pilot site",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Export-control and SBIR/cap-table counsel",
+   "why": "EAR vs ITAR classification of a DF-capable product, CUI handling for the non-U.S.-person founder, SBIR ownership structure",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Full-stack/offline-first application engineer (CRDT sync, TAK plugin)",
+   "why": "The workflow client and sync are conventional engineering the founding engineer can cover",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Federal/civil sales lead with installation NEC/comm-squadron and CBRS operator relationships",
+   "why": "Finding a buyer with signature authority is the binding constraint",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "Receive-only spectrum monitoring on COTS SDRs is legal domestically (FCC rules limit disclosure of intercepted content); a civil-scoped geolocation/workflow product that is not specially designed for military EW/DF is plausibly EAR (5A001/5D001 or EAR99) rather than USML Category XI, but direction-finding features aimed at military users can drift toward Category XI - only a commodity jurisdiction/classification review settles it. All real assignment, JRFL and JSIR data is CUI (JRFL may be classified), so any government pilot brings DFARS 252.204-7012/NIST SP 800-171/CMMC obligations. No clearance is needed for the civil product; a classified JRFL module would require a cleared facility and U.S.-citizen staff. None of this is a legal judgment.",
+  "non_us_person_founder_note": "If the product stays EAR99/EAR-dual-use the Indonesian founder is largely unconstrained on the engine and client code (E07-F17), but must be excluded from export-controlled CUI supplied by any government sponsor (E07-F30) and cannot count toward SBIR ownership (13 CFR 121.702). The German founder becomes a U.S. person for ITAR only on permanent residence (22 CFR 120.62). A CFIUS filing could be triggered by foreign investors only if the product becomes ITAR/600-series critical technology (E07-F27). Needs export-control and immigration counsel before the first government conversation."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "Civil buyers exist - private-5G/CBRS operators, telecom interference-hunting teams, airports and ports (GPS interference), event venues, regulators - and the shared-band policy push (NTIA Advanced DSS demonstration, NIST CBRS SEA program) keeps monitoring salient. But the civil market is thin and price-sensitive, CBRS interference is handled by SAS administrators and government measurement campaigns, premium vendors already serve regulators and telcos, and Aurora Insight is a documented failure of a standalone spectrum-data business. Medium, trending low for venture purposes."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "deployment footprint",
+   "workflow",
+   "government relationships",
+   "data"
+  ],
+  "explanation": "TDOA/AoA algorithms are published (R&S white paper, ION 2026 paper) and hardware is commodity, so code is not defensible. Per-site calibration data and a footprint of installed node networks would compound slowly; the JSIR/SFAF workflow client is copyable by DISA's contractors or the EWPMT-X integrator; government relationships (a CRADA, a DISA sponsor) would be the only real moat and are government-controlled. No network effects."
+ },
+ "why_now": "(1) Commodity coherent SDRs (KrakenSDR ~EUR 1,063) and GPSDO timing make sub-$2k geolocation nodes possible and peer-reviewed 2026 work shows jammer localization on low-cost arrays; (2) shared-spectrum policy (National Spectrum Strategy Advanced DSS demonstration at 3.1-3.45 GHz, NIST CBRS SEA measurements, GAO-26-107873) raises the salience of interference monitoring; (3) the Army proved in 2026 that cheap distributed spectrum sensors can be bought at production scale (REWSI) and that TAK is the tactical host (EWPMT-X), so an offline TAK-native client has a plausible home; (4) DISA is modernizing the enterprise stack (EMBM-J) and its SOSC support period runs to Sept 2026, a natural re-plan point. Counter: each of these has already pulled in a funded vendor or is being done in-house by government labs.",
+ "killer_risk": "There is no buyer with signature authority and a budget for this scope: installation and range spectrum managers are compliance/records staff who buy handhelds, the persistent base/range sensing money went to Hidden Level (OTA), tactical EMI detection went to 3dB Labs/REWSI vendors, the ticket and assignment workflow is owned by DISA DSO (JSIRO, Spectrum XXI, EMBM-J recompete) which can add offline modes through its own contractors, and the civil market is thin and already served by R&S/CRFS/Keysight at the top and Distributed Spectrum/Wavelet Lab/KrakenSDR at the bottom - so the best case is a licensed feature or a small SaaS, not a company.",
+ "market_stage": "Transitioning",
+ "procurement_signal_timeline": [
+  {
+   "year": "2013-2015",
+   "event": "NTIA/NIST Spectrum Monitoring Pilot Program defines tiered COTS sensor architecture (never scaled)",
+   "source_url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=917593"
+  },
+  {
+   "year": "2021",
+   "event": "DISA DSO sources sought for SOSC helpdesk supporting Spectrum XXI, JSIRO, JSDR, E2ESS (Sept 2021-Sept 2026)",
+   "source_url": "https://sam.gov/opp/94bf869720244451b2ce74110c72a288/view"
+  },
+  {
+   "year": "2023",
+   "event": "Aurora Insight exits to Maxar (Jan) - standalone spectrum-data precedent; DISA releases EMBM-J initial features (Dec)",
+   "source_url": "https://www.prnewswire.com/news-releases/disa-releases-new-electromagnetic-spectrum-capability-to-enhance-modern-warfighting-302009421.html"
+  },
+  {
+   "year": "2024",
+   "event": "Army cancels EWPMT follow-on, fixes TAK as EWPMT-X host (Apr); Distributed Spectrum AFRL SBIR Phase II (Apr); DISA GEMSIS sustainment sources sought (Sept)",
+   "source_url": "https://www.army.mil/article/275843/electronic_warfare_planning_and_management_tool_ewpmt_contract_cancellation"
+  },
+  {
+   "year": "2025",
+   "event": "Distributed Spectrum $25M Series A (Mar); S2AS prototype OTA (Apr); EMBM-J DS launched (Apr); EMBM-J SA recompete base period from Jul 14",
+   "source_url": "https://orangeslices.ai/disa-presolicitation-electromagnetic-battle-management-joint-embm-j-situational-awareness-sa-recompete/"
+  },
+  {
+   "year": "2026",
+   "event": "REWSI call (Apr) then ~$196M production IDIQs (Aug 27, Sep 3); S2AS $350M-ceiling production (Jun 1); GAO-26-107873 (Jun 5); Hidden Level $100M OTA (Jul 30); Space Force $981M test/training IDIQ (Jul 31); NIST CBRS SEA news (Sep); AFWERX/SpaceWERX reopen SBIR after reauthorization",
+   "source_url": "https://defensescoop.com/2026/09/11/army-awards-196m-sensor-production-contracts-electronic-warfare/"
+  }
+ ],
+ "allied_extension": "Only marginally. Allied regulators and militaries are the home market of Rohde & Schwarz (Germany) and CRFS (UK), so a German founder's network helps less than usual; NATO spectrum management uses its own tools and national JSIR equivalents, and civil CBRS-style sharing is U.S.-specific (Europe uses different sharing regimes). An offline TAK-native spectrum client could interest TAK-using allies (UK, Australia under the AUKUS ITAR exemption) but that is a feature sale, not a market. Allied extension does not change the verdict.",
+ "search_log": [
+  {
+   "query": "\"Distributed Spectrum\" RF sensor 2026 contract OR funding OR Army OR \"Air Force\"",
+   "useful": true
+  },
+  {
+   "query": "DoD installation spectrum manager interference resolution \"Spectrum XXI\" OR \"JSIR\" tool 2025 OR 2026 SBIR OR \"sources sought\"",
+   "useful": true
+  },
+  {
+   "query": "TDOA interference geolocation software commercial SDR sensor network 2026 CRFS OR \"Rohde & Schwarz\" OR Keysight OR \"Signal Hound\" OR KrakenSDR",
+   "useful": true
+  },
+  {
+   "query": "CBRS OR \"lower 3 GHz\" OR \"spectrum sharing\" DoD sensing interference monitoring 2026 NTIA award OR pilot OR contract",
+   "useful": true
+  },
+  {
+   "query": "\"Distributed Spectrum\" startup RF sensing New York 2025 OR 2026 Series OR SBIR OR Marines OR Navy",
+   "useful": true
+  },
+  {
+   "query": "SBIR OR STTR 2025 OR 2026 topic \"interference\" geolocation \"low-cost\" OR \"low cost\" spectrum sensors Army OR \"Air Force\" OR Navy OR SpaceWERX",
+   "useful": false
+  },
+  {
+   "query": "DISA \"EMBM-J\" OR \"Spectrum XXI\" OR \"JSIRO\" 2026 modernization award OR contract OR recompete",
+   "useful": true
+  },
+  {
+   "query": "\"test range\" OR \"training range\" OR \"installation\" spectrum monitoring interference geolocation sensors contract award 2025 OR 2026 Army OR Navy OR \"Air Force\" OR \"Space Force\"",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.prnewswire.com/news-releases/department-of-war-awards-hidden-level-100-million-ota-to-scale-passive-sensing-technology-302839232.html",
+   "title": "Department of War awards Hidden Level $100M OTA to scale passive sensing technology",
+   "pub_date": "2026-08-05",
+   "tier": 2
+  },
+  {
+   "url": "https://defensescoop.com/2026/09/11/army-awards-196m-sensor-production-contracts-electronic-warfare/",
+   "title": "Army awards $196M for sensors in first production contracts under EW-focused call for solutions",
+   "pub_date": "2026-09-11",
+   "tier": 2
+  },
+  {
+   "url": "https://cpeisw.army.mil/2026/06/01/army-awards-production-contract-for-the-spectrum-situational-awareness-system-s2as/",
+   "title": "Army Awards Production Contract for the Spectrum Situational Awareness System (S2AS)",
+   "pub_date": "2026-06-01",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-26-107873",
+   "title": "GAO-26-107873 DoD-NTIA spectrum sharing",
+   "pub_date": "2026-06-05",
+   "tier": 1
+  },
+  {
+   "url": "https://sam.gov/opp/94bf869720244451b2ce74110c72a288/view",
+   "title": "DISA DSO SOSC Helpdesk sources sought (Spectrum XXI, JSIRO, JSDR, E2ESS)",
+   "pub_date": "2021 (not captured)",
+   "tier": 1
+  },
+  {
+   "url": "https://orangeslices.ai/disa-presolicitation-electromagnetic-battle-management-joint-embm-j-situational-awareness-sa-recompete/",
+   "title": "DISA Presolicitation: EMBM-J Situational Awareness Recompete",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.jcs.mil/Portals/36/Documents/Library/Manuals/CJCSM%203320.02E.pdf",
+   "title": "CJCSM 3320.02E Joint Spectrum Interference Resolution (JSIR)",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://static.e-publishing.af.mil/production/1/af_a2_6/publication/dafi17-221/dafi17-221.pdf",
+   "title": "DAFI 17-221 Spectrum Management",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://www.rohde-schwarz.com/us/solutions/critical-infrastructure/spectrum-monitoring/tdoa-and-aoa-hybrid-geolocation-systems_232792.html",
+   "title": "Rohde & Schwarz - TDOA and AOA hybrid geolocation systems",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://cdn.rohde-schwarz.com/am/us/campaigns_2/a_d/Spectrum-Monitoring-with-Hybrid-AOA-TDOA-Geolocation.pdf",
+   "title": "R&S white paper: Spectrum Monitoring with Hybrid AOA/TDOA Geolocation",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://www.keysight.com/us/en/use-cases/locate-interfering-signals-with-tdoa.html",
+   "title": "Keysight - How to locate interfering signals with TDoA",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://www.crfs.com/guide-to-rf-geolocation",
+   "title": "CRFS - Guide to RF geolocation",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://wavelet-lab.com/distributed-rf-geolocation.html",
+   "title": "Wavelet Lab - Distributed RF Monitoring & Geolocation Platform",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://navi.ion.org/content/73/1/navi.735",
+   "title": "NAVIGATION: Real-World Jammer and Spoofer Localization Using a Low-Cost Array-Based SDR",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.cbinsights.com/company/distributed-spectrum",
+   "title": "CB Insights - Distributed Spectrum",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.sbir.gov/awards/210833",
+   "title": "SBIR.gov award record (Distributed Spectrum RF localization algorithms - per search summary)",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://defensetechsignals.beehiiv.com/p/distributedspectrum",
+   "title": "Distributed Spectrum: Small Sensors and the Future of EW",
+   "pub_date": "2025",
+   "tier": 4
+  },
+  {
+   "url": "https://www.crowdsupply.com/krakenrf/krakensdr",
+   "title": "KrakenSDR - Crowd Supply",
+   "pub_date": "undated",
+   "tier": 3
+  },
+  {
+   "url": "https://www.ntia.gov/issues/national-spectrum-strategy/advanced-dynamic-spectrum-sharing-demonstration-in-the-national-spectrum-strategy",
+   "title": "NTIA - Advanced Dynamic Spectrum Sharing Demonstration",
+   "pub_date": "undated (2024-2025)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.nist.gov/news-events/news/2026/09/validating-spectrum-cbrs-band-models-measurements",
+   "title": "NIST - Validating Spectrum in the CBRS Band: From Models to Measurements",
+   "pub_date": "2026-09",
+   "tier": 1
+  },
+  {
+   "url": "https://techpolicyinstitute.org/publications/broadband/spectrum-and-wireless/cbrs-in-2026-what-have-we-learned-panel-recap/",
+   "title": "TPI - CBRS in 2026: What Have We Learned? Panel recap",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://sky-brokers.com/supplier/aurora-insight/",
+   "title": "Aurora Insight supplier profile (corpus)",
+   "pub_date": "not captured",
+   "tier": 4
+  },
+  {
+   "url": "https://www.darpa.mil/work-with-us/opportunities/dpa26bz06-dv023",
+   "title": "DARPA SBIR: Novel Radio Frequency Sensing Technologies (title only)",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.navysbir.com/n22_1/N221-073.htm",
+   "title": "Navy 22.1 SBIR N221-073 RF Spectrum Patterns of Life",
+   "pub_date": "2022",
+   "tier": 1
+  },
+  {
+   "url": "https://www.afmc.af.mil/News/Article-Display/Article/4477844/afwerx-spacewerx-open-new-sbirsttr-solicitations-following-reauthorization/",
+   "title": "AFWERX, SpaceWERX open new SBIR/STTR solicitations following reauthorization",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2026/07/31/space-force-contract-vehicle-develop-testing-training-infrastructure/",
+   "title": "Space Force establishes $981M contract vehicle for testing/training infrastructure",
+   "pub_date": "2026-07-31",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/275843/electronic_warfare_planning_and_management_tool_ewpmt_contract_cancellation",
+   "title": "Army EWPMT contract cancellation / EWPMT-X on TAK",
+   "pub_date": "2024-04",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "title": "13 CFR 121.702 SBIR/STTR ownership and control",
+   "pub_date": "current eCFR",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62",
+   "title": "22 CFR 120.62 U.S. person (ITAR)",
+   "pub_date": "current eCFR",
+   "tier": 1
+  },
+  {
+   "url": "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export",
+   "title": "BIS - What is a deemed export",
+   "pub_date": "current",
+   "tier": 1
+  }
+ ]
+}

@@ -189,6 +189,9 @@ def build_data():
         v = str(s.get('verdict') or '').lower()
         return (0 if v.startswith('surv') else 1 if v.startswith('border') else 2, -(float(s.get('market_attractiveness') or 0) + float(s.get('founder_fit') or 0)))
     d['survivorsOrder'] = sorted(d['survivors'].keys(), key=rank)
+    for gid in d['survivors']:
+        v = str(((d['gaps'].get(gid) or {}).get('score') or {}).get('verdict') or '').lower()
+        d['survivors'][gid]['status'] = 'survived' if v.startswith('surv') else 'borderline' if v.startswith('border') else 'best-available path (killed as a venture)'
     # whitespace fallback matrix (company/segment placements aggregated by prep_gaps.py)
     wi = load(os.path.join(DATA, 'synthesis', 'whitespace_input.json'))
     if wi: d['whitespaceInput'] = wi

@@ -1,0 +1,60 @@
+[
+  {
+    "lens": "market",
+    "gap_id": "G35",
+    "refuted": true,
+    "strength": 4,
+    "bear_case": "There is no requirement owner and no budget line for third-party conformance, replay or synthetic-PNT tooling. The 2026 money in this neighborhood went to government-run assessment (SOFWERX/PEO-SDA UxSAI Mission Autonomy Systems AE, with T&E performed by the government) and to EO/IR computer-vision synthetic data (UxSAI Synthetic Data Modeler AE, milestones June-October 2026) - neither is interface conformance or DDIL replay. The Army planned its own pntOS compliance toolkit in 2021 and has since handed pntOS/ASPN stewardship to an ISTO consortium founded by Leidos, IS4S and TRX (June 2026), which is the natural publisher of a free official suite. NAVWAR's NP004 topic accepted synthetic ASPN data, but it funds the vendor's product, not tooling, and closed 2026-09-23. On the civil side, the DHS Resilient PNT Conformance Framework has no certifying body, CISA's acquisition guidance asks agencies to specify levels but not to require independent assessment, and vendors (Oscilloquartz/ADVA, VIAVI) self-attest. The paying market is therefore a few dozen small vendors buying a $25k-$100k stopgap, which is a consultancy, not a venture.",
+    "strongest_single_argument": "Every dollar that touches this problem in 2026 pays the government to assess, or a standards owner to publish, or a vendor to build its own deliverable - none pays a third party for conformance tooling, and the one civil market that could have had no such gatekeeper (DHS RPCF) has no certification requirement at all.",
+    "evidence": [
+      "sam.gov UxSAI Synthetic Data Modeler AE (2026): scope is EO/IR CV synthetic data for UxSAI; FACT/MEDIUM",
+      "Soldier Systems Daily 2026-08-21 / DefenseScoop 2026-08-18: UxSAI Mission Autonomy Systems AE with government-run T&E phases; FACT/MEDIUM",
+      "GAO-21-320SP (2021-05-10): Army planned pntOS compliance toolkit; $17M DoD-wide MOSA-PNT FY2020-2024; FACT/HIGH",
+      "GlobeNewswire via Manila Times 2026-06-02: ISTO PNT Standards Consortium founded by Leidos, IS4S, TRX; FACT/HIGH",
+      "navysbir.com NP004 Q&A 2026-08-08: synthetic ASPN/pntOS data acceptable for Phase I; FACT/HIGH",
+      "DHS RPCF v2.0 (2022-05-31) and CISA Federal PNT Services Acquisitions guidance (2024-03): levels defined, no certification body; FACT/HIGH",
+      "VIAVI / ADVA press releases: self-declared conformance; FACT/MEDIUM (company marketing cited only for the fact of self-attestation)"
+    ],
+    "what_would_change_my_mind": "A named program office or lab (PM PNT/C5ISR Center, PEO-SDA, PMS 406, TRMC) issuing a solicitation or OTA specifically for third-party conformance/replay tooling with a stated dollar figure; the ISTO consortium announcing it will not publish a conformance suite and instead certify commercial ones; or CISA/NIST establishing an accredited RPCF assessment scheme that requires independent scoring for federal PNT procurements.",
+    "narrower_survivable_version": "An open-source pntOS-C/ASPN conformance runner contributed to the ISTO consortium, monetized through 2-4 vendor-paid integration engagements per year - a services niche or acqui-hire path, explicitly not venture-capitalized."
+  },
+  {
+    "lens": "competition",
+    "gap_id": "G35",
+    "refuted": true,
+    "strength": 5,
+    "bear_case": "The slot is occupied at zero price for each interface family the gap names. STANAG 4586/IOP: the Army states that 'many software test tools are available to programs and eligible vendors to help demonstrate compliance' and that they 'continue to evolve to further automate compliance testing' (army.mil), and Kutta and other VSM/CUCS vendors serve the integration market. UMAA: MITRE supports compliance (RECALL - not re-verified) and RTI supplies DDS tooling. pntOS/ASPN: the authors (IS4S, TRX, Leidos) now govern the standard through the ISTO consortium and IS4S sells pntOS support commercially; the Army planned an automatic compliance toolkit. FANTOM Core and A-GRA: government-owned and reachable only inside a program, where SOCOM runs its own UxSAI assessment pipeline and CDAO selected Applied Intuition (2026-05) for a DoD-wide autonomy development/validation/certification environment. PNT scenarios: Spirent PNT Xe (2025-11) and Safran Skydel AI (2025-09) automate scenario generation with Python and could emit ASPN logs in one release. Third-party assessment: DIU's Blue UAS Recognized Assessors (2025-09) already hold that role for the cyber/NDAA standard and are accredited organizations. Interface verification as a business: Tangram Flex already sells it to USAF programs at ~$11M revenue (RECALL). None of these needs six months; most already have it. Switching cost for a vendor is nil because the tools are free, and every API and version is controlled by the government or consortium.",
+    "strongest_single_argument": "The Army already tells vendors that compliance test tools for its UAS interface standards are available for free and being automated further, and the pntOS/ASPN standards are now stewarded by the very companies that would publish an official conformance suite - a startup would be selling a paid copy of tooling its customers' interface owners give away.",
+    "evidence": [
+      "army.mil article 293795 'U.S. Army UAS Interoperability': compliance test tools available to programs and eligible vendors; FACT/MEDIUM (date not captured)",
+      "GlobeNewswire 2026-06-02: ISTO PNT Standards Consortium (Leidos, IS4S, TRX); is4s.com/pntos commercial support; FACT/HIGH",
+      "GAO-21-320SP (2021): planned Army pntOS compliance toolkit; FACT/HIGH",
+      "PRNewswire 2026-05-14 (from parent G19 verification): CDAO selects Applied Intuition for DoD-wide Autonomy Factory; FACT/MEDIUM; PNT coverage unverified",
+      "Spirent PNT Xe press release (2025-11); Safran Skydel AI (2025-09); FACT/MEDIUM",
+      "diu.mil (2025-09): Blue UAS Recognized Assessors; FACT/MEDIUM",
+      "Company index B08: Tangram Flex ~$11M 2024 revenue; RECALL - not re-verified this session",
+      "kuttatech.com STANAG 4586 interoperability page; FACT/LOW (company page)"
+    ],
+    "what_would_change_my_mind": "Evidence that the Army's STANAG 4586/IOP tools are unavailable to non-program vendors and that programs are paying for commercial substitutes; the ISTO consortium formally choosing to certify commercial conformance suites rather than publish one; or Spirent/Safran/Applied Intuition publicly declining ASPN or pntOS support while a program office requires it.",
+    "narrower_survivable_version": "None as a standalone product. A vendor-neutral open-core runner could coexist with incumbents only as the consortium's reference implementation maintained by a small services firm - which is the acqui-hire path, not a company."
+  },
+  {
+    "lens": "feasibility",
+    "gap_id": "G35",
+    "refuted": true,
+    "strength": 4,
+    "bear_case": "The narrower form is genuinely more feasible than its parents: the open subset (public ASPN-ICD YAML, pntOS-C Apache-2.0, MAVLink, UMAA ICDs, DHS RPCF, cisagov/pnt-integrity) can be built unclassified on commercial compute for $60k-$120k, and the civil PNT product carries no ITAR/FOCI/SBIR barrier for the Indonesian founder. But the demo that would matter cannot be reached with this team and this money. Credibility requires real vendor pntOS plug-ins and logs under NDA (vendor CUI, CMMC L2), realistic alternative-PNT error models that even the government lacks (GAO-21-320SP: fidelity 'poorer'; SOF distrust M&S), and a senior navigation/estimation engineer plus an autonomy T&E engineer with assessment-event experience - both fatal-if-absent and both missing. The interfaces with money behind them are controlled: STANAG 4586 is a NATO document obtained through a program or national body, FANTOM Core's M2M API is government-owned and program-access only, A-GRA is shared with selected performers - each a deemed-export and CUI question for the non-U.S.-person founder that counsel may answer unfavorably. SBIR is closed under 13 CFR 121.702 until the German founder's green card and a >50% U.S.-person cap table. The 'score against the DHS framework' output is scientifically contested (arXiv 2607.05415, 2026-07: single-number resilience ratings are decision-unstable), so the flagship deliverable may not survive expert review. Credible military demo: $400k-$900k; first adoption by a lab: $1.5M-$3M and U.S.-person staff.",
+    "strongest_single_argument": "What the team can legally and financially build (open-subset checkers and synthetic streams) is exactly what the government and consortium give away, and what would make the product valuable (controlled interfaces, real vendor logs, reviewer-accepted degradation models, a defensible resilience score) is exactly what a two-student, SBIR-ineligible, partly non-U.S.-person team cannot reach with $250k.",
+    "evidence": [
+      "github.com/Open-PNT/pntOS-C (2026-04-23, Apache-2.0, 3 stars/4 forks as of 2026-08-26): open subset is reachable but adoption is thin; FACT/MEDIUM",
+      "GAO-21-320SP (2021-05-10): alt-PNT M&S fidelity poorer; SOF reluctant to accept M&S; FACT/HIGH",
+      "arXiv 2607.05415 (2026-07): PNT resilience score decision-instability; FACT/MEDIUM",
+      "sam.gov 2026-06-26: FANTOM Core government-owned, integration via M2M API inside SOCOM program; FACT/MEDIUM",
+      "13 CFR 121.702 SBIR ownership test; GAO-24-107004 (2024) on VC-majority eligibility; FACT/MEDIUM",
+      "navysbir.com NP004 Q&A 2026-08-08: synthetic ASPN data accepted for Phase I - the only public precedent for reviewer acceptance; FACT/HIGH",
+      "arXiv 2608.09349 (2026-08): search-based UAS testing validated only for nominal/fault cases, not jamming/DDIL; INFERENCE/LOW"
+    ],
+    "what_would_change_my_mind": "Export counsel opining in writing that the harness is publicly available/EAR99 software including when adapted to STANAG 4586 and UMAA; a senior navigation engineer with a fielded pntOS/ASPN plug-in joining as co-founder; two alt-PNT vendors signing paid pilots with log-sharing under NDA; and a PM PNT or NAVWAR reviewer stating in writing that the synthetic streams and evidence table are acceptable milestone input.",
+    "narrower_survivable_version": "Build the open-subset runner as an open-source credibility project and use it to win vendor-paid engineering engagements and consortium standing, while the German founder's residency and a possible U.S.-person co-founder are sorted out; defer any DoD-specific product. Sized as a services niche, not a venture."
+  }
+]

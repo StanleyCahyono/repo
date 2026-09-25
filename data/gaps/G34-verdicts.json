@@ -1,0 +1,58 @@
+[
+ {
+  "lens": "market",
+  "gap_id": "G34",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "There is no budget owner for this product in any of its three target segments. Public safety: FY25 HSGP is $1.008B (FACT) but it is sub-granted to states and thousands of agencies, no purchase of TAK-native structured-forms or offline-IMS software under it was found, agencies already buy from a mature IMS category (DHS SAVER 2022), and TAK Public Safety's own charter says the adoption barrier is training and community, not features. National Guard: no requirement owner, program office, line or vehicle for a battalion orders/reports app (Public evidence insufficient) - the same chain break that killed G18. Allied: DIANA's 2027 challenges fit but closed 2026-07-03 with EUR 100k awards; CIHBw pilots are small. The 'merge model licensable to HQ platform owners' line has no evidenced buyer and competes with free Automerge/Yjs and Ditto. Even success is low-five-figure ACVs across dozens of agencies - a consultancy/open-source-services or acquihire outcome.",
+  "strongest_single_argument": "The only venture-scale element of G34 - licensing the merge model to Onebrief/Anduril/TPC/Systematic - has no evidenced buyer and is commoditized by open-source CRDTs and Ditto's existing ATAK sync product, leaving a fragmented, grant-funded public-safety niche whose own advocacy nonprofit says the binding constraint is training, not missing features.",
+  "evidence": [
+   "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo (FY25 HSGP $1.008B; no product-class evidence)",
+   "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf (mature IMS category, 2022-01-05)",
+   "https://www.takps.org/ (adoption gated by training/community, founded 2024)",
+   "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html (2026-06-02; EUR 100k; closed 2026-07-03)",
+   "Parent G18-score: no Guard/Army program office or line at this layer",
+   "E04-F25: M&A is the dominant graduation for TAK-adjacent software firms"
+  ],
+  "what_would_change_my_mind": "A state-level or multi-agency enterprise contract (or FEMA/USFA program) explicitly funding offline structured ICS forms on TAK; an NGB or state JFHQ solicitation for a battalion-and-below orders/reports app; or a signed paid licensing/integration agreement from TPC, Onebrief, Ditto or Systematic for a third-party merge model.",
+  "narrower_survivable_version": "An open-source 'ICS objects for TAK' schema and server extension stewarded with TAK Public Safety/WFTAK, monetized via hosting and support to state wildland agencies and IMTs - a bootstrapped business, not a venture."
+ },
+ {
+  "lens": "competition",
+  "gap_id": "G34",
+  "refuted": true,
+  "strength": 4,
+  "bear_case": "Every layer of the proposed stack already has an owner who can close the remaining seam in one release. Disconnect re-sync: TPC's free Data Sync plugin re-syncs mission map items, files, logs and chat after a device reconnects and TPC could add form objects. Merge engine: Ditto (~$136M raised, $82M Series B 2025-03) sells a CRDT edge-sync platform with an ATAK plugin it says USSOCOM uses; Automerge/Yjs/RxDB/PowerSync are open source. Forms workflow: Resgrid IC already markets offline-first ICS-201 with local queue and replay; Tablet Command, Intterra, WebEOC and Veoci own agency relationships. Military orders: Onebrief (enterprise IDIQ, offline 'underway'), Anduril/Rivet SBMC (ATAK-backward-compatible) and Systematic SitaWare Edge. The interfaces that matter are controlled by others - Apple blocks iTAK plugins (80% of wildland devices), TAK-GOV/MIL is gated, HQ platform APIs are closed. Switching cost for an agency is near zero and the schemas are public NIMS/FM standards, so no moat forms.",
+  "strongest_single_argument": "The CRDT-merge-for-TAK layer that G34 treats as its proprietary core is already a shipped, funded product (Ditto's Edge Sync plugin for ATAK) and an open-source commodity, while the free government Data Sync plugin already handles disconnect re-sync - leaving only public-standard forms as the startup's contribution, which any IMS vendor or TPC can add.",
+  "evidence": [
+   "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin (TPC Data Sync: mission re-sync after disconnect)",
+   "Corpus B03 Ditto record: Edge Sync plugin for ATAK, ~$136M funding (company claims on usage)",
+   "https://rxdb.info/articles/alternatives/ditto-alternative.html and https://powersync.com/blog/ditto-vs-powersync (CRDT commoditization, 2025-2026)",
+   "https://resgrid.com/apps/ic (offline-first ICS-201, company claim)",
+   "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf (IMS vendors)",
+   "https://meshtastic.org/blog/tak-server-integration-ios/ (iTAK no plugins, 2026-02)",
+   "https://defensescoop.com/2025/09/08/army-sbmc-contract-awards-anduril-rivet-soldier-borne-mission-command/ (SBMC ATAK compatibility)"
+  ],
+  "what_would_change_my_mind": "A TPC statement that structured form/order objects are out of scope for Data Sync; independent evidence that Ditto's ATAK plugin is not used or not extensible to forms; or 12 months of the IMS vendors failing to ship multi-writer offline merge while agencies publicly ask for it.",
+  "narrower_survivable_version": "Position as the schema/community layer on top of Ditto or TAK Data Sync rather than a competing merge engine: an open ICS-object standard plus iOS/web companion, built to be adopted (or acquired) by Ditto, a TPC contractor or an IMS vendor."
+ },
+ {
+  "lens": "feasibility",
+  "gap_id": "G34",
+  "refuted": false,
+  "strength": 2,
+  "bear_case": "Feasibility is the gap's strength and cannot be refuted: unclassified by design, public schemas, open-source ATAK-CIV and documented mission API, mature CRDT libraries, PoC under $150k on commercial devices, no SBIR (so the >50% U.S.-person ownership test, 13 CFR 121.702, does not bind), no ATO or CUI for public-safety pilots, and the Indonesian founder can work on an EAR99/open-source civil codebase (E07-F17, E07-F25) - counsel should confirm EAR99 status but no legal judgment is made. The residual concerns are real but not fatal: iTAK accepts no plugins, so reaching the iOS-majority wildland users requires a companion app or server-side design that doubles mobile engineering; the team lacks a fire-service/incident-command domain founder (fatal if absent) and any SLED sales capability; a Guard or allied variant reintroduces TAK-GOV gating, possible CUI/CMMC and ITAR defense-service questions (E07-F15); and DHS S&T SBIR, if ever used, brings the ownership test back.",
+  "strongest_single_argument": "The team can legally and cheaply build and demonstrate this, but a two-student team with no incident-command or fire-service founder and no agency references cannot sell it: public-safety adoption is gated by training, references and grant cycles (TAK Public Safety's stated reason for existing), and the iOS-majority user base cannot be reached by the ATAK-CIV plugin the thesis names.",
+  "evidence": [
+   "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV (open source; E07-F25)",
+   "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export (EAR99 path for non-U.S.-person founder; E07-F17)",
+   "https://docs.opentakserver.io/mission_api.html (documented mission API)",
+   "https://meshtastic.org/blog/tak-server-integration-ios/ (iTAK no plugins; Feb 2026 workaround)",
+   "https://wftak.wildfire.gov/pages/what-is-wftak (80% iOS wildland devices)",
+   "https://www.takps.org/ (adoption barriers: training, community)",
+   "E07-F15 (defense-service exposure for foreign-military integration)"
+  ],
+  "what_would_change_my_mind": "Nothing needed on feasibility; what would raise the overall verdict is a committed incident-command/fire-service co-founder or advisor with agency references, plus a first paying state agency or IMT pilot.",
+  "narrower_survivable_version": "Public-safety-only, iOS-and-Android companion plus TAK Server extension (no Guard/allied variant in the first 18 months, no military-specific integration) to keep the codebase unambiguously civil/EAR99 and avoid every defense-side access constraint."
+ }
+]

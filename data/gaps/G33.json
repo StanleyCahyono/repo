@@ -1,0 +1,654 @@
+{
+ "id": "G33",
+ "title": "Independent track-provenance and after-action audit tool for C-UAS and unit drone operations, with a friendly-flight declaration adapter (MAVLink/GCS to CoT flight-intent extension) and an offline-first UAS operator/airframe qualification and readiness ledger",
+ "problem": "After a counter-UAS engagement or a unit drone mission nobody can independently reconstruct which sensor said what, when, and why a track was called friend or unknown; friendly drone intent still reaches the C-UAS picture by voice and hand-marking; and units fielding thousands of multi-vendor drones track operator qualification and airframe readiness in DTMS entries, spreadsheets and binders.",
+ "categories": [
+  "B",
+  "C",
+  "G",
+  "I"
+ ],
+ "segment_ids": [
+  "S13",
+  "S07",
+  "S03"
+ ],
+ "chain_steps": [
+  "COLLECT",
+  "PROCESS",
+  "FUSE",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "company",
+  "battalion",
+  "brigade ADAM/BAE",
+  "CTC/range control",
+  "JIATF-401 / joint task force oversight"
+ ],
+ "user": {
+  "exact_role": "(a) JIATF-401 and JICO/ADAM-cell oversight staff, CTC observer-controller-trainers and range control officers who review C-UAS engagements and airspace incidents after the fact; (b) battalion S3 air NCOs and company drone team leaders who must declare friendly flights; (c) battalion sUAS master trainers and S3 sections who maintain operator/airframe readiness records",
+  "echelon": "company to brigade for (b) and (c); CTC, range and joint-task-force oversight for (a)",
+  "organization_examples": [
+   "JIATF-401 (DoD C-sUAS lead, established 2025-08-28)",
+   "Transformation-in-Contact battalions (e.g., 2-35 IN / 25th ID; 4ID units)",
+   "JPMRC / JMRC / NTC observer-controller airspace cells (the community that wrote CALL Handbook 25-14)",
+   "Yuma Proving Ground / Falcon Peak exercise control (NORTHCOM, JIATF-401)",
+   "3rd Combat Aviation Brigade airspace management cell (BARS marking workaround)"
+  ]
+ },
+ "current_workflow": [
+  "1. Friendly drone launch announced by radio/chat; unit marks it by BARS (bearing, altitude, range, speed) or an ATAK point; ADAM/BAE cell deconflicts procedurally per CALL 25-14 altitude blocks and ROZs",
+  "2. C-UAS sensors publish tracks into FAAD C2 or Lattice; operator correlates with the announced friendly flights under time pressure and labels friend/unknown/hostile",
+  "3. After an engagement, near-miss or exercise serial, the O/C-T or oversight staff rebuild the timeline from vendor screen recordings, radio logs, TAK chat and memory; the C2 vendor's own replay (where it exists) is the only machine record",
+  "4. Lessons learned are written into AARs and, at joint level, into products such as the JIATF-401 2026 Quick Reference Guide; no cross-vendor, government-owned machine-readable provenance record is retained",
+  "5. Operator qualification (sUAS Master Trainer course completions, currency), airframe and battery status are recorded in DTMS course-completion entries, unit spreadsheets, vendor clouds (Skydio Cloud) and paper logs; readiness is reported by hand"
+ ],
+ "current_solution": "Lattice (JIATF-401 common tactical C-UAS C2, $87M task order Mar 2026) and FAAD C2 with their built-in track logs and vendor-specific replay; TAK/ATAK with the free government UAS Tool plugin (MAVLink-class drones appear as CoT with telemetry and FMV); Auterion Mission Control CoT-to-ATAK feeds; procedural airspace control (CALL 25-14) and BARS hand-marking; DTMS as the Army system of record for individual training records; commercial fleet/compliance tools (AirData, Aloft, DroneSense - public-safety oriented); government test organizations and FFRDC data-collection teams at C-UAS test events (RECALL - not re-verified this session).",
+ "failure": "Three distinct failures: (a) there is no vendor-neutral, government-owned provenance record that survives the exercise or engagement - the only machine record lives inside the C2 vendor's stack, so oversight staff cannot independently grade fusion quality or explain a friend/unknown call; (b) friendly-flight intent (window, geometry, purpose) is not encoded in the CoT the C-UAS picture consumes, so blue-ID collapses to voice and pattern-matching; (c) operator currency and airframe readiness across Skydio/Auterion/Gauntlet fleets have no unit-owned offline ledger, so readiness is re-typed by hand. The narrow form deliberately excludes live fusion and live friend/foe identification.",
+ "evidence": [
+  {
+   "form": "government document",
+   "claim": "Falcon Peak 26.2 (Sept 2026, Yuma Proving Ground) was the first iteration to deploy Anduril Lattice as the digital backbone and 'baseline standard against which all commercial sensor-to-shooter counter-UAS assets are measured' - i.e., the government measures vendor performance through the incumbent's own stack rather than an independent record.",
+   "source_title": "What's unique about Northcom's Falcon Peak 26.2 counter-drone exercise (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/",
+   "pub_date": "2026-09-23",
+   "event_date": "2026-09",
+   "tier": "2",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "JIATF-401 published the 2026 C-sUAS Quick Reference Guide (2026-09-08) to give a common technical/tactical baseline and includes lessons learned from real-world operations 'intended to help developers and operators adapt defensive strategies and training' - after-action learning exists as a document product, not as a procured audit tool.",
+   "source_title": "Joint Interagency Task Force 401 publishes counter-drone handbook (army.mil)",
+   "source_url": "https://www.army.mil/article/293804/joint_interagency_task_force_401_publishes_counter_drone_handbook",
+   "pub_date": "2026-09",
+   "event_date": "2026-09-08",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "GAO-25-106454 found no mechanism to share lessons learned from CJADC2 experimentation, risking duplicative effort - a documented, unmet after-action/knowledge-capture need, but with no named buyer for tooling.",
+   "source_title": "GAO-25-106454",
+   "source_url": "https://www.gao.gov/products/gao-25-106454",
+   "pub_date": "2025-04-08",
+   "event_date": "2025-04",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Army CTO memo (Sept 2025) rated the NGC2 prototype 'very high risk' partly because of no user-activity logging and no control over who sees what - audit logging is an acknowledged gap inside the incumbent-led data layer, which the incumbent was told to fix.",
+   "source_title": "Anduril/Palantir Army memo on NGC2 (CNBC)",
+   "source_url": "https://www.cnbc.com/2025/10/03/anduril-palantir-army-memo-ngc2.html",
+   "pub_date": "2025-10-03",
+   "event_date": "2025-09",
+   "tier": "2",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "3rd Combat Aviation Brigade deconflicted sUAS and rotary-wing aircraft with designated launch points, loiter areas, altitudes and unit marking of UAS by BARS (bearing, altitude, range, speed) - friendly-flight intent is hand-marked because it is not carried in the picture.",
+   "source_title": "3rd Combat Aviation Brigade innovates airspace management for congested battlespace (army.mil)",
+   "source_url": "https://www.army.mil/article/290694/3rd_combat_aviation_brigade_innovates_airspace_management_for_congested_battlespace_advancing_army_2030_readiness",
+   "pub_date": "2026 (exact date not captured)",
+   "event_date": "2026 (pre-April JMRC rotation)",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "CALL Handbook 25-14 (Sept 2025) codifies procedural sUAS airspace control (altitude blocks, ROZs, ACMs) drawn from TiC exercises and CTC rotations - the Army's institutional answer to friendly-drone deconfliction is procedure, designed for degraded comms, not a software declaration feed.",
+   "source_title": "Small Unmanned Aircraft System Airspace Management and Control handbook (army.mil)",
+   "source_url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control",
+   "pub_date": "2025-09",
+   "event_date": "2025-09",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "The government-owned TAK UAS Tool plugin (public since 2021-09-22; COTAK training videos released Feb 2025) already flies common drones from ATAK and shares drone position, SPoI, FOV, telemetry and FMV as CoT across the TAK network - the MAVLink/GCS-to-CoT half of the 'adapter' is a free government baseline; only the flight-intent (window/geometry/purpose) extension is missing.",
+   "source_title": "UAS Tool Now Publicly Available (CivTAK); COTAK UAS Tool training videos",
+   "source_url": "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/",
+   "pub_date": "2021-09-22 (plugin); 2025-02 (training videos)",
+   "event_date": "2021-2025",
+   "tier": "2",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Certified hardware IFF sized for small UAS is on the market (Sagetech MX12B, DoD AIMS-certified Mode 5 micro transponder; uAvionix NATO-compliant drone IFF; Allen Control Systems optical friend-or-foe ID unveiled 2025-10-31) - the funded direction for friendly-drone identity is hardware/crypto, which a software declaration adapter would at best complement.",
+   "source_title": "ACS Unveils Optical Friend-or-Foe ID for Drones (Defense Post); Sagetech MX12B",
+   "source_url": "https://thedefensepost.com/2025/10/31/acs-drone-optical-iff/",
+   "pub_date": "2025-10-31",
+   "event_date": "2025-10",
+   "tier": "3",
+   "label": "FACT (vendor claims on capability)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "DTMS is the Army's system of record for recording, tracking and planning training, including course completions and MOS critical tasks; unit master trainers approve access - operator qualification records already have a mandated government home, so a ledger competes with a $0 incumbent system.",
+   "source_title": "DTMS Supports Training and Readiness Reporting (army.mil)",
+   "source_url": "https://www.army.mil/article/205783/dtms_supports_training_and_readiness_reporting",
+   "pub_date": "not captured (article predates 2025)",
+   "event_date": "ongoing",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "The Army SUAS Master Trainer Course at Fort Benning is expanding from basic drone training to producing instructors who integrate RQ-28A-class systems, with emphasis on EW resilience and scaling drone use (Infantry, Spring 2026) - the training pipeline, not a records tool, is the institutional focus.",
+   "source_title": "The SUAS Master Trainer Course: Forging the Future of Ground Warfare (Infantry journal)",
+   "source_url": "https://www.lineofdeparture.army.mil/Journals/Infantry/Infantry-Archive/Spring-2026/The-SUAS-Master-Trainer-Course/",
+   "pub_date": "2026 (Spring)",
+   "event_date": "2026",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "Army accepted 12,080 Gauntlet 1 drones by mid-Sept 2026 with 30,000 more inbound and >200,000 targeted by 2027; leadership says the remaining gap is training everyone to the appropriate level, especially in contested EMS - readiness/qualification pain at unit level is real and growing.",
+   "source_title": "As experimental drone battalion ends, Army aims to push drones to every squad (Army Times)",
+   "source_url": "https://www.armytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "pub_date": "2026-09-18",
+   "event_date": "2026-09",
+   "tier": "2",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "operator workaround",
+   "claim": "European Security & Defence reports that before Ukrainian drone-ID systems, coordination ran in chats and up to ~50% of downed Ukrainian drones were lost to friendly EW/air defence; MWI (West Point) recommends a friendly-UAS IFF interrogator for light C-UAS platforms - the fratricide pain that motivates provenance and friendly-flight declaration.",
+   "source_title": "Identity crisis (euro-sd); MWI light C-UAS platform analysis",
+   "source_url": "https://euro-sd.com/2025/11/articles/technology/47765/identity-crisis/",
+   "pub_date": "2025-11",
+   "event_date": "2022-2025",
+   "tier": "2",
+   "label": "FACT (50% figure is a secondary-source claim not independently verified)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "budget",
+   "claim": "The only named money for blue-object/friendly-force data integration found in the corpus is the DIU/INDOPACOM Blue Object Management Challenge ($500,000 prize pool shared by 10 startups, selected 2025-12-10) - theater-level, not tactical C-UAS audit.",
+   "source_title": "Finalists selected for the DIU Blue Object Management Challenge",
+   "source_url": "https://www.diu.mil/latest/finalists-selected-for-the-diu-blue-object-management-challenge",
+   "pub_date": "2025-12",
+   "event_date": "2025-12-10",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Commercial drone fleet/compliance software already tracks pilot currency (AirData recognizes 880+ certificate types, analyzes batteries after every flight, 65M flights logged by Aug 2026) and is consolidating into public-safety platforms (Versaterm acquired DroneSense Jul 2025 and Aloft Feb 2026) - the qualification-ledger function is a solved commercial category with no verified Army/Guard contract found.",
+   "source_title": "AirData surpasses 65 million drone flights (sUAS News); Versaterm doubles down on drones with Aloft acquisition (DroneDJ)",
+   "source_url": "https://dronedj.com/2026/02/19/versaterm-aloft-dronesense-acquisition-faa/",
+   "pub_date": "2026-02-19; 2026-08",
+   "event_date": "2025-07 to 2026-08",
+   "tier": "3",
+   "label": "FACT (company/press claims)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "Civil C-UAS vendors already market forensic follow-through: D-Fend describes 'forensic readiness' and 'complete incident resolution with the potential for forensic follow-through'; SkySafe stores flight history and works with Cellebrite for evidence - after-action forensics is a feature inside detection vendors' products in the civil market (vendor claims; D-Fend page could not be fetched - EGRESS_BLOCKED).",
+   "source_title": "Dedrone vs D-Fend comparison; D-Fend drone forensic readiness blog",
+   "source_url": "https://d-fendsolutions.com/blog/strengthening-counter-uas-operations-through-drone-forensic-readiness/",
+   "pub_date": "2026 (comparison page); blog date not captured",
+   "event_date": "2025-2026",
+   "tier": "3",
+   "label": "INFERENCE (vendor marketing, not proof of capability)",
+   "confidence": "LOW"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "No RFI, sources-sought, SBIR/xTech topic or CSO call for an independent C-UAS/drone track-provenance audit tool, a CoT flight-intent standard, or a unit UAS qualification ledger was found this session (searches on Army SBIR/xTech UAS training-management topics returned only generic xTech pages and unrelated C-UAS detection topics). Public evidence insufficient for any demand signal in this exact form.",
+   "source_title": "Army SBIR|STTR xTech program page (search result)",
+   "source_url": "https://armysbir.army.mil/program/xtech/",
+   "pub_date": "2026",
+   "event_date": "2026-09-25 (search)",
+   "tier": "1",
+   "label": "INFERENCE",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "ATAK-CIV and its SDK are open-sourced, government-owned software with a plugin architecture (TAK-GOV/MIL distribution-controlled) - both founders can build the adapter and ledger as a CIV plugin without export exposure; plugin signing for government users runs through the TAK Product Center.",
+   "source_title": "AndroidTacticalAssaultKit-CIV (GitHub, deptofdefense)",
+   "source_url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "pub_date": "ongoing (repo)",
+   "event_date": "ongoing",
+   "tier": "1",
+   "label": "FACT",
+   "confidence": "HIGH"
+  }
+ ],
+ "why_existing_startups_havent_solved": "Because each of the three pieces is either already given away or already owned. The MAVLink-to-CoT bridge ships free in the government TAK UAS Tool and in Auterion's CoT feed, so no startup can charge for it; a flight-intent extension to CoT is a schema decision that belongs to the TAK Product Center and JIATF-401, not to a vendor. Operator/airframe records have a mandated home (DTMS) plus vendor clouds and mature commercial compliance tools, so a unit ledger is a spreadsheet replacement nobody budgets for. The independent after-action audit is the one function with real oversight value, and it is precisely the one startups cannot reach: the machine records live inside Lattice/FAAD C2 (CUI, vendor formats), the government already staffs independent measurement through test organizations and FFRDC data-collection teams at events like Falcon Peak (RECALL - not re-verified this session), and the customer's revealed preference in Sept 2026 was to make the incumbent stack itself the measurement baseline. Absence of a startup here reflects absence of a buyer, not an overlooked seam.",
+ "why_not_solved_reasons": [
+  "it HAS been solved",
+  "insufficient commercial market",
+  "data inaccessible",
+  "buyer fragmentation",
+  "economics",
+  "proprietary incumbent architecture"
+ ],
+ "technical_wedge": "A single ATAK-CIV plugin plus a small offline-first edge service that (1) emits a 'friendly-flight declaration' CoT event (proposed schema extension: flight window, launch point, altitude block/ROZ geometry, purpose, operator ID) generated from a MAVLink GCS or hand entry and pre-checks it against unit-authored ACMs; (2) records every incoming track/CoT event with source, timestamp and label into a tamper-evident local log that syncs opportunistically; and (3) replays and diffs those logs after a serial to show which source reported which track, when, and what the friendly declaration said at that moment. The audit engine is sensor-agnostic and could later ingest exported Lattice/FAAD C2 logs if a sponsor grants them.",
+ "mvp": {
+  "what": "ATAK-CIV plugin + edge service on a laptop/Android: friendly-flight declaration from a PX4/ArduPilot GCS, a unit ledger (operators, currency, airframes, batteries) that works offline and syncs via TAK Server, and an after-action replay that reconstructs a scripted range serial from 2-3 commercial sensor feeds (low-cost radar or RF detector, EO camera tracker, Remote ID/ADS-B receiver) with per-source lineage.",
+  "demonstrable_in_3_6_months": "Yes for all three pieces on self-collected range data with 3-5 commercial drones and 50-200 synthetic tracks; roughly 8-12 weeks for adapter+ledger, 4-6 months to add the replay/audit engine. Cost roughly $40-90k including hardware.",
+  "what_it_must_prove": "That (a) a declared friendly flight can be matched to a detected track with measurable precision/recall when cooperative signals are removed, (b) the replay reconstructs a labelled timeline that an O/C-T would accept as evidence, (c) the ledger replaces spreadsheet/binder tracking without a network - and, critically, that a named government sponsor will supply real exercise logs, without which the demo proves only that the plumbing works.",
+  "uses": [
+   "commercial hardware",
+   "public/open data",
+   "simulated military data",
+   "unclassified architecture",
+   "commercial compute",
+   "open standards"
+  ]
+ },
+ "data_requirement": {
+  "what": "Track/CoT event logs from C-UAS C2 (source, time, label, confidence), friendly-flight declarations and GCS telemetry, unit ACMs/ACOs, and operator/airframe/battery/qualification records; for a credible military demo, exported engagement logs from Lattice/FAAD C2 and exercise ground truth.",
+  "legally_realistically_obtainable": "MVP: yes - self-generated MAVLink telemetry, commercial c-UAS sensor outputs, Remote ID/ADS-B, synthetic ACMs built from FM 3-52/CALL 25-14, synthetic personnel records. Credible demo: only through a sponsor (JIATF-401, a CTC, ATEC/test organization) - engagement logs are CUI at minimum and vendor-format; real unit training records contain PII; export-controlled CUI is effectively US-person-only (E07-F30), so the Indonesian co-founder cannot be assumed to handle that half. Needs counsel.",
+  "sources": [
+   "PX4/ArduPilot MAVLink streams from owned commercial drones",
+   "Commercial c-UAS sensors (low-cost radar, RF detector) and EO tracker on a private range",
+   "Remote ID (ASTM F3411) / ADS-B receivers",
+   "ATAK-CIV / TAK Server open-source SDK and CoT schema",
+   "Synthetic ACO/ACM and personnel data from public doctrine",
+   "Sponsor-provided exercise captures (Falcon Peak, CTC rotations, PC-C6) - CUI, sponsor-gated"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "ATAK/WinTAK/TAKX and TAK Server (plugin signing via TAK Product Center)",
+   "Lattice (JIATF-401 common C-UAS C2) and FAAD C2 log export",
+   "Vendor GCS: PX4/ArduPilot (open), Skydio Cloud API (partner), Auterion Mission Control (partner), Gauntlet vendor controllers (formats not public)",
+   "DTMS (Army training system of record) for qualification data - government-controlled, no public API found",
+   "TAIS (Army airspace program of record above brigade, GDMS) for ACO/ACM data"
+  ],
+  "interfaces_protocols": [
+   "CoT XML/protobuf and a proposed flight-intent extension",
+   "MAVLink",
+   "ASTM F3411 Remote ID",
+   "UC2 / Link 16 (out of scope for MVP; CUI)",
+   "CSV/JSON log exports from C2 vendors (formats vendor-controlled)"
+  ],
+  "who_controls_the_interface": "The TAK Product Center controls the CoT schema and plugin signing; Anduril and Northrop control Lattice/FAAD C2 export formats; Skydio, Auterion and Gauntlet vendors control drone telemetry APIs; the Army controls DTMS and TAIS. The startup controls none of them."
+ },
+ "customer": {
+  "user": "O/C-T airspace cells, JIATF-401 oversight/technical staff, range control, battalion S3 air and sUAS master trainers",
+  "champion": "A CTC airspace O/C-T team or a Transformation-in-Contact battalion commander; JIATF-401 technical staff at open industry demos (INFERENCE - no named champion identified)",
+  "contract_signer": "ACC-Detroit Arsenal (JIATF-401 CSO) or a division/CTC unit-level purchase authority for a small pilot; Army Applications Laboratory for xTech; no signer identified for a software-only audit/ledger product",
+  "requirement_owner": "None identified for the audit tool or the CoT flight-intent extension; T2COM (MCoE/USAACE) owns sUAS training/airspace doctrine and its answer is CALL 25-14 plus DTMS (INFERENCE)",
+  "program_office": "None owns an independent audit layer; TAK Product Center (C5ISR Center) for plugins; PEO Aviation PM UAS buys airframes; JIATF-401 acquisition cell for C-UAS software listings",
+  "contracting_office": "Public evidence insufficient for a software-only audit/ledger product; ACC-Detroit Arsenal (JIATF-401 CSO) and ACC-APG (C5ISR/TAK) are the plausible offices"
+ },
+ "budget": {
+  "program_or_line": "No program element or budget line for any of the three functions. Adjacent money: JIATF-401 C-UAS software task orders under the Army-Anduril enterprise agreement ($87M task order Mar 2026; $20B ceiling is not revenue); Army C-sUAS portfolio (cumulative $2.6B requested through FY2025 per GAO-25-107491); exercise/test budgets (Falcon Peak, CTC rotations) that fund government test teams; DIU Blue Object challenge $500k prize pool; Army training-management O&M that already sustains DTMS.",
+  "evidence": "Corpus and this session's searches found no solicitation, topic or line naming an independent C-UAS provenance/audit tool, a CoT flight-intent standard or a unit UAS qualification ledger; the training-records function is funded as DTMS; the audit function is funded as government test/oversight labor, not as a product. Public evidence insufficient.",
+  "source_url": "https://files.gao.gov/reports/GAO-25-107491/index.html",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Free ATAK-CIV plugin (flight-intent declaration + ledger) piloted by invitation with one TiC battalion or CTC O/C-T cell, then an xTech prize or a JIATF-401 CSO white paper for the audit engine once a sponsor supplies exercise logs",
+  "sequence": [
+   "1. Build plugin + replay engine on ATAK-CIV and PX4/ArduPilot with commercial sensors (no government paperwork; 3-6 months; <$90k)",
+   "2. Unit or CTC invitation for an unfunded pilot; TAK.gov plugin submission/signing for government users",
+   "3. xTech (sensor-integration / mission C2 problem areas) or the xTech hackathon for visibility; JIATF-401 industry demo day",
+   "4. CRADA or OTA with a test organization / JIATF-401 granting exported exercise logs to a US-person enclave for the audit engine",
+   "5. Only then: CSO/OTA award or a subcontract to a test-support or FFRDC team - realistically a services relationship"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% ownership and control by US citizens/permanent residents (E07-F3): not met today, possible after the German founder's green card only if the cap table is structured accordingly; AFWERX-style rules bar a non-US-person from being technical lead on controlled work (E07-F7). TAK-CIV plugins, xTech, OTAs and CSOs carry no citizenship test (E07-F22). The audit half touches export-controlled CUI (engagement logs, C2 interface formats), which is effectively US-person-only (E07-F30); the Indonesian founder would need a technology control plan and, for any 600-series/ITAR data, a licence (E07-F17/F18) - constraints to scope with counsel, not legal conclusions."
+ },
+ "competition": [
+  {
+   "company": "TAK Product Center (government) - UAS Tool plugin",
+   "how_close": "Direct for the adapter half: free, government-owned MAVLink-class drone integration into ATAK with telemetry/FMV as CoT since 2021; controls CoT schema and plugin signing, so any flight-intent extension is theirs to adopt or ignore.",
+   "evidence": "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/ (2021-09-22); COTAK training videos Feb 2025"
+  },
+  {
+   "company": "Anduril (Lattice)",
+   "how_close": "Owns the machine record the audit depends on: JIATF-401 common tactical C-UAS C2 ($87M task order, Mar 2026) and the Falcon Peak 26.2 'baseline standard'; can expose replay/provenance and blue-drone ingestion as features. Its own recording/replay capability is a vendor claim not verified this session (RECALL, LOW).",
+   "evidence": "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/ (2026-09-23)"
+  },
+  {
+   "company": "Northrop Grumman (FAAD C2)",
+   "how_close": "Owns the Army SHORAD/C-sUAS track record and fratricide-mitigation logic; controls its log formats.",
+   "evidence": "FAAD C2 data sheet (company, 2024) - see G05 card"
+  },
+  {
+   "company": "Government test organizations and FFRDC/UARC data-collection teams (ATEC, DOT&E, JIATF-401 test events)",
+   "how_close": "Institutionally the independent auditor: government testers score vendor C-UAS performance at events like Falcon Peak and JCO demos with their own data collection. RECALL - not re-verified this session.",
+   "evidence": "Public evidence insufficient this session; consistent with Falcon Peak 26.2 reporting that all assets are 'measured' against a baseline"
+  },
+  {
+   "company": "Hardware IFF vendors (Sagetech MX12B, uAvionix, Allen Control Systems optical ID)",
+   "how_close": "Solve friendly-drone identity with certified transponders/optical ID; if DoD mandates one, the software declaration adapter becomes a consumer of their signal, not a product.",
+   "evidence": "https://thedefensepost.com/2025/10/31/acs-drone-optical-iff/ (2025-10-31); Sagetech MX12B AIMS certification (vendor claim)"
+  },
+  {
+   "company": "Auterion (Nemyx / Mission Control CoT feed), Skydio (Skydio Cloud), AeroVironment (Kinesis)",
+   "how_close": "Already publish drone tracks to ATAK as CoT (Auterion) and hold fleet health/battery/flight logs (Skydio Cloud); control the telemetry APIs the ledger would need for anything beyond hand entry.",
+   "evidence": "https://thedefensepost.com/2025/09/05/auterion-nemyx-drone-swarm/ (2025-09-05); Skydio Cloud docs (2025-04-03)"
+  },
+  {
+   "company": "DTMS (Army Digital Training Management System)",
+   "how_close": "Mandated system of record for individual training records incl. course completions; a unit ledger duplicates it at $0 marginal cost to the unit.",
+   "evidence": "https://www.army.mil/article/205783/dtms_supports_training_and_readiness_reporting"
+  },
+  {
+   "company": "AirData, Aloft and DroneSense (Versaterm), other commercial fleet-compliance tools",
+   "how_close": "Mature pilot-currency, battery and flight-log compliance products (AirData: 880+ certificate types, 65M flights); consolidating into public-safety dispatch platforms; no Army/Guard contract verified.",
+   "evidence": "https://dronedj.com/2026/02/19/versaterm-aloft-dronesense-acquisition-faa/ (2026-02-19); https://www.suasnews.com/2026/08/airdata-surpasses-65-million-drone-flights-as-the-faas-bvlos-rule-awaits-publication/ (2026-08)"
+  },
+  {
+   "company": "Civil C-UAS forensics (D-Fend 'forensic readiness', SkySafe flight history + Cellebrite, Dedrone)",
+   "how_close": "After-action/forensic features inside civil detection vendors' products (vendor claims); crowds the dual-use beachhead.",
+   "evidence": "https://droneintelligence.ai/compare/dedrone-vs-d-fend-solutions (2026); D-Fend blog not fetchable (EGRESS_BLOCKED)"
+  },
+  {
+   "company": "Raft (NGC2 data/services registries) and Palantir (TITAN)",
+   "how_close": "Adjacent: registries and provenance inside the NGC2 common data baseline; TITAN at division/corps.",
+   "evidence": "See G05/G09 cards; https://www.army.mil/article/293409/ (2026)"
+  },
+  {
+   "company": "Perennial Autonomy (reported JIATF-401 counter-UAS contract)",
+   "how_close": "Search headline only ('$500M JIATF 401 Counter-UAS Contract', GovConWire) - not opened or verified this session; figure is presumably a ceiling, not revenue. Listed only because it indicates JIATF-401 is awarding C-UAS software/integration work to newer entrants.",
+   "evidence": "https://www.govconwire.com/articles/perennial-autonomy-jiatf-401-counter-uas (date not captured; LOW)"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes for two of three pieces within a release cycle: Lattice/FAAD C2 can expose track lineage, replay and a blue-drone declaration ingest as features (they own the data and the JIATF-401 relationship); the TAK Product Center can add a flight-intent field to the UAS Tool. The only piece they are structurally unmotivated to build is an audit that grades their own fusion - but the government already sources that independence from its own test organizations and FFRDCs, not from vendors.",
+  "why_startup_still_wins_or_reject": "Reject as a standalone company thesis. The adapter and ledger are features with a $0 government baseline; the audit is a services/test-support role whose data the startup cannot access without a sponsor and whose institutional owner (government testers) already exists. A startup could win a small pilot on speed and unit goodwill, but nothing here compounds into a defensible product."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "$40,000-90,000",
+  "credible_military_demo_usd": "$400,000-900,000",
+  "first_production_deployment_usd": "$1.5M-3M",
+  "assumptions": "PoC: two founders, commercial drones/sensors, ATAK-CIV, 4-6 months. Credible demo requires a sponsor-provided exercise log set, a US-person engineering enclave, an operator/O-C-T advisor on retainer, TAK.gov plugin signing, CUI handling and export counsel, and at least one exercise slot (travel, hardware); 9-15 months. Production: ATO under a host system, CMMC self-assessment, sustainment, and integration labor per unit/CTC - largely services. All figures are analyst estimates (HYPOTHESIS, MEDIUM)."
+ },
+ "expertise_required": [
+  {
+   "role": "Former CTC O/C-T airspace officer or JICO/ADAM-cell NCO",
+   "why": "Defines what an acceptable after-action reconstruction looks like and opens the unit/CTC door; without them the audit product is engineering guesswork",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "TAK plugin / CoT engineer with TAK.gov signing experience",
+   "why": "The delivery path for all three pieces is an ATAK plugin; schema-extension proposals need TPC credibility",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Test-and-evaluation / data-collection specialist familiar with C-UAS event scoring",
+   "why": "The audit engine must produce metrics government testers recognise (track continuity, ID latency, false-merge/split)",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Export-control / CUI compliance counsel",
+   "why": "Engagement logs and C2 interface formats are export-controlled CUI; the non-US-person founder's role must be structured before the first sponsor data set",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "US-person cleared engineer (later)",
+   "why": "Any exercise data above CUI and any Link 16/UC2 work require clearance; neither founder is eligible for years",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "medium",
+  "explanation": "The adapter and ledger on ATAK-CIV with commercial drones are low-burden (EAR99-level per E07; PII handling if real personnel data is used). Burden rises sharply for the audit half: C-UAS engagement logs and Lattice/FAAD C2 interface formats are CUI and likely export-controlled; exercise captures may be classified; government plugin signing and an ATO under a host system are needed for fielded use; CMMC self-assessment applies once on contract. Not a legal judgment.",
+  "non_us_person_founder_note": "The Indonesian founder can build and demo the adapter and ledger today. The audit engine's real data (export-controlled CUI) is effectively US-person-only (E07-F30); ITAR technical data has no deemed-export exception for domestic foreign-person employees (E07-F18); a technology control plan and counsel review are needed before the first sponsor data set. The German founder's expected permanent residency resolves US-person status for export purposes but not clearance eligibility. Any allied (Bundeswehr) deployment could constitute an ITAR 'defense service' even for EAR99 software (E07-F15). Needs counsel."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "medium",
+  "explanation": "Civil C-UAS sites (airports, stadiums, prisons, DHS/FAA test sites) need incident forensics and public-safety drone programs need currency/compliance ledgers, and both are fully unclassified - but those markets are already served by SkySafe/D-Fend/Dedrone forensics and AirData/Aloft/DroneSense compliance tools consolidating under Versaterm, so the dual-use beachhead is crowded rather than open."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "workflow",
+   "government relationships"
+  ],
+  "explanation": "No data moat (logs belong to the government or the C2 vendor), no algorithm moat (replay/diff and record-matching are commodity), no interface moat (TPC, Anduril, Northrop and drone OEMs own every interface). At best a unit-adopted workflow and an O/C-T relationship - both non-transferable and non-compounding."
+ },
+ "why_now": "Friendly-drone density exploded (12,080 Gauntlet drones by Sept 2026, drones-to-every-squad), CALL 25-14 and BARS hand-marking document the procedural workaround, the $87M Lattice task order under a $20B enterprise agreement and Falcon Peak 26.2's 'baseline standard' role create lock-in anxiety that an independent record would answer, the Army CTO's NGC2 memo and DoD IG's Advana audit put logging/audit gaps on record, and ATAK-CIV plus the free UAS Tool make the plumbing trivial to build. What has not changed is that nobody has funded any of it.",
+ "killer_risk": "There is no PROBLEM -> REQUIREMENT OWNER -> PROGRAM OFFICE -> BUDGET -> VEHICLE path for any of the three pieces: the adapter duplicates a free government plugin and a schema the TAK Product Center controls; the ledger duplicates DTMS and mature commercial compliance tools; and the audit function - the only part with oversight value - depends on export-controlled logs the founders cannot access and on an independence role the government already fills with its own test organizations and FFRDCs, so the best outcome is an unfunded pilot or a test-support services engagement, not a company.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2021",
+   "event": "TAK UAS Tool plugin made publicly available (MAVLink-class drone telemetry/FMV into ATAK as CoT)",
+   "source_url": "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/"
+  },
+  {
+   "year": "2021",
+   "event": "GAO-21-99 flags friendly-force tracking gaps in close air support",
+   "source_url": "https://www.gao.gov/products/gao-21-99"
+  },
+  {
+   "year": "2025",
+   "event": "GAO-25-106454: no mechanism to share CJADC2 experimentation lessons (Apr); JIATF-401 established (Aug 28); CALL Handbook 25-14 on sUAS airspace control (Sept); Army CTO memo on NGC2 logging gaps (Sept); DIU Blue Object challenge finalists, $500k pool (Dec 10)",
+   "source_url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control"
+  },
+  {
+   "year": "2026",
+   "event": "Lattice $87M JIATF-401 task order (Mar 13); 3rd CAB BARS-marking airspace plan tested at JMRC (Apr); SUAS Master Trainer Course expansion (Spring); JIATF-401 C-sUAS Quick Reference Guide with lessons learned (Sep 8); 12,080 Gauntlet drones accepted (Sep 18); Falcon Peak 26.2 uses Lattice as measurement baseline (Sep 23)",
+   "source_url": "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/"
+  }
+ ],
+ "allied_extension": "Marginally more compelling for the ledger and adapter, not for the audit. Allied armies fielding mixed Skydio/Quantum/Auterion fleets (Germany, UK, Poland, Ukraine) and NATO's interest in sensor-agnostic drone C2 (E06-F34) create similar readiness-record and friendly-declaration needs, and the German founder gives Cyber Innovation Hub / Bundeswehr pilot access (E06-F20). But allied C-UAS pictures run on national or SitaWare/Helsing stacks whose logs are equally closed, Ukraine already fielded its own UA DroneID, and furnishing the software to a foreign military may be an ITAR 'defense service' even if EAR99 (E07-F15). Allied markets change the buyer, not the absence of a budget line.",
+ "search_log": [
+  {
+   "query": "Army sUAS operator qualification records \"master trainer\" DTMS training records small unmanned aircraft 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "tak.gov \"UAS Tool\" plugin ATAK flight plan friendly UAS deconfliction CoT 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "JIATF-401 counter-UAS after action review engagement data recording Falcon Peak 26.2 September 2026",
+   "useful": true
+  },
+  {
+   "query": "Army TAIS \"Tactical Airspace Integration System\" sUAS flight request airspace management app NGC2 2026",
+   "useful": true
+  },
+  {
+   "query": "drone fleet management software pilot currency compliance \"National Guard\" OR \"U.S. Army\" contract DroneSense OR Aloft OR AirData 2025 2026",
+   "useful": true
+  },
+  {
+   "query": "Army friendly drone identification small UAS IFF fratricide \"friend or foe\" Gauntlet 2026 blue force drone ID",
+   "useful": true
+  },
+  {
+   "query": "Dedrone OR \"D-Fend\" OR \"Hidden Level\" counter-UAS forensic report incident replay after-action evidence export 2026",
+   "useful": true
+  },
+  {
+   "query": "Army SBIR OR xTech topic UAS operator training management readiness tracking \"unmanned aircraft\" software 2026",
+   "useful": false
+  },
+  {
+   "query": "WebFetch https://d-fendsolutions.com/blog/strengthening-counter-uas-operations-through-drone-forensic-readiness/ (EGRESS_BLOCKED, not retried)",
+   "useful": false
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://defensescoop.com/2026/09/23/northern-command-falcon-peak-26-2-counter-drone-exercise/",
+   "title": "What's unique about Northcom's Falcon Peak 26.2 counter-drone exercise",
+   "pub_date": "2026-09-23",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/293804/joint_interagency_task_force_401_publishes_counter_drone_handbook",
+   "title": "Joint Interagency Task Force 401 publishes counter-drone handbook",
+   "pub_date": "2026-09",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2026/Sep/08/2003992822/-1/-1/1/JOINT-INTERAGENCY-TASK-FORCE-401-2026-COUNTER-SMALL-UNMANNED-AIRCRAFT-SYSTEMS-QUICK-REFERENCE-GUIDE.PDF",
+   "title": "JIATF-401 2026 C-sUAS Quick Reference Guide",
+   "pub_date": "2026-09-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.gao.gov/products/gao-25-106454",
+   "title": "GAO-25-106454 CJADC2",
+   "pub_date": "2025-04-08",
+   "tier": 1
+  },
+  {
+   "url": "https://www.cnbc.com/2025/10/03/anduril-palantir-army-memo-ngc2.html",
+   "title": "Army CTO memo on NGC2 prototype risk",
+   "pub_date": "2025-10-03",
+   "tier": 2
+  },
+  {
+   "url": "https://www.army.mil/article/290694/3rd_combat_aviation_brigade_innovates_airspace_management_for_congested_battlespace_advancing_army_2030_readiness",
+   "title": "3rd CAB innovates airspace management for congested battlespace",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/288375/small_unmanned_aircraft_system_airspace_management_and_control",
+   "title": "CALL Handbook 25-14 sUAS Airspace Management and Control",
+   "pub_date": "2025-09",
+   "tier": 1
+  },
+  {
+   "url": "https://www.civtak.org/2021/09/22/uas-tool-now-publicly-available/",
+   "title": "UAS Tool Now Publicly Available",
+   "pub_date": "2021-09-22",
+   "tier": 2
+  },
+  {
+   "url": "https://cotak.gov/pages/news/uas-tool-training-videos",
+   "title": "COTAK UAS Tool Training Videos",
+   "pub_date": "2025-02",
+   "tier": 1
+  },
+  {
+   "url": "https://www.army.mil/article/205783/dtms_supports_training_and_readiness_reporting",
+   "title": "DTMS Supports Training and Readiness Reporting",
+   "pub_date": "not captured",
+   "tier": 1
+  },
+  {
+   "url": "https://www.lineofdeparture.army.mil/Journals/Infantry/Infantry-Archive/Spring-2026/The-SUAS-Master-Trainer-Course/",
+   "title": "The SUAS Master Trainer Course: Forging the Future of Ground Warfare (Infantry)",
+   "pub_date": "2026 (Spring)",
+   "tier": 1
+  },
+  {
+   "url": "https://www.armytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/",
+   "title": "As experimental drone battalion ends, Army aims to push drones to every squad",
+   "pub_date": "2026-09-18",
+   "tier": 2
+  },
+  {
+   "url": "https://thedefensepost.com/2025/10/31/acs-drone-optical-iff/",
+   "title": "ACS Unveils Optical Friend-or-Foe ID for Drones",
+   "pub_date": "2025-10-31",
+   "tier": 3
+  },
+  {
+   "url": "https://sagetech.com/news-and-events/identifying-drone-friend-or-foe-more-important-than-ever/",
+   "title": "Identifying Drone Friend or Foe (Sagetech, vendor)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://euro-sd.com/2025/11/articles/technology/47765/identity-crisis/",
+   "title": "Identity crisis (European Security & Defence)",
+   "pub_date": "2025-11",
+   "tier": 2
+  },
+  {
+   "url": "https://mwi.westpoint.edu/small-units-need-protection-from-drones-but-what-capabilities-should-a-light-maneuverable-counter-uas-platform-include/",
+   "title": "MWI: light maneuverable counter-UAS platform capabilities",
+   "pub_date": "2025-2026 (not visible)",
+   "tier": 2
+  },
+  {
+   "url": "https://www.diu.mil/latest/finalists-selected-for-the-diu-blue-object-management-challenge",
+   "title": "DIU Blue Object Management Challenge finalists",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://dronedj.com/2026/02/19/versaterm-aloft-dronesense-acquisition-faa/",
+   "title": "Versaterm doubles down on drones with Aloft acquisition",
+   "pub_date": "2026-02-19",
+   "tier": 3
+  },
+  {
+   "url": "https://www.suasnews.com/2026/08/airdata-surpasses-65-million-drone-flights-as-the-faas-bvlos-rule-awaits-publication/",
+   "title": "AirData surpasses 65 million drone flights",
+   "pub_date": "2026-08",
+   "tier": 3
+  },
+  {
+   "url": "https://droneintelligence.ai/compare/dedrone-vs-d-fend-solutions",
+   "title": "Dedrone vs D-Fend comparison",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://www.globalsecurity.org/military/systems/aircraft/systems/tais.htm",
+   "title": "Tactical Airspace Integration System (TAIS)",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://gdmissionsystems.com/command-and-control/tactical-airspace-integration-system-tais",
+   "title": "TAIS - General Dynamics Mission Systems",
+   "pub_date": "not captured",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "title": "ATAK-CIV repository",
+   "pub_date": "ongoing",
+   "tier": 1
+  },
+  {
+   "url": "https://files.gao.gov/reports/GAO-25-107491/index.html",
+   "title": "GAO-25-107491 Army air and missile defense incl. C-sUAS",
+   "pub_date": "2025-06-17",
+   "tier": 1
+  },
+  {
+   "url": "https://www.defenseone.com/business/2026/03/anduril-secures-87m-contract-common-counter-unmanned-c2-program/412156/",
+   "title": "Anduril secures $87M contract for common counter-unmanned C2",
+   "pub_date": "2026-03-14",
+   "tier": 2
+  },
+  {
+   "url": "https://armysbir.army.mil/program/xtech/",
+   "title": "Army xTech program",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.govconwire.com/articles/perennial-autonomy-jiatf-401-counter-uas",
+   "title": "Perennial Autonomy JIATF 401 counter-UAS contract (headline only, unverified)",
+   "pub_date": "not captured",
+   "tier": 3
+  }
+ ]
+}

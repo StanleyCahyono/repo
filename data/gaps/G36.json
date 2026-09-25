@@ -1,0 +1,648 @@
+{
+ "id": "G36",
+ "title": "ATO-evidence tooling: open-source evidence graph (SBOM, scans, attestations to OSCAL assessment results with content-addressed provenance) and TAK/marketplace plugin conformance tester, offered as a vendor-neutral component to hosting platforms and app pipelines rather than as a GRC product",
+ "problem": "Small software vendors onboarding apps to NGC2, TAK, Overmatch Armory, UDS or Game Warden re-assemble the same SBOM, scan, attestation and control-inheritance evidence by hand for each authorizing official or pipeline because nothing turns pipeline artifacts into a provenance-linked, reciprocally reusable OSCAL assessment-results package or proves plugin conformance before submission.",
+ "categories": [
+  "E",
+  "C",
+  "H",
+  "F"
+ ],
+ "segment_ids": [
+  "S09",
+  "S10",
+  "S01"
+ ],
+ "chain_steps": [
+  "PROCESS",
+  "DISSEMINATE_TASK"
+ ],
+ "echelons": [
+  "enterprise software factory / hosting platform",
+  "program office ISSM and AO",
+  "third-party app and plugin developers (vendor side)"
+ ],
+ "user": {
+  "exact_role": "DevSecOps lead or compliance engineer at a small ISV or TAK plugin developer; platform engineer at a hosting platform (UDS, Game Warden, Platform One) who assembles tenant evidence; ISSM/SCA who receives the package",
+  "echelon": "vendor and platform-operator level (enterprise), with the consumer at program-office ISSM/AO level",
+  "organization_examples": [
+   "NGC2 sub-vendors under Anduril/Lockheed team leads (Raft, Rune, RII class)",
+   "TAK third-party pipeline developers (takwerx-class small shops, RIIS)",
+   "Defense Unicorns UDS Army tenants; Second Front Game Warden tenants",
+   "Platform One Party Bus / Big Bang users",
+   "FedRAMP 20x Class B/C ISVs"
+  ]
+ },
+ "current_workflow": [
+  "CI pipeline produces container image, CycloneDX/SPDX SBOM (Syft/Anchore/Sonatype), scan JSON (Grype/Trivy/Twistlock), STIG/InSpec/CKL results and, in the better factories, cosign/in-toto attestations",
+  "Compliance engineer copies findings into a GRC tool (eMASS, Xacta, RegScale, Paramify, Vanta) or a spreadsheet and writes control narratives against the host's inheritance matrix (Iron Bank, UDS, Game Warden, FedRAMP host)",
+  "For SWFT the vendor also submits a vendor SBOM and obtains a third-party-assessor SBOM plus a 12-factor assessment; differences are reconciled by hand",
+  "For TAK plugins the developer packages source, submits to the tak.gov third-party build-and-sign service, and iterates on any build or signing failure; RBAC/audit/data-handling behaviour is not tested by the pipeline",
+  "Each additional ecosystem (NGC2 team-lead review, Armory RAISE, a second AO) receives a re-cut of the same evidence, re-scoped to that ecosystem's template",
+  "AO/SCA reviews the package in eMASS or by document; questions come back as email/spreadsheet, answered by re-exporting artifacts"
+ ],
+ "current_solution": "GRC platforms (eMASS government-furnished; Telos Xacta; RegScale incl. open-sourced OSCAL Hub; Paramify; Vanta/Drata for 20x), host-provided inheritance and evidence (Iron Bank compliance reports and provenance data; UDS/Lula; Game Warden), supply-chain metadata tools (Anchore, Sonatype, Chainguard, GUAC/Kusari), open-source OSCAL toolchains (OSCAL Compass compliance-trestle and C2P; FedRAMP 20x ksi-harness-type projects) and, for TAK, the tak.gov build-and-sign pipeline plus manual code review. Glue between these is scripts, spreadsheets and consultant labor.",
+ "failure": "It fails at two seams: (1) between pipeline artifacts and the assessor - the SBOM, scan and attestation objects are not linked by content hash to the OSCAL assessment-results items an AO/3PAO reads, so re-collection and re-adjudication happen per ecosystem and reciprocity does not occur; (2) before pipeline submission for TAK/marketplace plugins, where no automated conformance check (RBAC, audit events, data handling, SBOM) exists, so failures are found by human reviewers after submission (as the Sept 2025 Army CTO memo showed for NGC2 third-party apps).",
+ "evidence": [
+  {
+   "form": "RFI/sources sought",
+   "claim": "DoD CIO's combined summary of the three SWFT RFIs reports 500+ industry responses; the tooling RFI recorded vendor concern about inconsistent attestation requirements and support for continuous authorization - evidence that vendors re-assemble attestations per requester.",
+   "source_title": "SWFT RFI Combined Summary (DoD CIO)",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/SWFT-RFI-Combined-Summary.pdf",
+   "pub_date": "2025-12",
+   "event_date": "2025-05 to 2025-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "SWFT (memo 24 Apr 2025, live 1 Jun 2025) requires a vendor SBOM plus a third-party-assessor SBOM and a 12-factor third-party assessment, with AI-assisted review inside eMASS issuing provisional ATOs - the government intends to own the back-end review tooling.",
+   "source_title": "Inside the Pentagon CIO's push to overhaul antiquated software acquisition practices (DefenseScoop)",
+   "source_url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/",
+   "pub_date": "2025-06-09",
+   "event_date": "2025-04-24",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Vendor summaries report SWFT moved from pilot to an evolving requirement in Jan 2026 and that a Phase 2 with mandatory third-party (C3PAO) certification takes effect 10 Nov 2026; the dates are vendor-reported and possibly conflated with CMMC.",
+   "source_title": "DoD issues new orders on secure software and SBOMs (ReversingLabs blog) / Anchore SWFT blog",
+   "source_url": "https://www.reversinglabs.com/blog/dod-secure-software-with-sboms-and-automation-required",
+   "pub_date": "2025-2026 (vendor blogs; exact dates not verified)",
+   "event_date": "2026-01 / 2026-11-10 (vendor-reported)",
+   "tier": 3,
+   "label": "INFERENCE",
+   "confidence": "LOW"
+  },
+  {
+   "form": "government document",
+   "claim": "CSRMC strategic tenets (24 Sep 2025) name automation, reciprocity, enterprise services and inheritance among ten tenets replacing RMF - the policy owner wants evidence reuse but has published no schema a startup can build to.",
+   "source_title": "DoD CIO Cybersecurity Risk Management Construct - Strategic Tenets",
+   "source_url": "https://media.defense.gov/2025/Sep/24/2003808111/-1/-1/1/DOD-CIO-CYBER-SECURITY-RISK-MANAGEMENT-CONSTRUCT-STRATEGIC-TENETS.PDF",
+   "pub_date": "2025-09-24",
+   "event_date": "2025-09-24",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "DoD CIO 'State of DevSecOps' (Mar 2025): AOs are 'biased to caution rather than biased to action' and reciprocity is lacking or unclear - machine-generated evidence from an unknown vendor faces an acceptance, not a technology, problem.",
+   "source_title": "DoD State of DevSecOps 2025 (public mirror)",
+   "source_url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "pub_date": "2025-03-01",
+   "event_date": "2025-03",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "GUAC (Graph for Understanding Artifact Composition) is an OpenSSF incubating project maintained by Kusari (co-created with Google, Purdue, Citi) that ingests SBOMs, in-toto/SLSA attestations, vulnerability and Scorecard data into a queryable graph with GraphQL API; v1.1.0 shipped March 2026. The 'open-source evidence graph with content-addressed provenance' half of G36 already exists with a venture-backed maintainer.",
+   "source_title": "GUAC - Graph for Understanding Artifact Composition (project site) and Kusari blog on OpenSSF incubation",
+   "source_url": "https://guac.sh/",
+   "pub_date": "2026-03 (v1.1.0 per search summary)",
+   "event_date": "2022-2026",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "OSCAL Compass (compliance-trestle, agile authoring, Compliance-to-Policy/C2P) was accepted into CNCF Sandbox on 21 Jun 2024; C2P takes native results from policy validation points and generates OSCAL assessment results - the 'tool output to OSCAL assessment-results' half of G36 already exists as open source with IBM/Red Hat/NIST participation.",
+   "source_title": "OSCAL-COMPASS | CNCF; oscal-compass.dev",
+   "source_url": "https://www.cncf.io/projects/oscal-compass/",
+   "pub_date": "2024-06-21 (acceptance); site current 2026",
+   "event_date": "2024-06-21",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "FedRAMP released RFC-0024 (13 Jan 2026) mandating machine-readable packages for Rev5 holders by 30 Sep 2026; FedRAMP 20x general availability opened Aug 2026 (Class A 3 Aug, B/C 31 Aug); open-source 'ksi-harness' projects on GitHub already emit schema-valid 20x artifacts - the commercial-ISV evidence-generation seam is being filled by free tools and GRC vendors.",
+   "source_title": "FedRAMP News: 20x Phase 3, RFC-0024 & Class A-D System (Knox Systems) ; ksi-harness (GitHub)",
+   "source_url": "https://knoxsystems.com/resources/fedramp-news-2026",
+   "pub_date": "2026 (vendor summary)",
+   "event_date": "2026-01-13 / 2026-08",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "documented manual workaround",
+   "claim": "Defense Unicorns' Lula 1 (compliance-as-code emitting OSCAL findings, RegScale upload) is in maintenance mode with no new features - the one DoD-native open-source evidence tool was de-prioritized by a company that raised $136M (Jan 2026), signalling the layer is not where the platform owner sees value.",
+   "source_title": "defenseunicorns/lula (GitHub); Defense Unicorns $136M Series B (GovConWire)",
+   "source_url": "https://github.com/defenseunicorns/lula",
+   "pub_date": "2026 (repo status)",
+   "event_date": "2026-01-13 (Series B)",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "RegScale open-sourced an OSCAL Hub (Dec 2025); Telos Xacta and RegScale market CSRMC-ready continuous-ATO platforms; Paramify (20x Class C, Dec 2025) and Vanta (20x, Apr 2026) hold FedRAMP 20x positions - every adjacent commercial layer is occupied.",
+   "source_title": "RegScale open sources OSCAL Hub (Security Boulevard); Telos CSRMC blog",
+   "source_url": "https://securityboulevard.com/2025/12/regscale-open-sources-oscal-hub-to-further-compliance-as-code-adoption/",
+   "pub_date": "2025-12",
+   "event_date": "2025-12",
+   "tier": 3,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "multiple partial solutions",
+   "claim": "TAK.gov's third-party pipeline is an automated build-and-sign service open to vetted developers (registration with .mil/.gov or vetted industry e-mail; vetting 2-5 business days); it signs plugins for all ATAK variants but publishes no behavioural conformance test (RBAC, audit, data handling).",
+   "source_title": "TAK.gov | Our Process",
+   "source_url": "https://tak.gov/pages/our-process",
+   "pub_date": "2026 (page current)",
+   "event_date": "ongoing",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "Army CTO/AO memo (5 Sep 2025) rated the NGC2 prototype 'very high risk' over unvetted third-party apps, no need-to-know access control and no user-activity logging; Army CIO later said issues were mitigated - the only AO-grade statement of plugin/app conformance pain, and it was declared resolved inside the prime team.",
+   "source_title": "Army memo on NGC2 flaws (CNBC)",
+   "source_url": "https://www.cnbc.com/2025/10/03/anduril-palantir-ngc2-deep-flaws-army.html",
+   "pub_date": "2025-10-03",
+   "event_date": "2025-09-05",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "RFI/sources sought",
+   "claim": "ACC-APG Special Notice C2APPSRFI-1 (12 May 2026, responses 27 May 2026) sought an NGC2 Software Application Storefront, Pipeline and Tailorable Warfighting Applications under a lead-entity teaming model; PM C2 Applications said in Apr 2026 the pipeline precedes the storefront and vendors may bring their own DevSecOps pipelines. No award or follow-on solicitation naming third-party conformance tooling was found this session.",
+   "source_title": "C2APPSRFI-1 (HigherGov mirror); DoD Modernization Exchange 2026: Dennis Teefy (Federal News Network)",
+   "source_url": "https://www.highergov.com/contract-opportunity/request-for-information-next-generation-command-c2appsrfi-1-s-b655d/",
+   "pub_date": "2026-05-12",
+   "event_date": "2026-05-12",
+   "tier": 2,
+   "label": "FACT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "form": "government document",
+   "claim": "Platform One Iron Bank states it provides compliance reports, risk assessments and software provenance data at scale for 1000+ hardened containers to support ATO - the government already furnishes container-level evidence for its own registry.",
+   "source_title": "Iron Bank - Platform One",
+   "source_url": "https://p1.dso.mil/ironbank",
+   "pub_date": "2026 (page current)",
+   "event_date": "ongoing",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "budget",
+   "claim": "The only government money signal specific to RMF/ATO automation tooling is an Air Force SBIR D2P2 topic (AF254-D0802, open 7 May - 25 Jun 2025) for AI/ML-enhanced RMF; no PE, O&M line or solicitation funds a vendor-neutral evidence component; SBIR requires >50% ownership/control by U.S. citizens or permanent residents.",
+   "source_title": "SBIR topic 12032 (sbir.gov); 13 CFR 121.702",
+   "source_url": "https://www.sbir.gov/topics/12032",
+   "pub_date": "2025-05-07",
+   "event_date": "2025-05 to 2025-06",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  },
+  {
+   "form": "government document",
+   "claim": "The Department's AI Strategy memo (12 Jan 2026) calls for 'rapid ATO reciprocity' and eliminating ATO blockers - top-level intent exists, but it is directed at DoD CIO and components, not at procuring third-party evidence tooling.",
+   "source_title": "Artificial Intelligence Strategy for the Department of War",
+   "source_url": "https://media.defense.gov/2026/Jan/12/2003855671/-1/-1/0/ARTIFICIAL-INTELLIGENCE-STRATEGY-FOR-THE-DEPARTMENT-OF-WAR.PDF",
+   "pub_date": "2026-01-12",
+   "event_date": "2026-01-12",
+   "tier": 1,
+   "label": "FACT",
+   "confidence": "HIGH"
+  }
+ ],
+ "why_existing_startups_havent_solved": "They largely have, in pieces, and the pieces are free: GUAC already is an open-source, content-addressed evidence graph for SBOMs, attestations and vulnerabilities (OpenSSF incubating, maintained by venture-backed Kusari); OSCAL Compass C2P already converts tool results into OSCAL assessment results (CNCF, IBM/Red Hat); ksi-harness-type projects emit FedRAMP 20x artifacts; RegScale open-sourced an OSCAL Hub; Iron Bank publishes provenance and compliance reports for its containers. What no one has solved is the part that is not software: getting an AO or 3PAO to accept a machine-generated package from an unknown party without re-adjudication (State of DevSecOps 2025: AOs 'biased to caution'). Defense Unicorns tried the DoD-native open-source evidence layer (Lula 1), put it in maintenance mode and raised $136M for the delivery platform instead - the platform owner concluded the evidence layer is not where value accrues. For TAK, TPC owns the pipeline and has not asked for a conformance tester; plugin developers are numerous but individually tiny spenders.",
+ "why_not_solved_reasons": [
+  "it HAS been solved",
+  "insufficient commercial market",
+  "certification",
+  "buyer fragmentation",
+  "economics",
+  "proprietary incumbent architecture"
+ ],
+ "technical_wedge": "Two thin, open-source pieces of glue rather than a platform: (a) 'evidence crosswalk' plugins that take a GUAC graph (or raw CycloneDX/SPDX + Grype/Trivy + cosign/in-toto + InSpec/CKL) and emit OSCAL assessment-results and SWFT/20x-shaped bundles in which every finding carries the content hash of the artifact it came from and a signed reviewer-decision record; (b) an ATAK-CIV plugin conformance kit (synthetic roles and tagged data, RBAC matrix, audit-event coverage, SBOM, signed OSCAL results) that developers run before tak.gov submission. Both plug into what hosts and pipelines already run (UDS/Big Bang/Iron Bank, tak.gov build-and-sign) and compete with nothing that has a budget.",
+ "mvp": {
+  "what": "Open-source CLI + GitHub Action: ingest SBOM/scan/attestation/InSpec outputs from a UDS Core or Big Bang sample pipeline (or a GUAC instance), emit a hash-linked OSCAL assessment-results bundle plus a 20x-style KSI file, with a reviewer web view recording accept/reject per item; and an ATAK-CIV conformance tester run against three open-source sample plugins that produces a signed OSCAL results fragment.",
+  "demonstrable_in_3_6_months": "Yes: all inputs are open formats and all target ecosystems (ATAK-CIV SDK, UDS Core, Big Bang, GUAC, compliance-trestle) are public; two engineers can ship a demonstrable version in 3-4 months for well under $100k.",
+  "what_it_must_prove": "That one 3PAO or one platform ISSM accepts the generated bundle with measured re-work hours saved versus their current workflow, and that a single evidence item is reused across two regimes (e.g., SWFT-style and 20x) without re-collection; for TAK, that a plugin flagged by the tester would have failed human review and that TPC or a plugin shop values the pre-check.",
+  "uses": [
+   "public/open data",
+   "open standards",
+   "commercial compute",
+   "unclassified architecture",
+   "commercial hardware"
+  ]
+ },
+ "data_requirement": {
+  "what": "SBOMs, scan outputs, attestations and STIG/InSpec results from representative pipelines; OSCAL catalogs/profiles (NIST 800-53 rev5, FedRAMP 20x KSIs); sample ATAK-CIV plugins; and, to prove acceptance, real assessor decisions on real packages.",
+  "legally_realistically_obtainable": "Pipeline artifacts, OSCAL content, ATAK-CIV SDK and sample plugins: yes, all public. Real DoD packages and AO/3PAO decisions: no - they are CUI and held by programs/assessors; obtainable only after a contract or a host partnership, and the non-U.S.-person founder would need to be walled off from them.",
+  "sources": [
+   "github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+   "github.com/defenseunicorns (UDS Core, Zarf, Lula)",
+   "Platform One Big Bang / Iron Bank public docs",
+   "guac.sh / github.com/guacsec/guac",
+   "oscal-compass.dev (compliance-trestle, C2P)",
+   "github.com/FedRAMP/2026 (20x KSIs, RFC-0024)",
+   "github.com/usnistgov/OSCAL"
+  ]
+ },
+ "integration_requirement": {
+  "systems": [
+   "UDS Core / Zarf / Lula",
+   "Platform One Big Bang / Iron Bank / Party Bus",
+   "tak.gov third-party build-and-sign pipeline",
+   "eMASS (OSCAL import, DISA-gated API)",
+   "GRC tools: RegScale, Xacta, Paramify, Vanta",
+   "GUAC graph backend",
+   "NGC2 team-lead / PM C2 Applications pipeline (future)"
+  ],
+  "interfaces_protocols": [
+   "CycloneDX / SPDX",
+   "in-toto / SLSA attestations, Sigstore cosign",
+   "OSCAL (SSP, component-definition, assessment-results)",
+   "FedRAMP 20x KSI machine-readable schemas",
+   "InSpec / CKL / STIG viewer XML",
+   "GraphQL (GUAC)",
+   "ATAK-CIV plugin SDK"
+  ],
+  "who_controls_the_interface": "Inputs are open standards nobody controls; every consumer interface is controlled by others: DISA (eMASS), TAK Product Center (tak.gov pipeline), Defense Unicorns (UDS admission), Platform One, GRC vendors, and PM C2 Applications/its pipeline winner for NGC2. The component cannot force adoption at any of them."
+ },
+ "customer": {
+  "user": "ISV DevSecOps/compliance engineer; TAK plugin developer; platform ISSM",
+  "champion": "A platform product owner (UDS/Game Warden/Platform One) or a 3PAO who wants faster tenant onboarding; for TAK, a TPC pipeline operator - none identified by name (Public evidence insufficient)",
+  "contract_signer": "Hosting platform (commercial OEM/embedding agreement) or ISV (commercial support); no government signer exists for the component",
+  "requirement_owner": "DoD CIO (SWFT/CSRMC policy) and TAK Product Center - neither has published a requirement for a vendor-neutral evidence component or a plugin conformance tester",
+  "program_office": "None for the component. Adjacent: PM C2 Applications (NGC2 pipeline), TPC, Platform One, DoD CIO DevSecOps",
+  "contracting_office": "None for the component; ACC-APG for NGC2 pipeline; commercial contracts otherwise"
+ },
+ "budget": {
+  "program_or_line": "No appropriation, PE or O&M line for the component. Adjacent money: NGC2 C2 Applications (FY26 ~$488M RDT&E, RECALL - not re-verified), FedRAMP 20x/SWFT compliance spend inside ISVs' own budgets, hosting platforms' own R&D (Defense Unicorns $136M Series B).",
+  "evidence": "Only tooling-specific government signal is AF SBIR D2P2 AF254-D0802 (2025), unusable by this cap table; SWFT back-end review is described as AI tooling inside eMASS (government-furnished). No budget evidence for a vendor-neutral evidence component or a TAK conformance tester was found in the corpus or this session's searches.",
+  "source_url": "https://www.sbir.gov/topics/12032",
+  "confidence": "LOW"
+ },
+ "entry_vehicle": {
+  "primary": "Commercial/open-source: publish the component, get it adopted by one hosting platform or ISV cohort, sell support or an embedding license; no government vehicle exists for the component itself.",
+  "sequence": [
+   "Open-source release as GUAC and OSCAL Compass extensions plus an ATAK-CIV conformance kit (0-6 months)",
+   "Pilot with 2-3 hosted ISVs and one 3PAO; contribute to UDS/Big Bang communities",
+   "Embedding/OEM discussion with Defense Unicorns, Second Front or a GRC vendor",
+   "If a U.S.-person-majority structure exists: AFWERX open topic / D2P2 for eMASS-side connectors; otherwise stay commercial",
+   "Subcontract to the NGC2 pipeline winner or TPC support contractor if a conformance requirement is ever written"
+  ],
+  "eligibility_notes": "SBIR/STTR requires >50% ownership and control by U.S. citizens or permanent residents (13 CFR 121.702) - the Indonesian founder's stake and the German founder's pre-green-card status put this at risk; needs counsel. DIU CSO/OTA has no ownership test but FOCI/export controls and CUI clauses apply to any government-side integration. The TAK third-party pipeline and all open-source inputs are open to non-U.S. persons not on denied-party lists."
+ },
+ "competition": [
+  {
+   "company": "Kusari / GUAC (OpenSSF)",
+   "how_close": "Direct: the open-source content-addressed evidence graph for SBOMs, attestations and vulnerabilities already exists, is OpenSSF incubating, shipped v1.1.0 (Mar 2026) and has a venture-backed commercial maintainer.",
+   "evidence": "https://guac.sh/ ; https://www.kusari.dev/blog/graph-for-understanding-artifact-composition-guac-joins-openssf-as-incubating-project/"
+  },
+  {
+   "company": "OSCAL Compass (IBM/Red Hat, CNCF sandbox)",
+   "how_close": "Direct on the OSCAL half: compliance-trestle and C2P convert policy-validation results into OSCAL assessment results.",
+   "evidence": "https://www.cncf.io/projects/oscal-compass/"
+  },
+  {
+   "company": "Defense Unicorns (UDS, Zarf, Lula, UDS Army marketplace)",
+   "how_close": "Controls the most plausible host interface; Lula 1 in maintenance mode shows it can build or abandon this layer at will; $136M Series B.",
+   "evidence": "https://github.com/defenseunicorns/lula ; https://www.govconwire.com/articles/defense-unicorns-136m-series-b-1b-valuation"
+  },
+  {
+   "company": "RegScale / Telos Xacta / Paramify / Vanta / Drata",
+   "how_close": "Occupy the assessor-facing OSCAL output and FedRAMP 20x positions; RegScale open-sourced OSCAL Hub (Dec 2025).",
+   "evidence": "https://securityboulevard.com/2025/12/regscale-open-sources-oscal-hub-to-further-compliance-as-code-adoption/"
+  },
+  {
+   "company": "Anchore / Sonatype / Chainguard / NetRise",
+   "how_close": "Own SBOM generation, SWFT positioning and hardened images; supply the inputs and can add the crosswalk.",
+   "evidence": "https://anchore.com/blog/dod-swft-initiative-and-promise-of-cato-fulfilled/"
+  },
+  {
+   "company": "Platform One (Iron Bank) and DoD CIO eMASS/SWFT back-end",
+   "how_close": "Government-furnished: Iron Bank publishes provenance and compliance reports; SWFT review runs inside eMASS.",
+   "evidence": "https://p1.dso.mil/ironbank ; https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/"
+  },
+  {
+   "company": "TAK Product Center third-party pipeline",
+   "how_close": "Owns the plugin build-and-sign step; any conformance test it wants it can add to its own pipeline.",
+   "evidence": "https://tak.gov/pages/our-process"
+  },
+  {
+   "company": "PM C2 Applications pipeline lead entity (C2APPSRFI-1 successor) / Anduril-Palantir-Raft baseline team",
+   "how_close": "Whoever runs the NGC2 pipeline will own app onboarding checks; the common data baseline is Anduril-led.",
+   "evidence": "https://www.highergov.com/contract-opportunity/request-for-information-next-generation-command-c2appsrfi-1-s-b655d/ ; https://www.army.mil/article/293409"
+  },
+  {
+   "company": "Open-source FedRAMP 20x harnesses (ksi-harness class)",
+   "how_close": "Free tooling already emits schema-valid 20x artifacts for ISVs.",
+   "evidence": "https://github.com/RootCawsLLC/ksi-harness"
+  }
+ ],
+ "incumbent_response": {
+  "could_anduril_palantir_l3harris_add_it": "Yes. Anduril/Palantir own the NGC2 SDKs and can bake conformance evidence into app onboarding; Defense Unicorns can revive Lula or add a GUAC/OSCAL exporter to UDS in one release; RegScale/Xacta/Paramify already ship assessor-facing OSCAL; Kusari can add an OSCAL exporter to GUAC; TPC can add a conformance stage to tak.gov. Each has first look at draft SWFT/CSRMC schemas that the startup does not.",
+  "why_startup_still_wins_or_reject": "Reject as a company thesis. The only non-commodity asset would be a cross-vendor record of what assessors actually accepted, and that requires acceptance the team cannot obtain first. As an open-source contribution to GUAC/OSCAL Compass and a TAK developer tool it has real utility and credibility value, but no incumbent needs to crush it - they can simply adopt it."
+ },
+ "capital_required": {
+  "proof_of_concept_usd": "40,000-90,000",
+  "credible_military_demo_usd": "300,000-700,000",
+  "first_production_deployment_usd": "1,500,000-4,000,000",
+  "assumptions": "HYPOTHESIS/LOW. PoC: two founders, 3-5 months, open-source only. Credible demo: one pilot with 2-3 hosted ISVs and a 3PAO plus a part-time former SCA/ISSM adviser, tenant fees on a host sandbox, 9-15 months. Production: a U.S.-person compliance lead, CUI-handling practices (DFARS 7012/CMMC L2 readiness), an embedding agreement with a host, eMASS OSCAL import testing; the product itself may need an authorization if offered as SaaS to DoD users."
+ },
+ "expertise_required": [
+  {
+   "role": "Former SCA/ISSM or 3PAO assessor (U.S. person)",
+   "why": "Defines what an assessor will accept, and is the only person who can touch real packages; without them the tool optimizes for a reader it has never met.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "Supply-chain security engineer fluent in SBOM/in-toto/Sigstore/GUAC and OSCAL",
+   "why": "The whole product is crosswalk correctness; errors destroy assessor trust.",
+   "fatal_if_absent": true
+  },
+  {
+   "role": "ATAK plugin developer with tak.gov pipeline experience",
+   "why": "Conformance kit must mirror what TPC reviewers actually reject.",
+   "fatal_if_absent": false
+  },
+  {
+   "role": "Government-contracts and export counsel",
+   "why": "Cap-table (SBIR), CUI role separation and any deemed-export exposure need structuring before a government-side pilot.",
+   "fatal_if_absent": false
+  }
+ ],
+ "regulatory_burden": {
+  "level": "low",
+  "explanation": "The MVP is open-source software on public standards with no CUI, no ITAR technical data and no government system access; burden becomes medium only when the tool touches real DoD packages (CUI, DFARS 252.204-7012/CMMC L2 readiness), eMASS (DISA-gated) or is hosted as SaaS for DoD users (needs its own authorization). Not legal advice; needs counsel.",
+  "non_us_person_founder_note": "A non-U.S.-person co-founder can build, publish and sell the open-source component and the TAK developer tool. Access to real DoD assessment packages, vulnerability findings and eMASS is governed by contract clauses and need-to-know and may involve export-controlled data; role separation and possibly a technology control plan would be needed, and SBIR eligibility (>50% U.S. citizen/permanent-resident ownership and control) must be checked with counsel. Germany and Indonesia are not 'countries of concern' for SBIR disclosure purposes."
+ },
+ "classification_dependence": "eventually",
+ "dual_use_potential": {
+  "level": "high",
+  "explanation": "The same evidence-graph-to-assessment-results glue serves FedRAMP 20x/Rev5 machine-readable packages (RFC-0024), SOC 2, StateRAMP, CMMC and EU obligations (Cyber Resilience Act SBOM/vulnerability-handling duties phasing in 2026-2027 - RECALL, not re-verified this session, MEDIUM). This is also the problem: the commercial market is where Vanta/Drata/Paramify and free harnesses already compete."
+ },
+ "defensibility": {
+  "what_becomes_proprietary": [
+   "accreditation",
+   "government relationships",
+   "integrations"
+  ],
+  "explanation": "Nothing proprietary accrues to an open-source component by design; the only durable asset would be an acceptance-precedent record (which assessor accepted which evidence item), and building it requires the acceptance the team lacks. Integrations are with interfaces others control. Defensibility is low."
+ },
+ "why_now": "SWFT (Apr 2025), CSRMC (Sep 2025), FedRAMP RFC-0024 (Jan 2026) and 20x GA (Aug 2026) all make machine-readable evidence mandatory or expected, the AI Strategy memo (Jan 2026) demands ATO reciprocity, GUAC and OSCAL Compass have matured to usable open-source substrates, and NGC2's Sept 2025 AO memo plus C2APPSRFI-1 (May 2026) show the Army standing up app onboarding. Against that, the same signals have already drawn Kusari, IBM/Red Hat, RegScale, Paramify, Vanta and Defense Unicorns into the space.",
+ "killer_risk": "The thing described already exists as free, better-maintained open source (GUAC for the evidence graph; OSCAL Compass C2P for assessment results; ksi-harness for 20x) and the only remaining value - assessor acceptance - is a policy/relationship asset no two-student team can earn first; with no buyer, budget line or vehicle for a vendor-neutral component, the outcome is a well-regarded repo and an acquihire, not a company.",
+ "market_stage": "Prototyping",
+ "procurement_signal_timeline": [
+  {
+   "year": "2022-02",
+   "event": "DoD CIO continuous ATO memo",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/20220204-cATO-memo.PDF"
+  },
+  {
+   "year": "2024-06",
+   "event": "OSCAL Compass accepted to CNCF Sandbox (open-source OSCAL toolchain)",
+   "source_url": "https://www.cncf.io/projects/oscal-compass/"
+  },
+  {
+   "year": "2025-03",
+   "event": "DoD CIO State of DevSecOps: AOs biased to caution, reciprocity lacking",
+   "source_url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md"
+  },
+  {
+   "year": "2025-04",
+   "event": "SWFT memo (24 Apr); go-live 1 Jun; three RFIs",
+   "source_url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/"
+  },
+  {
+   "year": "2025-05",
+   "event": "AF SBIR D2P2 AF254-D0802 AI/ML-enhanced RMF topic (only tooling-specific money signal)",
+   "source_url": "https://www.sbir.gov/topics/12032"
+  },
+  {
+   "year": "2025-09",
+   "event": "Army CTO/AO memo on NGC2 third-party apps (5 Sep); CSRMC tenets (24 Sep)",
+   "source_url": "https://www.cnbc.com/2025/10/03/anduril-palantir-ngc2-deep-flaws-army.html"
+  },
+  {
+   "year": "2025-12",
+   "event": "SWFT RFI combined summary (500+ responses); RegScale open-sources OSCAL Hub; Paramify 20x Class C",
+   "source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/SWFT-RFI-Combined-Summary.pdf"
+  },
+  {
+   "year": "2026-01",
+   "event": "AI Strategy memo demands ATO reciprocity (12 Jan); FedRAMP RFC-0024 machine-readable packages (13 Jan); Defense Unicorns $136M Series B (13 Jan)",
+   "source_url": "https://media.defense.gov/2026/Jan/12/2003855671/-1/-1/0/ARTIFICIAL-INTELLIGENCE-STRATEGY-FOR-THE-DEPARTMENT-OF-WAR.PDF"
+  },
+  {
+   "year": "2026-03",
+   "event": "GUAC v1.1.0 released (OpenSSF incubating, Kusari-maintained)",
+   "source_url": "https://guac.sh/"
+  },
+  {
+   "year": "2026-05",
+   "event": "ACC-APG C2APPSRFI-1 NGC2 storefront/pipeline RFI (12 May; responses 27 May); no award found",
+   "source_url": "https://www.highergov.com/contract-opportunity/request-for-information-next-generation-command-c2appsrfi-1-s-b655d/"
+  },
+  {
+   "year": "2026-08",
+   "event": "FedRAMP 20x GA (Class A 3 Aug; B/C 31 Aug) (vendor summary)",
+   "source_url": "https://knoxsystems.com/resources/fedramp-news-2026"
+  },
+  {
+   "year": "2026-11",
+   "event": "SWFT Phase 2 third-party certification reportedly mandatory 10 Nov 2026 (vendor-reported, LOW confidence)",
+   "source_url": "https://www.reversinglabs.com/blog/dod-secure-software-with-sboms-and-automation-required"
+  }
+ ],
+ "allied_extension": "Marginally. Allied TAK users (NATO-wide ATAK adoption) and German/EU ISVs facing BSI C5, NIS2 and the EU Cyber Resilience Act's SBOM duties (RECALL) could use the same open-source glue, and NATO DIANA is open to a German-domiciled entity; but allied accreditation authorities are as cautious as U.S. AOs, OSCAL adoption outside the U.S. is thin, and the component still has no buyer with a budget line. Allies widen the open-source user base, not the revenue case.",
+ "search_log": [
+  {
+   "query": "GUAC OpenSSF software supply chain graph SBOM attestations Kusari 2026",
+   "useful": true
+  },
+  {
+   "query": "OSCAL Compass CNCF trestle assessment results open source 2026",
+   "useful": true
+  },
+  {
+   "query": "tak.gov third party pipeline plugin submission requirements review ATAK plugin 2026",
+   "useful": true
+  },
+  {
+   "query": "\"SWFT\" DoD CIO SBOM third-party assessment eMASS 2026 status vendors",
+   "useful": true
+  },
+  {
+   "query": "FedRAMP 20x machine-readable evidence KSI open source tooling 2026 RFC",
+   "useful": true
+  },
+  {
+   "query": "Defense Unicorns UDS marketplace third-party package Lula 2 OSCAL evidence 2026",
+   "useful": true
+  },
+  {
+   "query": "Army NGC2 \"storefront\" pipeline C2 Applications award 2026 third-party apps",
+   "useful": true
+  },
+  {
+   "query": "Platform One Iron Bank \"attestation\" OR \"SLSA\" OR \"cosign\" continuous ATO evidence 2026",
+   "useful": true
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://guac.sh/",
+   "title": "GUAC - Graph for Understanding Artifact Composition",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.kusari.dev/blog/graph-for-understanding-artifact-composition-guac-joins-openssf-as-incubating-project/",
+   "title": "GUAC joins OpenSSF as Incubating Project (Kusari)",
+   "pub_date": "2025-2026 (undated in summary)",
+   "tier": 3
+  },
+  {
+   "url": "https://www.cncf.io/projects/oscal-compass/",
+   "title": "OSCAL-COMPASS | CNCF",
+   "pub_date": "2024-06-21",
+   "tier": 2
+  },
+  {
+   "url": "https://oscal-compass.dev/",
+   "title": "OSCAL Compass project site",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://tak.gov/pages/our-process",
+   "title": "TAK.gov | Our Process",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/SWFT-RFI-Combined-Summary.pdf",
+   "title": "SWFT RFI Combined Summary",
+   "pub_date": "2025-12",
+   "tier": 1
+  },
+  {
+   "url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/",
+   "title": "Inside the Pentagon CIO's push to overhaul antiquated software acquisition practices",
+   "pub_date": "2025-06-09",
+   "tier": 2
+  },
+  {
+   "url": "https://www.reversinglabs.com/blog/dod-secure-software-with-sboms-and-automation-required",
+   "title": "DoD issues new orders on secure software and SBOMs (ReversingLabs)",
+   "pub_date": "2025-2026",
+   "tier": 3
+  },
+  {
+   "url": "https://media.defense.gov/2025/Sep/24/2003808111/-1/-1/1/DOD-CIO-CYBER-SECURITY-RISK-MANAGEMENT-CONSTRUCT-STRATEGIC-TENETS.PDF",
+   "title": "CSRMC Strategic Tenets",
+   "pub_date": "2025-09-24",
+   "tier": 1
+  },
+  {
+   "url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+   "title": "DoD State of DevSecOps 2025 (mirror)",
+   "pub_date": "2025-03-01",
+   "tier": 1
+  },
+  {
+   "url": "https://knoxsystems.com/resources/fedramp-news-2026",
+   "title": "FedRAMP News: 20x Phase 3, RFC-0024 & Class A-D System",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/RootCawsLLC/ksi-harness",
+   "title": "ksi-harness (GitHub)",
+   "pub_date": "2026",
+   "tier": 3
+  },
+  {
+   "url": "https://github.com/defenseunicorns/lula",
+   "title": "defenseunicorns/lula",
+   "pub_date": "2026",
+   "tier": 2
+  },
+  {
+   "url": "https://www.govconwire.com/articles/defense-unicorns-136m-series-b-1b-valuation",
+   "title": "Defense Unicorns $136M Series B",
+   "pub_date": "2026-01-13",
+   "tier": 2
+  },
+  {
+   "url": "https://securityboulevard.com/2025/12/regscale-open-sources-oscal-hub-to-further-compliance-as-code-adoption/",
+   "title": "RegScale open sources OSCAL Hub",
+   "pub_date": "2025-12",
+   "tier": 3
+  },
+  {
+   "url": "https://www.cnbc.com/2025/10/03/anduril-palantir-ngc2-deep-flaws-army.html",
+   "title": "Army memo on NGC2 flaws (CNBC)",
+   "pub_date": "2025-10-03",
+   "tier": 2
+  },
+  {
+   "url": "https://www.highergov.com/contract-opportunity/request-for-information-next-generation-command-c2appsrfi-1-s-b655d/",
+   "title": "C2APPSRFI-1 NGC2 Storefront, Pipeline and Tailorable Warfighting Applications RFI",
+   "pub_date": "2026-05-12",
+   "tier": 2
+  },
+  {
+   "url": "https://federalnewsnetwork.com/defense-main/2026/04/dod-modernization-exchange-2026-armys-dennis-teefy-on-building-application-layer-for-ngc2/",
+   "title": "Dennis Teefy on building application layer for NGC2 (FNN)",
+   "pub_date": "2026-04",
+   "tier": 2
+  },
+  {
+   "url": "https://p1.dso.mil/ironbank",
+   "title": "Iron Bank - Platform One",
+   "pub_date": "2026",
+   "tier": 1
+  },
+  {
+   "url": "https://www.sbir.gov/topics/12032",
+   "title": "SBIR topic 12032 AI/ML-Enhanced RMF",
+   "pub_date": "2025-05-07",
+   "tier": 1
+  },
+  {
+   "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+   "title": "13 CFR 121.702 SBIR/STTR eligibility",
+   "pub_date": "current",
+   "tier": 1
+  },
+  {
+   "url": "https://media.defense.gov/2026/Jan/12/2003855671/-1/-1/0/ARTIFICIAL-INTELLIGENCE-STRATEGY-FOR-THE-DEPARTMENT-OF-WAR.PDF",
+   "title": "AI Strategy for the Department of War",
+   "pub_date": "2026-01-12",
+   "tier": 1
+  },
+  {
+   "url": "https://anchore.com/blog/dod-swft-initiative-and-promise-of-cato-fulfilled/",
+   "title": "The DoD SWFT Initiative and the Promise of cATO Fulfilled (Anchore)",
+   "pub_date": "2025",
+   "tier": 3
+  },
+  {
+   "url": "https://www.army.mil/article/293409",
+   "title": "Army and industry align on common data baseline (NGC2)",
+   "pub_date": "2026-06",
+   "tier": 1
+  }
+ ]
+}

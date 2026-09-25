@@ -1,0 +1,58 @@
+[
+  {
+    "lens": "market",
+    "gap_id": "G29",
+    "refuted": true,
+    "strength": 5,
+    "bear_case": "There is no budget owner for a vendor-neutral DDIL test and conformance harness because the Army already performs the function itself. DEVCOM C5ISR Center ran a Radio Rodeo (March-April 2026) using its own laboratory infrastructure to create DDIL effects for NGC2 vendors and runs NetModX as persistent experimentation; ATEC supports Operation Jailbreak and the Army is hardening the 74+ jailbroken capabilities at its own software integration labs in Huntsville and Aberdeen; the Army Software Factory validates jailbroken interfaces (RECALL from G07). The only solicited demand for DDIL test tooling is Army SBIR A254-019 'Generative AI Enabled Tactical Network' - a Phase I of up to $250k - and it was routed through xTechIgnite 2025 to Assured Information Security's GRUNTS, so even that dollar is assigned. NGC2's ~$3.78B FY27 request funds primes and government activity under a 50% obligation cap; no sub-line, RFI, OTA or task order names test tooling. What is left is 50-80 small vendors per sprint who might pay a few thousand dollars for a readiness run before a Jailbreak-series date: episodic, price-capped, and exactly the shape of a consultancy. The pain is exercise-time pain, absorbed by engineers and labs, and the primes and government are visibly solving it themselves.",
+    "strongest_single_argument": "The customer has already built and staffed the product: C5ISR Center's laboratory DDIL effects (Radio Rodeo 2026), ATEC/SIL validation of jailbroken capabilities and free government emulators (NRL EMANE/CORE) mean the requirement owner has no need to buy a neutral harness, and the one solicited dollar for DDIL test tooling (A254-019, $250k Phase I) already went to an established SBIR firm.",
+    "evidence": [
+      "Army SBIR A254-019 Generative AI Enabled Tactical Network, issued 2025-02-05, Phase I up to $250k, eligibility via xTechIgnite (armysbir.army.mil; HigherGov) - FACT/HIGH",
+      "xTechIgnite 2025 Topic 2 winner: Assured Information Security 'GRUNTS' (xtech.army.mil winners, 2025-05) - FACT/MEDIUM (search summary)",
+      "C5ISR Center Radio Rodeo March-April 2026 using laboratory infrastructure to create DDIL effects for NGC2 (army.mil/article/293742, 2026-07) - FACT/HIGH",
+      "NetModX 25 persistent experimentation continuing into 2026 (army.mil/article/285967, 2025) - FACT/HIGH",
+      "ATEC support to Operation Jailbreak; hardening at Huntsville and APG software integration labs (army.mil/article/294250, 2026) - FACT/MEDIUM",
+      "NGC2 FY27 request ~$3.78B (Breaking Defense 2026-04) and FY26 NDAA 50% obligation cap (FNN 2026-02) - FACT/HIGH; no test-tooling line",
+      "No RFI/OTA/task order for a neutral harness found in 8 searches this session - Public evidence insufficient"
+    ],
+    "what_would_change_my_mind": "A C5ISR Center, PEO C3N/CPE C2IN, TAK Product Center or DOT&E solicitation (RFI, sources-sought, OTA or SBIR topic) that names a vendor-neutral DDIL sync-scoring or interface-conformance harness as a standalone deliverable with a ceiling of at least low millions; or a public statement by ADOC or an NGC2 team lead that third-party pre-event conformance evidence will be accepted in lieu of in-person validation; or evidence that the A254-019 effort was not awarded, leaving the topic open.",
+    "narrower_survivable_version": "Not a company: an open-source TAK DDIL bench and plugin conformance module used to sell a handful of fixed-fee pre-sprint readiness runs and to earn a NetModX/C5ISR Center slot or a prime T&E subcontract; budget under $60k; no expectation of a government purchase."
+  },
+  {
+    "lens": "competition",
+    "gap_id": "G29",
+    "refuted": true,
+    "strength": 4,
+    "bear_case": "Every layer of the proposed harness already has a free or entrenched supplier, and the parties that control conformance are the platform owners and government labs, not a startup. Link emulation: NRL's EMANE and CORE are free, government-sponsored (OSD NCCP, ARL cooperation) and carry Adjacent Link's SRW/WNW waveform ports; Keysight EXata/JNE and Apposite sell tactical DDIL emulation to labs and primes; Linux netem is a one-liner. API contract tests: Anduril's Lattice Sandboxes are free with unlimited API calls and simulated data, and TAK Server ships its own takcl test framework while TAK.gov signs third-party plugins for free. RBAC/audit conformance: Anduril and Palantir own the SDKs and Defense Unicorns, Second Front and RegScale-class vendors cover pipeline and compliance evidence (RECALL from G14). Government validation: ATEC, C5ISR Center and the Army Software Factory. The startup's residual differentiator - an impartial cross-vendor score across TAK, Lattice and Ditto - is replicable in weeks by any of them and has value only if a government body designates it; Anduril, Ditto or TAK Product Center could publish their own DDIL benchmark in one release. Switching cost is nil because the harness owns no interface, and the government already owns the software that matters (TAK, EMANE/CORE).",
+    "strongest_single_argument": "The government already owns free versions of the hardest parts (NRL EMANE/CORE for emulation, TAK Server's test framework and the TAK.gov signing pipeline for conformance) and the platform owner gives away the API test environment (Lattice Sandboxes), so the startup would be selling a scoring wrapper around other people's free tools to buyers who can assemble the same wrapper themselves.",
+    "evidence": [
+      "NRL EMANE open-source emulator, NRL/Adjacent Link maintained, OSD NCCP sponsored, SRW/WNW ports (nrl.navy.mil EMANE page; adjacentlink.com) - FACT/HIGH",
+      "Keysight EXata/JNE tactical network digital twin; Apposite DDIL test solutions for government/military (company pages) - FACT/HIGH that products exist; performance unverified",
+      "Anduril Lattice Sandboxes free, unlimited API calls, simulated data (developer.anduril.com) - FACT/HIGH",
+      "TAK.gov third-party signing pipeline open to anyone not on the DPL; TAK Server takcl test framework in public source (tak.gov/pages/our-process; TAK-Product-Center/Server) - FACT/HIGH",
+      "AIS GRUNTS selected under xTechIgnite 2025 for the GenAI DDIL simulation topic (xtech.army.mil, 2025-05) - FACT/MEDIUM",
+      "Defense Unicorns, Second Front, RegScale/Paramify adjacent for RBAC/audit/SBOM evidence (parent card G14) - RECALL/MEDIUM"
+    ],
+    "what_would_change_my_mind": "Evidence that 12+ months after the NGC2 baseline and API Marketplace launch, Anduril, TAK Product Center and the Army labs still provide no scripted DDIL conformance check and vendors are still failing the same faults at each sprint (persistence would suggest incumbents are deprioritising it), or a platform owner or lab publicly declining to build a benchmark and asking for a neutral third party.",
+    "narrower_survivable_version": "Build only the cross-vendor scoring and scenario layer as open source on top of EMANE/CORE/netem, TAK Server and public Lattice schemas, and position it as a contributed tool that labs and platform owners adopt rather than a product they buy; monetise, if at all, through readiness services and a possible acqui-hire by a TAK plugin shop or NGC2 sub-vendor."
+  },
+  {
+    "lens": "feasibility",
+    "gap_id": "G29",
+    "refuted": false,
+    "strength": 2,
+    "bear_case": "Feasibility is the one lens that does not kill this gap, and the bear case here is about ceiling, not possibility. The harness is unclassified by construction (ATAK-CIV open source, TAK.gov pipeline open to non-U.S. persons, Lattice Sandboxes public, EMANE/CORE public), costs $40-90k to prove and $150-400k to demonstrate credibly (HYPOTHESIS), and the Indonesian founder can plausibly work on the open core (INFERENCE from public-input, EAR99-type software; counsel must confirm and screen dependencies such as SRW/WNW EMANE ports, which are distribution-controlled). The real constraints are: (1) realism plateaus without PoR radio traces, controlled waveform models or exercise captures, which require a government sponsor and U.S.-person handling; (2) the only government rail that has ever paid for DDIL test tooling (SBIR via xTech) fails 13 CFR 121.702 for a 50/50 cap table until the German founder holds a green card and U.S.-person investors or hires dilute the Indonesian founder below control, and AFWERX-style topics bar a foreign national as technical lead; (3) neither founder has tactical-network T&E credibility, so a lab or prime has no reason to trust the rubric; (4) a credible military demo depends on an event slot (NetModX, Radio Rodeo, Jailbreak-series) the founders do not control. None of this prevents a demo in four months; all of it prevents the demo from converting into a funded program.",
+    "strongest_single_argument": "The MVP is cheap, open and legal for this team, which is precisely why it is not defensible: anything two students can build in four months on NRL and TAK public code for under $60k, a government lab or platform owner can also build, and the gate that would turn it into revenue (SBIR eligibility, a lab sponsor, T&E credibility) is the part this team lacks.",
+    "evidence": [
+      "ATAK-CIV open source with plugin SDK (github.com/deptofdefense/AndroidTacticalAssaultKit-CIV) - FACT/HIGH",
+      "TAK.gov third-party pipeline open to anyone not on the DPL (tak.gov/pages/our-process) - FACT/HIGH",
+      "Lattice Sandboxes free with public SDK libraries (developer.anduril.com) - FACT/HIGH",
+      "NRL EMANE/CORE public; SRW/WNW ports maintained by Adjacent Link (distribution status: constraint for counsel) - FACT/HIGH on existence",
+      "13 CFR 121.702 SBIR ownership/control test; AFWERX Open Topic FAQ foreign-national limits (2025-07-02) - FACT/HIGH",
+      "OTA/CSO has no ownership test but export-control and FOCI reviews apply (E07-F22) - FACT/MEDIUM",
+      "DARPA FLUID publicly specifies the 1 Mbps-1 kbps regime (darpa.mil, 2025-03-28) - FACT/HIGH"
+    ],
+    "what_would_change_my_mind": "Nothing on this lens changes the overall verdict; on this lens itself, confirmation from counsel that the open-core work and the EMANE dependencies are clear for the non-U.S.-person founder, plus a named C5ISR Center or prime T&E sponsor willing to supply representative link traces and an event slot, would raise strength to a clean 'not refuted' and make the harness a sound credibility project.",
+    "narrower_survivable_version": "Exactly the open-core TAK DDIL bench: netem/EMANE profiles from 1 Mbps to 1 kbps, ~10 ATAK-CIV/TAK Server nodes, scripted partitions and reconnect storms, scored report, CoT/Lattice contract-test CLI and an ATAK plugin RBAC/audit/SBOM module - built for under $60k, released as open source, entered into NetModX or an xTech hackathon, with the Indonesian founder on the open core under a documented technology control plan and no SBIR dependence until the cap table is restructured."
+  }
+]
