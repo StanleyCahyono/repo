@@ -1,4 +1,22 @@
 /* ===================== Views: overview, architecture ===================== */
+function statusPanel() {
+  const st = arr(D.meta?.stages); if (!st.length) return null;
+  const done = st.filter((x) => x.done).length;
+  return card(h('div', { class: 'card-head' }, h('h3', null, 'Research pipeline status'), chip(done + ' of ' + st.length + ' stages complete', done === st.length ? 'good' : 'warn')), h('ol', null, st.map((x) => h('li', null, chip(x.done ? 'done' : 'pending', x.done ? 'good' : 'outline'), ' ', x.name, h('span', { class: 'muted' }, ' · ' + x.detail)))), done < st.length ? h('p', { class: 'small muted', style: { marginTop: '8px' } }, 'Pending stages run as multi-agent pipelines and are rate-limited by the research environment; every page below already shows the evidence gathered so far and fills in automatically when the remaining stages land.') : null);
+}
+function interimLandscape() {
+  const ch = D.chain || {}; const segs = arr(D.segments); const reg = arr(D.registry?.gaps);
+  const ev = D.evidence || {};
+  const attr = (g) => String(g.initial_attractiveness || '').toLowerCase();
+  return [
+    ch.where_value_is_moving ? card('Where value is moving (from the first-principles chain map)', h('div', { class: 'prose' }, h('p', null, ch.where_value_is_moving))) : null,
+    h('div', { class: 'grid cols-2' }, card('Crowded layers', val(ch.crowded_layers)), card('Fragmented layers', val(ch.fragmented_layers))),
+    segs.length ? card('Segment verdicts at a glance', h('div', { class: 'table-wrap' }, h('table', { class: 'data' }, h('thead', null, h('tr', null, h('th', null, 'Segment'), h('th', null, 'Market stage'), h('th', null, 'Regulatory'), h('th', null, 'Verdict'))), h('tbody', null, segs.map((s) => h('tr', { class: 'clickable', onclick: () => (location.hash = '#segments/' + s.segment_id) }, h('td', null, h('a', { href: '#segments/' + s.segment_id }, h('b', null, s.segment_id + ' ' + s.segment_name))), h('td', null, stageChip(s.market_stage?.stage) || '—'), h('td', null, s.regulatory_access?.overall ? chip(s.regulatory_access.overall, /high/i.test(s.regulatory_access.overall) ? 'bad' : /med/i.test(s.regulatory_access.overall) ? 'warn' : 'good') : '—'), h('td', { class: 'small' }, s.attractiveness?.verdict || '—'))))))) : null,
+    reg.length ? card('Gap registry: where the evidence points before red-teaming', h('p', { class: 'small muted' }, 'Initial attractiveness comes from the segment analyses and the registry consolidation; the three-lens red team and 18-criterion scores replace it when that stage completes.'), h('div', { class: 'stack' }, ['high', 'medium', 'low'].map((lvl) => { const rows = reg.filter((g) => attr(g).startsWith(lvl)); return rows.length ? h('div', null, h('div', { class: 'eyebrow', style: { margin: '6px 0' } }, lvl + ' initial attractiveness · ' + rows.length), h('ul', null, rows.map((g) => h('li', null, h('a', { href: '#gaps/' + g.id }, h('span', { class: 'mono' }, g.id + ' '), g.title), ' ', chips(g.categories, 'cat'))))) : null; }))) : null,
+    Object.keys(ev).length ? card('Evidence in brief', h('div', { class: 'stack' }, EV_ORDER.filter((k) => ev[k]?.summary).map((k) => h('div', null, h('h4', null, h('a', { href: '#evidence/' + k }, ev[k].name || k)), h('p', { class: 'small' }, ev[k].summary))))) : null,
+    ch.taxonomy_critique ? card('Taxonomy critique from the chain map', kv([['Keep', val(ch.taxonomy_critique.keep, { chips: true })], ['Change', val(ch.taxonomy_critique.change)], ['Added segments', val(ch.taxonomy_critique.added_segments)]])) : null,
+  ];
+}
 route('overview', () => {
   const ex = D.executive || {};
   const m = D.meta || {}; const c = m.counts || {};
@@ -13,7 +31,9 @@ route('overview', () => {
       h('div', { class: 'kpi' }, h('div', { class: 'v' }, String(c.gaps || 0)), h('div', { class: 'l' }, 'candidate gaps red-teamed')),
       h('div', { class: 'kpi' }, h('div', { class: 'v' }, String(c.survivors || 0)), h('div', { class: 'l' }, 'surviving opportunities')),
       h('div', { class: 'kpi' }, h('div', { class: 'v' }, String(c.sources || 0)), h('div', { class: 'l' }, 'sources cited'))),
+    statusPanel(),
     ex.primary_conclusion ? h('div', { class: 'callout' }, h('div', { class: 'eyebrow' }, 'Primary conclusion'), h('p', null, ex.primary_conclusion)) : null,
+    ...(ex.sections?.length ? [] : interimLandscape()),
     survivors.length ? card('Surviving opportunities at a glance', h('div', { class: 'table-wrap' }, h('table', { class: 'data' }, h('thead', null, h('tr', null, h('th', null, 'ID'), h('th', null, 'Opportunity'), h('th', null, 'Verdict'), h('th', { class: 'num' }, 'Market'), h('th', { class: 'num' }, 'Founder fit'), h('th', null, 'Categories'))), h('tbody', null, survivors.map((s) => h('tr', { class: 'clickable', onclick: () => (location.hash = '#opportunities/' + s.id) }, h('td', { class: 'mono' }, s.id), h('td', null, h('a', { href: '#opportunities/' + s.id }, s.reg?.title || s.id)), h('td', null, verdictBadge(s.score?.verdict)), h('td', { class: 'num' }, scorePill(s.score?.market_attractiveness ?? 0)), h('td', { class: 'num' }, scorePill(s.score?.founder_fit ?? 0)), h('td', null, chips(s.reg?.categories, 'cat'))))))), h('p', { class: 'small muted' }, 'Scores are analytical heuristics (0–5), not facts. Market attractiveness is independent of this team; founder fit is specific to two founders with ~$250k.')) : null,
     ff.founder_fit?.portfolio ? card('Recommended portfolio', kv([['Primary bet', ff.founder_fit.portfolio.primary], ['Secondary bet', ff.founder_fit.portfolio.secondary], ['Option', ff.founder_fit.portfolio.option], ['Rationale', ff.founder_fit.portfolio.rationale]]), h('p', { class: 'small' }, h('a', { href: '#founderfit' }, 'Full founder-fit analysis →'))) : null,
     ...arr(ex.sections).map((s) => card(s.heading, h('div', { class: 'prose' }, arr(s.paragraphs).map((p) => h('p', null, linkify(p)))), s.label_notes ? h('p', { class: 'small muted' }, s.label_notes) : null)),

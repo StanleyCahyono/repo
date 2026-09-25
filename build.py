@@ -189,6 +189,9 @@ def build_data():
         v = str(s.get('verdict') or '').lower()
         return (0 if v.startswith('surv') else 1 if v.startswith('border') else 2, -(float(s.get('market_attractiveness') or 0) + float(s.get('founder_fit') or 0)))
     d['survivorsOrder'] = sorted(d['survivors'].keys(), key=rank)
+    # whitespace fallback matrix (company/segment placements aggregated by prep_gaps.py)
+    wi = load(os.path.join(DATA, 'synthesis', 'whitespace_input.json'))
+    if wi: d['whitespaceInput'] = wi
     # syntheses
     for k in ('executive', 'whitespace', 'money_map', 'founder_fit', 'critic'):
         v = load(os.path.join(DATA, 'synthesis', k + '.json'))
@@ -209,7 +212,18 @@ def build_data():
         elif isinstance(o, list):
             for v in o: walk(v)
     walk(d)
-    d['meta'] = {'generated': d['generated'], 'counts': {'companies': len(companies), 'segments': len(segs), 'findings': findings, 'gaps': len(d['registry'].get('gaps') or []), 'survivors': len(d['survivorsOrder']), 'sources': len(srcs), 'buyers': len(d['buyers']), 'evidence_sweeps': len(d['evidence'])}}
+    n_gaps = len(d['registry'].get('gaps') or [])
+    n_cards = sum(1 for g in d['gaps'].values() if g.get('card'))
+    n_scores = sum(1 for g in d['gaps'].values() if g.get('score'))
+    stages = [
+        {'name': 'Research sweep: 14 segment deep dives, 5 buyer maps, 12 company batches, 2 discovery passes, 7 evidence sweeps', 'done': len(segs) >= 14 and len(d['buyers']) >= 5 and len(d['evidence']) >= 7, 'detail': f"{len(segs)} segments, {len(d['buyers'])} buyer maps, {len(companies)} companies, {findings} findings"},
+        {'name': 'Gap registry consolidation (71 candidates to a scored registry)', 'done': n_gaps >= 20, 'detail': f'{n_gaps} registry gaps'},
+        {'name': 'Gap Evidence Cards with fresh web verification', 'done': n_gaps > 0 and n_cards >= n_gaps, 'detail': f'{n_cards} of {n_gaps} cards'},
+        {'name': 'Three-lens adversarial red team and 18-criterion scoring', 'done': n_gaps > 0 and n_scores >= n_gaps, 'detail': f'{n_scores} of {n_gaps} scored'},
+        {'name': 'Survivor deep dives: architecture, MVP, capital map, expertise, money map, customer discovery, 90-day plan', 'done': len(d['survivorsOrder']) > 0, 'detail': f"{len(d['survivorsOrder'])} survivors"},
+        {'name': 'Syntheses: executive landscape, white-space test, money map, founder fit, completeness audit', 'done': all(k in d for k in ('executive', 'whitespace', 'money', 'founderfit')), 'detail': ', '.join(k for k in ('executive', 'whitespace', 'money', 'founderfit', 'critic') if k in d) or 'none yet'},
+    ]
+    d['meta'] = {'generated': d['generated'], 'stages': stages, 'counts': {'companies': len(companies), 'segments': len(segs), 'findings': findings, 'gaps': len(d['registry'].get('gaps') or []), 'survivors': len(d['survivorsOrder']), 'sources': len(srcs), 'buyers': len(d['buyers']), 'evidence_sweeps': len(d['evidence'])}}
     return d
 
 def build_html(data):

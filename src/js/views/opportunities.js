@@ -8,11 +8,17 @@ route('opportunities', (r) => {
   const order = arr(D.survivorsOrder);
   const rows = order.map((id) => ({ id, reg: (D.registry?.gaps || []).find((g) => g.id === id) || {}, score: D.gaps?.[id]?.score || {}, card: D.gaps?.[id]?.card || {}, tech: D.survivors?.[id]?.tech, gtm: D.survivors?.[id]?.gtm }));
   return h('div', { class: 'page' },
-    pageHead('Deliverable 7 · Surviving opportunities', rows.length + ' opportunities survived the red team', 'Each survivor carries a full technical architecture, an MVP that two founders can demonstrate for under $100k, a capital map by stage, an expertise map with the first five hires, a money map, a procurement-signal timeline, a customer-discovery plan, and a 90-day validation plan with explicit kill criteria.'),
+    pageHead('Deliverable 7 · Surviving opportunities', rows.length ? rows.length + ' opportunities survived the red team' : 'Survivors are decided by the red team and scoring stage', 'Each survivor carries a full technical architecture, an MVP that two founders can demonstrate for under $100k, a capital map by stage, an expertise map with the first five hires, a money map, a procurement-signal timeline, a customer-discovery plan, and a 90-day validation plan with explicit kill criteria.'),
+    rows.length ? null : pendingCandidates(),
     rows.length ? h('div', { class: 'grid cols-2' }, rows.map((x) => h('a', { class: 'seg-card', href: '#opportunities/' + x.id }, h('div', { class: 'row' }, h('span', { class: 'seg-id' }, x.id), verdictBadge(x.score.verdict), stageChip(x.card.market_stage)), h('h3', null, x.reg.title || x.id), h('div', { class: 'seg-sum' }, x.card.problem || x.reg.problem || ''), h('div', { class: 'row' }, h('span', { class: 'small muted' }, 'Market '), scorePill(x.score.market_attractiveness ?? 0), h('span', { class: 'small muted' }, 'Founder fit '), scorePill(x.score.founder_fit ?? 0), chips(x.reg.categories, 'cat')), x.tech?.mvp?.total_cost_usd ? h('div', { class: 'small muted' }, 'MVP ' + fmtMoney(x.tech.mvp.total_cost_usd) + (x.tech.capital_map?.next_milestone ? ' → ' + x.tech.capital_map.next_milestone.slice(0, 90) : '')) : null))) : empty('No survivors recorded yet.'),
     D.founderfit?.opportunity_matrix ? card('Opportunity matrix', h('p', { class: 'small muted' }, 'Rows are surviving opportunities; cells carry a 0–5 rating (darker is better) and a short phrase. Hover for the phrase.'), opportunityMatrix(D.founderfit.opportunity_matrix)) : null);
 });
 
+function pendingCandidates() {
+  const reg = arr(D.registry?.gaps).filter((g) => !/^low/i.test(String(g.initial_attractiveness || '')));
+  if (!reg.length) return empty('No survivors recorded yet.');
+  return h('div', { class: 'stack' }, h('div', { class: 'callout amber' }, h('p', null, 'Stage status: the ' + reg.length + ' high- and medium-rated registry gaps below are the candidates entering the three-lens red team and 18-criterion scoring. Survivors then receive the full deep dive (architecture, MVP under $100k, capital map, expertise map, money map, customer discovery and 90-day plan).')), h('div', { class: 'grid cols-2' }, reg.map((g) => h('a', { class: 'seg-card', href: '#gaps/' + g.id }, h('div', { class: 'row' }, h('span', { class: 'seg-id' }, g.id), chip(g.initial_attractiveness || '—', /high/i.test(g.initial_attractiveness) ? 'good' : 'warn'), chips(g.segment_ids, 'mono')), h('h3', null, g.title), h('div', { class: 'seg-sum' }, g.problem || ''), chips(g.categories, 'cat')))));
+}
 function opportunityMatrix(m) {
   const cols = arr(m.columns); const rows = arr(m.rows);
   if (!rows.length) return empty();
@@ -74,6 +80,7 @@ route('plan', () => {
   const PHASES = [['weeks_1_3', 'Weeks 1–3', 'Research & customer interviews'], ['weeks_4_6', 'Weeks 4–6', 'Technical experiments'], ['weeks_7_9', 'Weeks 7–9', 'Prototype'], ['weeks_10_12', 'Weeks 10–12', 'User validation & demo']];
   return h('div', { class: 'page' },
     pageHead('Deliverable 10 · 90-day validation plans', 'Three plans, each with kill criteria', 'For the three most promising opportunities: what to research, build and demonstrate in twelve weeks, who owns each block, what it costs, and the measurable conditions under which the founders should stop.'),
+    ids.length ? null : h('div', { class: 'callout amber' }, h('p', null, 'Stage status: 90-day plans are written for the three highest-ranked survivors once the red team, scoring and founder-fit stages complete. Until then, each registry gap page carries the MVP sketch, entry vehicle and killer risk proposed by the segment analyses.')),
     ids.length ? ids.map((id) => { const gtm = D.survivors[id].gtm; const plan = gtm.plan_90_days || {}; const reg = arr(D.registry?.gaps).find((g) => g.id === id) || {}; return card(h('div', { class: 'card-head' }, h('h2', null, h('a', { href: '#opportunities/' + id + '/90-day-plan' }, id + ' · ' + (reg.title || id))), plan.total_budget_usd ? chip('Total ' + fmtMoney(num(plan.total_budget_usd)), 'amber') : null), h('div', { class: 'plan' }, PHASES.map(([k, w, label]) => { const p = plan[k] || {}; return h('div', { class: 'phase' }, h('h4', null, w), h('div', { class: 'eyebrow' }, label), p.owner ? h('div', { class: 'small muted' }, 'Owner: ' + p.owner + (p.budget_usd ? ' · ' + fmtMoney(num(p.budget_usd)) : '')) : null, h('ul', { class: 'small' }, arr(p.goals).map((x) => h('li', null, x))), arr(p.deliverables).length ? h('div', { class: 'small' }, h('b', null, 'Deliverables: '), arr(p.deliverables).join('; ')) : null, h('div', { class: 'kill' }, h('strong', null, 'Kill if: '), arr(p.kill_criteria).length ? h('ul', null, arr(p.kill_criteria).map((x) => h('li', null, x))) : '—')); })), gtm.most_important_question?.milestone_for_next_2_5m ? h('p', { class: 'small', style: { marginTop: '10px' } }, h('b', null, 'Milestone for the next $2–5M: '), gtm.most_important_question.milestone_for_next_2_5m) : null); }) : empty('No plans recorded.'));
 });
 
@@ -82,7 +89,7 @@ route('founderfit', () => {
   const reg = arr(D.regulatoryMatrix);
   return h('div', { class: 'page' },
     pageHead('Deliverables 8 & 9 · Founder fit', 'Which opportunities two founders and ~$250k can actually reach', 'Not whether $250k can build the company, but whether it can reach the next fundable milestone: a demonstration or customer validation credible enough to raise institutional capital or win government funding.'),
-    f.team_constraints_summary ? h('div', { class: 'callout amber' }, h('div', { class: 'eyebrow' }, 'Team constraints'), h('p', null, f.team_constraints_summary)) : null,
+    f.team_constraints_summary ? h('div', { class: 'callout amber' }, h('div', { class: 'eyebrow' }, 'Team constraints'), h('p', null, f.team_constraints_summary)) : (ff.founder_fit ? null : h('div', { class: 'callout amber' }, h('p', null, 'Stage status: the ranked founder-fit analysis and opportunity matrix are produced after scoring. The regulatory matrix and the founder-specific analysis below come from the completed regulatory evidence sweep.'))),
     f.portfolio ? card('Recommended portfolio', kv([['Primary bet', f.portfolio.primary], ['Secondary bet', f.portfolio.secondary], ['Option', f.portfolio.option], ['Rationale', f.portfolio.rationale]])) : null,
     arr(f.ranking).length ? card('Ranking', h('div', { class: 'stack' }, arr(f.ranking).map((x) => fold(h('span', null, h('b', null, '#' + x.rank + ' '), h('a', { href: '#opportunities/' + x.gap_id }, x.gap_id + ' ' + (x.title || '')), ' ', chip(x.reaches_fundable_milestone_in_12_months ? String(x.reaches_fundable_milestone_in_12_months).slice(0, 40) : '—', /^yes/i.test(x.reaches_fundable_milestone_in_12_months) ? 'good' : /^no/i.test(x.reaches_fundable_milestone_in_12_months) ? 'bad' : 'warn')), kv([['Reaches a fundable milestone in 12 months?', x.reaches_fundable_milestone_in_12_months], ['Milestone', x.milestone], ['Evidence produced', x.evidence_produced], ['Who would fund', val(x.who_would_fund, { chips: true })], ['Team risks', val(x.team_risks)], ['Mitigations', val(x.mitigations)], ['Needs counsel', val(x.needs_counsel)]]), x.rank <= 3)))) : null,
     arr(f.do_not_do).length ? card('What the founders should not do', h('ul', null, arr(f.do_not_do).map((x) => h('li', null, isStr(x) ? x : val(x))))) : null,
@@ -95,7 +102,8 @@ route('founderfit', () => {
 });
 
 route('whitespace', (r) => {
-  const w = D.whitespace || {}; const m = w.matrix || {};
+  const w = D.whitespace || {}; const m = w.matrix || D.whitespaceInput || {};
+  const tested = !!(D.whitespace && D.whitespace.matrix);
   const chain = arr(m.chain).length ? m.chain : ['COLLECT', 'TRANSPORT', 'PROCESS', 'FUSE', 'DECIDE', 'DISSEMINATE_TASK'];
   const ech = arr(m.echelons).length ? m.echelons : ['individual_platform', 'tactical_unit', 'battalion_brigade', 'division_corps', 'theater', 'joint', 'coalition'];
   const cells = arr(m.cells);
@@ -107,7 +115,7 @@ route('whitespace', (r) => {
   if (cells.length) showCell(chain[3], ech[2]);
   return h('div', { class: 'page' },
     pageHead('Deliverable · Competitive white-space map', 'Where the companies sit, and what the empty cells really mean', 'X axis: the information chain. Y axis: operating echelon. Darker cells hold more companies. Every empty or sparse cell was tested rather than assumed to be an opportunity: it may mean no demand, classification, impossible economics, government-only capability, or a market too small.'),
-    w.summary ? h('div', { class: 'callout' }, h('p', null, w.summary)) : null,
+    w.summary ? h('div', { class: 'callout' }, h('p', null, w.summary)) : (tested ? null : h('div', { class: 'callout amber' }, h('p', null, 'Interim view: cell counts come from the company records and segment analyses (84 companies placed by chain step and echelon). The empty-cell test, which decides whether a sparse cell means no demand, classification, impossible economics, government-only capability or a genuine under-served niche, runs in the synthesis stage.'))),
     card('Company density', h('div', { style: { overflowX: 'auto' } }, grid), h('p', { class: 'small muted' }, 'Click a cell for the companies in it and the test verdict.')),
     detail,
     under.length ? card('Cells judged under-served (with evidence of demand)', dataTable(under, [{ key: 'chain', title: 'Chain step', render: (c) => titleCase(c.chain) }, { key: 'echelon', title: 'Echelon', render: (c) => titleCase(c.echelon) }, { key: 'rationale', title: 'Rationale' }, { key: 'linked_gap_ids', title: 'Linked gaps', render: (c) => h('div', { class: 'chips' }, arr(c.linked_gap_ids).map((gid) => h('a', { class: 'chip mono', href: '#gaps/' + gid }, gid))) }, { key: 'confidence', title: 'Conf.', render: (c) => confTag(c.confidence) || '—' }], { filterable: false })) : null,
