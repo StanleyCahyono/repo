@@ -1,0 +1,1144 @@
+{
+  "service": "U.S. Space Force",
+  "organizations": [
+    {
+      "name": "United States Space Force",
+      "acronym": "USSF",
+      "parent": "Department of the Air Force (DAF)",
+      "role": "budget owner",
+      "portfolio": "Organize, train and equip space forces; owns the RDT&E Space Force, Procurement Space Force and O&M Space Force appropriations. Provides forces to USSPACECOM and other combatant commands through service components (e.g., Space Forces-Space).",
+      "current_status_2026": "FACT: Active. FY27 request sharply increases Space Force RDT&E (reported ~$38.4B, +159%, driven by Golden Dome and the new Space Data Network; Tier 3/4 reporting, Apr 2026). 2026 acquisition overhaul replaced program executive offices with nine Portfolio Acquisition Executives (PAEs) (DefenseScoop 2026-03-18; SpaceNews / Air & Space Forces mid-2026).",
+      "leader_title": "Chief of Space Operations (CSO); Secretary of the Air Force is the civilian head. Space acquisition executive is the Assistant Secretary of the Air Force for Space Acquisition and Integration (SAF/SQ).",
+      "key_programs": ["Space C2 / ATLAS", "Kronos family of systems", "Unified Data Library", "PWSA (SDA)", "Space Data Network", "R2C2", "Golden Dome space elements"],
+      "startup_relevance": "The service is the budget owner; startups never contract with 'the Space Force' directly but with SSC/SDA/Space RCO/SpaceWERX contracting activities under the PAEs.",
+      "source_url": "https://spacenews.com/space-force-completes-procurement-reorganization-creating-nine-acquisition-portfolios/",
+      "pub_date": "2026 (mid-year)",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Office of the Assistant Secretary of the Air Force for Space Acquisition and Integration",
+      "acronym": "SAF/SQ",
+      "parent": "Department of the Air Force",
+      "role": "policy",
+      "portfolio": "Service Acquisition Executive for space; approves acquisition strategies, milestone decisions, and (in 2026) the sorting of programs into PAE portfolios. Ainsworth (title not re-verified this session) told reporters in May 2026 that DAF was 'still working' to sort space programs into portfolios.",
+      "current_status_2026": "FACT: Active; overseeing the PAE transition. INFERENCE: Because ~90-92% of contracting authority was reportedly delegated to PAEs, SAF/SQ is less a day-to-day gate for small prototype awards than before.",
+      "leader_title": "Assistant Secretary of the Air Force (Space Acquisition and Integration) / acting officials in 2025-2026 (name not re-verified this session)",
+      "key_programs": ["Portfolio Acquisition Executive (PAE) transition", "Space acquisition policy"],
+      "startup_relevance": "Indirect: sets policy (e.g., commercial-first guidance, CSO usage) but is not a contracting office.",
+      "source_url": "https://breakingdefense.com/2026/05/dept-of-air-force-still-working-to-sort-space-programs-into-acquisition-portfolios-ainsworth/",
+      "pub_date": "2026-05",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Systems Command",
+      "acronym": "SSC",
+      "parent": "U.S. Space Force (field command)",
+      "role": "program office",
+      "portfolio": "Principal acquisition field command (Los Angeles AFB, CA) for satellites, ground systems, launch and C2/BMC3 software. Historically organized as five PEOs (Assured Access to Space; BMC3; Space Domain Awareness & Combat Power; MilComm & PNT; Space Sensing) plus System Deltas paired with SpOC Integrated Mission Deltas.",
+      "current_status_2026": "FACT: In 2026 the Space Force replaced PEOs with nine PAEs: infrastructure; BMC3 and space intelligence (BMC3I); SATCOM and PNT; missile warning and tracking; space-based sensing and targeting; space access; electromagnetic warfare and cyber; space combat power; advanced capabilities. Final three PAEs were to stand up in the 'June-ish' 2026 timeframe (Breaking Defense 2026-04). SDA and Space RCO continue to exist but sit under the applicable PAE.",
+      "leader_title": "Commander, Space Systems Command (Lieutenant General); PAEs are civilian SES or general-officer portfolio executives",
+      "key_programs": ["Space C2 / ATLAS", "Kronos", "Unified Data Library", "Warp Core", "SDANet / Space Surveillance Network modernization", "Space Data Network (portfolio assignment not verified)", "Golden Dome SBI prototypes", "Enterprise Ground Services (RECALL)"],
+      "startup_relevance": "Primary buyer of C2/SDA software. Uses Commercial Solutions Openings (CSOs), OTAs (Space Enterprise Consortium), SBIR Phase III and FAR contracts. Runs a Commercial Space Office ('Front Door') for industry entry.",
+      "source_url": "https://www.airandspaceforces.com/space-force-finalizes-new-acquisition-structure-9-portfolio-executives/",
+      "pub_date": "2026 (mid-year)",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Portfolio Acquisition Executive for Battle Management, Command, Control, Communications and Space Intelligence",
+      "acronym": "PAE BMC3I (formerly PEO BMC3 / BMC3I)",
+      "parent": "Space Systems Command",
+      "role": "program office",
+      "portfolio": "Space command and control (ATLAS/Space C2), Kronos family of systems (C2, battle management, space intelligence), Unified Data Library, Warp Core data services, space-domain-awareness data/network modernization (SDANet), and related BMC3 ground software. SSC's public BMC3I page and fact sheet describe the mission.",
+      "current_status_2026": "FACT: Shannon Pallone, previously PEO for BMC3I, is now the permanent PAE for BMC3I (SSC leadership page; Breaking Defense 2026-05). FACT: 'Space Intelligence' was added to the portfolio name (BMC3 -> BMC3I) before the 2026 PAE conversion (SSC program office page).",
+      "leader_title": "Portfolio Acquisition Executive (civilian SES)",
+      "key_programs": ["Space C2 / ATLAS (Kobayashi Maru)", "Kronos Family of Systems CSO", "Unified Data Library (Bluestaq)", "Warp Core (Palantir)", "SDANet (Anduril)"],
+      "startup_relevance": "The single most relevant office for a C2/SDA software startup: it ran the Kronos CSO whose first awards (Apr 2026) were sub-$1.5M prototypes to a small firm (MapLarge) and a large one (Leidos), and later added True Anomaly's Mosaic.",
+      "source_url": "https://www.ssc.spaceforce.mil/Program-Offices/Battle-Management-Command-Control-Communications-and-Space-Intelligence",
+      "pub_date": "2026",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Portfolio Acquisition Executive for Missile Warning and Tracking",
+      "acronym": "PAE MW&T",
+      "parent": "Space Systems Command / Space Force acquisition enterprise",
+      "role": "program office",
+      "portfolio": "Missile warning/tracking constellations including SDA's Tracking Layer and legacy/next-gen OPIR elements; SDA director Gurpartap Sandhoo was appointed PAE for missile warning and tracking (2026).",
+      "current_status_2026": "FACT: Newly created in 2026 PAE overhaul; the SDA director dual-hats as PAE (ExecutiveGov / SpaceNews 2026). HYPOTHESIS: SDA's institutional identity may be absorbed into this PAE over time (National Defense Magazine 2026-08-03 discusses 'potential dissolution').",
+      "leader_title": "Portfolio Acquisition Executive (Gurpartap Sandhoo, also Director SDA)",
+      "key_programs": ["SDA Tracking Layer Tranche 1-3", "Next-Gen OPIR (assignment not verified)"],
+      "startup_relevance": "Sensor-heavy portfolio; software openings are mainly BMC3/mission processing via SDA BAAs rather than direct C2 software buys.",
+      "source_url": "https://www.executivegov.com/articles/space-force-sda-pwsa-acquisition-pae",
+      "pub_date": "2026",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Development Agency",
+      "acronym": "SDA",
+      "parent": "U.S. Space Force (since Oct 2022); in 2026 aligned under the applicable PAE",
+      "role": "program office",
+      "portfolio": "Proliferated Warfighter Space Architecture (PWSA): Transport Layer (Tranche 0/1/2 launched or in production), Tracking Layer (Tranche 3 awarded Dec 2025), BMC3 layer (on-orbit compute plus BMC3 Application Factory run by SAIC), ground/ops centers. Uses OTAs and BAAs heavily.",
+      "current_status_2026": "FACT: Tranche 3 Transport Layer was not funded in the FY27 request; requirements 'rolled into' the new Space Data Network backbone (DefenseScoop 2026-04-28; Breaking Defense 2026-04). FACT: SDA continues to exist under a PAE (Breaking Defense 2026-04). HYPOTHESIS (Tier 3, 2026-08-03): SDA could be dissolved as its functions migrate to PAEs; confidence LOW on timing.",
+      "leader_title": "Director, SDA (Gurpartap Sandhoo, dual-hatted PAE MW&T)",
+      "key_programs": ["Transport Layer T0/T1/T2", "Tracking Layer T1/T2/T3", "BMC3 Application Factory (SAIC)", "Battle Management mission applications BAA", "BMC3 Multi-Mission Module (M3) interface RFI"],
+      "startup_relevance": "Historically the most open Space Force buyer of containerized mission software (BMC3 apps BAA). Transport-layer prime opportunities are now closed for startups; app-layer and ground-processing openings remain but are shrinking with T3 transport cancellation.",
+      "source_url": "https://www.sda.mil/battle-management/",
+      "pub_date": "2024-2026",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "Space Rapid Capabilities Office",
+      "acronym": "Space RCO",
+      "parent": "U.S. Space Force (Kirtland AFB, NM); in 2026 under applicable PAE",
+      "role": "program office",
+      "portfolio": "Rapid, often classified, space combat capabilities and the Rapid Resilient Command and Control (R2C2) cloud-based satellite C2 ground system for dynamic space operations.",
+      "current_status_2026": "FACT: Continues to exist under a PAE after 2026 overhaul (Breaking Defense 2026-04). R2C2 IDIQ (est. $1B ceiling, 5-7 years) awarded June 2024 to 20 small businesses; first $12M in delivery orders Sept 26, 2024 (up to $600K each). DefenseScoop (2025-03-06) reported challenges scaling R2C2.",
+      "leader_title": "Director, Space RCO",
+      "key_programs": ["R2C2 (Rapid Resilient Command and Control)", "classified programs"],
+      "startup_relevance": "R2C2 is small-business reserved (FACT) and agile/DevSecOps oriented; however the 20-vendor pool is closed unless an on-ramp is issued (not found this session). Anduril/Palantir are NOT R2C2 awardees (they are not small businesses); their Space Force C2-adjacent work is SDANet (Anduril) and Warp Core (Palantir).",
+      "source_url": "https://www.airandspaceforces.com/space-rco-new-c2-software-dynamic-satellites/",
+      "pub_date": "2024-09",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "SpaceWERX",
+      "acronym": "SpaceWERX",
+      "parent": "AFWERX (Air Force Research Laboratory) / Space Force innovation arm",
+      "role": "innovation org",
+      "portfolio": "SBIR/STTR open topics, Direct-to-Phase-II, STRATFI/TACFI bridge funding, Orbital Prime (ISAM, $141M seeded since 2023), Tactically Responsive Space (TacRS) challenge with Space Safari, mission-focused cohorts tied to PAE/COCOM priorities.",
+      "current_status_2026": "FACT: 2026 STRATFI cycle totaled $562.5M (SpaceWERX + program office + private capital; $245M private match) per Payload. FACT: Gravitics received a $60M STRATFI (PY 2025.1) for a TacRS orbital carrier (SpaceNews / Gravitics).",
+      "leader_title": "Director, SpaceWERX (Colonel)",
+      "key_programs": ["SBIR/STTR open topics", "STRATFI/TACFI", "Orbital Prime", "TacRS challenge", "SpaceWERX 2026 challenges (afwerxchallenge.com/spacewerx26)"],
+      "startup_relevance": "Most realistic first-dollar path for a two-founder company IF SBIR ownership rules are met; program-office matching for STRATFI requires a sponsoring PAE customer.",
+      "source_url": "https://spacewerx.us/accelerate/stratfi-tacfi/",
+      "pub_date": "2026",
+      "confidence": "HIGH"
+    },
+    {
+      "name": "SSC Commercial Space Office ('Front Door')",
+      "acronym": "COMSO",
+      "parent": "Space Systems Command",
+      "role": "innovation org",
+      "portfolio": "Industry entry point for SSC; manages commercial integration efforts including the Commercial Augmentation Space Reserve (CASR) and, historically, Tactical Surveillance, Reconnaissance and Tracking (TacSRT) commercial data buys via the Global Data Marketplace (RECALL - not re-verified this session).",
+      "current_status_2026": "FACT: CASR is moving out of pilot with next contracts planned in 2026 (Air & Space Forces Magazine). RECALL (MEDIUM): COMSO 'Front Door' remains the advertised submission portal for unsolicited capability briefs.",
+      "leader_title": "Director, Commercial Space Office",
+      "key_programs": ["CASR", "TacSRT / Global Data Marketplace (RECALL)", "Front Door industry intake"],
+      "startup_relevance": "Low-cost intake channel: submit a capability brief, get routed to a PAE; also the office that runs commercial-data purchase pilots where a data/analytics startup can sell directly.",
+      "source_url": "https://www.airandspaceforces.com/space-force-commercial-reserve-fleet-out-of-pilot-phase/",
+      "pub_date": "2025-2026",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Operations Command",
+      "acronym": "SpOC",
+      "parent": "U.S. Space Force (field command, Peterson SFB, CO)",
+      "role": "user command",
+      "portfolio": "Generates and presents space forces; Deltas include Delta 2 (space domain awareness; 18th/19th Space Defense Squadrons), Delta 3 (EW), Delta 4 (missile warning), Delta 5 (C2 / operations center support), Delta 6 (cyber and network ops), Delta 7 (ISR), Delta 8 (SATCOM/PNT), Delta 9 (orbital warfare), Delta 15 (NSDC support). Hosts the Joint Commercial Operations (JCO) cell that buys commercial SDA data on 4-6 week rolling contracts.",
+      "current_status_2026": "FACT: In Sept 2025 SpOC explored reorganizing the commercial cell to push commercial monitoring data into operations (Breaking Defense 2025-09). RECALL (MEDIUM): Integrated Mission Deltas pair SpOC deltas with SSC System Deltas so operators and acquirers sit under one commander for sustainment.",
+      "leader_title": "Commander, SpOC (Lieutenant General)",
+      "key_programs": ["JCO commercial SDA buys", "ATLAS/SPADOC operations (Delta 2)", "R2C2 users (Delta 9 and others)"],
+      "startup_relevance": "Source of operator pull; JCO rolling contracts are the fastest known direct-sale path for SDA data/analytics; delta-level CRADAs and user feedback are how requirements form.",
+      "source_url": "https://breakingdefense.com/2025/09/space-force-reorganizing-to-add-commercial-space-monitoring-data-analysis-into-operations/",
+      "pub_date": "2025-09",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Forces-Space",
+      "acronym": "S4S",
+      "parent": "U.S. Space Force service component to USSPACECOM (Vandenberg SFB, CA)",
+      "role": "user command",
+      "portfolio": "Operates the Combined Space Operations Center (CSpOC) and, with USSPACECOM, the National Space Defense Center (NSDC); primary operational users of the space COP, ATLAS/SPADOC catalog, and Kronos battle-management tools. RECALL (MEDIUM): Joint Task Force-Space Defense functions were consolidated into S4S/NSDC around 2024-2025.",
+      "current_status_2026": "FACT (Tier 3): S4S is the operational sponsor cited in Kronos and ATLAS coverage; Space Operations Command prepared a new shared domain-awareness tool for operators in late 2024 (Defense News 2024-12-23).",
+      "leader_title": "Commander, Space Forces-Space (Lieutenant General)",
+      "key_programs": ["CSpOC", "NSDC", "Kronos (user)", "ATLAS (user)"],
+      "startup_relevance": "Operational sponsor whose gaps drive SSC BMC3I CSOs; startups reach them via SSC industry days, JCO, and TEMs rather than direct sales.",
+      "source_url": "https://www.defensenews.com/space/2024/12/23/space-operations-command-preps-for-new-shared-domain-awareness-tool/",
+      "pub_date": "2024-12-23",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "United States Space Command",
+      "acronym": "USSPACECOM",
+      "parent": "Department of Defense (unified combatant command)",
+      "role": "requirement owner",
+      "portfolio": "Operational requirements for space domain awareness, space C2, and network modernization; e.g., mandated full deployment of the modernized Space Surveillance Network communications (SDANet) by end of 2026.",
+      "current_status_2026": "FACT (Tier 3): USSPACECOM mandate on SDANet deployment by end-2026 reported May 2026. RECALL (LOW): HQ relocation to Huntsville, AL was ordered in 2025; status of move not verified this session.",
+      "leader_title": "Commander, USSPACECOM (General)",
+      "key_programs": ["SDANet deployment mandate", "Space COP / battle management requirements", "Commercial Integration Cell"],
+      "startup_relevance": "Requirement owner, not a buyer; influences urgency (e.g., ATLAS/SPADOC decommission, Kronos MVCs).",
+      "source_url": "https://satnews.com/2026/05/07/anduril-secures-100m-modification-to-modernize-space-surveillance-network/",
+      "pub_date": "2026-05-07",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "National Space Intelligence Center (Space Delta 18)",
+      "acronym": "NSIC",
+      "parent": "U.S. Space Force (Wright-Patterson AFB, OH)",
+      "role": "requirement owner",
+      "portfolio": "Space intelligence production; its analysts are the intended users of Kronos 'space intelligence' capabilities (continuous adversary monitoring, multi-source data integration).",
+      "current_status_2026": "RECALL (MEDIUM): Established June 2022; active. INFERENCE: Kronos's 'space intelligence' segment (SSC newsroom 2026-04) ties NSIC/Delta 7 analysts to BMC3I acquisition.",
+      "leader_title": "Commander, Space Delta 18 / NSIC",
+      "key_programs": ["Kronos (user/requirement)"],
+      "startup_relevance": "Highly classified user base; startups without cleared staff can only reach it through cleared primes or unclassified data-layer work.",
+      "source_url": "https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4466726/space-force-advances-decisive-edge-in-a-contested-domain-aims-to-modernize-spac",
+      "pub_date": "2026-04",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Training and Readiness Command",
+      "acronym": "STARCOM",
+      "parent": "U.S. Space Force (field command)",
+      "role": "user command",
+      "portfolio": "Training, test (Delta 12), ranges/aggressors (Delta 11), doctrine; users of mission rehearsal and simulation tools.",
+      "current_status_2026": "FACT (Tier 3): Slingshot Aerospace won a $69.2M Space Force contract (July 2026) for MENTAT, an AI mission-rehearsal platform; contracting office not verified.",
+      "leader_title": "Commander, STARCOM (Major General)",
+      "key_programs": ["Mission rehearsal / wargaming tools (MENTAT)", "National Space Test and Training Complex"],
+      "startup_relevance": "Simulation/digital-twin and training software is a lower-classification entry point; Slingshot precedent shows scale is possible.",
+      "source_url": "https://thedefensepost.com/2026/07/21/slingshot-space-force-ai-contract/amp/",
+      "pub_date": "2026-07-21",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Air Force Research Laboratory Space Vehicles Directorate",
+      "acronym": "AFRL/RV",
+      "parent": "AFRL (Kirtland AFB, NM); supports Space Force S&T",
+      "role": "lab",
+      "portfolio": "Space S&T including autonomy, SDA algorithms, resilient comms; funded under PE 1206310SF (Space Science and Technology R&D, $314M requested FY27 per Air & Space Forces Magazine).",
+      "current_status_2026": "FACT: PE 1206310SF shows $314M in FY27 request (Tier 3). RECALL (MEDIUM): AFRL/RV runs BAAs and CRADAs open to small firms.",
+      "leader_title": "Director, AFRL/RV",
+      "key_programs": ["Space S&T BAAs", "SBIR/STTR technical sponsorship"],
+      "startup_relevance": "CRADA/BAA sponsor and SBIR technical point of contact; useful for algorithm validation before a PAE buys.",
+      "source_url": "https://www.airandspaceforces.com/space-force-budget-cuts-sdas-data-transport-funding/",
+      "pub_date": "2026-04",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Defense Innovation Unit - Space Portfolio",
+      "acronym": "DIU",
+      "parent": "Office of the Secretary of Defense",
+      "role": "innovation org",
+      "portfolio": "Commercial Solutions Openings for space (e.g., Hybrid Space Architecture, commercial SDA, tactically responsive launch) with Space Force transition partners.",
+      "current_status_2026": "RECALL (MEDIUM): Active; DIU CSO space projects typically pair with SSC or SpOC transition partners. Not re-verified this session.",
+      "leader_title": "Director, DIU; Space Portfolio Director",
+      "key_programs": ["Hybrid Space Architecture (RECALL)", "Space CSOs"],
+      "startup_relevance": "Non-SBIR path open to firms with foreign ownership (subject to FOCI/ITAR review); 24-month prototype OTs with follow-on production OT possible.",
+      "source_url": "https://www.diu.mil/",
+      "pub_date": "2026",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Enterprise Consortium (OTA)",
+      "acronym": "SpEC",
+      "parent": "Space Systems Command (consortium manager: NSTXL)",
+      "role": "contracting",
+      "portfolio": "Section 4022 prototype OTA consortium used by SSC and other DoD space buyers for prototype projects; members include primes and nontraditionals. RECALL (MEDIUM): ceiling raised to ~$12B in 2020.",
+      "current_status_2026": "RECALL (MEDIUM): Active; not re-verified this session. Public evidence insufficient on 2026 ceiling/usage.",
+      "leader_title": "Consortium Manager (NSTXL)",
+      "key_programs": ["Prototype OT projects for SSC portfolios"],
+      "startup_relevance": "Membership fee and a US presence get a startup on the distribution for RFPs; realistic for $1-10M prototypes once a PAE sponsor exists.",
+      "source_url": "https://www.ssc.spaceforce.mil/",
+      "pub_date": "2026",
+      "confidence": "MEDIUM"
+    },
+    {
+      "name": "Space Futures Command / Space Warfighting Analysis Center",
+      "acronym": "SFC / SWAC",
+      "parent": "U.S. Space Force (planned fourth field command)",
+      "role": "requirement owner",
+      "portfolio": "Force design, concept development, wargaming; SWAC produces force designs (e.g., missile warning/tracking, SDA) that shape PAE portfolios.",
+      "current_status_2026": "RECALL (LOW): Announced 2024 as a planned field command; stand-up status in 2026 not verified this session. Public evidence insufficient.",
+      "leader_title": "Commander (planned)",
+      "key_programs": ["Force design", "Wargaming"],
+      "startup_relevance": "Modeling/simulation and analytic tools; influence on requirements rather than purchases.",
+      "source_url": "https://www.spaceforce.mil/",
+      "pub_date": "2026",
+      "confidence": "LOW"
+    },
+    {
+      "name": "Office of Space Commerce (Dept. of Commerce) - TraCSS",
+      "acronym": "OSC",
+      "parent": "NOAA / Department of Commerce",
+      "role": "policy",
+      "portfolio": "Civil space traffic coordination system (TraCSS) meant to take over civil conjunction warnings from DoD; pathfinder with LeoLabs, Slingshot, COMSPOC (Jan 2024).",
+      "current_status_2026": "FACT (Tier 3): Sept 2026 reporting describes a DoD/industry 'showdown' over TraCSS's future, creating uncertainty about which agency buys commercial SSA data (Breaking Defense 2026-09).",
+      "leader_title": "Director, Office of Space Commerce",
+      "key_programs": ["TraCSS"],
+      "startup_relevance": "Adjacent civil buyer for the same SSA data/analytics; policy uncertainty is a demand risk for commercial-SDA startups.",
+      "source_url": "https://breakingdefense.com/2026/09/wither-tracss-dod-industry-face-hard-choices-in-showdown-over-commerce-spacewatch-effort/",
+      "pub_date": "2026-09",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "programs": [
+    {
+      "name": "Space Command and Control (Space C2) / Advanced Tracking and Launch Analysis System (ATLAS) - 'Kobayashi Maru'",
+      "owner": "SSC PAE BMC3I (Space C2 software factory in Colorado Springs; program restructured FY2022)",
+      "description": "Replaces the 1980s Space Defense Operations Center (SPADOC) for catalog maintenance, conjunction/launch analysis and the space COP. ATLAS is the SPADOC-replacement baseline; the broader Space C2 effort delivers apps for operators at CSpOC/NSDC/Delta 2.",
+      "status_2026": "FACT: ATLAS achieved operational acceptance late 2025, but DOT&E's FY25 report (reported 2026-03) found it lacks minimum viable capability to decommission SPADOC, citing 'deficiencies consistent with system immaturity'. Officials plan SPADOC decommission by end of 2026 contingent on L3Harris 'astrometric tools' under a $90M contract awarded March 2025. Kronos was split out of Space C2 in May 2025.",
+      "vendors": ["L3Harris (ATLAS prime and astrometric tools)", "Parsons (Space C2 work, RECALL LOW)", "Various software-factory support contractors (public evidence insufficient)"],
+      "contract_evidence": [
+        {
+          "vendor": "L3Harris",
+          "vehicle": "Contract for follow-on astrometric tools (vehicle type not verified)",
+          "ceiling": "Not disclosed",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$90M (reported)",
+          "date": "2025-03",
+          "prototype_or_production": "Production/sustainment enhancement of an operational system",
+          "source_url": "https://satnews.com/2026/03/21/pentagon-report-space-force-atlas-program-falls-short-of-decommissioning-targets/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Space Force RDT&E 'Space Command and Control' line historically (PE number not re-verified this session; verify in FY27 RDT&E Space Force J-book Vol 3). Related: PE 1206425SF Space Situation Awareness Systems (RECALL MEDIUM).",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session (FY27 J-books posted at af.mil SAF/FM Budget-2027 page).",
+        "source_url": "https://www.af.mil/Portals/1/documents/Secretariat%20of%20the%20AF/SAF-FM/Budget%20-%202027/Budget%20docs/FY27%20Air%20Force%20Space%20Procurement.pdf"
+      },
+      "third_party_software_openness": "INFERENCE: Space C2 was conceived as an app-based ecosystem with a software factory, and the 2025 split of Kronos (procured via CSO) indicates the government is deliberately opening the battle-management/intel layer to commercial software; ATLAS itself remains L3Harris-integrated. Confidence MEDIUM."
+    },
+    {
+      "name": "Kronos Family of Systems",
+      "owner": "SSC PAE BMC3I",
+      "description": "Integrated family of systems consolidating legacy tools for operational C2, battle management and space intelligence; first minimum viable capability is a tool connecting planning, live operations and post-mission analysis with continuous adversary monitoring.",
+      "status_2026": "FACT: Planning began May 2025 when SSC separated Kronos from Space C2; SSC announced first CSO prototype awards on 2026-04-22 (Leidos $1.43M; MapLarge $499,828). FACT (Tier 3): True Anomaly later selected under a CSO award to provide its Mosaic software (Military Aerospace). A 'Kronos Family of Systems Commercial Solutions Opening' is posted on sam.gov (via third-party mirror).",
+      "vendors": ["Leidos", "MapLarge", "True Anomaly (Mosaic)"],
+      "contract_evidence": [
+        {
+          "vendor": "Leidos",
+          "vehicle": "Commercial Solutions Opening (CSO) prototype OT",
+          "ceiling": "N/A",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$1.43M",
+          "date": "2026-04-22",
+          "prototype_or_production": "Prototype",
+          "source_url": "https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4466726/space-force-advances-decisive-edge-in-a-contested-domain-aims-to-modernize-spac"
+        },
+        {
+          "vendor": "MapLarge",
+          "vehicle": "CSO prototype OT",
+          "ceiling": "N/A",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$499,828",
+          "date": "2026-04-22",
+          "prototype_or_production": "Prototype",
+          "source_url": "https://www.executivegov.com/articles/ssc-kronos-contracts-leidos-maplarge"
+        },
+        {
+          "vendor": "True Anomaly",
+          "vehicle": "CSO award (Mosaic platform)",
+          "ceiling": "N/A",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Not disclosed",
+          "date": "2026 (after April)",
+          "prototype_or_production": "Prototype",
+          "source_url": "https://www.militaryaerospace.com/communications/article/55391545/space-force-adds-commercial-software-capability-to-kronos-battle-management-effort"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Funded from the Space C2 / BMC3 RDT&E lines (specific PE not verified this session)",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://breakingdefense.com/2026/03/space-force-anticipates-first-kronos-c2-contracts-in-april/"
+      },
+      "third_party_software_openness": "FACT: Procured through a CSO explicitly seeking commercial software with sub-$1.5M initial prototypes and multiple awardees including a small firm; HIGH openness relative to any other Space Force C2 program. Follow-on scale depends on prototype success (do not equate CSO award with production)."
+    },
+    {
+      "name": "Unified Data Library (UDL)",
+      "owner": "SSC PAE BMC3I (contractor Bluestaq, Colorado Springs)",
+      "description": "Cloud data library aggregating government and commercial space-object and SDA data across classification levels with public REST APIs; the de facto integration point for commercial SDA providers and for allied partners (Australia deployed a classified UDL instance).",
+      "status_2026": "FACT (Tier 3): Breaking Defense (2025-03) reported a 'multi-front push to fix' the UDL (performance/latency, governance). RECALL (MEDIUM): Bluestaq received a $280M Space Force contract to expand the UDL (SpaceNews, announced March 23; year believed 2023). FACT (Tier 3): Australian Defence contracted Bluestaq for a classified UDL rollout (iTnews).",
+      "vendors": ["Bluestaq"],
+      "contract_evidence": [
+        {
+          "vendor": "Bluestaq",
+          "vehicle": "Space Force contract (SBIR Phase III lineage, vehicle type not verified)",
+          "ceiling": "$280M (reported)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$280M ceiling-type figure; do not equate with revenue",
+          "date": "2023-03-23 (RECALL on year; MEDIUM)",
+          "prototype_or_production": "Production/sustainment",
+          "source_url": "https://spacenews.com/bluestaq-wins-280-million-space-force-contract-to-expand-space-data-catalog/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Within BMC3I/Space C2 RDT&E lines (PE not verified)",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://breakingdefense.com/2025/03/space-force-unveils-multi-front-push-to-fix-its-unified-data-library/"
+      },
+      "third_party_software_openness": "FACT: UDL exposes documented APIs (unifieddatalibrary.com) and Bluestaq publishes Python packages on PyPI; commercial providers can be onboarded as data producers/consumers. HIGH openness for data integration; the platform itself is single-vendor."
+    },
+    {
+      "name": "Warp Core (data-as-a-service)",
+      "owner": "SSC (BMC3I lineage)",
+      "description": "Palantir-provided common data interface enabling data sharing, streamlining manual reporting and decommissioning legacy systems across SSC/Space Force.",
+      "status_2026": "FACT (Tier 3): SpaceNews reported the Space Force extended Palantir's data-as-a-service contracts (date not re-verified). No 2026 award found this session.",
+      "vendors": ["Palantir"],
+      "contract_evidence": [
+        {
+          "vendor": "Palantir",
+          "vehicle": "Data-as-a-service contract(s), extended",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Not verified this session",
+          "date": "Not verified (extension reported by SpaceNews)",
+          "prototype_or_production": "Production services",
+          "source_url": "https://spacenews.com/space-force-extends-palantirs-data-as-a-service-contracts/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Not verified",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://www.ssc.spaceforce.mil/Portals/3/Harnessing%20the%20power%20of%20Data_%20SSC%20awards%20contract%20to%20Palantir%20_%20Space%20Systems%20Command%20_%20Article%20Display_1.pdf"
+      },
+      "third_party_software_openness": "INFERENCE: A Palantir-hosted data layer tends to lock third parties into Palantir's integration patterns; startups more commonly integrate via UDL. Confidence MEDIUM."
+    },
+    {
+      "name": "Space Surveillance Network modernization - SDANet (mesh networking)",
+      "owner": "SSC (portfolio: space domain awareness; PAE assignment not verified)",
+      "description": "Next-generation resilient communications architecture replacing fragmented legacy links among Space Surveillance Network sensors; built on Anduril's Lattice-class mesh networking.",
+      "status_2026": "FACT (Tier 3): Anduril received $99.7M in Nov 2024 and a $100.3M modification on 2026-05-05 raising the ceiling to $200M; USSPACECOM mandates full deployment by end of 2026.",
+      "vendors": ["Anduril Industries"],
+      "contract_evidence": [
+        {
+          "vendor": "Anduril",
+          "vehicle": "Contract modification (base vehicle type not verified)",
+          "ceiling": "$200M total after modification",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$99.7M (2024-11) + $100.3M (2026-05-05)",
+          "date": "2026-05-05",
+          "prototype_or_production": "Deployment (production-like) with continued development",
+          "source_url": "https://defensescoop.com/2024/11/21/anduril-space-surveillance-network-upgrade-contract-sdanet/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Likely PE 1206425SF Space Situation Awareness Systems (RECALL, MEDIUM; not verified)",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://satnews.com/2026/05/07/anduril-secures-100m-modification-to-modernize-space-surveillance-network/"
+      },
+      "third_party_software_openness": "INFERENCE: Vendor-owned mesh (Lattice) with government-mandated interfaces; third-party sensor/analytics integration likely via Anduril SDK or UDL. Confidence LOW."
+    },
+    {
+      "name": "SDA Proliferated Warfighter Space Architecture - Transport Layer (Tranche 0/1/2) and BMC3 layer",
+      "owner": "Space Development Agency (under PAE structure since 2026)",
+      "description": "LEO mesh of optically linked satellites carrying Link 16, IBS and tactical data (JADC2 'space transport layer'); BMC3 modules provide on-orbit processing; SAIC runs the BMC3 Application Factory; SDA BAAs solicit containerized battle-management mission applications.",
+      "status_2026": "FACT: Tranche 3 Transport Layer not funded in FY27; requirements shifted to the Space Data Network backbone. FACT (Tier 3): Tranche 1 and 2 received a combined $817M RDT&E in FY27 request. RECALL (MEDIUM): T2 transport vendors York (~$615M, Aug 2022), Northrop (~$692M, Aug 2022), Lockheed (~$816M, Aug 2023), Rocket Lab (~$515M, Jan 2024).",
+      "vendors": ["York Space Systems", "Lockheed Martin", "Northrop Grumman", "Rocket Lab", "SAIC (BMC3 Application Factory)", "Scientific Systems Company (T1 BMC3 software, RECALL LOW)", "EpiSci (public evidence insufficient)", "Raytheon (T1 Tracking, RECALL MEDIUM; not BMC3)", "Anduril (no SDA/PWSA award found this session)"],
+      "contract_evidence": [
+        {
+          "vendor": "SAIC",
+          "vehicle": "Other Transaction agreement - BMC3 Application Factory and middleware",
+          "ceiling": "~$64M total potential value",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "~$64M potential",
+          "date": "2023 (RECALL on exact date; MEDIUM)",
+          "prototype_or_production": "Prototype OT establishing development/hosting environment",
+          "source_url": "https://www.sda.mil/sda-makes-award-for-proliferated-warfighter-space-architecture-pwsa-battle-management-command-control-and-communications-bmc3-application-factory/"
+        },
+        {
+          "vendor": "Multiple (BAA)",
+          "vehicle": "Broad Agency Announcement for PWSA Battle Management Mission Applications (white papers then invited proposals)",
+          "ceiling": "Not stated",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Awards not verified this session",
+          "date": "BAA issued 2024 (RECALL MEDIUM)",
+          "prototype_or_production": "Prototype",
+          "source_url": "https://www.sda.mil/sda-issues-broad-agency-announcement-for-pwsa-battle-management-mission-applications/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Transport Layer historically funded partly via PE 1206310SF (Space S&T R&D; $314M FY27) and PE 1206410SF (Space Technology Development and Prototyping; $1.25B FY27) plus SDA tranche lines (T1+T2 $817M FY27). Exact SDA PE numbers not re-verified.",
+        "fy26_request": "Public evidence insufficient this session (Congress reinstated $500M for T3 transport in FY26 per Breaking Defense).",
+        "fy27_request": "T1+T2: $817M RDT&E; T3 transport: $0",
+        "source_url": "https://www.airandspaceforces.com/space-force-budget-cuts-sdas-data-transport-funding/"
+      },
+      "third_party_software_openness": "FACT: BMC3 layer was deliberately designed for containerized third-party apps via an Application Factory and BAA; openness HIGH in design, but with T3 transport cancelled and SDA's future uncertain, the funded pipeline for new apps is uncertain (INFERENCE, MEDIUM)."
+    },
+    {
+      "name": "Space Data Network (SDN)",
+      "owner": "Space Force (portfolio assignment not verified; likely BMC3I or SATCOM & PNT PAE - INFERENCE LOW)",
+      "description": "New FY27 multi-billion 'backbone' for orbital data relay intended to absorb Tranche 3 Transport Layer requirements and connect sensing, missile-defense (Golden Dome) and tactical users.",
+      "status_2026": "FACT (Tier 3): Announced with the FY27 budget (DefenseScoop 2026-04-28; Breaking Defense 2026-04). FACT (Tier 3): Space Force awarded SpaceX a $2.3B contract for the SDN (Via Satellite 2026-05-27); Quilty commentary dubbed it the 'Space(x) Data Network'.",
+      "vendors": ["SpaceX"],
+      "contract_evidence": [
+        {
+          "vendor": "SpaceX",
+          "vehicle": "Contract (vehicle type not verified)",
+          "ceiling": "$2.3B (reported)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$2.3B reported award value; treat as ceiling until obligations verified",
+          "date": "2026-05 (reported 2026-05-27)",
+          "prototype_or_production": "Development/production (unclear)",
+          "source_url": "https://www.satellitetoday.com/government-military/2026/05/27/space-force-awards-spacex-2-3-billion-contract-for-space-data-network/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "New FY27 line(s); 'billions' planned (DefenseScoop); PE not verified",
+        "fy26_request": "N/A (new in FY27)",
+        "fy27_request": "Multi-billion (exact figure not verified this session)",
+        "source_url": "https://defensescoop.com/2026/04/28/space-force-space-data-network/"
+      },
+      "third_party_software_openness": "HYPOTHESIS: A SpaceX-anchored backbone (Starshield lineage) will be less open to third-party on-orbit apps than SDA's BMC3 model; openings shift to ground/user terminals, crypto/waveform interop, and data services. Confidence LOW."
+    },
+    {
+      "name": "SDA Tracking Layer Tranche 3 (context for sensing/targeting)",
+      "owner": "SDA / PAE Missile Warning and Tracking",
+      "description": "72 missile warning/tracking satellites for T3.",
+      "status_2026": "FACT: Awarded 2025-12-19 (~$3.5B across four teams: Lockheed Martin, Rocket Lab, Northrop Grumman, L3Harris; 18 satellites each).",
+      "vendors": ["Lockheed Martin", "Rocket Lab", "Northrop Grumman", "L3Harris"],
+      "contract_evidence": [
+        {
+          "vendor": "Lockheed Martin / Rocket Lab / Northrop Grumman / L3Harris",
+          "vehicle": "OT agreements (SDA)",
+          "ceiling": "~$3.5B combined",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "~$3.5B combined",
+          "date": "2025-12-19",
+          "prototype_or_production": "Production (prototype OT lineage)",
+          "source_url": "https://www.sda.mil/space-development-agency-makes-awards-to-build-72-tracking-layer-satellites-for-tranche-3/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "SDA Tracking Layer lines (PE not verified)",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://defensescoop.com/2025/12/19/sda-tranche-3-missile-tracking-layer-contract-awards/"
+      },
+      "third_party_software_openness": "LOW for startups at prime level; mission data processing subcontracts possible."
+    },
+    {
+      "name": "Rapid Resilient Command and Control (R2C2)",
+      "owner": "Space Rapid Capabilities Office (Kirtland AFB)",
+      "description": "Cloud-based, DevSecOps satellite C2 ground system for 'dynamic space operations' (frequently maneuvering satellites); modular, incremental delivery via CI/CD.",
+      "status_2026": "FACT: IDIQ estimated at $1B over 5-7 years awarded June 2024 to 20 small businesses; first $12M in delivery orders 2024-09-26 (up to $600K each). FACT (Tier 3): DefenseScoop (2025-03-06) reported the Space Force is challenged to scale R2C2. 2026 status and vendor names not verified this session (egress-blocked).",
+      "vendors": ["20 small businesses (names not verified this session - public evidence insufficient)"],
+      "contract_evidence": [
+        {
+          "vendor": "20 small businesses",
+          "vehicle": "Multiple-award IDIQ, small-business reserved",
+          "ceiling": "~$1B (estimated, 5-7 years) - NOT revenue",
+          "obligated": "$12M in first delivery orders (2024-09-26)",
+          "awarded_value": "Up to $600K per company in first orders",
+          "date": "2024-06 (IDIQ); 2024-09-26 (first orders)",
+          "prototype_or_production": "Prototype/incremental development",
+          "source_url": "https://breakingdefense.com/2024/09/space-rco-taps-20-firms-for-software-to-control-maneuvering-sats/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "PE 1206857SF Space Rapid Capabilities Office (RECALL, MEDIUM; not verified)",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://spacenews.com/space-force-kicks-off-1-billion-cloud-based-satellite-operations-program/"
+      },
+      "third_party_software_openness": "FACT: Explicitly modular/agile and small-business-only; HIGH openness in principle but the awardee pool is closed; a new startup would need an on-ramp or a subcontract to a pool member."
+    },
+    {
+      "name": "Commercial SDA integration: Joint Commercial Operations (JCO) cell, Commercial Augmentation Space Reserve (CASR), Commercial Space Strategy",
+      "owner": "SpOC (JCO) / SSC Commercial Space Office (CASR) / USSF HQ (strategy, April 2024)",
+      "description": "JCO buys commercial space-monitoring data/analytics on 4-6 week competitive rolling contracts with 'constant on-boarding' (vendors: LeoLabs, ExoAnalytic, Slingshot, COMSPOC). CASR is a Civil-Reserve-Air-Fleet-like pool of commercial capacity for crisis. The April 2024 Commercial Space Strategy names SDA, SATCOM, TacSRT and other mission areas for commercial integration (RECALL MEDIUM on contents).",
+      "status_2026": "FACT (Tier 3): CASR moving out of pilot with next contract batch planned 2026. FACT (Tier 3): Anduril announced acquisition of ExoAnalytic (2026-03-11). FACT (Tier 3): Slingshot won $69.2M for MENTAT (2026-07). Contract sizes for JCO buys not disclosed.",
+      "vendors": ["LeoLabs", "ExoAnalytic (Anduril)", "Slingshot Aerospace", "COMSPOC"],
+      "contract_evidence": [
+        {
+          "vendor": "Slingshot Aerospace",
+          "vehicle": "Space Force contract (vehicle not verified; MENTAT AI mission rehearsal)",
+          "ceiling": "$69.2M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$69.2M (reported)",
+          "date": "2026-07",
+          "prototype_or_production": "Development",
+          "source_url": "https://www.slingshot.space/news/slingshot-aerospace-wins-69-2-million-u-s-space-force-contract-to-advance-ai-powered-mission-readiness-for-space-defense"
+        },
+        {
+          "vendor": "LeoLabs / ExoAnalytic / Slingshot / COMSPOC",
+          "vehicle": "JCO 4-6 week rolling competitive contracts",
+          "ceiling": "Not disclosed",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Not disclosed",
+          "date": "Ongoing (reported 2025-09)",
+          "prototype_or_production": "Operational data services",
+          "source_url": "https://breakingdefense.com/2025/09/space-force-reorganizing-to-add-commercial-space-monitoring-data-analysis-into-operations/"
+        }
+      ],
+      "budget": {
+        "appropriation": "other",
+        "pe_number_or_line": "Mixed O&M/RDT&E; JCO funding line not verified",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://www.airandspaceforces.com/space-force-commercial-reserve-fleet-out-of-pilot-phase/"
+      },
+      "third_party_software_openness": "HIGH: JCO's model is designed for constant onboarding of commercial providers; entry requires unique data or demonstrably better analytics, typically delivered into UDL."
+    },
+    {
+      "name": "Andromeda (GEO reconnaissance/surveillance task-order program)",
+      "owner": "Space Force (SSC; portfolio not verified)",
+      "description": "10-year, $1.8B multiple-award program to issue task orders to 14 space companies for GEO reconnaissance and surveillance missions; Anduril among awardees.",
+      "status_2026": "FACT (Tier 4, 2026-04-29): Reported by Motley Fool/Yahoo; 14 awardees; ceiling is not revenue. Other awardee names not verified this session.",
+      "vendors": ["Anduril", "13 others (not verified)"],
+      "contract_evidence": [
+        {
+          "vendor": "Anduril and 13 others",
+          "vehicle": "Multiple-award task-order contract",
+          "ceiling": "$1.8B over 10 years",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Ceiling only",
+          "date": "2026-04",
+          "prototype_or_production": "Mixed",
+          "source_url": "https://www.fool.com/investing/2026/04/29/anduril-wins-a-spot-in-18-billion-space-force-plan/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "Not verified",
+        "fy26_request": "Public evidence insufficient this session.",
+        "fy27_request": "Public evidence insufficient this session.",
+        "source_url": "https://finance.yahoo.com/markets/stocks/articles/anduril-wins-spot-1-8-092500216.html"
+      },
+      "third_party_software_openness": "LOW for a software-only startup (spacecraft-centric); subcontract for mission software possible."
+    },
+    {
+      "name": "SpaceWERX Orbital Prime / Tactically Responsive Space (TacRS) / STRATFI 2026",
+      "owner": "SpaceWERX (AFWERX) with Space Safari and PAE sponsors",
+      "description": "SBIR-funded cohorts: Orbital Prime ($141M seeded since 2023 for ISAM), TacRS challenge (respond to on-orbit threats by 2026) and STRATFI/TACFI bridge funding.",
+      "status_2026": "FACT (Tier 3): 2026 STRATFI cycle $562.5M total with $245M private match (Payload). FACT: Gravitics $60M STRATFI (PY2025.1) for TacRS orbital carrier.",
+      "vendors": ["Gravitics", "Other 2026 STRATFI awardees (list not retrieved - egress blocked)"],
+      "contract_evidence": [
+        {
+          "vendor": "Gravitics",
+          "vehicle": "STRATFI (SBIR Phase II bridge with program-office and private match)",
+          "ceiling": "$60M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$60M follow-on investment (mix of SBIR, program office and private match)",
+          "date": "2025 (PY 2025.1)",
+          "prototype_or_production": "Prototype / flight demonstration",
+          "source_url": "https://spacenews.com/gravitics-wins-spacewerx-award-for-tactically-responsive-space-system/"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "SBIR/STTR set-aside across Space Force RDT&E plus matching program-office funds",
+        "fy26_request": "N/A (set-aside percentage)",
+        "fy27_request": "N/A",
+        "source_url": "https://payloadspace.com/spacewerx-announces-2026-stratfi-awardees/"
+      },
+      "third_party_software_openness": "HIGH for eligible small businesses; software topics compete against hardware-heavy space topics."
+    },
+    {
+      "name": "Golden Dome for America - Space-Based Interceptor (SBI) prototypes (context)",
+      "owner": "SSC (Golden Dome space elements)",
+      "description": "Space-based interceptor prototypes; dominant driver of FY27 Space Force RDT&E growth.",
+      "status_2026": "FACT (Tier 2/3): Booz Allen received an OT agreement from SSC for an SBI prototype (May 2026). Golden Dome programs saw large FY27 boosts (Breaking Defense 2026-04).",
+      "vendors": ["Booz Allen Hamilton", "Others not verified"],
+      "contract_evidence": [
+        {
+          "vendor": "Booz Allen Hamilton",
+          "vehicle": "Other Transaction Authority agreement",
+          "ceiling": "Not disclosed",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Not disclosed",
+          "date": "2026-05",
+          "prototype_or_production": "Prototype",
+          "source_url": "https://newsroom.boozallen.com/news-releases/news-release-details/booz-allen-develop-prototype-system-space-forces-space-based"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "New Golden Dome lines (not verified)",
+        "fy26_request": "Reconciliation-funded (RECALL LOW)",
+        "fy27_request": "Large increase (exact not verified)",
+        "source_url": "https://breakingdefense.com/2026/04/golden-dome-spending-plan-fy27-budget-space-force/"
+      },
+      "third_party_software_openness": "Battle-management/fire-control software for Golden Dome is a major emerging C2 need but highly classified; startup entry only via cleared primes (INFERENCE, MEDIUM)."
+    },
+    {
+      "name": "Booz Allen / BigBear.ai / Accelint / Kratos / Parsons - Space C2 role check",
+      "owner": "Various",
+      "description": "Verification of vendors named in the assignment.",
+      "status_2026": "FACT: Booz Allen holds a $630M SSC systems engineering and integration contract (Oct 2023) for missile warning/weather programs (Space Sensing), a $5.5M DAF AI-based C2 integration research contract (2025-09-23 to 2028-11-22), and a 2026 SBI OT; NO Booz Allen 'Space C2 / Kobayashi Maru' contract found this session. BigBear.ai and Accelint (Hypergiant) Space Force contracts: public evidence insufficient this session. Kratos: RECALL (MEDIUM) major ground/SATCOM (OpenSpace, Satellite Control Network) supplier; no 2026 award verified. Parsons: RECALL (LOW) Space C2 support work; not verified.",
+      "vendors": ["Booz Allen Hamilton", "BigBear.ai (unverified)", "Accelint (unverified)", "Kratos (unverified 2026)", "Parsons (unverified)"],
+      "contract_evidence": [
+        {
+          "vendor": "Booz Allen Hamilton",
+          "vehicle": "SE&I contract (Space Sensing)",
+          "ceiling": "$630M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$630M ceiling",
+          "date": "2023-10",
+          "prototype_or_production": "Services",
+          "source_url": "https://breakingdefense.com/2023/10/booz-allen-nabs-630m-integration-contract-for-space-force-missile-warning-weather-programs/"
+        },
+        {
+          "vendor": "Booz Allen Hamilton",
+          "vehicle": "Definitive contract - AI-based C2 integration research (DAF)",
+          "ceiling": "$5.5M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$5.5M",
+          "date": "2025-09-23",
+          "prototype_or_production": "Research",
+          "source_url": "https://app.g2xchange.com/defense/posts/booz-allen-snaps-up-us-air-force-ai-based-jadc2-research-contract"
+        }
+      ],
+      "budget": {
+        "appropriation": "RDT&E",
+        "pe_number_or_line": "N/A",
+        "fy26_request": "N/A",
+        "fy27_request": "N/A",
+        "source_url": "https://investors.boozallen.com/news-releases/news-release-details/us-space-force-awards-booz-allen-630m-systems-engineering-and"
+      },
+      "third_party_software_openness": "N/A"
+    }
+  ],
+  "procurement_pathways": [
+    {
+      "pathway": "SBIR/STTR",
+      "how_it_works_here": "SpaceWERX (AFWERX) runs Space Force SBIR/STTR open topics and mission-focused cohorts; Phase I feasibility, Phase II prototype, Phase III sole-source follow-on by any DoD office (Bluestaq's UDL is the canonical Phase III success).",
+      "typical_award_size": "Phase I roughly $75K-$150K; Phase II roughly $0.75M-$1.8M (RECALL MEDIUM)",
+      "timeline": "Open-topic cycles 2-3x/year; ~3-6 months from submission to Phase I award; Phase II 12-24 months",
+      "recent_examples": [
+        {"company": "Gravitics", "what": "STRATFI (built on SBIR Phase II) for TacRS orbital carrier", "amount": "$60M", "date": "2025", "source_url": "https://spacenews.com/gravitics-wins-spacewerx-award-for-tactically-responsive-space-system/"},
+        {"company": "Bluestaq", "what": "UDL grew from 2019 SBIR to a $280M Phase III-type contract", "amount": "$280M ceiling", "date": "2023 (RECALL)", "source_url": "https://spacenews.com/bluestaq-wins-280-million-space-force-contract-to-expand-space-data-catalog/"}
+      ],
+      "fit_for_two_founder_startup": "Best first-dollar path if eligible; software topics welcomed; requires a Space Force customer memo for Phase II open topics.",
+      "eligibility_notes": "SBIR requires a for-profit US small business more than 50% owned and controlled by US citizens or permanent residents (a German permanent resident counts; an Indonesian non-US-person co-founder holding a large stake could break the >50% test); principal place of business and work in the US. Needs specialist review of the cap table before applying."
+    },
+    {
+      "pathway": "Direct-to-Phase-II",
+      "how_it_works_here": "AFWERX/SpaceWERX D2P2 open topics allow skipping Phase I with evidence of feasibility (e.g., a working product with commercial traction).",
+      "typical_award_size": "Up to ~$1.25M-$1.8M (RECALL MEDIUM)",
+      "timeline": "Cycle-based; ~4-6 months to award",
+      "recent_examples": [
+        {"company": "Various SpaceWERX 2026 challenge participants", "what": "SpaceWERX 2026 TacRS and other challenges route to D2P2", "amount": "Not disclosed", "date": "2026", "source_url": "https://afwerxchallenge.com/spacewerx26/tactically-responsive-space"}
+      ],
+      "fit_for_two_founder_startup": "Good if the team already has a demonstrable product and a Space Force user willing to write a customer memo.",
+      "eligibility_notes": "Same SBIR ownership rules; feasibility documentation required."
+    },
+    {
+      "pathway": "STRATFI/TACFI",
+      "how_it_works_here": "SpaceWERX matches SBIR funds with program-office (PAE) money and private capital to bridge Phase II to production; 2026 cycle totaled $562.5M with $245M private match.",
+      "typical_award_size": "TACFI up to ~$2M SBIR + match; STRATFI up to ~$15M SBIR + match (totals to $60M seen)",
+      "timeline": "Annual cycle; requires an active Phase II and a PAE sponsor",
+      "recent_examples": [
+        {"company": "Gravitics", "what": "STRATFI PY2025.1", "amount": "$60M", "date": "2025", "source_url": "https://www.gravitics.com/news/space-force-stratfi-execution-orbital-infrastructure"}
+      ],
+      "fit_for_two_founder_startup": "Later-stage (needs Phase II + private investor match); unrealistic in first 18 months.",
+      "eligibility_notes": "SBIR eligibility plus matched private capital."
+    },
+    {
+      "pathway": "DIU CSO",
+      "how_it_works_here": "DIU Space portfolio posts problem statements; companies submit short solution briefs; prototype OT within ~60-90 days of selection with a Space Force transition partner.",
+      "typical_award_size": "$1M-$10M prototype OTs (RECALL MEDIUM)",
+      "timeline": "Weeks to months",
+      "recent_examples": [
+        {"company": "Not verified this session", "what": "Public evidence insufficient.", "amount": "", "date": "", "source_url": "https://www.diu.mil/"}
+      ],
+      "fit_for_two_founder_startup": "Feasible for non-SBIR-eligible firms with a differentiated commercial product; requires meaningful product maturity.",
+      "eligibility_notes": "No SBIR ownership test, but FOCI/ITAR/export review applies; a non-US-person founder needs export-control counsel before touching technical data."
+    },
+    {
+      "pathway": "prototype OT",
+      "how_it_works_here": "SSC PAE BMC3I's Kronos Family of Systems CSO (sam.gov) awards small prototype OTs to commercial software vendors; SDA uses OTs for the BMC3 App Factory; Space Force CSOs accept short white papers.",
+      "typical_award_size": "$0.5M-$1.5M initial Kronos prototypes; SDA App Factory ~$64M (integrator-scale)",
+      "timeline": "Kronos: CSO posted ~late 2025, first awards 2026-04-22 (roughly 4-6 months)",
+      "recent_examples": [
+        {"company": "MapLarge", "what": "Kronos CSO prototype - continuous adversary monitoring MVC", "amount": "$499,828", "date": "2026-04-22", "source_url": "https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4466726/space-force-advances-decisive-edge-in-a-contested-domain-aims-to-modernize-spac"},
+        {"company": "Leidos", "what": "Kronos CSO prototype", "amount": "$1.43M", "date": "2026-04-22", "source_url": "https://www.executivegov.com/articles/ssc-kronos-contracts-leidos-maplarge"},
+        {"company": "True Anomaly", "what": "Kronos CSO award for Mosaic software", "amount": "Not disclosed", "date": "2026", "source_url": "https://www.militaryaerospace.com/communications/article/55391545/space-force-adds-commercial-software-capability-to-kronos-battle-management-effort"}
+      ],
+      "fit_for_two_founder_startup": "The most realistic direct path to the BMC3I customer; award sizes match a $250K company's scale, but delivery to classified environments will require cleared partners.",
+      "eligibility_notes": "OT nontraditional-contractor status is easy for a startup; classified work requires facility clearance (FOCI review) - an ownership stake by a non-US person triggers FOCI mitigation analysis."
+    },
+    {
+      "pathway": "production OT",
+      "how_it_works_here": "Follow-on production OT after a successful prototype OT (10 USC 4022(f)); SDA has used this for tranche production.",
+      "typical_award_size": "Tens of millions to billions (e.g., SDA T3 tracking ~$3.5B)",
+      "timeline": "Years after prototype",
+      "recent_examples": [
+        {"company": "Lockheed Martin / Rocket Lab / Northrop Grumman / L3Harris", "what": "SDA Tranche 3 Tracking Layer", "amount": "~$3.5B combined", "date": "2025-12-19", "source_url": "https://www.sda.mil/space-development-agency-makes-awards-to-build-72-tracking-layer-satellites-for-tranche-3/"}
+      ],
+      "fit_for_two_founder_startup": "Not a near-term path; relevant only as the end-state of a successful prototype.",
+      "eligibility_notes": "Requires successful prototype completion and competitive prototype award."
+    },
+    {
+      "pathway": "BAA",
+      "how_it_works_here": "SDA's BAA for PWSA Battle Management Mission Applications takes white papers then invited proposals for containerized apps; AFRL/RV BAAs fund space S&T.",
+      "typical_award_size": "Hundreds of thousands to low millions (not verified)",
+      "timeline": "Rolling white papers; months to award",
+      "recent_examples": [
+        {"company": "Not verified", "what": "SDA BM mission apps BAA awards not retrieved this session", "amount": "", "date": "", "source_url": "https://www.sda.mil/sda-issues-broad-agency-announcement-for-pwsa-battle-management-mission-applications/"}
+      ],
+      "fit_for_two_founder_startup": "Reasonable for an algorithm/app team; but SDA's pipeline is shrinking post-T3-transport cancellation (INFERENCE).",
+      "eligibility_notes": "No small-business ownership test; export-control and classification apply to on-orbit BMC3 apps."
+    },
+    {
+      "pathway": "consortium OTA",
+      "how_it_works_here": "Join the Space Enterprise Consortium (SpEC, managed by NSTXL) to receive SSC prototype RFPs and team with primes.",
+      "typical_award_size": "$1M-$50M projects (RECALL MEDIUM)",
+      "timeline": "Membership weeks; project awards 3-6 months",
+      "recent_examples": [
+        {"company": "Not verified this session", "what": "Public evidence insufficient.", "amount": "", "date": "", "source_url": "https://www.ssc.spaceforce.mil/"}
+      ],
+      "fit_for_two_founder_startup": "Useful for visibility and teaming; low cost.",
+      "eligibility_notes": "Membership fee; nontraditional status advantageous; foreign-ownership disclosures required."
+    },
+    {
+      "pathway": "FAR",
+      "how_it_works_here": "Space RCO's R2C2 multiple-award IDIQ (small-business reserved) and SSC FAR contracts (e.g., L3Harris ATLAS astrometric tools, Booz Allen SE&I).",
+      "typical_award_size": "R2C2 first orders up to $600K each; IDIQ ceiling ~$1B",
+      "timeline": "IDIQ pools open only at competition; task orders in weeks",
+      "recent_examples": [
+        {"company": "20 small businesses", "what": "R2C2 IDIQ and first delivery orders", "amount": "$12M total first orders", "date": "2024-09-26", "source_url": "https://www.airandspaceforces.com/space-rco-new-c2-software-dynamic-satellites/"}
+      ],
+      "fit_for_two_founder_startup": "Only via subcontract to a pool member unless an on-ramp opens; monitor sam.gov for R2C2 on-ramps.",
+      "eligibility_notes": "Small-business size standards; SAM registration; likely facility clearance for later orders."
+    },
+    {
+      "pathway": "subcontract",
+      "how_it_works_here": "Team with L3Harris (ATLAS), Leidos/True Anomaly (Kronos), SAIC (BMC3 App Factory), Bluestaq (UDL), Anduril (SDANet/ExoAnalytic), York/Lockheed/Northrop/Rocket Lab (PWSA), SpaceX (SDN) or R2C2 pool members.",
+      "typical_award_size": "$100K-$2M for niche software",
+      "timeline": "Driven by prime schedules",
+      "recent_examples": [
+        {"company": "Not verified", "what": "Public evidence insufficient on specific sub-awards.", "amount": "", "date": "", "source_url": "https://www.ssc.spaceforce.mil/"}
+      ],
+      "fit_for_two_founder_startup": "Realistic and fastest to revenue; but primes control IP terms and customer access.",
+      "eligibility_notes": "Prime flows down ITAR/clearance requirements; a non-US-person founder may be walled off from technical data."
+    },
+    {
+      "pathway": "CRADA",
+      "how_it_works_here": "Cooperative R&D agreements with AFRL/RV or SpOC deltas to test tools with operators without a procurement.",
+      "typical_award_size": "$0 (in-kind)",
+      "timeline": "1-3 months to sign",
+      "recent_examples": [
+        {"company": "Not verified", "what": "Public evidence insufficient.", "amount": "", "date": "", "source_url": "https://www.afrl.af.mil/"}
+      ],
+      "fit_for_two_founder_startup": "Good for building operator pull and evidence before a CSO; no revenue.",
+      "eligibility_notes": "Export-control review for data exchange."
+    },
+    {
+      "pathway": "commercial sale",
+      "how_it_works_here": "JCO buys commercial SDA data/analytics on 4-6 week rolling competitive contracts with constant onboarding; UDL onboarding as a data provider; CASR reserve contracts (next batch 2026); TacSRT/Global Data Marketplace for commercial imagery/analytics (RECALL).",
+      "typical_award_size": "Undisclosed; small recurring buys",
+      "timeline": "Weeks",
+      "recent_examples": [
+        {"company": "LeoLabs, ExoAnalytic, Slingshot, COMSPOC", "what": "JCO rolling contracts", "amount": "Not disclosed", "date": "2025", "source_url": "https://breakingdefense.com/2025/09/space-force-reorganizing-to-add-commercial-space-monitoring-data-analysis-into-operations/"}
+      ],
+      "fit_for_two_founder_startup": "Excellent fit for a software/analytics product that adds value to existing sensor data (no hardware needed); requires UDL integration and unclassified value.",
+      "eligibility_notes": "Standard commercial terms; foreign ownership less constraining at unclassified level, but ITAR review still needed for SSA software with defense-specific functions."
+    },
+    {
+      "pathway": "allied",
+      "how_it_works_here": "Australia contracted Bluestaq for a classified UDL; Five Eyes Combined Space Operations partners and NATO buy SSA analytics; Germany's Bundeswehr Weltraumkommando and GSSAC are potential customers for a German co-founder.",
+      "typical_award_size": "Australia UDL deal ~$37M (currency not verified)",
+      "timeline": "Months to years",
+      "recent_examples": [
+        {"company": "Bluestaq", "what": "Australian Defence classified UDL deployment", "amount": "~$37M", "date": "Not verified", "source_url": "https://www.itnews.com.au/news/defence-to-deploy-classified-version-of-space-data-repository-625532"}
+      ],
+      "fit_for_two_founder_startup": "A German-founded entity could pursue Bundeswehr/ESA SST work in parallel; watch ITAR on re-export of US-derived tech.",
+      "eligibility_notes": "Separate national procurement rules; EU/German export controls."
+    },
+    {
+      "pathway": "SpaceWERX",
+      "how_it_works_here": "Beyond SBIR: challenges (afwerxchallenge.com/spacewerx26), Orbital Prime and TacRS cohorts, Space Force Pitch Days, and cohort support (test facilities, SMEs, private-capital introductions).",
+      "typical_award_size": "Challenge awards route to SBIR Phase I/II sizes",
+      "timeline": "Annual challenge calendars",
+      "recent_examples": [
+        {"company": "Orbital Prime cohort companies", "what": "$141M seeded since 2023", "amount": "$141M cumulative", "date": "2023-2026", "source_url": "https://spacewerx.us/orbital-prime-2/"}
+      ],
+      "fit_for_two_founder_startup": "Primary front door for two students; free to enter; the TacRS and mission-cohort themes are hardware-leaning, so pitch software that closes a sponsor's stated gap.",
+      "eligibility_notes": "SBIR eligibility for funded awards."
+    },
+    {
+      "pathway": "AFWERX",
+      "how_it_works_here": "Parent organization to SpaceWERX; Air Force open topics sometimes accept space C2 software; Prime programs.",
+      "typical_award_size": "Same as SBIR",
+      "timeline": "Same as SBIR",
+      "recent_examples": [
+        {"company": "N/A", "what": "See SpaceWERX", "amount": "", "date": "", "source_url": "https://en.wikipedia.org/wiki/AFWERX"}
+      ],
+      "fit_for_two_founder_startup": "Secondary channel.",
+      "eligibility_notes": "SBIR rules."
+    },
+    {
+      "pathway": "xTech",
+      "how_it_works_here": "Army program; not applicable to Space Force buyers.",
+      "typical_award_size": "N/A",
+      "timeline": "N/A",
+      "recent_examples": [
+        {"company": "N/A", "what": "Not applicable", "amount": "", "date": "", "source_url": ""}
+      ],
+      "fit_for_two_founder_startup": "N/A",
+      "eligibility_notes": "N/A"
+    },
+    {
+      "pathway": "Naval innovation",
+      "how_it_works_here": "Not applicable to Space Force buyers.",
+      "typical_award_size": "N/A",
+      "timeline": "N/A",
+      "recent_examples": [
+        {"company": "N/A", "what": "Not applicable", "amount": "", "date": "", "source_url": ""}
+      ],
+      "fit_for_two_founder_startup": "N/A",
+      "eligibility_notes": "N/A"
+    }
+  ],
+  "chains": [
+    {
+      "problem_area": "Space domain awareness catalog, conjunction and launch analysis, space COP (SPADOC replacement)",
+      "user": "Space operators and orbital analysts in Space Delta 2 (18th/19th Space Defense Squadrons), CSpOC and NSDC crews",
+      "requirement_owner": "USSPACECOM via Space Forces-Space; SpOC as force provider",
+      "program_office": "SSC PAE BMC3I (Space C2 / ATLAS, Colorado Springs software factory)",
+      "contracting_office": "SSC contracting (Los Angeles AFB / Peterson SFB operating locations)",
+      "budget_line": "Space Force RDT&E Space C2 line (PE not verified); related PE 1206425SF SSA Systems (RECALL)",
+      "contract_vehicle": "FAR contracts (L3Harris astrometric tools $90M, Mar 2025); CSO prototypes for adjacent tools",
+      "current_vendors": ["L3Harris", "Bluestaq (UDL)", "Palantir (Warp Core)"],
+      "confidence": "MEDIUM"
+    },
+    {
+      "problem_area": "Operational C2, battle management and space intelligence integration (planning to live ops to post-mission analysis; continuous adversary monitoring)",
+      "user": "Battle managers and intel analysts at CSpOC/NSDC, Delta 7 ISR squadrons, NSIC (Delta 18) analysts",
+      "requirement_owner": "Space Forces-Space / USSPACECOM; NSIC for space intel",
+      "program_office": "SSC PAE BMC3I - Kronos Family of Systems",
+      "contracting_office": "SSC via Commercial Solutions Opening (Kronos FoS CSO on sam.gov)",
+      "budget_line": "Space C2 / BMC3 RDT&E (PE not verified)",
+      "contract_vehicle": "CSO prototype OTs (Leidos $1.43M; MapLarge $499,828; True Anomaly)",
+      "current_vendors": ["Leidos", "MapLarge", "True Anomaly"],
+      "confidence": "HIGH"
+    },
+    {
+      "problem_area": "Satellite command and control for dynamic space operations (maneuvering satellites, cloud ground)",
+      "user": "Satellite operators in Space Delta 9 (orbital warfare) and Space RCO program crews",
+      "requirement_owner": "USSPACECOM / SpOC (dynamic space operations concept)",
+      "program_office": "Space Rapid Capabilities Office (Kirtland AFB), now under applicable PAE",
+      "contracting_office": "Space RCO contracting (Kirtland)",
+      "budget_line": "PE 1206857SF Space RCO (RECALL, MEDIUM)",
+      "contract_vehicle": "R2C2 small-business multiple-award IDIQ (~$1B ceiling; $12M first orders)",
+      "current_vendors": ["20 small businesses (names not verified this session)"],
+      "confidence": "MEDIUM"
+    },
+    {
+      "problem_area": "Space-based tactical data transport and on-orbit BMC3 (JADC2 transport layer)",
+      "user": "Joint tactical users receiving Link 16/IBS from space; missile-defense operators (MDA, USNORTHCOM); SDA ops centers (Grand Forks)",
+      "requirement_owner": "Joint Staff / USSPACECOM / SDA warfighter council; Golden Dome requirements for SDN",
+      "program_office": "SDA (T0-T2 Transport, BMC3 App Factory) transitioning to Space Data Network (portfolio not verified)",
+      "contracting_office": "SDA agreements officers (OT/BAA); SSC for SDN (assumed)",
+      "budget_line": "PE 1206410SF ($1.25B FY27), PE 1206310SF ($314M FY27), SDA T1+T2 ($817M FY27); T3 transport $0; SDN new multi-billion line",
+      "contract_vehicle": "OTAs (York/Lockheed/Northrop/Rocket Lab), OT for SAIC App Factory (~$64M), BAA for BM apps; SpaceX SDN $2.3B",
+      "current_vendors": ["York", "Lockheed Martin", "Northrop Grumman", "Rocket Lab", "SAIC", "SpaceX"],
+      "confidence": "MEDIUM"
+    },
+    {
+      "problem_area": "Space Surveillance Network sensor connectivity and data transport (SDANet)",
+      "user": "Sensor operators and network operators supporting Delta 2 and Delta 6",
+      "requirement_owner": "USSPACECOM (full deployment mandate end-2026)",
+      "program_office": "SSC (SDA/combat power lineage; PAE not verified)",
+      "contracting_office": "SSC contracting",
+      "budget_line": "Likely PE 1206425SF (RECALL)",
+      "contract_vehicle": "Contract with modifications ($200M ceiling)",
+      "current_vendors": ["Anduril"],
+      "confidence": "MEDIUM"
+    },
+    {
+      "problem_area": "Commercial SDA data and analytics fusion into operations",
+      "user": "JCO cell analysts (SpOC), coalition partners in Combined Space Operations, CSpOC",
+      "requirement_owner": "SpOC / USSPACECOM Commercial Integration Cell",
+      "program_office": "SpOC JCO (rolling buys); SSC COMSO for CASR",
+      "contracting_office": "SpOC/SSC contracting via short-duration competitive awards",
+      "budget_line": "O&M/RDT&E mix (line not verified)",
+      "contract_vehicle": "4-6 week rolling contracts; CASR reserve contracts (2026 batch)",
+      "current_vendors": ["LeoLabs", "ExoAnalytic (Anduril)", "Slingshot Aerospace", "COMSPOC"],
+      "confidence": "MEDIUM"
+    },
+    {
+      "problem_area": "Mission rehearsal, wargaming and training simulation for space warfare",
+      "user": "STARCOM Delta 10/11/12 instructors and aggressors; SpOC crews in rehearsal",
+      "requirement_owner": "STARCOM / Space Futures Command (planned)",
+      "program_office": "Contracting office for Slingshot MENTAT not verified (SSC or SpaceWERX)",
+      "contracting_office": "Not verified",
+      "budget_line": "Not verified",
+      "contract_vehicle": "Contract $69.2M (Slingshot, July 2026)",
+      "current_vendors": ["Slingshot Aerospace"],
+      "confidence": "LOW"
+    },
+    {
+      "problem_area": "SATCOM/PNT network operations and enterprise ground services (DDIL resilience)",
+      "user": "Delta 6 network operators, Delta 8 SATCOM/PNT operators, Satellite Control Network crews",
+      "requirement_owner": "SpOC / USSPACECOM",
+      "program_office": "SSC PAE SATCOM and PNT; PAE Infrastructure (ground)",
+      "contracting_office": "SSC contracting",
+      "budget_line": "Not verified",
+      "contract_vehicle": "FAR/OT (Kratos OpenSpace-class ground, RECALL)",
+      "current_vendors": ["Kratos (RECALL)", "Others not verified"],
+      "confidence": "LOW"
+    }
+  ],
+  "org_chart": {
+    "nodes": [
+      {"id": "usspacecom", "label": "USSPACECOM (combatant command)", "type": "requirement"},
+      {"id": "s4s", "label": "Space Forces-Space / CSpOC / NSDC", "type": "user"},
+      {"id": "spoc", "label": "Space Operations Command (Deltas 2,5,6,7,8,9,15; JCO cell)", "type": "user"},
+      {"id": "nsic", "label": "NSIC / Space Delta 18", "type": "requirement"},
+      {"id": "starcom", "label": "STARCOM (training/test)", "type": "user"},
+      {"id": "sfc", "label": "Space Futures Command / SWAC (planned)", "type": "requirement"},
+      {"id": "safsq", "label": "SAF/SQ (space acquisition executive)", "type": "policy"},
+      {"id": "ssc", "label": "Space Systems Command (9 PAEs, 2026)", "type": "program"},
+      {"id": "bmc3i", "label": "PAE BMC3I (Space C2/ATLAS, Kronos, UDL, Warp Core)", "type": "program"},
+      {"id": "mwt", "label": "PAE Missile Warning & Tracking (SDA director dual-hat)", "type": "program"},
+      {"id": "sda", "label": "Space Development Agency (PWSA, BMC3 apps)", "type": "program"},
+      {"id": "srco", "label": "Space RCO (R2C2)", "type": "program"},
+      {"id": "comso", "label": "SSC Commercial Space Office / Front Door / CASR", "type": "innovation"},
+      {"id": "spacewerx", "label": "SpaceWERX (SBIR/STTR, STRATFI, Orbital Prime, TacRS)", "type": "innovation"},
+      {"id": "diu", "label": "DIU Space Portfolio (CSO)", "type": "innovation"},
+      {"id": "afrl", "label": "AFRL/RV (space S&T, CRADA, BAA)", "type": "lab"},
+      {"id": "spec", "label": "Space Enterprise Consortium OTA (NSTXL)", "type": "contracting"},
+      {"id": "ssc_cso", "label": "SSC Commercial Solutions Opening (Kronos FoS)", "type": "contracting"},
+      {"id": "sda_ao", "label": "SDA agreements officers (OT/BAA)", "type": "contracting"},
+      {"id": "srco_k", "label": "Space RCO contracting (R2C2 IDIQ)", "type": "contracting"},
+      {"id": "jco_buy", "label": "JCO rolling 4-6 week commercial buys", "type": "contracting"},
+      {"id": "rdte", "label": "RDT&E, Space Force (Space C2 line; PE 1206410SF; PE 1206310SF; SDA tranche lines; SDN)", "type": "budget"},
+      {"id": "om", "label": "O&M, Space Force (operations, commercial data)", "type": "budget"},
+      {"id": "congress", "label": "Congress (appropriations; restored $500M T3 transport FY26)", "type": "budget"}
+    ],
+    "edges": [
+      {"from": "usspacecom", "to": "s4s", "label": "operational tasking / requirements"},
+      {"from": "s4s", "to": "bmc3i", "label": "operator gaps -> Kronos/ATLAS requirements"},
+      {"from": "spoc", "to": "bmc3i", "label": "Delta 2/7 user feedback; Integrated Mission Deltas"},
+      {"from": "nsic", "to": "bmc3i", "label": "space intelligence requirements (Kronos)"},
+      {"from": "usspacecom", "to": "srco", "label": "dynamic space ops C2 need (R2C2)"},
+      {"from": "usspacecom", "to": "sda", "label": "JADC2 transport / BMC3 requirements"},
+      {"from": "sfc", "to": "ssc", "label": "force design informs portfolios"},
+      {"from": "safsq", "to": "ssc", "label": "acquisition authority delegated to PAEs (~90%)"},
+      {"from": "ssc", "to": "bmc3i", "label": "portfolio"},
+      {"from": "ssc", "to": "mwt", "label": "portfolio"},
+      {"from": "mwt", "to": "sda", "label": "SDA aligned under PAE (2026)"},
+      {"from": "ssc", "to": "srco", "label": "Space RCO under applicable PAE (2026)"},
+      {"from": "ssc", "to": "comso", "label": "industry intake / CASR"},
+      {"from": "bmc3i", "to": "ssc_cso", "label": "Kronos CSO prototype OTs"},
+      {"from": "bmc3i", "to": "spec", "label": "consortium OT prototypes"},
+      {"from": "sda", "to": "sda_ao", "label": "OT/BAA awards (App Factory, BM apps)"},
+      {"from": "srco", "to": "srco_k", "label": "R2C2 IDIQ task orders"},
+      {"from": "spoc", "to": "jco_buy", "label": "commercial SDA data purchases"},
+      {"from": "spacewerx", "to": "bmc3i", "label": "SBIR Phase II/STRATFI transition with PAE match"},
+      {"from": "diu", "to": "ssc", "label": "CSO prototypes with SSC transition partner"},
+      {"from": "afrl", "to": "spacewerx", "label": "SBIR technical sponsorship"},
+      {"from": "starcom", "to": "ssc", "label": "training/sim requirements (MENTAT)"},
+      {"from": "rdte", "to": "bmc3i", "label": "Space C2 / BMC3 funding"},
+      {"from": "rdte", "to": "sda", "label": "T1/T2 $817M FY27; PE 1206410SF; PE 1206310SF"},
+      {"from": "rdte", "to": "srco", "label": "PE 1206857SF (RECALL)"},
+      {"from": "om", "to": "spoc", "label": "operations and commercial data"},
+      {"from": "congress", "to": "rdte", "label": "appropriations / marks"}
+    ]
+  },
+  "recent_changes": [
+    {"change": "Space Force announces replacement of PEOs with Portfolio Acquisition Executives (PAEs); ~90-92% of contracting authority delegated to PAEs.", "date": "2026-03-18", "source_url": "https://defensescoop.com/2026/03/18/space-force-new-pae-portfolio-acquisition-executives/"},
+    {"change": "Nine PAE portfolios finalized (infrastructure; BMC3I; SATCOM & PNT; missile warning & tracking; space-based sensing & targeting; space access; EW & cyber; space combat power; advanced capabilities); Shannon Pallone permanent PAE BMC3I; SDA director Sandhoo named PAE MW&T; SDA and Space RCO continue under PAEs.", "date": "2026-04 to 2026-06", "source_url": "https://spacenews.com/space-force-completes-procurement-reorganization-creating-nine-acquisition-portfolios/"},
+    {"change": "SSC separates Kronos family of systems from the Space C2/ATLAS program.", "date": "2025-05", "source_url": "https://breakingdefense.com/2026/03/space-force-anticipates-first-kronos-c2-contracts-in-april/"},
+    {"change": "First Kronos CSO prototype awards: Leidos $1.43M and MapLarge $499,828; True Anomaly Mosaic added later.", "date": "2026-04-22", "source_url": "https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4466726/space-force-advances-decisive-edge-in-a-contested-domain-aims-to-modernize-spac"},
+    {"change": "ATLAS operational acceptance (late 2025) followed by DOT&E finding it lacks minimum viable capability to retire SPADOC; SPADOC decommission targeted end-2026 pending L3Harris astrometric tools ($90M, Mar 2025).", "date": "2026-03-21 (report coverage)", "source_url": "https://satnews.com/2026/03/21/pentagon-report-space-force-atlas-program-falls-short-of-decommissioning-targets/"},
+    {"change": "FY27 request: no funding for SDA Tranche 3 Transport Layer; requirements moved to new Space Data Network backbone; T1+T2 $817M; PE 1206410SF $1.25B; PE 1206310SF $314M.", "date": "2026-04-28", "source_url": "https://defensescoop.com/2026/04/28/space-force-space-data-network/"},
+    {"change": "Space Force awards SpaceX $2.3B for Space Data Network.", "date": "2026-05-27 (reported)", "source_url": "https://www.satellitetoday.com/government-military/2026/05/27/space-force-awards-spacex-2-3-billion-contract-for-space-data-network/"},
+    {"change": "SDA awards ~$3.5B for 72 Tranche 3 Tracking Layer satellites to Lockheed Martin, Rocket Lab, Northrop Grumman, L3Harris.", "date": "2025-12-19", "source_url": "https://www.sda.mil/space-development-agency-makes-awards-to-build-72-tracking-layer-satellites-for-tranche-3/"},
+    {"change": "Anduril receives $100.3M modification for SDANet (Space Surveillance Network mesh), ceiling to $200M; USSPACECOM mandates full deployment by end-2026.", "date": "2026-05-05", "source_url": "https://satnews.com/2026/05/07/anduril-secures-100m-modification-to-modernize-space-surveillance-network/"},
+    {"change": "Anduril announces acquisition of ExoAnalytic Solutions (commercial SDA telescope network).", "date": "2026-03-11", "source_url": "https://www.satellitetoday.com/technology/2026/03/11/anduril-acquiring-space-domain-awareness-missile-defense-software-company-exoanalytic-solutions/"},
+    {"change": "Slingshot Aerospace wins $69.2M Space Force contract for MENTAT AI mission-rehearsal platform.", "date": "2026-07-21", "source_url": "https://thedefensepost.com/2026/07/21/slingshot-space-force-ai-contract/amp/"},
+    {"change": "National Defense Magazine reports SDA faces potential dissolution under PAE structure.", "date": "2026-08-03", "source_url": "https://www.nationaldefensemagazine.org/articles/2026/8/3/space-development-agency-has-plenty-left-to-give-amid-potential-dissolution"},
+    {"change": "SpOC explores reorganizing its commercial cell to push commercial space-monitoring data into operations; JCO uses 4-6 week rolling contracts.", "date": "2025-09", "source_url": "https://breakingdefense.com/2025/09/space-force-reorganizing-to-add-commercial-space-monitoring-data-analysis-into-operations/"},
+    {"change": "DoD/industry 'showdown' over Commerce TraCSS future (civil SSA) creates demand uncertainty for commercial SSA vendors.", "date": "2026-09", "source_url": "https://breakingdefense.com/2026/09/wither-tracss-dod-industry-face-hard-choices-in-showdown-over-commerce-spacewatch-effort/"},
+    {"change": "SpaceWERX 2026 STRATFI cycle: $562.5M total incl. $245M private match.", "date": "2026", "source_url": "https://payloadspace.com/spacewerx-announces-2026-stratfi-awardees/"},
+    {"change": "Space RCO R2C2 IDIQ (est. $1B) to 20 small businesses; first $12M orders.", "date": "2024-06 / 2024-09-26", "source_url": "https://breakingdefense.com/2024/09/space-rco-taps-20-firms-for-software-to-control-maneuvering-sats/"},
+    {"change": "Booz Allen receives SSC OT for Golden Dome Space-Based Interceptor prototype.", "date": "2026-05", "source_url": "https://newsroom.boozallen.com/news-releases/news-release-details/booz-allen-develop-prototype-system-space-forces-space-based"}
+  ],
+  "how_a_startup_gets_in": "Sequenced plan for a two-founder, ~$250K company targeting Space Force C2/SDA software. (0) Legal first: get a cap-table and export-control review before anything else - SBIR requires >50% US-citizen/permanent-resident ownership (German LPR counts; Indonesian non-US-person stake must be sized accordingly), and space C2/SDA software can be ITAR-controlled; classified Kronos/NSDC work needs facility clearance and FOCI mitigation (specialist review, no legal judgment here). (1) Build on the Unified Data Library: register for UDL API access (unifieddatalibrary.com), ingest public/commercial catalog data and ship an unclassified analytic (e.g., maneuver detection, conjunction triage, sensor-tasking optimization) that demonstrates value in weeks; this is the integration layer every SSC/SpOC program uses. (2) Get operator pull: attend SSC BMC3I industry days and technical exchange meetings (SSC Space Industry Days, AFCEA LA), submit a capability brief through the SSC Commercial Space Office 'Front Door', and seek a no-cost CRADA or demo with Space Delta 2, the JCO cell, or AFRL/RV. (3) First dollars via SpaceWERX: submit to the next SpaceWERX/AFWERX open topic or 2026 challenge (afwerxchallenge.com/spacewerx26), ideally Direct-to-Phase-II with a customer memo from a delta or the BMC3I office; alternatively DIU Space CSO if SBIR-ineligible. (4) In parallel, sell commercially: onboard as a JCO commercial-data/analytics provider (4-6 week rolling competitions) and position for the 2026 CASR contract batch; consider allied buyers (Australia's classified UDL, German Weltraumkommando/GSSAC) where the German founder helps. (5) Target the Kronos Family of Systems CSO for a $0.5M-$1.5M prototype OT - the only Space Force C2 program in 2026 that awarded sub-$1M prototypes to small commercial software vendors - and/or the SDA BMC3 Battle Management mission-applications BAA while it lasts. (6) Team with primes and pool members: subcontract to Leidos/True Anomaly (Kronos), L3Harris (ATLAS), SAIC (BMC3 App Factory), Bluestaq (UDL), or an R2C2 small-business pool member; join the Space Enterprise Consortium (NSTXL) for RFP visibility. (7) Scale via STRATFI/TACFI (needs a PAE sponsor and private match) toward a Phase III or production OT. Avoid: pitching on-orbit transport (SDN is SpaceX-anchored), Golden Dome fire control (classified, prime-dominated), or hardware-heavy TacRS/ISAM cohorts.",
+  "search_log": [
+    {"query": "\"Space Systems Command\" \"Program Executive Officer\" BMC3 \"Battle Management\" 2026 reorganization", "useful": true},
+    {"query": "ATLAS SPADOC transition \"Space C2\" Kobayashi Maru 2026 status", "useful": true},
+    {"query": "Space Development Agency Tranche 3 Transport Layer BMC3 award 2026 battle management applications", "useful": true},
+    {"query": "\"Rapid Resilient Command and Control\" R2C2 Space RCO award 2025 2026 vendors", "useful": true},
+    {"query": "SpaceWERX STRATFI TACFI 2026 awards \"Orbital Prime\" \"Tactically Responsive Space\"", "useful": true},
+    {"query": "Space Force \"Kronos\" command and control contract award 2026 Space Systems Command", "useful": true},
+    {"query": "FY2027 budget request Space Force RDT&E \"Space Command and Control\" program element SDA \"Transport Layer\" million", "useful": true},
+    {"query": "\"Unified Data Library\" Bluestaq 2026 OR \"Commercial Augmentation Space Reserve\" 2026 Slingshot LeoLabs ExoAnalytic Space Force contract", "useful": true},
+    {"query": "Anduril OR Palantir \"Space Force\" contract 2026 \"Space Surveillance Network\" OR \"space domain awareness\" OR \"Warp Core\"", "useful": true},
+    {"query": "\"Booz Allen\" \"Space C2\" OR \"BigBear.ai\" \"Space Force\" OR \"Accelint\" \"Space Force\" contract 2025 2026", "useful": true},
+    {"query": "\"Portfolio Acquisition Executive\" Space Force 2026 \"Space Systems Command\" \"Space Development Agency\" realignment", "useful": true},
+    {"query": "\"Space Data Network\" Space Force 2026 award vendors transport layer Tranche 3 cancelled", "useful": true},
+    {"query": "WebFetch govconwire R2C2 20 awardees (EGRESS_BLOCKED)", "useful": false},
+    {"query": "WebFetch payloadspace STRATFI 2026 awardees (EGRESS_BLOCKED)", "useful": false}
+  ],
+  "saturation_statement": "Coverage is strong on the 2026 acquisition reorganization (PAEs), Kronos, ATLAS/SPADOC status, SDA transport-to-SDN shift, R2C2 structure, SDANet, and commercial-SDA buying patterns, all with 2025-2026 sources. Gaps remaining after the 12-search budget: exact FY26/FY27 PE numbers and dollar figures for the Space C2/BMC3I lines (need FY27 RDT&E Space Force J-book, Vol 3), names of the 20 R2C2 awardees and any 2025-2026 on-ramp, the 2026 STRATFI awardee list, SDA BM mission-app BAA award recipients, BigBear.ai/Accelint/Kratos/Parsons Space Force C2 roles, and which PAE owns the Space Data Network and SDANet. Two WebFetch attempts to third-party sites were egress-blocked. Absence of found competitors in a niche is not evidence of opportunity; the SDA/space-C2 software niche is already contested by Slingshot, LeoLabs, COMSPOC, True Anomaly, MapLarge, Bluestaq, Palantir and Anduril (which now owns ExoAnalytic).",
+  "sources": [
+    {"url": "https://www.ssc.spaceforce.mil/Program-Offices/Battle-Management-Command-Control-Communications-and-Space-Intelligence", "title": "BMC3I - Space Systems Command", "pub_date": "2026", "tier": 1},
+    {"url": "https://www.ssc.spaceforce.mil/About-Us/Leadership/Display/Article/3518663/shannon-pallone", "title": "Shannon Pallone - Portfolio Acquisition Executive BMC3I", "pub_date": "2026", "tier": 1},
+    {"url": "https://www.ssc.spaceforce.mil/Portals/3/SSC_Fact_Sheet_BMC3_FINAL_1.pdf", "title": "SSC Fact Sheet: Battle Management Command, Control, and Communications (BMC3)", "pub_date": "2023-2024", "tier": 1},
+    {"url": "https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4466726/space-force-advances-decisive-edge-in-a-contested-domain-aims-to-modernize-spac", "title": "Space Force advances decisive edge in a contested domain, aims to modernize space intel capabilities (Kronos first awards)", "pub_date": "2026-04-22", "tier": 1},
+    {"url": "https://www.sda.mil/battle-management/", "title": "Battle Management - Space Development Agency", "pub_date": "2024-2026", "tier": 1},
+    {"url": "https://www.sda.mil/sda-makes-award-for-proliferated-warfighter-space-architecture-pwsa-battle-management-command-control-and-communications-bmc3-application-factory/", "title": "SDA Makes Award for PWSA BMC3 Application Factory (SAIC, ~$64M OT)", "pub_date": "2023", "tier": 1},
+    {"url": "https://www.sda.mil/sda-issues-broad-agency-announcement-for-pwsa-battle-management-mission-applications/", "title": "SDA Issues BAA for PWSA Battle Management Mission Applications", "pub_date": "2024", "tier": 1},
+    {"url": "https://www.sda.mil/sda-issues-request-for-information-for-pwsa-battle-management-command-control-and-communications-bmc3-multi-mission-module-m3-interface/", "title": "SDA RFI for BMC3 Multi-Mission Module (M3) Interface", "pub_date": "2024-2025", "tier": 1},
+    {"url": "https://www.sda.mil/space-development-agency-makes-awards-to-build-72-tracking-layer-satellites-for-tranche-3/", "title": "SDA Makes Awards to Build 72 Tracking Layer Satellites for Tranche 3", "pub_date": "2025-12-19", "tier": 1},
+    {"url": "https://www.sda.mil/wp-content/uploads/2024/08/BMC3-Layer-Fact-Sheet-distro-A_v3.pdf", "title": "PWSA BMC3 Layer Fact Sheet", "pub_date": "2024-08", "tier": 1},
+    {"url": "https://www.af.mil/Portals/1/documents/Secretariat%20of%20the%20AF/SAF-FM/Budget%20-%202027/Budget%20docs/FY27%20Air%20Force%20Space%20Procurement.pdf", "title": "FY27 Air Force Space Procurement justification book", "pub_date": "2026-04", "tier": 1},
+    {"url": "https://www.congress.gov/crs-product/IF12610", "title": "CRS Defense Primer: U.S. Space Force", "pub_date": "2024-2026", "tier": 1},
+    {"url": "https://spacewerx.us/accelerate/stratfi-tacfi/", "title": "STRATFI/TACFI - SpaceWERX", "pub_date": "2026", "tier": 1},
+    {"url": "https://spacewerx.us/orbital-prime-2/", "title": "Orbital Prime - SpaceWERX", "pub_date": "2026", "tier": 1},
+    {"url": "https://afwerxchallenge.com/spacewerx26/tactically-responsive-space", "title": "SpaceWERX 2026 Tactically Responsive Space challenge", "pub_date": "2026", "tier": 1},
+    {"url": "https://www.diu.mil/", "title": "Defense Innovation Unit", "pub_date": "2026", "tier": 1},
+    {"url": "https://defensescoop.com/2026/03/18/space-force-new-pae-portfolio-acquisition-executives/", "title": "Space Force drives additional acquisition reforms with new portfolios", "pub_date": "2026-03-18", "tier": 3},
+    {"url": "https://spacenews.com/space-force-completes-procurement-reorganization-creating-nine-acquisition-portfolios/", "title": "Space Force completes procurement reorganization, creating nine acquisition portfolios", "pub_date": "2026", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/space-force-finalizes-new-acquisition-structure-9-portfolio-executives/", "title": "Space Force Finalizes New Acquisition Structure", "pub_date": "2026", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/04/space-force-to-finalize-acquisition-portfolio-structure-over-next-two-months/", "title": "Space Force to finalize acquisition portfolio structure over next two months", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/05/dept-of-air-force-still-working-to-sort-space-programs-into-acquisition-portfolios-ainsworth/", "title": "Dept. of Air Force 'still working' to sort space programs into acquisition portfolios: Ainsworth", "pub_date": "2026-05", "tier": 3},
+    {"url": "https://www.executivegov.com/articles/space-force-sda-pwsa-acquisition-pae", "title": "Space Force Acquisition Restructuring: Impact on SDA, PWSA", "pub_date": "2026", "tier": 3},
+    {"url": "https://www.nationaldefensemagazine.org/articles/2026/8/3/space-development-agency-has-plenty-left-to-give-amid-potential-dissolution", "title": "Space Development Agency Has Plenty Left to Give Amid Potential Dissolution", "pub_date": "2026-08-03", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/03/space-force-anticipates-first-kronos-c2-contracts-in-april/", "title": "Space Force anticipates first Kronos C2 contracts in April", "pub_date": "2026-03", "tier": 3},
+    {"url": "https://spacenews.com/space-force-awards-contracts-to-leidos-maplarge-for-battle-planning-software/", "title": "Space Force awards contracts to Leidos, MapLarge for 'battle planning' software", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://www.executivegov.com/articles/ssc-kronos-contracts-leidos-maplarge", "title": "SSC Awards Kronos Space Intelligence Prototype Contracts to Leidos, MapLarge", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://www.militaryaerospace.com/communications/article/55391545/space-force-adds-commercial-software-capability-to-kronos-battle-management-effort", "title": "Space Force adds commercial software capability to Kronos battle management effort (True Anomaly)", "pub_date": "2026", "tier": 3},
+    {"url": "https://satnews.com/2026/03/21/pentagon-report-space-force-atlas-program-falls-short-of-decommissioning-targets/", "title": "Pentagon Report: Space Force ATLAS Program Falls Short of Decommissioning Targets", "pub_date": "2026-03-21", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/key-space-force-c2-upgrade-issues-pentagon-report/", "title": "Key Space Force C2 Upgrade Still Faces Issues: Pentagon Report", "pub_date": "2026", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/long-delayed-space-c2-system-ready-for-operations/", "title": "Long-Delayed Space C2 System Ready for Operations", "pub_date": "2025", "tier": 3},
+    {"url": "https://breakingdefense.com/2024/02/space-force-effort-to-replace-aging-space-tracking-software-lagging-dote/", "title": "Space Force effort to replace aging space tracking software lagging: DOT&E", "pub_date": "2024-02", "tier": 3},
+    {"url": "https://www.defensenews.com/space/2024/12/23/space-operations-command-preps-for-new-shared-domain-awareness-tool/", "title": "Space Operations Command preps for new shared domain awareness tool", "pub_date": "2024-12-23", "tier": 3},
+    {"url": "https://defensescoop.com/2026/04/28/space-force-space-data-network/", "title": "Space Force plans to invest billions in sprawling Space Data Network in FY27", "pub_date": "2026-04-28", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/04/space-force-shifts-from-sda-transport-layer-to-new-space-data-network-backbone-for-orbital-relay/", "title": "Space Force shifts from SDA transport layer to new Space Data Network 'backbone'", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/space-force-budget-cuts-sdas-data-transport-funding/", "title": "Space Force Budget Cuts SDA's Data Transport Funding (PE 1206310SF / 1206410SF figures)", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://www.satellitetoday.com/government-military/2026/05/27/space-force-awards-spacex-2-3-billion-contract-for-space-data-network/", "title": "Space Force Awards SpaceX $2.3 Billion Contract for Space Data Network", "pub_date": "2026-05-27", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/04/golden-dome-spending-plan-fy27-budget-space-force/", "title": "Space Force programs supporting Golden Dome see big FY27 budget boost", "pub_date": "2026-04", "tier": 3},
+    {"url": "https://startupdod.substack.com/p/fy2027-defense-budget-playbook", "title": "FY2027 Defense Budget Playbook (Space Force RDT&E $38.4B)", "pub_date": "2026", "tier": 4},
+    {"url": "https://defensescoop.com/2025/12/19/sda-tranche-3-missile-tracking-layer-contract-awards/", "title": "SDA awards $3.5B across 4 contracts for next phase of missile tracking satellites", "pub_date": "2025-12-19", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/space-rco-new-c2-software-dynamic-satellites/", "title": "USSF Awards Contracts for New C2 Software to Manage Frequently Moving Satellites (R2C2)", "pub_date": "2024-09", "tier": 3},
+    {"url": "https://breakingdefense.com/2024/09/space-rco-taps-20-firms-for-software-to-control-maneuvering-sats/", "title": "Space RCO taps 20 firms for software to control maneuvering sats", "pub_date": "2024-09", "tier": 3},
+    {"url": "https://spacenews.com/space-force-kicks-off-1-billion-cloud-based-satellite-operations-program/", "title": "Space Force kicks off $1 billion cloud-based satellite operations program", "pub_date": "2024-06", "tier": 3},
+    {"url": "https://defensescoop.com/2025/03/06/space-force-rapid-capabilites-office-r2c2-cloud/", "title": "Space Force challenged to scale new cloud-based satellite ground control system", "pub_date": "2025-03-06", "tier": 3},
+    {"url": "https://breakingdefense.com/2025/03/space-force-unveils-multi-front-push-to-fix-its-unified-data-library/", "title": "Space Force unveils multi-front push to fix its Unified Data Library", "pub_date": "2025-03", "tier": 3},
+    {"url": "https://spacenews.com/bluestaq-wins-280-million-space-force-contract-to-expand-space-data-catalog/", "title": "Bluestaq wins $280 million Space Force contract to expand space data catalog", "pub_date": "2023-03 (year RECALL)", "tier": 3},
+    {"url": "https://www.itnews.com.au/news/defence-to-deploy-classified-version-of-space-data-repository-625532", "title": "Defence to deploy classified version of space data repository (Australia, Bluestaq UDL)", "pub_date": "2025", "tier": 3},
+    {"url": "https://unifieddatalibrary.com/", "title": "Unified Data Library login/API portal", "pub_date": "2026", "tier": 2},
+    {"url": "https://pypi.org/org/bluestaq/", "title": "Bluestaq PyPI organization (UDL client packages)", "pub_date": "2026", "tier": 2},
+    {"url": "https://breakingdefense.com/2025/09/space-force-reorganizing-to-add-commercial-space-monitoring-data-analysis-into-operations/", "title": "Space Force cell explores reorg to push commercial data to military (JCO)", "pub_date": "2025-09", "tier": 3},
+    {"url": "https://www.airandspaceforces.com/space-force-commercial-reserve-fleet-out-of-pilot-phase/", "title": "Space Force Commercial Reserve Fleet Moves Out of Pilot Phase (CASR)", "pub_date": "2025-2026", "tier": 3},
+    {"url": "https://www.slingshot.space/news/slingshot-aerospace-wins-69-2-million-u-s-space-force-contract-to-advance-ai-powered-mission-readiness-for-space-defense", "title": "Slingshot Aerospace Wins $69.2 Million U.S. Space Force Contract (MENTAT)", "pub_date": "2026-07", "tier": 2},
+    {"url": "https://thedefensepost.com/2026/07/21/slingshot-space-force-ai-contract/amp/", "title": "AI to Help US Space Force Rehearse Future Battles in Orbit", "pub_date": "2026-07-21", "tier": 3},
+    {"url": "https://www.satellitetoday.com/technology/2026/03/11/anduril-acquiring-space-domain-awareness-missile-defense-software-company-exoanalytic-solutions/", "title": "Anduril Acquiring ExoAnalytic Solutions", "pub_date": "2026-03-11", "tier": 3},
+    {"url": "https://satnews.com/2026/05/07/anduril-secures-100m-modification-to-modernize-space-surveillance-network/", "title": "Anduril Secures $100M Modification to Modernize Space Surveillance Network", "pub_date": "2026-05-07", "tier": 3},
+    {"url": "https://defensescoop.com/2024/11/21/anduril-space-surveillance-network-upgrade-contract-sdanet/", "title": "Anduril receives nearly $100M deal to modernize Space Surveillance Network", "pub_date": "2024-11-21", "tier": 3},
+    {"url": "https://www.fool.com/investing/2026/04/29/anduril-wins-a-spot-in-18-billion-space-force-plan/", "title": "Anduril Wins a Spot in $1.8 Billion Space Force Contract (Andromeda)", "pub_date": "2026-04-29", "tier": 4},
+    {"url": "https://spacenews.com/space-force-extends-palantirs-data-as-a-service-contracts/", "title": "Space Force extends Palantir's data-as-a-service contracts (Warp Core)", "pub_date": "not verified", "tier": 3},
+    {"url": "https://www.ssc.spaceforce.mil/Portals/3/Harnessing%20the%20power%20of%20Data_%20SSC%20awards%20contract%20to%20Palantir%20_%20Space%20Systems%20Command%20_%20Article%20Display_1.pdf", "title": "Harnessing the power of Data: SSC awards contract to Palantir (Warp Core)", "pub_date": "2022-2023", "tier": 1},
+    {"url": "https://newsroom.boozallen.com/news-releases/news-release-details/booz-allen-develop-prototype-system-space-forces-space-based", "title": "Booz Allen to Develop Prototype System for Space Force's Space-Based Interceptor Program", "pub_date": "2026-05", "tier": 2},
+    {"url": "https://breakingdefense.com/2023/10/booz-allen-nabs-630m-integration-contract-for-space-force-missile-warning-weather-programs/", "title": "Booz Allen nabs $630M integration contract for Space Force missile warning, weather programs", "pub_date": "2023-10", "tier": 3},
+    {"url": "https://app.g2xchange.com/defense/posts/booz-allen-snaps-up-us-air-force-ai-based-jadc2-research-contract", "title": "Booz Allen snaps up US Air Force AI-based JADC2 research contract ($5.5M)", "pub_date": "2025-09", "tier": 4},
+    {"url": "https://payloadspace.com/spacewerx-announces-2026-stratfi-awardees/", "title": "SpaceWERX Announces 2026 STRATFI Awardees", "pub_date": "2026", "tier": 3},
+    {"url": "https://spacenews.com/gravitics-wins-spacewerx-award-for-tactically-responsive-space-system/", "title": "Gravitics wins SpaceWERX award for tactically responsive space system ($60M STRATFI)", "pub_date": "2025", "tier": 3},
+    {"url": "https://breakingdefense.com/2026/09/wither-tracss-dod-industry-face-hard-choices-in-showdown-over-commerce-spacewatch-effort/", "title": "Whither TraCSS? DoD, industry face hard choices in showdown over Commerce spacewatch effort", "pub_date": "2026-09", "tier": 3},
+    {"url": "https://spacenews.com/space-force-to-reorganize-its-acquisition-command-to-focus-on-the-threat/", "title": "Space Force to reorganize its acquisition command to 'focus on the threat' (five-PEO structure)", "pub_date": "2022", "tier": 3}
+  ]
+}

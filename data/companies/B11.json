@@ -1,0 +1,1139 @@
+{
+  "batch_id": "B11",
+  "theme": "prime contractors",
+  "companies": [
+    {
+      "name": "Lockheed Martin Corporation",
+      "aka": "LMT; Lockheed Martin Rotary and Mission Systems (RMS); Lockheed Martin Space; Skunk Works; '21st Century Security' branding",
+      "founding_year": 1995,
+      "headquarters": "Bethesda, Maryland, USA",
+      "public_private": "public",
+      "employee_count_approx": "~121,000 (2024 annual report figure; RECALL - not re-verified this session, confidence MEDIUM)",
+      "founders": ["Formed by 1995 merger of Lockheed Corporation and Martin Marietta (not a founder-led company)"],
+      "founder_backgrounds": "Not applicable; legacy aerospace/defense merger.",
+      "total_disclosed_funding_usd": "N/A - publicly traded (NYSE: LMT); funded via public equity, debt and operating cash flow.",
+      "latest_valuation": "Public equity; market capitalization not verified this session.",
+      "major_investors": ["Institutional public shareholders (index funds and asset managers); no venture investors"],
+      "c4isr_products": [
+        {
+          "name": "Next Generation Command and Control (NGC2) integrated data layer prototype for 25th Infantry Division",
+          "description": "Army-prototyped division-level C2 stack built on a common data layer to give a continuous operating picture across echelons; Lockheed Martin is team lead for the 25th ID prototype with partners including Raft and Accelint. FACT (army.mil, lockheedmartin.com, Sept 2025 - Feb 2026).",
+          "input_process_output_user": "Inputs: sensor feeds, unit position/status data, fires and ISR data from division/brigade systems. Process: ingest/normalize into common data layer, apps for planning, fires, sustainment. Output: shared operating picture and fires execution workflows. Users: 25th ID commanders and staff (division to battalion)."
+        },
+        {
+          "name": "Command and Control, Battle Management and Communications (C2BMC) / C2BMC-Next",
+          "description": "Integrating element of the U.S. Missile Defense System that links sensors, shooters and command centers globally; C2BMC-Next upgrade awarded April 2024 by MDA and stated to support JADC2 integration. FACT (MDA award via lockheedmartin.com, Defense News, Breaking Defense, Apr 2024).",
+          "input_process_output_user": "Inputs: radar/space sensor tracks (e.g., AN/TPY-2, SBIRS/OPIR, Aegis). Process: track fusion, engagement planning, sensor tasking. Output: integrated missile-defense picture and engagement recommendations to combatant commands. Users: MDA, USNORTHCOM/USSTRATCOM, combatant command missile-defense cells."
+        },
+        {
+          "name": "Aegis Combat System / Aegis Ashore",
+          "description": "Ship- and shore-based integrated air and missile defense combat management system for U.S. Navy and allied navies. RECALL - not re-verified this session, confidence HIGH on existence.",
+          "input_process_output_user": "Inputs: SPY radar and off-board tracks. Process: track management, threat evaluation, weapon assignment. Output: engagement orders to interceptors, tactical picture. Users: Navy ship crews, Aegis Ashore sites, allied navies (Japan, Spain, Australia, ROK, Norway)."
+        },
+        {
+          "name": "Skunk Works JADC2 experimentation (Project Hydra, Keystone/5G.MIL, DEIMOS)",
+          "description": "Company-funded and government demo efforts to link F-35/F-22/U-2 and ground nodes and to provide open, containerized C2 middleware. RECALL - not re-verified this session, confidence MEDIUM; demo-level, not programs of record."
+        }
+      ],
+      "exact_problem_solved": "Integrating disparate sensors, shooters and C2 nodes into a single decision picture: at the strategic level for missile defense (C2BMC) and, since 2025, at the division/tactical level via a common data layer (NGC2 25th ID).",
+      "primary_users": ["U.S. Army 25th Infantry Division (NGC2 prototype)", "Missile Defense Agency and combatant commands (C2BMC)", "U.S. Navy and allied navies (Aegis)"],
+      "primary_buyers": ["U.S. Army (NGC2 program office / PEO C3N and Army Futures Command)", "Missile Defense Agency", "U.S. Navy (NAVSEA)", "Foreign militaries via FMS"],
+      "technical_layer": ["INGEST", "NORMALIZE", "STORE", "PROCESS", "FUSE", "IDENTIFY", "VISUALIZE", "DECIDE", "COLLABORATE", "DISSEMINATE", "TASK"],
+      "mission_layer": ["missile defense", "air defense", "fires", "maneuver (division C2)", "maritime", "joint", "space"],
+      "segment_ids": ["S01", "S02", "S07", "S08", "S09", "S03"],
+      "hw_sw_mix": "both - NGC2 work is software/data-layer integration; C2BMC and Aegis are large software systems tied to Lockheed-built sensors and interceptors.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "NGC2 prototype - integrated data layer for 25th Infantry Division",
+          "customer": "U.S. Army",
+          "contracting_org": "U.S. Army (announced by Army on army.mil; consortium/contracting office not captured)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "$26 million (reported OTA value)",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025-09-03 (Army announcement)",
+          "period_of_performance": "Not stated; prototype iterations continued through Lightning Surge 1 (Jan 2026) and 2 (Feb 2026)",
+          "prime_or_sub": "prime (team lead)",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts",
+          "pub_date": "2025-09",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "C2BMC-Next IDIQ",
+          "customer": "Missile Defense Agency",
+          "contracting_org": "Missile Defense Agency",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$4,099,900,000 (ordering period May 1, 2024 - Apr 30, 2029, option to Apr 30, 2034)",
+          "obligated": "Not verified",
+          "awarded_value": "Initial task orders ~$846.6M: TO1 enterprise management/services $490,412,086; TO2 mission software development $34,223,764; TO3 product execution $321,979,748",
+          "funded_amount": "Not verified",
+          "task_orders": "Three initial task orders (see awarded_value)",
+          "date": "2024-04-11",
+          "period_of_performance": "2024-05-01 to 2029-04-30 (option to 2034-04-30)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/sustainment and development of fielded system",
+          "source_url": "https://news.lockheedmartin.com/2024-04-11-Lockheed-Martin-Awarded-C2BMC-Next-Contract-to-Enhance-Global-Interoperability",
+          "pub_date": "2024-04-11",
+          "confidence": "HIGH"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "C2BMC is the fielded integrating C2 layer of the U.S. Missile Defense System across combatant commands (operational since mid-2000s, continuously upgraded).",
+          "evidence": "MDA C2BMC-Next award description (Apr 2024) and Lockheed product page; long-standing program of record. FACT/RECALL, confidence HIGH.",
+          "source_url": "https://www.lockheedmartin.com/en-us/products/command-control-battle-management-communications-c2bmc.html"
+        },
+        {
+          "what": "NGC2 prototype in use by 25th ID for experimentation (not a fielded program of record).",
+          "evidence": "Army tested Lockheed NGC2 data layer for the first time at Lightning Surge 1 (Jan 2026); live-fire execution at Lightning Surge 2 (Feb 2026). Prototype, not production. Confidence HIGH on events, LOW on operational maturity.",
+          "source_url": "https://breakingdefense.com/2026/01/army-tests-next-gen-c2-data-layer-for-the-first-time/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Lightning Surge 1 (25th ID NGC2 experiment)", "year": "2026", "note": "First Army test of Lockheed NGC2 data-layer prototype; real-time decision-making claims are company-reported.", "source_url": "https://news.lockheedmartin.com/2026-01-23-Lockheed-Martin-Accelerates-Next-Generation-Command-and-Control-NGC2-Capabilities-and-Real-Time-Decision-Making-at-Lightning-Surge-1"},
+        {"event": "Lightning Surge 2 (25th ID NGC2 live fires)", "year": "2026", "note": "Company reports NGC2 prototype enabled live-fires execution across echelons (sense, see, strike). Company-reported; independent assessment not found.", "source_url": "https://news.lockheedmartin.com/2026-02-27-Lockheed-Martin-Teams-Next-Generation-Command-and-Control-NGC2-Prototype-Enables-Live-Fires-Execution-for-Mission-Success-at-Lightning-Surge-2"},
+        {"event": "Project Hydra / Skunk Works JADC2 demos", "year": "2021-2023", "note": "RECALL - not re-verified this session; F-35/F-22/U-2 data-sharing demos with Army IBCS. Confidence MEDIUM.", "source_url": ""}
+      ],
+      "integration_partners": ["Raft (NGC2 25th ID team)", "Accelint (NGC2 25th ID team)", "Other unnamed 'best-of-breed' NGC2 partners per Lockheed", "Northrop Grumman IBCS (PAC-3 integration)", "MDA sensor and interceptor primes (C2BMC)"],
+      "apis_sdks_open_interfaces": "NGC2 is Army-mandated to be open/modular with a government-owned data layer; Lockheed's public materials describe MOSA/open architecture but no public SDK or developer program was found. Public evidence insufficient on concrete API documentation.",
+      "security_classification_requirements": "C2BMC and Aegis require cleared facilities and personnel (Secret/TS/SCI); NGC2 prototype work runs at Secret and below with cross-domain elements. Foreign-national participation constrained by ITAR and facility clearance rules; specialist legal review needed for any partnership.",
+      "allied_international_activity": "Aegis exported to Japan, Spain, Australia, ROK, Norway (RECALL, HIGH). C2BMC-Next scope emphasizes global interoperability with allies (Apr 2024 release). DIAMONDShield battle-management offering marketed to Japan/Australia (RECALL, LOW).",
+      "technical_differentiator": "Incumbent on the two largest U.S. missile-defense C2 systems (C2BMC, Aegis) plus one of the two competitive NGC2 division prototypes; owns sensor-to-shooter integration knowledge at strategic scale.",
+      "suspected_moat": "Program-of-record incumbency, classified integration knowledge, cleared workforce, and control of the weapons/sensors that C2 must integrate (PAC-3, Aegis, F-35). INFERENCE, confidence HIGH.",
+      "major_competitors": ["Anduril (NGC2 4th ID team lead)", "Palantir", "Northrop Grumman (IBCS, Providence DBMC2)", "RTX", "Leidos", "General Dynamics"],
+      "obvious_weaknesses": "Slow, program-of-record cadence; NGC2 competitor Anduril received the first (4th ID) award and larger reported value; open-architecture mandates weaken lock-in; Army has said it wants government-owned data layer, limiting vendor capture. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "C2BMC/Aegis: decades of operational use (HIGH). NGC2: 25th ID soldiers used the prototype in Lightning Surge 1 and 2 (Jan-Feb 2026); adoption beyond experimentation not yet evidenced (MEDIUM).",
+      "evidence_repeat_procurement": "C2BMC: successive spiral contracts culminating in $4.1B ceiling IDIQ (2024) with ~$847M in initial task orders (HIGH). NGC2: single $26M OTA; follow-on not verified (LOW).",
+      "evidence_prototype_to_production": "C2BMC and Aegis are mature production programs. NGC2 remains a prototype; the Army's stated 2026 plan is to expand to corps and additional divisions, but a Lockheed production transition is not verified. Public evidence insufficient.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "division_corps"},
+        {"chain_step": "DECIDE", "echelon": "division_corps"},
+        {"chain_step": "FUSE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "theater"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "individual_platform"},
+        {"chain_step": "FUSE", "echelon": "coalition"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): NGC2 data-layer work implies Kubernetes/containerized microservices, DevSecOps pipelines and data-mesh style APIs consistent with Army NGC2 characteristics of need; C2BMC uses large legacy real-time software with periodic spiral upgrades. Confidence LOW.",
+      "confidence_notes": "NGC2 award value ($26M OTA, Sept 2025) and exercise events verified via army.mil, Breaking Defense and company releases. C2BMC figures verified via April 2024 releases. Aegis/Skunk Works items are RECALL. No usaspending obligation data pulled this session.",
+      "sources": [
+        {"url": "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts", "title": "Army announces additional competitive award for NGC2 prototyping efforts", "pub_date": "2025-09", "type": "gov"},
+        {"url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award", "title": "Army announces NGC2 prototype award (first award, 4th ID)", "pub_date": "2025-07", "type": "gov"},
+        {"url": "https://breakingdefense.com/2026/01/army-tests-next-gen-c2-data-layer-for-the-first-time/", "title": "In first, Army tests Lockheed's NGC2 data layer prototype", "pub_date": "2026-01", "type": "independent"},
+        {"url": "https://breakingdefense.com/2025/12/whats-next-for-armys-ambitious-next-gen-c2-effort-2026-preview/", "title": "What's next for Army's ambitious Next Gen C2 effort: 2026 preview", "pub_date": "2025-12", "type": "independent"},
+        {"url": "https://news.lockheedmartin.com/2026-02-27-Lockheed-Martin-Teams-Next-Generation-Command-and-Control-NGC2-Prototype-Enables-Live-Fires-Execution-for-Mission-Success-at-Lightning-Surge-2", "title": "Lockheed Martin NGC2 prototype enables live fires at Lightning Surge 2", "pub_date": "2026-02-27", "type": "company"},
+        {"url": "https://news.lockheedmartin.com/2026-01-23-Lockheed-Martin-Accelerates-Next-Generation-Command-and-Control-NGC2-Capabilities-and-Real-Time-Decision-Making-at-Lightning-Surge-1", "title": "Lockheed Martin NGC2 at Lightning Surge 1", "pub_date": "2026-01-23", "type": "company"},
+        {"url": "https://www.lockheedmartin.com/en-us/products/next-generation-command-and-control.html", "title": "Next Generation Command and Control (NGC2) product page", "pub_date": "n/a", "type": "company"},
+        {"url": "https://news.lockheedmartin.com/2024-04-11-Lockheed-Martin-Awarded-C2BMC-Next-Contract-to-Enhance-Global-Interoperability", "title": "Lockheed Martin Awarded C2BMC-Next Contract", "pub_date": "2024-04-11", "type": "company"},
+        {"url": "https://www.defensenews.com/pentagon/2024/04/11/mda-awards-lockheed-41b-contract-to-upgrade-battle-command-system/", "title": "MDA awards Lockheed $4.1B contract to upgrade battle command system", "pub_date": "2024-04-11", "type": "independent"},
+        {"url": "https://breakingdefense.com/2024/04/mda-launches-missile-defense-battle-management-upgrade-with-847m-order-to-lockheed-martin/", "title": "MDA launches missile defense battle management upgrade with $847M order", "pub_date": "2024-04", "type": "independent"}
+      ]
+    },
+    {
+      "name": "Northrop Grumman Corporation",
+      "aka": "NOC; Northrop Grumman Defense Systems; Northrop Grumman Mission Systems; Northrop Grumman Space Systems",
+      "founding_year": 1994,
+      "headquarters": "Falls Church, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~97,000 (2024; RECALL - not re-verified this session, confidence MEDIUM)",
+      "founders": ["Northrop Grumman formed 1994 (Northrop acquisition of Grumman); Northrop founded 1939 by Jack Northrop"],
+      "founder_backgrounds": "Not applicable; legacy aerospace merger.",
+      "total_disclosed_funding_usd": "N/A - publicly traded (NYSE: NOC).",
+      "latest_valuation": "Public equity; market capitalization not verified this session.",
+      "major_investors": ["Institutional public shareholders"],
+      "c4isr_products": [
+        {
+          "name": "Integrated Battle Command System (IBCS)",
+          "description": "Army integrated air and missile defense C2 that nets any sensor to any shooter via an Integrated Fire Control Network; in low-rate/full-rate production for U.S. Army and fielded by Poland (WISLA). FACT (northropgrumman.com, Defense Post 2025-2026).",
+          "input_process_output_user": "Inputs: radar tracks (Patriot, Sentinel, LTAMDS, F-35 in demos), off-board sensor data. Process: composite tracking, engagement planning, launcher control. Output: single integrated air picture, engagement commands to launchers. Users: Army air defense battalions/brigades, Polish Armed Forces."
+        },
+        {
+          "name": "Forward Area Air Defense Command and Control (FAAD C2)",
+          "description": "Fielded SHORAD/C-UAS C2 used across Army and joint C-UAS sites; subject of a 2024 UK MOD feasibility study alongside IBCS. RECALL on fielding (HIGH); UK study FACT (find-tender notice).",
+          "input_process_output_user": "Inputs: short-range radars, EO/IR, RF detectors. Process: track correlation and engagement management. Output: air picture and engagement cues to SHORAD/C-UAS effectors. Users: Army ADA units, joint C-UAS operators, allied SHORAD."
+        },
+        {
+          "name": "Providence Distributed Battle Management Command and Control (DBMC2) MVPs (CJADC2)",
+          "description": "NAVAIR-awarded $99.1M contract to develop initial Providence DBMC2 minimum viable products for CJADC2, completion expected March 2028. FACT (Zacks via Yahoo/Nasdaq, DoD contracts Mar 2025).",
+          "input_process_output_user": "Inputs: multi-domain sensor and platform data over high-bandwidth, low-latency links. Process: distributed battle management software. Output: interoperable, secure C2 services across services. Users: Navy/joint operators (details not public)."
+        },
+        {
+          "name": "Battlefield Airborne Communications Node (BACN) and SDA BMC3 hosting",
+          "description": "BACN airborne gateway translating/relaying tactical datalinks for USAF; Northrop also builds SDA Transport/Tracking satellites that host BMC3 modules. RECALL - not re-verified this session, confidence MEDIUM-HIGH.",
+          "input_process_output_user": "Inputs: Link 16, SRW, voice and IP traffic from disparate platforms. Process: gateway translation and relay. Output: extended-range interoperable comms. Users: USAF/joint aircrews and ground forces."
+        },
+        {
+          "name": "Distributed Autonomy/Responsive Control (DA/RC)",
+          "description": "Mission-management/autonomy C2 software used in company JADC2 demonstrations. RECALL - not re-verified this session, confidence LOW-MEDIUM; demo-level."
+        }
+      ],
+      "exact_problem_solved": "Networking many air/missile-defense sensors and shooters into a single fire-control picture (IBCS/FAAD C2), and extending that battle-management concept to joint/naval and airborne-gateway contexts (Providence DBMC2, BACN).",
+      "primary_users": ["U.S. Army Air Defense Artillery units", "Polish Armed Forces (WISLA IBCS)", "USAF (BACN gateway)", "U.S. Navy/joint (Providence DBMC2 development)"],
+      "primary_buyers": ["U.S. Army (PEO Missiles and Space; Aviation and Missile Technology Consortium OTAs)", "Poland Ministry of National Defence via FMS", "NAVAIR", "USAF", "Space Development Agency"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "INGEST", "FUSE", "IDENTIFY", "VISUALIZE", "DECIDE", "DISSEMINATE", "TASK"],
+      "mission_layer": ["air defense", "missile defense", "counter-UAS", "joint", "space", "maritime"],
+      "segment_ids": ["S01", "S07", "S05", "S08", "S03", "S13"],
+      "hw_sw_mix": "both - IBCS combines software with Engagement Operations Centers, IFCN relays and adaptation kits; BACN is airborne hardware payload plus software; Providence is software.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "IBCS Low-Rate Initial Production and Full-Rate Production",
+          "customer": "U.S. Army",
+          "contracting_org": "Army Contracting Command (RECALL)",
+          "vehicle_type": "FAR",
+          "ceiling": "$1.4 billion (reported contract value covering LRIP and FRP, Dec 2021)",
+          "obligated": "Not verified",
+          "awarded_value": "$1.4 billion (Dec 2021)",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2021-12",
+          "period_of_performance": "LRIP major end items delivered July 2025; transition into FRP began November 2025",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://thedefensepost.com/2026/03/18/northrop-grumman-ibcs-delivery/",
+          "pub_date": "2026-03-18",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "IBCS software development expansion (Poland, U.S., Guam Defense System)",
+          "customer": "U.S. Army / Poland (FMS)",
+          "contracting_org": "Aviation and Missile Technology Consortium (AMTC)",
+          "vehicle_type": "OTA production",
+          "ceiling": "$481 million, five years",
+          "obligated": "Not verified",
+          "awarded_value": "$481M total: $347.6M Poland, $133.7M U.S. and Guam Defense System",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2025 (exact date not captured; company release headline cites $1.4B in contracts)",
+          "period_of_performance": "Five years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production software development",
+          "source_url": "https://news.northropgrumman.com/ibcs/northrop-grumman-secures-1-4-billion-in-contracts-to-modernize-global-air-and-missile-defense",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Initial Providence DBMC2 Minimum Viable Products (CJADC2)",
+          "customer": "U.S. Navy / DoD CJADC2",
+          "contracting_org": "Naval Air Systems Command, Patuxent River, MD",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not verified",
+          "awarded_value": "$99.1 million",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2025-03 (DoD contracts announcement, approximately Mar 28, 2025)",
+          "period_of_performance": "Expected completion March 2028",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (MVPs)",
+          "source_url": "https://finance.yahoo.com/news/northrop-secures-deal-joint-domain-144400947.html",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "UK MOD feasibility studies: IBCS and FAAD C2 as SHORAD/MRAD C2",
+          "customer": "UK Ministry of Defence",
+          "contracting_org": "UK MOD (Northrop Grumman UK Limited)",
+          "vehicle_type": "foreign",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "Not stated",
+          "funded_amount": "Not stated",
+          "task_orders": "Two case studies",
+          "date": "2024",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "study",
+          "source_url": "https://www.find-tender.service.gov.uk/Notice/037282-2024",
+          "pub_date": "2024",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Poland declared Full Operational Capability for IBCS-enabled WISLA medium-range air defense (December 2025); first U.S. NATO ally to fully operationalize IBCS.",
+          "evidence": "Northrop Grumman release and Defence Industry Europe reporting; Polish MOD operational exercise Sept 2025 preceded FOC. Confidence HIGH.",
+          "source_url": "https://news.northropgrumman.com/ibcs/poland-declares-integrated-battle-command-system-fully-combat-ready"
+        },
+        {
+          "what": "U.S. Army IBCS: LRIP major end items delivered (July 2025), FRP transition begun (Nov 2025); initial operational fielding to ADA units under way.",
+          "evidence": "Company release July 2025; Defense Post March 2026. Confidence HIGH on deliveries; fielded unit count not verified.",
+          "source_url": "https://news.northropgrumman.com/ibcs-integrated-air-and-defense-battle-command-system/Northrop-Grumman-Completes-Delivery-Under-Low-Rate-Initial-Production-Contract-for-Integrated-Battle-Command-System"
+        },
+        {
+          "what": "FAAD C2 widely fielded for Army SHORAD and joint C-UAS.",
+          "evidence": "RECALL - not re-verified this session, confidence MEDIUM-HIGH.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {"event": "IBCS first European flight test (Poland)", "year": "2025", "note": "Company-reported successful intercept test with Polish WISLA. Confidence MEDIUM on date.", "source_url": "https://news.northropgrumman.com/ibcs/Integrated-Battle-Command-System-Achieves-Major-Milestone-with-First-Successful-European-Flight-Test"},
+        {"event": "Polish MOD IBCS operational exercise", "year": "2025", "note": "September 2025 exercise preceding FOC declaration.", "source_url": "https://news.northropgrumman.com/ibcs/poland-declares-integrated-battle-command-system-fully-combat-ready"},
+        {"event": "IBCS/F-35 and joint JADC2 demonstrations (Project Convergence, Valiant Shield)", "year": "2021-2024", "note": "RECALL - not re-verified this session, confidence MEDIUM.", "source_url": ""}
+      ],
+      "integration_partners": ["Lockheed Martin (PAC-3 MSE, F-35 sensor feeds)", "RTX Raytheon (Patriot radar, LTAMDS)", "Polish industry (PGZ, local assembly and sustainment)", "Palantir TITAN team (Northrop as subcontractor; RECALL, MEDIUM)", "Space Development Agency BMC3 ecosystem"],
+      "apis_sdks_open_interfaces": "IBCS uses adaptation kits (A-kits) to integrate third-party sensors/shooters and is marketed as open/modular; no public developer SDK found. Providence DBMC2 explicitly targets interoperability via MVPs. Public evidence insufficient for API documentation.",
+      "security_classification_requirements": "IBCS, BACN and SDA BMC3 work require cleared facilities/personnel; Poland work under FMS/ITAR with Polish industrial participation. Specialist review required for foreign-national access.",
+      "allied_international_activity": "Poland WISLA (FOC Dec 2025) and NAREW (RECALL) IBCS FMS; IBCS simulator contract for Poland; UK MOD IBCS/FAAD C2 feasibility studies (2024); Guam Defense System integration for U.S.",
+      "technical_differentiator": "Only fielded 'any sensor, any shooter' IAMD network with composite tracking at Army echelon, now proven with an allied user; adjacent joint/naval DBMC2 development contract.",
+      "suspected_moat": "IBCS program-of-record status, IFCN network effects (each integrated sensor/shooter raises switching cost), FMS pipeline, and classified fire-control integration expertise. INFERENCE, confidence HIGH.",
+      "major_competitors": ["Lockheed Martin (C2BMC, Aegis, NGC2)", "RTX (Patriot legacy C2, Solipsys BC3)", "Anduril (Lattice for C-UAS/air defense C2)", "Palantir", "Kongsberg/Rheinmetall/MBDA in allied SHORAD C2"],
+      "obvious_weaknesses": "IBCS history of schedule slips and prior GAO criticism; hardware-heavy footprint; software modernization dependent on OTA follow-ons; joint DBMC2 is early MVP stage. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "Poland FOC (Dec 2025) and U.S. Army LRIP deliveries (July 2025) are strong operational adoption evidence (HIGH). Providence DBMC2 adoption unproven (development contract only).",
+      "evidence_repeat_procurement": "Sequential IBCS awards: EMD, 2021 LRIP/FRP ($1.4B), $481M five-year software OTA, Poland simulator contract; repeated FMS orders. Confidence HIGH.",
+      "evidence_prototype_to_production": "IBCS completed the prototype-to-LRIP-to-FRP path (FRP transition Nov 2025). Providence DBMC2 is MVP stage; production not evidenced.",
+      "whitespace_cells": [
+        {"chain_step": "FUSE", "echelon": "battalion_brigade"},
+        {"chain_step": "DECIDE", "echelon": "battalion_brigade"},
+        {"chain_step": "DISSEMINATE_TASK", "echelon": "battalion_brigade"},
+        {"chain_step": "FUSE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "coalition"},
+        {"chain_step": "TRANSPORT", "echelon": "theater"},
+        {"chain_step": "FUSE", "echelon": "joint"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): IBCS software development expansion suggests move to containerized, model-based and DevSecOps pipelines; Providence DBMC2 'MVP' language implies agile increments. Confidence LOW.",
+      "confidence_notes": "IBCS production and Poland FOC facts verified (2025-2026 sources). $481M OTA verified via company release but exact award date not captured. Providence DBMC2 $99.1M verified via syndicated Zacks article and DoD contracts index; obligation data not pulled. FAAD C2, BACN, DA/RC and TITAN sub role are RECALL.",
+      "sources": [
+        {"url": "https://thedefensepost.com/2026/03/18/northrop-grumman-ibcs-delivery/", "title": "Northrop Grumman Accelerates IBCS Delivery for the US Army", "pub_date": "2026-03-18", "type": "independent"},
+        {"url": "https://news.northropgrumman.com/ibcs-integrated-air-and-defense-battle-command-system/Northrop-Grumman-Completes-Delivery-Under-Low-Rate-Initial-Production-Contract-for-Integrated-Battle-Command-System", "title": "Northrop Grumman Completes Delivery Under LRIP Contract for IBCS", "pub_date": "2025-07", "type": "company"},
+        {"url": "https://news.northropgrumman.com/ibcs/poland-declares-integrated-battle-command-system-fully-combat-ready", "title": "Poland Declares IBCS Fully Combat-Ready", "pub_date": "2025-12", "type": "company"},
+        {"url": "https://news.northropgrumman.com/ibcs/northrop-grumman-secures-1-4-billion-in-contracts-to-modernize-global-air-and-missile-defense", "title": "Northrop Grumman Secures $1.4 Billion in Contracts to Modernize Global Air and Missile Defense", "pub_date": "2025", "type": "company"},
+        {"url": "https://finance.yahoo.com/news/northrop-secures-deal-joint-domain-144400947.html", "title": "Northrop Secures a Deal for Joint Domain Command and Control System (Zacks)", "pub_date": "2025", "type": "financial"},
+        {"url": "https://war.gov/News/Contracts/Contract/Article/4138718", "title": "DoD Contracts for Mar. 28, 2025", "pub_date": "2025-03-28", "type": "gov"},
+        {"url": "https://www.find-tender.service.gov.uk/Notice/037282-2024", "title": "UK MOD notice: IBCS and FAAD C2 feasibility case studies", "pub_date": "2024", "type": "gov"},
+        {"url": "https://defence-industry.eu/northrop-grumman-secures-ibcs-simulator-contract-for-poland/", "title": "Northrop Grumman secures IBCS simulator contract for Poland", "pub_date": "2025", "type": "independent"},
+        {"url": "https://www.northropgrumman.com/what-we-do/missile-defense/integrated-battle-command-system-ibcs/future-ready-command-and-control", "title": "Future Ready Command and Control (IBCS)", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "RTX Corporation",
+      "aka": "Raytheon Technologies (to 2023); Raytheon; Collins Aerospace; Solipsys; Battle Management Command and Control & Autonomy (BMC2A) portfolio",
+      "founding_year": 2020,
+      "headquarters": "Arlington, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~185,000 (2024; RECALL - not re-verified this session, confidence MEDIUM)",
+      "founders": ["Formed April 2020 by merger of Raytheon Company (founded 1922) and United Technologies Corporation"],
+      "founder_backgrounds": "Not applicable; legacy merger.",
+      "total_disclosed_funding_usd": "N/A - publicly traded (NYSE: RTX).",
+      "latest_valuation": "Public equity; market capitalization not verified this session.",
+      "major_investors": ["Institutional public shareholders"],
+      "c4isr_products": [
+        {
+          "name": "Solipsys Battlespace Command and Control Center (BC3) and Tactical Display Framework",
+          "description": "Collins Aerospace (Solipsys) battle-management software marketed as the core platform for USAF Control and Reporting Centers and USMC/Navy CAC2S. Company marketing claim; independent confirmation of scope not obtained (MEDIUM).",
+          "input_process_output_user": "Inputs: radar tracks, Link 16/TADIL, sensor feeds. Process: multi-source track correlation, display, engagement coordination. Output: integrated air picture and C2 workflows. Users: USAF CRC operators, USMC air control, Navy."
+        },
+        {
+          "name": "Electronic Warfare Planning and Battle Management (EWPBM)",
+          "description": "Software tool to plan, direct, coordinate, synchronize and assess electromagnetic warfare activities; awarded by NATO NCIA in Sept 2025. FACT (rtx.com, 2025-09-16).",
+          "input_process_output_user": "Inputs: spectrum data, EW asset status, mission plans. Process: EMSO planning and assessment. Output: EW tasking and coordination products. Users: NATO EW planners; also USAF/Army EW cells (RECALL)."
+        },
+        {
+          "name": "Collins tactical communications: AN/ARC-210 airborne radios, TTNT, MIDS/Link 16 (via Data Link Solutions JV with BAE)",
+          "description": "Airborne software-defined radios and tactical datalink terminals; Navy IDIQ modification of $351.2M for up to 9,859 ARC-210(v) radios, completion Sept 2026. FACT on modification (GovConWire); JV and TTNT are RECALL (HIGH).",
+          "input_process_output_user": "Inputs: voice/data traffic. Process: multi-band waveform transport and link encryption. Output: interoperable tactical connectivity for aircraft and ground nodes. Users: Navy, USAF, Army aviation, allies."
+        },
+        {
+          "name": "Raytheon sensors feeding C2 (LTAMDS, SPY-6, KuRFS) and Cooperative Engagement Capability (CEC)",
+          "description": "LTAMDS radar for IBCS-based Army IAMD in LRIP ($2.1B Aug 2024; $1.7B mod Aug 2025; FY2026 mod with $254.6M obligated; ~$3.8B total). CEC is Navy sensor-netting (RECALL, HIGH). FACT on LTAMDS figures (GovConWire).",
+          "input_process_output_user": "Inputs: RF returns. Process: detection, tracking, composite tracking (CEC). Output: fire-control-quality tracks to IBCS/Aegis. Users: Army ADA, Navy."
+        },
+        {
+          "name": "GPS Next Generation Operational Control System (OCX)",
+          "description": "Ground control segment for GPS III delivered to Space Force in 2025. RECALL - not re-verified this session, confidence MEDIUM.",
+          "input_process_output_user": "Inputs: satellite telemetry, monitoring station data. Process: constellation command and control, M-Code management. Output: PNT service control. Users: Space Force 2nd SOPS."
+        },
+        {
+          "name": "Air defense command and control prototype for U.S. Air Force ($39M)",
+          "description": "USAF award to RTX for an air defense C2 prototype; scope details not captured this session (press release title only). Confidence LOW on scope and date."
+        }
+      ],
+      "exact_problem_solved": "Providing the sensors, datalinks and battle-management software that populate and connect air/missile-defense and air-control pictures across services and NATO; less a single C2 platform than a portfolio of C2-adjacent components.",
+      "primary_users": ["USAF Control and Reporting Centers", "USMC/Navy aviation C2 operators", "NATO EW planners", "Army ADA (LTAMDS via IBCS)", "Space Force (GPS OCX)"],
+      "primary_buyers": ["NAVAIR (ARC-210)", "Army Contracting Command (LTAMDS)", "NATO Communications and Information Agency", "USAF", "Space Force"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "FUSE", "IDENTIFY", "VISUALIZE", "DECIDE", "TASK"],
+      "mission_layer": ["air defense", "missile defense", "air control", "electromagnetic warfare", "maritime", "space/PNT", "coalition"],
+      "segment_ids": ["S01", "S03", "S05", "S07", "S11", "S12", "S08"],
+      "hw_sw_mix": "both - hardware-heavy (radars, radios, datalink terminals) with software C2 products (BC3, EWPBM, OCX).",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "NATO Electronic Warfare Planning and Battle Management (EWPBM)",
+          "customer": "NATO",
+          "contracting_org": "NATO Communications and Information Agency (NCIA)",
+          "vehicle_type": "foreign",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025-09-16 (announcement)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production software delivery",
+          "source_url": "https://www.rtx.com/news/news-center/2025/09/16/rtxs-collins-aerospace-awarded-nato-contract-for-electromagnetic-warfare-command",
+          "pub_date": "2025-09-16",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "AN/ARC-210(v) radio production IDIQ modification",
+          "customer": "U.S. Navy (and other services/FMS via Navy)",
+          "contracting_org": "NAVAIR (RECALL)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Up to 9,859 radios and ancillary equipment under the IDIQ",
+          "obligated": "Not verified",
+          "awarded_value": "$351.2 million modification",
+          "funded_amount": "Not verified",
+          "task_orders": "Delivery orders under IDIQ",
+          "date": "2024-2025 (modification date not captured)",
+          "period_of_performance": "Completion September 2026",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://www.govconwire.com/articles/collins-aerospace-navy-contract-radios",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "LTAMDS Low-Rate Initial Production and modifications",
+          "customer": "U.S. Army",
+          "contracting_org": "Army Contracting Command",
+          "vehicle_type": "FAR",
+          "ceiling": "~$3.8B cumulative value reported",
+          "obligated": "$254.6M FY2026 Other Procurement Army obligated at time of latest modification (~$1B mod)",
+          "awarded_value": "$2.1B base (Aug 2024); $1.7B modification (Aug 2025); ~$1B modification (FY2026)",
+          "funded_amount": "See obligated",
+          "task_orders": "N/A",
+          "date": "2024-08 base; 2025-08 mod; 2026 mod",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (LRIP)",
+          "source_url": "https://www.govconwire.com/articles/raytheon-army-ltamds-contract",
+          "pub_date": "2026",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Air defense command and control prototype (USAF)",
+          "customer": "U.S. Air Force",
+          "contracting_org": "Not captured",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "$39 million",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "Not captured (2024-2025)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.nasdaq.com/press-release/us-air-force-awards-rtx-$39-million-for-air-defense-command-and-control-prototype",
+          "pub_date": "n/a",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "ARC-210 radios installed across thousands of U.S. and allied aircraft; Link 16 MIDS terminals via Data Link Solutions JV.",
+          "evidence": "Ongoing multi-hundred-million IDIQ orders (e.g., $351.2M mod). RECALL for install base, confidence HIGH.",
+          "source_url": "https://www.govconwire.com/articles/collins-aerospace-navy-contract-radios"
+        },
+        {
+          "what": "Solipsys BC3/TDF software in USAF CRC and USMC/Navy CAC2S (company claim).",
+          "evidence": "Company product page only; independent confirmation not obtained. Confidence MEDIUM.",
+          "source_url": "https://www.rtx.com/collinsaerospace/what-we-do/industries/military-and-defense/battle-management/solipsys-battlespace-command-and-control-center-bc3"
+        },
+        {
+          "what": "Raytheon TITAN prototype (Phase 1) - lost the 2024 Phase 2 award to Palantir.",
+          "evidence": "RECALL - not re-verified this session, confidence HIGH.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Northern Edge airborne tactical operations center demo in KC-135 (Collins)", "year": "2023", "note": "Collins JADC2 airborne C2 node demonstration.", "source_url": "https://breakingdefense.com/2023/12/airborne-tactical-operations-centers-are-needed-for-jadc2-northern-edge-demoed-one-in-a-kc-135/"},
+        {"event": "Collins JADC2 demonstrations (various)", "year": "2021-2022", "note": "Collins focusing on JADC2 with multiple demos; company-reported.", "source_url": "https://breakingdefense.com/2022/01/collins-focusing-on-jadc2-with-recent-demonstrations/"}
+      ],
+      "integration_partners": ["BAE Systems (Data Link Solutions JV for MIDS/Link 16; RECALL)", "Northrop Grumman IBCS (LTAMDS integration)", "Lockheed Martin Aegis (SPY-6, CEC)", "NATO NCIA", "Space Force (OCX)"],
+      "apis_sdks_open_interfaces": "Collins BMC2A markets open, modular battle management and TTNT/Link 16 standards compliance; no public SDK found. Public evidence insufficient for developer-facing APIs.",
+      "security_classification_requirements": "Cleared facilities required across radar, datalink and C2 lines; Link 16 crypto and M-Code items tightly export-controlled. Foreign-national participation requires ITAR/FOCI review.",
+      "allied_international_activity": "NATO EWPBM (2025); ARC-210 and Link 16 terminals widely exported; Patriot/LTAMDS partner nations; Collins has international BMC2 sales (RECALL).",
+      "technical_differentiator": "Breadth: owns key sensors (LTAMDS, SPY-6), airborne radios and datalink standards (ARC-210, MIDS, TTNT) and battle-management software; $2.7B internal JADC2 realignment into Collins BMC2A in 2023.",
+      "suspected_moat": "Datalink/radio install base and crypto certifications, radar incumbency, and program-of-record positions in USAF/USMC air control software. INFERENCE, confidence HIGH.",
+      "major_competitors": ["Northrop Grumman (IBCS, FAAD C2)", "Lockheed Martin", "L3Harris (radios)", "Anduril", "Palantir (won TITAN over Raytheon)"],
+      "obvious_weaknesses": "No flagship joint C2 software win since TITAN loss; battle-management portfolio is fragmented across Raytheon and Collins; slower software cadence than software-native entrants. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "Strong for radios/datalinks and radars (production orders); moderate for BC3 (program-of-record claim is company-sourced); NATO EWPBM is a new adoption (2025).",
+      "evidence_repeat_procurement": "Repeated ARC-210 IDIQ modifications and successive LTAMDS modifications (Aug 2024, Aug 2025, FY2026) indicate repeat procurement. Confidence HIGH.",
+      "evidence_prototype_to_production": "LTAMDS moved from prototype (2019 award) to LRIP (2024) and follow-on mods. TITAN prototype did not transition (lost to Palantir). USAF air-defense C2 prototype transition unknown.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "battalion_brigade"},
+        {"chain_step": "TRANSPORT", "echelon": "individual_platform"},
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "FUSE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "coalition"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): BMC2A software likely combines legacy C++/Java track-processing frameworks (Solipsys TDF) with newer containerized services; OCX is a large enterprise ground system. Confidence LOW.",
+      "confidence_notes": "NATO EWPBM (Sept 2025) verified via rtx.com; ARC-210 and LTAMDS figures from GovConWire (Tier 3) with award dates partially captured. BC3 program-of-record claims are company marketing. GPS OCX delivery, CEC, TTNT and DLS JV are RECALL.",
+      "sources": [
+        {"url": "https://www.rtx.com/news/news-center/2025/09/16/rtxs-collins-aerospace-awarded-nato-contract-for-electromagnetic-warfare-command", "title": "RTX's Collins Aerospace awarded NATO contract for EW command and control system", "pub_date": "2025-09-16", "type": "company"},
+        {"url": "https://www.govconwire.com/articles/collins-aerospace-navy-contract-radios", "title": "Collins Aerospace Books $351M Navy Contract Modification for Military Tactical Radios", "pub_date": "2025", "type": "independent"},
+        {"url": "https://www.govconwire.com/articles/raytheon-army-ltamds-contract", "title": "Raytheon Receives $1B Army Contract Modification for LTAMDS Production", "pub_date": "2026", "type": "independent"},
+        {"url": "https://www.rtx.com/collinsaerospace/what-we-do/industries/military-and-defense/battle-management/solipsys-battlespace-command-and-control-center-bc3", "title": "Solipsys Battlespace Command and Control Center (BC3)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://www.nasdaq.com/press-release/us-air-force-awards-rtx-$39-million-for-air-defense-command-and-control-prototype", "title": "US Air Force awards RTX $39 million for air defense command and control prototype", "pub_date": "n/a", "type": "company"},
+        {"url": "https://www.c4isrnet.com/industry/2023/06/19/raytheon-injecting-collins-aerospace-unit-with-27-billion-jadc2-jolt/", "title": "Raytheon injecting Collins Aerospace unit with $2.7 billion JADC2 jolt", "pub_date": "2023-06-19", "type": "independent"},
+        {"url": "https://breakingdefense.com/2023/12/airborne-tactical-operations-centers-are-needed-for-jadc2-northern-edge-demoed-one-in-a-kc-135/", "title": "Airborne tactical operations centers are needed for JADC2; Northern Edge demoed one in a KC-135", "pub_date": "2023-12", "type": "independent"},
+        {"url": "https://breakingdefense.com/2022/01/collins-focusing-on-jadc2-with-recent-demonstrations/", "title": "Collins focusing on JADC2 with recent demonstrations", "pub_date": "2022-01", "type": "independent"}
+      ]
+    },
+    {
+      "name": "L3Harris Technologies, Inc.",
+      "aka": "LHX; L3Harris Communication Systems; L3Harris Space & Airborne Systems; L3Harris Integrated Mission Systems; WESCAM",
+      "founding_year": 2019,
+      "headquarters": "Melbourne, Florida, USA",
+      "public_private": "public",
+      "employee_count_approx": "~47,000 (2024; RECALL - not re-verified this session, confidence MEDIUM)",
+      "founders": ["Formed 2019 by merger of Harris Corporation (founded 1895) and L3 Technologies"],
+      "founder_backgrounds": "Not applicable; legacy merger.",
+      "total_disclosed_funding_usd": "N/A - publicly traded (NYSE: LHX).",
+      "latest_valuation": "Public equity; market capitalization not verified this session.",
+      "major_investors": ["Institutional public shareholders"],
+      "c4isr_products": [
+        {
+          "name": "Falcon tactical radios: AN/PRC-158 Manpack, AN/PRC-163 Leader/Handheld, AN/PRC-158C NGC2 manpack",
+          "description": "Army HMS program full-rate production radios with MANET and resilient anti-jam waveforms; the 158C variant is being ordered specifically for NGC2 formations. FACT (l3harris.com Jan 2025 and July 2026; Defense Post July 2026).",
+          "input_process_output_user": "Inputs: voice/data from soldiers, vehicles, C2 apps. Process: multi-channel SDR with MANET, SATCOM and resilient waveforms; NSA Type 1 crypto. Output: tactical network transport from squad to aerial tier. Users: Army brigades/divisions, SOF, allies."
+        },
+        {
+          "name": "Tranche 3 Tracking Layer satellites (SDA) and prior tranches",
+          "description": "18 infrared missile-warning/tracking satellites plus ground software, operations and sustainment, up to $843M (Dec 2025); feeds tactical ground stations such as Army TITAN. FACT (l3harris.com, SpaceNews Dec 2025).",
+          "input_process_output_user": "Inputs: IR emissions from missile launches/hypersonics. Process: on-orbit detection/tracking, downlink. Output: track data to PWSA ground and tactical users. Users: SDA, Space Force, MDA, Army TITAN users."
+        },
+        {
+          "name": "WESCAM MX-series EO/IR sensors and airborne ISR mission systems",
+          "description": "EO/IR turrets and ISR aircraft integration (e.g., Army ARES demonstrator on Global 6500). RECALL - not re-verified this session, confidence MEDIUM.",
+          "input_process_output_user": "Inputs: EO/IR imagery. Process: stabilization, targeting, onboard processing. Output: FMV and target coordinates to PED/C2. Users: aviation, ISR crews, SOF."
+        },
+        {
+          "name": "DiSCO resilient EMSO architecture and EW systems",
+          "description": "Company-described resilient electromagnetic spectrum operations architecture to exploit EW data at campaign speed. Company marketing (l3harris.com Golden Dome page); confidence LOW on deployment.",
+          "input_process_output_user": "Inputs: EW sensor data. Process: spectrum awareness/mission data reprogramming. Output: EW effects and spectrum picture. Users: EW planners and aircrews."
+        },
+        {
+          "name": "AMORPHOUS autonomy swarm C2 software",
+          "description": "Software for commanding large numbers of uncrewed systems. RECALL - not re-verified this session, confidence LOW; demo-level."
+        }
+      ],
+      "exact_problem_solved": "Assured, jam-resistant tactical connectivity from the individual soldier to the aerial tier and space, plus the sensors (EO/IR, space IR) that feed C2; L3Harris is primarily a transport/collect layer supplier rather than a C2 application owner.",
+      "primary_users": ["U.S. Army brigades and NGC2 divisions (radios)", "SOF", "SDA/Space Force (tracking layer)", "Aviation and ISR crews (WESCAM)", "Allied militaries"],
+      "primary_buyers": ["Army PEO C3N/PM Tactical Radios (HMS)", "Space Development Agency", "SOCOM", "Foreign militaries (FMS/DCS)"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "PROCESS", "DISSEMINATE"],
+      "mission_layer": ["maneuver", "fires (comms)", "ISR", "missile warning/space", "electromagnetic warfare", "joint"],
+      "segment_ids": ["S05", "S03", "S12", "S13", "S08"],
+      "hw_sw_mix": "hardware-led (radios, sensors, satellites) with embedded waveform/crypto software and ground software.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "HMS full-rate production orders (AN/PRC-158 Manpack, AN/PRC-163 Leader)",
+          "customer": "U.S. Army",
+          "contracting_org": "Army Contracting Command (PEO C3N/PM Tactical Radios; RECALL)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Not stated (HMS IDIQ ceiling not captured)",
+          "obligated": "Not verified",
+          "awarded_value": "Nearly $300 million in production orders",
+          "funded_amount": "Not verified",
+          "task_orders": "Delivery orders",
+          "date": "2025-01-27",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (full-rate)",
+          "source_url": "https://www.l3harris.com/newsroom/press-release/2025/01/us-army-awards-l3harris-nearly-300-million-resilient-communications",
+          "pub_date": "2025-01",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGC2 manpack (AN/PRC-158C) delivery orders",
+          "customer": "U.S. Army",
+          "contracting_org": "Army (contracting office not captured)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Not stated",
+          "obligated": "Not verified",
+          "awarded_value": "$84 million in orders",
+          "funded_amount": "Not verified",
+          "task_orders": "Delivery orders",
+          "date": "2026-06-09 (orders announced; press release July 2026)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production radios supporting NGC2 prototype formations",
+          "source_url": "https://www.l3harris.com/newsroom/press-release/2026/07/us-army-awards-l3harris-ngc2-manpack-radio-delivery-orders",
+          "pub_date": "2026-07",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "SDA Tranche 3 Tracking Layer (18 satellites)",
+          "customer": "Space Development Agency",
+          "contracting_org": "Space Development Agency",
+          "vehicle_type": "OTA production",
+          "ceiling": "Up to $843 million (includes ground software, operations, sustainment)",
+          "obligated": "Not verified",
+          "awarded_value": "Up to $843 million",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2025-12 (announced Dec 19, 2025)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (tranche)",
+          "source_url": "https://www.l3harris.com/newsroom/press-release/2025/12/space-development-agency-awards-l3harris-843-million-contract",
+          "pub_date": "2025-12",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Selection to support Army NGC2 program (2025)",
+          "customer": "U.S. Army",
+          "contracting_org": "Not captured",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "Not captured",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "Likely subcontractor/team member for transport layer (INFERENCE)",
+          "prototype_or_production": "prototype",
+          "source_url": "https://s205.q4cdn.com/565046976/files/doc_news/US-Army-Selects-L3Harris-to-Support-NGC2-Program-2025.pdf",
+          "pub_date": "2025",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Falcon/HMS radios fielded at scale across Army brigades (full-rate production since 2020s).",
+          "evidence": "Successive LRIP and FRP orders (2020 third LRIP order; Jan 2025 ~$300M FRP orders; June 2026 $84M NGC2 orders). Confidence HIGH.",
+          "source_url": "https://thedefensepost.com/2026/07/15/us-manpack-radios-l3harris/"
+        },
+        {
+          "what": "Tracking Layer satellites from earlier tranches on orbit feeding PWSA.",
+          "evidence": "RECALL - not re-verified this session; Tranche 0/1 launches 2023-2025. Confidence MEDIUM.",
+          "source_url": "https://spacenews.com/space-development-agency-awards-3-5-billion-in-contracts-for-missile-tracking-satellites/"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Army NGC2 experimentation (radio transport for prototype divisions)", "year": "2025-2026", "note": "PRC-158C orders explicitly tied to NGC2; participation in Lightning Surge/Ivy Sting events is INFERENCE (not verified).", "source_url": "https://www.l3harris.com/newsroom/press-release/2026/07/us-army-awards-l3harris-ngc2-manpack-radio-delivery-orders"},
+        {"event": "Project Convergence / NIE-style network experiments", "year": "2021-2024", "note": "RECALL - not re-verified this session, confidence LOW.", "source_url": ""}
+      ],
+      "integration_partners": ["Anduril and Palantir NGC2/TITAN teams (L3Harris on Palantir TITAN team; RECALL, MEDIUM)", "Space Development Agency PWSA ecosystem", "Army PEO C3N", "Allied radio users (Five Eyes, NATO)"],
+      "apis_sdks_open_interfaces": "Radios expose standard interfaces (Ethernet/IP, USB, SNMP) and support open waveforms (TSM, SRW, MUOS, SATURN) plus proprietary MANET; no public developer SDK identified. Public evidence insufficient beyond product literature.",
+      "security_classification_requirements": "NSA Type 1 crypto radios and space tracking payloads require cleared facilities; export via ITAR/FMS; foreign-national participation heavily constrained.",
+      "allied_international_activity": "Falcon radios widely exported to NATO and Five Eyes; WESCAM (Canada-based) sensors sold globally; NGC2/TITAN work is U.S.-only. RECALL, confidence HIGH on export breadth.",
+      "technical_differentiator": "Largest U.S. tactical radio install base with certified resilient waveforms; now the designated transport for NGC2 divisions; space IR sensing that ties directly to Army TITAN.",
+      "suspected_moat": "NSA crypto certifications, waveform IP, fielded install base and logistics tail; program-of-record HMS position. INFERENCE, confidence HIGH.",
+      "major_competitors": ["Collins Aerospace/RTX (radios)", "Thales (radios)", "Silvus Technologies (MANET, acquired by Motorola Solutions 2025; RECALL)", "Persistent Systems", "Northrop Grumman and Lockheed Martin (tracking satellites)"],
+      "obvious_weaknesses": "Thin presence in the C2 application/data layer; radio business faces competition from lower-cost commercial MANET vendors; dependence on Army procurement cycles. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "Strong: full-rate production radio orders (Jan 2025) and NGC2-specific orders (June 2026) show sustained Army use.",
+      "evidence_repeat_procurement": "Repeat HMS delivery orders across LRIP (2020) to FRP (2025) to NGC2 (2026); repeat SDA tranche awards (Tranche 0 through 3). Confidence HIGH.",
+      "evidence_prototype_to_production": "HMS radios completed LRIP-to-FRP transition; Tracking Layer moved from Tranche 0 experiments to production tranches. Confidence HIGH.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "tactical_unit"},
+        {"chain_step": "TRANSPORT", "echelon": "battalion_brigade"},
+        {"chain_step": "TRANSPORT", "echelon": "division_corps"},
+        {"chain_step": "COLLECT", "echelon": "individual_platform"},
+        {"chain_step": "COLLECT", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): radio product lines rely on embedded SDR firmware, waveform porting and crypto engineering; SDA ground software likely cloud-hosted mission ops. Confidence LOW.",
+      "confidence_notes": "Radio orders (Jan 2025, June/July 2026) and SDA T3 award (Dec 2025) verified via company releases and Tier 3 coverage. NGC2 selection document seen only by title. WESCAM, AMORPHOUS, DiSCO deployment and TITAN sub role are RECALL or company marketing.",
+      "sources": [
+        {"url": "https://www.l3harris.com/newsroom/press-release/2025/01/us-army-awards-l3harris-nearly-300-million-resilient-communications", "title": "US Army Awards L3Harris Nearly $300 Million for Resilient Communications Program", "pub_date": "2025-01", "type": "company"},
+        {"url": "https://www.l3harris.com/newsroom/press-release/2026/07/us-army-awards-l3harris-ngc2-manpack-radio-delivery-orders", "title": "US Army Awards L3Harris NGC2 Manpack Radio Delivery Orders", "pub_date": "2026-07", "type": "company"},
+        {"url": "https://thedefensepost.com/2026/07/15/us-manpack-radios-l3harris/", "title": "US Army Buys More Manpack Radios From L3Harris", "pub_date": "2026-07-15", "type": "independent"},
+        {"url": "https://www.shephardmedia.com/news/landwarfareintl/l3harris-awarded-radio-deal-worth-almost-300-million/", "title": "L3Harris awarded manpack and handheld radio deal worth almost $300 million", "pub_date": "2025-01", "type": "independent"},
+        {"url": "https://www.l3harris.com/newsroom/press-release/2025/12/space-development-agency-awards-l3harris-843-million-contract", "title": "Space Development Agency Awards L3Harris $843 Million Contract for Tracking Layer Satellites", "pub_date": "2025-12", "type": "company"},
+        {"url": "https://spacenews.com/space-development-agency-awards-3-5-billion-in-contracts-for-missile-tracking-satellites/", "title": "Space Development Agency awards $3.5 billion in contracts for missile-tracking satellites", "pub_date": "2025-12", "type": "independent"},
+        {"url": "https://s205.q4cdn.com/565046976/files/doc_news/US-Army-Selects-L3Harris-to-Support-NGC2-Program-2025.pdf", "title": "US Army Selects L3Harris to Support NGC2 Program 2025", "pub_date": "2025", "type": "company"},
+        {"url": "https://www.l3harris.com/innovation/powering-new-golden-dome-america", "title": "Powering the New Golden Dome for America", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "General Dynamics Mission Systems",
+      "aka": "GDMS; General Dynamics C4 Systems (legacy); TACLANE; TACDS",
+      "founding_year": 2015,
+      "headquarters": "Fairfax, Virginia, USA",
+      "public_private": "subsidiary",
+      "employee_count_approx": "~13,000 GDMS (RECALL, confidence LOW); General Dynamics total ~117,000 (RECALL, MEDIUM)",
+      "founders": ["Business unit of General Dynamics (NYSE: GD) formed 2015 by combining GD C4 Systems and GD Advanced Information Systems"],
+      "founder_backgrounds": "Not applicable.",
+      "total_disclosed_funding_usd": "N/A - wholly owned subsidiary of General Dynamics.",
+      "latest_valuation": "N/A (parent public equity).",
+      "major_investors": ["General Dynamics Corporation (parent)"],
+      "c4isr_products": [
+        {
+          "name": "CMFF (C5ISR/EW Modular Open Suite of Standards Mounted Form Factor) prototype systems",
+          "description": "Vehicle chassis with NSA-certifiable multi-level security, HEMP/EW hardening and ruggedization that converges legacy boxes into one open-standard (CMOSS) enclosure, designed to run Palantir Maven and Anduril Lattice for NGC2. FACT (gdmissionsystems.com Oct 6, 2025; ExecutiveGov).",
+          "input_process_output_user": "Inputs: radio, EW, PNT, C2 cards and software payloads. Process: hosts multiple applications on shared compute with multi-level security. Output: consolidated mounted C5ISR/EW capability. Users: Army mounted formations (Stryker, JLTV, aviation)."
+        },
+        {
+          "name": "TACLANE family of NSA Type 1 HAIPE encryptors",
+          "description": "Sole NSA-approved GigE tactical LAN encryptors per a 2026 Army sole-source RFI; ubiquitous in tactical and enterprise networks. FACT (govdash RFI listing 2026; product literature).",
+          "input_process_output_user": "Inputs: classified IP traffic. Process: HAIPE encryption. Output: protected transport over untrusted networks. Users: all services, agencies."
+        },
+        {
+          "name": "Tactical Cross Domain Solutions (TACDS)",
+          "description": "Tactical cross-domain transfer device enabling data sharing across security domains in austere environments. FACT (product page); fielding scale not verified.",
+          "input_process_output_user": "Inputs: data from multiple classification levels. Process: rule-based filtering and guard. Output: authorized cross-domain flows at the edge. Users: tactical units, SOF, aviation."
+        },
+        {
+          "name": "NGC2 Comms suite: Mounted Command and Control (MC2) Hub, PhantomLink free-space optics, Digital Radio Head",
+          "description": "Transport-layer products marketed at AUSA 2025 for NGC2 across BLOS and LOS links. FACT on marketing (gdls.com AUSA 2025 page); adoption not verified.",
+          "input_process_output_user": "Inputs: C2 traffic from vehicles/CPs. Process: multi-transport routing including FSO and digital RF heads. Output: resilient PACE connectivity. Users: Army mounted units and command posts."
+        },
+        {
+          "name": "SDA Ground Management and Integration (GMI) ground segment",
+          "description": "$491.6M design and development for PWSA ground operations/integration (Sept 2024). FACT (gdmissionsystems.com, PRNewswire).",
+          "input_process_output_user": "Inputs: satellite telemetry and mission data. Process: ground management, integration across tranches. Output: operational PWSA ground services. Users: SDA, Space Force operators."
+        },
+        {
+          "name": "Legacy Army network programs (WIN-T, Mounted Family of Computer Systems)",
+          "description": "RECALL - not re-verified this session; WIN-T in sustainment, MFoCS mounted computing. Confidence MEDIUM."
+        }
+      ],
+      "exact_problem_solved": "Securing and transporting classified data at the tactical edge (encryption, cross-domain, mounted compute/comms) and providing large ground/network integration for space and Navy programs; GDMS underpins C2 rather than owning the C2 application.",
+      "primary_users": ["Army mounted formations and command posts", "All-service network operators (TACLANE)", "SDA/Space Force ground operators", "Navy strategic systems"],
+      "primary_buyers": ["Army PEO C3N and PEO IEW&S (CMFF OTA)", "Space Development Agency", "NSA-certified product buyers across DoD", "U.S. Navy"],
+      "technical_layer": ["TRANSPORT", "INGEST", "STORE", "PROCESS", "DISSEMINATE"],
+      "mission_layer": ["maneuver (mounted C2)", "network/security", "space", "maritime/strategic"],
+      "segment_ids": ["S05", "S06", "S10", "S01", "S13"],
+      "hw_sw_mix": "hardware-led (encryptors, chassis, radios, FSO) with embedded and ground software; GMI is software/ground integration.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "CMFF initial prototype systems",
+          "customer": "U.S. Army",
+          "contracting_org": "Army (OTA; consortium not captured)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "Not captured (company release fetch blocked)",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025-10-06 (announcement)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime (Pacific Defense also awarded separately)",
+          "prototype_or_production": "prototype",
+          "source_url": "https://gdmissionsystems.com/articles/2025/10/06/news-release-us-army-awards-general-dynamics-contract-to-deliver-initial-cmff-prototype-systems",
+          "pub_date": "2025-10-06",
+          "confidence": "HIGH (existence); LOW (value)"
+        },
+        {
+          "title": "SDA Ground Management and Integration design and development",
+          "customer": "Space Development Agency",
+          "contracting_org": "Space Development Agency",
+          "vehicle_type": "OTA production",
+          "ceiling": "$491.6 million",
+          "obligated": "Not verified",
+          "awarded_value": "$491.6 million",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2024-09-04",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "development for operational ground segment",
+          "source_url": "https://gdmissionsystems.com/articles/2024/09/04/news-release-general-dynamics-awarded-sda-ground-management-and-integration-contract",
+          "pub_date": "2024-09-04",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "2026 RFI - GDMS TACLANE products (sole-source justification)",
+          "customer": "U.S. Army (RECALL)",
+          "contracting_org": "Not captured",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "RFI only",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2026",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (sustained buys)",
+          "source_url": "https://discover.govdash.com/solicitations/01a043a6-6ae0-757c-9b02-5c710b8ea36b--2026-rfi-gdms-taclane-products",
+          "pub_date": "2026",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Navy Strategic Weapon System fire control subsystem (FY2026-2027)",
+          "customer": "U.S. Navy",
+          "contracting_org": "Navy Strategic Systems Programs",
+          "vehicle_type": "FAR",
+          "ceiling": "$740.4 million potential",
+          "obligated": "Not verified",
+          "awarded_value": "$740.4 million (hybrid)",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2025-2026",
+          "period_of_performance": "FY2026-2027",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/sustainment (note: strategic fire control, adjacent to C4ISR)",
+          "source_url": "https://www.executivebiz.com/articles/gdms-navy-strategic-weapon-system-fcs",
+          "pub_date": "2026",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "TACLANE encryptors deployed across DoD tactical and enterprise networks; sole NSA-approved GigE tactical LAN encryptor per 2026 RFI language.",
+          "evidence": "Sole-source RFI (2026) and decades of fielding. Confidence HIGH.",
+          "source_url": "https://discover.govdash.com/solicitations/01a043a6-6ae0-757c-9b02-5c710b8ea36b--2026-rfi-gdms-taclane-products"
+        },
+        {
+          "what": "WIN-T and MFoCS fielded to Army units (legacy programs).",
+          "evidence": "RECALL - not re-verified this session, confidence MEDIUM.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {"event": "AUSA 2025 (NGC2 Comms suite and CMFF display)", "year": "2025", "note": "Marketing exhibition; not an operational exercise.", "source_url": "https://www.gdls.com/ausa-2025/"},
+        {"event": "Army NGC2/CMFF prototype experimentation", "year": "2026", "note": "INFERENCE that CMFF prototypes will be exercised with NGC2 divisions; no public event evidence found.", "source_url": ""}
+      ],
+      "integration_partners": ["Palantir (Maven on CMFF)", "Anduril (Lattice on CMFF)", "Pacific Defense (parallel CMFF awardee/competitor)", "NSA (crypto certification)", "Space Development Agency"],
+      "apis_sdks_open_interfaces": "CMFF is built to CMOSS/SOSA open standards, allowing third-party cards and software; TACLANE uses HAIPE interoperability standard. No public SDK; standards compliance is the interface. Confidence MEDIUM.",
+      "security_classification_requirements": "NSA Type 1 products, cross-domain solutions and strategic fire control require the highest facility/personnel clearances; foreign-national access essentially precluded on these lines.",
+      "allied_international_activity": "TACLANE and cross-domain exports limited to select allies under NSA/ITAR controls; limited public evidence of allied C2 activity. Public evidence insufficient.",
+      "technical_differentiator": "Near-monopoly on NSA-certified tactical GigE encryption, plus an open-standards mounted chassis (CMFF) positioned as the hardware host for NGC2 software from Palantir/Anduril.",
+      "suspected_moat": "NSA certification barriers, sole-source status, and installed base of encryptors and vehicle systems. INFERENCE, confidence HIGH.",
+      "major_competitors": ["Pacific Defense (CMFF)", "Viasat (encryptors)", "L3Harris (mounted comms)", "Curtiss-Wright/Mercury (CMOSS compute)", "Collins Aerospace"],
+      "obvious_weaknesses": "Limited role in software C2 layer; legacy WIN-T association with slow, heavy networks; CMFF value uncaptured and prototype-only; relies on others' software (Maven, Lattice) for the user-facing capability. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "TACLANE ubiquitous (HIGH). CMFF and NGC2 Comms are prototype/marketing stage (LOW).",
+      "evidence_repeat_procurement": "Recurring TACLANE buys (2026 RFI), successive SDA and Navy awards. Confidence MEDIUM-HIGH.",
+      "evidence_prototype_to_production": "CMFF is prototype only (Oct 2025); no production decision evidenced. GMI is development toward operational ground segment.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "tactical_unit"},
+        {"chain_step": "TRANSPORT", "echelon": "battalion_brigade"},
+        {"chain_step": "PROCESS", "echelon": "individual_platform"},
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "PROCESS", "echelon": "theater"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): CMFF implies CMOSS/SOSA VPX hardware, hypervisor-based multi-level security, and Linux-based edge hosting for containerized third-party apps. Confidence LOW.",
+      "confidence_notes": "CMFF award existence verified (Oct 2025) but value not captured because company site fetch was egress-blocked. SDA GMI verified. TACLANE sole-source status verified via 2026 RFI listing. GDIT SACSS ($988M, Jan 2026) noted as separate GD unit and excluded from GDMS contracts.",
+      "sources": [
+        {"url": "https://gdmissionsystems.com/articles/2025/10/06/news-release-us-army-awards-general-dynamics-contract-to-deliver-initial-cmff-prototype-systems", "title": "U.S. Army Awards General Dynamics Contract to Deliver Initial CMFF Prototype Systems", "pub_date": "2025-10-06", "type": "company"},
+        {"url": "https://www.executivegov.com/articles/gdms-pacific-defense-ota-army-cmff-prototypes", "title": "GDMS, Pacific Defense for CMFF Prototypes for Army", "pub_date": "2025-10", "type": "independent"},
+        {"url": "https://gdmissionsystems.com/articles/2024/09/04/news-release-general-dynamics-awarded-sda-ground-management-and-integration-contract", "title": "General Dynamics Awarded SDA Ground Management and Integration Contract", "pub_date": "2024-09-04", "type": "company"},
+        {"url": "https://discover.govdash.com/solicitations/01a043a6-6ae0-757c-9b02-5c710b8ea36b--2026-rfi-gdms-taclane-products", "title": "2026 RFI GDMS TACLANE Products", "pub_date": "2026", "type": "gov"},
+        {"url": "https://gdmissionsystems.com/cross-domain-solutions/tactical-cross-domain-solutions-tacds", "title": "Tactical Cross Domain Solutions (TACDS)", "pub_date": "n/a", "type": "company"},
+        {"url": "https://www.gdls.com/ausa-2025/", "title": "General Dynamics Business Units to Participate in AUSA 2025 (NGC2 Comms description)", "pub_date": "2025-10", "type": "company"},
+        {"url": "https://www.executivebiz.com/articles/gdms-navy-strategic-weapon-system-fcs", "title": "GDMS Books P$740M Navy SWS Fire Control Subsystem Contract", "pub_date": "2026", "type": "independent"},
+        {"url": "https://www.armyrecognition.com/news/aerospace-news/2026/u-s-navy-awards-general-dynamics-988m-contract-to-upgrade-fleet-wide-command-networks", "title": "U.S. Navy Awards General Dynamics (GDIT) $988M SACSS Contract", "pub_date": "2026-01", "type": "independent"}
+      ]
+    },
+    {
+      "name": "BAE Systems, Inc. (U.S. subsidiary of BAE Systems plc)",
+      "aka": "BAE Systems Electronic Systems; BAE Systems FAST Labs; BAE Systems Intelligence & Security; BAE Systems Space & Mission Systems (formerly Ball Aerospace)",
+      "founding_year": 1999,
+      "headquarters": "Falls Church, Virginia, USA (parent: London/Farnborough, UK)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "~37,000-40,000 in U.S. (RECALL, confidence LOW-MEDIUM); parent plc ~100,000+ (RECALL)",
+      "founders": ["BAE Systems plc formed 1999 (British Aerospace and Marconi Electronic Systems); U.S. arm operates under a Special Security Agreement"],
+      "founder_backgrounds": "Not applicable.",
+      "total_disclosed_funding_usd": "N/A - subsidiary of publicly traded BAE Systems plc (LSE: BA.).",
+      "latest_valuation": "N/A (parent public equity).",
+      "major_investors": ["BAE Systems plc (parent); FOCI-mitigated via SSA with DCSA (RECALL, HIGH)"],
+      "c4isr_products": [
+        {
+          "name": "Tactical data links and networking: MIDS/Link 16 terminals (Data Link Solutions JV with Collins), MINC tactical network control software",
+          "description": "Link 16 terminals fielded across U.S./allied aircraft and ships (RECALL, HIGH); DARPA Mission-Integrated Network Control Phase 2 ($6M) to autonomously manage tactical networks for mission needs (FACT, Military Embedded).",
+          "input_process_output_user": "Inputs: network state, mission priorities, link availability. Process: autonomous network configuration/control across heterogeneous links. Output: mission-prioritized connectivity. Users: joint tactical networks (research/prototype)."
+        },
+        {
+          "name": "Military GPS / M-Code receivers (acquired from Collins 2020)",
+          "description": "Assured PNT receivers and modules for platforms and munitions. RECALL - not re-verified this session, confidence HIGH on business existence.",
+          "input_process_output_user": "Inputs: GPS signals. Process: M-Code anti-jam processing. Output: assured PNT to platforms and weapons. Users: all services, allies."
+        },
+        {
+          "name": "Geospatial eXploitation Products (GXP) / SOCET GXP",
+          "description": "Imagery/geospatial exploitation and PED software used by NGA and military intelligence. RECALL - not re-verified this session, confidence MEDIUM-HIGH.",
+          "input_process_output_user": "Inputs: satellite/airborne imagery, FMV. Process: photogrammetry, target mensuration, geospatial analysis. Output: intelligence products and precise coordinates. Users: imagery analysts, targeting cells."
+        },
+        {
+          "name": "DIRECT (Distributed, Interactive, Command-and-Control Tool) from DARPA RSPACE",
+          "description": "Mission-planning/C2 software developed under DARPA RSPACE and transitioning to USAF. FACT that company announced transition (baesystems.com feature); date and USAF fielding extent not captured.",
+          "input_process_output_user": "Inputs: air tasking requirements, asset availability, threat data. Process: distributed planning and synchronization under contested comms. Output: resilient air operations plans/tasking. Users: USAF air operations planners."
+        },
+        {
+          "name": "Oversight autonomous tracking (DARPA, Phase 2 $16M)",
+          "description": "Autonomous multi-sensor target tracking technology. FACT (ExecutiveBiz); research stage.",
+          "input_process_output_user": "Inputs: multi-INT sensor data. Process: AI-based track management across sensors. Output: persistent tracks for ISR/targeting. Users: research transition partners."
+        },
+        {
+          "name": "Electronic warfare and EMSO systems (EPAWSS, F-35 EW, Storm EW)",
+          "description": "RECALL - not re-verified this session; large EW franchise relevant to S12. Confidence HIGH on existence."
+        }
+      ],
+      "exact_problem_solved": "Supplying protected connectivity (Link 16, assured GPS), spectrum dominance (EW) and exploitation/planning software components that feed or protect C2; BAE is a component and research supplier rather than an end-to-end C2 integrator in the U.S. market.",
+      "primary_users": ["USAF (DIRECT planning; EW)", "Joint aircrews/ships (Link 16, GPS)", "Imagery analysts (GXP)", "DARPA research transitions"],
+      "primary_buyers": ["DARPA", "USAF", "NGA/intelligence community", "Navy/Army platform programs (GPS, Link 16)"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "PROCESS", "IDENTIFY", "DECIDE", "ASSESS"],
+      "mission_layer": ["air operations planning", "ISR/PED", "PNT", "electromagnetic warfare", "joint networking", "space"],
+      "segment_ids": ["S05", "S11", "S12", "S04", "S07", "S01", "S03"],
+      "hw_sw_mix": "both - hardware-heavy (terminals, receivers, EW) with software products (GXP, DIRECT) and DARPA software research.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "DARPA Mission-Integrated Network Control (MINC) Phase 2",
+          "customer": "DARPA",
+          "contracting_org": "DARPA",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "$6 million",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025 (approx.; not precisely captured)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research/prototype",
+          "source_url": "https://militaryembedded.com/comms/communications/tactical-network-control-development-contract-from-darpa-won-by-bae-systems",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "DARPA Oversight Phase 2 (autonomous tracking)",
+          "customer": "DARPA",
+          "contracting_org": "DARPA",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "$16 million",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025 (approx.)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research/prototype",
+          "source_url": "https://www.executivebiz.com/articles/bae-systems-darpa-autonomous-tracking",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "DARPA PROVERS (formal methods for software assurance)",
+          "customer": "DARPA",
+          "contracting_org": "DARPA",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "$6 million",
+          "funded_amount": "Not stated",
+          "task_orders": "N/A",
+          "date": "2025 (approx.)",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research",
+          "source_url": "https://militaryembedded.com/avionics/software/software-security-contract-signed-between-bae-systems-and-darpa",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Aggregate DARPA awards (~$46M across programs)",
+          "customer": "DARPA",
+          "contracting_org": "DARPA",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not stated",
+          "awarded_value": "~$46 million aggregate per ClearanceJobs (Apr 23, 2025)",
+          "funded_amount": "Not stated",
+          "task_orders": "Multiple programs",
+          "date": "2025-04",
+          "period_of_performance": "Not stated",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research/prototype",
+          "source_url": "https://news.clearancejobs.com/2025/04/23/darpa-taps-bae-systems-for-46m-in-cutting-edge-tech-expansion/",
+          "pub_date": "2025-04-23",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Link 16 MIDS terminals and military GPS receivers fielded across U.S. and allied platforms.",
+          "evidence": "RECALL - not re-verified this session, confidence HIGH.",
+          "source_url": ""
+        },
+        {
+          "what": "DIRECT planning tool transitioning to USAF from DARPA RSPACE.",
+          "evidence": "Company feature article; extent of operational use not verified. Confidence LOW-MEDIUM.",
+          "source_url": "https://www.baesystems.com/en/feature/bae-systems--mission-planning-autonomy-software-transitions-from-darpa-to-u-s--air-force"
+        }
+      ],
+      "exercises_demos": [
+        {"event": "DARPA program demonstrations (MINC, Oversight, RSPACE)", "year": "2023-2025", "note": "Research demonstrations; operational exercise participation not captured.", "source_url": "https://news.clearancejobs.com/2025/04/23/darpa-taps-bae-systems-for-46m-in-cutting-edge-tech-expansion/"}
+      ],
+      "integration_partners": ["Collins Aerospace (Data Link Solutions JV; RECALL)", "DARPA", "USAF", "NGA (GXP)", "Space Development Agency (Space & Mission Systems; RECALL)"],
+      "apis_sdks_open_interfaces": "GXP offers plugin/SDK extensibility for geospatial workflows (RECALL, MEDIUM); Link 16 and M-Code are standards-based. No public NGC2/JADC2-oriented SDK identified. Public evidence insufficient.",
+      "security_classification_requirements": "Operates under SSA/FOCI mitigation; EW, M-Code and Link 16 crypto require Type 1/ITAR handling; foreign-parent structure is itself a case study in FOCI mitigation relevant to the founders' situation (requires specialist legal review).",
+      "allied_international_activity": "Parent is UK-based; U.S. arm sells Link 16/GPS to allies via FMS; UK BAE runs separate C4ISR lines (e.g., Royal Navy combat systems) not covered here.",
+      "technical_differentiator": "Deep bench in EW, assured PNT and data links, plus FAST Labs as a repeat DARPA performer for network autonomy, tracking and C2 planning research.",
+      "suspected_moat": "Standards-body positions (Link 16), NSA/ITAR-gated products, DARPA research pipeline and long-lived platform content. INFERENCE, confidence MEDIUM-HIGH.",
+      "major_competitors": ["Collins Aerospace/RTX (partner and competitor)", "L3Harris (EW, comms)", "Northrop Grumman (EW, C2)", "Maxar/Esri (geospatial)", "Anduril and startups in autonomy/tracking"],
+      "obvious_weaknesses": "No prominent U.S. C2 program-of-record prime role; research awards are small and transition uncertain; FOCI structure adds governance overhead. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "Strong for datalinks/GPS/EW (fielded hardware, RECALL); weak/unknown for C2 software (DIRECT transition status unclear).",
+      "evidence_repeat_procurement": "Repeat DARPA phase awards (Phase 1 to Phase 2 on MINC and Oversight) indicate research continuity, not procurement. Hardware repeat buys are RECALL.",
+      "evidence_prototype_to_production": "DIRECT is the only documented research-to-service transition found (company-reported). Public evidence insufficient for others.",
+      "whitespace_cells": [
+        {"chain_step": "TRANSPORT", "echelon": "individual_platform"},
+        {"chain_step": "TRANSPORT", "echelon": "joint"},
+        {"chain_step": "PROCESS", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "theater"},
+        {"chain_step": "COLLECT", "echelon": "individual_platform"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): FAST Labs work implies AI/ML tracking research, network control algorithms and formal-methods toolchains; GXP is a desktop/enterprise C++ product line. Confidence LOW.",
+      "confidence_notes": "DARPA awards verified via Tier 3 trade press (2025) with approximate dates. Product lines (Link 16, GPS, GXP, EW) are RECALL. No U.S. C2 program-of-record prime award for BAE found in 2025-2026 searches; absence is not proof of absence.",
+      "sources": [
+        {"url": "https://militaryembedded.com/comms/communications/tactical-network-control-development-contract-from-darpa-won-by-bae-systems", "title": "Tactical network control development contract from DARPA won by BAE Systems", "pub_date": "2025", "type": "independent"},
+        {"url": "https://militaryembedded.com/avionics/software/software-security-contract-signed-between-bae-systems-and-darpa", "title": "Software security contract signed between BAE Systems and DARPA", "pub_date": "2025", "type": "independent"},
+        {"url": "https://www.executivebiz.com/articles/bae-systems-darpa-autonomous-tracking", "title": "BAE Systems Secures DARPA Contract for Autonomous Tracking", "pub_date": "2025", "type": "independent"},
+        {"url": "https://news.clearancejobs.com/2025/04/23/darpa-taps-bae-systems-for-46m-in-cutting-edge-tech-expansion/", "title": "DARPA Taps BAE Systems for $46M in Cutting-Edge Tech Expansion", "pub_date": "2025-04-23", "type": "independent"},
+        {"url": "https://www.baesystems.com/en/feature/bae-systems--mission-planning-autonomy-software-transitions-from-darpa-to-u-s--air-force", "title": "BAE Systems' mission planning autonomy software transitions from DARPA to U.S. Air Force", "pub_date": "n/a", "type": "company"},
+        {"url": "https://www.baesystems.com/en-us/productfamily/c4isr-systems", "title": "C4ISR Systems | BAE Systems | United States", "pub_date": "n/a", "type": "company"},
+        {"url": "https://www.baesystems.com/en-us/who-we-are/electronic-systems/c4isr", "title": "C4ISR - Electronic Systems", "pub_date": "n/a", "type": "company"}
+      ]
+    },
+    {
+      "name": "Sierra Nevada Corporation",
+      "aka": "SNC; SNC Mission Solutions and Technologies; (Sierra Space is a separate spun-out affiliate)",
+      "founding_year": 1963,
+      "headquarters": "Sparks, Nevada, USA",
+      "public_private": "private",
+      "employee_count_approx": "~5,000 (RECALL, confidence LOW-MEDIUM)",
+      "founders": ["Founded 1963; acquired and led since 1994 by Fatih Ozmen and Eren Ozmen (owners); original 1963 founders not verified this session"],
+      "founder_backgrounds": "Fatih Ozmen (electrical engineer, joined SNC in 1981) and Eren Ozmen (business/finance) bought the company in 1994 and grew it via acquisitions. RECALL, confidence MEDIUM.",
+      "total_disclosed_funding_usd": "N/A - privately held, family-owned; no disclosed venture funding.",
+      "latest_valuation": "Not public. Public evidence insufficient.",
+      "major_investors": ["Ozmen family (owners)"],
+      "c4isr_products": [
+        {
+          "name": "HADES (High Accuracy Detection and Exploitation System) lead system integrator",
+          "description": "Army program of record for large-cabin business-jet (Global 6500) aerial ISR; SNC selected LSI Aug 2024 under a 12-year IDIQ with $991.3M ceiling and $93.5M initial award; SNC self-procured aircraft ahead of need (fourth aircraft, 2026). FACT (sncorp.com, DefenseScoop, army.mil).",
+          "input_process_output_user": "Inputs: onboard SIGINT, radar (GMTI/SAR), EO/IR sensor collections. Process: onboard mission system and PED, connectivity to ground (TITAN). Output: deep-sensing intelligence and targeting data. Users: Army theater/corps intelligence and MDTF/fires cells."
+        },
+        {
+          "name": "E-4C Survivable Airborne Operations Center (SAOC)",
+          "description": "USAF nuclear command, control and communications airborne C2 platform replacing E-4B; contract awarded April 2024 with ~$13B ceiling. RECALL - not re-verified this session, confidence HIGH.",
+          "input_process_output_user": "Inputs: strategic communications and situational data. Process: hardened airborne command post integration. Output: survivable national/strategic C2. Users: USAF, national leadership, USSTRATCOM."
+        },
+        {
+          "name": "TRAX interoperability/translation software",
+          "description": "Software that translates between disparate C2 and datalink formats to connect legacy and new systems; used in USAF/SOCOM integration efforts. RECALL - not re-verified this session, confidence MEDIUM.",
+          "input_process_output_user": "Inputs: messages from heterogeneous C2/datalink systems. Process: protocol/message translation and routing. Output: interoperable data flows. Users: joint/SOF C2 integrators."
+        },
+        {
+          "name": "TITAN team member (Palantir-led)",
+          "description": "SNC listed among Palantir's TITAN industry team (Army tactical ground station). RECALL - not re-verified this session, confidence MEDIUM."
+        }
+      ],
+      "exact_problem_solved": "Integrating aircraft-based ISR and airborne C2 platforms for U.S. services (HADES deep sensing; SAOC survivable C2), and gluing disparate C2 systems together via translation software.",
+      "primary_users": ["Army MI and multi-domain task forces (HADES)", "USAF/national leadership (SAOC)", "Joint/SOF C2 integrators (TRAX)"],
+      "primary_buyers": ["Army PEO IEW&S / PM Fixed Wing (HADES)", "USAF (SAOC)", "SOCOM, AFRL", "Army TITAN via Palantir (sub)"],
+      "technical_layer": ["COLLECT", "TRANSPORT", "PROCESS", "IDENTIFY", "DISSEMINATE", "DECIDE"],
+      "mission_layer": ["ISR / deep sensing", "strategic NC3", "joint interoperability", "fires (targeting support)"],
+      "segment_ids": ["S03", "S04", "S01", "S08", "S05"],
+      "hw_sw_mix": "both - aircraft mission-system integration (hardware-heavy) with interoperability software (TRAX).",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "HADES lead system integrator IDIQ",
+          "customer": "U.S. Army",
+          "contracting_org": "Army Contracting Command (PEO IEW&S; RECALL)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$991.3 million (12-year)",
+          "obligated": "Not verified",
+          "awarded_value": "Initial award $93.5 million",
+          "funded_amount": "Not verified",
+          "task_orders": "Initial task order for prototype aircraft integration",
+          "date": "2024-08-22",
+          "period_of_performance": "12 years",
+          "prime_or_sub": "prime (LSI)",
+          "prototype_or_production": "prototype aircraft leading to program of record fleet",
+          "source_url": "https://defensescoop.com/2024/08/22/army-hades-snc-contract-award/",
+          "pub_date": "2024-08-22",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "E-4C Survivable Airborne Operations Center",
+          "customer": "U.S. Air Force",
+          "contracting_org": "USAF (Air Force Life Cycle Management Center; RECALL)",
+          "vehicle_type": "FAR",
+          "ceiling": "~$13.08 billion (RECALL)",
+          "obligated": "Not verified",
+          "awarded_value": "RECALL: initial obligation reported ~$59M at award (LOW confidence)",
+          "funded_amount": "Not verified",
+          "task_orders": "N/A",
+          "date": "2024-04 (RECALL)",
+          "period_of_performance": "Through mid-2030s (RECALL)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "development and production",
+          "source_url": "https://en.wikipedia.org/wiki/SNC_E-4C_Survivable_Airborne_Operations_Center",
+          "pub_date": "n/a",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "HADES prototype aircraft in integration; second jet delivered for integration/modernization; fourth aircraft procured by SNC (2026).",
+          "evidence": "SNC releases; program is pre-fielding. Confidence HIGH on status, LOW on operational use.",
+          "source_url": "https://www.sncorp.com/news-archive/snc-invests-in-the-future-of-the-army-procures-fourth-hades-aircraft"
+        },
+        {
+          "what": "Prior Army aerial ISR demonstrators (e.g., ATHENA-S) and SOCOM/USAF ISR aircraft integrations by SNC.",
+          "evidence": "RECALL - not re-verified this session, confidence LOW-MEDIUM.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {"event": "Army aerial ISR transformation (HADES prototype flights)", "year": "2025-2026", "note": "Company reports executing ahead of schedule; independent verification not found.", "source_url": "https://www.sncorp.com/news-archive/snc-takes-delivery-of-second-hades-jet-for-integration-modernization/"},
+        {"event": "ABMS onramps / JADC2 demos with TRAX", "year": "2020-2022", "note": "RECALL - not re-verified this session, confidence LOW.", "source_url": ""}
+      ],
+      "integration_partners": ["Bombardier (Global 6500 airframes)", "Palantir (TITAN team)", "Army MDSS/TLS/TSIGS programs (interfaces)", "USAF SAOC suppliers (Collins, Boeing 747-8 airframes; RECALL)"],
+      "apis_sdks_open_interfaces": "TRAX marketed as an open translation layer; HADES follows Army MOSA/open-architecture direction. No public SDK identified. Public evidence insufficient.",
+      "security_classification_requirements": "HADES (SIGINT) and SAOC (NC3) demand TS/SCI and special-access handling; foreign-national involvement effectively excluded on these programs; specialist review required.",
+      "allied_international_activity": "Limited public evidence of allied C2 work; SNC has international aircraft integration customers (RECALL, LOW).",
+      "technical_differentiator": "Proven rapid aircraft mission-system integration and willingness to self-fund airframes to accelerate Army ISR fielding; niche interoperability software (TRAX).",
+      "suspected_moat": "LSI positions on HADES and SAOC, SCI facilities, and private ownership enabling capital risk-taking. INFERENCE, confidence MEDIUM-HIGH.",
+      "major_competitors": ["L3Harris (ISR aircraft, ARES)", "Leidos (ARTEMIS)", "MAG Aerospace", "Boeing/Northrop (airborne C2 platforms)"],
+      "obvious_weaknesses": "Exposure to airframe supply and program schedule risk; smaller software presence; private company limits transparency for partnerships. INFERENCE, confidence MEDIUM.",
+      "evidence_user_adoption": "HADES not yet fielded; SAOC in development. Adoption evidence is contract-based rather than operational (MEDIUM).",
+      "evidence_repeat_procurement": "HADES IDIQ structure allows repeat task orders; SNC has won successive Army ISR aircraft awards (RECALL). Confidence MEDIUM.",
+      "evidence_prototype_to_production": "HADES is transitioning from prototype aircraft to a program-of-record fleet under the same IDIQ; production quantities not verified.",
+      "whitespace_cells": [
+        {"chain_step": "COLLECT", "echelon": "theater"},
+        {"chain_step": "PROCESS", "echelon": "theater"},
+        {"chain_step": "DECIDE", "echelon": "joint"},
+        {"chain_step": "TRANSPORT", "echelon": "joint"}
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no job-posting search performed this session): HADES integration implies mission-system middleware, sensor interface software and airworthiness-certified avionics integration; TRAX implies message-translation engines for Link 16/CoT/VMF. Confidence LOW.",
+      "confidence_notes": "HADES award facts (Aug 2024) verified via DefenseScoop, army.mil and SNC releases; 2026 fourth-aircraft procurement seen via SNC release title. SAOC figures and TRAX/TITAN roles are RECALL.",
+      "sources": [
+        {"url": "https://defensescoop.com/2024/08/22/army-hades-snc-contract-award/", "title": "Sierra Nevada lands contract for Army's fleet of next-generation spy planes", "pub_date": "2024-08-22", "type": "independent"},
+        {"url": "https://www.sncorp.com/news-archive/snc-wins-9913m-contract-to-deliver-us-army-hades-jets/", "title": "SNC Wins $991.3M Contract to Deliver U.S. Army HADES Jets", "pub_date": "2024-08", "type": "company"},
+        {"url": "https://www.army.mil/article/279124/army_selects_sierra_nevada_corporation_as_lead_system_integrator_for_its_high_accuracy_detection_and_exploitation_system", "title": "Army selects Sierra Nevada Corporation as lead system integrator for HADES", "pub_date": "2024-08", "type": "gov"},
+        {"url": "https://www.sncorp.com/news-archive/snc-invests-in-the-future-of-the-army-procures-fourth-hades-aircraft", "title": "SNC Invests in the Future of the Army, Procures Fourth HADES Aircraft", "pub_date": "2026", "type": "company"},
+        {"url": "https://www.sncorp.com/news-archive/snc-takes-delivery-of-second-hades-jet-for-integration-modernization/", "title": "SNC Takes Delivery of Second HADES Jet for Integration & Modernization", "pub_date": "2025", "type": "company"},
+        {"url": "https://militaryembedded.com/radar-ew/sensors/us-army-chooses-sierra-nevada-as-lead-integrator-for-isr-transformation", "title": "U.S. Army chooses Sierra Nevada as lead integrator for ISR transformation", "pub_date": "2024-08", "type": "independent"},
+        {"url": "https://en.wikipedia.org/wiki/SNC_E-4C_Survivable_Airborne_Operations_Center", "title": "SNC E-4C Survivable Airborne Operations Center", "pub_date": "n/a", "type": "independent"}
+      ]
+    }
+  ],
+  "search_log": [
+    {"query": "Army NGC2 \"Next Generation Command and Control\" Lockheed Martin 25th Infantry Division prototype award 2025 2026", "useful": true},
+    {"query": "Northrop Grumman IBCS 2025 2026 contract Army production Poland \"Integrated Battle Command System\"", "useful": true},
+    {"query": "Raytheon OR \"Collins Aerospace\" RTX command and control JADC2 contract award 2025 2026 site:breakingdefense.com OR site:defensescoop.com OR site:c4isrnet.com", "useful": false},
+    {"query": "L3Harris tactical radio contract Army 2025 2026 manpack leader radio award", "useful": true},
+    {"query": "\"General Dynamics Mission Systems\" contract award 2025 2026 command and control OR network OR TITAN OR \"Mounted Family\"", "useful": true},
+    {"query": "\"Sierra Nevada Corporation\" 2025 2026 contract TITAN OR ISR OR \"command and control\" OR HADES award", "useful": true},
+    {"query": "\"Northrop Grumman\" 2025 2026 JADC2 OR \"DA/RC\" OR \"battle management\" OR BMC3 OR \"Forward Area Air Defense\" contract award command and control", "useful": true},
+    {"query": "\"BAE Systems\" 2025 2026 US Army OR \"Air Force\" OR DARPA contract C4ISR OR \"command and control\" OR \"Link 16\" OR \"FAST Labs\" OR \"battle management\" award", "useful": true},
+    {"query": "Raytheon OR \"Collins Aerospace\" 2025 2026 \"command and control\" OR \"battle management\" OR TITAN OR \"tactical radio\" OR \"Solipsys\" contract award Army OR \"Air Force\" OR \"Space Force\"", "useful": true},
+    {"query": "\"Lockheed Martin\" 2025 2026 C2BMC OR JADC2 OR \"DIAMONDShield\" OR \"Space Force\" OR \"Air Force\" \"command and control\" contract award OR modification", "useful": true},
+    {"query": "L3Harris 2025 2026 ISR OR \"AMORPHOUS\" OR \"resilient network\" OR \"TITAN\" OR \"Space Development Agency\" OR \"WESCAM\" contract award command and control", "useful": true},
+    {"query": "\"General Dynamics Mission Systems\" 2025 2026 TACLANE OR \"cross domain\" OR NGC2 OR \"tactical network\" OR \"Army\" OR \"Space Development Agency\" award OR delivery", "useful": true}
+  ],
+  "notes": "Budget: 12 WebSearch calls, 2 WebFetch calls (both egress-blocked: l3harris.com and gdmissionsystems.com), no usaspending/sam.gov pulls, so obligated-vs-ceiling figures are largely unverified and labeled. Key 2025-2026 facts verified: Lockheed NGC2 $26M OTA for 25th ID (Sept 2025) with Lightning Surge 1/2 (Jan-Feb 2026); Northrop IBCS LRIP deliveries (July 2025), FRP transition (Nov 2025), Poland FOC (Dec 2025), $481M AMTC software OTA, $99.1M NAVAIR Providence DBMC2 MVP contract; L3Harris ~$300M HMS FRP orders (Jan 2025), $84M NGC2 PRC-158C orders (June 2026), $843M SDA T3 Tracking (Dec 2025); GDMS CMFF prototype OTA (Oct 2025, value not captured) and $491.6M SDA GMI (Sept 2024); RTX NATO EWPBM (Sept 2025), ARC-210 $351.2M mod, LTAMDS mods; BAE DARPA MINC/Oversight/PROVERS awards (2025); SNC HADES $991.3M ceiling/$93.5M initial (Aug 2024) and fourth aircraft (2026). Gaps: CMFF dollar value; exact date of Northrop $481M OTA; L3Harris NGC2 selection role; RTX $39M USAF air-defense C2 prototype scope/date; BAE DIRECT transition date; SNC SAOC and TRAX details (RECALL). Implication for founders: primes dominate FUSE/DECIDE at theater and battalion-brigade air/missile defense, and TRANSPORT across echelons; the software-defined data layer at division/corps is contested between primes (Lockheed) and software-native firms (Anduril/Palantir), and primes rely on partners (Raft, Accelint, Palantir, Anduril) for modern software components, which is where small-team entry via subcontracting is most plausible. Founder immigration/ITAR/FOCI constraints require specialist legal review before pursuing any prime partnership."
+}

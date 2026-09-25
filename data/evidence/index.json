@@ -1,0 +1,4968 @@
+{
+"findings": [
+{
+"id": "E01-F1",
+"sweep": "E01",
+"title": "GAO-25-106454: six years into CJADC2, DOD still has no framework to guide investments or track progress; services build C2 in isolation",
+"segment_ids": [
+"S01",
+"S03"
+],
+"chain_steps": [
+"CJADC2 launched 2019",
+"GAO-23-105495 Jan 2023 found details undefined",
+"GAO-25-106454 Apr 2025 finds no framework, isolated service efforts",
+"DOD concurred with 2 of 3 recs, partially with 1"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-106454",
+"pub_date": "2025-04-08",
+"startup_relevance": "Strongest single public statement that the joint C2 data-integration problem remains unsolved and fragmented by service; a startup selling integration/translati"
+},
+{
+"id": "E01-F2",
+"sweep": "E01",
+"title": "GAO-25-106454: overly restrictive data classification is a 'significant hindrance' to sharing C2 data, and no DOD entity owns the fix",
+"segment_ids": [
+"S03",
+"S06",
+"S09"
+],
+"chain_steps": [
+"Data classified at system level",
+"Cross-domain sharing blocked",
+"No owner for classification reform",
+"GAO rec 3 (Apr 2025) open"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-106454",
+"pub_date": "2025-04-08",
+"startup_relevance": "Points to demand for classification-aware data handling, automated tagging/downgrade workflows and cross-domain solutions; however, CDS is an NSA/NCDSMO-accredi"
+},
+{
+"id": "E01-F3",
+"sweep": "E01",
+"title": "GAO-25-106454: no mechanism to share lessons learned from CJADC2 experimentation, risking duplicative efforts",
+"segment_ids": [
+"S01",
+"S14"
+],
+"chain_steps": [
+"Service experiments (Project Convergence, Overmatch, ABMS, GIDE) run separately",
+"Lessons not consolidated",
+"GAO rec 2 (Apr 2025)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-106454",
+"pub_date": "2025-04-08",
+"startup_relevance": "Suggests an unmet need for experimentation data capture, after-action analytics and cross-exercise knowledge management; low-barrier software niche but the buye"
+},
+{
+"id": "E01-F4",
+"sweep": "E01",
+"title": "GAO-23-105495: JADC2 details undefined; the JADC2 Cross-Functional Team lacked personnel and authority to direct other offices",
+"segment_ids": [
+"S01"
+],
+"chain_steps": [
+"JADC2 strategy signed 2021, summary released Mar 2022",
+"GAO Jan 2023: systems contributing undefined, CFT under-resourced",
+"GAO Apr 2025: still no framework (persists)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-23-105495",
+"pub_date": "2023-01-13",
+"startup_relevance": "Evidence that the joint-level 'customer' for JADC2 integration has weak authority and budget; startups should expect service-level (Army/USAF/USN) rather than j"
+},
+{
+"id": "E01-F5",
+"sweep": "E01",
+"title": "GAO-23-105495: ABMS re-scoped into discrete efforts (Capability Release 1 for F-35-to-C2 connectivity) with prototypes planned for 2024",
+"segment_ids": [
+"S01",
+"S04"
+],
+"chain_steps": [
+"ABMS 2019 broad concept",
+"GAO-20-389 Apr 2020 no plan",
+"2021-2023 narrowed to Capability Releases / DAF Battle Network",
+"CR1 prototypes planned 2024"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-23-105495",
+"pub_date": "2023-01-13",
+"startup_relevance": "Illustrates the pattern of large C2 concepts being cut down into narrow, gateway-style deliverables (platform-to-C2 data links); gateway/translation products ar"
+},
+{
+"id": "E01-F6",
+"sweep": "E01",
+"title": "GAO-20-389: Air Force had no complete plan, cost estimate or affordability analysis for ABMS; management structure and decision authority not formalized",
+"segment_ids": [
+"S01"
+],
+"chain_steps": [
+"ABMS conceived 2018-19 as JSTARS recap replacement",
+"GAO May 2019 testimony: capabilities undetermined",
+"GAO Apr 2020: no plan/cost/affordability",
+"Congress fenced ABMS funds FY21 (context, not verified here)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-20-389",
+"pub_date": "2020-04-16",
+"startup_relevance": "Shows how oversight forces 'internet of military things' visions into accountable, narrowly-scoped programs; startups pitching broad 'battle network' platforms "
+},
+{
+"id": "E01-F7",
+"sweep": "E01",
+"title": "GAO-19-456T: in 2019 the Air Force was still determining what capabilities ABMS should provide",
+"segment_ids": [
+"S01"
+],
+"chain_steps": [
+"ABMS start 2018",
+"GAO-19-456T May 2019",
+"GAO-20-389 Apr 2020",
+"GAO-23-105495 Jan 2023"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-19-456t",
+"pub_date": "2019-05-02",
+"startup_relevance": "Baseline for the 2019-2025 persistence chain on air-domain battle management requirements instability."
+},
+{
+"id": "E01-F8",
+"sweep": "E01",
+"title": "DODIG-2025-126: DoD IG evaluated the CJADC2 line of effort for modernizing mission partner information sharing (report released July 18, 2025); findings not publicly retrievable here",
+"segment_ids": [
+"S06",
+"S01"
+],
+"chain_steps": [
+"Project announced 2024-07-15",
+"Report released 2025-07-18",
+"Findings: public evidence insufficient (site unreachable from this environment)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.dodig.mil/Reports/Audits-and-Evaluations/Article/4250222/evaluation-of-a-line-of-effort-in-the-dods-implementation-of-the-combined-joint/",
+"pub_date": "2025-07-18",
+"startup_relevance": "Existence of a dedicated IG evaluation signals sustained oversight interest in MPE; a downstream agent with dodig.mil access should extract the findings, since "
+},
+{
+"id": "E01-F9",
+"sweep": "E01",
+"title": "GAO-20-146: three prior space C2 programs ran late and over budget; legacy SPADOC operates on a mainframe discontinued in 1998; Space C2 adopted Agile before DOD guidance existed",
+"segment_ids": [
+"S05",
+"S13"
+],
+"chain_steps": [
+"JMS/ISC2 predecessors failed (per GAO)",
+"Space C2 program 2018 Agile pivot",
+"GAO-20-146 Oct 2019",
+"GAO-22-104685 Dec 2021",
+"GAO-23-105920 Jun 2023: SPADOC still in use"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-20-146",
+"pub_date": "2019-10-30",
+"startup_relevance": "Space domain awareness C2 is a documented decade-plus failure zone; commercial SSA data/analytics vendors have entered, but the core C2 replacement is a Space F"
+},
+{
+"id": "E01-F10",
+"sweep": "E01",
+"title": "GAO-22-104685: 'for decades' space C2 efforts have gone over budget, been late and left key capabilities undelivered; annual reporting could be enhanced",
+"segment_ids": [
+"S05"
+],
+"chain_steps": [
+"Congress mandates annual reports 2019",
+"GAO Dec 2021 reporting gaps",
+"GAO Jun 2023 persistent delays"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-22-104685",
+"pub_date": "2021-12-22",
+"startup_relevance": "Persistence evidence for S05; buyer (USSF/Space Systems Command) has a congressional reporting burden that favors vendors who can show measurable increments."
+},
+{
+"id": "E01-F11",
+"sweep": "E01",
+"title": "GAO-23-105920: Space C2 replacement reports lack context and consistent metrics; ~90 FTE on ATLAS/messaging in mid-2022; users still relied on SPADOC as of June 2023",
+"segment_ids": [
+"S05",
+"S13"
+],
+"chain_steps": [
+"ATLAS development in Agile increments",
+"PI 15 May-Jul 2022: ~90 FTE",
+"Jun 2023 SPADOC still operational",
+"Later status: public evidence insufficient here"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-23-105920",
+"pub_date": "2023-06-08",
+"startup_relevance": "Agile-program measurement and reporting is itself a pain point GAO repeatedly flags; tooling that turns sprint data into oversight-grade metrics has a plausible"
+},
+{
+"id": "E01-F12",
+"sweep": "E01",
+"title": "GAO-21-105298 and GAO-23-105611: DOD stood up the software acquisition pathway but had not collected data on it, and further actions were needed for modernization",
+"segment_ids": [
+"S13"
+],
+"chain_steps": [
+"DODI 5000.87 software pathway Oct 2020",
+"GAO Sep 2021: no data collected",
+"GAO Jul 2023: weapon programs still waterfall",
+"DoD CIO Mar 2025 DevSecOps study"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-21-105298",
+"pub_date": "2021-09-30",
+"startup_relevance": "The software pathway (DODI 5000.87) is the most startup-friendly acquisition route; GAO's finding that DOD lacked data on it implies immature but real adoption."
+},
+{
+"id": "E01-F13",
+"sweep": "E01",
+"title": "GAO-23-105867: DOD weapon programs largely have not implemented Agile; still using waterfall despite 2020 pathway reforms",
+"segment_ids": [
+"S13",
+"S01"
+],
+"chain_steps": [
+"2020 adaptive acquisition framework",
+"GAO Jul 2023 waterfall persists",
+"GAO IT assessments 2024-2025: 11 of 24 business programs Agile"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-23-105867",
+"pub_date": "2023-07-20",
+"startup_relevance": "C2 software embedded in weapon programs is still procured waterfall-style; a startup's fast iteration is a mismatch with the program office's oversight cadence "
+},
+{
+"id": "E01-F14",
+"sweep": "E01",
+"title": "GAO-25-107649 (June 2025): of 24 major DOD IT business programs ($10.9B FY23-25), 2 had no cybersecurity strategy, 4 had no zero-trust plan for the 2027 deadline, and only 11 used Agile",
+"segment_ids": [
+"S09",
+"S13"
+],
+"chain_steps": [
+"DoD Zero Trust Strategy Nov 2022 (target FY2027)",
+"GAO Jul 2024 (GAO-24-106912): metrics and cyber gaps",
+"GAO Jun 2025: 4 programs no ZT plan",
+"WaPo Sep 2026: modernization debt"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-107649",
+"pub_date": "2025-06-12",
+"startup_relevance": "Zero-trust compliance tooling and continuous-monitoring products have a dated, mandated demand signal (FY2027); but the buyers are large IT programs served by i"
+},
+{
+"id": "E01-F15",
+"sweep": "E01",
+"title": "GAO-24-106912 (July 2024): $9.1B on 21 IT business programs FY22-24; software metrics weak and cybersecurity/reporting gaps continued",
+"segment_ids": [
+"S09",
+"S13"
+],
+"chain_steps": [
+"FY2022 NDAA zero trust direction",
+"GAO Jul 2024",
+"GAO Jun 2025 persists"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-24-106912",
+"pub_date": "2024-07-11",
+"startup_relevance": "Confirms multi-year persistence of the same software-measurement and cyber-planning gaps."
+},
+{
+"id": "E01-F16",
+"sweep": "E01",
+"title": "GAO-23-106247 (Sept 2023): DOD committed ~$3B to cloud contracts in FY2022 but cannot track data egress fees department-wide (JWCC context)",
+"segment_ids": [
+"S10"
+],
+"chain_steps": [
+"JEDI canceled 2021",
+"JWCC awarded Dec 2022 (4 CSPs)",
+"GAO Sep 2023 egress-fee tracking gap"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-23-106247",
+"pub_date": "2023-09-12",
+"startup_relevance": "Cloud cost visibility/FinOps for DOD tenants is a concrete, unglamorous gap; hyperscaler partners and FinOps vendors already compete, so differentiation would n"
+},
+{
+"id": "E01-F17",
+"sweep": "E01",
+"title": "GAO-23-106290 (Sept 2023): restrictive software-license practices (e.g., extra fees to run software on third-party clouds) limit DOD cloud migration",
+"segment_ids": [
+"S10",
+"S13"
+],
+"chain_steps": [
+"Cloud-first mandates",
+"Vendor licensing restrictions",
+"GAO Sep 2023 rec for guidance"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-23-106290",
+"pub_date": "2023-09-12",
+"startup_relevance": "Official documentation of vendor lock-in as a live DOD problem; a startup with permissive licensing and cloud-portable deployment can use this as a selling poin"
+},
+{
+"id": "E01-F18",
+"sweep": "E01",
+"title": "GAO-25-106931 (Jan 2025): only 14 of 20 programs implemented MOSA to some extent; none analyzed MOSA costs vs. benefits; 14 recommendations; GAO official says MOSA implementation still lagging (June 2026)",
+"segment_ids": [
+"S13",
+"S01",
+"S02"
+],
+"chain_steps": [
+"10 USC 4401 MOSA requirement 2016-2019",
+"GAO Jan 2025: planning gaps",
+"GAO official Jun 2026: still lagging",
+"Army NGC2 and interceptor programs mandate MOSA (2025-2026 press)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-106931",
+"pub_date": "2025-01-22",
+"startup_relevance": "Open-interface compliance is both a policy tailwind and a trap: programs say they want MOSA but rarely enforce it, and incumbents 'resist sharing interface spec"
+},
+{
+"id": "E01-F19",
+"sweep": "E01",
+"title": "GAO-21-68 and GAO-22-104695: Cyber Command's Joint Cyber Warfighting Architecture had no defined interoperability goals (2020); by 2022 governance improved but metrics still lacking",
+"segment_ids": [
+"S09",
+"S03"
+],
+"chain_steps": [
+"JCWA concept 2019",
+"GAO Nov 2020: no interoperability goals",
+"GAO Mar 2022: governance fixed, metrics missing"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-21-68",
+"pub_date": "2020-11-19",
+"startup_relevance": "A second, non-JADC2 example of the same failure mode (architecture-by-vision without interoperability definitions); recurring across domains, which supports dem"
+},
+{
+"id": "E01-F20",
+"sweep": "E01",
+"title": "GAO-21-99 (Jan 2021): close-air-support digital communications and friendly-force tracking had guidance gaps",
+"segment_ids": [
+"S04",
+"S02"
+],
+"chain_steps": [
+"Digitally-aided CAS initiatives",
+"GAO Jan 2021 guidance gaps"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-21-99",
+"pub_date": "2021-01-21",
+"startup_relevance": "Blue-force tracking / digitally-aided fires remains a documented interoperability seam between air and ground C2; relevant to sensor-to-shooter startups."
+},
+{
+"id": "E01-F21",
+"sweep": "E01",
+"title": "GAO-21-320SP (May 2021): alternative PNT is not prioritized, has no central program office, unclear requirements, and closed proprietary PNT systems leave 'few opportunities to integrate' new sources",
+"segment_ids": [
+"S07",
+"S02"
+],
+"chain_steps": [
+"GPS jamming demonstrated in Ukraine/Middle East",
+"GAO May 2021: alt-PNT deprioritized, proprietary receivers",
+"GAO Aug 2022 public report: receivers cannot be upgraded affordably",
+"GAO Sep 2024: M-code delays continue"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-21-320sp",
+"pub_date": "2021-05-10",
+"startup_relevance": "Software-defined PNT fusion engines conforming to DOD's open architecture are an entry point for a small team, but the market is hardware-adjacent, export-contr"
+},
+{
+"id": "E01-F22",
+"sweep": "E01",
+"title": "GAO August 2022 PNT report (public version of an April 2022 report): 'even with these upgrades, vulnerabilities will remain'; current receivers 'cannot be upgraded affordably'",
+"segment_ids": [
+"S07"
+],
+"chain_steps": [
+"GAO April 2022 sensitive report",
+"GAO August 2022 public version",
+"European Security May 2025 recap"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://app.bigdata.com/documents/A25A25BB74B0A0B608729B5688F4A9FF",
+"pub_date": "2025-05-05",
+"startup_relevance": "Reinforces the open-architecture PNT receiver/fusion opportunity and the retrofit problem for the installed base."
+},
+{
+"id": "E01-F23",
+"sweep": "E01",
+"title": "GAO-24-106841 (Sept 2024): GPS M-code delays continue across ground, space and user-equipment segments",
+"segment_ids": [
+"S07"
+],
+"chain_steps": [
+"OCX ground segment delays (long-running)",
+"MGUE user equipment",
+"GAO Sep 2024 all segments challenged"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-24-106841",
+"pub_date": "2024-09-09",
+"startup_relevance": "Persistence evidence for PNT resilience demand through 2024; a startup cannot fix M-code but can sell around it (alt-PNT, jamming detection, PNT assurance softw"
+},
+{
+"id": "E01-F24",
+"sweep": "E01",
+"title": "GAO-21-64 / GAO-21-440T: DOD electromagnetic spectrum operations suffer governance and oversight gaps; 'U.S. risks losing control of the battlefield'; Russia's EW forces 'world class'",
+"segment_ids": [
+"S08",
+"S02"
+],
+"chain_steps": [
+"2013 and 2017 EMS strategies unimplemented",
+"Oct 2020 EMS Superiority Strategy",
+"GAO Dec 2020 governance gaps",
+"GAO Jun 2026 spectrum coordination report (narrower scope)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-21-64",
+"pub_date": "2020-12-10",
+"startup_relevance": "EMSO planning/management software (EMBM) is an underdeveloped C2 sub-market with documented leadership gaps; however, much of the relevant data is classified an"
+},
+{
+"id": "E01-F25",
+"sweep": "E01",
+"title": "GAO AI series (2022-2023): DOD AI acquisition hampered by long acquisition processes, staff shortages and insufficient usable training data; strategies and inventory incomplete; no department-wide AI acquisition guidance",
+"segment_ids": [
+"S11",
+"S03"
+],
+"chain_steps": [
+"JAIC 2018",
+"CDAO stood up 2022",
+"GAO Feb/Mar 2022 strategy and inventory gaps",
+"GAO Jun 2023 acquisition guidance gap",
+"GAO Dec 2023 workforce gap"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-22-104765",
+"pub_date": "2022-02-17",
+"startup_relevance": "The 'not enough usable data' finding is the root cause that data-labeling, data-fabric and synthetic-data startups sell against; IP/data-rights clauses are the "
+},
+{
+"id": "E01-F26",
+"sweep": "E01",
+"title": "GAO-24-105645 (Dec 2023): DOD cannot fully identify its AI workforce or which positions need AI skills",
+"segment_ids": [
+"S11"
+],
+"chain_steps": [
+"CDAO created 2022",
+"GAO Dec 2023 workforce gap",
+"DoD AI strategy Jan 2026 'AI-first' push"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-24-105645",
+"pub_date": "2023-12-14",
+"startup_relevance": "Skills scarcity inside government favors vendors that deliver turnkey analytics rather than toolkits requiring in-house data scientists."
+},
+{
+"id": "E01-F27",
+"sweep": "E01",
+"title": "GAO April 2026: DOD and three other agencies are not systematically collecting lessons learned from AI acquisitions (13 acquisitions, 44 contracts reviewed); all four recommendations concurred",
+"segment_ids": [
+"S11"
+],
+"chain_steps": [
+"OMB AI acquisition guidance",
+"GAO Apr 2026: no lessons-learned collection",
+"4 recs concurred"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://app.bigdata.com/documents/21ED375018D421CE91738AA048DEE5F2",
+"pub_date": "2026-04-13",
+"startup_relevance": "Government-side evaluation capacity for AI is thin; startups that bring their own test-and-evaluation evidence and clear data-rights terms reduce friction for b"
+},
+{
+"id": "E01-F28",
+"sweep": "E01",
+"title": "DODIG-2025-039 (Nov 14, 2024): CDAO operated without a charter or implementation plan; CDAO and DoD CIO disputed boundaries over cloud/IT infrastructure",
+"segment_ids": [
+"S11",
+"S10",
+"S03"
+],
+"chain_steps": [
+"CDAO merges JAIC/CDO/DDS/Advana 2022",
+"OIG evaluation announced early 2024",
+"DODIG-2025-039 Nov 2024",
+"DoDD 5105.89 Nov 18 2024",
+"CDAO to USD(R&E) Aug 2025"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://media.defense.gov/2024/Nov/18/2003585216/-1/-1/1/DODIG-2025-039_REDACTED.PDF",
+"pub_date": "2024-11-14",
+"startup_relevance": "Explains why enterprise data/AI buying authority at OSD is unstable; startups should target service-level program offices or combatant-command pilots rather tha"
+},
+{
+"id": "E01-F29",
+"sweep": "E01",
+"title": "DoD IG Advana audit (May 2026): CDAO did not implement NIST interface controls; 78 of 387 source systems connected without data-sharing agreements; 10 of 12 recommendations rejected",
+"segment_ids": [
+"S03",
+"S12",
+"S09"
+],
+"chain_steps": [
+"Advana launched 2021 (Comptroller)",
+"72,000+ users by 2023",
+"Development paused Jun 2024",
+"IG audit May 2026: interface controls, DSAs missing",
+"WDP restructuring 2026"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://app.bigdata.com/documents/1F783F795157BFDEF5770939D9DD34A6",
+"pub_date": "2026-05-18",
+"startup_relevance": "The enterprise data platform's data-quality plumbing (ingest validation, lineage, agreements, access governance) is officially deficient; data-quality/observabi"
+},
+{
+"id": "E01-F30",
+"sweep": "E01",
+"title": "Advana instability 2024-2026: development paused (June 2024), $15B AAMAC recompete canceled (July 2025), 80% contractor cuts reported, split into the War Data Platform (Jan 2026), $821M Accenture integration award (July 2026)",
+"segment_ids": [
+"S03",
+"S12"
+],
+"chain_steps": [
+"Advana 2021",
+"IG Jul 2022 slow adoption",
+"Jun 2024 pause",
+"Jul 2025 AAMAC canceled",
+"Jan 2026 WDP split",
+"Jul 2026 Accenture $821M"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://app.bigdata.com/documents/C67C25CDAC8086E193A9AEF1DE2579B2",
+"pub_date": "2025-08-20",
+"startup_relevance": "Enterprise data-platform contracting is in flux and being consolidated with large integrators; small vendors are more likely to enter as plug-ins/data products "
+},
+{
+"id": "E01-F31",
+"sweep": "E01",
+"title": "GAO weapon systems annual assessments 2021-2026: delivery keeps slowing (average >12 years), new pathways not clearly faster, workforce losses (40 of 48 programs) after 2025 deferred-resignation program",
+"segment_ids": [
+"S13",
+"S01"
+],
+"chain_steps": [
+"AAF pathways 2020",
+"GAO 2021-2024: speed not achieved",
+"DRP staffing cuts 2025",
+"GAO Jul 2026: >12 years average"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-24-106831",
+"pub_date": "2026-07-02",
+"startup_relevance": "Program-office capacity is shrinking while mandates to go faster grow; this creates demand for vendor-provided integration and test capacity, but also lengthens"
+},
+{
+"id": "E01-F32",
+"sweep": "E01",
+"title": "GAO-23-105008 (Feb 2023): middle-tier rapid prototyping/fielding requires changes to oversight and development approaches",
+"segment_ids": [
+"S13"
+],
+"chain_steps": [
+"Section 804 MTA 2016",
+"GAO Feb 2023",
+"GAO Jul 2026 rec on technology maturity"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-23-105008",
+"pub_date": "2023-02-07",
+"startup_relevance": "MTA and OTA prototyping are the routes most NGC2/ABMS vendors used; GAO's persistent critique implies continued policy churn around these routes."
+},
+{
+"id": "E01-F33",
+"sweep": "E01",
+"title": "GAO-24-107566 (July 2024): Army fielded 6 new equipment priorities ($46.5B) but sometimes fielded before support was in place",
+"segment_ids": [
+"S02",
+"S01"
+],
+"chain_steps": [
+"Army 2018 modernization priorities incl. network",
+"Capability Sets 21/23/25",
+"GAO Jul 2024 fielding support gaps"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-24-107566",
+"pub_date": "2024-07-15",
+"startup_relevance": "Fielding-support gaps (training, sustainment, help desk) around new network kit are a services/software opportunity adjacent to NGC2 scaling."
+},
+{
+"id": "E01-F34",
+"sweep": "E01",
+"title": "Army tactical network: GAO documented 'nearly 20 years' of limited success (2013-2014); no 2019-2026 GAO/IG ITN report found; NGC2 now absorbs the effort with mixed field reports (Sept 2026)",
+"segment_ids": [
+"S02",
+"S01",
+"S03"
+],
+"chain_steps": [
+"WIN-T/JTRS era failures (GAO 2013)",
+"ITN Capability Sets 2021-2025",
+"NGC2 prototypes 2025-2026 (4ID, 25ID)",
+"PC-C6 Sept 2026 mixed results",
+"FY27 $904M request"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-13-179",
+"pub_date": "2013-01-10",
+"startup_relevance": "NGC2 is structured as an ecosystem with named data-layer (Palantir/Anduril) and transport-layer (Persistent, L3Harris) incumbents; entry for a two-person team i"
+},
+{
+"id": "E01-F35",
+"sweep": "E01",
+"title": "DoD CIO 'State of DevSecOps' (March 2025): authorizing officials are 'biased to caution,' reciprocity is lacking or unclear, software factories face funding-model limits, and cloud utilization data is hard to obtain",
+"segment_ids": [
+"S09",
+"S13"
+],
+"chain_steps": [
+"cATO memo Feb 2022",
+"cATO evaluation criteria and implementation guide",
+"Jun 2024 Software Factory Coalition Summit",
+"Mar 2025 study"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://raw.githubusercontent.com/jacobdjwilson/awesome-annual-security-reports/main/Markdown%20Conversions/2025/USDoD-State-of-DevSecOps-2025.md",
+"pub_date": "2025-03-01",
+"startup_relevance": "ATO friction is the most-cited go-to-market blocker for defense software startups; compliance-automation (evidence collection, control inheritance, cATO dashboa"
+},
+{
+"id": "E01-F36",
+"sweep": "E01",
+"title": "DoD AI Strategy memo (Jan 2026): directs a 'wartime approach' to eliminate blockers to data sharing, ATOs, test and certification; federated data catalogs due within 30 days; models deployed within 30 days of release",
+"segment_ids": [
+"S11",
+"S09",
+"S03"
+],
+"chain_steps": [
+"Creating Data Advantage memo May 2021",
+"Data Decrees",
+"CDAO to USD(R&E) Aug 2025",
+"Jan 2026 AI strategy",
+"FY27 $46B AI/compute request (May 2026)"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://app.bigdata.com/documents/436A22707097BC785DBBBEAF29E8E80E",
+"pub_date": "2026-01-13",
+"startup_relevance": "Top-down policy now names the exact frictions GAO/IG documented (ATO, data sharing, classification); this raises demand for data-catalog, model-integration and "
+},
+{
+"id": "E01-F37",
+"sweep": "E01",
+"title": "CRS JADC2 products: IF11493 (In Focus, John R. Hoehn; updated through at least Jan 2025) and R46725 (Background and Issues for Congress) frame service programs (ABMS, Project Convergence, Project Overmatch) and questions on cost, interoperability and requirements",
+"segment_ids": [
+"S01"
+],
+"chain_steps": [
+"IF11493 first issued 2020",
+"R46725 Jan 2021",
+"IF11493 updated through v13 (~2025)"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.congress.gov/crs-product/IF11493",
+"pub_date": "2025-01-21",
+"startup_relevance": "Congressional framing document set; useful for founders' policy literacy but adds no new technical pain evidence beyond GAO."
+},
+{
+"id": "E01-F38",
+"sweep": "E01",
+"title": "CRS (Jan 2026): tanker aircraft lack tactical data-link access; connectivity would improve survivability and could serve as a backup information conduit in degraded communications",
+"segment_ids": [
+"S02",
+"S04"
+],
+"chain_steps": [
+"Mobility fleet lacks Link 16",
+"CRS Jan 2026",
+"KC-135 crash Mar 2026 raises urgency"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://app.bigdata.com/documents/A4A5DDD0A78283BA94C5BC43D3215F6C",
+"pub_date": "2026-03-23",
+"startup_relevance": "Retrofit connectivity for large legacy fleets (tankers, airlifters) is an identifiable, congressionally visible gap; the products are radios/gateways (hardware-"
+},
+{
+"id": "E01-F39",
+"sweep": "E01",
+"title": "Oversight gaps: no 2019-2026 GAO/DoD IG report specific to DCGS, Project Overmatch, NGC2, JWCC performance, contested logistics C2, or Mission Partner Environment findings could be retrieved",
+"segment_ids": [
+"S04",
+"S01",
+"S06",
+"S10",
+"S12"
+],
+"chain_steps": [
+"Coverage gap identified",
+"Downstream agents with gao.gov/dodig.mil access should fill"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/b-412746",
+"pub_date": "2016-06-01",
+"startup_relevance": "Flags where this evidence file is thin so the study does not over-weight the well-documented programs (JADC2, ABMS, Space C2) relative to programs that are simp"
+},
+{
+"id": "E01-F40",
+"sweep": "E01",
+"title": "GAO-26-107085 (Jan 2026): Space Development Agency missile-warning constellation risks late delivery; readiness of critical parts overestimated",
+"segment_ids": [
+"S05",
+"S04"
+],
+"chain_steps": [
+"SDA Tranche 0/1 tracking layer",
+"GAO Jan 2026 readiness overestimated"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-26-107085",
+"pub_date": "2026-01-28",
+"startup_relevance": "Space-sensor data volume for C2 is arriving later than planned; ground-segment fusion/processing vendors depend on these schedules."
+},
+{
+"id": "E02-F1",
+"sweep": "E02",
+"title": "Army NGC2 RFI asks industry to co-define API schema, reference architecture and developer environments",
+"segment_ids": [
+"S01",
+"S02",
+"S09"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"STORE",
+"VISUALIZE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/606845d8f52044b2b8fa4c5c54ddd41f/view",
+"pub_date": "unknown (post-2024-05-21; exact posting date not visible; primary page blocked)",
+"startup_relevance": "The Army is explicitly inviting third-party developers into an app-layer ecosystem with published APIs; a small vendor could target one application or data serv"
+},
+{
+"id": "E02-F2",
+"sweep": "E02",
+"title": "NGC2 has moved to draft-solicitation / draft-SOO stage with industry feedback requested (PEO C3N)",
+"segment_ids": [
+"S01",
+"S02",
+"S05",
+"S09"
+],
+"chain_steps": [
+"INGEST",
+"STORE",
+"VISUALIZE",
+"DECIDE",
+"DISSEMINATE"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/fe97ef8ca1694832b18dd33b56ba5dd2/view",
+"pub_date": "unknown (2025-2026 inferred from PEO C3N naming; primary page blocked)",
+"startup_relevance": "Draft SOOs and TEMs are the moment small vendors can shape API/eligibility terms; also signals that the market structure (integrator vs app vendors) is being fi"
+},
+{
+"id": "E02-F3",
+"sweep": "E02",
+"title": "NGC2 notice text defines the missing stack: transport, data/analytics platforms, hardware-agnostic UX, app-based tools",
+"segment_ids": [
+"S01",
+"S02",
+"S05",
+"S06"
+],
+"chain_steps": [
+"TRANSPORT",
+"INGEST",
+"STORE",
+"PROCESS",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/ef4a68d4cec04654a5a52690df8a24dc/view",
+"pub_date": "unknown (primary page blocked)",
+"startup_relevance": "Three explicit layers where a focused product can plug in; the UX/app layer is the least capital-intensive entry point for a two-person team."
+},
+{
+"id": "E02-F4",
+"sweep": "E02",
+"title": "Army and industry established an NGC2 common data-layer baseline after 4th ID and 25th ID validations",
+"segment_ids": [
+"S02",
+"S01"
+],
+"chain_steps": [
+"NORMALIZE",
+"STORE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+"pub_date": "2026 (exact date not visible)",
+"startup_relevance": "A published common data baseline is the interface a new app vendor must conform to; it also means the data-layer slot itself is likely taken by incumbents on th"
+},
+{
+"id": "E02-F5",
+"sweep": "E02",
+"title": "xTechIgnite 2025 topic: Generative-AI modeling and simulation of NGC2 under a DDIL tactical network",
+"segment_ids": [
+"S05",
+"S02",
+"S09"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.xtech.army.mil/wp-content/uploads/2025/02/RFI_xTechIgnite_FINAL_APPROVED_v2.pdf",
+"pub_date": "2025-02",
+"startup_relevance": "A network-emulation / digital-twin test harness for DDIL is an explicit, software-only Army ask suited to a small team; xTech prizes are small but lead to SBIR-"
+},
+{
+"id": "E02-F6",
+"sweep": "E02",
+"title": "xTech National Security Hackathon (Apr 2026) problem areas: sensor integration, resilient edge ops, mission C2, cyber",
+"segment_ids": [
+"S06",
+"S01",
+"S03",
+"S10"
+],
+"chain_steps": [
+"COLLECT",
+"FUSE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://xtech.army.mil/wp-content/uploads/2026/04/xTech-Hackathon_RFI_Final.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "Hackathon format is unusually accessible to student founders; prize money is small but it is a documented on-ramp to Army users."
+},
+{
+"id": "E02-F7",
+"sweep": "E02",
+"title": "Army UDRA RFI concedes the data mesh does not yet extend to tactical echelons",
+"segment_ids": [
+"S02",
+"S06"
+],
+"chain_steps": [
+"NORMALIZE",
+"STORE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/eb9c5cfc8ce34b2a9ac3c7fc5ca612bc/view",
+"pub_date": "unknown (believed 2024; primary page blocked)",
+"startup_relevance": "Tactical-echelon data products under DDIL is a named, deferred gap; a lightweight edge data-product/catalog tool aligned to UDRA is a plausible wedge, but owner"
+},
+{
+"id": "E02-F8",
+"sweep": "E02",
+"title": "PM Mission Command 'Operational Mission Command Suite' asks for common data model, data fabric, data catalog, data-science platform and DDIL-robust TAK data services",
+"segment_ids": [
+"S01",
+"S02",
+"S06",
+"S07"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"STORE",
+"VISUALIZE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/340689e568d74d08bb0c5c8cbebd42a6/view",
+"pub_date": "unknown (2025-2026 inferred; primary page blocked)",
+"startup_relevance": "TAK plug-ins and DDIL-tolerant sync services are a documented Army requirement in an open ecosystem (TAK is government-owned), which lowers the integration barr"
+},
+{
+"id": "E02-F9",
+"sweep": "E02",
+"title": "PM Mission Command Data Science Platform RFI for next-generation Mission Command",
+"segment_ids": [
+"S02",
+"S06"
+],
+"chain_steps": [
+"PROCESS",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/be7d6e94c7e041f382129c2dbfacf156/view",
+"pub_date": "unknown (primary page blocked)",
+"startup_relevance": "Signals PM MC intends to buy a commercial data-science platform rather than build; incumbents (Palantir, Databricks-class) likely dominate, so startup value is "
+},
+{
+"id": "E02-F10",
+"sweep": "E02",
+"title": "PEO C3T PM Mission Command RFI on contracting approach and Statement of Objectives",
+"segment_ids": [
+"S01",
+"S09"
+],
+"chain_steps": [
+"DECIDE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/6ac8eb29a0b741c38acc48083dc776b3/view",
+"pub_date": "unknown (2025-2026; primary page blocked)",
+"startup_relevance": "Vehicle design determines whether non-traditional vendors can compete; worth responding to even without a product."
+},
+{
+"id": "E02-F11",
+"sweep": "E02",
+"title": "Common Data Fabric RFI (10 Dec 2024)",
+"segment_ids": [
+"S02"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://sam.gov/opp/10d8c0cacb66495284037b65589a8208/view",
+"pub_date": "2024-12-10",
+"startup_relevance": "Needs verification of issuing office (DAF Battle Network, DISA or IC) before drawing conclusions."
+},
+{
+"id": "E02-F12",
+"sweep": "E02",
+"title": "DEVCOM C5ISR RFI: Zero Trust 'Data Pillar' protection for tactical data-in-use inside DDIL",
+"segment_ids": [
+"S10",
+"S02",
+"S06"
+],
+"chain_steps": [
+"STORE",
+"PROCESS",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view",
+"pub_date": "2025 (exact date not visible; primary page blocked)",
+"startup_relevance": "Offline-capable data-centric security (tagging, ABAC, encryption-in-use at the edge) is a narrow software problem with a named Army S&T sponsor; strong engineer"
+},
+{
+"id": "E02-F13",
+"sweep": "E02",
+"title": "Cross-domain at the edge: TACDS v3.0 filter buy (Dec 2025) and NEWT body-worn edge-to-enterprise terminal with CDS component",
+"segment_ids": [
+"S10",
+"S05",
+"S06"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/e52a36b1ed794fb7b223696a395d5718/view",
+"pub_date": "2025-12 (TACDS); 2024-10 (IWRP)",
+"startup_relevance": "CDS products require NCDSMO/Raise-the-Bar accreditation and cleared staff; not a first product for these founders, but adjacent filter/rules content is a possib"
+},
+{
+"id": "E02-F14",
+"sweep": "E02",
+"title": "Tactical ATC command-and-control RFI issued under 'Revolutionary FAR Overhaul Part 10', responses due 28 Aug 2026",
+"segment_ids": [
+"S01",
+"S10",
+"S07"
+],
+"chain_steps": [
+"FUSE",
+"VISUALIZE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/2c233bf0322144bc9dceea7cdde2ccf2/view",
+"pub_date": "2026-08 (inferred from response date)",
+"startup_relevance": "Niche airspace-C2 market with heavy certification; more useful as evidence that RFO-era market research is happening quickly and openly."
+},
+{
+"id": "E02-F15",
+"sweep": "E02",
+"title": "DAF CBC2+ Voice Communications RFI (posted 22 Aug 2025): battle-management software still lacks integrated voice/radio",
+"segment_ids": [
+"S01",
+"S05"
+],
+"chain_steps": [
+"COLLABORATE",
+"DISSEMINATE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/workspace/contract/opp/da62e3a414ca4d3ebb09e4457f034214/view",
+"pub_date": "2025-08-22",
+"startup_relevance": "A discrete software-only capability (VoIP/radio-over-IP integration into a cloud C2 app) with a named program office; realistic scope for a small team, though p"
+},
+{
+"id": "E02-F16",
+"sweep": "E02",
+"title": "Kessel Run market research for Air Operations Center weapon-system modernization (PAE C3BM)",
+"segment_ids": [
+"S01",
+"S09"
+],
+"chain_steps": [
+"DECIDE",
+"TASK",
+"MONITOR"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/b3c69875964c40ecb02b4dcb4f7feb78/view",
+"pub_date": "unknown (2025-2026; PAE terminology implies 2026)",
+"startup_relevance": "Kessel Run has a track record of onboarding small software vendors; AOC modernization (ATO planning, tasking) is one of the few C2 domains with an in-house DevS"
+},
+{
+"id": "E02-F17",
+"sweep": "E02",
+"title": "USMC TBMCS system sustainment RFI shows legacy theater battle management still in service",
+"segment_ids": [
+"S01"
+],
+"chain_steps": [
+"TASK",
+"MONITOR"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/64850caf230f6030c794a2acbac458e4/view",
+"pub_date": "unknown (2025; primary page blocked)",
+"startup_relevance": "Legacy-sustainment notices reveal replacement windows but are usually won by incumbents; useful mainly as a market-timing signal."
+},
+{
+"id": "E02-F18",
+"sweep": "E02",
+"title": "Space Systems Command sources sought (updated 25 Mar 2025): single integrated Ops C2 for Space Tasking and Joint Targeting cycles",
+"segment_ids": [
+"S01",
+"S07"
+],
+"chain_steps": [
+"DECIDE",
+"TASK",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/759d7e820fae4c8bab9bf10be5d1ce53/view",
+"pub_date": "2025-03-25 (last update visible)",
+"startup_relevance": "Space C2 is a smaller, more commercially-open market (SSC's Commercial Space Office) but incumbents (e.g., Anduril/Lattice for Space C2, Parsons, L3Harris) alre"
+},
+{
+"id": "E02-F19",
+"sweep": "E02",
+"title": "DIU 'Hydra' open submission: collaborative, real-time, cross-system USSF tactical C2",
+"segment_ids": [
+"S01",
+"S08",
+"S13"
+],
+"chain_steps": [
+"COLLABORATE",
+"TASK",
+"MONITOR"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/work-with-us/submit-solution/PROJ00677",
+"pub_date": "unknown (2025-2026)",
+"startup_relevance": "DIU CSOs are the most startup-friendly DoD on-ramp (commercial terms, no SBIR ownership test), but foreign-owned firms face FOCI/ITAR scrutiny that needs legal "
+},
+{
+"id": "E02-F20",
+"sweep": "E02",
+"title": "SSC Model Interoperability RFI: standards for syntactic, semantic and cross-domain interoperability of data and models",
+"segment_ids": [
+"S02",
+"S08"
+],
+"chain_steps": [
+"NORMALIZE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/d4cfa6871d8148cc91cc9177720a2eac/view",
+"pub_date": "unknown (primary page blocked)",
+"startup_relevance": "Semantic-layer / schema translation tooling is a repeat government ask across services; commercially adjacent to data-integration startups."
+},
+{
+"id": "E02-F21",
+"sweep": "E02",
+"title": "DIU + INDOPACOM 2025 Blue Object Management Challenge: AI-enabled integration and access to blue-force data across platforms",
+"segment_ids": [
+"S07",
+"S02",
+"S06"
+],
+"chain_steps": [
+"INGEST",
+"FUSE",
+"VISUALIZE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/latest/diu-presents-blue-object-management-challenge",
+"pub_date": "2025 (exact date not visible)",
+"startup_relevance": "A combatant-command-sponsored challenge with a named operational owner; friendly-force data fusion is tractable for a software startup, and DIU challenges pay i"
+},
+{
+"id": "E02-F22",
+"sweep": "E02",
+"title": "DIU AUKUS Maritime Innovation Challenge 2025: near-real-time links from undersea vehicles to C2/battle-management systems",
+"segment_ids": [
+"S05",
+"S13",
+"S08"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/latest/advance-underwater-communication-for-the-future-of-naval-operations-a-call",
+"pub_date": "2025",
+"startup_relevance": "Hardware-heavy and AUKUS-scoped (German/Indonesian founders are outside the three nations); low fit but shows autonomy-to-C2 linkage is an allied priority."
+},
+{
+"id": "E02-F23",
+"sweep": "E02",
+"title": "USSOCOM TACLAN / SDN 'King for a Day' RFI (posted 15 May 2026): modular C2 network, edge compute, SD-WAN, EW resilience",
+"segment_ids": [
+"S05",
+"S06",
+"S12"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://discover.govdash.com/solicitations/019e2c45-0ea1-7629-8f59-8b2664474496--tactical-local-area-network-taclan-and-satellite-deployable-node-sdn-king-for-a",
+"pub_date": "2026-05-15",
+"startup_relevance": "SOCOM's 'king for a day' format invites whole-architecture proposals; a software-defined networking or network-orchestration startup could partner with a hardwa"
+},
+{
+"id": "E02-F24",
+"sweep": "E02",
+"title": "ACC AMIC Deployable Tactical Communications RFI: routing, edge compute, application-level QoS and cross-domain data sharing in contested forward environments",
+"segment_ids": [
+"S05",
+"S06",
+"S10"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view",
+"pub_date": "unknown (2025-2026; primary page blocked)",
+"startup_relevance": "Application-aware QoS / traffic prioritization software for DDIL links is a repeated ask (also in NGC2 and xTech) and is achievable without radio hardware."
+},
+{
+"id": "E02-F25",
+"sweep": "E02",
+"title": "Nett Warrior Edge Compute Device RFI: consolidate dismounted-leader SA/C2 components into one lightweight device",
+"segment_ids": [
+"S06",
+"S07",
+"S01"
+],
+"chain_steps": [
+"PROCESS",
+"VISUALIZE",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://console.sweetspotgov.com/federal-contracts/47728783-bfd4-528b-83a6-35a137cccb84",
+"pub_date": "unknown (2025-2026)",
+"startup_relevance": "Hardware-centric (Samsung/Juggernaut incumbents); the software opportunity is on-device inference and power-aware sync for ATAK, not the device itself."
+},
+{
+"id": "E02-F26",
+"sweep": "E02",
+"title": "Other tactical-edge notices: PEO IEW&S Tactical Edge Node RFI (2024) and Global Tactical Edge Acquisition Directorate (G-TEAD) Marketplace",
+"segment_ids": [
+"S06",
+"S03",
+"S04"
+],
+"chain_steps": [
+"PROCESS",
+"FUSE"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://govtribe.com/opportunity/federal-contract-opportunity/peo-iews-tactical-edge-node-rfi-w56kgy24peoiewsisa",
+"pub_date": "2024 (IEW&S); unknown (G-TEAD)",
+"startup_relevance": "A 'marketplace' notice suggests a standing vendor-onboarding vehicle worth verifying. G-TEAD URLs: https://sam.gov/workspace/contract/opp/a600f39227e54e2cb38455"
+},
+{
+"id": "E02-F27",
+"sweep": "E02",
+"title": "JIATF-401 RFI for web-accessible counter-UAS mission planning, EMS management and threat-modeling software",
+"segment_ids": [
+"S01",
+"S12",
+"S07"
+],
+"chain_steps": [
+"DECIDE",
+"TASK",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/b9d5a581cb674b5f8a87b72ea01e2678/view",
+"pub_date": "2026 (RFI; exact date not visible); 2026-04-15 (CSO fact sheet); 2025-08-28 (establishment memo)",
+"startup_relevance": "Pure-software, web-based planning tool with a new, well-funded joint owner that has its own CSO; one of the best-fit asks in this sweep for a two-founder softwa"
+},
+{
+"id": "E02-F28",
+"sweep": "E02",
+"title": "C-sUAS sensor RFI specifies 4-10 Hz track updates to support effector cueing and multi-modal sensor fusion",
+"segment_ids": [
+"S07",
+"S03",
+"S01"
+],
+"chain_steps": [
+"COLLECT",
+"FUSE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/b1686e77f72441e0bcb029f6a1b8b276/view",
+"pub_date": "unknown (2025-2026; primary page blocked)",
+"startup_relevance": "Gives a measurable spec a fusion-software startup can benchmark against; the market is crowded (FAAD C2 / Anduril Lattice / others hold JIATF positions)."
+},
+{
+"id": "E02-F29",
+"sweep": "E02",
+"title": "'Data Fusion Correlator' notice (Mar 2026) admits SENSEI counter-UxS sensors are limited in coverage, accuracy and clutter rejection",
+"segment_ids": [
+"S07",
+"S04",
+"S13"
+],
+"chain_steps": [
+"FUSE",
+"IDENTIFY/INTERPRET"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/workspace/contract/opp/cf5c6beca1ba4964818c8ca28dd9bd86/view",
+"pub_date": "2026-03",
+"startup_relevance": "A bounded algorithmic problem (multi-sensor track correlation) suited to a strong engineer; scope, agency and whether it is set aside must be verified."
+},
+{
+"id": "E02-F30",
+"sweep": "E02",
+"title": "PM LAV vehicle-mounted C-sUAS sources sought (May 2025) wants whole find-fix-track-identify kill chain",
+"segment_ids": [
+"S07",
+"S03",
+"S13"
+],
+"chain_steps": [
+"COLLECT",
+"FUSE",
+"IDENTIFY/INTERPRET",
+"TASK"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/9e1f6c27e1f64dbeb21a3fe9219e9081/view",
+"pub_date": "2025-05",
+"startup_relevance": "Integrated-system buy favoring hardware primes; startup role is the ID/classification or track-management software subcomponent. Companions: https://sam.gov/opp"
+},
+{
+"id": "E02-F31",
+"sweep": "E02",
+"title": "Spectrum Situational Awareness System (S2AS) notice requires DDIL operation with local compute, memory and storage",
+"segment_ids": [
+"S12",
+"S06"
+],
+"chain_steps": [
+"COLLECT",
+"PROCESS",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/b043b5a9bf5941f5a37bb1c085916484/view",
+"pub_date": "unknown (2025; primary page blocked)",
+"startup_relevance": "EMS-awareness visualization/analytics is software-heavy but SDR hardware and classified signal libraries create ITAR and clearance hurdles."
+},
+{
+"id": "E02-F32",
+"sweep": "E02",
+"title": "Mobile-Long Range Precision RFI requires DDIL resilience and self-protection against network, cyber, EMS and PNT attacks",
+"segment_ids": [
+"S05",
+"S10",
+"S11",
+"S12"
+],
+"chain_steps": [
+"TRANSPORT",
+"TASK"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/202906f1bb8943bdb97054bf1bc0e964/view",
+"pub_date": "unknown (2025; primary page blocked)",
+"startup_relevance": "Weapons-platform RFI (prime territory); relevant only as evidence that PNT/EMS assurance software is a cross-cutting requirement."
+},
+{
+"id": "E02-F33",
+"sweep": "E02",
+"title": "Coast Guard 'Coastal Sentinel' RFI: next-gen maritime surveillance/C2/comms with data-rich COP; invite-only industry day 29 Sep 2026",
+"segment_ids": [
+"S07",
+"S03",
+"S01",
+"S04"
+],
+"chain_steps": [
+"COLLECT",
+"FUSE",
+"VISUALIZE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://sam.gov/opp/834fbda5c8424575a33b7a9b4162f237/view",
+"pub_date": "2026 (Aug-Sep inferred; primary page blocked)",
+"startup_relevance": "DHS/USCG is a non-DoD buyer with lighter ITAR exposure and an explicit rapid-prototyping office; maritime COP analytics is a strong fit for a software startup, "
+},
+{
+"id": "E02-F34",
+"sweep": "E02",
+"title": "USSOCOM Tactical X Event 2026 wants AI/ML to speed PED of data from unmanned-system encounters, captured materials and OSINT",
+"segment_ids": [
+"S04",
+"S06"
+],
+"chain_steps": [
+"PROCESS",
+"IDENTIFY/INTERPRET",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/11b9f31e57e940999defcd7a93f2e8dd/view",
+"pub_date": "2026 (exact date not visible)",
+"startup_relevance": "Drone-forensics / exploitation tooling is a narrow, software-heavy PED niche with a SOF sponsor; SOCOM Tactical X events accept live demos from small vendors. C"
+},
+{
+"id": "E02-F35",
+"sweep": "E02",
+"title": "Navy notices: 'Navy Collaborative' sources sought (31 Aug 2026, OTA-eligible), TacMobile Increment 3 (9 Sep 2025), TM-BM battle management",
+"segment_ids": [
+"S01",
+"S04",
+"S07"
+],
+"chain_steps": [
+"COLLABORATE",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://sam.gov/opp/9f1ccd7a09b847a684806128b982bec3/view",
+"pub_date": "2026-08-31 (Navy Collaborative); 2025-09-09 (TacMobile)",
+"startup_relevance": "OTA-eligible Navy sources sought are open to non-traditional vendors; needs primary read. Related: https://sam.gov/opp/7903da13ea244175abe6b2c3e8ac190d/view ; h"
+},
+{
+"id": "E02-F36",
+"sweep": "E02",
+"title": "CDAO Tradewinds: 2023 data-mesh RFI and 2025-2026 'awardable' assessments for decision-advantage and tactical data-mesh tools",
+"segment_ids": [
+"S02",
+"S06",
+"S14",
+"S09"
+],
+"chain_steps": [
+"STORE",
+"DISSEMINATE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2023/10/26/pentagons-cdao-queries-industry-about-commercial-data-mesh-capabilities/",
+"pub_date": "2023-10-26 (RFI coverage); 2026-06-16 (CACI); 2026 (NT Concepts)",
+"startup_relevance": "Tradewinds lets a startup become 'awardable' via a five-minute video with no prior contract, but conversion to funded work depends on a mission owner; treat as "
+},
+{
+"id": "E02-F37",
+"sweep": "E02",
+"title": "AFWERX 2026 replaced the general Open Topic with 'Focused Open Topics' where the Air Force names the gap; D2P2 requires a signed customer memo",
+"segment_ids": [
+"S09",
+"S01",
+"S02"
+],
+"chain_steps": [
+"DISSEMINATE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://grantengine.com/afwerx-sbir-2026/",
+"pub_date": "2026 (Grant Engine); 2025-05 (AFWERX deck); 2026-09-21 (AFA panel)",
+"startup_relevance": "SBIR/D2P2 is the classic student-founder path but (a) requires a US small business majority-owned by US citizens or permanent residents (statutory SBIR rule; ne"
+},
+{
+"id": "E02-F38",
+"sweep": "E02",
+"title": "DARPA TTO Office-Wide BAA (exec summaries due 17 Apr 2026, rolling to 22 Jun 2026, $500K-$5M) and MINC tactical-network-control program",
+"segment_ids": [
+"S05",
+"S13"
+],
+"chain_steps": [
+"TRANSPORT"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://simpler.grants.gov/opportunity/de7207c4-980f-4dba-a286-e96db65fd55e",
+"pub_date": "2025-2026 (BAA); unknown (MINC article)",
+"startup_relevance": "DARPA BAAs fund research, not products; MINC shows the autonomous-network-control problem is funded at prime level. Related: https://militaryembedded.com/comms/"
+},
+{
+"id": "E02-F39",
+"sweep": "E02",
+"title": "SOFWERX 2026 events: USV 'Poseidon's Fury' C2/UI assessment (submissions 24 Sep-7 Oct 2026) and Distributed Micro Sensors assessment (13-15 Oct 2026)",
+"segment_ids": [
+"S13",
+"S03",
+"S07",
+"S01"
+],
+"chain_steps": [
+"COLLECT",
+"TASK",
+"MONITOR"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://events.sofwerx.org/peo-m-unmanned-surface-vehicle-usv",
+"pub_date": "2026",
+"startup_relevance": "SOFWERX assessment events are open to small vendors and feed OTA prototypes; the USV C2/UI ask is software-only and time-relevant (submissions open today). Rela"
+},
+{
+"id": "E02-F40",
+"sweep": "E02",
+"title": "Army network experimentation on-ramps: C5ISR Center 2025 persistent network experimentation campaign; NETCOM at TechNet Augusta 2026",
+"segment_ids": [
+"S05",
+"S02"
+],
+"chain_steps": [
+"TRANSPORT",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://www.army.mil/article/285967/army_c5isr_center_kicks_off_2025_persistent_network_experimentation_campaign",
+"pub_date": "2025 (C5ISR); 2026 (NETCOM)",
+"startup_relevance": "Experimentation campaigns (CRADA-based) are a low-cost way to get an Army evaluation; details need primary read. Related: https://www.army.mil/article/294835/ne"
+},
+{
+"id": "E02-F41",
+"sweep": "E02",
+"title": "Absence signal: no Mission Partner Environment or coalition-interoperability RFI/sources sought surfaced in searches",
+"segment_ids": [
+"S08"
+],
+"chain_steps": [
+"COLLABORATE",
+"DISSEMINATE"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://sam.gov/opp/d4cfa6871d8148cc91cc9177720a2eac/view",
+"pub_date": "2026-09-24",
+"startup_relevance": "Coalition interoperability is the segment where a German co-founder could add value, but open US demand signals were not found; allied-side (NATO/BwB/EDF) notic"
+},
+{
+"id": "E02-F42",
+"sweep": "E02",
+"title": "Historical: FARA data-fusion sources sought asked for a 'synthetic operating picture' from multiple aircraft data inputs (program since cancelled)",
+"segment_ids": [
+"S07",
+"S04"
+],
+"chain_steps": [
+"FUSE",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sam.gov/opp/a47aa9e47c03435889dfd3bb79297084/view",
+"pub_date": "unknown (pre-2024)",
+"startup_relevance": "Low direct value (cancelled program); included to avoid over-counting fusion demand. Companion FLRAA mission-systems notice: https://sam.gov/opp/17e1c0ef669648e"
+},
+{
+"id": "E03-F1",
+"sweep": "E03",
+"title": "PC-C6 (July 2026): division-scale NGC2 validation produced overheating hardware, incomplete data displays and semi-frequent connectivity drops; Army says some components will be cut",
+"segment_ids": [
+"S01",
+"S02",
+"S05",
+"S06"
+],
+"chain_steps": [
+"TRANSPORT",
+"PROCESS",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units",
+"pub_date": "2026-07-31",
+"startup_relevance": "Exercise-only pain, but it is the Army's own admission that the prototype ecosystem still has transport and edge-hardware reliability gaps and duplicative apps;"
+},
+{
+"id": "E03-F2",
+"sweep": "E03",
+"title": "Army CTO memo (Sept 2025) rated the NGC2 prototype 'very high risk': no control over who sees what, no user-activity logging, unvetted third-party apps",
+"segment_ids": [
+"S10",
+"S09",
+"S02",
+"S01"
+],
+"chain_steps": [
+"STORE",
+"DISSEMINATE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.cnbc.com/2025/10/03/anduril-palantir-army-memo-ngc2.html",
+"pub_date": "2025-10-03",
+"startup_relevance": "Directly evidences an unmet need inside the NGC2 ecosystem for attribute-based access control, data tagging/releasability, audit logging and automated vetting o"
+},
+{
+"id": "E03-F3",
+"sweep": "E03",
+"title": "Balikatan 2026: first eight-nation common operating picture took 'more than eight years' of integration work and still depends on JICOs and foreign-disclosure officers hand-tagging data for cross-domain solutions",
+"segment_ids": [
+"S08",
+"S10",
+"S07"
+],
+"chain_steps": [
+"NORMALIZE",
+"DISSEMINATE",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+"pub_date": "2026-05 (approx.)",
+"startup_relevance": "Strongest exercise evidence that coalition COP sharing is gated by manual releasability tagging and per-partner network plumbing; tooling that automates data la"
+},
+{
+"id": "E03-F4",
+"sweep": "E03",
+"title": "INDOPACOM Mission Network (IMN) was tested for the first time at Balikatan 2026 as a zero-trust replacement for a stack of separate partner-nation networks",
+"segment_ids": [
+"S08",
+"S10",
+"S05"
+],
+"chain_steps": [
+"TRANSPORT",
+"DISSEMINATE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.navalnews.com/naval-news/2026/05/new-indopacom-mission-network-links-allies-during-balikatan/",
+"pub_date": "2026-05-11",
+"startup_relevance": "Confirms that until 2026 INDOPACOM ran multiple bilateral partner networks (the pain), and that the MPE layer is being consolidated under a prime-managed servic"
+},
+{
+"id": "E03-F5",
+"sweep": "E03",
+"title": "Army established the NGC2 common data layer baseline after 'ten months of feedback' from Ivy Sting/Ivy Mass and Lightning Surge; Ivy Mass (May 2026) fought through cyber and electromagnetic attack",
+"segment_ids": [
+"S02",
+"S01",
+"S06",
+"S05",
+"S12"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"STORE",
+"FUSE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.army.mil/article/293409/army_and_industry_align_on_common_data_baseline_as_next_generation_command_and_control_moves_from_prototyping_to_delivery",
+"pub_date": "2026-06 (approx.)",
+"startup_relevance": "Fixes who owns the NGC2 data layer (Anduril/Palantir/Raft) and signals the entry route: 'industry self-teaming' under division implementation leads. A startup w"
+},
+{
+"id": "E03-F6",
+"sweep": "E03",
+"title": "Ivy Sting 5 / Lightning Surge 2 (early 2026): division commander says industry partners are 'fixing the code in almost real time' during exercises; NGC2 framed as eliminating stovepiped systems",
+"segment_ids": [
+"S01",
+"S02",
+"S09"
+],
+"chain_steps": [
+"PROCESS",
+"FUSE",
+"DECIDE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.dvidshub.net/news/561532/two-divisions-team-up-transform-army",
+"pub_date": "2026-03-30",
+"startup_relevance": "Demonstrates the soldier-touchpoint cadence a vendor must sustain (monthly-ish events, live code fixes, 35 mission threads) and that application reuse across di"
+},
+{
+"id": "E03-F7",
+"sweep": "E03",
+"title": "Lightning Surge (25th ID, Apr 2026): private 5G carried the call-for-fire path for the first time, EW data demand cuts across warfighting functions, and the Pacific 'tyranny of distance' drives transport choices",
+"segment_ids": [
+"S05",
+"S12",
+"S02",
+"S01"
+],
+"chain_steps": [
+"TRANSPORT",
+"COLLECT",
+"DISSEMINATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.army.mil/article/291863/accelerating_transformative_technologies_aids_commanders_readiness_across_the_pacific",
+"pub_date": "2026-04-21",
+"startup_relevance": "Shows transport-layer experimentation (private 5G plus SATCOM fallback) is live inside NGC2 and that EW/spectrum data is wanted by non-EW functions; software th"
+},
+{
+"id": "E03-F8",
+"sweep": "E03",
+"title": "C5ISR Center (May 2026): first end-to-end simulated fires mission on an M777 over private 5G, explicitly to bridge 'legacy platforms' lacking modern communications pathways",
+"segment_ids": [
+"S05",
+"S06",
+"S02"
+],
+"chain_steps": [
+"TRANSPORT",
+"TASK"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.army.mil/article/292356/technical_firsts_in_indopacom_prove_viability_of_army_5g_for_ngc2",
+"pub_date": "2026-05-22",
+"startup_relevance": "Confirms legacy weapon platforms (M777/AFATDS-era chains) still need gateway/bridging software to join the data layer; protocol-bridging and edge-node software "
+},
+{
+"id": "E03-F9",
+"sweep": "E03",
+"title": "Ivy Sting 4 (early 2026) deliberately tested C2 of maneuver from division to battalion under 'denied network conditions', an airspace-management app for manned/unmanned aircraft, and joint/multinational integration",
+"segment_ids": [
+"S01",
+"S13",
+"S05",
+"S08",
+"S14"
+],
+"chain_steps": [
+"TASK",
+"MONITOR",
+"TRANSPORT",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.linkedin.com/posts/cpec2in_ngc2-futuresandconceptscommand-armyt2com-activity-7425616767848448000-BI2u",
+"pub_date": "2026-02 (approx.)",
+"startup_relevance": "Evidence that DDIL operation and airspace deconfliction for UAS are explicit NGC2 test objectives, and that third parties (Shift5, Kraus) onboarded via Lattice "
+},
+{
+"id": "E03-F10",
+"sweep": "E03",
+"title": "Ivy Sting 1 (Sept 2025): vendor account of 26 live M777 missions run side-by-side with legacy crews, with the legacy team 'struggling with delays'",
+"segment_ids": [
+"S01",
+"S02"
+],
+"chain_steps": [
+"DECIDE",
+"TASK"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.anduril.com/news/how-ngc2-is-expanding-the-battlefield-network-at-ivy-sting-2",
+"pub_date": "2025-11-19 (Ivy Sting 2 blog); Ivy Sting 1 content 2025-09/10",
+"startup_relevance": "The legacy-fires pain (AFATDS interfacing, setup time) is plausible and consistent with RUSI's 2022 finding, but the only quantified comparison is vendor market"
+},
+{
+"id": "E03-F11",
+"sweep": "E03",
+"title": "Ivy Sting series (vendor claim): planning cycles compressed from hours to ~30 minutes inside 'displaced, low-bandwidth command posts', replacing static briefings",
+"segment_ids": [
+"S01",
+"S05"
+],
+"chain_steps": [
+"DECIDE",
+"COLLABORATE"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://www.linkedin.com/posts/cpec2in_army-and-industry-align-on-common-data-baseline-activity-7474924486115487744-MMUC",
+"pub_date": "2026-06 (approx.)",
+"startup_relevance": "Indicates that collaborative planning under low bandwidth is a workflow the Army is buying inside NGC2 (Onebrief holds that slot); a new entrant would need an a"
+},
+{
+"id": "E03-F12",
+"sweep": "E03",
+"title": "Lightning Surge 1-2 (Raft release, Mar 2026): calls for fire were 'a soldier intensive process' compressed into an automated workflow; EW targeting, drone video, position feeds and BDA fused into one COP",
+"segment_ids": [
+"S02",
+"S04",
+"S07",
+"S12"
+],
+"chain_steps": [
+"INGEST",
+"FUSE",
+"VISUALIZE",
+"TASK"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html",
+"pub_date": "2026-03-11",
+"startup_relevance": "Shows the 25th ID stack's data layer is held by Raft (now also in the Army-wide common data baseline); the named pain (manual call-for-fire handling, multi-sour"
+},
+{
+"id": "E03-F13",
+"sweep": "E03",
+"title": "INDOPACOM (Mar 2024): Joint Fires Network had to be built from 15 experimentation kits in eight months and scaled from 8 to 20 nodes across Northern Edge 23-1/23-2; commander says service C2 efforts and NSA data must be 'pulled together fast'",
+"segment_ids": [
+"S02",
+"S01",
+"S08",
+"S04"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"FUSE",
+"DECIDE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.congress.gov/event/118th-congress/house-event/LC73165",
+"pub_date": "2024-03-20",
+"startup_relevance": "A combatant command had to hand-build a fires network because service C2 programs did not interoperate; JFN now has an Air Force integrated program office (per "
+},
+{
+"id": "E03-F14",
+"sweep": "E03",
+"title": "Valiant Shield 2024 (June 2024): first test of the initial JFN prototype; Lockheed Martin integrated digital C2 and claims 'actual tasking orders at combat-relevant speed'",
+"segment_ids": [
+"S01",
+"S02",
+"S12"
+],
+"chain_steps": [
+"FUSE",
+"DECIDE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://news.lockheedmartin.com/2024-06-20-Lockheed-Martin-Integrates-Command-and-Control-Capabilities-with-First-Joint-Fires-Network-Prototype",
+"pub_date": "2024-06-20",
+"startup_relevance": "Prime-dominated layer; shows large primes use joint exercises as product showcases, which raises the bar for a startup to get exercise slots without a prime spo"
+},
+{
+"id": "E03-F15",
+"sweep": "E03",
+"title": "Northern Edge 2023: JFN digital C2 demonstrated with F-35 and third-party platforms; 'first time joint force synchronization has been demonstrated at this scale' (Lockheed)",
+"segment_ids": [
+"S01",
+"S02",
+"S08",
+"S05"
+],
+"chain_steps": [
+"TRANSPORT",
+"NORMALIZE",
+"FUSE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.congress.gov/event/118th-congress/house-event/LC71200",
+"pub_date": "2023-07-18",
+"startup_relevance": "Datalink/gateway translation between 5th-gen, legacy and coalition platforms remains a live problem set in exercises, but it sits in ITAR-heavy, prime-owned ter"
+},
+{
+"id": "E03-F16",
+"sweep": "E03",
+"title": "Project Convergence Capstone 4 (Feb-Mar 2024): Army Futures Command told the Senate it tested joint C2, fires integration, contested logistics and human-machine integration with all services and six allies, with GIDE integrated 'for the first time'",
+"segment_ids": [
+"S01",
+"S08",
+"S13",
+"S14"
+],
+"chain_steps": [
+"DECIDE",
+"TASK",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000",
+"pub_date": "2024 (hearing; FY2025 posture cycle)",
+"startup_relevance": "Establishes PC as the Army's main joint/coalition experimentation venue; the record documents scope but not shortfalls, so founders should expect that specific "
+},
+{
+"id": "E03-F17",
+"sweep": "E03",
+"title": "CENTCOM (Mar 2024): 'CJADC2 ... is a daily activity we are improving with each exercise'; operators paired with software developers; task forces 59/99/179 built around unmanned MDA, low-cost UAS and 'target information sharing', with residents hired to 'tackle the friction points'",
+"segment_ids": [
+"S04",
+"S13",
+"S01",
+"S12",
+"S05"
+],
+"chain_steps": [
+"COLLECT",
+"FUSE",
+"DECIDE",
+"TASK"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.centcom.mil/ABOUT-US/POSTURE-STATEMENT/",
+"pub_date": "2024-03-21",
+"startup_relevance": "CENTCOM is a validated buyer of operator-developer pairing and low-cost unmanned/ISR integration (later formalised as a rapid-employment JTF in Sept 2025 per si"
+},
+{
+"id": "E03-F18",
+"sweep": "E03",
+"title": "GIDE series: Palantir reported Gotham use at CENTCOM's Digital Falcon Oasis and GIDE 6 (2023); INDOPACOM tied JFN to GIDE 8 (Dec 2023); GIDE 12 ran in Sept 2024; think tanks now propose GIDE as the venue for testing AI-era staff designs",
+"segment_ids": [
+"S04",
+"S01",
+"S09"
+],
+"chain_steps": [
+"FUSE",
+"DECIDE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2024/09/12/whats-unique-cdao-upcoming-global-information-dominance-experiment-gide-12/",
+"pub_date": "2023-08-08 / 2024-09-12 / 2025-07-17",
+"startup_relevance": "GIDE is the OSD-level venue where Maven/Palantir is entrenched (Maven became a program of record and CJADC2 'cornerstone' in 2026 per sibling sources); startup "
+},
+{
+"id": "E03-F19",
+"sweep": "E03",
+"title": "Scarlet Dragon (18th Airborne Corps, 2020-2025): the first AI-enabled live-fire targeting run took 743 minutes; by 2024 a 20-person cell using Maven reportedly reached ~80 targets/hour versus ~30 without, matching a 2,000-person OIF targeting cell",
+"segment_ids": [
+"S04",
+"S01",
+"S02"
+],
+"chain_steps": [
+"IDENTIFY",
+"DECIDE",
+"TASK",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/",
+"pub_date": "2024-08 (CSET); 2026-03-07 (WSJ)",
+"startup_relevance": "Quantifies the baseline pain (manual targeting is slow and staff-intensive) and shows the corps-level targeting layer is captured by Maven/Palantir with embedde"
+},
+{
+"id": "E03-F20",
+"sweep": "E03",
+"title": "Operations (Iran, March 2026): AI-enabled targeting used at scale; U.S. officers say human analysts can examine 'at most 4%' of collected intelligence",
+"segment_ids": [
+"S04",
+"S03"
+],
+"chain_steps": [
+"PROCESS",
+"IDENTIFY",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.wsj.com/tech/ai/how-ai-is-turbocharging-the-war-in-iran-aca59002",
+"pub_date": "2026-03-07",
+"startup_relevance": "Operational demand for PED automation and analyst-triage tooling is real and current; but classification and the Maven/Palantir incumbency mean an early-stage t"
+},
+{
+"id": "E03-F21",
+"sweep": "E03",
+"title": "NATO exercises 2025: Maven Smart System NATO used at Steadfast Deterrence (May 2025) and as the 'primary platform for warfighting integration' at Steadfast Duel (Oct 2025); Maven COP at SETAF-AF's Lion DRE (Nov 2025)",
+"segment_ids": [
+"S08",
+"S04",
+"S07"
+],
+"chain_steps": [
+"FUSE",
+"VISUALIZE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://en.wikipedia.org/wiki/Project_Maven",
+"pub_date": "2025-2026 (page revisions)",
+"startup_relevance": "Coalition COP/AI layer at NATO operational level is being filled by Palantir via NCIA; European founders (e.g., a German co-founder) might find allied-market en"
+},
+{
+"id": "E03-F22",
+"sweep": "E03",
+"title": "Project Convergence 2020 (RUSI, 2022): sensor-to-shooter time fell from ~14 minutes to seconds, but the experiment 'revealed that many of the systems in service ... could not pass data to each other in compatible forms'",
+"segment_ids": [
+"S02",
+"S05"
+],
+"chain_steps": [
+"TRANSPORT",
+"NORMALIZE",
+"INGEST"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/capacity-conduct-joint-all-domain-operations",
+"pub_date": "2022-11-23",
+"startup_relevance": "The original pain that spawned the data-fabric/NGC2 agenda; today largely being addressed by the common data layer vendors, but the same format-incompatibility "
+},
+{
+"id": "E03-F23",
+"sweep": "E03",
+"title": "Project Convergence 22: a U.S. Army officer described a junior soldier in a moving Bradley 'quickly overwhelmed' trying to manage uncrewed systems on a tablet; some experiments needed three soldiers per UGS",
+"segment_ids": [
+"S13",
+"S01",
+"S06"
+],
+"chain_steps": [
+"TASK",
+"MONITOR"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems",
+"pub_date": "2023-10-26",
+"startup_relevance": "Operator cognitive load in autonomy C2 (S13) is a documented exercise pain; UI/alerting and task-level autonomy that reduce inputs per vehicle are software prob"
+},
+{
+"id": "E03-F24",
+"sweep": "E03",
+"title": "Ukraine operations (CSIS, Dec 2024): Delta and Kropyva are both top-3 systems but 'not fully integrated'; cloud-hosted Delta depends on Starlink where connectivity is limited",
+"segment_ids": [
+"S02",
+"S07",
+"S05"
+],
+"chain_steps": [
+"INGEST",
+"FUSE",
+"VISUALIZE",
+"TRANSPORT"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.csis.org/analysis/cjadc2-ukraine",
+"pub_date": "2024-12-11",
+"startup_relevance": "Real-war validation that (a) bottom-up SA apps win adoption over official programs and (b) app-to-app integration and disconnected operation remain unsolved eve"
+},
+{
+"id": "E03-F25",
+"sweep": "E03",
+"title": "Ukraine (CSIS, Nov 2024): volunteer-built situational-awareness systems reached near-universal adoption while the official system (Dzvin) failed; unifying heterogeneous data sources is 'a challenge even for the United States military'",
+"segment_ids": [
+"S07",
+"S02",
+"S04"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"FUSE",
+"VISUALIZE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.csis.org/analysis/ukraines-military-ai-ecosystem",
+"pub_date": "2024-11-12",
+"startup_relevance": "Adoption is driven by front-line usability and direct user feedback loops, the same pattern the Army is now copying with Ivy Sting/Lightning Surge; product team"
+},
+{
+"id": "E03-F26",
+"sweep": "E03",
+"title": "U.S.-Japan space operations (CSIS, Aug 2024): officials on both sides say the current information-sharing paradigm is 'largely emails and PDFs', not operational data either side can analyse",
+"segment_ids": [
+"S08",
+"S10",
+"S03"
+],
+"chain_steps": [
+"DISSEMINATE",
+"COLLABORATE"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.csis.org/analysis/earth-uchu",
+"pub_date": "2024-08-23",
+"startup_relevance": "A concrete 'system A cannot ingest system B' coalition case with a policy/releasability root cause; software for machine-readable, releasability-tagged data exc"
+},
+{
+"id": "E03-F27",
+"sweep": "E03",
+"title": "Allied cloud-interoperability wargame (CSIS, Nov 2025): participants deployed liaison officers 'as a stopgap' for coordination, treated identity federation as the key to interoperability, and regretted not pre-negotiating with hyperscalers",
+"segment_ids": [
+"S08",
+"S10",
+"S09"
+],
+"chain_steps": [
+"COLLABORATE",
+"DISSEMINATE",
+"STORE"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.csis.org/analysis/allies-cloud-interoperability",
+"pub_date": "2025-11-05",
+"startup_relevance": "Reinforces that the liaison-officer workaround persists because identity/access federation across nations is unsolved; mission-partner ICAM tooling (S10) is a r"
+},
+{
+"id": "E03-F28",
+"sweep": "E03",
+"title": "Air Force department-level exercises 2025 (Bamboo Eagle 25-1/25-3, REFORPAC): distributed and coalition C2 in contested environments was the stated test object; TOC-L pathfinders use Red Flag, Bamboo Eagle and PC to refine requirements",
+"segment_ids": [
+"S01",
+"S05",
+"S08"
+],
+"chain_steps": [
+"DECIDE",
+"TASK",
+"TRANSPORT"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.aflcmc.af.mil/NEWS/Article/4359742/pathfinders-drive-toc-l-innovation/",
+"pub_date": "2025-02-15 / 2025-09-10 / 2025-09-26 / 2025-12-15",
+"startup_relevance": "DAF's battle-management modernization (TOC-L, CBC2, DAF Battle Network) is exercised through pathfinder units; entry is via AFWERX/ACC pathfinder channels, and "
+},
+{
+"id": "E03-F29",
+"sweep": "E03",
+"title": "Low-bandwidth cross-site collaboration on SIPRNet is a recurring exercise requirement: Immersive Wisdom claims 'ultra-low bandwidth digital war rooms' used at Bamboo Eagle 25-1 and PC-C5 and an 8 kbit/s SIPR-cloud-to-DDIL-edge test (Dec 2025), with repeat SOF renewals and an ACC IDIQ",
+"segment_ids": [
+"S05",
+"S01",
+"S06"
+],
+"chain_steps": [
+"COLLABORATE",
+"TRANSPORT"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://immersivewisdom.com",
+"pub_date": "2025-03-30; 2025-09-15; 2025-12-02",
+"startup_relevance": "Repeat renewals and a sole-source IDIQ (if accurate) are stronger demand evidence than exercise participation alone; suggests a viable niche for small vendors i"
+},
+{
+"id": "E03-F30",
+"sweep": "E03",
+"title": "Talisman Sabre 2025 (Jul 2025): commercial RF (HawkEye 360) data integrated into operational military platforms 'for the first time'; MRF-D exercised mobile, multimodal C2 across thousands of kilometres; USAF air-defense sectors integrated with the RAAF",
+"segment_ids": [
+"S03",
+"S04",
+"S08",
+"S05"
+],
+"chain_steps": [
+"COLLECT",
+"INGEST",
+"FUSE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.marines.mil/News/News-Display/Article/4263474/talisman-sabre-25-mrf-d-marines-and-sailors-conclude-multinational-exercise-in-the-top-end/",
+"pub_date": "2025-08-01 / 2025-08-05",
+"startup_relevance": "Commercial ISR feeds are still being wired into operational C2 one exercise at a time (an integration-services pain), and Australia is the most accessible allie"
+},
+{
+"id": "E03-F31",
+"sweep": "E03",
+"title": "Bold Quest and CWIX are the institutional venues where coalition 'interoperability gaps and integration shortfalls' are formally measured; Joint Staff budget books show Bold Quest assessing MPE/FMN, DACAS and coalition ISR, and translation gateways (5th-gen to Link-16) funded as JCTDs",
+"segment_ids": [
+"S08",
+"S02",
+"S05"
+],
+"chain_steps": [
+"NORMALIZE",
+"TRANSPORT",
+"ASSESS"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.act.nato.int/article/cwix25-concludes/",
+"pub_date": "2017-2019 (J-books); 2025-06 (CWIX25)",
+"startup_relevance": "Bold Quest/CWIX are the cheapest legitimate way for a small vendor (including allied vendors) to get an interoperability assessment against FMN/MPE standards; f"
+},
+{
+"id": "E03-F32",
+"sweep": "E03",
+"title": "GAO (Apr 2025): DOD lacks a framework to guide CJADC2 investments; services pursue separate data-integration efforts that risk new silos",
+"segment_ids": [
+"S02",
+"S01"
+],
+"chain_steps": [
+"NORMALIZE",
+"STORE",
+"FUSE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-25-106454",
+"pub_date": "2025-04-08",
+"startup_relevance": "Explains why cross-service data plumbing keeps being rebuilt exercise by exercise; a startup should assume there is no single DOD-wide integration standard to t"
+},
+{
+"id": "E03-F33",
+"sweep": "E03",
+"title": "NGC2 acquisition churn: the program's home office was renamed three times in ~12 months and there were zero NGC2-related SAM.gov notices in the 90 days before late April 2026; access runs through two OTA primes and TEMs",
+"segment_ids": [
+"S01",
+"S09"
+],
+"chain_steps": [
+"COLLABORATE"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://bceconsulting.com/insights/acquisition-transformation-as-the-real-story",
+"pub_date": "2026-04-25 / 2026",
+"startup_relevance": "Exercise participation, not solicitations, is the NGC2 sales channel; founders must plan for prime self-teaming, TEM attendance and a moving org chart, which fa"
+},
+{
+"id": "E03-F34",
+"sweep": "E03",
+"title": "Vendor and consultant narratives (2026) still describe the baseline as a 'swivel chair' model (manual re-entry between domain systems), with over-classification and 'incompatible data formats' across coalitions as the persistent frictions",
+"segment_ids": [
+"S02",
+"S08",
+"S10"
+],
+"chain_steps": [
+"INGEST",
+"NORMALIZE",
+"ASSESS"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "https://www.magaero.com/interoperability-in-defense-technology-enhancing-warfighting-abilities/",
+"pub_date": "2026",
+"startup_relevance": "Useful as a statement of the pain vocabulary buyers use; the Azymmetric claim that interoperability/mission-fit evidence generation is the bottleneck is an unva"
+},
+{
+"id": "E03-F35",
+"sweep": "E03",
+"title": "Prime and vendor participation at PC-C6 (Jul-Aug 2026): L3Harris continued NGC2 collaboration at Fort Irwin; QuSecure reached TRL-7 for post-quantum crypto on tactical networks",
+"segment_ids": [
+"S05",
+"S10",
+"S14"
+],
+"chain_steps": [
+"TRANSPORT",
+"STORE"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.l3harris.com/newsroom/editorial/2026/08/collaborative-capstone-l3harris-project-convergence",
+"pub_date": "2026-08-05 / 2026-09-02",
+"startup_relevance": "PC-C6 gave small vendors (QuSecure) a TRL-7 milestone alongside primes; the Capstone series remains a viable maturation path for niche security/sustainment soft"
+},
+{
+"id": "E03-F36",
+"sweep": "E03",
+"title": "Exercise-only versus operational pain: the strongest operationally reported pains are analyst overload and staff-intensive targeting (CENTCOM/Iran, Scarlet Dragon), coalition sharing by 'emails and PDFs' (U.S.-Japan) and app-to-app non-integration under intermittent connectivity (Ukraine); exercise-only pains are prototype reliability, cyber posture and network denial (NGC2 series)",
+"segment_ids": [
+"S02",
+"S04",
+"S08",
+"S10",
+"S05"
+],
+"chain_steps": [
+"NORMALIZE",
+"FUSE",
+"DISSEMINATE"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "",
+"pub_date": "2026-09-24",
+"startup_relevance": "For founders: operational pains (PED triage, releasability tagging, disconnected sync) are more durable demand signals than exercise pains that vendors fix betw"
+},
+{
+"id": "E04-F1",
+"sweep": "E04",
+"title": "DIU reports a ~51-56% prototype-to-production transition rate, the only published transition metric among the innovation channels",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-EDGEAI",
+"SEG-AUTONOMYC2",
+"SEG-LOGC2"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-25-106856",
+"pub_date": "2025-02",
+"startup_relevance": "DIU is the channel with the best documented odds of a follow-on; roughly half of completed prototypes get some production follow-on, but the definition is loose"
+},
+{
+"id": "E04-F2",
+"sweep": "E04",
+"title": "DIU's CSO + OT model has produced 500+ prototype awards and is being scaled across DoD as the default commercial on-ramp",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DEVSECOPS",
+"SEG-LOGC2"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.diu.mil/latest/advancing-dod-operational-capabilities-with-software-acquisition-reform",
+"pub_date": "2025-03",
+"startup_relevance": "A CSO/OT path avoids SBIR ownership constraints relevant to a non-U.S.-person co-founder, but FOCI/ITAR still apply and must be reviewed by counsel."
+},
+{
+"id": "E04-F3",
+"sweep": "E04",
+"title": "GAO has repeatedly found DoD cannot comprehensively measure SBIR transition outcomes (2013, 2014, 2025)",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-ISRPED",
+"SEG-TRACKFUSION",
+"SEG-DATAFABRIC"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://files.gao.gov/reports/GAO-25-107942/index.html",
+"pub_date": "2025-09",
+"startup_relevance": "Founders should not trust program-level transition claims; diligence must be per-company (named Phase III/production contracts, repeat orders)."
+},
+{
+"id": "E04-F4",
+"sweep": "E04",
+"title": "AFWERX STRATFI/TACFI is the Air Force's formal bridge from Phase II to production: $3-15M (STRATFI) and $375K-2M (TACFI), Phase II within two years, matching funds required; PY26.1 cycle opened in 2025",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DEVSECOPS",
+"SEG-EDGEAI",
+"SEG-PNT"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://afwerx.com/divisions/sbir-sttr/stratfi-tacfi/",
+"pub_date": "2025",
+"startup_relevance": "A STRATFI requires an Air Force customer willing to commit funds plus private match; with $250k of capital the team would need outside investors to satisfy the "
+},
+{
+"id": "E04-F5",
+"sweep": "E04",
+"title": "Rise8 selected for PY2025 STRATFI to enable rapid continuous delivery of mission-critical applications (DevSecOps/ATO theme graduates to bridge funding)",
+"segment_ids": [
+"SEG-DEVSECOPS"
+],
+"chain_steps": [
+"deliver",
+"secure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.globenewswire.com/news-release/2025/03/19/3045477/0/en/AFWERX-and-SpaceWERX-Select-Rise8-for-Program-Year-2025-STRATFI-under-U-S-Air-Force-SBIR-to-Enable-Rapid-Continuous-Delivery-of-Mission-Critical-Applications.html",
+"pub_date": "2025-03-19",
+"startup_relevance": "DevSecOps/continuous-ATO is a theme where SBIR money has demonstrably converted to bridge funding; it is also crowded (Rise8, Raft, Defense Unicorns, Second Fro"
+},
+{
+"id": "E04-F6",
+"sweep": "E04",
+"title": "Tycho.AI won an 18-month $2M AFRL TACFI (May 2026) for GPS-denied, comms-contested maritime autonomy - edge AI/PNT-denied autonomy is still being bridge-funded in 2026",
+"segment_ids": [
+"SEG-EDGEAI",
+"SEG-PNT",
+"SEG-AUTONOMYC2"
+],
+"chain_steps": [
+"sense",
+"act"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.globenewswire.com/news-release/2026/05/28/3302607/0/en/tycho-ai-secures-2m-afrl-tacfi-contract-to-advance-maritime-autonomy-in-gps-denied-environments.html",
+"pub_date": "2026-05-28",
+"startup_relevance": "Confirms continuing demand for DDIL-tolerant edge autonomy, but the award is a bridge, not production; company marketing is not proof the product works."
+},
+{
+"id": "E04-F7",
+"sweep": "E04",
+"title": "Intellisense Systems' STRATFI (May 2024) was explicitly to 'finalize transition' of its weather observation system - STRATFI is used as a named transition instrument, mostly for hardware/sensor products",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DEVSECOPS"
+],
+"chain_steps": [
+"sense"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.intellisenseinc.com/news-events/press-releases/intellisense-systems-awarded-usaf-stratfi-contract-to-finalize-transition-of-the-iwos/",
+"pub_date": "2024-05",
+"startup_relevance": "Pure-software C2 startups are under-represented among named STRATFI winners relative to sensors/hardware; the exception is DevSecOps infrastructure."
+},
+{
+"id": "E04-F8",
+"sweep": "E04",
+"title": "DIU Thunderforge: prototype OT to Scale AI (Mar 2025) to integrate commercial AI into operational and theater-level planning - a C2 decision-support prototype, not a production program",
+"segment_ids": [
+"SEG-C2APPS"
+],
+"chain_steps": [
+"make-sense",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.diu.mil/latest/dius-thunderforge-project-to-integrate-commercial-ai-powered-decision-making",
+"pub_date": "2025-03",
+"startup_relevance": "The AI-for-planning lane at the theater level is already occupied by a well-capitalized incumbent team; a student startup would be a subcontractor or niche data"
+},
+{
+"id": "E04-F9",
+"sweep": "E04",
+"title": "Logistics C2 shows the fastest 2025-2026 DIU cadence: JSDT launched Aug 2025, prototype OTs to Air Space Intelligence and Watchtower Labs Jan 2026, Gallatin AI added for USAREUR-AF Jul 2026",
+"segment_ids": [
+"SEG-LOGC2"
+],
+"chain_steps": [
+"sustain",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.diu.mil/latest/two-contracts-awarded-to-modernize-decision-making-for-dows-joint-logistics",
+"pub_date": "2026-02",
+"startup_relevance": "Logistics/sustainment C2 is a demand lane where new entrants won DIU prototypes in 2026; it is less crowded than kinetic C2 and has lower classification frictio"
+},
+{
+"id": "E04-F10",
+"sweep": "E04",
+"title": "DIU Common Operational Database (COD) with Project Overmatch/NAVWAR: DDIL-resilient database for unmanned systems, started mid-2023, DIU claims deployment of commercial AI solutions",
+"segment_ids": [
+"SEG-DDIL",
+"SEG-DATAFABRIC",
+"SEG-AUTONOMYC2"
+],
+"chain_steps": [
+"connect",
+"make-sense"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/latest/department-of-defense-successfully-deploys-commercial-ai-solutions-for",
+"pub_date": "2024",
+"startup_relevance": "DDIL data synchronization for unmanned fleets is a validated Navy need with a DIU deployment claim; a startup entering now competes against vendors already inte"
+},
+{
+"id": "E04-F11",
+"sweep": "E04",
+"title": "A 2025 DIU solicitation seeks DDIL-tolerant targeting for small dispersed strike teams with minimal reliance on external data links",
+"segment_ids": [
+"SEG-DDIL",
+"SEG-EDGEAI",
+"SEG-ISRPED"
+],
+"chain_steps": [
+"find",
+"fix",
+"target",
+"engage"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/work-with-us/submit-solution/PROJ00598",
+"pub_date": "2025",
+"startup_relevance": "Edge, disconnected targeting workflows remain an open DIU ask in late 2025; this is the clearest 'persistent unmet demand' signal for DDIL software, though it f"
+},
+{
+"id": "E04-F12",
+"sweep": "E04",
+"title": "NAVWAR open SBIR topic 'Data Integrity and Control in DDIL Environments' ties zero-trust data formats (ZTDF/ICDF) to DDIL operation - topic wording that recurs across services",
+"segment_ids": [
+"SEG-ZEROTRUST",
+"SEG-DDIL",
+"SEG-DATAFABRIC"
+],
+"chain_steps": [
+"connect",
+"secure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.sbir.gov/topics/10735",
+"pub_date": "2024-2025",
+"startup_relevance": "Zero-trust data tagging that survives DDIL is a well-specified, software-only problem where an SBIR Phase I/II is realistic for a small engineering team; the st"
+},
+{
+"id": "E04-F13",
+"sweep": "E04",
+"title": "XRDefense LLC received a $4.75M Air Force SBIR Phase III for zero-trust data fabric - a visible but small Phase III in the data-fabric theme",
+"segment_ids": [
+"SEG-DATAFABRIC",
+"SEG-ZEROTRUST"
+],
+"chain_steps": [
+"connect",
+"secure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://orangeslices.ai/contract-award-5m-air-force-sbir-phase-iii-zero-trust-data-fabric/",
+"pub_date": "2025",
+"startup_relevance": "Benchmark for what a 'graduation' looks like in this theme: a ~$5M Phase III, which sustains a small firm but is not a scaled program of record."
+},
+{
+"id": "E04-F14",
+"sweep": "E04",
+"title": "Navy FY26 Release 3 SBIR/STTR topics include zero-trust data for combat systems and sensor management; Navy 25.2 topic N252-089 asks for a 'Virtual Agent for Data Fusion and Understanding'",
+"segment_ids": [
+"SEG-ISRPED",
+"SEG-TRACKFUSION",
+"SEG-ZEROTRUST"
+],
+"chain_steps": [
+"sense",
+"make-sense",
+"secure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://navysbir.com/n25_2/N252-089.htm",
+"pub_date": "2025-04 and 2026",
+"startup_relevance": "Navy continues to buy fusion/PED research via SBIR every cycle, but Phase III is defined as combat-system integration, which requires prime cooperation and clea"
+},
+{
+"id": "E04-F15",
+"sweep": "E04",
+"title": "Army SBIR topic 'Generative AI Enabled Tactical Network' funds a DDIL tactical-network simulation environment for NGC2 - SBIR is being used to build test infrastructure around NGC2 rather than NGC2 itself",
+"segment_ids": [
+"SEG-TACNET",
+"SEG-DDIL",
+"SEG-C2APPS"
+],
+"chain_steps": [
+"connect"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/",
+"pub_date": "2025",
+"startup_relevance": "Adjacent tooling for NGC2 (network emulation, data-load simulation, test harnesses) is an SBIR-accessible niche for a small software team that cannot compete fo"
+},
+{
+"id": "E04-F16",
+"sweep": "E04",
+"title": "Army NGC2 prototype OTAs (2025) were competed via CSO and awarded to vendor teams for 4th ID, then 25th ID/III Corps - prototypes led by well-capitalized firms, not SBIR graduates",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DATAFABRIC",
+"SEG-TACNET"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts",
+"pub_date": "2025",
+"startup_relevance": "The flagship Army C2 lane is a team sport led by large integrators; a startup's realistic entry is as a specialty app or data-service supplier inside a team, no"
+},
+{
+"id": "E04-F17",
+"sweep": "E04",
+"title": "Army SBIR CATALYST: Compound Eye secured $13.3M in full CATALYST funding (Jul 2025) for VIDAS-SLAM - the Army's dedicated Phase II-to-III bridge is being used for GPS-denied navigation software",
+"segment_ids": [
+"SEG-PNT",
+"SEG-EDGEAI",
+"SEG-AUTONOMYC2"
+],
+"chain_steps": [
+"sense",
+"act"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.akelaconsultants.com/post/army-sbir-program",
+"pub_date": "2025",
+"startup_relevance": "PNT-denied navigation software is one of the few C4ISR-adjacent software themes with a documented eight-figure Army bridge award to a venture-backed startup."
+},
+{
+"id": "E04-F18",
+"sweep": "E04",
+"title": "xTechOverwatch (launched 2 Apr 2025): $1M cash prizes and up to $40M in follow-on SBIR awards for autonomy/AI/sensor small businesses; 40 finalists, up to 20 winners at the Oct 2025 Army summit",
+"segment_ids": [
+"SEG-AUTONOMYC2",
+"SEG-EDGEAI"
+],
+"chain_steps": [
+"sense",
+"act"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://armysbir.army.mil/announcement/xtech-overwatch-advances-armys-autonomous-capabilities-with-1m-in-cash-prizes-and-40m-in-follow-on-awards/",
+"pub_date": "2025",
+"startup_relevance": "xTech is the cheapest, fastest Army on-ramp for a two-person team (no prior Phase I needed), but prize money is small and the $40M follow-on pool is split acros"
+},
+{
+"id": "E04-F19",
+"sweep": "E04",
+"title": "Navy track-fusion topics recur across 14+ years (N111-016 in 2011, N231-019 in 2023, N252-089 in 2025) with Phase III notices still being issued for the 2011 topic - a perpetual-prototyping signature",
+"segment_ids": [
+"SEG-TRACKFUSION",
+"SEG-ISRPED"
+],
+"chain_steps": [
+"make-sense",
+"track"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.navysbir.com/n23_1/N231-019.htm",
+"pub_date": "2023",
+"startup_relevance": "Track fusion is a mature, incumbent-heavy SBIR niche (Toyon, Numerica, Metron, SSCI - RECALL) where new entrants face both algorithmic incumbents and classified"
+},
+{
+"id": "E04-F20",
+"sweep": "E04",
+"title": "ISR PED example: Wilson Eagle/Ausgar/Jove Sciences plan Phase III transition of ACOR-N and Pattern-of-Life Processor into the C2X program at SECRET and TS/SCI levels - classification is the transition gate",
+"segment_ids": [
+"SEG-ISRPED",
+"SEG-C2APPS"
+],
+"chain_steps": [
+"make-sense",
+"track"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.sbir.gov/awards/8672",
+"pub_date": "Public evidence insufficient (award year not captured).",
+"startup_relevance": "ISR PED transitions run through classified enclaves; without a facility clearance and cleared U.S.-person staff the theme is effectively closed to this founding"
+},
+{
+"id": "E04-F21",
+"sweep": "E04",
+"title": "SBIR/STTR authority lapsed 30 Sep 2025 and the Oct-Nov 2025 shutdown put SBIR contracts on hold; the Senate passed a reauthorization through 2031 with major reforms on 25 Feb 2026 and the program is being 'revamped for modern warfare'",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DATAFABRIC",
+"SEG-DDIL",
+"SEG-EDGEAI"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://defensescoop.com/2026/04/29/sbir-sttr-americas-seed-fund-is-being-revamped-for-modern-warfare/",
+"pub_date": "2026-04-29",
+"startup_relevance": "SBIR is a politically volatile funding rail; a plan that depends on Phase I/II cash-flow timing in 2026-2027 must budget for lapses and reform-driven rule chang"
+},
+{
+"id": "E04-F22",
+"sweep": "E04",
+"title": "Army is reorienting SBIR toward integrated capabilities ('the whole vs. the parts'), consistent with CATALYST and NGC2 team-based buying",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-TACNET",
+"SEG-EDGEAI"
+],
+"chain_steps": [
+"all"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://federalnewsnetwork.com/ask-the-cio/2026/05/army-moving-sbir-to-focus-on-the-whole-vs-the-parts/",
+"pub_date": "2026-05",
+"startup_relevance": "A narrow point solution is less fundable in the Army channel than before; positioning as a module of a named capability (NGC2 data layer, HMI formation) improve"
+},
+{
+"id": "E04-F23",
+"sweep": "E04",
+"title": "APFIT (Accelerate Procurement and Fielding of Innovative Technologies) has surpassed $1B in cumulative awards - a production bridge that complements SBIR Phase III and DIU follow-ons",
+"segment_ids": [
+"SEG-EDGEAI",
+"SEG-TACNET",
+"SEG-AUTONOMYC2"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://grantedai.com/blog/pentagon-apfit-billion-sbir-defense-small-business-innovation-strategy-2026",
+"pub_date": "2026",
+"startup_relevance": "APFIT is a real but competitive procurement bridge; to date it has favored hardware and platforms (RECALL), so software C2 startups should not plan around it."
+},
+{
+"id": "E04-F24",
+"sweep": "E04",
+"title": "Defense-tech startups raised a record $49.1B in 2025 (nearly double 2024) and 107+ venture rounds by mid-2026, while continuing resolutions meant 'no new starts' - funding is not demand",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-EDGEAI",
+"SEG-AUTONOMYC2"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.defensenews.com/industry/2026/01/20/defense-tech-startups-had-their-best-funding-year-ever-in-2025/",
+"pub_date": "2026-01-20",
+"startup_relevance": "Capital is abundant for defense software, which raises the competitive bar for a $250k team; the scarce resource is a government customer with obligated funds."
+},
+{
+"id": "E04-F25",
+"sweep": "E04",
+"title": "M&A is the dominant visible 'graduation' for SBIR-heritage C4ISR firms in 2025-2026: Forterra acquired goTenna (tactical mesh networking); Firefly acquired SciTec ($855M); CACI acquired ARKA ($2.6B); Motorola acquired D-Fend ($1.5B)",
+"segment_ids": [
+"SEG-TACNET",
+"SEG-ISRPED",
+"SEG-TRACKFUSION"
+],
+"chain_steps": [
+"connect",
+"sense"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://mergers.whitecase.com/highlights/boots-off-the-ground-defense-tech-ma-skyrockets-in-us-and-europe",
+"pub_date": "2026",
+"startup_relevance": "For tactical-networking and fusion software, the realistic upside case is acquisition by a prime or scaled startup, not independent scale; this shapes what to b"
+},
+{
+"id": "E04-F26",
+"sweep": "E04",
+"title": "Rebellion Defense is the canonical 'raised big, faded' C2-software case: ~40% workforce cut in May 2023 after a >$1B valuation in 2021",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-EDGEAI"
+],
+"chain_steps": [
+"make-sense",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://layoffs.fyi/company/rebellion-defense/",
+"pub_date": "2023-05",
+"startup_relevance": "Lesson: venture scale without a program of record or repeat orders leads to contraction; the C2 'AI mission software' pitch alone did not convert to durable rev"
+},
+{
+"id": "E04-F27",
+"sweep": "E04",
+"title": "Radiant Logic selected to create the Naval Identity Service (Nov 2022) - commercial ICAM/zero-trust software reaching enterprise adoption via a non-SBIR path",
+"segment_ids": [
+"SEG-ZEROTRUST"
+],
+"chain_steps": [
+"secure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.businesswire.com/news/home/20221115005636/en/The-Department-of-Navy-Selects-Radiant-Logic-to-Create-Naval-Identity-Service",
+"pub_date": "2022-11-15",
+"startup_relevance": "Zero trust has real production budgets, but enterprise ICAM is taken by established vendors; the open edge is tactical/DDIL data tagging (see F12)."
+},
+{
+"id": "E04-F28",
+"sweep": "E04",
+"title": "Recurring SBIR specialist firms dominate C2 decision-support, fusion and PED topics (Toyon, Numerica, Charles River Analytics, Aptima, SoarTech, Stottler Henke, Perceptronics, Metron, Scientific Systems) - the 'SBIR mill' pattern targeted by 2025-2026 reform",
+"segment_ids": [
+"SEG-TRACKFUSION",
+"SEG-ISRPED",
+"SEG-C2APPS"
+],
+"chain_steps": [
+"make-sense",
+"decide"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://breakingdefense.com/2025/10/clean-those-bastards-out-small-business-fund-used-by-dod-teeters-on-the-edge/",
+"pub_date": "2025-10",
+"startup_relevance": "Repeat awardees crowd the fusion/decision-aid topic space; reform-era caps on repeat awardees could open room for new entrants, but Phase III access still runs "
+},
+{
+"id": "E04-F29",
+"sweep": "E04",
+"title": "DevSecOps/ATO 'graduations' (Second Front Game Warden, Rise8, Raft, Defense Unicorns) show software-delivery infrastructure is the clearest SBIR-to-production lane in C4ISR software",
+"segment_ids": [
+"SEG-DEVSECOPS"
+],
+"chain_steps": [
+"deliver",
+"secure"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.rise8.us/resources/afwerx-and-spacewerx-select-rise8-for-program-year-2025-stratfi",
+"pub_date": "2025-03-19",
+"startup_relevance": "Verdict A (persistent demand with real graduations) but crowded and consolidating; a new entrant needs a differentiated wedge (e.g., DDIL/edge deployment of ATO"
+},
+{
+"id": "E04-F30",
+"sweep": "E04",
+"title": "Founder-eligibility constraints: SBIR/STTR requires a U.S. small business more than 50% owned and controlled by U.S. citizens or permanent residents; STRATFI/TACFI require matching funds; DIU CSO has no small-business rule but FOCI/ITAR/export controls apply",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DEVSECOPS",
+"SEG-ZEROTRUST",
+"SEG-DDIL"
+],
+"chain_steps": [
+"all"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://armysbir.army.mil/eligibility/",
+"pub_date": "2025",
+"startup_relevance": "This is a gating item: without a compliant ownership structure the SBIR/STRATFI/CATALYST rails are unavailable, leaving DIU CSO, prime subcontracting and allied"
+},
+{
+"id": "E04-F31",
+"sweep": "E04",
+"title": "Coalition interoperability/Mission Partner Environment and spectrum-awareness software: no SBIR/DIU/AFWERX awards or topics surfaced this session",
+"segment_ids": [
+"SEG-MPE",
+"SEG-SPECTRUM"
+],
+"chain_steps": [
+"connect",
+"sense"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "",
+"pub_date": "",
+"startup_relevance": "Absence of evidence is not opportunity; these themes need a dedicated sweep of DISA, JS J6, and Army EW program offices rather than SBIR databases."
+},
+{
+"id": "E04-F32",
+"sweep": "E04",
+"title": "Baseline: DIU's FY2022 record of 17 transitions and its FY2024 count of 13 imply low double-digit transitions per year across all technology areas, i.e. only a handful per year in C2/software",
+"segment_ids": [
+"SEG-C2APPS",
+"SEG-DDIL",
+"SEG-LOGC2"
+],
+"chain_steps": [
+"all"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://breakingdefense.com/2023/01/from-prototypes-to-operations-in-record-breaking-year-diu-transitioned-17-new-tech/",
+"pub_date": "2023-01",
+"startup_relevance": "Even the best-performing channel produces roughly a dozen transitions a year across DoD; a startup's plan should assume a multi-year, low-probability path and d"
+},
+{
+"id": "E05-F1",
+"sweep": "E05",
+"title": "FY2027 President's Budget released 21 April 2026; justification books now at comptroller.war.gov",
+"segment_ids": [
+"S-ACQ-POLICY",
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://comptroller.war.gov/Budget-Materials/Budget2027/",
+"pub_date": "2026-04-21",
+"startup_relevance": "Founders can read program-level narrative and out-year (FYDP) funding directly from the J-books; the FY27 books are the current authoritative statement of what "
+},
+{
+"id": "E05-F2",
+"sweep": "E05",
+"title": "Army NGC2 FY27 request ~$3.78B across RDT&E and procurement, split into four flexible sub-lines",
+"segment_ids": [
+"S-ARMY-NGC2",
+"S-TACTICAL-NETWORK",
+"S-DATA-FABRIC"
+],
+"chain_steps": [
+"transport",
+"process/fuse",
+"COP/visualize",
+"decide/plan"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://breakingdefense.com/2026/04/army-unveils-sweeping-xm30-push-4b-bet-on-ngc2-in-newly-released-budget-materials/",
+"pub_date": "2026-04",
+"startup_relevance": "The 'C2 applications' ($488.4M) and 'C2 data' ($306.1M) sub-lines are the most software-native and most accessible to small vendors via the NGC2 integrator team"
+},
+{
+"id": "E05-F3",
+"sweep": "E05",
+"title": "NGC2 trend: ~$3B FY26 request/provided -> ~$3.78B FY27 request (+28%)",
+"segment_ids": [
+"S-ARMY-NGC2"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2025/07/02/army-next-gen-command-and-control-budget-2026-request-3-billion/",
+"pub_date": "2025-07-02",
+"startup_relevance": "NGC2 is one of very few C2 software lines with a rising two-year trend; it is the Army's stated top modernization priority, which matters more than any IDIQ cei"
+},
+{
+"id": "E05-F4",
+"sweep": "E05",
+"title": "HASC FY27 chairman's mark would cut NGC2 authorization by $710M, signalling discomfort with flexible funding",
+"segment_ids": [
+"S-ARMY-NGC2",
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://insidedefense.com/daily-news/house-defense-policy-bill-would-see-700-million-drop-authorized-ngc2-dollars",
+"pub_date": "2026",
+"startup_relevance": "Budget risk is real: a startup depending on NGC2 flow-down should expect year-to-year volatility and reporting-driven obligation delays."
+},
+{
+"id": "E05-F5",
+"sweep": "E05",
+"title": "FY26 NDAA caps Army at 50% obligation of NGC2 portfolio funds until a comprehensive report is delivered",
+"segment_ids": [
+"S-ARMY-NGC2",
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://federalnewsnetwork.com/army/2026/02/lawmakers-cap-ngc2-funding-army-warns-industry-not-to-bring-negativity-to-congress/",
+"pub_date": "2026-02",
+"startup_relevance": "Signals two hard requirements for anyone building into NGC2: NSA-approved crypto integration and demonstrable resiliency in DDIL conditions; also that cash flow"
+},
+{
+"id": "E05-F6",
+"sweep": "E05",
+"title": "NGC2 execution status 2025-2026: prototypes with 4th ID / 25th ID, Anduril leads common data layer baseline, I Corps operational fielding",
+"segment_ids": [
+"S-ARMY-NGC2",
+"S-DATA-FABRIC"
+],
+"chain_steps": [
+"process/fuse",
+"COP/visualize"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://breakingdefense.com/2026/09/beyond-prototypes-army-readies-operational-ngc2-tech-for-i-corps/",
+"pub_date": "2026-09",
+"startup_relevance": "The money in E05-F2 is being executed through integrator-led teams (Anduril, Lockheed) on OTAs; the practical on-ramp for a two-person startup is as a niche app"
+},
+{
+"id": "E05-F7",
+"sweep": "E05",
+"title": "Army legacy tactical network / mission command lines (ITN, CPCE, C2 Fix, Unified Network) are being divested or absorbed into NGC2; PE-level FY27 figures not verified",
+"segment_ids": [
+"S-TACTICAL-NETWORK",
+"S-ARMY-NGC2"
+],
+"chain_steps": [
+"transport",
+"COP/visualize"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205D.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "Building against legacy CPCE/ITN interfaces is a shrinking market; the growth is in NGC2's data layer and application ecosystem."
+},
+{
+"id": "E05-F8",
+"sweep": "E05",
+"title": "TITAN (Tactical Intelligence Targeting Access Node): prototype under Palantir; FY27 budget line not verified",
+"segment_ids": [
+"S-ISR-PED",
+"S-ARMY-NGC2"
+],
+"chain_steps": [
+"collect",
+"process/fuse",
+"task/effects"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.executivegov.com/articles/army-fy2027-budget-request-c-suas-ngc2-mshorad-antpy2",
+"pub_date": "2026-04",
+"startup_relevance": "TITAN is a prime-led (Palantir) system; niche opportunities exist in sensor adapters, PED analytics and edge inference, but through the prime."
+},
+{
+"id": "E05-F9",
+"sweep": "E05",
+"title": "EWPMT: Army cancelled planned follow-on award in April 2024 and restructured its EMS planning-tool approach",
+"segment_ids": [
+"S-EW-SPECTRUM"
+],
+"chain_steps": [
+"decide/plan",
+"task/effects"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://defensescoop.com/2024/04/18/army-cancels-planned-award-ewpmt-electronic-warfare/",
+"pub_date": "2024-04-18",
+"startup_relevance": "A restructured, non-incumbent EMS-planning requirement is a genuine opening for software-first vendors, but the funded path in FY27 is unclear and likely rides "
+},
+{
+"id": "E05-F10",
+"sweep": "E05",
+"title": "Rainmaker (Army data fabric): S&T effort with no discrete budget line found",
+"segment_ids": [
+"S-DATA-FABRIC"
+],
+"chain_steps": [
+"process/fuse"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://breakingdefense.com/2020/11/project-rainmaker-army-weaves-data-fabric-to-link-joint-networks/",
+"pub_date": "2020-11",
+"startup_relevance": "Data-fabric money is now inside NGC2 'C2 data', not a standalone S&T line a startup could target directly."
+},
+{
+"id": "E05-F11",
+"sweep": "E05",
+"title": "DAF ABMS RDT&E request $1,040.5M in FY26; CBC2 and TOC-L live inside ABMS under C3BM; DAF Battle Network is the DAF's CJADC2 contribution",
+"segment_ids": [
+"S-DAF-BATTLE-NETWORK",
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"process/fuse",
+"COP/visualize",
+"decide/plan"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.congress.gov/crs-product/R48860",
+"pub_date": "2025",
+"startup_relevance": "ABMS is the DAF's ~$1B/yr C2 software-heavy line; CBC2 is deliberately built on a microservices/cloud model with multiple vendors, which is more startup-friendl"
+},
+{
+"id": "E05-F12",
+"sweep": "E05",
+"title": "DAF FY27 request: overview and IT/cyber priorities published; ABMS/DCGS FY27 line values not verified",
+"segment_ids": [
+"S-DAF-BATTLE-NETWORK",
+"S-ISR-PED"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://www.af.mil/Portals/1/documents/Secretariat%20of%20the%20AF/SAF-FM/Budget%20-%202027/Supporting%20Docs/FY27%20Budget%20Overview.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "Follow-up needed: pull PE 0207179F (ABMS) and DCGS lines from the FY27 DAF RDT&E Vol 3 to confirm trend."
+},
+{
+"id": "E05-F13",
+"sweep": "E05",
+"title": "Navy CANES: $534.3M FY26 request",
+"segment_ids": [
+"S-NAVY-OVERMATCH",
+"S-TACTICAL-NETWORK"
+],
+"chain_steps": [
+"transport"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.highergov.com/budget/canes-7f13abc/",
+"pub_date": "2025",
+"startup_relevance": "CANES is hardware/integration dominated (prime-led); the software opportunity is in applications hosted on CANES, funded elsewhere (Overmatch, NIWC efforts)."
+},
+{
+"id": "E05-F14",
+"sweep": "E05",
+"title": "Project Overmatch unclassified 'core' funding was $139.8M in FY25 ($716.7M across FYDP); most Overmatch funding is classified; FY26/FY27 core values not verified",
+"segment_ids": [
+"S-NAVY-OVERMATCH"
+],
+"chain_steps": [
+"transport",
+"process/fuse"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2024/03/11/navy-project-overmatch-funding-2025/",
+"pub_date": "2024-03-11",
+"startup_relevance": "Overmatch's opacity and classification make it the hardest CJADC2 pillar for an uncleared, non-U.S.-person-founded startup to enter; the visible money is small."
+},
+{
+"id": "E05-F15",
+"sweep": "E05",
+"title": "Marine Corps C2 (CAC2S, NOTM) funded in FY27 Procurement Marine Corps J-book; line values not verified",
+"segment_ids": [
+"S-USMC-C2"
+],
+"chain_steps": [
+"COP/visualize",
+"task/effects"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://www.secnav.navy.mil/fmc/fmb/Documents/27pres/PMC_Book.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "USMC C2 lines are modest and procurement-heavy; better approached through MCWL / NavalX / SBIR than the PMC line."
+},
+{
+"id": "E05-F16",
+"sweep": "E05",
+"title": "Space Force FY27 request $71.3B (65% RDT&E, $38.4B), roughly +80% year-on-year; new $1.5B 'Automate Sat C2' program",
+"segment_ids": [
+"S-SPACE-BMC3"
+],
+"chain_steps": [
+"task/effects",
+"decide/plan"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.airandspaceforces.com/space-force-80-percent-funding-boost-2027-budget/",
+"pub_date": "2026-08-06",
+"startup_relevance": "Automated satellite C2 is a software-heavy new start with no entrenched incumbent baseline; it is a plausible entry for autonomy/scheduling software startups, b"
+},
+{
+"id": "E05-F17",
+"sweep": "E05",
+"title": "Joint CJADC2: FY27 request seeks >$2B in FY27 (and ~$2.3B over the FYDP) to expand Maven Smart System and Joint Fires Network to combatant commands",
+"segment_ids": [
+"S-JOINT-CJADC2",
+"S-ENTERPRISE-AI"
+],
+"chain_steps": [
+"process/fuse",
+"COP/visualize",
+"decide/plan"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+"pub_date": "2026-05-28",
+"startup_relevance": "This is the clearest statement that joint C2 software money is being spent as enterprise licenses to one platform vendor (Palantir); startups should plan to be "
+},
+{
+"id": "E05-F18",
+"sweep": "E05",
+"title": "Palantir vehicles: MSS ceiling raised to ~$1.3B (May 2025) and Army Enterprise Agreement up to ~$10B/10 years (Aug 2025) - ceilings, not obligations",
+"segment_ids": [
+"S-ENTERPRISE-AI",
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"process/fuse",
+"COP/visualize"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.army.mil",
+"pub_date": "2025-08",
+"startup_relevance": "Enterprise-agreement consolidation reduces the number of independent small contracts an Army unit can let for C2 analytics; the ecosystem play is integration wi"
+},
+{
+"id": "E05-F19",
+"sweep": "E05",
+"title": "DISA FY27 O&M: Thunderdome zero-trust access to the Secret fabric for combatant commands; Coalition Information Environment hybrid-cloud MPE for C2 at Secret-and-below",
+"segment_ids": [
+"S-MPE-COALITION",
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"transport",
+"COP/visualize"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/budget_justification/pdfs/01_Operation_and_Maintenance/O_M_VOL_1_PART_1/OM_Volume1_Part1.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "MPE/CIE is an explicitly funded FY27 need with an allied-access angle relevant to a German-Indonesian founding team, but delivery runs through DISA and its larg"
+},
+{
+"id": "E05-F20",
+"sweep": "E05",
+"title": "OSD/CDAO FY27: Advana funded under OSW O&M increase (audit-driven), CDAO AI workforce and 'AI Rapid Capabilities' funded; PE-level CDAO figures not verified",
+"segment_ids": [
+"S-ENTERPRISE-AI"
+],
+"chain_steps": [
+"process/fuse",
+"sustain"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://comptroller.war.gov/Portals/45/Documents/defbudget/FY2027/budget_justification/pdfs/03_RDT_and_E/RDTE_OSW_PB_2027.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "Advana's justification is now audit/financial-management, not warfighting C2; CDAO's 'AI assessment and assurance' line is a small, software-shaped opportunity "
+},
+{
+"id": "E05-F21",
+"sweep": "E05",
+"title": "2025 reconciliation law (P.L. 119-21, Title II): ~$150B defense ($156.2B FY25 budget authority per CRS), no discrete JADC2/C2-software line; DoD planned to obligate essentially all $152B in one year",
+"segment_ids": [
+"S-ACQ-POLICY",
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.congress.gov/crs-product/IN12580",
+"pub_date": "2025",
+"startup_relevance": "Reconciliation money is one-time and hardware/munitions-heavy; the software-relevant slices are indirect (Golden Dome C2, Indo-Pacific C2, innovation/low-cost-w"
+},
+{
+"id": "E05-F22",
+"sweep": "E05",
+"title": "Reconciliation slices most relevant to C2/software: Golden Dome (~$24-25B), Indo-Pacific, and 'low-cost weapons / innovation' (~$16B) sections; Navy RDT&E got ~$3.4B",
+"segment_ids": [
+"S-SPACE-BMC3",
+"S-JOINT-CJADC2",
+"S-CUAS-C2"
+],
+"chain_steps": [
+"acquire",
+"decide/plan"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.congress.gov/crs-product/IN12576",
+"pub_date": "2025",
+"startup_relevance": "Golden Dome C2/battle management is the largest new software-adjacent pot, but it is highly classified and prime-dominated; not a realistic first market for an "
+},
+{
+"id": "E05-F23",
+"sweep": "E05",
+"title": "6 March 2025 SecDef memo 'Directing Modern Software Acquisition to Maximize Lethality': Software Acquisition Pathway preferred; CSO and OTA default solicitation methods",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.defensenews.com/pentagon/2025/03/07/hegseth-mandates-streamlined-software-acquisition-approach-in-new-memo/",
+"pub_date": "2025-03-07",
+"startup_relevance": "This is the single most startup-favorable policy in the set: CSOs/OTAs allow non-traditional vendors to be awarded without full FAR competition, and OTAs are th"
+},
+{
+"id": "E05-F24",
+"sweep": "E05",
+"title": "7 November 2025 'Warfighting Acquisition System' memo: Portfolio Acquisition Executives replace PEOs within two years; commercial-first; speed as organizing principle",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://defensescoop.com/2025/11/07/hegseth-acquisition-transformation-speech-memo-guidance/",
+"pub_date": "2025-11-07",
+"startup_relevance": "Portfolio-level buying (e.g., an Army C2 portfolio executive) concentrates decision authority; startups need one portfolio sponsor rather than many PEO/PM relat"
+},
+{
+"id": "E05-F25",
+"sweep": "E05",
+"title": "FY26 NDAA (signed December 2025, ~$901B topline) enacts portfolio-based acquisition, raises acquisition thresholds, and overhauls requirements",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.govconwire.com/articles/trump-fy26-ndaa-acquisition-reforms",
+"pub_date": "2025-12",
+"startup_relevance": "Raised thresholds enlarge the pool of small awards that can be made with simplified procedures, which is where a $250k-funded startup's first contracts realisti"
+},
+{
+"id": "E05-F26",
+"sweep": "E05",
+"title": "FY26 appropriations timeline: 43-day shutdown (1 Oct - 12 Nov 2025), CR, then full-year FY26 appropriations enacted before the FY27 request",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/pentagon-budget-2027-us-army-requests-over-usd3-billion-for-ngc2-c2now",
+"pub_date": "2026-04",
+"startup_relevance": "Under a CR, new starts and production-rate increases are frozen; a startup's first-year revenue plan should not assume October obligations."
+},
+{
+"id": "E05-F27",
+"sweep": "E05",
+"title": "Counter-UAS C2: JIATF-401 stood up (Aug 2025) as the DoD-wide C-sUAS lead; Army FY27 request emphasizes C-sUAS; specific C-UAS C2 software line not isolated",
+"segment_ids": [
+"S-CUAS-C2"
+],
+"chain_steps": [
+"collect",
+"process/fuse",
+"task/effects"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://media.defense.gov/2026/Sep/08/2003992822/-1/-1/1/JOINT-INTERAGENCY-TASK-FORCE-401-2026-COUNTER-SMALL-UNMANNED-AIRCRAFT-SYSTEMS-QUICK-REFERENCE-GUIDE.PDF",
+"pub_date": "2026-09-08",
+"startup_relevance": "C-UAS C2 is a fast-moving, commercially-solicited area (JIATF-401 runs frequent industry demos) with lower classification barriers at the base-defense tier; the"
+},
+{
+"id": "E05-F28",
+"sweep": "E05",
+"title": "JADC2/CJADC2 has no single program element; funding is distributed across service programs (NGC2, ABMS, Overmatch, SDA) plus joint CDAO/Joint Staff lines",
+"segment_ids": [
+"S-JOINT-CJADC2"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.congress.gov/crs-product/IF11493",
+"pub_date": "2025",
+"startup_relevance": "Do not build a business plan around 'JADC2 funding'; target a specific service line (NGC2 C2 apps/data, ABMS/CBC2, SDA BMC3) or the CDAO enterprise-licence pool"
+},
+{
+"id": "E05-F29",
+"sweep": "E05",
+"title": "DIU budget: FY24 enacted roughly $983M (congressional plus-up); FY26/FY27 DIU lines not verified this session",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://www.diu.mil",
+"pub_date": "2024",
+"startup_relevance": "DIU CSOs remain the most accessible federal on-ramp for a commercial software startup, and the March 2025 memo made DIU co-author of the software-acquisition im"
+},
+{
+"id": "E05-F30",
+"sweep": "E05",
+"title": "Contested logistics C2: no discrete C2-software budget line identified",
+"segment_ids": [
+"S-LOGISTICS-C2"
+],
+"chain_steps": [
+"sustain"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "https://www.army.mil",
+"pub_date": "2026",
+"startup_relevance": "Absence of a line is not evidence of opportunity; logistics C2 money is likely inside enterprise business systems and Advana rather than tactical C2."
+},
+{
+"id": "E05-F31",
+"sweep": "E05",
+"title": "FY27 service toplines: Army $252.8B (+10% vs FY26 appropriated), Navy $377.5B (+23%), Space Force $71.3B (~+80%)",
+"segment_ids": [
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.navy.mil/Press-Office/Press-Releases/display-pressreleases/Article/4464720/department-of-the-navy-releases-fy27-budget-request/",
+"pub_date": "2026-04",
+"startup_relevance": "Rising toplines increase the number of new starts and OTA prototypes, but Congress's FY27 marks (E05-F4) show the request is not the appropriation."
+},
+{
+"id": "E05-F32",
+"sweep": "E05",
+"title": "Army PNT (APNT/MAPS/DAPS): budget line not verified this session",
+"segment_ids": [
+"S-PNT"
+],
+"chain_steps": [
+"collect",
+"transport"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205A.pdf",
+"pub_date": "2026-04",
+"startup_relevance": "PNT is hardware/crypto heavy; software-only PNT resilience (e.g., sensor-fusion navigation) has a narrow but real niche, funding path unclear."
+},
+{
+"id": "E05-F33",
+"sweep": "E05",
+"title": "Startup-relevant synthesis: the accessible C2-software money in FY26-27 sits in (1) NGC2 C2 applications/data sub-lines, (2) ABMS/CBC2 microservices, (3) CDAO enterprise-license and AI-assurance pools, (4) C-UAS C2, all reached via OTA/CSO under the 2025 directives",
+"segment_ids": [
+"S-ARMY-NGC2",
+"S-DAF-BATTLE-NETWORK",
+"S-JOINT-CJADC2",
+"S-CUAS-C2",
+"S-ACQ-POLICY"
+],
+"chain_steps": [
+"acquire",
+"process/fuse",
+"COP/visualize"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://comptroller.war.gov/Budget-Materials/Budget2027/",
+"pub_date": "2026-09-24",
+"startup_relevance": "Direct guidance on which lines a startup can plausibly touch versus which are structurally closed."
+},
+{
+"id": "E06-F1",
+"sweep": "E06",
+"title": "NATO DIANA 2026 Challenge Programme: 150 companies from 3,600+ applicants; C2-relevant challenge areas",
+"segment_ids": [
+"SEG-DATA-FABRIC",
+"SEG-SENSOR-FUSION-PED",
+"SEG-TACTICAL-EDGE-DDIL",
+"SEG-DECISION-SUPPORT-AI"
+],
+"chain_steps": [
+"transport",
+"fuse",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.diana.nato.int/challenges.html",
+"pub_date": "2025 (challenge call); cohort announced early 2026",
+"startup_relevance": "Direct: DIANA accepts companies registered in any NATO nation (founder nationality is secondary to company domicile) and its 2026 challenge topics are C4ISR-sof"
+},
+{
+"id": "E06-F2",
+"sweep": "E06",
+"title": "DIANA announced six new challenges on 2 June 2026 for the 2027 cohort",
+"segment_ids": [
+"SEG-DATA-FABRIC",
+"SEG-DECISION-SUPPORT-AI"
+],
+"chain_steps": [
+"fuse",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html",
+"pub_date": "2026-06-02",
+"startup_relevance": "A live near-term application window for a NATO-domiciled startup; the 2027 cohort is the first realistic DIANA target for a company formed in late 2026."
+},
+{
+"id": "E06-F3",
+"sweep": "E06",
+"title": "NATO Rapid Adoption Action Plan endorsed at The Hague (25 June 2025): 24-month adoption goal, prototype-to-procurement without further competition",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan",
+"pub_date": "2025-06-25",
+"startup_relevance": "Reduces the classic allied valley-of-death risk for software; a demonstrated prototype (e.g., at CWIX or a DIANA test centre) can now become a non-competed buy "
+},
+{
+"id": "E06-F4",
+"sweep": "E06",
+"title": "DIANA Rapid Adoption Service launched (Dec 2025) connecting innovators to end users across 32 nations",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-C2-COP",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.nato.int/en/news-and-events/articles/news/2025/12/12/nato-s-diana-connects-innovators-and-end-users-through-the-rapid",
+"pub_date": "2025-12-12",
+"startup_relevance": "Provides a formal path to allied end users without a prime sponsor; evidence of actual awards flowing through the Service is not yet public (Public evidence ins"
+},
+{
+"id": "E06-F5",
+"sweep": "E06",
+"title": "NATO Innovation Scale-Up Package published as official text (8 July 2026); contents not verified this session",
+"segment_ids": [
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2026/07/08/nato-innovation-scale-up-package",
+"pub_date": "2026-07-08",
+"startup_relevance": "Should be read in full by the founders; likely defines the 2026-2028 NATO scale-up mechanisms a startup would target. Public evidence insufficient on details."
+},
+{
+"id": "E06-F6",
+"sweep": "E06",
+"title": "First Allied Innovation Procurement Forum (25 June 2026) co-organised by NSPA and NCIA; NCIA reforming its procurement for speed",
+"segment_ids": [
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.globalsecurity.org/military/library/news/2026/07/mil-260710-nato-nspa01.htm",
+"pub_date": "2026-07-10",
+"startup_relevance": "NCIA is the buyer of NATO-enterprise C2 software (DEMETER, MSS NATO); its reform is a tailwind but NCIA contracts still go predominantly to established vendors."
+},
+{
+"id": "E06-F7",
+"sweep": "E06",
+"title": "NCIA bought Palantir Maven Smart System NATO sole-source (finalised 25 March 2025) in six months",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-DECISION-SUPPORT-AI",
+"SEG-SENSOR-FUSION-PED"
+],
+"chain_steps": [
+"fuse",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://defensescoop.com/2025/04/14/nato-palantir-maven-smart-system-contract/",
+"pub_date": "2025-04-14",
+"startup_relevance": "Cuts both ways: proves US software can be exported to NATO fast (ITAR/EAR did not block), but occupies the enterprise C2 slot. A startup's realistic role is a n"
+},
+{
+"id": "E06-F8",
+"sweep": "E06",
+"title": "NATO Project DEMETER (Future Land C2): Systematic SitaWare HQ contracted Feb 2024, IOC March 2025, FOC March 2026, FMN Spiral 4 compliant",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"fuse",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/c4isr/nato-confirms-sitaware-headquarters-c2-system-to-reach-foc-by-march-2026",
+"pub_date": "2025 (Janes); 2025-10 (training contract)",
+"startup_relevance": "The NATO-level interoperability layer is Systematic's; a startup cannot displace it but can build to its published interfaces (MIP, ADatP-3, NVG, JDSS) and sell"
+},
+{
+"id": "E06-F9",
+"sweep": "E06",
+"title": "Hague Summit spending pledge: 5% of GDP by 2035 (3.5% core defence + 1.5% defence-related) drives allied C4ISR budgets",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-TACTICAL-COMMS"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.nato.int",
+"pub_date": "2025-06-25",
+"startup_relevance": "Budget growth is necessary but not sufficient; money flows first to munitions, air defence and platforms, and to established C2 vendors. Software startups benef"
+},
+{
+"id": "E06-F10",
+"sweep": "E06",
+"title": "NATO Innovation Fund (EUR 1bn, 24 participating Allies) invests in NATO-domiciled deep-tech including C2-adjacent robotics; portfolio not re-verified",
+"segment_ids": [
+"SEG-AUTONOMY-C2",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.nif.fund",
+"pub_date": "2023-2026",
+"startup_relevance": "A NATO-domiciled (e.g., German GmbH) startup is NIF-eligible; a US-incorporated startup is not (US is not an NIF participant). Funding proves investor interest,"
+},
+{
+"id": "E06-F11",
+"sweep": "E06",
+"title": "Allied interoperability standards stack: FMN Spiral 4 (current) / Spiral 5 (in development), NISP, STANAG 4677 JDSS, ADatP-3, MIP/JC3IEDM and MIM, Link 16 STANAG 5516, NATO Core Data Framework; CWIX is the proving ground",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"transport",
+"fuse"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.act.nato.int",
+"pub_date": "n/a (standards)",
+"startup_relevance": "The standards are public or obtainable via national MoDs, so an FMN/STANAG-native interoperability product is buildable by a small team; the cost is certificati"
+},
+{
+"id": "E06-F12",
+"sweep": "E06",
+"title": "Germany D-LBO: EUR 11.5bn programme, fielding began 2025, re-sequenced Nov 2025 after a failed system test, field tests Feb and Apr 2026 improved performance",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-C2-COP",
+"SEG-TACTICAL-EDGE-DDIL"
+],
+"chain_steps": [
+"transport",
+"fuse"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.bundeswehr.de/de/meldungen/digitalisierung-landbasierte-operationen",
+"pub_date": "2026-05 (ESUT); 2026 (Handelsblatt)",
+"startup_relevance": "Documented integration pain in the largest European land-C2 programme; the mixed analogue/digital transition period (2026-2029+) creates a need for bridging/tra"
+},
+{
+"id": "E06-F13",
+"sweep": "E06",
+"title": "TaWAN LBO: Rheinmetall first call-off EUR 1.88bn (Feb 2025) for one division, delivery end-2026 to end-2029, with GDELS, Thales Deutschland, blackned, ARTEC as subcontractors",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-TACTICAL-EDGE-DDIL"
+],
+"chain_steps": [
+"transport"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.rheinmetall.com/en/media/news-watch/news/2025/02/2025-02-04-rheinmetall-successful-with-tawan-lbo-for-the-bundeswehr",
+"pub_date": "2025-02-04",
+"startup_relevance": "Shows the German tactical-network money is contracted to a prime-led consortium through 2029; a startup's path is as a software subcontractor to Rheinmetall/bla"
+},
+{
+"id": "E06-F14",
+"sweep": "E06",
+"title": "Rheinmetall and blackned D-LBO integration order about EUR 1.2bn gross (award date not re-verified; believed late 2023)",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"transport",
+"fuse"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://esut.de/2025/07/fachbeitraege/60985/digitalisierung-landbasierte-operationen-mit-d-lbo-zur-vernetzten-operationsfuehrung/",
+"pub_date": "2025-07",
+"startup_relevance": "blackned (Heimertingen) is the precedent for a German software startup capturing a core role in national C2 through a prime partnership; it is also the incumben"
+},
+{
+"id": "E06-F15",
+"sweep": "E06",
+"title": "German 2026 defence budget: EUR 82.69bn of EUR 524.54bn federal budget; military procurement up EUR 16.8bn",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-TACTICAL-COMMS",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://dsei-gateway.com/en/news/budget-investment/german-parliament-approves-2026-defence-budget/",
+"pub_date": "2025-12 / 2026-01",
+"startup_relevance": "Budget is a demand signal, not a startup signal; but the volume is now so large relative to BAAINBw capacity that outsourcing to new vendors and faster procedur"
+},
+{
+"id": "E06-F16",
+"sweep": "E06",
+"title": "Bundeswehr Planning and Procurement Acceleration Act (BwPBBG) passed 15 Jan 2026, in force 14 Feb 2026",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.bmvg.de/de/aktuelles/parlament-beschliesst-beschaffungsbeschleunigungsgesetz-6058406",
+"pub_date": "2026-01-15 / 2026-02-17",
+"startup_relevance": "Faster German awards plus an EU-supplier preference favour a German-domiciled entity over a US Inc. selling into Germany; a specialist should check whether a Gm"
+},
+{
+"id": "E06-F17",
+"sweep": "E06",
+"title": "Helsing: intended EUR 580m Combat Fighter System Nucleus software contract, EUR 269m loitering-munition contracts (Helsing and Stark each), $1.8bn raise at $18bn valuation (May 2026)",
+"segment_ids": [
+"SEG-DECISION-SUPPORT-AI",
+"SEG-AUTONOMY-C2"
+],
+"chain_steps": [
+"decide",
+"act"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://resiliencemedia.co/germany-awards-stark-and-helsing-contracts-to-deliver-next-generation-strike-drones/",
+"pub_date": "2026 (Q1-Q2)",
+"startup_relevance": "Germany is willing to award nine-figure software-architecture contracts to a domestic startup-turned-scaleup rather than a US vendor: strong sovereignty signal."
+},
+{
+"id": "E06-F18",
+"sweep": "E06",
+"title": "Helsing-ARX Robotics strategic partnership for an AI reconnaissance-and-strike network; ARX built inside the German army ecosystem",
+"segment_ids": [
+"SEG-AUTONOMY-C2",
+"SEG-SENSOR-FUSION-PED"
+],
+"chain_steps": [
+"sense",
+"fuse",
+"act"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.arx-robotics.com/article/helsing-and-arx-robotics-enter-into-a-strategic-partnership",
+"pub_date": "2025-2026",
+"startup_relevance": "Competitive risk: well-funded German scaleups are building closed vertical stacks; an open interop/data layer must interoperate with Helsing/ARX/Quantum stacks,"
+},
+{
+"id": "E06-F19",
+"sweep": "E06",
+"title": "Quantum Systems (Bundeswehr and Ukraine ISR drones): major 2025 funding and orders; not re-verified this session",
+"segment_ids": [
+"SEG-SENSOR-FUSION-PED",
+"SEG-AUTONOMY-C2"
+],
+"chain_steps": [
+"sense",
+"transport"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://quantum-systems.com",
+"pub_date": "2025",
+"startup_relevance": "Potential partner/customer: drone makers need STANAG 4586 / FMN-compliant links into national C2; a small software vendor can supply the gateway rather than the"
+},
+{
+"id": "E06-F20",
+"sweep": "E06",
+"title": "German innovation and procurement bodies: Cyber Innovation Hub (under BWI), BAAINBw, BWI GmbH, SPRIND; startup access runs through pilots and prime subcontracts",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.cyberinnovationhub.de",
+"pub_date": "n/a",
+"startup_relevance": "A German co-founder gives language and network access to CIHBw pilots (typically small, months-long), which is the analogue of a US SBIR Phase I: good for user "
+},
+{
+"id": "E06-F21",
+"sweep": "E06",
+"title": "UK: Project MORPHEUS cancelled as a standalone project; LE TacCIS dossier retained (BCIP 5.6, TRINITY, JCRVT, DSA, Falcon, NIOBE); TRINITY becomes the deployed digital backbone",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"transport",
+"fuse"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.parallelparliament.co.uk/writtenanswers/search?search_term=LE+TacCIS+Programme&order_field=datenew",
+"pub_date": "2025 (written answers; exact dates not verified)",
+"startup_relevance": "The UK land C2 requirement is unfilled and being re-scoped in smaller increments, which historically opens room for software-defined, evolve-to-open components;"
+},
+{
+"id": "E06-F22",
+"sweep": "E06",
+"title": "UK Digital Targeting Web: GBP 1bn (SDR June 2025), MVP due 2026, first evolution tested in Norway with UK Commando Force, DIP 2026 adds GBP 1.8bn, GBP 17bn for backbone and DTW 2030-35",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-DATA-FABRIC",
+"SEG-SENSOR-FUSION-PED",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"sense",
+"fuse",
+"decide",
+"act"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.janes.com/defence-intelligence-insights/defence-news/security/uk-dip-2026-additional-gbp18-billion-allocated-for-digital-targeting-web",
+"pub_date": "2026",
+"startup_relevance": "The DTW is the clearest allied 'data fabric / kill-web' programme with explicit multi-vendor intent and 2026-2035 funding; UK MoD is contracting via multi-vendo"
+},
+{
+"id": "E06-F23",
+"sweep": "E06",
+"title": "UK MoD named 26 companies for a four-year Asgard decision-support contract (Jan 2026)",
+"segment_ids": [
+"SEG-DECISION-SUPPORT-AI",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"decide"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.computerweekly.com/news/366640322/UK-MoD-awards-more-than-two-dozen-contracts-for-AI-targeting-systems",
+"pub_date": "2026-01",
+"startup_relevance": "A 26-vendor framework is the type of vehicle a startup can join (likely including UK startups such as Arondite/Hadean - not verified). Framework membership is n"
+},
+{
+"id": "E06-F24",
+"sweep": "E06",
+"title": "UK defence-software startups (Arondite, Hadean, Improbable) show the UK ecosystem is active but exits/contracts are modest",
+"segment_ids": [
+"SEG-DECISION-SUPPORT-AI",
+"SEG-AUTONOMY-C2",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"decide"
+],
+"label": "FACT",
+"confidence": "LOW",
+"source_url": "https://systematic.com/int/newsroom/corporate-news/systematic-lands-a-multi-million-euro-contract-with-the-british-army/",
+"pub_date": "2024-2025 (not verified)",
+"startup_relevance": "Benchmark for what a UK software startup achieves in 2-3 years: DASA awards (tens to hundreds of thousands GBP) and framework slots; no public evidence yet of p"
+},
+{
+"id": "E06-F25",
+"sweep": "E06",
+"title": "Australia ASCA: AUD 6.2m to Australian companies in the AUKUS Pillar II Innovation Challenge (10 July 2026) for undersea-vehicle to C2/BMS communications, demos by end 2026",
+"segment_ids": [
+"SEG-AUTONOMY-C2",
+"SEG-TACTICAL-COMMS",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"transport",
+"act"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.defence.gov.au/news-events/releases/2026-07-10/62-million-australian-companies-aukus-pillar-ii-innovation-challenge",
+"pub_date": "2026-07-10",
+"startup_relevance": "Shows the AUKUS trilateral channel funds exactly the uncrewed-to-C2 link problem, but awards went to primes and an established Australian SME; award sizes (AUD "
+},
+{
+"id": "E06-F26",
+"sweep": "E06",
+"title": "Talisman Sabre 2025 / AUKUS Maritime Big Play: UK XLUUV controlled from Australia 10,000 miles away; Japan joined; partners building a shared approach to uncrewed C2 software",
+"segment_ids": [
+"SEG-AUTONOMY-C2",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"transport",
+"act"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.royalnavy.mod.uk/news/2025/august/11/20250811-aukus-maritime-big-play-ex-talisman-sabre",
+"pub_date": "2025-08-11; 2026-02-06",
+"startup_relevance": "A concrete allied demand for common uncrewed-systems C2 interfaces (UMAA/STANAG 4586-style) across three navies; the software is being shaped by primes and gove"
+},
+{
+"id": "E06-F27",
+"sweep": "E06",
+"title": "AUKUS ITAR exemption (22 CFR 126.7, effective 1 Sept 2024) and Australia's Defence Trade Controls Amendment Act 2024 create a licence-free zone for most defence transfers among US, UK, Australia",
+"segment_ids": [
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.pmddtc.state.gov",
+"pub_date": "2024-08 (rule); effective 2024-09-01",
+"startup_relevance": "A US-domiciled C2 software startup can export to UK/Australia with far less friction than to Germany/Japan/Korea; conversely a German GmbH is outside the AUKUS "
+},
+{
+"id": "E06-F28",
+"sweep": "E06",
+"title": "Japan activated the JSDF Joint Operations Command (24 March 2025); US Forces Japan upgrading to a joint force HQ; C2 modernisation is a stated alliance priority",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://news.usni.org/2025/03/25/japan-stands-up-new-joint-operations-command-planned-to-work-with-local-u-s-forces",
+"pub_date": "2025-03-25",
+"startup_relevance": "Japan's joint C2 build-out is real, but Japanese C2 systems are supplied by domestic primes (NEC, Fujitsu, Mitsubishi Electric - RECALL) and US systems via FMS;"
+},
+{
+"id": "E06-F29",
+"sweep": "E06",
+"title": "ATLA funded JPY 4bn in FY2026 to prototype a low-latency mobile communications infrastructure system supporting future JGSDF C2 (prototyping to 2029, tests 2030-31)",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-TACTICAL-EDGE-DDIL"
+],
+"chain_steps": [
+"transport"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.asianmilitaryreview.com/2025/11/atlas-rd-into-a-mobile-communications-infrastructure-system-assessing-strategic-and-technical-objectives-nsbt/",
+"pub_date": "2025-11",
+"startup_relevance": "Japan's timelines (2026-2031) are long and ATLA R&D is domestic-prime oriented; not a near-term startup market. Public evidence insufficient on foreign-vendor p"
+},
+{
+"id": "E06-F30",
+"sweep": "E06",
+"title": "Yama Sakura 91 (concluded 10 Sept 2026) and prior iterations: US-Japan-Australia command post exercises explicitly build shared common operating pictures and coordinated targeting",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"fuse",
+"decide"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.army.mil/article/295234/yama_sakura_91_comes_to_a_close_demonstrating_cohesive_commitment_to_pacific_allies",
+"pub_date": "2026-09",
+"startup_relevance": "Exercise-driven coalition COP federation is a recurring, dated demand signal in the Indo-Pacific (Yama Sakura, Keen Edge, Talisman Sabre); US Army I Corps / USA"
+},
+{
+"id": "E06-F31",
+"sweep": "E06",
+"title": "Poland fields Systematic SitaWare Frontline in M1 Abrams and support vehicles of the 18th Mechanised Division; domestic WB Group TOPAZ also dominant",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"fuse"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.mynewsdesk.com/systematic-international/pressreleases/poland-bolsters-c4isr-capabilities-for-armoured-forces-with-sitaware-3283735",
+"pub_date": "2023-2024 (not verified)",
+"startup_relevance": "Illustrates the allied pattern: US platforms (Abrams) running European C2 software - the integration seam between US-origin platforms/data links and European C2"
+},
+{
+"id": "E06-F32",
+"sweep": "E06",
+"title": "Nordic C2/comms consolidation: Bittium framework agreement with Finnish and Swedish Defence Forces (Nov 2025) with provisions for Norway and Denmark to join",
+"segment_ids": [
+"SEG-TACTICAL-COMMS",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"transport"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://en.wikipedia.org/wiki/Bittium_(company)",
+"pub_date": "2025-11",
+"startup_relevance": "Nordic nations increasingly buy jointly (NORDEFCO), so a single win can propagate; but they buy from Nordic vendors (Bittium, Systematic, Saab, Kongsberg). Entr"
+},
+{
+"id": "E06-F33",
+"sweep": "E06",
+"title": "Elbit Systems won a ~USD 1.5bn contract from an undisclosed European customer (Aug 2025) including a battle management system with PULS launchers",
+"segment_ids": [
+"SEG-C2-COP"
+],
+"chain_steps": [
+"decide",
+"act"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.calibredefence.co.uk/elbit-systems-awarded-1-4-billion-contract-by-european-customer/",
+"pub_date": "2025-08",
+"startup_relevance": "BMS is often bought bundled with the weapon system; standalone C2-software vendors compete against bundling. Startups should expect to be integrated by platform"
+},
+{
+"id": "E06-F34",
+"sweep": "E06",
+"title": "Ukraine-adjacent lessons: Delta situational-awareness system, Brave1 and drone-C2 integration reshape allied expectations toward fast-iterating, cloud-native, sensor-agnostic C2",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-SENSOR-FUSION-PED",
+"SEG-TACTICAL-EDGE-DDIL"
+],
+"chain_steps": [
+"sense",
+"fuse",
+"decide"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://brave1.gov.ua",
+"pub_date": "2023-2025",
+"startup_relevance": "Ukraine demonstrates that a software-first, non-prime team can build a national C2 layer under combat iteration; allied buyers now cite it, but no allied nation"
+},
+{
+"id": "E06-F35",
+"sweep": "E06",
+"title": "Singapore: DSTA/DSO/DIS form a closed, ST Engineering-centred C4ISR ecosystem with limited foreign-startup access",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-DECISION-SUPPORT-AI"
+],
+"chain_steps": [
+"decide"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://www.dsta.gov.sg",
+"pub_date": "n/a",
+"startup_relevance": "Not an initial market. An Indonesian co-founder does not confer Singapore access; Indonesia itself (TNI) is a US FMS/European-mix customer with heavy offset rul"
+},
+{
+"id": "E06-F36",
+"sweep": "E06",
+"title": "South Korea and Taiwan: domestic-prime C2 ecosystems (DAPA/ADD, Hanwha, LIG Nex1; NCSIST) with US FMS links; public evidence on foreign-startup access is insufficient",
+"segment_ids": [
+"SEG-C2-COP",
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"decide"
+],
+"label": "INFERENCE",
+"confidence": "LOW",
+"source_url": "https://www.dapa.go.kr",
+"pub_date": "n/a",
+"startup_relevance": "Not addressable by a seed-stage foreign startup without a domestic partner; treat as year-5+ markets."
+},
+{
+"id": "E06-F37",
+"sweep": "E06",
+"title": "EU EDIP adopted 8 Dec 2025 (EUR 1.5bn) with a 65% EU/EEA component-cost rule; EDF 2026 work programme commits over EUR 1bn in new calls",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-DATA-FABRIC"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/08/european-defence-industry-programme-council-gives-final-approval/",
+"pub_date": "2025-12-08",
+"startup_relevance": "EU money is growing but ring-fenced for EU-established, EU-controlled entities; a US-incorporated startup is effectively excluded, while a German GmbH is eligib"
+},
+{
+"id": "E06-F38",
+"sweep": "E06",
+"title": "EDF eligibility (Reg. (EU) 2021/697 Art. 9): recipients must be established in the EU/associated countries, have executive management there, and not be controlled by a non-associated third country or third-country entity unless member-state-approved guarantees are in place",
+"segment_ids": [
+"SEG-COALITION-INTEROP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.lexology.com/library/detail.aspx?g=f0af4aba-1906-45b5-aff8-3a65c3083c7c",
+"pub_date": "2021 (regulation); commentary 2024-2025",
+"startup_relevance": "Founder-critical: if the German founder becomes a US permanent resident and the company is US-incorporated, EDF/EDIP access is lost; a German GmbH with a US-res"
+},
+{
+"id": "E06-F39",
+"sweep": "E06",
+"title": "Export-control and security matrix for a C2-software startup: US ITAR/EAR vs German AWG/KrWaffKontrG and EU dual-use regime vs AUKUS exemption",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-C2-COP"
+],
+"chain_steps": [
+"procure"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://www.pmddtc.state.gov",
+"pub_date": "n/a",
+"startup_relevance": "The founders' nationality/residency mix makes single-jurisdiction structuring lossy in every direction; the decision of US Inc. vs German GmbH (or a dual struct"
+},
+{
+"id": "E06-F40",
+"sweep": "E06",
+"title": "Assessment: allied interoperability is a larger and more open opportunity than US-product export for this founding team, but the 'interoperability layer' slot is incumbent-held; the wedge must be narrower",
+"segment_ids": [
+"SEG-COALITION-INTEROP",
+"SEG-DATA-FABRIC",
+"SEG-TACTICAL-EDGE-DDIL",
+"SEG-AUTONOMY-C2"
+],
+"chain_steps": [
+"transport",
+"fuse",
+"procure"
+],
+"label": "HYPOTHESIS",
+"confidence": "MEDIUM",
+"source_url": "",
+"pub_date": "2026-09-24",
+"startup_relevance": "Directly answers the assignment question; should be stress-tested against E-sweeps on US programme access and competitor density before the founders choose a do"
+},
+{
+"id": "E07-F1",
+"sweep": "E07",
+"title": "SBIR/STTR lapsed 2025-09-30 and was reauthorized 2026-04-13 through 2031",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S07",
+"S08",
+"S09",
+"S10",
+"S11",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"funding-vehicle"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.crowell.com/en/insights/client-alerts/sbirsttr-programs-reauthorized-after-six-month-lapse",
+"pub_date": "2026-04",
+"startup_relevance": "SBIR is again available but the six-month gap compressed FY26 cycles; the German founder's permanent-residence timing determines when the company can even self-"
+},
+{
+"id": "E07-F2",
+"sweep": "E07",
+"title": "The 2026 reauthorization reportedly rewrote award and eligibility rules; specifics not verified this session",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S06",
+"S11"
+],
+"chain_steps": [
+"funding-vehicle"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "https://www.insidegovernmentcontracts.com/2026/03/is-congress-finally-reauthorizing-sbir-sttr-and-whats-changing/",
+"pub_date": "2026-03",
+"startup_relevance": "Any plan built on SBIR must be re-checked against the enacted 2026 text; INNOVATE Act-style provisions on foreign ties and repeat awardees may have been incorpo"
+},
+{
+"id": "E07-F3",
+"sweep": "E07",
+"title": "SBIR ownership test: more than 50 percent owned and controlled by U.S. citizens or permanent residents",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S07",
+"S08",
+"S09",
+"S10",
+"S11",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"funding-vehicle",
+"cap-table"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+"pub_date": "current eCFR",
+"startup_relevance": "The Indonesian founder's shares never count in the numerator; the German founder's count only after the green card is issued. A 50/50 split fails the test; the "
+},
+{
+"id": "E07-F4",
+"sweep": "E07",
+"title": "SBIR foreign-affiliation disclosure form is mandatory; Germany and Indonesia are not 'foreign countries of concern'",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S06",
+"S11"
+],
+"chain_steps": [
+"funding-vehicle",
+"due-diligence"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.sbir.gov/foreign_disclosures",
+"pub_date": "n.d. (post-2022)",
+"startup_relevance": "Both founders' foreign ties must be disclosed but neither nationality is a country of concern; the review risk is delay and questions, not an automatic bar, abs"
+},
+{
+"id": "E07-F5",
+"sweep": "E07",
+"title": "Agency due-diligence programs assess cybersecurity, patents, foreign ownership and employee affiliations; GAO finds gaps and DoD guidance pending",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S06",
+"S11"
+],
+"chain_steps": [
+"due-diligence"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.gao.gov/products/gao-26-107972",
+"pub_date": "2025-2026",
+"startup_relevance": "Expect inconsistent, component-specific vetting of the founders' foreign affiliations; keep clean documentation of ownership, funding sources and prior employme"
+},
+{
+"id": "E07-F6",
+"sweep": "E07",
+"title": "Majority-VC-owned SBIR eligibility is agency-elective and poorly tracked (GAO-24-107004)",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S06",
+"S11"
+],
+"chain_steps": [
+"cap-table",
+"funding-vehicle"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/products/gao-24-107004",
+"pub_date": "2024",
+"startup_relevance": "With only ~$250k of founder capital, a seed round could push citizen/PR ownership below 50 percent; sequencing of SBIR awards vs. dilution must be modeled."
+},
+{
+"id": "E07-F7",
+"sweep": "E07",
+"title": "AFWERX Open Topic SBIR limits foreign-national participation to public-domain or fundamental research and requires all work in the U.S.",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S06",
+"S10",
+"S11"
+],
+"chain_steps": [
+"funding-vehicle",
+"personnel"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://afwerx.com/wp-content/uploads/20250702_Ventures_Open_Topic_Phase_I_FAQs_update_CLEARED_AFRL-2025-3235.pdf",
+"pub_date": "2025-07-02",
+"startup_relevance": "A non-U.S.-person founder cannot be the technical lead on a DoD SBIR effort unless the work is structured as fundamental/public-domain research; whether DoD's '"
+},
+{
+"id": "E07-F8",
+"sweep": "E07",
+"title": "DoD SBIR BAA preface requires identification of foreign nationals and export-control compliance",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S13"
+],
+"chain_steps": [
+"funding-vehicle",
+"personnel"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://media.defense.gov/2023/Nov/14/2003339823/-1/-1/1/DOD_SBIR_24.4_PREFACE_111423.PDF",
+"pub_date": "2023-11-14",
+"startup_relevance": "Every DoD SBIR proposal will surface the Indonesian founder's status; plan the role split and technology control plan before proposing."
+},
+{
+"id": "E07-F9",
+"sweep": "E07",
+"title": "CMMC DFARS clause effective 2025-11-10; Phase 1 self-assessments live; Phase 2 (C3PAO) transition suspended July 2026",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S07",
+"S08",
+"S09",
+"S10",
+"S11",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"compliance",
+"cost-of-entry"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.cooley.com/news/insight/2025/2025-09-25-dod-releases-long-awaited-final-rule-implementing-cybersecurity-maturity-model-certification-contract-clause",
+"pub_date": "2025-09-25 (rule); 2026-07 (suspension coverage)",
+"startup_relevance": "Near-term cost is a self-assessment and SPRS score, not a third-party audit; but any contract involving CUI still requires full NIST SP 800-171 implementation, "
+},
+{
+"id": "E07-F10",
+"sweep": "E07",
+"title": "CMMC program rule (32 CFR Part 170) defines the three levels",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S09",
+"S11"
+],
+"chain_steps": [
+"compliance"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.ecfr.gov",
+"pub_date": "2024-10-15",
+"startup_relevance": "Budget roughly a Level 2 self-assessment posture from day one if any DoD prototype will touch CUI; enclave-based scoping (e.g., GCC High or a managed enclave) i"
+},
+{
+"id": "E07-F11",
+"sweep": "E07",
+"title": "DFARS 252.204-7012 and 7019/7020 already impose NIST SP 800-171, 72-hour incident reporting and FedRAMP Moderate-equivalent cloud",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S07",
+"S08",
+"S09",
+"S10",
+"S11",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"compliance"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.acquisition.gov",
+"pub_date": "current",
+"startup_relevance": "Even before CMMC certification, the first CUI-bearing award triggers 7012; choose a cloud/enclave that satisfies FedRAMP Moderate equivalency."
+},
+{
+"id": "E07-F12",
+"sweep": "E07",
+"title": "DoD Cloud Impact Levels (IL2/IL4/IL5/IL6) gate where C2 software can run",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S09",
+"S11",
+"S14"
+],
+"chain_steps": [
+"deployment"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://public.cyber.mil",
+"pub_date": "current",
+"startup_relevance": "An unclassified MVP can be demonstrated at IL2; operational C2 use typically needs IL4/IL5 hosting, which is achievable without clearances; IL6 requires cleared"
+},
+{
+"id": "E07-F13",
+"sweep": "E07",
+"title": "ITAR treats a lawful permanent resident as a U.S. person (22 CFR 120.62)",
+"segment_ids": [
+"S01",
+"S02",
+"S04",
+"S07",
+"S08",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"personnel"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62",
+"pub_date": "current eCFR",
+"startup_relevance": "The German founder's export-control exposure ends at green-card issuance; the Indonesian founder's persists until permanent residence, so ITAR-touching work mus"
+},
+{
+"id": "E07-F14",
+"sweep": "E07",
+"title": "ITAR USML targeted revisions (IFR 2025-01-17, effective 2025-09-15) revised definitions and Category XI",
+"segment_ids": [
+"S02",
+"S04",
+"S07",
+"S08"
+],
+"chain_steps": [
+"export-control"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.federalregister.gov/documents/2025/01/17/2025-01313/international-traffic-in-arms-regulations-us-munitions-list-targeted-revisions",
+"pub_date": "2025-01-17",
+"startup_relevance": "Category XI wording as of 2025-09-15 is the controlling text for any C2 hardware/electronics adjacency; classification analysis must use the revised list."
+},
+{
+"id": "E07-F15",
+"sweep": "E07",
+"title": "DDTC's redefinition of 'defense services' is proposed and a final rule sits on the regulatory agenda",
+"segment_ids": [
+"S01",
+"S03",
+"S12",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"allied-sales"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://sanctionsnews.bakermckenzie.com/ddtc-issues-proposed-rule-revising-itar-definition-and-controls-related-to-defense-services/",
+"pub_date": "2024-2025",
+"startup_relevance": "Even EAR99 software can generate an ITAR 'defense service' when the company trains or integrates it for a foreign military (e.g., Bundeswehr or TNI); allied go-"
+},
+{
+"id": "E07-F16",
+"sweep": "E07",
+"title": "What makes C2 software ITAR: 'specially designed' for a USML article, not military end use alone",
+"segment_ids": [
+"S01",
+"S03",
+"S04",
+"S06",
+"S13",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"product-design"
+],
+"label": "INFERENCE",
+"confidence": "MEDIUM",
+"source_url": "https://militaryembedded.com/from-the-editor/proposed-revision-to-usml-military-electronics-itar-issued-by-state-department",
+"pub_date": "2014-2025",
+"startup_relevance": "Product architecture is a compliance lever: keep the core generic and commercially deployable, isolate military-specific adapters (Link 16, fire control, specif"
+},
+{
+"id": "E07-F17",
+"sweep": "E07",
+"title": "EAR deemed-export rule: license needed to release controlled technology to a foreign national when a license would be needed for that country",
+"segment_ids": [
+"S01",
+"S02",
+"S04",
+"S05",
+"S07",
+"S08",
+"S13",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"personnel",
+"immigration"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export",
+"pub_date": "current",
+"startup_relevance": "For an EAR99 product the Indonesian founder is unconstrained; once 600-series technology (military UAS, military electronics) enters the codebase, a BIS deemed-"
+},
+{
+"id": "E07-F18",
+"sweep": "E07",
+"title": "ITAR has no deemed-export license exception for domestic foreign-person employees; DSP-5 or a TAA is needed",
+"segment_ids": [
+"S02",
+"S04",
+"S07",
+"S08",
+"S13",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"personnel"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.pmddtc.state.gov/ddtc_public?id=ddtc_public_portal_itar_landing",
+"pub_date": "current",
+"startup_relevance": "Any ITAR-touching segment implies the Indonesian founder is excluded from that technical data until licensed; the company would also need to register with DDTC "
+},
+{
+"id": "E07-F19",
+"sweep": "E07",
+"title": "FOCI under 32 CFR 117.11: any non-citizen, including a permanent resident, is a 'foreign interest'; mitigation instruments are graduated",
+"segment_ids": [
+"S01",
+"S04",
+"S05",
+"S07",
+"S08",
+"S09",
+"S12",
+"S14"
+],
+"chain_steps": [
+"clearance",
+"cap-table"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117/section-117.11",
+"pub_date": "current eCFR; SF-328 2025-05-01",
+"startup_relevance": "A facility clearance is not impossible but would require cleared U.S.-citizen key management personnel, a sponsoring contract, and FOCI mitigation that may side"
+},
+{
+"id": "E07-F20",
+"sweep": "E07",
+"title": "DoDI 5205.87 extends FOCI risk mitigation to certain unclassified DoD contracts",
+"segment_ids": [
+"S01",
+"S03",
+"S04",
+"S05",
+"S09",
+"S11",
+"S12"
+],
+"chain_steps": [
+"due-diligence",
+"clearance"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/520587p.pdf",
+"pub_date": "n.d.",
+"startup_relevance": "As contracts grow past prototype scale, beneficial-ownership disclosure and FOCI assessment will surface the foreign founders and any foreign investors even wit"
+},
+{
+"id": "E07-F21",
+"sweep": "E07",
+"title": "Personnel security clearances require U.S. citizenship; both founders are years from eligibility",
+"segment_ids": [
+"S01",
+"S04",
+"S05",
+"S07",
+"S08",
+"S09",
+"S12",
+"S14"
+],
+"chain_steps": [
+"clearance",
+"personnel"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.dcsa.mil",
+"pub_date": "current",
+"startup_relevance": "Classified-dependent business models require hiring cleared U.S.-citizen executives/engineers and accepting that founders cannot see classified requirements, te"
+},
+{
+"id": "E07-F22",
+"sweep": "E07",
+"title": "OTA/CSO route has no statutory U.S.-ownership test; nontraditional defense contractor status is about CAS coverage, not nationality",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S05",
+"S06",
+"S09",
+"S10",
+"S11",
+"S13",
+"S14"
+],
+"chain_steps": [
+"funding-vehicle"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://uscode.house.gov/view.xhtml?req=granuleid%3AUSC-prelim-title10-section3014&num=0&edition=prelim",
+"pub_date": "current; 2026-03 (H&K)",
+"startup_relevance": "OT prototypes (DIU, Army, AFWERX non-SBIR, SOCOM) are the most accessible federal vehicle for this team; the constraint moves from ownership to what the solicit"
+},
+{
+"id": "E07-F23",
+"sweep": "E07",
+"title": "GAO-25-106856 documents DIU's expanded role and measurement gaps",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S11",
+"S13"
+],
+"chain_steps": [
+"funding-vehicle"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gao.gov/assets/gao-25-106856.pdf",
+"pub_date": "2025",
+"startup_relevance": "DIU remains the principal commercial-entry door; GAO's critique implies transition-to-production metrics are still immature, so prototype awards should not be r"
+},
+{
+"id": "E07-F24",
+"sweep": "E07",
+"title": "Fundamental research exclusion protects university work, not the startup's product development",
+"segment_ids": [
+"S04",
+"S05",
+"S10",
+"S14"
+],
+"chain_steps": [
+"export-control",
+"university-transition"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.ecfr.gov",
+"pub_date": "current",
+"startup_relevance": "Student founders can prototype algorithms (fusion, PED models) under university fundamental research with both founders participating, but that protection ends "
+},
+{
+"id": "E07-F25",
+"sweep": "E07",
+"title": "ATAK-CIV and its SDK are open-sourced government-owned software with a plugin architecture; TAK-GOV/MIL remain distribution-controlled",
+"segment_ids": [
+"S01",
+"S06",
+"S12"
+],
+"chain_steps": [
+"product-entry"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+"pub_date": "ongoing (repo)",
+"startup_relevance": "Lowest-friction unclassified entry: both founders can build ATAK-CIV plugins and TAK Server integrations today; the license terms (and any copyleft obligations)"
+},
+{
+"id": "E07-F26",
+"sweep": "E07",
+"title": "Citizenship-based hiring restrictions must be tied to an actual legal requirement (8 U.S.C. 1324b)",
+"segment_ids": [
+"S01",
+"S02",
+"S04",
+"S08",
+"S13"
+],
+"chain_steps": [
+"personnel"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.gtlaw-insidebusinessimmigration.com/department-of-justice/immigrant-and-employee-rights-at-the-department-of-justice-national-origin-and-citizenship-discrimination/",
+"pub_date": "n.d.",
+"startup_relevance": "Ironically relevant to this team: when it later hires cleared or U.S.-person-only roles, job postings and screening must be worded around the specific ITAR/clea"
+},
+{
+"id": "E07-F27",
+"sweep": "E07",
+"title": "CFIUS mandatory declarations can be triggered by foreign investment in a startup whose products are ITAR/600-series 'critical technologies'",
+"segment_ids": [
+"S02",
+"S04",
+"S07",
+"S08",
+"S13",
+"S14"
+],
+"chain_steps": [
+"cap-table",
+"fundraising"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://home.treasury.gov",
+"pub_date": "current",
+"startup_relevance": "If the product becomes export-controlled, a German or Indonesian angel/VC taking a board seat or information rights could require a CFIUS filing; keeping the co"
+},
+{
+"id": "E07-F28",
+"sweep": "E07",
+"title": "2025 software acquisition reforms push DoD toward CSOs/OTs for software, widening non-SBIR entry",
+"segment_ids": [
+"S01",
+"S03",
+"S05",
+"S09",
+"S11",
+"S14"
+],
+"chain_steps": [
+"funding-vehicle"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.diu.mil/latest/advancing-dod-operational-capabilities-with-software-acquisition-reform",
+"pub_date": "2025",
+"startup_relevance": "The vehicle least sensitive to the founders' nationality (OT/CSO) is the one DoD is expanding for software; this partially offsets the SBIR ownership problem."
+},
+{
+"id": "E07-F29",
+"sweep": "E07",
+"title": "ITAR registration (22 CFR Part 122) is required once the company manufactures defense articles or furnishes defense services and discloses foreign ownership/control",
+"segment_ids": [
+"S02",
+"S04",
+"S07",
+"S08",
+"S12",
+"S13",
+"S14"
+],
+"chain_steps": [
+"export-control"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.pmddtc.state.gov",
+"pub_date": "current",
+"startup_relevance": "A decision to build ITAR modules triggers registration cost and disclosure of the founders' nationality and any foreign investors; an EAR-only product avoids it"
+},
+{
+"id": "E07-F30",
+"sweep": "E07",
+"title": "CUI access by foreign nationals is permitted only when consistent with export controls and the contract; export-controlled CUI is effectively U.S.-person-only",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S04",
+"S06",
+"S12",
+"S13"
+],
+"chain_steps": [
+"compliance",
+"personnel"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.esd.whs.mil",
+"pub_date": "current",
+"startup_relevance": "Even unclassified DoD prototype work will hand the company CUI; the Indonesian founder's access must be governed by contract terms and export-control markings, "
+},
+{
+"id": "E07-F31",
+"sweep": "E07",
+"title": "NIH's 2023 implementation notice shows how foreign-disclosure requirements operate pre- and post-award",
+"segment_ids": [
+"S05",
+"S10",
+"S14"
+],
+"chain_steps": [
+"due-diligence"
+],
+"label": "FACT",
+"confidence": "HIGH",
+"source_url": "https://www.federalregister.gov/documents/2023/06/16/2023-12854/implementation-of-the-nih-sbir-and-sttr-foreign-disclosure-pre-award-and-post-award-requirements",
+"pub_date": "2023-06-16",
+"startup_relevance": "Disclosure obligations continue after award; changes in the founders' status, foreign funding or foreign employment must be reported during performance."
+},
+{
+"id": "E07-F32",
+"sweep": "E07",
+"title": "Encryption in a commercial C2 product is usually 5D002 with License Exception ENC; open-source crypto source needs only notification",
+"segment_ids": [
+"S01",
+"S02",
+"S03",
+"S06",
+"S09",
+"S11"
+],
+"chain_steps": [
+"export-control"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.bis.gov",
+"pub_date": "current",
+"startup_relevance": "Encryption is not the blocker for this team; a one-time classification/notification step suffices for an EAR-only product with TLS, X.509 or standard crypto (as"
+},
+{
+"id": "E07-F33",
+"sweep": "E07",
+"title": "SBIR data rights (20-year protection) and OT-negotiated IP allow an unclassified commercial core with government-funded adapters",
+"segment_ids": [
+"S01",
+"S03",
+"S06",
+"S11"
+],
+"chain_steps": [
+"ip-strategy"
+],
+"label": "FACT",
+"confidence": "MEDIUM",
+"source_url": "https://www.acquisition.gov",
+"pub_date": "current",
+"startup_relevance": "IP structure and export structure can be aligned: commercial core (EAR99, foreign-founder-accessible, company-owned) plus controlled adapters (U.S.-person-built"
+},
+{
+"id": "E07-F34",
+"sweep": "E07",
+"title": "Allied vehicles (NATO DIANA, German innovation channels) are open to the German founder but EU-only instruments are constrained by third-country control",
+"segment_ids": [
+"S01",
+"S03",
+"S06",
+"S12"
+],
+"chain_steps": [
+"allied-markets",
+"funding-vehicle"
+],
+"label": "HYPOTHESIS",
+"confidence": "LOW",
+"source_url": "https://www.diana.nato.int",
+"pub_date": "current",
+"startup_relevance": "The German founder gives optionality in NATO/German channels (coalition interoperability, TAK-adjacent SA), but a dual-jurisdiction structure raises its own exp"
+}
+]
+}
