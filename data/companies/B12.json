@@ -1,0 +1,2119 @@
+{
+  "batch_id": "B12",
+  "theme": "services integrators",
+  "companies": [
+    {
+      "name": "Leidos Holdings, Inc.",
+      "aka": "Leidos (renamed 2013 from Science Applications International Corporation; subsidiaries include Dynetics, Leidos Australia, Leidos UK)",
+      "founding_year": 1969,
+      "headquarters": "Reston, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~48,000 (RECALL - not re-verified this session; MEDIUM)",
+      "founders": [
+        "J. Robert Beyster (founded SAIC in 1969; Leidos is the 2013-renamed parent)"
+      ],
+      "founder_backgrounds": "Beyster was a nuclear physicist (Los Alamos, General Atomics) who built an employee-owned R&D contractor. Current CEO Tom Bell (ex-Rolls-Royce North America, Boeing Defense) since 2023 (RECALL; MEDIUM). Founder history is irrelevant to current strategy; Leidos is a scaled public integrator.",
+      "total_disclosed_funding_usd": "N/A - public company (NYSE: LDOS). FY2025 revenue on the order of $17B (RECALL - not re-verified; MEDIUM).",
+      "latest_valuation": "Public market cap; roughly $20B-range equity value in 2025-2026 (RECALL; LOW - not checked this session).",
+      "major_investors": [
+        "Public float; large index/institutional holders (Vanguard, BlackRock, State Street) - RECALL, LOW"
+      ],
+      "c4isr_products": [
+        {
+          "name": "ARTEMIS (Airborne Reconnaissance and Targeting Exploitation Multi-Mission Intelligence System)",
+          "description": "Contractor-owned, contractor-operated (COCO) airborne ISR service on a modified Bombardier Challenger 650. Leidos supplies aircraft, mission systems, flight ops and support; the Army pays by flight hour and connects to the sensors remotely via SATCOM. Operating in the EUCOM AOR; extended through summer 2027 plus two option years (FACT; Leidos release 2026).",
+          "input_process_output_user": "Input: airborne multi-INT sensor collection (SIGINT/radar class payloads; exact payloads not public). Process: onboard collection, SATCOM backhaul to remote operators. Output: ISR products/feeds to Army theater intelligence consumers. Users: Army INSCOM / EUCOM aerial ISR units."
+        },
+        {
+          "name": "Common Hardware Systems-6 (CHS-6) - C5ISR hardware procurement vehicle",
+          "description": "Single-award Army IDIQ (max $7.9B, 4-year base + two 3-year options, awarded Sept 2023) through which the Army buys ruggedized COTS command, control, communications, computers, cyber, ISR hardware; also used as the ordering vehicle for the 2026 ARTEMIS extension (FACT).",
+          "input_process_output_user": "Input: Army unit/program hardware requirements. Process: catalog engineering, integration, logistics, refresh. Output: fielded tactical computing/network hardware. Users: Army tactical units and PEO C3N programs."
+        },
+        {
+          "name": "Defense Enclave Services (DES) / DoDNet",
+          "description": "DISA single-award IDIQ ($11.5B ceiling, 10 years, awarded Feb 2022) consolidating Fourth Estate agency networks onto a common enterprise network; Leidos has run DoDNet operations since Feb 2022 (FACT per Leidos and Inside Defense; ceiling is NOT revenue).",
+          "input_process_output_user": "Input: legacy agency networks/users. Process: migration, network operations, security, service desk. Output: a common DoD enterprise network for Fourth Estate agencies. Users: DISA and ~22 defense agencies/field activities."
+        },
+        {
+          "name": "NGEN-R SMIT (Navy Next Generation Enterprise Network - Service Management, Integration and Transport)",
+          "description": "Navy enterprise network (NMCI/ONE-Net) services contract, up to $7.7B, won 2020 (FACT). A $926M Navy award reported in 2026 alongside the ARTEMIS award is, by headline, an NGEN-related award; details not fetched (INFERENCE from headline; MEDIUM).",
+          "input_process_output_user": "Input: Navy/USMC enterprise users. Process: network transport, service management, integration. Output: operated enterprise network. Users: Navy and Marine Corps shore users."
+        },
+        {
+          "name": "Dynetics air defense and autonomy products (Enduring Shield launcher; Sea Hunter/Seahawk USVs)",
+          "description": "Subsidiary Dynetics builds the Army IFPC Inc 2 'Enduring Shield' launcher (integrates with IBCS) and Leidos built the DARPA/Navy Sea Hunter and Seahawk medium USVs (RECALL - not re-verified this session; MEDIUM).",
+          "input_process_output_user": "Input: fire-control/IBCS tracks (Enduring Shield) or mission plans (USV). Output: engagements or autonomous maritime ISR patrols. Users: Army air defense units; Navy unmanned task forces."
+        }
+      ],
+      "exact_problem_solved": "Runs very large enterprise/tactical networks and hardware supply chains at scale (DES, NGEN, CHS-6) and delivers ISR aircraft as a per-hour service (ARTEMIS) so the Army/Navy/DISA can field capability without owning platforms or staff. In C4ISR terms it is a transport/hardware/operations prime rather than a C2 software product company.",
+      "primary_users": [
+        "DISA and Fourth Estate agency users",
+        "Navy/USMC enterprise network users",
+        "Army tactical units buying C5ISR hardware",
+        "Army/EUCOM aerial ISR consumers"
+      ],
+      "primary_buyers": [
+        "DISA",
+        "Navy PEO Digital / NAVWAR",
+        "Army PEO C3N (CHS-6)",
+        "Army intelligence/aviation program offices (ARTEMIS)",
+        "Army Rapid Capabilities and Critical Technologies Office / IFPC (Dynetics)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "TRANSPORT",
+        "STORE",
+        "PROCESS",
+        "DISSEMINATE",
+        "MONITOR"
+      ],
+      "mission_layer": [
+        "ISR",
+        "joint enterprise networks",
+        "air defense (Dynetics)",
+        "maritime autonomy",
+        "cyber"
+      ],
+      "segment_ids": [
+        "S03",
+        "S05",
+        "S09",
+        "S10",
+        "S13"
+      ],
+      "hw_sw_mix": "both - services-heavy prime; hardware integrator/reseller under CHS-6; ISR aircraft platform provider; limited standalone C2 software products.",
+      "market_posture": "defense-native (with civil, health and commercial segments)",
+      "contracts": [
+        {
+          "title": "ARTEMIS airborne ISR mission extension (EUCOM) via CHS-6",
+          "customer": "U.S. Army",
+          "contracting_org": "Army (ordered through the CHS-6 vehicle, PEO C3N)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "up to $127M (extension incl. options)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "up to $127M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Order under CHS-6",
+          "date": "2026 (announced Aug-Sept 2026 per Leidos release and trade press)",
+          "period_of_performance": "Through summer 2027 plus two option years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational service (COCO ISR); not a program of record",
+          "source_url": "https://www.leidos.com/insights/leidos-support-extended-artemis-airborne-isr-mission-us-army",
+          "pub_date": "2026",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Common Hardware Systems-6 (CHS-6)",
+          "customer": "U.S. Army",
+          "contracting_org": "Army PEO C3T/C3N",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$7.9B maximum (10 years: 4-year base + two 3-year options)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "single award; ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Multiple delivery orders (incl. 2026 ARTEMIS order)",
+          "date": "2023-09 (award announced Sept 2023)",
+          "period_of_performance": "2023-2033 if all options exercised",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production procurement vehicle",
+          "source_url": "https://www.defensenews.com/battlefield-tech/it-networks/2023/09/20/leidos-wins-79-billion-us-army-information-technology-contract/",
+          "pub_date": "2023-09-20",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Defense Enclave Services (DES) / DoDNet",
+          "customer": "Defense Information Systems Agency",
+          "contracting_org": "DISA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$11.5B (10 years)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "single award; ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Task orders since Feb 2022",
+          "date": "2022-02",
+          "period_of_performance": "2022-2032",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operations",
+          "source_url": "https://www.leidos.com/insights/disa-awards-leidos-115-billion-defense-enclave-services-contract",
+          "pub_date": "2022-02",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGEN-R Service Management, Integration and Transport (SMIT)",
+          "customer": "U.S. Navy",
+          "contracting_org": "NAVWAR / PEO Digital",
+          "vehicle_type": "FAR",
+          "ceiling": "up to $7.7B",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "up to $7.7B (recompete win 2020)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2020 (award); a further $926M Navy award reported 2026 (headline only)",
+          "period_of_performance": "2020-~2028 (RECALL; MEDIUM)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operations",
+          "source_url": "https://insidedefense.com/insider/navy-awards-leidos-contract-worth-77-billion-ngen-services",
+          "pub_date": "2020",
+          "confidence": "HIGH for 2020 award; MEDIUM for 2026 $926M linkage (https://virginiabusiness.com/leidos-926m-navy-127m-army-ngen-artemis/)"
+        },
+        {
+          "title": "Army cybersecurity award (~$301M)",
+          "customer": "U.S. Army",
+          "contracting_org": "Public evidence insufficient (headline only).",
+          "vehicle_type": "FAR",
+          "ceiling": "$301M (headline)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$301M (headline)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2026-08",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (INFERENCE)",
+          "prototype_or_production": "services",
+          "source_url": "https://news.clearancejobs.com/2026/08/26/leidos-wins-301-million-army-deal-as-military-cybersecurity-push-accelerates/",
+          "pub_date": "2026-08-26",
+          "confidence": "LOW (details not read)"
+        },
+        {
+          "title": "ATHENA-S Army SIGINT prototype aircraft (COCO)",
+          "customer": "U.S. Army",
+          "contracting_org": "Army PEO IEW&S / PM Fixed Wing",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "~2023 (RECALL - not re-verified this session)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://www.leidos.com",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "ARTEMIS flying operational ISR missions in the EUCOM AOR (since ~2020-21), extended through summer 2027",
+          "evidence": "Leidos/Army announcement of up-to-$127M extension (2026); prior extensions reported",
+          "source_url": "https://www.govconwire.com/articles/leidos-127m-army-artemis-airborne-isr-extension"
+        },
+        {
+          "what": "DoDNet operations for Fourth Estate agencies since Feb 2022",
+          "evidence": "Leidos release and Inside Defense reporting on $11.5B DES",
+          "source_url": "https://insidedefense.com/insider/leidos-wins-11b-defense-enclave-services-contract"
+        },
+        {
+          "what": "Navy NMCI/ONE-Net enterprise network operated under SMIT",
+          "evidence": "2020 award; 2026 $926M Navy award headline",
+          "source_url": "https://virginiabusiness.com/leidos-926m-navy-127m-army-ngen-artemis/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Project Convergence / Northern Edge participation",
+          "year": "2021-2025",
+          "note": "Public evidence insufficient this session; participation not verified. Do not treat as confirmed.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Bombardier (Challenger 650 airframe for ARTEMIS)",
+        "Microsoft and AWS (enterprise cloud partners; RECALL, MEDIUM)",
+        "Dynetics (owned subsidiary)",
+        "Networking OEMs (Cisco/Juniper class) under DES/SMIT (INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient. Leidos does not market a developer-facing C2 API/SDK; interfaces are program-specific (e.g., DoDNet service catalogs, CHS-6 hardware catalog).",
+      "security_classification_requirements": "Facility and personnel clearances up to TS/SCI across programs; ARTEMIS SIGINT collection implies TS/SCI operations; DES/SMIT operate at IL5/IL6 and SIPR-class enclaves (INFERENCE; MEDIUM).",
+      "allied_international_activity": "Leidos Australia and Leidos UK hold defence ICT/logistics work (RECALL; MEDIUM); ARTEMIS operates from Europe for EUCOM. Specific allied C2 product sales: Public evidence insufficient.",
+      "technical_differentiator": "Ability to stand up and run multi-billion-dollar networks and a COCO ISR aircraft fleet with cleared staff; this is operational scale, not unique software (INFERENCE; HIGH).",
+      "suspected_moat": "Incumbency on single-award decade-long vehicles (DES $11.5B, CHS-6 $7.9B, SMIT $7.7B), switching costs of network migration, and cleared workforce (INFERENCE; HIGH).",
+      "major_competitors": [
+        "SAIC",
+        "Booz Allen Hamilton",
+        "CACI",
+        "Peraton",
+        "GDIT",
+        "Accenture Federal",
+        "L3Harris / Sierra Nevada / MAG Aerospace (COCO ISR aircraft)"
+      ],
+      "obvious_weaknesses": "Low-margin services model dependent on recompetes and protests; no evidence Leidos leads any NGC2/CJADC2 data-layer effort (Army chose Anduril/Palantir baseline in 2026); ARTEMIS remains a service rather than the HADES program of record (HADES prime went to Sierra Nevada in 2024 - RECALL, MEDIUM).",
+      "evidence_user_adoption": "ARTEMIS repeatedly extended by the Army for EUCOM operations (FACT, HIGH); DoDNet migrations ongoing since 2022 (FACT, HIGH).",
+      "evidence_repeat_procurement": "ARTEMIS extension up to $127M in 2026 after prior extensions; Navy $926M follow-on award 2026 (headline); options on CHS-6/DES (HIGH for pattern, MEDIUM for 2026 details).",
+      "evidence_prototype_to_production": "ARTEMIS moved from a demonstration/quick-reaction aircraft (~2020) to multi-year operational service ordered on a production vehicle (CHS-6), but not into a program of record (INFERENCE; MEDIUM). ATHENA-S prototype outcome: Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "battalion_brigade"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (job postings not re-read this session; RECALL, LOW): enterprise network engineering (Cisco/Juniper, SD-WAN), ServiceNow ITSM, AWS GovCloud/Azure Government, Kubernetes, Java/Python, plus airborne mission-system and SIGINT engineers for ARTEMIS/ATHENA.",
+      "confidence_notes": "Contract ceilings (DES, CHS-6, SMIT) are HIGH-confidence facts but are ceilings, not revenue. 2026 ARTEMIS extension HIGH. $926M Navy award and $301M Army award known by headline only (LOW-MEDIUM). ATHENA-S, Dynetics/USV items and employee/revenue figures are RECALL, not re-verified.",
+      "sources": [
+        {
+          "url": "https://www.leidos.com/insights/leidos-support-extended-artemis-airborne-isr-mission-us-army",
+          "title": "Leidos to support extended ARTEMIS airborne ISR mission for U.S. Army",
+          "pub_date": "2026",
+          "type": "company"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/leidos-127m-army-artemis-airborne-isr-extension",
+          "title": "Leidos Wins $127M Extension for Army ARTEMIS Airborne ISR Work",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://virginiabusiness.com/leidos-926m-navy-127m-army-ngen-artemis/",
+          "title": "Leidos secures $926M Navy, $127M Army awards",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.defensenews.com/battlefield-tech/it-networks/2023/09/20/leidos-wins-79-billion-us-army-information-technology-contract/",
+          "title": "Leidos wins $7.9 billion US Army information technology contract (CHS-6)",
+          "pub_date": "2023-09-20",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.leidos.com/insights/disa-awards-leidos-115-billion-defense-enclave-services-contract",
+          "title": "DISA awards Leidos $11.5 billion Defense Enclave Services contract",
+          "pub_date": "2022-02",
+          "type": "company"
+        },
+        {
+          "url": "https://insidedefense.com/insider/navy-awards-leidos-contract-worth-77-billion-ngen-services",
+          "title": "Navy awards Leidos contract worth $7.7 billion for NGEN services",
+          "pub_date": "2020",
+          "type": "independent"
+        },
+        {
+          "url": "https://news.clearancejobs.com/2026/08/26/leidos-wins-301-million-army-deal-as-military-cybersecurity-push-accelerates/",
+          "title": "Leidos Wins $301 Million Army Deal as Military Cybersecurity Push Accelerates",
+          "pub_date": "2026-08-26",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Science Applications International Corporation (SAIC)",
+      "aka": "SAIC (2013 spin-off of the technical-services business of the original SAIC, which became Leidos); subsidiaries/acquisitions include Engility (2019), Unisys Federal (2020), Koverse (2021), Halfaker (2021)",
+      "founding_year": 2013,
+      "headquarters": "Reston, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~24,000 (RECALL - not re-verified; MEDIUM)",
+      "founders": [
+        "Spun off from Leidos in 2013; heritage founder J. Robert Beyster (1969)"
+      ],
+      "founder_backgrounds": "No founder-led culture today; CEO Toni Townes-Whitley (ex-Microsoft U.S. regulated industries) since Oct 2023 (RECALL; MEDIUM).",
+      "total_disclosed_funding_usd": "N/A - public company (Nasdaq: SAIC). Annual revenue roughly $7.5B (FY2026, fiscal year ending Jan 2026; RECALL, MEDIUM).",
+      "latest_valuation": "Public market cap on the order of $5-6B in 2025-2026 (RECALL; LOW - not checked this session).",
+      "major_investors": [
+        "Public float; institutional holders (RECALL; LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Cloud Based Command and Control (CBC2) - integrator for DAF ABMS",
+          "description": "SAIC received a $112M contract to develop CBC2, the cloud-native air defense C2 replacing legacy Battle Control System-Fixed for NORAD/NORTHCOM air defense sectors (FACT that the award exists per SAIC release; award date and IOC dates RECALL ~2022 award and 2024-25 IOC at an air defense sector, not re-verified; MEDIUM).",
+          "input_process_output_user": "Input: radar/sensor tracks and civil/military air surveillance feeds. Process: cloud-hosted track correlation, identification and battle-management workflows. Output: single integrated air picture and tasking for air defense sectors. Users: NORAD/NORTHCOM air defense sector battle managers; buyer DAF PEO C3BM."
+        },
+        {
+          "name": "SDA BMC3 Application Factory integrator",
+          "description": "$64M award (June 2023) to develop, implement and maintain the Battle Management Command, Control and Communications (BMC3) Application Factory for the Proliferated Warfighter Space Architecture (FACT).",
+          "input_process_output_user": "Input: mission apps from vendors/government. Process: DevSecOps pipeline, containerized app deployment to on-orbit BMC3 processors. Output: certified apps running on PWSA satellites. Users: Space Development Agency and app developers."
+        },
+        {
+          "name": "ABMS Digital Infrastructure / JADC2 IDIQ positions",
+          "description": "Position on the $950M multi-award ABMS/JADC2 IDIQ (Aug 2020; ceiling only) and a 'leading position' on a $192M ABMS Digital Infrastructure contract (GovConWire; date not verified this session, likely 2022-2023 - RECALL).",
+          "input_process_output_user": "Input: DAF Battle Network requirements. Process: digital infrastructure engineering (cloud, data, comms). Output: infrastructure services for ABMS. Users: DAF PEO C3BM and Battle Network programs."
+        },
+        {
+          "name": "COBRA task order (CJADC2 systems modernization) and Air Force warfighting-capability prototype engineering",
+          "description": "GovConWire headlines report a $1.4B COBRA task order to support CJADC2 systems modernization and a $928M Air Force contract for warfighting capability prototype engineering and mission integration (2026 listings). Customer, obligations and scope not read this session (headline-only; LOW).",
+          "input_process_output_user": "Public evidence insufficient beyond headlines."
+        },
+        {
+          "name": "Koverse data platform / AI tooling",
+          "description": "Koverse (acquired 2021) is a data platform for sensitive/classified data with attribute-based access control that SAIC markets for mission data problems (RECALL; MEDIUM). Independent evidence of scaled operational use: Public evidence insufficient.",
+          "input_process_output_user": "Input: multi-source structured/unstructured data. Process: indexing, ABAC security tagging, analytics. Output: governed data access for analysts/apps. Users: intelligence and DoD data teams (company claim)."
+        }
+      ],
+      "exact_problem_solved": "Acts as government-side systems integrator for cloud-native C2 modernization: it builds and operates DevSecOps factories and cloud C2 applications (CBC2, SDA BMC3 app factory, ABMS digital infrastructure) so that programs can absorb third-party software without owning the integration burden.",
+      "primary_users": [
+        "NORAD/NORTHCOM air defense sector operators (CBC2)",
+        "SDA and PWSA app developers",
+        "DAF Battle Network/ABMS programs",
+        "Army DEVCOM AvMC software users (aviation/missile systems)",
+        "Intelligence agency ground-program users"
+      ],
+      "primary_buyers": [
+        "Department of the Air Force PEO C3BM / DAF Rapid Capabilities Office",
+        "Space Development Agency",
+        "Army DEVCOM Aviation & Missile Center",
+        "Space Force Space Systems Command",
+        "Intelligence community agencies"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "NORMALIZE",
+        "PROCESS",
+        "FUSE",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DECIDE",
+        "TRANSPORT"
+      ],
+      "mission_layer": [
+        "air defense (homeland)",
+        "space",
+        "joint (CJADC2)",
+        "aviation and missiles (software sustainment)"
+      ],
+      "segment_ids": [
+        "S01",
+        "S02",
+        "S07",
+        "S09",
+        "S08"
+      ],
+      "hw_sw_mix": "software/services - integrator; owns little hardware IP; some data platform IP (Koverse).",
+      "market_posture": "defense-native (plus civil/federal IT)",
+      "contracts": [
+        {
+          "title": "Cloud Based Command and Control (CBC2) development",
+          "customer": "Department of the Air Force (ABMS)",
+          "contracting_org": "DAF Rapid Capabilities Office / PEO C3BM (RECALL)",
+          "vehicle_type": "FAR",
+          "ceiling": "$112M (as announced)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$112M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "~2022 (RECALL; release undated in this session's results)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype transitioning to fielded capability (IOC at an air defense sector 2024-25 - RECALL)",
+          "source_url": "https://investors.saic.com/news-releases/news-release-details/saic-receives-112m-contract-deliver-cloud-based-command-and",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "SDA BMC3 Application Factory",
+          "customer": "Space Development Agency",
+          "contracting_org": "SDA",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "$64M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$64M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2023-06-08",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype (supports Tranche 1 constellation)",
+          "source_url": "https://spacenews.com/saic-to-deliver-space-battle-management-command-and-control-solution-for-space-development-agency/",
+          "pub_date": "2023-06",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "ABMS / JADC2 multi-award IDIQ",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFLCMC",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$950M shared multi-award ceiling",
+          "obligated": "Public evidence insufficient (ceiling is not revenue).",
+          "awarded_value": "position only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2020-08-04",
+          "period_of_performance": "5 years base (RECALL)",
+          "prime_or_sub": "prime (one of many)",
+          "prototype_or_production": "prototype/maturation vehicle",
+          "source_url": "https://www.businesswire.com/news/home/20200804005364/en/",
+          "pub_date": "2020-08-04",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "ABMS Digital Infrastructure contract - 'leading position'",
+          "customer": "U.S. Air Force",
+          "contracting_org": "DAF PEO C3BM (INFERENCE)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$192M (per headline)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "position",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "not verified (likely 2022-2023; RECALL)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype/engineering",
+          "source_url": "https://www.govconwire.com/articles/saic-usaf-abms-digital-infrastructure-contract",
+          "pub_date": "",
+          "confidence": "LOW"
+        },
+        {
+          "title": "COBRA task order supporting CJADC2 systems modernization",
+          "customer": "Not verified (headline only)",
+          "contracting_org": "Public evidence insufficient.",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$1.4B (task order value per headline)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$1.4B (headline)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2026 (per GovConWire listing; not verified)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (INFERENCE)",
+          "prototype_or_production": "modernization/sustainment (INFERENCE)",
+          "source_url": "https://www.govconwire.com/articles/saic-cobra-cjadc2-task-order",
+          "pub_date": "",
+          "confidence": "LOW"
+        },
+        {
+          "title": "Air Force warfighting capability prototype engineering and mission integration",
+          "customer": "U.S. Air Force",
+          "contracting_org": "Public evidence insufficient.",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$928M (headline)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$928M (headline)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2026 (per listing; not verified)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (INFERENCE)",
+          "prototype_or_production": "prototype engineering",
+          "source_url": "https://www.govconwire.com/articles/saic-air-force-warfighting-prototyping-capability-vincent-difronzo",
+          "pub_date": "",
+          "confidence": "LOW"
+        },
+        {
+          "title": "Army DEVCOM AvMC System Software Lifecycle Engineering (SSLE)",
+          "customer": "U.S. Army",
+          "contracting_org": "Army DEVCOM Aviation & Missile Center",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$1.8B (5 years)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2025-2026 (listing; not verified)",
+          "period_of_performance": "5 years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "software sustainment/engineering",
+          "source_url": "https://www.govconwire.com/s/company/saic",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "CBC2 in operational use at NORAD/NORTHCOM air defense sectors",
+          "evidence": "RECALL: IOC declared at an air defense sector in 2024-25; not re-verified this session (MEDIUM/LOW).",
+          "source_url": "https://investors.saic.com/news-releases/news-release-details/saic-receives-112m-contract-deliver-cloud-based-command-and"
+        },
+        {
+          "what": "BMC3 app factory supporting SDA Tranche 1 satellites",
+          "evidence": "2023 award; on-orbit use depends on Tranche 1 launch cadence (2024-2026) - INFERENCE",
+          "source_url": "https://saic.com/perspectives/jadc2/space-development-agency-leads-on-orbit-bmc3-data-processing-for-all-domain-warfighting"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "ABMS on-ramp demonstrations",
+          "year": "2020-2021",
+          "note": "SAIC participated as an ABMS IDIQ holder (company materials); independent confirmation of specific demos: Public evidence insufficient.",
+          "source_url": "https://militaryembedded.com/comms/communications/joint-all-domain-command-and-control-efforts-supported-bu-saic"
+        }
+      ],
+      "integration_partners": [
+        "AWS / Microsoft Azure (cloud hosting for CBC2 and factories - INFERENCE)",
+        "Space Development Agency BMC3 app vendors",
+        "Koverse (owned)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient for a public SDK. CBC2 and the SDA app factory expose government-owned interfaces/pipelines to third-party app developers (INFERENCE; MEDIUM).",
+      "security_classification_requirements": "Secret to TS/SCI programs; CBC2 runs at classified levels for air defense; intel ground programs require TS/SCI staff (INFERENCE; MEDIUM).",
+      "allied_international_activity": "CBC2 supports the bi-national NORAD mission (Canada) by nature of the air defense sectors (INFERENCE; MEDIUM). Other allied C2 sales: Public evidence insufficient.",
+      "technical_differentiator": "Demonstrated cloud-native C2 delivery (CBC2) and software-factory operations for space (BMC3) - execution track record rather than proprietary tech (INFERENCE; MEDIUM).",
+      "suspected_moat": "Incumbency with DAF PEO C3BM and SDA plus large task-order vehicles; moderate, since the government owns the architectures and can re-compete integrators (INFERENCE; MEDIUM).",
+      "major_competitors": [
+        "Leidos",
+        "Booz Allen Hamilton",
+        "CACI",
+        "Peraton",
+        "L3Harris (BMC3 and battle management)",
+        "Anduril / Palantir (data layer for NGC2/CJADC2)",
+        "Raytheon, Northrop Grumman (air defense C2)"
+      ],
+      "obvious_weaknesses": "Integrator margins and recompete exposure; several 2026 headline awards are ceilings/task orders whose obligations are unknown; no evidence of a role in Army NGC2 (Anduril/Lockheed-led teams).",
+      "evidence_user_adoption": "CBC2 operational use by air defense sectors (RECALL; MEDIUM/LOW). SDA app factory in use by SDA (MEDIUM).",
+      "evidence_repeat_procurement": "Sequence of ABMS-family awards (2020 IDIQ, CBC2 ~2022, Digital Infrastructure, 2026 prototype-engineering and COBRA task orders) indicates repeat buying from DAF (INFERENCE; MEDIUM given headline-only 2026 items).",
+      "evidence_prototype_to_production": "CBC2 progressed from prototype to fielded air-defense C2 replacing BCS-F (RECALL; MEDIUM). SDA BMC3 app factory remains a prototype OTA (HIGH).",
+      "whitespace_cells": [
+        {
+          "chain_step": "FUSE",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DECIDE",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): Kubernetes/Platform One-style DevSecOps, Kafka, Java/Go/Python microservices, AWS GovCloud/Azure Government, Koverse data platform, on-orbit container deployment for BMC3.",
+      "confidence_notes": "2020 IDIQ and 2023 SDA award HIGH. CBC2 award value HIGH, date/IOC MEDIUM-LOW (recall). 2026 headline awards ($1.4B COBRA, $928M Air Force, $1.8B SSLE) are LOW because company site and news fetches were blocked; treat as ceilings not obligations.",
+      "sources": [
+        {
+          "url": "https://www.businesswire.com/news/home/20200804005364/en/",
+          "title": "SAIC to Partner with U.S. Air Force on JADC2 under Multiple-Award $950 Million ABMS Contract",
+          "pub_date": "2020-08-04",
+          "type": "company"
+        },
+        {
+          "url": "https://spacenews.com/saic-to-deliver-space-battle-management-command-and-control-solution-for-space-development-agency/",
+          "title": "SAIC to Deliver Space Battle Management Command and Control Solution for SDA",
+          "pub_date": "2023-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://investors.saic.com/news-releases/news-release-details/saic-receives-112m-contract-deliver-cloud-based-command-and",
+          "title": "SAIC Receives $112M Contract to Deliver Cloud Based Command and Control",
+          "pub_date": "",
+          "type": "company"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/saic-cobra-cjadc2-task-order",
+          "title": "SAIC Awarded $1.4B COBRA Task Order to Support CJADC2 Systems Modernization",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/saic-air-force-warfighting-prototyping-capability-vincent-difronzo",
+          "title": "SAIC Secures $928M Air Force Contract for Warfighting Capability Prototype Engineering, Mission Integration",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/saic-usaf-abms-digital-infrastructure-contract",
+          "title": "SAIC Awarded Leading Position on $192M Air Force ABMS Digital Infrastructure Contract",
+          "pub_date": "",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.saic.com/what-we-do/mission-it/jadc2",
+          "title": "SAIC - Joint All-Domain Command and Control",
+          "pub_date": "",
+          "type": "company"
+        }
+      ]
+    },
+    {
+      "name": "Booz Allen Hamilton Holding Corporation",
+      "aka": "Booz Allen; BAH; Booz Allen Ventures (corporate VC arm); acquisitions include Liberty IT Solutions (2021), Tracepoint, EverWatch (2022)",
+      "founding_year": 1914,
+      "headquarters": "McLean, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~32,000-34,000 in FY2025, reduced by ~2,500 civil-side roles in 2025 (RECALL; MEDIUM)",
+      "founders": [
+        "Edwin G. Booz (1914); later partners James L. Allen and Carl Hamilton"
+      ],
+      "founder_backgrounds": "Management-consulting origins; today a technology/AI-heavy federal contractor led by CEO Horacio Rozanski (RECALL; HIGH on identity).",
+      "total_disclosed_funding_usd": "N/A - public company (NYSE: BAH). FY2026 revenue roughly $12B (RECALL; MEDIUM).",
+      "latest_valuation": "Public market cap; mid-teens $B range in 2025-2026 (RECALL; LOW - not checked).",
+      "major_investors": [
+        "Public float; institutional holders (RECALL; LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "ABMS Distributed Battle Management Node (DBMN) Phase II - Tactical Operations Center-Light (TOC-L) prototype",
+          "description": "$315M rapid prototyping award (announced July 2025) to deliver the TOC-L deployable battle-management node for the Department of the Air Force, with L3Harris as partner, explicitly framed as enabling CJADC2 (FACT per Booz Allen release).",
+          "input_process_output_user": "Input: multi-domain sensor/track feeds and datalinks at a deployed site. Process: containerized battle-management software on transportable hardware. Output: air battle-management picture and C2 at the tactical edge. Users: DAF air battle managers / air operations elements; buyer DAF PEO C3BM."
+        },
+        {
+          "name": "Advana (DoD enterprise data and analytics platform) - system integrator",
+          "description": "Booz Allen has been Advana's primary integrator since ~2019-2020 (RECALL; MEDIUM) and won a $149.1M Alliant 2 task (16 Feb 2025 - 15 Feb 2027) for system integration and service desk (FACT per OrangeSlices/USAspending-derived report).",
+          "input_process_output_user": "Input: hundreds of DoD financial, logistics, personnel and readiness data sources. Process: ingestion, cataloging, analytics and dashboards. Output: decision analytics for OSD/CDAO and components. Users: OSD comptroller, CDAO, combatant commands; not a tactical C2 system."
+        },
+        {
+          "name": "Thunderdome (DISA zero-trust architecture)",
+          "description": "$6.8M prototype OTA (Jan 2022) followed by a DISA production agreement in 2023 (RECALL - value not re-verified; LOW). A 2025 Booz Allen post cites a top CPARS score on the contract (company claim).",
+          "input_process_output_user": "Input: DISA/DoD user and device traffic. Process: SASE/SD-WAN, identity-based segmentation, policy enforcement. Output: zero-trust access across DISN enclaves. Users: DISA and DoD components; buyer DISA."
+        },
+        {
+          "name": "AI-based C2 integration and experimentation (Air Force)",
+          "description": "$5.5M contract (23 Sep 2025 - 22 Nov 2028) for AI-based command and control integration and experimentation supporting JADC2 (FACT per G2Xchange summary).",
+          "input_process_output_user": "Input: C2 data and AI models. Process: integration/experimentation. Output: evaluated AI decision-support prototypes. Users: Air Force research/C2 organizations."
+        },
+        {
+          "name": "Vellox Reverb, District Defend, aiSSEMBLE and Booz Allen Ventures portfolio",
+          "description": "Vellox Reverb (2025) is an edge AI stack demonstrated on-orbit; District Defend is device-security software; aiSSEMBLE is an open-source AI engineering baseline; Booz Allen Ventures holds stakes in edge/C2-adjacent startups (e.g., Shield AI, Hidden Level, Second Front, Latent AI - RECALL, LOW). Investor interest, not proof of military demand.",
+          "input_process_output_user": "Varies; Vellox Reverb: input satellite sensor data, process onboard ML inference, output tipped/cued products (company claim)."
+        }
+      ],
+      "exact_problem_solved": "Supplies the data/AI/zero-trust engineering and deployable battle-management integration that government C2 programs need but cannot staff internally; its C4ISR value is integration and analytics at the enterprise and theater layers, with TOC-L its first sizable tactical-edge C2 hardware/software delivery.",
+      "primary_users": [
+        "DAF air battle managers (TOC-L)",
+        "OSD/CDAO and combatant command analysts (Advana)",
+        "DISA network/security operators (Thunderdome)",
+        "Army Mission Command Training Program (MCTP) exercise audiences",
+        "USSOUTHCOM staff (EDA analytics)"
+      ],
+      "primary_buyers": [
+        "Department of the Air Force PEO C3BM",
+        "DoD Chief Digital and AI Office",
+        "DISA",
+        "U.S. Army (MCTP)",
+        "USSOUTHCOM"
+      ],
+      "technical_layer": [
+        "INGEST",
+        "NORMALIZE",
+        "STORE",
+        "PROCESS",
+        "FUSE",
+        "VISUALIZE",
+        "DECIDE",
+        "TRANSPORT"
+      ],
+      "mission_layer": [
+        "joint",
+        "air battle management",
+        "enterprise decision support",
+        "cyber/zero trust",
+        "space (edge AI)"
+      ],
+      "segment_ids": [
+        "S01",
+        "S02",
+        "S06",
+        "S07",
+        "S09",
+        "S10"
+      ],
+      "hw_sw_mix": "software/services - some productized software (District Defend, Vellox Reverb); TOC-L involves ruggedized hardware kits with L3Harris.",
+      "market_posture": "defense-native (federal civil and intelligence also large)",
+      "contracts": [
+        {
+          "title": "ABMS DBMN Phase II Tactical Operations Center-Light (TOC-L) prototype",
+          "customer": "Department of the Air Force",
+          "contracting_org": "DAF PEO C3BM (INFERENCE)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "$315M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$315M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2025-07",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (L3Harris partner)",
+          "prototype_or_production": "rapid prototyping (Phase II)",
+          "source_url": "https://investors.boozallen.com/news-releases/news-release-details/booz-allen-awarded-315-million-rapid-prototyping-contract",
+          "pub_date": "2025-07",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "ADVANA system integrator and service desk support (Alliant 2 task)",
+          "customer": "DoD CDAO / Advana",
+          "contracting_org": "GSA FEDSIM (Alliant 2) - INFERENCE from vehicle",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$149,144,008",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$149.1M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Task on Alliant 2",
+          "date": "2025-02-16",
+          "period_of_performance": "2025-02-16 to 2027-02-15",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operations",
+          "source_url": "https://orangeslices.ai/booz-allen-hamilton-wins-149m-dod-advana-service-desk-and-system-integrator-support-task-on-alliant-2/",
+          "pub_date": "2025",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "AI-based command and control integration and experimentation",
+          "customer": "U.S. Air Force",
+          "contracting_org": "Public evidence insufficient (AFRL likely - INFERENCE)",
+          "vehicle_type": "FAR",
+          "ceiling": "$5.5M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$5.5M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2025-09-23",
+          "period_of_performance": "2025-09-23 to 2028-11-22",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research/experimentation",
+          "source_url": "https://app.g2xchange.com/defense/posts/booz-allen-snaps-up-us-air-force-ai-based-jadc2-research-contract",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Thunderdome zero-trust prototype",
+          "customer": "DISA",
+          "contracting_org": "DISA",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "$6.8M",
+          "obligated": "$6.8M (prototype)",
+          "awarded_value": "$6.8M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2022-01",
+          "period_of_performance": "6 months prototype (RECALL)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype; follow-on production agreement 2023 (RECALL, value not re-verified; LOW)",
+          "source_url": "https://www.afcea.org/signal-media/booz-allen-hamilton-wins-thunderdome-prototype-contract",
+          "pub_date": "2022-01",
+          "confidence": "HIGH for prototype; LOW for production value"
+        },
+        {
+          "title": "USSOUTHCOM Enterprise Data Analytics (EDA) IDIQ - largest share",
+          "customer": "USSOUTHCOM",
+          "contracting_org": "Army contracting (per headline)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$392M multi-award",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "share not quantified",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "not verified (2025-2026 listing)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "services",
+          "source_url": "https://www.govconwire.com/articles/booz-allen-392m-army-eda-idiq",
+          "pub_date": "",
+          "confidence": "LOW"
+        },
+        {
+          "title": "Army Mission Command Training Program (MCTP) support",
+          "customer": "U.S. Army",
+          "contracting_org": "Army",
+          "vehicle_type": "FAR",
+          "ceiling": "$697M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$697M (headline)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "not verified (2025-2026 listing)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "services (training support for mission command)",
+          "source_url": "https://www.govconwire.com/articles/booz-allen-697m-army-mctp-training-contract",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Advana in daily use across OSD/CDAO and components for financial/readiness analytics",
+          "evidence": "Continuous integrator task orders incl. $149M 2025-2027 SI/service-desk task",
+          "source_url": "https://orangeslices.ai/booz-allen-hamilton-wins-149m-dod-advana-service-desk-and-system-integrator-support-task-on-alliant-2/"
+        },
+        {
+          "what": "Thunderdome zero-trust deployed in DISA production environments",
+          "evidence": "RECALL of 2023 production agreement plus 2025 company claim of top CPARS score; independent deployment metrics: Public evidence insufficient.",
+          "source_url": "https://www.linkedin.com/posts/booz-allen-hamilton_boozallen-zerotrust-activity-7366141662798032897-jgok"
+        },
+        {
+          "what": "TOC-L nodes fielded to operational units",
+          "evidence": "Public evidence insufficient (Phase II prototype awarded 2025).",
+          "source_url": "https://newsroom.boozallen.com/news-releases/news-release-details/booz-allen-wins-315m-air-force-command-control-contract"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "DAF TOC-L / DBMN experimentation events",
+          "year": "2025-2026",
+          "note": "Phase II award implies Phase I prototype evaluation occurred (INFERENCE); named exercises not verified this session.",
+          "source_url": "https://investors.boozallen.com/news-releases/news-release-details/booz-allen-awarded-315-million-rapid-prototyping-contract"
+        }
+      ],
+      "integration_partners": [
+        "L3Harris (TOC-L)",
+        "AWS / Databricks / Qlik class analytics stack for Advana (RECALL; LOW)",
+        "Booz Allen Ventures portfolio companies (Shield AI, Hidden Level, Second Front, Latent AI - RECALL; LOW)"
+      ],
+      "apis_sdks_open_interfaces": "Advana exposes government-owned data APIs to DoD users (INFERENCE); aiSSEMBLE is open source (company). No public commercial C2 SDK. Public evidence insufficient beyond this.",
+      "security_classification_requirements": "Large cleared workforce (Secret to TS/SCI); Advana operates at multiple classification levels; Thunderdome spans NIPR/SIPR (INFERENCE; MEDIUM).",
+      "allied_international_activity": "Public evidence insufficient for allied C2 sales; work is overwhelmingly U.S. federal.",
+      "technical_differentiator": "Data-engineering and AI integration depth plus a corporate VC arm that lets it bundle startup tech into government programs (INFERENCE; MEDIUM). TOC-L is its most tangible edge C2 delivery.",
+      "suspected_moat": "Advana/CDAO and DISA incumbency, program knowledge, and cleared data engineers; moderate because CDAO has signalled modular re-competition of Advana (RECALL; LOW).",
+      "major_competitors": [
+        "Leidos",
+        "SAIC",
+        "CACI",
+        "Palantir (CDAO data/AI platforms)",
+        "Accenture Federal / Deloitte",
+        "GDIT",
+        "Anduril (edge C2 nodes)"
+      ],
+      "obvious_weaknesses": "Labor-based margins; 2025 civil-agency cuts and layoffs hit revenue (RECALL; MEDIUM); reliance on a few large integrator contracts; TOC-L still a prototype with no production decision known.",
+      "evidence_user_adoption": "Advana user base across DoD (FACT-level, MEDIUM); Thunderdome production (RECALL; LOW-MEDIUM); TOC-L: insufficient.",
+      "evidence_repeat_procurement": "Recurring Advana task orders through 2027; Thunderdome prototype-to-production; TOC-L Phase I to Phase II (INFERENCE; MEDIUM).",
+      "evidence_prototype_to_production": "Thunderdome: prototype (2022) to production agreement (2023, RECALL). TOC-L: Phase II prototype only. AI-C2 experimentation: research.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "FUSE",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "DECIDE",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): Python/Spark/Databricks and Qlik for Advana, Kubernetes and containerized ML for Vellox Reverb, SASE/SD-WAN vendors for Thunderdome, Java/C++ for battle-management software.",
+      "confidence_notes": "TOC-L $315M, Advana $149M task and Thunderdome $6.8M prototype are HIGH. Thunderdome production value, Advana history, ventures portfolio and headcount are RECALL. MCTP and SOUTHCOM awards known by headline only (LOW).",
+      "sources": [
+        {
+          "url": "https://investors.boozallen.com/news-releases/news-release-details/booz-allen-awarded-315-million-rapid-prototyping-contract",
+          "title": "Booz Allen Awarded $315 Million Rapid Prototyping Contract to Transform Command and Control for the U.S. Air Force",
+          "pub_date": "2025-07",
+          "type": "company"
+        },
+        {
+          "url": "https://app.g2xchange.com/defense/posts/booz-allen-snaps-up-us-air-force-ai-based-jadc2-research-contract",
+          "title": "Booz Allen snaps up US Air Force AI-Based JADC2 research contract",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://orangeslices.ai/booz-allen-hamilton-wins-149m-dod-advana-service-desk-and-system-integrator-support-task-on-alliant-2/",
+          "title": "Booz Allen Hamilton wins $149M DOD ADVANA Service Desk and System Integrator Support task on Alliant 2",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.afcea.org/signal-media/booz-allen-hamilton-wins-thunderdome-prototype-contract",
+          "title": "Booz Allen Hamilton Wins Thunderdome Prototype Contract",
+          "pub_date": "2022-01",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/booz-allen-697m-army-mctp-training-contract",
+          "title": "Booz Allen Secures $697M Army MCTP Training Support Contract",
+          "pub_date": "",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/booz-allen-392m-army-eda-idiq",
+          "title": "Booz Allen Wins Largest Share of $392M USSOUTHCOM EDA IDIQ",
+          "pub_date": "",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "CACI International Inc",
+      "aka": "CACI (originally California Analysis Center, Inc.); business units include CACI Photonics (optical comms), SkyTracker/CORIAN counter-UAS; acquisitions include Azure Summit Technology (2024), Applied Insight (2024), ARKA Group (announced Dec 2025)",
+      "founding_year": 1962,
+      "headquarters": "Reston, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~25,000 (RECALL; MEDIUM)",
+      "founders": [
+        "Herb Karr",
+        "Harry Markowitz"
+      ],
+      "founder_backgrounds": "Founded by simulation-language pioneers (SIMSCRIPT); today an M&A-driven defense/intel technology firm led by CEO John Mengucci (RECALL; HIGH on identity).",
+      "total_disclosed_funding_usd": "N/A - public company (NYSE: CACI). FY2025 (June FYE) revenue roughly $8.6B (RECALL; MEDIUM).",
+      "latest_valuation": "Public market cap; roughly $10-12B in 2025-2026 (RECALL; LOW - not checked).",
+      "major_investors": [
+        "Public float; institutional holders (RECALL; LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Spectral - shipboard SIGINT / EW / information operations system (Navy SIWE)",
+          "description": "Next-generation shipboard system for signals intelligence, electronic warfare and IO; CACI received a $143M firm-fixed-price delivery order to enhance the existing Shipboard Information Warfare Exploit (SIWE) system under its ongoing Spectral contract (FACT per trade press; the underlying Spectral contract was awarded ~2023 with a ceiling on the order of $1B+ - RECALL, LOW).",
+          "input_process_output_user": "Input: RF environment sensed by shipboard antennas/receivers. Process: signal detection, exploitation, geolocation, EW/IO effects. Output: tactical SIGINT/EW picture and effects for ship combat systems. Users: Navy surface-ship information warfare teams; buyer NAVWAR/PEO C4I."
+        },
+        {
+          "name": "Counter-UAS systems (CORIAN, SkyTracker) and Navy C-UAS integration",
+          "description": "RF-based C-UAS product line; Navy awarded a $48.5M single-award IDIQ for integration, installation, sustainment and engineering of C-UAS technology, plus a NAWC task order to modernize C-UAS-relevant mission systems on EP-3E, P-8A, MQ-8 and MQ-25 (FACT per Military Embedded Systems).",
+          "input_process_output_user": "Input: RF emissions from drones/controllers. Process: detection, identification, geolocation, electronic attack. Output: alerts and defeat effects to base/ship defenders. Users: Navy installations and ships, JCO users (RECALL for JCO adoption; MEDIUM)."
+        },
+        {
+          "name": "Army spectrum dominance / next-generation EW engineering",
+          "description": "Five-year task order up to $250M for Army Capability Program Executive - Intelligence, Electronic Warfare & Sensors (CPE IEW&S) (announced Jan 27 2026) and a three-year up-to-$79M DEVCOM task order to counter EW threats (Dec 2025) (FACT).",
+          "input_process_output_user": "Input: Army EW/spectrum requirements and threat data. Process: prototyping, integration and sustainment of EW/spectrum capabilities. Output: fielded EW and spectrum-awareness upgrades. Users: Army EW and cyber-electromagnetic activity units; buyers CPE IEW&S, DEVCOM C5ISR."
+        },
+        {
+          "name": "Optical communications terminals (CACI Photonics) for SDA Transport/Tracking layers",
+          "description": "Laser crosslink terminals supplied to SDA satellite primes (RECALL - not re-verified; MEDIUM). Enables high-bandwidth mesh transport for PWSA.",
+          "input_process_output_user": "Input: satellite bus data. Process: optical inter-satellite links. Output: low-latency mesh transport for BMC3 data. Users: SDA constellation primes (York, Northrop Grumman, L3Harris class - RECALL)."
+        },
+        {
+          "name": "ARKA Group acquisition (space-based sensors and ground processing)",
+          "description": "Agreement announced Dec 2025 to acquire ARKA Group for $2.6B, expanding space sensors and ground processing (FACT per FedSavvy summary); closing status not verified this session.",
+          "input_process_output_user": "Input: space-borne sensor collection. Process: ground processing/exploitation. Output: intelligence products. Users: national security space customers."
+        }
+      ],
+      "exact_problem_solved": "Delivers sensing, exploitation and effects in the electromagnetic spectrum (shipboard SIGINT/EW, Army EW, C-UAS) and space transport/sensing hardware, combined with cleared engineering services; in the C4ISR chain it is strongest at COLLECT and PROCESS for RF/EW rather than at general-purpose C2 software.",
+      "primary_users": [
+        "Navy surface ship information-warfare teams",
+        "Army EW/spectrum units",
+        "Navy installations and aircraft program offices (C-UAS)",
+        "SDA constellation primes",
+        "Navy enterprise IT users"
+      ],
+      "primary_buyers": [
+        "NAVWAR / PEO C4I (Spectral)",
+        "Army CPE IEW&S and DEVCOM C5ISR",
+        "NAVAIR / NAWC and NIWC (C-UAS)",
+        "Space Development Agency primes (optical terminals)",
+        "Navy IT organizations ($416M modernization)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "IDENTIFY",
+        "TRANSPORT",
+        "TASK"
+      ],
+      "mission_layer": [
+        "maritime information warfare",
+        "land EW/spectrum",
+        "counter-UAS / base defense",
+        "space transport and sensing",
+        "enterprise IT"
+      ],
+      "segment_ids": [
+        "S12",
+        "S03",
+        "S05",
+        "S04",
+        "S09",
+        "S06"
+      ],
+      "hw_sw_mix": "both - owns product hardware/software (Spectral, SkyTracker/CORIAN, optical terminals, Azure Summit RF payloads) alongside services.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Spectral (SIWE) enhancement delivery order",
+          "customer": "U.S. Navy",
+          "contracting_org": "NAVWAR / PEO C4I (INFERENCE)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Spectral base contract ceiling not verified (RECALL ~$1B+; LOW)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$143M firm-fixed-price delivery order",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Delivery order under Spectral",
+          "date": "2025 (per Consulting Report; exact date not verified)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production enhancement of fielded system",
+          "source_url": "https://www.theconsultingreport.com/caci-advances-u-s-navys-electronic-warfare-capabilities-with-new-contract-award/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Army CPE IEW&S spectrum dominance / next-gen EW task order",
+          "customer": "U.S. Army",
+          "contracting_org": "Army CPE IEW&S",
+          "vehicle_type": "IDIQ",
+          "ceiling": "up to $250M (5 years)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "up to $250M task order",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "single task order",
+          "date": "2026-01-27",
+          "period_of_performance": "5 years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "engineering/production support",
+          "source_url": "https://investor.caci.com/2026-01-27-CACI-to-Strengthen-U-S-Army-Readiness-and-Spectrum-Dominance-with-Next-Gen-Electronic-Warfare",
+          "pub_date": "2026-01-27",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "DEVCOM counter-EW threats task order",
+          "customer": "U.S. Army DEVCOM",
+          "contracting_org": "Army DEVCOM (C5ISR Center - INFERENCE)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "up to $79M (3 years)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "up to $79M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "single task order",
+          "date": "2025-12",
+          "period_of_performance": "3 years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "R&D/engineering",
+          "source_url": "https://thedefensepost.com/2025/12/03/caci-us-armys-electronic-warfare/",
+          "pub_date": "2025-12-03",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Navy counter-UAS integration and sustainment IDIQ",
+          "customer": "U.S. Navy",
+          "contracting_org": "Naval Warfare Center (per trade press)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$48.5M single award",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "ceiling $48.5M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Subsequent task order for C-UAS mission-systems engineering (EP-3E, P-8A, MQ-8, MQ-25)",
+          "date": "2024-2025 (not precisely verified)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production integration/sustainment",
+          "source_url": "https://militaryembedded.com/unmanned/counter-uas/counter-uas-tech-the-focus-of-48-5-million-u-s-navy-contract-with-caci",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Navy IT modernization contract",
+          "customer": "U.S. Navy",
+          "contracting_org": "Public evidence insufficient.",
+          "vehicle_type": "FAR",
+          "ceiling": "$416M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$416M (headline)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2026-01",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "services",
+          "source_url": "https://thedefensepost.com/2026/01/14/caci-us-navy-contract/",
+          "pub_date": "2026-01-14",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Azure Summit Technology acquisition (RF/EW/SIGINT products)",
+          "customer": "N/A (M&A)",
+          "contracting_org": "N/A",
+          "vehicle_type": "FAR",
+          "ceiling": "N/A",
+          "obligated": "N/A",
+          "awarded_value": "$1.275B purchase price (RECALL; MEDIUM)",
+          "funded_amount": "N/A",
+          "task_orders": "N/A",
+          "date": "2024-10 (RECALL)",
+          "period_of_performance": "N/A",
+          "prime_or_sub": "N/A",
+          "prototype_or_production": "N/A",
+          "source_url": "https://www.caci.com",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Spectral/SIWE fielded on Navy surface ships",
+          "evidence": "$143M order for enhancements to the 'existing' SIWE system implies a fielded baseline (INFERENCE; MEDIUM)",
+          "source_url": "https://www.theconsultingreport.com/caci-advances-u-s-navys-electronic-warfare-capabilities-with-new-contract-award/"
+        },
+        {
+          "what": "CORIAN/SkyTracker C-UAS deployed at U.S. sites and with JCO/CENTCOM",
+          "evidence": "RECALL - not re-verified this session (MEDIUM/LOW)",
+          "source_url": "https://www.caci.com"
+        },
+        {
+          "what": "CACI optical terminals on orbit with SDA Tranche 0/1 satellites",
+          "evidence": "RECALL; LOW-MEDIUM",
+          "source_url": "https://www.caci.com"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "JCO counter-UAS demonstrations (Yuma)",
+          "year": "2021-2024",
+          "note": "RECALL that CACI systems participated; not re-verified this session (LOW).",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "SDA satellite primes (York Space, Northrop Grumman, L3Harris - RECALL)",
+        "Navy combat-system integrators (Lockheed Martin Aegis class - INFERENCE)",
+        "Azure Summit and ARKA (owned/pending)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient for open SDKs; C-UAS products advertise integration with the JCO/FAAD C2 ecosystem (RECALL; LOW).",
+      "security_classification_requirements": "SIGINT/EW work at Secret to TS/SCI; large cleared workforce and intel-agency programs (INFERENCE; HIGH).",
+      "allied_international_activity": "Public evidence insufficient this session; CACI has a UK subsidiary (CACI Ltd) mostly outside C4ISR (RECALL; LOW).",
+      "technical_differentiator": "Owns RF/EW/SIGINT and optical-comms product IP (via Azure Summit, Photonics, Spectral) coupled with prime-integrator scale (INFERENCE; MEDIUM).",
+      "suspected_moat": "Program incumbency on Navy Spectral/SIWE and Army EW task orders, classified RF know-how, and consolidation via M&A (INFERENCE; MEDIUM).",
+      "major_competitors": [
+        "L3Harris",
+        "BAE Systems (EW)",
+        "Leidos",
+        "Peraton",
+        "SAIC",
+        "Anduril (C-UAS)",
+        "Mynaric / Tesat / Skyloom (optical terminals)",
+        "Raytheon/RTX"
+      ],
+      "obvious_weaknesses": "Integration risk and leverage from serial large acquisitions (ARKA $2.6B pending); hardware supply-chain exposure; less presence in general-purpose C2/data-fabric software; no evidence of NGC2 role.",
+      "evidence_user_adoption": "Navy continues ordering Spectral/SIWE enhancements; Army placed two EW task orders within two months (Dec 2025, Jan 2026) (HIGH).",
+      "evidence_repeat_procurement": "Repeat delivery orders under Spectral; successive C-UAS Navy awards; consecutive Army EW task orders (HIGH for pattern).",
+      "evidence_prototype_to_production": "Spectral moved from development to fielded shipboard system with production enhancements (INFERENCE; MEDIUM). Optical terminals moved to on-orbit Tranche deliveries (RECALL; MEDIUM).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): FPGA/DSP and RF engineers, embedded Linux/C++ for EW payloads, photonics engineers, plus Kubernetes/cloud engineers from Applied Insight.",
+      "confidence_notes": "Army EW task orders (Dec 2025, Jan 2026) and Navy IT award are HIGH/MEDIUM from dated trade press. Spectral base ceiling, optical-terminal deployments, C-UAS operational use, Azure Summit price and ARKA closing are RECALL/LOW-MEDIUM.",
+      "sources": [
+        {
+          "url": "https://investor.caci.com/2026-01-27-CACI-to-Strengthen-U-S-Army-Readiness-and-Spectrum-Dominance-with-Next-Gen-Electronic-Warfare",
+          "title": "CACI to Strengthen U.S. Army Readiness and Spectrum Dominance with Next-Gen Electronic Warfare",
+          "pub_date": "2026-01-27",
+          "type": "company"
+        },
+        {
+          "url": "https://thedefensepost.com/2025/12/03/caci-us-armys-electronic-warfare/",
+          "title": "CACI to Support US Army's Electronic Warfare Efforts Under $79M Contract",
+          "pub_date": "2025-12-03",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/caci-army-task-order-spectrum-dominance",
+          "title": "CACI Secures $250M Army Task Order to Support Spectrum Dominance Efforts",
+          "pub_date": "2026-01",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.theconsultingreport.com/caci-advances-u-s-navys-electronic-warfare-capabilities-with-new-contract-award/",
+          "title": "CACI Advances U.S. Navy's Electronic Warfare Capabilities with New Contract Award (Spectral $143M)",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/unmanned/counter-uas/counter-uas-tech-the-focus-of-48-5-million-u-s-navy-contract-with-caci",
+          "title": "Counter-UAS tech the focus of $48.5 million U.S. Navy contract with CACI",
+          "pub_date": "",
+          "type": "independent"
+        },
+        {
+          "url": "https://thedefensepost.com/2026/01/14/caci-us-navy-contract/",
+          "title": "CACI Wins $416M US Navy IT Modernization Contract",
+          "pub_date": "2026-01-14",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.fedsavvystrategies.com/caci-expands-its-military-space-presence-and-continues-to-win-gsa-aas-fedsim-contracts/",
+          "title": "CACI expands its military space presence (ARKA $2.6B)",
+          "pub_date": "2025-12",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Peraton Corporation",
+      "aka": "Peraton (2017 Veritas Capital carve-out of Harris Corporation government services; merged Perspecta and Northrop Grumman IT services in 2021); research arm Peraton Labs (ex-Perspecta Labs / Vencore Labs / Telcordia Applied Research)",
+      "founding_year": 2017,
+      "headquarters": "Reston (Herndon), Virginia, USA",
+      "public_private": "private",
+      "employee_count_approx": "~18,000 (RECALL; MEDIUM)",
+      "founders": [
+        "Veritas Capital (sponsor); founding CEO Stu Shea"
+      ],
+      "founder_backgrounds": "PE-sponsored roll-up rather than founder-led; CEO Steve Schmidt (ex-Booz Allen, ex-Leidos executive) since 2023-24 (RECALL; MEDIUM).",
+      "total_disclosed_funding_usd": "Private; Veritas Capital funded ~$3.4B (Northrop Grumman IT, Feb 2021) and ~$7.1B (Perspecta, May 2021) acquisitions (RECALL; MEDIUM). Revenue on the order of $7B (RECALL; LOW-MEDIUM).",
+      "latest_valuation": "Public evidence insufficient (private; implied enterprise value ~$10B+ by 2021 deal sizes - INFERENCE, LOW).",
+      "major_investors": [
+        "Veritas Capital (owner)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "DARPA Mission-Integrated Network Control (MINC) - Peraton Labs",
+          "description": "$19.28M BAA contract to develop autonomous, mission-aware control of tactical networks so that critical data flows across heterogeneous radios/links; positioned as a JADC2 enabler (FACT per Shephard; award date ~2021, RECALL).",
+          "input_process_output_user": "Input: mission priorities, network state across tactical links. Process: automated cross-network configuration/routing. Output: assured connectivity for prioritized C2/ISR flows. Users: DARPA, prospective Army/Joint tactical network programs (research stage)."
+        },
+        {
+          "name": "NIWC Pacific maritime ISR and Information Operations advanced technical development IDIQ",
+          "description": "Position on a multi-award IDIQ worth up to $250M over five years for advanced development of maritime ISR/IO capabilities (FACT per Military Embedded Systems; date not verified this session).",
+          "input_process_output_user": "Input: maritime sensor and IO requirements. Process: prototyping and technical development. Output: ISR/IO prototypes for Navy labs. Users: NIWC Pacific and fleet customers."
+        },
+        {
+          "name": "ABMS / JADC2 multi-award IDIQ position and Project Overmatch / Project Convergence support",
+          "description": "Peraton holds a position on the $950M ABMS IDIQ (2020) and states it supports Navy Project Overmatch and Army Project Convergence (company claim; scope not independently verified).",
+          "input_process_output_user": "Engineering/integration support; specifics: Public evidence insufficient."
+        },
+        {
+          "name": "Network operations, SATCOM and cyber services (NETCOM Global Cyber Center, USFK JCC, CENTCOM commercial SATCOM, DISA CSC III, USSF SWAFS)",
+          "description": "$196M Army NETCOM Global Cyber Center support (Nov 2025); USFK Joint Cyber Center recompete; $56M CENTCOM commercial SATCOM via Space Force CSCO/FCSA; $280M DISA Capacity Services Communications III IDIQ (Aug 2026); $109.1M Space Force Space Weather Analysis and Forecast System maintenance through 2033 (Aug 2026) (FACT per GovConWire/Peraton).",
+          "input_process_output_user": "Input: enterprise/theater network and satellite service demand. Process: network operations, defensive cyber, SATCOM provisioning, system maintenance. Output: operated and defended networks and communications. Users: Army NETCOM, USFK, CENTCOM, DISA, Space Force."
+        },
+        {
+          "name": "Army ISR satellite terminal prototype (2019)",
+          "description": "Sole-source OTA prototype award for an Army ISR SATCOM terminal (Breaking Defense, Nov 2019); transition outcome not verified this session.",
+          "input_process_output_user": "Input: ISR sensor data at the edge. Process: SATCOM terminal transport. Output: ISR data reachback. Users: Army ISR units (prototype)."
+        }
+      ],
+      "exact_problem_solved": "Operates and defends large government networks and satellite communications and runs advanced networking/spectrum R&D (Peraton Labs); its C4ISR contribution is mostly the TRANSPORT and MONITOR layers plus research on autonomous tactical networking, not fielded C2 applications.",
+      "primary_users": [
+        "Army NETCOM and theater signal commands",
+        "USFK and CENTCOM staffs",
+        "DISA and Space Force operations centers",
+        "NIWC Pacific researchers",
+        "DARPA performers/transition partners"
+      ],
+      "primary_buyers": [
+        "Army NETCOM / Army Contracting Command",
+        "DISA",
+        "Space Force CSCO and SSC",
+        "NIWC Pacific",
+        "DARPA",
+        "FAA (BNATCS air-traffic-control integrator IDIQ, 2026)"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "MONITOR",
+        "PROCESS",
+        "COLLECT"
+      ],
+      "mission_layer": [
+        "joint enterprise networks",
+        "tactical networking research",
+        "maritime ISR/IO",
+        "space operations support",
+        "cyber"
+      ],
+      "segment_ids": [
+        "S05",
+        "S09",
+        "S10",
+        "S03",
+        "S12"
+      ],
+      "hw_sw_mix": "software/services - services prime; Peraton Labs produces research prototypes (software-defined networking, RF) rather than products.",
+      "market_posture": "defense-native (with large federal civil and intelligence portfolio)",
+      "contracts": [
+        {
+          "title": "ABMS / JADC2 multi-award IDIQ position",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFLCMC",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$950M shared",
+          "obligated": "Public evidence insufficient (ceiling not revenue).",
+          "awarded_value": "position only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2020",
+          "period_of_performance": "5 years (RECALL)",
+          "prime_or_sub": "prime (one of many)",
+          "prototype_or_production": "prototype vehicle",
+          "source_url": "https://www.peraton.com/news/jadc2-and-the-future-of-national-security",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "DARPA Mission-Integrated Network Control (MINC)",
+          "customer": "DARPA",
+          "contracting_org": "DARPA",
+          "vehicle_type": "FAR",
+          "ceiling": "$19.28M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$19.28M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "~2021 (RECALL; Shephard article undated in results)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "research prototype",
+          "source_url": "https://www.shephardmedia.com/news/digital-battlespace/darpa-orders-support-for-jadc2-enabling-programme/",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NIWC Pacific maritime ISR/IO advanced technical development IDIQ",
+          "customer": "U.S. Navy",
+          "contracting_org": "NIWC Pacific",
+          "vehicle_type": "IDIQ",
+          "ceiling": "up to $250M (5 years, multi-award)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "position",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "not verified (2022-2024 range; RECALL)",
+          "period_of_performance": "5 years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "R&D/prototype",
+          "source_url": "https://militaryembedded.com/company/peraton?page=2",
+          "pub_date": "",
+          "confidence": "LOW"
+        },
+        {
+          "title": "Army NETCOM Global Cyber Center operations and cybersecurity support",
+          "customer": "U.S. Army NETCOM",
+          "contracting_org": "Army",
+          "vehicle_type": "FAR",
+          "ceiling": "$196M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$196M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2025-11",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operations",
+          "source_url": "https://www.govconwire.com/articles/peraton-army-netcom-gcc-cyber-defense-contract",
+          "pub_date": "2025-11",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "DISA Capacity Services Communications III (CSC III) IDIQ",
+          "customer": "DISA",
+          "contracting_org": "DISA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$280M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2026-08",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production services",
+          "source_url": "https://www.govconwire.com/articles/peraton-disa-csc-iii-contract-award",
+          "pub_date": "2026-08",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Space Force SWAFS (Space Weather Analysis and Forecast System) maintenance",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Force",
+          "vehicle_type": "FAR",
+          "ceiling": "$109.1M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$109.1M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2026-08",
+          "period_of_performance": "through 2033",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "sustainment",
+          "source_url": "https://www.govconwire.com/articles/peraton-109m-space-force-swafs-maintenance-contract",
+          "pub_date": "2026-08",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Commercial SATCOM for U.S. Central Command (FCSA)",
+          "customer": "USCENTCOM via Space Force CSCO",
+          "contracting_org": "Space Force Commercial Satellite Communications Office",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$56M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$56M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "not verified",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "services",
+          "source_url": "https://www.peraton.com/news/peraton-awarded-56m-contract-to-provide-satellite-communications-to-us-central-command",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Army ISR satellite terminal prototype (sole award)",
+          "customer": "U.S. Army",
+          "contracting_org": "Army (consortium OTA - INFERENCE)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2019-11",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://breakingdefense.com/2019/11/peraton-wins-sole-award-for-army-isr-sat-terminal-prototype/",
+          "pub_date": "2019-11",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Operation of Army NETCOM Global Cyber Center and USFK Joint Cyber Center",
+          "evidence": "Recompete/renewal awards 2025 (GovConWire, ExecutiveBiz)",
+          "source_url": "https://www.executivebiz.com/articles/peraton-usfk-jcc-cyber-support-recompete"
+        },
+        {
+          "what": "Commercial SATCOM services delivered to CENTCOM",
+          "evidence": "Peraton release on $56M FCSA award",
+          "source_url": "https://www.peraton.com/news/peraton-awarded-56m-contract-to-provide-satellite-communications-to-us-central-command"
+        },
+        {
+          "what": "Fielded C2 applications or MINC-derived network control in operational units",
+          "evidence": "Public evidence insufficient.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Project Convergence / Project Overmatch support",
+          "year": "2021-2024",
+          "note": "Company claim of support roles; independent confirmation of Peraton-delivered capabilities: Public evidence insufficient.",
+          "source_url": "https://www.peraton.com/news/jadc2-and-the-future-of-national-security"
+        }
+      ],
+      "integration_partners": [
+        "Commercial SATCOM operators (via FCSA)",
+        "DARPA MINC performer teams (RECALL)",
+        "Veritas Capital portfolio companies (INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient; no public C2 SDK. Peraton Labs publishes research on SDN/spectrum but no commercial API.",
+      "security_classification_requirements": "Extensive cleared workforce (Secret to TS/SCI) across intel, DoD and cyber programs (INFERENCE; HIGH).",
+      "allied_international_activity": "Supports USFK (Korea) and CENTCOM networks; allied product sales: Public evidence insufficient.",
+      "technical_differentiator": "Peraton Labs' DARPA-funded tactical networking/spectrum research plus scale in network operations (INFERENCE; MEDIUM).",
+      "suspected_moat": "Incumbency on long-running network/cyber operations contracts and cleared staff; weak product moat (INFERENCE; MEDIUM).",
+      "major_competitors": [
+        "Leidos",
+        "SAIC",
+        "CACI",
+        "GDIT",
+        "Booz Allen Hamilton",
+        "ManTech",
+        "Accenture Federal"
+      ],
+      "obvious_weaknesses": "PE-owned with acquisition leverage; heavy IT-services mix; little evidence of fielded C2 products; no evidence of NGC2 or CJADC2 baseline roles; several C4ISR items are research or ceilings only.",
+      "evidence_user_adoption": "Operational network/cyber services renewed by Army/USFK (HIGH for services); C2 product adoption: insufficient.",
+      "evidence_repeat_procurement": "Recompete wins (USFK JCC, Army Africa ops support 2025) and new DISA/Space Force awards in 2026 (HIGH for services pattern).",
+      "evidence_prototype_to_production": "MINC and the 2019 ISR terminal prototype have no verified transition; Public evidence insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): network engineering (Cisco, SD-WAN), SIEM/SOC tooling (Splunk, Elastic), cloud (AWS/Azure), and Peraton Labs roles in software-defined radio, C/C++, ML for network control.",
+      "confidence_notes": "2025-2026 services awards (NETCOM $196M, DISA CSC III $280M, SWAFS $109M) are HIGH from dated GovConWire coverage. MINC, NIWC IDIQ and ABMS dates are MEDIUM/LOW. Ownership by Veritas is HIGH; revenue/headcount are RECALL.",
+      "sources": [
+        {
+          "url": "https://www.shephardmedia.com/news/digital-battlespace/darpa-orders-support-for-jadc2-enabling-programme/",
+          "title": "DARPA orders support for JADC2 enabling programme (MINC)",
+          "pub_date": "",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/peraton-army-netcom-gcc-cyber-defense-contract",
+          "title": "Peraton Secures $196M Army Contract for NETCOM Global Cyber Center Support",
+          "pub_date": "2025-11",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/peraton-disa-csc-iii-contract-award",
+          "title": "Peraton Wins Potential $280M DISA Capacity Services Communications III IDIQ",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/peraton-109m-space-force-swafs-maintenance-contract",
+          "title": "Peraton Lands $109M Space Force Weather System Maintenance Contract",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.peraton.com/news/peraton-awarded-56m-contract-to-provide-satellite-communications-to-us-central-command",
+          "title": "Peraton Awarded $56M Contract to Provide Satellite Communications to U.S. Central Command",
+          "pub_date": "",
+          "type": "company"
+        },
+        {
+          "url": "https://breakingdefense.com/2019/11/peraton-wins-sole-award-for-army-isr-sat-terminal-prototype/",
+          "title": "Peraton Wins Sole Award For Army ISR-Sat Terminal Prototype",
+          "pub_date": "2019-11",
+          "type": "independent"
+        },
+        {
+          "url": "https://orangeslices.ai/faa-brand-new-air-traffic-control-system-bnatcs-integrator-contract/",
+          "title": "Peraton wins integrator IDIQ contract for FAA Brand New Air Traffic Control System (BNATCS)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Parsons Corporation",
+      "aka": "Parsons (Federal Solutions segment); acquisitions relevant to C4ISR include Braxton Science & Technology Group (2020, satellite ground/C2), Echo Ridge and BlackHorse Solutions (2021), Xator (2022), Sealing Technologies and IPKeys (2023), BlackSignal Technologies (Aug 2024)",
+      "founding_year": 1944,
+      "headquarters": "Chantilly, Virginia, USA (formerly Pasadena, California)",
+      "public_private": "public",
+      "employee_count_approx": "~20,000 (RECALL; MEDIUM)",
+      "founders": [
+        "Ralph M. Parsons"
+      ],
+      "founder_backgrounds": "Engineering/construction origins (1944); pivoted toward defense/intel technology through 2019 IPO and serial acquisitions; CEO Carey Smith (RECALL; HIGH on identity).",
+      "total_disclosed_funding_usd": "N/A - public company (NYSE: PSN, IPO 2019). Revenue roughly $6.8-7B in 2024-2025 (RECALL; MEDIUM).",
+      "latest_valuation": "Public market cap; roughly $6-8B range in 2025-2026 (RECALL; LOW - not checked).",
+      "major_investors": [
+        "Employee Stock Ownership Plan (large holder) and public float (RECALL; MEDIUM)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Missile Defense System engineering incl. resilient command and control (MDA TEAMS-Next)",
+          "description": "Technical, Engineering, Advisory and Management Support - Next (TEAMS-Next) Missile Defense System Engineering contract, awarded 2021; $514M option two exercised Aug 2026 covering resilient C2, systems engineering and missile defense capability support (FACT per Parsons release, Aug 24 2026).",
+          "input_process_output_user": "Input: MDA system requirements, sensor/weapon architectures. Process: systems engineering, C2 resilience analysis, test and integration support. Output: engineering products for the Missile Defense System (C2BMC ecosystem). Users: Missile Defense Agency."
+        },
+        {
+          "name": "Satellite ground systems and space C2 software (Braxton heritage; NRL IDIQ)",
+          "description": "A Parsons subsidiary won a $245M IDIQ from the Naval Research Laboratory (July 14 2026) for satellite ground system software and solutions; Parsons cites 30+ years in mission engineering, SATCOM, space domain awareness and advanced C2 (FACT per GlobeNewswire; subsidiary identity likely Braxton - INFERENCE).",
+          "input_process_output_user": "Input: satellite telemetry, tracking and commanding streams. Process: ground-system software for TT&C, mission planning, SDA processing. Output: operated satellites and space situational awareness data. Users: NRL space programs and USSF/IC operators."
+        },
+        {
+          "name": "Electromagnetic warfare / Non-Kinetic Effects (NOKE) and BlackSignal DSP products",
+          "description": "$40M cost-plus-fixed-fee NOKE contract (Aug 11 2026; one base year + 4.5 option years; new work) to advance next-generation EW capabilities for national security missions; BlackSignal (acquired Aug 16 2024 for $203.8M) adds digital signal processing, EW and cyber products (FACT per 8-K and GlobeNewswire).",
+          "input_process_output_user": "Input: RF signals of interest. Process: DSP-based detection, exploitation and effects. Output: non-kinetic effects and spectrum awareness. Users: undisclosed national security customers (customer not named)."
+        },
+        {
+          "name": "Counter-UAS and SOF ISR integration (Xator heritage) and tactical edge compute (Sealing Technologies)",
+          "description": "Xator (2022) brought SOCOM and C-UAS integration work; SealingTech (2023) brought deployable cyber/edge compute kits (RECALL; MEDIUM). Current program-level evidence: Public evidence insufficient this session.",
+          "input_process_output_user": "Input: drone/ISR sensor feeds; Process: integration on ruggedized edge kits; Output: base/force protection awareness. Users: SOCOM and force-protection units (RECALL)."
+        }
+      ],
+      "exact_problem_solved": "Provides government-side systems engineering for missile defense C2 resilience, satellite ground/C2 software, and EW/cyber effects, i.e., specialized engineering where the customer owns the architecture; it is not a vendor of general tactical C2 software.",
+      "primary_users": [
+        "Missile Defense Agency engineers and C2BMC stakeholders",
+        "NRL and Space Force satellite operators",
+        "EW/spectrum and cyber effects units (customer undisclosed)",
+        "SOCOM and force-protection units (C-UAS/ISR integration)"
+      ],
+      "primary_buyers": [
+        "Missile Defense Agency",
+        "Naval Research Laboratory",
+        "Space Force Space Systems Command (RECALL)",
+        "USSOCOM (RECALL)",
+        "Undisclosed national security customer (NOKE)"
+      ],
+      "technical_layer": [
+        "PROCESS",
+        "DECIDE",
+        "TASK",
+        "MONITOR",
+        "COLLECT",
+        "IDENTIFY"
+      ],
+      "mission_layer": [
+        "air and missile defense",
+        "space operations / space domain awareness",
+        "electromagnetic warfare",
+        "counter-UAS / force protection",
+        "cyber"
+      ],
+      "segment_ids": [
+        "S01",
+        "S07",
+        "S12",
+        "S09",
+        "S06"
+      ],
+      "hw_sw_mix": "both - mostly engineering services and ground-system software; BlackSignal and SealingTech add hardware-enabled products.",
+      "market_posture": "defense-native (Federal Solutions) alongside a civil Critical Infrastructure segment",
+      "contracts": [
+        {
+          "title": "MDA TEAMS-Next Missile Defense System Engineering - option two",
+          "customer": "Missile Defense Agency",
+          "contracting_org": "MDA",
+          "vehicle_type": "FAR",
+          "ceiling": "Total contract value not verified this session (original 2021 award)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$514M (option two)",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2026-08-24 (option); original award 2021",
+          "period_of_performance": "Option period from 2026 (length not stated in snippet)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "engineering services",
+          "source_url": "https://investors.parsons.com/news-releases/news-release-details/parsons-secures-514-million-missile-defense-agency-contract",
+          "pub_date": "2026-08-24",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRL Satellite Ground Systems IDIQ",
+          "customer": "U.S. Naval Research Laboratory",
+          "contracting_org": "NRL",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$245M",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "ceiling only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2026-07-14",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (subsidiary)",
+          "prototype_or_production": "production software/sustainment",
+          "source_url": "https://www.globenewswire.com/news-release/2026/07/14/3326677/0/en/Parsons-Awarded-245-Million-Naval-Research-Laboratory-Satellite-Ground-Systems-Contract.html",
+          "pub_date": "2026-07-14",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Non-Kinetic Effects (NOKE) electromagnetic warfare contract",
+          "customer": "Undisclosed national security customer",
+          "contracting_org": "Not disclosed",
+          "vehicle_type": "FAR",
+          "ceiling": "$40M (CPFF)",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "$40M",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "N/A",
+          "date": "2026-08-11",
+          "period_of_performance": "1 base year + 4.5 option years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "R&D/engineering (new work)",
+          "source_url": "https://www.globenewswire.com/news-release/2026/08/11/3342513/0/en/parsons-awarded-40-million-electronic-warfare-national-security-contract.html",
+          "pub_date": "2026-08-11",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "BlackSignal Technologies acquisition",
+          "customer": "N/A (M&A)",
+          "contracting_org": "N/A",
+          "vehicle_type": "FAR",
+          "ceiling": "N/A",
+          "obligated": "N/A",
+          "awarded_value": "$203.8M purchase price",
+          "funded_amount": "N/A",
+          "task_orders": "N/A",
+          "date": "2024-08-16",
+          "period_of_performance": "N/A",
+          "prime_or_sub": "N/A",
+          "prototype_or_production": "N/A",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/275880/000095017024118574/psn-20240930.htm",
+          "pub_date": "2024-11",
+          "confidence": "HIGH"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Continuous MDA systems-engineering support since 2021 (option two exercised 2026)",
+          "evidence": "Parsons release Aug 2026",
+          "source_url": "https://www.parsons.com/2026/08/parsons-secures-514-million-missile-defense-agency-contract-option/"
+        },
+        {
+          "what": "Satellite ground systems in operation for NRL programs",
+          "evidence": "Company claims 30+ years; 2026 IDIQ award; independent operational metrics: Public evidence insufficient.",
+          "source_url": "https://www.globenewswire.com/news-release/2026/07/14/3326677/0/en/Parsons-Awarded-245-Million-Naval-Research-Laboratory-Satellite-Ground-Systems-Contract.html"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Named C2/JADC2 exercises",
+          "year": "",
+          "note": "Public evidence insufficient this session.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Missile Defense Agency C2BMC prime (Lockheed Martin) as government-side engineering counterpart (INFERENCE)",
+        "Acquired subsidiaries (Braxton, BlackSignal, SealingTech, Xator)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient; Braxton-heritage ground software historically marketed as COTS with open interfaces (RECALL; LOW).",
+      "security_classification_requirements": "Missile defense, EW and IC space work require Secret to TS/SCI facilities and staff (INFERENCE; HIGH).",
+      "allied_international_activity": "Parsons has Middle East infrastructure business; allied C4ISR product sales: Public evidence insufficient.",
+      "technical_differentiator": "Combination of missile-defense engineering incumbency, in-house satellite ground software and newly acquired DSP/EW IP (INFERENCE; MEDIUM).",
+      "suspected_moat": "MDA/NRL incumbency and organizational conflict-of-interest positioning as a non-hardware-prime engineer (INFERENCE; MEDIUM).",
+      "major_competitors": [
+        "Leidos",
+        "SAIC",
+        "Booz Allen Hamilton",
+        "CACI",
+        "KBR",
+        "MTSI / Torch (MDA engineering)",
+        "Kratos and L3Harris (satellite ground software)"
+      ],
+      "obvious_weaknesses": "C4ISR presence is fragmented across acquisitions with no unified C2 product; heavy reliance on cost-plus engineering; NOKE customer undisclosed limits diligence; no evidence of NGC2/CJADC2 roles.",
+      "evidence_user_adoption": "MDA continues to exercise options (HIGH); NRL repeat business (MEDIUM); EW product adoption post-BlackSignal: insufficient.",
+      "evidence_repeat_procurement": "TEAMS-Next options exercised 2026; NRL follow-on IDIQ (HIGH/MEDIUM).",
+      "evidence_prototype_to_production": "Public evidence insufficient for Parsons-owned C4ISR products transitioning to production programs.",
+      "whitespace_cells": [
+        {
+          "chain_step": "DECIDE",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): C++/Java ground-system software, modeling and simulation for missile defense, DSP/FPGA and SDR engineers from BlackSignal, cloud/DevSecOps for Federal Solutions.",
+      "confidence_notes": "All three 2026 awards (MDA $514M option, NRL $245M IDIQ, NOKE $40M) and the BlackSignal price are HIGH from dated releases/SEC filings. Subsidiary identities, product deployments and headcount/revenue are RECALL or INFERENCE.",
+      "sources": [
+        {
+          "url": "https://investors.parsons.com/news-releases/news-release-details/parsons-secures-514-million-missile-defense-agency-contract",
+          "title": "Parsons Secures $514 Million Missile Defense Agency Contract Option",
+          "pub_date": "2026-08-24",
+          "type": "company"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/07/14/3326677/0/en/Parsons-Awarded-245-Million-Naval-Research-Laboratory-Satellite-Ground-Systems-Contract.html",
+          "title": "Parsons Awarded $245 Million Naval Research Laboratory Satellite Ground Systems Contract",
+          "pub_date": "2026-07-14",
+          "type": "company"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/08/11/3342513/0/en/parsons-awarded-40-million-electronic-warfare-national-security-contract.html",
+          "title": "Parsons Awarded $40 Million Electronic Warfare National Security Contract",
+          "pub_date": "2026-08-11",
+          "type": "company"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/275880/000095017024118574/psn-20240930.htm",
+          "title": "Parsons Corp Form 10-Q (Q3 2024) - BlackSignal acquisition",
+          "pub_date": "2024-11",
+          "type": "financial"
+        }
+      ]
+    },
+    {
+      "name": "Sigma Defense Systems LLC",
+      "aka": "Sigma Defense; acquisitions: SOLUTE (2021), Sub U Systems (announced May 2022), Juno Technologies (Feb 2024), EWA Inc. (April 2024), Aries Defense (Oct 2025)",
+      "founding_year": 2006,
+      "headquarters": "Perry, Georgia, USA",
+      "public_private": "private",
+      "employee_count_approx": "Several hundred to ~1,000 after acquisitions (RECALL/INFERENCE; LOW)",
+      "founders": [
+        "Matt Jones (CEO; RECALL, MEDIUM)"
+      ],
+      "founder_backgrounds": "Founder-led Georgia SATCOM/ISR-transport engineering firm that became a private-equity platform under Sagewind Capital in early 2021 (FACT per Washington Technology).",
+      "total_disclosed_funding_usd": "Private; Sagewind Capital investment (early 2021) and acquisition financing amounts undisclosed. Public evidence insufficient for dollar figures.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Sagewind Capital (owner since early 2021)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Olympus",
+          "description": "Company-described platform for software development, orchestration and multi-domain data fusion into which acquired ISR products are being integrated (company claim via Aries acquisition release, Oct 2025). Independent evidence of operational use: Public evidence insufficient.",
+          "input_process_output_user": "Input: sensor/video/spectrum data from edge nodes. Process: orchestration, fusion, app hosting. Output: fused situational awareness to operators and rear decision-makers. Users: USMC/Navy/SOF units (target); buyers not verified."
+        },
+        {
+          "name": "Aries Defense tactical video and sensor integration (OverWatch, CheckPoints, Recon V OverWatch (R5O), NEOS)",
+          "description": "Fielded products capturing and distributing UAV and unattended-sensor data for real-time situational awareness and full-motion video in DDIL environments; stated to be deployed under U.S. Marine Corps programs of record (company claim in acquisition release; MEDIUM). Demonstrated at Modern Day Marine 2026.",
+          "input_process_output_user": "Input: UAV video, unattended ground sensor data. Process: encoding, low-bandwidth distribution, sensor integration. Output: FMV and alerts to squad/company operators and rear command posts. Users: Marine Corps units; buyer MCSC/PEO Land Systems (INFERENCE)."
+        },
+        {
+          "name": "EWA electromagnetic spectrum data collection and management tools",
+          "description": "EWA Inc. (acquired April 2024) adds tools that collect and manage electromagnetic-spectrum data (FACT per Washington Technology).",
+          "input_process_output_user": "Input: RF/spectrum observations. Process: collection management and analysis. Output: spectrum awareness data for EW planners. Users: EW/spectrum managers (customers not verified)."
+        },
+        {
+          "name": "Sub U Systems C5ISR / tactical SATCOM communications",
+          "description": "Sub U Systems brought C5ISR, JADC2 and tactical SATCOM capabilities (FACT per BusinessWire, May 2022).",
+          "input_process_output_user": "Input: tactical data at the edge. Process: SATCOM/transport engineering. Output: connectivity for ISR data flows. Users: Navy/SOF/USMC units (INFERENCE)."
+        },
+        {
+          "name": "SOLUTE Navy C4I engineering and DevSecOps",
+          "description": "SOLUTE (San Diego) provided Navy C4I/NIWC Pacific engineering and software development, a JADC2-oriented acquisition (RECALL; MEDIUM).",
+          "input_process_output_user": "Engineering services for Navy C4I programs; specific fielded systems: Public evidence insufficient."
+        }
+      ],
+      "exact_problem_solved": "Moves sensor and video data from tactical-edge units to decision-makers over constrained (DDIL) links and integrates edge ISR products into a fusion/orchestration environment; it is a PE-assembled mid-tier integrator targeting CJADC2 at the tactical echelon.",
+      "primary_users": [
+        "Marine Corps squads/companies and command posts (Aries products)",
+        "Navy C4I programs (SOLUTE heritage)",
+        "SOF and Army units using tactical SATCOM (INFERENCE)",
+        "DAF ABMS programs (IDIQ position)"
+      ],
+      "primary_buyers": [
+        "Marine Corps Systems Command / PEO Land Systems (INFERENCE from 'programs of record')",
+        "NIWC Pacific (INFERENCE)",
+        "Department of the Air Force (ABMS IDIQ)",
+        "USSOCOM (INFERENCE; LOW)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "TRANSPORT",
+        "INGEST",
+        "FUSE",
+        "VISUALIZE",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "ISR at the tactical edge",
+        "maneuver (USMC)",
+        "maritime C4I",
+        "spectrum awareness",
+        "joint (CJADC2)"
+      ],
+      "segment_ids": [
+        "S03",
+        "S04",
+        "S05",
+        "S02",
+        "S06",
+        "S12"
+      ],
+      "hw_sw_mix": "both - edge sensor/video kits and SATCOM hardware integration plus Olympus software.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "ABMS / JADC2 multi-award IDIQ position",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFLCMC",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$950M shared multi-award ceiling",
+          "obligated": "Public evidence insufficient (no task orders verified).",
+          "awarded_value": "position only",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "2022-10",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (one of many)",
+          "prototype_or_production": "prototype vehicle",
+          "source_url": "https://www.prnewswire.com/news-releases/sigma-defense-awarded-950m-advanced-battle-management-system-abms-idiq-contract-for-jadc2-301641977.html",
+          "pub_date": "2022-10-06",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "USMC programs of record fielding Aries Defense products (inherited via acquisition)",
+          "customer": "U.S. Marine Corps",
+          "contracting_org": "Marine Corps Systems Command (INFERENCE)",
+          "vehicle_type": "FAR",
+          "ceiling": "Public evidence insufficient.",
+          "obligated": "Public evidence insufficient.",
+          "awarded_value": "Public evidence insufficient.",
+          "funded_amount": "Public evidence insufficient.",
+          "task_orders": "Public evidence insufficient.",
+          "date": "pre-2025 (products fielded before Oct 2025 acquisition)",
+          "period_of_performance": "Public evidence insufficient.",
+          "prime_or_sub": "prime (Aries) - INFERENCE",
+          "prototype_or_production": "production (program of record per company claim)",
+          "source_url": "https://www.washingtontechnology.com/companies/2025/10/sigma-defense-acquires-aries-defense-boost-tactical-edge-capabilities/408749/",
+          "pub_date": "2025-10",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Aries Defense acquisition",
+          "customer": "N/A (M&A)",
+          "contracting_org": "N/A",
+          "vehicle_type": "FAR",
+          "ceiling": "N/A",
+          "obligated": "N/A",
+          "awarded_value": "undisclosed",
+          "funded_amount": "N/A",
+          "task_orders": "N/A",
+          "date": "2025-10",
+          "period_of_performance": "N/A",
+          "prime_or_sub": "N/A",
+          "prototype_or_production": "N/A",
+          "source_url": "https://www.govconwire.com/articles/sigma-defense-aries-defense-acquisition",
+          "pub_date": "2025-10",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "EWA Inc. acquisition",
+          "customer": "N/A (M&A)",
+          "contracting_org": "N/A",
+          "vehicle_type": "FAR",
+          "ceiling": "N/A",
+          "obligated": "N/A",
+          "awarded_value": "undisclosed",
+          "funded_amount": "N/A",
+          "task_orders": "N/A",
+          "date": "2024-04",
+          "period_of_performance": "N/A",
+          "prime_or_sub": "N/A",
+          "prototype_or_production": "N/A",
+          "source_url": "https://sigmadefense.com/press-release/driving-innovation-sigma-defense-expands-cjadc2-capabilities-with-ewa-acquisition/",
+          "pub_date": "2024-04",
+          "confidence": "HIGH"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Aries OverWatch/CheckPoints/R5O/NEOS deployed under USMC programs of record for FMV and persistent surveillance in DDIL conditions",
+          "evidence": "Company acquisition release and trade coverage (Oct 2025); no independent government confirmation found this session",
+          "source_url": "https://www.prnewswire.com/news-releases/sigma-defense-acquires-aries-defense-to-expand-tactical-edge-isr-and-cjadc2-capabilities-302580361.html"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Modern Day Marine 2026 (trade show demo of NEOS, CheckPoints, R5O)",
+          "year": "2026",
+          "note": "Demonstration of edge-to-rear information flow; a trade-show demo, not a military exercise.",
+          "source_url": "https://sigmadefense.com/events/modern-day-marine/"
+        }
+      ],
+      "integration_partners": [
+        "Sagewind Capital (owner)",
+        "UAV and unattended sensor OEMs integrated by Aries (unnamed)",
+        "TAK/ATAK ecosystem integration (HYPOTHESIS; LOW - not verified)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient; Olympus is described as an orchestration/fusion environment but no public API/SDK documentation was found (company site fetch blocked).",
+      "security_classification_requirements": "Work with USMC/Navy programs implies facility clearance and Secret-level staff; SIGINT/EW (EWA) work likely higher (INFERENCE; MEDIUM).",
+      "allied_international_activity": "Public evidence insufficient.",
+      "technical_differentiator": "Low-bandwidth tactical video/sensor distribution products already fielded with the Marine Corps, stitched to spectrum tools and SATCOM engineering under one roof (INFERENCE; MEDIUM).",
+      "suspected_moat": "Program-of-record incumbency of Aries products and USMC relationships; otherwise a services roll-up with limited proprietary moat (INFERENCE; MEDIUM).",
+      "major_competitors": [
+        "Anduril (edge ISR/C2)",
+        "Persistent Systems and Silvus (tactical networking)",
+        "L3Harris and Cubic (ISR data links)",
+        "Sierra Nevada Corp (ISR PED)",
+        "Other PE-backed mid-tier integrators (e.g., Bluehalo-class firms)"
+      ],
+      "obvious_weaknesses": "Integration of five acquisitions; dependence on IDIQ ceilings (ABMS $950M) with no verified task orders; scale far below the primes; possible loss of small-business set-aside eligibility as it grows (HYPOTHESIS; LOW); corporate website blocked for verification this session.",
+      "evidence_user_adoption": "Aries products in USMC programs of record (company claim; MEDIUM). Olympus adoption: insufficient.",
+      "evidence_repeat_procurement": "Public evidence insufficient this session (no dated repeat orders found).",
+      "evidence_prototype_to_production": "Aries products reportedly transitioned to programs of record before acquisition (company claim; MEDIUM). Sigma-originated prototypes: insufficient.",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "FUSE",
+          "echelon": "battalion_brigade"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (RECALL, LOW; postings not read this session): video encoding/streaming for low-bandwidth links, SATCOM terminal engineering, Kubernetes-based orchestration for Olympus, DevSecOps for Navy C4I (SOLUTE heritage).",
+      "confidence_notes": "Ownership (Sagewind, early 2021), ABMS IDIQ position (Oct 2022) and the acquisition sequence are HIGH from dated trade press. Product functionality and USMC program-of-record status come from company releases (MEDIUM). Financials, headcount and task-order revenue: insufficient.",
+      "sources": [
+        {
+          "url": "https://www.washingtontechnology.com/companies/2025/10/sigma-defense-acquires-aries-defense-boost-tactical-edge-capabilities/408749/",
+          "title": "Sigma Defense acquires Aries Defense to boost tactical edge capabilities",
+          "pub_date": "2025-10",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/sigma-defense-acquires-aries-defense-to-expand-tactical-edge-isr-and-cjadc2-capabilities-302580361.html",
+          "title": "Sigma Defense Acquires Aries Defense to Expand Tactical Edge ISR and CJADC2 Capabilities",
+          "pub_date": "2025-10",
+          "type": "company"
+        },
+        {
+          "url": "https://www.washingtontechnology.com/companies/2024/02/sigma-defense-closes-second-jadc2-focused-acquisition/394137/",
+          "title": "Sigma Defense closes second JADC2-focused acquisition (Juno Technologies)",
+          "pub_date": "2024-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.prnewswire.com/news-releases/sigma-defense-awarded-950m-advanced-battle-management-system-abms-idiq-contract-for-jadc2-301641977.html",
+          "title": "Sigma Defense Awarded $950M ABMS IDIQ Contract for JADC2",
+          "pub_date": "2022-10-06",
+          "type": "company"
+        },
+        {
+          "url": "https://www.businesswire.com/news/home/20220517005987/en/Sigma-Defense-Announces-Acquisition-of-Sub-U-Systems-to-Deliver-Enhanced-C5ISR-and-JADC2-Capabilities",
+          "title": "Sigma Defense Announces Acquisition of Sub U Systems",
+          "pub_date": "2022-05-17",
+          "type": "company"
+        },
+        {
+          "url": "https://sigmadefense.com/events/modern-day-marine/",
+          "title": "Modern Day Marine 2026 | Sigma Defense Marine Corps Solutions",
+          "pub_date": "2026",
+          "type": "company"
+        }
+      ]
+    }
+  ],
+  "search_log": [
+    {
+      "query": "Leidos 2025 OR 2026 contract award \"command and control\" OR ISR OR ATHENA OR ARTEMIS OR \"data fabric\" Army OR Navy OR \"Air Force\"",
+      "useful": true
+    },
+    {
+      "query": "SAIC 2025 OR 2026 contract award \"command and control\" OR \"battle management\" OR JADC2 OR \"space domain awareness\" OR \"data fabric\"",
+      "useful": true
+    },
+    {
+      "query": "Booz Allen Hamilton 2025 OR 2026 Advana OR Thunderdome OR \"command and control\" OR JADC2 contract award",
+      "useful": true
+    },
+    {
+      "query": "CACI 2025 OR 2026 contract award \"electronic warfare\" OR Spectral OR \"optical communications\" OR \"command and control\" OR counter-UAS Navy OR Army OR \"Space Development Agency\"",
+      "useful": true
+    },
+    {
+      "query": "Peraton 2025 OR 2026 contract award \"command and control\" OR \"mission partner\" OR ISR OR \"satellite control\" OR \"tactical network\" OR JADC2",
+      "useful": true
+    },
+    {
+      "query": "Parsons Corporation 2025 OR 2026 contract award \"command and control\" OR \"space domain awareness\" OR \"counter-UAS\" OR \"electronic warfare\" OR \"missile defense\" OR BlackSignal",
+      "useful": true
+    },
+    {
+      "query": "\"Sigma Defense\" Systems 2025 OR 2026 contract OR acquisition OR JADC2 OR \"Project Overmatch\" OR Sagewind",
+      "useful": true
+    },
+    {
+      "query": "SAIC contract award 2026 Space Force OR Army OR Navy OR \"Air Force\" site:govconwire.com",
+      "useful": true
+    },
+    {
+      "query": "\"Next Generation Command and Control\" NGC2 2026 Army Anduril Lockheed team Leidos OR SAIC OR \"Booz Allen\" OR CACI OR Peraton OR Parsons OR \"Sigma Defense\"",
+      "useful": true
+    },
+    {
+      "query": "Leidos 2026 NGEN $926M OR \"Defense Enclave Services\" OR \"Common Hardware Systems-6\" OR \"ATHENA-S\" award status",
+      "useful": true
+    },
+    {
+      "query": "Peraton 2026 contract award site:govconwire.com OR site:defensescoop.com OR site:breakingdefense.com",
+      "useful": true
+    },
+    {
+      "query": "\"Sigma Defense\" Aries Defense OR EWA OR \"Project Overmatch\" OR Navy OR \"Marine Corps\" products ISR PED \"tactical edge\" 2025 OR 2026",
+      "useful": true
+    },
+    {
+      "query": "WebFetch https://investors.saic.com/news-releases (EGRESS_BLOCKED - not retried)",
+      "useful": false
+    },
+    {
+      "query": "WebFetch https://sigmadefense.com/ (EGRESS_BLOCKED - not retried)",
+      "useful": false
+    }
+  ],
+  "notes": "Batch B12 (services integrators) researched 2026-09-25 under a strict budget of 12 WebSearch and 2 WebFetch calls; both fetches (investors.saic.com, sigmadefense.com) were blocked by the egress proxy, so 2026 SAIC headline awards ($1.4B COBRA CJADC2 task order, $928M Air Force prototype engineering) and Sigma Defense product detail rest on search snippets and are labeled LOW/MEDIUM. Cross-cutting finding: none of the seven companies appears in Army NGC2 coverage; the Army selected Anduril (with Palantir) to lead the NGC2 common data layer baseline in June 2026 and Lockheed Martin leads the 25th ID team, so this batch mostly occupies TRANSPORT/network-operations, specialized engineering (missile defense, EW, space ground) and enterprise analytics layers rather than the tactical C2 application/data layer. Best-evidenced C4ISR positions: Leidos ARTEMIS COCO ISR (repeat extensions, 2026), CACI EW/SIGINT (Navy Spectral orders; Army task orders Dec 2025/Jan 2026), Booz Allen TOC-L $315M prototype (Jul 2025) and Advana task (2025-27), SAIC CBC2/SDA BMC3 (older but fielded), Parsons MDA/NRL/EW awards (Jul-Aug 2026), Peraton network/cyber operations (2025-26) with only research-stage tactical networking (DARPA MINC), Sigma Defense USMC-fielded Aries edge ISR products (company claim). All IDIQ ceilings are recorded as ceilings, not revenue; obligations were not discoverable within budget. Headcount, revenue, market-cap and several historical items are RECALL (not re-verified) and flagged as such. Ownership/FOCI, ITAR and clearance implications for the founders were out of scope for this batch and need specialist legal review."
+}

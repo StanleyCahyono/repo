@@ -89,7 +89,7 @@ def build_data():
     for f in sorted(f for f in glob.glob(os.path.join(DATA, 'companies', 'B*.json')) if '_part' not in os.path.basename(f)):
         b = load(f) or {}
         for c in b.get('companies') or []:
-            if not c.get('name'): continue
+            if not isinstance(c, dict) or not c.get('name'): continue
             c['batch_id'] = b.get('batch_id'); c['batch_theme'] = b.get('theme')
             key = slug(c['name'])
             if key in seen: continue
@@ -164,6 +164,7 @@ def build_data():
     d['founderAnalysis'] = st.get('founder_analysis') or st.get('founder_specific_analysis') or None
     # gaps
     d['registry'] = load(os.path.join(DATA, 'gaps', 'registry.json')) or {'gaps': []}
+    d['registry']['gaps'] = [g for g in (d['registry'].get('gaps') or []) if isinstance(g, dict) and g.get('id')]
     d['gaps'] = {}
     for g in d['registry'].get('gaps') or []:
         gid = g['id']

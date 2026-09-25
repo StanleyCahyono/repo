@@ -2424,6 +2424,1237 @@
 "weakness": "Revenue is RDT&E/cost-plus experimentation with small obligations relative to ceilings ($3.9M obligated on a $48M modification); no disclosed commercial product"
 },
 {
+"name": "Viasat, Inc. (Government Systems / Defense and Advanced Technologies segment)",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "Carlsbad, California, USA",
+"founded": 1986,
+"posture": "dual-use",
+"segment_ids": [
+"S05",
+"S10"
+],
+"technical_layer": [
+"TRANSPORT",
+"DISSEMINATE"
+],
+"problem": "Resilient, protected beyond-line-of-sight transport (and NSA-grade encryption) for tactical and joint users operating under jamming and in remote/maritime/airborne settings; PTS-G specifically addresses the gap in anti-j",
+"products": [
+"PTS-G (Protected Tactical SATCOM-Global) satellites",
+"Government SATCOM services and terminals (Viasat Ka-band incl. ViaSat-3, Inmarsat Government L-band and Global Xpress, 'Hybrid Adaptive Network' multi-network concept)",
+"Type 1 network encryption (KG-250X/XS, KG-142 100 Gbps, PSIAM)",
+"Link 16 radios (BATS-D AN/PRC-161, KOR-24A STT, MIDS) - DIVESTED",
+"XVI Link 16-capable LEO demonstration satellite (AFRL)"
+],
+"funding": "Not applicable - public company (NASDAQ: VSAT). Defense and Advanced Technologies segment revenue on the order of $1.1-1",
+"contracts": [
+{
+"title": "PTS-G Delivery Order 1 (initial design; one of five awardees)",
+"customer": "U.S. Space Force",
+"ceiling": "Overall multi-award IDIQ ceiling not captured in snippets",
+"obligated": "Not disclosed",
+"date": "2025-10-08",
+"stage": "design/prototype phase"
+},
+{
+"title": "PTS-G Swarm 1 delivery order - first two operational PTS-G satellites (Viasat and Intelsat",
+"customer": "U.S. Space Force",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "2026-05 (late May 2026)",
+"stage": "first operational (production) satellites"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "coalition"
+}
+],
+"competitors": [
+"Intelsat General / SES Space & Defense (managed SATCOM, PTS-G)",
+"Boeing and Northrop Grumman (protected SATCOM payloads)",
+"SpaceX Starshield / Starlink (LEO transport)",
+"Hughes Defense",
+"General Dynamics Mission Systems and L3Harris (Type 1 crypto)",
+"Eutelsat OneWeb (multi-orbit services)"
+],
+"moat": "Orbital/spectrum assets, NSA certifications, installed terminal and crypto base, and program incumbency on PTS-G; high capital intensity deters new entrants.",
+"weakness": "High leverage after the Inmarsat purchase; ViaSat-3 F1 antenna anomaly (2023) reduced Ka capacity; LEO (Starshield/OneWeb) price-performance pressure on GEO ser"
+},
+{
+"name": "SpaceX Starshield (Space Exploration Technologies Corp. government business line)",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "Starbase, Texas (corporate HQ moved from Hawthorne, California in 2024); Starshield offices in Hawthorne and the Washington DC area (RECALL, MEDIUM)",
+"founded": 2002,
+"posture": "dual-use",
+"segment_ids": [
+"S05",
+"S03"
+],
+"technical_layer": [
+"TRANSPORT",
+"COLLECT"
+],
+"problem": "Provides high-capacity, low-latency, hard-to-jam LEO transport at scale (thousands of satellites, laser mesh) and rapidly manufacturable buses for sensing constellations, replacing bandwidth-constrained GEO SATCOM and sl",
+"products": [
+"Starshield LEO satellites and SDN Backbone / MILNET constellation",
+"NRO Proliferated Architecture (Starshield buses for EO/ISR constellation)",
+"Starshield user terminals and Starlink-for-government services",
+"Space-Based Airborne Moving Target Indicator (SB-AMTI) satellites"
+],
+"funding": "SpaceX has raised well over $10B in primary equity over its life (RECALL, LOW precision); Starshield is not separately f",
+"contracts": [
+{
+"title": "NRO Proliferated Architecture (classified; Starshield buses for LEO imaging constellation)",
+"customer": "National Reconnaissance Office",
+"ceiling": "Not public",
+"obligated": "Not public",
+"date": "2021",
+"stage": "production constellation"
+},
+{
+"title": "MILNET (now SDN Backbone) - 480-satellite LEO SATCOM constellation; FY2026 budget $277M fo",
+"customer": "U.S. Space Force (funder) / NRO (program manager)",
+"ceiling": "Not public",
+"obligated": "FY2026 budget request $277M (budget, not obligation)",
+"date": "disclosed 2025-06; first deployments mid-2026; IOC targeted late 2027",
+"stage": "production (government-owned, contractor-operated)"
+},
+{
+"title": "SDN Backbone acceleration award - $2.29B",
+"customer": "U.S. Space Force",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "2026-05-26",
+"stage": "production"
+},
+{
+"title": "Space-Based Airborne Moving Target Indicator (SB-AMTI) - $4.16B",
+"customer": "U.S. Space Force",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "2026-05-29",
+"stage": "development/production of sensing layer (stage not specified in snippets)"
+},
+{
+"title": "Golden Dome space-based interceptor development - one of 12 companies sharing 20 contracts",
+"customer": "U.S. Space Force",
+"ceiling": "$3.2B combined across 20 awards (not SpaceX-specific)",
+"obligated": "Not disclosed",
+"date": "2026-04",
+"stage": "prototype"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Viasat/Inmarsat and Intelsat/SES (GEO/MEO government SATCOM)",
+"Eutelsat OneWeb",
+"Amazon Kuiper (government)",
+"Space Development Agency Transport Layer vendors (York, Lockheed, Northrop, Rocket Lab)",
+"Iridium (L-band tactical)"
+],
+"moat": "Vertical integration (bus + payload + launch + terminals), scale economics, and incumbency across NRO PA, SDN Backbone and SB-AMTI - a de facto single-vendor po",
+"weakness": "Single-vendor concentration and political/key-person risk (Musk); closed architecture limits third-party innovation; government-owned SDN implies dependence on "
+},
+{
+"name": "Kymeta Corporation",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "Redmond, Washington, USA",
+"founded": 2012,
+"posture": "dual-use",
+"segment_ids": [
+"S05"
+],
+"technical_layer": [
+"TRANSPORT"
+],
+"problem": "Low-profile, no-moving-parts SATCOM on the move for vehicles, with automatic GEO/LEO diversity so command posts and maneuver units keep BLOS connectivity while moving and under network degradation.",
+"products": [
+"Osprey u8 multi-orbit terminal",
+"Goshawk u8 (LEO/OneWeb-optimized u8 terminal)",
+"Peregrine u8 (GEO Ku terminal) and Kymeta Broadband/Connect services",
+"Multi-band, multi-beam Ku/Ka antenna R&D (ONR)"
+],
+"funding": "Several hundred million dollars cumulative (public reports cite $85M Series D 2020 incl. $78.5M from Bill Gates plus a $",
+"contracts": [
+{
+"title": "Army NGC2 Pilot - multi-orbit SATCOM capability provider (Osprey u8; ~138 terminals plus s",
+"customer": "U.S. Army (4th Infantry Division via NGC2 pilot)",
+"ceiling": "Not disclosed",
+"obligated": "Not disclosed",
+"date": "2025-10-15",
+"stage": "prototype (pilot)"
+},
+{
+"title": "$20M order for 100+ Osprey u8 terminals and multi-orbit connectivity services (unnamed DoD",
+"customer": "Unnamed U.S. Department of Defense/War organization",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "late 2025 to 2026 (exact date not captured; 'DoW' naming implies after Sept 2025)",
+"stage": "production order (terminals plus services)"
+},
+{
+"title": "ONR three-year development contract for multi-band, multi-beam Ku/Ka antenna",
+"customer": "Office of Naval Research",
+"ceiling": "Not disclosed",
+"obligated": "Not disclosed",
+"date": "2026-04",
+"stage": "R&D"
+},
+{
+"title": "Earlier Army flat-panel antenna supply award (SpaceNews report; date and value not capture",
+"customer": "U.S. Army",
+"ceiling": "Not captured",
+"obligated": "Not captured",
+"date": "circa 2021 (RECALL, LOW)",
+"stage": "evaluation/prototype quantities (INFERENCE)"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "individual_platform"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "battalion_brigade"
+}
+],
+"competitors": [
+"Starlink/Starshield flat-panel terminals",
+"ThinKom",
+"Hughes (HM-series / OneWeb terminals)",
+"Intellian",
+"Cubic Halo",
+"Ball/Telephonics legacy ESAs",
+"Get SAT and Satcube (small terminals)"
+],
+"moat": "Patent portfolio on metamaterial ESAs, Army exercise track record feeding NGC2 selection, and bundled airtime services; moat is moderate because competitors (Th",
+"weakness": "Long history of capital consumption and leadership turnover; dependency on third-party satellite capacity; NGC2 selection is a pilot, not a program of record; S"
+},
+{
+"name": "Klas (Klas Telecom / Klas Government) - now an Anduril Industries business",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "Dublin, Ireland (parent); Klas Government in Herndon, Virginia, USA (RECALL, MEDIUM); now part of Anduril (Costa Mesa, CA)",
+"founded": 1991,
+"posture": "defense-native",
+"segment_ids": [
+"S05",
+"S06",
+"S10"
+],
+"technical_layer": [
+"TRANSPORT",
+"PROCESS",
+"STORE"
+],
+"problem": "Delivers a full tactical network and compute stack (routing, multi-enclave security, virtualization) in a small, rugged, rapidly deployable form that survives heat, dust and denied environments without vehicle modificati",
+"products": [
+"Voyager modular tactical compute/network chassis (Voyager 6, Voyager 8, Voyager TDC, VMm/VMs compute modules, Ignition Kit)",
+"TRX R2/R6 small tactical routers and TDC edge data center",
+"Anduril Menace family integration (Menace-X, Menace-T)"
+],
+"funding": "Bootstrapped/privately held until acquisition; no venture rounds disclosed. Acquisition price undisclosed (Houlihan Loke",
+"contracts": [
+{
+"title": "USSOCOM Tactical Local Area Network (TACLAN) - initial award for Voyager Tactical Multi-En",
+"customer": "USSOCOM",
+"ceiling": "Not captured",
+"obligated": "Not captured",
+"date": "2025",
+"stage": "production (program of record refresh)"
+},
+{
+"title": "Voyager onboarding to USAF Enterprise-wide Agile Acquisition Contract (EWAAC) via Voyager ",
+"customer": "Not applicable",
+"ceiling": "",
+"obligated": "",
+"date": "2025",
+"stage": ""
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "battalion_brigade"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "battalion_brigade"
+}
+],
+"competitors": [
+"Cubic DTECH (M3-SE family)",
+"PacStar (Curtiss-Wright)",
+"Crystal Group",
+"Mercury/Systel rugged servers",
+"Dell and HPE rugged edge lines",
+"Fischer Panda/Tampa Microwave (case-based kits)"
+],
+"moat": "Installed base in SOCOM/USMC kits, TACLAN incumbency and now vertical integration with Anduril's Lattice and Menace; switching costs in fielded kits.",
+"weakness": "Now captive to Anduril, which may reduce neutrality as a hardware host for competing software vendors; hardware refresh cycles; limited public visibility into c"
+},
+{
+"name": "Parry Labs LLC",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "Alexandria, Virginia, USA (engineering presence in Huntsville, Alabama) - RECALL, MEDIUM",
+"founded": 2017,
+"posture": "defense-native",
+"segment_ids": [
+"S06",
+"S02",
+"S13"
+],
+"technical_layer": [
+"PROCESS",
+"TRANSPORT",
+"INGEST"
+],
+"problem": "Breaks vendor lock in Army aviation and UAS mission systems by supplying government-owned MOSA requirements and matching open, upgradeable mission computers so new software and sensors can be integrated across platforms ",
+"products": [
+"MOSA-aligned mission computing hardware for aircraft and UAS (rugged edge mission computers/gateways)",
+"Army Aviation Mission Computing Environment (AMCE) MOSA requirements and MBSE models",
+"Edge C2, interoperability and AI computing software (roadmap funded by 2024 raise)"
+],
+"funding": "$80M growth equity round closed 2024-08-28 (first institutional round). Aggregate figures conflict: Crunchbase-type sour",
+"contracts": [
+{
+"title": "$49M single-award IDIQ (full and open competition; customer and scope not captured in snip",
+"customer": "Not captured (likely U.S. Army - INFERENCE)",
+"ceiling": "$49M",
+"obligated": "Not disclosed",
+"date": "2024-2025 (not captured)",
+"stage": "Not captured"
+},
+{
+"title": "AMTC MOSA agreement - two task awards for Army Aviation Mission Computing Environment requ",
+"customer": "U.S. Army (PEO Aviation / DEVCOM AvMC)",
+"ceiling": "Not disclosed",
+"obligated": "Not disclosed",
+"date": "circa 2022-2023 (RECALL on timing, LOW)",
+"stage": "prototype/requirements development"
+},
+{
+"title": "P550 / Army Long Range Reconnaissance - MOSA mission system hardware and software (teamed ",
+"customer": "U.S. Army (via AeroVironment)",
+"ceiling": "Not disclosed",
+"obligated": "Not disclosed",
+"date": "late 2025",
+"stage": "development toward fielding (LRR)"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "PROCESS",
+"echelon": "individual_platform"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "individual_platform"
+}
+],
+"competitors": [
+"Collins Aerospace (mission computers)",
+"Northrop Grumman (open mission systems)",
+"Mercury Systems",
+"Curtiss-Wright",
+"Anduril (Lattice/Menace edge compute)",
+"Shield AI (Hivemind edge autonomy compute)"
+],
+"moat": "Standards influence and relationships with PEO Aviation; moderate and contestable because primes and Collins/Northrop/Mercury also build MOSA mission computers.",
+"weakness": "Revenue visibility is low (single IDIQ ceiling $49M; subcontract on UAS program); no evidence of fielded production; reliance on Army aviation budgets and MOSA "
+},
+{
+"name": "Kratos Defense & Security Solutions, Inc.",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "San Diego, California, USA",
+"founded": 1994,
+"posture": "defense-native",
+"segment_ids": [
+"S05",
+"S07",
+"S12",
+"S13",
+"S09"
+],
+"technical_layer": [
+"TRANSPORT",
+"COLLECT",
+"PROCESS",
+"MONITOR",
+"TASK"
+],
+"problem": "Replaces hardware-bound, program-specific satellite ground and C2 systems with software-defined, multi-mission ground infrastructure, and supplies space situational awareness and resilient SATCOM ground hardware for mili",
+"products": [
+"OpenSpace software-defined satellite ground system",
+"Command and Control System-Consolidated (CCS-C) and Evolved Strategic SATCOM (ESS) ground support",
+"Space domain awareness and RF interference sensing (Global Sensor Network; modular ground-based SDA system)",
+"Mobile SATCOM gateways and tactical SATCOM ground terminals",
+"Kratos C5ISR / Modular Systems rugged electronics and air-defense system support",
+"XQ-58A Valkyrie mission system integration (USMC, $348M)"
+],
+"funding": "Not applicable - public (NASDAQ: KTOS); 2024 revenue ~$1.1B with 2025 guidance ~$1.3B (RECALL, LOW; verify against 10-K)",
+"contracts": [
+{
+"title": "OpenSpace software-defined ground system OTA (total potential value $446.8M contingent on ",
+"customer": "U.S. Space Force",
+"ceiling": "$446.8M total potential value including all options",
+"obligated": "Not disclosed",
+"date": "2026-04",
+"stage": "prototype OTA with production-relevant options (stage INFERENCE)"
+},
+{
+"title": "Ground-based modular Space Domain Awareness system - sole-source prime production award (~",
+"customer": "U.S. Space Force (customer inferred; program name not captured)",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "2026-07-13",
+"stage": "production"
+},
+{
+"title": "Evolved Strategic SATCOM (ESS) ground task order under CCS-C Sustainment and Resiliency (C",
+"customer": "U.S. Space Force",
+"ceiling": "C-SAR ceiling not captured",
+"obligated": "Not disclosed",
+"date": "2025-06-11",
+"stage": "sustainment/development for NC3 ground"
+},
+{
+"title": "Mobile SATCOM gateways for a defense customer in Asia (>$20M)",
+"customer": "Undisclosed Asian defense ministry",
+"ceiling": "Not stated",
+"obligated": "Not disclosed",
+"date": "2026-09",
+"stage": "production delivery"
+},
+{
+"title": "Air defense system single-award contract (~$36M)",
+"customer": "Not captured",
+"ceiling": "~$36M",
+"obligated": "Not disclosed",
+"date": "2025-2026 (not captured)",
+"stage": "Not captured"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Raytheon and Lockheed Martin (ground systems)",
+"Parsons and BAE Systems (space ground, SDA)",
+"Slingshot Aerospace, LeoLabs, ExoAnalytic (SDA sensing)",
+"Amergint/Peraton (ground signal processing)",
+"Comtech and L3Harris (SATCOM gateways)"
+],
+"moat": "Incumbency (CCS-C since early 2000s), FORGE/OpenSpace interoperability position, cleared workforce and installed RF sensor sites.",
+"weakness": "Thin margins and capital needs across many product lines; OpenSpace OTA value is option-contingent; some awards lack program identification; hardware-heavy segm"
+},
+{
+"name": "Cubic Mission & Performance Solutions (CMPS) / Cubic Defense",
+"batch": "B05",
+"theme": "SATCOM, transport and rugged edge hardware",
+"hq": "San Diego, California, USA (Cubic Corporation); DTECH/secure communications in Sterling, Virginia; GATR in Huntsville, Alabama (RECALL, MEDIUM)",
+"founded": 1951,
+"posture": "defense-native",
+"segment_ids": [
+"S05",
+"S06",
+"S04",
+"S08"
+],
+"technical_layer": [
+"TRANSPORT",
+"PROCESS",
+"STORE",
+"DISSEMINATE"
+],
+"problem": "Gives expeditionary and SOF units compact, transportable network, SATCOM and compute kits plus radio-to-IP interoperability, and gives ISR enterprises fast access to very large imagery/video holdings.",
+"products": [
+"DTECH M3-SE / DTECH Fusion modular tactical network and compute kits",
+"GATR inflatable SATCOM antennas (1.2m/2.4m/4m) and expeditionary SATCOM",
+"Halo multilink, multiband, multi-orbit hybrid SATCOM antenna",
+"Vocality voice/data gateways (RoIP) and radio interoperability",
+"Pixia HiPER LOOK/STARE and TeraLogics/MotionDSP ISR data and video PED software",
+"P5 Combat Training System / F-35 P5 Internal Subsystem (air combat training instrumentation)"
+],
+"funding": "Not applicable - private-equity owned; segment revenue not disclosed (Cubic pre-privatization total revenue ~ $1.4B FY20",
+"contracts": [
+{
+"title": "F-35 P5 Internal Subsystem follow-on - 140 units for Lot 21 (subcontract to Lockheed Marti",
+"customer": "Lockheed Martin / F-35 Joint Program Office",
+"ceiling": "Not disclosed",
+"obligated": "Not applicable",
+"date": "2026-05",
+"stage": "production"
+},
+{
+"title": "AFRL contract to advance Halo multilink/multiband/multi-orbit hybrid SATCOM antenna",
+"customer": "Air Force Research Laboratory",
+"ceiling": "Not captured",
+"obligated": "Not captured",
+"date": "2024-2025 (not captured)",
+"stage": "prototype/R&D"
+},
+{
+"title": "Historical: DTECH LABS acquisition (up to $114.5M) - established SOCOM/USMC supplier",
+"customer": "Not applicable (M&A context)",
+"ceiling": "",
+"obligated": "Acquisition consideration up to $114.5M",
+"date": "2014-12",
+"stage": ""
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "battalion_brigade"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "theater"
+}
+],
+"competitors": [
+"Klas/Anduril Voyager (modular tactical compute)",
+"PacStar (Curtiss-Wright)",
+"Kymeta and Hughes (multi-orbit terminals)",
+"L3Harris and Comtech (expeditionary SATCOM)",
+"Anduril and Palantir (edge software stacks)",
+"Esri/Maxar (imagery services vs Pixia)"
+],
+"moat": "Installed base and program incumbency in SOCOM/USMC kits, proprietary inflatable antenna IP, and NSA/ITAR-certified product lines; PE ownership may constrain in",
+"weakness": "Private-equity ownership with limited disclosure; uncertain corporate status (rebrand/possible sale not verifiable); modular-kit market now facing Anduril-integ"
+},
+{
+"name": "Planet Labs PBC",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "San Francisco, California, USA",
+"founded": 2010,
+"posture": "dual-use",
+"segment_ids": [
+"S03",
+"S04",
+"S07"
+],
+"technical_layer": [
+"COLLECT",
+"INGEST",
+"NORMALIZE",
+"STORE",
+"PROCESS",
+"IDENTIFY",
+"VISUALIZE",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "Persistent, daily, unclassified global optical coverage plus AI monitoring that lets defense/intelligence users detect change, monitor maritime activity and support planning without tasking scarce national assets; increa",
+"products": [
+"PlanetScope / SkySat / Pelican / Tanager constellations",
+"Planet Insights Platform (incl. Sentinel Hub) and Planetary Variables",
+"AI-enabled Maritime Domain Awareness (MDA) and Global Monitoring Service (GMS)",
+"Satellite Services (dedicated capacity / direct downlink)"
+],
+"funding": "Public company since Dec 2021 SPAC merger (dMY Technology Group IV). Pre-listing venture funding roughly $300M+ (RECALL,",
+"contracts": [
+{
+"title": "German government multi-year satellite services and imagery agreement",
+"customer": "German federal government (defense and intelligence)",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2025-07-01 (announced)",
+"stage": "production/operational service (dedicated Pelican capacity, direct downlink, PlanetScope/SkySat access, AI SA/MDA)"
+},
+{
+"title": "NATO daily monitoring services contract",
+"customer": "NATO",
+"ceiling": "",
+"obligated": "seven-figure (undisclosed)",
+"date": "2025-06",
+"stage": "operational monitoring service"
+},
+{
+"title": "NGA Maritime Domain Awareness Option Year 1 extension and new Global Monitoring Service aw",
+"customer": "National Geospatial-Intelligence Agency",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2026 (announced mid-2026; GMS referenced in Q2 FY2027 results)",
+"stage": "operational service (option exercise = repeat procurement)"
+},
+{
+"title": "NRO Electro-Optical Commercial Layer (EOCL) subscription",
+"customer": "National Reconnaissance Office",
+"ceiling": "Program-wide ~$4B over 10 years across Maxar/Vantor, BlackSky, Planet; Planet share smallest (RECALL: ~$146M base period; LOW)",
+"obligated": "Not public",
+"date": "2022-05-25",
+"stage": "production/operational subscription"
+},
+{
+"title": "NGA Luno B IDIQ (awardee)",
+"customer": "NGA",
+"ceiling": "$200M shared across 13 vendors",
+"obligated": "Not disclosed",
+"date": "2025 (RECALL early 2025; MEDIUM)",
+"stage": "analytic services IDIQ (ceiling is not revenue)"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "coalition"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "theater"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "theater"
+}
+],
+"competitors": [
+"Vantor (Maxar)",
+"BlackSky",
+"Airbus Defence and Space",
+"Satellogic",
+"ICEYE/Umbra/Capella (SAR substitutes)",
+"European sovereign programs"
+],
+"moat": "Data-archive network effects (decade of daily imagery), constellation scale and manufacturing cadence, incumbency in NRO/NGA workflows, and expanding sovereign-",
+"weakness": "Exposed to NRO EOCL budget-cut proposals (Planet/BlackSky would bear cuts if Maxar fully funded, per 2025 reporting); 3m PlanetScope resolution is coarse for ma"
+},
+{
+"name": "BlackSky Technology Inc.",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "Herndon, Virginia, USA",
+"founded": 2013,
+"posture": "defense-native",
+"segment_ids": [
+"S03",
+"S04",
+"S07"
+],
+"technical_layer": [
+"COLLECT",
+"INGEST",
+"PROCESS",
+"IDENTIFY",
+"VISUALIZE",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "High-revisit, rapidly tasked, high-resolution optical imagery with AI monitoring so users can watch specific sites/facilities many times per day and receive alerts, at commercial cost and unclassified releasability.",
+"products": [
+"Gen-3 and Gen-2 imaging constellation",
+"Spectra AI platform (tasking, tipping and cueing, monitoring, analytics)",
+"AROS (broad-area multispectral EO satellites for foundation imaging)"
+],
+"funding": "Public via SPAC (Osprey Technology, Sept 2021). Q2 2026: revenue $33.3M (+50% YoY from $22.2M), positive adjusted EBITDA",
+"contracts": [
+{
+"title": "NRO Electro-Optical Commercial Layer (EOCL) subscription (award and later one-year extensi",
+"customer": "National Reconnaissance Office",
+"ceiling": "BlackSky share up to ~$1.02B over 10 years incl. all options (RECALL, MEDIUM); program ~$4B",
+"obligated": "Not public",
+"date": "2022-05-25 (award); one-year extension for Gen-2 services and feature enhancements announced later (date not verified; ~2025)",
+"stage": "production/operational subscription"
+},
+{
+"title": "NRO AROS development contract and 8-figure modification",
+"customer": "National Reconnaissance Office",
+"ceiling": "",
+"obligated": "Not public",
+"date": "2026-06 (modification)",
+"stage": "development/prototype satellites (not yet operational)"
+},
+{
+"title": "AFRL large optical imaging payload development",
+"customer": "Air Force Research Laboratory",
+"ceiling": "up to $99M (ceiling, not revenue)",
+"obligated": "Not disclosed",
+"date": "Reported by SpaceNews (exact award date not verified this session; 2025-2026)",
+"stage": "prototype/R&D"
+},
+{
+"title": "NGA Luno A IDIQ (awardee) and delivery orders",
+"customer": "National Geospatial-Intelligence Agency",
+"ceiling": "$290M shared among 10 awardees, five years",
+"obligated": "Not public",
+"date": "2024-09 (IDIQ); 2025-06-24 (>$24M DO)",
+"stage": "operational analytic services"
+},
+{
+"title": "NGA Luno B IDIQ (awardee)",
+"customer": "NGA",
+"ceiling": "$200M shared across 13 vendors",
+"obligated": "",
+"date": "2025 (RECALL early 2025)",
+"stage": "analytic services IDIQ"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "theater"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "theater"
+}
+],
+"competitors": [
+"Planet Labs",
+"Vantor (Maxar)",
+"Airbus",
+"Satellogic",
+"SAR providers (Umbra, Capella, ICEYE US)"
+],
+"moat": "Deep NRO/NGA workflow integration, accumulating Gen-3 capacity funded by subscriptions, and now NRO-funded AROS positioning as foundation-imaging alternative (I",
+"weakness": "Small revenue base ($33.3M/quarter) with heavy dependence on NRO/NGA; EOCL cut proposals would hit BlackSky/Planet first; constellation replenishment capex; his"
+},
+{
+"name": "Umbra Lab, Inc.",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "Santa Barbara, California, USA (additional presence in Arlington, VA area; RECALL, MEDIUM)",
+"founded": 2015,
+"posture": "dual-use",
+"segment_ids": [
+"S03"
+],
+"technical_layer": [
+"COLLECT",
+"PROCESS",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "All-weather, day-night high-resolution radar imaging with assured tasking so intelligence and maritime users can see through cloud/darkness and detect change; supplies U.S. government with a domestic commercial SAR augme",
+"products": [
+"Umbra SAR constellation and imagery services",
+"Canopy tasking/data platform and Open Data Program",
+"Next-generation maritime surveillance satellites (STRATFI)"
+],
+"funding": "Public evidence insufficient this session. RECALL: venture rounds through a 2021 Series B, cumulative ~ $100M-class, wit",
+"contracts": [
+{
+"title": "NRO Radar Commercial Augmentation (RCA) sole-source contract",
+"customer": "National Reconnaissance Office",
+"ceiling": "Not disclosed (NRO budget classified)",
+"obligated": "Not disclosed",
+"date": "2026-08-05 (announced); base begins 2026-08-01",
+"stage": "production/operational augmentation (follow-on to four years of study contracts)"
+},
+{
+"title": "NRO Commercial Radar Capabilities (CRC) three-phase study contracts (Strategic Commercial ",
+"customer": "NRO",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2022-01 (program start) through 2026",
+"stage": "study/evaluation (prototype-class)"
+},
+{
+"title": "STRATFI agreement for next-generation maritime surveillance satellites",
+"customer": "U.S. military (Space Force/AFWERX STRATFI; INFERENCE on office)",
+"ceiling": "up to $60M including required private co-investment (pending final contracting)",
+"obligated": "Not disclosed",
+"date": "2026 (exact date not verified this session)",
+"stage": "prototype development"
+},
+{
+"title": "Space Force Tactical Surveillance, Reconnaissance and Tracking (TacSRT) task orders",
+"customer": "U.S. Space Force",
+"ceiling": "",
+"obligated": "RECALL - not re-verified this session",
+"date": "2024 (RECALL)",
+"stage": "operational pilot"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Capella Space (IonQ)",
+"ICEYE / ICEYE US",
+"Airbus (TerraSAR/PAZ)",
+"Synspective",
+"iQPS"
+],
+"moat": "Proprietary antenna/radar design and cost position; NRO qualification through multi-year study phases creates switching costs (INFERENCE, MEDIUM).",
+"weakness": "Private with limited public financial disclosure; contract values undisclosed; SAR products require specialist PED to be useful to tactical users; competing for"
+},
+{
+"name": "Capella Space",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "San Francisco, California, USA (parent IonQ: College Park, Maryland)",
+"founded": 2016,
+"posture": "dual-use",
+"segment_ids": [
+"S03"
+],
+"technical_layer": [
+"COLLECT",
+"PROCESS",
+"IDENTIFY",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "All-weather, day-night radar imaging with self-service tasking and fast delivery for intelligence and maritime users, now positioned by IonQ as the space segment of a quantum networking/sensing strategy (INFERENCE).",
+"products": [
+"Acadia-generation SAR constellation",
+"Capella Console and Tasking API; Capella Analytics",
+"NRO Radar Commercial Augmentation services"
+],
+"funding": "Pre-acquisition venture funding roughly $250-300M incl. $97M Series C (2022) and a ~$60M 2023 round (RECALL, MEDIUM). Ac",
+"contracts": [
+{
+"title": "NRO Radar Commercial Augmentation (RCA) sole-source contract",
+"customer": "National Reconnaissance Office",
+"ceiling": "Not disclosed by NRO; one secondary blog cited $25.6M (unverified, LOW)",
+"obligated": "Not disclosed",
+"date": "2026-08-05/06 (announced)",
+"stage": "production/operational augmentation"
+},
+{
+"title": "NRO Commercial Radar Capabilities (CRC) three-phase study contracts",
+"customer": "NRO",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2022-01 onward",
+"stage": "study/evaluation"
+},
+{
+"title": "NASA Commercial SmallSat Data Acquisition (CSDA) program on-ramp",
+"customer": "NASA",
+"ceiling": "Shared program ceiling (not C4ISR)",
+"obligated": "RECALL - not re-verified",
+"date": "2022-2023 (RECALL)",
+"stage": "data purchase"
+},
+{
+"title": "U.S. Air Force / Space Force SBIR and tactical SAR awards",
+"customer": "USAF/USSF",
+"ceiling": "",
+"obligated": "RECALL - not re-verified this session",
+"date": "2020-2023 (RECALL)",
+"stage": "prototype"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Umbra",
+"ICEYE / ICEYE US",
+"Airbus",
+"Synspective",
+"iQPS",
+"PredaSAR/Terran Orbital lineage (RECALL)"
+],
+"moat": "NRO qualification and operational contract, U.S. ownership, and API-first customer base (INFERENCE, MEDIUM). Parent-company capital access post-acquisition may ",
+"weakness": "Small constellation; integration under a quantum-computing parent with different strategic focus; contract values undisclosed; SAR data still needs downstream P"
+},
+{
+"name": "HawkEye 360, Inc.",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "Herndon, Virginia, USA",
+"founded": 2015,
+"posture": "defense-native",
+"segment_ids": [
+"S03",
+"S12",
+"S07",
+"S11"
+],
+"technical_layer": [
+"COLLECT",
+"PROCESS",
+"IDENTIFY",
+"VISUALIZE",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "Unclassified, space-based detection and geolocation of RF emitters (including 'dark' vessels and GPS jammers) so government users gain wide-area electronic order-of-battle and maritime awareness without national SIGINT a",
+"products": [
+"RF geolocation satellite constellation",
+"Mission Space software and RF analytics",
+"NRO Commercial RF Capability Augmentation (CRFCA) services"
+],
+"funding": "Pre-IPO venture funding ~$375M+ (RECALL, MEDIUM). IPO completed 2026-05-07 on NYSE: 16M shares at $26 (top of range), ra",
+"contracts": [
+{
+"title": "NRO Commercial RF Capability Augmentation (CRFCA) contract",
+"customer": "National Reconnaissance Office",
+"ceiling": "No fixed value cap per company statement",
+"obligated": "Not disclosed",
+"date": "2026-08-18 (announced)",
+"stage": "production/operational augmentation"
+},
+{
+"title": "NRO Broad Agency Announcement commercial RF study contracts (Phases 1-3)",
+"customer": "NRO",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2019-2026 (phases; RECALL on start year)",
+"stage": "study/evaluation"
+},
+{
+"title": "NGA RF emitter data contract extension and analytics task order",
+"customer": "National Geospatial-Intelligence Agency",
+"ceiling": "",
+"obligated": "Not disclosed",
+"date": "2024-09 (extension); relationship >4 years",
+"stage": "operational data services"
+},
+{
+"title": "U.S. Space Force Joint Commercial Operations (JCO) space domain awareness contracts",
+"customer": "U.S. Space Force",
+"ceiling": "",
+"obligated": "Not disclosed (several contracts over ~2 years)",
+"date": "2024-2026",
+"stage": "operational support"
+},
+{
+"title": "International contract awards announced in 2026",
+"customer": "Undisclosed international government customers",
+"ceiling": "",
+"obligated": ">$100M aggregate new awards (FACT per earnings release summary)",
+"date": "2026",
+"stage": "operational subscriptions"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "coalition"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "theater"
+}
+],
+"competitors": [
+"Spire Global (RF/AIS)",
+"Kleos (defunct/RECALL)",
+"Unseenlabs (France)",
+"Aurora Insight",
+"National SIGINT systems (substitute)"
+],
+"moat": "Regulatory/IC trust, on-orbit cluster count, and multi-year signal libraries enabling analytics (INFERENCE, MEDIUM).",
+"weakness": "Dependence on classified-budget customers with undisclosed values; RF geolocation accuracy limits versus national systems; newly public with valuation expectati"
+},
+{
+"name": "Vantor",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "Westminster, Colorado, USA",
+"founded": 1992,
+"posture": "defense-native",
+"segment_ids": [
+"S03",
+"S04",
+"S07",
+"S11"
+],
+"technical_layer": [
+"COLLECT",
+"INGEST",
+"NORMALIZE",
+"STORE",
+"PROCESS",
+"IDENTIFY",
+"VISUALIZE",
+"DISSEMINATE",
+"TASK"
+],
+"problem": "Highest-resolution commercial optical imagery and derived 3D/foundation products at scale for intelligence, mapping, mission planning, training and now GNSS-denied navigation.",
+"products": [
+"WorldView Legion / WorldView-3 / GeoEye-1 imaging constellation",
+"One World Terrain (OWT) 3D terrain for Army Synthetic Training Environment",
+"Sentry (automated change detection) and Luno B terrain monitoring",
+"Raptor (vision-based GNSS-denied navigation for UAVs)"
+],
+"funding": "Private-equity owned (Advent International); no venture rounds. Revenue not disclosed publicly since 2023 take-private.",
+"contracts": [
+{
+"title": "Army One World Terrain follow-on production OTA",
+"customer": "U.S. Army (Synthetic Training Environment / One World Terrain)",
+"ceiling": "$217M potential (base year + four option years)",
+"obligated": "Not disclosed",
+"date": "2026-02 (announced ~2026-02-26)",
+"stage": "production (follow-on to prototype work since 2019)"
+},
+{
+"title": "NGA Luno B award for AI-driven global terrain monitoring",
+"customer": "National Geospatial-Intelligence Agency",
+"ceiling": "Luno B program cap $200M (13 vendors)",
+"obligated": "$5.3M",
+"date": "2026-02-05",
+"stage": "operational analytic service"
+},
+{
+"title": "NGA Luno A IDIQ (Maxar Intelligence awardee) and Luno B IDIQ (Maxar Mission Solutions awar",
+"customer": "NGA",
+"ceiling": "Luno A $290M (10 vendors, 5 years); Luno B $200M (13 vendors)",
+"obligated": "Not public",
+"date": "2024-09 (Luno A); 2025 (Luno B)",
+"stage": "analytic services IDIQ"
+},
+{
+"title": "NRO Electro-Optical Commercial Layer (EOCL) - majority share",
+"customer": "National Reconnaissance Office",
+"ceiling": "Maxar share up to ~$3.24B over 10 years incl. options (RECALL, MEDIUM); program nearly $4B",
+"obligated": "Not public",
+"date": "2022-05-25",
+"stage": "production/operational subscription"
+},
+{
+"title": "$205M strategic contracts for sovereign capabilities across Middle East and Africa",
+"customer": "Undisclosed MEA governments",
+"ceiling": "",
+"obligated": "$205M aggregate (company blog; date not verified, likely 2024)",
+"date": "Not verified (company blog)",
+"stage": "sovereign ground station/imagery services"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "joint"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "coalition"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "theater"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "individual_platform"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "theater"
+}
+],
+"competitors": [
+"Planet Labs",
+"BlackSky",
+"Airbus Defence and Space",
+"Satellogic",
+"SAR providers (Umbra, Capella, ICEYE US)"
+],
+"moat": "Incumbency in NRO/NGA/Army programs, proprietary 3D global dataset, Legion revisit, cleared workforce (INFERENCE, HIGH for incumbency).",
+"weakness": "PE leverage and limited financial transparency; dependence on NRO budget; rebrand and carve-out execution risk; Raptor/Sentry adoption not yet publicly evidence"
+},
+{
+"name": "Hidden Level, Inc.",
+"batch": "B06",
+"theme": "ISR collection and commercial sensing",
+"hq": "Syracuse, New York, USA",
+"founded": 2018,
+"posture": "dual-use",
+"segment_ids": [
+"S03",
+"S12",
+"S07"
+],
+"technical_layer": [
+"COLLECT",
+"PROCESS",
+"IDENTIFY",
+"DISSEMINATE"
+],
+"problem": "Detect and track drones and aircraft - including RF-silent, autonomous drones that emitter-based sensors miss - without radiating (non-detectable, no spectrum authorization burden), at low cost for layered base/area air ",
+"products": [
+"Airspace Monitoring Service (AMS) - passive RF sensing network",
+"Tactical passive C-UAS radar (hardware + software)"
+],
+"funding": "Public evidence insufficient this session. RECALL: venture rounds (Series A/B) totaling tens of millions with corporate/",
+"contracts": [
+{
+"title": "OUSW(R&E) Other Transaction Agreement to scale passive sensing technology",
+"customer": "Office of the Under Secretary of War for Research and Engineering (Department of War/DoD)",
+"ceiling": "$100M agreement value (ceiling; obligations not disclosed)",
+"obligated": "Not disclosed",
+"date": "2026-07-30",
+"stage": "scaling/production-oriented (follows multiple T&E events; exact OTA type - prototype vs follow-on production - not verified)"
+},
+{
+"title": "DoD APFIT (Accelerate the Procurement and Fielding of Innovative Technologies) funding for",
+"customer": "DoD (OUSD(R&E) APFIT)",
+"ceiling": "",
+"obligated": "$10M",
+"date": "2025 (RECALL on exact date; MEDIUM)",
+"stage": "production/fielding acceleration (APFIT purpose)"
+},
+{
+"title": "AFWERX Phase I STTR - sUAS threat identification",
+"customer": "U.S. Air Force",
+"ceiling": "",
+"obligated": "Phase I STTR (small; value not verified)",
+"date": "Not verified (pre-2026)",
+"stage": "prototype/feasibility"
+},
+{
+"title": "DIU Low-Cost Sensing Challenge - named 'Top Performer'",
+"customer": "Defense Innovation Unit",
+"ceiling": "",
+"obligated": "Evaluation event (not a contract value)",
+"date": "2025-2026 (RECALL on date)",
+"stage": "T&E/prototype"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "battalion_brigade"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "tactical_unit"
+}
+],
+"competitors": [
+"Echodyne (active radar)",
+"Robin Radar",
+"SRC Inc. (Gryphon)",
+"Dedrone (Axon)",
+"Anduril (Sentry towers)",
+"BlueHalo/Epirus (effectors, partial overlap)"
+],
+"moat": "Proprietary passive-radar signal processing and multi-year deployment data; early DoD selection via DIU and APFIT (INFERENCE, MEDIUM).",
+"weakness": "Small private company scaling hardware production against a $100M agreement; passive radar dependent on ambient illuminators; limited public disclosure of fundi"
+},
+{
 "name": "Synthetaic, Inc.",
 "batch": "B07",
 "theme": "ISR PED and geospatial analytics",
@@ -5360,6 +6591,705 @@
 ],
 "moat": "LSI positions on HADES and SAOC, SCI facilities, and private ownership enabling capital risk-taking. INFERENCE, confidence MEDIUM-HIGH.",
 "weakness": "Exposure to airframe supply and program schedule risk; smaller software presence; private company limits transparency for partnerships. INFERENCE, confidence ME"
+},
+{
+"name": "Leidos Holdings, Inc.",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Reston, Virginia, USA",
+"founded": 1969,
+"posture": "defense-native (with civil, health and commercial segments)",
+"segment_ids": [
+"S03",
+"S05",
+"S09",
+"S10",
+"S13"
+],
+"technical_layer": [
+"COLLECT",
+"TRANSPORT",
+"STORE",
+"PROCESS",
+"DISSEMINATE",
+"MONITOR"
+],
+"problem": "Runs very large enterprise/tactical networks and hardware supply chains at scale (DES, NGEN, CHS-6) and delivers ISR aircraft as a per-hour service (ARTEMIS) so the Army/Navy/DISA can field capability without owning plat",
+"products": [
+"ARTEMIS (Airborne Reconnaissance and Targeting Exploitation Multi-Mission Intelligence System)",
+"Common Hardware Systems-6 (CHS-6) - C5ISR hardware procurement vehicle",
+"Defense Enclave Services (DES) / DoDNet",
+"NGEN-R SMIT (Navy Next Generation Enterprise Network - Service Management, Integration and Transport)",
+"Dynetics air defense and autonomy products (Enduring Shield launcher; Sea Hunter/Seahawk USVs)"
+],
+"funding": "N/A - public company (NYSE: LDOS). FY2025 revenue on the order of $17B (RECALL - not re-verified; MEDIUM).",
+"contracts": [
+{
+"title": "ARTEMIS airborne ISR mission extension (EUCOM) via CHS-6",
+"customer": "U.S. Army",
+"ceiling": "up to $127M (extension incl. options)",
+"obligated": "Public evidence insufficient.",
+"date": "2026 (announced Aug-Sept 2026 per Leidos release and trade press)",
+"stage": "operational service (COCO ISR); not a program of record"
+},
+{
+"title": "Common Hardware Systems-6 (CHS-6)",
+"customer": "U.S. Army",
+"ceiling": "$7.9B maximum (10 years: 4-year base + two 3-year options)",
+"obligated": "Public evidence insufficient.",
+"date": "2023-09 (award announced Sept 2023)",
+"stage": "production procurement vehicle"
+},
+{
+"title": "Defense Enclave Services (DES) / DoDNet",
+"customer": "Defense Information Systems Agency",
+"ceiling": "$11.5B (10 years)",
+"obligated": "Public evidence insufficient.",
+"date": "2022-02",
+"stage": "production/operations"
+},
+{
+"title": "NGEN-R Service Management, Integration and Transport (SMIT)",
+"customer": "U.S. Navy",
+"ceiling": "up to $7.7B",
+"obligated": "Public evidence insufficient.",
+"date": "2020 (award); a further $926M Navy award reported 2026 (headline only)",
+"stage": "production/operations"
+},
+{
+"title": "Army cybersecurity award (~$301M)",
+"customer": "U.S. Army",
+"ceiling": "$301M (headline)",
+"obligated": "Public evidence insufficient.",
+"date": "2026-08",
+"stage": "services"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "battalion_brigade"
+}
+],
+"competitors": [
+"SAIC",
+"Booz Allen Hamilton",
+"CACI",
+"Peraton",
+"GDIT",
+"Accenture Federal",
+"L3Harris / Sierra Nevada / MAG Aerospace (COCO ISR aircraft)"
+],
+"moat": "Incumbency on single-award decade-long vehicles (DES $11.5B, CHS-6 $7.9B, SMIT $7.7B), switching costs of network migration, and cleared workforce (INFERENCE; H",
+"weakness": "Low-margin services model dependent on recompetes and protests; no evidence Leidos leads any NGC2/CJADC2 data-layer effort (Army chose Anduril/Palantir baseline"
+},
+{
+"name": "Science Applications International Corporation (SAIC)",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Reston, Virginia, USA",
+"founded": 2013,
+"posture": "defense-native (plus civil/federal IT)",
+"segment_ids": [
+"S01",
+"S02",
+"S07",
+"S09",
+"S08"
+],
+"technical_layer": [
+"INGEST",
+"NORMALIZE",
+"PROCESS",
+"FUSE",
+"IDENTIFY",
+"VISUALIZE",
+"DECIDE",
+"TRANSPORT"
+],
+"problem": "Acts as government-side systems integrator for cloud-native C2 modernization: it builds and operates DevSecOps factories and cloud C2 applications (CBC2, SDA BMC3 app factory, ABMS digital infrastructure) so that program",
+"products": [
+"Cloud Based Command and Control (CBC2) - integrator for DAF ABMS",
+"SDA BMC3 Application Factory integrator",
+"ABMS Digital Infrastructure / JADC2 IDIQ positions",
+"COBRA task order (CJADC2 systems modernization) and Air Force warfighting-capability prototype engineering",
+"Koverse data platform / AI tooling"
+],
+"funding": "N/A - public company (Nasdaq: SAIC). Annual revenue roughly $7.5B (FY2026, fiscal year ending Jan 2026; RECALL, MEDIUM).",
+"contracts": [
+{
+"title": "Cloud Based Command and Control (CBC2) development",
+"customer": "Department of the Air Force (ABMS)",
+"ceiling": "$112M (as announced)",
+"obligated": "Public evidence insufficient.",
+"date": "~2022 (RECALL; release undated in this session's results)",
+"stage": "prototype transitioning to fielded capability (IOC at an air defense sector 2024-25 - RECALL)"
+},
+{
+"title": "SDA BMC3 Application Factory",
+"customer": "Space Development Agency",
+"ceiling": "$64M",
+"obligated": "Public evidence insufficient.",
+"date": "2023-06-08",
+"stage": "prototype (supports Tranche 1 constellation)"
+},
+{
+"title": "ABMS / JADC2 multi-award IDIQ",
+"customer": "U.S. Air Force",
+"ceiling": "$950M shared multi-award ceiling",
+"obligated": "Public evidence insufficient (ceiling is not revenue).",
+"date": "2020-08-04",
+"stage": "prototype/maturation vehicle"
+},
+{
+"title": "ABMS Digital Infrastructure contract - 'leading position'",
+"customer": "U.S. Air Force",
+"ceiling": "$192M (per headline)",
+"obligated": "Public evidence insufficient.",
+"date": "not verified (likely 2022-2023; RECALL)",
+"stage": "prototype/engineering"
+},
+{
+"title": "COBRA task order supporting CJADC2 systems modernization",
+"customer": "Not verified (headline only)",
+"ceiling": "$1.4B (task order value per headline)",
+"obligated": "Public evidence insufficient.",
+"date": "2026 (per GovConWire listing; not verified)",
+"stage": "modernization/sustainment (INFERENCE)"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "FUSE",
+"echelon": "theater"
+},
+{
+"chain_step": "DECIDE",
+"echelon": "theater"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "joint"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Leidos",
+"Booz Allen Hamilton",
+"CACI",
+"Peraton",
+"L3Harris (BMC3 and battle management)",
+"Anduril / Palantir (data layer for NGC2/CJADC2)",
+"Raytheon, Northrop Grumman (air defense C2)"
+],
+"moat": "Incumbency with DAF PEO C3BM and SDA plus large task-order vehicles; moderate, since the government owns the architectures and can re-compete integrators (INFER",
+"weakness": "Integrator margins and recompete exposure; several 2026 headline awards are ceilings/task orders whose obligations are unknown; no evidence of a role in Army NG"
+},
+{
+"name": "Booz Allen Hamilton Holding Corporation",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "McLean, Virginia, USA",
+"founded": 1914,
+"posture": "defense-native (federal civil and intelligence also large)",
+"segment_ids": [
+"S01",
+"S02",
+"S06",
+"S07",
+"S09",
+"S10"
+],
+"technical_layer": [
+"INGEST",
+"NORMALIZE",
+"STORE",
+"PROCESS",
+"FUSE",
+"VISUALIZE",
+"DECIDE",
+"TRANSPORT"
+],
+"problem": "Supplies the data/AI/zero-trust engineering and deployable battle-management integration that government C2 programs need but cannot staff internally; its C4ISR value is integration and analytics at the enterprise and th",
+"products": [
+"ABMS Distributed Battle Management Node (DBMN) Phase II - Tactical Operations Center-Light (TOC-L) prototype",
+"Advana (DoD enterprise data and analytics platform) - system integrator",
+"Thunderdome (DISA zero-trust architecture)",
+"AI-based C2 integration and experimentation (Air Force)",
+"Vellox Reverb, District Defend, aiSSEMBLE and Booz Allen Ventures portfolio"
+],
+"funding": "N/A - public company (NYSE: BAH). FY2026 revenue roughly $12B (RECALL; MEDIUM).",
+"contracts": [
+{
+"title": "ABMS DBMN Phase II Tactical Operations Center-Light (TOC-L) prototype",
+"customer": "Department of the Air Force",
+"ceiling": "$315M",
+"obligated": "Public evidence insufficient.",
+"date": "2025-07",
+"stage": "rapid prototyping (Phase II)"
+},
+{
+"title": "ADVANA system integrator and service desk support (Alliant 2 task)",
+"customer": "DoD CDAO / Advana",
+"ceiling": "$149,144,008",
+"obligated": "Public evidence insufficient.",
+"date": "2025-02-16",
+"stage": "production/operations"
+},
+{
+"title": "AI-based command and control integration and experimentation",
+"customer": "U.S. Air Force",
+"ceiling": "$5.5M",
+"obligated": "Public evidence insufficient.",
+"date": "2025-09-23",
+"stage": "research/experimentation"
+},
+{
+"title": "Thunderdome zero-trust prototype",
+"customer": "DISA",
+"ceiling": "$6.8M",
+"obligated": "$6.8M (prototype)",
+"date": "2022-01",
+"stage": "prototype; follow-on production agreement 2023 (RECALL, value not re-verified; LOW)"
+},
+{
+"title": "USSOUTHCOM Enterprise Data Analytics (EDA) IDIQ - largest share",
+"customer": "USSOUTHCOM",
+"ceiling": "$392M multi-award",
+"obligated": "Public evidence insufficient.",
+"date": "not verified (2025-2026 listing)",
+"stage": "services"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "PROCESS",
+"echelon": "joint"
+},
+{
+"chain_step": "FUSE",
+"echelon": "joint"
+},
+{
+"chain_step": "DECIDE",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+}
+],
+"competitors": [
+"Leidos",
+"SAIC",
+"CACI",
+"Palantir (CDAO data/AI platforms)",
+"Accenture Federal / Deloitte",
+"GDIT",
+"Anduril (edge C2 nodes)"
+],
+"moat": "Advana/CDAO and DISA incumbency, program knowledge, and cleared data engineers; moderate because CDAO has signalled modular re-competition of Advana (RECALL; LO",
+"weakness": "Labor-based margins; 2025 civil-agency cuts and layoffs hit revenue (RECALL; MEDIUM); reliance on a few large integrator contracts; TOC-L still a prototype with"
+},
+{
+"name": "CACI International Inc",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Reston, Virginia, USA",
+"founded": 1962,
+"posture": "defense-native",
+"segment_ids": [
+"S12",
+"S03",
+"S05",
+"S04",
+"S09",
+"S06"
+],
+"technical_layer": [
+"COLLECT",
+"PROCESS",
+"IDENTIFY",
+"TRANSPORT",
+"TASK"
+],
+"problem": "Delivers sensing, exploitation and effects in the electromagnetic spectrum (shipboard SIGINT/EW, Army EW, C-UAS) and space transport/sensing hardware, combined with cleared engineering services; in the C4ISR chain it is ",
+"products": [
+"Spectral - shipboard SIGINT / EW / information operations system (Navy SIWE)",
+"Counter-UAS systems (CORIAN, SkyTracker) and Navy C-UAS integration",
+"Army spectrum dominance / next-generation EW engineering",
+"Optical communications terminals (CACI Photonics) for SDA Transport/Tracking layers",
+"ARKA Group acquisition (space-based sensors and ground processing)"
+],
+"funding": "N/A - public company (NYSE: CACI). FY2025 (June FYE) revenue roughly $8.6B (RECALL; MEDIUM).",
+"contracts": [
+{
+"title": "Spectral (SIWE) enhancement delivery order",
+"customer": "U.S. Navy",
+"ceiling": "Spectral base contract ceiling not verified (RECALL ~$1B+; LOW)",
+"obligated": "Public evidence insufficient.",
+"date": "2025 (per Consulting Report; exact date not verified)",
+"stage": "production enhancement of fielded system"
+},
+{
+"title": "Army CPE IEW&S spectrum dominance / next-gen EW task order",
+"customer": "U.S. Army",
+"ceiling": "up to $250M (5 years)",
+"obligated": "Public evidence insufficient.",
+"date": "2026-01-27",
+"stage": "engineering/production support"
+},
+{
+"title": "DEVCOM counter-EW threats task order",
+"customer": "U.S. Army DEVCOM",
+"ceiling": "up to $79M (3 years)",
+"obligated": "Public evidence insufficient.",
+"date": "2025-12",
+"stage": "R&D/engineering"
+},
+{
+"title": "Navy counter-UAS integration and sustainment IDIQ",
+"customer": "U.S. Navy",
+"ceiling": "$48.5M single award",
+"obligated": "Public evidence insufficient.",
+"date": "2024-2025 (not precisely verified)",
+"stage": "production integration/sustainment"
+},
+{
+"title": "Navy IT modernization contract",
+"customer": "U.S. Navy",
+"ceiling": "$416M",
+"obligated": "Public evidence insufficient.",
+"date": "2026-01",
+"stage": "services"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "individual_platform"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "individual_platform"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+}
+],
+"competitors": [
+"L3Harris",
+"BAE Systems (EW)",
+"Leidos",
+"Peraton",
+"SAIC",
+"Anduril (C-UAS)",
+"Mynaric / Tesat / Skyloom (optical terminals)",
+"Raytheon/RTX"
+],
+"moat": "Program incumbency on Navy Spectral/SIWE and Army EW task orders, classified RF know-how, and consolidation via M&A (INFERENCE; MEDIUM).",
+"weakness": "Integration risk and leverage from serial large acquisitions (ARKA $2.6B pending); hardware supply-chain exposure; less presence in general-purpose C2/data-fabr"
+},
+{
+"name": "Peraton Corporation",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Reston (Herndon), Virginia, USA",
+"founded": 2017,
+"posture": "defense-native (with large federal civil and intelligence portfolio)",
+"segment_ids": [
+"S05",
+"S09",
+"S10",
+"S03",
+"S12"
+],
+"technical_layer": [
+"TRANSPORT",
+"MONITOR",
+"PROCESS",
+"COLLECT"
+],
+"problem": "Operates and defends large government networks and satellite communications and runs advanced networking/spectrum R&D (Peraton Labs); its C4ISR contribution is mostly the TRANSPORT and MONITOR layers plus research on aut",
+"products": [
+"DARPA Mission-Integrated Network Control (MINC) - Peraton Labs",
+"NIWC Pacific maritime ISR and Information Operations advanced technical development IDIQ",
+"ABMS / JADC2 multi-award IDIQ position and Project Overmatch / Project Convergence support",
+"Network operations, SATCOM and cyber services (NETCOM Global Cyber Center, USFK JCC, CENTCOM commercial SATCOM, DISA CSC III, USSF SWAFS)",
+"Army ISR satellite terminal prototype (2019)"
+],
+"funding": "Private; Veritas Capital funded ~$3.4B (Northrop Grumman IT, Feb 2021) and ~$7.1B (Perspecta, May 2021) acquisitions (RE",
+"contracts": [
+{
+"title": "ABMS / JADC2 multi-award IDIQ position",
+"customer": "U.S. Air Force",
+"ceiling": "$950M shared",
+"obligated": "Public evidence insufficient (ceiling not revenue).",
+"date": "2020",
+"stage": "prototype vehicle"
+},
+{
+"title": "DARPA Mission-Integrated Network Control (MINC)",
+"customer": "DARPA",
+"ceiling": "$19.28M",
+"obligated": "Public evidence insufficient.",
+"date": "~2021 (RECALL; Shephard article undated in results)",
+"stage": "research prototype"
+},
+{
+"title": "NIWC Pacific maritime ISR/IO advanced technical development IDIQ",
+"customer": "U.S. Navy",
+"ceiling": "up to $250M (5 years, multi-award)",
+"obligated": "Public evidence insufficient.",
+"date": "not verified (2022-2024 range; RECALL)",
+"stage": "R&D/prototype"
+},
+{
+"title": "Army NETCOM Global Cyber Center operations and cybersecurity support",
+"customer": "U.S. Army NETCOM",
+"ceiling": "$196M",
+"obligated": "Public evidence insufficient.",
+"date": "2025-11",
+"stage": "operations"
+},
+{
+"title": "DISA Capacity Services Communications III (CSC III) IDIQ",
+"customer": "DISA",
+"ceiling": "$280M",
+"obligated": "Public evidence insufficient.",
+"date": "2026-08",
+"stage": "production services"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "TRANSPORT",
+"echelon": "theater"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "joint"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+}
+],
+"competitors": [
+"Leidos",
+"SAIC",
+"CACI",
+"GDIT",
+"Booz Allen Hamilton",
+"ManTech",
+"Accenture Federal"
+],
+"moat": "Incumbency on long-running network/cyber operations contracts and cleared staff; weak product moat (INFERENCE; MEDIUM).",
+"weakness": "PE-owned with acquisition leverage; heavy IT-services mix; little evidence of fielded C2 products; no evidence of NGC2 or CJADC2 baseline roles; several C4ISR i"
+},
+{
+"name": "Parsons Corporation",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Chantilly, Virginia, USA (formerly Pasadena, California)",
+"founded": 1944,
+"posture": "defense-native (Federal Solutions) alongside a civil Critical Infrastructure segment",
+"segment_ids": [
+"S01",
+"S07",
+"S12",
+"S09",
+"S06"
+],
+"technical_layer": [
+"PROCESS",
+"DECIDE",
+"TASK",
+"MONITOR",
+"COLLECT",
+"IDENTIFY"
+],
+"problem": "Provides government-side systems engineering for missile defense C2 resilience, satellite ground/C2 software, and EW/cyber effects, i.e., specialized engineering where the customer owns the architecture; it is not a vend",
+"products": [
+"Missile Defense System engineering incl. resilient command and control (MDA TEAMS-Next)",
+"Satellite ground systems and space C2 software (Braxton heritage; NRL IDIQ)",
+"Electromagnetic warfare / Non-Kinetic Effects (NOKE) and BlackSignal DSP products",
+"Counter-UAS and SOF ISR integration (Xator heritage) and tactical edge compute (Sealing Technologies)"
+],
+"funding": "N/A - public company (NYSE: PSN, IPO 2019). Revenue roughly $6.8-7B in 2024-2025 (RECALL; MEDIUM).",
+"contracts": [
+{
+"title": "MDA TEAMS-Next Missile Defense System Engineering - option two",
+"customer": "Missile Defense Agency",
+"ceiling": "Total contract value not verified this session (original 2021 award)",
+"obligated": "Public evidence insufficient.",
+"date": "2026-08-24 (option); original award 2021",
+"stage": "engineering services"
+},
+{
+"title": "NRL Satellite Ground Systems IDIQ",
+"customer": "U.S. Naval Research Laboratory",
+"ceiling": "$245M",
+"obligated": "Public evidence insufficient.",
+"date": "2026-07-14",
+"stage": "production software/sustainment"
+},
+{
+"title": "Non-Kinetic Effects (NOKE) electromagnetic warfare contract",
+"customer": "Undisclosed national security customer",
+"ceiling": "$40M (CPFF)",
+"obligated": "Public evidence insufficient.",
+"date": "2026-08-11",
+"stage": "R&D/engineering (new work)"
+},
+{
+"title": "BlackSignal Technologies acquisition",
+"customer": "N/A (M&A)",
+"ceiling": "N/A",
+"obligated": "N/A",
+"date": "2024-08-16",
+"stage": "N/A"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "DECIDE",
+"echelon": "joint"
+},
+{
+"chain_step": "PROCESS",
+"echelon": "theater"
+},
+{
+"chain_step": "COLLECT",
+"echelon": "tactical_unit"
+}
+],
+"competitors": [
+"Leidos",
+"SAIC",
+"Booz Allen Hamilton",
+"CACI",
+"KBR",
+"MTSI / Torch (MDA engineering)",
+"Kratos and L3Harris (satellite ground software)"
+],
+"moat": "MDA/NRL incumbency and organizational conflict-of-interest positioning as a non-hardware-prime engineer (INFERENCE; MEDIUM).",
+"weakness": "C4ISR presence is fragmented across acquisitions with no unified C2 product; heavy reliance on cost-plus engineering; NOKE customer undisclosed limits diligence"
+},
+{
+"name": "Sigma Defense Systems LLC",
+"batch": "B12",
+"theme": "services integrators",
+"hq": "Perry, Georgia, USA",
+"founded": 2006,
+"posture": "defense-native",
+"segment_ids": [
+"S03",
+"S04",
+"S05",
+"S02",
+"S06",
+"S12"
+],
+"technical_layer": [
+"COLLECT",
+"TRANSPORT",
+"INGEST",
+"FUSE",
+"VISUALIZE",
+"DISSEMINATE"
+],
+"problem": "Moves sensor and video data from tactical-edge units to decision-makers over constrained (DDIL) links and integrates edge ISR products into a fusion/orchestration environment; it is a PE-assembled mid-tier integrator tar",
+"products": [
+"Olympus",
+"Aries Defense tactical video and sensor integration (OverWatch, CheckPoints, Recon V OverWatch (R5O), NEOS)",
+"EWA electromagnetic spectrum data collection and management tools",
+"Sub U Systems C5ISR / tactical SATCOM communications",
+"SOLUTE Navy C4I engineering and DevSecOps"
+],
+"funding": "Private; Sagewind Capital investment (early 2021) and acquisition financing amounts undisclosed. Public evidence insuffi",
+"contracts": [
+{
+"title": "ABMS / JADC2 multi-award IDIQ position",
+"customer": "U.S. Air Force",
+"ceiling": "$950M shared multi-award ceiling",
+"obligated": "Public evidence insufficient (no task orders verified).",
+"date": "2022-10",
+"stage": "prototype vehicle"
+},
+{
+"title": "USMC programs of record fielding Aries Defense products (inherited via acquisition)",
+"customer": "U.S. Marine Corps",
+"ceiling": "Public evidence insufficient.",
+"obligated": "Public evidence insufficient.",
+"date": "pre-2025 (products fielded before Oct 2025 acquisition)",
+"stage": "production (program of record per company claim)"
+},
+{
+"title": "Aries Defense acquisition",
+"customer": "N/A (M&A)",
+"ceiling": "N/A",
+"obligated": "N/A",
+"date": "2025-10",
+"stage": "N/A"
+},
+{
+"title": "EWA Inc. acquisition",
+"customer": "N/A (M&A)",
+"ceiling": "N/A",
+"obligated": "N/A",
+"date": "2024-04",
+"stage": "N/A"
+}
+],
+"whitespace_cells": [
+{
+"chain_step": "COLLECT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "TRANSPORT",
+"echelon": "tactical_unit"
+},
+{
+"chain_step": "FUSE",
+"echelon": "battalion_brigade"
+},
+{
+"chain_step": "DISSEMINATE_TASK",
+"echelon": "tactical_unit"
+}
+],
+"competitors": [
+"Anduril (edge ISR/C2)",
+"Persistent Systems and Silvus (tactical networking)",
+"L3Harris and Cubic (ISR data links)",
+"Sierra Nevada Corp (ISR PED)",
+"Other PE-backed mid-tier integrators (e.g., Bluehalo-class firms)"
+],
+"moat": "Program-of-record incumbency of Aries products and USMC relationships; otherwise a services roll-up with limited proprietary moat (INFERENCE; MEDIUM).",
+"weakness": "Integration of five acquisitions; dependence on IDIQ ceilings (ABMS $950M) with no verified task orders; scale far below the primes; possible loss of small-busi"
 }
 ]
 }
