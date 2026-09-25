@@ -1,0 +1,1860 @@
+{
+  "batch_id": "B05",
+  "theme": "SATCOM, transport and rugged edge hardware",
+  "companies": [
+    {
+      "name": "Viasat, Inc. (Government Systems / Defense and Advanced Technologies segment)",
+      "aka": "Viasat Government Systems; Viasat Defense and Advanced Technologies (DAT); Inmarsat Government (subsidiary)",
+      "founding_year": 1986,
+      "headquarters": "Carlsbad, California, USA",
+      "public_private": "public",
+      "employee_count_approx": "~7,000 company-wide after the May 2023 Inmarsat acquisition (RECALL - not re-verified this session; MEDIUM). Government/DAT segment headcount not disclosed.",
+      "founders": [
+        "Mark Dankberg",
+        "Mark Miller",
+        "Steve Hart"
+      ],
+      "founder_backgrounds": "Three engineers who left Linkabit/M/A-COM in 1986; Dankberg was CEO for decades and is now Executive Chairman. RECALL - not re-verified this session; MEDIUM.",
+      "total_disclosed_funding_usd": "Not applicable - public company (NASDAQ: VSAT). Defense and Advanced Technologies segment revenue on the order of $1.1-1.3B in FY2025 (RECALL, LOW; verify against the FY2025 10-K).",
+      "latest_valuation": "Public market capitalization; not captured this session.",
+      "major_investors": [
+        "Public shareholders (NASDAQ: VSAT)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "PTS-G (Protected Tactical SATCOM-Global) satellites",
+          "description": "Small GEO satellites carrying X-band and military Ka-band payloads using the Protected Tactical Waveform (PTW) for anti-jam communications; Viasat is prime for design (DO1, Oct 2025) and for the first two operational 'Swarm 1' satellites (May 2026, launch expected 2028). FACT (Viasat PR, Breaking Defense, Via Satellite).",
+          "input_process_output_user": "Input: tactical user traffic from PTW-capable modems/terminals; Process: protected/anti-jam on-board relay in GEO; Output: resilient beyond-line-of-sight transport; User: USSF-provided service to joint tactical forces."
+        },
+        {
+          "name": "Government SATCOM services and terminals (Viasat Ka-band incl. ViaSat-3, Inmarsat Government L-band and Global Xpress, 'Hybrid Adaptive Network' multi-network concept)",
+          "description": "Airborne, ground and maritime terminals plus managed multi-band/multi-orbit connectivity for government users. Hybrid Adaptive Network is a Viasat architecture concept for switching across commercial and military networks (Tier 2 marketing; independent operational proof not gathered this session).",
+          "input_process_output_user": "Input: user IP traffic at the edge; Process: terminal/modem access to GEO (and partner LEO) capacity with network management; Output: BLOS broadband; User: SOCOM, Army, USAF, Navy, allied MODs."
+        },
+        {
+          "name": "Type 1 network encryption (KG-250X/XS, KG-142 100 Gbps, PSIAM)",
+          "description": "NSA-certified HAIPE and Ethernet encryptors for classified enclaves. RECALL - not re-verified this session; MEDIUM.",
+          "input_process_output_user": "Input: classified IP/Ethernet traffic; Process: Type 1 encryption; Output: protected transport over untrusted networks; User: DoD network operators."
+        },
+        {
+          "name": "Link 16 radios (BATS-D AN/PRC-161, KOR-24A STT, MIDS) - DIVESTED",
+          "description": "IMPORTANT: Viasat sold its Tactical Data Links (Link 16) business to L3Harris (closed Jan 2023, ~$1.96B). RECALL, HIGH confidence. Search results describing 'Viasat' Link 16 production above 200 radios/month and the Canadian Army STT test predate that divestiture; those products are now L3Harris products. Viasat still markets a 'Tactical Networking' line (viasat.com/government/security/tactical-networking; page not fetched - blocked) - INFERENCE that it now centers on multi-orbit SATCOM, gateways and crypto rather than Link 16 radios.",
+          "input_process_output_user": "Historical: Link 16 J-series messages between dismounted JTACs/aircraft/ground platforms; now L3Harris."
+        },
+        {
+          "name": "XVI Link 16-capable LEO demonstration satellite (AFRL)",
+          "description": "Small satellite demonstrating Link 16 from LEO; RECALL, LOW confidence on current ownership/status after the TDL divestiture.",
+          "input_process_output_user": "Input: Link 16 traffic from terminals beyond line of sight; Process: on-orbit Link 16 relay; Output: extended-range tactical data link; User: AFRL/USSF experimentation."
+        }
+      ],
+      "exact_problem_solved": "Resilient, protected beyond-line-of-sight transport (and NSA-grade encryption) for tactical and joint users operating under jamming and in remote/maritime/airborne settings; PTS-G specifically addresses the gap in anti-jam tactical SATCOM capacity for contested environments.",
+      "primary_users": [
+        "USSF-served joint tactical forces (PTS-G, future)",
+        "US Army tactical network users",
+        "USAF/AFSOC and SOCOM aircraft and teams",
+        "US Navy/Coast Guard and allied navies (Inmarsat)",
+        "Allied MODs (UK and others via Inmarsat Government)"
+      ],
+      "primary_buyers": [
+        "USSF Space Systems Command (PTS-G)",
+        "US Army PEO C3T / PM Tactical Network (SATCOM services and terminals)",
+        "DISA and service commercial SATCOM buyers",
+        "USSOCOM",
+        "NSA/DoD crypto modernization buyers",
+        "Allied MODs"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "joint",
+        "space",
+        "air",
+        "maritime",
+        "SOF",
+        "ISR (transport of ISR data)"
+      ],
+      "segment_ids": [
+        "S05",
+        "S10"
+      ],
+      "hw_sw_mix": "both - satellites, terminals, modems and crypto hardware plus network-management software and managed services",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "PTS-G Delivery Order 1 (initial design; one of five awardees)",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Overall multi-award IDIQ ceiling not captured in snippets",
+          "obligated": "Not disclosed",
+          "awarded_value": "DO1 value not disclosed in snippets",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Delivery Order 1 (design)",
+          "date": "2025-10-08",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "design/prototype phase",
+          "source_url": "https://www.viasat.com/news/latest-news/government/2025/viasat-ptsg-ussf-award/",
+          "pub_date": "2025-10-08",
+          "confidence": "HIGH (award) / LOW (values)"
+        },
+        {
+          "title": "PTS-G Swarm 1 delivery order - first two operational PTS-G satellites (Viasat and Intelsat General each awarded; combined ~$437.7M)",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": "~$437.7M combined across Viasat and Intelsat General awards; Viasat's individual share not isolated in the snippets",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Swarm 1 delivery order covering manufacturing, integration, test, launch and on-orbit checkout",
+          "date": "2026-05 (late May 2026)",
+          "period_of_performance": "Through launch expected 2028 and on-orbit checkout",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "first operational (production) satellites",
+          "source_url": "https://www.satellitetoday.com/government-military/2026/05/26/space-force-awards-viasat-and-intelsat-general-438m-for-continued-work-on-pts-g/",
+          "pub_date": "2026-05-26",
+          "confidence": "HIGH (award) / MEDIUM (split between the two vendors)"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Inmarsat Government L-band and Global Xpress services in use by US and allied forces; Viasat Type 1 encryptors (KG-250X family) fielded across DoD networks",
+          "evidence": "RECALL - not re-verified this session; MEDIUM. No specific 2025-2026 deployment document captured.",
+          "source_url": "https://www.viasat.com/government/"
+        },
+        {
+          "what": "PTS-G satellites",
+          "evidence": "Not yet deployed; first operational satellites expected to launch in 2028 (FACT, Via Satellite/Breaking Defense 2026).",
+          "source_url": "https://breakingdefense.com/2026/06/space-force-contracts-viasat-intelsat-for-first-of-new-anti-jam-communication-sats/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "AUSA Annual Meeting 2025 - Viasat showcase of tactical networking/communications for Army NGC2 objectives",
+          "year": "2025",
+          "note": "Company marketing (Tier 2); not evidence of an NGC2 award or fielding. Public evidence insufficient for Viasat participation in NGC2 pilot exercises.",
+          "source_url": "https://www.viasat.com/news/latest-news/government/2025/viasat-ausa-2025/"
+        }
+      ],
+      "integration_partners": [
+        "Intelsat General (parallel PTS-G awardee, separate contracts)",
+        "L3Harris (historical STT co-developer; now owns the Link 16 business)",
+        "Inmarsat (wholly owned subsidiary since May 2023)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient for developer-facing APIs/SDKs. Interoperability is standards-based (Protected Tactical Waveform for PTS-G, HAIPE for crypto, DVB-S2X/proprietary waveforms for commercial SATCOM) rather than open software interfaces.",
+      "security_classification_requirements": "NSA Type 1 certification for crypto products; PTS-G and NC3-adjacent work require cleared facilities/personnel; ITAR-controlled hardware. Not a legal judgment; specialist review needed for any partnership involving non-US-person founders.",
+      "allied_international_activity": "Inmarsat Government serves allied governments (UK MOD and others; RECALL MEDIUM); historical Canadian Army STT testing (now L3Harris). PTS-G is a US-only program.",
+      "technical_differentiator": "Vertically integrated satellite operator + terminal + crypto vendor; only prime alongside Intelsat General for the first PTS-G operational satellites; global multi-band (L/Ka) network after Inmarsat.",
+      "suspected_moat": "Orbital/spectrum assets, NSA certifications, installed terminal and crypto base, and program incumbency on PTS-G; high capital intensity deters new entrants.",
+      "major_competitors": [
+        "Intelsat General / SES Space & Defense (managed SATCOM, PTS-G)",
+        "Boeing and Northrop Grumman (protected SATCOM payloads)",
+        "SpaceX Starshield / Starlink (LEO transport)",
+        "Hughes Defense",
+        "General Dynamics Mission Systems and L3Harris (Type 1 crypto)",
+        "Eutelsat OneWeb (multi-orbit services)"
+      ],
+      "obvious_weaknesses": "High leverage after the Inmarsat purchase; ViaSat-3 F1 antenna anomaly (2023) reduced Ka capacity; LEO (Starshield/OneWeb) price-performance pressure on GEO services; the Link 16 radio franchise is gone; PTS-G revenue is back-loaded to 2028+ launches.",
+      "evidence_user_adoption": "Broad adoption of Inmarsat Government services and Viasat encryptors is well established but was not re-verified this session (RECALL, MEDIUM). Public evidence insufficient for adoption of Viasat products inside the Army NGC2 pilot.",
+      "evidence_repeat_procurement": "Progression within PTS-G from DO1 design (Oct 2025) to Swarm 1 production order (May 2026) - HIGH. Recurring SATCOM service buys assumed but not documented this session.",
+      "evidence_prototype_to_production": "PTS-G moved from design order to first operational satellites within ~8 months (FACT, HIGH on the award); production deliveries and launch (2028) still pending.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "coalition"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search performed this session): Viasat DAT roles historically emphasize RF/ASIC/modem design, waveform (PTW) implementation, embedded Linux, and NSA-certified crypto engineering. RECALL, LOW.",
+      "confidence_notes": "PTS-G awards: HIGH (multiple Tier 2 and Tier 3 sources, May-June 2026). Link 16 divestiture to L3Harris (Jan 2023): HIGH from recall but not re-verified; treat any 'Viasat Link 16' claim as pre-2023. Segment revenue, headcount and current status of XVI: LOW. Company web pages were blocked by the egress proxy, so product descriptions rely on search snippets and recall.",
+      "sources": [
+        {
+          "url": "https://www.viasat.com/news/latest-news/government/2025/viasat-ptsg-ussf-award/",
+          "title": "Viasat Awarded Contract by U.S. Space Force for PTS-G Program",
+          "pub_date": "2025-10-08",
+          "type": "company"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2025/10/08/3163272/0/en/Viasat-Awarded-Contract-by-U-S-Space-Force-for-Protected-Tactical-SATCOM-Global-PTS-G-Program.html",
+          "title": "Viasat PTS-G award press release (GlobeNewswire)",
+          "pub_date": "2025-10-08",
+          "type": "company"
+        },
+        {
+          "url": "https://www.satellitetoday.com/government-military/2026/05/26/space-force-awards-viasat-and-intelsat-general-438m-for-continued-work-on-pts-g/",
+          "title": "Space Force Awards Viasat and Intelsat General $438M for Continued Work on PTS-G",
+          "pub_date": "2026-05-26",
+          "type": "independent"
+        },
+        {
+          "url": "https://breakingdefense.com/2026/06/space-force-contracts-viasat-intelsat-for-first-of-new-anti-jam-communication-sats/",
+          "title": "Space Force contracts Viasat, Intelsat for first of new anti-jam communication sats",
+          "pub_date": "2026-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/viasat-intelsat-ussf-ptsg-satellites",
+          "title": "Viasat, Intelsat General Secure $437M Space Force Contracts for PTS-G Satellites",
+          "pub_date": "2026-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.viasat.com/news/latest-news/government/2026/viasat-ussf-ptsg-delivery-award/",
+          "title": "Viasat Selected to Deliver Dual-Band Satellite System under PTS-G Swarm 1 Delivery Order",
+          "pub_date": "2026-05",
+          "type": "company"
+        },
+        {
+          "url": "https://www.viasat.com/news/latest-news/government/2025/viasat-ausa-2025/",
+          "title": "Supporting Connectivity for U.S. Army Next-generation Command and Control Objectives (AUSA 2025)",
+          "pub_date": "2025-10",
+          "type": "company"
+        },
+        {
+          "url": "https://investors.viasat.com/news-releases/news-release-details/viasat-ramps-production-its-link-16-next-generation-tactical",
+          "title": "Viasat Ramps-Up Production on its Link 16 Radios (pre-divestiture)",
+          "pub_date": "unknown (pre-2023)",
+          "type": "company"
+        },
+        {
+          "url": "https://www.viasat.com/government/security/tactical-networking/",
+          "title": "Viasat Tactical Networking product page",
+          "pub_date": "unknown",
+          "type": "company"
+        }
+      ]
+    },
+    {
+      "name": "SpaceX Starshield (Space Exploration Technologies Corp. government business line)",
+      "aka": "Starshield; SDN Backbone (formerly MILNET) constellation; NRO Proliferated Architecture (Starshield buses)",
+      "founding_year": 2002,
+      "headquarters": "Starbase, Texas (corporate HQ moved from Hawthorne, California in 2024); Starshield offices in Hawthorne and the Washington DC area (RECALL, MEDIUM)",
+      "public_private": "private",
+      "employee_count_approx": "SpaceX ~13,000+ company-wide (RECALL, LOW); Starshield unit headcount undisclosed. Press coverage in 2026 references a planned SpaceX IPO (Yahoo Finance, May 2026).",
+      "founders": [
+        "Elon Musk"
+      ],
+      "founder_backgrounds": "Musk founded SpaceX in 2002 after PayPal; Starshield was announced publicly in Dec 2022 as a government-focused line (secure comms, Earth observation, hosted payloads). RECALL, HIGH for the 2022 announcement.",
+      "total_disclosed_funding_usd": "SpaceX has raised well over $10B in primary equity over its life (RECALL, LOW precision); Starshield is not separately funded.",
+      "latest_valuation": "Secondary/tender valuations reported at ~$350B (Dec 2024) and higher figures reported in 2025-2026 ahead of a planned IPO; not re-verified this session (RECALL, LOW).",
+      "major_investors": [
+        "Founders Fund",
+        "Fidelity",
+        "Google/Alphabet",
+        "Baillie Gifford",
+        "Sequoia Capital (RECALL, MEDIUM)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Starshield LEO satellites and SDN Backbone / MILNET constellation",
+          "description": "Militarized Starlink-derived buses with optical crosslinks, government-controlled encryption and hosted payloads. MILNET (renamed SDN Backbone in 2026) is a ~480-satellite government-owned, contractor-operated LEO SATCOM layer paid for by USSF and managed by NRO; SpaceX received a $2.29B award on 2026-05-26 to accelerate it. FACT (Breaking Defense Jun 2025 and May 2026; DefenseScoop Apr 2026).",
+          "input_process_output_user": "Input: user-terminal and gateway traffic, hosted-payload data; Process: LEO relay with laser crosslinks and government crypto; Output: low-latency global backhaul transport for the Space Data Network; User: USSF/NRO-served joint forces and space systems."
+        },
+        {
+          "name": "NRO Proliferated Architecture (Starshield buses for EO/ISR constellation)",
+          "description": "Classified ~$1.8B 2021 contract for a proliferated LEO imaging constellation using Starshield buses; NRO said in April 2025 the constellation exceeded 150 satellites. FACT (Reuters 2024 reporting summarized in Breaking Defense 2025; Wikipedia summary).",
+          "input_process_output_user": "Input: EO/other sensor collection; Process: on-orbit collection and downlink; Output: ISR imagery/data to NRO/NGA users; User: IC and DoD."
+        },
+        {
+          "name": "Starshield user terminals and Starlink-for-government services",
+          "description": "Starlink-compatible terminals with government features; services procured via USSF's Proliferated LEO (PLEO) SATCOM IDIQ (SpaceX received a ~$70M Starshield task order in Sept 2023 - RECALL, MEDIUM) and by Army/USAF/Navy units for on-the-move broadband.",
+          "input_process_output_user": "Input: tactical IP traffic; Process: Ku/Ka-band LEO access; Output: high-bandwidth BLOS broadband at the edge; User: tactical units, aircraft, ships."
+        },
+        {
+          "name": "Space-Based Airborne Moving Target Indicator (SB-AMTI) satellites",
+          "description": "$4.16B SSC award on 2026-05-29 for a space-based AMTI sensing layer - ISR collection rather than transport. FACT (AeroMorning/SpaceExplored 2026).",
+          "input_process_output_user": "Input: radar/RF sensing of airborne movers; Process: on-orbit detection and tracking; Output: air-moving-target tracks to air defense/C2 users; User: USSF, NORTHCOM/Golden Dome, joint air defense."
+        }
+      ],
+      "exact_problem_solved": "Provides high-capacity, low-latency, hard-to-jam LEO transport at scale (thousands of satellites, laser mesh) and rapidly manufacturable buses for sensing constellations, replacing bandwidth-constrained GEO SATCOM and slow bespoke satellite programs.",
+      "primary_users": [
+        "USSF and NRO operators",
+        "Joint tactical users of PLEO broadband (Army, USAF, Navy, SOCOM)",
+        "Intelligence Community imagery consumers",
+        "Ukraine armed forces (Starlink/Starshield services funded by DoD, 2023; RECALL, HIGH)"
+      ],
+      "primary_buyers": [
+        "USSF Space Systems Command (SDN Backbone, SB-AMTI, PLEO IDIQ)",
+        "National Reconnaissance Office",
+        "US Army/USAF/Navy service buyers of Starlink/Starshield terminals and services",
+        "Golden Dome / Missile Defense Agency-linked programs"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "COLLECT"
+      ],
+      "mission_layer": [
+        "space",
+        "joint",
+        "ISR",
+        "air defense (SB-AMTI, Golden Dome)",
+        "maneuver (tactical broadband)"
+      ],
+      "segment_ids": [
+        "S05",
+        "S03"
+      ],
+      "hw_sw_mix": "both - satellite buses, payloads, terminals and the network operations software; dominant value is vertically integrated manufacturing plus launch",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "NRO Proliferated Architecture (classified; Starshield buses for LEO imaging constellation)",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO",
+          "vehicle_type": "FAR",
+          "ceiling": "Not public",
+          "obligated": "Not public",
+          "awarded_value": "~$1.8B (Reuters reporting; classified contract)",
+          "funded_amount": "Not public",
+          "task_orders": "Not public",
+          "date": "2021",
+          "period_of_performance": "Not public; >150 satellites on orbit by April 2025",
+          "prime_or_sub": "prime (bus provider; Northrop Grumman reported as payload/partner - RECALL LOW)",
+          "prototype_or_production": "production constellation",
+          "source_url": "https://breakingdefense.com/2025/06/space-force-is-contracting-with-spacex-for-new-secretive-milnet-satcom-network/",
+          "pub_date": "2025-06",
+          "confidence": "MEDIUM (value from press; contract classified)"
+        },
+        {
+          "title": "MILNET (now SDN Backbone) - 480-satellite LEO SATCOM constellation; FY2026 budget $277M for MILNET",
+          "customer": "U.S. Space Force (funder) / NRO (program manager)",
+          "contracting_org": "NRO on behalf of USSF",
+          "vehicle_type": "FAR",
+          "ceiling": "Not public",
+          "obligated": "FY2026 budget request $277M (budget, not obligation)",
+          "awarded_value": "Not public at 2025 disclosure",
+          "funded_amount": "Not public",
+          "task_orders": "Not public",
+          "date": "disclosed 2025-06; first deployments mid-2026; IOC targeted late 2027",
+          "period_of_performance": "2025-2027+",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (government-owned, contractor-operated)",
+          "source_url": "https://satnews.com/2025/12/29/u-s-space-force-and-spacex-partner-to-develop-480-satellite-milnet-constellation/",
+          "pub_date": "2025-12-29",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "SDN Backbone acceleration award - $2.29B",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": "$2.29B",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not stated",
+          "date": "2026-05-26",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://breakingdefense.com/2026/05/spacex-wins-2-29b-to-speed-space-forces-leo-communications-backbone/",
+          "pub_date": "2026-05",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Space-Based Airborne Moving Target Indicator (SB-AMTI) - $4.16B",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": "$4.16B",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not stated",
+          "date": "2026-05-29",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "development/production of sensing layer (stage not specified in snippets)",
+          "source_url": "https://aeromorning.com/en/spacex-wins-6-45b-to-build-golden-domes-space-layer/",
+          "pub_date": "2026-06",
+          "confidence": "MEDIUM (secondary press; vehicle type not confirmed)"
+        },
+        {
+          "title": "Golden Dome space-based interceptor development - one of 12 companies sharing 20 contracts worth $3.2B combined",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "$3.2B combined across 20 awards (not SpaceX-specific)",
+          "obligated": "Not disclosed",
+          "awarded_value": "SpaceX share not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not stated",
+          "date": "2026-04",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "https://spaceexplored.com/2026/07/07/spacex-has-been-stacking-up-defense-contracts/",
+          "pub_date": "2026-07-07",
+          "confidence": "LOW-MEDIUM (vehicle type inferred; SpaceX share unknown)"
+        },
+        {
+          "title": "PLEO SATCOM services IDIQ task order (Starshield services, ~$70M)",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command Commercial SATCOM Office",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$900M multi-vendor PLEO IDIQ ceiling (RECALL)",
+          "obligated": "Not captured",
+          "awarded_value": "~$70M task order (RECALL)",
+          "funded_amount": "Not captured",
+          "task_orders": "Initial Starshield task order",
+          "date": "2023-09",
+          "period_of_performance": "One year plus options (RECALL)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "services",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "MEDIUM - RECALL, not re-verified this session"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "NRO proliferated LEO constellation on orbit (>150 satellites by April 2025) and operational",
+          "evidence": "FACT per Breaking Defense (June 2025) citing NRO statements.",
+          "source_url": "https://breakingdefense.com/2025/06/space-force-is-contracting-with-spacex-for-new-secretive-milnet-satcom-network/"
+        },
+        {
+          "what": "Starlink/Starshield terminals widely used by US units and by Ukraine under DoD-funded service contracts",
+          "evidence": "RECALL, HIGH for Ukraine (2023 DoD contract); specific 2025-2026 US-unit fielding documents not captured this session.",
+          "source_url": "https://en.wikipedia.org/wiki/SpaceX_Starshield"
+        },
+        {
+          "what": "MILNET/SDN Backbone",
+          "evidence": "First deployments slated mid-2026; IOC late 2027 - not yet an operational transport layer (FACT, SatNews Dec 2025).",
+          "source_url": "https://satnews.com/2025/12/29/u-s-space-force-and-spacex-partner-to-develop-480-satellite-milnet-constellation/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient for named exercise participation; Starlink connectivity is routinely used in Army network experiments (e.g., NGC2 pilot commercial transport) but vendor-specific exercise records were not captured",
+          "year": "2025-2026",
+          "note": "INFERENCE, LOW",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Northrop Grumman (reported NRO PA payload/partner; RECALL LOW)",
+        "Terminal and gateway integrators (Kymeta, Cubic/Halo, Anduril) that bundle Starlink/Starshield capacity",
+        "USSF Space Data Network ecosystem vendors via FORGE/SDN interfaces (INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient. Starshield is a closed, vertically integrated system; interfaces to government users are through terminals/gateways and classified program interfaces, not public SDKs.",
+      "security_classification_requirements": "Most Starshield work is classified (NRO PA, MILNET/SDN); requires TS/SCI-cleared staff and cleared facilities; ITAR-controlled. Non-US-person founders could not participate directly without specialist legal review.",
+      "allied_international_activity": "Starlink services used by Ukraine and many allied militaries; Starshield reportedly offered to select allies (RECALL, LOW). SDN Backbone is a US-only program.",
+      "technical_differentiator": "Unmatched production rate and cost per satellite, in-house launch, laser mesh network, and a proven commercial constellation of thousands of satellites to derive from.",
+      "suspected_moat": "Vertical integration (bus + payload + launch + terminals), scale economics, and incumbency across NRO PA, SDN Backbone and SB-AMTI - a de facto single-vendor position in LEO military transport.",
+      "major_competitors": [
+        "Viasat/Inmarsat and Intelsat/SES (GEO/MEO government SATCOM)",
+        "Eutelsat OneWeb",
+        "Amazon Kuiper (government)",
+        "Space Development Agency Transport Layer vendors (York, Lockheed, Northrop, Rocket Lab)",
+        "Iridium (L-band tactical)"
+      ],
+      "obvious_weaknesses": "Single-vendor concentration and political/key-person risk (Musk); closed architecture limits third-party innovation; government-owned SDN implies dependence on SpaceX operations; commercial Starlink terminals are RF-detectable in EW-contested settings (INFERENCE, MEDIUM).",
+      "evidence_user_adoption": "Strong: NRO constellation operating (>150 sats), DoD-funded Starlink for Ukraine, and PLEO services buys (RECALL). HIGH overall.",
+      "evidence_repeat_procurement": "Strong: successive awards across NRO PA (2021), PLEO task orders (2023), MILNET (2025), SDN Backbone $2.29B and SB-AMTI $4.16B (May 2026), Golden Dome interceptor awards (Apr 2026). HIGH.",
+      "evidence_prototype_to_production": "NRO PA reached production scale; SDN Backbone is a production program with deployments beginning mid-2026 (FACT). HIGH.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): Starshield postings historically ask for RF/phased-array, satellite bus avionics, Linux networking, and cleared systems engineers; heavy use of in-house software rather than open ecosystems. RECALL, LOW.",
+      "confidence_notes": "SDN Backbone $2.29B and SB-AMTI $4.16B: HIGH/MEDIUM from Breaking Defense and secondary press (May-June 2026). MILNET 480-satellite design and FY26 $277M: MEDIUM (Breaking Defense June 2025, SatNews Dec 2025). NRO PA $1.8B: MEDIUM (classified; press-reported). PLEO task order and valuations: RECALL, LOW-MEDIUM. Vehicle types for SSC awards are not confirmed and are marked FAR by default.",
+      "sources": [
+        {
+          "url": "https://breakingdefense.com/2025/06/space-force-is-contracting-with-spacex-for-new-secretive-milnet-satcom-network/",
+          "title": "Space Force is contracting with SpaceX for new, secretive MILNET SATCOM network",
+          "pub_date": "2025-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://satnews.com/2025/12/29/u-s-space-force-and-spacex-partner-to-develop-480-satellite-milnet-constellation/",
+          "title": "U.S. Space Force and SpaceX Partner to Develop 480-Satellite MILNET Constellation",
+          "pub_date": "2025-12-29",
+          "type": "independent"
+        },
+        {
+          "url": "https://breakingdefense.com/2026/05/spacex-wins-2-29b-to-speed-space-forces-leo-communications-backbone/",
+          "title": "SpaceX wins $2.29B to speed Space Force's LEO communications 'backbone'",
+          "pub_date": "2026-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://defensescoop.com/2026/04/28/space-force-space-data-network/",
+          "title": "Space Force plans to invest billions in sprawling Space Data Network in FY27",
+          "pub_date": "2026-04-28",
+          "type": "independent"
+        },
+        {
+          "url": "https://aeromorning.com/en/spacex-wins-6-45b-to-build-golden-domes-space-layer/",
+          "title": "SpaceX Wins $6.45B to Build Golden Dome's Space Layer",
+          "pub_date": "2026-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://spaceexplored.com/2026/07/07/spacex-has-been-stacking-up-defense-contracts/",
+          "title": "SpaceX has been stacking up defense contracts",
+          "pub_date": "2026-07-07",
+          "type": "independent"
+        },
+        {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-wins-2-29b-space-100000053.html",
+          "title": "SpaceX wins $2.29B Space Force contract for military satellites ahead of planned IPO",
+          "pub_date": "2026-05",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.quiltyspace.com/post/welcome-to-the-space-x-data-network",
+          "title": "Welcome to the Space(x) Data Network (SDN) - Quilty Space",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/SpaceX_Starshield",
+          "title": "SpaceX Starshield (Wikipedia summary; fetch blocked)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Kymeta Corporation",
+      "aka": "Kymeta; Kymeta Government Solutions",
+      "founding_year": 2012,
+      "headquarters": "Redmond, Washington, USA",
+      "public_private": "private",
+      "employee_count_approx": "~200-300 (RECALL, LOW)",
+      "founders": [
+        "Nathan Kundtz (founding CEO; metamaterials research)"
+      ],
+      "founder_backgrounds": "Spun out of Intellectual Ventures in 2012 to commercialize metamaterials-based electronically steered flat-panel antennas (Duke University lineage); early and largest backer Bill Gates. RECALL, MEDIUM.",
+      "total_disclosed_funding_usd": "Several hundred million dollars cumulative (public reports cite $85M Series D 2020 incl. $78.5M from Bill Gates plus a $30M Hanwha Systems investment; earlier rounds since 2013). Aggregate not re-verified this session; RECALL, LOW.",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Bill Gates (personal)",
+        "Intellectual Ventures",
+        "Hanwha Systems (strategic, 2020)",
+        "Liberty Global (early; RECALL LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Osprey u8 multi-orbit terminal",
+          "description": "Vehicle-mounted flat-panel electronically steered Ku-band terminal that connects to GEO and LEO (OneWeb) networks on the move; selected for the Army NGC2 pilot (Oct 2025; ~138 terminals plus spares for 4th Infantry Division per Kymeta) and subject of a $20M DoD order for 100+ terminals plus services. FACT (Kymeta PR; SatNews; Defense Post; army-technology).",
+          "input_process_output_user": "Input: vehicle network IP traffic; Process: electronically steered beam to GEO/LEO satellites with TRANSEC-capable modem and Kymeta Broadband service; Output: on-the-move BLOS broadband; User: Army maneuver/command post vehicles, SOF, Marines."
+        },
+        {
+          "name": "Goshawk u8 (LEO/OneWeb-optimized u8 terminal)",
+          "description": "Generally available on Eutelsat OneWeb LEO for government/military customers since May 2025 (FACT, Kymeta/OneWeb release).",
+          "input_process_output_user": "Input: user data; Process: LEO tracking flat panel; Output: low-latency BLOS link; User: government mobile users."
+        },
+        {
+          "name": "Peregrine u8 (GEO Ku terminal) and Kymeta Broadband/Connect services",
+          "description": "GEO-focused terminal plus bundled GEO+LEO airtime with TRANSEC and non-TRANSEC options (FACT for the service bundle per the $20M DoD order coverage).",
+          "input_process_output_user": "Input: user data; Process: managed multi-network airtime; Output: connectivity-as-a-service; User: DoD units, first responders."
+        },
+        {
+          "name": "Multi-band, multi-beam Ku/Ka antenna R&D (ONR)",
+          "description": "Three-year ONR development contract (Apr 2026) to mature four concurrent full-duplex beams across Ku and Ka bands. FACT (Kymeta PR).",
+          "input_process_output_user": "Input: R&D funding; Process: antenna architecture maturation; Output: future multi-band terminal; User: Navy/Marine Corps."
+        }
+      ],
+      "exact_problem_solved": "Low-profile, no-moving-parts SATCOM on the move for vehicles, with automatic GEO/LEO diversity so command posts and maneuver units keep BLOS connectivity while moving and under network degradation.",
+      "primary_users": [
+        "US Army maneuver and command-post vehicle crews (4th ID under NGC2 pilot)",
+        "USSOCOM and Marine Corps mobile users (RECALL, LOW)",
+        "Public safety/first responders",
+        "Allied governments via Eutelsat OneWeb partnership"
+      ],
+      "primary_buyers": [
+        "US Army PEO C3T / NGC2 program office and PM Tactical Network",
+        "Unnamed DoD organization ($20M order)",
+        "Office of Naval Research (R&D)",
+        "Eutelsat OneWeb channel"
+      ],
+      "technical_layer": [
+        "TRANSPORT"
+      ],
+      "mission_layer": [
+        "maneuver",
+        "fires (command post connectivity)",
+        "SOF",
+        "joint"
+      ],
+      "segment_ids": [
+        "S05"
+      ],
+      "hw_sw_mix": "both - metamaterial flat-panel antenna hardware and modems plus network-selection software and managed airtime services",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "Army NGC2 Pilot - multi-orbit SATCOM capability provider (Osprey u8; ~138 terminals plus spares for 4th ID)",
+          "customer": "U.S. Army (4th Infantry Division via NGC2 pilot)",
+          "contracting_org": "Army PEO C3T / NGC2 (likely via the prime integrator team; contracting path not disclosed - INFERENCE)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "2025-10-15",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "likely sub/vendor to the NGC2 prime team (INFERENCE)",
+          "prototype_or_production": "prototype (pilot)",
+          "source_url": "https://www.kymetacorp.com/about/news-insights/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot",
+          "pub_date": "2025-10-15",
+          "confidence": "HIGH (selection) / LOW (vehicle and value)"
+        },
+        {
+          "title": "$20M order for 100+ Osprey u8 terminals and multi-orbit connectivity services (unnamed DoD organization)",
+          "customer": "Unnamed U.S. Department of Defense/War organization",
+          "contracting_org": "Not disclosed",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": "$20M",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not stated",
+          "date": "late 2025 to 2026 (exact date not captured; 'DoW' naming implies after Sept 2025)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production order (terminals plus services)",
+          "source_url": "https://www.army-technology.com/news/kymeta-usdow-satellite-terminals/",
+          "pub_date": "2025-2026 (not captured)",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "ONR three-year development contract for multi-band, multi-beam Ku/Ka antenna",
+          "customer": "Office of Naval Research",
+          "contracting_org": "ONR",
+          "vehicle_type": "FAR",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "2026-04",
+          "period_of_performance": "3 years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "R&D",
+          "source_url": "https://www.kymetacorp.com/about/news-insights/kymeta-wins-onr-contract",
+          "pub_date": "2026-04",
+          "confidence": "HIGH (award) / LOW (value)"
+        },
+        {
+          "title": "Earlier Army flat-panel antenna supply award (SpaceNews report; date and value not captured this session)",
+          "customer": "U.S. Army",
+          "contracting_org": "Not captured",
+          "vehicle_type": "FAR",
+          "ceiling": "Not captured",
+          "obligated": "Not captured",
+          "awarded_value": "Not captured",
+          "funded_amount": "Not captured",
+          "task_orders": "Not captured",
+          "date": "circa 2021 (RECALL, LOW)",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "evaluation/prototype quantities (INFERENCE)",
+          "source_url": "https://spacenews.com/kymeta-to-supply-flat-panel-satellite-antennas-to-u-s-army/",
+          "pub_date": "unknown",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Osprey u8 terminals being fielded to 4th Infantry Division as the NGC2 pilot's multi-orbit SATCOM layer",
+          "evidence": "Kymeta statement (Oct 2025) of ~138 terminals plus spares; pilot fielding, not program-of-record production. Independent confirmation of delivery quantities not captured.",
+          "source_url": "https://news.satnews.com/2025/10/16/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot/"
+        },
+        {
+          "what": "100+ Osprey u8 terminals with services delivered to an unnamed DoD organization",
+          "evidence": "$20M order reported by Military Aerospace and army-technology.com (company-sourced).",
+          "source_url": "https://www.militaryaerospace.com/communications/article/55403573/kymeta-supplies-more-than-100-multi-orbit-satcom-terminals-to-dod"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Armored Formation Network On The Move (AFNOTM)",
+          "year": "2024-2025",
+          "note": "Cited by Kymeta as a successful evaluation preceding NGC2 selection (company claim).",
+          "source_url": "https://www.kymetacorp.com/about/news-insights/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot"
+        },
+        {
+          "event": "Network Modernization Experiment (NetModX)",
+          "year": "2024-2025",
+          "note": "Cited by Kymeta (company claim).",
+          "source_url": "https://www.kymetacorp.com/about/news-insights/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot"
+        },
+        {
+          "event": "Project Convergence Capstone",
+          "year": "2025",
+          "note": "Cited by Kymeta (company claim).",
+          "source_url": "https://thedefensepost.com/2025/10/15/us-kymeta-osprey-u8-satcom/"
+        }
+      ],
+      "integration_partners": [
+        "Eutelsat OneWeb (LEO capacity; joint government offering)",
+        "GEO operators for Kymeta Broadband (Intelsat/SES class; RECALL LOW)",
+        "NGC2 prime integrator team for 4th ID (Anduril-led team per public reporting; Kymeta's contractual link not verified - INFERENCE)",
+        "Hanwha Systems (strategic investor; Korean market)"
+      ],
+      "apis_sdks_open_interfaces": "Public evidence insufficient for public APIs; terminals expose standard IP/Ethernet and modem management interfaces (INFERENCE).",
+      "security_classification_requirements": "Unclassified hardware with TRANSEC-capable service options; DoD orders may require ITAR handling and possibly facility clearance for program integration (not a legal judgment).",
+      "allied_international_activity": "Eutelsat OneWeb partnership targets global government and defense customers; Hanwha Systems investment ties to South Korea (RECALL).",
+      "technical_differentiator": "Metamaterial electronically steered flat panel with GEO/LEO switching in a single low-profile vehicle terminal; multi-band multi-beam roadmap under ONR funding.",
+      "suspected_moat": "Patent portfolio on metamaterial ESAs, Army exercise track record feeding NGC2 selection, and bundled airtime services; moat is moderate because competitors (ThinKom, Hughes, Intellian, Starlink flat panels) offer alternatives.",
+      "major_competitors": [
+        "Starlink/Starshield flat-panel terminals",
+        "ThinKom",
+        "Hughes (HM-series / OneWeb terminals)",
+        "Intellian",
+        "Cubic Halo",
+        "Ball/Telephonics legacy ESAs",
+        "Get SAT and Satcube (small terminals)"
+      ],
+      "obvious_weaknesses": "Long history of capital consumption and leadership turnover; dependency on third-party satellite capacity; NGC2 selection is a pilot, not a program of record; Starlink's low terminal prices compress margins.",
+      "evidence_user_adoption": "Moderate-to-strong: repeated Army experiment participation and selection for 4th ID NGC2 fielding; 100+ terminal DoD order. Company-sourced; MEDIUM.",
+      "evidence_repeat_procurement": "Moderate: sequence of Army evaluations (2021 supply award, AFNOTM/NetModX) then NGC2 selection and a $20M DoD order; no multi-year program-of-record buys documented. MEDIUM.",
+      "evidence_prototype_to_production": "Partial: transition from experiments to pilot fielding (138 units) and a 100+ unit order; still short of an Army program-of-record production decision. MEDIUM.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "battalion_brigade"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): RF/antenna and modem firmware, embedded Linux, network management software; RECALL, LOW.",
+      "confidence_notes": "NGC2 selection: HIGH (multiple outlets, Oct 2025). Terminal counts and exercise claims are company-sourced (MEDIUM). $20M DoD order: MEDIUM (date not captured). Funding history and headcount: RECALL, LOW.",
+      "sources": [
+        {
+          "url": "https://www.kymetacorp.com/about/news-insights/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot",
+          "title": "Kymeta Selected As Multi-Orbit SATCOM Provider For U.S. Army's NGC2 Pilot",
+          "pub_date": "2025-10-15",
+          "type": "company"
+        },
+        {
+          "url": "https://thedefensepost.com/2025/10/15/us-kymeta-osprey-u8-satcom/",
+          "title": "US Army Picks Kymeta Osprey u8 for Multi-Orbit SATCOM Pilot",
+          "pub_date": "2025-10-15",
+          "type": "independent"
+        },
+        {
+          "url": "https://news.satnews.com/2025/10/16/kymeta-selected-as-multi-orbit-satcom-provider-for-u-s-armys-ngc2-pilot/",
+          "title": "Kymeta selected as multi-orbit SATCOM provider for U.S. Army's NGC2 pilot",
+          "pub_date": "2025-10-16",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.army-technology.com/news/kymeta-usdow-satellite-terminals/",
+          "title": "Kymeta wins $20m US DoW contract for multi-orbit satellite terminals",
+          "pub_date": "2025-2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.militaryaerospace.com/communications/article/55403573/kymeta-supplies-more-than-100-multi-orbit-satcom-terminals-to-dod",
+          "title": "Kymeta supplies more than 100 multi-orbit SATCOM terminals to DoD",
+          "pub_date": "2025-2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.kymetacorp.com/about/news-insights/kymeta-wins-onr-contract",
+          "title": "Kymeta Wins ONR Contract to Advance Ku/Ka Multi-Band SATCOM Technology",
+          "pub_date": "2026-04",
+          "type": "company"
+        },
+        {
+          "url": "https://www.kymetacorp.com/about/news-insights/eutelsat-oneweb-and-kymeta-strengthen-global-governments-defense-infrastructures-with-multi-orbit-satcom-offering",
+          "title": "Eutelsat OneWeb and Kymeta Strengthen Global Governments' Defense Infrastructures with Multi-Orbit SATCOM Offering",
+          "pub_date": "2025",
+          "type": "company"
+        },
+        {
+          "url": "https://spacenews.com/kymeta-to-supply-flat-panel-satellite-antennas-to-u-s-army/",
+          "title": "Kymeta to supply flat-panel satellite antennas to U.S. Army",
+          "pub_date": "unknown",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Klas (Klas Telecom / Klas Government) - now an Anduril Industries business",
+      "aka": "Klas Telecom; Klas Government; Voyager (product family); acquired by Anduril (announced May 2025, closed July 2025)",
+      "founding_year": 1991,
+      "headquarters": "Dublin, Ireland (parent); Klas Government in Herndon, Virginia, USA (RECALL, MEDIUM); now part of Anduril (Costa Mesa, CA)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "~300 at acquisition (RECALL, LOW)",
+      "founders": [
+        "Frank Murphy (founder and long-time CEO)"
+      ],
+      "founder_backgrounds": "Irish telecom engineer who founded Klas in Dublin in 1991; company built rugged network/compute for military and rail; US subsidiary Klas Government serves DoD/SOCOM. RECALL, MEDIUM.",
+      "total_disclosed_funding_usd": "Bootstrapped/privately held until acquisition; no venture rounds disclosed. Acquisition price undisclosed (Houlihan Lokey advised).",
+      "latest_valuation": "Undisclosed; Anduril acquisition terms not public (press speculation only).",
+      "major_investors": [
+        "Anduril Industries (100% owner since July 2025)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Voyager modular tactical compute/network chassis (Voyager 6, Voyager 8, Voyager TDC, VMm/VMs compute modules, Ignition Kit)",
+          "description": "Rugged, SWaP-optimized modular chassis hosting routers, switches, compute (virtualization), radios and crypto for command posts, vehicles and dismounted kits; Voyager 6 introduced 2021 with no-vehicle-modification mounting. Runs KlasOS Blackrock (RECALL, MEDIUM). Selected for USSOCOM TACLAN (2025) as the 'Voyager Tactical Multi-Enclave System'. FACT (Klas/Anduril releases; Military Embedded Systems).",
+          "input_process_output_user": "Input: radio/SATCOM WAN links, sensor and user devices; Process: routing, multi-enclave virtualization, edge compute and encryption; Output: an integrated tactical LAN/WAN and hosted mission apps at the edge; User: SOF teams, Army/Marine command posts, vehicle crews."
+        },
+        {
+          "name": "TRX R2/R6 small tactical routers and TDC edge data center",
+          "description": "Handheld/vehicle routers and a tactical data center configuration for hosting virtual machines and containers at the edge (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: network traffic and workloads; Process: routing and compute; Output: connected, locally hosted services; User: small units."
+        },
+        {
+          "name": "Anduril Menace family integration (Menace-X, Menace-T)",
+          "description": "Post-acquisition, Voyager hardware is the compute/network core of Anduril's Menace expeditionary C4 systems; Menace-T (two carry-on cases) launched 2025. FACT (Anduril/Tectonic Defense).",
+          "input_process_output_user": "Input: sensor feeds and network links; Process: Lattice software on Voyager compute; Output: deployable command center with common operating picture; User: Marines, SOF, Army units."
+        }
+      ],
+      "exact_problem_solved": "Delivers a full tactical network and compute stack (routing, multi-enclave security, virtualization) in a small, rugged, rapidly deployable form that survives heat, dust and denied environments without vehicle modifications.",
+      "primary_users": [
+        "USSOCOM teams (TACLAN)",
+        "US Marine Corps networking-on-the-move users (RECALL, MEDIUM)",
+        "US Army tactical network/command post users",
+        "Allied SOF and militaries",
+        "Anduril Menace customers"
+      ],
+      "primary_buyers": [
+        "USSOCOM (TACLAN program)",
+        "US Army PEO C3T (tactical network kits; RECALL LOW)",
+        "Marine Corps Systems Command",
+        "Anduril (internal integration)",
+        "Allied MODs"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "PROCESS",
+        "STORE"
+      ],
+      "mission_layer": [
+        "SOF",
+        "maneuver",
+        "joint",
+        "maritime (expeditionary)"
+      ],
+      "segment_ids": [
+        "S05",
+        "S06",
+        "S10"
+      ],
+      "hw_sw_mix": "both - rugged chassis, modules and routers with KlasOS/virtualization software; hardware-led",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "USSOCOM Tactical Local Area Network (TACLAN) - initial award for Voyager Tactical Multi-Enclave System",
+          "customer": "USSOCOM",
+          "contracting_org": "USSOCOM (SOF AT&L; contracting office not captured)",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Not captured",
+          "obligated": "Not captured",
+          "awarded_value": "Not disclosed in snippets",
+          "funded_amount": "Not captured",
+          "task_orders": "Initial award",
+          "date": "2025",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (program of record refresh)",
+          "source_url": "https://www.klasgroup.com/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM (selection reported via company/press; vehicle type INFERENCE)"
+        },
+        {
+          "title": "Voyager onboarding to USAF Enterprise-wide Agile Acquisition Contract (EWAAC) via Voyager Space partner listing (note: document appears to concern a separate company named Voyager; not attributable to Klas)",
+          "customer": "Not applicable",
+          "contracting_org": "Not applicable",
+          "vehicle_type": "IDIQ",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025",
+          "period_of_performance": "",
+          "prime_or_sub": "",
+          "prototype_or_production": "",
+          "source_url": "https://s206.q4cdn.com/740209347/files/doc_news/Voyager-Onboards-USAF-Enterprise-wide-Agile-Acquisition-Contract-2025.pdf",
+          "pub_date": "2025",
+          "confidence": "LOW - likely a name collision (Voyager Technologies), recorded only to prevent misattribution"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Voyager deployed in USSOCOM and Marine Corps tactical networks and inside Anduril Menace systems",
+          "evidence": "Anduril acquisition materials state Voyager is 'already deployed' in Menace across ground, maritime and air domains (company claim); SOCOM/USMC fielding is RECALL, MEDIUM.",
+          "source_url": "https://www.anduril.com/news/anduril-to-acquire-klas-to-build-the-future-of-tactical-compute-and-communications"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient for named 2025-2026 exercises; Voyager-based Menace systems appear in Marine Corps and Army experimentation per Anduril marketing",
+          "year": "2025",
+          "note": "INFERENCE, LOW",
+          "source_url": "https://www.anduril.com/voyager"
+        }
+      ],
+      "integration_partners": [
+        "Anduril Lattice (parent)",
+        "Zscaler (zero-trust at the tactical edge partner brief)",
+        "Cisco and Palo Alto Networks modules hosted in Voyager (RECALL, MEDIUM)",
+        "Radio vendors (L3Harris, Silvus) integrated in kits (INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Voyager hosts third-party VMs/containers and vendor modules, giving a de facto open hardware slot standard; no public SDK found. Post-acquisition, Lattice SDK becomes the software interface (Anduril).",
+      "security_classification_requirements": "Multi-enclave (classified/unclassified) operation is a core use case; program work with SOCOM implies cleared staff; ITAR-controlled ruggedized equipment. Irish parentage was managed via a US subsidiary before Anduril ownership (illustrative for foreign-founded ventures; needs specialist FOCI review).",
+      "allied_international_activity": "Irish-origin company with UK/European and Five Eyes SOF customers (RECALL, MEDIUM); now part of Anduril's international footprint (UK, Australia).",
+      "technical_differentiator": "Fully modular ruggedized chassis that lets units mix compute, routing, radios and crypto without vehicle modification; proven SOF pedigree.",
+      "suspected_moat": "Installed base in SOCOM/USMC kits, TACLAN incumbency and now vertical integration with Anduril's Lattice and Menace; switching costs in fielded kits.",
+      "major_competitors": [
+        "Cubic DTECH (M3-SE family)",
+        "PacStar (Curtiss-Wright)",
+        "Crystal Group",
+        "Mercury/Systel rugged servers",
+        "Dell and HPE rugged edge lines",
+        "Fischer Panda/Tampa Microwave (case-based kits)"
+      ],
+      "obvious_weaknesses": "Now captive to Anduril, which may reduce neutrality as a hardware host for competing software vendors; hardware refresh cycles; limited public visibility into contract values.",
+      "evidence_user_adoption": "Strong within SOF/USMC niche: TACLAN selection (2025) and long history in tactical kits (RECALL). MEDIUM-HIGH.",
+      "evidence_repeat_procurement": "TACLAN is a recurring SOCOM program; repeated kit buys are typical but specific order history not captured. MEDIUM.",
+      "evidence_prototype_to_production": "Voyager is a production product line; Menace-T integration moved from prototype to marketed product within months of acquisition (company claim). MEDIUM.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "battalion_brigade"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "battalion_brigade"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): embedded Linux, networking (Cisco IOS-XE hosting), virtualization (KVM/ESXi), and mechanical/thermal engineering; RECALL, LOW.",
+      "confidence_notes": "Anduril acquisition: HIGH (announced 2025-05-05; closed July 2025 per Houlihan Lokey/press). TACLAN selection: MEDIUM (company/press summary; no contract value). Product details and customer base partly RECALL. The 'Voyager EWAAC' PDF in results is almost certainly Voyager Technologies, not Klas.",
+      "sources": [
+        {
+          "url": "https://www.anduril.com/news/anduril-to-acquire-klas-to-build-the-future-of-tactical-compute-and-communications",
+          "title": "Anduril to Acquire Klas to Build the Future of Tactical Compute and Communications",
+          "pub_date": "2025-05-05",
+          "type": "company"
+        },
+        {
+          "url": "https://hl.com/about-us/transactions/klas-anduril/",
+          "title": "Klas - Anduril transaction details (Houlihan Lokey)",
+          "pub_date": "2025-07",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/anduril-acquire-klas-compute-and-connectivity-capabilities",
+          "title": "Anduril to Acquire Klas to Boost Compute & Connectivity Capabilities",
+          "pub_date": "2025-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.tectonicdefense.com/anduril-acquires-klas-launches-menace-t/",
+          "title": "Anduril Acquires Klas, Launches Menace-T",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/comms/vetronics/klas-government-launches-voyager-6-enabling-tactical-edge-comms-with-no-military-vehicle-modifications",
+          "title": "Klas Government Launches Voyager 6",
+          "pub_date": "2021-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.klasgroup.com/",
+          "title": "Klas - Voyager | Edge Intelligence | Network Edge",
+          "pub_date": "2025",
+          "type": "company"
+        },
+        {
+          "url": "https://www.anduril.com/voyager",
+          "title": "Voyager | Anduril",
+          "pub_date": "2025",
+          "type": "company"
+        },
+        {
+          "url": "https://www.zscaler.com/resources/solution-briefs/partner-klas.pdf",
+          "title": "Deploying Zero Trust at the Tactical Edge - Zscaler/Klas partner brief",
+          "pub_date": "unknown",
+          "type": "company"
+        }
+      ]
+    },
+    {
+      "name": "Parry Labs LLC",
+      "aka": "Parry Labs",
+      "founding_year": 2017,
+      "headquarters": "Alexandria, Virginia, USA (engineering presence in Huntsville, Alabama) - RECALL, MEDIUM",
+      "public_private": "private",
+      "employee_count_approx": "~250-400 (RECALL, LOW)",
+      "founders": [
+        "John Parkes (co-founder and CEO; RECALL, MEDIUM)"
+      ],
+      "founder_backgrounds": "Leadership drawn from Army aviation, defense software and systems-engineering backgrounds; company positioned itself as a MOSA/digital-engineering specialist for Army aviation before adding edge hardware. RECALL, LOW on individual biographies.",
+      "total_disclosed_funding_usd": "$80M growth equity round closed 2024-08-28 (first institutional round). Aggregate figures conflict: Crunchbase-type sources ~$116M; Tracxn $171M across 3 rounds. Treat total as $116-171M, MEDIUM.",
+      "latest_valuation": "Public evidence insufficient (PitchBook profile exists but was not accessible).",
+      "major_investors": [
+        "Capitol Meridian Partners (lead, 2024)",
+        "True Ventures",
+        "3Wire Partners",
+        "Teamworthy Ventures",
+        "TriplePoint Capital (debt/venture lending; RECALL)",
+        "U.S. Army (SBIR/STTR or AMTC funding listed as investor by aggregators)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "MOSA-aligned mission computing hardware for aircraft and UAS (rugged edge mission computers/gateways)",
+          "description": "Modular, open-architecture mission system hardware integrated on AeroVironment's P550 UAS for the Army Long Range Reconnaissance (LRR) program (AV won a three-year Army contract in late 2025). Specific product brand names were not verified this session. FACT for the P550 teaming (Military Embedded Systems; Yahoo Finance).",
+          "input_process_output_user": "Input: sensor, payload and datalink data on the platform; Process: onboard compute with MOSA/FACE-aligned software environment; Output: mission data and C2 messages to ground stations and other platforms; User: Army aviation and UAS operators."
+        },
+        {
+          "name": "Army Aviation Mission Computing Environment (AMCE) MOSA requirements and MBSE models",
+          "description": "Two AMTC (Aviation and Missile Technology Consortium) task awards making Parry Labs industry lead to define MOSA computing/software operating environment requirements for future Army aviation procurements (FLRAA, FARA, AH-64, UH-60, CH-47, Gray Eagle, fixed wing). FACT (ExecutiveBiz; Military Embedded Systems).",
+          "input_process_output_user": "Input: Army aviation architecture needs; Process: model-based systems engineering; Output: government-owned MOSA requirements/standards; User: Army PEO Aviation and platform primes."
+        },
+        {
+          "name": "Edge C2, interoperability and AI computing software (roadmap funded by 2024 raise)",
+          "description": "Company states the 2024 capital funds command and control, mission-critical software, interoperability and advanced AI edge computing (Tier 2 statement; product maturity not independently evidenced).",
+          "input_process_output_user": "Input: multi-source platform data; Process: edge processing/AI; Output: decision-support and interoperable messaging; User: aviation and ground tactical users."
+        }
+      ],
+      "exact_problem_solved": "Breaks vendor lock in Army aviation and UAS mission systems by supplying government-owned MOSA requirements and matching open, upgradeable mission computers so new software and sensors can be integrated across platforms quickly.",
+      "primary_users": [
+        "Army aviation units (Apache, Black Hawk, Chinook, Gray Eagle, FLRAA future)",
+        "Army brigade-level UAS operators (LRR/P550)",
+        "Platform primes integrating MOSA hardware"
+      ],
+      "primary_buyers": [
+        "Army PEO Aviation and DEVCOM AvMC via AMTC OTA",
+        "AeroVironment (subcontract on P550/LRR)",
+        "Other primes and program offices (IDIQ; customer not captured)"
+      ],
+      "technical_layer": [
+        "PROCESS",
+        "TRANSPORT",
+        "INGEST"
+      ],
+      "mission_layer": [
+        "ISR (UAS)",
+        "Army aviation",
+        "maneuver"
+      ],
+      "segment_ids": [
+        "S06",
+        "S02",
+        "S13"
+      ],
+      "hw_sw_mix": "both - rugged mission computing hardware plus MOSA software environment and digital-engineering services",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "$49M single-award IDIQ (full and open competition; customer and scope not captured in snippets)",
+          "customer": "Not captured (likely U.S. Army - INFERENCE)",
+          "contracting_org": "Not captured",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$49M",
+          "obligated": "Not disclosed",
+          "awarded_value": "Ceiling only",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not disclosed",
+          "date": "2024-2025 (not captured)",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "Not captured",
+          "source_url": "https://www.prnewswire.com/news/parry-labs-llc/",
+          "pub_date": "unknown",
+          "confidence": "LOW-MEDIUM (ceiling reported; details missing)"
+        },
+        {
+          "title": "AMTC MOSA agreement - two task awards for Army Aviation Mission Computing Environment requirements (industry lead)",
+          "customer": "U.S. Army (PEO Aviation / DEVCOM AvMC)",
+          "contracting_org": "Aviation and Missile Technology Consortium (OTA)",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Two tasks",
+          "date": "circa 2022-2023 (RECALL on timing, LOW)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime (industry lead)",
+          "prototype_or_production": "prototype/requirements development",
+          "source_url": "https://www.executivebiz.com/articles/parry-labs-secures-army-awards-for-aviation-mission-computing-environment-development",
+          "pub_date": "unknown",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "P550 / Army Long Range Reconnaissance - MOSA mission system hardware and software (teamed with AeroVironment, which holds a three-year Army contract awarded late 2025)",
+          "customer": "U.S. Army (via AeroVironment)",
+          "contracting_org": "Army PEO Aviation / PM UAS (INFERENCE)",
+          "vehicle_type": "subcontract",
+          "ceiling": "Not disclosed",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "late 2025",
+          "period_of_performance": "3 years (prime contract)",
+          "prime_or_sub": "sub",
+          "prototype_or_production": "development toward fielding (LRR)",
+          "source_url": "https://militaryembedded.com/unmanned/isr/mosa-aligned-systems-for-army-offered-by-parry-labs-and-aerovironment",
+          "pub_date": "2025-2026",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "No independently documented fielded Parry Labs hardware on operational Army platforms captured this session",
+          "evidence": "Public evidence insufficient; work to date is requirements definition, prototypes and a development-phase UAS integration.",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient for named exercises",
+          "year": "",
+          "note": "None captured.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "AeroVironment (P550/LRR)",
+        "Army AMTC consortium members and aviation primes (Boeing, Sikorsky, Bell, General Atomics) as consumers of MOSA requirements (INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Positioned around MOSA/FACE and government-owned interfaces; no public SDK found. INFERENCE that hardware exposes FACE-aligned software environment and standard aviation buses (MIL-STD-1553, Ethernet).",
+      "security_classification_requirements": "Army aviation mission systems require ITAR compliance and likely facility clearance for classified integration; not a legal judgment.",
+      "allied_international_activity": "Public evidence insufficient.",
+      "technical_differentiator": "Rare combination of authoring the Army's MOSA aviation requirements (MBSE) and building compliant edge hardware/software, giving first-mover conformance on emerging standards.",
+      "suspected_moat": "Standards influence and relationships with PEO Aviation; moderate and contestable because primes and Collins/Northrop/Mercury also build MOSA mission computers.",
+      "major_competitors": [
+        "Collins Aerospace (mission computers)",
+        "Northrop Grumman (open mission systems)",
+        "Mercury Systems",
+        "Curtiss-Wright",
+        "Anduril (Lattice/Menace edge compute)",
+        "Shield AI (Hivemind edge autonomy compute)"
+      ],
+      "obvious_weaknesses": "Revenue visibility is low (single IDIQ ceiling $49M; subcontract on UAS program); no evidence of fielded production; reliance on Army aviation budgets and MOSA policy enforcement.",
+      "evidence_user_adoption": "Weak-to-moderate: requirements work adopted by Army aviation stakeholders; hardware adoption limited to development integrations. LOW-MEDIUM.",
+      "evidence_repeat_procurement": "Two AMTC tasks plus an IDIQ suggests repeat engagement with Army customers; values undisclosed. LOW-MEDIUM.",
+      "evidence_prototype_to_production": "Not yet demonstrated publicly. LOW.",
+      "whitespace_cells": [
+        {
+          "chain_step": "PROCESS",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "individual_platform"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): FACE/MOSA software, embedded Linux/RTOS, MBSE (Cameo/SysML), containerized edge AI on NVIDIA-class modules; RECALL, LOW.",
+      "confidence_notes": "2024 $80M raise and investors: HIGH (PR Newswire; Houlihan Lokey). AMTC tasks and P550 teaming: MEDIUM. IDIQ $49M: LOW-MEDIUM (customer not captured). Founding year, HQ, founders and headcount: RECALL, LOW-MEDIUM. Product brand names intentionally omitted (not verified).",
+      "sources": [
+        {
+          "url": "https://www.prnewswire.com/news-releases/parry-labs-raises-80-million-from-capitol-meridian-partners-true-ventures-and-other-technology-investors-302232842.html",
+          "title": "Parry Labs Raises $80 Million From Capitol Meridian Partners, True Ventures, and Other Technology Investors",
+          "pub_date": "2024-08",
+          "type": "company"
+        },
+        {
+          "url": "https://hl.com/about-us/transactions/parry-labs-capitol-meridian-partners/",
+          "title": "Parry Labs - Capitol Meridian Partners transaction details (Houlihan Lokey)",
+          "pub_date": "2024-08-28",
+          "type": "financial"
+        },
+        {
+          "url": "https://intelligencecommunitynews.com/parry-labs-raises-80m-from-capitol-meridian-partners-others/",
+          "title": "Parry Labs raises $80M from Capitol Meridian Partners, others",
+          "pub_date": "2024-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.executivebiz.com/articles/parry-labs-secures-army-awards-for-aviation-mission-computing-environment-development",
+          "title": "Parry Labs Secures Army Awards for Aviation Mission Computing Environment Development",
+          "pub_date": "unknown",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/avionics/computers/mosa-requirements-for-army-aviation-procurements-to-be-developed-by-parry-labs",
+          "title": "MOSA requirements for Army aviation procurements to be developed by Parry Labs",
+          "pub_date": "unknown",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/unmanned/isr/mosa-aligned-systems-for-army-offered-by-parry-labs-and-aerovironment",
+          "title": "MOSA aligned systems for Army offered by Parry Labs and AeroVironment",
+          "pub_date": "2025-2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://finance.yahoo.com/news/parry-labs-advances-modular-mission-144300355.html",
+          "title": "Parry Labs Advances Modular Mission Systems in AV's P550 for Army LRR Program",
+          "pub_date": "2025-2026",
+          "type": "company"
+        },
+        {
+          "url": "https://tracxn.com/d/companies/parry-labs/__nl7hpCR1QZTfjaGV6XYIsE2Xe7QDPqGf0bSPBlJb5U4",
+          "title": "Parry Labs - Tracxn profile ($171M across 3 rounds)",
+          "pub_date": "2026",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.crunchbase.com/organization/parry-labs",
+          "title": "Parry Labs - Crunchbase (~$116M)",
+          "pub_date": "2026",
+          "type": "financial"
+        }
+      ]
+    },
+    {
+      "name": "Kratos Defense & Security Solutions, Inc.",
+      "aka": "Kratos; Kratos Space, Training & Cyber; Kratos C5ISR / Modular Systems; Kratos Unmanned Systems",
+      "founding_year": 1994,
+      "headquarters": "San Diego, California, USA",
+      "public_private": "public",
+      "employee_count_approx": "~4,000-4,500 (RECALL, MEDIUM)",
+      "founders": [
+        "Founded 1994 as Wireless Facilities Inc.; rebranded Kratos in 2007 under CEO Eric DeMarco (RECALL, HIGH)"
+      ],
+      "founder_backgrounds": "Telecom-services origin; transformed into a defense contractor through acquisitions (Herley, Integral Systems, Composite Engineering, etc.) under DeMarco. RECALL, MEDIUM.",
+      "total_disclosed_funding_usd": "Not applicable - public (NASDAQ: KTOS); 2024 revenue ~$1.1B with 2025 guidance ~$1.3B (RECALL, LOW; verify against 10-K).",
+      "latest_valuation": "Public market capitalization; not captured this session.",
+      "major_investors": [
+        "Public shareholders (NASDAQ: KTOS)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "OpenSpace software-defined satellite ground system",
+          "description": "Virtualized, cloud-capable ground platform (TT&C, signal processing, dynamic Ground Resource Manager) selected by USSF SSC under an OTA with total potential value $446.8M contingent on all options (Apr 2026); integrates with FORGE to interoperate across multiple space-vehicle providers. FACT (Kratos PR; StockTitan).",
+          "input_process_output_user": "Input: RF/IF from antennas and mission data; Process: software-defined modems, orchestration and resource management; Output: commanded satellites and delivered mission data; User: USSF satellite operators and mission ground segments."
+        },
+        {
+          "name": "Command and Control System-Consolidated (CCS-C) and Evolved Strategic SATCOM (ESS) ground support",
+          "description": "Long-running USSF MILSATCOM C2 system (WGS, DSCS, Milstar/AEHF) sustained by Kratos; $25M task order (Jun 2025) under CCS-C C-SAR to support ESS ground for the NC3 mission. FACT (GlobeNewswire).",
+          "input_process_output_user": "Input: satellite telemetry; Process: command and control; Output: constellation operations; User: USSF Space Operations Command."
+        },
+        {
+          "name": "Space domain awareness and RF interference sensing (Global Sensor Network; modular ground-based SDA system)",
+          "description": "~$100M sole-source prime award (Jul 2026) to produce a ground-based modular SDA system; complements Kratos' worldwide RF monitoring/geolocation network. FACT (Kratos PR).",
+          "input_process_output_user": "Input: RF observations of satellites and interference; Process: detection, characterization, geolocation; Output: SDA tracks and interference reports; User: USSF/Space Command and commercial operators."
+        },
+        {
+          "name": "Mobile SATCOM gateways and tactical SATCOM ground terminals",
+          "description": "Transportable gateways delivered to a defense customer in Asia under a >$20M contract (Sep 2026). FACT (Kratos PR).",
+          "input_process_output_user": "Input: satellite links; Process: gateway/teleport functions in the field; Output: resilient connection between tactical networks and the SATCOM backbone; User: allied defense networks."
+        },
+        {
+          "name": "Kratos C5ISR / Modular Systems rugged electronics and air-defense system support",
+          "description": "Rugged consoles, integrated electronics and ~$36M air defense system single-award contract (details not captured). RECALL/FACT mix, MEDIUM.",
+          "input_process_output_user": "Input: sensor/radar data; Process: rugged processing/display hardware; Output: operator consoles and system integration; User: air and missile defense units."
+        },
+        {
+          "name": "XQ-58A Valkyrie mission system integration (USMC, $348M)",
+          "description": "Collaborative combat aircraft with autonomy C2 relevance; not a core C4ISR product but relevant to S13. FACT via Nasdaq syndication; date not captured.",
+          "input_process_output_user": "Input: mission commands; Process: autonomous aircraft mission system; Output: uncrewed ISR/strike effects; User: Marine Corps."
+        }
+      ],
+      "exact_problem_solved": "Replaces hardware-bound, program-specific satellite ground and C2 systems with software-defined, multi-mission ground infrastructure, and supplies space situational awareness and resilient SATCOM ground hardware for military users.",
+      "primary_users": [
+        "USSF satellite and MILSATCOM operators",
+        "US Space Command SDA analysts",
+        "Allied defense SATCOM network operators (Asia customer)",
+        "Air and missile defense operators",
+        "USMC (Valkyrie)"
+      ],
+      "primary_buyers": [
+        "USSF Space Systems Command",
+        "Space Development Agency (ground segment via partners; RECALL)",
+        "Missile Defense Agency and Army air defense offices",
+        "Foreign defense customers (Asia)",
+        "Commercial satellite operators (OpenSpace, RF monitoring)"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "COLLECT",
+        "PROCESS",
+        "MONITOR",
+        "TASK"
+      ],
+      "mission_layer": [
+        "space",
+        "joint",
+        "air defense",
+        "NC3",
+        "autonomy"
+      ],
+      "segment_ids": [
+        "S05",
+        "S07",
+        "S12",
+        "S13",
+        "S09"
+      ],
+      "hw_sw_mix": "both - OpenSpace is software; SATCOM gateways, RF sensors, rugged electronics and aircraft are hardware",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "OpenSpace software-defined ground system OTA (total potential value $446.8M contingent on all options; integrates with FORGE)",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "$446.8M total potential value including all options",
+          "obligated": "Not disclosed",
+          "awarded_value": "Base value not disclosed in snippets",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Options-based",
+          "date": "2026-04",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype OTA with production-relevant options (stage INFERENCE)",
+          "source_url": "https://ir.kratosdefense.com/node/32501/pdf",
+          "pub_date": "2026-04",
+          "confidence": "HIGH (award) / MEDIUM (stage)"
+        },
+        {
+          "title": "Ground-based modular Space Domain Awareness system - sole-source prime production award (~$100M)",
+          "customer": "U.S. Space Force (customer inferred; program name not captured)",
+          "contracting_org": "Not captured",
+          "vehicle_type": "FAR",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": "~$100M",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "2026-07-13",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production",
+          "source_url": "https://www.globenewswire.com/news-release/2026/07/13/3326150/224/en/Kratos-Receives-Approximate-100-Million-Sole-Source-Prime-Space-Domain-Awareness-System-Program-Award.html",
+          "pub_date": "2026-07-13",
+          "confidence": "HIGH (award) / MEDIUM (customer)"
+        },
+        {
+          "title": "Evolved Strategic SATCOM (ESS) ground task order under CCS-C Sustainment and Resiliency (C-SAR) - $25M",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command",
+          "vehicle_type": "IDIQ",
+          "ceiling": "C-SAR ceiling not captured",
+          "obligated": "Not disclosed",
+          "awarded_value": "$25M task order",
+          "funded_amount": "Not disclosed",
+          "task_orders": "ESS task order",
+          "date": "2025-06-11",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "sustainment/development for NC3 ground",
+          "source_url": "https://www.globenewswire.com/news-release/2025/06/11/3097482/224/en/Kratos-Awarded-25-Million-Task-Order-for-U-S-Space-Force-s-Evolved-Strategic-SATCOM.html",
+          "pub_date": "2025-06-11",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Mobile SATCOM gateways for a defense customer in Asia (>$20M)",
+          "customer": "Undisclosed Asian defense ministry",
+          "contracting_org": "Foreign",
+          "vehicle_type": "foreign",
+          "ceiling": "Not stated",
+          "obligated": "Not disclosed",
+          "awarded_value": ">$20M",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "2026-09",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production delivery",
+          "source_url": "https://www.kratosdefense.com/newsroom/kratos-wins-20-million-contract-to-deliver-mobile-satcom-gateways-for-resilient-defense-network",
+          "pub_date": "2026-09",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Air defense system single-award contract (~$36M)",
+          "customer": "Not captured",
+          "contracting_org": "Not captured",
+          "vehicle_type": "FAR",
+          "ceiling": "~$36M",
+          "obligated": "Not disclosed",
+          "awarded_value": "~$36M",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not captured",
+          "date": "2025-2026 (not captured)",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "Not captured",
+          "source_url": "https://www.kratosdefense.com/newsroom/kratos-receives-approximate-36-million-air-defense-system-single-award-contract",
+          "pub_date": "unknown",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "XQ-58A Valkyrie mission system integration for U.S. Marine Corps ($348M)",
+          "customer": "U.S. Marine Corps / Navy",
+          "contracting_org": "Not captured",
+          "vehicle_type": "FAR",
+          "ceiling": "$348M (likely ceiling/maximum; structure not captured)",
+          "obligated": "Not disclosed",
+          "awarded_value": "$348M headline",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not captured",
+          "date": "2025 (not captured precisely)",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "mission system integration (pre-production)",
+          "source_url": "https://www.nasdaq.com/articles/kratos-gets-348-mln-contract-valkyrie-mission-system-integration-us-marine-corps",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "CCS-C operating USSF MILSATCOM constellations for two decades; Kratos RF monitoring/Global Sensor Network in continuous commercial and government use",
+          "evidence": "RECALL, HIGH for CCS-C incumbency; ESS task order (2025) confirms continuing role.",
+          "source_url": "https://www.globenewswire.com/news-release/2025/06/11/3097482/224/en/Kratos-Awarded-25-Million-Task-Order-for-U-S-Space-Force-s-Evolved-Strategic-SATCOM.html"
+        },
+        {
+          "what": "OpenSpace in operational use for SDA/other ground programs",
+          "evidence": "Public evidence insufficient for operational status of the 2026 SSC OpenSpace OTA; earlier commercial and SDA ground deployments RECALL, LOW.",
+          "source_url": "https://ir.kratosdefense.com/node/32501/pdf"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient for named 2025-2026 exercises in the C4ISR ground/SATCOM lines",
+          "year": "",
+          "note": "Not captured this session.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "USSF FORGE (Next-Gen OPIR ground framework) - OpenSpace integration",
+        "General Dynamics Mission Systems (SDA ground operations teaming; RECALL, MEDIUM)",
+        "Commercial satellite operators using OpenSpace/quantum products",
+        "Microsoft Azure (cloud-hosted ground demonstrations; RECALL, LOW)"
+      ],
+      "apis_sdks_open_interfaces": "OpenSpace is marketed as standards-based (virtualized network functions, open interfaces, FORGE interoperability); no public SDK captured. Tier 2 claims.",
+      "security_classification_requirements": "NC3 (ESS) and SDA programs require high-level clearances and cleared facilities; ITAR-controlled ground hardware.",
+      "allied_international_activity": "Mobile SATCOM gateway sale to an Asian defense customer (2026); global RF monitoring sites; Valkyrie international interest. MEDIUM.",
+      "technical_differentiator": "Only mid-tier vendor with a fielded software-defined ground platform tied into USSF's FORGE plus incumbency on MILSATCOM C2 and a global RF sensing network.",
+      "suspected_moat": "Incumbency (CCS-C since early 2000s), FORGE/OpenSpace interoperability position, cleared workforce and installed RF sensor sites.",
+      "major_competitors": [
+        "Raytheon and Lockheed Martin (ground systems)",
+        "Parsons and BAE Systems (space ground, SDA)",
+        "Slingshot Aerospace, LeoLabs, ExoAnalytic (SDA sensing)",
+        "Amergint/Peraton (ground signal processing)",
+        "Comtech and L3Harris (SATCOM gateways)"
+      ],
+      "obvious_weaknesses": "Thin margins and capital needs across many product lines; OpenSpace OTA value is option-contingent; some awards lack program identification; hardware-heavy segments face supply-chain risk.",
+      "evidence_user_adoption": "Strong in space ground/C2 (CCS-C incumbency, ESS, SDA production award). HIGH.",
+      "evidence_repeat_procurement": "Strong: repeated USSF awards 2025-2026 across CCS-C task orders, OpenSpace and SDA; foreign gateway follow-on. HIGH.",
+      "evidence_prototype_to_production": "SDA system moved to a sole-source production award (Jul 2026) - HIGH; OpenSpace OTA to production still option-dependent - MEDIUM.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): OpenSpace roles historically emphasize C++/Java, Kubernetes, virtualized modems/SDR, and cloud (Azure/AWS GovCloud); RECALL, LOW.",
+      "confidence_notes": "OpenSpace $446.8M OTA (Apr 2026), SDA ~$100M (Jul 2026), ESS $25M (Jun 2025), Asia gateways >$20M (Sep 2026): HIGH from company releases (Tier 2) with financial-news syndication; obligated amounts unknown. Air-defense $36M and Valkyrie $348M dates/customers: MEDIUM. Corporate financials and headcount: RECALL, LOW-MEDIUM.",
+      "sources": [
+        {
+          "url": "https://ir.kratosdefense.com/node/32501/pdf",
+          "title": "Kratos Receives $446.8 Million Space Systems Command Contract (OpenSpace OTA)",
+          "pub_date": "2026-04",
+          "type": "company"
+        },
+        {
+          "url": "https://www.stocktitan.net/news/KTOS/kratos-receives-446-8-million-space-systems-command-contract-for-onb9rfe5qodp.html",
+          "title": "Kratos wins $446.8M Space Force ground contract",
+          "pub_date": "2026-04",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/07/13/3326150/224/en/Kratos-Receives-Approximate-100-Million-Sole-Source-Prime-Space-Domain-Awareness-System-Program-Award.html",
+          "title": "Kratos Receives Approximate $100 Million Sole Source Prime Space Domain Awareness System Program Award",
+          "pub_date": "2026-07-13",
+          "type": "company"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2025/06/11/3097482/224/en/Kratos-Awarded-25-Million-Task-Order-for-U-S-Space-Force-s-Evolved-Strategic-SATCOM.html",
+          "title": "Kratos Awarded $25 Million Task Order for U.S. Space Force's Evolved Strategic SATCOM",
+          "pub_date": "2025-06-11",
+          "type": "company"
+        },
+        {
+          "url": "https://www.kratosdefense.com/newsroom/kratos-wins-20-million-contract-to-deliver-mobile-satcom-gateways-for-resilient-defense-network",
+          "title": "Kratos Wins $20 Million Contract to Deliver Mobile SATCOM Gateways for Resilient Defense Network",
+          "pub_date": "2026-09",
+          "type": "company"
+        },
+        {
+          "url": "https://www.kratosdefense.com/newsroom/kratos-receives-approximate-36-million-air-defense-system-single-award-contract",
+          "title": "Kratos Receives Approximate $36 Million Air Defense System Single Award Contract",
+          "pub_date": "unknown",
+          "type": "company"
+        },
+        {
+          "url": "https://www.nasdaq.com/articles/kratos-gets-348-mln-contract-valkyrie-mission-system-integration-us-marine-corps",
+          "title": "Kratos gets $348 mln contract for Valkyrie mission system integration, US Marine Corps",
+          "pub_date": "2025",
+          "type": "financial"
+        }
+      ]
+    },
+    {
+      "name": "Cubic Mission & Performance Solutions (CMPS) / Cubic Defense",
+      "aka": "Cubic Defense; Cubic Mission and Performance Solutions; business units: Cubic DTECH, GATR (expeditionary SATCOM), Vocality, Pixia, TeraLogics/MotionDSP, Nuvotronics, Cubic Defense training (P5/ACMI)",
+      "founding_year": 1951,
+      "headquarters": "San Diego, California, USA (Cubic Corporation); DTECH/secure communications in Sterling, Virginia; GATR in Huntsville, Alabama (RECALL, MEDIUM)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "Cubic Corporation ~6,000 pre-privatization; CMPS/Cubic Defense roughly 2,000-3,000 (RECALL, LOW)",
+      "founders": [
+        "Walter J. Zable (founded Cubic Corporation in 1951)"
+      ],
+      "founder_backgrounds": "Engineer-founder; Cubic grew through defense electronics and transportation fare systems. Taken private in May 2021 by Veritas Capital and Evergreen Coast Capital (Elliott) for about $2.8B equity (RECALL, HIGH). Public search results from 2025-2026 use the 'Cubic Defense' name for the defense business; the exact rebrand date and any 2024-2026 ownership change were not verifiable this session (Wikipedia fetch blocked).",
+      "total_disclosed_funding_usd": "Not applicable - private-equity owned; segment revenue not disclosed (Cubic pre-privatization total revenue ~ $1.4B FY2020, RECALL).",
+      "latest_valuation": "Not disclosed; PitchBook profile exists (not accessible). Any reported sale process for Cubic Defense could not be verified - Public evidence insufficient.",
+      "major_investors": [
+        "Veritas Capital",
+        "Evergreen Coast Capital (Elliott Management affiliate)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "DTECH M3-SE / DTECH Fusion modular tactical network and compute kits",
+          "description": "Small, rugged, modular server/router/switch/crypto modules ('mini mission modules') and the newer DTECH Fusion line (Fusion Trust with HyperSphere quantum-resistant cybersecurity launched at SOF Week, May 2025). DTECH acquired Dec 2014 for up to $114.5M; established supplier to SOCOM and USMC. FACT (Military Aerospace 2014; Military Embedded Systems 2025).",
+          "input_process_output_user": "Input: WAN links (SATCOM, radio, LTE) and user devices; Process: routing, multi-enclave encryption, edge compute; Output: deployable tactical network with hosted apps; User: SOF teams, Marine and Army units."
+        },
+        {
+          "name": "GATR inflatable SATCOM antennas (1.2m/2.4m/4m) and expeditionary SATCOM",
+          "description": "Inflatable, ultra-portable parabolic antennas for high-throughput at-the-halt SATCOM; acquired Dec 2015; fielded with USMC, Army, SOCOM and USAF (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: user network traffic; Process: satellite uplink/downlink; Output: high-bandwidth BLOS connectivity from a backpack-sized kit; User: expeditionary units."
+        },
+        {
+          "name": "Halo multilink, multiband, multi-orbit hybrid SATCOM antenna",
+          "description": "AFRL contract to advance Halo, a flat/hybrid antenna for concurrent GEO/LEO links (date and value not captured). FACT of award per Military Embedded Systems; product maturity unknown.",
+          "input_process_output_user": "Input: user data; Process: simultaneous multi-orbit links with automatic path selection; Output: resilient SATCOM on the move; User: Air Force and joint mobile users."
+        },
+        {
+          "name": "Vocality voice/data gateways (RoIP) and radio interoperability",
+          "description": "Vocality (acquired Dec 2016) provides radio-over-IP and voice/data gateways linking disparate radios and IP networks; used in coalition/tactical interoperability kits (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: analog/digital radio audio and serial data; Process: IP gateway and cross-connect; Output: interoperable voice across radio types and networks; User: tactical and coalition operators."
+        },
+        {
+          "name": "Pixia HiPER LOOK/STARE and TeraLogics/MotionDSP ISR data and video PED software",
+          "description": "Pixia (acquired 2020, ~$200M) provides high-performance geospatial imagery access/dissemination used by NGA/USAF DCGS-class systems; TeraLogics (FMV management) and MotionDSP/Ikena (video enhancement) support ISR PED. RECALL, MEDIUM.",
+          "input_process_output_user": "Input: large imagery and FMV archives; Process: fast tiling, streaming, enhancement and search; Output: analyst-ready imagery/video services; User: ISR analysts, PED cells."
+        },
+        {
+          "name": "P5 Combat Training System / F-35 P5 Internal Subsystem (air combat training instrumentation)",
+          "description": "Follow-on award from Lockheed Martin (May 2026) for 140 P5 IS units for F-35 Lot 21, building on a Nov 2025 award; Leonardo DRS principal subcontractor. Training-focused but demonstrates repeat procurement. FACT (Defense Post; Newswire).",
+          "input_process_output_user": "Input: aircraft position/weapons data; Process: encrypted air-to-air datalink and recording; Output: live/virtual training debrief data; User: F-35 training squadrons."
+        }
+      ],
+      "exact_problem_solved": "Gives expeditionary and SOF units compact, transportable network, SATCOM and compute kits plus radio-to-IP interoperability, and gives ISR enterprises fast access to very large imagery/video holdings.",
+      "primary_users": [
+        "USSOCOM operators",
+        "US Marine Corps expeditionary units",
+        "US Army tactical network users",
+        "USAF/AFRL mobile users (Halo)",
+        "ISR analysts at NGA/DCGS nodes (Pixia)",
+        "F-35 training units"
+      ],
+      "primary_buyers": [
+        "USSOCOM SOF AT&L",
+        "Marine Corps Systems Command",
+        "Army PEO C3T (tactical network components; RECALL LOW)",
+        "AFRL",
+        "NGA and Air Force ISR program offices (Pixia)",
+        "Lockheed Martin (F-35 training subcontract)"
+      ],
+      "technical_layer": [
+        "TRANSPORT",
+        "PROCESS",
+        "STORE",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "SOF",
+        "maneuver",
+        "joint",
+        "ISR",
+        "air (training)"
+      ],
+      "segment_ids": [
+        "S05",
+        "S06",
+        "S04",
+        "S08"
+      ],
+      "hw_sw_mix": "both - hardware-led (DTECH kits, GATR antennas, Halo, Vocality gateways) with ISR software (Pixia, TeraLogics) and training instrumentation",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "F-35 P5 Internal Subsystem follow-on - 140 units for Lot 21 (subcontract to Lockheed Martin; builds on Nov 2025 award)",
+          "customer": "Lockheed Martin / F-35 Joint Program Office",
+          "contracting_org": "Lockheed Martin Aeronautics",
+          "vehicle_type": "subcontract",
+          "ceiling": "Not disclosed",
+          "obligated": "Not applicable",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "Not applicable",
+          "date": "2026-05",
+          "period_of_performance": "Lot 21 production",
+          "prime_or_sub": "sub",
+          "prototype_or_production": "production",
+          "source_url": "https://thedefensepost.com/2026/05/08/cubic-defense-f35-training-subsystem/",
+          "pub_date": "2026-05-08",
+          "confidence": "HIGH (award) / LOW (value)"
+        },
+        {
+          "title": "AFRL contract to advance Halo multilink/multiband/multi-orbit hybrid SATCOM antenna",
+          "customer": "Air Force Research Laboratory",
+          "contracting_org": "AFRL",
+          "vehicle_type": "FAR",
+          "ceiling": "Not captured",
+          "obligated": "Not captured",
+          "awarded_value": "Not captured",
+          "funded_amount": "Not captured",
+          "task_orders": "Not applicable",
+          "date": "2024-2025 (not captured)",
+          "period_of_performance": "Not captured",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype/R&D",
+          "source_url": "https://militaryembedded.com/company/cubic",
+          "pub_date": "unknown",
+          "confidence": "MEDIUM (award) / LOW (details)"
+        },
+        {
+          "title": "Historical: DTECH LABS acquisition (up to $114.5M) - established SOCOM/USMC supplier",
+          "customer": "Not applicable (M&A context)",
+          "contracting_org": "Not applicable",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Acquisition consideration up to $114.5M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2014-12",
+          "period_of_performance": "",
+          "prime_or_sub": "",
+          "prototype_or_production": "",
+          "source_url": "https://www.militaryaerospace.com/commercial-aerospace/article/14228047/cubic-acquires-dtech-labs-inc-expanding-secure-communications-and-networking-portfolio",
+          "pub_date": "2014-12",
+          "confidence": "HIGH"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "DTECH kits and GATR antennas fielded across SOCOM, USMC, Army and USAF expeditionary units",
+          "evidence": "RECALL, MEDIUM; 2025-2026 fielding documents not captured this session (defense.gov contract listings in results were not readable through the proxy).",
+          "source_url": "https://militaryembedded.com/company/cubic"
+        },
+        {
+          "what": "P5 training subsystems installed on F-35 production aircraft",
+          "evidence": "FACT - repeat production orders Nov 2025 and May 2026.",
+          "source_url": "https://www.newswire.com/news/cubic-awarded-follow-on-contract-supporting-lockheed-martin-f-35-air-combat"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "SOF Week 2025 - DTECH Fusion Trust launch",
+          "year": "2025",
+          "note": "Product launch/marketing (Tier 2), not an exercise result.",
+          "source_url": "https://militaryembedded.com/company/cubic"
+        }
+      ],
+      "integration_partners": [
+        "Leonardo DRS (P5 principal subcontractor)",
+        "Lockheed Martin (F-35)",
+        "HyperSphere (quantum-resistant security in DTECH Fusion Trust)",
+        "Satellite operators for GATR/Halo services (INFERENCE)",
+        "Radio vendors bridged by Vocality (L3Harris, Thales, Motorola; INFERENCE)"
+      ],
+      "apis_sdks_open_interfaces": "Pixia exposes OGC-standard web services (WMS/WMTS-class) for imagery access (RECALL, MEDIUM); DTECH/Vocality use standard IP/RoIP interfaces; no public SDK captured for tactical kits.",
+      "security_classification_requirements": "SOCOM/USMC secure networking kits carry Type 1 crypto integration and require cleared personnel; ITAR-controlled SATCOM hardware; not a legal judgment.",
+      "allied_international_activity": "GATR and DTECH sold to allied SOF and militaries; Cubic training systems are widely exported (RECALL, MEDIUM). Specific 2025-2026 foreign awards not captured.",
+      "technical_differentiator": "Breadth of expeditionary kit (inflatable antennas, modular servers, radio gateways) plus a hybrid multi-orbit antenna program and enterprise ISR data software under one roof.",
+      "suspected_moat": "Installed base and program incumbency in SOCOM/USMC kits, proprietary inflatable antenna IP, and NSA/ITAR-certified product lines; PE ownership may constrain investment.",
+      "major_competitors": [
+        "Klas/Anduril Voyager (modular tactical compute)",
+        "PacStar (Curtiss-Wright)",
+        "Kymeta and Hughes (multi-orbit terminals)",
+        "L3Harris and Comtech (expeditionary SATCOM)",
+        "Anduril and Palantir (edge software stacks)",
+        "Esri/Maxar (imagery services vs Pixia)"
+      ],
+      "obvious_weaknesses": "Private-equity ownership with limited disclosure; uncertain corporate status (rebrand/possible sale not verifiable); modular-kit market now facing Anduril-integrated Klas; several products (Halo) are still R&D-stage.",
+      "evidence_user_adoption": "Moderate-to-strong for legacy DTECH/GATR lines (RECALL); F-35 training repeat orders confirmed 2025-2026. MEDIUM.",
+      "evidence_repeat_procurement": "F-35 P5 IS follow-on (Nov 2025 then May 2026) - HIGH; tactical kit reorders not captured this session.",
+      "evidence_prototype_to_production": "Halo remains AFRL-funded R&D (no production evidence); DTECH/GATR are mature production lines. MEDIUM.",
+      "whitespace_cells": [
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "TRANSPORT",
+          "echelon": "battalion_brigade"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (no careers search this session): embedded networking (Cisco/Linux), RF/antenna engineering, and for Pixia large-scale imagery services (Java/C++, cloud); RECALL, LOW.",
+      "confidence_notes": "Corporate structure after 2021: HIGH for Veritas/Evergreen privatization, LOW for any 2024-2026 rebrand or sale (fetch blocked). Product portfolio and historical acquisitions: HIGH/MEDIUM from recall plus 2014 Military Aerospace article. Halo AFRL award and DTECH Fusion Trust launch: MEDIUM (Military Embedded Systems company page summary). F-35 P5 awards: HIGH.",
+      "sources": [
+        {
+          "url": "https://thedefensepost.com/2026/05/08/cubic-defense-f35-training-subsystem/",
+          "title": "Cubic Defense to Supply 140 F-35 Air Combat Training Subsystems",
+          "pub_date": "2026-05-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.newswire.com/news/cubic-awarded-follow-on-contract-supporting-lockheed-martin-f-35-air-combat",
+          "title": "Cubic Awarded Follow-On Contract Supporting Lockheed Martin F-35 Air Combat Training Subsystems",
+          "pub_date": "2026-05",
+          "type": "company"
+        },
+        {
+          "url": "https://militaryembedded.com/company/cubic",
+          "title": "Cubic - Military Embedded Systems company page (Halo AFRL award; DTECH Fusion Trust at SOF Week 2025)",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.militaryaerospace.com/commercial-aerospace/article/14228047/cubic-acquires-dtech-labs-inc-expanding-secure-communications-and-networking-portfolio",
+          "title": "Cubic acquires DTECH LABS Inc., expanding secure communications and networking portfolio",
+          "pub_date": "2014-12",
+          "type": "independent"
+        },
+        {
+          "url": "https://pitchbook.com/profiles/company/463164-04",
+          "title": "Cubic Mission and Performance Solutions 2026 Company Profile (PitchBook)",
+          "pub_date": "2026",
+          "type": "financial"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Cubic_Corporation",
+          "title": "Cubic Corporation (Wikipedia; fetch blocked)",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    }
+  ],
+  "search_log": [
+    {
+      "query": "Viasat Government Systems contract award 2025 OR 2026 Link 16 OR SATCOM OR tactical data Army OR Space Force OR Air Force",
+      "useful": true
+    },
+    {
+      "query": "SpaceX Starshield contract 2025 OR 2026 Space Force OR NRO OR Army OR MILNET OR proliferated",
+      "useful": true
+    },
+    {
+      "query": "Kymeta contract 2025 OR 2026 Army OR Marine OR Space Force Osprey OR Goshawk OR Peregrine OR multi-orbit",
+      "useful": true
+    },
+    {
+      "query": "Klas Voyager contract 2025 OR 2026 Army OR Marine Corps OR tactical edge OR TDC OR Blackhawk",
+      "useful": true
+    },
+    {
+      "query": "Parry Labs contract OR award OR funding 2025 OR 2026 Army OR MOSA OR mission computing OR Series",
+      "useful": true
+    },
+    {
+      "query": "Kratos Defense 2025 OR 2026 contract OpenSpace OR ground system OR space domain awareness OR C5ISR OR SATCOM award",
+      "useful": true
+    },
+    {
+      "query": "Cubic Mission & Performance Solutions OR Cubic Defense 2025 OR 2026 contract OR acquisition DTECH OR Halo OR GATR OR Vocality OR edge",
+      "useful": true
+    },
+    {
+      "query": "Viasat Link 16 OR BATS-D OR Small Tactical Terminal OR tactical networking 2025 OR 2026 contract OR order OR NGC2 OR Army",
+      "useful": true
+    },
+    {
+      "query": "Starshield Army OR Golden Dome OR NGC2 OR Air Force 2026 contract OR terminals OR Starlink military deployment (breakingdefense/defensescoop/c4isrnet)",
+      "useful": true
+    },
+    {
+      "query": "Parry Labs raises OR Series B OR valuation OR investors OR product names mission computer",
+      "useful": true
+    },
+    {
+      "query": "Cubic Defense OR Cubic DTECH 2025 OR 2026 SOCOM OR Army OR Marine Corps contract OR sale OR acquired OR M3X OR GATR OR Halo",
+      "useful": false
+    },
+    {
+      "query": "Klas Voyager Anduril 2025 OR 2026 NGC2 OR Integrated Tactical Network OR Lattice OR TITAN OR Marine Corps OR Space Force edge compute deployment",
+      "useful": true
+    },
+    {
+      "query": "WebFetch https://en.wikipedia.org/wiki/Cubic_Corporation",
+      "useful": false
+    },
+    {
+      "query": "WebFetch https://www.viasat.com/news/latest-news/government/2025/viasat-ausa-2025/",
+      "useful": false
+    }
+  ],
+  "notes": "Budget used: 12 WebSearch, 2 WebFetch (both EGRESS_BLOCKED: en.wikipedia.org and www.viasat.com). Data gaps: (1) Viasat - no 2025-2026 tactical-networking/NGC2 award found; note the Link 16 business was divested to L3Harris in Jan 2023 (RECALL), so older 'Viasat Link 16' items must not be attributed to Viasat today. (2) Starshield - contract vehicle types for SSC awards are not confirmed; MILNET/SDN Backbone obligations unknown; valuations are RECALL. (3) Kymeta - NGC2 contracting path (sub to which prime) and dollar values undisclosed; $20M DoD order date not captured. (4) Klas - TACLAN award value/vehicle not captured; a 'Voyager EWAAC' PDF in results is almost certainly Voyager Technologies, not Klas (flagged). (5) Parry Labs - $49M IDIQ customer and product brand names not verified; total funding conflicts ($116M vs $171M). (6) Kratos - obligated values unknown; OpenSpace OTA is option-contingent; air-defense $36M and Valkyrie $348M lack dates/customers. (7) Cubic - corporate status (rebrand to 'Cubic Defense', any 2024-2026 sale) unverifiable; defense.gov contract listings surfaced but were unreadable through the proxy; Halo AFRL award details missing. Contract-data rules applied: ceilings and total-potential values are labeled as such and never equated with revenue; pilots/OTAs labeled prototype; SB-AMTI and Golden Dome stages marked uncertain. Founder-relevance: every company in this batch operates under ITAR/cleared-program constraints; Klas (Irish parent with US subsidiary, later acquired by Anduril) is the most instructive precedent for a foreign-founded hardware entrant, but FOCI/ITAR implications need specialist legal review."
+}

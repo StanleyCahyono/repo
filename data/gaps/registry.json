@@ -1,0 +1,226 @@
+{
+"generated": "2026-09-24",
+"method_note": "Consolidated from 71 candidate gaps proposed by segment agents S01-S14 (S00 is an architecture overview with no candidates). Merges are by shared workflow/mechanism, not by segment. evidence_forms counts DISTINCT evidence forms with at least one FACT-labelled pointer among: government document; exercise/operator workaround; RFI/Sources Sought/SBIR topic; budget line; product failure vs requirement; multiple partial-solution startups without scale; repeated procurement; documented manual workaround. Company claims and RECALL items are cited but not counted. IDIQ/OTA ceilings cited are ceilings, not revenue; prototype awards are not deployments. No fresh web searches were run this session (all pointers come from the prior evidence base); items not re-verified are labelled. Entries are ordered roughly by initial attractiveness; G20-G28 are deliberately weak or J-rated so the red team can kill them explicitly.",
+"gaps": [
+{
+"id": "G01",
+"title": "Machine-readable security labeling and releasability at the point of production (born-releasable C2/ISR objects: tracks, reports, video, AI detections)",
+"problem": "Tracks, reports, video and AI-derived products are created on U.S. Secret systems without interoperable, machine-enforceable classification/releasability tags (ACP-240/ZTDF/IC-TDF), so ABAC and cross-domain filters cannot decide automatically and staff regenerate, re-key or hand-carry products to partner enclaves after weeks of phone-and-email negotiation.",
+"categories": ["F", "I", "A", "B", "C"],
+"segment_ids": ["S02", "S04", "S08", "S10"],
+"merged_from": ["S10-G2", "S08-G1", "S02-G3", "S04-G5"],
+"user": "Intelligence and fires staff producing REL products (35F/35G analysts, targeting officers), foreign disclosure officers, multinational intelligence cell analysts, CDS filter engineers, NGC2/data-layer integrators",
+"initial_attractiveness": "high",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://www.gao.gov/products/gao-25-106454", "note": "FACT/HIGH (2025-04-08): GAO finds overly restrictive, system-level classification a 'significant hindrance' to sharing C2 data with allies and no DoD entity owns the fix (government document)."},
+{"source_url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/", "note": "FACT/HIGH (MIPB 2025, WFX 24-03): intelligence produced at collateral Secret could not be shared and had to be regenerated on the MPE enclave with REL NATO markings using a different tool (documented manual workaround / exercise)."},
+{"source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2025-09-18-zero-trust-18sep25-jgottlieb-interoperable-data-tagging.json", "note": "FACT/MEDIUM (DoD CIO ZT PfMO webinar, 2025-09-18): tagging coordination today is 'phone calls, IERs, weeks of negotiation' with incompatible local definitions; ZTDF/ABAC named as the target (government document; mirrored transcript)."},
+{"source_url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture", "note": "FACT/HIGH (2026-05): first eight-nation COP at Balikatan 2026 took 'more than eight years' of integration and still depends on JICOs and foreign-disclosure officers (exercise)."},
+{"source_url": "https://comptroller.defense.gov/Budget-Materials/", "note": "FACT/MEDIUM (FY27 Joint Staff J6 justification): ACP-240, ICAM and Zero Trust listed as coalition 'testing standards' for Bold Quest-type events (budget line; exact PE not extracted)."},
+{"source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view", "note": "FACT/HIGH (2025, primary page blocked in-session): DEVCOM C5ISR RFI for Zero Trust Data Pillar protection of tactical data-in-use in DDIL, which presupposes machine-readable labels (RFI)."},
+{"source_url": "https://www.defenseone.com/defense-systems/2024/11/indopacom-replacing-pile-partner-nation-networks-just-one/401129/", "note": "FACT/MEDIUM (2024-11-18): INDOPACOM partner data still moved by thumb drives/CDs and attachments blocked for lack of data-sharing policy (documented manual workaround)."}
+],
+"companies_near": ["Virtru / OpenTDF", "Fortra (Titus/Boldon James)", "Microsoft Purview", "Anchor Defense", "Everfox", "Owl Cyber Defense", "Palantir (Foundry markings, MSS NATO)", "Anduril (Lattice access controls)", "General Dynamics Mission Systems", "Northrop Grumman (CHORD)", "Immuta", "Mattermost (ABAC channels)"],
+"notes": "Chain steps: NORMALIZE, STORE, DISSEMINATE; echelons: division/corps, theater/joint, coalition. Multiple partial-solution vendors exist (Virtru, Anchor, Fortra) but none is fielded as the tactical object-level labeling service (INFERENCE, MEDIUM). Killer risks carried from segments: disclosure authorities may never accept machine-generated release decisions; marking policy is human-in-the-loop by regulation; a non-U.S.-person founder cannot legally work with classified marking guides or CUI export-controlled data - needs counsel, not a founder judgement. S04-G5 (releasability-aware dissemination of AI intelligence) merged as a sub-scope; the segment rated it J for this team. Entry vehicles: Joint Staff J6/Bold Quest, Army xTech, DoD CIO/DISA SBIR (ownership test applies), NATO DIANA."
+},
+{
+"id": "G02",
+"title": "Offline-capable zero-trust policy, key and replication enforcement for tagged data at the tactical edge (ZT Data Pillar under DDIL)",
+"problem": "Zero-trust access and TDF-style data protection stop working when the identity provider, policy decision point or key server is unreachable, and edge meshes that replicate through outages do not converge state while enforcing per-attribute classification, releasability and role rules, so units fall back to implicit trust or lose access to protected data.",
+"categories": ["A", "D", "F", "I"],
+"segment_ids": ["S02", "S10"],
+"merged_from": ["S10-G1", "S02-G2"],
+"user": "Battalion/brigade S6 and data managers, NGC2 tactical cloud (hub/spoke) node operators, expeditionary targeting cells, coalition tactical MPE operators, ZT program offices",
+"initial_attractiveness": "high",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://sam.gov/opp/784528d45bcc4bcaa163a33e6562bef2/view", "note": "FACT/HIGH (2025): DEVCOM C5ISR RFI surveys the market for ZT Data Pillar solutions that operate inside DDIL (RFI)."},
+{"source_url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf", "note": "FACT/HIGH (2022-11): DoD ZT Strategy requires target-level ZT by FY27 for all components including tactical systems (government document / dated mandate)."},
+{"source_url": "https://www.sbir.gov/topics/10735", "note": "FACT/HIGH (2024-2025): NAVWAR open SBIR topic 'Data Integrity and Control in DDIL Environments' ties ZTDF/ICDF formats to disconnected operation (repeated procurement / SBIR topic)."},
+{"source_url": "https://mwi.westpoint.edu/shattering-the-software-stovepipes-how-to-close-the-us-militarys-technology-integration-gap/", "note": "FACT/MEDIUM (2026-02): CDAO funded a ~$100M three-year Edge Data Mesh pilot and NGC2 funded two data-mesh prototypes (~$130M combined); CRDT-style replication discussed as the approach (budget)."},
+{"source_url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale", "note": "FACT/HIGH (2026): Ivy Mass demonstrated local tracking with later synchronization under degraded comms and simulated cyberattack/EMI (exercise)."},
+{"source_url": "https://federalnewsnetwork.com/ask-the-cio/2024/12/navy-looking-at-cloud-as-gfe-to-reduce-cmmc-burden/", "note": "FACT/MEDIUM (2024-12-23): Navy piloting shipboard hyper-converged infrastructure plus LEO SATCOM to extend Flank Speed ZT to the tactical edge (government program)."},
+{"source_url": "https://github.com/opentdf/spec", "note": "FACT (2026): OpenTDF/ZTDF is an open object format and key-access model that could be extended with offline key release; multiple partial solutions (Virtru, Xage, Ditto, Lattice Mesh) cover pieces (multiple partial-solution vendors)."}
+],
+"companies_near": ["Virtru / OpenTDF", "Xage Security", "Anduril (Lattice Mesh; ZT with Booz Allen)", "Ditto", "Raft", "NT Concepts (PLANK)", "Microsoft (Flank Speed edge)", "Mattermost", "Radiant Logic (Naval Identity Service)"],
+"notes": "Chain steps: STORE, PROCESS, DISSEMINATE; echelons: tactical unit, battalion/brigade, coalition. Strong, dated demand (FY27 ZT deadline, NSA ZIGs Jan 2026, NGC2 scale-up) and a narrow software problem; the RFI page could not be read directly this session (sam.gov blocked). Killer risks: government decides cached Entra/AD plus network enclaves is 'good enough'; an NGC2 integrator bundles it free; policy not technology is binding (IMN quote); non-U.S.-person founder cannot touch classified labeling data. Entry vehicles: Army SBIR/xTech, DEVCOM C5ISR CRADA/OTA, NATO DIANA (data-centric security), DoD CIO ZT PfMO pilots. Raft's claim that LS3 sync 'survived daily DDIL outages' is a vendor claim (not counted)."
+},
+{
+"id": "G03",
+"title": "DDIL geospatial data logistics: versioned delta-sync and prioritized distribution of basemaps, 3D terrain and overlays across TAK Server federations and NGC2 edge nodes",
+"problem": "Units still pre-load maps and 3D terrain by hand (USB/pre-mission loading) and lose overlay consistency across devices and servers when links drop, because no fielded service versions, prioritizes and delta-syncs geospatial data across TAK federations and NGC2 hub/spoke nodes.",
+"categories": ["D", "B", "I", "H"],
+"segment_ids": ["S07"],
+"merged_from": ["S07-G2"],
+"user": "Brigade/battalion geospatial engineers (12Y), TAK Server administrators, S6 sections, team leaders loading devices before missions; allied and DHS/CBP TAK users as unclassified first customers",
+"initial_attractiveness": "high",
+"evidence_forms": 5,
+"key_evidence_pointers": [
+{"source_url": "https://www.defenseandmunitions.com/news/immersive-wisdom-awarded-air-force-contract-digital-war-room-software/", "note": "FACT/MEDIUM (undated snippet; contract runs through ~2029): USAF sole-sourced a five-year, up-to-$25M ordering contract specifically for no/low-bandwidth collaborative operations software - ceiling, not revenue (repeated procurement)."},
+{"source_url": "https://systematic.com/us/industries/defense/news-knowledge/news/systematic-experts-support-coalition-forces-during-bold-quest-2025/", "note": "FACT/MEDIUM (2025, company-reported): Bold Quest 2025 interoperability was limited by network challenges during the deployment window (exercise)."},
+{"source_url": "https://www.businesswire.com/news/home/20260225394227/en/Vantor-Awarded-Contract-Worth-up-to-$217M-to-Power-Immersive-Global-3D-Terrain-for-U.S.-Army-Training-and-Mission-Rehearsal", "note": "FACT/MEDIUM (2026-02-25): OWT 3D terrain is integrated into ATAK and procured at scale (up to $217M ceiling), multiplying the data volume that must reach the edge (repeated procurement)."},
+{"source_url": "https://sam.gov/opp/340689e568d74d08bb0c5c8cbebd42a6/view", "note": "FACT/HIGH (2025-2026, page blocked in-session): PM Mission Command Operational Mission Command Suite asks for DDIL-robust TAK data services (RFI)."},
+{"source_url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award", "note": "FACT/HIGH (2025-07): NGC2 is explicitly built as an edge-to-cloud data mesh for intermittent links, i.e., the Army recognizes the sync problem (government document)."},
+{"source_url": "https://tak.gov/products", "note": "INFERENCE (undated): manual pre-loading and USB distribution of map packages remains standard practice in TAK units (documented manual workaround - inferred, not counted)."}
+],
+"companies_near": ["Immersive Wisdom", "Anduril (Lattice Mesh)", "Palantir (Foundry edge)", "Booz Allen / PAR Government (Sit(x), TAK services)", "Cesium / Bentley (OWT)", "Vantor", "Reveal Technology", "TAK Product Center (government)", "Ditto"],
+"notes": "Chain steps: STORE, DISSEMINATE, VISUALIZE; echelons: tactical unit, battalion/brigade. Rated high by the S07 agent (MEDIUM confidence) because it is unclassified-first, TAK-native and testable with allied/DHS users. Killer risks: TAK Product Center ships an equivalent inside TAK Server (free feature); the Army treats sync as the data-layer prime's job; TAKX migration (2026) forces plugin rework. The sixth candidate form (manual USB workaround) is inferred, so evidence_forms is held at 5. Entry vehicles: Army xTech, AFWERX SBIR (ownership test), TPC engagement via a sponsor, NATO/Australia TAK users."
+},
+{
+"id": "G04",
+"title": "Unified assured-PNT operational awareness and decision support (single pane for source health, composite confidence, jam/spoof triage, fallback recommendation) with a formation-level PNT interference picture feeding the C2/EW COP",
+"problem": "Navigation and EW operators must mentally fuse several fragmented displays of GPS/INS/alternate-source health to decide whether they are jammed, spoofed or broken and which fallback to take, with no composite confidence, no recommendation, no audit trail and no aggregation of local interference detections into a formation-level picture.",
+"categories": ["B", "C", "G", "D", "I", "F"],
+"segment_ids": ["S11"],
+"merged_from": ["S11-G1", "S11-G2"],
+"user": "Navy ETV/ETSW and navigation teams on surface combatants (initial); EW/spectrum planners and battle captains at battalion through theater; JNWC and Space Force NAVWAR cells; Army MAPS/DAPS-equipped vehicle crews later",
+"initial_attractiveness": "high",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://www.navysbir.com/n26_5/DON26BX05-NP004.htm", "note": "FACT/HIGH (2026-08-05; closed 2026-09-23): Navy SBIR 26.5 topic states operators face 'multiple fragmented physical displays' that raise cognitive workload and slow decisions, and seeks a single integrated PNT awareness/decision interface with GPNTS as transition owner (RFI/SBIR topic + documented manual workaround + budget via Phase I/II prototype OTs)."},
+{"source_url": "https://www.gao.gov/products/gao-21-320sp", "note": "FACT/HIGH (2021-05-10): GAO finds alt-PNT deprioritized, assurance determination across sources 'an active research area', and closed proprietary receivers leave few integration opportunities (government document)."},
+{"source_url": "https://www.secnav.navy.mil/doni/Directives/09000%20General%20Ship%20Design%20and%20Support/09-400%20Command%20and%20Surveillance%20Systems%20Support/9420.1C.pdf", "note": "FACT/HIGH (OPNAVINST 9420.1C, 2019-09-30): policy already requires new PNT systems to indicate degradation to the operator and pass interference data to electronic-support efforts (government document / product vs requirement)."},
+{"source_url": "https://www.dhs.gov/sites/default/files/2022-05/22_0531_st_resilient_pnt_conformance_framework_v2.0.pdf", "note": "FACT/HIGH (2022-05-31): DHS Resilient PNT Conformance Framework v2.0 defines expected respond/recover behaviors, giving a testable requirement baseline (government document)."},
+{"source_url": "https://sam.gov/opp/202906f1bb8943bdb97054bf1bc0e964/view", "note": "FACT/MEDIUM (2025, page blocked in-session): Army Mobile-Long Range Precision RFI requires systems to protect themselves against PNT attacks in DDIL (RFI - second service)."},
+{"source_url": "https://www.maritime.dot.gov/msci/2026-008-global-us-maritime-advisory-updates-resources-and-contacts", "note": "FACT/MEDIUM (2026): civil authorities run parallel interference-reporting channels (NAVCEN, NATO Shipping Centre), evidence of a manual, unfused reporting workflow (documented manual workaround)."},
+{"source_url": "https://github.com/Open-PNT/ASPN-ICD", "note": "FACT (2026-01-21): ASPN 2023 schemas and pntOS C API are now public, giving an open interface for an MVP (enabler, not demand)."}
+],
+"companies_near": ["IS4S (pntOS/ASPN engineering)", "Safran Federal Systems (VersaPNT displays, Skydel)", "Accelint / Forward Slope (Navy C2 software)", "Hexagon / Trimble (receiver dashboards)", "TRX Systems", "Infleqtion", "SandboxAQ (AQNav)", "Collins Aerospace", "HawkEye 360 (RF geolocation, RECALL)"],
+"notes": "Chain steps: COLLECT (PNT sensors), FUSE, VISUALIZE, DECIDE; echelons: individual platform (ship/vehicle) through theater. The S11 agent rated this the best-evidenced software-only entry in its segment (HIGH confidence) because a first-ever dedicated solicitation exists (Aug 2026). Multiple vendors sell dashboards but no vendor-neutral fused-confidence layer is evidenced (INFERENCE). Killer risks: SBIR ownership test (>50% U.S. citizens/permanent residents) and CUI/citizenship gates on the government ASPN message set; single-customer dependence on GPNTS; aggregated threat pictures (S11-G2 scope) drift toward classified, cleared-facility work. Formation-level interference picture sub-scope is HYPOTHESIS-level on commercial jamming-map integration (not re-verified)."
+},
+{
+"id": "G05",
+"title": "Open, vendor-neutral track deduplication, correlation and blue-force drone identification for drone-dense tactical air pictures below the fire-control tier (with cross-fabric provenance/catalog)",
+"problem": "Brigade-and-below COPs receive overlapping detections of the same small drones from c-UAS radars, RF sensors, EO/IR, BFT, friendly drone telemetry and partner feeds, and no vendor-neutral layer correlates them into single, identified (friend/unknown/hostile) tracks with confidence and auditable provenance before the operator is overloaded.",
+"categories": ["A", "B", "I", "D", "F"],
+"segment_ids": ["S02", "S07", "S13"],
+"merged_from": ["S07-G1", "S13-G3", "S02-G4"],
+"user": "ADAM/BAE cell and battle captains at company through division, C-UAS operators on FAAD C2/Lattice C-UAS, battalion air-defense and drone team leaders, JICO at higher echelons, data-layer administrators/UDRA data stewards",
+"initial_attractiveness": "medium",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://sam.gov/workspace/contract/opp/cf5c6beca1ba4964818c8ca28dd9bd86/view", "note": "FACT/MEDIUM (2026-03): 'Data Fusion Correlator' notice admits SENSEI counter-UxS sensors are limited in coverage, accuracy and clutter rejection and buys a separate correlator (RFI/notice + product failure vs requirement)."},
+{"source_url": "https://sam.gov/workspace/contract/opp/b1686e77f72441e0bcb029f6a1b8b276/view", "note": "FACT/MEDIUM (2025-2026, page blocked): C-sUAS sensor RFI specifies 4-10 Hz track updates to support effector cueing and multi-modal fusion (RFI)."},
+{"source_url": "https://www.gao.gov/products/gao-21-99", "note": "FACT/MEDIUM (2021-01-21): friendly-force tracking between ground and air remains inadequately integrated, a fratricide risk (government document)."},
+{"source_url": "https://www.navysbir.com/n23_1/N231-019.htm", "note": "INFERENCE/MEDIUM: Navy track-fusion SBIR topics recur across 14+ years (N111-016 2011, N231-019 2023, N252-089 2025) with Phase III notices still issued (repeated procurement without closure)."},
+{"source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems", "note": "FACT/MEDIUM (2023-10-26): at Project Convergence 22 a junior soldier in a moving Bradley was 'quickly overwhelmed' managing uncrewed systems on the picture (exercise / operator overload)."},
+{"source_url": "https://raw.githubusercontent.com/kc0bfv/waru-webevent-search/main/data/events/2024-06-05-data-centric-interoperability-the-armys-unified-data-reference-architecture.json", "note": "FACT/MEDIUM (2024-06-05): UDRA presenter listed missing attributes - discoverable products, quality signals, anti-tamper indicators, feedback mechanisms (government document; catalog/provenance sub-scope)."},
+{"source_url": "https://www.army.mil/article/291074/u_s_army_awards_enterprise_contract_for_it_commercial_solutions", "note": "FACT/HIGH (2026-03): JIATF-401 selected Lattice as common C-UAS tactical C2 integrating 'hundreds of Joint and Army systems' - the incumbent this layer must plug into or be absorbed by (repeated procurement; absorption risk)."}
+],
+"companies_near": ["Anduril (Lattice, JIATF-401 C-UAS C2)", "Northrop Grumman (FAAD C2, IBCS)", "Systematic", "Helsing (Altra)", "Palantir", "AeroVironment", "Hidden Level / Dedrone (sensor-side)", "uAvionix", "Auterion", "Raft (NGC2 registries)", "SAIC (JFN)", "BigBear.ai", "Accelint", "Striveworks", "Picogrid", "Rebellion Defense (Iris)"],
+"notes": "Chain steps: INGEST, FUSE, IDENTIFY; echelons: tactical unit, battalion/brigade, division. Evidence is rich (6 forms) but the March 2026 Lattice selection as JIATF-401 backbone makes absorption the dominant risk; fires-adjacent correlation needs classified validation and C-UAS data access needs clearances. Ukraine fratricide/blue-drone confusion is HYPOTHESIS (not verified). Held at medium rather than high for that reason. Entry vehicles: JIATF-401 CSO/industry days, xTech hackathon sensor-integration area, DIU Blue Object Management Challenge follow-ons, DHS S&T (unclassified path)."
+},
+{
+"id": "G06",
+"title": "Edge-to-enterprise sustainment status bridge (LOGSTAT-to-COP automation under DDIL) with plan-coupled fuel/ammunition/parts feasibility forecasting",
+"problem": "Battalion-to-division sustainment status (Class I/III/V, maintenance, medical) is hand-assembled from GCSS-Army extracts, voice reports and spreadsheets and re-entered into C2 tools, so the commander's sustainment picture lags hours to a day, collapses when disconnected, and operational plans are never automatically checked against consumption reality.",
+"categories": ["B", "C", "D", "I", "G", "A"],
+"segment_ids": ["S01", "S14"],
+"merged_from": ["S14-G1", "S14-G3", "S01-G5"],
+"user": "Battalion S4, BSB support operations (SPO), division G4 and DSB staff, division/corps G4 planners, TSC/ESC planners, NGC2 users at 4th ID/25th ID/I Corps, USMC CLE staff",
+"initial_attractiveness": "medium",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://api.army.mil/e2/c/downloads/2025/08/19/5d3af5ba/lg-da-19-aug-25.pdf", "note": "FACT/HIGH (2025-08-19): Army logistics directorate document describes the 'swivel chair' burden across multiple logistics systems (government document / documented manual workaround)."},
+{"source_url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment", "note": "FACT/HIGH (2018): Army acknowledged sustainment brigades must build their own terrain-oriented sustainment COP - persistence since 2018 (government document)."},
+{"source_url": "https://www.congress.gov/event/118th-congress/senate-event/LC74000", "note": "FACT/HIGH (2024 hearing): Project Convergence Capstone 4 tested contested logistics alongside joint C2 and fires (exercise)."},
+{"source_url": "https://www.diu.mil/latest/two-contracts-awarded-to-modernize-decision-making-for-dows-joint-logistics-enterprise", "note": "FACT/HIGH (2026-02-19): DIU JSDT awarded two prototype OTs (Air Space Intelligence, Watchtower Labs) for predictive joint logistics COAs - prototypes, not deployments (repeated procurement)."},
+{"source_url": "https://www.washingtontechnology.com/contracts/2026/05/army-walks-away-business-system-consolidation-contract/413751/", "note": "FACT/MEDIUM (2026-05-18): Army declined the EBS-C second-year option, leaving ERP-side integration unresolved (product failure vs requirement)."},
+{"source_url": "https://techcrunch.com/2025/07/21/anduril-alums-raise-24m-series-a-to-bring-military-logistics-out-of-the-excel-spreadsheet-era/", "note": "FACT/MEDIUM (2025-07-21): Rune raised $24M to bring logistics out of Excel; reported $99M Army IDIQ (June 2026) is LOW confidence and a ceiling (multiple partial-solution startups without evidenced scale)."},
+{"source_url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software", "note": "FACT (2026-09-17): Onebrief $20M-ceiling enterprise IDIQ makes plan objects programmatically available - the integration target for feasibility forecasting (enabler; ceiling not revenue)."}
+],
+"companies_near": ["Palantir (Vantage/ADP, NGC2 data layer)", "Rune Technologies (TyrOS)", "Anduril and Lockheed Martin (NGC2 integrators)", "Onebrief", "Govini", "Shift5", "Watchtower Labs", "Air Space Intelligence", "C3 AI (contested logistics app for RCCTO)", "Army CPCE/Logistics Reporting Tool (PEO C3T, government)", "LMI"],
+"notes": "Chain steps: INGEST, NORMALIZE, VISUALIZE, DECIDE; echelons: battalion/brigade, division/corps. No discrete contested-logistics C2 software budget line was found (E05-F30, HYPOTHESIS/LOW), so budget is not counted. S01-G5 rated this J with a B/I residual because the field is crowded (Rune, Shift5, Raft, Govini, C3 AI, Palantir); S14 rated it medium with 7 evidence items. Killer risks: Army routes sustainment data only through Palantir/NGC2 integrators; Rune closes the gap first; Onebrief builds feasibility natively. Entry vehicles: Army SBIR contested-logistics topic, xTech, CL CFT sponsorship, Onebrief/Govini partner integrations."
+},
+{
+"id": "G07",
+"title": "Self-service adapter, schema-mapping and conformance kit for onboarding legacy systems, vehicles and third-party sensors/payloads onto the government-baselined data layer (NGC2 common data baseline, TAK, Maven/Open DAGIR, Blue UAS marketplace)",
+"problem": "Every new sensor, vehicle, payload or program of record still needs a bespoke, vendor-built adapter and a human-run integration event (a 600-person Jailbreak sprint) to join the NGC2/TAK/Maven data layer, because interface documentation, schema mapping and conformance testing are not productized.",
+"categories": ["B", "I", "E", "G"],
+"segment_ids": ["S02", "S03"],
+"merged_from": ["S02-G1", "S03-G4"],
+"user": "Program-office and unit integration cells (PEO C3N team-lead integration engineers), small vendors joining a team lead's stack, TAK Product Center plugin developers, PM UAS/DCMA US-X marketplace managers and payload makers",
+"initial_attractiveness": "medium",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://defensescoop.com/2026/05/29/operation-jailbreak-the-armys-massive-push-to-hack-its-own-systems-and-make-them-talk-to-each-other/", "note": "FACT/HIGH (2026-05-29): the Army ran an in-person sprint with ~600 people from 50+ companies to expose APIs across 70+ capabilities - integration is still an event, not a product (documented manual workaround / exercise)."},
+{"source_url": "https://sam.gov/opp/606845d8f52044b2b8fa4c5c54ddd41f/view", "note": "FACT/HIGH (2024, page blocked): NGC2 RFI asks industry to co-define API schema, reference architecture and developer environments (RFI)."},
+{"source_url": "https://sam.gov/opp/eb9c5cfc8ce34b2a9ac3c7fc5ca612bc/view", "note": "FACT/HIGH (believed 2024): Army UDRA RFI concedes the data mesh does not yet extend to tactical echelons (government document / RFI)."},
+{"source_url": "https://halecapital.com/media_archive/news_releases/2020_Aug11_Tangram_Flex_95M_AFRL.pdf", "note": "FACT/HIGH (2020-08-11): Tangram Flex holds a $95M Phase III ceiling since 2020 without public fielding evidence; Picogrid, Raft and Lattice SDK are other partial solutions (multiple partial-solution startups without scale; ceiling not revenue)."},
+{"source_url": "https://sam.gov/opp/d4cfa6871d8148cc91cc9177720a2eac/view", "note": "FACT/MEDIUM (page blocked): SSC Model Interoperability RFI seeks syntactic/semantic interoperability standards - the same ask recurs across services (repeated procurement)."},
+{"source_url": "https://www.gao.gov/products/gao-25-106931", "note": "FACT/HIGH (2025-01-22; June 2026 follow-up quote): only 14 of 20 programs implement MOSA to some extent and incumbents resist sharing interface specs (government document)."},
+{"source_url": "https://uasmagazine.com/articles/diu-transfers-blue-uas-cleared-list-to-dcma-to-accelerate-secure-drone-procurement", "note": "FACT/MEDIUM (2025-12-03): Blue UAS list moved to a DCMA marketplace with a Framework section for components/payloads (S03-G4 sub-scope; rated close to J by S03)."}
+],
+"companies_near": ["Picogrid", "Tangram Flex", "Raft (registries/transformation)", "Anduril (Lattice SDK/translators)", "Palantir (OSDK, Open DAGIR onboarding)", "TAK Product Center (government)", "Shift5", "Skydio / Teal-Red Cat / Auterion (payload side)"],
+"notes": "Chain steps: INGEST, NORMALIZE; echelons: platform through division. Six forms, but the S02 agent's killer risk is structural: the government or platform owner builds it as a free capability, and a startup cannot access real schemas without being inside a team. Shift5's 'two months per vehicle, no standard protocol' statement is a vendor claim (not counted). S03-G4 sub-scope (Blue UAS payload onboarding) is a government-owned process with services economics. Entry vehicles: xTech/SBIR, TAK plugin pipeline, Jailbreak 1.5 participation, subcontract to a team lead."
+},
+{
+"id": "G08",
+"title": "Cross-system swivel-chair elimination: provenance-tracked translation of plans, targets and intelligence products between planning, fires, airspace, intel and briefing systems (Onebrief/COP graphics to AFATDS/AXS, TAIS, IBCS-M; AIDP/DCGS-A to MSS, chat and slides)",
+"problem": "Plans and intelligence products are built in one environment and re-entered by humans into the specialized systems that execute or brief them, so fires, airspace, sustainment and targeting still require manual reconciliation, phone/chat coordination and slide-building with no provenance.",
+"categories": ["B", "C", "I", "G"],
+"segment_ids": ["S01", "S04"],
+"merged_from": ["S01-G2", "S04-G2"],
+"user": "Fires cells, ADAM/airspace cells and current-ops battle captains at brigade through corps; 35F/35G analysts and targeting officers at brigade, division, corps and COCOM J2",
+"initial_attractiveness": "medium",
+"evidence_forms": 5,
+"key_evidence_pointers": [
+{"source_url": "https://www.lineofdeparture.army.mil/Journals/Military-Intelligence/Military-Intelligence-Archive/2026-January-June/The-Swivel-Chair-War/", "note": "FACT/HIGH (MIPB 2026): 'The Swivel-Chair War' documents analysts manually moving data between disconnected systems (government document / documented manual workaround)."},
+{"source_url": "https://cset.georgetown.edu/publication/building-the-tech-coalition/", "note": "FACT/MEDIUM (2024-08): Scarlet Dragon's first AI-enabled live-fire targeting run took 743 minutes; later a 20-person cell using Maven ran the cycle far faster - the staff-intensive baseline is documented (exercise)."},
+{"source_url": "https://www.redhat.com/en/blog/inside-operation-jailbreak-red-hats-participation-us-armys-open-integration-sprint", "note": "FACT/MEDIUM (2026-08-06): APIs across 70+ capabilities including IBCS-M were only exposed in May 2026, so machine-to-machine plan-to-execution integration was previously impossible (documented manual workaround)."},
+{"source_url": "https://www.gao.gov/products/gao-21-99", "note": "FACT/MEDIUM (2021-01-21): digitally-aided close air support and friendly-force tracking guidance gaps between air and ground C2 (government document)."},
+{"source_url": "https://www.defensedaily.com/diu-awards-vannevar-labs-contract-to-transition-data-analysis-solution-into-production/advanced-transformational-technology/", "note": "FACT/MEDIUM (2024-11; up to $99M potential, $16M initial): DIU production OT for analyst-workflow automation shows buyers paying for this class of tool (repeated procurement; ceiling not revenue)."},
+{"source_url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/", "note": "FACT/MEDIUM (2026-04-15): OSD directs components to migrate C2/analytic tools onto MSS on an aggressive timeline - defines the API target and the absorption risk (government direction)."},
+{"source_url": "https://www.prnewswire.com/news-releases/raft-validates-the-future-of-command-and-control-at-armys-lightning-surge-exercises-302710260.html", "note": "INFERENCE/LOW (2026-03-11, vendor release): Raft claims calls for fire were 'a soldier intensive process' compressed into an automated workflow at Lightning Surge - company marketing, not counted."}
+],
+"companies_near": ["Raft", "Onebrief", "Palantir (MSS/AIDP native workflow, Maven target workbench)", "Accelint / Lyntris", "Leidos (AFATDS)", "Research Innovations Inc", "Vannevar Labs", "Primer", "BigBear.ai", "Scale AI (Donovan)", "Ask Sage", "Anduril (Lattice)"],
+"notes": "Chain steps: NORMALIZE, DECIDE, DISSEMINATE, TASK; echelons: battalion/brigade through joint. The Joint Staff PB2017 J-book finding of 12 interoperability discrepancies in digitally-aided fire support at Bold Quest was cited from a mirrored copy without a URL (FACT/MEDIUM, 2016). Killer risks: Raft/Palantir/Onebrief close the seam before a newcomer obtains interface access; safety authorities refuse automation into fires systems; MSS native features absorb it; classified data needed to make it good is inaccessible to a non-U.S.-person founder. Entry vehicles: NGC2 CSO component proposal under a team lead, Jailbreak 1.5, SBIR with PM Mission Command, XVIII Airborne Corps innovation cell."
+},
+{
+"id": "G09",
+"title": "Squad-to-battalion small-UAS fleet control, registry, deconfliction, tasking and collection forwarding for Drone Dominance mass (multi-vendor drones into company/battalion C2, S2 and training pipelines)",
+"problem": "Hundreds of thousands of multi-vendor small drones are being pushed to squads faster than units can register, deconflict, task and report them into company/battalion C2, and the EO/IR video they collect mostly dies at the controller because the Army's fusion node (TITAN) fields only 17 units at division/corps.",
+"categories": ["B", "C", "G", "D", "I"],
+"segment_ids": ["S03", "S13"],
+"merged_from": ["S13-G2", "S03-G3", "S13-G5"],
+"user": "Company/battalion drone team leaders and sUAS operators, S2/S3/S6 sections, brigade collection managers, C-UAS operators, Transformation-in-Contact units, TITAN operators as upstream consumers",
+"initial_attractiveness": "medium",
+"evidence_forms": 5,
+"key_evidence_pointers": [
+{"source_url": "https://www.armytimes.com/news/your-military/2026/09/18/as-experimental-drone-battalion-ends-army-aims-to-push-drones-to-every-squad/", "note": "FACT/HIGH (2026-09-18): Army accepted 12,080 Gauntlet 1 drones by mid-Sept 2026 with 30,000 more inbound and >200,000 by 2027 (government program scale via press)."},
+{"source_url": "https://breakingdefense.com/2026/09/army-has-enough-drones-for-each-unit-now-it-needs-to-train-soldiers-to-use-them/", "note": "FACT/HIGH (2026-09): Army leadership says it has enough drones and now names training/employment as the gap (product vs requirement at unit level)."},
+{"source_url": "https://dronedominance.mil/", "note": "FACT (2026): Drone Dominance is a formal DoW program with public Gauntlet rounds (government document)."},
+{"source_url": "https://defensescoop.com/2025/10/14/army-small-drones-skyfoundry/", "note": "FACT/HIGH (2025-10-14; order 2026-03): 2,500+ Skydio X10D order (>$52M) and a 10,000 drones/month SkyFoundry goal (repeated procurement)."},
+{"source_url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/", "note": "FACT/HIGH (2026-09-01): TITAN production is 8 systems over 18 months for a 17-system fleet, i.e., division/corps scale only - company-level collection has no fusion node (product vs requirement, INFERENCE on the gap)."},
+{"source_url": "https://www.rusi.org/explore-our-research/publications/occasional-papers/uncrewed-ground-systems", "note": "FACT/MEDIUM (2023-10-26): Project Convergence 22 soldier 'quickly overwhelmed' managing uncrewed systems from a moving vehicle (exercise / operator overload)."},
+{"source_url": "https://resiliencemedia.co/auterion-demonstrates-a-multi-manufacturer/", "note": "INFERENCE/MEDIUM (2025-12): multi-manufacturer swarm coordination was first demonstrated only in late 2025 (Auterion); AeroVironment Kinesis, Skydio Cloud, Lattice are partial solutions (multiple partial-solution vendors)."}
+],
+"companies_near": ["Auterion (Nemyx)", "AeroVironment (Tomahawk Robotics / Kinesis)", "Anduril (Lattice)", "Skydio (Skydio Cloud)", "Red Cat / Teal", "Getac (CommandCore)", "TAK Product Center (government)", "Palantir (TITAN)", "Edgybees", "Quantum Systems", "Applied Intuition"],
+"notes": "Chain steps: COLLECT, TASK, INGEST, DISSEMINATE; echelons: tactical unit (squad/platoon), battalion. No documented RFI or budget line for a unit-level fleet/collection layer was found (S03-G3: 'No documented requirement or budget line found'), so the RFI form is not counted. S13-G5 (post-mission exploitation of autonomy logs) merged as a low-evidence sub-scope (HYPOTHESIS: no RFI found). Killer risks: Army designates Lattice or a TAK-native government tool as the fleet layer; vendor lock at the app layer blocks telemetry access; low willingness to pay; feature of Skydio Cloud/TAK rather than a company. Entry vehicles: Army xTech, SBIR (ownership test), TAK plugin marketplace, Gauntlet-vendor partnership, DCMA Blue UAS software listing."
+},
+{
+"id": "G10",
+"title": "Vendor-agnostic automated PACE/multi-path transport orchestration and single-pane tactical NetOps for S6/G6 at brigade and below (MANET, pLEO, GEO, private 5G, HF)",
+"problem": "Units carry three to five transports but path selection and failover are still planned on paper and executed by signal soldiers using many vendor tools that do not share data, so applications stall during jamming or movement and awareness of link health, spectrum conflicts and cyber events is manual and slow.",
+"categories": ["A", "B", "D", "G", "C", "E"],
+"segment_ids": ["S05"],
+"merged_from": ["S05-G1", "S05-G2"],
+"user": "Brigade S6 and division G6 NetOps cells, platform crews at brigade and below, NGC2 transport-layer integrators, NETCOM",
+"initial_attractiveness": "medium",
+"evidence_forms": 6,
+"key_evidence_pointers": [
+{"source_url": "https://sam.gov/workspace/contract/opp/1e1135d1d9d74b26a435ea0f27069559/view", "note": "FACT/MEDIUM (2026-01; responses due 2026-02-25): ACC AMIC Deployable Tactical Communications RFI asks for routing, edge compute, application-level QoS and cross-domain sharing in contested forward environments (RFI)."},
+{"source_url": "https://discover.govdash.com/solicitations/019e2c45-0ea1-7629-8f59-8b2664474496--tactical-local-area-network-taclan-and-satellite-deployable-node-sdn-king-for-a", "note": "FACT/MEDIUM (2026-05-15): USSOCOM TACLAN/SDN 'King for a Day' RFI seeks modular C2 network, edge compute, SD-WAN and EW resilience (RFI, second buyer)."},
+{"source_url": "https://peoc3t.army.mil/i2s/uno.php", "note": "FACT/HIGH (2024-2025): Unified Network Operations goal is to reduce the number of network-management tools S6/G6 use and ease Signal Soldier workload (government document)."},
+{"source_url": "https://federalnewsnetwork.com/ask-the-cio/2024/07/with-uno-army-intends-to-stop-battling-its-own-network/", "note": "FACT/MEDIUM (2024-07): PEO C3T planned a UNO IDIQ RFP in 2025 and awards in 2026 after OTA prototypes (repeated procurement)."},
+{"source_url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units", "note": "FACT/MEDIUM (2026-07-31): PC-C6 division-scale NGC2 validation produced semi-frequent connectivity drops and incomplete displays (exercise)."},
+{"source_url": "https://www.gao.gov/products/gao-26-108019", "note": "FACT/HIGH (2026-08-20): Army has identified ~$3.3B of NGC2 costs through FY2026 and plans a division production ecosystem in FY27 (budget)."},
+{"source_url": "https://breakingdefense.com/2024/02/startup-aalyria-demos-satcom-software-for-diu-hybrid-network/", "note": "INFERENCE/MEDIUM (2024-02): Aalyria, Persistent Cloud Relay, Anduril and Silvus each attempt partial solutions; none is a cross-vendor orchestration layer (multiple partial-solution vendors)."}
+],
+"companies_near": ["Aalyria", "Persistent Systems (Cloud Relay)", "Silvus Technologies (Motorola)", "Anduril (Lattice Mesh)", "CodeMettle", "Research Innovations Inc (UNO OT)", "L3Harris", "General Dynamics Mission Systems", "Rajant", "Doodle Labs", "Ditto"],
+"notes": "Chain steps: TRANSPORT, MONITOR; echelons: platform, tactical unit, battalion/brigade. Killer risks: radio vendors close APIs or the NGC2/UNO prime builds it in-house (RII/CodeMettle stack); founders cannot access ITAR technical data for military radios without U.S.-person status - needs counsel. Lightning Surge private-5G call-for-fire and C5ISR 5G firsts (army.mil 2026-04/05) are additional exercise evidence. Entry vehicles: Army SBIR/xTech, DIU CSO (ORIENT follow-on), subcontract to an NGC2 or UNO IDIQ prime, C5ISR NetModX."
+},
+"__SENTINEL_A__"
+]
+}

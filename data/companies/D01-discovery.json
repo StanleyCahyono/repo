@@ -1,0 +1,427 @@
+{
+  "discovery_id": "D01",
+  "new_companies": [
+    {
+      "name": "Rune Technologies",
+      "hq": "Washington, DC / Northern Virginia area (RECALL - not re-verified this session, MEDIUM)",
+      "founding_year": 2024,
+      "relevance": "TyrOS: edge-first, AI-enabled sustainment/logistics mission-command software for contested (DDIL) environments; the clearest example in this batch of a seed-stage startup moving from prize/venture money to Army and Marine Corps C2 program participation.",
+      "segment_ids": ["S14", "S01", "S06"],
+      "evidence": [
+        {
+          "what": "FACT: closed $24M Series A led by Human Capital with Pax VC, Washington Harbour Partners and existing investors Andreessen Horowitz and Point72 Ventures (funding = investor interest, not demand).",
+          "source_url": "https://www.businesswire.com/news/home/20250721838717/en/Rune-Technologies-Closes-$24M-Series-A-to-Deploy-AI-Enabled-Software-for-Military-Logistics",
+          "date": "2025-07-21"
+        },
+        {
+          "what": "FACT: U.S. Army awarded Rune $4.1M to expand TyrOS across the 1st Cavalry Division and to connect logistics demand signals to unmanned aircraft and ground vehicles for autonomous resupply (award value as reported by the company; obligated amount not independently verified).",
+          "source_url": "https://www.businesswire.com/news/home/20260917806470/en/U.S.-Army-Awards-Rune-Technologies-$4.1M-for-Logistics-Modernization-and-Autonomous-Resupply",
+          "date": "2026-09-17 (independent coverage: https://thedefensepost.com/2026/09/21/us-army-rune-autonomous-resupply/ on 2026-09-21)"
+        },
+        {
+          "what": "Company claim (Tier 2, not independent proof): TyrOS described as the only application selected by both Army NGC2 prime teams and the sole logistics provider on the Marine Corps Project Dynamis C2 modernization effort. Secondary coverage also reports a five-year, $99M Army contract for TyrOS in June 2025 - LOW confidence, not verified against sam.gov/usaspending this session; if real, treat as a ceiling, not revenue.",
+          "source_url": "https://runetech.co/",
+          "date": "2025-06 (reported contract) / 2026-09 (site claim as read this session)"
+        }
+      ],
+      "priority": 5
+    },
+    {
+      "name": "Latent AI",
+      "hq": "Princeton, New Jersey, USA (RECALL, MEDIUM)",
+      "founding_year": 2018,
+      "relevance": "Edge-AI model optimization and deployment platform (LEIP) aimed at DDIL edge inference; repeated SBIR/prize participation across USAF and Army makes it a benchmark for the edge-AI orchestration segment.",
+      "segment_ids": ["S06", "S02"],
+      "evidence": [
+        {
+          "what": "FACT: 4th place ($75,000) in the Army xTech AI Grand Challenge for 'AI Agent for Automated Data Engineering'; winners enter a Plug and Play-led accelerator. Prize money, not a program of record.",
+          "source_url": "https://www.army.mil/article/288299/army_selects_six_winners_in_xtech_ai_grand_challenge_competition",
+          "date": "2025-09 (independent coverage: https://thedefensepost.com/2025/09/09/ai-army-showdown/ on 2025-09-09)"
+        },
+        {
+          "what": "FACT (MEDIUM - surfaced in search summary, source page not read): USAF SBIR effort framed around DDIL edge AI for resilient information sharing and rapid decision-making, with Latent AI's edge processing cited for latency/bandwidth/security benefits. RECALL (not re-verified): prior AFWERX SBIR Phase II work (~2020-2021) and an Army SBIR relationship; ~$19M Series A (2021).",
+          "source_url": "https://latentai.com/",
+          "date": "2020-2025 (various; not re-verified)"
+        }
+      ],
+      "priority": 4
+    },
+    {
+      "name": "Kinnami Software Corporation",
+      "hq": "Austin, Texas, USA (per Austin startup directory; earlier Boston presence RECALL)",
+      "founding_year": 2017,
+      "relevance": "AmiShare: distributed, encrypted, self-healing data storage/sync fabric for disconnected and contested networks - a direct DDIL data-fabric competitor/reference point for a Ditto-style edge-sync play.",
+      "segment_ids": ["S02", "S10", "S06"],
+      "evidence": [
+        {
+          "what": "FACT: USAF SBIR Phase I via AFWERX/AFRL to adapt AmiShare (distributes, encrypts and audits data across users, servers, devices and cloud) for military use.",
+          "source_url": "https://www.prnewswire.com/news-releases/kinnami-wins-us-air-force-sbir-contract-to-pioneer-military-applications-for-its-advanced-security-platform-amishare-300991003.html",
+          "date": "2020 (press release; exact day not captured)"
+        },
+        {
+          "what": "FACT: USAF SBIR Direct-to-Phase II 'Resilient Data Infrastructure for Digital Engineering' valued at $999,999, adapting AmiShare for SAF/AQR collaborative digital engineering after a Pitch Day selection.",
+          "source_url": "https://www.sbir.gov/awards/191058",
+          "date": "2021 (award year; FY21 Air Force SBIR)"
+        },
+        {
+          "what": "Trade coverage of the USAF SBIR work (ExecutiveBiz, airforce-technology). No Phase III, production or NGC2-scale transition found this session - Public evidence insufficient.",
+          "source_url": "https://www.executivebiz.com/articles/kinnami-to-mature-data-security-tool-under-usaf-sbir-contract",
+          "date": "2021 (approx.)"
+        }
+      ],
+      "priority": 4
+    },
+    {
+      "name": "Autonodyne LLC",
+      "hq": "Boston, Massachusetts, USA (RECALL, MEDIUM)",
+      "founding_year": 2018,
+      "relevance": "Vendor-agnostic Common Control Station and autonomy-behavior library for heterogeneous unmanned systems - a small-company reference case in the common-controller / autonomy-C2 segment that reached a Phase III vehicle.",
+      "segment_ids": ["S13", "S01"],
+      "evidence": [
+        {
+          "what": "FACT: AFWERX SBIR Phase II worth nearly $3M to mature the Common Control Station and a library of autonomy behaviors that can be manually invoked or automatically stitched into high-level tasks.",
+          "source_url": "https://www.sbir.gov/awards/194549",
+          "date": "2021-07"
+        },
+        {
+          "what": "FACT: AFWERX Phase III contract of $1.5M (initial) funded by the AFLCMC Advanced Aircraft Division for 'software vehicle control integration and development', with the agreement potentially reaching $17.5M - ceiling, not obligations. Year of the May award inferred as 2022 (MEDIUM).",
+          "source_url": "https://afwerx.com/about-us/",
+          "date": "2022-05 (inferred year)"
+        },
+        {
+          "what": "sbir.gov firm portfolio page for Autonodyne (multiple DAF awards).",
+          "source_url": "https://www.sbir.gov/portfolio/881607",
+          "date": "2021-2024 (portfolio, as indexed)"
+        }
+      ],
+      "priority": 4
+    },
+    {
+      "name": "Ozni AI",
+      "hq": "Public evidence insufficient.",
+      "founding_year": null,
+      "relevance": "COMbINE ('Common-Mission Integration and Normalization Engine'): automated data integration/normalization for Army AI readiness - a data-fabric-adjacent capability that won the Army's largest AI prize this cycle.",
+      "segment_ids": ["S02", "S01"],
+      "evidence": [
+        {
+          "what": "FACT: 1st place, $500,000, Army xTech AI Grand Challenge (data verification/validation and augmentation/feature-engineering tracks); joins Plug and Play accelerator. Prize, not a contract.",
+          "source_url": "https://www.army.mil/article/288299/army_selects_six_winners_in_xtech_ai_grand_challenge_competition",
+          "date": "2025-09 (coverage 2025-09-09: https://thedefensepost.com/2025/09/09/ai-army-showdown/)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Rise8",
+      "hq": "Tampa, Florida, USA (RECALL, MEDIUM)",
+      "founding_year": 2019,
+      "relevance": "DevSecOps/cATO delivery firm (Kessel Run lineage) selected for a SpaceWERX STRATFI to build a continuous-ATO pipeline for third-party apps on the Space Force 'Warp Core' data-as-a-service platform - shows ATO-as-a-service remains a funded gap.",
+      "segment_ids": ["S09"],
+      "evidence": [
+        {
+          "what": "FACT: selected for Program Year 2025 STRATFI under the USAF SBIR program to support Space Systems Command with a cATO pipeline for third-party applications on Warp Core (USSF DaaS). STRATFI agreements are up to $60M combined government/private per project (up to $30M government) - potential, not obligated.",
+          "source_url": "https://www.globenewswire.com/news-release/2025/03/19/3045477/0/en/AFWERX-and-SpaceWERX-Select-Rise8-for-Program-Year-2025-STRATFI-under-U-S-Air-Force-SBIR-to-Enable-Rapid-Continuous-Delivery-of-Mission-Critical-Applications.html",
+          "date": "2025-03-19 (selection announced 2025-03-08)"
+        },
+        {
+          "what": "FACT: independent listing of the eight 2025 SpaceWERX STRATFI selectees (Albedo, Beast Code, CesiumAstro, Gravitics, LeoLabs, Rise8, Umbra, Xona) worth a combined ~$440M government + private funding.",
+          "source_url": "https://spacenews.com/spacewerx-selects-eight-companies-for-440-million-in-public-private-partnerships/",
+          "date": "2025-03"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Protopia AI",
+      "hq": "Austin, Texas, USA (RECALL, MEDIUM)",
+      "founding_year": 2020,
+      "relevance": "'Stained Glass Transform' data obfuscation that lets sensitive data be used by LLMs/ML without exposing it - a data-security/zero-trust layer for AI pipelines, relevant to data tagging and sharing gaps.",
+      "segment_ids": ["S10", "S02", "S06"],
+      "evidence": [
+        {
+          "what": "FACT: 1st place ($100,000) in Army xTechScalable AI 2 (supported by PM IS&A / Project Linchpin); check presented 2024-10-16. Winners may submit for Phase I ($250K) or Direct-to-Phase II (up to $2M) SBIR - eligibility, not an award.",
+          "source_url": "https://www.army.mil/article/281422/xtech_scalable_ai_2_competition",
+          "date": "2024-10-16 (also https://asc.army.mil/web/altmag-news-xtech-scalable-ai-2-competition/)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "DeepSig Inc.",
+      "hq": "Arlington, Virginia, USA (RECALL, MEDIUM)",
+      "founding_year": 2016,
+      "relevance": "AI-native RF sensing (OmniSIG) and ML-based signal classification for spectrum awareness at the tactical edge; a software-first spectrum-awareness benchmark (hardware-light) for the S12 segment.",
+      "segment_ids": ["S12", "S05"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): multiple DAF SBIR awards (AFWERX Phase I/II, ~2019-2022) and DARPA RF machine-learning work; venture-backed. No search budget remained to confirm dollar values or Phase III status.",
+          "source_url": "https://www.deepsig.ai/",
+          "date": "2019-2024 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Somewear Labs",
+      "hq": "San Francisco, California, USA (RECALL, MEDIUM)",
+      "founding_year": 2016,
+      "relevance": "Satellite/cellular/mesh 'Node' gateway plus a lightweight team situational-awareness app (TAK-interoperable) for disconnected small units - a software-plus-COTS-hardware entry into tactical SA.",
+      "segment_ids": ["S05", "S01", "S07"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): AFWERX SBIR Phase II (~2020-2021) and subsequent DAF/SOCOM/National Guard user adoption reported by the company; venture-backed. Treat adoption claims as company-sourced.",
+          "source_url": "https://www.somewearlabs.com/",
+          "date": "2020-2024 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Corsha",
+      "hq": "Vienna/Tysons, Virginia, USA (RECALL, MEDIUM)",
+      "founding_year": 2018,
+      "relevance": "Machine-identity / API zero-trust (dynamic MFA for machine-to-machine traffic) originated through DAF and Army SBIRs - directly relevant to zero-trust plumbing between C2 services.",
+      "segment_ids": ["S10"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): AFWERX SBIR Phase I/II and Army SBIR awards (~2020-2022) for machine-to-machine MFA; later commercial venture rounds. Phase III/production status: Public evidence insufficient.",
+          "source_url": "https://corsha.com/",
+          "date": "2020-2023 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Virtru",
+      "hq": "Washington, DC, USA (RECALL, HIGH)",
+      "founding_year": 2012,
+      "relevance": "Commercial steward of the Trusted Data Format (TDF/ZTDF) - object-level data tagging and policy binding that underpins DoD/IC data-centric security; the de facto open standard a data-tagging startup would build on or compete with.",
+      "segment_ids": ["S10", "S08", "S02"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): TDF originated in the IC (NSA/ODNI); Virtru maintains OpenTDF and has DAF/IC deployments and prior SBIR-style DAF work; ~$180M+ venture funding cumulatively. Specific contract values not verified.",
+          "source_url": "https://www.virtru.com/",
+          "date": "2019-2025 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Vidrovr",
+      "hq": "New York, New York, USA (RECALL, MEDIUM)",
+      "founding_year": 2016,
+      "relevance": "Multimodal video/audio AI for full-motion-video and open-source media exploitation - an ISR PED software startup with DAF SBIR lineage.",
+      "segment_ids": ["S04"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): AFWERX SBIR Phase I/II awards (~2019-2021) and reported Army/USAF video-analysis pilots; venture-backed. Production transition: Public evidence insufficient.",
+          "source_url": "https://www.vidrovr.com/",
+          "date": "2019-2023 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "CodeMettle",
+      "hq": "Atlanta, Georgia, USA (RECALL, MEDIUM)",
+      "founding_year": 2007,
+      "relevance": "Network operations management (NetOps) software for tactical and enterprise DoD networks - the unglamorous 'manage the transport' layer of tactical networking where small vendors persist.",
+      "segment_ids": ["S05", "S09"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (LOW-MEDIUM): Army and DAF NetOps/network-management contracts and SBIR-related work (Army unified network operations prototyping ~2020-2023). Contract values and current program status: Public evidence insufficient.",
+          "source_url": "https://www.codemettle.com/",
+          "date": "2020-2024 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Rhombus Power",
+      "hq": "Palo Alto, California, USA (RECALL, MEDIUM)",
+      "founding_year": 2011,
+      "relevance": "'Guardian' AI decision-support / predictive analytics platform sold to DAF and combatant commands - a decision-support C2 application competitor for the S01 segment.",
+      "segment_ids": ["S01", "S02"],
+      "evidence": [
+        {
+          "what": "RECALL - not re-verified this session (MEDIUM): AFWERX SBIR lineage culminating in a DAF Phase III award (~2021) for Guardian and a later large AFRL/DAF contract (~2023, value not re-verified); INDOPACOM analytic use reported. Do not equate ceilings with revenue.",
+          "source_url": "https://www.rhombuspower.com/",
+          "date": "2021-2023 (not re-verified)"
+        }
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Forward Edge-AI, Inc.",
+      "hq": "San Antonio, Texas, USA (RECALL, MEDIUM)",
+      "founding_year": 2018,
+      "relevance": "Small SBIR performer pairing quantum-secure wireless data transfer with predictive logistics for the Army - illustrates how logistics-C2 and secure-transport topics recur at Phase I without visible scale.",
+      "segment_ids": ["S14", "S10", "S05"],
+      "evidence": [
+        {
+          "what": "FACT: Army SBIR Phase I 'Quantum-Secure Wireless Data Transfer for Predictive Logistics' (company help-center write-up; dollar value not stated in snippet). Company also publishes a Phase III market-survey page soliciting sole-source follow-ons.",
+          "source_url": "https://support.forwardedge.ai/en/articles/12027315-phase-i-sbir-us-army-quantum-secure-wireless-data-transfer-for-predictive-logistics",
+          "date": "2025 (approx.; article undated in search snippet)"
+        }
+      ],
+      "priority": 2
+    },
+    {
+      "name": "LeoLabs",
+      "hq": "Menlo Park, California, USA (RECALL, HIGH)",
+      "founding_year": 2016,
+      "relevance": "Commercial space-domain-awareness radar network and orbital tracking/analytics software - space track-management analogue to terrestrial track management; a SpaceWERX STRATFI selectee.",
+      "segment_ids": ["S07", "S03"],
+      "evidence": [
+        {
+          "what": "FACT: one of eight SpaceWERX 2025 STRATFI selectees (up to $60M combined per project; ceiling not obligations).",
+          "source_url": "https://spacenews.com/spacewerx-selects-eight-companies-for-440-million-in-public-private-partnerships/",
+          "date": "2025-03"
+        }
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Snorkel AI",
+      "hq": "Redwood City, California, USA (RECALL, HIGH)",
+      "founding_year": 2019,
+      "relevance": "Programmatic data labeling / AI data-development platform now competing for Army AI data-pipeline work - a well-funded commercial entrant into the Army's Project Linchpin-adjacent data layer.",
+      "segment_ids": ["S02", "S06"],
+      "evidence": [
+        {
+          "what": "FACT: 3rd place ($150,000) in the Army xTech AI Grand Challenge for 'Optimizing Army Data Pipelines for AI Readiness'.",
+          "source_url": "https://www.army.mil/article/288299/army_selects_six_winners_in_xtech_ai_grand_challenge_competition",
+          "date": "2025-09"
+        }
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Cenith Innovations",
+      "hq": "Public evidence insufficient (U.S. small business).",
+      "founding_year": null,
+      "relevance": "Winner of the first Army xTechScalable AI competition (Project Linchpin-aligned scalable AI for ISR/intelligence data) - a small AI/ML vendor to track through the Army SBIR pipeline.",
+      "segment_ids": ["S06", "S04"],
+      "evidence": [
+        {
+          "what": "FACT (company blog, Tier 2): Cenith states it won the Army's Scalable AI xTech competition; the competition announced up to four final winners on 2024-03-12 with finalists pitching at SXSW 2024. Prize, not a contract; specific product details not verified.",
+          "source_url": "https://cenithinnovations.com/blog/xtech-competition/",
+          "date": "2024-03 (approx.)"
+        }
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Exia Labs",
+      "hq": "Public evidence insufficient.",
+      "founding_year": null,
+      "relevance": "'Soraka' verification-and-validation tooling for AI data pipelines - AI assurance/test tooling that C2 program offices will need before fielding models.",
+      "segment_ids": ["S06", "S09"],
+      "evidence": [
+        {
+          "what": "FACT: 5th place ($50,000) in the Army xTech AI Grand Challenge.",
+          "source_url": "https://www.army.mil/article/288299/army_selects_six_winners_in_xtech_ai_grand_challenge_competition",
+          "date": "2025-09"
+        }
+      ],
+      "priority": 2
+    },
+    {
+      "name": "R-DEX Systems",
+      "hq": "Marietta, Georgia, USA (RECALL, MEDIUM)",
+      "founding_year": null,
+      "relevance": "'Angler' information-theoretic data profiling for AI readiness - small Georgia AI/analytics firm with DoD SBIR history now in the Army data-pipeline pool.",
+      "segment_ids": ["S02", "S06"],
+      "evidence": [
+        {
+          "what": "FACT: 6th place ($25,000) in the Army xTech AI Grand Challenge.",
+          "source_url": "https://www.army.mil/article/288299/army_selects_six_winners_in_xtech_ai_grand_challenge_competition",
+          "date": "2025-09"
+        }
+      ],
+      "priority": 2
+    }
+  ],
+  "repeated_topics": [
+    {
+      "topic": "Common control station / vendor-agnostic control of heterogeneous unmanned systems (autonomy C2)",
+      "agencies": ["AFWERX/AFRL", "AFLCMC Advanced Aircraft Division", "Army (xTechOverwatch 2025, Unmanned Systems Summit)", "Navy (UMAA/common control - RECALL)"],
+      "years": [2020, 2021, 2022, 2024, 2025],
+      "transition_evidence": "Autonodyne reached an AFWERX Phase III ($1.5M initial, up to $17.5M ceiling, ~2022) - a vehicle, not proof of fielding. Broader transition in this segment has gone to larger players (AeroVironment/Tomahawk Kinesis, Anduril Lattice, Auterion) rather than SBIR performers; xTechOverwatch (40 finalists, $15K each, final event Oct 2025) restarts the funnel at prize scale.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "AI data preparation, labeling, validation and feature engineering for Army 'scalable AI' (Project Linchpin / PM IS&A)",
+      "agencies": ["Army xTech (xTechScalable AI 2024, xTechScalable AI 2 2024, xTech AI Grand Challenge 2025)", "Army SBIR (Phase I / D2P2 eligibility for winners)"],
+      "years": [2024, 2025],
+      "transition_evidence": "Three consecutive prize competitions ($100K-$500K top prizes, $2M total in 2025) plus SBIR eligibility and a Plug and Play accelerator; no production contract or program-of-record award to a prize winner surfaced this session (Public evidence insufficient). Pattern fits a prize-to-SBIR funnel whose Phase III step is not yet visible.",
+      "signal": "proto-purgatory"
+    },
+    {
+      "topic": "Resilient / distributed data infrastructure for DDIL and tactical-edge environments (data fabric, edge sync, encrypted distributed storage)",
+      "agencies": ["AFWERX/AFRL (Kinnami Phase I 2020, D2P2 2021)", "Army xTechIgnite 2025 (DDIL simulation requirement)", "Army SBIR ('Generative AI Enabled Tactical Network' topic)", "Army NGC2 / Marine Corps Dynamis (program side)"],
+      "years": [2020, 2021, 2024, 2025, 2026],
+      "transition_evidence": "The requirement transitioned into programs (NGC2 common data layer, Dynamis) largely via venture-backed vendors (Anduril, Palantir, Ditto - all on master list) rather than via SBIR performers; SBIR-lane firms like Kinnami show Phase I/II awards without visible Phase III. Demand is persistent, but the SBIR path itself looks like purgatory.",
+      "signal": "proto-purgatory"
+    },
+    {
+      "topic": "Edge-AI model optimization and DDIL edge inference (compress/deploy models on constrained hardware)",
+      "agencies": ["AFWERX/AFRL (Latent AI SBIRs, RECALL)", "Army xTech AI Grand Challenge 2025", "AFWERX FY26 priorities (decision-support AI, computer vision for ISR)"],
+      "years": [2020, 2021, 2022, 2025, 2026],
+      "transition_evidence": "Latent AI has repeated DAF/Army participation across five-plus years and venture funding, but no publicly visible production program; AFWERX lists 'Command, Control & Battle Management' and AI among FY26 solicitation priorities, indicating the buyer still treats it as an open need.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "Continuous ATO (cATO) and DevSecOps pipelines for third-party mission applications",
+      "agencies": ["SpaceWERX/AFWERX STRATFI PY2025 (Rise8 for SSC Warp Core)", "USAF Platform One / Kessel Run lineage (RECALL)"],
+      "years": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "transition_evidence": "Funded repeatedly through services-style vehicles and now a STRATFI (up to $60M combined, ceiling); the 'product' remains largely bespoke pipelines per program, which is why ATO-as-a-product startups (Second Front, Defense Unicorns - master list) keep appearing.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "AI-enabled predictive logistics / sustainment C2 in contested environments",
+      "agencies": ["Army SBIR Phase I (Forward Edge-AI)", "Army (Rune $4.1M 1st Cav expansion, 2026; reported 2025 TyrOS contract)", "Marine Corps Project Dynamis (Rune claim)", "Army NGC2 prime teams (Rune claim)"],
+      "years": [2024, 2025, 2026],
+      "transition_evidence": "Visible transition: Rune moved from venture seed/Series A to division-level Army awards and program participation within ~2 years, while Phase I SBIR performers on adjacent topics show no follow-on. Suggests the buyer prefers venture-backed, edge-first products over SBIR-incubated ones in this lane.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "RF/spectrum sensing and signal classification with machine learning (spectrum awareness at the edge)",
+      "agencies": ["DARPA (RFMLS - RECALL)", "AFWERX (DeepSig SBIRs - RECALL)", "Army xTechOverwatch 2025 (autonomy/EW/C-UAS - partial)"],
+      "years": [2018, 2019, 2020, 2021, 2025],
+      "transition_evidence": "RECALL only; no Phase III or program-of-record evidence gathered this session. Public evidence insufficient.",
+      "signal": "unclear"
+    },
+    {
+      "topic": "Zero-trust and data-centric security for AI/C2 data (machine identity, data obfuscation, data tagging)",
+      "agencies": ["AFWERX/Army SBIR (Corsha - RECALL)", "Army xTechScalable AI 2 (Protopia AI, 2024)", "DAF/IC TDF adoption (Virtru - RECALL)"],
+      "years": [2020, 2021, 2022, 2024],
+      "transition_evidence": "Mixed: TDF/ZTDF is embedded in DoD data strategy language (standard-level transition), while individual SBIR performers show prize/Phase II evidence only. Public evidence insufficient on production contracts for Corsha and Protopia.",
+      "signal": "unclear"
+    },
+    {
+      "topic": "Assured PNT with contextual machine learning (software-side PNT)",
+      "agencies": ["Army ($2M contract to Infleqtion - master-list company)"],
+      "years": [2025],
+      "transition_evidence": "Infleqtion $2M Army contract (2025-12-11, BusinessWire) - noted for the master-list agent; single award, not a program.",
+      "signal": "unclear"
+    }
+  ],
+  "search_log": [
+    {"query": "Army xTechScalable AI winners finalists companies announced", "useful": true},
+    {"query": "Army xTech 2025 winners \"xTechSearch 9\" OR \"xTechOverwatch\" OR \"xTechPacific\" finalists announced", "useful": true},
+    {"query": "AFWERX SpaceWERX STRATFI TACFI 2025 awardees list companies announced", "useful": true},
+    {"query": "AFWERX SBIR Phase II 2025 award \"command and control\" OR \"battle management\" OR \"data fabric\" startup announces", "useful": false},
+    {"query": "site:sbir.gov \"Phase II\" \"DDIL\" OR \"denied, degraded, intermittent\" tactical edge data 2024 2025 Army Air Force award", "useful": true},
+    {"query": "Navy SBIR \"Phase III\" 2025 \"command and control\" software small business award NavalX tactical edge", "useful": false},
+    {"query": "\"xTech AI Grand Challenge\" six winners companies Army 2025", "useful": true},
+    {"query": "\"STRATFI\" 2025 OR 2026 selected AFWERX press release software company \"command and control\" OR \"decision\" OR \"data\" OR \"AI\"", "useful": true},
+    {"query": "Rune Technologies TyrOS logistics command and control Series A Marine Corps Army 2025", "useful": true},
+    {"query": "Kinnami AmiShare DDIL data Air Force OR Army SBIR Phase II award", "useful": true},
+    {"query": "Autonodyne common control software AFWERX SBIR Phase II Air Force OR Navy award unmanned", "useful": true},
+    {"query": "\"xTechScalable AI 2\" winners first place announced companies Army", "useful": true},
+    {"query": "WebFetch https://payloadspace.com/spacewerx-announces-2026-stratfi-awardees/ (SpaceWERX 2026 STRATFI list)", "useful": false},
+    {"query": "WebFetch https://xtech.online15.net/announcement_category/xtech-winners/ (xTech winners mirror)", "useful": false}
+  ],
+  "notes": "SCOPE AND METHOD: 12 WebSearch calls and 2 WebFetch attempts (both EGRESS_BLOCKED: payloadspace.com, xtech.online15.net); sbir.gov, army.mil and xtech.army.mil pages could not be read directly, so award details come from search summaries, company/press releases and trade coverage. Items marked RECALL were not re-verified this session and carry MEDIUM/LOW confidence; no contract numbers or dollar values were invented - where a value was not surfaced it is omitted. OTHER NAMES SURFACED BUT NOT WRITTEN UP (second tier or off-scope): PeopleTec (Huntsville AL, established contractor; $300K 2nd place xTech AI Grand Challenge 2025); Beast Code (Fort Walton Beach FL software/digital-twin firm; SpaceWERX 2025 STRATFI, relevance LOW); Albedo (VLEO EO imagery; STRATFI 2025; S03); CesiumAstro (phased-array comms hardware; STRATFI 2025; S05 hardware); Gravitics and Castelion (STRATFI 2025; not C4ISR); xTechPacific 2025 winners FieldLine Industries (subsurface hazard detection), Havoc and ZeroMark (maritime autonomous platforms) - not core C4ISR software; Infleqtion $2M Army assured-PNT ML contract (2025-12-11) is master-list. RECALL candidates worth a follow-up agent if budget allows: Forterra (ground autonomy; appears already covered by batch B04 files in scratchpad), Overland AI (ground autonomy, DARPA RACER), Scientific Systems Co. (collaborative autonomy, AFRL Phase III), Toyon Research (sensor fusion/tracking SBIRs), Charles River Analytics and Aptima (serial C2 decision-support SBIR performers - classic proto-purgatory exemplars), Mattermost (DDIL collaboration on Platform One), Rancher Government Solutions (edge Kubernetes), Hypori (Army BYOD/zero trust), Virtualitics (AFWERX STRATFI analytics), Anchore (Iron Bank scanning), Deepwave Digital and Bastille Networks (spectrum sensing), Slingshot Aerospace (space C2/SDA). CONTEXT: AFWERX lists 'Command, Control & Battle Management' among FY26 priorities and AFWERX/SpaceWERX reopened SBIR/STTR solicitations following reauthorization (https://www.dvidshub.net/news/564491/afwerx-spacewerx-open-new-sbir-sttr-solicitations-following-reauthorization); Army SBIR keeps a standing 'Generative AI Enabled Tactical Network' topic (https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/). STUDY IMPLICATION (INFERENCE, MEDIUM): the prize/SBIR funnel is producing many data-pipeline and edge-AI performers but the observable transitions in 2025-2026 (Rune, Rise8 STRATFI, NGC2 vendors) favor venture-backed, product-shaped companies that attach to a named program (NGC2, Dynamis, Warp Core) rather than SBIR-only firms; a two-founder team should treat SBIR as validation/non-dilutive runway, not as the go-to-market. FOUNDER CONSTRAINTS: SBIR/STTR eligibility requires a U.S.-based small business majority-owned by U.S. citizens or permanent residents (and xTech prize eligibility has similar rules); the Indonesian founder's ownership share and any ITAR/export-controlled technical data access need specialist legal review - no legal judgment is made here."
+}

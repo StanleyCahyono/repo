@@ -1,0 +1,2085 @@
+{
+  "batch_id": "B06",
+  "theme": "ISR collection and commercial sensing",
+  "companies": [
+    {
+      "name": "Planet Labs PBC",
+      "aka": "Planet; Planet Labs Federal, Inc. (US government subsidiary); NYSE: PL",
+      "founding_year": 2010,
+      "headquarters": "San Francisco, California, USA",
+      "public_private": "public",
+      "employee_count_approx": "~1,000 (RECALL - not re-verified this session; LOW)",
+      "founders": [
+        "Will Marshall",
+        "Robbie Schingler",
+        "Chris Boshuizen"
+      ],
+      "founder_backgrounds": "Former NASA Ames scientists/engineers (PhoneSat lineage); Marshall remains CEO, Schingler Chief Strategy Officer. (Stable background; RECALL, HIGH)",
+      "total_disclosed_funding_usd": "Public company since Dec 2021 SPAC merger (dMY Technology Group IV). Pre-listing venture funding roughly $300M+ (RECALL, MEDIUM). Trailing financials: Q2 FY2027 (quarter ended Jul 31, 2026) revenue $116M, +58% YoY; backlog ~$815M (+11% YoY), ~50% recognizable in 12 months, ~70% in 24 months (FACT, company release Sep 2026).",
+      "latest_valuation": "Public market cap (not captured this session). Defense & Intelligence was ~70% of Q2 FY2027 revenue and D&I revenue incl. satellite services grew >90% YoY (FACT).",
+      "major_investors": [
+        "Public float",
+        "Google (legacy holder, RECALL)",
+        "DFJ/Draper (legacy, RECALL)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "PlanetScope / SkySat / Pelican / Tanager constellations",
+          "description": "Daily ~3m medium-resolution global scan (PlanetScope, ~200 Doves), ~50cm tasked SkySat, next-gen ~30cm-class Pelican (Pelican-2 carries NVIDIA Jetson edge compute; RECALL, MEDIUM), and Tanager hyperspectral.",
+          "input_process_output_user": "Input: optical/hyperspectral collection; Process: ground processing to analysis-ready imagery, basemaps; Output: imagery, mosaics, tasking deliveries via API/direct downlink; Users: NGA/NRO/COCOM analysts, allied MoDs, civil."
+        },
+        {
+          "name": "Planet Insights Platform (incl. Sentinel Hub) and Planetary Variables",
+          "description": "Cloud platform for search, streaming, analytics and ML-ready data; Sentinel Hub acquired from Sinergise (2023, FACT stable).",
+          "input_process_output_user": "Input: Planet + third-party EO data; Process: cloud analytics, change/vessel detection; Output: alerts, feeds, dashboards; Users: intelligence analysts, government monitoring cells."
+        },
+        {
+          "name": "AI-enabled Maritime Domain Awareness (MDA) and Global Monitoring Service (GMS)",
+          "description": "Analytic services sold to NGA: MDA across multiple Combatant Commands (Option Year 1, $22M) and GMS crisis-response monitoring ($8M award) (FACT, 2026).",
+          "input_process_output_user": "Input: daily scan imagery; Process: automated vessel/object detection and monitoring; Output: MDA feeds to NGA/COCOMs; Users: NGA, COCOM watch floors."
+        },
+        {
+          "name": "Satellite Services (dedicated capacity / direct downlink)",
+          "description": "Sovereign-style offering: dedicated Pelican capacity and direct-to-ground downlink over defined regions (German government EUR 240M deal, 2025; JSAT commercial Pelican deal, RECALL).",
+          "input_process_output_user": "Input: customer tasking; Process: dedicated satellite capacity; Output: low-latency imagery to customer ground segment; Users: German government defense/intelligence, NATO."
+        }
+      ],
+      "exact_problem_solved": "Persistent, daily, unclassified global optical coverage plus AI monitoring that lets defense/intelligence users detect change, monitor maritime activity and support planning without tasking scarce national assets; increasingly also sovereign, low-latency access via dedicated capacity.",
+      "primary_users": [
+        "NGA and NRO analysts",
+        "Combatant Command watch floors (MDA)",
+        "Allied MoD and intelligence analysts (Germany, NATO, other European customers)",
+        "Civil/commercial users (agriculture, mapping, ESG)"
+      ],
+      "primary_buyers": [
+        "NRO (EOCL)",
+        "NGA (MDA, GMS, Luno B)",
+        "German federal government",
+        "NATO",
+        "Other allied defense/intelligence agencies",
+        "U.S. DoD/Navy (2026 announcements referenced by company; details insufficient)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "INGEST",
+        "NORMALIZE",
+        "STORE",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maritime",
+        "joint",
+        "space",
+        "coalition"
+      ],
+      "segment_ids": [
+        "S03",
+        "S04",
+        "S07"
+      ],
+      "hw_sw_mix": "both - builds and operates its own satellites (hardware) and monetizes mostly through data subscriptions and cloud software/analytics; growing satellite-services line sells dedicated capacity.",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "German government multi-year satellite services and imagery agreement",
+          "customer": "German federal government (defense and intelligence)",
+          "contracting_org": "German federal government (specific agency not disclosed publicly)",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "EUR 240M (~$280-283M) multi-year (FACT)",
+          "funded_amount": "Not disclosed",
+          "task_orders": "",
+          "date": "2025-07-01 (announced)",
+          "period_of_performance": "Multi-year (reported ~7 years; RECALL, MEDIUM)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational service (dedicated Pelican capacity, direct downlink, PlanetScope/SkySat access, AI SA/MDA)",
+          "source_url": "https://www.satellitetoday.com/government-military/2025/07/01/planet-highlights-defense-momentum-with-280m-german-government-deal/",
+          "pub_date": "2025-07-01",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NATO daily monitoring services contract",
+          "customer": "NATO",
+          "contracting_org": "NATO (agency not disclosed)",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "seven-figure (undisclosed)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-06",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational monitoring service",
+          "source_url": "https://www.satellitetoday.com/government-military/2025/07/01/planet-highlights-defense-momentum-with-280m-german-government-deal/",
+          "pub_date": "2025-07-01",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA Maritime Domain Awareness Option Year 1 extension and new Global Monitoring Service award",
+          "customer": "National Geospatial-Intelligence Agency",
+          "contracting_org": "NGA",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "MDA extension $22M (one year); GMS new award $8M",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026 (announced mid-2026; GMS referenced in Q2 FY2027 results)",
+          "period_of_performance": "MDA: one-year option",
+          "prime_or_sub": "prime (Planet Labs Federal)",
+          "prototype_or_production": "operational service (option exercise = repeat procurement)",
+          "source_url": "https://finance.yahoo.com/sectors/technology/articles/planet-secures-8-figure-nga-130400495.html",
+          "pub_date": "2026",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRO Electro-Optical Commercial Layer (EOCL) subscription",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO Commercial Systems Program Office",
+          "vehicle_type": "FAR",
+          "ceiling": "Program-wide ~$4B over 10 years across Maxar/Vantor, BlackSky, Planet; Planet share smallest (RECALL: ~$146M base period; LOW)",
+          "obligated": "Not public",
+          "awarded_value": "Not disclosed for Planet share",
+          "funded_amount": "Program-wide ~ $300M/yr reported; 2025 proposal to cut to ~$200M/yr (SpaceNews)",
+          "task_orders": "",
+          "date": "2022-05-25",
+          "period_of_performance": "Base period plus options through ~2032 (structure reporting varies)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational subscription",
+          "source_url": "https://spacenews.com/satellite-firms-brace-for-potential-imagery-budget-cuts-in-2026/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NGA Luno B IDIQ (awardee)",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$200M shared across 13 vendors",
+          "obligated": "Not disclosed",
+          "awarded_value": "Delivery orders to Planet not verified this session",
+          "funded_amount": "",
+          "task_orders": "Unknown",
+          "date": "2025 (RECALL early 2025; MEDIUM)",
+          "period_of_performance": "Multi-year IDIQ",
+          "prime_or_sub": "prime (Planet Labs Federal, Inc.)",
+          "prototype_or_production": "analytic services IDIQ (ceiling is not revenue)",
+          "source_url": "https://intelligencecommunitynews.com/nga-announces-luno-b-idiq-awardees/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "8-figure contract renewal with international defense and intelligence customer",
+          "customer": "Undisclosed international defense/intelligence agency",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "8-figure (undisclosed)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-11-05",
+          "period_of_performance": "Multi-year renewal",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational (renewal = repeat procurement)",
+          "source_url": "https://www.businesswire.com/news/home/20251105850980/en",
+          "pub_date": "2025-11-05",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "7-figure one-year agreement with European defense and intelligence customer (Mosaics + professional services)",
+          "customer": "Undisclosed European defense/intelligence customer",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "~$7M (reported), one year",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026-09-03 (announced; awarded Aug 2026)",
+          "period_of_performance": "1 year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational planning support",
+          "source_url": "https://www.nasdaq.com/press-release/planet-signs-7-figure-agreement-european-defense-and-intelligence-customer-2026-09-03",
+          "pub_date": "2026-09-03",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "SKY Perfect JSAT Pelican satellite services agreement (commercial)",
+          "customer": "SKY Perfect JSAT (Japan)",
+          "contracting_org": "Commercial",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "~$230M (RECALL - not re-verified this session)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-01 (RECALL)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "commercial satellite services",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "AI-enabled Maritime Domain Awareness delivered to NGA across multiple Combatant Commands",
+          "evidence": "NGA exercised Option Year 1 ($22M) - option exercise implies operational use (FACT)",
+          "source_url": "https://finance.yahoo.com/sectors/technology/articles/planet-secures-8-figure-nga-130400495.html"
+        },
+        {
+          "what": "Ukraine conflict monitoring imagery widely used by governments and media since 2022",
+          "evidence": "RECALL - stable public record; not re-verified this session (MEDIUM)",
+          "source_url": ""
+        },
+        {
+          "what": "German government dedicated Pelican capacity and direct downlink",
+          "evidence": "Contracted July 2025; deployment/operational status not verified this session (INFERENCE that service ramps through 2026)",
+          "source_url": "https://payloadspace.com/planet-scores-e240m-defense-and-intelligence-contract/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named military exercise participation verified this session)",
+          "year": "",
+          "note": "Planet's traction evidence is contractual (options, renewals) rather than exercise-based.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Esri (FACT stable)",
+        "Google Cloud / AWS / Microsoft Planetary Computer (RECALL, MEDIUM)",
+        "Palantir (legacy partnership; RECALL, LOW)",
+        "Sinergise/Sentinel Hub (acquired 2023)",
+        "NVIDIA (Jetson on Pelican-2; RECALL, MEDIUM)"
+      ],
+      "apis_sdks_open_interfaces": "Public, documented REST APIs: Data API, Orders API, Subscriptions API, Tasking API, plus Sentinel Hub APIs and Python SDK/CLI; STAC-style catalogs (FACT stable, company docs; not re-fetched this session).",
+      "security_classification_requirements": "Unclassified commercial data by design; Planet Labs Federal handles U.S. government work; direct-downlink/dedicated capacity model addresses sovereignty needs. Facility/personnel clearance details: Public evidence insufficient.",
+      "allied_international_activity": "Strong: German government EUR 240M (2025), NATO seven-figure (2025), 8-figure international renewal (Nov 2025), ~$7M European D&I customer (Sep 2026), JSAT Japan (commercial, RECALL). International D&I is a stated growth driver.",
+      "technical_differentiator": "Unique daily whole-Earth medium-resolution archive (deep temporal baseline for change detection) combined with tasked high-res and a cloud analytics platform; vertically integrated satellite manufacturing enabling dedicated-capacity sales.",
+      "suspected_moat": "Data-archive network effects (decade of daily imagery), constellation scale and manufacturing cadence, incumbency in NRO/NGA workflows, and expanding sovereign-capacity contracts (INFERENCE, MEDIUM).",
+      "major_competitors": [
+        "Vantor (Maxar)",
+        "BlackSky",
+        "Airbus Defence and Space",
+        "Satellogic",
+        "ICEYE/Umbra/Capella (SAR substitutes)",
+        "European sovereign programs"
+      ],
+      "obvious_weaknesses": "Exposed to NRO EOCL budget-cut proposals (Planet/BlackSky would bear cuts if Maxar fully funded, per 2025 reporting); 3m PlanetScope resolution is coarse for many tactical uses; Pelican fleet still scaling; GAAP profitability only recently approached (first positive non-GAAP EPS Q2 FY2027).",
+      "evidence_user_adoption": "NGA option exercise for MDA and new GMS award; D&I ~70% of quarterly revenue; multiple international agency renewals (FACT, HIGH).",
+      "evidence_repeat_procurement": "NGA MDA Option Year 1 ($22M); 8-figure international renewal (Nov 2025); 'renewed multi-year' international defense agency contract (2025-2026). HIGH.",
+      "evidence_prototype_to_production": "Not a prototype-to-production model; Planet sells operational subscriptions. German dedicated-capacity deal converts pilot-style data sales into multi-year sovereign service (INFERENCE, MEDIUM).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "coalition"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): Python/Go microservices on Kubernetes, historically Google Cloud, geospatial data lakes (STAC/COG), ML pipelines for detection; on-orbit edge compute (NVIDIA Jetson) on Pelican-2.",
+      "confidence_notes": "Financials and 2025-2026 contract announcements verified via press/financial coverage (HIGH). EOCL share values and JSAT deal are RECALL (LOW-MEDIUM). Employee count and investor list RECALL (LOW). 2026 U.S. DoD/Navy awards referenced by the company but details not retrieved: Public evidence insufficient.",
+      "sources": [
+        {
+          "url": "https://www.satellitetoday.com/government-military/2025/07/01/planet-highlights-defense-momentum-with-280m-german-government-deal/",
+          "title": "Planet Highlights Defense Momentum With $280M German Government Deal",
+          "pub_date": "2025-07-01",
+          "type": "independent"
+        },
+        {
+          "url": "https://payloadspace.com/planet-scores-e240m-defense-and-intelligence-contract/",
+          "title": "Planet Scores EUR 240M Defense and Intelligence Contract",
+          "pub_date": "2025-07",
+          "type": "independent"
+        },
+        {
+          "url": "https://finance.yahoo.com/sectors/technology/articles/planet-secures-8-figure-nga-130400495.html",
+          "title": "Planet Secures 8-Figure NGA Contract Extension for Maritime Surveillance and New Award for Crisis Response Monitoring",
+          "pub_date": "2026",
+          "type": "company"
+        },
+        {
+          "url": "https://www.nasdaq.com/press-release/planet-signs-7-figure-agreement-european-defense-and-intelligence-customer-2026-09-03",
+          "title": "Planet Signs 7-Figure Agreement with European Defense and Intelligence Customer",
+          "pub_date": "2026-09-03",
+          "type": "company"
+        },
+        {
+          "url": "https://thedefensepost.com/2026/09/08/europe-satellite-imagery-planet-labs/",
+          "title": "Planet Labs Inks Seven-Figure Satellite Imagery Support Deal in Europe",
+          "pub_date": "2026-09-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.businesswire.com/news/home/20251105850980/en",
+          "title": "Planet Signs 8 Figure Contract Renewal with International Defense and Intelligence Customer",
+          "pub_date": "2025-11-05",
+          "type": "company"
+        },
+        {
+          "url": "https://uk.finance.yahoo.com/news/planet-reports-financial-results-second-200500682.html",
+          "title": "Planet Reports Financial Results for Second Quarter of Fiscal Year 2027",
+          "pub_date": "2026-09",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001836833/000119312526381874/pl-ex99_1.htm",
+          "title": "Planet Labs PBC Form 8-K exhibit 99.1 (Q2 FY2027 results)",
+          "pub_date": "2026-09",
+          "type": "financial"
+        },
+        {
+          "url": "https://spacenews.com/satellite-firms-brace-for-potential-imagery-budget-cuts-in-2026/",
+          "title": "Satellite firms brace for potential imagery budget cuts in 2026",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://breakingdefense.com/2025/06/us-cuts-to-commercial-space-imagery-could-endanger-long-term-health-of-industry-say-insiders/",
+          "title": "US cuts to commercial space imagery could endanger long-term health of industry",
+          "pub_date": "2025-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://intelligencecommunitynews.com/nga-announces-luno-b-idiq-awardees/",
+          "title": "NGA announces Luno B IDIQ awardees",
+          "pub_date": "2025",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "BlackSky Technology Inc.",
+      "aka": "BlackSky; BlackSky Geospatial Solutions, Inc.; NYSE: BKSY",
+      "founding_year": 2013,
+      "headquarters": "Herndon, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~300 (RECALL - not re-verified this session; LOW)",
+      "founders": [
+        "Jason Andrews (Spaceflight Industries founder; RECALL)"
+      ],
+      "founder_backgrounds": "Spun out of Spaceflight Industries (Seattle); current CEO Brian O'Toole (former ex-Lockheed/analytics executive) has led since the 2021 SPAC listing (RECALL, MEDIUM).",
+      "total_disclosed_funding_usd": "Public via SPAC (Osprey Technology, Sept 2021). Q2 2026: revenue $33.3M (+50% YoY from $22.2M), positive adjusted EBITDA $4.7M, ~ $150M cash added to balance sheet in the quarter (FACT, Aug 6, 2026 release).",
+      "latest_valuation": "Public market cap (not captured this session).",
+      "major_investors": [
+        "Public float",
+        "Legacy holders incl. Mithril, Seahawk/Intelsat-related, Palantir-affiliated investors (RECALL, LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Gen-3 and Gen-2 imaging constellation",
+          "description": "Gen-2 ~1m class high-revisit satellites plus Gen-3 35cm-class satellites (first launched Feb 2025; next two expected Q3 2026 per Q2 2026 release). Rocket Lab supplies Gen-3 buses/launch (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: customer tasking; Process: rapid tasking-to-delivery (company claims sub-hour class); Output: imagery and AI detections; Users: NRO, NGA, Space Force GDM users, international MoDs."
+        },
+        {
+          "name": "Spectra AI platform (tasking, tipping and cueing, monitoring, analytics)",
+          "description": "Subscription platform for automated site monitoring, object detection, change detection, and integration of third-party sensors; sold as 'space-based intelligence and AI services'.",
+          "input_process_output_user": "Input: BlackSky and partner sensor data; Process: AI/ML detection, facility monitoring; Output: alerts, reports, API feeds; Users: intelligence analysts, MoD operations centers."
+        },
+        {
+          "name": "AROS (broad-area multispectral EO satellites for foundation imaging)",
+          "description": "NRO-funded development of a commercial alternative for foundation imaging; contract value >$150M after June 2026 modification (FACT).",
+          "input_process_output_user": "Input: broad-area collection; Process: foundation/base mapping imagery; Output: foundation GEOINT to NRO/NGA; Users: IC mapping and foundation data producers."
+        }
+      ],
+      "exact_problem_solved": "High-revisit, rapidly tasked, high-resolution optical imagery with AI monitoring so users can watch specific sites/facilities many times per day and receive alerts, at commercial cost and unclassified releasability.",
+      "primary_users": [
+        "NRO/NGA analysts",
+        "Space Force / JCO and GDM users",
+        "International MoD intelligence and operations staffs",
+        "COCOM and Army GEOINT cells (RECALL, LOW)"
+      ],
+      "primary_buyers": [
+        "NRO (EOCL, AROS)",
+        "NGA (Luno A/B)",
+        "AFRL",
+        "U.S. Space Force (Global Data Marketplace)",
+        "International Ministries of Defense (multi-year subscriptions)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "INGEST",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "joint",
+        "space",
+        "maritime",
+        "coalition"
+      ],
+      "segment_ids": [
+        "S03",
+        "S04",
+        "S07"
+      ],
+      "hw_sw_mix": "both - designs satellites (built with partners) and sells subscriptions to imagery plus the Spectra software/AI platform; also payload/satellite development for government (AROS, AFRL payload).",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "NRO Electro-Optical Commercial Layer (EOCL) subscription (award and later one-year extension)",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO Commercial Systems Program Office",
+          "vehicle_type": "FAR",
+          "ceiling": "BlackSky share up to ~$1.02B over 10 years incl. all options (RECALL, MEDIUM); program ~$4B",
+          "obligated": "Not public",
+          "awarded_value": "Not disclosed annually",
+          "funded_amount": "Not public",
+          "task_orders": "",
+          "date": "2022-05-25 (award); one-year extension for Gen-2 services and feature enhancements announced later (date not verified; ~2025)",
+          "period_of_performance": "Reported as five-year base plus five one-year options (ExecutiveGov); earlier reports described shorter base (RECALL) - structure uncertain",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational subscription",
+          "source_url": "https://www.executivegov.com/articles/blacksky-secures-nro-contract-extension-for-high-frequency-imagery-services",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NRO AROS development contract and 8-figure modification",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not public",
+          "awarded_value": "Total contract value >$150M after modification (FACT)",
+          "funded_amount": "8-figure modification (undisclosed)",
+          "task_orders": "",
+          "date": "2026-06 (modification)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "development/prototype satellites (not yet operational)",
+          "source_url": "https://www.satellitetoday.com/imagery-and-sensing/2026/06/09/nro-awards-blacksky-multi-million-dollar-modification-to-accelerate-aros-development/",
+          "pub_date": "2026-06-09",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "AFRL large optical imaging payload development",
+          "customer": "Air Force Research Laboratory",
+          "contracting_org": "AFRL",
+          "vehicle_type": "FAR",
+          "ceiling": "up to $99M (ceiling, not revenue)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "Reported by SpaceNews (exact award date not verified this session; 2025-2026)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype/R&D",
+          "source_url": "https://spacenews.com/air-force-lab-awards-blacksky-contract-worth-up-to-99-million-for-large-optical-satellite-payload/",
+          "pub_date": "2025-2026",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "NGA Luno A IDIQ (awardee) and delivery orders",
+          "customer": "National Geospatial-Intelligence Agency",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$290M shared among 10 awardees, five years",
+          "obligated": "Not public",
+          "awarded_value": "Facility Operational Monitoring delivery order valued >$24M (June 2025); AI-enabled change detection delivery order (value not verified); 7-figure renewals in 2026",
+          "funded_amount": "",
+          "task_orders": "At least two named delivery orders plus 2026 renewals",
+          "date": "2024-09 (IDIQ); 2025-06-24 (>$24M DO)",
+          "period_of_performance": "5-year IDIQ",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational analytic services",
+          "source_url": "https://www.satellitetoday.com/government-military/2025/06/24/nga-awards-blacksky-potential-24m-luno-a-task-order-for-ai-based-analytics/",
+          "pub_date": "2025-06-24",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA Luno B IDIQ (awardee)",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "$200M shared across 13 vendors",
+          "obligated": "",
+          "awarded_value": "",
+          "funded_amount": "",
+          "task_orders": "Not verified",
+          "date": "2025 (RECALL early 2025)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "analytic services IDIQ",
+          "source_url": "https://intelligencecommunitynews.com/nga-announces-luno-b-idiq-awardees/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "$25M multi-year subscription with major international Ministry of Defense (35cm imagery + AI analytics)",
+          "customer": "Undisclosed international MoD",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$25M multi-year",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026 (H1)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational subscription",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/0001753539/000175353926000118/exhibit991-blackskyq22026e.htm",
+          "pub_date": "2026-08-06",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "Multi-year international defense contract combining Gen-2 and Gen-3 (scaled from pilot)",
+          "customer": "Undisclosed international defense customer",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026-08-12",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (expands initial pilot deployment to operational access)",
+          "source_url": "https://satnews.com/2026/08/12/blacksky-awarded-multi-year-international-defense-contract-combining-gen-2-and-gen-3-satellite-intelligence/",
+          "pub_date": "2026-08-12",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "U.S. Space Force Global Data Marketplace orders",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command Commercial Space Office (INFERENCE)",
+          "vehicle_type": "BPA",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Not disclosed ('continued new orders')",
+          "funded_amount": "",
+          "task_orders": "Multiple",
+          "date": "2026",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational data orders",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/0001753539/000175353926000118/exhibit991-blackskyq22026e.htm",
+          "pub_date": "2026-08-06",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Multi-year Gen-3 international customer contract (~$150M-class, reported 2024)",
+          "customer": "International customer (press reports pointed to Indonesian MoD; not verified)",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "RECALL - not re-verified this session",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024 (RECALL)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "Gen-3 capacity subscription",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Gen-3 subscription services generating record revenue with accelerating customer adoption, notably international",
+          "evidence": "Q2 2026 results attribute +50% revenue growth to Gen-3 subscriptions (FACT)",
+          "source_url": "https://blacksky.com/press-releases/blacksky-reports-second-quarter-2026-results/"
+        },
+        {
+          "what": "NGA facility monitoring and change-detection services under Luno A",
+          "evidence": "Delivery orders and 2026 renewals (FACT)",
+          "source_url": "https://blacksky.com/press-releases/blacksky-wins-nga-luno-a-delivery-order-for-ai-enabled-change-detection/"
+        },
+        {
+          "what": "NRO EOCL operational imagery subscription",
+          "evidence": "Award 2022 plus one-year extension (FACT)",
+          "source_url": "https://blacksky.com/press-releases/blacksky-wins-electro-optical-commercial-layer-extension-contract-with-the-national-reconnaissance-office-for-gen-2-services-and-feature-enhancements/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named exercise verified this session); RECALL of Army/USAF tactical demos (LOW)",
+          "year": "",
+          "note": "International contract expanded from a pilot deployment (2026) is the clearest pilot-to-scale evidence.",
+          "source_url": "https://satnews.com/2026/08/12/blacksky-awarded-multi-year-international-defense-contract-combining-gen-2-and-gen-3-satellite-intelligence/"
+        }
+      ],
+      "integration_partners": [
+        "Rocket Lab (Gen-3 bus/launch; RECALL, MEDIUM)",
+        "Palantir (data integration; RECALL, LOW)",
+        "Esri (RECALL, LOW)",
+        "LeoStella (former JV manufacturer; RECALL)"
+      ],
+      "apis_sdks_open_interfaces": "Spectra platform exposes tasking and data APIs for programmatic tasking/delivery (company docs; RECALL, MEDIUM). Public developer portal details not re-fetched this session.",
+      "security_classification_requirements": "Unclassified commercial products; U.S. government work through cleared U.S. entity (BlackSky Geospatial Solutions). Facility clearance specifics: Public evidence insufficient.",
+      "allied_international_activity": "Growing share: $25M multi-year MoD subscription (2026), multi-year international defense contract scaled from pilot (Aug 2026), earlier large multi-year international Gen-3 deal (RECALL). Management cites international as principal Gen-3 growth engine.",
+      "technical_differentiator": "Very high revisit from mid-inclination orbits, fast tasking-to-delivery, and AI-first monitoring platform; now moving up into government-funded satellite/payload development (AROS, AFRL payload).",
+      "suspected_moat": "Deep NRO/NGA workflow integration, accumulating Gen-3 capacity funded by subscriptions, and now NRO-funded AROS positioning as foundation-imaging alternative (INFERENCE, MEDIUM).",
+      "major_competitors": [
+        "Planet Labs",
+        "Vantor (Maxar)",
+        "Airbus",
+        "Satellogic",
+        "SAR providers (Umbra, Capella, ICEYE US)"
+      ],
+      "obvious_weaknesses": "Small revenue base ($33.3M/quarter) with heavy dependence on NRO/NGA; EOCL cut proposals would hit BlackSky/Planet first; constellation replenishment capex; history of dilution and debt.",
+      "evidence_user_adoption": "Record Gen-3 subscription revenue, expanding customer base, Space Force GDM repeat orders (FACT, HIGH).",
+      "evidence_repeat_procurement": "EOCL one-year extension; Luno A renewals (2026); international pilot expanded to multi-year contract; GDM repeat orders. HIGH.",
+      "evidence_prototype_to_production": "International pilot to multi-year operational contract (Aug 2026, FACT). AROS and AFRL payload remain development stage (not production).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): AWS-hosted microservices, Python/Java, computer-vision ML for object detection, satellite flight software and ground automation.",
+      "confidence_notes": "2026 quarterly results, NRO AROS modification, NGA Luno orders and international awards verified via press/SEC exhibit summaries (HIGH). EOCL contract structure conflicting across sources (MEDIUM). 2024 ~$150M international deal, founders, employee count and investors are RECALL (LOW).",
+      "sources": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001753539/000175353926000118/exhibit991-blackskyq22026e.htm",
+          "title": "BlackSky Form 8-K exhibit 99.1 - Q2 2026 results",
+          "pub_date": "2026-08-06",
+          "type": "financial"
+        },
+        {
+          "url": "https://blacksky.com/press-releases/blacksky-reports-second-quarter-2026-results/",
+          "title": "BlackSky reports second quarter 2026 results",
+          "pub_date": "2026-08-06",
+          "type": "company"
+        },
+        {
+          "url": "https://www.satellitetoday.com/imagery-and-sensing/2026/06/09/nro-awards-blacksky-multi-million-dollar-modification-to-accelerate-aros-development/",
+          "title": "NRO Awards BlackSky Multi-Million Dollar Modification to Accelerate AROS Development",
+          "pub_date": "2026-06-09",
+          "type": "independent"
+        },
+        {
+          "url": "https://spacenews.com/air-force-lab-awards-blacksky-contract-worth-up-to-99-million-for-large-optical-satellite-payload/",
+          "title": "Air Force lab awards BlackSky contract worth up to $99 million for large optical satellite payload",
+          "pub_date": "2025-2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://satnews.com/2026/08/12/blacksky-awarded-multi-year-international-defense-contract-combining-gen-2-and-gen-3-satellite-intelligence/",
+          "title": "BlackSky Awarded Multi-Year International Defense Contract Combining Gen-2 and Gen-3",
+          "pub_date": "2026-08-12",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.satellitetoday.com/government-military/2025/06/24/nga-awards-blacksky-potential-24m-luno-a-task-order-for-ai-based-analytics/",
+          "title": "NGA Awards BlackSky Potential $24M Luno A Task Order for AI-Based Analytics",
+          "pub_date": "2025-06-24",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.nga.mil/news/NGA_awards_$290_million_Luno_A_commercial_data_con.html",
+          "title": "NGA announces award as part of Luno A commercial data contract",
+          "pub_date": "2024-09",
+          "type": "gov"
+        },
+        {
+          "url": "https://www.nga.mil/news/NGA_announces_selectees_for_$200M_Luno_B_IDIQ.html",
+          "title": "NGA announces selectees for $200M Luno B IDIQ",
+          "pub_date": "2025",
+          "type": "gov"
+        },
+        {
+          "url": "https://www.executivegov.com/articles/blacksky-secures-nro-contract-extension-for-high-frequency-imagery-services",
+          "title": "BlackSky Secures NRO Contract Extension for High-frequency Imagery Services",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.satellitetoday.com/government-military/2022/05/25/nro-awards-imagery-contracts-to-maxar-blacksky-and-planet-worth-billions/",
+          "title": "NRO Awards Imagery Contracts to Maxar, BlackSky, and Planet Worth Billions",
+          "pub_date": "2022-05-25",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Umbra Lab, Inc.",
+      "aka": "Umbra; Umbra Space",
+      "founding_year": 2015,
+      "headquarters": "Santa Barbara, California, USA (additional presence in Arlington, VA area; RECALL, MEDIUM)",
+      "public_private": "private",
+      "employee_count_approx": "~150-300 (RECALL - not re-verified; LOW)",
+      "founders": [
+        "David Langan (CEO)",
+        "Gabe Dominocielo (co-founder/President)"
+      ],
+      "founder_backgrounds": "Langan: RF/radar engineering background; Dominocielo: business/communications; both co-founded Umbra to build low-cost high-resolution SAR smallsats (RECALL, MEDIUM).",
+      "total_disclosed_funding_usd": "Public evidence insufficient this session. RECALL: venture rounds through a 2021 Series B, cumulative ~ $100M-class, with company statements about being cash-flow positive/profitable in 2023-2024 (LOW).",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Public evidence insufficient this session (RECALL of venture and family-office backers; LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Umbra SAR constellation and imagery services",
+          "description": "X-band SAR smallsats offering the highest commercially available resolution (16-25cm class in best modes; RECALL, MEDIUM), with global tasking capacity and low-latency delivery now sold to NRO under Radar Commercial Augmentation (FACT).",
+          "input_process_output_user": "Input: government/commercial tasking; Process: SAR collection, ground processing to SLC/GEC products; Output: radar imagery, complex data for coherent change detection; Users: NRO/NGA analysts, Space Force users, allied MoDs, analytics partners."
+        },
+        {
+          "name": "Canopy tasking/data platform and Open Data Program",
+          "description": "Web/API tasking and delivery interface (Canopy; RECALL, MEDIUM) and a free open SAR data program used by researchers and startups (FACT stable).",
+          "input_process_output_user": "Input: tasking requests via API; Process: scheduling and delivery; Output: SAR products in standard formats; Users: developers, analytics firms, government."
+        },
+        {
+          "name": "Next-generation maritime surveillance satellites (STRATFI)",
+          "description": "Selected to develop maritime surveillance SAR satellites under a STRATFI public-private agreement valued up to $60M pending final contracting and co-investment (FACT per SpaceNews; timing MEDIUM).",
+          "input_process_output_user": "Input: wide-area maritime collection; Process: onboard/ground vessel detection; Output: maritime tracks/detections to military users; Users: Navy/Space Force maritime domain awareness cells (INFERENCE)."
+        }
+      ],
+      "exact_problem_solved": "All-weather, day-night high-resolution radar imaging with assured tasking so intelligence and maritime users can see through cloud/darkness and detect change; supplies U.S. government with a domestic commercial SAR augmentation layer.",
+      "primary_users": [
+        "NRO and downstream IC/NGA analysts",
+        "Space Force / Joint commercial operations users (RECALL)",
+        "Maritime domain awareness analysts",
+        "SAR analytics developers"
+      ],
+      "primary_buyers": [
+        "NRO Commercial Systems Program Office (RCA)",
+        "U.S. Space Force / AFWERX (STRATFI)",
+        "Analytics resellers and international governments (RECALL, LOW)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maritime",
+        "space",
+        "joint"
+      ],
+      "segment_ids": [
+        "S03"
+      ],
+      "hw_sw_mix": "both - designs/builds its own SAR satellites and radar payloads (hardware-heavy) and sells data via software tasking platform; has also offered satellite hardware to third parties (RECALL, LOW).",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "NRO Radar Commercial Augmentation (RCA) sole-source contract",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO Commercial Systems Program Office",
+          "vehicle_type": "FAR",
+          "ceiling": "Not disclosed (NRO budget classified)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "",
+          "date": "2026-08-05 (announced); base begins 2026-08-01",
+          "period_of_performance": "Base 2026-08-01 to 2027-07-31 plus two option years to 2029-07-31",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational augmentation (follow-on to four years of study contracts)",
+          "source_url": "https://breakingdefense.com/2026/08/nro-issues-3-sar-satellite-data-providers-rigorous-new-contracts/",
+          "pub_date": "2026-08",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRO Commercial Radar Capabilities (CRC) three-phase study contracts (Strategic Commercial Enhancements BAA)",
+          "customer": "NRO",
+          "contracting_org": "NRO CSPO",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2022-01 (program start) through 2026",
+          "period_of_performance": "Phased 2022-2026",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "study/evaluation (prototype-class)",
+          "source_url": "https://www.satellitetoday.com/government-military/2026/08/05/capella-iceye-us-and-umbra-receive-nro-commercial-sar-contracts/",
+          "pub_date": "2026-08-05",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "STRATFI agreement for next-generation maritime surveillance satellites",
+          "customer": "U.S. military (Space Force/AFWERX STRATFI; INFERENCE on office)",
+          "contracting_org": "AFWERX/AFRL (INFERENCE)",
+          "vehicle_type": "SBIR",
+          "ceiling": "up to $60M including required private co-investment (pending final contracting)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not finalized at time of report",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026 (exact date not verified this session)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype development",
+          "source_url": "https://spacenews.com/umbra-to-develop-maritime-surveillance-satellites-for-u-s-military/",
+          "pub_date": "2026",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Space Force Tactical Surveillance, Reconnaissance and Tracking (TacSRT) task orders",
+          "customer": "U.S. Space Force",
+          "contracting_org": "Space Systems Command Commercial Space Office",
+          "vehicle_type": "BPA",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "RECALL - not re-verified this session",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024 (RECALL)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational pilot",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Operational SAR augmentation for NRO with assured global tasking and low-latency delivery to government users",
+          "evidence": "RCA sole-source award after completing all study phases (FACT); Breaking Defense characterizes the contracts as 'rigorous' operational terms",
+          "source_url": "https://breakingdefense.com/2026/08/nro-issues-3-sar-satellite-data-providers-rigorous-new-contracts/"
+        },
+        {
+          "what": "Ukraine-related SAR imagery use by allied/commercial analysts",
+          "evidence": "RECALL - not re-verified (LOW)",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named exercise verified this session)",
+          "year": "",
+          "note": "Evidence base is NRO study phases culminating in the 2026 RCA award.",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Ursa Space Systems and other SAR analytics resellers (RECALL, MEDIUM)",
+        "SkyFi / UP42 style marketplaces (RECALL, LOW)",
+        "SpaceX rideshare launches (FACT stable)"
+      ],
+      "apis_sdks_open_interfaces": "Tasking/delivery API (Canopy) and an Open Data Program with freely downloadable SAR products (RECALL, MEDIUM; company site not fetchable this session due to proxy block).",
+      "security_classification_requirements": "Unclassified commercial SAR; U.S.-owned provider preferred for NRO augmentation; clearance/facility details: Public evidence insufficient.",
+      "allied_international_activity": "Public evidence insufficient this session (RECALL of international data sales via partners; LOW).",
+      "technical_differentiator": "Highest-resolution commercial SAR at low unit cost from smallsats with large deployable antenna; open data posture lowered adoption friction for analytics developers.",
+      "suspected_moat": "Proprietary antenna/radar design and cost position; NRO qualification through multi-year study phases creates switching costs (INFERENCE, MEDIUM).",
+      "major_competitors": [
+        "Capella Space (IonQ)",
+        "ICEYE / ICEYE US",
+        "Airbus (TerraSAR/PAZ)",
+        "Synspective",
+        "iQPS"
+      ],
+      "obvious_weaknesses": "Private with limited public financial disclosure; contract values undisclosed; SAR products require specialist PED to be useful to tactical users; competing for the same NRO budget with two peers; maritime satellite program not yet finalized.",
+      "evidence_user_adoption": "Progression through three NRO study phases to operational augmentation implies sustained government use (FACT for progression; INFERENCE for usage volume). HIGH/MEDIUM.",
+      "evidence_repeat_procurement": "NRO follow-on after four years of contracted work (FACT). HIGH.",
+      "evidence_prototype_to_production": "Study/evaluation contracts (2022-2026) to sole-source operational RCA contract (Aug 2026) is a documented prototype-to-production style transition (FACT). HIGH.",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): RF/antenna and radar signal processing (C++/CUDA), Python data pipelines, cloud-hosted tasking API, satellite flight software; hiring emphasis on RF hardware and mission operations.",
+      "confidence_notes": "NRO RCA award and terms verified across Breaking Defense, Via Satellite, Defense Daily and company release (HIGH). STRATFI maritime program from SpaceNews summary (MEDIUM on timing/value). Funding, headcount, TacSRT and partner claims are RECALL (LOW). Company site blocked by egress proxy.",
+      "sources": [
+        {
+          "url": "https://breakingdefense.com/2026/08/nro-issues-3-sar-satellite-data-providers-rigorous-new-contracts/",
+          "title": "NRO issues 3 SAR satellite data providers 'rigorous' new contracts",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.satellitetoday.com/government-military/2026/08/05/capella-iceye-us-and-umbra-receive-nro-commercial-sar-contracts/",
+          "title": "Capella, Iceye US, and Umbra Receive NRO Commercial SAR Contracts",
+          "pub_date": "2026-08-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://umbra.space/blog/umbra-nro-radar-contract/",
+          "title": "Umbra Wins Sole-Source Contract from the NRO for Radar Commercial Augmentation",
+          "pub_date": "2026-08-05",
+          "type": "company"
+        },
+        {
+          "url": "https://www.defensedaily.com/capella-iceye-us-and-umbra-receive-nro-commercial-sar-contracts/intelligence-community/",
+          "title": "Capella, ICEYE US, And Umbra Receive NRO Commercial SAR Contracts",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://spacenews.com/umbra-to-develop-maritime-surveillance-satellites-for-u-s-military/",
+          "title": "Umbra to develop maritime surveillance satellites for U.S. military",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Capella Space",
+      "aka": "Capella, an IonQ company; Capella Federal (US government subsidiary, RECALL); IonQ Space Division",
+      "founding_year": 2016,
+      "headquarters": "San Francisco, California, USA (parent IonQ: College Park, Maryland)",
+      "public_private": "subsidiary",
+      "employee_count_approx": "~150-250 (RECALL - not re-verified; LOW)",
+      "founders": [
+        "Payam Banazadeh",
+        "William Woods"
+      ],
+      "founder_backgrounds": "Banazadeh: former NASA JPL engineer, Stanford MBA; Woods: SAR engineering. Frank Backes (ex-Kratos) became CEO in 2024 (RECALL, MEDIUM).",
+      "total_disclosed_funding_usd": "Pre-acquisition venture funding roughly $250-300M incl. $97M Series C (2022) and a ~$60M 2023 round (RECALL, MEDIUM). Acquired by IonQ in an all-stock transaction announced May 2025 and closed in 2025 (RECALL on close timing and value; LOW-MEDIUM).",
+      "latest_valuation": "Now consolidated inside IonQ (NYSE: IONQ); acquisition consideration reported as all-stock in the low hundreds of millions of dollars (RECALL, LOW).",
+      "major_investors": [
+        "IonQ (parent)",
+        "Legacy investors incl. NightDragon, Thomas Tull's US Innovative Technology Fund, DCVC, Spark Capital (RECALL, MEDIUM)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Acadia-generation SAR constellation",
+          "description": "Third-generation X-band SAR satellites delivering ~50cm-class spot imagery with automated tasking and rapid delivery; constellation in the single digits (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: API tasking; Process: SAR collection and processing; Output: imagery/complex data, vessel and change detections; Users: NRO/NGA, Space Force, allied governments, analytics firms."
+        },
+        {
+          "name": "Capella Console and Tasking API; Capella Analytics",
+          "description": "Self-service web console and publicly documented REST API for tasking, ordering and delivery; analytics for vessel detection and change detection (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: user tasking; Process: automated scheduling, processing, analytics; Output: standard SAR products and detections via API; Users: developers, analysts."
+        },
+        {
+          "name": "NRO Radar Commercial Augmentation services",
+          "description": "Commercial SAR imagery and data services for national security missions under NRO RCA (FACT, Aug 2026).",
+          "input_process_output_user": "Input: NRO tasking; Process: assured collection; Output: low-latency radar imagery to government users; Users: NRO and downstream IC."
+        }
+      ],
+      "exact_problem_solved": "All-weather, day-night radar imaging with self-service tasking and fast delivery for intelligence and maritime users, now positioned by IonQ as the space segment of a quantum networking/sensing strategy (INFERENCE).",
+      "primary_users": [
+        "NRO and IC analysts",
+        "Space Force and DoD users (RECALL)",
+        "Allied government analysts",
+        "Commercial/analytics developers"
+      ],
+      "primary_buyers": [
+        "NRO CSPO (RCA)",
+        "NASA CSDA (civil; RECALL)",
+        "U.S. Space Force / AFRL (RECALL, LOW)",
+        "International governments (RECALL, LOW)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "IDENTIFY",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maritime",
+        "space",
+        "joint"
+      ],
+      "segment_ids": [
+        "S03"
+      ],
+      "hw_sw_mix": "both - designs and builds SAR satellites and operates a software tasking/delivery platform.",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "NRO Radar Commercial Augmentation (RCA) sole-source contract",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO Commercial Systems Program Office",
+          "vehicle_type": "FAR",
+          "ceiling": "Not disclosed by NRO; one secondary blog cited $25.6M (unverified, LOW)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026-08-05/06 (announced)",
+          "period_of_performance": "Base 2026-08-01 to 2027-07-31 plus two option years to 2029-07-31",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational augmentation",
+          "source_url": "https://www.ionq.com/news/ionqs-space-division-awarded-nro-radar-commercial-augmentation-contract",
+          "pub_date": "2026-08-06",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRO Commercial Radar Capabilities (CRC) three-phase study contracts",
+          "customer": "NRO",
+          "contracting_org": "NRO CSPO",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2022-01 onward",
+          "period_of_performance": "Phased 2022-2026",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "study/evaluation",
+          "source_url": "https://www.satellitetoday.com/government-military/2026/08/05/capella-iceye-us-and-umbra-receive-nro-commercial-sar-contracts/",
+          "pub_date": "2026-08-05",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NASA Commercial SmallSat Data Acquisition (CSDA) program on-ramp",
+          "customer": "NASA",
+          "contracting_org": "NASA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Shared program ceiling (not C4ISR)",
+          "obligated": "",
+          "awarded_value": "RECALL - not re-verified",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2022-2023 (RECALL)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "data purchase",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "U.S. Air Force / Space Force SBIR and tactical SAR awards",
+          "customer": "USAF/USSF",
+          "contracting_org": "AFWERX / SSC (RECALL)",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "RECALL - not re-verified this session",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2020-2023 (RECALL)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Commercial SAR data services to NRO under an operational augmentation contract",
+          "evidence": "RCA award following three completed study phases (FACT)",
+          "source_url": "https://thequantuminsider.com/2026/08/06/ionq-space-division-nro-radar-commercial-augmentation-contract/"
+        },
+        {
+          "what": "Ukraine and other conflict monitoring by government/analyst users",
+          "evidence": "RECALL - not re-verified (LOW)",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named exercise verified this session)",
+          "year": "",
+          "note": "",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "IonQ ecosystem (quantum networking companies acquired by IonQ; INFERENCE)",
+        "Analytics resellers/marketplaces (RECALL, LOW)",
+        "AWS Ground Station (RECALL, MEDIUM)"
+      ],
+      "apis_sdks_open_interfaces": "Publicly documented Capella API (tasking, catalog, orders) with open GitHub examples (RECALL, MEDIUM; not re-fetched this session).",
+      "security_classification_requirements": "Unclassified commercial SAR; U.S. government work via U.S. subsidiary; foreign-ownership questions mitigated as IonQ is a U.S. public company (INFERENCE). Clearance details: Public evidence insufficient.",
+      "allied_international_activity": "Public evidence insufficient this session (RECALL of international government customers and reseller deals; LOW).",
+      "technical_differentiator": "Automated, self-service SAR tasking with quick delivery; early mover in U.S. commercial SAR; potential coupling with IonQ quantum-secure communications ambitions (INFERENCE, LOW).",
+      "suspected_moat": "NRO qualification and operational contract, U.S. ownership, and API-first customer base (INFERENCE, MEDIUM). Parent-company capital access post-acquisition may be an advantage.",
+      "major_competitors": [
+        "Umbra",
+        "ICEYE / ICEYE US",
+        "Airbus",
+        "Synspective",
+        "iQPS",
+        "PredaSAR/Terran Orbital lineage (RECALL)"
+      ],
+      "obvious_weaknesses": "Small constellation; integration under a quantum-computing parent with different strategic focus; contract values undisclosed; SAR data still needs downstream PED to inform C2.",
+      "evidence_user_adoption": "Progression through NRO study phases into RCA (FACT, HIGH for progression; MEDIUM for usage intensity).",
+      "evidence_repeat_procurement": "NRO follow-on contract after multi-year study work (FACT). MEDIUM-HIGH.",
+      "evidence_prototype_to_production": "Study contracts to operational RCA contract in Aug 2026 (FACT, HIGH).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "joint"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): Python/cloud-native processing on AWS, SAR signal processing, ML detection models, API platform engineering; post-acquisition roles referencing quantum networking integration.",
+      "confidence_notes": "NRO RCA award verified across IonQ release and three trade outlets (HIGH). Acquisition close date/value, funding totals, founders' current roles and other contracts are RECALL (LOW-MEDIUM). The $25.6M figure comes from a single secondary blog and is not corroborated by NRO (LOW).",
+      "sources": [
+        {
+          "url": "https://www.ionq.com/news/ionqs-space-division-awarded-nro-radar-commercial-augmentation-contract",
+          "title": "IonQ's Space Division Awarded NRO Radar Commercial Augmentation Contract",
+          "pub_date": "2026-08-06",
+          "type": "company"
+        },
+        {
+          "url": "https://thequantuminsider.com/2026/08/06/ionq-space-division-nro-radar-commercial-augmentation-contract/",
+          "title": "IonQ's Space Division Awarded NRO Radar Commercial Augmentation Contract",
+          "pub_date": "2026-08-06",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.satellitetoday.com/government-military/2026/08/05/capella-iceye-us-and-umbra-receive-nro-commercial-sar-contracts/",
+          "title": "Capella, Iceye US, and Umbra Receive NRO Commercial SAR Contracts",
+          "pub_date": "2026-08-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://quantumzeitgeist.com/ionqs-win-quantum-space-25-6m/",
+          "title": "IonQ's Quantum Space Division Wins $25.6M Radar Imagery Contract (uncorroborated value)",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Capella_Space",
+          "title": "Capella Space - Wikipedia",
+          "pub_date": "2026",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "HawkEye 360, Inc.",
+      "aka": "HawkEye 360; NYSE: HAWK",
+      "founding_year": 2015,
+      "headquarters": "Herndon, Virginia, USA",
+      "public_private": "public",
+      "employee_count_approx": "~300-400 (RECALL - not re-verified; LOW)",
+      "founders": [
+        "John Serafini (CEO)",
+        "Chris DeMay",
+        "T. Charles Clancy"
+      ],
+      "founder_backgrounds": "Serafini: Allied Minds venture executive turned CEO; DeMay: RF/space systems engineer; Clancy: Virginia Tech Hume Center wireless/security researcher (RECALL, MEDIUM).",
+      "total_disclosed_funding_usd": "Pre-IPO venture funding ~$375M+ (RECALL, MEDIUM). IPO completed 2026-05-07 on NYSE: 16M shares at $26 (top of range), raising $416M (FACT). 2025 revenue $117.7M vs $67.6M in 2024 (FACT, S-1 via press).",
+      "latest_valuation": "~$2.4B at IPO price; ~$3.15B at first-day open of $33.80 (FACT, May 2026). Current market cap not captured.",
+      "major_investors": [
+        "Insight Partners (RECALL)",
+        "Razor's Edge Ventures (RECALL)",
+        "NightDragon (RECALL)",
+        "Advance (RECALL)",
+        "Public float post-IPO"
+      ],
+      "c4isr_products": [
+        {
+          "name": "RF geolocation satellite constellation",
+          "description": "Clusters of formation-flying smallsats that detect and geolocate RF emitters (radars, comms, GPS jammers, AIS/VHF, EPIRB) across VHF-through-X-band (RECALL on bands, MEDIUM); 30+ satellites on orbit (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: RF emissions; Process: TDOA/FDOA geolocation and signal characterization; Output: geolocated emitter detections and analytics feeds; Users: NRO/NGA/IC analysts, Space Force JCO, maritime and EW cells, allied MoDs."
+        },
+        {
+          "name": "Mission Space software and RF analytics",
+          "description": "Web platform for visualizing/analyzing RF detections, GPS interference mapping, maritime dark-vessel activity, and spectrum awareness; sold as data subscriptions and analytics (RECALL, MEDIUM).",
+          "input_process_output_user": "Input: RF detections plus AIS/EO context; Process: pattern-of-life, interference mapping, correlation; Output: alerts, layers for COP tools; Users: intelligence analysts, MDA operators."
+        },
+        {
+          "name": "NRO Commercial RF Capability Augmentation (CRFCA) services",
+          "description": "Operational augmentation contract delivering commercial RF data to national security missions; first commercial provider to move from BAA study phases to operational augmentation (FACT, Aug 2026).",
+          "input_process_output_user": "Input: NRO collection requirements; Process: constellation tasking; Output: RF data to NRO; Users: IC."
+        }
+      ],
+      "exact_problem_solved": "Unclassified, space-based detection and geolocation of RF emitters (including 'dark' vessels and GPS jammers) so government users gain wide-area electronic order-of-battle and maritime awareness without national SIGINT assets.",
+      "primary_users": [
+        "NRO/NGA/IC analysts",
+        "U.S. Space Force Joint Commercial Operations cell",
+        "Maritime domain awareness and coast guard analysts",
+        "Allied MoD intelligence staffs"
+      ],
+      "primary_buyers": [
+        "NRO CSPO (CRFCA)",
+        "NGA (RF emitter data, analytics task orders)",
+        "U.S. Space Force (JCO)",
+        "International government customers (>$100M new awards in 2026)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maritime",
+        "space",
+        "EW",
+        "joint",
+        "coalition"
+      ],
+      "segment_ids": [
+        "S03",
+        "S12",
+        "S07",
+        "S11"
+      ],
+      "hw_sw_mix": "both - builds and operates RF sensing satellites and sells data plus analytics software.",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "NRO Commercial RF Capability Augmentation (CRFCA) contract",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO Commercial Systems Program Office",
+          "vehicle_type": "FAR",
+          "ceiling": "No fixed value cap per company statement",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "Not disclosed",
+          "task_orders": "",
+          "date": "2026-08-18 (announced)",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational augmentation",
+          "source_url": "https://www.nasdaq.com/press-release/hawkeye-360-awarded-nro-commercial-rf-capability-augmentation-contract-2026-08-18",
+          "pub_date": "2026-08-18",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRO Broad Agency Announcement commercial RF study contracts (Phases 1-3)",
+          "customer": "NRO",
+          "contracting_org": "NRO CSPO",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2019-2026 (phases; RECALL on start year)",
+          "period_of_performance": "Phased",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "study/evaluation",
+          "source_url": "https://www.militaryaerospace.com/rf-analog/article/55399280/nro-moves-commercial-rf-sensing-into-operational-augmentation",
+          "pub_date": "2026-08",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA RF emitter data contract extension and analytics task order",
+          "customer": "National Geospatial-Intelligence Agency",
+          "contracting_org": "NGA",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed",
+          "funded_amount": "",
+          "task_orders": "Task order for emerging commercial analytics services",
+          "date": "2024-09 (extension); relationship >4 years",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational data services",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1750704/000162828026024593/hawkeye360-sx1.htm",
+          "pub_date": "2026-04",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "U.S. Space Force Joint Commercial Operations (JCO) space domain awareness contracts",
+          "customer": "U.S. Space Force",
+          "contracting_org": "USSF / JCO",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Not disclosed (several contracts over ~2 years)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2024-2026",
+          "period_of_performance": "~2 years cumulative",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational support",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1750704/000162828026024593/hawkeye360-sx1.htm",
+          "pub_date": "2026-04",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "International contract awards announced in 2026",
+          "customer": "Undisclosed international government customers",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": ">$100M aggregate new awards (FACT per earnings release summary)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2026",
+          "period_of_performance": "Multi-year (INFERENCE)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational subscriptions",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/0001750704/000175070426000018/exhibit991-earningsrelease.htm",
+          "pub_date": "2026-08",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Commercial RF data feeding NRO operational augmentation",
+          "evidence": "CRFCA award after all three BAA phases (FACT)",
+          "source_url": "https://www.militaryaerospace.com/rf-analog/article/55399280/nro-moves-commercial-rf-sensing-into-operational-augmentation"
+        },
+        {
+          "what": "RF data supplied for Ukraine (via U.S. government channels) and for counter-IUU fishing in Pacific/Latin America",
+          "evidence": "RECALL - not re-verified (LOW-MEDIUM)",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named exercise verified this session)",
+          "year": "",
+          "note": "",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Esri/ArcGIS and COP tool integrations (RECALL, LOW)",
+        "Maritime analytics partners e.g., Windward/Spire style (RECALL, LOW)",
+        "Japanese partners (RECALL, LOW)"
+      ],
+      "apis_sdks_open_interfaces": "Data delivery via Mission Space and API feeds (RECALL, MEDIUM); public developer documentation not verified this session.",
+      "security_classification_requirements": "Unclassified commercial RF products; company holds cleared facilities to support IC customers (RECALL, LOW). Export of RF sensing analytics subject to controls needing specialist review.",
+      "allied_international_activity": ">$100M new international awards announced in 2026 (FACT); earlier international customers in Asia-Pacific and Europe (RECALL, LOW).",
+      "technical_differentiator": "Only scaled U.S. commercial RF geolocation constellation with multi-year IC qualification; broad spectrum coverage and formation-flying clusters.",
+      "suspected_moat": "Regulatory/IC trust, on-orbit cluster count, and multi-year signal libraries enabling analytics (INFERENCE, MEDIUM).",
+      "major_competitors": [
+        "Spire Global (RF/AIS)",
+        "Kleos (defunct/RECALL)",
+        "Unseenlabs (France)",
+        "Aurora Insight",
+        "National SIGINT systems (substitute)"
+      ],
+      "obvious_weaknesses": "Dependence on classified-budget customers with undisclosed values; RF geolocation accuracy limits versus national systems; newly public with valuation expectations; competition from allied sovereign RF programs.",
+      "evidence_user_adoption": "Revenue near-doubling to $117.7M in 2025 and multi-year NGA/USSF relationships (FACT, HIGH).",
+      "evidence_repeat_procurement": "NGA extension (2024), multiple USSF JCO contracts, NRO follow-on into CRFCA (FACT, HIGH).",
+      "evidence_prototype_to_production": "NRO BAA study phases to operational CRFCA (Aug 2026) - explicit, documented transition (FACT, HIGH).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "coalition"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): DSP/RF signal processing, Python and C++, cloud analytics on AWS/GovCloud, geospatial front-end (web GIS), satellite operations automation.",
+      "confidence_notes": "IPO facts, 2025 revenue and CRFCA award verified via multiple outlets (HIGH). Founders, investors, constellation size, international customer identities are RECALL (LOW-MEDIUM). Q2 2026 quarterly figures not captured this session.",
+      "sources": [
+        {
+          "url": "https://qz.com/hawkeye-360-ipo-nyse-hawk-416-million-050726",
+          "title": "HawkEye 360 IPO raises $416 million, priced at $26 per share",
+          "pub_date": "2026-05-07",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.govconwire.com/articles/hawkeye-360-initial-public-offering",
+          "title": "HawkEye 360 Prices $416M Initial Public Offering at $26 Per Share",
+          "pub_date": "2026-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://finance.yahoo.com/markets/stocks/articles/hawkeye-360-targets-2-4-133638357.html",
+          "title": "HawkEye 360 targets $2.4 billion valuation in U.S. IPO",
+          "pub_date": "2026-04",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1750704/000162828026024593/hawkeye360-sx1.htm",
+          "title": "HawkEye 360 Form S-1",
+          "pub_date": "2026-04",
+          "type": "financial"
+        },
+        {
+          "url": "https://www.nasdaq.com/press-release/hawkeye-360-awarded-nro-commercial-rf-capability-augmentation-contract-2026-08-18",
+          "title": "HawkEye 360 Awarded NRO Commercial RF Capability Augmentation Contract",
+          "pub_date": "2026-08-18",
+          "type": "company"
+        },
+        {
+          "url": "https://www.militaryaerospace.com/rf-analog/article/55399280/nro-moves-commercial-rf-sensing-into-operational-augmentation",
+          "title": "NRO moves commercial RF sensing into operational augmentation",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001750704/000175070426000018/exhibit991-earningsrelease.htm",
+          "title": "HawkEye 360 Form 8-K earnings release exhibit (2026)",
+          "pub_date": "2026-08",
+          "type": "financial"
+        }
+      ]
+    },
+    {
+      "name": "Vantor",
+      "aka": "Formerly Maxar Intelligence (rebranded Oct 2025; RECALL, MEDIUM-HIGH); Maxar Mission Solutions (affiliate); DigitalGlobe lineage",
+      "founding_year": 1992,
+      "headquarters": "Westminster, Colorado, USA",
+      "public_private": "private",
+      "employee_count_approx": "~2,000+ (RECALL - not re-verified; LOW)",
+      "founders": [
+        "DigitalGlobe founders (Walter Scott) - legacy; current entity is an Advent International carve-out"
+      ],
+      "founder_backgrounds": "Legacy DigitalGlobe/GeoEye heritage; Maxar Technologies taken private by Advent International in May 2023 (~$6.4B) and split into Maxar Intelligence (now Vantor) and Maxar Space Systems (FACT stable). CEO Dan Smoot (RECALL, MEDIUM).",
+      "total_disclosed_funding_usd": "Private-equity owned (Advent International); no venture rounds. Revenue not disclosed publicly since 2023 take-private.",
+      "latest_valuation": "Not public; Maxar Technologies acquired at ~$6.4B enterprise value in 2023 (FACT stable).",
+      "major_investors": [
+        "Advent International",
+        "British Columbia Investment Management Corp (co-investor; RECALL, MEDIUM)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "WorldView Legion / WorldView-3 / GeoEye-1 imaging constellation",
+          "description": "30cm-class very-high-resolution optical constellation with WorldView Legion (six satellites launched 2024-2025; RECALL, MEDIUM) adding revisit; majority provider under NRO EOCL.",
+          "input_process_output_user": "Input: tasking; Process: collection, orthorectification, 3D; Output: imagery, basemaps, direct downlink to tactical ground stations; Users: NRO/NGA, Army, allies."
+        },
+        {
+          "name": "One World Terrain (OWT) 3D terrain for Army Synthetic Training Environment",
+          "description": "High-fidelity global 3D terrain data (Precision3D lineage) delivered to the Army STE; supported since 2019, transitioned to production via $217M-ceiling OTA (Feb 2026, FACT).",
+          "input_process_output_user": "Input: satellite stereo imagery; Process: automated 3D reconstruction; Output: immersive terrain for mission planning/rehearsal and simulation; Users: Army training and mission-planning units."
+        },
+        {
+          "name": "Sentry (automated change detection) and Luno B terrain monitoring",
+          "description": "AI change-detection platform launched June 2025; NGA Luno B $5.3M award (Feb 2026) for AI-driven real-time global landscape change detection across multiple sensors (FACT).",
+          "input_process_output_user": "Input: multi-sensor imagery; Process: AI change detection; Output: alerts/tips to analysts; Users: NGA analysts."
+        },
+        {
+          "name": "Raptor (vision-based GNSS-denied navigation for UAVs)",
+          "description": "Software that matches drone camera views to Vantor 3D terrain for navigation without GPS, launched Feb 2025 (FACT); adoption evidence: Public evidence insufficient.",
+          "input_process_output_user": "Input: onboard camera video + 3D terrain; Process: visual positioning; Output: position/navigation to autopilot; Users: UAV operators in jammed environments."
+        }
+      ],
+      "exact_problem_solved": "Highest-resolution commercial optical imagery and derived 3D/foundation products at scale for intelligence, mapping, mission planning, training and now GNSS-denied navigation.",
+      "primary_users": [
+        "NRO/NGA and IC analysts",
+        "Army training, simulation and mission-planning users (STE/OWT)",
+        "Allied MoDs and sovereign programs",
+        "UAV operators (Raptor)"
+      ],
+      "primary_buyers": [
+        "NRO (EOCL, majority share)",
+        "U.S. Army (OWT OTA; PEO STRI/STE)",
+        "NGA (Luno A/B)",
+        "International governments (MEA sovereign contracts)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "INGEST",
+        "NORMALIZE",
+        "STORE",
+        "PROCESS",
+        "IDENTIFY",
+        "VISUALIZE",
+        "DISSEMINATE",
+        "TASK"
+      ],
+      "mission_layer": [
+        "ISR",
+        "maneuver",
+        "joint",
+        "space",
+        "coalition",
+        "autonomy"
+      ],
+      "segment_ids": [
+        "S03",
+        "S04",
+        "S07",
+        "S11"
+      ],
+      "hw_sw_mix": "both - owns and operates satellites (built by sister company Maxar Space Systems) and sells imagery, 3D data products and software (platform, Sentry, Raptor).",
+      "market_posture": "defense-native",
+      "contracts": [
+        {
+          "title": "Army One World Terrain follow-on production OTA",
+          "customer": "U.S. Army (Synthetic Training Environment / One World Terrain)",
+          "contracting_org": "U.S. Army (PEO STRI; INFERENCE on office)",
+          "vehicle_type": "OTA production",
+          "ceiling": "$217M potential (base year + four option years)",
+          "obligated": "Not disclosed",
+          "awarded_value": "Not disclosed beyond ceiling",
+          "funded_amount": "Not disclosed",
+          "task_orders": "",
+          "date": "2026-02 (announced ~2026-02-26)",
+          "period_of_performance": "1 base year + 4 option years",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production (follow-on to prototype work since 2019)",
+          "source_url": "https://www.defensedaily.com/army-awards-vantor-217-million-contract-to-transition-one-world-terrain-to-production/army/",
+          "pub_date": "2026-02",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA Luno B award for AI-driven global terrain monitoring",
+          "customer": "National Geospatial-Intelligence Agency",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Luno B program cap $200M (13 vendors)",
+          "obligated": "",
+          "awarded_value": "$5.3M",
+          "funded_amount": "",
+          "task_orders": "Delivery order under Luno B",
+          "date": "2026-02-05",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational analytic service",
+          "source_url": "https://satnews.com/2026/02/05/vantor-secures-5-3-million-nga-contract-to-deliver-ai-driven-global-terrain-monitoring/",
+          "pub_date": "2026-02-05",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NGA Luno A IDIQ (Maxar Intelligence awardee) and Luno B IDIQ (Maxar Mission Solutions awardee)",
+          "customer": "NGA",
+          "contracting_org": "NGA",
+          "vehicle_type": "IDIQ",
+          "ceiling": "Luno A $290M (10 vendors, 5 years); Luno B $200M (13 vendors)",
+          "obligated": "Not public",
+          "awarded_value": "Order-level values largely undisclosed",
+          "funded_amount": "",
+          "task_orders": "Not enumerated",
+          "date": "2024-09 (Luno A); 2025 (Luno B)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "analytic services IDIQ",
+          "source_url": "https://www.nga.mil/news/NGA_announces_new_Luno_A_and_Luno_B_delivery_order.html",
+          "pub_date": "2025-2026",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "NRO Electro-Optical Commercial Layer (EOCL) - majority share",
+          "customer": "National Reconnaissance Office",
+          "contracting_org": "NRO CSPO",
+          "vehicle_type": "FAR",
+          "ceiling": "Maxar share up to ~$3.24B over 10 years incl. options (RECALL, MEDIUM); program nearly $4B",
+          "obligated": "Not public",
+          "awarded_value": "Not disclosed annually",
+          "funded_amount": "Program ~ $300M/yr; 2025 proposal to reduce to ~$200M/yr with Maxar likely protected (SpaceNews)",
+          "task_orders": "",
+          "date": "2022-05-25",
+          "period_of_performance": "5-year base + 5 option years (RECALL, MEDIUM)",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/operational subscription",
+          "source_url": "https://spacenews.com/satellite-firms-brace-for-potential-imagery-budget-cuts-in-2026/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "$205M strategic contracts for sovereign capabilities across Middle East and Africa",
+          "customer": "Undisclosed MEA governments",
+          "contracting_org": "Undisclosed",
+          "vehicle_type": "foreign",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$205M aggregate (company blog; date not verified, likely 2024)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "Not verified (company blog)",
+          "period_of_performance": "Multi-year",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "sovereign ground station/imagery services",
+          "source_url": "https://vantor.com/blog/maxar-awarded-205-million-in-strategic-contracts-to-advance-sovereign-capabilities-across-the-middle-east-and-africa-region/",
+          "pub_date": "",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "Army Global Enhanced GEOINT Delivery (G-EGD) online imagery service",
+          "customer": "U.S. Army / NGA users",
+          "contracting_org": "Army",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "RECALL - not re-verified this session",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "Multi-year program (RECALL)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "operational service",
+          "source_url": "",
+          "pub_date": "",
+          "confidence": "LOW"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "One World Terrain data in the Army Synthetic Training Environment since 2019",
+          "evidence": "Production OTA awarded 2026 after seven years of deliveries (FACT)",
+          "source_url": "https://www.govconwire.com/articles/vantor-army-one-world-terrain-support"
+        },
+        {
+          "what": "EOCL imagery supply to NRO/NGA and wide use in Ukraine conflict monitoring",
+          "evidence": "EOCL award (FACT); Ukraine use RECALL (MEDIUM)",
+          "source_url": "https://www.satellitetoday.com/government-military/2022/05/25/nro-awards-imagery-contracts-to-maxar-blacksky-and-planet-worth-billions/"
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "Public evidence insufficient (no named exercise verified this session); Raptor GNSS-denied demonstrations reported at launch (RECALL, LOW)",
+          "year": "2025",
+          "note": "",
+          "source_url": ""
+        }
+      ],
+      "integration_partners": [
+        "Esri (FACT stable)",
+        "Palantir and Anduril data integrations (RECALL, LOW)",
+        "Maxar Space Systems (sister company builds Legion)",
+        "Microsoft/AWS cloud distribution (RECALL, LOW)"
+      ],
+      "apis_sdks_open_interfaces": "Maxar Geospatial Platform / Vantor platform APIs (streaming imagery, tasking, 3D) and ArcGIS integrations (RECALL, MEDIUM; not re-fetched this session).",
+      "security_classification_requirements": "Cleared U.S. contractor with long-standing IC work; Maxar Mission Solutions handles classified support (RECALL, MEDIUM). Specifics: Public evidence insufficient.",
+      "allied_international_activity": "Sovereign contracts across MEA ($205M aggregate, company-reported), Ukraine support, long-standing direct-access ground station customers (RECALL, MEDIUM).",
+      "technical_differentiator": "Best-in-class commercial optical resolution/accuracy and mature 3D/foundation data pipelines (Precision3D/OWT), now extending into edge navigation (Raptor) and AI change detection (Sentry).",
+      "suspected_moat": "Incumbency in NRO/NGA/Army programs, proprietary 3D global dataset, Legion revisit, cleared workforce (INFERENCE, HIGH for incumbency).",
+      "major_competitors": [
+        "Planet Labs",
+        "BlackSky",
+        "Airbus Defence and Space",
+        "Satellogic",
+        "SAR providers (Umbra, Capella, ICEYE US)"
+      ],
+      "obvious_weaknesses": "PE leverage and limited financial transparency; dependence on NRO budget; rebrand and carve-out execution risk; Raptor/Sentry adoption not yet publicly evidenced.",
+      "evidence_user_adoption": "Army OWT production follow-on and NGA Luno B award indicate ongoing use (FACT, HIGH).",
+      "evidence_repeat_procurement": "OWT support since 2019 renewed into a production OTA; EOCL majority share continuing (FACT, HIGH).",
+      "evidence_prototype_to_production": "One World Terrain prototype/OTA work transitioned to a $217M-ceiling production OTA in Feb 2026 (FACT, HIGH).",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "joint"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "coalition"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "theater"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "individual_platform"
+        },
+        {
+          "chain_step": "DISSEMINATE_TASK",
+          "echelon": "theater"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): large-scale photogrammetry/3D pipelines (C++/CUDA), cloud geospatial services on AWS, ML change detection, and embedded computer vision for Raptor.",
+      "confidence_notes": "OWT OTA and Luno B award verified across multiple outlets (HIGH). EOCL share, rebrand date, CEO, headcount and MEA contract date are RECALL or company-only (MEDIUM/LOW). Rename to Vantor confirmed by 2026 coverage referring to 'formerly Maxar Intelligence'.",
+      "sources": [
+        {
+          "url": "https://www.govconwire.com/articles/vantor-army-one-world-terrain-support",
+          "title": "Vantor Secures $217M Army Contract for One World Terrain Support",
+          "pub_date": "2026-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.defensedaily.com/army-awards-vantor-217-million-contract-to-transition-one-world-terrain-to-production/army/",
+          "title": "Army Awards Vantor $217 Million Contract To Transition One World Terrain To Production",
+          "pub_date": "2026-02",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.washingtontimes.com/news/2026/feb/26/us-army-contracts-vantor-immersive-global-3d-terrain-system-conduct/",
+          "title": "U.S. Army contracts Vantor for 'immersive global 3D terrain' system",
+          "pub_date": "2026-02-26",
+          "type": "independent"
+        },
+        {
+          "url": "https://satnews.com/2026/02/05/vantor-secures-5-3-million-nga-contract-to-deliver-ai-driven-global-terrain-monitoring/",
+          "title": "Vantor Secures $5.3 Million NGA Contract to Deliver AI-Driven Global Terrain Monitoring",
+          "pub_date": "2026-02-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://newsletter.terrawatchspace.com/three-years-on-analysing-advents-maxar-acquisition/",
+          "title": "Three Years On: Analysing Advent's Maxar Acquisition",
+          "pub_date": "2026",
+          "type": "independent"
+        },
+        {
+          "url": "https://vantor.com/blog/maxar-awarded-205-million-in-strategic-contracts-to-advance-sovereign-capabilities-across-the-middle-east-and-africa-region/",
+          "title": "Maxar Awarded $205M to Advance Sovereign Capabilities in MEA",
+          "pub_date": "",
+          "type": "company"
+        },
+        {
+          "url": "https://www.nga.mil/news/NGA_announces_new_Luno_A_and_Luno_B_delivery_order.html",
+          "title": "NGA announces new Luno A and Luno B delivery order awards",
+          "pub_date": "2025-2026",
+          "type": "gov"
+        },
+        {
+          "url": "https://spacenews.com/satellite-firms-brace-for-potential-imagery-budget-cuts-in-2026/",
+          "title": "Satellite firms brace for potential imagery budget cuts in 2026",
+          "pub_date": "2025",
+          "type": "independent"
+        }
+      ]
+    },
+    {
+      "name": "Hidden Level, Inc.",
+      "aka": "Hidden Level",
+      "founding_year": 2018,
+      "headquarters": "Syracuse, New York, USA",
+      "public_private": "private",
+      "employee_count_approx": "~50-150 (RECALL - not re-verified; LOW)",
+      "founders": [
+        "Jeff Cole (CEO)"
+      ],
+      "founder_backgrounds": "Founding team drawn from the Syracuse radar/defense-electronics ecosystem (SRC Inc. and Lockheed Martin Syracuse alumni; RECALL, LOW).",
+      "total_disclosed_funding_usd": "Public evidence insufficient this session. RECALL: venture rounds (Series A/B) totaling tens of millions with corporate/defense-focused investors (LOW). Non-dilutive: $10M DoD APFIT funding (MEDIUM) and a $100M OTA (FACT, July 2026).",
+      "latest_valuation": "Public evidence insufficient.",
+      "major_investors": [
+        "Public evidence insufficient this session (RECALL of corporate venture participation; LOW)"
+      ],
+      "c4isr_products": [
+        {
+          "name": "Airspace Monitoring Service (AMS) - passive RF sensing network",
+          "description": "Distributed passive sensors that detect, track and identify crewed and uncrewed aircraft without emitting signals, exploiting ambient RF (passive radar/RF sensing), including RF-silent drones (FACT per coverage).",
+          "input_process_output_user": "Input: ambient RF reflections/emissions; Process: multistatic passive detection, tracking, classification; Output: air tracks to C2/UTM and C-UAS systems; Users: base defense, air defense/C-UAS operators, event security, airports."
+        },
+        {
+          "name": "Tactical passive C-UAS radar (hardware + software)",
+          "description": "Tactical, low-cost passive sensing platform funded via DoD APFIT ($10M) and scaled via $100M OTA from OUSW(R&E) (FACT).",
+          "input_process_output_user": "Input: ambient RF; Process: onboard/edge processing; Output: tracks for C-UAS C2 (e.g., FAAD C2 integration - INFERENCE); Users: Army and joint C-UAS units."
+        }
+      ],
+      "exact_problem_solved": "Detect and track drones and aircraft - including RF-silent, autonomous drones that emitter-based sensors miss - without radiating (non-detectable, no spectrum authorization burden), at low cost for layered base/area air defense.",
+      "primary_users": [
+        "Army and joint counter-UAS operators",
+        "Air Force base defense",
+        "Airport/event security and public safety agencies",
+        "FAA/UTM stakeholders (RECALL, LOW)"
+      ],
+      "primary_buyers": [
+        "OUSW(R&E) via Army Contracting Command - Rock Island (OTA)",
+        "DoD APFIT program",
+        "AFWERX (STTR)",
+        "DIU (Low-Cost Sensing Challenge)",
+        "Municipal/venue customers (RECALL, LOW)"
+      ],
+      "technical_layer": [
+        "COLLECT",
+        "PROCESS",
+        "IDENTIFY",
+        "DISSEMINATE"
+      ],
+      "mission_layer": [
+        "air defense",
+        "counter-UAS",
+        "base defense",
+        "homeland security"
+      ],
+      "segment_ids": [
+        "S03",
+        "S12",
+        "S07"
+      ],
+      "hw_sw_mix": "both - proprietary passive sensor hardware plus tracking/classification software delivered as a service.",
+      "market_posture": "dual-use",
+      "contracts": [
+        {
+          "title": "OUSW(R&E) Other Transaction Agreement to scale passive sensing technology",
+          "customer": "Office of the Under Secretary of War for Research and Engineering (Department of War/DoD)",
+          "contracting_org": "Army Contracting Command - Rock Island",
+          "vehicle_type": "OTA production",
+          "ceiling": "$100M agreement value (ceiling; obligations not disclosed)",
+          "obligated": "Not disclosed",
+          "awarded_value": "$100M (agreement)",
+          "funded_amount": "Not disclosed",
+          "task_orders": "",
+          "date": "2026-07-30",
+          "period_of_performance": "Not disclosed",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "scaling/production-oriented (follows multiple T&E events; exact OTA type - prototype vs follow-on production - not verified)",
+          "source_url": "https://www.prnewswire.com/news-releases/department-of-war-awards-hidden-level-100-million-ota-to-scale-passive-sensing-technology-302839232.html",
+          "pub_date": "2026-07-30",
+          "confidence": "HIGH"
+        },
+        {
+          "title": "DoD APFIT (Accelerate the Procurement and Fielding of Innovative Technologies) funding for tactical passive C-UAS radar",
+          "customer": "DoD (OUSD(R&E) APFIT)",
+          "contracting_org": "DoD APFIT program",
+          "vehicle_type": "FAR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "$10M",
+          "funded_amount": "$10M",
+          "task_orders": "",
+          "date": "2025 (RECALL on exact date; MEDIUM)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "production/fielding acceleration (APFIT purpose)",
+          "source_url": "https://www.unmannedairspace.info/latest-news-and-information/hidden-level-receives-usd10-million-dod-funding-for-tactical-passive-c-uas-radar/",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "AFWERX Phase I STTR - sUAS threat identification",
+          "customer": "U.S. Air Force",
+          "contracting_org": "AFWERX/AFRL",
+          "vehicle_type": "SBIR",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Phase I STTR (small; value not verified)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "Not verified (pre-2026)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "prototype/feasibility",
+          "source_url": "https://www.newswire.com/news/hidden-level-receives-apfit-funding-from-the-department-of-defense-22046417",
+          "pub_date": "2025",
+          "confidence": "MEDIUM"
+        },
+        {
+          "title": "DIU Low-Cost Sensing Challenge - named 'Top Performer'",
+          "customer": "Defense Innovation Unit",
+          "contracting_org": "DIU",
+          "vehicle_type": "OTA prototype",
+          "ceiling": "",
+          "obligated": "",
+          "awarded_value": "Evaluation event (not a contract value)",
+          "funded_amount": "",
+          "task_orders": "",
+          "date": "2025-2026 (RECALL on date)",
+          "period_of_performance": "",
+          "prime_or_sub": "prime",
+          "prototype_or_production": "T&E/prototype",
+          "source_url": "https://thedefensepost.com/2026/08/05/hidden-level-passive-drone-detection/",
+          "pub_date": "2026-08-05",
+          "confidence": "MEDIUM"
+        }
+      ],
+      "operational_deployments": [
+        {
+          "what": "Passive sensing platform to be provided for use across DoD organizations under $100M OTA",
+          "evidence": "OTA announced July 30, 2026; fielding scale not yet evidenced (FACT for award; INFERENCE for scale)",
+          "source_url": "https://militaryembedded.com/unmanned/counter-uas/counter-uas-tech-from-hidden-level-wins-100-million-dod-contract"
+        },
+        {
+          "what": "Urban airspace monitoring deployments in U.S. cities and at major events",
+          "evidence": "RECALL - not re-verified this session (LOW)",
+          "source_url": ""
+        }
+      ],
+      "exercises_demos": [
+        {
+          "event": "DIU Low-Cost Sensing Challenge",
+          "year": "2025-2026",
+          "note": "Named Top Performer; cited as basis for OTA",
+          "source_url": "https://thedefensepost.com/2026/08/05/hidden-level-passive-drone-detection/"
+        },
+        {
+          "event": "Multiple DoD testing and evaluation events (JCO C-sUAS demonstrations, RECALL LOW)",
+          "year": "2024-2026",
+          "note": "Company cites 'successful operational performance across multiple testing and evaluation events'",
+          "source_url": "https://www.prnewswire.com/news-releases/department-of-war-awards-hidden-level-100-million-ota-to-scale-passive-sensing-technology-302839232.html"
+        }
+      ],
+      "integration_partners": [
+        "C-UAS C2 integrators (FAAD C2 / MEDUSA-class systems - INFERENCE, LOW)",
+        "Public evidence insufficient for named partners this session"
+      ],
+      "apis_sdks_open_interfaces": "Track outputs to third-party C2 via standard interfaces (Cursor-on-Target/ASTERIX-style - INFERENCE, LOW). Company site blocked by proxy this session.",
+      "security_classification_requirements": "Work with OUSW(R&E)/Army implies U.S.-person workforce and likely facility clearance needs; specifics: Public evidence insufficient.",
+      "allied_international_activity": "Public evidence insufficient.",
+      "technical_differentiator": "Passive (non-emitting) RF sensing that detects RF-silent drones, avoids spectrum licensing and emissions signatures, and is cheap enough for dense layered coverage.",
+      "suspected_moat": "Proprietary passive-radar signal processing and multi-year deployment data; early DoD selection via DIU and APFIT (INFERENCE, MEDIUM).",
+      "major_competitors": [
+        "Echodyne (active radar)",
+        "Robin Radar",
+        "SRC Inc. (Gryphon)",
+        "Dedrone (Axon)",
+        "Anduril (Sentry towers)",
+        "BlueHalo/Epirus (effectors, partial overlap)"
+      ],
+      "obvious_weaknesses": "Small private company scaling hardware production against a $100M agreement; passive radar dependent on ambient illuminators; limited public disclosure of funding, customers and integration standards.",
+      "evidence_user_adoption": "DIU Top Performer and APFIT selection indicate favorable DoD evaluation; fielded scale not yet public (MEDIUM).",
+      "evidence_repeat_procurement": "Progression STTR to APFIT to $100M OTA suggests repeated DoD buys, but each is a different funding line (INFERENCE, MEDIUM).",
+      "evidence_prototype_to_production": "APFIT (fielding acceleration) followed by a $100M OTA 'to scale' passive sensing across DoD (FACT for awards; production volumes undisclosed) - MEDIUM-HIGH.",
+      "whitespace_cells": [
+        {
+          "chain_step": "COLLECT",
+          "echelon": "tactical_unit"
+        },
+        {
+          "chain_step": "COLLECT",
+          "echelon": "battalion_brigade"
+        },
+        {
+          "chain_step": "PROCESS",
+          "echelon": "tactical_unit"
+        }
+      ],
+      "tech_stack_inference_from_jobs": "INFERENCE (not re-verified this session): RF/DSP engineering (FPGA, C/C++), embedded Linux, multi-sensor tracking algorithms, cloud services for AMS data delivery.",
+      "confidence_notes": "$100M OTA verified across PR Newswire and four trade outlets (HIGH). APFIT $10M and AFWERX STTR from trade/newswire summaries (MEDIUM). Founding year, HQ (Syracuse) and founder are RECALL (MEDIUM); funding/investors/headcount are not verified (LOW). Company website blocked by egress proxy.",
+      "sources": [
+        {
+          "url": "https://www.prnewswire.com/news-releases/department-of-war-awards-hidden-level-100-million-ota-to-scale-passive-sensing-technology-302839232.html",
+          "title": "Department of War Awards Hidden Level $100 Million OTA to Scale Passive Sensing Technology",
+          "pub_date": "2026-07-30",
+          "type": "company"
+        },
+        {
+          "url": "https://thedefensepost.com/2026/08/05/hidden-level-passive-drone-detection/",
+          "title": "Hidden Level Secures $100M US Military Contract for Passive Drone Detection",
+          "pub_date": "2026-08-05",
+          "type": "independent"
+        },
+        {
+          "url": "https://militaryembedded.com/unmanned/counter-uas/counter-uas-tech-from-hidden-level-wins-100-million-dod-contract",
+          "title": "Counter-UAS tech from Hidden Level wins $100 million DoD contract",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/us-department-of-war-awards-hidden-level-a-us100-million-contract-for-c-uas-radar-technology/",
+          "title": "US Department of War awards Hidden Level a US100 million contract for C-UAS radar technology",
+          "pub_date": "2026-08",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.unmannedairspace.info/latest-news-and-information/hidden-level-receives-usd10-million-dod-funding-for-tactical-passive-c-uas-radar/",
+          "title": "Hidden Level receives USD10 million DoD funding for tactical, passive C-UAS radar",
+          "pub_date": "2025",
+          "type": "independent"
+        },
+        {
+          "url": "https://www.newswire.com/news/hidden-level-receives-apfit-funding-from-the-department-of-defense-22046417",
+          "title": "Hidden Level Receives APFIT Funding From the Department of Defense",
+          "pub_date": "2025",
+          "type": "company"
+        },
+        {
+          "url": "https://www.techtimes.com/articles/322388/20260731/passive-radar-that-catches-rf-silent-drones-earns-100m-pentagon-contract.htm",
+          "title": "Passive Radar That Catches RF-Silent Drones Earns $100M Pentagon Contract",
+          "pub_date": "2026-07-31",
+          "type": "independent"
+        }
+      ]
+    }
+  ],
+  "search_log": [
+    {
+      "query": "\"Planet Labs\" defense contract 2026 (NATO OR Germany OR \"Department of Defense\" OR NRO OR NGA OR Army) satellite imagery award",
+      "useful": true
+    },
+    {
+      "query": "\"BlackSky\" Gen-3 contract 2026 (Army OR NGA OR NRO OR \"Space Force\" OR international customer) award backlog",
+      "useful": true
+    },
+    {
+      "query": "\"Umbra\" SAR satellite contract 2026 (Army OR \"Space Force\" OR NRO OR NGA OR AFRL) award OR funding",
+      "useful": true
+    },
+    {
+      "query": "\"Capella Space\" IonQ SAR contract 2026 (Army OR Navy OR \"Space Force\" OR NRO OR NGA) award",
+      "useful": true
+    },
+    {
+      "query": "\"HawkEye 360\" RF contract 2026 (Army OR NRO OR \"Space Force\" OR NGA OR Navy) award OR funding round",
+      "useful": true
+    },
+    {
+      "query": "\"Vantor\" (formerly \"Maxar Intelligence\") contract 2026 (Army OR NGA OR NRO OR \"Space Force\") Raptor OR Sentry OR \"One World Terrain\" award",
+      "useful": true
+    },
+    {
+      "query": "\"Hidden Level\" passive radar counter-UAS contract 2026 (Army OR \"Air Force\" OR AFWERX OR SBIR OR \"Golden Dome\") award OR funding",
+      "useful": true
+    },
+    {
+      "query": "\"HawkEye 360\" IPO 2026 priced shares (Nasdaq OR NYSE) valuation \"second quarter\" 2026 results revenue backlog",
+      "useful": true
+    },
+    {
+      "query": "\"Planet Labs\" \"second quarter\" fiscal 2027 results backlog \"defense and intelligence\" revenue Navy OR \"Department of Defense\" contract 2026",
+      "useful": true
+    },
+    {
+      "query": "\"BlackSky\" \"second quarter 2026\" results revenue backlog Gen-3 satellites launched on orbit",
+      "useful": true
+    },
+    {
+      "query": "NGA \"Luno A\" OR \"Luno B\" awardees list BlackSky Planet Umbra Maxar HawkEye Capella ceiling contract",
+      "useful": true
+    },
+    {
+      "query": "NRO EOCL 2026 (option OR extension OR budget cut) commercial imagery Planet BlackSky Vantor Maxar \"Electro-Optical Commercial Layer\"",
+      "useful": true
+    },
+    {
+      "query": "WebFetch https://www.hiddenlevel.com/ (EGRESS_BLOCKED)",
+      "useful": false
+    },
+    {
+      "query": "WebFetch https://umbra.space/blog/umbra-nro-radar-contract/ (EGRESS_BLOCKED)",
+      "useful": false
+    }
+  ],
+  "notes": "Batch B06 compiled 2026-09-25 under a 12-search / 2-fetch budget; both WebFetch attempts (company sites) were blocked by the egress proxy, so no primary documents were read in full - all facts come from search-result summaries of press releases, SEC exhibits, trade press and NGA/NRO coverage, plus clearly labeled RECALL. Cross-cutting findings: (1) NRO moved commercial SAR (Umbra, Capella/IonQ, ICEYE US - RCA, Aug 2026) and commercial RF (HawkEye 360 - CRFCA, Aug 2026) from multi-year study contracts into operational augmentation contracts with undisclosed (classified-budget) values; (2) EOCL (EO layer, ~$4B/10yr from May 2022) faced 2025 proposals to cut program funding from ~$300M/yr to ~$200M/yr with Planet and BlackSky most exposed - FY2026 appropriations outcome not verified this session (Public evidence insufficient); (3) NGA Luno A ($290M ceiling, 10 vendors, Sept 2024) and Luno B ($200M cap, 13 vendors, 2025) are the main analytics IDIQs - verified awardees in this batch: BlackSky (A and B), Maxar Intelligence/Vantor (A) and Maxar Mission Solutions (B), Planet Labs Federal (B); Umbra, Capella and HawkEye 360 participation not verified (partial lists only). Traction: HawkEye 360 IPO (May 2026, $416M raised, ~$2.4B) and Planet (Q2 FY27 revenue $116M, backlog ~$815M, D&I ~70%) show the strongest commercial-sensing demand signals; BlackSky reached positive adjusted EBITDA with Gen-3 subscriptions; Vantor converted OWT to a $217M-ceiling production OTA; Hidden Level jumped from STTR/APFIT to a $100M OTA. Data gaps: contract obligations vs ceilings for nearly all awards; Umbra and Hidden Level funding/investors/headcount; Capella acquisition close value; Planet's 2026 DoD/Navy award details; BlackSky FY2025 revenue; HawkEye Q2 2026 figures; TacSRT and Global Data Marketplace order values. Implication for founders: this batch sits almost entirely at COLLECT (space/passive sensors) with vendor-specific PROCESS platforms; whitespace for a small software team is in multi-vendor tasking/orchestration, cross-sensor tipping-and-cueing and delivery into tactical-echelon C2 rather than in owning sensors - but absence of competitors is not evidence of demand and foreign-national founders face ITAR/FOCI constraints on ISR data work that require specialist legal review."
+}

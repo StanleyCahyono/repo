@@ -86,7 +86,7 @@ def build_data():
         if b: d['buyers'][k] = b
     # companies (merge batches + discovery)
     companies, seen = [], {}
-    for f in sorted(glob.glob(os.path.join(DATA, 'companies', 'B*.json'))):
+    for f in sorted(f for f in glob.glob(os.path.join(DATA, 'companies', 'B*.json')) if '_part' not in os.path.basename(f)):
         b = load(f) or {}
         for c in b.get('companies') or []:
             if not c.get('name'): continue

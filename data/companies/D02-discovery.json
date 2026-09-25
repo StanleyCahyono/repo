@@ -1,0 +1,309 @@
+{
+  "discovery_id": "D02",
+  "new_companies": [
+    {
+      "name": "Comand AI",
+      "hq": "Paris, France",
+      "founding_year": 2023,
+      "relevance": "AI-native command-and-control platform ('Prevail') for planning, fires and maneuver decision support; the closest European analog to a young venture-backed C2 software startup, now scaling across NATO with Saab as strategic investor. Company claims deployments with operational units in France, Germany, Ukraine and other allies over the prior 12 months (company claim, not independently verified).",
+      "segment_ids": ["S01", "S08"],
+      "evidence": [
+        {"what": "FACT (company press release found via search): EUR 32M Series A led by Blossom Capital with strategic investment from Saab, to expand Prevail across NATO markets and new domains. Funding proves investor interest, not military demand; deployment claims are company marketing.", "source_url": "https://www.comand.ai/news/comand-ai-raises-%E2%82%AC32-million-series-a-to-scale-ai-native-command-and-control-platform-across-nato", "date": "2026-06"},
+        {"what": "RECALL - not re-verified this session (confidence LOW): earlier seed round in 2024 (single-digit EUR millions) and French MoD / Army experimentation contracts preceding the Series A.", "source_url": "https://www.comand.ai", "date": "2024"}
+      ],
+      "priority": 5
+    },
+    {
+      "name": "Rune Technologies",
+      "hq": "Washington, DC area (RECALL, MEDIUM)",
+      "founding_year": 2024,
+      "relevance": "Founded by ex-Anduril engineers; 'TyrOS' is an AI-enabled sustainment/logistics C2 layer designed for DDIL operation, now attached to the Army NGC2 effort through Team Lockheed Martin. Directly occupies the logistics-C2 gap (S14) that this study is examining.",
+      "segment_ids": ["S14", "S01"],
+      "evidence": [
+        {"what": "FACT (company announcement page surfaced by search; page fetch was egress-blocked so date/details unverified): Rune Technologies announced it joined the Lockheed Martin team supporting the Army's NGC2 prototype agreement (25th ID). Team membership is a prototype role, not a production award.", "source_url": "https://www.runetech.co/news/lockheed-martin-ngc2", "date": "2025-2026 (exact date not verified)"},
+        {"what": "FACT: Lockheed's 25th ID NGC2 OTA is USD 26M with a not-to-exceed 16-month period of performance, awarded via the NGC2 competitive CSO on behalf of PEO C3N (obligated vs ceiling not disclosed).", "source_url": "https://www.army.mil/article/288233/army_announces_additional_competitive_award_for_next_generation_command_and_control_ngc2_prototyping_efforts", "date": "2025-09-03"},
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): seed round led by a16z American Dynamism (2024) and a Series A in 2025; Marine Corps and Army prototype/SBIR-type awards for TyrOS. Amounts intentionally omitted.", "source_url": "", "date": "2024-2025"}
+      ],
+      "priority": 5
+    },
+    {
+      "name": "Shift5",
+      "hq": "Arlington, VA",
+      "founding_year": 2018,
+      "relevance": "Onboard-platform data capture and observability/cyber for military vehicles and aircraft (serial-bus and CAN data); partnering with Anduril to feed platform telemetry into the NGC2 common data layer, i.e., the 'vehicle-to-C2 data' seam.",
+      "segment_ids": ["S02", "S06", "S10"],
+      "evidence": [
+        {"what": "FACT (company press release): Shift5 announced a partnership with Anduril on the Army's Next Generation Command and Control initiative (Team Anduril, 4th ID). Partnership announcement, not a disclosed contract value.", "source_url": "https://shift5.io/insights/shift5-partners-with-anduril-armys-ngc2/", "date": "2026-02 (approx.; inferred from PR Newswire release numbering, exact date not verified)"},
+        {"what": "Same announcement on PR Newswire.", "source_url": "https://www.prnewswire.com/news-releases/shift5-partners-with-anduril-on-armys-next-generation-command-and-control-initiative-302694012.html", "date": "2026-02 (approx.)"},
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): USD 50M Series B (2022, Insight Partners) plus later extension; multiple Army/USAF SBIR and OTA awards for onboard cyber.", "source_url": "https://shift5.io", "date": "2022-2024"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Instant Connect Enterprise (Instant Connect Software)",
+      "hq": "Chicago, IL",
+      "founding_year": null,
+      "relevance": "IP-based push-to-talk and voice interoperability that bridges legacy radios, LTE/5G and software clients; supplies the voice/comms layer inside Team Anduril's NGC2 prototype. Illustrates that NGC2 teams source narrow, mature interoperability components from small firms.",
+      "segment_ids": ["S05", "S08", "S01"],
+      "evidence": [
+        {"what": "FACT: Named as a member of Team Anduril (with Palantir, Striveworks, Govini, Research Innovations and Microsoft) on the USD 99.6M NGC2 prototype OTA for 4th Infantry Division, awarded 2025-07-18. Prototype OTA, not production.", "source_url": "https://www.anduril.com/news/anduril-awarded-usd99-6m-for-u-s-army-next-generation-command-and-control-prototype", "date": "2025-07-21 (award 2025-07-18)"},
+        {"what": "Independent coverage of the team roster.", "source_url": "https://breakingdefense.com/2025/07/army-awards-team-anduril-nearly-100m-to-lead-ngc2-prototype-for-4th-infantry-division/", "date": "2025-07"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Research Innovations, Inc. (RII)",
+      "hq": "Alexandria, VA",
+      "founding_year": null,
+      "relevance": "Mid-size government software developer of mission-command, fires/targeting and intelligence workflow applications; application-layer member of Team Anduril's NGC2 prototype. Relevant as an incumbent 'app builder' that competes with startups for NGC2 application slots.",
+      "segment_ids": ["S01", "S02"],
+      "evidence": [
+        {"what": "FACT: Listed as a Team Anduril member on the NGC2 4th ID prototype OTA (USD 99.6M, awarded 2025-07-18).", "source_url": "https://www.anduril.com/news/anduril-awarded-usd99-6m-for-u-s-army-next-generation-command-and-control-prototype", "date": "2025-07-21"},
+        {"what": "FACT: Striveworks release confirming the same roster and the 11-month prototype delivery window to 4th ID.", "source_url": "https://www.businesswire.com/news/home/20250723349263/en/Striveworks-to-Help-Advance-U.S.-Army-Battlefield-Decision-Making", "date": "2025-07-23"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Swarm Aero",
+      "hq": "Los Angeles, CA (RECALL, LOW)",
+      "founding_year": null,
+      "relevance": "Collaborative-autonomy / swarm command software for attritable drones; a DIU Replicator software vendor for Autonomous Collaborative Teaming (ACT), i.e., a small-company competitor in autonomy C2 sitting alongside Anduril and L3Harris.",
+      "segment_ids": ["S13"],
+      "evidence": [
+        {"what": "FACT (DIU announcement surfaced by search): DIU announced Replicator software vendors on 2024-11-20 for resilient C2 (ORIENT) and collaborative autonomy (ACT). RECALL (confidence MEDIUM, not re-verified this session): the ACT awardees were Anduril, L3Harris and Swarm Aero. Prototype contracts only.", "source_url": "https://www.diu.mil/latest/defense-innovation-unit-announces-software-vendors-to-support-replicator", "date": "2024-11-20"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Higher Ground LLC",
+      "hq": "Palo Alto, CA (RECALL, MEDIUM)",
+      "founding_year": null,
+      "relevance": "Small satellite-messaging / resilient communications software vendor; DIU ORIENT prototype awardee for resilient C2 links to all-domain attritable autonomous (ADA2) systems.",
+      "segment_ids": ["S05", "S13"],
+      "evidence": [
+        {"what": "FACT: DIU awarded ORIENT (Opportunistic, Resilient & Innovative Expeditionary Network Topology) prototype contracts to Viasat, Aalyria, Higher Ground and IoT/AI after 119 companies submitted 130 proposals. Prototype awards, values undisclosed.", "source_url": "https://www.diu.mil/latest/defense-innovation-unit-announces-software-vendors-to-support-replicator", "date": "2024-11-20"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "IoT/AI",
+      "hq": "Public evidence insufficient.",
+      "founding_year": null,
+      "relevance": "Very small vendor selected by DIU for the ORIENT resilient-C2 network-topology prototype for Replicator autonomous systems; evidence that DIU CSOs do fund micro-companies for C2 networking prototypes.",
+      "segment_ids": ["S05"],
+      "evidence": [
+        {"what": "FACT: Named ORIENT prototype awardee (with Viasat, Aalyria, Higher Ground) in DIU's Replicator software vendor announcement. No follow-on or production evidence found; Public evidence insufficient beyond the award.", "source_url": "https://www.diu.mil/latest/defense-innovation-unit-announces-software-vendors-to-support-replicator", "date": "2024-11-20"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "CX2",
+      "hq": "Los Angeles area, CA (RECALL, MEDIUM)",
+      "founding_year": 2024,
+      "relevance": "Venture-backed electronic-warfare startup (software-defined spectrum sensing, jamming and spectrum situational awareness) founded by ex-Epirus/Spartan Radar leadership; representative of the a16z American Dynamism EW/spectrum thesis adjacent to C4ISR.",
+      "segment_ids": ["S12"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): seed round led by a16z American Dynamism (2024) followed by a Series A led by Point72 Ventures (early 2025). Funding proves investor interest only; no public production contract found.", "source_url": "", "date": "2024-2025"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Rhombus Power",
+      "hq": "Palo Alto (Moffett Field), CA",
+      "founding_year": 2011,
+      "relevance": "'Guardian' AI decision-support and predictive analytics for operational C2, contested logistics and readiness; long-running AFWERX/SBIR-to-contract vendor used by USAF and INDOPACOM-facing staffs, i.e., an incumbent in the S01d decision-support layer.",
+      "segment_ids": ["S01", "S14"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): multiple Air Force SBIR Phase II/III and AFWERX awards for Guardian since ~2019, plus Army and CDAO-adjacent decision-support work. Values omitted; SBIR Phase III ceilings are not revenue.", "source_url": "https://www.rhombuspower.com", "date": "2019-2025"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Two Six Technologies",
+      "hq": "Arlington, VA",
+      "founding_year": 2021,
+      "relevance": "Carlyle-backed, DARPA-heavy software house whose Project IKE became the basis for the Joint Cyber Command and Control (JCC2) baseline; also active in RF/EW and information-environment analytics. An incumbent in cyber C2 that a startup would encounter on any 'C2 for non-kinetic effects' thesis.",
+      "segment_ids": ["S01", "S10", "S12"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): Project IKE (cyber operations planning/C2) transitioned from DARPA/SCO to USCYBERCOM and was selected as the foundation for JCC2 (~2021); company formed in 2021 by merging Two Six Labs and IST Research under Carlyle ownership.", "source_url": "https://twosixtech.com", "date": "2021"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Slingshot Aerospace",
+      "hq": "Austin, TX / El Segundo, CA",
+      "founding_year": 2017,
+      "relevance": "Space domain awareness, space traffic coordination and satellite-behavior analytics software (Beacon, Laboratory); venture-backed vendor in the Space C2 / SDA track-management niche that sits beside Kobayashi Maru and the Palantir Space C2 Data Platform.",
+      "segment_ids": ["S07", "S04"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): multiple Space Force / SpaceWERX awards (SBIR Phase II/III and prototype OTAs) for SDA and space-traffic tools, plus large venture rounds 2022-2024. No production program-of-record ownership identified.", "source_url": "https://www.slingshot.com", "date": "2022-2025"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Swarmer",
+      "hq": "Kyiv, Ukraine (with a US entity, RECALL)",
+      "founding_year": 2023,
+      "relevance": "Combat-proven swarm/multi-drone mission-control software from Ukraine (one operator commanding many UAS, coordinated strike and ISR missions); a source of battle-tested autonomy-C2 competitors entering NATO markets.",
+      "segment_ids": ["S13"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): Series A of roughly USD 15M in 2025 with Ukrainian and US investors; reported operational use by Ukrainian units. Operational-use claims are company/press claims.", "source_url": "", "date": "2025"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "ARX Robotics",
+      "hq": "Oberding (Munich), Germany",
+      "founding_year": 2022,
+      "relevance": "Modular unmanned ground vehicles plus 'Mithra OS', a software layer for autonomy and retrofit of legacy vehicles; the leading German venture-backed autonomy company after Helsing/Quantum Systems, with HV Capital, NATO Innovation Fund and Project A on the cap table (relevant to the German founder's market).",
+      "segment_ids": ["S13"],
+      "evidence": [
+        {"what": "FACT (aggregator profiles surfaced by search): EUR 31M Series A led by HV Capital with NATO Innovation Fund and Project A Ventures; ~EUR 40M total raised; deployments cited with German, Ukrainian and UK forces and the European Defence Agency (deployment claims from company/press, not independently verified).", "source_url": "https://pitchbook.com/profiles/company/532753-12", "date": "2025"},
+        {"what": "Secondary profile with the same funding details.", "source_url": "https://tracxn.com/d/companies/arx-robotics/__U-18pV8pHUrvKDokjHCOyyFio_ECoyUyOUCke36nyp0", "date": "2026"}
+      ],
+      "priority": 3
+    },
+    {
+      "name": "Axellio",
+      "hq": "Colorado Springs, CO",
+      "founding_year": null,
+      "relevance": "High-speed packet-capture and edge data platform (PacketXpress) marketed for real-time data access, situational awareness and cyber in tactical and enterprise networks; a Tradewinds-awardable edge-data vendor.",
+      "segment_ids": ["S02", "S06", "S10"],
+      "evidence": [
+        {"what": "FACT (company release): assessed 'Awardable' in the CDAO Tradewinds Solutions Marketplace. Awardable status is a pre-competed pathway, not a contract or revenue.", "source_url": "https://news.axellio.com/axellio-assessed-awardable-for-department-of-defense-work-in-the-cdaos-tradewinds-solutions-marketplace", "date": "2025-07"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Systems Planning & Analysis (SPA)",
+      "hq": "Alexandria, VA",
+      "founding_year": 1972,
+      "relevance": "Services prime for Space Systems Command's DevSecOps Platform and Space C2 Software Enablement (the platform/infrastructure layer under Kobayashi Maru); defines the on-ramp any startup must use to field Space C2 applications.",
+      "segment_ids": ["S09", "S01"],
+      "evidence": [
+        {"what": "FACT (company release): SPA awarded prime contract (LOE1) for SSC DevSecOps Platform and Space C2 Software Enablement, initially valued at up to USD 211M (ceiling, not obligations); SPA states it has supported Space C2 DevOps since program inception in 2020.", "source_url": "https://spa.com/news/spa-to-prime-space-systems-commands-devsecops-platform-and-space-c2-software-enablement-contract/", "date": "2025 (exact date not verified)"},
+        {"what": "Context: SSC advanced the Space C2 Data Platform program with a USD 217.8M delivery order to Palantir USG under the DSS IDIQ (Palantir is covered by another agent).", "source_url": "https://news.satnews.com/2025/05/18/space-systems-command-advances-the-space-c2-data-platform-program/", "date": "2025-05-18"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Innovative Defense Technologies (IDT)",
+      "hq": "Arlington, VA",
+      "founding_year": null,
+      "relevance": "Automated test, retest and analysis software (ATRT) for Navy combat and C2 systems; holds a potential USD 90M contract supporting Project Overmatch, showing that Overmatch buys test automation and integration support from mid-size firms.",
+      "segment_ids": ["S09", "S01"],
+      "evidence": [
+        {"what": "FACT (trade press): IDT received a potential USD 90M contract to support the Navy's Project Overmatch (ceiling value; obligations unknown).", "source_url": "https://www.executivebiz.com/articles/innovative-defense-technologies-receives-potential-90m-contract-to-support-navys-project-overmatch", "date": "not verified (believed 2023-2024)"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "HII Mission Technologies",
+      "hq": "McLean, VA (division of HII, Newport News, VA)",
+      "founding_year": null,
+      "relevance": "Large prime's C5ISR/spectrum division; two spectrum dominance and awareness products became Tradewinds-awardable in 2026, indicating prime-level competition in the spectrum-awareness niche adjacent to C4ISR.",
+      "segment_ids": ["S12", "S05"],
+      "evidence": [
+        {"what": "FACT (company release): HII Mission Technologies announced two spectrum dominance and awareness products assessed 'Awardable' in the CDAO Tradewinds Solutions Marketplace (awardable status is not a contract).", "source_url": "https://www.hii.com/news/hii-is-assessed-awardable-in-the-us-department-of-war-cdao-tradewinds-solutions-marketplace", "date": "2026-07"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Latent AI",
+      "hq": "Princeton, NJ",
+      "founding_year": 2018,
+      "relevance": "SRI spin-out whose LEIP platform compresses, optimizes and deploys ML models on constrained tactical-edge hardware; a repeat SBIR/OTA vendor in the edge-AI layer that C2 and PED applications depend on.",
+      "segment_ids": ["S06", "S04"],
+      "evidence": [
+        {"what": "RECALL - not re-verified this session (confidence MEDIUM): Army and Air Force SBIR Phase II awards and DIU/Army edge-AI prototype participation 2020-2024; no production program of record identified (candidate for proto-purgatory).", "source_url": "https://latentai.com", "date": "2020-2024"}
+      ],
+      "priority": 2
+    },
+    {
+      "name": "Prescient Edge Corp",
+      "hq": "McLean, VA (RECALL)",
+      "founding_year": null,
+      "relevance": "Services firm providing technical support for Project Overmatch robotic autonomous systems testing and operationalization; low product relevance but shows how Overmatch autonomy work is contracted (cost-reimbursement support, not product buys).",
+      "segment_ids": ["S13", "S01"],
+      "evidence": [
+        {"what": "FACT (trade press): USD 11.3M cost-reimbursement contract for Project Overmatch robotic autonomous systems support; separately a seat on a NIWC Pacific multiple-award contract with a USD 350M ceiling (ceiling shared across awardees, not revenue).", "source_url": "https://thedefensewatch.com/defense-contracts/prescient-edge-secures-11-3-million-navy-project-overmatch-contract-for-autonomous-systems-support/", "date": "2025"}
+      ],
+      "priority": 1
+    }
+  ],
+  "repeated_topics": [
+    {
+      "topic": "Resilient / alternative battle-network topology for attritable autonomy and DDIL C2 (DIU ORIENT CSO; Navy Overmatch 'alternative battle networks' research; NGC2 transport layer)",
+      "agencies": ["DIU", "NIWC Pacific / Project Overmatch", "Army PEO C3N (NGC2)"],
+      "years": [2024, 2025, 2026],
+      "transition_evidence": "ORIENT prototype awards (Viasat, Aalyria, Higher Ground, IoT/AI, Nov 2024); Persistent Systems USD 87.5M NGC2 network contract (Feb 2026) shows the incumbent MANET vendor capturing the transport slot; no small-vendor production transition visible.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "Contested-logistics / sustainment decision support (CDAO Open DAGIR Challenge on contested logistics; C3 AI Contested Logistics on Tradewinds; Rune TyrOS in NGC2; Rhombus Guardian)",
+      "agencies": ["CDAO", "Army", "USMC", "USAF"],
+      "years": [2024, 2025, 2026],
+      "transition_evidence": "Open DAGIR challenge launched Aug 2024 for contested logistics vendors; C3 AI product made Tradewinds-awardable Jan 2025; Rune joined a funded NGC2 team. Transition to a program of record not yet visible; most activity is awardable status, prototypes and team membership.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "Edge AI model optimization and deployment on tactical hardware (Latent AI SBIRs; xTech data/edge categories; DIU edge CSOs)",
+      "agencies": ["Army xTech / SBIR", "AFWERX", "DIU"],
+      "years": [2020, 2021, 2022, 2023, 2024, 2025],
+      "transition_evidence": "Repeated Phase II awards and prize wins; no production program identified for a standalone edge-AI optimization vendor. Strong candidate for proto-purgatory.",
+      "signal": "proto-purgatory"
+    },
+    {
+      "topic": "Voice / push-to-talk interoperability across legacy radios and IP networks",
+      "agencies": ["Army (NGC2 via Team Anduril)", "DHS/first responders (commercial adjacent)"],
+      "years": [2023, 2024, 2025, 2026],
+      "transition_evidence": "Instant Connect Enterprise inside the funded NGC2 prototype (2025); Persistent Systems Tradewinds-awardable (2026). Transition path is via prime-led team membership rather than direct awards.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "xTech prize competitions recurring on C2/data/edge themes (xTech Search 1-10, xTech Edge Strike, xTech Inversion) with prize-to-SBIR-to-exercise pathway",
+      "agencies": ["Army xTech / Army Applications Laboratory"],
+      "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+      "transition_evidence": "Documented transitions are rare and hardware-leaning: TRX Systems (xTech Search 3) fed DAPS Gen II full-rate production (2024); Icarus (xTech Search 9) used follow-on SBIR to join Valiant Shield (June 2026). For software C2 winners no production transition was identified this session.",
+      "signal": "unclear"
+    },
+    {
+      "topic": "Spectrum awareness / EW-adjacent sensing products (HII spectrum products on Tradewinds; CX2; Distributed Spectrum; Army EW xTech topics)",
+      "agencies": ["CDAO Tradewinds", "Army", "USMC"],
+      "years": [2024, 2025, 2026],
+      "transition_evidence": "Prime-level products reached awardable status (July 2026); startup activity is funding-led (CX2). No program-of-record transition for a startup identified.",
+      "signal": "unclear"
+    },
+    {
+      "topic": "Space C2 data platform and DevSecOps enablement (Kobayashi Maru, Warp Core, Space C2 Data Platform, SSC DevSecOps enablement)",
+      "agencies": ["Space Systems Command", "USSF"],
+      "years": [2020, 2021, 2022, 2023, 2024, 2025],
+      "transition_evidence": "Consolidated onto Palantir (USD 217.8M delivery order, 2025) plus a services prime (SPA, up to USD 211M ceiling). Persistent, but access for new entrants runs through those primes.",
+      "signal": "persistent demand"
+    },
+    {
+      "topic": "Automated test / validation of C2 and combat-system software (IDT ATRT for Overmatch; DevSecOps platform contracts)",
+      "agencies": ["Navy / NAVWAR / Project Overmatch", "SSC"],
+      "years": [2022, 2023, 2024, 2025],
+      "transition_evidence": "Recurring services contracts to mid-size firms; not a startup product transition.",
+      "signal": "persistent demand"
+    }
+  ],
+  "search_log": [
+    {"query": "Lockheed Martin NGC2 25th Infantry Division team partners 'Next Generation Command and Control' 2025", "useful": true},
+    {"query": "Anduril NGC2 4th Infantry Division team partners 'Instant Connect' 'Research Innovations' Microsoft Palantir Govini Striveworks", "useful": true},
+    {"query": "'Kobayashi Maru' Space C2 vendors awarded 2025 Space Systems Command software companies", "useful": true},
+    {"query": "'Project Overmatch' contract awarded vendor 2025 Navy software companies", "useful": true},
+    {"query": "'Tradewinds Solutions Marketplace' awardee 'command and control' OR 'situational awareness' 2025 CDAO", "useful": true},
+    {"query": "'Open DAGIR' OR 'GIDE' CDAO vendors participants industry partners 2025 command and control", "useful": true},
+    {"query": "Army 'additional competitive award' NGC2 prototyping team awarded 2026 III Corps OR '1st Cavalry' OR '101st'", "useful": true},
+    {"query": "Defense Innovation Unit prototype award 'command and control' OR 'edge' software selected companies 2026", "useful": true},
+    {"query": "NATO Innovation Fund portfolio companies 2026 investment defense software autonomy", "useful": true},
+    {"query": "'Comand AI' OR 'Alpine Eagle' OR 'ARX Robotics' OR 'Lambda Automata' OR Adarga funding 2026 command and control Europe", "useful": true},
+    {"query": "xTech winners 2025 2026 Army 'command and control' OR 'tactical edge' OR 'data' finalists software startups", "useful": false},
+    {"query": "defense startup 'command and control' software raises 'Series A' OR seed 2026 a16z OR 'Founders Fund' OR Lux OR 8VC OR 'Shield Capital'", "useful": false},
+    {"query": "WebFetch https://www.nif.fund/portfolio/ (EGRESS_BLOCKED)", "useful": false},
+    {"query": "WebFetch https://www.runetech.co/news/lockheed-martin-ngc2 (EGRESS_BLOCKED)", "useful": false}
+  ],
+  "notes": "SCOPE AND BUDGET: 12 WebSearch calls and 2 WebFetch calls (both egress-blocked: nif.fund, runetech.co) were used; no GitHub/Bigdata/other tools. Items marked RECALL were not re-verified this session. NGC2 ROSTERS (FACT): Team Anduril (4th ID, USD 99.6M OTA awarded 2025-07-18, 11-month prototype, Ivy Sting events) = Anduril, Palantir, Striveworks, Govini, Instant Connect Enterprise, Research Innovations Inc, Microsoft, plus later-announced partner Shift5 (~Feb 2026). Team Lockheed Martin (25th ID, USD 26M OTA, NTE 16 months, announced 2025-09-03, Lightning Surge/Lightning Strike events in the Indo-Pacific; Lightning Surge 2 live-fire release 2026-02-27) = Lockheed RMS with 'non-traditional' partners including Raft and Accelint (both on master list) and Rune Technologies. 2026 STATUS SIGNALS: Persistent Systems received a USD 87.5M Army contract supporting the NGC2 prototype (announced 2026-02-05; on master list, pass to owner); DefenseScoop reported III Armored Corps receiving baseline NGC2 capabilities (2026-09-21), and a Tectonic Defense item reports Anduril 'tapped to lead NGC2 common data baseline' (date not verified) - INFERENCE (confidence LOW-MEDIUM): the Army may be converging both division prototypes onto a single Anduril-led data baseline, which would make partner-slot access (not prime competition) the realistic entry path for a startup. OTHER VERIFIED SIGNALS NOT LISTED AS COMPANIES: Chariot Defense USD 34M Series A led by a16z with Shield Capital, DCVC and others (2026-02; battlefield power management, adjacent not core); Databricks (Tradewinds awardable 2025-11), Progress Federal Solutions (2025-10) and Arlo Solutions (2025-03) also became awardable; Palantir USG received a USD 217.8M Space C2 Data Platform delivery order under the DSS IDIQ (2025); Project Overmatch small awards include EpiSci (~USD 2.7M follow-on, 2024-2025, covered under Applied Intuition), goTenna (USD 450K, on master list), Rebellion Defense (2024, on master list), Ocean Power Technologies (USD 1M Mission Autonomy Proving Grounds), PEC (USD 59M RAS support) and an unnamed small firm researching alternative battle networks (USNI, 2024-10). NATO INNOVATION FUND (as of 2026-07, 25 portfolio companies per aggregator; direct page blocked): C4ISR-adjacent names include ARX Robotics (Germany), Kelluu (Finland, persistent airship surveillance, Arctic/Canada expansion 2026), Aquark Technologies (UK, compact quantum sensing, EUR 5M seed 2024 - PNT-adjacent, S11), Kraken Technology Group (UK, uncrewed surface vessels, USD 175M Series B 2026-07), STARK (Germany, loitering munitions) and Greenjets (UK, propulsion); none are core C2 software. COMPANIES CONSIDERED BUT NOT LISTED (recall only, lower relevance): Enveil, SpiderOak/Kestrel and Atlas Space Operations (DIU Hybrid Space Architecture participants, S10/S05), Forterra and Overland AI (ground autonomy, S13), Adarga and Hadean (UK AI/synthetic-environment vendors), True Anomaly (space C2), Expedition Technology (RF ML), Dedrone by Axon (counter-UAS C2). Absence of a listed competitor in any niche is not evidence of opportunity. DAF Battle Network / ABMS vendor lists, GIDE participant rosters and Project Convergence Capstone 5 industry lists were not verified this session beyond the Open DAGIR framing (CDAO with OUSD R&E, Joint Fires Network and DIU; Maven Smart System onboarding pathways) - Public evidence insufficient within budget; the upcoming Advana IDIQ (reported as up to USD 15B ceiling, 'largest acquisition of digital and AI enabling capabilities') is a ceiling figure, not funding."
+}
