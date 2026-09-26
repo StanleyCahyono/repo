@@ -23,10 +23,10 @@ route('evidence', (r) => {
     pageHead('Evidence base', 'What government documents, exercises, solicitations and budgets actually say', 'Government primary sources dominate: GAO and Inspector General reports, SAM.gov notices, exercise reporting, SBIR and prototype award patterns, budget justification books, allied programs, and the regulatory rules that shape what this founding team can do.'),
     bar,
     h('h2', null, e.name || cur),
-    e.summary ? h('div', { class: 'callout' }, h('p', null, e.summary)) : null,
+    e.summary ? h('div', { class: 'callout' }, P(e.summary)) : null,
     card('Findings (' + findings.length + ')', dataTable(findings, cols, { facets: [{ title: 'Segment', get: (f) => f.segment_ids }, { title: 'Label', get: (f) => f.label }, { title: 'Chain step', get: (f) => f.chain_steps }], id: 'ev-' + cur, pageSize: 60 })),
     structured.length ? card('Structured extracts', h('div', { class: 'stack' }, structured.map(([k, v]) => fold(titleCase(k) + (Array.isArray(v) ? ' (' + v.length + ')' : ''), structuredTable(v))))) : null,
-    e.saturation_statement ? card('Saturation statement', h('p', null, e.saturation_statement)) : null,
+    e.saturation_statement ? card('Saturation statement', P(e.saturation_statement)) : null,
     sourceList(e.sources));
 });
 function structuredTable(v) {
@@ -44,7 +44,7 @@ route('allied', () => {
   const surv = arr(D.survivorsOrder).map((id) => ({ id, reg: (D.registry?.gaps || []).find((g) => g.id === id), gtm: D.survivors?.[id]?.gtm }));
   return h('div', { class: 'page' },
     pageHead('Phase 18 · Allied-market lens', 'Does the opportunity get bigger outside the United States?', 'NATO, Germany, the United Kingdom, Australia, Japan, Singapore and other allies: standards, exportability, sovereignty and data-residency rules, domestic-procurement preferences, national C2 systems, and whether allied interoperability itself could be the larger business.'),
-    e.summary ? h('div', { class: 'callout' }, h('p', null, e.summary)) : null,
+    e.summary ? h('div', { class: 'callout' }, P(e.summary)) : null,
     markets.length ? card('Markets', h('div', { class: 'stack' }, markets.map((m) => fold(m.market || m.country || m.name || 'Market', structuredTable([m]))))) : null,
     surv.length ? card('Allied extension for each surviving opportunity', dataTable(surv.filter((s) => s.gtm?.allied_extension), [{ key: 'id', title: 'Opportunity', render: (s) => h('a', { href: '#opportunities/' + s.id }, s.id + ' ' + (s.reg?.title || '')) }, { key: 'bigger', title: 'Bigger with allies?', render: (s) => s.gtm.allied_extension.bigger_with_allies || '—' }, { key: 'what', title: 'What changes', render: (s) => s.gtm.allied_extension.what_changes || '—' }, { key: 'markets', title: 'Markets', render: (s) => chips(s.gtm.allied_extension.markets) }], { filterable: false })) : null,
     card('Findings (' + arr(e.findings).length + ')', evidenceList(arr(e.findings).map((f) => ({ claim: f.title + (f.detail ? ' — ' + f.detail : ''), source_url: f.source_url, source_title: f.source_title, pub_date: f.pub_date, label: f.label, confidence: f.confidence, tier: f.source_tier })))),

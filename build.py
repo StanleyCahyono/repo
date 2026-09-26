@@ -234,7 +234,7 @@ def build_data():
 def build_html(data):
     tpl = open(os.path.join(SRC, 'template.html'), encoding='utf-8').read()
     css = open(os.path.join(SRC, 'app.css'), encoding='utf-8').read()
-    js_files = ['js/core.js', 'js/components.js', 'js/views/overview.js', 'js/views/segments.js', 'js/views/buyers.js', 'js/views/companies.js', 'js/views/evidence.js', 'js/views/gaps.js', 'js/views/opportunities.js', 'js/views/method.js']
+    js_files = ['js/core.js', 'js/components.js', 'js/ux.js', 'js/views/overview.js', 'js/views/segments.js', 'js/views/buyers.js', 'js/views/companies.js', 'js/views/evidence.js', 'js/views/gaps.js', 'js/views/opportunities.js', 'js/views/method.js']
     js = '\n'.join(open(os.path.join(SRC, f), encoding='utf-8').read() for f in js_files)
     payload = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     html = tpl.replace('/*__CSS__*/', css).replace('/*__DATA__*/', 'window.DATA = ' + payload + ';').replace('/*__JS__*/', js)

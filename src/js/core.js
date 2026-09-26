@@ -11,7 +11,7 @@ function h(tag, attrs, ...children) {
     else if (k === 'html') el.innerHTML = v;
     else if (k === 'dataset') Object.assign(el.dataset, v);
     else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
-    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+    else if (k === 'style' && typeof v === 'object') { for (const [sk, sv] of Object.entries(v)) { if (sv == null) continue; if (sk.startsWith('--')) el.style.setProperty(sk, String(sv)); else el.style[sk] = sv; } }
     else el.setAttribute(k, v === true ? '' : v);
   }
   append(el, children);
@@ -51,8 +51,9 @@ function val(v, opts = {}) {
   if (typeof v === 'boolean') return h('span', null, v ? 'Yes' : 'No');
   if (typeof v === 'number') return h('span', { class: 'num' }, String(v));
   if (isStr(v)) {
-    if (INSUFFICIENT.test(v)) return h('span', { class: 'empty' }, v);
-    return h('span', null, linkify(v));
+    if (INSUFFICIENT.test(v) && v.length < 90) return h('span', { class: 'empty' }, v);
+    if (v.length > 200 && typeof rich === 'function') return rich(v, { limit: opts.limit ?? 3 });
+    return h('span', null, typeof inline === 'function' ? inline(v) : linkify(v));
   }
   if (Array.isArray(v)) {
     if (!v.length) return h('span', { class: 'empty' }, opts.empty || '—');
@@ -75,7 +76,7 @@ function sourceLine(o) {
   const text = o.claim || o.title || o.what || o.pain || o.note || o.event || '';
   return h('div', { class: 'ev-item' },
     h('div', { class: 'ev-head' }, o.form ? h('span', { class: 'ev-form' }, o.form) : null, labelTag(o.label), confTag(o.confidence), o.tier ? h('span', { class: 'tier' }, 'T' + o.tier) : null, o.source_type ? h('span', { class: 'tier' }, o.source_type) : null),
-    h('div', null, text),
+    typeof rich === 'function' ? rich(text, { limit: 2 }) : h('div', null, text),
     o.source_url ? h('a', { href: o.source_url, target: '_blank', rel: 'noopener' }, (o.source_title || shortUrl(o.source_url)) + (o.pub_date ? ' · ' + o.pub_date : '') + (o.event_date && o.event_date !== o.pub_date ? ' (event ' + o.event_date + ')' : '')) : (o.pub_date ? h('span', { class: 'small muted' }, o.pub_date) : null));
 }
 function labelTag(l) { if (!l) return null; const k = String(l).toLowerCase(); const cls = k.includes('fact') ? 'fact' : k.includes('infer') ? 'inference' : k.includes('hypo') ? 'hypothesis' : ''; return h('span', { class: 'label ' + cls }, l); }
@@ -90,13 +91,13 @@ function tabs(defs, initial = 0) {
   const bar = h('div', { class: 'tabs', role: 'tablist' });
   const panel = h('div');
   let active = initial;
-  const render = () => { panel.innerHTML = ''; const r = defs[active].render(); append(panel, [r]); $$('button', bar).forEach((b, i) => b.classList.toggle('active', i === active)); };
+  const render = () => { panel.innerHTML = ''; panel.className = 'tab-panel'; void panel.offsetWidth; panel.classList.add('tab-in'); const r = defs[active].render(); append(panel, [r]); $$('button', bar).forEach((b, i) => { b.classList.toggle('active', i === active); b.setAttribute('aria-selected', String(i === active)); }); };
   defs.forEach((d, i) => bar.append(h('button', { role: 'tab', onclick: () => { active = i; render(); } }, d.title)));
   wrap.append(bar, panel);
   render();
   return wrap;
 }
-function pageHead(eyebrow, title, lede, meta) { return h('div', { class: 'page-head' }, eyebrow ? h('div', { class: 'eyebrow' }, eyebrow) : null, h('h1', null, title), lede ? h('p', { class: 'lede' }, lede) : null, meta ? h('div', { class: 'meta' }, meta) : null); }
+function pageHead(eyebrow, title, lede, meta) { return h('div', { class: 'page-head' }, eyebrow ? h('div', { class: 'eyebrow' }, eyebrow) : null, h('h1', { class: String(title || '').length > 90 ? 'long' : null }, title), lede ? h('p', { class: 'lede' }, lede) : null, meta ? h('div', { class: 'meta' }, meta) : null); }
 function crumbs(list) { return h('div', { class: 'crumbs' }, list.map((c, i) => (i ? h('span', null, c.href ? h('a', { href: c.href }, c.text) : c.text) : h('a', { href: c.href }, c.text)))); }
 function empty(msg = 'Public evidence insufficient.') { return h('p', { class: 'empty' }, msg); }
 function sourceList(sources) { const s = arr(sources).filter((x) => x && (x.url || x.source_url)); if (!s.length) return null; return fold('Sources (' + s.length + ')', h('ol', { class: 'source-list' }, s.map((x) => h('li', null, h('a', { href: x.url || x.source_url, target: '_blank', rel: 'noopener' }, x.title || shortUrl(x.url || x.source_url)), x.pub_date ? ' · ' + x.pub_date : '', x.tier ? h('span', { class: 'tier' }, ' T' + x.tier) : null)))); }
@@ -122,7 +123,7 @@ function navigate() {
   const fn = ROUTES[r.view] || ROUTES.overview;
   const main = $('#main');
   main.innerHTML = '';
-  try { append(main, [fn(r)]); } catch (e) { console.error(e); main.append(h('div', { class: 'card' }, h('h2', null, 'Render error'), h('pre', null, String(e.stack || e)))); }
+  try { append(main, [fn(r)]); if (typeof enhance === 'function') enhance(main); } catch (e) { console.error(e); main.append(h('div', { class: 'card' }, h('h2', null, 'Render error'), h('pre', null, String(e.stack || e)))); }
   $$('#sidebar a').forEach((a) => a.classList.toggle('active', a.dataset.view === r.view));
   $('#sidebar').classList.remove('open');
   window.scrollTo({ top: 0 });
@@ -141,7 +142,7 @@ function buildSidebar() {
   ];
   const nav = $('#sidebar');
   nav.innerHTML = '';
-  for (const g of groups) nav.append(h('div', { class: 'group' }, h('div', { class: 'eyebrow group-title' }, g.title), g.items.map(([v, t, c]) => h('a', { href: '#' + v, dataset: { view: v } }, t, c != null ? h('span', { class: 'count' }, String(c)) : null))));
+  for (const g of groups) nav.append(h('div', { class: 'group' }, h('div', { class: 'eyebrow group-title' }, g.title), g.items.map(([v, t, c]) => h('a', { href: '#' + v, dataset: { view: v } }, typeof icon === 'function' ? icon(v) : null, h('span', { class: 'nav-text' }, t), c != null ? h('span', { class: 'count' }, String(c)) : null))));
   $('#navToggle').addEventListener('click', () => { const open = nav.classList.toggle('open'); $('#navToggle').setAttribute('aria-expanded', String(open)); });
 }
 

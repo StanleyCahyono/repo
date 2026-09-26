@@ -3,7 +3,14 @@
 /* Sortable, filterable, paged table.
    cols: [{key, title, render?(row), sort?(row), num?, width?}] */
 function dataTable(rows, cols, opts = {}) {
-  const state = { sortKey: opts.sortKey || null, desc: !!opts.desc, page: 0, filter: '', filters: {} };
+  const state = { sortKey: opts.sortKey || null, desc: !!opts.desc, page: 0, filter: '', filters: {}, layout: 'table' };
+  const cellLen = (v) => (v == null ? 0 : Array.isArray(v) ? v.map((x) => (isStr(x) ? x : JSON.stringify(x))).join(' ').length : typeof v === 'object' ? JSON.stringify(v).length : String(v).length);
+  const sample = rows.slice(0, 15); const dataCols = cols.slice(1);
+  const avgLen = sample.length && dataCols.length ? sample.reduce((a, r) => a + dataCols.reduce((b, c) => b + cellLen(r[c.key]), 0), 0) / (sample.length * dataCols.length) : 0;
+  const heavy = cols.length >= 4 && avgLen > 60;
+  const canToggle = opts.layout !== 'table' && cols.length >= 4;
+  if (opts.defaultLayout) state.layout = opts.defaultLayout; else if (opts.layout === 'cards' || (heavy && opts.layout !== 'table')) state.layout = 'cards';
+  if (canToggle && opts.id) { try { const saved = localStorage.getItem('c4isr-layout-' + opts.id); if (saved === 'cards' || saved === 'table') state.layout = saved; } catch {} }
   const pageSize = opts.pageSize || 40;
   const wrap = h('div', { class: 'stack' });
   const toolbar = h('div', { class: 'toolbar' });
@@ -17,7 +24,13 @@ function dataTable(rows, cols, opts = {}) {
     f._sel = sel; toolbar.append(sel);
   }
   const countEl = h('span', { class: 'small muted' });
-  toolbar.append(h('span', { class: 'spacer' }), countEl);
+  const sortSel = h('select', { 'aria-label': 'Sort by', id: opts.id ? opts.id + '-sort' : null }, h('option', { value: '' }, 'Sort: default'), cols.map((c) => h('option', { value: c.key }, 'Sort: ' + c.title)));
+  sortSel.addEventListener('change', () => { state.sortKey = sortSel.value || null; state.desc = !!(cols.find((c) => c.key === state.sortKey) || {}).num; state.page = 0; render(); });
+  const seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Layout' });
+  const setLayout = (l) => { state.layout = l; if (opts.id) { try { localStorage.setItem('c4isr-layout-' + opts.id, l); } catch {} } render(); };
+  const bCards = h('button', { type: 'button', onclick: () => setLayout('cards') }, 'Cards'); const bTable = h('button', { type: 'button', onclick: () => setLayout('table') }, 'Table');
+  seg.append(bCards, bTable);
+  toolbar.append(h('span', { class: 'spacer' }), canToggle ? sortSel : null, canToggle ? seg : null, countEl);
   const rowText = (r) => cols.map((c) => { const v = c.text ? c.text(r) : r[c.key]; return typeof v === 'object' ? JSON.stringify(v) : String(v ?? ''); }).join(' ').toLowerCase();
   rows.forEach((r) => (r.__t = rowText(r)));
   function current() {
@@ -27,14 +40,33 @@ function dataTable(rows, cols, opts = {}) {
     if (state.sortKey) { const c = cols.find((x) => x.key === state.sortKey); const get = c.sort || ((r) => (c.num ? num(r[c.key]) : String(r[c.key] ?? '').toLowerCase())); out = out.slice().sort((a, b) => { const x = get(a), y = get(b); return (x < y ? -1 : x > y ? 1 : 0) * (state.desc ? -1 : 1); }); }
     return out;
   }
+  function renderCards(slice) {
+    if (opts.card) { const g = h('div', { class: opts.cardGridClass || 'flip-grid' }, slice.map((r, i) => { const n = opts.card(r, i); if (n && n.style) n.style.setProperty('--i', Math.min(i, 16)); return n; })); if (!slice.length) g.append(h('p', { class: 'empty' }, 'No rows match.')); return g; }
+    const [first, ...rest] = cols;
+    const grid = h('div', { class: 'rec-grid' });
+    slice.forEach((r, i) => {
+      const fields = rest.map((c) => { const raw = r[c.key]; if (!c.render && (raw == null || raw === '' || (Array.isArray(raw) && !raw.length))) return null; return h('div', { class: 'rec-field' + (cellLen(raw) > 160 ? ' wide' : '') }, h('div', { class: 'rec-label' }, c.title), h('div', { class: 'rec-val' }, c.render ? c.render(r) : val(raw))); }).filter(Boolean);
+      const card = h('article', { class: 'rec' + (opts.onRow ? ' clickable' : ''), style: { '--i': Math.min(i, 12) } }, h('div', { class: 'rec-title' }, first.render ? first.render(r) : val(r[first.key])), h('div', { class: 'rec-fields' }, fields));
+      if (opts.onRow) card.addEventListener('click', (e) => { if (e.target.closest('a,button,details,summary')) return; opts.onRow(r); });
+      grid.append(card);
+    });
+    if (!slice.length) grid.append(h('p', { class: 'empty' }, 'No rows match.'));
+    return grid;
+  }
   function render() {
     const all = current(); const start = state.page * pageSize; const slice = all.slice(start, start + pageSize);
     countEl.textContent = all.length + ' of ' + rows.length;
+    bCards.classList.toggle('active', state.layout === 'cards'); bTable.classList.toggle('active', state.layout === 'table'); sortSel.value = state.sortKey || '';
     tableWrap.innerHTML = '';
+    tableWrap.className = state.layout === 'cards' ? 'rec-wrap' : 'table-wrap';
+    if (state.layout === 'cards') { tableWrap.append(renderCards(slice)); renderPager(all); return; }
     const thead = h('thead', null, h('tr', null, cols.map((c) => h('th', { class: (c.num ? 'num ' : '') + (state.sortKey === c.key ? 'sorted ' + (state.desc ? 'desc' : '') : ''), style: c.width ? { minWidth: c.width } : null, onclick: () => { if (state.sortKey === c.key) state.desc = !state.desc; else { state.sortKey = c.key; state.desc = !!c.num; } render(); } }, c.title))));
     const tbody = h('tbody', null, slice.map((r) => { const tr = h('tr', { class: opts.onRow ? 'clickable' : '' }, cols.map((c) => h('td', { class: c.num ? 'num' : '' }, c.render ? c.render(r) : val(r[c.key])))); if (opts.onRow) tr.addEventListener('click', (e) => { if (e.target.closest('a')) return; opts.onRow(r); }); return tr; }));
     if (!slice.length) tbody.append(h('tr', null, h('td', { colspan: cols.length, class: 'empty' }, 'No rows match.')));
     tableWrap.append(h('table', { class: 'data' }, thead, tbody));
+    renderPager(all);
+  }
+  function renderPager(all) {
     pager.innerHTML = '';
     if (all.length > pageSize) { const pages = Math.ceil(all.length / pageSize); pager.append(h('button', { class: 'btn small', disabled: state.page === 0 || null, onclick: () => { state.page--; render(); } }, '‹ Prev'), h('span', null, 'Page ' + (state.page + 1) + ' of ' + pages), h('button', { class: 'btn small', disabled: state.page >= pages - 1 || null, onclick: () => { state.page++; render(); } }, 'Next ›')); }
   }
@@ -53,7 +85,7 @@ function strengthMeter(n) { return h('div', { class: 'strength', title: 'Bear-ca
 
 /* Layered directed graph (SVG). nodes: [{id,label,layer|kind|type,...}], edges: [{from,to,label}]
    layers: ordered list of layer keys; layerOf(node) -> key. */
-function layeredGraph(nodes, edges, opts = {}) {
+function layeredGraphSvg(nodes, edges, opts = {}) {
   const layerKeys = opts.layers || Array.from(new Set(nodes.map(opts.layerOf)));
   const layerOf = opts.layerOf || ((n) => n.layer);
   const byLayer = layerKeys.map((k) => nodes.filter((n) => layerOf(n) === k));
@@ -87,7 +119,7 @@ function heatmap(xs, ys, cellFn, opts = {}) {
   const grid = h('div', { class: 'heat', style: { gridTemplateColumns: 'minmax(120px, auto) repeat(' + xs.length + ', minmax(64px, 1fr))' } });
   grid.append(h('div'));
   xs.forEach((x) => grid.append(h('div', { class: 'hx' }, opts.xLabel ? opts.xLabel(x) : x)));
-  ys.forEach((y) => { grid.append(h('div', { class: 'hy' }, opts.yLabel ? opts.yLabel(y) : y)); xs.forEach((x) => { const c = cellFn(x, y) || { value: 0 }; const v = num(c.value); const step = v === 0 ? 0 : clamp(Math.ceil((v / maxV) * 6), 1, 6); const el = h('div', { class: 'cell' + (v === 0 ? ' empty' : ''), style: v ? { background: `var(--seq-${step})`, color: step >= 4 ? '#fff' : 'var(--ink)' } : null, role: 'button', tabindex: 0 }, c.label != null ? c.label : String(v)); if (c.tip) withTip(el, c.tip); if (c.onClick) { el.addEventListener('click', () => c.onClick(el)); el.addEventListener('keydown', (e) => { if (e.key === 'Enter') c.onClick(el); }); } grid.append(el); }); });
+  ys.forEach((y) => { grid.append(h('div', { class: 'hy' }, opts.yLabel ? opts.yLabel(y) : y)); xs.forEach((x) => { const c = cellFn(x, y) || { value: 0 }; const v = num(c.value); const step = v === 0 ? 0 : clamp(Math.ceil((v / maxV) * 6), 1, 6); const el = h('div', { class: 'cell' + (v === 0 ? ' empty' : ''), style: Object.assign({ '--i': ys.indexOf(y) * xs.length + xs.indexOf(x) }, v ? { background: `var(--seq-${step})`, color: step >= 4 ? '#fff' : 'var(--ink)' } : {}), role: 'button', tabindex: 0 }, c.label != null ? c.label : String(v)); if (c.tip) withTip(el, c.tip); if (c.onClick) { el.addEventListener('click', () => c.onClick(el)); el.addEventListener('keydown', (e) => { if (e.key === 'Enter') c.onClick(el); }); } grid.append(el); }); });
   return grid;
 }
 

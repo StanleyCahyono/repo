@@ -30,7 +30,7 @@ route('companies', (r) => {
   return h('div', { class: 'page' },
     pageHead('Deliverable 4 · Competitive database', cos.length + ' companies across the C4ISR chain', 'Startups and incumbents, each with a 40-field record: founders and funding, products and the exact problem solved, users and buyers, contracts with ceiling and obligation separated, deployments, exercises, interfaces, moat, weaknesses, and evidence of adoption, repeat procurement and prototype-to-production transition. Sort any column; filter by segment, posture, chain step or echelon.'),
     h('div', { class: 'callout amber' }, h('p', { class: 'small' }, h('b', null, 'Contract-data discipline: '), 'an IDIQ ceiling is not revenue; a prototype OTA is not a program of record; a selected vendor is not a production award. Every contract row keeps ceiling, obligated and awarded amounts separate and carries a confidence level.')),
-    dataTable(cos, cols, { facets, sortKey: 'name', id: 'companies', pageSize: 100, placeholder: 'Filter by name, product, investor, customer…' }),
+    dataTable(cos, cols, { facets, sortKey: 'name', id: 'companies', defaultLayout: 'table', pageSize: 100, placeholder: 'Filter by name, product, investor, customer…' }),
     discoveredTable());
 });
 function discoveredTable() {
