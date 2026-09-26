@@ -1,0 +1,415 @@
+{
+ "id": "G04",
+ "title": "Unified assured-PNT operational awareness and decision support (single pane for source health, composite confidence, jam/spoof triage, fallback recommendation) with a formation-level PNT interference picture feeding the C2/EW COP",
+ "version_designed_for": "NARROWER VERSION per G04-score.json (verdict: borderline). This plan is designed ONLY for the vendor-neutral composite-assurance engine: an ASPN 2023 / pntOS-C-conformant plug-in that ingests 3-8 heterogeneous PNT sources, emits per-source health, composite confidence with attributed evidence, explainable fault/jam/spoof classification and a fallback recommendation, plus a synthetic scenario generator and a replay/audit library validated against public recordings (TEXBAT-type) and DHS Resilient PNT Conformance Framework v2.0 behaviors. It is NOT designed for the single-pane HMI as the product (a thin demo HMI is only a window onto the engine) and NOT for the formation-level PNT interference picture / EW COP feed (killed in the score file as classified-adjacent and NGC2-absorbable). Every milestone below tests the decisive doubt from the score file: does a named buyer with a budget line or vehicle exist for this software layer, and can this founding team lawfully reach it? Honest framing: until a Phase II/OT or Phase III appears, this is a credibility-and-evidence path with SBIR-scale money (single-digit $M), not yet a venture-scale company.",
+ "money_map": {
+  "links": [
+   {
+    "link": "problem",
+    "value": "Shipboard navigation watchstanders monitor several fragmented GPS/INS/GPNTS/alternate-source displays and must manually infer hardware fault vs jamming vs spoofing and pick a fallback, with no composite confidence, explainable rationale or audit trail.",
+    "detail": "FACT: Navy CSO open topic DON26BX05-NP004 text and Q&A state operators 'interact with multiple interfaces and data sources', that this 'fragmented environment increases cognitive workload... and slows decision-making', and that success metrics are speed to decision during an anomaly, threat comprehension accuracy and correct fallback selection (topic posted 2026-08-05; Q&A 2026-08-08 to 2026-09-01, read via mirror in the G04 card). OPNAVINST 9420.1C 5.a(11) (2019-09-30) has required operator degradation indication and interference reporting to electronic support since 2019.",
+    "confidence": "HIGH",
+    "source_url": "https://navysbir.com/n26_5/DON26BX05-NP004.htm"
+   },
+   {
+    "link": "user",
+    "value": "Electronics Technician - Navigation (ETV/ETSW) and the navigation team (Quartermaster, Navigator, OOD) on GPNTS-equipped surface combatants; second-order user is the strike-group information warfare commander (IWC) staff who receive interference reports.",
+    "detail": "FACT (NP004 Q&A): the ETV mans the navigation station mainly during navigation issues or contested transits, so the acute pain is episodic. INFERENCE: the formation/EW user is out of scope for the narrower version and is listed only as the recipient of an interference report message.",
+    "confidence": "HIGH",
+    "source_url": "https://navysbir.com/n26_5/DON26BX05-NP004.htm"
+   },
+   {
+    "link": "requirement_owner",
+    "value": "OPNAV N2N6 (Information Warfare) as Navy PNT policy owner and requirements sponsor for fleet PNT systems under OPNAVINST 9420.1C; NAVWAR compliance gate under DoDI 4650.08.",
+    "detail": "FACT for the policy documents (OPNAVINST 9420.1C 7.a-b assigns CNO N2N6 responsibilities; DoDI 4650.08 Change 1, 2020-12-30, makes NAVWAR compliance a milestone gate). LOW for any specific validated requirement document (CDD/CPD) covering an awareness/decision-support layer: none found in the public record - Public evidence insufficient. The requirement therefore exists as policy language plus a program office's SBIR topic, not as a funded requirement line.",
+    "confidence": "MEDIUM",
+    "source_url": "https://www.secnav.navy.mil/doni/Directives/09000%20General%20Ship%20Design%20and%20Support/09-400%20Command%20and%20Surveillance%20Systems%20Support/9420.1C.pdf"
+   },
+   {
+    "link": "program_office",
+    "value": "PEO C4I PMW/A 170 Communications & GPS Navigation Program Office (GPNTS program of record; named transition owner in NP004).",
+    "detail": "FACT (verified this session): PMW/A 170 tear sheet (peoc4i.navy.mil, 2025-01-31) and the GPNTS solicitations name PMW/A 170 as the GPNTS program office; NP004 names GPNTS as transition owner. FACT: PMW/A 170 already sponsors a Phase II SBIR 'GPS-Based PNT Service (GPNTS) SA Tool' with BlueRISC (N68335-25-C-0158, $750K, end date 2026-05-25) and ran the 23.4 NAVWAR open topic 'Holistic Common Operational Picture (COP): PMW 170' (N234-P07) - i.e., this office has bought PNT situational-awareness software at SBIR scale at least twice (search summaries citing the NDIA San Diego Winter 2026 PMW 170 brief and sbir.gov; the brief itself was EGRESS_BLOCKED).",
+    "confidence": "HIGH",
+    "source_url": "https://www.peoc4i.navy.mil/Portals/98/Documents/Tear-Sheets/2025_PMW%20170%20Tear%20Sheet_v01312025.pdf"
+   },
+   {
+    "link": "contracting_office",
+    "value": "NAVWAR HQ contracts (N00039) for GPNTS prime/production contracts; Navy SBIR Phase I/II contracts for PMW 170 topics issued via NAVAIR Lakehurst (N68335) as the BlueRISC contract number shows; NAVWAR CSO Prototype OT for NP004 Phase I.",
+    "detail": "FACT: GPNTS software support contract N00039-20-D-0021 (Raytheon) and hardware production IDIQ MAC N0003921D2002/N0003921D2003 (Sechan, SESCo) carry the N00039 DODAAC; BlueRISC's GPNTS SA Tool Phase II is N68335-25-C-0158. FACT (G04 card, Navy FY26 Release 5 instructions): NP004 Phase I is a Prototype OT (base up to $200K/6 months + option up to $115K; Phase II up to $2M).",
+    "confidence": "HIGH",
+    "source_url": "https://www.defensedaily.com/contract-awards/contract-award-sechan-electronics-inc-lititz-pennsylvania-n0003921d2002-and-systems-engineering-support-co-inc-sesco-san-diego-452850428/"
+   },
+   {
+    "link": "budget",
+    "value": "Evidenced money for THIS software layer: Navy SBIR/STTR set-aside only - NP004 Phase I caps ($200K + $115K option; Phase II up to $2M; multiple Phase I awards planned) and one prior Phase II of $750K (BlueRISC GPNTS SA Tool). GPNTS itself is funded from Navy OPN (hardware production) and the Raytheon software-support IDIQ; the FY26/FY27 amounts for any GPNTS line were NOT extracted (Navy FY27 OPN BA1/BA2 justification books identified at secnav.navy.mil/fmc/fmb/Documents/27pres but not readable this session). No RDT&E or OPN line item, PE or obligation for an assured-PNT awareness/decision-support capability was found: Public evidence insufficient.",
+    "detail": "FACT for award caps and the $750K Phase II; LOW for program-line funding. Context (FACT, GAO-21-320SP 2021-05-10): DoD funded open-architecture PNT integration at $17M FY2020-2024 against $783M PNT S&T. The hardware IDIQ ceiling ($452.85M, 2021) is a ceiling, not revenue, and does not fund software. Army APNT lines exist (FY2027 RDT&E Vol 3 BA 5A J-book identified) but values were not extracted (E05-F32). Treat the total evidenced addressable money for this layer as single-digit $M over 3 years unless a Phase III, a GPNTS ECP, or a production line appears.",
+    "confidence": "LOW",
+    "source_url": "https://www.navysbir.com/docs/NAVY_SBIR_26BX_R5.pdf"
+   },
+   {
+    "link": "contract_vehicle",
+    "value": "(a) NAVWAR CSO open topic DON26BX05-NP004 Prototype OT - CLOSED 2026-09-23, selections expected ~Q1-Q2 2027 by the pattern of Navy 'FY-26 Release 1 selections' postings; (b) Navy SBIR Phase II (BlueRISC precedent, N68335); (c) Raytheon GPNTS software support IDIQ N00039-20-D-0021 (PoP 2019-11-15 to 2029-11-14; ceiling reported reached by Aug 2025 with a sole-source modification notice) - the only vehicle that can actually put software INTO GPNTS today; (d) IWRP consortium OT (NIWC Atlantic) and NIWC Pacific CRADA/ANTX-NICE CSO as no-ownership-test fallbacks; (e) a possible next NAVWAR open-topic cycle or Direct-to-Phase-II (not announced - HYPOTHESIS).",
+    "detail": "FACT for (a)-(c) (navysbir.com; usfcr.com notice of intent to award a sole-source modification to GPNTS Software contract N0003920D0021, date not captured; Defense Daily 2021-09-20). FACT/MEDIUM for (d) (buyers/navy.json: IWRP quarterly industry days, NICE ANTX CSO). (e) is unverified. The decisive point: the one open door closed before the founders could bid, and the only route into the fielded system is through Raytheon's software-support vehicle or a PMW 170-sponsored SBIR/OT.",
+    "confidence": "MEDIUM",
+    "source_url": "https://usfcr.com/search/opportunities/?oppId=5b568e4790934130b54e61f562eef2f3"
+   },
+   {
+    "link": "current_vendors",
+    "value": "Raytheon (GPNTS developer and software support prime, N00039-20-D-0021); Sechan Electronics and SESCo (GPNTS follow-on hardware production, $452.85M IDIQ MAC ceiling, 2021-09-20); BlueRISC (AI/ML NAVWAR situational-awareness software module for GPNTS, SBIR Phase I 2024 'Leveraging GPNTS for NAVWAR Situational Awareness' -> Phase II N68335-25-C-0158 $750K ending 2026-05-25); IS4S (pntOS/ASPN engineering house, DHS PNT Integrity Library author, Army NorthStar OTA April 2026); device-level detection inside Collins MAPS Gen II / TRX DAPS Gen II / Safran VersaPNT (RECALL - not re-verified this session).",
+    "detail": "FACT for Raytheon, Sechan/SESCo and BlueRISC (search-result summaries of defensedaily.com, usfcr.com, sbir.gov, inknowvation.com). BlueRISC's transition status after May 2026 is unknown - Public evidence insufficient; the fact that NAVWAR issued a broader open topic (NP004) three months after that Phase II ended is consistent with EITHER a successful Phase II that the office wants to broaden, OR an unsatisfying one (INFERENCE, LOW). Selected vendor is not production: none of the SA-tool efforts is evidenced as fielded on a ship.",
+    "confidence": "HIGH",
+    "source_url": "https://www.inknowvation.com/sbir/awards/navy-2024-leveraging-gpnts-navwar-situational-awareness"
+   }
+  ],
+  "weakest_link": "BUDGET (and, tied to it, CONTRACT VEHICLE). The buyer chain from problem to program office is now verified end-to-end - PMW/A 170 exists, owns GPNTS, and has bought PNT situational-awareness software at SBIR scale twice (2024/2025 BlueRISC, 2026 NP004) - but no program budget line, Phase III, ECP or production award for this software layer is evidenced; the only open vehicle closed on 2026-09-23; and the sole path into the fielded system runs through Raytheon's software-support IDIQ, which the founders cannot access directly.",
+  "penalty_note": "Major penalty retained from the score file. Evidenced money is SBIR caps plus one $750K Phase II; IDIQ ceilings ($452.85M hardware) must not be read as software demand; a prototype award (BlueRISC Phase II) is not deployment; and the pattern Phase I -> Phase II -> new open topic without a production step is the proto-purgatory GAO described. The plan below is therefore structured to produce evidence quickly and to kill quickly: if no named PMW 170 or NP004-awardee counterpart engages by week 12, and no second vehicle (IWRP/CRADA/D2P2/civil pilot) is in motion by month 9, the company should not raise venture money on this opportunity."
+ },
+ "procurement_signal": {
+  "timeline": [
+   {
+    "date": "2015-09-04",
+    "event": "PEO C4I program-manager view 'Beyond GPS: The Navy's plan for assured position, navigation, timing' publicly frames GPNTS as the Navy's shipboard assured-PNT distribution service (FACT, trade press).",
+    "type": "RFI",
+    "source_url": "https://www.c4isrnet.com/special-reports/pm-view/2015/09/04/beyond-gps-the-navy-s-plan-for-assured-position-navigation-timing/"
+   },
+   {
+    "date": "2016-2018 (exact dates not captured)",
+    "event": "SPAWAR posts GPNTS RFI and then a GPNTS synopsis for the shipboard PNT distribution system (FACT that the notices exist; dates not captured this session).",
+    "type": "sources sought",
+    "source_url": "https://intelligencecommunitynews.com/spawar-posts-gpnts-rfi/"
+   },
+   {
+    "date": "2019-09-30",
+    "event": "OPNAVINST 9420.1C requires primary plus GPS-independent alternate PNT, operator degradation indication and interference reporting to electronic support (the standing requirement this software layer answers).",
+    "type": "RFI",
+    "source_url": "https://www.secnav.navy.mil/doni/Directives/09000%20General%20Ship%20Design%20and%20Support/09-400%20Command%20and%20Surveillance%20Systems%20Support/9420.1C.pdf"
+   },
+   {
+    "date": "2019-11-15",
+    "event": "NAVWAR awards Raytheon the GPNTS Software Support contract N00039-20-D-0021 (PoP to 2029-11-14); the ceiling was reported as expected to be reached by August 2025 due to 'multiple software development efforts and emergent fleet needs', triggering a sole-source modification notice.",
+    "type": "follow-on",
+    "source_url": "https://usfcr.com/search/opportunities/?oppId=5b568e4790934130b54e61f562eef2f3"
+   },
+   {
+    "date": "2020 (solicitation N00039-20-R-0001)",
+    "event": "GPNTS Hardware Production Follow-On solicitation issued by NAVWAR for PMW/A 170.",
+    "type": "prototype solicitation",
+    "source_url": "https://govtribe.com/opportunity/federal-contract-opportunity/global-positioning-system-gps-based-positioning-navigation-and-timing-service-gpnts-hardware-production-follow-on-n0003920r0001"
+   },
+   {
+    "date": "2021-05-10",
+    "event": "GAO-21-320SP: alternative PNT 'not prioritized', 'no central program office', assurance determination 'an active research area', $17M open-architecture integration vs $783M PNT S&T FY2020-2024.",
+    "type": "RFI",
+    "source_url": "https://www.gao.gov/products/gao-21-320sp"
+   },
+   {
+    "date": "2021-09-20",
+    "event": "Sechan Electronics (N0003921D2002) and SESCo (N0003921D2003) awarded a combined $452,850,428 IDIQ multiple-award contract for GPNTS follow-on hardware production units; 5-year base plus 3-year option ordering period, work through September 2029 if exercised (ceiling, not revenue; hardware, not this software).",
+    "type": "production",
+    "source_url": "https://www.defensedaily.com/contract-awards/contract-award-sechan-electronics-inc-lititz-pennsylvania-n0003921d2002-and-systems-engineering-support-co-inc-sesco-san-diego-452850428/"
+   },
+   {
+    "date": "2023 (SBIR 23.4 cycle)",
+    "event": "NAVWAR Open Topic N234-P07 'Holistic Common Operational Picture (COP): PMW 170' - PMW 170 begins using NAVWAR open topics to buy software (FACT that the topic exists; award outcome not captured).",
+    "type": "prototype solicitation",
+    "source_url": "https://www.navysbir.com/n23_4/N234-P07.htm"
+   },
+   {
+    "date": "2024",
+    "event": "Navy SBIR Phase I 'Leveraging GPNTS for NAVWAR Situational Awareness' awarded to BlueRISC: an AI/ML-driven NAVWAR situational-awareness software module targeting integration into GPNTS.",
+    "type": "prototype award",
+    "source_url": "https://www.inknowvation.com/sbir/awards/navy-2024-leveraging-gpnts-navwar-situational-awareness"
+   },
+   {
+    "date": "2025 (FY25 award; end date 2026-05-25)",
+    "event": "BlueRISC Phase II N68335-25-C-0158, $750K, 'GPS-Based Positioning, Navigation, and Timing Service (GPNTS) SA Tool' for PMW/A 170 (per search summaries of the NDIA San Diego Winter 2026 PMW 170 brief and sbir.gov; transition status after May 2026: Public evidence insufficient).",
+    "type": "follow-on",
+    "source_url": "https://www.sbir.gov/awards/211304"
+   },
+   {
+    "date": "2026-01-21 / 2026-04-23",
+    "event": "Open-PNT publishes the ASPN 2023 YAML data model (Distribution A) and the pntOS-C API (Apache-2.0) - the open interface the narrower product is built on.",
+    "type": "RFI",
+    "source_url": "https://github.com/Open-PNT/ASPN-ICD"
+   },
+   {
+    "date": "2026-08-05 (pre-release) / 2026-08-26 (open) / 2026-09-23 (close)",
+    "event": "NAVWAR CSO Open Topic DON26BX05-NP004 'Unified Assured PNT Operational Awareness and Decision Support' (Phase I Prototype OT up to $200K + $115K option; Phase II up to $2M; multiple Phase I awards planned; synthetic ASPN/pntOS data allowed; CMMC L2 self, CUI only, no facility clearance expected in Phase II).",
+    "type": "repeat",
+    "source_url": "https://navysbir.com/n26_5/DON26BX05-NP004.htm"
+   },
+   {
+    "date": "~2027-Q1 to Q2 (expected, not announced)",
+    "event": "NP004 Phase I selections posted on navysbir.com selections pages (by analogy with the 'FY-26 Release 1 NAVY SBIR/STTR/CSO SELECTIONS' posting pattern) - the moment the founders' subcontract/teaming window opens. HYPOTHESIS on timing.",
+    "type": "prototype award",
+    "source_url": "https://www.navysbir.com/sel-awd/26_01-selections.htm"
+   },
+   {
+    "date": "2027-06-07 to 2027-06-10",
+    "event": "ION Joint Navigation Conference 2027 (50th JNC), Covington, Kentucky; theme 'Robust, Resilient, Assured PNT for Warfighters and Homeland Security' - the largest U.S. military PNT conference and the natural venue to show the engine to PMW 170, JNWC, Army PM PNT and Phase I awardees (note: JNC has restricted/classified sessions limited to U.S. persons - the non-U.S.-person founder can attend only unrestricted sessions; verify with ION).",
+    "type": "repeat",
+    "source_url": "https://www.ion.org/jnc/future-meetings.cfm"
+   }
+  ],
+  "stage": "Prototyping",
+  "rationale": "Upgraded from the card's 'Emerging' on new evidence: the program office has now issued repeated prototype solicitations for this software layer (2024 Phase I -> 2025 Phase II $750K -> 2026 broader CSO open topic with multiple Phase I awards planned), the host system is in hardware production (2021 IDIQ) with a software-support prime whose ceiling was exhausted early by 'emergent fleet needs', and open interfaces (ASPN/pntOS) became public in 2026. But there is no follow-on-to-production step for any awareness/decision-support software, no budget line, and the assurance determination problem is still called 'an active research area' by GAO. The five-year sequence is RFI (policy 2019) -> prototype award (2024) -> follow-on (Phase II 2025) -> repeat prototype solicitation (2026), which is the signature of Prototyping, not Transitioning. Confidence MEDIUM; the NDIA PMW 170 brief that would settle the transition question was blocked."
+ },
+ "entry_sequence": [
+  {
+   "step": 1,
+   "vehicle": "Teaming/subcontract as the assurance-engine supplier to NP004 Phase I awardees and to the incumbent SBIR vendor (BlueRISC) - plus a direct technical conversation with the PMW 170 GPNTS office (NP004 TPOC, NAVWAR Small Business Office mailbox navwarsbo.fct@navy.mil).",
+   "office_or_event": "PEO C4I PMW/A 170 (San Diego); NAVWAR OSBP / PEO C4I Small Business Fair; navysbir.com selections page (watch for NP004 selections); Open-PNT / ISTO ASPN community (GitHub, ION working groups) as the neutral venue to publish a reference ASPN/pntOS plug-in.",
+   "timing": "Months 0-6 (now to ~March 2027): build and publish the reference plug-in and scenario library; contact PMW 170 immediately (NP004 is closed, so the conversation is about the next cycle and about supplying awardees); approach awardees within 30 days of the selection posting.",
+   "eligibility_notes": "No ownership test applies to a subcontract or to an open-source reference implementation. CUI: any awardee will flow down DFARS 252.204-7012 and CMMC Level 2 (self) - the company needs a scoped CUI enclave and a plan under which the non-U.S.-person founder does not touch export-controlled CUI (E07-F29: export-controlled CUI is effectively U.S.-person-only; not a legal judgment). aspn.us government message set is citizenship/contractor-gated - use the public ASPN 2023 YAML only. Engage government-contracts/export-control counsel in week 1.",
+   "what_it_yields": "First government-facing evidence: a named program-office contact, a letter of intent or teaming agreement, ICD/interface feedback, and the answer to the decisive doubt (does PMW 170 intend a next cycle, a D2P2 or a GPNTS ECP for this layer, or is it content with GOTS/BlueRISC?)."
+  },
+  {
+   "step": 2,
+   "vehicle": "IWRP consortium prototype OT (NIWC Atlantic) and/or NIWC Pacific CRADA, entered through a NavalX Tech Bridge (Southwest/San Diego or Palmetto/Charleston) and an ANTX/NICE CSO demonstration; in parallel a paying unclassified civil or allied maritime pilot (commercial operator under MARAD Advisory 2026-008 conditions, or a port/pilotage authority).",
+   "office_or_event": "IWRP Quarterly Industry Day (standing event; sam.gov notice 6db04a8afa964cad91c3f5f6f4f45ca6 per buyers/navy.json); NIWC Pacific Office of Research and Technology Applications for CRADAs; NICE/ANTX CSO (mailbox NICE.ANTX21.fct@navy.mil, historical); JNC 2027 (2027-06-07 to 06-10, Covington KY) for the first public demo.",
+   "timing": "Months 3-12 (Dec 2026 to Sep 2027): IWRP membership and pitch within 6 months; CRADA signed by month 9; one ANTX-class demo or JNC exhibit by June 2027; civil/allied pilot contract by month 9.",
+   "eligibility_notes": "OTs and CRADAs carry no statutory U.S.-ownership test (E07-F22) and 10 U.S.C. 4022 favors nontraditional participants; but IWRP consortium membership terms and the Navy sponsor's FOCI/foreign-national screens must be checked (buyers/navy.json flags this). A CRADA is not funding. The civil/allied pilot is the only channel with no citizenship gates at all - keep the product EAR-only (no 'specially designed' military functions, no M-code/PPS interfaces) to avoid ITAR registration (E07-F16/F28).",
+   "what_it_yields": "A second, ownership-insensitive DoD door; NIWC engineering feedback; a demonstration record (ANTX/JNC) that PMW 170 and Phase I awardees can cite; and first revenue plus real-world interference recordings from a civil/allied pilot for the scenario library."
+  },
+  {
+   "step": 3,
+   "vehicle": "Next NAVWAR open-topic cycle or Direct-to-Phase-II under a counsel-cleared cap table; alternatively Army pntOS plug-in path (C5ISR Center / PM PNT, PNTAX at White Sands) or a DIU CSO if one is published; longer term a Phase III or task order under the GPNTS software-support vehicle via Raytheon.",
+   "office_or_event": "Navy SBIR/STTR program office (ONR-run, navysbir.com); PMW 170 as topic sponsor; Army PM PNT (cpeisw.army.mil/pm-pnt) and AFC All-Domain Sensing CFT for PNTAX (annual, WSMR, historically Aug-Oct; 2026/2027 dates not found); DIU commercial solutions openings.",
+   "timing": "Months 9-24 (mid-2027 to 2028).",
+   "eligibility_notes": "SBIR/D2P2 requires >50% direct ownership AND control by U.S. citizens/permanent residents at award (13 CFR 121.702, E07-F3) - workable only if the German founder holds permanent residency and a controlling stake and the Indonesian founder is non-controlling; DoD BAAs require identification of foreign nationals and limit their roles (E07-F7/F8); the 2026 SBIR reauthorization (signed 2026-04-13) reportedly changed rules that were not read (E07-F1/F2). PNTAX requires a government sponsor and may involve classified threat conditions - U.S.-person staff only. None of this is a legal judgment; counsel must clear the structure before any self-certification.",
+   "what_it_yields": "Government-funded Phase II/OT with GPNTS ICDs in hand, a scheduled fleet/PNTAX demonstration, and a real transition owner - the milestone that would justify $2-5M."
+  }
+ ],
+ "customer_discovery": {
+  "targets": [
+   {
+    "role": "Former Electronics Technician - Navigation (ETV/ETSW) who has stood the nav-station watch on a GPNTS-equipped surface combatant during a contested-strait transit",
+    "why": "The primary user named in NP004; only they can describe the actual fragmented-display workflow, the C/N0 and INS-divergence cues they use, and which fallback they chose and why.",
+    "where_to_find": "Navy veteran networks (LinkedIn 'Surface Navy Association', 'Navy ET' groups), Navy-focused veteran hiring communities, reservists, NPS alumni, San Diego and Norfolk defense-tech meetups; recruit as paid advisors ($100-200/hr honoraria)."
+   },
+   {
+    "role": "Surface Warfare Officer who has served as Navigator or OOD on a DDG/CG within the last 5 years",
+    "why": "Owns the decision to shift to alternate fixes under OPNAVINST 9420.1C; explains the bridge-alert conventions and who is 'allowed' to declare a spoofing event.",
+    "where_to_find": "University NROTC alumni offices, Surface Navy Association chapters, LinkedIn SWO communities, veterans' MBA/engineering cohorts at the founders' university."
+   },
+   {
+    "role": "GPNTS in-service engineering or fleet-support engineer (NIWC Pacific / Raytheon software support team)",
+    "why": "Knows GPNTS's real message set, what 'emergent fleet needs' consumed the software-support ceiling, and whether an SA layer is on the ECP roadmap.",
+    "where_to_find": "NIWC Pacific ORTA/CRADA office, NDIA San Diego chapter events, AFCEA San Diego, JNC 2027 exhibit floor, LinkedIn (search 'GPNTS')."
+   },
+   {
+    "role": "PMW/A 170 assistant program manager or NP004 technical point of contact (government civilian)",
+    "why": "The decisive doubt lives here: whether a next cycle, D2P2 or GPNTS ECP exists and what BlueRISC's Phase II delivered.",
+    "where_to_find": "NAVWAR Small Business Office mailbox, PEO C4I Small Business Fair, NDIA San Diego Winter Forum (PMW 170 briefs there), JNC 2027."
+   },
+   {
+    "role": "CTO or principal investigator at an NP004 Phase I awardee or at the incumbent SBIR vendor (BlueRISC-type)",
+    "why": "They will need validated assurance analytics they do not have; discover what their Phase I deliverable actually covers and where a component supplier fits.",
+    "where_to_find": "navysbir.com selections page once posted (~Q1-Q2 2027), sbir.gov firm profiles, JNC 2027, ION GNSS+ 2027."
+   },
+   {
+    "role": "OPNAV N2N6 PNT policy/standards action officer or Navigator of the Navy staff",
+    "why": "Requirement owner under OPNAVINST 9420.1C; reveals whether 5.a(11) waivers are being granted and whether a requirements document is planned.",
+    "where_to_find": "JNC 2027 government sessions, NDIA/AFCEA IW events, introductions via retired SWO advisors."
+   },
+   {
+    "role": "Joint Navigation Warfare Center (JNWC) or Space Force NAVWAR assessor",
+    "why": "Owns PNT operational field assessments and standardized threat vignettes (DoDI 4650.08); defines what 'correct classification' means to the joint force.",
+    "where_to_find": "JNC 2027, ION Pacific PNT, Space Force/JNWC industry days; U.S.-person founder only for restricted sessions."
+   },
+   {
+    "role": "Army PM PNT or C5ISR Center pntOS/ASPN engineer",
+    "why": "Controls the plug-in ecosystem the engine conforms to; validates whether a third-party assurance plug-in is wanted and how PNTAX admits industry.",
+    "where_to_find": "Open-PNT GitHub issues/discussions, ISTO PNT Standards Consortium meetings, PNTAX industry calls, JNC 2027, cpeisw.army.mil/pm-pnt engagement channels."
+   },
+   {
+    "role": "Master, chief officer or designated person ashore at a commercial ship operator with routine Red Sea / Baltic / Black Sea transits",
+    "why": "The unclassified civil beachhead: real interference exposure, no citizenship gates, and they must already 'develop plans for responding to GPS disruptions' (MARAD 2026-008).",
+    "where_to_find": "Maritime cyber/navigation LinkedIn groups, BIMCO/Nautical Institute events, German shipping associations via the German founder's network, port authority innovation offices (Hamburg, Rotterdam, Singapore)."
+   },
+   {
+    "role": "USCG NAVCEN GPS problem-report / interference desk analyst",
+    "why": "Sees the civil reporting workflow end-to-end and the quality of reports mariners actually file; informs the audit/report message design.",
+    "where_to_find": "NAVCEN public contacts, RTCM SC-131/ION events, DHS S&T PNT program contacts."
+   },
+   {
+    "role": "Allied navy navigation or NAVWAR officer (German Navy, Royal Navy, Royal Australian Navy) with Baltic or Red Sea deployment experience",
+    "why": "Tests whether the same engine is wanted outside the U.S., what ECDIS/fusion engines they run, and what releasability constraints apply.",
+    "where_to_find": "German founder's network, NATO DIANA challenge community (Electromagnetic Resilience challenge, 2026), UK Royal Institute of Navigation, ION Pacific PNT / European Navigation Conference."
+   },
+   {
+    "role": "Human-factors / bridge-systems engineer at an ECDIS or bridge-alert-management supplier",
+    "why": "Explains IMO BAM alert conventions and S-52 symbology constraints so the engine's outputs can be consumed by any bridge display rather than requiring a new screen.",
+    "where_to_find": "Nautical Institute, CIRM membership, European Navigation Conference, LinkedIn maritime software groups."
+   }
+  ],
+  "questions": [
+   "Walk me through the last time you saw a GPS or navigation-source anomaly on watch: what did you see first, on which display, and what did you do in the first 60 seconds?",
+   "Which indicators did you actually look at to decide whether it was a hardware fault, jamming or spoofing, and in what order? What did you ignore?",
+   "How did you decide which fallback to use (alternate source, INS-only, celestial/radar/DR), and who had to agree before you shifted?",
+   "What did you write in the navigation workbook or report afterwards, and who, if anyone, received the interference information (EW cell, IWC, NAVCEN, fleet)?",
+   "Show me, on a whiteboard, every display and panel you monitor during a contested-strait transit and which system each belongs to.",
+   "When GPNTS or a receiver reports 'degraded', how much do you trust it, and what have you seen it get wrong?",
+   "Tell me about a time the team disagreed about whether you were being spoofed; how was it resolved and how long did it take?",
+   "If you had to explain to the CO after the fact why you shifted sources at 0213, what evidence would you want to be able to pull up?",
+   "How were you trained on jam/spoof triage, and what parts of the training did not match what you saw at sea?",
+   "For the program-office and engineering roles: walk me through how a new software capability gets onto GPNTS today, from idea to fleet install, and where it usually stalls.",
+   "What did the last GPNTS situational-awareness effort deliver, and what would you need to see from a vendor-neutral assurance component before you would let it sit under your display?",
+   "For the pntOS/ASPN roles: walk me through how a third-party plug-in is accepted into the ecosystem and tested, and what integrity or assurance messages you wish plug-ins emitted.",
+   "For commercial masters: walk me through your last GPS-disruption transit, what your company's disruption plan told you to do, and what you actually reported to NAVCEN or your DPA.",
+   "Which of your current tools or vendors would you expect to add this kind of composite confidence next, and why haven't they?",
+   "What would make you stop trusting an automated fallback recommendation, and what would it take to earn that trust back?"
+  ]
+ },
+ "first_deployment_path": {
+  "path": "Two-track. Track A (government, evidence): become the assurance-engine component inside an NP004 Phase I awardee's prototype (or inside the incumbent SBIR vendor's follow-on) so that the engine runs on GPNTS-furnished ICD data in their Phase I/II, then demonstrate it at an ANTX/NICE event or JNC 2027 and, through an NIWC Pacific CRADA, on a NIWC lab GPNTS string. Track B (paying, unclassified): a pilot on 2-5 commercial vessels of one operator with routine Red Sea/Baltic transits (or one allied navy training/hydrographic vessel), consuming NMEA/IEC 61162 receiver telemetry plus INS, running the same engine air-gapped on bridge hardware, producing real interference recordings and audit logs. Track B is the first deployment the founders control; Track A is the one the Navy will credit.",
+  "evidence_it_produces": "For a Navy Phase II/D2P2 or OT: measured detection latency, classification accuracy and false-alert rate on both synthetic and real recordings; an operator study against the Navy's own NP004 metrics (speed to decision, threat comprehension accuracy, correct fallback selection) with former ETVs/QMs; a conformant ASPN/pntOS plug-in exercised on a lab GPNTS string (CRADA); a demonstration record at ANTX/JNC. For a seed/Series A or STRATFI-equivalent (Navy has no branded STRATFI; analog is Phase II sequential/enhancement funding): one paying pilot with renewal, a government-funded Phase II or OT (or a subcontract on one), a named transition owner in PMW 170, and a counsel-cleared U.S.-person-controlled cap table. For DIU-style production: a fielded pilot on a government platform with an ATO path (RAISE/OSA container) - not reachable inside 12 months by public evidence.",
+  "alternatives": [
+   "Army route: pntOS plug-in accepted by C5ISR Center and run at PNTAX (annual, WSMR) under a government sponsor - requires a sponsor and U.S.-person staff for threat data; longer path, larger fleet of MAPS/DAPS hosts.",
+   "Prime's demo: offer the engine to Raytheon's GPNTS software support team as a candidate ECP component; yields ICD access but risks becoming a work-for-hire feature with no data rights.",
+   "NATO DIANA 2026/2027 cohort (Electromagnetic Resilience / Data-Assisted Decision Making challenges; 150 companies selected from 3,600+ in 2026) - allied test-centre access and a non-U.S. funding line; German entity may be required.",
+   "DHS/CISA critical-infrastructure timing pilot under the Resilient PNT Conformance Framework v2.0 - civil, unclassified, but a different product variant (cloud-tolerant, single-receiver)."
+  ]
+ },
+ "allied_extension": {
+  "bigger_with_allies": "Moderately bigger and materially de-risking, but not transformative in evidenced dollars. Allies face harsher real-world interference (Baltic, Black Sea, Eastern Mediterranean, Red Sea) and have no citizenship gate on an unclassified, EAR-only engine; NATO DIANA explicitly solicits 'Electromagnetic Resilience' (sensing, navigation, data link in contested EMS) and 'Data-Assisted Decision Making' (E06-F1, 2026 cohort); Project Overmatch's Five Eyes arrangement gives a coalition C2 context; and the German founder's network is a real asset in Germany. No allied program of record for a PNT awareness/decision layer was verified this session - Public evidence insufficient - so allied demand is INFERENCE/MEDIUM, and allied revenue is plausible only for the unclassified operator/assurance layer, never for aggregated threat pictures (DoDI 4650.08 transfer limits; coalition releasability unresolved).",
+  "what_changes": "(1) Product must stay EAR-only and vendor-neutral (public ASPN YAML, NMEA/IEC 61162, S-52/BAM-compatible outputs) with no U.S.-CUI-derived signatures in the allied build - two code trains (U.S. CUI build vs releasable build) from day one. (2) Corporate structure: a U.S. Inc. for DoD plus a possible German GmbH for EDF/DIANA/Bundeswehr work; E06-F38 says single-jurisdiction structuring is lossy in every direction and counsel must map ITAR deemed-export, EDF/EDIP control and German clearance rules against the first customer. (3) Interfaces multiply: each navy runs different fusion engines and ECDIS suppliers, so the ASPN plug-in plus a small adapter set is the only scalable form. (4) Evidence base improves: allied and commercial recordings of real interference feed the scenario library, which is the moat. (5) Timing: DIANA application windows are annual; JNC 2027 and European Navigation Conference are the venues.",
+  "markets": [
+   "NATO DIANA (Electromagnetic Resilience and Data-Assisted Decision Making challenges) - accelerator/test-centre access, small grants; entry for a European-registered entity",
+   "Germany - German Navy Baltic operations and Bundeswehr PNT resilience via the German founder; requires GmbH/clearance mapping; no verified program line",
+   "United Kingdom - Royal Navy and UK national PNT strategy (RECALL - not re-verified this session); DASA-type challenges as entry",
+   "Australia - Five Eyes/Overmatch alignment; AUKUS Pillar II adjacency (RECALL, LOW)",
+   "Japan and Singapore - maritime interference exposure in the Singapore Strait and East Asian waters; civil/port and coast-guard variant more plausible than navy (HYPOTHESIS, LOW)",
+   "Commercial maritime operators and ports (Hamburg, Rotterdam, Singapore) under MARAD 2026-008 / NATO Shipping Centre guidance - the only allied channel with no citizenship gate and the best first paying beachhead"
+  ]
+ },
+ "plan_90_days": {
+  "weeks_1_3": {
+   "goals": [
+    "Test the decisive doubt: does PMW/A 170 intend a next cycle, D2P2 or GPNTS ECP for this layer, and what did the BlueRISC Phase II deliver?",
+    "Run 12+ workflow-discovery interviews across the target roles (minimum 4 former ETV/QM/SWO, 2 GPNTS/NIWC engineers, 1 PMW 170 or NAVWAR SBO contact, 2 pntOS/Army, 2 commercial masters/allied officers, 1 NAVCEN)",
+    "Obtain a counsel memo on cap-table structure (13 CFR 121.702), foreign-national work rules, CUI handling and EAR-only product design",
+    "Technical spike: parse the public ASPN 2023 YAML, build a pntOS-C hello-world plug-in, and inventory public jam/spoof recordings (TEXBAT and similar)"
+   ],
+   "deliverables": [
+    "Interview synthesis (workflow maps for shipboard triage and for the commercial bridge; list of the 5 indicators watchstanders actually use)",
+    "Written answer from a PMW 170 / NAVWAR SBO contact (or documented non-response after 3 attempts) on next-cycle intent and the awardee announcement timing",
+    "Counsel memo with a recommended structure and a go/no-go on SBIR eligibility timing (not legal certainty, a plan)",
+    "Running ASPN message parser and pntOS-C plug-in skeleton in a repo; dataset inventory with licenses"
+   ],
+   "budget_usd": 16000,
+   "owner": "Business founder (interviews, PMW 170 outreach, counsel); engineer founder (technical spike)",
+   "kill_criteria": [
+    "Fewer than 8 of 12 interviewees independently describe the fragmented-display triage problem as a real, recurring pain (not just plausible) -> stop",
+    "Counsel concludes there is no realistic path to a >50% U.S.-person-owned-and-controlled structure within 12 months AND assesses the OT/CRADA/civil route as unworkable for this team -> stop the DoD track",
+    "PMW 170 / NAVWAR SBO state in writing that the awareness layer will be government-developed or is fully covered by an existing vendor with no further competition planned -> pivot to civil/allied-only or stop",
+    "Public ASPN YAML and pntOS-C are insufficient to build a conformant plug-in without the gated aspn.us message set -> reassess feasibility of the Phase I-style synthetic path"
+   ]
+  },
+  "weeks_4_6": {
+   "goals": [
+    "Build the synthetic strait-transit scenario generator (3-8 sources at 1-10 Hz: GNSS jamming onset, spoofing pull-off, INS drift, clock holdover, hardware fault) emitting ASPN 2023 messages",
+    "Implement v0 integrity checks (per-source health from C/N0/AGC/clock-drift/residuals; INS-GNSS divergence; consensus/RAIM-like residuals; DHS PNT Integrity Library-style checks) and a first explainable fault/jam/spoof classifier",
+    "Benchmark on held-out synthetic scenarios and on public real recordings (TEXBAT-type)",
+    "Recruit a paid PNT-integrity advisor (part-time) and confirm 3 former watchstanders for the week 10-12 study"
+   ],
+   "deliverables": [
+    "Scenario generator with a 10-scenario library and ground truth",
+    "Integrity engine v0 with a benchmark report: detection latency, classification accuracy, false-alert rate on synthetic and public recordings",
+    "Signed advisor agreements (1 PNT-integrity engineer, 1 former ETV/QM)"
+   ],
+   "budget_usd": 22000,
+   "owner": "Engineer founder (generator, engine); business founder (advisor recruiting, benchmark protocol, continued PMW 170 / awardee tracking)",
+   "kill_criteria": [
+    "Detection latency > 1 s at 10 Hz or false-alert rate > 5% on the held-out synthetic set after two iterations -> the engine is not differentiated; stop unless the advisor identifies a clear fix",
+    "Classification accuracy on public real spoofing recordings below 80% (jam vs spoof vs fault) with no explainable evidence chain -> stop",
+    "Cannot recruit a PNT-integrity advisor within 6 weeks -> per the score file this role is fatal if absent; stop"
+   ]
+  },
+  "weeks_7_9": {
+   "goals": [
+    "Package the engine as an air-gapped OCI container with a pntOS-C plug-in interface and an ASPN/LCM ingest path",
+    "Add composite confidence with attributed evidence, fallback recommendation with rationale, and a replayable audit timeline (event log + replay)",
+    "Build a thin ECDIS-style demo HMI (source cards, confidence gauge, classification, recommendation, timeline) purely as a window onto the engine",
+    "Prepare the NIWC Pacific CRADA request and IWRP membership application; draft a one-page 'component supplier' offer for NP004 awardees"
+   ],
+   "deliverables": [
+    "Container image + plug-in + replay library, reproducible from the repo",
+    "Demo HMI running 10 scenarios end-to-end with replay",
+    "CRADA draft submitted to NIWC Pacific ORTA; IWRP membership filed; awardee offer sheet ready",
+    "Public reference plug-in (open-source subset) posted to the Open-PNT community with a short technical note"
+   ],
+   "budget_usd": 24000,
+   "owner": "Engineer founder (container, engine features, HMI); business founder (CRADA/IWRP paperwork, awardee offer, JNC 2027 abstract/exhibit planning)",
+   "kill_criteria": [
+    "Engine cannot run fully disconnected in a container on commodity hardware at 10 Hz with 8 sources -> architecture rework or stop",
+    "No NIWC/PMW 170/awardee/advisor is willing to review the offer sheet or the reference plug-in (zero technical engagement after 3 outreach rounds) -> the government track is not alive; continue civil only or stop",
+    "Reference plug-in receives a documented objection from the ASPN/pntOS stewards that it cannot conform without gated data -> reassess"
+   ]
+  },
+  "weeks_10_12": {
+   "goals": [
+    "Run a structured operator study with at least 6 former ETV/QM/SWO participants comparing fragmented displays (baseline) vs the engine's outputs on the same scenarios, scored on the Navy's NP004 metrics",
+    "Show the engine to at least 5 named counterparts: a PMW 170 or NIWC GPNTS engineer, an NP004 awardee or the incumbent SBIR vendor, an Open-PNT/Army pntOS engineer, one commercial operator/allied officer, and one investor familiar with defense software",
+    "Secure one letter of intent (teaming, CRADA, or paid civil pilot) and decide go/no-go on the 12-month plan"
+   ],
+   "deliverables": [
+    "Operator-study report: speed to decision, threat comprehension accuracy, correct fallback selection, with confidence intervals",
+    "Demo recordings and a 6-page technical/evidence brief for PMW 170, awardees and investors",
+    "At least one signed LOI or CRADA in review, or a paid civil pilot proposal accepted",
+    "Decision memo: go (12-month plan with IWRP/CRADA/civil pilot/JNC 2027), pivot (civil/allied only), or stop"
+   ],
+   "budget_usd": 18000,
+   "owner": "Business founder (study logistics, demos, LOI); engineer founder (study instrumentation, fixes)",
+   "kill_criteria": [
+    "Operator study shows no statistically meaningful improvement in speed to decision or correct fallback selection versus fragmented displays (n>=6, same scenarios) -> the value claim fails; stop",
+    "Zero of the 5 named counterparts agrees to a second meeting or a written next step -> no buyer engagement; stop the DoD track",
+    "No LOI, CRADA in review, or paid civil pilot proposal by day 90 -> do not spend beyond the remaining founder capital on this opportunity; stop or pivot",
+    "Counsel-recommended structure cannot be executed (e.g., German founder's permanent residency not on a 12-month path and no U.S.-person controlling owner available) AND no OT/civil path is live -> stop"
+   ]
+  },
+  "total_budget_usd": 80000
+ },
+ "most_important_question": {
+  "build_first": "Build the assurance engine, not the screen: an ASPN 2023 / pntOS-C-conformant integrity service, packaged as an air-gapped OCI container, that consumes a synthetic strait-transit scenario generator (3-8 sources at 1-10 Hz: GNSS jamming onset, spoofing pull-off, INS drift, clock holdover, hardware fault) and emits per-source health, composite confidence with attributed evidence, an explainable fault/jam/spoof classification, a fallback recommendation with rationale, and a replayable audit timeline - validated against held-out synthetic scenarios, public real recordings (TEXBAT-type) and DHS Resilient PNT Conformance Framework v2.0 Respond/Recover behaviors. Add a thin ECDIS-style demo HMI only as a window onto the engine, and publish a reference plug-in subset to the Open-PNT community so the engine becomes the thing others plug into. Budget: roughly $80K over 90 days and $100-150K over 4-5 months, within founder capital.",
+  "show_it_to": "In order: (1) NP004 Phase I awardees as soon as selections post (~Q1-Q2 2027) and the incumbent SBIR vendor (BlueRISC, whose $750K GPNTS SA Tool Phase II ended 2026-05-25) - as a component supplier; (2) the PMW/A 170 GPNTS office (NP004 TPOC via the NAVWAR Small Business Office) and the NIWC Pacific GPNTS/Raytheon software-support engineers - as the candidate for the next open-topic cycle, a D2P2 or a GPNTS ECP, via a CRADA; (3) the Open-PNT / ISTO ASPN community and Army C5ISR Center pntOS engineers - as a reference plug-in; (4) one commercial operator with Red Sea/Baltic transits or one allied navy officer - as an unclassified paid pilot; (5) JNC 2027 (2027-06-07 to 06-10, Covington KY) as the single public venue where all of the above are in one room.",
+  "demo_proves": "Against the Navy's own NP004 metrics: detection latency under 1 s at 1-10 Hz; correct fault/jam/spoof classification on held-out synthetic and public real recordings with a quantified false-alert rate (targets: >=90% classification accuracy on synthetic, >=80% on public real recordings, <5% false alerts); former watchstanders reach the correct fallback measurably faster and with fewer errors than with fragmented displays (n>=6 operator study); every recommendation carries an evidence chain and can be replayed for after-action review; and the same container consumes an ASPN/pntOS stream unchanged, so a Phase II can swap in GPNTS ICDs without rework.",
+  "why_customer_cares": "PMW 170 wrote the problem in its own words (NP004, 2026-08-05) and has now paid for PNT situational-awareness software at least twice (2024 Phase I, 2025 Phase II $750K) and re-solicited it more broadly in 2026 with multiple awards planned, so it is not satisfied with what it has; OPNAVINST 9420.1C 5.a(11) has required degradation indication and interference reporting since 2019 and systems that cannot comply must seek waivers; the GPNTS software-support ceiling was exhausted early by 'emergent fleet needs'; GPS denial is routine (12 DoD interference tests in Aug-Sep 2026 per NAVCEN; MARAD 2026-008 global advisory) and M-code remains late in all three segments (GAO-24-106841, 2024-09-09); and every Phase I awardee will need validated assurance analytics they do not have.",
+  "why_incumbent_cant_crush": "Honestly, this is a speed-and-evidence defense, not a structural one, which is why the verdict is borderline. What protects the founders: receiver primes (Collins, BAE, L3Harris, Safran) have no incentive to ship vendor-neutral assurance that commoditizes their boxes; Raytheon as GPNTS prime is a systems house on a ceiling-exhausted support contract and has not fielded this layer in seven years; BlueRISC's effort is an AI/ML module tied to GPNTS rather than an open ASPN/pntOS-conformant engine with a scenario/replay library; NGC2/Overmatch integrators lack PNT-integrity depth; and IS4S - the one competitor who could build this - is committed to Army NorthStar (up to $41M, April 2026) and AF design-agent work and may prefer to license a validated component. The founders lose if they build a dashboard; they can hold only if the validated algorithms, the scenario/replay library with real recordings from civil/allied pilots, the operator-study evidence and conformance to open standards make them the reference implementation everyone else plugs in.",
+  "milestone_for_next_2_5m": "All four within 18 months, or stop: (1) a funded Navy Phase II, D2P2 or OT - or a paid subcontract on one - with GPNTS ICDs in hand and a scheduled fleet, ANTX or PNTAX demonstration; (2) at least one paying unclassified civil or allied pilot with a renewal; (3) a named PMW 170 transition owner and a documented path (ECP, RAISE/OSA container, or Phase III) into GPNTS or pntOS; (4) a counsel-cleared U.S.-person-controlled cap table plus a CMMC Level 2 self-assessment and a CUI enclave. If, at 18 months, the only money is Phase I-scale and the government has taken the layer GOTS or bought it from the standard-setter, the founders should stop - this opportunity's evidenced money is single-digit millions and a $2-5M raise is justified only by a transition owner with a vehicle, not by prototypes."
+ },
+ "sources": [
+  {"url": "https://navysbir.com/n26_5/DON26BX05-NP004.htm", "title": "Navy CSO Open Topic DON26BX05-NP004: NAVWAR Open Topic for Unified Assured PNT Operational Awareness and Decision Support (with Q&A; pre-release 2026-08-05, open 2026-08-26, close 2026-09-23)", "pub_date": "2026-08-05"},
+  {"url": "https://www.navysbir.com/docs/NAVY_SBIR_26BX_R5.pdf", "title": "Navy SBIR FY26 Release 5 CSO instructions (Phase I Prototype OT caps; multiple Phase I awards planned)", "pub_date": "2026-08"},
+  {"url": "https://www.navysbir.com/sel-awd/26_01-selections.htm", "title": "FY-26 Release 1 Navy SBIR/STTR/CSO selections page (pattern for selection timing)", "pub_date": "2026"},
+  {"url": "https://www.peoc4i.navy.mil/Portals/98/Documents/Tear-Sheets/2025_PMW%20170%20Tear%20Sheet_v01312025.pdf", "title": "PEO C4I PMW/A 170 Communications & GPS Navigation Program Office tear sheet", "pub_date": "2025-01-31"},
+  {"url": "https://www.ndia-sd.org/wp-content/uploads/Briefs/Winter2026/Day02Brief04-NDIAWinterForum_PMW170.pdf", "title": "NDIA San Diego Winter Forum 2026, PMW 170 brief (cited via search summary: BlueRISC GPNTS SA Tool Phase II $750K end 2026-05-25; WebFetch EGRESS_BLOCKED)", "pub_date": "2026 (Winter Forum; exact date not captured)"},
+  {"url": "https://www.sbir.gov/awards/211304", "title": "SBIR.gov award record associated with BlueRISC GPNTS SA Tool (Phase II N68335-25-C-0158, $750K)", "pub_date": "2025"},
+  {"url": "https://www.inknowvation.com/sbir/awards/navy-2024-leveraging-gpnts-navwar-situational-awareness", "title": "Navy 2024 SBIR: Leveraging GPNTS for NAVWAR Situational Awareness (BlueRISC Phase I)", "pub_date": "2024"},
+  {"url": "https://www.navysbir.com/n23_4/N234-P07.htm", "title": "Navy 23.4 SBIR NAVWAR Open Topic for Holistic Common Operational Picture (COP): PMW 170", "pub_date": "2023"},
+  {"url": "https://usfcr.com/search/opportunities/?oppId=5b568e4790934130b54e61f562eef2f3", "title": "Notice of intent to award a sole-source modification to GPNTS Software contract N00039-20-D-0021 (Raytheon; PoP 2019-11-15 to 2029-11-14; ceiling expected reached by Aug 2025)", "pub_date": "2025 (exact date not captured)"},
+  {"url": "https://www.defensedaily.com/contract-awards/contract-award-sechan-electronics-inc-lititz-pennsylvania-n0003921d2002-and-systems-engineering-support-co-inc-sesco-san-diego-452850428/", "title": "Contract award: Sechan Electronics (N0003921D2002) and SESCo (N0003921D2003), $452,850,428 IDIQ MAC for GPNTS follow-on hardware production units", "pub_date": "2021-09-20"},
+  {"url": "https://www.shephardmedia.com/news/naval-warfare/us-orders-gptns-hardware-for-naval-systems/", "title": "US orders GPNTS hardware for naval systems (Shephard)", "pub_date": "2021-09"},
+  {"url": "https://govtribe.com/opportunity/federal-contract-opportunity/global-positioning-system-gps-based-positioning-navigation-and-timing-service-gpnts-hardware-production-follow-on-n0003920r0001", "title": "GPNTS Hardware Production Follow-On solicitation N00039-20-R-0001", "pub_date": "2020"},
+  {"url": "https://intelligencecommunitynews.com/spawar-posts-gpnts-rfi/", "title": "SPAWAR posts GPNTS RFI (Intelligence Community News)", "pub_date": "date not captured"},
+  {"url": "https://www.c4isrnet.com/special-reports/pm-view/2015/09/04/beyond-gps-the-navy-s-plan-for-assured-position-navigation-timing/", "title": "Beyond GPS: The Navy's plan for assured position, navigation, timing (PM view)", "pub_date": "2015-09-04"},
+  {"url": "https://www.ion.org/jnc/future-meetings.cfm", "title": "ION Joint Navigation Conference future meetings: JNC 2027, 7-10 June 2027, Covington KY (50th JNC; theme Robust, Resilient, Assured PNT for Warfighters and Homeland Security)", "pub_date": "2026"},
+  {"url": "https://www.army.mil/article/281520/sixth_annual_pnt_assessment_experiment_aligns_army_priorities_capabilities", "title": "Sixth annual PNT Assessment Experiment (PNTAX) at White Sands Missile Range, hosted by AFC All-Domain Sensing CFT", "pub_date": "2024 (exact date not captured)"},
+  {"url": "https://cpeisw.army.mil/pm-pnt/", "title": "Army Project Manager Positioning, Navigation and Timing (CPE ISW)", "pub_date": "2026"},
+  {"url": "https://www.asafm.army.mil/Portals/72/Documents/BudgetMaterial/2027/Discretionary%20Budget/rdte/RDTE%20-%20Vol%203%20-%20Budget%20Activity%205A.pdf", "title": "Army FY2027 RDT&E Vol 3 Budget Activity 5A justification book (identified; APNT values not extracted)", "pub_date": "2026-04"},
+  {"url": "https://www.secnav.navy.mil/fmc/fmb/Documents/27pres/OPN_BA2_Book.pdf", "title": "Navy FY2027 Other Procurement, Navy BA 2 justification book (identified; GPNTS line not extracted)", "pub_date": "2026-04"},
+  {"url": "https://www.gao.gov/products/gao-21-320sp", "title": "GAO-21-320SP Defense Navigation Capabilities: DOD is Developing PNT Technologies to Complement GPS", "pub_date": "2021-05-10"},
+  {"url": "https://www.gao.gov/products/gao-24-106841", "title": "GAO-24-106841 GPS Modernization: Delays Continue in Delivering More Secure Capability for the Warfighter", "pub_date": "2024-09-09"},
+  {"url": "https://www.secnav.navy.mil/doni/Directives/09000%20General%20Ship%20Design%20and%20Support/09-400%20Command%20and%20Surveillance%20Systems%20Support/9420.1C.pdf", "title": "OPNAVINST 9420.1C Positioning, Navigation and Timing Policy", "pub_date": "2019-09-30"},
+  {"url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/465008p.pdf", "title": "DoDI 4650.08 PNT and Navigation Warfare, Change 1", "pub_date": "2020-12-30"},
+  {"url": "https://www.dhs.gov/sites/default/files/2022-05/22_0531_st_resilient_pnt_conformance_framework_v2.0.pdf", "title": "DHS Resilient PNT Conformance Framework v2.0", "pub_date": "2022-05-31"},
+  {"url": "https://www.maritime.dot.gov/msci/2026-008-global-us-maritime-advisory-updates-resources-and-contacts", "title": "U.S. Maritime Advisory 2026-008 (GPS disruption guidance)", "pub_date": "2026"},
+  {"url": "https://github.com/Open-PNT/ASPN-ICD", "title": "Open-PNT/ASPN-ICD: ASPN 2023 public YAML data model", "pub_date": "2026-01-21"},
+  {"url": "https://github.com/Open-PNT/pntOS-C", "title": "Open-PNT/pntOS-C: pntOS C API (Apache-2.0)", "pub_date": "2026-04-23"},
+  {"url": "https://github.com/cisagov/pnt-integrity", "title": "DHS S&T PNT Integrity Library (IS4S, BSD-3)", "pub_date": "2020"},
+  {"url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702", "title": "13 CFR 121.702 SBIR/STTR ownership and control eligibility", "pub_date": "current"},
+  {"url": "https://www.niwcpacific.navy.mil/Technology/Overmatch-Software-Armory/", "title": "NIWC Pacific Overmatch Software Armory (RAISE/OSA accreditation pipeline)", "pub_date": "2025"},
+  {"url": "https://www.onr.navy.mil/organization/navalx", "title": "NavalX and the Tech Bridge network", "pub_date": "2025"},
+  {"url": "research/gaps/G04.json; research/gaps/G04-score.json; research/buyers/navy.json; research/evidence/E02.json, E05.json, E06.json, E07.json", "title": "Earlier-stage research files reused (internal): NP004 Q&A capture, buyer chain, eligibility findings E07-F3/F4/F7/F22/F28/F29, DIANA finding E06-F1, structuring note E06-F38, Army PNT budget finding E05-F32", "pub_date": "2026-09"}
+ ]
+}

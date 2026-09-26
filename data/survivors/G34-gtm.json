@@ -1,0 +1,425 @@
+{
+ "id": "G34",
+ "title": "Offline-first, EAR99-by-design structured orders, tasks, reports and LOGSTAT object layer with CRDT merge for TAK-CIV, sold first to public-safety incident command, National Guard and allied light units, with the merge model licensable to HQ planning and C2 platform owners",
+ "version_designed_for": "NARROWER NON-VENTURE VERSION named in G34-score.json narrower_version_if_borderline: an open-source 'ICS objects for TAK' schema plus TAK Server extension (ICS 201/204/209/214 and a resource/LOGSTAT-style ledger as CRDT-merged Data Sync mission objects) with an ATAK-CIV plugin and an iOS/web companion, stewarded with the TAK Public Safety community and the WFTAK/COTAK state wildland programs, monetized through hosting/support subscriptions to state wildland agencies and incident management teams. The Guard line is kept ONLY as an unfunded drill-weekend credibility test, the allied line ONLY as an optional 2028 DIANA application, and the 'license the merge model' revenue line is DROPPED (commoditized by Automerge/Yjs/Ditto). Verdict was KILL as a venture; this plan therefore treats G34 as a bootstrappable open-source-plus-hosting business whose 90 days must answer one decisive doubt: does ANY named agency, state TAK program or IMT with a budget line pay for structured offline ICS objects rather than using free TAK Data Sync plus its existing IMS? Every milestone below tests that doubt with a measurable kill criterion. This is not a venture-scale company and the plan does not pretend it is.",
+ "money_map": {
+  "links": [
+   {
+    "link": "problem",
+    "value": "Incident command posts, field divisions and higher coordination centers that already run TAK on unclassified networks still carry assignments (ICS 204), status (ICS 209/214) and resource/sustainment status as paper, chat, voice and spreadsheets; when nodes reconnect after working disconnected, edits made in parallel do not merge and staff re-key by hand, so the picture diverges between ICP, field and higher.",
+    "detail": "FACT that TAK Data Sync re-syncs map items/files/chat but carries no structured form objects and no multi-writer merge (Google Play Data Sync listing, TPC; OpenTAKServer Mission API docs 2025-2026). FACT that public-safety TAK use is routine (DHS S&T/HS Today; WFTAK; Green Bay Fire + FirstNet 2025). INFERENCE that the disconnected multi-writer conflict is episodic rather than daily (score file criterion 1 = 3/5); the daily pain is form re-keying per operational period. Severity is tolerated today.",
+    "confidence": "MEDIUM",
+    "source_url": "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin"
+   },
+   {
+    "link": "user",
+    "value": "Incident commander, planning section chief, resource unit leader and situation unit leader on Type 1-3 incident management teams; state wildland fire dispatch/technology leads running WFTAK or a state TAK program (COTAK, Colorado); municipal fire TAK administrators; secondary: National Guard battalion S3/S4 and battle captain on state active duty (unfunded credibility test only).",
+    "detail": "FACT: WFTAK is an interagency TAK server developed by the Colorado Center of Excellence under agreement with FAM IM Tools & Technology; wildland responders are ~80% iOS (wftak.wildfire.gov). FACT: COTAK runs a 2026 COTAK Summit (cotak.gov schedule page surfaced 2026-09; date not verified - .gov blocked). FACT: Guard units use ATAK on domestic missions (nationalguard.mil ATAK video; CivTAK National Guard archive) but no Guard requirement for structured offline reports found - Public evidence insufficient.",
+    "confidence": "HIGH",
+    "source_url": "https://wftak.wildfire.gov/pages/what-is-wftak"
+   },
+   {
+    "link": "requirement_owner",
+    "value": "No single requirement owner. Each agency/IMT sets its own; NWCG (National Wildfire Coordinating Group) sets interagency wildland standards and hosts IM Tools & Technology/WFMRDA but does not buy; FEMA NIMS defines ICS form standards but does not buy; for the Guard, no validated requirement exists (Public evidence insufficient).",
+    "detail": "FACT: NWCG provides national leadership for interoperable wildland fire operations among federal, state, local, tribal partners (nwcg.gov). FACT: NIMS ICS forms booklet is public FEMA guidance. INFERENCE: the closest thing to a requirement owner for a TAK-native ICS object schema is the WFTAK/COTAK program lead plus the TAK Public Safety 501(c)(3), neither of which controls budget. This is the first weak link.",
+    "confidence": "LOW",
+    "source_url": "https://www.nwcg.gov/"
+   },
+   {
+    "link": "program_office",
+    "value": "None for the product. DHS S&T funds TAK development through the TAK Product Center (TPC), not agency purchases; WFTAK is operated by the Colorado Center of Excellence with FAM IM Tools; COTAK is Colorado's state TAK program; no Guard program office exists for a battalion orders/reports app.",
+    "detail": "FACT: TPC runs the annual TAK Offsite (2026: Aug 18-20, Colorado Springs) and is described as the maintainer of CivTAK; CivTAK 2026 (Nov 18-20, Washington DC) is the civilian/public-safety TAK event (tak.gov/events/2026_Offsite; civtak.org 2026-03-23). FACT: DHS S&T SVIP uses an Innovation Other Transaction Solicitation for first-responder topics but no 2026 topic matching this product was found (dhs.gov SVIP page; 2025-and-earlier results). HYPOTHESIS: TPC could add form objects to Data Sync itself - the decisive incumbent risk to test at CivTAK 2026.",
+    "confidence": "MEDIUM",
+    "source_url": "https://tak.gov/events/2026_Offsite"
+   },
+   {
+    "link": "contracting_office",
+    "value": "Thousands of SLTT procurement offices (county/municipal fire, state fire agencies, state divisions of fire prevention and control), state HSGP sub-grant administrators (State Administrative Agencies), and cooperative purchasing bodies; for the Guard, state JFHQ/USPFO contracting (unverified); DHS S&T SVIP OTA agreements officer (federal, prototype only).",
+    "detail": "FACT: FY2026 HSGP NOFO released June 2026, applications due 2026-07-24, awards flow through State Administrative Agencies to subrecipients (fema.gov key changes PDF, June 2026). INFERENCE: first paid deals will be P-card/micro-purchase or simplified-acquisition subscriptions at single agencies, not a competed RFP. RECALL - not re-verified: federal micro-purchase threshold is $10,000 and state thresholds vary (LOW).",
+    "confidence": "LOW",
+    "source_url": "https://www.fema.gov/sites/default/files/documents/fema_gpd_hsgp-key-changes-fy2026.pdf"
+   },
+   {
+    "link": "budget",
+    "value": "No dedicated line. Public safety: FY2026 HSGP more than $1B (FEMA press release 2026-06-24 cites $1.573B across the remaining FY26 preparedness grants; UASI ~$584M across 44 urban areas per grant-tracker summary) plus AFG and local operating budgets; FY2025 HSGP $1.008B (SHSP $373.5M, UASI $553.5M). Guard: state active duty and O&M ARNG/ANG funds, no software line found. Allied: DIANA EUR 100k per selected company. FY27: not yet published (Public evidence insufficient).",
+    "detail": "FACT (amounts, MEDIUM: from FEMA press release and NOFO summaries surfaced by search; primary PDF not fetched). FACT: FY26 SHSP/UASI recipients must spend at least 35% on LETPA and at least 30% across five National Priority Areas, which constrains discretionary software buys (fema.gov key changes, June 2026). INFERENCE: situational-awareness software is generally allowable but no HSGP-funded purchase of TAK-native structured-forms software was found in any session. This is the weakest link: the pool exists, the line item does not.",
+    "confidence": "LOW",
+    "source_url": "https://www.fema.gov/press-release/20260624/fema-announces-15-billion-empower-communities-prevent-terrorism-and-protect"
+   },
+   {
+    "link": "contract_vehicle",
+    "value": "Direct commercial subscription (hosting/support for the open-source core) via P-card, micro-purchase or simplified acquisition at the agency; later a state cooperative contract or GSA MAS; SHSP/UASI sub-grant line items in the FY2027 application cycle (NOFO expected ~June 2027 by pattern); optional federal prototype via DHS S&T SVIP Innovation OTS; no SBIR (ownership test); no OTA/CSO exists for this product class.",
+    "detail": "FACT: SVIP uses an Innovation Other Transaction Solicitation and a streamlined pitch process for first-responder and CBP problems (dhs.gov). RECALL - not re-verified: SVIP has funded non-U.S. startups in past cohorts (LOW). FACT: OTA/CSO routes carry no statutory U.S.-ownership test (E07-F22). FACT: SBIR requires >50% U.S.-citizen/permanent-resident ownership (13 CFR 121.702) which this cap table likely fails without restructuring - needs counsel.",
+    "confidence": "LOW",
+    "source_url": "https://www.dhs.gov/publication/st-silicon-valley-innovation-program"
+   },
+   {
+    "link": "current_vendors",
+    "value": "TAK Product Center Data Sync missions (government, free); WFTAK/COTAK (government-run TAK servers); Tablet Command, Resgrid IC (offline-first ICS-201, company claim), Intterra, Juvare WebEOC, Veoci and the other products in the DHS SAVER 2022 IMS market survey; Ditto Edge Sync plugin for ATAK (CRDT engine, ~$136M raised, company claims USSOCOM use); on the military side Onebrief, Anduril/Rivet SBMC clients, Systematic SitaWare Edge.",
+    "detail": "FACT: DHS SAVER IMS market survey 2022-01-05 documents a mature multi-vendor category. FACT (company claims, not proof of field performance): Resgrid IC offline-first ICS-201 queue-and-replay; Tablet Command ICS-201 records. FACT: SBMC prototype OTAs to Anduril and Rivet 2025-09-08 mandate ATAK backward compatibility (prototype award, not production). Absence of a vendor combining structured ICS objects + multi-writer merge + TAK-native is NOT evidence of opportunity - each owner's customers are satisfied enough by their slice.",
+    "confidence": "HIGH",
+    "source_url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf"
+   }
+  ],
+  "weakest_link": "BUDGET (tied with REQUIREMENT OWNER): there is no line item, program of record or requirement anywhere in the chain for structured offline ICS objects in TAK; the only money is a $1B+/yr grant pool spread across thousands of agencies with spending mandates that do not name this class, plus agency operating budgets. Without a named agency that will put a hosting/support subscription on a purchase order, every other link is decorative.",
+  "penalty_note": "Chain penalty applies: the Guard segment has no requirement owner, program office, budget or vehicle (Public evidence insufficient), and the civil segment has a budget pool but no line. The score file's market attractiveness of 2.7 already reflects this; nothing found this session raises it. The FY2026 HSGP NOFO (June 2026) and CivTAK 2026 (Nov 18-20) are new, verifiable calendar facts, not new budget evidence."
+ },
+ "procurement_signal": {
+  "timeline": [
+   {
+    "date": "2018",
+    "event": "Army acknowledges sustainment brigades must build their own sustainment COP (LOGSTAT hand-assembly documented; military-side pain only)",
+    "type": "RFI",
+    "source_url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment"
+   },
+   {
+    "date": "2022-01-05",
+    "event": "DHS SAVER Incident Management Software market survey: multi-vendor IMS category established (WebEOC, Intterra and others) - a market survey, the civil analogue of sources sought",
+    "type": "sources sought",
+    "source_url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf"
+   },
+   {
+    "date": "2022-2026",
+    "event": "TAK Product Center ships and maintains the free Data Sync plugin/mission API (re-sync of map items, files, logs, chat after disconnect; no structured form objects) - government production capability that any entrant must extend, not replace",
+    "type": "production",
+    "source_url": "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin"
+   },
+   {
+    "date": "2024",
+    "event": "TAK Public Safety 501(c)(3) founded to lower adoption barriers (training, community, events) - signals that adoption, not features, is the binding constraint",
+    "type": "repeat",
+    "source_url": "https://www.takps.org/"
+   },
+   {
+    "date": "2025 (FY2025)",
+    "event": "FY2025 HSGP NOFO: $1.008B (SHSP $373.5M, UASI $553.5M, OPSG $81M) - recurring grant pool, no line for this product class",
+    "type": "repeat",
+    "source_url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo"
+   },
+   {
+    "date": "2025-03",
+    "event": "Ditto raises $82M Series B; sells CRDT Edge Sync plugin for ATAK (company claims USSOCOM use) - the merge-engine slice is funded and occupied",
+    "type": "follow-on",
+    "source_url": "https://rxdb.info/articles/alternatives/ditto-alternative.html"
+   },
+   {
+    "date": "2025 (2025-2026 inferred)",
+    "event": "PM Mission Command 'Operational Mission Command Suite' market research asks for common data model, data fabric and DDIL-robust TAK data services (E02-F8) - Army-side RFI that names TAK sync services but is being answered by NGC2 integrator teams, not this company",
+    "type": "RFI",
+    "source_url": "https://sam.gov/opp/340689e568d74d08bb0c5c8cbebd42a6/view"
+   },
+   {
+    "date": "2025-09-08",
+    "event": "Army SBMC prototype OTAs to Anduril ($159M) and Rivet ($195M) mandate ATAK backward compatibility - prototype award, not production; closes the U.S. Army version of this layer to a new entrant",
+    "type": "prototype award",
+    "source_url": "https://defensescoop.com/2025/09/08/army-sbmc-contract-awards-anduril-rivet-soldier-borne-mission-command/"
+   },
+   {
+    "date": "2026-02",
+    "event": "Meshtastic iOS app ships a built-in TAK server, giving iOS users a mesh path without iTAK plugins; Ivy Sting 4 tests division-to-battalion C2 under denied networks",
+    "type": "repeat",
+    "source_url": "https://meshtastic.org/blog/tak-server-integration-ios/"
+   },
+   {
+    "date": "2026-06-02",
+    "event": "NATO DIANA announces six 2027 challenges including 'operational resilience in contested environments' and 'responsive logistics'; submissions closed 2026-07-03; EUR 100k per selected company; next window is the 2028 cohort",
+    "type": "prototype solicitation",
+    "source_url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html"
+   },
+   {
+    "date": "2026-06-24",
+    "event": "FEMA announces FY2026 HSGP and remaining preparedness grants ($1.573B across programs; HSGP more than $1B; UASI ~ $584M); applications due 2026-07-24; 35% LETPA and 30% National Priority Area spending mandates",
+    "type": "repeat",
+    "source_url": "https://www.fema.gov/press-release/20260624/fema-announces-15-billion-empower-communities-prevent-terrorism-and-protect"
+   },
+   {
+    "date": "2026-07-27 to 2026-07-30",
+    "event": "Vigilant Guard 26-4 (with Northern Strike 26-2) at JFHQ Lansing, Michigan: Dual-Status-Commander JTF command post exercise for contested homeland defense - the type of state exercise where a Guard drill-weekend test could be observed (contractor post-exercise report)",
+    "type": "repeat",
+    "source_url": "https://www.appliedtrg.com/2026/08/07/post-exercise-report-vigilant-guard-26-4-homeland-defense-mission-assurance/"
+   },
+   {
+    "date": "2026-08-18 to 2026-08-20",
+    "event": "TAK Offsite 2026, Colorado Springs (TPC annual government TAK gathering; Day 1 CUI, Days 2-3 open to TAK.gov accounts; foreign persons admitted to publicly releasable briefings) - already passed for this cycle",
+    "type": "repeat",
+    "source_url": "https://tak.gov/events/2026_Offsite"
+   },
+   {
+    "date": "2026-09-17",
+    "event": "Onebrief awarded Army enterprise IDIQ ($20M ceiling; ceiling is not revenue) and states offline tactical access is 'underway' (company statement 2026-06-26) - military HQ planning layer consolidating around an incumbent",
+    "type": "follow-on",
+    "source_url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software"
+   },
+   {
+    "date": "2026-11-18 to 2026-11-20",
+    "event": "CivTAK 2026, Crystal Gateway Marriott, Washington DC - the premier civilian/public-safety TAK event; the single best venue to test whether TPC intends to add form objects and whether any state program will pay",
+    "type": "repeat",
+    "source_url": "https://www.civtak.org/2026/03/23/civtak-2026-save-the-date/"
+   }
+  ],
+  "stage": "Mature",
+  "rationale": "There is no government RFI -> sources sought -> prototype -> production sequence for this product because the civil buyer never runs one: public-safety incident management software is a mature, multi-vendor commercial category (DHS SAVER 2022, FACT HIGH) bought agency by agency on grants and operating budgets, and TAK itself is free government software whose sync layer (Data Sync) is already in production. The only formal procurement signals are on the military side (PM MC OMCS RFI, SBMC prototype awards, Onebrief follow-on) and those are being closed by funded incumbents, which is exactly why G34 retreated to public safety. The TAK-native structured-objects slice is 'Emerging' in the narrow sense that nobody ships it, but absence of a vendor is not evidence of demand; the recurring signals (annual HSGP NOFO, annual CivTAK/TAK Offsite, TAK Public Safety founded 2024) show a mature adoption curve for TAK in public safety, not a procurement pipeline for this feature. Confidence MEDIUM."
+ },
+ "entry_sequence": [
+  {
+   "step": 1,
+   "vehicle": "Open-source release (ATAK-CIV plugin + TAK Server/OpenTAKServer mission-API extension + web companion) and community placement: TAK.gov developer training, GitHub publication, TAK Public Safety community, and a demo slot or hallway demos at CivTAK 2026 (Nov 18-20, Washington DC)",
+   "office_or_event": "CivTAK 2026 (civtak.org, Crystal Gateway Marriott, 2026-11-18 to 20); TAK Public Safety 501(c)(3) (takps.org/events); TAK Product Center virtual plugin-developer training (tak.gov/events); COTAK Summit 2026 (cotak.gov; date unverified)",
+   "timing": "Weeks 1-12 of this plan (Oct-Dec 2026); CivTAK 2026 is the Week-8 to Week-9 external checkpoint",
+   "eligibility_notes": "No ownership test, no clearance, no ATO. ATAK-CIV and its SDK are open-source government software (E07-F25, FACT HIGH); confirm the ATAK-CIV license and any copyleft obligations before publishing (counsel). Product design must stay EAR99/publicly-available: publishing the core as open source generally removes it from EAR control as 'published' software, but this is a legal determination for export counsel, not a finding here. The Indonesian founder can work on this codebase (E07-F17: deemed-export licensing applies only to controlled technology). TAK-GOV/MIL builds remain distribution-controlled - do not touch them. CivTAK is open to the public; TAK Offsite Day 1 (CUI) is not open to foreign persons.",
+   "what_it_yields": "A public, installable artifact; 20+ first-hand conversations with public-safety TAK administrators in three days; a direct read on whether TPC plans form objects in Data Sync (the decisive incumbent question); GitHub stars/installs as the first adoption metric; candidate MOU pilot partners."
+  },
+  {
+   "step": 2,
+   "vehicle": "No-cost MOU pilot with one state wildland TAK program (COTAK/Colorado Center of Excellence or another WFTAK-using state) and one Type 2/3 IMT during pre-season training or a prescribed-burn period; parallel unfunded observation/test at one National Guard battalion drill weekend or a state Vigilant Guard-series exercise via a Guard S3/S6 champion",
+   "office_or_event": "Colorado Center of Excellence for Advanced Technology Aerial Firefighting (WFTAK developer) and COTAK program; NWCG IM Tools & Technology / WFMRDA community; a state JFHQ J6/J3 innovation lead for the Guard observer slot (no Guard program office exists - this is credibility only)",
+   "timing": "Dec 2026 - Apr 2027 (before the 2027 western fire season); Guard drill weekend any month by invitation",
+   "eligibility_notes": "MOU/CRADA-style collaboration has no SBIR ownership test. Public-safety pilot data (ICS forms, resource lists) is not CUI. For the Guard observer slot: use only synthetic scenario data, no CUI, no connection to Army networks (avoids ATO/CMMC); any military-specific feature work should be reviewed by export counsel to prevent classification drift (E07-F15 defense-services proposed rule; no final rule confirmed).",
+   "what_it_yields": "Field measurements (convergence time, bytes per object, re-key count = 0), an agency reference, workflow evidence for the ICS 204/214 model, and - decisively - a named budget holder's answer to 'will you fund hosting/support next fiscal year?'"
+  },
+  {
+   "step": 3,
+   "vehicle": "First paid subscriptions: hosting/support for the open-source core sold to 1-3 agencies via P-card/micro-purchase or simplified acquisition; then an SHSP/UASI sub-grant line item in the FY2027 HSGP application cycle (NOFO expected ~June 2027 by the 2025/2026 pattern - HYPOTHESIS); optional federal prototype via a DHS S&T SVIP Innovation OTS topic if one matching first-responder situational awareness opens",
+   "office_or_event": "Agency procurement offices of the pilot partners; State Administrative Agencies for HSGP sub-grants; DHS S&T SVIP (dhs.gov SVIP page; no matching 2026 topic found this session)",
+   "timing": "Apr-Sep 2027 for first P-card deals; FY2027 HSGP cycle Jun-Jul 2027 applications, awards ~Sep 2027 (pattern-based, LOW)",
+   "eligibility_notes": "No ownership test for direct commercial sales or OTS (E07-F22). SBIR/STTR (DHS, Army) is NOT available without a >50% U.S.-person-owned cap table (13 CFR 121.702) - counsel; STRATFI/TACFI are therefore also closed (they require SBIR Phase II lineage). Hosted service may trigger state security reviews, CJIS-adjacent questions and StateRAMP for some buyers - budget for it only after a paying customer asks. Register in SAM.gov and obtain a UEI early (federal), and register as a vendor with each state.",
+   "what_it_yields": "The first revenue and the only metric that matters for the kill decision: paying agencies and ACV. If 12 months after CivTAK 2026 there are fewer than 3 paying agencies or ARR under $50k, the business is a hobby or an acquihire pitch, not a company."
+  },
+  {
+   "step": 4,
+   "vehicle": "Optional allied on-ramp: NATO DIANA 2028 cohort application (expected mid-2027 by the 2026-06-02 pattern) through a NATO-nation-domiciled entity, and a CIHBw startup pitch ('Pitch deine Idee an die Bundeswehr') via the German founder",
+   "office_or_event": "NATO DIANA (diana.nato.int challenges); Cyber Innovation Hub der Bundeswehr (cyberinnovationhub.de/mitwirken/startup)",
+   "timing": "Mid-2027 application; 2028 cohort; CIHBw pitch any time but expect months-long small pilots",
+   "eligibility_notes": "DIANA accepts companies registered in any NATO nation (E06-F1); EUR 100k per selected company (FACT, 2026-06-02). Integrating or training for a foreign military can raise ITAR defense-service questions for a U.S. entity even with EAR99 software (E07-F15) - obtain export counsel before any Bundeswehr pilot; a dual-jurisdiction structure raises its own expense (E07-F34, HYPOTHESIS LOW). No CIHBw TAK pilot was found in public sources this session.",
+   "what_it_yields": "Credibility and a second small channel, not scale: EUR 100k and test-centre access; a possible NATO Rapid Adoption Service path (E06-F4) if a nation's end user adopts."
+  }
+ ],
+ "customer_discovery": {
+  "targets": [
+   {
+    "role": "State wildland fire agency TAK/technology program lead (WFTAK or state TAK program administrator, e.g., a COTAK-type program)",
+    "why": "Closest thing to a requirement owner and a budget holder in one person; runs the server the extension must live on; decides what gets pushed to hundreds of devices",
+    "where_to_find": "CivTAK 2026 (Nov 18-20, DC); COTAK Summit 2026; NWCG IM Tools & Technology / WFMRDA meetings; TAK Public Safety community channels; LinkedIn 'TAK' and 'CivTAK' groups"
+   },
+   {
+    "role": "Planning section chief (PSC) or resource unit leader (RESL) on a Type 1/2 incident management team",
+    "why": "Owns the ICS 204/209/215 cycle each operational period; the person who re-keys; the credible judge of whether a structured object model matches the real workflow",
+    "where_to_find": "Complex Incident Management Team rosters via state/geographic area coordination centers; NWCG training courses; fire-service LinkedIn; wildland fire subreddits and IMT alumni networks; university forestry/fire programs"
+   },
+   {
+    "role": "Municipal or county fire department TAK administrator / battalion chief using TAK with FirstNet",
+    "why": "Represents the connected-broadband majority of public-safety TAK users; tests whether offline merge matters when connectivity usually exists",
+    "where_to_find": "TAK Public Safety chapters and events; Firehouse/FireRescue1 TAK coverage; state fire chiefs associations; FirstNet Authority public-safety advocacy events"
+   },
+   {
+    "role": "Emergency manager / EOC manager who owns the agency's WebEOC/Veoci/Intterra license",
+    "why": "Controls the incumbent IMS budget the product would displace or complement; reveals whether a TAK-native layer is bought in addition to or instead of the IMS",
+    "where_to_find": "IAEM conferences and regional chapters; state emergency management associations; Juvare/Veoci user groups; LinkedIn emergency-management communities"
+   },
+   {
+    "role": "TAK Product Center product or engineering lead responsible for Data Sync / mission API",
+    "why": "Owns the incumbent path; the single most important conversation - whether TPC intends to add structured form objects to missions decides whether the company exists",
+    "where_to_find": "CivTAK 2026 and TAK Offsite sessions; TAK.gov developer training; TAK Product Center LinkedIn page; PAR Government / TPC contractor staff at events"
+   },
+   {
+    "role": "State Administrative Agency (SAA) grants manager who administers SHSP/UASI sub-grants",
+    "why": "Knows whether situational-awareness software has ever been funded under HSGP in that state, how the 35% LETPA and 30% NPA mandates are applied, and the FY2027 cycle calendar",
+    "where_to_find": "State homeland security offices; National Homeland Security Association/NHSA meetings; FEMA GPD webinars; state grant workshops (e.g., Nevada DHS NTECC-style meetings)"
+   },
+   {
+    "role": "National Guard battalion S3 or S6 (traditional Guardsman, often a civilian firefighter/police officer/IT professional) who has used ATAK on state active duty",
+    "why": "Unfunded credibility test for the dual-use claim; can invite a drill-weekend observation; also a natural bridge to public-safety agencies via his or her civilian job",
+    "where_to_find": "University ROTC cadre and alumni; state Guard associations (NGAUS state chapters, EANGUS); veterans' entrepreneurship networks; LinkedIn posts tagged with domestic operations, Vigilant Guard, Vibrant Response"
+   },
+   {
+    "role": "Agency procurement officer or fire chief's budget analyst at a candidate pilot agency",
+    "why": "Only person who can say how a $5k-$20k hosting subscription actually gets bought (P-card, micro-purchase, cooperative contract, grant) and how long it takes",
+    "where_to_find": "Through the pilot champion; state procurement offices; NIGP (public procurement) chapters"
+   },
+   {
+    "role": "Public-safety IMS vendor product manager (Tablet Command, Resgrid, Intterra or similar) or Ditto public-sector lead",
+    "why": "Competitor and potential acquirer/partner; reveals whether offline multi-writer forms are on their roadmap and what an integration or acquihire would look like",
+    "where_to_find": "CivTAK 2026 exhibitors; FDIC/Fire-Rescue International exhibit halls; company LinkedIn; DHS SAVER vendor list"
+   },
+   {
+    "role": "Former incident commander / type 1 IMT member now consulting or teaching (candidate domain co-founder or advisor)",
+    "why": "The score file names this role as fatal-if-absent; discovery must double as recruiting",
+    "where_to_find": "NWCG instructor cadres; state fire academies; wildland-fire consulting firms; LinkedIn; TAK Public Safety board and volunteers"
+   },
+   {
+    "role": "Mesh/edge radio integrator serving public safety (Meshtastic community lead, goTenna/Forterra or similar field engineer)",
+    "why": "Knows real-world partition patterns, message-size limits and which agencies actually run disconnected - calibrates whether the CRDT delta design is needed or over-engineered",
+    "where_to_find": "Meshtastic Discord/forums; CivTAK 2026; TAK Public Safety mesh integration sessions (the Tennessee TAK event listed mesh radio integration)"
+   }
+  ],
+  "questions": [
+   "Walk me through the last operational period on your most recent large incident: from the planning meeting to the ICS 204s in the hands of division supervisors, who typed what, into what, and how many times was the same assignment re-entered?",
+   "The last time a division or strike team lost connectivity for hours, what happened to the status they collected while disconnected - how did it get back into the plan, and what was wrong or duplicated when it did?",
+   "Show me how resource status (ICS 214/215, T-cards, whiteboard, IMS) is reconciled at the end of a shift; who notices when two people changed the same record, and what do they do?",
+   "What does TAK actually show on your incidents today - PLI, markers, chat, data packages - and what still travels on paper, radio or a separate app? Why that split?",
+   "When you brief the IC or the agency administrator, which numbers do they distrust, and how do you defend them?",
+   "Which of your responders are on iPhones versus Android, and how do the iOS users get incident information today?",
+   "Tell me about the last software your agency bought for incident management: who proposed it, what money paid for it (grant, operating budget, P-card), how long from idea to purchase order, and who could have vetoed it?",
+   "If a free TAK plugin did structured ICS 204/214 forms tomorrow, what would have to be true for you to push it to your fleet - and who would have to approve it?",
+   "What did you stop using in the last three years, and why did it lose?",
+   "How do you exchange the incident action plan and status with the neighboring agency, the state EOC and the federal team that arrives on day three? Where does it get retyped?",
+   "For Guard interviewees: walk me through receiving the OPORD/FRAGO and reporting SITREP/LOGSTAT/PERSTAT on your last state active duty mission - what tools, what links, and what happened after each displacement or reconnect?",
+   "Who in your state or agency would you introduce me to that has actually paid for TAK-adjacent software, and who has refused to?",
+   "What does your training pipeline look like for TAK - who onboards a new user, how long does it take, and where do people give up?"
+  ]
+ },
+ "first_deployment_path": {
+  "path": "Primary: a no-cost MOU pilot on one state wildland TAK program's server (WFTAK-using state or COTAK-type program) during pre-season training or a prescribed-burn period in Q1-Q2 2027, on the agency's own Android/iOS devices with the open-source extension deployed server-side and the web companion for iOS, measured against paper/IMS baseline in one operational period; secondary, unfunded: observe/test at one Guard battalion drill weekend or a state Vigilant Guard-series exercise using synthetic data only. No Project Convergence, NetModX, ANTX, Bold Quest or CWIX participation is pursued - those are military experimentation venues that require sponsors, CUI environments or NATO nation nomination this team cannot meet in 12 months and that address a buyer (Army/NATO) this version has abandoned.",
+  "evidence_it_produces": "Field metrics (multi-writer edits made during a >=4-hour partition merge with zero re-keying and zero lost updates on both Android and iOS; ICS 204 production time versus baseline; bytes per object over mesh), a signed agency reference, and - the only evidence that matters - a written answer from the agency budget holder on whether and how they will fund hosting/support in FY2027. This evidence supports a bootstrapped revenue business or an acquihire conversation with Ditto, a TPC contractor (e.g., PAR Government) or an IMS vendor. It does NOT support a Series A, STRATFI (requires SBIR Phase II lineage this cap table cannot obtain) or a DIU production transition (no DoD requirement owner); stating otherwise would dress a niche business up as a venture.",
+  "alternatives": [
+   "Municipal fire department pilot on FirstNet (connected majority): weaker test of the offline merge thesis but faster to arrange via TAK Public Safety chapters",
+   "IMS-vendor partnership pilot: offer the open-source TAK object layer as an integration to Tablet Command/Resgrid/Intterra for a joint customer - fastest route to an acquihire signal, slowest to independent revenue",
+   "DHS S&T SVIP Innovation OTS topic (if a first-responder situational-awareness topic opens in 2027): federal prototype dollars without an SBIR ownership test - RECALL LOW on international eligibility; monitor, do not plan around it",
+   "NATO DIANA 2028 cohort via a German-domiciled entity: EUR 100k and test-centre access; credibility, not deployment"
+  ]
+ },
+ "allied_extension": {
+  "bigger_with_allies": "No - allies add a second small channel and credibility, not a larger market. DIANA's 2027 'operational resilience in contested environments' and 'responsive logistics' challenges match the problem statement almost verbatim (FACT, 2026-06-02) but the window closed 2026-07-03, awards are EUR 100k, and the next realistic target is the 2028 cohort with applications ~mid-2027 (pattern-based). Systematic SitaWare Edge already offers tasking in NATO armies, and Bundeswehr tactical networking is contracted through 2029 (E06-F13). No CIHBw TAK pilot was found in public sources this session.",
+  "what_changes": "Entity structure (a NATO-nation-domiciled entity for DIANA; dual-jurisdiction cost, E07-F34), export posture (any integration/training for a foreign military can be an ITAR defense service even for EAR99 software - E07-F15 proposed rule, no final rule confirmed; counsel required before a Bundeswehr or other foreign-military pilot), data schemas (NATO APP-11 message formats and national report formats replace NIMS ICS forms - a second schema pack, not a new product), and the buyer (civil-protection agencies such as German THW/fire services and allied light units on ATAK rather than U.S. IMTs). The German founder's language and network access to CIHBw is the only concrete advantage.",
+  "markets": [
+   "Germany: CIHBw startup pitch and small pilots (months-long, SBIR-Phase-I analogue); civil protection (THW, Feuerwehr) as the EAR99-clean analogue of U.S. public safety - HYPOTHESIS, no evidence of TAK-native forms demand",
+   "NATO DIANA 2028 cohort (EUR 100k; test centres; Rapid Adoption Service) - credibility channel",
+   "UK/Australia: RECALL - not re-verified: DASA (UK) and ASCA (Australia) run open calls that accept overseas suppliers with conditions; not researched this session, LOW",
+   "Japan/Singapore: no evidence of ATAK-CIV public-safety adoption or relevant open calls found; deprioritize"
+  ]
+ },
+ "plan_90_days": {
+  "weeks_1_3": {
+   "goals": [
+    "Answer the decisive doubt by interview: find at least one named state TAK program, IMT or agency budget holder who describes structured offline ICS objects as a funded or fundable need",
+    "Map the actual buying path for a $5k-$20k hosting/support subscription in two states",
+    "Get TPC's position on adding form objects to Data Sync (or a dated plan to ask at CivTAK 2026)",
+    "Recruit one former IC/PSC advisor (fatal-if-absent role)"
+   ],
+   "deliverables": [
+    "12-20 completed workflow interviews across at least 7 of the 11 target roles, coded against the questions above",
+    "Two-state buying-path memo (grant vs. operating budget vs. P-card, thresholds, calendar)",
+    "Written schema draft v0.1 for ICS 204/214 and resource ledger objects reviewed by the advisor",
+    "CivTAK 2026 registration and demo/lightning-talk request submitted; COTAK Summit 2026 date confirmed and registered if it falls in the window",
+    "Export-counsel intake memo confirming the open-source/EAR99 design and license terms (no legal conclusion drawn by this plan)"
+   ],
+   "budget_usd": 7000,
+   "owner": "Business founder (interviews, buying-path memo, event logistics, advisor recruiting); engineer founder (schema draft, TAK.gov developer training)",
+   "kill_criteria": [
+    "KILL if after 15 interviews zero budget holders (state TAK program lead, fire chief, EOC manager, SAA) can name a fund and a fiscal year from which they would pay for this - not 'would be interested'",
+    "KILL if a TPC representative states on the record that structured form objects are on the Data Sync roadmap within 12 months",
+    "KILL if no former IC/PSC-level advisor agrees to participate by end of Week 3 (score file: fatal-if-absent)",
+    "PIVOT-TO-SERVICES flag if >50% of interviewees say the pain is training/adoption rather than forms/merge (consistent with TAK Public Safety's charter)"
+   ]
+  },
+  "weeks_4_6": {
+   "goals": [
+    "Prove the technical wedge is cheap: CRDT-merged ICS objects transported as mission deltas through an unmodified TAK Server / OpenTAKServer mission API",
+    "Decide iOS strategy empirically (web companion/PWA vs. Meshtastic iOS TAK-server path) since iTAK has no plugin architecture"
+   ],
+   "deliverables": [
+    "Bench experiment: 5 Android EUDs (ATAK-CIV) + 1 laptop ICP + 1 web companion on iOS, 4 deliberate partitions, multi-writer edits to the same ICS 204 assignment and resource quantities; report convergence time, bytes per object, conflicts surfaced vs. auto-merged",
+    "Meshtastic/LoRa transport test of object deltas (message size budget, loss behavior)",
+    "Decision memo: Automerge/Yjs/custom merge choice with per-field semantics (LWW with causal history for text, list merge for assignments, explicit conflict surfacing for quantities)",
+    "Public GitHub repository with README, license and reproducible test harness"
+   ],
+   "budget_usd": 11000,
+   "owner": "Engineer founder (build, experiments); business founder (continues interviews, secures pilot MOU candidates, drafts MOU template)",
+   "kill_criteria": [
+    "KILL the CRDT-object thesis if the mission API cannot carry object deltas without forking TAK Server (i.e., the extension would require a TPC-controlled server change)",
+    "KILL if merged objects need >20 KB per edit over mesh or convergence after a 4-hour partition exceeds 5 minutes on reconnect - the free Data Sync plus a manual reconcile would then be 'good enough'",
+    "KILL if no path reaches iOS users without an App Store app the team cannot ship in 90 days (given ~80% iOS in wildland)",
+    "KILL if by end of Week 6 no state TAK program or IMT has agreed in writing to a no-cost pilot window in Q1-Q2 2027"
+   ]
+  },
+  "weeks_7_9": {
+   "goals": [
+    "Turn the experiment into a demonstrable prototype an agency can install: ICS 204, 214 and a resource ledger as CRDT mission objects; ATAK-CIV plugin UI; web companion; server-side extension packaged for OpenTAKServer and TAK Server",
+    "Show it at CivTAK 2026 (Nov 18-20) and record buyer reactions"
+   ],
+   "deliverables": [
+    "Installable prototype v0.2 (APK, server container, web companion) with a 10-minute scripted partition-and-merge demo",
+    "CivTAK 2026 demo delivered to at least 15 public-safety TAK administrators and at least one TPC Data Sync engineer; structured notes on each",
+    "Named list of >=3 agencies that request a pilot install after seeing the demo",
+    "Pilot MOU signed with at least one state program or IMT for Q1-Q2 2027"
+   ],
+   "budget_usd": 17000,
+   "owner": "Engineer founder (prototype); business founder (CivTAK logistics, demo script, pilot MOU, follow-ups); advisor (workflow review)",
+   "kill_criteria": [
+    "KILL if fewer than 3 agencies at CivTAK ask for a pilot install (out of >=15 demos)",
+    "KILL if the TPC conversation confirms a native form-object feature in the next release cycle",
+    "KILL if no pilot MOU is signed by end of Week 9",
+    "DOWNGRADE to 'open-source hobby/acquihire' if the only interest comes from IMS vendors or Ditto rather than agencies"
+   ]
+  },
+  "weeks_10_12": {
+   "goals": [
+    "User validation with real practitioners on real-form workflows (tabletop or training scenario) and a first commercial ask",
+    "Decide go/no-go on continuing beyond 90 days with a written case"
+   ],
+   "deliverables": [
+    "Two moderated sessions (one IMT planning section, one municipal/state TAK program; optional Guard drill-weekend observation with synthetic data) producing the next operational period's ICS 204s with the prototype versus paper baseline; timing and error counts recorded",
+    "Pricing test: a written hosting/support quote ($5k-$20k/yr) delivered to >=3 agencies with the buying path from Week 3; count of purchase-intent letters or P-card commitments",
+    "Go/no-go memo: interview evidence, technical results, TPC roadmap read, pilot MOU status, commitments, and the 12-month plan or the wind-down/acquihire outreach list",
+    "If GO: FY2027 HSGP sub-grant language template offered to pilot agencies ahead of the ~June 2027 NOFO"
+   ],
+   "budget_usd": 15000,
+   "owner": "Business founder (sessions, pricing test, memo); engineer founder (fixes, metrics); advisor (session facilitation)",
+   "kill_criteria": [
+    "KILL if the prototype does not cut ICS 204 production time by at least 30% versus paper/Word in the moderated session, or if any merge produces a lost or duplicated assignment",
+    "KILL if zero agencies commit in writing (LOI, P-card, or grant line) to pay for hosting/support within FY2027 after receiving a quote",
+    "KILL if total credible 12-month pipeline is below $50k ARR - at that level the correct decision is to hand the open-source project to TAK Public Safety/WFTAK stewardship and approach Ditto, a TPC contractor or an IMS vendor about an acquihire",
+    "Regardless of outcome: do not raise outside capital on this version; it is a bootstrapped niche business or an acquihire, and the plan's own evidence cannot justify a venture round"
+   ]
+  },
+  "total_budget_usd": 50000
+ },
+ "most_important_question": {
+  "build_first": "An open-source TAK Server/OpenTAKServer extension plus ATAK-CIV plugin plus a thin web companion (for the iOS majority, since iTAK has no plugin architecture) that stores three things as CRDT-merged Data Sync mission objects: ICS 204 assignments, ICS 214 activity/status entries, and a resource/LOGSTAT-style ledger with per-field merge semantics (LWW-with-history for text, list merge for assignments, explicit conflict surfacing for quantities), transported as compact mission deltas over Meshtastic/LoRa and FirstNet. Roughly $50k and 90 days to a demonstrable prototype; entirely unclassified, EAR99-by-design, buildable by the non-U.S.-person founder. Nothing military-specific in v1.",
+  "show_it_to": "In order: (1) the state wildland TAK program lead who runs a WFTAK-using or COTAK-type server, (2) a Type 2 IMT planning section chief and resource unit leader, (3) the TAK Product Center Data Sync engineer at CivTAK 2026 (Nov 18-20, DC), (4) an SAA grants manager and an agency budget analyst, (5) a Guard battalion S3 on a drill weekend as an unfunded dual-use check. Not to Army program offices, not to DIU, not to primes - that buyer has been ceded to SBMC/Onebrief.",
+  "demo_proves": "That edits to the same assignment, activity log and resource quantities made by multiple users during a >=4-hour partition merge on reconnect with zero re-keying, zero lost or duplicated records, on Android and on iOS via the web companion, over a LoRa mesh at under 20 KB per edit; and that a planning section produces the next operational period's ICS 204s at least 30% faster than on paper/Word. It deliberately does NOT try to prove a merge model worth licensing - that thesis is dead.",
+  "why_customer_cares": "Every operational period the planning section re-keys assignments and status from radio, paper and chat; every reconnect after a division worked disconnected forces a manual reconcile of which version is current; the IC defends numbers he or she cannot trace. The product removes the re-keying and makes provenance visible inside the TAK app the agency already runs. Caveat from the score file: the pain is real but tolerated (severity 3/5), and TAK Public Safety's own charter says adoption is gated by training, not features - the 90-day plan tests whether the pain is worth $5k-$20k a year to anyone.",
+  "why_incumbent_cant_crush": "Honest answer: they can. TPC can add form objects to free Data Sync; Ditto can ship a schema pack on its ATAK plugin; Resgrid already markets offline-first ICS-201; Tablet Command/Intterra/WebEOC own agency relationships; the schemas are public standards and the merge engine is open source. The only partial defenses are (a) speed and focus - none of them has combined structured ICS objects + multi-writer merge + TAK-native, and public-safety vendors move slowly; (b) open-source community stewardship with TAK Public Safety/WFTAK so that the de facto 'ICS objects for TAK' schema is the company's, making the company the natural maintainer/hosting provider and the natural acquihire; (c) the founders' cost base (two students) lets a $100k-ARR business survive where a funded vendor would not bother. These are reasons a small business can exist, not reasons a venture can win - which is why the verdict is kill-as-venture.",
+  "milestone_for_next_2_5m": "Twenty or more paying agencies or one statewide enterprise contract (>= $150k ARR combined) within 12 months of CivTAK 2026, plus written evidence that TPC will not add form objects natively, plus a signed integration or acquisition LOI from an IMS vendor, Ditto or a TPC contractor. The plan's own evidence says this milestone is unlikely: agency ACVs are low five figures, the buying cycle is 12-24 months, and the licensing buyer has no reason to pay for what it can take from open source. If the milestone is missed, the correct next step is not a raise but stewardship transfer plus acquihire outreach. If it is somehow hit, $2-5M would fund a SLED sales lead, StateRAMP/security packaging and a second schema pack (NATO/allied civil protection) - still a small-cap outcome."
+ },
+ "sources": [
+  {"url": "https://www.civtak.org/2026/03/23/civtak-2026-save-the-date/", "title": "CivTAK 2026: November 18-20 at the Crystal Gateway Marriott", "pub_date": "2026-03-23"},
+  {"url": "https://tak.gov/events/2026_Offsite", "title": "TAK.gov - TAK Offsite 2026 (Aug 18-20, Colorado Springs)", "pub_date": "2026"},
+  {"url": "https://tak.gov/pages/2026-offsite-media-fact-sheet", "title": "TAK.gov - 2026 TAK Offsite Media Fact Sheet", "pub_date": "2026"},
+  {"url": "https://www.takps.org/events", "title": "TAK Public Safety - Events", "pub_date": "2026 (site)"},
+  {"url": "https://cotak.gov/pagegroups/cotak-summit-2026/cotak-summit-2026-schedule", "title": "COTAK Summit 2026 schedule (date not verified - .gov blocked)", "pub_date": "2026"},
+  {"url": "https://www.fema.gov/press-release/20260624/fema-announces-15-billion-empower-communities-prevent-terrorism-and-protect", "title": "FEMA Announces $1.5 Billion to Empower Communities to Prevent Terrorism and Protect American Infrastructure", "pub_date": "2026-06-24"},
+  {"url": "https://www.fema.gov/sites/default/files/documents/fema_gpd_hsgp-key-changes-fy2026.pdf", "title": "Homeland Security Grant Program Key Changes: June 2026", "pub_date": "2026-06"},
+  {"url": "https://www.fema.gov/grants/preparedness/homeland-security/fy-25-nofo", "title": "FY 2025 Homeland Security Grant Program NOFO", "pub_date": "2025"},
+  {"url": "https://www.appliedtrg.com/2026/08/07/post-exercise-report-vigilant-guard-26-4-homeland-defense-mission-assurance/", "title": "Post-Exercise Report - VIGILANT GUARD 26-4 (contractor report)", "pub_date": "2026-08-07"},
+  {"url": "https://www.army.mil/article/293452/ny_army_guard_aviation_brigade_hones_domestic_response_readiness_during_vibrant_response_2026", "title": "NY Army Guard aviation brigade hones domestic response readiness during Vibrant Response 2026", "pub_date": "2026-06"},
+  {"url": "https://www.nationalguard.mil/Resources/Videos/videoid/756156/", "title": "ATAK: Android Team Awareness Kit (National Guard video)", "pub_date": "not captured"},
+  {"url": "https://www.civtak.org/tag/national-guard/", "title": "CivTAK - National Guard archives", "pub_date": "various"},
+  {"url": "https://wftak.wildfire.gov/pages/what-is-wftak", "title": "What is WFTAK?", "pub_date": "not captured (live 2026-09)"},
+  {"url": "https://wftak.wildfire.gov/pages/system-architechture", "title": "WFTAK system architecture", "pub_date": "not captured"},
+  {"url": "https://www.nwcg.gov/", "title": "National Wildfire Coordinating Group", "pub_date": "2026 (site)"},
+  {"url": "https://www.dhs.gov/publication/st-silicon-valley-innovation-program", "title": "DHS S&T Silicon Valley Innovation Program", "pub_date": "not captured"},
+  {"url": "https://www.dhs.gov/science-and-technology/sbir", "title": "DHS S&T SBIR program", "pub_date": "not captured"},
+  {"url": "https://www.dhs.gov/sites/default/files/2022-01/SAVER%20IMS%20MSR_05Jan2022-508.pdf", "title": "DHS SAVER Incident Management Software Market Survey Report", "pub_date": "2022-01-05"},
+  {"url": "https://play.google.com/store/apps/details?id=com.atakmap.android.datasync.plugin", "title": "ATAK Plugin: Data Sync (TAK Product Center)", "pub_date": "not captured"},
+  {"url": "https://docs.opentakserver.io/mission_api.html", "title": "Mission API/Data Sync - OpenTAKServer documentation", "pub_date": "2025-2026"},
+  {"url": "https://meshtastic.org/blog/tak-server-integration-ios/", "title": "No Plugins, No Problem: Integrating TAK, Meshtastic, and iOS", "pub_date": "2026-02"},
+  {"url": "https://www.takps.org/", "title": "TAK Public Safety", "pub_date": "2024-2026"},
+  {"url": "https://resgrid.com/apps/ic", "title": "Resgrid IC - Digital Incident Command Board", "pub_date": "2025-2026"},
+  {"url": "https://rxdb.info/articles/alternatives/ditto-alternative.html", "title": "RxDB as a Ditto Alternative", "pub_date": "2025-2026"},
+  {"url": "https://defensescoop.com/2025/09/08/army-sbmc-contract-awards-anduril-rivet-soldier-borne-mission-command/", "title": "Army SBMC contract awards to Anduril, Rivet", "pub_date": "2025-09-08"},
+  {"url": "https://www.businesswire.com/news/home/20260917440642/en/Onebrief-Awarded-Enterprise-Contract-by-U.S.-Army-Contracting-Command-Enabling-Department-Wide-Access-to-AI-Powered-Planning-Software", "title": "Onebrief awarded Army enterprise contract", "pub_date": "2026-09-17"},
+  {"url": "https://sam.gov/opp/340689e568d74d08bb0c5c8cbebd42a6/view", "title": "PM Mission Command Operational Mission Command Suite market research (E02-F8)", "pub_date": "2025-2026 (inferred)"},
+  {"url": "https://www.army.mil/article/194399/developing_a_common_operational_picture_for_sustainment", "title": "Developing a common operational picture for sustainment", "pub_date": "2018"},
+  {"url": "https://www.diana.nato.int/connect/nato-diana-unveils-six-new-challenges-to-tackle-evolving-defence-and-security-needs.html", "title": "NATO DIANA unveils six new challenges", "pub_date": "2026-06-02"},
+  {"url": "https://www.diana.nato.int/challenges.html", "title": "NATO DIANA challenges", "pub_date": "2025-2026"},
+  {"url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/summary-of-natos-rapid-adoption-action-plan", "title": "NATO Rapid Adoption Action Plan summary", "pub_date": "2025-06-25"},
+  {"url": "https://www.cyberinnovationhub.de/mitwirken/startup#c3201", "title": "Cyber Innovation Hub: Pitch deine Idee an die Bundeswehr", "pub_date": "2026 (site)"},
+  {"url": "https://www.cyberinnovationhub.de/en", "title": "Bundeswehr Cyber Innovation Hub (CIHBw)", "pub_date": "2026 (site)"},
+  {"url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV", "title": "AndroidTacticalAssaultKit-CIV (deptofdefense GitHub)", "pub_date": "ongoing"},
+  {"url": "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export", "title": "BIS - What is a deemed export", "pub_date": "current"},
+  {"url": "https://sanctionsnews.bakermckenzie.com/ddtc-issues-proposed-rule-revising-itar-definition-and-controls-related-to-defense-services/", "title": "DDTC proposed rule revising ITAR definition of defense services (Baker McKenzie)", "pub_date": "2024-2025"},
+  {"url": "https://www.firehouse.com/technology/blog/55396422/green-bay-wi-fire-pairs-team-awareness-kit-with-firstnet-for-real-time-command", "title": "Green Bay, WI, Fire Pairs Team Awareness Kit with FirstNet", "pub_date": "2025"},
+  {"url": "https://www.hstoday.us/federal-pages/dhs/dhs-sts-team-awareness-kit-expands-its-reach/", "title": "DHS S&T's Team Awareness Kit Expands Its Reach", "pub_date": "not captured"}
+ ]
+}
