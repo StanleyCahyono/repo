@@ -328,3 +328,8 @@ svg.graph .node.link { cursor: pointer; }
   .main { padding: 0; }
   .card, .table-wrap { break-inside: avoid; }
 }
+
+/* Verdict strip */
+.verdict-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 2px; }
+.vs-cell { display: grid; place-items: center; height: 34px; border-radius: 3px; color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 500; }
+.vs-cell:hover { outline: 2px solid var(--ink); outline-offset: -2px; text-decoration: none; }
