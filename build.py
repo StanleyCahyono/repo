@@ -23,10 +23,15 @@ def load(path, default=None):
 def slug(s):
     return re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', str(s).lower()))
 
+# Working files produced while running the research pipeline; they are not part of the published data.
+SCRATCH = re.compile(r'(_part\d*|^shard|\.args\.json$|^candidates\.json$|_norm\.json$|^money_input\.json$|^index\.json$)')
+
 def copy_research(src):
     for sub in ('segments', 'buyers', 'companies', 'evidence', 'gaps', 'survivors', 'synthesis'):
         os.makedirs(os.path.join(DATA, sub), exist_ok=True)
         for f in glob.glob(os.path.join(src, sub, '*.json')):
+            if SCRATCH.search(os.path.basename(f)):
+                continue
             shutil.copy(f, os.path.join(DATA, sub, os.path.basename(f)))
 
 TRACTION_WORDS = ('strong', 'moderate', 'weak', 'unknown')
