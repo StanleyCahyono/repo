@@ -94,10 +94,10 @@ function heatmap(xs, ys, cellFn, opts = {}) {
 /* Stacked horizontal bars: rows [{label, segments: [{key, value}], total}] with fixed categorical order for keys */
 const SERIES = ['--s1', '--s2', '--s3', '--s4', '--s5', '--s6', '--s7', '--s8'];
 function stackedBars(rows, keys, opts = {}) {
-  const max = Math.max(1, ...rows.map((r) => r.total ?? r.segments.reduce((a, s) => a + num(s.value), 0)));
+  const max = opts.composition ? 1 : Math.max(1, ...rows.map((r) => r.total ?? r.segments.reduce((a, s) => a + num(s.value), 0)));
   const colorOf = (k) => `var(${SERIES[Math.min(keys.indexOf(k), 7)] || '--s8'})`;
   const wrap = h('div', { class: 'stack' });
-  wrap.append(h('div', { class: 'stack-bars' }, rows.map((r) => { const total = r.total ?? r.segments.reduce((a, s) => a + num(s.value), 0); const track = h('div', { class: 'stack-track', style: { width: (total / max * 100) + '%' } }); for (const s of r.segments) { if (!num(s.value)) continue; const seg = h('div', { class: 'stack-seg', style: { flex: num(s.value) + ' 0 0', background: colorOf(s.key) } }); withTip(seg, () => `<b>${esc(r.label)}</b><br>${esc(titleCase(s.key))}: ${esc(fmtMoney(num(s.value)))}${s.note ? '<br>' + esc(s.note) : ''}`); track.append(seg); } return h('div', { class: 'stack-row' }, h('span', { class: 'bar-label', title: r.label }, r.label), h('div', null, track), h('span', { class: 'bar-val num' }, opts.fmt ? opts.fmt(total) : fmtMoney(total))); })));
+  wrap.append(h('div', { class: 'stack-bars' }, rows.map((r) => { const total = r.total ?? r.segments.reduce((a, s) => a + num(s.value), 0); const track = h('div', { class: 'stack-track', style: { width: opts.composition ? '100%' : (total / max * 100) + '%' } }); for (const s of r.segments) { if (!num(s.value)) continue; const seg = h('div', { class: 'stack-seg', style: { flex: num(s.value) + ' 0 0', background: colorOf(s.key) } }); withTip(seg, () => `<b>${esc(r.label)}</b><br>${esc(titleCase(s.key))}: ${esc(fmtMoney(num(s.value)))}${total ? ' (' + Math.round(num(s.value) / total * 100) + '% of stage)' : ''}${s.note ? '<br>' + esc(s.note) : ''}`); track.append(seg); } return h('div', { class: 'stack-row' }, h('span', { class: 'bar-label', title: r.label }, r.label), h('div', null, track), h('span', { class: 'bar-val num' }, opts.fmt ? opts.fmt(total) : fmtMoney(total))); })));
   wrap.append(h('div', { class: 'legend' }, keys.map((k) => h('span', null, h('i', { class: 'sw', style: { background: colorOf(k) } }), titleCase(k)))));
   return wrap;
 }
