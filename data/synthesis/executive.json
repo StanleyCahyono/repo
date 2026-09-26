@@ -1,0 +1,398 @@
+{
+  "id": "executive",
+  "title": "Executive Landscape",
+  "sections": [
+    {
+      "heading": "1. How modern C4ISR is structured: the chain and the layers",
+      "paragraphs": [
+        "Modern U.S. C4ISR is best read as a fifteen-step information and decision chain rather than as a list of programs: COLLECT (satellites, airborne ISR, ground and ship radars, small UAS and soldier reports), TRANSPORT (Link 16/MIDS JTRS, JREAP and SIMPLE gateways, GEO/MEO/LEO SATCOM including Starshield/MILNET and the SDA transport layer, tactical MANET/private 5G, DISN and coalition enclaves), INGEST and NORMALIZE (message gateways for J-series, VMF, USMTF, CoT and STANAG 4607/4609/4676/NITF, registries and schema transformation), STORE (edge nodes replicated to cloud), PROCESS (SAR image formation, plot-to-track, computer vision and ATR), FUSE, IDENTIFY, VISUALIZE (the common operating picture), DECIDE, COLLABORATE, DISSEMINATE (cross-domain solutions and releasability gates), TASK (fire missions, air tasking, drone assignment), MONITOR (blue force tracking, sustainment status, network health) and ASSESS (battle damage and program assessment). Every seam between two steps is a format translation, a security-domain crossing or a human control point, and it is at those seams, not in the steps themselves, that most of the documented pain sits (FACT for the architecture as described in the S00 chain map, assembled from Army, Air Force, GAO and public SDK/protocol sources; HIGH).",
+        "Architecturally the chain now resolves into seven layers. Sensors and transport are hardware- and waveform-heavy and are owned by primes, SpaceX and government radio programs. Above them sits a newly commercial two-tier data layer: Anduril Lattice as the Army's tactical data layer and Palantir Foundry as its cloud data layer, with Raft supplying registries, transformation and federation (the NGC2 common data layer baseline declared June 22, 2026; FACT, HIGH), and Palantir's Maven Smart System as the joint-level equivalent run by NGA and CDAO across three security domains with 20,000-plus users and 35-plus tools (NGA, 2025; FACT, HIGH on the stated counts). Processing splits into two grades that must not be confused: fire-control-quality fusion (Northrop IBCS in full-rate production since November 2025, Aegis, Link 16 track management) is a closed, safety-certified, prime-owned world, while situational-awareness fusion (Lattice entity merge, Foundry ontology, TAK Server) is the commercially contested world. Applications sit on top: planning and collaboration (Onebrief, Microsoft), warfighting-function execution apps (fires, airspace, sustainment such as Air's Enterprise Readiness), autonomy C2 (Lattice, Swarm Aero, L3Harris ACT, Tesseract) and the COP (ATAK/WinTAK, Lattice UI, Foundry apps, GCCS-J legacy, SitaWare and HexaForce abroad). Two cross-cutting security layers, cross-domain solutions with data-centric labeling and ICAM/zero trust/continuous ATO, gate everything that crosses classification or national boundaries (FACT for the layer inventory; HIGH).",
+        "Three structural observations follow. First, the government-owned TAK/CoT ecosystem (500,000-plus users, TAK Server and TAK Protocol v1 published on GitHub) has commoditized the basic COP client and lowered the cost of tactical situational-awareness integrations, which also means a new COP is not a product (FACT, HIGH). Second, the human control points are fixed by policy, not technology: positive identification and target approval are human, releasability decisions are made by foreign disclosure officers, and authorizing officials personally accept risk for every ATO (FACT, HIGH). Third, ASSESS is the weakest step publicly: GAO found in April 2025 that DoD still had no framework to guide CJADC2 investments or measure progress six years after launch, that services build C2 'largely in isolation', and that overly restrictive classification is a 'significant hindrance' to sharing C2 data with no DoD entity owning the fix (GAO-25-106454, 2025-04-08; FACT, HIGH)."
+      ],
+      "label_notes": "Chain and layer descriptions are FACT/HIGH where they cite named programs, published SDKs or protocol specifications; the mapping of specific commercial products to chain steps is INFERENCE/MEDIUM where contract values are undisclosed. Sensor-to-shooter timings quoted by vendors (for example, sub-one-minute fire missions at Ivy Sting) are HYPOTHESIS: no independent exercise measurement was found."
+    },
+    {
+      "heading": "2. Where value is moving, with evidence",
+      "paragraphs": [
+        "The single largest shift of 2024-2026 is from monolithic programs of record (CPCE, DCGS-A, the AFATDS-era fires chain) toward commercially owned data platforms with third-party app ecosystems on top, and the money is following. The Army's NGC2 became a program of record in 2025, awarded prototype OTAs to a Team Anduril (about $99.6M, July 2025) and a Lockheed Martin team (about $26M, September 2025), ran a serialized experimentation campaign (Ivy Sting 1-5, Ivy Mass, Lightning Surge 1-3, Operation Jailbreak in May 2026, Project Convergence Capstone 6 in July 2026 with roughly 9,000-10,000 personnel, six brigades and 90-plus technologies), declared the Lattice/Foundry/Raft common data layer in June 2026 and told Congress it was 'ready to scale' in August 2026 (army.mil, 2026-08-03; FACT, HIGH). GAO's August 20, 2026 report (GAO-26-108019) confirms the scale and the risk: about $3.3B identified through FY2026, a tentative goal of 11 divisions and four corps by FY2032, but no life-cycle cost estimate and no unit-by-year fielding schedule (FACT, HIGH). The FY2027 request is roughly $3.78B across C2 applications ($488.4M RDT&E), C2 data ($306.1M), C2 infrastructure (about $1.36B) and C2 transport (about $1.36B), while the FY26 NDAA capped NGC2 obligations at 50 percent pending a report and the HASC FY27 chairman's mark cut $710M (E05 budget sweep, comptroller justification books; FACT, MEDIUM on the exact figures).",
+        "At the joint level, CDAO and NGA have made Maven Smart System the de facto joint C2 developer platform. The IDIQ grew from $480M (May 2024) to a ceiling of about $1.3B through 2029 (DefenseScoop, 2025-05-23; FACT, HIGH; a ceiling, not revenue); the Deputy Secretary's April 2026 directive made AI-enabled decision-making 'the cornerstone' of CJADC2 and put components on an 'aggressive' transition timeline (DefenseScoop, 2026-04-03 and 2026-04-15; FACT, HIGH); Maven was designated a program of record in 2026 (month reported inconsistently across sources; MEDIUM); and the FY2027 request seeks more than $2B in FY27, including more than $1.5B to expand Maven access under a 'Joint Force AI-Enabled Headquarters' initiative and about $2.3B across the FYDP for Maven plus the Joint Fires Network, explicitly to move 'from fragmented deployments to Joint enterprise tooling' (DefenseScoop, 2026-05-28; FACT, HIGH). Palantir reported 25,000 builders on Maven on its Q2 2026 call (company statement; MEDIUM). Open DAGIR, CDAO's May 2024 government-owned-interface initiative for onboarding third-party apps, is the formal counterweight to single-vendor lock-in, but its 2026 status could not be verified (public evidence insufficient). CDAO's enterprise data layer is meanwhile unstable: the 2026 DoD IG Advana audit saw 10 of 12 recommendations rejected and the Advana recompete was cancelled and split into a War Data Platform (E01 sweep; FACT, MEDIUM).",
+        "The Department of the Air Force converged on the same pattern one year later: PAE C3BM (renamed from PEO in January 2026) owns the DAF Battle Network; the ABMS RDT&E request was $1,040.5M in FY26 with Cloud-Based C2 inside it; SciTec (now part of Firefly Aerospace) was selected as the CBC2 operational data fusion provider in Q2 2026; TOC-L MR2 kits are due by end-2026; DASH human-machine-teaming sprints at ShOC-N validate industry software and then transition it to classified networks (af.mil, 2026-09-08; FACT, HIGH); the Integrated Capabilities Command was shelved in December 2025 and Kessel Run folded into an AOC program office (DAF buyer map; FACT, MEDIUM). The Navy's Project Overmatch is fielded to three carrier strike groups (C4ISRNET, 2024-03-06) but its unclassified core line was only $139.8M in FY25 with most funding classified (E05; FACT, MEDIUM), so the Navy is the least observable buyer. Space Force spending is enormous (FY27 request $71.3B including a new $1.5B 'Automate Sat C2' program) but the transport layer is SpaceX-anchored: a $2.29B MILNET/Space Data Network award in May 2026 and SDA Tranche 1 Transport at 63 of 126 satellites by July 16, 2026 after a months-long pause (SpaceNews; FACT, HIGH).",
+        "Value is also moving down and sideways. Downward: DDIL-tolerant synchronization and edge integration are now funded problems (Ivy Mass demonstrated local tracking with later synchronization under degraded comms; PC-C6 still reported intermittent connectivity and overheating equipment; CDAO funded an approximately $100M Edge Data Mesh OTA to Anduril in December 2024; Ditto is under USMC Project Dynamis evaluation; Defense Unicorns raised $136M in January 2026; Anduril acquired Klas for edge hardware) (FACT, MEDIUM-HIGH). Sideways: data-centric security and releasability for coalition and cross-domain sharing is the layer GAO, the DoD CIO zero-trust office and exercise reporting all name as the binding constraint, yet it remains policy-bound and thinly served (FACT, HIGH on the pain; INFERENCE on thin supply). Autonomy C2 is a demonstrated failure point that is pulling money: Replicator delivered 'hundreds' rather than thousands of systems by August 2025, hobbled partly by software unable to command large heterogeneous drone sets (CRS via secondary; FACT, MEDIUM), DIU issued C2/ACT prototype awards to seven companies in November 2024, Replicator was folded into the DAWG in late 2025, and the FY2027 DAWG request is reported at $54.6B alongside a 'Drone Dominance' target of 200,000 drones by 2027 (S13 sweep; FACT, MEDIUM). Finally, the acquisition system itself is being rebuilt around commercial software (see section 5), which changes who can touch this money more than how much money there is."
+      ],
+      "label_notes": "Dollar figures are labeled ceiling vs request vs obligation where known; none of the ceilings ($20B Anduril Army enterprise agreement, $10B Palantir Army EA, $1.3B Maven, $13B pLEO IDIQ) is revenue. The Maven program-of-record month and the FY27 DAWG figure are MEDIUM because sources disagree or could not be read at primary level."
+    },
+    {
+      "heading": "3. Which layers are crowded (and by whom)",
+      "paragraphs": [
+        "Five layers are crowded to the point where a new entrant needs a reason to exist beyond being newer. (a) COP, visualization and geospatial situational awareness: the government-owned TAK family (ATAK, WinTAK, iTAK, TAK Server, plus FreeTAKServer, OpenTAKServer and pytak in open source), Lattice UI, Foundry and Maven apps, Lockheed CommandIQ, Systematic SitaWare and Thales HexaForce in NATO markets, with Booz Allen (through PAR Government and Sit(x)) as the dominant TAK services house; PAR's sale to Booz Allen for a modest sum signals services-priced economics (FACT, HIGH; RECALL on the sale price). (b) Core data platform and middleware: Foundry, Lattice, Raft, Striveworks, Govini, the CDAO Edge Data Mesh, plus every prime's integration platform; the Army has already chosen, and the segment sweep found no price point for a standalone middleware company between 'free government standard' and 'bundled by Anduril/Palantir' (FACT on the baseline; INFERENCE on economics, HIGH). (c) Autonomy and swarm C2 orchestration: Anduril Lattice (Replicator/DAWG, SOCOM $86M, Army enterprise agreement, CCA), Shield AI, Auterion (Nemyx, $130M Series B), Swarm Aero Legion, the L3Harris-led ACT team, Tesseract NOMAD, XTEND XOS and Quantum MOSAIC, with government reference architectures (A-GRA, FANTOM Core, UMAA, STANAG 4586) commoditizing the layer further (FACT, HIGH). (d) Counter-UAS C2: Parsons DroneArmor, Anduril's Army counter-drone fire-control selection (October 2025), Hidden Level ($100M OTA) and many others (FACT, MEDIUM-HIGH). (e) Fire-control C2: IBCS, Aegis, CEC and FAAD C2, closed and safety-certified; not a startup layer at all (FACT, HIGH).",
+        "Three adjacent layers are crowded in a different way: they are owned by well-capitalized specialists who can absorb features. Accredited hosting and DevSecOps is held by Platform One (free to programs), Second Front (Game Warden), Defense Unicorns, Palantir (FedStart, Apollo, IL5/IL6 on-prem and edge since February 2026), the hyperscalers under JWCC and Cloud One integrators (Leidos, AWS $581M, Oracle $88M). Enterprise zero trust and ICAM belongs to Booz Allen (Thunderdome) and Microsoft, and cross-domain solutions are an NSA-assessed oligopoly (Everfox, Owl, General Dynamics Mission Systems, Northrop, Lockheed). Tactical transport software is contested by Anduril, Aalyria, Persistent Systems, Motorola/Silvus (a $4.4B-plus exit) and RII/CodeMettle. In each case, the segment sweeps concluded that the absence of a visible competitor in a sub-niche reflects incumbents' priorities rather than open demand (INFERENCE, HIGH)."
+      ],
+      "label_notes": "Company positioning is FACT where a government award or public product is cited and INFERENCE where the study judged a product 'absorbable'. Vendor participation in NGC2 team sets is vendor-stated; contract values for team members are undisclosed."
+    },
+    {
+      "heading": "4. Which layers remain fragmented, and why fragmentation is not the same as opportunity",
+      "paragraphs": [
+        "The S00 chain map and the seven evidence sweeps converge on seven fragmented layers. (1) DDIL synchronization and edge replication: Ditto plus a few named vendors, while every NGC2 event still finds sync and code faults live (Ivy Sting 4-5 had industry 'fixing the code in almost real time', DVIDS 2026-03-30; FACT, HIGH). (2) Data-centric security, labeling and releasability: the DoD CIO zero-trust office described tagging coordination as 'phone calls, IERs, weeks of negotiation' (2025-09-18); intelligence at WFX 24-03 had to be regenerated on the MPE enclave with REL NATO markings (MIPB 2025); Balikatan 2026's first eight-nation COP took 'more than eight years' and still depends on JICOs and foreign-disclosure officers; INDOPACOM partner data still moved by thumb drive in late 2024 (FACT, HIGH). (3) Assessment, BDA and effects analytics: no named systems and no incumbents found; GAO says DoD cannot measure CJADC2 progress (FACT, HIGH on absence of evidence; not evidence of demand). (4) Sustainment and logistics data at the tactical edge: Air and Rune are the only named NGC2-adjacent entrants; the EBS-C ERP consolidation regressed in 2026 (FACT, MEDIUM). (5) Electromagnetic battle management: no public 2026 evidence beyond the EWPMT-X move onto TAK and DISA's EMBM-J (public evidence insufficient). (6) Test, instrumentation, EW/threat emulation and C2 experimentation tooling: Operation Jailbreak needed about 600 people from 55-80 firms to expose interfaces (DefenseScoop, 2026-05-29; FACT, HIGH). (7) Legacy message-format translation (USMTF, VMF, Link 16, OTH-Gold to modern APIs): small vendors and Systematic, with SBIR-funded translation tools failing to transition for roughly twenty years (E04; FACT, MEDIUM).",
+        "The study then red-teamed all 36 consolidated gaps that sit in these layers, and 35 were killed. The kill reasons repeat with unusual consistency and matter more than any individual gap: the buyer chain breaks at 'program office, budget line or contract vehicle' (the government performs the function itself, as with test and conformance in C5ISR Center's Radio Rodeo and ATEC labs, or has never funded it, as with coalition releasability tooling, which has had demonstrations since 2022 but no program of record); the incumbent platform owner can absorb the feature (Anduril, Palantir, Raft, Ditto, TAK Product Center, IS4S in PNT); and the nationality and clearance gates fall exactly where the value is (classified marking guides, Secret-REL enclaves, USML-controlled EW and fire-control interfaces). Policy, not technology, is the binding constraint on sharing, as both GAO and an industry panelist at AFA 2026 stated ('not actually a technological impediment... policy impediments', af.mil 2026-09-21; FACT, HIGH). Fragmentation in these layers is therefore real, but it is fragmentation of buyers and authorities, not an unserved market waiting for a product (INFERENCE, HIGH)."
+      ],
+      "label_notes": "Pain evidence is FACT/HIGH where it comes from GAO, Army professional journals, DVIDS or DoD CIO webinars; several RFI pointers (sam.gov) are FACT on existence but their text was not read directly because the egress proxy blocked sam.gov. The conclusion that fragmentation is not opportunity is INFERENCE built on 36 gap red teams."
+    },
+    {
+      "heading": "5. Major procurement trends, 2024-2026",
+      "paragraphs": [
+        "OTAs and Commercial Solutions Openings are now the default front door for C2 software. NGC2 was competed through a CSO with rolling windows; the Air Force JADC2 CSO (FA8612-21-S-C001) is open to November 9, 2026 and the Kessel Run DevSecOps CSO to November 2027; the Space Force Kronos family of systems awarded sub-$1M prototype OTs to small commercial vendors in 2026; DIU CSOs remain the main OSD route, with DIU reporting a 51 percent prototype-to-production transition rate for FY2016-2023 and 56 percent cumulative, where 'transition' means any production contract, not scaled fielding (GAO-25-106856; FACT, HIGH). The March 2025 software-acquisition memo made the Software Acquisition Pathway the preferred path and CSO/OTA the default contracting approach, and the November 7, 2025 'Warfighting Acquisition System' memo replaces PEOs with Portfolio Acquisition Executives within two years under a commercial-first policy (media.defense.gov, 2025-11-10; DefenseScoop, 2025-11-07; FACT, HIGH). The FY26 NDAA codified portfolio-acquisition reforms (E05; FACT, MEDIUM). For a startup the practical consequence is that Other Transactions carry no statutory ownership test, unlike SBIR (E07; FACT, HIGH), which is the single most important procurement fact for this founding team.",
+        "Authorization reform is real but unfinished. The February 2022 continuous-ATO memo, the April 24, 2025 Software Fast Track (SWFT) memo and its three RFIs (more than 400 responses), the September 2025 Cybersecurity Risk Management Construct and FedRAMP 20x all push toward automated, evidence-based intake using SBOMs and continuous risk assessment; vendor-side reporting indicates SWFT moved from pilot to an expected requirement in January 2026 (secondary blogs; MEDIUM-LOW). Yet DoD CIO's own 2025 DevSecOps study records authorizing officials 'biased to caution' and unclear reciprocity, an Army CTO memo in September 2025 rated the NGC2 prototype 'very high risk' for lacking access control, logging and app vetting (secondary; MEDIUM), and CMMC's DFARS clause took effect November 10, 2025 while the Phase 2 third-party-assessment transition was suspended in July 2026 (E07; FACT, MEDIUM). Every prior fix has been a policy change, and policy is still moving, so vendors build to a target that shifts yearly (INFERENCE, HIGH).",
+        "Consolidation and new entry are happening at the same time, at different layers. Consolidation: Anduril's ten-year Army enterprise agreement with a $20B ceiling (June 2026), Palantir's Army enterprise agreement with a $10B ceiling (July 2025), Maven's directed transition, the NGC2 common data layer decision, and M&A (Anduril-Klas, Booz Allen-PAR Government, Motorola-Silvus, Firefly-SciTec, the Capella acquisition). New entry: Onebrief (a 2019 startup reported at a $2B-plus valuation with an Army enterprise contract in September 2026; MEDIUM), Air, Striveworks, Govini, Rune, RII, Instant Connect, Ditto and Defense Unicorns all won slots on or around NGC2, but almost always as members of a prime- or Anduril-led team with undisclosed values, entered through exercise self-teaming rather than solicitations (E03; FACT on participation, HIGH; contract values unknown). Traditional primes are not gone: Lockheed leads the 25th ID stack, Northrop holds IBCS ($1.4B LRIP/FRP, about 12 nations requesting export), L3Harris leads the Replicator C2 team, SAIC holds the Joint Fires Network, and Data Link Solutions delivered a $248M Navy MIDS JTRS production order in January 2026 (FACT, HIGH). Record private funding, $49.1B raised by defense-tech startups in 2025, is capital supply, not military demand (E04; FACT, HIGH).",
+        "Budget lines are concentrating into a few large, deliberately flexible pots: NGC2 (about $3.78B FY27 request), Maven/JFN (more than $2B FY27), ABMS/DAF Battle Network ($1,040.5M FY26), CANES ($534.3M FY26), Space Force 'Automate Sat C2' ($1.5B new), DISA Thunderdome and the Coalition Information Environment in O&M, while legacy lines (ITN, CPCE/Mission Command, C2 Fix) are divested or folded in; the 2025 reconciliation law (P.L. 119-21, roughly $150-156B) contains no discrete C2-software line (E05; FACT, MEDIUM-HIGH). Two countervailing facts: Congress is pushing back on flexible funding (the 50 percent NGC2 obligation cap and the $710M HASC cut), and GAO's 2026 annual assessment says average capability delivery now exceeds 12 years while acquisition staffing shrank in 2025 (E01; FACT, HIGH). SBIR/STTR authority lapsed on September 30, 2025 and was restored by S. 3971 on April 13, 2026 through 2031, but the 13 CFR 121.702 ownership test (more than 50 percent owned and controlled by U.S. citizens or permanent residents) is unchanged (E07; FACT, HIGH)."
+      ],
+      "label_notes": "Policy memos and NDAA provisions are FACT/HIGH from primary or reputable secondary sources retrieved this session (GAO-26-108019, media.defense.gov WAS memo, DefenseScoop). SWFT's January 2026 'requirement' status is MEDIUM-LOW (vendor blogs only). Line-item figures come from the E05 comptroller sweep and could not all be re-read at PE level."
+    },
+    {
+      "heading": "6. Primary conclusion for these two founders: what to pursue, what to avoid, and why",
+      "paragraphs": [
+        "The honest headline is that this study did not find a venture-scale opening in U.S. C4ISR software that these two founders can attack in 2026 with $250k. Of 36 consolidated gaps, one survived as borderline and only in a narrowed form: G04, a vendor-neutral composite-assurance engine for assured PNT (an ASPN 2023/pntOS-C-conformant service that ingests several heterogeneous PNT sources and produces per-source health, composite confidence, explainable jam/spoof/fault classification and a fallback recommendation, with a synthetic scenario and replay library), scored 2.5 on market attractiveness and 3.3 on founder fit with MEDIUM confidence. Its case rests on three facts: a program of record (NAVWAR GPNTS) published a software-only topic (DON26BX05-NP004), named itself transition owner, accepted synthetic open-standard data and planned multiple Phase I awards; ASPN 2023 and the pntOS C API went public in January and April 2026, removing the proprietary-interface barrier GAO described in GAO-21-320SP; and GPS denial is now routine (12 DoD interference tests in August-September 2026, global maritime advisories). Its weaknesses are equally factual: the only evidenced vehicle closed on September 23, 2026, no program budget line for awareness software exists (DoD funded MOSA/pntOS integration at $17M against $783M of PNT S&T in FY20-24), IS4S authored the standards and holds an Army NorthStar OTA of up to $41M (April 2026), and the SBIR ownership test collides with the cap table. The recommended pursuit is therefore narrow: spend roughly $100k-$150k over four to five months on the engine rather than a dashboard, take it to NP004 Phase I awardees and the GPNTS integrator as a subcontract component, to OT/CSO doors that carry no ownership test (IWRP, NavalX/ANTX, DIU), and to an unclassified civil or allied maritime operator as a first paying beachhead, and abandon it if a PNT-integrity engineer and a former Navy watchstander cannot be recruited within six months (INFERENCE from the G04 scorecard; MEDIUM).",
+        "Two killed gaps remain useful as paths rather than companies. G29, an open-source 'TAK DDIL bench' (containerized ATAK-CIV and TAK Server nodes behind netem/EMANE link profiles, a sync scorer, CoT/TAK Mission API and public-Lattice-schema contract tests, and an ATAK plugin RBAC/audit/SBOM conformance module), is buildable for $30k-$60k in three to four months, is unclassified by construction, is legal for the non-U.S.-person founder to build (counsel to confirm), and is the best-evidenced way to earn relationships with Jailbreak-series vendors, C5ISR Center's NetModX/Radio Rodeo and an NGC2 team lead's T&E cell; it was killed as a venture because the government owns and resources the function and platform owners give the test environment away (HIGH confidence). G34, offline-first structured ICS/orders/LOGSTAT objects with CRDT merge for TAK-CIV sold to public-safety incident command, is the best bootstrappable fallback (founder fit 3.8, no SBIR, no CUI, EAR99-plausible) but abandons the U.S. defense goal, competes with free TAK Data Sync, Ditto and mature incident-management vendors, and has no moat (MEDIUM confidence). The study's recommended sequence is: (0) counsel-led structuring of the cap table, export classification and a technology control plan before any code that touches controlled data; (1) build the G29 bench and one TAK-CIV integration as public credibility assets; (2) use them to enter an NGC2 team member's or TAK plugin shop's orbit and a NetModX or xTech slot; (3) run the G04 engine as the one product bet, with civil/allied maritime as the revenue hedge; (4) re-evaluate at 12-18 months against the events in section 8, including whether an EU/NATO-domiciled entity (DIANA's 24-month rapid-adoption path, Germany's D-LBO, the UK Digital Targeting Web) offers the German founder a structurally larger market than a U.S.-domiciled ITAR-exposed product (E06; INFERENCE, MEDIUM).",
+        "What to avoid, with reasons: a new data fabric, middleware or platform (the Army and joint decisions are made; no price point exists); a new COP client or generic TAK plugin business (commoditized by government-owned TAK, services-priced); autonomy orchestration or a common controller (Anduril, Shield AI, Auterion plus government reference architectures; fifteen years of common-controller purgatory); cross-domain solutions, CSfC or enterprise ICAM (NSA-assessed oligopoly, sole-source follow-ons); sensors, radios, satellites or edge hardware (capital-intensive, ITAR-adjacent, consolidating); anything specially designed for fire control, EW/direction finding, military UAS control, SIGINT PED or targeting (USML or 600-series drift, deemed-export licensing for the Indonesian founder, clearances that require citizenship and are five-plus years away for both founders); and DISA/JWCC/Thunderdome, DARPA or SBIR-first strategies as a route to first revenue. The recurring reason is the same buyer-chain break: prototype awards, contract ceilings and exercise slots are not revenue, and every fragmented layer in section 4 is fragmented at the level of authorities and budgets, which two students cannot change (INFERENCE, HIGH)."
+      ],
+      "label_notes": "Recommendations are INFERENCE built on the gap scorecards and buyer maps; confidence is MEDIUM for G04, HIGH for the kills of G29 and G34 as ventures, and MEDIUM for the EU/NATO domicile alternative. Nothing here is a legal determination on SBIR eligibility, ITAR/EAR classification, FOCI or immigration; each requires specialist counsel."
+    },
+    {
+      "heading": "7. Research saturation: what was searched and what remains uncertain",
+      "paragraphs": [
+        "The study ran fifteen segment deep dives (S00 architecture plus S01-S14), five buyer maps (joint/OSD, Army, DAF, Navy/USMC, Space Force), seven evidence sweeps (GAO and DoD IG 2019-2026; sam.gov RFIs and CSOs; exercise and experimentation reporting; SBIR/DIU/xTech/AFWERX transition patterns; FY2026-2027 budget justification books and the reconciliation law; allied markets; regulatory and eligibility constraints), twelve company records plus two discovery files, and a gap pipeline that consolidated 71 candidates into 36 registry entries, each red-teamed on market, competition and feasibility. Channels were WebSearch (budget-capped in every stage), Bigdata.com full-text indexes of GAO, af.mil, earnings transcripts and SEC filings, and GitHub code and mirrored documents; WebFetch to .gov, .mil and most news domains was egress-blocked throughout, so many primary documents were read only through search snippets or mirrors. This session added four targeted web checks that confirmed GAO-26-108019 (2026-08-20), the November 2025 WAS memo, the FY27 Maven/JFN request and SWFT's status, and re-read no new primary budget documents.",
+        "Coverage is strong and recent for NGC2, Maven, TITAN, IBCS, the DAF Battle Network, SDA transport, Replicator/DAWG, PC-C6, the TAK/CoT/Lattice data models, the acquisition-reform memos and the founders' regulatory position. Coverage is thin or absent, and marked 'Public evidence insufficient', for: Project Overmatch 2026 specifics (mostly classified); AFATDS/JADOCS/Joint Fires Network 2026 status and the NGC2 fires replacement path; GCCS-J/JPES; the DCGS-N/AF/MC family; cross-domain-solution procurement; electromagnetic battle management; logistics C2 systems below the enterprise layer; the text of the April 2026 Maven transition directive and the September 2025 NGC2 security memo; DODIG-2025-126 findings on mission-partner sharing; comptroller PE-level lines for TITAN, EWPMT, Rainmaker, Army PNT, DAF DCGS, USMC NOTM, SDA BMC3, CDAO and DIU; any Mission Partner Environment or coalition RFI (none surfaced, which is not evidence of opportunity); and any independent sensor-to-shooter timing measurement. No public after-action shortfall list exists for any 2024-2026 exercise. Where the corpus relies on RECALL items they are labeled and were not re-verified this session."
+      ],
+      "label_notes": "This section is a FACT description of the study's own method and limits; judgments of 'strong' versus 'thin' coverage are the analysts' INFERENCE."
+    },
+    {
+      "heading": "8. Top uncertainties further research should resolve",
+      "paragraphs": [
+        "The uncertainties that would most change the conclusion are listed in the top_uncertainties field. In order of leverage for these founders they are: whether NAVWAR re-issues NP004 or a Direct-to-Phase-II, and who the Phase I awardees are (expected around Q1 2027), since the G04 path depends on subcontracting to them; whether a compliant cap table (German founder as controlling U.S.-person owner after permanent residence, Indonesian founder in a non-controlling, non-CUI role) is achievable under 13 CFR 121.702 and AFWERX foreign-national rules, which only counsel can answer; the export classification of a generic PNT-assurance or DDIL-test product (EAR99/5D002 versus USML drift), which determines whether the Indonesian founder can work on the core code; whether Open DAGIR and the Maven program-of-record transition actually produce third-party app onboarding terms, data rights and revenue for small vendors, none of which is public today; whether NGC2 scales beyond two divisions on the FY27 request after the congressional cap and cut, and what the production ecosystem's app-portability and 'reuse applications' terms look like; and whether any government body (C5ISR Center, Army CTO/AO, TAK Product Center) would ever designate a neutral DDIL conformance report as accepted evidence, the only event that would turn G29 from a credibility asset into a business."
+      ],
+      "label_notes": "All items are open questions (HYPOTHESIS status by definition); the expected dates given (NP004 awards around Q1 2027) are INFERENCE from the Navy's published cycle timing."
+    }
+  ],
+  "key_numbers": [
+    {
+      "label": "NGC2 costs identified through FY2026",
+      "value": "about $3.3B; no life-cycle cost estimate; goal 11 divisions and 4 corps by FY2032",
+      "source_url": "https://www.gao.gov/products/gao-26-108019",
+      "note": "GAO-26-108019, 2026-08-20. FACT, HIGH. Re-verified this session."
+    },
+    {
+      "label": "NGC2 FY2027 request",
+      "value": "about $3.78B (C2 applications $488.4M RDT&E; C2 data $306.1M; C2 infrastructure about $1.36B; C2 transport about $1.36B)",
+      "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+      "note": "E05 budget sweep of FY27 justification books; FY26 NDAA caps NGC2 obligations at 50% pending report; HASC FY27 mark cuts $710M. FACT, MEDIUM (PE-level lines not re-read this session)."
+    },
+    {
+      "label": "Maven Smart System / Joint Fires Network FY2027 request",
+      "value": "more than $2B in FY27 (more than $1.5B to expand Maven access); about $2.3B across the FYDP",
+      "source_url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+      "note": "DefenseScoop, 2026-05-28. FACT, HIGH. Request, not appropriation."
+    },
+    {
+      "label": "Maven Smart System contract ceiling",
+      "value": "$480M (May 2024) raised to about $1.3B through 2029 (May 2025)",
+      "source_url": "https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase/",
+      "note": "Ceiling, not revenue. FACT, HIGH."
+    },
+    {
+      "label": "Anduril Army enterprise agreement",
+      "value": "10-year agreement with a $20B ceiling (June 2026); NGC2 prototype OTA about $99.6M (July 2025)",
+      "source_url": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/",
+      "note": "Ceiling is not obligation. FACT, HIGH on ceiling; obligations undisclosed."
+    },
+    {
+      "label": "TITAN production order",
+      "value": "$192M for 8 systems over 18 months (Sept 1, 2026); 9 prototypes fielded; prototype OTA $178M (March 2024)",
+      "source_url": "https://www.army.mil/article/274301/army_tactical_intelligence_targeting_access_node_titan_ground_station_prototype_award",
+      "note": "Production figure from Military Times / Palantir release 2026-09-01 via Bigdata.com. FACT, HIGH. Illustrates the gap between headline ceilings and obligated production."
+    },
+    {
+      "label": "ABMS / DAF Battle Network RDT&E request",
+      "value": "$1,040.5M in FY2026 (CBC2 inside ABMS)",
+      "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+      "note": "E05 sweep. FACT, MEDIUM."
+    },
+    {
+      "label": "Project Overmatch unclassified core line",
+      "value": "$139.8M in FY2025; most funding classified; CANES $534.3M FY2026",
+      "source_url": "https://comptroller.defense.gov/Budget-Materials/",
+      "note": "E05 sweep. FACT, MEDIUM. Navy is the least observable C2 buyer."
+    },
+    {
+      "label": "Operation Jailbreak scale",
+      "value": "about 600 people from 55-80 firms to expose legacy program interfaces (May 2026)",
+      "source_url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units/",
+      "note": "DefenseScoop 2026-05-29 per G29 scorecard; URL given is the related scaling article in the S00 source list. FACT, HIGH."
+    },
+    {
+      "label": "DIU prototype-to-production transition rate",
+      "value": "51% of completed prototypes FY2016-2023 (GAO); 56% cumulative reported by DIU",
+      "source_url": "https://www.gao.gov/products/gao-25-106856",
+      "note": "'Transition' means any production contract or program adoption, not scaled fielding. FACT, HIGH."
+    },
+    {
+      "label": "IBCS status",
+      "value": "full-rate production since November 2025; $1.4B LRIP/FRP contract; Poland WISLA FOC December 2025; about 12 nations requested export",
+      "source_url": "https://app.bigdata.com/documents/712690C151716D678C3797503B2E4A19",
+      "note": "Northrop releases and Defense Post 2026-03-18 via Bigdata.com. FACT, HIGH. Fire-control C2 is closed to startups."
+    },
+    {
+      "label": "SDA Transport Layer Tranche 1",
+      "value": "63 of 126 satellites on orbit by July 16, 2026; SpaceX MILNET/Space Data Network award $2.29B (May 26, 2026)",
+      "source_url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+      "note": "SpaceNews via Bigdata.com. FACT, HIGH. Ceiling/obligation split for the SpaceX award not public."
+    },
+    {
+      "label": "Defense-tech private funding 2025",
+      "value": "$49.1B raised by defense-tech startups",
+      "source_url": "https://www.gao.gov/products/gao-25-107942",
+      "note": "E04 sweep (funding figure from industry reporting; GAO URL is for the SBIR transition-measurement finding cited alongside it). Capital supply is not military demand. FACT, MEDIUM."
+    },
+    {
+      "label": "Assured-PNT integration funding vs S&T",
+      "value": "$17M for open-architecture/pntOS integration vs $783M PNT S&T, FY2020-2024",
+      "source_url": "https://www.gao.gov/products/gao-21-320sp",
+      "note": "GAO-21-320SP, 2021-05-10. FACT, HIGH. Central to the G04 budget weakness."
+    },
+    {
+      "label": "SBIR/STTR ownership test",
+      "value": "more than 50% owned and controlled by U.S. citizens or permanent residents (13 CFR 121.702); authority restored 2026-04-13 through 2031",
+      "source_url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFR6c8a3b8c4c1a4d3/section-121.702",
+      "note": "E07 sweep. FACT, HIGH on the rule; application to this cap table needs counsel."
+    }
+  ],
+  "primary_conclusion": "Modern C4ISR has re-formed around commercially owned data platforms (Anduril Lattice and Palantir Foundry for the Army since June 2026, Palantir Maven at the joint level, PAE C3BM's DAF Battle Network, a largely classified Navy Overmatch) with app ecosystems on top, and 2024-2026 procurement has shifted to OTAs, CSOs, the software pathway, SWFT-style continuous authorization and a commercial-first 'Warfighting Acquisition System'; money is concentrating into a few flexible pots (NGC2 about $3.78B FY27 request, Maven/JFN more than $2B) while Congress caps and cuts them. For these two founders the study did not find a venture-scale opening: of 36 red-teamed gaps, 35 died on the same three facts (the buyer chain breaks at program office, budget line or vehicle; the platform owner or a government lab can absorb the feature; and nationality, clearance and export-control gates fall exactly where the value is). The one borderline survivor is a narrow, vendor-neutral assured-PNT composite-assurance engine (G04) pursued as a subcontract component to NAVWAR NP004 awardees, through OT/CSO doors that carry no ownership test, and into an unclassified civil/allied maritime beachhead, contingent on recruiting a PNT-integrity engineer and a former Navy watchstander within six months. The recommended sequence is counsel-led structuring first, then a sub-$60k open-source TAK DDIL conformance bench (G29) as a credibility asset, then the G04 engine as the single product bet, with an EU/NATO-domiciled entity as an explicit alternative for the German founder; avoid platforms, COP clients, autonomy orchestration, CDS/ICAM, hardware and anything specially designed for fire control, EW, targeting or military UAS control. Confidence: HIGH on the landscape and the kills, MEDIUM on the G04 path.",
+  "top_uncertainties": [
+    "Whether NAVWAR re-issues topic NP004 (closed 2026-09-23) or offers a Direct-to-Phase-II, and who the Phase I awardees are (expected around Q1 2027); the G04 path depends on subcontracting to them or to the GPNTS integrator.",
+    "Whether a SBIR-compliant cap table is achievable for this team under 13 CFR 121.702 and AFWERX foreign-national work rules, and on what timeline the German founder's permanent residence is granted; requires counsel, not analyst judgment.",
+    "The export classification (EAR99/5D002 vs USML or 600-series) of a generic PNT-assurance engine or DDIL-test harness, which determines whether the Indonesian founder can work on core code and whether a technology control plan suffices.",
+    "Whether Open DAGIR and the 2026 Maven program-of-record transition publish third-party app onboarding terms, data rights and revenue-sharing for small vendors; nothing public exists today, and the program-of-record month itself is reported inconsistently.",
+    "Whether NGC2 scales past two divisions on the FY27 request after the 50 percent obligation cap and the $710M HASC cut, and what the production ecosystem's app-portability ('reuse applications') and team-membership terms are; GAO's recommended unit-by-year schedule does not yet exist.",
+    "Whether any government body (C5ISR Center, Army CTO/AO, TAK Product Center) would designate a neutral DDIL/API conformance report as accepted pre-event or acceptance evidence; this is the only event that would turn G29 from a credibility asset into a business.",
+    "Project Overmatch's 2026 scope, spend and Software Armory intake terms, which are mostly classified; the Navy may be a larger or smaller software buyer than the unclassified $139.8M core line suggests.",
+    "The 2026 status of the fires chain (AFATDS/JADOCS/Joint Fires Network) and its NGC2 replacement path, GCCS-J/JPES, and cross-domain-solution procurement, all marked 'Public evidence insufficient'; these determine whether legacy-translation demand is real or already assigned.",
+    "Whether SWFT actually became a mandatory authorization route in 2026 (vendor-blog evidence only) and whether reciprocity improves, since ATO friction is the shared gate for every app-layer entrant.",
+    "Whether EU/NATO instruments (DIANA rapid adoption, EDF/EDIP control tests, Germany's D-LBO, the UK Digital Targeting Web) give an EU-domiciled company founded by the German founder a structurally larger addressable market than a U.S.-domiciled ITAR-exposed product; the study rates this INFERENCE/MEDIUM and it needs both counsel and a market test."
+  ],
+  "saturation_statement": "This synthesis rests on fifteen segment deep dives, five buyer maps, seven evidence sweeps, fourteen company records and a 71-candidate to 36-entry gap registry with full red teams; it was searched through WebSearch (capped in every stage), Bigdata.com full-text indexes (GAO, af.mil, transcripts, SEC filings) and GitHub code, with WebFetch to .gov, .mil and most news domains egress-blocked throughout, and this session used four targeted WebSearch calls to re-verify GAO-26-108019 (2026-08-20), the November 2025 Warfighting Acquisition System memo, the FY27 Maven/JFN request and SWFT's status. Coverage is strong for NGC2, Maven, TITAN, IBCS, DAF Battle Network, SDA transport, Replicator/DAWG, PC-C6, the TAK/CoT/Lattice data models, acquisition-reform memos and the founders' regulatory position. It is thin or absent (marked 'Public evidence insufficient') for Overmatch specifics, the fires chain (AFATDS/JADOCS/JFN), GCCS-J/JPES, the DCGS family, cross-domain-solution procurement, electromagnetic battle management, tactical logistics C2 systems, the texts of the April 2026 Maven directive and the September 2025 NGC2 security memo, DODIG-2025-126 findings, PE-level budget lines for a dozen programs, any MPE/coalition RFI (none found; not evidence of opportunity) and any independent sensor-to-shooter timing measurement. RECALL items in the corpus are labeled and were not re-verified this session; no contract numbers, dollar amounts, dates or URLs were invented, and where sources conflict (Maven program-of-record month) the conflict is stated rather than resolved.",
+  "sources": [
+    {
+      "url": "https://www.gao.gov/products/gao-26-108019",
+      "title": "GAO-26-108019 Army Modernization: Better Schedule and Cost Information Needed to Support Scaling Battlefield Network",
+      "pub_date": "2026-08-20"
+    },
+    {
+      "url": "https://defensescoop.com/2026/08/20/gao-report-army-ngc2-battlefield-network-modernization/",
+      "title": "DefenseScoop: GAO warns information gaps could hinder Army's battlefield network modernization plans",
+      "pub_date": "2026-08-20"
+    },
+    {
+      "url": "https://www.army.mil/article/294284/army_leaders_next_generation_command_and_control_ready_to_scale",
+      "title": "army.mil: Army leaders: Next Generation Command and Control 'ready to scale'",
+      "pub_date": "2026-08-03"
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-25-106454",
+      "title": "GAO-25-106454 Defense Command and Control: Further Progress Hinges on Establishing a Comprehensive Framework",
+      "pub_date": "2025-04-08"
+    },
+    {
+      "url": "https://defensescoop.com/2026/05/28/dod-fy27-budget-cjadc2-maven-smart-system-palantir/",
+      "title": "DefenseScoop: DOD wants more than $2B in fiscal 2027 to move beyond 'fragmented' CJADC2 deployments",
+      "pub_date": "2026-05-28"
+    },
+    {
+      "url": "https://defensescoop.com/2026/04/03/palantir-maven-feinberg-directive/",
+      "title": "DefenseScoop: Feinberg's new Maven directive sets AI-enabled decision-making as 'the cornerstone' for CJADC2",
+      "pub_date": "2026-04-03"
+    },
+    {
+      "url": "https://defensescoop.com/2026/04/15/palantir-maven-smart-system-pentagon-program-transition-feinberg/",
+      "title": "DefenseScoop: DOD components face 'aggressive' timeline for Maven Smart System transition",
+      "pub_date": "2026-04-15"
+    },
+    {
+      "url": "https://defensescoop.com/2025/05/23/dod-palantir-maven-smart-system-contract-increase/",
+      "title": "DefenseScoop: DOD raises Maven Smart System contract ceiling",
+      "pub_date": "2025-05-23"
+    },
+    {
+      "url": "https://defensescoop.com/2026/06/22/army-taps-anduril-lead-ngc2-common-data-layer-baseline/",
+      "title": "DefenseScoop: Army taps Anduril as lead for NGC2 common data layer baseline",
+      "pub_date": "2026-06-22"
+    },
+    {
+      "url": "https://defensescoop.com/2026/07/31/army-ngc2-start-scaling-parts-to-more-units/",
+      "title": "DefenseScoop: Ready, but not done: Army will start scaling parts of NGC2",
+      "pub_date": "2026-07-31"
+    },
+    {
+      "url": "https://www.army.mil/article/287180/army_announces_next_generation_command_and_control_ngc2_prototype_award",
+      "title": "army.mil: Army announces NGC2 prototype award",
+      "pub_date": "2025-07"
+    },
+    {
+      "url": "https://www.army.mil/article/292999/ivy_mass_exercises_ngc2_at_division_scale",
+      "title": "army.mil: Ivy Mass exercises NGC2 at division scale",
+      "pub_date": "2026-06-03"
+    },
+    {
+      "url": "https://www.dvidshub.net/news/571002/simulated-threat-environment-pushes-armys-ngc2-network-its-limits-pc-c6",
+      "title": "DVIDS: Simulated threat environment pushes NGC2 network to its limits at PC-C6",
+      "pub_date": "2026-07-29"
+    },
+    {
+      "url": "https://media.defense.gov/2025/Nov/10/2003819439/-1/-1/1/TRANSFORMING-THE-DEFENSE-ACQUISITION-SYSTEM-INTO-THE-WARFIGHTING-ACQUISITION-SYSTEM-TO-ACCELERATE-FIELDING-OF-URGENTLY-NEEDED-CAPABILITIES-TO-OUR-WARRIORS.PDF",
+      "title": "Memorandum: Transforming the Defense Acquisition System into the Warfighting Acquisition System",
+      "pub_date": "2025-11-10"
+    },
+    {
+      "url": "https://defensescoop.com/2025/11/07/hegseth-acquisition-transformation-speech-memo-guidance/",
+      "title": "DefenseScoop: Hegseth looking to sideline laggards in acquisition community, industry",
+      "pub_date": "2025-11-07"
+    },
+    {
+      "url": "https://defensescoop.com/2025/06/09/katie-arrington-swft-software-fast-track/",
+      "title": "DefenseScoop: Software Fast Track (SWFT) initiative",
+      "pub_date": "2025-06-09"
+    },
+    {
+      "url": "https://govciomedia.com/pentagon-swft-rfis-back-shift-to-continuous-software-authorization/",
+      "title": "GovCIO Media: Pentagon SWFT responses back shift to continuous software authorization",
+      "pub_date": "2025"
+    },
+    {
+      "url": "https://www.schellman.com/blog/federal-compliance/current-state-of-federal-and-dod-software-security",
+      "title": "Schellman: Current state of federal and DoD software security (SWFT status, secondary)",
+      "pub_date": "2026"
+    },
+    {
+      "url": "https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf",
+      "title": "DoD Zero Trust Strategy (target level by FY2027)",
+      "pub_date": "2022-11"
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-25-106856",
+      "title": "GAO-25-106856 Defense Innovation Unit prototype transition outcomes",
+      "pub_date": "2025"
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-25-107942",
+      "title": "GAO-25-107942 DoD cannot comprehensively measure SBIR transition outcomes",
+      "pub_date": "2025-09"
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-21-320sp",
+      "title": "GAO-21-320SP Defense Navigation Capabilities: DOD is developing positioning, navigation, and timing technologies to complement GPS",
+      "pub_date": "2021-05-10"
+    },
+    {
+      "url": "https://www.gao.gov/products/gao-24-106841",
+      "title": "GAO-24-106841 GPS M-code and alternative PNT status",
+      "pub_date": "2024"
+    },
+    {
+      "url": "https://comptroller.defense.gov/Budget-Materials/",
+      "title": "DoD Comptroller FY2027 budget justification materials (NGC2, ABMS, CANES, Overmatch, Space Force lines)",
+      "pub_date": "2026-04-21"
+    },
+    {
+      "url": "https://www.dvidshub.net/news/balikatan-2026-debuts-groundbreaking-common-operating-picture",
+      "title": "DVIDS: Balikatan 2026 debuts eight-nation common operating picture",
+      "pub_date": "2026-05"
+    },
+    {
+      "url": "https://mipb.ikn.army.mil/issues/continuous-transformation-2025/multinational-intelligence-sharing/",
+      "title": "MIPB: Multinational intelligence sharing lessons (WFX 24-03)",
+      "pub_date": "2025"
+    },
+    {
+      "url": "https://www.defenseone.com/defense-systems/2024/11/indopacom-replacing-pile-partner-nation-networks-just-one/401129/",
+      "title": "Defense One: INDOPACOM replacing pile of partner-nation networks with just one",
+      "pub_date": "2024-11-18"
+    },
+    {
+      "url": "https://mwi.westpoint.edu/shattering-the-software-stovepipes-how-to-close-the-us-militarys-technology-integration-gap/",
+      "title": "MWI: Shattering the software stovepipes (CDAO Edge Data Mesh, NGC2 data-mesh prototypes)",
+      "pub_date": "2026-02"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/9E2BEB2082C239A81F57548C33E2B4C6",
+      "title": "af.mil: Connecting the fight: AFA 2026 panel explores next-generation DAF battle management [via Bigdata.com]",
+      "pub_date": "2026-09-21"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/F4AB40CDA0A70FA20C299227E5924326",
+      "title": "af.mil: DAF accelerates joint C2 with AI, Space Force integration in latest DASH experiment [via Bigdata.com]",
+      "pub_date": "2026-09-08"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/7EEA47601AAC5265ECD90F7F62F6F82F",
+      "title": "Firefly Aerospace Q2 2026 earnings call (SciTec CBC2 data fusion option) [via Bigdata.com]",
+      "pub_date": "2026-08-11"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/31AE4EC0CBCC838647F3DE89E15BA345",
+      "title": "Palantir Q2 2026 earnings call transcript [via Bigdata.com]",
+      "pub_date": "2026-08-03"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/712690C151716D678C3797503B2E4A19",
+      "title": "Defense Post: Northrop Grumman accelerates IBCS delivery (FRP Nov 2025) [via Bigdata.com]",
+      "pub_date": "2026-03-18"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/015102EDF952836E7C4F666548815F2B",
+      "title": "SpaceNews: SDA Tranche 1 Transport Layer status [via Bigdata.com]",
+      "pub_date": "2026-07-16"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/037FB6896768BCA8CE54698E1176AD60",
+      "title": "SpaceNews: SpaceX $2.29B MILNET / Space Data Network award [via Bigdata.com]",
+      "pub_date": "2026-05-26"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/D6545A884AA0F9F8A05AD7F15149905F",
+      "title": "Tech Times citing CRS: Replicator delivered hundreds, not thousands [via Bigdata.com]",
+      "pub_date": "2026-07-16"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/C3590048D385A1E39877C2D5FD514C51",
+      "title": "BAE/Data Link Solutions: $248M MIDS JTRS Navy production contract [via Bigdata.com]",
+      "pub_date": "2026-01-28"
+    },
+    {
+      "url": "https://app.bigdata.com/documents/3EAA3D4A0EFB0C64D27718E187769C4D",
+      "title": "Military Times: TITAN moves to production, $192M for 8 systems [via Bigdata.com]",
+      "pub_date": "2026-09-02"
+    },
+    {
+      "url": "https://www.c4isrnet.com/battlefield-tech/c2-comms/2024/03/06/overmatch-networking-installed-on-3-carrier-strike-groups-says-boyle/",
+      "title": "C4ISRNET: Overmatch networking installed on 3 carrier strike groups",
+      "pub_date": "2024-03-06"
+    },
+    {
+      "url": "https://github.com/anduril/lattice-sdk-python",
+      "title": "Anduril Lattice Python SDK (entity model, mil_view, MilStd2525C)",
+      "pub_date": "2026-09-22"
+    },
+    {
+      "url": "https://github.com/TAK-Product-Center/Server",
+      "title": "TAK Server (TAK Protocol v1 protobuf)",
+      "pub_date": "2026-09-22"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFR6c8a3b8c4c1a4d3/section-121.702",
+      "title": "13 CFR 121.702 SBIR/STTR size and eligibility (ownership and control test)",
+      "pub_date": "n/a"
+    },
+    {
+      "url": "https://www.businesswire.com/news/home/20260225394227/en/Vantor-Awarded-Contract-Worth-up-to-$217M-to-Power-Immersive-Global-3D-Terrain-for-U.S.-Army-Training-and-Mission-Rehearsal",
+      "title": "Business Wire: Vantor OWT 3D terrain contract up to $217M (ceiling)",
+      "pub_date": "2026-02-25"
+    }
+  ]
+}

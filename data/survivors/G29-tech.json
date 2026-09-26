@@ -1,0 +1,1458 @@
+{
+  "id": "G29",
+  "title": "Vendor-neutral DDIL test and conformance harness for tactical software (link emulation, multi-node TAK/CoT sync scoring, pre-Jailbreak API contract tests, TAK plugin RBAC/audit conformance)",
+  "version_designed_for": "NARROWER VERSION ONLY. G29 was KILLED as a venture (G29-score.json verdict 'kill', confidence HIGH: no requirement owner, program office, budget line or vehicle; the government resources DDIL test and conformance itself through C5ISR Center Radio Rodeo / NetModX, ATEC and the APG/Huntsville software integration labs, and - new this session - the Reveille Forge Integrated Development Environment opened in July 2026 (Breaking Defense 2026-07, FACT/MEDIUM)). This diligence therefore designs the residual form named in the score file: an OPEN-SOURCE 'TAK DDIL bench' (containerised ATAK-CIV / TAK Server nodes behind Linux tc/netem or EMANE/CORE link profiles from 1 Mbps to 1 kbps with scripted partitions and reconnect storms, a sync scorer, a CoT/TAK Mission API and public-Lattice-schema contract-test CLI) plus an ATAK plugin RBAC/audit/SBOM conformance module that emits a signed OSCAL-style bundle. It is sized at $30-60k and 3-4 months, is explicitly a credibility and validation asset and a small fixed-fee readiness service, NOT a venture-scale company, and every plan and milestone below is built to TEST the decisive doubt: does a named sponsor with a budget line or vehicle exist (PdM Application Store and Pipeline under PM C2 Applications, DEVCOM C5ISR Center, ATEC, Reveille Forge, a Team Anduril / Team Lockheed T&E cell, TAK Product Center, or paying Jailbreak-series vendors) within 90 days of first demo? If the kill criteria trip, the founders stop at the open-source release, keep the relationships and put the remaining capital elsewhere. Nothing here is a legal determination on ITAR/EAR/FOCI/SBIR/immigration; constraints are described for counsel.",
+  "architecture": {
+    "prose": "INPUTS. Three input classes enter the bench: (1) a scenario file (YAML) that declares a link profile - bandwidth from 1 Mbps down to 1 kbps as in the DARPA FLUID regime (darpa.mil 2025-03-28, FACT/HIGH), latency, jitter, loss, and a timed schedule of partitions and reconnect storms across a named node topology; (2) synthetic traffic - a CoT generator that emits position, chat, markers, mission-data-sync objects and simulated sensor tracks (MAVLink-derived UAS positions from ArduPilot SITL converted to CoT), with a ground-truth ledger of every object, its priority tag and emission time; (3) the system under test (SUT) - a vendor's ATAK plugin APK, a CoT feed/gateway, a TAK Server Mission API client, or a Lattice SDK client exercised against the free Lattice Sandbox (developer.anduril.com sandboxes page, FACT/HIGH that sandboxes exist; licence terms not retrievable this session - EGRESS_BLOCKED). Public schemas (CoT XML event schema, TAK Protocol Version 1 protobuf, TAK Server Marti REST / Mission API documentation, Lattice protobufs on the Buf Schema Registry) and role/tag fixtures (synthetic users, roles and data tags) are the fourth input. COMPUTE. The whole bench runs on one commodity x86 host (mini PC or workstation, 32-64 GB RAM) running Docker/Podman: TAK Server containers, ATAK-CIV in Android emulators (x86_64 system images) or on a handful of physical Android phones via ADB, a netem/tc controller (or, for MANET-style topologies, an EMANE + CORE node), a capture/ledger service, the scorer and the report builder. Cloud is optional (a single large VM) for parallel runs. CORE SOFTWARE. Six modules: (a) Scenario Runner - translates the YAML into per-link tc/netem qdiscs (or EMANE event-service commands) on the container network namespaces and executes the partition schedule with wall-clock precision; (b) Traffic Generator and Ledger - emits CoT with unique IDs, priority tags and timestamps into the source nodes and records ground truth; (c) Multi-node Sync Scorer - captures what each ATAK-CIV/TAK Server node actually received (via TAK Server logs, Marti API queries and an instrumented observer plugin on the emulators) and computes time-to-arrival of priority objects, duplicates and conflicting versions after reconnect, missing objects, ordering violations and offered load versus link capacity during the reconnect storm; (d) Contract-Test Engine - drives OpenAPI-based property tests (Schemathesis-style) against a vendor's Mission API usage and buf/protobuf breaking-change and lint checks against Lattice protos, from a capture or spec; (e) Plugin Conformance Module - installs the plugin on emulator nodes, drives it with Appium/ADB scripts under synthetic roles and tagged data, and produces an RBAC matrix (which role could see/do what), an audit-event coverage table (which security-relevant actions produced a log entry, mapped to a NIST SP 800-53 AU-2-style list), a static-permission/manifest review and an SBOM (CycloneDX via Syft); (f) Report/Bundle Signer - renders HTML/JSON and an OSCAL assessment-results-style JSON bundle, signs it with Sigstore cosign. INTERFACES. CoT over TLS (TAK Server streaming port) and TAK Protocol v1 protobuf; TAK Server Marti REST / Mission API; Lattice gRPC/REST against the sandbox; Linux tc/netem via netlink and the EMANE event API; ADB/Appium to Android nodes; OSCAL, CycloneDX/SPDX and JSON out. OUTPUTS. A scored, reproducible report per run; a signed OSCAL-style conformance bundle; an SBOM; and an anonymised comparative leaderboard across SUTs. USERS. Vendor integration engineers preparing for a Jailbreak-series sprint or PdM ASaP onboarding; prime and government T&E engineers who need comparable pre-event numbers; and AO/ISSM reviewers who consume the RBAC/audit bundle. Everything is unclassified by construction; realism plateaus at 'generic DDIL' unless a lab supplies controlled waveform models or traces, which would require U.S.-person handling (constraint for counsel).",
+    "graph": {
+      "nodes": [
+        {
+          "id": "I1",
+          "label": "Scenario YAML: link profile 1 Mbps-1 kbps, latency/loss, partition and reconnect schedule, topology",
+          "kind": "input"
+        },
+        {
+          "id": "I2",
+          "label": "Synthetic CoT / MAVLink-derived traffic with priority tags and ground-truth ledger",
+          "kind": "input"
+        },
+        {
+          "id": "I3",
+          "label": "System under test: vendor ATAK plugin APK, CoT feed/gateway, Mission API client, Lattice SDK client",
+          "kind": "input"
+        },
+        {
+          "id": "I4",
+          "label": "Public schemas: CoT XML, TAK Protocol v1 protobuf, TAK Server Marti/Mission API docs, Lattice protos (Buf Schema Registry)",
+          "kind": "input"
+        },
+        {
+          "id": "I5",
+          "label": "Role and data-tag fixtures (synthetic users, roles, classification-like tags)",
+          "kind": "input"
+        },
+        {
+          "id": "C1",
+          "label": "Orchestration host: x86 mini PC / workstation, 32-64 GB RAM, Docker/Podman",
+          "kind": "compute"
+        },
+        {
+          "id": "C2",
+          "label": "Android nodes: x86_64 Android emulators and 2-4 physical phones running ATAK-CIV",
+          "kind": "compute"
+        },
+        {
+          "id": "C3",
+          "label": "Optional cloud VM for parallel runs; optional EMANE/CORE node for MANET-style topologies",
+          "kind": "compute"
+        },
+        {
+          "id": "K1",
+          "label": "Scenario Runner (tc/netem qdisc controller, EMANE event driver, partition scheduler)",
+          "kind": "core"
+        },
+        {
+          "id": "K2",
+          "label": "TAK Server containers (2-3 federated or single with mission sync)",
+          "kind": "core"
+        },
+        {
+          "id": "K3",
+          "label": "ATAK-CIV nodes with observer plugin (receive log, timestamps)",
+          "kind": "core"
+        },
+        {
+          "id": "K4",
+          "label": "Capture and Ledger service (ground truth vs observed, pcap)",
+          "kind": "core"
+        },
+        {
+          "id": "K5",
+          "label": "Sync Scorer (time-to-arrival, duplicates/conflicts, ordering, saturation)",
+          "kind": "core"
+        },
+        {
+          "id": "K6",
+          "label": "Contract-Test Engine (OpenAPI property tests, protobuf lint/breaking checks, capture replay)",
+          "kind": "core"
+        },
+        {
+          "id": "K7",
+          "label": "Plugin Conformance Module (RBAC matrix, audit-event coverage, manifest/permission review, SBOM)",
+          "kind": "core"
+        },
+        {
+          "id": "K8",
+          "label": "Report and Bundle Signer (HTML/JSON, OSCAL-style assessment results, Sigstore signature)",
+          "kind": "core"
+        },
+        {
+          "id": "N1",
+          "label": "CoT over TLS streaming port; TAK Protocol v1 protobuf",
+          "kind": "interface"
+        },
+        {
+          "id": "N2",
+          "label": "TAK Server Marti REST / Mission API (data sync)",
+          "kind": "interface"
+        },
+        {
+          "id": "N3",
+          "label": "Lattice gRPC/REST against free Lattice Sandbox",
+          "kind": "interface"
+        },
+        {
+          "id": "N4",
+          "label": "Linux tc/netem netlink; EMANE event service API",
+          "kind": "interface"
+        },
+        {
+          "id": "N5",
+          "label": "ADB / Appium to Android nodes",
+          "kind": "interface"
+        },
+        {
+          "id": "N6",
+          "label": "OSCAL JSON, CycloneDX/SPDX SBOM, JSON/HTML report",
+          "kind": "interface"
+        },
+        {
+          "id": "O1",
+          "label": "Scored reproducible DDIL run report (per SUT, per scenario)",
+          "kind": "output"
+        },
+        {
+          "id": "O2",
+          "label": "Signed OSCAL-style conformance bundle (RBAC matrix, audit coverage, SBOM)",
+          "kind": "output"
+        },
+        {
+          "id": "O3",
+          "label": "Contract-test pass/fail matrix against CoT/Mission API/Lattice schemas",
+          "kind": "output"
+        },
+        {
+          "id": "O4",
+          "label": "Anonymised comparative leaderboard across SUTs",
+          "kind": "output"
+        },
+        {
+          "id": "U1",
+          "label": "Vendor integration engineer before a Jailbreak-series sprint or PdM ASaP onboarding",
+          "kind": "user"
+        },
+        {
+          "id": "U2",
+          "label": "Prime / government T&E engineer (C5ISR Center, ATEC, Reveille Forge, Team Anduril/Lockheed)",
+          "kind": "user"
+        },
+        {
+          "id": "U3",
+          "label": "AO / ISSM reviewer consuming RBAC-audit-SBOM evidence",
+          "kind": "user"
+        }
+      ],
+      "edges": [
+        {
+          "from": "I1",
+          "to": "K1",
+          "label": "scenario parsed into link states and schedule"
+        },
+        {
+          "from": "K1",
+          "to": "N4",
+          "label": "applies qdiscs / EMANE events per link"
+        },
+        {
+          "from": "N4",
+          "to": "K2",
+          "label": "degrades server-to-server and client links"
+        },
+        {
+          "from": "N4",
+          "to": "K3",
+          "label": "degrades client links, partitions nodes"
+        },
+        {
+          "from": "I2",
+          "to": "K3",
+          "label": "injected at source nodes via observer plugin / CoT socket"
+        },
+        {
+          "from": "I2",
+          "to": "K4",
+          "label": "ground-truth ledger entries"
+        },
+        {
+          "from": "I3",
+          "to": "K3",
+          "label": "plugin APK installed on nodes"
+        },
+        {
+          "from": "I3",
+          "to": "K6",
+          "label": "client spec or traffic capture"
+        },
+        {
+          "from": "I4",
+          "to": "K6",
+          "label": "reference schemas"
+        },
+        {
+          "from": "I5",
+          "to": "K7",
+          "label": "roles and tags for conformance drive"
+        },
+        {
+          "from": "K3",
+          "to": "N1",
+          "label": "CoT to/from TAK Server"
+        },
+        {
+          "from": "N1",
+          "to": "K2",
+          "label": "server ingest and fan-out"
+        },
+        {
+          "from": "K2",
+          "to": "N2",
+          "label": "Mission API state for reconciliation queries"
+        },
+        {
+          "from": "N2",
+          "to": "K4",
+          "label": "observed state per node"
+        },
+        {
+          "from": "K3",
+          "to": "N5",
+          "label": "received-object logs pulled via ADB"
+        },
+        {
+          "from": "N5",
+          "to": "K4",
+          "label": "observed arrivals with timestamps"
+        },
+        {
+          "from": "K4",
+          "to": "K5",
+          "label": "ground truth vs observed"
+        },
+        {
+          "from": "K6",
+          "to": "N3",
+          "label": "exercises Lattice client against sandbox"
+        },
+        {
+          "from": "K7",
+          "to": "N5",
+          "label": "drives plugin under roles, harvests logs"
+        },
+        {
+          "from": "K5",
+          "to": "K8",
+          "label": "sync metrics"
+        },
+        {
+          "from": "K6",
+          "to": "K8",
+          "label": "contract results"
+        },
+        {
+          "from": "K7",
+          "to": "K8",
+          "label": "RBAC matrix, audit coverage, SBOM"
+        },
+        {
+          "from": "K8",
+          "to": "N6",
+          "label": "serialise and sign"
+        },
+        {
+          "from": "N6",
+          "to": "O1",
+          "label": ""
+        },
+        {
+          "from": "N6",
+          "to": "O2",
+          "label": ""
+        },
+        {
+          "from": "N6",
+          "to": "O3",
+          "label": ""
+        },
+        {
+          "from": "O1",
+          "to": "O4",
+          "label": "aggregated across runs"
+        },
+        {
+          "from": "O1",
+          "to": "U1",
+          "label": "pre-sprint readiness evidence"
+        },
+        {
+          "from": "O3",
+          "to": "U1",
+          "label": "fix list before onboarding"
+        },
+        {
+          "from": "O4",
+          "to": "U2",
+          "label": "comparable triage numbers"
+        },
+        {
+          "from": "O2",
+          "to": "U3",
+          "label": "AO-visible access-control and audit evidence"
+        },
+        {
+          "from": "C1",
+          "to": "K1",
+          "label": "hosts"
+        },
+        {
+          "from": "C2",
+          "to": "K3",
+          "label": "hosts"
+        },
+        {
+          "from": "C3",
+          "to": "K1",
+          "label": "optional EMANE/CORE and parallel runs"
+        }
+      ]
+    },
+    "dependencies": [
+      "ATAK-CIV and its SDK remain open source on DoD GitHub (deptofdefense/AndroidTacticalAssaultKit-CIV, FACT/HIGH); TAK-GOV/MIL builds are distribution-controlled, so any behaviour divergence between CIV and GOV/MIL builds is outside the bench (E07-F25).",
+      "TAK Server public source (TAK-Product-Center/Server) including the takcl test framework and Mission API; LICENSE.md includes a linking provision for gRPC/protobuf libraries (github.com search summary, FACT/MEDIUM); the exact copyleft terms must be read before combining code (RECALL: GPL-family with linking exception - not re-verified this session, MEDIUM).",
+      "TAK Protocol Version 1 protobuf and CoT XML as implemented by pytak/takproto (Apache-2.0, RECALL) for the traffic generator.",
+      "Linux kernel tc/netem (in every distro) and container network namespaces for link emulation; EMANE (adjacentlink/emane, NRL-sponsored, FACT/HIGH) and CORE (coreemu/core, BSD-2-Clause, FACT/HIGH) for MANET-style topologies; Adjacent Link SRW/WNW waveform ports are NOT assumed available (controlled).",
+      "Lattice SDK protobufs published on the Buf Schema Registry (buf.build/anduril/lattice-sdk, FACT/HIGH); the language SDK repos were archived 2025-07-24 in favour of BSR-generated code (FACT/MEDIUM); the Lattice SDK License Agreement was updated 2026-07-31 (FACT/MEDIUM) but its terms were not retrievable (EGRESS_BLOCKED) - whether it permits publishing benchmark results or building third-party test tooling is UNVERIFIED and must be read before the Lattice module is released.",
+      "Lattice Sandboxes (free, simulated data) as the only runtime for the Lattice contract tests; access is at Anduril's discretion (FACT/HIGH that sandboxes exist).",
+      "Android emulator x86_64 system images (Android SDK terms) and ADB/Appium (Apache-2.0, RECALL) for driving ATAK-CIV and plugins.",
+      "Ditto SDK adapter (later stage) requires a commercial licence; small-peer developer pricing not found this session (Public evidence insufficient); AWS Marketplace lists a Cloud Sync Pro plan at $11,988 per 12 months for 1,000 connections (FACT/MEDIUM, not the SDK tier needed).",
+      "Sigstore cosign, Syft/CycloneDX for SBOM, NIST OSCAL schemas (public domain), Schemathesis/Pact-style contract tools (MIT, RECALL) for the conformance and contract modules.",
+      "A synthetic-only data regime: no PoR radio traces, SRW/WNW models or CUI ICDs; if a sponsor supplies them later, U.S.-person handling and a technology control plan are needed (E07-F13, E07-F17; counsel).",
+      "An external definition of 'conformant' does not exist today; the Army AO memo (2025-09, RECALL/MEDIUM) and NIST SP 800-53 AU/AC families are the only public anchors for the RBAC/audit rubric, so the rubric must be labelled as the bench's own until a government body endorses one."
+    ],
+    "hardest_problem": "Making a synthetic, netem-driven score MEAN something to the people who own acceptance. Technically the hardest sub-problem is faithful, reproducible multi-node reconciliation scoring: attributing every CoT object observed on every node to a ground-truth emission across partitions and reconnect storms (object IDs re-used, stale-time semantics, mission-sync versus streaming paths, emulator clock drift, TAK Server's own dedupe and stale handling) so that 'duplicate', 'conflict', 'late' and 'lost' are counted identically run to run and match what a soldier would see. netem models bandwidth/latency/loss on a point-to-point link but not MANET dynamics (routing churn, hidden nodes, half-duplex contention), so the bench must be honest that it measures application behaviour under specified link states, not radio behaviour - EMANE/CORE narrows but does not close this gap without controlled waveform models. The non-technical half of the hardest problem dominates: no government body has said what a passing score is, and until one does the report is an opinion. That is why every milestone below tests sponsor existence, not feature completeness.",
+    "commodity": [
+      "Link emulation primitives: Linux tc/netem, container network namespaces, Pumba/Toxiproxy-style chaos wrappers",
+      "TAK Server and ATAK-CIV themselves (government open source), pytak/takproto CoT encoders",
+      "Android emulation and UI automation (Android SDK emulator, ADB, Appium)",
+      "OpenAPI/protobuf contract testing (Schemathesis, buf lint/breaking, Pact)",
+      "SBOM generation and signing (Syft, CycloneDX, Sigstore cosign)",
+      "Report rendering, dashboards (Grafana/Prometheus or static HTML)",
+      "Commodity x86 hosts, used Android phones, single-board computers, managed switches"
+    ],
+    "must_be_proprietary": [
+      "Nothing needs to be closed for the design to work; the score file's finding is that any proprietary layer is replicable in weeks by Anduril, TAK Product Center, Ditto or a lab. The only assets worth holding privately (as know-how, not code) are: the curated scenario library calibrated against whatever real-exercise anecdotes the T&E advisor can share; the scoring rubric weights and the RBAC/audit checklist mapping to AO expectations; and the anonymised cross-vendor results dataset. Even these should be published in part, because openness is the credibility mechanism for this narrower version."
+    ],
+    "open_source": [
+      {
+        "project": "ATAK-CIV and ATAK SDK (deptofdefense/AndroidTacticalAssaultKit-CIV)",
+        "license": "GPL-3.0 (RECALL, MEDIUM - verify in repo LICENSE)",
+        "use": "Client nodes under test and host for the observer plugin; plugin SDK for the conformance module"
+      },
+      {
+        "project": "TAK Server (TAK-Product-Center/Server) incl. takcl test framework",
+        "license": "See repo LICENSE.md; includes a stated linking provision for gRPC/protobuf under Apache-2.0 (FACT/MEDIUM); copyleft family (RECALL - not re-verified)",
+        "use": "Server nodes, Mission API, federation; takcl as a reference for server-side test harnessing"
+      },
+      {
+        "project": "pytak / takproto (snstac)",
+        "license": "Apache-2.0 (RECALL, MEDIUM)",
+        "use": "CoT XML and TAK Protocol v1 protobuf generation and decoding in the traffic generator and capture service"
+      },
+      {
+        "project": "FreeTAKServer",
+        "license": "EPL-2.0 (RECALL, LOW)",
+        "use": "Optional lightweight second server implementation to show vendor neutrality across servers"
+      },
+      {
+        "project": "EMANE (adjacentlink/emane)",
+        "license": "BSD-style open source (RECALL, MEDIUM; NRL/Adjacent Link, FACT/HIGH that it is open source)",
+        "use": "PHY/MAC emulation for MANET-style topologies in the optional EMANE mode; generic models only (no SRW/WNW ports)"
+      },
+      {
+        "project": "CORE (coreemu/core)",
+        "license": "BSD-2-Clause (FACT/HIGH)",
+        "use": "Container/namespace topology orchestration and EMANE integration for multi-hop scenarios"
+      },
+      {
+        "project": "Linux tc/netem (kernel) and Pumba",
+        "license": "GPL-2.0 kernel; Pumba Apache-2.0 (RECALL)",
+        "use": "Per-link bandwidth, delay, jitter, loss and partition control on container interfaces"
+      },
+      {
+        "project": "Toxiproxy",
+        "license": "MIT (RECALL)",
+        "use": "TCP-level fault injection for the Mission API / REST paths"
+      },
+      {
+        "project": "Schemathesis",
+        "license": "MIT (RECALL)",
+        "use": "Property-based contract tests against the TAK Server Marti/Mission OpenAPI surface as used by the SUT"
+      },
+      {
+        "project": "buf CLI and Buf Schema Registry",
+        "license": "Apache-2.0 CLI (RECALL); Lattice protos under Anduril's licence on buf.build (terms unverified)",
+        "use": "Lint and breaking-change checks for Lattice protobuf usage; codegen for the Lattice client exerciser"
+      },
+      {
+        "project": "Pact",
+        "license": "MIT (RECALL)",
+        "use": "Consumer-driven contract tests for vendor CoT gateways and feeds"
+      },
+      {
+        "project": "Appium and Android SDK emulator/ADB",
+        "license": "Apache-2.0 (RECALL); Android SDK terms",
+        "use": "Drive ATAK-CIV and plugins under synthetic roles; harvest logs"
+      },
+      {
+        "project": "Syft and CycloneDX",
+        "license": "Apache-2.0 (RECALL)",
+        "use": "SBOM generation for plugin APKs and bench itself"
+      },
+      {
+        "project": "NIST OSCAL schemas and oscal-cli",
+        "license": "U.S. Government public domain / CC0 (RECALL)",
+        "use": "Assessment-results-style conformance bundle format"
+      },
+      {
+        "project": "Sigstore cosign",
+        "license": "Apache-2.0 (RECALL)",
+        "use": "Signing report bundles and SBOMs"
+      },
+      {
+        "project": "ArduPilot SITL and MAVLink",
+        "license": "ArduPilot GPL-3.0; MAVLink MIT/LGPL (RECALL)",
+        "use": "Simulated UAS positions converted to CoT tracks for realistic sensor-feed load"
+      },
+      {
+        "project": "Prometheus and Grafana",
+        "license": "Apache-2.0; AGPL-3.0 (RECALL)",
+        "use": "Live link-state and arrival dashboards during runs"
+      }
+    ],
+    "third_party_hardware": [
+      "One x86 mini PC or workstation, 32-64 GB RAM, 8+ cores, 1-2 TB NVMe (commodity; needed to run 8-10 Android emulators plus TAK Server containers concurrently)",
+      "2-4 used/mid-range Android phones (ATAK-CIV requires a recent Android; used Pixel-class devices) for physical-node fidelity checks",
+      "Optional 4x Raspberry Pi 5 (8 GB) or similar SBCs as physical CoT-feed and TAK Server edge nodes (list price about $80 each, RECALL, MEDIUM - not re-verified this session)",
+      "One managed gigabit switch and USB-Ethernet adapters for physical topologies",
+      "Optional (Stage 2 only): 2-4 commercial unlicensed-band MANET radios or Wi-Fi HaLow / LoRa dev kits to show the bench beside real RF; pricing not verified this session and NOT required for the MVP",
+      "No sensors, no PoR radios, no crypto devices"
+    ],
+    "integration_burden": "LOW for the bench itself (all public code, one host, Docker), MEDIUM per SUT (each vendor plugin needs an adapter script for roles/tags and an agreed set of 'security-relevant actions'; CoT feeds need a mapping to the ground-truth ledger; Lattice clients need sandbox credentials), and HIGH-and-uncontrollable for anything the government would need to accept: a lab would have to map the bench's scenarios to its own emulation effects, the AO would have to endorse the RBAC/audit rubric, and PdM ASaP would have to admit a third-party report into its pipeline. Expect 1-2 engineer-days per SUT onboarding once the adapters exist, 2-4 weeks for a Lattice or Ditto adapter, and months of relationship work for any government acceptance.",
+    "performance_metrics": [
+      {
+        "metric": "Scenario reproducibility (coefficient of variation of headline scores across 3 identical runs)",
+        "target": "< 5% CV on time-to-arrival P95 and exact match on duplicate/conflict counts",
+        "why": "A score nobody can reproduce is an anecdote; reproducibility is the only differentiator against 'fixing the code live at Ivy Sting' (DVIDS 2026-03-30)"
+      },
+      {
+        "metric": "Link fidelity (configured vs measured throughput, latency and loss per link)",
+        "target": "within 10% of configured values from 1 Mbps to 1 kbps; partitions start within 1 s of schedule",
+        "why": "The DARPA FLUID 1 Mbps-1 kbps regime (2025-03-28) is the public DDIL definition buyers recognise; the bench must demonstrably hit it"
+      },
+      {
+        "metric": "Time-to-arrival of priority CoT objects after reconnect (P50/P95 per node)",
+        "target": "measured to +/-1 s across all nodes; report, do not prescribe, since no government threshold exists",
+        "why": "This is the number a commander feels ('lag under denied conditions', G29 current_workflow step 4) and the one a lab could compare across 50-80 vendors"
+      },
+      {
+        "metric": "Duplicate and conflicting objects after reconnect (per 1,000 ground-truth objects)",
+        "target": "zero false positives in the ledger; SUT results reported as raw counts",
+        "why": "Duplicate tracks after reconnect are a classic sync failure that TAK Server dedupe, mission sync and vendor feeds each handle differently"
+      },
+      {
+        "metric": "Object loss and ordering violations under a 30-minute partition at 4 kbps",
+        "target": "complete accounting of every ledger object (delivered / late / lost / superseded)",
+        "why": "Shows whether a feed degrades gracefully or silently drops data, which today is discovered only at events"
+      },
+      {
+        "metric": "Reconnect saturation (peak offered load / link capacity during the first 60 s after reconnect)",
+        "target": "reported as a ratio with time series; flag > 1.0 sustained > 10 s",
+        "why": "Reconnect storms are what break real tactical links; vendors rarely script them (G29 current_workflow step 2)"
+      },
+      {
+        "metric": "Node scale on one host",
+        "target": "10 ATAK-CIV emulator nodes + 2 TAK Servers on a 64 GB host without emulator starvation",
+        "why": "A bench a vendor can run on one machine before a sprint is the entire value proposition"
+      },
+      {
+        "metric": "Setup-to-run time",
+        "target": "< 15 minutes from YAML to a running scenario; full 30-minute scenario plus report in < 45 minutes",
+        "why": "Pre-sprint engineers will not adopt a bench that takes a day to configure"
+      },
+      {
+        "metric": "Contract-test coverage",
+        "target": "100% of the Mission API / Lattice endpoints the SUT actually calls are exercised; schema-level lint/breaking checks pass or list violations",
+        "why": "Undocumented or misused APIs were a top Jailbreak failure class (DefenseScoop 2026-05-29)"
+      },
+      {
+        "metric": "RBAC matrix and audit-event coverage",
+        "target": "every declared role x action pair tested; percent of security-relevant actions producing an audit record, mapped to a NIST SP 800-53 AU-2-style list",
+        "why": "Missing access control and logging were the AO's stated reason for the 'very high risk' NGC2 rating (CNBC 2025-10-03, RECALL/MEDIUM)"
+      },
+      {
+        "metric": "Bundle verifiability",
+        "target": "OSCAL-style JSON validates against schema; cosign signature verifies; SBOM lists 100% of plugin dependencies detected by Syft",
+        "why": "ISSMs and pipeline owners need machine-checkable evidence, not PDFs"
+      }
+    ]
+  },
+  "mvp": {
+    "demo": "A single-host, Dockerised 'TAK DDIL bench' demonstrated live and published on GitHub: 8-10 ATAK-CIV nodes (emulators plus 2-4 physical phones) and two TAK Servers behind netem profiles stepping from 1 Mbps to 4 kbps, a scripted 30-minute partition and reconnect storm, three public/open-source ATAK plugins and one synthetic UAS CoT feed run through the same scenario, producing side-by-side scored reports (time-to-arrival, duplicates/conflicts, loss, saturation); a contract-test CLI run against the same feed's Mission API usage and, if the Lattice licence permits, a Lattice sandbox client; and the plugin conformance module run against one open-source plugin to emit a signed OSCAL-style RBAC/audit/SBOM bundle. The demo is shown to (1) three or four MatrixSpace/Adyton-class vendors facing the next Jailbreak-series or PdM ASaP onboarding date, (2) a C5ISR Center or ATEC T&E contact via a NetModX / Reveille Forge / xTech application, and (3) a Team Anduril or Team Lockheed T&E engineer - and the demo's success criterion is a sponsor signal, not applause.",
+    "must_prove": [
+      "That an independent, reproducible score (CV < 5% across repeated runs) exposes concrete failure classes - arrival delay, duplicate tracks after reconnect, silent loss, reconnect saturation, missing audit events - in real plugins and feeds BEFORE an event, matching the failure types reported from Jailbreak and Ivy Sting",
+      "That the bench runs end to end on one commodity machine in under 45 minutes per scenario, so a vendor engineer would actually use it in the week before a sprint",
+      "That the RBAC/audit bundle is machine-checkable (schema-valid OSCAL-style JSON, verified signature, complete SBOM) and that at least one ISSM/AO-adjacent reviewer says it is the shape of evidence they would accept",
+      "DECISIVE: that at least one named party with money or a vehicle - a vendor paying a fixed fee, PdM ASaP / PM C2 Applications, C5ISR Center, ATEC, Reveille Forge, TAK Product Center, or a prime T&E cell - commits in writing to use the report (paid readiness run, CRADA, evaluation agreement, task-order intent or pipeline inclusion) within 90 days of the first demo"
+    ],
+    "uses": [
+      "commercial hardware",
+      "public/open data",
+      "simulated military data",
+      "unclassified architecture",
+      "commercial compute",
+      "open standards"
+    ],
+    "bom": [
+      {
+        "item": "x86 mini PC / workstation, 64 GB RAM, 8-16 cores, 2 TB NVMe (orchestration host)",
+        "cost_usd": 1500,
+        "note": "Commodity; $900-1,800 range (RECALL pricing, not re-verified this session)"
+      },
+      {
+        "item": "4x used Pixel-class Android phones for physical ATAK-CIV nodes",
+        "cost_usd": 900,
+        "note": "$150-300 each used (RECALL, LOW); emulators cover the other 6 nodes"
+      },
+      {
+        "item": "4x Raspberry Pi 5 8 GB + PSU/case/SD (optional physical edge nodes for TAK Server / CoT feeds)",
+        "cost_usd": 500,
+        "note": "About $80 board list (RECALL, MEDIUM) plus accessories"
+      },
+      {
+        "item": "Managed gigabit switch, USB-Ethernet adapters, cables, Wi-Fi AP",
+        "cost_usd": 350,
+        "note": "Commodity"
+      },
+      {
+        "item": "Cloud VM for parallel runs and public demo (4-6 months)",
+        "cost_usd": 1500,
+        "note": "One 32-64 GB VM at $150-300/month; optional"
+      },
+      {
+        "item": "GitHub org, CI minutes, domain, Sigstore (free), object storage",
+        "cost_usd": 400,
+        "note": "Commodity SaaS"
+      },
+      {
+        "item": "Ditto SDK licence (adapter deferred; placeholder)",
+        "cost_usd": 0,
+        "note": "Public evidence insufficient for small-peer developer pricing; defer to Stage 2 or use a free/startup tier if offered"
+      },
+      {
+        "item": "Lattice Sandbox access",
+        "cost_usd": 0,
+        "note": "Free with unlimited API calls per Anduril docs (FACT/HIGH); licence terms for benchmarking unverified"
+      },
+      {
+        "item": "Counsel memo: entity formation, SBIR ownership/control, EAR classification of the bench, technology control plan for the non-U.S.-person founder, review of TAK Server / ATAK-CIV copyleft and Lattice SDK licence",
+        "cost_usd": 9000,
+        "note": "$6,000-12,000; E07-F3, F13, F17, F25"
+      },
+      {
+        "item": "Fractional U.S.-person tactical-network T&E advisor (ex-C5ISR Center / ATEC / JITC / prime T&E), ~2 days/month x 4 months",
+        "cost_usd": 8000,
+        "note": "$150-250/hour equivalent or small equity; FATAL if absent"
+      },
+      {
+        "item": "Travel: 2-3 trips (AFCEA TechNet / TAK-related events, APG/Huntsville, a NetModX or Reveille Forge visit)",
+        "cost_usd": 6000,
+        "note": "$1,500-2,500 per trip"
+      },
+      {
+        "item": "Founder stipends (two founders, 4 months, student rates)",
+        "cost_usd": 24000,
+        "note": "$0-30,000 depending on personal runway; excluded from the $30-60k asset budget in the score file"
+      },
+      {
+        "item": "Contract TAK plugin developer, 2-3 weeks for observer plugin polish and one adapter",
+        "cost_usd": 8000,
+        "note": "$100-150/hour; optional if the engineer founder covers it"
+      },
+      {
+        "item": "General liability insurance and SAM/CAGE registration",
+        "cost_usd": 1200,
+        "note": "Needed only if a paid engagement or CRADA materialises"
+      }
+    ],
+    "total_cost_usd": 61350,
+    "build_plan": [
+      {
+        "month": 1,
+        "work": "Set up TAK Server containers and 4 ATAK-CIV emulator nodes; implement the netem scenario runner with YAML link profiles (1 Mbps, 256 kbps, 64 kbps, 16 kbps, 4 kbps, 1 kbps) and partition scheduler; build the CoT traffic generator with ground-truth ledger (pytak/takproto); engage counsel (formation, EAR self-classification, technology control plan, copyleft review); start 90-day sponsor discovery: 15 outreach conversations targeted at Jailbreak-participant vendors, PdM ASaP / PM C2 Applications, C5ISR Center NetModX, ATEC industry-partner programme (NDM 2026-07-24), Reveille Forge, TAK Product Center."
+      },
+      {
+        "month": 2,
+        "work": "Observer plugin on ATAK-CIV nodes; capture/ledger service and first sync scorer (time-to-arrival, loss, duplicates); scale to 8-10 nodes plus 2-4 physical phones; reproducibility runs (3x) and link-fidelity calibration; publish repo v0.1 with a 5-minute video; first three vendor demos; submit NetModX persistent-experimentation / Reveille Forge / xTech applications."
+      },
+      {
+        "month": 3,
+        "work": "Contract-test CLI (Schemathesis against Mission API usage; buf lint/breaking against Lattice protos; Pact for CoT gateways); plugin conformance module v0.1 (Appium role drive, RBAC matrix, audit-event coverage, Syft SBOM, OSCAL-style bundle, cosign); run three open-source plugins and a synthetic UAS feed through the reference scenario; publish anonymised comparative results; demo to one prime T&E engineer and one government lab contact; ask each for a written statement of what evidence they would accept."
+      },
+      {
+        "month": 4,
+        "work": "Harden: one-command install, 45-minute end-to-end run, docs; optional EMANE/CORE mode for a 3-hop topology; first paid fixed-fee readiness run if a vendor signs ($5-15k); decision gate against kill criteria; if a sponsor exists, scope Stage 2 (adapter for Lattice or Ditto, event slot); if not, freeze as a maintained open-source project and stop spending."
+      },
+      {
+        "month": 5,
+        "work": "(Only if month-4 gate passes) Lattice or Ditto adapter, second scenario family (division-to-battalion multi-server federation), CRADA/evaluation-agreement paperwork with the sponsor, NIST SP 800-171 self-assessment planning if CUI is in prospect."
+      },
+      {
+        "month": 6,
+        "work": "(Only if gate passed) Field-adjacent demonstration at the sponsor's venue or a NetModX / Reveille Forge slot with commercial radios in the loop; publish the sponsor-endorsed rubric; decide whether the residual business is a service line or a joinable team (acqui-hire / prime T&E subcontract)."
+      }
+    ],
+    "kill_criteria": [
+      "By day 45: fewer than 10 substantive conversations with target buyers (Jailbreak-participant vendors, PdM ASaP / PM C2 Applications, C5ISR Center, ATEC, Reveille Forge, TAK Product Center, prime T&E) or none of them names a budget, pipeline step or vehicle through which a third-party DDIL/conformance report could be consumed -> stop building beyond the open-source v0.1",
+      "By day 90 after first demo: no vendor has paid a fixed fee (>= $5,000) for a readiness run AND no government or prime party has signed a CRADA, evaluation agreement, task-order intent or pipeline-inclusion letter -> freeze the project as an open-source credibility asset; do not raise or spend further",
+      "By month 4: the bench cannot achieve < 5% CV reproducibility or < 10% link fidelity across 1 Mbps-1 kbps on one host -> the technical premise (a comparable score) fails; stop",
+      "At any point: a government body (C5ISR Center, TAK Product Center, PdM ASaP, Anduril for Lattice) publishes an equivalent open bench or declares its own report the only accepted evidence -> stop and contribute upstream instead",
+      "At any point: counsel finds the Lattice SDK licence prohibits third-party benchmarking/publication or the TAK Server/ATAK-CIV copyleft terms make the intended open-source release non-viable -> drop the affected module; if both, reassess whether any residual asset remains",
+      "Total spend cap: $60,000 excluding founder stipends before a signed sponsor exists; exceeding it without a sponsor is itself a kill"
+    ]
+  },
+  "capital_map": {
+    "stages": [
+      {
+        "stage": 0,
+        "name": "Customer discovery and sponsor test",
+        "duration_months": 2,
+        "total_usd_low": 8000,
+        "total_usd_high": 22000,
+        "line_items": [
+          {
+            "item": "salaries",
+            "usd_low": 0,
+            "usd_high": 6000,
+            "assumption": "Founders unpaid or small stipend; no hires"
+          },
+          {
+            "item": "compute",
+            "usd_low": 0,
+            "usd_high": 1500,
+            "assumption": "Laptops; start of mini PC purchase if overlapped with Stage 1"
+          },
+          {
+            "item": "sensors",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None"
+          },
+          {
+            "item": "rf_equipment",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None"
+          },
+          {
+            "item": "prototype_hardware",
+            "usd_low": 0,
+            "usd_high": 500,
+            "assumption": "One used Android phone for ATAK-CIV familiarisation"
+          },
+          {
+            "item": "manufacturing",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "Software only"
+          },
+          {
+            "item": "testing",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None"
+          },
+          {
+            "item": "travel",
+            "usd_low": 2000,
+            "usd_high": 5000,
+            "assumption": "1-2 trips: AFCEA TechNet / TAK community event, APG or Huntsville meetings"
+          },
+          {
+            "item": "compliance",
+            "usd_low": 0,
+            "usd_high": 500,
+            "assumption": "SAM/CAGE registration only if a paid engagement appears"
+          },
+          {
+            "item": "legal",
+            "usd_low": 5000,
+            "usd_high": 8000,
+            "assumption": "Formation plus counsel memo on SBIR ownership, EAR classification, technology control plan, copyleft and Lattice licence review (E07-F3, F13, F17, F25)"
+          },
+          {
+            "item": "security",
+            "usd_low": 0,
+            "usd_high": 300,
+            "assumption": "Endpoint hygiene, password manager"
+          },
+          {
+            "item": "insurance",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "Not yet"
+          },
+          {
+            "item": "cloud",
+            "usd_low": 0,
+            "usd_high": 200,
+            "assumption": "Repo and CI only"
+          },
+          {
+            "item": "subcontract_engineering",
+            "usd_low": 0,
+            "usd_high": 1000,
+            "assumption": "Optional introductory paid consultation with a T&E advisor; the fractional advisor engagement starts in Stage 1"
+          }
+        ],
+        "milestone": "15+ substantive conversations logged; at least 3 target parties name a concrete consumption path (pipeline step, lab process, event, budget) for a third-party DDIL/conformance report, or the founders learn none exists",
+        "evidence_produced": "Interview log with named roles and organisations; a written map of who would consume the report and under what vehicle; go/no-go against kill criterion 1"
+      },
+      {
+        "stage": 1,
+        "name": "Laboratory MVP: open-source TAK DDIL bench and plugin conformance module",
+        "duration_months": 4,
+        "total_usd_low": 30000,
+        "total_usd_high": 62000,
+        "line_items": [
+          {
+            "item": "salaries",
+            "usd_low": 0,
+            "usd_high": 24000,
+            "assumption": "Two founders at student stipends for 4 months; the score file's $30-60k asset budget excludes stipends"
+          },
+          {
+            "item": "compute",
+            "usd_low": 1000,
+            "usd_high": 1800,
+            "assumption": "One 64 GB mini PC / workstation"
+          },
+          {
+            "item": "sensors",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None; simulated UAS feed via ArduPilot SITL"
+          },
+          {
+            "item": "rf_equipment",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None; netem/EMANE only"
+          },
+          {
+            "item": "prototype_hardware",
+            "usd_low": 1200,
+            "usd_high": 2000,
+            "assumption": "4 used phones, 4 SBCs, switch, adapters"
+          },
+          {
+            "item": "manufacturing",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "Software only"
+          },
+          {
+            "item": "testing",
+            "usd_low": 500,
+            "usd_high": 1500,
+            "assumption": "Reproducibility and calibration runs on cloud VMs"
+          },
+          {
+            "item": "travel",
+            "usd_low": 3000,
+            "usd_high": 6000,
+            "assumption": "2-3 trips for demos to vendors, a lab and a prime"
+          },
+          {
+            "item": "compliance",
+            "usd_low": 300,
+            "usd_high": 1200,
+            "assumption": "SAM/CAGE; NIST SP 800-171 self-assessment planning only if CUI is foreseeable"
+          },
+          {
+            "item": "legal",
+            "usd_low": 2000,
+            "usd_high": 5000,
+            "assumption": "Open-source licence choice and contributor agreement; first readiness-engagement contract template"
+          },
+          {
+            "item": "security",
+            "usd_low": 200,
+            "usd_high": 800,
+            "assumption": "Signing keys, CI hardening, Sigstore"
+          },
+          {
+            "item": "insurance",
+            "usd_low": 0,
+            "usd_high": 1200,
+            "assumption": "General liability only once a paid run is signed"
+          },
+          {
+            "item": "cloud",
+            "usd_low": 600,
+            "usd_high": 2000,
+            "assumption": "One large VM for 4-6 months plus storage/CI"
+          },
+          {
+            "item": "subcontract_engineering",
+            "usd_low": 6000,
+            "usd_high": 16000,
+            "assumption": "Fractional U.S.-person T&E advisor (2 days/month) plus optional contract TAK plugin developer for 2-3 weeks"
+          }
+        ],
+        "milestone": "Public v0.1-v0.3 release; three plugins and one feed scored reproducibly (CV < 5%) through the 1 Mbps-1 kbps reference scenario; signed OSCAL-style conformance bundle for one plugin; first demos to vendors, a lab contact and a prime T&E engineer; 90-day sponsor test started",
+        "evidence_produced": "Repository, reproducible reports, comparative results, demo video, written statements from at least one ISSM/AO-adjacent reviewer and one T&E engineer on what evidence they would accept; ideally one paid readiness run ($5-15k)"
+      },
+      {
+        "stage": 2,
+        "name": "Credible field-adjacent demonstration with a sponsor (only if the 90-day sponsor test passes)",
+        "duration_months": 5,
+        "total_usd_low": 120000,
+        "total_usd_high": 300000,
+        "line_items": [
+          {
+            "item": "salaries",
+            "usd_low": 40000,
+            "usd_high": 90000,
+            "assumption": "Two founders at modest salaries for 5 months plus a part-time TAK/DevSecOps engineer"
+          },
+          {
+            "item": "compute",
+            "usd_low": 2000,
+            "usd_high": 5000,
+            "assumption": "Second host or ruggedised laptop for on-site runs"
+          },
+          {
+            "item": "sensors",
+            "usd_low": 0,
+            "usd_high": 3000,
+            "assumption": "Optional commercial camera/GPS puck feeds to show real CoT sources; not required"
+          },
+          {
+            "item": "rf_equipment",
+            "usd_low": 5000,
+            "usd_high": 30000,
+            "assumption": "2-4 commercial unlicensed-band MANET radios or Wi-Fi HaLow / LoRa kits to run the bench beside real RF; pricing not verified this session; may be lent by the sponsor"
+          },
+          {
+            "item": "prototype_hardware",
+            "usd_low": 3000,
+            "usd_high": 8000,
+            "assumption": "Transit cases, additional phones/SBCs, network gear"
+          },
+          {
+            "item": "manufacturing",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None"
+          },
+          {
+            "item": "testing",
+            "usd_low": 5000,
+            "usd_high": 20000,
+            "assumption": "Event participation costs (NetModX / Reveille Forge / Jailbreak-series slot), calibration against the sponsor's emulation effects"
+          },
+          {
+            "item": "travel",
+            "usd_low": 10000,
+            "usd_high": 25000,
+            "assumption": "4-8 trips including a multi-week on-site period at APG, Huntsville, Fort Carson or Redstone"
+          },
+          {
+            "item": "compliance",
+            "usd_low": 5000,
+            "usd_high": 20000,
+            "assumption": "NIST SP 800-171 self-assessment and basic CUI handling if the sponsor shares controlled link profiles; CMMC Level 1/2 self-assessment posture (E07-F9)"
+          },
+          {
+            "item": "legal",
+            "usd_low": 10000,
+            "usd_high": 25000,
+            "assumption": "CRADA / evaluation agreement / OTA-consortium membership, export-control screening of any sponsor-provided data, technology control plan implementation"
+          },
+          {
+            "item": "security",
+            "usd_low": 2000,
+            "usd_high": 8000,
+            "assumption": "Segregated build environment, U.S.-person-only enclave for any controlled inputs"
+          },
+          {
+            "item": "insurance",
+            "usd_low": 1500,
+            "usd_high": 4000,
+            "assumption": "General liability plus errors and omissions once government-facing"
+          },
+          {
+            "item": "cloud",
+            "usd_low": 2000,
+            "usd_high": 6000,
+            "assumption": "Parallel scenario runs and hosted comparative dashboard"
+          },
+          {
+            "item": "subcontract_engineering",
+            "usd_low": 20000,
+            "usd_high": 60000,
+            "assumption": "U.S.-person T&E engineer on a larger fraction; Lattice and/or Ditto adapter development (Ditto SDK licence cost unknown)"
+          }
+        ],
+        "milestone": "Bench run at a sponsor venue or event beside real radios; sponsor-endorsed scenario set and rubric; 3-5 paid vendor readiness runs; a written statement from the sponsor that the report is used in its pre-event or onboarding process",
+        "evidence_produced": "Event report with sponsor sign-off; comparative results across 5+ real vendor SUTs; signed engagement contracts totalling >= $30k; the sponsor's stated path to a task order, CRADA extension or subcontract"
+      },
+      {
+        "stage": 3,
+        "name": "Military prototype / pilot: adoption inside a lab or prime pipeline",
+        "duration_months": 12,
+        "total_usd_low": 400000,
+        "total_usd_high": 1200000,
+        "line_items": [
+          {
+            "item": "salaries",
+            "usd_low": 250000,
+            "usd_high": 600000,
+            "assumption": "4-6 people: founders, a cleared or clearable U.S.-person T&E engineer, a DevSecOps/RMF engineer, a TAK/plugin engineer"
+          },
+          {
+            "item": "compute",
+            "usd_low": 5000,
+            "usd_high": 20000,
+            "assumption": "Lab-grade hosts for the sponsor's environment"
+          },
+          {
+            "item": "sensors",
+            "usd_low": 0,
+            "usd_high": 5000,
+            "assumption": "Minimal"
+          },
+          {
+            "item": "rf_equipment",
+            "usd_low": 10000,
+            "usd_high": 60000,
+            "assumption": "Commercial radios for a persistent test rig; PoR radios supplied by the government if at all"
+          },
+          {
+            "item": "prototype_hardware",
+            "usd_low": 5000,
+            "usd_high": 20000,
+            "assumption": "Deployable bench kits"
+          },
+          {
+            "item": "manufacturing",
+            "usd_low": 0,
+            "usd_high": 0,
+            "assumption": "None"
+          },
+          {
+            "item": "testing",
+            "usd_low": 20000,
+            "usd_high": 80000,
+            "assumption": "Calibration against government emulation effects; multiple event cycles"
+          },
+          {
+            "item": "travel",
+            "usd_low": 20000,
+            "usd_high": 50000,
+            "assumption": "Sustained on-site presence"
+          },
+          {
+            "item": "compliance",
+            "usd_low": 20000,
+            "usd_high": 80000,
+            "assumption": "NIST SP 800-171 implementation, CMMC self-assessment, possible facility/enclave requirements if CUI or controlled waveform models are ingested; ATO support if the bench runs inside a government boundary"
+          },
+          {
+            "item": "legal",
+            "usd_low": 20000,
+            "usd_high": 60000,
+            "assumption": "Task order / OTA / subcontract negotiation, IP and data-rights, export-control programme, possible SBIR restructuring once the German founder holds permanent residence (13 CFR 121.702)"
+          },
+          {
+            "item": "security",
+            "usd_low": 10000,
+            "usd_high": 40000,
+            "assumption": "Segregated enclave, personnel screening, technology control plan audits"
+          },
+          {
+            "item": "insurance",
+            "usd_low": 5000,
+            "usd_high": 15000,
+            "assumption": "GL, E&O, cyber"
+          },
+          {
+            "item": "cloud",
+            "usd_low": 5000,
+            "usd_high": 20000,
+            "assumption": "Hosted service for vendors plus lab instance"
+          },
+          {
+            "item": "subcontract_engineering",
+            "usd_low": 30000,
+            "usd_high": 150000,
+            "assumption": "Adapters for additional platforms; integration with the sponsor's pipeline (e.g., PdM ASaP DevSecOps pipeline if it exists as a consumer)"
+          }
+        ],
+        "milestone": "A funded agreement (task order, Phase II-scale award via a restructured cap table, CRADA with funding, or prime subcontract) under which a lab or prime pipeline runs the bench as a standing step, plus a government statement that the report is accepted pre-event or onboarding evidence",
+        "evidence_produced": "Obligated funds (not ceilings); documented use in >= 2 event or onboarding cycles; >= 20 SUTs scored; published rubric endorsed by the sponsor. NOTE: no public evidence today that any party intends to fund this stage (G29-score.json); reaching it is the HYPOTHESIS being tested, not a plan"
+      },
+      {
+        "stage": 4,
+        "name": "Production-ready capability (hosted and on-prem bench, allied variants)",
+        "duration_months": 18,
+        "total_usd_low": 1500000,
+        "total_usd_high": 4000000,
+        "line_items": [
+          {
+            "item": "salaries",
+            "usd_low": 1000000,
+            "usd_high": 2500000,
+            "assumption": "8-14 people over 18 months including support and BD"
+          },
+          {
+            "item": "compute",
+            "usd_low": 20000,
+            "usd_high": 60000,
+            "assumption": "Multi-tenant hosted runs"
+          },
+          {
+            "item": "sensors",
+            "usd_low": 0,
+            "usd_high": 10000,
+            "assumption": "Minimal"
+          },
+          {
+            "item": "rf_equipment",
+            "usd_low": 30000,
+            "usd_high": 120000,
+            "assumption": "Reference radio rigs for calibration"
+          },
+          {
+            "item": "prototype_hardware",
+            "usd_low": 20000,
+            "usd_high": 80000,
+            "assumption": "Deployable kits for labs and allied users"
+          },
+          {
+            "item": "manufacturing",
+            "usd_low": 0,
+            "usd_high": 30000,
+            "assumption": "Kit assembly at small volume only"
+          },
+          {
+            "item": "testing",
+            "usd_low": 50000,
+            "usd_high": 200000,
+            "assumption": "Continuous calibration, event cycles, allied exercises"
+          },
+          {
+            "item": "travel",
+            "usd_low": 60000,
+            "usd_high": 150000,
+            "assumption": "U.S. and allied (NATO TAK users, Bundeswehr D-LBO integrators)"
+          },
+          {
+            "item": "compliance",
+            "usd_low": 80000,
+            "usd_high": 250000,
+            "assumption": "CMMC Level 2, possible FedRAMP-adjacent hosting (IL4/IL5 via a partner), export licences for allied variants"
+          },
+          {
+            "item": "legal",
+            "usd_low": 50000,
+            "usd_high": 150000,
+            "assumption": "Contracts, data rights, export programme, allied entity structuring"
+          },
+          {
+            "item": "security",
+            "usd_low": 40000,
+            "usd_high": 120000,
+            "assumption": "Enclaves, personnel, audits"
+          },
+          {
+            "item": "insurance",
+            "usd_low": 15000,
+            "usd_high": 40000,
+            "assumption": "Full commercial and government-facing coverage"
+          },
+          {
+            "item": "cloud",
+            "usd_low": 30000,
+            "usd_high": 100000,
+            "assumption": "Hosted service"
+          },
+          {
+            "item": "subcontract_engineering",
+            "usd_low": 100000,
+            "usd_high": 300000,
+            "assumption": "Platform adapters and integrations"
+          }
+        ],
+        "milestone": "Supported product used as a standing gate by >= 2 government or prime pipelines and >= 1 allied lab, with recurring revenue covering operating cost",
+        "evidence_produced": "Recurring obligated revenue; published acceptance policy naming the bench; allied adoption. NOTE: the score file rates the ceiling of this business as a lab-tool and services niche well below venture scale; Stage 4 is shown for completeness, not as an expectation"
+      }
+    ],
+    "does_250k_reach_next_fundable_milestone": "YES, with a large margin - but the binding constraint is not money. Stages 0 and 1 together cost $38k-$84k (typically about $60k including stipends), which is the next milestone: a published, reproducible open-source TAK DDIL bench with a signed conformance bundle PLUS the result of the 90-day sponsor test. $250k would also cover the low end of Stage 2 ($120k-$300k) if a sponsor emerges. However, the score file's verdict is that no requirement owner, budget line or vehicle exists, so the 'fundable' event is not a technical deliverable but an external signal: a paying vendor, a CRADA/evaluation agreement with PdM ASaP, C5ISR Center, ATEC or Reveille Forge, or a prime T&E subcontract. The founders should cap spend at $60k (excluding stipends) until that signal exists, and treat the remaining ~$190k as reserved for a different opportunity. If the signal never comes, $250k does not change the outcome; it only funds a longer consultancy.",
+    "next_milestone": "Published v0.3 bench with reproducible comparative results for 3+ SUTs and one signed OSCAL-style conformance bundle, AND a documented answer to the decisive doubt within 90 days of first demo: either (a) >= 1 paid readiness run (>= $5k) plus >= 1 written government/prime commitment (CRADA, evaluation agreement, pipeline inclusion or task-order intent), which unlocks Stage 2; or (b) neither, which freezes the project as a credibility asset",
+    "assumptions": "All figures HYPOTHESIS unless noted. Hardware prices are RECALL (not re-verified this session). Founder stipends at student rates; U.S.-person T&E advisor at $150-250/hour fractional or equity. No PoR radio data, waveform models or CUI in Stages 0-1. Vendor readiness fees of $5-15k per run (INFERENCE from the score file's $5-25k range). Ditto SDK cost unknown (Public evidence insufficient). Lattice SDK licence terms unverified (EGRESS_BLOCKED); the Lattice module may have to be dropped. SBIR remains unavailable until the cap table meets 13 CFR 121.702 (E07-F3); OTA/CSO routes carry no ownership test but export-control and FOCI reviews apply - counsel, no legal determination. Government resources its own DDIL test (C5ISR Center Radio Rodeo 2026-03/04; Reveille Forge 2026-07; ATEC and APG/Huntsville SILs), so Stage 3+ is a hypothesis with no public evidence of a funder."
+  },
+  "expertise": {
+    "matrix": {
+      "software": {
+        "distributed_systems": "critical",
+        "backend": "critical",
+        "data_engineering": "important",
+        "networking": "critical",
+        "cybersecurity": "critical",
+        "geospatial": "important",
+        "ml": "n/a",
+        "cv": "n/a",
+        "embedded_software": "optional",
+        "frontend_hmi": "optional",
+        "devsecops": "critical",
+        "android_tak_plugin_development": "critical",
+        "network_emulation_netem_emane": "critical",
+        "contract_testing_api_tooling": "important"
+      },
+      "hardware": {
+        "electrical": "n/a",
+        "rf": "optional",
+        "fpga": "n/a",
+        "sensors": "n/a",
+        "embedded_systems": "optional",
+        "mechanical": "n/a",
+        "ruggedization": "optional",
+        "manufacturing": "n/a"
+      },
+      "defense_domain": {
+        "tactical_networks": "critical",
+        "isr": "optional",
+        "intelligence_analysis": "n/a",
+        "command_post_operations": "important",
+        "logistics": "n/a",
+        "spectrum": "optional",
+        "acquisition": "critical",
+        "security_architecture": "critical",
+        "test_and_evaluation_practice": "critical",
+        "rmf_ato_oscal": "important"
+      },
+      "business": {
+        "government_sales": "critical",
+        "federal_contracting": "important",
+        "partnerships": "critical",
+        "capture": "optional",
+        "fundraising": "n/a",
+        "program_management": "important",
+        "open_source_community_building": "important"
+      }
+    },
+    "first_five_hires": [
+      {
+        "role": "Fractional U.S.-person tactical-network T&E advisor (ex-DEVCOM C5ISR Center, ATEC, JITC or prime T&E cell)",
+        "why": "Only person who can make the link profiles, scenarios and rubric credible to labs and primes, tell the founders how evidence is actually accepted, and open doors at NetModX, Reveille Forge and ATEC's industry-partner programme; also the U.S.-person wall for any controlled input",
+        "when": "Month 1 (Stage 0/1)",
+        "cost_range_usd": "$6,000-16,000 for 4 months fractional, or 1-3% advisor equity"
+      },
+      {
+        "role": "Government-contracts and export-control counsel (retainer, not a hire)",
+        "why": "EAR self-classification of the bench, technology control plan for the non-U.S.-person founder, SBIR ownership structuring for later, copyleft and Lattice-licence review, CRADA/OTA paperwork",
+        "when": "Month 1, on call thereafter",
+        "cost_range_usd": "$6,000-12,000 initial memo; $10,000-25,000 in Stage 2"
+      },
+      {
+        "role": "Contract TAK/ATAK plugin and TAK Server engineer",
+        "why": "Observer plugin, Mission API edge cases, TAK Protocol v1 handling, and speed: the engineer founder should not be the only TAK expert",
+        "when": "Month 2-3 (2-3 weeks), fuller role only in Stage 2",
+        "cost_range_usd": "$8,000-16,000 contract; $130,000-170,000/yr if hired in Stage 2-3"
+      },
+      {
+        "role": "Defense DevSecOps / RMF-OSCAL practitioner (fractional)",
+        "why": "Make the RBAC/audit/SBOM bundle ingestible by real compliance tooling and credible to ISSMs; map audit events to NIST SP 800-53 AU/AC families defensibly",
+        "when": "Month 3 (fractional), full-time only in Stage 3",
+        "cost_range_usd": "$5,000-12,000 fractional; $150,000-190,000/yr full-time"
+      },
+      {
+        "role": "Capture / BD lead with C5ISR Center, PEO C3N / CPE C2IN and prime relationships",
+        "why": "Only needed if the 90-day sponsor test passes; converts a CRADA or evaluation agreement into a task order or subcontract and navigates OTA consortia",
+        "when": "Stage 2 onward, never before a sponsor signal",
+        "cost_range_usd": "$120,000-180,000/yr plus commission, or fractional at $8,000-15,000/month"
+      }
+    ],
+    "fatal_if_absent": [
+      "U.S.-person tactical-network T&E credibility (advisor or hire): without it the link profiles and rubric are a student project and no lab or prime will consume the report",
+      "Government-contracts and export-control counsel: SBIR eligibility, deemed-export and technology-control-plan questions for the Indonesian founder, and the copyleft/Lattice-licence review must be answered before publishing and before any government engagement (constraint description, not a legal determination)",
+      "A sponsor relationship (PdM ASaP / PM C2 Applications, C5ISR Center, ATEC, Reveille Forge, TAK Product Center or a prime T&E cell): not expertise but access; its absence after 90 days is the kill trigger"
+    ]
+  },
+  "engineering_risks": [
+    {
+      "risk": "netem models point-to-point link states, not MANET radio dynamics (routing churn, contention, half-duplex), so scores may not predict field behaviour",
+      "mitigation": "State scope honestly ('application behaviour under specified link states'); add an EMANE/CORE mode with generic models for multi-hop topologies in month 4; calibrate scenarios with the T&E advisor; treat any sponsor-supplied emulation effects as the calibration target in Stage 2"
+    },
+    {
+      "risk": "Android emulators diverge from physical devices (timers, background limits, radio stack), corrupting time-to-arrival and reconnect behaviour",
+      "mitigation": "Mix 2-4 physical phones with emulators in every run; report emulator/physical split; measure emulator-vs-phone delta as a bench metric"
+    },
+    {
+      "risk": "Attribution errors in the ledger (CoT UID reuse, stale-time semantics, mission-sync versus streaming paths, TAK Server dedupe) produce false duplicates or losses",
+      "mitigation": "Tag every synthetic object with a bench-unique detail attribute plus emission time; validate the scorer against a zero-degradation control run that must score perfect; publish the counting rules"
+    },
+    {
+      "risk": "TAK Server / ATAK-CIV version drift and CIV-vs-GOV/MIL behaviour differences make results non-comparable over time",
+      "mitigation": "Pin versions per scenario and embed them in the report; keep a compatibility matrix; state explicitly that GOV/MIL builds are out of scope"
+    },
+    {
+      "risk": "Lattice SDK licence (updated 2026-07-31, terms unverified) may forbid publishing benchmark results or third-party test tooling",
+      "mitigation": "Counsel reads the licence before any Lattice work; keep the Lattice module optional and separable; fall back to TAK-only and Ditto adapters"
+    },
+    {
+      "risk": "Copyleft terms of TAK Server / ATAK-CIV may constrain how the bench is packaged and licensed",
+      "mitigation": "Keep bench code in separate processes communicating over sockets/APIs; license the bench itself permissively (Apache-2.0) where possible; counsel review before release"
+    },
+    {
+      "risk": "No authoritative definition of 'conformant' for RBAC/audit; the rubric is the founders' opinion and can be dismissed",
+      "mitigation": "Anchor every check to a public control (NIST SP 800-53 AU-2/AC-3-style), publish the mapping, and ask an ISSM/AO-adjacent reviewer to critique it in month 3; the demo's purpose is to get a government party to endorse or correct the rubric"
+    },
+    {
+      "risk": "Vendors 'teach to the test' or dispute scores, turning the bench into a liability",
+      "mitigation": "Randomise partition timings within declared bounds; publish counting rules; anonymise comparative results; frame outputs as diagnostics, not certification"
+    },
+    {
+      "risk": "Host resource starvation with 10 emulators plus servers skews timing",
+      "mitigation": "Cap at the measured node count where CPU steal is < 10%; use a 64 GB host; move to a cloud VM for larger runs; report host utilisation in every run"
+    },
+    {
+      "risk": "Clock alignment across nodes for sub-second time-to-arrival",
+      "mitigation": "All emulators share the host clock; physical phones sync via NTP to the host before each run; report residual offset"
+    },
+    {
+      "risk": "Deemed-export or CUI exposure if a lab shares link profiles, waveform models or traces with the non-U.S.-person founder",
+      "mitigation": "Technology control plan from month 1: controlled inputs handled only by the U.S.-person advisor/engineer in a segregated enclave; the bench stays synthetic-only until counsel clears anything else"
+    },
+    {
+      "risk": "A government body or platform owner publishes its own bench and the founders' work is stranded",
+      "mitigation": "This is an explicit kill criterion; the mitigation is speed to publication (month 2) and contributing upstream so the founders' names travel with the work"
+    },
+    {
+      "risk": "The whole effort produces credibility but no sponsor, and drifts into unpaid support",
+      "mitigation": "Hard $60k cap and the 90-day sponsor test; pre-agreed stop decision; treat the asset as a portfolio piece for joining a prime T&E cell, TAK plugin shop or NGC2 sub-vendor"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.darpa.mil/research/programs/fluid",
+      "title": "FLUID: Flexible Networking Using Intelligent Dialecting (DARPA) - defines 1 Mbps to 1 kbps DDIL regime",
+      "pub_date": "2025-03-28"
+    },
+    {
+      "url": "https://www.army.mil/article/293742/radio_rodeo_leverages_c5isr_center_expertise_facilities_to_improve_ngc2_tech",
+      "title": "'Radio Rodeo' leverages C5ISR Center expertise, facilities to improve NGC2 tech",
+      "pub_date": "2026-07"
+    },
+    {
+      "url": "https://www.army.mil/article/294250/operation_jailbreak_inside_atec_support_to_the_armys_sprint_to_integrate_the_battlefield",
+      "title": "Operation Jailbreak: Inside ATEC support to the Army's sprint to integrate the battlefield",
+      "pub_date": "2026"
+    },
+    {
+      "url": "https://breakingdefense.com/2026/07/army-opens-new-testing-hub-for-further-air-defense-integration/",
+      "title": "Army opens new testing hub (Reveille Forge Integrated Development Environment) for further air defense integration - Breaking Defense",
+      "pub_date": "2026-07"
+    },
+    {
+      "url": "https://thedefensepost.com/2026/07/31/us-technology-integration-hub/",
+      "title": "US Army Opens Integration Hub for New Defense Technologies - The Defense Post",
+      "pub_date": "2026-07-31"
+    },
+    {
+      "url": "https://www.nationaldefensemagazine.org/articles/2026/7/24/army-test-and-evaluation-command-empowering-industry-partners",
+      "title": "Army Test and Evaluation Command Empowering Industry Partners - National Defense Magazine",
+      "pub_date": "2026-07-24"
+    },
+    {
+      "url": "https://federalnewsnetwork.com/army/2026/07/army-unleashes-master-data-brokers-to-break-down-sharing-obstacles/",
+      "title": "Army unleashes 'master data brokers' (Army Data Operations Center) - Federal News Network",
+      "pub_date": "2026-07"
+    },
+    {
+      "url": "https://cpec2in.army.mil/Organizations/PM-C2-Applications/Application-Store-and-Pipeline/",
+      "title": "CPE C2IN > PM C2 Applications > Application Store and Pipeline (PdM ASaP) - designated NGC2 pathway for integrating commercial software",
+      "pub_date": "current (2026)"
+    },
+    {
+      "url": "https://www.highergov.com/contract-opportunity/request-for-information-next-generation-command-c2appsrfi-1-s-b655d/",
+      "title": "C2APPSRFI-1 NGC2 Software Application Storefront, Pipeline and Tailorable Warfighting Applications RFI (HigherGov mirror)",
+      "pub_date": "2026-05-12"
+    },
+    {
+      "url": "https://federalnewsnetwork.com/defense-main/2026/04/dod-modernization-exchange-2026-armys-dennis-teefy-on-building-application-layer-for-ngc2/",
+      "title": "DoD Modernization Exchange 2026: Army's Dennis Teefy on building application layer for NGC2 - Federal News Network",
+      "pub_date": "2026-04"
+    },
+    {
+      "url": "https://defensescoop.com/2026/05/29/operation-jailbreak-the-armys-massive-push-to-hack-its-own-systems-and-make-them-talk-to-each-other/",
+      "title": "Operation Jailbreak: the Army's massive push to hack its own systems - DefenseScoop",
+      "pub_date": "2026-05-29"
+    },
+    {
+      "url": "https://www.militaryaerospace.com/communications/article/55381163/army-pushes-open-api-architecture-in-fort-carson-hackathon-to-link-sensors-shooters-and-c2-networks",
+      "title": "Army pushes open-API architecture in Fort Carson hackathon - Military Aerospace",
+      "pub_date": "2026"
+    },
+    {
+      "url": "https://www.avinc.com/2026/07/27/operation-jailbreak-and-what-comes-next-for-defense-integration/",
+      "title": "Operation Jailbreak and What Comes Next for Defense Integration - AeroVironment (vendor perspective)",
+      "pub_date": "2026-07-27"
+    },
+    {
+      "url": "https://www.army.mil/article/292898/army_advances_historic_first_right_to_integrate_hackathon_accelerating_data_sharing_on_the_battlefield",
+      "title": "Army advances historic, first 'Right to Integrate' hackathon",
+      "pub_date": "2026"
+    },
+    {
+      "url": "https://www.dvidshub.net/news/561532/two-divisions-team-up-transform-army",
+      "title": "Two divisions team up to transform Army (Ivy Sting / Lightning Surge; industry fixing code in near real time) - DVIDS",
+      "pub_date": "2026-03-30"
+    },
+    {
+      "url": "https://www.cnbc.com/2025/10/03/anduril-palantir-ngc2-deep-flaws-army.html",
+      "title": "Anduril, Palantir NGC2 'deep flaws' Army memo - CNBC (RECALL from G14, not re-verified)",
+      "pub_date": "2025-10-03"
+    },
+    {
+      "url": "https://github.com/deptofdefense/AndroidTacticalAssaultKit-CIV",
+      "title": "deptofdefense/AndroidTacticalAssaultKit-CIV (ATAK-CIV open source)",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://github.com/TAK-Product-Center/Server",
+      "title": "TAK-Product-Center/Server (TAK Server source incl. takcl test framework)",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://github.com/TAK-Product-Center/Server/blob/main/LICENSE.md",
+      "title": "TAK Server LICENSE.md (includes gRPC/protobuf linking provision)",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://github.com/snstac/pytak",
+      "title": "snstac/pytak - Python TAK integration (CoT / TAK Protocol)",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://github.com/snstac/takproto",
+      "title": "snstac/takproto - encode/decode CoT XML and TAK Protocol v1 protobuf",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://tak.gov/pages/our-process",
+      "title": "TAK.gov | Our Process (official and third-party plugin signing pipelines)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://github.com/coreemu/core",
+      "title": "coreemu/core - Common Open Research Emulator (BSD-2-Clause)",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://coreemu.github.io/core/emane.html",
+      "title": "CORE documentation - EMANE integration (NRL Code 5522 and Adjacent Link)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://github.com/adjacentlink/emane",
+      "title": "adjacentlink/emane - Extendable Mobile Ad-hoc Network Emulator",
+      "pub_date": "ongoing (repo)"
+    },
+    {
+      "url": "https://www.nrl.navy.mil/Our-Work/Areas-of-Research/Information-Technology/NCS/EMANE/",
+      "title": "EMANE - U.S. Naval Research Laboratory",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://buf.build/anduril/lattice-sdk",
+      "title": "anduril/lattice-sdk on the Buf Schema Registry (Lattice protobufs)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://github.com/anduril/lattice-sdk-cpp",
+      "title": "anduril/lattice-sdk-cpp (archived 2025-07-24; protos moved to Buf Schema Registry)",
+      "pub_date": "2025-07-24"
+    },
+    {
+      "url": "https://developer.anduril.com/license",
+      "title": "Anduril Lattice SDK License Agreement (updated 2026-07-31; terms not retrievable this session - EGRESS_BLOCKED)",
+      "pub_date": "2026-07-31"
+    },
+    {
+      "url": "https://developer.anduril.com/guides/developer-tools/sandboxes",
+      "title": "Lattice Sandboxes | Lattice Developers (free, simulated data)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://ditto.live/pricing/cloud-sync",
+      "title": "Ditto - Device Sync Pricing",
+      "pub_date": "current (2026)"
+    },
+    {
+      "url": "https://aws.amazon.com/marketplace/pp/prodview-axv2ggb5yy5za",
+      "title": "Ditto on AWS Marketplace (Cloud Sync Pro plan pricing)",
+      "pub_date": "current (2026)"
+    },
+    {
+      "url": "https://armysbir.army.mil/topics/generative-ai-enabled-tactical-network/",
+      "title": "Army SBIR A254-019 Generative AI Enabled Tactical Network (DDIL modelling environment; Phase I up to $250k)",
+      "pub_date": "2025-02-05"
+    },
+    {
+      "url": "https://xtech.army.mil/announcement_category/xtech-winners/",
+      "title": "xTech Winners (xTechIgnite 2025; AIS GRUNTS)",
+      "pub_date": "2025-05"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-13/chapter-I/part-121/subpart-A/subject-group-ECFRb7921b3fcf04228/section-121.702",
+      "title": "13 CFR 121.702 SBIR/STTR ownership and control (E07-F3)",
+      "pub_date": "current eCFR"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120/subpart-C/section-120.62",
+      "title": "22 CFR 120.62 U.S. person definition (E07-F13)",
+      "pub_date": "current eCFR"
+    },
+    {
+      "url": "https://www.bis.gov/learn-support/deemed-exports/what-deemed-export",
+      "title": "BIS - What is a deemed export? (E07-F17)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://www.cooley.com/news/insight/2025/2025-09-25-dod-releases-long-awaited-final-rule-implementing-cybersecurity-maturity-model-certification-contract-clause",
+      "title": "DoD final rule implementing CMMC contract clause (E07-F9; Phase 2 suspended 2026-07-13)",
+      "pub_date": "2025-09-25"
+    },
+    {
+      "url": "https://apposite-tech.com/solutions/government-military/",
+      "title": "Apposite - Test Solutions for Government and Military Communications (commercial DDIL emulation, vendor claim)",
+      "pub_date": "current"
+    },
+    {
+      "url": "https://www.keysight.com/us/en/product/SN100JNEA/exata-network-modeling-multidomain-networks.html",
+      "title": "Keysight EXata / JNE network modeling (commercial tactical network emulation, vendor claim)",
+      "pub_date": "current"
+    }
+  ]
+}
