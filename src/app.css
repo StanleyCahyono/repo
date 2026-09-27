@@ -598,3 +598,9 @@ table.data .rt-list li::before { left: 0; width: 6px; }
 .plan .phase { min-width: 0; grid-template-columns: minmax(0, 1fr); overflow-wrap: anywhere; }
 .page > *, .card, .tab-panel { min-width: 0; }
 .page-head h1.long { font-size: clamp(22px, 2.3vw, 30px); line-height: 1.2; max-width: 60ch; }
+.audit-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.audit-grid .rec { gap: 8px; }
+.market-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.market-grid .rec { gap: 6px; padding: 12px 14px; }
+.chip-list { font-size: 13.5px; }
+.rec { align-content: start; }

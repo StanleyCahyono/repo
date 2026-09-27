@@ -6,8 +6,8 @@ function dataTable(rows, cols, opts = {}) {
   const state = { sortKey: opts.sortKey || null, desc: !!opts.desc, page: 0, filter: '', filters: {}, layout: 'table' };
   const cellLen = (v) => (v == null ? 0 : Array.isArray(v) ? v.map((x) => (isStr(x) ? x : JSON.stringify(x))).join(' ').length : typeof v === 'object' ? JSON.stringify(v).length : String(v).length);
   const sample = rows.slice(0, 15); const dataCols = cols.slice(1);
-  const avgLen = sample.length && dataCols.length ? sample.reduce((a, r) => a + dataCols.reduce((b, c) => b + cellLen(r[c.key]), 0), 0) / (sample.length * dataCols.length) : 0;
-  const heavy = cols.length >= 4 && avgLen > 60;
+  const avgLen = sample.length && dataCols.length ? sample.reduce((a, r) => a + dataCols.reduce((b, c) => b + (r[c.key] === undefined && c.render ? (() => { try { const n = c.render(r); return n instanceof Node ? n.textContent.length : cellLen(n); } catch { return 0; } })() : cellLen(r[c.key])), 0), 0) / (sample.length * dataCols.length) : 0;
+  const heavy = (cols.length >= 4 && avgLen > 60) || (cols.length >= 3 && avgLen > 160);
   const canToggle = opts.layout !== 'table' && cols.length >= 4;
   if (opts.defaultLayout) state.layout = opts.defaultLayout; else if (opts.layout === 'cards' || (heavy && opts.layout !== 'table')) state.layout = 'cards';
   if (canToggle && opts.id) { try { const saved = localStorage.getItem('c4isr-layout-' + opts.id); if (saved === 'cards' || saved === 'table') state.layout = saved; } catch {} }

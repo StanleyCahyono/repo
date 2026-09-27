@@ -1,0 +1,197 @@
+{
+ "id": "critic",
+ "generated": "2026-09-27",
+ "method": "Scripted audit plus editor review, run after the web-verified critic agent was interrupted. Checks: JSON validity and presence of every mandated file; counts; evidence forms per gap card; a written rationale for every score of 0 or 1; verdict/score consistency; contract rows that lack amounts or sources or mention revenue beside a ceiling; outdated organization names used without a note of the change; classified-architecture passages without an evidence marker. Three known cross-file leads were checked by hand, one with a web search.",
+ "file_audit": [],
+ "counts": {
+  "companies": 84,
+  "segments": 14,
+  "gaps": 36,
+  "scored_gaps": 36,
+  "survivors_deep_dived": 3,
+  "cards_with_lt3_evidence_forms": [],
+  "low_scores_without_rationale": [],
+  "verdicts": {
+   "kill": 35,
+   "borderline": 1
+  },
+  "contract_rows": 354
+ },
+ "contract_violations": [
+  {
+   "file": "companies",
+   "company": "Klas (Klas Telecom / Klas Government) - now an Anduril Industries business",
+   "issue": "Contract row has no ceiling, obligated or awarded amount: Voyager onboarding to USAF Enterprise-wide Agile Acquisition Contract (EWAAC) via Voyager "
+  }
+ ],
+ "unsourced_claims": [
+  {
+   "file": "companies",
+   "claim": "Doodle Labs: contract 'Direct DoD prime contracts / SBIR awards' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Rajant Corporation: contract 'Direct DoD prime contracts / SBIR awards' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "SpaceX Starshield (Space Exploration Technologies Corp. government business line): contract 'PLEO SATCOM services IDIQ task order (Starshield services, ~$70M)' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Planet Labs PBC: contract 'SKY Perfect JSAT Pelican satellite services agreement (commercial)' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "BlackSky Technology Inc.: contract 'Multi-year Gen-3 international customer contract (~$150M-class, reported 2024)' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Umbra Lab, Inc.: contract 'Space Force Tactical Surveillance, Reconnaissance and Tracking (TacSRT) task ord' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Capella Space: contract 'NASA Commercial SmallSat Data Acquisition (CSDA) program on-ramp' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Capella Space: contract 'U.S. Air Force / Space Force SBIR and tactical SAR awards' has no source URL"
+  },
+  {
+   "file": "companies",
+   "claim": "Vantor: contract 'Army Global Enhanced GEOINT Delivery (G-EGD) online imagery service' has no source URL"
+  }
+ ],
+ "contradictions": [
+  {
+   "files": [
+    "synthesis/executive.json",
+    "synthesis/founder_fit.json"
+   ],
+   "issue": "Sequencing differs. The executive landscape says: counsel-led structuring first, then the G29 DDIL test bench as a credibility asset, then the G04 engine as the single product bet. Founder fit makes G04 the primary bet from day one (gated 90-day validation, at most $80k), runs G29 as a parallel side project while G04 waits on external events, and holds G34 as the funded fallback.",
+   "resolution": "Both agree G04 is the only product bet and G29 is a credibility asset with no expected government purchase. They differ only on timing. The site's bottom line follows founder fit, the later and more detailed analysis. Counsel-led structuring comes first in both."
+  },
+  {
+   "files": [
+    "buyers/army.json",
+    "gaps/*.json",
+    "synthesis/money_map.json"
+   ],
+   "issue": "NGC2 sub-line amounts were attributed to FY2026 in the buyer map and 11 gap files but to FY2027 in the money map.",
+   "resolution": "FY2027 is correct; fixed in place (see fixes applied)."
+  },
+  {
+   "files": [
+    "synthesis/founder_fit.json"
+   ],
+   "issue": "Every entry in the founder-fit ranking carries rank 1, although the list order and the portfolio make G04 first, G34 second and G29 third.",
+   "resolution": "The site uses list order (primary, fallback, option) and ignores the rank field."
+  },
+  {
+   "files": [
+    "synthesis/money_map.json",
+    "survivors/G04-gtm.json",
+    "synthesis/founder_fit.json"
+   ],
+   "issue": "Checked whether any file treats NAVWAR topic DON26BX05-NP004 as still open.",
+   "resolution": "No contradiction. All three record it as closed on 2026-09-23, with selections expected around Q1-Q2 2027 (INFERENCE), and treat subcontracting to awardees as the door."
+  }
+ ],
+ "naming_issues": [
+  {
+   "file": "segments/S14.json (3), gaps/G06.json (2), companies/B11.json (1), gaps/G03.json (1), gaps/G21.json (1), segments/S11.json (1) and others",
+   "issue": "16 mentions use the old name with no note of the change nearby. Army Futures Command merged into T2COM in 2025-2026. Many are historical references to awards made before the change, which is correct; current-tense uses should use the new name.",
+   "correct": "T2COM (Transformation and Training Command)",
+   "source_url": ""
+  },
+  {
+   "file": "segments/S07.json (6), evidence/E02.json (6), companies/B05.json (5), segments/S14.json (5), gaps/G10.json (3), gaps/G01-score.json (3) and others",
+   "issue": "55 mentions use the old name with no note of the change nearby. PEO C3T was renamed PEO C3N and later reorganised under CPE C2IN. Many are historical references to awards made before the change, which is correct; current-tense uses should use the new name.",
+   "correct": "CPE C2IN (formerly PEO C3N / PEO C3T)",
+   "source_url": ""
+  }
+ ],
+ "speculation_flags": [
+  {
+   "file": "gaps/G27.json",
+   "issue": "4 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "segments/S09.json",
+   "issue": "3 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "gaps/G15.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "gaps/G34.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "gaps/G18.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "segments/S06.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "segments/S12.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  },
+  {
+   "file": "segments/S00.json",
+   "issue": "2 passage(s) describe a classified architecture without an evidence-insufficiency or INFERENCE marker nearby; read these as analyst inference."
+  }
+ ],
+ "unconvincing_miq": [
+  {
+   "gap_id": "G29",
+   "why": "By the founder-fit analysis's own account there is no buyer (budget 1, moat 1, incumbent vulnerability 1). Its answer earns relationships and an xTech entry, not a fundable company."
+  },
+  {
+   "gap_id": "G34",
+   "why": "The best regulatory fit, but the paying customers are civil agencies funded by grants, not defense programs. The answer supports a small bootstrapped business or acquihire, not the venture the mandate asks for."
+  }
+ ],
+ "fixes_applied": [
+  {
+   "file": "gaps/G05.json, gaps/G06.json, gaps/G06-score.json, gaps/G07.json, gaps/G07-score.json, gaps/G07-verdicts.json, gaps/G08.json, gaps/G14.json, gaps/G18.json, gaps/G18-score.json, gaps/G29.json, buyers/army.json",
+   "fix": "Relabelled the NGC2 'C2 Applications' $488.4M and 'C2 Data' $306.1M sub-lines from FY2026 to FY2027 request (16 places). Confirmed by Breaking Defense (2026-04) and Defense Daily reporting on the Army FY2027 budget, which list $488.4M C2 applications, $306.1M C2 data and $1.36B each for C2 infrastructure and transport. The money map had already flagged this."
+  }
+ ],
+ "recommended_fixes": [
+  {
+   "file": "synthesis/founder_fit.json",
+   "fix": "Set ranking ranks to 1, 2, 3 to match the list order.",
+   "priority": "low"
+  },
+  {
+   "file": "segments, gaps, evidence (see naming issues)",
+   "fix": "Review current-tense uses of 'PEO C3T' and 'Army Futures Command' and add the current name (CPE C2IN; T2COM). Leave historical award references as they are.",
+   "priority": "medium"
+  },
+  {
+   "file": "gaps/G27.json, segments/S09.json and others (see speculation flags)",
+   "fix": "Add an INFERENCE label or 'Public evidence insufficient' to passages that describe classified architectures.",
+   "priority": "medium"
+  },
+  {
+   "file": "companies (see unsourced claims)",
+   "fix": "Add source URLs to the 9 contract rows that have none, or drop them.",
+   "priority": "medium"
+  },
+  {
+   "file": "survivors/G04-*.json",
+   "fix": "Before any spend, re-verify the three facts G04 rests on: BlueRISC's $750k Phase II end date, NP004 selection timing, and whether PMW/A 170 plans a follow-on topic or D2P2. These are the load-bearing claims for the only borderline survivor.",
+   "priority": "high"
+  },
+  {
+   "file": "all",
+   "fix": "Ask counsel to confirm the SBIR ownership test outcome (13 CFR 121.702) for this founding team before any SBIR or D2P2 path is planned.",
+   "priority": "high"
+  }
+ ],
+ "overall_assessment": "The corpus is complete against the mandate and internally consistent on the points that decide the verdict. All mandated files exist and parse. There are 84 company profiles, 14 segment deep dives, 36 registry gaps each scored on 18 criteria, and 3 survivor deep dives. Every gap card has at least three forms of evidence, and every score of 0 or 1 carries a written rationale. No verdict contradicts its scores. The one material factual error found, NGC2 sub-lines labelled FY2026 instead of FY2027, was corrected in 12 files; it changes no verdict because no gap relied on those lines as its own budget. Residual weaknesses are editorial: old organization names in some current-tense passages, a few classified-architecture descriptions that should carry an INFERENCE label, and 9 contract rows without a source link. The main conclusion stands: 35 of 36 gaps fail, and G04 survives only as a gated, borderline validation bet whose load-bearing Navy facts should be re-checked before money is spent."
+}

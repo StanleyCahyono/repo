@@ -51,15 +51,14 @@ function kpi(n, label, sub) {
 function bottomLine(ff) {
   const pf = ff?.portfolio; if (!pf) return null;
   const idOf = (t) => (String(t || '').match(/\bG\d{2}\b/) || [])[0];
-  const gapT = (id) => (D.registry?.gaps || []).find((g) => g.id === id)?.title || '';
-  const betCard = (tone, iconName, eyebrow, title, text) => { const id = idOf(text); return h('div', { class: 'bl-card', style: { '--bl': tone } }, h('div', { class: 'eyebrow' }, eyebrow), h('h3', null, icon(iconName, 18), title), id ? h('a', { class: 'bl-gap', href: '#opportunities/' + id }, h('span', { class: 'mono' }, id), ' ', gapT(id)) : null, rich(String(text || '').replace(/^G\d{2}\s*[-–—]\s*/, ''), { limit: 2, threshold: 140 })); };
+  const betCard = (tone, iconName, eyebrow, title, text) => { const id = idOf(text); return h('div', { class: 'bl-card', style: { '--bl': tone } }, h('div', { class: 'eyebrow' }, eyebrow), h('h3', null, icon(iconName, 18), title), id ? h('a', { class: 'bl-gap', href: '#opportunities/' + id }, h('span', { class: 'mono' }, id), ' ', shortGapTitle(id)) : null, rich(String(text || '').replace(/^G\d{2}\s*[-–—]\s*/, ''), { limit: 2, threshold: 140 })); };
   return h('section', { class: 'stack' },
     h('div', { class: 'section-head' }, h('div', { class: 'eyebrow' }, 'Bottom line for the two founders'), h('h2', null, 'What to do with $250k')),
     h('div', { class: 'bottom-line' },
       betCard('var(--good)', 'opportunities', 'Pursue, gated', 'Primary bet', pf.primary),
       betCard('var(--s2)', 'plan', 'Fund only if the primary fails', 'Fallback', pf.secondary),
       betCard('var(--s4)', 'founderfit', 'Cheap side project', 'Option', pf.option)),
-    arr(ff.do_not_do).length ? h('div', { class: 'bl-card avoid', style: { '--bl': 'var(--critical)' } }, h('div', { class: 'eyebrow' }, 'Avoid'), h('h3', null, 'What not to do (' + arr(ff.do_not_do).length + ' rules)'), rich(arr(ff.do_not_do).map((x) => String(x).replace(/\s+/g, ' ').trim().replace(/([^.])$/, '$1.')).join(' '), { limit: 4, threshold: 0 }), h('a', { class: 'small', href: '#founderfit' }, 'Full founder-fit analysis →')) : null);
+    arr(ff.do_not_do).length ? h('div', { class: 'bl-card avoid', style: { '--bl': 'var(--critical)' } }, h('div', { class: 'eyebrow' }, 'Avoid'), h('h3', null, 'What not to do: ' + arr(ff.do_not_do).length + ' rules'), moreList(arr(ff.do_not_do).map((x) => h('li', null, leadBold(String(x).replace(/\s+/g, ' ').trim()))), 4), h('a', { class: 'small', href: '#founderfit' }, 'Full founder-fit analysis →')) : null);
 }
 function oppFlips(survivors) {
   const ff = D.founderfit || {};
@@ -91,7 +90,7 @@ route('overview', () => {
   const hero = h('section', { class: 'hero' }, heroRadar(gaps, vOf),
     h('div', { class: 'eyebrow' }, 'C4ISR startup landscape · research as of ' + (m.generated || 'September 2026')),
     scored ? h('h1', null, h('em', null, String(V.kill || 0) + ' of ' + scored), ' candidate gaps failed the red team.') : h('h1', null, 'Where can two founders with $250k build in C4ISR?'),
-    alive.length ? h('p', { class: 'hero-sub' }, (alive.length === 1 ? 'One survives, and only as borderline: ' : alive.length + ' survive: '), alive.map((g, i) => { const rk = arr(ff.founder_fit?.ranking).find((x) => x.gap_id === g.id); const short = (rk?.title || g.title).split(/\s[(\-–]/)[0].trim(); return [i ? '; ' : '', h('b', null, g.id + ', a ' + short.charAt(0).toLowerCase() + short.slice(1))]; }), '. It is worth a gated 90-day validation, not a full company build-out.') : null,
+    alive.length ? h('p', { class: 'hero-sub' }, (alive.length === 1 ? 'One survives, and only as borderline: ' : alive.length + ' survive: '), alive.map((g, i) => { const short = shortGapTitle(g.id); return [i ? '; ' : '', h('b', null, g.id + ', a ' + short.charAt(0).toLowerCase() + short.slice(1))]; }), '. It is worth a gated 90-day validation, not a full company build-out.') : null,
     h('p', { class: 'hero-sub small-sub' }, 'Question studied: where in modern C4ISR are there important, funded, technically tractable problems that are still unsolved and could support a new company for two university founders?'),
     h('div', { class: 'hero-actions' },
       alive[0] ? h('a', { class: 'hero-btn primary', href: '#opportunities/' + alive[0].id }, 'See the survivor', h('span', { 'aria-hidden': 'true' }, '→')) : null,

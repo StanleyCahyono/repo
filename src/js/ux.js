@@ -79,10 +79,14 @@ function rich(text, opts = {}) {
     items = sentences(s).flatMap(splitLong);
     if (items.length <= 1) return h('p', { class: 'rt' }, leadBold(s));
   }
-  const lis = items.map((x) => h('li', null, leadBold(x)));
+  const wrap = moreList(items.map((x) => h('li', null, leadBold(x))), limit);
+  if (pre) wrap.prepend(h('p', { class: 'rt-pre' }, leadBold(pre)));
+  return wrap;
+}
+/* A bullet list that shows the first `limit` items and a toggle for the rest. */
+function moreList(lis, limit = 4, cls = '') {
   const wrap = h('div', { class: 'rt-block' });
-  if (pre) wrap.append(h('p', { class: 'rt-pre' }, leadBold(pre)));
-  const ul = h('ul', { class: 'rt-list' }, lis.slice(0, limit));
+  const ul = h('ul', { class: 'rt-list ' + cls }, lis.slice(0, limit));
   wrap.append(ul);
   if (lis.length > limit) {
     const more = lis.slice(limit);
@@ -262,4 +266,12 @@ function enhance(root) {
   if (!REVEAL_IO) REVEAL_IO = new IntersectionObserver((entries) => entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.remove('will-reveal'); en.target.classList.add('revealed'); REVEAL_IO.unobserve(en.target); } }), { rootMargin: '0px 0px -40px 0px' });
   const vh = window.innerHeight;
   $$('.page > *', root).forEach((el) => { if (el.getBoundingClientRect().top > vh) { el.classList.add('will-reveal'); REVEAL_IO.observe(el); } });
+}
+
+/* Short product name for a gap: founder-fit ranking title (narrower form) before any qualifier, else the registry title. */
+function shortGapTitle(id) {
+  const rk = arr(D.founderfit?.founder_fit?.ranking).find((x) => x.gap_id === id);
+  const t = rk?.title || (D.registry?.gaps || []).find((g) => g.id === id)?.title || id;
+  const cut = t.split(/\s\(|\s[-–—]\s/)[0].trim();
+  return cut.length > 12 ? cut : t;
 }
