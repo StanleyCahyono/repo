@@ -1,0 +1,20 @@
+{
+  "@context": ["https://geojson.org/geojson-ld/geojson-context.jsonld"],
+  "id": "https://api.weather.gov/points/42.5086,-76.146",
+  "type": "Feature",
+  "geometry": { "type": "Point", "coordinates": [-76.146, 42.5086] },
+  "properties": {
+    "@id": "https://api.weather.gov/points/42.5086,-76.146",
+    "cwa": "BGM",
+    "forecastOffice": "https://api.weather.gov/offices/BGM",
+    "gridId": "BGM",
+    "gridX": 42,
+    "gridY": 61,
+    "forecast": "https://api.weather.gov/gridpoints/BGM/42,61/forecast",
+    "forecastHourly": "https://api.weather.gov/gridpoints/BGM/42,61/forecast/hourly",
+    "forecastGridData": "https://api.weather.gov/gridpoints/BGM/42,61",
+    "observationStations": "https://api.weather.gov/gridpoints/BGM/42,61/stations",
+    "timeZone": "America/New_York",
+    "radarStation": "KBGM"
+  }
+}

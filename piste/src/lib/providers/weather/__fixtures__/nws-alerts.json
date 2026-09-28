@@ -1,0 +1,50 @@
+{
+  "@context": ["https://geojson.org/geojson-ld/geojson-context.jsonld"],
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.aaaa.001.1",
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.aaaa.001.1",
+        "@type": "wx:Alert",
+        "id": "urn:oid:2.49.0.1.840.0.aaaa.001.1",
+        "areaDesc": "Cortland; Tompkins",
+        "sent": "2027-01-15T04:12:00-05:00",
+        "effective": "2027-01-15T04:12:00-05:00",
+        "onset": "2027-01-15T07:00:00-05:00",
+        "expires": "2027-01-15T19:00:00-05:00",
+        "ends": "2027-01-16T07:00:00-05:00",
+        "status": "Actual",
+        "messageType": "Alert",
+        "category": "Met",
+        "severity": "Moderate",
+        "certainty": "Likely",
+        "urgency": "Expected",
+        "event": "Winter Weather Advisory",
+        "headline": "Winter Weather Advisory issued January 15 at 4:12AM EST until January 16 at 7:00AM EST by NWS Binghamton NY"
+      }
+    },
+    {
+      "id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.bbbb.002.1",
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.bbbb.002.1",
+        "id": "urn:oid:2.49.0.1.840.0.bbbb.002.1",
+        "areaDesc": "Cortland",
+        "onset": null,
+        "expires": "2027-01-15T12:00:00-05:00",
+        "ends": null,
+        "status": "Test",
+        "messageType": "Alert",
+        "severity": "Unknown",
+        "event": "Test Message",
+        "headline": null
+      }
+    }
+  ],
+  "title": "Current watches, warnings, and advisories for 42.5086 N, 76.146 W",
+  "updated": "2027-01-15T09:15:00+00:00"
+}

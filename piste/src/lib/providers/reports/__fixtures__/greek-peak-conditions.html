@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+  SYNTHETIC FIXTURE. Written for Piste's parser tests; NOT a recording of greekpeak.net (the live page could not be
+  loaded from the build environment). It mimics common resort-page patterns and deliberately includes traps:
+  a legend "Status: Open / Closed", an announced opening date, an elevation in feet, a newsletter "Stay updated"
+  line, a column-layout snowfall table, and script data that must be ignored.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Current Conditions | Greek Peak Mountain Resort</title>
+  <meta name="description" content="Greek Peak: 55 trails, 8 lifts and night skiing near Ithaca and Syracuse.">
+  <meta property="og:description" content="Trails Open 55 of 55 all season long!">
+  <script>window.__STATE__ = { "trailsOpen": 999, "newSnow": "88\"" };</script>
+  <style>.open{color:green}</style>
+</head>
+<body>
+  <nav><a href="/">Home</a> <a href="/ski-ride/">Ski &amp; Ride</a> <a href="/newsletter">Stay updated with our newsletter</a></nav>
+  <main>
+    <h1>Current Conditions</h1>
+    <p class="updated">Last Updated: Friday, January 15, 2027 7:02 AM</p>
+    <div class="status-banner"><span>Mountain Status:</span> <strong>Open</strong></div>
+    <p>2026&ndash;27 Opening Day: Friday, December 4 (announced)</p>
+
+    <section class="snow">
+      <h2>Snowfall</h2>
+      <table class="snow-table">
+        <tr><th>24 Hour</th><th>48 Hour</th><th>7 Day</th></tr>
+        <tr><td>3&quot;</td><td>5&quot;</td><td>11&quot;</td></tr>
+      </table>
+      <div class="stat"><div class="label">Base Depth</div><div class="value">18&Prime; - 30&Prime;</div></div>
+      <div class="stat"><div class="label">Season Total</div><div class="value">64&quot;</div></div>
+      <div class="stat"><div class="label">Base Elevation</div><div class="value">1,148'</div></div>
+    </section>
+
+    <section class="ops">
+      <h2>Terrain</h2>
+      <ul>
+        <li>Trails Open 32 of 55</li>
+        <li>Lifts Open: 6 / 8</li>
+        <li>Beginner Trails Open: 9 of 12</li>
+        <li>Groomed Trails: 28</li>
+      </ul>
+      <dl>
+        <dt>Surface Conditions</dt><dd>Packed Powder, Machine Groomed, some Loose Granular</dd>
+        <dt>Snowmaking</dt><dd>Guns running on Alpha, Olympian and Hercules</dd>
+      </dl>
+      <p>Grooming: 28 trails groomed overnight including all beginner terrain.</p>
+    </section>
+
+    <section class="trail-list">
+      <h2>Trail Status</h2>
+      <p class="legend">Status: Open / Closed</p>
+      <table>
+        <tr><th>Trail</th><th>Difficulty</th><th>Status</th></tr>
+        <tr><td>Alpha</td><td>Beginner</td><td>Open</td></tr>
+        <tr><td>Zeus</td><td>Advanced</td><td>Closed</td></tr>
+      </table>
+    </section>
+  </main>
+  <footer>Hope Lake Lodge &middot; 2000 NYS Route 392, Cortland NY &middot; Snow phone 800-365-7669</footer>
+</body>
+</html>

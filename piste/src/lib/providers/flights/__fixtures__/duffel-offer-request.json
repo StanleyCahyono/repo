@@ -1,0 +1,53 @@
+{
+  "data": {
+    "id": "orq_0000AUde3KY1SptM4ABSfT",
+    "live_mode": false,
+    "created_at": "2027-01-10T15:21:01.927Z",
+    "cabin_class": "economy",
+    "slices": [
+      { "origin": { "iata_code": "ITH", "type": "airport" }, "destination": { "iata_code": "SLC", "type": "airport" }, "departure_date": "2027-01-15" }
+    ],
+    "passengers": [{ "id": "pas_0000AUde3KY1SptM4ABSfS", "type": "adult" }],
+    "offers": [
+      {
+        "id": "off_0000AUde3KY1SptM4ABSfU",
+        "live_mode": false,
+        "total_amount": "245.60",
+        "total_currency": "USD",
+        "base_amount": "203.00",
+        "tax_amount": "42.60",
+        "expires_at": "2027-01-10T15:51:01.927Z",
+        "owner": { "iata_code": "ZZ", "name": "Duffel Airways" },
+        "slices": [
+          {
+            "origin": { "iata_code": "ITH", "time_zone": "America/New_York" },
+            "destination": { "iata_code": "SLC", "time_zone": "America/Denver" },
+            "duration": "PT7H5M",
+            "segments": [
+              {
+                "origin": { "iata_code": "ITH", "time_zone": "America/New_York" },
+                "destination": { "iata_code": "DTW", "time_zone": "America/Detroit" },
+                "departing_at": "2027-01-15T06:00:00",
+                "arriving_at": "2027-01-15T07:35:00",
+                "marketing_carrier": { "iata_code": "ZZ", "name": "Duffel Airways" },
+                "marketing_carrier_flight_number": "1234",
+                "operating_carrier": { "iata_code": "ZZ", "name": "Duffel Airways" },
+                "passengers": [{ "passenger_id": "pas_0000AUde3KY1SptM4ABSfS", "cabin_class": "economy", "baggages": [{ "type": "carry_on", "quantity": 1 }, { "type": "checked", "quantity": 0 }] }]
+              },
+              {
+                "origin": { "iata_code": "DTW", "time_zone": "America/Detroit" },
+                "destination": { "iata_code": "SLC", "time_zone": "America/Denver" },
+                "departing_at": "2027-01-15T09:10:00",
+                "arriving_at": "2027-01-15T11:05:00",
+                "marketing_carrier": { "iata_code": "ZZ", "name": "Duffel Airways" },
+                "marketing_carrier_flight_number": "88",
+                "operating_carrier": { "iata_code": "ZZ", "name": "Duffel Airways" },
+                "passengers": [{ "passenger_id": "pas_0000AUde3KY1SptM4ABSfS", "cabin_class": "economy", "baggages": [{ "type": "carry_on", "quantity": 1 }] }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

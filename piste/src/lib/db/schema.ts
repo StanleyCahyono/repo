@@ -302,6 +302,11 @@ export const weatherRuns = sqliteTable(
     horizonDays: integer('horizon_days'),
     variables: json<string[]>('variables').notNull(),
     units: json<Record<string, string>>('units').notNull(),
+    /**
+     * How the provider's accumulations relate to `validTime` (Open-Meteo: 'preceding-hour' — a value stamped T
+     * covers (T−1h, T]). Needed to read stored points back without re-attributing hours. Null on error rows.
+     */
+    intervalSemantics: text('interval_semantics', { enum: ['preceding-hour', 'following-hour', 'instant'] }),
     status: text('status', { enum: ['ok', 'error'] }).notNull(),
     error: text('error'),
     prov: json<Provenance>('prov').notNull(),
@@ -871,6 +876,23 @@ export const alerts = sqliteTable('alerts', {
   readAt: text('read_at'),
 })
 
+export interface RefreshItemOutcome {
+  /** Stable item key, e.g. "alta:summit:open-meteo". */
+  key: string
+  /** Resort id (or other subject) the item belongs to; used for per-target "last success". */
+  target: string | null
+  ok: boolean
+  /** Nothing to do (unsupported, unchanged, not due) — neither success nor failure. */
+  skipped?: boolean
+  written: number
+  error?: string | null
+}
+
+export interface RefreshRunDetails {
+  items: RefreshItemOutcome[]
+  notes?: string[]
+}
+
 /** Scheduler / manual refresh bookkeeping. */
 export const refreshRuns = sqliteTable(
   'refresh_runs',
@@ -885,6 +907,8 @@ export const refreshRuns = sqliteTable(
     attempts: integer('attempts').notNull().default(1),
     itemsWritten: integer('items_written').notNull().default(0),
     error: text('error'),
+    /** Per-source outcomes (one resort failing never aborts the others; this records which ones failed). */
+    details: json<RefreshRunDetails | null>('details'),
   },
   (t) => [index('refresh_job_target').on(t.job, t.target, t.startedAt)],
 )

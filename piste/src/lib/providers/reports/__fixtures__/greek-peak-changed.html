@@ -1,0 +1,15 @@
+<!doctype html>
+<!--
+  SYNTHETIC "CHANGED LAYOUT" FIXTURE: the conditions moved into a client-rendered widget and the few visible
+  labels were renamed. The parser must fail loudly (schema-changed), not return a half-empty report.
+-->
+<html><head><title>Current Conditions | Greek Peak</title>
+<script>window.__CONDITIONS__ = {"trails":{"open":32,"total":55},"lifts":{"open":6,"total":8}}</script>
+</head>
+<body>
+  <nav><a href="/">Home</a></nav>
+  <h1>Current Conditions</h1>
+  <div id="conditions-widget" data-src="/api/widget"></div>
+  <p>Runs available today: see the live board.</p>
+  <p>Fresh corduroy every morning! Night skiing until 9pm.</p>
+</body></html>

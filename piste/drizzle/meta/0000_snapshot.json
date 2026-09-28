@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "4d7da057-1587-4864-a2d0-8ecd9861a591",
+  "id": "320db5b7-8e96-4a5e-a21d-05c195531884",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "airports": {
@@ -2359,6 +2359,13 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "details": {
+          "name": "details",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
@@ -4239,6 +4246,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "interval_semantics": {
+          "name": "interval_semantics",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "status": {

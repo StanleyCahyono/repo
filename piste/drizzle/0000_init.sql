@@ -356,7 +356,8 @@ CREATE TABLE `refresh_runs` (
 	`status` text NOT NULL,
 	`attempts` integer DEFAULT 1 NOT NULL,
 	`items_written` integer DEFAULT 0 NOT NULL,
-	`error` text
+	`error` text,
+	`details` text
 );
 --> statement-breakpoint
 CREATE INDEX `refresh_job_target` ON `refresh_runs` (`job`,`target`,`started_at`);--> statement-breakpoint
@@ -638,6 +639,7 @@ CREATE TABLE `weather_runs` (
 	`horizon_days` integer,
 	`variables` text NOT NULL,
 	`units` text NOT NULL,
+	`interval_semantics` text,
 	`status` text NOT NULL,
 	`error` text,
 	`prov` text NOT NULL,

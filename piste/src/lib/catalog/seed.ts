@@ -304,8 +304,12 @@ export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promis
       await db.insert(s.travelOptions).values({ resortId: r.id, mode: 'airport', airportIata: a.iata, role: a.role, minutes: a.minutes, km: a.km, basis: a.basis, prov: prov(a.source) })
       report.travelOptions++
     }
+    // Transfers carry no per-item source: only records built from web research may claim 'search-summary';
+    // reference-only records (research.method 'reference-only') are Piste reference data and stay 'unverified'.
+    const transferVerification = r.research.method === 'web-search' ? 'search-summary' : 'unverified'
+    const transferNote = transferVerification === 'unverified' ? 'Piste reference data (not web-verified in this build) — confirm at source' : null
     for (const t of r.travel.transfers) {
-      await db.insert(s.travelOptions).values({ resortId: r.id, mode: 'transfer', name: t.name, transferType: t.type, url: t.url, notes: t.notes, prov: prov({ url: t.url, verification: 'search-summary', checkedOn: r.research.date, note: null }) })
+      await db.insert(s.travelOptions).values({ resortId: r.id, mode: 'transfer', name: t.name, transferType: t.type, url: t.url, notes: t.notes, prov: prov({ url: t.url, verification: transferVerification, checkedOn: r.research.date, note: transferNote }) })
       report.travelOptions++
     }
   }

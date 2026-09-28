@@ -21,6 +21,14 @@ export interface SourceFetch {
   contentHash: string | null
   /** Small permitted extract for debugging/change detection — not a full page copy. */
   extract?: unknown
+  /** Outcome of this request (after retries). Absent on legacy records. */
+  ok?: boolean
+  /** Short error text when `ok` is false. Never contains credentials. */
+  error?: string | null
+  /** Number of network attempts made (0 when served from the in-memory cache). */
+  attempts?: number
+  /** Served from the short-lived in-memory cache; `fetchedAt` is the ORIGINAL retrieval time. */
+  fromCache?: boolean
 }
 
 export type ProviderResult<T> =
@@ -104,9 +112,14 @@ export interface OfficialAlert {
   event: string
   headline: string | null
   severity: string | null
+  /** UTC ISO instants. `ends` null = the issuer gave no end (treat as unbounded, never as "over"). */
   onset: string | null
   ends: string | null
   url: string | null
+  /** When the alert message itself expires (UTC ISO). Distinct from `ends` (end of the hazard). */
+  expires?: string | null
+  /** Issuer's affected-area description. */
+  areaDesc?: string | null
 }
 
 export interface AlertsProvider {
@@ -185,7 +198,20 @@ export interface FlightOffer {
     destination: string
     departAt: string
     arriveAt: string
-    segments: { carrier: string; flightNumber: string; origin: string; destination: string; departAt: string; arriveAt: string }[]
+    segments: {
+      carrier: string
+      flightNumber: string
+      origin: string
+      destination: string
+      /** UTC ISO instant when the airport zone is known; otherwise the airport-local wall time (see `departLocal`). */
+      departAt: string
+      arriveAt: string
+      /** Airport-local wall-clock time exactly as the provider stated it ('YYYY-MM-DDTHH:mm:ss'). */
+      departLocal?: string | null
+      arriveLocal?: string | null
+      carrierName?: string | null
+      operatingCarrier?: string | null
+    }[]
   }[]
   baggageNotes: string | null
   testMode: boolean
