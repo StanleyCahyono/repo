@@ -1,0 +1,206 @@
+{
+  "id": "breckenridge",
+  "name": "Breckenridge Ski Resort",
+  "shortName": "Breckenridge",
+  "country": "US",
+  "region": "Colorado",
+  "stateProvince": "CO",
+  "locality": "Breckenridge, CO",
+  "timezone": "America/Denver",
+  "operator": "Vail Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 39.487,
+    "lon": -106.07,
+    "source": {
+      "url": "https://www.breckenridge.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Peak 8 base-area position west of the town of Breckenridge"
+    }
+  },
+  "elevation": {
+    "baseM": 2926,
+    "summitM": 3962,
+    "verticalM": 1036,
+    "source": {
+      "url": "https://www.breckenridge.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 9,600 ft, summit about 12,998 ft (hike-to Peak 8 summit), vertical about 3,398 ft. The highest lift, Imperial Express, tops out near 12,840 ft"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Peak 8 base area (approx.)",
+      "lat": 39.487,
+      "lon": -106.07,
+      "elevationM": 2926,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper Peak 8 near the Imperial Express top (approx.; elevation left to terrain model)",
+      "lat": 39.472,
+      "lon": -106.095,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Lower Peak 9 and the Peak 8 base area (confirm)",
+    "source": {
+      "url": "https://www.breckenridge.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging along the Peak 8 and Peak 9 bases. High base elevation (about 9,600 ft) — altitude is a real consideration for visitors from sea level"
+    }
+  },
+  "character": "A high-altitude resort spread across Peaks 6 to 10 of the Tenmile Range directly above the historic mining town of Breckenridge. It pairs plenty of groomed intermediate cruising lower down with high alpine bowls, and its base elevation of about 9,600 ft is among the highest in North America.",
+  "learning": "Reference note: much of the easiest terrain is on lower Peak 9 and around the Peak 8 base, with lessons through the resort ski and ride school. Confirm where first-timers start, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.breckenridge.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.cotrip.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://avalanche.state.co.us/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "EGE",
+        "role": "closest",
+        "minutes": 80,
+        "km": 117,
+        "basis": "Estimate from typical routing (I-70 E over Vail Pass to Frisco, then CO-9 S); not a routing-service result. Winter service at EGE is limited and seasonal (Piste reference, confirm).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "DEN",
+        "role": "practical",
+        "minutes": 120,
+        "km": 165,
+        "basis": "Estimate from typical routing (Peña Blvd to I-70 W through the Eisenhower Tunnel to Frisco, then CO-9 S); not a routing-service result. Winter weekend traffic and closures on I-70 (Eisenhower Tunnel, Vail Pass) can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Epic Mountain Express (shared airport shuttle)",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: Vail Resorts' shared-ride shuttle (formerly branded Colorado Mountain Express) has run from DEN and EGE to Vail and Summit County. 2026-27 schedules and fares are unconfirmed."
+      },
+      {
+        "name": "Summit Stage (county bus)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the free Summit County bus has linked Frisco, Breckenridge, Copper Mountain and other Summit County towns. 2026-27 routes and schedules are unconfirmed."
+      },
+      {
+        "name": "Breckenridge Free Ride buses and BreckConnect Gondola",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the town's free buses and the free gondola from town lots to the Peak 7 and Peak 8 bases. 2026-27 schedules are unconfirmed."
+      },
+      {
+        "name": "Bustang (CDOT intercity bus, I-70 West line)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: CDOT's intercity coach has run along I-70 from Denver with stops including Frisco and Vail. Confirm 2026-27 stops, schedule and fares."
+      },
+      {
+        "name": "Rental car",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: winter driving on I-70 and CO-9; Colorado's traction law can apply on I-70 in winter. Check COtrip."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on breckenridge.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Vail Resorts).",
+      "Confirm terrain stats (leads: ~2,900 acres across Peaks 6–10, ~185+ trails, ~35 lifts, roughly 11–14% beginner), parks, snowmaking, night skiing, tubing and childcare.",
+      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): unlimited on the Epic Pass and Epic Local (holiday restrictions on Epic Local); Colorado-only Vail Resorts passes; Epic Day Pass products; not on Ikon, Indy or Mountain Collective. Confirm 2026-27 products and USD prices.",
+      "Learning setup: confirm ski-school bases (leads: Peak 8 and Peak 9 / Beaver Run), children's programs and carpets.",
+      "Parking: confirm 2026-27 rules (lead: mostly paid, some lots needing reservations on peak days).",
+      "Snow report: record the official conditions page and whether any structured feed exists."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Peak 8 / Peak 9 learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

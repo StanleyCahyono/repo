@@ -1,0 +1,194 @@
+{
+  "id": "steamboat",
+  "name": "Steamboat Ski Resort",
+  "shortName": "Steamboat",
+  "country": "US",
+  "region": "Colorado",
+  "stateProvince": "CO",
+  "locality": "Steamboat Springs, CO",
+  "timezone": "America/Denver",
+  "operator": "Alterra Mountain Company",
+  "priority": 0,
+  "location": {
+    "lat": 40.457,
+    "lon": -106.805,
+    "source": {
+      "url": "https://www.steamboat.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate gondola base-area position south-east of downtown Steamboat Springs"
+    }
+  },
+  "elevation": {
+    "baseM": 2103,
+    "summitM": 3221,
+    "verticalM": 1118,
+    "source": {
+      "url": "https://www.steamboat.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 6,900 ft, summit 10,568 ft (Mount Werner), vertical about 3,668 ft (resort-published figures as remembered; confirm)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Gondola base area (approx.)",
+      "lat": 40.457,
+      "lon": -106.805,
+      "elevationM": 2103,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain toward Storm Peak (approx.; elevation left to terrain model)",
+      "lat": 40.453,
+      "lon": -106.77,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Greenhorn Ranch mid-mountain learning area, reached by the gondola (confirm)",
+    "source": {
+      "url": "https://www.steamboat.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging around the base area"
+    }
+  },
+  "character": "A large resort on Mount Werner just outside the ranching town of Steamboat Springs in north-west Colorado, known for extensive tree skiing and dry snow. It is far from Denver, so most visitors fly into Hayden or plan a long drive.",
+  "learning": "Reference note: first-timers are now usually sent to Greenhorn Ranch, a mid-mountain learning area with its own surface lifts reached by the gondola; lessons run through the resort ski and ride school. Confirm the setup and lesson products for 2026-27.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.steamboat.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.cotrip.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://avalanche.state.co.us/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "HDN",
+        "role": "closest",
+        "minutes": 40,
+        "km": 45,
+        "basis": "Estimate from typical routing (US-40 E from Hayden to Steamboat Springs, then Mt. Werner Rd); not a routing-service result. Winter service at HDN is seasonal (Piste reference, confirm).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "DEN",
+        "role": "practical",
+        "minutes": 195,
+        "km": 290,
+        "basis": "Estimate from typical routing (I-70 W to Silverthorne, CO-9 N to Kremmling, then US-40 W over Rabbit Ears Pass); not a routing-service result. Mountain passes and I-70 traffic can add hours in winter.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Go Alpine shuttles",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: shuttle service has run from HDN and DEN. 2026-27 schedules and fares are unconfirmed."
+      },
+      {
+        "name": "Steamboat Springs Transit",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: free city buses link downtown and the mountain base."
+      },
+      {
+        "name": "Rental car",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: winter driving on US-40 and Rabbit Ears Pass; Colorado's traction law can apply on I-70 in winter. Check COtrip."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on steamboat.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Alterra Mountain Company).",
+      "Confirm terrain stats (leads: ~3,700 acres after the Mahogany Ridge expansion, 180+ trails, 20+ lifts including the Wild Blue Gondola, roughly 14/42/44 ability split), parks, snowmaking, night skiing (uncertain — the separate city-owned Howelsen Hill has night skiing) and childcare.",
+      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): unlimited on the Ikon Pass; included on Ikon Base (possible blackouts); Steamboat season passes; not on Epic or Mountain Collective. Confirm 2026-27 products and USD prices.",
+      "Learning setup: confirm Greenhorn Ranch access, surface lifts and lesson products.",
+      "HDN 2026-27 winter flight schedule; Go Alpine and any CDOT Snowstang service.",
+      "Snow report: record the official conditions page and whether any structured feed exists."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Greenhorn Ranch learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

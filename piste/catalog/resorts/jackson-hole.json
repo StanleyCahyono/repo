@@ -1,0 +1,194 @@
+{
+  "id": "jackson-hole",
+  "name": "Jackson Hole Mountain Resort",
+  "shortName": "Jackson Hole",
+  "country": "US",
+  "region": "Wyoming",
+  "stateProvince": "WY",
+  "locality": "Teton Village, WY",
+  "timezone": "America/Denver",
+  "operator": "Jackson Hole Mountain Resort (independent; Kemmerer family ownership)",
+  "priority": 0,
+  "location": {
+    "lat": 43.588,
+    "lon": -110.828,
+    "source": {
+      "url": "https://www.jacksonhole.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Teton Village base position"
+    }
+  },
+  "elevation": {
+    "baseM": 1924,
+    "summitM": 3185,
+    "verticalM": 1262,
+    "source": {
+      "url": "https://www.jacksonhole.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 6,311 ft (Teton Village), summit 10,450 ft (Rendezvous Mountain, top of the Aerial Tram), vertical 4,139 ft"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Teton Village base (approx.)",
+      "lat": 43.588,
+      "lon": -110.828,
+      "elevationM": 1924,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Rendezvous Mountain, top of the Aerial Tram (approx.)",
+      "lat": 43.596,
+      "lon": -110.868,
+      "elevationM": 3185,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": false,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Teton Village base-area learning lifts (e.g. Teewinot, Eagle's Rest — confirm)",
+    "source": {
+      "url": "https://www.jacksonhole.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Day operations only (reference). Slopeside lodging in Teton Village"
+    }
+  },
+  "character": "A big, steep mountain in the Teton Range above Teton Village, with an aerial tram to the summit of Rendezvous Mountain and one of the largest lift-served verticals in the US. Much of the terrain is advanced, with easier groomed runs and learning areas lower down near the base.",
+  "learning": "Reference note: learning lifts and carpets sit at the Teton Village base, with the easier Apres Vous area as a step up; lessons run through the resort's mountain sports school. Confirm current learning lifts and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.jacksonhole.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.wyoroad.info/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://bridgertetonavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "JAC",
+        "role": "both",
+        "minutes": 35,
+        "km": 35,
+        "basis": "Estimate from typical routing (US-26/89/191 S into Jackson, WY-22 W, then WY-390 N to Teton Village); not a routing-service result. JAC sits inside Grand Teton National Park; winter schedules and weather diversions are the main practical concerns (Piste reference, confirm).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "IDA",
+        "role": "practical",
+        "minutes": 130,
+        "km": 140,
+        "basis": "Estimate from typical routing (US-26 E, ID-31 over Pine Creek Pass to Victor, then ID-33/WY-22 over Teton Pass and WY-390 N); not a routing-service result. Teton Pass can close in storms.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "START Bus (Jackson – Teton Village)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the local public bus has linked the town of Jackson with Teton Village. 2026-27 schedule and fares are unconfirmed."
+      },
+      {
+        "name": "Taxis and shuttles from JAC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: taxis and shuttle operators serve JAC and Teton Village. No operator or fare is on file."
+      },
+      {
+        "name": "Rental car from JAC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: winter driving on WY-22/WY-390; check WYDOT conditions."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on jacksonhole.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: independently owned by the Kemmerer family).",
+      "Confirm terrain stats (leads: ~2,500+ acres, 130+ named runs, about 13–15 lifts including the Aerial Tram and the Bridger Gondola), ability split, parks, snowmaking, tubing and childcare.",
+      "Confirm Aerial Tram hours versus chairlift hours.",
+      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer days plus blackouts on Ikon Base); Mountain Collective days; resort season passes. Confirm 2026-27 terms and any reservation rule.",
+      "Learning setup: confirm base-area learning lifts (leads: Teewinot, Eagle's Rest), carpets and lesson products.",
+      "Teton Pass (WY-22) has had closures, including a 2024 road collapse (reference) — confirm current status if using the IDA route.",
+      "JAC 2026-27 winter service and IDA alternative; START Bus schedule."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, Teton Village lodging, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

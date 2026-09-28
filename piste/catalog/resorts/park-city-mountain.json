@@ -1,0 +1,181 @@
+{
+  "id": "park-city-mountain",
+  "name": "Park City Mountain",
+  "shortName": "Park City",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Park City, UT",
+  "timezone": "America/Denver",
+  "operator": "Vail Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 40.651,
+    "lon": -111.508,
+    "source": {
+      "url": "https://www.parkcitymountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Park City Mountain Village base position (the Canyons Village base is about 6 km north-west)"
+    }
+  },
+  "elevation": {
+    "baseM": 2073,
+    "summitM": 3056,
+    "verticalM": 983,
+    "source": {
+      "url": "https://www.parkcitymountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 6,800 ft, summit about 10,026 ft (Jupiter Peak); vertical derived as the difference. Resort materials round these to about 10,000 ft and 3,200 ft — confirm the official figures"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Park City Mountain Village base (approx.; elevation left to terrain model)",
+      "lat": 40.651,
+      "lon": -111.508,
+      "elevationM": null,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain around the Summit House area (approx.; elevation left to terrain model)",
+      "lat": 40.633,
+      "lon": -111.53,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "First Time lift area at Park City Mountain Village; more beginner terrain at Canyons Village (confirm)",
+    "source": {
+      "url": "https://www.parkcitymountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging at both base villages"
+    }
+  },
+  "character": "One of the largest ski areas in the US, created when Vail Resorts linked the Park City and Canyons ski areas for the 2015-16 season. It has two main bases, Park City Mountain Village and Canyons Village, plus a Town Lift from historic Main Street, and it is ticketed separately from neighbouring Deer Valley.",
+  "learning": "Reference note: beginner areas exist at both bases (the First Time lift area at Park City Mountain Village and learning terrain at Canyons Village), and lessons run through the resort ski and ride school. Confirm current learning lifts and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.parkcitymountain.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.visitparkcity.com/",
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 45,
+        "km": 58,
+        "basis": "Estimate from typical routing (I-80 E through Parleys Canyon to Exit 145 / Kimball Junction, then SR-224 into Park City); not a routing-service result. Winter storms on I-80 add time. Canyons Village is slightly closer, just off SR-224.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Park City Transit (local buses)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the city-run free bus system has linked Park City Mountain, Main Street and Deer Valley. 2026-27 routes and schedules are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: I-80 through Parleys Canyon is the usual route; parking rules and any paid or reserved parking for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on parkcitymountain.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Vail Resorts, owner since 2014).",
+      "Confirm terrain stats (leads: ~7,300 acres, 300+ trails, 40+ lifts), ability split, parks, snowmaking, night skiing, tubing and childcare; confirm precise base and summit coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): unlimited on the Epic Pass; Epic Local with holiday restrictions; Epic Day Pass products; a resort-specific pass. Confirm 2026-27 products, terms and USD prices.",
+      "Learning setup: confirm the First Time lift area, Canyons Village learning terrain, carpets and lesson products.",
+      "Labor: a ski-patrol strike in late Dec 2024 to early Jan 2025 limited terrain (reference); check whether any labor issue affects 2026-27.",
+      "Park City Transit 2026-27 routes and SLC shuttle operators; parking rules and prices at both bases.",
+      "Snow report: record the official conditions page and whether any structured feed exists."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

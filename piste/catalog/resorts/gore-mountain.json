@@ -1,0 +1,195 @@
+{
+  "id": "gore-mountain",
+  "name": "Gore Mountain",
+  "shortName": "Gore",
+  "country": "US",
+  "region": "Adirondacks",
+  "stateProvince": "NY",
+  "locality": "North Creek, NY",
+  "timezone": "America/New_York",
+  "operator": "New York State Olympic Regional Development Authority (ORDA)",
+  "priority": 1,
+  "location": {
+    "lat": 43.672,
+    "lon": -74.006,
+    "source": {
+      "url": "https://goremountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate main base-lodge position off Peaceful Valley Rd south-west of North Creek"
+    }
+  },
+  "elevation": {
+    "baseM": 324,
+    "summitM": 1097,
+    "verticalM": 773,
+    "source": {
+      "url": "https://goremountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit ~3,600 ft and vertical ~2,537 ft as commonly advertised; base derived as summit minus vertical (the low point is at the North Creek Ski Bowl; the main base lodge sits higher)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Main base lodge (approx.; elevation left to terrain model)",
+      "lat": 43.672,
+      "lon": -74.006,
+      "elevationM": null,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Summit lift area near Gore Mountain peak (approx.)",
+      "lat": 43.674,
+      "lon": -74.045,
+      "elevationM": 1097,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://goremountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+    }
+  },
+  "character": "A state-owned ski mountain in the southern Adirondacks near North Creek, run by ORDA, spread across several connected peaks with a mix of groomed trails and glades. The North Creek Ski Bowl area is linked to the main mountain.",
+  "learning": "Reference note: ski school and rentals operate at the main base. Learning-area details were not researched — confirm at source.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Gore date itself and past actual opening dates were not captured."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://goremountain.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.511ny.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null
+  },
+  "moreLinks": [
+    {
+      "label": "ORDA — operator",
+      "url": "https://orda.org/"
+    },
+    {
+      "label": "SKI3 season pass (Belleayre + Gore + Whiteface) — ORDA page on belleayre.com (researched, confirm)",
+      "url": "https://www.belleayre.com/seasonpasses/"
+    },
+    {
+      "label": "ORDA Frequent Skier Card (researched, confirm 2026-27 terms)",
+      "url": "https://www.belleayre.com/tickets/frequent-skier-cards/"
+    },
+    {
+      "label": "ORDA announcement of 2025-26 opening dates (2025-11-21)",
+      "url": "https://orda.org/2025/11/21/governor-hochul-announces-opening-dates-for-new-yorks-flagship-ski-mountains/"
+    },
+    {
+      "label": "Snow Pass partner resorts 2026-27 (SnowBrains, third-party)",
+      "url": "https://snowbrains.com/snow-pass-partner-resorts-2026-27/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": {
+      "minutes": 255,
+      "km": 405,
+      "basis": "Estimate from typical routing (NY-79 to Binghamton, I-88 E to Schenectady, I-87 N to Exit 23 (Warrensburg), then NY-28 N to North Creek); not a routing-service result. Alternative via I-81 N and the NY Thruway (I-90) to Albany is similar. Winter conditions add time.",
+      "source": {
+        "url": null,
+        "verification": "unverified",
+        "checkedOn": "2026-09-28",
+        "note": "Piste estimate"
+      }
+    },
+    "airports": [
+      {
+        "iata": "ALB",
+        "role": "practical",
+        "minutes": 95,
+        "km": 140,
+        "basis": "Estimate from typical routing (I-87 N to Exit 23, then US-9/NY-28 N to North Creek); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": []
+  },
+  "reportSource": {
+    "url": null,
+    "format": "unknown",
+    "notes": "The Gore snow-report URL was not found in research. Sibling Belleayre research found ORDA runs Belleayre, Gore and Whiteface on a shared web platform with an HTML snow report, so this one is probably HTML too — unverified. No JSON feed identified."
+  },
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (ORDA announced 2025-26 dates on 2025-11-21; 2026-27 dates likely around November 2026). Also capture the actual 2024-25 and 2025-26 opening dates.",
+      "Confirm 2026-27 pass access: SKI3 terms and prices, Frequent Skier Card terms, the Snow Pass partner benefit, and whether Gore has any Mountain Collective, Ikon, Epic or Indy access (only Whiteface was named in the ORDA Mountain Collective release).",
+      "Resolve whether the listed SKI3 blackout dates apply to the pass itself or only to the Mountain Collective discount perk.",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window).",
+      "Confirm daily lift hours, and whether the North Creek Ski Bowl offers night skiing and/or tubing in 2026-27.",
+      "Confirm official deep links on goremountain.com (trail map, snow report, tickets, lessons, webcams, parking).",
+      "Confirm terrain stats (trails, lifts, acres, snowmaking %), learning area, childcare and on-mountain lodging.",
+      "Confirm elevations (base here is derived) and base/summit coordinates (approximations).",
+      "Get a sourced drive time from Ithaca (current value is a Piste estimate)."
+    ],
+    "conflicts": [
+      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research)."
+    ],
+    "confidenceNotes": "Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and perks, Frequent Skier Card, Snow Pass partner listing and the 2025-11-21 opening-dates release — links/notes only; pass rules belong in passes.json. Coordinates, elevations (base derived), homepage and lessons/rentals are Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "id": "copper-mountain",
+  "name": "Copper Mountain Resort",
+  "shortName": "Copper",
+  "country": "US",
+  "region": "Colorado",
+  "stateProvince": "CO",
+  "locality": "Copper Mountain, CO (I-70 Exit 195)",
+  "timezone": "America/Denver",
+  "operator": "POWDR",
+  "priority": 0,
+  "location": {
+    "lat": 39.501,
+    "lon": -106.151,
+    "source": {
+      "url": "https://www.coppercolorado.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Center Village base position beside I-70"
+    }
+  },
+  "elevation": {
+    "baseM": 2960,
+    "summitM": 3753,
+    "verticalM": 793,
+    "source": {
+      "url": "https://www.coppercolorado.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 9,712 ft, summit about 12,313 ft, vertical about 2,601 ft (resort-published figures as remembered; confirm)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Center Village base (approx.)",
+      "lat": 39.501,
+      "lon": -106.151,
+      "elevationM": 2960,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain / bowl-top lift terminals (approx.; elevation left to terrain model)",
+      "lat": 39.475,
+      "lon": -106.165,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "West Village / Union Creek area (confirm)",
+    "source": {
+      "url": "https://www.coppercolorado.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Lodging in the base villages"
+    }
+  },
+  "character": "A large Summit County resort right beside I-70 whose terrain is naturally sorted by difficulty, with easier runs on the west side and steeper terrain to the east, plus high open bowls on top. It has three base areas (West Village / Union Creek, Center Village and East Village).",
+  "learning": "Reference note: the West Village / Union Creek base is aimed at beginners and families, with gentle terrain nearby, and the resort runs its own ski and ride school. Confirm current learning lifts, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.coppercolorado.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.cotrip.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://avalanche.state.co.us/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "EGE",
+        "role": "closest",
+        "minutes": 60,
+        "km": 91,
+        "basis": "Estimate from typical routing (I-70 E over Vail Pass to Exit 195); not a routing-service result. Winter service at EGE is limited and seasonal (Piste reference, confirm).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "DEN",
+        "role": "practical",
+        "minutes": 110,
+        "km": 162,
+        "basis": "Estimate from typical routing (Peña Blvd to I-70 W through the Eisenhower Tunnel to Exit 195); not a routing-service result. Winter weekend traffic and closures on I-70 (Eisenhower Tunnel, Vail Pass) can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Summit Stage (county bus)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the free Summit County bus has linked Frisco, Breckenridge, Copper Mountain and other Summit County towns. 2026-27 routes and schedules are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from DEN",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: operators serving Copper in 2026-27 are unconfirmed."
+      },
+      {
+        "name": "Rental car",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: winter driving on I-70; Colorado's traction law can apply on I-70 in winter. Check COtrip."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on coppercolorado.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: POWDR, owner since about 2009).",
+      "Confirm terrain stats (leads: ~2,500 acres, 140–160 trails, 23–24 lifts, roughly one fifth beginner), parks, snowmaking, night skiing, tubing (lead: a lift-served tubing hill has operated), the Woodward Copper facilities and childcare.",
+      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): unlimited on the Ikon Pass; included on Ikon Base (possible holiday blackouts); Copper season passes; not on Epic. Confirm 2026-27 products and USD prices.",
+      "Parking: confirm 2026-27 rules (lead: paid close-in lots with reservations on peak days, free remote lots with shuttles, carpool incentives).",
+      "Transfers: confirm which shuttle operators and CDOT services (Bustang/Snowstang) reach Copper in 2026-27.",
+      "Snow report: record the official conditions page and whether any structured feed exists."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, base-village lodging, Union Creek learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "id": "vail",
+  "name": "Vail Mountain",
+  "shortName": "Vail",
+  "country": "US",
+  "region": "Colorado",
+  "stateProvince": "CO",
+  "locality": "Vail, CO",
+  "timezone": "America/Denver",
+  "operator": "Vail Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 39.64,
+    "lon": -106.374,
+    "source": {
+      "url": "https://www.vail.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Vail Village base (Gondola One) position"
+    }
+  },
+  "elevation": {
+    "baseM": 2475,
+    "summitM": 3527,
+    "verticalM": 1052,
+    "source": {
+      "url": "https://www.vail.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 8,120 ft, summit 11,570 ft, vertical 3,450 ft (resort-published figures as remembered; confirm)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Vail Village base, Gondola One (approx.)",
+      "lat": 39.64,
+      "lon": -106.374,
+      "elevationM": 2475,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper front-side ridge near Wildwood / Two Elk (approx.; elevation left to terrain model)",
+      "lat": 39.612,
+      "lon": -106.362,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Golden Peak and Eagle's Nest (top of the Eagle Bahn Gondola) learning areas (confirm)",
+    "source": {
+      "url": "https://www.vail.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging in the Vail Village and Lionshead base areas"
+    }
+  },
+  "character": "A very large resort above the town of Vail on I-70 and the flagship of Vail Resorts, with long groomed front-side runs, the open Back Bowls and the separate Blue Sky Basin. Base areas are Vail Village, Lionshead and Golden Peak; it is busy and expensive at peak times.",
+  "learning": "Reference note: learning terrain has been concentrated at Golden Peak and at Eagle's Nest (top of the Eagle Bahn Gondola), with lessons through the Vail Ski & Snowboard School. Confirm where first-timers start in 2026-27 and the lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.vail.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.cotrip.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://avalanche.state.co.us/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "EGE",
+        "role": "closest",
+        "minutes": 40,
+        "km": 61,
+        "basis": "Estimate from typical routing (I-70 E from Gypsum to the Vail exits); not a routing-service result. Winter service at EGE is limited and seasonal (Piste reference, confirm).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "DEN",
+        "role": "practical",
+        "minutes": 135,
+        "km": 195,
+        "basis": "Estimate from typical routing (Peña Blvd to I-70 W through the Eisenhower Tunnel and over Vail Pass); not a routing-service result. Winter weekend traffic and closures on I-70 (Eisenhower Tunnel, Vail Pass) can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Epic Mountain Express (shared airport shuttle)",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: Vail Resorts' shared-ride shuttle (formerly branded Colorado Mountain Express) has run from DEN and EGE to Vail and Summit County. 2026-27 schedules and fares are unconfirmed."
+      },
+      {
+        "name": "Bustang (CDOT intercity bus, I-70 West line)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: CDOT's intercity coach has run along I-70 from Denver with stops including Frisco and Vail. Confirm 2026-27 stops, schedule and fares."
+      },
+      {
+        "name": "Town of Vail buses",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: free in-town buses link Vail Village, Lionshead and Golden Peak with town lots and neighbourhoods."
+      },
+      {
+        "name": "Rental car",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: winter driving on I-70 and Vail Pass; Colorado's traction law can apply on I-70 in winter. Check COtrip."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on vail.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Vail Resorts; the resort operates largely on White River National Forest land).",
+      "Confirm terrain stats (leads: ~5,300 acres, ~195 trails, 30+ lifts, roughly 18/29/53 ability split), parks, snowmaking, night skiing, tubing (lead: an Eagle's Nest activity area has offered tubing) and childcare.",
+      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): unlimited on the Epic Pass; limited days on Epic Local (shared with Beaver Creek, holiday restrictions); Epic Day Pass products; not on Ikon, Indy or Mountain Collective. Confirm 2026-27 products, price-increase deadlines and USD prices.",
+      "Parking: confirm 2026-27 rates and rules at the town parking structures (Vail Village, Lionshead).",
+      "Transfers: confirm Epic Mountain Express, Bustang and Eagle County regional bus operators and schedules.",
+      "Snow report: record the official conditions page and whether any structured feed exists (lead: Vail Resorts pages have embedded report data in the page source)."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, base-village lodging, Golden Peak / Eagle's Nest learning areas) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

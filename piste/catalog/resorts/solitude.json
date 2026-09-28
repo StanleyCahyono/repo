@@ -1,0 +1,183 @@
+{
+  "id": "solitude",
+  "name": "Solitude Mountain Resort",
+  "shortName": "Solitude",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Solitude, UT (Big Cottonwood Canyon, SR-190)",
+  "timezone": "America/Denver",
+  "operator": "Alterra Mountain Company",
+  "priority": 0,
+  "location": {
+    "lat": 40.62,
+    "lon": -111.592,
+    "source": {
+      "url": "https://www.solitudemountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Solitude Village base position on SR-190"
+    }
+  },
+  "elevation": {
+    "baseM": 2435,
+    "summitM": 3197,
+    "verticalM": 762,
+    "source": {
+      "url": "https://www.solitudemountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 7,988 ft and top about 10,488 ft; vertical derived as the difference (about 2,500 ft). Some sources list a slightly different vertical — confirm the official figures"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Solitude Village base area (approx.; elevation left to terrain model)",
+      "lat": 40.62,
+      "lon": -111.592,
+      "elevationM": null,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain lift terminals (approx.; elevation left to terrain model)",
+      "lat": 40.604,
+      "lon": -111.59,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Moonbeam base area (confirm current learning lifts)",
+    "source": {
+      "url": "https://www.solitudemountain.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Lodging in the small base village"
+    }
+  },
+  "character": "A resort in Big Cottonwood Canyon just down-canyon from Brighton, with a small pedestrian base village, groomed intermediate runs and advanced bowl and tree terrain such as Honeycomb Canyon.",
+  "learning": "Reference note: beginner terrain is centred on the Moonbeam base area, and the resort runs a ski and snowboard school. Confirm current learning lifts, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.solitudemountain.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 50,
+        "km": 54,
+        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd to the canyon mouth, then SR-190 up Big Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-190 can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "UTA ski bus (Big Cottonwood Canyon service)",
+        "type": "bus",
+        "url": "https://www.rideuta.com/",
+        "notes": "Reference, confirm: Utah Transit Authority has run winter ski-bus service from Salt Lake Valley park-and-ride lots up SR-190 to Solitude and Brighton. 2026-27 routes, schedule and fares are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: Utah applies a winter traction law in the Cottonwood canyons (SR-190 Big Cottonwood) that can require 4WD/AWD or suitable snow tires/chains. Parking rules for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on solitudemountain.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Alterra Mountain Company, owner since about 2018).",
+      "Confirm terrain stats (leads: ~1,200 acres including Honeycomb Canyon, 80+ runs, about 8 lifts), the official vertical, ability split, parks and snowmaking; confirm precise coordinates (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): Ikon Pass (unlimited, as an Alterra resort) and Ikon Base (terms to confirm); Solitude season passes; a ticket option linking to Brighton. Confirm 2026-27 products, blackouts and reservation rules.",
+      "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, free for full carpools), price and booking platform.",
+      "Learning setup: confirm Moonbeam-area lifts, carpets and lesson products; a Nordic center has operated nearby.",
+      "Road and avalanche context: SR-190 (Big Cottonwood Canyon, UDOT), traction law and avalanche-control closures.",
+      "UTA Big Cottonwood ski bus 2026-27 routes, schedule and fares.",
+      "Night skiing, tubing, childcare and events.",
+      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, base-village lodging, Moonbeam learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "id": "ski-arlberg",
+  "name": "Ski Arlberg",
+  "shortName": "Arlberg",
+  "country": "AT",
+  "region": "Arlberg (Tyrol / Vorarlberg)",
+  "stateProvince": "Tyrol / Vorarlberg",
+  "locality": "St. Anton am Arlberg, St. Christoph, Stuben, Zürs, Lech and Warth-Schröcken",
+  "timezone": "Europe/Vienna",
+  "operator": "Several lift companies under a joint Ski Arlberg ticket (including Arlberger Bergbahnen AG in St. Anton)",
+  "priority": 0,
+  "location": {
+    "lat": 47.129,
+    "lon": 10.264,
+    "source": {
+      "url": "https://www.skiarlberg.at/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate St. Anton am Arlberg village position; the linked area also has bases in Lech, Zürs, Stuben and Warth-Schröcken"
+    }
+  },
+  "elevation": {
+    "baseM": 1304,
+    "summitM": 2811,
+    "verticalM": 1507,
+    "source": {
+      "url": "https://www.skiarlberg.at/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Lowest base St. Anton am Arlberg about 1,304 m, top lift station Valluga about 2,811 m; vertical derived as the difference"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "St. Anton am Arlberg village (approx.)",
+      "lat": 47.129,
+      "lon": 10.264,
+      "elevationM": 1304,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Valluga top lift station (approx.; about 5 km from St. Anton village)",
+      "lat": 47.158,
+      "lon": 10.213,
+      "elevationM": 2811,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.skiarlberg.at/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski schools, rental shops and slopeside hotels exist in the villages; details per village are not on file"
+    }
+  },
+  "character": "A large linked ski area around the Arlberg pass in western Austria, sold on one ticket and spanning St. Anton and St. Christoph in Tyrol and Stuben, Zürs, Lech, Oberlech, Zug, Warth and Schröcken in Vorarlberg. The Flexenbahn gondola links Zürs with Stuben and the St. Anton side, and the Auenfeldjet links Lech with Warth-Schröcken; the area is known for extensive off-piste routes.",
+  "learning": "Reference note: each village has its own ski schools and nursery slopes. Confirm which village suits a beginner stay, and the ski-school and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived. Sectors (St. Anton, Lech-Zürs, Warth-Schröcken) may open on different dates."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.skiarlberg.at/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.stantonamarlberg.com/",
+    "avalanche": "https://avalanche.report/",
+    "openSkiMap": null
+  },
+  "moreLinks": [
+    {
+      "label": "Lech Zürs tourism (reference link — confirm)",
+      "url": "https://www.lechzuers.com/"
+    },
+    {
+      "label": "ÖBB Austrian Federal Railways (trains to St. Anton am Arlberg; reference link)",
+      "url": "https://www.oebb.at/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "INN",
+        "role": "closest",
+        "minutes": 75,
+        "km": 100,
+        "basis": "Estimate from typical routing (A12 Inntal motorway west to Landeck, then the S16 Arlberg road to St. Anton); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "ZRH",
+        "role": "practical",
+        "minutes": 140,
+        "km": 200,
+        "basis": "Estimate from typical routing (A3/A13 east via Liechtenstein or Feldkirch, A14 to Bludenz, then the S16 to St. Anton); not a routing-service result. Main transatlantic gateway (Piste reference, confirm). Direct trains also run from Zurich to St. Anton.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "MUC",
+        "role": "practical",
+        "minutes": 180,
+        "km": 300,
+        "basis": "Estimate from typical routing (A8/A93 to Kufstein, A12 through Innsbruck to Landeck, then the S16); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "ÖBB trains to St. Anton am Arlberg",
+        "type": "train",
+        "url": "https://www.oebb.at/",
+        "notes": "Reference, confirm: St. Anton has a station on the Arlberg railway with direct trains from Zurich and Innsbruck. Check 2026-27 timetables."
+      },
+      {
+        "name": "Arlberg Express and other airport shuttles",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: shared airport transfers have run from Zurich, Innsbruck and Munich. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Local buses between St. Anton and Lech/Zürs",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: regional buses link the villages over the Flexen pass road."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on skiarlberg.at (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the lift companies behind the joint ticket (reference: Arlberger Bergbahnen AG in St. Anton, plus separate companies in Lech, Zürs and Warth-Schröcken).",
+      "Confirm 2026-27 opening and closing dates for each sector.",
+      "Confirm area stats (leads: about 300 km of marked pistes plus about 200 km of deep-snow routes, about 85–90 lifts). European areas publish piste kilometres rather than acres, so skiableAcres will likely stay null.",
+      "Confirm precise base and top-station coordinates; weather points may be needed for Lech and Zürs as well, because the area spans several valleys.",
+      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days. Also check Mountain Collective and Ski Arlberg multi-day and season tickets (EUR, possibly low/high season pricing).",
+      "Avalanche: avalanche.report covers the Tyrol side (St. Anton); record the Vorarlberg bulletin URL for Lech, Zürs and Warth-Schröcken.",
+      "Road info: find the official status source for the Arlberg road tunnel, the Arlberg pass road and the Flexen pass road (seasonal and avalanche closures).",
+      "Airport shuttle operators and 2026-27 train timetables."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, village lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "id": "bristol-mountain",
+  "name": "Bristol Mountain Winter Resort",
+  "shortName": "Bristol Mountain",
+  "country": "US",
+  "region": "Western New York",
+  "stateProvince": "NY",
+  "locality": "South Bristol, NY (Canandaigua mailing address: 5662 NY-64)",
+  "timezone": "America/New_York",
+  "operator": null,
+  "priority": 1,
+  "location": {
+    "lat": 42.745,
+    "lon": -77.4044,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Wikipedia resort coordinate via search summary"
+    }
+  },
+  "elevation": {
+    "baseM": 305,
+    "summitM": 671,
+    "verticalM": 366,
+    "source": {
+      "url": "https://www.bristolmountain.com/about-the-mountain/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Base 1,000 ft, summit 2,200 ft, vertical 1,200 ft (official site; base/summit from a summary mixing the official page and a third-party guide). Wikipedia gives 1,150 ft vertical."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Base area (Route 64 base lodge; Wikipedia coordinate)",
+      "lat": 42.745,
+      "lon": -77.404,
+      "elevationM": 305,
+      "approximate": false
+    },
+    {
+      "key": "summit",
+      "label": "Summit (approximate, top of the Comet Express ridge; estimated coordinate)",
+      "lat": 42.742,
+      "lon": -77.391,
+      "elevationM": 671,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 39,
+    "lifts": 5,
+    "skiableAcres": 138,
+    "beginnerPct": 32,
+    "intermediatePct": 50,
+    "advancedPct": 18,
+    "terrainParks": 2,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.bristolmountain.com/about-the-mountain/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Official: 39 trails, 5 chairlifts (2 high-speed detachables) plus a magic carpet (carpet not counted). 138 acres per official-site/OnTheSnow summary (Wikipedia 160). Terrain-park count from a third-party summary."
+    }
+  },
+  "features": {
+    "nightSkiing": true,
+    "snowmakingPct": 100,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Launching Pad learning area served by a magic carpet; beginner lesson tickets are limited to the Lunar Launch and Sunset Chair",
+    "source": {
+      "url": "https://www.bristolmountain.com/lessons/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Night lighting reported on ~97% of trails (third-party summary). On-mountain lodging left unknown: the research only saw a 'ski & stay' page. Childcare (18 months-12 years) appeared in an unattributed summary — unconfirmed."
+    }
+  },
+  "character": "Compact Finger Lakes ski area south of Canandaigua with about 1,200 ft (366 m) of vertical, large for western New York, on terrain that is fairly steep for the region. Snowmaking covers the whole mountain, most trails are lit for night skiing, and it hosts race and aerials training.",
+  "learning": "Beginners start at the Launching Pad, a separate learning zone with a magic carpet. Beginner-only 2-hour group lessons run on weekends and holidays at 10am and 1pm; the package bundles a 4-hour lift ticket restricted to the Lunar Launch and Sunset Chair plus a 4-hour rental.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-06",
+        "closed": "2026-04-02",
+        "source": {
+          "url": "https://www.whec.com/top-news/bristol-mountain-opening-this-weekend-to-kick-off-2025-26-season/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-28",
+          "note": "Opened Sat Dec 6, 2025 (weekends only at first, Comet Express with 3 trails; daily from mid-December). Closed Thu Apr 2, 2026 after 111 operating days per RochesterFirst (https://www.rochesterfirst.com/news/business/local-business/bristol-mountains-2025-26-season-comes-to-a-close/)."
+        }
+      }
+    ],
+    "typicalText": "Opened Sat Dec 6, 2025 (weekends at first, daily from mid-December) and on a Thursday around Nov 30, 2023 for its 59th season (date inferred from article dates); the 2024-25 opening date was not found. The 2025-26 season closed Thu Apr 2, 2026 after 111 operating days.",
+    "notes": "No official 2026-27 opening date found as of 2026-09-28. OnTheSnow (third party) projects an opening of 2026-12-11 and closing of 2027-04-04; these are projections, not announcements (https://www.onthesnow.com/new-york/bristol-mountain/ski-resort)."
+  },
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Weekday day + night session (full operations)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "opens": "09:00",
+      "closes": "21:00",
+      "season": "2025-26",
+      "note": "Reported Dec 2025 when hours were extended for the season.",
+      "source": {
+        "url": "https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Weekend session",
+      "days": [
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": null,
+      "season": "2025-26",
+      "note": "Closing time not stated in the source.",
+      "source": {
+        "url": "https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "night-skiing",
+      "label": "Twilight ticket (valid 4 PM to close)",
+      "days": null,
+      "opens": "16:00",
+      "closes": null,
+      "season": "2025-26",
+      "note": "Applies during the night-operating season; close time not stated.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Opening weekend 2025 (Sat-Sun Dec 6-7), limited operations",
+      "days": [
+        6,
+        7
+      ],
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": "2025-26",
+      "note": "Opening weekend only; not the regular schedule.",
+      "source": {
+        "url": "https://www.whec.com/top-news/bristol-mountain-opening-this-weekend-to-kick-off-2025-26-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    }
+  ],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Full-day lift ticket, weekday non-holiday, bought 7+ days ahead",
+      "category": "Adult (13-69)",
+      "amount": 86,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Full-day lift ticket, weekday non-holiday, bought within 7 days",
+      "category": "Adult (13-69)",
+      "amount": 91,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Full-day lift ticket, weekend/holiday, bought 7+ days ahead",
+      "category": "Adult (13-69)",
+      "amount": 99,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Full-day lift ticket, weekend/holiday, bought within 7 days",
+      "category": "Adult (13-69)",
+      "amount": 104,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Twilight ticket (4 PM-close), bought in advance",
+      "category": "Adult",
+      "amount": 49,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Twilight ticket (4 PM-close), bought within 7 days",
+      "category": "Adult",
+      "amount": 52,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season label not shown on the indexed lift-ticket page; assumed 2025-26. A $5 reloadable Gateway Card is not included.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "College Tuesday twilight ticket (4 PM-close)",
+      "category": "College",
+      "amount": 40,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Tuesdays only; valid college ID and Gateway Card required. Season label assumed 2025-26.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "other",
+      "item": "Gateway Card (reloadable lift card)",
+      "category": null,
+      "amount": 5,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Charged in addition to ticket prices per the lift-ticket page summary.",
+      "source": {
+        "url": "https://www.bristolmountain.com/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.bristolmountain.com/",
+    "trailMap": "https://www.bristolmountain.com/trail-map/",
+    "interactiveMap": null,
+    "snowReport": "https://www.bristolmountain.com/conditions/",
+    "hours": null,
+    "tickets": "https://www.bristolmountain.com/lift-tickets/",
+    "seasonPass": "https://www.bristolmountain.com/season-products/",
+    "lessons": "https://www.bristolmountain.com/lessons/",
+    "rentals": null,
+    "webcams": "https://www.bristolmountain.com/webcam/",
+    "parking": null,
+    "roadInfo": "https://www.511ny.org/",
+    "lodging": "https://www.bristolmountain.com/ski-stay/",
+    "events": null,
+    "tourism": "https://www.visitfingerlakes.com/things-to-do/bristol-mountain/",
+    "avalanche": null,
+    "openSkiMap": null
+  },
+  "moreLinks": [
+    {
+      "label": "About the mountain (stats)",
+      "url": "https://www.bristolmountain.com/about-the-mountain/"
+    },
+    {
+      "label": "Rocket trail webcam (live)",
+      "url": "https://www.bristolmountain.com/webcams/RocketWebCamLive.html"
+    },
+    {
+      "label": "2026-27 season pass pricing (PDF)",
+      "url": "https://www.bristolmountain.com/wp-content/uploads/2026/04/26-27-Season-Pass-Pricing-Summer.pdf"
+    },
+    {
+      "label": "2026-27 season products announcement (SANY)",
+      "url": "https://www.iskiny.com/news/2026-2027-season-products-available-now-plus-fun-things-happening-bristol-mountain"
+    },
+    {
+      "label": "2025-26 opening weekend (WHEC)",
+      "url": "https://www.whec.com/top-news/bristol-mountain-opening-this-weekend-to-kick-off-2025-26-season/"
+    },
+    {
+      "label": "2025-26 season closes (RochesterFirst)",
+      "url": "https://www.rochesterfirst.com/news/business/local-business/bristol-mountains-2025-26-season-comes-to-a-close/"
+    },
+    {
+      "label": "Extended ski hours, Dec 2025 (FingerLakes1)",
+      "url": "https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/"
+    },
+    {
+      "label": "OnTheSnow snow report",
+      "url": "https://www.onthesnow.com/new-york/bristol-mountain/skireport"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": {
+      "minutes": 103,
+      "km": 120.7,
+      "basis": "Rome2rio driving estimate Ithaca to Bristol Mountain Ski Resort (about 1 h 43 min, 75 mi)",
+      "source": {
+        "url": "https://www.rome2rio.com/s/Ithaca/Bristol-Mountain-Ski-Resort",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": "Third-party routing estimate"
+      }
+    },
+    "airports": [],
+    "transfers": []
+  },
+  "reportSource": {
+    "url": "https://www.bristolmountain.com/conditions/",
+    "format": "html",
+    "notes": "Official HTML conditions page listing trail/lift status with New York Ski Industry Association surface codes (MG, HP, BS, CO, etc.). No JSON feed identified. Third-party mirror: https://www.onthesnow.com/new-york/bristol-mountain/skireport."
+  },
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "2026-27 lift ticket rates (the $86/$99 figures are assumed to be 2025-26).",
+      "Official 2026-27 opening date (only an OnTheSnow projection of Dec 11, 2026 was found).",
+      "Exact 2024-25 and 2023-24 opening dates.",
+      "Owner/operator entity.",
+      "Childcare (unattributed summary: 18 months-12 years), tubing, and whether any lodging is on-mountain.",
+      "Weekend closing time for night operations (weekday lifts ran to 9 PM in 2025-26).",
+      "What 'Lunar Launch' is (likely a beginner surface lift or carpet in the Launching Pad).",
+      "2026-27 season-pass prices (Executive, 25 & Under, Flex) — tracked in passes.json."
+    ],
+    "conflicts": [
+      "terrain.trails: 39 (https://www.bristolmountain.com/about-the-mountain/); 40 (https://www.onthesnow.com/new-york/bristol-mountain/ski-resort); 35 (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort). Resolution: Used official 39.",
+      "elevation.verticalFt: 1200 (https://www.bristolmountain.com/trail-map/); 1150 (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort). Resolution: Used official 1,200 ft.",
+      "terrain.skiableAcres: 138 (https://www.onthesnow.com/new-york/bristol-mountain/ski-resort); 160 (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort). Resolution: Used 138 (matches the official-site summary).",
+      "terrain.lifts: 5 lifts (2 high-speed detachables) plus a magic carpet (https://www.bristolmountain.com/about-the-mountain/); Named chairs: Galaxy Express, Comet Express, Morning Star, Rocket Triple, Sunset Double (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort); '6 chair lifts and 2 high-speed quads' (search summary of a site:bristolmountain.com query; exact page unclear) (https://www.bristolmountain.com/trail-map/). Resolution: Used 5 chairlifts; carpet/surface lifts not counted.",
+      "prices (adult day ticket): $86 weekday / $99 weekend (advance) (https://www.bristolmountain.com/lift-tickets/); $59-$79 range (third-party search summary; exact attribution among Liftopia/SnowStash/OnTheSnow unclear) (https://snowstash.com/usa/new-york/bristol-mountain/lift-tickets). Resolution: Kept official figures.",
+      "hours: Mon-Fri 9am-9pm, weekends from 8:30am (Dec 2025) (https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/); Fri 9-4, Sat/Sun 8:30-4, Mon-Thu closed (Yelp listing, probably early/late season) (https://www.yelp.com/biz/bristol-mountain-ski-and-snowboard-resort-canandaigua). Resolution: Used the Dec 2025 news report for full-season hours."
+    ],
+    "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Base (1,000 ft) and summit (2,200 ft) came from a summary mixing the official About page and a New York By Rail guide. Terrain parks (2) and night-lighting details (97% of trails lit) come from third-party or encyclopedia summaries. The lift ticket page did not show a season label; prices are assumed to be 2025-26. The 2026-27 family pricing ($750/$250) comes from the 2026-27 pricing PDF and an iskiny.com news item. The summit coordinate is an estimate for weather queries only. Season-pass prices ($750/$250 family tiers) belong to passes.json and are not listed here."
+  }
+}

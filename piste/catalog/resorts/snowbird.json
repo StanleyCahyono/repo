@@ -1,0 +1,185 @@
+{
+  "id": "snowbird",
+  "name": "Snowbird",
+  "shortName": "Snowbird",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Snowbird, UT (Little Cottonwood Canyon, SR-210)",
+  "timezone": "America/Denver",
+  "operator": "POWDR",
+  "priority": 0,
+  "location": {
+    "lat": 40.581,
+    "lon": -111.657,
+    "source": {
+      "url": "https://www.snowbird.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Snowbird Center / Aerial Tram base position on SR-210"
+    }
+  },
+  "elevation": {
+    "baseM": 2365,
+    "summitM": 3353,
+    "verticalM": 988,
+    "source": {
+      "url": "https://www.snowbird.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 7,760 ft (lowest base), summit 11,000 ft (Hidden Peak, top of the Aerial Tram), vertical 3,240 ft. The Snowbird Center / tram plaza sits higher than the lowest base"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Snowbird Center / Aerial Tram base (approx.; elevation left to terrain model)",
+      "lat": 40.581,
+      "lon": -111.657,
+      "elevationM": null,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Hidden Peak, top of the Aerial Tram (approx.)",
+      "lat": 40.561,
+      "lon": -111.645,
+      "elevationM": 3353,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Chickadee lift area near the base; Baby Thunder as a next step (confirm)",
+    "source": {
+      "url": "https://www.snowbird.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging at the base (e.g. The Cliff Lodge). Snowboarding is allowed, unlike at Alta"
+    }
+  },
+  "character": "A large resort in Little Cottonwood Canyon just down-canyon from Alta, opened in 1971 and ticketed separately from it. An aerial tram climbs to Hidden Peak, Mineral Basin lies on the back side, and the terrain leans toward steep, high-alpine skiing; snowboarding is allowed.",
+  "learning": "Reference note: beginner terrain is served by the Chickadee lift near the base area, with Baby Thunder as a common next step; the resort runs its own ski and snowboard school. Confirm current lifts, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.snowbird.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 45,
+        "km": 49,
+        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd, then SR-210 up Little Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-210 can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "UTA ski bus (Little Cottonwood Canyon service)",
+        "type": "bus",
+        "url": "https://www.rideuta.com/",
+        "notes": "Reference, confirm: Utah Transit Authority has run winter ski-bus service from Salt Lake Valley park-and-ride lots up SR-210 to Snowbird and Alta. 2026-27 routes, schedule, fares and any pass-holder ride benefit are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: Utah applies a winter traction law in the Cottonwood canyons (SR-210 Little Cottonwood) that can require 4WD/AWD or suitable snow tires/chains. Parking rules for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on snowbird.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: POWDR, owner since about 2014).",
+      "Confirm terrain stats (leads: ~2,500 acres including Mineral Basin, 140+ runs, the Aerial Tram plus about 10 chairlifts and the Peruvian Tunnel carpet), ability split, parks, snowmaking, night skiing, tubing and childcare.",
+      "Confirm precise base and Hidden Peak coordinates and the tram-plaza elevation (weather points are approximate).",
+      "Pass leads from earlier seasons (unverified): Ikon Pass / Ikon Base days shared with Alta; Mountain Collective days counted separately from Alta; Snowbird season passes; Alta Snowbird combined pass and day ticket. Confirm every 2026-27 product, day count, blackout and reservation rule.",
+      "Confirm Aerial Tram hours versus chairlift hours.",
+      "Learning setup: confirm Chickadee / Baby Thunder, carpets and the ski-school name and lesson products.",
+      "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives) and the official URL.",
+      "Road and avalanche context shared with Alta: SR-210 (UDOT), traction law, avalanche-control closures, interlodge orders, and any tolling or bus changes from UDOT's Little Cottonwood plan.",
+      "UTA ski bus: confirm 2026-27 routes, schedule and fares, and whether any Snowbird pass includes rides.",
+      "Lodging: confirm resort-run slopeside lodging (leads: The Cliff Lodge, The Lodge at Snowbird, The Inn, Iron Blosam).",
+      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Chickadee learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

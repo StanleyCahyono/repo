@@ -1,0 +1,181 @@
+{
+  "id": "big-sky",
+  "name": "Big Sky Resort",
+  "shortName": "Big Sky",
+  "country": "US",
+  "region": "Montana",
+  "stateProvince": "MT",
+  "locality": "Big Sky, MT",
+  "timezone": "America/Denver",
+  "operator": "Boyne Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 45.285,
+    "lon": -111.401,
+    "source": {
+      "url": "https://bigskyresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Mountain Village base position"
+    }
+  },
+  "elevation": {
+    "baseM": 2078,
+    "summitM": 3403,
+    "verticalM": 1326,
+    "source": {
+      "url": "https://bigskyresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit 11,166 ft (Lone Peak) and advertised vertical 4,350 ft; base derived as summit minus vertical (the lowest lift-served point, not Mountain Village, which sits around 7,500 ft)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Mountain Village base (approx.)",
+      "lat": 45.285,
+      "lon": -111.401,
+      "elevationM": 2286,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Lone Peak, top of the Lone Peak Tram (approx.; about 4 km west of Mountain Village)",
+      "lat": 45.278,
+      "lon": -111.45,
+      "elevationM": 3403,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Mountain Village base-area learning terrain (confirm lift names)",
+    "source": {
+      "url": "https://bigskyresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Slopeside lodging in Mountain Village"
+    }
+  },
+  "character": "A very large resort in south-west Montana built around Lone Peak, whose summit is reached by a tram, with terrain spread across several connected mountains and a vertical of over 4,000 ft. Steep expert terrain sits up high, with groomed intermediate runs lower down.",
+  "learning": "Reference note: learning terrain is near the Mountain Village base, and lessons run through the resort's ski and ride school. Confirm current learning lifts, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://bigskyresort.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.mdt.mt.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://www.mtavalanche.com/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "BZN",
+        "role": "both",
+        "minutes": 75,
+        "km": 85,
+        "basis": "Estimate from typical routing (MT-85 S to Four Corners, US-191 S through Gallatin Canyon, then the Big Sky spur road, MT-64, to Mountain Village); not a routing-service result. Gallatin Canyon is slow in storms.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Skyline bus (Bozeman – Big Sky)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the local Skyline transit service has run between Bozeman and Big Sky and within Big Sky. 2026-27 schedule and fares are unconfirmed."
+      },
+      {
+        "name": "Shuttles from BZN",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: private shuttle operators serve BZN–Big Sky. No operator or fare is on file."
+      },
+      {
+        "name": "Rental car from BZN",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: US-191 through Gallatin Canyon; check MDT road conditions."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on bigskyresort.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Boyne Resorts).",
+      "Confirm terrain stats (leads: ~5,800+ acres, 300+ runs, 35+ lifts including the Lone Peak Tram and the Ramcharger 8 chair), ability split, parks, snowmaking, night skiing, tubing and childcare.",
+      "Confirm the official base elevation basis and precise Mountain Village and Lone Peak coordinates (weather points are approximate).",
+      "Lone Peak Tram: confirm hours and whether it needs a separate reservation or upgrade.",
+      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer plus blackouts on Ikon Base); Mountain Collective days; Big Sky passes. Confirm 2026-27 terms.",
+      "Skyline bus 2026-27 schedule; BZN shuttle operators.",
+      "Record the official Montana road-conditions page (MDT traveler information / 511) for US-191 and MT-64; the road link on this record is the MDT homepage only."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, Mountain Village lodging, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

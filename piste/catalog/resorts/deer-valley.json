@@ -1,0 +1,182 @@
+{
+  "id": "deer-valley",
+  "name": "Deer Valley Resort",
+  "shortName": "Deer Valley",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Park City, UT",
+  "timezone": "America/Denver",
+  "operator": "Alterra Mountain Company",
+  "priority": 0,
+  "location": {
+    "lat": 40.637,
+    "lon": -111.478,
+    "source": {
+      "url": "https://www.deervalley.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Snow Park base-area position"
+    }
+  },
+  "elevation": {
+    "baseM": 2003,
+    "summitM": 2917,
+    "verticalM": 914,
+    "source": {
+      "url": "https://www.deervalley.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Pre-expansion figures: Snow Park base about 6,570 ft, top of Empire Canyon about 9,570 ft, vertical about 3,000 ft. The East Village expansion may change the published base and vertical"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Snow Park base area (approx.)",
+      "lat": 40.637,
+      "lon": -111.478,
+      "elevationM": 2003,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain around Bald Mountain (approx.; elevation left to terrain model)",
+      "lat": 40.614,
+      "lon": -111.487,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": false,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Snow Park base (Wide West learning area — confirm)",
+    "source": {
+      "url": "https://www.deervalley.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Day operations only (reference). Slopeside lodging at Snow Park, Silver Lake and Empire Pass. Skiers only — snowboards are not allowed"
+    }
+  },
+  "character": "A skiers-only resort (no snowboards) beside Park City, separately ticketed from Park City Mountain, known for extensive grooming and a service-focused approach. Its original terrain spreads from the Snow Park base up through Silver Lake to Empire Canyon, and it is in the middle of a multi-year expansion toward a new East Village base near Jordanelle Reservoir.",
+  "learning": "Reference note: beginner terrain is at the Snow Park base (the Wide West learning area) with more green runs around Silver Lake, and the resort runs its own ski school. Skiing only. Confirm current learning lifts and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.deervalley.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.visitparkcity.com/",
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 50,
+        "km": 60,
+        "basis": "Estimate from typical routing (I-80 E through Parleys Canyon to Exit 145 / Kimball Junction, then SR-224 into Park City); not a routing-service result. Winter storms on I-80 add time. Snow Park is a few minutes past downtown Park City.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Park City Transit (local buses)",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: the city-run free bus system has linked Park City Mountain, Main Street and Deer Valley. 2026-27 routes and schedules are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: I-80 through Parleys Canyon is the usual route; parking rules and any paid or reserved parking for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on deervalley.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the skiers-only policy for 2026-27 (reference: Deer Valley does not allow snowboards).",
+      "Confirm the operator (reference: Alterra Mountain Company, owner since 2017).",
+      "East Village expansion: confirm which lifts, runs and base facilities are open in 2026-27, the updated elevation/vertical and terrain totals, and whether East Village is a recommended arrival point.",
+      "Confirm terrain stats (leads, pre-expansion: ~2,000+ acres and 20+ lifts; the expansion adds substantial terrain and lifts).",
+      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer days and holiday blackouts on lower tiers); Deer Valley season passes; daily ticket-sales caps. Confirm 2026-27 terms and whether any reservation rule applies.",
+      "Learning setup: confirm Wide West, carpets and ski-school products; confirm childcare (lead: a center has operated at Snow Park).",
+      "Park City Transit 2026-27 routes and SLC shuttle operators.",
+      "Snow-report URL and format."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, slopeside lodging, Snow Park learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

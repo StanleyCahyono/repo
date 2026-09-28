@@ -1,0 +1,187 @@
+{
+  "id": "alta",
+  "name": "Alta Ski Area",
+  "shortName": "Alta",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Alta, UT (head of Little Cottonwood Canyon, SR-210)",
+  "timezone": "America/Denver",
+  "operator": "Alta Ski Lifts Company",
+  "priority": 2,
+  "location": {
+    "lat": 40.5885,
+    "lon": -111.638,
+    "source": {
+      "url": "https://www.alta.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Wildcat/Collins base-area position in the Town of Alta on SR-210"
+    }
+  },
+  "elevation": {
+    "baseM": 2600,
+    "summitM": 3216,
+    "verticalM": 616,
+    "source": {
+      "url": "https://www.alta.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Lift-served figures: base 8,530 ft, top of lift-served terrain about 10,550 ft, vertical about 2,020 ft. Some sources quote the hike-to Mt. Baldy summit (about 11,068 ft) and a vertical near 2,538 ft instead — check which basis the official stats page uses"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Wildcat / Collins base area, Town of Alta (approx.)",
+      "lat": 40.5885,
+      "lon": -111.638,
+      "elevationM": 2600,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain near the Sugarloaf / Supreme lift tops (approx.)",
+      "lat": 40.57,
+      "lon": -111.628,
+      "elevationM": 3216,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": false,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Albion base (Albion Basin) — Sunnyside and Albion lifts; confirm current lift names",
+    "source": {
+      "url": "https://www.alta.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing: Alta runs day operations only (reference). Slopeside lodging in the Town of Alta is run by independent lodges, not the ski area. Skiers only — snowboards are not allowed"
+    }
+  },
+  "character": "A skiers-only ski area (no snowboards) at the head of Little Cottonwood Canyon in Utah's Wasatch Range, next to but separately ticketed from Snowbird. Lift service began in 1939; it has two base areas, Wildcat and Albion, linked by a transfer tow, with gentle terrain around Albion Basin and a large share of steep advanced terrain higher up.",
+  "learning": "Reference note: first-timers normally start at the Albion base (Albion Basin), where the Sunnyside and Albion lifts serve the easiest groomed terrain; the Alta ski school (historically the Alf Engen Ski School) runs lessons. Skiing only — there are no snowboard lessons. Confirm current lift names, any carpet and 2026-27 beginner packages.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.alta.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 50,
+        "km": 52,
+        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd, then SR-210 up Little Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-210 can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "UTA ski bus (Little Cottonwood Canyon service)",
+        "type": "bus",
+        "url": "https://www.rideuta.com/",
+        "notes": "Reference, confirm: Utah Transit Authority has run winter ski-bus service from Salt Lake Valley park-and-ride lots up SR-210 to Snowbird and Alta. 2026-27 routes, schedule, fares and any pass-holder ride benefit are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: Utah applies a winter traction law in the Cottonwood canyons (SR-210 Little Cottonwood) that can require 4WD/AWD or suitable snow tires/chains. Parking rules for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on alta.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Record an official source for the skiers-only policy (reference: Alta does not allow snowboards).",
+      "Confirm the operator (reference: Alta Ski Lifts Company, operating largely on Uinta-Wasatch-Cache National Forest land under a Forest Service permit).",
+      "Elevation basis: Piste stores the lift-served figures (base ~8,530 ft, top ~10,550 ft, ~2,020 ft vertical); some sources quote Mt. Baldy (~11,068 ft) and ~2,538 ft vertical. Record the official basis and precise Wildcat, Albion and upper-mountain coordinates (weather points are approximate).",
+      "Learning setup: confirm the Albion-side beginner lifts (reference: Sunnyside and Albion), any carpet, the Wildcat–Albion transfer tow, the current ski-school name (historically Alf Engen Ski School) and beginner lesson packages. Recent lift replacements may have changed lift names.",
+      "Pass leads from earlier seasons (unverified): Ikon Pass / Ikon Base days shared with Snowbird; Mountain Collective days counted separately from Snowbird; Alta season pass; Alta Snowbird combined season pass and day ticket. Confirm every 2026-27 product, day count, blackout and reservation rule.",
+      "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives), price, booking platform and official URL.",
+      "Road: SR-210 (Little Cottonwood Canyon) is a UDOT road. Record the Cottonwood Canyons status page, 2026-27 traction-law rules, avalanche-control closure practice (often until mid-morning after storms), Town of Alta interlodge notices, and any tolling or bus changes from UDOT's Little Cottonwood plan.",
+      "UTA ski bus: confirm 2026-27 Little Cottonwood routes (lead: route numbers 994/953 in past seasons), schedule, fares, park-and-ride lots and whether any Alta pass includes rides.",
+      "Snow report: record the official snow-report URL and format (lead: HTML page on alta.com) so the unverified Alta report parser can be checked; record webcam URLs.",
+      "Lodging: confirm the slopeside lodges in the Town of Alta (leads: Alta Lodge, Rustler Lodge, Alta Peruvian Lodge, Snowpine Lodge, Goldminer's Daughter).",
+      "Confirm uphill-travel and backcountry-gate policy.",
+      "Confirm terrain stats (leads: ~2,200–2,600 acres, 115+ runs, 6–7 chairs plus surface tows, roughly 15/30/55 ability split), childcare (a children's program has existed), snowmaking (believed limited), tubing and terrain parks (believed none).",
+      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, slopeside lodging in the Town of Alta, Albion learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

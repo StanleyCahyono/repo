@@ -1,0 +1,184 @@
+{
+  "id": "brighton",
+  "name": "Brighton Resort",
+  "shortName": "Brighton",
+  "country": "US",
+  "region": "Utah",
+  "stateProvince": "UT",
+  "locality": "Brighton, UT (top of Big Cottonwood Canyon, SR-190)",
+  "timezone": "America/Denver",
+  "operator": "Boyne Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 40.598,
+    "lon": -111.583,
+    "source": {
+      "url": "https://www.brightonresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate base-lodge position at the top of SR-190"
+    }
+  },
+  "elevation": {
+    "baseM": 2669,
+    "summitM": 3200,
+    "verticalM": 532,
+    "source": {
+      "url": "https://www.brightonresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 8,755 ft, top about 10,500 ft, vertical about 1,745 ft (resort-published figures as remembered; confirm)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Brighton base lodge area (approx.)",
+      "lat": 40.598,
+      "lon": -111.583,
+      "elevationM": 2669,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper mountain, ridge-top lift terminals (approx.; elevation left to terrain model)",
+      "lat": 40.585,
+      "lon": -111.58,
+      "elevationM": null,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": true,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Explorer lift area near the base (confirm)",
+    "source": {
+      "url": "https://www.brightonresort.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing on part of the mountain is a long-standing Brighton feature; 2026-27 nights and hours are unconfirmed"
+    }
+  },
+  "character": "A mid-sized ski area at the top of Big Cottonwood Canyon, next to Solitude, with a strong local and snowboard following, terrain parks and lift-served night skiing on part of the mountain.",
+  "learning": "Reference note: beginner terrain sits near the base, served by the Explorer lift, and the resort runs a ski and snowboard school. Confirm current learning lifts, carpets and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.brightonresort.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://udottraffic.utah.gov/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://utahavalanchecenter.org/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SLC",
+        "role": "both",
+        "minutes": 55,
+        "km": 57,
+        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd to the canyon mouth, then SR-190 up Big Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-190 can add hours.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "UTA ski bus (Big Cottonwood Canyon service)",
+        "type": "bus",
+        "url": "https://www.rideuta.com/",
+        "notes": "Reference, confirm: Utah Transit Authority has run winter ski-bus service from Salt Lake Valley park-and-ride lots up SR-190 to Solitude and Brighton. 2026-27 routes, schedule and fares are unconfirmed."
+      },
+      {
+        "name": "Shared or private airport shuttles from SLC",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: several private operators run airport transfers to the Cottonwood Canyon and Park City resorts. No operator, fare or schedule is on file."
+      },
+      {
+        "name": "Rental car from SLC",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: Utah applies a winter traction law in the Cottonwood canyons (SR-190 Big Cottonwood) that can require 4WD/AWD or suitable snow tires/chains. Parking rules for 2026-27 are unknown."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on brightonresort.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Boyne Resorts).",
+      "Confirm terrain stats (leads: ~1,050 acres, ~65 runs, 6–7 lifts plus carpets, several terrain parks), ability split and snowmaking; confirm precise base and summit coordinates (upper point is rough).",
+      "Confirm the 2026-27 night-skiing schedule (nights, hours, terrain) and a night-ticket price.",
+      "Pass leads from earlier seasons (unverified): Ikon Pass and Ikon Base with limited days; Brighton season passes; any ticket option linking to Solitude. Confirm 2026-27 products, day counts and blackouts.",
+      "Learning setup: confirm the Explorer lift, carpets, ski-school products and any kids-ski-free program.",
+      "Parking for 2026-27 (free or paid, reservations, carpool rules).",
+      "Road and avalanche context: SR-190 (Big Cottonwood Canyon, UDOT), traction law and avalanche-control closures.",
+      "UTA Big Cottonwood ski bus 2026-27 routes, schedule and fares.",
+      "Lodging (lead: a small lodge at the base), childcare and events.",
+      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (night skiing, lessons, rentals, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

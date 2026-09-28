@@ -1,0 +1,283 @@
+{
+  "id": "elk-mountain",
+  "name": "Elk Mountain Ski Resort",
+  "shortName": "Elk Mountain",
+  "country": "US",
+  "region": "Northeastern Pennsylvania",
+  "stateProvince": "PA",
+  "locality": "Union Dale (Herrick Township, Susquehanna County), PA",
+  "timezone": "America/New_York",
+  "operator": "Elk Mountain Ski Resort, Inc. (independent, family-owned)",
+  "priority": 1,
+  "location": {
+    "lat": 41.721,
+    "lon": -75.559,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Wikipedia resort coordinate via search summary"
+    }
+  },
+  "elevation": {
+    "baseM": 531,
+    "summitM": 813,
+    "verticalM": 282,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Base 1,742 ft, summit 2,667 ft, vertical 925 ft (Wikipedia). Resort marketing says 1,000 ft of vertical."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Base area (main lodge; Wikipedia coordinate)",
+      "lat": 41.721,
+      "lon": -75.559,
+      "elevationM": 531,
+      "approximate": false
+    },
+    {
+      "key": "summit",
+      "label": "Summit (approximate, top of lifts on Elk Hill; estimated coordinate)",
+      "lat": 41.716,
+      "lon": -75.57,
+      "elevationM": 813,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 27,
+    "lifts": 7,
+    "skiableAcres": 180,
+    "beginnerPct": 25,
+    "intermediatePct": 30,
+    "advancedPct": 45,
+    "terrainParks": 2,
+    "season": "2025-26",
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Wikipedia plus SKI Mag/SnowBrains summaries: 27 trails, 180 acres, 6 chairs + 1 rope tow, 2 parks, 25/30/45 split (category labels were ambiguous in one summary)."
+    }
+  },
+  "features": {
+    "nightSkiing": true,
+    "snowmakingPct": 100,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Dedicated Beginner Slope at the base; the ski school meeting area is at its foot",
+    "source": {
+      "url": "https://www.elkskier.com/ski-school/adult-ski-snowboarding-lessons/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-28",
+      "note": "Night skiing Thu-Sat per the lift-ticket page. A lodging page exists but its contents (on-mountain or partner lodging) were not seen."
+    }
+  },
+  "character": "Independent, family-owned ski area in northeastern Pennsylvania just off I-81 north of Scranton, known regionally for challenging terrain and long, sustained runs. It is a skiing-focused operation with a single base area rather than a resort village.",
+  "learning": "Group lessons run daily at 10:00 and 13:00, plus 17:45 Thu-Sat on night-skiing evenings. Meet at the ski school area at the base of the Beginner Slope. First-timer packages bundle a full-day beginner lift ticket, a first-timer group lesson and rental skis or snowboard. The PSIA-member school (75+ instructors) recommends new skiers take at least three lessons. Private 1-2 hour lessons can be reserved on weekends, subject to availability.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2022-23",
+        "opened": "2022-12-14",
+        "closed": null,
+        "source": {
+          "url": "https://www.nbcphiladelphia.com/entertainment/the-scene/ski-opening-pocono-mountain-slopes-2024/4043625/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-28",
+          "note": "From NBC Pocono opening-date guides; per-year attribution is approximate."
+        }
+      }
+    ],
+    "typicalText": "Typically opens in mid-December. Opened Dec 14, 2022; Dec 13 was the estimated/tentative first day in both 2023-24 and 2024-25. The 2025-26 opening date was not found.",
+    "notes": "No official 2026-27 opening date found as of 2026-09-28. OnTheSnow (third party) projects an opening of 2026-12-11 and closing of 2027-03-21 (~100 days); these are projections, not announcements (https://www.onthesnow.com/pennsylvania/elk-mountain-ski-resort/ski-resort). In Jan 2026 the resort closed for a weekend during a major snowstorm for staff safety (https://fox56.com/news/local/too-much-snow-on-tap-elk-mountain-closes-until-monday-for-employee-safety). 2025-26 holiday-rate dates were Dec 24, 2025-Jan 1, 2026, Jan 19, 2026 and Feb 16, 2026."
+  },
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Day session",
+      "days": [
+        7,
+        1,
+        2,
+        3
+      ],
+      "opens": "08:30",
+      "closes": "16:30",
+      "season": "2025-26",
+      "note": "Sunday-Wednesday. Official lift-ticket page updated Oct 2025.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Day + night session (extended ticket)",
+      "days": [
+        4,
+        5,
+        6
+      ],
+      "opens": "08:30",
+      "closes": "21:00",
+      "season": "2025-26",
+      "note": "Thursday-Saturday.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "night-skiing",
+      "label": "Night ticket",
+      "days": [
+        4,
+        5,
+        6
+      ],
+      "opens": "16:30",
+      "closes": "21:00",
+      "season": "2025-26",
+      "note": "Thursday-Saturday.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "ticket-office",
+      "label": "Ticket sales open",
+      "days": null,
+      "opens": "08:00",
+      "closes": null,
+      "season": "2025-26",
+      "note": "Ticket sales, rentals, ski school and cafeteria open at 08:00; closing times not stated.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "activity": "rentals",
+      "label": "Rental shop opens",
+      "days": null,
+      "opens": "08:00",
+      "closes": null,
+      "season": "2025-26",
+      "note": "Closing time not stated.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    }
+  ],
+  "prices": [],
+  "links": {
+    "official": "https://www.elkskier.com/",
+    "trailMap": "https://www.elkskier.com/trail-maps/",
+    "interactiveMap": null,
+    "snowReport": "https://www.elkskier.com/conditions/",
+    "hours": "https://www.elkskier.com/lift-ticket/",
+    "tickets": "https://www.elkskier.com/lift-ticket/",
+    "seasonPass": "https://www.elkskier.com/season-passes/",
+    "lessons": "https://www.elkskier.com/ski-school/",
+    "rentals": "https://www.elkskier.com/gear/rental-repair-shop/",
+    "webcams": "https://elkskier.com/conditions-web-cam",
+    "parking": "https://www.elkskier.com/directions-parking/",
+    "roadInfo": "https://www.511pa.com/",
+    "lodging": "https://www.elkskier.com/lodging/",
+    "events": "https://www.elkskier.com/events/",
+    "tourism": "https://endlessmountains.org/directory/elk-mountain-ski-resort/",
+    "avalanche": null,
+    "openSkiMap": null
+  },
+  "moreLinks": [
+    {
+      "label": "Adult ski & snowboard lessons",
+      "url": "https://www.elkskier.com/ski-school/adult-ski-snowboarding-lessons/"
+    },
+    {
+      "label": "OnTheSnow snow report",
+      "url": "https://www.onthesnow.com/pennsylvania/elk-mountain-ski-resort/skireport"
+    },
+    {
+      "label": "OnTheSnow overview (projected dates)",
+      "url": "https://www.onthesnow.com/pennsylvania/elk-mountain-ski-resort/ski-resort"
+    },
+    {
+      "label": "Storm Skiing: PA areas outside Epic/Ikon/Indy",
+      "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast"
+    },
+    {
+      "label": "Jan 2026 storm closure (FOX56)",
+      "url": "https://fox56.com/news/local/too-much-snow-on-tap-elk-mountain-closes-until-monday-for-employee-safety"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": {
+      "minutes": 120,
+      "km": 143.2,
+      "basis": "Rome2rio Union Dale to Ithaca: about 89 mi, about 2 h by car (town-to-town, not to the ski-area lot). Typical route: NY-79 to I-81 south past Binghamton to Exit 206 (Elk's official directions reference I-81 Exit 206).",
+      "source": {
+        "url": "https://www.rome2rio.com/s/Union-Dale/Ithaca",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": "Third-party routing estimate"
+      }
+    },
+    "airports": [],
+    "transfers": []
+  },
+  "reportSource": {
+    "url": "https://www.elkskier.com/conditions/",
+    "format": "html",
+    "notes": "Official HTML conditions page; a conditions + webcam page also exists (https://elkskier.com/conditions-web-cam). No structured feed identified. Third-party mirror: https://www.onthesnow.com/pennsylvania/elk-mountain-ski-resort/skireport."
+  },
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Adult 1-day lift ticket prices (official page updated Oct 2025, but figures were not visible in search results).",
+      "Official 2026-27 opening date (only an OnTheSnow projection of Dec 11, 2026).",
+      "2025-26 actual opening and closing dates; 2023-24 and 2024-25 actual openings.",
+      "Whether there is on-mountain lodging, tubing or childcare.",
+      "Whether College Wednesdays and Senior Tuesdays continue in 2026-27.",
+      "2026-27 season-pass prices — tracked in passes.json."
+    ],
+    "conflicts": [
+      "elevation.verticalFt: 925 (https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area); 1,000 ft ('1,000 feet of vertical' phrasing in resort/tourism listing copy; exact page among elkskier.com / discovernepa.com / visitnepa.org unclear) (https://www.elkskier.com/). Resolution: Used 925 ft so it stays consistent with the 1,742/2,667 ft base/summit figures. Resort marketing says 1,000 ft."
+    ],
+    "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Terrain stats come from Wikipedia and a SKI Mag / SnowBrains summary: 27 trails, 180 acres, 6 chairs + 1 rope tow, 100% snowmaking, 2 parks, 25/30/45 split. The ability split's category labels were ambiguous in one summary ('easy/difficult/more difficult'), but SnowBrains gives beginner/intermediate/expert. Hours come from the official lift-ticket page, which was updated Oct 2025. The 2025-26 holiday-rate dates were Dec 24, 2025 to Jan 1, 2026, Jan 19, 2026 and Feb 16, 2026. Opening-date history comes from NBC Pocono opening-date guides, and the exact attribution per year is approximate. Ownership comes from Unofficial Networks (Dec 2025) and First Tracks!! (2014). The summit coordinate is an estimate for weather queries only."
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "id": "mount-snow",
+  "name": "Mount Snow",
+  "shortName": "Mount Snow",
+  "country": "US",
+  "region": "Vermont",
+  "stateProvince": "VT",
+  "locality": "West Dover, VT",
+  "timezone": "America/New_York",
+  "operator": "Vail Resorts",
+  "priority": 1,
+  "location": {
+    "lat": 42.958,
+    "lon": -72.906,
+    "source": {
+      "url": "https://www.mountsnow.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Main Base position west of VT-100 in West Dover"
+    }
+  },
+  "elevation": {
+    "baseM": 579,
+    "summitM": 1097,
+    "verticalM": 518,
+    "source": {
+      "url": "https://www.mountsnow.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,900 ft, summit ~3,600 ft, vertical ~1,700 ft)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Main Base (approx.)",
+      "lat": 42.958,
+      "lon": -72.906,
+      "elevationM": 579,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Mount Snow summit (approx.)",
+      "lat": 42.961,
+      "lon": -72.922,
+      "elevationM": 1097,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.mountsnow.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+    }
+  },
+  "character": "A southern Vermont resort in the Deerfield Valley, operated by Vail Resorts, and one of the closest large Vermont ski areas to the New York and Boston metro areas. Its separate Carinthia base focuses on terrain parks.",
+  "learning": "Reference note: ski school and rentals operate at the Main Base. Learning-area details were not researched — confirm at source.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.mountsnow.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://newengland511.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": {
+      "minutes": 290,
+      "km": 405,
+      "basis": "Estimate from typical routing (NY-79/I-88 to Albany, NY-7 E to Bennington, VT-9 E to Wilmington, then VT-100 N to West Dover); not a routing-service result. VT-9 over Hogback Mountain can be slow in winter.",
+      "source": {
+        "url": null,
+        "verification": "unverified",
+        "checkedOn": "2026-09-28",
+        "note": "Piste estimate"
+      }
+    },
+    "airports": [
+      {
+        "iata": "ALB",
+        "role": "practical",
+        "minutes": 110,
+        "km": 115,
+        "basis": "Estimate from typical routing (NY-7 E to Bennington, VT-9 E to Wilmington, VT-100 N); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": []
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm the operator (Vail Resorts since its 2019 purchase of Peak Resorts — reference) and which 2026-27 Epic products include Mount Snow, with any holiday restrictions.",
+      "Confirm official deep links on mountsnow.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
+      "Confirm terrain stats (trails, lifts, acres, parks at Carinthia, snowmaking %), learning area, childcare, tubing and night skiing.",
+      "Confirm elevations and base/summit coordinates (approximations)."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

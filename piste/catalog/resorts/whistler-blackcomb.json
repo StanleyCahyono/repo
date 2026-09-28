@@ -1,0 +1,182 @@
+{
+  "id": "whistler-blackcomb",
+  "name": "Whistler Blackcomb",
+  "shortName": "Whistler",
+  "country": "CA",
+  "region": "British Columbia",
+  "stateProvince": "BC",
+  "locality": "Whistler, BC",
+  "timezone": "America/Vancouver",
+  "operator": "Vail Resorts",
+  "priority": 0,
+  "location": {
+    "lat": 50.115,
+    "lon": -122.95,
+    "source": {
+      "url": "https://www.whistlerblackcomb.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate Whistler Village base position"
+    }
+  },
+  "elevation": {
+    "baseM": 675,
+    "summitM": 2284,
+    "verticalM": 1609,
+    "source": {
+      "url": "https://www.whistlerblackcomb.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 675 m (2,214 ft, Whistler Village), top lift-served point 2,284 m (7,494 ft, Blackcomb), vertical 1,609 m (5,280 ft)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Whistler Village base (approx.)",
+      "lat": 50.115,
+      "lon": -122.95,
+      "elevationM": 675,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Roundhouse, top of the Whistler Village Gondola (approx.; about 5 km from the village)",
+      "lat": 50.0675,
+      "lon": -122.947,
+      "elevationM": 1850,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Olympic Station (Whistler) and the Blackcomb base area (confirm)",
+    "source": {
+      "url": "https://www.whistlerblackcomb.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski-in/ski-out lodging in Whistler Village and the Upper Village"
+    }
+  },
+  "character": "Two large mountains, Whistler and Blackcomb, linked by the Peak 2 Peak Gondola above a pedestrian village in the Coast Mountains about 125 km north of Vancouver. It is one of the largest ski areas in North America, with alpine bowls, glaciers and over 1,600 m of vertical.",
+  "learning": "Reference note: beginner zones sit at mid-mountain on Whistler (around Olympic Station) and near the Blackcomb base, and lessons run through the resort snow school. Confirm current learning areas and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.whistlerblackcomb.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.drivebc.ca/",
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.whistler.com/",
+    "avalanche": "https://avalanche.ca/",
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "YVR",
+        "role": "both",
+        "minutes": 130,
+        "km": 135,
+        "basis": "Estimate from typical routing (through Vancouver and the Lions Gate Bridge, then the Sea-to-Sky Highway, BC-99, north to Whistler); not a routing-service result. Closest airport with regular scheduled service (Piste reference, confirm). Winter tires/chains rules apply on BC-99.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Scheduled airport coaches from YVR",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: coach services have run from YVR and downtown Vancouver to Whistler Village; operators change — confirm 2026-27 operators and schedules."
+      },
+      {
+        "name": "Private shuttles from YVR",
+        "type": "private",
+        "url": null,
+        "notes": "Reference, confirm: private transfers are common. No operator or fare is on file."
+      },
+      {
+        "name": "Rental car from YVR",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: Sea-to-Sky Highway (BC-99); check DriveBC for conditions and winter-tire requirements."
+      }
+    ]
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
+      "Confirm official deep links on whistlerblackcomb.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
+      "Confirm the operator (reference: Vail Resorts, owner since 2016).",
+      "Confirm terrain stats (leads: 8,100+ acres, 200+ marked runs, 35+ lifts including the Peak 2 Peak Gondola), parks, snowmaking, night skiing, tubing and childcare.",
+      "Confirm precise village, Roundhouse and peak coordinates; the summit weather point is about 5 km from the village because the gondola climbs that far.",
+      "Pass leads from earlier seasons (unverified): unlimited on the Epic Pass; Epic Local and similar tiers with holiday restrictions; Canada-only products (Whistler Blackcomb season pass, Edge Card). Confirm 2026-27 products and CAD prices.",
+      "Learning setup: confirm Olympic Station and Blackcomb base learning zones and lesson products.",
+      "YVR coach operators and schedules for 2026-27; BC-99 winter-tire rule dates.",
+      "Avalanche Canada forecast region for the Sea-to-Sky area (out-of-bounds travel).",
+      "Snow report: record the official conditions page and whether any structured feed exists."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, village lodging, Olympic Station / Blackcomb base learning areas) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}

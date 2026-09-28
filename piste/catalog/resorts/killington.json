@@ -1,0 +1,182 @@
+{
+  "id": "killington",
+  "name": "Killington Resort",
+  "shortName": "Killington",
+  "country": "US",
+  "region": "Vermont",
+  "stateProvince": "VT",
+  "locality": "Killington, VT",
+  "timezone": "America/New_York",
+  "operator": "Local ownership group (acquired from POWDR in 2024)",
+  "priority": 1,
+  "location": {
+    "lat": 43.626,
+    "lon": -72.797,
+    "source": {
+      "url": "https://www.killington.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Approximate K-1/Snowshed base-area position at the top of Killington Road"
+    }
+  },
+  "elevation": {
+    "baseM": 363,
+    "summitM": 1293,
+    "verticalM": 930,
+    "source": {
+      "url": "https://www.killington.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit 4,241 ft (Killington Peak) and advertised vertical 3,050 ft; base derived as summit minus vertical (the low point is the Skyeship base on US-4; the K-1/Snowshed base is much higher)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "K-1 / Snowshed base area (approx.; elevation left to terrain model)",
+      "lat": 43.626,
+      "lon": -72.797,
+      "elevationM": null,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Killington Peak, K-1 Gondola top (approx.)",
+      "lat": 43.605,
+      "lon": -72.819,
+      "elevationM": 1293,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": null,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "season": null,
+    "source": null
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": "Snowshed",
+    "source": {
+      "url": "https://www.killington.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-28",
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+    }
+  },
+  "character": "A large multi-peak resort in central Vermont off US Route 4, generally regarded as the largest ski area in the eastern US, and known for aiming at a long season with early openings.",
+  "learning": "Reference note: the Snowshed slope and the Ramshead base are the usual beginner and family areas. Confirm current learning lifts and lesson programs.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.killington.com/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://newengland511.org/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null
+  },
+  "moreLinks": [],
+  "travel": {
+    "driveFromIthaca": {
+      "minutes": 320,
+      "km": 465,
+      "basis": "Estimate from typical routing (NY-79/I-88 to Albany, NY-7 E to Bennington, US-7 N to Rutland, then US-4 E to Killington Road); not a routing-service result. Alternative via I-87 N, NY-149 and US-4 through Whitehall is similar. Winter conditions add time.",
+      "source": {
+        "url": null,
+        "verification": "unverified",
+        "checkedOn": "2026-09-28",
+        "note": "Piste estimate"
+      }
+    },
+    "airports": [
+      {
+        "iata": "ALB",
+        "role": "practical",
+        "minutes": 145,
+        "km": 180,
+        "basis": "Estimate from typical routing (NY-7 E to Bennington, US-7 N to Rutland, US-4 E); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "BTV",
+        "role": "practical",
+        "minutes": 125,
+        "km": 140,
+        "basis": "Estimate from typical routing (US-7 S through Middlebury to Rutland, then US-4 E); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-28",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": []
+  },
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "reference-only",
+    "date": "2026-09-28",
+    "openQuestions": [
+      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
+      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm the current owner/operator (POWDR sold Killington and Pico to a local ownership group in 2024 — reference).",
+      "Confirm 2026-27 Ikon Pass / Ikon Base terms (lead from earlier seasons: days shared with Pico) and Killington's own pass products.",
+      "Capture actual 2024-25 and 2025-26 opening dates so an estimated window can be derived.",
+      "Confirm official deep links on killington.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
+      "Confirm terrain stats (trails, lifts, acres, snowmaking %), childcare and tubing.",
+      "Transit leads to confirm: Amtrak's Ethan Allen Express serves Rutland; a local bus has served Killington Road. Rutland (RUT) is the closest airport."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Snowshed beginner area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+  }
+}
