@@ -54,6 +54,8 @@ export interface ResortLinks {
   tourism?: string | null
   avalanche?: string | null
   openSkiMap?: string | null
+  /** Additional useful official/partner pages. */
+  more?: { label: string; url: string }[]
 }
 
 export interface WeatherPointDef {

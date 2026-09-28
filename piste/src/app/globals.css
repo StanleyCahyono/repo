@@ -38,6 +38,7 @@
 
   /* Pass families — app categories, not official brand colours. */
   --ikon: #c49a36;
+  --ikon-edge: #9c7a24; /* ≥3:1 border on ikon-bg */
   --ikon-bg: #f6ecd2;
   --ikon-ink: #5c440f;
   --epic: #2764a5;
@@ -91,6 +92,7 @@
     --topo-line: rgb(141 199 204 / 0.12);
     --topo-line-strong: rgb(141 199 204 / 0.26);
     --ikon: #d8b056;
+    --ikon-edge: #d8b056;
     --ikon-bg: #3a2f14;
     --ikon-ink: #f0d58f;
     --epic: #6aa0dc;
@@ -141,6 +143,7 @@
   --topo-line: rgb(141 199 204 / 0.12);
   --topo-line-strong: rgb(141 199 204 / 0.26);
   --ikon: #d8b056;
+  --ikon-edge: #d8b056;
   --ikon-bg: #3a2f14;
   --ikon-ink: #f0d58f;
   --epic: #6aa0dc;
@@ -188,6 +191,7 @@
   --color-focus: var(--focus);
   --color-overlay: var(--overlay);
   --color-ikon: var(--ikon);
+  --color-ikon-edge: var(--ikon-edge);
   --color-ikon-bg: var(--ikon-bg);
   --color-ikon-ink: var(--ikon-ink);
   --color-epic: var(--epic);

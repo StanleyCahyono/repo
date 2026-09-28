@@ -52,7 +52,7 @@ export const PASS_FAMILY_LABEL: Record<PassFamilyId, string> = {
 }
 
 const passTones: Record<PassFamilyId, string> = {
-  ikon: 'bg-ikon-bg text-ikon-ink border-ikon',
+  ikon: 'bg-ikon-bg text-ikon-ink border-ikon-edge',
   epic: 'bg-epic-bg text-epic-ink border-epic',
   indy: 'bg-indy-bg text-indy-ink border-indy',
   'mountain-collective': 'bg-mc-bg text-mc-ink border-mc',
