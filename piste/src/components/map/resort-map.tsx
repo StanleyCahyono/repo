@@ -147,6 +147,7 @@ export default function ResortMap(props: ResortMapProps) {
   useEffect(() => {
     let cancelled = false
     let map: MlMap | null = null
+    const placed = markerRefs.current
     const timeout = window.setTimeout(() => {
       if (!mapRef.current?.isStyleLoaded()) setFailed('map tiles did not load (offline or blocked)')
     }, 12000)
@@ -178,8 +179,8 @@ export default function ResortMap(props: ResortMapProps) {
     return () => {
       cancelled = true
       window.clearTimeout(timeout)
-      markerRefs.current.forEach((m) => m.remove())
-      markerRefs.current.clear()
+      placed.forEach((m) => m.remove())
+      placed.clear()
       map?.remove()
       mapRef.current = null
     }
