@@ -56,6 +56,30 @@ describe('Duffel', () => {
     expect(o.baggageNotes).toMatch(/1 carry-on/)
   })
 
+  it('baggage notes never overstate: the minimum across segments, and unstated segments are flagged', () => {
+    const f = fixture()
+    const segments = f.data.offers[0].slices[0].segments
+    segments[0].passengers[0].baggages = [
+      { type: 'checked', quantity: 1 },
+      { type: 'carry_on', quantity: 1 },
+    ]
+    segments[1].passengers[0].baggages = [
+      { type: 'checked', quantity: 0 },
+      { type: 'carry_on', quantity: 1 },
+    ]
+    const r = normalizeDuffelOffers(f, false)
+    if (!r.ok) throw new Error(r.error)
+    const notes = r.offers[0].baggageNotes
+    expect(notes).toMatch(/\b0 checked\b/) // a bag included on one leg only is not included for the trip
+    expect(notes).toMatch(/1 carry-on/)
+    expect(notes).not.toMatch(/Not stated/)
+
+    delete segments[1].passengers
+    const partial = normalizeDuffelOffers(f, false)
+    if (!partial.ok) throw new Error(partial.error)
+    expect(partial.offers[0].baggageNotes).toMatch(/1 checked.*Not stated for every segment/)
+  })
+
   it('keeps airport-local times (flagged) when no time zone is supplied', () => {
     const f = fixture()
     delete f.data.offers[0].slices[0].segments[0].origin.time_zone

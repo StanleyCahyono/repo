@@ -5,8 +5,11 @@
  *   Only `status: "Actual"` messages are kept; test/exercise/system messages are dropped and counted.
  * - Gridpoint forecast (second model for disagreement checks): GET /points/{lat},{lon} → `forecastGridData`
  *   URL → GET that grid. Layers are ISO-8601 intervals and are spread onto UTC hours by `nws-intervals.ts`
- *   (accumulations proportionally, instantaneous values repeated). Records are stamped at the hour START and
- *   describe [T, T+1h) → intervalSemantics 'following-hour'.
+ *   (accumulations proportionally, instantaneous values repeated; hours covered by overlapping accumulation
+ *   intervals stay null). Records are stamped at the hour START and describe [T, T+1h) → intervalSemantics
+ *   'following-hour'.
+ * - Timestamps (alert onset/ends/expires, grid updateTime, interval bounds) must carry an offset; an offset-less
+ *   stamp is treated as unknown (null), never read in the server's zone.
  *
  * NWS requires every client to identify itself via User-Agent (set by http.ts from PISTE_CONTACT) and asks for
  * caching: the point→grid lookup is cached for 24 h, grid data for 10 min. Coordinates are sent with at most four
@@ -267,7 +270,7 @@ export function parseNwsGrid(json: unknown, keep: { fromMs: number; toMs: number
   const c = centroid(parsed.data.geometry)
   limitations.push(
     'NWS gridded forecast (forecaster-edited model blend on a ~2.5 km grid); modeled, not observed.',
-    'Interval totals (snowfall, precipitation) are spread evenly over the hours they cover; partly covered edge hours are left empty.',
+    'Interval totals (snowfall, precipitation) are spread evenly over the hours they cover; partly covered edge hours and hours covered by overlapping intervals are left empty.',
     'Grid position is the centroid of the NWS grid-cell polygon.',
   )
   if (c.lat === null) limitations.push('Grid-cell geometry not supplied.')

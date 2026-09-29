@@ -23,6 +23,13 @@ describe('Frankfurter FX', () => {
     expect(res.capabilities.missing).toEqual(['USD/CHF'])
   })
 
+  it('a zero amount is a parse failure, never a thrown division error', async () => {
+    const h = fakeHttp(() => json({ amount: 0, base: 'USD', date: '2027-01-14', rates: { CAD: 1.37 } }))
+    const res = await createFrankfurterProvider({ http: h.client }).fetchRates('USD', ['CAD'])
+    expect(res.ok).toBe(false)
+    expect(res.ok === false && res.errorKind).toBe('parse')
+  })
+
   it('rejects a response for the wrong base and bad codes without a request', async () => {
     const h = fakeHttp(() => json({ amount: 1, base: 'EUR', date: '2027-01-14', rates: { CAD: 1.5 } }))
     const p = createFrankfurterProvider({ http: h.client })

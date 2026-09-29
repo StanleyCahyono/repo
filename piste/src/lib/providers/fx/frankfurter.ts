@@ -17,7 +17,8 @@ export const FRANKFURTER_URL = 'https://api.frankfurter.app/latest'
 const CODE = /^[A-Z]{3}$/
 
 const Schema = z.object({
-  amount: z.number().optional(),
+  // Rates are divided by `amount`: zero or negative is a malformed response ('parse'), never a thrown division.
+  amount: z.number().positive().optional(),
   base: z.string().regex(CODE),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   rates: z.record(z.string(), z.number().positive()),

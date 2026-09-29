@@ -21,9 +21,18 @@ export function caps(supplied: string[], missing: string[], limitations: string[
   return { supplied: [...new Set(supplied)], missing: [...new Set(missing)], limitations }
 }
 
-/** Normalize any ISO-8601 instant (with offset or Z) to a UTC ISO string; null when absent/invalid. */
+/** True when an ISO-8601 date-time states its own offset (`Z` or ±hh[:mm]); a bare date or wall time does not. */
+export function hasExplicitOffset(value: string): boolean {
+  return /T[\d:.,]+(?:Z|[+-]\d{2}(?::?\d{2})?)$/i.test(value)
+}
+
+/**
+ * Normalize an ISO-8601 instant with an explicit offset (or Z) to a UTC ISO string; null when absent, invalid or
+ * offset-less. Luxon would read an offset-less stamp in the server's own zone, so such an ambiguous instant is
+ * unknown, never guessed.
+ */
 export function toUtcIso(value: string | null | undefined): string | null {
-  if (!value) return null
+  if (!value || !hasExplicitOffset(value)) return null
   const dt = DateTime.fromISO(value, { setZone: true })
   return dt.isValid ? dt.toUTC().toISO() : null
 }

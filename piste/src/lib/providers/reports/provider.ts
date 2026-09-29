@@ -2,8 +2,8 @@
  * Reusable label-based official-report adapter. A resort adapter is just configuration: page URLs, publisher
  * name, the unit the resort prints snow in, and which anchors must be present for the page to count as a report.
  *
- * Pipeline: robots.txt check → fetch page (primary URL, then alternates) → structured data (JSON-LD / meta) lines
- * first, then table/definition-list pairs, then page text → label extraction → required-anchor check → zod
+ * Pipeline: per URL (primary, then alternates) robots.txt check → fetch page → structured data (JSON-LD / meta)
+ * lines first, then table/definition-list pairs, then page text → label extraction → required-anchor check → zod
  * validation. Missing required anchors or implausible values → errorKind 'schema-changed' (never partial silent
  * data). Optional fields that are absent are listed in `capabilities.missing`.
  */
@@ -101,6 +101,11 @@ export function extractReport(html: string, cfg: LabelReportConfig, ctx: { now: 
   const assumed = [...Object.values(x.snowfall), x.baseDepth, x.summitDepth].some((v) => v?.assumed)
   if (assumed) limitations.push(`Some snow values had no printed unit and were read as ${cfg.assumedSnowUnit === 'in' ? 'inches' : 'centimetres'}.`)
   if (x.baseDepth?.rangeCm) notes.push(`Base depth reported as a range (${x.baseDepth.text}); the lower bound is stored.`)
+  for (const w of WINDOW_ORDER) {
+    const s = x.snowfall[w]
+    if (s?.rangeCm) notes.push(`Snowfall reported as a range (${s.text}); the lower bound is stored.`)
+  }
+  const noteText = notes.join(' ')
 
   let localDate: string
   let reportedAt: string | null = null
@@ -133,7 +138,8 @@ export function extractReport(html: string, cfg: LabelReportConfig, ctx: { now: 
     openBeginnerTrails: x.beginnerTrails?.open ?? null,
     totalBeginnerTrails: x.beginnerTrails?.total ?? null,
     openAcres: x.openAcres?.value ?? null,
-    notes: notes.length ? notes.join(' ') : null,
+    // Bounded to the schema's 500 characters so several range notes can never fail validation.
+    notes: noteText ? (noteText.length > 500 ? `${noteText.slice(0, 499)}…` : noteText) : null,
   }
 
   const valid = ParsedReportSchema.safeParse(report)
@@ -163,11 +169,14 @@ export function extractReport(html: string, cfg: LabelReportConfig, ctx: { now: 
 }
 
 /**
- * Hash of the normalised report — use for "is this a new report?" decisions. Two fetches of an unchanged page hash
- * identically even if its markup (tokens, ads, timestamps in scripts) changed.
+ * Hash of the normalised report CONTENT — use for "is this a new report?" decisions. Two fetches of an unchanged
+ * page hash identically even if its markup (tokens, ads, timestamps in scripts) changed. `localDate` and
+ * `reportedAt` are excluded (as in the jobs' hash): an undated page is dated by the retrieval day, and a page may
+ * re-render its timestamp, so neither may make an unchanged report look new and reset its observation age.
  */
 export function reportContentHash(report: ParsedReport): string {
-  return stableHash(report)
+  const { localDate: _localDate, reportedAt: _reportedAt, ...content } = report
+  return stableHash(content)
 }
 
 export function createLabelReportProvider(cfg: LabelReportConfig, options: { http?: HttpClient } = {}): ResortReportProvider {
@@ -181,14 +190,23 @@ export function createLabelReportProvider(cfg: LabelReportConfig, options: { htt
       const http = options.http ?? defaultHttp
       const fetches: SourceFetch[] = []
 
-      const robots = await checkRobots(http, cfg.urls[0])
-      fetches.push(robots.fetch)
-      if (!robots.ok) return fail(robots.errorKind, `${cfg.publisher} ${robots.error}`, fetches, robots.retriable)
-      if (!robots.allowed) return fail('unsupported', `${cfg.publisher} robots.txt disallows automated fetching of this page`, fetches, false)
-
       let lastHttpFailure: ProviderResult<never> | null = null
+      let robotsFailure: ProviderResult<never> | null = null
       let schemaError: string | null = null
+      let disallowed = 0
       for (const url of cfg.urls) {
+        // robots.txt is checked for EVERY URL: an alternate may sit on another origin (greekpeak.net vs www.) or on
+        // a path the rules exclude. Same-origin checks are served from the 24 h robots cache.
+        const robots = await checkRobots(http, url)
+        fetches.push(robots.fetch)
+        if (!robots.ok) {
+          robotsFailure = fail(robots.errorKind, `${cfg.publisher} ${robots.error}`, fetches, robots.retriable)
+          continue
+        }
+        if (!robots.allowed) {
+          disallowed++
+          continue
+        }
         const res = await http.request(url, {
           expect: 'text',
           headers: { Accept: 'text/html,application/xhtml+xml' },
@@ -231,8 +249,15 @@ export function createLabelReportProvider(cfg: LabelReportConfig, options: { htt
           }),
         }
       }
+      // Most informative failure first: a page that no longer parses, then a page that could not be fetched, then a
+      // robots.txt that could not be read. Only when robots.txt disallowed every URL is the source unsupported.
       if (schemaError) return fail('schema-changed', schemaError, fetches, false)
-      return lastHttpFailure ?? fail('network', `${cfg.publisher}: no page could be fetched`, fetches)
+      if (lastHttpFailure) return lastHttpFailure
+      if (robotsFailure) return robotsFailure
+      if (disallowed) {
+        return fail('unsupported', `${cfg.publisher} robots.txt disallows automated fetching of ${cfg.urls.length > 1 ? 'every report page' : 'this page'}`, fetches, false)
+      }
+      return fail('network', `${cfg.publisher}: no page could be fetched`, fetches)
     },
   }
 }

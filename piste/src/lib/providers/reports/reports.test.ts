@@ -7,6 +7,7 @@ import { getReportProvider, reportProviders } from './index'
 import { extractFromLines, parseReportDate, parseSnowAt } from './labels'
 import { extractReport, reportContentHash } from './provider'
 import { isAllowed, parseRobots } from './robots'
+import { htmlPairLines } from './text'
 
 const fixture = (n: string) => readFileSync(new URL(`./__fixtures__/${n}`, import.meta.url), 'utf8')
 const NY = { now: '2027-01-15T14:00:00.000Z', timezone: 'America/New_York' }
@@ -89,11 +90,29 @@ describe('Greek Peak (synthetic fixture)', () => {
     expect(res.fetches.some((f) => f.url === GREEK_PEAK_REPORT.urls[0] && f.ok === false && f.httpStatus === 500)).toBe(true)
   })
 
-  it('respects robots.txt and does not fetch a disallowed page', async () => {
-    const h = fakeHttp((c) => (c.url.endsWith('/robots.txt') ? text('User-agent: *\nDisallow: /ski-ride/\n') : text(fixture('greek-peak-conditions.html'))))
+  it('respects robots.txt for every URL and does not fetch a disallowed page', async () => {
+    const h = fakeHttp((c) =>
+      c.url.endsWith('/robots.txt') ? text('User-agent: *\nDisallow: /ski-ride/\nDisallow: /conditions-print\n') : text(fixture('greek-peak-conditions.html')),
+    )
     const res = await createGreekPeakReportProvider({ http: h.client }).fetchReport(NY)
     expect(res.ok === false && res.errorKind).toBe('unsupported')
-    expect(h.calls.map((c) => c.url)).toEqual(['https://www.greekpeak.net/robots.txt'])
+    // Both origins' rules were read; neither page was requested.
+    expect(h.calls.map((c) => c.url)).toEqual(['https://www.greekpeak.net/robots.txt', 'https://greekpeak.net/robots.txt'])
+  })
+
+  it("checks the alternate's own robots.txt before falling back to it", async () => {
+    const h = fakeHttp((c) => {
+      if (c.url === 'https://www.greekpeak.net/robots.txt') return text('User-agent: *\nDisallow: /wp-admin/\n')
+      if (c.url === 'https://greekpeak.net/robots.txt') return text('User-agent: *\nDisallow: /\n')
+      if (c.url === GREEK_PEAK_REPORT.urls[0]) return new Response('', { status: 500 })
+      return text(fixture('greek-peak-print.html'))
+    })
+    const res = await createGreekPeakReportProvider({ http: h.client }).fetchReport(NY)
+    expect(h.calls.map((c) => c.url)).not.toContain(GREEK_PEAK_REPORT.urls[1])
+    expect(res.ok).toBe(false)
+    if (res.ok) return
+    expect(res.errorKind).toBe('http') // the primary's failure, not a report taken from a disallowed page
+    expect(res.fetches.map((f) => f.url)).toContain('https://greekpeak.net/robots.txt')
   })
 
   it('an unreachable page is a network/timeout failure, not a parser failure', async () => {
@@ -145,6 +164,55 @@ describe('label matcher guards', () => {
     expect(lines('Mountain Status: Closed').status?.value).toBe('temporarily-closed')
   })
 
+  it('never takes a facility, product, table-row or legend status as the resort status', () => {
+    for (const l of [
+      'Tubing Status: Open',
+      'Lift Status: Open',
+      'Summit Chair Status: Closed',
+      'Terrain Park: Not yet open',
+      'Hope Lake Water Park is closed for the season',
+      'Night skiing: closed for the season',
+      'Registration is not yet open',
+      'Status: Closed', // a bare "Status:" is a table column or a facility's field (the old list-table pair line)
+      'Chair 2 | Closed for the season | 9-4',
+      'Legend: Open / Closed / Closed for the season',
+    ]) {
+      expect(lines(l).status, l).toBeNull()
+    }
+    // A value on its own line belongs to the facility named on the line above it.
+    expect(lines('Night Skiing', 'Closed for the season').status).toBeNull()
+    expect(lines('Terrain Park', 'Not yet open').status).toBeNull()
+    // Resort-level wording still counts, including next to facility text.
+    expect(lines('We are closed for the 2026-27 season.').status?.value).toBe('closed-for-season')
+    expect(lines('Greek Peak is closed for the season').status?.value).toBe('closed-for-season')
+    expect(lines('Mountain Status: Open').status?.value).toBe('open')
+    expect(lines('Lifts Open 6 of 8', 'Mountain Status: Open').status?.value).toBe('open')
+    expect(lines('Night skiing: closed for the season. Mountain Status: Open').status?.value).toBe('open')
+  })
+
+  it('a lift list table never sets the resort status; the explicit banner does', () => {
+    const html = `<html><body>
+      <p>Mountain Status: Open</p>
+      <p>Lifts Open: 1 of 2</p>
+      <table>
+        <tr><th>Lift</th><th>Status</th><th>Hours</th></tr>
+        <tr><td>Chair 2</td><td>Closed</td><td>9am-4pm</td></tr>
+        <tr><td>Chair 3</td><td>Open</td><td>9am-4pm</td></tr>
+      </table>
+    </body></html>`
+    const out = extractReport(html, GREEK_PEAK_REPORT, NY)
+    if (!out.ok) throw new Error(out.error)
+    expect(out.report.status).toBe('open')
+    expect(out.extract.matched).toMatchObject({ status: 'Mountain Status: Open' })
+  })
+
+  it('notes a snowfall range, whose lower bound is stored', () => {
+    const out = extractReport('<html><body><p>Trails Open 32 of 55</p><p>24 Hour Snowfall: 2-4"</p></body></html>', GREEK_PEAK_REPORT, NY)
+    if (!out.ok) throw new Error(out.error)
+    expect(out.report.snowfall).toEqual([expect.objectContaining({ window: '24h', amountCm: 5.1 })])
+    expect(out.report.notes).toBe('Snowfall reported as a range (24 Hour Snowfall 2-4"); the lower bound is stored.')
+  })
+
   it('combines separate open/total lines and rejects impossible counts', () => {
     expect(lines('Trails Open: 32', 'Total Trails: 55').trails).toMatchObject({ open: 32, total: 55 })
     expect(lines('Lifts Open 9 of 8').lifts).toBeNull()
@@ -155,6 +223,19 @@ describe('label matcher guards', () => {
     const x = lines('Stay updated: 3 ways to follow us', 'Last Updated: Jan 15, 2027 7:02 AM')
     expect(x.reportDate?.instant).toBe('2027-01-15T12:02:00.000Z')
     expect(lines('Updated: Jan 20, 2027 7:00 AM').reportDate).toBeNull()
+  })
+})
+
+describe('table pairs', () => {
+  it('pairs a header row only with a single data row, never with the rows of a list', () => {
+    const list = `<table>
+      <tr><th>Lift</th><th>Status</th><th>Hours</th></tr>
+      <tr><td>Chair 2</td><td>Closed</td><td>9am-4pm</td></tr>
+      <tr><td>Chair 3</td><td>Open</td><td>9am-4pm</td></tr>
+    </table>`
+    expect(htmlPairLines(list)).toEqual([])
+    // The single-row snow table (column layout) still pairs each window with its own value.
+    expect(htmlPairLines(fixture('greek-peak-conditions.html'))).toEqual(expect.arrayContaining(['24 Hour: 3"', '48 Hour: 5"', '7 Day: 11"']))
   })
 })
 
@@ -175,6 +256,19 @@ describe('change detection and registry', () => {
     const b = extractReport(html.replace('<h1>', '<h1 class="x" data-token="abc123">').replace('</body>', '<script>var t=Date.now()</script></body>'), GREEK_PEAK_REPORT, NY)
     if (!a.ok || !b.ok) throw new Error('fixture failed')
     expect(reportContentHash(b.report)).toBe(reportContentHash(a.report))
+  })
+
+  it('an unchanged undated page hashes the same the next day; a changed count does not', () => {
+    const html = '<html><body><p>Trails Open 32 of 55</p><p>Lifts Open 6 of 8</p></body></html>'
+    const nextDay = { ...NY, now: '2027-01-16T14:00:00.000Z' }
+    const day1 = extractReport(html, GREEK_PEAK_REPORT, NY)
+    const day2 = extractReport(html, GREEK_PEAK_REPORT, nextDay)
+    const changed = extractReport(html.replace('32 of 55', '33 of 55'), GREEK_PEAK_REPORT, nextDay)
+    if (!day1.ok || !day2.ok || !changed.ok) throw new Error('fixture failed')
+    expect([day1.report.localDate, day2.report.localDate]).toEqual(['2027-01-15', '2027-01-16']) // dated by retrieval day
+    expect(reportContentHash(day2.report)).toBe(reportContentHash(day1.report))
+    expect(day2.extract.normalizedHash).toBe(day1.extract.normalizedHash)
+    expect(reportContentHash(changed.report)).not.toBe(reportContentHash(day1.report))
   })
 
   it('registers the unverified Greek Peak and Alta adapters', () => {

@@ -9,8 +9,9 @@
  *   Unitless snow values are read in the adapter's declared unit (US resorts: inches) only for labels that name
  *   a snow quantity; the assumption is surfaced as a limitation. Plain "Base"/"Summit" need an explicit unit.
  * - Implausible candidates (e.g. 90″ in 24 h, open > total) are skipped, not clamped.
- * - Status is only taken from explicit wording ("Status: Open", "closed for the season"). Trail counts never
- *   imply "open", and announced dates never do either.
+ * - Status is only taken from explicit resort-level wording ("Mountain Status: Open", "We are closed for the
+ *   season"). A bare "Status:" label, a facility's status ("Tubing Status: Open", "Terrain Park: Not yet open"), a
+ *   table row and a legend never set it. Trail counts never imply "open", and announced dates never do either.
  */
 import { DateTime } from 'luxon'
 import type { OperatingStatus, SnowWindow, SurfaceTag } from '@/lib/domain/types'
@@ -296,23 +297,88 @@ export function surfaceTagsFor(text: string): SurfaceTag[] {
 }
 
 // Status ----------------------------------------------------------------------
+//
+// The resort-wide status must never come from a facility, product or table row: "Tubing Status: Open", "Terrain
+// Park: Not yet open", "Hope Lake Water Park is closed for the season" or a lift-list row "Chair 2 | Closed" all
+// describe one thing at the resort. A wrong resort status is worse than none (unknown is never treated as open, and
+// a closure overrides every score), so anything ambiguous is left null.
 
-function parseStatus(line: string): { value: OperatingStatus; text: string } | null {
-  let m = line.match(/\bclosed\s+for\s+the\s+(?:\d{4}\s*[/–-]\s*\d{2,4}\s+)?season\b/i)
-  if (m) return { value: 'closed-for-season', text: m[0] }
-  m = line.match(/\bnot\s+yet\s+open(?:\s+for\s+the\s+(?:\d{4}\s*[/–-]\s*\d{2,4}\s+)?season)?\b/i)
-  if (m) return { value: 'not-yet-open', text: m[0] }
-  // "Mountain Status: Open" / "Status: Closed" — but not legends such as "Status: Open / Closed".
-  m = line.match(
-    /\b(?:(?:mountain|resort|operating|operations|lift\s+operations|today'?s?|current)\s+status\s*[:=|–—-]?|status\s*:)\s*(open|closed|partially\s+open|limited\s+operations|on\s+hold|delayed(?:\s+opening)?)\b(?!\s*(?:[/|,]|or\b|and\b)?\s*(?:open|closed)\b)/i,
-  )
-  if (m) {
+/**
+ * Facilities, services and products that have their own open/closed state. A facility word directly followed by
+ * "Mountain", "Resort" or "Ski Area" is part of a resort name ("Snowshoe Mountain") and does not count; "pass" only
+ * counts as a product ("season pass", "passes"), never in a name such as "Stevens Pass".
+ */
+const NOT_RESORT =
+  /\b(?:(?:chair\s*)?lifts?|chairs?|gondolas?|trams?|t-?bars?|(?:rope\s+)?tows?|(?:magic\s+)?carpets?|trails?|runs?|slopes?|glades?|(?:terrain|water|tubing|snow|adventure|bike)\s+parks?|(?:half|super)?[\s-]?pipes?|tubing|lanes?|night\s+(?:skiing|riding|sessions?)|nordic|cross[\s-]country|snowshoe(?:ing|s)?|lodges?|lodging|restaurants?|caf[eé]s?|dining|shops?|rentals?|schools?|lessons?|programs?|camps?|clinics?|racing|race\s+(?:courses?|programs?)|zip[\s-]?lines?|coasters?|rinks?|skating|pools?|spas?|hotels?|golf|sales|passes|pass\s*holders?|(?:season|day|lift|ski|ikon|epic|indy)\s+pass|tickets?|registration|bookings?|reservations?|summer|uphill|(?:beginner|learning|teaching)\s+(?:areas?|zones?))\b(?!\s+(?:mountain|resort|ski\s+area)\b)/i
+
+/** The matched phrase itself names the resort ("Mountain Status: Open", "the resort is open today"). */
+const NAMES_RESORT = /\b(?:mountain|resort|ski\s+area)\b/i
+/** A subject that makes "not yet open" about the resort: we / we're / the mountain / the resort / the ski area. */
+const RESORT_SUBJECT = /\b(?:we|mountain|resort|ski\s+area)\b/i
+/** A clause with no subject of its own: nothing at all, or only a bare "Status:" label. */
+const NO_SUBJECT = /^(?:status\s*[:=–—-]?)?$/i
+/** The phrase ends a list of states, i.e. a legend: "Open / Closed / Closed for the season". */
+const LEGEND_TAIL = /\b(?:open|closed|on\s+hold)\s*(?:[/,]|\bor|\band)$/i
+/** How far back from a match the clause is read (keeps huge single-line pages linear). */
+const LOOKBACK = 240
+
+const SEASON = String.raw`for\s+the\s+(?:\d{4}\s*[/–-]\s*\d{2,4}\s+)?season`
+const CLOSED_FOR_SEASON = new RegExp(String.raw`\bclosed\s+${SEASON}\b`, 'gi')
+const NOT_YET_OPEN = new RegExp(String.raw`\bnot\s+yet\s+open(\s+${SEASON})?\b`, 'gi')
+/** "Mountain Status: Open", never a bare "Status:" (a table column or a facility's field), nor a legend "Open / Closed". */
+const LABELLED_STATUS =
+  /\b(?:mountain|resort|operating|operations|lift\s+operations|today['’]?s?|current)\s+status\s*[:=|–—-]?\s*(open|closed|partially\s+open|limited\s+operations|on\s+hold|delayed(?:\s+opening)?)\b(?!\s*(?:[/|,]|or\b|and\b)?\s*(?:open|closed)\b)/gi
+const OPEN_TODAY = /\b(?:we\s+are|the\s+mountain\s+is|the\s+resort\s+is|mountain\s+is)\s+(open|closed)\s+today\b/gi
+
+/**
+ * The clause a match sits in: text before it, back to the previous sentence break, bullet or semicolon. A period
+ * only ends a sentence before a capital or right before the match ("…32 of 55. Mountain Status"), so "(est. 2008)"
+ * or "Mt. Snow" do not cut a clause short.
+ */
+function clauseBefore(line: string, index: number): string {
+  return line
+    .slice(Math.max(0, index - LOOKBACK), index)
+    .split(/[;•·]|[.!?](?=\s+[A-Z]|\s*$)/)
+    .pop()!
+    .trim()
+}
+
+/**
+ * Whether a status phrase at `index` describes the whole resort rather than one facility.
+ * - A table row (" | " before the phrase) describes that row's item.
+ * - The phrase's clause must not name a facility/product, nor end a legend.
+ * - A phrase with no subject of its own ("Closed for the season", "Status: Not yet open") belongs to the label or
+ *   heading on the previous line, so that line must not name a facility either (label and value split over lines).
+ */
+function describesResort(line: string, m: RegExpExecArray, prev: string | undefined): boolean {
+  const index = m.index
+  if (/\s\|\s/.test(line.slice(Math.max(0, index - LOOKBACK), index))) return false
+  const clause = clauseBefore(line, index)
+  if (NOT_RESORT.test(clause) || LEGEND_TAIL.test(clause)) return false
+  if (NO_SUBJECT.test(clause) && !NAMES_RESORT.test(m[0]) && prev !== undefined && NOT_RESORT.test(prev.slice(-LOOKBACK))) return false
+  return true
+}
+
+function parseStatus(line: string, prev: string | undefined): { value: OperatingStatus; text: string } | null {
+  for (const m of line.matchAll(CLOSED_FOR_SEASON)) {
+    if (describesResort(line, m, prev)) return { value: 'closed-for-season', text: m[0] }
+  }
+  for (const m of line.matchAll(NOT_YET_OPEN)) {
+    // "Registration is not yet open" is about something else: require the season, a resort subject or an empty
+    // clause (a value on its own line; its label is checked on the previous line).
+    const clause = clauseBefore(line, m.index)
+    const aboutResort = m[1] !== undefined || clause === '' || RESORT_SUBJECT.test(clause)
+    if (aboutResort && describesResort(line, m, prev)) return { value: 'not-yet-open', text: m[0] }
+  }
+  for (const m of line.matchAll(LABELLED_STATUS)) {
+    if (!describesResort(line, m, prev)) continue
     const w = m[1].toLowerCase()
     const value: OperatingStatus = w === 'open' ? 'open' : w.startsWith('partially') || w.startsWith('limited') ? 'partially-open' : 'temporarily-closed'
     return { value, text: m[0] }
   }
-  m = line.match(/\b(?:we\s+are|the\s+mountain\s+is|the\s+resort\s+is|mountain\s+is)\s+(open|closed)\s+today\b/i)
-  if (m) return { value: m[1].toLowerCase() === 'open' ? 'open' : 'temporarily-closed', text: m[0] }
+  for (const m of line.matchAll(OPEN_TODAY)) {
+    if (describesResort(line, m, prev)) return { value: m[1].toLowerCase() === 'open' ? 'open' : 'temporarily-closed', text: m[0] }
+  }
   return null
 }
 
@@ -433,7 +499,7 @@ export function extractFromLines(
       const m = line.match(/\bsnowmaking\s*[:=|–—-]\s*(.{3,200})/i)
       if (m) x.snowmaking = { text: cut(m[1].trim(), 200) }
     }
-    if (!x.status) x.status = parseStatus(line)
+    if (!x.status) x.status = parseStatus(line, lines[i - 1])
     if (!x.reportDate) {
       // Only a parseable date counts: "Stay updated…" or "updated 3 times daily" must not block a later stamp.
       const m = DATE_LABEL.exec(line)

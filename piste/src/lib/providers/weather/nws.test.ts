@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { Settings } from 'luxon'
 import { describe, expect, it } from 'vitest'
 import { fakeHttp, json } from '../test-helpers'
 import type { WeatherPointRequest } from '../types'
@@ -48,6 +49,41 @@ describe('NWS validTime intervals', () => {
     expect(m.get(at('2027-01-15T07:00:00Z'))).toBe(2)
     expect(m.get(at('2027-01-15T08:00:00Z'))).toBe(2) // 1 (first half) + 1 (second half)
     expect(m.get(at('2027-01-15T09:00:00Z'))).toBe(2)
+  })
+
+  it('leaves hours covered twice (duplicate or overlapping intervals) empty instead of double counting', () => {
+    const dup = distributeToHours(
+      [
+        { validTime: '2027-01-15T06:00:00+00:00/PT6H', value: 6 },
+        { validTime: '2027-01-15T06:00:00+00:00/PT6H', value: 6 },
+      ],
+      'sum',
+    )
+    expect([...dup.keys()]).toHaveLength(6)
+    expect([...dup.values()].every((v) => v === null)).toBe(true) // never 2 mm/h (12 mm in total)
+    const overlap = distributeToHours(
+      [
+        { validTime: '2027-01-15T06:00:00+00:00/PT3H', value: 3 }, // 06–09
+        { validTime: '2027-01-15T08:00:00+00:00/PT2H', value: 4 }, // 08–10: 08:00 is covered twice
+      ],
+      'sum',
+    )
+    expect(overlap.get(at('2027-01-15T06:00:00Z'))).toBe(1)
+    expect(overlap.get(at('2027-01-15T07:00:00Z'))).toBe(1)
+    expect(overlap.get(at('2027-01-15T08:00:00Z'))).toBeNull()
+    expect(overlap.get(at('2027-01-15T09:00:00Z'))).toBe(2)
+  })
+
+  it('treats interval bounds without an offset as unknown, never as server-local time', () => {
+    const prev = Settings.defaultZone
+    Settings.defaultZone = 'Asia/Tokyo' // a server that is not on UTC
+    try {
+      expect(parseValidTime('2027-01-15T06:00:00+00:00/PT6H')).toEqual({ startMs: at('2027-01-15T06:00:00Z'), endMs: at('2027-01-15T12:00:00Z') })
+      expect(parseValidTime('2027-01-15T06:00:00/PT6H')).toBeNull()
+      expect(parseValidTime('2027-01-15T06:00:00+00:00/2027-01-16T09:00:00')).toBeNull()
+    } finally {
+      Settings.defaultZone = prev
+    }
   })
 
   it('repeats instantaneous values and keeps nulls null', () => {
@@ -160,6 +196,20 @@ describe('NWS alerts', () => {
     expect(h.calls[0].url).toBe('https://api.weather.gov/alerts/active?point=42.5086,-76.146')
     expect(res.provenance.kind).toBe('official')
     expect(res.capabilities.limitations.join(' ')).toMatch(/1 test\/exercise/)
+  })
+
+  it('an alert time without an offset is unknown, not read in the server zone', () => {
+    const prev = Settings.defaultZone
+    Settings.defaultZone = 'Asia/Tokyo'
+    try {
+      const r = parseNwsAlerts({
+        features: [{ properties: { id: 'a1', event: 'Winter Storm Warning', status: 'Actual', onset: '2027-01-15T07:00:00', ends: '2027-01-16T07:00:00-05:00' } }],
+      })
+      if (!r.ok) throw new Error(r.error)
+      expect(r.alerts[0]).toMatchObject({ onset: null, ends: '2027-01-16T12:00:00.000Z' })
+    } finally {
+      Settings.defaultZone = prev
+    }
   })
 
   it('an empty collection is a valid "no active alerts" answer', () => {

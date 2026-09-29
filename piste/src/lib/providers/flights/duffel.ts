@@ -10,7 +10,8 @@
  * - Segment times are airport-LOCAL wall times without offset; converted to UTC only when Duffel supplies the
  *   airport `time_zone`, and the local wall time is kept alongside.
  * - Offers expire (`expires_at`); callers must show the quote retrieval time and expiry.
- * - Ski/sports-equipment fees are not part of Duffel offers; baggage notes list included bags only.
+ * - Ski/sports-equipment fees are not part of Duffel offers; baggage notes list included bags only, as the minimum
+ *   across segments (never overstated).
  */
 import { DateTime } from 'luxon'
 import { z } from 'zod'
@@ -62,14 +63,22 @@ function localToUtc(local: string, zone: string | null | undefined): string | nu
   return dt.isValid ? dt.toUTC().toISO() : null
 }
 
+/**
+ * Bags included for the first passenger. A bag is only included for the trip when EVERY segment that states
+ * baggage includes it, so each type takes the minimum across those segments (a type a stating segment omits counts
+ * as 0) — never the maximum, which would overstate what the fare covers. Segments without baggage data are flagged.
+ */
 function baggageNotes(segments: z.infer<typeof Segment>[]): string | null {
-  const counts = new Map<string, number>()
-  for (const s of segments) {
-    for (const b of s.passengers?.[0]?.baggages ?? []) counts.set(b.type, Math.max(counts.get(b.type) ?? 0, b.quantity))
-  }
-  if (counts.size === 0) return null
-  const parts = [...counts].map(([type, q]) => `${q} ${type.replace('_', '-')}`)
-  return `Included per passenger (first passenger): ${parts.join(', ')}. Ski/sports-equipment fees not included.`
+  type Bag = { type: string; quantity: number }
+  const stated = segments.map((s) => s.passengers?.[0]?.baggages).filter((b): b is Bag[] => b !== undefined)
+  const types = [...new Set(stated.flat().map((b) => b.type))]
+  if (types.length === 0) return null
+  const parts = types.map((type) => {
+    const perSegment = stated.map((bags) => Math.max(0, ...bags.filter((b) => b.type === type).map((b) => b.quantity)))
+    return `${Math.min(...perSegment)} ${type.replace(/_/g, '-')}`
+  })
+  const partial = stated.length < segments.length ? ' Not stated for every segment.' : ''
+  return `Included per passenger (first passenger): ${parts.join(', ')}.${partial} Ski/sports-equipment fees not included.`
 }
 
 /** Pure normalisation of an offer-request response. Exported for tests. */

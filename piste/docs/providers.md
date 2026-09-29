@@ -181,7 +181,9 @@ return `unsupported` without any network call.
 - **Request:** `GET https://api.weather.gov/alerts/active?point=lat,lon`, cached for 5 minutes.
 - **Output:** each feature becomes an `OfficialAlert` with `id`, `event`, `headline`, `severity`, `onset`, `ends`,
   `expires`, `areaDesc` and `url` (the alert's API URL).
-- **Timestamps:** converted to UTC ISO. When `ends` is null it stays null, and the domain treats it as unbounded.
+- **Timestamps:** converted to UTC ISO. A timestamp must state its offset (`Z` or `±hh:mm`). One without an offset is
+  ambiguous and becomes null; it is never read in the server's own zone. When `ends` is null it stays null, and the
+  domain treats it as unbounded.
 - **Filtering:** only `status: "Actual"` messages are kept. Test, exercise and cancel messages are dropped and
   counted in `limitations`.
 - **Provenance:** kind `official`, stale after 1 h.
@@ -212,12 +214,15 @@ are listed as missing. `snowLevel` is deliberately **not** used as the freezing 
 **How intervals are spread over hours** (`weather/nws-intervals.ts`):
 
 - Each `validTime` is an ISO-8601 interval, `start/duration` or `start/end`, for example
-  `2027-01-15T06:00:00+00:00/PT6H`.
+  `2027-01-15T06:00:00+00:00/PT6H`. The start and an absolute end must state their offset. An interval without one
+  is skipped, never read in the server's zone.
 - Instantaneous values are copied to every hour the interval covers.
 - Accumulations are **spread proportionally**: each UTC hour gets `total × overlap ÷ interval length`. For example,
   6 mm over PT6H gives 1 mm per hour, and the total is conserved.
 - An hour only partly covered by the layer, such as an edge hour when an interval starts at :30, is left **null**
   rather than reported as a smaller amount.
+- An hour covered by more than one accumulation interval (a duplicate or overlapping interval) is also left
+  **null**. Its amount is ambiguous, and it is never double counted.
 - Records are stamped at the hour start and describe [T, T+1 h). The series therefore uses intervalSemantics
   `following-hour`.
 - Proportional spreading is a documented approximation. NWS does not say how snow falls within its 6-hour
@@ -225,7 +230,8 @@ are listed as missing. `snowLevel` is deliberately **not** used as the freezing 
 
 **Other series fields.**
 
-- `modelRunAt` is the grid's `updateTime`, the forecast office's issue time as the API supplies it.
+- `modelRunAt` is the grid's `updateTime`, the forecast office's issue time as the API supplies it (null when the
+  stamp has no offset).
 - `grid.lat` and `grid.lon` are the centroid of the grid-cell polygon.
 - `grid.elevationM` comes from `properties.elevation`. NWS does not adjust values to the requested point's
   elevation, and a limitation says so.
@@ -237,16 +243,25 @@ are listed as missing. `snowLevel` is deliberately **not** used as the freezing 
 `createLabelReportProvider(config)` is a reusable adapter. A resort adapter is only configuration: the URLs, the
 publisher, the unit the resort prints snow in, and the required anchors. For each fetch it runs these steps:
 
-1. **robots.txt.** It checks the rules for the product token `piste` and for `*`, and caches them for 24 h.
-   - Disallowed: the adapter returns `unsupported` and does not fetch the page.
+1. **robots.txt, for every URL.** Before each page, the primary and every alternate, it checks that origin's rules
+   for the product token `piste` and for `*`, and caches them for 24 h. An alternate on another origin (Greek Peak:
+   `greekpeak.net` next to `www.greekpeak.net`) is checked against its own robots.txt.
+   - Disallowed: that page is not fetched, and the adapter moves on to the next URL.
    - 4xx response: no rules apply.
-   - 5xx or timeout: the adapter reports that error, because it cannot tell whether fetching is allowed.
-2. **Fetch.** It fetches the primary URL, then tries alternates if that fails (Greek Peak: the print version).
+   - 5xx or timeout: that page is skipped, because the adapter cannot tell whether fetching is allowed.
+2. **Fetch.** It fetches the primary URL, then tries alternates if that fails (Greek Peak: the print version). When
+   no URL yields a report, the most informative failure is returned: `schema-changed` (a page no longer parses),
+   then the HTTP or network failure, then the robots.txt error. Only when robots.txt disallows every URL is the
+   result `unsupported`.
 3. **Build text lines,** in priority order:
    1. **Structured data:** JSON-LD blocks, flattened. A schema.org `PropertyValue` becomes `name: value unit`, and
       camelCase or snake_case keys are turned into words. Custom `<meta>` tags are included. Social/SEO tags
       (`og:`, `twitter:`, description) are skipped because they are marketing copy.
-   2. **Table and definition-list pairs:** two-cell rows, a header row followed by a value row, and `dt`/`dd`.
+   2. **Table and definition-list pairs:** two-cell rows, `dt`/`dd`, and a header row followed by a value row
+      (column layout). The column layout is used only when those two rows are the table's only rows of that width,
+      that is, a table with a single data row. A list, such as lifts or trails with a `Lift | Status | Hours` header
+      and one row per lift, is never paired, so its first row cannot become page-level facts like `Status: Closed`.
+      A stacked layout with several header and value rows is skipped too: those values end up missing, never wrong.
    3. **Page text:** scripts, styles, SVG and iframes are stripped. Block elements become lines and table cells
       are joined with ` | `.
 4. **Match labels.** For each field, the first plausible match wins. See the rules below.
@@ -271,7 +286,7 @@ Optional fields that the page does not show are listed in `capabilities.missing`
   - For labels that name a snow quantity, unitless values are read in the adapter's declared unit (inches for
     Greek Peak and Alta), and a limitation says so.
   - A bare "Base" or "Summit" needs an explicit unit.
-  - A range such as `18″–30″` is stored as its lower bound, with a note.
+  - A range such as `18″–30″`, for base depth or any snowfall window, is stored as its lower bound, with a note.
 - **Snowfall windows.**
   - 24, 48 and 72 hour labels map to those windows.
   - "7 day" and "past week" map to 7 days.
@@ -284,11 +299,27 @@ Optional fields that the page does not show are listed in `capabilities.missing`
     separate `Total Trails: 55`.
   - Beginner, night, groomed and Nordic trail counts never feed the main trail count.
   - A candidate where open is greater than total is skipped.
-- **Status.** Status is taken only from explicit wording: `Mountain Status: Open`, `Status: Closed`,
-  `closed for the season`, `not yet open`, `we are open today`.
-  - Legends such as `Status: Open / Closed` are ignored.
+- **Status.** The resort's operating status is taken only from explicit resort-level wording:
+  `Mountain Status: Open` (also Resort, Operating, Operations, Lift Operations, Today's or Current status),
+  `closed for the season`, `not yet open`, `we are open today` and `the mountain is closed today`. When in doubt the
+  status stays `null`: a wrong resort status is worse than an unknown one, because unknown is never treated as open
+  and a closure overrides every score.
+  - A bare `Status:` never counts. It is usually a table column or one facility's field.
+  - A status about one facility, service or product never becomes the resort status, for example
+    `Tubing Status: Open`, `Terrain Park: Not yet open`, `Hope Lake Water Park is closed for the season`,
+    `Night skiing: closed for the season` or `Registration is not yet open`. The clause before the phrase is checked
+    for lifts, trails, parks, tubing, lodges, rentals, lessons, passes, tickets, registration, summer activities and
+    similar words. A word that is part of a resort name ("Snowshoe Mountain", "Stevens Pass") does not count.
+  - A table row (`Chair 2 | Closed for the season`) and a legend (`Status: Open / Closed`,
+    `Open / Closed / Closed for the season`) are ignored.
+  - A status value on its own line is read together with the line above it: `Night Skiing` followed by
+    `Closed for the season` is about night skiing.
+  - `not yet open` also needs the season (`not yet open for the 2026-27 season`), a resort subject (we, the mountain,
+    the resort, the ski area) or nothing else in its clause.
   - Trail counts and announced opening dates **never** set the status to "open".
   - With no explicit status, the status is `null`.
+  - Remaining risk: a standalone `Closed for the season` line under an item with no facility word, such as a bare
+    trail name, can still set the status.
 - **Report time.** Recognised labels: "Last updated", "Updated", "Report date", "As of". Accepted formats:
   ISO-8601, `January 15, 2027 7:02 AM`, `1/15/2027 6:45 AM`, and a weekday with a date. The time is interpreted in
   the resort's zone.
@@ -306,9 +337,11 @@ Optional fields that the page does not show are listed in `capabilities.missing`
   - `staleAfter` is the end of the report's local day. It is measured from the **report** date, not the fetch, so
     refetching an old report does not make it fresh.
   - `verification` is `unverified` until the parser has been checked against the live page.
-- **Change detection.** Use `reportContentHash(report)`, a stable hash of the normalised report, to decide whether
-  a fetch is a new report. The raw-page hash in `SourceFetch.contentHash` changes whenever the markup changes, for
-  example with tokens or ads.
+- **Change detection.** Use `reportContentHash(report)`, a stable hash of the normalised report content, to decide
+  whether a fetch is a new report. Like the jobs hash, it excludes `localDate` and `reportedAt`: an undated page is
+  dated by the retrieval day, and a page may re-render its timestamp, so neither may make an unchanged report look
+  new and reset its observation age. The raw-page hash in `SourceFetch.contentHash` changes whenever the markup
+  changes, for example with tokens or ads.
 - **Extracts.** `SourceFetch.extract` stores only the matched label snippets and the normalised hash, never a copy
   of the page.
 
@@ -354,6 +387,7 @@ fixtures and tests.
 - **Rates:** JSON numbers are converted to plain decimal strings with big.js, for example `"0.00000091"`, never
   `9.1e-7`. Floats are never used for money downstream (`domain/money.ts`).
 - **Missing currencies** are listed in `capabilities.missing`.
+- **Validation:** an `amount` of zero or less is malformed and returns `parse`, never a thrown error.
 - **Provenance:** kind `official`, provider "Frankfurter (ECB reference rates)", `validFrom` set to the reference
   date, stale after 36 h.
 - **Scope:** these are informational rates, not what a card or bank charges.
@@ -382,8 +416,12 @@ manual itinerary or quote entry.
   `arriveLocal`. If a zone is missing, the time stays local and a limitation says so.
 - **Flight identifiers** come from the marketing carrier's IATA code and `marketing_carrier_flight_number`.
   Nothing is invented.
-- **Expiry.** `expiresAt` comes from `expires_at`. Provenance `staleAfter` is the earliest offer expiry.
-- **Baggage.** `baggageNotes` lists included bags only. Duffel offers do not include ski or sports-equipment fees.
+- **Expiry.** `expiresAt` comes from `expires_at`; a value without an offset becomes null. Provenance `staleAfter`
+  is the earliest offer expiry.
+- **Baggage.** `baggageNotes` lists included bags only, for the first passenger. For each bag type it takes the
+  **minimum** across the segments that state baggage (a type a segment omits counts as 0), so a bag included on one
+  leg only is never shown as included for the trip. When some segments give no baggage data, the note adds "Not
+  stated for every segment." Duffel offers do not include ski or sports-equipment fees.
 
 **Test mode.** Offers are marked `testMode: true` when any of these holds:
 
