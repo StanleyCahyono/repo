@@ -35,6 +35,7 @@ What each status means:
 | Google Maps | Prefilled **directions links**. The travel time shown is Google's, not Piste's | None | Manual (links) | `links/builders.ts` |
 | OpenSkiMap, NWS forecast page | Map and forecast **links** | None | Manual (links) | `links/builders.ts` |
 | Link checker | HTTP status, final URL after redirects, whether the page can be framed | None | Live | `links/check.ts` |
+| OpenFreeMap (map style and tiles) | Vector basemap for the Explore and resort maps, loaded by the browser. Attribution is shown on the map. Piste reads no data from it | None. `NEXT_PUBLIC_MAP_STYLE_URL` swaps in another MapLibre style | Live (browser). Never loaded in the build environment, where the maps showed their schematic fallback: markers plotted by coordinates, with the same selection and interactions | `components/map/resort-map.tsx` |
 | Pass products and rules, lift prices, lodging, events | Curated records with per-fact sources (`catalog/`) | — | Manual | — |
 | Driving routes (openrouteservice) | — | `ORS_API_KEY` | **Not implemented.** The variable is listed in `.env.example`, but no adapter exists yet. Drive times are curated estimates plus directions links | — |
 
