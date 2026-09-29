@@ -10,9 +10,10 @@ import { useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, MotionConfig } from 'motion/react'
-import { Ellipsis, FlaskConical, Radio } from 'lucide-react'
+import { Bell, Ellipsis, FlaskConical, Radio } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
+import { Badge } from '@/components/ui/badge'
 import { Sheet } from '@/components/ui/sheet'
 import { ToastProvider } from '@/components/ui/toast'
 import { PRIMARY_NAV, UTILITY_NAV, MOBILE_PRIMARY, MOBILE_MORE, type NavItem } from './nav'
@@ -203,12 +204,29 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                   {unreadAlerts > 0 ? <span className="absolute -top-0.5 -right-1 size-2 rounded-full bg-copper" aria-hidden /> : null}
                 </span>
                 More
+                {unreadAlerts > 0 ? <span className="sr-only"> ({unreadAlerts} unread alerts)</span> : null}
               </button>
             </li>
           </ul>
         </nav>
         <Sheet open={moreOpen} onOpenChange={setMoreOpen} side="bottom" title="More">
           <ul className="flex flex-col gap-1 pb-2">
+            {unreadAlerts > 0 ? (
+              // The dot on "More" means unread alerts; say where they are instead of leaving it unexplained.
+              <li>
+                <Link
+                  href="/#alerts"
+                  onClick={() => setMoreOpen(false)}
+                  className="flex h-12 items-center gap-3 rounded-[10px] px-3 text-[15px] font-medium text-ink hover:bg-surface-3"
+                >
+                  <Bell aria-hidden className="size-5 text-copper" strokeWidth={1.8} />
+                  Unread alerts
+                  <Badge tone="copper" className="tnum ml-auto">
+                    {unreadAlerts}
+                  </Badge>
+                </Link>
+              </li>
+            ) : null}
             {MOBILE_MORE.map((item) => (
               <li key={item.href}>
                 <Link

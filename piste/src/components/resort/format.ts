@@ -93,6 +93,16 @@ export function units(u: UnitPrefs) {
 export type Units = ReturnType<typeof units>
 
 /** Research-grade or unverified catalog facts are "confirm at source", never presented as verified. */
+/**
+ * Wording for a fact that still needs confirming: web-search research is "Researched — confirm at source"; an
+ * unverified catalog entry is Piste reference data ("Reference — confirm at source").
+ */
+export function confirmText(p: Provenance | null | undefined): string {
+  if (p?.verification === 'search-summary') return 'Researched — confirm at source'
+  if (p?.kind === 'manual') return 'Confirm at source'
+  return 'Reference — confirm at source'
+}
+
 export function needsCheck(p: Provenance | null | undefined): boolean {
   if (!p) return true
   const v = p.verification ?? null

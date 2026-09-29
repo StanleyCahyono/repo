@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Recommendation, RankedOption } from '@/lib/domain/recommend'
-import { explainPosition, factorDeltas, ordinal, rankingView, tidyLines, topContributions, weightPercents } from './rank-model'
+import { explainPosition, factorDeltas, ordinal, rankingView, topContributions, weightPercents } from './rank-model'
 
 function option(
   resortId: string,
@@ -193,20 +193,10 @@ describe('helpers', () => {
     expect(Object.values(q).reduce((s, x) => s + x, 0)).toBe(100)
     expect(weightPercents({ conditions: 0, fit: 0, travel: 0, cost: 0, events: 0 }).fit).toBe(0)
   })
-  it('tidies engine wording without dropping facts', () => {
-    expect(tidyLines(['Not covered by your Indy Base Pass: Indy Base Pass: No days left'])).toEqual(['Not covered by your Indy Base Pass: No days left'])
-    expect(
-      tidyLines([
-        'Conditions 88 (Excellent)',
-        'About 50 min drive (1 h with winter buffer)',
-        'About 50 min drive (1 h with a 20% winter buffer), within your 4 h limit',
-      ]),
-    ).toEqual(['Conditions 88 (Excellent)', 'About 50 min drive (1 h with a 20% winter buffer), within your 4 h limit'])
-    expect(tidyLines(['Same line', 'Same line'])).toEqual(['Same line'])
-    expect(tidyLines(['Cost estimate incomplete (No weekday lift ticket price for 2027-01-15.; No rental price.)'])).toEqual([
-      'Cost estimate incomplete (No weekday lift ticket price for Fri 15 Jan; No rental price)',
-    ])
-    expect(tidyLines(['Great fit (87)', 'Lessons offered'])).toEqual(['Great fit (87)', 'Lessons offered'])
+  it('passes the engine sentences through unchanged (wording is fixed at the source, in recommend.ts)', () => {
+    const lines = { benefits: ['Great fit (87)', 'Lessons offered'], tradeoffs: ['Not covered by your Indy Base Pass: No days left'], limitations: ['Snow report 20 h old'] }
+    const [o] = rankingView(rec([option('a', 1, 70, { conditions: 80 }, lines)])).options
+    expect({ benefits: o.benefits, tradeoffs: o.tradeoffs, limitations: o.limitations }).toEqual(lines)
   })
   it('writes ordinals', () => {
     expect([1, 2, 3, 4, 11, 12, 13, 21, 22].map(ordinal)).toEqual(['1st', '2nd', '3rd', '4th', '11th', '12th', '13th', '21st', '22nd'])

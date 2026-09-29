@@ -6,9 +6,10 @@
  * offset by good component values. "Limited data" is a designed state, not a grey number.
  */
 import Link from 'next/link'
-import { AlertTriangle, ArrowRight, Ban, CircleHelp, ClipboardPen, CloudOff, ExternalLink, FlaskConical, NotebookPen, Snowflake } from 'lucide-react'
+import { AlertTriangle, ArrowRight, Ban, ChevronDown, CircleHelp, ClipboardPen, CloudOff, ExternalLink, FlaskConical, NotebookPen, Snowflake } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { ChartFrame, chartUnits, DailyBars, type DailyBarDatum } from '@/components/charts'
+import { Disclosure } from '@/components/ui/disclosure'
 import { ConfidenceTag, ScoreBreakdown, ScoreChip } from '@/components/ui/score'
 import { Freshness, KindTag, Missing } from '@/components/ui/provenance'
 import { StatusPill } from '@/components/ui/status'
@@ -322,7 +323,16 @@ function ScorePanel({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Page
         </p>
       ) : null}
 
-      {s.components.length ? <ScoreBreakdown components={s.components} /> : null}
+      {s.components.length ? (
+        <Disclosure
+          id="score-breakdown"
+          variant="row"
+          className="scroll-mt-[124px] border-y border-divider md:scroll-mt-[84px]"
+          summary={`How the score adds up · ${s.components.filter((c) => c.included).length} of ${s.components.length} factors`}
+        >
+          <ScoreBreakdown components={s.components} className="pt-1 pb-3" />
+        </Disclosure>
+      ) : null}
 
       {why.length ? (
         <div>
@@ -691,7 +701,7 @@ function WeatherPanel({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pa
           </p>
         </div>
       ) : (
-        <div className="-mx-1 overflow-x-auto px-1">
+        <div className="relative -mx-1 overflow-x-auto px-1">
           <table className="w-full text-left text-[13.5px]">
             <caption className="sr-only">Modeled weather at the base and upper-mountain points on {dayLabelYear(v.date)}</caption>
             <thead>
@@ -725,13 +735,13 @@ function WeatherPanel({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pa
             <tbody>
               {rows.map((row) => (
                 <tr key={row.label} className="border-b border-divider last:border-b-0">
-                  <th scope="row" className="py-2 pr-3 font-normal text-ink-2">
+                  <th scope="row" className="py-1.5 pr-3 font-normal text-ink-2">
                     {row.label}
                   </th>
                   {cols.map((c) => {
                     const val = c.agg ? row.get(c.agg) : null
                     return (
-                      <td key={c.key} className="py-2 pr-3 text-ink tnum">
+                      <td key={c.key} className="py-1.5 pr-3 text-ink tnum">
                         {c.agg ? val ?? <Missing label="Not provided" /> : <span className="text-ink-3">—</span>}
                       </td>
                     )
@@ -756,17 +766,24 @@ function WeatherPanel({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pa
       {anyRun ? <WeekOutlook d={d} v={v} /> : null}
 
       <div className="flex flex-col gap-1 border-t border-divider pt-3 text-[12.5px] text-ink-3">
-        {cols.map((c) =>
-          c.point ? (
-            <p key={c.key}>
-              <span className="font-medium text-ink-2">{pointTitle(c.key)} point:</span> {c.point.label}
-            </p>
-          ) : null,
-        )}
-        {limitations.map((l) => (
-          <p key={l}>{l}</p>
-        ))}
         {anyRun ? <p>Elevation-adjusted model output, not a weather station.</p> : null}
+        {/* Where the model points sit and what the runs can't do — kept, one click away. */}
+        {cols.some((c) => c.point) || limitations.length ? (
+          <Disclosure summary={`Model points and limitations (${cols.filter((c) => c.point).length + limitations.length})`}>
+            <div className="mt-1 flex flex-col gap-1">
+              {cols.map((c) =>
+                c.point ? (
+                  <p key={c.key}>
+                    <span className="font-medium text-ink-2">{pointTitle(c.key)} point:</span> {c.point.label}
+                  </p>
+                ) : null,
+              )}
+              {limitations.map((l) => (
+                <p key={l}>{l}</p>
+              ))}
+            </div>
+          </Disclosure>
+        ) : null}
         <Link href={forecastHref} className="mt-1 inline-flex items-center gap-1 self-start text-[13px] font-medium text-teal hover:underline">
           Hourly timeline and 16-day outlook <ArrowRight aria-hidden className="size-3.5" />
         </Link>
@@ -1116,55 +1133,68 @@ function HistoryStrip({ x, v }: { x: ResortPageExtras; v: PageView }) {
 // ---------------------------------------------------------------------------
 // Report history and my observations
 
+/** Report days shown before "N earlier report days". */
+const REPORT_DAYS_SHOWN = 3
+
 function ReportHistory({ d, v }: { d: ResortDetail; v: PageView }) {
   const u = units(v.units)
+  const item = (g: ResortDetail['reports'][number]) => {
+    // Same order as "the latest report" everywhere else: highest revision, then newest row.
+    const revisions = [...g.revisions].sort((a, b) => b.revision - a.revision || b.id - a.id)
+    const latest = revisions[0]
+    const sn = snow24(latest)
+    return (
+      <li key={g.date} className="px-4 py-3">
+        <details className="group">
+          <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 [&::-webkit-details-marker]:hidden">
+            <span className="w-[92px] text-[14px] font-medium text-ink tnum">{dayLabel(g.date)}</span>
+            {latest.status ? <StatusPill status={latest.status} size="sm" /> : null}
+            <span className="text-[13px] text-ink-2 tnum">
+              {dotJoin(
+                sn !== null ? `${u.snow(sn)} new` : null,
+                latest.baseDepthCm !== null ? `${u.snow(latest.baseDepthCm)} base` : null,
+                latest.openTrails !== null ? `${latest.openTrails}${latest.totalTrails ? `/${latest.totalTrails}` : ''} trails` : null,
+              ) || 'No figures'}
+            </span>
+            <span className="ml-auto flex items-center gap-2 text-[12px] text-ink-3">
+              {revisions.length > 1 ? (new Set(revisions.map((x) => x.kind)).size > 1 ? `${revisions.length} reports` : `${revisions.length} revisions`) : null}
+              <KindTag kind={latest.kind} compact />
+              <ChevronDown aria-hidden className="size-4 transition-transform duration-150 group-open:rotate-180" />
+            </span>
+          </summary>
+          <ol className="mt-2 flex flex-col gap-2 border-l border-divider-strong pl-3">
+            {revisions.map((rv) => (
+              <li key={rv.id} className="text-[12.5px] text-ink-2">
+                <span className="font-medium text-ink">{REPORT_ORIGIN_LABEL[rv.origin]}</span>
+                {rv.revision > 1 ? ` · revision ${rv.revision}` : ''} ·{' '}
+                {rv.reportedAt ? `published ${instantLabel(rv.reportedAt, v.tz, v.now)}` : 'publish time not stated'}
+                {rv.surfaceText ? <> · <q>{rv.surfaceText}</q></> : null}
+                {rv.notes ? <span className="block text-ink-3">{rv.notes}</span> : null}
+                <Src title={`Report revision ${rv.revision}`} items={[src(`Report ${dayLabelYear(rv.localDate)}, revision ${rv.revision}`, rv.prov)]} className="ml-1" />
+              </li>
+            ))}
+          </ol>
+        </details>
+      </li>
+    )
+  }
+  const fold = d.reports.length > REPORT_DAYS_SHOWN + 1
+  const shown = fold ? d.reports.slice(0, REPORT_DAYS_SHOWN) : d.reports
+  const older = fold ? d.reports.slice(REPORT_DAYS_SHOWN) : []
   return (
     <section aria-labelledby="reports-title" className="min-w-0">
       <SubHead id="reports-title" aside="Every revision kept">
         Report history
       </SubHead>
       {d.reports.length ? (
-        <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">
-          {d.reports.map((g) => {
-            // Same order as "the latest report" everywhere else: highest revision, then newest row.
-            const revisions = [...g.revisions].sort((a, b) => b.revision - a.revision || b.id - a.id)
-            const latest = revisions[0]
-            const sn = snow24(latest)
-            return (
-              <li key={g.date} className="px-4 py-3">
-                <details className="group">
-                  <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 [&::-webkit-details-marker]:hidden">
-                    <span className="w-[92px] text-[14px] font-medium text-ink tnum">{dayLabel(g.date)}</span>
-                    {latest.status ? <StatusPill status={latest.status} size="sm" /> : null}
-                    <span className="text-[13px] text-ink-2 tnum">
-                      {dotJoin(
-                        sn !== null ? `${u.snow(sn)} new` : null,
-                        latest.baseDepthCm !== null ? `${u.snow(latest.baseDepthCm)} base` : null,
-                        latest.openTrails !== null ? `${latest.openTrails}${latest.totalTrails ? `/${latest.totalTrails}` : ''} trails` : null,
-                      ) || 'No figures'}
-                    </span>
-                    <span className="ml-auto flex items-center gap-2 text-[12px] text-ink-3">
-                      {revisions.length > 1 ? (new Set(revisions.map((x) => x.kind)).size > 1 ? `${revisions.length} reports` : `${revisions.length} revisions`) : null}
-                      <KindTag kind={latest.kind} compact />
-                    </span>
-                  </summary>
-                  <ol className="mt-2 flex flex-col gap-2 border-l border-divider-strong pl-3">
-                    {revisions.map((rv) => (
-                      <li key={rv.id} className="text-[12.5px] text-ink-2">
-                        <span className="font-medium text-ink">{REPORT_ORIGIN_LABEL[rv.origin]}</span>
-                        {rv.revision > 1 ? ` · revision ${rv.revision}` : ''} ·{' '}
-                        {rv.reportedAt ? `published ${instantLabel(rv.reportedAt, v.tz, v.now)}` : 'publish time not stated'}
-                        {rv.surfaceText ? <> · <q>{rv.surfaceText}</q></> : null}
-                        {rv.notes ? <span className="block text-ink-3">{rv.notes}</span> : null}
-                        <Src title={`Report revision ${rv.revision}`} items={[src(`Report ${dayLabelYear(rv.localDate)}, revision ${rv.revision}`, rv.prov)]} className="ml-1" />
-                      </li>
-                    ))}
-                  </ol>
-                </details>
-              </li>
-            )
-          })}
-        </ul>
+        <>
+          <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">{shown.map(item)}</ul>
+          {older.length ? (
+            <Disclosure summary={`${older.length} earlier report days`} className="mt-2">
+              <ul className="mt-2 flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">{older.map(item)}</ul>
+            </Disclosure>
+          ) : null}
+        </>
       ) : (
         <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-4 text-[13.5px] text-ink-2">No reports stored yet. History begins with the first report read or entered.</p>
       )}

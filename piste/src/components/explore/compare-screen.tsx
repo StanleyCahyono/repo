@@ -31,6 +31,7 @@ import { COMPARE_MAX, useCompareSelection } from '@/components/resort/card-compa
 import type { CompareColumn, CompareView } from '@/lib/data/explore'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
 import { readableQuery, rememberQuery } from './use-explore-url'
+import { formatLocalDate } from '@/lib/domain/time'
 
 type BestKey = keyof CompareView['best']
 
@@ -185,7 +186,7 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
             max={view.seasonBounds.max}
             value={view.date}
             onChange={(e) => /^\d{4}-\d{2}-\d{2}$/.test(e.target.value) && onChange({ date: e.target.value === view.today ? null : e.target.value })}
-            className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+            className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
           />
         </div>
         <div className={field}>
@@ -471,7 +472,9 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
 
       <div
         ref={scroller}
-        className="-mx-4 mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 pb-2 scrollbar-thin md:-mx-8 md:scroll-px-8 md:px-8"
+        // `relative` makes the scroller the containing block of its absolutely positioned (sr-only) descendants, so
+        // they are clipped with the columns instead of widening the page on phones.
+        className="relative -mx-4 mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 pb-2 scrollbar-thin md:-mx-8 md:scroll-px-8 md:px-8"
       >
         {cols.map((c, i) => (
           <section
@@ -761,7 +764,7 @@ function OpeningCell({ c }: { c: CompareColumn }) {
         <span className="tnum">{s.openingText}</span>
       </span>
       <span className="tnum text-[12.5px] text-ink-2">{s.closingText}</span>
-      {s.announcedOn ? <span className="tnum text-[12px] text-ink-3">Announced {s.announcedOn}</span> : null}
+      {s.announcedOn ? <span className="tnum text-[12px] text-ink-3">Announced {formatLocalDate(s.announcedOn, 'd LLL yyyy')}</span> : null}
     </span>
   )
 }
@@ -821,7 +824,7 @@ function CostTotalCell({ c }: { c: CompareColumn }) {
     return (
       <span className="flex flex-col gap-0.5">
         <span className="font-medium text-ink-2">Incomplete estimate</span>
-        {k.missing.length ? <span className="text-[12.5px] text-ink-3">{k.missing.slice(0, 2).join(' · ')}</span> : null}
+        {k.missing.length ? <span className="text-[12.5px] text-ink-3">{k.missing.slice(0, 2).map((m) => m.replace(/\.$/, '')).join(' · ')}</span> : null}
         <span className="text-[12px] text-ink-3">{k.dayType}</span>
       </span>
     )

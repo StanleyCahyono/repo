@@ -360,7 +360,7 @@ function SearchBox({ value, onChange }: { value: string; onChange: (q: string) =
           setSynced(e.target.value)
           onChange(e.target.value)
         }}
-        className="h-11 w-full rounded-md border border-divider-strong bg-surface pr-10 pl-9 text-[15px] text-ink placeholder:text-ink-3 transition-colors duration-150 hover:border-ink-3 focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10 [&::-webkit-search-cancel-button]:hidden"
+        className="h-11 w-full rounded-md border border-divider-strong bg-surface pr-10 pl-9 text-[15px] text-ink placeholder:text-ink-3 transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10 [&::-webkit-search-cancel-button]:hidden"
       />
       {text ? (
         <button

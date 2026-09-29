@@ -1,4 +1,4 @@
-import { Badge } from '@/components/ui/badge'
+import { DemoBadge } from '@/components/ui/badge'
 import { CompareScreen } from '@/components/explore/compare-screen'
 import { ExploreHeader } from '@/components/explore/explore-header'
 import { getCtx } from '@/lib/context'
@@ -41,9 +41,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
             </span>
             <span>{view.dateLabel}</span>
             {view.demo ? (
-              <Badge tone="demo" className="normal-case tracking-normal">
-                Demo data
-              </Badge>
+              <DemoBadge />
             ) : null}
           </>
         }

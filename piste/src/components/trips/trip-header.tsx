@@ -10,9 +10,9 @@ import { useRouter } from 'next/navigation'
 import { DropdownMenu } from 'radix-ui'
 import { ArrowLeft, Ban, CalendarPlus, Check, CircleCheck, Copy, Ellipsis, Flag, PencilLine, RotateCcw, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { DemoBadge } from '@/components/ui/badge'
 import { Sheet } from '@/components/ui/sheet'
 import { Checkbox, Field, TextInput } from '@/components/ui/form'
-import { KindTag } from '@/components/ui/provenance'
 import { Notice } from '@/components/ui/states'
 import { addDays, daysBetween } from '@/lib/domain/time'
 import type { TripRow } from '@/lib/db/rows'
@@ -66,7 +66,7 @@ export function TripHeader({
             <TripStatusBadge status={trip.status} />
             <span className="tnum">{tripDateLabel(trip.startDate, trip.endDate)}</span>
             {trip.status !== 'cancelled' ? <span className="text-ink-3 normal-case tracking-normal tnum">{countdown(trip, data.today)}</span> : null}
-            {data.demo ? <KindTag kind="demo" className="normal-case tracking-normal" /> : null}
+            {data.demo ? <DemoBadge /> : null}
           </div>
           <h1 className="font-display text-[32px] leading-[1.02] text-balance text-ink md:text-[44px]">{trip.name}</h1>
           <p className="mt-2 max-w-[72ch] text-[15px] text-ink-2 md:text-[16px]">

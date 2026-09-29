@@ -4,7 +4,8 @@
  * This weekend · Pick dates) and, once resorts are open, what kind of day to rank for. Both live in the URL.
  */
 import Link from 'next/link'
-import { Bell, FlaskConical } from 'lucide-react'
+import { DemoBadge } from '@/components/ui/badge'
+import { Bell } from 'lucide-react'
 import { formatLocalDate } from '@/lib/domain/time'
 import type { RecommendPreset } from '@/lib/domain/recommend'
 import { DateChips } from './date-chips'
@@ -54,9 +55,7 @@ export function TodayHeader({
         <span aria-hidden>·</span>
         <span>From {homeName}</span>
         {demo ? (
-          <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 tracking-normal text-demo normal-case">
-            <FlaskConical aria-hidden className="size-3.5" /> Demo data
-          </span>
+          <DemoBadge />
         ) : null}
       </div>
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">

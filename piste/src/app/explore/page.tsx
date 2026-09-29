@@ -1,4 +1,4 @@
-import { Badge } from '@/components/ui/badge'
+import { DemoBadge } from '@/components/ui/badge'
 import { ExploreHeader } from '@/components/explore/explore-header'
 import { ExploreScreen } from '@/components/explore/explore-screen'
 import { getCtx } from '@/lib/context'
@@ -31,9 +31,7 @@ export default async function ExplorePage({ searchParams }: { searchParams: Sear
               {view.counts.total} resorts from {view.home.name}
             </span>
             {view.demo ? (
-              <Badge tone="demo" className="normal-case tracking-normal">
-                Demo data
-              </Badge>
+              <DemoBadge />
             ) : null}
           </>
         }

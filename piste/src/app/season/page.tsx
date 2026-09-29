@@ -1,7 +1,7 @@
 import { getCtx } from '@/lib/context'
 import { getSeasonScreen } from '@/lib/data/season-screen'
 import { PageHeader } from '@/components/ui/page-header'
-import { KindTag } from '@/components/ui/provenance'
+import { DemoBadge } from '@/components/ui/badge'
 import { SeasonUiProvider, LogDayButton, type DayIntent, type SeasonUiData } from '@/components/season/season-ui'
 import { SeasonFigures, SeasonTimeline } from '@/components/season/overview'
 import { SeasonSectionNav } from '@/components/season/section-nav'
@@ -66,7 +66,7 @@ export default async function SeasonPage({ searchParams }: { searchParams: Promi
             <span>Season {v.season.label}</span>
             <span aria-hidden>·</span>
             <span>Your journal</span>
-            {demo ? <KindTag kind="demo" className="tracking-normal normal-case" /> : null}
+            {demo ? <DemoBadge /> : null}
           </>
         }
         title="My Season"

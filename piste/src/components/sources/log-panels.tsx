@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/ui/cn'
 import { Ago } from './ago'
 import { errorBeyondStatus, groupFailures, httpReason, shortUrl } from './format'
+import { formatLocalDate, isLocalDate } from '@/lib/domain/time'
 
 function Disclosure({ summary, children, className }: { summary: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
@@ -237,7 +238,7 @@ function NoteItem({ n }: { n: ResearchNoteView }) {
               </ul>
             </>
           ) : null}
-          {n.date ? <p className="mt-2 text-[12.5px] text-ink-3">Recorded {n.date}</p> : null}
+          {n.date ? <p className="mt-2 text-[12.5px] text-ink-3">Recorded {isLocalDate(n.date) ? formatLocalDate(n.date, 'd LLL yyyy') : n.date}</p> : null}
         </div>
       </details>
     </li>

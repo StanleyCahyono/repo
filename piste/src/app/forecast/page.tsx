@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { ArrowRight, FlaskConical } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { ButtonLink } from '@/components/ui/button'
+import { DemoBadge } from '@/components/ui/badge'
 import { PageHeader } from '@/components/ui/page-header'
 import { ForecastNav } from '@/components/forecast/nav'
 import { ForecastView } from '@/components/forecast/forecast-view'
@@ -33,9 +34,7 @@ export default async function ForecastPage({ searchParams }: { searchParams: Pro
           <>
             <span>Weather-model output</span>
             {ctx.mode === 'demo' ? (
-              <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 text-demo normal-case tracking-normal">
-                <FlaskConical aria-hidden className="size-3.5" /> Demo data
-              </span>
+              <DemoBadge />
             ) : null}
           </>
         }

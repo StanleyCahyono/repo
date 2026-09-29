@@ -17,6 +17,7 @@ import { useForecastNav } from './nav'
 import { POINT_LABEL, pointElevation, type PointKey } from './model'
 import { MAX_COMPARE, validDate } from './params'
 import { ResortPicker } from './resort-picker'
+import { formatLocalDate } from '@/lib/domain/time'
 
 export function ForecastToolbar({
   catalog,
@@ -188,7 +189,7 @@ function DateJump({ value, today, onChange }: { value: string | null; today: str
         ) : null}
       </div>
       <p id={`${id}-hint`} className="sr-only">
-        A past date opens its history; a date within the forecast shows that day; a later date shows planning information. Today is {today}.
+        A past date opens its history; a date within the forecast shows that day; a later date shows planning information. Today is {formatLocalDate(today, 'cccc d LLLL yyyy')}.
       </p>
     </div>
   )

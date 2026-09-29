@@ -1,4 +1,4 @@
-import { Badge } from '@/components/ui/badge'
+import { DemoBadge } from '@/components/ui/badge'
 import { EventsScreen } from '@/components/explore/events-screen'
 import { ExploreHeader } from '@/components/explore/explore-header'
 import { getCtx } from '@/lib/context'
@@ -22,9 +22,7 @@ export default async function EventsPage() {
               {view.events.length} {view.events.length === 1 ? 'event' : 'events'} tracked
             </span>
             {view.demo ? (
-              <Badge tone="demo" className="normal-case tracking-normal">
-                Demo data
-              </Badge>
+              <DemoBadge />
             ) : null}
           </>
         }

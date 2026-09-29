@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
-import { ArrowRight, FlaskConical } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { ButtonLink } from '@/components/ui/button'
+import { DemoBadge } from '@/components/ui/badge'
 import { OfflineBanner } from '@/components/ui/offline-banner'
 import { PageHeader } from '@/components/ui/page-header'
 import { AlertsPanel } from '@/components/settings/alerts-panel'
@@ -78,9 +79,7 @@ export default async function SettingsPage() {
           <>
             <span>Personal defaults</span>
             {demo ? (
-              <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 tracking-normal text-demo normal-case">
-                <FlaskConical aria-hidden className="size-3.5" /> Demo data — changes stay in the demo database
-              </span>
+              <DemoBadge>Demo data — changes stay in the demo database</DemoBadge>
             ) : null}
           </>
         }

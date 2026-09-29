@@ -18,7 +18,7 @@
 import { evalCurve } from './conditions/curve'
 import type { Curve } from './conditions/types'
 import { ageLabel } from './conditions/format'
-import type { FitResult, TravelVerdict } from './fit'
+import type { FitComponent, FitResult, TravelVerdict } from './fit'
 import { formatMoney, type Money } from './money'
 import { formatLocalDate, hoursBetween, seasonIdFor } from './time'
 import {
@@ -465,14 +465,19 @@ function travelFactor(t: TravelVerdict | null): FactorBuild {
   if (t.winterMinutes === null) return { value: null, note: 'Travel time unknown', limitation: 'Drive time unknown' }
   return {
     value: Math.round(evalCurve(TRAVEL_CURVE, t.winterMinutes)),
-    note: `${t.isEstimate ? 'About ' : ''}${formatDuration(t.driveMinutes)} drive (${formatDuration(t.winterMinutes)} with winter buffer)`,
+    // The verdict's own sentence ("About 50 min drive (1 h with a 20% winter buffer), within your 4 h limit"), so the
+    // travel line reads the same here as in the fit breakdown.
+    note: t.note || `${t.isEstimate ? 'About ' : ''}${formatDuration(t.driveMinutes)} drive (${formatDuration(t.winterMinutes)} with winter buffer)`,
     limitation: t.isEstimate ? 'Drive time is a curated estimate, not live routing' : null,
   }
 }
 
+/** Basket messages are sentences ("No rental price."); inside a parenthesised list they lose the full stop. */
+const clause = (s: string) => s.trim().replace(/\.+$/, '')
+
 function costFactor(cost: CandidateCost | null): FactorBuild {
   if (!cost || cost.tier === 'incomplete' || (!cost.total && !cost.tier)) {
-    const missing = cost?.missing.length ? ` (${cost.missing.join('; ')})` : ''
+    const missing = cost?.missing.length ? ` (${cost.missing.map(clause).join('; ')})` : ''
     return { value: null, note: 'Cost estimate incomplete', limitation: `Cost estimate incomplete${missing}` }
   }
   const lim = cost.confirmAtSource ? 'Prices are researched — confirm at source' : null
@@ -533,8 +538,11 @@ function scoreDay(c: RecommendCandidate, day: CandidateDay | undefined, date: st
     else if (f.used < 50) tradeoffs.push(f.note)
   }
   if (c.fit && weights.fit > 0) {
-    const pos = c.fit.components.filter((x) => x.known && x.used >= 75).map((x) => x.note)
-    const neg = c.fit.components.filter((x) => x.known && x.used < 45).map((x) => x.note)
+    // Travel and budget are also ranking factors of their own; when those factors are weighted they already speak
+    // for themselves above, so the fit breakdown does not repeat them as a second line.
+    const repeats = (x: FitComponent) => (x.key === 'travel' && weights.travel > 0) || (x.key === 'budget' && weights.cost > 0)
+    const pos = c.fit.components.filter((x) => x.known && x.used >= 75 && !repeats(x)).map((x) => x.note)
+    const neg = c.fit.components.filter((x) => x.known && x.used < 45 && !repeats(x)).map((x) => x.note)
     if (c.fit.cappedBy) neg.unshift(c.fit.cappedBy)
     for (const p of pos.slice(0, 2)) if (!benefits.includes(p)) benefits.push(p)
     for (const n of neg.slice(0, 2)) if (!tradeoffs.includes(n)) tradeoffs.push(n)

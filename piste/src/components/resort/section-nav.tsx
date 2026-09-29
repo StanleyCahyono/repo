@@ -10,6 +10,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { CalendarDays, ChevronLeft, ChevronRight, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
+import { useScrollEdges } from '@/lib/ui/use-scroll-edges'
 import { addDays, formatLocalDate } from '@/lib/domain/time'
 import { SECTIONS, dayLabel, dayLabelYear, type SectionId } from './format'
 import { ResortActions, type ResortActionsProps } from './resort-actions'
@@ -64,11 +65,18 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
     const list = listRef.current
     const item = list?.querySelector<HTMLElement>(`[data-tab="${active}"]`)
     if (!list || !item) return
-    const left = item.offsetLeft - 16
-    const right = item.offsetLeft + item.offsetWidth + 16
+    // 40px margins keep the active tab clear of the edge fade (scroll-fade-x).
+    const left = item.offsetLeft - 40
+    const right = item.offsetLeft + item.offsetWidth + 40
     if (left < list.scrollLeft) list.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' })
     else if (right > list.scrollLeft + list.clientWidth) list.scrollTo({ left: right - list.clientWidth, behavior: reduce ? 'auto' : 'smooth' })
   }, [active, reduce])
+
+  useScrollEdges(listRef)
+  const page = (dir: 1 | -1) => {
+    const list = listRef.current
+    if (list) list.scrollBy({ left: dir * Math.max(120, list.clientWidth * 0.7), behavior: reduce ? 'auto' : 'smooth' })
+  }
 
   const go = useCallback(
     (id: SectionId) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -91,8 +99,11 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
   return (
     <div data-resort-nav className="sticky top-14 z-20 -mx-4 border-b border-divider bg-canvas md:top-0 md:-mx-8">
       <div className="flex h-12 items-center gap-2 px-4 md:h-14 md:gap-4 md:px-8">
-        <nav aria-label="Resort sections" className="min-w-0 flex-1">
-          <ul ref={listRef} className="flex h-12 items-stretch gap-0.5 overflow-x-auto [scrollbar-width:none] md:h-14 [&::-webkit-scrollbar]:hidden">
+        <nav aria-label="Resort sections" className="relative min-w-0 flex-1">
+          <ul
+            ref={listRef}
+            className="peer scroll-fade-x flex h-12 items-stretch gap-0.5 overflow-x-auto [scrollbar-width:none] md:h-14 [&::-webkit-scrollbar]:hidden"
+          >
             {SECTIONS.map((s) => {
               const on = s.id === active
               return (
@@ -114,6 +125,25 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
               )
             })}
           </ul>
+          {/* Pointer hint for tabs past the edge (keyboard users reach every tab with Tab; phones swipe). */}
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-hidden
+            onClick={() => page(-1)}
+            className="absolute inset-y-0 left-0 my-auto hidden size-8 items-center justify-center rounded-full border border-divider bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal md:peer-data-[more-start]:inline-flex"
+          >
+            <ChevronLeft aria-hidden className="size-4" />
+          </button>
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-hidden
+            onClick={() => page(1)}
+            className="absolute inset-y-0 right-0 my-auto hidden size-8 items-center justify-center rounded-full border border-divider bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal md:peer-data-[more-end]:inline-flex"
+          >
+            <ChevronRight aria-hidden className="size-4" />
+          </button>
         </nav>
         <DateControl date={date} today={today} />
         <motion.div

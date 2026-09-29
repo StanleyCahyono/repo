@@ -11,6 +11,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'motion/react'
 import { Calculator, Grid3x3, ReceiptText, Tags, Ticket } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 
 type TabId = 'mine' | 'products' | 'matrix' | 'costs' | 'compare'
@@ -79,7 +80,7 @@ export function PassesTabs({ className }: { className?: string }) {
   }
 
   return (
-    <nav aria-label="Passes & Costs sections" className={cn('-mx-4 overflow-x-auto px-4 scrollbar-thin md:mx-0 md:px-0', className)}>
+    <ScrollRow as="nav" aria-label="Passes & Costs sections" className={cn('-mx-4 px-4 scrollbar-thin md:mx-0 md:px-0', className)}>
       <ul ref={listRef} className="flex w-max min-w-full items-end gap-1 border-b border-divider">
         {TABS.map((tab) => {
           const on = tab.id === active
@@ -103,6 +104,6 @@ export function PassesTabs({ className }: { className?: string }) {
           )
         })}
       </ul>
-    </nav>
+    </ScrollRow>
   )
 }

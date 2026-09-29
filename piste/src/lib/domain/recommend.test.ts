@@ -188,6 +188,26 @@ describe('evidence limitations', () => {
     expect(cost.known).toBe(false)
   })
 
+  it('writes each fact once, in plain sentences (no repeated pass name, no duplicate travel line, no ".;")', () => {
+    const c = cand('greek-peak', {
+      days: [
+        day(TODAY, {
+          cost: { total: null, tier: 'incomplete', missing: ['No weekday lift ticket price for Fri 15 Jan.', 'No price for rental package (skis, boots, poles).'] },
+          pass: { status: 'not-covered', productName: 'Indy Base Pass', note: 'No days left' },
+        }),
+      ],
+    })
+    const o = recommend(base([c])).winner!
+    const all = [...o.benefits, ...o.tradeoffs, ...o.limitations]
+    expect(o.tradeoffs).toContain('Not covered by your Indy Base Pass: No days left')
+    expect(o.limitations).toContain('Cost estimate incomplete (No weekday lift ticket price for Fri 15 Jan; No price for rental package (skis, boots, poles))')
+    // The drive is stated once — by the travel factor, in the verdict's own words — not again by the fit breakdown.
+    const drives = all.filter((l) => /drive \(/.test(l))
+    expect(drives).toEqual(['1 h drive (1 h 12 min with a 20% winter buffer), within your 4 h limit'])
+    expect(all.join(' | ')).not.toMatch(/\.[;)]|\d{4}-\d{2}-\d{2}/)
+    expect(new Set(all).size).toBe(all.length)
+  })
+
   it('unknown factors never help: a missing conditions score ranks below a modest known one', () => {
     const known = cand('known', { days: [day(TODAY, { score: 50 })] })
     const missing = cand('missing', { days: [day(TODAY, { score: null })] })

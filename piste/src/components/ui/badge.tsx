@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { FlaskConical } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import type { PassFamilyId } from '@/lib/domain/types'
 
@@ -40,6 +41,18 @@ export function Badge({
       {icon ? <span aria-hidden className="-ml-0.5 inline-flex [&>svg]:size-3.5">{icon}</span> : null}
       {children}
     </span>
+  )
+}
+
+/**
+ * The one demo-mode label for page and resort headers (flask icon + text, demo tone). Sits inside an `eyebrow`, so it
+ * resets the eyebrow's uppercase tracking. Pass `children` to say what demo means on that page.
+ */
+export function DemoBadge({ children = 'Demo data', className }: { children?: ReactNode; className?: string }) {
+  return (
+    <Badge tone="demo" icon={<FlaskConical strokeWidth={2} />} className={cn('h-auto min-h-6 py-1 leading-tight tracking-normal whitespace-normal normal-case', className)}>
+      {children}
+    </Badge>
   )
 }
 

@@ -13,6 +13,7 @@
  * - Estimate ranges are classified at both ends (`tier` low end, `tierMax` when the high end is in a higher band).
  */
 import { allocate, formatMoney, money, sum, type Money } from '../money'
+import { formatLocalDate } from '../time'
 import { ACCESS_STATUS_LABEL, type AccessStatus, type AccessVerdict } from '../passes/types'
 import { DEFAULT_DAY_TYPE_CONFIG, dayTypeFor, type DayType, type DayTypeConfig } from './day-type'
 import { convertMoney, convertWith, type FxRateRecord, type FxRateUsed } from './fx'
@@ -176,6 +177,8 @@ function fromSelection(
   const s = sel.snapshot
   if (!s) {
     const expiredNote = sel.expired ? ` (${sel.expired} expired quote${sel.expired === 1 ? '' : 's'} ignored)` : ''
+    // Keep the note inside the sentence: "No rental price (1 expired quote ignored)."
+    const message = expiredNote ? `${missingMessage.replace(/\.+$/, '')}${expiredNote}.` : missingMessage
     return {
       key,
       label,
@@ -187,7 +190,7 @@ function fromSelection(
       note: null,
       required,
       confirmAtSource: false,
-      missingMessage: missingMessage + expiredNote,
+      missingMessage: message,
     }
   }
   return {
@@ -245,7 +248,7 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
     })
   } else {
     const sel = selectPrice(day.prices, { ...q, subjectType: 'lift-ticket', category })
-    const line = fromSelection('lift', 'Lift ticket', sel, requiredKeys.has('lift'), `No ${dayType} lift ticket price for ${day.date}.`)
+    const line = fromSelection('lift', 'Lift ticket', sel, requiredKeys.has('lift'), `No ${dayType} lift ticket price for ${formatLocalDate(day.date)}.`)
     if (day.pass) line.note = [notCoveredNote(day.pass), line.note].filter(Boolean).join(' ')
     drafts.push(line)
   }

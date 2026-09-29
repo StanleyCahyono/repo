@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { ArrowRight, FlaskConical, Info } from 'lucide-react'
+import { ArrowRight, Info } from 'lucide-react'
 import { ButtonLink } from '@/components/ui/button'
+import { DemoBadge } from '@/components/ui/badge'
 import { OfflineBanner } from '@/components/ui/offline-banner'
 import { PageHeader } from '@/components/ui/page-header'
 import { Rise } from '@/components/settings/rise'
@@ -52,9 +53,7 @@ export default async function SourcesPage() {
           <>
             <span>Data health</span>
             {v.demo ? (
-              <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 tracking-normal text-demo normal-case">
-                <FlaskConical aria-hidden className="size-3.5" /> Demo data — nothing here is fetched
-              </span>
+              <DemoBadge>Demo data — nothing here is fetched</DemoBadge>
             ) : null}
           </>
         }

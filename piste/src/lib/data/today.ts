@@ -39,6 +39,7 @@ import {
   type Bundle,
   type DataCtx,
 } from './core'
+import { reportOrigin, type ReportOrigin } from './deps'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { tripSummaries, type TripSummary } from './trips'
 import {
@@ -127,7 +128,9 @@ async function buildCandidates(b: Bundle, dates: readonly string[], summaries: r
         date,
         conditions: Object.fromEntries(SCORING_MODES.map((m) => [m, toConditions(assessments.get(assessmentKey(r.id, date, m)))])),
         cost,
-        pass: { status: pass.status, productName: pass.productName, note: pass.status === 'not-covered' ? pass.headline : null },
+        // The engine writes "Not covered by your <product>: <note>", so the note is the verdict's own headline
+        // ("No days left"), not MyPassView.headline (which already starts with the product name).
+        pass: { status: pass.status, productName: pass.productName, note: pass.status === 'not-covered' ? (pass.verdicts[0]?.headline ?? null) : null },
         events: eventsOverlapping(b.events, new Set([r.id]), date, date).map((e) => ({ title: e.title, status: e.status })),
         snow: { forecast72hCm: snow72.cm, forecast72hComplete: snow72.complete, reported24hCm: report && report.localDate === today ? reportedWindow(report, '24h') : null },
         warnings: alertsOverlapping(b.alerts.get(r.id) ?? [], startOfLocalDay(date, r.timezone), endOfLocalDay(date, r.timezone)).map((a) => a.headline ?? a.event),
@@ -297,6 +300,16 @@ export interface TodayView {
 
 const LABEL_ORDER: Record<OpeningLabel, number> = { announced: 0, estimated: 0, opened: 1, 'not-announced': 2 }
 
+/** "Recent changes" wording per report origin — a simulated demo report is never called official or manual. */
+const REPORT_CHANGE_LABEL: Record<ReportOrigin, string> = {
+  'official-adapter': 'new official report',
+  'official-by-user': 'official report entered by you',
+  'manual-transcribed': 'report typed by you from the source',
+  personal: 'your own observation',
+  demo: 'simulated demo report',
+  other: 'new report',
+}
+
 async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
   const { db, now } = b.ctx
   const since7 = addHours(now, -7 * 24)
@@ -355,7 +368,7 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
         resortId: r.resortId,
         resortName: name(r.resortId),
         kind: 'report' as const,
-        title: `${name(r.resortId)}: new ${r.kind === 'official' ? 'official' : 'manual'} report for ${formatLocalDate(r.localDate)}${r.revision > 1 ? ` (revision ${r.revision})` : ''}`,
+        title: `${name(r.resortId)}: ${REPORT_CHANGE_LABEL[reportOrigin(r)]} for ${formatLocalDate(r.localDate)}${r.revision > 1 ? ` (revision ${r.revision})` : ''}`,
         detail: snow != null ? `Reported ${formatSnow(snow, units)} new snow` : null,
         prov: r.prov,
       }

@@ -10,6 +10,7 @@
 import { useId } from 'react'
 import { CalendarDays, Gauge, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
 
 const chip =
@@ -44,7 +45,7 @@ export function ScenarioBar({
     if (/^\d{4}-\d{2}-\d{2}$/.test(v) && v !== date) onDate(v)
   }
   return (
-    <div className={cn('-mx-4 overflow-x-auto px-4 scrollbar-thin md:mx-0 md:overflow-visible md:px-0', className)}>
+    <ScrollRow className={cn('-mx-4 px-4 scrollbar-thin md:mx-0 md:overflow-visible md:px-0', className)}>
       <div className="flex w-max items-center gap-2 py-0.5 md:w-auto md:flex-wrap md:gap-x-6 md:gap-y-3 lg:justify-between">
         <div role="group" aria-labelledby={`${id}-day`} className="flex items-center gap-2">
           <span id={`${id}-day`} className="inline-flex shrink-0 items-center gap-1.5 text-[13.5px] font-medium text-ink-2">
@@ -79,7 +80,7 @@ export function ScenarioBar({
             onChange={(e) => pick(e.target.value)}
             className={cn(
               chip,
-              'tnum w-[10.25rem] bg-surface px-3 focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 max-md:hidden',
+              'tnum w-[10.25rem] bg-surface px-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 max-md:hidden',
               custom ? 'border-teal text-teal' : 'border-divider-strong text-ink-2',
             )}
           />
@@ -124,7 +125,7 @@ export function ScenarioBar({
             id={`${id}-mode`}
             value={mode}
             onChange={(e) => onMode(e.target.value as ScoringMode)}
-            className="h-11 rounded-full border border-divider-strong bg-surface pr-3 pl-3.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-teal focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+            className="h-11 rounded-full border border-divider-strong bg-surface pr-3 pl-3.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-teal focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
           >
             {SCORING_MODES.map((m) => (
               <option key={m} value={m}>
@@ -134,6 +135,6 @@ export function ScenarioBar({
           </select>
         </div>
       </div>
-    </div>
+    </ScrollRow>
   )
 }

@@ -6,6 +6,7 @@
 import Link from 'next/link'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { PassBadge } from '@/components/ui/badge'
+import { Disclosure } from '@/components/ui/disclosure'
 import { Missing } from '@/components/ui/provenance'
 import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
 import type { FamilyView, PassPriceView, PassProductView } from '@/lib/data/passes'
@@ -147,22 +148,9 @@ function ProductRow({
 }) {
   const d = p.salesDeadline
   const official = p.prov?.sourceUrl
-  return (
-    <li id={`product-${p.id}`} className="grid scroll-mt-24 gap-x-8 gap-y-4 py-5 md:grid-cols-[minmax(0,1fr)_240px]">
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-[17px] leading-snug font-semibold text-ink">{p.name}</h3>
-          {p.ownedByMe ? <HolderTag holder="me" /> : null}
-          {p.ownedBy
-            .filter((h) => h !== 'me')
-            .map((h) => (
-              <HolderTag key={h} holder={h} />
-            ))}
-        </div>
-        <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
-          <span>{dotJoin(p.resortName ? `${p.resortName} season pass` : null, p.resortCount ? `rules at ${plural(p.resortCount, 'resort')}` : 'no resort rules recorded')}</span>
-          {p.confirmAtSource ? <ConfirmTag text={p.verificationLabel} /> : <span>· {p.verificationLabel}</span>}
-        </p>
+  const notesBody =
+    p.summary || p.blackoutsSummary || p.reservationsSummary || p.renewalNotes ? (
+      <>
         {p.summary ? <p className="mt-2 max-w-[68ch] text-[14px] text-ink-2">{p.summary}</p> : null}
         {p.blackoutsSummary || p.reservationsSummary || p.renewalNotes ? (
           <dl className="mt-2 grid max-w-[68ch] gap-1 text-[13px]">
@@ -185,6 +173,35 @@ function ProductRow({
               </div>
             ) : null}
           </dl>
+        ) : null}
+      </>
+    ) : null
+  const notesLabel = ['Notes', p.blackoutsSummary ? 'blackouts' : null, p.reservationsSummary ? 'reservations' : null, p.renewalNotes ? 'renewal' : null].filter(Boolean).join(' · ')
+  return (
+    <li id={`product-${p.id}`} className="grid scroll-mt-24 gap-x-8 gap-y-4 py-5 md:grid-cols-[minmax(0,1fr)_240px]">
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="text-[17px] leading-snug font-semibold text-ink">{p.name}</h3>
+          {p.ownedByMe ? <HolderTag holder="me" /> : null}
+          {p.ownedBy
+            .filter((h) => h !== 'me')
+            .map((h) => (
+              <HolderTag key={h} holder={h} />
+            ))}
+        </div>
+        <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
+          <span>{dotJoin(p.resortName ? `${p.resortName} season pass` : null, p.resortCount ? `rules at ${plural(p.resortCount, 'resort')}` : 'no resort rules recorded')}</span>
+          {p.confirmAtSource ? <ConfirmTag text={p.verificationLabel} /> : <span>· {p.verificationLabel}</span>}
+        </p>
+        {notesBody ? (
+          p.ownedByMe ? (
+            notesBody
+          ) : (
+            // Research notes repeat per product; for passes you don't hold they stay one click away.
+            <Disclosure summary={notesLabel} className="mt-2">
+              {notesBody}
+            </Disclosure>
+          )
         ) : null}
         {d ? (
           <p className={cn('mt-2 text-[13px]', d.passed ? 'text-ink-3' : d.daysLeft !== null && d.daysLeft <= 14 ? 'font-medium text-copper' : 'text-ink-2')}>

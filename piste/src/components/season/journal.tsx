@@ -55,7 +55,7 @@ export function Stars({ rating, className }: { rating: number; className?: strin
 }
 
 const personalProv = (date: string) =>
-  provenance({ kind: 'manual', provider: 'You — ski-day journal', verification: 'user-confirmed', publishedAt: null, note: `Your own observation on ${date}. Personal feedback — never an official report or evidence the resort was open.` })
+  provenance({ kind: 'manual', provider: 'You — ski-day journal', verification: 'user-confirmed', publishedAt: null, note: `Your own observation on ${formatLocalDate(date, 'ccc d LLL yyyy')}. Personal feedback — never an official report or evidence the resort was open.` })
 
 function ReportAction({ day, saved }: { day: SkiDayView; saved: boolean }) {
   const toast = useToast()

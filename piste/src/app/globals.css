@@ -325,6 +325,21 @@
     scrollbar-color: var(--divider-strong) transparent;
   }
 
+  /* Scrolling tab/chip rows: fade only an edge with more content past it (set by useScrollEdges), and keep
+     keyboard-focused items clear of the fade when the browser scrolls them into view. */
+  .scroll-fade-x {
+    scroll-padding-inline: 36px;
+  }
+  .scroll-fade-x[data-more-end] {
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
+  .scroll-fade-x[data-more-start] {
+    mask-image: linear-gradient(to right, transparent, #000 40px);
+  }
+  .scroll-fade-x[data-more-start][data-more-end] {
+    mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  }
+
   .sr-only-focusable:not(:focus):not(:focus-within) {
     position: absolute;
     width: 1px;

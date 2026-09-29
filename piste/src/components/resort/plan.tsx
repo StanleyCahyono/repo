@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ArrowRight, BadgeCheck, CalendarX2, CircleHelp, Clock3, ExternalLink, GraduationCap, KeyRound, ParkingSquare, Ticket, TrafficCone, XCircle } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { PassBadge } from '@/components/ui/badge'
+import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import type { PassAccessRow, PriceView, ResortDetail } from '@/lib/data/resort-detail'
 import { describeBands, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/costs'
@@ -15,7 +16,7 @@ import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL } from '@/lib/domain/passes'
 import { PASS_FAMILIES, type PassFamilyId } from '@/lib/domain/types'
 import { ConfirmTag, ResortSection, Src, SubHead, TriChip } from './section'
-import { accessTone, ACTIVITY_LABEL, clock, CORE_ACTIVITIES, dayLabel, dayLabelYear, dotJoin, hostOf, plural, seasonText, shortDate, src, TRANSFER_TYPE_LABEL, weekdaysText, type PageView } from './format'
+import { accessTone, ACTIVITY_LABEL, clock, confirmText, CORE_ACTIVITIES, dayLabel, dayLabelYear, dotJoin, hostOf, plural, seasonText, shortDate, src, TRANSFER_TYPE_LABEL, weekdaysText, type PageView } from './format'
 
 const DAY_TYPE_TEXT: Record<string, string> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
 
@@ -91,9 +92,8 @@ function HoursBlock({ d, v }: { d: ResortDetail; v: PageView }) {
         ))}
       </ul>
       {h.schedules.length ? (
-        <details className="mt-3 border-t border-divider pt-2.5">
-          <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">All schedules on file ({h.schedules.length})</summary>
-          <div className="-mx-1 mt-2 overflow-x-auto px-1">
+        <Disclosure summary={`All schedules on file (${h.schedules.length})`} className="mt-3 border-t border-divider pt-2">
+          <div className="relative -mx-1 mt-2 overflow-x-auto px-1">
             <table className="w-full min-w-[440px] text-left text-[12.5px]">
               <caption className="sr-only">Every operating schedule on file</caption>
               <thead>
@@ -128,7 +128,7 @@ function HoursBlock({ d, v }: { d: ResortDetail; v: PageView }) {
               </tbody>
             </table>
           </div>
-        </details>
+        </Disclosure>
       ) : null}
       {d.links.find((l) => l.key === 'hours') ? (
         <a
@@ -184,25 +184,42 @@ function AccessRow({ p }: { p: PassAccessRow }) {
         {vd.confirmAtSource ? <ConfirmTag text="Researched — confirm at source" /> : null}
       </p>
       {extra.length ? (
-        <details className="text-[12.5px] text-ink-2">
-          <summary className="cursor-pointer font-medium text-teal select-none hover:underline">Details</summary>
+        <Disclosure summary="Details" className="text-[12.5px] text-ink-2">
           {extra.map((r) => (
             <p key={r} className="mt-1">
               {r}
             </p>
           ))}
-        </details>
+        </Disclosure>
       ) : null}
     </li>
   )
 }
 
+const TONE_WORD = { positive: 'included', caution: 'discount only', critical: 'not usable', unknown: 'not confirmed' } as const
+
+/** "2 not confirmed, 1 included" — what the folded products say, so nothing important hides behind the fold. */
+function accessSummary(rows: readonly PassAccessRow[]): string {
+  const counts = new Map<keyof typeof TONE_WORD, number>()
+  for (const p of rows) counts.set(accessTone(p.verdict.status), (counts.get(accessTone(p.verdict.status)) ?? 0) + 1)
+  return (['positive', 'caution', 'critical', 'unknown'] as const)
+    .filter((k) => counts.get(k))
+    .map((k) => `${counts.get(k)} ${TONE_WORD[k]}`)
+    .join(', ')
+}
+
 function AccessBlock({ d, v }: { d: ResortDetail; v: PageView }) {
   const rows = d.passAccess
   const my = d.summary.myPass
+  // Your own products (or, without one, the first two) stay in view; other products recorded here are one click away.
+  const owned = rows.filter((p) => p.owned)
+  const shown = owned.length ? owned : rows.slice(0, 2)
+  const rest = rows.filter((p) => !shown.includes(p))
+  const folded = rest.length > 1
+  const visible = folded ? shown : rows
   return (
     <section aria-labelledby="access-title" className="min-w-0 rounded-[12px] border border-divider bg-surface p-5">
-      <SubHead id="access-title" aside={<Link href="/passes" className="text-teal hover:underline">Pass checker</Link>}>
+      <SubHead id="access-title" aside={<Link href={`/passes?resort=${v.id}&from=${v.date}`} className="text-teal hover:underline">Pass checker</Link>}>
         Tickets &amp; passes on {dayLabel(v.date)}
       </SubHead>
       <p className="-mt-2 mb-3 text-[12.5px] text-ink-3">
@@ -214,11 +231,26 @@ function AccessBlock({ d, v }: { d: ResortDetail; v: PageView }) {
         ) : null}
       </p>
       {rows.length ? (
-        <ul className="flex flex-col divide-y divide-divider">
-          {rows.map((p) => (
-            <AccessRow key={p.productId} p={p} />
-          ))}
-        </ul>
+        <>
+          <ul className="flex flex-col divide-y divide-divider">
+            {visible.map((p) => (
+              <AccessRow key={p.productId} p={p} />
+            ))}
+          </ul>
+          {folded ? (
+            <Disclosure
+              variant="row"
+              className="mt-3 border-t border-divider"
+              summary={`${owned.length ? 'Other products' : 'More products'} recorded here (${rest.length}) · ${accessSummary(rest)}`}
+            >
+              <ul className="flex flex-col divide-y divide-divider pt-1 pb-1">
+                {rest.map((p) => (
+                  <AccessRow key={p.productId} p={p} />
+                ))}
+              </ul>
+            </Disclosure>
+          ) : null}
+        </>
       ) : (
         <p className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 p-3 text-[13.5px] text-ink-2">
           No pass product is recorded for this resort in {d.season.label}. Lift tickets are the only known option.
@@ -339,7 +371,7 @@ function PriceRow({ p, planningSeason, tagConfirm }: { p: PriceView; planningSea
           <span className="text-ink-3"> · {p.quoteLabel}</span>
         </span>
         <span className="mt-0.5 flex flex-wrap items-center gap-1.5">
-          {tagConfirm && p.confirmAtSource ? <ConfirmTag /> : null}
+          {tagConfirm && p.confirmAtSource ? <ConfirmTag text={confirmText(p.prov)} /> : null}
           {p.expired ? <span className="text-[11.5px] font-medium text-critical">Expired quote</span> : null}
         </span>
       </th>
@@ -358,12 +390,53 @@ function PriceRow({ p, planningSeason, tagConfirm }: { p: PriceView; planningSea
   )
 }
 
+type PriceGroup = (typeof GROUPS)[number] & { rows: PriceView[] }
+
+function PriceTable({ groups, planningSeason, tagConfirm, caption }: { groups: PriceGroup[]; planningSeason: string; tagConfirm: boolean; caption: string }) {
+  return (
+    <table className="w-full text-left text-[13.5px]">
+      <caption className="sr-only">{caption}</caption>
+      <thead className="sr-only">
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Price</th>
+          <th scope="col">Season</th>
+          <th scope="col">Quote kind and source</th>
+        </tr>
+      </thead>
+      {groups.map((g, i) => (
+        <tbody key={g.key}>
+          <tr>
+            <th scope="rowgroup" colSpan={4} className={cn('eyebrow pb-1 text-left', i > 0 ? 'pt-5' : 'pt-0')}>
+              {g.label}
+            </th>
+          </tr>
+          {g.rows.map((p) => (
+            <PriceRow key={p.id} p={p} planningSeason={planningSeason} tagConfirm={tagConfirm} />
+          ))}
+        </tbody>
+      ))}
+    </table>
+  )
+}
+
+/** Rows shown before "N more prices on file" (the first group's first rows). */
+const PRICE_ROWS_SHOWN = 4
+
 function PricesBlock({ d, v }: { d: ResortDetail; v: PageView }) {
-  const groups = GROUPS.map((g) => ({ ...g, rows: d.prices[g.key] })).filter((g) => g.rows.length)
+  const groups: PriceGroup[] = GROUPS.map((g) => ({ ...g, rows: d.prices[g.key] })).filter((g) => g.rows.length)
   const planningSeason = d.season.seasonId
   const otherSeason = groups.some((g) => g.rows.some((p) => p.seasonId && p.seasonId !== planningSeason))
-  const allConfirm = groups.length > 0 && groups.every((g) => g.rows.every((p) => p.confirmAtSource))
+  const all = groups.flatMap((g) => g.rows)
+  const allConfirm = all.length > 0 && all.every((p) => p.confirmAtSource)
+  const wording = [...new Set(all.map((p) => confirmText(p.prov)))]
+  const allTag = wording.length === 1 && wording[0] !== 'Confirm at source' ? `All ${wording[0][0].toLowerCase()}${wording[0].slice(1)}` : 'All: confirm at source'
   const tickets = d.links.find((l) => l.key === 'tickets')
+  // Keep the first few rows of the first group in view; fold the rest when that saves real space.
+  const head: PriceGroup[] = groups.length ? [{ ...groups[0], rows: groups[0].rows.slice(0, PRICE_ROWS_SHOWN) }] : []
+  const tail: PriceGroup[] = groups.length ? [{ ...groups[0], rows: groups[0].rows.slice(PRICE_ROWS_SHOWN) }, ...groups.slice(1)].filter((g) => g.rows.length) : []
+  const tailCount = tail.reduce((n, g) => n + g.rows.length, 0)
+  const fold = tailCount > 2
   return (
     <section aria-labelledby="prices-title" className="min-w-0 rounded-[12px] border border-divider bg-surface p-5">
       <SubHead id="prices-title" aside={tickets ? <a href={tickets.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-teal hover:underline">Official prices <ExternalLink aria-hidden className="size-3" /></a> : null}>
@@ -373,33 +446,26 @@ function PricesBlock({ d, v }: { d: ResortDetail; v: PageView }) {
         <>
           {otherSeason || allConfirm ? (
             <div className="-mt-1 mb-3 flex flex-wrap items-center gap-2 text-[12.5px] text-caution">
-              {allConfirm ? <ConfirmTag text="All researched — confirm at source" /> : null}
+              {allConfirm ? <ConfirmTag text={allTag} /> : null}
               {otherSeason ? <span>Some prices are from another season — shown for reference, not as {seasonText(planningSeason)} prices.</span> : null}
             </div>
           ) : null}
-          <table className="w-full text-left text-[13.5px]">
-            <caption className="sr-only">Price snapshots by group, with season, quote kind and source</caption>
-            <thead className="sr-only">
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Price</th>
-                <th scope="col">Season</th>
-                <th scope="col">Quote kind and source</th>
-              </tr>
-            </thead>
-            {groups.map((g, i) => (
-              <tbody key={g.key}>
-                <tr>
-                  <th scope="rowgroup" colSpan={4} className={cn('eyebrow pb-1 text-left', i > 0 ? 'pt-5' : 'pt-0')}>
-                    {g.label}
-                  </th>
-                </tr>
-                {g.rows.map((p) => (
-                  <PriceRow key={p.id} p={p} planningSeason={planningSeason} tagConfirm={!allConfirm} />
-                ))}
-              </tbody>
-            ))}
-          </table>
+          {fold ? (
+            <>
+              <PriceTable groups={head} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="Price snapshots, first rows, with season, quote kind and source" />
+              <Disclosure
+                variant="row"
+                className="mt-2 border-t border-divider"
+                summary={`${tailCount} more price${tailCount === 1 ? '' : 's'} on file · ${[...new Set(tail.map((g) => g.label.toLowerCase()))].join(', ')}`}
+              >
+                <div className="pb-1">
+                  <PriceTable groups={tail} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="More price snapshots by group, with season, quote kind and source" />
+                </div>
+              </Disclosure>
+            </>
+          ) : (
+            <PriceTable groups={groups} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="Price snapshots by group, with season, quote kind and source" />
+          )}
         </>
       ) : (
         <p className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 p-3 text-[13.5px] text-ink-2">

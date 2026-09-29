@@ -2,7 +2,8 @@
  * Compact resort header: licensed photo (with credit) or the contour placeholder, name, locality, region,
  * timezone, operating status, opening label, and the Save / Compare / Add to trip actions.
  */
-import { FlaskConical, Globe2 } from 'lucide-react'
+import { Globe2 } from 'lucide-react'
+import { DemoBadge } from '@/components/ui/badge'
 import { OpeningTag, StatusPill } from '@/components/ui/status'
 import type { ResortSummary } from '@/lib/data/resorts'
 import { HeaderArt } from './header-art'
@@ -46,9 +47,7 @@ export function ResortHeader({ r, zoneAbbrev, unitPrefs, actions }: { r: ResortS
             <BackLink />
             <p className="eyebrow">{place}</p>
             {r.demo ? (
-              <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 text-[12px] font-semibold text-demo">
-                <FlaskConical aria-hidden className="size-3.5" /> Demo data
-              </span>
+              <DemoBadge />
             ) : null}
           </div>
           <h1 className="font-display text-[32px] leading-[1.02] text-ink md:text-[44px]">{r.name}</h1>

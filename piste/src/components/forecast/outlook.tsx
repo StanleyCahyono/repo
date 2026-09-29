@@ -236,7 +236,7 @@ export function OutlookMatrix({
           </div>
         ) : null}
         <div className="relative">
-          <div ref={scrollRef} onScroll={updateEdges} className="-mx-1 overflow-x-auto px-1 pb-1 scrollbar-thin">
+          <div ref={scrollRef} onScroll={updateEdges} className="relative -mx-1 overflow-x-auto px-1 pb-1 scrollbar-thin">
             <div
               role="grid"
               aria-label={`Daily outlook: ${METRIC_LABEL[metric].toLowerCase()} by resort and day`}

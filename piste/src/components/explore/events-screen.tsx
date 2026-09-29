@@ -269,7 +269,7 @@ function DateField({
         min={min}
         max={max}
         onChange={(e) => /^\d{4}-\d{2}-\d{2}$/.test(e.target.value) && onChange(e.target.value)}
-        className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+        className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
       />
     </div>
   )

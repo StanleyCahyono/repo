@@ -7,6 +7,7 @@
 import Link from 'next/link'
 import { ArrowUpRight, Car, CloudSnow, ExternalLink, Mountain, Plane, PlaneTakeoff, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import type { MapLine, MapMarker } from '@/components/map'
 import type { ResortDetail } from '@/lib/data/resort-detail'
@@ -14,7 +15,7 @@ import type { AirportPlace, ResortPageExtras } from '@/lib/data/resort-page'
 import { addDays } from '@/lib/domain/time'
 import { directionsLink, flightSearchLinks, nwsForecastPageUrl } from '@/lib/providers/links/builders'
 import { ConfirmTag, ResortSection, Src, SubHead } from './section'
-import { dayLabel, dotJoin, hostOf, needsCheck, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
+import { confirmText, dayLabel, dotJoin, hostOf, needsCheck, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
 import { TravelMap } from './travel-map'
 
 const ROLE_TEXT: Record<string, string> = {
@@ -79,7 +80,7 @@ function DriveBlock({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Page
                 <Car aria-hidden className="size-3.5" />
                 {t.isEstimate ? 'Curated estimate — not live routing' : 'Sourced routing'}
               </p>
-              {needsCheck(t.prov) ? <ConfirmTag /> : null}
+              {needsCheck(t.prov) ? <ConfirmTag text={confirmText(t.prov)} /> : null}
             </div>
             {t.basis ? <p className="mt-2 max-w-[68ch] text-[13px] text-ink-2">{t.basis}</p> : null}
           </>
@@ -159,13 +160,16 @@ function AirportsBlock({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: P
   )
 }
 
+/** Origins listed before "N more origin airports" (the default origin and the next alternative). */
+const ORIGINS_SHOWN = 2
+
 function FlightSearch({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
-  const u = units(v.units)
   const dests = d.travel.airports.filter((a) => a.role !== 'closest').length ? d.travel.airports.filter((a) => a.role !== 'closest') : d.travel.airports
   // Fly in the day before the planning date, back two days after it (never in the past). Editable on the search site.
   const depart = addDays(v.date, -1) >= v.homeToday ? addDays(v.date, -1) : v.homeToday
   const ret = addDays(depart, 3)
   const origins = x.originAirports
+  const fold = origins.length > ORIGINS_SHOWN + 1
   return (
     <section aria-labelledby="flights-title" className="min-w-0">
       <SubHead id="flights-title" aside={`Out ${dayLabel(depart)} · back ${dayLabel(ret)}`}>
@@ -174,73 +178,12 @@ function FlightSearch({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pa
       <p className="-mt-2 mb-3 text-[12.5px] text-ink-3">
         Prefilled search links from {origins[0]?.iata ?? 'ITH'} and the alternatives — not fares, schedules or availability. Change dates on the search site.
       </p>
-      <div className="-mx-1 overflow-x-auto px-1">
-        <table className="w-full min-w-[480px] text-left text-[13.5px]">
-          <caption className="sr-only">Flight search links from each origin airport to each practical destination airport</caption>
-          <thead>
-            <tr className="border-b border-divider text-[12px] text-ink-3">
-              <th scope="col" className="py-2 pr-3 font-medium">
-                From
-              </th>
-              <th scope="col" className="py-2 pr-3 font-medium">
-                Drive to airport
-              </th>
-              {dests.map((dst) => (
-                <th key={dst.iata} scope="col" className="py-2 pr-3 font-medium">
-                  To {dst.iata}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {origins.map((o: AirportPlace, i) => (
-              <tr key={o.iata} className="border-b border-divider align-top last:border-b-0">
-                <th scope="row" className="py-2.5 pr-3 font-normal">
-                  <span className="flex items-center gap-2">
-                    <PlaneTakeoff aria-hidden className={cn('size-4', i === 0 ? 'text-teal' : 'text-ink-3')} />
-                    <span className="font-semibold text-ink">{o.iata}</span>
-                    {i === 0 ? <span className="text-[11.5px] font-medium text-teal">default</span> : null}
-                  </span>
-                  <span className="block text-[12px] text-ink-3">{o.city ?? o.name}</span>
-                </th>
-                <td className="py-2.5 pr-3 text-ink-2 tnum">
-                  {o.driveFromHome?.minutes != null ? (
-                    <>
-                      {u.duration(o.driveFromHome.minutes)}
-                      <span className="block text-[12px] text-ink-3">estimate{o.parking ? ` · ${o.parking}` : ' · parking unknown'}</span>
-                    </>
-                  ) : (
-                    <Missing />
-                  )}
-                </td>
-                {dests.map((dst) => {
-                  const links = flightSearchLinks({ from: o.iata, to: dst.iata, depart, return: ret })
-                  return (
-                    <td key={dst.iata} className="py-2.5 pr-3">
-                      {links.length ? (
-                        <span className="flex flex-wrap gap-x-3 gap-y-1">
-                          {links.map((l) => (
-                            <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium whitespace-nowrap text-teal hover:underline" title={l.note}>
-                              {l.label.replace('Search ', '')}
-                              <ExternalLink aria-hidden className="size-3" />
-                              <span className="sr-only">
-                                {' '}
-                                — search {o.iata} to {dst.iata}, opens a new tab
-                              </span>
-                            </a>
-                          ))}
-                        </span>
-                      ) : (
-                        <span className="text-ink-3">—</span>
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <FlightTable origins={origins.slice(0, fold ? ORIGINS_SHOWN : origins.length)} first={0} dests={dests} depart={depart} ret={ret} v={v} />
+      {fold ? (
+        <Disclosure variant="row" className="mt-1 border-t border-divider" summary={`${origins.length - ORIGINS_SHOWN} more origin airports · ${origins.slice(ORIGINS_SHOWN).map((o) => o.iata).join(', ')}`}>
+          <FlightTable origins={origins.slice(ORIGINS_SHOWN)} first={ORIGINS_SHOWN} dests={dests} depart={depart} ret={ret} v={v} />
+        </Disclosure>
+      ) : null}
       {origins[0]?.notes ? (
         <p className="mt-2 text-[12.5px] text-ink-3">
           {origins[0].iata}: {origins[0].notes.replace(/^Default flight origin\.\s*/, '')}
@@ -254,6 +197,82 @@ function FlightSearch({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pa
         .
       </p>
     </section>
+  )
+}
+
+function FlightTable({ origins, first, dests, depart, ret, v }: { origins: AirportPlace[]; first: number; dests: ResortDetail['travel']['airports']; depart: string; ret: string; v: PageView }) {
+  const u = units(v.units)
+  return (
+    <div className="relative -mx-1 overflow-x-auto px-1">
+      <table className="w-full min-w-[480px] text-left text-[13.5px]">
+        <caption className="sr-only">Flight search links from each origin airport to each practical destination airport</caption>
+        <thead>
+          <tr className="border-b border-divider text-[12px] text-ink-3">
+            <th scope="col" className="py-2 pr-3 font-medium">
+              From
+            </th>
+            <th scope="col" className="py-2 pr-3 font-medium">
+              Drive to airport
+            </th>
+            {dests.map((dst) => (
+              <th key={dst.iata} scope="col" className="py-2 pr-3 font-medium">
+                To {dst.iata}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {origins.map((o: AirportPlace, j) => {
+            const i = first + j
+            return (
+            <tr key={o.iata} className="border-b border-divider align-top last:border-b-0">
+              <th scope="row" className="py-2.5 pr-3 font-normal">
+                <span className="flex items-center gap-2">
+                  <PlaneTakeoff aria-hidden className={cn('size-4', i === 0 ? 'text-teal' : 'text-ink-3')} />
+                  <span className="font-semibold text-ink">{o.iata}</span>
+                  {i === 0 ? <span className="text-[11.5px] font-medium text-teal">default</span> : null}
+                </span>
+                <span className="block text-[12px] text-ink-3">{o.city ?? o.name}</span>
+              </th>
+              <td className="py-2.5 pr-3 text-ink-2 tnum">
+                {o.driveFromHome?.minutes != null ? (
+                  <>
+                    {u.duration(o.driveFromHome.minutes)}
+                    <span className="block text-[12px] text-ink-3">estimate{o.parking ? ` · ${o.parking}` : ' · parking unknown'}</span>
+                  </>
+                ) : (
+                  <Missing />
+                )}
+              </td>
+              {dests.map((dst) => {
+                const links = flightSearchLinks({ from: o.iata, to: dst.iata, depart, return: ret })
+                return (
+                  <td key={dst.iata} className="py-2.5 pr-3">
+                    {links.length ? (
+                      <span className="flex flex-wrap gap-x-3 gap-y-1">
+                        {links.map((l) => (
+                          <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium whitespace-nowrap text-teal hover:underline" title={l.note}>
+                            {l.label.replace('Search ', '')}
+                            <ExternalLink aria-hidden className="size-3" />
+                            <span className="sr-only">
+                              {' '}
+                              — search {o.iata} to {dst.iata}, opens a new tab
+                            </span>
+                          </a>
+                        ))}
+                      </span>
+                    ) : (
+                      <span className="text-ink-3">—</span>
+                    )}
+                  </td>
+                )
+              })}
+            </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

@@ -834,7 +834,10 @@ export function alertsOverlapping(alerts: readonly WeatherAlertRow[], fromInstan
 
 export function catalogResearchGap(r: ResortRow): string | null {
   if (r.research?.method === 'reference-only') return 'Catalog facts are Piste reference data (not web-verified) — confirm at source'
-  const provs = [r.terrain?.prov, r.features?.prov, r.locationProv, r.elevationProv]
-  if (provs.some((p) => p && needsConfirmation(p))) return 'Catalog facts are reference data — confirm at source'
-  return null
+  const open = [r.terrain?.prov, r.features?.prov, r.locationProv, r.elevationProv].filter((p): p is Provenance => !!p && needsConfirmation(p))
+  if (!open.length) return null
+  // Web-search research is "Researched — confirm at source"; unverified entries are reference data.
+  return open.some((p) => p.verification === 'search-summary')
+    ? 'Catalog facts are researched from web-search summaries — confirm at source'
+    : 'Catalog facts are reference data — confirm at source'
 }

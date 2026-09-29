@@ -10,6 +10,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'motion/react'
 import { CalendarDays, Columns3, Compass } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 import { useCompareSelection } from '@/components/resort/card-compare'
 import { readableQuery, recallQuery } from './use-explore-url'
@@ -64,7 +65,7 @@ export function ExploreTabs({ className }: { className?: string }) {
   }
 
   return (
-    <nav aria-label="Explore sections" className={cn('overflow-x-auto scrollbar-thin', className)}>
+    <ScrollRow as="nav" aria-label="Explore sections" className={cn('scrollbar-thin', className)}>
       <ul className="flex w-max min-w-full items-end gap-1 border-b border-divider">
         {TABS.map((tab) => {
           const on = tab.id === active
@@ -97,6 +98,6 @@ export function ExploreTabs({ className }: { className?: string }) {
           )
         })}
       </ul>
-    </nav>
+    </ScrollRow>
   )
 }

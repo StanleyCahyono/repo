@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
+import { useScrollEdges } from '@/lib/ui/use-scroll-edges'
 
 export interface NavSection {
   id: string
@@ -22,6 +23,7 @@ export interface NavSection {
 export function SettingsNav({ sections, label, vertical = true }: { sections: NavSection[]; label: string; /** Vertical index from 1280px (else always a strip). */ vertical?: boolean }) {
   const [active, setActive] = useState(sections[0]?.id)
   const listRef = useRef<HTMLUListElement>(null)
+  useScrollEdges(listRef)
   const reduce = useReducedMotion()
 
   useEffect(() => {
@@ -56,8 +58,9 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
     if (!list || list.scrollWidth <= list.clientWidth) return
     const item = list.querySelector<HTMLElement>(`[data-nav="${active}"]`)
     if (!item) return
-    const left = item.offsetLeft - 16
-    const right = item.offsetLeft + item.offsetWidth + 16
+    // 40px margins keep the active tab clear of the edge fade (scroll-fade-x).
+    const left = item.offsetLeft - 40
+    const right = item.offsetLeft + item.offsetWidth + 40
     if (left < list.scrollLeft) list.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' })
     else if (right > list.scrollLeft + list.clientWidth) list.scrollTo({ left: right - list.clientWidth, behavior: reduce ? 'auto' : 'smooth' })
   }, [active, reduce])
@@ -91,7 +94,7 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
         <ul
           ref={listRef}
           className={cn(
-            'flex h-12 items-stretch gap-0.5 overflow-x-auto px-3 [scrollbar-width:none] md:h-14 md:px-6 [&::-webkit-scrollbar]:hidden',
+            'scroll-fade-x flex h-12 items-stretch gap-0.5 overflow-x-auto px-3 [scrollbar-width:none] md:h-14 md:px-6 [&::-webkit-scrollbar]:hidden',
             vertical && 'xl:h-auto xl:flex-col xl:overflow-visible xl:px-0',
           )}
         >

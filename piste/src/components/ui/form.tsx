@@ -4,7 +4,7 @@ import { cn } from '@/lib/ui/cn'
 
 const control =
   'w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink placeholder:text-ink-3 ' +
-  'transition-colors duration-150 hover:border-ink-3 focus:border-teal focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 ' +
+  'transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 ' +
   'disabled:bg-surface-3 disabled:text-ink-3 aria-[invalid=true]:border-critical'
 
 export function Field({
@@ -28,7 +28,8 @@ export function Field({
     <div className={cn('flex flex-col gap-1.5', className)}>
       <label htmlFor={htmlFor} className="text-[13.5px] font-medium text-ink">
         {label}
-        {optional ? <span className="ml-1 font-normal text-ink-3">(optional)</span> : null}
+        {/* A real space, so the accessible name reads "Grooming (optional)", not "Grooming(optional)". */}
+        {optional ? <span className="font-normal text-ink-3"> (optional)</span> : null}
       </label>
       {children}
       {hint && !error ? <p className="text-[12.5px] text-ink-3">{hint}</p> : null}

@@ -8,6 +8,7 @@ import { useId, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { motion } from 'motion/react'
 import { CalendarRange, X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 import { addDays, daysBetween, formatLocalDate } from '@/lib/domain/time'
 import { useTodayNav } from './nav'
@@ -64,7 +65,7 @@ export function DateChips({ className }: { className?: string }) {
 
   return (
     <div className={cn('flex min-w-0 flex-col gap-2', className)}>
-      <div className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-0.5 scrollbar-thin md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
+      <ScrollRow className="-mx-4 flex items-center gap-2 px-4 pb-0.5 scrollbar-thin md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
         <div role="radiogroup" aria-label="Dates to rank" className="flex items-center gap-2" onKeyDown={onKey}>
           {radios.map((r) => {
             const on = quick === r.key
@@ -101,7 +102,7 @@ export function DateChips({ className }: { className?: string }) {
           <span className="tnum relative">{quick === 'custom' ? formatDates(dates) : 'Pick dates'}</span>
           {quick === 'custom' ? <span className="sr-only"> (change dates)</span> : null}
         </button>
-      </div>
+      </ScrollRow>
       {open ? (
         <RangeForm
           id={formId}

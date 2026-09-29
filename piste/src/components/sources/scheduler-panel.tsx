@@ -17,7 +17,7 @@ export function SchedulerPanel({ v, tz }: { v: SourcesView; tz: string }) {
   const modeText = s.mode === 'worker' ? 'Long-running worker (npm run worker)' : s.mode === 'once' ? 'One-off passes (npm run refresh, e.g. from cron)' : s.mode ? s.mode : 'None yet'
 
   return (
-    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
       <div className="rounded-[12px] border border-divider bg-surface">
         <div className="flex items-start gap-3 border-b border-divider px-4 py-4 md:px-5">
           <Icon aria-hidden className={cn('mt-1 size-5 shrink-0', TONE_TEXT[sum.tone])} />

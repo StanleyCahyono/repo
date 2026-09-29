@@ -7,6 +7,7 @@
 import Link from 'next/link'
 import { ArrowRight, BedDouble, CalendarPlus, ExternalLink, Plus } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag } from '@/components/ui/provenance'
 import type { HotelView, ResortDetail } from '@/lib/data/resort-detail'
 import type { ResortPageExtras } from '@/lib/data/resort-page'
@@ -15,7 +16,7 @@ import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { formatLocalDate } from '@/lib/domain/time'
 import { ConfirmTag, ResortSection, Src, SubHead } from './section'
 import { TripSheet } from './trip-sheet'
-import { clock, dayLabel, dotJoin, EVENT_STATUS_TEXT, hostOf, HOTEL_TIER_LABEL, needsCheck, shortDate, src, type PageView } from './format'
+import { clock, confirmText, dayLabel, dotJoin, EVENT_STATUS_TEXT, hostOf, HOTEL_TIER_LABEL, needsCheck, shortDate, src, type PageView } from './format'
 
 const TIER_ORDER = ['budget', 'comfortable', 'premium']
 
@@ -49,18 +50,22 @@ function HotelRow({ h, d, x, v }: { h: HotelView; d: ResortDetail; x: ResortPage
           <Src title={h.name} items={[src(h.name, h.prov, h.distanceText)]} />
         </div>
         <p className="mt-1 text-[13.5px] text-ink-2">{h.distanceText ?? 'Distance to the lifts not recorded.'}</p>
-        <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[12.5px]">
-          <dt className="text-ink-3">Ski-in/ski-out</dt>
-          <dd className={cn(h.skiInOut === 'verified-yes' ? 'font-medium text-positive' : 'text-ink-2')}>
-            {h.skiInOut === 'verified-yes' ? 'Yes (verified)' : h.skiInOut === 'verified-no' ? 'No (verified)' : 'Not verified'}
-          </dd>
-          <dt className="text-ink-3">Parking</dt>
-          <dd className="text-ink-2">{h.parking ?? <span className="text-ink-3 italic">Unknown</span>}</dd>
-          <dt className="text-ink-3">Shuttle</dt>
-          <dd className="text-ink-2">{h.shuttle ?? <span className="text-ink-3 italic">Unknown</span>}</dd>
-        </dl>
-        {h.notes ? <p className="mt-2 max-w-[68ch] text-[12.5px] text-ink-3">{h.notes}</p> : null}
-        {needsCheck(h.prov) ? <ConfirmTag className="mt-2" /> : null}
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+          {needsCheck(h.prov) ? <ConfirmTag text={confirmText(h.prov)} /> : null}
+          <span className={cn('text-[12.5px]', h.skiInOut === 'verified-yes' ? 'font-medium text-positive' : 'text-ink-3')}>
+            Ski-in/ski-out: {h.skiInOut === 'verified-yes' ? 'yes (verified)' : h.skiInOut === 'verified-no' ? 'no (verified)' : 'not verified'}
+          </span>
+        </div>
+        {/* Parking, shuttle and the research notes are secondary — one click away. */}
+        <Disclosure summary="Parking, shuttle and notes" className="mt-1">
+          <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[12.5px]">
+            <dt className="text-ink-3">Parking</dt>
+            <dd className="text-ink-2">{h.parking ?? <span className="text-ink-3 italic">Unknown</span>}</dd>
+            <dt className="text-ink-3">Shuttle</dt>
+            <dd className="text-ink-2">{h.shuttle ?? <span className="text-ink-3 italic">Unknown</span>}</dd>
+          </dl>
+          {h.notes ? <p className="mt-2 max-w-[68ch] text-[12.5px] break-words text-ink-3">{h.notes}</p> : null}
+        </Disclosure>
       </div>
       <div className="flex flex-row flex-wrap items-center gap-2 sm:w-[168px] sm:flex-col sm:items-stretch">
         {quote ? (
@@ -267,14 +272,13 @@ function Events({ d, v }: { d: ResortDetail; v: PageView }) {
             </div>
           ) : null}
           {ev.past.length ? (
-            <details>
-              <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">Past events ({ev.past.length})</summary>
+            <Disclosure summary={`Past events (${ev.past.length})`}>
               <ul className="mt-2 flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">
                 {ev.past.map((e) => (
                   <EventRow key={e.id} e={e} past />
                 ))}
               </ul>
-            </details>
+            </Disclosure>
           ) : null}
           {eventsLink ? (
             <a href={eventsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 self-start text-[13px] font-medium text-teal hover:underline">

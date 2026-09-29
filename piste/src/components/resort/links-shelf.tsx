@@ -26,6 +26,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag } from '@/components/ui/provenance'
 import type { LinkView, ResortDetail } from '@/lib/data/resort-detail'
 import { openSkiMapUrl } from '@/lib/providers/links/builders'
@@ -119,39 +120,56 @@ function Tile({ item, link, url, now, built }: { item: ShelfItem; link: LinkView
   const state = built ? 'unchecked' : linkState(link?.check)
   const descId = `link-${item.key}-status`
   return (
-    <li className="group relative flex min-w-0 flex-col gap-1.5 rounded-[12px] border border-divider bg-surface p-3.5 transition-[border-color,transform] duration-150 hover:-translate-y-0.5 hover:border-teal focus-within:border-teal">
-      <div className="flex items-start justify-between gap-2">
-        <Icon aria-hidden className="size-5 text-teal" strokeWidth={1.8} />
-        <ExternalLink aria-hidden className="size-3.5 text-ink-3 transition-colors group-hover:text-teal" />
+    <li className="group relative flex min-w-0 items-start gap-3 rounded-[12px] border border-divider bg-surface px-3.5 py-3 transition-[border-color,transform] duration-150 hover:-translate-y-0.5 hover:border-teal focus-within:border-teal has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-focus">
+      <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-teal" strokeWidth={1.8} />
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start justify-between gap-2">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-describedby={descId}
+            className="text-[14.5px] leading-snug font-semibold text-ink after:absolute after:inset-0 after:rounded-[12px] focus-visible:outline-none"
+          >
+            {item.label}
+            <span className="sr-only"> (opens {hostOf(url) ?? 'external site'} in a new tab)</span>
+          </a>
+          <ExternalLink aria-hidden className="mt-1 size-3.5 shrink-0 text-ink-3 transition-colors group-hover:text-teal" />
+        </div>
+        <p className="truncate text-[12px] text-ink-3">{item.note ?? hostOf(url)}</p>
+        <div id={descId} className="mt-0.5">
+          <StatusLine link={link} now={now} built={built} />
+          <span className="sr-only">{built ? '' : linkStateDetail(link?.check, now)}</span>
+        </div>
+        {state === 'broken' ? <p className="mt-0.5 text-[12px] text-ink-2">The page may have moved — try the official site.</p> : null}
       </div>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-describedby={descId}
-        className="text-[14.5px] leading-snug font-semibold text-ink after:absolute after:inset-0 after:rounded-[12px] focus-visible:outline-none"
-      >
-        {item.label}
-        <span className="sr-only"> (opens {hostOf(url) ?? 'external site'} in a new tab)</span>
-      </a>
-      <p className="line-clamp-2 text-[12px] text-ink-3">{item.note ?? hostOf(url)}</p>
-      <div id={descId}>
-        <StatusLine link={link} now={now} built={built} />
-        <span className="sr-only">{built ? '' : linkStateDetail(link?.check, now)}</span>
-      </div>
-      {state === 'broken' ? <p className="text-[12px] text-ink-2">The page may have moved — try the official site.</p> : null}
     </li>
   )
 }
 
-function MissingTile({ item, official }: { item: ShelfItem; official: string | null }) {
-  const Icon = item.icon
+/** Expected links with no URL on file, folded into one line instead of a grid of empty tiles. */
+function NotRecorded({ items, official }: { items: ShelfItem[]; official: string | null }) {
+  if (!items.length) return null
   return (
-    <li className="flex min-w-0 flex-col gap-1.5 rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-3.5">
-      <Icon aria-hidden className="size-5 text-ink-3" strokeWidth={1.8} />
-      <p className="text-[14.5px] leading-snug font-semibold text-ink-2">{item.label}</p>
-      <p className="text-[12px] text-ink-3 italic">Not recorded{official ? ' — look on the official site' : ''}</p>
-    </li>
+    <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-3 text-[13.5px] text-ink-2">
+      <span className="font-semibold text-ink">Not recorded yet:</span> {items.map((i) => i.label).join(' · ')}
+      <span className="text-ink-3">
+        {' '}
+        —{' '}
+        {official ? (
+          <>
+            look on the{' '}
+            <a href={official} target="_blank" rel="noopener noreferrer" className="font-medium text-teal hover:underline">
+              official site
+              <span className="sr-only"> (opens a new tab)</span>
+            </a>
+            .
+          </>
+        ) : (
+          'no official site is recorded either.'
+        )}
+      </span>
+    </p>
   )
 }
 
@@ -185,19 +203,21 @@ export function LinksSection({ d, v }: { d: ResortDetail; v: PageView }) {
             ))}
           {counts['check-failed'] ? <span className="text-ink-3">“Check failed” means the site or network refused the automated check — the link may still work.</span> : null}
         </p>
-        {GROUPS.map((g) => (
-          <div key={g.title}>
-            <p className="eyebrow mb-2">{g.title}</p>
-            <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
-              {g.items.map((item) => {
-                if (item.key === 'openSkiMap') return osm ? <Tile key={item.key} item={item} link={byKey.get('openSkiMap') ?? null} url={osm} now={v.now} built={!byKey.get('openSkiMap')} /> : null
-                const l = byKey.get(item.key)
-                if (l) return <Tile key={item.key} item={item} link={l} url={l.url} now={v.now} />
-                return item.expected ? <MissingTile key={item.key} item={item} official={official} /> : null
-              })}
-            </ul>
-          </div>
-        ))}
+        {GROUPS.map((g) => {
+          const tiles = g.items.flatMap((item) => {
+            if (item.key === 'openSkiMap') return osm ? [<Tile key={item.key} item={item} link={byKey.get('openSkiMap') ?? null} url={osm} now={v.now} built={!byKey.get('openSkiMap')} />] : []
+            const l = byKey.get(item.key)
+            return l ? [<Tile key={item.key} item={item} link={l} url={l.url} now={v.now} />] : []
+          })
+          if (!tiles.length) return null
+          return (
+            <div key={g.title}>
+              <p className="eyebrow mb-2">{g.title}</p>
+              <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">{tiles}</ul>
+            </div>
+          )
+        })}
+        <NotRecorded items={GROUPS.flatMap((g) => g.items.filter((i) => i.expected && i.key !== 'openSkiMap' && !byKey.get(i.key)))} official={official} />
         {more.length ? (
           <div>
             <p className="eyebrow mb-2">More useful pages ({more.length})</p>
@@ -263,7 +283,7 @@ function Coverage({ d, v }: { d: ResortDetail; v: PageView }) {
           official source.
         </p>
       ) : null}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-x-8 gap-y-4 lg:grid-cols-2">
         <div className="min-w-0">
           <p className="mb-2 text-[14px] font-semibold text-ink">What’s missing or uncertain</p>
           {r.dataGaps.length ? (
@@ -278,8 +298,10 @@ function Coverage({ d, v }: { d: ResortDetail; v: PageView }) {
           ) : (
             <p className="text-[13.5px] text-ink-2">No known gaps for this date.</p>
           )}
+        </div>
+        <div className="min-w-0">
           {research ? (
-            <p className="mt-4 text-[12.5px] text-ink-3">
+            <p className="text-[12.5px] text-ink-3 lg:mt-7">
               Catalog: {research.method === 'web-search' ? 'researched from web-search summaries' : research.method === 'reference-only' ? 'reference data' : research.method} on{' '}
               {shortDate(research.date)}. {research.confidenceNotes}
             </p>
@@ -298,75 +320,73 @@ function Coverage({ d, v }: { d: ResortDetail; v: PageView }) {
             </div>
           ) : null}
         </div>
-        <div className="min-w-0">
-          <p className="mb-2 text-[14px] font-semibold text-ink">Open research questions</p>
-          {research?.openQuestions.length ? (
-            <ol className="flex list-decimal flex-col gap-1.5 pl-5 text-[13.5px] text-ink-2 marker:text-ink-3 marker:tnum">
+      </div>
+      {/* Research detail stays one click away instead of adding a screen of text to every resort. */}
+      <div className="mt-5 flex flex-col divide-y divide-divider border-y border-divider">
+        {research?.openQuestions.length ? (
+          <Disclosure variant="row" summary={`Open research questions (${research.openQuestions.length})`}>
+            <ol className="flex list-decimal flex-col gap-1.5 pb-3 pl-5 text-[13.5px] text-ink-2 marker:text-ink-3 marker:tnum">
               {research.openQuestions.map((q) => (
                 <li key={q}>{q}</li>
               ))}
             </ol>
-          ) : (
-            <p className="text-[13.5px] text-ink-2">None recorded.</p>
-          )}
-          {research?.conflicts.length ? (
-            <details className="mt-3">
-              <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">Conflicting sources ({research.conflicts.length})</summary>
-              <ul className="mt-2 flex flex-col gap-1.5 text-[12.5px] text-ink-2">
-                {research.conflicts.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
-            </details>
-          ) : null}
-        </div>
-      </div>
-      <details className="mt-5 border-t border-divider pt-3">
-        <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">
-          All sources on file ({d.sources.length}){confirm.length ? ` · ${confirm.length} to confirm at source` : ''}
-        </summary>
-        <div className="-mx-1 mt-2 overflow-x-auto px-1">
-          <table className="w-full min-w-[520px] text-left text-[12.5px]">
-            <caption className="sr-only">Every source behind the facts on this page</caption>
-            <thead>
-              <tr className="border-b border-divider text-ink-3">
-                <th scope="col" className="py-1.5 pr-2 font-medium">
-                  Fact
-                </th>
-                <th scope="col" className="py-1.5 pr-2 font-medium">
-                  Kind
-                </th>
-                <th scope="col" className="py-1.5 pr-2 font-medium">
-                  Verification
-                </th>
-                <th scope="col" className="py-1.5 font-medium">
-                  Source
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {d.sources.map((s, i) => (
-                <tr key={`${s.topic}-${i}`} className="border-b border-divider align-top last:border-b-0">
-                  <td className="py-1.5 pr-2 text-ink">{s.topic}</td>
-                  <td className="py-1.5 pr-2">
-                    <KindTag kind={s.kind} />
-                  </td>
-                  <td className={cn('py-1.5 pr-2', s.confirmAtSource ? 'font-medium text-caution' : 'text-ink-2')}>{s.verificationLabel}</td>
-                  <td className="py-1.5">
-                    {s.url ? (
-                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="break-all text-teal hover:underline">
-                        {hostOf(s.url) ?? s.url}
-                      </a>
-                    ) : (
-                      <span className="text-ink-3">{s.provider ?? 'No link'}</span>
-                    )}
-                  </td>
-                </tr>
+          </Disclosure>
+        ) : (
+          <p className="py-2.5 text-[13.5px] text-ink-2">Open research questions: none recorded.</p>
+        )}
+        {research?.conflicts.length ? (
+          <Disclosure variant="row" summary={`Conflicting sources (${research.conflicts.length})`}>
+            <ul className="flex flex-col gap-1.5 pb-3 text-[12.5px] text-ink-2">
+              {research.conflicts.map((c) => (
+                <li key={c}>{c}</li>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </details>
+            </ul>
+          </Disclosure>
+        ) : null}
+        <Disclosure variant="row" summary={`All sources on file (${d.sources.length})${confirm.length ? ` · ${confirm.length} to confirm at source` : ''}`}>
+          <div className="relative -mx-1 overflow-x-auto px-1 pb-3">
+            <table className="w-full min-w-[520px] text-left text-[12.5px]">
+              <caption className="sr-only">Every source behind the facts on this page</caption>
+              <thead>
+                <tr className="border-b border-divider text-ink-3">
+                  <th scope="col" className="py-1.5 pr-2 font-medium">
+                    Fact
+                  </th>
+                  <th scope="col" className="py-1.5 pr-2 font-medium">
+                    Kind
+                  </th>
+                  <th scope="col" className="py-1.5 pr-2 font-medium">
+                    Verification
+                  </th>
+                  <th scope="col" className="py-1.5 font-medium">
+                    Source
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {d.sources.map((s, i) => (
+                  <tr key={`${s.topic}-${i}`} className="border-b border-divider align-top last:border-b-0">
+                    <td className="py-1.5 pr-2 text-ink">{s.topic}</td>
+                    <td className="py-1.5 pr-2">
+                      <KindTag kind={s.kind} />
+                    </td>
+                    <td className={cn('py-1.5 pr-2', s.confirmAtSource ? 'font-medium text-caution' : 'text-ink-2')}>{s.verificationLabel}</td>
+                    <td className="py-1.5">
+                      {s.url ? (
+                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="break-all text-teal hover:underline">
+                          {hostOf(s.url) ?? s.url}
+                        </a>
+                      ) : (
+                        <span className="text-ink-3">{s.provider ?? 'No link'}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Disclosure>
+      </div>
       {v.demo ? <p className="mt-3 text-[12.5px] text-demo">Demo mode: operations, reports, weather and scores here are simulated.</p> : null}
     </section>
   )

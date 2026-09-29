@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
+import { useScrollEdges } from '@/lib/ui/use-scroll-edges'
 
 export interface NavSection {
   id: string
@@ -17,6 +18,7 @@ export interface NavSection {
 export function TripSectionNav({ sections }: { sections: NavSection[] }) {
   const [active, setActive] = useState(sections[0]?.id ?? '')
   const listRef = useRef<HTMLUListElement>(null)
+  useScrollEdges(listRef)
   const reduce = useReducedMotion()
 
   useEffect(() => {
@@ -49,15 +51,16 @@ export function TripSectionNav({ sections }: { sections: NavSection[] }) {
     const list = listRef.current
     const item = list?.querySelector<HTMLElement>(`[data-tab="${active}"]`)
     if (!list || !item) return
-    const left = item.offsetLeft - 16
-    const right = item.offsetLeft + item.offsetWidth + 16
+    // 40px margins keep the active tab clear of the edge fade (scroll-fade-x).
+    const left = item.offsetLeft - 40
+    const right = item.offsetLeft + item.offsetWidth + 40
     if (left < list.scrollLeft) list.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' })
     else if (right > list.scrollLeft + list.clientWidth) list.scrollTo({ left: right - list.clientWidth, behavior: reduce ? 'auto' : 'smooth' })
   }, [active, reduce])
 
   return (
     <nav aria-label="Trip sections" className="sticky top-14 z-20 -mx-4 mb-8 border-b border-divider bg-canvas/95 px-4 backdrop-blur-sm md:top-0 md:-mx-8 md:px-8">
-      <ul ref={listRef} className="scrollbar-thin flex gap-1 overflow-x-auto py-2 max-lg:[mask-image:linear-gradient(to_right,black_calc(100%-28px),transparent)] max-lg:pr-6">
+      <ul ref={listRef} className="scroll-fade-x scrollbar-thin flex gap-1 overflow-x-auto py-2">
         {sections.map((s) => {
           const on = s.id === active
           return (

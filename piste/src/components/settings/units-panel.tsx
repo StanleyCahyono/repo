@@ -9,7 +9,7 @@ import { ArrowRight, Database, Eye } from 'lucide-react'
 import Link from 'next/link'
 import { saveCurrency, saveUnits } from '@/lib/actions/settings'
 import type { FxView } from '@/lib/data/settings-screen'
-import { formatInstant, relativeLabel } from '@/lib/domain/time'
+import { formatInstant, relativeLabel, formatLocalDate, isLocalDate } from '@/lib/domain/time'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { formatDistance, formatElevation, formatSnow, formatSpeed, formatTemp } from '@/lib/domain/units'
 import { Badge } from '@/components/ui/badge'
@@ -140,7 +140,7 @@ function FxInfo({ fx, now, tz, demo, display }: { fx: FxView; now: string; tz: s
               {q.demo ? <Badge tone="demo">Demo rate</Badge> : null}
               <span>
                 {q.provider ?? 'Unknown provider'}
-                {q.rateDate ? ` · rate for ${q.rateDate}` : ''}
+                {q.rateDate ? ` · rate for ${isLocalDate(q.rateDate) ? formatLocalDate(q.rateDate, 'd LLL yyyy') : q.rateDate}` : ''}
               </span>
               {q.fetchedAt ? (
                 <time dateTime={q.fetchedAt} title={formatInstant(q.fetchedAt, tz, 'ccc d LLL yyyy, HH:mm ZZZZ')} className="tnum">

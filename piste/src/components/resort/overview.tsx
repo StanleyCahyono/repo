@@ -15,8 +15,9 @@ import { daysBetween } from '@/lib/domain/time'
 import { SCORING_MODE_LABEL } from '@/lib/domain/types'
 import { RatingEditor } from './rating-editor'
 import { Reveal } from './reveal'
+import { Disclosure } from '@/components/ui/disclosure'
 import { ConfirmTag, FactRow, ResortSection, Src, SubHead, TriChip } from './section'
-import { ago, dayLabel, dayLabelYear, dotJoin, instantLabel, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
+import { ago, confirmText, dayLabel, dayLabelYear, dotJoin, instantLabel, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
 
 const ABILITY_TEXT: Record<string, string> = { beginner: 'beginner', novice: 'novice', intermediate: 'intermediate', advanced: 'advanced', expert: 'expert' }
 
@@ -105,20 +106,22 @@ function RatingsTrio({ d, v, ability, weatherFailed }: { d: ResortDetail; v: Pag
             ))}
           </ul>
           {fit.reasons.length || fit.unknowns.length ? (
-            <ul className="flex flex-col gap-1 text-[13px] text-ink-2">
-              {fit.reasons.slice(0, 3).map((x) => (
-                <li key={x} className="flex gap-2">
-                  <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-ink-3" />
-                  {x}
-                </li>
-              ))}
-              {fit.unknowns.map((x) => (
-                <li key={x} className="flex gap-2 text-ink-3 italic">
-                  <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-divider-strong" />
-                  {x}
-                </li>
-              ))}
-            </ul>
+            <Disclosure summary={`Why this fit${fit.unknowns.length ? ` · ${fit.unknowns.length} unknown` : ''}`}>
+              <ul className="mt-1.5 flex flex-col gap-1 text-[13px] text-ink-2">
+                {fit.reasons.slice(0, 3).map((x) => (
+                  <li key={x} className="flex gap-2">
+                    <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-ink-3" />
+                    {x}
+                  </li>
+                ))}
+                {fit.unknowns.map((x) => (
+                  <li key={x} className="flex gap-2 text-ink-3 italic">
+                    <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-divider-strong" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </Disclosure>
           ) : null}
           {fit.cappedBy ? <p className="text-[12.5px] font-medium text-caution">{fit.cappedBy}</p> : null}
           <p className="mt-auto text-[12.5px] text-ink-3">
@@ -174,7 +177,7 @@ function RatingsTrio({ d, v, ability, weatherFailed }: { d: ResortDetail; v: Pag
           {r.status.status === 'unknown' && !r.closure ? (
             <p className="text-[12.5px] font-medium text-caution">Operating status unknown — never treated as open.</p>
           ) : null}
-          <a href="#conditions" className="mt-auto inline-flex items-center gap-1 text-[13px] font-medium text-teal hover:underline">
+          <a href="#score-breakdown" className="mt-auto inline-flex items-center gap-1 text-[13px] font-medium text-teal hover:underline">
             Breakdown and evidence <ArrowDown aria-hidden className="size-3.5" />
           </a>
         </section>
@@ -312,7 +315,7 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
           {split.beginnerArea ? <p className="text-[14px] font-medium text-ink">{split.beginnerArea}</p> : null}
           {learning ? <p className="mt-1.5 max-w-[68ch] text-[14px] text-ink-2">{learning}</p> : null}
           <div className="mt-2 flex items-center gap-2">
-            {needsCheck(split.featuresProv ?? split.terrainProv) ? <ConfirmTag /> : null}
+            {needsCheck(split.featuresProv ?? split.terrainProv) ? <ConfirmTag text={confirmText(split.featuresProv ?? split.terrainProv)} /> : null}
             <Src title="Learning information" items={[src('Facilities', split.featuresProv), src('Terrain', split.terrainProv)]} />
           </div>
         </div>
@@ -466,8 +469,7 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
           </div>
         </dl>
         {changes.length ? (
-          <details className="group mt-2 border-t border-divider pt-2.5">
-            <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">Date changes on file ({changes.length})</summary>
+          <Disclosure summary={`Date changes on file (${changes.length})`} className="mt-2 border-t border-divider pt-2">
             <ul className="mt-2 flex flex-col gap-1.5 text-[13px] text-ink-2">
               {changes.map((c) => (
                 <li key={c.id} className="flex flex-wrap items-baseline gap-x-2 tnum">
@@ -480,7 +482,7 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
                 </li>
               ))}
             </ul>
-          </details>
+          </Disclosure>
         ) : null}
         {d.season.others.length ? (
           <div className="mt-2 border-t border-divider pt-2.5 text-[13px] text-ink-2">
@@ -496,10 +498,9 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
           </div>
         ) : null}
         {cur?.notes ? (
-          <details className="mt-2 border-t border-divider pt-2.5">
-            <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">Season research notes</summary>
+          <Disclosure summary="Season research notes" className="mt-2 border-t border-divider pt-2">
             <p className="mt-2 max-w-[68ch] text-[13px] text-ink-2">{cur.notes}</p>
-          </details>
+          </Disclosure>
         ) : null}
         <p className="mt-3 flex items-center gap-1.5 border-t border-divider pt-2.5 text-[12.5px] text-ink-3">
           <span aria-hidden className="inline-block size-2.5 rounded-full bg-teal" /> Announced
@@ -545,20 +546,23 @@ function StatusBlock({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
           </p>
         ) : null}
         {history.length ? (
-          <ol className="relative mt-4 flex flex-col gap-3 border-l border-divider-strong pl-5">
-            {history.map((e, i) => (
-              <li key={e.id} className="relative">
-                <span aria-hidden className={cn('absolute top-1.5 -left-[25px] size-2.5 rounded-full border-2 border-surface', i === 0 ? 'bg-teal' : 'bg-divider-strong')} />
-                <div className="flex flex-wrap items-baseline gap-x-2">
-                  <span className="text-[14px] font-medium text-ink">{e.label}</span>
-                  <span className="text-[12.5px] text-ink-3 tnum">{instantLabel(e.effectiveAt, v.tz, v.now)}</span>
-                  <KindTag kind={e.prov.kind} compact />
-                  <Src title={`Status: ${e.label}`} items={[src(`Status on ${dayLabelYear(e.localDate)}`, e.prov, e.label)]} />
-                </div>
-                {e.note ? <p className="text-[12.5px] text-ink-2">{e.note}</p> : null}
-              </li>
-            ))}
-          </ol>
+          // The current statement leads the block above; its history is one click away.
+          <Disclosure summary={`Status history (${history.length})`} className="mt-3">
+            <ol className="relative mt-3 flex flex-col gap-3 border-l border-divider-strong pl-5">
+              {history.map((e, i) => (
+                <li key={e.id} className="relative">
+                  <span aria-hidden className={cn('absolute top-1.5 -left-[25px] size-2.5 rounded-full border-2 border-surface', i === 0 ? 'bg-teal' : 'bg-divider-strong')} />
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="text-[14px] font-medium text-ink">{e.label}</span>
+                    <span className="text-[12.5px] text-ink-3 tnum">{instantLabel(e.effectiveAt, v.tz, v.now)}</span>
+                    <KindTag kind={e.prov.kind} compact />
+                    <Src title={`Status: ${e.label}`} items={[src(`Status on ${dayLabelYear(e.localDate)}`, e.prov, e.label)]} />
+                  </div>
+                  {e.note ? <p className="text-[12.5px] text-ink-2">{e.note}</p> : null}
+                </li>
+              ))}
+            </ol>
+          </Disclosure>
         ) : (
           <p className="mt-3 text-[13px] text-ink-3 italic">No status statements recorded yet — history starts with the first official or manual report.</p>
         )}

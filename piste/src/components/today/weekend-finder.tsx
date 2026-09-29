@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { motion } from 'motion/react'
 import { CircleHelp, LoaderCircle, RotateCcw, Save, SlidersHorizontal } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 import { useToast } from '@/components/ui/toast'
 import { rankWindow, saveWeights } from '@/lib/actions/today'
@@ -63,7 +64,7 @@ function WindowChips({ onChoose }: { onChoose: (w: FinderWindow) => void }) {
     e.currentTarget.querySelector<HTMLButtonElement>(`[data-fw="${next}"]`)?.focus()
   }
   return (
-    <div className="-mx-4 overflow-x-auto px-4 pb-0.5 scrollbar-thin md:mx-0 md:px-0">
+    <ScrollRow className="-mx-4 px-4 pb-0.5 scrollbar-thin md:mx-0 md:px-0">
       <div
         role="radiogroup"
         aria-label="Window to compare"
@@ -99,7 +100,7 @@ function WindowChips({ onChoose }: { onChoose: (w: FinderWindow) => void }) {
           )
         })}
       </div>
-    </div>
+    </ScrollRow>
   )
 }
 

@@ -16,7 +16,6 @@ import {
   type Recommendation,
   type RankedOption,
 } from '@/lib/domain/recommend'
-import { formatLocalDate, isLocalDate } from '@/lib/domain/time'
 
 export interface FactorView {
   key: FactorKey
@@ -85,22 +84,6 @@ export function factorViews(o: Pick<RankedOption, 'factors'>): FactorView[] {
   return o.factors.map((f) => ({ ...f, points: round1(f.weight * f.used) }))
 }
 
-/**
- * Display tidy-up for engine sentences: "Not covered by your X: X: No days left" → "Not covered by your X: No days
- * left", and of two lines that open with the same clause ("About 50 min drive (…)") only the fuller one is kept.
- * Wording only — no fact is added or dropped that another line does not already state.
- */
-export function tidyLines(lines: readonly string[]): string[] {
-  const fixed = lines.map((l) =>
-    l
-      .replace(/^(Not covered by your (.+?)): \2: /, '$1: ')
-      .replace(/\b(\d{4}-\d{2}-\d{2})\b/g, (d) => (isLocalDate(d) ? formatLocalDate(d) : d))
-      .replace(/\.([;)])/g, '$1'),
-  )
-  const key = (l: string) => l.split(' (')[0].trim().toLowerCase()
-  return fixed.filter((l, i) => !fixed.some((m, j) => j !== i && key(m) === key(l) && (m.length > l.length || (m.length === l.length && j < i))))
-}
-
 export function optionView(o: RankedOption, dates: readonly string[]): OptionView {
   const other = new Map(o.otherDates.map((d) => [d.date, d]))
   const days: DayCell[] = dates.map((date) => {
@@ -139,9 +122,9 @@ export function optionView(o: RankedOption, dates: readonly string[]): OptionVie
     statusNote: o.statusNote,
     assumption: o.assumption,
     factors: factorViews(o),
-    benefits: tidyLines(o.benefits),
-    tradeoffs: tidyLines(o.tradeoffs),
-    limitations: tidyLines(o.limitations),
+    benefits: o.benefits,
+    tradeoffs: o.tradeoffs,
+    limitations: o.limitations,
     warnings: o.warnings,
     days,
   }

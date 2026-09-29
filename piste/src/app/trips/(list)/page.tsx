@@ -1,7 +1,7 @@
 import { getCtx } from '@/lib/context'
 import { getTripsPage } from '@/lib/data/trip-plan'
 import { PageHeader } from '@/components/ui/page-header'
-import { KindTag } from '@/components/ui/provenance'
+import { DemoBadge } from '@/components/ui/badge'
 import { TripsOverview } from '@/components/trips/trip-list'
 import { NewTripButton, NewTripSheet } from '@/components/trips/new-trip-sheet'
 
@@ -19,7 +19,7 @@ export default async function TripsPage() {
             <span>Season {season}</span>
             <span aria-hidden>·</span>
             <span>From {data.home}</span>
-            {data.demo ? <KindTag kind="demo" className="tracking-normal normal-case" /> : null}
+            {data.demo ? <DemoBadge /> : null}
           </>
         }
         title="Trips"

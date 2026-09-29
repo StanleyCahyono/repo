@@ -53,7 +53,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <div
         aria-live="polite"
         aria-atomic="false"
-        className="pointer-events-none fixed inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-[60] flex flex-col items-center gap-2 px-4 md:bottom-6"
+        className={
+          'pointer-events-none fixed inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-[60] flex flex-col items-center gap-2 px-4 md:bottom-6 ' +
+          // Stay clear of fixed bottom bars (the resort action bar on phones, the comparison tray) so a toast never
+          // covers the buttons that were just used.
+          'max-md:[body:has([data-mobile-actions],[data-bottom-bar])_&]:bottom-[calc(140px+env(safe-area-inset-bottom))] md:[body:has([data-bottom-bar])_&]:bottom-28'
+        }
       >
         <AnimatePresence initial={false}>
           {items.map((item) => (

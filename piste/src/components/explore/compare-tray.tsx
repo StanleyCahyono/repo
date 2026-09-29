@@ -35,6 +35,7 @@ export function CompareTray({ scenario }: { scenario: { date: string; mode: stri
         >
           <div className="mx-auto max-w-[1320px] px-3 pb-2 md:px-8 md:pb-4">
             <section
+              data-bottom-bar
               aria-label="Comparison tray"
               className="pointer-events-auto flex items-center gap-2 rounded-[14px] border border-divider-strong bg-surface py-2 pr-2 pl-3 shadow-overlay md:gap-3 md:pl-4"
             >

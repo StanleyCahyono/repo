@@ -165,7 +165,8 @@ describe('computeDayBasket', () => {
     expect(b.total).toBeNull()
     expect(b.tier.tier).toBe('incomplete')
     expect(b.label).toBe('Incomplete estimate')
-    expect(b.missing.find((m) => m.key === 'lift')).toMatchObject({ required: true })
+    // Human date in the sentence, never the raw ISO date.
+    expect(b.missing.find((m) => m.key === 'lift')).toMatchObject({ required: true, message: 'No weekend lift ticket price for Sat 16 Jan.' })
     // The known lines are still shown for itemisation.
     expect(b.knownSubtotal.amountMinor).toBe(4500 + 2500 + 334)
   })

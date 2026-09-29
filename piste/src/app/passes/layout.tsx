@@ -1,6 +1,6 @@
 import { Suspense, type ReactNode } from 'react'
-import { FlaskConical } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
+import { DemoBadge } from '@/components/ui/badge'
 import { PassesTabs } from '@/components/passes/tabs'
 import { dayLabel, seasonText } from '@/components/passes/format'
 import { getCtx } from '@/lib/context'
@@ -17,9 +17,7 @@ export default async function PassesLayout({ children }: { children: ReactNode }
             <span aria-hidden>·</span>
             <span>{dayLabel(ctx.today, true)}</span>
             {ctx.mode === 'demo' ? (
-              <span className="inline-flex items-center gap-1 rounded-sm bg-demo-bg px-1.5 py-0.5 text-demo normal-case tracking-normal">
-                <FlaskConical aria-hidden className="size-3.5" /> Demo data
-              </span>
+              <DemoBadge />
             ) : null}
           </>
         }

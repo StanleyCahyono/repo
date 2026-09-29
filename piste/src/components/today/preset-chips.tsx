@@ -6,6 +6,7 @@
 import type { KeyboardEvent } from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/ui/cn'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 import type { RecommendPreset } from '@/lib/domain/recommend'
 import { useTodayNav } from './nav'
@@ -40,7 +41,7 @@ export function PresetChips({ presets, fallback, className }: { presets: PresetO
     e.currentTarget.querySelector<HTMLButtonElement>(`[data-preset="${next.id}"]`)?.focus()
   }
   return (
-    <div className={cn('-mx-4 overflow-x-auto px-4 pb-0.5 scrollbar-thin md:mx-0 md:px-0', className)}>
+    <ScrollRow className={cn('-mx-4 px-4 pb-0.5 scrollbar-thin md:mx-0 md:px-0', className)}>
       <div role="radiogroup" aria-label="Rank for" onKeyDown={onKey} className="flex w-max items-center gap-1.5 xl:w-auto xl:flex-wrap">
         {presets.map((p) => {
           const on = p.id === current
@@ -66,6 +67,6 @@ export function PresetChips({ presets, fallback, className }: { presets: PresetO
           )
         })}
       </div>
-    </div>
+    </ScrollRow>
   )
 }
