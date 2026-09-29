@@ -7,7 +7,7 @@ import type { HourlyWeather, WeatherPointRequest } from '@/lib/providers/types'
 import { lastSuccess, runJob } from './runner'
 import { addResort, blankHour, deps, fail, fakeAlerts, fakeWeather, hours, ok, series, T0, testDb } from './test-helpers'
 import type { JobContext } from './types'
-import { latestOkRuns, persistWeatherSeries, pruneWeatherRuns, refreshOfficialAlerts, refreshWeather, usableHourCount, weatherLocalDate } from './weather'
+import { latestOkRuns, persistWeatherSeries, refreshOfficialAlerts, refreshWeather, usableHourCount, weatherLocalDate } from './weather'
 
 const ctx = (db: JobContext['db'], over: Partial<JobContext> = {}): JobContext => ({ db, now: T0, deps: deps(), target: null, trigger: 'schedule', ...over })
 
@@ -131,57 +131,6 @@ describe('weather: a response without usable hours is a schema change, not a for
     const t = '2027-01-15T00:00:00Z'
     expect(usableHourCount([])).toBe(0)
     expect(usableHourCount([{ ...blankHour(t), snowDepthM: 1.2 }, { ...blankHour('not-a-time'), temperatureC: -3 }, { ...blankHour(t), windKmh: Number.NaN }])).toBe(1)
-  })
-})
-
-describe('weather retention', () => {
-  it('keeps every recent run and the first successful run per resort / point / local day for older ones', async () => {
-    const db = await testDb()
-    await addResort(db, { id: 'alta', timezone: 'America/Denver' })
-    const insertRun = async (fetchedAt: string, status: 'ok' | 'error' = 'ok') => {
-      const [r] = await db
-        .insert(weatherRuns)
-        .values({
-          resortId: 'alta',
-          pointKey: 'base',
-          provider: 'open-meteo',
-          model: 'best_match',
-          kind: 'modeled',
-          requestedLat: 40.59,
-          requestedLon: -111.64,
-          fetchedAt,
-          timezone: 'America/Denver',
-          variables: [],
-          units: {},
-          intervalSemantics: 'preceding-hour',
-          status,
-          prov: provenance({ kind: 'modeled', provider: 'Open-Meteo', fetchedAt }),
-        })
-        .returning()
-      await db.insert(weatherPoints).values({ runId: r.id, validTime: fetchedAt, localDate: fetchedAt.slice(0, 10), snowfallCm: 1 })
-      return r
-    }
-    const jan1a = await insertRun('2027-01-01T08:00:00.000Z') // 01:00 MST 1 Jan — first of the local day
-    await insertRun('2027-01-01T10:00:00.000Z', 'error')
-    await insertRun('2027-01-01T14:00:00.000Z')
-    await insertRun('2027-01-02T03:00:00.000Z') // 20:00 MST on 1 Jan — same local day, not first
-    const jan2 = await insertRun('2027-01-02T08:00:00.000Z') // first of 2 Jan (local)
-    await insertRun('2027-01-02T20:00:00.000Z')
-    const recent1 = await insertRun('2027-01-25T08:00:00.000Z')
-    const recent2 = await insertRun('2027-01-25T11:00:00.000Z')
-
-    const now = '2027-01-30T12:00:00.000Z'
-    const res = await pruneWeatherRuns(db, now, 14)
-    expect(res.runsDeleted).toBe(4)
-    const left = await db.select().from(weatherRuns).orderBy(weatherRuns.id)
-    expect(left.map((r) => r.id)).toEqual([jan1a.id, jan2.id, recent1.id, recent2.id])
-    // Kept rows are untouched — never rewritten with newer data.
-    expect(left[0]).toEqual(jan1a)
-    // Points of deleted runs are gone; kept runs keep theirs.
-    const pts = await db.select().from(weatherPoints)
-    expect(new Set(pts.map((p) => p.runId))).toEqual(new Set(left.map((r) => r.id)))
-    // Idempotent.
-    expect((await pruneWeatherRuns(db, now, 14)).runsDeleted).toBe(0)
   })
 })
 

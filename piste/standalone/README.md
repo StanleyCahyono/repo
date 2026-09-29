@@ -12,13 +12,25 @@ npm run standalone:verify   # re-check it in headless Chromium from its file:// 
 `verify` accepts `--shots <dir>` for screenshots at 390 and 1440 px, light and dark, `--no-demo`, and
 `--chromium <path>`. It also reads `PLAYWRIGHT_CHROMIUM_PATH`.
 
+## Daily use
+
+- **Open the file once a day, or keep it open in a pinned tab.** A couple of seconds after it opens, it fetches what
+  is due: the forecast at most twice a day, alerts hourly, exchange rates daily.
+- **Check the line under Today's title.** It says when the weather last updated, or that the latest attempt failed
+  and which data you are looking at. **Update now** runs it straight away.
+- **Nothing is collected while the file is closed or the computer sleeps.**
+- **Opening dates, prices, pass rules and snow reports have no data feed.** Enter them in the app as they are
+  announced; "Keeping it current" in the main README says where.
+- **Keep a copy now and then:** Settings → Export & backup → *Download my data*.
+
 ## What works
 
 - **Every screen, in live and demo mode:** Today, Explore (list, map, compare, events), resort pages, Forecast, Trips,
   Passes & Costs (products, matrix, costs, compare, rule editor), My Season, Settings and Sources & Sync. Unknown
   resorts, trips and addresses show the app's own not-found pages.
 - **Your data stays in this browser.** Live and demo data are two separate SQLite databases (SQLite compiled to
-  WebAssembly), saved in IndexedDB a moment after each change and when the tab is hidden. On first start the curated
+  WebAssembly). Your changes are saved in IndexedDB within a second, the in-page scheduler's writes at most every
+  10 minutes, and everything is saved when the tab is hidden or closed (see "Saved data" below). On first start the curated
   catalog is loaded (`seedCatalog`, the same code as `npm run db:setup`). If a rebuilt file carries a changed catalog,
   it is re-seeded automatically. Your corrections and records are kept.
 - **Demo mode:** the first switch builds the demo season in the page, with a progress screen (about 15 s). It is
@@ -31,7 +43,8 @@ npm run standalone:verify   # re-check it in headless Chromium from its file:// 
     schema, and not be a demo database.
 - **Refresh jobs while the page is open:** in live mode and online, the same scheduler as `npm run worker` ticks once a
   minute. It fetches Open-Meteo, NWS forecasts and alerts, and Frankfurter FX, then runs status, assessments, alerts and
-  prune, each on its own cadence. A failed refresh never advances "last successful update".
+  prune, each on its own cadence. Weather is fetched every 12 h, so every daily visit gets a fresh forecast. The
+  server's default is 3 h. A failed refresh never advances "last successful update".
 - **Maps:** MapLibre GL runs from an embedded worker. Tiles come from OpenFreeMap, so they need an internet connection.
   Offline, the schematic map says so.
 - **Links and history:** URLs look like `index.html?view=map#/explore`: the app's query is the real query, and the
@@ -49,7 +62,39 @@ Measured in headless Chromium on the build machine:
 | Start, first time (includes loading the catalog) | about 1.0–1.3 s to the first rendered page |
 | Start with saved data | about 0.7–0.95 s |
 | Demo generation, first switch | about 12–13 s (`npm run demo:seed` takes about 14 s natively on the same machine) |
-| Saved data | about 0.75 MB live; the demo database is about 51 MB |
+| Saved data | about 0.75 MB live on first start (about 1.6 MB after the first prune writes 16 KB pages); the demo database is about 51 MB |
+
+### Saved data
+
+The whole live database is held in memory and saved to IndexedDB as one file, so it must stay small with daily use.
+A refresh pass writes about 40,000 hourly weather rows and up to 1,683 assessments (about 8 MB). Before this was
+limited, a year of once-a-day visits would have reached gigabytes. The single file is built with these settings
+(`standalone/build.mjs`; the rules are in `docs/scheduler.md`, "Retention"):
+
+- **Weather every 12 h** (`PISTE_WEATHER_EVERY_MIN=720`). **Only the current pass is kept whole**
+  (`PISTE_WEATHER_RETENTION_DAYS=0.25`), because no screen compares a forecast with earlier runs.
+- **Past days:** the forecast-then hours the history calendar reads (about 26 per point and day) are kept for every
+  resort for 14 days. After that they are kept only for favourites and resorts in a trip
+  (`PISTE_WEATHER_HISTORY_DAYS=14`); for other resorts the calendar says the older forecast-then is not kept. "Piste
+  estimated then" is kept for every resort and day. A past day's full assessment breakdown is kept for 14 days
+  (`PISTE_ASSESSMENT_DETAIL_DAYS=14`). After that its score, confidence and surface remain.
+- **Prune on every visit and every 6 h**, right after the refresh (`PISTE_PRUNE_EVERY_MIN=360`), then `VACUUM` with
+  16 KB pages (`PISTE_PRUNE_VACUUM=1`, `PISTE_DB_PAGE_SIZE=16384`), so the saved file shrinks too. The VACUUM took
+  about half a second on a 50–70 MB file (sql.js in Node on the build machine).
+- **Saving:** a save exports the whole database. Your own actions (forms, buttons, a manual refresh) are saved within
+  a second of finishing. The scheduler's writes (a heartbeat every minute, refresh bookkeeping, fetched data) are
+  saved at most every 10 minutes. Everything is saved when the tab is hidden or closed, or when another tab takes
+  over. Before this, the page saved after nearly every write. In headless Chromium, the first 150 s of a refresh pass
+  made 94 whole-database saves; now it makes 1, the initial save of a fresh database.
+
+Measured with once-a-day use (`src/lib/jobs/retention.sim.test.ts`, extrapolated from 2 simulated resorts to all 33,
+with the 2 default favourites):
+
+| | Before | Now |
+|---|---|---|
+| Growth per day | 13.5 MB | about 0.075 MB (each extra favourite adds about 11 KB) |
+| After 70 days | about 940 MB | about 35 MB |
+| After 200 days (projected) | about 2.7 GB | about 45 MB |
 
 ## What does not (and why)
 

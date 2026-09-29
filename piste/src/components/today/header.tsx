@@ -5,7 +5,10 @@
  */
 import Link from 'next/link'
 import { DemoBadge } from '@/components/ui/badge'
-import { Bell } from 'lucide-react'
+import { Bell, CircleCheck, Clock3, RefreshCw, TriangleAlert } from 'lucide-react'
+import { RefreshButton } from '@/components/sources/refresh-button'
+import { FRESHNESS_JOBS, type FreshnessView } from '@/lib/data/freshness'
+import { cn } from '@/lib/ui/cn'
 import { formatLocalDate } from '@/lib/domain/time'
 import type { RecommendPreset } from '@/lib/domain/recommend'
 import { DateChips } from './date-chips'
@@ -24,6 +27,7 @@ export function TodayHeader({
   presets,
   fallbackPreset,
   unread,
+  freshness,
 }: {
   today: string
   dates: string[]
@@ -35,6 +39,8 @@ export function TodayHeader({
   presets: PresetOption[]
   fallbackPreset: RecommendPreset
   unread: number
+  /** Live mode: when the data was last updated. Null in demo mode (simulated, never fetched). */
+  freshness: FreshnessView | null
 }) {
   const quick = quickRangeOf(dates, today)
   const when =
@@ -67,6 +73,7 @@ export function TodayHeader({
             </time>{' '}
             — {lead}
           </p>
+          {freshness ? <FreshnessLine f={freshness} /> : null}
         </div>
         {unread ? (
           <Link
@@ -90,5 +97,27 @@ export function TodayHeader({
         )}
       </div>
     </header>
+  )
+}
+
+const FRESHNESS_ICON = { current: CircleCheck, failed: TriangleAlert, running: RefreshCw, stale: Clock3, never: Clock3 } as const
+const FRESHNESS_TONE = { current: 'text-positive', failed: 'text-critical', running: 'text-info', stale: 'text-caution', never: 'text-caution' } as const
+
+/**
+ * "Weather updated today 07:02 · Alerts … · Exchange rates …" with an Update now button. Piste refreshes on its
+ * own (the worker, or the single-file page while it is open); this line says whether today's refresh has happened.
+ */
+function FreshnessLine({ f }: { f: FreshnessView }) {
+  const Icon = FRESHNESS_ICON[f.state]
+  return (
+    <div className="mt-3 flex flex-wrap items-start gap-x-4 gap-y-2">
+      <p role="status" className="flex max-w-[68ch] min-w-0 items-start gap-2 pt-1 text-[13.5px] leading-snug text-ink-2">
+        <Icon aria-hidden className={cn('mt-px size-4 shrink-0', FRESHNESS_TONE[f.state])} />
+        <span className="min-w-0">
+          <span className="text-ink">{f.text}.</span> <span className="text-ink-3">{f.detail}.</span>
+        </span>
+      </p>
+      <RefreshButton jobs={FRESHNESS_JOBS} label="Update the weather, alerts and exchange rates now" idleText="Update now" busyText="Updating…" size="sm" />
+    </div>
   )
 }

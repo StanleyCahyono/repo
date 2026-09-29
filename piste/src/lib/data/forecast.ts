@@ -25,13 +25,12 @@ import {
   latestRuns,
   loadResortRows,
   NOT_PERSONAL_REPORT,
-  pickPrimary,
   pointsForRuns,
   resortToday,
   toHourly,
   type DataCtx,
 } from './core'
-import { runSemantics } from './deps'
+import { assessmentThenPick, FORECAST_KEPT_FROM_META, forecastThenHours, forecastThenPick, HISTORY_POINTS, historyRunsFrom, runSemantics } from './deps'
 import { reportView, runMeta, type ReportView, type RunMeta } from './views'
 
 export type PointKey = 'base' | 'summit'
@@ -302,10 +301,12 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
   const dates = dateRange(first, last)
   const today = resortToday(resort, now)
 
-  const runWindowFrom = startOfLocalDay(addDays(first, -(MAX_FORECAST_DAYS + 1)), tz)
+  const runWindowFrom = historyRunsFrom(month, tz)
   const runWindowTo = startOfLocalDay(addDays(last, 1), tz)
-  const [tracking, reports, runs, assessments] = await Promise.all([
+  const [tracking, keptFromRow, reports, runs, assessments] = await Promise.all([
     trackingStart(ctx, resort),
+    // Set by the prune when this resort's older forecast-then is not kept (PISTE_WEATHER_HISTORY_DAYS).
+    db.select({ v: s.appMeta.value }).from(s.appMeta).where(eq(s.appMeta.key, FORECAST_KEPT_FROM_META + resortId)),
     db
       .select()
       .from(s.operationalReports)
@@ -347,18 +348,17 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
       ),
   ])
 
-  // Forecast-then: per day and point, the primary run fetched most recently BEFORE the local day started.
+  // Forecast-then: per day and point, the primary run fetched most recently BEFORE the local day started (the rule and
+  // the hours read are shared with the prune job, which keeps exactly these).
   const picks: { date: string; point: PointKey; run: WeatherRunRow; from: string; to: string }[] = []
   const runsByPoint = groupBy(runs, (r) => r.pointKey)
+  const keptFrom = keptFromRow[0]?.v ?? null
+  const notKept = (date: string) => !!keptFrom && date < keptFrom
   for (const date of dates) {
-    if (date > today) continue
-    const dayStart = startOfLocalDay(date, tz)
-    for (const point of ['base', 'summit'] as const) {
-      const before = (runsByPoint.get(point) ?? []).filter((r) => r.fetchedAt < dayStart)
-      // Latest run of each provider before the day, then the same provider preference as elsewhere.
-      const latestPerProvider = [...groupBy(before, (r) => r.provider).values()].map((list) => list.sort((a, b) => b.fetchedAt.localeCompare(a.fetchedAt) || b.id - a.id)[0])
-      const run = pickPrimary(latestPerProvider)
-      if (run) picks.push({ date, point, run, from: dayStart, to: addHours(endOfLocalDay(date, tz), 1) })
+    if (date > today || notKept(date)) continue
+    for (const point of HISTORY_POINTS) {
+      const run = forecastThenPick(runsByPoint.get(point) ?? [], date, tz)
+      if (run) picks.push({ date, point, run, ...forecastThenHours(date, tz) })
     }
   }
   const pointRows = new Map<string, HourlyWeather[]>()
@@ -443,16 +443,16 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
     }
     const forecastThen = { base: then('base'), summit: then('summit') }
 
-    const a: ConditionsAssessmentRow | undefined = (assessByDate.get(date) ?? [])
-      .filter((x) => x.computedAt < dayStart)
-      .sort((x, y) => y.computedAt.localeCompare(x.computedAt) || y.id - x.id)[0]
+    const a: ConditionsAssessmentRow | undefined = assessmentThenPick(assessByDate.get(date) ?? [], dayStart)
     const assessmentThen: AssessmentThen | null = a
       ? { id: a.id, mode: a.mode, score: a.score, scoreKind: a.scoreKind, descriptor: a.descriptor, confidence: a.confidence, surface: a.surface, computedAt: a.computedAt, leadDays: a.leadDays, modelVersion: a.modelVersion }
       : null
 
     const tracked = state === 'tracked' || state === 'today'
-    const gap = state === 'tracked' && !report && !forecastThen.base && !forecastThen.summit && !assessmentThen && !later.length
+    // A day whose forecast-then was deliberately not kept is not a collection gap.
+    const gap = state === 'tracked' && !notKept(date) && !report && !forecastThen.base && !forecastThen.summit && !assessmentThen && !later.length
     if (state === 'before-tracking') notes.push('Before tracking started — no history is shown for this day')
+    if (tracked && notKept(date)) notes.push('Forecast-then for this day is not kept (older history is kept for favourites and trip resorts)')
     if (tracked && !report) notes.push('No report stored for this day')
     return {
       date,
@@ -480,7 +480,10 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
     gaps: days.filter((d) => d.gap).map((d) => d.date),
     notes: [
       'Forecast-then is the stored run fetched before the day started; it is never recomputed from later data.',
-      'Older runs are pruned to the first run of each day, so older forecasts may have a longer lead time.',
+      'For older days only the run and hours used here are kept; other runs are pruned.',
+      ...(keptFrom && first < keptFrom
+        ? [`Forecast-then before ${keptFrom} is not kept for this resort — favourites and resorts in a trip keep their whole history.`]
+        : []),
     ],
   }
 }

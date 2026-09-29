@@ -8,9 +8,10 @@
  * stored, published lift hours, and official alerts.
  *
  * History: a new row is inserted only when the material result changed (fingerprint of the output plus the
- * report/status evidence it used). Earlier rows are never updated, so the history calendar can show what the app
- * estimated at the time. Weather-run ids are not part of the fingerprint — every refresh creates a new run, and a
- * row is written when the new weather actually changes the result.
+ * report/status evidence it used). A score is never rewritten, so the history calendar can show what the app
+ * estimated at the time; the prune (./retention.ts) deletes superseded rows no screen reads and empties the unread
+ * breakdown of rows it keeps for their headline. Weather-run ids are not part of the fingerprint — every refresh
+ * creates a new run, and a row is written when the new weather actually changes the result.
  */
 import { and, asc, desc, eq, gte, inArray } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
@@ -42,11 +43,12 @@ import type { OfficialAlert } from '@/lib/providers/types'
 import { isPersonalReport } from './reports'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
 import { errorMessage, hashJson, selectResorts } from './util'
+import { PRIMARY_WEATHER_PROVIDERS } from './retention'
 import { latestOkRuns, loadRunSeries, type StoredSeries } from './weather'
 
 export const MAX_HORIZON_DAYS = 16
 /** Providers whose runs are the primary forecast, in preference order; any other stored provider is an alternate. */
-export const PRIMARY_WEATHER_PROVIDERS = ['open-meteo', 'demo'] as const
+export { PRIMARY_WEATHER_PROVIDERS }
 
 type Material = Pick<
   ConditionsAssessmentRow,

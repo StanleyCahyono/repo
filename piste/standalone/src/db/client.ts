@@ -3,8 +3,8 @@
  *
  * Same exports and the same contract — `getDb(mode)` returns a Drizzle libsql database, live and demo are two separate
  * databases that never share a row — but each database is SQLite in WebAssembly (sql.js), kept in memory and saved to
- * IndexedDB about a second after each write (and when the page is hidden). Standalone-only helpers (export, import,
- * reset, hold) are exported for the runtime.
+ * IndexedDB within a second of your changes, at most every 10 minutes for the in-page scheduler's writes, and always
+ * when the page is hidden (see deferSaves / saveSoon). Standalone-only helpers (export, import, reset, hold) are exported for the runtime.
  */
 import initSqlJs, { type Database, type SqlJsStatic } from 'sql.js'
 import wasmBytes from 'sql.js/dist/sql-wasm-browser.wasm'
@@ -46,9 +46,13 @@ interface Handle {
   /** While true, writes do not schedule saves (demo generation saves once at the end). */
   hold: boolean
   timer: ReturnType<typeof setTimeout> | null
+  /** performance.now() at which the pending save timer fires. */
+  timerDue: number
   saving: Promise<void> | null
   savedAt: string | null
   size: number
+  /** performance.now() of the last save (or of opening): background saves are spaced from it. */
+  lastSaveAt: number
 }
 
 let sqlPromise: Promise<SqlJsStatic> | null = null
@@ -66,17 +70,53 @@ export function onSave(fn: SaveListener) {
   return () => saveListeners.delete(fn)
 }
 
-/** Saves trail the last write by this much (a burst of statements from one action becomes one save). */
+/** Saves trail your last write by this much (a burst of statements from one action becomes one save). */
 const SAVE_DELAY_MS = 300
+/**
+ * Every save exports the whole database. Writes made while saves are deferred — the in-page scheduler's tick (a
+ * heartbeat every minute, refresh bookkeeping, fetched weather), or an action or API call still running (a manual
+ * refresh writes for minutes) — are saved at most this often. A finished action calls saveSoon(), and everything is
+ * saved when the page is hidden or closed, or another tab takes over.
+ */
+const DEFERRED_SAVE_MS = 10 * 60_000
+
+let deferring = 0
+/** Defer saves while some work runs; call the returned function when it ends (then saveSoon() for your actions). */
+export function deferSaves(): () => void {
+  deferring++
+  let ended = false
+  return () => {
+    if (ended) return
+    ended = true
+    deferring--
+  }
+}
+
+function saveIn(h: Handle, delayMs: number, debounce: boolean) {
+  const due = performance.now() + delayMs
+  // A deferred write never postpones a save that is already due sooner.
+  if (h.timer && !debounce && h.timerDue <= due) return
+  if (h.timer) clearTimeout(h.timer)
+  h.timerDue = due
+  h.timer = setTimeout(() => {
+    h.timer = null
+    void save(h)
+  }, delayMs)
+}
 
 function markDirty(h: Handle) {
   h.dirty = true
   if (h.hold) return
-  if (h.timer) clearTimeout(h.timer)
-  h.timer = setTimeout(() => {
-    h.timer = null
-    void save(h)
-  }, SAVE_DELAY_MS)
+  if (deferring > 0) saveIn(h, Math.max(SAVE_DELAY_MS, h.lastSaveAt + DEFERRED_SAVE_MS - performance.now()), false)
+  else saveIn(h, SAVE_DELAY_MS, true)
+}
+
+/**
+ * Save unsaved changes within a second — after one of your actions finishes (server actions, API calls), including
+ * any scheduler writes that happened meanwhile.
+ */
+export function saveSoon() {
+  for (const h of opened.values()) if (h.dirty && !h.hold) saveIn(h, SAVE_DELAY_MS, true)
 }
 
 async function exportRaw(client: SqlJsClient): Promise<Uint8Array> {
@@ -103,6 +143,7 @@ async function save(h: Handle): Promise<void> {
       await saveDatabase(h.mode, { bytes, schemaId: BUILD_INFO.schemaId, savedAt, size: bytes.byteLength })
       h.savedAt = savedAt
       h.size = bytes.byteLength
+      h.lastSaveAt = performance.now()
       for (const l of saveListeners) l({ mode: h.mode, ok: true })
     } catch (e) {
       h.dirty = true
@@ -124,7 +165,7 @@ async function wrap(mode: AppMode, raw: Database, fresh: boolean): Promise<Handl
     client.close()
     throw new SchemaMismatchError(mode, status.detail, bytes)
   }
-  const h: Handle = { mode, client, db, dirty: false, hold: false, timer: null, saving: null, savedAt: null, size: 0 }
+  const h: Handle = { mode, client, db, dirty: false, hold: false, timer: null, timerDue: 0, saving: null, savedAt: null, size: 0, lastSaveAt: performance.now() }
   client.hooks.onWrite = () => markDirty(h)
   // A fresh demo database is not worth saving until the generator has filled it.
   if (status.kind === 'upgraded' || (status.kind === 'fresh' && mode === 'live')) markDirty(h)

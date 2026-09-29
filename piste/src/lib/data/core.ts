@@ -35,7 +35,7 @@ import type {
 import type { HourlyWeather } from '@/lib/providers/types'
 import { localDateOf, seasonIdFor } from '@/lib/domain/time'
 import { provenance, type Provenance, type ScoringMode } from '@/lib/domain/types'
-import { PRIMARY_WEATHER_PROVIDERS, runSemantics } from './deps'
+import { pickPrimaryRun, runSemantics } from './deps'
 
 /** What every loader needs: the per-request context from getCtx() (or an equivalent object in tests/scripts). */
 export type DataCtx = Pick<Ctx, 'db' | 'now' | 'today' | 'prefs' | 'mode'>
@@ -589,20 +589,12 @@ export async function reportsBetween(
     )
 }
 
-const providerRank = (p: string) => {
-  const i = (PRIMARY_WEATHER_PROVIDERS as readonly string[]).indexOf(p)
-  return i === -1 ? 99 : i
-}
-
 /**
  * Pick the run used as "the forecast" for a point from the latest ok run per provider: primary provider first,
- * then longer horizon, then most recent — the same rule the assessments job uses.
+ * then longer horizon, then most recent — the same rule the assessments job and the prune job use.
  */
 export function pickPrimary(runs: readonly WeatherRunRow[]): WeatherRunRow | null {
-  const sorted = [...runs].sort(
-    (a, b) => providerRank(a.provider) - providerRank(b.provider) || (b.horizonDays ?? 0) - (a.horizonDays ?? 0) || b.fetchedAt.localeCompare(a.fetchedAt) || b.id - a.id,
-  )
-  return sorted[0] ?? null
+  return pickPrimaryRun(runs)
 }
 
 /** Latest successful run per resort / point (primary provider preferred), fetched by `now`. */

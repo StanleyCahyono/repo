@@ -40,7 +40,11 @@ anything but a positive number) fall back to the default. See `docs/scheduler.md
 | `PISTE_PRUNE_EVERY_MIN` | `1440` | Retention pruning. |
 | `PISTE_WORKER_TICK_SECONDS` | `60` | How often the worker checks for due jobs (seconds). |
 | `PISTE_SCHEDULER_JITTER` | `0.1` | Random jitter per due time as a fraction of the cadence (0 ≤ value < 1; `0.1` = ±10 %), so requests do not align on the hour. |
-| `PISTE_WEATHER_RETENTION_DAYS` | `14` | Every weather run from the last N days is kept; older runs keep the first successful run per resort, point, provider and resort-local day. |
+| `PISTE_WEATHER_RETENTION_DAYS` | `14` | Every weather run from the last N days (fractions allowed: `0.25` = 6 h) is kept whole. Older runs keep only what a screen reads: the latest run per resort, point and provider, and the hours each past day's "forecast then" uses (see `docs/scheduler.md`, retention). |
+| `PISTE_WEATHER_HISTORY_DAYS` | unset (every day) | Size limit: past days' "forecast then" is kept for every resort for N days, then only for favourites and resorts in a trip. The history calendar says so for the others. The single-file build uses `14`. |
+| `PISTE_ASSESSMENT_DETAIL_DAYS` | unset (every day) | Size limit: past days keep their newest assessment with its breakdown for N days, then only what Piste estimated before the day (score, confidence, coverage, surface). The single-file build uses `14`. |
+| `PISTE_PRUNE_VACUUM` | unset | `1` runs `VACUUM` after a prune that deleted rows, so the database file shrinks (the single-file build saves the whole file). |
+| `PISTE_DB_PAGE_SIZE` | unset | Page size (bytes: 4096–65536) applied by that `VACUUM`; ignored in WAL mode. The single-file build uses `16384`. |
 | `PISTE_HEALTH_MAX_HEARTBEAT_MIN` | `5` (worker) / `240` (cron) | Minutes without a scheduler heartbeat after which `/api/health` reports the scheduler as stale (`?strict=1` answers 503). |
 
 ## Backups (`npm run backup` / `npm run restore`)

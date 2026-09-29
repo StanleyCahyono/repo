@@ -11,7 +11,7 @@
  * - Grid coordinates/elevation, units and model run time are stored exactly as the provider returned them;
  *   a missing model run time stays null (never inferred from the response time).
  */
-import { and, desc, eq, inArray, lt, lte, notInArray } from 'drizzle-orm'
+import { and, desc, eq, lte, notInArray } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
 import { sourceRecords, weatherAlerts, weatherPoints, weatherRuns } from '@/lib/db/schema'
 import type { ResortRow, WeatherRunRow } from '@/lib/db/rows'
@@ -27,7 +27,7 @@ import type {
   WeatherSeries,
 } from '@/lib/providers/types'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
-import { canonicalInstant, chunk, daysBefore, errorMessage, selectResorts, truncate } from './util'
+import { canonicalInstant, chunk, errorMessage, selectResorts, truncate } from './util'
 
 export type IntervalSemantics = WeatherSeries['intervalSemantics']
 
@@ -386,47 +386,9 @@ export async function refreshOfficialAlerts(ctx: JobContext): Promise<JobWorkRes
 }
 
 // ---------------------------------------------------------------------------
-// Retention
+// Retention (rules in ./retention.ts, shared with the history reader)
 
-export interface PruneResult {
-  runsDeleted: number
-  runsKept: number
-}
-
-/**
- * Keep every run from the last `keepDays` days. Older runs: keep the first successful run per
- * resort / point / provider / resort-local day (forecasts made before their valid time stay available for
- * verification); delete the rest, including old error rows. Rows are only ever deleted — never rewritten.
- */
-export async function pruneWeatherRuns(db: Db, now: string, keepDays = DEFAULT_WEATHER_RETENTION_DAYS): Promise<PruneResult> {
-  const cutoff = daysBefore(now, keepDays)
-  const old = await db
-    .select({
-      id: weatherRuns.id,
-      resortId: weatherRuns.resortId,
-      pointKey: weatherRuns.pointKey,
-      provider: weatherRuns.provider,
-      fetchedAt: weatherRuns.fetchedAt,
-      timezone: weatherRuns.timezone,
-      status: weatherRuns.status,
-    })
-    .from(weatherRuns)
-    .where(lt(weatherRuns.fetchedAt, cutoff))
-  const firstOfDay = new Map<string, { id: number; fetchedAt: string }>()
-  for (const r of old) {
-    if (r.status !== 'ok') continue
-    const k = `${r.resortId}|${r.pointKey}|${r.provider}|${localDateOf(r.fetchedAt, r.timezone)}`
-    const cur = firstOfDay.get(k)
-    if (!cur || r.fetchedAt < cur.fetchedAt || (r.fetchedAt === cur.fetchedAt && r.id < cur.id)) firstOfDay.set(k, { id: r.id, fetchedAt: r.fetchedAt })
-  }
-  const keep = new Set([...firstOfDay.values()].map((v) => v.id))
-  const doomed = old.filter((r) => !keep.has(r.id)).map((r) => r.id)
-  for (const ids of chunk(doomed, 400)) {
-    await db.delete(weatherPoints).where(inArray(weatherPoints.runId, ids))
-    await db.delete(weatherRuns).where(inArray(weatherRuns.id, ids))
-  }
-  return { runsDeleted: doomed.length, runsKept: keep.size }
-}
+export { pruneWeatherHistory as pruneWeatherRuns, type WeatherPruneResult as PruneResult } from './retention'
 
 // ---------------------------------------------------------------------------
 // Reading back

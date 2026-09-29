@@ -6,6 +6,7 @@
  *   data is rendered (so `startTransition(async () => { await action() })` stays pending until then);
  * - redirect() inside the action navigates instead of surfacing as an error.
  */
+import { deferSaves, saveSoon } from '../db/client'
 import { isRedirectError } from './errors'
 import { go, pendingRefresh } from './router'
 
@@ -14,6 +15,8 @@ let queue: Promise<unknown> = Promise.resolve()
 export function wrapAction<A extends unknown[], R>(fn: (...args: A) => Promise<R>, name: string): (...args: A) => Promise<R> {
   const wrapped = (...args: A): Promise<R> => {
     const run = async (): Promise<R> => {
+      // Writes save once the action is done (within a second), not after every statement pause.
+      const endDeferral = deferSaves()
       try {
         const result = await fn(...args)
         const refreshing = pendingRefresh()
@@ -25,6 +28,9 @@ export function wrapAction<A extends unknown[], R>(fn: (...args: A) => Promise<R
           return undefined as R
         }
         throw e
+      } finally {
+        endDeferral()
+        saveSoon()
       }
     }
     const p = queue.then(run, run)

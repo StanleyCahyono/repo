@@ -11,6 +11,7 @@
  */
 import 'server-only'
 import type { Ctx } from '@/lib/context'
+import { getFreshness, type FreshnessView } from '@/lib/data/freshness'
 import { getPassesView } from '@/lib/data/passes'
 import { listResortSummaries, type ResortSummary } from '@/lib/data/resorts'
 import { defaultPreset, getRecommendation, getTodayView, type TodayView } from '@/lib/data/today'
@@ -149,6 +150,8 @@ export interface TodayData {
   units: UnitPrefs
   /** Every favourite lacks stored weather. */
   weatherMissing: boolean
+  /** When the data was last updated (live mode); null in demo mode. */
+  freshness: FreshnessView | null
 }
 
 export const cardKey = (resortId: string, date: string) => `${resortId}|${date}`
@@ -343,10 +346,11 @@ function finderInputs(ctx: Ctx, mine: PassWatch['mine']): FinderInputs {
 
 export async function loadToday(ctx: Ctx, p: TodayParams): Promise<TodayData> {
   const finderDates = finderRange(p.finder, ctx.today)
-  const [view, finderRec, trips] = await Promise.all([
+  const [view, finderRec, trips, freshness] = await Promise.all([
     getTodayView(ctx, { date: p.date, range: p.range, preset: p.preset }),
     getRecommendation(ctx, { range: finderDates, preset: 'custom' }),
     tripSummaries(ctx),
+    getFreshness(ctx),
   ])
   const [cards, pw] = await Promise.all([optionCards(ctx, view), passWatch(ctx, view)])
   const prefs = ctx.prefs
@@ -391,5 +395,6 @@ export async function loadToday(ctx: Ctx, p: TodayParams): Promise<TodayData> {
     onboarding,
     units: prefs.units,
     weatherMissing: view.watchlist.length > 0 && view.watchlist.every((w) => !w.summary.freshness.weatherFetchedAt),
+    freshness,
   }
 }

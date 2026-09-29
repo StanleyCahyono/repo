@@ -40,6 +40,20 @@ const ENV = {
   PISTE_STANDALONE: '1',
   // Browsers cannot read other sites' pages (CORS): official report parsers and the link checker. Duffel needs a secret.
   PISTE_DISABLED_PROVIDERS: 'alta-official,greek-peak-official,link-check,duffel',
+  // The whole database lives in memory and is saved as one file, so it has to stay small (see README "Saved data").
+  // Weather every 12 h: every daily visit fetches a fresh forecast, and a page left open refreshes twice a day.
+  PISTE_WEATHER_EVERY_MIN: '720',
+  // No screen compares a forecast with earlier runs, so only the current pass is kept whole (6 h < the 12 h cadence).
+  PISTE_WEATHER_RETENTION_DAYS: '0.25',
+  // Past days: forecast-then for every resort for 14 days, then for favourites and trip resorts only; assessment
+  // breakdowns for 14 days, then only what Piste estimated before the day.
+  PISTE_WEATHER_HISTORY_DAYS: '14',
+  PISTE_ASSESSMENT_DETAIL_DAYS: '14',
+  // Prune on every visit (after the refresh in the same tick) and every 6 h while open, then VACUUM so the saved
+  // file shrinks; 16 KB pages pack the 1–3 KB assessment rows better than SQLite's default 4 KB.
+  PISTE_PRUNE_EVERY_MIN: '360',
+  PISTE_PRUNE_VACUUM: '1',
+  PISTE_DB_PAGE_SIZE: '16384',
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

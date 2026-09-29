@@ -2,6 +2,7 @@
  * The app's API routes (src/app/api/**\/route.ts) run in the browser: fetch('/api/…') and export links call the same
  * handlers with a Request built from the call. Downloads become Blob files with the handler's Content-Disposition name.
  */
+import { deferSaves, saveSoon } from '../db/client'
 import { NextRequest } from '../shims/next-server'
 import { findApiRoute } from './routes'
 import { notify } from './notices'
@@ -18,11 +19,18 @@ export async function callApi(url: AppUrl, init: RequestInit = {}): Promise<Resp
   const handler = route.module[method] as Handler | undefined
   if (typeof handler !== 'function') return Response.json({ error: `Method ${method} not allowed` }, { status: 405, headers: { allow: Object.keys(route.module).filter((k) => /^[A-Z]+$/.test(k)).join(', ') } })
   const req = new NextRequest(`${ORIGIN}${url.pathname}${url.search}`, { ...init, method })
+  // A write through an API route (e.g. a manual refresh, which writes for minutes) saves once it is done.
+  const endDeferral = method === 'GET' ? null : deferSaves()
   try {
     return await handler(req, { params: Promise.resolve({}) })
   } catch (e) {
     console.error(e)
     return Response.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 })
+  } finally {
+    if (endDeferral) {
+      endDeferral()
+      saveSoon()
+    }
   }
 }
 

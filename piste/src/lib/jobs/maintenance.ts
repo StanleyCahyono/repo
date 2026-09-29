@@ -1,5 +1,5 @@
 /** Link checks, FX rates and retention pruning. */
-import { desc, eq, inArray, lt } from 'drizzle-orm'
+import { desc, eq, inArray, lt, sql } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
 import {
   airports,
@@ -22,6 +22,7 @@ import {
 import { successTargets } from './success'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
 import { chunk, daysBefore, defaultSleep, errorMessage } from './util'
+import { historyPolicy, pruneAssessments } from './retention'
 import { DEFAULT_WEATHER_RETENTION_DAYS, pruneWeatherRuns, recordFetches } from './weather'
 
 // ---------------------------------------------------------------------------
@@ -153,11 +154,17 @@ export interface PruneOptions {
   weatherKeepDays?: number
   sourceRecordKeepDays?: number
   refreshRunKeepDays?: number
+  /**
+   * VACUUM after a pass that deleted rows, so the database file shrinks instead of keeping free pages
+   * (default: PISTE_PRUNE_VACUUM=1; the single-file build sets it because it saves the whole file).
+   */
+  vacuum?: boolean
 }
 
 /**
- * Daily retention: weather runs (see pruneWeatherRuns), old source-record fetch logs (the latest record per
- * adapter/resort/url is always kept), old refresh-run bookkeeping, and expired official alerts.
+ * Daily retention: weather runs and assessments (rules in ./retention.ts — only what a screen, the history calendar or
+ * an alert still reads is kept), old source-record fetch logs (the latest record per adapter/resort/url is always
+ * kept), old refresh-run bookkeeping, and expired official alerts. Item `written` counts are rows deleted.
  */
 export async function pruneAll(ctx: JobContext, opts: PruneOptions = {}): Promise<JobWorkResult> {
   const { db, now } = ctx
@@ -170,7 +177,22 @@ export async function pruneAll(ctx: JobContext, opts: PruneOptions = {}): Promis
     }
   }
   const envDays = Number(process.env.PISTE_WEATHER_RETENTION_DAYS)
-  await step('weather-runs', async () => (await pruneWeatherRuns(db, now, opts.weatherKeepDays ?? (envDays > 0 ? envDays : DEFAULT_WEATHER_RETENTION_DAYS))).runsDeleted)
+  const keepDays = opts.weatherKeepDays ?? (envDays > 0 ? envDays : DEFAULT_WEATHER_RETENTION_DAYS)
+  const policy = historyPolicy()
+  let weatherHours = 0
+  await step('weather-runs', async () => {
+    const r = await pruneWeatherRuns(db, now, keepDays, policy)
+    weatherHours = r.pointsDeleted
+    return r.runsDeleted
+  })
+  if (weatherHours > 0) items.push({ key: 'weather-hours', target: null, ok: true, written: weatherHours })
+  let compacted = 0
+  await step('assessments', async () => {
+    const r = await pruneAssessments(db, now, policy)
+    compacted = r.compacted
+    return r.deleted
+  })
+  if (compacted > 0) items.push({ key: 'assessment-details', target: null, ok: true, written: compacted })
   await step('source-records', async () => {
     const cutoff = daysBefore(now, opts.sourceRecordKeepDays ?? 30)
     const rows = await db
@@ -225,5 +247,16 @@ export async function pruneAll(ctx: JobContext, opts: PruneOptions = {}): Promis
     return doomed.length
   })
   await step('weather-alerts', async () => (await db.delete(weatherAlerts).where(lt(weatherAlerts.ends, now)).returning({ id: weatherAlerts.id })).length)
+  const vacuum = opts.vacuum ?? process.env.PISTE_PRUNE_VACUUM === '1'
+  if (vacuum && items.some((i) => i.written > 0)) {
+    // Outside any transaction (SQLite refuses VACUUM inside one). Not counted as rows written. A page size set with
+    // PISTE_DB_PAGE_SIZE takes effect here (not in WAL mode): larger pages pack the 2–4 KB assessment rows better.
+    await step('vacuum', async () => {
+      const pageSize = Number(process.env.PISTE_DB_PAGE_SIZE)
+      if ([4096, 8192, 16384, 32768, 65536].includes(pageSize)) await db.run(sql.raw(`PRAGMA page_size = ${pageSize}`))
+      await db.run(sql`VACUUM`)
+      return 0
+    })
+  }
   return { items }
 }

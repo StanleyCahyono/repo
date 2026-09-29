@@ -18,6 +18,31 @@ what your exact pass covers on your dates, what a day or trip really costs, and 
 - **Full app (Node.js):** the quick start below. It adds a database file on disk, the background worker, scripted
   backups and optional sign-in for use from other devices.
 
+## Keeping it current
+
+**Weather, alerts and exchange rates update themselves.**
+
+- **Single file:** it updates whenever it is open and online, and nothing is collected while it is closed.
+  - **Open it once a day.** A couple of seconds after it opens it fetches what is due: the forecast at most twice a
+    day, alerts hourly, exchange rates daily.
+  - **Check the line under Today's title.** It says when the weather last updated, or that the latest attempt
+    failed and which data you are looking at. **Update now** runs it on demand.
+  - **Or keep it open in a pinned tab.** It then refreshes on its own while the computer is awake.
+- **Full app:** `npm run worker`, or `npm run refresh` from cron, on a computer that stays on (see
+  [`docs/scheduler.md`](docs/scheduler.md)).
+
+**Opening dates, prices, pass rules and reports have no data feed.** They change a few times a season; when one is
+announced, enter it where you see it. Each entry is labelled as yours, with its source:
+
+- **Opening date, hours, terrain or links of a resort:** Settings → Catalog corrections → *Correct a catalog fact*.
+- **Pass access rules and blackout dates:** Passes & Costs → check the pass, resort and date → *Enter the rule*, or
+  *Enter a new version*. The new version is added and the old one is kept.
+- **A price you were quoted:** Passes & Costs → Products & prices → *Add estimate*. It is shown as your estimate,
+  never as a published price.
+- **An official snow report:** the resort's page → Conditions → *Save report*, with the report's link.
+- **Events** come from the catalog and cannot be added in the app yet. Save one to a trip, or add it to the trip as
+  your own item.
+
 ## Screens
 
 | Route | What it is for |
@@ -37,7 +62,7 @@ what your exact pass covers on your dates, what a day or trip really costs, and 
 Requires Node.js 22.12 or newer.
 
 ```bash
-cd piste
+cd piste                # the folder unzipped from piste-source.zip
 npm install
 npm run db:setup        # create data/piste.db and load the curated catalog
 npm run dev             # http://localhost:3000

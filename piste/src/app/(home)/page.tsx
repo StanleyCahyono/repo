@@ -64,6 +64,7 @@ export default async function TodayPage({ searchParams }: { searchParams: Promis
       presets={data.presets}
       fallbackPreset={data.defaultPreset}
       unread={alerts.length}
+      freshness={data.freshness}
     />
   )
   const notices = (

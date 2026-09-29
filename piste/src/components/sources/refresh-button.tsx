@@ -45,23 +45,48 @@ function describe(res: Response, body: Summary & { error?: string }): Feedback {
   return { tone: 'ok', text: `Done — ${body.itemsWritten ?? 0} written${body.itemsWritten ? '' : ' (nothing changed)'}.` }
 }
 
+const JOB_LABEL: Record<string, string> = { weather: 'Weather', 'nws-alerts': 'Alerts', fx: 'Exchange rates', reports: 'Official reports', links: 'Links' }
+
+/** Several jobs run one after another: one line for all of them, naming only the ones that did not go well. */
+function combine(results: { job: string; fb: Feedback; written: number }[]): Feedback {
+  const bad = results.filter((r) => r.fb && r.fb.tone !== 'ok')
+  if (!bad.length) {
+    const written = results.reduce((n, r) => n + r.written, 0)
+    return { tone: 'ok', text: written ? `Updated — ${written} written.` : 'Up to date — nothing changed.' }
+  }
+  return {
+    tone: bad.some((r) => r.fb!.tone === 'error') ? 'error' : 'warn',
+    text: bad.map((r) => `${JOB_LABEL[r.job] ?? r.job}: ${r.fb!.text}`).join(' '),
+  }
+}
+
 export function RefreshButton({
   job,
+  jobs,
   target = null,
   label,
+  idleText = 'Refresh',
+  busyText = 'Refreshing…',
   disabledReason,
   size = 'md',
   className,
 }: {
-  job: string
+  /** One job to run. */
+  job?: string
+  /** Several jobs, run one after another (overrides `job`). */
+  jobs?: readonly string[]
   target?: string | null
   /** Accessible name, e.g. "Refresh weather for Alta". */
   label: string
+  /** Visible button text. */
+  idleText?: string
+  busyText?: string
   /** When set, the button is disabled and this explains why. */
   disabledReason?: string | null
   size?: 'sm' | 'md'
   className?: string
 }) {
+  const list = jobs ?? (job ? [job] : [])
   const router = useRouter()
   const toast = useToast()
   const [busy, setBusy] = useState(false)
@@ -72,23 +97,27 @@ export function RefreshButton({
     setBusy(true)
     setFeedback(null)
     try {
-      const res = await fetch('/api/refresh', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ job, target }),
-      })
-      reportNetworkOk()
-      let body: Summary & { error?: string } = {}
-      try {
-        body = await res.json()
-      } catch {
-        body = {}
+      const results: { job: string; fb: Feedback; written: number }[] = []
+      for (const j of list) {
+        const res = await fetch('/api/refresh', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ job: j, target }),
+        })
+        reportNetworkOk()
+        let body: Summary & { error?: string } = {}
+        try {
+          body = await res.json()
+        } catch {
+          body = {}
+        }
+        if (res.status === 401) {
+          setFeedback({ tone: 'error', text: 'Signed out — sign in again, then retry.' })
+          return
+        }
+        results.push({ job: j, fb: describe(res, body), written: res.ok ? (body.itemsWritten ?? 0) : 0 })
       }
-      if (res.status === 401) {
-        setFeedback({ tone: 'error', text: 'Signed out — sign in again, then retry.' })
-        return
-      }
-      const fb = describe(res, body)
+      const fb = results.length === 1 ? results[0].fb : combine(results)
       setFeedback(fb)
       if (fb) toast.show(`${label}: ${fb.text}`, { tone: fb.tone === 'ok' ? 'success' : fb.tone === 'error' ? 'error' : 'info', durationMs: 6000 })
       startTransition(() => router.refresh())
@@ -100,21 +129,21 @@ export function RefreshButton({
     }
   }
 
-  const id = `refresh-${job}-${target ?? 'all'}`
+  const id = `refresh-${list.join('-') || 'none'}-${target ?? 'all'}`
   return (
     <div className={cn('flex min-w-0 flex-col items-start gap-1', className)}>
       <Button
         variant="secondary"
         size={size}
         onClick={refresh}
-        disabled={busy || !!disabledReason}
+        disabled={busy || !!disabledReason || !list.length}
         aria-label={label}
         aria-describedby={feedback || disabledReason ? `${id}-fb` : undefined}
         title={disabledReason ?? undefined}
         className={cn(size === 'md' ? 'min-h-11 md:min-h-0' : 'min-h-11 md:min-h-8')}
       >
         {busy ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <RefreshCw aria-hidden className="size-4" />}
-        {busy ? 'Refreshing…' : 'Refresh'}
+        {busy ? busyText : idleText}
       </Button>
       <p id={`${id}-fb`} aria-live="polite" className={cn('max-w-[36ch] text-[12.5px] leading-snug', !feedback && !disabledReason && 'sr-only', feedback?.tone === 'error' ? 'text-critical' : feedback?.tone === 'warn' ? 'text-caution' : feedback ? 'text-positive' : 'text-ink-3')}>
         {feedback?.text ?? disabledReason ?? ''}

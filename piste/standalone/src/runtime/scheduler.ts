@@ -12,7 +12,8 @@ import { defaultDeps } from '@/lib/jobs/deps'
 import { reapInterruptedScheduledRuns } from '@/lib/jobs/runner'
 import { cadencesFromEnv, newTickState, tick } from '@/lib/jobs/schedule'
 import { setMeta } from '@/lib/jobs/util'
-import { getDb } from '../db/client'
+import { deferSaves, getDb } from '../db/client'
+import { scheduleRefresh } from './router'
 import { cookieStore } from '../shims/next-headers'
 
 let timer: ReturnType<typeof setTimeout> | null = null
@@ -27,6 +28,9 @@ const live = () => cookieStore.get(MODE_COOKIE)?.value !== 'demo'
 async function once() {
   if (stopped || busy || !live() || !navigator.onLine) return
   busy = true
+  // The tick's writes (heartbeat every minute, refresh bookkeeping, fetched data) are saved at most every 10 minutes,
+  // not one whole-database export per minute; see ../db/client.ts.
+  const endDeferral = deferSaves()
   try {
     const db = await getDb('live')
     if (!started) {
@@ -35,10 +39,19 @@ async function once() {
       await setMeta(db, 'scheduler.startedAt', clock(), clock())
       await setMeta(db, 'scheduler.cadences', JSON.stringify(cadences), clock())
     }
-    await tick({ db, deps: defaultDeps(), cadences, clock, state, log: (line) => console.debug(`[piste scheduler] ${line}`) })
+    // A tick with nothing due finishes at once. One that is still going after a moment is running a job (a weather
+    // pass takes minutes: api.weather.gov is paced at one request a second), so redraw to show "Updating…" meanwhile.
+    const showRunning = setTimeout(() => void scheduleRefresh(), 1500)
+    const ran = await tick({ db, deps: defaultDeps(), cadences, clock, state, log: (line) => console.debug(`[piste scheduler] ${line}`) }).finally(() =>
+      clearTimeout(showRunning),
+    )
+    // Something ran (new data, or an honest failure): redraw the open page so Today's "updated" line and the data
+    // on screen follow without a navigation. Nothing due means nothing to redraw.
+    if (ran.length) void scheduleRefresh()
   } catch (e) {
     console.warn('[piste scheduler] tick failed', e)
   } finally {
+    endDeferral()
     busy = false
   }
 }

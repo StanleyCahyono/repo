@@ -57,10 +57,10 @@ WantedBy=multi-user.target
 | `alerts` | after every refresh pass | — | Evaluates alert rules → in-app alerts. |
 | `fx` | daily | `PISTE_FX_EVERY_MIN` | ECB reference rates for every currency in use. |
 | `links` | daily | `PISTE_LINKS_EVERY_MIN` | Re-checks links older than 20 h (≤ 300 per run, 250 ms apart). |
-| `prune` | daily | `PISTE_PRUNE_EVERY_MIN` | Retention (below). |
+| `prune` | daily | `PISTE_PRUNE_EVERY_MIN` | Retention (below). The single-file build prunes every 6 h and on every visit. |
 
 Other settings: `PISTE_WORKER_TICK_SECONDS` (60), `PISTE_SCHEDULER_JITTER` (0.1 = ±10 % of each cadence, so
-requests do not align on the hour; 0 ≤ value < 1), `PISTE_WEATHER_RETENTION_DAYS` (14), `PISTE_DISABLED_PROVIDERS`
+requests do not align on the hour; 0 ≤ value < 1), `PISTE_WEATHER_RETENTION_DAYS` (14; retention settings below), `PISTE_DISABLED_PROVIDERS`
 (comma-separated ids of providers the jobs must not call: `open-meteo`, `nws-grid`, `nws-alerts`, `frankfurter`,
 `link-check`, `alta-official`, `greek-peak-official`). Invalid or non-positive cadence values fall back to the
 defaults. All variables are listed in `docs/environment.md`.
@@ -124,12 +124,85 @@ external uptime monitor.
   Open-Meteo (`preceding-hour`) a value stamped 00:00 local covers 23:00–24:00 of the **previous** day, and DST days
   have 23 or 25 hours.
 - Grid coordinates/elevation, units and model run time are stored as returned; a missing model run time stays null.
-- Retention (`prune`): every run from the last 14 days is kept. Older runs: the **first successful run per resort /
-  point / provider / resort-local day** is kept — a forecast made before its valid time stays available to compare
-  with what was later reported — and the rest are deleted. Stored runs are never rewritten with newer data.
-- `source_records` older than 30 days are pruned except the newest per adapter/resort/URL; `refresh_runs` older than
-  60 days (skipped rows after 7 days), except the run "last success" points at for each job and for each resort —
-  including a resort's success recorded inside a global run — which is kept whatever its age.
+- Stored runs are never rewritten with newer data. Retention is below.
+
+## Retention (`prune`)
+
+Only what a screen, the history calendar or an alert still reads is kept. The rules live in
+`src/lib/jobs/retention.ts`, and the history calendar (`src/lib/data/forecast.ts`) selects with the same helpers, so
+the two cannot drift apart. `src/lib/jobs/retention.test.ts` checks that every reader (history calendars, latest
+runs and their hours, newest assessments, trip-alert inputs) returns exactly the same data after a prune, and that a
+second prune changes nothing.
+
+**Who reads old rows:**
+
+- Forecast, resort pages, Today, assessments and alerts read only the **latest successful run per resort / point /
+  provider** (all its hours). Nothing compares a run with earlier runs. "Model disagreement" uses the latest NWS
+  run, and the snow alert uses the latest run (fetched within 12 h).
+- History calendar, **forecast then**: for each past resort-local day and point (base, summit), the primary run
+  fetched most recently before the day started (Open-Meteo is preferred to NWS even when older, within a look-back
+  of 17 days before the month), and only its hours from the day's start to its end + 1 h. With one visit a day, that
+  is yesterday's first run and about 26 of its 456 hours.
+- History calendar, **Piste estimated then**: for each past day and mode, the newest assessment computed before the
+  day started. Only headline fields are read: score, kind, descriptor, confidence, surface, lead time and model.
+- Every screen that shows a date, including a resort page for a past date (up to 400 days back) and trip days up to
+  7 days back, shows the **newest assessment** per resort, date and mode, with its breakdown.
+- **Outlook fell** alerts compare every assessment computed since the trip was created for trip days that are today
+  or later. They read score and kind.
+- **Tracking start** (when not recorded) is the earliest successful run and the earliest assessment per resort.
+- No screen dereferences an assessment's `inputs.weatherRunIds`, so deleting runs cannot break a view. The report
+  and status ids it holds point at rows that are never pruned.
+
+**Weather runs:** every run fetched in the last `PISTE_WEATHER_RETENTION_DAYS` days (default 14) is kept whole, and
+so is any run stamped in the future. Older runs:
+
+- the latest successful run per resort / point / provider stays whole, however old (the app was not opened for
+  weeks);
+- a run that is a past day's forecast-then keeps only the hours that day reads. One run can serve several days when
+  the app was not opened in between;
+- the earliest successful run per resort keeps its row (tracking start);
+- everything else is deleted: superseded runs, NWS runs no past day used (NWS is only picked when Open-Meteo has
+  nothing for that point), other points, and old error rows.
+
+**Assessments** (no window): per resort, date and mode the newest row is kept whole. The "estimated then" row, the
+trip rows and the earliest row per resort are kept for their headline facts only: their components, explanation and
+confidence reasons are emptied, and the explanation says the breakdown is not kept. A row that is not the newest can
+never become the newest again. Rows stamped in the future are left alone. Everything else is deleted.
+
+**Size limits (off by default; the single-file build turns them on):**
+
+- `PISTE_WEATHER_HISTORY_DAYS=N`: past days keep forecast-then for every resort for N days, then only for
+  favourites and resorts in a trip (not cancelled). For the others the prune records the first day still kept in
+  `app_meta['history.forecastKeptFrom.<resort>']`. The history calendar then shows no forecast-then for earlier days
+  and says why. It does not count them as gaps, and it still shows what was reported and what Piste estimated then.
+- `PISTE_ASSESSMENT_DETAIL_DAYS=N`: a past day older than N days keeps only its "estimated then" row, or its newest
+  row when nothing was estimated before it, as headline facts. A resort page for such a date shows that score,
+  confidence and surface, with "Older assessment: its breakdown and reasons are not kept."
+- `PISTE_PRUNE_VACUUM=1` runs `VACUUM` after a prune that deleted rows, and `PISTE_DB_PAGE_SIZE=16384` sets the page
+  size it writes. Assessment rows of 1–3 KB waste much of a 4 KB page.
+
+Other tables: `source_records` older than 30 days are pruned except the newest per adapter/resort/URL;
+`refresh_runs` older than 60 days (skipped rows after 7 days) are pruned, except the run "last success" points at for
+each job and for each resort, including a resort's success recorded inside a global run, which is kept whatever its
+age. Reports, status events, opening-date history and personal records are never pruned.
+
+**Measured** (`src/lib/jobs/retention.sim.test.ts`: the real Open-Meteo and NWS adapters fed full-size synthetic
+responses, once-a-day passes of weather, status, assessments, alerts and prune; 2 simulated US resorts extrapolated
+linearly to the 33 in the catalog; size = `page_count × page_size` after `VACUUM`):
+
+| Settings | Growth | Day 70 | Day 200 (projected) |
+|---|---|---|---|
+| Before this change (every day's first run kept with all 456 hours, assessments never pruned), 1 visit a day | 13.5 MB/day | ≈ 940 MB (607 MB measured at day 45) | ≈ 2.7 GB |
+| Exact rules only, `PISTE_WEATHER_RETENTION_DAYS=0.25`, 16 KB pages (no visible loss) | 0.67 MB/day | 69 MB | ≈ 157 MB |
+| Single-file settings (above plus both size limits at 14 days), 2 favourites | 0.075 MB/day | ≈ 35 MB | ≈ 45 MB |
+| Next app defaults (14-day window, weather every 3 h), after this change | ≈ 0.85 MB/day beyond the window | ≈ 0.9 GB | ≈ 1.0 GB |
+
+In the single-file row, each extra favourite or trip resort adds about 11 KB a day, about 2 MB over 200 days. In the
+Next app the 14-day full-retention window is most of the size: about 770 MB of whole runs at 8 passes a day. No
+screen reads it, so `PISTE_WEATHER_RETENTION_DAYS=2` brings 200 days down to about 320 MB and `0.25` to about 210 MB.
+The projections scale `refresh_runs` and `source_records` with the resort count too, so they err on the high side.
+Run `PISTE_SIM_REPORT=1 PISTE_SIM_DAYS=70 [PISTE_SIM_SINGLE_FILE=1] npx vitest run src/lib/jobs/retention.sim.test.ts`
+to measure again.
 
 ## Assessments history
 
@@ -138,8 +211,10 @@ the latest operations report on or before the date (personal feedback is passed 
 operations report), the latest successful primary weather run per point, an alternate model's daily snowfall when
 one is stored (NWS), published lift hours and official alerts. A new `conditions_assessments` row is written only
 when the material result changes (score, components, surface, confidence, eligibility, and the report/status rows
-used). Earlier rows are never updated, so the history calendar can show what the app estimated at the time. Without
-any stored forecast only yesterday and today are assessed. Rows computed in the demo database are kind `demo`.
+used). A score is never rewritten, so the history calendar can show what the app estimated at the time. The prune
+deletes superseded rows no screen reads and empties the unread breakdown of rows kept for their headline (see
+Retention). Without any stored forecast only yesterday and today are assessed. Rows computed in the demo database are
+kind `demo`.
 
 ## Honesty rules enforced by jobs
 
