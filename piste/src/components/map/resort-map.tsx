@@ -56,6 +56,8 @@ export interface ResortMapProps {
 }
 
 const STYLE_URL = process.env.NEXT_PUBLIC_MAP_STYLE_URL || 'https://tiles.openfreemap.org/styles/positron'
+/** Served by src/app/vendor/maplibre/[file]/route.ts from the installed maplibre-gl package. */
+const MAPLIBRE_WORKER_PATH = '/vendor/maplibre/maplibre-gl-worker.mjs'
 
 const toneClass: Record<NonNullable<MapMarker['tone']>, string> = {
   default: 'bg-surface text-ink border-teal',
@@ -259,8 +261,10 @@ export default function ResortMap(props: ResortMapProps) {
       if (!mapRef.current?.isStyleLoaded()) setFailed('map tiles did not load (offline or blocked)')
     }, 12000)
     import('maplibre-gl')
-      .then(({ Map, NavigationControl, AttributionControl }) => {
+      .then(({ Map, NavigationControl, AttributionControl, setWorkerUrl }) => {
         if (cancelled || !container.current) return
+        // The bundler hides MapLibre's own script URL, so point it at the same-origin worker route explicitly.
+        setWorkerUrl(new URL(MAPLIBRE_WORKER_PATH, window.location.origin).href)
         map = new Map({
           container: container.current,
           style: STYLE_URL,
@@ -276,9 +280,14 @@ export default function ResortMap(props: ResortMapProps) {
           window.clearTimeout(timeout)
           setReady(true)
         })
-        map.on('error', (e) => {
-          const msg = String((e as unknown as { error?: Error }).error?.message ?? '')
-          if (!map?.isStyleLoaded() && /style|fetch|Failed|NetworkError|403|404/i.test(msg)) setFailed('map style could not be loaded')
+        let loaded = false
+        map.once('load', () => {
+          loaded = true
+        })
+        map.on('error', () => {
+          // Before the first load any error (style fetch, style parse, worker) means no usable map: fall back to the
+          // schematic view. After that, individual tile errors are left to MapLibre.
+          if (!loaded) setFailed('map style could not be loaded')
         })
         mapRef.current = map
       })
@@ -366,7 +375,12 @@ export default function ResortMap(props: ResortMapProps) {
 
   return (
     <div className={cn('relative overflow-hidden rounded-[12px] border border-divider bg-surface-2', className)} role="region" aria-label={ariaLabel}>
-      <div ref={container} className={cn('absolute inset-0', dark && '[&_.maplibregl-canvas]:[filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)_brightness(0.95)]')} />
+      <div
+        ref={container}
+        // Inline position: maplibre-gl.css sets .maplibregl-map { position: relative }, which would override `absolute`
+        // and collapse the map to zero height.
+        style={{ position: 'absolute', inset: 0 }}
+        className={cn('absolute inset-0', dark && '[&_.maplibregl-canvas]:[filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)_brightness(0.95)]')} />
       {!ready ? <div className="absolute inset-0 animate-pulse bg-surface-3/60" aria-hidden /> : null}
       {lines?.length ? (
         <p className="absolute top-2 left-2 rounded-sm bg-surface/90 px-2 py-1 text-[11.5px] text-ink-2">Dashed lines are straight lines, not routes.</p>
