@@ -1,10 +1,11 @@
 // Screenshot helper for visual review: node scripts/shots.mjs <baseUrl> <outDir> <path...>
+// Use http://localhost:<port> (not 127.0.0.1): Next 16 dev blocks the HMR socket for other origins, so pages would not hydrate.
 // Captures 390 / 768 / 1440 widths in light and dark. Uses PLAYWRIGHT_CHROMIUM_PATH if set.
 import { chromium } from 'playwright'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const [base = 'http://127.0.0.1:3000', out = 'shots', ...paths] = process.argv.slice(2)
+const [base = 'http://localhost:3000', out = 'shots', ...paths] = process.argv.slice(2)
 const widths = (process.env.SHOT_WIDTHS ?? '390,768,1440').split(',').map(Number)
 const themes = (process.env.SHOT_THEMES ?? 'light,dark').split(',')
 fs.mkdirSync(out, { recursive: true })
