@@ -10,8 +10,13 @@ export * from 'maplibre-gl/dist/maplibre-gl.mjs'
 
 let blobUrl: string | null = null
 
+/**
+ * MapLibre starts a MODULE worker unless the URL ends in `.cjs`; Chromium refuses module workers from Blob URLs on a
+ * file:// page (opaque origin), while classic workers work. The bundled worker is a plain IIFE, so a `#.cjs` fragment
+ * (ignored when the Blob is fetched) selects the classic path.
+ */
 export function workerBlobUrl(): string {
-  blobUrl ??= URL.createObjectURL(new Blob([workerSource], { type: 'text/javascript' }))
+  blobUrl ??= `${URL.createObjectURL(new Blob([workerSource], { type: 'text/javascript' }))}#.cjs`
   return blobUrl
 }
 

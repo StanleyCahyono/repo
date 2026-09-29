@@ -25,7 +25,7 @@ const clock = () => nowFor('live')
 const live = () => cookieStore.get(MODE_COOKIE)?.value !== 'demo'
 
 async function once() {
-  if (busy || !live() || !navigator.onLine) return
+  if (stopped || busy || !live() || !navigator.onLine) return
   busy = true
   try {
     const db = await getDb('live')
@@ -43,11 +43,20 @@ async function once() {
   }
 }
 
+let stopped = false
+
 function loop() {
+  if (stopped) return
   timer = setTimeout(async () => {
     await once()
     loop()
   }, cadences.tickSeconds * 1000)
+}
+
+/** This tab no longer owns the data (another tab took over). */
+export function stopScheduler() {
+  stopped = true
+  if (timer) clearTimeout(timer)
 }
 
 export function startScheduler(delayMs = 2000) {

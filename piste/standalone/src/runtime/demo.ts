@@ -55,12 +55,13 @@ export function enterDemo(): Promise<boolean> {
 
 export let lastDemoGenerationMs: number | null = null
 
+/** Share of the bar per phase, from a reference run (weather ~35 % of the time, assessments ~55 %). */
 const PHASES: { key: string; label: string; from: number; to: number }[] = [
-  { key: 'catalog', label: 'Loading the resort catalog', from: 0.02, to: 0.06 },
-  { key: 'weather', label: 'Simulating a season of modeled weather', from: 0.06, to: 0.62 },
-  { key: 'operations', label: 'Simulating resort reports and operations', from: 0.62, to: 0.74 },
-  { key: 'personal', label: 'Adding a demo skier’s trips, passes and ski days', from: 0.74, to: 0.77 },
-  { key: 'assessments', label: 'Scoring conditions day by day', from: 0.77, to: 0.96 },
+  { key: 'catalog', label: 'Loading the resort catalog', from: 0.02, to: 0.05 },
+  { key: 'weather', label: 'Simulating a season of modeled weather', from: 0.05, to: 0.38 },
+  { key: 'operations', label: 'Simulating resort reports and operations', from: 0.38, to: 0.42 },
+  { key: 'personal', label: 'Adding a demo skier’s trips, passes and ski days', from: 0.42, to: 0.43 },
+  { key: 'assessments', label: 'Scoring conditions day by day', from: 0.43, to: 0.96 },
 ]
 
 async function generate() {
@@ -75,7 +76,7 @@ async function generate() {
     if (label === shownLabel && now - shownAt < 120) return
     shownAt = now
     shownLabel = label
-    setDemoProgress({ phase: label, fraction, startedAt })
+    setDemoProgress({ phase: label, fraction, startedAt, elapsed: Math.round((now - startedAt) / 1000) })
   }
   show(0.01, 'Preparing the demo database')
 

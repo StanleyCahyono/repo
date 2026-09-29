@@ -28,4 +28,5 @@ export function isIP(s: string): 0 | 4 | 6 {
   return isIPv4(s) ? 4 : isIPv6(s) ? 6 : 0
 }
 
-export default { isIP, isIPv4, isIPv6 }
+const net = { isIP, isIPv4, isIPv6 }
+export default net

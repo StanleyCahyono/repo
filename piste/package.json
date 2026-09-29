@@ -24,6 +24,8 @@
     "backup": "tsx scripts/backup.ts",
     "restore": "tsx scripts/restore.ts",
     "e2e": "playwright test",
+    "standalone": "node standalone/build.mjs",
+    "standalone:verify": "node standalone/verify.mjs",
     "db:regen": "rm -rf drizzle && drizzle-kit generate --name init"
   },
   "dependencies": {

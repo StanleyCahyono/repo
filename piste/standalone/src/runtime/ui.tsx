@@ -38,7 +38,7 @@ export function DemoOverlay() {
   const { demo } = useChrome()
   if (!demo) return null
   const pct = Math.round(Math.min(1, Math.max(0, demo.fraction)) * 100)
-  const seconds = Math.round((performance.now() - demo.startedAt) / 1000)
+  const seconds = demo.elapsed ?? 0
   return (
     <div className="fixed inset-0 z-[90] flex items-center justify-center bg-overlay px-4" role="dialog" aria-modal="true" aria-labelledby="demo-gen-title">
       <div className="w-full max-w-[460px] rounded-[14px] border border-divider bg-surface p-5 shadow-overlay md:p-6">
@@ -152,6 +152,22 @@ export function RecoveryScreen({ detail, bytes, onReset }: { detail: string; byt
         ) : null}
         <button type="button" className={`${buttonCls} border-divider-strong bg-surface text-ink hover:border-teal hover:text-teal`} onClick={onReset}>
           <RotateCcw aria-hidden className="size-4" /> Start fresh
+        </button>
+      </div>
+    </Frame>
+  )
+}
+
+export function MovedScreen({ saved }: { saved: boolean }) {
+  return (
+    <Frame eyebrow="Open in another tab" title="Piste is open in another tab">
+      <p>
+        To keep your records from overwriting each other, only one tab uses them at a time — the one you opened last.{' '}
+        {saved ? 'Everything you did here was saved before it took over.' : 'The other tab took over without waiting, so a change made here in the last moments may not have been saved.'}
+      </p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        <button type="button" className={`${buttonCls} border-teal bg-teal text-on-teal hover:bg-teal-strong`} onClick={() => location.reload()}>
+          <RotateCcw aria-hidden className="size-4" /> Use Piste here
         </button>
       </div>
     </Frame>

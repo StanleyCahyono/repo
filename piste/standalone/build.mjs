@@ -213,14 +213,53 @@ const PATCHES = {
     ],
   },
   'src/components/map/resort-map.tsx': {
-    required: true,
     edits: [
       // file:// has origin "null"; the maplibre shim ignores the path and starts its worker from a Blob.
-      { find: 'setWorkerUrl(new URL(MAPLIBRE_WORKER_PATH, window.location.origin).href)', replace: 'setWorkerUrl(MAPLIBRE_WORKER_PATH)' },
+      { required: true, find: 'setWorkerUrl(new URL(MAPLIBRE_WORKER_PATH, window.location.origin).href)', replace: 'setWorkerUrl(MAPLIBRE_WORKER_PATH)' },
+      { find: "setFailed('map style could not be loaded')", replace: "setFailed('map tiles need an internet connection; the map style could not be loaded')" },
+      { find: "setFailed('map tiles did not load (offline or blocked)')", replace: "setFailed('map tiles need an internet connection and did not load (offline or blocked)')" },
+    ],
+  },
+  'src/components/forecast/not-fetched.tsx': {
+    edits: [
+      {
+        find: "'no scheduled run recorded — start the worker (npm run worker) or refresh manually'",
+        replace: "'no scheduled run recorded yet — Piste refreshes while this page is open and online, or refresh manually'",
+      },
+    ],
+  },
+  'src/app/api/health/route.ts': {
+    edits: [
+      {
+        find: /`No scheduler heartbeat for \$\{ageMinutes\} min\. A sleeping machine cannot collect data — run \\`npm run worker\\` on an always-on host or \\`npm run refresh\\` from cron\.`/,
+        replace: '`No scheduler heartbeat for ${ageMinutes} min. The single-file version collects data only while its page is open and online.`',
+      },
+      {
+        find: "'The scheduler has never run. Start `npm run worker`, or call `npm run refresh` from cron.'",
+        replace: "'The scheduler has never run. In the single-file version it runs while the page is open, online and in live mode.'",
+      },
     ],
   },
   'src/components/ui/offline-banner.tsx': {
-    edits: [{ find: 'setLocal(isLocalHost(window.location.hostname))', replace: 'setLocal(true)' }],
+    edits: [
+      { find: 'setLocal(isLocalHost(window.location.hostname))', replace: 'setLocal(true)' },
+      { find: "'Can’t reach Piste’s server'", replace: "'That did not save'" },
+      {
+        find: '`Your last change or refresh didn’t reach the server. What’s on screen${since} is unchanged — try again in a moment.`',
+        replace: '`Your last change or refresh could not be completed in this browser. What’s on screen${since} is unchanged — try again in a moment.`',
+      },
+    ],
+  },
+  'src/components/settings/use-save.ts': {
+    edits: [
+      {
+        find: "'Not saved — Piste’s server could not be reached. Try again when you are back online.'",
+        replace: "'Not saved — something went wrong while saving in this browser. Try again; if it keeps failing, download your data from Settings → Export & backup.'",
+      },
+    ],
+  },
+  'src/components/settings/appearance-panel.tsx': {
+    edits: [{ find: 'hint="Applies at once on this and every device that opens Piste."', replace: 'hint="Applies at once, in this browser."' }],
   },
   'src/lib/data/sources.ts': {
     edits: [
@@ -244,6 +283,31 @@ const PATCHES = {
       },
     ],
   },
+  'src/lib/providers/registry.ts': {
+    edits: [
+      // A local file has no environment variables, and a browser sends its own User-Agent: no setting to show.
+      {
+        find: "const contactNote = set('PISTE_CONTACT') ? [] : ['PISTE_CONTACT is not set; api.weather.gov asks clients to include contact details in the User-Agent.']",
+        replace: 'const contactNote: string[] = []',
+      },
+      { find: /envVars: \['(PISTE_CONTACT|OPEN_METEO_API_KEY|DUFFEL_ACCESS_TOKEN)'\],/g, replace: 'envVars: [],' },
+    ],
+  },
+  'src/components/sources/connectors-panel.tsx': {
+    edits: [
+      // Both official report readers are off in this build, so every resort's report is entered by hand.
+      { find: 'scope: `${resortCount - reportAdapters} of ${resortCount} resorts`,', replace: "scope: `All ${resortCount} resorts`," },
+      {
+        find: "'No report adapter: open the official report from the resort page and enter it by hand, with the link. It is labelled as typed from an official source.'",
+        replace:
+          "'No automatic report reader in the single-file version: open the official report from the resort page and enter it by hand, with the link. It is labelled as typed from an official source.'",
+      },
+      {
+        find: "'Search links (Google Flights, KAYAK) and your own itinerary and quote entries, until Duffel is configured.'",
+        replace: "'Search links (Google Flights, KAYAK) and your own itinerary and quote entries. Live flight offers need a server with a Duffel key.'",
+      },
+    ],
+  },
   'src/components/sources/status-board.tsx': {
     edits: [
       { find: "'No worker or cron pass has run yet.'", replace: "'Nothing has run in this browser yet.'" },
@@ -254,6 +318,9 @@ const PATCHES = {
   'src/components/sources/scheduler-panel.tsx': {
     edits: [
       { find: "'Long-running worker (npm run worker)'", replace: "'This browser tab, while Piste is open'" },
+      { find: "' reported by the worker'", replace: "' used in this browser'" },
+      { find: '<dt className="text-ink-2">Worker started</dt>', replace: '<dt className="text-ink-2">Collecting since</dt>' },
+      { find: '<dt className="text-ink-2">Worker stopped</dt>', replace: '<dt className="text-ink-2">Stopped</dt>' },
       { find: 'A sleeping machine cannot collect data', replace: 'A closed page cannot collect data' },
       {
         find: words(
@@ -269,6 +336,16 @@ const PATCHES = {
       },
       { element: { anchor: '>Health check<', tag: 'dt' }, replace: '' },
       { element: { anchor: 'GET /api/health?strict=1', tag: 'dd' }, replace: '' },
+    ],
+  },
+  'src/components/resort/back-link.tsx': {
+    edits: [
+      {
+        // Every history entry of the single file has the same path; the app path is in the fragment.
+        find: 'if (u.origin === window.location.origin && u.pathname !== window.location.pathname) return u.pathname',
+        replace:
+          "{ const ap = (x: URL) => (x.hash.startsWith('#/') ? x.hash.slice(1).split('#')[0] : '/'); if (u.origin === window.location.origin && u.pathname === window.location.pathname && ap(u) !== ap(new URL(window.location.href))) return ap(u) }",
+      },
     ],
   },
   'src/app/sources/page.tsx': {
@@ -363,7 +440,7 @@ function patchSource(file, src) {
     else next = e.find.test(out) ? out.replace(e.find, () => e.replace) : null
     const label = `${rel(file)} patch ${i + 1}${e.element ? ` (<${e.element.tag}> with "${e.element.anchor}")` : ''}`
     if (next === null) {
-      if (spec.required) throw new Error(`Required bundle patch no longer applies: ${label}. Update standalone/build.mjs.`)
+      if (spec.required || e.required) throw new Error(`Required bundle patch no longer applies: ${label}. Update standalone/build.mjs.`)
       warn(`patch not applied (source changed?): ${label}`)
       return
     }
@@ -432,6 +509,7 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
     'virtual:piste/migrations': () => `export const migrations = ${JSON.stringify(migrations)}`,
     'virtual:piste/build-info': () => `export const BUILD_INFO = ${JSON.stringify(buildInfo)}`,
     'virtual:piste/maplibre-worker': () => `export default ${JSON.stringify(worker)}`,
+    'virtual:piste/env': () => `export const ENV = ${JSON.stringify(ENV)}`,
   }
   return {
     name: 'piste',
@@ -444,6 +522,8 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
         if (args.path.endsWith('?action-impl')) return { path: args.path.slice(0, -'?action-impl'.length), namespace: 'piste-action-impl' }
         const alias = args.path.startsWith('@/')
         if (!alias && !args.path.startsWith('.') && !path.isAbsolute(args.path)) return undefined
+        // Only imports from the app's own source can reach a redirected file; leave node_modules to esbuild.
+        if (!alias && args.importer.includes(`${path.sep}node_modules${path.sep}`)) return undefined
         const r = await b.resolve(alias ? `./${args.path.slice(2)}` : args.path, {
           resolveDir: alias ? SRC : args.resolveDir,
           kind: args.kind,
@@ -479,10 +559,12 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
 
 async function buildCss(fontCss) {
   const input = fs.readFileSync(path.join(APP, 'globals.css'), 'utf8')
-  // The generated page itself is not a source of class names.
-  const sourceNot = `@source not ${JSON.stringify(path.relative(APP, OUT).split(path.sep).join('/'))};\n`
-  const withNot = input.replace(/(@import\s+['"]tailwindcss['"];?\s*\n)/, `$1${sourceNot}`)
-  const result = await postcss([tailwind({ base: ROOT, optimize: { minify: true } })]).process(withNot, { from: path.join(APP, 'globals.css') })
+  // globals.css keeps standalone/ out of the Next build's class scan. Here the runtime's own components (standalone/src)
+  // are app source; only the generated page is not.
+  const toOut = path.relative(APP, OUT).split(path.sep).join('/')
+  const scan = input.replace(/^@source\s+not\s+['"]\.\.\/\.\.\/standalone['"];?[^\n]*$/m, `@source not "${toOut}";`)
+  if (scan === input) warn('globals.css no longer excludes standalone/ from the class scan (expected @source not \'../../standalone\')')
+  const result = await postcss([tailwind({ base: ROOT, optimize: { minify: true } })]).process(scan, { from: path.join(APP, 'globals.css') })
   const maplibreCss = fs.readFileSync(path.join(ROOT, 'node_modules', 'maplibre-gl', 'dist', 'maplibre-gl.css'), 'utf8')
   return `${fontCss}\n${result.css}\n${maplibreCss}`
 }
@@ -512,16 +594,22 @@ async function main() {
     entryPoints: [path.join(HERE, 'src', 'main.tsx')],
     bundle: true,
     platform: 'browser',
-    format: 'iife',
+    // An inline module script, not an IIFE: V8 compiles lazily-called code inside one huge function much more slowly
+    // (React DOM initialised ~5× faster this way). Module scripts run after parsing, like a script at the end of <body>.
+    format: 'esm',
     target: ['es2022', 'chrome111', 'firefox115', 'safari16.4'],
+    // PISTE_STANDALONE_DEBUG=1 keeps names readable (for profiling); the shipped file is fully minified.
     minify: true,
+    minifyIdentifiers: !process.env.PISTE_STANDALONE_DEBUG,
     jsx: 'automatic',
     write: false,
     metafile: true,
     legalComments: 'none',
     charset: 'utf8',
+    // When the bundle starts running (after the HTML and the script were parsed); boot timings are measured from here.
+    banner: { js: 'var __pisteBundleStart=performance.now();' },
     tsconfig: path.join(ROOT, 'tsconfig.json'),
-    define: { 'process.env.NODE_ENV': '"production"', __PISTE_ENV__: JSON.stringify(ENV), global: 'globalThis' },
+    define: { 'process.env.NODE_ENV': '"production"', global: 'globalThis' },
     inject: [shim('process.ts')],
     loader: { '.wasm': 'binary', '.sql': 'text' },
     logLevel: 'warning',
@@ -558,14 +646,14 @@ async function main() {
 <body>
 <div id="piste-root">${bootHtml()}</div>
 <noscript><p style="padding:24px;font-family:system-ui,sans-serif">Piste needs JavaScript to run.</p></noscript>
-<script>${escapeScript(code)}</script>
+<script type="module">${escapeScript(code)}</script>
 </body>
 </html>
 `
   fs.writeFileSync(OUT, html)
 
   // Wording from the server version that should not survive in the single file (a patch no longer applies).
-  for (const phrase of ['npm run worker', 'server-side jobs, never from your browser', 'PISTE_DISABLED_PROVIDERS)']) {
+  for (const phrase of ['npm run worker', 'server-side jobs, never from your browser', 'PISTE_DISABLED_PROVIDERS)', 'PISTE_CONTACT is not set', 'until Duffel is configured']) {
     const count = code.split(phrase).length - 1
     if (count) warn(`bundle still contains "${phrase}" (${count}×)`)
   }

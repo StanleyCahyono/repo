@@ -80,3 +80,8 @@ declare module '*.wasm' {
 declare module 'maplibre-gl/dist/maplibre-gl.mjs' {
   export * from 'maplibre-gl'
 }
+
+declare module 'virtual:piste/env' {
+  /** process.env of the browser build. */
+  export const ENV: Record<string, string>
+}

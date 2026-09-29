@@ -4,6 +4,7 @@
  * runs in this page with a progress screen, and the switch navigates instead of throwing redirect().
  */
 import { MODE_COOKIE } from '@/lib/context'
+import { closeHandle, flush } from '../db/client'
 import { cookieStore } from '../shims/next-headers'
 import { enterDemo } from './demo'
 import { go } from './router'
@@ -18,4 +19,6 @@ export async function setMode(mode: 'live' | 'demo', returnTo = '/') {
   }
   onModeChange(mode)
   await go(typeof returnTo === 'string' && returnTo.startsWith('/') ? returnTo : '/', 'push')
+  // The demo database is large (~50 MB in memory): save and close it once live data is on screen.
+  if (mode === 'live') void flush('demo').then(() => closeHandle('demo'))
 }

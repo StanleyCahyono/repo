@@ -20,9 +20,29 @@ export interface Entry {
   scroll: boolean
 }
 
+/**
+ * Mark a promise with React's thenable fields when it settles, so `use()` reads a resolved route synchronously
+ * instead of suspending once (which costs React's 300 ms Suspense throttle on the first render).
+ */
+function tracked<T>(p: Promise<T>): Promise<T> {
+  const t = p as Promise<T> & { status?: string; value?: T; reason?: unknown }
+  t.status = 'pending'
+  p.then(
+    (value) => {
+      t.status = 'fulfilled'
+      t.value = value
+    },
+    (reason: unknown) => {
+      t.status = 'rejected'
+      t.reason = reason
+    },
+  )
+  return p
+}
+
 let navSeq = 0
 export function initialEntry(url: AppUrl): Entry {
-  return { id: ++navSeq, url, promise: loadRoute(url), kind: 'initial', scroll: true }
+  return { id: ++navSeq, url, promise: tracked(loadRoute(url)), kind: 'initial', scroll: true }
 }
 
 const THEME_KEY = 'piste:standalone:theme'
@@ -45,7 +65,7 @@ export function App({ initial, onFirstCommit }: { initial: Entry; onFirstCommit?
   const [entry, setEntry] = useState(initial)
   const [url, setUrl] = useState(initial.url)
   const [loadingFor, setLoadingFor] = useState<{ id: number; url: AppUrl } | null>(null)
-  const [announcement, setAnnouncement] = useState('')
+  const announcer = useRef<HTMLParagraphElement>(null)
   const committedPath = useRef(initial.url.pathname)
   const firstCommit = useRef(onFirstCommit)
 
@@ -55,7 +75,7 @@ export function App({ initial, onFirstCommit }: { initial: Entry; onFirstCommit?
         if (kind === 'push' || kind === 'replace') writeHistory(kind, target)
         else setKnownUrl(target)
         const id = ++navSeq
-        const promise = loadRoute(target)
+        const promise = tracked(loadRoute(target))
         const pathChanged = target.pathname !== committedPath.current
         startTransition(() => {
           setEntry({ id, url: target, promise, kind, scroll })
@@ -92,7 +112,8 @@ export function App({ initial, onFirstCommit }: { initial: Entry; onFirstCommit?
       firstCommit.current = undefined
       return
     }
-    setAnnouncement(resolved.title)
+    // Route announcer (like Next's): screen readers hear the new page's title.
+    if (announcer.current) announcer.current.textContent = resolved.title
     if (entry.kind === 'pop') {
       const y = savedScroll(entryKey())
       if (y !== null) window.scrollTo(0, y)
@@ -119,9 +140,7 @@ export function App({ initial, onFirstCommit }: { initial: Entry; onFirstCommit?
           </LoadingOverrideContext.Provider>
         </ResolvedContext.Provider>
       </ParamsContext.Provider>
-      <p aria-live="assertive" aria-atomic="true" className="sr-only" data-route-announcer data-url={formatAppUrl(url)}>
-        {announcement}
-      </p>
+      <p ref={announcer} aria-live="assertive" aria-atomic="true" className="sr-only" data-route-announcer data-url={formatAppUrl(url)} />
     </UrlContext.Provider>
   )
 }

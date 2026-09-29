@@ -72,6 +72,8 @@ function request<T>(mode: IDBTransactionMode, fn: (store: IDBObjectStore) => IDB
         tx.oncomplete = () => resolve(req.result)
         tx.onerror = () => reject(tx.error ?? req.error)
         tx.onabort = () => reject(tx.error ?? new Error('IndexedDB transaction aborted'))
+        // Commit now rather than when the event loop is idle: a save issued as the page is hidden should land.
+        if (mode === 'readwrite') tx.commit?.()
       }),
   )
 }
@@ -105,9 +107,14 @@ export async function deleteDatabase(mode: AppMode): Promise<void> {
   await request('readwrite', (s) => s.delete(mode))
 }
 
-/** Ask the browser not to evict the data under storage pressure (best effort; ignored where unsupported). */
+/**
+ * Ask the browser not to evict the data under storage pressure (best effort). Only where the answer is silent
+ * (Chromium decides by heuristics); Firefox would show a permission prompt at start-up.
+ */
 export async function requestPersistence(): Promise<boolean> {
   try {
+    if (!('userAgentData' in navigator)) return false
+    if (await navigator.storage?.persisted?.()) return true
     return (await navigator.storage?.persist?.()) ?? false
   } catch {
     return false

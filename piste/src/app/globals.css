@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* The single-file build (npm run standalone) is generated, not app source: keep its bundle out of the class scan. */
+@source not '../../standalone';
 
 /*
  * Piste design tokens.

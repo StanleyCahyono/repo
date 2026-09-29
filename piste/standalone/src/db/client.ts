@@ -15,6 +15,7 @@ import * as schema from '@/lib/db/schema'
 import type { AppMode } from '@/lib/domain/types'
 import { inspectMigrations, migrateDatabase } from './migrations'
 import { SqlJsClient } from './sqljs-client'
+import { canWrite } from '../runtime/tab-owner'
 import { databaseExists, deleteDatabase, loadDatabase, saveDatabase, storageAvailable } from './storage'
 
 export type Db = LibSQLDatabase<typeof schema>
@@ -65,7 +66,8 @@ export function onSave(fn: SaveListener) {
   return () => saveListeners.delete(fn)
 }
 
-const SAVE_DELAY_MS = 1000
+/** Saves trail the last write by this much (a burst of statements from one action becomes one save). */
+const SAVE_DELAY_MS = 300
 
 function markDirty(h: Handle) {
   h.dirty = true
@@ -91,7 +93,8 @@ async function save(h: Handle): Promise<void> {
     await h.saving
     if (!h.dirty) return
   }
-  if (!(await storageAvailable())) return
+  // Another tab owns the data now: never overwrite its saves with this tab's copy.
+  if (!canWrite() || !(await storageAvailable())) return
   h.dirty = false
   h.saving = (async () => {
     try {

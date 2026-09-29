@@ -8,7 +8,7 @@
 import { Suspense, useSyncExternalStore } from 'react'
 import { createRoot } from 'react-dom/client'
 import { getMode, MODE_COOKIE } from '@/lib/context'
-import { exportBytes, flushAll, onSave, resetDatabase, SchemaMismatchError, sqlite } from './db/client'
+import { closeAll, exportBytes, flushAll, onSave, resetDatabase, SchemaMismatchError, sqlite } from './db/client'
 import { requestPersistence, storageAvailable, storageProblem } from './db/storage'
 import { saveBlob } from './runtime/api'
 import { App, initialEntry, type Entry } from './runtime/app'
@@ -17,8 +17,9 @@ import { installInterceptors } from './runtime/interceptors'
 import { ensureLiveReady } from './runtime/live'
 import { notify, setMemoryOnly, setSaveError } from './runtime/notices'
 import { currentAppUrl } from './runtime/router'
-import { startScheduler } from './runtime/scheduler'
-import { BootScreen, DemoOverlay, FatalBoundary, FatalScreen, Notices, RecoveryScreen, StorageBanner } from './runtime/ui'
+import { startScheduler, stopScheduler } from './runtime/scheduler'
+import { becomeOwner, setOnLost } from './runtime/tab-owner'
+import { BootScreen, DemoOverlay, FatalBoundary, FatalScreen, MovedScreen, Notices, RecoveryScreen, StorageBanner } from './runtime/ui'
 import { cookieStore } from './shims/next-headers'
 
 type BootState =
@@ -26,6 +27,7 @@ type BootState =
   | { stage: 'ready'; entry: Entry }
   | { stage: 'recovery'; error: SchemaMismatchError }
   | { stage: 'fatal'; error: unknown }
+  | { stage: 'moved'; saved: boolean }
 
 let boot: BootState = { stage: 'booting', text: 'Opening your data…' }
 const listeners = new Set<() => void>()
@@ -38,10 +40,17 @@ const subscribe = (fn: () => void) => {
   return () => listeners.delete(fn)
 }
 
-const timings: Record<string, number> = {}
-;(window as unknown as { __piste: unknown }).__piste = { timings }
-const t0 = performance.now()
-const mark = (name: string) => (timings[name] = Math.round(performance.now() - t0))
+declare const __pisteBundleStart: number | undefined
+/**
+ * Milliseconds since navigation start: `bundleStart` is when the script began to run (HTML and JS parsed),
+ * `scriptStart` when this entry module runs (every bundled module initialised).
+ */
+const timings: Record<string, number> = {
+  bundleStart: typeof __pisteBundleStart === 'number' ? Math.round(__pisteBundleStart) : -1,
+  scriptStart: Math.round(performance.now()),
+}
+;(window as unknown as { __piste: unknown }).__piste = { timings, flush: () => flushAll() }
+const mark = (name: string) => (timings[name] = Math.round(performance.now()))
 
 async function downloadLive() {
   try {
@@ -74,6 +83,7 @@ function Root() {
       />
     )
   } else if (b.stage === 'fatal') body = <FatalScreen error={b.error} />
+  else if (b.stage === 'moved') body = <MovedScreen saved={b.saved} />
   else body = <BootScreen text={b.text} />
   return (
     <>
@@ -112,6 +122,14 @@ async function start() {
   createRoot(container).render(<Root />)
 
   try {
+    // Only one tab may hold the data (the newest takes over and the old one steps back, having saved).
+    setOnLost(async (saveFirst) => {
+      stopScheduler()
+      if (saveFirst) await flushAll()
+      setBoot({ stage: 'moved', saved: saveFirst })
+      await closeAll()
+    })
+    await becomeOwner((text) => setBoot({ stage: 'booting', text }))
     await sqlite()
     mark('sqlite')
     if (!(await storageAvailable())) setMemoryOnly(storageProblem() ?? 'IndexedDB is unavailable')
@@ -136,9 +154,13 @@ async function start() {
     mark('firstRoute')
     setBoot({ stage: 'ready', entry })
   } catch (e) {
-    console.error(e)
-    if (e instanceof SchemaMismatchError) setBoot({ stage: 'recovery', error: e })
-    else setBoot({ stage: 'fatal', error: e })
+    if (e instanceof SchemaMismatchError) {
+      console.warn(e.message)
+      setBoot({ stage: 'recovery', error: e })
+    } else {
+      console.error(e)
+      setBoot({ stage: 'fatal', error: e })
+    }
   }
 
   const save = () => void flushAll()

@@ -158,4 +158,5 @@ export function randomUUID(): string {
 
 export const webcrypto = globalThis.crypto
 
-export default { createHash, createHmac, randomBytes, timingSafeEqual, randomUUID, webcrypto }
+const nodeCrypto = { createHash, createHmac, randomBytes, timingSafeEqual, randomUUID, webcrypto }
+export default nodeCrypto

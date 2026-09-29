@@ -112,7 +112,9 @@ function onClick(e: MouseEvent) {
     rawHistory.push.call(window.history, withKey(null, true), '', toRealUrl(r.url, window.location))
     setKnownUrl(r.url)
     notifyUrlChanged(r.url)
-    if (scrollToSection(r.url.section, !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)) {
+    const smooth = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    if (!r.url.section) window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }) // href="#": top of the page
+    else if (scrollToSection(r.url.section, smooth)) {
       const el = document.getElementById(r.url.section)
       if (el && el.tabIndex >= 0) el.focus({ preventScroll: true })
     }

@@ -1,11 +1,11 @@
 /**
  * `process` for the browser bundle (injected by esbuild for every free `process` reference). The environment is fixed
- * at build time (standalone/build.mjs → __PISTE_ENV__); there is no working directory, so cwd() is '/'.
+ * at build time (standalone/build.mjs → virtual:piste/env); there is no working directory, so cwd() is '/'.
  */
-declare const __PISTE_ENV__: Record<string, string>
+import { ENV } from 'virtual:piste/env'
 
 export const process = {
-  env: { ...__PISTE_ENV__ } as Record<string, string | undefined>,
+  env: { ...ENV } as Record<string, string | undefined>,
   cwd: () => '/',
   platform: 'browser',
   versions: {} as Record<string, string>,

@@ -8,6 +8,16 @@ what your exact pass covers on your dates, what a day or trip really costs, and 
 > estimates are labelled, weather-model output is never called "observed", and demo data is isolated. What is live
 > and what is not is listed under [Data coverage](#data-coverage).
 
+## Two ways to use it
+
+- **One file, no install:** open [`standalone/index.html`](standalone/index.html) in a desktop browser (download it
+  and double-click). It is the same app, built from the same source into one 6 MB file, and your data stays in that
+  browser (with Download/Import for backups). A few things need a server and are left out: the automatic Greek Peak
+  and Alta report readers, link checks, live flight offers, and refreshing while the page is closed. Details are in
+  [`standalone/README.md`](standalone/README.md). Rebuild it with `npm run standalone`.
+- **Full app (Node.js):** the quick start below. It adds a database file on disk, the background worker, scripted
+  backups and optional sign-in for use from other devices.
+
 ## Screens
 
 | Route | What it is for |
@@ -103,6 +113,7 @@ Until then, live mode shows honest "not fetched yet" or failure states, never de
 | `npm run backup` / `restore` | SQLite backup / validated restore (see `docs/backup.md`) |
 | `npm run typecheck` / `lint` / `test` | TypeScript, ESLint, Vitest unit tests |
 | `npm run e2e` | Playwright journeys against a production build (see below) |
+| `npm run standalone` / `standalone:verify` | Build the single-file `standalone/index.html` / check it in headless Chromium from its file URL |
 
 ## Tests
 
@@ -123,6 +134,7 @@ docs/               brief, methodology, providers, scheduler, backup, environmen
 drizzle/            the SQL migration
 e2e/                Playwright journeys
 scripts/            CLI entry points: migrate, seed, demo, worker, refresh, backup, restore, checks
+standalone/         the single-file build: index.html (generated), its build and verify scripts, browser shims
 src/app/            routes (App Router); src/proxy.ts is the optional sign-in gate
 src/components/     ui/ design-system primitives, one folder per screen
 src/lib/domain/     pure logic: units, time, money, Conditions v1, pass rules, costs, recommendation

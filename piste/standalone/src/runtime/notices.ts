@@ -15,6 +15,8 @@ export interface DemoProgress {
   /** 0..1, approximate. */
   fraction: number
   startedAt: number
+  /** Whole seconds since start, as of this update. */
+  elapsed?: number
   error?: string
   done?: boolean
 }

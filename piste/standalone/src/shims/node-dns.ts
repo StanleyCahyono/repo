@@ -7,4 +7,5 @@ export async function lookup(hostname: string): Promise<never> {
   throw new Error(`DNS lookups are not available in the single-file version (${hostname})`)
 }
 
-export default { lookup }
+const dns = { lookup }
+export default dns
