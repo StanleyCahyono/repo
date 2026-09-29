@@ -52,7 +52,7 @@ WantedBy=multi-user.target
 | `weather` | 180 min | `PISTE_WEATHER_EVERY_MIN` | Every resort weather point (base/summit) from every supporting provider: Open-Meteo (primary), NWS gridded forecast (US, stored as an alternate model for disagreement checks). 3 past days + 16 forecast days. |
 | `nws-alerts` | 60 min | `PISTE_ALERTS_EVERY_MIN` | Official NWS watches/warnings per US resort. Ended or withdrawn alerts are removed. |
 | `reports` | 60 min between 06:00–18:00 **resort-local**, 240 min otherwise | `PISTE_REPORTS_EVERY_MIN`, `PISTE_REPORTS_NIGHT_EVERY_MIN` | One task per resort with an official report adapter (Greek Peak, Alta). |
-| `status` | daily, and after report changes | — | Status implied by season dates (see "Honesty rules"). |
+| `status` | 60 min | `PISTE_STATUS_EVERY_MIN` | Status implied by season dates (see "Honesty rules"). Local and cheap, so an announced date passing (or a recorded closing) shows within the hour. |
 | `assessments` | every 6 h, and after weather/report/status changes | `PISTE_ASSESSMENTS_EVERY_MIN` | Conditions v1 for every resort, today−1 … forecast horizon (≤ 16 days), all three modes. |
 | `alerts` | after every refresh pass | — | Evaluates alert rules → in-app alerts. |
 | `fx` | daily | `PISTE_FX_EVERY_MIN` | ECB reference rates for every currency in use. |
@@ -60,11 +60,13 @@ WantedBy=multi-user.target
 | `prune` | daily | `PISTE_PRUNE_EVERY_MIN` | Retention (below). |
 
 Other settings: `PISTE_WORKER_TICK_SECONDS` (60), `PISTE_SCHEDULER_JITTER` (0.1 = ±10 % of each cadence, so
-requests do not align on the hour), `PISTE_WEATHER_RETENTION_DAYS` (14), `PISTE_DISABLED_PROVIDERS`
-(comma-separated provider ids to switch off, e.g. `nws-grid`).
+requests do not align on the hour; 0 ≤ value < 1), `PISTE_WEATHER_RETENTION_DAYS` (14), `PISTE_DISABLED_PROVIDERS`
+(comma-separated ids of providers the jobs must not call: `open-meteo`, `nws-grid`, `nws-alerts`, `frankfurter`,
+`link-check`, `alta-official`, `greek-peak-official`). Invalid or non-positive cadence values fall back to the
+defaults. All variables are listed in `docs/environment.md`.
 
 Due times are computed from `refresh_runs`, so restarting the worker does not re-run everything, and a job + target
-that is already running is never started twice (a `running` row older than 30 min is marked abandoned). After a
+that is already running is never started twice (a `running` row older than 90 min is marked abandoned). After a
 failed run the job is retried after min(cadence, 30 min). A job body that throws is retried once with backoff;
 provider-level retries/timeouts live in `src/lib/providers/http.ts`.
 
@@ -75,10 +77,17 @@ the error text and per-source outcomes in `details.items` (`{ key, target, ok, s
 
 - **Per-source isolation:** each resort/point/provider is its own item. One failing never aborts the others; the
   run is `partial` when some items failed.
-- **Last success** (`lastSuccess(db, job, target?)`) only considers `ok`/`partial` runs; for a resort, a global run
-  counts only if that resort's own item succeeded. A failed run never advances it.
+- **Last success** (`lastSuccess(db, job, target?)`, rule in `src/lib/jobs/success.ts`) only considers `ok`/`partial`
+  runs; for a resort, a global run counts only if that resort's own item succeeded. A failed run never advances it.
+  Jobs that call external sources (`weather`, `nws-alerts`, `reports`, `links`, `fx`) count only when at least one
+  real fetch succeeded: a run that fetched nothing — no provider configured or disabled, every source unsupported,
+  every item skipped — is recorded `ok` but does not advance "last successful update", so a disconnected provider
+  never looks fresh. Local jobs (`status`, `assessments`, `alerts`, `prune`) count whenever they complete. The whole
+  run history is searched, so a source failing for months still shows its real last success.
 - **Failed weather fetches** add a `weather_runs` row with `status = 'error'` (shown on Sources) and never delete or
-  modify earlier good runs.
+  modify earlier good runs. A response the adapter accepted but that holds no usable hour (an empty time axis, or
+  renamed variables that all parse as null) is treated the same way, as a `schema-changed` failure: an error run, a
+  `source_records` row with `ok = false` and the parser error, and the last good run stays the latest.
 - **Report fetches** are always logged in `source_records` (adapter, URL, HTTP status, content hash, extract, error,
   parser errors). An unchanged report (same content hash, ignoring the page's "updated" time and the date) creates
   no new revision and does not touch the stored report's `reportedAt`, so its observation age keeps growing. A
@@ -104,8 +113,9 @@ Content-Type: application/json
 ## Health (`GET /api/health`)
 
 Returns the scheduler heartbeat (`app_meta['scheduler.heartbeat']`), its age, whether it is stale (worker: > 5 min;
-cron: > 240 min), last success per job (reports per resort), and the latest run of each job. `?strict=1` answers
-`503` when stale, for an external uptime monitor.
+cron: > 240 min; `PISTE_HEALTH_MAX_HEARTBEAT_MIN` overrides both), last success per job (reports per resort; see
+"last successful update" above), and the latest run of each job. `?strict=1` answers `503` when stale, for an
+external uptime monitor.
 
 ## Weather history and retention
 
@@ -118,7 +128,8 @@ cron: > 240 min), last success per job (reports per resort), and the latest run 
   point / provider / resort-local day** is kept — a forecast made before its valid time stays available to compare
   with what was later reported — and the rest are deleted. Stored runs are never rewritten with newer data.
 - `source_records` older than 30 days are pruned except the newest per adapter/resort/URL; `refresh_runs` older than
-  60 days (skipped rows after 7 days).
+  60 days (skipped rows after 7 days), except the run "last success" points at for each job and for each resort —
+  including a resort's success recorded inside a global run — which is kept whatever its age.
 
 ## Assessments history
 
@@ -133,9 +144,17 @@ any stored forecast only yesterday and today are assessed. Rows computed in the 
 ## Honesty rules enforced by jobs
 
 - Status events are appended only on change and never reordered (an older statement is not appended).
+- A statement cannot postdate its retrieval: an official report stamped after it was fetched (a typo, or a local
+  "updated 06:00" parsed as UTC) enters the status history at the fetch time — the stored report keeps the source's
+  own `reportedAt`. A manual report whose reported time is more than 5 minutes in the future is rejected; within
+  that clock-skew allowance its status takes effect at entry time.
 - An announced opening date never produces `open`. Before it, the derived status is `not-yet-open`; once it passes
   without an official confirmation the derived status becomes `unknown` ("Status unavailable"). Derived statuses
-  never override a newer official statement.
+  never override a newer official statement of the same season; a statement from an earlier season (last April's
+  "closed for the season") does not block the new season's derived status.
+- A derived status describes the whole resort-local day, so it is stamped at local midnight: an official statement
+  made later that day wins even if it is fetched after the status job ran. (When it supersedes a statement about an
+  earlier date that was first recorded later today, it takes that statement's time instead.)
 - An official `open`/`partially-open` report confirms the actual opening; `closed-for-season` after an opening
   confirms the actual closing. Every change of announced/actual opening/closing is logged to
   `opening_date_history`.
@@ -153,9 +172,16 @@ are not recreated.
 
 - **Dedupe:** each alert has a unique key `type:subject:bucket` (e.g. snow threshold: resort + the local day the
   threshold is crossed; price change: the new snapshot). Repeated refreshes of the same forecast never repeat it.
+- **Snow threshold** alerts use only a forecast fetched within the last 12 hours
+  (`CONDITIONS_CONFIG_V1.confidence.weatherStaleHours`); after fetches have failed for longer, the last good run is not
+  presented as current news. Summit first, Open-Meteo preferred.
+- **Opening-date changes** researched by web search (catalog reseeds, verification `search-summary`) say
+  "Researched — confirm at source"; unverified ones say "Unverified — confirm at the official source".
 - **Cooldown:** per rule and subject (default 12 h). A new bucket inside the cooldown is held back and fires later if
   the condition still holds.
 - Price changes use verified snapshots only (`published`/`observed-quote` with verification `api`, `official-page`
-  or `user-confirmed`), compared within the same subject, item, category, day type and season. Researched
-  (search-summary) prices never trigger alerts.
+  or `user-confirmed`), compared within the same subject, item, category, day type, season, currency, validity dates
+  (`appliesFrom`/`appliesTo`, i.e. date-specific tickets), purchase-by tier and tax treatment. Two prices observed at
+  the same instant are conflicting statements, not a change. Researched (search-summary) prices never trigger
+  alerts.
 - Event alerts start from what exists when a resort is first watched (no burst of alerts for the existing catalog).

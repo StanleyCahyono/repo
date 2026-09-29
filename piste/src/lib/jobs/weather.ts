@@ -3,6 +3,8 @@
  *
  * - Every provider call becomes a `weather_runs` row: status 'ok' with its hourly `weather_points`, or status
  *   'error' with the error text (so Sources can show it). Earlier good runs are never deleted or rewritten.
+ * - A response without a single usable hour (empty time axis, or every value null after a variable rename) is a
+ *   'schema-changed' failure, not an 'ok' run, so the last good forecast stays the latest one.
  * - `validTime` is the provider's UTC stamp; `localDate` is the resort-local day of the hour the values describe,
  *   using the provider's interval semantics (Open-Meteo 'preceding-hour': a value stamped 00:00 local covers
  *   23:00–24:00 of the PREVIOUS day).
@@ -216,6 +218,51 @@ export async function recordFetches(
   return ids
 }
 
+/** Hourly fields that carry weather (`isDay` alone describes the sun, not the weather). */
+const WEATHER_VALUE_FIELDS = [
+  'temperatureC',
+  'apparentTemperatureC',
+  'snowfallCm',
+  'rainMm',
+  'precipitationMm',
+  'windKmh',
+  'gustKmh',
+  'humidityPct',
+  'visibilityM',
+  'cloudCoverPct',
+  'freezingLevelM',
+  'snowDepthM',
+  'weatherCode',
+] as const satisfies readonly (keyof HourlyWeather)[]
+
+/** Hours with a parseable valid time and at least one finite weather value. */
+export function usableHourCount(hourly: readonly HourlyWeather[] | null | undefined): number {
+  if (!Array.isArray(hourly)) return 0
+  let n = 0
+  for (const h of hourly) {
+    if (!h || typeof h.validTime !== 'string' || !canonicalInstant(h.validTime)) continue
+    if (WEATHER_VALUE_FIELDS.some((k) => typeof h[k] === 'number' && Number.isFinite(h[k]))) n++
+  }
+  return n
+}
+
+/**
+ * A response the adapter accepted but that holds no usable hour (an empty time axis, or renamed variables that all
+ * parse as null) is a schema change, not a forecast: storing it as an 'ok' run would hide the last good forecast
+ * from assessments and alerts. It becomes a non-retriable 'schema-changed' failure; the last good run is kept.
+ */
+export function rejectEmptySeries(result: ProviderResult<WeatherSeries>, label: string): ProviderResult<WeatherSeries> {
+  if (!result.ok || usableHourCount(result.data?.hourly) > 0) return result
+  const records = Array.isArray(result.data?.hourly) ? result.data.hourly.length : 0
+  return {
+    ok: false,
+    errorKind: 'schema-changed',
+    retriable: false,
+    error: `${label} returned no usable hourly values (${records} record${records === 1 ? '' : 's'}); the last good run is kept`,
+    fetches: result.fetches,
+  }
+}
+
 async function callSafely<T>(fn: () => Promise<ProviderResult<T>>): Promise<ProviderResult<T>> {
   try {
     return await fn()
@@ -251,8 +298,11 @@ export async function refreshWeather(ctx: JobContext, opts: WeatherJobOptions = 
             items.push({ key, target: resort.id, ok: true, skipped: true, written: 0 })
             continue
           }
-          const result = await callSafely(() =>
-            provider.fetchForecast(request, { pastDays: opts.pastDays ?? DEFAULT_PAST_DAYS, forecastDays: opts.forecastDays ?? DEFAULT_FORECAST_DAYS }),
+          const result = rejectEmptySeries(
+            await callSafely(() =>
+              provider.fetchForecast(request, { pastDays: opts.pastDays ?? DEFAULT_PAST_DAYS, forecastDays: opts.forecastDays ?? DEFAULT_FORECAST_DAYS }),
+            ),
+            provider.label,
           )
           await recordFetches(db, { adapter: provider.id, resortId: resort.id, result })
           if (result.ok) {

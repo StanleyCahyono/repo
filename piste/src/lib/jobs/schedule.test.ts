@@ -13,6 +13,12 @@ describe('cadences', () => {
     expect(c.fxMin).toBe(DEFAULT_CADENCES.fxMin)
   })
 
+  it('derives statuses hourly by default (an announced date passing shows within the hour), overridable', () => {
+    expect(DEFAULT_CADENCES.statusMin).toBe(60)
+    expect(cadencesFromEnv({ PISTE_STATUS_EVERY_MIN: '30' }).statusMin).toBe(30)
+    expect(cadencesFromEnv({ PISTE_STATUS_EVERY_MIN: '0' }).statusMin).toBe(60)
+  })
+
   it('refreshes reports hourly in resort-local daytime and every 4 h otherwise', () => {
     const c = DEFAULT_CADENCES
     // 14:00Z = 07:00 in Denver, 09:00 in New York.
@@ -58,10 +64,10 @@ describe('scheduler tick', () => {
     expect(await tick({ db, deps: d, cadences: DEFAULT_CADENCES, clock: () => now, state, rng: () => 0.5 })).toHaveLength(0)
     expect(await getMeta(db, 'scheduler.heartbeat')).toBe(now)
 
-    // 07:00 Denver + 61 min: the daytime report cadence (60 min) is due again, weather (180) is not.
+    // 07:00 Denver + 61 min: the daytime report cadence and the hourly status job are due again, weather (180) is not.
     now = addHours(T0, 61 / 60)
     const third = await tick({ db, deps: d, cadences: { ...DEFAULT_CADENCES, jitterPct: 0 }, clock: () => now, state, rng: () => 0.5 })
-    expect(third.map((s) => `${s.job}${s.target ? `:${s.target}` : ''}`)).toEqual(['nws-alerts', 'reports:alta', 'alerts'])
+    expect(third.map((s) => `${s.job}${s.target ? `:${s.target}` : ''}`)).toEqual(['nws-alerts', 'reports:alta', 'status', 'alerts'])
     expect((await db.select().from(refreshRuns)).every((r) => r.status !== 'running')).toBe(true)
   })
 

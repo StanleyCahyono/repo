@@ -3,15 +3,19 @@
  * failures (one resort failing never aborts the others), retries a job whose body throws with bounded backoff,
  * enforces the manual-refresh cooldown and prevents overlapping runs of the same job + target.
  *
- * "Last successful update" only ever moves on ok/partial runs — a failed run never advances it.
+ * "Last successful update" only ever moves on ok/partial runs that actually did something (see ./success.ts) — a
+ * failed run, or an external job that fetched nothing, never advances it.
  */
-import { and, desc, eq, inArray, isNull, lt, ne } from 'drizzle-orm'
+import { and, desc, eq, inArray, isNull, lt, ne, or, type SQL } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
 import { refreshRuns, type RefreshRunDetails } from '@/lib/db/schema'
 import type { RefreshRunRow } from '@/lib/db/rows'
+import { successTargets } from './success'
 import type { ItemOutcome, JobContext, JobDeps, JobName, JobWork, JobWorkResult, RunStatus, Trigger } from './types'
 import { defaultSleep, errorMessage, minutesAfter, truncate } from './util'
 import { JOB_WORK } from './work'
+
+export { successTargets }
 
 export const DEFAULT_COOLDOWN_MINUTES = 10
 /** A 'running' row older than this is treated as abandoned (the process died mid-run). */
@@ -190,32 +194,36 @@ export async function runJob(args: RunJobArgs): Promise<RunSummary> {
   }
 }
 
+const LAST_SUCCESS_PAGE = 500
+
 /**
- * Last successful update of a job (optionally for one target). Only ok/partial runs count. For a target, a
- * global run counts only when that target's own item succeeded — a partial run in which this resort failed does
- * not advance its "last successful update".
+ * Last successful update of a job (optionally for one target), per `successTargets`: only ok/partial runs count;
+ * external jobs need a real successful fetch (a run that fetched nothing does not count); for a target, a global
+ * run counts only when that target's own item succeeded — a partial run in which this resort failed does not
+ * advance its "last successful update". Pages back through the whole history, so a source that has been failing
+ * for months still reports its real last success instead of "never".
  */
 export async function lastSuccess(db: Db, job: JobName, target: string | null = null): Promise<string | null> {
-  const rows = await db
-    .select()
-    .from(refreshRuns)
-    .where(and(eq(refreshRuns.job, job), inArray(refreshRuns.status, ['ok', 'partial'])))
-    .orderBy(desc(refreshRuns.startedAt), desc(refreshRuns.id))
-    .limit(500)
-  for (const r of rows) {
-    if (target === null) {
-      if (r.target === null) return r.finishedAt ?? r.startedAt
-      continue
+  // Only global runs can count for the job as a whole; for a target, its own runs and global runs.
+  const scope = target === null ? isNull(refreshRuns.target) : or(isNull(refreshRuns.target), eq(refreshRuns.target, target))
+  let cursor: { startedAt: string; id: number } | null = null
+  for (;;) {
+    const after: SQL | undefined = cursor
+      ? or(lt(refreshRuns.startedAt, cursor.startedAt), and(eq(refreshRuns.startedAt, cursor.startedAt), lt(refreshRuns.id, cursor.id)))
+      : undefined
+    const rows: RefreshRunRow[] = await db
+      .select()
+      .from(refreshRuns)
+      .where(and(eq(refreshRuns.job, job), inArray(refreshRuns.status, ['ok', 'partial']), scope, after))
+      .orderBy(desc(refreshRuns.startedAt), desc(refreshRuns.id))
+      .limit(LAST_SUCCESS_PAGE)
+    for (const r of rows) {
+      if (successTargets(r).includes(target)) return r.finishedAt ?? r.startedAt
     }
-    const own = (r.details?.items ?? []).filter((i) => i.target === target && !i.skipped)
-    if (r.target === target) {
-      // A targeted partial run can still have failed for every item of this target.
-      if (r.status === 'ok' || own.length === 0 || own.some((i) => i.ok)) return r.finishedAt ?? r.startedAt
-      continue
-    }
-    if (r.target === null && own.some((i) => i.ok)) return r.finishedAt ?? r.startedAt
+    if (rows.length < LAST_SUCCESS_PAGE) return null
+    const last: RefreshRunRow = rows[rows.length - 1]
+    cursor = { startedAt: last.startedAt, id: last.id }
   }
-  return null
 }
 
 /** Most recent run of a job + target (any status). */

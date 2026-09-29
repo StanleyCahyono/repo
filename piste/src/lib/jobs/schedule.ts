@@ -5,8 +5,9 @@
  * - Due times derive from `refresh_runs`, so restarting the worker does not re-run everything and two processes
  *   cannot overlap a job (the runner skips a job + target that is already running).
  * - Cadences come from the environment with defaults: weather 180 min; official reports 60 min between 06:00 and
- *   18:00 resort-local and 240 min otherwise; official alerts 60 min; status/links/fx/prune daily; assessments every
- *   6 h and after weather/report changes; alerts after each refresh pass. Each due time gets ± jitter.
+ *   18:00 resort-local and 240 min otherwise; official alerts 60 min; status 60 min (local and cheap: an announced
+ *   date passing, or a recorded closing, shows up within the hour); links/fx/prune daily; assessments every 6 h and
+ *   after weather/report/status changes; alerts after each refresh pass. Each due time gets ± jitter.
  * - The worker writes a heartbeat to app_meta('scheduler.heartbeat') every tick. A sleeping or powered-off machine
  *   collects nothing: run the worker on an always-on host, or call `npm run refresh` from cron.
  */
@@ -45,7 +46,7 @@ export const DEFAULT_CADENCES: Cadences = {
   reportsDayStart: '06:00',
   reportsDayEnd: '18:00',
   assessmentsMin: 360,
-  statusMin: 1440,
+  statusMin: 60,
   linksMin: 1440,
   fxMin: 1440,
   pruneMin: 1440,
@@ -60,6 +61,7 @@ const ENV_KEYS: Partial<Record<keyof Cadences, string>> = {
   reportsDayMin: 'PISTE_REPORTS_EVERY_MIN',
   reportsNightMin: 'PISTE_REPORTS_NIGHT_EVERY_MIN',
   assessmentsMin: 'PISTE_ASSESSMENTS_EVERY_MIN',
+  statusMin: 'PISTE_STATUS_EVERY_MIN',
   linksMin: 'PISTE_LINKS_EVERY_MIN',
   fxMin: 'PISTE_FX_EVERY_MIN',
   pruneMin: 'PISTE_PRUNE_EVERY_MIN',

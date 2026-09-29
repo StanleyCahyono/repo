@@ -19,6 +19,7 @@ import {
   userPreferences,
   weatherAlerts,
 } from '@/lib/db/schema'
+import { successTargets } from './success'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
 import { chunk, daysBefore, defaultSleep, errorMessage } from './util'
 import { DEFAULT_WEATHER_RETENTION_DAYS, pruneWeatherRuns, recordFetches } from './weather'
@@ -192,22 +193,32 @@ export async function pruneAll(ctx: JobContext, opts: PruneOptions = {}): Promis
     const cutoff = daysBefore(now, opts.refreshRunKeepDays ?? 60)
     const skippedCutoff = daysBefore(now, 7)
     const rows = await db
-      .select({ id: refreshRuns.id, job: refreshRuns.job, target: refreshRuns.target, status: refreshRuns.status, startedAt: refreshRuns.startedAt })
+      .select({
+        id: refreshRuns.id,
+        job: refreshRuns.job,
+        target: refreshRuns.target,
+        status: refreshRuns.status,
+        startedAt: refreshRuns.startedAt,
+        details: refreshRuns.details,
+      })
       .from(refreshRuns)
       .orderBy(desc(refreshRuns.startedAt), desc(refreshRuns.id))
-    // The newest successful run of each job + target is kept whatever its age: "last successful update" must never
-    // turn into "never" just because a source has been failing for a long time.
+    // The run "last successful update" points at is kept whatever its age, for the job and for every resort:
+    // it must never turn into "never" just because a source has been failing for a long time. Per-resort successes
+    // live in the items of global runs, so walking newest first, a run is kept while it is the newest success for
+    // any job + target it counts for (the same predicate lastSuccess uses).
     const seenSuccess = new Set<string>()
     const doomed: number[] = []
     for (const r of rows) {
-      const k = `${r.job}|${r.target ?? ''}`
-      if (r.status === 'ok' || r.status === 'partial') {
-        if (!seenSuccess.has(k)) {
-          seenSuccess.add(k)
-          continue
-        }
-      }
       if (r.status === 'running') continue
+      let newestForSome = false
+      for (const t of successTargets(r)) {
+        const k = `${r.job}|${t ?? ''}`
+        if (seenSuccess.has(k)) continue
+        seenSuccess.add(k)
+        newestForSome = true
+      }
+      if (newestForSome) continue
       if (r.startedAt < cutoff || (r.status === 'skipped' && r.startedAt < skippedCutoff)) doomed.push(r.id)
     }
     for (const ids of chunk(doomed, 400)) await db.delete(refreshRuns).where(inArray(refreshRuns.id, ids))

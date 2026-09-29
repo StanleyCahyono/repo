@@ -27,7 +27,7 @@ import { OPERATING_STATUSES, SNOW_WINDOWS, SURFACE_TAGS, provenance, type DataKi
 import type { ParsedReport, ProviderResult, ResortReportProvider } from '@/lib/providers/types'
 import { applyStatusToSeason, recordStatus } from './status'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
-import { canonicalInstant, errorMessage, hashJson, selectResorts, truncate } from './util'
+import { canonicalInstant, errorMessage, hashJson, minutesAfter, selectResorts, truncate } from './util'
 
 export const PERSONAL_NOTE = 'personal'
 export const TRANSCRIBED_NOTE = 'transcribed'
@@ -147,6 +147,21 @@ export async function latestOfficialReport(db: Db, resortId: string): Promise<Op
   return rows.find((r) => reportOrigin(r) === 'official-adapter') ?? null
 }
 
+/**
+ * When a status statement takes effect in the status history: the source's own time, unless it is missing,
+ * unparseable or later than `latestPossible` (when we retrieved or entered it). A statement cannot postdate its
+ * retrieval; a future stamp (a typo, or a local "updated 06:00" parsed as UTC) would otherwise become the latest
+ * status event and block every later change, closures included. The report row keeps the source's `reportedAt`.
+ */
+export function statementTime(reportedAt: string | null, latestPossible: string): string {
+  const bound = canonicalInstant(latestPossible) ?? latestPossible
+  const stated = reportedAt ? canonicalInstant(reportedAt) : null
+  return stated && stated <= bound ? stated : bound
+}
+
+/** A manual report's `reportedAt` may run ahead of the app clock by at most this much (clock skew). */
+export const MANUAL_REPORT_CLOCK_SKEW_MINUTES = 5
+
 // ---------------------------------------------------------------------------
 // Adapter ingestion
 
@@ -233,7 +248,7 @@ export async function ingestOfficialReport(
       resortId: provider.resortId,
       status: n.status,
       localDate: n.localDate,
-      effectiveAt: n.reportedAt ?? base.fetchedAt,
+      effectiveAt: statementTime(n.reportedAt, base.fetchedAt),
       prov,
       note: `From ${provider.label}`,
     })
@@ -334,9 +349,17 @@ function hostOf(url: string): string {
   }
 }
 
-/** Insert a report typed from an official source (kind 'manual') or an official report entered by me. */
+/**
+ * Insert a report typed from an official source (kind 'manual') or an official report entered by me.
+ * A `reportedAt` later than now (beyond a few minutes of clock skew) is rejected: a statement from the future would
+ * freeze the status history.
+ */
 export async function addManualReport(db: Db, input: ManualReportInput, now: string): Promise<{ id: number; revision: number; statusAppended: boolean }> {
-  const v = ManualReportInput.parse(input)
+  const latestAllowed = minutesAfter(now, MANUAL_REPORT_CLOCK_SKEW_MINUTES)
+  const v = ManualReportInput.refine((x) => x.reportedAt === null || (canonicalInstant(x.reportedAt) ?? '') <= latestAllowed, {
+    path: ['reportedAt'],
+    message: 'Reported time cannot be in the future',
+  }).parse(input)
   const host = v.sourceLabel ?? hostOf(v.sourceUrl)
   const prov: Provenance =
     v.kind === 'official'
@@ -375,7 +398,7 @@ export async function addManualReport(db: Db, input: ManualReportInput, now: str
       resortId: v.resortId,
       status: n.status,
       localDate: n.localDate,
-      effectiveAt: n.reportedAt ?? now,
+      effectiveAt: statementTime(n.reportedAt, now),
       prov,
       note: `Entered from ${host}`,
     })

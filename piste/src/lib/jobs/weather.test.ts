@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { eq } from 'drizzle-orm'
-import { weatherAlerts, weatherPoints, weatherRuns } from '@/lib/db/schema'
+import { sourceRecords, weatherAlerts, weatherPoints, weatherRuns } from '@/lib/db/schema'
+import { addHours } from '@/lib/domain/time'
 import { provenance } from '@/lib/domain/types'
-import type { WeatherPointRequest } from '@/lib/providers/types'
-import { addResort, deps, fail, fakeAlerts, fakeWeather, hours, ok, series, T0, testDb } from './test-helpers'
+import type { HourlyWeather, WeatherPointRequest } from '@/lib/providers/types'
+import { lastSuccess, runJob } from './runner'
+import { addResort, blankHour, deps, fail, fakeAlerts, fakeWeather, hours, ok, series, T0, testDb } from './test-helpers'
 import type { JobContext } from './types'
-import { persistWeatherSeries, pruneWeatherRuns, refreshOfficialAlerts, refreshWeather, weatherLocalDate } from './weather'
+import { latestOkRuns, persistWeatherSeries, pruneWeatherRuns, refreshOfficialAlerts, refreshWeather, usableHourCount, weatherLocalDate } from './weather'
 
 const ctx = (db: JobContext['db'], over: Partial<JobContext> = {}): JobContext => ({ db, now: T0, deps: deps(), target: null, trigger: 'schedule', ...over })
 
@@ -78,6 +80,57 @@ describe('weather points: resort-local day attribution', () => {
     const res = await refreshWeather(ctx(db, { deps: deps({ weatherProviders: [provider], demo: true }) }))
     expect(provider.calls).toHaveLength(0)
     expect(res.items).toHaveLength(0)
+  })
+})
+
+describe('weather: a response without usable hours is a schema change, not a forecast', () => {
+  /** A good run, then the same provider answers "ok" with `bad` hours. */
+  async function goodThenBad(bad: HourlyWeather[]) {
+    const db = await testDb()
+    await addResort(db, { id: 'alta' })
+    let respond: HourlyWeather[] = hours('2027-01-14T00:00:00Z', 48)
+    const provider = fakeWeather((req) => ok(series(req, respond), T0))
+    const run = (now: string) => runJob({ db, job: 'weather', trigger: 'schedule', now, deps: deps({ weatherProviders: [provider] }), maxAttempts: 1 })
+    expect((await run(T0)).status).toBe('ok')
+    const goodIds = [...(await latestOkRuns(db, 'alta')).values()].map((r) => r.id).sort()
+    const pointsBefore = (await db.select().from(weatherPoints)).length
+    respond = bad
+    const later = addHours(T0, 3)
+    const summary = await run(later)
+    return { db, summary, goodIds, pointsBefore, later }
+  }
+
+  async function expectLastGoodRunKept(r: Awaited<ReturnType<typeof goodThenBad>>, records: number) {
+    const { db, summary, goodIds, pointsBefore } = r
+    // Every point failed as a non-retriable schema change; the job is an error and "last success" does not move.
+    expect(summary.status).toBe('error')
+    expect(summary.items.every((i) => !i.ok && /^schema-changed: .*no usable hourly values/.test(i.error ?? ''))).toBe(true)
+    expect(await lastSuccess(db, 'weather', 'alta')).toBe(T0)
+    // The last good runs are still the latest ok runs, with all their points.
+    expect([...(await latestOkRuns(db, 'alta')).values()].map((x) => x.id).sort()).toEqual(goodIds)
+    expect((await db.select().from(weatherPoints)).length).toBe(pointsBefore)
+    // The failure is visible: an error run per point and a failed fetch record with the parser error.
+    const errors = await db.select().from(weatherRuns).where(eq(weatherRuns.status, 'error'))
+    expect(errors).toHaveLength(2)
+    expect(errors.every((e) => e.error?.includes(`(${records} record`))).toBe(true)
+    const recs = await db.select().from(sourceRecords).orderBy(sourceRecords.id)
+    const last = recs[recs.length - 1]
+    expect(last.ok).toBe(false)
+    expect(last.parserErrors?.[0]).toMatch(/no usable hourly values/)
+  }
+
+  it('an empty time axis keeps the last good forecast', async () => {
+    await expectLastGoodRunKept(await goodThenBad([]), 0)
+  })
+
+  it('24 hours of nulls (renamed variables) keep the last good forecast; isDay alone is not weather', async () => {
+    await expectLastGoodRunKept(await goodThenBad(hours('2027-01-15T00:00:00Z', 24, () => ({ isDay: true }))), 24)
+  })
+
+  it('counts an hour as usable when it has a valid time and any finite weather value', () => {
+    const t = '2027-01-15T00:00:00Z'
+    expect(usableHourCount([])).toBe(0)
+    expect(usableHourCount([{ ...blankHour(t), snowDepthM: 1.2 }, { ...blankHour('not-a-time'), temperatureC: -3 }, { ...blankHour(t), windKmh: Number.NaN }])).toBe(1)
   })
 })
 

@@ -11,7 +11,7 @@ import { and, desc, eq } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
 import { openingDateHistory, resortSeasons, seasons, statusEvents } from '@/lib/db/schema'
 import type { ResortSeasonRow, StatusEventRow } from '@/lib/db/rows'
-import { localDateOf, seasonIdFor, formatLocalDate } from '@/lib/domain/time'
+import { localDateOf, seasonIdFor, formatLocalDate, startOfLocalDay } from '@/lib/domain/time'
 import { provenance, type OperatingStatus, type Provenance } from '@/lib/domain/types'
 import type { ItemOutcome, JobContext, JobWorkResult } from './types'
 import { errorMessage, selectResorts } from './util'
@@ -152,14 +152,20 @@ type SeasonDates = Pick<ResortSeasonRow, 'announcedOpening' | 'actualOpening' | 
 
 /**
  * Status implied by season dates alone (pure). Never 'open': operations come from official statements.
- * `latest` is the latest recorded event; derived statuses never override a newer official statement.
+ * `latest` is the latest recorded event; derived statuses never override a newer official statement of this season.
  */
 export function deriveSeasonStatus(season: SeasonDates | null, today: string, latest: Pick<StatusEventRow, 'status' | 'localDate' | 'prov'> | null): DerivedStatus | null {
   if (!season) return null
-  // Piste's own statements (kind 'derived', or 'demo' ones written by Piste in the demo database) may be superseded.
-  const latestIsDerived = !latest || latest.prov.kind === 'derived' || (latest.prov.kind === 'demo' && latest.prov.provider === 'Piste')
+  // Piste's own statements (kind 'derived', or 'demo' ones written by Piste in the demo database) may be superseded,
+  // and so may any statement about an earlier season: last April's "closed for the season" says nothing about
+  // this October.
+  const supersedable =
+    !latest ||
+    latest.prov.kind === 'derived' ||
+    (latest.prov.kind === 'demo' && latest.prov.provider === 'Piste') ||
+    seasonIdFor(latest.localDate) !== seasonIdFor(today)
   if (season.actualClosing && season.actualClosing <= today) {
-    return latestIsDerived || latest!.localDate < season.actualClosing
+    return supersedable || latest!.localDate < season.actualClosing
       ? { status: 'closed-for-season', note: `Closed for the season on ${formatLocalDate(season.actualClosing)}` }
       : null
   }
@@ -167,16 +173,29 @@ export function deriveSeasonStatus(season: SeasonDates | null, today: string, la
   const announced = season.announcedOpening
   if (!announced) return null
   if (today < announced) {
-    return latestIsDerived ? { status: 'not-yet-open', note: `Announced opening ${formatLocalDate(announced)} is a target, not a confirmation` } : null
+    return supersedable ? { status: 'not-yet-open', note: `Announced opening ${formatLocalDate(announced)} is a target, not a confirmation` } : null
   }
   // The announced date has arrived without a confirmed opening: status is unknown, never "open".
-  if (latestIsDerived || latest!.localDate < announced) {
+  if (supersedable || latest!.localDate < announced) {
     return { status: 'unknown', note: `Announced opening date (${formatLocalDate(announced)}) reached without an official confirmation` }
   }
   return null
 }
 
-/** Append derived statuses where season dates imply a change (daily and after report refreshes). */
+/**
+ * When a derived status for resort-local `today` takes effect. It describes the whole local day, so it is stamped
+ * at the day's start: any official statement made later that day — even one fetched after this job ran — is newer
+ * and wins. (Stamping it with the job's run time would let it out-rank, and so drop, an official statement
+ * published earlier the same day but fetched later.) When the statement it supersedes was itself made later today
+ * (e.g. yesterday's report first fetched this morning), it is stamped at that statement's time so it still lands
+ * after it without moving the ordering threshold for anything else.
+ */
+export function derivedStatusTime(today: string, tz: string, now: string, latest: Pick<StatusEventRow, 'effectiveAt'> | null): string {
+  const dayStart = startOfLocalDay(today, tz)
+  return latest && latest.effectiveAt > dayStart && latest.effectiveAt <= now ? latest.effectiveAt : dayStart
+}
+
+/** Append derived statuses where season dates imply a change (hourly by default, and on manual refresh). */
 export async function deriveStatuses(ctx: JobContext): Promise<JobWorkResult> {
   const { db, now } = ctx
   const resorts = await selectResorts(db, ctx.target ? [ctx.target] : null)
@@ -203,7 +222,7 @@ export async function deriveStatuses(ctx: JobContext): Promise<JobWorkResult> {
         resortId: resort.id,
         status: derived.status,
         localDate: today,
-        effectiveAt: now,
+        effectiveAt: derivedStatusTime(today, resort.timezone, now, latest),
         note: derived.note,
         prov: provenance({ kind: ctx.deps.demo ? 'demo' : 'derived', provider: 'Piste', fetchedAt: now, season: seasonId, note: derived.note }),
       })

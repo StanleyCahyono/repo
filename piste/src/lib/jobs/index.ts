@@ -4,7 +4,7 @@
  * through POST /api/refresh (or a server action calling `runJob` with trigger 'manual').
  */
 export { JOB_NAMES, EXTERNAL_JOBS, emptyDeps, type JobName, type JobDeps, type JobContext, type JobWorkResult, type Trigger, type RunStatus } from './types'
-export { runJob, lastSuccess, lastRun, lastAttemptRun, statusFromItems, DEFAULT_COOLDOWN_MINUTES, type RunJobArgs, type RunSummary } from './runner'
+export { runJob, lastSuccess, lastRun, lastAttemptRun, statusFromItems, successTargets, DEFAULT_COOLDOWN_MINUTES, type RunJobArgs, type RunSummary } from './runner'
 export {
   refreshWeather,
   refreshOfficialAlerts,

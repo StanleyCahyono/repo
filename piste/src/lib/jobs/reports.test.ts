@@ -5,6 +5,7 @@ import { addHours } from '@/lib/domain/time'
 import type { ParsedReport, ProviderResult } from '@/lib/providers/types'
 import { addManualReport, addPersonalReport, isPersonalReport, refreshReports, reportContentHash, reportOrigin } from './reports'
 import { runJob, lastSuccess } from './runner'
+import { latestStatusEvent } from './status'
 import { addResort, addSeason, deps, fail, fakeReports, parsedReport, reportResult, T0, testDb } from './test-helpers'
 
 async function setup() {
@@ -84,6 +85,24 @@ describe('official report ingestion', () => {
     expect(hist.map((h) => [h.field, h.previousValue, h.newValue])).toEqual([['actualOpening', null, '2027-01-15']])
   })
 
+  it('records a status stamped after it was fetched at the fetch time, so a later closure still becomes the latest status', async () => {
+    const { db, refresh, set } = await setup()
+    // The page claims a time after we retrieved it (a typo, or a local "updated 06:00" parsed as UTC).
+    set(reportResult(parsedReport({ reportedAt: '2028-01-15T13:00:00.000Z' }), T0))
+    await refresh(T0)
+    const [report] = await db.select().from(operationalReports)
+    expect(report.reportedAt).toBe('2028-01-15T13:00:00.000Z') // the report keeps the source's own stamp
+    const first = await latestStatusEvent(db, 'alta')
+    expect([first?.status, first?.effectiveAt]).toEqual(['open', T0])
+
+    // Next day the resort closes. A statement from "2028" must not freeze the status history.
+    const nextDay = '2027-01-16T14:00:00.000Z'
+    set(reportResult(parsedReport({ localDate: '2027-01-16', reportedAt: '2027-01-16T13:00:00.000Z', status: 'temporarily-closed', openTrails: 0, openLifts: 0 }), nextDay))
+    await refresh(nextDay)
+    const latest = await latestStatusEvent(db, 'alta')
+    expect([latest?.status, latest?.effectiveAt]).toEqual(['temporarily-closed', '2027-01-16T13:00:00.000Z'])
+  })
+
   it('isolates adapters: a throwing adapter does not stop other resorts', async () => {
     const db = await testDb()
     await addResort(db, { id: 'alta' })
@@ -107,6 +126,25 @@ describe('official report ingestion', () => {
 })
 
 describe('manual and personal reports', () => {
+  it('rejects a reported time in the future; a few minutes of clock skew are accepted but never outrank later statements', async () => {
+    const db = await testDb()
+    await addResort(db, { id: 'alta' })
+    const input = { resortId: 'alta', localDate: '2027-01-15', sourceUrl: 'https://www.alta.com/conditions', status: 'open' as const }
+    // A typo a year ahead would otherwise become the latest status and hide every later change, closures included.
+    await expect(addManualReport(db, { ...input, reportedAt: '2028-01-15T13:00:00Z' }, T0)).rejects.toThrow(/cannot be in the future/)
+    expect(await db.select().from(operationalReports)).toHaveLength(0)
+    expect(await db.select().from(statusEvents)).toHaveLength(0)
+
+    // Three minutes ahead (a clock running fast) is accepted, but the status takes effect when it was entered…
+    const skewed = await addManualReport(db, { ...input, reportedAt: addHours(T0, 3 / 60) }, T0)
+    expect(skewed.statusAppended).toBe(true)
+    expect((await latestStatusEvent(db, 'alta'))?.effectiveAt).toBe(T0)
+    // …so a closure stated a minute later still becomes the latest status.
+    const closure = await addManualReport(db, { ...input, kind: 'official', status: 'temporarily-closed', reportedAt: addHours(T0, 1 / 60) }, addHours(T0, 2 / 60))
+    expect(closure.statusAppended).toBe(true)
+    expect((await latestStatusEvent(db, 'alta'))?.status).toBe('temporarily-closed')
+  })
+
   it('requires a source URL for transcribed reports and keeps personal feedback distinguishable', async () => {
     const db = await testDb()
     await addResort(db, { id: 'greek-peak', timezone: 'America/New_York' })

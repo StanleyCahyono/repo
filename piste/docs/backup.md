@@ -9,11 +9,17 @@ All data lives in SQLite files under `PISTE_DATA_DIR` (default `./data`): `piste
 npm run backup                 # → data/backups/piste-YYYYMMDD-HHmm.db (UTC time), keeps the newest 14
 npm run backup -- --keep 30    # or PISTE_BACKUP_KEEP=30
 npm run backup -- --dir /mnt/usb/piste-backups   # or PISTE_BACKUP_DIR
+npm run backup -- --demo       # the demo database → data/backups-demo/ (or $PISTE_BACKUP_DIR/demo)
 ```
 
 - Uses SQLite `VACUUM INTO`, which writes a consistent, compacted copy including committed WAL content. It is safe
   to run while the app and the worker are running.
 - Rotation only removes files named `piste-YYYYMMDD-HHmm[-n].db`; safety copies made by restore are never rotated.
+- Live and demo backups use the same file names and are kept apart by directory: `data/backups` and
+  `data/backups-demo`, or `$PISTE_BACKUP_DIR` and `$PISTE_BACKUP_DIR/demo`, so rotating one never removes the
+  other. An explicit `--dir` is used as given for either database — do not point both at the same directory.
+- Each backup records which database it was taken from (`app_meta` key `backup.sourceMode` = `live` or `demo`,
+  written into the copy only; the running database is never modified).
 - Schedule it like any job, e.g. `15 3 * * * cd /srv/piste && npm run backup`, and copy `data/backups/` off the
   machine now and then — a backup on the same disk does not survive the disk.
 
@@ -29,13 +35,20 @@ npm run restore -- data/backups/piste-20270115-1400.db
 2. The file is validated before anything changes: SQLite header, `PRAGMA quick_check`, the expected Piste tables,
    the Drizzle `__drizzle_migrations` table, and that it was not written by a newer Piste version than the code you
    run.
-3. The current database is copied to `data/backups/piste-pre-restore-YYYYMMDD-HHmmss.db` (a raw copy if it is too
-   damaged to vacuum).
-4. The file replaces `piste.db` atomically; stale `piste.db-wal`/`-shm` files are removed first so the old WAL cannot
+3. **Live and demo never cross.** A backup of the demo database — recognised by its recorded source, or by any demo
+   rows (`kind = 'demo'` weather runs, reports, assessments or FX rates, `quote_kind = 'demo'` prices, demo status
+   events), whatever the file is called — is refused for the live database. A backup recorded as coming from the live
+   database is refused for the demo database. `--force` does not override this, and `--check` reports it as a
+   failure. The output lists the file's demo row count and recorded source.
+4. The current database is copied to `data/backups/piste-pre-restore-YYYYMMDD-HHmmss.db` (for `--demo`:
+   `data/backups-demo/`; with `PISTE_BACKUP_DIR` set, that directory or its `demo/` subdirectory), labelled with
+   the database it came from — a raw copy if the database is too damaged to vacuum.
+5. The file replaces `piste.db` atomically; stale `piste.db-wal`/`-shm` files are removed first so the old WAL cannot
    be replayed onto the restored database.
-5. Start the app. If the backup is older than the code, pending migrations apply on first open.
+6. Start the app. If the backup is older than the code, pending migrations apply on first open.
 
-To undo a restore, restore the `piste-pre-restore-…` copy the same way. `--demo` targets the demo database.
+To undo a restore, restore the `piste-pre-restore-…` copy the same way. `--demo` targets the demo database
+(`npm run restore -- data/backups-demo/piste-20270115-1400.db --demo`).
 
 ## Personal export (JSON / CSV)
 

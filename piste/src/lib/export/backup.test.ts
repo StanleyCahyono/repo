@@ -7,7 +7,7 @@ import { drizzle } from 'drizzle-orm/libsql'
 import { migrate } from 'drizzle-orm/libsql/migrator'
 import { migrationsDir, schema } from '@/lib/db/client'
 import { trips } from '@/lib/db/schema'
-import { backupFileName, backupsToRemove, createBackup, localMigrations, restoreFromBackup, validatePisteDbFile } from './backup'
+import { backupFileName, backupsToRemove, createBackup, defaultBackupDir, localMigrations, restoreFromBackup, validatePisteDbFile } from './backup'
 
 let dir: string
 beforeEach(() => {
@@ -92,5 +92,64 @@ describe('backup and restore', () => {
     c.close()
     const v = await validatePisteDbFile(file, { local: localMigrations(migrationsDir()) })
     expect(v.errors.join(' ')).toMatch(/newer Piste version/)
+  })
+})
+
+describe('live / demo isolation', () => {
+  const now = '2027-01-16T09:00:00.000Z'
+
+  it('refuses a database holding demo rows for the live slot, whatever it is called, and leaves live untouched', async () => {
+    const live = path.join(dir, 'piste.db')
+    await makeDb(live, 'Live trip')
+    // Demo backups use the same piste-*.db names as live ones.
+    const demoFile = path.join(dir, 'piste-20270115-1400.db')
+    await makeDb(demoFile, 'Demo trip')
+    const c = createClient({ url: 'file:' + demoFile })
+    await c.execute(
+      "INSERT INTO fx_rates (base, quote, rate, rate_date, provider, fetched_at, kind) VALUES ('USD', 'EUR', '0.91', '2027-01-14', 'demo', '2027-01-15T14:00:00.000Z', 'demo')",
+    )
+    c.close()
+
+    const v = await validatePisteDbFile(demoFile, { local: localMigrations(migrationsDir()) })
+    expect(v.ok).toBe(true) // a valid Piste database…
+    expect(v.demoRows).toBe(1) // …holding demo data
+    await expect(restoreFromBackup({ backupFile: demoFile, targetFile: live, backupDir: path.join(dir, 'b'), now })).rejects.toThrow(/demo data never goes into the live database/)
+    expect(await tripName(live)).toBe('Live trip')
+    expect(fs.existsSync(path.join(dir, 'b'))).toBe(false) // refused before anything was touched
+
+    // The demo slot takes it.
+    const demoTarget = path.join(dir, 'piste-demo.db')
+    await restoreFromBackup({ backupFile: demoFile, targetFile: demoTarget, backupDir: path.join(dir, 'b-demo'), now, mode: 'demo' })
+    expect(await tripName(demoTarget)).toBe('Demo trip')
+  })
+
+  it('records which database a backup came from and never restores across live and demo', async () => {
+    const live = path.join(dir, 'piste.db')
+    const demo = path.join(dir, 'piste-demo.db')
+    await makeDb(live, 'Live trip')
+    await makeDb(demo, 'Demo trip') // no demo rows at all: recognised by the recorded source only
+    const demoBackup = (await createBackup({ sourceFile: demo, backupDir: path.join(dir, 'backups-demo'), now, keep: 5, mode: 'demo' })).file
+    const liveBackup = (await createBackup({ sourceFile: live, backupDir: path.join(dir, 'backups'), now, keep: 5, mode: 'live' })).file
+    expect((await validatePisteDbFile(demoBackup)).sourceMode).toBe('demo')
+    expect((await validatePisteDbFile(liveBackup)).sourceMode).toBe('live')
+    expect((await validatePisteDbFile(live)).sourceMode).toBeNull() // the source database itself is never written to
+
+    await expect(restoreFromBackup({ backupFile: demoBackup, targetFile: live, backupDir: path.join(dir, 'backups'), now })).rejects.toThrow(/backup of the demo database/)
+    await expect(restoreFromBackup({ backupFile: liveBackup, targetFile: demo, backupDir: path.join(dir, 'backups-demo'), now, mode: 'demo' })).rejects.toThrow(
+      /backup of the live database/,
+    )
+    expect(await tripName(live)).toBe('Live trip')
+    expect(await tripName(demo)).toBe('Demo trip')
+
+    // Same-mode restores work, and the safety copy is labelled with the database it came from.
+    const res = await restoreFromBackup({ backupFile: liveBackup, targetFile: live, backupDir: path.join(dir, 'backups'), now })
+    expect((await validatePisteDbFile(res.safetyCopy!)).sourceMode).toBe('live')
+  })
+
+  it('keeps live and demo backups in separate directories, so rotating one never removes the other', () => {
+    expect(defaultBackupDir('live', '/srv/piste/data', {})).toBe(path.join('/srv/piste/data', 'backups'))
+    expect(defaultBackupDir('demo', '/srv/piste/data', {})).toBe(path.join('/srv/piste/data', 'backups-demo'))
+    expect(defaultBackupDir('live', '/srv/piste/data', { PISTE_BACKUP_DIR: '/mnt/usb/piste' })).toBe(path.resolve('/mnt/usb/piste'))
+    expect(defaultBackupDir('demo', '/srv/piste/data', { PISTE_BACKUP_DIR: '/mnt/usb/piste' })).toBe(path.resolve('/mnt/usb/piste/demo'))
   })
 })

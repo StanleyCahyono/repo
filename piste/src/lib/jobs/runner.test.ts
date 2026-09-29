@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { eq } from 'drizzle-orm'
-import { refreshRuns, weatherPoints, weatherRuns } from '@/lib/db/schema'
+import { refreshRuns, weatherPoints, weatherRuns, type RefreshItemOutcome } from '@/lib/db/schema'
 import { addHours } from '@/lib/domain/time'
-import { lastSuccess, runJob } from './runner'
+import { lastSuccess, runJob, successTargets } from './runner'
 import { addResort, deps, fail, fakeWeather, hours, ok, series, T0, testDb } from './test-helpers'
+import { chunk } from './util'
 import { latestOkRuns } from './weather'
 
 const later = (h: number) => addHours(T0, h)
@@ -78,6 +79,77 @@ describe('runJob — refresh failure behaviour', () => {
     expect(s.status).toBe('error')
     expect(s.attempts).toBe(3)
     expect(await lastSuccess(db, 'prune')).toBeNull()
+  })
+})
+
+describe('last successful update', () => {
+  it('does not advance when an external job fetched nothing (no provider, every point unsupported)', async () => {
+    const db = await testDb()
+    await addResort(db, { id: 'alta' })
+    const weather = (now: string, over = {}) => runJob({ db, job: 'weather', trigger: 'schedule', now, deps: deps(over) })
+
+    // No weather provider configured (or PISTE_DISABLED_PROVIDERS=open-meteo): the run is "ok" with nothing done.
+    const none = await weather(T0)
+    expect(none.status).toBe('ok')
+    expect(none.notes).toEqual(['No weather provider configured'])
+    // A provider that supports none of the points: every item is skipped.
+    const provider = fakeWeather((req) => ok(series(req, hours('2027-01-14T00:00:00Z', 24)), T0))
+    const unsupported = await weather(later(1), { weatherProviders: [{ ...provider, supports: () => false }] })
+    expect(unsupported.items.every((i) => i.skipped)).toBe(true)
+    // A targeted run of an external job with nothing to fetch for that target.
+    await runJob({ db, job: 'reports', target: 'alta', trigger: 'schedule', now: later(1), deps: deps() })
+    expect(await lastSuccess(db, 'weather')).toBeNull()
+    expect(await lastSuccess(db, 'weather', 'alta')).toBeNull()
+    expect(await lastSuccess(db, 'reports', 'alta')).toBeNull()
+
+    // A real fetch advances both.
+    await weather(later(2), { weatherProviders: [provider] })
+    expect(await lastSuccess(db, 'weather')).toBe(later(2))
+    expect(await lastSuccess(db, 'weather', 'alta')).toBe(later(2))
+
+    // Local jobs are unchanged: evaluating and finding nothing to change is a successful run.
+    await runJob({ db, job: 'status', target: 'alta', trigger: 'schedule', now: later(3), deps: deps() })
+    expect(await lastSuccess(db, 'status', 'alta')).toBe(later(3))
+  })
+
+  it('finds a resort’s last success behind more than 500 later runs in which it failed', async () => {
+    const db = await testDb()
+    const item = (target: string, okay: boolean): RefreshItemOutcome => ({ key: `${target}:base:open-meteo`, target, ok: okay, written: okay ? 10 : 0, error: okay ? null : 'timeout' })
+    const run = (job: string, startedAt: string, status: 'ok' | 'partial', items: RefreshItemOutcome[]) => ({
+      job,
+      target: null,
+      trigger: 'schedule' as const,
+      startedAt,
+      finishedAt: startedAt,
+      status,
+      details: { items },
+    })
+    await db.insert(refreshRuns).values(run('weather', T0, 'ok', [item('alta', true), item('greek-peak', true)]))
+    const failing = Array.from({ length: 600 }, (_, i) => run('weather', later(3 * (i + 1)), 'partial', [item('alta', false), item('greek-peak', true)]))
+    for (const part of chunk(failing, 100)) await db.insert(refreshRuns).values(part)
+    expect(await lastSuccess(db, 'weather', 'alta')).toBe(T0)
+    expect(await lastSuccess(db, 'weather', 'greek-peak')).toBe(later(1800))
+    expect(await lastSuccess(db, 'weather')).toBe(later(1800))
+
+    // Page boundaries inside runs that share a start time are ordered by id, so none is skipped.
+    const t = later(5)
+    await db.insert(refreshRuns).values(run('nws-alerts', t, 'ok', [item('alta', true)]))
+    const sameTime = Array.from({ length: 500 }, () => run('nws-alerts', t, 'partial', [item('alta', false), item('greek-peak', true)]))
+    for (const part of chunk(sameTime, 100)) await db.insert(refreshRuns).values(part)
+    expect(await lastSuccess(db, 'nws-alerts', 'alta')).toBe(t)
+    expect(await lastSuccess(db, 'nws-alerts', 'stowe')).toBeNull()
+  })
+
+  it('successTargets: which job + targets a finished run counts for', () => {
+    const items = (...xs: [string | null, boolean, boolean?][]) => ({ items: xs.map(([target, okay, skipped]) => ({ key: String(target), target, ok: okay, skipped, written: 0 })) })
+    expect(successTargets({ job: 'weather', target: null, status: 'error', details: items(['alta', false]) })).toEqual([])
+    expect(successTargets({ job: 'weather', target: null, status: 'partial', details: items(['alta', true], ['stowe', false]) })).toEqual([null, 'alta'])
+    expect(successTargets({ job: 'weather', target: null, status: 'ok', details: items(['alta', true, true]) })).toEqual([])
+    expect(successTargets({ job: 'fx', target: null, status: 'ok', details: items([null, true]) })).toEqual([null])
+    expect(successTargets({ job: 'reports', target: 'alta', status: 'ok', details: items() })).toEqual([])
+    expect(successTargets({ job: 'reports', target: 'alta', status: 'ok', details: null })).toEqual(['alta'])
+    expect(successTargets({ job: 'assessments', target: null, status: 'ok', details: items() })).toEqual([null])
+    expect(successTargets({ job: 'status', target: 'alta', status: 'ok', details: items(['alta', true, true]) })).toEqual(['alta'])
   })
 })
 

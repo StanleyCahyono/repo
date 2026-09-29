@@ -27,10 +27,10 @@ import {
   type AlertType,
 } from '@/lib/db/schema'
 import type { AlertRuleRow, ResortRow } from '@/lib/db/rows'
-import { prepareSeries, slotsWithin } from '@/lib/domain/conditions'
+import { CONDITIONS_CONFIG_V1, prepareSeries, slotsWithin } from '@/lib/domain/conditions'
 import { formatMoney } from '@/lib/domain/money'
-import { daysBetween, formatLocalDate, localDateOf } from '@/lib/domain/time'
-import { DEFAULT_UNITS, SCORING_MODES, type UnitPrefs } from '@/lib/domain/types'
+import { daysBetween, formatLocalDate, hoursBetween, localDateOf } from '@/lib/domain/time'
+import { DEFAULT_UNITS, SCORING_MODES, type UnitPrefs, type VerificationLevel } from '@/lib/domain/types'
 import { formatSnow } from '@/lib/domain/units'
 import type { ItemOutcome, JobContext, JobWorkResult } from './types'
 import { daysBefore, errorMessage, getMeta, hashJson, setMeta } from './util'
@@ -184,10 +184,17 @@ async function openingDateChanges(rule: AlertRuleRow, c: EvalCtx): Promise<Alert
       bucket: h.newValue ?? 'removed',
       resortId: h.resortId,
       title: from ? `${name}: ${label} changed to ${to}` : `${name}: ${label} ${h.newValue ? `set to ${to}` : 'removed'}`,
-      body: `${from ? `Previously ${from}. ` : ''}${h.field === 'announcedOpening' ? 'An announced date is a target and depends on operations and weather. ' : ''}Source: ${h.prov?.provider ?? 'unknown'}${h.prov?.sourceUrl ? ` (${h.prov.sourceUrl})` : ''}.`,
+      body: `${from ? `Previously ${from}. ` : ''}${h.field === 'announcedOpening' ? 'An announced date is a target and depends on operations and weather. ' : ''}Source: ${h.prov?.provider ?? 'unknown'}${h.prov?.sourceUrl ? ` (${h.prov.sourceUrl})` : ''}.${verificationCaveat(h.prov?.verification)}`,
       link: `/resorts/${h.resortId}`,
     }
   })
+}
+
+/** Dates found by research (catalog reseeds) are not official statements and must say so. */
+function verificationCaveat(v: VerificationLevel | null | undefined): string {
+  if (v === 'search-summary') return ' Researched — confirm at source: this date comes from a web search summary, not from the official page.'
+  if (v === 'unverified') return ' Unverified — confirm at the official source.'
+  return ''
 }
 
 async function resortOpenings(rule: AlertRuleRow, c: EvalCtx): Promise<AlertCandidate[]> {
@@ -248,10 +255,14 @@ async function snowThresholds(rule: AlertRuleRow, c: EvalCtx): Promise<AlertCand
   for (const resortId of scopeResorts(rule, c)) {
     const resort = c.resorts.get(resortId)
     if (!resort) continue
-    const runs = await latestOkRuns(c.db, resortId)
-    // Upper mountain first; the primary (non-alternate) provider only.
+    // Only a current forecast may raise a snow alert: after days of failed fetches the last good run is still the
+    // latest one, but "likely N of snow in the next 72 h" from it would be stale news presented as current.
+    const runs = [...(await latestOkRuns(c.db, resortId)).values()].filter(
+      (r) => r.kind !== 'demo' && hoursBetween(r.fetchedAt, c.now) <= CONDITIONS_CONFIG_V1.confidence.weatherStaleHours,
+    )
+    // Upper mountain first; Open-Meteo (the primary forecast) preferred.
     const run = ['summit', 'base']
-      .map((k) => [...runs.values()].filter((r) => r.pointKey === k && r.kind !== 'demo').sort((a, b) => (a.provider === 'open-meteo' ? -1 : b.provider === 'open-meteo' ? 1 : 0))[0])
+      .map((k) => runs.filter((r) => r.pointKey === k).sort((a, b) => (a.provider === 'open-meteo' ? -1 : b.provider === 'open-meteo' ? 1 : 0))[0])
       .find((r) => !!r)
     if (!run) continue
     const s = await loadRunSeries(c.db, run)
@@ -401,8 +412,22 @@ async function priceChanges(rule: AlertRuleRow, c: EvalCtx): Promise<AlertCandid
   const verified = rows.filter((r) => r.prov.kind !== 'demo' && VERIFIED.has(r.prov.verification ?? ''))
   const groups = new Map<string, typeof verified>()
   for (const r of verified) {
-    // Weekday vs weekend or different seasons are different prices, not changes.
-    const k = [r.subjectType, r.subjectId, r.item, r.category ?? '', r.dayType ?? '', r.seasonId ?? ''].join('/')
+    // Only the same product can change price. Weekday vs weekend, different seasons, currencies, date-specific
+    // tickets (applies from/to), purchase-by price tiers and tax-inclusive vs exclusive prices are different
+    // prices, not changes.
+    const k = [
+      r.subjectType,
+      r.subjectId,
+      r.item,
+      r.category ?? '',
+      r.dayType ?? '',
+      r.seasonId ?? '',
+      r.currency,
+      r.appliesFrom ?? '',
+      r.appliesTo ?? '',
+      r.purchaseBy ?? '',
+      String(r.includesTax),
+    ].join('/')
     groups.set(k, [...(groups.get(k) ?? []), r])
   }
   const since = daysBefore(c.now, p.lookbackDays)
@@ -413,6 +438,8 @@ async function priceChanges(rule: AlertRuleRow, c: EvalCtx): Promise<AlertCandid
     const cur = sorted[sorted.length - 1]
     const prev = sorted[sorted.length - 2]
     if (cur.observedAt < since) continue
+    // Two prices observed at the same instant are conflicting statements, not a change over time.
+    if (cur.observedAt === prev.observedAt) continue
     if (cur.amountMinor === prev.amountMinor && cur.currency === prev.currency && cur.amountMaxMinor === prev.amountMaxMinor) continue
     const fmt = (r: typeof cur) => formatMoney({ amountMinor: r.amountMinor, currency: r.currency })
     const subjectName = cur.resortId ? nameOf(c, cur.resortId) : cur.subjectId

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { fxRates, linkChecks, priceSnapshots, refreshRuns, sourceRecords } from '@/lib/db/schema'
+import { fxRates, linkChecks, priceSnapshots, refreshRuns, sourceRecords, type RefreshItemOutcome } from '@/lib/db/schema'
 import { provenance } from '@/lib/domain/types'
 import type { FxProvider } from '@/lib/providers/types'
 import { pruneAll, refreshFx, refreshLinks } from './maintenance'
@@ -26,6 +26,26 @@ describe('pruning bookkeeping', () => {
       ['2027-01-14', 'error'],
     ])
     expect(await lastSuccess(db, 'reports', 'alta')).toBe('2026-09-02T12:00:00.000Z')
+  })
+
+  it('keeps each resort’s last success recorded inside global runs, not just the newest run per job', async () => {
+    const db = await testDb()
+    const item = (target: string, okay: boolean): RefreshItemOutcome => ({ key: `${target}:base:open-meteo`, target, ok: okay, written: okay ? 10 : 0, error: okay ? null : 'timeout' })
+    const run = (startedAt: string, status: 'ok' | 'partial', items: RefreshItemOutcome[], notes: string[] = []) =>
+      db.insert(refreshRuns).values({ job: 'weather', target: null, trigger: 'schedule', startedAt, finishedAt: startedAt, status, details: { items, notes } })
+    await run('2026-09-01T12:00:00.000Z', 'ok', [], ['No weather provider configured']) // fetched nothing: not a success
+    await run('2026-10-01T12:00:00.000Z', 'ok', [item('alta', true), item('greek-peak', true)])
+    await run('2026-10-02T12:00:00.000Z', 'partial', [item('alta', false), item('greek-peak', true)])
+    await run('2027-01-14T12:00:00.000Z', 'partial', [item('alta', false), item('greek-peak', true)])
+    expect(await lastSuccess(db, 'weather', 'alta')).toBe('2026-10-01T12:00:00.000Z')
+
+    await pruneAll(ctx(db))
+    // Alta has been failing since 2 Oct: its last success must not turn into "never".
+    expect(await lastSuccess(db, 'weather', 'alta')).toBe('2026-10-01T12:00:00.000Z')
+    expect(await lastSuccess(db, 'weather', 'greek-peak')).toBe('2027-01-14T12:00:00.000Z')
+    expect(await lastSuccess(db, 'weather')).toBe('2027-01-14T12:00:00.000Z')
+    const left = await db.select().from(refreshRuns).orderBy(refreshRuns.startedAt)
+    expect(left.map((r) => r.startedAt.slice(0, 10))).toEqual(['2026-10-01', '2027-01-14'])
   })
 
   it('keeps the newest fetch record per source however old it is', async () => {

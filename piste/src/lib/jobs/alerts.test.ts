@@ -85,6 +85,43 @@ describe('alert rules', () => {
     expect(await byType('snow-threshold')).toHaveLength(2)
   })
 
+  it('never raises a snow alert from a stale forecast', async () => {
+    const { forecast, evaluate, byType } = await setup()
+    const storm = addHours(T0, 10)
+    // The last good run was fetched five days ago; every fetch since failed. It still shows the storm.
+    await forecast(addHours(T0, -120), storm)
+    await evaluate(T0)
+    expect(await byType('snow-threshold')).toHaveLength(0)
+
+    // A current run of the same storm does alert.
+    await forecast(addHours(T0, 1), storm)
+    await evaluate(addHours(T0, 1))
+    expect(await byType('snow-threshold')).toHaveLength(1)
+  })
+
+  it('labels researched opening-date changes "Researched — confirm at source"', async () => {
+    const { db, evaluate, byType } = await setup()
+    await addResort(db, { id: 'stowe', shortName: 'Stowe', timezone: 'America/New_York' }, { favorite: true })
+    await addSeason(db, 'stowe', { announcedOpening: '2026-11-13' })
+    const change = (resortId: string, date: string, verification: VerificationLevel) =>
+      updateSeasonDates(db, {
+        resortId,
+        seasonId: '2026-27',
+        changes: { announcedOpening: date },
+        prov: provenance({ kind: 'manual', provider: 'Piste catalog', sourceUrl: 'https://example.test/news', verification }),
+        now: '2026-11-01T12:00:00.000Z',
+      })
+    await change('alta', '2026-11-27', 'search-summary') // a catalog reseed from web research
+    await change('stowe', '2026-11-20', 'official-page')
+    await evaluate('2026-11-01T13:00:00.000Z')
+    const got = await byType('opening-date-change')
+    const researched = got.find((a) => a.resortId === 'alta')
+    const official = got.find((a) => a.resortId === 'stowe')
+    expect(researched?.body).toMatch(/Researched — confirm at source/)
+    expect(official?.body).toBeDefined()
+    expect(official?.body).not.toMatch(/Researched|Unverified/)
+  })
+
   it('alerts once on an announced opening-date change', async () => {
     const { db, evaluate, byType } = await setup()
     await updateSeasonDates(db, {
@@ -129,6 +166,49 @@ describe('alert rules', () => {
     expect(got).toHaveLength(1)
     expect(got[0].title).toBe('Alta: Day ticket (adult) now $209')
     expect(got[0].body).toMatch(/^Was \$199 /)
+  })
+
+  it('compares only comparable prices: date-specific tickets, currencies, tax and simultaneous observations are not changes', async () => {
+    const { db, evaluate, byType } = await setup()
+    const official = provenance({ kind: 'official', provider: 'alta.com', verification: 'official-page' })
+    const snap = (v: Partial<typeof priceSnapshots.$inferInsert> & Pick<typeof priceSnapshots.$inferInsert, 'amountMinor' | 'observedAt'>) => ({
+      subjectType: 'lift-ticket' as const,
+      subjectId: 'alta',
+      resortId: 'alta',
+      item: 'Day ticket',
+      category: 'adult',
+      currency: 'USD',
+      seasonId: '2026-27',
+      dayType: 'any',
+      quoteKind: 'published' as const,
+      prov: official,
+      ...v,
+    })
+    await db.insert(priceSnapshots).values([
+      // Two date-specific tickets published together: different products, not a price change.
+      snap({ amountMinor: 18900, appliesFrom: '2027-01-20', appliesTo: '2027-01-20', observedAt: '2027-01-10T00:00:00.000Z' }),
+      snap({ amountMinor: 21900, appliesFrom: '2027-01-23', appliesTo: '2027-01-23', observedAt: '2027-01-10T00:00:00.000Z' }),
+      // Two prices for the same product observed at the same instant: conflicting statements, not a change.
+      snap({ item: 'Half day', amountMinor: 9900, observedAt: '2027-01-12T00:00:00.000Z' }),
+      snap({ item: 'Half day', amountMinor: 10900, observedAt: '2027-01-12T00:00:00.000Z' }),
+      // Different currency or tax treatment: not comparable.
+      snap({ item: 'Night ticket', amountMinor: 5900, currency: 'CAD', observedAt: '2027-01-05T00:00:00.000Z' }),
+      snap({ item: 'Night ticket', amountMinor: 4900, observedAt: '2027-01-12T00:00:00.000Z' }),
+      // Purchase-by price tiers are different offers.
+      snap({ item: 'Advance ticket', amountMinor: 14900, purchaseBy: '2026-12-31', observedAt: '2027-01-05T00:00:00.000Z' }),
+      snap({ item: 'Advance ticket', amountMinor: 16900, purchaseBy: '2027-01-31', observedAt: '2027-01-12T00:00:00.000Z' }),
+      snap({ item: 'Lesson', amountMinor: 18900, includesTax: true, observedAt: '2027-01-05T00:00:00.000Z' }),
+      snap({ item: 'Lesson', amountMinor: 17500, includesTax: false, observedAt: '2027-01-12T00:00:00.000Z' }),
+    ])
+    await evaluate(T0)
+    expect(await byType('price-change')).toHaveLength(0)
+
+    // The same date-specific ticket repriced later is a change.
+    await db.insert(priceSnapshots).values(snap({ amountMinor: 19900, appliesFrom: '2027-01-20', appliesTo: '2027-01-20', observedAt: '2027-01-14T00:00:00.000Z' }))
+    await evaluate(addHours(T0, 1))
+    const got = await byType('price-change')
+    expect(got.map((a) => a.title)).toEqual(['Alta: Day ticket (adult) now $199'])
+    expect(got[0].body).toMatch(/^Was \$189 /)
   })
 
   it('stores in-app alerts only, each with a unique dedupe key', async () => {

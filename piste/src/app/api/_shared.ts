@@ -2,8 +2,9 @@
 import 'server-only'
 
 /**
- * Refuse cross-site browser requests to mutating endpoints. Non-browser clients (curl, cron) send no Origin and
- * are still subject to the app's sign-in when a passcode is configured.
+ * Refuse cross-site browser requests to mutating endpoints. Non-browser clients (curl, cron) send no Origin and pass
+ * this check. These handlers do no authentication of their own: like every route, they rely on the passcode proxy
+ * in src/proxy.ts (enabled when PISTE_PASSCODE is set) for access control.
  */
 export function isSameOrigin(request: Request): boolean {
   if (request.headers.get('sec-fetch-site') === 'cross-site') return false

@@ -31,7 +31,7 @@ async function main() {
 
   console.log(`Piste worker — ${dbFile('live')}`)
   console.log(
-    `Cadences (min): weather ${cadences.weatherMin}, alerts ${cadences.nwsAlertsMin}, reports ${cadences.reportsDayMin} (${cadences.reportsDayStart}–${cadences.reportsDayEnd} resort time) / ${cadences.reportsNightMin}, assessments ${cadences.assessmentsMin}, links ${cadences.linksMin}, fx ${cadences.fxMin}, prune ${cadences.pruneMin}; tick ${cadences.tickSeconds}s, jitter ±${Math.round(cadences.jitterPct * 100)}%`,
+    `Cadences (min): weather ${cadences.weatherMin}, alerts ${cadences.nwsAlertsMin}, reports ${cadences.reportsDayMin} (${cadences.reportsDayStart}–${cadences.reportsDayEnd} resort time) / ${cadences.reportsNightMin}, status ${cadences.statusMin}, assessments ${cadences.assessmentsMin}, links ${cadences.linksMin}, fx ${cadences.fxMin}, prune ${cadences.pruneMin}; tick ${cadences.tickSeconds}s, jitter ±${Math.round(cadences.jitterPct * 100)}%`,
   )
   console.log(`Providers: weather [${deps.weatherProviders.map((p) => p.id).join(', ')}], reports [${deps.reportProviders.map((p) => p.id).join(', ')}], alerts ${deps.alertsProvider?.id ?? 'none'}, fx ${deps.fxProvider?.id ?? 'none'}`)
 
