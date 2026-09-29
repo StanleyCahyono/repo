@@ -31,8 +31,9 @@ import {
   type OperatingStatus,
   type ScoreKind,
   type ScoringMode,
+  type UnitPrefs,
 } from './types'
-import { formatDuration } from './units'
+import { formatDuration, formatSnow } from './units'
 
 // ---------------------------------------------------------------------------
 // Presets
@@ -162,8 +163,11 @@ export interface CandidateDay {
   pass: CandidatePass | null
   /** Events at/near the resort on this date (any status; only announced/tentative count). */
   events: readonly { title: string; status: string }[]
-  /** Explanation-only snow context. */
-  snow?: { forecast72hCm: number | null; reported24hCm: number | null } | null
+  /**
+   * Explanation-only snow context. `forecast72hComplete: false` means the model run covers only part of the
+   * 72 h, so the sum is a lower bound ("at least …"), never a full total.
+   */
+  snow?: { forecast72hCm: number | null; forecast72hComplete?: boolean | null; reported24hCm: number | null } | null
   /** Official alert headlines overlapping the day — shown, never scored. */
   warnings?: readonly string[]
 }
@@ -202,6 +206,8 @@ export interface RecommendInput {
   defaultMode?: ScoringMode
   now: string
   appMode?: AppMode
+  /** Display units for explanation text (snow amounts); centimetres when not given. */
+  units?: UnitPrefs | null
 }
 
 // ---------------------------------------------------------------------------
@@ -268,7 +274,10 @@ export interface Recommendation {
   evidenceLimitations: string[]
   /** No resort has opened yet this season: show opening watch instead of a winner. */
   preseason: boolean
+  /** Why there is no winner, built from the actual exclusion reasons (null when there is a winner). */
   noWinnerReason: string | null
+  /** Set when the requested weights could not be used (e.g. custom weights all zero). */
+  weightsNote: string | null
 }
 
 // ---------------------------------------------------------------------------
@@ -289,6 +298,50 @@ export function hasOpenedThisSeason(c: RecommendCandidate, date: string = c.toda
   return isOpenStatus(o.status) && !!o.statusDate && o.statusDate <= c.today && seasonIdFor(o.statusDate) === season
 }
 
+export type ClosureKind = 'season-ended' | 'before-opening' | 'closed-for-season' | 'temporarily-closed'
+
+export interface ConfirmedClosure {
+  kind: ClosureKind
+  /** Plain-language reason, e.g. "Temporarily closed on Fri 15 Jan (reported)". */
+  reason: string
+}
+
+/**
+ * Did a 'closed-for-season' statement dated `sd` close the season that contains it? With an actual opening on
+ * record the statement must come after it. Without one, a statement dated before this season's announced (or
+ * estimated) opening is a leftover about the previous season — e.g. a report page still reading "closed for the
+ * season" over the summer — and closes nothing.
+ */
+function closesThisSeason(o: CandidateOps, sd: string): boolean {
+  if (o.actualOpening && seasonIdFor(o.actualOpening) === seasonIdFor(sd)) return o.actualOpening <= sd
+  const start = o.announcedOpening ?? o.estimatedOpenFrom
+  return !start || seasonIdFor(start) !== seasonIdFor(sd) || sd >= start
+}
+
+/**
+ * A confirmed closure for `date`, or null. `o` carries the latest status statement and the dates of the season
+ * containing `date`. Shared by recommendation eligibility and the read models, where a confirmed closure replaces
+ * the ski-day score with "Closed" (brief §5).
+ *
+ * - after the recorded actual closing, or before the recorded actual opening;
+ * - 'closed-for-season' reported on or before `date` in the SAME season, after that season's opening — last
+ *   season's April closure is not a closure of the new season;
+ * - 'temporarily-closed' reported for that very date.
+ */
+export function confirmedClosure(o: CandidateOps, date: string): ConfirmedClosure | null {
+  const s = o.status
+  const sd = o.statusDate
+  if (o.actualClosing && date > o.actualClosing) return { kind: 'season-ended', reason: `Closed for the season (closed ${fmt(o.actualClosing)})` }
+  if (o.actualOpening && date < o.actualOpening) {
+    return { kind: 'before-opening', reason: `Not operating on ${fmt(date)} — the season opened ${fmt(o.actualOpening)}` }
+  }
+  if (s === 'closed-for-season' && sd && sd <= date && seasonIdFor(sd) === seasonIdFor(date) && closesThisSeason(o, sd)) {
+    return { kind: 'closed-for-season', reason: `Closed for the season (reported ${fmt(sd)})` }
+  }
+  if (s === 'temporarily-closed' && sd === date) return { kind: 'temporarily-closed', reason: `Temporarily closed on ${fmt(date)} (reported)` }
+  return null
+}
+
 /** Classify one resort-date. Eligibility is decided before any factor is scored. */
 export function classifyDay(c: RecommendCandidate, day: CandidateDay | undefined, date: string, now: string): DayClass {
   const o = c.ops
@@ -296,14 +349,8 @@ export function classifyDay(c: RecommendCandidate, day: CandidateDay | undefined
   const sd = o.statusDate
 
   // 1. Confirmed closures.
-  if (o.actualClosing && date > o.actualClosing) return { kind: 'closed', reason: `Closed for the season (closed ${fmt(o.actualClosing)})` }
-  if (o.actualOpening && date < o.actualOpening) {
-    return { kind: 'closed', reason: `Not operating on ${fmt(date)} — the season opened ${fmt(o.actualOpening)}` }
-  }
-  if (s === 'closed-for-season' && sd && sd <= date && (!o.actualOpening || o.actualOpening <= sd)) {
-    return { kind: 'closed', reason: `Closed for the season (reported ${fmt(sd)})` }
-  }
-  if (s === 'temporarily-closed' && sd === date) return { kind: 'closed', reason: `Temporarily closed on ${fmt(date)} (reported)` }
+  const closure = confirmedClosure(o, date)
+  if (closure) return { kind: 'closed', reason: closure.reason }
   const assessed = day ? Object.values(day.conditions).find((x) => x && x.scoreKind === 'closed') : null
   if (assessed) return { kind: 'closed', reason: 'Closure confirmed in the conditions assessment for this date' }
 
@@ -355,7 +402,7 @@ export function classifyDay(c: RecommendCandidate, day: CandidateDay | undefined
 // ---------------------------------------------------------------------------
 // Factors
 
-function resolveWeights(input: RecommendInput): FactorWeights {
+function resolveWeights(input: RecommendInput): { weights: FactorWeights; note: string | null } {
   const preset = input.preset
   const base: FactorWeights =
     preset === 'custom' ? { conditions: 0, fit: 0, travel: 0, cost: 0, events: 0 } : { ...PRESET_WEIGHTS[preset] }
@@ -367,8 +414,10 @@ function resolveWeights(input: RecommendInput): FactorWeights {
     }
   }
   const sum = FACTOR_KEYS.reduce((a, k) => a + base[k], 0)
-  if (sum <= 0) return { ...PRESET_WEIGHTS.learning }
-  return base
+  if (sum <= 0) {
+    return { weights: { ...PRESET_WEIGHTS.learning }, note: `Your weights are all zero — ranked with the ${PRESET_LABEL.learning} weights instead` }
+  }
+  return { weights: base, note: null }
 }
 
 function modesFor(input: RecommendInput): readonly ScoringMode[] {
@@ -491,7 +540,14 @@ function scoreDay(c: RecommendCandidate, day: CandidateDay | undefined, date: st
     for (const n of neg.slice(0, 2)) if (!tradeoffs.includes(n)) tradeoffs.push(n)
   }
   if (day?.snow?.forecast72hCm != null && day.snow.forecast72hCm >= 5) {
-    benefits.push(`Likely ${Math.round(day.snow.forecast72hCm)} cm new snow in the next 72 h (weather model)`)
+    const cm = day.snow.forecast72hCm
+    const amount = input.units ? formatSnow(cm, input.units) : `${Math.round(cm)} cm`
+    // A run that covers only part of the 72 h gives a lower bound, never a full total.
+    benefits.push(
+      day.snow.forecast72hComplete === false
+        ? `Likely at least ${amount} new snow in the next 72 h (weather model; the forecast covers only part of the window)`
+        : `Likely ${amount} new snow in the next 72 h (weather model)`,
+    )
   }
   if (day?.pass?.status === 'covered' && day.pass.productName) benefits.push(`Lift access covered by your ${day.pass.productName}`)
   if (day?.pass?.status === 'not-covered' && day.pass.productName) tradeoffs.push(`Not covered by your ${day.pass.productName}${day.pass.note ? `: ${day.pass.note}` : ''}`)
@@ -565,8 +621,46 @@ function compareScored(a: Scored, b: Scored): number {
 
 // ---------------------------------------------------------------------------
 
+/** The exclusion kind that applies on most dates (ties: the earliest date's kind). */
+function dominantKind(kinds: readonly ExcludedResort['kind'][]): ExcludedResort['kind'] {
+  const counts = new Map<ExcludedResort['kind'], number>()
+  for (const k of kinds) counts.set(k, (counts.get(k) ?? 0) + 1)
+  let best = kinds[0]
+  for (const k of kinds) if ((counts.get(k) ?? 0) > (counts.get(best) ?? 0)) best = k
+  return best
+}
+
+const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
+
+/** Why there is no winner, from what actually excluded the resorts (never a generic "nothing is open"). */
+export function describeNoWinner(a: { candidates: number; preseason: boolean; excluded: readonly ExcludedResort[]; statusUnknown: number }): string {
+  if (a.candidates === 0) return 'No resorts to compare yet.'
+  if (a.preseason) return 'Preseason — no resort has reported opening yet this season. Watch openings instead.'
+  const n = (k: ExcludedResort['kind']) => a.excluded.filter((e) => e.kind === k).length
+  const closed = n('closed')
+  const travel = n('travel')
+  const pre = n('preseason')
+  const unknown = a.statusUnknown
+    ? `${plural(a.statusUnknown, 'resort')} with unknown status ${a.statusUnknown === 1 ? 'is' : 'are'} listed separately — never treated as open.`
+    : ''
+  const kinds = [closed, travel, pre].filter((x) => x > 0).length
+  let main: string
+  if (kinds === 0) main = 'No resort is confirmed or expected open on these dates.'
+  else if (kinds > 1) {
+    const parts = [
+      travel ? `${travel} outside your travel limits` : null,
+      closed ? `${closed} closed` : null,
+      pre ? `${pre} not open yet` : null,
+    ].filter(Boolean)
+    main = `No resort is open and within your travel limits on these dates (${parts.join(', ')}).`
+  } else if (travel) main = `No open resort within your travel limits on these dates (${plural(travel, 'resort')} excluded for travel).`
+  else if (closed) main = 'No resort is open on these dates — every candidate has a confirmed closure.'
+  else main = 'No resort is open yet on these dates.'
+  return unknown ? `${main} ${unknown}` : main
+}
+
 export function recommend(input: RecommendInput): Recommendation {
-  const weights = resolveWeights(input)
+  const { weights, note: weightsNote } = resolveWeights(input)
   const dates = [...new Set(input.dates)].sort()
   const eligible: (Scored & { otherDates: RankedOption['otherDates'] })[] = []
   const unknown: (Scored & { otherDates: RankedOption['otherDates'] })[] = []
@@ -601,17 +695,17 @@ export function recommend(input: RecommendInput): Recommendation {
     } else if (unk.length) {
       const best = unk.sort(compareScored)[0]
       unknown.push({ ...best, otherDates: otherDates(best) })
-    } else {
-      const reasons = [...new Set(perDate.map((p) => (p.cls as { reason: string }).reason))]
-      const first = perDate[0]?.cls as { kind: ExcludedResort['kind']; reason: string } | undefined
-      if (first) {
-        excluded.push({
-          resortId: c.resortId,
-          name: c.name,
-          kind: first.kind,
-          reason: reasons.length === 1 ? reasons[0] : `${reasons[0]} (and ${reasons.length - 1} other reason${reasons.length > 2 ? 's' : ''} across the dates)`,
-        })
-      }
+    } else if (perDate.length) {
+      const classes = perDate.map((p) => p.cls as { kind: ExcludedResort['kind']; reason: string })
+      const kind = dominantKind(classes.map((x) => x.kind))
+      // Lead with a reason of the dominant kind so the kind and the text agree.
+      const reasons = [...new Set([...classes.filter((x) => x.kind === kind), ...classes].map((x) => x.reason))]
+      excluded.push({
+        resortId: c.resortId,
+        name: c.name,
+        kind,
+        reason: reasons.length === 1 ? reasons[0] : `${reasons[0]} (and ${reasons.length - 1} other reason${reasons.length > 2 ? 's' : ''} across the dates)`,
+      })
     }
   }
 
@@ -646,12 +740,7 @@ export function recommend(input: RecommendInput): Recommendation {
     explanation,
     evidenceLimitations: winner ? winner.limitations : [],
     preseason,
-    noWinnerReason: winner
-      ? null
-      : preseason
-        ? 'Preseason — no resort has reported opening yet this season. Watch openings instead.'
-        : statusUnknown.length
-          ? 'No resort is confirmed or expected open on these dates; resorts with unknown status are listed separately.'
-          : 'No resort is open on these dates.',
+    noWinnerReason: winner ? null : describeNoWinner({ candidates: candidates.length, preseason, excluded, statusUnknown: statusUnknown.length }),
+    weightsNote,
   }
 }

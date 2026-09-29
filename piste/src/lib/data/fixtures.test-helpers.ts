@@ -26,7 +26,8 @@ const price = (item: string, amount: number, dayType: string | null, subjectType
   source: { url: 'https://example.org/prices', verification: 'official-page' },
 })
 
-function resort(id: string, over: Record<string, unknown> = {}) {
+/** A small catalog resort (New York timezone, Ithaca-practical) with `over` applied. */
+export function fixtureResort(id: string, over: Record<string, unknown> = {}) {
   return CatalogResort.parse({
     id,
     name: `${id} resort`,
@@ -54,18 +55,18 @@ function resort(id: string, over: Record<string, unknown> = {}) {
 }
 
 export const FIXTURE_RESORTS = [
-  resort('test-peak', { priority: 2 }),
-  resort('expert-bowl', {
+  fixtureResort('test-peak', { priority: 2 }),
+  fixtureResort('expert-bowl', {
     terrain: { beginnerPct: 5, intermediatePct: 25, advancedPct: 70, source: { url: 'https://example.org/stats', verification: 'official-page' } },
     travel: { driveFromIthaca: { minutes: 90, km: 120, basis: 'curated estimate' } },
   }),
-  resort('far-west', {
+  fixtureResort('far-west', {
     timezone: 'America/Denver',
     region: 'Colorado',
     priority: 0,
     travel: { driveFromIthaca: null, airports: [{ iata: 'DEN', role: 'practical', minutes: 120, km: 150, basis: 'estimate' }] },
   }),
-  resort('quiet-hill', {
+  fixtureResort('quiet-hill', {
     season: { season: '2026-27', announcedOpening: { date: '2027-01-10', text: 'Targeting Jan 10', source: { url: 'https://example.org/news' } }, announcedClosing: {}, history: [] },
   }),
 ]
@@ -148,12 +149,14 @@ export interface Fixture {
   db: Db
   ctx: DataCtx
   runs: { a: number; b: number; c: number; summit: number }
+  /** My owned Indy Base Pass (2 days at test-peak, one logged on 2027-01-02). */
+  ownershipId: number
 }
 
-/** Seed the fixture catalog and a small, known set of evidence rows. */
-export async function buildFixture(): Promise<Fixture> {
+/** Seed the fixture catalog and a small, known set of evidence rows. `extraResorts` are seeded alongside. */
+export async function buildFixture(opts: { extraResorts?: ReturnType<typeof fixtureResort>[] } = {}): Promise<Fixture> {
   const { db } = await createMemoryDb()
-  await seedCatalog(db, { resorts: FIXTURE_RESORTS, passes, airports: null, hotels: null, events: null }, '2026-09-28T12:00:00.000Z')
+  await seedCatalog(db, { resorts: [...FIXTURE_RESORTS, ...(opts.extraResorts ?? [])], passes, airports: null, hotels: null, events: null }, '2026-09-28T12:00:00.000Z')
 
   // Season facts: three resorts actually opened; quiet-hill's announced date passed without an opening.
   for (const [id, opened] of [
@@ -295,7 +298,7 @@ export async function buildFixture(): Promise<Fixture> {
   await db.insert(s.passUsage).values({ ownershipId: own.id, resortId: 'test-peak', date: '2027-01-02', createdAt: NOW })
 
   const prefs = defaultPreferences(NOW)
-  return { db, ctx: { db, now: NOW, today: TODAY, prefs, mode: 'live' }, runs: { a, b, c, summit } }
+  return { db, ctx: { db, now: NOW, today: TODAY, prefs, mode: 'live' }, runs: { a, b, c, summit }, ownershipId: own.id }
 }
 
 function eqResort(id: string) {

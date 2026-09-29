@@ -19,8 +19,9 @@ import { computeDayBasket, type BasketLine, type DayBasket } from '@/lib/domain/
 import { computeFit, travelVerdict, type FitResult, type TravelVerdict } from '@/lib/domain/fit'
 import { money, type Money } from '@/lib/domain/money'
 import { evaluateAccess, familyBadges, latestRule, type AccessVerdict } from '@/lib/domain/passes'
+import { confirmedClosure, type CandidateOps, type ClosureKind } from '@/lib/domain/recommend'
 import { daysUntil, openingLabel } from '@/lib/domain/season'
-import { addDays, hoursBetween, seasonIdFor } from '@/lib/domain/time'
+import { addDays, hoursBetween, seasonIdFor, startOfLocalDay } from '@/lib/domain/time'
 import {
   OPERATING_STATUS_LABEL,
   provenance,
@@ -61,11 +62,27 @@ export interface StatusView {
   lastConfirmedAt: string | null
   /** Hours since the latest statement or confirmation. */
   ageHours: number | null
+  /**
+   * Season the statement belongs to. A 'closed-for-season' kept from an earlier season (the only statement that
+   * carries over) means "closed since last season", not that the current season has ended — see `note`.
+   */
+  seasonId: string | null
 }
 
 export function statusView(resort: Pick<ResortRow, 'timezone'>, event: StatusEventRow | undefined, report: OperationalReportRow | undefined, now: string): StatusView {
   if (!event) {
-    return { status: 'unknown', label: OPERATING_STATUS_LABEL.unknown, since: null, localDate: null, basis: 'none', prov: null, note: 'No operating status recorded', lastConfirmedAt: null, ageHours: null }
+    return {
+      status: 'unknown',
+      label: OPERATING_STATUS_LABEL.unknown,
+      since: null,
+      localDate: null,
+      basis: 'none',
+      prov: null,
+      note: 'No operating status recorded',
+      lastConfirmedAt: null,
+      ageHours: null,
+      seasonId: null,
+    }
   }
   const today = resortToday(resort, now)
   const currentSeason = seasonIdFor(today)
@@ -82,6 +99,7 @@ export function statusView(resort: Pick<ResortRow, 'timezone'>, event: StatusEve
       note: `Latest status (${OPERATING_STATUS_LABEL[event.status]}) is from the ${seasonLabel(eventSeason)} season`,
       lastConfirmedAt: null,
       ageHours: null,
+      seasonId: eventSeason,
     }
   }
   const confirmed =
@@ -96,19 +114,76 @@ export function statusView(resort: Pick<ResortRow, 'timezone'>, event: StatusEve
     localDate: event.localDate,
     basis: event.prov?.kind === 'derived' ? 'season' : 'reported',
     prov: event.prov,
-    note: event.note,
+    note:
+      eventSeason !== currentSeason
+        ? `Closed since the end of the ${seasonLabel(eventSeason)} season — no ${seasonLabel(currentSeason)} status reported yet`
+        : event.note,
     lastConfirmedAt: confirmed,
     ageHours: Math.max(0, Math.round(hoursBetween(latestAt, now) * 10) / 10),
+    seasonId: eventSeason,
   }
 }
 
+export interface StatusStatement {
+  status: OperatingStatus | null
+  statusDate: string | null
+  statusAt: string | null
+  /** Which record the statement came from. */
+  source: 'event' | 'report' | null
+  prov: Provenance | null
+}
+
 /** Latest status statement for recommendation eligibility: the newer of the status event and the report's status. */
-export function statusStatement(event: StatusEventRow | undefined, report: OperationalReportRow | undefined): { status: OperatingStatus | null; statusDate: string | null; statusAt: string | null } {
-  const fromEvent = event ? { status: event.status, statusDate: event.localDate, statusAt: event.effectiveAt } : null
-  const fromReport = report?.status ? { status: report.status, statusDate: report.localDate, statusAt: report.reportedAt } : null
-  if (fromReport && (!fromEvent || fromReport.statusDate > fromEvent.statusDate)) return fromReport
-  if (fromReport && fromEvent && fromReport.statusDate === fromEvent.statusDate && fromReport.statusAt && fromReport.statusAt > fromEvent.statusAt) return fromReport
-  return fromEvent ?? { status: null, statusDate: null, statusAt: null }
+export function statusStatement(event: StatusEventRow | undefined, report: OperationalReportRow | undefined): StatusStatement {
+  const fromEvent: StatusStatement | null = event
+    ? { status: event.status, statusDate: event.localDate, statusAt: event.effectiveAt, source: 'event', prov: event.prov }
+    : null
+  const fromReport: StatusStatement | null = report?.status
+    ? { status: report.status, statusDate: report.localDate, statusAt: report.reportedAt, source: 'report', prov: report.prov }
+    : null
+  if (fromReport && (!fromEvent || fromReport.statusDate! > fromEvent.statusDate!)) return fromReport
+  if (fromReport && fromEvent && fromReport.statusDate === fromEvent.statusDate && fromReport.statusAt && fromReport.statusAt > fromEvent.statusAt!) return fromReport
+  return fromEvent ?? { status: null, statusDate: null, statusAt: null, source: null, prov: null }
+}
+
+/** Eligibility input: the latest status statement plus the dates of the season containing the date in question. */
+export function candidateOps(st: StatusStatement, season: ResortSeasonRow | null | undefined): CandidateOps {
+  return {
+    status: st.status,
+    statusDate: st.statusDate,
+    statusAt: st.statusAt,
+    announcedOpening: season?.announcedOpening ?? null,
+    estimatedOpenFrom: season?.estimatedOpenFrom ?? null,
+    estimatedOpenTo: season?.estimatedOpenTo ?? null,
+    actualOpening: season?.actualOpening ?? null,
+    announcedClosing: season?.announcedClosing ?? null,
+    actualClosing: season?.actualClosing ?? null,
+  }
+}
+
+export interface ClosureView {
+  kind: ClosureKind
+  /** "Temporarily closed on Fri 15 Jan (reported)", "Closed for the season (closed Sun 11 Apr)"… */
+  reason: string
+  /** When the closure was stated (status statements only). */
+  statedAt: string | null
+  prov: Provenance | null
+}
+
+/**
+ * A confirmed closure on `date` (same rule as recommendation eligibility). `season` must be the resort's row for
+ * the season containing `date`. A confirmed closure overrides any ski-day score: show "Closed".
+ */
+export function closureView(st: StatusStatement, season: ResortSeasonRow | null | undefined, date: string): ClosureView | null {
+  const c = confirmedClosure(candidateOps(st, season), date)
+  if (!c) return null
+  const fromStatus = c.kind === 'closed-for-season' || c.kind === 'temporarily-closed'
+  return {
+    kind: c.kind,
+    reason: c.reason,
+    statedAt: fromStatus ? st.statusAt : null,
+    prov: fromStatus ? st.prov : c.kind === 'season-ended' ? (season?.actualClosingProv ?? null) : (season?.actualOpeningProv ?? null),
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -194,6 +269,24 @@ export interface ScoreView {
   modelVersion: string
   kind: DataKind
   prov: Provenance
+  /**
+   * Set when a confirmed closure overrides the stored assessment for this date: `score`/`descriptor` are then null
+   * and `scoreKind` is 'closed' ("Display Closed rather than a misleading ski-day score"). The model's own values
+   * are kept here for the explanation drawer only — never show them as a ski-day score.
+   */
+  supersededByClosure: { reason: string; kind: ClosureKind; modelScore: number | null; modelScoreKind: ScoreKind; modelDescriptor: string | null } | null
+}
+
+/** Replace a ski-day score with "Closed" when a closure is confirmed for its date. */
+export function applyClosure(score: ScoreView | null, closure: ClosureView | null): ScoreView | null {
+  if (!score || !closure) return score
+  return {
+    ...score,
+    score: null,
+    descriptor: null,
+    scoreKind: 'closed',
+    supersededByClosure: { reason: closure.reason, kind: closure.kind, modelScore: score.score, modelScoreKind: score.scoreKind, modelDescriptor: score.descriptor },
+  }
 }
 
 export function scoreView(a: ConditionsAssessmentRow | undefined): ScoreView | null {
@@ -216,6 +309,7 @@ export function scoreView(a: ConditionsAssessmentRow | undefined): ScoreView | n
     modelVersion: a.modelVersion,
     kind: a.kind,
     prov: derivedProv(`Piste Conditions (${a.modelVersion})`, a.computedAt, 'Suitability estimate, not a safety rating', a.kind === 'demo' ? 'demo' : 'derived'),
+    supersededByClosure: null,
   }
 }
 
@@ -231,8 +325,10 @@ export interface ReportView {
   /** When the source says it published the report (never the fetch time). */
   reportedAt: string | null
   fetchedAt: string | null
-  /** Age from the publish time (or the start of its local date when the publish time is unknown). */
+  /** Age from the publish time (or the start of its resort-local date when the publish time is unknown). */
   ageHours: number | null
+  /** What `ageHours` is measured from. */
+  ageBasis: 'published' | 'local-day-start'
   status: OperatingStatus | null
   snowfall: SnowfallReading[]
   baseDepthCm: number | null
@@ -254,9 +350,13 @@ export interface ReportView {
   prov: Provenance
 }
 
-export function reportView(r: OperationalReportRow | undefined, now: string): ReportView | null {
+/**
+ * `tz` is the resort's IANA zone: without a publish time the age runs from resort-local midnight of the report's
+ * date (the earliest it can have been published), never from UTC midnight.
+ */
+export function reportView(r: OperationalReportRow | undefined, now: string, tz: string): ReportView | null {
   if (!r) return null
-  const ref = r.reportedAt ?? `${r.localDate}T00:00:00.000Z`
+  const ref = r.reportedAt ?? startOfLocalDay(r.localDate, tz)
   return {
     id: r.id,
     localDate: r.localDate,
@@ -266,6 +366,7 @@ export function reportView(r: OperationalReportRow | undefined, now: string): Re
     reportedAt: r.reportedAt,
     fetchedAt: r.fetchedAt,
     ageHours: Math.max(0, Math.round(hoursBetween(ref, now) * 10) / 10),
+    ageBasis: r.reportedAt ? 'published' : 'local-day-start',
     status: r.status,
     snowfall: r.snowfall,
     baseDepthCm: r.baseDepthCm,
@@ -504,6 +605,11 @@ export function myPassView(verdicts: readonly AccessVerdict[]): MyPassView {
   const status: MyPassView['status'] = best.canSki ? 'covered' : sorted.some((v) => v.status === 'unknown') ? 'unconfirmed' : 'not-covered'
   const pick = status === 'unconfirmed' ? sorted.find((v) => v.status === 'unknown')! : best
   return { status, productName: pick.productName, headline: `${pick.productName}: ${pick.headline}`, verdicts: sorted }
+}
+
+/** The verdict a day basket is priced with: a pass that can be used that day first, else the most telling "not covered". */
+export function basketVerdict(verdicts: readonly AccessVerdict[]): AccessVerdict | null {
+  return myPassView(verdicts).verdicts[0] ?? null
 }
 
 // ---------------------------------------------------------------------------

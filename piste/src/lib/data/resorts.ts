@@ -25,8 +25,11 @@ import {
 import { providerStatus } from './deps'
 import {
   alertView,
+  applyClosure,
+  basketVerdict,
   beginnerView,
   catalogResearchGap,
+  closureView,
   dayBasket,
   eventsOverlapping,
   eventWindow,
@@ -39,10 +42,12 @@ import {
   reportView,
   runMeta,
   scoreView,
+  statusStatement,
   statusView,
   travelView,
   type AlertView,
   type BeginnerView,
+  type ClosureView,
   type DayWeatherView,
   type EventView,
   type ExpenseView,
@@ -97,8 +102,13 @@ export interface ResortSummary extends ResortIdentity {
   isFavorite: boolean
   favoriteOrder: number | null
   status: StatusView
+  /**
+   * A confirmed closure on `date` (reported temporary closure for that date, a closure this season, or outside the
+   * season's actual opening/closing). When set, show "Closed" — `score` is then superseded (scoreKind 'closed').
+   */
+  closure: ClosureView | null
   opening: OpeningView
-  /** Latest stored assessment for (date, mode); null → "No score yet". */
+  /** Latest stored assessment for (date, mode); null → "No score yet". Superseded by a confirmed closure. */
   score: ScoreView | null
   snow: SnowView
   /** Daily weather aggregates for the date at base and summit (modeled). */
@@ -197,7 +207,9 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     const status = statusView(r, event, report, now)
     const season = b.seasons.get(`${r.id}|${b.seasonId}`)
     const opening = openingView(season, b.seasonId, today)
-    const score = scoreView(assessments.get(assessmentKey(r.id, date, mode)))
+    // A confirmed closure overrides the ski-day score (same rule as recommendation eligibility).
+    const closure = closureView(statusStatement(event, report), b.seasons.get(`${r.id}|${seasonIdFor(date)}`), date)
+    const score = applyClosure(scoreView(assessments.get(assessmentKey(r.id, date, mode))), closure)
     const pointRuns = b.runs.get(r.id) ?? new Map()
 
     const forecastFor = (key: string): ForecastSnowView | null => {
@@ -221,11 +233,9 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
       summitRun: pointRuns.get('summit') ? runMeta(pointRuns.get('summit')!, now) : null,
     }
 
-    const verdicts = ownedVerdicts(b, r.id, date)
-    const myPass = myPassView(verdicts.map((v) => v.verdict))
-    const bestCanSki = verdicts.map((v) => v.verdict).find((v) => v.canSki) ?? null
-    const basketPass = bestCanSki ?? (myPass.verdicts[0] ?? null)
-    const basket = dayBasket(b, r.id, date, basketPass)
+    const verdicts = ownedVerdicts(b, r.id, date).map((v) => v.verdict)
+    const myPass = myPassView(verdicts)
+    const basket = dayBasket(b, r.id, date, basketVerdict(verdicts))
     const expense = expenseView(basket)
     const travel = travelView(b, r.id)
     const fit = fitView(b, r, travel, basket)
@@ -245,7 +255,8 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     if (!report) gaps.push('No snow report on file')
     if (!pointRuns.size) gaps.push('Weather not fetched yet')
     else if (weatherFetchedAt && hoursBetween(weatherFetchedAt, now) > WEATHER_STALE_H) gaps.push(`Weather data is ${Math.round(hoursBetween(weatherFetchedAt, now))} h old`)
-    if (!score) gaps.push('No conditions score yet for this date')
+    if (closure) gaps.unshift(`${closure.reason} — no ski-day score`)
+    else if (!score) gaps.push('No conditions score yet for this date')
     const seasonTxt = seasonLabel(b.seasonId)
     if (!badges.length) gaps.push(`No pass access recorded for ${seasonTxt}`)
     else if (badges.some((x) => !x.confirmed)) gaps.push(`Pass access unconfirmed for ${seasonTxt}`)
@@ -265,9 +276,10 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
       isFavorite: b.favorites.has(r.id),
       favoriteOrder: b.favorites.get(r.id)?.sortOrder ?? null,
       status,
+      closure,
       opening,
       score,
-      snow: { report: reportView(report, now), forecast: { base: forecastFor('base'), summit: forecastFor('summit') } },
+      snow: { report: reportView(report, now, r.timezone), forecast: { base: forecastFor('base'), summit: forecastFor('summit') } },
       weather,
       passes: badges,
       myPass,

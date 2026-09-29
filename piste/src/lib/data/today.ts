@@ -27,10 +27,12 @@ import { OPERATING_STATUS_LABEL, SCORING_MODES, type OpeningLabel, type Operatin
 import { formatSnow } from '@/lib/domain/units'
 import {
   assessmentKey,
+  currentReports,
   isLive,
   latestAssessments,
-  latestReports,
   loadBundle,
+  NOT_PERSONAL_REPORT,
+  notDemoProv,
   pointsForRuns,
   resortToday,
   seasonLabel,
@@ -41,13 +43,17 @@ import { buildSummaries, type ResortSummary } from './resorts'
 import { tripSummaries, type TripSummary } from './trips'
 import {
   alertsOverlapping,
+  basketVerdict,
+  candidateOps,
   catalogResearchGap,
+  closureView,
   dayBasket,
   eventsOverlapping,
   myPassView,
   ownedVerdicts,
   reportedWindow,
   statusStatement,
+  type ClosureView,
   type EventView,
 } from './views'
 
@@ -88,27 +94,32 @@ function presetMode(preset: RecommendPreset, fallback: ScoringMode): ScoringMode
 const toConditions = (a: { score: number | null; scoreKind: ScoreKind; descriptor: string | null; confidence: CandidateConditions['confidence']; computedAt: string; kind: CandidateConditions['kind'] } | undefined): CandidateConditions | null =>
   a ? { score: a.score, scoreKind: a.scoreKind, descriptor: a.descriptor, confidence: a.confidence, computedAt: a.computedAt, kind: a.kind } : null
 
+/** Larger of the base/summit modeled 72 h snowfall, with whether that sum covers the whole window. */
+function forecast72h(sum: ResortSummary): { cm: number | null; complete: boolean | null } {
+  const pts = [sum.snow.forecast.base?.next72h, sum.snow.forecast.summit?.next72h].filter((x): x is NonNullable<typeof x> => !!x && x.sumCm !== null)
+  if (!pts.length) return { cm: null, complete: null }
+  const top = pts.sort((x, y) => y.sumCm! - x.sumCm!)[0]
+  return { cm: top.sumCm, complete: top.complete }
+}
+
 /** Build recommendation candidates for every resort in the bundle. */
-async function buildCandidates(b: Bundle, dates: readonly string[], summaries: readonly ResortSummary[]): Promise<RecommendCandidate[]> {
+async function buildCandidates(b: Bundle, dates: readonly string[], summaries: readonly ResortSummary[], reportsNow: Map<string, OperationalReportRow>): Promise<RecommendCandidate[]> {
   const { db, now } = b.ctx
   const resortIds = b.resorts.map((r) => r.row.id)
-  const [assessments, reportsToday] = await Promise.all([
-    latestAssessments(db, { dates, modes: SCORING_MODES, now, live: b.live, resortIds }),
-    latestReports(db, { date: b.ctx.today, now, live: b.live, resortIds }),
-  ])
+  const assessments = await latestAssessments(db, { dates, modes: SCORING_MODES, now, live: b.live, resortIds })
   const byId = new Map(summaries.map((x) => [x.id, x]))
   const seasonId = seasonIdFor(dates[0])
   return b.resorts.map(({ row: r }) => {
     const sum = byId.get(r.id)!
-    const report: OperationalReportRow | undefined = reportsToday.get(r.id)
+    const report: OperationalReportRow | undefined = reportsNow.get(r.id)
     const season = b.seasons.get(`${r.id}|${seasonId}`)
     const st = statusStatement(b.status.get(r.id), report)
-    const snow72 = [sum.snow.forecast.base?.next72h.sumCm, sum.snow.forecast.summit?.next72h.sumCm].filter((x): x is number => x != null)
+    const snow72 = forecast72h(sum)
     const today = resortToday(r, now)
     const days: CandidateDay[] = dates.map((date) => {
       const verdicts = ownedVerdicts(b, r.id, date).map((v) => v.verdict)
       const pass = myPassView(verdicts)
-      const basket = date === sum.date ? null : dayBasket(b, r.id, date, verdicts.find((v) => v.canSki) ?? verdicts[0] ?? null)
+      const basket = date === sum.date ? null : dayBasket(b, r.id, date, basketVerdict(verdicts))
       const cost = basket
         ? { total: basket.total, tier: basket.tier.tier, missing: basket.missing.filter((m) => m.required).map((m) => m.message), confirmAtSource: basket.lines.some((l) => l.confirmAtSource) }
         : { total: sum.expense.total, tier: sum.expense.tier, missing: sum.expense.requiredMissing, confirmAtSource: sum.expense.confirmAtSource }
@@ -118,7 +129,7 @@ async function buildCandidates(b: Bundle, dates: readonly string[], summaries: r
         cost,
         pass: { status: pass.status, productName: pass.productName, note: pass.status === 'not-covered' ? pass.headline : null },
         events: eventsOverlapping(b.events, new Set([r.id]), date, date).map((e) => ({ title: e.title, status: e.status })),
-        snow: { forecast72hCm: snow72.length ? Math.max(...snow72) : null, reported24hCm: report && report.localDate === today ? reportedWindow(report, '24h') : null },
+        snow: { forecast72hCm: snow72.cm, forecast72hComplete: snow72.complete, reported24hCm: report && report.localDate === today ? reportedWindow(report, '24h') : null },
         warnings: alertsOverlapping(b.alerts.get(r.id) ?? [], startOfLocalDay(date, r.timezone), endOfLocalDay(date, r.timezone)).map((a) => a.headline ?? a.event),
       }
     })
@@ -126,15 +137,7 @@ async function buildCandidates(b: Bundle, dates: readonly string[], summaries: r
       resortId: r.id,
       name: r.shortName || r.name,
       today,
-      ops: {
-        ...st,
-        announcedOpening: season?.announcedOpening ?? null,
-        estimatedOpenFrom: season?.estimatedOpenFrom ?? null,
-        estimatedOpenTo: season?.estimatedOpenTo ?? null,
-        actualOpening: season?.actualOpening ?? null,
-        announcedClosing: season?.announcedClosing ?? null,
-        actualClosing: season?.actualClosing ?? null,
-      },
+      ops: candidateOps(st, season),
       fit: sum.fit,
       travel: sum.fit.travel,
       evidence: {
@@ -160,6 +163,7 @@ function runRecommendation(b: Bundle, dates: string[], preset: RecommendPreset, 
     defaultMode: p.scoringMode,
     now: b.ctx.now,
     appMode: b.ctx.mode,
+    units: p.units,
   })
 }
 
@@ -168,8 +172,8 @@ export async function getRecommendation(ctx: DataCtx, opts: RecommendationOption
   const dates = resolveDates(ctx.today, opts)
   const preset = opts.preset ?? defaultPreset(ctx.prefs.ability)
   const b = await loadBundle(ctx, { seasons: dates.map(seasonIdFor) })
-  const summaries = await buildSummaries(b, { date: dates[0], mode: presetMode(preset, ctx.prefs.scoringMode) })
-  return runRecommendation(b, dates, preset, await buildCandidates(b, dates, summaries), !!opts.useMyWeights)
+  const [summaries, reportsNow] = await Promise.all([buildSummaries(b, { date: dates[0], mode: presetMode(preset, ctx.prefs.scoringMode) }), currentReports(b)])
+  return runRecommendation(b, dates, preset, await buildCandidates(b, dates, summaries, reportsNow), !!opts.useMyWeights)
 }
 
 // ---------------------------------------------------------------------------
@@ -194,13 +198,23 @@ export interface WatchItem {
 export interface StripCell {
   resortId: string
   name: string
-  /** Modeled daily snowfall at base and summit; null = unknown/not covered. */
+  /**
+   * Modeled snowfall at base and summit over the part of the local day the run covers; null = unknown/not covered.
+   * When `partial` is true this is NOT a day total — word it "at least …".
+   */
   snowfallCm: { base: number | null; summit: number | null }
+  /** Share of the local day (0–1) the model run covers at each point; null = no run. */
+  coverage: { base: number | null; summit: number | null }
+  /** Some shown weather covers only part of the day (end of the forecast horizon, or today's past hours missing). */
+  partial: boolean
   tempMinC: number | null
   tempMaxC: number | null
+  /** null when no score — or when `closed` supersedes it. */
   score: number | null
   scoreKind: ScoreKind | null
   descriptor: string | null
+  /** Confirmed closure on this date: show "Closed", never a ski-day score. */
+  closed: ClosureView | null
 }
 
 export interface StripDay {
@@ -230,12 +244,18 @@ export interface SnowWatchItem {
   resortId: string
   name: string
   isFavorite: boolean
-  /** Larger of base/summit modeled snowfall in the next 72 h. */
+  /** Larger of base/summit modeled snowfall in the next 72 h — a lower bound when `complete` is false. */
   next72hCm: number
+  /** The run covers all 72 hours. When false the amount is "at least …". */
+  complete: boolean
+  /** Hours of the window the run covers with a snowfall value. */
+  hoursCovered: number
   next7dCm: number | null
+  /** The 7-day sum covers all 168 hours (else a lower bound). */
+  next7dComplete: boolean
   point: 'base' | 'summit'
   fetchedAt: string
-  /** "Likely …" wording: modeled, not observed. */
+  /** "Likely …" wording: modeled, not observed; "Likely at least …" for a partial window. */
   text: string
 }
 
@@ -287,12 +307,12 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
     db
       .select()
       .from(s.statusEvents)
-      .where(and(gte(s.statusEvents.effectiveAt, since7), lte(s.statusEvents.effectiveAt, now), b.live ? sql`coalesce(json_extract(${s.statusEvents.prov}, '$.kind'), '') <> 'demo'` : undefined))
+      .where(and(gte(s.statusEvents.effectiveAt, since7), lte(s.statusEvents.effectiveAt, now), b.live ? notDemoProv(s.statusEvents.prov) : undefined))
       .orderBy(desc(s.statusEvents.effectiveAt)),
     db
       .select()
       .from(s.openingDateHistory)
-      .where(and(gte(s.openingDateHistory.changedAt, since14), lte(s.openingDateHistory.changedAt, now)))
+      .where(and(gte(s.openingDateHistory.changedAt, since14), lte(s.openingDateHistory.changedAt, now), b.live ? notDemoProv(s.openingDateHistory.prov) : undefined))
       .orderBy(desc(s.openingDateHistory.changedAt)),
     db
       .select()
@@ -301,7 +321,7 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
         and(
           gte(s.operationalReports.createdAt, since2),
           lte(s.operationalReports.createdAt, now),
-          sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`,
+          NOT_PERSONAL_REPORT,
           b.live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       )
@@ -353,7 +373,14 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
   return items.sort((x, y) => (x.at < y.at ? 1 : x.at > y.at ? -1 : x.resortId.localeCompare(y.resortId)))
 }
 
-async function stripFor(b: Bundle, resortIds: readonly string[], dates7: readonly string[], selected: ReadonlySet<string>, mode: ScoringMode): Promise<StripDay[]> {
+async function stripFor(
+  b: Bundle,
+  resortIds: readonly string[],
+  dates7: readonly string[],
+  selected: ReadonlySet<string>,
+  mode: ScoringMode,
+  reportsNow: Map<string, OperationalReportRow>,
+): Promise<StripDay[]> {
   const { db, now } = b.ctx
   const ids = resortIds.filter((id) => b.byId.has(id))
   const runs = ids.flatMap((id) => [...(b.runs.get(id)?.values() ?? [])])
@@ -370,12 +397,13 @@ async function stripFor(b: Bundle, resortIds: readonly string[], dates7: readonl
     latestAssessments(db, { dates: dates7, modes: [mode], now, live: b.live, resortIds: ids }),
   ])
   const series = new Map(runs.map((r) => [r.id, prepareSeries(points.get(r.id) ?? [], r.intervalSemantics ?? 'preceding-hour')]))
+  const statements = new Map(ids.map((id) => [id, statusStatement(b.status.get(id), reportsNow.get(id))]))
   return dates7.map((date) => ({
     date,
     label: formatLocalDate(date, 'ccc d'),
     isWeekend: isWeekend(date),
     selected: selected.has(date),
-    cells: ids.map((id) => {
+    cells: ids.map((id): StripCell => {
       const r = b.byId.get(id)!.row
       const agg = (key: string) => {
         const run = b.runs.get(id)?.get(key)
@@ -386,15 +414,21 @@ async function stripFor(b: Bundle, resortIds: readonly string[], dates7: readonl
       const base = agg('base')
       const summit = agg('summit')
       const a = assessments.get(assessmentKey(id, date, mode))
+      // Same rule as the resort summaries and recommendation eligibility: a confirmed closure shows "Closed".
+      const closed = closureView(statements.get(id)!, b.seasons.get(`${id}|${seasonIdFor(date)}`), date)
+      const shown = [base, summit].filter((x): x is NonNullable<typeof x> => !!x)
       return {
         resortId: id,
         name: r.shortName || r.name,
         snowfallCm: { base: base?.snowfallCm ?? null, summit: summit?.snowfallCm ?? null },
+        coverage: { base: base ? Math.round(base.coverage * 1000) / 1000 : null, summit: summit ? Math.round(summit.coverage * 1000) / 1000 : null },
+        partial: shown.some((x) => !x.complete),
         tempMinC: (base ?? summit)?.tempMinC ?? null,
         tempMaxC: (base ?? summit)?.tempMaxC ?? null,
-        score: a?.score ?? null,
-        scoreKind: a?.scoreKind ?? null,
-        descriptor: a?.descriptor ?? null,
+        score: closed ? null : (a?.score ?? null),
+        scoreKind: closed ? 'closed' : (a?.scoreKind ?? null),
+        descriptor: closed ? null : (a?.descriptor ?? null),
+        closed,
       }
     }),
   }))
@@ -405,10 +439,11 @@ export async function getTodayView(ctx: DataCtx, opts: RecommendationOptions = {
   const dates = resolveDates(ctx.today, opts)
   const preset = opts.preset ?? defaultPreset(ctx.prefs.ability)
   const mode = presetMode(preset, ctx.prefs.scoringMode)
-  const b = await loadBundle(ctx, { seasons: dates.map(seasonIdFor) })
-  const summaries = await buildSummaries(b, { date: dates[0], mode })
+  const dates7 = dateRange(ctx.today, addDays(ctx.today, STRIP_DAYS - 1))
+  const b = await loadBundle(ctx, { seasons: [...dates, ...dates7].map(seasonIdFor) })
+  const [summaries, reportsNow] = await Promise.all([buildSummaries(b, { date: dates[0], mode }), currentReports(b)])
   const [candidates, changes, trips, unreadAlerts, snowRules] = await Promise.all([
-    buildCandidates(b, dates, summaries),
+    buildCandidates(b, dates, summaries, reportsNow),
     recentChanges(b),
     tripSummaries(ctx),
     db.select().from(s.alerts).where(isNull(s.alerts.readAt)).orderBy(desc(s.alerts.firedAt), desc(s.alerts.id)).limit(20),
@@ -421,9 +456,8 @@ export async function getTodayView(ctx: DataCtx, opts: RecommendationOptions = {
   const watchlist: WatchItem[] = favs.map((summary) => ({ summary, changes: changes.filter((c) => c.resortId === summary.id).slice(0, 3) }))
 
   // Seven-day strip for favourites (or the winner).
-  const dates7 = dateRange(ctx.today, addDays(ctx.today, STRIP_DAYS - 1))
   const stripIds = favs.length ? favs.slice(0, MAX_STRIP_RESORTS).map((f) => f.id) : recommendation.winner ? [recommendation.winner.resortId] : []
-  const strip = await stripFor(b, stripIds, dates7, new Set(dates), mode)
+  const strip = await stripFor(b, stripIds, dates7, new Set(dates), mode, reportsNow)
 
   const nextTrip = trips.find((t) => t.phase === 'in-progress') ?? trips.find((t) => t.phase === 'upcoming') ?? null
 
@@ -459,18 +493,26 @@ export async function getTodayView(ctx: DataCtx, opts: RecommendationOptions = {
         .filter((p) => p.f && p.f.next72h.sumCm !== null)
         .sort((p, q) => q.f!.next72h.sumCm! - p.f!.next72h.sumCm!)
       const top = pts[0]
+      // An incomplete sum is a lower bound: it can confirm the threshold, never rule it out.
       if (!top || top.f!.next72h.sumCm! < thresholdCm) return []
-      const cm = top.f!.next72h.sumCm!
+      const w = top.f!.next72h
+      const cm = w.sumCm!
+      const amount = formatSnow(cm, units)
       return [
         {
           resortId: x.id,
           name: x.name,
           isFavorite: x.isFavorite,
           next72hCm: cm,
+          complete: w.complete,
+          hoursCovered: w.hoursWithValue,
           next7dCm: top.f!.next7d.sumCm,
+          next7dComplete: top.f!.next7d.complete,
           point: top.k,
           fetchedAt: top.f!.run.fetchedAt,
-          text: `Likely ${formatSnow(cm, units)} of new snow in the next 72 h at the ${top.k} (weather model)`,
+          text: w.complete
+            ? `Likely ${amount} of new snow in the next 72 h at the ${top.k} (weather model)`
+            : `Likely at least ${amount} of new snow in the next 72 h at the ${top.k} (weather model; the forecast covers ${w.hoursWithValue} of 72 h)`,
         },
       ]
     })

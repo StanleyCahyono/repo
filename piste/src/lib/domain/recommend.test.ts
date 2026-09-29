@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { computeFit, type FitInput } from './fit'
 import { money } from './money'
-import { classifyDay, recommend, type CandidateDay, type RecommendCandidate, type RecommendInput } from './recommend'
+import { classifyDay, confirmedClosure, describeNoWinner, recommend, type CandidateDay, type RecommendCandidate, type RecommendInput } from './recommend'
 
 const NOW = '2027-01-15T14:00:00.000Z'
 const TODAY = '2027-01-15'
@@ -252,6 +252,96 @@ describe('preseason', () => {
     const r = recommend(base([c], { dates: ['2026-10-12'], now: '2026-10-10T14:00:00.000Z' }))
     expect(r.preseason).toBe(true)
     expect(r.excluded[0].kind).toBe('preseason')
+  })
+
+  it("last season's closed-for-season does not close the new season: preseason before the announced date, unknown after", () => {
+    const lastApril = (today: string, date: string) =>
+      cand('alta', {
+        today,
+        ops: { ...cand('x').ops, status: 'closed-for-season', statusDate: '2026-04-12', statusAt: '2026-04-12T16:00:00.000Z', actualOpening: null, announcedOpening: '2026-11-20' },
+        days: [day(date)],
+      })
+    const before = lastApril('2026-10-10', '2026-10-12')
+    expect(classifyDay(before, before.days[0], '2026-10-12', '2026-10-10T14:00:00.000Z')).toMatchObject({ kind: 'preseason', reason: expect.stringMatching(/Not open yet — opens Fri 20 Nov/) })
+    const r = recommend(base([before], { dates: ['2026-10-12'], now: '2026-10-10T14:00:00.000Z' }))
+    expect(r.excluded).toEqual([expect.objectContaining({ resortId: 'alta', kind: 'preseason' })])
+    expect(r.excluded[0].reason).not.toMatch(/Closed for the season/)
+
+    const after = lastApril('2026-11-24', '2026-11-25')
+    const cls = classifyDay(after, after.days[0], '2026-11-25', '2026-11-24T14:00:00.000Z')
+    expect(cls.kind).toBe('status-unknown')
+    const r2 = recommend(base([after, cand('open', { today: '2026-11-24', ops: { ...cand('x').ops, statusDate: '2026-11-25', actualOpening: '2026-11-21' }, days: [day('2026-11-25')] })], { dates: ['2026-11-25'], now: '2026-11-24T14:00:00.000Z' }))
+    expect(r2.statusUnknown.map((o) => o.resortId)).toEqual(['alta'])
+    expect(r2.excluded).toEqual([])
+  })
+
+  it('a summer "closed for the season" page before this season\'s announced opening is not a closure of this season', () => {
+    const c = cand('alta', {
+      today: '2026-10-10',
+      ops: { ...cand('x').ops, status: 'closed-for-season', statusDate: '2026-07-15', actualOpening: null, announcedOpening: '2026-11-20' },
+      days: [day('2026-10-12')],
+    })
+    expect(confirmedClosure(c.ops, '2026-10-12')).toBeNull()
+    expect(classifyDay(c, c.days[0], '2026-10-12', '2026-10-10T14:00:00.000Z').kind).toBe('preseason')
+    // …while a closure reported after this season's opening still closes it.
+    const closedInApril = { ...c.ops, statusDate: '2027-04-05', actualOpening: '2026-11-21' }
+    expect(confirmedClosure(closedInApril, '2027-04-10')).toMatchObject({ kind: 'closed-for-season', reason: 'Closed for the season (reported Mon 5 Apr)' })
+    expect(confirmedClosure(closedInApril, '2027-04-01')).toBeNull()
+  })
+})
+
+describe('confirmedClosure', () => {
+  const ops = cand('x').ops
+  it('a temporary closure applies to its own date only; season dates bound the season', () => {
+    const temp = { ...ops, status: 'temporarily-closed' as const, statusDate: TODAY }
+    expect(confirmedClosure(temp, TODAY)).toMatchObject({ kind: 'temporarily-closed' })
+    expect(confirmedClosure(temp, SAT)).toBeNull()
+    expect(confirmedClosure({ ...ops, actualClosing: '2027-04-11' }, '2027-04-12')).toMatchObject({ kind: 'season-ended' })
+    expect(confirmedClosure({ ...ops, actualClosing: '2027-04-11' }, '2027-04-11')).toBeNull()
+    expect(confirmedClosure(ops, '2026-11-20')).toMatchObject({ kind: 'before-opening' })
+    expect(confirmedClosure(ops, TODAY)).toBeNull()
+  })
+})
+
+describe('no-winner reasons', () => {
+  it('says the resorts are outside the travel limits rather than "nothing is open"', () => {
+    const far = cand('far', {}, { travel: { driveMinutes: 400, driveIsEstimate: true, airports: [] }, travelPrefs: { ...PREFS, willingToFly: false } })
+    const r = recommend(base([far]))
+    expect(r.winner).toBeNull()
+    expect(r.noWinnerReason).toMatch(/within your travel limits/)
+    expect(r.noWinnerReason).not.toMatch(/No resort is open on these dates/)
+  })
+
+  it('lists the counts when exclusions are mixed, and mentions unknown-status resorts', () => {
+    const far = cand('far', {}, { travel: { driveMinutes: 400, driveIsEstimate: true, airports: [] }, travelPrefs: { ...PREFS, willingToFly: false } })
+    const closed = cand('shut', { ops: { ...cand('x').ops, status: 'temporarily-closed', statusDate: TODAY } })
+    const unknown = cand('mystery', { ops: { ...cand('x').ops, status: 'unknown', statusDate: TODAY } })
+    const r = recommend(base([far, closed, unknown]))
+    expect(r.winner).toBeNull()
+    expect(r.noWinnerReason).toMatch(/1 outside your travel limits, 1 closed/)
+    expect(r.noWinnerReason).toMatch(/1 resort with unknown status is listed separately/)
+    expect(describeNoWinner({ candidates: 1, preseason: false, excluded: [{ resortId: 'a', name: 'A', kind: 'closed', reason: 'x' }], statusUnknown: 0 })).toMatch(/confirmed closure/)
+  })
+
+  it('custom weights that are all zero fall back to Learning day weights, and say so', () => {
+    const r = recommend(base([cand('a')], { preset: 'custom', weights: { conditions: 0, fit: 0, travel: 0, cost: 0, events: 0 } }))
+    expect(r.weights).toEqual({ conditions: 25, fit: 45, travel: 15, cost: 15, events: 0 })
+    expect(r.weightsNote).toMatch(/all zero/)
+    expect(recommend(base([cand('a')])).weightsNote).toBeNull()
+  })
+})
+
+describe('modeled snow wording', () => {
+  it('an incomplete 72 h sum reads "at least …", and display units are respected', () => {
+    const partial = cand('a', { days: [day(TODAY, { snow: { forecast72hCm: 20, forecast72hComplete: false, reported24hCm: null } })] })
+    const full = cand('b', { days: [day(TODAY, { snow: { forecast72hCm: 20, forecast72hComplete: true, reported24hCm: null } })] })
+    const r = recommend(base([partial, full]))
+    const a = r.ranked.find((o) => o.resortId === 'a')!
+    const b = r.ranked.find((o) => o.resortId === 'b')!
+    expect(a.benefits.join(' | ')).toMatch(/Likely at least 20 cm new snow in the next 72 h/)
+    expect(b.benefits.join(' | ')).toMatch(/Likely 20 cm new snow in the next 72 h \(weather model\)/)
+    const inches = recommend(base([full], { units: { temperature: 'F', snow: 'in', distance: 'mi', elevation: 'ft', speed: 'mph' } }))
+    expect(inches.winner!.benefits.join(' | ')).toMatch(/Likely 7.9″ new snow/)
   })
 })
 

@@ -19,11 +19,12 @@ import type { HourlyWeather } from '@/lib/providers/types'
 import { addDays, addHours, dateRange, endOfLocalDay, formatInstant, hoursBetween, isoWeekday, localDateOf, startOfLocalDay } from '@/lib/domain/time'
 import type { Confidence, ScoreKind, ScoringMode, SnowfallReading, SurfaceInterpretation } from '@/lib/domain/types'
 import {
-  applyOverrides,
   floorHour,
   groupBy,
   isLive,
   latestRuns,
+  loadResortRows,
+  NOT_PERSONAL_REPORT,
   pickPrimary,
   pointsForRuns,
   resortToday,
@@ -80,15 +81,7 @@ export interface ForecastView {
   notes: string[]
 }
 
-async function loadResorts(ctx: DataCtx, ids: readonly string[]): Promise<ResortRow[]> {
-  if (!ids.length) return []
-  const [rows, ovs] = await Promise.all([
-    ctx.db.select().from(s.resorts).where(inArray(s.resorts.id, [...ids])),
-    ctx.db.select().from(s.resortOverrides).where(inArray(s.resortOverrides.resortId, [...ids])),
-  ])
-  const byId = new Map(rows.map((r) => [r.id, applyOverrides(r, null, ovs.filter((o) => !o.field.startsWith('season.'))).resort]))
-  return ids.map((id) => byId.get(id)).filter((r): r is ResortRow => !!r)
-}
+const loadResorts = (ctx: DataCtx, ids: readonly string[]): Promise<ResortRow[]> => loadResortRows(ctx, ids)
 
 function hourView(h: HourlyWeather, tz: string): HourView {
   return { ...h, localDate: localDateOf(h.validTime, tz), localTime: formatInstant(h.validTime, tz, 'HH:mm') }
@@ -258,11 +251,27 @@ async function trackingStart(ctx: DataCtx, resort: ResortRow): Promise<{ date: s
     db
       .select({ v: min(s.weatherRuns.fetchedAt) })
       .from(s.weatherRuns)
-      .where(and(eq(s.weatherRuns.resortId, resort.id), eq(s.weatherRuns.status, 'ok'), lte(s.weatherRuns.fetchedAt, ctx.now), live ? sql`${s.weatherRuns.kind} <> 'demo'` : undefined)),
+      .where(
+        and(
+          eq(s.weatherRuns.resortId, resort.id),
+          eq(s.weatherRuns.status, 'ok'),
+          lte(s.weatherRuns.fetchedAt, ctx.now),
+          live ? sql`${s.weatherRuns.kind} <> 'demo' and ${s.weatherRuns.provider} <> 'demo'` : undefined,
+        ),
+      ),
+    // Operations evidence only (personal feedback is not tracking), and only what was published by `now`.
     db
       .select({ v: min(s.operationalReports.localDate) })
       .from(s.operationalReports)
-      .where(and(eq(s.operationalReports.resortId, resort.id), live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined)),
+      .where(
+        and(
+          eq(s.operationalReports.resortId, resort.id),
+          NOT_PERSONAL_REPORT,
+          sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${ctx.now})`,
+          lte(s.operationalReports.createdAt, ctx.now),
+          live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
+        ),
+      ),
     db
       .select({ v: min(s.conditionsAssessments.computedAt) })
       .from(s.conditionsAssessments)
@@ -305,7 +314,8 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
           eq(s.operationalReports.resortId, resortId),
           gte(s.operationalReports.localDate, first),
           lte(s.operationalReports.localDate, addDays(last, 1)),
-          sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`,
+          sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${now})`,
+          NOT_PERSONAL_REPORT,
           live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       ),
@@ -448,7 +458,7 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
       date,
       weekday: isoWeekday(date),
       state,
-      report: reportView(report, now),
+      report: reportView(report, now, tz),
       revisions: dayReports.length,
       forecastThen,
       assessmentThen,

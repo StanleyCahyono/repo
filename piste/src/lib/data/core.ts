@@ -7,7 +7,7 @@
  * (live and demo data already live in separate database files).
  */
 import 'server-only'
-import { and, eq, gte, inArray, lte, or, sql, type SQL } from 'drizzle-orm'
+import { and, eq, gte, inArray, lte, or, sql, type SQL, type SQLWrapper } from 'drizzle-orm'
 import { DateTime } from 'luxon'
 import type { Ctx } from '@/lib/context'
 import type { Db } from '@/lib/db/client'
@@ -386,16 +386,20 @@ export async function loadBundle(ctx: DataCtx, opts: { ids?: readonly string[] |
         ),
       db.select().from(s.fxRates).where(live ? sql`${s.fxRates.kind} <> 'demo'` : undefined),
       loadPassData(db, seasonId),
-      ids
-        ? db
-            .select()
-            .from(s.events)
-            .where(inArray(s.events.resortId, ids))
-        : db.select().from(s.events),
+      db
+        .select()
+        .from(s.events)
+        .where(and(ids ? inArray(s.events.resortId, ids) : undefined, live ? notDemoProv(s.events.prov) : undefined)),
       db
         .select()
         .from(s.weatherAlerts)
-        .where(and(or(sql`${s.weatherAlerts.ends} is null`, sql`${s.weatherAlerts.ends} > ${now}`), ids ? inArray(s.weatherAlerts.resortId, ids) : undefined)),
+        .where(
+          and(
+            or(sql`${s.weatherAlerts.ends} is null`, sql`${s.weatherAlerts.ends} > ${now}`),
+            ids ? inArray(s.weatherAlerts.resortId, ids) : undefined,
+            live ? sql`${s.weatherAlerts.provider} <> 'demo'` : undefined,
+          ),
+        ),
       latestRuns(db, now, live, ids),
     ])
 
@@ -438,6 +442,25 @@ export async function loadBundle(ctx: DataCtx, opts: { ids?: readonly string[] |
     runs,
     names: Object.fromEntries(resorts.map((r) => [r.row.id, r.row.shortName || r.row.name])),
   }
+}
+
+/**
+ * Resort rows with manual corrections applied (no season rows), for loaders that need names/zones without the
+ * full bundle. `ids` null = every resort (catalog order: priority, then name).
+ */
+export async function loadResortRows(ctx: Pick<DataCtx, 'db'>, ids: readonly string[] | null): Promise<ResortRow[]> {
+  if (ids && !ids.length) return []
+  const [rows, ovs] = await Promise.all([
+    ids ? ctx.db.select().from(s.resorts).where(inArray(s.resorts.id, [...ids])) : ctx.db.select().from(s.resorts),
+    ids ? ctx.db.select().from(s.resortOverrides).where(inArray(s.resortOverrides.resortId, [...ids])) : ctx.db.select().from(s.resortOverrides),
+  ])
+  const byResort = groupBy(ovs, (o) => o.resortId)
+  const corrected = rows.map((r) => applyOverrides(r, null, (byResort.get(r.id) ?? []).filter((o) => !o.field.startsWith('season.'))).resort)
+  if (ids) {
+    const byId = new Map(corrected.map((r) => [r.id, r]))
+    return ids.map((id) => byId.get(id)).filter((r): r is ResortRow => !!r)
+  }
+  return corrected.sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name))
 }
 
 export async function loadPassData(db: Db, seasonId: string): Promise<PassData> {
@@ -508,7 +531,13 @@ export async function latestStatusEvents(db: Db, now: string, live: boolean, res
 }
 
 /** Personal feedback is stored as a manual report with prov.note 'personal'; it is never operations evidence. */
-const notPersonal = sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`
+export const NOT_PERSONAL_REPORT = sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`
+const notPersonal = NOT_PERSONAL_REPORT
+
+/** Second-line demo filter for rows whose data kind lives in a JSON provenance column (null prov passes). */
+export function notDemoProv(col: SQLWrapper): SQL {
+  return sql`coalesce(json_extract(${col}, '$.kind'), '') <> 'demo'`
+}
 
 /** Latest operations report per resort with localDate ≤ `date`, published by `now`. */
 export async function latestReports(db: Db, opts: { date: string; now: string; live: boolean; resortIds?: readonly string[] | null }): Promise<Map<string, OperationalReportRow>> {
@@ -526,6 +555,17 @@ export async function latestReports(db: Db, opts: { date: string; now: string; l
   )
   const rows = await byIds(idList, (c) => db.select().from(t).where(inArray(t.id, c)))
   return new Map(rows.map((r) => [r.resortId, r]))
+}
+
+/**
+ * Latest operations report per resort as of each resort's OWN local today (resorts east of home are already on
+ * the next day during the home evening). One query per distinct local date — two or three at most.
+ */
+export async function currentReports(b: Pick<Bundle, 'ctx' | 'live' | 'resorts'>): Promise<Map<string, OperationalReportRow>> {
+  const { db, now } = b.ctx
+  const byToday = groupBy(b.resorts, (r) => resortToday(r.row, now))
+  const parts = await Promise.all([...byToday].map(([date, rs]) => latestReports(db, { date, now, live: b.live, resortIds: rs.map((r) => r.row.id) })))
+  return new Map(parts.flatMap((m) => [...m]))
 }
 
 /** Operations reports (all revisions) for resorts in a local-date window. */

@@ -17,12 +17,12 @@ import { dateRange, daysBetween } from '@/lib/domain/time'
 import type { AbilityLevel, Provenance } from '@/lib/domain/types'
 import { isLive, loadBundle, type DataCtx } from './core'
 import {
+  basketVerdict,
   dayBasket,
   eventsOverlapping,
   expenseView,
   fitView,
   myPassView,
-  ownedVerdicts,
   travelView,
   type AirportOption,
   type EventView,
@@ -245,10 +245,11 @@ export async function getTripDetail(ctx: DataCtx, id: string): Promise<TripDetai
   }))
   // Best answer per day for me, walking plans so earlier trip days consume allotments.
   const mine = passPlans.filter((p) => p.holder === 'me')
+  const planVerdicts = resortDays.map((_, idx) => mine.map((p) => p.plan.days.find((x) => x.index === idx)!.verdict))
   const dayAccess = resortDays.map((d, idx) => ({
     date: d.date,
     resortId: d.resortId,
-    access: myPassView(mine.map((p) => p.plan.days.find((x) => x.index === idx)!.verdict)),
+    access: myPassView(planVerdicts[idx]),
   }))
 
   const companion = trip.companions.find((c) => c.ability)
@@ -257,21 +258,19 @@ export async function getTripDetail(ctx: DataCtx, id: string): Promise<TripDetai
     : ctx.prefs.companionAbility
       ? { name: ctx.prefs.companionName, ability: ctx.prefs.companionAbility }
       : null
-  const dayBaskets = resortDays
-    .filter((d) => b.byId.has(d.resortId))
-    .map((d) => {
-      const best = ownedVerdicts(b, d.resortId, d.date).map((v) => v.verdict)
-      const pass = best.find((v) => v.canSki) ?? best[0] ?? null
-      return { date: d.date, resortId: d.resortId, expense: expenseView(dayBasket(b, d.resortId, d.date, pass)) }
-    })
+  // Per-day baskets priced with the PLAN's verdict for that day: a day the plan leaves uncovered (allotment used
+  // up by earlier trip days, blackout…) is priced with a lift ticket, never as pass-covered.
+  const baskets = new Map(
+    resortDays
+      .map((d, idx) => ({ d, idx }))
+      .filter(({ d }) => b.byId.has(d.resortId))
+      .map(({ d, idx }) => [idx, dayBasket(b, d.resortId, d.date, basketVerdict(planVerdicts[idx]))] as const),
+  )
+  const dayBaskets = [...baskets].map(([idx, basket]) => ({ date: resortDays[idx].date, resortId: resortDays[idx].resortId, expense: expenseView(basket) }))
   const fit = b.resorts.map(({ row }) => {
-    // Same basis as the resort summaries: the first planned day's basket with my pass applied where it can be used.
-    const firstDay = resortDays.find((d) => d.resortId === row.id)
-    let basket = null
-    if (firstDay) {
-      const verdicts = ownedVerdicts(b, row.id, firstDay.date).map((v) => v.verdict)
-      basket = dayBasket(b, row.id, firstDay.date, verdicts.find((v) => v.canSki) ?? verdicts[0] ?? null)
-    }
+    // Same basis as the resort summaries: the first planned day's basket, with my pass as the plan applies it.
+    const firstIdx = resortDays.findIndex((d) => d.resortId === row.id)
+    const basket = firstIdx >= 0 ? (baskets.get(firstIdx) ?? null) : null
     return { resortId: row.id, name: row.name, fit: fitView(b, row, travelView(b, row.id), basket, comp) }
   })
 

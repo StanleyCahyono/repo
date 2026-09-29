@@ -12,12 +12,12 @@ import type { ResearchNotes, ResortLinks } from '@/lib/db/schema'
 import { isExpired, priceNeedsSourceCheck, QUOTE_KIND_LABEL, type DayBasket } from '@/lib/domain/costs'
 import { money, type Money } from '@/lib/domain/money'
 import { evaluateAccess, latestRule, type AccessVerdict } from '@/lib/domain/passes'
-import { isLocalDate, isoWeekday, seasonIdFor, zoneAbbrev } from '@/lib/domain/time'
+import { isLocalDate, isoWeekday, localTimeToInstant, seasonIdFor, zoneAbbrev } from '@/lib/domain/time'
 import type { Provenance, ScheduleActivity, ScoringMode } from '@/lib/domain/types'
-import { loadBundle, needsConfirmation, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
+import { loadBundle, needsConfirmation, NOT_PERSONAL_REPORT, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
 import { getForecast, getHistoryCalendar, type HistoryCalendar, type ResortForecast } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
-import { dayBasket, eventView, reportView, type EventView, type ReportView, type TravelView } from './views'
+import { basketVerdict, dayBasket, eventView, reportView, type EventView, type ReportView, type TravelView } from './views'
 
 export interface ScheduleView {
   id: number
@@ -288,7 +288,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
           eq(s.operationalReports.resortId, id),
           lte(s.operationalReports.localDate, date),
           sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${now})`,
-          sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`,
+          NOT_PERSONAL_REPORT,
           b.live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       )
@@ -329,6 +329,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
               s.priceSnapshots.subjectId,
               hotelRows.map((h) => h.id),
             ),
+            b.live ? sql`${s.priceSnapshots.quoteKind} <> 'demo'` : undefined,
           ),
         )
     : []
@@ -373,7 +374,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
     date: d,
     revisions: reportRows
       .filter((x) => x.localDate === d)
-      .map((x) => reportView(x, now)!)
+      .map((x) => reportView(x, now, r.timezone)!)
       .sort((x, y) => y.revision - x.revision),
   }))
 
@@ -416,8 +417,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
   }
 
   // Basket (with my pass where it can be used)
-  const canSki = summary.myPass.verdicts.find((v) => v.canSki) ?? summary.myPass.verdicts[0] ?? null
-  const basket = dayBasket(b, id, date, canSki)
+  const basket = dayBasket(b, id, date, basketVerdict(summary.myPass.verdicts))
 
   // Hotels
   const hotels: HotelView[] = hotelRows
@@ -494,7 +494,8 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
   return {
     summary,
     season: { seasonId: b.seasonId, label: seasonLabel(b.seasonId), current, others, changes },
-    hours: { timezone: r.timezone, zoneAbbrev: zoneAbbrev(now, r.timezone), date, forDate, schedules: scheduleViews, notes: hourNotes },
+    // The abbreviation in force on the viewed date (EST vs EDT), taken at local noon — never at `now`.
+    hours: { timezone: r.timezone, zoneAbbrev: zoneAbbrev(localTimeToInstant(date, '12:00', r.timezone), r.timezone), date, forDate, schedules: scheduleViews, notes: hourNotes },
     reports,
     history,
     weather: { base: base.resorts[0] ?? null, summit: summit.resorts[0] ?? null },
