@@ -2,9 +2,9 @@ node_modules/
 .next/
 .next-*/
 out/
-data/*.db
-data/*.db-*
-data/backups/
+# Runtime data (SQLite files, per-agent dev dirs, backups) — never committed.
+data/*
+!data/.gitkeep
 .env
 .env.local
 *.tsbuildinfo
