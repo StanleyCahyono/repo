@@ -22,6 +22,11 @@ export interface SheetProps {
   footer?: ReactNode
   className?: string
   widthClass?: string
+  /**
+   * Where focus goes on close. Radix returns it to the Trigger; a sheet opened programmatically (no trigger) should
+   * pass this, call `event.preventDefault()` and focus the element that opened it.
+   */
+  onCloseAutoFocus?: (event: Event) => void
 }
 
 export function Sheet({
@@ -35,6 +40,7 @@ export function Sheet({
   footer,
   className,
   widthClass = 'md:w-[440px]',
+  onCloseAutoFocus,
 }: SheetProps) {
   const position =
     side === 'bottom'
@@ -54,6 +60,7 @@ export function Sheet({
       <Dialog.Portal>
         <Dialog.Overlay className="piste-overlay fixed inset-0 z-50 bg-overlay" />
         <Dialog.Content
+          onCloseAutoFocus={onCloseAutoFocus}
           className={cn(
             'fixed z-50 flex flex-col border border-divider bg-surface text-ink shadow-overlay outline-none',
             position,
