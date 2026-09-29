@@ -6,7 +6,7 @@ import { EmptyState } from '@/components/ui/states'
 export function ResortNotFoundView() {
   return (
     <div className="mx-auto max-w-[720px] pt-4 md:pt-10">
-      <p className="eyebrow mb-3">Resort not found</p>
+      <h1 className="mb-6 font-display text-[32px] leading-[1.02] text-ink md:text-[44px]">Resort not found</h1>
       <EmptyState
         seed="resort-not-found"
         title="There is no resort at this address"

@@ -14,7 +14,7 @@ export default function Loading() {
           <div className="grid gap-3 border-b border-divider p-4 md:grid-cols-2 md:p-5">
             <Skeleton className="h-11 md:h-10" />
             <Skeleton className="h-11 md:h-10" />
-            <div className="flex gap-3 md:col-span-2">
+            <div className="flex min-w-0 gap-3 md:col-span-2">
               <Skeleton className="h-11 w-44 md:h-10" />
               <Skeleton className="h-11 w-44 md:h-10" />
             </div>

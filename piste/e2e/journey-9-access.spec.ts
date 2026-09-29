@@ -6,7 +6,8 @@
  *   checking that dialogs take focus and give it back.
  * - Reduced motion: with prefers-reduced-motion, sheet animations and transitions collapse to ~0 ms (and run
  *   normally without it).
- * - 390 px: the key pages have no horizontal overflow, and the phone navigation (bottom bar + More sheet) works.
+ * - 390 px (phone project only): every screen, live and demo, has no horizontal overflow, and the phone navigation
+ *   (bottom bar with 44 px targets + More sheet) works.
  */
 import { expect, setMode, test } from './fixtures'
 import { DEMO_ONLY_ROUTES, expectNoHorizontalOverflow, expectVisibleFocus, focused, PRIMARY_ROUTES, reveal, settle, tabUntil } from './helpers'
