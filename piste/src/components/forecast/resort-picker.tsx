@@ -97,7 +97,7 @@ export function ResortPicker({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name or region"
-          className="h-11 w-full rounded-md border border-divider-strong bg-surface pr-3 pl-9 text-[15px] text-ink placeholder:text-ink-3 focus:border-teal focus:outline-none"
+          className="h-11 w-full rounded-md border border-divider-strong bg-surface pr-3 pl-9 text-[15px] text-ink placeholder:text-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1"
         />
       </label>
       {full ? <p className="mb-2 text-[13px] text-caution">Four resorts selected — remove one to add another.</p> : null}

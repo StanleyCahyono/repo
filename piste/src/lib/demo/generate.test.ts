@@ -57,8 +57,10 @@ async function fingerprint(d: Db) {
 }
 
 describe('demo generator', () => {
-  it('runs in under 20 seconds with modest row counts', () => {
-    expect(summary.totalMs).toBeLessThan(20_000)
+  it('runs in bounded time with modest row counts', () => {
+    // About 12 s on an idle 4-core machine; the generous ceiling catches runaway generation without failing on a
+    // busy machine (parallel test files, builds). Row counts below are the real size guard.
+    expect(summary.totalMs).toBeLessThan(60_000)
     const c = summary.counts
     expect(c.weather_points).toBeGreaterThan(100_000)
     expect(c.weather_points).toBeLessThan(250_000)

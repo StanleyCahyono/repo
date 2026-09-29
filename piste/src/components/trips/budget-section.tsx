@@ -8,6 +8,7 @@
 import { CircleDashed, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { KindTag, Missing } from '@/components/ui/provenance'
+import { Disclosure } from '@/components/ui/disclosure'
 import type { TripPage } from '@/lib/data/trip-plan'
 import type { TripBudgetLine } from '@/lib/domain/costs'
 import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
@@ -261,35 +262,38 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
           <SubHead id="baskets-title" aside={<KindTag kind={demo ? 'demo' : 'derived'} />}>
             Day baskets for reference
           </SubHead>
-          <p className="-mt-1 mb-3 max-w-[70ch] text-[13px] text-ink-2">
-            Piste’s per-person basket for each ski day — lift access with your pass as planned, your rental setting, lunch and parking — using the same assumptions as Explore. It is not added to the trip total.
-          </p>
-          <div className="overflow-x-auto rounded-[12px] border border-divider bg-surface">
-            <table className="w-full min-w-[520px] text-[13.5px]">
-              <caption className="sr-only">Per-person day basket for each planned ski day</caption>
-              <thead>
-                <tr className="border-b border-divider bg-surface-2 text-left text-[12px] text-ink-3">
-                  <th scope="col" className="px-4 py-2 font-medium">Day</th>
-                  <th scope="col" className="px-3 py-2 font-medium">Basket</th>
-                  <th scope="col" className="px-3 py-2 text-right font-medium">Per person</th>
-                  <th scope="col" className="px-4 py-2 font-medium">Missing</th>
-                </tr>
-              </thead>
-              <tbody>
-                {page.detail.dayBaskets.map((d) => (
-                  <tr key={`${d.resortId}${d.date}`} className="border-b border-divider align-top last:border-0">
-                    <th scope="row" className="px-4 py-2.5 text-left font-normal">
-                      <span className="font-medium whitespace-nowrap text-ink tnum">{dayLabel(d.date)}</span>
-                      <span className="block text-[12px] text-ink-3">{page.resorts.find((r) => r.id === d.resortId)?.shortName ?? d.resortId}</span>
-                    </th>
-                    <td className="px-3 py-2.5 whitespace-nowrap text-ink">{d.expense.label}</td>
-                    <td className="px-3 py-2.5 text-right whitespace-nowrap tnum">{d.expense.total ? formatMoneyRange(d.expense.total, d.expense.totalMax) : <span className="text-ink-3">{formatMoney(d.expense.knownSubtotal)} known</span>}</td>
-                    <td className="px-4 py-2.5 text-[12.5px] text-ink-2">{d.expense.missing.length ? d.expense.missing.join(' ') : '—'}</td>
+          {/* Reference only (never added to the trip total), so it stays one click away. */}
+          <Disclosure summary={`Show the basket for each ski day (${page.detail.dayBaskets.length})`} className="-mt-1">
+            <p className="mt-2 mb-3 max-w-[70ch] text-[13px] text-ink-2">
+              Piste’s per-person basket for each ski day — lift access with your pass as planned, your rental setting, lunch and parking — using the same assumptions as Explore. It is not added to the trip total.
+            </p>
+            <div className="relative overflow-x-auto rounded-[12px] border border-divider bg-surface">
+              <table className="w-full min-w-[520px] text-[13.5px]">
+                <caption className="sr-only">Per-person day basket for each planned ski day</caption>
+                <thead>
+                  <tr className="border-b border-divider bg-surface-2 text-left text-[12px] text-ink-3">
+                    <th scope="col" className="px-4 py-2 font-medium">Day</th>
+                    <th scope="col" className="px-3 py-2 font-medium">Basket</th>
+                    <th scope="col" className="px-3 py-2 text-right font-medium">Per person</th>
+                    <th scope="col" className="px-4 py-2 font-medium">Missing</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {page.detail.dayBaskets.map((d) => (
+                    <tr key={`${d.resortId}${d.date}`} className="border-b border-divider align-top last:border-0">
+                      <th scope="row" className="px-4 py-2.5 text-left font-normal">
+                        <span className="font-medium whitespace-nowrap text-ink tnum">{dayLabel(d.date)}</span>
+                        <span className="block text-[12px] text-ink-3">{page.resorts.find((r) => r.id === d.resortId)?.shortName ?? d.resortId}</span>
+                      </th>
+                      <td className="px-3 py-2.5 whitespace-nowrap text-ink">{d.expense.label}</td>
+                      <td className="px-3 py-2.5 text-right whitespace-nowrap tnum">{d.expense.total ? formatMoneyRange(d.expense.total, d.expense.totalMax) : <span className="text-ink-3">{formatMoney(d.expense.knownSubtotal)} known</span>}</td>
+                      <td className="px-4 py-2.5 text-[12.5px] text-ink-2">{d.expense.missing.length ? d.expense.missing.join(' ') : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Disclosure>
         </section>
       ) : null}
     </TripSection>

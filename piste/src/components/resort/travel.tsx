@@ -205,7 +205,7 @@ function FlightTable({ origins, first, dests, depart, ret, v }: { origins: Airpo
   return (
     <div className="relative -mx-1 overflow-x-auto px-1">
       <table className="w-full min-w-[480px] text-left text-[13.5px]">
-        <caption className="sr-only">Flight search links from each origin airport to each practical destination airport</caption>
+        <caption className="sr-only">{first ? 'Flight search links from more origin airports' : 'Flight search links from each origin airport to each practical destination airport'}</caption>
         <thead>
           <tr className="border-b border-divider text-[12px] text-ink-3">
             <th scope="col" className="py-2 pr-3 font-medium">

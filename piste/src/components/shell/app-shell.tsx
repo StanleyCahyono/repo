@@ -196,6 +196,7 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                 type="button"
                 onClick={() => setMoreOpen(true)}
                 aria-haspopup="dialog"
+                aria-describedby={unreadAlerts > 0 ? 'more-unread' : undefined}
                 className={cn('flex h-full w-full flex-col items-center justify-center gap-1 text-[12px] font-medium', moreActive ? 'text-teal' : 'text-ink-2')}
               >
                 {moreActive ? <span aria-hidden className="absolute top-0 h-[3px] w-10 rounded-b-full bg-teal" /> : null}
@@ -204,7 +205,12 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                   {unreadAlerts > 0 ? <span className="absolute -top-0.5 -right-1 size-2 rounded-full bg-copper" aria-hidden /> : null}
                 </span>
                 More
-                {unreadAlerts > 0 ? <span className="sr-only"> ({unreadAlerts} unread alerts)</span> : null}
+                {/* Described, not named: the button's accessible name stays "More". */}
+                {unreadAlerts > 0 ? (
+                  <span id="more-unread" hidden>
+                    {unreadAlerts} unread {unreadAlerts === 1 ? 'alert' : 'alerts'}
+                  </span>
+                ) : null}
               </button>
             </li>
           </ul>

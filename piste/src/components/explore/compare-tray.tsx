@@ -11,6 +11,7 @@ import { ArrowRight, Columns3, X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { useToast } from '@/components/ui/toast'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { COMPARE_MAX, COMPARE_MIN, useCompareSelection } from '@/components/resort/card-compare'
 import { compareHref } from './explore-tabs'
 
@@ -47,7 +48,7 @@ export function CompareTray({ scenario }: { scenario: { date: string; mode: stri
                   <span className="sr-only"> resorts selected</span>
                 </span>
               </p>
-              <ul className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto py-0.5 scrollbar-thin">
+              <ScrollRow as="ul" className="flex min-w-0 flex-1 items-center gap-1.5 py-0.5 scrollbar-thin">
                 {entries.map((e) => (
                   <li key={e.id} className="shrink-0">
                     <span className="inline-flex h-11 items-center gap-1 rounded-full border border-teal/40 bg-glacier/60 pr-1 pl-3 text-[13px] font-medium text-ink md:h-9">
@@ -70,7 +71,7 @@ export function CompareTray({ scenario }: { scenario: { date: string; mode: stri
                     </span>
                   </li>
                 ))}
-              </ul>
+              </ScrollRow>
               <button
                 type="button"
                 onClick={() => {

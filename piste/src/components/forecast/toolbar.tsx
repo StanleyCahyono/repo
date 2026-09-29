@@ -175,7 +175,7 @@ function DateJump({ value, today, onChange }: { value: string | null; today: str
             if (d) onChange(d)
           }}
           aria-describedby={`${id}-hint`}
-          className="h-11 w-full min-w-0 rounded-[10px] border border-divider-strong bg-surface px-3 text-[14px] text-ink tnum transition-colors duration-150 hover:border-ink-3 focus:border-teal focus:outline-none sm:w-[172px] md:h-9"
+          className="h-11 w-full min-w-0 rounded-[10px] border border-divider-strong bg-surface px-3 text-[14px] text-ink tnum transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 sm:w-[172px] md:h-9"
         />
         {value ? (
           <button

@@ -161,7 +161,7 @@ function Comparison({ lodging }: { lodging: TripItemRow[] }) {
   return (
     <section aria-labelledby="compare-stay">
       <SubHead id="compare-stay">Compare options</SubHead>
-      <div className="overflow-x-auto rounded-[12px] border border-divider bg-surface">
+      <div className="relative overflow-x-auto rounded-[12px] border border-divider bg-surface">
         <table className="w-full min-w-[560px] text-[13.5px]">
           <caption className="sr-only">Saved lodging options compared</caption>
           <thead>

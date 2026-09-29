@@ -458,7 +458,7 @@ function ResultsBar({
           <select
             value={filters.sort}
             onChange={(e) => onSort(e.target.value as SortKey)}
-            className="h-10 rounded-md border border-divider-strong bg-surface px-2.5 text-[14px] font-medium text-ink hover:border-ink-3 focus:border-teal focus:outline-none md:h-9"
+            className="h-10 rounded-md border border-divider-strong bg-surface px-2.5 text-[14px] font-medium text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-9"
           >
             {SORTS.map((s) => (
               <option key={s} value={s}>

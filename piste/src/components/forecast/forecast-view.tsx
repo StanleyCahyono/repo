@@ -293,7 +293,7 @@ function ModeSelect({ value, pendingValue, onChange }: { value: ScoringMode; pen
       <select
         value={pendingValue ?? value}
         onChange={(e) => onChange(e.target.value as ScoringMode)}
-        className="h-10 rounded-[10px] border border-divider-strong bg-surface px-2.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-ink-3 focus:border-teal focus:outline-none md:h-9"
+        className="h-10 rounded-[10px] border border-divider-strong bg-surface px-2.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-9"
       >
         {SCORING_MODES.map((m) => (
           <option key={m} value={m}>

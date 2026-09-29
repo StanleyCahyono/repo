@@ -99,8 +99,8 @@ export type Units = ReturnType<typeof units>
  */
 export function confirmText(p: Provenance | null | undefined): string {
   if (p?.verification === 'search-summary') return 'Researched — confirm at source'
-  if (p?.kind === 'manual') return 'Confirm at source'
-  return 'Reference — confirm at source'
+  if (p?.verification === 'unverified') return 'Reference — confirm at source'
+  return 'Confirm at source'
 }
 
 export function needsCheck(p: Provenance | null | undefined): boolean {
