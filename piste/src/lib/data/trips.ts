@@ -217,6 +217,12 @@ export interface TripDetail {
   demo: boolean
 }
 
+/** Cheap existence check for route layouts (lets an unknown trip id return a real 404 before anything streams). */
+export async function getTripName(ctx: DataCtx, id: string): Promise<string | null> {
+  const [row] = await ctx.db.select({ name: s.trips.name }).from(s.trips).where(eq(s.trips.id, id))
+  return row?.name ?? null
+}
+
 export async function getTripDetail(ctx: DataCtx, id: string): Promise<TripDetail | null> {
   const { db } = ctx
   const [trip] = await db.select().from(s.trips).where(eq(s.trips.id, id))
