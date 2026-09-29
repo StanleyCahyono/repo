@@ -17,7 +17,7 @@ for (const r of RESORTS) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(r.name)
 
     // A catalog fact opens its source drawer: provider, retrieval, verification and the source link.
-    const trigger = await reveal(page.getByRole('button', { name: /^Sources: (Elevation|Location|Terrain)$/ }))
+    const trigger = await reveal(page.getByRole('button', { name: /^Sources: (Elevation|Location|Terrain)$/, includeHidden: true }))
     const fact = (await trigger.getAttribute('aria-label'))!.replace('Sources: ', '')
     await trigger.click()
     const drawer = page.getByRole('dialog', { name: fact })
@@ -37,15 +37,15 @@ for (const r of RESORTS) {
     const weather = page.getByRole('region', { name: /^Weather on / })
     await expect(weather).toContainText(/not fetched|fetch failed|could not be fetched|failing|unavailable/i)
     await expect(page.getByRole('region', { name: 'Piste Conditions' })).toContainText(/No score|Not a full conditions score/)
-    const feeds = page.getByRole('region', { name: 'Data feeds' })
+    const feeds = await reveal(page.getByRole('region', { name: 'Data feeds', includeHidden: true }))
     await expect(feeds).toContainText(/Weather/)
     await expect(feeds).toContainText(/Not fetched yet|Failing|failed/)
     await expect(feeds.getByRole('definition').first()).toHaveText(/^never$/i)
 
     // Official pages Piste cannot read: https links on the resort's own site, opened safely in a new tab — the
     // official website, and the report page its unverified reader targets.
-    await expect(page.getByRole('region', { name: 'Maps & links' }).getByRole('link', { name: /^Official website/ })).toHaveAttribute('href', r.official)
-    await expect(feeds.getByRole('link', { name: /Open the page/ })).toHaveAttribute('href', r.official)
+    await expect(await reveal(page.getByRole('region', { name: 'Maps & links' }).getByRole('link', { name: /^Official website/, includeHidden: true }))).toHaveAttribute('href', r.official)
+    await expect(await reveal(feeds.getByRole('link', { name: /Open the page/, includeHidden: true }))).toHaveAttribute('href', r.official)
     const official = page.getByRole('main').locator(`a[href*="${r.host}"]`)
     expect(await official.count(), `links to ${r.host}`).toBeGreaterThan(1)
     for (const link of await official.all()) {
@@ -55,7 +55,7 @@ for (const r of RESORTS) {
     }
 
     // The manual-edit route for that data: the report form, prefilled with the official page as its source.
-    await (await reveal(page.getByRole('button', { name: /Enter an official report/ }))).click()
+    await (await reveal(page.getByRole('button', { name: /Enter an official report/, includeHidden: true }))).click()
     const sheet = page.getByRole('dialog', { name: literal(`Enter a report for ${r.short}`) })
     await expect(sheet).toBeVisible()
     await expect(sheet.getByRole('textbox', { name: 'Source link' })).toHaveValue(r.official)
@@ -72,7 +72,7 @@ test('a manual report is stored with its source and shown as manual, not officia
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Alta Ski Area')
 
   // A missing source link is refused: official figures always carry one.
-  await (await reveal(page.getByRole('button', { name: /Enter an official report/ }))).click()
+  await (await reveal(page.getByRole('button', { name: /Enter an official report/, includeHidden: true }))).click()
   const sheet = page.getByRole('dialog', { name: /Enter a report for Alta/ })
   await sheet.getByRole('textbox', { name: 'Source link' }).fill('')
   await sheet.getByRole('textbox', { name: '24 hours', exact: true }).fill('7')
@@ -102,7 +102,7 @@ test('a manual report is stored with its source and shown as manual, not officia
   await expect(drawer).toBeHidden()
 
   // Every revision is kept, labelled by origin; a reload shows the same stored report.
-  await expect(page.getByRole('region', { name: 'Report history' })).toContainText(/7″ new · 52″ base/)
+  await expect(await reveal(page.getByRole('region', { name: 'Report history', includeHidden: true }))).toContainText(/7″ new · 52″ base/)
   await page.reload()
   await expect(page.getByRole('region', { name: 'Snow report' }).getByRole('table', { name: /Reported snowfall/ })).toContainText('7″')
 })

@@ -4,7 +4,7 @@
  */
 import type { Locator, Page } from '@playwright/test'
 import { expect, test } from './fixtures'
-import { createTrip, literal, submitAndWait } from './helpers'
+import { createTrip, literal, reveal, submitAndWait } from './helpers'
 
 /** Tick "Add a price" in an item editor and enter an estimate. */
 async function price(sheet: Locator, amount: string, who: 'Per person' | 'Shared') {
@@ -43,7 +43,7 @@ test('a trip from SYR with a hotel option, an event and an itemised budget survi
 
   // A hotel option from the curated list, then priced for the stay.
   const stay = page.getByRole('region', { name: 'Stay' })
-  const option = stay.getByRole('region', { name: 'Options on file' }).getByRole('listitem').filter({ hasText: /^Alta Lodge/ })
+  const option = (await reveal(stay.getByRole('region', { name: 'Options on file', includeHidden: true }))).getByRole('listitem').filter({ hasText: /^Alta Lodge/ })
   await submitAndWait(page, option.getByRole('button', { name: 'Save as option' }))
   const hotel = stay.getByRole('button', { name: 'Alta Lodge', exact: true })
   await expect(hotel).toBeVisible()
@@ -68,7 +68,7 @@ test('a trip from SYR with a hotel option, an event and an itemised budget survi
   // The itemised budget: each priced line, and a total that says it is incomplete (ski days are unpriced).
   const expectBudget = async () => {
     // A table on wide screens, a list on phones: one line per item either way.
-    const itemised = page.getByRole('region', { name: 'Itemised' })
+    const itemised = await reveal(page.getByRole('region', { name: 'Itemised', includeHidden: true }))
     const line = (title: RegExp) => itemised.getByRole('row', { name: title }).or(itemised.getByRole('listitem').filter({ hasText: title }))
     await expect(line(/^Flights SYR ⇄ SLC/)).toContainText('$420')
     await expect(line(/^Alta Lodge/)).toContainText('$900')

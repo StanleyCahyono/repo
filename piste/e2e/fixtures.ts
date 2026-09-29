@@ -3,8 +3,9 @@
  *
  * - `mode`: 'live' (default) or 'demo'. Demo sets the `piste-mode=demo` cookie on the context before any navigation
  *   (demo "now" is Fri 15 Jan 2027, 09:00 in Ithaca).
- * - Every request to a host other than the app is aborted: map tiles and live providers are unreachable in the
- *   sandbox anyway; aborting makes that deterministic everywhere and guarantees tests never touch the internet.
+ * - The browser can reach only the app (playwright.config.ts routes every other host to a closed proxy port): map
+ *   tiles and live providers are unreachable in the sandbox anyway; this makes it deterministic everywhere and
+ *   guarantees tests never touch the internet.
  * - An automatic guard fails the test on page errors (uncaught exceptions), hydration errors and any other app
  *   console error. Failed loads of non-app resources are ignored, and a test can allow a known message with
  *   `consoleErrors.allow(/pattern/)` (the 404 checks allow the document's own "404 (Not Found)").
@@ -39,14 +40,14 @@ function describe(msg: ConsoleMessage): string {
 export const test = base.extend<{ mode: Mode; consoleErrors: ConsoleGuard }>({
   mode: ['live', { option: true }],
 
-  context: async ({ context, mode, baseURL }, use) => {
-    await context.route((url) => !isAppUrl(url.toString()), (route) => route.abort('blockedbyclient'))
+  // Fixture callbacks name their second argument `provide`, not `use`, so React's hooks lint rule leaves them alone.
+  context: async ({ context, mode, baseURL }, provide) => {
     if (mode === 'demo') await context.addCookies([{ name: 'piste-mode', value: 'demo', url: baseURL! }])
-    await use(context)
+    await provide(context)
   },
 
   consoleErrors: [
-    async ({ page }, use) => {
+    async ({ page }, provide) => {
       const allowed: RegExp[] = []
       const errors: string[] = []
       const record = (text: string) => {
@@ -60,7 +61,7 @@ export const test = base.extend<{ mode: Mode; consoleErrors: ConsoleGuard }>({
         if (!isAppUrl(where) && /Failed to load resource|net::ERR_/.test(msg.text())) return
         record(describe(msg))
       })
-      await use({
+      await provide({
         allow: (pattern) => {
           allowed.push(pattern)
           // Drop anything already recorded that the new pattern covers.

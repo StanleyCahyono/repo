@@ -9,7 +9,7 @@
  * - 390 px: the key pages have no horizontal overflow, and the phone navigation (bottom bar + More sheet) works.
  */
 import { expect, setMode, test } from './fixtures'
-import { expectNoHorizontalOverflow, expectVisibleFocus, focused, reveal, tabUntil } from './helpers'
+import { DEMO_ONLY_ROUTES, expectNoHorizontalOverflow, expectVisibleFocus, focused, PRIMARY_ROUTES, reveal, settle, tabUntil } from './helpers'
 
 test('Today, Explore and a resort page are usable from the keyboard with visible focus', async ({ page }) => {
   // Today: the skip link comes first, is visible when focused and moves focus to the content.
@@ -79,7 +79,7 @@ test('Today, Explore and a resort page are usable from the keyboard with visible
 test('prefers-reduced-motion collapses sheet animations and transitions @mobile', async ({ page }) => {
   const sheetTiming = async () => {
     await page.goto('/resorts/greek-peak')
-    await (await reveal(page.getByRole('button', { name: /^Sources: (Elevation|Location|Terrain)$/ }))).click()
+    await (await reveal(page.getByRole('button', { name: /^Sources: (Elevation|Location|Terrain)$/, includeHidden: true }))).click()
     const drawer = page.getByRole('dialog')
     await expect(drawer).toBeVisible()
     const t = await drawer.evaluate((el) => {
@@ -103,38 +103,44 @@ test('prefers-reduced-motion collapses sheet animations and transitions @mobile'
   expect(reduced.transition, 'button transition with reduced motion').toBeLessThan(0.01)
 })
 
-test('key pages fit 390 px without sideways scrolling, and the phone navigation works @mobile', async ({ page, baseURL }) => {
-  test.slow()
-  await page.setViewportSize({ width: 390, height: 844 })
-  const pages: Record<'live' | 'demo', string[]> = {
-    live: ['/', '/explore', '/resorts/alta', '/trips', '/settings'],
-    demo: ['/', '/explore', '/explore/compare?ids=greek-peak,alta,bristol-mountain', '/resorts/greek-peak', '/forecast', '/trips/demo-alta-presidents-day', '/passes', '/season', '/sources'],
+test('every screen fits 390 px without sideways scrolling, and the phone navigation works @phone-only', async ({ page, baseURL }) => {
+  expect(page.viewportSize()?.width).toBe(390)
+  // Demo mode has the fullest screens (in season, trips, passes, journal); live mode adds preseason Today, onboarding
+  // and empty states.
+  const sweep: Record<'live' | 'demo', string[]> = {
+    demo: [...PRIMARY_ROUTES, ...DEMO_ONLY_ROUTES, '/explore/compare?ids=greek-peak,alta,bristol-mountain'],
+    live: ['/', '/explore', '/forecast', '/trips', '/passes', '/season', '/settings', '/sources', '/resorts/alta'],
   }
-  for (const mode of ['live', 'demo'] as const) {
+  for (const mode of ['demo', 'live'] as const) {
     await setMode(page, mode, baseURL!)
-    for (const path of pages[mode]) {
+    for (const path of sweep[mode]) {
       await test.step(`${mode} ${path}`, async () => {
-        await page.goto(path)
+        const res = await page.goto(path)
+        expect(res?.status(), `${mode} ${path}`).toBe(200)
+        await settle(page)
         await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
         await expectNoHorizontalOverflow(page, `${mode} ${path}`)
       })
     }
   }
+  await setMode(page, 'demo', baseURL!)
+  await page.goto('/trips/demo-alta-presidents-day')
 
-  // The phone navigation: a bottom bar with the main destinations and a More sheet for the rest.
-  const bar = page.getByRole('navigation', { name: 'Main' }).filter({ has: page.getByRole('button', { name: 'More' }) })
+  // The phone navigation: a bottom bar with the main destinations (44 px targets) and a More sheet for the rest.
+  const bar = page.getByRole('navigation', { name: 'Main' }).filter({ has: page.getByRole('button', { name: /^More/ }) })
   await expect(bar).toBeVisible()
   for (const link of await bar.getByRole('link').all()) {
     const box = (await link.boundingBox())!
     expect(box.height, 'bottom-bar targets are at least 44 px tall').toBeGreaterThanOrEqual(44)
   }
-  await bar.getByRole('button', { name: 'More' }).click()
+  await bar.getByRole('button', { name: /^More/ }).click()
   const more = page.getByRole('dialog', { name: 'More' })
   await expect(more).toBeVisible()
   await more.getByRole('link', { name: 'Passes & Costs' }).click()
   await expect(page).toHaveURL(/\/passes$/)
   await expect(page.getByRole('heading', { level: 1, name: 'Passes & Costs' })).toBeVisible()
-  await expectNoHorizontalOverflow(page, 'demo /passes after navigating')
+  await expect(page.getByRole('region', { name: 'Your passes' })).toBeVisible()
+  await expectNoHorizontalOverflow(page, 'demo /passes after navigating from More')
   await bar.getByRole('link', { name: 'Trips' }).click()
   await expect(page).toHaveURL(/\/trips$/)
   await expect(page.getByRole('heading', { level: 1, name: 'Trips' })).toBeVisible()

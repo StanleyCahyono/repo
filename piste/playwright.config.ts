@@ -17,7 +17,8 @@ import { defineConfig, devices } from '@playwright/test'
  *   is never reused unless E2E_REUSE_SERVER=1 (then global setup keeps the existing data as well).
  * - Optional API keys are blanked (journey 7), and the server's outbound HTTP goes through a closed local proxy
  *   port, so every live provider fails fast and deterministically (journey 8), with or without network access.
- * - Projects: every journey runs on desktop (1440×900); tests tagged @mobile also run at 390×844.
+ * - Projects: every journey runs on desktop (1440×900); tests tagged @mobile also run on a phone (390×844, touch),
+ *   and @phone-only tests (the 390 px sweep of every screen) run only there.
  * - Uses the pre-installed Chromium when PLAYWRIGHT_CHROMIUM_PATH is set, otherwise Playwright's managed browser.
  */
 const executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined
@@ -45,6 +46,9 @@ export default defineConfig({
     locale: 'en-US',
     timezoneId: 'America/New_York',
     launchOptions: executablePath ? { executablePath } : {},
+    // The browser reaches only the app: every other host (map tiles, styles) goes to a closed proxy port and fails
+    // at once. Map tiles and live providers are blocked in the sandbox anyway; this makes it deterministic.
+    proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1,localhost' },
   },
   webServer: {
     command: `npx next start --port ${port} --hostname 127.0.0.1`,
@@ -80,7 +84,7 @@ export default defineConfig({
     },
   },
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'mobile', grep: /@mobile/, use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } } },
+    { name: 'desktop', grepInvert: /@phone-only/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    { name: 'mobile', grep: /@mobile|@phone-only/, use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } } },
   ],
 })

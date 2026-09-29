@@ -58,7 +58,7 @@ test('a failed refresh never replaces the last good report and says so', async (
   // way without overwriting anything.
   await page.goto('/resorts/greek-peak')
   await stored()
-  const feeds = page.getByRole('region', { name: 'Data feeds' })
+  const feeds = await reveal(page.getByRole('region', { name: 'Data feeds', includeHidden: true }))
   await expect(feeds).toContainText(/Official report/)
   await expect(feeds).toContainText(/Failing/)
   await feeds.getByRole('button', { name: 'Fetch now' }).click()
@@ -67,6 +67,6 @@ test('a failed refresh never replaces the last good report and says so', async (
   await stored()
   await page.reload()
   await stored()
-  await expect(page.getByRole('region', { name: 'Data feeds' })).toContainText(/Failing/)
+  await expect(await reveal(page.getByRole('region', { name: 'Data feeds', includeHidden: true }))).toContainText(/Failing/)
   await expect(page.getByRole('region', { name: /^Weather on / })).toContainText(/not fetched|fetch failed|failing|could not/i)
 })

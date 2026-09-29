@@ -46,9 +46,10 @@ test('choose a weekend on Today, inspect why the pick wins, compare it and save 
 
   // Save the pick as a draft trip for the weekend (nothing is booked).
   await submitAndWait(page, where.getByRole('button', { name: 'Save as draft trip' }))
-  await expect(toast(page, /Draft trip saved/)).toBeVisible()
-  const tripName = (await toast(page, /Draft trip saved/).first().innerText()).match(/Draft trip saved: (.+)/)?.[1]?.split('\n')[0].trim()
-  expect(tripName, 'toast names the saved trip').toBeTruthy()
+  const saved = toast(page, /Draft trip saved/).getByText(/^Draft trip saved: /)
+  await expect(saved).toBeVisible()
+  const tripName = (await saved.innerText()).replace(/^Draft trip saved: /, '').trim()
+  expect(tripName, 'the toast names the saved trip').not.toBe('')
   const opened = where.getByRole('link', { name: /Saved — open trip/ })
   await expect(opened).toBeVisible()
   const tripHref = await opened.getAttribute('href')
@@ -107,13 +108,13 @@ test('choose a weekend on Today, inspect why the pick wins, compare it and save 
 
   // The saved trip is on /trips, survives a reload and opens with the pick and the weekend.
   await page.goto('/trips')
-  const listed = page.getByRole('link', { name: literal(tripName!) }).and(page.locator(`[href="${tripHref}"]`)).first()
+  const listed = page.getByRole('link', { name: literal(tripName) }).and(page.locator(`[href="${tripHref}"]`)).first()
   await expect(listed).toBeVisible()
   await page.reload()
   await expect(listed).toBeVisible()
   await listed.click()
   await expect(page).toHaveURL(new RegExp(`${tripHref}$`))
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText(tripName!)
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(tripName)
   await expect(page.getByRole('main')).toContainText(winner)
   await expect(page.getByRole('main')).toContainText(/16–17 Jan 2027|Sat 16 Jan|Sun 17 Jan/)
   await expect(page.getByRole('main')).toContainText('Draft')

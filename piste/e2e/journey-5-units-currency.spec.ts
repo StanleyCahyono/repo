@@ -6,7 +6,7 @@
  */
 import type { Page } from '@playwright/test'
 import { expect, test } from './fixtures'
-import { definition, num, submitAndWait } from './helpers'
+import { definition, num, reveal, submitAndWait } from './helpers'
 
 test.use({ mode: 'demo' })
 
@@ -31,7 +31,7 @@ async function readDisplayed(page: Page): Promise<Shown> {
   const budget = (await definition(page.getByRole('region', { name: 'Your next saved trip' }), 'Budget').innerText()).trim()
 
   await page.goto('/resorts/greek-peak')
-  const drive = (await page.getByRole('region', { name: /^Drive from/ }).getByText(/^one way · /).innerText()).trim()
+  const drive = (await (await reveal(page.getByRole('region', { name: /^Drive from/, includeHidden: true }))).getByText(/^one way · /).innerText()).trim()
   const elevation = (await page.getByRole('main').innerText()).match(/[\d,]+ (ft|m) → [\d,]+ (ft|m)/)?.[0] ?? ''
 
   await page.goto('/passes')
@@ -70,7 +70,7 @@ const IMPERIAL_USD: [string, string][] = [
 
 const nums = (s: string) => [...s.replace(/[−–](?=\d)/g, '-').matchAll(/-?\d[\d,]*(?:\.\d+)?/g)].map((m) => num(m[0]))
 
-test('units and currency change only the display, consistently, and switch back exactly @mobile', async ({ page }) => {
+test('units and currency change only the display, consistently, and switch back exactly', async ({ page }) => {
   await choose(page, IMPERIAL_USD)
   const before = await readDisplayed(page)
   expect(before.day).toMatch(/snow [\d.]+″; high \/ low -?\d+° \/ -?\d+°/)

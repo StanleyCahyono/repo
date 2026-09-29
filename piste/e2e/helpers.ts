@@ -2,8 +2,28 @@
 import type { Locator, Page, Response } from '@playwright/test'
 import { expect } from './fixtures'
 
-/** The demo clock (src/lib/clock.ts): Friday 15 January 2027. */
-export const DEMO_TODAY = '2027-01-15'
+/** Every primary screen (live and demo). */
+export const PRIMARY_ROUTES = [
+  '/',
+  '/explore',
+  '/explore/compare',
+  '/explore/events',
+  '/forecast',
+  '/trips',
+  '/passes',
+  '/passes/products',
+  '/passes/matrix',
+  '/passes/costs',
+  '/passes/compare',
+  '/passes/rules/ikon-pass-2026-27/alta',
+  '/season',
+  '/settings',
+  '/sources',
+  '/resorts/greek-peak',
+  '/resorts/alta',
+]
+/** Screens that exist only in the demo database (its simulated trips). */
+export const DEMO_ONLY_ROUTES = ['/trips/demo-greek-peak-saturday', '/trips/demo-alta-presidents-day']
 
 /** A regexp matching `text` literally. */
 export function literal(text: string, flags = ''): RegExp {
@@ -16,17 +36,20 @@ export function num(text: string): number {
 }
 
 /**
- * Make `target` visible by opening every closed <details> around it through its own <summary> (the reviewer may move
- * secondary detail behind disclosures). Anything else must already be reachable.
+ * Make `target` visible by opening the closed <details> disclosures around it through their own <summary> — the
+ * resort and trip pages keep secondary detail behind disclosures. Returns the first visible match. Role locators must
+ * pass `includeHidden: true` so a match inside a closed disclosure can be found at all.
  */
 export async function reveal(target: Locator): Promise<Locator> {
-  const el = target.first()
-  await el.waitFor({ state: 'attached' })
-  for (let i = 0; i < 4 && !(await el.isVisible()); i++) {
-    const summary = el.locator('xpath=ancestor::details[not(@open)][last()]/summary')
-    if (!(await summary.count())) break
-    await summary.first().click()
+  await target.first().waitFor({ state: 'attached' })
+  for (let i = 0; i < 4; i++) {
+    const shown = target.filter({ visible: true })
+    if (await shown.count()) return shown.first()
+    const folded = target.locator('xpath=self::*[ancestor::details[not(@open)]]').first()
+    if (!(await folded.count())) break
+    await folded.locator('xpath=ancestor::details[not(@open)][last()]/summary').click()
   }
+  const el = target.filter({ visible: true }).first()
   await expect(el).toBeVisible()
   return el
 }
@@ -132,7 +155,7 @@ export interface ManualReport {
 
 /** Resort page → "Enter an official report" (the manual-edit route) → save. The page must be the resort page. */
 export async function enterManualReport(page: Page, report: ManualReport) {
-  const open = await reveal(page.getByRole('button', { name: /Enter an official report/ }))
+  const open = await reveal(page.getByRole('button', { name: /Enter an official report/, includeHidden: true }))
   await open.click()
   const sheet = page.getByRole('dialog', { name: /Enter a report for/ })
   await expect(sheet).toBeVisible()
@@ -188,4 +211,13 @@ export async function createTrip(page: Page, trip: NewTrip): Promise<{ id: strin
 export function definition(scope: Locator, term: string | RegExp): Locator {
   const t = typeof term === 'string' ? new RegExp(`^\\s*${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`) : term
   return scope.getByRole('term').filter({ hasText: t }).first().locator('xpath=following-sibling::dd[1]')
+}
+
+/**
+ * Wait until the page's main thread is idle after load: hydration (and any hydration error it logs) has run. Uses
+ * requestIdleCallback — an event, not a fixed delay — so it is fast on quick pages and patient on slow ones.
+ */
+export async function settle(page: Page) {
+  await page.waitForLoadState('load')
+  await page.evaluate(() => new Promise<void>((resolve) => requestIdleCallback(() => resolve(), { timeout: 3000 })))
 }

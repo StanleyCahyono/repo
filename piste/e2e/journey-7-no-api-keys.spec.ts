@@ -4,7 +4,7 @@
  * curated drive estimates with map directions links. Live mode.
  */
 import { expect, test } from './fixtures'
-import { createTrip, definition, submitAndWait } from './helpers'
+import { createTrip, definition, reveal, submitAndWait } from './helpers'
 
 test('without optional keys, the fallbacks are explicit and a fly-in trip can still be fully planned @mobile', async ({ page }, testInfo) => {
   // Sources & Sync says plainly what is not configured and what to use instead.
@@ -18,7 +18,7 @@ test('without optional keys, the fallbacks are explicit and a fly-in trip can st
 
   // Drives are curated estimates (no routing key), with a map link for a live estimate elsewhere.
   await page.goto('/resorts/greek-peak')
-  const drive = page.getByRole('region', { name: /^Drive from/ })
+  const drive = await reveal(page.getByRole('region', { name: /^Drive from/, includeHidden: true }))
   await expect(drive).toContainText(/Curated estimate — not live routing/)
   await expect(drive.getByRole('link', { name: /^Directions from/ })).toHaveAttribute('href', /^https:\/\/www\.google\.com\/maps\/dir\/\?api=1&origin=[-\d.%C,]+&destination=[-\d.%C,]+/)
 
