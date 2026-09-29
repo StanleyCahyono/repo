@@ -15,7 +15,8 @@ import { planAccess, type AccessPlan } from '@/lib/domain/passes'
 import type { MoneyRange } from '@/lib/domain/costs'
 import { dateRange, daysBetween } from '@/lib/domain/time'
 import type { AbilityLevel, Provenance } from '@/lib/domain/types'
-import { isLive, loadBundle, type DataCtx } from './core'
+import { isLive, loadBundle, loadPassData, type DataCtx } from './core'
+import { myPassCover, refineTripBudget } from './trip-budget'
 import {
   basketVerdict,
   dayBasket,
@@ -137,16 +138,25 @@ function summarise(ctx: DataCtx, trip: TripRow, items: TripItemRow[], names: Map
 export async function tripSummaries(ctx: DataCtx): Promise<TripSummary[]> {
   const { db } = ctx
   const live = isLive(ctx)
-  const [trips, items, resorts, rates] = await Promise.all([
+  const [trips, items, resorts, rates, pass] = await Promise.all([
     db.select().from(s.trips).orderBy(asc(s.trips.startDate), asc(s.trips.id)),
     db.select().from(s.tripItems).orderBy(asc(s.tripItems.sortOrder), asc(s.tripItems.id)),
-    db.select({ id: s.resorts.id, name: s.resorts.name }).from(s.resorts),
+    db.select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName }).from(s.resorts),
     db.select().from(s.fxRates),
+    loadPassData(db, ctx.prefs.activeSeasonId),
   ])
   const names = new Map(resorts.map((r) => [r.id, r.name]))
+  const short = Object.fromEntries(resorts.map((r) => [r.id, r.shortName || r.name]))
+  const fx = rates.filter((r) => !live || r.kind !== 'demo')
   const byTrip = new Map<string, TripItemRow[]>()
   for (const i of items) byTrip.set(i.tripId, [...(byTrip.get(i.tripId) ?? []), i])
-  return trips.map((t) => summarise(ctx, t, byTrip.get(t.id) ?? [], names, tripBudget(ctx, t, byTrip.get(t.id) ?? [], rates.filter((r) => !live || r.kind !== 'demo'))))
+  return trips.map((t) => {
+    const mine = byTrip.get(t.id) ?? []
+    // Same rule as the Trips screens: a ski day priced by a lift ticket or covered by an owned pass is not "missing".
+    const days = mine.filter((i) => i.type === 'resort-day' && i.refId && i.date).sort((a, b) => a.date!.localeCompare(b.date!))
+    const cover = myPassCover(pass, days.map((d) => ({ resortId: d.refId!, date: d.date! })), ctx.today, short)
+    return summarise(ctx, t, mine, names, refineTripBudget(tripBudget(ctx, t, mine, fx), mine, cover))
+  })
 }
 
 export async function getTripsView(ctx: DataCtx): Promise<TripsView> {
