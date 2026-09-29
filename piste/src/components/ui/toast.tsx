@@ -1,6 +1,10 @@
 'use client'
-/** Lightweight toasts: brief confirmation with optional Undo. Announced politely to screen readers. */
+/**
+ * Lightweight toasts: brief confirmation with optional Undo and an optional in-app link (e.g. "Open trip").
+ * Announced politely to screen readers.
+ */
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from 'react'
+import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { Check, X } from 'lucide-react'
 import { t as motionT } from '@/lib/ui/motion'
@@ -10,10 +14,12 @@ interface ToastItem {
   message: string
   tone: 'success' | 'error' | 'info'
   undo?: () => void | Promise<void>
+  /** Optional in-app link shown beside the message, e.g. { href: '/trips/abc', label: 'Open trip' }. */
+  link?: { href: string; label: string }
 }
 
 interface ToastApi {
-  show: (message: string, opts?: { tone?: ToastItem['tone']; undo?: ToastItem['undo']; durationMs?: number }) => void
+  show: (message: string, opts?: { tone?: ToastItem['tone']; undo?: ToastItem['undo']; link?: ToastItem['link']; durationMs?: number }) => void
 }
 
 const Ctx = createContext<ToastApi | null>(null)
@@ -33,8 +39,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const show = useCallback<ToastApi['show']>(
     (message, opts = {}) => {
       const id = ++seq.current
-      setItems((xs) => [...xs.slice(-2), { id, message, tone: opts.tone ?? 'success', undo: opts.undo }])
-      window.setTimeout(() => dismiss(id), opts.durationMs ?? (opts.undo ? 6000 : 3200))
+      setItems((xs) => [...xs.slice(-2), { id, message, tone: opts.tone ?? 'success', undo: opts.undo, link: opts.link }])
+      window.setTimeout(() => dismiss(id), opts.durationMs ?? (opts.undo || opts.link ? 6000 : 3200))
     },
     [dismiss],
   )
@@ -72,6 +78,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 </motion.span>
               ) : null}
               <span className="min-w-0 flex-1">{item.message}</span>
+              {item.link ? (
+                <Link
+                  href={item.link.href}
+                  onClick={() => dismiss(item.id)}
+                  className="rounded-sm px-2 py-1 font-semibold whitespace-nowrap text-glacier underline underline-offset-2 hover:no-underline"
+                >
+                  {item.link.label}
+                </Link>
+              ) : null}
               {item.undo ? (
                 <button
                   type="button"
