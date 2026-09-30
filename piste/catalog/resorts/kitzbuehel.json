@@ -1,0 +1,244 @@
+{
+  "id": "kitzbuehel",
+  "name": "Kitzbühel (KitzSki)",
+  "shortName": "Kitzbühel",
+  "country": "AT",
+  "region": "Kitzbühel Alps (Tyrol)",
+  "stateProvince": "Tyrol (Mittersill sector in Salzburg)",
+  "locality": "Kitzbühel, Kirchberg, Jochberg, Pass Thurn and Mittersill",
+  "timezone": "Europe/Vienna",
+  "operator": "Bergbahn AG Kitzbühel (KitzSki)",
+  "priority": 0,
+  "location": {
+    "lat": 47.4464,
+    "lon": 12.3925,
+    "source": {
+      "url": "https://www.kitzski.at/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Kitzbühel town centre; KitzSki also has bases in Kirchberg, Jochberg, Pass Thurn and Mittersill"
+    }
+  },
+  "elevation": {
+    "baseM": 800,
+    "summitM": 2000,
+    "verticalM": 1200,
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/kitzski-kitzbuehel-kirchberg/test-result/size/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base 800 m, top 2,000 m, 1,200 m elevation difference"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Kitzbühel town (approx.)",
+      "lat": 47.4464,
+      "lon": 12.3925,
+      "elevationM": 762,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Upper KitzSki, Resterhöhe/Pass Thurn sector (approx.; top of the lift system about 2,000 m)",
+      "lat": 47.29,
+      "lon": 12.39,
+      "elevationM": 2000,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 58,
+    "skiableAcres": null,
+    "beginnerPct": 54,
+    "intermediatePct": 35,
+    "advancedPct": 11,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 188,
+    "liftsByType": {
+      "gondolas": 12,
+      "cableCars": 1,
+      "chairlifts": 28,
+      "surfaceLifts": 8,
+      "other": null
+    },
+    "liftCapacityPerHour": 110323,
+    "season": null,
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/kitzski-kitzbuehel-kirchberg/test-result/lifts-cable-cars/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (skiresort.info): 58 lifts with 110,323 persons/hour. Typed: 1 aerial tramway (cable car), 11 gondolas plus the 3S tricable gondola (counted together as 12 gondolas), 28 chairlifts and 8 T-bars = 49 of 58; the other 9 were not typed in the summary. 188 km of pistes: 102 km easy (54%), 66 km intermediate (35%), 20 km difficult (11%) per https://www.skiresort.info/ski-resort/kitzski-kitzbuehel-kirchberg/test-result/size/."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.kitzski.at/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski schools and rental shops operate at the bases"
+    }
+  },
+  "character": "KitzSki links the historic town of Kitzbühel with Kirchberg, Jochberg, Pass Thurn/Mittersill and the Kitzbüheler Horn in the Kitzbühel Alps. The Hahnenkamm is home to the Streif World Cup downhill, and a 3S tricable gondola links the Hahnenkamm–Pengelstein side with the Jochberg and Resterhöhe sectors. Terrain is mostly blue and red at moderate altitude (about 800–2,000 m).",
+  "learning": "Search summary: over half of the piste km are rated easy. Reference note: ski schools operate in Kitzbühel and Kirchberg; confirm beginner areas and lessons.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-11-06",
+      "text": "Winter season 6 Nov 2026 – 4 Apr 2027 (early-season operation may be partial)",
+      "announcedOn": null,
+      "source": {
+        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions."
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-04-04",
+      "text": "Season end 4 Apr 2027",
+      "announcedOn": null,
+      "source": {
+        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions."
+      }
+    },
+    "history": [],
+    "typicalText": null,
+    "notes": "2026-27 dates from an Austria opening-dates search summary. Which lifts open first was not stated."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "KitzSki 1-day ticket",
+      "category": "adult",
+      "amount": 83.0,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary gave EUR 83 as the 2026/27 adult 1-day price; the exact source page and any seasonal or online price variation were not stated.",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/tyrol/kitzbuehel/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.kitzski.at/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.kitzbuehel.com/en/sport/skiing/",
+    "avalanche": "https://avalanche.report/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "KitzSki ski area (Kitzbühel Alps tourism)",
+      "url": "https://www.kitzbueheler-alpen.com/en/bri/wi/ski/kitzski.html"
+    },
+    {
+      "label": "Ikon Pass: compare 2026-27 access",
+      "url": "https://www.ikonpass.com/en/compare-passes"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "SZG",
+        "role": "closest",
+        "minutes": 80,
+        "km": 85,
+        "basis": "Estimate from typical routing (B21 via Bad Reichenhall, then the B178/B161 via Lofer and St. Johann in Tirol); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "INN",
+        "role": "practical",
+        "minutes": 75,
+        "km": 100,
+        "basis": "Estimate from typical routing (A12 east to Wörgl, then the B170 via Brixen im Thale); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "MUC",
+        "role": "practical",
+        "minutes": 115,
+        "km": 150,
+        "basis": "Estimate from typical routing (A8/A93 to Kufstein, then the B178/B161 via St. Johann in Tirol); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "ÖBB trains to Kitzbühel",
+        "type": "train",
+        "url": "https://www.oebb.at/",
+        "notes": "Reference, confirm: Kitzbühel has stations on the Wörgl–Saalfelden line, with connections from Innsbruck and Salzburg. Check 2026-27 timetables."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Official snow report, live lift-status and ticket pages on kitzski.at (only the homepage is recorded).",
+      "Types of the 9 untyped lifts; confirm the 800 m base (Kitzbühel town is about 760 m).",
+      "Confirm the EUR 83 day price (season periods, online pricing) and which lifts open on 6 Nov 2026.",
+      "Ikon Base blackout dates that apply at Kitzbühel."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of skiresort.info, onthesnow and an Austria roundup. Coordinates, homepage, weather points and airport times are Piste reference data or estimates."
+  }
+}

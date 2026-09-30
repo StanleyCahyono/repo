@@ -10,6 +10,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ConditionsSection } from '@/components/resort/conditions'
 import type { PageView } from '@/components/resort/format'
+import { LiftsSection } from '@/components/resort/lifts-runs'
 import { LinksSection } from '@/components/resort/links-shelf'
 import { MobileActionBar } from '@/components/resort/mobile-bar'
 import { OverviewSection } from '@/components/resort/overview'
@@ -21,6 +22,7 @@ import { SectionNav } from '@/components/resort/section-nav'
 import { StaySection } from '@/components/resort/stay'
 import { TravelSection } from '@/components/resort/travel'
 import { getCtx } from '@/lib/context'
+import { getLiftsRuns } from '@/lib/data/lifts'
 import { getResortDetail } from '@/lib/data/resort-detail'
 import { getResortName, getResortPageExtras } from '@/lib/data/resort-page'
 import { daysBetween, isLocalDate, localDateOf } from '@/lib/domain/time'
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const where = [r.region, r.stateProvince].filter(Boolean).join(', ')
   return {
     title: r.name,
-    description: `${r.name} (${where}): conditions, season dates, hours, passes and costs, travel from ${ctx.prefs.homeName}, hotels, events and official links.`,
+    description: `${r.name} (${where}): conditions, season dates, lifts and runs, hours, passes and costs, travel from ${ctx.prefs.homeName}, hotels, events and official links.`,
   }
 }
 
@@ -69,8 +71,11 @@ export default async function ResortPage({ params, searchParams }: { params: Par
 
   const detail = await getResortDetail(ctx, id, { date, mode })
   if (!detail) notFound()
-  const extras = await getResortPageExtras(ctx, id, { date, mode, destinationIatas: detail.travel.airports.map((a) => a.iata) })
   const r = detail.summary
+  const [extras, lifts] = await Promise.all([
+    getResortPageExtras(ctx, id, { date, mode, destinationIatas: detail.travel.airports.map((a) => a.iata) }),
+    getLiftsRuns(ctx, { id: r.id, country: r.country, lat: r.lat, lon: r.lon }),
+  ])
 
   const view: PageView = {
     id: r.id,
@@ -111,6 +116,7 @@ export default async function ResortPage({ params, searchParams }: { params: Par
       <div className="mt-8 flex flex-col gap-14 md:mt-10 md:gap-16">
         <OverviewSection d={detail} x={extras} v={view} ability={ctx.prefs.ability} />
         <ConditionsSection d={detail} x={extras} v={view} preferredMode={ctx.prefs.scoringMode} />
+        <LiftsSection d={detail} lifts={lifts} v={view} />
         <PlanSection d={detail} v={view} />
         <TravelSection d={detail} x={extras} v={view} />
         <StaySection d={detail} x={extras} v={view} />

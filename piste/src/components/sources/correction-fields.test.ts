@@ -56,6 +56,28 @@ describe('every correctable field is one applyOverrides accepts', () => {
   }
 })
 
+describe('terrain facts added later', () => {
+  it('corrects one lift type without touching the others, and marks the terrain as corrected', () => {
+    const withTypes = { ...resort, terrain: { ...resort.terrain!, liftsByType: { gondolas: 1, cableCars: null, chairlifts: 5, surfaceLifts: 3, other: null } } }
+    const { resort: r, corrections } = applyOverrides(withTypes, season, [
+      { id: 1, resortId: resort.id, field: 'terrain.liftsByType.chairlifts', value: 6, note: 'Counted on the trail map', sourceUrl: null, createdAt: '2027-01-15T12:00:00.000Z' },
+      { id: 2, resortId: resort.id, field: 'terrain.pisteKm', value: 52, note: null, sourceUrl: null, createdAt: '2027-01-15T12:00:00.000Z' },
+      { id: 3, resortId: resort.id, field: 'links.liftStatus', value: 'https://example.org/lifts', note: null, sourceUrl: null, createdAt: '2027-01-15T12:00:00.000Z' },
+    ])
+    expect(corrections.every((c) => c.applied)).toBe(true)
+    expect(r.terrain?.liftsByType).toEqual({ gondolas: 1, cableCars: null, chairlifts: 6, surfaceLifts: 3, other: null })
+    expect(r.terrain?.pisteKm).toBe(52)
+    expect(r.terrain?.prov).toMatchObject({ provider: 'Your correction', verification: 'user-confirmed' })
+    expect(r.links.liftStatus).toBe('https://example.org/lifts')
+    // A row seeded before these facts existed has no liftsByType at all: the correction starts from unknowns.
+    const { resort: bare } = applyOverrides({ ...resort, terrain: null }, season, [
+      { id: 4, resortId: resort.id, field: 'terrain.liftsByType.gondolas', value: 2, note: null, sourceUrl: null, createdAt: '2027-01-15T12:00:00.000Z' },
+    ])
+    expect(bare.terrain?.liftsByType).toEqual({ gondolas: 2, cableCars: null, chairlifts: null, surfaceLifts: null, other: null })
+    expect(apply('terrain.liftsByType.nonsense', 1).corrections[0]).toMatchObject({ applied: false, reason: 'Not a correctable terrain field' })
+  })
+})
+
 describe('parseCorrectionValue', () => {
   it('stores elevations in metres whatever unit they were typed in', () => {
     expect(parseCorrectionValue('elevation?', '10,551', 'ft')).toEqual({ ok: true, value: 3215.9 })

@@ -19,9 +19,9 @@ import type { LessonRow, TripItemRow, TripRow } from '@/lib/db/rows'
 import type { ResortLinks } from '@/lib/db/schema'
 import { computeTripBudget, type MoneyRange, type TripBudgetItemInput, type FxRateRecord } from '@/lib/domain/costs'
 import { planAccess, type AccessPlan, type AccessVerdict } from '@/lib/domain/passes'
-import { addDays, dateRange, daysBetween, seasonIdFor } from '@/lib/domain/time'
+import { addDays, dateRange, daysBetween, seasonIdsForDates } from '@/lib/domain/time'
 import type { AbilityLevel, PassFamilyId, Provenance, ScoringMode, UnitPrefs } from '@/lib/domain/types'
-import { isLive, loadBundle, loadPassData, type Bundle, type DataCtx } from './core'
+import { isLive, loadBundle, loadPassData, resortSeasonFor, type Bundle, type DataCtx } from './core'
 import { providerStatus } from './deps'
 import { MAX_FORECAST_DAYS } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
@@ -428,7 +428,7 @@ export async function getTripPage(ctx: DataCtx, id: string, opts: { pass?: strin
   const tripDates = dateRange(trip.startDate, trip.endDate)
   const skiDates = [...new Set(detail.resortDays.map((d) => d.date))].sort()
   const bundleIds = [...new Set([...detail.resortDays.map((d) => d.resortId), ...resortIds])]
-  const b: Bundle | null = bundleIds.length ? await loadBundle(ctx, { ids: bundleIds, seasons: [...new Set(skiDates.map(seasonIdFor))] }) : null
+  const b: Bundle | null = bundleIds.length ? await loadBundle(ctx, { ids: bundleIds, seasons: seasonIdsForDates(skiDates) }) : null
   const catalogIds = b ? b.resorts.map((r) => r.row.id) : []
 
   const [hotelRows, skillRows, lessonRows, templateRows, catalog, airportRows] = await Promise.all([
@@ -467,7 +467,7 @@ export async function getTripPage(ctx: DataCtx, id: string, opts: { pass?: strin
       passData.rules.filter((r) => r.productId === chosen.id),
       detail.resortDays.map((d) => ({ resortId: d.resortId, date: d.date })),
       owned?.usage ?? [],
-      { today, names: b?.names ?? {} },
+      { today, names: b?.names ?? {}, seasonOf: passData.seasonOf },
     )
   }
 
@@ -487,7 +487,9 @@ export async function getTripPage(ctx: DataCtx, id: string, opts: { pass?: strin
     const rec = b?.byId.get(d.resortId)
     const lead = daysBetween(today, d.date)
     const sum = summaries.get(`${d.resortId}|${d.date}`) ?? null
-    const opening = rec && b ? openingView(b.seasons.get(`${d.resortId}|${b.seasonId}`), b.seasonId, today) : null
+    // Opening facts for the season the trip day falls in, at that resort (Southern Hemisphere winters differ).
+    const daySeason = rec ? resortSeasonFor(rec.row, d.date) : null
+    const opening = rec && b && daySeason ? openingView(b.seasons.get(`${d.resortId}|${daySeason}`), daySeason, today) : null
     let state: ConditionsState
     if (!rec) state = 'no-score'
     else if (d.date > horizonEnd) state = 'beyond-horizon'

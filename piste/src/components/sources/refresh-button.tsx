@@ -45,7 +45,7 @@ function describe(res: Response, body: Summary & { error?: string }): Feedback {
   return { tone: 'ok', text: `Done — ${body.itemsWritten ?? 0} written${body.itemsWritten ? '' : ' (nothing changed)'}.` }
 }
 
-const JOB_LABEL: Record<string, string> = { weather: 'Weather', 'nws-alerts': 'Alerts', fx: 'Exchange rates', reports: 'Official reports', links: 'Links' }
+const JOB_LABEL: Record<string, string> = { weather: 'Weather', 'nws-alerts': 'Alerts', fx: 'Exchange rates', reports: 'Official reports', osm: 'Lifts & runs', links: 'Links' }
 
 /** Several jobs run one after another: one line for all of them, naming only the ones that did not go well. */
 function combine(results: { job: string; fb: Feedback; written: number }[]): Feedback {

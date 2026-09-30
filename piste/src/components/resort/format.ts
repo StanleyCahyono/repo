@@ -3,6 +3,7 @@
  * Stored values are metric; display units come from the user's preferences. Unknown stays null — callers render
  * <Missing/> rather than a zero.
  */
+import { greatCircleKm } from '@/lib/domain/geo'
 import { addDays, formatInstant, formatLocalDate, hoursBetween, relativeLabel } from '@/lib/domain/time'
 import { formatDistance, formatDuration, formatElevation, formatSnow, formatSpeed, formatTemp, formatVisibility, formatPrecip, snowValue } from '@/lib/domain/units'
 import type { Provenance, ScoringMode, UnitPrefs } from '@/lib/domain/types'
@@ -34,6 +35,7 @@ export interface PageView {
 export const SECTIONS = [
   { id: 'overview', label: 'Overview', short: 'Overview' },
   { id: 'conditions', label: 'Conditions', short: 'Conditions' },
+  { id: 'lifts', label: 'Lifts & runs', short: 'Lifts' },
   { id: 'plan', label: 'Plan a visit', short: 'Plan' },
   { id: 'getting-there', label: 'Getting there', short: 'Travel' },
   { id: 'stay', label: 'Stay & après', short: 'Stay' },
@@ -306,12 +308,7 @@ export function pointTitle(key: string): string {
 
 /** Straight-line distance in km between two coordinates (haversine) — labelled as straight-line wherever shown. */
 export function straightLineKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }): number {
-  const R = 6371
-  const rad = (d: number) => (d * Math.PI) / 180
-  const dLat = rad(b.lat - a.lat)
-  const dLon = rad(b.lon - a.lon)
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2
-  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)))
+  return greatCircleKm(a, b)
 }
 
 /** Arrival/return dates for prefilled flight searches: the planning date (never in the past) + `nights`. */

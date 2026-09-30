@@ -11,7 +11,7 @@ import { KindTag, Missing } from '@/components/ui/provenance'
 import { OpeningTag, StatusPill } from '@/components/ui/status'
 import type { ResortDetail } from '@/lib/data/resort-detail'
 import type { ResortPageExtras } from '@/lib/data/resort-page'
-import { daysBetween } from '@/lib/domain/time'
+import { addDays, daysBetween, skiWindow, type Hemisphere } from '@/lib/domain/time'
 import { SCORING_MODE_LABEL } from '@/lib/domain/types'
 import { RatingEditor } from './rating-editor'
 import { Reveal } from './reveal'
@@ -231,11 +231,26 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
         t.trails !== null ? plural(t.trails, 'trail') : null,
         t.lifts !== null ? plural(t.lifts, 'lift') : null,
         t.skiableAcres !== null ? `${t.skiableAcres.toLocaleString('en-US')} acres` : null,
+        t.pisteKm != null ? `${u.dist(t.pisteKm)} of pistes` : null,
         t.terrainParks !== null ? plural(t.terrainParks, 'terrain park') : null,
       ].filter(Boolean)
     : []
+  // Lifts by type and uphill capacity, where research found them (shown only when known).
+  const byType = t?.liftsByType ?? null
+  const liftTypeBits = byType
+    ? [
+        byType.gondolas ? plural(byType.gondolas, 'gondola') : null,
+        byType.cableCars ? plural(byType.cableCars, 'cable car') : null,
+        byType.chairlifts ? plural(byType.chairlifts, 'chairlift') : null,
+        byType.surfaceLifts ? plural(byType.surfaceLifts, 'surface lift') : null,
+        byType.other ? plural(byType.other, 'other lift') : null,
+      ].filter((b): b is string => !!b)
+    : []
+  const capacity = t?.liftCapacityPerHour ?? null
+  const terrainCheck = needsCheck(t?.prov) ? confirmText(t?.prov) : undefined
   const split = r.beginner
-  const hasSplit = split.beginnerPct !== null || split.intermediatePct !== null || split.advancedPct !== null
+  const expertPct = t?.expertPct ?? null
+  const hasSplit = split.beginnerPct !== null || split.intermediatePct !== null || split.advancedPct !== null || expertPct !== null
   const learning = split.learning
   return (
     <div className="min-w-0">
@@ -264,6 +279,16 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
         >
           {terrainBits.length ? <span className="tnum">{terrainBits.join(' · ')}</span> : <Missing label="Trail and lift counts unknown" />}
         </FactRow>
+        {liftTypeBits.length ? (
+          <FactRow label="Lifts by type" source={<Src title="Lifts by type" items={[src('Terrain', t?.prov, liftTypeBits.join(' · '))]} />} hint={terrainCheck}>
+            <span className="tnum">{liftTypeBits.join(' · ')}</span>
+          </FactRow>
+        ) : null}
+        {capacity !== null ? (
+          <FactRow label="Uphill capacity" source={<Src title="Uphill capacity" items={[src('Terrain', t?.prov, `${capacity.toLocaleString('en-US')} people per hour`)]} />} hint={terrainCheck}>
+            <span className="tnum">{capacity.toLocaleString('en-US')} people per hour</span>
+          </FactRow>
+        ) : null}
         <div className="border-b border-divider py-2.5">
           <div className="flex items-baseline justify-between gap-4">
             <dt className="shrink-0 text-[13.5px] text-ink-2">Ability split</dt>
@@ -273,6 +298,7 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
                   split.beginnerPct !== null && `${split.beginnerPct}% beginner`,
                   split.intermediatePct !== null && `${split.intermediatePct}% intermediate`,
                   split.advancedPct !== null && `${split.advancedPct}% advanced`,
+                  expertPct !== null && `${expertPct}% expert`,
                 )
               ) : (
                 <Missing label="Unknown" />
@@ -284,6 +310,7 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
               <span className="h-full bg-positive/80" style={{ width: `${split.beginnerPct ?? 0}%` }} />
               <span className="h-full bg-info/70" style={{ width: `${split.intermediatePct ?? 0}%` }} />
               <span className="h-full bg-ink/70" style={{ width: `${split.advancedPct ?? 0}%` }} />
+              <span className="h-full bg-ink" style={{ width: `${expertPct ?? 0}%` }} />
             </dd>
           ) : null}
         </div>
@@ -327,27 +354,26 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
 // ---------------------------------------------------------------------------
 // Season dates
 
+/** First day of the month `n` months after the month of `first` (a YYYY-MM-01 date). */
+const addMonths = (first: string, n: number) => {
+  let d = first
+  for (let i = 0; i < n; i++) d = `${addDays(d, 32).slice(0, 7)}-01`
+  return d
+}
+
 interface Mark {
   date: string
   label: string
   tone: 'announced' | 'opened' | 'closed' | 'date' | 'estimate'
 }
 
-function seasonSpan(seasonId: string): { from: string; to: string } {
-  const y = Number(seasonId.slice(0, 4))
-  return { from: `${y}-11-01`, to: `${y + 1}-04-30` }
-}
-
-function SeasonTimeline({ seasonId, marks, band, date }: { seasonId: string; marks: Mark[]; band: { from: string; to: string } | null; date: string }) {
-  const span = seasonSpan(seasonId)
+function SeasonTimeline({ seasonId, hemisphere, marks, band, date }: { seasonId: string; hemisphere: Hemisphere; marks: Mark[]; band: { from: string; to: string } | null; date: string }) {
+  // Six winter months in the resort's hemisphere: November–April, or May–October in the Southern Hemisphere.
+  const span = skiWindow(seasonId, hemisphere)
   const total = daysBetween(span.from, span.to)
   const pos = (x: string) => Math.min(100, Math.max(0, (daysBetween(span.from, x) / total) * 100))
   const inSpan = (x: string) => x >= span.from && x <= span.to
-  const months = [0, 1, 2, 3, 4, 5].map((i) => {
-    const y = Number(span.from.slice(0, 4)) + (i >= 2 ? 1 : 0)
-    const m = ((10 + i) % 12) + 1
-    return `${y}-${String(m).padStart(2, '0')}-01`
-  })
+  const months = [0, 1, 2, 3, 4, 5].map((i) => addMonths(span.from, i))
   return (
     <div aria-hidden className="relative mt-1 mb-6 h-10 select-none">
       <div className="absolute inset-x-0 top-4 h-1.5 rounded-full bg-surface-3" />
@@ -406,7 +432,7 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
     <div className="min-w-0">
       <SubHead aside={cur?.lastCheckedAt ? <>Last checked {shortDate(cur.lastCheckedAt.slice(0, 10))}</> : null}>{d.season.label} season</SubHead>
       <div className="rounded-[12px] border border-divider bg-surface p-4">
-        <SeasonTimeline seasonId={d.season.seasonId} marks={marks} band={band} date={v.date} />
+        <SeasonTimeline seasonId={d.season.seasonId} hemisphere={d.season.hemisphere} marks={marks} band={band} date={v.date} />
         <dl className="flex flex-col divide-y divide-divider">
           <div className="grid grid-cols-[88px_minmax(0,1fr)_auto] items-start gap-x-3 py-2.5">
             <dt className="text-[13.5px] text-ink-2">Opening</dt>
@@ -436,7 +462,7 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
                   : o.label === 'estimated'
                     ? dotJoin(o.basis, 'Piste estimate, not an announcement')
                     : o.label === 'opened'
-                      ? dotJoin(cur?.announcedOpening ? `Announced target was ${dayLabel(cur.announcedOpening)}` : null, 'Actual opening')
+                      ? dotJoin(cur?.announcedOpening ? `Announced target was ${dayLabel(cur.announcedOpening)}` : null, o.date ? 'Actual opening' : 'Reported open this season — the opening date is not recorded')
                       : (o.typicalText ?? 'No opening date or estimate on file for this season.')}
               </p>
               {o.label !== 'not-announced' && o.typicalText ? <p className="mt-1 line-clamp-3 text-[12.5px] text-ink-3">Typically: {o.typicalText}</p> : null}
@@ -486,12 +512,13 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
         ) : null}
         {d.season.others.length ? (
           <div className="mt-2 border-t border-divider pt-2.5 text-[13px] text-ink-2">
-            <p className="font-medium text-ink">Earlier seasons</p>
+            <p className="font-medium text-ink">{d.season.others.some((s) => s.seasonId > d.season.seasonId) ? 'Other seasons' : 'Earlier seasons'}</p>
             <ul className="mt-1 flex flex-col gap-0.5 tnum">
               {d.season.others.slice(0, 3).map((s) => (
                 <li key={s.id}>
-                  {seasonText(s.seasonId)}: {s.actualOpening ? `opened ${dayLabelYear(s.actualOpening)}` : 'opening not recorded'}
-                  {s.actualClosing ? ` · closed ${dayLabelYear(s.actualClosing)}` : ''}
+                  {s.seasonId > d.season.seasonId
+                    ? `${seasonText(s.seasonId)} (next): ${s.announcedOpening ? `target ${dayLabelYear(s.announcedOpening)}` : s.estimatedOpenFrom ? `Piste estimate from ${dayLabelYear(s.estimatedOpenFrom)}` : 'opening not announced'}`
+                    : `${seasonText(s.seasonId)}: ${s.actualOpening ? `opened ${dayLabelYear(s.actualOpening)}` : 'opening not recorded'}${s.actualClosing ? ` · closed ${dayLabelYear(s.actualClosing)}` : ''}`}
                 </li>
               ))}
             </ul>

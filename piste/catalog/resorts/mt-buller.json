@@ -1,0 +1,262 @@
+{
+  "id": "mt-buller",
+  "name": "Mt Buller",
+  "shortName": "Mt Buller",
+  "country": "AU",
+  "region": "Victorian Alps",
+  "stateProvince": "Victoria",
+  "locality": "Mt Buller Village, near Mansfield",
+  "timezone": "Australia/Melbourne",
+  "operator": "Buller Ski Lifts (lift operator — reference, confirm)",
+  "priority": 0,
+  "location": {
+    "lat": -37.147,
+    "lon": 146.439,
+    "source": {
+      "url": "https://www.mtbuller.com.au/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Mt Buller Village position"
+    }
+  },
+  "elevation": {
+    "baseM": 1375,
+    "summitM": 1805,
+    "verticalM": 430,
+    "source": {
+      "url": "https://www.skiresort.com/en/ski-resort/mt-buller/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: summit 1,805 m, base 1,375 m, vertical 430 m (results included skiresort.com, Wikipedia and Mt Buller's FAQ; attribution uncertain). The village itself sits above the lowest lift base (reference)."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Mt Buller Village area (approx.; published base 1,375 m is the lowest lift point)",
+      "lat": -37.147,
+      "lon": 146.439,
+      "elevationM": 1375,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Mt Buller summit (approx.)",
+      "lat": -37.1456,
+      "lon": 146.4486,
+      "elevationM": 1805,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 76,
+    "lifts": 19,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 80,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.skiresort.com/en/ski-resort/mt-buller/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 19 lifts, 76 runs, more than 300 hectares (hectares kept in this note) and 'around 80 km of groomed trails' (stated that way; may not be comparable with European piste km). Attribution between skiresort.com, Wikipedia and the Mt Buller FAQ uncertain. Lift types and capacity not found. Season id 2025-26."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.mtbuller.com.au/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Village lodging, ski school and rentals are reference facts."
+    }
+  },
+  "character": "The closest of Victoria's major resorts to Melbourne (about three hours by road), with a compact on-mountain village beneath the summit and runs spread around it. Mt Buller is on the Ikon Pass.",
+  "learning": "Reference note: the village has a ski and snowboard school and beginner areas; confirm 2027 lesson products and prices.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2026-06-05",
+        "closed": "2026-09-27",
+        "source": {
+          "url": "https://www.mtbuller.com.au/winter/news/details/free-skiing-today-and-more-runs-tomorrow",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2026: opened Fri 5 Jun 2026, one day ahead of the scheduled opening weekend (search summary; result attribution uncertain). Closed Sun 27 Sep 2026 (shared research notes, https://www.onthesnow.com/australia/projected-closing)."
+        }
+      }
+    ],
+    "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (Buller opened a day early on 5 Jun 2026); the 2026 season ended on 27 Sep.",
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference)."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift ticket, weekday (from)",
+      "category": "adult",
+      "amount": 121,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 (season id 2025-26): 'adults can ski this season from just $121 a day' on weekdays with date-based pricing — a lowest price, booked in advance; window and peak-day prices are higher.",
+      "source": {
+        "url": "https://www.mtbuller.com.au/winter/news/details/2026-snow-season-on-sale",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (also https://snowstash.com/australia/victoria/mt-buller/lift-tickets 'From A$121 Adult Daily')"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift ticket, weekend",
+      "category": "adult",
+      "amount": 187,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 (season id 2025-26) weekend adult rate per the search summary; date-based pricing, so it may be a 'from' price.",
+      "source": {
+        "url": "https://www.mtbuller.com.au/winter/news/details/2026-snow-season-on-sale",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (attribution uncertain)"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.mtbuller.com.au/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://www.mtbuller.com.au/winter/lift-passes/lift-passes-overview",
+    "seasonPass": "https://www.mtbuller.com.au/winter/lift-passes/season-memberships",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://traffic.vicroads.vic.gov.au/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Mt Buller winter FAQs",
+      "url": "https://www.mtbuller.com.au/winter/faqs"
+    },
+    {
+      "label": "Ikon Pass (the 2026-27 pass covers the 2027 Australian winter)",
+      "url": "https://www.ikonpass.com/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "MEL",
+        "role": "both",
+        "minutes": 190,
+        "km": 240,
+        "basis": "Estimate from typical routing (Hume Freeway and the Goulburn Valley / Maroondah highways to Mansfield, then Mt Buller Road); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Buses from Melbourne and Mansfield",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: winter bus services have run from Melbourne and Mansfield to the village; no operator, fare or schedule is on file."
+      },
+      {
+        "name": "Drive via Mansfield",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: chains must be carried on Mt Buller Road in the snow season and a resort entry fee applies."
+      }
+    ]
+  },
+  "recentReports": [
+    {
+      "observedOn": "2026-09-27",
+      "operatingStatus": "closed-for-season",
+      "baseDepthCm": null,
+      "summitDepthCm": null,
+      "newSnow24hCm": null,
+      "liftsOpen": null,
+      "liftsTotal": null,
+      "note": "Season closed Sun 27 Sep 2026. After Falls Creek and Hotham closed on 6 Sep, Buller was one of three Australian resorts still open.",
+      "source": {
+        "url": "https://www.onthesnow.com/australia/projected-closing",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "From the shared research notes"
+      }
+    }
+  ],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
+      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
+      "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
+      "Confirm published lift and ticket-office hours for 2027.",
+      "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
+      "Confirm lift split and capacity, and whether '80 km' covers only downhill runs.",
+      "Confirm the official snow-report / lift-status page and the resort entry fee for 2027.",
+      "Confirm Ikon Pass 2026-27 day allowance at Mt Buller (and Ikon Base / Session access)."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, terrain figures, 2026 opening/closing and 2026 prices come from search summaries (confirm at source); coordinates, operator, features and drive times are Piste reference data or estimates."
+  }
+}

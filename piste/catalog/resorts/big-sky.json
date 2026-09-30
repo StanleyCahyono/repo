@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 320,
+    "lifts": 40,
+    "skiableAcres": 5850,
+    "beginnerPct": 21,
+    "intermediatePct": 29,
+    "advancedPct": 31,
     "terrainParks": null,
+    "expertPct": 19,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": 1,
+      "chairlifts": 24,
+      "surfaceLifts": 13,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.bigskyresort.com/mountain-info",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: bigskyresort.com Mountain Information, Wikipedia, OnTheSnow, PeakRankings): 5,850 skiable acres, \"more than 320 named runs\" (stored as 320), lifts: 1 aerial tram, 2 gondolas, 8 high-speed detachable and 16 fixed-grip chairlifts, 13 surface lifts (total 40 is the sum); 21% beginner / 29% intermediate / 31% advanced / 19% expert and extreme. Season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-25",
+      "text": "Planned opening Nov. 25, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -93,17 +113,39 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 25, 2026 per Ikon opening-date roundups and snow-report listings. No 2026-27 closing date was found."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (lowest advance to peak window)",
+      "category": "adult",
+      "amount": 84,
+      "amountMax": 289,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27: single-day tickets from $84 on select dates (advance) up to a $289 peak window ticket.",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Big Sky's lift-ticket page and 2026-27 price roundups (Unofficial Networks, SnowBrains, Sep 2026)."
+      }
+    }
+  ],
   "links": {
     "official": "https://bigskyresort.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.bigskyresort.com/current-conditions",
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,9 +156,19 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://www.mtavalanche.com/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Mountain information (official stats)",
+      "url": "https://www.bigskyresort.com/mountain-info"
+    },
+    {
+      "label": "Ikon Pass at Big Sky (official)",
+      "url": "https://www.bigskyresort.com/ikon-pass"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,24 +210,22 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing date (not found) and that Nov. 25, 2026 stays the planned opening.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days with no blackouts; Ikon Base 5 days with blackouts; Mountain Collective 2 days.",
+      "Confirm whether the Lone Peak Tram needs a separate upgrade or reservation in 2026-27.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
+      "Confirm official lift-status and trail-map pages (the current-conditions page is recorded).",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on bigskyresort.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: Boyne Resorts).",
-      "Confirm terrain stats (leads: ~5,800+ acres, 300+ runs, 35+ lifts including the Lone Peak Tram and the Ramcharger 8 chair), ability split, parks, snowmaking, night skiing, tubing and childcare.",
       "Confirm the official base elevation basis and precise Mountain Village and Lone Peak coordinates (weather points are approximate).",
       "Lone Peak Tram: confirm hours and whether it needs a separate reservation or upgrade.",
-      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer plus blackouts on Ikon Base); Mountain Collective days; Big Sky passes. Confirm 2026-27 terms.",
       "Skyline bus 2026-27 schedule; BZN shuttle operators.",
       "Record the official Montana road-conditions page (MDT traveler information / 511) for US-191 and MT-64; the road link on this record is the MDT homepage only."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, Mountain Village lodging, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats, the 2026-27 ticket range and conditions/tickets links. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

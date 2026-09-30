@@ -38,6 +38,7 @@ anything but a positive number) fall back to the default. See `docs/scheduler.md
 | `PISTE_LINKS_EVERY_MIN` | `1440` | Link checks. |
 | `PISTE_FX_EVERY_MIN` | `1440` | Currency reference rates. |
 | `PISTE_PRUNE_EVERY_MIN` | `1440` | Retention pruning. |
+| `PISTE_OSM_EVERY_MIN` | `10080` | OpenStreetMap lifts & runs for favourites and resorts in upcoming trips (per resort; others load on demand). |
 | `PISTE_WORKER_TICK_SECONDS` | `60` | How often the worker checks for due jobs (seconds). |
 | `PISTE_SCHEDULER_JITTER` | `0.1` | Random jitter per due time as a fraction of the cadence (0 ≤ value < 1; `0.1` = ±10 %), so requests do not align on the hour. |
 | `PISTE_WEATHER_RETENTION_DAYS` | `14` | Every weather run from the last N days (fractions allowed: `0.25` = 6 h) is kept whole. Older runs keep only what a screen reads: the latest run per resort, point and provider, and the hours each past day's "forecast then" uses (see `docs/scheduler.md`, retention). |

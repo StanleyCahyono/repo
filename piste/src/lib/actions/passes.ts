@@ -23,7 +23,7 @@ import type { BudgetPrefs, GearPrefs } from '@/lib/db/schema'
 import type { ExpenseRow, PassOwnershipRow, PassUsageRow } from '@/lib/db/rows'
 import { fromMajor, minorDigits } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL, evaluateAccess, latestRule } from '@/lib/domain/passes'
-import { isLocalDate, seasonIdFor } from '@/lib/domain/time'
+import { hemisphereOf, isLocalDate, seasonBounds, seasonIdForResort, seasonResolver } from '@/lib/domain/time'
 import { PASS_ACCESS, provenance } from '@/lib/domain/types'
 
 export type ActionResult<T = null> = { ok: true; data: T; message?: string } | { ok: false; error: string; fieldErrors?: Record<string, string> }
@@ -252,10 +252,11 @@ export async function logPassDay(input: LogDayForm): Promise<ActionResult<{ usag
   if (!ownership) return fail('This pass is no longer recorded')
   const [product] = await db.select().from(s.passProducts).where(eq(s.passProducts.id, ownership.productId))
   if (!product) return fail('Unknown pass product')
-  const [resort] = await db.select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName }).from(s.resorts).where(eq(s.resorts.id, v.resortId))
+  const [resort] = await db.select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, lat: s.resorts.lat }).from(s.resorts).where(eq(s.resorts.id, v.resortId))
   if (!resort) return fail('Unknown resort', { resortId: 'Choose a resort from the list' })
   if (v.date > today) return fail('Log days you have skied — plan future days in Trips', { date: `Pick ${today} or earlier` })
-  if (seasonIdFor(v.date) !== product.seasonId) {
+  // The pass season of the day at that resort: a Southern Hemisphere winter (June–October 2027) is 2026–27.
+  if (seasonIdForResort(v.date, resort) !== product.seasonId) {
     return fail(`${product.name} is a ${seasonText(product.seasonId)} pass`, { date: `Pick a date in the ${seasonText(product.seasonId)} season` })
   }
   const usage = await db.select().from(s.passUsage).where(eq(s.passUsage.ownershipId, ownership.id))
@@ -263,7 +264,8 @@ export async function logPassDay(input: LogDayForm): Promise<ActionResult<{ usag
 
   // What the recorded rule said for this day before logging it (logging is a personal fact; the rule may be wrong).
   const rules = await db.select().from(s.passAccessRules).where(eq(s.passAccessRules.productId, product.id))
-  const verdict = evaluateAccess({ product, rule: latestRule(rules, product.id, resort.id), resortId: resort.id, date: v.date, usage, poolRules: rules, today })
+  const seasonOf = seasonResolver(await db.select({ id: s.resorts.id, lat: s.resorts.lat }).from(s.resorts))
+  const verdict = evaluateAccess({ product, rule: latestRule(rules, product.id, resort.id), resortId: resort.id, date: v.date, usage, poolRules: rules, today, seasonOf })
   const name = resort.shortName || resort.name
   const warning = verdict.canSki
     ? null
@@ -380,11 +382,16 @@ export async function saveAccessRule(input: RuleForm): Promise<ActionResult<{ id
   const { db, now } = await getCtx()
   const [product] = await db.select().from(s.passProducts).where(eq(s.passProducts.id, v.productId))
   if (!product) return fail('Unknown pass product')
-  const [resort] = await db.select({ id: s.resorts.id, name: s.resorts.name }).from(s.resorts).where(eq(s.resorts.id, v.resortId))
+  const [resort] = await db.select({ id: s.resorts.id, name: s.resorts.name, lat: s.resorts.lat }).from(s.resorts).where(eq(s.resorts.id, v.resortId))
   if (!resort) return fail('Unknown resort')
   const season = product.seasonId
-  const outside = v.blackouts.findIndex((b) => seasonIdFor(b.from) !== season || seasonIdFor(b.to) !== season)
-  if (outside !== -1) return fail('Blackout dates must fall in the pass season', { [`blackouts.${outside}.from`]: `Use ${seasonText(season)} dates` })
+  // Blackouts fall in the pass season at this resort: 1 Jul → 30 Jun, or the calendar year of a Southern Hemisphere
+  // winter (a 2026–27 pass covers June–October 2027 in Australia and New Zealand).
+  const outside = v.blackouts.findIndex((b) => seasonIdForResort(b.from, resort) !== season || seasonIdForResort(b.to, resort) !== season)
+  if (outside !== -1) {
+    const span = seasonBounds(season, hemisphereOf(resort.lat))
+    return fail('Blackout dates must fall in the pass season', { [`blackouts.${outside}.from`]: `Use ${seasonText(season)} dates (${span.from} to ${span.to} here)` })
+  }
 
   const rules = await db.select().from(s.passAccessRules).where(eq(s.passAccessRules.productId, product.id))
   const usesPool = v.access === 'shared-pool' || (v.access === 'limited-days' && (v.poolId || v.poolLabel))

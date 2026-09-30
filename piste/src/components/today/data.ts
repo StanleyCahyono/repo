@@ -18,7 +18,9 @@ import { defaultPreset, getRecommendation, getTodayView, type TodayView } from '
 import { tripSummaries, type TripSummary } from '@/lib/data/trips'
 import { toResortCardData, type ResortCardData } from '@/components/resort/card-data'
 import { HOME_ITHACA } from '@/lib/domain/defaults'
+import { LONG_HAUL_KM } from '@/lib/domain/geo'
 import { formatMoney, money } from '@/lib/domain/money'
+import { formatDistance } from '@/lib/domain/units'
 import {
   FACTOR_KEYS,
   FACTOR_LABEL,
@@ -152,6 +154,8 @@ export interface TodayData {
   weatherMissing: boolean
   /** When the data was last updated (live mode); null in demo mode. */
   freshness: FreshnessView | null
+  /** LONG_HAUL_KM in display units: resorts farther from home are planned as trips, not ranked on Today. */
+  longHaulLimit: string | null
 }
 
 export const cardKey = (resortId: string, date: string) => `${resortId}|${date}`
@@ -387,7 +391,7 @@ export async function loadToday(ctx: Ctx, p: TodayParams): Promise<TodayData> {
     modeLabel: SCORING_MODE_LABEL[modeFor(view, prefs.scoringMode)],
     presets: presetOptions(saved),
     defaultPreset: defaultPreset(prefs.ability),
-    names: Object.fromEntries(view.openingTimeline.map((o) => [o.resortId, o.name])),
+    names: view.resortNames,
     cards,
     passes: pw.watch,
     trips: trips.filter((t) => t.phase === 'upcoming' || t.phase === 'in-progress'),
@@ -396,5 +400,6 @@ export async function loadToday(ctx: Ctx, p: TodayParams): Promise<TodayData> {
     units: prefs.units,
     weatherMissing: view.watchlist.length > 0 && view.watchlist.every((w) => !w.summary.freshness.weatherFetchedAt),
     freshness,
+    longHaulLimit: formatDistance(LONG_HAUL_KM, prefs.units),
   }
 }

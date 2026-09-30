@@ -24,12 +24,13 @@ import {
   latestRules,
   remainingByPool,
   remainingByResort,
+  usageInSeason,
   type AccessStatus,
   type AccessVerdict,
   type PoolAllowance,
   type ResortAllowance,
 } from '@/lib/domain/passes'
-import { daysBetween, isLocalDate, seasonIdFor } from '@/lib/domain/time'
+import { daysBetween, hemisphereOf, isLocalDate, type SeasonOf } from '@/lib/domain/time'
 import { PASS_FAMILIES, type Provenance } from '@/lib/domain/types'
 import { groupBy, isLive, loadPassData, loadResortRows, needsConfirmation, seasonLabel, verificationLabel, type DataCtx, type OwnedPass } from './core'
 
@@ -246,11 +247,14 @@ function deadlineView(p: PassProductRow, today: string): SalesDeadlineView | nul
   return { date, text: p.salesDeadlineText, daysLeft, passed: daysLeft !== null && daysLeft < 0 }
 }
 
-/** One owned pass with its logged usage and remaining days (shared with My Season). */
-export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[], names: Readonly<Record<string, string>>, familyName: string): OwnedPassView {
+/**
+ * One owned pass with its logged usage and remaining days (shared with My Season). `seasonOf` places each day in the
+ * season of its resort (a Southern Hemisphere winter — June–October 2027 — counts toward a 2026–27 pass).
+ */
+export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[], names: Readonly<Record<string, string>>, familyName: string, seasonOf: SeasonOf): OwnedPassView {
   const productRules = rules.filter((r) => r.productId === o.product.id)
   const name = (id: string) => names[id] ?? id
-  const inSeason = o.usage.filter((u) => isLocalDate(u.date) && seasonIdFor(u.date) === o.product.seasonId)
+  const inSeason = o.usage.filter((u) => usageInSeason(u, o.product.seasonId, seasonOf))
   return {
     ownershipId: o.ownership.id,
     productId: o.product.id,
@@ -265,7 +269,7 @@ export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[],
       .sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id)
       .map((u) => ({ id: u.id, date: u.date, resortId: u.resortId, resortName: name(u.resortId), notes: u.notes, inSeason: inSeason.includes(u) })),
     daysUsed: new Set(inSeason.map((u) => `${u.resortId}|${u.date}`)).size,
-    byResort: remainingByResort(o.product, productRules, o.usage).map((a) => ({
+    byResort: remainingByResort(o.product, productRules, o.usage, seasonOf).map((a) => ({
       ...a,
       resortName: name(a.resortId),
       statusLabel:
@@ -281,7 +285,7 @@ export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[],
                   ? 'Not included'
                   : 'Days not confirmed',
     })),
-    byPool: remainingByPool(o.product, productRules, o.usage).map((p) => ({ ...p, memberNames: p.memberResortIds.map(name) })),
+    byPool: remainingByPool(o.product, productRules, o.usage, seasonOf).map((p) => ({ ...p, memberNames: p.memberResortIds.map(name) })),
   }
 }
 
@@ -357,7 +361,7 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
     .map((f) => ({ id: f.id, name: f.name, operator: f.operator, links: f.links, productIds: products.filter((p) => p.familyId === f.id).map((p) => p.id), prov: f.prov }))
 
   const ownedSorted = [...pass.owned].sort((a, b) => Number(b.ownership.holder === 'me') - Number(a.ownership.holder === 'me') || a.ownership.id - b.ownership.id)
-  const owned = ownedSorted.map((o) => ownedPassView(o, pass.rules, names, familyName(o.product.familyId)))
+  const owned = ownedSorted.map((o) => ownedPassView(o, pass.rules, names, familyName(o.product.familyId), pass.seasonOf))
 
   // --- Access matrix -------------------------------------------------------------------------------------------
   const ruleResorts = new Set([...pass.rules.map((r) => r.resortId), ...pass.products.filter((p) => p.resortId).map((p) => p.resortId!)])
@@ -381,6 +385,7 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
         poolRules: productRules,
         today,
         names,
+        seasonOf: pass.seasonOf,
       })
       return { resortId: mr.id, status: verdict.status, label: ACCESS_STATUS_LABEL[verdict.status], canSki: verdict.canSki, hasRule: !!rule, verdict, ruleProv: rule?.prov ?? null }
     })
@@ -409,7 +414,8 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
   // --- Pass vs tickets on the planned days ---------------------------------------------------------------------
   const tripById = new Map(trips.map((t) => [t.id, t]))
   const planned = tripItems
-    .filter((i) => i.refId && i.date && isLocalDate(i.date) && i.date >= today && seasonIdFor(i.date) === seasonId && i.status !== 'idea')
+    // Planned days in the pass season at their resort (a Southern Hemisphere winter is the calendar year's).
+    .filter((i) => i.refId && i.date && isLocalDate(i.date) && i.date >= today && pass.seasonOf(i.refId, i.date) === seasonId && i.status !== 'idea')
     .sort((a, b) => a.date!.localeCompare(b.date!) || a.id - b.id)
   const plannedResortIds = [...new Set(planned.map((i) => i.refId!))]
   const liftPrices = plannedResortIds.length
@@ -425,8 +431,10 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
         )
     : []
   const liftBy = groupBy(liftPrices, (p) => p.resortId ?? p.subjectId)
+  const resortById = new Map(resorts.map((r) => [r.id, r]))
   const plannedDays: PlannedDayView[] = planned.map((i) => {
-    const t = liftTicketFor(liftBy.get(i.refId!) ?? [], i.refId!, i.date!, { now, today })
+    const row = resortById.get(i.refId!)
+    const t = liftTicketFor(liftBy.get(i.refId!) ?? [], i.refId!, i.date!, { now, today, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) })
     const trip = tripById.get(i.tripId)!
     return {
       date: i.date!,
@@ -457,7 +465,15 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
         owned: mine ? { usage: mine.usage } : null,
       }
     })
-    result = comparePasses({ days: plannedDays.map((d) => ({ resortId: d.resortId, date: d.date, ticket: d.ticket, ticketBasis: d.ticketBasis })), candidates, currency: ctx.prefs.currency, rates: fx, today, names })
+    result = comparePasses({
+      days: plannedDays.map((d) => ({ resortId: d.resortId, date: d.date, ticket: d.ticket, ticketBasis: d.ticketBasis })),
+      candidates,
+      currency: ctx.prefs.currency,
+      rates: fx,
+      today,
+      names,
+      seasonOf: pass.seasonOf,
+    })
     if (plannedDays.some((d) => d.ticketConfirmAtSource)) comparisonNotes.push('Some ticket prices are researched — confirm at source.')
     if (products.some((p) => !p.ownedByMe && p.currentPrice?.confirmAtSource)) comparisonNotes.push('Some pass prices are researched — confirm at source.')
   }

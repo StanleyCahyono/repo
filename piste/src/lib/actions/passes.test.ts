@@ -216,6 +216,29 @@ describe('manual access rules', () => {
     expect(all.map((r) => r.version).sort()).toEqual([1, 2, 3])
   })
 
+  it('validates blackouts in the pass season at the resort: a 2026-27 pass covers June–October 2027 in the south', async () => {
+    const southFx = await buildFixture({ extraResorts: [fixtureResort('south-peak', { country: 'AU', timezone: 'Australia/Sydney', location: { lat: -36.5, lon: 148.3 }, prices: [], hours: [] })] })
+    const saved = state.ctx
+    state.ctx = { ...southFx.ctx, mode: 'live' }
+    try {
+      const rule = { productId: 'ikon-base-2026-27', access: 'unlimited' as const, days: null, reservationRequired: false, sourceUrl: 'https://example.org/ikon/south' }
+      const july = [{ from: '2027-07-03', to: '2027-07-11', label: 'School holidays' }]
+      expect((await saveAccessRule({ ...rule, resortId: 'south-peak', blackouts: july })).ok).toBe(true)
+      // The same July 2027 dates are next season at a northern resort.
+      const north = await saveAccessRule({ ...rule, resortId: 'test-peak', blackouts: july })
+      expect(north).toMatchObject({ ok: false, error: 'Blackout dates must fall in the pass season' })
+      // And the 2026 southern winter (2025-26) is not this pass's season there.
+      const lastWinter = await saveAccessRule({ ...rule, resortId: 'south-peak', blackouts: [{ from: '2026-07-04', to: '2026-07-12', label: null }] })
+      expect(lastWinter).toMatchObject({ ok: false, fieldErrors: { 'blackouts.0.from': expect.stringMatching(/2027-01-01 to 2027-12-31/) } })
+      // The checker offers the southern dates and answers from the rule.
+      const v = await getCheckerView(southFx.ctx, { pass: 'ikon-base-2026-27', resort: 'south-peak', from: '2027-07-10', to: '2027-07-12' })
+      expect(v.season.end).toBe('2027-12-31')
+      expect(v.result!.days.map((d) => d.verdict.status)).toEqual(['blackout', 'blackout', 'included'])
+    } finally {
+      state.ctx = saved
+    }
+  })
+
   it('explains a shared day pool across its member resorts', async () => {
     const pool = { productId: 'ikon-base-2026-27', access: 'shared-pool' as const, days: 3, blackouts: [], reservationRequired: false, sourceUrl: 'https://example.org/ikon/pool' }
     const first = ok(await saveAccessRule({ ...pool, resortId: 'test-peak', poolLabel: 'Test Peak + Expert Bowl' }))

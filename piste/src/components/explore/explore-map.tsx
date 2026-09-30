@@ -10,17 +10,20 @@ import { useMemo, useState, type ReactNode } from 'react'
 import { LazyResortMap, type MapMarker } from '@/components/map'
 import { cn } from '@/lib/ui/cn'
 import type { ExploreRow } from '@/lib/data/explore'
+import { REGION_GROUP_ORDER } from './regions'
 
 const HOME_ID = '__home'
 
-/** Region groups in the order they are offered as map views. */
-const VIEW_ORDER = ['Northeast US', 'Eastern Canada', 'Western US', 'Western Canada', 'Europe', 'International']
+/** Region groups in the order they are offered as map views (same order as Explore's region filter). */
+const VIEW_ORDER: readonly string[] = REGION_GROUP_ORDER
 const VIEW_SHORT: Record<string, string> = {
   'Northeast US': 'Northeast',
   'Eastern Canada': 'E. Canada',
   'Western US': 'West',
   'Western Canada': 'W. Canada',
-  Europe: 'Europe',
+  'Other Europe': 'Europe',
+  'South Korea': 'Korea',
+  'Australia & New Zealand': 'Aus & NZ',
   International: 'Other',
 }
 
@@ -101,7 +104,7 @@ export function ExploreMap({
           <div
             role="group"
             aria-label="Map view"
-            className="pointer-events-auto flex max-w-full gap-0.5 overflow-x-auto rounded-[10px] border border-divider bg-surface p-0.5 shadow-lift scrollbar-thin"
+            className="pointer-events-auto relative flex max-w-full min-w-0 gap-0.5 overflow-x-auto rounded-[10px] border border-divider bg-surface p-0.5 shadow-lift scrollbar-thin"
           >
             {[...groups.map(([g, ids]) => ({ key: g, label: VIEW_SHORT[g] ?? g, n: ids.length })), { key: 'all', label: 'All', n: rows.length }].map((v) => {
               const on = v.key === current

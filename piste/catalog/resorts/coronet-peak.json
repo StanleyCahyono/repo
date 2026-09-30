@@ -1,0 +1,256 @@
+{
+  "id": "coronet-peak",
+  "name": "Coronet Peak",
+  "shortName": "Coronet Peak",
+  "country": "NZ",
+  "region": "Queenstown Lakes (Southern Lakes)",
+  "stateProvince": "Otago",
+  "locality": "Above Arthurs Point, near Queenstown",
+  "timezone": "Pacific/Auckland",
+  "operator": "NZSki (reference)",
+  "priority": 0,
+  "location": {
+    "lat": -44.924,
+    "lon": 168.736,
+    "source": {
+      "url": "https://www.coronetpeak.co.nz/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate ski-area base position (no village; visitors stay in Queenstown)"
+    }
+  },
+  "elevation": {
+    "baseM": 1187,
+    "summitM": 1649,
+    "verticalM": 462,
+    "source": {
+      "url": "https://www.onthesnow.com/new-zealand/coronet-peak/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base 1,187 m, summit 1,649 m (result attribution uncertain); vertical derived as the difference."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Coronet Peak base area (approx.)",
+      "lat": -44.924,
+      "lon": 168.736,
+      "elevationM": 1187,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Coronet Peak summit / top of the Coronet Express (approx.)",
+      "lat": -44.915,
+      "lon": 168.725,
+      "elevationM": 1649,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 8,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.coronetpeak.co.nz/mountain-info",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 280 hectares (kept in this note) and 8 lifts in total, including high-speed six-seat and quad chairs and surface lifts; another line in the same summary said '3 chairlifts and 3 express chairlifts', so the lift-type split is left unknown. Season id 2025-26."
+    }
+  },
+  "features": {
+    "nightSkiing": true,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.coronetpeak.co.nz/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing on selected evenings in mid-winter is a long-running Coronet Peak feature (reference — confirm 2027 dates)."
+    }
+  },
+  "character": "Queenstown's closest ski area, on the slopes above Arthurs Point, operated by NZSki and included on the Ikon Pass. A new Snow Factory was set to open early-season terrain from 29 May 2026, and the mountain is known for its mid-winter night skiing.",
+  "learning": "Reference note: learner areas and an NZSki snowsports school are at the base; confirm 2027 lesson products and prices.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2026-05-29",
+        "closed": null,
+        "source": {
+          "url": "https://www.coronetpeak.co.nz/early-season-guide",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2026: early-season opening 29 May – 12 Jun 2026 on Snow Factory terrain, full mountain from 13 Jun subject to conditions (resort early-season guide — a planned date; the actual opening was not independently confirmed). Closing: scheduled Sun 4 Oct 2026 (shared research notes, https://www.onthesnow.com/new-zealand/projected-closing) — still ahead on 2026-09-30. Planned closing day 2026-10-04 (not yet happened as of 2026-09-30)."
+        }
+      },
+      {
+        "season": "2024-25",
+        "opened": "2025-06-14",
+        "closed": "2025-09-28",
+        "source": {
+          "url": "https://snowfall.co.nz/the-2025-ski-season-closing-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2025 published season dates: 14 Jun – 28 Sep 2025 (scheduled dates; actual days may have differed)."
+        }
+      }
+    ],
+    "typicalText": "Usually mid-June to late September or early October; in 2026 a new Snow Factory added an early start planned for 29 May.",
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30 (NZSki's 2027 3 Peak Pass was still listed as 'Coming Soon' — https://www.theremarkables.co.nz/passes-packages/). OnTheSnow labels the 2026 NZ winter '2026/2027', so its 'projected' dates describe winter 2026, not 2027. "
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift pass (16–64)",
+      "category": "adult",
+      "amount": 180,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Same price weekday and weekend per the search summary; the season was not stated (most likely the 2026 winter). Half-day adult NZ$135.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/coronet-peak/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (attribution uncertain)"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.coronetpeak.co.nz/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": "https://www.coronetpeak.co.nz/mountain-info",
+    "hours": null,
+    "tickets": null,
+    "seasonPass": "https://www.nzski.com/superpass/",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.journeys.nzta.govt.nz/",
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.queenstownnz.co.nz/things-to-do/skiing-and-snowboarding/ski-fields/",
+    "avalanche": "https://www.avalanche.net.nz/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Coronet Peak early-season guide (Snow Factory)",
+      "url": "https://www.coronetpeak.co.nz/early-season-guide"
+    },
+    {
+      "label": "Ikon Pass (the 2026-27 pass covers the 2027 NZ winter)",
+      "url": "https://www.ikonpass.com/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "ZQN",
+        "role": "both",
+        "minutes": 30,
+        "km": 22,
+        "basis": "Estimate from typical routing (from Frankton via Lower Shotover Road and Malaghans Road to the Coronet Peak access road); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "NZSki shuttle buses from Queenstown",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: NZSki has run ski-season shuttles from central Queenstown; check 2027 timetable and fares."
+      },
+      {
+        "name": "Drive the Coronet Peak access road",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: sealed access road; carry chains in winter."
+      }
+    ]
+  },
+  "recentReports": [
+    {
+      "observedOn": "2026-09-30",
+      "operatingStatus": null,
+      "baseDepthCm": null,
+      "summitDepthCm": null,
+      "newSnow24hCm": null,
+      "liftsOpen": null,
+      "liftsTotal": null,
+      "note": "Scheduled season closing day Sun 4 Oct 2026 (OnTheSnow NZ closing-dates list as retrieved 2026-09-30). Current lift status and snow depths not captured.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/projected-closing",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "From the shared research notes"
+      }
+    }
+  ],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
+      "Confirm 2027 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm which official page is the live lift/run status page (the 'mountain info' page is used as the snow report link).",
+      "Confirm published lift hours, access-road rules (chains) and shuttle operators for 2027.",
+      "Confirm the actual 2026 opening day (Snow Factory early start planned 29 May; full mountain 13 Jun subject to conditions).",
+      "Confirm the lift list and split by type (8 lifts per one summary; '3 chairlifts and 3 express chairlifts' per another line).",
+      "Confirm the published base elevation (1,187 m per search summary) and vertical.",
+      "Confirm 2027 night-skiing dates.",
+      "Confirm Ikon Pass 2026-27 day allowance at Coronet Peak (NZSki days may be shared across its three mountains)."
+    ],
+    "conflicts": [
+      "Lift split: '8 lifts total' vs '3 chairlifts and 3 express chairlifts' in the same search summary — split left unknown.",
+      "OnTheSnow's NZ projected-openings page (labelled 2026/2027) lists Coronet Peak 29 May — this is the 2026 winter, not 2027."
+    ],
+    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, area, lift total, 2026 plans/closing, 2025 dates and the day price come from search summaries (confirm at source); coordinates, operator, night skiing and drive times are Piste reference data or estimates."
+  }
+}

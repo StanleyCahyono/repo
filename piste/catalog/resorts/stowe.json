@@ -24,10 +24,10 @@
     "summitM": 1105,
     "verticalM": 719,
     "source": {
-      "url": "https://www.stowe.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Lift-served summit ~3,625 ft on Mount Mansfield and advertised vertical ~2,360 ft; base derived as summit minus vertical. Mount Mansfield's true summit (4,395 ft) is not lift-served"
+      "url": "https://www.stowe.com/the-mountain/about-the-mountain/mountain-info.aspx",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): highest lift-served skiing 3,625 ft (1,105 m) and 2,360 ft (719 m) vertical; Mt. Mansfield summit 4,395 ft (Vermont's highest). Base (386 m) derived as top minus vertical."
     }
   },
   "weatherPoints": [
@@ -49,19 +49,34 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 116,
+    "lifts": 12,
+    "skiableAcres": 485,
+    "beginnerPct": 16,
+    "intermediatePct": 55,
+    "advancedPct": 29,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": 0,
+      "chairlifts": 8,
+      "surfaceLifts": 2,
+      "other": 0
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.stowe.com/the-mountain/about-the-mountain/mountain-info.aspx",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30), current published figures: 116 trails, 12 lifts, 485 acres on Mt. Mansfield and Spruce Peak (linked by the Over Easy gondola). Split 16% beginner / 55% intermediate / 29% expert (published as three bands; the third is stored as advanced). Lifts: Over Easy transfer gondola, the high-speed summit Gondola, 4 high-speed quads, 2 triples, 2 doubles, 2 surface lifts. Average snowfall 314 in."
+    }
   },
   "features": {
     "nightSkiing": null,
-    "snowmakingPct": null,
+    "snowmakingPct": 83,
     "lessons": true,
     "rentals": true,
     "onMountainLodging": true,
@@ -72,7 +87,7 @@
       "url": "https://www.stowe.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered' snowmakingPct (83%) from a 2026-09-30 search summary of Stowe's mountain-info page; the other flags remain reference data."
     }
   },
   "character": "A large northern Vermont resort on Mount Mansfield, the state's highest peak, operated by Vail Resorts. Spruce Peak, across the Mountain Road, holds the base village and much of the easier terrain.",
@@ -93,15 +108,37 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No confirmed 2026-27 opening date on file as of 2026-09-30. OnTheSnow projects Nov 20, 2026 (a third-party projection, not an announcement). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Stowe's date — check the release (More links). For reference, Okemo, Stowe and Mount Snow targeted Sat Nov 22, 2025 for 2025-26 (announced Oct 29, 2025) — a target, not a confirmed opening day."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (date-based)",
+      "category": "adult",
+      "amount": 169,
+      "amountMax": 239,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Aggregator (snowstash.com): 2026/27 day tickets from $169, peak $239. Vail prices vary by date and advance purchase. Confirm at source.",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.stowe.com/",
-    "trailMap": null,
+    "trailMap": "https://www.stowe.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.stowe.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -114,9 +151,27 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.stowe.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Mountain info, stats and hours (official)",
+      "url": "https://www.stowe.com/the-mountain/about-the-mountain/mountain-info.aspx"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (Vermont)",
+      "url": "https://www.onthesnow.com/vermont/projected-openings"
+    },
+    {
+      "label": "Vail Resorts 2026/27 opening-dates release (18 Aug 2026)",
+      "url": "https://investors.vailresorts.com/news-releases/news-release-details/winter-about-show-vail-resorts-announces-202627-opening-dates"
+    },
+    {
+      "label": "2025-26 target opening day (Mountain Times, Oct 2025)",
+      "url": "https://mountaintimes.info/2025/10/29/okemo-stowe-and-mount-snow-announced-nov-22-as-target-opening-day/"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 405,
@@ -149,21 +204,21 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "No confirmed 2026-27 opening or closing date (OnTheSnow projects Nov 20, 2026; check the Vail Resorts 18 Aug 2026 opening-dates release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the operator (Vail Resorts since 2017 — reference) and which 2026-27 Epic products include Stowe, with any holiday restrictions or reservation rules.",
-      "Confirm official deep links on stowe.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), childcare, tubing and night skiing.",
-      "Confirm elevations (base here is derived) and base/summit coordinates (approximations).",
+      "Confirm 2026-27 adult day-ticket prices at the source (aggregator range $169–$239).",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm childcare, tubing and night skiing.",
+      "Confirm that the snow-report and trail-map links (standard Vail Resorts site pattern) resolve; the lift-status and mountain-info pages appeared in search results.",
+      "Confirm base/summit coordinates (approximations); elevation figures now match the search summary.",
       "Transit leads to confirm: a free Mountain Road shuttle between Stowe village and the resort; Amtrak's Vermonter stops at Waterbury.",
       "VT-108 through Smugglers' Notch closes in winter — relevant for any routing from the north."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Spruce Peak learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Elevations, terrain (116 trails, 12 lifts by type, 485 acres, 16/55/29 split), 83% snowmaking and the 2026/27 $169–$239 aggregator day-ticket range are search-summary facts. Identity, coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. Snow-report and trail-map links follow the standard Vail site pattern (lift-status page seen in results). The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
   }
 }

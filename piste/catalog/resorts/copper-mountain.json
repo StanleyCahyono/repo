@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 2960,
-    "summitM": 3753,
-    "verticalM": 793,
+    "baseM": 2961,
+    "summitM": 3792,
+    "verticalM": 835,
     "source": {
-      "url": "https://www.coppercolorado.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 9,712 ft, summit about 12,313 ft, vertical about 2,601 ft (resort-published figures as remembered; confirm)"
+      "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base 9,715 ft, summit 12,441 ft, vertical 2,738 ft (as stated; the difference of the two elevations is 2,726 ft). The earlier Piste reference used a lift-served summit of about 12,313 ft and 2,601 ft vertical; the summit weather point stays at the upper lift terminals."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 150,
+    "lifts": 24,
+    "skiableAcres": 2507,
+    "beginnerPct": 21,
+    "intermediatePct": 25,
+    "advancedPct": 36,
     "terrainParks": null,
+    "expertPct": 18,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 1,
+      "cableCars": null,
+      "chairlifts": 14,
+      "surfaceLifts": 9,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: OnTheSnow overview, Wikipedia, evo, j2ski, SnowPak): 2,507 skiable acres, 150 trails, 24 lifts listed as 1 gondola, 2 high-speed six-seat, 4 high-speed quad, 4 triple and 4 double chairs, 9 surface lifts; 21% easiest / 25% intermediate / 36% advanced / 18% expert. Lift classification as listed (confirm); season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,30 +95,62 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-06",
+      "text": "Planned opening Nov. 6, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+      }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-05-02",
+      "text": "Scheduled closing May 2, 2027 (third-party season-dates roundup)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.uncovercolorado.com/colorado-ski-resorts-season-opening-closing-dates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Uncover Colorado's \"2026-27 Colorado Ski Resorts Season Opening and Closing Dates\": Copper opens Nov. 6, 2026 and closes May 2, 2027. Third-party roundup — confirm on coppercolorado.com."
+      }
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned Nov. 6, 2026 opening (Ikon opening-date roundups) and a May 2, 2027 closing (Uncover Colorado roundup). Both are search-summary facts; confirm on coppercolorado.com."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (weekday–weekend)",
+      "category": "adult",
+      "amount": 264,
+      "amountMax": 274,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekday $264, weekend $274; dynamic pricing varies by date and advance purchase. Season not stated (the summary labelled it 2026-27 only because the query asked) — may be the 2025-26 listing.",
+      "source": {
+        "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of OnTheSnow's Copper lift-ticket listing."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.coppercolorado.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.coppercolorado.com/tickets-passes/lift-tickets/tickets/",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,7 +161,8 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://avalanche.state.co.us/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [],
   "travel": {
@@ -171,24 +219,26 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 opening (Nov. 6) and closing (May 2, 2027) on coppercolorado.com; the closing comes from a third-party roundup.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Base unlimited; full Ikon Pass unlimited (inferred from the Base terms). Base blackout dates at Copper not confirmed.",
+      "Confirm 2026-27 day-ticket prices (only an undated $264–$274 OnTheSnow range is on file).",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
+      "Confirm official snow-report, lift-status and trail-map pages on coppercolorado.com (only third-party snow reports were found).",
+      "Confirm the lift classification (the listing counts 1 gondola) and terrain parks.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on coppercolorado.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: POWDR, owner since about 2009).",
-      "Confirm terrain stats (leads: ~2,500 acres, 140–160 trails, 23–24 lifts, roughly one fifth beginner), parks, snowmaking, night skiing, tubing (lead: a lift-served tubing hill has operated), the Woodward Copper facilities and childcare.",
       "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Pass leads from earlier seasons (unverified): unlimited on the Ikon Pass; included on Ikon Base (possible holiday blackouts); Copper season passes; not on Epic. Confirm 2026-27 products and USD prices.",
       "Parking: confirm 2026-27 rules (lead: paid close-in lots with reservations on peak days, free remote lots with shuttles, carpool incentives).",
       "Transfers: confirm which shuttle operators and CDOT services (Bustang/Snowstang) reach Copper in 2026-27.",
       "Snow report: record the official conditions page and whether any structured feed exists."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, base-village lodging, Union Creek learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Opening: a third-party snow-report page listed a planned start of Nov. 7, 2026; the Ikon and Colorado roundups say Nov. 6, 2026 (stored).",
+      "Elevation: summit 12,441 ft / vertical 2,738 ft (search summary, stored) vs reference lift-served 12,313 ft / 2,601 ft."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening and closing, terrain and lift stats, elevations, an undated day-ticket range and the tickets link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

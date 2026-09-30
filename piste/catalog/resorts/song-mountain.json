@@ -22,8 +22,13 @@
   "elevation": {
     "baseM": null,
     "summitM": null,
-    "verticalM": null,
-    "source": null
+    "verticalM": 213,
+    "source": {
+      "url": "https://www.snow-forecast.com/resorts/Song-Mountain",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): 213 m (700 ft) vertical. Base and summit elevations not found."
+    }
   },
   "weatherPoints": [
     {
@@ -44,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 24,
+    "lifts": 5,
+    "skiableAcres": 100,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 0,
+      "cableCars": 0,
+      "chairlifts": 2,
+      "surfaceLifts": 3,
+      "other": 0
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.snow-forecast.com/resorts/Song-Mountain",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30; attribution between Snow-Forecast and SkiCentral not isolated): 100 acres, 24 trails, 5 lifts = 2 chairlifts and 3 surface lifts."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -83,10 +103,32 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No 2026-27 opening date and no historical opening dates found in research. 2026-27 SkiCNY season passes (valid at Song and Labrador, '2 mountains for 1 price') went on sale in spring 2026; spring pricing ran through Wed Apr 15, 2026 with a Buddy Pass and a $25 voucher for Heuga's Alpine; an 'Early Fall 2026-27' rate page exists. After Toggenburg closed in 2021, reporting described longer lift lines at Song. The operator lost a NY antitrust case in 2025 over buying and closing Toggenburg; remedies were pending as of Aug 2025."
+    "notes": "OnTheSnow projects Dec 12, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening date and no historical opening dates found in research. 2026-27 SkiCNY season passes (valid at Song and Labrador, '2 mountains for 1 price') went on sale in spring 2026; spring pricing ran through Wed Apr 15, 2026 with a Buddy Pass and a $25 voucher for Heuga's Alpine; an 'Early Fall 2026-27' rate page exists. After Toggenburg closed in 2021, reporting described longer lift lines at Song. The operator lost a NY antitrust case in 2025 over buying and closing Toggenburg; remedies were pending as of Aug 2025."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (13-64) 8-hour lift ticket (Song-Labrador)",
+      "category": "adult",
+      "amount": 89,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "SkiCNY 2025-26 daily rate, valid at Song and Labrador (4-hour adult ticket $84). Day-type rules not stated. 2026-27 rates not found.",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.skicny.com/",
     "trailMap": null,
@@ -130,6 +172,10 @@
     {
       "label": "Court ruling on Toggenburg purchase (operator context)",
       "url": "https://cnycentral.com/news/local/judge-rules-purchasing-shutting-down-toggenburg-mountain-violated-anticompetitive-law-intermountain-management-fabius-ski-resort"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
     }
   ],
   "travel": {
@@ -154,18 +200,18 @@
   },
   "research": {
     "method": "web-search",
-    "date": "2026-09-28",
+    "date": "2026-09-30",
     "openQuestions": [
       "Song's own page URLs on skicny.com (conditions, hours, trail map).",
-      "Vertical, base and summit elevations, trails, lifts, acres, snowmaking %, terrain parks.",
+      "Base and summit elevations, snowmaking %, terrain parks and trail difficulty split (vertical 700 ft, 24 trails, 100 acres and 5 lifts were found 2026-09-30).",
       "Day and night hours for 2026-27 (night skiing likely but unconfirmed).",
       "Lessons and learning-area details, rentals, tubing.",
-      "2026-27 day-ticket prices and SkiCNY season-pass prices.",
-      "Historical opening dates and any 2026-27 target opening date.",
+      "2026-27 day-ticket prices (2025-26 SkiCNY adult 13-64: $89 8-hour, $84 4-hour) and SkiCNY season-pass prices.",
+      "Historical opening dates and any resort-announced 2026-27 opening (OnTheSnow projects Dec 12, 2026).",
       "Exact coordinates (location and weather points are unsourced approximations).",
       "Indy Pass, SANY Gold Pass or other reciprocal access for 2026-27."
     ],
     "conflicts": [],
-    "confidenceNotes": "The web-search budget ran out before Song-specific searches could run, so this record is mostly unknowns. Included facts come from shared SkiCNY and ownership sources: the Intermountain operator, the combined Song+Labrador 2026-27 pass and the Heuga's Alpine restaurant. Stats were deliberately left null rather than filled from memory. Coordinates are approximate estimates for weather-model use only; drive time is a Piste estimate."
+    "confidenceNotes": "Updated 2026-09-30: vertical (700 ft), terrain (24 trails, 100 acres, 5 lifts = 2 chairs + 3 surface) and the 2025-26 SkiCNY adult rate come from search summaries. The web-search budget ran out before Song-specific searches could run, so this record is mostly unknowns. Included facts come from shared SkiCNY and ownership sources: the Intermountain operator, the combined Song+Labrador 2026-27 pass and the Heuga's Alpine restaurant. Stats were deliberately left null rather than filled from memory. Coordinates are approximate estimates for weather-model use only; drive time is a Piste estimate."
   }
 }

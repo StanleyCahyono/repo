@@ -56,12 +56,22 @@
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 0,
+      "cableCars": 0,
+      "chairlifts": 4,
+      "surfaceLifts": 0,
+      "other": 1
+    },
+    "liftCapacityPerHour": null,
     "season": "2025-26",
     "source": {
       "url": "https://www.indyskipass.com/our-resorts/swain-resort",
       "verification": "search-summary",
       "checkedOn": "2026-09-28",
-      "note": "35 runs and 5 lifts (4 chairlifts + 1 magic carpet) per Indy Pass page; 100 acres per OnTheSnow, which lists 30 trails."
+      "note": "35 runs and 5 lifts (4 chairlifts + 1 magic carpet) per Indy Pass page; 100 acres per OnTheSnow, which lists 30 trails. Lift types (2026-09-30 search summary): 3 quad chairs, 1 double chair and 1 surface lift; the Indy page calls the fifth lift a magic carpet, stored as other."
     }
   },
   "features": {
@@ -101,15 +111,58 @@
     "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-28. OnTheSnow (third party) projects an opening of 2026-12-19 and a closing of 2027-03-28; these are projections, not announcements (https://www.onthesnow.com/new-york/swain/ski-resort). No historical opening dates were found."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult all-day lift ticket, weekday",
+      "category": "adult",
+      "amount": 65,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary (2026-09-30) gave $65 weekdays and attributed it to 2026-27, but the source page was not isolated (swain.com tickets page and OnTheSnow listing both in results). Season unconfirmed.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult all-day lift ticket, weekend/holiday",
+      "category": "adult",
+      "amount": 84,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary (2026-09-30) gave $84 weekends/holidays and attributed it to 2026-27; source page not isolated. Season unconfirmed.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://swain.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
-    "seasonPass": null,
+    "tickets": "https://swain.com/tickets-and-rentals/",
+    "seasonPass": "https://swain.com/season-passes/",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -119,7 +172,8 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [
     {
@@ -145,6 +199,14 @@
     {
       "label": "SnowBrains: Indy Pass adds Swain (2020)",
       "url": "https://snowbrains.com/indy-pass-adds-swain-mountain-ny-for-winter-20-21/"
+    },
+    {
+      "label": "NYSkiBlog directory (stats, trail map)",
+      "url": "https://nyskiblog.com/directory/ny-ski-areas/western-ny/swain/"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
     }
   ],
   "travel": {
@@ -169,15 +231,15 @@
   },
   "research": {
     "method": "web-search",
-    "date": "2026-09-28",
+    "date": "2026-09-30",
     "openQuestions": [
       "Owner/operator name.",
       "Base and summit elevations and precise coordinates. The location and weather points are approximate.",
       "Trail count (35 vs 30), difficulty split, terrain parks.",
       "Night skiing, lessons and beginner programs, rentals, tubing, childcare.",
       "Operating hours for 2025-26 and 2026-27.",
-      "2026-27 season pass products and prices, and 2025-26/2026-27 day-ticket prices.",
-      "Official snow-report, trail-map, ticket and season-pass URLs on swain.com.",
+      "2026-27 season pass products and prices; confirm the season of the $65 weekday / $84 weekend adult all-day tickets found 2026-09-30.",
+      "Official snow-report and trail-map URLs on swain.com (ticket and season-pass pages found).",
       "Historical opening dates and any resort-announced 2026-27 opening date.",
       "Confirmation directly from indyskipass.com that Swain remains a 2026-27 Indy partner, and its blackout dates."
     ],
@@ -186,6 +248,6 @@
       "Lift count: 4 chairlifts + 1 magic carpet = 5 (Indy Pass). No conflicting figure seen.",
       "Region: one search summary called Swain 'northwestern New York'. It is in Allegany County (Southern Tier / Western NY), and 'Western New York' was used."
     ],
-    "confidenceNotes": "The web-search budget ran out before Swain-specific searches beyond the Indy results, so coverage is thin. Medium confidence: vertical 650 ft, 4 chairs + 1 carpet and 35 runs (Indy Pass page); 100 acres and 97% snowmaking (OnTheSnow); the Indy partnership. The coordinates and summit point are unsourced approximations for weather-model use only. Drive time is a Piste estimate."
+    "confidenceNotes": "Updated 2026-09-30: lift types (3 quads, 1 double, 1 surface/carpet) and adult all-day prices of unconfirmed season come from search summaries. The web-search budget ran out before Swain-specific searches beyond the Indy results, so coverage is thin. Medium confidence: vertical 650 ft, 4 chairs + 1 carpet and 35 runs (Indy Pass page); 100 acres and 97% snowmaking (OnTheSnow); the Indy partnership. The coordinates and summit point are unsourced approximations for weather-model use only. Drive time is a Piste estimate."
   }
 }

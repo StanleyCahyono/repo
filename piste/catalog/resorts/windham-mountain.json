@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 54,
+    "lifts": 11,
+    "skiableAcres": 285,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": null,
+      "cableCars": null,
+      "chairlifts": 6,
+      "surfaceLifts": 5,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Windham_Mountain_Club",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30; attribution not isolated): 285 skiable acres, 54 trails, 11 lifts including four high-speed detachables (1 six-pack, 3 quads) and 5 surface lifts. Chairlifts = 6 is derived (11 total minus 5 surface lifts); the types of the two other chairs were not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,17 +108,39 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 4, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). Past opening dates were not captured, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (date-based)",
+      "category": "adult",
+      "amount": 99,
+      "amountMax": 149,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Aggregator (snowstash.com): 2026/27 day tickets from $99, peak $149. The official Double Diamond Pass page lists products from $99 (Adult/Youth/70+); terms not captured. Confirm at source.",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.windhammountainclub.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.windhammountainclub.com/lift-tickets/",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,9 +151,19 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Double Diamond Pass (official)",
+      "url": "https://www.windhammountainclub.com/double-diamond-pass/"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 205,
@@ -149,20 +196,20 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "KEY: confirm the public access model under the Windham Mountain Club branding — are public day tickets sold for 2026-27, and are they capped, date-restricted or member-only on some days?",
+      "KEY: confirm the public access model under the Windham Mountain Club branding for 2026-27. Day tickets are listed ($99–$149, snowstash; official lift-ticket and Double Diamond Pass pages exist), but caps, member-only dates or reservation rules were not captured.",
       "Confirm the operator/owner (not recorded) and the official homepage (windhammountainclub.com is Piste reference data).",
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "No resort-announced 2026-27 opening or closing date as of 2026-09-30 (OnTheSnow projects Dec 4, 2026).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Pass affiliations for 2026-27: Windham appeared on the Ikon Pass in some earlier seasons (low-confidence lead); its 2026-27 status is unknown.",
-      "Confirm whether night skiing is still offered, plus terrain stats, learning area, childcare, tubing and on-mountain lodging.",
-      "Confirm elevations and base/summit coordinates (approximations)."
+      "Confirm the types of the two chairlifts beyond the four high-speed detachables (6 chairlifts is derived from 11 total minus 5 surface lifts).",
+      "Confirm night skiing, trail difficulty split, terrain parks, snowmaking %, learning area, childcare, tubing and on-mountain lodging.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm elevations, base/summit coordinates (approximations) and official deep links (snow report, lift status, trail map)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, homepage and the few features set (lessons, rentals) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown. Operator left null (not confident)."
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (285 acres, 54 trails, 11 lifts with four high-speed detachables and five surface lifts) comes from a combined summary; the chairlift count is derived. The 2026/27 $99–$149 range is from an aggregator. Identity, coordinates, elevations and homepage remain Piste reference data; the OnTheSnow date is a projection; drive/airport times are Piste estimates."
   }
 }

@@ -16,7 +16,7 @@ import 'server-only'
 import { and, desc, eq, lte, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { ComponentResult } from '@/lib/db/schema'
-import { addDays, dateRange, isLocalDate, seasonIdFor } from '@/lib/domain/time'
+import { addDays, dateRange, isLocalDate, seasonIdsForDates } from '@/lib/domain/time'
 import type { AppMode, Confidence, DataKind, Eligibility, Provenance, ScoreKind, ScoringMode, SurfaceInterpretation, UnitPrefs } from '@/lib/domain/types'
 import {
   assessmentKey,
@@ -26,8 +26,11 @@ import {
   latestRuns,
   loadBundle,
   loadResortRows,
+  resortHemisphere,
+  resortSeasonFor,
   resortToday,
   seasonLabel,
+  seasonRowFor,
   type DataCtx,
 } from './core'
 import { lastAttemptRun, lastSuccess } from './deps'
@@ -280,7 +283,7 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
     getForecast(ctx, selected, { point: opts.point }),
     latestAssessments(db, { dates, modes: [mode], now, live, resortIds: selected }),
     focus && historyMonth ? getHistoryCalendar(ctx, focus, historyMonth, { mode }) : Promise.resolve(null),
-    selected.length ? loadBundle(ctx, { ids: selected, seasons: [seasonIdFor(planDate)] }) : Promise.resolve(null),
+    selected.length ? loadBundle(ctx, { ids: selected, seasons: seasonIdsForDates([planDate, ...dates]) }) : Promise.resolve(null),
     // The newest failed attempt per resort: its error rows (one per point × provider, bounded).
     Promise.all(
       selected.map((id) =>
@@ -357,12 +360,14 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
       const event = bundle.status.get(id)
       const report = reports.get(id)
       const st = statusStatement(event, report)
-      const seasonFor = (date: string) => bundle.seasons.get(`${id}|${seasonIdFor(date)}`)
+      // The resort's own season for each date (a Southern Hemisphere winter changes season on 1 January).
+      const hemisphere = resortHemisphere(r)
+      const seasonFor = (date: string) => seasonRowFor(bundle, r, date)
       const days = dateRange(today, addDays(today, MAX_FORECAST_DAYS - 1))
       potentials[id] = days
-        .map((date) => potentialOf(applyClosure(scoreView(assessments.get(assessmentKey(id, date, mode))), closureView(st, seasonFor(date), date))))
+        .map((date) => potentialOf(applyClosure(scoreView(assessments.get(assessmentKey(id, date, mode))), closureView(st, seasonFor(date), date, hemisphere))))
         .filter((p): p is DayPotential => !!p)
-      const planSeason = seasonIdFor(planDate)
+      const planSeason = resortSeasonFor(r, planDate)
       planning[id] = {
         resortId: id,
         date: planDate,
@@ -370,7 +375,7 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
         seasonLabel: seasonLabel(planSeason),
         status: statusView(r, event, report, now),
         opening: openingView(bundle.seasons.get(`${id}|${planSeason}`), planSeason, today),
-        closure: closureView(st, seasonFor(planDate), planDate),
+        closure: closureView(st, seasonFor(planDate), planDate, hemisphere),
         passes: passBadges(bundle, id),
         myPass: myPassView(ownedVerdicts(bundle, id, planDate).map((v) => v.verdict)),
       }

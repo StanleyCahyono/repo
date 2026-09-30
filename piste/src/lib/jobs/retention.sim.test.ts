@@ -1,11 +1,11 @@
 /**
  * Retention simulation: how big does the live database get with daily use?
  *
- * Seeds the real catalog (all 33 resorts), then runs N simulated once-a-day passes — weather (the REAL Open-Meteo and
- * NWS adapters, fed synthetic API responses of the real size: 19 days × 24 h per Open-Meteo run, ~176 h per NWS run),
- * status, assessments, alerts and prune — with the app clock advancing a day at a time. Weather and assessments run
- * for a subset of resorts (default: 2 US resorts with both providers); the growth is extrapolated linearly to all 33
- * (a slight overestimate: 2 of the 33 resorts are outside the US and get no NWS runs).
+ * Seeds the real catalog (every resort in catalog/resorts), then runs N simulated once-a-day passes — weather (the REAL
+ * Open-Meteo and NWS adapters, fed synthetic API responses of the real size: 19 days × 24 h per Open-Meteo run, ~176 h
+ * per NWS run), status, assessments, alerts and prune — with the app clock advancing a day at a time. Weather and
+ * assessments run for a subset of resorts (default: 2 US resorts with both providers); the growth is extrapolated
+ * linearly to every catalog resort (an overestimate: resorts outside the US get no NWS runs).
  *
  * Size = page_count × page_size after VACUUM (what the single-file build exports), plus row counts and per-table bytes
  * (dbstat). Default settings are small enough for CI; set PISTE_SIM_DAYS / PISTE_SIM_RESORTS (ids or "all") /
@@ -317,7 +317,8 @@ export async function simulate(o: SimOptions): Promise<{ base: Measurement; poin
   }
 }
 
-const CATALOG_RESORTS = 33
+/** Resorts in the catalog (derived, so the projection follows the catalog as resorts are added). */
+const catalogResorts = () => loadCatalog().resorts.length
 const HISTORY_TABLES = ['weather_points', 'weather_runs', 'conditions_assessments'] as const
 const historyBytes = (m: Measurement) => HISTORY_TABLES.reduce((a, t) => a + (m.tables[t] ?? 0), 0)
 
@@ -326,19 +327,19 @@ const historyBytes = (m: Measurement) => HISTORY_TABLES.reduce((a, t) => a + (m.
  * simulated resorts (bookkeeping tables are scaled too — an overestimate), plus the history tables' growth rate between
  * the last two checkpoints for the remaining days.
  */
-export function project(base: Measurement, points: readonly Measurement[], simulatedResorts: number, horizonDays = 200) {
-  const scale = CATALOG_RESORTS / simulatedResorts
+export function project(base: Measurement, points: readonly Measurement[], simulatedResorts: number, horizonDays = 200, totalResorts = catalogResorts()) {
+  const scale = totalResorts / simulatedResorts
   const a = points[points.length - 2]
   const b = points[points.length - 1]
   const perDay = ((historyBytes(b) - historyBytes(a)) / (b.day - a.day)) * scale
   const atLast = base.bytes + (b.bytes - base.bytes) * scale
-  return { scale, perDayMB: perDay / MB, lastMB: atLast / MB, lastDay: b.day, projectedMB: (atLast + perDay * Math.max(0, horizonDays - b.day)) / MB }
+  return { scale, totalResorts, perDayMB: perDay / MB, lastMB: atLast / MB, lastDay: b.day, projectedMB: (atLast + perDay * Math.max(0, horizonDays - b.day)) / MB }
 }
 
 function report(label: string, base: Measurement, points: readonly Measurement[], simulated: number) {
   const p = project(base, points, simulated)
   const lines = [
-    `${label}: ${simulated} resort(s) simulated, extrapolated ×${p.scale.toFixed(1)} to ${CATALOG_RESORTS}`,
+    `${label}: ${simulated} resort(s) simulated, extrapolated ×${p.scale.toFixed(1)} to ${p.totalResorts}`,
     `  base (catalog only) ${(base.bytes / MB).toFixed(2)} MB`,
     ...points.map(
       (m) =>
@@ -348,7 +349,7 @@ function report(label: string, base: Measurement, points: readonly Measurement[]
           .map((k) => `${k}=${((m.tables[k] ?? 0) / MB).toFixed(2)}`)
           .join(' ')}`,
     ),
-    `  history growth ${p.perDayMB.toFixed(3)} MB/day (33 resorts) · day ${p.lastDay}: ${p.lastMB.toFixed(1)} MB · 200-day projection ${p.projectedMB.toFixed(1)} MB`,
+    `  history growth ${p.perDayMB.toFixed(3)} MB/day (${p.totalResorts} resorts) · day ${p.lastDay}: ${p.lastMB.toFixed(1)} MB · 200-day projection ${p.projectedMB.toFixed(1)} MB`,
   ]
   console.log(lines.join('\n'))
   return p

@@ -1,0 +1,256 @@
+{
+  "id": "cardrona",
+  "name": "Cardrona Alpine Resort",
+  "shortName": "Cardrona",
+  "country": "NZ",
+  "region": "Queenstown Lakes (Wānaka area)",
+  "stateProvince": "Otago",
+  "locality": "Cardrona Valley, between Queenstown and Wānaka",
+  "timezone": "Pacific/Auckland",
+  "operator": "Cardrona Alpine Resort Ltd, part of RealNZ; also runs Treble Cone (reference — confirm)",
+  "priority": 0,
+  "location": {
+    "lat": -44.875,
+    "lon": 168.948,
+    "source": {
+      "url": "https://cardrona-treblecone.com/cardrona",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate base-area position above the Cardrona Valley"
+    }
+  },
+  "elevation": {
+    "baseM": 1670,
+    "summitM": 1860,
+    "verticalM": 600,
+    "source": {
+      "url": "https://cardrona-treblecone.com/mountains",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base area 1,670 m, highest lifted point 1,860 m, vertical rise 600 m. The published vertical is larger than the base-to-top difference (190 m), presumably because lift-served terrain extends below the base area — confirm."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Cardrona base area (approx.)",
+      "lat": -44.875,
+      "lon": 168.948,
+      "elevationM": 1670,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Highest lifted point (approx.)",
+      "lat": -44.868,
+      "lon": 168.94,
+      "elevationM": 1860,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 47,
+    "lifts": 11,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": 5,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": null,
+      "cableCars": null,
+      "chairlifts": 6,
+      "surfaceLifts": 2,
+      "other": 3
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://cardrona-treblecone.com/mountains",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 615 hectares across 5 basins (kept in this note), 6 chairlifts, 3 carpets (other), 1 T-bar and 1 platter (surface lifts) = 11 lifts, 47 groomable runs and 5 terrain parks. Capacity not found. Season id 2025-26."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://cardrona-treblecone.com/cardrona",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'."
+    }
+  },
+  "character": "New Zealand's biggest ski resort by area, with 615 hectares across five basins above the Cardrona Valley between Queenstown and Wānaka. It has five terrain parks and is run by the same company as Treble Cone.",
+  "learning": "Reference note: Cardrona has dedicated learner areas with carpets and a snowsports school; confirm 2027 lesson products and prices.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": null,
+        "closed": null,
+        "source": {
+          "url": "https://www.powder.com/news/cardrona-resort-extends-season-week",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2026: season extended by a week to Sun 18 Oct 2026 (was 11 Oct) — shared research notes; still ahead on 2026-09-30. Opening: planned for 13 Jun 2026, pushed to 20 Jun, then targeting 26 Jun as of 21 Jun (https://www.freeskier.com/cardrona-new-zealand-targets-june-26-2026-opening-day); the actual opening day was not confirmed. Planned closing day 2026-10-18 (not yet happened as of 2026-09-30)."
+        }
+      },
+      {
+        "season": "2024-25",
+        "opened": "2025-06-14",
+        "closed": "2025-10-05",
+        "source": {
+          "url": "https://snowfall.co.nz/the-2025-ski-season-closing-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2025 published season dates: 14 Jun – 5 Oct 2025 (scheduled dates; actual days may have differed)."
+        }
+      }
+    ],
+    "typicalText": "Usually mid-June to early or mid-October; in 2026 the opening was delayed to late June and the season extended to 18 Oct.",
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30 (NZSki's 2027 3 Peak Pass was still listed as 'Coming Soon' — https://www.theremarkables.co.nz/passes-packages/). OnTheSnow labels the 2026 NZ winter '2026/2027', so its 'projected' dates describe winter 2026, not 2027. Cardrona is not on the Ikon or Epic 2026-27 rosters in the shared notes."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift pass",
+      "category": "adult",
+      "amount": 199,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekday and weekend adult day price per the search summary; the season was not stated (most likely the 2026 winter). Online single-day prices 'from $184' and multi-day 'from $120/day' were also quoted (date-based pricing).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/cardrona-alpine-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (see also https://cardrona-treblecone.com/passes/lift-passes)"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://cardrona-treblecone.com/cardrona",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": "https://cardrona-treblecone.com/mountains",
+    "hours": "https://cardrona-treblecone.com/mountains/opening-hours",
+    "tickets": "https://cardrona-treblecone.com/passes/lift-passes",
+    "seasonPass": "https://cardrona-treblecone.com/passes/season-passes",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://www.journeys.nzta.govt.nz/",
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.queenstownnz.co.nz/things-to-do/skiing-and-snowboarding/ski-fields/",
+    "avalanche": "https://www.avalanche.net.nz/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Cardrona & Treble Cone passes",
+      "url": "https://cardrona-treblecone.com/passes"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "ZQN",
+        "role": "both",
+        "minutes": 60,
+        "km": 57,
+        "basis": "Estimate from typical routing (SH6 towards Arrow Junction, then the Crown Range Road to the Cardrona ski-field access road); not a routing-service result. Wānaka (WKA, not in Piste's airport list) is closer, roughly 35 minutes (reference).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Ski-season shuttles from Queenstown and Wānaka",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: shuttles have run to Cardrona from both towns; no operator, fare or schedule is on file."
+      },
+      {
+        "name": "Drive over the Crown Range Road",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: alpine pass road and a ski-field access road; carry chains in winter."
+      }
+    ]
+  },
+  "recentReports": [
+    {
+      "observedOn": "2026-09-26",
+      "operatingStatus": null,
+      "baseDepthCm": 112,
+      "summitDepthCm": null,
+      "newSnow24hCm": 6,
+      "liftsOpen": null,
+      "liftsTotal": null,
+      "note": "Natural base 112 cm with 6 cm of new snow in 24 h on 26 Sep 2026. Season extended a week to Sun 18 Oct 2026 (https://www.powder.com/news/cardrona-resort-extends-season-week).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/cardrona-alpine-resort/skireport",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "From the shared research notes"
+      }
+    }
+  ],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
+      "Confirm 2027 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm which official page is the live lift/run status page (the 'mountain info' page is used as the snow report link).",
+      "Confirm published lift hours, access-road rules (chains) and shuttle operators for 2027.",
+      "Confirm the actual 2026 opening day (targeted 26 Jun after two delays).",
+      "Confirm the lowest lifted point behind the 600 m vertical figure.",
+      "Check whether Cardrona is on any 2026-27 multi-resort pass (not on the Ikon/Epic rosters in the shared notes)."
+    ],
+    "conflicts": [
+      "Vertical: published vertical rise 600 m vs 190 m base-to-top difference (base area 1,670 m, top 1,860 m).",
+      "Closing 2026: a closing-dates summary gave 11 Oct; the season was extended to 18 Oct (Powder) — 18 Oct used."
+    ],
+    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, area, lifts, runs, parks, 2026 closing, 2025 dates, conditions and the day price come from search summaries (confirm at source); coordinates, operator and drive times are Piste reference data or estimates."
+  }
+}

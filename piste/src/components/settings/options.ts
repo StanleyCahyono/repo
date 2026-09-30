@@ -2,17 +2,15 @@
  * Option lists and labels for Settings (pure constants — shared by the forms, the settings read model and the
  * server actions that validate against them).
  */
+import { CURRENCY_NAME, SUPPORTED_CURRENCIES, type SupportedCurrency } from '@/lib/domain/money'
 import type { AbilityLevel, ScoringMode, UnitPrefs } from '@/lib/domain/types'
 import type { GearPrefs } from '@/lib/db/schema'
 
-export const DISPLAY_CURRENCIES = ['USD', 'CAD', 'EUR'] as const
-export type DisplayCurrency = (typeof DISPLAY_CURRENCIES)[number]
+/** Display currencies: the app-wide supported list (src/lib/domain/money.ts). */
+export const DISPLAY_CURRENCIES = SUPPORTED_CURRENCIES
+export type DisplayCurrency = SupportedCurrency
 
-export const CURRENCY_LABEL: Record<DisplayCurrency, string> = {
-  USD: 'US dollar',
-  CAD: 'Canadian dollar',
-  EUR: 'Euro',
-}
+export const CURRENCY_LABEL: Record<DisplayCurrency, string> = CURRENCY_NAME
 
 /** Currencies a budget can be kept in (amounts are stored in this currency, never converted). */
 export const BUDGET_CURRENCIES = DISPLAY_CURRENCIES

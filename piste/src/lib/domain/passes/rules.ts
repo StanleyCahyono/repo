@@ -2,7 +2,7 @@
  * Low-level helpers shared by the access evaluator and the allowance trackers: picking the current rule version,
  * resolving shared day pools and counting consumed days.
  */
-import { isLocalDate, seasonIdFor } from '../time'
+import { isLocalDate, northernSeasonOf, type SeasonOf } from '../time'
 import type { DateRange } from '../types'
 import type { PassRuleInput, PassUsageInput } from './types'
 
@@ -48,6 +48,14 @@ export function invalidBlackouts(blackouts: readonly DateRange[]): unknown[] {
 export const usageKey = (u: { resortId: string; date: string }) => `${u.resortId}|${u.date}`
 
 /**
+ * Is a usage day in `seasonId` at its resort? `seasonOf` resolves the resort's hemisphere (a Southern Hemisphere
+ * winter — June–October 2027 — is season 2026-27); without it every resort is treated as northern.
+ */
+export function usageInSeason(u: { resortId: string; date: string }, seasonId: string, seasonOf: SeasonOf = northernSeasonOf): boolean {
+  return isLocalDate(u.date) && seasonOf(u.resortId, u.date) === seasonId
+}
+
+/**
  * Distinct resort-days consumed at any of `resortIds` within `seasonId`. Duplicate log entries for the same
  * resort and date count once. Two different member resorts on the same date count as two days (conservative).
  */
@@ -56,10 +64,11 @@ export function countUsedDays(
   resortIds: ReadonlySet<string>,
   seasonId: string,
   excludeKey: string | null = null,
+  seasonOf: SeasonOf = northernSeasonOf,
 ): number {
   const seen = new Set<string>()
   for (const u of usage) {
-    if (!resortIds.has(u.resortId) || !isLocalDate(u.date) || seasonIdFor(u.date) !== seasonId) continue
+    if (!resortIds.has(u.resortId) || !usageInSeason(u, seasonId, seasonOf)) continue
     const k = usageKey(u)
     if (k !== excludeKey) seen.add(k)
   }

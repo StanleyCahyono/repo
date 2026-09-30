@@ -180,9 +180,12 @@ export async function loadCorrectableValues(input: { resortId: string }): Promis
   const groups: Record<string, unknown> = { terrain: resort.terrain, features: resort.features, links: resort.links, season }
   const current: Record<string, unknown> = {}
   for (const { field } of CORRECTION_FIELDS) {
-    const [group, key] = field.includes('.') ? (field.split('.', 2) as [string, string]) : [null, field]
-    const obj = (group === null ? resort : groups[group]) as Record<string, unknown> | null | undefined
-    current[field] = obj ? (obj[key] ?? null) : null
+    // 'terrain.liftsByType.gondolas' → group 'terrain', path liftsByType → gondolas.
+    const dot = field.indexOf('.')
+    const [group, path] = dot > 0 ? [field.slice(0, dot), field.slice(dot + 1)] : [null, field]
+    let value: unknown = group === null ? resort : groups[group]
+    for (const k of path.split('.')) value = value && typeof value === 'object' ? (value as Record<string, unknown>)[k] : undefined
+    current[field] = value ?? null
   }
   return {
     ok: true,

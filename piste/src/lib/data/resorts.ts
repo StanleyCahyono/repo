@@ -7,7 +7,7 @@ import type { ResortRow } from '@/lib/db/rows'
 import type { FeatureInfo } from '@/lib/db/schema'
 import { aggregateDay, prepareSeries } from '@/lib/domain/conditions'
 import type { FitResult } from '@/lib/domain/fit'
-import { endOfLocalDay, hoursBetween, isLocalDate, seasonIdFor, startOfLocalDay } from '@/lib/domain/time'
+import { endOfLocalDay, hoursBetween, isLocalDate, seasonIdsForDates, startOfLocalDay } from '@/lib/domain/time'
 import type { Provenance, ScoringMode } from '@/lib/domain/types'
 import {
   forecastSnowSums,
@@ -17,7 +17,11 @@ import {
   pointsForRuns,
   resortToday,
   assessmentKey,
+  resortHemisphere,
+  resortSeasonFor,
+  resortSeasonId,
   seasonLabel,
+  seasonRowFor,
   type Bundle,
   type Correction,
   type DataCtx,
@@ -168,7 +172,7 @@ const WEATHER_STALE_H = 12
 /** Summaries for every resort (or `ids`) for one date. */
 export async function listResortSummaries(ctx: DataCtx, opts: SummaryOptions = {}): Promise<ResortSummary[]> {
   const date = opts.date && isLocalDate(opts.date) ? opts.date : ctx.today
-  const bundle = await loadBundle(ctx, { ids: opts.ids ?? null, seasons: [seasonIdFor(date)] })
+  const bundle = await loadBundle(ctx, { ids: opts.ids ?? null, seasons: seasonIdsForDates([date]) })
   return buildSummaries(bundle, { date, mode: opts.mode ?? ctx.prefs.scoringMode })
 }
 
@@ -205,10 +209,15 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     const report = reports.get(r.id)
     const event = b.status.get(r.id)
     const status = statusView(r, event, report, now)
-    const season = b.seasons.get(`${r.id}|${b.seasonId}`)
-    const opening = openingView(season, b.seasonId, today)
-    // A confirmed closure overrides the ski-day score (same rule as recommendation eligibility).
-    const closure = closureView(statusStatement(event, report), b.seasons.get(`${r.id}|${seasonIdFor(date)}`), date)
+    // The resort's "current or next" winter: normally the planning season, but a winter still under way in the
+    // resort's own season (a Southern Hemisphere winter in September) is shown until it ends.
+    const seasonId = resortSeasonId(b, r, today)
+    const season = b.seasons.get(`${r.id}|${seasonId}`)
+    const openStatement = event && (event.status === 'open' || event.status === 'partially-open') && event.localDate <= today && resortSeasonFor(r, event.localDate) === seasonId ? event : null
+    const opening = openingView(season, seasonId, today, openStatement)
+    // A confirmed closure overrides the ski-day score (same rule as recommendation eligibility), judged on the
+    // resort's own season for the date.
+    const closure = closureView(statusStatement(event, report), seasonRowFor(b, r, date), date, resortHemisphere(r))
     const score = applyClosure(scoreView(assessments.get(assessmentKey(r.id, date, mode))), closure)
     const pointRuns = b.runs.get(r.id) ?? new Map()
 
@@ -262,7 +271,7 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     else if (badges.some((x) => !x.confirmed)) gaps.push(`Pass access unconfirmed for ${seasonTxt}`)
     if (myPass.status === 'unconfirmed') gaps.push(`Access with your ${myPass.productName} is not confirmed`)
     if (expense.tier === 'incomplete') gaps.push(`Cost estimate incomplete${expense.requiredMissing.length ? `: ${expense.requiredMissing.join(' ')}` : ''}`)
-    if (opening.label === 'not-announced') gaps.push(`Opening date for ${seasonTxt} not announced`)
+    if (opening.label === 'not-announced') gaps.push(`Opening date for ${seasonLabel(seasonId)} not announced`)
     if (travel.driveMinutes !== null && travel.isEstimate) gaps.push('Drive time is a curated estimate, not live routing')
     if (travel.driveMinutes === null && !travel.airports.length) gaps.push('No travel information recorded')
     const research = catalogResearchGap(r)

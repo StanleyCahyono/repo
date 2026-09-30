@@ -11,8 +11,9 @@
  */
 import { frankfurterProvider } from './fx/frankfurter'
 import { duffelProvider } from './flights/duffel'
+import { OVERPASS_ENDPOINT, overpassProvider } from './osm/overpass'
 import { reportProviders } from './reports'
-import type { AlertsProvider, FxProvider, ResortReportProvider, TravelProvider, WeatherPointRequest, WeatherProvider } from './types'
+import type { AlertsProvider, FxProvider, ResortReportProvider, SkiAreaProvider, TravelProvider, WeatherPointRequest, WeatherProvider } from './types'
 import { nwsAlertsProvider, nwsGridWeatherProvider } from './weather/nws'
 import { openMeteoProvider } from './weather/open-meteo'
 
@@ -23,9 +24,11 @@ export const weatherProviders: WeatherProvider[] = [openMeteoProvider, nwsGridWe
 export const alertsProvider: AlertsProvider = nwsAlertsProvider
 export const fxProvider: FxProvider = frankfurterProvider
 export const travelProvider: TravelProvider = duffelProvider
+/** OpenStreetMap lifts and runs (community map data, never live status). */
+export const skiAreaProvider: SkiAreaProvider = overpassProvider
 
 export type ConnectorState = 'live' | 'needs-credentials' | 'unverified' | 'disabled'
-export type ConnectorRole = 'weather' | 'alerts' | 'resort-report' | 'fx' | 'flights' | 'link-check'
+export type ConnectorRole = 'weather' | 'alerts' | 'resort-report' | 'lifts-runs' | 'fx' | 'flights' | 'link-check'
 
 export interface ConnectorStatus {
   id: string
@@ -134,6 +137,24 @@ export function providerStatus(env: Env = process.env, reports: ResortReportProv
           ? []
           : ['Built without access to the live page. Expect "layout not recognised" failures until verified; manual report entry works meanwhile.'],
     })),
+    {
+      id: overpassProvider.id,
+      label: 'OpenStreetMap lifts & runs',
+      role: 'lifts-runs',
+      state: st(overpassProvider.id, 'live'),
+      auth: 'none',
+      credentialSet: false,
+      testMode: false,
+      coverage: 'Lift and run lists mapped by OpenStreetMap contributors, worldwide: lift types, lengths, capacity; run difficulty and lengths. Weekly for favourites and upcoming trips, on demand for any resort.',
+      sourceUrl: 'https://wiki.openstreetmap.org/wiki/Overpass_API',
+      resortId: null,
+      envVars: ['PISTE_CONTACT'],
+      notes: [
+        'Community-mapped: may be incomplete or out of date. Never live open/closed status — that is only on the resort’s own site.',
+        `Data © OpenStreetMap contributors (ODbL), read through the public Overpass API (${new URL(OVERPASS_ENDPOINT).host}); attribution is shown with every list.`,
+        ...contactNote,
+      ],
+    },
     {
       id: 'frankfurter',
       label: 'Frankfurter FX (ECB)',

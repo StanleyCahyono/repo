@@ -83,6 +83,59 @@ describe('weather points: resort-local day attribution', () => {
   })
 })
 
+describe('weather: a rate limit stops that provider for the rest of the pass', () => {
+  it('after a 429 / quota answer, skips the remaining points with a note; other providers carry on; nothing advances', async () => {
+    const db = await testDb()
+    for (const id of ['a-resort', 'b-resort', 'c-resort']) await addResort(db, { id })
+    let calls = 0
+    // Open-Meteo answers the first point, then says its daily quota is spent.
+    const openMeteo = fakeWeather((req) =>
+      ++calls === 1 ? ok(series(req, hours(T0, 24)), T0) : fail('Open-Meteo: HTTP 429 Too Many Requests — Daily API request limit exceeded. Please try again tomorrow.', 'rate-limited'),
+    )
+    const other = fakeWeather((req) => ok(series(req, hours(T0, 24)), T0), 'nws')
+    const summary = await runJob({ db, job: 'weather', trigger: 'schedule', now: T0, deps: deps({ weatherProviders: [openMeteo, other] }), maxAttempts: 1 })
+
+    // 3 resorts × 2 points: Open-Meteo was called twice (one success, one 429) and never again.
+    expect(openMeteo.calls).toHaveLength(2)
+    expect(other.calls).toHaveLength(6)
+    const om = summary.items.filter((i) => i.key.endsWith(':open-meteo'))
+    expect(om.map((i) => (i.skipped ? 'skipped' : i.ok ? 'ok' : 'failed'))).toEqual(['ok', 'failed', 'skipped', 'skipped', 'skipped', 'skipped'])
+    expect(om[1].error).toMatch(/^rate-limited: .*Daily API request limit/)
+    expect(om.slice(2).every((i) => i.written === 0 && /Skipped: Open-Meteo rate-limited this pass at a-resort:summit:open-meteo/.test(i.error ?? ''))).toBe(true)
+    expect(summary.status).toBe('partial')
+    expect(summary.notes).toEqual([expect.stringMatching(/^Open-Meteo rate-limited the pass at a-resort:summit:open-meteo: it was not called again, so 4 remaining points were skipped/)])
+
+    // Skipped points wrote nothing: one error run (the 429) and no run at all for the skipped points.
+    const runs = await db.select().from(weatherRuns).where(eq(weatherRuns.provider, 'open-meteo'))
+    expect(runs.map((r) => [r.resortId, r.pointKey, r.status])).toEqual([
+      ['a-resort', 'base', 'ok'],
+      ['a-resort', 'summit', 'error'],
+    ])
+    // "Last successful update" of a resort only follows its own real fetches (here: the other provider's).
+    expect(await lastSuccess(db, 'weather', 'b-resort')).toBe(summary.finishedAt)
+  })
+
+  it('a pass where the only provider is rate-limited from the start fails and advances nothing', async () => {
+    const db = await testDb()
+    for (const id of ['a-resort', 'b-resort']) await addResort(db, { id })
+    const openMeteo = fakeWeather(() => fail('Open-Meteo: HTTP 429 Too Many Requests', 'rate-limited'))
+    const summary = await runJob({ db, job: 'weather', trigger: 'schedule', now: T0, deps: deps({ weatherProviders: [openMeteo] }), maxAttempts: 1 })
+    expect(openMeteo.calls).toHaveLength(1)
+    expect(summary.status).toBe('error')
+    expect(summary.items.filter((i) => i.skipped)).toHaveLength(3)
+    expect(await lastSuccess(db, 'weather')).toBeNull()
+    expect(await lastSuccess(db, 'weather', 'b-resort')).toBeNull()
+  })
+
+  it('other failures do not stop the provider', async () => {
+    const db = await testDb()
+    await addResort(db, { id: 'a-resort' })
+    const flaky = fakeWeather(() => fail('Open-Meteo: timed out', 'timeout'))
+    await refreshWeather(ctx(db, { deps: deps({ weatherProviders: [flaky] }) }))
+    expect(flaky.calls).toHaveLength(2)
+  })
+})
+
 describe('weather: a response without usable hours is a schema change, not a forecast', () => {
   /** A good run, then the same provider answers "ok" with `bad` hours. */
   async function goodThenBad(bad: HourlyWeather[]) {

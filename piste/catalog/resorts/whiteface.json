@@ -27,7 +27,7 @@
       "url": "https://whiteface.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Advertised figures: 1,220 ft base, 3,430 ft vertical measured to the top of hike-to terrain (~4,650 ft). The lift-served top is ~4,386 ft (1,337 m), used for the summit weather point"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Advertised figures: 1,220 ft base, 3,430 ft vertical measured to the top of hike-to terrain (~4,650 ft). The lift-served top is ~4,386 ft (1,337 m), used for the summit weather point Search summary (2026-09-30): 3,166 ft lift-served vertical, 3,430 ft including The Slides (hike-to); the verticalM here (1,045 m ≈ 3,430 ft) is the Slides figure."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
+    "trails": 96,
+    "lifts": 12,
     "skiableAcres": null,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 1,
+      "cableCars": 0,
+      "chairlifts": 9,
+      "surfaceLifts": 2,
+      "other": 0
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.skicentral.com/whiteface.html",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): 96 trails, 12 lifts and \"nearly 300\" skiable acres (acres left null as not exact); 3,166 ft vertical (3,430 ft with The Slides). Lift types (SkiCentral-style listing, may lag recent lift replacements): 1 gondola, 1 high-speed quad, 1 quad, 2 triples, 5 doubles, 2 surface lifts = 12."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,18 +108,40 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Whiteface date itself and past actual opening dates were not captured."
+    "notes": "OnTheSnow projects Nov 21, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Whiteface date itself and past actual opening dates were not captured."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day lift ticket, peak",
+      "category": "adult",
+      "amount": 134,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary labelled this the 2026-27 peak adult rate, but it comes from third-party listings whose season is unclear (a snowstash page in the same results was titled 2025/26). Confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://whiteface.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://whiteface.com/mountain/snow-report",
     "hours": null,
     "tickets": null,
-    "seasonPass": null,
+    "seasonPass": "https://whiteface.com/seasonpasses/",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,7 +151,8 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [
     {
@@ -144,6 +182,10 @@
     {
       "label": "Snow Pass partner resorts 2026-27 (SnowBrains, third-party)",
       "url": "https://snowbrains.com/snow-pass-partner-resorts-2026-27/"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
     }
   ],
   "travel": {
@@ -196,22 +238,23 @@
   "photo": null,
   "research": {
     "method": "web-search",
-    "date": "2026-09-28",
+    "date": "2026-09-30",
     "openQuestions": [
       "Confirm 2026-27 announced opening and closing dates (ORDA announced 2025-26 dates on 2025-11-21; 2026-27 dates likely around November 2026). Also capture the actual 2024-25 and 2025-26 opening dates.",
       "Confirm 2026-27 pass access: SKI3 terms and prices (prices rose 2026-05-01; a later deadline of 2026-08-05 applied), whether Whiteface stays on the Mountain Collective for 2026-27 (joined for 2025-26) and its day count, Frequent Skier Card terms, and the Snow Pass partner benefit.",
       "Resolve whether the listed blackout dates apply to SKI3 itself or only to the Mountain Collective discount perk.",
       "Confirm whether Whiteface is on any Ikon, Epic or Indy product for 2026-27 (believed not, unverified).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window).",
+      "Confirm 2026-27 adult day-ticket prices: a summary gave $134 as the peak adult (20-64) rate, labelled 2026-27 but from listings of unclear season.",
       "Confirm daily lift hours and whether there is any night skiing.",
-      "Confirm official deep links on whiteface.com (trail map, snow report, tickets, lessons, rentals, webcams, parking).",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), childcare, tubing and on-mountain lodging.",
+      "Confirm official deep links on whiteface.com (trail map, lift status, tickets, lessons, rentals, webcams, parking); the snow-report link follows the shared ORDA site pattern and should be checked.",
+      "Confirm skiable acres (\"nearly 300\" in the search summary — left null), snowmaking %, childcare, tubing and on-mountain lodging; the lift-type breakdown is SkiCentral-style and may lag lift replacements.",
       "Confirm elevations and base/summit coordinates (currently reference data and approximations).",
       "Get a sourced drive time from Ithaca (current value is a Piste estimate)."
     ],
     "conflicts": [
-      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research)."
+      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research).",
+      "prices: the $134 peak adult ticket was labelled 2026-27 in the search summary, but its source listings have unclear seasons. Resolution: season left null."
     ],
-    "confidenceNotes": "Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and its perks, Frequent Skier Card, Mountain Collective membership for 2025-26, Snow Pass partner listing and the 2025-11-21 opening-dates release — these are links/notes only; pass rules belong in passes.json. Everything else (coordinates, elevations, homepage, lessons/rentals, Bear Den beginner area) is Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
+    "confidenceNotes": "Updated 2026-09-30: terrain (96 trails, 12 lifts by type, \"nearly 300\" acres), the 3,166/3,430 ft vertical and a $134 peak adult price of uncertain season come from search summaries; the snow-report link is inferred from the shared ORDA site pattern. Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and its perks, Frequent Skier Card, Mountain Collective membership for 2025-26, Snow Pass partner listing and the 2025-11-21 opening-dates release — these are links/notes only; pass rules belong in passes.json. Everything else (coordinates, elevations, homepage, lessons/rentals, Bear Den beginner area) is Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
   }
 }

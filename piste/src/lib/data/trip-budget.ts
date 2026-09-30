@@ -91,7 +91,7 @@ export function myPassCover(pass: Awaited<ReturnType<typeof loadPassData>>, visi
       pass.rules.filter((r) => r.productId === o.product.id),
       visits,
       o.usage,
-      { today, names },
+      { today, names, seasonOf: pass.seasonOf },
     )
     for (const d of plan.days) if (d.verdict.canSki && !covered.has(`${d.resortId}|${d.date}`)) covered.set(`${d.resortId}|${d.date}`, o.product.name)
   }

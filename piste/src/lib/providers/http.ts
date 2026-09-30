@@ -130,6 +130,8 @@ export const HOST_MIN_INTERVAL_MS: Record<string, number> = {
   'customer-api.open-meteo.com': 100,
   'api.frankfurter.app': 500,
   'api.duffel.com': 500,
+  // A shared, donated service: its usage policy asks for a few requests at a time, spaced out.
+  'overpass-api.de': 2000,
   'www.greekpeak.net': 3000,
   'greekpeak.net': 3000,
   'www.alta.com': 3000,
@@ -189,6 +191,13 @@ export function parseRetryAfter(header: string | null, nowMs: number): number | 
   const at = Date.parse(trimmed)
   if (Number.isNaN(at)) return null
   return Math.max(0, at - nowMs)
+}
+
+/** A failure whose Retry-After is longer than the caller waits: 'rate-limited', with the wait stated. */
+export function backOff(r: HttpFailure, maxRetryAfterMs: number): HttpFailure {
+  const secs = (ms: number) => `${Math.round(ms / 1000)} s`
+  const error = `${r.error} — the server asked to retry after ${secs(r.retryAfterMs ?? 0)}, longer than the ${secs(maxRetryAfterMs)} this call waits`
+  return { ...r, errorKind: 'rate-limited', retriable: true, error, fetch: { ...r.fetch, error } }
 }
 
 export function backoffDelay(attempt: number, b: BackoffPolicy | undefined, random: () => number): number {
@@ -429,13 +438,14 @@ export function createHttpClient(overrides: Partial<HttpEnv> = {}): HttpClient {
         }
         return r
       }
+      // A Retry-After longer than this call waits is the server telling us to back off (a quota or rate limit): it
+      // is reported as 'rate-limited' — whatever the status (429 or 503) — without retrying, so a job can stop
+      // sending this source requests for the rest of its pass instead of hammering it.
+      if ((r.status === 429 || r.status === 503) && r.retryAfterMs !== null && r.retryAfterMs > maxRetryAfterMs) return backOff(r, maxRetryAfterMs)
       if (!r.retriable || n > retries) return r
       let delay = backoffDelay(n, policy.backoff, env.random)
-      if (r.retryAfterMs !== null) {
-        // Honour the server's Retry-After, but do not park a job for minutes: hand it back to the scheduler.
-        if (r.retryAfterMs > maxRetryAfterMs) return r
-        delay = Math.max(r.retryAfterMs, 0)
-      }
+      // Honour the server's Retry-After (short enough to wait for here).
+      if (r.retryAfterMs !== null) delay = Math.max(r.retryAfterMs, 0)
       await env.sleep(delay)
     }
   }

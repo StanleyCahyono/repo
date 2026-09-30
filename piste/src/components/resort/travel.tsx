@@ -1,5 +1,5 @@
 /**
- * 04 Getting there — drive from home (curated estimate vs sourced routing, with the explicit winter buffer and a
+ * 05 Getting there — drive from home (curated estimate vs sourced routing, with the explicit winter buffer and a
  * Google Maps directions link), practical vs closest airports, prefilled flight SEARCH links from ITH and the
  * alternatives (links, never fares or schedules), transfers, a small map with straight dashed lines that are
  * labelled as not routes (plus a list alternative), and winter-road / safety links.
@@ -30,7 +30,7 @@ export function TravelSection({ d, x, v }: { d: ResortDetail; x: ResortPageExtra
   return (
     <ResortSection
       id="getting-there"
-      index={4}
+      index={5}
       title="Getting there"
       meta={`From ${x.home.name}`}
       lead={t.verdict.note ? `${t.verdict.note}.` : undefined}

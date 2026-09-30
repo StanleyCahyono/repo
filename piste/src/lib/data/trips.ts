@@ -256,7 +256,7 @@ export async function getTripDetail(ctx: DataCtx, id: string): Promise<TripDetai
       b.pass.rules.filter((r) => r.productId === o.product.id),
       resortDays.map((d) => ({ resortId: d.resortId, date: d.date })),
       o.usage,
-      { today: ctx.today, names: b.names },
+      { today: ctx.today, names: b.names, seasonOf: b.pass.seasonOf },
     ),
   }))
   // Best answer per day for me, walking plans so earlier trip days consume allotments.

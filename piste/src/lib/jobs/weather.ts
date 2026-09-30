@@ -280,6 +280,16 @@ export interface WeatherJobOptions {
   forecastDays?: number
 }
 
+/**
+ * A provider that answered "rate limited" (HTTP 429, a quota such as Open-Meteo's daily limit, or a Retry-After
+ * longer than the client waits) is not called again in the same pass: every later point is recorded as skipped with
+ * this note. Skipped points write no weather run, so their last good forecast stays the latest and no "last
+ * successful update" moves; the next scheduled pass tries again.
+ */
+export function rateLimitedNote(label: string, at: string, skipped: number): string {
+  return `${label} rate-limited the pass at ${at}: it was not called again, so ${skipped} remaining point${skipped === 1 ? ' was' : 's were'} skipped — their last good forecasts are kept; the next pass tries again`
+}
+
 /** Fetch and persist forecasts for every resort weather point from every supporting provider. */
 export async function refreshWeather(ctx: JobContext, opts: WeatherJobOptions = {}): Promise<JobWorkResult> {
   const { db, now, deps } = ctx
@@ -288,14 +298,24 @@ export async function refreshWeather(ctx: JobContext, opts: WeatherJobOptions = 
   const ids = opts.resortIds ?? (ctx.target ? [ctx.target] : null)
   const resorts = await selectResorts(db, ids)
   const items: ItemOutcome[] = []
+  // Providers that rate-limited this pass: the point where it happened, and how many points were skipped since.
+  const stopped = new Map<string, { label: string; at: string; skipped: number }>()
+  const notes = () => [...stopped.values()].map((x) => rateLimitedNote(x.label, x.at, x.skipped))
   for (const resort of resorts) {
-    if (ctx.signal?.aborted) return { items, notes: [STOPPED_NOTE] }
+    if (ctx.signal?.aborted) return { items, notes: [STOPPED_NOTE, ...notes()] }
     for (const request of weatherRequests(resort)) {
       for (const provider of deps.weatherProviders) {
         const key = `${resort.id}:${request.pointKey}:${provider.id}`
         try {
           if (!provider.supports(request)) {
             items.push({ key, target: resort.id, ok: true, skipped: true, written: 0 })
+            continue
+          }
+          const halted = stopped.get(provider.id)
+          if (halted) {
+            // Neither a success nor a failure: not fetched at all. Its last good run is untouched.
+            halted.skipped++
+            items.push({ key, target: resort.id, ok: true, skipped: true, written: 0, error: `Skipped: ${provider.label} rate-limited this pass at ${halted.at}` })
             continue
           }
           const result = rejectEmptySeries(
@@ -320,6 +340,7 @@ export async function refreshWeather(ctx: JobContext, opts: WeatherJobOptions = 
             const error = `${result.errorKind}: ${result.error}`
             await recordWeatherFailure(db, { resort, request, provider, error, sourceUrl: result.fetches[0]?.url ?? null, now })
             items.push({ key, target: resort.id, ok: false, written: 0, error })
+            if (result.errorKind === 'rate-limited') stopped.set(provider.id, { label: provider.label, at: key, skipped: 0 })
           }
         } catch (e) {
           // Per-source isolation: a DB or adapter bug for one point never aborts the others.
@@ -328,7 +349,8 @@ export async function refreshWeather(ctx: JobContext, opts: WeatherJobOptions = 
       }
     }
   }
-  return { items }
+  const n = notes()
+  return n.length ? { items, notes: n } : { items }
 }
 
 /** Official warnings (e.g. NWS) → weather_alerts. Alerts no longer active and expired alerts are removed. */

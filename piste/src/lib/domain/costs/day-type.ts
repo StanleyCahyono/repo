@@ -3,6 +3,10 @@
  * (computed per season, so the same config serves later seasons), an optional Christmas–New Year period, and
  * user-added dates/ranges. Holiday wins over weekend. Resorts publish their own "holiday"/"peak" calendars —
  * those belong on the price snapshot's appliesFrom/To, not here.
+ *
+ * The calendar is a North American one: it applies to resorts in the US and Canada only (HOLIDAY_CALENDAR_COUNTRIES).
+ * Everywhere else (Europe, Japan, Australia, New Zealand…) days are weekday or weekend only — national and school
+ * holidays there are not modelled.
  */
 import { DateTime } from 'luxon'
 import { addDays, isLocalDate, isWeekend, seasonIdFor } from '../time'
@@ -117,11 +121,26 @@ function seasonHolidays(seasonId: string, config: DayTypeConfig): Holiday[] {
   return hit
 }
 
+/** Countries whose resorts use the holiday calendar (US federal holidays + the Christmas–New Year period). */
+export const HOLIDAY_CALENDAR_COUNTRIES: readonly string[] = ['US', 'CA']
+
+/** Does the holiday calendar apply to a resort in `country` (ISO 3166-1 alpha-2)? Unknown country → no. */
+export function holidayCalendarApplies(country: string | null | undefined): boolean {
+  return !!country && HOLIDAY_CALENDAR_COUNTRIES.includes(country.toUpperCase())
+}
+
+/**
+ * Day type of a resort-local date. `country` is the resort's country: the holiday calendar applies only in the US
+ * and Canada, elsewhere a day is a weekday or a weekend day. Omitted (undefined) → the calendar applies (callers
+ * pricing a resort day should always pass the country).
+ */
 export function dayTypeFor(
   date: string,
   config: DayTypeConfig = DEFAULT_DAY_TYPE_CONFIG,
+  country?: string | null,
 ): { dayType: DayType; holidayName: string | null } {
   if (!isLocalDate(date)) throw new Error(`dayTypeFor: invalid local date ${String(date)}`)
+  if (country !== undefined && !holidayCalendarApplies(country)) return { dayType: isWeekend(date) ? 'weekend' : 'weekday', holidayName: null }
   const hit = seasonHolidays(seasonIdFor(date), config).find((h) => h.date === date)
   if (hit) return { dayType: 'holiday', holidayName: hit.name }
   return { dayType: isWeekend(date) ? 'weekend' : 'weekday', holidayName: null }

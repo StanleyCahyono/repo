@@ -8,6 +8,7 @@
  *    log a ski day, units + currency, theme; a reload keeps everything (IndexedDB).
  * 3. Exports: a trip's ICS download and "Download my data" (a SQLite file).
  * 4. Maps: MapLibre starts from the Blob worker and draws a style (served by the test, the sandbox has no network).
+ *    OpenStreetMap lifts & runs load on demand from a resort page, from Overpass fixtures served by the test.
  * 5. Demo: generation from the UI (timed), every route in demo mode, then back to live with live data unchanged.
  * Screenshots (390 and 1440 px, light and dark) of Today, Explore, a resort, Trips and Season with --shots.
  * Expected network failures (the in-page scheduler calling weather APIs without internet) are not counted as errors.
@@ -389,6 +390,35 @@ async function main() {
     if (schematic) throw new Error('fell back to the schematic map')
     if (errors.length) throw new Error(errors[0])
     return `${markers} markers on a live MapLibre canvas`
+  })
+
+  await step('Lifts & runs load from OpenStreetMap on demand (Overpass served by the test)', async () => {
+    const page = await ctx.newPage()
+    const errors = watch(page)
+    const fixture = (name) => fs.readFileSync(path.join(HERE, '..', 'src', 'lib', 'providers', 'osm', '__fixtures__', name), 'utf8')
+    // Only this resort's requests are answered: the in-page scheduler's own loads (favourites) stay offline.
+    const base = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'catalog', 'resorts', 'ski-arlberg.json'), 'utf8')).weatherPoints[0]
+    const mark = `${base.lat.toFixed(5)},${base.lon.toFixed(5)}`
+    const asked = []
+    await page.route('https://overpass-api.de/**', (route) => {
+      const q = decodeURIComponent((route.request().postData() ?? '').replace(/^data=/, ''))
+      const kind = q.includes('out tags bb') ? 'sites' : q.includes('map_to_area') ? 'area' : 'bbox'
+      if (kind === 'sites' && !q.includes(mark)) return route.abort()
+      asked.push(kind)
+      const name = kind === 'sites' ? 'overpass-arlberg-sites.json' : kind === 'area' ? 'overpass-arlberg-area-empty.json' : 'overpass-arlberg-bbox.json'
+      return route.fulfill({ contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: fixture(name) })
+    })
+    await page.goto(FILE + '#/resorts/ski-arlberg')
+    await ready(page)
+    const section = page.getByRole('region', { name: 'Lifts & runs' })
+    await expect(section.getByText(/Not loaded yet/)).toBeVisible()
+    await section.getByRole('button', { name: 'Load lifts & runs from OpenStreetMap' }).click()
+    await expect(section.getByText('Galzigbahn', { exact: true })).toBeVisible({ timeout: 60_000 })
+    await expect(section.getByText(/1 green · 2 blue · 1 red · 1 black · 2 freeride \/ itinerary/)).toBeVisible()
+    await expect(section.getByRole('link', { name: /© OpenStreetMap contributors/ })).toBeVisible()
+    await page.close()
+    if (errors.length) throw new Error(errors[0])
+    return `requests: ${asked.join(', ')} — lifts listed, runs in European colours, attribution shown`
   })
 
   await screenshots(ctx, 'live')

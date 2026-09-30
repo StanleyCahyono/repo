@@ -9,7 +9,7 @@
  * No fallback across day types: a weekend price is not used for a holiday.
  */
 import { DateTime } from 'luxon'
-import { daysBetween, isLocalDate, seasonIdFor } from '../time'
+import { daysBetween, isLocalDate, seasonIdForHemisphere, type Hemisphere } from '../time'
 import type { Provenance } from '../types'
 import type { DayType } from './day-type'
 
@@ -52,6 +52,11 @@ export interface PriceQuery {
   now: string
   /** Home-local date — for date-only expiry / purchase-by. Defaults to the UTC date of `now`. */
   today?: string | null
+  /**
+   * The resort's hemisphere (default north): a season-tagged price applies in the resort's own season for `date` —
+   * a Southern Hemisphere winter (June–October of year Y) is season '(Y-1)-(YY)'.
+   */
+  hemisphere?: Hemisphere
 }
 
 export interface PriceSelection {
@@ -119,7 +124,7 @@ function dayTypeScore(s: PriceSnapshotInput, dayType: DayType): number | null {
 }
 
 export function selectPrice(snapshots: readonly PriceSnapshotInput[], q: PriceQuery): PriceSelection {
-  const season = seasonIdFor(q.date)
+  const season = seasonIdForHemisphere(q.date, q.hemisphere ?? 'north')
   const category = q.category?.toLowerCase() ?? null
   let expired = 0
   const scored: { s: PriceSnapshotInput; quality: number; spec: number; span: number }[] = []

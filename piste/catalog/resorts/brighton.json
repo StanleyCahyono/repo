@@ -24,10 +24,10 @@
     "summitM": 3200,
     "verticalM": 532,
     "source": {
-      "url": "https://www.brightonresort.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base about 8,755 ft, top about 10,500 ft, vertical about 1,745 ft (resort-published figures as remembered; confirm)"
+      "url": "https://www.skiutah.com/members/brighton/snowreport",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary of Ski Utah's Brighton snow-report page: base 8,755 ft, peak 10,500 ft (matches the earlier Piste reference figures); vertical derived as the difference (1,745 ft)."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,24 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 66,
+    "lifts": 6,
+    "skiableAcres": 1050,
+    "beginnerPct": 21,
+    "intermediatePct": 40,
+    "advancedPct": 39,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/utah/brighton-resort/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: OnTheSnow overview, Visit Utah, Visit Salt Lake, Ski Utah family guide): 1,050+ skiable acres (stored as 1,050), 66 runs, 6 lifts, 21% beginner / 40% intermediate / 39% advanced; night skiing on 250+ acres with 32 lighted runs, Monday to Saturday nights. Lift types and carpets not stated; season not stated."
+    }
   },
   "features": {
     "nightSkiing": true,
@@ -72,7 +81,7 @@
       "url": "https://www.brightonresort.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing on part of the mountain is a long-standing Brighton feature; 2026-27 nights and hours are unconfirmed"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing on part of the mountain is a long-standing Brighton feature; 2026-27 nights and hours are unconfirmed Search summary (2026-09-30; OnTheSnow/Visit Utah results): night skiing covers 250+ acres with 32 lighted runs, Monday to Saturday nights."
     }
   },
   "character": "A mid-sized ski area at the top of Big Cottonwood Canyon, next to Solitude, with a strong local and snowboard following, terrain parks and lift-served night skiing on part of the mountain.",
@@ -91,20 +100,54 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-02",
+        "closed": null,
+        "source": {
+          "url": "https://www.skiutah.com/blog/authors/yeti/utah-ski-resort-opening-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Search summary: 2025-26 opening Dec. 2, 2025 (Ski Utah 2025-26 opening-dates list; may show dates revised after weather delays). Closing date was still \"TBD\" in the closing-date roundup summary."
+        }
+      }
+    ],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No official 2026-27 opening date was found as of 2026-09-30. Utah roundups (OnTheSnow projected openings, Salt Lake Tribune 20 Sep 2026) list a projected Dec. 4, 2026, explicitly not yet announced, so it is not stored as an announced date. 2025-26 opened Dec. 2, 2025 (see history)."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (weekday)",
+      "category": "adult",
+      "amount": 149,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekday adult $149 (two-day $295). The season is not stated (the summary labelled it 2026-27 only because the query asked) — may be the 2025-26 listing. Confirm on brightonresort.com.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of OnTheSnow's Brighton lift-ticket listing."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.brightonresort.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
-    "seasonPass": null,
+    "tickets": "https://www.brightonresort.com/lift-tickets",
+    "seasonPass": "https://www.brightonresort.com/season-pass/winter-season-passes",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,9 +157,15 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://utahavalanchecenter.org/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Ski Utah snow report — Brighton",
+      "url": "https://www.skiutah.com/members/brighton/snowreport"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,19 +207,18 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the official 2026-27 opening (projected Dec. 4, 2026 in roundups, not announced) and closing dates.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days; Ikon Base 5 days with blackouts.",
+      "Confirm the 2026-27 day-ticket price (only an undated $149 weekday adult figure is on file), night-ticket price and season-pass prices.",
+      "Capture the actual 2025-26 closing date and 2024-25 opening/closing dates.",
+      "Confirm official snow-report, lift-status and trail-map pages on brightonresort.com (only the Ski Utah snow report was found).",
+      "Confirm lift types (6 lifts per summary; carpets not stated) and terrain parks.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on brightonresort.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: Boyne Resorts).",
-      "Confirm terrain stats (leads: ~1,050 acres, ~65 runs, 6–7 lifts plus carpets, several terrain parks), ability split and snowmaking; confirm precise base and summit coordinates (upper point is rough).",
       "Confirm the 2026-27 night-skiing schedule (nights, hours, terrain) and a night-ticket price.",
-      "Pass leads from earlier seasons (unverified): Ikon Pass and Ikon Base with limited days; Brighton season passes; any ticket option linking to Solitude. Confirm 2026-27 products, day counts and blackouts.",
       "Learning setup: confirm the Explorer lift, carpets, ski-school products and any kids-ski-free program.",
       "Parking for 2026-27 (free or paid, reservations, carpool rules).",
       "Road and avalanche context: SR-190 (Big Cottonwood Canyon, UDOT), traction law and avalanche-control closures.",
@@ -179,6 +227,6 @@
       "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (night skiing, lessons, rentals, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: terrain stats, night-skiing extent, base/peak elevations, 2025-26 opening, an undated day-ticket price and ticket/season-pass links. Still Piste reference data (unverified): identity, coordinates and weather points, operator, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

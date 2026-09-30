@@ -56,12 +56,22 @@
     "intermediatePct": 58,
     "advancedPct": 20,
     "terrainParks": 3,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 1,
+      "cableCars": 0,
+      "chairlifts": 4,
+      "surfaceLifts": 3,
+      "other": null
+    },
+    "liftCapacityPerHour": 12980,
     "season": "2025-26",
     "source": {
       "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
       "verification": "search-summary",
       "checkedOn": "2026-09-28",
-      "note": "62 trails incl. glades and parks (other official copy says 50); 8 lifts incl. the Catskill Thunder gondola and Belleayre Express detachable quad; 171 acres (other copy 174). Terrain-park count from a third-party summary."
+      "note": "62 trails incl. glades and parks (other official copy says 50); 8 lifts incl. the Catskill Thunder gondola and Belleayre Express detachable quad; 171 acres (other copy 174). Terrain-park count from a third-party summary. Lift types (reconciled 2026-09-30): 1 gondola (Catskill Thunder, 60 eight-person cabins), 4 chairlifts (Wikipedia count) and 3 handle-tow surface lifts = the official 8; learning-area magic carpets are not counted. Third-party lists showing 5 chairs (1 high-speed quad, 1 quad, 1 triple, 2 doubles) appear to predate the gondola. Uphill capacity 12,980/h is from the earlier official-domain search; a 2026-09-30 aggregator summary said 10,980/h."
     }
   },
   "features": {
@@ -132,7 +142,7 @@
       }
     ],
     "typicalText": "Among the earliest openers in New York, usually mid-to-late November with snowmaking: passholders Fri Nov 21 and public Sat Nov 22, 2025; Nov 15, 2024; passholder-only Thu Nov 16, 2023 (then closed until a planned Nov 24 reopening).",
-    "notes": "No official 2026-27 opening date found as of 2026-09-28. In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the 'Swing into Spring' promotion ran Mar 30-Apr 19, 2026 'through Closing Day', suggesting about Apr 19, 2026 (https://www.belleayre.com/event/spring-savings/)."
+    "notes": "OnTheSnow projects Nov 20, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No official 2026-27 opening date found as of 2026-09-28. In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the 'Swing into Spring' promotion ran Mar 30-Apr 19, 2026 'through Closing Day', suggesting about Apr 19, 2026 (https://www.belleayre.com/event/spring-savings/)."
   },
   "hours": [
     {
@@ -205,7 +215,50 @@
       }
     }
   ],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day lift ticket, weekday",
+      "category": "adult",
+      "amount": 119,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow listing via search summary (2026-09-30), labelled 2026-27 there, but the season is unconfirmed and it may be a window rate. Confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (online, date-based)",
+      "category": "adult",
+      "amount": 61,
+      "amountMax": 89,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "snowstash.com: \"from $61, peak $89\". The summary labelled it 2026/27, but the page title in the results read 2025/26, and an earlier (2026-09-28) summary gave $41–$89 for 2025-26. Season unconfirmed.",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.belleayre.com/",
     "trailMap": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
@@ -257,6 +310,10 @@
     {
       "label": "OnTheSnow overview",
       "url": "https://www.onthesnow.com/new-york/belleayre/ski-resort"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
     }
   ],
   "travel": {
@@ -281,21 +338,24 @@
   },
   "research": {
     "method": "web-search",
-    "date": "2026-09-28",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Adult 1-day lift ticket prices (a third-party summary said 2025-26 dynamic tickets ranged about $41-$89; not verified). Weekend/holiday tickets must be bought online in advance.",
-      "Official 2026-27 opening date.",
+      "Adult 1-day lift ticket prices for 2026-27: 2026-09-30 summaries gave $61–$89 online by date (season label unclear) and $119 adult weekday (OnTheSnow; season unclear); an earlier summary said 2025-26 dynamic tickets were about $41–$89. Weekend/holiday rules unconfirmed.",
+      "Official 2026-27 opening date (OnTheSnow projects Nov 20, 2026).",
       "Exact 2025-26 closing date (inferred about Apr 19, 2026).",
       "Tubing, childcare and on-mountain lodging availability.",
       "Webcam page URL and rentals page URL.",
       "Road distance and a sourced drive time from Ithaca.",
-      "2026-27 SKI3 pass prices, blackout scope and Snow Pass partner benefits — tracked in passes.json."
+      "2026-27 SKI3 pass prices, blackout scope and Snow Pass partner benefits — tracked in passes.json.",
+      "Confirm the lift inventory by type (gondola + 4 chairs + 3 handle tows is a reconciliation of sources) and the uphill capacity (12,980 vs 10,980 per hour)."
     ],
     "conflicts": [
       "terrain.trails: 62 (including glades and parks) (https://www.belleayre.com/mountain/trail-map-and-mountain-stats/); 50 (other official-site copy) (https://www.belleayre.com/mountain/); 51 (search summary; attribution unclear). Resolution: Used 62 from the stats page. The difference seems to depend on whether glades and parks are counted.",
       "terrain.skiableAcres: 171 (https://www.belleayre.com/mountain/trail-map-and-mountain-stats/); 174 (https://www.belleayre.com/mountain/). Resolution: Used 171.",
       "terrain.lifts: 8 lifts including the Catskill Thunder gondola and Belleayre Express detachable quad (https://www.belleayre.com/mountain/); 4 chairlifts + 1 gondola (https://en.wikipedia.org/wiki/Belleayre_Mountain); 9 lifts: 1 gondola, 2 quads, 1 triple, 2 doubles, 3 handle tows (search summary (third-party; attribution unclear)). Resolution: Used 8. Counts differ by whether carpets and handle tows are included.",
-      "passAccess SKI3 blackouts: Blackout dates Dec 25, 2026-Jan 1, 2027; Jan 16-18, 2027; Feb 13-21, 2027 (https://www.belleayre.com/mountain-collective/); SKI3 lift access valid even on sold-out days (implies full access) (https://www.belleayre.com/seasonpasses/). Resolution: Access set to unknown pending verification."
+      "passAccess SKI3 blackouts: Blackout dates Dec 25, 2026-Jan 1, 2027; Jan 16-18, 2027; Feb 13-21, 2027 (https://www.belleayre.com/mountain-collective/); SKI3 lift access valid even on sold-out days (implies full access) (https://www.belleayre.com/seasonpasses/). Resolution: Access set to unknown pending verification.",
+      "terrain.liftCapacityPerHour: 12,980/h (earlier official-domain search) vs 10,980/h (2026-09-30 aggregator summary). Resolution: kept 12,980.",
+      "terrain.liftsByType: 1 gondola + 4 chairlifts (Wikipedia) + 3 handle tows = 8 (official total) vs third-party lists of 5 chairs (1 high-speed quad, 1 quad, 1 triple, 2 doubles) + 3 surface lifts that omit or add the gondola. Resolution: used 1/4/3."
     ],
     "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Vertical, summit and base (Discovery Lodge at 2,025 ft) were confirmed by an official-domain search that did not include those numbers in the query. Sunset Lodge is at 3,325 ft and Overlook Lodge at 2,542 ft. Uphill capacity is 12,980 skiers per hour and the longest run is 12,024 ft. The terrain-park count (3) comes from a third-party summary. Night skiing is marked false because official lift hours are 9am-4pm daily. Belleayre allows uphill travel Mon-Fri during operating hours (not weekends or holidays). Both weatherPoint coordinates are approximations for weather queries only. Whether the Wikipedia coordinate marks the summit or the ski-area centroid is unverified."
   }

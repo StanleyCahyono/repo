@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 141,
+    "lifts": 13,
+    "skiableAcres": 2500,
+    "beginnerPct": 4,
+    "intermediatePct": 41,
+    "advancedPct": 38,
     "terrainParks": null,
+    "expertPct": 17,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": 1,
+      "chairlifts": 10,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/wyoming/jackson-hole/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: jacksonhole.com 2026-27 Winter page and FAQ, OnTheSnow, Wikipedia, Jackson Hole Traveler): 2,500 skiable acres, 141 trails, 13 lifts (1 aerial tram, 2 gondolas, 10 chairlifts; carpets not stated), 4% beginner / 41% intermediate / 38% advanced / 17% expert. Which result carried the ability split is unclear — confirm against the official stats. Season not stated."
+    }
   },
   "features": {
     "nightSkiing": false,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-27",
+      "text": "Planned opening Nov. 27, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://unofficialnetworks.com/2026/08/10/jackson-hole-announces-opening-day/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "JHMR announced its 2026-27 opening day in Aug 2026 (Unofficial Networks, 10 Aug 2026; SnowBrains). The Nov. 27, 2026 date comes from search summaries of 2026-27 opening-date roundups (Powder Ikon list) and JH snow-report listings. Confirm on jacksonhole.com."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -93,18 +113,40 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 27, 2026 (announced Aug 2026). Closing not announced in the results; OnTheSnow \"projected closing\" listing (https://www.onthesnow.com/united-states/projected-closing), a projection, not an announcement — Apr. 11, 2027 projected. Confirm."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (lowest advance to peak)",
+      "category": "adult",
+      "amount": 85,
+      "amountMax": 339,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27: single-day adult tickets \"starting at $85\" (lowest advance/early-bird price on select dates; may come from jacksonhole.com's lift-ticket page) up to a $339 peak adult ticket.",
+      "source": {
+        "url": "https://unofficialnetworks.com/2026/09/10/how-expensive-is-skiing-2026/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 price roundups (Unofficial Networks \"How Expensive Is Skiing?\", 10 Sep 2026; SnowBrains)."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.jacksonhole.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.jacksonhole.com/mountain-report",
     "hours": null,
-    "tickets": null,
-    "seasonPass": null,
+    "tickets": "https://www.jacksonhole.com/lift-tickets",
+    "seasonPass": "https://www.jacksonhole.com/season-pass",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,9 +156,27 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://bridgertetonavalanchecenter.org/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "2026-27 winter overview (official)",
+      "url": "https://www.jacksonhole.com/winter"
+    },
+    {
+      "label": "Jackson Hole facts & FAQs (official)",
+      "url": "https://www.jacksonhole.com/blog/jackson-hole-faqs"
+    },
+    {
+      "label": "Ikon Pass at JHMR (official)",
+      "url": "https://www.jacksonhole.com/ikon-pass"
+    },
+    {
+      "label": "Mountain Collective at JHMR (official)",
+      "url": "https://www.jacksonhole.com/the-mountain-collective"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -171,24 +231,22 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing date (OnTheSnow projects Apr. 11, 2027; not announced in the results).",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days; Mountain Collective 2 days. Unclear: whether Ikon holders need reservations (a summary said so, possibly an old rule); Ikon Base terms not found.",
+      "Confirm the 2026-27 day-ticket range ($85 lowest advance to $339 peak) on jacksonhole.com and the window price.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
+      "Confirm the official ability split (summary: 4/41/38/17), carpets/surface lifts and a lift-status page.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on jacksonhole.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: independently owned by the Kemmerer family).",
-      "Confirm terrain stats (leads: ~2,500+ acres, 130+ named runs, about 13–15 lifts including the Aerial Tram and the Bridger Gondola), ability split, parks, snowmaking, tubing and childcare.",
       "Confirm Aerial Tram hours versus chairlift hours.",
-      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer days plus blackouts on Ikon Base); Mountain Collective days; resort season passes. Confirm 2026-27 terms and any reservation rule.",
       "Learning setup: confirm base-area learning lifts (leads: Teewinot, Eagle's Rest), carpets and lesson products.",
       "Teton Pass (WY-22) has had closures, including a 2024 road collapse (reference) — confirm current status if using the IDA route.",
       "JAC 2026-27 winter service and IDA alternative; START Bus schedule."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, Teton Village lodging, base-area learning terrain) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats, the 2026-27 ticket range, and snow-report/ticket/season-pass links. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

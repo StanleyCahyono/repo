@@ -22,7 +22,7 @@ import {
 import { computeDayBasket, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/costs'
 import { formatMoney, formatMoneyRange, money } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL, evaluateAccess, latestRule, type AccessStatus, type AccessVerdict } from '@/lib/domain/passes'
-import { addDays, formatLocalDate, isLocalDate, localTimeToInstant, nextSaturday, seasonIdFor, zoneAbbrev } from '@/lib/domain/time'
+import { addDays, formatLocalDate, hemisphereOf, isLocalDate, localTimeToInstant, nextSaturday, planningSeasonBounds, seasonIdForHemisphere, seasonIdsForDates, zoneAbbrev } from '@/lib/domain/time'
 import { formatDuration } from '@/lib/domain/units'
 import {
   COMPONENT_LABEL,
@@ -37,7 +37,8 @@ import {
   type ScoringMode,
   type UnitPrefs,
 } from '@/lib/domain/types'
-import { isLive, loadBundle, loadResortRows, seasonLabel, type Bundle, type DataCtx } from './core'
+import { REGION_GROUP_ORDER } from '@/components/explore/regions'
+import { hasSouthernResorts, isLive, loadBundle, loadResortRows, seasonLabel, type Bundle, type DataCtx } from './core'
 import { hoursForDate } from './resort-detail'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { ownedVerdicts, type EventView, eventView } from './views'
@@ -46,17 +47,44 @@ import { ownedVerdicts, type EventView, eventView } from './views'
 // Shared helpers
 
 const EAST = new Set(['NY', 'PA', 'VT', 'NH', 'ME', 'MA', 'CT', 'RI', 'NJ', 'MD', 'WV', 'VA', 'MI', 'OH', 'ON', 'QC'])
-const EUROPE = new Set(['AT', 'CH', 'FR', 'IT', 'DE', 'AD', 'SI', 'NO', 'SE', 'FI', 'ES'])
 
-/** Broad grouping for the region filter: "Northeast US", "Western US", "Canada", "Europe", "International". */
+/** Region groups by country outside North America: the Alps by country, then the other ski regions. */
+const COUNTRY_GROUP: Record<string, string> = {
+  AT: 'Austria',
+  CH: 'Switzerland',
+  FR: 'France',
+  IT: 'Italy',
+  DE: 'Germany',
+  AD: 'Andorra & Spain',
+  ES: 'Andorra & Spain',
+  SE: 'Scandinavia',
+  NO: 'Scandinavia',
+  FI: 'Scandinavia',
+  SI: 'Other Europe',
+  PL: 'Other Europe',
+  CZ: 'Other Europe',
+  SK: 'Other Europe',
+  BG: 'Other Europe',
+  JP: 'Japan',
+  KR: 'South Korea',
+  AU: 'Australia & New Zealand',
+  NZ: 'Australia & New Zealand',
+  CL: 'South America',
+  AR: 'South America',
+}
+
+/**
+ * Grouping for the region filter and the map's views: "Northeast US", "Western US", "Eastern/Western Canada", the
+ * Alps by country ("Austria", "Switzerland", "France", "Italy", "Germany"), "Andorra & Spain", "Scandinavia",
+ * "Japan", "South Korea", "Australia & New Zealand" — else "International".
+ */
 export function regionGroup(country: string, stateProvince: string | null): string {
   if (country === 'US') return stateProvince && EAST.has(stateProvince) ? 'Northeast US' : 'Western US'
   if (country === 'CA') return stateProvince && EAST.has(stateProvince) ? 'Eastern Canada' : 'Western Canada'
-  if (EUROPE.has(country)) return 'Europe'
-  return 'International'
+  return COUNTRY_GROUP[country] ?? 'International'
 }
 
-const GROUP_ORDER = ['Northeast US', 'Eastern Canada', 'Western US', 'Western Canada', 'Europe', 'International']
+const GROUP_ORDER: readonly string[] = REGION_GROUP_ORDER
 
 function researchLevel(b: Bundle, id: string): ResearchLevel {
   const method = b.byId.get(id)?.row.research?.method ?? null
@@ -161,6 +189,7 @@ function productVerdicts(b: Bundle, resortId: string, date: string): ExploreFace
       poolRules: productRules,
       today: b.ctx.today,
       names: b.names,
+      seasonOf: b.pass.seasonOf,
     })
     out.push({ id: p.id, status: v.status, canSki: v.canSki, headline: v.headline, confirmAtSource: v.confirmAtSource })
   }
@@ -212,23 +241,27 @@ function facetsFor(b: Bundle, sum: ResortSummary): ExploreFacets {
   }
 }
 
-export function resolveExploreDate(input: string | null | undefined, today: string, seasonId: string): string {
-  const b = seasonBoundsFor(seasonId)
+export function resolveExploreDate(input: string | null | undefined, today: string, seasonId: string, withSouthern = false): string {
+  const b = seasonBoundsFor(seasonId, withSouthern)
   return input && isLocalDate(input) && input >= b.min && input <= b.max ? input : today
 }
 
-function seasonBoundsFor(seasonId: string): { min: string; max: string } {
-  const y = Number(seasonId.slice(0, 4))
-  return { min: `${y}-07-01`, max: `${y + 1}-06-30` }
+/**
+ * Dates the planning season spans: 1 Jul → 30 Jun, extended to 31 Dec of the second year when the catalog has
+ * Southern Hemisphere resorts (their 2026–27 winter is June–October 2027).
+ */
+function seasonBoundsFor(seasonId: string, withSouthern: boolean): { min: string; max: string } {
+  const b = planningSeasonBounds(seasonId, withSouthern)
+  return { min: b.from, max: b.to }
 }
 
 export async function getExploreView(ctx: DataCtx, opts: { date?: string | null; mode?: ScoringMode | null } = {}): Promise<ExploreView> {
   const seasonId = ctx.prefs.activeSeasonId
-  const bounds = seasonBoundsFor(seasonId)
+  const bounds = seasonBoundsFor(seasonId, await hasSouthernResorts(ctx.db))
   // Allow today even when it falls outside the active season window (preseason in live mode).
   const date = opts.date && isLocalDate(opts.date) && ((opts.date >= bounds.min && opts.date <= bounds.max) || opts.date === ctx.today) ? opts.date : ctx.today
   const mode = opts.mode ?? ctx.prefs.scoringMode
-  const b = await loadBundle(ctx, { seasons: [seasonIdFor(date)] })
+  const b = await loadBundle(ctx, { seasons: seasonIdsForDates([date]) })
   const summaries = await buildSummaries(b, { date, mode })
   const sl = seasonLabel(b.seasonId)
   const rows: ExploreRow[] = summaries.map((sum) => ({
@@ -465,13 +498,13 @@ export async function getCompareView(
   opts: { ids: readonly string[]; date?: string | null; mode?: ScoringMode | null; party?: number | null; productId?: string | null },
 ): Promise<CompareView> {
   const seasonId = ctx.prefs.activeSeasonId
-  const bounds = seasonBoundsFor(seasonId)
+  const bounds = seasonBoundsFor(seasonId, await hasSouthernResorts(ctx.db))
   const date = opts.date && isLocalDate(opts.date) && ((opts.date >= bounds.min && opts.date <= bounds.max) || opts.date === ctx.today) ? opts.date : ctx.today
   const mode = opts.mode ?? ctx.prefs.scoringMode
   const party = Math.min(12, Math.max(1, Math.round(opts.party ?? 1)))
   const unique = [...new Set(opts.ids.filter((x) => /^[a-z0-9-]{1,80}$/.test(x)))]
   const wanted = unique.slice(0, 4)
-  const b = await loadBundle(ctx, { ids: wanted.length ? wanted : ['__none__'], seasons: [seasonIdFor(date)] })
+  const b = await loadBundle(ctx, { ids: wanted.length ? wanted : ['__none__'], seasons: seasonIdsForDates([date]) })
   const sl = seasonLabel(b.seasonId)
   const famName = new Map(b.pass.families.map((f) => [f.id, f.name]))
   const [summaries, schedules, hotelRows, allResorts, favRows] = await Promise.all([
@@ -524,6 +557,7 @@ export async function getCompareView(
                   poolRules: productRules,
                   today: ctx.today,
                   names: b.names,
+                  seasonOf: b.pass.seasonOf,
                 }),
                 owned: !!ownedPass,
                 prov: (rule?.prov as Provenance | null | undefined) ?? null,
@@ -565,8 +599,10 @@ export async function getCompareView(
       const basketPass = verdicts.map((x) => x.v).sort((a, c) => Number(c.canSki) - Number(a.canSki))[0] ?? null
       const lunch =
         p.budget.lunchEstimateMinor != null && Number.isInteger(p.budget.lunchEstimateMinor) ? money(p.budget.lunchEstimateMinor, p.budget.currency) : null
+      const row = b.byId.get(id)?.row
+      const hemisphere = hemisphereOf(row?.lat)
       const basket = computeDayBasket(
-        { resortId: id, date, prices: b.prices.get(id) ?? [], pass: basketPass },
+        { resortId: id, date, prices: b.prices.get(id) ?? [], pass: basketPass, country: row ? row.country : null, hemisphere },
         { currency: p.currency, rentalOption: p.gear.rentalOption, lunch, partySize: party },
         { now: ctx.now, today: ctx.today, rates: b.fx },
       )
@@ -583,8 +619,8 @@ export async function getCompareView(
 
       // Hours for the date (published vs live), in the resort's zone.
       const mySchedules = schedules.filter((x) => x.resortId === id)
-      const forDate = hoursForDate(mySchedules, date)
-      const dateSeason = seasonIdFor(date)
+      const forDate = hoursForDate(mySchedules, date, hemisphere)
+      const dateSeason = seasonIdForHemisphere(date, hemisphere)
       const otherSeason = mySchedules.some((x) => x.seasonId && x.seasonId !== dateSeason)
       const hoursNote = forDate.length
         ? 'Published hours do not mean every lift is running.'
@@ -942,7 +978,7 @@ export async function getEventsView(ctx: DataCtx): Promise<EventsView> {
       })),
     today: ctx.today,
     seasonLabel: sl,
-    seasonBounds: seasonBoundsFor(b.seasonId),
+    seasonBounds: seasonBoundsFor(b.seasonId, b.resorts.some((r) => hemisphereOf(r.row.lat) === 'south')),
     demo: !isLive(ctx),
     now: ctx.now,
     lastVerifiedAt: verified[verified.length - 1] ?? null,

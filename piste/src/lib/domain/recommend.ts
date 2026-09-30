@@ -20,7 +20,7 @@ import type { Curve } from './conditions/types'
 import { ageLabel } from './conditions/format'
 import type { FitComponent, FitResult, TravelVerdict } from './fit'
 import { formatMoney, type Money } from './money'
-import { formatLocalDate, hoursBetween, seasonIdFor } from './time'
+import { formatLocalDate, hoursBetween, seasonIdForHemisphere, type Hemisphere } from './time'
 import {
   OPERATING_STATUS_LABEL,
   SCORING_MODE_LABEL,
@@ -34,6 +34,7 @@ import {
   type UnitPrefs,
 } from './types'
 import { formatDuration, formatSnow } from './units'
+import { LONG_HAUL_NOTE } from './geo'
 
 // ---------------------------------------------------------------------------
 // Presets
@@ -127,7 +128,15 @@ export interface CandidateOps {
   actualOpening: string | null
   announcedClosing: string | null
   actualClosing: string | null
+  /**
+   * The resort's hemisphere (default north): it decides which season a date belongs to — a Southern Hemisphere
+   * winter (June–October of year Y) is season '(Y-1)-(YY)', so its season changes on 1 January, not 1 July.
+   */
+  hemisphere?: Hemisphere
 }
+
+/** Season of a date at the candidate's resort. */
+const seasonOfDate = (o: Pick<CandidateOps, 'hemisphere'>, date: string) => seasonIdForHemisphere(date, o.hemisphere ?? 'north')
 
 export interface CandidateConditions {
   score: number | null
@@ -208,6 +217,16 @@ export interface RecommendInput {
   appMode?: AppMode
   /** Display units for explanation text (snow amounts); centimetres when not given. */
   units?: UnitPrefs | null
+  /**
+   * Hemisphere of home (default north). "Preseason" (no resort has opened yet this season) is judged over resorts in
+   * this hemisphere only: an August opening in New Zealand says nothing about the winter at home, and vice versa.
+   */
+  homeHemisphere?: Hemisphere
+  /**
+   * Resorts left out before ranking because they are more than a long flight from home (see domain/geo.ts,
+   * LONG_HAUL_KM) — reported so the answer can say so; they are planned as trips, never ranked here.
+   */
+  longHaulExcluded?: number
 }
 
 // ---------------------------------------------------------------------------
@@ -278,6 +297,8 @@ export interface Recommendation {
   noWinnerReason: string | null
   /** Set when the requested weights could not be used (e.g. custom weights all zero). */
   weightsNote: string | null
+  /** Resorts not ranked because they are more than a long flight from home (planned as trips instead). */
+  longHaulExcluded: number
 }
 
 // ---------------------------------------------------------------------------
@@ -290,12 +311,12 @@ type DayClass =
 const fmt = (d: string) => formatLocalDate(d)
 const isOpenStatus = (s: OperatingStatus | null) => s === 'open' || s === 'partially-open'
 
-/** Has the resort actually opened in the season containing `date` (as of its local today)? */
+/** Has the resort actually opened in the season containing `date` (as of its local today, in its hemisphere)? */
 export function hasOpenedThisSeason(c: RecommendCandidate, date: string = c.today): boolean {
   const o = c.ops
-  const season = seasonIdFor(date)
-  if (o.actualOpening && o.actualOpening <= c.today && seasonIdFor(o.actualOpening) === season) return true
-  return isOpenStatus(o.status) && !!o.statusDate && o.statusDate <= c.today && seasonIdFor(o.statusDate) === season
+  const season = seasonOfDate(o, date)
+  if (o.actualOpening && o.actualOpening <= c.today && seasonOfDate(o, o.actualOpening) === season) return true
+  return isOpenStatus(o.status) && !!o.statusDate && o.statusDate <= c.today && seasonOfDate(o, o.statusDate) === season
 }
 
 export type ClosureKind = 'season-ended' | 'before-opening' | 'closed-for-season' | 'temporarily-closed'
@@ -313,9 +334,9 @@ export interface ConfirmedClosure {
  * season" over the summer — and closes nothing.
  */
 function closesThisSeason(o: CandidateOps, sd: string): boolean {
-  if (o.actualOpening && seasonIdFor(o.actualOpening) === seasonIdFor(sd)) return o.actualOpening <= sd
+  if (o.actualOpening && seasonOfDate(o, o.actualOpening) === seasonOfDate(o, sd)) return o.actualOpening <= sd
   const start = o.announcedOpening ?? o.estimatedOpenFrom
-  return !start || seasonIdFor(start) !== seasonIdFor(sd) || sd >= start
+  return !start || seasonOfDate(o, start) !== seasonOfDate(o, sd) || sd >= start
 }
 
 /**
@@ -335,7 +356,7 @@ export function confirmedClosure(o: CandidateOps, date: string): ConfirmedClosur
   if (o.actualOpening && date < o.actualOpening) {
     return { kind: 'before-opening', reason: `Not operating on ${fmt(date)} — the season opened ${fmt(o.actualOpening)}` }
   }
-  if (s === 'closed-for-season' && sd && sd <= date && seasonIdFor(sd) === seasonIdFor(date) && closesThisSeason(o, sd)) {
+  if (s === 'closed-for-season' && sd && sd <= date && seasonOfDate(o, sd) === seasonOfDate(o, date) && closesThisSeason(o, sd)) {
     return { kind: 'closed-for-season', reason: `Closed for the season (reported ${fmt(sd)})` }
   }
   if (s === 'temporarily-closed' && sd === date) return { kind: 'temporarily-closed', reason: `Temporarily closed on ${fmt(date)} (reported)` }
@@ -641,8 +662,10 @@ function dominantKind(kinds: readonly ExcludedResort['kind'][]): ExcludedResort[
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
 
 /** Why there is no winner, from what actually excluded the resorts (never a generic "nothing is open"). */
-export function describeNoWinner(a: { candidates: number; preseason: boolean; excluded: readonly ExcludedResort[]; statusUnknown: number }): string {
-  if (a.candidates === 0) return 'No resorts to compare yet.'
+export function describeNoWinner(a: { candidates: number; preseason: boolean; excluded: readonly ExcludedResort[]; statusUnknown: number; longHaul?: number }): string {
+  if (a.candidates === 0) {
+    return a.longHaul ? `No resort within a long flight of home to compare. ${LONG_HAUL_NOTE}.` : 'No resorts to compare yet.'
+  }
   if (a.preseason) return 'Preseason — no resort has reported opening yet this season. Watch openings instead.'
   const n = (k: ExcludedResort['kind']) => a.excluded.filter((e) => e.kind === k).length
   const closed = n('closed')
@@ -674,10 +697,12 @@ export function recommend(input: RecommendInput): Recommendation {
   const unknown: (Scored & { otherDates: RankedOption['otherDates'] })[] = []
   const excluded: ExcludedResort[] = []
   let anyOpened = false
+  const home = input.homeHemisphere ?? 'north'
+  const atHome = (c: RecommendCandidate) => (c.ops.hemisphere ?? 'north') === home
 
   const candidates = [...input.candidates].sort((a, b) => (a.resortId < b.resortId ? -1 : a.resortId > b.resortId ? 1 : 0))
   for (const c of candidates) {
-    if (dates.some((d) => hasOpenedThisSeason(c, d))) anyOpened = true
+    if (atHome(c) && dates.some((d) => hasOpenedThisSeason(c, d))) anyOpened = true
     const perDate: { date: string; cls: DayClass; scored: Scored | null }[] = dates.map((date) => {
       const day = c.days.find((d) => d.date === date)
       let cls = classifyDay(c, day, date, input.now)
@@ -721,7 +746,8 @@ export function recommend(input: RecommendInput): Recommendation {
     list.sort(compareScored).map((s, i) => ({ ...s.option, rank: i + 1, otherDates: s.otherDates }))
   const ranked = rank(eligible)
   const statusUnknown = rank(unknown)
-  const preseason = candidates.length > 0 && !anyOpened
+  // Preseason is a statement about the home hemisphere's winter; resorts elsewhere never start or end it.
+  const preseason = candidates.some(atHome) && !anyOpened
   const winner = preseason ? null : (ranked[0] ?? null)
   const alternatives = winner ? ranked.slice(1, 1 + MAX_ALTERNATIVES) : []
 
@@ -748,7 +774,10 @@ export function recommend(input: RecommendInput): Recommendation {
     explanation,
     evidenceLimitations: winner ? winner.limitations : [],
     preseason,
-    noWinnerReason: winner ? null : describeNoWinner({ candidates: candidates.length, preseason, excluded, statusUnknown: statusUnknown.length }),
+    noWinnerReason: winner
+      ? null
+      : describeNoWinner({ candidates: candidates.length, preseason, excluded, statusUnknown: statusUnknown.length, longHaul: input.longHaulExcluded ?? 0 }),
     weightsNote,
+    longHaulExcluded: Math.max(0, input.longHaulExcluded ?? 0),
   }
 }

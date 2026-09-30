@@ -24,10 +24,10 @@
     "summitM": null,
     "verticalM": 656,
     "source": {
-      "url": "https://jaypeakresort.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base ~1,815 ft and vertical ~2,153 ft as commonly advertised. Summit left unknown: the commonly quoted resort summit (~3,968 ft) exceeds the mapped elevation of Jay Peak (~3,858 ft, ~1,176 m)"
+      "url": "https://en.wikipedia.org/wiki/Jay_Peak_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): base 1,815 ft (553 m) and vertical 2,153 ft (656 m), with a 3,968 ft summit (consistent with that vertical) and, in another result, a 3,862 ft top elevation. summitM stays null — see conflicts. Page-level attribution not isolated (Wikipedia/skiresort.info/OnTheSnow results)."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 81,
+    "lifts": 9,
+    "skiableAcres": 385,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 0,
+      "cableCars": 1,
+      "chairlifts": 6,
+      "surfaceLifts": 2,
+      "other": 0
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Jay_Peak_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30), current published figures: 385 skiable acres, 81 trails (another result: 80), 9 lifts = 1 aerial tramway, 6 chairlifts and 2 surface lifts."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,10 +108,53 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 22, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, weekday",
+      "category": "adult",
+      "amount": 119,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary labelled this 2026-27 (juniors/seniors $97), but the official page in the results was the 2025+26 lift-ticket page, so it may be the 2025-26 rate. Confirm at source.",
+      "source": {
+        "url": "https://jaypeakresort.com/skiing-riding/tickets-passes/202526-lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, weekend",
+      "category": "adult",
+      "amount": 135,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary labelled this 2026-27 (juniors/seniors $112), but the official page in the results was the 2025+26 lift-ticket page, so it may be the 2025-26 rate. Confirm at source.",
+      "source": {
+        "url": "https://jaypeakresort.com/skiing-riding/tickets-passes/202526-lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://jaypeakresort.com/",
     "trailMap": null,
@@ -104,7 +162,7 @@
     "snowReport": null,
     "hours": null,
     "tickets": null,
-    "seasonPass": null,
+    "seasonPass": "https://jaypeakresort.com/skiing-riding/tickets-passes/202627-season-passes",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,9 +172,27 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "2025+26 lift tickets (official)",
+      "url": "https://jaypeakresort.com/skiing-riding/tickets-passes/202526-lift-tickets"
+    },
+    {
+      "label": "Deals and discounts (official)",
+      "url": "https://jaypeakresort.com/trip-planning/deals-discounts"
+    },
+    {
+      "label": "Indy Pass 26/27 on sale (Snow-Forecast Whiteroom)",
+      "url": "https://www.snow-forecast.com/whiteroom/indy-pass-expands-as-26-27-passes-go-on-sale-with-auto-renew/"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (Vermont)",
+      "url": "https://www.onthesnow.com/vermont/projected-openings"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 435,
@@ -149,23 +225,24 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "No resort-announced 2026-27 opening or closing date (OnTheSnow projects Nov 22, 2026).",
+      "Confirm Jay Peak's 2026-27 Indy Pass terms (day allowance, Indy Base blackout dates, reservations); it is listed among Indy resorts in 2026-27 coverage (search summary).",
+      "Confirm 2026-27 adult day-ticket prices: $119 weekday / $135 weekend were labelled 2026-27 in a summary, but the official page in the results was the 2025+26 ticket page.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the operator (Pacific Group Resorts since the 2022 sale out of receivership — reference).",
-      "Confirm 2026-27 pass access (lead: Indy Pass partner in recent seasons — confirm Indy/Indy Base, blackouts and reservations) and Jay Peak's own pass products.",
       "Resolve the summit elevation (advertised vs mapped) and confirm base/summit coordinates (approximations).",
       "Confirm official deep links on jaypeakresort.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), learning area, childcare, tubing and night skiing.",
+      "Confirm snowmaking %, trail difficulty split, learning area, childcare, tubing and night skiing.",
       "Montreal-Trudeau (YUL) is a possible alternative airport but involves a border crossing — add with sourced ground times if useful."
     ],
     "conflicts": [
-      "Summit elevation: the commonly quoted resort summit (~3,968 ft) is higher than the mapped elevation of Jay Peak (~3,858 ft); summitM left null and the summit weather point uses the mapped peak elevation (approx. 1,176 m)."
+      "Summit elevation: the commonly quoted resort summit (~3,968 ft) is higher than the mapped elevation of Jay Peak (~3,858 ft); summitM left null and the summit weather point uses the mapped peak elevation (approx. 1,176 m).",
+      "Summit elevation (2026-09-30 search): 3,968 ft summit (consistent with 2,153 ft vertical above a 1,815 ft base) vs a 3,862 ft top elevation in another result (close to the mapped 3,858 ft). Resolution: summitM still null; the summit weather point keeps the mapped elevation.",
+      "terrain.trails: 81 vs 80 in different results. Resolution: used 81."
     ],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Base and vertical, terrain (385 acres, 81 trails, 9 lifts incl. the aerial tram) and the Indy Pass listing are search-summary facts; day-ticket prices are recorded with no season because their season label is doubtful. Coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. The OnTheSnow date is a projection; drive/airport times are Piste estimates."
   }
 }

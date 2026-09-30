@@ -1,0 +1,260 @@
+{
+  "id": "val-thorens",
+  "name": "Val Thorens",
+  "shortName": "Val Thorens",
+  "country": "FR",
+  "region": "Belleville valley, Tarentaise, Savoie, French Alps — Les 3 Vallées",
+  "stateProvince": "Auvergne-Rhône-Alpes (Savoie)",
+  "locality": "Val Thorens (Les Belleville); linked with Orelle (Maurienne)",
+  "timezone": "Europe/Paris",
+  "operator": "SETAM (Val Thorens lifts) — reference, confirm",
+  "priority": 0,
+  "location": {
+    "lat": 45.2979,
+    "lon": 6.5803,
+    "source": {
+      "url": "https://www.valthorens.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Val Thorens village position"
+    }
+  },
+  "elevation": {
+    "baseM": 2300,
+    "summitM": 3200,
+    "verticalM": 900,
+    "source": {
+      "url": "https://www.valthorens.com/en/nouveautes-station-domaine-skiable-hiver-2025-2026/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Village about 2,300 m (reference). Summit: Cime Caron, 'the highest point of the resort at 3,200 m' (search summary of Val Thorens' 2025/26 news and Cime Caron articles); the Orelle side reaches about 3,230 m at Pointe du Bouchet (reference). Pistes also run down towards Les Menuires and Orelle; vertical here is village to Cime Caron"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Val Thorens village (approx.)",
+      "lat": 45.2979,
+      "lon": 6.5803,
+      "elevationM": 2300,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Cime Caron cable car top station (approx.)",
+      "lat": 45.29,
+      "lon": 6.556,
+      "elevationM": 3200,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 85,
+    "lifts": 32,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "expertPct": null,
+    "terrainParks": null,
+    "pisteKm": 150,
+    "liftsByType": {
+      "gondolas": 10,
+      "cableCars": null,
+      "chairlifts": 13,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://www.valthorens.com/en/domaine-ski-vtt/val-thorens-orelle/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Figures describe Val Thorens–Orelle (the resort's own pass). Search summary of valthorens.com and Val Thorens guide pages: 150 km of slopes; 85 runs = 12 green, 35 blue, 30 red, 8 black; 32 lifts including 10 gondolas and 13 chairlifts (the other 9, including the Cime Caron cable car and surface lifts, not broken down). Cime Caron cable car reopened for 2025-26 with two new 150-person cabins, 1,430 people/hour. Linked Les 3 Vallées area (official 'in figures' page, search summary): 600 km of pistes, 334 pistes (53 green, 136 blue, 108 red, 37 black), 161 lifts, of which the summary itemised 34 gondolas, 3 cable cars, 57 chairlifts and 33 drag lifts (the other 34 not broken down); Wikipedia puts total uplift at about 284,500 skiers/hour in 2026 (estimate)."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.valthorens.com/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski schools (e.g. ESF) and rental shops operate in the resort villages"
+    }
+  },
+  "character": "Val Thorens, at about 2,300 m, is the highest resort in Les 3 Vallées and is linked with Orelle in the Maurienne valley (about 150 km of pistes on the Val Thorens–Orelle pass). The ski-in/ski-out village connects to Les Menuires, Méribel and Courchevel in the 600 km 3 Vallées area; the 2026-27 season runs from 21 Nov 2026 to 2 May 2027.",
+  "learning": "Val Thorens–Orelle has 12 green and 35 blue runs (search summary). The high altitude makes it cold and exposed in mid-winter; reference: beginner areas are close to the village. Confirm beginner-lift access and lessons locally.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-11-21",
+      "text": "Val Thorens and Orelle open 21 Nov 2026 and run to 2 May 2027 (France Montagnes 2026-27 list and Val Thorens day-pass price bands, per search summaries).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-05-02",
+      "text": "Season to 2 May 2027 (per search summaries; day-pass price bands run to 2 May).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.valthorens.com/en/ski/forfaits/forfait-journee/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    "history": [],
+    "typicalText": "Usually late November to early May (reference; 2026-27: 21 Nov to 2 May).",
+    "notes": "Links to the rest of Les 3 Vallées depend on each valley's opening (Méribel 5 Dec 2026, Courchevel 4–5 Dec 2026, per search summaries). Past seasons were not captured."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Val Thorens–Orelle adult 1-day ski pass",
+      "category": "adult",
+      "amount": 66.1,
+      "amountMax": 73.5,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27: €66.10 from 21 Nov to 18 Dec 2026; €73.50 from 19 Dec 2026 to 2 May 2027 (search summary). The 3 Vallées day pass (not found) costs more.",
+      "source": {
+        "url": "https://www.valthorens.com/en/ski/forfaits/forfait-journee/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Val Thorens day-pass and price pages"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.valthorens.com/",
+    "trailMap": "https://www.valthorens.com/en/ski/plan/",
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://www.valthorens.com/en/ski/forfaits/forfait-journee/",
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://meteofrance.com/meteo-montagne",
+    "openSkiMap": null,
+    "liftStatus": "https://www.les3vallees.com/en/live/lifts-and-trails-opening"
+  },
+  "moreLinks": [
+    {
+      "label": "Les 3 Vallées ski pass (official)",
+      "url": "https://www.les3vallees.com/en/skipass"
+    },
+    {
+      "label": "Les 3 Vallées in figures (press)",
+      "url": "https://press.les3vallees.com/en/guide/in-figures"
+    },
+    {
+      "label": "Orelle ski-area prices",
+      "url": "https://ski.orelle.net/en/prices/"
+    },
+    {
+      "label": "Les 3 Vallées ski-area map",
+      "url": "https://www.les3vallees.com/en/guide/the-world-s-largest-ski-area/ski-area-map"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "CMF",
+        "role": "closest",
+        "minutes": 125,
+        "km": 135,
+        "basis": "Estimate from typical routing (A43/A430 to Albertville, then the N90 up the Tarentaise to Moûtiers and the Belleville valley road); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "GVA",
+        "role": "practical",
+        "minutes": 170,
+        "km": 185,
+        "basis": "Estimate from typical routing (A41 via Annecy, then Albertville and the N90 up the Tarentaise to Moûtiers and the Belleville valley road); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "LYS",
+        "role": "practical",
+        "minutes": 160,
+        "km": 200,
+        "basis": "Estimate from typical routing (A43 to Chambéry, A430/N90 to Albertville and up the Tarentaise to Moûtiers and the Belleville valley road); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Train to Moûtiers-Salins-Brides-les-Bains, then bus",
+        "type": "train",
+        "url": "https://www.sncf-connect.com/",
+        "notes": "Reference, confirm: Moûtiers is the rail station for the Belleville, Méribel and Courchevel valleys, with onward buses or taxis. Check 2026-27 timetables and any winter weekend through-trains."
+      },
+      {
+        "name": "Shared and private airport transfers",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: shared and private transfers run in winter from Geneva, Lyon and Chambéry airports. No operator, fare or schedule is on file."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Remaining lift types (cable cars, surface lifts) and total hourly capacity for Val Thorens–Orelle.",
+      "3 Vallées adult day-pass price for 2026-27.",
+      "Epic Pass 2026-27 day allowance for Les 3 Vallées (limited consecutive days; not researched).",
+      "Official snow-report page (the 3 Vallées live lifts-and-trails page is linked)."
+    ],
+    "conflicts": [
+      "Val Thorens–Orelle runs: 85 (12/35/30/8) in the resort search vs 88 (11/39/30/8) in the 3 Vallées figures."
+    ],
+    "confidenceNotes": "Season dates and day prices come from search summaries of official pages (fairly solid). Lift mix is partial. Coordinates, village altitude and operator are reference data; weather points approximate; airport times are estimates."
+  }
+}

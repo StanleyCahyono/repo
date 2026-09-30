@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { computeFit, type FitInput } from './fit'
 import { money } from './money'
-import { classifyDay, confirmedClosure, describeNoWinner, recommend, type CandidateDay, type RecommendCandidate, type RecommendInput } from './recommend'
+import { classifyDay, confirmedClosure, describeNoWinner, hasOpenedThisSeason, recommend, type CandidateDay, type RecommendCandidate, type RecommendInput } from './recommend'
 
 const NOW = '2027-01-15T14:00:00.000Z'
 const TODAY = '2027-01-15'
@@ -307,6 +307,67 @@ describe('preseason', () => {
     const closedInApril = { ...c.ops, statusDate: '2027-04-05', actualOpening: '2026-11-21' }
     expect(confirmedClosure(closedInApril, '2027-04-10')).toMatchObject({ kind: 'closed-for-season', reason: 'Closed for the season (reported Mon 5 Apr)' })
     expect(confirmedClosure(closedInApril, '2027-04-01')).toBeNull()
+  })
+})
+
+describe('Southern Hemisphere seasons and the home hemisphere', () => {
+  // 30 Sep 2026: the 2026 Australian winter (season 2025-26) is ending; the northern 2026-27 season has not begun.
+  const today = '2026-09-30'
+  const now = '2026-09-30T14:00:00.000Z'
+  const southOpen = (id: string, over: Partial<RecommendCandidate['ops']> = {}): RecommendCandidate =>
+    cand(id, {
+      today,
+      ops: { ...cand('x').ops, hemisphere: 'south', status: 'open', statusDate: today, actualOpening: '2026-06-06', announcedOpening: null, ...over },
+      days: [day(today), day('2026-10-01')],
+    })
+  const northPre = (id: string): RecommendCandidate =>
+    cand(id, {
+      today,
+      ops: { ...cand('x').ops, status: null, statusDate: null, statusAt: null, actualOpening: null, announcedOpening: '2026-11-20' },
+      days: [day(today), day('2026-10-01')],
+    })
+
+  it('a June opening and a September date are the same Southern Hemisphere season (no 1 July split)', () => {
+    const c = southOpen('thredbo')
+    const r = recommend(base([c], { dates: ['2026-10-01'], now, homeHemisphere: 'south' }))
+    expect(r.preseason).toBe(false)
+    expect(r.winner?.resortId).toBe('thredbo')
+    expect(r.winner?.eligibility).toBe('expected-open')
+    // Only the June opening on record: it counts for October in the south, while a northern reading of the same
+    // dates would split the winter at 1 July and call October a new, unopened season.
+    const openingOnly = { ...c.ops, status: null, statusDate: null, statusAt: null }
+    expect(hasOpenedThisSeason({ ...c, ops: openingOnly }, '2026-10-01')).toBe(true)
+    expect(hasOpenedThisSeason({ ...c, ops: { ...openingOnly, hemisphere: 'north' } }, '2026-10-01')).toBe(false)
+  })
+
+  it('a closed-for-season statement in September closes the rest of that southern winter, and not the next one', () => {
+    const ops = { ...southOpen('thredbo').ops, status: 'closed-for-season' as const, statusDate: '2026-09-21' }
+    expect(confirmedClosure(ops, '2026-10-01')).toMatchObject({ kind: 'closed-for-season' })
+    // Next winter (2026-27, June 2027) is another season: last September's closure says nothing about it.
+    expect(confirmedClosure({ ...ops, actualOpening: null, announcedOpening: '2027-06-12' }, '2027-06-20')).toBeNull()
+  })
+
+  it('preseason is judged on home-hemisphere resorts only', () => {
+    // Home in the north in September: a resort open in Australia does not end the northern preseason…
+    const north = recommend(base([northPre('greek-peak'), southOpen('thredbo')], { dates: ['2026-10-01'], now, homeHemisphere: 'north' }))
+    expect(north.preseason).toBe(true)
+    expect(north.winner).toBeNull()
+    expect(north.noWinnerReason).toMatch(/Preseason/)
+    // …and a home in the south is in season while its own resorts are open.
+    const south = recommend(base([northPre('greek-peak'), southOpen('thredbo')], { dates: ['2026-10-01'], now, homeHemisphere: 'south' }))
+    expect(south.preseason).toBe(false)
+    expect(south.winner?.resortId).toBe('thredbo')
+    // No home-hemisphere candidate at all: never "preseason".
+    expect(recommend(base([southOpen('thredbo')], { dates: ['2026-10-01'], now })).preseason).toBe(false)
+  })
+
+  it('says when resorts were left out as long haul, and why there is nothing to compare', () => {
+    const r = recommend(base([], { longHaulExcluded: 12 }))
+    expect(r.longHaulExcluded).toBe(12)
+    expect(r.noWinnerReason).toMatch(/No resort within a long flight of home/)
+    expect(r.noWinnerReason).toMatch(/Resorts more than a long flight away are planned as trips — see Explore/)
+    expect(recommend(base([])).noWinnerReason).toBe('No resorts to compare yet.')
+    expect(recommend(base([cand('a')])).longHaulExcluded).toBe(0)
   })
 })
 

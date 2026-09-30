@@ -4,6 +4,8 @@
  * - Opening-date changes are logged to opening_date_history; actual openings/closings (live data) are never
  *   overwritten by catalog research.
  * - Price snapshots and pass rules are appended/versioned, never rewritten, so history stays explainable.
+ * - Dated reports found by research (`recentReports`) are stored as researched official reports of their own day,
+ *   once: re-seeding unchanged content writes nothing, so their observation age is never reset (jobs/reports.ts).
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -13,6 +15,9 @@ import * as s from '@/lib/db/schema'
 import { provenance, type Provenance } from '@/lib/domain/types'
 import { fromMajor } from '@/lib/domain/money'
 import { estimateOpeningWindow } from '@/lib/domain/season'
+import { hemisphereOf } from '@/lib/domain/time'
+import { ensureSeason } from '@/lib/jobs/status'
+import { addResearchedReport } from '@/lib/jobs/reports'
 import {
   CatalogResort,
   CatalogPasses,
@@ -95,7 +100,16 @@ export interface SeedReport {
   hotels: number
   events: number
   openingChanges: number
+  /** Researched reports stored by this run (unchanged ones are not counted). */
+  recentReports: number
+  /** Researched reports that could not be stored, with the reason. */
+  recentReportsSkipped: string[]
   firstRun: boolean
+}
+
+export interface SeedOptions {
+  /** Store catalog `recentReports` (default). The demo database holds simulated reports only, so it passes false. */
+  recentReports?: boolean
 }
 
 const DEFAULT_SKILLS: [string, string][] = [
@@ -128,7 +142,7 @@ const DEFAULT_CHECKLIST: [string, string][] = [
 ]
 
 /** Seed or refresh the catalog. `now` is the app clock instant. */
-export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promise<SeedReport> {
+export async function seedCatalog(db: Db, catalog: Catalog, now: string, opts: SeedOptions = {}): Promise<SeedReport> {
   const report: SeedReport = {
     resorts: 0,
     schedules: 0,
@@ -141,6 +155,8 @@ export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promis
     hotels: 0,
     events: 0,
     openingChanges: 0,
+    recentReports: 0,
+    recentReportsSkipped: [],
     firstRun: false,
   }
 
@@ -198,7 +214,7 @@ export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promis
 
     // --- Season dates ---
     const season = r.season
-    const est = estimateOpeningWindow(season.history.map((h) => ({ season: h.season, opened: h.opened })), season.season)
+    const est = estimateOpeningWindow(season.history.map((h) => ({ season: h.season, opened: h.opened })), season.season, hemisphereOf(r.location.lat))
     const existing = (
       await db
         .select()
@@ -222,6 +238,8 @@ export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promis
       updatedAt: now,
     }
     if (!existing) {
+      // A resort may describe another season than CATALOG_SEASON (e.g. a Southern Hemisphere winter in progress).
+      await ensureSeason(db, season.season)
       await db.insert(s.resortSeasons).values({ resortId: r.id, seasonId: season.season, ...seasonRow })
     } else {
       for (const field of ['announcedOpening', 'announcedClosing'] as const) {
@@ -311,6 +329,15 @@ export async function seedCatalog(db: Db, catalog: Catalog, now: string): Promis
     for (const t of r.travel.transfers) {
       await db.insert(s.travelOptions).values({ resortId: r.id, mode: 'transfer', name: t.name, transferType: t.type, url: t.url, notes: t.notes, prov: prov({ url: t.url, verification: transferVerification, checkedOn: r.research.date, note: transferNote }) })
       report.travelOptions++
+    }
+
+    // --- Dated reports found by research (oldest first, so status statements append in order) ---
+    if (opts.recentReports !== false) {
+      for (const rr of [...r.recentReports].sort((a, b) => a.observedOn.localeCompare(b.observedOn))) {
+        const out = await addResearchedReport(db, { ...rr, resortId: r.id, timezone: r.timezone, provider: CATALOG_PROVIDER }, now)
+        if (out.outcome === 'inserted') report.recentReports++
+        else if (out.outcome === 'skipped') report.recentReportsSkipped.push(`${r.id} ${rr.observedOn}: ${out.reason}`)
+      }
     }
   }
 

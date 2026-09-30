@@ -26,7 +26,7 @@ import type { ExpenseRow, LessonRow, SkiDayLogRow, SkillRow } from '@/lib/db/row
 import { BUDGET_CATEGORIES } from '@/lib/domain/costs'
 import { fromMajor } from '@/lib/domain/money'
 import { evaluateAccess, latestRule } from '@/lib/domain/passes'
-import { formatLocalDate, isLocalDate, localDateOf, seasonIdFor } from '@/lib/domain/time'
+import { formatLocalDate, isLocalDate, localDateOf, seasonIdFor, seasonIdForResort, seasonResolver } from '@/lib/domain/time'
 import { SURFACE_TAGS } from '@/lib/domain/types'
 import { defaultDeps } from '@/lib/jobs/deps'
 import { addPersonalReport } from '@/lib/jobs/reports'
@@ -96,8 +96,17 @@ const seasonText = (id: string) => id.replace('-', '–')
 
 async function resortInfo(id: string) {
   const { db } = await getCtx()
-  const [r] = await db.select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, timezone: s.resorts.timezone }).from(s.resorts).where(eq(s.resorts.id, id))
+  const [r] = await db
+    .select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, timezone: s.resorts.timezone, lat: s.resorts.lat })
+    .from(s.resorts)
+    .where(eq(s.resorts.id, id))
   return r ?? null
+}
+
+/** Season of a date at any stored resort (Southern Hemisphere winters are the calendar year's). */
+async function seasonOfResorts() {
+  const { db } = await getCtx()
+  return seasonResolver(await db.select({ id: s.resorts.id, lat: s.resorts.lat }).from(s.resorts))
 }
 
 async function knownSkillIds(ids: readonly number[]): Promise<number[]> {
@@ -188,12 +197,14 @@ async function syncPassDay(a: { ownershipId: number | null; resortId: string; da
   if (!own) return { changed, warning: null, error: 'That pass is no longer recorded' }
   const [product] = await db.select().from(s.passProducts).where(eq(s.passProducts.id, own.productId))
   if (!product) return { changed, warning: null, error: 'Unknown pass product' }
-  if (seasonIdFor(a.date) !== product.seasonId) return { changed, warning: null, error: `${product.name} is a ${seasonText(product.seasonId)} pass` }
+  // The pass season of the day at that resort: a Southern Hemisphere winter (June–October 2027) is 2026–27.
+  const seasonOf = await seasonOfResorts()
+  if (seasonOf(a.resortId, a.date) !== product.seasonId) return { changed, warning: null, error: `${product.name} is a ${seasonText(product.seasonId)} pass` }
   if (at(a.resortId, a.date).some((u) => u.ownershipId === own.id)) return { changed, warning: null, error: null }
 
   const rules = await db.select().from(s.passAccessRules).where(eq(s.passAccessRules.productId, product.id))
   const ownUsage = usage.filter((u) => u.ownershipId === own.id && !(a.old && u.resortId === a.old.resortId && u.date === a.old.date))
-  const verdict = evaluateAccess({ product, rule: latestRule(rules, product.id, a.resortId), resortId: a.resortId, date: a.date, usage: ownUsage, poolRules: rules, today })
+  const verdict = evaluateAccess({ product, rule: latestRule(rules, product.id, a.resortId), resortId: a.resortId, date: a.date, usage: ownUsage, poolRules: rules, today, seasonOf })
   const { now } = await getCtx()
   await db.insert(s.passUsage).values({ ownershipId: own.id, resortId: a.resortId, date: a.date, notes: 'Logged from My Season', createdAt: now })
   const warning = verdict.canSki
@@ -216,7 +227,8 @@ export async function saveSkiDay(input: SkiDayInput): Promise<ActionResult<{ id:
   if (!resort) return fail('Unknown resort', { resortId: 'Choose a resort from the list' })
   const resortToday = localDateOf(now, resort.timezone)
   if (v.date > resortToday) return fail('Log days you have skied — plan future days in Trips', { date: `Pick ${resortToday} or earlier (resort time)` })
-  if (seasonIdFor(v.date) !== prefs.activeSeasonId) {
+  // The season of the day at that resort (a Southern Hemisphere winter in June–October 2027 is 2026–27).
+  if (seasonIdForResort(v.date, resort) !== prefs.activeSeasonId) {
     return fail(`My Season shows ${seasonText(prefs.activeSeasonId)}`, { date: `Pick a day in the ${seasonText(prefs.activeSeasonId)} season` })
   }
   const trip = await tripIssue(v.tripId, v.date)
@@ -544,7 +556,7 @@ export async function saveLesson(input: LessonInput): Promise<ActionResult<{ id:
   const { db, now, prefs } = await getCtx()
   const resort = await resortInfo(v.resortId)
   if (!resort) return fail('Unknown resort', { resortId: 'Choose a resort from the list' })
-  if (v.date && seasonIdFor(v.date) !== prefs.activeSeasonId) return fail(`My Season shows ${seasonText(prefs.activeSeasonId)}`, { date: `Pick a day in the ${seasonText(prefs.activeSeasonId)} season` })
+  if (v.date && seasonIdForResort(v.date, resort) !== prefs.activeSeasonId) return fail(`My Season shows ${seasonText(prefs.activeSeasonId)}`, { date: `Pick a day in the ${seasonText(prefs.activeSeasonId)} season` })
   let old: LessonRow | null = null
   if (v.id) {
     ;[old] = await db.select().from(s.lessons).where(eq(s.lessons.id, v.id))

@@ -1,5 +1,5 @@
 /**
- * 03 Plan a visit — published hours by activity (with season, timezone and "published hours ≠ every lift
+ * 04 Plan a visit — published hours by activity (with season, timezone and "published hours ≠ every lift
  * running"), exact pass access for the planning date (my products first; unknown rules say so and are never
  * permission), price snapshots with season / quote kind / source, the per-person day basket with its expense tier
  * or "Incomplete estimate", and lessons, rentals, parking and road/transit links.
@@ -23,7 +23,7 @@ const DAY_TYPE_TEXT: Record<string, string> = { weekday: 'weekday', weekend: 'we
 export function PlanSection({ d, v }: { d: ResortDetail; v: PageView }) {
   const dayType = d.basket.holidayName ? `${d.basket.holidayName} (holiday)` : DAY_TYPE_TEXT[d.basket.dayType] ?? d.basket.dayType
   return (
-    <ResortSection id="plan" index={3} title="Plan a visit" meta={`${dayLabelYear(v.date)} · ${dayType}`}>
+    <ResortSection id="plan" index={4} title="Plan a visit" meta={`${dayLabelYear(v.date)} · ${dayType}`}>
       <div className="flex flex-col gap-8">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           <HoursBlock d={d} v={v} />

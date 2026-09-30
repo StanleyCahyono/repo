@@ -48,6 +48,8 @@ export const LinkSet = z.object({
   tourism: optUrl,
   avalanche: optUrl,
   openSkiMap: optUrl,
+  /** The resort's own live lift and run status page (Piste links to it; it cannot read it). */
+  liftStatus: optUrl,
 })
 
 export const HistoricalOpening = z.object({
@@ -56,6 +58,23 @@ export const HistoricalOpening = z.object({
   closed: optDate,
   source: SourceRef.nullable().default(null),
 })
+
+/**
+ * A dated conditions report found by research (e.g. an end-of-season snow depth or closing day). Seeded as an official
+ * report with its own observation date and source, so it ages honestly; never presented as live.
+ */
+export const RecentReport = z.object({
+  observedOn: date,
+  operatingStatus: z.enum(['open', 'closed', 'closed-for-season', 'not-yet-open']).nullable().default(null),
+  baseDepthCm: optNum,
+  summitDepthCm: optNum,
+  newSnow24hCm: optNum,
+  liftsOpen: optNum,
+  liftsTotal: optNum,
+  note: optStr,
+  source: SourceRef,
+})
+export type RecentReport = z.infer<typeof RecentReport>
 
 export const CatalogResort = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
@@ -91,6 +110,17 @@ export const CatalogResort = z.object({
     intermediatePct: optNum,
     advancedPct: optNum,
     terrainParks: optNum,
+    /** Share of expert terrain (double black / freeride) where the resort publishes it separately. */
+    expertPct: optNum,
+    /** Marked pistes in km — how European, Japanese and Australian resorts state their size. */
+    pisteKm: optNum,
+    /** Lifts by type; the counts should add up to `lifts` when both are known. */
+    liftsByType: z
+      .object({ gondolas: optNum, cableCars: optNum, chairlifts: optNum, surfaceLifts: optNum, other: optNum })
+      .nullable()
+      .default(null),
+    /** Uphill capacity, people per hour. */
+    liftCapacityPerHour: optNum,
     season: season.nullable().default(null),
   }),
   features: withSource({
@@ -173,6 +203,7 @@ export const CatalogResort = z.object({
       )
       .default([]),
   }),
+  recentReports: z.array(RecentReport).default([]),
   reportSource: z
     .object({ url: optUrl, format: z.enum(['html', 'json', 'pdf', 'unknown']).default('unknown'), notes: optStr })
     .nullable()

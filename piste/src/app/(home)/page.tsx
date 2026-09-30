@@ -73,7 +73,17 @@ export default async function TodayPage({ searchParams }: { searchParams: Promis
       {params.ignored ? <Notice tone="info" title={params.ignored} className="mb-6" /> : null}
     </>
   )
-  const strip = <DayStrip days={data.strip} basis={view.stripBasis} units={units} modeLabel={data.modeLabel} today={view.today} />
+  const strip = (
+    <DayStrip
+      days={data.strip}
+      basis={view.stripBasis}
+      units={units}
+      modeLabel={data.modeLabel}
+      today={view.today}
+      longHaul={view.stripLongHaul.map((f) => f.name)}
+      longHaulLimit={data.longHaulLimit}
+    />
+  )
   const watchlist = (
     <PendingVeil>
       <Watchlist view={view} cards={data.cards} units={units} />
@@ -89,6 +99,7 @@ export default async function TodayPage({ searchParams }: { searchParams: Promis
         inputs={data.finder.inputs}
         preseason={preseason}
         demo={view.demo}
+        longHaulLimit={data.longHaulLimit}
       />
     </PendingVeil>
   )
@@ -128,6 +139,8 @@ export default async function TodayPage({ searchParams }: { searchParams: Promis
                 dates={view.dates}
                 seasonLabel={view.season.label}
                 reason={ranking.noWinnerReason}
+                longHaul={ranking.longHaul}
+                longHaulLimit={data.longHaulLimit}
               />
             </PendingVeil>
           </Rise>
@@ -159,7 +172,15 @@ export default async function TodayPage({ searchParams }: { searchParams: Promis
       <div className={grid}>
         <Rise index={0}>
           <PendingVeil>
-            <RecommendationPanel ranking={ranking} dates={view.dates} today={view.today} cards={data.cards} resortCount={resortCount} demo={view.demo} />
+            <RecommendationPanel
+              ranking={ranking}
+              dates={view.dates}
+              today={view.today}
+              cards={data.cards}
+              resortCount={resortCount}
+              demo={view.demo}
+              longHaulLimit={data.longHaulLimit}
+            />
           </PendingVeil>
         </Rise>
         <div className={column}>

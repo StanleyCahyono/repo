@@ -22,6 +22,7 @@ const ROLE_TEXT: Record<ConnectorView['role'], string> = {
   weather: 'Weather model',
   alerts: 'Official alerts',
   'resort-report': 'Resort report',
+  'lifts-runs': 'Lifts & runs (community map)',
   fx: 'Exchange rates',
   flights: 'Flight offers',
   'link-check': 'Link checks',

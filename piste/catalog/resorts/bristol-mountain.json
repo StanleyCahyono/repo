@@ -56,12 +56,22 @@
     "intermediatePct": 50,
     "advancedPct": 18,
     "terrainParks": 2,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 0,
+      "cableCars": 0,
+      "chairlifts": 5,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": 9700,
     "season": "2025-26",
     "source": {
       "url": "https://www.bristolmountain.com/about-the-mountain/",
       "verification": "search-summary",
       "checkedOn": "2026-09-28",
-      "note": "Official: 39 trails, 5 chairlifts (2 high-speed detachables) plus a magic carpet (carpet not counted). 138 acres per official-site/OnTheSnow summary (Wikipedia 160). Terrain-park count from a third-party summary."
+      "note": "Official: 39 trails, 5 chairlifts (2 high-speed detachables) plus a magic carpet (carpet not counted). 138 acres per official-site/OnTheSnow summary (Wikipedia 160). Terrain-park count from a third-party summary. Lift types (search summary 2026-09-30; skiresort.info https://www.skiresort.info/ski-resort/bristol-mountain/ski-lifts/): Galaxy Express (high-speed quad, 2009, Doppelmayr, 2,400/h), Comet Express (high-speed quad, 1999, Garaventa, 2,400/h), Morning Star (fixed quad, 2000), Rocket Triple (1984), Sunset Double (1973) — 9,700/h over 5.1 km of lifts. Another result said 4 chairs and 1 surface lift; surface lifts left unknown."
     }
   },
   "features": {
@@ -448,7 +458,8 @@
       "terrain.skiableAcres: 138 (https://www.onthesnow.com/new-york/bristol-mountain/ski-resort); 160 (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort). Resolution: Used 138 (matches the official-site summary).",
       "terrain.lifts: 5 lifts (2 high-speed detachables) plus a magic carpet (https://www.bristolmountain.com/about-the-mountain/); Named chairs: Galaxy Express, Comet Express, Morning Star, Rocket Triple, Sunset Double (https://en.wikipedia.org/wiki/Bristol_Mountain_Ski_Resort); '6 chair lifts and 2 high-speed quads' (search summary of a site:bristolmountain.com query; exact page unclear) (https://www.bristolmountain.com/trail-map/). Resolution: Used 5 chairlifts; carpet/surface lifts not counted.",
       "prices (adult day ticket): $86 weekday / $99 weekend (advance) (https://www.bristolmountain.com/lift-tickets/); $59-$79 range (third-party search summary; exact attribution among Liftopia/SnowStash/OnTheSnow unclear) (https://snowstash.com/usa/new-york/bristol-mountain/lift-tickets). Resolution: Kept official figures.",
-      "hours: Mon-Fri 9am-9pm, weekends from 8:30am (Dec 2025) (https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/); Fri 9-4, Sat/Sun 8:30-4, Mon-Thu closed (Yelp listing, probably early/late season) (https://www.yelp.com/biz/bristol-mountain-ski-and-snowboard-resort-canandaigua). Resolution: Used the Dec 2025 news report for full-season hours."
+      "hours: Mon-Fri 9am-9pm, weekends from 8:30am (Dec 2025) (https://www.fingerlakes1.com/2025/12/17/bristol-mountain-extends-ski-hours-for-season/); Fri 9-4, Sat/Sun 8:30-4, Mon-Thu closed (Yelp listing, probably early/late season) (https://www.yelp.com/biz/bristol-mountain-ski-and-snowboard-resort-canandaigua). Resolution: Used the Dec 2025 news report for full-season hours.",
+      "terrain.liftsByType (2026-09-30): 5 chairlifts (skiresort.info) vs 4 chairlifts + 1 surface lift (another search result). Resolution: used 5 chairlifts, matching the official 5-lift total; surface lifts left unknown."
     ],
     "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Base (1,000 ft) and summit (2,200 ft) came from a summary mixing the official About page and a New York By Rail guide. Terrain parks (2) and night-lighting details (97% of trails lit) come from third-party or encyclopedia summaries. The lift ticket page did not show a season label; prices are assumed to be 2025-26. The 2026-27 family pricing ($750/$250) comes from the 2026-27 pricing PDF and an iskiny.com news item. The summit coordinate is an estimate for weather queries only. Season-pass prices ($750/$250 family tiers) belong to passes.json and are not listed here."
   }

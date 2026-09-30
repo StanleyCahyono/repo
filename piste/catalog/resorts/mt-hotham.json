@@ -1,0 +1,239 @@
+{
+  "id": "mt-hotham",
+  "name": "Hotham Alpine Resort",
+  "shortName": "Mt Hotham",
+  "country": "AU",
+  "region": "Victorian Alps",
+  "stateProvince": "Victoria",
+  "locality": "Hotham Heights (Hotham Village); Dinner Plain nearby",
+  "timezone": "Australia/Melbourne",
+  "operator": "Vail Resorts (reference)",
+  "priority": 0,
+  "location": {
+    "lat": -36.985,
+    "lon": 147.143,
+    "source": {
+      "url": "https://www.mthotham.com.au/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Hotham Village position on the Great Alpine Road ridge"
+    }
+  },
+  "elevation": {
+    "baseM": 1450,
+    "summitM": 1845,
+    "verticalM": 395,
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: ski area between 1,450 m and 1,845 m; vertical derived as the difference. Hotham is an 'upside-down' resort — the village sits high on the ridge and many runs drop below it (reference)."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Hotham Village area (approx.; the published 1,450 m base is the lowest lift point below the village)",
+      "lat": -36.985,
+      "lon": 147.143,
+      "elevationM": 1450,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Mt Hotham summit area, top lifts (approx.)",
+      "lat": -36.977,
+      "lon": 147.133,
+      "elevationM": 1845,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 14,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 14 lifts and 320 hectares (hectares kept in this note; skiableAcres is for North America only). The run count was contradictory in the summary (72 runs vs '105 slopes') and is left unknown. Lift types, km and capacity not found. Season id 2025-26."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.mthotham.com.au/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Village lodging, ski school and rentals are reference facts."
+    }
+  },
+  "character": "A high alpine village strung along the Great Alpine Road on the Mt Hotham ridge in Victoria, known as an 'upside-down' mountain because the village sits near the top and many runs drop below it. It is owned by Vail Resorts and included without day limits on the Epic Pass; Dinner Plain nearby offers more lodging.",
+  "learning": "Reference note: beginner areas sit near the summit and village (the Summit Trainer carpet ran on opening weekend 2026); confirm 2027 lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2026-06-06",
+        "closed": "2026-09-06",
+        "source": {
+          "url": "https://www.mthotham.com.au/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Winter 2026: resort announcement 'Sunday 6 September will be our last day of skiing and boarding for winter' (search summary; exact news page not captured). Opening: operating from Sat 6 Jun 2026 with the Summit Trainer carpet (https://snowbrains.com/australia-ski-season-2026-opening-weekend-perisher-thredbo-buller-falls-hotham/). skiresort.info had listed a tentative 6 Jun – 4 Oct 2026 season."
+        }
+      }
+    ],
+    "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (6 Jun 2026) and was scheduled to run to early October; in the very poor 2026 season the last day was 6 Sep.",
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference)."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift ticket (main season)",
+      "category": "adult",
+      "amount": 256,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Main-season adult full-day price per the search summary; the season was not stated (most likely the 2026 winter). Date-based pricing applies online (see Snowstash 'Mt Hotham Lift Tickets 2026').",
+      "source": {
+        "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (attribution uncertain; may be https://www.onthesnow.com/australia/mt-hotham/lift-tickets)"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.mthotham.com.au/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://www.mthotham.com.au/lift-passes/lift-passes/lift-tickets",
+    "seasonPass": "https://www.mthotham.com.au/passes",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": "https://traffic.vicroads.vic.gov.au/",
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Epic Pass (the 2026-27 pass covers the 2027 Australian winter)",
+      "url": "https://www.epicpass.com/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "MEL",
+        "role": "practical",
+        "minutes": 270,
+        "km": 360,
+        "basis": "Estimate from typical routing (Hume Freeway to Wangaratta, Great Alpine Road via Myrtleford, Bright and Harrietville, then the mountain section to Hotham); not a routing-service result. Albury (ABX, not in Piste's airport list) is closer (reference).",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Drive via Bright and Harrietville (or via Omeo)",
+        "type": "rental-car",
+        "url": null,
+        "notes": "Reference, confirm: chains must be carried on the Great Alpine Road in the snow season and a resort entry fee applies."
+      },
+      {
+        "name": "Winter coaches and shuttles",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: coach services have run from Melbourne and the valley towns; no operator, fare or schedule is on file."
+      }
+    ]
+  },
+  "recentReports": [
+    {
+      "observedOn": "2026-09-06",
+      "operatingStatus": "closed-for-season",
+      "baseDepthCm": null,
+      "summitDepthCm": null,
+      "newSnow24hCm": null,
+      "liftsOpen": null,
+      "liftsTotal": null,
+      "note": "Last day of lifts Sun 6 Sep 2026 — an early close in a very poor season (a tentative end of 4 Oct had been listed).",
+      "source": {
+        "url": "https://www.mthotham.com.au/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary quoting the resort's announcement; shared research notes agree (same weekend as Falls Creek)"
+      }
+    }
+  ],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
+      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
+      "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
+      "Confirm published lift and ticket-office hours for 2027.",
+      "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
+      "Confirm the run count (72 vs 105 in search results), km of runs, lift split and capacity.",
+      "Confirm the official snow-report / lift-status page and the resort entry fee for 2027."
+    ],
+    "conflicts": [
+      "Run count: 72 runs vs '105 slopes' in the same search summary — left unknown.",
+      "Season end: skiresort.info's tentative end 4 Oct 2026 vs the resort's actual last day Sun 6 Sep 2026 (the season ended early)."
+    ],
+    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, lift count, area, 2026 opening/closing and the day price come from search summaries (confirm at source); coordinates, operator, features and drive times are Piste reference data or estimates."
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * 06 Maps & links — the prominent link shelf (trail map, interactive map, OpenSkiMap, webcams, snow report, hours,
+ * 07 Maps & links — the prominent link shelf (trail map, interactive map, OpenSkiMap, webcams, snow report, hours,
  * tickets, lessons, rentals, parking, road info, lodging, tourism, avalanche…) with each link's check status
  * (OK / broken / check failed / not yet checked), always opening externally; then "Sources & data coverage": the
  * honest gaps, research open questions and conflicts, what is reference-only, and every source on file.
@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   Backpack,
   BedDouble,
+  CableCar,
   CalendarDays,
   Clock3,
   ExternalLink,
@@ -56,6 +57,7 @@ const GROUPS: { title: string; items: ShelfItem[] }[] = [
     title: 'Conditions & safety',
     items: [
       { key: 'snowReport', label: 'Snow report', icon: Snowflake, expected: true },
+      { key: 'liftStatus', label: 'Live lift status', icon: CableCar, expected: false, note: 'Official live lift & run status — Piste cannot read it' },
       { key: 'roadInfo', label: 'Road information', icon: Route, expected: true },
       { key: 'avalanche', label: 'Avalanche information', icon: AlertTriangle, expected: false },
     ],
@@ -186,7 +188,7 @@ export function LinksSection({ d, v }: { d: ResortDetail; v: PageView }) {
   return (
     <ResortSection
       id="links"
-      index={6}
+      index={7}
       title="Maps & links"
       meta={dotJoin(`${d.links.length} links`, lastChecked ? `last checked ${shortDate(lastChecked.slice(0, 10))}` : 'not checked yet')}
       lead="Official pages open in a new tab. Piste doesn’t embed pages that refuse framing and never draws trail geometry from a raster trail map."

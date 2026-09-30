@@ -18,6 +18,7 @@ import { QuickLook, SaveTripButton } from './option-actions'
 import { formatDates } from './params'
 import { explainPosition, ordinal, type OptionView, type RankingView } from './rank-model'
 import { Label } from './section'
+import { LongHaulNote } from './long-haul'
 
 const cardKey = (id: string, date: string) => `${id}|${date}`
 
@@ -29,6 +30,8 @@ export interface RecommendationProps {
   resortCount: number
   /** Demo mode: simulated data, labelled beside the title. */
   demo?: boolean
+  /** LONG_HAUL_KM in display units, for the note on resorts too far away to rank here. */
+  longHaulLimit?: string | null
 }
 
 /** Ski days for a saved trip: the option's eligible days in the selected range. */
@@ -351,7 +354,7 @@ export function Excluded({ list, datesLabel }: { list: RankingView['excluded']; 
   )
 }
 
-export function RecommendationPanel({ ranking, dates, today, cards, resortCount, demo = false }: RecommendationProps) {
+export function RecommendationPanel({ ranking, dates, today, cards, resortCount, demo = false, longHaulLimit = null }: RecommendationProps) {
   const winner = ranking.preseason ? null : (ranking.options[0] ?? null)
   const top = winner ? ranking.options.slice(0, 4) : []
   const label = formatDates(dates)
@@ -392,6 +395,7 @@ export function RecommendationPanel({ ranking, dates, today, cards, resortCount,
       {top.length > 1 ? <Alternatives list={top} cards={cards} dates={dates} /> : null}
       {ranking.unknown.length ? <UnknownGroup list={ranking.unknown.slice(0, 4)} cards={cards} /> : null}
       <Excluded list={ranking.excluded} datesLabel={label} />
+      {ranking.longHaul ? <LongHaulNote count={ranking.longHaul} limit={longHaulLimit} what="ranked here" className="border-t border-divider px-4 py-3 md:px-6" /> : null}
     </section>
   )
 }

@@ -19,6 +19,7 @@ export function Segmented<T extends string>({
   size = 'md',
   className,
   hideLabel = true,
+  wrap = false,
 }: {
   label: string
   options: SegmentOption<T>[]
@@ -27,6 +28,8 @@ export function Segmented<T extends string>({
   size?: 'sm' | 'md'
   className?: string
   hideLabel?: boolean
+  /** Let the segments wrap onto more rows (many options on a narrow screen). */
+  wrap?: boolean
 }) {
   const group = useId()
   return (
@@ -37,7 +40,7 @@ export function Segmented<T extends string>({
       <div
         role="radiogroup"
         aria-labelledby={group}
-        className="inline-flex rounded-[10px] border border-divider bg-surface-2 p-0.5"
+        className={cn('rounded-[10px] border border-divider bg-surface-2 p-0.5', wrap ? 'flex flex-wrap' : 'inline-flex')}
         onKeyDown={(e) => {
           const i = options.findIndex((o) => o.value === value)
           if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {

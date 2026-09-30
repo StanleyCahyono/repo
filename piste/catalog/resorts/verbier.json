@@ -1,0 +1,239 @@
+{
+  "id": "verbier",
+  "name": "Verbier 4 Vallées",
+  "shortName": "Verbier",
+  "country": "CH",
+  "region": "Valais (4 Vallées)",
+  "stateProvince": "Valais",
+  "locality": "Verbier (Val de Bagnes), linked with Nendaz, Veysonnaz, Thyon, La Tzoumaz and Bruson",
+  "timezone": "Europe/Zurich",
+  "operator": "Téléverbier SA (Verbier sector) with partner lift companies across the 4 Vallées (reference)",
+  "priority": 0,
+  "location": {
+    "lat": 46.097,
+    "lon": 7.229,
+    "source": {
+      "url": "https://verbier4vallees.ch/en",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Verbier village (Médran lift base)"
+    }
+  },
+  "elevation": {
+    "baseM": 1350,
+    "summitM": 3330,
+    "verticalM": 1980,
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/4-vallees-verbier-la-tzoumaz-nendaz-veysonnaz-thyon/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 'situated between the elevations of 1,350 and 3,330 m' (top: Mont Fort). Verbier village is about 1,500 m (reference); the valley gondola base at Le Châble is lower (reference) — confirm. Vertical derived as the difference."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Verbier village, Médran (approx.)",
+      "lat": 46.097,
+      "lon": 7.229,
+      "elevationM": 1500,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Mont Fort top station (approx.)",
+      "lat": 46.083,
+      "lon": 7.311,
+      "elevationM": 3330,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 74,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 412,
+    "liftsByType": {
+      "gondolas": 18,
+      "cableCars": 4,
+      "chairlifts": 20,
+      "surfaceLifts": 30,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/4-vallees-verbier-la-tzoumaz-nendaz-veysonnaz-thyon/ski-lifts/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Lift-type breakdown from a search summary of lift listings: 74 lifts including 4 aerial tramways (Jumbo 150 pers., Col des Gentianes 115, Mont-Fort 45, Mont-Gelé 45), 18 gondolas (up to the 30-person Funispace), 20 chairlifts (9 six-seat, 7 four-seat, 1 three-seat, 3 two-seat) and 30 surface lifts (7 T-bars, 23 J-bars). The listed types add up to 72, not 74; another summary gave 68 lifts. 412 km of pistes for the whole 4 Vallées. Uphill capacity and difficulty split not found."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://verbier4vallees.ch/en",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Ski schools and rental shops operate in Verbier and the other villages; other features not on file"
+    }
+  },
+  "character": "Switzerland's largest ski area (412 km on one pass), linking Verbier with Nendaz, Veysonnaz, Thyon, La Tzoumaz and Bruson in Valais. Verbier is known for off-piste and freeride terrain, with Mont Fort (3,330 m) as the high point.",
+  "learning": "Reference note: each village has ski schools; much of Verbier's own terrain suits intermediate and advanced skiers. Confirm dedicated beginner areas and lesson products.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-12-05",
+      "text": "Verbier ski area opens 5 Dec 2026",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.seeverbier.com/lifts/dates",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary: 'The Verbier area opens on 5 December 2026 and closes on 25 April 2027'"
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-04-25",
+      "text": "Verbier ski area closes 25 Apr 2027",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.seeverbier.com/lifts/dates",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary"
+      }
+    },
+    "history": [],
+    "typicalText": "Early December to late April (2026-27 schedule)",
+    "notes": "Dates are for the Verbier sector; the other 4 Vallées sectors may open and close on different dates."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "4 Vallées 1-day ski pass, adult",
+      "category": "adult",
+      "amount": 79,
+      "amountMax": 94,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "CHF 94 at the standard adult rate; from CHF 79 when bought online at least ten days ahead. Youth (born 2002–2011) CHF 80; children (born 2012–2019) CHF 47.",
+      "source": {
+        "url": "https://www.allverbier.ch/en/news/7330215a-79b6-462b-b839-db1c4bb38acd/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Article: 'Verbier ski pass prices 2026/27: 4 Vallées lift passes'"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://verbier4vallees.ch/en",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://verbier4vallees.ch/en/useful-information/prices-winter",
+    "seasonPass": "https://verbier4vallees.ch/en/annual-passes",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.verbier.ch/",
+    "avalanche": "https://www.slf.ch/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Live information (summer page; winter live page not captured)",
+      "url": "https://verbier4vallees.ch/en/useful-information/live-information-summer"
+    },
+    {
+      "label": "Season dates (seeverbier.com)",
+      "url": "https://www.seeverbier.com/lifts/dates"
+    },
+    {
+      "label": "Verbier 4 Vallées on the Epic Pass",
+      "url": "https://www.epicpass.com/regions/europe/switzerland/verbier-4-vallees.aspx"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "GVA",
+        "role": "both",
+        "minutes": 120,
+        "km": 160,
+        "basis": "Estimate from typical routing (A1/A9 via Lausanne and Martigny to Le Châble, then the road or gondola up to Verbier); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate — confirm with a routing service"
+        }
+      },
+      {
+        "iata": "ZRH",
+        "role": "practical",
+        "minutes": 210,
+        "km": 300,
+        "basis": "Estimate from typical routing (A1 via Bern and Fribourg, A12/A9 via Vevey and Martigny to Le Châble); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate — confirm with a routing service"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Trains to Le Châble, then the Le Châble–Verbier gondola",
+        "type": "train",
+        "url": "https://www.sbb.ch/",
+        "notes": "Reference, confirm: trains via Martigny to Le Châble; the gondola from Le Châble connects to Verbier."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm the 4 Vallées lift total (74 vs 68) and uphill capacity.",
+      "Find the difficulty split (km or share of easy/intermediate/difficult pistes).",
+      "Find the winter live lift status and snow report pages on verbier4vallees.ch.",
+      "Confirm opening/closing dates for the other 4 Vallées sectors (Nendaz, Veysonnaz, Thyon, La Tzoumaz, Bruson).",
+      "Epic Pass day allowance for Verbier 4 Vallées (not researched)."
+    ],
+    "conflicts": [
+      "Lift total 74 (lift-type listing; listed types sum to 72) vs 68 (main area summary).",
+      "Lowest elevation 1,350 m per summary vs the Le Châble valley gondola base (reference, lower)."
+    ],
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Season dates and the 2026-27 day-pass price come from resort-specific pages."
+  }
+}

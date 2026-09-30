@@ -1,0 +1,257 @@
+{
+  "id": "tignes",
+  "name": "Tignes",
+  "shortName": "Tignes",
+  "country": "FR",
+  "region": "Upper Tarentaise, Savoie, French Alps — Espace Killy",
+  "stateProvince": "Auvergne-Rhône-Alpes (Savoie)",
+  "locality": "Tignes Le Lac, Val Claret, Le Lavachet, Tignes 1800, Les Boisses, Les Brévières",
+  "timezone": "Europe/Paris",
+  "operator": "STGM (Société des Téléphériques de la Grande Motte) — reference, confirm",
+  "priority": 0,
+  "location": {
+    "lat": 45.4685,
+    "lon": 6.9063,
+    "source": {
+      "url": "https://en.tignes.net/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Tignes Le Lac position"
+    }
+  },
+  "elevation": {
+    "baseM": 1550,
+    "summitM": 3456,
+    "verticalM": 1906,
+    "source": {
+      "url": "https://www.seetignes.com/ski-area/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary of Tignes ski-area guides: 1,550 m (Tignes-Les Brévières) to 3,456 m on the Grande Motte glacier; vertical derived"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Tignes Le Lac (approx.)",
+      "lat": 45.4685,
+      "lon": 6.9063,
+      "elevationM": 2100,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Grande Motte cable car top station (approx.)",
+      "lat": 45.43,
+      "lon": 6.899,
+      "elevationM": 3456,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 156,
+    "lifts": 90,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "expertPct": null,
+    "terrainParks": null,
+    "pisteKm": 300,
+    "liftsByType": {
+      "gondolas": 4,
+      "cableCars": 4,
+      "chairlifts": 44,
+      "surfaceLifts": 36,
+      "other": 2
+    },
+    "liftCapacityPerHour": 64480,
+    "season": null,
+    "source": {
+      "url": "https://en.tignes.net/skiing/ski-area/ski-lifts",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Figures describe the Espace Killy (Tignes–Val d'Isère), the area covered by the standard day pass. Search summary of Tignes lift pages and Wikipedia: Espace Killy (Tignes–Val d'Isère, one ticket): 300 km of marked pistes; 90 lifts = 2 funiculars, 4 cable cars, 4 gondolas, 44 chairlifts, 36 surface lifts; one result states that '87 ski lifts' uplift 64,480 skiers and snowboarders per hour (likely an older lift count). Runs: 156 = 23 green (15%), 66 blue (42%), 40 red (26%), 27 black (17%). Perce-Neige funicular (Val Claret to the Grande Motte): 3,491 m long, 3,600 passengers/hour. Tignes-only totals not found."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://en.tignes.net/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski schools (e.g. ESF) and rental shops operate in the resort villages"
+    }
+  },
+  "character": "Tignes is a group of high villages (Val Claret, Le Lac, Le Lavachet, Tignes 1800, Les Boisses and Les Brévières) that shares the Espace Killy with Val d'Isère: about 300 km of pistes and around 90 lifts. The Grande Motte glacier, reached by the Perce-Neige underground funicular, gives one of the longest winter seasons in the Alps, from late November into May.",
+  "learning": "The Espace Killy has 23 green and 66 blue runs by one count (search summary). Reference: the main villages have beginner areas; the altitude (2,100 m at Le Lac) means cold, exposed conditions early and late in the season. Confirm beginner-lift access and lessons locally.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-11-21",
+      "text": "Tignes opens 21 Nov 2026; the link with Val d'Isère opens from 28 Nov 2026 (official Tignes opening-dates page, per search summary).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://en.tignes.net/resort-opening-dates",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-05-02",
+      "text": "Season to 2 May 2027 (official Tignes opening-dates page, per search summary).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://en.tignes.net/resort-opening-dates",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    "history": [],
+    "typicalText": "Usually late November to early May (reference; the Grande Motte glacier has also offered summer skiing).",
+    "notes": "Val d'Isère's side of the Espace Killy opens 28 Nov 2026. Past seasons were not captured."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Tignes–Val d'Isère (Espace Killy) adult 1-day ski pass",
+      "category": "adult (19–64)",
+      "amount": 70,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary: Winter 2026-2027 1-day €70.00 for adults 19–64; €57.00 for ages 8–18 and 65–74. Confirm whether the price varies by date.",
+      "source": {
+        "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Tignes / Val d'Isère ski-pass pages"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://en.tignes.net/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://en.tignes.net/skiing/ski-pass-you-need",
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://meteofrance.com/meteo-montagne",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Tignes opening dates (official)",
+      "url": "https://en.tignes.net/resort-opening-dates"
+    },
+    {
+      "label": "Access to the Tignes ski lifts (official)",
+      "url": "https://en.tignes.net/skiing/ski-area/ski-lifts"
+    },
+    {
+      "label": "Tignes/Val d'Isère lift list (skiresort.info)",
+      "url": "https://www.skiresort.info/ski-resort/tignes-val-disere/ski-lifts/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "CMF",
+        "role": "closest",
+        "minutes": 135,
+        "km": 160,
+        "basis": "Estimate from typical routing (A43/A430 to Albertville, then the N90 up the Tarentaise to Bourg-Saint-Maurice and the D902); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "GVA",
+        "role": "practical",
+        "minutes": 175,
+        "km": 205,
+        "basis": "Estimate from typical routing (A41 via Annecy, then Albertville and the N90 up the Tarentaise and the D902); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "LYS",
+        "role": "practical",
+        "minutes": 175,
+        "km": 235,
+        "basis": "Estimate from typical routing (A43 to Chambéry, A430/N90 to Albertville and up the Tarentaise and the D902); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Train to Bourg-Saint-Maurice, then bus",
+        "type": "train",
+        "url": "https://www.sncf-connect.com/",
+        "notes": "Reference, confirm: Bourg-Saint-Maurice is the railhead for the upper Tarentaise, with buses up to the resorts. Check 2026-27 timetables."
+      },
+      {
+        "name": "Shared and private airport transfers",
+        "type": "shuttle",
+        "url": null,
+        "notes": "Reference, confirm: shared and private transfers run in winter from Geneva, Lyon and Chambéry airports. No operator, fare or schedule is on file."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Tignes-only piste km and lift breakdown.",
+      "Official live lift-status and snow-report pages.",
+      "Date of the 64,480 skiers/hour capacity figure (stated for 87 lifts).",
+      "Past opening/closing dates for an estimated window."
+    ],
+    "conflicts": [
+      "Espace Killy runs: 156 (23/66/40/27) in this search vs 155 (22/68/39/26) in the Val d'Isère search.",
+      "Lift count 90 (by-type list) vs 87 (capacity statement)."
+    ],
+    "confidenceNotes": "Season dates come from a search summary of Tignes' official page; area and lift figures from search summaries of guide pages and Wikipedia. Coordinates and operator are reference data; weather points are approximate; airport times are estimates."
+  }
+}

@@ -21,6 +21,7 @@ import {
   type PassRuleInput,
   type PassUsageInput,
 } from '../passes/types'
+import type { SeasonOf } from '../time'
 import { convertMoney, type FxRateRecord } from './fx'
 
 export interface PlannedResortDay {
@@ -118,6 +119,8 @@ export function comparePasses(input: {
   rates: readonly FxRateRecord[]
   today?: string | null
   names?: Readonly<Record<string, string>>
+  /** Season of a date at a resort (Southern Hemisphere winters differ); default: every resort northern. */
+  seasonOf?: SeasonOf
 }): PassComparison {
   const currency = input.currency.toUpperCase()
   const zero = money(0, currency)
@@ -152,7 +155,7 @@ export function comparePasses(input: {
       c.rules,
       days.map((d) => ({ resortId: d.resortId, date: d.date })),
       c.owned?.usage ?? [],
-      { today, names: input.names },
+      { today, names: input.names, seasonOf: input.seasonOf },
     )
     const calcDays: CalcDay[] = plan.days.map((p) => {
       const d = days[p.index]

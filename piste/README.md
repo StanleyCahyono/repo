@@ -114,8 +114,10 @@ format. The build environment could not reach any external host, so none has run
 first successful refresh on a networked machine confirms them, and Sources & Sync shows exactly what succeeded when.
 Until then, live mode shows honest "not fetched yet" or failure states, never demo data.
 
-**Catalog** (`catalog/`, validated with `npx tsx scripts/validate-catalog.ts`): 33 resorts, 23 pass products,
-83 pass access rules, 18 airports, 13 hotels and 2 events.
+**Catalog** (`catalog/`, validated with `npx tsx scripts/validate-catalog.ts`): 108 resorts (North America, Japan,
+Australia and New Zealand, Austria, Switzerland, France, Italy, Germany, Andorra, Spain and Sweden), 23 pass products,
+130 pass access rules, 43 airports, 13 hotels and 2 events. Lift and run lists come from OpenStreetMap on each resort
+page (loaded automatically for favourites).
 
 - Fully researched: Greek Peak, Bristol, Holiday Valley and Elk Mountain. Partly researched: Labrador and Belleayre.
   Researched facts are shown as "Researched — confirm at source" with their source links.

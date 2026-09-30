@@ -66,6 +66,8 @@ export interface RankingView {
   weightsNote: string | null
   preseason: boolean
   noWinnerReason: string | null
+  /** Resorts not ranked because they are more than a long flight from home (planned as trips — see Explore). */
+  longHaul: number
   /** Eligible options in rank order. The first is the pick unless `preseason`. */
   options: OptionView[]
   /** Status unknown — ranked for planning, never the pick. */
@@ -139,6 +141,7 @@ export function rankingView(rec: Recommendation): RankingView {
     weightsNote: rec.weightsNote,
     preseason: rec.preseason,
     noWinnerReason: rec.noWinnerReason,
+    longHaul: rec.longHaulExcluded ?? 0,
     options: rec.ranked.map((o) => optionView(o, rec.dates)),
     unknown: rec.statusUnknown.map((o) => optionView(o, rec.dates)),
     excluded: rec.excluded.map((e) => ({

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { defaultDeps } from '@/lib/jobs/deps'
 import { providerStatus, weatherProviders, weatherProvidersFor } from './registry'
 
 const byId = (env: Record<string, string>) => Object.fromEntries(providerStatus(env).map((s) => [s.id, s]))
@@ -19,6 +20,18 @@ describe('providerStatus', () => {
     expect(s.duffel).toMatchObject({ state: 'live', credentialSet: true, testMode: true })
     expect(s['open-meteo'].credentialSet).toBe(true)
     expect(JSON.stringify(providerStatus({ DUFFEL_ACCESS_TOKEN: 'duffel_test_topsecret', OPEN_METEO_API_KEY: 'om-secret' }))).not.toMatch(/topsecret|om-secret/)
+  })
+
+  it('lists OpenStreetMap lifts & runs as a live connector that needs no key, honest about what it is', () => {
+    const osm = byId({})['osm-overpass']
+    expect(osm).toMatchObject({ role: 'lifts-runs', state: 'live', auth: 'none', credentialSet: false })
+    expect(osm.notes.join(' ')).toMatch(/Community-mapped/)
+    expect(osm.notes.join(' ')).toMatch(/Never live open\/closed status/)
+    expect(osm.notes.join(' ')).toMatch(/OpenStreetMap contributors \(ODbL\)/)
+    expect(byId({ PISTE_DISABLED_PROVIDERS: 'osm-overpass' })['osm-overpass'].state).toBe('disabled')
+    expect(defaultDeps({ env: {} }).osmProvider?.id).toBe('osm-overpass')
+    expect(defaultDeps({ env: { PISTE_DISABLED_PROVIDERS: 'osm-overpass' } }).osmProvider).toBeNull()
+    expect(defaultDeps({ demo: true }).osmProvider).toBeNull()
   })
 
   it('can disable a connector explicitly', () => {

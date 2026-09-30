@@ -58,6 +58,7 @@ WantedBy=multi-user.target
 | `fx` | daily | `PISTE_FX_EVERY_MIN` | ECB reference rates for every currency in use. |
 | `links` | daily | `PISTE_LINKS_EVERY_MIN` | Re-checks links older than 20 h (≤ 300 per run, 250 ms apart). |
 | `prune` | daily | `PISTE_PRUNE_EVERY_MIN` | Retention (below). The single-file build prunes every 6 h and on every visit. |
+| `osm` | weekly, per resort | `PISTE_OSM_EVERY_MIN` | OpenStreetMap lifts & runs (`src/lib/jobs/osm.ts`): one task per favourite and per resort with a resort day in an upcoming (draft or booked) trip, planned after every other task — a new favourite loads at the next tick. Other resorts load on demand from their page (`POST /api/refresh { job: 'osm', target }`; always one resort). A failed load is retried after 30 min; a cron pass (`npm run refresh`) loads only the resorts that are due. Never against the demo database. |
 
 Other settings: `PISTE_WORKER_TICK_SECONDS` (60), `PISTE_SCHEDULER_JITTER` (0.1 = ±10 % of each cadence, so
 requests do not align on the hour; 0 ≤ value < 1), `PISTE_WEATHER_RETENTION_DAYS` (14; retention settings below), `PISTE_DISABLED_PROVIDERS`
@@ -84,6 +85,12 @@ the error text and per-source outcomes in `details.items` (`{ key, target, ok, s
   every item skipped — is recorded `ok` but does not advance "last successful update", so a disconnected provider
   never looks fresh. Local jobs (`status`, `assessments`, `alerts`, `prune`) count whenever they complete. The whole
   run history is searched, so a source failing for months still shows its real last success.
+- **Rate limits and quotas.** When a weather provider answers `rate-limited` (HTTP 429 — e.g. Open-Meteo's daily or
+  hourly request limit — or a Retry-After longer than the HTTP client waits), the weather job does not call that
+  provider again in the same pass: that point is a failed item (with an error run), every remaining point of that
+  provider is a **skipped** item whose `error` says why, and the run's notes say how many points were skipped.
+  Skipped points write no run, so their last good forecasts stay the latest, and — like failures — they never
+  advance "last successful update". Other providers carry on; the next scheduled pass tries again.
 - **Failed weather fetches** add a `weather_runs` row with `status = 'error'` (shown on Sources) and never delete or
   modify earlier good runs. A response the adapter accepted but that holds no usable hour (an empty time axis, or
   renamed variables that all parse as null) is treated the same way, as a `schema-changed` failure: an error run, a
@@ -181,7 +188,8 @@ never become the newest again. Rows stamped in the future are left alone. Everyt
 - `PISTE_PRUNE_VACUUM=1` runs `VACUUM` after a prune that deleted rows, and `PISTE_DB_PAGE_SIZE=16384` sets the page
   size it writes. Assessment rows of 1–3 KB waste much of a 4 KB page.
 
-Other tables: `source_records` older than 30 days are pruned except the newest per adapter/resort/URL;
+Other tables: `source_records` older than 30 days are pruned except the newest per adapter/resort/URL and the newest
+successful one (its extract is the last good data — a resort's OpenStreetMap lifts and runs are read from it);
 `refresh_runs` older than 60 days (skipped rows after 7 days) are pruned, except the run "last success" points at for
 each job and for each resort, including a resort's success recorded inside a global run, which is kept whatever its
 age. Reports, status events, opening-date history and personal records are never pruned.
@@ -226,12 +234,15 @@ kind `demo`.
 - An announced opening date never produces `open`. Before it, the derived status is `not-yet-open`; once it passes
   without an official confirmation the derived status becomes `unknown` ("Status unavailable"). Derived statuses
   never override a newer official statement of the same season; a statement from an earlier season (last April's
-  "closed for the season") does not block the new season's derived status.
+  "closed for the season") does not block the new season's derived status. Seasons are the resort's own: at a
+  Southern Hemisphere resort the season changes on 1 January (its June–October winter of year Y is `(Y-1)-(YY)`),
+  so September is not next winter's preseason there.
 - A derived status describes the whole resort-local day, so it is stamped at local midnight: an official statement
   made later that day wins even if it is fetched after the status job ran. (When it supersedes a statement about an
   earlier date that was first recorded later today, it takes that statement's time instead.)
 - An official `open`/`partially-open` report confirms the actual opening; `closed-for-season` after an opening
-  confirms the actual closing. Every change of announced/actual opening/closing is logged to
+  confirms the actual closing — filed under the resort's own season for the statement's date (the `seasons` and
+  `resort_seasons` rows are created when missing). Every change of announced/actual opening/closing is logged to
   `opening_date_history`.
 - Manual reports: kind `manual` (typed from an official source, source URL required), kind `official` entered by me
   (`verification: user-confirmed`, `note: entered-by-user`), personal feedback (kind `manual`, provider `You`,

@@ -29,15 +29,17 @@ import type {
 } from '@/lib/db/rows'
 import { isExpired } from '@/lib/domain/costs'
 import { latestRules } from '@/lib/domain/passes'
-import { addHours, hoursBetween, seasonIdFor } from '@/lib/domain/time'
+import { addHours, hoursBetween } from '@/lib/domain/time'
 import type { AppMode, Provenance } from '@/lib/domain/types'
-import { currentReports, loadBundle, seasonLabel, verificationLabel, type Bundle, type Correction, type DataCtx } from './core'
+import { currentReports, loadBundle, resortSeasonFor, resortToday, seasonLabel, verificationLabel, type Bundle, type Correction, type DataCtx } from './core'
 import {
   collectLinks,
   DEFAULT_CADENCES,
   EXTERNAL_JOBS,
   HEARTBEAT_KEY,
   JOB_NAMES,
+  isResearchedReport,
+  osmTargets,
   providerStatus,
   reportOrigin,
   successTargets,
@@ -281,6 +283,7 @@ export const JOB_LABEL: Record<JobName, string> = {
   weather: 'Weather forecasts',
   'nws-alerts': 'Official weather alerts',
   reports: 'Official snow reports',
+  osm: 'Lifts & runs (OpenStreetMap)',
   status: 'Operating status (from season dates)',
   assessments: 'Conditions scores',
   alerts: 'In-app alerts',
@@ -484,6 +487,12 @@ function cadenceFor(job: JobName, c: Cadences): { minutes: number | null; staleA
       return { minutes: c.fxMin, staleAfterMin: 2 * c.fxMin, text: every(c.fxMin) }
     case 'prune':
       return { minutes: c.pruneMin, staleAfterMin: 2 * c.pruneMin, text: every(c.pruneMin) }
+    case 'osm':
+      return {
+        minutes: c.osmMin,
+        staleAfterMin: 2 * c.osmMin,
+        text: `${c.osmMin === 10_080 ? 'Weekly' : every(c.osmMin)} for favourites and upcoming trips; other resorts on demand`,
+      }
   }
 }
 
@@ -590,8 +599,24 @@ function coverageFor(e: ResortEvidence, ctx: DataCtx, demo: boolean): CoverageCe
   cells.push(provCell('location', true, r.locationProv, null, 'Location not recorded'))
   const elevKnown = [r.baseElevationM, r.summitElevationM, r.verticalM].filter((x) => x !== null).length
   cells.push(provCell('elevation', elevKnown > 0, r.elevationProv, `${elevKnown} of 3 elevation facts recorded`, 'Elevation not recorded'))
-  const terrainKnown = t ? [t.trails, t.lifts, t.skiableAcres, t.beginnerPct, t.intermediatePct, t.advancedPct, t.terrainParks].filter((x) => x !== null).length : 0
-  cells.push(provCell('terrain', terrainKnown > 0, t?.prov, `${terrainKnown} of 7 terrain facts recorded`, 'Terrain not recorded'))
+  const byType = t?.liftsByType ?? null
+  const terrainFacts = t
+    ? [
+        t.trails,
+        t.lifts,
+        t.skiableAcres,
+        t.beginnerPct,
+        t.intermediatePct,
+        t.advancedPct,
+        t.terrainParks,
+        t.expertPct ?? null,
+        t.pisteKm ?? null,
+        t.liftCapacityPerHour ?? null,
+        byType && Object.values(byType).some((x) => x !== null) ? 1 : null,
+      ]
+    : []
+  const terrainKnown = terrainFacts.filter((x) => x !== null).length
+  cells.push(provCell('terrain', terrainKnown > 0, t?.prov, `${terrainKnown} of 11 terrain facts recorded`, 'Terrain not recorded'))
   const featuresKnown = f ? [f.nightSkiing, f.snowmakingPct, f.lessons, f.rentals, f.onMountainLodging, f.tubing, f.childcare, f.beginnerArea].filter((x) => x !== null).length : 0
   cells.push(provCell('features', featuresKnown > 0, f?.prov, `${featuresKnown} of 8 features recorded`, 'Lessons, rentals and features not recorded'))
 
@@ -652,7 +677,14 @@ function coverageFor(e: ResortEvidence, ctx: DataCtx, demo: boolean): CoverageCe
   } else if (rep) {
     const origin = reportOrigin(rep)
     const fresh = repAge !== null && repAge <= REPORT_LIVE_HOURS
-    const what = origin === 'official-adapter' ? 'Official report' : origin === 'official-by-user' ? 'Official report entered by you' : 'Report typed from an official source'
+    const what =
+      origin === 'official-adapter'
+        ? 'Official report'
+        : origin === 'official-by-user'
+          ? 'Official report entered by you'
+          : isResearchedReport(rep)
+            ? 'Report found by catalog research'
+            : 'Report typed from an official source'
     const detail = `${what} for ${rep.localDate}, published ${rep.reportedAt ? `${ageText(repAge!)} ago` : 'at an unknown time'}${adapterOn ? '' : ' — no report adapter, manual entries only'}`
     // "Live" only for a fresh report from a connected adapter; anything else is judged by its own source.
     const state: CoverageState = !fresh ? 'stale' : adapterOn && origin === 'official-adapter' ? 'live' : sourceClass(rep.prov)
@@ -687,7 +719,7 @@ function coverageFor(e: ResortEvidence, ctx: DataCtx, demo: boolean): CoverageCe
   const sv = statusView(r, b.status.get(r.id), rep, now)
   if (demo) cells.push(sv.basis === 'none' ? cell('status', 'missing', 'No status in the demo data') : cell('status', 'demo', sv.label, sv.since))
   else if (sv.basis === 'none') cells.push(cell('status', 'missing', sv.note ?? 'No operating status recorded', null, sv.prov?.sourceUrl ?? null))
-  else if (sv.seasonId && sv.seasonId !== seasonIdFor(ctx.today)) cells.push(cell('status', 'stale', `${sv.label} — ${sv.note ?? `from the ${seasonLabel(sv.seasonId)} season`}`, sv.since, sv.prov?.sourceUrl ?? null))
+  else if (sv.seasonId && sv.seasonId !== resortSeasonFor(r, resortToday(r, now))) cells.push(cell('status', 'stale', `${sv.label} — ${sv.note ?? `from the ${seasonLabel(sv.seasonId)} season`}`, sv.since, sv.prov?.sourceUrl ?? null))
   else if (sv.basis === 'season') cells.push(cell('status', 'derived', `${sv.label} — derived from season dates, not a report`, sv.since))
   else {
     const c = sourceClass(sv.prov)
@@ -740,6 +772,18 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
   const adapterByResort = new Map(connectors.filter((c) => c.role === 'resort-report' && c.resortId).map((c) => [c.resortId!, c]))
   const failSince = addHours(now, -FAILURE_WINDOW_DAYS * 24)
   const sr = s.sourceRecords
+  // Lifts & runs load per resort: the scheduled ones (favourites, upcoming trips), then any loaded on demand.
+  const osmIds = demo
+    ? []
+    : [
+        ...new Set([
+          ...(await osmTargets(db, now)),
+          ...(await db.selectDistinct({ id: s.refreshRuns.target }).from(s.refreshRuns).where(eq(s.refreshRuns.job, 'osm')))
+            .map((x) => x.id)
+            .filter((x): x is string => !!x && resortIds.includes(x))
+            .sort(),
+        ]),
+      ]
 
   const [schedules, hotels, reportsNow, meta, fetchStats, failureRows, linkRows, allLinks, histories] = await Promise.all([
     db.select().from(s.operatingSchedules),
@@ -768,7 +812,7 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
     collectLinks(db),
     Promise.all(
       JOB_NAMES.map(async (job) => {
-        const targets = job === 'weather' ? resortIds : job === 'reports' ? [...adapterByResort.keys()] : []
+        const targets = job === 'weather' ? resortIds : job === 'reports' ? [...adapterByResort.keys()] : job === 'osm' ? osmIds : []
         return [job, await scanRunHistory(db, job, targets)] as const
       }),
     ),
@@ -784,7 +828,7 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
   const jobs: JobView[] = JOB_NAMES.map((job) => {
     const c = cadenceFor(job, cadences)
     const h = history.get(job)!
-    const targetIds = job === 'weather' ? resortIds : job === 'reports' ? [...adapterByResort.keys()] : []
+    const targetIds = job === 'weather' ? resortIds : job === 'reports' ? [...adapterByResort.keys()] : job === 'osm' ? osmIds : []
     const targets = targetIds.map((id) => ({ resortId: id, name: names[id] ?? id, ...health(h.scopes.get(id)!, { demo, staleAfterMin: c.staleAfterMin, now }) }))
     return {
       job,
@@ -800,7 +844,15 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
   // --- Connectors --------------------------------------------------------------------------------------------------
   const lastOkBy = new Map(fetchStats.map((x) => [x.adapter, x.lastOk ?? null]))
   const lastFetchBy = new Map(latestFetch.map((x) => [x.adapter, x]))
-  const ROLE_JOB: Record<ConnectorStatus['role'], JobName | null> = { weather: 'weather', alerts: 'nws-alerts', 'resort-report': 'reports', fx: 'fx', flights: null, 'link-check': 'links' }
+  const ROLE_JOB: Record<ConnectorStatus['role'], JobName | null> = {
+    weather: 'weather',
+    alerts: 'nws-alerts',
+    'resort-report': 'reports',
+    'lifts-runs': 'osm',
+    fx: 'fx',
+    flights: null,
+    'link-check': 'links',
+  }
   const connectorViews: ConnectorView[] = connectors.map((c) => {
     const job = ROLE_JOB[c.role]
     const j = job ? jobBy.get(job)! : null

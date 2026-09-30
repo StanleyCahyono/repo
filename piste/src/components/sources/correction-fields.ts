@@ -53,6 +53,15 @@ export const CORRECTION_FIELDS: readonly CorrectionField[] = [
   { field: 'terrain.intermediatePct', label: 'Intermediate terrain', group: 'terrain', kind: 'pct?' },
   { field: 'terrain.advancedPct', label: 'Advanced terrain', group: 'terrain', kind: 'pct?' },
   { field: 'terrain.terrainParks', label: 'Terrain parks', group: 'terrain', kind: 'int?' },
+  { field: 'terrain.expertPct', label: 'Expert terrain', group: 'terrain', kind: 'pct?', hint: 'Only when the resort states it apart from advanced terrain (double black, freeride).' },
+  { field: 'terrain.pisteKm', label: 'Marked pistes (km)', group: 'terrain', kind: 'number?', hint: 'Kilometres of marked runs, as the resort states it.' },
+  { field: 'terrain.liftsByType.gondolas', label: 'Gondolas', group: 'terrain', kind: 'int?' },
+  { field: 'terrain.liftsByType.cableCars', label: 'Cable cars / trams', group: 'terrain', kind: 'int?' },
+  { field: 'terrain.liftsByType.chairlifts', label: 'Chairlifts', group: 'terrain', kind: 'int?' },
+  { field: 'terrain.liftsByType.surfaceLifts', label: 'Surface lifts', group: 'terrain', kind: 'int?', hint: 'T-bars, platters, rope tows.' },
+  { field: 'terrain.liftsByType.other', label: 'Other lifts', group: 'terrain', kind: 'int?', hint: 'Carpets, funiculars and anything else.' },
+  // 'number?': a large area's capacity is well above the whole-number field's 100,000 limit.
+  { field: 'terrain.liftCapacityPerHour', label: 'Uphill capacity (people per hour)', group: 'terrain', kind: 'number?' },
   { field: 'features.lessons', label: 'Lessons', group: 'features', kind: 'bool?' },
   { field: 'features.rentals', label: 'Rentals', group: 'features', kind: 'bool?' },
   { field: 'features.nightSkiing', label: 'Night skiing', group: 'features', kind: 'bool?' },
@@ -86,6 +95,7 @@ export const CORRECTION_FIELDS: readonly CorrectionField[] = [
   link('tourism', 'Tourism office'),
   link('avalanche', 'Avalanche centre'),
   link('openSkiMap', 'OpenSkiMap'),
+  link('liftStatus', 'Live lift status'),
   { field: 'character', label: 'Character', group: 'about', kind: 'longtext?' },
   { field: 'learning', label: 'Learning notes', group: 'about', kind: 'longtext?' },
 ]

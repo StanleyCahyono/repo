@@ -9,9 +9,9 @@
  */
 import { and, desc, eq } from 'drizzle-orm'
 import type { Db } from '@/lib/db/client'
-import { openingDateHistory, resortSeasons, seasons, statusEvents } from '@/lib/db/schema'
+import { openingDateHistory, resorts, resortSeasons, seasons, statusEvents } from '@/lib/db/schema'
 import type { ResortSeasonRow, StatusEventRow } from '@/lib/db/rows'
-import { localDateOf, seasonIdFor, formatLocalDate, startOfLocalDay } from '@/lib/domain/time'
+import { localDateOf, formatLocalDate, hemisphereOf, seasonBounds, seasonIdForHemisphere, startOfLocalDay, type Hemisphere } from '@/lib/domain/time'
 import { provenance, type OperatingStatus, type Provenance } from '@/lib/domain/types'
 import type { ItemOutcome, JobContext, JobWorkResult } from './types'
 import { errorMessage, selectResorts } from './util'
@@ -61,15 +61,26 @@ const PROV_FIELD = {
   actualClosing: 'actualClosingProv',
 } as const
 
-/** Seasons run 1 Jul → 30 Jun (see seasonIdFor); create the season row a resort season refers to. */
-async function ensureSeason(db: Db, seasonId: string) {
+/**
+ * Create the (planning) season row a resort season refers to. Its nominal dates are the Northern Hemisphere span
+ * (1 Jul → 30 Jun); a Southern Hemisphere resort's winter in the same season id is the calendar year after the start
+ * year (see seasonIdForHemisphere) and is filed under the same row.
+ */
+export async function ensureSeason(db: Db, seasonId: string) {
   const m = /^(\d{4})-(\d{2})$/.exec(seasonId)
   if (!m) throw new Error(`Invalid season id: ${seasonId}`)
   const start = Number(m[1])
+  const nominal = seasonBounds(seasonId, 'north')
   await db
     .insert(seasons)
-    .values({ id: seasonId, label: `${start}–${String(start + 1).slice(2)}`, startDate: `${start}-07-01`, endDate: `${start + 1}-06-30` })
+    .values({ id: seasonId, label: `${start}–${String(start + 1).slice(2)}`, startDate: nominal.from, endDate: nominal.to })
     .onConflictDoNothing()
+}
+
+/** Hemisphere of a stored resort (by latitude); an unknown resort counts as northern. */
+async function resortHemisphere(db: Db, resortId: string): Promise<Hemisphere> {
+  const [row] = await db.select({ lat: resorts.lat }).from(resorts).where(eq(resorts.id, resortId)).limit(1)
+  return hemisphereOf(row?.lat)
 }
 
 /** Update season dates, logging each change to opening_date_history. Returns the fields that changed. */
@@ -117,13 +128,16 @@ export async function updateSeasonDates(
 
 /**
  * Season facts implied by an official (or transcribed-official) status statement: 'open'/'partially-open' confirms
- * the actual opening; 'closed-for-season' after an opening confirms the actual closing.
+ * the actual opening; 'closed-for-season' after an opening confirms the actual closing. The statement is filed
+ * under the resort's own season for its date — a Southern Hemisphere winter (June–October of year Y) is season
+ * '(Y-1)-(YY)' — and the season row is created when missing. `hemisphere` defaults to the stored resort's latitude.
  */
 export async function applyStatusToSeason(
   db: Db,
-  a: { resortId: string; status: OperatingStatus; localDate: string; prov: Provenance; now: string },
+  a: { resortId: string; status: OperatingStatus; localDate: string; prov: Provenance; now: string; hemisphere?: Hemisphere },
 ): Promise<SeasonDateField[]> {
-  const seasonId = seasonIdFor(a.localDate)
+  if (a.status !== 'open' && a.status !== 'partially-open' && a.status !== 'closed-for-season') return []
+  const seasonId = seasonIdForHemisphere(a.localDate, a.hemisphere ?? (await resortHemisphere(db, a.resortId)))
   const season = (
     await db
       .select()
@@ -153,8 +167,14 @@ type SeasonDates = Pick<ResortSeasonRow, 'announcedOpening' | 'actualOpening' | 
 /**
  * Status implied by season dates alone (pure). Never 'open': operations come from official statements.
  * `latest` is the latest recorded event; derived statuses never override a newer official statement of this season.
+ * `hemisphere` decides which season a date belongs to (Southern Hemisphere winters change season on 1 January).
  */
-export function deriveSeasonStatus(season: SeasonDates | null, today: string, latest: Pick<StatusEventRow, 'status' | 'localDate' | 'prov'> | null): DerivedStatus | null {
+export function deriveSeasonStatus(
+  season: SeasonDates | null,
+  today: string,
+  latest: Pick<StatusEventRow, 'status' | 'localDate' | 'prov'> | null,
+  hemisphere: Hemisphere = 'north',
+): DerivedStatus | null {
   if (!season) return null
   // Piste's own statements (kind 'derived', or 'demo' ones written by Piste in the demo database) may be superseded,
   // and so may any statement about an earlier season: last April's "closed for the season" says nothing about
@@ -163,7 +183,7 @@ export function deriveSeasonStatus(season: SeasonDates | null, today: string, la
     !latest ||
     latest.prov.kind === 'derived' ||
     (latest.prov.kind === 'demo' && latest.prov.provider === 'Piste') ||
-    seasonIdFor(latest.localDate) !== seasonIdFor(today)
+    seasonIdForHemisphere(latest.localDate, hemisphere) !== seasonIdForHemisphere(today, hemisphere)
   if (season.actualClosing && season.actualClosing <= today) {
     return supersedable || latest!.localDate < season.actualClosing
       ? { status: 'closed-for-season', note: `Closed for the season on ${formatLocalDate(season.actualClosing)}` }
@@ -204,7 +224,8 @@ export async function deriveStatuses(ctx: JobContext): Promise<JobWorkResult> {
     const key = resort.id
     try {
       const today = localDateOf(now, resort.timezone)
-      const seasonId = seasonIdFor(today)
+      const hemisphere = hemisphereOf(resort.lat)
+      const seasonId = seasonIdForHemisphere(today, hemisphere)
       const season =
         (
           await db
@@ -213,7 +234,7 @@ export async function deriveStatuses(ctx: JobContext): Promise<JobWorkResult> {
             .where(and(eq(resortSeasons.resortId, resort.id), eq(resortSeasons.seasonId, seasonId)))
         )[0] ?? null
       const latest = await latestStatusEvent(db, resort.id)
-      const derived = deriveSeasonStatus(season, today, latest)
+      const derived = deriveSeasonStatus(season, today, latest, hemisphere)
       if (!derived || latest?.status === derived.status) {
         items.push({ key, target: resort.id, ok: true, skipped: true, written: 0 })
         continue

@@ -43,7 +43,8 @@ npm run standalone:verify   # re-check it in headless Chromium from its file:// 
     schema, and not be a demo database.
 - **Refresh jobs while the page is open:** in live mode and online, the same scheduler as `npm run worker` ticks once a
   minute. It fetches Open-Meteo, NWS forecasts and alerts, and Frankfurter FX, then runs status, assessments, alerts and
-  prune, each on its own cadence. Weather is fetched every 12 h, so every daily visit gets a fresh forecast. The
+  prune, each on its own cadence. OpenStreetMap lifts & runs load weekly for favourites and resorts in upcoming trips,
+  and on demand from any resort page (the Overpass API answers browsers, so it works from `file://`). Weather is fetched every 12 h, so every daily visit gets a fresh forecast. The
   server's default is 3 h. A failed refresh never advances "last successful update".
 - **Maps:** MapLibre GL runs from an embedded worker. Tiles come from OpenFreeMap, so they need an internet connection.
   Offline, the schematic map says so.
@@ -109,7 +110,7 @@ with the 2 default favourites):
 - **Storage belongs to the browser.** Another browser, another computer or clearing site data starts empty. Chrome
   keeps one storage area for all files opened from disk. If a browser refuses storage for local files, the page still
   works but warns that changes will not be kept, and points you to Download.
-- **Untested here:** the live weather, FX and tile APIs. The build environment has no internet access. They are public
+- **Untested here:** the live weather, FX, OpenStreetMap (Overpass) and tile APIs. The build environment has no internet access. They are public
   APIs that send CORS headers, and failures show as failures. Only Chromium was tested.
 
 ## How it is built

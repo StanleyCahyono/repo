@@ -1,5 +1,5 @@
 export * from './types'
-export { latestRule, latestRules, findBlackout, resolvePool, countUsedDays, type PoolDefinition } from './rules'
+export { latestRule, latestRules, findBlackout, resolvePool, countUsedDays, usageInSeason, type PoolDefinition } from './rules'
 export { evaluateAccess, planAccess, type EvaluateAccessInput, type PlannedVisit, type PlannedAccessDay, type AccessPlan } from './access'
 export {
   remainingByResort,

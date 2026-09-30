@@ -17,6 +17,7 @@ import type { ScoreKind, UnitPrefs } from '@/lib/domain/types'
 import { maxSnow, snowLabel, tempPair } from './format'
 import { useTodayNav } from './nav'
 import { datesPatch, formatDates } from './params'
+import { LongHaulNote } from './long-haul'
 
 export interface StripCellData {
   resortId: string
@@ -65,12 +66,18 @@ export function DayStrip({
   units,
   modeLabel,
   today,
+  longHaul = [],
+  longHaulLimit = null,
 }: {
   days: StripDayData[]
   basis: 'favourites' | 'winner' | 'none'
   units: UnitPrefs
   modeLabel: string
   today: string
+  /** Favourites left out: more than a long flight from home (planned as trips). */
+  longHaul?: readonly string[]
+  /** LONG_HAUL_KM in display units. */
+  longHaulLimit?: string | null
 }) {
   const { dates, navigate } = useTodayNav()
   const groupRef = useRef<HTMLDivElement>(null)
@@ -228,6 +235,7 @@ export function DayStrip({
         </div>
 
         {outside ? <p className="mt-2 px-2 text-[12.5px] text-ink-3">Ranking {formatDates(dates)} — beyond this strip.</p> : null}
+        {longHaul.length ? <LongHaulNote count={longHaul.length} names={longHaul.length <= 3 ? longHaul : undefined} limit={longHaulLimit} what="in this strip" className="mt-2 px-2" /> : null}
         {anyWeather ? (
           <p className="mt-2 px-2 text-[12px] leading-relaxed text-ink-3">
             Big number: conditions score ({modeLabel}); <span aria-hidden>*</span> weather potential only — terrain and status unknown. Blue: likely new snow{' '}

@@ -17,18 +17,20 @@ import type { ResortDetail } from '@/lib/data/resort-detail'
 import type { RefreshHealthView, ResortPageExtras } from '@/lib/data/resort-page'
 import type { ReportView } from '@/lib/data/views'
 import { CONDITIONS_CONFIG_V1 } from '@/lib/domain/conditions/config.v1'
+import { isResearchedReport } from '@/lib/domain/reports'
 import { formatLocalDate } from '@/lib/domain/time'
 import { COMPONENT_LABEL, SCORING_MODE_LABEL, SURFACE_LABEL, type SnowfallReading } from '@/lib/domain/types'
 import { ModeSwitch } from './mode-switch'
 import { RefreshNow } from './refresh-now'
 import { ObservationSheet, ReportEntrySheet } from './report-entry'
-import { ResortSection, Src, SubHead } from './section'
+import { ConfirmTag, ResortSection, Src, SubHead } from './section'
 import {
   ago,
   dayLabel,
   dayLabelYear,
   dotJoin,
   groupErrors,
+  hostOf,
   instantLabel,
   plural,
   pointTitle,
@@ -42,6 +44,13 @@ import {
 } from './format'
 
 const GATE = Math.round(CONDITIONS_CONFIG_V1.gate.minCoverage * 100)
+
+/** Where a report came from, in words. A report found by catalog research names the site it was found on. */
+function originLabel(r: Pick<ReportView, 'origin' | 'prov'>): string {
+  if (!isResearchedReport(r)) return REPORT_ORIGIN_LABEL[r.origin]
+  const host = hostOf(r.prov.sourceUrl)
+  return `Found by catalog research${host ? ` (${host})` : ''}`
+}
 
 /** Ends a stored note with a full stop so it can be followed by another sentence. */
 const sentence = (t: string) => (/[.!?]$/.test(t.trim()) ? t.trim() : `${t.trim()}.`)
@@ -390,7 +399,26 @@ function Meter({ label, open, total }: { label: string; open: number | null; tot
   )
 }
 
+/**
+ * The resort's own live lift status page, when the catalog has one: which lifts run right now is only there — Piste
+ * cannot read it. The Lifts meter above counts what a report stated, not live status.
+ */
+function LiftStatusLink({ url, counted }: { url: string | null; counted: boolean }) {
+  if (!url) return null
+  return (
+    <p className="text-[12.5px] text-ink-2">
+      {counted ? 'The lift count is what the report stated. ' : ''}Which lifts are running right now:{' '}
+      <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-teal hover:underline">
+        Live lift status (official site) <ExternalLink aria-hidden className="size-3" />
+        <span className="sr-only"> (opens a new tab)</span>
+      </a>{' '}
+      — Piste cannot read it.
+    </p>
+  )
+}
+
 function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPageExtras; v: PageView; reportUrl: string | null }) {
+  const liftStatusUrl = d.links.find((l) => l.key === 'liftStatus')?.url ?? null
   const r = d.summary
   const rep = r.snow.report
   const u = units(v.units)
@@ -404,15 +432,15 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
           </SubHead>
           {rep ? (
             <p className="text-[12.5px] text-ink-2 tnum">
-              {dotJoin(REPORT_ORIGIN_LABEL[rep.origin], rep.reportedAt ? `published ${instantLabel(rep.reportedAt, v.tz, v.now)} ${v.zone}` : `for ${dayLabel(rep.localDate)} (publish time not stated)`)}
+              {dotJoin(originLabel(rep), rep.reportedAt ? `published ${instantLabel(rep.reportedAt, v.tz, v.now)} ${v.zone}` : `for ${dayLabel(rep.localDate)} (publish time not stated)`)}
               {rep.revision > 1 ? ` · revision ${rep.revision}` : ''}
             </p>
           ) : null}
         </div>
         {rep ? (
-          <div className="flex items-center gap-2">
-            <KindTag kind={rep.kind} />
-            <Freshness at={rep.reportedAt ?? rep.fetchedAt} now={v.now} staleHours={24} prefix={rep.reportedAt ? 'Published' : 'Fetched'} />
+          <div className="flex flex-wrap items-center gap-2">
+            {isResearchedReport(rep) ? <ConfirmTag text="Researched — confirm at source" /> : <KindTag kind={rep.kind} />}
+            <Freshness at={rep.reportedAt ?? rep.fetchedAt} now={v.now} staleHours={24} prefix={rep.reportedAt ? 'Published' : isResearchedReport(rep) ? 'Found' : 'Fetched'} />
             <Src title="Snow report" items={[src(`Report for ${dayLabelYear(rep.localDate)}`, rep.prov)]} />
           </div>
         ) : null}
@@ -483,6 +511,7 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
             <Meter label="Beginner trails" open={rep.openBeginnerTrails} total={rep.totalBeginnerTrails} />
             <Meter label="Lifts" open={rep.openLifts} total={rep.totalLifts} />
           </div>
+          <LiftStatusLink url={liftStatusUrl} counted={rep.openLifts !== null} />
           {rep.openAcres !== null ? <p className="-mt-1 text-[12.5px] text-ink-2 tnum">{rep.openAcres.toLocaleString('en-US')} acres open</p> : null}
           {rep.status ? (
             <p className="flex items-center gap-2 text-[13px] text-ink-2">
@@ -517,6 +546,7 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
               Enter what it says <ArrowRight aria-hidden className="size-4" />
             </a>
           </div>
+          <LiftStatusLink url={liftStatusUrl} counted={false} />
         </div>
       )}
 
@@ -1026,7 +1056,7 @@ function ManualEntry({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPageExt
         />
       </div>
       <p className="mt-3 text-[12.5px] text-ink-3">
-        The manual-edit route for official data Piste can’t read automatically. {d.reports.some((g) => g.revisions.some((r) => r.origin !== 'official-adapter' && r.origin !== 'demo')) ? 'Your earlier entries are listed under Report history.' : ''}
+        The manual-edit route for official data Piste can’t read automatically. {d.reports.some((g) => g.revisions.some((r) => r.origin !== 'official-adapter' && r.origin !== 'demo' && !isResearchedReport(r))) ? 'Your earlier entries are listed under Report history.' : ''}
       </p>
     </section>
   )
@@ -1165,7 +1195,7 @@ function ReportHistory({ d, v }: { d: ResortDetail; v: PageView }) {
           <ol className="mt-2 flex flex-col gap-2 border-l border-divider-strong pl-3">
             {revisions.map((rv) => (
               <li key={rv.id} className="text-[12.5px] text-ink-2">
-                <span className="font-medium text-ink">{REPORT_ORIGIN_LABEL[rv.origin]}</span>
+                <span className="font-medium text-ink">{originLabel(rv)}</span>
                 {rv.revision > 1 ? ` · revision ${rv.revision}` : ''} ·{' '}
                 {rv.reportedAt ? `published ${instantLabel(rv.reportedAt, v.tz, v.now)}` : 'publish time not stated'}
                 {rv.surfaceText ? <> · <q>{rv.surfaceText}</q></> : null}

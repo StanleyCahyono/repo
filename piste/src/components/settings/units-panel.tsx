@@ -113,8 +113,10 @@ export function UnitsPanel({ units, currency, fx, now, homeTimezone, demo }: { u
               options={DISPLAY_CURRENCIES.map((x) => ({ value: x, label: x, hint: CURRENCY_LABEL[x] }))}
               value={cur}
               onChange={(val) => changeCurrency(val)}
-              className={TALL}
+              className={cn('max-w-[34rem]', TALL)}
+              wrap
             />
+            <p className="mt-1.5 text-[12.5px] text-ink-3">{CURRENCY_LABEL[cur]}</p>
             <FxInfo fx={fx} now={now} tz={homeTimezone} demo={demo} display={cur} />
           </div>
         </li>

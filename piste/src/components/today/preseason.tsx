@@ -6,6 +6,7 @@
 import { TopoArt } from '@/components/ui/topo'
 import type { OpeningTimelineItem } from '@/lib/data/today'
 import { countdown, openingDates } from './format'
+import { LongHaulNote } from './long-haul'
 import { OpeningTimeline } from './opening-timeline'
 import { formatDates } from './params'
 
@@ -19,12 +20,17 @@ export function PreseasonHero({
   dates,
   seasonLabel,
   reason,
+  longHaul = 0,
+  longHaulLimit = null,
 }: {
   items: OpeningTimelineItem[]
   today: string
   dates: string[]
   seasonLabel: string
   reason: string | null
+  /** Resorts more than a long flight from home: not part of this answer (planned as trips). */
+  longHaul?: number
+  longHaulLimit?: string | null
 }) {
   const announced = first(items, 'announced', today)
   const estimated = first(items, 'estimated', today)
@@ -59,6 +65,7 @@ export function PreseasonHero({
             <span className="text-ink">{lead}</span>
           </p>
           {reason ? <p className="sr-only">{reason}</p> : null}
+          <LongHaulNote count={longHaul} limit={longHaulLimit} what="part of this answer" className="mt-2 max-w-[62ch]" />
           <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
             <div>
               <dt className="text-[12px] font-semibold tracking-[0.06em] text-ink-3 uppercase">Announced</dt>

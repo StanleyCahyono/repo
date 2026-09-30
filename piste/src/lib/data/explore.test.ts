@@ -55,7 +55,15 @@ describe('regionGroup', () => {
     expect(regionGroup('US', 'NY')).toBe('Northeast US')
     expect(regionGroup('US', 'UT')).toBe('Western US')
     expect(regionGroup('CA', 'BC')).toBe('Western Canada')
-    expect(regionGroup('AT', null)).toBe('Europe')
+    // Europe is split: the Alps by country, then the other ski regions.
+    expect(regionGroup('AT', null)).toBe('Austria')
+    expect(regionGroup('CH', null)).toBe('Switzerland')
+    expect(regionGroup('AD', null)).toBe('Andorra & Spain')
+    expect(regionGroup('SE', null)).toBe('Scandinavia')
+    expect(regionGroup('JP', null)).toBe('Japan')
+    expect(regionGroup('AU', null)).toBe('Australia & New Zealand')
+    expect(regionGroup('NZ', null)).toBe('Australia & New Zealand')
+    expect(regionGroup('XX', null)).toBe('International')
   })
 })
 

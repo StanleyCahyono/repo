@@ -21,7 +21,7 @@ import { money, type Money } from '@/lib/domain/money'
 import { evaluateAccess, familyBadges, latestRule, type AccessVerdict } from '@/lib/domain/passes'
 import { confirmedClosure, type CandidateOps, type ClosureKind } from '@/lib/domain/recommend'
 import { daysUntil, openingLabel } from '@/lib/domain/season'
-import { addDays, hoursBetween, seasonIdFor, startOfLocalDay } from '@/lib/domain/time'
+import { addDays, hemisphereOf, hoursBetween, seasonIdForHemisphere, startOfLocalDay, type Hemisphere } from '@/lib/domain/time'
 import {
   OPERATING_STATUS_LABEL,
   provenance,
@@ -69,7 +69,7 @@ export interface StatusView {
   seasonId: string | null
 }
 
-export function statusView(resort: Pick<ResortRow, 'timezone'>, event: StatusEventRow | undefined, report: OperationalReportRow | undefined, now: string): StatusView {
+export function statusView(resort: Pick<ResortRow, 'timezone' | 'lat'>, event: StatusEventRow | undefined, report: OperationalReportRow | undefined, now: string): StatusView {
   if (!event) {
     return {
       status: 'unknown',
@@ -85,8 +85,10 @@ export function statusView(resort: Pick<ResortRow, 'timezone'>, event: StatusEve
     }
   }
   const today = resortToday(resort, now)
-  const currentSeason = seasonIdFor(today)
-  const eventSeason = seasonIdFor(event.localDate)
+  // Seasons in the resort's hemisphere: a Southern Hemisphere winter changes season on 1 January, not 1 July.
+  const hemisphere = hemisphereOf(resort.lat)
+  const currentSeason = seasonIdForHemisphere(today, hemisphere)
+  const eventSeason = seasonIdForHemisphere(event.localDate, hemisphere)
   // A statement from an earlier season says nothing about this one — except that a season-end closure still holds.
   if (eventSeason !== currentSeason && event.status !== 'closed-for-season') {
     return {
@@ -146,9 +148,13 @@ export function statusStatement(event: StatusEventRow | undefined, report: Opera
   return fromEvent ?? { status: null, statusDate: null, statusAt: null, source: null, prov: null }
 }
 
-/** Eligibility input: the latest status statement plus the dates of the season containing the date in question. */
-export function candidateOps(st: StatusStatement, season: ResortSeasonRow | null | undefined): CandidateOps {
+/**
+ * Eligibility input: the latest status statement plus the dates of the season containing the date in question (the
+ * resort's own season — see seasonRowFor), in the resort's hemisphere.
+ */
+export function candidateOps(st: StatusStatement, season: ResortSeasonRow | null | undefined, hemisphere: Hemisphere = 'north'): CandidateOps {
   return {
+    hemisphere,
     status: st.status,
     statusDate: st.statusDate,
     statusAt: st.statusAt,
@@ -172,10 +178,11 @@ export interface ClosureView {
 
 /**
  * A confirmed closure on `date` (same rule as recommendation eligibility). `season` must be the resort's row for
- * the season containing `date`. A confirmed closure overrides any ski-day score: show "Closed".
+ * the season containing `date` in its hemisphere (seasonRowFor). A confirmed closure overrides any ski-day score:
+ * show "Closed".
  */
-export function closureView(st: StatusStatement, season: ResortSeasonRow | null | undefined, date: string): ClosureView | null {
-  const c = confirmedClosure(candidateOps(st, season), date)
+export function closureView(st: StatusStatement, season: ResortSeasonRow | null | undefined, date: string, hemisphere: Hemisphere = 'north'): ClosureView | null {
+  const c = confirmedClosure(candidateOps(st, season, hemisphere), date)
   if (!c) return null
   const fromStatus = c.kind === 'closed-for-season' || c.kind === 'temporarily-closed'
   return {
@@ -208,7 +215,17 @@ export interface OpeningView {
   closing: { label: 'closed' | 'announced' | 'not-announced'; date: string | null; text: string | null; prov: Provenance | null }
 }
 
-export function openingView(season: ResortSeasonRow | undefined, seasonId: string, today: string): OpeningView {
+/**
+ * Opening facts of one season. `openStatement`: an open / partially-open statement made in this season on or before
+ * today. With no actual opening on record it still shows the season has opened — "Opened", date unknown, sourced to
+ * the statement (a reported fact, never an announced date turned into "Opened").
+ */
+export function openingView(
+  season: ResortSeasonRow | undefined,
+  seasonId: string,
+  today: string,
+  openStatement: Pick<StatusEventRow, 'prov'> | null = null,
+): OpeningView {
   const dates = {
     announcedOpening: season?.announcedOpening ?? null,
     estimatedOpenFrom: season?.estimatedOpenFrom ?? null,
@@ -217,10 +234,14 @@ export function openingView(season: ResortSeasonRow | undefined, seasonId: strin
     announcedClosing: season?.announcedClosing ?? null,
     actualClosing: season?.actualClosing ?? null,
   }
-  const o = openingLabel(dates, today)
+  const labelled = openingLabel(dates, today)
+  const byStatement = labelled.label !== 'opened' && !!openStatement
+  const o: typeof labelled = byStatement ? { label: 'opened', date: null } : labelled
   const prov =
     o.label === 'opened'
-      ? (season?.actualOpeningProv ?? null)
+      ? byStatement
+        ? openStatement!.prov
+        : (season?.actualOpeningProv ?? null)
       : o.label === 'announced'
         ? (season?.announcedOpeningProv ?? null)
         : o.label === 'estimated'
@@ -584,6 +605,7 @@ export function ownedVerdicts(b: Bundle, resortId: string, date: string): { owne
           poolRules: productRules,
           today,
           names: b.names,
+          seasonOf: b.pass.seasonOf,
         }),
       }
     })
@@ -639,8 +661,10 @@ export interface ExpenseView {
 export function dayBasket(b: Bundle, resortId: string, date: string, pass: AccessVerdict | null): DayBasket {
   const p = b.ctx.prefs
   const lunch = p.budget.lunchEstimateMinor != null && Number.isInteger(p.budget.lunchEstimateMinor) ? money(p.budget.lunchEstimateMinor, p.budget.currency) : null
+  const row = b.byId.get(resortId)?.row
   return computeDayBasket(
-    { resortId, date, prices: b.prices.get(resortId) ?? [], pass },
+    // Holiday day types follow the resort's country (US/Canada only); season-tagged prices its hemisphere.
+    { resortId, date, prices: b.prices.get(resortId) ?? [], pass, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) },
     { currency: p.currency, rentalOption: p.gear.rentalOption, lunch, partySize: 1 },
     { now: b.ctx.now, today: b.ctx.today, rates: b.fx },
   )

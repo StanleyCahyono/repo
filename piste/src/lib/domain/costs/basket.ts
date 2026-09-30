@@ -13,7 +13,7 @@
  * - Estimate ranges are classified at both ends (`tier` low end, `tierMax` when the high end is in a higher band).
  */
 import { allocate, formatMoney, money, sum, type Money } from '../money'
-import { formatLocalDate } from '../time'
+import { formatLocalDate, type Hemisphere } from '../time'
 import { ACCESS_STATUS_LABEL, type AccessStatus, type AccessVerdict } from '../passes/types'
 import { DEFAULT_DAY_TYPE_CONFIG, dayTypeFor, type DayType, type DayTypeConfig } from './day-type'
 import { convertMoney, convertWith, type FxRateRecord, type FxRateUsed } from './fx'
@@ -110,6 +110,13 @@ export type BasketPass = Pick<AccessVerdict, 'canSki' | 'status' | 'productName'
 export interface BasketDayInput {
   resortId: string
   date: string
+  /**
+   * The resort's country (ISO-2): holiday day types apply to US and Canadian resorts only; elsewhere a day is a
+   * weekday or weekend day. Omitted → the holiday calendar applies.
+   */
+  country?: string | null
+  /** The resort's hemisphere, for season-tagged prices (default north). */
+  hemisphere?: Hemisphere
   /** Price snapshots for this resort (lift-ticket, rental, parking…). */
   prices: readonly PriceSnapshotInput[]
   /** Confirmed parking facts; otherwise parking snapshots are used; otherwise unknown. */
@@ -222,9 +229,9 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
     throw new Error(`Basket for ${day.resortId} ${day.date} was given a pass verdict for ${day.pass.resortId} ${day.pass.date}`)
   }
   const requiredKeys = new Set(a.required ?? DEFAULT_REQUIRED_LINES)
-  const { dayType, holidayName } = dayTypeFor(day.date, a.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG)
+  const { dayType, holidayName } = dayTypeFor(day.date, a.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG, day.country)
   const category = a.category ?? 'adult'
-  const q = { resortId: day.resortId, date: day.date, dayType, now: ctx.now, today: ctx.today ?? null }
+  const q = { resortId: day.resortId, date: day.date, dayType, now: ctx.now, today: ctx.today ?? null, hemisphere: day.hemisphere }
   const drafts: LineDraft[] = []
 
   // Lift access
@@ -436,7 +443,16 @@ export function liftTicketFor(
   prices: readonly PriceSnapshotInput[],
   resortId: string,
   date: string,
-  ctx: { now: string; today?: string | null; category?: string | null; dayTypeConfig?: DayTypeConfig },
+  ctx: {
+    now: string
+    today?: string | null
+    category?: string | null
+    dayTypeConfig?: DayTypeConfig
+    /** The resort's country: holiday day types apply to US and Canadian resorts only (omitted → they apply). */
+    country?: string | null
+    /** The resort's hemisphere, for season-tagged prices (default north). */
+    hemisphere?: Hemisphere
+  },
 ): {
   price: Money | null
   kind: QuoteKind | null
@@ -445,7 +461,7 @@ export function liftTicketFor(
   dayType: DayType
   confirmAtSource: boolean
 } {
-  const { dayType } = dayTypeFor(date, ctx.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG)
+  const { dayType } = dayTypeFor(date, ctx.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG, ctx.country)
   const sel = selectPrice(prices, {
     subjectType: 'lift-ticket',
     resortId,
@@ -454,6 +470,7 @@ export function liftTicketFor(
     category: ctx.category ?? 'adult',
     now: ctx.now,
     today: ctx.today ?? null,
+    hemisphere: ctx.hemisphere,
   })
   const s = sel.snapshot
   return {

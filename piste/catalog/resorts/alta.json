@@ -49,15 +49,24 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 118,
+    "lifts": 8,
+    "skiableAcres": 2614,
+    "beginnerPct": 15,
+    "intermediatePct": 30,
+    "advancedPct": 55,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/utah/alta-ski-area/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: OnTheSnow overview, alta.com/about, Ski Utah family guide, Utah.com): 2,614 skiable acres, 118 trails, 8 lifts, vertical 2,538 ft, ability split 15% beginner / 30% intermediate / 55% advanced, no night skiing. The same summary also said \"5 chairlifts and 2 surface conveyers\", which does not add up to 8, so lifts by type are left unknown. Season of the figures not stated."
+    }
   },
   "features": {
     "nightSkiing": false,
@@ -72,7 +81,7 @@
       "url": "https://www.alta.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing: Alta runs day operations only (reference). Slopeside lodging in the Town of Alta is run by independent lodges, not the ski area. Skiers only — snowboards are not allowed"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing: Alta runs day operations only (reference). Slopeside lodging in the Town of Alta is run by independent lodges, not the ski area. Skiers only — snowboards are not allowed Search summary (2026-09-30; OnTheSnow/Ski Utah results) also states no night skiing."
     }
   },
   "character": "A skiers-only ski area (no snowboards) at the head of Little Cottonwood Canyon in Utah's Wasatch Range, next to but separately ticketed from Snowbird. Lift service began in 1939; it has two base areas, Wildcat and Albion, linked by a transfer tow, with gentle terrain around Albion Basin and a large share of steep advanced terrain higher up.",
@@ -80,10 +89,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-20",
+      "text": "Planned opening Nov. 20, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.sltrib.com/news/environment/2026/09/20/utah-ski-resort-2026-27-opening/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summaries of 2026-27 opening-date roundups (Salt Lake Tribune, 20 Sep 2026; Powder's Utah and Ikon opening-date articles; Unofficial Networks, 17 Sep 2026) agree on this date. Conditions permitting — confirm on the resort site."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -91,12 +105,46 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-07",
+        "closed": "2026-04-26",
+        "source": {
+          "url": "https://www.skiutah.com/blog/authors/yeti/utah-ski-resort-opening-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Search summary: 2025-26 opening Dec. 7, 2025 (Ski Utah 2025-26 opening-dates list, which may show dates revised after weather delays) and a scheduled closing of Apr. 26, 2026 (Utah closing-date roundups, e.g. https://www.powder.com/news/utah-ski-resorts-closing-dates-2026). Actual dates may differ — confirm."
+        }
+      }
+    ],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 20, 2026 per Utah and Ikon opening-date roundups (search summaries, 2026-09-30). No 2026-27 closing date was found (a summary said Alta, Snowbird and Park City closing dates are still to be announced). History holds the Ski Utah-listed 2025-26 dates."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (13+)",
+      "category": "adult",
+      "amount": 199,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Undated figure: another search summary (SnowBrains 2026-27 lift-ticket prices) says Alta releases 2026-27 ticket prices in the fall, so $199 is most likely the 2025-26 rate. Confirm on alta.com.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/alta-ski-area/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary gave \"Adult 13+: $199.00\" without a season."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.alta.com/",
     "trailMap": null,
@@ -114,9 +162,23 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://utahavalanchecenter.org/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.alta.com/lift-terrain-status"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Alta-Bird season passes (Alta + Snowbird; official)",
+      "url": "https://www.alta.com/tickets-and-passes/alta-bird"
+    },
+    {
+      "label": "About Alta (official)",
+      "url": "https://www.alta.com/about"
+    },
+    {
+      "label": "Ikon Pass at Alta (official)",
+      "url": "https://www.alta.com/Ikon"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,30 +220,32 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing date (not announced as of 2026-09-30) and that Nov. 20, 2026 stays the planned opening.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days shared with Snowbird, Mountain Collective 2 days. Not found: Alta's Ikon Base allowance (Snowbird's is \"5 total days\" with blackouts — possibly shared) and any Ikon reservation rule.",
+      "2026-27 adult day-ticket prices (a summary says Alta publishes them in the fall); only an undated $199 adult (13+) figure is on file. Also the Alta-Bird day ticket and season-pass prices.",
+      "Capture the actual 2025-26 opening and closing dates (only Ski Utah-listed dates are on file) and 2024-25 dates.",
+      "Confirm the remaining official deep links on alta.com (snow report, trail map, tickets, lessons, rentals, webcams, parking); the lift and terrain status page is recorded.",
+      "Lift count and types: a summary says 8 lifts but also \"5 chairlifts and 2 surface conveyers\"; confirm, plus terrain parks (believed none), snowmaking and childcare.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on alta.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Record an official source for the skiers-only policy (reference: Alta does not allow snowboards).",
       "Confirm the operator (reference: Alta Ski Lifts Company, operating largely on Uinta-Wasatch-Cache National Forest land under a Forest Service permit).",
       "Elevation basis: Piste stores the lift-served figures (base ~8,530 ft, top ~10,550 ft, ~2,020 ft vertical); some sources quote Mt. Baldy (~11,068 ft) and ~2,538 ft vertical. Record the official basis and precise Wildcat, Albion and upper-mountain coordinates (weather points are approximate).",
       "Learning setup: confirm the Albion-side beginner lifts (reference: Sunnyside and Albion), any carpet, the Wildcat–Albion transfer tow, the current ski-school name (historically Alf Engen Ski School) and beginner lesson packages. Recent lift replacements may have changed lift names.",
-      "Pass leads from earlier seasons (unverified): Ikon Pass / Ikon Base days shared with Snowbird; Mountain Collective days counted separately from Snowbird; Alta season pass; Alta Snowbird combined season pass and day ticket. Confirm every 2026-27 product, day count, blackout and reservation rule.",
       "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives), price, booking platform and official URL.",
       "Road: SR-210 (Little Cottonwood Canyon) is a UDOT road. Record the Cottonwood Canyons status page, 2026-27 traction-law rules, avalanche-control closure practice (often until mid-morning after storms), Town of Alta interlodge notices, and any tolling or bus changes from UDOT's Little Cottonwood plan.",
       "UTA ski bus: confirm 2026-27 Little Cottonwood routes (lead: route numbers 994/953 in past seasons), schedule, fares, park-and-ride lots and whether any Alta pass includes rides.",
       "Snow report: record the official snow-report URL and format (lead: HTML page on alta.com) so the unverified Alta report parser can be checked; record webcam URLs.",
       "Lodging: confirm the slopeside lodges in the Town of Alta (leads: Alta Lodge, Rustler Lodge, Alta Peruvian Lodge, Snowpine Lodge, Goldminer's Daughter).",
       "Confirm uphill-travel and backcountry-gate policy.",
-      "Confirm terrain stats (leads: ~2,200–2,600 acres, 115+ runs, 6–7 chairs plus surface tows, roughly 15/30/55 ability split), childcare (a children's program has existed), snowmaking (believed limited), tubing and terrain parks (believed none).",
       "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, slopeside lodging in the Town of Alta, Albion learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Vertical: the OnTheSnow-based summary gives 2,538 ft (hike-to Mt. Baldy basis), while Piste stores the lift-served ~2,020 ft (616 m) from reference data. Elevation left unchanged pending the official basis.",
+      "Lifts: summary states 8 lifts but lists 5 chairlifts + 2 surface conveyors (7). Lifts by type left unknown."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, 2025-26 history, terrain stats, an undated day-ticket price and the lift-status link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

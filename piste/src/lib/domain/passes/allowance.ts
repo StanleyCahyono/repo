@@ -3,6 +3,7 @@
  * Dates are not considered (no blackouts here) — this is the season-level balance. Use evaluateAccess for a date.
  */
 import type { PassAccessType } from '../types'
+import type { SeasonOf } from '../time'
 import { countUsedDays, isCount, isPoolRule, latestRules, resolvePool } from './rules'
 import type { PassProductInput, PassRuleInput, PassUsageInput } from './types'
 
@@ -38,12 +39,14 @@ export function remainingByPool(
   product: PassProductInput,
   rules: readonly PassRuleInput[],
   usage: readonly PassUsageInput[],
+  /** Season of a date at a resort (Southern Hemisphere resorts differ); default: every resort northern. */
+  seasonOf?: SeasonOf,
 ): PoolAllowance[] {
   const current = latestRules(rules, product.id)
   const poolIds = [...new Set(current.filter((r) => isPoolRule(r) && r.poolId).map((r) => r.poolId!))].sort()
   return poolIds.map((poolId) => {
     const def = resolvePool(product.id, poolId, current)
-    const used = countUsedDays(usage, new Set(def.memberResortIds), product.seasonId)
+    const used = countUsedDays(usage, new Set(def.memberResortIds), product.seasonId, null, seasonOf)
     return {
       ...def,
       used,
@@ -52,7 +55,7 @@ export function remainingByPool(
         const rule = current.find((r) => r.resortId === resortId)
         return {
           resortId,
-          used: countUsedDays(usage, new Set([resortId]), product.seasonId),
+          used: countUsedDays(usage, new Set([resortId]), product.seasonId, null, seasonOf),
           cap: rule?.access === 'limited-days' ? rule.days : null,
         }
       }),
@@ -64,12 +67,13 @@ export function remainingByResort(
   product: PassProductInput,
   rules: readonly PassRuleInput[],
   usage: readonly PassUsageInput[],
+  seasonOf?: SeasonOf,
 ): ResortAllowance[] {
   const current = latestRules(rules, product.id).sort((a, b) => a.resortId.localeCompare(b.resortId))
-  const pools = new Map(remainingByPool(product, rules, usage).map((p) => [p.id, p]))
+  const pools = new Map(remainingByPool(product, rules, usage, seasonOf).map((p) => [p.id, p]))
 
   return current.map((rule): ResortAllowance => {
-    const used = countUsedDays(usage, new Set([rule.resortId]), product.seasonId)
+    const used = countUsedDays(usage, new Set([rule.resortId]), product.seasonId, null, seasonOf)
     const out: ResortAllowance = {
       resortId: rule.resortId,
       accessType: rule.access,

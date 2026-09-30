@@ -28,4 +28,12 @@ describe('season format helpers', () => {
     expect(timelineWindow('2026-27', ['2027-01-10'])).toEqual({ from: '2026-11-01', to: '2027-04-30' })
     expect(timelineWindow('2026-27', ['2026-10-24', '2027-05-09', '2025-12-01'])).toEqual({ from: '2026-10-01', to: '2027-05-31' })
   })
+
+  it('draws a Southern Hemisphere winter in the season: May–October at a southern home, and a northern season widened to it', () => {
+    expect(timelineWindow('2026-27', [], { home: 'south' })).toEqual({ from: '2027-05-01', to: '2027-10-31' })
+    // A 2026-27 trip to New Zealand in August 2027 widens a northern season through August…
+    expect(timelineWindow('2026-27', ['2027-01-10', '2027-08-12'], { southern: true })).toEqual({ from: '2026-11-01', to: '2027-08-31' })
+    // …but only when a southern day is in view: without it, August 2027 is next season (2027-28) and is ignored.
+    expect(timelineWindow('2026-27', ['2027-01-10', '2027-08-12'])).toEqual({ from: '2026-11-01', to: '2027-04-30' })
+  })
 })

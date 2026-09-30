@@ -7,6 +7,50 @@ planning heuristic. None of them is a validated meteorological or safety model.
 descriptor bands, is an initial engineering assumption. Piste makes no accuracy claims until it has comparable
 observations or personal feedback and enough samples by resort, forecast horizon and metric.
 
+## Seasons, hemispheres and distance
+
+The domain code is in `src/lib/domain/time.ts` (seasons) and `src/lib/domain/geo.ts` (distance).
+
+- **Season ids name the planning season.** `2026-27` is the Northern Hemisphere winter of 2026–27 (1 Jul 2026 →
+  30 Jun 2027) and the season a 2026-27 Ikon or Epic pass covers.
+- **Southern Hemisphere resorts** (latitude below 0°) have one winter per calendar year, about June to October. The
+  winter of calendar year Y is season `(Y-1)-(YY)`: the 2027 Australian or New Zealand winter is `2026-27` — the
+  season 2026-27 passes cover there — and the 2026 winter is `2025-26`. At those resorts the season changes on
+  **1 January**, not 1 July, so a June–October winter is never split in two (`seasonIdForResort`).
+- **Where the resort's own season is used:** filing status statements as actual openings and closings (the season
+  row is created when missing), statuses derived from season dates, the season dates and published hours the
+  conditions assessment reads, recommendation eligibility ("opened this season", confirmed closures), the operating
+  status view (a statement from an earlier season is not this season's), pass access (`season-mismatch`, day counts
+  and pools, blackout validation), season-tagged price snapshots, and the ski days, pass days, lessons and planned
+  resort items of My Season.
+- **Where the planning season's dates are used:** things with no resort — expenses, and planned costs that are not at
+  a resort. An expense for an August trip to New Zealand is therefore dated in the next planning season (1 Jul →
+  30 Jun); switch the active season to record it there.
+- **The season a resort page describes** ("current or next") is the planning season, except while the resort's own
+  winter for today is **under way** and precedes it: opened (an actual opening, or an open statement, in that
+  season), not closed (no actual closing on or before today, no closed-for-season statement after the opening), and
+  within its winter months — an "open" statement older than the end of the display window (below) is not read as
+  a winter still running. Example: in September 2026 a New Zealand resort reported open shows its 2025–26 winter;
+  once it closes, or with no evidence at all, it shows the 2026–27 winter (June–October 2027). Corrections to season
+  fields always apply to the planning season's row.
+- **Display windows** draw a winter over six months: November → April in the north, May → October in the south.
+  Date pickers for the planning season (Explore, Passes) run 1 Jul → 30 Jun, extended to 31 Dec of the second year
+  when the catalog has Southern Hemisphere resorts.
+- **Estimated opening windows** project past openings onto the target season by hemisphere (a southern July opening
+  stays in July of the winter's year).
+
+### Today: long haul and the home hemisphere
+
+- **Long haul.** Today answers short-range questions. A resort more than **4,500 km** (`LONG_HAUL_KM`, great-circle
+  distance from home) is planned as a trip: it is left out of "Where to ski", the seven-day strip and the weekend
+  finder, which say so ("Resorts more than a long flight away are planned as trips — see Explore"). It stays in
+  Explore, Trips, Passes, Forecast and in favourites (the watchlist keeps every favourite). A resort with unknown
+  coordinates is never left out on a guess. From Ithaca this keeps North America (Whistler ≈ 3,600 km) and makes
+  Europe, Japan, Australia and New Zealand trips.
+- **Preseason** ("no resort has opened yet this season") is judged over resorts in the **home hemisphere** only, by
+  the latitude of home: an August opening in New Zealand does not end a New York preseason, and vice versa. The
+  opening timeline on Today lists home-hemisphere openings only.
+
 ## Conditions model
 
 "Piste Conditions v1" (`modelVersion: piste-conditions/1.0`) is implemented in `src/lib/domain/conditions/`. It is
@@ -308,7 +352,7 @@ permission, never read as $0, and it never produces a tier.
 
 | # | Status | When |
 |---|---|---|
-| 1 | `season-mismatch` | The product's season (e.g. `2026-27`, which runs 1 Jul → 30 Jun) does not contain the date. |
+| 1 | `season-mismatch` | The product's season does not contain the date at that resort (e.g. `2026-27` runs 1 Jul 2026 → 30 Jun 2027; at a Southern Hemisphere resort it is the 2027 winter, 1 Jan → 31 Dec 2027 — see "Seasons, hemispheres and distance"). |
 | 2 | `unknown` | There is no rule, the rule says `unknown`, a day limit has no day count (or one that is not a whole number of days), or a shared pool is missing its size or its member resorts, or the pool's other rules were not supplied to the evaluator (so days used at the other members could not be counted). The message is *"Access rules not confirmed for this product — check the official page"*. |
 | 3 | `not-included` | The rule says the product does not include this resort. |
 | 4 | `unknown` / `blackout` | Blackout dates that are not recorded (`null`) or that cannot be read make the date `unknown` — an unreadable blackout is never read as "no blackout". Otherwise, `blackout` when the date falls inside a range. Ranges are **inclusive** resort-local dates (`from` and `to` are both blacked out). Blackouts apply to discount benefits too. |
@@ -335,7 +379,8 @@ does not record as ranges.
   resort then has to satisfy its own cap **and** the pool. The days remaining is the smaller of the two.
 - If member rules disagree about the pool size, Piste uses the **smaller** figure and says that the records
   conflict.
-- **Counting days:** Piste counts distinct (resort, date) pairs within the product's season. A duplicate log
+- **Counting days:** Piste counts distinct (resort, date) pairs within the product's season, each day placed in
+  the season of its own resort (August days in New Zealand count toward a 2026-27 pass in 2027). A duplicate log
   entry counts once. Two different member resorts on the same date count as two days, which is the
   conservative choice. If the date being evaluated is already logged, it is not counted twice.
 - **Planning** (`planAccess`) walks the planned days in date order. It starts from the logged usage and uses up
@@ -378,7 +423,15 @@ otherwise it is an assumption.
 Prices are looked up by day type: weekday, weekend or holiday. A holiday takes priority over a weekend. The
 holiday calendar is configurable (`DayTypeConfig`). It includes US federal holidays, which are computed for each
 season so later seasons work without edits, plus observed days. It also includes an optional Christmas–New Year
-period (default 25 Dec → 1 Jan inclusive) and any dates or ranges you add. The 2026–27 defaults are:
+period (default 25 Dec → 1 Jan inclusive) and any dates or ranges you add.
+
+**The calendar applies to resorts in the US and Canada only** (`HOLIDAY_CALENDAR_COUNTRIES`). Canadian resorts get
+the same US calendar — Canadian statutory holidays are not modelled separately (Family Day usually falls on
+Presidents' Day; Canadian Thanksgiving and Boxing Day are not holidays here). **Everywhere else — Europe, Japan,
+Australia, New Zealand and the rest — a day is a weekday or a weekend day only: per-country public and school
+holidays are not modelled.** A day a resort there prices as a holiday or peak day is therefore looked up with its
+weekday or weekend price, unless the price snapshot itself carries the dated peak window (`appliesFrom` /
+`appliesTo`). An unknown country gets no holidays. The 2026–27 defaults are:
 
 Independence Day (4 Jul, observed 3 Jul) · Labor Day 7 Sep · Columbus Day 12 Oct · Veterans Day 11 Nov ·
 Thanksgiving 26 Nov · Christmas–New Year 25 Dec – 1 Jan · MLK Day 18 Jan · Presidents' Day 15 Feb · Memorial
@@ -392,7 +445,7 @@ A snapshot is used only if all of these hold:
 
 - the subject and resort match;
 - the category matches (a snapshot with no category is accepted as generic);
-- the season matches;
+- the season matches (the resort's own season for the date — a Southern Hemisphere winter is the calendar year's);
 - the date is inside `appliesFrom` / `appliesTo`;
 - the day type matches, or the snapshot's day type is `any` or unset (a `peak` price needs a dated window);
 - it has not expired, and its purchase-by date has not passed.
@@ -539,6 +592,9 @@ How the My Season page feeds this budget (`src/lib/data/season.ts`):
 - Spend noted on a ski-day log is shown on that day but not added to the budget; expenses are the record of
   actual spending, so nothing is counted twice.
 - Pass usage value uses each used day's own lift ticket (`liftTicketFor`) for that resort and date.
+- Ski days, pass days, lessons and planned items at a resort belong to the season of that resort for their date (a
+  2027 New Zealand winter is 2026–27); expenses and other items with no resort follow the planning season's dates
+  (1 Jul → 30 Jun).
 
 ### Data conventions and known limits
 
@@ -553,5 +609,6 @@ How the My Season page feeds this budget (`src/lib/data/season.ts`):
   must keep such products out of the generic slots (give them their own category, or a dated window).
 - Categories are compared as exact (case-insensitive) strings: `adult` does not match `Adult (13-69)`. Catalog
   categories need a normalised id for the basket's default `adult` to find them.
-- The holiday calendar is one user-level configuration (US federal by default); it is not per resort, so
-  Canadian or European resorts get US holiday day types.
+- The holiday calendar is one user-level configuration (US federal holidays and the Christmas–New Year period by
+  default). It applies to US and Canadian resorts only; resorts elsewhere have weekday/weekend day types and no
+  holidays, because per-country public and school holidays are not modelled.

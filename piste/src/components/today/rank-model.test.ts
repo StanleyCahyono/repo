@@ -75,6 +75,7 @@ const rec = (ranked: RankedOption[], extra: Partial<Recommendation> = {}): Recom
   preseason: false,
   noWinnerReason: null,
   weightsNote: null,
+  longHaulExcluded: 0,
   ...extra,
 })
 

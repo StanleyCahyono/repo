@@ -13,7 +13,7 @@
  *
  * Reservation requirements never block; they are surfaced in `reservationRequired` and `reasons`.
  */
-import { isLocalDate, seasonIdFor } from '../time'
+import { isLocalDate, northernSeasonOf, type SeasonOf } from '../time'
 import type { DateRange } from '../types'
 import { countUsedDays, findBlackout, invalidBlackouts, isCount, isPoolRule, latestRule, resolvePool, usageKey } from './rules'
 import {
@@ -47,6 +47,11 @@ export interface EvaluateAccessInput {
   today?: string | null
   /** Optional display names for resorts, used in reasons. */
   names?: Readonly<Record<string, string>>
+  /**
+   * Season of a date at a resort. Southern Hemisphere winters (June–October of year Y) belong to season
+   * '(Y-1)-(YY)' — the season a '(Y-1)-(YY)' pass covers there. Default: every resort northern (1 Jul → 30 Jun).
+   */
+  seasonOf?: SeasonOf
 }
 
 function rangeText(b: DateRange): string {
@@ -73,6 +78,7 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
   const usage = input.usage ?? []
   const today = input.today ?? null
   const resortName = names?.[resortId] ?? resortId
+  const seasonOf = input.seasonOf ?? northernSeasonOf
 
   const passed = input.rule ?? null
   const rule = passed && passed.productId === product.id && passed.resortId === resortId ? passed : null
@@ -137,8 +143,8 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
     return v
   }
 
-  // 1. Season
-  const dateSeason = seasonIdFor(date)
+  // 1. Season (the resort's own season for the date)
+  const dateSeason = seasonOf(resortId, date)
   if (dateSeason !== product.seasonId) {
     return finish('season-mismatch', ACCESS_STATUS_LABEL['season-mismatch'], [
       `${product.name} is a ${product.seasonId} product; ${date} falls in the ${dateSeason} season.`,
@@ -207,7 +213,7 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
         UNCONFIRMED_ACCESS_MESSAGE,
       ])
     }
-    const used = countUsedDays(usage, new Set([resortId]), seasonId, selfKey)
+    const used = countUsedDays(usage, new Set([resortId]), seasonId, selfKey, seasonOf)
     resortCap = { total: rule.days, used, remaining: Math.max(0, rule.days - used) }
   }
 
@@ -240,7 +246,7 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
         { resortCap },
       )
     }
-    const used = countUsedDays(usage, new Set(def.memberResortIds), seasonId, selfKey)
+    const used = countUsedDays(usage, new Set(def.memberResortIds), seasonId, selfKey, seasonOf)
     pool = { ...def, used, remaining: Math.max(0, def.total - used) }
   }
 
@@ -329,7 +335,7 @@ export function planAccess(
   rules: readonly PassRuleInput[],
   visits: readonly PlannedVisit[],
   usage: readonly PassUsageInput[] = [],
-  opts: { today?: string | null; names?: Readonly<Record<string, string>> } = {},
+  opts: { today?: string | null; names?: Readonly<Record<string, string>>; seasonOf?: SeasonOf } = {},
 ): AccessPlan {
   const productRules = rules.filter((r) => r.productId === product.id)
   const ordered = visits
@@ -348,6 +354,7 @@ export function planAccess(
       poolRules: productRules,
       today: opts.today,
       names: opts.names,
+      seasonOf: opts.seasonOf,
     })
     if (verdict.canSki && !verdict.alreadyCounted) running.push({ resortId: v.resortId, date: v.date, planned: true })
     byStatus[verdict.status] += 1

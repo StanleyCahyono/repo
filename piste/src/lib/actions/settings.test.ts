@@ -80,7 +80,7 @@ describe('units and currency are display-only (the conversion boundary)', () => 
   it('rejects unknown units and currencies without writing', async () => {
     const [before] = await fx.db.select().from(s.userPreferences).where(eq(s.userPreferences.id, 1))
     expect(await saveUnits({ ...before.units, snow: 'ft' as never })).toMatchObject({ ok: false })
-    expect(await saveCurrency({ currency: 'GBP' })).toMatchObject({ ok: false })
+    expect(await saveCurrency({ currency: 'MXN' })).toMatchObject({ ok: false })
     const [after] = await fx.db.select().from(s.userPreferences).where(eq(s.userPreferences.id, 1))
     expect(after.units).toEqual(before.units)
     expect(after.currency).toBe(before.currency)

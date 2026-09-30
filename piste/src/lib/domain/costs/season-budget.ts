@@ -14,7 +14,7 @@
  */
 import Big from 'big.js'
 import { money, subtract, sum, type Money } from '../money'
-import { isLocalDate, seasonIdFor } from '../time'
+import { isLocalDate, northernSeasonOf, seasonIdFor, type SeasonOf } from '../time'
 import { convertMoney, type FxRateRecord, type FxRateUsed } from './fx'
 
 export const BUDGET_CATEGORIES = ['pass', 'lift', 'lodging', 'travel', 'food', 'lessons', 'rentals', 'gear', 'other'] as const
@@ -71,6 +71,8 @@ export interface PlannedCostInput {
   passOwnershipId?: number | null
   /** A planned lift line for a day the pass covers → contributes 0. */
   passCovered?: boolean
+  /** The resort the item is at, when it is at one: it then belongs to that resort's season for its date. */
+  resortId?: string | null
 }
 
 export interface CategoryLine {
@@ -129,6 +131,12 @@ export function computeSeasonBudget(input: {
   rates: readonly FxRateRecord[]
   /** Restrict expenses, planned items, usage and ski days to this season (by date). */
   seasonId?: string | null
+  /**
+   * Season of a date at a resort, for ski days, pass days and planned items at a resort: a Southern Hemisphere winter
+   * (June–October 2027) belongs to 2026–27. Expenses (no resort) follow the planning season's dates, 1 Jul → 30 Jun.
+   * Default: every resort northern.
+   */
+  seasonOf?: SeasonOf
   expenses: readonly ExpenseInput[]
   planned?: readonly PlannedCostInput[]
   /** Passes owned for this season. Expenses linked to them are their purchase, whatever the expense date. */
@@ -143,8 +151,12 @@ export function computeSeasonBudget(input: {
   const currency = input.currency.toUpperCase()
   const zero = money(0, currency)
   const seasonId = input.seasonId ?? null
+  const seasonOf = input.seasonOf ?? northernSeasonOf
   const inSeason = (date: string | null | undefined) =>
     !seasonId || (!!date && isLocalDate(date.slice(0, 10)) && seasonIdFor(date.slice(0, 10)) === seasonId)
+  /** A day at a resort: the resort's own season for the date. */
+  const atResortInSeason = (resortId: string | null | undefined, date: string | null | undefined) =>
+    !seasonId || (!!date && isLocalDate(date.slice(0, 10)) && seasonOf(resortId, date.slice(0, 10)) === seasonId)
 
   const warnings: string[] = []
   const unconverted: SeasonBudget['unconverted'] = []
@@ -230,7 +242,7 @@ export function computeSeasonBudget(input: {
   }
 
   // --- Other expenses ----------------------------------------------------------------------------------------
-  const passDays = new Set(passes.flatMap((p) => p.usage.filter((u) => inSeason(u.date)).map((u) => u.date)))
+  const passDays = new Set(passes.flatMap((p) => p.usage.filter((u) => atResortInSeason(u.resortId, u.date)).map((u) => u.date)))
   for (const e of expenses) {
     if (consumed.has(e)) continue
     // An expense linked to a pass we were not given is still a pass purchase, counted once here.
@@ -245,7 +257,7 @@ export function computeSeasonBudget(input: {
   // --- Planned -------------------------------------------------------------------------------------------------
   const plannedPass = new Set<number>()
   for (const item of input.planned ?? []) {
-    if (item.date && !inSeason(item.date)) continue
+    if (item.date && !(item.resortId ? atResortInSeason(item.resortId, item.date) : inSeason(item.date))) continue
     let category = normalizeCategory(item.category)
     if (item.passOwnershipId != null && category !== 'lift') category = 'pass'
     if (category === 'lift' && (item.passCovered || item.passOwnershipId != null)) continue // pass-covered: 0 cash
@@ -283,7 +295,7 @@ export function computeSeasonBudget(input: {
 
   // --- Ski days and per-day costs ------------------------------------------------------------------------------
   const skiDates = new Set<string>()
-  for (const d of input.skiDays ?? []) if (inSeason(d.date)) skiDates.add(d.date)
+  for (const d of input.skiDays ?? []) if (atResortInSeason(d.resortId, d.date)) skiDates.add(d.date)
   passDays.forEach((d) => skiDates.add(d))
   const skiDays = skiDates.size
 
@@ -300,7 +312,7 @@ export function computeSeasonBudget(input: {
   // --- Pass usage value -----------------------------------------------------------------------------------------
   const ticketByDay = new Map((input.ticketValues ?? []).map((t) => [`${t.resortId}|${t.date}`, t.ticket]))
   const passValues: PassValue[] = passes.map((p) => {
-    const days = [...new Map(p.usage.filter((u) => inSeason(u.date)).map((u) => [`${u.resortId}|${u.date}`, u])).values()]
+    const days = [...new Map(p.usage.filter((u) => atResortInSeason(u.resortId, u.date)).map((u) => [`${u.resortId}|${u.date}`, u])).values()]
     const { cost, source } = passCost.get(p.ownershipId) ?? { cost: null, source: null }
     const values = days.map((u) => {
       const t = ticketByDay.get(`${u.resortId}|${u.date}`) ?? null

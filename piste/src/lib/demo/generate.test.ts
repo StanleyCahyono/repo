@@ -4,7 +4,7 @@ import { and, asc, eq, inArray } from 'drizzle-orm'
 import { createMemoryDb, type Db } from '@/lib/db/client'
 import * as s from '@/lib/db/schema'
 import type { OperationalReportRow, WeatherRunRow } from '@/lib/db/rows'
-import { getMeta, loadCatalog, seedCatalog, setMeta } from '@/lib/catalog/seed'
+import { CATALOG_PROVIDER, getMeta, loadCatalog, seedCatalog, setMeta } from '@/lib/catalog/seed'
 import { aggregateDay, assessDay, prepareSeries } from '@/lib/domain/conditions'
 import { defaultPreferences } from '@/lib/domain/defaults'
 import { addDays, dateRange, localTimeToInstant, startOfLocalDay } from '@/lib/domain/time'
@@ -98,7 +98,8 @@ describe('demo generator', () => {
     const seasons = await db.select().from(s.resortSeasons)
     for (const r of seasons) {
       if (r.actualOpening) expect(r.actualOpeningProv?.kind).toBe('demo')
-      if (r.announcedOpening) expect(r.announcedOpeningProv?.kind).toBe('demo')
+      // An announced date is either simulated, or a real researched catalog fact kept with its catalog provenance.
+      if (r.announcedOpening && r.announcedOpeningProv?.kind !== 'demo') expect(r.announcedOpeningProv?.provider).toBe(CATALOG_PROVIDER)
     }
     expect((await db.select().from(s.fxRates)).every((f) => f.kind === 'demo')).toBe(true)
     // Tables without a kind column say so in their text.
@@ -152,12 +153,16 @@ describe('demo generator', () => {
     expect(assessed.some((a) => a.eligibility === 'eligible')).toBe(false)
   })
 
-  it('leaves about ten catalog resorts with no status at all', async () => {
+  it('leaves every catalog resort it does not simulate with no status at all', async () => {
     const withStatus = new Set((await db.select({ id: s.statusEvents.resortId }).from(s.statusEvents)).map((r) => r.id))
     const all = (await db.select({ id: s.resorts.id }).from(s.resorts)).map((r) => r.id)
     const none = all.filter((id) => !withStatus.has(id))
-    expect(none.length).toBeGreaterThanOrEqual(8)
-    expect(none.length).toBeLessThanOrEqual(12)
+    // Computed from the catalog, so the count follows it as resorts are added.
+    const unsimulated = loadCatalog()
+      .resorts.map((r) => r.id)
+      .filter((id) => !DEMO_RESORT_IDS.includes(id))
+    expect(unsimulated.length).toBeGreaterThanOrEqual(8)
+    expect(new Set(none)).toEqual(new Set(unsimulated))
     expect(new Set(none)).toEqual(new Set(summary.untouchedResorts))
     expect(await db.select().from(s.weatherRuns).where(inArray(s.weatherRuns.resortId, none))).toEqual([])
     expect(await db.select().from(s.conditionsAssessments).where(inArray(s.conditionsAssessments.resortId, none))).toEqual([])

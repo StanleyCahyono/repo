@@ -10,7 +10,7 @@ import { PassesSection } from '@/components/passes/section'
 import { ChipFilter, DateField } from '@/components/passes/toolbar'
 import { getCtx } from '@/lib/context'
 import { getPassesView } from '@/lib/data/passes'
-import { defaultDate, seasonInfo } from '@/lib/data/passes-screen'
+import { defaultDate, planningSeason } from '@/lib/data/passes-screen'
 import { PASS_FAMILIES } from '@/lib/domain/types'
 
 export const metadata: Metadata = { title: 'Access matrix · Passes & Costs' }
@@ -18,7 +18,7 @@ export const metadata: Metadata = { title: 'Access matrix · Passes & Costs' }
 export default async function MatrixPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const q = parseMatrix(await searchParams)
   const ctx = await getCtx()
-  const season = seasonInfo(ctx.prefs.activeSeasonId)
+  const season = await planningSeason(ctx)
   const date = q.date && q.date >= season.start && q.date <= season.end ? q.date : defaultDate(ctx.today, season)
   const pv = await getPassesView(ctx, { date })
   const m = pv.matrix

@@ -2,7 +2,7 @@
  * Pure helpers for My Season (server- and client-safe): labels, date text, money text and form presets.
  * Presets only fill the form — whatever I type is kept as written.
  */
-import { formatMoney, toMajorString, type Money } from '@/lib/domain/money'
+import { currencyChoicesFor, formatMoney, toMajorString, type Money } from '@/lib/domain/money'
 import { formatLocalDate } from '@/lib/domain/time'
 import { provenance, type Provenance } from '@/lib/domain/types'
 import type { BudgetCategory } from '@/lib/domain/costs'
@@ -73,10 +73,9 @@ export const CATEGORY_LABEL: Record<BudgetCategory, string> = {
   other: 'Other',
 }
 
-export const COMMON_CURRENCIES = ['USD', 'CAD', 'EUR', 'CHF', 'GBP'] as const
-
+/** Your currency first, then the app-wide supported list, then any other code already used. */
 export function currencies(preferred: string, ...more: (string | null | undefined)[]): string[] {
-  return [...new Set([preferred, ...COMMON_CURRENCIES, ...more.filter((c): c is string => !!c)].map((c) => c.toUpperCase()))]
+  return currencyChoicesFor(preferred, ...more)
 }
 
 /** Resort-page link for a resort id. */

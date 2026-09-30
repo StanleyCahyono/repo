@@ -1,6 +1,7 @@
 'use client'
 /**
- * "Fetch now" for this resort's weather and official report, through POST /api/refresh (one job at a time).
+ * "Fetch now" for this resort's weather and official report — or its OpenStreetMap lifts & runs — through
+ * POST /api/refresh (one job at a time).
  * Reports honestly: a failed fetch says so and never counts as an update; a cooldown says when to try again.
  * Live mode only — demo data is simulated and never fetched from live sources (the page hides this in demo).
  */
@@ -10,8 +11,8 @@ import { LoaderCircle, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { useToast } from '@/components/ui/toast'
 
-type Job = 'weather' | 'reports'
-const JOB_TEXT: Record<Job, string> = { weather: 'Weather', reports: 'Official report' }
+type Job = 'weather' | 'reports' | 'osm'
+const JOB_TEXT: Record<Job, string> = { weather: 'Weather', reports: 'Official report', osm: 'Lifts & runs' }
 
 interface Payload {
   status?: string

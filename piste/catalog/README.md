@@ -123,3 +123,13 @@ survive re-seeding, and the catalog never overwrites them.
    - Price snapshots are appended only when new.
    - A changed access rule becomes a new rule version.
    - Opening-date changes are logged.
+   - A dated report in `recentReports` is stored once, as an official report of its own `observedOn` day with its
+     source and "Researched — confirm at source" (verification from its `source`; no publish time, so it ages from
+     that day). Re-seeding unchanged content writes nothing, so its age is never reset; changed content for the same
+     day becomes a new revision. Its `operatingStatus` goes through the normal status history ("closed" = closed that
+     day); an "open" snapshot never becomes the season's actual opening. A day still in the future at the resort, or
+     after the research date, is skipped. The demo database never receives them.
+
+`links.liftStatus` is shown as a link only ("Live lift status (official site)"): Piste cannot read those pages. The
+full list of lifts and runs comes from OpenStreetMap (`docs/providers.md`), not from the catalog; the catalog's
+terrain counts (`lifts`, `liftsByType`, `liftCapacityPerHour`, `pisteKm`, `expertPct`) are the resort's own figures.

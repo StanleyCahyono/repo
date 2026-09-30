@@ -1,0 +1,41 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.1 084b4234",
+ "osm3s": {
+  "timestamp_osm_base": "2026-09-29T20:55:41Z",
+  "timestamp_areas_base": "2026-09-29T19:02:11Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "relation",
+   "id": 1234567,
+   "bounds": {
+    "minlat": 47.1201,
+    "minlon": 10.1905,
+    "maxlat": 47.1702,
+    "maxlon": 10.2803
+   },
+   "tags": {
+    "landuse": "winter_sports",
+    "name": "Skigebiet St. Anton am Arlberg",
+    "name:en": "St. Anton am Arlberg ski area",
+    "type": "multipolygon"
+   }
+  },
+  {
+   "type": "way",
+   "id": 7654321,
+   "bounds": {
+    "minlat": 47.105,
+    "minlon": 10.17,
+    "maxlat": 47.115,
+    "maxlon": 10.19
+   },
+   "tags": {
+    "landuse": "winter_sports",
+    "name": "Sonnenkopf"
+   }
+  }
+ ]
+}

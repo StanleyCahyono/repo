@@ -12,9 +12,9 @@ import type { ResearchNotes, ResortLinks } from '@/lib/db/schema'
 import { isExpired, priceNeedsSourceCheck, QUOTE_KIND_LABEL, type DayBasket } from '@/lib/domain/costs'
 import { money, type Money } from '@/lib/domain/money'
 import { evaluateAccess, latestRule, type AccessVerdict } from '@/lib/domain/passes'
-import { isLocalDate, isoWeekday, localTimeToInstant, seasonIdFor, zoneAbbrev } from '@/lib/domain/time'
+import { hemisphereOf, isLocalDate, isoWeekday, localTimeToInstant, seasonIdForHemisphere, seasonIdsForDates, zoneAbbrev, type Hemisphere } from '@/lib/domain/time'
 import type { Provenance, ScheduleActivity, ScoringMode } from '@/lib/domain/types'
-import { loadBundle, needsConfirmation, NOT_PERSONAL_REPORT, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
+import { loadBundle, needsConfirmation, NOT_PERSONAL_REPORT, resortSeasonFor, resortSeasonId, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
 import { getForecast, getHistoryCalendar, type HistoryCalendar, type ResortForecast } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { basketVerdict, dayBasket, eventView, reportView, type EventView, type ReportView, type TravelView } from './views'
@@ -137,10 +137,16 @@ export interface SourceEntry {
 export interface ResortDetail {
   summary: ResortSummary
   season: {
+    /**
+     * The resort's "current or next" season: the planning season, or the resort's own winter while it is still
+     * under way (a Southern Hemisphere winter in September when the planning season is already 2026–27).
+     */
     seasonId: string
     label: string
+    /** The resort's hemisphere: a Southern Hemisphere winter runs about May–October of the season's second year. */
+    hemisphere: Hemisphere
     current: ResortSeasonRow | null
-    /** Other seasons on file (history). */
+    /** Other seasons on file (earlier ones, and any later one), newest first. */
     others: ResortSeasonRow[]
     /** Every change to announced/actual dates, newest first. */
     changes: (typeof s.openingDateHistory.$inferSelect)[]
@@ -181,6 +187,7 @@ export const LINK_LABEL: Record<Exclude<keyof ResortLinks, 'more'>, string> = {
   tourism: 'Tourism office',
   avalanche: 'Avalanche information',
   openSkiMap: 'OpenSkiMap',
+  liftStatus: 'Live lift status',
 }
 
 function priceView(p: PriceSnapshotRow, ctx: DataCtx): PriceView {
@@ -211,9 +218,12 @@ function priceView(p: PriceSnapshotRow, ctx: DataCtx): PriceView {
 
 const byNewest = (a: PriceView, b: PriceView) => (a.observedAt < b.observedAt ? 1 : a.observedAt > b.observedAt ? -1 : b.id - a.id)
 
-/** Published hours for one date: a dated exception wins over the weekly pattern; live statements over published. */
-export function hoursForDate(schedules: readonly OperatingScheduleRow[], date: string): HoursForDate[] {
-  const season = seasonIdFor(date)
+/**
+ * Published hours for one date: a dated exception wins over the weekly pattern; live statements over published.
+ * Season-scoped schedules apply in the resort's own season for the date (`hemisphere`, default north).
+ */
+export function hoursForDate(schedules: readonly OperatingScheduleRow[], date: string, hemisphere: Hemisphere = 'north'): HoursForDate[] {
+  const season = seasonIdForHemisphere(date, hemisphere)
   const wd = isoWeekday(date)
   const applicable = schedules.filter((x) => !x.seasonId || x.seasonId === season)
   const liveFirst = (a: OperatingScheduleRow, b: OperatingScheduleRow) => (a.nature === b.nature ? a.id - b.id : a.nature === 'live' ? -1 : 1)
@@ -264,7 +274,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
   const { db, now } = ctx
   const date = opts.date && isLocalDate(opts.date) ? opts.date : ctx.today
   const mode = opts.mode ?? ctx.prefs.scoringMode
-  const b = await loadBundle(ctx, { ids: [id], seasons: [seasonIdFor(date)] })
+  const b = await loadBundle(ctx, { ids: [id], seasons: seasonIdsForDates([date]) })
   const rec = b.byId.get(id)
   if (!rec) return null
   const r = rec.row
@@ -334,12 +344,14 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
         )
     : []
 
-  // Seasons
-  const current = b.seasons.get(`${id}|${b.seasonId}`) ?? null
-  const others = seasonRows.filter((x) => x.seasonId !== b.seasonId).sort((x, y) => y.seasonId.localeCompare(x.seasonId))
+  // Seasons: the resort's "current or next" winter (see resortSeasonId).
+  const hemisphere = hemisphereOf(r.lat)
+  const shownSeason = resortSeasonId(b, r, resortToday(r, now))
+  const current = b.seasons.get(`${id}|${shownSeason}`) ?? null
+  const others = seasonRows.filter((x) => x.seasonId !== shownSeason).sort((x, y) => y.seasonId.localeCompare(x.seasonId))
 
   // Hours
-  const dateSeason = seasonIdFor(date)
+  const dateSeason = resortSeasonFor(r, date)
   const scheduleViews: ScheduleView[] = schedules
     .map((x) => ({
       id: x.id,
@@ -358,7 +370,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
       prov: x.prov,
     }))
     .sort((x, y) => x.activity.localeCompare(y.activity) || (x.exceptionDate ?? '').localeCompare(y.exceptionDate ?? '') || x.id - y.id)
-  const forDate = hoursForDate(schedules, date)
+  const forDate = hoursForDate(schedules, date, hemisphere)
   const hourNotes: string[] = [`Times are resort-local (${r.timezone}).`, 'Published hours do not mean every lift is running.']
   if (!forDate.length) {
     hourNotes.unshift(
@@ -394,7 +406,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
         familyId: p.familyId,
         familyName: fam.get(p.familyId) ?? p.familyId,
         owned: ownedIds.has(p.id),
-        verdict: evaluateAccess({ product: p, rule, resortId: id, date, usage, poolRules: productRules, today: ctx.today, names: b.names }),
+        verdict: evaluateAccess({ product: p, rule, resortId: id, date, usage, poolRules: productRules, today: ctx.today, names: b.names, seasonOf: b.pass.seasonOf }),
         ruleProv: rule?.prov ?? null,
       }
     })
@@ -493,7 +505,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
 
   return {
     summary,
-    season: { seasonId: b.seasonId, label: seasonLabel(b.seasonId), current, others, changes },
+    season: { seasonId: shownSeason, label: seasonLabel(shownSeason), hemisphere, current, others, changes },
     // The abbreviation in force on the viewed date (EST vs EDT), taken at local noon — never at `now`.
     hours: { timezone: r.timezone, zoneAbbrev: zoneAbbrev(localTimeToInstant(date, '12:00', r.timezone), r.timezone), date, forDate, schedules: scheduleViews, notes: hourNotes },
     reports,

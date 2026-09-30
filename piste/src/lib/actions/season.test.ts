@@ -9,7 +9,7 @@ vi.mock('@/lib/jobs/runner', () => ({ runJob: (...args: unknown[]) => runJob(...
 
 import { and, eq } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
-import { buildFixture, NOW, type Fixture } from '@/lib/data/fixtures.test-helpers'
+import { buildFixture, fixtureResort, NOW, type Fixture } from '@/lib/data/fixtures.test-helpers'
 import {
   addSkill,
   deleteExpense,
@@ -36,6 +36,25 @@ beforeAll(async () => {
 
 beforeEach(() => {
   runJob.mockClear()
+})
+
+describe('saveSkiDay — Southern Hemisphere resorts', () => {
+  it('files a day at a southern resort in that resort’s season: August 2026 is 2025–26 there, not 2026–27', async () => {
+    const south = fixtureResort('south-peak', { country: 'AU', timezone: 'Australia/Sydney', location: { lat: -36.5, lon: 148.3 }, prices: [], hours: [] })
+    const own = await buildFixture({ extraResorts: [south] })
+    const saved = ctxRef.current
+    ctxRef.current = own.ctx
+    try {
+      // The northern reading would call 15 Aug 2026 part of 2026-27; at Thredbo-like latitudes it is the 2026 winter.
+      expect(await saveSkiDay(day({ resortId: 'south-peak', date: '2026-08-15' }))).toMatchObject({ ok: false, fieldErrors: { date: expect.stringMatching(/2026–27/) } })
+      // A day in the 2026-27 season at that resort (from 1 Jan 2027) is accepted.
+      expect(await saveSkiDay(day({ resortId: 'south-peak', date: '2027-01-10' }))).toMatchObject({ ok: true })
+      // A northern resort keeps the 1 July boundary.
+      expect(await saveSkiDay(day({ resortId: 'test-peak', date: '2026-08-15' }))).toMatchObject({ ok: true })
+    } finally {
+      ctxRef.current = saved
+    }
+  })
 })
 
 describe('saveSkiDay — the ski-day journal', () => {

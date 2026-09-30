@@ -1,0 +1,277 @@
+{
+  "id": "garmisch-partenkirchen",
+  "name": "Garmisch-Partenkirchen (Garmisch-Classic + Zugspitze)",
+  "shortName": "Garmisch",
+  "country": "DE",
+  "region": "Werdenfelser Land (Bavaria)",
+  "stateProvince": "Bavaria",
+  "locality": "Garmisch-Partenkirchen and Grainau (Zugspitze)",
+  "timezone": "Europe/Berlin",
+  "operator": "Bayerische Zugspitzbahn Bergbahn AG",
+  "priority": 0,
+  "location": {
+    "lat": 47.4917,
+    "lon": 11.0955,
+    "source": {
+      "url": "https://zugspitze.de/en",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Garmisch-Partenkirchen town centre"
+    }
+  },
+  "elevation": {
+    "baseM": 708,
+    "summitM": 2650,
+    "verticalM": 1942,
+    "source": {
+      "url": "https://zugspitze.de/en/Our-mountain-worlds/Winter/Garmisch-Classic-ski-area",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summaries: Garmisch-Classic 708–2,050 m; Zugspitze ski area 2,000–2,650 m (https://www.skiresort.com/en/ski-resort/zugspitze/). The two areas are not linked on skis; vertical here is the overall difference (Garmisch-Classic alone: 1,342 m)"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Garmisch-Partenkirchen town (approx.)",
+      "lat": 47.4917,
+      "lon": 11.0955,
+      "elevationM": 708,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Zugspitzplatt glacier ski area (approx.)",
+      "lat": 47.408,
+      "lon": 10.99,
+      "elevationM": 2650,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 26,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 57,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": 2,
+      "chairlifts": 4,
+      "surfaceLifts": 10,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://zugspitze.de/en/Our-mountain-worlds/Winter/Garmisch-Classic-ski-area",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summaries: Garmisch-Classic 40 km of slopes and 18 lifts (2 aerial trams, 2 gondolas, 4 chairlifts, 10 surface lifts); Zugspitze ski area 17 km and 8 lifts, types not given (https://zugspitze.de/en/Our-mountain-worlds/Winter/Zugspitze-ski-area). Totals are the sum of the two areas (57 km, 26 lifts); the type breakdown covers Garmisch-Classic only."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://zugspitze.de/en",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Ski schools and rental shops operate at the bases"
+    }
+  },
+  "character": "Garmisch-Partenkirchen in Bavaria has two ski areas run by the Bayerische Zugspitzbahn: Garmisch-Classic (Hausberg, Kreuzeck, Alpspitze) above the town, home of the Kandahar World Cup downhill, and the Zugspitze glacier ski area on Germany's highest mountain, reached by rack railway and cable car. The two areas are not linked on skis.",
+  "learning": "Reference note: ski schools operate in Garmisch-Partenkirchen, and the Zugspitze glacier has easy runs; confirm beginner areas and lessons.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-11-27",
+      "text": "Zugspitze glacier ski area expected 27 Nov 2026 – 2 May 2027; no 2026-27 date found for Garmisch-Classic",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.skiresort.info/snow-reports/seasonstart/zugspitz-region/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary ('expected to run from 27.11.2026 to 02.05.2027'); exact page not attributed"
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-05-02",
+      "text": "Zugspitze expected to run to 2 May 2027",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.skiresort.info/snow-reports/seasonstart/zugspitz-region/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary"
+      }
+    },
+    "history": [
+      {
+        "season": "2024-25",
+        "opened": "2024-12-13",
+        "closed": null,
+        "source": {
+          "url": "https://zugspitze.de/en/Garmisch-Classic-opens-with-first-ski-lifts-and-reduced-ticket-prices_bba_1716686",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Garmisch-Classic opened its first lifts (including the Hausbergbahn) on Friday 13 Dec 2024; the Zugspitze opens separately"
+        }
+      }
+    ],
+    "typicalText": null,
+    "notes": "Dates are for the Zugspitze glacier; Garmisch-Classic depends on snow at lower altitude (it opened 13 Dec in 2024-25)."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Garmisch-Classic day ticket",
+      "category": "adult",
+      "amount": 69.0,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary listed EUR 69.00 as the day-ticket price, but the season was not confirmed.",
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Tickets-rates/Garmisch-Classic",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Zugspitze day ticket",
+      "category": "adult",
+      "amount": 69.0,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025-26 figure (the 2026-27 price had not been published per the search summary): adult EUR 69.00, junior 16–18 EUR 55.00, child 6–15 EUR 34.50.",
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Tickets-rates/Zugspitze",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
+  "links": {
+    "official": "https://zugspitze.de/en",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+    "tickets": "https://zugspitze.de/en/Service-information/Tickets-rates/Garmisch-Classic",
+    "seasonPass": "https://zugspitze.de/en/Service-information/Tickets-rates/Season-tickets-annual-passes",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": "https://www.lawinenwarndienst-bayern.de/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Garmisch-Classic ski area",
+      "url": "https://zugspitze.de/en/Our-mountain-worlds/Winter/Garmisch-Classic-ski-area"
+    },
+    {
+      "label": "Zugspitze ski area",
+      "url": "https://zugspitze.de/en/Our-mountain-worlds/Winter/Zugspitze-ski-area"
+    },
+    {
+      "label": "Zugspitze tickets",
+      "url": "https://zugspitze.de/en/Service-information/Tickets-rates/Zugspitze"
+    },
+    {
+      "label": "Garmisch-Partenkirchen tourism (reference link — confirm)",
+      "url": "https://www.gapa.de/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "INN",
+        "role": "closest",
+        "minutes": 60,
+        "km": 60,
+        "basis": "Estimate from typical routing (B171/B177 via Zirl and Seefeld to Mittenwald, then the B2 to Garmisch-Partenkirchen); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "MUC",
+        "role": "practical",
+        "minutes": 80,
+        "km": 110,
+        "basis": "Estimate from typical routing (A9/A99 and the A95 Munich–Garmisch motorway, then the B2); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "DB regional trains Munich–Garmisch-Partenkirchen",
+        "type": "train",
+        "url": "https://www.bahn.de/",
+        "notes": "Reference, confirm: regional trains run from Munich to Garmisch-Partenkirchen. Check 2026-27 timetables."
+      },
+      {
+        "name": "Zugspitze rack railway and cable cars",
+        "type": "train",
+        "url": "https://zugspitze.de/en",
+        "notes": "Reference, confirm: the Bayerische Zugspitzbahn rack railway runs from Garmisch-Partenkirchen via Grainau to the Zugspitzplatt ski area."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "2026-27 opening date for Garmisch-Classic and 2026-27 day prices for both areas.",
+      "Zugspitze lift types and hourly lift capacity for both areas.",
+      "Official snow report and live lift-status pages."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Piste, lift, date and price facts come from web-search summaries of zugspitze.de and skiresort pages; totals combine two separate areas. Coordinates, weather points, the tourism link and airport times are Piste reference data or estimates."
+  }
+}

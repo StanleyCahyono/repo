@@ -7,7 +7,8 @@
  * - Cadences come from the environment with defaults: weather 180 min; official reports 60 min between 06:00 and
  *   18:00 resort-local and 240 min otherwise; official alerts 60 min; status 60 min (local and cheap: an announced
  *   date passing, or a recorded closing, shows up within the hour); links/fx/prune daily; assessments every 6 h and
- *   after weather/report/status changes; alerts after each refresh pass. Each due time gets ± jitter.
+ *   after weather/report/status changes; alerts after each refresh pass; OpenStreetMap lifts & runs weekly, per resort,
+ *   for favourites and resorts in upcoming trips (./osm.ts). Each due time gets ± jitter.
  * - The worker writes a heartbeat to app_meta('scheduler.heartbeat') every tick. A sleeping or powered-off machine
  *   collects nothing: run the worker on an always-on host, or call `npm run refresh` from cron.
  */
@@ -16,6 +17,7 @@ import { localTimeToInstant } from '@/lib/domain/time'
 import { DateTime } from 'luxon'
 import { lastAttemptRun, reapInterruptedScheduledRuns, runJob, type RunSummary } from './runner'
 import type { JobDeps, JobName, Trigger } from './types'
+import { osmTargets } from './osm'
 import { minutesAfter, selectResorts, setMeta } from './util'
 
 export interface Cadences {
@@ -31,6 +33,8 @@ export interface Cadences {
   linksMin: number
   fxMin: number
   pruneMin: number
+  /** OpenStreetMap lifts & runs, per favourite / upcoming-trip resort (community map data changes slowly). */
+  osmMin: number
   /** ± fraction of each cadence added as jitter (0.1 = ±10%). */
   jitterPct: number
   /** After a failed run, retry after min(cadence, this). */
@@ -50,6 +54,7 @@ export const DEFAULT_CADENCES: Cadences = {
   linksMin: 1440,
   fxMin: 1440,
   pruneMin: 1440,
+  osmMin: 10_080,
   jitterPct: 0.1,
   errorRetryMin: 30,
   tickSeconds: 60,
@@ -65,6 +70,7 @@ const ENV_KEYS: Partial<Record<keyof Cadences, string>> = {
   linksMin: 'PISTE_LINKS_EVERY_MIN',
   fxMin: 'PISTE_FX_EVERY_MIN',
   pruneMin: 'PISTE_PRUNE_EVERY_MIN',
+  osmMin: 'PISTE_OSM_EVERY_MIN',
   tickSeconds: 'PISTE_WORKER_TICK_SECONDS',
 }
 
@@ -98,7 +104,13 @@ export interface ScheduledTask {
   everyMin: number
 }
 
-export function planTasks(now: string, c: Cadences, reportTargets: readonly { resortId: string; timezone: string }[]): ScheduledTask[] {
+export function planTasks(
+  now: string,
+  c: Cadences,
+  reportTargets: readonly { resortId: string; timezone: string }[],
+  /** Resorts whose OpenStreetMap lifts & runs load on schedule (see osmTargets). */
+  osmTargetIds: readonly string[] = [],
+): ScheduledTask[] {
   const g = (job: JobName, everyMin: number): ScheduledTask => ({ key: job, job, target: null, everyMin })
   return [
     g('weather', c.weatherMin),
@@ -109,6 +121,8 @@ export function planTasks(now: string, c: Cadences, reportTargets: readonly { re
     g('fx', c.fxMin),
     g('links', c.linksMin),
     g('prune', c.pruneMin),
+    // Last: community map data never holds up the forecast, status or alerts.
+    ...osmTargetIds.map((id) => ({ key: `osm:${id}`, job: 'osm' as const, target: id, everyMin: c.osmMin })),
   ]
 }
 
@@ -175,7 +189,8 @@ export async function tick(a: TickArgs): Promise<RunSummary[]> {
   state.firstTick = false
 
   const reportResorts = await selectResorts(db, deps.reportProviders.map((p) => p.resortId))
-  const tasks = planTasks(now, c, reportResorts.map((r) => ({ resortId: r.id, timezone: r.timezone })))
+  const osmIds = deps.osmProvider && !deps.demo ? await osmTargets(db, now) : []
+  const tasks = planTasks(now, c, reportResorts.map((r) => ({ resortId: r.id, timezone: r.timezone })), osmIds)
   const ran: RunSummary[] = []
   for (const t of tasks) {
     if (a.signal?.aborted) break
@@ -249,7 +264,21 @@ export async function runWorker(a: WorkerArgs): Promise<void> {
   await setMeta(a.db, 'scheduler.stoppedAt', a.clock(), a.clock())
 }
 
-export const ONCE_ORDER: readonly JobName[] = ['weather', 'nws-alerts', 'reports', 'status', 'assessments', 'alerts', 'fx', 'links', 'prune']
+export const ONCE_ORDER: readonly JobName[] = ['weather', 'nws-alerts', 'reports', 'status', 'assessments', 'alerts', 'fx', 'links', 'osm', 'prune']
+
+/**
+ * OpenStreetMap targets that are due (their last attempt is older than the cadence): a cron pass may run hourly, but
+ * community map data is fetched weekly — and a failed attempt is retried after `errorRetryMin`.
+ */
+async function dueOsmTargets(db: Db, deps: JobDeps, now: string, c: Cadences): Promise<string[]> {
+  if (!deps.osmProvider || deps.demo) return []
+  const due: string[] = []
+  for (const id of await osmTargets(db, now)) {
+    const next = nextDueAt(await lastAttemptRun(db, 'osm', id), c.osmMin, 0, c)
+    if (!next || next <= now) due.push(id)
+  }
+  return due
+}
 
 /** One pass of every job (for cron). Reports run per adapter so one failing source never hides the others. */
 export async function runOnce(a: {
@@ -259,6 +288,8 @@ export async function runOnce(a: {
   jobs?: readonly JobName[]
   signal?: AbortSignal
   log?: (line: string) => void
+  /** Cadences for the jobs that keep their own pace in a cron pass (OpenStreetMap). Default: from the environment. */
+  cadences?: Cadences
 }): Promise<RunSummary[]> {
   const log = a.log ?? (() => {})
   const jobs = a.jobs ?? ONCE_ORDER
@@ -266,7 +297,12 @@ export async function runOnce(a: {
   const out: RunSummary[] = []
   for (const job of ONCE_ORDER.filter((j) => jobs.includes(j))) {
     if (a.signal?.aborted) break
-    const targets: (string | null)[] = job === 'reports' ? [...new Set(a.deps.reportProviders.map((p) => p.resortId))] : [null]
+    const targets: (string | null)[] =
+      job === 'reports'
+        ? [...new Set(a.deps.reportProviders.map((p) => p.resortId))]
+        : job === 'osm'
+          ? await dueOsmTargets(a.db, a.deps, a.clock(), a.cadences ?? cadencesFromEnv())
+          : [null]
     for (const target of targets) {
       const s = await runJob({ db: a.db, job, target, trigger: 'schedule', now: a.clock(), deps: a.deps, clock: a.clock, signal: a.signal })
       log(`${job}${target ? `:${target}` : ''}: ${s.status}${s.itemsWritten ? ` (+${s.itemsWritten})` : ''}${s.error ? ` — ${s.error.slice(0, 300)}` : ''}`)

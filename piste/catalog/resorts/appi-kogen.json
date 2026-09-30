@@ -1,0 +1,209 @@
+{
+  "id": "appi-kogen",
+  "name": "APPI Kogen Resort",
+  "shortName": "Appi",
+  "country": "JP",
+  "region": "Iwate (Hachimantai)",
+  "stateProvince": "Iwate",
+  "locality": "Hachimantai city (Appi Kogen)",
+  "timezone": "Asia/Tokyo",
+  "operator": null,
+  "priority": 0,
+  "location": {
+    "lat": 40.003,
+    "lon": 140.966,
+    "source": {
+      "url": "https://www.appi.co.jp/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate APPI main base / hotel area position"
+    }
+  },
+  "elevation": {
+    "baseM": 500,
+    "summitM": 1328,
+    "verticalM": 828,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Appi_Kogen_Ski_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base 500 m, top 1,328 m, vertical 828 m. The same summary describes Maemoriyama as 1,304 m"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "APPI main base (approx.)",
+      "lat": 40.003,
+      "lon": 140.966,
+      "elevationM": 500,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Maemoriyama summit / gondola top (approx.; the area's top is about 1,328 m)",
+      "lat": 39.985,
+      "lon": 140.935,
+      "elevationM": 1304,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 21,
+    "lifts": 16,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": null,
+      "chairlifts": 14,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Appi_Kogen_Ski_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 21 courses on Maemoriyama and Nishimoriyama, half over 2 km long, longest 5.5 km; lift system 16 (2 gondolas, 3 high-speed quad and 11 pair chairlifts). Piste km not stated"
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": null,
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Resort hotels sit at the base"
+    }
+  },
+  "character": "A large resort in the Appi Highlands of Iwate, about 50 km north of Morioka, with long groomed runs on two peaks, Maemoriyama and Nishimoriyama. Resort hotels are clustered at the base.",
+  "learning": "Reference, confirm: long, wide groomed runs and resort ski schools make it a common family choice; the ability split was not captured.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-05",
+        "closed": null,
+        "source": {
+          "url": "https://steep.jp/en/ski-area/appikogen/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Search summary: 2025-26 opening day scheduled for 5 Dec 2025; the actual first day was not confirmed"
+        }
+      }
+    ],
+    "typicalText": "Opens early December (2025-26 scheduled 5 Dec 2025)",
+    "notes": "No 2026-27 opening date was found."
+  },
+  "hours": [],
+  "prices": [],
+  "links": {
+    "official": "https://www.appi.co.jp/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": null,
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Appi Kogen (japan-guide.com)",
+      "url": "https://www.japan-guide.com/e/e5095.html"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "HNA",
+        "role": "closest",
+        "minutes": 80,
+        "km": 100,
+        "basis": "Estimate from typical routing (Tohoku Expressway north past Morioka, then local roads); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      },
+      {
+        "iata": "SDJ",
+        "role": "practical",
+        "minutes": 180,
+        "km": 250,
+        "basis": "Estimate from typical routing (Tohoku Expressway north); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Tohoku Shinkansen to Morioka, then bus to Appi",
+        "type": "train",
+        "url": "https://www.jreast.co.jp/",
+        "notes": "Reference, confirm: Tokyo to Morioka by Tohoku Shinkansen (about 2.25 h), then about 1 h by bus; resort shuttles have served hotel guests. Schedules and fares are not on file."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Standard 2026-27 adult 1-day price (only the premium BLACK PASS, ¥33,000 for one day, was found for 2026-27). A recent-season day ticket was reported as ¥9,500 regular / ¥4,500 low season, season not stated, so it is not recorded.",
+      "2026-27 opening/closing dates; actual 2025-26 opening and closing dates.",
+      "Live lift-status, snow-report, ticket and trail-map URLs; operator.",
+      "Pass access: not on the Ikon or Epic rosters in the shared notes."
+    ],
+    "conflicts": [
+      "Summit: Wikipedia-style top elevation 1,328 m vs Maemoriyama described as 1,304 m; which peak or lift top is 1,328 m was not confirmed."
+    ],
+    "confidenceNotes": "Terrain and elevations come from Wikipedia-style search summaries; the 2025-26 opening is a scheduled date. No standard price is recorded. Official homepage, coordinates and airport times are Piste reference data/estimates."
+  }
+}

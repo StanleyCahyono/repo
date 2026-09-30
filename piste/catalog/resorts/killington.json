@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 155,
+    "lifts": 22,
+    "skiableAcres": 1526,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": null,
+      "chairlifts": 14,
+      "surfaceLifts": 2,
+      "other": 3
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.vermontvacations.com/blog/killington-ski-lifts-and-prices",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30), current published figures: 1,526 skiable acres and 155 trails; one result gave 20 lifts, while the Vermont Vacations lift guide lists 22 lifts: 2 gondolas, 14 chairlifts, 1 T-bar, 1 rope tow and 3 magic carpets (surface = T-bar + rope tow; carpets counted as other). Those types sum to 21. Page-level attribution of the acres/trails figures was not isolated (OnTheSnow/skiresort-style summary)."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,17 +108,39 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 11, 2026 (a third-party projection, not an announcement). Killington publishes its historical opening and closing dates (see More links), but they were not captured in this research, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (18-64) 1-day lift ticket, weekday",
+      "category": "adult",
+      "amount": 205,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow listing described as the \"most recent\" adult weekday price; the season was not stated. Killington prices are date-specific and cheaper when bought early. Confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/vermont/killington-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.killington.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://killington.com/lift-tickets",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,9 +151,23 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Historical opening and closing dates (official)",
+      "url": "https://www.killington.com/the-mountain/mountain-info/operating-schedule/historical-open-close/"
+    },
+    {
+      "label": "K-Tickets and K-Days (official)",
+      "url": "https://killington.com/k-tickets-and-k-days"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (Vermont)",
+      "url": "https://www.onthesnow.com/vermont/projected-openings"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 320,
@@ -162,21 +213,22 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "No resort-announced 2026-27 opening or closing date found as of 2026-09-30 (OnTheSnow projects Nov 11, 2026).",
+      "Confirm 2026-27 Ikon Pass / Ikon Base terms (lead from earlier seasons: days shared with Pico) and Killington's own pass products.",
+      "Confirm 2026-27 adult day-ticket prices: OnTheSnow lists $205 adult (18-64) weekday with no season stated; prices are date-specific.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the current owner/operator (POWDR sold Killington and Pico to a local ownership group in 2024 — reference).",
-      "Confirm 2026-27 Ikon Pass / Ikon Base terms (lead from earlier seasons: days shared with Pico) and Killington's own pass products.",
-      "Capture actual 2024-25 and 2025-26 opening dates so an estimated window can be derived.",
-      "Confirm official deep links on killington.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), childcare and tubing.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates from the official historical open/close page (More links) so an estimated window can be derived.",
+      "Confirm official deep links on killington.com (snow report, lift status, trail map, lessons, webcams, parking) and the snow-report format.",
+      "Resolve the lift count (20 vs 22; the 22-lift breakdown sums to 21) and confirm skiable acres (1,526 in the summary), trail difficulty split, snowmaking %, childcare and tubing.",
       "Transit leads to confirm: Amtrak's Ethan Allen Express serves Rutland; a local bus has served Killington Road. Rutland (RUT) is the closest airport."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Snowshed beginner area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "terrain.lifts: 20 lifts (one search result) vs 22 lifts listed as 2 gondolas, 14 chairlifts, 1 T-bar, 1 rope tow and 3 magic carpets (Vermont Vacations), which sum to 21. Resolution: used 22 with the listed types; total unconfirmed."
+    ],
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries only; page fetches blocked). Terrain (1,526 acres, 155 trails, 20–22 lifts by source) and a $205 weekday adult price of unstated season are search-summary facts. Identity, coordinates, elevations, owner, homepage and the few features set remain Piste reference data (unverified). The OnTheSnow opening date is a projection. Drive and airport times are Piste estimates. Pass access was not re-researched."
   }
 }

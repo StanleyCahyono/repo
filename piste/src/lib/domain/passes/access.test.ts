@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { PassAccessRuleRow, PassProductRow, PassUsageRow } from '@/lib/db/rows'
+import { seasonIdForHemisphere } from '../time'
 import { provenance } from '../types'
 import { evaluateAccess, planAccess } from './access'
 import { remainingByPool, remainingByResort } from './allowance'
@@ -276,6 +277,48 @@ describe('evaluateAccess — shared pools and caps', () => {
     expect(v.pool?.total).toBe(5)
     expect(v.pool?.conflictingTotals).toEqual([5, 7])
     expect(v.reasons.join(' ')).toContain('disagree')
+  })
+})
+
+describe('evaluateAccess — Southern Hemisphere resorts', () => {
+  // A 2026-27 pass covers the 2027 winter in Australia and New Zealand (June–October 2027).
+  const south = new Set(['thredbo', 'mt-hutt'])
+  const seasonOf = (resortId: string | null | undefined, date: string) => seasonIdForHemisphere(date, resortId && south.has(resortId) ? 'south' : 'north')
+  const shRules: PassRuleInput[] = [
+    rule({ resortId: 'thredbo', access: 'limited-days', days: 5, blackouts: [{ from: '2027-07-03', to: '2027-07-05', label: 'School holidays' }] }),
+    rule({ resortId: 'mt-hutt', access: 'shared-pool', days: 5, poolId: 'nz', poolLabel: 'NZ pool' }),
+    rule({ resortId: 'alta', access: 'unlimited' }),
+  ]
+  const at = (resortId: string, date: string, usage: PassUsageInput[] = []) =>
+    evaluateAccess({ product: ikon, rule: shRules.find((r) => r.resortId === resortId), resortId, date, usage, poolRules: shRules, seasonOf })
+
+  it('places the southern winter in the pass season: August 2027 is 2026-27 there, 2027-28 in Utah', () => {
+    expect(at('thredbo', '2027-08-02').status).toBe('included-limited')
+    expect(at('alta', '2027-08-02').status).toBe('season-mismatch')
+    // The 2026 southern winter belongs to the 2025-26 pass.
+    const sept2026 = at('thredbo', '2026-09-10')
+    expect(sept2026.status).toBe('season-mismatch')
+    expect(sept2026.reasons[0]).toMatch(/2026-09-10 falls in the 2025-26 season/)
+    // Without the resolver every resort is northern (the old behaviour).
+    expect(evaluateAccess({ product: ikon, rule: shRules[0], resortId: 'thredbo', date: '2027-08-02', poolRules: shRules }).status).toBe('season-mismatch')
+    expect(at('thredbo', '2027-07-04').status).toBe('blackout')
+  })
+
+  it('counts southern winter days against the allowance (days after 1 July are this season’s)', () => {
+    const usage: PassUsageInput[] = [
+      { resortId: 'thredbo', date: '2027-06-20' },
+      { resortId: 'thredbo', date: '2027-07-10' },
+      { resortId: 'thredbo', date: '2027-08-01' },
+      { resortId: 'thredbo', date: '2026-08-01' }, // the 2026 winter: another season
+    ]
+    const v = at('thredbo', '2027-08-15', usage)
+    expect(v.resortCap).toMatchObject({ total: 5, used: 3, remaining: 2 })
+    expect(remainingByResort(ikon, shRules, usage, seasonOf).find((a) => a.resortId === 'thredbo')).toMatchObject({ used: 3, remaining: 2 })
+    expect(remainingByPool(ikon, shRules, [{ resortId: 'mt-hutt', date: '2027-09-01' }], seasonOf)[0]).toMatchObject({ used: 1, remaining: 4 })
+    // A northern reading would miss the July and August 2027 days and count August 2026 (last winter) instead.
+    expect(remainingByResort(ikon, shRules, usage).find((a) => a.resortId === 'thredbo')).toMatchObject({ used: 2 })
+    const plan = planAccess(ikon, shRules, [{ resortId: 'thredbo', date: '2027-08-20' }, { resortId: 'thredbo', date: '2027-08-21' }, { resortId: 'thredbo', date: '2027-08-22' }], usage, { seasonOf })
+    expect(plan.days.map((d) => d.verdict.status)).toEqual(['included-limited', 'included-limited', 'days-exhausted'])
   })
 })
 

@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 2003,
+    "baseM": 1966,
     "summitM": 2917,
-    "verticalM": 914,
+    "verticalM": 951,
     "source": {
-      "url": "https://www.deervalley.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Pre-expansion figures: Snow Park base about 6,570 ft, top of Empire Canyon about 9,570 ft, vertical about 3,000 ft. The East Village expansion may change the published base and vertical"
+      "url": "https://www.deervalley.com/media-room/062926-ee-updates",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: peak elevation 9,570 ft, lowest elevation 6,450 ft (after the East Village expansion); vertical derived (3,120 ft). The base weather point stays at the Snow Park base (about 6,570 ft, Piste reference)."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 209,
+    "lifts": 32,
+    "skiableAcres": 4500,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": null,
+      "chairlifts": 30,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": "2026-27",
+    "source": {
+      "url": "https://www.deervalley.com/media-room/062926-ee-updates",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: Deer Valley media room 29 Jun 2026 \"Expanded Excellence\" update, deervalley.com Explore the Mountain, Coleman Concierge, Park Record): for 2026-27 about 4,500 skiable acres and 209 runs; 32 aerial lifts (2 gondolas, 23 detachable and 7 fixed-grip chairlifts). Surface lifts and carpets are not stated, so \"lifts\" counts aerial lifts only. The new Hail Peak Express (86 chairs, up to 2,400 skiers/hour; placed by helicopter in Sep 2026) adds about 200 acres and 7 runs for 2026-27. Ability split not captured."
+    }
   },
   "features": {
     "nightSkiing": false,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-05",
+      "text": "Targets a Dec. 5, 2026 opening",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://townlift.com/2026/09/deer-valley-targets-dec-5-opening-as-resort-continues-developing-expanded-terrain/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "TownLift (Sep 2026): \"Deer Valley targets Dec. 5 opening as resort continues developing expanded terrain\". Utah roundups list the same date as projected. Conditions permitting — confirm on deervalley.com."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -91,17 +111,51 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-06",
+        "closed": "2026-03-29",
+        "source": {
+          "url": "https://www.skiutah.com/blog/authors/yeti/utah-ski-resort-opening-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Search summary: 2025-26 opening Dec. 6, 2025 (Ski Utah 2025-26 opening-dates list) and an early closure on Mar. 29, 2026 because of unseasonably warm conditions (Deseret News, 26 Mar 2026: https://www.deseret.com/lifestyle/2026/03/26/utah-ski-season-snow-forecast-deer-valley-closing/)."
+        }
+      }
+    ],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: Deer Valley targets Dec. 5, 2026 (TownLift, Sep 2026). No 2026-27 closing date was found. 2025-26 closed early (Mar. 29, 2026) in a warm season, so that closing is not typical."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (peak day)",
+      "category": "adult",
+      "amount": 349,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27 peak-day adult ticket $349. Non-peak and advance-online prices were not captured. In spring 2026 Deer Valley ran $100 half-day tickets (TownLift/Powder, Mar 2026) — not a 2026-27 price.",
+      "source": {
+        "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of TownLift (Sep 2026) and other 2026-27 price roundups."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.deervalley.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.deervalley.com/explore-the-mountain/mountain-report",
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -114,9 +168,19 @@
     "events": null,
     "tourism": "https://www.visitparkcity.com/",
     "avalanche": "https://utahavalanchecenter.org/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Explore the mountain (official overview)",
+      "url": "https://www.deervalley.com/explore-the-mountain"
+    },
+    {
+      "label": "Expanded Excellence — East Village expansion (official)",
+      "url": "https://expandedexcellence.deervalley.com/"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,25 +222,27 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing date (not found) and that Dec. 5, 2026 stays the target opening.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days with reservations required. Not found: Ikon Base access.",
+      "Confirm non-peak and online 2026-27 day-ticket prices (only the $349 peak price is on file) and season-pass prices.",
+      "Capture the 2024-25 opening/closing dates (2025-26 is on file).",
+      "Confirm official lift-status and trail-map pages on deervalley.com (the mountain report page is recorded).",
+      "Confirm the 2026-27 ability split, surface lifts/carpets, and which East Village lifts, runs and base facilities open on day one.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on deervalley.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the skiers-only policy for 2026-27 (reference: Deer Valley does not allow snowboards).",
       "Confirm the operator (reference: Alterra Mountain Company, owner since 2017).",
       "East Village expansion: confirm which lifts, runs and base facilities are open in 2026-27, the updated elevation/vertical and terrain totals, and whether East Village is a recommended arrival point.",
-      "Confirm terrain stats (leads, pre-expansion: ~2,000+ acres and 20+ lifts; the expansion adds substantial terrain and lifts).",
-      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days (fewer days and holiday blackouts on lower tiers); Deer Valley season passes; daily ticket-sales caps. Confirm 2026-27 terms and whether any reservation rule applies.",
       "Learning setup: confirm Wide West, carpets and ski-school products; confirm childcare (lead: a center has operated at Snow Park).",
       "Park City Transit 2026-27 routes and SLC shuttle operators.",
       "Snow-report URL and format."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (no night skiing, lessons, rentals, slopeside lodging, Snow Park learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Elevation: Piste reference stored the Snow Park base (~6,570 ft, 2,003 m); the 2026 summary gives a lowest elevation of 6,450 ft (1,966 m, East Village), now stored as baseM.",
+      "A third-party snow-report page in the results listed \"0 of 41 lifts\" and \"202 km of pistes\" — inconsistent with the 32 aerial lifts in the resort-based summary; not used."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: target 2026-27 opening, 2025-26 opening and early closure, 2026-27 terrain and lift counts, elevations, the 2026-27 peak ticket price and the mountain-report link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

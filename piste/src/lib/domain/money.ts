@@ -10,6 +10,30 @@ export interface Money {
   currency: string
 }
 
+/**
+ * Currencies offered for display, budgets and entered amounts, everywhere in the app (the same list and order in
+ * every picker). Rates come from the FX job (Frankfurter / ECB reference rates, which publish all of these).
+ */
+export const SUPPORTED_CURRENCIES = ['USD', 'CAD', 'EUR', 'CHF', 'GBP', 'JPY', 'AUD', 'NZD', 'SEK'] as const
+export type SupportedCurrency = (typeof SUPPORTED_CURRENCIES)[number]
+
+export const CURRENCY_NAME: Record<SupportedCurrency, string> = {
+  USD: 'US dollar',
+  CAD: 'Canadian dollar',
+  EUR: 'Euro',
+  CHF: 'Swiss franc',
+  GBP: 'Pound sterling',
+  JPY: 'Japanese yen',
+  AUD: 'Australian dollar',
+  NZD: 'New Zealand dollar',
+  SEK: 'Swedish krona',
+}
+
+/** A preferred currency first, then the supported list, then any extra codes in use (upper-cased, no repeats). */
+export function currencyChoicesFor(preferred: string | null | undefined, ...more: (string | null | undefined)[]): string[] {
+  return [...new Set([preferred, ...SUPPORTED_CURRENCIES, ...more].filter((c): c is string => !!c).map((c) => c.toUpperCase()))]
+}
+
 const MINOR_DIGITS: Record<string, number> = { JPY: 0, KRW: 0, ISK: 0, CLP: 0 }
 
 export function minorDigits(currency: string): number {

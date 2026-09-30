@@ -27,7 +27,7 @@
       "url": "https://www.mountsnow.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,900 ft, summit ~3,600 ft, vertical ~1,700 ft)"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,900 ft, summit ~3,600 ft, vertical ~1,700 ft) The 3,600 ft summit matches Wikipedia (search summary, 2026-09-30)."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,24 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 86,
+    "lifts": 19,
+    "skiableAcres": 601,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Mount_Snow",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): 601 acres, 86 trails, 19 lifts including six high-speed detachable chairlifts, two of which run from the base to the 3,600 ft summit (other lift types not captured). Carinthia Parks (Vail 2025-26 Vermont tip sheet): an all-park face with 80–100 features in eight zones and 100+ acres of freestyle terrain — terrainParks left null because \"zones\" are not a park count."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,15 +102,15 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No confirmed 2026-27 opening date on file as of 2026-09-30. OnTheSnow projects Nov 21, 2026 (a third-party projection, not an announcement). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Mount Snow's date — check the release (More links). For reference, Okemo, Stowe and Mount Snow targeted Sat Nov 22, 2025 for 2025-26 (announced Oct 29, 2025) — a target, not a confirmed opening day."
   },
   "hours": [],
   "prices": [],
   "links": {
     "official": "https://www.mountsnow.com/",
-    "trailMap": null,
+    "trailMap": "https://www.mountsnow.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.mountsnow.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -114,9 +123,27 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.mountsnow.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Vail Resorts Vermont winter tip sheet 2025-26",
+      "url": "https://news.vailresorts.com/vermont-winter-tip-sheet-2025-26"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (Vermont)",
+      "url": "https://www.onthesnow.com/vermont/projected-openings"
+    },
+    {
+      "label": "Vail Resorts 2026/27 opening-dates release (18 Aug 2026)",
+      "url": "https://investors.vailresorts.com/news-releases/news-release-details/winter-about-show-vail-resorts-announces-202627-opening-dates"
+    },
+    {
+      "label": "2025-26 target opening day (Mountain Times, Oct 2025)",
+      "url": "https://mountaintimes.info/2025/10/29/okemo-stowe-and-mount-snow-announced-nov-22-as-target-opening-day/"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 290,
@@ -149,19 +176,19 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "No confirmed 2026-27 opening or closing date (OnTheSnow projects Nov 21, 2026; check the Vail Resorts 18 Aug 2026 opening-dates release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the operator (Vail Resorts since its 2019 purchase of Peak Resorts — reference) and which 2026-27 Epic products include Mount Snow, with any holiday restrictions.",
-      "Confirm official deep links on mountsnow.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
-      "Confirm terrain stats (trails, lifts, acres, parks at Carinthia, snowmaking %), learning area, childcare, tubing and night skiing.",
+      "Confirm 2026-27 adult day-ticket prices (none captured).",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm that the snow-report, lift-status and trail-map links (standard Vail Resorts site pattern) resolve.",
+      "Confirm lifts by type (six high-speed detachable chairs named), trail difficulty split, snowmaking %, learning area, childcare, tubing and night skiing.",
       "Confirm elevations and base/summit coordinates (approximations)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (601 acres, 86 trails, 19 lifts incl. six high-speed detachables) is from Wikipedia via search; Carinthia details from Vail's 2025-26 tip sheet. Coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. Deep links follow the standard Vail site pattern. No price was found. The OnTheSnow date is a projection; drive/airport times are Piste estimates."
   }
 }

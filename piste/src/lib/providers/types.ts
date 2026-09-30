@@ -4,6 +4,7 @@
  * database: jobs (src/lib/jobs) persist what adapters return.
  */
 import type { DataKind, OperatingStatus, Provenance, SnowfallReading, SurfaceTag } from '@/lib/domain/types'
+import type { SkiAreaExtract } from '@/lib/domain/lifts'
 
 export interface Capabilities {
   /** Fields/variables this call actually returned with values. */
@@ -162,6 +163,26 @@ export interface ResortReportProvider {
   maturity: 'verified' | 'unverified'
   url: string
   fetchReport(ctx: { now: string; timezone: string }): Promise<ProviderResult<ParsedReport>>
+}
+
+// ---------------------------------------------------------------------------
+// Lifts and runs (community map data — never live status)
+
+export interface SkiAreaRequest {
+  resortId: string
+  /** Names the ski area may be mapped under (the resort's name and short name). */
+  names: string[]
+  country: string
+  /** Where to look: Piste's base and summit weather points. */
+  points: { lat: number; lon: number }[]
+}
+
+export interface SkiAreaProvider {
+  id: string
+  label: string
+  /** Endpoint every request goes to (recorded as the fetch URL). */
+  endpoint: string
+  fetchSkiArea(req: SkiAreaRequest): Promise<ProviderResult<SkiAreaExtract>>
 }
 
 // ---------------------------------------------------------------------------

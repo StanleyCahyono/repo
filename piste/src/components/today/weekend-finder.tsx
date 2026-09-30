@@ -28,6 +28,7 @@ import { FINDER_WINDOW_LABEL, FINDER_WINDOWS, formatDates, type FinderWindow } f
 import { explainPosition, topContributions, weightPercents, type OptionView, type RankingView } from './rank-model'
 import { SaveTripButton } from './option-actions'
 import { Label } from './section'
+import { LongHaulNote } from './long-haul'
 
 const FACTOR_HINT: Record<FactorKey, string> = {
   conditions: 'Piste Conditions score for the day',
@@ -218,6 +219,7 @@ export function WeekendFinder({
   inputs,
   preseason,
   demo = false,
+  longHaulLimit = null,
 }: {
   window: FinderWindow
   ranking: RankingView
@@ -226,6 +228,8 @@ export function WeekendFinder({
   preseason: boolean
   /** Demo mode: simulated data, labelled in the eyebrow. */
   demo?: boolean
+  /** LONG_HAUL_KM in display units, for the note on resorts too far away to compare here. */
+  longHaulLimit?: string | null
 }) {
   const toast = useToast()
   const { pending: navPending, params } = useTodayNav()
@@ -431,6 +435,7 @@ export function WeekendFinder({
               .
             </p>
           ) : null}
+          {shown.longHaul ? <LongHaulNote count={shown.longHaul} limit={longHaulLimit} what="compared here" className="mt-2" /> : null}
         </div>
       </div>
     </section>

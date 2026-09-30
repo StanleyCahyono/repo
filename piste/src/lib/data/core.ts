@@ -33,7 +33,17 @@ import type {
   WeatherRunRow,
 } from '@/lib/db/rows'
 import type { HourlyWeather } from '@/lib/providers/types'
-import { localDateOf, seasonIdFor } from '@/lib/domain/time'
+import {
+  hemisphereOf,
+  localDateOf,
+  previousSeasonId,
+  seasonIdForHemisphere,
+  seasonIdsForDates,
+  seasonResolver,
+  skiWindow,
+  type Hemisphere,
+  type SeasonOf,
+} from '@/lib/domain/time'
 import { provenance, type Provenance, type ScoringMode } from '@/lib/domain/types'
 import { pickPrimaryRun, runSemantics } from './deps'
 
@@ -124,6 +134,14 @@ const TERRAIN_FIELDS: Record<string, Kind> = {
   intermediatePct: 'number?',
   advancedPct: 'number?',
   terrainParks: 'number?',
+  expertPct: 'number?',
+  pisteKm: 'number?',
+  liftCapacityPerHour: 'number?',
+  'liftsByType.gondolas': 'number?',
+  'liftsByType.cableCars': 'number?',
+  'liftsByType.chairlifts': 'number?',
+  'liftsByType.surfaceLifts': 'number?',
+  'liftsByType.other': 'number?',
   season: 'string?',
 }
 const FEATURE_FIELDS: Record<string, Kind> = {
@@ -154,6 +172,7 @@ const LINK_FIELDS = [
   'tourism',
   'avalanche',
   'openSkiMap',
+  'liftStatus',
 ] as const
 const SEASON_FIELDS: Record<string, Kind> = {
   announcedOpening: 'date?',
@@ -234,7 +253,9 @@ export function applyOverrides(
   for (const [field, o] of [...latest.entries()].sort(([a], [b]) => a.localeCompare(b))) {
     const c: Correction = { field, value: o.value ?? null, note: o.note, sourceUrl: o.sourceUrl, at: o.createdAt, applied: false, reason: null }
     corrections.push(c)
-    const [group, key] = field.includes('.') ? (field.split('.', 2) as [string, string]) : [null, field]
+    // 'terrain.liftsByType.gondolas' → group 'terrain', key 'liftsByType.gondolas'.
+    const dot = field.indexOf('.')
+    const [group, key] = dot > 0 ? [field.slice(0, dot), field.slice(dot + 1)] : [null, field]
     const v = o.value ?? null
     const reject = (reason: string) => {
       c.reason = reason
@@ -255,7 +276,14 @@ export function applyOverrides(
       else if (!validValue(kind, v)) reject('Value has the wrong type')
       else {
         const t = r.terrain ?? { trails: null, lifts: null, skiableAcres: null, beginnerPct: null, intermediatePct: null, advancedPct: null, terrainParks: null, season: null, prov: null }
-        r.terrain = { ...t, [key]: v, prov: correctionProv(t.prov, c) }
+        const byType = key.startsWith('liftsByType.') ? key.slice('liftsByType.'.length) : null
+        r.terrain = byType
+          ? {
+              ...t,
+              liftsByType: { gondolas: null, cableCars: null, chairlifts: null, surfaceLifts: null, other: null, ...(t.liftsByType ?? {}), [byType]: v as number | null },
+              prov: correctionProv(t.prov, c),
+            }
+          : { ...t, [key]: v, prov: correctionProv(t.prov, c) }
         c.applied = true
       }
     } else if (group === 'features') {
@@ -308,6 +336,11 @@ export interface PassData {
   rules: PassAccessRuleRow[]
   /** Owned products (any holder) for the active season, with logged usage. */
   owned: OwnedPass[]
+  /**
+   * Season of a date at a resort, for every stored resort: a Southern Hemisphere winter (June–October of year Y)
+   * is season '(Y-1)-(YY)' — the season a '(Y-1)-(YY)' pass covers there. Pass checks and usage counts use it.
+   */
+  seasonOf: SeasonOf
 }
 
 export interface ResortRecord {
@@ -354,12 +387,23 @@ export function resortToday(resort: Pick<ResortRow, 'timezone'>, now: string): s
   return localDateOf(now, resort.timezone)
 }
 
+/**
+ * Season ids whose rows a bundle loads: the requested (planning) seasons and the season of home "today", each with
+ * the season before it. A Southern Hemisphere resort's season for a date from July to December is the planning
+ * season before the date's (its winter is June–October of one calendar year), and its "current or next" season can
+ * be the winter still running while the planning season has moved on (see `resortSeasonId`).
+ */
+export function bundleSeasonIds(activeSeasonId: string, requested: readonly string[], today: string): string[] {
+  const base = [activeSeasonId, ...requested, ...seasonIdsForDates([today])]
+  return [...new Set(base.flatMap((id) => [id, previousSeasonId(id)]))]
+}
+
 export async function loadBundle(ctx: DataCtx, opts: { ids?: readonly string[] | null; seasons?: readonly string[] } = {}): Promise<Bundle> {
   const { db, now } = ctx
   const live = isLive(ctx)
   const ids = opts.ids && opts.ids.length ? [...opts.ids] : null
   const seasonId = ctx.prefs.activeSeasonId
-  const seasonIds = [...new Set([seasonId, ...(opts.seasons ?? [])])]
+  const seasonIds = bundleSeasonIds(seasonId, opts.seasons ?? [], ctx.today)
   const byResort = <T extends { resortId: string | null }>(rows: T[]) => groupBy(rows, (r) => r.resortId ?? '')
 
   const [resortRows, overrideRows, seasonRows, favRows, statusRows, travelRows, airportRows, priceRows, fxRows, pass, eventRows, alertRows, runs] =
@@ -464,7 +508,11 @@ export async function loadResortRows(ctx: Pick<DataCtx, 'db'>, ids: readonly str
 }
 
 export async function loadPassData(db: Db, seasonId: string): Promise<PassData> {
-  const [families, products] = await Promise.all([db.select().from(s.passFamilies), db.select().from(s.passProducts).where(eq(s.passProducts.seasonId, seasonId))])
+  const [families, products, coords] = await Promise.all([
+    db.select().from(s.passFamilies),
+    db.select().from(s.passProducts).where(eq(s.passProducts.seasonId, seasonId)),
+    db.select({ id: s.resorts.id, lat: s.resorts.lat }).from(s.resorts),
+  ])
   const productIds = products.map((p) => p.id)
   const [rules, ownership] = await Promise.all([
     productIds.length ? db.select().from(s.passAccessRules).where(inArray(s.passAccessRules.productId, productIds)) : Promise.resolve([] as PassAccessRuleRow[]),
@@ -492,7 +540,65 @@ export async function loadPassData(db: Db, seasonId: string): Promise<PassData> 
       .sort((a, b) => a.id - b.id)
       .map((o) => ({ ownership: o, product: productById.get(o.productId)!, usage: usageBy.get(o.id) ?? [] }))
       .filter((o) => !!o.product),
+    seasonOf: seasonResolver(coords),
   }
+}
+
+// ---------------------------------------------------------------------------
+// Resort seasons (hemisphere-aware)
+
+/** Does the catalog hold any Southern Hemisphere resort? (Their winters extend the planning season to December.) */
+export async function hasSouthernResorts(db: Db): Promise<boolean> {
+  const rows = await db.select({ id: s.resorts.id }).from(s.resorts).where(sql`${s.resorts.lat} < 0`).limit(1)
+  return rows.length > 0
+}
+
+/** The resort's hemisphere, by its (corrected) latitude. */
+export const resortHemisphere = (r: Pick<ResortRow, 'lat'>): Hemisphere => hemisphereOf(r.lat)
+
+/** The resort's own season for one of its local dates (Southern Hemisphere winters change season on 1 January). */
+export const resortSeasonFor = (r: Pick<ResortRow, 'lat'>, date: string): string => seasonIdForHemisphere(date, hemisphereOf(r.lat))
+
+/** The resort's season row for the season containing `date` (corrections applied), if loaded. */
+export function seasonRowFor(b: Pick<Bundle, 'seasons'>, r: Pick<ResortRow, 'id' | 'lat'>, date: string): ResortSeasonRow | undefined {
+  return b.seasons.get(`${r.id}|${resortSeasonFor(r, date)}`)
+}
+
+const isOpenStatus = (x: string | null | undefined) => x === 'open' || x === 'partially-open'
+
+/**
+ * Is the resort's winter `seasonId` under way on `today`: opened (an actual opening, or an open statement, in that
+ * season) and not closed (no actual closing on or before today, no closed-for-season statement after the opening)?
+ * A statement from inside the season's months counts; after the display window (north 30 Apr, south 31 Oct) only a
+ * statement dated after it still shows the winter running — an old "open" is never read as open months later.
+ */
+export function winterUnderway(
+  r: Pick<ResortRow, 'lat'>,
+  seasonId: string,
+  row: Pick<ResortSeasonRow, 'actualOpening' | 'actualClosing'> | null | undefined,
+  latest: Pick<StatusEventRow, 'status' | 'localDate'> | null | undefined,
+  today: string,
+): boolean {
+  const h = hemisphereOf(r.lat)
+  const ev = latest && seasonIdForHemisphere(latest.localDate, h) === seasonId && latest.localDate <= today ? latest : null
+  const opening = row?.actualOpening && row.actualOpening <= today ? row.actualOpening : null
+  const opened = !!opening || (!!ev && isOpenStatus(ev.status))
+  if (!opened) return false
+  if (row?.actualClosing && row.actualClosing <= today) return false
+  if (ev?.status === 'closed-for-season' && (!opening || opening <= ev.localDate)) return false
+  const windowEnd = skiWindow(seasonId, h).to
+  return today <= windowEnd || (!!ev && isOpenStatus(ev.status) && ev.localDate > windowEnd)
+}
+
+/**
+ * The season a resort's pages describe — its "current or next" winter. Normally the planning season
+ * (`b.seasonId`); but while the resort's own winter for today is still under way and precedes the planning season
+ * (a Southern Hemisphere winter running in September when the planning season is already 2026–27), that winter.
+ */
+export function resortSeasonId(b: Pick<Bundle, 'seasonId' | 'seasons' | 'status'>, r: Pick<ResortRow, 'id' | 'lat'>, today: string): string {
+  const own = resortSeasonFor(r, today)
+  if (own >= b.seasonId) return b.seasonId
+  return winterUnderway(r, own, b.seasons.get(`${r.id}|${own}`), b.status.get(r.id), today) ? own : b.seasonId
 }
 
 // ---------------------------------------------------------------------------
@@ -748,7 +854,7 @@ export async function forecastSnowSums(db: Db, runs: readonly WeatherRunRow[], n
   return out
 }
 
-/** Season ids touched by local dates. */
+/** Season ids touched by local dates at any resort (both hemispheres). */
 export function seasonsOf(dates: readonly string[]): string[] {
-  return [...new Set(dates.map(seasonIdFor))]
+  return seasonIdsForDates(dates)
 }

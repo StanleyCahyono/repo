@@ -1,0 +1,241 @@
+{
+  "id": "rusutsu",
+  "name": "Rusutsu Resort",
+  "shortName": "Rusutsu",
+  "country": "JP",
+  "region": "Hokkaido (Shiribeshi)",
+  "stateProvince": "Hokkaido",
+  "locality": "Rusutsu village",
+  "timezone": "Asia/Tokyo",
+  "operator": null,
+  "priority": 0,
+  "location": {
+    "lat": 42.748,
+    "lon": 140.898,
+    "source": {
+      "url": "https://rusutsu.com/en/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate resort hotel / West Mountain base position"
+    }
+  },
+  "elevation": {
+    "baseM": 400,
+    "summitM": 994,
+    "verticalM": 594,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Rusutsu_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: base 400 m, top 994 m, vertical 594 m"
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Rusutsu resort hotel base (approx.)",
+      "lat": 42.748,
+      "lon": 140.898,
+      "elevationM": 400,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Mt. Isola top (approx.)",
+      "lat": 42.757,
+      "lon": 140.928,
+      "elevationM": 994,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": 37,
+    "lifts": 19,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 42,
+    "liftsByType": {
+      "gondolas": 4,
+      "cableCars": null,
+      "chairlifts": 15,
+      "surfaceLifts": null,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Rusutsu_Resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 37 courses totalling 42 km; 19 lifts (4 gondolas, 7 quad and 8 pair chairlifts). The summary notes other sources give slightly different course and lift counts"
+    }
+  },
+  "features": {
+    "nightSkiing": true,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": true,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": null,
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'. Night skiing and slopeside hotels exist; hours not on file"
+    }
+  },
+  "character": "A self-contained resort across three mountains (West Mountain, East Mountain and Mt. Isola) about 1.5–2 hours by road from New Chitose Airport. It is known for groomed runs, tree skiing and a large resort-hotel base, and is an Epic Pass partner.",
+  "learning": "Reference note: ski school and rentals operate at the resort. The beginner/intermediate/advanced split was not captured.",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": "2026-11-28",
+      "text": "Scheduled to open 28 Nov 2026 (snow permitting).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://japanskiexperience.com/blog/japan-ski-resort-opening-dates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summaries (Japan 2026-27 opening-date articles). Confirm on rusutsu.com"
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-03-30",
+      "text": "Scheduled season end 30 Mar 2027 (per search summary; confirm).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://japanskiexperience.com/blog/japan-ski-resort-opening-dates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary; the specific article giving the closing date was not isolated"
+      }
+    },
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-11-29",
+        "closed": null,
+        "source": {
+          "url": "https://www.skisafari.com/blog/ski-resort-opening-dates-2025-26-the-snow-is-falling",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Scheduled 2025-26 opening from a published opening-dates list; the actual first day was not confirmed"
+        }
+      }
+    ],
+    "typicalText": "Late November to end of March (2026-27 schedule)",
+    "notes": "2026-27 regular season (pricing) runs 19 Dec 2026 – 14 Mar 2027."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket (adult 19–64), regular season",
+      "category": "adult",
+      "amount": 13200,
+      "amountMax": 16700,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Regular season 19 Dec 2026 – 14 Mar 2027: ¥13,200 online, ¥16,700 at the ticket counter. Early, spring and any peak prices were not captured.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of the official winter lift-ticket page"
+      }
+    }
+  ],
+  "links": {
+    "official": "https://rusutsu.com/en/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://rusutsu.com/en/winter-lift-tickets/",
+    "seasonPass": "https://rusutsu.com/en/winter-season-passes/",
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": null,
+    "avalanche": null,
+    "openSkiMap": null,
+    "liftStatus": "https://rusutsu.com/en/lift-and-trail-status/"
+  },
+  "moreLinks": [
+    {
+      "label": "Rusutsu Epic Pass page",
+      "url": "https://rusutsu.com/en/epic-pass/"
+    },
+    {
+      "label": "Epic Pass: Rusutsu Resort",
+      "url": "https://www.epicpass.com/regions/japan/rusutsu-resort.aspx"
+    },
+    {
+      "label": "25-hour lift ticket (official news)",
+      "url": "https://rusutsu.com/en/news-and-topics/25h-ticket/"
+    },
+    {
+      "label": "Advance lift tickets (official)",
+      "url": "https://rusutsu.com/en/advance-lift-tickets/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "CTS",
+        "role": "both",
+        "minutes": 100,
+        "km": 90,
+        "basis": "Estimate from typical routing (via Lake Shikotsu on Routes 453/276); not a routing-service result. Winter roads can add time.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Airport buses and shuttles from New Chitose",
+        "type": "bus",
+        "url": null,
+        "notes": "Reference, confirm: seasonal buses and shared shuttles run from New Chitose Airport (and Sapporo) to Rusutsu. Operators, fares and schedules are not on file."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm the 2026-27 closing date (30 Mar 2027 came from a search summary).",
+      "Early-season, spring and any peak 1-day prices for 2026-27.",
+      "Operator (reference lead: Kamori Kanko) — not confirmed in this pass.",
+      "Actual 2024-25 and 2025-26 opening and closing dates.",
+      "Snow-report page URL, trail map URL, hourly lift capacity."
+    ],
+    "conflicts": [
+      "One search summary quoted a 'regular season 1-day adult' price of ¥39,000 from rusutsu.com — implausible for one day (probably a multi-day ticket); a later search gave ¥13,200 online / ¥16,700 at the counter, which is what is recorded."
+    ],
+    "confidenceNotes": "2026-27 prices and lift-status links are from search summaries of official rusutsu.com pages; opening/closing dates from third-party opening-date articles; terrain from Wikipedia-style summaries. Coordinates and airport time are Piste reference estimates."
+  }
+}

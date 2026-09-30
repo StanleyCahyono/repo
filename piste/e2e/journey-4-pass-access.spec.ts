@@ -30,13 +30,14 @@ test('the pass checker answers from exact product rules and never counts unknown
   await checker.getByRole('group', { name: 'Date shortcuts' }).getByRole('button', { name: /Sat–Sun|This weekend/ }).click()
   await expect(page).toHaveURL(/from=2027-01-16&to=2027-01-17/)
   const unconfirmed = checker.getByRole('region', { name: /Not confirmed/ })
-  await expect(unconfirmed.getByRole('link', { name: /^Alta Ski Area/ })).toContainText(/Not confirmed/)
-  await expect(checker.getByRole('region', { name: /^Can use/ })).toHaveCount(0)
+  await expect(unconfirmed.getByRole('link', { name: /^Killington Resort/ })).toContainText(/Not confirmed/)
+  // A resort whose rule is unknown is never listed as usable, whatever else the pass covers.
+  await expect(checker.getByRole('region', { name: /^Can use/ }).getByRole('link', { name: /^Killington Resort/ })).toHaveCount(0)
   await expect(checker).toContainText(/not confirmed, never assumed included/)
 
-  // 2. Ikon Pass at Alta: a rule is on file but its access is unknown → every day "not confirmed", never included.
-  await resort.selectOption({ label: 'Alta Ski Area' })
-  await expect(page).toHaveURL(/[?&]resort=alta/)
+  // 2. Ikon Pass at Killington: a rule is on file but its access is unknown → every day "not confirmed", never included.
+  await resort.selectOption({ label: 'Killington Resort' })
+  await expect(page).toHaveURL(/[?&]resort=killington/)
   await expect(checker).toContainText(/0\/2\s*days confirmed — access not confirmed/)
   const days = checker.getByRole('list', { name: 'Day by day' })
   await expect(days.getByRole('listitem')).toHaveCount(2)

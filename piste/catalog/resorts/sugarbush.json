@@ -49,15 +49,24 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 111,
+    "lifts": 15,
+    "skiableAcres": 581,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.skiresort.info/ski-resort/sugarbush/",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): 581 acres of skiable terrain and 111 runs across two peaks; \"15 lifts\" (skiresort.info wording), while another result mentioned 16 lifts. Lift types not captured."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,17 +102,81 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 21, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (date-based)",
+      "category": "adult",
+      "amount": 135,
+      "amountMax": 195,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Aggregator (snowstash.com): 2026/27 adult day tickets from $135 to $195 depending on date and advance purchase. An OnTheSnow listing showed $129 weekday / $199 weekend with no season stated.",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "TBD (\"Third Best Deal\") ticket, any day, no blackout dates",
+      "category": null,
+      "amount": 99,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary of the official TBD page: $99 tickets valid any day of the 2026-27 winter with no blackout dates. Age category and purchase deadline not captured.",
+      "source": {
+        "url": "https://www.sugarbush.com/plan-your-trip/deals-and-packages/third-best-deal-ticket",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Quad Pack: four transferable all-mountain lift tickets (price per ticket)",
+      "category": null,
+      "amount": 109,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Search summary of the official Quad Pack page: four fully transferable tickets at $109 each, valid for 2026-27. Purchase deadline and any restrictions not captured.",
+      "source": {
+        "url": "https://www.sugarbush.com/plan-your-trip/deals-and-packages/quad-pack",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.sugarbush.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.sugarbush.com/plan-your-trip/lift-tickets",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,9 +187,23 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Quad Pack (official)",
+      "url": "https://www.sugarbush.com/plan-your-trip/deals-and-packages/quad-pack"
+    },
+    {
+      "label": "TBD ticket (official)",
+      "url": "https://www.sugarbush.com/plan-your-trip/deals-and-packages/third-best-deal-ticket"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (Vermont)",
+      "url": "https://www.onthesnow.com/vermont/projected-openings"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 370,
@@ -149,19 +236,21 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "No resort-announced 2026-27 opening or closing date (OnTheSnow projects Nov 21, 2026).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the operator (Alterra Mountain Company since 2019 — reference) and 2026-27 Ikon Pass / Ikon Base terms (lead: unlimited on Ikon in earlier seasons; low-confidence lead on Mountain Collective).",
-      "Confirm official deep links on sugarbush.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
-      "Confirm terrain stats (trails, lifts, acres — definitions vary with Slide Brook terrain — snowmaking %), learning area, childcare and tubing.",
+      "Confirm purchase deadlines and age categories for the 2026-27 TBD ($99) and Quad Pack ($109/ticket) deals; aggregator adult day tickets run $135–$195.",
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
+      "Confirm official deep links on sugarbush.com (snow report, lift status, trail map, lessons, webcams, parking) and the snow-report format.",
+      "Resolve the lift count (15 vs 16) and lifts by type; confirm trail difficulty split, snowmaking %, learning area, childcare and tubing.",
       "Confirm elevations (base here is derived) and base/summit coordinates (approximations). Consider a Mount Ellen weather point."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "terrain.lifts: 15 lifts (skiresort.info-style summary) vs 16 lifts (another result). Resolution: used 15."
+    ],
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (581 acres, 111 runs, 15–16 lifts) and 2026-27 prices (aggregator $135–$195; official TBD $99 and Quad Pack $109/ticket) are search-summary facts. Identity, coordinates, elevations, operator and the few features set remain Piste reference data. The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
   }
 }

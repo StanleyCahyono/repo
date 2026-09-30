@@ -130,10 +130,101 @@ export function relativeLabel(instant: string, now: string): string {
   return `${Math.round(abs / 24)} d ${suffix}`
 }
 
-/** Season id for a local date: seasons run 1 Jul → 30 Jun, e.g. 2027-01-15 → '2026-27'. */
+/**
+ * Season id for a local date in the Northern Hemisphere (and the planning season): seasons run 1 Jul → 30 Jun,
+ * e.g. 2027-01-15 → '2026-27'. For a date at a resort use `seasonIdForResort`: Southern Hemisphere winters differ.
+ */
 export function seasonIdFor(date: string): string {
   const y = Number(date.slice(0, 4))
   const m = Number(date.slice(5, 7))
   const start = m >= 7 ? y : y - 1
-  return `${start}-${String((start + 1) % 100).padStart(2, '0')}`
+  return seasonIdFromStartYear(start)
+}
+
+const seasonIdFromStartYear = (start: number) => `${start}-${String((start + 1) % 100).padStart(2, '0')}`
+
+// ---------------------------------------------------------------------------
+// Hemispheres
+//
+// A season id names the planning season (e.g. '2026-27': the Northern Hemisphere winter of 2026–27, and the season
+// a 2026-27 Ikon or Epic pass covers). A Southern Hemisphere winter runs about June–October of ONE calendar year Y;
+// it is season '(Y-1)-(YY)' — the 2027 winter in Australia or New Zealand is '2026-27', which is what 2026-27 passes
+// cover there. So at a Southern Hemisphere resort the season boundary is 1 January, not 1 July.
+
+export type Hemisphere = 'north' | 'south'
+
+/** Southern Hemisphere when the latitude is below the equator; unknown/invalid latitudes count as northern. */
+export function hemisphereOf(lat: number | null | undefined): Hemisphere {
+  return typeof lat === 'number' && Number.isFinite(lat) && lat < 0 ? 'south' : 'north'
+}
+
+/** Season id of a local date in a hemisphere: north 1 Jul → 30 Jun; south the calendar year's winter (1 Jan → 31 Dec). */
+export function seasonIdForHemisphere(date: string, hemisphere: Hemisphere): string {
+  return hemisphere === 'south' ? seasonIdFromStartYear(Number(date.slice(0, 4)) - 1) : seasonIdFor(date)
+}
+
+/** Season id of a resort-local date at a resort (by the resort's latitude). */
+export function seasonIdForResort(date: string, resort: { lat: number | null | undefined }): string {
+  return seasonIdForHemisphere(date, hemisphereOf(resort.lat))
+}
+
+/** Season of a (resort, date) pair — resolves the resort's hemisphere by id. */
+export type SeasonOf = (resortId: string | null | undefined, date: string) => string
+
+/** Every resort in the Northern Hemisphere (the behaviour when resort latitudes are not known). */
+export const northernSeasonOf: SeasonOf = (_resortId, date) => seasonIdFor(date)
+
+/** A `SeasonOf` for a set of resorts: Southern Hemisphere resorts (by latitude) use the calendar-year winter. */
+export function seasonResolver(resorts: Iterable<{ id: string; lat: number | null | undefined }>): SeasonOf {
+  const south = new Set<string>()
+  for (const r of resorts) if (hemisphereOf(r.lat) === 'south') south.add(r.id)
+  if (!south.size) return northernSeasonOf
+  return (resortId, date) => seasonIdForHemisphere(date, resortId && south.has(resortId) ? 'south' : 'north')
+}
+
+function startYearOf(seasonId: string): number {
+  const m = /^(\d{4})-\d{2}$/.exec(seasonId)
+  if (!m) throw new Error(`Invalid season id: ${seasonId}`)
+  return Number(m[1])
+}
+
+/** '2026-27' → '2027-28'. */
+export function nextSeasonId(seasonId: string): string {
+  return seasonIdFromStartYear(startYearOf(seasonId) + 1)
+}
+
+/** '2026-27' → '2025-26'. */
+export function previousSeasonId(seasonId: string): string {
+  return seasonIdFromStartYear(startYearOf(seasonId) - 1)
+}
+
+/** The dates a season id covers in a hemisphere: north 1 Jul → 30 Jun, south 1 Jan → 31 Dec of the winter's year. */
+export function seasonBounds(seasonId: string, hemisphere: Hemisphere = 'north'): { from: string; to: string } {
+  const y = startYearOf(seasonId)
+  return hemisphere === 'south' ? { from: `${y + 1}-01-01`, to: `${y + 1}-12-31` } : { from: `${y}-07-01`, to: `${y + 1}-06-30` }
+}
+
+/**
+ * The span of the planning season across hemispheres: 1 Jul of its first year, through 31 Dec of its second year
+ * when Southern Hemisphere resorts are involved (their 2026-27 winter is June–October 2027), else 30 Jun.
+ */
+export function planningSeasonBounds(seasonId: string, withSouthern: boolean): { from: string; to: string } {
+  const north = seasonBounds(seasonId, 'north')
+  return withSouthern ? { from: north.from, to: seasonBounds(seasonId, 'south').to } : north
+}
+
+/** Months a season is drawn over (a display window, not a closing rule): north 1 Nov → 30 Apr, south 1 May → 31 Oct. */
+export function skiWindow(seasonId: string, hemisphere: Hemisphere = 'north'): { from: string; to: string } {
+  const y = startYearOf(seasonId)
+  return hemisphere === 'south' ? { from: `${y + 1}-05-01`, to: `${y + 1}-10-31` } : { from: `${y}-11-01`, to: `${y + 1}-04-30` }
+}
+
+/** Season ids a set of local dates can fall in at any resort (both hemispheres) — for loading season rows. */
+export function seasonIdsForDates(dates: Iterable<string>): string[] {
+  const out = new Set<string>()
+  for (const d of dates) {
+    out.add(seasonIdFor(d))
+    out.add(seasonIdForHemisphere(d, 'south'))
+  }
+  return [...out]
 }

@@ -135,7 +135,7 @@ export async function saveUnits(input: UnitPrefs): Promise<ActionResult<UnitPref
 
 export async function saveCurrency(input: { currency: string }): Promise<ActionResult<{ currency: string }>> {
   const parsed = z.object({ currency: z.enum(DISPLAY_CURRENCIES) }).safeParse(input)
-  if (!parsed.success) return zodFail(parsed.error, 'Choose USD, CAD or EUR')
+  if (!parsed.success) return zodFail(parsed.error, `Choose one of ${DISPLAY_CURRENCIES.join(', ')}`)
   await writePrefs({ currency: parsed.data.currency })
   revalidateAll()
   return { ok: true, data: parsed.data, message: `Prices shown in ${parsed.data.currency} where a rate is stored — originals kept` }

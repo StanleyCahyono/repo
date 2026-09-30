@@ -28,12 +28,17 @@ export {
   reportOrigin,
   isPersonalReport,
   latestOfficialReport,
+  addResearchedReport,
+  isResearchedReport,
+  RESEARCHED_REPORT_NOTE,
   type ReportOrigin,
+  type ResearchedReportInput,
 } from './reports'
 export { recordStatus, latestStatusEvent, updateSeasonDates, applyStatusToSeason, deriveSeasonStatus, deriveStatuses, type SeasonDateField } from './status'
 export { refreshAssessments, assessResort, assessmentFingerprint, buildAssessInput, liftHoursFor, MAX_HORIZON_DAYS } from './assessments'
 export { evaluateAlerts, ensureDefaultAlertRules, fireCandidate, dedupeKeyOf, RULE_PARAMS, type AlertCandidate } from './alerts'
 export { refreshLinks, refreshFx, pruneAll, collectLinks, currenciesInUse } from './maintenance'
+export { refreshOsm, osmTargets, recordSkiArea, searchPoints } from './osm'
 export {
   cadencesFromEnv,
   DEFAULT_CADENCES,

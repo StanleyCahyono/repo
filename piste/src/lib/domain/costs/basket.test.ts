@@ -3,7 +3,7 @@ import type { PriceSnapshotRow } from '@/lib/db/rows'
 import { fromMajor, money } from '../money'
 import { provenance } from '../types'
 import { computeDayBasket, liftTicketFor, type BasketAssumptions, type BasketPass } from './basket'
-import { dayTypeFor, holidaysForSeason, HOLIDAYS_2026_27 } from './day-type'
+import { DEFAULT_DAY_TYPE_CONFIG, dayTypeFor, HOLIDAY_CALENDAR_COUNTRIES, holidayCalendarApplies, holidaysForSeason, HOLIDAYS_2026_27 } from './day-type'
 import type { FxRateRecord } from './fx'
 import { isExpired, selectPrice, type PriceSnapshotInput } from './prices'
 
@@ -77,6 +77,39 @@ describe('day types', () => {
     expect(dayTypeFor('2027-01-18', cfg).dayType).toBe('weekday')
     expect(dayTypeFor('2027-02-17', cfg)).toEqual({ dayType: 'holiday', holidayName: "Presidents' week" })
     expect(holidaysForSeason('2027-28').map((h) => h.date)).toContain('2027-11-25') // Thanksgiving 2027
+  })
+
+  it('applies the holiday calendar to US and Canadian resorts only; elsewhere weekday/weekend', () => {
+    expect(HOLIDAY_CALENDAR_COUNTRIES).toEqual(['US', 'CA'])
+    // MLK Day (a Monday) and 29 Dec (inside the Christmas–New Year period, a Tuesday).
+    expect(dayTypeFor('2027-01-18', DEFAULT_DAY_TYPE_CONFIG, 'US')).toEqual({ dayType: 'holiday', holidayName: 'Martin Luther King Jr. Day' })
+    expect(dayTypeFor('2027-01-18', DEFAULT_DAY_TYPE_CONFIG, 'CA').dayType).toBe('holiday')
+    for (const country of ['AT', 'CH', 'FR', 'JP', 'AU', 'NZ']) {
+      expect(dayTypeFor('2027-01-18', DEFAULT_DAY_TYPE_CONFIG, country)).toEqual({ dayType: 'weekday', holidayName: null })
+      expect(dayTypeFor('2026-12-29', DEFAULT_DAY_TYPE_CONFIG, country).dayType).toBe('weekday')
+      expect(dayTypeFor('2027-01-16', DEFAULT_DAY_TYPE_CONFIG, country).dayType).toBe('weekend')
+    }
+    // An unknown country gets no holidays (never assumed American); an omitted one keeps the calendar.
+    expect(dayTypeFor('2027-01-18', DEFAULT_DAY_TYPE_CONFIG, null).dayType).toBe('weekday')
+    expect(dayTypeFor('2027-01-18').dayType).toBe('holiday')
+    expect(holidayCalendarApplies('us')).toBe(true)
+  })
+
+  it('prices a basket by the resort country and a season-tagged price by the resort hemisphere', () => {
+    const a: BasketAssumptions = { currency: 'AUD', rentalOption: 'none', lunch: null, partySize: 1 }
+    const aud = (p: Partial<PriceSnapshotInput>) => snap({ subjectType: 'lift-ticket', amountMinor: 0, currency: 'AUD', subjectId: 'thredbo', resortId: 'thredbo', ...p })
+    // Thredbo's 2027 winter is season 2026-27: a 2026-27 weekday price applies on a Monday in August 2027.
+    const prices = [aud({ amountMinor: 18_900, dayType: 'weekday' }), aud({ amountMinor: 19_900, dayType: 'weekend' }), aud({ amountMinor: 25_000, dayType: 'holiday' })]
+    const day = { resortId: 'thredbo', date: '2027-08-02', prices, country: 'AU', hemisphere: 'south' as const }
+    const b = computeDayBasket(day, a, { now: NOW, today: TODAY, rates: [] })
+    expect(b.dayType).toBe('weekday')
+    expect(b.lines.find((l) => l.key === 'lift')?.amount).toEqual(money(18_900, 'AUD'))
+    // Read as a northern resort, August 2027 is season 2027-28 and the 2026-27 prices would not apply.
+    expect(computeDayBasket({ ...day, hemisphere: 'north' }, a, { now: NOW, today: TODAY, rates: [] }).lines.find((l) => l.key === 'lift')?.amount).toBeNull()
+    // No US holiday in Australia: MLK Day 2027 is an ordinary Monday there.
+    const mlk = computeDayBasket({ ...day, date: '2027-01-18' }, a, { now: NOW, today: TODAY, rates: [] })
+    expect(mlk.dayType).toBe('weekday')
+    expect(liftTicketFor(prices, 'thredbo', '2027-08-02', { now: NOW, today: TODAY, country: 'AU', hemisphere: 'south' }).price).toEqual(money(18_900, 'AUD'))
   })
 })
 

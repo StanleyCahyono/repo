@@ -3,7 +3,7 @@
  * An estimate is a Piste-derived planning aid and is always labelled "Estimated", never "Announced".
  */
 import type { OpeningLabel } from './types'
-import { addDays, daysBetween } from './time'
+import { addDays, daysBetween, type Hemisphere } from './time'
 
 export interface SeasonDates {
   announcedOpening: string | null
@@ -14,11 +14,15 @@ export interface SeasonDates {
   actualClosing: string | null
 }
 
-/** Map a past opening date onto the target season, keeping month/day (Jul–Dec → start year, Jan–Jun → end year). */
-export function projectToSeason(date: string, targetSeason: string): string {
+/**
+ * Map a past opening date onto the target season, keeping month/day. Northern Hemisphere: Jul–Dec → the start year,
+ * Jan–Jun → the end year. Southern Hemisphere: the whole winter is in the end year ('2026-27' is the 2027 winter),
+ * so a July opening stays in July of that year.
+ */
+export function projectToSeason(date: string, targetSeason: string, hemisphere: Hemisphere = 'north'): string {
   const startYear = Number(targetSeason.slice(0, 4))
   const month = Number(date.slice(5, 7))
-  const year = month >= 7 ? startYear : startYear + 1
+  const year = hemisphere === 'south' || month < 7 ? startYear + 1 : startYear
   let md = date.slice(5)
   if (md === '02-29' && !((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0)) md = '02-28'
   return `${year}-${md}`
@@ -34,8 +38,14 @@ export interface OpeningEstimate {
  * Estimated opening window from historical openings: [earliest, latest] projected onto the target season;
  * a single data point widens to ±7 days. Returns null without history.
  */
-export function estimateOpeningWindow(history: { season: string; opened: string | null }[], targetSeason: string): OpeningEstimate | null {
-  const pts = history.filter((h) => h.opened && h.season !== targetSeason).map((h) => ({ season: h.season, d: projectToSeason(h.opened!, targetSeason) }))
+export function estimateOpeningWindow(
+  history: { season: string; opened: string | null }[],
+  targetSeason: string,
+  hemisphere: Hemisphere = 'north',
+): OpeningEstimate | null {
+  const pts = history
+    .filter((h) => h.opened && h.season !== targetSeason)
+    .map((h) => ({ season: h.season, d: projectToSeason(h.opened!, targetSeason, hemisphere) }))
   if (pts.length === 0) return null
   const sorted = pts.map((p) => p.d).sort()
   let from = sorted[0]

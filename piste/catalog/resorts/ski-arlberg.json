@@ -50,14 +50,23 @@
   ],
   "terrain": {
     "trails": null,
-    "lifts": null,
+    "lifts": 85,
     "skiableAcres": null,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 300,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.skiarlberg.at/en",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary of skiarlberg.at: 300 km of ski runs, over 200 km of powder-snow (off-piste) routes, 85 cable cars and lifts. Lift types, capacity and piste difficulty split not captured; season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,30 +89,62 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-02",
+      "text": "Season 2 Dec 2026 – 18 Apr 2027 (St. Anton, St. Christoph, Stuben, Lech, Oberlech, Zürs)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/season-times-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Ski Arlberg's \"Winter Season Times\" page: the 2026/27 season starts Dec. 2, 2026 and ends Apr. 18, 2027 for St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs. Warth-Schröcken dates were not stated."
+      }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-18",
+      "text": "Season ends 18 Apr 2027 (St. Anton, St. Christoph, Stuben, Lech, Oberlech, Zürs)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/season-times-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Ski Arlberg's \"Winter Season Times\" page (2026/27). Warth-Schröcken dates were not stated."
+      }
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived. Sectors (St. Anton, Lech-Zürs, Warth-Schröcken) may open on different dates."
+    "notes": "2026/27: Dec. 2, 2026 to Apr. 18, 2027 for St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs (official season-times page, via search summary). Warth-Schröcken may differ. Ticket prices are split into season periods (Wedel ski weeks, main season, sun ski weeks)."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski Arlberg adult day ticket (full day)",
+      "category": "adult",
+      "amount": 85,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Adult EUR 85, youth/senior EUR 78, child EUR 51 for a full day. Prices vary by season period (Wedel weeks, main season, sun ski weeks); which period and whether this is the 2025-26 or 2026-27 rate was not stated — confirm.",
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Ski Arlberg's prices page (\"most recent pricing information available\")."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.skiarlberg.at/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -114,7 +155,8 @@
     "events": null,
     "tourism": "https://www.stantonamarlberg.com/",
     "avalanche": "https://avalanche.report/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [
     {
@@ -124,6 +166,18 @@
     {
       "label": "ÖBB Austrian Federal Railways (trains to St. Anton am Arlberg; reference link)",
       "url": "https://www.oebb.at/"
+    },
+    {
+      "label": "Ski Arlberg winter season times (official)",
+      "url": "https://www.skiarlberg.at/en/tickets-season-times/season-times-winter"
+    },
+    {
+      "label": "Ski Arlberg lift pass — Lech Zürs tourism",
+      "url": "https://www.lechzuers.com/en/winter/winter-sports/skiing/lift-pass"
+    },
+    {
+      "label": "Arlberger Bergbahnen tickets (St. Anton)",
+      "url": "https://www.arlbergerbergbahnen.com/en/winter/tickets/"
     }
   ],
   "travel": {
@@ -193,25 +247,23 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm Warth-Schröcken's 2026/27 season dates (the official summary covered St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs only).",
+      "Pass access: no 2026-27 Ikon day allowance for Ski Arlberg was found (Ikon international blackouts: Dec. 26-30, 2026; Jan. 16-17 and Feb. 13-14, 2027; validity Nov. 1, 2026 to May 31, 2027). Existing rules left as they are.",
+      "Confirm the 2026/27 adult day-ticket price per season period (only EUR 85, season unclear, is on file) and multi-day / season ticket prices.",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
+      "Confirm official snow-report, lift-status and trail-map pages on skiarlberg.at.",
+      "Confirm lift types and uphill capacity (85 lifts per the summary).",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on skiarlberg.at (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the lift companies behind the joint ticket (reference: Arlberger Bergbahnen AG in St. Anton, plus separate companies in Lech, Zürs and Warth-Schröcken).",
-      "Confirm 2026-27 opening and closing dates for each sector.",
-      "Confirm area stats (leads: about 300 km of marked pistes plus about 200 km of deep-snow routes, about 85–90 lifts). European areas publish piste kilometres rather than acres, so skiableAcres will likely stay null.",
       "Confirm precise base and top-station coordinates; weather points may be needed for Lech and Zürs as well, because the area spans several valleys.",
-      "Pass leads from earlier seasons (unverified): Ikon Pass with limited days. Also check Mountain Collective and Ski Arlberg multi-day and season tickets (EUR, possibly low/high season pricing).",
       "Avalanche: avalanche.report covers the Tyrol side (St. Anton); record the Vorarlberg bulletin URL for Lech, Zürs and Warth-Schröcken.",
       "Road info: find the official status source for the Arlberg road tunnel, the Arlberg pass road and the Flexen pass road (seasonal and avalanche closures).",
       "Airport shuttle operators and 2026-27 train timetables."
     ],
     "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, village lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: 2026/27 season dates for the main sectors, piste km and lift count, and an undated day-ticket price. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

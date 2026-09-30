@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 184,
+    "lifts": 23,
+    "skiableAcres": 3741,
+    "beginnerPct": 12,
+    "intermediatePct": 38,
+    "advancedPct": 41,
     "terrainParks": null,
+    "expertPct": 9,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 2,
+      "cableCars": null,
+      "chairlifts": 15,
+      "surfaceLifts": 6,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/colorado/steamboat/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: OnTheSnow overview, Wikipedia, Powder trail-map breakdown, Uncover Colorado): 3,741 skiable acres over six peaks, vertical 3,666 ft (consistent with Piste's 1,118 m), 23 lifts (2 gondolas, 1 high-speed six-seat, 8 high-speed quad, 4 triple and 2 double chairs, 6 surface lifts), 184 trails; 12% beginner / 38% intermediate / 41% advanced / 9% expert. Fish Creek Canyon terrain is served by the Mahogany Ridge Express. Season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-21",
+      "text": "Planned opening Nov. 21, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -93,10 +113,32 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 21, 2026 per the Ikon opening-date roundups (other sources disagree — see research conflicts). Closing not recorded: an Uncover Colorado roundup lists Apr. 4, 2027, but the same roundup gives a conflicting Nov. 20 opening, so it is not stored as announced. Steamboat announced its 2025-26 closing date after a dry winter (9News, 2026; date not captured)."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (peak day)",
+      "category": "adult",
+      "amount": 344,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27 peak adult ticket $344. An undated OnTheSnow listing shows $199 weekday / $279 weekend (dynamic pricing).",
+      "source": {
+        "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 price roundups (TownLift, SnowBrains, Unofficial Networks, Sep 2026)."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.steamboat.com/",
     "trailMap": null,
@@ -114,7 +156,8 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://avalanche.state.co.us/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [],
   "travel": {
@@ -171,24 +214,26 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Resolve the 2026-27 opening date (Nov. 21 in Ikon roundups; Nov. 20 and Nov. 26 elsewhere) and the closing date (Apr. 4, 2027 in one roundup) on steamboat.com.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass unlimited with no holiday blackouts. Not found: Ikon Base terms.",
+      "Confirm non-peak and advance 2026-27 day-ticket prices (only the $344 peak price is on file).",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates (9News reported a 2025-26 closing announcement after a dry winter; date not captured).",
+      "Confirm official snow-report, lift-status and trail-map pages on steamboat.com (only third-party pages were found).",
+      "Confirm terrain parks and the current gondola set-up (2 gondolas listed).",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on steamboat.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: Alterra Mountain Company).",
-      "Confirm terrain stats (leads: ~3,700 acres after the Mahogany Ridge expansion, 180+ trails, 20+ lifts including the Wild Blue Gondola, roughly 14/42/44 ability split), parks, snowmaking, night skiing (uncertain — the separate city-owned Howelsen Hill has night skiing) and childcare.",
       "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Pass leads from earlier seasons (unverified): unlimited on the Ikon Pass; included on Ikon Base (possible blackouts); Steamboat season passes; not on Epic or Mountain Collective. Confirm 2026-27 products and USD prices.",
       "Learning setup: confirm Greenhorn Ranch access, surface lifts and lesson products.",
       "HDN 2026-27 winter flight schedule; Go Alpine and any CDOT Snowstang service.",
       "Snow report: record the official conditions page and whether any structured feed exists."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Greenhorn Ranch learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Opening: Ikon roundups (Powder) say Nov. 21, 2026 (stored); Uncover Colorado's roundup says Nov. 20, 2026; a third-party snow-report page says Nov. 26, 2026.",
+      "Day ticket: 2026-27 peak $344 (roundups) vs an undated OnTheSnow listing of $199 weekday / $279 weekend."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats and the 2026-27 peak ticket price. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

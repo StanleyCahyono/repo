@@ -13,8 +13,10 @@ import { RefreshButton } from './refresh-button'
 import { REFRESH_STATE, StateChip } from './state'
 
 /** Jobs POST /api/refresh accepts (prune runs on schedule only). */
-const MANUAL = new Set(['weather', 'nws-alerts', 'reports', 'status', 'assessments', 'alerts', 'links', 'fx'])
+const MANUAL = new Set(['weather', 'nws-alerts', 'reports', 'osm', 'status', 'assessments', 'alerts', 'links', 'fx'])
 const GLOBAL_ONLY = new Set(['alerts', 'links', 'fx'])
+/** Jobs refreshed one resort at a time (the per-resort list, or the resort page). */
+const TARGET_ONLY = new Set(['osm'])
 
 const OUTCOME_TEXT: Record<string, string> = {
   ok: 'succeeded',
@@ -79,6 +81,7 @@ function Cell({ label, children, className, hideLabel = false }: { label: string
 function refreshBlock(job: JobView, demo: boolean): string | null {
   if (!MANUAL.has(job.job)) return 'Runs on schedule only'
   if (demo && job.external) return 'Demo data is never refreshed from live sources'
+  if (TARGET_ONLY.has(job.job)) return job.targets.length ? 'One resort at a time — see Per resort' : 'One resort at a time, from its resort page'
   return null
 }
 
@@ -123,7 +126,7 @@ export function JobsPanel({ v, tz }: { v: SourcesView; tz: string }) {
                   {j.lastSuccessAt && j.lastAttemptOutcome === 'failed' ? <p className="text-[12.5px] text-ink-3">Kept — the failed run did not replace it</p> : null}
                 </Cell>
                 <Cell label="Manual refresh" hideLabel className="order-3 justify-self-end text-right lg:order-none lg:justify-self-auto lg:text-left">
-                  {block && !MANUAL.has(j.job) ? (
+                  {block && (!MANUAL.has(j.job) || TARGET_ONLY.has(j.job)) ? (
                     <p className="text-[12.5px] text-ink-3">{block}</p>
                   ) : (
                     <RefreshButton job={j.job} label={`Refresh ${j.title.toLowerCase()}`} disabledReason={block} size="sm" className="items-end lg:items-start" />

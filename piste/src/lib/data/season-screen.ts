@@ -15,7 +15,7 @@ import { and, eq, ne, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { TripRow } from '@/lib/db/rows'
 import { money, type Money } from '@/lib/domain/money'
-import { addDays, isLocalDate, localDateOf, seasonIdFor } from '@/lib/domain/time'
+import { addDays, hemisphereOf, isLocalDate, localDateOf, seasonIdFor, seasonIdForHemisphere, skiWindow, type Hemisphere } from '@/lib/domain/time'
 import { getSeasonView, type SeasonView } from './season'
 import { loadResortRows, type DataCtx } from './core'
 
@@ -108,13 +108,20 @@ export interface SeasonScreen {
   timeline: SeasonTimeline
 }
 
-/** Season window drawn by the timeline: 1 Nov → 30 Apr, widened to include anything logged or planned outside it. */
-export function timelineWindow(seasonId: string, dates: readonly string[]): { from: string; to: string } {
-  const y = Number(seasonId.slice(0, 4))
-  let from = `${y}-11-01`
-  let to = `${y + 1}-04-30`
+/**
+ * Season window drawn by the timeline: the home hemisphere's winter (north 1 Nov → 30 Apr, south 1 May → 31 Oct),
+ * widened to include anything logged or planned in the season outside it — with `southern`, that includes a
+ * Southern Hemisphere winter in the season (a 2026–27 trip to New Zealand in August 2027).
+ */
+export function timelineWindow(seasonId: string, dates: readonly string[], opts: { home?: Hemisphere; southern?: boolean } = {}): { from: string; to: string } {
+  const home = opts.home ?? 'north'
+  const base = skiWindow(seasonId, home)
+  let from = base.from
+  let to = base.to
+  const south = home === 'south' || !!opts.southern
+  const inSeason = (d: string) => seasonIdFor(d) === seasonId || (south && seasonIdForHemisphere(d, 'south') === seasonId)
   for (const d of dates) {
-    if (!isLocalDate(d) || seasonIdFor(d) !== seasonId) continue
+    if (!isLocalDate(d) || !inSeason(d)) continue
     if (d < from) from = `${d.slice(0, 7)}-01`
     if (d > to) to = addDays(`${addDays(`${d.slice(0, 7)}-01`, 32).slice(0, 7)}-01`, -1)
   }
@@ -124,9 +131,10 @@ export function timelineWindow(seasonId: string, dates: readonly string[]): { fr
 export async function getSeasonScreen(ctx: DataCtx): Promise<SeasonScreen> {
   const { db, now, today, prefs } = ctx
   const seasonId = prefs.activeSeasonId
+  /** Planning-season membership of a date with no resort (expenses): 1 Jul → 30 Jun. */
   const inSeason = (d: string | null | undefined) => !!d && isLocalDate(d) && seasonIdFor(d) === seasonId
 
-  const [view, resortRows, favs, trips, skillRows, expenseRows, personal, owned] = await Promise.all([
+  const [view, resortRows, favs, trips, skillRows, expenseRows, personal, owned, tripResorts] = await Promise.all([
     getSeasonView(ctx),
     loadResortRows(ctx, null),
     db.select({ resortId: s.favorites.resortId }).from(s.favorites),
@@ -141,7 +149,17 @@ export async function getSeasonScreen(ctx: DataCtx): Promise<SeasonScreen> {
       .select({ id: s.passOwnership.id, holder: s.passOwnership.holder, productId: s.passOwnership.productId, name: s.passProducts.name, familyId: s.passProducts.familyId, seasonId: s.passProducts.seasonId })
       .from(s.passOwnership)
       .innerJoin(s.passProducts, eq(s.passProducts.id, s.passOwnership.productId)),
+    db.select({ tripId: s.tripItems.tripId, resortId: s.tripItems.refId }).from(s.tripItems).where(eq(s.tripItems.type, 'resort-day')),
   ])
+  // A day at a resort belongs to that resort's season (a Southern Hemisphere winter — June–October 2027 — is 2026–27).
+  const southern = new Set(resortRows.filter((r) => hemisphereOf(r.lat) === 'south').map((r) => r.id))
+  const atResortInSeason = (resortId: string, d: string | null | undefined) =>
+    !!d && isLocalDate(d) && seasonIdForHemisphere(d, southern.has(resortId) ? 'south' : 'north') === seasonId
+  // A trip whose resort days are all at Southern Hemisphere resorts follows their season; any other trip the dates.
+  const tripSouth = new Map<string, boolean>()
+  for (const x of tripResorts) if (x.resortId) tripSouth.set(x.tripId, (tripSouth.get(x.tripId) ?? true) && southern.has(x.resortId))
+  const tripInSeason = (t: Pick<TripRow, 'id' | 'startDate' | 'endDate'>) =>
+    tripSouth.get(t.id) ? [t.startDate, t.endDate].some((d) => isLocalDate(d) && seasonIdForHemisphere(d, 'south') === seasonId) : inSeason(t.startDate) || inSeason(t.endDate)
 
   const favSet = new Set(favs.map((f) => f.resortId))
   const resorts: PickerResort[] = resortRows
@@ -150,7 +168,7 @@ export async function getSeasonScreen(ctx: DataCtx): Promise<SeasonScreen> {
 
   const tripName = new Map(trips.map((t) => [t.id, t.name]))
   const pickerTrips: PickerTrip[] = trips
-    .filter((t) => inSeason(t.startDate) || inSeason(t.endDate))
+    .filter(tripInSeason)
     .sort((a, b) => a.startDate.localeCompare(b.startDate) || a.name.localeCompare(b.name))
     .map((t) => ({ id: t.id, name: t.name, startDate: t.startDate, endDate: t.endDate, status: t.status }))
 
@@ -211,7 +229,10 @@ export async function getSeasonScreen(ctx: DataCtx): Promise<SeasonScreen> {
       .map((l) => ({ kind: 'lesson' as const, date: l.date!, resortId: l.resortId, label: name.get(l.resortId) ?? l.resortName, upcoming: l.date! >= today })),
   ].sort((a, b) => a.date.localeCompare(b.date))
   const timelineTrips: TimelineTrip[] = pickerTrips.map((t) => ({ ...t }))
-  const win = timelineWindow(seasonId, [...marks.map((m) => m.date), ...timelineTrips.flatMap((t) => [t.startDate, t.endDate])])
+  const win = timelineWindow(seasonId, [...marks.map((m) => m.date), ...timelineTrips.flatMap((t) => [t.startDate, t.endDate])], {
+    home: hemisphereOf(prefs.homeLat),
+    southern: marks.some((m) => southern.has(m.resortId)) || timelineTrips.some((t) => tripSouth.get(t.id)),
+  })
 
   return {
     view,
@@ -224,7 +245,7 @@ export async function getSeasonScreen(ctx: DataCtx): Promise<SeasonScreen> {
     passOptions,
     skills,
     skillCategories,
-    personalReports: [...new Set(personal.filter((p) => inSeason(p.localDate)).map((p) => `${p.resortId}|${p.localDate}`))],
+    personalReports: [...new Set(personal.filter((p) => atResortInSeason(p.resortId, p.localDate)).map((p) => `${p.resortId}|${p.localDate}`))],
     expenses,
     timeline: { from: win.from, to: win.to, today, marks, trips: timelineTrips },
   }

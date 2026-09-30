@@ -22,7 +22,8 @@ import {
   type RecommendCandidate,
   type RecommendPreset,
 } from '@/lib/domain/recommend'
-import { addDays, addHours, dateRange, endOfLocalDay, formatLocalDate, isLocalDate, isWeekend, seasonIdFor, startOfLocalDay } from '@/lib/domain/time'
+import { isLongHaul } from '@/lib/domain/geo'
+import { addDays, addHours, dateRange, endOfLocalDay, formatLocalDate, hemisphereOf, isLocalDate, isWeekend, seasonIdsForDates, startOfLocalDay } from '@/lib/domain/time'
 import { OPERATING_STATUS_LABEL, SCORING_MODES, type OpeningLabel, type OperatingStatus, type Provenance, type ScoreKind, type ScoringMode } from '@/lib/domain/types'
 import { formatSnow } from '@/lib/domain/units'
 import {
@@ -34,8 +35,10 @@ import {
   NOT_PERSONAL_REPORT,
   notDemoProv,
   pointsForRuns,
+  resortHemisphere,
   resortToday,
   seasonLabel,
+  seasonRowFor,
   type Bundle,
   type DataCtx,
 } from './core'
@@ -103,17 +106,40 @@ function forecast72h(sum: ResortSummary): { cm: number | null; complete: boolean
   return { cm: top.sumCm, complete: top.complete }
 }
 
-/** Build recommendation candidates for every resort in the bundle. */
-async function buildCandidates(b: Bundle, dates: readonly string[], summaries: readonly ResortSummary[], reportsNow: Map<string, OperationalReportRow>): Promise<RecommendCandidate[]> {
+/**
+ * Resorts Today's short-range answers consider: those within LONG_HAUL_KM of home (great circle). Farther resorts
+ * are trips to plan (Explore, Trips, Passes, Forecast and favourites keep them); unknown coordinates are kept.
+ */
+export function nearHome(b: Pick<Bundle, 'resorts' | 'ctx'>): { near: Set<string>; longHaul: string[] } {
+  const home = { lat: b.ctx.prefs.homeLat, lon: b.ctx.prefs.homeLon }
+  const near = new Set<string>()
+  const longHaul: string[] = []
+  for (const { row } of b.resorts) {
+    if (isLongHaul(home, row)) longHaul.push(row.id)
+    else near.add(row.id)
+  }
+  return { near, longHaul }
+}
+
+/** Build recommendation candidates for the bundle's resorts (`only`: restrict to these ids). */
+async function buildCandidates(
+  b: Bundle,
+  dates: readonly string[],
+  summaries: readonly ResortSummary[],
+  reportsNow: Map<string, OperationalReportRow>,
+  only: ReadonlySet<string> | null = null,
+): Promise<RecommendCandidate[]> {
   const { db, now } = b.ctx
-  const resortIds = b.resorts.map((r) => r.row.id)
+  const resorts = only ? b.resorts.filter((r) => only.has(r.row.id)) : b.resorts
+  const resortIds = resorts.map((r) => r.row.id)
+  if (!resortIds.length) return []
   const assessments = await latestAssessments(db, { dates, modes: SCORING_MODES, now, live: b.live, resortIds })
   const byId = new Map(summaries.map((x) => [x.id, x]))
-  const seasonId = seasonIdFor(dates[0])
-  return b.resorts.map(({ row: r }) => {
+  return resorts.map(({ row: r }) => {
     const sum = byId.get(r.id)!
     const report: OperationalReportRow | undefined = reportsNow.get(r.id)
-    const season = b.seasons.get(`${r.id}|${seasonId}`)
+    // The resort's own season for the first date (a Southern Hemisphere winter changes season on 1 January).
+    const season = seasonRowFor(b, r, dates[0])
     const st = statusStatement(b.status.get(r.id), report)
     const snow72 = forecast72h(sum)
     const today = resortToday(r, now)
@@ -140,7 +166,7 @@ async function buildCandidates(b: Bundle, dates: readonly string[], summaries: r
       resortId: r.id,
       name: r.shortName || r.name,
       today,
-      ops: candidateOps(st, season),
+      ops: candidateOps(st, season, resortHemisphere(r)),
       fit: sum.fit,
       travel: sum.fit.travel,
       evidence: {
@@ -155,7 +181,7 @@ async function buildCandidates(b: Bundle, dates: readonly string[], summaries: r
   })
 }
 
-function runRecommendation(b: Bundle, dates: string[], preset: RecommendPreset, candidates: RecommendCandidate[], useMyWeights: boolean): Recommendation {
+function runRecommendation(b: Bundle, dates: string[], preset: RecommendPreset, candidates: RecommendCandidate[], useMyWeights: boolean, longHaulExcluded: number): Recommendation {
   const p = b.ctx.prefs
   return recommend({
     candidates,
@@ -167,16 +193,19 @@ function runRecommendation(b: Bundle, dates: string[], preset: RecommendPreset, 
     now: b.ctx.now,
     appMode: b.ctx.mode,
     units: p.units,
+    homeHemisphere: hemisphereOf(p.homeLat),
+    longHaulExcluded,
   })
 }
 
-/** Weekend finder / "Where to ski": the recommendation alone. */
+/** Weekend finder / "Where to ski": the recommendation alone (resorts within a long flight of home only). */
 export async function getRecommendation(ctx: DataCtx, opts: RecommendationOptions = {}): Promise<Recommendation> {
   const dates = resolveDates(ctx.today, opts)
   const preset = opts.preset ?? defaultPreset(ctx.prefs.ability)
-  const b = await loadBundle(ctx, { seasons: dates.map(seasonIdFor) })
+  const b = await loadBundle(ctx, { seasons: seasonIdsForDates(dates) })
+  const { near, longHaul } = nearHome(b)
   const [summaries, reportsNow] = await Promise.all([buildSummaries(b, { date: dates[0], mode: presetMode(preset, ctx.prefs.scoringMode) }), currentReports(b)])
-  return runRecommendation(b, dates, preset, await buildCandidates(b, dates, summaries, reportsNow), !!opts.useMyWeights)
+  return runRecommendation(b, dates, preset, await buildCandidates(b, dates, summaries, reportsNow, near), !!opts.useMyWeights, longHaul.length)
 }
 
 // ---------------------------------------------------------------------------
@@ -288,6 +317,10 @@ export interface TodayView {
   watchlist: WatchItem[]
   strip: StripDay[]
   stripBasis: 'favourites' | 'winner' | 'none'
+  /** Favourites left out of the strip: more than a long flight from home (LONG_HAUL_KM) — planned as trips. */
+  stripLongHaul: { resortId: string; name: string }[]
+  /** Every resort's name by id (events and changes can be about any resort, near or far). */
+  resortNames: Record<string, string>
   nextTrip: TripSummary | null
   openingTimeline: OpeningTimelineItem[]
   newSnowWatch: { thresholdCm: number; windowHours: number; items: SnowWatchItem[] }
@@ -428,7 +461,7 @@ async function stripFor(
       const summit = agg('summit')
       const a = assessments.get(assessmentKey(id, date, mode))
       // Same rule as the resort summaries and recommendation eligibility: a confirmed closure shows "Closed".
-      const closed = closureView(statements.get(id)!, b.seasons.get(`${id}|${seasonIdFor(date)}`), date)
+      const closed = closureView(statements.get(id)!, seasonRowFor(b, r, date), date, resortHemisphere(r))
       const shown = [base, summit].filter((x): x is NonNullable<typeof x> => !!x)
       return {
         resortId: id,
@@ -453,28 +486,35 @@ export async function getTodayView(ctx: DataCtx, opts: RecommendationOptions = {
   const preset = opts.preset ?? defaultPreset(ctx.prefs.ability)
   const mode = presetMode(preset, ctx.prefs.scoringMode)
   const dates7 = dateRange(ctx.today, addDays(ctx.today, STRIP_DAYS - 1))
-  const b = await loadBundle(ctx, { seasons: [...dates, ...dates7].map(seasonIdFor) })
+  const b = await loadBundle(ctx, { seasons: seasonIdsForDates([...dates, ...dates7]) })
+  // Today's short-range answers (ranking, strip) leave out resorts more than a long flight from home.
+  const { near, longHaul } = nearHome(b)
   const [summaries, reportsNow] = await Promise.all([buildSummaries(b, { date: dates[0], mode }), currentReports(b)])
   const [candidates, changes, trips, unreadAlerts, snowRules] = await Promise.all([
-    buildCandidates(b, dates, summaries, reportsNow),
+    buildCandidates(b, dates, summaries, reportsNow, near),
     recentChanges(b),
     tripSummaries(ctx),
     db.select().from(s.alerts).where(isNull(s.alerts.readAt)).orderBy(desc(s.alerts.firedAt), desc(s.alerts.id)).limit(20),
     db.select().from(s.alertRules).where(and(sql`${s.alertRules.type} = 'snow-threshold'`, sql`${s.alertRules.enabled} = 1`)),
   ])
-  const recommendation = runRecommendation(b, dates, preset, candidates, !!opts.useMyWeights)
+  const recommendation = runRecommendation(b, dates, preset, candidates, !!opts.useMyWeights, longHaul.length)
 
-  // Watchlist: favourites in their saved order.
+  // Watchlist: favourites in their saved order (every favourite, however far away).
   const favs = summaries.filter((x) => x.isFavorite).sort((a, b2) => (a.favoriteOrder ?? 0) - (b2.favoriteOrder ?? 0) || a.name.localeCompare(b2.name))
   const watchlist: WatchItem[] = favs.map((summary) => ({ summary, changes: changes.filter((c) => c.resortId === summary.id).slice(0, 3) }))
 
-  // Seven-day strip for favourites (or the winner).
-  const stripIds = favs.length ? favs.slice(0, MAX_STRIP_RESORTS).map((f) => f.id) : recommendation.winner ? [recommendation.winner.resortId] : []
+  // Seven-day strip for favourites within a long flight of home (or the winner).
+  const nearFavs = favs.filter((f) => near.has(f.id))
+  const stripIds = nearFavs.length ? nearFavs.slice(0, MAX_STRIP_RESORTS).map((f) => f.id) : recommendation.winner ? [recommendation.winner.resortId] : []
   const strip = await stripFor(b, stripIds, dates7, new Set(dates), mode, reportsNow)
+  const stripLongHaul = favs.filter((f) => !near.has(f.id)).map((f) => ({ resortId: f.id, name: f.shortName || f.name }))
 
   const nextTrip = trips.find((t) => t.phase === 'in-progress') ?? trips.find((t) => t.phase === 'upcoming') ?? null
 
+  // Openings in the home hemisphere only: a New Zealand opening in June is not part of a New York preseason.
+  const homeHemisphere = hemisphereOf(ctx.prefs.homeLat)
   const openingTimeline: OpeningTimelineItem[] = summaries
+    .filter((x) => hemisphereOf(x.lat) === homeHemisphere)
     .map((x) => ({
       resortId: x.id,
       name: x.name,
@@ -565,7 +605,9 @@ export async function getTodayView(ctx: DataCtx, opts: RecommendationOptions = {
     recommendation,
     watchlist,
     strip,
-    stripBasis: favs.length ? 'favourites' : stripIds.length ? 'winner' : 'none',
+    stripBasis: nearFavs.length ? 'favourites' : stripIds.length ? 'winner' : 'none',
+    stripLongHaul,
+    resortNames: Object.fromEntries(summaries.map((x) => [x.id, x.name])),
     nextTrip,
     openingTimeline,
     newSnowWatch: { thresholdCm, windowHours: 72, items: newSnow },

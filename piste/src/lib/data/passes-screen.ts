@@ -33,20 +33,21 @@ import {
   type QuoteKind,
   type RentalOption,
 } from '@/lib/domain/costs'
-import { money, toMajorString, type Money } from '@/lib/domain/money'
+import { currencyChoicesFor, money, toMajorString, type Money } from '@/lib/domain/money'
 import {
   evaluateAccess,
   latestRule,
   latestRules,
   planAccess,
   resolvePool,
+  usageInSeason,
   type AccessStatus,
   type AccessVerdict,
   type PassRuleInput,
 } from '@/lib/domain/passes'
-import { addDays, dateRange, daysBetween, isLocalDate, nextSaturday, seasonIdFor } from '@/lib/domain/time'
+import { addDays, dateRange, daysBetween, hemisphereOf, isLocalDate, nextSaturday, planningSeasonBounds, seasonBounds, type Hemisphere, type SeasonOf } from '@/lib/domain/time'
 import { PASS_FAMILIES, type DateRange, type PassAccessType, type Provenance } from '@/lib/domain/types'
-import { groupBy, isLive, loadPassData, loadResortRows, needsConfirmation, seasonLabel, verificationLabel, type DataCtx, type OwnedPass, type PassData } from './core'
+import { groupBy, hasSouthernResorts, isLive, loadPassData, loadResortRows, needsConfirmation, seasonLabel, verificationLabel, type DataCtx, type OwnedPass, type PassData } from './core'
 import { getPassesView, type PassProductView, type PlannedDayView } from './passes'
 import { basketVerdict } from './views'
 
@@ -63,7 +64,11 @@ export const MAX_PARTY = 12
 export interface SeasonInfo {
   id: string
   label: string
-  /** Inclusive bounds of the season's dates (1 Jul → 30 Jun). */
+  /**
+   * Inclusive bounds of the season's dates: 1 Jul → 30 Jun; through 31 Dec of the second year when Southern
+   * Hemisphere resorts are involved (a 2026–27 pass covers their June–October 2027 winter); 1 Jan → 31 Dec of the
+   * second year for one Southern Hemisphere resort.
+   */
   start: string
   end: string
 }
@@ -200,14 +205,23 @@ export function estimateView(p: Pick<PriceSnapshotRow, 'id' | 'subjectType' | 's
   }
 }
 
-/** Currencies offered when you type an estimate or a price paid: yours first, then common ones. */
+/** Currencies offered when you type an estimate or a price paid: yours first, then the supported list. */
 export function entryCurrencies(preferred: string): string[] {
-  return [...new Set([preferred.toUpperCase(), 'USD', 'CAD', 'EUR', 'CHF', 'GBP', 'JPY'])]
+  return currencyChoicesFor(preferred)
 }
 
-export function seasonInfo(seasonId: string): SeasonInfo {
-  const start = Number(seasonId.slice(0, 4))
-  return { id: seasonId, label: seasonLabel(seasonId), start: `${start}-07-01`, end: `${start + 1}-06-30` }
+/**
+ * The planning season's dates: 'north' 1 Jul → 30 Jun, 'south' the Southern Hemisphere winter's calendar year, 'both'
+ * from 1 Jul through 31 Dec of the second year (a catalog with resorts in both hemispheres).
+ */
+export function seasonInfo(seasonId: string, span: Hemisphere | 'both' = 'north'): SeasonInfo {
+  const b = span === 'both' ? planningSeasonBounds(seasonId, true) : seasonBounds(seasonId, span)
+  return { id: seasonId, label: seasonLabel(seasonId), start: b.from, end: b.to }
+}
+
+/** The active planning season, spanning Southern Hemisphere winters when the catalog has such resorts. */
+export async function planningSeason(ctx: Pick<DataCtx, 'db' | 'prefs'>): Promise<SeasonInfo> {
+  return seasonInfo(ctx.prefs.activeSeasonId, (await hasSouthernResorts(ctx.db)) ? 'both' : 'north')
 }
 
 const familyOrder = (id: string) => {
@@ -319,8 +333,15 @@ function passOptions(pass: PassData): PassOption[] {
   ]
 }
 
-function poolView(def: { id: string; label: string | null; memberResortIds: string[]; total: number | null; conflictingTotals: number[] | null }, usage: readonly { resortId: string; date: string }[], seasonId: string, names: Readonly<Record<string, string>>, usedOverride?: number): PoolView {
-  const inSeason = usage.filter((u) => isLocalDate(u.date) && seasonIdFor(u.date) === seasonId)
+function poolView(
+  def: { id: string; label: string | null; memberResortIds: string[]; total: number | null; conflictingTotals: number[] | null },
+  usage: readonly { resortId: string; date: string }[],
+  seasonId: string,
+  names: Readonly<Record<string, string>>,
+  seasonOf: SeasonOf,
+  usedOverride?: number,
+): PoolView {
+  const inSeason = usage.filter((u) => usageInSeason(u, seasonId, seasonOf))
   const usedAt = (id: string) => new Set(inSeason.filter((u) => u.resortId === id).map((u) => u.date)).size
   const used = usedOverride ?? def.memberResortIds.reduce((n, id) => n + usedAt(id), 0)
   return {
@@ -451,7 +472,7 @@ function answerRank(a: CheckSummary): number {
 
 export async function getCheckerView(ctx: DataCtx, input: CheckerInput = {}): Promise<CheckerView> {
   const { today } = ctx
-  const season = seasonInfo(ctx.prefs.activeSeasonId)
+  const season = await planningSeason(ctx)
   const [pass, resortRows, favorites] = await Promise.all([loadPassData(ctx.db, season.id), loadResortRows(ctx, null), favoriteSet(ctx)])
   const resorts = resortOptions(resortRows, favorites)
   const names = namesOf(resortRows)
@@ -497,7 +518,7 @@ export async function getCheckerView(ctx: DataCtx, input: CheckerInput = {}): Pr
       rules,
       dates.map((date) => ({ resortId, date })),
       usage,
-      { today, names },
+      { today, names, seasonOf: pass.seasonOf },
     )
     return summarize(res.days.map((d) => ({ date: d.date, verdict: d.verdict })))
   }
@@ -521,7 +542,7 @@ export async function getCheckerView(ctx: DataCtx, input: CheckerInput = {}): Pr
     if (current?.poolId) {
       const first = summary.days[0]?.verdict.pool
       const def = resolvePool(product.id, current.poolId, productRules as readonly PassRuleInput[])
-      pool = poolView(def, usage, product.seasonId, names, first?.used)
+      pool = poolView(def, usage, product.seasonId, names, pass.seasonOf, first?.used)
     }
     return {
       ...base,
@@ -534,7 +555,7 @@ export async function getCheckerView(ctx: DataCtx, input: CheckerInput = {}): Pr
           ? {
               ownershipId: ownership.ownership.id,
               holder: ownership.ownership.holder,
-              loggedDays: new Set(ownership.usage.filter((u) => isLocalDate(u.date) && seasonIdFor(u.date) === product.seasonId).map((u) => `${u.resortId}|${u.date}`)).size,
+              loggedDays: new Set(ownership.usage.filter((u) => usageInSeason(u, product.seasonId, pass.seasonOf)).map((u) => `${u.resortId}|${u.date}`)).size,
             }
           : null,
         rule: current ? ruleVersionView(current) : null,
@@ -606,12 +627,14 @@ export interface RuleEditorView {
 }
 
 export async function getRuleEditorView(ctx: DataCtx, productId: string, resortId: string): Promise<RuleEditorView | null> {
-  const season = seasonInfo(ctx.prefs.activeSeasonId)
-  const [pass, resortRows, favorites] = await Promise.all([loadPassData(ctx.db, season.id), loadResortRows(ctx, null), favoriteSet(ctx)])
+  const seasonId = ctx.prefs.activeSeasonId
+  const [pass, resortRows, favorites] = await Promise.all([loadPassData(ctx.db, seasonId), loadResortRows(ctx, null), favoriteSet(ctx)])
   const product = pass.products.find((p) => p.id === productId)
   const resorts = resortOptions(resortRows, favorites)
   const resort = resorts.find((r) => r.id === resortId)
   if (!product || !resort) return null
+  // Blackouts are dated in the pass season at this resort (a Southern Hemisphere winter is the calendar year's).
+  const season = seasonInfo(seasonId, hemisphereOf(resortRows.find((r) => r.id === resortId)?.lat))
   const names = namesOf(resortRows)
   const rules = pass.rules.filter((r) => r.productId === product.id)
   const history = versionsOf(rules, product.id, resort.id)
@@ -626,7 +649,7 @@ export async function getRuleEditorView(ctx: DataCtx, productId: string, resortI
     current: history[0] ?? null,
     history,
     nextVersion: (history[0]?.version ?? 0) + 1,
-    pools: poolIds.map((id) => poolView(resolvePool(product.id, id, rules), mine?.usage ?? [], product.seasonId, names)),
+    pools: poolIds.map((id) => poolView(resolvePool(product.id, id, rules), mine?.usage ?? [], product.seasonId, names, pass.seasonOf)),
     otherRuleResorts: current
       .filter((r) => r.resortId !== resort.id)
       .map((r) => byId.get(r.resortId))
@@ -759,7 +782,7 @@ const BASKET_SUBJECTS = ['lift-ticket', 'rental', 'parking'] as const
 
 export async function getDayCostsView(ctx: DataCtx, opts: { date?: string | null; currency?: string | null } = {}): Promise<DayCostsView> {
   const { now, today, prefs } = ctx
-  const season = seasonInfo(prefs.activeSeasonId)
+  const season = await planningSeason(ctx)
   const date = clampToSeason(opts.date, season, defaultDate(today, season))
   const live = isLive(ctx)
   const [resortRows, favorites, pass, prices, rates] = await Promise.all([
@@ -780,17 +803,20 @@ export async function getDayCostsView(ctx: DataCtx, opts: { date?: string | null
   const rulesBy = groupBy(pass.rules, (r) => r.productId)
   const mine = pass.owned.filter((o) => o.ownership.holder === 'me')
   const a = basketAssumptions(prefs)
+  // The day type headline follows the US/Canadian holiday calendar; each resort's basket uses its own country.
   const { dayType, holidayName } = dayTypeFor(date)
+  const rowById = new Map(resortRows.map((r) => [r.id, r]))
 
   const rows: DayCostRow[] = resorts.map((resort) => {
     const verdicts = mine.map((o) => {
       const rules = rulesBy.get(o.product.id) ?? []
-      return evaluateAccess({ product: o.product, rule: latestRule(rules, o.product.id, resort.id), resortId: resort.id, date, usage: o.usage, poolRules: rules, today, names })
+      return evaluateAccess({ product: o.product, rule: latestRule(rules, o.product.id, resort.id), resortId: resort.id, date, usage: o.usage, poolRules: rules, today, names, seasonOf: pass.seasonOf })
     })
     const v = basketVerdict(verdicts)
     const resortPrices = pricesBy.get(resort.id) ?? []
+    const row = rowById.get(resort.id)
     const basket = computeDayBasket(
-      { resortId: resort.id, date, prices: resortPrices, pass: v },
+      { resortId: resort.id, date, prices: resortPrices, pass: v, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) },
       { currency, rentalOption: a.rentalOption, lunch: a.lunch, partySize: a.partySize },
       { now, today, rates },
     )
@@ -914,7 +940,7 @@ export interface ScenarioInput {
 
 export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly ScenarioInput[]; includeTrips?: boolean; currency?: string | null } = {}): Promise<PassCompareView> {
   const { now, today, prefs } = ctx
-  const season = seasonInfo(prefs.activeSeasonId)
+  const season = await planningSeason(ctx)
   const includeTrips = opts.includeTrips ?? true
   const [pv, pass, resortRows, favorites, rates] = await Promise.all([getPassesView(ctx), loadPassData(ctx.db, season.id), loadResortRows(ctx, null), favoriteSet(ctx), fxRows(ctx)])
   const currencies = currencyChoices(prefs.currency, rates, today)
@@ -948,9 +974,11 @@ export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly 
         .where(and(eq(s.priceSnapshots.subjectType, 'lift-ticket'), inArray(s.priceSnapshots.subjectId, dayResorts), live ? sql`${s.priceSnapshots.quoteKind} <> 'demo'` : undefined))
     : []
   const liftBy = groupBy(liftPrices, (p) => p.resortId ?? p.subjectId)
+  const rowById = new Map(resortRows.map((r) => [r.id, r]))
   const priced = (resortId: string, date: string) => {
     const prices = liftBy.get(resortId) ?? []
-    const t = liftTicketFor(prices, resortId, date, { now, today })
+    const row = rowById.get(resortId)
+    const t = liftTicketFor(prices, resortId, date, { now, today, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) })
     const snap = t.snapshotId != null ? prices.find((p) => p.id === t.snapshotId) : undefined
     return {
       dayType: t.dayType,
@@ -1044,7 +1072,7 @@ export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly 
   })
 
   const result = days.length
-    ? comparePasses({ days: days.map((d) => ({ resortId: d.resortId, date: d.date, ticket: d.ticket, ticketBasis: d.ticketBasis })), candidates, currency, rates, today, names })
+    ? comparePasses({ days: days.map((d) => ({ resortId: d.resortId, date: d.date, ticket: d.ticket, ticketBasis: d.ticketBasis })), candidates, currency, rates, today, names, seasonOf: pass.seasonOf })
     : null
 
   const originals = [
@@ -1100,12 +1128,14 @@ export async function ownedValueBasis(ctx: DataCtx): Promise<Record<number, Owne
     .from(s.priceSnapshots)
     .where(and(eq(s.priceSnapshots.subjectType, 'lift-ticket'), inArray(s.priceSnapshots.subjectId, resortIds), isLive(ctx) ? sql`${s.priceSnapshots.quoteKind} <> 'demo'` : undefined))
   const by = groupBy(prices, (p) => p.resortId ?? p.subjectId)
+  const rows = new Map((await loadResortRows(ctx, resortIds)).map((r) => [r.id, r]))
   const out: Record<number, OwnedValueBasis> = {}
   for (const o of mine) {
-    const days = new Map(o.usage.filter((u) => isLocalDate(u.date) && seasonIdFor(u.date) === o.product.seasonId).map((u) => [`${u.resortId}|${u.date}`, u]))
+    const days = new Map(o.usage.filter((u) => usageInSeason(u, o.product.seasonId, pass.seasonOf)).map((u) => [`${u.resortId}|${u.date}`, u]))
     const basis: OwnedValueBasis = { estimatedDays: 0, researchedDays: 0 }
     for (const u of days.values()) {
-      const t = liftTicketFor(by.get(u.resortId) ?? [], u.resortId, u.date, { now, today })
+      const row = rows.get(u.resortId)
+      const t = liftTicketFor(by.get(u.resortId) ?? [], u.resortId, u.date, { now, today, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) })
       if (t.kind === 'user-estimate') basis.estimatedDays += 1
       else if (t.price && t.confirmAtSource) basis.researchedDays += 1
     }

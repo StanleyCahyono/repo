@@ -16,14 +16,28 @@
  * - official-by-user: kind 'official', prov.verification 'user-confirmed', prov.note 'entered-by-user'.
  * - transcribed manual reports: kind 'manual', sourceUrl required, prov.note 'transcribed'.
  * - personal feedback: kind 'manual', prov.provider 'You', prov.note 'personal' — never used as operations evidence.
+ * - researched: kind 'official', prov.verification from the catalog research ('search-summary'), prov.note
+ *   'catalog-research' — a dated report found by web research (catalog `recentReports`), seeded with its own observation
+ *   day and source (origin 'other': never "read by Piste", never live).
  */
 import { and, desc, eq, max } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Db } from '@/lib/db/client'
 import { operationalReports, sourceRecords } from '@/lib/db/schema'
 import type { OperationalReportRow } from '@/lib/db/rows'
-import { isLocalDate, localDateOf } from '@/lib/domain/time'
-import { OPERATING_STATUSES, SNOW_WINDOWS, SURFACE_TAGS, provenance, type DataKind, type Provenance, type SnowfallReading } from '@/lib/domain/types'
+import { RESEARCHED_REPORT_NOTE, isResearchedReport } from '@/lib/domain/reports'
+import { formatLocalDate, isLocalDate, localDateOf, localTimeToInstant } from '@/lib/domain/time'
+import {
+  OPERATING_STATUSES,
+  SNOW_WINDOWS,
+  SURFACE_TAGS,
+  provenance,
+  type DataKind,
+  type OperatingStatus,
+  type Provenance,
+  type SnowfallReading,
+  type VerificationLevel,
+} from '@/lib/domain/types'
 import type { ParsedReport, ProviderResult, ResortReportProvider } from '@/lib/providers/types'
 import { applyStatusToSeason, recordStatus } from './status'
 import { STOPPED_NOTE, type ItemOutcome, type JobContext, type JobWorkResult } from './types'
@@ -35,13 +49,19 @@ export const ENTERED_BY_USER_NOTE = 'entered-by-user'
 
 export type ReportOrigin = 'official-adapter' | 'official-by-user' | 'manual-transcribed' | 'personal' | 'demo' | 'other'
 
-/** How a stored report came to exist — for badges and for keeping personal feedback out of operations evidence. */
+/**
+ * How a stored report came to exist — for badges and for keeping personal feedback out of operations evidence. A report
+ * found by catalog research is 'other' (see `isResearchedReport` for its own label): it was neither read by Piste nor
+ * entered by you.
+ */
 export function reportOrigin(r: Pick<OperationalReportRow, 'kind' | 'prov'>): ReportOrigin {
   if (r.kind === 'demo') return 'demo'
   if (r.kind === 'manual') return r.prov?.note === PERSONAL_NOTE ? 'personal' : 'manual-transcribed'
-  if (r.kind === 'official') return r.prov?.note === ENTERED_BY_USER_NOTE ? 'official-by-user' : 'official-adapter'
+  if (r.kind === 'official') return r.prov?.note === ENTERED_BY_USER_NOTE ? 'official-by-user' : isResearchedReport(r) ? 'other' : 'official-adapter'
   return 'other'
 }
+
+export { RESEARCHED_REPORT_NOTE, isResearchedReport }
 
 export function isPersonalReport(r: Pick<OperationalReportRow, 'kind' | 'prov'>): boolean {
   return reportOrigin(r) === 'personal'
@@ -453,6 +473,136 @@ export async function addPersonalReport(db: Db, input: PersonalReportInput, now:
     .values({ resortId: v.resortId, revision, kind: 'manual', fetchedAt: null, contentHash: reportContentHash(n), prov, createdAt: now, ...reportRowValues(n) })
     .returning({ id: operationalReports.id })
   return { id: row.id, revision }
+}
+
+// ---------------------------------------------------------------------------
+// Reports found by catalog research (seeded from catalog `recentReports`)
+
+export interface ResearchedReportInput {
+  resortId: string
+  /** The resort's IANA zone: `observedOn` is a resort-local day. */
+  timezone: string
+  observedOn: string
+  operatingStatus: 'open' | 'closed' | 'closed-for-season' | 'not-yet-open' | null
+  baseDepthCm: number | null
+  summitDepthCm: number | null
+  newSnow24hCm: number | null
+  liftsOpen: number | null
+  liftsTotal: number | null
+  note: string | null
+  source: { url: string | null; verification: VerificationLevel; checkedOn: string }
+  /** Provider name of the research (the catalog's). */
+  provider: string
+}
+
+export interface ResearchedReportOutcome {
+  outcome: 'inserted' | 'unchanged' | 'skipped'
+  reportId: number | null
+  /** Why a report was skipped. */
+  reason: string | null
+}
+
+/** A researched "closed" on a day is a closure of that day, not of the season. */
+const RESEARCHED_STATUS: Record<NonNullable<ResearchedReportInput['operatingStatus']>, OperatingStatus> = {
+  open: 'open',
+  closed: 'temporarily-closed',
+  'closed-for-season': 'closed-for-season',
+  'not-yet-open': 'not-yet-open',
+}
+
+/** Research can read a page; it cannot claim an API or your confirmation. */
+const researchVerification = (v: VerificationLevel): VerificationLevel => (v === 'official-page' || v === 'unverified' ? v : 'search-summary')
+
+/**
+ * Store a dated report found by catalog research as an official report of its own observation day (kind 'official',
+ * prov.note 'catalog-research', the research's verification and source), with no publish time (`reportedAt` null — its
+ * age runs from the start of that day) and retrieved when the research checked it (`fetchedAt`, never later than now).
+ *
+ * Idempotent: a report with the same content for the same resort and day is 'unchanged' — nothing is written, so a
+ * re-seed never resets its observation age. Changed content for the same day is a new revision.
+ *
+ * Its status goes through the normal status pipeline (`recordStatus`: appended only when it changes, never before a
+ * newer statement), stated at local noon of the observed day (bounded by when research checked it). Season facts come
+ * from closures only (`applyStatusToSeason`): an "open" snapshot says the resort was open that day, not that it opened
+ * that day, so it never becomes the season's actual opening.
+ * Skipped: a day in the future at the resort, a day after the research date, or a report with nothing in it.
+ */
+export async function addResearchedReport(db: Db, a: ResearchedReportInput, now: string): Promise<ResearchedReportOutcome> {
+  const skip = (reason: string): ResearchedReportOutcome => ({ outcome: 'skipped', reportId: null, reason })
+  if (!isLocalDate(a.observedOn) || !isLocalDate(a.source.checkedOn)) return skip('Not a YYYY-MM-DD date')
+  if (a.observedOn > localDateOf(now, a.timezone)) return skip(`Observed on ${a.observedOn}, which is still in the future at the resort`)
+  if (a.observedOn > a.source.checkedOn) return skip(`Observed on ${a.observedOn}, after the research date ${a.source.checkedOn}`)
+  const status = a.operatingStatus ? RESEARCHED_STATUS[a.operatingStatus] : null
+  const note = a.note?.replace(/\s+/g, ' ').trim() || null
+  const measured = [a.baseDepthCm, a.summitDepthCm, a.newSnow24hCm, a.liftsOpen, a.liftsTotal].some((x) => x !== null)
+  if (!status && !measured && !note) return skip('Nothing reported')
+
+  const checked = `${a.source.checkedOn}T12:00:00.000Z`
+  const fetchedAt = checked < now ? checked : (canonicalInstant(now) ?? now)
+  const parsed: ParsedReport = {
+    localDate: a.observedOn,
+    reportedAt: null,
+    status,
+    snowfall: a.newSnow24hCm !== null ? [{ window: '24h', amountCm: a.newSnow24hCm, sourceText: null }] : [],
+    baseDepthCm: a.baseDepthCm,
+    baseDepthLocation: null,
+    summitDepthCm: a.summitDepthCm,
+    surfaceTags: [],
+    surfaceText: null,
+    groomingText: null,
+    groomedRuns: null,
+    snowmakingText: null,
+    openTrails: null,
+    totalTrails: null,
+    openLifts: a.liftsOpen,
+    totalLifts: a.liftsTotal,
+    openBeginnerTrails: null,
+    totalBeginnerTrails: null,
+    openAcres: null,
+    notes: note,
+  }
+  const n = normalizeReport(parsed)
+  const hash = reportContentHash(n)
+  const same = await db
+    .select({ id: operationalReports.id })
+    .from(operationalReports)
+    .where(
+      and(
+        eq(operationalReports.resortId, a.resortId),
+        eq(operationalReports.localDate, a.observedOn),
+        eq(operationalReports.kind, 'official'),
+        eq(operationalReports.contentHash, hash),
+      ),
+    )
+    .limit(1)
+  if (same[0]) return { outcome: 'unchanged', reportId: same[0].id, reason: null }
+
+  const prov = provenance({
+    kind: 'official',
+    provider: a.provider,
+    sourceUrl: a.source.url,
+    fetchedAt,
+    verification: researchVerification(a.source.verification),
+    note: RESEARCHED_REPORT_NOTE,
+  })
+  const revision = await nextRevision(db, a.resortId, a.observedOn, 'official')
+  const [row] = await db
+    .insert(operationalReports)
+    .values({ resortId: a.resortId, revision, kind: 'official', fetchedAt, contentHash: hash, prov, createdAt: fetchedAt, ...reportRowValues(n) })
+    .returning({ id: operationalReports.id })
+
+  if (status) {
+    await recordStatus(db, {
+      resortId: a.resortId,
+      status,
+      localDate: a.observedOn,
+      effectiveAt: statementTime(localTimeToInstant(a.observedOn, '12:00', a.timezone), fetchedAt),
+      prov,
+      note: `Found by catalog research for ${formatLocalDate(a.observedOn)} — confirm at source`,
+    })
+    if (status !== 'open') await applyStatusToSeason(db, { resortId: a.resortId, status, localDate: a.observedOn, prov, now })
+  }
+  return { outcome: 'inserted', reportId: row.id, reason: null }
 }
 
 /** Resort-local date "today" for a report entered now (helper for forms). */

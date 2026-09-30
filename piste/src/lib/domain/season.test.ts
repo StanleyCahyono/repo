@@ -9,6 +9,14 @@ describe('projectToSeason', () => {
   it('maps Feb 29 to Feb 28 in non-leap target years', () => {
     expect(projectToSeason('2024-02-29', '2026-27')).toBe('2027-02-28')
   })
+  it('keeps a Southern Hemisphere winter in one calendar year: 2026-27 is the 2027 winter', () => {
+    // A June opening and a July opening of the 2024 winter (2023-24) both land in 2027 — never split at 1 July.
+    expect(projectToSeason('2024-06-08', '2026-27', 'south')).toBe('2027-06-08')
+    expect(projectToSeason('2024-07-06', '2026-27', 'south')).toBe('2027-07-06')
+    expect(projectToSeason('2026-06-06', '2026-27', 'south')).toBe('2027-06-06')
+    // Northern Hemisphere projection of the same July date would be the season's first year.
+    expect(projectToSeason('2024-07-06', '2026-27')).toBe('2026-07-06')
+  })
 })
 
 describe('estimateOpeningWindow', () => {
@@ -36,6 +44,18 @@ describe('estimateOpeningWindow', () => {
   })
   it('returns null without history', () => {
     expect(estimateOpeningWindow([{ season: '2025-26', opened: null }], '2026-27')).toBeNull()
+  })
+  it('estimates a Southern Hemisphere opening in the winter of the season’s second year', () => {
+    const est = estimateOpeningWindow(
+      [
+        { season: '2025-26', opened: '2026-06-27' },
+        { season: '2024-25', opened: '2025-06-14' },
+        { season: '2023-24', opened: '2024-07-06' },
+      ],
+      '2026-27',
+      'south',
+    )
+    expect(est).toMatchObject({ from: '2027-06-14', to: '2027-07-06' })
   })
 })
 

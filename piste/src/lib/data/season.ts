@@ -26,7 +26,7 @@ import {
 } from '@/lib/domain/costs'
 import { allocate, formatMoney, money, sum, type Money } from '@/lib/domain/money'
 import { evaluateAccess, latestRule } from '@/lib/domain/passes'
-import { isLocalDate, seasonIdFor } from '@/lib/domain/time'
+import { hemisphereOf, isLocalDate, type SeasonOf } from '@/lib/domain/time'
 import type { SurfaceTag } from '@/lib/domain/types'
 import { groupBy, isLive, loadPassData, loadResortRows, seasonLabel, type DataCtx } from './core'
 import { ownedPassView, type OwnedPassView } from './passes'
@@ -149,7 +149,12 @@ function myShare(amountMinor: number, currency: string, basis: TripItemRow['cost
   return basis === 'shared' ? allocate(m, Math.max(1, partySize))[0] : m
 }
 
-function plannedFromTrips(trips: readonly TripRow[], items: readonly TripItemRow[], seasonId: string): { planned: PlannedCostInput[]; ideas: number; unpriced: number } {
+/**
+ * Planned costs from trip items in the season. An item at a resort (a resort day, ticket, lesson…) belongs to that
+ * resort's season for its date (`seasonOf`: a Southern Hemisphere winter is the calendar year's); other items follow
+ * the planning season's dates.
+ */
+function plannedFromTrips(trips: readonly TripRow[], items: readonly TripItemRow[], seasonId: string, seasonOf: SeasonOf): { planned: PlannedCostInput[]; ideas: number; unpriced: number } {
   const tripById = new Map(trips.map((t) => [t.id, t]))
   const planned: PlannedCostInput[] = []
   let ideas = 0
@@ -158,7 +163,7 @@ function plannedFromTrips(trips: readonly TripRow[], items: readonly TripItemRow
     const trip = tripById.get(i.tripId)
     if (!trip) continue
     const date = i.date ?? trip.startDate
-    if (!isLocalDate(date) || seasonIdFor(date) !== seasonId) continue
+    if (!isLocalDate(date) || seasonOf(i.refId, date) !== seasonId) continue
     if (i.status === 'idea') {
       ideas += 1
       continue
@@ -177,6 +182,7 @@ function plannedFromTrips(trips: readonly TripRow[], items: readonly TripItemRow
       date,
       passOwnershipId: typeof d.passOwnershipId === 'number' ? d.passOwnershipId : null,
       passCovered: d.passCovered === true,
+      resortId: i.refId,
     })
   }
   return { planned, ideas, unpriced }
@@ -186,7 +192,6 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
   const { db, now, today, prefs } = ctx
   const live = isLive(ctx)
   const seasonId = prefs.activeSeasonId
-  const inSeason = (d: string | null | undefined) => !!d && isLocalDate(d) && seasonIdFor(d) === seasonId
 
   const [resorts, pass, dayLogs, expenseRows, trips, skills, lessonRows, ratings, fx] = await Promise.all([
     loadResortRows(ctx, null),
@@ -200,8 +205,11 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
     db.select().from(s.fxRates).where(live ? sql`${s.fxRates.kind} <> 'demo'` : undefined),
   ])
   const tripIds = trips.map((t) => t.id)
+  // A day at a resort belongs to that resort's season (a Southern Hemisphere winter — June–October 2027 — is 2026–27).
+  const seasonOf = pass.seasonOf
+  const atResortInSeason = (resortId: string, d: string | null | undefined) => !!d && isLocalDate(d) && seasonOf(resortId, d) === seasonId
   const mine = pass.owned.filter((o) => o.ownership.holder === 'me')
-  const usageMine = mine.flatMap((o) => o.usage.filter((u) => inSeason(u.date)).map((u) => ({ ...u, ownershipId: o.ownership.id, productName: o.product.name })))
+  const usageMine = mine.flatMap((o) => o.usage.filter((u) => atResortInSeason(u.resortId, u.date)).map((u) => ({ ...u, ownershipId: o.ownership.id, productName: o.product.name })))
   const usedResortIds = [...new Set(usageMine.map((u) => u.resortId))]
   const [tripItems, allTrips, liftPrices] = await Promise.all([
     tripIds.length ? db.select().from(s.tripItems).where(inArray(s.tripItems.tripId, tripIds)) : Promise.resolve([] as TripItemRow[]),
@@ -228,7 +236,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
   const passDayAt = new Map(usageMine.map((u) => [`${u.resortId}|${u.date}`, { ownershipId: u.ownershipId, productName: u.productName }]))
 
   // --- Ski days --------------------------------------------------------------------------------------------------
-  const seasonLogs = dayLogs.filter((d) => inSeason(d.date))
+  const seasonLogs = dayLogs.filter((d) => atResortInSeason(d.resortId, d.date))
   const skiDays: SkiDayView[] = [...seasonLogs]
     .sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id)
     .map((d) => ({
@@ -289,7 +297,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
     tripId: e.tripId,
     passOwnershipId: e.passOwnershipId,
   }))
-  const { planned, ideas, unpriced } = plannedFromTrips(trips, tripItems, seasonId)
+  const { planned, ideas, unpriced } = plannedFromTrips(trips, tripItems, seasonId, seasonOf)
   const passes: OwnedPassInput[] = mine.map((o) => ({
     ownershipId: o.ownership.id,
     productName: o.product.name,
@@ -297,11 +305,16 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
     usage: o.usage,
   }))
   const liftBy = groupBy(liftPrices, (p) => p.resortId ?? p.subjectId)
-  const ticketValues = usageMine.map((u) => ({ resortId: u.resortId, date: u.date, ticket: liftTicketFor(liftBy.get(u.resortId) ?? [], u.resortId, u.date, { now, today }).price }))
+  const ticketValues = usageMine.map((u) => {
+    const r = byId.get(u.resortId)
+    const ticket = liftTicketFor(liftBy.get(u.resortId) ?? [], u.resortId, u.date, { now, today, country: r ? r.country : null, hemisphere: hemisphereOf(r?.lat) }).price
+    return { resortId: u.resortId, date: u.date, ticket }
+  })
   const budget = computeSeasonBudget({
     currency: prefs.currency,
     rates: fx,
     seasonId,
+    seasonOf,
     expenses,
     planned,
     passes,
@@ -320,7 +333,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
   // A priced lift ticket planned on a day my pass covers is real cash only if I buy a ticket anyway: flag it.
   const rulesBy = groupBy(pass.rules, (r) => r.productId)
   for (const i of tripItems) {
-    if (normalizeCategory(i.type) !== 'lift' || i.costMinor == null || !i.refId || !i.date || !inSeason(i.date) || i.status === 'idea') continue
+    if (normalizeCategory(i.type) !== 'lift' || i.costMinor == null || !i.refId || !i.date || !atResortInSeason(i.refId, i.date) || i.status === 'idea') continue
     const d = i.details ?? {}
     if (d.passCovered === true || typeof d.passOwnershipId === 'number') continue
     const covering = mine.find((o) =>
@@ -332,6 +345,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
         usage: o.usage,
         poolRules: rulesBy.get(o.product.id) ?? [],
         today,
+        seasonOf,
       }).canSki,
     )
     if (covering) budgetNotes.push(`"${i.title}" (${i.date}, ${name(i.refId)}) is a planned lift ticket on a day your ${covering.product.name} covers — remove it if you will use the pass.`)
@@ -344,12 +358,12 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
   const seasonPasses: SeasonPassView[] = [...pass.owned]
     .sort((a, b) => Number(b.ownership.holder === 'me') - Number(a.ownership.holder === 'me') || a.ownership.id - b.ownership.id)
     .map((o) => ({
-      ...ownedPassView(o, pass.rules, shortNames, famName.get(o.product.familyId) ?? o.product.familyId),
+      ...ownedPassView(o, pass.rules, shortNames, famName.get(o.product.familyId) ?? o.product.familyId, seasonOf),
       value: o.ownership.holder === 'me' ? (budget.passes.find((p) => p.ownershipId === o.ownership.id) ?? null) : null,
     }))
 
   // --- Skills and lessons ----------------------------------------------------------------------------------------
-  const seasonLessons = lessonRows.filter((l) => !l.date || inSeason(l.date))
+  const seasonLessons = lessonRows.filter((l) => !l.date || atResortInSeason(l.resortId, l.date))
   const skillViews: SkillView[] = [...skills]
     .sort((a, b) => a.sortOrder - b.sortOrder || a.id - b.id)
     .map((k) => {

@@ -9,14 +9,15 @@ import type {
   FxProvider,
   LinkCheckResult,
   ResortReportProvider,
+  SkiAreaProvider,
   WeatherProvider,
 } from '@/lib/providers/types'
 
-export const JOB_NAMES = ['weather', 'nws-alerts', 'reports', 'status', 'assessments', 'alerts', 'links', 'fx', 'prune'] as const
+export const JOB_NAMES = ['weather', 'nws-alerts', 'reports', 'osm', 'status', 'assessments', 'alerts', 'links', 'fx', 'prune'] as const
 export type JobName = (typeof JOB_NAMES)[number]
 
 /** Jobs that call external sources (never run against the demo database). */
-export const EXTERNAL_JOBS: readonly JobName[] = ['weather', 'nws-alerts', 'reports', 'links', 'fx']
+export const EXTERNAL_JOBS: readonly JobName[] = ['weather', 'nws-alerts', 'reports', 'osm', 'links', 'fx']
 
 export type Trigger = 'schedule' | 'manual' | 'startup'
 
@@ -28,6 +29,8 @@ export interface JobDeps {
   alertsProvider: AlertsProvider | null
   fxProvider: FxProvider | null
   reportProviders: readonly ResortReportProvider[]
+  /** OpenStreetMap lifts and runs (job 'osm'); null when turned off. */
+  osmProvider: SkiAreaProvider | null
   checkLink: ((url: string) => Promise<LinkCheckResult>) | null
   /** True when the database is the demo database: derived rows are kind 'demo' and nothing external is fetched. */
   demo: boolean
@@ -65,6 +68,7 @@ export function emptyDeps(overrides: Partial<JobDeps> = {}): JobDeps {
     alertsProvider: null,
     fxProvider: null,
     reportProviders: [],
+    osmProvider: null,
     checkLink: null,
     demo: false,
     ...overrides,

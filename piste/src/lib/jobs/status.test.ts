@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { openingDateHistory, resortSeasons, statusEvents } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
+import { openingDateHistory, resortSeasons, seasons, statusEvents } from '@/lib/db/schema'
 import { provenance } from '@/lib/domain/types'
 import { refreshReports } from './reports'
-import { deriveSeasonStatus, deriveStatuses, latestStatusEvent, recordStatus, updateSeasonDates } from './status'
+import { applyStatusToSeason, deriveSeasonStatus, deriveStatuses, latestStatusEvent, recordStatus, updateSeasonDates } from './status'
 import { addResort, addSeason, deps, fakeReports, parsedReport, reportResult, testDb } from './test-helpers'
 
 const official = provenance({ kind: 'official', provider: 'alta.com' })
@@ -116,5 +117,69 @@ describe('announced opening dates', () => {
     const [season] = await db.select().from(resortSeasons)
     expect(season.announcedOpening).toBe('2026-11-27')
     expect(season.announcedOpeningProv?.sourceUrl).toBe('https://www.alta.com/news')
+  })
+})
+
+describe('status filing by hemisphere', () => {
+  const at = (d: string) => `${d}T02:00:00.000Z`
+  const seasonsOf = async (db: Awaited<ReturnType<typeof testDb>>, id: string) =>
+    (await db.select().from(resortSeasons).where(eq(resortSeasons.resortId, id))).map((r) => [r.seasonId, r.actualOpening, r.actualClosing]).sort()
+
+  it('files a Southern Hemisphere winter under one season across 1 July, creating the season rows it needs', async () => {
+    const db = await testDb()
+    await addResort(db, { id: 'thredbo', timezone: 'Australia/Sydney', lat: -36.5048, lon: 148.3, country: 'AU' })
+    // Opens in June 2026, reported open in August, closes in September: all of it is the 2026 winter = 2025-26.
+    expect(await applyStatusToSeason(db, { resortId: 'thredbo', status: 'open', localDate: '2026-06-06', prov: official, now: at('2026-06-06') })).toEqual(['actualOpening'])
+    expect(await applyStatusToSeason(db, { resortId: 'thredbo', status: 'open', localDate: '2026-08-01', prov: official, now: at('2026-08-01') })).toEqual([])
+    expect(await applyStatusToSeason(db, { resortId: 'thredbo', status: 'closed-for-season', localDate: '2026-09-21', prov: official, now: at('2026-09-21') })).toEqual(['actualClosing'])
+    expect(await seasonsOf(db, 'thredbo')).toEqual([['2025-26', '2026-06-06', '2026-09-21']])
+    const [row] = await db.select().from(seasons).where(eq(seasons.id, '2025-26'))
+    expect(row).toMatchObject({ id: '2025-26', label: '2025–26' })
+    // A northern resort splits the same dates at 1 July: the June opening is 2025-26, the August one 2026-27.
+    await addResort(db, { id: 'alta' })
+    await applyStatusToSeason(db, { resortId: 'alta', status: 'open', localDate: '2026-06-06', prov: official, now: at('2026-06-06') })
+    await applyStatusToSeason(db, { resortId: 'alta', status: 'open', localDate: '2026-08-01', prov: official, now: at('2026-08-01') })
+    expect(await seasonsOf(db, 'alta')).toEqual([
+      ['2025-26', '2026-06-06', null],
+      ['2026-27', '2026-08-01', null],
+    ])
+  })
+
+  it('starts a new Southern Hemisphere season on 1 January', async () => {
+    const db = await testDb()
+    await addResort(db, { id: 'mt-hutt', timezone: 'Pacific/Auckland', lat: -43.471, lon: 171.53, country: 'NZ' })
+    await applyStatusToSeason(db, { resortId: 'mt-hutt', status: 'open', localDate: '2026-12-31', prov: official, now: at('2026-12-31') })
+    await applyStatusToSeason(db, { resortId: 'mt-hutt', status: 'open', localDate: '2027-01-01', prov: official, now: at('2027-01-01') })
+    expect(await seasonsOf(db, 'mt-hutt')).toEqual([
+      ['2025-26', '2026-12-31', null],
+      ['2026-27', '2027-01-01', null],
+    ])
+    // The hemisphere can be passed explicitly (no lookup).
+    await addResort(db, { id: 'cardrona', timezone: 'Pacific/Auckland', lat: -44.875, lon: 168.95, country: 'NZ' })
+    await applyStatusToSeason(db, { resortId: 'cardrona', status: 'open', localDate: '2027-07-10', prov: official, now: at('2027-07-10'), hemisphere: 'south' })
+    expect(await seasonsOf(db, 'cardrona')).toEqual([['2026-27', '2027-07-10', null]])
+  })
+
+  it('derives statuses from the resort’s own season: a September Southern Hemisphere day is not in next winter’s preseason', async () => {
+    // Season 2026-27 at Thredbo is the 2027 winter; its announced June 2027 opening says nothing about September 2026.
+    const next = { announcedOpening: '2027-06-12', actualOpening: null, actualClosing: null }
+    const closedSept = { status: 'closed-for-season' as const, localDate: '2026-09-21', prov: official }
+    // Same season (2025-26) as today → an official statement of this winter is not superseded.
+    expect(deriveSeasonStatus(null, '2026-09-30', closedSept, 'south')).toBeNull()
+    // In January the new southern season has begun: last September's closure no longer blocks "not yet open".
+    expect(deriveSeasonStatus(next, '2027-01-05', closedSept, 'south')?.status).toBe('not-yet-open')
+    // Read as northern, September and January would be the same season and the closure would stand.
+    expect(deriveSeasonStatus(next, '2027-01-05', closedSept, 'north')).toBeNull()
+
+    const db = await testDb()
+    await addResort(db, { id: 'thredbo', timezone: 'Australia/Sydney', lat: -36.5048, lon: 148.3, country: 'AU' })
+    await addSeason(db, 'thredbo', { announcedOpening: '2027-06-12' })
+    await recordStatus(db, { resortId: 'thredbo', status: 'open', localDate: '2026-09-12', effectiveAt: '2026-09-11T22:00:00.000Z', prov: official })
+    // 30 Sep 2026 in Sydney: the 2027 winter's announced opening must not turn today's winter into "not yet open".
+    await deriveStatuses({ db, now: '2026-09-30T02:00:00.000Z', deps: deps(), target: null, trigger: 'schedule' })
+    expect((await latestStatusEvent(db, 'thredbo'))?.status).toBe('open')
+    // In January (2027 winter's season) the announced opening applies.
+    await deriveStatuses({ db, now: '2027-01-05T02:00:00.000Z', deps: deps(), target: null, trigger: 'schedule' })
+    expect((await latestStatusEvent(db, 'thredbo'))).toMatchObject({ status: 'not-yet-open', localDate: '2027-01-05' })
   })
 })

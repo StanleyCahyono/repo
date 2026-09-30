@@ -50,6 +50,18 @@ describe('fetchWithPolicy: timeouts and retries', () => {
     expect(h.sleeps).toEqual([])
   })
 
+  it('a 503 asking for a long wait is reported as rate-limited (back off), with the wait stated', async () => {
+    const h = fakeHttp(() => new Response('maintenance', { status: 503, headers: { 'retry-after': '600' } }))
+    const r = await h.client.request('https://api.example.org/x', { retries: 3 })
+    expect(r.ok).toBe(false)
+    if (r.ok) return
+    expect(r.errorKind).toBe('rate-limited')
+    expect(r.error).toMatch(/HTTP 503.*retry after 600 s, longer than the 30 s this call waits/)
+    expect(r.fetch.error).toBe(r.error)
+    expect(h.calls).toHaveLength(1)
+    expect(h.sleeps).toEqual([])
+  })
+
   it('retries 503 (with Retry-After) but not 404', async () => {
     let n = 0
     const h = fakeHttp(() => (n++ < 1 ? new Response('', { status: 503, headers: { 'retry-after': '1' } }) : text('ok')))

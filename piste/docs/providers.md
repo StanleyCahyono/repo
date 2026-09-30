@@ -29,6 +29,8 @@ What each status means:
 | Greek Peak conditions page | Trail, lift and beginner-trail counts, snowfall windows, base depth, surface, grooming, snowmaking, status, report time | None | **Unverified parser** | `reports/greek-peak.ts` |
 | Alta snow report | Snowfall windows (24 h, storm, season), base depth, lift counts, surface, report time | None | **Unverified parser, unverified URL** | `reports/alta.ts` |
 | Other resorts' official reports | — | — | Manual: report entry plus official links | — |
+| OpenStreetMap lifts & runs (Overpass API) | Community-mapped lift and run lists: lift names, types, mapped lengths, capacity, seats, ride time; run names, difficulty, grooming, mapped lengths. Never live open/closed status | None. Identified by User-Agent (`PISTE_CONTACT`) | Live (weekly for favourites and upcoming trips, on demand for any resort) | `osm/overpass.ts` |
+| Live lift status pages | The resort's own live lift/run status, **as a link only** (`links.liftStatus`). No public source a browser can read publishes it, so Piste never shows per-lift open/closed | — | Manual (link) | — |
 | Frankfurter (ECB reference rates) | Daily FX reference rates as decimal strings | None | Live | `fx/frankfurter.ts` |
 | Duffel | On-demand flight offers (amount, currency, expiry, segments, marketing carrier and flight number) | `DUFFEL_ACCESS_TOKEN` | Needs credentials | `flights/duffel.ts` |
 | Google Flights, KAYAK | Prefilled **search links** only. Piste reads no fares or schedules from them | None | Manual (links) | `links/builders.ts` |
@@ -54,8 +56,10 @@ includes credential values.
   - Retried: timeouts, network errors, 408, 425, 429 and 5xx (except 501 and 505).
   - Not retried: other 4xx errors and parse errors.
 - **Retry-After.** On 429 or 503, the `Retry-After` header is honoured, in either seconds or HTTP-date form. If the
-  server asks for more than `maxRetryAfterMs` (default 30 s), the call returns `rate-limited` with
-  `retryAfterMs`. The scheduler retries later, and no job blocks for minutes.
+  server asks for more than `maxRetryAfterMs` (default 30 s), the call returns `rate-limited` (for a 503 too) with
+  `retryAfterMs` and the requested wait in the error text, without retrying. The scheduler retries later, and no
+  job blocks for minutes. The weather job stops calling a provider that answered `rate-limited` for the rest of
+  its pass (see `docs/scheduler.md`).
 - **Identification.** Every request sends
   `User-Agent: Piste/0.1 (+personal ski planner; contact: $PISTE_CONTACT)`. The contact is sanitised, and reads
   `unset` when the variable is empty. api.weather.gov requires clients to identify themselves.
@@ -66,6 +70,7 @@ includes credential values.
   | api.weather.gov | 1 s |
   | api.open-meteo.com | 200 ms |
   | api.frankfurter.app, api.duffel.com | 500 ms |
+  | overpass-api.de | 2 s |
   | resort sites | 3 s |
 - **Cache.** A small in-memory TTL cache holds successful GETs only. A cache hit keeps the **original**
   `fetchedAt` and is marked `fromCache`. Serving from cache therefore never counts as a new observation, and
@@ -379,6 +384,52 @@ Keep the synthetic "changed layout" fixtures. They prove that failures stay loud
 Write a `LabelReportConfig` like the ones in `greek-peak.ts` and `alta.ts`, add it to `reports/index.ts`, and add
 fixtures and tests.
 
+## OpenStreetMap lifts & runs (`osm/overpass.ts`)
+
+The "full list" of a resort's lifts and runs, as mapped by OpenStreetMap contributors (data © OpenStreetMap
+contributors, ODbL; the attribution is shown with every list). Community-mapped: it can be incomplete or out of date,
+and it never says whether a lift or run is open today. The resort page says so once and links the resort's own live
+lift status page when the catalog has one (`links.liftStatus`) — Piste cannot read it.
+
+- **Endpoint:** `POST https://overpass-api.de/api/interpreter`, body `data=<Overpass QL>` (form-encoded, `Accept:
+  application/json`). That is a CORS "simple" request, and the service answers `Access-Control-Allow-Origin: *`, so
+  the single-file build calls it from `file://` too.
+- **Finding the ski area** (two small requests, a third when needed):
+  1. `landuse=winter_sports` ways/relations within 2.5 km of the line from Piste's base point to its summit point
+     (`around` with both points), `out tags bb` (names and bounds).
+  2. The resort's own ones are kept: names sharing a distinctive word with the resort's name or short name (generic
+     words such as "ski", "mountain", "resort" do not count), plus unnamed ones whose bounds hold a weather point;
+     else those whose bounds hold a weather point; else the nearest. So Snowbird's area, whose bounds hold Alta's base
+     point, is not read as part of Alta. They become areas (`map_to_area`), and `aerialway` ways (cable_car, gondola,
+     mixed_lift, chair_lift, drag_lift, t-bar, j-bar, platter, rope_tow, magic_carpet), `railway=funicular` ways and
+     `piste:type=downhill` ways (`out tags geom`) and relations (`out body geom`) inside are read.
+  3. Fallback, a bounding box: when nothing is found inside (the area is not in Overpass' area index), the chosen
+     ski areas' bounds plus 300 m; when no ski area is mapped nearby, the weather points plus 1.5 km. A box can take
+     in a neighbouring area's lifts; the extract records the method and the page says so.
+- **Parsing:** lengths are summed along the returned geometry (haversine, whole metres; map distance, so steep lines
+  are a little longer on the ground), then the geometry is dropped. Capacity (`aerialway:capacity`, "2400", "2,400",
+  "2.400" or "2 400"), seats (`aerialway:occupancy`) and ride time (`aerialway:duration`: minutes, `mm:ss`,
+  `h:mm:ss` or ISO `PT…`) are read when valid, else unknown. Disused, abandoned and demolished lifts and runs are left
+  out; so are stations, zip lines and goods lifts. Named piste ways are grouped into runs by name/ref and
+  difficulty; a route relation is one run (its unnamed member ways, and members of the same name, are not listed
+  again; with no difficulty of its own it takes its members' only when they all state the same); unnamed ways are
+  counted per difficulty as sections, never as runs; pistes mapped only as outlines are counted, not listed.
+- **Difficulty** is shown in the resort's convention, as text plus a shape (`domain/lifts.ts`): US, Canada,
+  Australia, New Zealand — green circle (novice, easy), blue square, black diamond, double black diamond; Japan —
+  green, red, black; elsewhere (Europe) — green (novice), blue, red, black, then "freeride / itinerary" (expert and
+  freeride). A run without `piste:difficulty` is "difficulty not mapped", never guessed.
+- **Politeness:** per-host spacing of 2 s, at most one retry (5 s backoff), `Retry-After` honoured up to 30 s. After
+  HTTP 429/504, a longer `Retry-After`, or a server-side "runtime error" remark (which arrives as HTTP 200 and is
+  treated as a failure, never as an empty ski area), nothing is requested for a minute; a load asked for meanwhile
+  fails as `rate-limited` without a request, and the job leaves the remaining resorts for their next turn.
+- **Storage:** one `source_records` row per load (adapter `osm-overpass`, the endpoint as URL): the compact extract
+  `{ skiArea, requests }` on success (no geometry; about 10–60 KB for a large area), the error on failure. The resort
+  page reads the newest successful row, so a failed load never replaces the last good list; retention keeps the
+  newest row and the newest successful row per adapter/resort/URL whatever their age. No schema change.
+- **Provenance:** kind `manual` (community-mapped), provider "OpenStreetMap contributors (ODbL)", verification
+  `unverified`, `publishedAt` = the server's OpenStreetMap data timestamp, source URL = the ski area on
+  openstreetmap.org. `capabilities.missing` always lists live lift and run status.
+
 ## Frankfurter FX (`fx/frankfurter.ts`)
 
 - **Request:** `GET https://api.frankfurter.app/latest?from=USD&to=CAD,EUR`. No key is needed.
@@ -468,7 +519,8 @@ travel times from them. Piste never scrapes Google Flights.
 ## Registry (`registry.ts`)
 
 - `weatherProviders` lists Open-Meteo (primary) first and NWS grid (secondary, US only) second.
-- `alertsProvider` is NWS, `fxProvider` is Frankfurter and `travelProvider` is Duffel.
+- `alertsProvider` is NWS, `fxProvider` is Frankfurter, `travelProvider` is Duffel and `skiAreaProvider` is the
+  OpenStreetMap Overpass adapter (connector role `lifts-runs`, job `osm`).
 - `reportProviders` and `getReportProvider(resortId)` are re-exported from `reports/index.ts`.
 - `weatherProvidersFor(req)` returns the enabled providers that support a point.
 - `providerStatus(env)` returns the connector states described above.
@@ -489,6 +541,8 @@ These optional fields were added to `types.ts`, and nothing existing was changed
 Every adapter is tested with a scripted fake `fetch` (`src/lib/providers/test-helpers.ts`), with injectable sleep,
 random and clocks. No test touches the network.
 
-Fixtures under `weather/__fixtures__` and `flights/__fixtures__` are written in the documented response formats.
+Fixtures under `weather/__fixtures__`, `flights/__fixtures__` and `osm/__fixtures__` are written in the documented
+response formats (the Overpass ones by hand: a North American resort next to a neighbour, and an Alps resort whose
+ski area is not in the area index).
 Report fixtures under `reports/__fixtures__` are **synthetic**, and each is marked as such in the file. They
 include "changed layout" pages that must produce `schema-changed`.

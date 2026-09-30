@@ -214,7 +214,8 @@ export async function generateDemoData(db: Db, opts: GenerateOptions = {}): Prom
 
   // 1. Catalog (the same researched facts as live), preferences, tracking start.
   const catalog = loadCatalog()
-  await seedCatalog(db, catalog, DEMO_NOW)
+  // Researched reports are real-world statements: the demo database holds simulated reports only.
+  await seedCatalog(db, catalog, DEMO_NOW, { recentReports: false })
   const prefs = { ...defaultPreferences(DEMO_NOW), onboardingDone: true }
   await db.insert(s.userPreferences).values(prefs).onConflictDoNothing()
   await db.update(s.userPreferences).set({ onboardingDone: true }).where(eq(s.userPreferences.id, 1))

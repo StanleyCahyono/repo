@@ -27,7 +27,7 @@
       "url": "https://goremountain.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit ~3,600 ft and vertical ~2,537 ft as commonly advertised; base derived as summit minus vertical (the low point is at the North Creek Ski Bowl; the main base lodge sits higher)"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit ~3,600 ft and vertical ~2,537 ft as commonly advertised; base derived as summit minus vertical (the low point is at the North Creek Ski Bowl; the main base lodge sits higher) The 773 m vertical matches the 2,537 ft found in a 2026-09-30 search summary."
     }
   },
   "weatherPoints": [
@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 107,
+    "lifts": 14,
+    "skiableAcres": 439,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
-    "terrainParks": null,
-    "season": null,
-    "source": null
+    "terrainParks": 7,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 1,
+      "cableCars": null,
+      "chairlifts": 9,
+      "surfaceLifts": 3,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://en.wikipedia.org/wiki/Gore_Mountain_(ski_resort)",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30): 107 trails plus 27 glades, 7 freestyle areas (stored as terrain parks) and 11 cross-country/snowshoe loops; 439 skiable acres; 2,537 ft vertical. Lift system stated as 14 total: 1 eight-passenger gondola, 3 high-speed quads, 5 quads, 1 triple and 3 surface lifts — these sum to 13."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -93,18 +108,40 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Gore date itself and past actual opening dates were not captured."
+    "notes": "OnTheSnow projects Nov 20, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Gore date itself and past actual opening dates were not captured."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day lift ticket",
+      "category": "adult",
+      "amount": 124,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow listing: $124 weekday and weekend. The search summary called it 2026-27 but said the listing was last updated Oct 2025, so it may be a 2025-26 rate. ORDA uses date-based pricing; confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://goremountain.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://goremountain.com/mountain/snow-report",
     "hours": null,
     "tickets": null,
-    "seasonPass": null,
+    "seasonPass": "https://goremountain.com/seasonpasses/",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,7 +151,8 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": null
   },
   "moreLinks": [
     {
@@ -136,6 +174,14 @@
     {
       "label": "Snow Pass partner resorts 2026-27 (SnowBrains, third-party)",
       "url": "https://snowbrains.com/snow-pass-partner-resorts-2026-27/"
+    },
+    {
+      "label": "Frequent Skier Cards (official)",
+      "url": "https://goremountain.com/tickets-passes/frequent-skier-cards/"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
     }
   ],
   "travel": {
@@ -175,21 +221,23 @@
   "photo": null,
   "research": {
     "method": "web-search",
-    "date": "2026-09-28",
+    "date": "2026-09-30",
     "openQuestions": [
       "Confirm 2026-27 announced opening and closing dates (ORDA announced 2025-26 dates on 2025-11-21; 2026-27 dates likely around November 2026). Also capture the actual 2024-25 and 2025-26 opening dates.",
       "Confirm 2026-27 pass access: SKI3 terms and prices, Frequent Skier Card terms, the Snow Pass partner benefit, and whether Gore has any Mountain Collective, Ikon, Epic or Indy access (only Whiteface was named in the ORDA Mountain Collective release).",
       "Resolve whether the listed SKI3 blackout dates apply to the pass itself or only to the Mountain Collective discount perk.",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window).",
+      "Confirm 2026-27 adult day-ticket prices: OnTheSnow lists $124 (ages 20-64, weekday and weekend), but the listing was last updated Oct 2025.",
       "Confirm daily lift hours, and whether the North Creek Ski Bowl offers night skiing and/or tubing in 2026-27.",
-      "Confirm official deep links on goremountain.com (trail map, snow report, tickets, lessons, webcams, parking).",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), learning area, childcare and on-mountain lodging.",
+      "Confirm official deep links on goremountain.com (trail map, lift status, tickets, lessons, webcams, parking); the snow-report link follows the shared ORDA site pattern (as on belleayre.com) and should be checked.",
+      "Resolve the lift inventory (14 stated vs 13 by type) and confirm snowmaking %, learning area, childcare and on-mountain lodging.",
       "Confirm elevations (base here is derived) and base/summit coordinates (approximations).",
       "Get a sourced drive time from Ithaca (current value is a Piste estimate)."
     ],
     "conflicts": [
-      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research)."
+      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research).",
+      "terrain.liftsByType: 14 lifts stated, but the listed types (1 gondola, 3 high-speed quads, 5 quads, 1 triple, 3 surface lifts) sum to 13. Resolution: kept 14 and the listed types.",
+      "prices: the $124 adult ticket was labelled 2026-27 in the search summary, but the OnTheSnow listing was last updated Oct 2025. Resolution: season left null."
     ],
-    "confidenceNotes": "Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and perks, Frequent Skier Card, Snow Pass partner listing and the 2025-11-21 opening-dates release — links/notes only; pass rules belong in passes.json. Coordinates, elevations (base derived), homepage and lessons/rentals are Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
+    "confidenceNotes": "Updated 2026-09-30: terrain (439 acres, 107 trails + 27 glades, 7 freestyle areas, 14 lifts incl. an eight-passenger gondola; types sum to 13) and a $124 adult ticket of uncertain season come from search summaries; the snow-report link is inferred from the shared ORDA site pattern. Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and perks, Frequent Skier Card, Snow Pass partner listing and the 2025-11-21 opening-dates release — links/notes only; pass rules belong in passes.json. Coordinates, elevations (base derived), homepage and lessons/rentals are Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
   }
 }

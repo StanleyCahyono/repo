@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "trails": 140,
+    "lifts": 14,
+    "skiableAcres": 2500,
+    "beginnerPct": 8,
+    "intermediatePct": 26,
+    "advancedPct": 66,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": null,
+      "cableCars": 1,
+      "chairlifts": 10,
+      "surfaceLifts": null,
+      "other": 3
+    },
+    "liftCapacityPerHour": null,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.onthesnow.com/utah/snowbird/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: OnTheSnow overview, snowbird.com, Ski Utah family guide, displays.snowbird.com): 2,500 skiable acres, 14 lifts (1 aerial tram, 10 chairlifts, 3 conveyor lifts — conveyors counted as \"other\"), 140+ trails (stored as 140), 3,000 vertical ft (rounded marketing figure; Piste stores 3,240 ft), 8% beginner / 26% intermediate / 66% advanced-expert (advanced and expert combined in advancedPct). Season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-27",
+      "text": "Planned opening Nov. 27, 2026 (conditions permitting)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.sltrib.com/news/environment/2026/09/20/utah-ski-resort-2026-27-opening/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summaries of 2026-27 opening-date roundups (Salt Lake Tribune, 20 Sep 2026; Powder's Utah and Ikon opening-date articles; Unofficial Networks, 17 Sep 2026) agree on this date. Conditions permitting — confirm on the resort site."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -91,12 +111,46 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-07",
+        "closed": null,
+        "source": {
+          "url": "https://www.skiutah.com/blog/authors/yeti/utah-ski-resort-opening-dates/",
+          "verification": "search-summary",
+          "checkedOn": "2026-09-30",
+          "note": "Search summary: 2025-26 opening Dec. 7, 2025 (Ski Utah 2025-26 opening-dates list; may show dates revised after weather delays). Closing date was still \"TBD\" in the closing-date roundup summary."
+        }
+      }
+    ],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 27, 2026 per Utah and Ikon opening-date roundups (search summaries, 2026-09-30). No 2026-27 closing date was found (to be announced). History holds the Ski Utah-listed 2025-26 opening."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (window; online about 15% less)",
+      "category": "adult",
+      "amount": 215,
+      "amountMax": 238,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27: $238 window price; buying online gives a 15% discount ($215). Day type (peak or regular) not stated. An older undated OnTheSnow listing showed $194 for a weekday adult (13-64).",
+      "source": {
+        "url": "https://snowbrains.com/2026-27-lift-ticket-prices/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 lift-ticket price roundups (SnowBrains, TownLift, Unofficial Networks)."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.snowbird.com/",
     "trailMap": null,
@@ -114,9 +168,15 @@
     "events": null,
     "tourism": null,
     "avalanche": "https://utahavalanchecenter.org/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://displays.snowbird.com/lifts-trails/"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Alta-Bird season passes (Alta + Snowbird; official Alta page)",
+      "url": "https://www.alta.com/tickets-and-passes/alta-bird"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,19 +218,18 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing date (not announced as of 2026-09-30) and that Nov. 27, 2026 stays the planned opening.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days shared with Alta; Ikon Base \"5 total days\" with blackouts (whether shared with Alta is unclear); Mountain Collective 2 days.",
+      "Confirm 2026-27 day-ticket day types (is $238 the peak or regular window price?) and season-pass prices.",
+      "Capture the actual 2025-26 closing date and 2024-25 opening/closing dates.",
+      "Confirm official deep links on snowbird.com (snow report, trail map, tickets, lessons, rentals, webcams, parking); the lifts & trails status display is recorded.",
+      "Confirm the exact trail count (summary: 140+), whether any surface lifts exist besides the 3 conveyors, and terrain parks.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on snowbird.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: POWDR, owner since about 2014).",
-      "Confirm terrain stats (leads: ~2,500 acres including Mineral Basin, 140+ runs, the Aerial Tram plus about 10 chairlifts and the Peruvian Tunnel carpet), ability split, parks, snowmaking, night skiing, tubing and childcare.",
       "Confirm precise base and Hidden Peak coordinates and the tram-plaza elevation (weather points are approximate).",
-      "Pass leads from earlier seasons (unverified): Ikon Pass / Ikon Base days shared with Alta; Mountain Collective days counted separately from Alta; Snowbird season passes; Alta Snowbird combined pass and day ticket. Confirm every 2026-27 product, day count, blackout and reservation rule.",
       "Confirm Aerial Tram hours versus chairlift hours.",
       "Learning setup: confirm Chickadee / Baby Thunder, carpets and the ski-school name and lesson products.",
       "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives) and the official URL.",
@@ -179,7 +238,10 @@
       "Lodging: confirm resort-run slopeside lodging (leads: The Cliff Lodge, The Lodge at Snowbird, The Inn, Iron Blosam).",
       "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging, Chickadee learning area) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Vertical: a summary quotes \"3,000 vertical feet\" (rounded); Piste keeps the reference 3,240 ft (988 m).",
+      "Day ticket: 2026-27 roundup gives $238 window / $215 online; an undated OnTheSnow listing gives $194 weekday adult."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, 2025-26 opening, terrain stats, the 2026-27 window/online ticket price and the lift-status link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
   }
 }

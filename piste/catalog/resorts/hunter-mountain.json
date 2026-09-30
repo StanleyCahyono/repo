@@ -27,7 +27,7 @@
       "url": "https://www.huntermtn.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,600 ft, summit ~3,200 ft, vertical ~1,600 ft)"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,600 ft, summit ~3,200 ft, vertical ~1,600 ft) The ~1,600 ft vertical matches a 2026-09-30 search summary."
     }
   },
   "weatherPoints": [
@@ -49,19 +49,34 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 67,
+    "lifts": 13,
+    "skiableAcres": 320,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
-    "season": null,
-    "source": null
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": null,
+      "cableCars": null,
+      "chairlifts": 10,
+      "surfaceLifts": 2,
+      "other": null
+    },
+    "liftCapacityPerHour": null,
+    "season": "2025-26",
+    "source": {
+      "url": "https://www.huntermtn.com/the-mountain/about-the-mountain/mountain-info.aspx",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (2026-09-30), current published figures: 320 skiable acres, 67 trails, 13 lifts, 100% snowmaking, 1,600 ft vertical. Lift types from the same summary (page not isolated; may be an aggregator): 1 high-speed six-person chair, 2 quads, 2 triples, 5 doubles and 2 surface lifts — these sum to 12, one fewer than the stated 13."
+    }
   },
   "features": {
     "nightSkiing": null,
-    "snowmakingPct": null,
+    "snowmakingPct": 100,
     "lessons": true,
     "rentals": true,
     "onMountainLodging": true,
@@ -72,7 +87,7 @@
       "url": "https://www.huntermtn.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered' snowmakingPct (100%) from a 2026-09-30 search summary; the other flags remain reference data."
     }
   },
   "character": "A Catskills resort in the village of Hunter, operated by Vail Resorts. It is one of the larger ski areas within a few hours' drive of New York City, so weekends can be busy.",
@@ -93,15 +108,58 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 21, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Hunter's date — check the release (More links). Past opening dates were not captured, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, weekday",
+      "category": "adult",
+      "amount": 128,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Aggregator listing via search summary (\"weekday $97 child to $128 adult\"); season not stated. Hunter sells date-based tickets online. Confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, weekend",
+      "category": "adult",
+      "amount": 179,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Aggregator listing via search summary (\"weekend $136 child to $179 adult\"); season not stated. Confirm at source.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": null
+      }
+    }
+  ],
   "links": {
     "official": "https://www.huntermtn.com/",
-    "trailMap": null,
+    "trailMap": "https://www.huntermtn.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.huntermtn.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -114,9 +172,23 @@
     "events": null,
     "tourism": null,
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.huntermtn.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Mountain info (official)",
+      "url": "https://www.huntermtn.com/the-mountain/about-the-mountain/mountain-info.aspx"
+    },
+    {
+      "label": "OnTheSnow 2026/27 projected openings (New York)",
+      "url": "https://www.onthesnow.com/new-york/projected-openings"
+    },
+    {
+      "label": "Vail Resorts 2026/27 opening-dates release (18 Aug 2026)",
+      "url": "https://investors.vailresorts.com/news-releases/news-release-details/winter-about-show-vail-resorts-announces-202627-opening-dates"
+    }
+  ],
   "travel": {
     "driveFromIthaca": {
       "minutes": 210,
@@ -149,20 +221,23 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
+      "No resort-announced 2026-27 opening or closing date as of 2026-09-30 (OnTheSnow projects Nov 21, 2026; check the Vail Resorts 18 Aug 2026 release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm 2026-27 adult day-ticket prices: an aggregator summary gave $128 weekday / $179 weekend with no season stated.",
+      "Resolve the lift inventory: 13 lifts stated, but the listed types (1 six-pack, 2 quads, 2 triples, 5 doubles, 2 surface) sum to 12.",
+      "Confirm trail difficulty split, terrain parks, learning area, childcare, tubing and any night skiing.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the operator (Vail Resorts since its 2019 purchase of Peak Resorts — reference) and which 2026-27 Epic products include Hunter, with any holiday restrictions or reservation rules.",
-      "Confirm official deep links on huntermtn.com (snow report, trail map, tickets, lessons, webcams, parking).",
-      "Confirm terrain stats (trails, lifts, acres, snowmaking %), learning area, childcare, tubing and any night skiing.",
+      "Confirm that the snow-report, lift-status and trail-map links (standard Vail Resorts site pattern) resolve.",
       "Confirm elevations and base/summit coordinates (approximations).",
       "Check weekend ski-bus options from the NYC area, if relevant."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. Web research for this resort was cut short (search budget exhausted, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, slopeside lodging) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Drive and airport times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "terrain.liftsByType: 13 lifts stated, but the listed types (1 six-pack, 2 quads, 2 triples, 5 doubles, 2 surface lifts) sum to 12. Resolution: kept 13 and the listed types; one lift is unaccounted for."
+    ],
+    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries; page fetches blocked). Terrain totals (320 acres, 67 trails, 13 lifts), 100% snowmaking and the lift types (which sum to 12) are search-summary facts; the $128/$179 adult prices come from an aggregator with no season stated. Coordinates, elevations, operator and the lessons/rentals/lodging flags remain Piste reference data. Deep links follow the standard Vail site pattern. The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
   }
 }

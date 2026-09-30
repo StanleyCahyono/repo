@@ -1,0 +1,201 @@
+{
+  "id": "engelberg-titlis",
+  "name": "Engelberg-Titlis",
+  "shortName": "Engelberg",
+  "country": "CH",
+  "region": "Central Switzerland",
+  "stateProvince": "Obwalden",
+  "locality": "Engelberg",
+  "timezone": "Europe/Zurich",
+  "operator": "Bergbahnen Engelberg-Trübsee-Titlis AG (reference)",
+  "priority": 0,
+  "location": {
+    "lat": 46.82,
+    "lon": 8.403,
+    "source": {
+      "url": "https://www.titlis.ch/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Approximate Engelberg village"
+    }
+  },
+  "elevation": {
+    "baseM": 1000,
+    "summitM": 3020,
+    "verticalM": 2020,
+    "source": {
+      "url": "https://www.titlis.ch/en/activities/skiing",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: the TITLIS ski area spans from the summit station at 'over 3,000 m' down to Engelberg at 1,000 m. The exact top (3,020 m, Klein Titlis top station) is Piste reference data — confirm. Vertical derived as the difference."
+    }
+  },
+  "weatherPoints": [
+    {
+      "key": "base",
+      "label": "Engelberg village (approx.)",
+      "lat": 46.82,
+      "lon": 8.403,
+      "elevationM": 1000,
+      "approximate": true
+    },
+    {
+      "key": "summit",
+      "label": "Klein Titlis top station (approx.)",
+      "lat": 46.773,
+      "lon": 8.425,
+      "elevationM": 3020,
+      "approximate": true
+    }
+  ],
+  "terrain": {
+    "trails": null,
+    "lifts": 37,
+    "skiableAcres": null,
+    "beginnerPct": null,
+    "intermediatePct": null,
+    "advancedPct": null,
+    "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": 82,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
+    "season": null,
+    "source": {
+      "url": "https://www.titlis.ch/en/activities/skiing",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary: 82 km of piste including ski routes; 37 lifts (single-source figure — confirm). Lift types, capacity and difficulty split not found. Search summary did not tie this to one result; cited URL is the most likely source."
+    }
+  },
+  "features": {
+    "nightSkiing": null,
+    "snowmakingPct": null,
+    "lessons": true,
+    "rentals": true,
+    "onMountainLodging": null,
+    "tubing": null,
+    "childcare": null,
+    "beginnerArea": null,
+    "source": {
+      "url": "https://www.engelberg.ch/",
+      "verification": "unverified",
+      "checkedOn": "2026-09-30",
+      "note": "Piste reference data — confirm at source. Ski schools and rental shops operate in Engelberg; other features not on file"
+    }
+  },
+  "character": "Monastery village in Central Switzerland, about 35 km from Lucerne, below the Titlis glacier. The Titlis Rotair cable car climbs to Klein Titlis (about 3,020 m), and the area is known for long freeride descents (reference).",
+  "learning": "Reference note: ski schools operate in Engelberg. Confirm beginner areas (e.g. around Trübsee and Brunni — unverified).",
+  "season": {
+    "season": "2026-27",
+    "announcedOpening": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "announcedClosing": {
+      "date": null,
+      "text": null,
+      "announcedOn": null,
+      "source": null
+    },
+    "history": [],
+    "typicalText": "Titlis glacier often opens in October (projected 10 Oct 2026 — estimate, not an announcement)",
+    "notes": "No announced 2026-27 opening or closing found. A projected-openings listing (estimate) gives 10 Oct 2026 for the glacier."
+  },
+  "hours": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Engelberg-Titlis 1-day ski pass, adult (20–63)",
+      "category": "adult",
+      "amount": 69,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow-type listing via search summary: CHF 69 weekday and weekend; dynamic pricing applies. Season not stated — confirm.",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/central-switzerland/engelberg/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary did not tie this to one result; cited URL is the most likely source."
+      }
+    }
+  ],
+  "links": {
+    "official": "https://www.titlis.ch/",
+    "trailMap": null,
+    "interactiveMap": null,
+    "snowReport": null,
+    "hours": null,
+    "tickets": "https://www.titlis.ch/en/information/prices",
+    "seasonPass": null,
+    "lessons": null,
+    "rentals": null,
+    "webcams": null,
+    "parking": null,
+    "roadInfo": null,
+    "lodging": null,
+    "events": null,
+    "tourism": "https://www.engelberg.ch/",
+    "avalanche": "https://www.slf.ch/",
+    "openSkiMap": null,
+    "liftStatus": null
+  },
+  "moreLinks": [
+    {
+      "label": "Skiing on Titlis",
+      "url": "https://www.titlis.ch/en/activities/skiing"
+    },
+    {
+      "label": "Winter ski pass prices (Engelberg tourism)",
+      "url": "https://www.engelberg.ch/en/cable-cars/prices-winter/"
+    }
+  ],
+  "travel": {
+    "driveFromIthaca": null,
+    "airports": [
+      {
+        "iata": "ZRH",
+        "role": "both",
+        "minutes": 75,
+        "km": 100,
+        "basis": "Estimate from typical routing (A4/A14 to Lucerne, A2 to Stans, then up the Engelberg valley); not a routing-service result.",
+        "source": {
+          "url": null,
+          "verification": "unverified",
+          "checkedOn": "2026-09-30",
+          "note": "Piste estimate — confirm with a routing service"
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "name": "Zentralbahn from Lucerne",
+        "type": "train",
+        "url": "https://www.zentralbahn.ch/",
+        "notes": "Reference, confirm: direct trains Lucerne–Engelberg (about 45 minutes)."
+      }
+    ]
+  },
+  "recentReports": [],
+  "reportSource": null,
+  "photo": null,
+  "research": {
+    "method": "web-search",
+    "date": "2026-09-30",
+    "openQuestions": [
+      "Confirm the lift count (37, single source), lift types and capacity.",
+      "Announced 2026-27 opening (glacier) and closing dates.",
+      "Confirm the adult day price and season; find the live lift status page on titlis.ch."
+    ],
+    "conflicts": [],
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+  }
+}

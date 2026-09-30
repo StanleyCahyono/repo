@@ -54,6 +54,8 @@ export interface ResortLinks {
   tourism?: string | null
   avalanche?: string | null
   openSkiMap?: string | null
+  /** The resort's own live lift and run status page (Piste links to it; it cannot read it). */
+  liftStatus?: string | null
   /** Additional useful official/partner pages. */
   more?: { label: string; url: string }[]
 }
@@ -66,6 +68,19 @@ export interface WeatherPointDef {
   elevationM: number | null
 }
 
+/** Lift counts by type (catalog research); null = unknown. */
+export interface LiftsByType {
+  gondolas: number | null
+  cableCars: number | null
+  chairlifts: number | null
+  surfaceLifts: number | null
+  other: number | null
+}
+
+/**
+ * Terrain facts (JSON column). The fields marked optional were added later: rows seeded before them lack the keys, so
+ * read them with `?? null` (undefined means unknown, like null).
+ */
 export interface TerrainInfo {
   trails: number | null
   lifts: number | null
@@ -74,6 +89,13 @@ export interface TerrainInfo {
   intermediatePct: number | null
   advancedPct: number | null
   terrainParks: number | null
+  /** Expert (double black / freeride) share, where the resort publishes it separately. */
+  expertPct?: number | null
+  /** Marked pistes, km. */
+  pisteKm?: number | null
+  liftsByType?: LiftsByType | null
+  /** Uphill capacity, people per hour. */
+  liftCapacityPerHour?: number | null
   season: string | null
   prov: Provenance | null
 }

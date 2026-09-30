@@ -196,17 +196,22 @@ export async function pruneAll(ctx: JobContext, opts: PruneOptions = {}): Promis
   await step('source-records', async () => {
     const cutoff = daysBefore(now, opts.sourceRecordKeepDays ?? 30)
     const rows = await db
-      .select({ id: sourceRecords.id, adapter: sourceRecords.adapter, resortId: sourceRecords.resortId, url: sourceRecords.url, fetchedAt: sourceRecords.fetchedAt })
+      .select({ id: sourceRecords.id, adapter: sourceRecords.adapter, resortId: sourceRecords.resortId, url: sourceRecords.url, fetchedAt: sourceRecords.fetchedAt, ok: sourceRecords.ok })
       .from(sourceRecords)
       .orderBy(desc(sourceRecords.fetchedAt), desc(sourceRecords.id))
-    // The newest record of each adapter/resort/url is kept whatever its age, so Sources always shows the last state.
+    // The newest record of each adapter/resort/url is kept whatever its age, so Sources always shows the last state —
+    // and so is the newest SUCCESSFUL one: its extract is the last good data (a resort's OpenStreetMap lifts and runs
+    // are read from it), which no run of failures may prune away.
     const seen = new Set<string>()
+    const seenOk = new Set<string>()
     const doomed: number[] = []
     for (const r of rows) {
       const k = `${r.adapter}|${r.resortId ?? ''}|${r.url}`
       const newest = !seen.has(k)
+      const newestOk = r.ok && !seenOk.has(k)
       seen.add(k)
-      if (!newest && r.fetchedAt < cutoff) doomed.push(r.id)
+      if (r.ok) seenOk.add(k)
+      if (!newest && !newestOk && r.fetchedAt < cutoff) doomed.push(r.id)
     }
     for (const ids of chunk(doomed, 400)) await db.delete(sourceRecords).where(inArray(sourceRecords.id, ids))
     return doomed.length

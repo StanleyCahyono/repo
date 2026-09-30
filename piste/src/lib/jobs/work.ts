@@ -2,6 +2,7 @@
 import { evaluateAlerts } from './alerts'
 import { refreshAssessments } from './assessments'
 import { pruneAll, refreshFx, refreshLinks } from './maintenance'
+import { refreshOsm } from './osm'
 import { refreshReports } from './reports'
 import { deriveStatuses } from './status'
 import type { JobName, JobWork } from './types'
@@ -11,6 +12,7 @@ export const JOB_WORK: Record<JobName, JobWork> = {
   weather: (ctx) => refreshWeather(ctx),
   'nws-alerts': (ctx) => refreshOfficialAlerts(ctx),
   reports: (ctx) => refreshReports(ctx),
+  osm: (ctx) => refreshOsm(ctx),
   status: (ctx) => deriveStatuses(ctx),
   assessments: (ctx) => refreshAssessments(ctx),
   alerts: (ctx) => evaluateAlerts(ctx),

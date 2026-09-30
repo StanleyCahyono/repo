@@ -37,7 +37,7 @@ import type {
 } from '@/lib/db/rows'
 import { aggregateDay, assessDay, prepareSeries, CONDITIONS_CONFIG_V1 } from '@/lib/domain/conditions'
 import type { AssessDayInput, DayAssessment, OperationsEvidence, PersonalFeedback, PointWeather } from '@/lib/domain/conditions'
-import { addDays, dateRange, isoWeekday, localDateOf, seasonIdFor } from '@/lib/domain/time'
+import { addDays, dateRange, hemisphereOf, isoWeekday, localDateOf, seasonIdForHemisphere, type Hemisphere } from '@/lib/domain/time'
 import { SCORING_MODES, type ScoringMode, type UnitPrefs } from '@/lib/domain/types'
 import type { OfficialAlert } from '@/lib/providers/types'
 import { isPersonalReport } from './reports'
@@ -190,9 +190,12 @@ async function loadEvidence(db: Db, resort: ResortRow): Promise<ResortEvidence> 
   }
 }
 
-/** Published lift hours for a date: a dated exception wins over the weekly pattern; live statements over published. */
-export function liftHoursFor(schedules: readonly OperatingScheduleRow[], date: string): { opens: string; closes: string } | null {
-  const seasonId = seasonIdFor(date)
+/**
+ * Published lift hours for a date: a dated exception wins over the weekly pattern; live statements over published.
+ * Season-scoped schedules apply in the resort's own season for the date (`hemisphere`, default north).
+ */
+export function liftHoursFor(schedules: readonly OperatingScheduleRow[], date: string, hemisphere: Hemisphere = 'north'): { opens: string; closes: string } | null {
+  const seasonId = seasonIdForHemisphere(date, hemisphere)
   const applicable = schedules.filter((s) => !s.seasonId || s.seasonId === seasonId)
   const byNature = (a: OperatingScheduleRow, b: OperatingScheduleRow) => (a.nature === b.nature ? 0 : a.nature === 'live' ? -1 : 1)
   const exception = applicable.filter((s) => s.exceptionDate === date).sort(byNature)[0]
@@ -217,7 +220,9 @@ export interface BuildInputArgs {
 export function buildAssessInput(ev: ResortEvidence, a: BuildInputArgs): AssessDayInput {
   const { resort } = ev
   const tz = resort.timezone
-  const season = ev.seasons.find((s) => s.seasonId === seasonIdFor(a.date)) ?? null
+  // The resort's own season for the date: a Southern Hemisphere winter (June–October of year Y) is '(Y-1)-(YY)'.
+  const hemisphere = hemisphereOf(resort.lat)
+  const season = ev.seasons.find((s) => s.seasonId === seasonIdForHemisphere(a.date, hemisphere)) ?? null
   const event = [...ev.events].filter((e) => e.localDate <= a.date).pop() ?? null
   const report =
     [...ev.reports]
@@ -254,7 +259,7 @@ export function buildAssessInput(ev: ResortEvidence, a: BuildInputArgs): AssessD
     personalFeedback: ev.personal.filter((p) => p.date <= a.date),
     operations,
     alerts: ev.alerts,
-    operatingHours: liftHoursFor(ev.schedules, a.date),
+    operatingHours: liftHoursFor(ev.schedules, a.date, hemisphere),
     alternateModel,
     units: a.units,
     appMode: a.demo ? 'demo' : 'live',

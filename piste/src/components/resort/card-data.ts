@@ -224,12 +224,28 @@ const COUNTRY_NAME: Record<string, string> = {
   FR: 'France',
   IT: 'Italy',
   DE: 'Germany',
+  AD: 'Andorra',
+  ES: 'Spain',
+  SE: 'Sweden',
+  NO: 'Norway',
+  FI: 'Finland',
+  SI: 'Slovenia',
   JP: 'Japan',
+  KR: 'South Korea',
+  AU: 'Australia',
+  NZ: 'New Zealand',
+  CL: 'Chile',
+  AR: 'Argentina',
+}
+
+/** Display name of an ISO 3166-1 alpha-2 country code (the code itself when unknown). */
+export function countryName(country: string): string {
+  return COUNTRY_NAME[country.toUpperCase()] ?? country
 }
 
 /** "Virgil (Cortland mailing address…)" + NY → "Virgil, NY"; Arlberg's village list → "St. Anton am Arlberg, Austria". */
 export function shortPlace(locality: string | null, stateProvince: string | null, country: string): string {
-  const where = country === 'US' || country === 'CA' ? (stateProvince ?? COUNTRY_NAME[country] ?? country) : (COUNTRY_NAME[country] ?? country)
+  const where = country === 'US' || country === 'CA' ? (stateProvince ?? countryName(country)) : countryName(country)
   const base = (locality ?? '').replace(/\s*\([^)]*\)/g, '').trim()
   const first = base
     .split(',')

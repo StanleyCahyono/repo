@@ -49,15 +49,30 @@
     }
   ],
   "terrain": {
-    "trails": null,
-    "lifts": null,
-    "skiableAcres": null,
+    "trails": 200,
+    "lifts": 34,
+    "skiableAcres": 8171,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "terrainParks": null,
+    "expertPct": null,
+    "pisteKm": null,
+    "liftsByType": {
+      "gondolas": 5,
+      "cableCars": null,
+      "chairlifts": 16,
+      "surfaceLifts": 15,
+      "other": null
+    },
+    "liftCapacityPerHour": 69939,
     "season": null,
-    "source": null
+    "source": {
+      "url": "https://www.whistlerblackcomb.com/the-mountain/about-the-mountain/mountain-info.aspx",
+      "verification": "search-summary",
+      "checkedOn": "2026-09-30",
+      "note": "Search summary (results: whistlerblackcomb.com mountain info, whistler.com Stats & Facts, Wikipedia, forgedaxe lift guide): 8,171 acres (3,307 ha), 200+ runs (stored as 200; one result says 241 marked runs, while its breakdown of 35 easiest / 110 more difficult / 35 most difficult / 20 expert runs sums to 200); \"34 total lifts\" listed as 5 gondolas, 1 high-speed eight-seat, 4 high-speed six-seat, 8 high-speed quad and 3 triple chairs and 15 surface lifts (sums to 36); uphill capacity 69,939 skiers/hour. Terrain split published per mountain: Whistler 20% beginner / 55% intermediate / 25% advanced, Blackcomb 15/55/30 — no combined split stored. The PEAK 2 PEAK Gondola runs 436 m above the valley floor. Season not stated."
+    }
   },
   "features": {
     "nightSkiing": null,
@@ -80,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-11-20",
+      "text": "Planned opening Nov. 20, 2026 (subject to weather and conditions)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.piquenewsmagazine.com/local-news/whistler-blackcomb-targets-nov-20-opening-as-powerful-el-nino-looms-12678244",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Pique Newsmagazine: \"Whistler Blackcomb targets Nov. 20 opening as powerful El Niño looms\"; the same date is in the Vail Resorts 2026-27 opening-dates release (reported 18 Aug 2026)."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -93,18 +113,40 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "Not researched in this build (web-search budget exhausted, page fetches blocked). No 2026-27 opening or closing date is on file as of 2026-09-28 — check the official site. Past opening dates were not captured, so no estimated window is derived."
+    "notes": "2026-27: planned opening Nov. 20, 2026. Closing not announced; OnTheSnow \"projected closing\" listing (https://www.onthesnow.com/british-columbia/projected-closing), a projection, not an announcement — May 16, 2027 projected. Confirm."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (restricted / unrestricted)",
+      "category": "adult",
+      "amount": 156,
+      "amountMax": 183,
+      "currency": "CAD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27: adult 1-day CAD 156 (restricted) or CAD 183 (unrestricted); child 7-12 CAD 79/93. These look like advance-purchase prices (\"restricted\" presumably excludes holiday/peak dates); window rates are likely higher — confirm on whistlerblackcomb.com.",
+      "source": {
+        "url": "https://www.whistler.com/skiing/lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of Tourism Whistler's lift-ticket page (whistler.com)."
+      }
+    }
+  ],
   "links": {
     "official": "https://www.whistlerblackcomb.com/",
-    "trailMap": null,
+    "trailMap": "https://www.whistlerblackcomb.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
     "tickets": null,
-    "seasonPass": null,
+    "seasonPass": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/season-passes.aspx",
     "lessons": null,
     "rentals": null,
     "webcams": null,
@@ -114,9 +156,27 @@
     "events": null,
     "tourism": "https://www.whistler.com/",
     "avalanche": "https://avalanche.ca/",
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/terrain-and-lift-status.aspx"
   },
-  "moreLinks": [],
+  "moreLinks": [
+    {
+      "label": "Mountain info & stats (official)",
+      "url": "https://www.whistlerblackcomb.com/the-mountain/about-the-mountain/mountain-info.aspx"
+    },
+    {
+      "label": "Holiday restricted dates (official)",
+      "url": "https://www.whistlerblackcomb.com/info/holiday-restricted-dates.aspx"
+    },
+    {
+      "label": "Whistler stats & facts (Tourism Whistler)",
+      "url": "https://www.whistler.com/about-whistler/stats-facts/"
+    },
+    {
+      "label": "Lift tickets via Tourism Whistler",
+      "url": "https://www.whistler.com/skiing/lift-tickets/"
+    }
+  ],
   "travel": {
     "driveFromIthaca": null,
     "airports": [
@@ -158,25 +218,25 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "reference-only",
-    "date": "2026-09-28",
+    "method": "web-search",
+    "date": "2026-09-30",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (none on file as of 2026-09-28).",
-      "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Confirm the 2026-27 closing dates for Whistler and Blackcomb (OnTheSnow projects May 16, 2027; not announced).",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local 10 days combined with Vail and Beaver Creek, with peak-date restrictions (WB-specific holiday dates to confirm on its holiday-restricted-dates page).",
+      "Confirm the 2026-27 window day-ticket price (only whistler.com's CAD 156/183 advance-style prices are on file).",
+      "Capture actual 2024-25 and 2025-26 opening and closing dates (a 2025-26 opening-day post exists on blog.whistlerblackcomb.com).",
+      "Resolve the lift count (34 stated vs 36 in the breakdown) and run count (200+ vs 241 marked runs) from the official page; confirm terrain parks and snowmaking.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates so an estimated window can be derived.",
-      "Confirm official deep links on whistlerblackcomb.com (snow report, trail map, tickets, lessons, rentals, webcams, parking) and the snow-report format.",
       "Confirm the operator (reference: Vail Resorts, owner since 2016).",
-      "Confirm terrain stats (leads: 8,100+ acres, 200+ marked runs, 35+ lifts including the Peak 2 Peak Gondola), parks, snowmaking, night skiing, tubing and childcare.",
       "Confirm precise village, Roundhouse and peak coordinates; the summit weather point is about 5 km from the village because the gondola climbs that far.",
-      "Pass leads from earlier seasons (unverified): unlimited on the Epic Pass; Epic Local and similar tiers with holiday restrictions; Canada-only products (Whistler Blackcomb season pass, Edge Card). Confirm 2026-27 products and CAD prices.",
       "Learning setup: confirm Olympic Station and Blackcomb base learning zones and lesson products.",
       "YVR coach operators and schedules for 2026-27; BC-99 winter-tire rule dates.",
       "Avalanche Canada forecast region for the Sea-to-Sky area (out-of-bounds travel).",
       "Snow report: record the official conditions page and whether any structured feed exists."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Reference-only record. The research pass for this resort returned nothing usable (web-search budget exhausted before it began, page fetches blocked), so no fact here is web-verified. Identity, coordinates, elevations, operator, homepage and the few features set (lessons, rentals, village lodging, Olympic Station / Blackcomb base learning areas) are Piste reference data marked 'unverified'. Weather-point coordinates are approximate. Airport drive times are Piste estimates, not routing-service results. Dates, prices, hours, terrain counts and pass access are deliberately left unknown."
+    "conflicts": [
+      "Lifts: 34 stated, but the listed breakdown sums to 36. Runs: 200+ vs 241 marked runs in another result. Stored 34 lifts / 200 runs with the breakdown as listed."
+    ],
+    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain/lift stats and uphill capacity, 2026-27 advance-style prices and season-pass link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it. Snow-report, lift-status and trail-map links follow the URL pattern shared by all Vail Resorts sites (terrain-and-lift-status.aspx and mountain-info.aspx were seen in results for sister resorts); they were not individually opened."
   }
 }

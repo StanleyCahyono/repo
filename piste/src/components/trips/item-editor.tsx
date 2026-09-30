@@ -18,6 +18,7 @@ import { Notice } from '@/components/ui/states'
 import { cn } from '@/lib/ui/cn'
 import type { TripItemRow } from '@/lib/db/rows'
 import type { TripItemType } from '@/lib/db/schema'
+import { currencyChoicesFor } from '@/lib/domain/money'
 import { addTripItem, removeTripItem, restoreTripItem, updateTripItem, type AddTripItemInput } from '@/lib/actions/trips'
 import {
   ITEM_LABEL,
@@ -36,7 +37,6 @@ import { DEFAULT_AIRPORT_BUFFER_MIN, DEFAULT_ARRIVAL_BUFFER_MIN } from './model'
 import type { EditorTarget, TripUiData } from './trip-ui'
 import type { Run } from './use-run'
 
-const COMMON_CURRENCIES = ['USD', 'CAD', 'EUR', 'CHF', 'GBP', 'JPY', 'AUD', 'NZD']
 const TYPES: TripItemType[] = ['resort-day', 'flight', 'drive', 'transfer', 'lodging', 'lesson', 'rental', 'lift-ticket', 'parking', 'food', 'event', 'other']
 const RESORT_TYPES = new Set<TripItemType>(['resort-day', 'lift-ticket', 'lesson', 'rental', 'parking', 'food', 'drive', 'transfer'])
 const RANGE_TYPES = new Set<TripItemType>(['flight', 'drive', 'transfer', 'lodging', 'rental', 'lift-ticket', 'parking', 'food', 'event', 'other'])
@@ -513,7 +513,7 @@ export function ItemEditor({
                 ) : null}
                 <Field label="Currency" htmlFor={id('cur')} error={err('currency')}>
                   <Select id={id('cur')} value={f.currency} onChange={(e) => set('currency', e.target.value)}>
-                    {[...new Set([data.currency, ...COMMON_CURRENCIES, ...data.rates.map((r) => r.currency), f.currency])].map((c) => (
+                    {currencyChoicesFor(data.currency, ...data.rates.map((r) => r.currency), f.currency).map((c) => (
                       <option key={c} value={c}>
                         {c}
                       </option>
