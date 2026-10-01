@@ -10,7 +10,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { motion } from 'motion/react'
 import { CalendarDays, Columns3, Compass } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
-import { ScrollRow } from '@/components/ui/scroll-row'
 import { t } from '@/lib/ui/motion'
 import { useCompareSelection } from '@/components/resort/card-compare'
 import { readableQuery, recallQuery } from './use-explore-url'
@@ -65,8 +64,8 @@ export function ExploreTabs({ className }: { className?: string }) {
   }
 
   return (
-    <ScrollRow as="nav" aria-label="Explore sections" className={cn('scrollbar-thin', className)}>
-      <ul className="flex w-max min-w-full items-end gap-1 border-b border-divider">
+    <nav aria-label="Explore sections" className={cn('max-w-full', className)}>
+      <ul className="glass flex w-max max-w-full items-center gap-0.5 rounded-full p-[5px]">
         {TABS.map((tab) => {
           const on = tab.id === active
           const count = tab.id === 'compare' ? compare.entries.length : 0
@@ -77,27 +76,30 @@ export function ExploreTabs({ className }: { className?: string }) {
                 onClick={go(tab.id)}
                 aria-current={on ? 'page' : undefined}
                 className={cn(
-                  'relative flex h-11 items-center gap-2 rounded-t-md px-3 text-[14.5px] font-medium transition-colors duration-150',
-                  on ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                  'relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150',
+                  on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
                 )}
               >
-                <tab.Icon aria-hidden className="size-4" strokeWidth={1.8} />
-                {tab.label}
+                {on ? <motion.span layoutId="explore-tab" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
+                <tab.Icon aria-hidden className="relative size-4" strokeWidth={1.8} />
+                <span className="relative">{tab.label}</span>
                 {count ? (
-                  <span className="tnum inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-glacier px-1.5 text-[12px] font-semibold text-teal">
+                  <span
+                    className={cn(
+                      'tnum relative inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[12px] font-semibold',
+                      on ? 'bg-on-ink-chip text-ink-chip' : 'bg-teal text-on-teal',
+                    )}
+                  >
                     <span className="sr-only">(</span>
                     {count}
                     <span className="sr-only"> selected)</span>
                   </span>
                 ) : null}
               </Link>
-              {on ? (
-                <motion.span layoutId="explore-tab" transition={t.select} aria-hidden className="absolute inset-x-2 -bottom-px h-[2px] rounded-full bg-teal" />
-              ) : null}
             </li>
           )
         })}
       </ul>
-    </ScrollRow>
+    </nav>
   )
 }

@@ -1,6 +1,7 @@
 /**
- * Shared header for the Explore routes (Resorts, Compare, Events): eyebrow, Barlow title, one supporting line and
- * the section tabs. Server-renderable; the tabs are a small client island.
+ * Shared header for the Explore routes (Resorts, Compare, Events), Glass HUD: a teal mono eyebrow, a big light
+ * title, the section tabs as a glass pill beside it, and an optional actions slot (e.g. the scenario controls) on
+ * the right. Server-renderable; the tabs are a small client island.
  */
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/ui/cn'
@@ -21,15 +22,15 @@ export function ExploreHeader({
 }) {
   return (
     <header className={cn('mb-5 md:mb-6', className)}>
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-6">
-        <div className="min-w-0">
-          {eyebrow ? <div className="eyebrow mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">{eyebrow}</div> : null}
-          <h1 className="font-display text-[32px] leading-[1.02] text-ink md:text-[44px]">{title}</h1>
-          {lead ? <p className="mt-2 max-w-[68ch] text-[15px] text-ink-2 max-sm:hidden md:text-[15.5px]">{lead}</p> : null}
+      {eyebrow ? <div className="hud flex flex-wrap items-center gap-x-2.5 gap-y-1 tracking-[0.16em] text-teal">{eyebrow}</div> : null}
+      <div className="mt-2.5 flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-3">
+          <h1 className="m-0 min-w-0 text-[clamp(36px,4.4vw,64px)] leading-[0.98] font-light tracking-[-0.04em] text-ink">{title}</h1>
+          <ExploreTabs />
         </div>
-        {actions ? <div className="flex flex-wrap items-center gap-2 md:justify-end">{actions}</div> : null}
+        {actions ? <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">{actions}</div> : null}
       </div>
-      <ExploreTabs className="mt-4 md:mt-5" />
+      {lead ? <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-ink-2 max-sm:hidden md:text-[16px]">{lead}</p> : null}
     </header>
   )
 }

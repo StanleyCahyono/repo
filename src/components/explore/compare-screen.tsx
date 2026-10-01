@@ -24,7 +24,7 @@ import { KindTag, Missing } from '@/components/ui/provenance'
 import { ConfidenceTag, ScoreChip } from '@/components/ui/score'
 import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
 import { EmptyState, Notice } from '@/components/ui/states'
-import { OpeningTag, StatusPill } from '@/components/ui/status'
+import { OpeningTag } from '@/components/ui/status'
 import { CardPassBadges } from '@/components/resort/card-passes'
 import { RESEARCH_LABEL } from '@/components/resort/card-data'
 import { COMPARE_MAX, useCompareSelection } from '@/components/resort/card-compare'
@@ -32,6 +32,11 @@ import type { CompareColumn, CompareView } from '@/lib/data/explore'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
 import { readableQuery, rememberQuery } from './use-explore-url'
 import { formatLocalDate } from '@/lib/domain/time'
+import { formatElevation } from '@/lib/domain/units'
+import { CountUp } from './count-up'
+import { ResortArt } from './resort-art'
+import { toneOf } from './resort-rail'
+import { TONE_DOT, TONE_LABEL } from './tones'
 
 type BestKey = keyof CompareView['best']
 
@@ -106,13 +111,13 @@ export function CompareScreen({ view }: { view: CompareView }) {
       <Highlights view={view} />
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-[13.5px] text-ink-2">
-          <span className="tnum font-semibold text-ink">{cols.length}</span> of {COMPARE_MAX} columns · every column uses the scenario above
+        <p className="hud text-ink-2">
+          <span className="tnum text-ink">{cols.length}</span> of {COMPARE_MAX} columns · one scenario for every column
         </p>
         {cols.length < COMPARE_MAX ? (
           <AddResort candidates={view.candidates} onAdd={addResort} disabled={pending} />
         ) : (
-          <p className="text-[12.5px] text-ink-3">Compare holds four — remove one to add another.</p>
+          <p className="text-[12.5px] text-ink-2">Compare holds four — remove one to add another.</p>
         )}
       </div>
 
@@ -121,9 +126,9 @@ export function CompareScreen({ view }: { view: CompareView }) {
         <CompareColumns view={view} sections={sections} onRemove={removeColumn} />
       </div>
 
-      <p className="text-[12.5px] text-ink-3">
-        Scores describe suitability for the day, not safety. Prices are Piste estimates from recorded snapshots — confirm at the source before buying. Unknown
-        values are never ranked.
+      <p className="hud text-[11.5px] leading-relaxed tracking-[0.08em] text-ink-2">
+        ◇ Catalog facts marked researched — confirm at source · Scores describe suitability for the day, not safety · Prices are Piste estimates from
+        recorded snapshots · Unknown values are never ranked
       </p>
     </div>
   )
@@ -145,9 +150,9 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
   const [editing, setEditing] = useState(false)
   const passLabel = view.product ? view.product.name : view.owned.length ? 'your passes' : 'no pass (tickets)'
   return (
-    <section aria-labelledby="compare-scenario" className="rounded-[12px] border border-divider bg-surface p-4 md:p-5">
+    <section aria-labelledby="compare-scenario" className="glass rounded-[24px] p-4 md:px-6 md:py-5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h2 id="compare-scenario" className="text-[15px] font-semibold text-ink">
+        <h2 id="compare-scenario" className="hud text-ink-2">
           Same scenario for every column
         </h2>
         <p role="status" aria-live="polite" className="inline-flex items-center gap-1.5 text-[12.5px] text-ink-3">
@@ -169,12 +174,12 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
           aria-expanded={editing}
           aria-controls="cmp-scenario-fields"
           onClick={() => setEditing((v) => !v)}
-          className="inline-flex h-11 shrink-0 items-center rounded-md border border-divider-strong bg-surface px-3 text-[13.5px] font-medium text-ink hover:border-teal hover:text-teal"
+          className="inline-flex h-11 shrink-0 items-center rounded-full bg-ink-chip px-4 text-[13.5px] font-medium text-on-ink-chip"
         >
           {editing ? 'Done' : 'Change'}
         </button>
       </div>
-      <div id="cmp-scenario-fields" className={cn('mt-3 grid grid-cols-2 gap-3 md:grid-cols-4', !editing && 'max-md:hidden')}>
+      <div id="cmp-scenario-fields" className={cn('mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4', !editing && 'max-md:hidden')}>
         <div className={field}>
           <label htmlFor="cmp-date" className={label}>
             Day
@@ -270,19 +275,26 @@ function Highlights({ view }: { view: CompareView }) {
     },
   ]
   return (
-    <section aria-label="Highlights" className="grid grid-cols-2 gap-px overflow-hidden rounded-[12px] border border-divider bg-divider md:grid-cols-4">
-      {items.map((i) => (
-        <div key={i.label} className="flex min-w-0 flex-col gap-0.5 bg-surface px-4 py-3">
-          <span className="text-[12px] font-semibold tracking-[0.06em] text-ink-3 uppercase">{i.label}</span>
+    <section aria-label="Highlights" className="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 md:gap-4 xl:grid-cols-4">
+      {items.map((i, k) => (
+        <motion.div
+          key={i.label}
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ ...t.pageIn, delay: k * 0.06 }}
+          className={cn('flex min-w-0 flex-col gap-1.5 rounded-[24px] px-5 py-4', i.value ? 'glass' : 'border border-dashed border-divider-strong')}
+        >
+          <span className="hud text-ink-2">{i.label}</span>
           {i.value ? (
-            <span className="flex min-w-0 items-baseline gap-2">
-              <span className="truncate text-[15px] font-semibold text-ink">{i.value}</span>
-              {i.detail ? <span className="tnum shrink-0 text-[13px] text-ink-2">{i.detail}</span> : null}
-            </span>
+            <>
+              <span className="text-[26px] leading-[1.05] font-light tracking-[-0.03em] text-ink">{i.value}</span>
+              {i.detail ? <span className="tnum text-[13px] text-ink-2">{i.detail}</span> : null}
+            </>
           ) : (
-            <span className="text-[13.5px] text-ink-3 italic">No clear leader</span>
+            <span className="text-[14px] text-ink-2">No clear leader — values unknown or tied</span>
           )}
-        </div>
+        </motion.div>
       ))}
     </section>
   )
@@ -291,34 +303,42 @@ function Highlights({ view }: { view: CompareView }) {
 // ---------------------------------------------------------------------------
 // Layouts
 
-function ColumnHead({ c, onRemove }: { c: CompareColumn; onRemove: (id: string) => void }) {
+function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: string) => void; index: number }) {
   const r = c.card
   const sources: SourceItem[] = [
     ...r.sources,
     ...c.access.rows.map((a) => ({ label: `Pass: ${a.productName}`, value: `${a.statusLabel} — ${a.headline}`, prov: a.prov })),
     ...c.hours.rows.map((h) => ({ label: `Hours: ${h.label}`, value: h.text, prov: h.prov })),
   ]
+  const tone = toneOf(r)
   return (
-    <div className="flex min-w-0 flex-col gap-2">
-      <div className="flex items-start gap-2">
-        <div className="min-w-0 flex-1">
-          <Link href={r.href} className="text-[15.5px] leading-snug font-semibold text-ink hover:text-teal hover:underline">
-            {r.name}
-          </Link>
-          <p className="truncate text-[12.5px] text-ink-2">{r.place}</p>
-        </div>
+    <div className="flex min-w-0 flex-col gap-2.5">
+      <div className="group/art relative">
+        <ResortArt id={r.id} name={r.name} media={r.media} variant="banner" className="h-[120px] rounded-[20px] transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover/art:scale-[1.015]" />
+        <span aria-hidden className="hud absolute top-2.5 left-3 rounded-full bg-glass-strong px-2 py-0.5 text-[11px] text-ink-2">
+          {String(index + 1).padStart(2, '0')}
+        </span>
         <button
           type="button"
           onClick={() => onRemove(c.id)}
           aria-label={`Remove ${r.name} from the comparison`}
           title="Remove from comparison"
-          className="-mt-1 -mr-1 inline-flex size-11 shrink-0 items-center justify-center rounded-md text-ink-3 hover:bg-surface-3 hover:text-ink md:size-8"
+          className="glass-strong absolute top-2 right-2 inline-flex size-9 items-center justify-center rounded-full text-ink-2 transition-colors hover:text-ink max-lg:size-11"
         >
           <X aria-hidden className="size-4" />
         </button>
       </div>
+      <div className="min-w-0">
+        <Link href={r.href} className="text-[20px] leading-tight font-semibold tracking-[-0.01em] text-ink decoration-teal/60 underline-offset-[3px] hover:text-teal hover:underline">
+          {r.shortName}
+        </Link>
+        <p className="hud mt-1 text-[11.5px] text-ink-2">{r.place}</p>
+      </div>
       <div className="flex flex-wrap items-center gap-1.5">
-        <StatusPill status={r.status.status} size="sm" />
+        <span className="inline-flex items-center gap-1.5 text-[12.5px] text-ink-2">
+          <i aria-hidden className={cn('size-2 rounded-full', TONE_DOT[tone])} />
+          {TONE_LABEL[tone]}
+        </span>
         {r.demo ? (
           <Badge tone="demo" className="h-5 px-1.5">
             Demo
@@ -332,66 +352,61 @@ function ColumnHead({ c, onRemove }: { c: CompareColumn; onRemove: (id: string) 
 
 function CompareTable({ view, sections, onRemove }: { view: CompareView; sections: SectionDef[]; onRemove: (id: string) => void }) {
   const cols = view.columns
+  const [hover, setHover] = useState<number | null>(null)
+  const colTint = (ci: number) => (hover === ci ? 'bg-[color-mix(in_srgb,var(--teal)_6%,transparent)]' : '')
   return (
     <div className="hidden lg:block">
-      <table className="w-full table-fixed border-separate border-spacing-0 text-left">
+      <table className="glass w-full table-fixed border-separate border-spacing-0 overflow-clip rounded-[32px] text-left" onMouseLeave={() => setHover(null)}>
         <caption className="sr-only">
           Comparison of {cols.map((c) => c.card.name).join(', ')} for {view.dateLabel}, {view.modeLabel}, party of {view.party}
         </caption>
         <colgroup>
-          <col className="w-[190px] xl:w-[210px]" />
+          <col className="w-[180px] xl:w-[200px]" />
           {cols.map((c) => (
             <col key={c.id} />
           ))}
         </colgroup>
         <thead>
           <tr>
-            <td className="sticky top-0 z-10 border-b border-divider-strong bg-canvas" />
-            {cols.map((c) => (
-              <th key={c.id} scope="col" className="sticky top-0 z-10 border-b border-divider-strong bg-canvas px-4 pt-3 pb-3 align-top font-normal">
-                <ColumnHead c={c} onRemove={onRemove} />
+            <td className="px-5 pt-5 pb-4 align-bottom">
+              <span className="hud text-ink-2">
+                {cols.length} resorts
+                <br />
+                {view.dateLabel.replace(/ \d{4}$/, '')}
+              </span>
+            </td>
+            {cols.map((c, ci) => (
+              <th key={c.id} scope="col" onMouseEnter={() => setHover(ci)} className={cn('px-4 pt-4 pb-4 align-top font-normal transition-colors duration-200', colTint(ci))}>
+                <ColumnHead c={c} onRemove={onRemove} index={ci} />
               </th>
             ))}
           </tr>
         </thead>
-        {sections.map((s) => (
-          <tbody key={s.key}>
+        {sections.map((sec) => (
+          <motion.tbody key={sec.key} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -60px 0px' }} transition={t.pageIn}>
             <tr>
-              <th colSpan={cols.length + 1} scope="colgroup" className="px-0 pt-6 pb-2 text-left">
-                <span className="text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase">{s.title}</span>
-                {s.note ? <span className="ml-2 text-[12.5px] font-normal text-ink-3 normal-case">{s.note}</span> : null}
+              <th colSpan={cols.length + 1} scope="colgroup" className="border-t border-divider px-5 pt-6 pb-2 text-left">
+                <span className="hud text-teal">{sec.title}</span>
+                {sec.note ? <span className="ml-3 text-[12.5px] font-normal text-ink-2 normal-case">{sec.note}</span> : null}
               </th>
             </tr>
-            {s.rows.map((row, i) => (
+            {sec.rows.map((row) => (
               <tr key={row.key} className="align-top">
-                <th
-                  scope="row"
-                  className={cn(
-                    'border-divider bg-surface-2 px-4 py-3 text-[13px] font-medium text-ink-2',
-                    'border-l',
-                    i === 0 ? 'rounded-tl-[10px] border-t' : '',
-                    i === s.rows.length - 1 ? 'rounded-bl-[10px] border-b' : 'border-b',
-                  )}
-                >
-                  {row.label}
+                <th scope="row" className="border-t border-[color-mix(in_srgb,var(--ink)_7%,transparent)] px-5 py-4 text-left font-normal">
+                  <span className="hud text-[11.5px] text-ink-2">{row.label}</span>
                 </th>
                 {cols.map((c, ci) => (
                   <td
                     key={c.id}
-                    className={cn(
-                      'border-b border-l border-divider bg-surface px-4 py-3 text-[13.5px] text-ink',
-                      i === 0 && 'border-t',
-                      ci === cols.length - 1 && 'border-r',
-                      ci === cols.length - 1 && i === 0 && 'rounded-tr-[10px]',
-                      ci === cols.length - 1 && i === s.rows.length - 1 && 'rounded-br-[10px]',
-                    )}
+                    onMouseEnter={() => setHover(ci)}
+                    className={cn('border-t border-[color-mix(in_srgb,var(--ink)_7%,transparent)] px-4 py-4 text-[14px] text-ink transition-colors duration-200', colTint(ci))}
                   >
                     <Cell row={row} c={c} view={view} />
                   </td>
                 ))}
               </tr>
             ))}
-          </tbody>
+          </motion.tbody>
         ))}
       </table>
     </div>
@@ -423,8 +438,8 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
 
   return (
     <div className="lg:hidden">
-      <div className="sticky top-14 z-10 -mx-4 flex items-center gap-2 border-b border-divider bg-canvas px-4 py-2 md:top-0 md:-mx-8 md:px-8">
-        <div role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 overflow-x-auto scrollbar-thin">
+      <div className="glass sticky top-14 z-10 -mx-4 flex items-center gap-2 rounded-none border-x-0 border-t-0 px-4 py-2 md:top-0 md:-mx-8 md:px-8">
+        <div role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 overflow-x-auto scrollbar-thin [mask-image:linear-gradient(to_right,#000_calc(100%-28px),transparent)] pr-6">
           {cols.map((c, i) => (
             <button
               key={c.id}
@@ -434,18 +449,18 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
               aria-controls={`cmp-col-${c.id}`}
               onClick={() => go(i)}
               className={cn(
-                'relative inline-flex h-11 shrink-0 items-center rounded-md px-3 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150',
-                i === active ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                'relative inline-flex h-11 shrink-0 items-center rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150',
+                i === active ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
               )}
             >
               {i === active ? (
-                <motion.span layoutId="cmp-active-col" transition={t.select} aria-hidden className="absolute inset-0 rounded-md bg-glacier" />
+                <motion.span layoutId="cmp-active-col" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" />
               ) : null}
               <span className="relative">{c.card.shortName}</span>
             </button>
           ))}
         </div>
-        <span className="tnum shrink-0 text-[12.5px] text-ink-3" aria-hidden>
+        <span className="hud tnum shrink-0 text-ink-2" aria-hidden>
           {active + 1}/{cols.length}
         </span>
         <div className="flex shrink-0 gap-1">
@@ -454,7 +469,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
             onClick={() => go(Math.max(0, active - 1))}
             disabled={active === 0}
             aria-label="Previous resort"
-            className="inline-flex size-11 items-center justify-center rounded-md border border-divider-strong bg-surface text-ink-2 disabled:opacity-40"
+            className="glass-strong inline-flex size-11 items-center justify-center rounded-full text-ink-2 disabled:opacity-40"
           >
             <ArrowLeft aria-hidden className="size-4" />
           </button>
@@ -463,7 +478,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
             onClick={() => go(Math.min(cols.length - 1, active + 1))}
             disabled={active === cols.length - 1}
             aria-label="Next resort"
-            className="inline-flex size-11 items-center justify-center rounded-md border border-divider-strong bg-surface text-ink-2 disabled:opacity-40"
+            className="glass-strong inline-flex size-11 items-center justify-center rounded-full text-ink-2 disabled:opacity-40"
           >
             <ArrowRight aria-hidden className="size-4" />
           </button>
@@ -483,19 +498,19 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
             data-index={i}
             role="tabpanel"
             aria-label={c.card.name}
-            className="w-[86%] max-w-[26rem] shrink-0 snap-start rounded-[12px] border border-divider bg-surface"
+            className="glass w-[86%] max-w-[26rem] shrink-0 snap-start overflow-hidden rounded-[28px]"
           >
             <div className="border-b border-divider p-4">
-              <ColumnHead c={c} onRemove={onRemove} />
+              <ColumnHead c={c} onRemove={onRemove} index={i} />
             </div>
             {sections.map((s) => (
               <div key={s.key} className="border-b border-divider px-4 py-3 last:border-b-0">
-                <h3 className="mb-2 text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase">{s.title}</h3>
+                <h3 className="hud mb-2.5 text-teal">{s.title}</h3>
                 <dl className="flex flex-col gap-3">
                   {s.rows.map((row) => (
                     <div key={row.key} className="flex flex-col gap-1">
-                      <dt className="text-[12.5px] font-medium text-ink-3">{row.label}</dt>
-                      <dd className="text-[13.5px] text-ink">
+                      <dt className="hud text-[11.5px] text-ink-2">{row.label}</dt>
+                      <dd className="text-[14px] text-ink">
                         <Cell row={row} c={c} view={view} />
                       </dd>
                     </div>
@@ -516,7 +531,7 @@ function Cell({ row, c, view }: { row: RowDef; c: CompareColumn; view: CompareVi
     <div className="flex min-w-0 flex-col gap-1.5">
       {row.render(c)}
       {best ? (
-        <span className="inline-flex w-fit items-center gap-1 rounded-sm bg-positive-bg px-1.5 py-0.5 text-[12px] font-semibold text-positive">
+        <span className="inline-flex w-fit items-center gap-1 rounded-full bg-positive-bg px-2 py-0.5 text-[12px] font-semibold text-positive">
           <Award aria-hidden className="size-3.5" /> Best of these
         </span>
       ) : null}
@@ -529,7 +544,38 @@ function Cell({ row, c, view }: { row: RowDef; c: CompareColumn; view: CompareVi
 
 function buildSections(view: CompareView): SectionDef[] {
   const date = view.dateLabel.replace(/ \d{4}$/, '')
+  // One elevation scale for every column (rounded up to the next 1,000 m), so the bars compare honestly.
+  const tallest = Math.max(0, ...view.columns.map((c) => c.mountain.summitM ?? 0))
+  const scaleMax = Math.max(1000, Math.ceil(tallest / 1000) * 1000)
+  const scaleLabel = formatElevation(scaleMax, view.units) ?? `${scaleMax} m`
   return [
+    {
+      key: 'mountain',
+      title: 'The mountain',
+      note: 'Catalog facts',
+      rows: [
+        { key: 'elevation', label: `Elevation · shared 0–${scaleLabel}`, render: (c) => <ElevationCell c={c} max={scaleMax} /> },
+        { key: 'lifts', label: 'Lifts · pistes', render: (c) => <LiftsCell c={c} /> },
+        {
+          key: 'uphill',
+          label: 'Uphill / hour',
+          render: (c) =>
+            c.mountain.uphillPerHour !== null ? (
+              <span className="tnum text-[15px]">{c.mountain.uphillPerHour.toLocaleString('en-US')}</span>
+            ) : (
+              <Missing label="Unknown" />
+            ),
+        },
+      ],
+    },
+    {
+      key: 'season',
+      title: 'Season & hours',
+      rows: [
+        { key: 'opening', label: 'Opening & closing', render: (c) => <OpeningCell c={c} /> },
+        { key: 'hours', label: `Hours on ${date}`, render: (c) => <HoursCell c={c} /> },
+      ],
+    },
     {
       key: 'conditions',
       title: `Conditions · ${date}`,
@@ -557,14 +603,6 @@ function buildSections(view: CompareView): SectionDef[] {
             </span>
           ),
         },
-      ],
-    },
-    {
-      key: 'season',
-      title: 'Season & hours',
-      rows: [
-        { key: 'opening', label: 'Opening & closing', render: (c) => <OpeningCell c={c} /> },
-        { key: 'hours', label: `Hours on ${date}`, render: (c) => <HoursCell c={c} /> },
       ],
     },
     {
@@ -612,6 +650,51 @@ function buildSections(view: CompareView): SectionDef[] {
       rows: [{ key: 'gaps', label: 'Data gaps', render: (c) => <GapsCell c={c} /> }],
     },
   ]
+}
+
+function ElevationCell({ c, max }: { c: CompareColumn; max: number }) {
+  const m = c.mountain
+  if (m.baseM === null && m.summitM === null) return <Missing label="Elevation unknown" />
+  const base = m.baseM ?? 0
+  const top = m.summitM ?? base
+  return (
+    <span className="flex items-end gap-3.5">
+      <span aria-hidden className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]">
+        {m.summitM !== null && m.baseM !== null ? (
+          <motion.span
+            className="absolute inset-x-0 rounded-[8px] bg-[linear-gradient(180deg,var(--snow-top),var(--teal))]"
+            style={{ bottom: `${(base / max) * 100}%`, height: `${Math.max(2, ((top - base) / max) * 100)}%`, originY: 1 }}
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 0.8, 0.26, 1] }}
+          />
+        ) : null}
+      </span>
+      <span className="flex min-w-0 flex-col gap-1">
+        <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em]">{m.vertical ?? '—'}</span>
+        <span className="text-[12.5px] text-ink-2">{m.vertical ? 'vertical' : 'vertical unknown'}</span>
+        <span className="tnum text-[13px] text-ink-2">
+          {m.base ?? 'base unknown'} – {m.summit ?? 'summit unknown'}
+        </span>
+      </span>
+    </span>
+  )
+}
+
+function LiftsCell({ c }: { c: CompareColumn }) {
+  const m = c.mountain
+  const extra = [m.trails !== null ? `${m.trails} trails` : null, m.piste ? `${m.piste} of pistes` : null, m.acres !== null ? `${m.acres.toLocaleString('en-US')} acres` : null].filter(Boolean)
+  return (
+    <span className="flex flex-col gap-1">
+      <span className="flex items-baseline gap-2">
+        {m.lifts !== null ? <CountUp value={m.lifts} className="tnum text-[28px] leading-none font-light tracking-[-0.03em]" /> : <span className="text-[28px] leading-none font-light text-ink-3">—</span>}
+        <span className="text-[13px] text-ink-2">{m.lifts !== null ? 'lifts' : 'lift count unknown'}</span>
+      </span>
+      <span className="text-[13px] text-ink-2">{extra.length ? extra.join(' · ') : 'Trails and piste length not recorded'}</span>
+      {m.researched ? <span className="text-[12px] font-medium text-caution">◇ Researched — confirm at source</span> : null}
+    </span>
+  )
 }
 
 function ScoreCell(c: CompareColumn) {
@@ -724,7 +807,7 @@ function TerrainCell({ c }: { c: CompareColumn }) {
   ]
   return (
     <span className="flex flex-col gap-1.5">
-      <span className="font-display tnum text-[24px] leading-none text-ink">{tr.beginnerPct === null ? '—' : `${tr.beginnerPct}%`}</span>
+      <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em] text-ink">{tr.beginnerPct === null ? '—' : `${tr.beginnerPct}%`}</span>
       <span aria-hidden className="flex h-1.5 overflow-hidden rounded-full bg-surface-3">
         {parts.map((p) => (p.v !== null ? <span key={p.k} className={cn('h-full', p.cls)} style={{ width: `${p.v}%` }} /> : null))}
       </span>
@@ -832,7 +915,7 @@ function CostTotalCell({ c }: { c: CompareColumn }) {
   return (
     <span className="flex flex-col gap-0.5">
       <span className="flex items-baseline gap-2">
-        <span className="font-display tnum text-[24px] leading-none text-copper">{k.label}</span>
+        <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em] text-copper">{k.label}</span>
         <span className="tnum font-semibold">≈ {k.total}</span>
       </span>
       <span className="text-[12px] text-ink-3">
@@ -869,7 +952,7 @@ function DriveCell({ c }: { c: CompareColumn }) {
     <span className="flex flex-col gap-0.5">
       <span className="inline-flex items-center gap-1.5">
         <Car aria-hidden className="size-4 text-ink-3" />
-        <span className="font-display tnum text-[24px] leading-none">{d.text}</span>
+        <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em]">{d.text}</span>
       </span>
       <span className="text-[12px] text-ink-3">{d.estimate ? 'Curated estimate, not live routing' : 'Routed'}</span>
       {d.winterText ? <span className="tnum text-[12px] text-ink-2">{d.winterText}</span> : null}

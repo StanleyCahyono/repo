@@ -22,6 +22,17 @@ export function useMediaQuery(query: string, serverValue = false): boolean {
   )
 }
 
+const noop = () => () => {}
+
+/** false during SSR and the hydration pass, true afterwards. */
+export function useHydrated(): boolean {
+  return useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  )
+}
+
 export function usePrefersReducedMotion(): boolean {
   return useMediaQuery('(prefers-reduced-motion: reduce)', false)
 }

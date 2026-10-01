@@ -54,6 +54,8 @@ export function useExploreUrl() {
 
   const filters = useMemo(() => parseFilters(sp), [sp])
   const view: ExploreView = sp.get('view') === 'map' ? 'map' : 'list'
+  /** Map region jump (camera + list scope); absent = World. */
+  const jump = sp.get('at')
 
   const replaceLocal = useCallback(
     (params: URLSearchParams) => {
@@ -86,6 +88,16 @@ export function useExploreUrl() {
     [replaceLocal],
   )
 
+  const setJump = useCallback(
+    (key: string | null) => {
+      const p = new URLSearchParams(window.location.search)
+      if (key && key !== 'world') p.set('at', key)
+      else p.delete('at')
+      replaceLocal(p)
+    },
+    [replaceLocal],
+  )
+
   /** Change the scenario (server data): date and/or scoring mode. `null` removes the key (back to the default). */
   const navigate = useCallback(
     (patch: Record<string, string | null>) => {
@@ -100,5 +112,5 @@ export function useExploreUrl() {
     [pathname, router],
   )
 
-  return { filters, setFilters, view, setView, navigate, pending, search: sp.toString() }
+  return { filters, setFilters, view, setView, jump, setJump, navigate, pending, search: sp.toString() }
 }

@@ -14,9 +14,9 @@ import { ScrollRow } from '@/components/ui/scroll-row'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
 
 const chip =
-  'inline-flex h-11 shrink-0 items-center rounded-full border px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150 md:h-10'
-const chipOff = 'border-divider-strong bg-surface text-ink-2 hover:border-teal hover:text-ink'
-const chipOn = 'border-teal bg-glacier text-teal'
+  'inline-flex h-11 shrink-0 items-center rounded-full border px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-[background-color,color,border-color,transform] duration-150 active:scale-[0.97] md:h-10'
+const chipOff = 'border-[var(--glass-edge)] bg-glass-strong text-ink-2 hover:text-ink'
+const chipOn = 'border-transparent bg-ink-chip text-on-ink-chip'
 
 export function ScenarioBar({
   date,
@@ -46,11 +46,11 @@ export function ScenarioBar({
   }
   return (
     <ScrollRow className={cn('-mx-4 px-4 scrollbar-thin md:mx-0 md:overflow-visible md:px-0', className)}>
-      <div className="flex w-max items-center gap-2 py-0.5 md:w-auto md:flex-wrap md:gap-x-6 md:gap-y-3 lg:justify-between">
+      <div className="flex w-max items-center gap-2 py-0.5 md:w-auto md:flex-wrap md:gap-x-5 md:gap-y-3">
         <div role="group" aria-labelledby={`${id}-day`} className="flex items-center gap-2">
           <span id={`${id}-day`} className="inline-flex shrink-0 items-center gap-1.5 text-[13.5px] font-medium text-ink-2">
             <CalendarDays aria-hidden className="size-4 text-ink-3" />
-            <span className="max-md:sr-only">Day</span>
+            <span className="hud max-md:sr-only">Day</span>
             <span className="sr-only">: {dateLabel}</span>
           </span>
           {quickDates.map((q) => {
@@ -80,8 +80,8 @@ export function ScenarioBar({
             onChange={(e) => pick(e.target.value)}
             className={cn(
               chip,
-              'tnum w-[10.25rem] bg-surface px-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 max-md:hidden',
-              custom ? 'border-teal text-teal' : 'border-divider-strong text-ink-2',
+              'tnum w-[10.25rem] bg-glass-strong px-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 max-md:hidden',
+              custom ? 'border-teal text-teal' : 'border-[var(--glass-edge)] text-ink-2',
             )}
           />
           <span
@@ -119,13 +119,13 @@ export function ScenarioBar({
         <div className="flex shrink-0 items-center gap-2 max-md:hidden">
           <label htmlFor={`${id}-mode`} className="inline-flex shrink-0 items-center gap-1.5 text-[13.5px] font-medium text-ink-2">
             <Gauge aria-hidden className="size-4 text-ink-3" />
-            <span className="max-md:sr-only">Score for</span>
+            <span className="hud max-md:sr-only">Score for</span>
           </label>
           <select
             id={`${id}-mode`}
             value={mode}
             onChange={(e) => onMode(e.target.value as ScoringMode)}
-            className="h-11 rounded-full border border-divider-strong bg-surface pr-3 pl-3.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-teal focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+            className="h-11 rounded-full border border-[var(--glass-edge)] bg-glass-strong pr-3 pl-3.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-teal focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
           >
             {SCORING_MODES.map((m) => (
               <option key={m} value={m}>

@@ -338,15 +338,15 @@ export const FilterButton = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<H
       type="button"
       {...rest}
       className={cn(
-        'inline-flex h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-md border px-3 text-[14px] font-medium transition-colors duration-150 sm:px-3.5 md:h-10',
-        count ? 'border-teal bg-glacier text-teal' : 'border-divider-strong bg-surface text-ink hover:border-teal hover:text-teal',
+        'inline-flex h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-full border px-3 text-[14px] font-medium transition-[background-color,color,border-color,transform] duration-150 active:scale-95 sm:px-3.5 lg:h-10',
+        count ? 'border-transparent bg-ink-chip text-on-ink-chip' : 'border-[var(--glass-edge)] bg-glass-strong text-ink hover:border-teal hover:text-teal',
         className,
       )}
     >
       <SlidersHorizontal aria-hidden className="size-4" />
       <span className="max-sm:sr-only">Filters</span>
       {count ? (
-        <span className="tnum inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-teal px-1.5 text-[12px] font-semibold text-on-teal">
+        <span className="tnum inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-on-ink-chip px-1.5 text-[12px] font-semibold text-ink-chip">
           <span className="sr-only">(</span>
           {count}
           <span className="sr-only"> active)</span>
