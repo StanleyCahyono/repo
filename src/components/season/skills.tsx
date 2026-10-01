@@ -17,6 +17,7 @@ import { addSkill, moveSkill, removeSkill, renameSkill, restoreSkill, setSkillSt
 import type { ChecklistSkill } from '@/lib/data/season-screen'
 import { formatLocalDate } from '@/lib/domain/time'
 import { plural } from './format'
+import { useSeasonUi } from './season-ui'
 
 type Status = ChecklistSkill['status']
 
@@ -59,6 +60,7 @@ function StatusPill({ status, onClick, label }: { status: Status; onClick: (e: R
 
 function StatusSheet({ skill, today, open, onOpenChange, onCloseAutoFocus }: { skill: ChecklistSkill | null; today: string; open: boolean; onOpenChange: (v: boolean) => void; onCloseAutoFocus?: (e: Event) => void }) {
   const toast = useToast()
+  const { celebrate } = useSeasonUi()
   const formId = useId()
   const name = useId()
   const ids = { date: useId(), note: useId() }
@@ -102,6 +104,7 @@ function StatusSheet({ skill, today, open, onOpenChange, onCloseAutoFocus }: { s
             }
             onOpenChange(false)
             const prev = r.data.previous
+            if (confirmed && prev.status !== 'self-confirmed' && prev.status !== 'instructor-confirmed') celebrate('Skill confirmed')
             toast.show(r.message ?? 'Saved', {
               undo: async () => {
                 const back = await setSkillStatus({ id: skill.id, status: prev.status, confirmedOn: prev.confirmedOn, notes: prev.notes })

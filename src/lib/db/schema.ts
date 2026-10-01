@@ -657,6 +657,20 @@ export interface GearPrefs {
   rentalOption: 'full-package' | 'skis-only' | 'boots-only' | 'none'
 }
 
+/** Avatar slots the skier can wear (colour each; backpack and poles can be shown or hidden). */
+export const AVATAR_SLOTS = ['jacket', 'pants', 'helmet', 'goggles', 'gloves', 'boots', 'skis', 'poles', 'backpack'] as const
+export type AvatarSlot = (typeof AVATAR_SLOTS)[number]
+
+/** How my skier avatar looks (stylised; never generated from photos). `null` on the row = the defaults. */
+export interface AvatarPrefs {
+  look: 'suit' | 'holo'
+  colors: Record<AvatarSlot, string>
+  backpack: boolean
+  poles: boolean
+  /** Gear-locker item worn in a slot (its colour was copied into `colors`); a manual colour change clears it. */
+  wearing: Partial<Record<AvatarSlot, number>>
+}
+
 export interface BudgetPrefs {
   dayBudgetMinor: number | null
   seasonBudgetMinor: number | null
@@ -691,6 +705,8 @@ export const userPreferences = sqliteTable('user_preferences', {
   lodgingStyle: text('lodging_style'),
   weights: json<RecommendationWeights>('weights').notNull(),
   theme: text('theme', { enum: ['system', 'light', 'dark'] }).notNull().default('system'),
+  /** My skier avatar (null = defaults). */
+  avatar: json<AvatarPrefs | null>('avatar'),
   onboardingDone: bool('onboarding_done').notNull().default(false),
   updatedAt: updatedAt(),
 })
@@ -813,6 +829,8 @@ export const skiDayLogs = sqliteTable('ski_day_logs', {
   crowdGuess: text('crowd_guess'),
   skillsPracticed: json<number[]>('skills_practiced').notNull(),
   hoursSkied: real('hours_skied'),
+  /** Vertical metres I recorded for the day (null = not recorded, never 0). */
+  verticalM: real('vertical_m'),
   spendMinor: integer('spend_minor'),
   currency: text('currency'),
   notes: text('notes'),
@@ -846,6 +864,25 @@ export const lessons = sqliteTable('lessons', {
   costKind: text('cost_kind', { enum: ['quote', 'estimate', 'actual'] }),
   notes: text('notes'),
   createdAt: createdAt(),
+})
+
+export const GEAR_TYPES = ['skis', 'snowboard', 'boots', 'bindings', 'poles', 'helmet', 'goggles', 'jacket', 'pants', 'gloves', 'backpack', 'other'] as const
+export type GearType = (typeof GEAR_TYPES)[number]
+
+/** Gear locker: what I own. Brand and model are plain text (no logos); the photo is an optional small data URL. */
+export const gear = sqliteTable('gear', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  type: text('type').$type<GearType>().notNull(),
+  brandModel: text('brand_model').notNull(),
+  size: text('size'),
+  boughtOn: text('bought_on'),
+  notes: text('notes'),
+  /** Colour shown on the avatar when worn (#rrggbb). */
+  color: text('color'),
+  /** data:image/jpeg;base64,… resized on this device (≤ ~200 KB). */
+  photo: text('photo'),
+  createdAt: createdAt(),
+  updatedAt: updatedAt(),
 })
 
 /** Personal expenses outside trips (e.g. gear, pass purchase) for the season budget. */

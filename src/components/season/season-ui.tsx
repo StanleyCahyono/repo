@@ -31,6 +31,8 @@ export interface SeasonUiData {
   skills: SkillOption[]
   personalReports: string[]
   days: SkiDayView[]
+  /** Display unit for vertical (stored in metres). */
+  elevationUnit: 'm' | 'ft'
 }
 
 export interface DayIntent {
@@ -43,6 +45,9 @@ interface SeasonUiApi {
   openDay: (intent?: DayIntent, opener?: HTMLElement | null) => void
   /** The day just logged — the journal gives it a brief completion mark. */
   justLogged: number | null
+  /** Make the skier celebrate with a short HUD caption (a ski day logged, a skill confirmed, gear added). */
+  celebrate: (label: string) => void
+  celebration: { seq: number; label: string } | null
 }
 
 const Ctx = createContext<SeasonUiApi | null>(null)
@@ -59,6 +64,13 @@ export function SeasonUiProvider({ data, initialIntent, children }: { data: Seas
   const [intent, setIntent] = useState<DayIntent | null>(initialIntent)
   const [open, setOpen] = useState(!!initialIntent)
   const [justLogged, setJustLogged] = useState<number | null>(null)
+  const [celebration, setCelebration] = useState<{ seq: number; label: string } | null>(null)
+  const celebrate = useCallback((label: string) => setCelebration((c) => ({ seq: (c?.seq ?? 0) + 1, label })), [])
+  useEffect(() => {
+    if (!celebration) return
+    const id = window.setTimeout(() => setCelebration(null), 2800)
+    return () => window.clearTimeout(id)
+  }, [celebration])
   // A fresh form per opening; closing keeps the instance so the sheet can animate out.
   const [seq, setSeq] = useState(0)
   const opener = useRef<HTMLElement | null>(null)
@@ -90,7 +102,7 @@ export function SeasonUiProvider({ data, initialIntent, children }: { data: Seas
     return () => window.clearTimeout(id)
   }, [justLogged, shown])
 
-  const api = useMemo(() => ({ data, openDay, justLogged }), [data, openDay, justLogged])
+  const api = useMemo(() => ({ data, openDay, justLogged, celebrate, celebration }), [data, openDay, justLogged, celebrate, celebration])
   const editing = intent?.dayId ? (data.days.find((d) => d.id === intent.dayId) ?? null) : null
 
   return (
@@ -104,7 +116,10 @@ export function SeasonUiProvider({ data, initialIntent, children }: { data: Seas
         day={editing}
         prefill={editing ? undefined : intent?.prefill}
         onSaved={(id, created) => {
-          if (created) setJustLogged(id)
+          if (created) {
+            setJustLogged(id)
+            celebrate('Ski day logged')
+          }
         }}
         onCloseAutoFocus={(e) => {
           if (opener.current && document.contains(opener.current)) {

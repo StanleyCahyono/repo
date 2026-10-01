@@ -28,6 +28,7 @@ export function defaultPreferences(now: string): UserPreferencesRow {
     lodgingStyle: null,
     weights: { conditions: 35, fit: 25, travel: 20, cost: 15, events: 5 },
     theme: 'system',
+    avatar: null,
     onboardingDone: false,
     updatedAt: now,
   }

@@ -133,6 +133,19 @@ CREATE TABLE `fx_rates` (
 	PRIMARY KEY(`base`, `quote`, `rate_date`)
 );
 --> statement-breakpoint
+CREATE TABLE `gear` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`type` text NOT NULL,
+	`brand_model` text NOT NULL,
+	`size` text,
+	`bought_on` text,
+	`notes` text,
+	`color` text,
+	`photo` text,
+	`created_at` text NOT NULL,
+	`updated_at` text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `hotels` (
 	`id` text PRIMARY KEY NOT NULL,
 	`resort_id` text NOT NULL,
@@ -449,6 +462,7 @@ CREATE TABLE `ski_day_logs` (
 	`crowd_guess` text,
 	`skills_practiced` text NOT NULL,
 	`hours_skied` real,
+	`vertical_m` real,
 	`spend_minor` integer,
 	`currency` text,
 	`notes` text,
@@ -579,6 +593,7 @@ CREATE TABLE `user_preferences` (
 	`lodging_style` text,
 	`weights` text NOT NULL,
 	`theme` text DEFAULT 'system' NOT NULL,
+	`avatar` text,
 	`onboarding_done` integer DEFAULT false NOT NULL,
 	`updated_at` text NOT NULL
 );

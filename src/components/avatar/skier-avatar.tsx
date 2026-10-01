@@ -59,7 +59,12 @@ export function SkierAvatar({ label, className, ...opts }: Partial<SkierOptions>
   }, [key])
 
   return (
-    <div ref={host} role="img" aria-label={label} className={cn('relative h-full w-full', className)}>
+    <div
+      ref={host}
+      role="img"
+      aria-label={label}
+      className={cn('relative h-full w-full', merged.drag && 'cursor-grab touch-pan-y active:cursor-grabbing', className)}
+    >
       {state !== 'ready' ? (
         <div className="hud absolute inset-0 flex items-center justify-center text-ink-2" aria-hidden>
           {state === 'failed' ? 'Avatar unavailable on this device' : 'Loading avatar…'}

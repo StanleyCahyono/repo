@@ -29,6 +29,7 @@ export type TripRow = typeof s.trips.$inferSelect
 export type TripItemRow = typeof s.tripItems.$inferSelect
 export type SkiDayLogRow = typeof s.skiDayLogs.$inferSelect
 export type SkillRow = typeof s.skillChecklist.$inferSelect
+export type GearRow = typeof s.gear.$inferSelect
 export type LessonRow = typeof s.lessons.$inferSelect
 export type ExpenseRow = typeof s.expenses.$inferSelect
 export type AlertRuleRow = typeof s.alertRules.$inferSelect

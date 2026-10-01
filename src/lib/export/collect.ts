@@ -28,6 +28,7 @@ const LOADERS: Record<PersonalTable, (db: Db, mode: AppMode) => Promise<Rows>> =
   skills: (db) => db.select().from(s.skillChecklist).orderBy(s.skillChecklist.sortOrder),
   lessons: (db) => db.select().from(s.lessons),
   expenses: (db) => db.select().from(s.expenses).orderBy(s.expenses.date),
+  gear: (db) => db.select().from(s.gear).orderBy(s.gear.createdAt),
   'alert-rules': (db) => db.select().from(s.alertRules),
   'manual-reports': async (db, mode) => {
     const rows = await db.select().from(s.operationalReports).where(inArray(s.operationalReports.kind, ['manual', 'official', 'demo']))

@@ -23,6 +23,11 @@ export interface SkierOptions {
   gloves: string
   boots: string
   skis: string
+  goggles: string
+  /** Pole shaft colour. */
+  poleColor: string
+  /** Backpack colour. */
+  pack: string
   skin: string
   rim: string
   backpack: boolean
@@ -32,6 +37,8 @@ export interface SkierOptions {
   drag: boolean
   /** Camera distance. */
   distance: number
+  /** Extra turn (radians) on top of dragging — for keyboard / button turning. */
+  yaw: number
 }
 
 export const DEFAULT_SKIER: SkierOptions = {
@@ -43,6 +50,9 @@ export const DEFAULT_SKIER: SkierOptions = {
   gloves: '#1b2733',
   boots: '#1b2733',
   skis: '#13202c',
+  goggles: '#0b1520',
+  poleColor: '#aab6c1',
+  pack: '#1c6c9c',
   skin: '#c99a7a',
   rim: '#2a9fd6',
   backpack: false,
@@ -50,6 +60,7 @@ export const DEFAULT_SKIER: SkierOptions = {
   pad: true,
   drag: false,
   distance: 6.2,
+  yaw: 0,
 }
 
 const PAD_VS = `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`
@@ -443,6 +454,9 @@ export class SkierScene {
     u.uRim.value.set(o.rim)
     this.gear.helmet.color.set(o.helmet)
     this.gear.skis.color.set(o.skis)
+    this.gear.goggle.color.set(o.goggles)
+    this.gear.poles.color.set(o.poleColor)
+    this.gear.pack.color.set(o.pack)
     const holo = o.look === 'holo'
     u.uHolo.value = holo ? 1 : 0
     this.ground.visible = !holo
@@ -453,6 +467,8 @@ export class SkierScene {
       m.needsUpdate = true
     }
     for (const m of Object.values(this.gear)) {
+      // Hologram: gear is light, not paint — a dim rim tint so a white helmet does not glow solid.
+      if (holo) m.color.copy(u.uRim.value).multiplyScalar(0.3)
       m.transparent = holo
       m.opacity = holo ? 0.35 : 1
       m.emissive.set(holo ? u.uRim.value : '#000000')
@@ -546,7 +562,9 @@ export class SkierScene {
     const bounce = wi * (bt > 2 && bt < 3.2 ? Math.abs(Math.sin((bt - 2) * Math.PI * 2.5)) : 0)
     const hop = Math.max(0, Math.sin(t * 3.4))
     const root = this.root
-    this.yaw += (this.yawT - this.yaw) * Math.min(1, dt * 6)
+    const yawGoal = this.yawT + (this.o.yaw || 0)
+    if (still) this.yaw = yawGoal
+    else this.yaw += (yawGoal - this.yaw) * Math.min(1, dt * 6)
     root.rotation.set(0, this.yaw + turnV * 0.34 * wc + shift * 0.05 + (we ? Math.sin(t * 1.7) * 0.15 * we : 0), -turn * 0.44 * wc)
     root.position.set(turn * 0.16 * wc + shift * 0.02, 0, 0)
     root.updateMatrixWorld(true)
@@ -721,9 +739,10 @@ export class SkierScene {
     }
     const cam = this.cam
     const ca = 0.55 + 0.16 * Math.sin(t * 0.13)
-    const cd = this.o.distance * 1.2 * (1 - 0.05 * wc)
-    cam.position.set(Math.sin(ca) * cd + root.position.x * 0.4, 1.3 + 0.06 * Math.sin(t * 0.21), Math.cos(ca) * cd)
-    cam.lookAt(root.position.x * 0.6, 0.86, 0)
+    // Pull back and look up a little while celebrating, so raised arms and poles stay in frame.
+    const cd = this.o.distance * 1.2 * (1 - 0.05 * wc + 0.26 * this.w.celebrate)
+    cam.position.set(Math.sin(ca) * cd + root.position.x * 0.4, 1.3 + 0.06 * Math.sin(t * 0.21) + 0.3 * this.w.celebrate, Math.cos(ca) * cd)
+    cam.lookAt(root.position.x * 0.6, 0.86 + 0.42 * this.w.celebrate, 0)
     this.r.render(this.scene, cam)
   }
 }
