@@ -36,7 +36,7 @@ export function PartyAndCompanions({ partySize, companions, saved, ability }: { 
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-wrap items-center justify-between gap-4 rounded-[12px] border border-divider bg-surface p-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-[20px] border border-divider bg-surface/70 p-4">
         <div>
           <p className="text-[14.5px] font-semibold text-ink">Party size</p>
           <p className="text-[12.5px] text-ink-3">You{list.length ? ` + ${list.length} named` : ''} · per-person costs count once for each person</p>
@@ -51,7 +51,7 @@ export function PartyAndCompanions({ partySize, companions, saved, ability }: { 
           >
             <Minus aria-hidden className="size-4" />
           </button>
-          <output aria-live="polite" className="w-12 text-center font-display text-[30px] leading-none text-ink tnum">
+          <output aria-live="polite" className="w-12 text-center font-light tracking-[-0.03em] text-[30px] leading-none text-ink tnum">
             {partySize}
           </output>
           <button
@@ -66,7 +66,7 @@ export function PartyAndCompanions({ partySize, companions, saved, ability }: { 
         </div>
       </div>
 
-      <div className="rounded-[12px] border border-divider bg-surface p-4">
+      <div className="rounded-[20px] border border-divider bg-surface/70 p-4">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <p className="text-[14.5px] font-semibold text-ink">Companions</p>
           <p className="text-[12.5px] text-ink-3">You: {ABILITY_LABEL[ability]}</p>

@@ -23,6 +23,24 @@ import {
   updateChecklistItem,
 } from '@/lib/actions/trips'
 import { useTripUi } from './trip-ui'
+import { Ring } from './hud-bits'
+
+/** Animated tick: the box fills and the check draws itself (instant under reduced motion). Focus ring via the sr-only input. */
+function Tick({ on }: { on: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        'relative flex size-[22px] shrink-0 items-center justify-center rounded-[7px] border-[1.5px] transition-[background-color,border-color,transform] duration-200 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus active:scale-90',
+        on ? 'border-ink-chip bg-ink-chip' : 'border-divider-strong bg-surface/70 group-hover/ck:border-teal',
+      )}
+    >
+      <svg viewBox="0 0 16 16" className="size-3.5">
+        <motion.path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="var(--on-ink-chip)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" initial={false} animate={{ pathLength: on ? 1 : 0, opacity: on ? 1 : 0 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }} />
+      </svg>
+    </span>
+  )
+}
 
 export interface ChecklistRow {
   id: number
@@ -80,12 +98,15 @@ export function Checklist({ items, templates }: { items: ChecklistRow[]; templat
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="min-w-[200px] flex-1">
-          <p className="text-[14px] text-ink-2">
-            <span className="font-semibold text-ink tnum">{done}</span> of <span className="tnum">{list.length}</span> done
-          </p>
-          <div aria-hidden className="mt-1.5 h-1.5 max-w-[320px] overflow-hidden rounded-full bg-surface-3">
-            <motion.div className="h-full rounded-full bg-teal" initial={{ width: 0 }} animate={{ width: `${list.length ? (done / list.length) * 100 : 0}%` }} transition={t.bars} />
+        <div className="flex min-w-[200px] flex-1 items-center gap-4">
+          <Ring value={list.length ? done / list.length : 0} size={64}>
+            {list.length ? `${Math.round((done / list.length) * 100)}%` : '—'}
+          </Ring>
+          <div className="min-w-0">
+            <p aria-live="polite" className="text-[24px] leading-none font-light tracking-[-0.02em] text-ink tnum">
+              {done} <span className="text-ink-2">of {list.length} done</span>
+            </p>
+            <p className="mt-1 text-[12.5px] text-ink-2">{list.length - done ? `${list.length - done} to go` : list.length ? 'All set' : 'Nothing on the list yet'}</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -105,10 +126,14 @@ export function Checklist({ items, templates }: { items: ChecklistRow[]; templat
               <legend className="eyebrow mb-1.5">{g.c}</legend>
               <ul className="flex flex-col">
                 {g.rows.map((r) => (
-                  <li key={r.id} className="group/ck flex min-h-11 items-center gap-2 border-b border-divider last:border-0">
+                  <motion.li key={r.id} layout="position" transition={t.spring} className="group/ck flex min-h-11 items-center gap-2 border-b border-divider last:border-0">
                     <label className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 py-2">
-                      <input type="checkbox" checked={r.done} disabled={r.id < 0} onChange={(e) => toggle(r, e.target.checked)} className="size-5 shrink-0 accent-[var(--teal)]" />
-                      <span className={cn('text-[14.5px] transition-colors duration-150', r.done ? 'text-ink-3 line-through decoration-ink-3/60' : 'text-ink')}>{r.label}</span>
+                      <input type="checkbox" checked={r.done} disabled={r.id < 0} onChange={(e) => toggle(r, e.target.checked)} className="peer sr-only" />
+                      <Tick on={r.done} />
+                      <span className={cn('relative text-[14.5px] transition-colors duration-200', r.done ? 'text-ink-3' : 'text-ink')}>
+                        {r.label}
+                        <motion.span aria-hidden className="absolute top-1/2 left-0 h-px w-full bg-ink-3" style={{ originX: 0 }} initial={false} animate={{ scaleX: r.done ? 1 : 0 }} transition={{ duration: 0.28, ease: [0.22, 0.8, 0.26, 1] }} />
+                      </span>
                     </label>
                     {r.link ? (
                       <a href={r.link} target="_blank" rel="noopener noreferrer" aria-label={`Open link for ${r.label} (new tab)`} className="inline-flex size-9 items-center justify-center rounded-md text-ink-3 hover:bg-surface-3 hover:text-teal">
@@ -124,18 +149,18 @@ export function Checklist({ items, templates }: { items: ChecklistRow[]; templat
                     >
                       <X aria-hidden className="size-4" />
                     </button>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </fieldset>
           ))}
         </div>
       ) : (
-        <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">The checklist is empty. Add from your templates or write your own below.</p>
+        <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">The checklist is empty. Add from your templates or write your own below.</p>
       )}
 
       <form
-        className="flex flex-col gap-2 rounded-[12px] border border-divider bg-surface-2 p-3 sm:flex-row sm:items-end"
+        className="flex flex-col gap-2 rounded-[20px] border border-divider bg-ink/[0.03] p-3 sm:flex-row sm:items-end"
         onSubmit={(e) => {
           e.preventDefault()
           add()
@@ -156,7 +181,7 @@ export function Checklist({ items, templates }: { items: ChecklistRow[]; templat
               ))}
           </Select>
         </Field>
-        <Button type="submit" variant="primary" className="h-11 md:h-10" disabled={!label.trim()}>
+        <Button type="submit" variant="primary" className="h-11" disabled={!label.trim()}>
           <Plus aria-hidden className="size-4" /> Add
         </Button>
       </form>
@@ -213,7 +238,7 @@ function TemplatesSheet({ open, onOpenChange, templates }: { open: boolean; onOp
         ))}
       </ul>
       <form
-        className="mt-4 flex flex-col gap-3 rounded-[12px] border border-divider bg-surface-2 p-3"
+        className="mt-4 flex flex-col gap-3 rounded-[20px] border border-divider bg-ink/[0.03] p-3"
         onSubmit={(e) => {
           e.preventDefault()
           const v = label.trim()

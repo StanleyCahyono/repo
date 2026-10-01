@@ -74,7 +74,7 @@ function DateColumn({ date, n }: { date: string; n: number }) {
   return (
     <div aria-hidden className="hidden pt-0.5 text-left sm:block">
       <p className="eyebrow">{formatLocalDate(date, 'ccc')}</p>
-      <p className="font-display text-[32px] leading-none text-ink tnum md:text-[38px]">{formatLocalDate(date, 'd')}</p>
+      <p className="font-light tracking-[-0.03em] text-[32px] leading-none text-ink tnum md:text-[38px]">{formatLocalDate(date, 'd')}</p>
       <p className="mt-1 text-[12px] text-ink-3">
         {formatLocalDate(date, 'LLL')} · Day {n}
       </p>
@@ -105,7 +105,7 @@ function DayBlock({ day, last, units, now, chosenName, onAnnounce }: { day: Trip
         <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
           <div className="min-w-0">
             <p aria-hidden className="mb-1 flex items-baseline gap-2 sm:hidden">
-              <span className="font-display text-[26px] leading-none text-ink tnum">{formatLocalDate(day.date, 'd')}</span>
+              <span className="font-light tracking-[-0.03em] text-[26px] leading-none text-ink tnum">{formatLocalDate(day.date, 'd')}</span>
               <span className="eyebrow">
                 {formatLocalDate(day.date, 'ccc · LLL')} · Day {day.n}
               </span>
@@ -296,13 +296,13 @@ function AddToDay({ date, resortId }: { date: string; resortId: string | null })
         Add<span className="sr-only"> to {dayLabel(date)}</span>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content align="end" sideOffset={6} className="z-50 max-h-[min(70dvh,440px)] min-w-[200px] overflow-y-auto rounded-[12px] border border-divider bg-surface p-1 text-[14px] shadow-overlay">
+        <DropdownMenu.Content align="end" sideOffset={6} className="z-50 max-h-[min(70dvh,440px)] min-w-[200px] overflow-y-auto glass-strong rounded-[16px] p-1 text-[14px] shadow-overlay">
           <DropdownMenu.Label className="px-2.5 pt-1.5 pb-1 text-[12px] font-semibold text-ink-3">Add to {dayLabel(date)}</DropdownMenu.Label>
           {QUICK_ADD.map((type) => (
             <DropdownMenu.Item
               key={type}
               onSelect={() => openEditor({ mode: 'add', type, defaults: { date, refId: type === 'flight' || type === 'lodging' || type === 'event' || type === 'other' ? undefined : (resortId ?? undefined) } })}
-              className="flex h-10 cursor-pointer items-center gap-2.5 rounded-[8px] px-2.5 text-ink outline-none data-[highlighted]:bg-surface-3"
+              className="flex h-10 cursor-pointer items-center gap-2.5 rounded-[8px] px-2.5 text-ink outline-none data-[highlighted]:bg-ink/[0.06]"
             >
               <ItemIcon type={type} className="text-ink-2" />
               {ITEM_LABEL[type]}

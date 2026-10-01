@@ -7,7 +7,15 @@ import { getTripPage, isTripId } from '@/lib/data/trip-plan'
 import { Notice } from '@/components/ui/states'
 import { TripUiProvider, type TripUiData } from '@/components/trips/trip-ui'
 import { TripHeader } from '@/components/trips/trip-header'
-import { TripGlance } from '@/components/trips/glance'
+import { BudgetCard, GlanceCard } from '@/components/trips/glance'
+import { RoutePanel, type RouteData } from '@/components/trips/route-panel'
+import { DatesCard } from '@/components/trips/dates-card'
+import { mainResort } from '@/components/trips/travel-section'
+import { DEFAULT_AIRPORT_BUFFER_MIN, DEFAULT_ARRIVAL_BUFFER_MIN, doorToDoor, itineraryTiming, type SegmentLike } from '@/components/trips/model'
+import { detailNumber, detailString } from '@/components/trips/format'
+import { formatDistance } from '@/lib/domain/units'
+import { formatLocalDate } from '@/lib/domain/time'
+import type { SeasonTrack } from '@/lib/data/trip-seasons'
 import { TripSectionNav } from '@/components/trips/section-nav'
 import { TripSection } from '@/components/trips/bits'
 import { Itinerary } from '@/components/trips/itinerary'
@@ -90,61 +98,148 @@ export default async function TripDetailPage({ params, searchParams }: { params:
     { id: 'people', label: 'People' },
   ]
 
+  // Season markers for the calendars: the trip's resorts (or, before any ski day, none).
+  const tracks: SeasonTrack[] = tripResorts.map((r) => {
+    const c = page.catalog.find((x) => x.id === r.id)
+    return { resortId: r.id, name: c?.shortName || r.name, windows: c?.seasons ?? [] }
+  })
+  const route = routeData(page)
+
   return (
     <TripUiProvider data={ui}>
       <Rise>
-        <TripHeader trip={trip} resorts={tripResorts} lead={lead} />
+        <TripHeader trip={trip} resorts={tripResorts} lead={lead} tracks={tracks} />
       </Rise>
       {warnings.length ? (
         <Notice tone="stale" title="Check this plan" className="mb-6">
           {warnings.join('. ')}.
         </Notice>
       ) : null}
-      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-10">
-        <div className="mb-6 xl:col-start-2 xl:row-start-1 xl:mb-0">
-          <Rise index={1} className="xl:sticky xl:top-6">
-            <TripGlance page={page} />
+      <div className="mb-10 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+        {/* Phones: route, dates, budget, glance — one column in reading order. */}
+        <div className="flex min-w-0 flex-col gap-5 max-lg:contents">
+          <Rise index={1} className="max-lg:order-1">
+            {route ? <RoutePanel data={route} /> : <NoRoute />}
+          </Rise>
+          <Rise index={3} className="max-lg:order-4">
+            <GlanceCard page={page} />
           </Rise>
         </div>
-        <div className="min-w-0 xl:col-start-1 xl:row-start-1">
-          <TripSectionNav sections={sections} />
-          <div className="flex flex-col gap-14">
-            <TripSection
-              id="itinerary"
-              index={1}
-              title="Itinerary"
-              meta={page.pass.chosen ? `Pass access shown for your passes and, as a what-if, ${page.pass.chosen.name}` : page.pass.ownsAny ? 'Pass access for the passes you own' : 'No pass on file — choose one to check access day by day'}
-              actions={<PassPicker products={page.pass.products} chosen={page.pass.chosen?.id ?? null} />}
-              lead={
-                page.pass.chosen && !page.pass.chosen.owned
-                  ? `What-if: you don’t own ${page.pass.chosen.name}. Allotments are counted in date order across this trip; rules not on file stay “not confirmed” — never permission.`
-                  : undefined
-              }
-            >
-              <Itinerary days={page.days} unscheduled={page.unscheduled} outside={page.outside} units={page.units} now={page.now} chosenName={page.pass.chosen?.name ?? null} />
-            </TripSection>
-            <TravelSection page={page} index={2} />
-            <StaySection page={page} index={3} />
-            <LessonsSection page={page} index={4} />
-            <ExtrasSection page={page} index={5} />
-            <BudgetSection page={page} index={6} />
-            <TripSection id="checklist" index={7} title="Checklist" meta="Gear, bookings, travel and the day itself — from your editable templates">
-              <Checklist items={detail.checklist} templates={page.templates} />
-            </TripSection>
-            <TripSection id="people" index={8} title="People & notes">
-              <div className="grid gap-6 lg:grid-cols-2">
-                <div className="flex flex-col gap-6">
-                  <PartyAndCompanions partySize={trip.partySize} companions={trip.companions} saved={page.savedCompanion} ability={page.ability} />
-                </div>
-                <div className="flex flex-col gap-6">
-                  <FitList page={page} />
-                  <TripNotes notes={trip.notes} />
-                </div>
-              </div>
-            </TripSection>
-          </div>
+        <div className="flex min-w-0 flex-col gap-5 max-lg:contents">
+          <Rise index={2} className="max-lg:order-2">
+            <DatesCard tracks={tracks} />
+          </Rise>
+          <Rise index={3} className="max-lg:order-3">
+            <BudgetCard page={page} />
+          </Rise>
         </div>
+      </div>
+      <TripSectionNav sections={sections} />
+      <div className="flex flex-col gap-5">
+        <TripSection
+          id="itinerary"
+          index={1}
+          title="Itinerary"
+          meta={page.pass.chosen ? `Pass access shown for your passes and, as a what-if, ${page.pass.chosen.name}` : page.pass.ownsAny ? 'Pass access for the passes you own' : 'No pass on file — choose one to check access day by day'}
+          actions={<PassPicker products={page.pass.products} chosen={page.pass.chosen?.id ?? null} />}
+          lead={
+            page.pass.chosen && !page.pass.chosen.owned
+              ? `What-if: you don’t own ${page.pass.chosen.name}. Allotments are counted in date order across this trip; rules not on file stay “not confirmed” — never permission.`
+              : undefined
+          }
+        >
+          <Itinerary days={page.days} unscheduled={page.unscheduled} outside={page.outside} units={page.units} now={page.now} chosenName={page.pass.chosen?.name ?? null} />
+        </TripSection>
+        <TravelSection page={page} index={2} />
+        <StaySection page={page} index={3} />
+        <LessonsSection page={page} index={4} />
+        <ExtrasSection page={page} index={5} />
+        <BudgetSection page={page} index={6} />
+        <TripSection id="checklist" index={7} title="Checklist" meta="Gear, bookings, travel and the day itself — from your editable templates">
+          <Checklist items={detail.checklist} templates={page.templates} />
+        </TripSection>
+        <TripSection id="people" index={8} title="People & notes">
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="flex flex-col gap-6">
+              <PartyAndCompanions partySize={trip.partySize} companions={trip.companions} saved={page.savedCompanion} ability={page.ability} />
+            </div>
+            <div className="flex flex-col gap-6">
+              <FitList page={page} />
+              <TripNotes notes={trip.notes} />
+            </div>
+          </div>
+        </TripSection>
       </div>
     </TripUiProvider>
   )
+}
+
+function NoRoute() {
+  return (
+    <section aria-labelledby="route-title" className="glass flex min-h-[300px] flex-col items-start justify-end gap-2 rounded-[32px] p-6">
+      <p className="hud text-teal">Getting there</p>
+      <h2 id="route-title" className="text-[28px] leading-tight font-light tracking-[-0.03em] text-ink">
+        Add a ski day to see the route
+      </h2>
+      <p className="max-w-[48ch] text-[14px] text-ink-2">Drive and fly options come from the resort you ski. Add one in the itinerary below.</p>
+      <a href="#itinerary" className="mt-2 inline-flex h-11 items-center rounded-full bg-ink-chip px-5 text-[14px] font-medium text-on-ink-chip">
+        Go to the itinerary
+      </a>
+    </section>
+  )
+}
+
+/** Hero route data for the main resort: drive (estimate + winter buffer) and fly (door to door, flight leg from your itinerary only). */
+function routeData(page: NonNullable<Awaited<ReturnType<typeof getTripPage>>>): RouteData | null {
+  const main = mainResort(page)
+  if (!main) return null
+  const pct = page.travelPrefs.winterBufferPct
+  const flight = page.detail.items.find((i) => i.type === 'flight')
+  const origin = detailString(flight?.details, 'origin') ?? page.trip.originAirport ?? 'ITH'
+  const dest = flight?.refId ?? main.airports[0]?.iata ?? null
+  const destAirport = main.airports.find((a) => a.iata === dest) ?? null
+  const zones = Object.fromEntries(page.airports.filter((a) => a.timezone).map((a) => [a.iata, a.timezone!]))
+  const raw = flight?.details?.segments
+  const timing = flight ? itineraryTiming(Array.isArray(raw) ? (raw as SegmentLike[]) : [], zones) : null
+  const originOpt = page.detail.originAirports.find((a) => a.iata === origin)
+  const d2d = main.airports.length
+    ? doorToDoor({
+        originIata: origin,
+        homeName: page.home.name,
+        driveToAirport: originOpt?.driveFromHome?.minutes ?? null,
+        airportBuffer: detailNumber(flight?.details, 'airportBufferMin') ?? DEFAULT_AIRPORT_BUFFER_MIN,
+        flightMinutes: timing?.totalMinutes ?? null,
+        arrivalBuffer: detailNumber(flight?.details, 'arrivalBufferMin') ?? DEFAULT_ARRIVAL_BUFFER_MIN,
+        destinationIata: dest,
+        resortName: main.shortName,
+        transferMinutes: destAirport?.minutes ?? null,
+        winterPct: pct,
+      })
+    : null
+  const season = page.catalog.find((c) => c.id === main.id)?.seasons.find((w) => w.to >= page.today) ?? null
+  const fmt = (d: string) => formatLocalDate(d, 'd LLL')
+  const hasFlight = !!flight
+  const drives = page.detail.items.some((i) => i.type === 'drive')
+  const maxDrive = page.travelPrefs.maxDriveHours
+  const preferFly = hasFlight || (!drives && (main.drive.minutes === null || (maxDrive !== null && main.drive.minutes > maxDrive * 60)) && main.airports.length > 0)
+  return {
+    homeName: page.home.name.split(',')[0],
+    resortId: main.id,
+    resortName: main.shortName,
+    drive: { minutes: main.drive.minutes, winterMinutes: main.drive.winterMinutes, km: formatDistance(main.drive.km, page.units), isEstimate: main.drive.isEstimate },
+    fly: d2d ? { origin, originDriveMinutes: originOpt?.driveFromHome?.minutes ?? null, dest, transferMinutes: destAirport?.minutes ?? null, total: d2d.total, known: d2d.known } : null,
+    season: season
+      ? {
+          tone: season.kind,
+          text:
+            season.kind === 'opened'
+              ? `Season opened ${fmt(season.from)}`
+              : season.kind === 'announced'
+                ? `Season from ${fmt(season.from)} (announced)`
+                : `Opening est. ${fmt(season.from)} (Piste estimate)`,
+        }
+      : { tone: 'unknown', text: 'Opening not announced' },
+    initial: preferFly ? 'fly' : 'drive',
+    winterPct: pct,
+  }
 }

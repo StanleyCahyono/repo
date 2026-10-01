@@ -38,7 +38,7 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
             </span>
           </SubHead>
           {tickets.length ? (
-            <ul className="flex flex-col rounded-[12px] border border-divider bg-surface p-1.5">
+            <ul className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-1.5">
               {tickets.map((t) => {
                 const overlap = covered.filter((c) => c.resortId === t.refId && t.date && c.date >= t.date && c.date <= (t.endDate ?? t.date))
                 return (
@@ -58,7 +58,7 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
               })}
             </ul>
           ) : (
-            <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">
+            <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">
               No lift ticket saved.{' '}
               {page.detail.resortDays.length ? (covered.length === page.detail.resortDays.length ? 'Your pass covers every planned ski day.' : 'Ski days without a ticket or a covering pass stay unpriced in the budget.') : null}
             </p>
@@ -81,7 +81,7 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
             </span>
           </SubHead>
           {food.length ? (
-            <ul className="flex flex-col rounded-[12px] border border-divider bg-surface p-1.5">
+            <ul className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-1.5">
               {food.map((f) => (
                 <li key={f.id}>
                   <ItemRow item={f} />
@@ -89,7 +89,7 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
               ))}
             </ul>
           ) : (
-            <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No food budget yet. The day basket uses your lunch estimate from Settings as a reference only.</p>
+            <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No food budget yet. The day basket uses your lunch estimate from Settings as a reference only.</p>
           )}
         </section>
       </div>
@@ -103,7 +103,7 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             {events.length ? (
-              <ul className="flex flex-col rounded-[12px] border border-divider bg-surface p-1.5">
+              <ul className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-1.5">
                 {events.map((e) => {
                   const ev = page.events.find((x) => x.id === e.refId)
                   return (
@@ -133,10 +133,10 @@ export function ExtrasSection({ page, index }: { page: TripPage; index: number }
                 })}
               </ul>
             ) : (
-              <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No events saved. Save one from the calendar on file, or add your own.</p>
+              <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No events saved. Save one from the calendar on file, or add your own.</p>
             )}
           </div>
-          <div className="min-w-0 rounded-[12px] border border-divider bg-surface-2 p-4">
+          <div className="min-w-0 rounded-[20px] border border-divider bg-ink/[0.03] p-4">
             <p className="text-[13.5px] font-semibold text-ink">On file at {page.resorts.length === 1 ? page.resorts[0].shortName : 'your resorts'}</p>
             {groups.length ? (
               <div className="mt-2 flex flex-col gap-4">

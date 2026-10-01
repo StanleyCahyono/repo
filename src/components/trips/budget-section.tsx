@@ -50,18 +50,18 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
       lead="Per-person items count once for each person; shared items are split evenly and the shares always add up to the total. Original currencies are kept, with the rate and date used to convert them."
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        <div className="flex flex-col gap-4 rounded-[12px] border border-divider bg-surface p-5">
+        <div className="flex flex-col gap-4 rounded-[20px] border border-divider bg-surface/70 p-5">
           {!b.lines.some((l) => l.groupTotal) ? (
             <div>
               <p className="eyebrow">Per person</p>
-              <p className="mt-1 font-display text-[34px] leading-none text-ink-2">No costs entered yet</p>
+              <p className="mt-1 font-light tracking-[-0.03em] text-[34px] leading-none text-ink-2">No costs entered yet</p>
               <p className="mt-2 text-[14px] text-ink-2">Nothing on this trip has a price yet — unknown is never shown as $0. Add prices to items as you get estimates, quotes or receipts.</p>
             </div>
           ) : b.complete && b.total && b.perPersonTotal ? (
             <>
               <div>
                 <p className="eyebrow">Per person</p>
-                <p className="mt-1 font-display text-[44px] leading-none text-ink tnum">{rangeText(b.perPersonTotal)}</p>
+                <p className="mt-1 font-light tracking-[-0.03em] text-[44px] leading-none text-ink tnum">{rangeText(b.perPersonTotal)}</p>
               </div>
               <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
                 <p className="text-[14px] text-ink-2">
@@ -74,7 +74,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
             <>
               <div>
                 <p className="eyebrow">Per person</p>
-                <p className="mt-1 font-display text-[34px] leading-none text-ink-2">Incomplete estimate</p>
+                <p className="mt-1 font-light tracking-[-0.03em] text-[34px] leading-none text-ink-2">Incomplete estimate</p>
                 <p className="mt-2 text-[14px] text-ink-2">
                   Known so far <span className="font-semibold text-ink tnum">{rangeText(b.perPersonMax)}</span> per person ·{' '}
                   <span className="font-semibold text-ink tnum">{rangeText(b.group)}</span> for the party
@@ -122,7 +122,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
           ) : null}
         </div>
 
-        <div className="min-w-0 rounded-[12px] border border-divider bg-surface p-5">
+        <div className="min-w-0 rounded-[20px] border border-divider bg-surface/70 p-5">
           <SubHead aside={`Whole party, ${b.currency}`}>Where the money goes</SubHead>
           {rows.length ? (
             <BudgetBars rows={rows} currency={b.currency} caption={`Priced items by category, whole party, ${b.currency}. Ranges show your low and high estimates.`} />
@@ -143,7 +143,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
           Itemised
         </SubHead>
         {/* Wide screens: table */}
-        <div className="hidden overflow-x-auto rounded-[12px] border border-divider bg-surface md:block">
+        <div className="hidden overflow-x-auto rounded-[20px] border border-divider bg-surface/70 md:block">
           <table className="w-full min-w-[720px] text-[13.5px]">
             <caption className="sr-only">Every trip item with its price as entered, the converted amount and the party total</caption>
             <thead>
@@ -186,14 +186,14 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
                 <th scope="row" colSpan={4} className="px-4 py-2.5 text-left text-[13px] font-semibold text-ink">
                   {b.complete ? 'Trip total' : 'Known so far (incomplete)'}
                 </th>
-                <td className="px-3 py-2.5 text-right whitespace-nowrap text-ink-2 tnum">{party > 1 ? rangeText(b.complete ? b.perPersonTotal : b.perPersonMax) : null}</td>
-                <td className="px-4 py-2.5 text-right text-[14.5px] font-semibold whitespace-nowrap text-ink tnum">{rangeText(b.complete ? b.total : b.group)}</td>
+                <td className="px-3 py-2.5 text-right whitespace-nowrap text-ink-2 tnum">{party > 1 && b.lines.some((l) => l.groupTotal) ? rangeText(b.complete ? b.perPersonTotal : b.perPersonMax) : null}</td>
+                <td className="px-4 py-2.5 text-right text-[14.5px] font-semibold whitespace-nowrap text-ink tnum">{b.lines.some((l) => l.groupTotal) ? rangeText(b.complete ? b.total : b.group) : <span className="font-normal text-ink-2">Nothing priced yet</span>}</td>
               </tr>
             </tfoot>
           </table>
         </div>
         {/* Narrow screens: list */}
-        <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface md:hidden">
+        <ul className="flex flex-col divide-y divide-divider rounded-[20px] border border-divider bg-surface/70 md:hidden">
           {lines.map((l) => {
             const item = typeof l.id === 'number' ? itemById.get(l.id) : undefined
             const fx = fxNote(l)
@@ -216,7 +216,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
           })}
           <li className={cn('flex items-baseline justify-between gap-3 bg-surface-2 px-4 py-3')}>
             <p className="text-[13px] font-semibold text-ink">{b.complete ? 'Trip total' : 'Known so far (incomplete)'}</p>
-            <p className="text-[14.5px] font-semibold text-ink tnum">{rangeText(b.complete ? b.total : b.group)}</p>
+            <p className="text-[14.5px] font-semibold text-ink tnum">{b.lines.some((l) => l.groupTotal) ? rangeText(b.complete ? b.total : b.group) : <span className="font-normal text-ink-2">Nothing priced yet</span>}</p>
           </li>
         </ul>
       </section>
@@ -226,7 +226,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
           <SubHead id="budget-missing-title" aside="Unknown is never counted as $0">
             Still to price
           </SubHead>
-          <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-dashed border-divider-strong bg-surface-2">
+          <ul className="flex flex-col divide-y divide-divider rounded-[20px] border border-dashed border-divider-strong bg-surface/40">
             {b.missing.map((m) => {
               const item = typeof m.id === 'number' ? itemById.get(m.id) : undefined
               return (
@@ -267,7 +267,7 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
             <p className="mt-2 mb-3 max-w-[70ch] text-[13px] text-ink-2">
               Piste’s per-person basket for each ski day — lift access with your pass as planned, your rental setting, lunch and parking — using the same assumptions as Explore. It is not added to the trip total.
             </p>
-            <div className="relative overflow-x-auto rounded-[12px] border border-divider bg-surface">
+            <div className="relative overflow-x-auto rounded-[20px] border border-divider bg-surface/70">
               <table className="w-full min-w-[520px] text-[13.5px]">
                 <caption className="sr-only">Per-person day basket for each planned ski day</caption>
                 <thead>

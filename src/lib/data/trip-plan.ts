@@ -26,6 +26,7 @@ import { providerStatus } from './deps'
 import { MAX_FORECAST_DAYS } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { getTripDetail, type TripDetail, type TripSummary } from './trips'
+import { seasonWindows, type SeasonWindow } from './trip-seasons'
 import { myPassCover, refineTripBudget, type RefinedBudget } from './trip-budget'
 import { eventView, openingView, travelView, type AirportOption, type EventView, type ExpenseView, type MyPassView, type OpeningView, type TransferOption } from './views'
 
@@ -67,6 +68,8 @@ export interface PickerResort {
   driveMinutes: number | null
   /** Practical (or, failing that, closest) airports. */
   flyVia: string[]
+  /** Known season windows from today on (opened / announced / Piste estimate) for the calendar markers. */
+  seasons: SeasonWindow[]
 }
 
 export interface BudgetGlance {
@@ -109,13 +112,27 @@ export function glanceOf(b: RefinedBudget): BudgetGlance {
 
 async function pickerResorts(ctx: DataCtx): Promise<PickerResort[]> {
   const { db } = ctx
-  const [rows, favs, travel] = await Promise.all([
+  const [rows, favs, travel, seasonRows] = await Promise.all([
     db
-      .select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, region: s.resorts.region, locality: s.resorts.locality, stateProvince: s.resorts.stateProvince, country: s.resorts.country, priority: s.resorts.priority })
+      .select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, region: s.resorts.region, locality: s.resorts.locality, stateProvince: s.resorts.stateProvince, country: s.resorts.country, priority: s.resorts.priority, lat: s.resorts.lat })
       .from(s.resorts),
     db.select().from(s.favorites),
     db.select({ resortId: s.travelOptions.resortId, mode: s.travelOptions.mode, airportIata: s.travelOptions.airportIata, role: s.travelOptions.role, minutes: s.travelOptions.minutes }).from(s.travelOptions),
+    db
+      .select({
+        resortId: s.resortSeasons.resortId,
+        seasonId: s.resortSeasons.seasonId,
+        announcedOpening: s.resortSeasons.announcedOpening,
+        estimatedOpenFrom: s.resortSeasons.estimatedOpenFrom,
+        estimatedOpenTo: s.resortSeasons.estimatedOpenTo,
+        actualOpening: s.resortSeasons.actualOpening,
+        announcedClosing: s.resortSeasons.announcedClosing,
+        actualClosing: s.resortSeasons.actualClosing,
+      })
+      .from(s.resortSeasons),
   ])
+  const seasonsBy = new Map<string, typeof seasonRows>()
+  for (const r of seasonRows) seasonsBy.set(r.resortId, [...(seasonsBy.get(r.resortId) ?? []), r])
   const fav = new Set(favs.map((f) => f.resortId))
   return rows
     .map((r) => {
@@ -132,6 +149,7 @@ async function pickerResorts(ctx: DataCtx): Promise<PickerResort[]> {
         favorite: fav.has(r.id),
         driveMinutes: drive,
         flyVia: [...new Set((practical.length ? practical : air).map((x) => x.airportIata!))],
+        seasons: seasonWindows(seasonsBy.get(r.id) ?? [], r.lat, ctx.today),
         priority: r.priority,
       }
     })
