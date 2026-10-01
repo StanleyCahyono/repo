@@ -85,3 +85,8 @@ declare module 'virtual:piste/env' {
   /** process.env of the browser build. */
   export const ENV: Record<string, string>
 }
+
+declare module 'virtual:piste/assets' {
+  /** src/assets files as data URLs, keyed by file name. */
+  export const ASSETS: Record<string, string>
+}

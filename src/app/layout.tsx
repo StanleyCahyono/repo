@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { count, isNull } from 'drizzle-orm'
 import './globals.css'
-import { barlowCondensed, plexSans, plexMono } from './fonts'
+import { geist, geistMono } from './fonts'
 import { AppShell } from '@/components/shell/app-shell'
 import { getCtx } from '@/lib/context'
 import { alerts } from '@/lib/db/schema'
@@ -18,9 +18,14 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f4f5f1' },
-    { media: '(prefers-color-scheme: dark)', color: '#0c1a24' },
+    { media: '(prefers-color-scheme: light)', color: '#e4eef7' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1622' },
   ],
+}
+
+/** "42.44°N 76.50°W" */
+function coords(lat: number, lon: number): string {
+  return `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? 'N' : 'S'} ${Math.abs(lon).toFixed(2)}°${lon >= 0 ? 'E' : 'W'}`
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="en"
       data-theme={theme === 'system' ? undefined : theme}
-      className={`${barlowCondensed.variable} ${plexSans.variable} ${plexMono.variable}`}
+      className={`${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <body>
@@ -39,6 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           mode={ctx.mode}
           seasonLabel={ctx.prefs.activeSeasonId.replace('-', '–')}
           homeName={ctx.prefs.homeName}
+          homeCoords={coords(ctx.prefs.homeLat, ctx.prefs.homeLon)}
           todayLabel={formatInstant(ctx.now, ctx.prefs.homeTimezone, 'ccc d LLL yyyy')}
           unreadAlerts={n}
         >

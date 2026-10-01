@@ -135,7 +135,7 @@ function collectMigrations() {
 // 4. Route table from src/app (pages, layouts, loading, error, not-found; API route handlers separately).
 
 const ROUTE_FILES = { 'page.tsx': 'page', 'layout.tsx': 'layout', 'loading.tsx': 'loading', 'error.tsx': 'error', 'not-found.tsx': 'notFound' }
-const SKIP_DIRS = new Set(['api', 'signin', 'vendor'])
+const SKIP_DIRS = new Set(['api', 'signin', 'vendor', 'assets'])
 
 const isClientFile = (file) => /^(?:\s|\/\/[^\n]*\n|\/\*[\s\S]*?\*\/)*['"]use client['"]/.test(fs.readFileSync(file, 'utf8'))
 
@@ -516,6 +516,7 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
   const REDIRECTS = {
     [path.join(SRC, 'lib', 'db', 'client.ts')]: path.join(HERE, 'src', 'db', 'client.ts'),
     [path.join(SRC, 'lib', 'actions', 'mode.ts')]: path.join(HERE, 'src', 'runtime', 'mode-action.ts'),
+    [path.join(SRC, 'lib', 'ui', 'assets.ts')]: shim('assets.ts'),
   }
   const VIRTUAL = {
     'virtual:piste/routes': () => routes,
@@ -524,6 +525,7 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
     'virtual:piste/build-info': () => `export const BUILD_INFO = ${JSON.stringify(buildInfo)}`,
     'virtual:piste/maplibre-worker': () => `export default ${JSON.stringify(worker)}`,
     'virtual:piste/env': () => `export const ENV = ${JSON.stringify(ENV)}`,
+    'virtual:piste/assets': () => `export const ASSETS = ${JSON.stringify(assetDataUrls())}`,
   }
   return {
     name: 'piste',
@@ -566,6 +568,18 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
       })
     },
   }
+}
+
+/** src/assets as data URLs (the Today hero art, the avatar body), for src/lib/ui/assets.ts's shim. */
+function assetDataUrls() {
+  const TYPES = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary' }
+  const dir = path.join(SRC, 'assets')
+  const out = {}
+  for (const f of fs.readdirSync(dir)) {
+    const type = TYPES[f.split('.').pop()]
+    if (type) out[f] = `data:${type};base64,${fs.readFileSync(path.join(dir, f)).toString('base64')}`
+  }
+  return out
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -652,7 +666,7 @@ async function main() {
 <title>Piste</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,${icon.toString('base64')}">
 <!-- Piste, single-file version. Bundles React, React DOM, Motion, Radix UI, lucide, Drizzle ORM, zod, Luxon, d3,
-     sql.js (SQLite, public domain), MapLibre GL JS (BSD-3-Clause) and the IBM Plex and Barlow Condensed fonts (SIL OFL 1.1).
+     sql.js (SQLite, public domain), MapLibre GL JS (BSD-3-Clause) and the Geist and Geist Mono fonts (SIL OFL 1.1), three.js (MIT).
      Their licences are in node_modules and src/fonts of the Piste source. -->
 <script>${themeScript}</script>
 <style>${css}</style>

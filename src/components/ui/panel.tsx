@@ -1,10 +1,10 @@
 import type { ReactNode, HTMLAttributes } from 'react'
 import { cn } from '@/lib/ui/cn'
 
-/** Primary content surface: fine border, 12px radius, no resting shadow. */
+/** Primary content surface: a glass panel (translucent tint, specular top edge, soft lift), 20px radius. */
 export function Panel({ className, children, as: Tag = 'section', ...rest }: HTMLAttributes<HTMLElement> & { as?: 'section' | 'div' | 'article' | 'aside' }) {
   return (
-    <Tag className={cn('rounded-[12px] border border-divider bg-surface', className)} {...rest}>
+    <Tag className={cn('glass rounded-[20px]', className)} {...rest}>
       {children}
     </Tag>
   )

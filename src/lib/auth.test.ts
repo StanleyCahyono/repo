@@ -108,7 +108,7 @@ describe('passcodeMatches', () => {
 
 describe('path matcher', () => {
   it('lets only sign-in, static build assets, the favicon and the map worker through', () => {
-    for (const p of ['/signin', '/signin/signout', '/signin/fonts/ibm-plex-sans-latin-400-normal.woff2', '/_next/static/chunks/app.js', '/icon.svg', '/vendor/maplibre/maplibre-gl-worker.mjs']) {
+    for (const p of ['/signin', '/signin/signout', '/signin/fonts/geist-latin-400-normal.woff2', '/_next/static/chunks/app.js', '/icon.svg', '/vendor/maplibre/maplibre-gl-worker.mjs']) {
       expect(isPublicPath(p), p).toBe(true)
     }
   })

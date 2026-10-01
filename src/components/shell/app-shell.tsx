@@ -1,16 +1,16 @@
 'use client'
 /**
- * Application frame.
- * - ≥1280px: 232px navigation rail with labels, utility area and data-mode card.
- * - 768–1279px: compact 76px rail (icon + short label).
- * - <768px: sticky top bar + bottom navigation (Today, Explore, Forecast, Trips, More).
- * The active indicator glides between items (shared layoutId, ~200ms).
+ * Application frame (Glass HUD).
+ * - ≥768px: a sticky top bar — PISTE wordmark, a glass navigation pill whose dark active chip glides between items
+ *   (shared layoutId, ~200ms), and the home position with Sources, Settings and alerts.
+ * - <768px: sticky glass top bar + glass bottom navigation (Today, Explore, Forecast, Trips, More).
+ * Content sits on the sky gradient (body background); pages use glass panels.
  */
 import { useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, MotionConfig } from 'motion/react'
-import { Bell, Ellipsis, FlaskConical, Radio } from 'lucide-react'
+import { Bell, Ellipsis, FlaskConical } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Badge } from '@/components/ui/badge'
@@ -23,65 +23,48 @@ export interface ShellProps {
   mode: 'live' | 'demo'
   seasonLabel: string
   homeName: string
+  /** "42.44°N 76.50°W" */
+  homeCoords: string
   todayLabel: string
   unreadAlerts: number
   children: ReactNode
 }
 
-export function Wordmark({ compact = false }: { compact?: boolean }) {
-  return (
-    <span className="inline-flex items-center gap-2.5">
-      <svg viewBox="0 0 32 32" aria-hidden className="size-8 shrink-0">
-        <rect width="32" height="32" rx="8" fill="var(--teal)" />
-        <path d="M4 23.5 12.2 12l4.6 6 3.4-4.2L28 23.5" fill="none" stroke="var(--on-teal)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-        <path d="M12.2 12c1.6 3.2 1 6.4-1.6 11.5" fill="none" stroke="var(--on-teal)" strokeWidth="1.4" strokeDasharray="1.6 2.2" strokeLinecap="round" opacity=".85" />
-      </svg>
-      {compact ? null : <span className="font-display text-[26px] leading-none tracking-[0.01em] text-ink">Piste</span>}
-    </span>
-  )
+export function Wordmark() {
+  return <span className="text-[20px] leading-none font-semibold tracking-[0.22em] text-ink">PISTE</span>
 }
 
-function RailLink({ item, active }: { item: NavItem; active: boolean }) {
+function PillLink({ item, active }: { item: NavItem; active: boolean }) {
   return (
     <Link
       href={item.href}
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'group relative flex rounded-[10px] font-medium outline-offset-0 transition-colors duration-150',
-        'h-[58px] flex-col items-center justify-center gap-1 px-1 text-[12px]',
-        'xl:h-10 xl:flex-row xl:justify-start xl:gap-3 xl:px-3 xl:text-[14.5px]',
-        active ? 'text-teal' : 'text-ink-2 hover:bg-surface-3 hover:text-ink',
+        'relative flex h-10 items-center rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150 lg:px-4',
+        active ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
       )}
     >
-      {active ? <motion.span layoutId="rail-active" transition={t.select} className="absolute inset-0 rounded-[10px] bg-glacier" aria-hidden /> : null}
-      <item.Icon aria-hidden className="relative size-5 shrink-0 xl:size-[18px]" strokeWidth={1.8} />
-      <span className="relative truncate xl:hidden">{item.short ?? item.label}</span>
-      <span className="relative hidden truncate xl:inline">{item.label}</span>
+      {active ? <motion.span layoutId="pill-active" transition={t.select} className="absolute inset-0 rounded-full bg-ink-chip" aria-hidden /> : null}
+      <span className="relative">{item.short ?? item.label}</span>
     </Link>
   )
 }
 
-function ModeCard({ mode, homeName, todayLabel }: { mode: 'live' | 'demo'; homeName: string; todayLabel: string }) {
-  const pathname = usePathname()
+function UtilityLink({ item, active, badge }: { item: NavItem; active: boolean; badge?: number }) {
   return (
-    <form
-      action={setMode.bind(null, mode === 'demo' ? 'live' : 'demo', pathname)}
+    <Link
+      href={item.href}
+      aria-current={active ? 'page' : undefined}
+      aria-label={item.label}
+      title={item.label}
       className={cn(
-        'rounded-[12px] border p-3 text-[12.5px] leading-snug',
-        mode === 'demo' ? 'border-demo/40 bg-demo-bg text-ink' : 'border-divider bg-surface-2 text-ink-2',
+        'glass-strong relative flex size-10 items-center justify-center rounded-full transition-colors duration-150',
+        active ? 'text-teal' : 'text-ink-2 hover:text-ink',
       )}
     >
-      <p className="flex items-center gap-1.5 font-semibold text-ink">
-        {mode === 'demo' ? <FlaskConical aria-hidden className="size-3.5 text-demo" /> : <Radio aria-hidden className="size-3.5 text-positive" />}
-        {mode === 'demo' ? 'Demo data' : 'Live data'}
-      </p>
-      <p className="mt-0.5">
-        {homeName} · {todayLabel}
-      </p>
-      <button type="submit" className="mt-2 font-medium text-teal underline-offset-2 hover:underline">
-        {mode === 'demo' ? 'Return to live data' : 'Explore demo mode'}
-      </button>
-    </form>
+      <item.Icon aria-hidden className="size-[18px]" strokeWidth={1.8} />
+      {badge ? <span className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full border-2 border-surface bg-copper" aria-hidden /> : null}
+    </Link>
   )
 }
 
@@ -92,7 +75,7 @@ function DemoBanner({ todayLabel }: { todayLabel: string }) {
       action={setMode.bind(null, 'live', pathname)}
       role="region"
       aria-label="Demo mode notice"
-      className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-demo/30 bg-demo-bg px-4 py-2 text-[13px] text-ink md:px-8"
+      className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-demo/30 bg-demo-bg px-4 py-2 text-[13px] text-ink md:px-12"
     >
       <FlaskConical aria-hidden className="size-4 text-demo" />
       <p className="min-w-0 flex-1">
@@ -106,7 +89,7 @@ function DemoBanner({ todayLabel }: { todayLabel: string }) {
   )
 }
 
-export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts, children }: ShellProps) {
+export function AppShell({ mode, seasonLabel, homeName, homeCoords, todayLabel, unreadAlerts, children }: ShellProps) {
   const pathname = usePathname()
   const [moreOpen, setMoreOpen] = useState(false)
   const moreActive = MOBILE_MORE.some((i) => i.match(pathname))
@@ -114,64 +97,59 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
   return (
     <MotionConfig reducedMotion="user">
       <ToastProvider>
-        <a
-          href="#main"
-          className="sr-only-focusable fixed top-2 left-2 z-[70] rounded-md bg-teal px-3 py-2 text-on-teal"
-        >
+        <a href="#main" className="sr-only-focusable fixed top-2 left-2 z-[70] rounded-md bg-teal px-3 py-2 text-on-teal">
           Skip to content
         </a>
-        <div className="min-h-dvh md:grid md:grid-cols-[76px_1fr] xl:grid-cols-[232px_1fr]">
-          {/* Desktop / tablet rail */}
-          <aside className="sticky top-0 hidden h-dvh flex-col border-r border-divider bg-surface md:flex" aria-label="Primary">
-            <div className="flex h-[72px] items-center px-4 xl:px-5">
+        <div className="flex min-h-dvh min-w-0 flex-col">
+          {/* Desktop / tablet top bar */}
+          <header className="relative z-30 hidden md:block">
+            <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-5 gap-y-3 px-8 pt-6 lg:px-12">
               <Link href="/" className="rounded-md" aria-label="Piste — Today">
-                <span className="hidden xl:inline-flex">
-                  <Wordmark />
-                </span>
-                <span className="inline-flex xl:hidden">
-                  <Wordmark compact />
-                </span>
-              </Link>
-            </div>
-            <p className="eyebrow hidden px-5 pb-3 xl:block">Season {seasonLabel}</p>
-            <nav aria-label="Main" className="flex flex-col gap-0.5 px-2 xl:px-3">
-              {PRIMARY_NAV.map((item) => (
-                <RailLink key={item.href} item={item} active={item.match(pathname)} />
-              ))}
-            </nav>
-            <div className="mt-auto flex flex-col gap-0.5 px-2 pb-3 xl:px-3">
-              <p className="eyebrow hidden px-3 pt-3 pb-1 xl:block">Utility</p>
-              {UTILITY_NAV.map((item) => (
-                <RailLink key={item.href} item={item} active={item.match(pathname)} />
-              ))}
-              <div className="mt-3 hidden xl:block">
-                <ModeCard mode={mode} homeName={homeName} todayLabel={todayLabel} />
-              </div>
-            </div>
-          </aside>
-
-          <div className="flex min-w-0 flex-col">
-            {/* Mobile top bar */}
-            <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-divider bg-surface/95 px-4 backdrop-blur-sm md:hidden">
-              <Link href="/" aria-label="Piste — Today" className="rounded-md">
                 <Wordmark />
               </Link>
-              <span className="text-[12.5px] text-ink-2">
-                {seasonLabel} · {homeName}
-              </span>
-            </header>
-            {mode === 'demo' ? <DemoBanner todayLabel={todayLabel} /> : null}
-            <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1320px] flex-1 px-4 pt-6 pb-28 outline-none md:px-8 md:pt-8 md:pb-16">
-              {children}
-            </main>
-          </div>
+              <nav aria-label="Main" className="glass flex gap-0.5 rounded-full p-[5px]">
+                {PRIMARY_NAV.map((item) => (
+                  <PillLink key={item.href} item={item} active={item.match(pathname)} />
+                ))}
+              </nav>
+              <div className="flex items-center gap-2.5">
+                <span className="hud hidden text-ink-2 xl:inline" title={`Home: ${homeName} · season ${seasonLabel}`}>
+                  {homeName} · {homeCoords}
+                </span>
+                {unreadAlerts > 0 ? (
+                  <Link
+                    href="/#alerts"
+                    aria-label={`${unreadAlerts} unread ${unreadAlerts === 1 ? 'alert' : 'alerts'}`}
+                    className="glass-strong relative flex size-10 items-center justify-center rounded-full text-copper"
+                  >
+                    <Bell aria-hidden className="size-[18px]" strokeWidth={1.8} />
+                    <span className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full border-2 border-surface bg-copper" aria-hidden />
+                  </Link>
+                ) : null}
+                {UTILITY_NAV.map((item) => (
+                  <UtilityLink key={item.href} item={item} active={item.match(pathname)} />
+                ))}
+              </div>
+            </div>
+          </header>
+
+          {/* Mobile top bar */}
+          <header className="glass sticky top-0 z-30 flex h-14 items-center justify-between rounded-none border-x-0 border-t-0 px-4 md:hidden">
+            <Link href="/" aria-label="Piste — Today" className="rounded-md">
+              <Wordmark />
+            </Link>
+            <span className="hud text-ink-2">
+              {seasonLabel} · {homeName}
+            </span>
+          </header>
+          {mode === 'demo' ? <DemoBanner todayLabel={todayLabel} /> : null}
+          <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1440px] min-w-0 flex-1 px-4 pt-6 pb-28 outline-none md:px-8 md:pt-8 md:pb-16 lg:px-12">
+            {children}
+          </main>
         </div>
 
         {/* Mobile bottom navigation */}
-        <nav
-          aria-label="Main"
-          className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-divider bg-surface/97 backdrop-blur-sm md:hidden"
-        >
+        <nav aria-label="Main" className="glass safe-bottom fixed inset-x-0 bottom-0 z-40 rounded-none border-x-0 border-b-0 md:hidden">
           <ul className="grid h-16 grid-cols-5">
             {MOBILE_PRIMARY.map((item) => {
               const active = item.match(pathname)
@@ -180,10 +158,10 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                   <Link
                     href={item.href}
                     aria-current={active ? 'page' : undefined}
-                    className={cn('flex h-full flex-col items-center justify-center gap-1 text-[12px] font-medium', active ? 'text-teal' : 'text-ink-2')}
+                    className={cn('flex h-full flex-col items-center justify-center gap-1 text-[12px] font-medium', active ? 'text-ink' : 'text-ink-2')}
                   >
                     {active ? (
-                      <motion.span layoutId="bottom-active" transition={t.select} aria-hidden className="absolute top-0 h-[3px] w-10 rounded-b-full bg-teal" />
+                      <motion.span layoutId="bottom-active" transition={t.select} aria-hidden className="absolute top-0 h-[3px] w-10 rounded-b-full bg-ink-chip" />
                     ) : null}
                     <item.Icon aria-hidden className="size-[22px]" strokeWidth={1.8} />
                     {item.short ?? item.label}
@@ -197,9 +175,9 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                 onClick={() => setMoreOpen(true)}
                 aria-haspopup="dialog"
                 aria-describedby={unreadAlerts > 0 ? 'more-unread' : undefined}
-                className={cn('flex h-full w-full flex-col items-center justify-center gap-1 text-[12px] font-medium', moreActive ? 'text-teal' : 'text-ink-2')}
+                className={cn('flex h-full w-full flex-col items-center justify-center gap-1 text-[12px] font-medium', moreActive ? 'text-ink' : 'text-ink-2')}
               >
-                {moreActive ? <span aria-hidden className="absolute top-0 h-[3px] w-10 rounded-b-full bg-teal" /> : null}
+                {moreActive ? <span aria-hidden className="absolute top-0 h-[3px] w-10 rounded-b-full bg-ink-chip" /> : null}
                 <span className="relative">
                   <Ellipsis aria-hidden className="size-[22px]" strokeWidth={1.8} />
                   {unreadAlerts > 0 ? <span className="absolute -top-0.5 -right-1 size-2 rounded-full bg-copper" aria-hidden /> : null}
@@ -223,7 +201,7 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                 <Link
                   href="/#alerts"
                   onClick={() => setMoreOpen(false)}
-                  className="flex h-12 items-center gap-3 rounded-[10px] px-3 text-[15px] font-medium text-ink hover:bg-surface-3"
+                  className="flex h-12 items-center gap-3 rounded-[12px] px-3 text-[15px] font-medium text-ink hover:bg-surface-3"
                 >
                   <Bell aria-hidden className="size-5 text-copper" strokeWidth={1.8} />
                   Unread alerts
@@ -240,7 +218,7 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
                   onClick={() => setMoreOpen(false)}
                   aria-current={item.match(pathname) ? 'page' : undefined}
                   className={cn(
-                    'flex h-12 items-center gap-3 rounded-[10px] px-3 text-[15px] font-medium',
+                    'flex h-12 items-center gap-3 rounded-[12px] px-3 text-[15px] font-medium',
                     item.match(pathname) ? 'bg-glacier text-teal' : 'text-ink hover:bg-surface-3',
                   )}
                 >
@@ -250,9 +228,9 @@ export function AppShell({ mode, seasonLabel, homeName, todayLabel, unreadAlerts
               </li>
             ))}
           </ul>
-          <div className="mt-3">
-            <ModeCard mode={mode} homeName={homeName} todayLabel={todayLabel} />
-          </div>
+          <p className="hud mt-3 px-3 text-ink-2">
+            {homeName} · {homeCoords} · {todayLabel}
+          </p>
         </Sheet>
       </ToastProvider>
     </MotionConfig>

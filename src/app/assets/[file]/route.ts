@@ -1,0 +1,27 @@
+/**
+ * Serves the app's own binary assets (src/assets: the Today hero art and the avatar body), same-origin, so nothing
+ * loads from a CDN at runtime. Only the files listed in ASSET_FILES are served. The single-file build inlines the
+ * same files as data URLs instead (standalone/src/shims/assets.ts).
+ */
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { ASSET_FILES } from '@/lib/ui/assets'
+
+const TYPES: Record<string, string> = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary' }
+
+export async function GET(_req: Request, ctx: { params: Promise<{ file: string }> }) {
+  const { file } = await ctx.params
+  if (!(ASSET_FILES as readonly string[]).includes(file)) return new Response('Not found', { status: 404 })
+  try {
+    const body = await fs.readFile(path.join(process.cwd(), 'src', 'assets', file))
+    return new Response(new Uint8Array(body), {
+      headers: {
+        'content-type': TYPES[file.split('.').pop() ?? ''] ?? 'application/octet-stream',
+        'cache-control': 'public, max-age=604800',
+        'x-content-type-options': 'nosniff',
+      },
+    })
+  } catch {
+    return new Response('Not found', { status: 404 })
+  }
+}

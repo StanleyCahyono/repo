@@ -28,11 +28,11 @@ const icon = (name: keyof typeof ICON, cls = 'icon') =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICON[name]}</svg>`
 
 const FONT_FACES = [
-  ['Barlow Condensed', 'barlow-condensed-latin-600-normal.woff2', 600],
-  ['IBM Plex Sans', 'ibm-plex-sans-latin-400-normal.woff2', 400],
-  ['IBM Plex Sans', 'ibm-plex-sans-latin-500-normal.woff2', 500],
-  ['IBM Plex Sans', 'ibm-plex-sans-latin-600-normal.woff2', 600],
-  ['IBM Plex Mono', 'ibm-plex-mono-latin-400-normal.woff2', 400],
+  ['Geist', 'geist-latin-300-normal.woff2', 300],
+  ['Geist', 'geist-latin-400-normal.woff2', 400],
+  ['Geist', 'geist-latin-500-normal.woff2', 500],
+  ['Geist', 'geist-latin-600-normal.woff2', 600],
+  ['Geist Mono', 'geist-mono-latin-400-normal.woff2', 400],
 ] as const
 
 export const SIGNIN_FONT_FILES: readonly string[] = FONT_FACES.map((f) => f[1])
@@ -44,7 +44,7 @@ ${FONT_FACES.map(([family, file, weight]) => `@font-face{font-family:'${family}'
 @media (prefers-color-scheme:dark){:root{--canvas:#0c1a24;--surface:#12232e;--surface-2:#162a37;--surface-3:#1d3342;--ink:#e5ecee;--ink-2:#a8b7be;--ink-3:#97a7af;--teal:#6db3ba;--teal-strong:#8cc7cc;--on-teal:#0b1e25;--glacier:#1b3a41;--divider:#243a47;--divider-strong:#34505f;--critical:#ec8d90;--critical-bg:#3d1e21;--caution:#ddb45a;--caution-bg:#3a2f14;--info:#8ab6e0;--info-bg:#1a3048;--focus:#8cc7cc;--topo-line:rgb(141 199 204/.12);--topo-line-strong:rgb(141 199 204/.26);--shadow-lift:0 6px 18px -8px rgb(0 0 0/.55);color-scheme:dark}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/1.55 'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/1.55 'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:max(24px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom))}
 .card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--divider);border-radius:14px;overflow:hidden;animation:rise .22s cubic-bezier(.22,.8,.26,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -53,10 +53,10 @@ body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/1.55 'IBM 
 .band svg.topo{position:absolute;inset:0;width:100%;height:100%}
 .brand{position:absolute;left:24px;bottom:16px;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .brand .mark{width:32px;height:32px}
-.brand span{font:600 26px/1 'Barlow Condensed',system-ui,sans-serif;letter-spacing:.01em}
+.brand span{font:600 20px/1 'Geist',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase}
 .body{padding:24px 24px 28px}
 .eyebrow{margin:0 0 6px;font-size:12px;line-height:1.3;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
-h1{margin:0;font:600 34px/1.02 'Barlow Condensed',system-ui,sans-serif;letter-spacing:.005em;text-wrap:balance}
+h1{margin:0;font:300 36px/1.02 'Geist',system-ui,sans-serif;letter-spacing:-.035em;text-wrap:balance}
 .lead{margin:8px 0 0;color:var(--ink-2);font-size:15px;text-wrap:pretty}
 .notice{display:flex;gap:10px;margin:18px 0 0;padding:12px 14px;border:1px solid;border-radius:10px;font-size:13.5px;line-height:1.45}
 .notice .icon{flex:none;width:16px;height:16px;margin-top:2px}
@@ -74,7 +74,7 @@ input[type=password]:focus{outline:none;border-color:var(--teal)}
 input:disabled{background:var(--surface-3);color:var(--ink-3)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
 input[type=password]:focus-visible{outline-offset:1px;border-radius:10px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:var(--on-teal);font:500 15px/1 'IBM Plex Sans',system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s,transform .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:var(--on-teal);font:500 15px/1 'Geist',system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s,transform .15s}
 .btn:hover{background:var(--teal-strong);border-color:var(--teal-strong)}
 .btn:active{transform:translateY(1px)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
@@ -83,8 +83,8 @@ input[type=password]:focus-visible{outline-offset:1px;border-radius:10px}
 .fine{margin:22px 0 0;padding-top:16px;border-top:1px solid var(--divider);font-size:12.5px;color:var(--ink-3)}
 ol{margin:16px 0 0;padding:0;list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:12px}
 ol li{position:relative;padding-left:34px;font-size:14px;color:var(--ink)}
-ol li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:999px;background:var(--glacier);color:var(--teal);font:600 12.5px/24px 'IBM Plex Sans',system-ui,sans-serif;text-align:center}
-code{font:400 13px/1.4 'IBM Plex Mono',ui-monospace,monospace;background:var(--surface-3);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+ol li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:999px;background:var(--glacier);color:var(--teal);font:600 12.5px/24px 'Geist',system-ui,sans-serif;text-align:center}
+code{font:400 13px/1.4 'Geist Mono',ui-monospace,monospace;background:var(--surface-3);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .foot{margin:0;font-size:12px;color:var(--ink-3)}
 code.nw{white-space:nowrap}
 .actions{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:10px}

@@ -44,11 +44,11 @@ Piste is a single-user ski planning app (Next.js 16 App Router, React 19, TypeSc
 - Times: instants are UTC ISO strings; resort days are `YYYY-MM-DD` in the resort's IANA zone via `src/lib/domain/time.ts` (Luxon). Never compute resort days with `Date` local time.
 
 ## Design system (see docs/design.md for the full spec)
-- Fonts: Barlow Condensed 600 (`font-display`) for wordmark, page titles and selected large numbers; IBM Plex Sans (body, controls, tables); IBM Plex Mono (`font-mono`) sparingly for compact measurements/timestamps. Never Inter, Roboto, Montserrat or Arial.
+- Fonts: Geist (self-hosted, OFL) for display and text — big titles in weight 300 with tight tracking; Geist Mono (`font-mono`, `.hud`, `.eyebrow`) for tracked uppercase HUD labels, measurements and timestamps. Never Inter, Roboto, Montserrat or Arial.
 - Colours only through tokens: `bg-canvas`, `bg-surface`, `bg-surface-2`, `text-ink`, `text-ink-2`, `text-ink-3`, `bg-teal`/`text-teal`, `bg-glacier`, `text-copper`, `border-divider`, `positive|caution|critical|info|demo` (+ `-bg`), pass families `ikon|epic|indy|mc|regional` (+ `-bg`, `-ink`). No raw hex in components. Dark theme is automatic via tokens.
 - Radii 10–14px for panels (`rounded-[12px]`), fine borders, shadow only on overlays (`shadow-overlay`). 8px spacing rhythm.
 - Tabular numerals (`tnum`) for prices, times and measurements. Metadata text ≥ 12px.
-- No purple gradients, neon glows, glassmorphism, emoji navigation, oversized slogans or repetitive identical card grids.
+- Glass HUD (2026 redesign): pages sit on the sky gradient; panels use `.glass` / `.glass-strong` (translucent tint, specular edge, blur with a solid fallback). Primary actions are dark `bg-ink-chip` pills. No purple gradients, neon glows or emoji navigation.
 - Accessibility: semantic landmarks, labelled controls, visible focus, 44px touch targets for primary mobile actions, text/icon alongside colour, table alternatives for charts, list alternative for maps, `prefers-reduced-motion` respected.
 - Motion: opacity/transform only; timings from `src/lib/ui/motion.ts` (page-in 180–240ms, hover 120–160ms, sheets 220–300ms, score bars 300–450ms once).
 

@@ -6,20 +6,20 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'quiet' | 'danger'
 type Size = 'sm' | 'md' | 'lg'
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-medium select-none whitespace-nowrap rounded-md border ' +
+  'inline-flex items-center justify-center gap-2 font-medium select-none whitespace-nowrap rounded-full border ' +
   'transition-[background-color,border-color,color,box-shadow,transform] duration-150 ease-[var(--ease-out-soft)] ' +
   'active:translate-y-px disabled:opacity-50 disabled:active:translate-y-0'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-teal text-on-teal border-teal hover:bg-teal-strong hover:border-teal-strong shadow-[inset_0_-1px_0_rgb(0_0_0/0.12)]',
-  secondary: 'bg-surface text-ink border-divider-strong hover:border-teal hover:text-teal',
+  primary: 'bg-ink-chip text-on-ink-chip border-ink-chip hover:bg-teal hover:border-teal hover:text-on-teal shadow-[0_8px_20px_-8px_rgb(19_32_44/0.45)]',
+  secondary: 'bg-glass-strong text-ink border-[var(--glass-edge)] shadow-[0_6px_18px_-10px_rgb(19_32_44/0.35)] hover:border-teal hover:text-teal',
   ghost: 'bg-transparent text-ink border-transparent hover:bg-surface-3',
   quiet: 'bg-glacier/60 text-teal border-transparent hover:bg-glacier',
-  danger: 'bg-surface text-critical border-divider-strong hover:border-critical',
+  danger: 'bg-glass-strong text-critical border-divider-strong hover:border-critical',
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'h-8 px-3 text-[13.5px]',
+  sm: 'h-9 px-3.5 text-[13.5px]',
   md: 'h-10 px-4 text-[14.5px]',
   lg: 'h-12 px-5 text-[15px]',
 }

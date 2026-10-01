@@ -419,7 +419,7 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
   return items.sort((x, y) => (x.at < y.at ? 1 : x.at > y.at ? -1 : x.resortId.localeCompare(y.resortId)))
 }
 
-async function stripFor(
+export async function stripFor(
   b: Bundle,
   resortIds: readonly string[],
   dates7: readonly string[],
