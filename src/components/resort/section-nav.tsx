@@ -1,15 +1,18 @@
 'use client'
 /**
- * Sticky, anchored section bar for the resort page. Highlights the section in view (the highlight glides with a
- * shared layoutId), keeps the planning date one tap away, and shows compact Save / Compare / Add to trip once the
- * header's own actions have scrolled out of view. Sections are plain anchors, so it works without JavaScript.
+ * The scroll story's chapter bar: a floating glass pill whose dark highlight slides to the chapter in view (a shared
+ * layoutId spring; instant under reduced motion). The first chapter is the resort itself (the hero and overview).
+ * It keeps the planning date one tap away and shows compact Save / Compare / Add to trip once the hero's own actions
+ * have scrolled out of view. Chapters are plain anchors, so it works without JavaScript.
+ *
+ * Sticky below the phone header (top 56px) and near the top on desktop, where the app header scrolls away; the
+ * wrapper ignores the pointer so only the pill itself covers content.
  */
 import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { motion, useReducedMotion } from 'motion/react'
 import { CalendarDays, ChevronLeft, ChevronRight, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
-import { t } from '@/lib/ui/motion'
 import { useScrollEdges } from '@/lib/ui/use-scroll-edges'
 import { addDays, formatLocalDate } from '@/lib/domain/time'
 import { SECTIONS, dayLabel, dayLabelYear, type SectionId } from './format'
@@ -18,18 +21,20 @@ import { ResortActions, type ResortActionsProps } from './resort-actions'
 /** '15 Jan' — the compact planning-date label on phones. */
 const shortDay = (date: string) => formatLocalDate(date, 'd LLL')
 
-export function SectionNav({ date, today, actions }: { date: string; today: string; actions: ResortActionsProps }) {
+const PILL = { type: 'spring', stiffness: 380, damping: 32, mass: 0.9 } as const
+
+export function SectionNav({ date, today, actions, name }: { date: string; today: string; actions: ResortActionsProps; name: string }) {
   const [active, setActive] = useState<SectionId>('overview')
-  const [headerHidden, setHeaderHidden] = useState(false)
+  const [heroHidden, setHeroHidden] = useState(false)
   const listRef = useRef<HTMLUListElement>(null)
   const reduce = useReducedMotion()
 
-  // Scrollspy: the last section whose top has passed a line just below the sticky bars.
+  // Scrollspy: the last chapter whose top has passed a line a little below the bar.
   useEffect(() => {
     let raf = 0
     const measure = () => {
       raf = 0
-      const line = window.innerWidth >= 768 ? 120 : 150
+      const line = Math.min(window.innerHeight * 0.4, window.innerWidth >= 768 ? 260 : 300)
       let current: SectionId = SECTIONS[0].id
       for (const s of SECTIONS) {
         const el = document.getElementById(s.id)
@@ -51,21 +56,31 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
     }
   }, [])
 
-  // Compact actions appear once the header's actions are out of view.
+  // Compact actions appear once the hero (and its actions) is out of view.
   useEffect(() => {
-    const el = document.getElementById('resort-header-actions')
-    if (!el || typeof IntersectionObserver === 'undefined') return
-    const io = new IntersectionObserver(([e]) => setHeaderHidden(!e.isIntersecting), { rootMargin: '-64px 0px 0px 0px' })
-    io.observe(el)
-    return () => io.disconnect()
+    const el = document.getElementById('overview')
+    if (!el) return
+    let raf = 0
+    const check = () => {
+      raf = 0
+      setHeroHidden(el.getBoundingClientRect().top < 200)
+    }
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(check)
+    }
+    check()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) window.cancelAnimationFrame(raf)
+    }
   }, [])
 
-  // Keep the active tab visible inside the horizontally scrolling list (never scrolls the page).
+  // Keep the active chapter visible inside the horizontally scrolling list (never scrolls the page).
   useEffect(() => {
     const list = listRef.current
     const item = list?.querySelector<HTMLElement>(`[data-tab="${active}"]`)
     if (!list || !item) return
-    // 40px margins keep the active tab clear of the edge fade (scroll-fade-x).
     const left = item.offsetLeft - 40
     const right = item.offsetLeft + item.offsetWidth + 40
     if (left < list.scrollLeft) list.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' })
@@ -73,21 +88,18 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
   }, [active, reduce])
 
   useScrollEdges(listRef)
-  const page = (dir: 1 | -1) => {
-    const list = listRef.current
-    if (list) list.scrollBy({ left: dir * Math.max(120, list.clientWidth * 0.7), behavior: reduce ? 'auto' : 'smooth' })
-  }
 
   const go = useCallback(
     (id: SectionId) => (e: React.MouseEvent<HTMLAnchorElement>) => {
       const el = document.getElementById(id)
       if (!el) return
       e.preventDefault()
-      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+      // The resort chapter starts at the top of the page (the hero).
+      if (id === 'overview') window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+      else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
       history.replaceState(history.state, '', `#${id}`)
       setActive(id)
-      // Move focus to the section heading for keyboard and screen-reader users (without a second scroll).
-      const h = document.getElementById(`${id}-title`)
+      const h = document.getElementById(id === 'overview' ? 'resort-title' : `${id}-title`)
       if (h) {
         h.setAttribute('tabindex', '-1')
         h.focus({ preventScroll: true })
@@ -97,64 +109,56 @@ export function SectionNav({ date, today, actions }: { date: string; today: stri
   )
 
   return (
-    <div data-resort-nav className="sticky top-14 z-20 -mx-4 border-b border-divider bg-canvas md:top-0 md:-mx-8">
-      <div className="flex h-12 items-center gap-2 px-4 md:h-14 md:gap-4 md:px-8">
-        <nav aria-label="Resort sections" className="relative min-w-0 flex-1">
-          <ul
-            ref={listRef}
-            className="peer scroll-fade-x flex h-12 items-stretch gap-0.5 overflow-x-auto [scrollbar-width:none] md:h-14 [&::-webkit-scrollbar]:hidden"
-          >
+    <div data-resort-nav className="pointer-events-none sticky top-14 z-20 -mx-4 -mt-4 flex justify-center px-2 pt-1.5 md:top-3 md:mx-0 md:mt-0 md:px-0 md:pt-0">
+      {/* Once the story is under way, text scrolling up fades out beneath the bar instead of running into it. */}
+      <span
+        aria-hidden
+        className={cn(
+          'absolute inset-x-0 -top-1.5 h-[76px] bg-[linear-gradient(var(--canvas)_45%,transparent)] transition-opacity duration-300 md:-top-3 md:-mx-8 md:h-[92px] lg:-mx-12',
+          '[mask-image:linear-gradient(to_right,transparent,#000_4%,#000_96%,transparent)]',
+          heroHidden ? 'opacity-100' : 'opacity-0',
+        )}
+      />
+      <div className="glass-strong pointer-events-auto relative flex h-[52px] max-w-full min-w-0 items-center gap-1 rounded-full p-[5px]">
+        <nav aria-label="Resort chapters" className="relative min-w-0 flex-1">
+          <ul ref={listRef} className="scroll-fade-x flex h-[42px] items-stretch gap-0.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {SECTIONS.map((s) => {
               const on = s.id === active
+              const label = s.id === 'overview' ? name : s.label
+              const short = s.id === 'overview' ? name : s.short
               return (
                 <li key={s.id} data-tab={s.id} className="relative flex shrink-0">
+                  {on ? (
+                    <motion.span layoutId="resort-chapter-pill" transition={reduce ? { duration: 0 } : PILL} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip shadow-[0_6px_16px_rgb(19_32_44/0.25)]" />
+                  ) : null}
                   <a
-                    href={`#${s.id}`}
+                    href={s.id === 'overview' ? '#top' : `#${s.id}`}
                     onClick={go(s.id)}
                     aria-current={on ? 'location' : undefined}
                     className={cn(
-                      'relative flex items-center rounded-md px-2.5 text-[14px] font-medium whitespace-nowrap transition-colors duration-150 md:px-3',
-                      on ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                      'relative flex items-center rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap transition-colors duration-300 md:px-4',
+                      on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
                     )}
                   >
-                    <span className="lg:hidden">{s.short}</span>
-                    <span className="hidden lg:inline">{s.label}</span>
+                    <span className="lg:hidden">{short}</span>
+                    <span className="hidden lg:inline">{label}</span>
                   </a>
-                  {on ? <motion.span layoutId="resort-section-active" transition={t.select} aria-hidden className="absolute inset-x-2 bottom-0 h-[3px] rounded-t-full bg-teal" /> : null}
                 </li>
               )
             })}
           </ul>
-          {/* Pointer hint for tabs past the edge (keyboard users reach every tab with Tab; phones swipe). */}
-          <button
-            type="button"
-            tabIndex={-1}
-            aria-hidden
-            onClick={() => page(-1)}
-            className="absolute inset-y-0 left-0 my-auto hidden size-8 items-center justify-center rounded-full border border-divider bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal md:peer-data-[more-start]:inline-flex"
-          >
-            <ChevronLeft aria-hidden className="size-4" />
-          </button>
-          <button
-            type="button"
-            tabIndex={-1}
-            aria-hidden
-            onClick={() => page(1)}
-            className="absolute inset-y-0 right-0 my-auto hidden size-8 items-center justify-center rounded-full border border-divider bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal md:peer-data-[more-end]:inline-flex"
-          >
-            <ChevronRight aria-hidden className="size-4" />
-          </button>
         </nav>
+        <span aria-hidden className="mx-1 hidden h-6 w-px bg-divider-strong md:block" />
         <DateControl date={date} today={today} />
         <motion.div
           initial={false}
-          animate={headerHidden ? { opacity: 1, x: 0 } : { opacity: 0, x: 6 }}
-          transition={t.hover}
-          className={cn('hidden md:block', !headerHidden && 'pointer-events-none')}
-          aria-hidden={!headerHidden}
-          inert={!headerHidden}
+          animate={heroHidden ? { opacity: 1, width: 'auto' } : { opacity: 0, width: 0 }}
+          transition={{ duration: reduce ? 0 : 0.22 }}
+          className={cn('hidden overflow-hidden md:block', !heroHidden && 'pointer-events-none')}
+          aria-hidden={!heroHidden}
+          inert={!heroHidden}
         >
-          <ResortActions variant="compact" {...actions} />
+          <ResortActions variant="compact" className="pl-1" {...actions} />
         </motion.div>
       </div>
     </div>
@@ -184,7 +188,7 @@ export function DateControl({ date, today, className }: { date: string; today: s
         type="button"
         onClick={() => setDate(addDays(date, -1))}
         aria-label={`Previous day (${dayLabel(addDays(date, -1))})`}
-        className="hidden size-9 items-center justify-center rounded-md text-ink-2 hover:bg-surface-3 hover:text-ink lg:inline-flex"
+        className="hidden size-9 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink xl:inline-flex"
       >
         <ChevronLeft aria-hidden className="size-4" />
       </button>
@@ -201,8 +205,8 @@ export function DateControl({ date, today, className }: { date: string; today: s
             }
           }}
           className={cn(
-            'inline-flex h-11 items-center gap-1.5 rounded-md border px-2.5 text-[13.5px] font-medium tnum transition-colors duration-150 md:h-9',
-            date === today ? 'border-divider-strong bg-surface text-ink' : 'border-teal/60 bg-glacier/60 text-teal',
+            'inline-flex h-[42px] items-center gap-1.5 rounded-full border px-3 text-[13.5px] font-medium whitespace-nowrap tnum transition-colors duration-150',
+            date === today ? 'border-transparent bg-transparent text-ink hover:bg-surface-3' : 'border-teal/60 bg-glacier/60 text-teal',
           )}
           aria-label={`Planning date: ${dayLabelYear(date)}${date === today ? ' (today)' : ''}. Change date`}
         >
@@ -224,12 +228,12 @@ export function DateControl({ date, today, className }: { date: string; today: s
         type="button"
         onClick={() => setDate(addDays(date, 1))}
         aria-label={`Next day (${dayLabel(addDays(date, 1))})`}
-        className="hidden size-9 items-center justify-center rounded-md text-ink-2 hover:bg-surface-3 hover:text-ink lg:inline-flex"
+        className="hidden size-9 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink xl:inline-flex"
       >
         <ChevronRight aria-hidden className="size-4" />
       </button>
       {date !== today ? (
-        <button type="button" onClick={() => setDate(today)} className="hidden h-9 rounded-md px-2 text-[13px] font-medium text-teal hover:underline lg:inline-flex lg:items-center">
+        <button type="button" onClick={() => setDate(today)} className="hidden h-9 rounded-full px-2 text-[13px] font-medium text-teal hover:underline xl:inline-flex xl:items-center">
           Today
         </button>
       ) : null}

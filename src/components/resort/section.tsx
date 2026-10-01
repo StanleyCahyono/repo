@@ -1,9 +1,10 @@
 /**
- * Layout primitives for the resort page: numbered editorial sections, sub-headings, fact lists with a source
- * trigger beside each value, and yes/no/unknown feature chips (unknown is never "no").
+ * Layout primitives for the resort page scroll story: numbered sections with a mono eyebrow and one big headline,
+ * glass story cards, the detail drawer that holds each section's dense sourced data, sub-headings, fact lists with a
+ * source trigger beside each value, and yes/no/unknown feature chips (unknown is never "no").
  */
 import type { ReactNode } from 'react'
-import { Check, CircleHelp, Minus } from 'lucide-react'
+import { Check, CircleHelp, Minus, Plus } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
 
@@ -11,45 +12,98 @@ export function ResortSection({
   id,
   index,
   title,
+  headline,
   meta,
   lead,
   actions,
   children,
   className,
-  rule = true,
+  header = 'default',
 }: {
   id: string
   index: number
+  /** Short section name, shown as the mono eyebrow ("03 · LIFTS AND RUNS"). */
   title: string
+  /** The story line: one big, calm sentence built from real data (defaults to the title). */
+  headline?: ReactNode
   meta?: ReactNode
   lead?: ReactNode
   actions?: ReactNode
   children: ReactNode
   className?: string
-  /** Top rule above the heading (off for the first section, which sits right under the section bar). */
-  rule?: boolean
+  /** 'none': the section draws its own header (it must render an h2 with id `${id}-title`). */
+  header?: 'default' | 'none'
 }) {
   const headingId = `${id}-title`
   return (
-    <section id={id} aria-labelledby={headingId} data-section={id} className={cn('scroll-mt-[124px] md:scroll-mt-[84px]', className)}>
-      <header className={cn('mb-5 md:mb-6', rule && 'border-t border-divider-strong pt-5')}>
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-          <div className="flex min-w-0 items-baseline gap-3">
-            <span aria-hidden className="font-mono text-[12px] tracking-wider text-ink-3 tnum">
-              {String(index).padStart(2, '0')}
-            </span>
-            <h2 id={headingId} className="text-[21px] leading-tight font-semibold text-ink md:text-[22px]">
-              {title}
-            </h2>
-            {meta ? <span className="hidden text-[13.5px] text-ink-2 sm:inline">{meta}</span> : null}
-          </div>
+    <section id={id} aria-labelledby={headingId} data-section={id} className={cn('scroll-mt-[124px] md:scroll-mt-[88px]', className)}>
+      {header === 'none' ? null : (
+      <header className="mb-7 flex flex-col gap-3 md:mb-9">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          <p className="hud m-0 tracking-[0.16em] text-teal">
+            <span className="tnum">{String(index).padStart(2, '0')}</span> · {title}
+            {meta ? <span className="text-ink-2"> · {meta}</span> : null}
+          </p>
           {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
         </div>
-        {meta ? <p className="mt-1 text-[13.5px] text-ink-2 sm:hidden">{meta}</p> : null}
-        {lead ? <p className="mt-2 max-w-[70ch] text-[14.5px] text-ink-2">{lead}</p> : null}
+        <h2 id={headingId} className="m-0 max-w-[920px] text-[clamp(32px,4.6vw,64px)] leading-[1.02] font-light tracking-[-0.04em] text-ink">
+          {headline ?? title}
+        </h2>
+        {lead ? <p className="m-0 max-w-[68ch] text-[16px] leading-[1.55] text-ink-2 md:text-[17px]">{lead}</p> : null}
       </header>
+      )}
       {children}
     </section>
+  )
+}
+
+/** A glass story card with a mono HUD title (the mockups' 28–32px radius cards). */
+export function GlassCard({
+  title,
+  aside,
+  children,
+  className,
+  as: Tag = 'section',
+  strong,
+}: {
+  title?: ReactNode
+  aside?: ReactNode
+  children: ReactNode
+  className?: string
+  as?: 'section' | 'div' | 'article'
+  strong?: boolean
+}) {
+  return (
+    <Tag className={cn(strong ? 'glass-strong' : 'glass', 'flex min-w-0 flex-col gap-3.5 rounded-[28px] p-5 md:p-[22px]', className)}>
+      {title || aside ? (
+        <div className="flex min-w-0 flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          {title ? <h3 className="hud m-0 tracking-[0.14em] text-ink-2">{title}</h3> : <span />}
+          {aside ? <div className="hud min-w-0 text-right text-ink-2">{aside}</div> : null}
+        </div>
+      ) : null}
+      {children}
+    </Tag>
+  )
+}
+
+/**
+ * "Story first, data in a drawer": the dense, sourced detail of a section behind one glass disclosure. A native
+ * <details>, so it works without JavaScript, find-in-page and links into it still open it.
+ */
+export function DetailDrawer({ summary, hint, children, id, defaultOpen }: { summary: ReactNode; hint?: ReactNode; children: ReactNode; id?: string; defaultOpen?: boolean }) {
+  return (
+    <details id={id} open={defaultOpen} className="group/drawer mt-5 scroll-mt-[124px] md:scroll-mt-[88px]">
+      <summary className="glass-strong flex min-h-12 w-fit max-w-full cursor-pointer list-none items-center gap-3 rounded-full py-2 pr-3 pl-5 select-none hover:text-teal [&::-webkit-details-marker]:hidden">
+        <span className="min-w-0">
+          <span className="block text-[14px] font-medium text-ink">{summary}</span>
+          {hint ? <span className="block text-[12.5px] leading-snug text-ink-2">{hint}</span> : null}
+        </span>
+        <span aria-hidden className="flex size-8 shrink-0 items-center justify-center rounded-full bg-ink-chip text-on-ink-chip transition-transform duration-200 group-open/drawer:rotate-45">
+          <Plus className="size-4" strokeWidth={2} />
+        </span>
+      </summary>
+      <div className="glass mt-3 rounded-[28px] p-4 md:p-6">{children}</div>
+    </details>
   )
 }
 

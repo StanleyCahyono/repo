@@ -1,5 +1,6 @@
 /**
- * 05 Getting there — drive from home (curated estimate vs sourced routing, with the explicit winter buffer and a
+ * 05 Getting there — the story card (drive time from home, or the gateway airports with their transfer times) over a
+ * drawer with the detail: drive from home (curated estimate vs sourced routing, with the explicit winter buffer and a
  * Google Maps directions link), practical vs closest airports, prefilled flight SEARCH links from ITH and the
  * alternatives (links, never fares or schedules), transfers, a small map with straight dashed lines that are
  * labelled as not routes (plus a list alternative), and winter-road / safety links.
@@ -14,7 +15,8 @@ import type { ResortDetail } from '@/lib/data/resort-detail'
 import type { AirportPlace, ResortPageExtras } from '@/lib/data/resort-page'
 import { addDays } from '@/lib/domain/time'
 import { directionsLink, flightSearchLinks, nwsForecastPageUrl } from '@/lib/providers/links/builders'
-import { ConfirmTag, ResortSection, Src, SubHead } from './section'
+import { CountUp } from './count-up'
+import { ConfirmTag, DetailDrawer, ResortSection, Src, SubHead } from './section'
 import { confirmText, dayLabel, dotJoin, hostOf, needsCheck, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
 import { TravelMap } from './travel-map'
 
@@ -24,29 +26,116 @@ const ROLE_TEXT: Record<string, string> = {
   closest: 'Closest — not the most practical',
 }
 
+/**
+ * The journey card stays a night panel in both themes: dark ink by day; in the alpine-night theme a deep surface with
+ * a fine edge (the dark pill token turns light there). Local custom properties keep every colour on a token.
+ */
+const NIGHT_CARD = [
+  '[--card-bg:var(--ink-chip)] [--card-fg:var(--on-ink-chip)] [--card-fg2:var(--on-ink-chip-2)] [--card-acc:var(--on-ink-chip-accent)] [--card-edge:transparent]',
+  '[--btn-bg:var(--on-ink-chip)] [--btn-fg:var(--ink-chip)]',
+  // Written out in full so Tailwind sees every class (explicit dark theme, then the system preference).
+  '[:root[data-theme=dark]_&]:[--card-bg:var(--surface-2)] [:root[data-theme=dark]_&]:[--card-fg:var(--ink)] [:root[data-theme=dark]_&]:[--card-fg2:var(--ink-2)] [:root[data-theme=dark]_&]:[--card-acc:var(--teal)] [:root[data-theme=dark]_&]:[--card-edge:var(--divider-strong)] [:root[data-theme=dark]_&]:[--btn-bg:var(--ink-chip)] [:root[data-theme=dark]_&]:[--btn-fg:var(--on-ink-chip)]',
+  '[@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-bg:var(--surface-2)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-fg:var(--ink)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-fg2:var(--ink-2)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-acc:var(--teal)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-edge:var(--divider-strong)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--btn-bg:var(--ink-chip)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--btn-fg:var(--on-ink-chip)]',
+].join(' ')
+
+function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
+  const t = d.travel
+  const u = units(v.units)
+  const drive = t.driveMinutes !== null
+  const airports = t.airports.slice(0, 4)
+  // 'Geneva Airport' → 'Geneva', 'Milan Malpensa Airport' → 'Milan Malpensa' (short, for the headline only).
+  const placeName = (a: (typeof airports)[number]) =>
+    (a.name ?? a.city ?? a.iata).replace(/\s*\(.*?\)/g, '').replace(/\b(International|Regional|Airport|Intl\.?)\b/gi, '').replace(/\s+/g, ' ').split(',')[0].trim() || a.iata
+  const places = [...new Set(airports.map(placeName))].slice(0, 3)
+  const headline = drive
+    ? `${u.duration(t.driveMinutes)} from ${x.home.name}.`
+    : places.length
+      ? `Fly to ${places.length > 1 ? `${places.slice(0, -1).join(', ')} or ${places[places.length - 1]}` : places[0]}. Then the road or train.`
+      : 'Getting there is not researched yet.'
+  const dir = directionsLink({ lat: x.home.lat, lon: x.home.lon }, { lat: d.summary.lat, lon: d.summary.lon }, `Directions from ${x.home.name}`)
+  const transferCheck = airports.some((a) => needsCheck(a.prov))
+  return (
+    <div className={cn(NIGHT_CARD, 'grid gap-7 rounded-[32px] border border-[var(--card-edge)] bg-[var(--card-bg)] p-6 text-[var(--card-fg)] md:rounded-[36px] md:p-8 lg:grid-cols-2 lg:items-center')}>
+      <div className="flex min-w-0 flex-col gap-3">
+        <p className="hud m-0 tracking-[0.16em] text-[var(--card-acc)]">05 · Getting there · from {x.home.name}</p>
+        <h2 id="getting-there-title" className="m-0 text-[clamp(32px,4vw,56px)] leading-[1.02] font-light tracking-[-0.04em]">
+          {headline}
+        </h2>
+        {drive ? (
+          <p className="m-0 text-[15px] text-[var(--card-fg2)]">
+            {dotJoin(t.km !== null ? u.dist(t.km) : null, t.basis, t.isEstimate ? 'estimate, not live routing' : 'sourced routing')}
+          </p>
+        ) : t.verdict.note ? (
+          <p className="m-0 text-[15px] text-[var(--card-fg2)]">{t.verdict.note}.</p>
+        ) : null}
+        <div className="mt-1 flex flex-wrap gap-2.5">
+          {dir ? (
+            <a href={dir.url} target="_blank" rel="noopener noreferrer" className="flex h-11 items-center gap-2 rounded-full bg-[var(--btn-bg)] px-5 text-[14px] font-semibold text-[var(--btn-fg)]">
+              {dir.label} <ArrowUpRight aria-hidden className="size-4" />
+              <span className="sr-only"> (Google Maps, opens a new tab)</span>
+            </a>
+          ) : null}
+          <a href="#drive-title" className="flex h-11 items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--card-fg)_30%,transparent)] px-5 text-[14px] font-medium">
+            Routes, airports and flights
+          </a>
+        </div>
+      </div>
+      <div className="flex min-w-0 flex-col gap-2">
+        {airports.length ? (
+          <>
+            {airports.map((a) => (
+              <div key={a.iata} className="flex items-center gap-3.5 rounded-[18px] bg-[color-mix(in_srgb,var(--card-fg)_8%,transparent)] px-4 py-3.5">
+                <span className="w-11 shrink-0 font-mono text-[13px] font-semibold">{a.iata}</span>
+                <span className="min-w-0 flex-1 truncate text-[14px] text-[var(--card-fg2)]">{a.name ?? a.city ?? 'Airport'}</span>
+                <span className="shrink-0 text-[18px] font-semibold tnum">{a.minutes !== null ? <CountUp text={`${a.minutes} min`} /> : <span className="text-[13px] font-normal italic">Unknown</span>}</span>
+              </div>
+            ))}
+            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">Airport-to-resort transfer{transferCheck ? ' · researched, confirm at source' : ''}</p>
+          </>
+        ) : drive ? (
+          <>
+            <div className="flex items-center gap-3.5 rounded-[18px] bg-[color-mix(in_srgb,var(--card-fg)_8%,transparent)] px-4 py-3.5">
+              <Car aria-hidden className="size-5 shrink-0 text-[var(--card-acc)]" />
+              <span className="min-w-0 flex-1 text-[14px] text-[var(--card-fg2)]">One way</span>
+              <span className="text-[18px] font-semibold tnum">{u.duration(t.driveMinutes)}</span>
+            </div>
+            {t.winterMinutes !== null ? (
+              <div className="flex items-center gap-3.5 rounded-[18px] bg-[color-mix(in_srgb,var(--card-fg)_8%,transparent)] px-4 py-3.5">
+                <CloudSnow aria-hidden className="size-5 shrink-0 text-[var(--card-acc)]" />
+                <span className="min-w-0 flex-1 text-[14px] text-[var(--card-fg2)]">With your {t.winterBufferPct}% winter buffer</span>
+                <span className="text-[18px] font-semibold tnum">{u.duration(t.winterMinutes)}</span>
+              </div>
+            ) : null}
+            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">{t.isEstimate ? 'Curated drive estimate' : 'Sourced routing'}{needsCheck(t.prov) ? ' · confirm at source' : ''}</p>
+          </>
+        ) : (
+          <p className="m-0 text-[14px] text-[var(--card-fg2)]">No drive estimate or airports are recorded for this resort.</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export function TravelSection({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
   const t = d.travel
   const fly = t.airports.length > 0
   return (
-    <ResortSection
-      id="getting-there"
-      index={5}
-      title="Getting there"
-      meta={`From ${x.home.name}`}
-      lead={t.verdict.note ? `${t.verdict.note}.` : undefined}
-    >
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-        <div className="flex min-w-0 flex-col gap-8">
-          <DriveBlock d={d} x={x} v={v} />
-          {fly ? <AirportsBlock d={d} x={x} v={v} /> : null}
-          {fly ? <FlightSearch d={d} x={x} v={v} /> : null}
-          <TransfersBlock d={d} />
+    <ResortSection id="getting-there" index={5} title="Getting there" header="none">
+      <TravelStory d={d} x={x} v={v} />
+      <DetailDrawer id="travel-detail" summary="Routes, airports, flight search and the map" hint={dotJoin(t.verdict.note, 'straight lines are labelled as straight lines')}>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+          <div className="flex min-w-0 flex-col gap-8">
+            <DriveBlock d={d} x={x} v={v} />
+            {fly ? <AirportsBlock d={d} x={x} v={v} /> : null}
+            {fly ? <FlightSearch d={d} x={x} v={v} /> : null}
+            <TransfersBlock d={d} />
+          </div>
+          <div className="flex min-w-0 flex-col gap-6">
+            <MapBlock d={d} x={x} v={v} />
+            <WinterBlock d={d} />
+          </div>
         </div>
-        <div className="flex min-w-0 flex-col gap-6">
-          <MapBlock d={d} x={x} v={v} />
-          <WinterBlock d={d} />
-        </div>
-      </div>
+      </DetailDrawer>
     </ResortSection>
   )
 }

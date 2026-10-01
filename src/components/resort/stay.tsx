@@ -28,8 +28,19 @@ const categoryText = (c: string) => {
 export function StaySection({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
   const lodging = d.links.find((l) => l.key === 'lodging')?.url ?? null
   return (
-    <ResortSection id="stay" index={6} title="Stay & après" meta={d.hotels.length ? `${d.hotels.length} curated hotel${d.hotels.length === 1 ? '' : 's'}` : null}>
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+    <ResortSection
+      id="stay"
+      index={6}
+      title="Stay & après"
+      meta={d.hotels.length ? `${d.hotels.length} curated hotel${d.hotels.length === 1 ? '' : 's'}` : null}
+      headline={
+        d.hotels.length
+          ? `${d.hotels.length} ${d.hotels.length === 1 ? 'place' : 'places'} to stay on file${d.events.upcoming.length ? `, ${d.events.upcoming.length} ${d.events.upcoming.length === 1 ? 'event' : 'events'} ahead` : ''}.`
+          : 'Lodging not researched yet.'
+      }
+      lead="Piste never shows ratings or reviews. Room prices appear only from a dated, sourced quote; otherwise “Check rates”."
+    >
+      <div className="glass grid gap-8 rounded-[28px] p-5 md:p-7 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
         <Hotels d={d} x={x} v={v} lodging={lodging} />
         <Events d={d} v={v} />
       </div>

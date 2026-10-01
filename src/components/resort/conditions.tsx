@@ -1,5 +1,6 @@
 /**
- * 02 Conditions — what was reported, what the weather model says, and what Piste estimates, kept apart.
+ * 02 Conditions — the story (the score as the star number, the snowpack strata, the animated 7-day snowfall) over a
+ * drawer with the evidence: what was reported, what the weather model says, and what Piste estimates, kept apart.
  *
  * Hard rules are visible before any number: a confirmed closure replaces the score with "Closed"; an unknown
  * operating status is called out and never treated as open; official alerts stand on their own and cannot be
@@ -18,12 +19,14 @@ import type { RefreshHealthView, ResortPageExtras } from '@/lib/data/resort-page
 import type { ReportView } from '@/lib/data/views'
 import { CONDITIONS_CONFIG_V1 } from '@/lib/domain/conditions/config.v1'
 import { isResearchedReport } from '@/lib/domain/reports'
-import { formatLocalDate } from '@/lib/domain/time'
+import { addDays, formatLocalDate } from '@/lib/domain/time'
 import { COMPONENT_LABEL, SCORING_MODE_LABEL, SURFACE_LABEL, type SnowfallReading } from '@/lib/domain/types'
+import { Snowpack, SnowfallWeek, type SnowDayDatum, type StrataLayer } from './conditions-story'
+import { CountUp } from './count-up'
 import { ModeSwitch } from './mode-switch'
 import { RefreshNow } from './refresh-now'
 import { ObservationSheet, ReportEntrySheet } from './report-entry'
-import { ConfirmTag, ResortSection, Src, SubHead } from './section'
+import { ConfirmTag, DetailDrawer, GlassCard, ResortSection, Src, SubHead } from './section'
 import {
   ago,
   dayLabel,
@@ -73,37 +76,183 @@ function ErrorList({ errors, className }: { errors: readonly { source: string; m
   )
 }
 
+/** Same bands as the score chip (ui/score is a client module, so its helper cannot be called here). */
+function descriptorFor(score: number | null): string | null {
+  if (score === null) return null
+  return score >= 85 ? 'Excellent' : score >= 70 ? 'Good' : score >= 55 ? 'Mixed' : 'Challenging'
+}
+
+const MODE_PHRASE: Record<string, string> = { learning: 'a learning day', 'all-mountain': 'an all-mountain day', powder: 'powder' }
+
+/** The section's one-line story, from the score state (never a promise; suitability, not safety). */
+function conditionsHeadline(d: ResortDetail, v: PageView, weatherMissing: boolean): string {
+  const r = d.summary
+  const s = r.score
+  if (r.closure) return `Closed on ${dayLabel(v.date)}.`
+  if (s && s.scoreKind === 'limited') return 'Limited data. The score needs more evidence.'
+  if (s && s.score !== null) {
+    const word = (s.descriptor ?? descriptorFor(s.score) ?? 'mixed').toLowerCase()
+    return s.scoreKind === 'weather-potential'
+      ? `Likely ${word} weather for ${MODE_PHRASE[v.mode]}. Open terrain is not known yet.`
+      : `Likely ${word} for ${MODE_PHRASE[v.mode]}.`
+  }
+  if (r.status.status === 'not-yet-open' || r.status.status === 'closed-for-season') return 'Not open yet. The score waits on the season.'
+  if (weatherMissing) return 'No score yet. It waits on modeled weather and a snow report.'
+  return `No score for ${dayLabel(v.date)} yet.`
+}
+
+function ScoreStar({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
+  const r = d.summary
+  const s = r.score
+  const weatherMissing = !r.weather.baseRun && !r.weather.summitRun
+  const cov = s ? Math.round(s.coverage * 100) : null
+  let big: React.ReactNode
+  let word: string
+  let body: string
+  if (r.closure) {
+    big = <span className="text-critical">Closed</span>
+    word = r.closure.reason
+    body = 'A confirmed closure overrides any score: no ski-day score is shown.'
+  } else if (s && s.scoreKind === 'limited') {
+    big = <span className="text-caution">{s.score !== null ? <CountUp text={`~${s.score}`} /> : '—'}</span>
+    word = 'Limited data'
+    body = s.score !== null ? `The available inputs suggest about ${s.score} — an estimate, not a day score.` : 'Too little is known for an overall estimate.'
+  } else if (s && s.score !== null) {
+    big = <CountUp text={String(s.score)} />
+    word = s.descriptor ?? descriptorFor(s.score) ?? ''
+    body = s.surface.text
+  } else {
+    big = <span aria-label="No score" className="my-[0.42em] block h-[3px] w-[0.72em] rounded-full bg-[color-mix(in_srgb,var(--ink-3)_55%,transparent)]" />
+    word = 'Unknown'
+    body = weatherMissing
+      ? `Piste combines reported snow with modeled weather. ${x.refresh.weather.lastAttemptOutcome === 'failed' ? 'The weather fetch failed' : 'Weather has not been fetched'}${r.snow.report ? '' : ' and no snow report is on file'}, so it shows no score rather than a guess.`
+      : `No assessment is stored for ${dayLabel(v.date)} — dates beyond the forecast horizon are never scored.`
+  }
+  return (
+    <GlassCard strong title="Conditions score · suitability" aside={s && !r.closure ? <KindTag kind={s.kind === 'demo' ? 'demo' : 'derived'} compact /> : null} className="bg-[linear-gradient(160deg,var(--glass-strong),color-mix(in_srgb,var(--glacier)_70%,var(--glass)))]">
+      <p className="m-0 text-[clamp(88px,10vw,128px)] leading-[0.9] font-extralight tracking-[-0.06em] text-ink tnum">{big}</p>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="text-[15px] font-medium text-ink">{word}</span>
+        {s && !r.closure ? <ConfidenceTag confidence={s.confidence} /> : null}
+      </div>
+      <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{body}</p>
+      {cov !== null && !r.closure ? (
+        <div className="mt-auto">
+          <div className="relative h-1.5 rounded-full bg-[color-mix(in_srgb,var(--ink)_8%,transparent)]" aria-hidden>
+            <span className={cn('block h-full rounded-full', cov >= GATE ? 'bg-teal' : 'bg-caution')} style={{ width: `${Math.max(2, cov)}%` }} />
+            <span className="absolute -top-1 h-3.5 w-0.5 rounded-full bg-ink" style={{ left: `${GATE}%` }} />
+          </div>
+          <p className="mt-1.5 mb-0 text-[12px] text-ink-2 tnum">
+            Inputs cover {cov}% · {GATE}% needed for a full score
+          </p>
+        </div>
+      ) : null}
+      <p className="m-0 text-[12px] text-ink-2">{SCORING_MODE_LABEL[v.mode]} · {dayLabel(v.date)} · describes suitability, never safety.</p>
+    </GlassCard>
+  )
+}
+
+function strataLayers(d: ResortDetail, v: PageView): { layers: StrataLayer[]; source: string } {
+  const rep = d.summary.snow.report
+  const u = units(v.units)
+  const fresh = rep ? (['24h', 'overnight', '48h', '72h'] as const).map((w) => rep.snowfall.find((sf) => sf.window === w && sf.amountCm !== null)).find(Boolean) ?? null : null
+  const season = rep?.snowfall.find((sf) => sf.window === 'season' && sf.amountCm !== null) ?? null
+  const layers: StrataLayer[] = [
+    { key: 'new', label: fresh ? `New snow · ${WINDOW_LABEL[fresh.window]?.toLowerCase() ?? fresh.window}` : 'New snow', cm: fresh?.amountCm ?? null, value: fresh ? u.snow(fresh.amountCm) : null, note: null },
+    { key: 'base', label: 'Base depth', cm: rep?.baseDepthCm ?? null, value: rep?.baseDepthCm != null ? u.snow(rep.baseDepthCm) : null, note: rep?.summitDepthCm != null ? `Summit ${u.snow(rep.summitDepthCm)}` : (rep?.baseDepthLocation ?? null) },
+    { key: 'season', label: 'Season total', cm: season?.amountCm ?? null, value: season ? u.snow(season.amountCm) : null, note: null },
+  ]
+  const source = rep
+    ? `${isResearchedReport(rep) ? 'Researched — confirm at source' : REPORT_ORIGIN_LABEL[rep.origin]} · report for ${dayLabel(rep.localDate)}. Layers fill only from reports; nothing is estimated.`
+    : 'No snow report on file. Layers fill in as the resort reports; nothing is estimated here.'
+  return { layers, source }
+}
+
+function snowWeek(d: ResortDetail, v: PageView, x: ResortPageExtras): { days: SnowDayDatum[]; point: string; status: string; empty: string | null } {
+  const u = units(v.units)
+  const upper = d.weather.summit?.shownPoint === 'summit' ? d.weather.summit : null
+  const base = d.weather.base?.shownPoint === 'base' ? d.weather.base : null
+  const fc = upper ?? base
+  const pointKey = upper ? 'summit' : 'base'
+  const elev = u.elev(pointKey === 'summit' ? d.summary.summitElevationM : d.summary.baseElevationM)
+  const point = `${pointKey === 'summit' ? 'Upper mountain' : 'Base'}${elev ? ` · ${elev}` : ''}`
+  const daily = new Map((fc?.daily ?? []).filter((x) => x.dayIndex < 7).map((x) => [x.date, x]))
+  const start = fc?.daily.find((x) => x.dayIndex === 0)?.date ?? v.today
+  const days: SnowDayDatum[] = Array.from({ length: 7 }, (_, i) => {
+    const date = addDays(start, i)
+    const w = daily.get(date)
+    const cm = w ? w.snowfallCm : null
+    return {
+      date,
+      dow: formatLocalDate(date, 'ccc').toUpperCase(),
+      day: formatLocalDate(date, 'd'),
+      full: formatLocalDate(date, 'cccc d LLLL'),
+      cm,
+      text: cm !== null ? u.snow(cm) : null,
+      partial: w?.partial ?? false,
+      trend: w?.trend ?? false,
+      planning: date === v.date,
+    }
+  })
+  const run = fc?.run ?? null
+  const failed = x.refresh.weather.lastAttemptOutcome === 'failed'
+  const status = run ? `${run.kind === 'demo' ? 'Demo' : 'Modeled'} · ${instantLabel(run.fetchedAt, v.tz, v.now).replace(/^\w{3} /, '')}` : failed ? 'Fetch failed' : 'Not fetched'
+  const empty = run ? null : failed ? 'The weather fetch failed, so no modeled snowfall is shown — never a guess.' : 'Modeled weather has not been fetched yet. The days fill in after the next weather update.'
+  return { days, point, status, empty }
+}
+
 export function ConditionsSection({ d, x, v, preferredMode }: { d: ResortDetail; x: ResortPageExtras; v: PageView; preferredMode: typeof v.mode }) {
   const reportUrl = d.links.find((l) => l.key === 'snowReport')?.url ?? x.refresh.reportAdapter?.sourceUrl ?? x.catalog.reportSource?.url ?? null
   const when = v.date === v.today ? 'today' : v.date < v.today ? 'past' : 'future'
+  const weatherMissing = !d.summary.weather.baseRun && !d.summary.weather.summitRun
+  const strata = strataLayers(d, v)
+  const week = snowWeek(d, v, x)
   return (
     <ResortSection
       id="conditions"
       index={2}
       title="Conditions"
-      meta={`${dayLabelYear(v.date)}${when === 'today' ? ' (today)' : ''} · ${SCORING_MODE_LABEL[v.mode]}`}
+      meta={`${dayLabel(v.date)}${when === 'today' ? ' · today' : ''}`}
+      headline={conditionsHeadline(d, v, weatherMissing)}
       actions={<ModeSwitch mode={v.mode} preferred={preferredMode} />}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-[18px]">
         <HardRules d={d} v={v} when={when} />
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-          <ScorePanel d={d} x={x} v={v} />
-          <SnowReportPanel d={d} x={x} v={v} reportUrl={reportUrl} />
-        </div>
-        <SurfaceTrio d={d} v={v} />
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] xl:items-start">
-          <WeatherPanel d={d} x={x} v={v} />
-          <div className="flex min-w-0 flex-col gap-6">
-            <FeedHealth x={x} v={v} reportUrl={reportUrl} weatherShown={!!(d.summary.weather.baseRun || d.summary.weather.summitRun)} />
-            <ManualEntry d={d} x={x} v={v} reportUrl={reportUrl} />
-          </div>
-        </div>
-        <HistoryStrip x={x} v={v} />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ReportHistory d={d} v={v} />
-          <MyObservations x={x} />
+        <div className="grid gap-[18px] md:grid-cols-2 xl:grid-cols-3">
+          <ScoreStar d={d} x={x} v={v} />
+          <GlassCard title="Snowpack" aside={d.summary.snow.report ? <span>Reported</span> : null}>
+            <Snowpack layers={strata.layers} source={strata.source} />
+          </GlassCard>
+          <GlassCard title={`7-day snowfall · ${week.point}`} aside={<span className="text-copper">{week.status}</span>} className="md:col-span-2 xl:col-span-1">
+            <SnowfallWeek days={week.days} point={week.point} empty={week.empty} />
+          </GlassCard>
         </div>
       </div>
+      <DetailDrawer
+        id="conditions-detail"
+        summary="Score breakdown, snow report, modeled weather and history"
+        hint={`Evidence, sources and data feeds for ${dayLabel(v.date)}`}
+      >
+        <div className="flex flex-col gap-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+            <ScorePanel d={d} x={x} v={v} />
+            <SnowReportPanel d={d} x={x} v={v} reportUrl={reportUrl} />
+          </div>
+          <SurfaceTrio d={d} v={v} />
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] xl:items-start">
+            <WeatherPanel d={d} x={x} v={v} />
+            <div className="flex min-w-0 flex-col gap-6">
+              <FeedHealth x={x} v={v} reportUrl={reportUrl} weatherShown={!!(d.summary.weather.baseRun || d.summary.weather.summitRun)} />
+              <ManualEntry d={d} x={x} v={v} reportUrl={reportUrl} />
+            </div>
+          </div>
+          <HistoryStrip x={x} v={v} />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <ReportHistory d={d} v={v} />
+            <MyObservations x={x} />
+          </div>
+        </div>
+      </DetailDrawer>
     </ResortSection>
   )
 }
@@ -117,7 +266,7 @@ function HardRules({ d, v, when }: { d: ResortDetail; v: PageView; when: 'today'
   const items: React.ReactNode[] = []
   if (r.closure) {
     items.push(
-      <div key="closed" role="status" className="flex gap-3 rounded-[12px] border border-critical/40 bg-critical-bg px-4 py-3">
+      <div key="closed" role="status" className="flex gap-3 rounded-[20px] border border-critical/40 bg-critical-bg px-4 py-3">
         <Ban aria-hidden className="mt-0.5 size-5 shrink-0 text-critical" />
         <div className="min-w-0 text-[14px] text-ink">
           <p className="font-semibold">Closed on {dayLabelYear(v.date)}</p>
@@ -132,7 +281,7 @@ function HardRules({ d, v, when }: { d: ResortDetail; v: PageView; when: 'today'
   } else if (r.status.status === 'not-yet-open') {
     const o = r.opening
     items.push(
-      <div key="not-open" role="status" className="flex gap-3 rounded-[12px] border border-divider-strong bg-surface-2 px-4 py-3">
+      <div key="not-open" role="status" className="flex gap-3 rounded-[20px] border border-divider-strong bg-surface-2 px-4 py-3">
         <CircleHelp aria-hidden className="mt-0.5 size-5 shrink-0 text-ink-2" />
         <div className="min-w-0 text-[14px] text-ink">
           <p className="font-semibold">Not open yet for the season — not treated as open</p>
@@ -148,7 +297,7 @@ function HardRules({ d, v, when }: { d: ResortDetail; v: PageView; when: 'today'
     )
   } else if (r.status.status === 'unknown') {
     items.push(
-      <div key="unknown" role="status" className="flex gap-3 rounded-[12px] border border-dashed border-caution/60 bg-caution-bg px-4 py-3">
+      <div key="unknown" role="status" className="flex gap-3 rounded-[20px] border border-dashed border-caution/60 bg-caution-bg px-4 py-3">
         <CircleHelp aria-hidden className="mt-0.5 size-5 shrink-0 text-caution" />
         <div className="min-w-0 text-[14px] text-ink">
           <p className="font-semibold">Operating status unknown — not treated as open</p>
@@ -161,7 +310,7 @@ function HardRules({ d, v, when }: { d: ResortDetail; v: PageView; when: 'today'
   }
   if (alerts.length) {
     items.push(
-      <div key="alerts" role="status" className="rounded-[12px] border border-critical/40 bg-surface px-4 py-3">
+      <div key="alerts" role="status" className="rounded-[20px] border border-critical/40 bg-surface px-4 py-3">
         <p className="flex items-center gap-2 text-[14px] font-semibold text-ink">
           <AlertTriangle aria-hidden className="size-4 text-critical" /> Official alerts ({alerts.length})
         </p>

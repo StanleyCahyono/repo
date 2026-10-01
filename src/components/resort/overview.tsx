@@ -1,22 +1,22 @@
 /**
- * 01 Overview — what the place is (location, elevation, terrain, character, facilities), the three different
- * ratings (Fit for me · Conditions on the date · My rating), the season's opening/closing facts with sources, and
- * the operating status with its history. External review ratings are omitted: no permitted source supplies one.
+ * 01 Overview — the story: vertical and terrain numbers that count up, Fit for me, the season (an opening countdown
+ * ring) and My rating; the drawer holds what the place is (location, elevation, terrain, character, facilities), the
+ * season's opening/closing facts with sources, and the operating status with its history. The conditions score lives
+ * in 02. External review ratings are omitted: no permitted source supplies one.
  */
 import Link from 'next/link'
-import { ArrowDown, Ban, CalendarClock, Info, UserRound } from 'lucide-react'
+import { Info } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
-import { ConfidenceTag, ScoreChip } from '@/components/ui/score'
+import { ConfidenceTag } from '@/components/ui/score'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import { OpeningTag, StatusPill } from '@/components/ui/status'
 import type { ResortDetail } from '@/lib/data/resort-detail'
 import type { ResortPageExtras } from '@/lib/data/resort-page'
 import { addDays, daysBetween, skiWindow, type Hemisphere } from '@/lib/domain/time'
-import { SCORING_MODE_LABEL } from '@/lib/domain/types'
+import { CountUp } from './count-up'
 import { RatingEditor } from './rating-editor'
-import { Reveal } from './reveal'
 import { Disclosure } from '@/components/ui/disclosure'
-import { ConfirmTag, FactRow, ResortSection, Src, SubHead, TriChip } from './section'
+import { ConfirmTag, DetailDrawer, FactRow, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
 import { ago, confirmText, dayLabel, dayLabelYear, dotJoin, instantLabel, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
 
 const ABILITY_TEXT: Record<string, string> = { beginner: 'beginner', novice: 'novice', intermediate: 'intermediate', advanced: 'advanced', expert: 'expert' }
@@ -38,180 +38,237 @@ function coords(lat: number, lon: number): string {
 
 export function OverviewSection({ d, x, v, ability }: { d: ResortDetail; x: ResortPageExtras; v: PageView; ability: string }) {
   const research = d.research
-  const meta = research?.date
-    ? `Catalog ${research.method === 'reference-only' ? 'reference data' : 'researched'} ${shortDate(research.date)} — confirm at source`
-    : null
+  const r = d.summary
+  const u = units(v.units)
+  const meta = research?.date ? `${research.method === 'reference-only' ? 'Reference data' : 'Researched'} ${shortDate(research.date)}` : null
+  const base = u.elev(r.baseElevationM)
+  const top = u.elev(r.summitElevationM)
+  const verticalM = r.verticalM ?? (r.baseElevationM !== null && r.summitElevationM !== null ? r.summitElevationM - r.baseElevationM : null)
+  const vertical = u.elev(verticalM)
+  const headline = vertical && base && top ? `${vertical} of vertical, from ${base} to ${top}.` : top ? `Up to ${top}.` : `${r.shortName}, ${r.region}.`
   return (
-    <ResortSection id="overview" index={1} title="Overview" meta={meta} lead={x.catalog.character ?? undefined} rule={false}>
-      <Reveal delay={0.06} className="flex flex-col gap-8">
-        <RatingsTrio d={d} v={v} ability={ability} weatherFailed={x.refresh.weather.lastAttemptOutcome === 'failed'} />
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
-          <AtAGlance d={d} x={x} v={v} />
-          <div className="flex min-w-0 flex-col gap-8">
-            <SeasonBlock d={d} v={v} />
-            <StatusBlock d={d} x={x} v={v} />
+    <ResortSection id="overview" index={1} title="Overview" meta={meta} headline={headline} lead={x.catalog.character ?? undefined}>
+      <div className="flex flex-col gap-[18px]">
+        <StatStrip d={d} x={x} v={v} vertical={vertical} />
+        <div className="grid gap-[18px] md:grid-cols-2 xl:grid-cols-3">
+          <FitCard d={d} ability={ability} />
+          <SeasonCard d={d} v={v} />
+          <MyRatingCard d={d} v={v} />
+        </div>
+      </div>
+      <DetailDrawer summary="Resort facts, season dates and status history" hint={research?.date ? `Catalog ${meta?.toLowerCase()} — confirm at source` : 'Location, terrain, facilities, opening and closing, status'}>
+        <div className="flex flex-col gap-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
+            <AtAGlance d={d} x={x} v={v} />
+            <div className="flex min-w-0 flex-col gap-8">
+              <SeasonBlock d={d} v={v} />
+              <StatusBlock d={d} x={x} v={v} />
+            </div>
           </div>
         </div>
-      </Reveal>
+      </DetailDrawer>
     </ResortSection>
   )
 }
 
 // ---------------------------------------------------------------------------
-// Three ratings, three questions
+// Story: stats, fit, season, my rating
 
-function RatingsTrio({ d, v, ability, weatherFailed }: { d: ResortDetail; v: PageView; ability: string; weatherFailed: boolean }) {
-  const r = d.summary
-  const fit = r.fit
-  const score = r.score
-  const days = d.mySkiDays
+function Stat({ label, value, sub }: { label: string; value: string | null; sub?: string | null }) {
   return (
-    <div>
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h3 className="text-[16px] font-semibold text-ink">Three ratings, three different questions</h3>
-        <p className="text-[12.5px] text-ink-3">External review ratings are omitted — no permitted source supplies one.</p>
+    <div className="flex min-w-0 flex-col gap-1.5 px-4 py-3.5 md:px-5 md:py-4">
+      <span className="hud text-ink-2">{label}</span>
+      {value ? (
+        <CountUp text={value} className="text-[clamp(26px,3vw,38px)] leading-none font-light tracking-[-0.03em] text-ink tnum" />
+      ) : (
+        <span className="text-[17px] leading-[1.6] text-ink-2 italic">Unknown</span>
+      )}
+      {sub ? <span className="text-[12px] text-ink-2">{sub}</span> : null}
+    </div>
+  )
+}
+
+function StatStrip({ d, x, v, vertical }: { d: ResortDetail; x: ResortPageExtras; v: PageView; vertical: string | null }) {
+  const r = d.summary
+  const u = units(v.units)
+  const t = x.catalog.terrain
+  const stats: { label: string; value: string | null; sub?: string | null }[] = [
+    { label: 'Vertical', value: vertical },
+    { label: 'Summit', value: u.elev(r.summitElevationM), sub: r.baseElevationM !== null ? `Base ${u.elev(r.baseElevationM)}` : null },
+    t?.pisteKm != null ? { label: 'Pistes', value: u.dist(t.pisteKm) } : { label: 'Trails', value: t?.trails != null ? t.trails.toLocaleString('en-US') : null },
+    { label: 'Lifts', value: t?.lifts != null ? t.lifts.toLocaleString('en-US') : null },
+  ]
+  if (t?.pisteKm != null && t.trails != null) stats.push({ label: 'Trails', value: t.trails.toLocaleString('en-US') })
+  if (t?.skiableAcres != null) stats.push({ label: 'Skiable acres', value: t.skiableAcres.toLocaleString('en-US') })
+  if (t?.liftCapacityPerHour != null) stats.push({ label: 'Skiers / hour', value: t.liftCapacityPerHour.toLocaleString('en-US') })
+  const shown = stats.slice(0, 6)
+  return (
+    <div className="glass grid grid-cols-2 overflow-hidden rounded-[28px] sm:grid-cols-3 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]" style={{ ['--n' as string]: shown.length }}>
+      {shown.map((s, i) => (
+        <div key={s.label} className={cn('border-divider', i > 0 && 'lg:border-l', i % 2 === 1 && 'max-sm:border-l', i >= 2 && 'max-sm:border-t', i % 3 !== 0 && 'sm:max-lg:border-l', i >= 3 && 'sm:max-lg:border-t')}>
+          <Stat {...s} />
+        </div>
+      ))}
+      {needsCheck(t?.prov) || needsCheck(r.elevationProv) ? (
+        <p className="hud col-span-full m-0 border-t border-divider px-4 py-2.5 text-ink-2 md:px-5">
+          {confirmText(t?.prov ?? r.elevationProv)}
+          {t?.season ? ` · ${seasonText(t.season)} figures` : ''}
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+function FitCard({ d, ability }: { d: ResortDetail; ability: string }) {
+  const fit = d.summary.fit
+  return (
+    <GlassCard title={`Fit for me · ${ABILITY_TEXT[ability] ?? ability}`}>
+      <div className="flex items-end gap-3">
+        {fit.score !== null ? (
+          <CountUp text={String(fit.score)} className="text-[64px] leading-[0.9] font-extralight tracking-[-0.05em] text-ink tnum" />
+        ) : (
+          <span className="text-[64px] leading-[0.9] font-extralight text-ink-3">—</span>
+        )}
+        <span className="pb-1.5">
+          <span className="block text-[15px] font-medium text-ink">{fit.label}</span>
+          <ConfidenceTag confidence={fit.confidence} />
+        </span>
       </div>
-      <div className="grid gap-px overflow-hidden rounded-[12px] border border-divider bg-divider md:grid-cols-2 lg:grid-cols-3">
-        {/* Fit for me */}
-        <section aria-labelledby="fit-title" className="flex min-w-0 flex-col gap-3 bg-surface p-4 md:p-5">
-          <header>
-            <p className="eyebrow flex items-center gap-1.5">
-              <UserRound aria-hidden className="size-3.5" /> Fit for me
-            </p>
-            <h4 id="fit-title" className="sr-only">
-              Fit for me
-            </h4>
-            <p className="mt-1 text-[12.5px] text-ink-3">Does it suit a {ABILITY_TEXT[ability] ?? ability}, my travel limits and budget? Not date-specific.</p>
-          </header>
-          <div className="flex items-end gap-3">
-            {fit.score !== null ? (
-              <span className="font-display text-[44px] leading-none text-ink tnum">{fit.score}</span>
-            ) : (
-              <span className="font-display text-[34px] leading-none text-ink-3">—</span>
-            )}
-            <div className="pb-1 text-[13px] leading-tight">
-              <p className="font-semibold text-ink">{fit.label}</p>
-              <ConfidenceTag confidence={fit.confidence} className="mt-1" />
-            </div>
-          </div>
-          <ul className="flex flex-col gap-2">
-            {fit.components.map((c) => (
-              <li key={c.key} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1">
-                <span className="truncate text-[13px] text-ink-2">{c.label}</span>
-                <span className={cn('text-[13px] tnum', c.known ? 'font-semibold text-ink' : 'text-ink-3 italic')}>{c.known ? c.value : 'Unknown'}</span>
-                <span aria-hidden className="col-span-2 h-1 overflow-hidden rounded-full bg-surface-3">
-                  {c.known && c.value !== null ? <span className="block h-full rounded-full bg-teal/70" style={{ width: `${Math.max(3, c.value)}%` }} /> : null}
-                </span>
+      <ul className="m-0 flex list-none flex-col gap-2 p-0">
+        {fit.components.map((c) => (
+          <li key={c.key} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1">
+            <span className="truncate text-[13px] text-ink-2">{c.label}</span>
+            <span className={cn('text-[13px] tnum', c.known ? 'font-semibold text-ink' : 'text-ink-2 italic')}>{c.known ? c.value : 'Unknown'}</span>
+            <span aria-hidden className="col-span-2 h-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--ink)_8%,transparent)]">
+              {c.known && c.value !== null ? <span className="block h-full rounded-full bg-teal" style={{ width: `${Math.max(3, c.value)}%` }} /> : null}
+            </span>
+          </li>
+        ))}
+      </ul>
+      {fit.reasons.length || fit.unknowns.length ? (
+        <Disclosure summary={`Why this fit${fit.unknowns.length ? ` · ${fit.unknowns.length} unknown` : ''}`}>
+          <ul className="mt-1.5 flex flex-col gap-1 text-[13px] text-ink-2">
+            {fit.reasons.slice(0, 3).map((x) => (
+              <li key={x} className="flex gap-2">
+                <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-ink-3" />
+                {x}
+              </li>
+            ))}
+            {fit.unknowns.map((x) => (
+              <li key={x} className="flex gap-2 text-ink-2 italic">
+                <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-divider-strong" />
+                {x}
               </li>
             ))}
           </ul>
-          {fit.reasons.length || fit.unknowns.length ? (
-            <Disclosure summary={`Why this fit${fit.unknowns.length ? ` · ${fit.unknowns.length} unknown` : ''}`}>
-              <ul className="mt-1.5 flex flex-col gap-1 text-[13px] text-ink-2">
-                {fit.reasons.slice(0, 3).map((x) => (
-                  <li key={x} className="flex gap-2">
-                    <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-ink-3" />
-                    {x}
-                  </li>
-                ))}
-                {fit.unknowns.map((x) => (
-                  <li key={x} className="flex gap-2 text-ink-3 italic">
-                    <span aria-hidden className="mt-[7px] size-1 shrink-0 rounded-full bg-divider-strong" />
-                    {x}
-                  </li>
-                ))}
-              </ul>
-            </Disclosure>
-          ) : null}
-          {fit.cappedBy ? <p className="text-[12.5px] font-medium text-caution">{fit.cappedBy}</p> : null}
-          <p className="mt-auto text-[12.5px] text-ink-3">
-            Based on your{' '}
-            <Link href="/settings" className="text-teal hover:underline">
-              ability and travel settings
-            </Link>
-            . {fit.confidenceReasons[0] ?? ''}
-          </p>
-        </section>
+        </Disclosure>
+      ) : null}
+      {fit.cappedBy ? <p className="m-0 text-[12.5px] font-medium text-caution">{fit.cappedBy}</p> : null}
+      <p className="m-0 mt-auto text-[12.5px] text-ink-2">
+        Does it suit you, your travel limits and budget? Not date-specific. {fit.confidenceReasons[0] ?? ''}{' '}
+        <Link href="/settings" className="text-teal hover:underline">
+          Your settings
+        </Link>
+      </p>
+    </GlassCard>
+  )
+}
 
-        {/* Conditions on the date */}
-        <section aria-labelledby="cond-title" className="flex min-w-0 flex-col gap-3 bg-surface p-4 md:p-5">
-          <header>
-            <p className="eyebrow flex items-center gap-1.5">
-              <CalendarClock aria-hidden className="size-3.5" /> Conditions · {dayLabel(v.date)}
-            </p>
-            <h4 id="cond-title" className="sr-only">
-              Conditions on {dayLabelYear(v.date)}
-            </h4>
-            <p className="mt-1 text-[12.5px] text-ink-3">How suitable is that day for a {SCORING_MODE_LABEL[v.mode].toLowerCase()}? Suitability, not safety.</p>
-          </header>
-          <div className="flex min-h-[44px] items-end">
-            {r.closure ? (
-              <p className="flex items-center gap-2 font-display text-[34px] leading-none text-critical">
-                <Ban aria-hidden className="size-7" strokeWidth={1.8} /> Closed
-              </p>
-            ) : score?.scoreKind === 'limited' ? (
-              <p className="font-display text-[30px] leading-none text-caution">Limited data</p>
-            ) : score && score.score !== null ? (
-              <ScoreChip scoreKind={score.scoreKind} score={score.score} coverage={score.coverage} size="lg" />
-            ) : (
-              <p className="font-display text-[30px] leading-none text-ink-3">No score yet</p>
-            )}
-          </div>
-          {r.closure ? (
-            <p className="text-[13.5px] text-ink">{r.closure.reason}. No ski-day score is shown for a closed resort.</p>
-          ) : score ? (
-            <>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <ConfidenceTag confidence={score.confidence} />
-                <span className="text-[12.5px] text-ink-3 tnum">{Math.round(score.coverage * 100)}% of weighted inputs</span>
-              </div>
-              <p className="text-[13.5px] text-ink-2">{score.surface.text}</p>
-            </>
-          ) : (
-            <p className="text-[13.5px] text-ink-2">
-              No score for this date yet
-              {r.freshness.weatherFetchedAt ? '' : weatherFailed ? ' — the weather fetch failed' : ' — weather has not been fetched'}. Scores need weather plus operations
-              evidence.
-            </p>
-          )}
-          {r.status.status === 'unknown' && !r.closure ? (
-            <p className="text-[12.5px] font-medium text-caution">Operating status unknown — never treated as open.</p>
-          ) : null}
-          <a href="#score-breakdown" className="mt-auto inline-flex items-center gap-1 text-[13px] font-medium text-teal hover:underline">
-            Breakdown and evidence <ArrowDown aria-hidden className="size-3.5" />
-          </a>
-        </section>
+const RING_DAYS = 90
 
-        {/* My rating */}
-        <section aria-labelledby="mine-title" className="flex min-w-0 flex-col gap-3 bg-surface p-4 md:col-span-2 md:p-5 lg:col-span-1">
-          <header>
-            <p className="eyebrow">My rating</p>
-            <h4 id="mine-title" className="sr-only">
-              My rating
-            </h4>
-            <p className="mt-1 text-[12.5px] text-ink-3">My own review after a visit — private, editable.</p>
-          </header>
-          <RatingEditor
-            resortId={r.id}
-            name={r.shortName}
-            initial={d.myRating ? { rating: d.myRating.rating, review: d.myRating.review, updatedAt: d.myRating.updatedAt } : null}
-            updatedLabel={d.myRating ? ago(d.myRating.updatedAt, v.now) : null}
-          />
-          <p className="mt-auto text-[12.5px] text-ink-3 tnum">
-            {days.length ? (
+function SeasonCard({ d, v }: { d: ResortDetail; v: PageView }) {
+  const o = d.summary.opening
+  const st = d.summary.status
+  const openNow = st.status === 'open' || st.status === 'partially-open'
+  const days = o.daysAway !== null && o.daysAway > 0 && o.label !== 'opened' ? o.daysAway : null
+  const estimate = o.label === 'estimated'
+  const deg = days !== null ? Math.round(Math.max(0.04, Math.min(1, 1 - days / RING_DAYS)) * 360) : openNow || o.label === 'opened' ? 360 : 0
+  const ringColor = estimate ? 'var(--copper)' : openNow || o.label === 'opened' ? 'var(--positive)' : 'var(--teal)'
+  const title = openNow
+    ? st.label
+    : o.label === 'opened'
+      ? o.date
+        ? `Opened ${dayLabel(o.date)}`
+        : 'Opened this season'
+      : o.label === 'announced'
+        ? o.date
+          ? `Opens ${dayLabel(o.date)}`
+          : 'Opening announced'
+        : o.label === 'estimated'
+          ? o.date
+            ? `About ${dayLabel(o.date)}`
+            : 'Opening estimated'
+          : 'Opening not announced'
+  const sub =
+    o.label === 'announced'
+      ? 'Announced target — subject to snow and operations; never shown as open until it opens.'
+      : o.label === 'estimated'
+        ? `Piste estimate, not an announcement${o.basis ? ` · ${o.basis}` : ''}.`
+        : o.label === 'not-announced'
+          ? (o.typicalText ?? 'No opening date or estimate on file.')
+          : null
+  const closing =
+    o.closing.label === 'closed' && o.closing.date ? `Closed ${dayLabelYear(o.closing.date)}` : o.closing.label === 'announced' && o.closing.date ? `Closes ${dayLabelYear(o.closing.date)}` : 'Closing not announced'
+  return (
+    <GlassCard title={`${d.season.label} season`} aside={o.prov ? <Src title="Opening" items={[src('Opening', o.prov, o.date ? dayLabelYear(o.date) : 'Not announced')]} /> : null}>
+      <div className="flex items-center gap-4">
+        <div
+          aria-hidden
+          className={cn('flex size-[88px] shrink-0 items-center justify-center rounded-full', deg === 0 && 'border-[1.5px] border-dashed border-[color-mix(in_srgb,var(--teal)_40%,transparent)]')}
+          style={deg ? { background: `conic-gradient(${ringColor} ${deg}deg, color-mix(in srgb, var(--teal) 12%, transparent) 0)` } : undefined}
+        >
+          <span className="flex size-[72px] flex-col items-center justify-center rounded-full bg-surface-2 text-ink">
+            {days !== null ? (
               <>
-                {plural(days.length, 'ski day')} logged here · last {dayLabelYear(days[0].date)}
+                <CountUp text={String(days)} className="text-[24px] leading-none font-semibold tnum" />
+                <span className="hud mt-0.5 text-[11px] text-ink-2">{days === 1 ? 'day' : 'days'}</span>
               </>
+            ) : openNow || o.label === 'opened' ? (
+              <span className="hud text-positive">Open</span>
             ) : (
-              <>No ski days logged here yet.</>
-            )}{' '}
-            <Link href="/season" className="text-teal hover:underline">
-              My Season
-            </Link>
+              <span className="text-[24px] font-light text-ink-3">—</span>
+            )}
+          </span>
+        </div>
+        <div className="min-w-0">
+          <p className="m-0 text-[17px] leading-snug font-medium text-ink tnum">{title}</p>
+          <p className="m-0 mt-1 flex flex-wrap items-center gap-2 text-[13px] text-ink-2">
+            <OpeningTag label={o.label} />
+            <span className="tnum">{closing}</span>
           </p>
-        </section>
+        </div>
       </div>
-    </div>
+      {sub ? <p className="m-0 line-clamp-4 text-[13.5px] leading-[1.5] text-ink-2">{sub}</p> : null}
+      {st.status === 'unknown' ? <p className="m-0 mt-auto text-[12.5px] font-medium text-caution">Operating status unknown — never treated as open.</p> : null}
+      {v.date !== v.today ? <p className="m-0 text-[12px] text-ink-2">Status is as of now, not {dayLabel(v.date)}.</p> : null}
+    </GlassCard>
+  )
+}
+
+function MyRatingCard({ d, v }: { d: ResortDetail; v: PageView }) {
+  const r = d.summary
+  const days = d.mySkiDays
+  return (
+    <GlassCard title="My rating · private" className="md:col-span-2 xl:col-span-1">
+      <RatingEditor
+        resortId={r.id}
+        name={r.shortName}
+        initial={d.myRating ? { rating: d.myRating.rating, review: d.myRating.review, updatedAt: d.myRating.updatedAt } : null}
+        updatedLabel={d.myRating ? ago(d.myRating.updatedAt, v.now) : null}
+      />
+      <p className="m-0 mt-auto text-[12.5px] text-ink-2 tnum">
+        {days.length ? (
+          <>
+            {plural(days.length, 'ski day')} logged here · last {dayLabelYear(days[0].date)}
+          </>
+        ) : (
+          <>No ski days logged here yet.</>
+        )}{' '}
+        <Link href="/season" className="text-teal hover:underline">
+          My Season
+        </Link>
+      </p>
+    </GlassCard>
   )
 }
 

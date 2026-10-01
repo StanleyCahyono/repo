@@ -6,6 +6,9 @@
  *
  * Community-mapped data, labelled as such, never live status. A failed attempt never hides the last good list. Demo mode
  * reads nothing: OpenStreetMap is never fetched into the demo database.
+ *
+ * Line geometry (for the lifts-and-runs map) comes only from OpenStreetMap snapshots bundled with the app
+ * (src/assets/osm): the stored extract keeps no geometry. Resorts without a snapshot get no drawn lines.
  */
 import 'server-only'
 import { and, desc, eq, lte, ne } from 'drizzle-orm'
@@ -30,6 +33,9 @@ import {
   type SkiAreaTotals,
 } from '@/lib/domain/lifts'
 import { provenance, type Provenance } from '@/lib/domain/types'
+import { greatCircleKm } from '@/lib/domain/geo'
+import { LIFT_TYPES, PISTE_DIFFICULTIES, difficultyStyle as styleOf, liftKindText, type LiftType, type PisteShape, type PisteTone, type RunDifficulty } from '@/lib/domain/lifts'
+import greekPeakOsm from '@/assets/osm/greek-peak.json'
 import { isLive, type DataCtx } from './core'
 import { OSM_ADAPTER_ID, osmTargets, providerStatus, readSkiAreaExtract, type ConnectorState } from './deps'
 
@@ -151,4 +157,102 @@ export async function getLiftsRuns(ctx: DataCtx, resort: { id: string; country: 
   }
 
   return { ...base, demo: false, scheduled: scheduledIds.includes(resort.id), loaded, lastAttempt }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bundled geometry (map lines)
+
+/** One mapped way, ready to draw: a run in the resort's own sign (shape + words, never colour alone) or a lift. */
+export interface MappedLine {
+  id: string
+  kind: 'run' | 'lift'
+  name: string | null
+  /** Run: 'Black diamond'; lift: '4-seat chairlift'. */
+  label: string
+  /** Run sign (lifts have none). */
+  sign: { key: string; shape: PisteShape; tone: PisteTone; meaning: string } | null
+  /** Along the mapped line (map distance), metres. */
+  lengthM: number
+  /** [lon, lat] pairs. */
+  coords: [number, number][]
+}
+
+export interface MappedGeometry {
+  /** When the snapshot was taken from OpenStreetMap. */
+  fetchedAt: string
+  lines: MappedLine[]
+  /** [west, south, east, north] */
+  bbox: [number, number, number, number]
+  prov: Provenance
+}
+
+interface SnapshotElement {
+  tags?: Record<string, string | undefined>
+  geometry: { lat: number; lon: number }[]
+}
+interface Snapshot {
+  fetched: string
+  elements: SnapshotElement[]
+}
+
+const SNAPSHOTS: Record<string, Snapshot> = { 'greek-peak': greekPeakOsm as unknown as Snapshot }
+
+const lineLength = (coords: [number, number][]) =>
+  coords.reduce((m, c, i) => (i ? m + greatCircleKm({ lon: coords[i - 1][0], lat: coords[i - 1][1] }, { lon: c[0], lat: c[1] }) * 1000 : 0), 0)
+
+/** Lines of the OpenStreetMap snapshot bundled for this resort, or null when there is none. */
+export function bundledGeometry(resortId: string, country: string): MappedGeometry | null {
+  const snap = SNAPSHOTS[resortId]
+  if (!snap) return null
+  const convention = difficultyConvention(country)
+  const lines: MappedLine[] = []
+  let w = 180
+  let so = 90
+  let e = -180
+  let n = -90
+  snap.elements.forEach((el, i) => {
+    const t = el.tags ?? {}
+    const coords = el.geometry.map((g) => [g.lon, g.lat] as [number, number])
+    if (coords.length < 2) return
+    for (const [lon, lat] of coords) {
+      w = Math.min(w, lon)
+      e = Math.max(e, lon)
+      so = Math.min(so, lat)
+      n = Math.max(n, lat)
+    }
+    const lengthM = Math.round(lineLength(coords))
+    if (t.aerialway) {
+      if (!(LIFT_TYPES as readonly string[]).includes(t.aerialway)) return
+      const occ = Number(t['aerialway:occupancy'])
+      const label = liftKindText({ type: t.aerialway as LiftType, occupancy: Number.isFinite(occ) && occ > 0 ? occ : null })
+      lines.push({ id: `l${i}`, kind: 'lift', name: t.name ?? t.ref ?? null, label, sign: null, lengthM, coords })
+      return
+    }
+    const raw = t['piste:difficulty']
+    const diff: RunDifficulty = raw && (PISTE_DIFFICULTIES as readonly string[]).includes(raw) ? (raw as RunDifficulty) : 'unknown'
+    const st = styleOf(diff, convention)
+    lines.push({
+      id: `r${i}`,
+      kind: 'run',
+      name: t.name ?? t['piste:name'] ?? null,
+      label: st.label,
+      sign: { key: st.key, shape: st.shape, tone: st.tone, meaning: st.meaning },
+      lengthM,
+      coords,
+    })
+  })
+  return {
+    fetchedAt: snap.fetched,
+    lines,
+    bbox: [w, so, e, n],
+    prov: provenance({
+      kind: 'manual',
+      provider: OSM_PROVIDER,
+      sourceUrl: osmMapUrl((so + n) / 2, (w + e) / 2),
+      publishedAt: null,
+      fetchedAt: snap.fetched,
+      verification: 'unverified',
+      note: `${OSM_NOTE}. Snapshot bundled with Piste.`,
+    }),
+  }
 }
