@@ -114,8 +114,8 @@ export function CostsForm({ gear, budget, lodgingStyle }: { gear: GearPrefs; bud
               <label
                 key={r}
                 className={cn(
-                  'flex min-h-11 cursor-pointer items-start gap-3 rounded-[10px] border px-3 py-2.5 transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-focus',
-                  on ? 'border-teal bg-glacier/50' : 'border-divider bg-surface hover:border-divider-strong',
+                  'flex min-h-11 cursor-pointer items-start gap-3 rounded-[14px] border px-3 py-2.5 transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-focus',
+                  on ? 'border-teal bg-glacier/60' : 'border-glass-line bg-chip-track hover:border-field-edge',
                 )}
               >
                 <input type="radio" name="rental" value={r} checked={on} onChange={() => d.set({ rentalOption: r })} className="mt-1 size-4 shrink-0 accent-[var(--teal)] focus-visible:outline-none" />

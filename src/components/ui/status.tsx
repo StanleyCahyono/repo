@@ -5,10 +5,10 @@ import { OPERATING_STATUS_LABEL, type OperatingStatus, type OpeningLabel } from 
 const statusStyle: Record<OperatingStatus, { cls: string; Icon: typeof CircleCheck }> = {
   open: { cls: 'bg-positive-bg text-positive', Icon: CircleCheck },
   'partially-open': { cls: 'bg-positive-bg text-positive', Icon: CircleDot },
-  'not-yet-open': { cls: 'bg-surface-3 text-ink-2', Icon: Hourglass },
+  'not-yet-open': { cls: 'bg-chip-track text-ink-2', Icon: Hourglass },
   'temporarily-closed': { cls: 'bg-caution-bg text-caution', Icon: CirclePause },
   'closed-for-season': { cls: 'bg-critical-bg text-critical', Icon: CircleSlash },
-  unknown: { cls: 'bg-surface-3 text-ink-2 border border-dashed border-divider-strong', Icon: CircleHelp },
+  unknown: { cls: 'bg-chip-track text-ink-2 border border-dashed border-divider-strong', Icon: CircleHelp },
 }
 
 /** Operating status with icon + text (never colour alone). */
@@ -17,7 +17,7 @@ export function StatusPill({ status, className, size = 'md' }: { status: Operati
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap',
+        'inline-flex shrink-0 items-center gap-1.5 rounded-full font-medium whitespace-nowrap',
         size === 'sm' ? 'h-6 px-2 text-[12px]' : 'h-7 px-2.5 text-[13px]',
         cls,
         className,
@@ -40,7 +40,7 @@ const openingStyle: Record<OpeningLabel, { text: string; cls: string }> = {
 export function OpeningTag({ label, className }: { label: OpeningLabel; className?: string }) {
   const s = openingStyle[label]
   return (
-    <span className={cn('inline-flex h-5 items-center rounded-sm border px-1.5 text-[11.5px] font-medium', s.cls, className)}>
+    <span className={cn('inline-flex h-[22px] shrink-0 items-center rounded-[7px] border px-1.5 text-[12px] leading-none font-medium whitespace-nowrap', s.cls, className)}>
       {s.text}
     </span>
   )

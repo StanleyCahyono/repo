@@ -92,7 +92,7 @@ export function CorrectionsPanel({
       </div>
 
       {visible.length ? (
-        <ul className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+        <ul className="overflow-hidden glass rounded-[24px]">
           <AnimatePresence initial={false}>
             {visible.map((c, i) => (
               <motion.li

@@ -13,7 +13,7 @@ import { formatLocalDate, isLocalDate } from '@/lib/domain/time'
 
 function Disclosure({ summary, children, className }: { summary: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
-    <details className={cn('group rounded-[10px] border border-divider bg-surface', className)}>
+    <details className={cn('group rounded-[14px] border border-divider bg-surface', className)}>
       <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-3.5 py-2 text-[13.5px] font-medium text-ink md:min-h-10 [&::-webkit-details-marker]:hidden">
         <span className="min-w-0">{summary}</span>
         <ChevronDown aria-hidden className="size-4 shrink-0 text-ink-3 transition-transform duration-150 group-open:rotate-180" />
@@ -64,7 +64,7 @@ export function FailuresPanel({ v, tz, labels }: { v: SourcesView; tz: string; l
   const anythingRan = v.jobs.some((j) => j.lastAttempt)
   if (!items.length) {
     return (
-      <div className="flex items-start gap-3 rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+      <div className="flex items-start gap-3 glass rounded-[24px] px-4 py-4 md:px-5">
         <CircleCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-ink-3" />
         <p className="text-[13.5px] text-ink-2">
           <span className="font-semibold text-ink">No fetch or parser failures logged in the last {windowDays} days.</span>{' '}
@@ -77,7 +77,7 @@ export function FailuresPanel({ v, tz, labels }: { v: SourcesView; tz: string; l
   const rest = items.slice(6)
   return (
     <div className="flex flex-col gap-4">
-      <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+      <div className="overflow-hidden glass rounded-[24px]">
         <table className="w-full text-left text-[13.5px]">
           <caption className="sr-only">Failures per source in the last {windowDays} days</caption>
           <thead>
@@ -112,7 +112,7 @@ export function FailuresPanel({ v, tz, labels }: { v: SourcesView; tz: string; l
           </tbody>
         </table>
       </div>
-      <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+      <div className="overflow-hidden glass rounded-[24px]">
         <p className="border-b border-divider bg-surface-2 px-4 py-2 text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase md:px-5">Most recent</p>
         <ul className="divide-y divide-divider">
           {first.map((f) => (
@@ -149,7 +149,7 @@ export function LinksPanel({ links, now, tz, demo, names }: { links: LinksView; 
   const groups = groupFailures(links.brokenLinks)
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-[12px] border border-divider bg-surface">
+      <div className="glass rounded-[24px]">
         <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-t-[12px] bg-divider sm:grid-cols-4 lg:grid-cols-7">
           {stats.map((s) => (
             <div key={s.label} className="bg-surface px-4 py-3">
@@ -248,7 +248,7 @@ function NoteItem({ n }: { n: ResearchNoteView }) {
 export function ResearchNotesPanel({ notes }: { notes: ResearchNotes }) {
   return (
     <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-      <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+      <div className="overflow-hidden glass rounded-[24px]">
         <div className="border-b border-divider bg-surface-2 px-4 py-3 md:px-5">
           <p className="flex items-center gap-2 text-[14.5px] font-semibold text-ink">
             <BookMarked aria-hidden className="size-4 text-ink-3" /> Reference data only · {notes.referenceOnly.length}
@@ -265,7 +265,7 @@ export function ResearchNotesPanel({ notes }: { notes: ResearchNotes }) {
         </ul>
       </div>
       <div className="flex flex-col gap-4">
-        <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+        <div className="overflow-hidden glass rounded-[24px]">
           <div className="border-b border-divider bg-surface-2 px-4 py-3 md:px-5">
             <p className="flex items-center gap-2 text-[14.5px] font-semibold text-ink">
               <SearchCheck aria-hidden className="size-4 text-caution" /> Researched by web search · {notes.researched.length}
@@ -279,7 +279,7 @@ export function ResearchNotesPanel({ notes }: { notes: ResearchNotes }) {
           </ul>
         </div>
         {notes.unrecorded.length ? (
-          <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+          <div className="overflow-hidden glass rounded-[24px]">
             <p className="border-b border-divider bg-surface-2 px-4 py-3 text-[14.5px] font-semibold text-ink md:px-5">Added by you or unrecorded · {notes.unrecorded.length}</p>
             <ul className="divide-y divide-divider">
               {notes.unrecorded.map((n) => (

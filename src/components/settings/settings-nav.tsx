@@ -1,8 +1,8 @@
 'use client'
 /**
- * Section index for Settings and Sources & Sync. One <nav>: a sticky horizontal strip on phones and tablets, a
- * sticky vertical index beside the content from 1280px. Highlights the section in view (the marker glides with a
- * shared layoutId). Plain anchors, so it works without JavaScript.
+ * Section index for Settings and Sources & Sync. One <nav>: a sticky glass pill strip on phones and tablets, a
+ * sticky vertical glass index beside the content from 1280px. The section in view gets the dark HUD chip, which
+ * glides between items (shared layoutId; instant under reduced motion). Plain anchors, so it works without JavaScript.
  */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
@@ -85,17 +85,17 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
   return (
     <div
       className={cn(
-        'sticky top-14 z-20 -mx-4 mb-6 border-b border-divider bg-canvas md:top-0 md:-mx-8',
-        vertical && 'xl:top-8 xl:mx-0 xl:mb-0 xl:self-start xl:border-b-0 xl:bg-transparent',
+        'sticky top-[64px] z-20 mb-6 md:top-3',
+        vertical && 'xl:top-8 xl:mb-0 xl:self-start',
       )}
     >
-      <nav aria-label={label}>
-        {vertical ? <p className="eyebrow mb-2 hidden px-3 xl:block">On this page</p> : null}
+      <nav aria-label={label} className={cn('glass rounded-full p-1', vertical && 'xl:rounded-[24px] xl:p-2')}>
+        {vertical ? <p className="eyebrow mb-1 hidden px-3 pt-2 pb-1 xl:block">On this page</p> : null}
         <ul
           ref={listRef}
           className={cn(
-            'scroll-fade-x flex h-12 items-stretch gap-0.5 overflow-x-auto px-3 [scrollbar-width:none] md:h-14 md:px-6 [&::-webkit-scrollbar]:hidden',
-            vertical && 'xl:h-auto xl:flex-col xl:overflow-visible xl:px-0',
+            'scroll-fade-x flex h-11 items-stretch gap-0.5 overflow-x-auto rounded-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+            vertical && 'xl:h-auto xl:flex-col xl:overflow-visible xl:rounded-none',
           )}
         >
           {sections.map((s) => {
@@ -107,9 +107,9 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
                   onClick={go(s.id)}
                   aria-current={on ? 'location' : undefined}
                   className={cn(
-                    'relative flex w-full items-center gap-2 rounded-md px-2.5 text-[14px] font-medium whitespace-nowrap transition-colors duration-150',
-                    vertical && 'xl:min-h-9 xl:px-3',
-                    on ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                    'relative flex w-full items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap transition-colors duration-150',
+                    vertical && 'xl:min-h-10 xl:rounded-[14px] xl:px-3',
+                    on ? 'text-on-ink-chip' : 'text-ink-2 hover:bg-chip-hover hover:text-ink',
                   )}
                 >
                   {on ? (
@@ -117,10 +117,7 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
                       layoutId="settings-nav-active"
                       transition={t.select}
                       aria-hidden
-                      className={cn(
-                        'absolute inset-x-2 bottom-0 h-[3px] rounded-t-full bg-teal',
-                        vertical && 'xl:inset-x-0 xl:inset-y-0 xl:h-auto xl:rounded-md xl:bg-glacier',
-                      )}
+                      className={cn('absolute inset-0 rounded-full bg-ink-chip shadow-[0_6px_16px_-8px_rgb(19_32_44/0.55)]', vertical && 'xl:rounded-[14px]')}
                     />
                   ) : null}
                   <span className={cn('relative', vertical ? 'xl:hidden' : 'lg:hidden')}>{s.short ?? s.label}</span>
@@ -128,7 +125,7 @@ export function SettingsNav({ sections, label, vertical = true }: { sections: Na
                   {s.badge ? (
                     <span
                       className={cn(
-                        'relative ml-auto rounded-sm px-1.5 text-[12px] leading-5 font-medium tnum',
+                        'relative ml-auto rounded-full px-2 text-[12px] leading-5 font-medium tnum',
                         s.tone === 'critical' ? 'bg-critical-bg text-critical' : s.tone === 'caution' ? 'bg-caution-bg text-caution' : 'bg-surface-3 text-ink-2',
                       )}
                     >

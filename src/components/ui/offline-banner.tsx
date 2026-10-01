@@ -82,11 +82,16 @@ export function OfflineBanner({ className }: { className?: string }) {
           transition={t.pageIn}
           className={cn('sticky top-16 z-20 mb-5 md:top-4', className)}
         >
-          <div className="flex gap-3 rounded-[10px] border border-divider-strong bg-surface-3 px-4 py-3 text-[13.5px] text-ink shadow-lift">
-            {state === 'offline' ? <WifiOff aria-hidden className="mt-0.5 size-4 shrink-0 text-ink-2" /> : <ServerOff aria-hidden className="mt-0.5 size-4 shrink-0 text-critical" />}
+          <div className="glass-strong flex gap-3 rounded-[20px] px-4 py-3.5 text-[13.5px] text-ink">
+            <span
+              aria-hidden
+              className={cn('mt-px inline-flex size-7 shrink-0 items-center justify-center rounded-full', state === 'offline' ? 'bg-ink-chip text-on-ink-chip' : 'bg-critical text-surface')}
+            >
+              {state === 'offline' ? <WifiOff className="size-3.5" strokeWidth={2.2} /> : <ServerOff className="size-3.5" strokeWidth={2.2} />}
+            </span>
             <div className="min-w-0">
               <p className="font-semibold">{state === 'offline' ? 'You’re offline' : 'Can’t reach Piste’s server'}</p>
-              <p className="mt-0.5 text-ink-2">
+              <p className="mt-0.5 leading-relaxed text-ink-2">
                 {state === 'offline'
                   ? local
                     ? `Piste reads your saved data from this computer, so pages still open. Forecasts, reports and exchange rates can’t refresh until you’re back online. What you see${since} keeps its timestamps.`

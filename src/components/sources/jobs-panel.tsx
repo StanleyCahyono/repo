@@ -87,7 +87,7 @@ function refreshBlock(job: JobView, demo: boolean): string | null {
 
 export function JobsPanel({ v, tz }: { v: SourcesView; tz: string }) {
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div className="overflow-hidden glass rounded-[24px]">
       <div aria-hidden className="hidden grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,0.8fr)_9.5rem] gap-x-4 border-b border-divider bg-surface-2 px-5 py-2.5 text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase lg:grid">
         <span>Job</span>
         <span>State</span>
@@ -134,7 +134,7 @@ export function JobsPanel({ v, tz }: { v: SourcesView; tz: string }) {
                 </Cell>
               </div>
               {j.targets.length ? (
-                <details className="group mt-3 rounded-[10px] border border-divider bg-surface-2">
+                <details className="group mt-3 rounded-[14px] border border-divider bg-surface-2">
                   <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-3 py-2 text-[13px] font-medium text-ink md:min-h-9 [&::-webkit-details-marker]:hidden">
                     <span>
                       Per resort · {j.targets.length}

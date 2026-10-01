@@ -1,5 +1,9 @@
 'use client'
-/** Segmented single-choice control (radiogroup semantics) with a gliding selection highlight. */
+/**
+ * Segmented single-choice control (radiogroup semantics, roving tabindex, arrow keys). Glass HUD: a translucent pill
+ * track with a dark HUD chip that slides to the selection (shared layoutId, 200ms; instant under reduced motion).
+ * Never forces horizontal page scroll: a long row scrolls inside its own track, or pass `wrap` to wrap it.
+ */
 import { useId } from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/ui/cn'
@@ -40,7 +44,10 @@ export function Segmented<T extends string>({
       <div
         role="radiogroup"
         aria-labelledby={group}
-        className={cn('rounded-[10px] border border-divider bg-surface-2 p-0.5', wrap ? 'flex flex-wrap' : 'inline-flex')}
+        className={cn(
+          'max-w-full gap-0.5 border border-glass-line bg-chip-track p-1',
+          wrap ? 'flex flex-wrap rounded-[20px]' : 'inline-flex overflow-x-auto rounded-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        )}
         onKeyDown={(e) => {
           const i = options.findIndex((o) => o.value === value)
           if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -64,13 +71,18 @@ export function Segmented<T extends string>({
               title={o.hint}
               onClick={() => onChange(o.value)}
               className={cn(
-                'relative rounded-[8px] font-medium whitespace-nowrap transition-colors duration-150',
-                size === 'sm' ? 'h-8 px-2.5 text-[13px]' : 'h-9 px-3.5 text-[14px]',
-                selected ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                'relative shrink-0 rounded-full font-medium whitespace-nowrap transition-colors duration-150',
+                size === 'sm' ? 'h-8 px-3 text-[13px]' : 'h-9 px-4 text-[14px]',
+                selected ? 'text-on-ink-chip' : 'text-ink hover:bg-chip-hover',
               )}
             >
               {selected ? (
-                <motion.span layoutId={`seg-${group}`} transition={t.select} className="absolute inset-0 rounded-[8px] border border-divider bg-surface shadow-[0_1px_2px_rgb(12_30_42/0.08)]" aria-hidden />
+                <motion.span
+                  layoutId={`seg-${group}`}
+                  transition={t.select}
+                  className="absolute inset-0 rounded-full bg-ink-chip shadow-[0_4px_12px_-4px_rgb(19_32_44/0.45)]"
+                  aria-hidden
+                />
               ) : null}
               <span className="relative">{o.label}</span>
             </button>

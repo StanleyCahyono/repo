@@ -99,7 +99,7 @@ export function StatusBoard({ v }: { v: SourcesView }) {
   ]
 
   return (
-    <div className="grid overflow-hidden rounded-[12px] border border-divider bg-surface sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid overflow-hidden glass rounded-[24px] sm:grid-cols-2 lg:grid-cols-5">
       {tiles.map((t, i) => (
         <a
           key={t.href}

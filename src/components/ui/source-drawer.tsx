@@ -31,14 +31,14 @@ export function SourceList({ items }: { items: SourceItem[] }) {
   return (
     <ul className="flex flex-col divide-y divide-divider">
       {items.map((it, i) => (
-        <li key={i} className="py-3 first:pt-0">
+        <li key={i} className="py-3.5 first:pt-0">
           <div className="flex items-baseline justify-between gap-3">
-            <p className="text-[14px] font-semibold text-ink">{it.label}</p>
+            <p className="min-w-0 text-[14px] font-semibold break-words text-ink">{it.label}</p>
             {it.prov ? <KindTag kind={it.prov.kind} /> : null}
           </div>
           {it.value ? <div className="mt-0.5 text-[14px] text-ink">{it.value}</div> : null}
           {it.prov ? (
-            <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[12.5px]">
+            <dl className="mt-2.5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1 rounded-[14px] bg-chip-track px-3 py-2.5 text-[12.5px]">
               {it.prov.provider ? (
                 <>
                   <dt className="text-ink-3">Provider</dt>
@@ -123,8 +123,8 @@ export function SourceDrawer({
         <button
           type="button"
           className={cn(
-            'inline-flex items-center gap-1 rounded-sm text-[12px] font-medium text-ink-3 hover:text-teal',
-            compact ? 'size-6 justify-center' : 'h-7 px-1.5',
+            'inline-flex shrink-0 items-center gap-1 rounded-full text-[12px] font-medium text-ink-3 transition-colors duration-150 hover:bg-chip-hover hover:text-teal',
+            compact ? 'size-6 justify-center' : 'h-7 px-2',
             className,
           )}
           aria-label={compact ? `${label}: ${title}` : undefined}

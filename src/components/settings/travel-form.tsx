@@ -104,7 +104,7 @@ export function TravelForm({ saved, airports, homeName }: { saved: TravelPrefs; 
           {announce}
         </p>
         {v.originAirports.length ? (
-          <ol aria-labelledby="origins-label" className="max-w-xl divide-y divide-divider rounded-[10px] border border-divider">
+          <ol aria-labelledby="origins-label" className="max-w-xl divide-y divide-divider rounded-[14px] border border-divider">
             <AnimatePresence initial={false}>
               {v.originAirports.map((code, i) => {
                 const a = byCode.get(code)
@@ -153,7 +153,7 @@ export function TravelForm({ saved, airports, homeName }: { saved: TravelPrefs; 
             </AnimatePresence>
           </ol>
         ) : (
-          <p className="max-w-xl rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-3 py-3 text-[13.5px] text-ink-2">
+          <p className="max-w-xl rounded-[14px] border border-dashed border-divider-strong bg-surface-2 px-3 py-3 text-[13.5px] text-ink-2">
             No origin airports — flight planning will ask for one each time.
           </p>
         )}

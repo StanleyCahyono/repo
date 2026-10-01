@@ -5,6 +5,9 @@
  * - `side="right"`: desktop drawer (source drawer, filters, previews).
  * - `side="responsive"`: bottom sheet below md, right drawer at md+.
  * - `side="center"`: dialog.
+ * Glass HUD: every overlay is a glass-strong panel (≥ 90% tint, opaque without backdrop-filter) over a blurred, dimmed
+ * page. Bottom sheets have 28px top corners and a grab handle; drawers float 12px off the edges at md+ with 24px
+ * corners; dialogs are 24px. Openings use a soft spring (CSS, transform/opacity only; instant under reduced motion).
  */
 import type { ReactNode } from 'react'
 import { Dialog } from 'radix-ui'
@@ -44,35 +47,39 @@ export function Sheet({
 }: SheetProps) {
   const position =
     side === 'bottom'
-      ? 'piste-sheet inset-x-0 bottom-0 max-h-[88dvh] rounded-t-[18px] safe-bottom'
+      ? 'piste-sheet inset-x-0 bottom-0 max-h-[88dvh] rounded-t-[28px] border-b-0 safe-bottom'
       : side === 'right'
-        ? cn('piste-drawer inset-y-0 right-0 h-dvh w-[min(100vw,440px)]', widthClass)
+        ? cn(
+            'piste-drawer inset-y-0 right-0 h-dvh w-[min(100vw,440px)] max-w-full',
+            'md:inset-y-3 md:right-3 md:h-auto md:max-w-[calc(100vw-24px)] md:rounded-[24px]',
+            widthClass,
+          )
         : side === 'center'
-          ? 'piste-dialog left-1/2 top-1/2 w-[min(94vw,560px)] max-h-[86dvh] -translate-x-1/2 -translate-y-1/2 rounded-[14px]'
+          ? 'piste-dialog left-1/2 top-1/2 w-[min(94vw,560px)] max-h-[86dvh] -translate-x-1/2 -translate-y-1/2 rounded-[24px]'
           : cn(
-              'piste-responsive inset-x-0 bottom-0 max-h-[88dvh] rounded-t-[18px] safe-bottom',
-              'md:inset-y-0 md:right-0 md:left-auto md:bottom-auto md:h-dvh md:max-h-none md:rounded-none md:rounded-l-[14px]',
+              'piste-responsive inset-x-0 bottom-0 max-h-[88dvh] rounded-t-[28px] border-b-0 safe-bottom',
+              'md:inset-y-3 md:right-3 md:left-auto md:bottom-auto md:h-auto md:max-h-none md:max-w-[calc(100vw-24px)] md:rounded-[24px] md:border-b',
               widthClass,
             )
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       {trigger ? <Dialog.Trigger asChild>{trigger}</Dialog.Trigger> : null}
       <Dialog.Portal>
-        <Dialog.Overlay className="piste-overlay fixed inset-0 z-50 bg-overlay" />
+        <Dialog.Overlay className="piste-overlay fixed inset-0 z-50 bg-overlay backdrop-blur-[3px]" />
         <Dialog.Content
           onCloseAutoFocus={onCloseAutoFocus}
           className={cn(
-            'fixed z-50 flex flex-col border border-divider bg-surface text-ink shadow-overlay outline-none',
+            'glass-strong fixed z-50 flex min-w-0 flex-col text-ink shadow-[var(--glass-shadow-lg)] outline-none',
             position,
             className,
           )}
         >
           {side === 'bottom' || side === 'responsive' ? (
-            <div aria-hidden className={cn('mx-auto mt-2 h-1 w-10 rounded-full bg-divider-strong', side === 'responsive' && 'md:hidden')} />
+            <div aria-hidden className={cn('mx-auto mt-2.5 h-1 w-10 shrink-0 rounded-full bg-field-edge', side === 'responsive' && 'md:hidden')} />
           ) : null}
-          <div className="flex items-start justify-between gap-3 border-b border-divider px-5 pt-4 pb-3">
-            <div className="min-w-0">
-              <Dialog.Title className="text-[17px] font-semibold leading-snug">{title}</Dialog.Title>
+          <div className="flex shrink-0 items-start justify-between gap-3 border-b border-glass-line px-5 pt-4 pb-3.5 md:px-6">
+            <div className="min-w-0 pt-1">
+              <Dialog.Title className="text-[18px] leading-snug font-semibold tracking-[-0.01em] break-words">{title}</Dialog.Title>
               {description ? (
                 <Dialog.Description className="mt-0.5 text-[13.5px] text-ink-2">{description}</Dialog.Description>
               ) : (
@@ -81,13 +88,13 @@ export function Sheet({
             </div>
             <Dialog.Close
               aria-label="Close"
-              className="-mr-1 inline-flex size-10 shrink-0 items-center justify-center rounded-md text-ink-2 hover:bg-surface-3 hover:text-ink"
+              className="-mr-1 inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-chip-track text-ink-2 transition-colors duration-150 hover:bg-chip-hover hover:text-ink md:size-10"
             >
               <X aria-hidden className="size-5" />
             </Dialog.Close>
           </div>
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 scrollbar-thin">{children}</div>
-          {footer ? <div className="border-t border-divider px-5 py-3">{footer}</div> : null}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 scrollbar-thin md:px-6">{children}</div>
+          {footer ? <div className="shrink-0 border-t border-glass-line px-5 py-3 md:px-6">{footer}</div> : null}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

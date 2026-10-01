@@ -69,7 +69,7 @@ export function ScoreChip({ scoreKind, score, coverage, size = 'md', className }
     scoreKind === 'limited' ? 'Limited data' : scoreKind === 'weather-potential' ? 'Weather potential' : descriptorFor(score)
   return (
     <span className={cn('inline-flex items-baseline gap-2', className)}>
-      <span className={cn('font-display tnum leading-none', big, scoreKind === 'conditions' ? toneFor(score) : 'text-ink-2')}>
+      <span className={cn('font-display tnum leading-none font-light tracking-[-0.03em]', big, scoreKind === 'conditions' ? toneFor(score) : 'text-ink-2')}>
         {score}
         {scoreKind !== 'conditions' ? <span className="align-top text-[0.45em]">*</span> : null}
       </span>
