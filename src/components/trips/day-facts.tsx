@@ -201,7 +201,7 @@ function BasketCell({ r }: { r: DayResortView }) {
 
 export function DayResortFacts({ r, units, date, now, chosenName, header }: { r: DayResortView; units: UnitPrefs; date: string; now: string; chosenName: string | null; header?: React.ReactNode }) {
   return (
-    <div className="rounded-[10px] border border-divider bg-surface-2">
+    <div className="rounded-[16px] border border-divider bg-ink/[0.03]">
       {header ? <div className="flex flex-wrap items-center justify-between gap-2 border-b border-divider px-3.5 py-2">{header}</div> : null}
       <div className="grid gap-4 p-3.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
         <AccessCell r={r} chosenName={chosenName} />

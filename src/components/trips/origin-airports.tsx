@@ -36,7 +36,7 @@ export function OriginAirports({ rows, selected, dest, depart, ret, winterPct, h
   const fastest = rows.filter((r) => r.winterMinutes !== null).sort((a, b) => a.winterMinutes! - b.winterMinutes!)[0]?.iata
   const anyRoutes = rows.some((r) => r.routesKnown)
   return (
-    <div role="radiogroup" aria-label="Origin airport for this trip" className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div role="radiogroup" aria-label="Origin airport for this trip" className="overflow-hidden rounded-[20px] border border-divider bg-surface/70">
       <div aria-hidden className="hidden grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.9fr)_auto_104px] gap-4 border-b border-divider bg-surface-2 px-4 py-2 text-[12px] font-semibold tracking-wide text-ink-3 uppercase lg:grid">
         <span>Airport</span>
         <span>Drive, winter</span>
@@ -53,7 +53,7 @@ export function OriginAirports({ rows, selected, dest, depart, ret, winterPct, h
               {on ? <motion.span layoutId="origin-selected" transition={t.select} aria-hidden className="absolute inset-0 border-l-[3px] border-teal bg-glacier/45" /> : null}
               <div className="relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 px-4 py-3.5 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.9fr)_auto_104px]">
                 <div className="flex min-w-0 items-center gap-3 lg:order-1">
-                  <span className="w-12 shrink-0 font-display text-[26px] leading-none text-ink">{r.iata}</span>
+                  <span className="w-12 shrink-0 font-light tracking-[-0.03em] text-[26px] leading-none text-ink">{r.iata}</span>
                   <div className="min-w-0">
                     <p className="line-clamp-2 text-[13.5px] leading-snug font-medium text-ink">{r.name ?? r.iata}</p>
                     <p className="text-[12.5px] text-ink-3">

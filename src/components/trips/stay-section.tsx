@@ -59,7 +59,7 @@ export function StaySection({ page, index }: { page: TripPage; index: number }) 
               const pn = perNight(l)
               const n = nights(l.date, l.endDate)
               return (
-                <article key={l.id} className="rounded-[12px] border border-divider bg-surface p-1.5">
+                <article key={l.id} className="rounded-[20px] border border-divider bg-surface/70 p-1.5">
                   <ItemRow item={l} />
                   <div className="mx-2 mb-2 grid gap-x-6 gap-y-1.5 border-t border-divider px-1 pt-3 text-[13px] sm:grid-cols-2 md:mx-3">
                     <p className="text-ink-2 tnum">
@@ -114,7 +114,7 @@ export function StaySection({ page, index }: { page: TripPage; index: number }) 
                 return (
                   <div key={rid}>
                     {byResort.length > 1 ? <p className="mb-2 text-[13px] font-semibold text-ink-2">{list[0].resortName}</p> : null}
-                    <ul className="divide-y divide-divider overflow-hidden rounded-[12px] border border-divider bg-surface">
+                    <ul className="divide-y divide-divider overflow-hidden rounded-[20px] border border-divider bg-surface/70">
                       {list.map((h) => (
                         <li key={h.id} className="grid gap-3 px-4 py-3.5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
                           <div className="flex min-w-0 gap-3">
@@ -161,7 +161,7 @@ function Comparison({ lodging }: { lodging: TripItemRow[] }) {
   return (
     <section aria-labelledby="compare-stay">
       <SubHead id="compare-stay">Compare options</SubHead>
-      <div className="relative overflow-x-auto rounded-[12px] border border-divider bg-surface">
+      <div className="relative overflow-x-auto rounded-[20px] border border-divider bg-surface/70">
         <table className="w-full min-w-[560px] text-[13.5px]">
           <caption className="sr-only">Saved lodging options compared</caption>
           <thead>

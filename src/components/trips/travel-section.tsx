@@ -160,7 +160,7 @@ export function TravelSection({ page, index }: { page: TripPage; index: number }
             </SubHead>
             <div className="flex min-w-0 flex-col gap-3">
               {[...drives, ...transfers, ...parking].length ? (
-                <ul className="flex flex-col rounded-[12px] border border-divider bg-surface p-1.5">
+                <ul className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-1.5">
                   {[...drives, ...transfers, ...parking].map((i) => (
                     <li key={i.id}>
                       <ItemRow item={i} />
@@ -168,7 +168,7 @@ export function TravelSection({ page, index }: { page: TripPage; index: number }
                   ))}
                 </ul>
               ) : (
-                <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No transfer, drive or parking saved yet.</p>
+                <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No transfer, drive or parking saved yet.</p>
               )}
               <div className="flex flex-wrap gap-2">
                 <AddItemButton type="transfer" defaults={{ refId: main.id, date: page.trip.startDate, endDate: ret ?? undefined }}>
@@ -191,7 +191,7 @@ function DriveCard({ main, home, pct, units }: { main: TripResortInfo; home: Tri
   const dir = directionsLink({ lat: home.lat, lon: home.lon }, { lat: main.lat, lon: main.lon }, `Directions to ${main.shortName}`)
   const d = main.drive
   return (
-    <section aria-labelledby="drive-card" className="flex flex-col rounded-[12px] border border-divider bg-surface p-5">
+    <section aria-labelledby="drive-card" className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-5">
       <div className="flex items-center justify-between gap-3">
         <h3 id="drive-card" className="inline-flex items-center gap-2 text-[15px] font-semibold text-ink">
           <Car aria-hidden className="size-4 text-ink-2" /> Drive
@@ -200,7 +200,7 @@ function DriveCard({ main, home, pct, units }: { main: TripResortInfo; home: Tri
       </div>
       {d.minutes !== null ? (
         <>
-          <p className="mt-3 font-display text-[40px] leading-none text-ink tnum">{duration(d.winterMinutes)}</p>
+          <p className="mt-3 font-light tracking-[-0.03em] text-[40px] leading-none text-ink tnum">{duration(d.winterMinutes)}</p>
           <p className="mt-1 text-[13px] text-ink-2 tnum">
             one way with the {pct}% winter buffer · {duration(d.minutes)} without{d.km !== null ? ` · ${formatDistance(d.km, units)}` : ''}
           </p>
@@ -227,7 +227,7 @@ function DriveCard({ main, home, pct, units }: { main: TripResortInfo; home: Tri
 
 function FlyCard({ main, canFly, d2d, origin, dest, timing, hasFlight }: { main: TripResortInfo; canFly: boolean; d2d: ReturnType<typeof doorToDoor> | null; origin: string; dest: string | null; timing: ReturnType<typeof itineraryTiming> | null; hasFlight: boolean }) {
   return (
-    <section aria-labelledby="fly-card" className="rounded-[12px] border border-divider bg-surface p-5">
+    <section aria-labelledby="fly-card" className="rounded-[20px] border border-divider bg-surface/70 p-5">
       <div className="flex items-center justify-between gap-3">
         <h3 id="fly-card" className="inline-flex items-center gap-2 text-[15px] font-semibold text-ink">
           <Plane aria-hidden className="size-4 text-ink-2" /> Fly {canFly ? `${origin} → ${dest ?? '—'}` : ''}
@@ -242,10 +242,10 @@ function FlyCard({ main, canFly, d2d, origin, dest, timing, hasFlight }: { main:
       ) : (
         <>
           {d2d.total !== null ? (
-            <p className="mt-3 font-display text-[40px] leading-none text-ink tnum">{duration(d2d.total)}</p>
+            <p className="mt-3 font-light tracking-[-0.03em] text-[40px] leading-none text-ink tnum">{duration(d2d.total)}</p>
           ) : (
             <div className="mt-3">
-              <p className="font-display text-[32px] leading-none text-ink-2">Unknown</p>
+              <p className="font-light tracking-[-0.03em] text-[32px] leading-none text-ink-2">Unknown</p>
               <p className="mt-1 text-[13px] text-ink-2 tnum">
                 at least {duration(d2d.known)} before the flight itself — {hasFlight ? 'add your flight times' : 'enter a flight'} to complete it
               </p>
@@ -285,7 +285,7 @@ function FlightCard({ item, zones }: { item: TripItemRow; zones: Record<string, 
   const origin = detailString(item.details, 'origin')
   const links = origin && item.refId && item.date ? flightSearchLinks({ from: origin, to: item.refId, depart: item.date, return: item.endDate }) : []
   return (
-    <article className="rounded-[12px] border border-divider bg-surface p-1.5">
+    <article className="rounded-[20px] border border-divider bg-surface/70 p-1.5">
       <ItemRow item={item} hideFacts />
       <div className="mx-2 mb-2 flex flex-col gap-3 border-t border-divider px-1 pt-3 md:mx-3">
         {segs.length ? (
@@ -364,7 +364,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 function CatalogTransfers({ main, savedTitles, startDate, endDate }: { main: TripResortInfo; savedTitles: Set<string>; startDate: string; endDate: string | null }) {
   const airport = main.airports[0] ?? null
   return (
-    <div className="mt-2 min-w-0 rounded-[12px] border border-divider bg-surface-2 p-4">
+    <div className="mt-2 min-w-0 rounded-[20px] border border-divider bg-ink/[0.03] p-4">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="text-[14px] font-semibold text-ink">Options on file for {main.shortName}</p>
         {airport ? (
@@ -379,7 +379,7 @@ function CatalogTransfers({ main, savedTitles, startDate, endDate }: { main: Tri
           {main.transfers.map((t, k) => {
             const title = t.name ?? `${TRANSFER_LABEL[t.type ?? ''] ?? 'Transfer'} to ${main.shortName}`
             return (
-              <li key={k} className="flex min-w-0 flex-col gap-2 rounded-[10px] border border-divider bg-surface p-3.5">
+              <li key={k} className="flex min-w-0 flex-col gap-2 rounded-[16px] border border-divider bg-surface/70 p-3.5">
                 <div className="min-w-0 flex-1">
                   <p className="text-[12px] font-semibold tracking-[0.06em] text-ink-3 uppercase">{t.type ? (TRANSFER_LABEL[t.type] ?? t.type) : 'Transfer'}</p>
                   <p className="mt-0.5 text-[14px] leading-snug font-medium text-ink">{title}</p>

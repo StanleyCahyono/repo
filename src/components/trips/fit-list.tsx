@@ -19,7 +19,7 @@ export function FitList({ page }: { page: TripPage }) {
   if (!fits.length) return null
   const companion = page.detail.trip.companions.find((c) => c.ability)
   return (
-    <div className="rounded-[12px] border border-divider bg-surface p-4">
+    <div className="rounded-[20px] border border-divider bg-surface/70 p-4">
       <p className="text-[14.5px] font-semibold text-ink">Fit for this group</p>
       <p className="text-[12.5px] text-ink-3">
         You{companion ? ` and ${companion.name}, ${companion.ability}` : ''} · a personal match, separate from the day’s conditions

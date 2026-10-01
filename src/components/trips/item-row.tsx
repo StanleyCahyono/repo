@@ -139,7 +139,7 @@ export function StatusMenu({ item }: { item: TripItemRow }) {
         <ChevronDown aria-hidden className="size-3.5 text-ink-3 transition-transform duration-150 group-data-[state=open]/st:rotate-180" />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content align="start" sideOffset={6} className="z-50 min-w-[168px] rounded-[10px] border border-divider bg-surface p-1 text-[14px] shadow-overlay">
+        <DropdownMenu.Content align="start" sideOffset={6} className="z-50 min-w-[168px] glass-strong rounded-[16px] p-1 text-[14px] shadow-overlay">
           <DropdownMenu.Label className="px-2.5 pt-1.5 pb-1 text-[12px] font-semibold text-ink-3">Booking status</DropdownMenu.Label>
           {(['idea', 'draft', 'booked'] as const).map((st) => (
             <DropdownMenu.Item
@@ -147,7 +147,7 @@ export function StatusMenu({ item }: { item: TripItemRow }) {
               onSelect={() => {
                 if (st !== item.status) run(() => setTripItemStatus({ tripId: data.tripId, itemId: item.id, status: st }), { success: `${item.title}: ${ITEM_STATUS_LABEL[st].toLowerCase()}` })
               }}
-              className="flex h-9 cursor-pointer items-center justify-between gap-3 rounded-[8px] px-2.5 text-ink outline-none data-[highlighted]:bg-surface-3"
+              className="flex h-9 cursor-pointer items-center justify-between gap-3 rounded-[8px] px-2.5 text-ink outline-none data-[highlighted]:bg-ink/[0.06]"
             >
               <ItemStatusChip status={st} />
               {st === item.status ? <Check aria-hidden className="size-4 text-teal" /> : null}

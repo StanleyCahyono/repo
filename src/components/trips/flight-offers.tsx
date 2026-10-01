@@ -35,7 +35,7 @@ export function FlightOffers({ state, testMode, origin, dest, depart, ret, adult
               body: 'Piste can request quotes from Duffel when DUFFEL_ACCESS_TOKEN is set on the server. Until then there are no fares, schedules or price monitoring here — use the search links above and enter your itinerary and quote by hand.',
             }
     return (
-      <div className="flex gap-3 rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-3.5">
+      <div className="flex gap-3 rounded-[20px] border border-dashed border-divider-strong bg-surface/40 px-4 py-3.5">
         <copy.Icon aria-hidden className="mt-0.5 size-4 shrink-0 text-ink-3" />
         <div className="min-w-0">
           <p className="text-[14px] font-semibold text-ink">{copy.title}</p>
@@ -56,7 +56,7 @@ export function FlightOffers({ state, testMode, origin, dest, depart, ret, adult
   }
 
   return (
-    <div className="rounded-[12px] border border-divider bg-surface">
+    <div className="rounded-[20px] border border-divider bg-surface/70">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-divider px-4 py-3">
         <div>
           <p className="text-[14px] font-semibold text-ink">Flight offers (Duffel)</p>

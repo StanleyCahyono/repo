@@ -20,16 +20,21 @@ import { deleteTrip, duplicateTrip, restoreTrip, updateTrip } from '@/lib/action
 import { useToast } from '@/components/ui/toast'
 import { TripStatusBadge } from './bits'
 import { TRIP_STATUS_LABEL, countdown, icsUrl, plural, tripDateLabel } from './format'
+import { RangeCalendar } from './range-calendar'
+import type { SeasonTrack } from '@/lib/data/trip-seasons'
 import { useTripUi } from './trip-ui'
 
 export function TripHeader({
   trip,
   resorts,
   lead,
+  tracks = [],
 }: {
   trip: Pick<TripRow, 'id' | 'name' | 'status' | 'startDate' | 'endDate' | 'partySize' | 'notes'>
   resorts: { id: string; name: string }[]
   lead: string
+  /** Season windows of the trip's resorts, for the edit sheet's calendar. */
+  tracks?: SeasonTrack[]
 }) {
   const { data, run, pending } = useTripUi()
   const router = useRouter()
@@ -57,48 +62,46 @@ export function TripHeader({
 
   return (
     <header className="mb-6 md:mb-8">
-      <Link href="/trips" className="-ml-1 inline-flex h-10 items-center gap-1.5 rounded-md px-1 text-[13.5px] font-medium text-ink-2 hover:text-teal">
+      <Link href="/trips" className="hud -ml-1 inline-flex h-10 items-center gap-1.5 rounded-full px-1 text-ink-2 hover:text-teal">
         <ArrowLeft aria-hidden className="size-4" /> All trips
       </Link>
-      <div className="mt-2 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div className="mt-2 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="min-w-0">
-          <div className="eyebrow mb-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <span className="hud tracking-[0.16em] text-teal">Trip planner</span>
             <TripStatusBadge status={trip.status} />
-            <span className="tnum">{tripDateLabel(trip.startDate, trip.endDate)}</span>
-            {trip.status !== 'cancelled' ? <span className="text-ink-3 normal-case tracking-normal tnum">{countdown(trip, data.today)}</span> : null}
+            <span className="hud text-ink-2 tnum">{tripDateLabel(trip.startDate, trip.endDate)}</span>
+            {trip.status !== 'cancelled' ? <span className="hud text-ink-2 tnum">{countdown(trip, data.today)}</span> : null}
             {data.demo ? <DemoBadge /> : null}
           </div>
-          <h1 className="font-display text-[32px] leading-[1.02] text-balance text-ink md:text-[44px]">{trip.name}</h1>
-          <p className="mt-2 max-w-[72ch] text-[15px] text-ink-2 md:text-[16px]">
+          <h1 className="m-0 text-[clamp(38px,5vw,72px)] leading-[1] font-light tracking-[-0.04em] text-balance text-ink">{trip.name}</h1>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
             {resorts.length ? (
-              resorts.map((r, k) => (
-                <span key={r.id}>
-                  {k ? ' + ' : ''}
-                  <Link href={`/resorts/${r.id}`} className="font-medium text-ink underline-offset-2 hover:text-teal hover:underline">
-                    {r.name}
-                  </Link>
-                </span>
+              resorts.map((r) => (
+                <Link key={r.id} href={`/resorts/${r.id}`} className="inline-flex min-h-10 items-center rounded-full bg-ink-chip px-4 text-[13.5px] font-medium text-on-ink-chip transition-transform duration-150 hover:-translate-y-px">
+                  {r.name}
+                </Link>
               ))
             ) : (
-              <span className="text-ink-3">No resort yet</span>
+              <span className="glass-strong inline-flex min-h-10 items-center rounded-full px-4 text-[13.5px] text-ink-2">No resort yet</span>
             )}
-            {lead ? <span> · {lead}</span> : null}
-          </p>
+            {lead ? <span className="text-[14.5px] text-ink-2">{lead}</span> : null}
+          </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Button variant="secondary" className="h-11 md:h-10" onClick={() => setEditOpen(true)}>
+          <Button variant="secondary" className="h-11" onClick={() => setEditOpen(true)}>
             <PencilLine aria-hidden className="size-4" /> Edit trip
           </Button>
-          <a href={icsUrl(trip.id)} download className="inline-flex h-11 items-center gap-2 rounded-md border border-divider-strong bg-surface px-4 text-[14.5px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:h-10">
+          <a href={icsUrl(trip.id)} download className="glass-strong inline-flex h-11 items-center gap-2 rounded-full px-4 text-[14.5px] font-medium text-ink transition-colors duration-150 hover:text-teal">
             <CalendarPlus aria-hidden className="size-4" /> Export .ics
           </a>
           <DropdownMenu.Root>
-            <DropdownMenu.Trigger aria-label="More trip actions" disabled={pending} className="inline-flex size-11 items-center justify-center rounded-md border border-divider-strong bg-surface text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:size-10">
+            <DropdownMenu.Trigger aria-label="More trip actions" disabled={pending} className="glass-strong inline-flex size-11 items-center justify-center rounded-full text-ink transition-colors duration-150 hover:text-teal">
               <Ellipsis aria-hidden className="size-5" />
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-              <DropdownMenu.Content align="end" sideOffset={6} className="z-50 min-w-[220px] rounded-[12px] border border-divider bg-surface p-1 text-[14px] shadow-overlay">
-                <DropdownMenu.Label className="px-2.5 pt-1.5 pb-1 text-[12px] font-semibold text-ink-3">Trip status</DropdownMenu.Label>
+              <DropdownMenu.Content align="end" sideOffset={6} className="glass-strong z-50 min-w-[220px] rounded-[16px] p-1 text-[14px] shadow-overlay">
+                <DropdownMenu.Label className="hud px-2.5 pt-1.5 pb-1 text-ink-3">Trip status</DropdownMenu.Label>
                 {(
                   [
                     ['draft', 'Draft — still planning', PencilLine],
@@ -138,7 +141,7 @@ export function TripHeader({
           Its plan is kept for reference and it no longer counts toward planned spending. Reopen it from the ⋯ menu.
         </Notice>
       ) : null}
-      <EditTripSheet open={editOpen} onOpenChange={setEditOpen} trip={trip} />
+      <EditTripSheet open={editOpen} onOpenChange={setEditOpen} trip={trip} tracks={tracks} />
       <DuplicateSheet open={dupOpen} onOpenChange={setDupOpen} trip={trip} />
     </header>
   )
@@ -146,18 +149,18 @@ export function TripHeader({
 
 function MenuItem({ children, onSelect, danger }: { children: React.ReactNode; onSelect: () => void; danger?: boolean }) {
   return (
-    <DropdownMenu.Item onSelect={onSelect} className={`flex h-10 cursor-pointer items-center gap-2.5 rounded-[8px] px-2.5 outline-none data-[highlighted]:bg-surface-3 ${danger ? 'text-critical' : 'text-ink'}`}>
+    <DropdownMenu.Item onSelect={onSelect} className={`flex h-10 cursor-pointer items-center gap-2.5 rounded-[8px] px-2.5 outline-none data-[highlighted]:bg-ink/[0.06] ${danger ? 'text-critical' : 'text-ink'}`}>
       {children}
     </DropdownMenu.Item>
   )
 }
 
-function EditTripSheet({ open, onOpenChange, trip }: { open: boolean; onOpenChange: (o: boolean) => void; trip: Pick<TripRow, 'id' | 'name' | 'startDate' | 'endDate' | 'partySize'> }) {
-  const { run, pending } = useTripUi()
+function EditTripSheet({ open, onOpenChange, trip, tracks }: { open: boolean; onOpenChange: (o: boolean) => void; trip: Pick<TripRow, 'id' | 'name' | 'startDate' | 'endDate' | 'partySize'>; tracks: SeasonTrack[] }) {
+  const { data, run, pending } = useTripUi()
   const uid = useId()
   const [name, setName] = useState(trip.name)
-  const [start, setStart] = useState(trip.startDate)
-  const [end, setEnd] = useState(trip.endDate)
+  const [start, setStart] = useState<string | null>(trip.startDate)
+  const [end, setEnd] = useState<string | null>(trip.endDate)
   const [shift, setShift] = useState(true)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const moved = start !== trip.startDate || end !== trip.endDate
@@ -176,6 +179,7 @@ function EditTripSheet({ open, onOpenChange, trip }: { open: boolean; onOpenChan
       }}
       title="Edit trip"
       description="Name and dates. Party size and companions are under People & notes."
+      widthClass="md:w-[520px]"
       footer={
         <div className="flex justify-end gap-2">
           <Button variant="ghost" className="h-11 md:h-10" onClick={() => onOpenChange(false)}>
@@ -184,9 +188,9 @@ function EditTripSheet({ open, onOpenChange, trip }: { open: boolean; onOpenChan
           <Button
             variant="primary"
             className="h-11 md:h-10"
-            disabled={pending || !name.trim()}
+            disabled={pending || !name.trim() || !start || !end}
             onClick={() =>
-              run(() => updateTrip({ tripId: trip.id, name: name.trim(), ...(moved ? { startDate: start, endDate: end, shiftItems: shift && delta !== 0 } : {}) }), {
+              run(() => updateTrip({ tripId: trip.id, name: name.trim(), ...(moved && start && end ? { startDate: start, endDate: end, shiftItems: shift && delta !== 0 } : {}) }), {
                 success: (d) => (d.shifted ? `Saved · moved ${plural(d.shifted, 'item')} by ${plural(Math.abs(delta), 'day')}` : 'Trip saved'),
                 onDone: () => onOpenChange(false),
                 onError: (r) => setErrors(r.fieldErrors ?? {}),
@@ -202,22 +206,22 @@ function EditTripSheet({ open, onOpenChange, trip }: { open: boolean; onOpenChan
         <Field label="Name" htmlFor={`${uid}-n`} error={errors.name}>
           <TextInput id={`${uid}-n`} value={name} maxLength={120} onChange={(e) => setName(e.target.value)} />
         </Field>
-        <div className="grid grid-cols-2 gap-3">
-          <Field label="First day" htmlFor={`${uid}-s`} error={errors.startDate}>
-            <TextInput
-              id={`${uid}-s`}
-              type="date"
-              value={start}
-              onChange={(e) => {
-                const v = e.target.value
-                if (v && start && end) setEnd(addDays(v, daysBetween(start, end)))
-                setStart(v)
-              }}
-            />
-          </Field>
-          <Field label="Last day" htmlFor={`${uid}-e`} error={errors.endDate}>
-            <TextInput id={`${uid}-e`} type="date" value={end} min={start} onChange={(e) => setEnd(e.target.value)} />
-          </Field>
+        <div className="glass rounded-[24px] p-4">
+          <RangeCalendar
+            start={start}
+            end={end}
+            onChange={(a, b) => {
+              setStart(a)
+              setEnd(b)
+            }}
+            today={data.today}
+            min={trip.startDate < data.today ? trip.startDate : data.today}
+            maxDays={30}
+            tracks={tracks}
+            initialMonth={trip.startDate.slice(0, 7)}
+            label="Dates"
+          />
+          {errors.startDate || errors.endDate ? <p className="mt-2 text-[12.5px] font-medium text-critical">{errors.startDate ?? errors.endDate}</p> : null}
         </div>
         {moved && delta !== 0 ? (
           <Checkbox label={`Move every dated item by ${plural(Math.abs(delta), 'day')} ${delta > 0 ? 'later' : 'earlier'}`} hint="Ski days, bookings and events keep their place in the plan." checked={shift} onChange={(e) => setShift(e.target.checked)} />

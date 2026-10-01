@@ -538,7 +538,7 @@ export function ItemEditor({
                 </Field>
               ) : null}
               {foreign ? (
-                <div className="rounded-[10px] border border-divider bg-surface-2 p-3">
+                <div className="rounded-[16px] border border-divider bg-ink/[0.03] p-3">
                   <p className="text-[13.5px] font-medium text-ink">Conversion to {data.currency}</p>
                   {stored ? (
                     <p className="mt-0.5 text-[13px] text-ink-2">
@@ -655,7 +655,7 @@ function FlightFields({ f, set, id, err, data }: FieldsProps & { data: TripUiDat
         <p className="text-[13.5px] font-medium text-ink">Itinerary (your entry)</p>
         <p className="-mt-1 text-[12.5px] text-ink-3">Airport-local times, as printed on the booking. Piste never looks up or invents flight numbers or schedules.</p>
         {f.segments.map((x, k) => (
-          <div key={k} className="rounded-[10px] border border-divider bg-surface-2 p-3">
+          <div key={k} className="rounded-[16px] border border-divider bg-ink/[0.03] p-3">
             <div className="mb-2 flex items-center justify-between">
               <p className="text-[12.5px] font-semibold text-ink-2">Segment {k + 1}</p>
               <div className="flex gap-1">

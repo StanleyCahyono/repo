@@ -113,7 +113,7 @@ export function PrivateTag({ className, label = 'Your entry · private' }: { cla
   )
 }
 
-/** Numbered editorial section with a strong rule, mono index and optional actions. */
+/** Numbered glass section: mono HUD index, a big light title, optional meta, lead and actions. */
 export function TripSection({
   id,
   index,
@@ -135,19 +135,18 @@ export function TripSection({
 }) {
   const headingId = `${id}-title`
   return (
-    <section id={id} aria-labelledby={headingId} data-section={id} className={cn('scroll-mt-[120px] md:scroll-mt-[76px]', className)}>
-      <header className="mb-5 border-t border-divider-strong pt-5">
-        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
-          <div className="flex min-w-0 items-baseline gap-3">
-            <span aria-hidden className="font-mono text-[12px] tracking-wider text-ink-3 tnum">
+    <section id={id} aria-labelledby={headingId} data-section={id} className={cn('glass scroll-mt-[136px] rounded-[28px] px-4 py-5 sm:px-6 sm:py-6 md:scroll-mt-[84px] lg:px-7', className)}>
+      <header className="mb-5">
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+          <div className="min-w-0">
+            <p aria-hidden className="hud flex items-center gap-2.5 text-teal tnum">
               {String(index).padStart(2, '0')}
-            </span>
-            <div className="min-w-0">
-              <h2 id={headingId} tabIndex={-1} className="text-[21px] leading-tight font-semibold text-ink outline-none md:text-[22px]">
-                {title}
-              </h2>
-              {meta ? <p className="mt-1 text-[13.5px] text-ink-2">{meta}</p> : null}
-            </div>
+              <span className="h-px w-10 bg-teal/40" />
+            </p>
+            <h2 id={headingId} tabIndex={-1} className="mt-1 text-[28px] leading-[1.05] font-light tracking-[-0.03em] text-ink outline-none md:text-[34px]">
+              {title}
+            </h2>
+            {meta ? <p className="mt-1.5 text-[13.5px] text-ink-2">{meta}</p> : null}
           </div>
           {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
         </div>
@@ -161,7 +160,7 @@ export function TripSection({
 export function SubHead({ children, id, aside, className }: { children: ReactNode; id?: string; aside?: ReactNode; className?: string }) {
   return (
     <div className={cn('mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1', className)}>
-      <h3 id={id} className="text-[16px] leading-snug font-semibold text-ink">
+      <h3 id={id} className="text-[17px] leading-snug font-semibold tracking-[-0.01em] text-ink">
         {children}
       </h3>
       {aside ? <div className="text-[12.5px] text-ink-3">{aside}</div> : null}
@@ -172,7 +171,7 @@ export function SubHead({ children, id, aside, className }: { children: ReactNod
 /** Dashed empty slot with a short explanation and an action. */
 export function EmptySlot({ title, body, action, className }: { title: string; body?: ReactNode; action?: ReactNode; className?: string }) {
   return (
-    <div className={cn('flex flex-col gap-3 rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between', className)}>
+    <div className={cn('flex flex-col gap-3 rounded-[20px] border border-dashed border-divider-strong bg-surface/40 px-4 py-4 sm:flex-row sm:items-center sm:justify-between', className)}>
       <div className="min-w-0">
         <p className="text-[14.5px] font-semibold text-ink">{title}</p>
         {body ? <div className="mt-0.5 text-[13.5px] text-ink-2">{body}</div> : null}

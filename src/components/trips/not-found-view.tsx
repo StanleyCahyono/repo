@@ -7,7 +7,7 @@ import { EmptyState } from '@/components/ui/states'
 export function TripNotFoundView() {
   return (
     <div className="mx-auto max-w-[640px] pt-2">
-      <h1 className="mb-6 font-display text-[32px] leading-[1.02] text-ink md:text-[44px]">Trip not found</h1>
+      <h1 className="mb-6 font-light tracking-[-0.03em] text-[32px] leading-[1.02] text-ink md:text-[44px]">Trip not found</h1>
       <EmptyState
         seed="trip-not-found"
         title="This trip isn’t here"

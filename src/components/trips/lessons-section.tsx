@@ -78,7 +78,7 @@ export function LessonsSection({ page, index }: { page: TripPage; index: number 
                 const p = planner(l)
                 const resort = page.resorts.find((r) => r.id === l.refId)
                 return (
-                  <article key={l.id} className="rounded-[12px] border border-divider bg-surface p-1.5">
+                  <article key={l.id} className="rounded-[20px] border border-divider bg-surface/70 p-1.5">
                     <ItemRow item={l} />
                     <div className="mx-2 mb-2 flex flex-col gap-3 border-t border-divider px-1 pt-3 md:mx-3">
                       <div>
@@ -153,7 +153,7 @@ export function LessonsSection({ page, index }: { page: TripPage; index: number 
             Rentals
           </SubHead>
           {rentals.length ? (
-            <ul className="flex flex-col rounded-[12px] border border-divider bg-surface p-1.5">
+            <ul className="flex flex-col rounded-[20px] border border-divider bg-surface/70 p-1.5">
               {rentals.map((r) => (
                 <li key={r.id}>
                   <ItemRow item={r} />
@@ -161,12 +161,12 @@ export function LessonsSection({ page, index }: { page: TripPage; index: number 
               ))}
             </ul>
           ) : (
-            <p className="rounded-[12px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No rental saved. Your gear setting in Settings decides what the day basket assumes.</p>
+            <p className="rounded-[20px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">No rental saved. Your gear setting in Settings decides what the day basket assumes.</p>
           )}
           {resortsOnTrip.length ? (
             <div className="mt-4 flex flex-col gap-3">
               {resortsOnTrip.map((r) => (
-                <div key={r.id} className="rounded-[12px] border border-divider bg-surface-2 p-3.5">
+                <div key={r.id} className="rounded-[20px] border border-divider bg-ink/[0.03] p-3.5">
                   <p className="text-[13.5px] font-semibold text-ink">{r.name}</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     <Offered value={r.lessons} label="Lessons" />
