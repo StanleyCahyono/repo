@@ -6,7 +6,7 @@
  * labelled as not routes (plus a list alternative), and winter-road / safety links.
  */
 import Link from 'next/link'
-import { ArrowUpRight, Car, CloudSnow, ExternalLink, Mountain, Plane, PlaneTakeoff, TriangleAlert } from 'lucide-react'
+import { ArrowUpRight, Car, Navigation, CloudSnow, ExternalLink, Mountain, Plane, PlaneTakeoff, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag, Missing } from '@/components/ui/provenance'
@@ -69,6 +69,12 @@ function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
           <p className="m-0 text-[15px] text-[var(--card-fg2)]">{t.verdict.note}.</p>
         ) : null}
         <div className="mt-1 flex flex-wrap gap-2.5">
+          <Link
+            href={`/ride?to=${encodeURIComponent(d.summary.id)}&mode=${drive ? 'drive' : 'fly'}`}
+            className="flex h-11 items-center gap-2 rounded-full bg-[var(--card-acc)] px-5 text-[14px] font-semibold text-[var(--card-bg)]"
+          >
+            <Navigation aria-hidden className="size-4" /> Ride there
+          </Link>
           {dir ? (
             <a href={dir.url} target="_blank" rel="noopener noreferrer" className="flex h-11 items-center gap-2 rounded-full bg-[var(--btn-bg)] px-5 text-[14px] font-semibold text-[var(--btn-fg)]">
               {dir.label} <ArrowUpRight aria-hidden className="size-4" />
