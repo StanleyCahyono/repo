@@ -25,6 +25,7 @@ export const UTILITY_NAV: NavItem[] = [
   { href: '/settings', label: 'Settings', Icon: Settings2, match: starts('/settings') },
 ]
 
-/** Mobile bottom bar: first four primary destinations + More. */
-export const MOBILE_PRIMARY = PRIMARY_NAV.slice(0, 4)
-export const MOBILE_MORE = [...PRIMARY_NAV.slice(4), ...UTILITY_NAV]
+/** Mobile bottom bar: Today, Explore, Forecast, Trips + More (Ride there, Passes, Season and utilities). */
+const MOBILE_HREFS = ['/', '/explore', '/forecast', '/trips']
+export const MOBILE_PRIMARY = PRIMARY_NAV.filter((i) => MOBILE_HREFS.includes(i.href))
+export const MOBILE_MORE = [...PRIMARY_NAV.filter((i) => !MOBILE_HREFS.includes(i.href)), ...UTILITY_NAV]

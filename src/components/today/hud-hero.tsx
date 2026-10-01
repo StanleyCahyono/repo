@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { ArrowRight, CircleCheck, Clock3, RefreshCw, TriangleAlert } from 'lucide-react'
 import { RefreshButton } from '@/components/sources/refresh-button'
 import { SkierAvatar } from '@/components/avatar/skier-avatar'
+import type { SkierOptions } from '@/components/avatar/skier-scene'
 import { FRESHNESS_JOBS, type FreshnessView } from '@/lib/data/freshness'
 import type { HomeMountain, TodayHud } from '@/lib/data/today-hud'
 import { assetUrl } from '@/lib/ui/assets'
@@ -80,7 +81,7 @@ export function Freshness({ f }: { f: FreshnessView }) {
   )
 }
 
-export function TodayHero({ hud }: { hud: TodayHud }) {
+export function TodayHero({ hud, look }: { hud: TodayHud; look?: Partial<SkierOptions> }) {
   const home = hud.home
   const caption = `You · ${hud.ability} · ${hud.daysLogged} ${hud.daysLogged === 1 ? 'day' : 'days'}`
   return (
@@ -112,7 +113,7 @@ export function TodayHero({ hud }: { hud: TodayHud }) {
           </div>
         </div>
         <div className="relative h-[360px] md:h-[470px]">
-          <SkierAvatar label={`Your skier avatar (${hud.ability}), idle. Hover to see it carve.`} distance={6.2} />
+          <SkierAvatar label={`Your skier avatar (${hud.ability}), idle. Hover to see it carve.`} distance={6.2} {...look} />
           <div className="glass-strong hud absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[14px] px-3 py-2 whitespace-nowrap text-ink-2">
             <span>{caption}</span>
             <Link href="/season" className="text-teal">

@@ -16,6 +16,8 @@ import { CountdownCard, PassDeadlinesCard, SnowCard } from '@/components/today/h
 import { Freshness, TodayHero } from '@/components/today/hud-hero'
 import { WorldSeasonCard } from '@/components/today/hud-world'
 import { getTodayHud } from '@/lib/data/today-hud'
+import { loadAvatar } from '@/lib/data/gear'
+import { sceneColors } from '@/components/avatar/presets'
 import { alerts as alertsTable } from '@/lib/db/schema'
 import { getCtx } from '@/lib/context'
 import { formatInstant, formatLocalDate, relativeLabel } from '@/lib/domain/time'
@@ -24,9 +26,10 @@ export const metadata: Metadata = { title: 'Today' }
 
 export default async function TodayPage() {
   const ctx = await getCtx()
-  const [hud, unread] = await Promise.all([
+  const [hud, unread, avatar] = await Promise.all([
     getTodayHud(ctx),
     ctx.db.select().from(alertsTable).where(isNull(alertsTable.readAt)).orderBy(desc(alertsTable.firedAt), desc(alertsTable.id)).limit(20),
+    loadAvatar(ctx.db),
   ])
   const demo = ctx.mode === 'demo'
   const alerts: AlertItem[] = unread.map((a) => ({
@@ -48,7 +51,7 @@ export default async function TodayPage() {
 
   return (
     <div className="flex flex-col">
-      <TodayHero hud={hud} />
+      <TodayHero hud={hud} look={sceneColors(avatar)} />
       {first ? <WorldSeasonCard world={hud.world} range={range.toUpperCase()} /> : null}
       <div className="grid grid-cols-1 gap-5 pt-5 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
         <CountdownCard items={hud.countdowns} />

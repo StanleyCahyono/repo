@@ -1,15 +1,16 @@
-'use client'
-/** Entrance: 8px rise + fade (220ms). Pass `index` to stagger only the first few blocks; later ones appear at once. */
-import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
-import { t } from '@/lib/ui/motion'
+/**
+ * Entrance: 8px rise + fade (220ms), staggered by `index` for the first four blocks; later ones render at once.
+ * Pure CSS (`.piste-rise` in globals.css) so server-rendered content is never invisible while the page hydrates;
+ * collapses under reduced motion.
+ */
+import type { CSSProperties, ReactNode } from 'react'
+import { cn } from '@/lib/ui/cn'
 
-export function Rise({ children, index = 0, className, as = 'div' }: { children: ReactNode; index?: number; className?: string; as?: 'div' | 'li' | 'section' }) {
-  const Comp = as === 'li' ? motion.li : as === 'section' ? motion.section : motion.div
-  if (index > 3) return as === 'li' ? <li className={className}>{children}</li> : as === 'section' ? <section className={className}>{children}</section> : <div className={className}>{children}</div>
+export function Rise({ children, index = 0, className, as: Tag = 'div' }: { children: ReactNode; index?: number; className?: string; as?: 'div' | 'li' | 'section' }) {
+  if (index > 3) return <Tag className={className}>{children}</Tag>
   return (
-    <Comp className={className} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ ...t.pageIn, delay: index * 0.045 }}>
+    <Tag className={cn('piste-rise', className)} style={{ '--rise-delay': `${index * 45}ms` } as CSSProperties}>
       {children}
-    </Comp>
+    </Tag>
   )
 }

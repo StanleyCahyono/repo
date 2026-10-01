@@ -1,16 +1,16 @@
-'use client'
 /**
- * Entrance for the first few blocks of the Forecast page: 220 ms fade + 8 px rise (docs/design.md), staggered by
- * `index`. Only use on the first ~4 blocks. Collapses under reduced motion via the shell's MotionConfig.
+ * Entrance: 8px rise + fade (220ms), staggered by `index` for the first four blocks; later ones render at once.
+ * Pure CSS (`.piste-rise` in globals.css) so server-rendered content is never invisible while the page hydrates;
+ * collapses under reduced motion.
  */
-import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
-import { rise, t } from '@/lib/ui/motion'
+import type { CSSProperties, ReactNode } from 'react'
+import { cn } from '@/lib/ui/cn'
 
-export function Rise({ index = 0, className, children }: { index?: number; className?: string; children: ReactNode }) {
+export function Rise({ children, index = 0, className, as: Tag = 'div' }: { children: ReactNode; index?: number; className?: string; as?: 'div' | 'li' | 'section' }) {
+  if (index > 3) return <Tag className={className}>{children}</Tag>
   return (
-    <motion.div variants={rise} initial="hidden" animate="show" transition={{ ...t.pageIn, delay: Math.min(index, 3) * 0.045 }} className={className}>
+    <Tag className={cn('piste-rise', className)} style={{ '--rise-delay': `${index * 45}ms` } as CSSProperties}>
       {children}
-    </motion.div>
+    </Tag>
   )
 }

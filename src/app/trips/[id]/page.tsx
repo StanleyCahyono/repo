@@ -26,6 +26,8 @@ import { LessonsSection } from '@/components/trips/lessons-section'
 import { ExtrasSection } from '@/components/trips/extras-section'
 import { BudgetSection } from '@/components/trips/budget-section'
 import { Checklist } from '@/components/trips/checklist'
+import { GearPacking } from '@/components/trips/gear-packing'
+import { ownedGearCoverage } from '@/lib/data/gear'
 import { PartyAndCompanions, TripNotes } from '@/components/trips/people'
 import { FitList } from '@/components/trips/fit-list'
 import { Rise } from '@/components/trips/rise'
@@ -45,7 +47,7 @@ export default async function TripDetailPage({ params, searchParams }: { params:
   if (!isTripId(id)) notFound()
   const ctx = await getCtx()
   const pass = typeof sp.pass === 'string' ? sp.pass : null
-  const page = await getTripPage(ctx, id, { pass })
+  const [page, gear] = await Promise.all([getTripPage(ctx, id, { pass }), ownedGearCoverage(ctx.db)])
   if (!page) notFound()
 
   const { trip, detail } = page
@@ -156,6 +158,7 @@ export default async function TripDetailPage({ params, searchParams }: { params:
         <ExtrasSection page={page} index={5} />
         <BudgetSection page={page} index={6} />
         <TripSection id="checklist" index={7} title="Checklist" meta="Gear, bookings, travel and the day itself — from your editable templates">
+          <GearPacking gear={gear} />
           <Checklist items={detail.checklist} templates={page.templates} />
         </TripSection>
         <TripSection id="people" index={8} title="People & notes">

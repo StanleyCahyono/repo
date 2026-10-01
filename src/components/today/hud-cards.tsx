@@ -44,7 +44,7 @@ export function CountdownCard({ items }: { items: Countdown[] }) {
   return (
     <Card title="Opening countdown · days">
       {items.length ? (
-        <div className="grid grid-cols-3 justify-items-center gap-x-1 gap-y-4 sm:flex sm:justify-between">
+        <div className="grid grid-cols-3 gap-x-1.5 gap-y-4 sm:grid-cols-6">
           {items.map((c, i) => {
             const on = hc === i
             const dim = hc !== null && !on
@@ -58,7 +58,7 @@ export function CountdownCard({ items }: { items: Countdown[] }) {
                 onFocus={() => setHc(i)}
                 onBlur={() => leave(i)}
                 aria-label={`${c.name}: ${c.days} ${c.days === 1 ? 'day' : 'days'}, ${c.estimate ? 'estimated' : 'announced'} ${c.sub.replace('EST. ', '').toLowerCase()}`}
-                className={cn('flex w-[66px] cursor-default flex-col items-center gap-1.5 rounded-[14px] outline-offset-4', LIFT, dim ? 'opacity-35' : 'opacity-100', on && '-translate-y-[5px] scale-[1.08]')}
+                className={cn('flex min-w-0 cursor-default flex-col items-center gap-1.5 rounded-[14px] outline-offset-4', LIFT, dim ? 'opacity-35' : 'opacity-100', on && '-translate-y-[5px] scale-[1.08]')}
               >
                 <div
                   className={cn('flex size-14 items-center justify-center rounded-full transition-shadow duration-[250ms]', on && 'shadow-[0_10px_24px_rgb(19_32_44/0.3)]')}
@@ -70,7 +70,9 @@ export function CountdownCard({ items }: { items: Countdown[] }) {
                     {c.days}
                   </div>
                 </div>
-                <span className="text-center text-[12px] leading-[1.2] font-medium">{c.name}</span>
+                <span className="line-clamp-2 w-full text-center text-[12px] leading-[1.2] font-medium [overflow-wrap:anywhere]" title={c.name}>
+                  {c.name}
+                </span>
                 <span className="text-center font-mono text-[12px] text-ink-2">{c.sub}</span>
               </div>
             )
