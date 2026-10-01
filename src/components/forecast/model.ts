@@ -198,3 +198,111 @@ export function addMonths(month: string, n: number): string {
 
 /** The date `n` days after `date`. */
 export const plusDays = addDays
+
+// ---------------------------------------------------------------------------
+// Glass HUD charts (16-day strip, 48-hour glance, month calendar)
+
+const finite = (v: number | null | undefined): v is number => typeof v === 'number' && Number.isFinite(v)
+
+/**
+ * The page headline's total: modeled snowfall summed over the stored days (display units). `atLeast` when a day is
+ * partial or a day's amount is not provided (the sum is then a lower bound); null when no day states an amount.
+ */
+export function outlookTotal(
+  daily: readonly Pick<DayView, 'snowfallCm' | 'partial'>[],
+  toDisplay: (cm: number | null) => number | null,
+): { total: number; atLeast: boolean; days: number } | null {
+  const known = daily.filter((d) => finite(d.snowfallCm))
+  if (!known.length) return null
+  const total = known.reduce((a, d) => a + (toDisplay(d.snowfallCm) ?? 0), 0)
+  return { total, atLeast: known.length < daily.length || daily.some((d) => d.partial), days: daily.length }
+}
+
+/** Geometry for daily high/low lines in a `w × h` viewBox, with `pad` px top/bottom. Unknown values break the line. */
+export function tempGeometry(
+  his: readonly (number | null)[],
+  los: readonly (number | null)[],
+  opts: { w: number; top: number; bottom: number; freezing: number },
+): { hi: string; lo: string; band: string; zeroY: number | null; y: (v: number) => number; min: number; max: number } | null {
+  const all = [...his, ...los].filter(finite)
+  if (!all.length) return null
+  const n = Math.max(his.length, los.length)
+  const min = Math.min(...all, opts.freezing) - 2
+  const max = Math.max(...all, opts.freezing) + 2
+  const y = (v: number) => opts.top + (1 - (v - min) / (max - min)) * (opts.bottom - opts.top)
+  const x = (i: number) => ((i + 0.5) / n) * opts.w
+  const path = (vs: readonly (number | null)[]) => {
+    let d = ''
+    let pen = false
+    vs.forEach((v, i) => {
+      if (!finite(v)) {
+        pen = false
+        return
+      }
+      d += `${pen ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)} `
+      pen = true
+    })
+    return d.trim()
+  }
+  // Band only across runs where both values are known.
+  let band = ''
+  let run: number[] = []
+  const flush = () => {
+    if (run.length > 1) {
+      band += `M${run.map((i) => `${x(i).toFixed(1)},${y(his[i] as number).toFixed(1)}`).join(' L')} `
+      band += `L${[...run].reverse().map((i) => `${x(i).toFixed(1)},${y(los[i] as number).toFixed(1)}`).join(' L')} Z `
+    }
+    run = []
+  }
+  for (let i = 0; i < n; i++) {
+    if (finite(his[i]) && finite(los[i])) run.push(i)
+    else flush()
+  }
+  flush()
+  const zeroY = opts.freezing >= min && opts.freezing <= max ? y(opts.freezing) : null
+  return { hi: path(his), lo: path(los), band: band.trim(), zeroY, y, min, max }
+}
+
+/** Line + area paths for an hourly series over `w × h` (x by index). Unknown values break the line and the area. */
+export function seriesGeometry(
+  vs: readonly (number | null)[],
+  opts: { w: number; top: number; bottom: number; minSpan?: number },
+): { line: string; area: string; y: (v: number) => number; x: (i: number) => number; min: number; max: number } | null {
+  const known = vs.filter(finite)
+  if (!known.length) return null
+  let min = Math.min(...known)
+  let max = Math.max(...known)
+  const span = Math.max(opts.minSpan ?? 1, max - min)
+  const mid = (min + max) / 2
+  min = mid - span / 2 - span * 0.12
+  max = mid + span / 2 + span * 0.12
+  const n = vs.length
+  const x = (i: number) => (n <= 1 ? opts.w / 2 : (i / (n - 1)) * opts.w)
+  const y = (v: number) => opts.top + (1 - (v - min) / (max - min)) * (opts.bottom - opts.top)
+  let line = ''
+  let area = ''
+  let seg: number[] = []
+  const flush = () => {
+    if (seg.length) {
+      const pts = seg.map((i) => `${x(i).toFixed(1)},${y(vs[i] as number).toFixed(1)}`)
+      line += `M${pts.join(' L')} `
+      if (seg.length > 1) area += `M${x(seg[0]).toFixed(1)},${opts.bottom} L${pts.join(' L')} L${x(seg[seg.length - 1]).toFixed(1)},${opts.bottom} Z `
+    }
+    seg = []
+  }
+  vs.forEach((v, i) => (finite(v) ? seg.push(i) : flush()))
+  flush()
+  return { line: line.trim(), area: area.trim(), y, x, min, max }
+}
+
+/** Month grid cells (Monday first): leading blanks, the month's dates, trailing blanks to a full week. */
+export function monthCells(month: string): (string | null)[] {
+  const [y, m] = month.split('-').map(Number)
+  const first = new Date(Date.UTC(y, m - 1, 1))
+  const dim = new Date(Date.UTC(y, m, 0)).getUTCDate()
+  const lead = (first.getUTCDay() + 6) % 7
+  const cells: (string | null)[] = Array.from({ length: lead }, () => null)
+  for (let d = 1; d <= dim; d++) cells.push(`${month}-${String(d).padStart(2, '0')}`)
+  while (cells.length % 7) cells.push(null)
+  return cells
+}

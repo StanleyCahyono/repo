@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { ArrowRight } from 'lucide-react'
 import { ButtonLink } from '@/components/ui/button'
-import { DemoBadge } from '@/components/ui/badge'
-import { PageHeader } from '@/components/ui/page-header'
 import { ForecastNav } from '@/components/forecast/nav'
 import { ForecastView } from '@/components/forecast/forecast-view'
 import { parseForecastParams } from '@/components/forecast/params'
@@ -29,17 +27,8 @@ export default async function ForecastPage({ searchParams }: { searchParams: Pro
 
   return (
     <ForecastNav>
-      <PageHeader
-        eyebrow={
-          <>
-            <span>Weather-model output</span>
-            {ctx.mode === 'demo' ? (
-              <DemoBadge />
-            ) : null}
-          </>
-        }
-        title="Forecast"
-        lead="Modeled weather for the resorts you follow — the next 48 hours, two weeks ahead, and a tracked history of what was forecast, reported and estimated."
+      <ForecastView
+        screen={screen}
         actions={
           <>
             {live && targets.length && anyForecast ? <RefreshWeatherButton targets={targets} /> : null}
@@ -49,7 +38,6 @@ export default async function ForecastPage({ searchParams }: { searchParams: Pro
           </>
         }
       />
-      <ForecastView screen={screen} />
     </ForecastNav>
   )
 }

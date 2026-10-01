@@ -54,7 +54,7 @@ export function BeyondHorizon({
     <section
       id="beyond"
       aria-labelledby="beyond-title"
-      className={cn('scroll-mt-20 overflow-hidden rounded-[12px] border border-divider bg-surface transition-opacity duration-200', stale && 'opacity-55')}
+      className={cn('glass scroll-mt-20 overflow-hidden rounded-[28px] md:rounded-[32px] transition-opacity duration-200', stale && 'opacity-55')}
       aria-busy={stale || undefined}
     >
       <header className="border-b border-divider bg-surface-2 px-4 pt-3.5 pb-3 md:px-5">

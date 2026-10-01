@@ -74,7 +74,7 @@ export function RunDetails({
   const limitations = forecast.limitations.filter((l) => !/does not resolve individual slopes/.test(l))
 
   return (
-    <section aria-labelledby={`run-${forecast.resortId}`} className="rounded-[12px] border border-divider bg-surface-2 px-4 py-3.5 md:px-5">
+    <section aria-labelledby={`run-${forecast.resortId}`} className="glass rounded-[24px] px-4 py-3.5 md:px-6">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <h3 id={`run-${forecast.resortId}`} className="text-[15px] font-semibold text-ink">
           About this forecast
