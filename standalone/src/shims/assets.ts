@@ -7,6 +7,12 @@ import { ASSETS } from 'virtual:piste/assets'
 export const ASSET_FILES = ['greek-peak-hero.webp', 'greek-peak-duo.webp', 'greek-peak-ridge.svg', 'matterhorn-cut.webp', 'matterhorn-duo.webp', 'matterhorn-ridge.svg', 'skier-body.glb'] as const
 export type AssetFile = (typeof ASSET_FILES)[number]
 
-export function assetUrl(file: AssetFile): string {
+export const ASSET_NAME = /^[a-z0-9][a-z0-9-]*\.(webp|png|svg|glb)$/
+
+export function assetUrl(file: AssetFile | `photo-${string}.webp`): string {
   return ASSETS[file] ?? ''
+}
+
+export function photoSrc(src: string): string {
+  return src.startsWith('asset:') ? assetUrl(src.slice(6) as `photo-${string}.webp`) : src
 }

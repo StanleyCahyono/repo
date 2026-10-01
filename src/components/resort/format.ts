@@ -39,7 +39,7 @@ export const SECTIONS = [
   { id: 'plan', label: 'Plan', short: 'Plan' },
   { id: 'getting-there', label: 'Getting there', short: 'Travel' },
   { id: 'stay', label: 'Stay', short: 'Stay' },
-  { id: 'links', label: 'Links', short: 'Links' },
+  { id: 'links', label: 'Snow report', short: 'Snow' },
 ] as const
 export type SectionId = (typeof SECTIONS)[number]['id']
 

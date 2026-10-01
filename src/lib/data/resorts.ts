@@ -3,6 +3,7 @@
  * resorts (no per-resort queries), manual corrections applied on read, provenance on every fact.
  */
 import 'server-only'
+import { photoSrc } from '@/lib/ui/assets'
 import type { ResortRow } from '@/lib/db/rows'
 import type { FeatureInfo } from '@/lib/db/schema'
 import { aggregateDay, prepareSeries } from '@/lib/domain/conditions'
@@ -161,7 +162,7 @@ export function identityOf(r: ResortRow): ResortIdentity {
     baseElevationM: r.baseElevationM,
     summitElevationM: r.summitElevationM,
     verticalM: r.verticalM,
-    photo: r.photo,
+    photo: r.photo ? { ...r.photo, src: photoSrc(r.photo.src) } : null,
     locationProv: r.locationProv,
     elevationProv: r.elevationProv,
   }

@@ -35,7 +35,7 @@ import {
 import { provenance, type Provenance } from '@/lib/domain/types'
 import { greatCircleKm } from '@/lib/domain/geo'
 import { LIFT_TYPES, PISTE_DIFFICULTIES, difficultyStyle as styleOf, liftKindText, type LiftType, type PisteShape, type PisteTone, type RunDifficulty } from '@/lib/domain/lifts'
-import greekPeakOsm from '@/assets/osm/greek-peak.json'
+import { OSM_SNAPSHOTS } from '@/assets/osm'
 import { isLive, type DataCtx } from './core'
 import { OSM_ADAPTER_ID, osmTargets, providerStatus, readSkiAreaExtract, type ConnectorState } from './deps'
 
@@ -188,14 +188,15 @@ export interface MappedGeometry {
 
 interface SnapshotElement {
   tags?: Record<string, string | undefined>
-  geometry: { lat: number; lon: number }[]
+  c?: [number, number][]
+  geometry?: { lat: number; lon: number }[]
 }
 interface Snapshot {
   fetched: string
   elements: SnapshotElement[]
 }
 
-const SNAPSHOTS: Record<string, Snapshot> = { 'greek-peak': greekPeakOsm as unknown as Snapshot }
+const SNAPSHOTS = OSM_SNAPSHOTS as unknown as Record<string, Snapshot>
 
 const lineLength = (coords: [number, number][]) =>
   coords.reduce((m, c, i) => (i ? m + greatCircleKm({ lon: coords[i - 1][0], lat: coords[i - 1][1] }, { lon: c[0], lat: c[1] }) * 1000 : 0), 0)
@@ -212,7 +213,7 @@ export function bundledGeometry(resortId: string, country: string): MappedGeomet
   let n = -90
   snap.elements.forEach((el, i) => {
     const t = el.tags ?? {}
-    const coords = el.geometry.map((g) => [g.lon, g.lat] as [number, number])
+    const coords = el.c ?? (el.geometry ?? []).map((g) => [g.lon, g.lat] as [number, number])
     if (coords.length < 2) return
     for (const [lon, lat] of coords) {
       w = Math.min(w, lon)

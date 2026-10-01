@@ -2,6 +2,7 @@
  * What the resort hero says, built on the server from the summary: the status / opening line (never "Open" from an
  * announced date; unknown status says so), the HUD line (place, coordinates, elevations) and which art to draw.
  */
+import { photoSrc } from '@/lib/ui/assets'
 import type { ResortSummary } from '@/lib/data/resorts'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { dayLabel, dayLabelYear, dotJoin, seasonText, units } from './format'
@@ -60,7 +61,7 @@ export function heroData(r: ResortSummary, prefs: UnitPrefs, chapters: number): 
   const range = base && top ? `${base.replace(/ (m|ft)$/, '')}–${top}` : (top ?? base)
   const locality = r.locality ? r.locality.split('(')[0].trim() : null
   let art: HeroArtSpec
-  if (r.photo) art = { kind: 'photo', ...r.photo }
+  if (r.photo) art = { kind: 'photo', ...r.photo, src: photoSrc(r.photo.src) }
   else if (r.id === 'zermatt') art = { kind: 'matterhorn', peakLabel: `Matterhorn · ${u.elev(MATTERHORN_M)}`, topLabel: top ? `Ski area top · ${top}` : null }
   else if (r.id === 'greek-peak') art = { kind: 'greek-peak', topLabel: top ? `Summit · ${top}` : null, sub: verticalM !== null ? `${u.elev(verticalM)} vertical` : null }
   else
