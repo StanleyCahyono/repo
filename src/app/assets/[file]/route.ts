@@ -7,7 +7,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { ASSET_FILES } from '@/lib/ui/assets'
 
-const TYPES: Record<string, string> = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary' }
+const TYPES: Record<string, string> = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary', svg: 'image/svg+xml' }
 
 export async function GET(_req: Request, ctx: { params: Promise<{ file: string }> }) {
   const { file } = await ctx.params

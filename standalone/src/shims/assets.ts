@@ -4,7 +4,7 @@
  */
 import { ASSETS } from 'virtual:piste/assets'
 
-export const ASSET_FILES = ['greek-peak-hero.webp', 'skier-body.glb'] as const
+export const ASSET_FILES = ['greek-peak-hero.webp', 'greek-peak-duo.webp', 'greek-peak-ridge.svg', 'matterhorn-cut.webp', 'matterhorn-duo.webp', 'matterhorn-ridge.svg', 'skier-body.glb'] as const
 export type AssetFile = (typeof ASSET_FILES)[number]
 
 export function assetUrl(file: AssetFile): string {

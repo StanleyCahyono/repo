@@ -572,7 +572,7 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
 
 /** src/assets as data URLs (the Today hero art, the avatar body), for src/lib/ui/assets.ts's shim. */
 function assetDataUrls() {
-  const TYPES = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary' }
+  const TYPES = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary', svg: 'image/svg+xml' }
   const dir = path.join(SRC, 'assets')
   const out = {}
   for (const f of fs.readdirSync(dir)) {
