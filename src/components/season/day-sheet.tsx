@@ -34,6 +34,7 @@ interface Form {
   resortId: string
   tripId: string
   hours: string
+  vertical: string
   rating: number | null
   surface: SurfaceTag[]
   saveReport: boolean
@@ -53,6 +54,7 @@ function initialForm(data: SeasonUiData, day: SkiDayView | null, prefill: DayPre
       resortId: day.resortId,
       tripId: day.tripId ?? '',
       hours: day.hoursSkied != null ? String(day.hoursSkied) : '',
+      vertical: day.verticalM != null ? String(Math.round(data.elevationUnit === 'ft' ? day.verticalM / 0.3048 : day.verticalM)) : '',
       rating: day.rating,
       surface: day.surfaceFeedback.filter((t) => t !== 'unknown'),
       saveReport: false,
@@ -72,6 +74,7 @@ function initialForm(data: SeasonUiData, day: SkiDayView | null, prefill: DayPre
     resortId,
     tripId: prefill?.tripId && data.trips.some((t) => t.id === prefill.tripId) ? prefill.tripId : '',
     hours: '',
+    vertical: '',
     rating: null,
     surface: [],
     saveReport: false,
@@ -193,7 +196,7 @@ export function DaySheet({
 }) {
   const toast = useToast()
   const formId = useId()
-  const ids = { date: useId(), resort: useId(), trip: useId(), hours: useId(), time: useId(), crowd: useId(), spend: useId(), currency: useId(), notes: useId(), pass: useId(), report: useId() }
+  const ids = { date: useId(), resort: useId(), trip: useId(), hours: useId(), vertical: useId(), time: useId(), crowd: useId(), spend: useId(), currency: useId(), notes: useId(), pass: useId(), report: useId() }
   const [f, setF] = useState<Form>(() => initialForm(data, day, prefill))
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [error, setError] = useState<string | null>(null)
@@ -218,6 +221,9 @@ export function DaySheet({
     const errs: Record<string, string> = {}
     const hours = f.hours.trim() ? Number(f.hours.trim().replace(',', '.')) : null
     if (hours !== null && (!Number.isFinite(hours) || hours <= 0 || hours > 14)) errs.hoursSkied = 'Use hours between 0.25 and 14 (e.g. 3.5)'
+    const vRaw = f.vertical.trim() ? Number(f.vertical.trim().replace(/[,\s]/g, '')) : null
+    const verticalM = vRaw !== null && Number.isFinite(vRaw) ? (data.elevationUnit === 'ft' ? vRaw * 0.3048 : vRaw) : null
+    if (vRaw !== null && (!Number.isFinite(vRaw) || vRaw <= 0 || (verticalM ?? 0) > 30000)) errs.verticalM = `Use a number of ${data.elevationUnit === 'ft' ? 'feet' : 'metres'} above 0`
     if (!f.resortId) errs.resortId = 'Choose where you skied'
     if (!f.date) errs.date = 'Pick the day'
     if (Object.keys(errs).length) {
@@ -234,6 +240,7 @@ export function DaySheet({
         resortId: f.resortId,
         tripId: f.tripId || null,
         hoursSkied: hours,
+        verticalM,
         rating: f.rating,
         surfaceFeedback: f.surface,
         preferredTime: f.preferredTime,
@@ -337,7 +344,7 @@ export function DaySheet({
               </Select>
             </Field>
           </div>
-          <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,11rem)]">
+          <div className="grid gap-4">
             <Field label="Trip" htmlFor={ids.trip} optional error={errors.tripId} hint={tripsForDay.length ? undefined : 'No trip covers this day.'}>
               <Select id={ids.trip} value={f.tripId} disabled={!tripsForDay.length} onChange={(e) => set('tripId', e.target.value)} aria-invalid={!!errors.tripId}>
                 <option value="">Not part of a trip</option>
@@ -348,9 +355,22 @@ export function DaySheet({
                 ))}
               </Select>
             </Field>
-            <Field label="Hours on snow" htmlFor={ids.hours} optional error={errors.hoursSkied}>
-              <TextInput id={ids.hours} inputMode="decimal" placeholder="e.g. 3.5" value={f.hours} onChange={(e) => set('hours', e.target.value)} className="tnum" aria-invalid={!!errors.hoursSkied} />
-            </Field>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Hours on snow" htmlFor={ids.hours} optional error={errors.hoursSkied}>
+                <TextInput id={ids.hours} inputMode="decimal" placeholder="e.g. 3.5" value={f.hours} onChange={(e) => set('hours', e.target.value)} className="tnum" aria-invalid={!!errors.hoursSkied} />
+              </Field>
+              <Field label={`Vertical (${data.elevationUnit})`} htmlFor={ids.vertical} optional error={errors.verticalM} hint="From your watch or app, if it tracked the day.">
+                <TextInput
+                  id={ids.vertical}
+                  inputMode="numeric"
+                  placeholder={data.elevationUnit === 'ft' ? 'e.g. 6500' : 'e.g. 2000'}
+                  value={f.vertical}
+                  onChange={(e) => set('vertical', e.target.value)}
+                  className="tnum"
+                  aria-invalid={!!errors.verticalM}
+                />
+              </Field>
+            </div>
           </div>
           <RatingPicker value={f.rating} onChange={(v) => set('rating', v)} error={errors.rating} />
         </Group>

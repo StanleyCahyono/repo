@@ -1,69 +1,15 @@
 /**
- * Season at a glance (server-rendered): the key figures and a small timeline of the season — logged days, pass days,
+ * Season at a glance (server-rendered): a small timeline of the season — logged days, pass days,
  * lessons and planned trips on one date axis, with today marked. The timeline is decoration over a real list
- * ("Show as list"), so nothing is colour- or position-only. Spending figures come from the season-budget engine:
- * the pass purchase is counted once and pass days add no lift cash.
+ * ("Show as list"), so nothing is colour- or position-only.
  */
 import { GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { KindTag } from '@/components/ui/provenance'
-import { SourceDrawer } from '@/components/ui/source-drawer'
-import type { SeasonView } from '@/lib/data/season'
 import type { SeasonTimeline as Timeline } from '@/lib/data/season-screen'
-import { formatMoneyRange } from '@/lib/domain/money'
 import { addDays, daysBetween, formatLocalDate } from '@/lib/domain/time'
-import { budgetProvenance, dayLabel, hoursText, money, plural, rangeLabel } from './format'
+import { dayLabel, plural, rangeLabel } from './format'
 import { TimelineTrips } from './timeline-trips'
-
-function Figure({ label, value, sub, muted, action }: { label: string; value: string; sub?: string | null; muted?: boolean; action?: React.ReactNode }) {
-  return (
-    <div className="min-w-0">
-      <dt className="eyebrow flex h-4 items-center gap-1">
-        {label}
-        {action}
-      </dt>
-      <dd className={cn('mt-1 font-display leading-none tnum', muted ? 'text-[22px] text-ink-3 md:text-[24px]' : 'text-[28px] text-ink md:text-[30px]')}>{value}</dd>
-      {sub ? <dd className="mt-1.5 text-[12.5px] leading-snug text-ink-3">{sub}</dd> : null}
-    </div>
-  )
-}
-
-export function SeasonFigures({ view, passDays }: { view: SeasonView; passDays: number }) {
-  const { totals, budget } = view
-  const top = view.destinations[0]
-  const spent = budget.actualTotal.amountMinor > 0
-  const planned = budget.plannedTotal.amountMinor > 0 ? formatMoneyRange(budget.plannedTotal, budget.plannedTotalMax) : null
-  const budgetProv = budgetProvenance(view.season.label)
-  return (
-    <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-y border-divider py-4 sm:grid-cols-3 lg:grid-cols-5">
-      <Figure
-        label="Ski days"
-        value={String(totals.skiDays)}
-        sub={totals.skiDays ? [`${totals.loggedDays} in your journal`, passDays ? `${passDays} on a pass` : null].filter(Boolean).join(' · ') : 'None logged yet'}
-      />
-      <Figure label="Resorts" value={String(totals.resorts)} sub={top ? `Most: ${top.name} (${top.days})` : 'Where you ski shows here'} />
-      <Figure
-        label="Hours on snow"
-        value={totals.hoursSkied != null ? (hoursText(totals.hoursSkied) ?? '—') : '—'}
-        muted={totals.hoursSkied == null}
-        sub={totals.hoursSkied == null ? 'Not recorded' : totals.daysWithHours < totals.loggedDays ? `Recorded on ${totals.daysWithHours} of ${totals.loggedDays} days` : null}
-      />
-      <Figure
-        label="Spent so far"
-        value={spent ? (money(budget.actualTotal) ?? '—') : 'None yet'}
-        muted={!spent}
-        sub={[planned ? `${planned} planned` : null, !budget.complete ? 'Some amounts could not be converted' : null].filter(Boolean).join(' · ') || 'Record costs under Spending'}
-        action={<SourceDrawer className="-my-1" title="How spending is counted" items={[{ label: 'Spent so far', value: spent ? money(budget.actualTotal) : 'Nothing recorded', prov: budgetProv }]} />}
-      />
-      <Figure
-        label="All-in per ski day"
-        value={budget.costPerSkiDay ? (money(budget.costPerSkiDay) ?? '—') : '—'}
-        muted={!budget.costPerSkiDay}
-        sub={budget.costPerSkiDay ? (budget.onSnowCostPerSkiDay ? `${money(budget.onSnowCostPerSkiDay)} of it on snow` : null) : 'After your first ski day'}
-      />
-    </dl>
-  )
-}
 
 // ---------------------------------------------------------------------------
 // Timeline
@@ -94,7 +40,7 @@ export function SeasonTimeline({ tl, demo, seasonLabel }: { tl: Timeline; demo: 
   const empty = !items.length
 
   return (
-    <figure aria-labelledby="season-timeline-title" className="m-0 rounded-[12px] border border-divider bg-surface px-4 pt-4 pb-3 md:px-5">
+    <figure aria-labelledby="season-timeline-title" className="glass m-0 rounded-[24px] px-4 pt-4 pb-3 md:px-6 md:pt-5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
           <h2 id="season-timeline-title" className="text-[15px] font-semibold text-ink">

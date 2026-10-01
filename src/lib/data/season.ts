@@ -46,6 +46,8 @@ export interface SkiDayView {
   crowdGuess: string | null
   skillsPracticed: { id: number; label: string }[]
   hoursSkied: number | null
+  /** Vertical metres I recorded (null = not recorded). */
+  verticalM: number | null
   /** Spend noted on the day log (null = not recorded, never 0). Not part of the budget — expenses are. */
   spend: Money | null
   notes: string | null
@@ -128,6 +130,9 @@ export interface SeasonView {
     /** Sum of recorded hours; null when no day records hours. */
     hoursSkied: number | null
     daysWithHours: number
+    /** Sum of recorded vertical metres; null when no day records vertical. */
+    verticalM: number | null
+    daysWithVertical: number
     /** Spend noted on ski-day logs, per currency (shown, never added to the budget). */
     dayLogSpend: Money[]
   }
@@ -252,6 +257,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
       crowdGuess: d.crowdGuess,
       skillsPracticed: skillRefs(d.skillsPracticed),
       hoursSkied: d.hoursSkied,
+      verticalM: d.verticalM ?? null,
       spend: d.spendMinor != null && d.currency ? money(d.spendMinor, d.currency) : null,
       notes: d.notes,
       passDay: passDayAt.get(`${d.resortId}|${d.date}`) ?? null,
@@ -259,6 +265,7 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
 
   const skiDates = new Set([...seasonLogs.map((d) => d.date), ...usageMine.map((u) => u.date)])
   const withHours = seasonLogs.filter((d) => typeof d.hoursSkied === 'number' && Number.isFinite(d.hoursSkied))
+  const withVertical = seasonLogs.filter((d) => typeof d.verticalM === 'number' && Number.isFinite(d.verticalM))
   const spendByCur = groupBy(
     skiDays.filter((d) => d.spend),
     (d) => d.spend!.currency,
@@ -416,6 +423,8 @@ export async function getSeasonView(ctx: DataCtx): Promise<SeasonView> {
       resorts: destinations.length,
       hoursSkied: withHours.length ? Math.round(withHours.reduce((a, d) => a + d.hoursSkied!, 0) * 10) / 10 : null,
       daysWithHours: withHours.length,
+      verticalM: withVertical.length ? Math.round(withVertical.reduce((a, d) => a + d.verticalM!, 0) * 10) / 10 : null,
+      daysWithVertical: withVertical.length,
       dayLogSpend,
     },
     destinations,

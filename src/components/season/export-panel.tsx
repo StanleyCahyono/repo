@@ -9,7 +9,7 @@ import { PERSONAL_TABLES, PERSONAL_TABLE_LABEL, type PersonalTable } from '@/lib
 import type { PickerTrip } from '@/lib/data/season-screen'
 import { rangeLabel } from './format'
 
-const SEASON_TABLES: PersonalTable[] = ['ski-logs', 'skills', 'lessons', 'expenses', 'pass-usage', 'pass-ownership', 'ratings', 'manual-reports']
+const SEASON_TABLES: PersonalTable[] = ['ski-logs', 'skills', 'lessons', 'expenses', 'gear', 'pass-usage', 'pass-ownership', 'ratings', 'manual-reports']
 
 const action =
   'inline-flex h-11 items-center justify-center gap-2 rounded-md border border-divider-strong bg-surface px-4 text-[14.5px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:h-10'

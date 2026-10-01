@@ -86,8 +86,9 @@ function ReportAction({ day, saved }: { day: SkiDayView; saved: boolean }) {
 }
 
 function DayEntry({ day, index, saved, fresh, demo }: { day: SkiDayView; index: number; saved: boolean; fresh: boolean; demo: boolean }) {
-  const { openDay } = useSeasonUi()
-  const meta = [hoursText(day.hoursSkied), day.preferredTime ? `Best time: ${day.preferredTime.charAt(0).toLowerCase()}${day.preferredTime.slice(1)}` : null].filter(Boolean)
+  const { openDay, data } = useSeasonUi()
+  const vert = day.verticalM != null ? `${Math.round(data.elevationUnit === 'ft' ? day.verticalM / 0.3048 : day.verticalM).toLocaleString('en-US')} ${data.elevationUnit} vertical` : null
+  const meta = [hoursText(day.hoursSkied), vert, day.preferredTime ? `Best time: ${day.preferredTime.charAt(0).toLowerCase()}${day.preferredTime.slice(1)}` : null].filter(Boolean)
   const crowd = crowdText(day.crowdGuess)
   return (
     <Rise as="li" index={index} className="relative">

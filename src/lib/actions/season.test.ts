@@ -77,6 +77,21 @@ describe('saveSkiDay — the ski-day journal', () => {
     expect(b).toMatchObject({ hoursSkied: null, rating: null, spendMinor: null, currency: null, preferredTime: null })
   })
 
+  it('stores recorded vertical in metres (unknown stays null) and refuses impossible values', async () => {
+    const r = await saveSkiDay(day({ date: '2027-01-03', verticalM: 1280.16 }))
+    if (!r.ok) throw new Error(r.error)
+    const [row] = await fx.db.select().from(s.skiDayLogs).where(eq(s.skiDayLogs.id, r.data.id))
+    expect(row.verticalM).toBe(1280.2)
+    expect(await saveSkiDay(day({ date: '2027-01-04', verticalM: 0 }))).toMatchObject({ ok: false, fieldErrors: { verticalM: expect.any(String) } })
+    expect(await saveSkiDay(day({ date: '2027-01-04', verticalM: 40000 }))).toMatchObject({ ok: false, fieldErrors: { verticalM: expect.any(String) } })
+    const d = await deleteSkiDay({ id: r.data.id })
+    if (!d.ok) throw new Error(d.error)
+    expect(d.data.snapshot.verticalM).toBe(1280.2)
+    const back = await restoreSkiDay({ snapshot: d.data.snapshot })
+    if (!back.ok) throw new Error(back.error)
+    await fx.db.delete(s.skiDayLogs).where(eq(s.skiDayLogs.id, back.data.id))
+  })
+
   it('refuses a second entry for the same resort and date', async () => {
     expect(await saveSkiDay(day())).toMatchObject({ ok: false, fieldErrors: { date: 'Already logged at this resort' } })
   })
