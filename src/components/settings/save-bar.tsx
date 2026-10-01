@@ -24,7 +24,7 @@ export function SaveBar({
 }) {
   const status = pending ? 'saving' : error ? 'error' : dirty ? 'dirty' : 'clean'
   return (
-    <div className="flex flex-col gap-3 bg-surface-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between md:px-5">
+    <div className="flex flex-col gap-3 bg-chip-track px-4 py-3 sm:flex-row sm:items-center sm:justify-between md:px-6">
       <div className="min-w-0 text-[13px]" aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
           <motion.p

@@ -120,7 +120,7 @@ function LastFetch({ c, now, tz, links }: { c: ConnectorView; now: string; tz: s
 export function ConnectorsPanel({ v, tz, names }: { v: SourcesView; tz: string; names: Record<string, string> }) {
   const rows = v.connectors
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div className="overflow-hidden glass rounded-[24px]">
       <table className="hidden w-full text-left lg:table">
         <caption className="sr-only">Connectors: setup, current status, last fetch and last successful update</caption>
         <thead>
@@ -212,7 +212,7 @@ export function ManualSources({ v, reportAdapters, resortCount }: { v: SourcesVi
     },
   ]
   return (
-    <div className="mt-4 rounded-[12px] border border-divider bg-surface-2">
+    <div className="mt-4 rounded-[18px] border border-glass-line bg-chip-track">
       <p className="flex flex-wrap items-center gap-2 border-b border-divider px-4 py-2.5 text-[13.5px] font-semibold text-ink md:px-5">
         <StateChip spec={CONNECTOR_SETUP.manual} /> Manual and link-only sources
       </p>

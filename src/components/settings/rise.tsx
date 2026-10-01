@@ -1,17 +1,16 @@
-'use client'
 /**
  * Entrance for the first few sections of Settings and Sources & Sync: 220 ms fade + 8 px rise (docs/design.md),
- * staggered by `index` (only the first ~4 animate). Collapses under reduced motion via the shell's MotionConfig.
+ * staggered by `index` (only the first ~4 animate). Pure CSS (`.piste-rise`), so the content is never left
+ * invisible while a long page hydrates, and it works without JavaScript; collapses under reduced motion.
  */
-import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
-import { rise, t } from '@/lib/ui/motion'
+import type { CSSProperties, ReactNode } from 'react'
+import { cn } from '@/lib/ui/cn'
 
 export function Rise({ index = 0, className, children }: { index?: number; className?: string; children: ReactNode }) {
   if (index > 3) return <div className={className}>{children}</div>
   return (
-    <motion.div variants={rise} initial="hidden" animate="show" transition={{ ...t.pageIn, delay: index * 0.045 }} className={className}>
+    <div className={cn('piste-rise', className)} style={{ '--rise-delay': `${index * 45}ms` } as CSSProperties}>
       {children}
-    </motion.div>
+    </div>
   )
 }

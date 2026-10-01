@@ -42,22 +42,22 @@ export function Switch({
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={cn(
-        'group inline-flex min-h-11 items-center gap-2.5 rounded-md pr-1 text-[13.5px] font-medium text-ink disabled:opacity-50 md:min-h-8',
+        'group inline-flex min-h-11 items-center gap-2.5 rounded-full pr-1 text-[13.5px] font-medium text-ink disabled:opacity-50 md:min-h-8',
         className,
       )}
     >
       <span
         aria-hidden
         className={cn(
-          'relative inline-flex h-6 w-10 shrink-0 items-center rounded-full border transition-colors duration-150',
-          checked ? 'border-teal bg-teal' : 'border-divider-strong bg-surface-3 group-hover:border-ink-3',
+          'relative inline-flex h-6 w-10 shrink-0 items-center rounded-full border transition-colors duration-200',
+          checked ? 'border-teal bg-teal' : 'border-field-edge bg-chip-track group-hover:border-field-edge-hover',
         )}
       >
         <motion.span
           initial={false}
           animate={{ x: checked ? 17 : 2 }}
-          transition={t.hover}
-          className={cn('absolute top-[2px] left-0 size-[18px] rounded-full shadow-[0_1px_2px_rgb(12_30_42/0.25)]', checked ? 'bg-on-teal' : 'bg-surface')}
+          transition={t.spring}
+          className={cn('absolute top-[2px] left-0 size-[18px] rounded-full shadow-[0_1px_2px_rgb(12_30_42/0.25)]', checked ? 'bg-on-teal' : 'bg-ink-3')}
         />
       </span>
       {showState ? <span className={checked ? 'text-ink' : 'text-ink-2'}>{checked ? onText : offText}</span> : null}

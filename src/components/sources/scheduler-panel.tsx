@@ -18,7 +18,7 @@ export function SchedulerPanel({ v, tz }: { v: SourcesView; tz: string }) {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <div className="rounded-[12px] border border-divider bg-surface">
+      <div className="glass rounded-[24px]">
         <div className="flex items-start gap-3 border-b border-divider px-4 py-4 md:px-5">
           <Icon aria-hidden className={cn('mt-1 size-5 shrink-0', TONE_TEXT[sum.tone])} />
           <div className="min-w-0">
@@ -82,7 +82,7 @@ export function SchedulerPanel({ v, tz }: { v: SourcesView; tz: string }) {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="rounded-[12px] border border-caution/40 bg-caution-bg px-4 py-4 md:px-5">
+        <div className="rounded-[20px] border border-caution/40 bg-caution-bg px-4 py-4 md:px-5">
           <p className="flex items-center gap-2 text-[15px] font-semibold text-ink">
             <Moon aria-hidden className="size-4 text-caution" /> A sleeping machine cannot collect data
           </p>
@@ -92,7 +92,7 @@ export function SchedulerPanel({ v, tz }: { v: SourcesView; tz: string }) {
             worker on an always-on machine.
           </p>
         </div>
-        <div className="rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+        <div className="glass rounded-[24px] px-4 py-4 md:px-5">
           <p className="flex items-center gap-2 text-[14.5px] font-semibold text-ink">
             <Server aria-hidden className="size-4 text-ink-3" /> Always-on host
           </p>

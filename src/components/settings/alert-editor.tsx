@@ -157,7 +157,7 @@ function EditorBody({ rule, resorts, units, onSaved, close }: { rule: AlertRuleV
           </Select>
         </div>
       ) : null}
-      <div className="rounded-[10px] border border-divider bg-surface-2 px-3.5 py-3 text-[13.5px]">
+      <div className="rounded-[14px] border border-divider bg-surface-2 px-3.5 py-3 text-[13.5px]">
         <p className="text-ink">{spec.summary}</p>
         {spec.caveat ? <p className="mt-1 text-ink-2">{spec.caveat}</p> : null}
       </div>

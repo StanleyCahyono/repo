@@ -120,7 +120,7 @@ export function PhotoPlaceholder({ seed, name, className }: { seed: string; name
   return (
     <div className={cn('relative overflow-hidden bg-[linear-gradient(160deg,var(--glacier),var(--surface-2)_70%)]', className)}>
       <TopoArt seed={seed} />
-      <span className="absolute right-2 bottom-2 rounded-sm bg-surface/80 px-1.5 py-0.5 text-[11px] text-ink-3 backdrop-blur-[2px]">
+      <span className="glass-strong absolute right-2 bottom-2 max-w-[calc(100%-16px)] truncate rounded-full px-2 py-0.5 text-[12px] text-ink-2 shadow-none">
         No licensed photo · decorative contours
       </span>
       <span className="sr-only">Decorative contour pattern for {name}; not a map of the resort.</span>

@@ -30,7 +30,7 @@ function AbilityLadder({ value, onChange, labelledBy }: { value: AbilityLevel; o
       <div
         role="radiogroup"
         aria-labelledby={labelledBy}
-        className="grid grid-cols-1 gap-1.5 sm:grid-cols-5 sm:gap-0 sm:overflow-hidden sm:rounded-[10px] sm:border sm:border-divider sm:bg-surface-2"
+        className="grid grid-cols-1 gap-1.5 sm:grid-cols-5 sm:gap-1 sm:rounded-[20px] sm:border sm:border-glass-line sm:bg-chip-track sm:p-1"
         onKeyDown={(e) => {
           const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
           if (!step) return
@@ -52,17 +52,17 @@ function AbilityLadder({ value, onChange, labelledBy }: { value: AbilityLevel; o
               data-level={lvl}
               onClick={() => onChange(lvl)}
               className={cn(
-                'relative flex min-h-11 items-center gap-3 rounded-[10px] border px-3 text-left text-[14px] font-medium transition-colors duration-150 sm:flex-col sm:items-start sm:justify-center sm:gap-1.5 sm:rounded-none sm:border-0 sm:py-2.5 sm:[&:not(:first-child)]:border-l sm:[&:not(:first-child)]:border-divider',
-                on ? 'border-teal text-teal' : 'border-divider text-ink-2 hover:text-ink',
+                'relative flex min-h-11 min-w-0 items-center gap-3 rounded-[16px] border px-3 text-left text-[14px] font-medium transition-colors duration-150 sm:flex-col sm:items-start sm:justify-center sm:gap-1.5 sm:border-0 sm:py-2.5',
+                on ? 'border-ink-chip text-on-ink-chip' : 'border-glass-line text-ink-2 hover:bg-chip-hover hover:text-ink max-sm:bg-chip-track',
               )}
             >
-              {on ? <motion.span layoutId={`ladder-${layout}`} transition={t.select} aria-hidden className="absolute inset-0 rounded-[10px] bg-glacier sm:rounded-none" /> : null}
+              {on ? <motion.span layoutId={`ladder-${layout}`} transition={t.select} aria-hidden className="absolute inset-0 rounded-[16px] bg-ink-chip shadow-[0_6px_16px_-8px_rgb(19_32_44/0.55)]" /> : null}
               <span aria-hidden className="relative flex gap-[3px]">
                 {ABILITY_LEVELS.map((_, j) => (
-                  <span key={j} className={cn('h-2.5 w-[5px] rounded-[2px]', j <= i ? (on ? 'bg-teal' : 'bg-ink-3') : 'bg-divider-strong')} />
+                  <span key={j} className={cn('h-2.5 w-[5px] rounded-[2px]', j <= i ? (on ? 'bg-on-ink-chip' : 'bg-ink-3') : on ? 'bg-on-ink-chip/30' : 'bg-divider-strong')} />
                 ))}
               </span>
-              <span className="relative">{ABILITY_TEXT[lvl].label}</span>
+              <span className="relative min-w-0 truncate">{ABILITY_TEXT[lvl].label}</span>
             </button>
           )
         })}

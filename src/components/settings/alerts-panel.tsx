@@ -117,7 +117,7 @@ export function AlertsPanel({
         </div>
 
         {groups.length ? (
-          <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+          <div className="overflow-hidden glass rounded-[24px]">
             {groups.map((g, gi) => (
               <section key={g.type} aria-labelledby={`alerts-${g.type}`} className={cn(gi > 0 && 'border-t border-divider')}>
                 <header className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 bg-surface-2 px-4 py-2.5 md:px-5">
@@ -193,7 +193,7 @@ export function AlertsPanel({
       </div>
 
       <aside aria-label="Recent alerts and how alerts work" className="flex flex-col gap-4">
-        <div className="rounded-[12px] border border-divider bg-surface">
+        <div className="glass rounded-[24px]">
           <p className="flex items-center justify-between gap-2 border-b border-divider px-4 py-2.5 text-[13.5px] font-semibold text-ink">
             Recent alerts
             <span className="text-[12.5px] font-normal text-ink-3 tnum">{unread ? `${unread} unread` : 'All read'}</span>
@@ -223,7 +223,7 @@ export function AlertsPanel({
             <p className="px-4 py-3 text-[13px] text-ink-2">No alerts yet. They appear here and on Today when a rule matches new data.</p>
           )}
         </div>
-        <div className="rounded-[12px] border border-divider bg-surface-2 px-4 py-3.5 text-[13px] text-ink-2">
+        <div className="rounded-[18px] border border-glass-line bg-chip-track px-4 py-3.5 text-[13px] text-ink-2">
           <p className="flex items-center gap-2 font-semibold text-ink">
             <BellRing aria-hidden className="size-4 text-teal" /> In-app only
           </p>

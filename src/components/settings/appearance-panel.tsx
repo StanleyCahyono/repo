@@ -121,7 +121,7 @@ export function AppearancePanel({ theme, mode }: { theme: Theme; mode: 'live' | 
 
 function ModeOption({ active, icon, title, body }: { active: boolean; icon: React.ReactNode; title: string; body: string }) {
   return (
-    <div className={cn('rounded-[10px] border px-3.5 py-3', active ? 'border-teal bg-glacier/50' : 'border-divider bg-surface-2')}>
+    <div className={cn('rounded-[14px] border px-3.5 py-3', active ? 'border-teal bg-glacier/60' : 'border-glass-line bg-chip-track')}>
       <p className="flex items-center gap-2 text-[14px] font-semibold text-ink">
         {icon}
         {title}

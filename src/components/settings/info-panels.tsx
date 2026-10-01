@@ -61,7 +61,7 @@ export function ExportPanel({ demo }: { demo: boolean }) {
         <a
           href="/api/export/json"
           download
-          className="inline-flex h-11 items-center gap-2 rounded-md border border-teal bg-teal px-4 text-[14.5px] font-medium text-on-teal transition-colors duration-150 hover:border-teal-strong hover:bg-teal-strong md:h-10"
+          className="inline-flex h-11 items-center gap-2 rounded-full border border-ink-chip bg-ink-chip px-5 text-[14.5px] font-medium text-on-ink-chip shadow-[0_8px_20px_-8px_rgb(19_32_44/0.5)] transition-transform duration-150 hover:-translate-y-px md:h-10"
         >
           <FileJson aria-hidden className="size-4" /> Download JSON
         </a>
@@ -74,7 +74,7 @@ export function ExportPanel({ demo }: { demo: boolean }) {
               <a
                 href={`/api/export/csv?table=${t}`}
                 download
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-divider bg-surface-2 px-2.5 text-[13px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:min-h-8"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-glass-line bg-chip-track px-3 text-[13px] font-medium text-ink transition-[background-color,transform] duration-150 hover:-translate-y-px hover:bg-chip-hover md:min-h-9"
               >
                 <Download aria-hidden className="size-3.5 text-ink-3" />
                 {PERSONAL_TABLE_LABEL[t]}

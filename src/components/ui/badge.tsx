@@ -6,7 +6,7 @@ import type { PassFamilyId } from '@/lib/domain/types'
 type Tone = 'neutral' | 'teal' | 'positive' | 'caution' | 'critical' | 'info' | 'demo' | 'copper'
 
 const tones: Record<Tone, string> = {
-  neutral: 'bg-surface-3 text-ink-2 border-divider',
+  neutral: 'bg-chip-track text-ink-2 border-glass-line',
   teal: 'bg-glacier text-teal border-transparent',
   positive: 'bg-positive-bg text-positive border-transparent',
   caution: 'bg-caution-bg text-caution border-transparent',
@@ -33,7 +33,7 @@ export function Badge({
     <span
       title={title}
       className={cn(
-        'inline-flex h-6 items-center gap-1 rounded-sm border px-2 text-[12px] font-medium leading-none whitespace-nowrap',
+        'inline-flex h-6 max-w-full shrink-0 items-center gap-1 rounded-[8px] border px-2 text-[12px] font-medium leading-none whitespace-nowrap',
         tones[tone],
         className,
       )}
@@ -98,13 +98,13 @@ export function PassBadge({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-sm border font-medium whitespace-nowrap',
-        size === 'sm' ? 'h-5 px-1.5 text-[11.5px]' : 'h-6 px-2 text-[12px]',
+        'inline-flex shrink-0 items-center gap-1.5 rounded-[8px] border font-medium whitespace-nowrap',
+        size === 'sm' ? 'h-[22px] px-1.5 text-[12px]' : 'h-6 px-2 text-[12px]',
         passTones[family],
         className,
       )}
     >
-      <span aria-hidden className="font-mono text-[9.5px] font-medium tracking-wider opacity-80">
+      <span aria-hidden className="font-mono text-[10px] font-semibold tracking-wider opacity-80">
         {passMarks[family]}
       </span>
       <span>{PASS_FAMILY_LABEL[family]}</span>

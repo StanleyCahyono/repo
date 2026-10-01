@@ -1,11 +1,16 @@
-/** Form primitives: every control has a visible, associated label. */
+/**
+ * Form primitives: every control has a visible, associated label. Glass HUD fields: an opaque field fill (text never
+ * sits on bare glass), a 3:1 boundary (WCAG 1.4.11), 12px radius, and a teal edge + soft halo on focus on top of the
+ * global focus outline.
+ */
 import { forwardRef, useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from 'react'
 import { cn } from '@/lib/ui/cn'
 
 const control =
-  'w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink placeholder:text-ink-3 ' +
-  'transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 ' +
-  'disabled:bg-surface-3 disabled:text-ink-3 aria-[invalid=true]:border-critical'
+  'w-full min-w-0 rounded-[12px] border border-field-edge bg-field px-3 text-[15px] text-ink placeholder:text-ink-3 ' +
+  'transition-[border-color,box-shadow] duration-150 hover:border-field-edge-hover ' +
+  'focus:border-teal focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--focus)_18%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-1 ' +
+  'disabled:border-glass-line disabled:bg-chip-track disabled:text-ink-3 aria-[invalid=true]:border-critical'
 
 export function Field({
   label,
@@ -48,7 +53,11 @@ export const TextInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLIn
 
 export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement>>(function Select({ className, children, ...rest }, ref) {
   return (
-    <select ref={ref} className={cn(control, 'h-11 appearance-none bg-[length:12px] bg-[right_12px_center] bg-no-repeat pr-9 md:h-10', className)} style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%2352616b' stroke-width='1.6'/%3E%3C/svg%3E\")" }} {...rest}>
+    <select
+      ref={ref}
+      className={cn(control, 'h-11 appearance-none truncate bg-(image:--chevron) bg-[length:12px] bg-[right_14px_center] bg-no-repeat pr-10 md:h-10', className)}
+      {...rest}
+    >
       {children}
     </select>
   )
@@ -62,8 +71,8 @@ export function Checkbox({ label, hint, className, ...rest }: InputHTMLAttribute
   const id = useId()
   return (
     <div className={cn('flex items-start gap-3', className)}>
-      <input id={rest.id ?? id} type="checkbox" className="mt-0.5 size-5 shrink-0 accent-[var(--teal)]" {...rest} />
-      <label htmlFor={rest.id ?? id} className="text-[14.5px] text-ink">
+      <input id={rest.id ?? id} type="checkbox" className="mt-0.5 size-5 shrink-0 rounded-[6px] accent-[var(--teal)]" {...rest} />
+      <label htmlFor={rest.id ?? id} className="min-w-0 text-[14.5px] text-ink">
         {label}
         {hint ? <span className="block text-[12.5px] text-ink-3">{hint}</span> : null}
       </label>

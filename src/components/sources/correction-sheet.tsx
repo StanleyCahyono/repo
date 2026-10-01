@@ -195,7 +195,7 @@ function CorrectionBody({ resorts, units, initialResortId, close }: { resorts: R
         <FieldError id="corr-field-err" error={errors.field} />
       </div>
 
-      <div className="rounded-[10px] border border-divider bg-surface-2 px-3.5 py-3 text-[13.5px]" aria-live="polite">
+      <div className="rounded-[14px] border border-divider bg-surface-2 px-3.5 py-3 text-[13.5px]" aria-live="polite">
         <p className="text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase">Piste has now</p>
         <p className="mt-1 flex items-center gap-2 text-ink">
           {loading && current === undefined ? (

@@ -23,7 +23,7 @@ export default function SourcesError({ error, retry }: { error: Error & { digest
         }
       >
         Stored data and refresh history are unchanged — this page failed to read them.{error.digest ? ` Reference: ${error.digest}.` : ''} The health endpoint{' '}
-        <code className="rounded-[5px] bg-surface-3 px-1.5 font-mono text-[12.5px]">/api/health</code> reports the scheduler on its own.
+        <code className="rounded-[6px] bg-chip-track px-1.5 font-mono text-[12.5px]">/api/health</code> reports the scheduler on its own.
       </Notice>
       <div className="mt-4">
         <ButtonLink href="/settings" variant="ghost">

@@ -32,9 +32,9 @@ export function FavoriteButton({ resortId, name, initial, size = 'md', withLabel
       aria-label={fav ? `Remove ${name} from favourites` : `Save ${name} to favourites`}
       onClick={() => flip(!fav)}
       className={cn(
-        'inline-flex items-center justify-center gap-1.5 rounded-md border transition-colors duration-150',
-        withLabel ? 'h-10 px-3 text-[14px] font-medium' : size === 'lg' ? 'size-11' : 'size-10',
-        fav ? 'border-copper/40 bg-copper/10 text-copper' : 'border-divider-strong bg-surface text-ink-2 hover:border-teal hover:text-teal',
+        'inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full border transition-[background-color,border-color,color,transform] duration-150 hover:-translate-y-px',
+        withLabel ? 'h-10 px-4 text-[14px] font-medium' : size === 'lg' ? 'size-11' : 'size-10',
+        fav ? 'border-ink-chip bg-ink-chip text-on-ink-chip' : 'glass-strong text-ink-2 hover:border-field-edge hover:text-ink',
         className,
       )}
     >

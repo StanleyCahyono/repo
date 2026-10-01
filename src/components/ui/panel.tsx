@@ -1,10 +1,10 @@
 import type { ReactNode, HTMLAttributes } from 'react'
 import { cn } from '@/lib/ui/cn'
 
-/** Primary content surface: a glass panel (translucent tint, specular top edge, soft lift), 20px radius. */
+/** Primary content surface: a glass panel (translucent tint, specular top edge, soft lift), 24px radius. */
 export function Panel({ className, children, as: Tag = 'section', ...rest }: HTMLAttributes<HTMLElement> & { as?: 'section' | 'div' | 'article' | 'aside' }) {
   return (
-    <Tag className={cn('glass rounded-[20px]', className)} {...rest}>
+    <Tag className={cn('glass min-w-0 rounded-[24px]', className)} {...rest}>
       {children}
     </Tag>
   )
@@ -29,8 +29,8 @@ export function PanelHeader({
   return (
     <header className={cn('flex items-start justify-between gap-3 px-5 pt-4 pb-3', className)}>
       <div className="min-w-0">
-        {eyebrow ? <p className="eyebrow mb-1">{eyebrow}</p> : null}
-        <H id={id} className="text-[17px] font-semibold leading-tight text-ink">
+        {eyebrow ? <p className="eyebrow mb-1.5">{eyebrow}</p> : null}
+        <H id={id} className="text-[17px] leading-tight font-semibold tracking-[-0.01em] text-ink">
           {title}
         </H>
       </div>
@@ -47,8 +47,8 @@ export function Divider({ className }: { className?: string }) {
 export function Fact({ label, children, className }: { label: ReactNode; children: ReactNode; className?: string }) {
   return (
     <div className={cn('flex items-baseline justify-between gap-4 py-2', className)}>
-      <dt className="text-[13.5px] text-ink-2">{label}</dt>
-      <dd className="text-right text-[14.5px] text-ink">{children}</dd>
+      <dt className="min-w-0 text-[13.5px] text-ink-2">{label}</dt>
+      <dd className="min-w-0 text-right text-[14.5px] break-words text-ink">{children}</dd>
     </div>
   )
 }

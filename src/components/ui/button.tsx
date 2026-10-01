@@ -5,17 +5,25 @@ import { cn } from '@/lib/ui/cn'
 type Variant = 'primary' | 'secondary' | 'ghost' | 'quiet' | 'danger'
 type Size = 'sm' | 'md' | 'lg'
 
+/*
+ * Glass HUD buttons: pills. Primary is the dark HUD chip; secondary is a glass-strong pill; ghost/quiet sit on a chip
+ * track. Hover lifts by 1px (transform only, 150ms; collapses under reduced motion). Disabled is a designed state —
+ * a flat track with readable ink-3 text — never a washed-out primary that looks broken.
+ */
 const base =
-  'inline-flex items-center justify-center gap-2 font-medium select-none whitespace-nowrap rounded-full border ' +
+  'inline-flex min-w-0 items-center justify-center gap-2 font-medium select-none whitespace-nowrap rounded-full border ' +
   'transition-[background-color,border-color,color,box-shadow,transform] duration-150 ease-[var(--ease-out-soft)] ' +
-  'active:translate-y-px disabled:opacity-50 disabled:active:translate-y-0'
+  'not-disabled:hover:-translate-y-px not-disabled:active:translate-y-0 not-disabled:active:scale-[0.98] ' +
+  'disabled:border-transparent disabled:bg-chip-track disabled:text-ink-3 disabled:shadow-none'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-ink-chip text-on-ink-chip border-ink-chip hover:bg-teal hover:border-teal hover:text-on-teal shadow-[0_8px_20px_-8px_rgb(19_32_44/0.45)]',
-  secondary: 'bg-glass-strong text-ink border-[var(--glass-edge)] shadow-[0_6px_18px_-10px_rgb(19_32_44/0.35)] hover:border-teal hover:text-teal',
-  ghost: 'bg-transparent text-ink border-transparent hover:bg-surface-3',
-  quiet: 'bg-glacier/60 text-teal border-transparent hover:bg-glacier',
-  danger: 'bg-glass-strong text-critical border-divider-strong hover:border-critical',
+  primary:
+    'bg-ink-chip text-on-ink-chip border-ink-chip shadow-[0_8px_20px_-8px_rgb(19_32_44/0.5)] not-disabled:hover:shadow-[0_12px_26px_-10px_rgb(19_32_44/0.6)]',
+  secondary:
+    'glass-strong text-ink shadow-[0_6px_18px_-10px_rgb(19_32_44/0.35)] not-disabled:hover:border-field-edge not-disabled:hover:text-ink',
+  ghost: 'bg-transparent text-ink border-transparent not-disabled:hover:bg-chip-hover',
+  quiet: 'bg-glacier/70 text-teal border-transparent not-disabled:hover:bg-glacier',
+  danger: 'glass-strong text-critical not-disabled:hover:border-critical',
 }
 
 const sizes: Record<Size, string> = {
@@ -79,8 +87,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
       aria-label={label}
       title={label}
       className={cn(
-        'inline-flex items-center justify-center rounded-md border transition-colors duration-150',
-        variant === 'ghost' ? 'border-transparent text-ink-2 hover:bg-surface-3 hover:text-ink' : 'border-divider-strong bg-surface text-ink hover:border-teal hover:text-teal',
+        'inline-flex shrink-0 items-center justify-center rounded-full border transition-[background-color,border-color,color,transform] duration-150 disabled:opacity-50',
+        variant === 'ghost' ? 'border-transparent text-ink-2 not-disabled:hover:bg-chip-hover not-disabled:hover:text-ink' : 'glass-strong text-ink not-disabled:hover:-translate-y-px not-disabled:hover:border-field-edge',
         dims,
         className,
       )}

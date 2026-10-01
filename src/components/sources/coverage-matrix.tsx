@@ -91,7 +91,7 @@ export function CoverageMatrix({
       </ul>
 
       {/* Table (≥1024px) */}
-      <div className="hidden overflow-x-auto rounded-[12px] border border-divider bg-surface lg:block">
+      <div className="hidden overflow-x-auto glass rounded-[24px] lg:block">
         <table className="w-full border-collapse text-left">
           <caption className="sr-only">
             Coverage of {rows.length} resorts across {ORDERED.length} kinds of fact for {seasonLabel}. Each cell names its state; activate it for details and sources.
@@ -153,7 +153,7 @@ export function CoverageMatrix({
       </div>
 
       {/* List (<1024px) */}
-      <ul className="divide-y divide-divider overflow-hidden rounded-[12px] border border-divider bg-surface lg:hidden">
+      <ul className="divide-y divide-divider overflow-hidden glass rounded-[24px] lg:hidden">
         {rows.map((r) => {
           const counts = COVERAGE_ORDER.filter((s) => r.counts[s]).map((s) => `${r.counts[s]} ${COVERAGE[s].short.toLowerCase()}`)
           return (
@@ -216,7 +216,7 @@ export function CoverageMatrix({
             {GROUPS.map((g) => (
               <section key={g.label} aria-label={g.label}>
                 <p className="eyebrow mb-1.5">{g.label}</p>
-                <ul className="divide-y divide-divider rounded-[10px] border border-divider">
+                <ul className="divide-y divide-divider rounded-[14px] border border-divider">
                   {g.fields.map((f) => (
                     <CellDetail key={f} c={cellOf(current, f)} label={label.get(f) ?? f} now={now} tz={tz} highlight={open?.field === f} />
                   ))}

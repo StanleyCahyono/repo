@@ -62,7 +62,7 @@ export function UnitsPanel({ units, currency, fx, now, homeTimezone, demo }: { u
 
   const cur = c.values.currency
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div className="overflow-hidden glass rounded-[24px]">
       <div className="flex flex-col gap-2 border-b border-divider bg-surface-2 px-4 py-3 text-[13px] text-ink-2 sm:flex-row sm:items-center sm:gap-5 md:px-5">
         <p className="flex items-center gap-2">
           <Database aria-hidden className="size-4 shrink-0 text-ink-3" />
@@ -129,7 +129,7 @@ function FxInfo({ fx, now, tz, demo, display }: { fx: FxView; now: string; tz: s
   const { job } = fx
   const failed = job.lastAttemptStatus === 'error'
   return (
-    <div className="mt-3 rounded-[10px] border border-divider bg-surface-2">
+    <div className="mt-3 rounded-[14px] border border-divider bg-surface-2">
       <p className="border-b border-divider px-3 py-2 text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase">Exchange rates on file</p>
       <ul className="divide-y divide-divider text-[13px]">
         {fx.quotes.map((q) => (
