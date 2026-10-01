@@ -15,15 +15,11 @@ export default async function EventsPage() {
         eyebrow={
           <>
             <span>Season {view.seasonLabel}</span>
-            <span aria-hidden className="text-ink-3">
-              ·
-            </span>
+            <span aria-hidden>·</span>
             <span>
               {view.events.length} {view.events.length === 1 ? 'event' : 'events'} tracked
             </span>
-            {view.demo ? (
-              <DemoBadge />
-            ) : null}
+            {view.demo ? <DemoBadge /> : null}
           </>
         }
         title="Events"

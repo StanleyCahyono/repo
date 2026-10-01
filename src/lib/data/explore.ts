@@ -23,7 +23,7 @@ import { computeDayBasket, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/co
 import { formatMoney, formatMoneyRange, money } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL, evaluateAccess, latestRule, type AccessStatus, type AccessVerdict } from '@/lib/domain/passes'
 import { addDays, formatLocalDate, hemisphereOf, isLocalDate, localTimeToInstant, nextSaturday, planningSeasonBounds, seasonIdForHemisphere, seasonIdsForDates, zoneAbbrev } from '@/lib/domain/time'
-import { formatDuration } from '@/lib/domain/units'
+import { formatDistance, formatDuration, formatElevation } from '@/lib/domain/units'
 import {
   COMPONENT_LABEL,
   PASS_FAMILIES,
@@ -437,6 +437,24 @@ export interface CompareColumn {
     verdict: string
   }
   lodging: { curated: number; byTier: { tier: string; count: number }[]; onMountain: boolean | null; skiInOutVerified: number }
+  /** Catalog mountain facts (metres / counts as stored; formatted in the user's units). null = unknown. */
+  mountain: {
+    baseM: number | null
+    summitM: number | null
+    verticalM: number | null
+    base: string | null
+    summit: string | null
+    vertical: string | null
+    lifts: number | null
+    trails: number | null
+    pisteKm: number | null
+    piste: string | null
+    acres: number | null
+    uphillPerHour: number | null
+    /** Researched by web search: show "Researched — confirm at source". */
+    researched: boolean
+    prov: Provenance | null
+  }
   events: { inWindow: { title: string; when: string; statusLabel: string }[]; upcoming: number; watching: number }
   fit: ResortCardData['fit']
   gaps: string[]
@@ -466,6 +484,7 @@ export interface CompareView {
   seasonLabel: string
   seasonBounds: { min: string; max: string }
   today: string
+  units: UnitPrefs
 }
 
 const ACTIVITY_LABEL: Record<string, string> = {
@@ -764,6 +783,29 @@ export async function getCompareView(
           upcoming: evs.filter((e) => e.startDate && (e.endDate ?? e.startDate) >= ctx.today).length,
           watching: evs.filter((e) => !e.startDate).length,
         },
+        mountain: (() => {
+          const tr = row?.terrain ?? null
+          const baseM = row?.baseElevationM ?? null
+          const summitM = row?.summitElevationM ?? null
+          const verticalM = row?.verticalM ?? (baseM !== null && summitM !== null ? summitM - baseM : null)
+          const prov = (row?.elevationProv as Provenance | null | undefined) ?? tr?.prov ?? null
+          return {
+            baseM,
+            summitM,
+            verticalM,
+            base: formatElevation(baseM, p.units),
+            summit: formatElevation(summitM, p.units),
+            vertical: formatElevation(verticalM, p.units),
+            lifts: tr?.lifts ?? null,
+            trails: tr?.trails ?? null,
+            pisteKm: tr?.pisteKm ?? null,
+            piste: formatDistance(tr?.pisteKm ?? null, p.units),
+            acres: tr?.skiableAcres ?? null,
+            uphillPerHour: tr?.liftCapacityPerHour ?? null,
+            researched: [prov, tr?.prov].some((x) => x?.verification === 'search-summary'),
+            prov,
+          }
+        })(),
         fit: card.fit,
         gaps: sum.dataGaps,
       }
@@ -811,6 +853,7 @@ export async function getCompareView(
     seasonLabel: sl,
     seasonBounds: bounds,
     today: ctx.today,
+    units: p.units,
   }
 }
 

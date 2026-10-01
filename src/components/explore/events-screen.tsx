@@ -142,7 +142,7 @@ function FilterPanel({
 }) {
   const label = 'text-[12.5px] font-medium text-ink-2'
   return (
-    <section aria-labelledby="events-filters" className="rounded-[12px] border border-divider bg-surface p-4 md:p-5">
+    <section aria-labelledby="events-filters" className="glass rounded-[24px] p-4 md:px-6 md:py-5">
       <h2 id="events-filters" className="sr-only">
         Filter events
       </h2>
@@ -277,7 +277,7 @@ function DateField({
 
 function LayoutToggle({ value, onChange }: { value: 'list' | 'calendar'; onChange: (v: 'list' | 'calendar') => void }) {
   return (
-    <div role="group" aria-label="Show events as" className="inline-flex rounded-[10px] border border-divider bg-surface-2 p-0.5">
+    <div role="group" aria-label="Show events as" className="glass-strong inline-flex rounded-full p-1">
       {(
         [
           { v: 'list', label: 'List', Icon: List },
@@ -292,8 +292,8 @@ function LayoutToggle({ value, onChange }: { value: 'list' | 'calendar'; onChang
             aria-pressed={on}
             onClick={() => onChange(v)}
             className={cn(
-              'relative inline-flex h-10 items-center gap-1.5 rounded-[8px] px-3 text-[13.5px] font-medium transition-colors duration-150 md:h-9',
-              on ? 'text-teal' : 'text-ink-2 hover:text-ink',
+              'relative inline-flex h-10 items-center gap-1.5 rounded-full px-3.5 text-[13.5px] font-medium transition-colors duration-150 md:h-9',
+              on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
             )}
           >
             {on ? (
@@ -301,7 +301,7 @@ function LayoutToggle({ value, onChange }: { value: 'list' | 'calendar'; onChang
                 layoutId="events-layout"
                 transition={t.select}
                 aria-hidden
-                className="absolute inset-0 rounded-[8px] border border-divider bg-surface"
+                className="absolute inset-0 rounded-full bg-ink-chip"
               />
             ) : null}
             <Icon aria-hidden className="relative size-4" />
@@ -322,11 +322,11 @@ function Timeline({ events, view }: { events: EventItem[]; view: EventsView }) {
     <div className="flex flex-col gap-6">
       {months.map((m) => (
         <section key={m.month} aria-labelledby={`ev-month-${m.month}`}>
-          <h2 id={`ev-month-${m.month}`} className="mb-2 flex items-baseline gap-2 px-1 text-[15px] font-semibold text-ink">
+          <h2 id={`ev-month-${m.month}`} className="hud mb-2.5 flex items-baseline gap-2 px-2 text-teal">
             {m.label}
-            <span className="tnum text-[13px] font-medium text-ink-3">{m.events.length}</span>
+            <span className="tnum text-ink-2">{m.events.length}</span>
           </h2>
-          <ul className="divide-y divide-divider overflow-hidden rounded-[12px] border border-divider bg-surface">
+          <ul className="glass divide-y divide-divider overflow-hidden rounded-[24px]">
             {m.events.map((e) => (
               <li key={e.id}>
                 <EventRow e={e} view={view} />
@@ -343,12 +343,12 @@ function DateBlock({ e }: { e: EventItem }) {
   if (!e.startDate) return null
   const multi = e.endDate && e.endDate !== e.startDate
   return (
-    <div className="flex w-16 shrink-0 flex-col items-center self-start rounded-[10px] border border-divider bg-surface-2 py-2 text-center" aria-hidden>
-      <span className="text-[12px] font-semibold tracking-[0.08em] text-ink-2 uppercase">{formatLocalDate(e.startDate, 'LLL')}</span>
-      <span className="font-display tnum text-[30px] leading-none text-ink">{formatLocalDate(e.startDate, 'd')}</span>
-      <span className="text-[12px] text-ink-3">{formatLocalDate(e.startDate, 'ccc')}</span>
+    <div className="flex w-16 shrink-0 flex-col items-center self-start rounded-[16px] bg-ink-chip py-2.5 text-center text-on-ink-chip" aria-hidden>
+      <span className="hud text-on-ink-chip-2">{formatLocalDate(e.startDate, 'LLL')}</span>
+      <span className="tnum text-[30px] leading-none font-light tracking-[-0.03em]">{formatLocalDate(e.startDate, 'd')}</span>
+      <span className="text-[12px] text-on-ink-chip-2">{formatLocalDate(e.startDate, 'ccc')}</span>
       {multi ? (
-        <span className="tnum mt-0.5 text-[12px] text-ink-2">
+        <span className="tnum mt-0.5 text-[12px] text-on-ink-chip-2">
           – {formatLocalDate(e.endDate!, e.endDate!.slice(0, 7) === e.startDate.slice(0, 7) ? 'd' : 'd LLL')}
         </span>
       ) : null}
@@ -360,7 +360,7 @@ function EventRow({ e, view }: { e: EventItem; view: EventsView }) {
   const cancelled = e.status === 'cancelled'
   const past = !!e.startDate && (e.endDate ?? e.startDate) < view.today
   return (
-    <article aria-labelledby={`ev-${e.id}`} className="flex gap-4 p-4">
+    <article aria-labelledby={`ev-${e.id}`} className="flex gap-4 p-4 transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--surface)_45%,transparent)] md:p-5">
       <DateBlock e={e} />
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
@@ -390,7 +390,7 @@ function EventRow({ e, view }: { e: EventItem; view: EventsView }) {
             <a
               href={e.icsUrl}
               download
-              className="inline-flex h-11 items-center gap-1.5 rounded-md border border-divider-strong bg-surface px-3 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:h-9"
+              className="inline-flex h-11 items-center gap-1.5 rounded-full border border-[var(--glass-edge)] bg-glass-strong px-3.5 text-[13.5px] font-medium text-ink transition-[color,border-color,transform] duration-150 hover:border-teal hover:text-teal active:scale-95 md:h-9"
             >
               <Download aria-hidden className="size-4" />
               Add to calendar
@@ -520,7 +520,7 @@ function NoDated({ view, f, outside, onWiden }: { view: EventsView; f: EventFilt
           <button
             type="button"
             onClick={onWiden}
-            className="inline-flex h-11 items-center rounded-md border border-divider-strong bg-surface px-4 text-[14px] font-medium text-ink hover:border-teal hover:text-teal md:h-10"
+            className="inline-flex h-11 items-center rounded-full bg-ink-chip px-4 text-[14px] font-medium text-on-ink-chip md:h-10"
           >
             Show the whole season
           </button>
@@ -559,18 +559,18 @@ function EventCalendar({
 
   return (
     <section aria-labelledby="ev-cal-title" className="flex flex-col gap-4">
-      <div className="rounded-[12px] border border-divider bg-surface">
-        <div className="flex items-center justify-between gap-2 border-b border-divider px-3 py-2">
+      <div className="glass overflow-hidden rounded-[24px]">
+        <div className="flex items-center justify-between gap-2 border-b border-divider px-4 py-2.5">
           <button
             type="button"
             onClick={() => onMonth(shiftMonth(month, -1))}
             disabled={month <= minMonth}
             aria-label="Previous month"
-            className="inline-flex size-11 items-center justify-center rounded-md text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
+            className="inline-flex size-11 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
           >
             <ChevronLeft aria-hidden className="size-5" />
           </button>
-          <h2 id="ev-cal-title" className="text-[16px] font-semibold text-ink" aria-live="polite">
+          <h2 id="ev-cal-title" className="text-[20px] font-light tracking-[-0.02em] text-ink" aria-live="polite">
             {label}
             <span className="tnum ml-2 text-[13px] font-medium text-ink-3">
               {inMonth.length} {inMonth.length === 1 ? 'event' : 'events'}
@@ -581,7 +581,7 @@ function EventCalendar({
             onClick={() => onMonth(shiftMonth(month, 1))}
             disabled={month >= maxMonth}
             aria-label="Next month"
-            className="inline-flex size-11 items-center justify-center rounded-md text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
+            className="inline-flex size-11 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
           >
             <ChevronRight aria-hidden className="size-5" />
           </button>
@@ -609,7 +609,7 @@ function EventCalendar({
                   const isToday = d.date === view.today
                   const on = d.date === day
                   return (
-                    <td key={d.date} className={cn('h-16 border-t border-divider p-0 align-top md:h-24', !d.inMonth && 'bg-surface-2')}>
+                    <td key={d.date} className={cn('h-16 border-t border-divider p-0 align-top md:h-24', !d.inMonth && 'bg-[color-mix(in_srgb,var(--ink)_3%,transparent)]')}>
                       {evs.length ? (
                         <button
                           type="button"
@@ -658,10 +658,10 @@ function EventCalendar({
 
       {day && dayEvents.length ? (
         <section aria-labelledby="ev-day-title">
-          <h2 id="ev-day-title" className="mb-2 px-1 text-[15px] font-semibold text-ink">
+          <h2 id="ev-day-title" className="hud mb-2.5 px-2 text-teal">
             {formatLocalDate(day, 'cccc d LLLL yyyy')}
           </h2>
-          <ul className="divide-y divide-divider overflow-hidden rounded-[12px] border border-divider bg-surface">
+          <ul className="glass divide-y divide-divider overflow-hidden rounded-[24px]">
             {dayEvents.map((e) => (
               <li key={e.id}>
                 <EventRow e={e} view={view} />
@@ -670,7 +670,7 @@ function EventCalendar({
           </ul>
         </section>
       ) : (
-        <p className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-4 py-3 text-[13.5px] text-ink-2">
+        <p className="rounded-[18px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">
           No dated events in {label}
           {dated.length ? ' — use the arrows to find the months that have some.' : '.'} Events without an announced date are listed under “Watching for dates”,
           never placed on the calendar.
@@ -702,7 +702,7 @@ function Watching({ events, view }: { events: EventItem[]; view: EventsView }) {
   return (
     <section aria-labelledby="ev-watching" className="flex flex-col gap-3">
       <div className="flex flex-col gap-1 px-1">
-        <h2 id="ev-watching" className="flex items-baseline gap-2 text-[15px] font-semibold text-ink">
+        <h2 id="ev-watching" className="hud flex items-baseline gap-2 text-teal">
           <Eye aria-hidden className="size-4 self-center text-ink-3" />
           Watching for dates
           <span className="tnum text-[13px] font-medium text-ink-3">{events.length}</span>
@@ -717,7 +717,7 @@ function Watching({ events, view }: { events: EventItem[]; view: EventsView }) {
           <li key={e.id}>
             <article
               aria-labelledby={`ev-${e.id}`}
-              className="flex h-full flex-col gap-1.5 rounded-[12px] border border-dashed border-divider-strong bg-surface p-4"
+              className="flex h-full flex-col gap-1.5 rounded-[24px] border border-dashed border-divider-strong bg-[color-mix(in_srgb,var(--surface)_50%,transparent)] p-5 transition-transform duration-200 hover:-translate-y-0.5"
             >
               <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
                 <h3 id={`ev-${e.id}`} className="text-[16px] leading-snug font-semibold text-ink">

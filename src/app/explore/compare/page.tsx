@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { DemoBadge } from '@/components/ui/badge'
 import { CompareScreen } from '@/components/explore/compare-screen'
 import { ExploreHeader } from '@/components/explore/explore-header'
@@ -30,26 +31,30 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
     productId: product && /^[a-z0-9-]{1,100}$/.test(product) ? product : null,
   })
 
+  const names = view.columns.map((c) => c.card.shortName)
+  const title =
+    names.length >= 2 ? `${names.slice(0, -1).join(', ')} & ${names[names.length - 1]}.` : names.length === 1 ? `${names[0]}, and…` : 'Side by side.'
+
   return (
     <>
       <ExploreHeader
         eyebrow={
           <>
-            <span>Season {view.seasonLabel}</span>
-            <span aria-hidden className="text-ink-3">
-              ·
+            <span>
+              Compare · {view.columns.length} of 4
             </span>
+            <span aria-hidden>·</span>
             <span>{view.dateLabel}</span>
-            {view.demo ? (
-              <DemoBadge />
-            ) : null}
+            <span aria-hidden>·</span>
+            <span>Season {view.seasonLabel}</span>
+            {view.demo ? <DemoBadge /> : null}
           </>
         }
-        title="Compare"
-        lead={
-          view.columns.length >= 2
-            ? `${view.columns.map((c) => c.card.shortName).join(', ')} — side by side on identical terms.`
-            : 'Two to four resorts, side by side on identical terms.'
+        title={title}
+        actions={
+          <Link href="/explore" className="hud rounded-full px-2 py-2 text-ink-2 hover:text-ink">
+            ← Back to map
+          </Link>
         }
       />
       <CompareScreen view={view} />
