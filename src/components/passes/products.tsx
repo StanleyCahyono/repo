@@ -17,6 +17,7 @@ import { daysAway, dotJoin, familyId, plural, shortDate } from './format'
 import { checkerHref } from './params'
 import { EstimateButton } from './estimate-form'
 import { AddPassButton, type ProductChoice } from './pass-forms'
+import { MoneyUp } from './count-up'
 import { ConfirmTag, HolderTag } from './section'
 
 const FAMILY_LINK_LABEL: Record<string, string> = {
@@ -89,7 +90,7 @@ function PriceBlock({ p, est }: { p: PassProductView; est: EstimateEntry }) {
     <div className="flex min-w-0 flex-col">
       {cur ? (
         <>
-          <p className="font-display text-[32px] leading-none text-ink tnum">{formatMoneyRange(cur.amount, cur.amountMax)}</p>
+          <p className="text-[34px] leading-none font-light tracking-[-0.03em] text-ink tnum">{cur.amountMax ? formatMoneyRange(cur.amount, cur.amountMax) : <MoneyUp amountMinor={cur.amount.amountMinor} currency={cur.amount.currency} />}</p>
           <p className="mt-1 text-[12.5px] text-ink-2">
             {dotJoin(cur.category ?? 'Adult', cur.purchaseBy ? `buy by ${shortDate(cur.purchaseBy.slice(0, 10))}` : 'on sale now', later[0] ? `then ${formatMoney(later[0].amount)}` : null)}
           </p>
@@ -264,12 +265,12 @@ export function FamilySection({
   const links = Object.entries(f.links).filter(([, url]) => !!url && /^https?:\/\//.test(url!)) as [string, string][]
   const priced = products.filter((p) => p.currentPrice && p.currentPrice.quoteKind !== 'user-estimate').length
   return (
-    <section id={`family-${f.id}`} aria-labelledby={`family-${f.id}-title`} className="scroll-mt-24 border-t border-divider-strong pt-5">
+    <section id={`family-${f.id}`} aria-labelledby={`family-${f.id}-title`} className="glass scroll-mt-24 rounded-[28px] px-4 pt-5 pb-2 md:px-6">
       <header className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <PassBadge family={familyId(f.id)} />
-            <h2 id={`family-${f.id}-title`} className="text-[21px] leading-tight font-semibold text-ink md:text-[22px]">
+            <h2 id={`family-${f.id}-title`} className="text-[26px] leading-[1.1] font-light tracking-[-0.03em] text-ink md:text-[30px]">
               {f.name}
             </h2>
           </div>

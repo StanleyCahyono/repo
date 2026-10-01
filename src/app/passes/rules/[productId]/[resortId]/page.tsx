@@ -80,7 +80,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
         }
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start xl:grid-cols-[minmax(0,1fr)_360px]">
-          <Rise index={0} className="min-w-0 rounded-[12px] border border-divider bg-surface p-4 md:p-6">
+          <Rise index={0} className="min-w-0 glass rounded-[24px] p-4 md:p-6">
             <RuleEditor
               productId={view.product.id}
               productName={view.product.name}
@@ -95,7 +95,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
             />
           </Rise>
           <Rise index={1} as="aside" className="flex min-w-0 flex-col gap-4">
-            <section aria-labelledby="current-title" className="rounded-[12px] border border-divider bg-surface p-4">
+            <section aria-labelledby="current-title" className="glass rounded-[24px] p-4">
               <h2 id="current-title" className="mb-2 text-[15px] font-semibold text-ink">
                 On file now
               </h2>
@@ -137,7 +137,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
               ) : null}
             </section>
             {view.pools.length ? (
-              <section aria-labelledby="pools-title" className="rounded-[12px] border border-divider bg-surface p-4">
+              <section aria-labelledby="pools-title" className="glass rounded-[24px] p-4">
                 <h2 id="pools-title" className="mb-2 text-[15px] font-semibold text-ink">
                   Shared pools on this pass
                 </h2>
@@ -151,7 +151,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
                 </ul>
               </section>
             ) : null}
-            <section aria-labelledby="links-title" className="rounded-[12px] border border-divider bg-surface-2 p-4">
+            <section aria-labelledby="links-title" className="rounded-[18px] border border-divider bg-surface-2 p-4">
               <h2 id="links-title" className="mb-2 text-[15px] font-semibold text-ink">
                 Official pages
               </h2>

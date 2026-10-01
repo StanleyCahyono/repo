@@ -17,7 +17,7 @@ export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?
   const undated = items.filter((i) => !i.date)
   const shown = dated.slice(0, limit)
   return (
-    <section aria-labelledby="buyby-title" className="min-w-0 rounded-[12px] border border-divider bg-surface">
+    <section aria-labelledby="buyby-title" className="min-w-0 glass rounded-[24px]">
       <header className="flex items-center justify-between gap-3 border-b border-divider px-4 pt-4 pb-3">
         <h2 id="buyby-title" className="flex items-center gap-2 text-[17px] font-semibold text-ink">
           <CalendarClock aria-hidden className="size-4 text-ink-3" />

@@ -10,7 +10,7 @@ export default function Loading() {
       <div className="flex min-w-0 flex-col gap-4">
         <Skeleton className="h-7 w-72" />
         <Skeleton className="h-4 w-full max-w-[520px]" />
-        <div className="rounded-[12px] border border-divider bg-surface">
+        <div className="glass rounded-[24px]">
           <div className="grid gap-3 border-b border-divider p-4 md:grid-cols-2 md:p-5">
             <Skeleton className="h-11 md:h-10" />
             <Skeleton className="h-11 md:h-10" />
@@ -20,7 +20,7 @@ export default function Loading() {
             </div>
           </div>
           <div className="flex flex-col gap-3 p-4 md:p-5">
-            <Skeleton className="h-24 w-full rounded-[12px]" />
+            <Skeleton className="h-24 w-full rounded-[18px]" />
             <Skeleton className="h-14 w-full" />
             <Skeleton className="h-14 w-full" />
           </div>
@@ -28,8 +28,8 @@ export default function Loading() {
       </div>
       <div className="flex min-w-0 flex-col gap-4">
         <Skeleton className="h-7 w-40" />
-        <Skeleton className="h-64 w-full rounded-[12px]" />
-        <Skeleton className="h-40 w-full rounded-[12px]" />
+        <Skeleton className="h-64 w-full rounded-[18px]" />
+        <Skeleton className="h-40 w-full rounded-[18px]" />
       </div>
     </div>
   )

@@ -1,32 +1,22 @@
-'use client'
 /**
- * Entrance for the first few blocks of a Passes & Costs page: 220 ms fade + 8 px rise (docs/design.md), staggered by
- * `index` (capped at 3). Collapses under reduced motion via the shell's MotionConfig.
+ * Entrance for the blocks of a Passes & Costs page: a 260 ms fade + 10 px rise, staggered by `index` (capped at 4).
+ * Pure CSS (hud.module.css) so server-rendered content never waits invisible for hydration; reduced motion collapses
+ * it (globals.css).
  */
-import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
-import { rise, t } from '@/lib/ui/motion'
+import type { CSSProperties, ReactNode } from 'react'
+import { cn } from '@/lib/ui/cn'
+import css from './hud.module.css'
 
-export function Rise({ index = 0, className, children, as = 'div' }: { index?: number; className?: string; children: ReactNode; as?: 'div' | 'li' | 'section' | 'aside' }) {
-  const M = as === 'li' ? motion.li : as === 'section' ? motion.section : as === 'aside' ? motion.aside : motion.div
+export function Rise({ index = 0, className, children, as: Tag = 'div' }: { index?: number; className?: string; children: ReactNode; as?: 'div' | 'li' | 'section' | 'aside' }) {
   return (
-    <M variants={rise} initial="hidden" animate="show" transition={{ ...t.pageIn, delay: Math.min(index, 3) * 0.045 }} className={className}>
+    <Tag className={cn(css.rise, className)} style={{ '--i': Math.min(index, 4) } as CSSProperties}>
       {children}
-    </M>
+    </Tag>
   )
 }
 
-/** A bar that grows from its start once (300–450 ms), e.g. day allowances and cost bars. */
+/** A bar that grows from its start once, e.g. day allowances and cost bars. */
 export function GrowBar({ className, pct, delay = 0 }: { className?: string; pct: number; delay?: number }) {
   const w = Math.max(0, Math.min(100, pct))
-  return (
-    <motion.span
-      aria-hidden
-      className={className}
-      style={{ width: `${w}%`, transformOrigin: 'left center' }}
-      initial={{ scaleX: 0 }}
-      animate={{ scaleX: 1 }}
-      transition={{ ...t.bars, delay }}
-    />
-  )
+  return <span aria-hidden className={cn(css.grow, className)} style={{ width: `${w}%`, animationDelay: `${200 + delay * 1000}ms` }} />
 }

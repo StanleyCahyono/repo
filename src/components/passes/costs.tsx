@@ -104,7 +104,7 @@ function Amount({ l, compact = false }: { l: BasketLine | undefined; compact?: b
   return (
     <span className="font-medium text-ink tnum">
       {formatMoneyRange(shown, l.displayMax ?? l.amountMax)}
-      {!l.display ? <span className="ml-1 text-[11.5px] font-normal text-ink-3">(not converted)</span> : null}
+      {!l.display ? <span className="ml-1 text-[12px] font-normal text-ink-3">(not converted)</span> : null}
     </span>
   )
 }
@@ -128,11 +128,11 @@ function LineCell({ row, l, ctx, align = 'right' }: { row: DayCostRow; l: Basket
     <span className={cn('flex flex-col gap-0.5', align === 'right' ? 'items-end' : 'items-start')}>
       <Amount l={l} compact />
       {mine ? (
-        <LineEstimate row={row} l={l} ctx={ctx} label="your estimate" className="-mx-1 text-[11.5px] font-normal text-ink-2 hover:text-teal" />
+        <LineEstimate row={row} l={l} ctx={ctx} label="your estimate" className="-mx-1 text-[12px] font-normal text-ink-2 hover:text-teal" />
       ) : canAdd ? (
-        <LineEstimate row={row} l={l} ctx={ctx} label="Add estimate" className="-mx-1 text-[11.5px]" />
+        <LineEstimate row={row} l={l} ctx={ctx} label="Add estimate" className="-mx-1 text-[12px]" />
       ) : note ? (
-        <span className={cn('text-[11.5px]', l?.confirmAtSource ? 'text-caution' : 'text-ink-3')}>{note}</span>
+        <span className={cn('text-[12px]', l?.confirmAtSource ? 'text-caution' : 'text-ink-3')}>{note}</span>
       ) : null}
     </span>
   )
@@ -169,7 +169,7 @@ function Total({ row }: { row: DayCostRow }) {
     return (
       <span className="flex flex-col items-end">
         <span className="text-[15px] font-semibold text-ink tnum">{formatMoneyRange(b.total, b.totalMax)}</span>
-        {usesEstimate(row) ? <span className="text-[11.5px] text-ink-3">includes your estimates</span> : null}
+        {usesEstimate(row) ? <span className="text-[12px] text-ink-3">includes your estimates</span> : null}
       </span>
     )
   }
@@ -235,7 +235,7 @@ export function BasketSheet({ row, ctx }: { row: DayCostRow; ctx: EstimateCtx })
                   <td className="py-2.5 text-right whitespace-nowrap">
                     <Amount l={l} />
                     {l.fx && l.amount ? (
-                      <span className="block text-[11.5px] text-ink-3 tnum">
+                      <span className="block text-[12px] text-ink-3 tnum">
                         from {formatMoney(l.amount)} · 1 {l.fx.from} = {Number(l.fx.rate).toFixed(4)} {l.fx.to}
                         {l.fx.rateDate ? ` (${l.fx.rateDate})` : ''}
                       </span>
@@ -340,7 +340,7 @@ function TableHead() {
 
 export function CostsTable({ rows, ctx, currency, caption }: { rows: DayCostRow[]; ctx: EstimateCtx; currency: string; caption?: string }) {
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div className="overflow-hidden glass rounded-[24px]">
       <table className="w-full text-left text-[13.5px]">
         <caption className="sr-only">{caption ?? `Per-person day basket by resort on ${dayLabel(ctx.date, true)}, in ${currency}`}</caption>
         <TableHead />
@@ -379,7 +379,7 @@ export function CostsList({ rows, ctx }: { rows: DayCostRow[]; ctx: EstimateCtx 
   return (
     <ul className="flex flex-col gap-2">
       {rows.map((row) => (
-        <li key={row.resort.id} className="rounded-[12px] border border-divider bg-surface px-4 py-3">
+        <li key={row.resort.id} className="glass rounded-[24px] px-4 py-3">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <Link href={`/resorts/${row.resort.id}`} className="text-[15px] font-medium text-ink hover:text-teal">

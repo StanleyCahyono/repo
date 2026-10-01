@@ -68,7 +68,7 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
       >
         <div className="grid gap-4 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <Rise index={0}>
-            <section aria-labelledby="assumptions-title" className="h-full rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+            <section aria-labelledby="assumptions-title" className="h-full glass rounded-[24px] px-4 py-4 md:px-5">
               <h3 id="assumptions-title" className="mb-3 text-[16px] font-semibold text-ink">
                 Basket assumptions
               </h3>
@@ -76,7 +76,7 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
             </section>
           </Rise>
           <Rise index={1}>
-            <section aria-labelledby="bands-title" className="flex h-full flex-col gap-4 rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+            <section aria-labelledby="bands-title" className="flex h-full flex-col gap-4 glass rounded-[24px] px-4 py-4 md:px-5">
               <h3 id="bands-title" className="text-[16px] font-semibold text-ink">
                 Expense tiers
               </h3>
@@ -109,7 +109,7 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
           </Rise>
         </div>
 
-        <div className="mt-6 mb-4 flex flex-col gap-4 md:flex-row md:flex-wrap md:items-end md:justify-between">
+        <div className="glass mt-6 mb-4 flex flex-col gap-4 rounded-[24px] px-4 py-4 md:flex-row md:flex-wrap md:items-start md:justify-between md:px-5">
           <DateField value={v.date} today={v.today} season={v.season} />
           <ChipFilter
             label="Show"
@@ -140,7 +140,7 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
             <div className="flex flex-col gap-4">
               {lead.length ? <Rows rows={lead} ctx={est} currency={v.currency} /> : null}
               {rest.length ? (
-                <details className="group rounded-[12px] border border-divider bg-surface-2" open={!lead.length}>
+                <details className="group glass rounded-[24px]" open={!lead.length}>
                   <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 select-none">
                     <span>
                       <span className="block text-[15px] font-semibold text-ink">
@@ -157,7 +157,7 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
               ) : null}
             </div>
           ) : (
-            <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-5 text-[14px] text-ink-2">
+            <p className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft p-5 text-[14px] text-ink-2">
               {q.show === 'complete'
                 ? 'No resort has every required price for this date — nothing is guessed. Try “Own gear”, or add your own estimate where a price is missing.'
                 : 'No favourite resorts yet — star resorts in Explore to follow them here.'}

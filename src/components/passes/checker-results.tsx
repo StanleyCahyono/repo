@@ -66,8 +66,9 @@ function ruleSources(r: CheckerResult): SourceItem[] {
 
 // ---------------------------------------------------------------------------
 
-export function CheckerResults({ view }: { view: CheckerView }) {
-  if (view.mode === 'both' && view.result) return <DayByDay r={view.result} from={view.selection.from} to={view.selection.to} />
+/** `hero`: the verdict itself is drawn by the hero card, so the details start with the reasons. */
+export function CheckerResults({ view, hero = false }: { view: CheckerView; hero?: boolean }) {
+  if (view.mode === 'both' && view.result) return <DayByDay r={view.result} from={view.selection.from} to={view.selection.to} hero={hero} />
   if (view.mode === 'pass' && view.byResort) return <WhereItWorks view={view} answers={view.byResort} />
   if (view.mode === 'resort' && view.byProduct) return <WhatWorksHere view={view} answers={view.byProduct} />
   return null
@@ -76,7 +77,7 @@ export function CheckerResults({ view }: { view: CheckerView }) {
 // ---------------------------------------------------------------------------
 // Pass × resort
 
-function DayByDay({ r, from, to }: { r: CheckerResult; from: string; to: string }) {
+function DayByDay({ r, from, to, hero }: { r: CheckerResult; from: string; to: string; hero: boolean }) {
   const single = r.days.length === 1
   const first = r.days[0]?.verdict
   const confirm = r.days.some((d) => d.verdict.confirmAtSource)
@@ -102,7 +103,7 @@ function DayByDay({ r, from, to }: { r: CheckerResult; from: string; to: string 
         <SourceDrawer title="Rule and product sources" label="Sources" compact={false} items={ruleSources(r)} />
       </div>
 
-      {single && first ? <SingleVerdict v={first} rule={r.rule} /> : <RangeVerdict r={r} />}
+      {hero ? single && first ? <Reasons v={first} rule={r.rule} /> : null : single && first ? <SingleVerdict v={first} rule={r.rule} /> : <RangeVerdict r={r} />}
 
       {confirm ? (
         <p className="-mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-ink-3">
@@ -144,7 +145,7 @@ function SingleVerdict({ v, rule }: { v: AccessVerdict; rule: RuleVersionView | 
   const unknown = v.status === 'unknown'
   const allowance = v.pool?.total ?? v.resortCap?.total ?? null
   return (
-    <div className={cn('rounded-[12px] border px-4 py-4 md:px-5', verdictFrame(m.tone, unknown))}>
+    <div className={cn('rounded-[18px] border px-4 py-4 md:px-5', verdictFrame(m.tone, unknown))}>
       <div className="flex items-start gap-3">
         <m.Icon aria-hidden className={cn('mt-1 size-7 shrink-0 md:size-8', TONE_TEXT[m.tone])} strokeWidth={1.8} />
         <div className="min-w-0 flex-1">
@@ -179,6 +180,24 @@ function SingleVerdict({ v, rule }: { v: AccessVerdict; rule: RuleVersionView | 
   )
 }
 
+function Reasons({ v, rule }: { v: AccessVerdict; rule: RuleVersionView | null }) {
+  const reasons = reasonsOf(v, rule)
+  if (!reasons.length) return null
+  return (
+    <div>
+      <h3 className="eyebrow mb-2">Why</h3>
+      <ul className="flex flex-col gap-1.5 text-[14.5px] text-ink">
+        {reasons.map((x, i) => (
+          <li key={i} className={cn('flex gap-2.5', i > 0 && 'text-ink-2')}>
+            <span aria-hidden className="mt-[9px] size-1.5 shrink-0 rotate-45 bg-teal" />
+            <span>{x}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function RangeVerdict({ r }: { r: CheckerResult }) {
   const n = r.days.length
   const counts = new Map<string, { status: AccessVerdict['status']; n: number }>()
@@ -189,7 +208,7 @@ function RangeVerdict({ r }: { r: CheckerResult }) {
   }
   const allUnknown = r.days.every((d) => d.verdict.status === 'unknown')
   return (
-    <div className={cn('rounded-[12px] border px-4 py-4 md:px-5', allUnknown ? 'border-dashed border-divider-strong bg-surface-2' : 'border-divider bg-surface-2')}>
+    <div className={cn('rounded-[18px] border px-4 py-4 md:px-5', allUnknown ? 'border-dashed border-divider-strong bg-surface-2' : 'border-divider bg-surface-2')}>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <p className="flex items-baseline gap-2">
           <span className="font-display text-[40px] leading-none text-ink tnum">
@@ -240,7 +259,7 @@ function DayList({ r }: { r: CheckerResult }) {
   const common = firstCovered ? reasonsOf(firstCovered, r.rule, true) : []
   return (
     <div className="flex flex-col gap-3">
-      <ol className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">
+      <ol className="flex flex-col divide-y divide-divider rounded-[18px] border border-divider bg-surface">
         {r.days.map((d) => {
           const v = d.verdict
           const own = reasonsOf(v, r.rule, true).filter((x) => !common.includes(x))
@@ -346,7 +365,7 @@ function RulePanel({ r, from }: { r: CheckerResult; from: string }) {
     (x): x is string => !!x,
   )
   return (
-    <section aria-labelledby="rule-title" className="min-w-0 rounded-[12px] border border-divider bg-surface p-4 md:p-5">
+    <section aria-labelledby="rule-title" className="min-w-0 rounded-[18px] border border-divider bg-surface p-4 md:p-5">
       <SubHead id="rule-title" aside={rule ? <RuleProvenance rule={rule} /> : null} className="flex-wrap">
         The rule behind this answer
       </SubHead>
@@ -407,7 +426,7 @@ function RulePanel({ r, from }: { r: CheckerResult; from: string }) {
                 <span className="text-ink">{ACCESS_TYPE_LABEL[h.access]}</span>
                 {h.days != null ? <span className="text-ink-2 tnum">· {plural(h.days, 'day')}</span> : null}
                 <span className="text-ink-3">· {h.verificationLabel}</span>
-                {h.id === r.history[0].id ? <span className="rounded-sm bg-glacier px-1.5 text-[11.5px] font-semibold text-teal">current</span> : null}
+                {h.id === r.history[0].id ? <span className="rounded-sm bg-glacier px-1.5 text-[12px] font-semibold text-teal">current</span> : null}
               </li>
             ))}
           </ol>
@@ -421,7 +440,7 @@ function PoolPanel({ pool, resortId }: { pool: PoolView; resortId: string }) {
   const names = pool.members.map((m) => m.name)
   const joined = names.length <= 2 ? names.join(' and ') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
   return (
-    <section aria-labelledby="pool-title" className="min-w-0 rounded-[12px] border border-divider bg-surface p-4 md:p-5">
+    <section aria-labelledby="pool-title" className="min-w-0 rounded-[18px] border border-divider bg-surface p-4 md:p-5">
       <SubHead id="pool-title" aside={<Layers aria-hidden className="size-4 text-ink-3" />}>
         Shared day pool{pool.label ? `: ${pool.label}` : ''}
       </SubHead>
@@ -463,7 +482,7 @@ function ProductNotes({ r }: { r: CheckerResult }) {
   const p = r.product
   if (!p.blackoutsSummary && !p.reservationsSummary && !p.summary) return null
   return (
-    <details className="group rounded-[12px] border border-divider bg-surface-2 px-4 py-3 md:px-5">
+    <details className="group rounded-[18px] border border-divider bg-surface-2 px-4 py-3 md:px-5">
       <summary className="flex cursor-pointer items-center justify-between gap-3 text-[14px] font-semibold text-ink select-none">
         <span>About {p.name} (all resorts)</span>
         <span className="text-[12.5px] font-medium text-teal group-open:hidden">Show</span>
@@ -541,7 +560,7 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
         groups.map((g) => (
           <section key={g.id} aria-label={g.title}>
             <h3 className="eyebrow mb-2">{g.title}</h3>
-            <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">
+            <ul className="flex flex-col divide-y divide-divider rounded-[18px] border border-divider bg-surface">
               {g.items.map((a) => {
                 const l = answerLabel(a)
                 return (
@@ -575,7 +594,7 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
           </section>
         ))
       ) : (
-        <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-4 text-[14px] text-ink-2">
+        <p className="rounded-[20px] border border-dashed border-divider-strong bg-glass-soft p-4 text-[14px] text-ink-2">
           No resort rules are recorded for {opt.name} yet — nowhere is confirmed. Choose a resort to enter the rule from the official page.
         </p>
       )}
@@ -603,7 +622,7 @@ function WhatWorksHere({ view, answers }: { view: CheckerView; answers: ProductA
         groups.map((g) => (
           <section key={g.id} aria-label={g.title}>
             <h3 className="eyebrow mb-2">{g.title}</h3>
-            <ul className="flex flex-col divide-y divide-divider rounded-[12px] border border-divider bg-surface">
+            <ul className="flex flex-col divide-y divide-divider rounded-[18px] border border-divider bg-surface">
               {g.items.map((a) => {
                 const l = answerLabel(a)
                 return (
@@ -633,7 +652,7 @@ function WhatWorksHere({ view, answers }: { view: CheckerView; answers: ProductA
           </section>
         ))
       ) : (
-        <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-4 text-[14px] text-ink-2">
+        <p className="rounded-[20px] border border-dashed border-divider-strong bg-glass-soft p-4 text-[14px] text-ink-2">
           No pass product is recorded for {resort.name} in {view.season.label}. Lift tickets are the only known option — see{' '}
           <Link href="/passes/costs" className="font-medium text-teal hover:underline">
             day costs

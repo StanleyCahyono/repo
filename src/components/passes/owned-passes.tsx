@@ -15,6 +15,7 @@ import { dayLabel, dotJoin, familyId, plural, shortDate } from './format'
 import { checkerHref } from './params'
 import { LogDayButton, RemoveDayButton, RemovePassButton, type ResortChoice } from './pass-forms'
 import { PunchMeter } from './punch-meter'
+import { CountUp } from './count-up'
 import { HolderTag } from './section'
 
 const COST_SOURCE: Record<string, string> = {
@@ -50,7 +51,7 @@ export function OwnedPassCard({
   const inSeason = p.usage.filter((u) => u.inSeason)
   const outOfSeason = p.usage.length - inSeason.length
   return (
-    <article aria-labelledby={`own-${p.ownershipId}`} className="min-w-0 rounded-[12px] border border-divider bg-surface">
+    <article aria-labelledby={`own-${p.ownershipId}`} className="min-w-0 glass rounded-[24px]">
       <header className="flex flex-col gap-1.5 border-b border-divider px-4 pt-4 pb-3">
         <p className="flex flex-wrap items-center gap-2">
           <PassBadge family={familyId(p.familyId)} size="sm" />
@@ -71,7 +72,7 @@ export function OwnedPassCard({
       <div className="flex flex-col gap-4 px-4 py-4">
         <div className="flex items-end justify-between gap-3">
           <p className="flex items-baseline gap-2">
-            <span className="font-display text-[34px] leading-none text-ink tnum">{p.daysUsed}</span>
+            <CountUp value={p.daysUsed} className="text-[40px] leading-none font-light tracking-[-0.03em] text-ink tnum" />
             <span className="text-[13.5px] text-ink-2">{p.daysUsed === 1 ? 'day used' : 'days used'} this season</span>
           </p>
           <Link href={checkerHref({ own: p.ownershipId })} scroll={false} className="inline-flex items-center gap-1 text-[13px] font-medium text-teal hover:underline max-md:min-h-11">

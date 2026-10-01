@@ -12,7 +12,6 @@ import { motion } from 'motion/react'
 import { Calculator, Grid3x3, ReceiptText, Tags, Ticket } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { ScrollRow } from '@/components/ui/scroll-row'
-import { t } from '@/lib/ui/motion'
 
 type TabId = 'mine' | 'products' | 'matrix' | 'costs' | 'compare'
 
@@ -80,8 +79,8 @@ export function PassesTabs({ className }: { className?: string }) {
   }
 
   return (
-    <ScrollRow as="nav" aria-label="Passes & Costs sections" className={cn('-mx-4 px-4 scrollbar-thin md:mx-0 md:px-0', className)}>
-      <ul ref={listRef} className="flex w-max min-w-full items-end gap-1 border-b border-divider">
+    <ScrollRow as="nav" aria-label="Passes & Costs sections" className={cn('-mx-4 px-4 py-2 scrollbar-thin md:mx-0 md:px-0', className)}>
+      <ul ref={listRef} className="glass flex w-max items-center gap-0.5 rounded-full p-[5px]">
         {TABS.map((tab) => {
           const on = tab.id === active
           return (
@@ -91,15 +90,15 @@ export function PassesTabs({ className }: { className?: string }) {
                 onClick={go(tab)}
                 aria-current={on ? 'page' : undefined}
                 className={cn(
-                  'relative flex h-11 items-center gap-2 rounded-t-md px-3 text-[14.5px] font-medium whitespace-nowrap transition-colors duration-150',
-                  on ? 'text-teal' : 'text-ink-2 hover:text-ink',
+                  'relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150 max-md:h-11 lg:px-4',
+                  on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
                 )}
               >
-                <tab.Icon aria-hidden className="size-4 max-sm:hidden" strokeWidth={1.8} />
-                <span className="sm:hidden">{tab.short}</span>
-                <span className="max-sm:hidden">{tab.label}</span>
+                {on ? <motion.span layoutId="passes-tab" transition={{ type: 'spring', stiffness: 520, damping: 40, mass: 0.9 }} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip shadow-[0_6px_16px_-6px_rgb(19_32_44/0.45)]" /> : null}
+                <tab.Icon aria-hidden className="relative size-4 max-sm:hidden" strokeWidth={1.8} />
+                <span className="relative sm:hidden">{tab.short}</span>
+                <span className="relative max-sm:hidden">{tab.label}</span>
               </Link>
-              {on ? <motion.span layoutId="passes-tab" transition={t.select} aria-hidden className="absolute inset-x-2 -bottom-px h-[2px] rounded-full bg-teal" /> : null}
             </li>
           )
         })}

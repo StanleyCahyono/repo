@@ -46,7 +46,7 @@ export function MatrixTable({ date, resorts, rows }: { date: string; resorts: Ma
       role="region"
       aria-label="Access matrix — scroll sideways for more resorts"
       tabIndex={0}
-      className="relative max-h-[min(74vh,780px)] overflow-auto rounded-[12px] border border-divider bg-surface scrollbar-thin"
+      className="relative max-h-[min(74vh,780px)] overflow-auto glass rounded-[24px] scrollbar-thin"
     >
       <table className="border-separate border-spacing-0 text-left text-[13px]">
         <caption className="sr-only">Pass products (rows) by resort (columns): access on the chosen date, from each product’s own rules</caption>
@@ -84,7 +84,7 @@ export function MatrixTable({ date, resorts, rows }: { date: string; resorts: Ma
                 {cells.map((c) => {
                   const resort = resorts[colIndex.get(c.resortId)!]
                   return (
-                    <td key={c.resortId} className={cn('border-b border-divider p-0 align-middle', row.owned && 'bg-surface-2/60')}>
+                    <td key={c.resortId} className={cn('border-b border-divider p-0 align-middle transition-colors duration-150 group-hover/row:bg-glacier/35', row.owned && 'bg-surface-2/60')}>
                       {c.hasRule ? (
                         <Link
                           href={checkerHref({ pass: rowKey(row), resort: c.resortId, from: date })}
@@ -122,7 +122,7 @@ export function MatrixList({ date, resorts, rows }: { date: string; resorts: Mat
         const cells = row.cells.filter((c) => c.hasRule && byId.has(c.resortId))
         return (
           <li key={row.key}>
-            <details open={row.owned} className="group rounded-[12px] border border-divider bg-surface">
+            <details open={row.owned} className="group glass rounded-[24px]">
               <summary className="flex min-h-14 cursor-pointer items-center gap-3 px-4 py-3 select-none">
                 <span className="min-w-0 flex-1">
                   <span className="flex flex-wrap items-center gap-1.5">

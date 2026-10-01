@@ -35,7 +35,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
       >
         <div className="grid gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:items-start">
           <Rise index={0} className="flex min-w-0 flex-col gap-4">
-            <section aria-labelledby="days-title" className="rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+            <section aria-labelledby="days-title" className="glass rounded-[24px] px-4 py-4 md:px-5">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <h3 id="days-title" className="text-[16px] font-semibold text-ink">
                   Planned days <span className="font-normal text-ink-3 tnum">({v.days.length})</span>
@@ -54,7 +54,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
           </Rise>
 
           <Rise index={1} className="flex min-w-0 flex-col gap-4">
-            <div className="flex flex-col gap-4 rounded-[12px] border border-divider bg-surface px-4 py-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:px-5">
+            <div className="flex flex-col gap-4 glass rounded-[24px] px-4 py-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:px-5">
               <ViewSwitch value={q.view} />
               <CurrencySelect value={v.currency} choices={v.currencies} preferred={ctx.prefs.currency.toUpperCase()} />
             </div>
@@ -78,7 +78,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
               {v.result ? (
                 <CompareResults view={v} mode={q.view} />
               ) : (
-                <div className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-5 py-6">
+                <div className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft px-5 py-6">
                   <p className="text-[15px] font-semibold text-ink">No planned days yet</p>
                   <p className="mt-1 max-w-[60ch] text-[14px] text-ink-2">
                     Add the resort-days you expect to ski — or plan them in Trips — and each pass is compared with buying that day’s own ticket. Nothing is

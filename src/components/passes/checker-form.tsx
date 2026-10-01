@@ -13,6 +13,9 @@ import { PendingNote, usePassesNav } from './nav'
 import { saturdayFrom, shiftDate } from './params'
 import { dayLabel } from './format'
 
+const LABEL = 'hud tracking-[0.12em] text-ink-2'
+const FIELD = 'h-[52px] rounded-[16px] border-divider-strong/80 bg-surface pl-3.5 text-[16px] md:h-[52px]'
+
 export function CheckerForm({
   passes,
   resorts,
@@ -65,13 +68,13 @@ export function CheckerForm({
   const isSingle = selection.from === selection.to
 
   return (
-    <form action="/passes" method="get" onSubmit={onSubmit} className="flex flex-col gap-3">
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+    <form action="/passes" method="get" onSubmit={onSubmit} className="flex flex-col gap-4">
+      <div className="grid gap-4">
         <div className="flex min-w-0 flex-col gap-1.5">
-          <label htmlFor={`${id}-pass`} className="text-[13.5px] font-medium text-ink">
+          <label htmlFor={`${id}-pass`} className={LABEL}>
             Pass
           </label>
-          <Select id={`${id}-pass`} name="pick" value={pickValue} onChange={(e) => setPick(e.target.value)}>
+          <Select className={FIELD} id={`${id}-pass`} name="pick" value={pickValue} onChange={(e) => setPick(e.target.value)}>
             <option value="none">{hasProduct ? 'No pass — every product at the resort' : 'Choose a pass…'}</option>
             {mine.length ? (
               <optgroup label="Your passes">
@@ -105,10 +108,10 @@ export function CheckerForm({
           </Select>
         </div>
         <div className="flex min-w-0 flex-col gap-1.5">
-          <label htmlFor={`${id}-resort`} className="text-[13.5px] font-medium text-ink">
+          <label htmlFor={`${id}-resort`} className={LABEL}>
             Resort
           </label>
-          <Select id={`${id}-resort`} name="resort" value={selection.resortId ?? ''} onChange={(e) => navigate({ resort: e.target.value || null })}>
+          <Select className={FIELD} id={`${id}-resort`} name="resort" value={selection.resortId ?? ''} onChange={(e) => navigate({ resort: e.target.value || null })}>
             <option value="">{hasProduct ? 'Any resort — where does it work?' : 'Choose a resort…'}</option>
             {hasProduct ? (
               <>
@@ -154,17 +157,18 @@ export function CheckerForm({
       </div>
 
       <fieldset className="flex min-w-0 flex-col gap-2">
-        <legend className="mb-1.5 flex items-center gap-1.5 text-[13.5px] font-medium text-ink">
-          <CalendarRange aria-hidden className="size-4 text-ink-2" />
+        <legend className={cn(LABEL, 'mb-1.5 flex items-center gap-1.5')}>
+          <CalendarRange aria-hidden className="size-3.5" />
           Dates
-          <span className="font-normal text-ink-3">· {season.label} season, up to 14 days</span>
+          <span className="tracking-[0.06em] text-ink-3 normal-case">· {season.label} season, up to 14 days</span>
         </legend>
         <div className="flex flex-wrap items-end gap-x-3 gap-y-2">
-          <div className="flex w-[176px] flex-col gap-1">
+          <div className="flex min-w-[150px] flex-1 flex-col gap-1">
             <label htmlFor={`${id}-from`} className="text-[12.5px] text-ink-2">
               From
             </label>
             <TextInput
+              className={FIELD}
               id={`${id}-from`}
               name="from"
               type="date"
@@ -178,11 +182,12 @@ export function CheckerForm({
               }}
             />
           </div>
-          <div className="flex w-[176px] flex-col gap-1">
+          <div className="flex min-w-[150px] flex-1 flex-col gap-1">
             <label htmlFor={`${id}-to`} className="text-[12.5px] text-ink-2">
               To <span className="text-ink-3">(optional)</span>
             </label>
             <TextInput
+              className={FIELD}
               id={`${id}-to`}
               name="to"
               type="date"
@@ -196,7 +201,7 @@ export function CheckerForm({
             <button
               type="button"
               onClick={() => setDates(selection.from, null)}
-              className="inline-flex h-11 items-center gap-1.5 rounded-md px-2 text-[13px] font-medium text-teal hover:bg-glacier/60 md:h-10"
+              className="inline-flex h-[52px] items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-teal hover:bg-glacier/60"
             >
               <RotateCcw aria-hidden className="size-3.5" /> Single day
             </button>
@@ -213,8 +218,8 @@ export function CheckerForm({
                 onClick={() => setDates(p.from, p.to)}
                 title={p.to ? `${dayLabel(p.from)} – ${dayLabel(p.to)}` : dayLabel(p.from)}
                 className={cn(
-                  'inline-flex h-9 items-center rounded-full border px-3 text-[13px] font-medium transition-colors duration-150 max-md:h-11',
-                  on ? 'border-teal bg-glacier text-teal' : 'border-divider bg-surface text-ink-2 hover:border-teal hover:text-teal',
+                  'inline-flex h-9 items-center rounded-full border px-3.5 text-[13px] font-medium transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.97] max-md:h-11',
+                  on ? 'border-transparent bg-ink-chip text-on-ink-chip' : 'border-divider-strong/70 bg-glass-strong text-ink-2 hover:-translate-y-px hover:border-teal hover:text-teal',
                 )}
               >
                 {p.label}

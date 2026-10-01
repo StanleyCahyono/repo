@@ -310,7 +310,7 @@ export function RuleEditor({
         </Field>
       </div>
 
-      <fieldset className="flex flex-col gap-3 rounded-[12px] border border-divider bg-surface-2 p-4">
+      <fieldset className="flex flex-col gap-3 rounded-[18px] border border-divider bg-surface-2 p-4">
         <legend className="px-1 text-[14px] font-semibold text-ink">Source</legend>
         <Field label="Link to the official page you read" htmlFor={`${id}-src`} error={errors.sourceUrl} hint="Required — every manual rule keeps its source.">
           <TextInput id={`${id}-src`} type="url" inputMode="url" placeholder="https://" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} aria-invalid={!!errors.sourceUrl} required />

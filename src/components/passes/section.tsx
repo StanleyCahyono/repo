@@ -3,7 +3,7 @@
  * optional mono index, sentence-case h2, one line of context). Server-renderable.
  */
 import type { ReactNode } from 'react'
-import { AlertTriangle } from 'lucide-react'
+import { Diamond } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 
 export function PassesSection({
@@ -29,20 +29,20 @@ export function PassesSection({
   const headingId = `${id}-title`
   return (
     <section id={id} aria-labelledby={headingId} className={cn('min-w-0 scroll-mt-20 md:scroll-mt-8', className)}>
-      <header className={cn('mb-4 md:mb-5', rule && 'border-t border-divider-strong pt-5')}>
+      <header className={cn('mb-4 md:mb-5', rule && 'pt-4 md:pt-6')}>
         <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
           <div className="min-w-0">
             <div className="flex items-baseline gap-3">
               {index != null ? (
-                <span aria-hidden className="font-mono text-[12px] tracking-wider text-ink-3 tnum">
+                <span aria-hidden className="hud text-teal tnum">
                   {String(index).padStart(2, '0')}
                 </span>
               ) : null}
-              <h2 id={headingId} className="text-[21px] leading-tight font-semibold text-ink md:text-[22px]">
+              <h2 id={headingId} className="text-[26px] leading-[1.1] font-light tracking-[-0.03em] text-ink md:text-[30px]">
                 {title}
               </h2>
             </div>
-            {meta ? <div className={cn('mt-1 max-w-[72ch] text-[13.5px] text-ink-2', index != null && 'md:pl-[30px]')}>{meta}</div> : null}
+            {meta ? <div className={cn('mt-1.5 max-w-[72ch] text-[14px] leading-[1.5] text-ink-2', index != null && 'md:pl-[34px]')}>{meta}</div> : null}
           </div>
           {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
         </div>
@@ -59,7 +59,7 @@ export function SubHead({ id, children, aside, className, as: Tag = 'h3' }: { id
       <Tag id={id} className="text-[16px] leading-snug font-semibold text-ink">
         {children}
       </Tag>
-      {aside ? <div className="shrink-0 text-[13px]">{aside}</div> : null}
+      {aside ? <div className="max-w-full min-w-0 shrink-0 text-[13px]">{aside}</div> : null}
     </div>
   )
 }
@@ -67,8 +67,8 @@ export function SubHead({ id, children, aside, className, as: Tag = 'h3' }: { id
 /** "Researched — confirm at source" tag (research-grade or unverified facts). */
 export function ConfirmTag({ text = 'Researched — confirm at source', className }: { text?: string; className?: string }) {
   return (
-    <span className={cn('inline-flex items-center gap-1 text-[12px] font-medium text-caution', className)}>
-      <AlertTriangle aria-hidden className="size-3.5 shrink-0" />
+    <span className={cn('inline-flex min-h-6 items-center gap-1.5 rounded-full border border-caution/35 bg-caution-bg/60 px-2 text-[12px] leading-tight font-medium text-caution', className)}>
+      <Diamond aria-hidden className="size-3 shrink-0" strokeWidth={2.2} />
       {text}
     </span>
   )
@@ -76,13 +76,13 @@ export function ConfirmTag({ text = 'Researched — confirm at source', classNam
 
 /** "Manual — you entered" tag for rules typed into the rule editor. */
 export function YouEnteredTag({ className }: { className?: string }) {
-  return <span className={cn('inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[11.5px] font-semibold text-copper', className)}>Manual — you entered</span>
+  return <span className={cn('inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[12px] font-semibold text-copper', className)}>Manual — you entered</span>
 }
 
 /** "Yours" / "Sam's" ownership tag. */
 export function HolderTag({ holder, className }: { holder: string; className?: string }) {
   return (
-    <span className={cn('inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[11.5px] font-semibold whitespace-nowrap text-copper', className)}>
+    <span className={cn('inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[12px] font-semibold whitespace-nowrap text-copper', className)}>
       {holder === 'me' ? 'Your pass' : `${holder}’s pass`}
     </span>
   )

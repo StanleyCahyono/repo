@@ -20,6 +20,7 @@ import { EstimateButton } from './estimate-form'
 import { DAY_TYPE_LABEL, dayLabel, dotJoin, familyId, plural, STATUS_META, TONE_TEXT } from './format'
 import { checkerHref, type CompareView, type ScenarioDayParam } from './params'
 import { GrowBar } from './rise'
+import { MoneyUp } from './count-up'
 import { RemoveAddedDay } from './scenario-editor'
 import { ConfirmTag, HolderTag } from './section'
 
@@ -61,7 +62,7 @@ export function PlannedDays({ view, added }: { view: PassCompareView; added: Sce
   const b = view.result?.baseline
   const unknown = view.days.filter((d) => !d.ticket).length
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div className="overflow-hidden glass rounded-[24px]">
       <table className="w-full text-left text-[13.5px]">
         <caption className="sr-only">Planned resort-days and each day’s own lift-ticket price ({view.currency})</caption>
         <thead className="bg-surface-2 text-[12px] font-semibold tracking-[0.06em] text-ink-2 uppercase">
@@ -146,15 +147,15 @@ function DayRow({ d, view, added }: { d: ScenarioDay; view: PassCompareView; add
             <SourceDrawer title={`${d.resortName}: lift ticket`} className="-mr-1.5" items={[{ label: `Lift ticket for ${dayLabel(d.date, true)}`, value: dotJoin(formatMoney(d.ticket), d.ticketBasis), prov: d.ticketProv }]} />
           ) : null}
         </span>
-        {d.ticket && !shown ? <span className="block text-[11.5px] text-caution">no stored rate to {view.currency}</span> : null}
-        {d.ticket && shown && d.ticket.currency !== shown.currency ? <span className="block text-[11.5px] text-ink-3 tnum">from {formatMoney(d.ticket)}</span> : null}
+        {d.ticket && !shown ? <span className="block text-[12px] text-caution">no stored rate to {view.currency}</span> : null}
+        {d.ticket && shown && d.ticket.currency !== shown.currency ? <span className="block text-[12px] text-ink-3 tnum">from {formatMoney(d.ticket)}</span> : null}
         {est ? (
           <span className="mt-0.5 flex items-center justify-end">
             <EstimateButton
               {...estimateProps}
               existing={est}
               label="Your estimate"
-              className="-mr-1 text-[11.5px] font-normal text-ink-2 hover:text-teal"
+              className="-mr-1 text-[12px] font-normal text-ink-2 hover:text-teal"
               context={
                 <>
                   Prices {d.resortName} on {dayLabel(d.date, true)} — and on every {est.dayType === 'any' ? 'day' : `${DAY_TYPE_LABEL[est.dayType].toLowerCase().replace(/s$/, '')} day`} this
@@ -164,12 +165,12 @@ function DayRow({ d, view, added }: { d: ScenarioDay; view: PassCompareView; add
             />
           </span>
         ) : d.ticketBasis ? (
-          <span className={cn('ml-auto block max-w-[34ch] text-[11.5px] leading-snug', d.ticketConfirmAtSource ? 'text-caution' : 'text-ink-3')}>{d.ticketBasis}</span>
+          <span className={cn('ml-auto block max-w-[34ch] text-[12px] leading-snug', d.ticketConfirmAtSource ? 'text-caution' : 'text-ink-3')}>{d.ticketBasis}</span>
         ) : (
           <span className="mt-0.5 flex justify-end">
             <EstimateButton
               {...estimateProps}
-              className="-mr-1 text-[11.5px]"
+              className="-mr-1 text-[12px]"
               context={
                 <>
                   No {d.dayType} lift ticket price for the {view.season.label} season is on file for {d.resortName}, so {dayLabel(d.date, true)} can’t be totalled.
@@ -315,7 +316,7 @@ function CandidateRow({
         </p>
       </div>
       <div className="flex flex-col items-start gap-1 md:items-end md:text-right">
-        {total ? <p className="font-display text-[30px] leading-none text-ink tnum">{formatMoney(total)}</p> : <p className="text-[15px] font-medium text-caution">Can’t total</p>}
+        {total ? <p className="text-[32px] leading-none font-light tracking-[-0.03em] text-ink tnum"><MoneyUp amountMinor={total.amountMinor} currency={total.currency} /></p> : <p className="text-[15px] font-medium text-caution">Can’t total</p>}
         <p className="text-[12.5px] text-ink-3 tnum">
           {dotJoin(
             c.owned && mode === 'incremental' ? (c.alreadyPaid ? `+ ${formatMoney(c.alreadyPaid)} already paid` : 'price paid not recorded') : c.passPrice ? `pass ${formatMoney(c.passPrice)}` : 'pass price not recorded',
@@ -392,13 +393,13 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
 
   return (
     <div className="flex flex-col gap-5">
-      <section aria-labelledby="baseline-title" className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5">
+      <section aria-labelledby="baseline-title" className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 glass rounded-[24px] px-4 py-4 md:px-5">
         <div>
           <h3 id="baseline-title" className="text-[13.5px] font-medium text-ink-2">
             Tickets only · {plural(planned, 'planned day')}
           </h3>
           {baseline ? (
-            <p className="mt-1 font-display text-[36px] leading-none text-ink tnum">{formatMoney(baseline)}</p>
+            <p className="mt-1 text-[40px] leading-none font-light tracking-[-0.03em] text-ink tnum"><MoneyUp amountMinor={baseline.amountMinor} currency={baseline.currency} /></p>
           ) : (
             <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
               <span className="font-display text-[28px] leading-none text-caution">Incomplete</span>
@@ -412,7 +413,7 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
       </section>
 
       {ranked.length ? (
-        <section aria-labelledby="ranked-title" className="rounded-[12px] border border-divider bg-surface">
+        <section aria-labelledby="ranked-title" className="glass rounded-[24px]">
           <header className="flex flex-col gap-2 border-b border-divider px-4 py-3 md:px-5">
             <h3 id="ranked-title" className="text-[16px] font-semibold text-ink">
               {mode === 'season' ? 'Season total' : 'What the plan still costs'} · {plural(ranked.length, 'option')}
@@ -432,14 +433,14 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
           </ol>
         </section>
       ) : (
-        <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-4 text-[13.5px] text-ink-2 md:px-5">
+        <p className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft px-4 py-4 text-[13.5px] text-ink-2 md:px-5">
           No option can be totalled yet: every product is missing its price or a ticket price for a day it doesn’t cover. Add your own estimates below and in Planned days —
           nothing is filled in for you.
         </p>
       )}
 
       {partial.length ? (
-        <section aria-labelledby="partial-title" className="rounded-[12px] border border-divider bg-surface">
+        <section aria-labelledby="partial-title" className="glass rounded-[24px]">
           <header className="border-b border-divider px-4 py-3 md:px-5">
             <h3 id="partial-title" className="text-[15px] font-semibold text-ink">
               Can’t total yet · {plural(partial.length, 'product')}
@@ -455,7 +456,7 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
       ) : null}
 
       {noAccess.length ? (
-        <details className="group rounded-[12px] border border-divider bg-surface">
+        <details className="group glass rounded-[24px]">
           <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 select-none md:px-5">
             <span>
               <span className="block text-[15px] font-semibold text-ink">No confirmed access on your planned days · {plural(noAccess.length, 'product')}</span>

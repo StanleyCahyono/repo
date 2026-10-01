@@ -1,0 +1,141 @@
+/*
+ * Passes & Costs HUD motion. CSS keyframes (not JS) so server-rendered blocks never sit invisible waiting for
+ * hydration. Opacity/transform only; globals.css collapses every animation under prefers-reduced-motion, and the
+ * rules at the bottom remove the decorative ones outright.
+ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 260ms cubic-bezier(0.22, 0.8, 0.26, 1) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+
+/* Specular sheen that crosses the verdict card once when a new answer lands. */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) skewX(-12deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(220%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.sheen {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, color-mix(in srgb, currentColor 16%, transparent) 50%, transparent);
+  animation: sheen 1100ms cubic-bezier(0.3, 0.6, 0.2, 1) 180ms both;
+}
+
+/* Scan line while the next answer loads. */
+@keyframes scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+.scan {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, currentColor 14%, transparent));
+  animation: scan 1200ms linear infinite;
+}
+
+/* Punch card squares fill one after another. */
+@keyframes punch {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.punch {
+  animation: punch 360ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  animation-delay: calc(120ms + var(--i, 0) * 45ms);
+}
+
+/* Bars that grow from their start once. */
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.grow {
+  transform-origin: left center;
+  animation: grow 700ms cubic-bezier(0.22, 0.8, 0.26, 1) 200ms both;
+}
+
+/* Blinking HUD beacon dot. */
+@keyframes blink {
+  0%,
+  60%,
+  100% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.25;
+  }
+}
+
+.blink {
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+/* Hover lift for cards (transform only). */
+.lift {
+  transition:
+    transform 220ms cubic-bezier(0.3, 1.4, 0.5, 1),
+    box-shadow 220ms ease;
+}
+.lift:hover,
+.lift:focus-within {
+  transform: translateY(-4px);
+  box-shadow: inset 0 1px 0 var(--glass-shine), var(--glass-shadow-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen,
+  .scan {
+    display: none;
+  }
+  .blink {
+    animation: none;
+  }
+  .lift:hover,
+  .lift:focus-within {
+    transform: none;
+  }
+}

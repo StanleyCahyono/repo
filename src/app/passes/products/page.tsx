@@ -34,7 +34,7 @@ export default async function ProductsPage() {
       }
     >
       <Rise index={0}>
-        <div className="mb-6 flex flex-col gap-4 rounded-[12px] border border-divider bg-surface px-4 py-4 md:px-5 xl:flex-row xl:items-center xl:justify-between">
+        <div className="mb-6 flex flex-col gap-4 glass rounded-[24px] px-4 py-4 md:px-5 xl:flex-row xl:items-center xl:justify-between">
           <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4 xl:flex xl:gap-8">
             {(
               [

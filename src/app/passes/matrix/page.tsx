@@ -48,7 +48,7 @@ export default async function MatrixPage({ searchParams }: { searchParams: Promi
         }
       >
         <Rise index={0}>
-          <div className="mb-4 flex flex-col gap-4 rounded-[12px] border border-divider bg-surface px-4 py-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:px-5">
+          <div className="mb-4 flex flex-col gap-4 glass rounded-[24px] px-4 py-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:px-5">
             <DateField value={date} today={ctx.today} season={season} label="Access on" />
             <ChipFilter
               label="Family"
@@ -87,7 +87,7 @@ export default async function MatrixPage({ searchParams }: { searchParams: Promi
               </div>
             </>
           ) : (
-            <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 p-5 text-[14px] text-ink-2">
+            <p className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft p-5 text-[14px] text-ink-2">
               No access rules are recorded for these products yet — nothing is confirmed. Open a product in the checker to enter a rule from its official page.
             </p>
           )}
