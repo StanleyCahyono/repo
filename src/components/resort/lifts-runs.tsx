@@ -1,5 +1,6 @@
 /**
- * 03 Lifts & runs — every lift and run OpenStreetMap contributors have mapped at the resort: lifts grouped by type
+ * 03 Lifts & runs — the story view (terrain map, lifts by type, runs by sign: lifts-explorer.tsx) over the full list in a
+ * drawer: every lift and run OpenStreetMap contributors have mapped at the resort: lifts grouped by type
  * (name, length, hourly capacity), runs grouped by difficulty in the resort's own signs (text + shape) with counts and
  * lists. Community-mapped data: labelled as such, with attribution, never live status — whether a lift runs today is
  * only on the resort's own site, which this section links to once.
@@ -9,16 +10,19 @@
  */
 import { ExternalLink, Info, Map as MapIcon } from 'lucide-react'
 import { Disclosure } from '@/components/ui/disclosure'
-import type { LiftsRunsView } from '@/lib/data/lifts'
+import type { TerrainInfo } from '@/lib/db/schema'
+import type { LiftsRunsView, MappedGeometry } from '@/lib/data/lifts'
 import type { ResortDetail } from '@/lib/data/resort-detail'
 import { groomingText, liftKindText, liftName, OSM_COPYRIGHT_URL, runName, type LiftGroup, type RunGroup } from '@/lib/domain/lifts'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { mToFt } from '@/lib/domain/units'
 import { cn } from '@/lib/ui/cn'
+import { CountUp } from './count-up'
+import { LiftsExplorer, type LiftsExplorerProps, type RunChipGroup, type SignLegend } from './lifts-explorer'
 import { PisteSymbol } from './piste-symbol'
 import { RefreshNow } from './refresh-now'
-import { ResortSection, Src, SubHead } from './section'
-import { ago, plural, shortDate, src, type PageView } from './format'
+import { DetailDrawer, ResortSection, Src, SubHead } from './section'
+import { ago, confirmText, hostOf, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
 
 /** Lists open by default up to this many entries; larger areas show their counts and open on demand. */
 const OPEN_UP_TO = 40
@@ -38,35 +42,159 @@ const capacityText = (n: number) => `${n.toLocaleString('en-US')}/h`
 const linkClass =
   'inline-flex min-h-11 items-center gap-2 rounded-md border border-divider-strong bg-surface px-3.5 text-[14px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal md:min-h-9'
 
-export function LiftsSection({ d, lifts, v }: { d: ResortDetail; lifts: LiftsRunsView; v: PageView }) {
+const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' })
+const NAMES_SHOWN = 28
+
+/** Run chips grouped by sign, from the bundled lines (selectable on the map) or the stored list (names only). */
+function runChips(lifts: LiftsRunsView, geometry: MappedGeometry | null): RunChipGroup[] {
+  if (geometry) {
+    const groups = new Map<string, { sign: SignLegend; names: Map<string, string[]>; unnamed: number; order: number }>()
+    const order = new Map(lifts.legend.map((s, i) => [s.key, i]))
+    for (const l of geometry.lines) {
+      if (l.kind !== 'run' || !l.sign) continue
+      let g = groups.get(l.sign.key)
+      if (!g) groups.set(l.sign.key, (g = { sign: { ...l.sign, label: l.label }, names: new Map(), unnamed: 0, order: order.get(l.sign.key) ?? 99 }))
+      if (l.name) g.names.set(l.name, [...(g.names.get(l.name) ?? []), l.id])
+      else g.unnamed++
+    }
+    return [...groups.values()]
+      .sort((a, b) => a.order - b.order)
+      .map((g) => {
+        const names = [...g.names.entries()].sort((a, b) => collator.compare(a[0], b[0])).map(([name, ids]) => ({ name, ids }))
+        return { sign: g.sign, count: plural(names.length, 'run'), names, more: 0, unnamed: g.unnamed }
+      })
+  }
+  const l = lifts.loaded
+  if (!l) return []
+  return l.runGroups.map((g) => ({
+    sign: { key: g.style.key, label: g.style.label, shape: g.style.shape, tone: g.style.tone, meaning: g.style.meaning },
+    count: plural(g.runs.length, 'run'),
+    names: g.runs.slice(0, NAMES_SHOWN).map((r) => ({ name: runName(r), ids: [] })),
+    more: Math.max(0, g.runs.length - NAMES_SHOWN),
+    unnamed: g.unnamed?.segments ?? 0,
+  }))
+}
+
+const LIFT_TYPE_BARS: { key: keyof NonNullable<TerrainInfo['liftsByType']>; label: string }[] = [
+  { key: 'gondolas', label: 'Gondolas' },
+  { key: 'cableCars', label: 'Cable cars' },
+  { key: 'chairlifts', label: 'Chairs' },
+  { key: 'surfaceLifts', label: 'Surface' },
+  { key: 'other', label: 'Other' },
+]
+
+function liftBars(terrain: TerrainInfo | null, lifts: LiftsRunsView, geometry: MappedGeometry | null): LiftsExplorerProps['liftBars'] {
+  const cap = terrain?.liftCapacityPerHour ?? null
+  const aside = cap !== null ? `${cap.toLocaleString('en-US')} skiers/h` : null
+  const byType = terrain?.liftsByType ?? null
+  const bars = byType ? LIFT_TYPE_BARS.map((b) => ({ label: b.label, n: byType[b.key] ?? 0 })).filter((b) => b.n > 0) : []
+  if (bars.length) return { title: 'Lifts by type', aside, bars, note: needsCheck(terrain?.prov) ? `${confirmText(terrain?.prov)}${terrain?.season ? ` · ${seasonText(terrain.season)} figures` : ''}` : null }
+  if (lifts.loaded?.liftGroups.length) {
+    return { title: 'Lifts by type · OpenStreetMap', aside, bars: lifts.loaded.liftGroups.map((g) => ({ label: g.label.replace(' and trams', ''), n: g.lifts.length })), note: 'As mapped by OpenStreetMap contributors.' }
+  }
+  if (geometry) {
+    const m = new Map<string, number>()
+    for (const l of geometry.lines) if (l.kind === 'lift') m.set(l.label.replace(/^\d+-seat /, ''), (m.get(l.label.replace(/^\d+-seat /, '')) ?? 0) + 1)
+    if (m.size) return { title: 'Lifts by type · OpenStreetMap', aside, bars: [...m.entries()].map(([label, n]) => ({ label: label.charAt(0).toUpperCase() + label.slice(1), n })), note: 'As mapped by OpenStreetMap contributors.' }
+  }
+  return aside ? { title: 'Lifts by type', aside, bars: [], note: null } : null
+}
+
+/** "55 trails. 8 lifts. 8,225 skiers an hour." — counted up as the headline enters. */
+function headline(terrain: TerrainInfo | null, u: UnitPrefs) {
+  const parts: string[] = []
+  if (terrain?.trails != null) parts.push(`${terrain.trails.toLocaleString('en-US')} ${terrain.trails === 1 ? 'trail' : 'trails'}.`)
+  if (terrain?.lifts != null) parts.push(`${terrain.lifts.toLocaleString('en-US')} ${terrain.lifts === 1 ? 'lift' : 'lifts'}.`)
+  if (terrain?.pisteKm != null) parts.push(`${units(u).dist(terrain.pisteKm)} of pistes.`)
+  if (terrain?.liftCapacityPerHour != null && parts.length < 3) parts.push(`${terrain.liftCapacityPerHour.toLocaleString('en-US')} skiers an hour.`)
+  if (!parts.length) return 'Lifts and runs, as mapped.'
+  return (
+    <>
+      {parts.slice(0, 3).map((t, i) => (
+        <span key={t}>
+          {i ? ' ' : ''}
+          <CountUp text={t} delay={i * 0.12} />
+        </span>
+      ))}
+    </>
+  )
+}
+
+export function LiftsSection({ d, lifts, v, terrain, geometry }: { d: ResortDetail; lifts: LiftsRunsView; v: PageView; terrain: TerrainInfo | null; geometry: MappedGeometry | null }) {
   const liftStatusUrl = d.links.find((l) => l.key === 'liftStatus')?.url ?? null
   const snowReportUrl = d.links.find((l) => l.key === 'snowReport')?.url ?? null
   const loaded = lifts.loaded
-  const meta = loaded
-    ? `${plural(loaded.totals.lifts, 'lift')} · ${plural(loaded.totals.runs, 'named run')} · OpenStreetMap`
-    : 'OpenStreetMap — community-mapped'
+  const r = d.summary
+  const used = new Set(geometry ? geometry.lines.flatMap((l) => (l.sign ? [l.sign.key] : [])) : (loaded?.runGroups.map((g) => g.style.key) ?? []))
+  const legend: SignLegend[] = (used.size ? lifts.legend.filter((s) => used.has(s.key)) : lifts.legend.filter((s) => s.key !== 'unknown' && s.order < 5)).map((s) => ({
+    key: s.key,
+    label: s.label,
+    shape: s.shape,
+    tone: s.tone,
+    meaning: s.meaning,
+  }))
+  const groups = runChips(lifts, geometry)
+  const runCount = geometry ? new Set(geometry.lines.filter((l) => l.kind === 'run' && l.name).map((l) => l.name)).size : (loaded?.totals.runs ?? null)
+  const liftCount = geometry ? geometry.lines.filter((l) => l.kind === 'lift').length : (loaded?.totals.lifts ?? null)
+  const statusText =
+    runCount !== null && liftCount !== null
+      ? `${runCount} runs · ${liftCount} lifts`
+      : lifts.demo
+        ? 'Not in demo'
+        : lifts.connector.state === 'disabled'
+          ? 'Connector off'
+          : lifts.lastAttempt?.outcome === 'failed'
+            ? 'Last load failed'
+            : 'Not loaded yet'
+  const explorer: LiftsExplorerProps = {
+    name: r.shortName,
+    center: { lat: r.lat, lon: r.lon },
+    lines: geometry?.lines ?? null,
+    bbox: geometry?.bbox ?? null,
+    linesSource: geometry ? `OpenStreetMap snapshot · ${shortDate(geometry.fetchedAt.slice(0, 10))} · built in` : null,
+    legend,
+    liftBars: liftBars(terrain, lifts, geometry),
+    runs: {
+      source: 'Runs · from OpenStreetMap',
+      status: statusText,
+      groups,
+      empty: lifts.demo
+        ? 'OpenStreetMap is never loaded into demo data.'
+        : `Run names load from OpenStreetMap when online${terrain?.trails != null ? `; the catalog counts ${plural(terrain.trails, 'trail')}` : ''}. The full list and its load button are in the drawer below.`,
+    },
+    liveStatus: liftStatusUrl
+      ? { url: liftStatusUrl, label: `Live lift status on ${hostOf(liftStatusUrl) ?? 'the resort site'}` }
+      : snowReportUrl
+        ? { url: snowReportUrl, label: `Official snow report on ${hostOf(snowReportUrl) ?? 'the resort site'}` }
+        : null,
+    units: v.units.distance === 'mi' ? 'imperial' : 'metric',
+  }
+  const meta = loaded ? `${plural(loaded.totals.lifts, 'lift')} · ${plural(loaded.totals.runs, 'named run')} mapped` : geometry ? 'OpenStreetMap, built in' : 'OpenStreetMap'
   return (
-    <ResortSection
-      id="lifts"
-      index={3}
-      title="Lifts & runs"
-      meta={meta}
-      lead="What OpenStreetMap contributors have mapped here, grouped the way the resort signs its runs. A map of what exists, not of what is running today."
-    >
-      <div className="flex flex-col gap-6">
-        <LiveStatusNote liftStatusUrl={liftStatusUrl} snowReportUrl={snowReportUrl} />
-        {lifts.demo ? (
-          <EmptyPanel title="Not loaded in demo mode">OpenStreetMap is never loaded into demo data. Switch to your live data to load this resort’s lifts and runs.</EmptyPanel>
-        ) : lifts.connector.state === 'disabled' ? (
-          <EmptyPanel title="The OpenStreetMap connector is off">
-            It is turned off on this installation, so lifts and runs are not loaded. Sources &amp; Sync lists every connector.
-          </EmptyPanel>
-        ) : !loaded ? (
-          <NotLoaded lifts={lifts} v={v} />
-        ) : (
-          <Loaded lifts={lifts} v={v} />
-        )}
-      </div>
+    <ResortSection id="lifts" index={3} title="Lifts and runs" meta={meta} headline={headline(terrain, v.units)}>
+      <LiftsExplorer {...explorer} />
+      <p className="mt-4 max-w-[110ch] text-[12.5px] text-ink-2">
+        {geometry
+          ? `Runs and lifts are built into Piste from an OpenStreetMap snapshot (${shortDate(geometry.fetchedAt.slice(0, 10))}), so the map works offline. `
+          : 'Piste has no bundled lines for this area, so only the 3D terrain is drawn (online). '}
+        Map data © OpenStreetMap contributors — community-mapped, tagging may be incomplete, and never live lift or run status.
+      </p>
+      <DetailDrawer summary="Every mapped lift and run" hint={loaded ? `${lifts.conventionLabel} · lengths and capacities` : 'Load the full list from OpenStreetMap'}>
+        <div className="flex flex-col gap-6">
+          <LiveStatusNote liftStatusUrl={liftStatusUrl} snowReportUrl={snowReportUrl} />
+          {lifts.demo ? (
+            <EmptyPanel title="Not loaded in demo mode">OpenStreetMap is never loaded into demo data. Switch to your live data to load this resort’s lifts and runs.</EmptyPanel>
+          ) : lifts.connector.state === 'disabled' ? (
+            <EmptyPanel title="The OpenStreetMap connector is off">
+              It is turned off on this installation, so lifts and runs are not loaded. Sources &amp; Sync lists every connector.
+            </EmptyPanel>
+          ) : !loaded ? (
+            <NotLoaded lifts={lifts} v={v} />
+          ) : (
+            <Loaded lifts={lifts} v={v} />
+          )}
+        </div>
+      </DetailDrawer>
     </ResortSection>
   )
 }

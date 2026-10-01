@@ -1,6 +1,10 @@
 /**
  * Resort detail — /resorts/[id]?date=YYYY-MM-DD&mode=learning|all-mountain|powder
  *
+ * A scroll story (Glass HUD): a sticky hero with the mountain, then chapters — overview, conditions, lifts & runs,
+ * plan a visit, getting there, stay, links — each a headline and a few glass cards, with the dense sourced detail in
+ * a drawer. A floating chapter pill tracks the chapter in view.
+ *
  * One planning date (resort-local; defaults to the resort's own today) and one scoring mode drive every
  * date-specific fact on the page (score, weather, pass access, hours, day basket); both live in the URL so a shared
  * link, the back button and the comparison all reproduce the same view. Unknown ids 404 (checked in the layout, so
@@ -9,20 +13,20 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ConditionsSection } from '@/components/resort/conditions'
-import type { PageView } from '@/components/resort/format'
+import { SECTIONS, type PageView } from '@/components/resort/format'
 import { LiftsSection } from '@/components/resort/lifts-runs'
 import { LinksSection } from '@/components/resort/links-shelf'
+import { ResortHero } from '@/components/resort/hero'
+import { heroData } from '@/components/resort/hero-data'
 import { MobileActionBar } from '@/components/resort/mobile-bar'
 import { OverviewSection } from '@/components/resort/overview'
 import { PlanSection } from '@/components/resort/plan'
 import type { ResortActionsProps } from '@/components/resort/resort-actions'
-import { ResortHeader } from '@/components/resort/resort-header'
-import { RevealNoScript } from '@/components/resort/reveal'
 import { SectionNav } from '@/components/resort/section-nav'
 import { StaySection } from '@/components/resort/stay'
 import { TravelSection } from '@/components/resort/travel'
 import { getCtx } from '@/lib/context'
-import { getLiftsRuns } from '@/lib/data/lifts'
+import { bundledGeometry, getLiftsRuns } from '@/lib/data/lifts'
 import { getResortDetail } from '@/lib/data/resort-detail'
 import { getResortName, getResortPageExtras } from '@/lib/data/resort-page'
 import { daysBetween, isLocalDate, localDateOf } from '@/lib/domain/time'
@@ -110,13 +114,12 @@ export default async function ResortPage({ params, searchParams }: { params: Par
 
   return (
     <>
-      <RevealNoScript />
-      <ResortHeader r={r} zoneAbbrev={view.zone} unitPrefs={ctx.prefs.units} actions={actions} />
-      <SectionNav date={date} today={resortToday} actions={actions} />
-      <div className="mt-8 flex flex-col gap-14 md:mt-10 md:gap-16">
+      <SectionNav date={date} today={resortToday} actions={actions} name={r.shortName} />
+      <ResortHero hero={heroData(r, ctx.prefs.units, SECTIONS.length)} actions={actions} />
+      <div className="mt-14 flex flex-col gap-24 md:mt-20 md:gap-32">
         <OverviewSection d={detail} x={extras} v={view} ability={ctx.prefs.ability} />
         <ConditionsSection d={detail} x={extras} v={view} preferredMode={ctx.prefs.scoringMode} />
-        <LiftsSection d={detail} lifts={lifts} v={view} />
+        <LiftsSection d={detail} lifts={lifts} v={view} terrain={extras.catalog.terrain} geometry={bundledGeometry(r.id, r.country)} />
         <PlanSection d={detail} v={view} />
         <TravelSection d={detail} x={extras} v={view} />
         <StaySection d={detail} x={extras} v={view} />

@@ -1,5 +1,6 @@
 /**
- * 04 Plan a visit — published hours by activity (with season, timezone and "published hours ≠ every lift
+ * 04 Plan a visit — the story (lift ticket for the date, your passes, the day cost and today's hours) over a drawer
+ * with the detail: published hours by activity (with season, timezone and "published hours ≠ every lift
  * running"), exact pass access for the planning date (my products first; unknown rules say so and are never
  * permission), price snapshots with season / quote kind / source, the per-person day basket with its expense tier
  * or "Incomplete estimate", and lessons, rentals, parking and road/transit links.
@@ -15,26 +16,136 @@ import { describeBands, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/costs
 import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL } from '@/lib/domain/passes'
 import { PASS_FAMILIES, type PassFamilyId } from '@/lib/domain/types'
-import { ConfirmTag, ResortSection, Src, SubHead, TriChip } from './section'
+import { CountUp } from './count-up'
+import { ConfirmTag, DetailDrawer, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
 import { accessTone, ACTIVITY_LABEL, clock, confirmText, CORE_ACTIVITIES, dayLabel, dayLabelYear, dotJoin, hostOf, plural, seasonText, shortDate, src, TRANSFER_TYPE_LABEL, weekdaysText, type PageView } from './format'
 
 const DAY_TYPE_TEXT: Record<string, string> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
 
+function planHeadline(d: ResortDetail, v: PageView): string {
+  const lift = d.basket.lines.find((l) => l.key === 'lift')
+  if (lift?.kind === 'pass-covered') return `Your pass covers the lift on ${dayLabel(v.date)}.`
+  const shown = lift ? (lift.display ?? lift.amount) : null
+  if (lift && shown) return `Day ticket ${formatMoneyRange(shown, lift.displayMax ?? lift.amountMax)}.`
+  return `Ticket prices for ${dayLabel(v.date)} are not on file.`
+}
+
+const MY_PASS_TONE = { covered: 'text-positive', 'not-covered': 'text-critical', unconfirmed: 'text-caution', 'no-pass': 'text-ink-2' } as const
+
+function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
+  const lift = d.basket.lines.find((l) => l.key === 'lift') ?? null
+  const shown = lift ? (lift.display ?? lift.amount) : null
+  const b = d.basket
+  const incomplete = b.tier.tier === 'incomplete'
+  const my = d.summary.myPass
+  const lifts = d.hours.forDate.filter((f) => f.activity === 'lifts')
+  const night = d.hours.forDate.filter((f) => f.activity === 'night-skiing')
+  const hoursText = (fs: typeof lifts) => fs.map((f) => (f.closed ? 'Closed' : f.opens || f.closes ? `${clock(f.opens) ?? '?'}–${clock(f.closes) ?? '?'}` : 'Times not stated')).join(', ')
+  const products = d.passAccess
+  const others = d.prices.tickets.filter((p) => !p.expired || p.seasonId).slice(0, 3)
+  return (
+    <div className="grid gap-[18px] md:grid-cols-2 xl:grid-cols-3">
+      <GlassCard title="Lift ticket" aside={dayLabel(v.date)}>
+        {lift?.kind === 'pass-covered' ? (
+          <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-positive">Covered</p>
+        ) : shown ? (
+          <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-ink tnum">
+            <CountUp text={formatMoneyRange(shown, lift?.displayMax ?? lift?.amountMax ?? null) ?? "—"} />
+          </p>
+        ) : (
+          <p className="m-0 text-[30px] leading-none font-light text-ink-3">Not on file</p>
+        )}
+        <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">
+          {lift ? dotJoin(lift.kind ? LINE_KIND_LABEL[lift.kind] : 'Price unknown', lift.source, lift.note) : 'No ticket price recorded.'}
+        </p>
+        {!shown && lift?.kind !== 'pass-covered' && others.length ? (
+          <ul className="m-0 flex list-none flex-col gap-1.5 border-t border-divider p-0 pt-3 text-[13px]">
+            {others.map((p) => (
+              <li key={p.id} className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0 text-ink-2">
+                  {p.item}
+                  {p.seasonId ? <span className="text-ink-2"> · {seasonText(p.seasonId)}</span> : null}
+                </span>
+                <span className="shrink-0 font-medium text-ink tnum">{formatMoneyRange(p.amount, p.amountMax)}</span>
+              </li>
+            ))}
+            <li className="text-[12px] text-ink-2">Other dates or seasons on file — not the price for {dayLabel(v.date)}.</li>
+          </ul>
+        ) : null}
+        {lift?.confirmAtSource ? <ConfirmTag text="Researched — confirm at source" className="self-start" /> : null}
+        <Link href={`/passes?resort=${v.id}&from=${v.date}`} className="mt-auto text-[13px] font-semibold text-teal hover:underline">
+          Check your pass for a date →
+        </Link>
+      </GlassCard>
+      <GlassCard title="Passes" aside={products.length ? `${products.length} on file` : null}>
+        <p className={cn('m-0 text-[17px] leading-snug font-medium', MY_PASS_TONE[my.status])}>{my.status === 'no-pass' ? 'No pass recorded' : my.headline}</p>
+        {products.length ? (
+          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+            {products.slice(0, 6).map((p) => {
+              const fam = ((PASS_FAMILIES as readonly string[]).includes(p.familyId) ? p.familyId : 'regional') as PassFamilyId
+              return (
+                <li key={p.productId} className="flex items-center gap-1.5 rounded-full bg-[color-mix(in_srgb,var(--ink)_5%,transparent)] py-1 pr-2.5 pl-1 text-[12.5px] text-ink">
+                  <PassBadge family={fam} size="sm" />
+                  <span className="truncate">{ACCESS_STATUS_LABEL[p.verdict.status]}</span>
+                </li>
+              )
+            })}
+          </ul>
+        ) : (
+          <p className="m-0 text-[13.5px] text-ink-2">No pass products recorded for this resort.</p>
+        )}
+        <p className="m-0 mt-auto text-[12.5px] text-ink-2">Exact products, not family badges. Unknown access is never permission.</p>
+      </GlassCard>
+      <GlassCard title="Day cost per person" aside={b.holidayName ?? DAY_TYPE_TEXT[b.dayType]} className="md:col-span-2 xl:col-span-1">
+        <div className="flex items-end justify-between gap-3">
+          {incomplete ? (
+            <p className="m-0 text-[28px] leading-none font-light text-caution">Incomplete estimate</p>
+          ) : (
+            <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-ink tnum">
+              <CountUp text={formatMoneyRange(b.total, b.totalMax) ?? "—"} />
+            </p>
+          )}
+          {!incomplete ? (
+            <span className="rounded-full border border-copper/50 px-2.5 py-1 text-[18px] leading-none text-copper tnum" title="Expense tier (UI band)">
+              {b.tier.tier}
+              {b.tierMax ? `–${b.tierMax}` : ''}
+            </span>
+          ) : null}
+        </div>
+        <p className="m-0 text-[13.5px] text-ink-2">{b.missing.find((m) => m.required)?.message ?? b.caveats[0] ?? `Lift + ${RENTAL_LABEL[b.assumptions.rentalOption].toLowerCase()} + lunch + parking.`}</p>
+        <dl className="m-0 mt-auto grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 border-t border-divider pt-3 text-[13px]">
+          <dt className="text-ink-2">Lifts</dt>
+          <dd className="m-0 text-right text-ink tnum">{lifts.length ? hoursText(lifts) : <span className="text-ink-2 italic">Hours not recorded</span>}</dd>
+          {night.length ? (
+            <>
+              <dt className="text-ink-2">Night skiing</dt>
+              <dd className="m-0 text-right text-ink tnum">{hoursText(night)}</dd>
+            </>
+          ) : null}
+        </dl>
+      </GlassCard>
+    </div>
+  )
+}
+
 export function PlanSection({ d, v }: { d: ResortDetail; v: PageView }) {
   const dayType = d.basket.holidayName ? `${d.basket.holidayName} (holiday)` : DAY_TYPE_TEXT[d.basket.dayType] ?? d.basket.dayType
   return (
-    <ResortSection id="plan" index={4} title="Plan a visit" meta={`${dayLabelYear(v.date)} · ${dayType}`}>
-      <div className="flex flex-col gap-8">
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
-          <HoursBlock d={d} v={v} />
-          <AccessBlock d={d} v={v} />
+    <ResortSection id="plan" index={4} title="Plan a visit" meta={`${dayLabel(v.date)} · ${dayType}`} headline={planHeadline(d, v)}>
+      <PlanStory d={d} v={v} />
+      <DetailDrawer summary="Hours, pass access, prices and the day basket" hint="Every schedule, product and price on file, with sources">
+        <div className="flex flex-col gap-8">
+          <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+            <HoursBlock d={d} v={v} />
+            <AccessBlock d={d} v={v} />
+          </div>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start">
+            <BasketBlock d={d} v={v} />
+            <PricesBlock d={d} v={v} />
+          </div>
+          <Practical d={d} />
         </div>
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start">
-          <BasketBlock d={d} v={v} />
-          <PricesBlock d={d} v={v} />
-        </div>
-        <Practical d={d} />
-      </div>
+      </DetailDrawer>
     </ResortSection>
   )
 }

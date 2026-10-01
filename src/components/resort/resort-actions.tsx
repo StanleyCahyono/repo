@@ -39,7 +39,7 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
             <Columns3 aria-hidden className="size-[18px]" strokeWidth={1.8} />
           </button>
         ) : (
-          <button type="button" className={cn(textBtn, variant === 'bar' && barBtn)}>
+          <button type="button" className={cn(textBtn, variant === 'bar' ? barBtn : 'px-4')}>
             <Columns3 aria-hidden className="size-[18px]" strokeWidth={1.8} />
             Compare
           </button>
@@ -57,11 +57,11 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
       demo={p.demo}
       trigger={
         variant === 'compact' ? (
-          <button type="button" aria-label={`Add ${p.shortName} to a trip`} title="Add to trip" className={cn(iconBtn, 'border-teal bg-teal text-on-teal hover:bg-teal-strong hover:text-on-teal')}>
+          <button type="button" aria-label={`Add ${p.shortName} to a trip`} title="Add to trip" className={iconBtnDark}>
             <Plus aria-hidden className="size-[18px]" strokeWidth={2} />
           </button>
         ) : (
-          <button type="button" className={cn(primaryBtn, variant === 'bar' && barBtn)}>
+          <button type="button" className={cn(primaryBtn, variant === 'bar' ? barBtn : 'px-5')}>
             <Plus aria-hidden className="size-[18px]" strokeWidth={2} />
             Add to trip
           </button>
@@ -72,7 +72,7 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
   if (variant === 'compact') {
     return (
       <div className={cn('flex items-center gap-1.5', className)}>
-        <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} className="size-9" />
+        <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} className="size-9! rounded-full!" />
         {compare}
         {trip}
       </div>
@@ -81,7 +81,7 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
   if (variant === 'bar') {
     return (
       <div className={cn('grid grid-cols-[auto_1fr_1.3fr] gap-2', className)}>
-        <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel className="h-11 px-3.5" />
+        <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel className="h-11! rounded-full! px-3.5!" />
         {compare}
         {trip}
       </div>
@@ -89,7 +89,7 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
   }
   return (
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
-      <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel />
+      <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel className="h-11! rounded-full! border-glass-strong! bg-glass-strong! px-4! backdrop-blur-[14px]" />
       {compare}
       {trip}
     </div>
@@ -97,9 +97,10 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
 }
 
 const iconBtn =
-  'inline-flex size-9 items-center justify-center rounded-md border border-divider-strong bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal'
+  'inline-flex size-9 items-center justify-center rounded-full border border-divider-strong bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal'
+const iconBtnDark = 'inline-flex size-9 items-center justify-center rounded-full bg-ink-chip text-on-ink-chip transition-transform duration-150 hover:-translate-y-px'
 const textBtn =
-  'inline-flex h-10 items-center justify-center gap-2 rounded-md border border-divider-strong bg-surface px-3.5 text-[14px] font-medium text-ink transition-colors duration-150 hover:border-teal hover:text-teal'
+  'glass-strong inline-flex h-11 items-center justify-center gap-2 rounded-full text-[14px] font-medium whitespace-nowrap text-ink transition-colors duration-150 hover:text-teal'
 const primaryBtn =
-  'inline-flex h-10 items-center justify-center gap-2 rounded-md border border-teal bg-teal px-4 text-[14px] font-medium text-on-teal transition-colors duration-150 hover:border-teal-strong hover:bg-teal-strong'
-const barBtn = 'h-11 w-full px-2'
+  'inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink-chip text-[14px] font-medium whitespace-nowrap text-on-ink-chip shadow-[0_8px_22px_rgb(19_32_44/0.22)] transition-transform duration-150 hover:-translate-y-px'
+const barBtn = 'h-11 w-full px-2.5'

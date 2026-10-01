@@ -36,10 +36,10 @@ export const SECTIONS = [
   { id: 'overview', label: 'Overview', short: 'Overview' },
   { id: 'conditions', label: 'Conditions', short: 'Conditions' },
   { id: 'lifts', label: 'Lifts & runs', short: 'Lifts' },
-  { id: 'plan', label: 'Plan a visit', short: 'Plan' },
+  { id: 'plan', label: 'Plan', short: 'Plan' },
   { id: 'getting-there', label: 'Getting there', short: 'Travel' },
-  { id: 'stay', label: 'Stay & après', short: 'Stay' },
-  { id: 'links', label: 'Maps & links', short: 'Links' },
+  { id: 'stay', label: 'Stay', short: 'Stay' },
+  { id: 'links', label: 'Links', short: 'Links' },
 ] as const
 export type SectionId = (typeof SECTIONS)[number]['id']
 

@@ -122,7 +122,7 @@ function Tile({ item, link, url, now, built }: { item: ShelfItem; link: LinkView
   const state = built ? 'unchecked' : linkState(link?.check)
   const descId = `link-${item.key}-status`
   return (
-    <li className="group relative flex min-w-0 items-start gap-3 rounded-[12px] border border-divider bg-surface px-3.5 py-3 transition-[border-color,transform] duration-150 hover:-translate-y-0.5 hover:border-teal focus-within:border-teal has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-focus">
+    <li className="glass group relative flex min-w-0 items-start gap-3 rounded-[20px] px-4 py-3.5 transition-[border-color,transform] duration-150 hover:-translate-y-0.5 hover:border-teal focus-within:border-teal has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-focus">
       <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-teal" strokeWidth={1.8} />
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
@@ -131,7 +131,7 @@ function Tile({ item, link, url, now, built }: { item: ShelfItem; link: LinkView
             target="_blank"
             rel="noopener noreferrer"
             aria-describedby={descId}
-            className="text-[14.5px] leading-snug font-semibold text-ink after:absolute after:inset-0 after:rounded-[12px] focus-visible:outline-none"
+            className="text-[14.5px] leading-snug font-semibold text-ink after:absolute after:inset-0 after:rounded-[20px] focus-visible:outline-none"
           >
             {item.label}
             <span className="sr-only"> (opens {hostOf(url) ?? 'external site'} in a new tab)</span>
@@ -153,7 +153,7 @@ function Tile({ item, link, url, now, built }: { item: ShelfItem; link: LinkView
 function NotRecorded({ items, official }: { items: ShelfItem[]; official: string | null }) {
   if (!items.length) return null
   return (
-    <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-3 text-[13.5px] text-ink-2">
+    <p className="rounded-[20px] border border-dashed border-divider-strong bg-glass-soft px-4 py-3 text-[13.5px] text-ink-2">
       <span className="font-semibold text-ink">Not recorded yet:</span> {items.map((i) => i.label).join(' · ')}
       <span className="text-ink-3">
         {' '}
@@ -190,7 +190,8 @@ export function LinksSection({ d, v }: { d: ResortDetail; v: PageView }) {
       id="links"
       index={7}
       title="Maps & links"
-      meta={dotJoin(`${d.links.length} links`, lastChecked ? `last checked ${shortDate(lastChecked.slice(0, 10))}` : 'not checked yet')}
+      meta={dotJoin(`${d.links.length} links`, lastChecked ? `checked ${shortDate(lastChecked.slice(0, 10))}` : 'not checked yet')}
+      headline="Official pages, one tap away."
       lead="Official pages open in a new tab. Piste doesn’t embed pages that refuse framing and never draws trail geometry from a raster trail map."
     >
       <div className="flex flex-col gap-7">
@@ -223,7 +224,7 @@ export function LinksSection({ d, v }: { d: ResortDetail; v: PageView }) {
         {more.length ? (
           <div>
             <p className="eyebrow mb-2">More useful pages ({more.length})</p>
-            <details className="group rounded-[12px] border border-divider bg-surface" open={more.length <= 8}>
+            <details className="glass group rounded-[20px]" open={more.length <= 8}>
               <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-[13.5px] font-medium text-teal select-none hover:underline [&::-webkit-details-marker]:hidden">
                 <span className="group-open:hidden">Show all {more.length} links</span>
                 <span className="hidden group-open:inline">Hide</span>
