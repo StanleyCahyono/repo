@@ -10,13 +10,15 @@
  * - official alerts for the chosen resorts (shown independently of any score) and when alerts were last checked;
  * - per-resort weather fetch health: the last successful run and any failed attempt since (a failure never counts as
  *   an update);
- * - planning facts (status, opening/closing, pass families, your pass on the date) for dates beyond the forecast.
+ * - planning facts (status, opening/closing, pass families, your pass on the date) for dates beyond the forecast;
+ * - season markers for the focus resort's calendar (openings and closings as announced, reported or estimated by
+ *   Piste — each says which, and an announced opening never becomes "Opened").
  */
 import 'server-only'
 import { and, desc, eq, lte, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { ComponentResult } from '@/lib/db/schema'
-import { addDays, dateRange, isLocalDate, seasonIdsForDates } from '@/lib/domain/time'
+import { addDays, dateRange, formatLocalDate, isLocalDate, seasonIdsForDates } from '@/lib/domain/time'
 import type { AppMode, Confidence, DataKind, Eligibility, Provenance, ScoreKind, ScoringMode, SurfaceInterpretation, UnitPrefs } from '@/lib/domain/types'
 import {
   assessmentKey,
@@ -160,6 +162,22 @@ export interface PlanningView {
   myPass: MyPassView
 }
 
+/** A dated season fact for the focus resort's calendar. */
+export interface SeasonMarker {
+  /** Resort-local date the marker sits on (an estimate: the start of its window). */
+  date: string
+  /** End of an estimated window (inclusive), else null. */
+  to: string | null
+  event: 'opening' | 'closing'
+  /** announced = the resort's stated target; actual = reported as happened; estimate = a Piste estimate. */
+  basis: 'announced' | 'actual' | 'estimate'
+  /** Short tag text ("Opens", "Est. opening", "Closed"). */
+  label: string
+  /** One readable sentence for the detail line and screen readers. */
+  detail: string
+  seasonId: string
+}
+
 export interface JobHealth {
   lastAttemptAt: string | null
   lastAttemptStatus: string | null
@@ -194,6 +212,58 @@ export interface ForecastScreen {
   history: HistoryCalendar | null
   historyMonth: string | null
   selectedDate: string | null
+  /** Season markers for the focus resort (all stored seasons), by date. */
+  seasonMarkers: SeasonMarker[]
+}
+
+const fmtDay = (d: string) => formatLocalDate(d, 'ccc d LLL yyyy')
+
+/**
+ * Calendar markers from a resort's season rows. Announced dates stay announced — a passed announced opening without a
+ * reported opening reads "Announced opening", never "Opened". Estimates are labelled as Piste estimates.
+ */
+export function seasonMarkers(rows: readonly (typeof s.resortSeasons.$inferSelect)[], today: string): SeasonMarker[] {
+  const out: SeasonMarker[] = []
+  for (const r of rows) {
+    const base = { seasonId: r.seasonId, to: null }
+    if (r.actualOpening) {
+      out.push({ ...base, date: r.actualOpening, event: 'opening', basis: 'actual', label: 'Opened', detail: `Opened ${fmtDay(r.actualOpening)} (reported).` })
+    } else if (r.announcedOpening) {
+      const future = r.announcedOpening >= today
+      out.push({
+        ...base,
+        date: r.announcedOpening,
+        event: 'opening',
+        basis: 'announced',
+        label: future ? 'Opens' : 'Announced opening',
+        detail: `${future ? 'Announced opening' : 'Announced opening date (no opening reported)'}: ${fmtDay(r.announcedOpening)}${r.announcedOpeningText ? ` — “${r.announcedOpeningText}”` : ''}.`,
+      })
+    } else if (r.estimatedOpenFrom) {
+      out.push({
+        ...base,
+        date: r.estimatedOpenFrom,
+        to: r.estimatedOpenTo && r.estimatedOpenTo > r.estimatedOpenFrom ? r.estimatedOpenTo : null,
+        event: 'opening',
+        basis: 'estimate',
+        label: 'Est. opening',
+        detail: `Piste estimate: opening ${fmtDay(r.estimatedOpenFrom)}${r.estimatedOpenTo && r.estimatedOpenTo > r.estimatedOpenFrom ? ` – ${fmtDay(r.estimatedOpenTo)}` : ''}. Not announced by the resort${r.estimateBasis ? ` (${r.estimateBasis.replace(/\.$/, '')})` : ''}.`,
+      })
+    }
+    if (r.actualClosing && r.actualClosing <= today) {
+      out.push({ ...base, date: r.actualClosing, event: 'closing', basis: 'actual', label: 'Closed', detail: `Closed for the season ${fmtDay(r.actualClosing)} (reported).` })
+    } else if (r.announcedClosing) {
+      const future = r.announcedClosing >= today
+      out.push({
+        ...base,
+        date: r.announcedClosing,
+        event: 'closing',
+        basis: 'announced',
+        label: future ? 'Closes' : 'Announced closing',
+        detail: `Announced closing: ${fmtDay(r.announcedClosing)}${r.announcedClosingText ? ` — “${r.announcedClosingText}”` : ''}.`,
+      })
+    }
+  }
+  return out.sort((a, b) => a.date.localeCompare(b.date) || a.event.localeCompare(b.event))
 }
 
 function potentialOf(v: ReturnType<typeof scoreView>): DayPotential | null {
@@ -279,7 +349,7 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
   const planDate = selectedDate ?? ctx.today
 
   const w = s.weatherRuns
-  const [forecast, assessments, history, bundle, failures, weatherAttempt, weatherSuccess, alertsAttempt, alertsSuccess, alertChecks] = await Promise.all([
+  const [forecast, assessments, history, bundle, failures, weatherAttempt, weatherSuccess, alertsAttempt, alertsSuccess, alertChecks, focusSeasons] = await Promise.all([
     getForecast(ctx, selected, { point: opts.point }),
     latestAssessments(db, { dates, modes: [mode], now, live, resortIds: selected }),
     focus && historyMonth ? getHistoryCalendar(ctx, focus, historyMonth, { mode }) : Promise.resolve(null),
@@ -301,6 +371,7 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
     lastAttemptRun(db, 'nws-alerts', null),
     lastSuccess(db, 'nws-alerts', null),
     Promise.all(selected.map((id) => lastSuccess(db, 'nws-alerts', id))),
+    focus ? db.select().from(s.resortSeasons).where(eq(s.resortSeasons.resortId, focus)) : Promise.resolve([]),
   ])
 
   // Catalog facts per selected resort.
@@ -412,5 +483,6 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
     history,
     historyMonth,
     selectedDate,
+    seasonMarkers: seasonMarkers(focusSeasons, focusToday),
   }
 }

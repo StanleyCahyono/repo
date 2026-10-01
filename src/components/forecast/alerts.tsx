@@ -56,7 +56,7 @@ export function OfficialAlerts({
             const tone = TONE[severityTone(a.severity)]
             const tz = resorts[a.resortId]?.timezone ?? 'UTC'
             return (
-              <li key={a.id} className={cn('rounded-[12px] border px-4 py-3', tone.box)}>
+              <li key={a.id} className={cn('rounded-[20px] border px-4 py-3 shadow-[var(--glass-shadow)]', tone.box)}>
                 <div className="flex items-start gap-3">
                   <TriangleAlert aria-hidden className={cn('mt-0.5 size-[18px] shrink-0', tone.icon)} />
                   <div className="min-w-0 flex-1">
@@ -130,11 +130,11 @@ export function OfficialAlerts({
   return (
     <section
       aria-label="Official alerts"
-      className="flex items-start gap-2.5 rounded-[10px] border border-divider bg-surface-2 px-3.5 py-2.5 text-[13px] text-ink-2"
+      className="glass flex items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[13px] text-ink-2"
     >
       <Icon aria-hidden className={cn('mt-0.5 size-4 shrink-0', Icon === ShieldCheck ? 'text-positive' : 'text-ink-3')} />
       <p className="min-w-0">
-        <span className="font-semibold text-ink">Official alerts. </span>
+        <span className="hud mr-1.5 text-ink">Official alerts</span>
         {text}
       </p>
     </section>

@@ -207,7 +207,7 @@ export function OutlookMatrix({
   }
 
   return (
-    <div className="rounded-[12px] border border-divider bg-surface px-3 pt-3 pb-3.5 md:px-5 md:pt-4 md:pb-4">
+    <div className="glass rounded-[28px] px-3 pt-4 pb-4 md:rounded-[32px] md:px-6 md:pt-5 md:pb-5">
       <ChartFrame
         title="Daily outlook by resort"
         titleAs="h3"

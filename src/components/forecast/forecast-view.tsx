@@ -3,15 +3,20 @@
  * The Forecast screen body. Server data arrives as one serialisable `ForecastScreen`; every choice lives in the URL
  * (see params.ts / nav.tsx) so a reload, a shared link or "back from a resort" restores the same view.
  *
- * Order: toolbar → official alerts → 01 daily outlook (all compared resorts; selected day / beyond-horizon panel)
- * → 02 next 48 hours (focus resort) → 03 history calendar (focus resort) → attribution. In live mode without any
- * stored weather, 01–02 become one designed "not fetched" state.
+ * Glass HUD order: hero (the answer for the focus resort + resort pills) → point / date controls and official alerts
+ * → the 16-day strip (focus resort) → the selected day (or planning facts beyond the forecast) → next 48 hours beside
+ * the month calendar → compare resorts (outlook matrix) → hour by hour → attribution. Without stored weather the
+ * strip, the 48 hours and the calendar keep their structure in a designed "Not fetched yet" state, followed by what
+ * Piste will request; nothing is estimated in its place.
  */
+import type { ReactNode } from 'react'
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ButtonLink } from '@/components/ui/button'
 import { Segmented } from '@/components/ui/segmented'
 import { EmptyState, Notice } from '@/components/ui/states'
-import type { ForecastScreen } from '@/lib/data/forecast-screen'
+import type { ResortForecast } from '@/lib/data/forecast'
+import type { ForecastScreen, ResortInfo } from '@/lib/data/forecast-screen'
 import { relativeLabel } from '@/lib/domain/time'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
 import { cn } from '@/lib/ui/cn'
@@ -21,21 +26,24 @@ import { BeyondHorizon } from './beyond'
 import { DayDetail } from './day-detail'
 import { HistoryCalendarView } from './history'
 import { HourlyForecast } from './hourly'
-import { dateZone, lastForecastDate, POINT_LABEL, pointElevation, zoneLabel } from './model'
+import { ForecastHero } from './hero'
+import { HoursGlance } from './hours-glance'
+import { dateZone, lastForecastDate, POINT_LABEL, pointElevation, zoneLabel, type PointKey } from './model'
+import { OutlookStrip } from './outlook-strip'
 import { PendingVeil, useForecastNav } from './nav'
 import { NotFetched } from './not-fetched'
 import { METRIC_LABEL, OutlookMatrix } from './outlook'
 import { OUTLOOK_METRICS, type OutlookMetric } from './params'
 import { RefreshWeatherButton } from './refresh-button'
+import { SeasonCard } from './season-card'
 import { ResortPicker } from './resort-picker'
 import { Rise } from './rise'
 import { ForecastSection } from './section'
-import { ForecastToolbar } from './toolbar'
+import { ForecastControls, ResortPills } from './toolbar'
 
-export function ForecastView({ screen }: { screen: ForecastScreen }) {
+export function ForecastView({ screen, actions }: { screen: ForecastScreen; actions?: ReactNode }) {
   const { params, navigate, replaceLocal, pending } = useForecastNav()
   const { selected, resorts, forecast } = screen
-  const q = chartUnits(screen.units)
 
   // Optimistic focus/date/metric come from the URL; server-bound data is veiled while it reloads.
   const focus = params.focus && selected.includes(params.focus) ? params.focus : screen.focus
@@ -50,6 +58,7 @@ export function ForecastView({ screen }: { screen: ForecastScreen }) {
   const anyForecast = forecasts.some((f) => f.run)
   const hasForecast = new Set(forecasts.filter((f) => f.run).map((f) => f.resortId))
   const live = screen.mode === 'live'
+  const focusHealth = focus ? screen.health[focus] : undefined
 
   const requestedMonth = params.month ?? (urlDate && urlDate < focusToday ? urlDate.slice(0, 7) : focusToday.slice(0, 7))
   const historyStale = pending && (screen.history?.resortId !== focus || screen.historyMonth !== requestedMonth)
@@ -57,7 +66,8 @@ export function ForecastView({ screen }: { screen: ForecastScreen }) {
     pending &&
     (params.point !== screen.point ||
       (params.mode ?? screen.scoringMode) !== screen.scoringMode ||
-      (params.resorts !== null && params.resorts.join(',') !== selected.join(',')))
+      (params.resorts !== null && params.resorts.join(',') !== selected.join(',')) ||
+      focusForecast?.resortId !== focus)
   const planningStale = pending && (Object.values(screen.planning)[0]?.date ?? null) !== (urlDate ?? screen.homeToday)
   const openHistoryDate = urlDate && (zone === 'past' || zone === 'today') ? urlDate : null
 
@@ -68,15 +78,27 @@ export function ForecastView({ screen }: { screen: ForecastScreen }) {
     else replaceLocal({ date: value })
   }
 
-  const pointLabel = (() => {
-    const shown = focusForecast?.shownPoint ?? params.point
-    const elev = focusForecast?.run?.requested.elevationM ?? pointElevation(info, shown)
-    return `${POINT_LABEL[shown]}${elev !== null ? ` ${q.elevation.format(elev)}` : ''}`
-  })()
+  const onMonth = (m: string) => navigate({ month: m === focusToday.slice(0, 7) ? null : m, date: zone === 'past' ? null : undefined })
+
+  const hero = (
+    <ForecastHero
+      name={info ? (info.shortName ?? info.name) : null}
+      forecast={focusForecast}
+      health={focusHealth}
+      units={screen.units}
+      mode={screen.mode}
+      now={screen.now}
+      actions={actions}
+      pills={
+        selected.length ? <ResortPills catalog={screen.catalog} selected={selected} resorts={resorts} focus={focus} hasForecast={hasForecast} /> : null
+      }
+    />
+  )
 
   if (!selected.length) {
     return (
       <div className="flex flex-col gap-6">
+        {hero}
         {screen.unknownIds.length ? <UnknownNotice ids={screen.unknownIds} /> : null}
         <EmptyState
           seed="forecast-empty"
@@ -93,93 +115,161 @@ export function ForecastView({ screen }: { screen: ForecastScreen }) {
     )
   }
 
+  const focusName = info?.name ?? focus ?? ''
+  const refreshAll = live ? <RefreshWeatherButton targets={selected.map((id) => ({ id, name: resorts[id]?.name ?? id }))} variant="primary" label="Try a refresh now" /> : null
+  const sources = (
+    <ButtonLink href="/sources" variant="secondary" className="min-h-11 md:min-h-0">
+      Sources &amp; Sync <ArrowRight aria-hidden className="size-4" />
+    </ButtonLink>
+  )
+  const empty = !anyForecast
+    ? {
+        title: 'No forecast stored yet',
+        body: (
+          <>
+            Forecasts appear after the weather job fetches modeled weather for your resorts — every 3 hours by default while the Piste worker runs.
+            {focusHealth?.lastFailure
+              ? ` The last attempt ${relativeLabel(focusHealth.lastFailure.at, screen.now)} failed${focusHealth.lastFailure.error ? ` (${focusHealth.lastFailure.error.replace(/^http:\s*/, '')})` : ''}, and a failed fetch never counts as an update.`
+              : ''}{' '}
+            Nothing is estimated in the meantime.
+          </>
+        ),
+        actions: (
+          <>
+            {refreshAll}
+            {sources}
+          </>
+        ),
+      }
+    : {
+        title: `No forecast stored for ${focusName}`,
+        body: focusHealth?.lastFailure
+          ? `The last fetch ${relativeLabel(focusHealth.lastFailure.at, screen.now)} failed${focusHealth.lastFailure.error ? ` (${focusHealth.lastFailure.error.replace(/^http:\s*/, '')})` : ''}. Nothing is estimated in its place.`
+          : 'Weather has not been fetched for this resort yet. Nothing is estimated in its place.',
+        actions: live && focus ? <RefreshWeatherButton targets={[{ id: focus, name: focusName }]} variant="primary" /> : undefined,
+      }
+
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
-      <Rise index={0} className="flex flex-col gap-3">
-        <ForecastToolbar
-          catalog={screen.catalog}
-          selected={selected}
-          resorts={resorts}
-          focus={focus}
-          hasForecast={hasForecast}
-          point={params.point}
-          units={screen.units}
-          today={focusToday}
-        />
+    <div className="flex flex-col gap-5 md:gap-6">
+      <Rise index={0}>{hero}</Rise>
+
+      <Rise index={1} className="flex flex-col gap-3">
+        <ForecastControls resorts={resorts} focus={focus} point={params.point} units={screen.units} today={focusToday} />
         {screen.unknownIds.length ? <UnknownNotice ids={screen.unknownIds} /> : null}
         <OfficialAlerts alerts={screen.alerts} resorts={resorts} selected={selected} job={screen.alertsJob} now={screen.now} mode={screen.mode} />
       </Rise>
 
-      {anyForecast ? (
-        <>
-          <Rise index={1}>
-            <ForecastSection
-              id="daily"
-              index={1}
-              title="Daily outlook"
-              meta={`Model output per resort-local day${forecasts.some((f) => f.daily.some((d) => d.trend)) ? ' · days 8–16 as a less certain trend' : ''}`}
-              actions={
-                <ModeSelect
-                  value={screen.scoringMode}
-                  pendingValue={params.mode}
-                  onChange={(m) => navigate({ mode: m === screen.scoringMode && !params.mode ? null : m })}
-                />
-              }
-            >
-              <PendingVeil when={dataStale}>
-                <OutlookMatrix
-                  forecasts={forecasts}
-                  resorts={resorts}
-                  potentials={screen.potentials}
-                  health={screen.health}
-                  focus={focus}
-                  selectedDate={zone === 'beyond' || zone === 'no-forecast' ? null : detailDate}
-                  metric={params.metric}
-                  units={screen.units}
-                  now={screen.now}
-                  point={params.point}
-                  onSelect={onSelectDay}
-                  actions={<MetricSwitch value={params.metric} onChange={(m) => replaceLocal({ metric: m === 'snow' ? null : m })} />}
-                />
-              </PendingVeil>
-              <div className="mt-4">
-                {zone === 'beyond' || zone === 'no-forecast' ? (
-                  <BeyondHorizon
-                    date={date}
-                    selected={selected}
-                    resorts={resorts}
-                    planning={screen.planning}
-                    forecasts={forecasts}
-                    now={screen.now}
-                    stale={planningStale}
-                  />
-                ) : focusForecast?.run ? (
-                  <PendingVeil when={dataStale}>
-                    <DayDetail
-                      forecast={focusForecast}
-                      day={focusForecast.daily.find((d) => d.date === detailDate)}
-                      date={detailDate}
-                      potential={screen.potentials[focusForecast.resortId]?.find((p) => p.date === detailDate)}
-                      info={info}
-                      units={screen.units}
-                      scoringMode={screen.scoringMode}
-                    />
-                  </PendingVeil>
-                ) : null}
-              </div>
-            </ForecastSection>
-          </Rise>
+      <Rise index={2}>
+        <div id="strip" className="scroll-mt-24">
+          <PendingVeil when={dataStale}>
+            <OutlookStrip
+              key={`${focus}|${focusForecast?.shownPoint}`}
+              forecast={focusForecast}
+              info={info}
+              point={params.point}
+              units={screen.units}
+              health={focusHealth}
+              now={screen.now}
+              selectedDate={zone === 'forecast' || zone === 'today' ? detailDate : null}
+              onSelect={(d) => focus && onSelectDay({ resortId: focus, date: d })}
+              empty={empty}
+            />
+          </PendingVeil>
+        </div>
+      </Rise>
 
-          <Rise index={2}>
+      {zone === 'beyond' || zone === 'no-forecast' ? (
+        <BeyondHorizon date={date} selected={selected} resorts={resorts} planning={screen.planning} forecasts={forecasts} now={screen.now} stale={planningStale} />
+      ) : focusForecast?.run ? (
+        <PendingVeil when={dataStale}>
+          <DayDetail
+            forecast={focusForecast}
+            day={focusForecast.daily.find((d) => d.date === detailDate)}
+            date={detailDate}
+            potential={screen.potentials[focusForecast.resortId]?.find((p) => p.date === detailDate)}
+            info={info}
+            units={screen.units}
+            scoringMode={screen.scoringMode}
+          />
+        </PendingVeil>
+      ) : null}
+
+      <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:gap-6">
+        <div className="flex min-w-0 flex-col gap-5 md:gap-6">
+          <PendingVeil when={dataStale}>
+            <HoursGlance key={`${focus}|${focusForecast?.shownPoint}`} forecast={focusForecast} info={info} units={screen.units} now={screen.now} />
+          </PendingVeil>
+          <PendingVeil when={historyStale}>
+            <SeasonCard name={info?.shortName ?? focusName} markers={screen.seasonMarkers} today={focusToday} onMonth={onMonth} />
+          </PendingVeil>
+        </div>
+        <div id="history" className="min-w-0 scroll-mt-24">
+          {screen.history ? (
+            <HistoryCalendarView
+              calendar={screen.history}
+              info={focus && screen.history.resortId === focus ? info : resorts[screen.history.resortId]}
+              month={screen.historyMonth ?? requestedMonth}
+              openDate={historyStale ? null : openHistoryDate}
+              units={screen.units}
+              now={screen.now}
+              appMode={screen.mode}
+              stale={historyStale}
+              forecast={screen.history.resortId === focusForecast?.resortId ? focusForecast : null}
+              markers={historyStale ? [] : screen.seasonMarkers}
+              selectedDate={zone === 'forecast' ? detailDate : null}
+              onOpenDay={(d) => replaceLocal({ date: d })}
+              onSelectDay={(d) => {
+                if (focus) onSelectDay({ resortId: focus, date: d })
+                document.getElementById('strip')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
+              onClose={() => replaceLocal({ date: null })}
+              onMonth={onMonth}
+            />
+          ) : null}
+        </div>
+      </div>
+
+      {!anyForecast ? (
+        <NotFetched selected={selected} resorts={resorts} health={screen.health} weatherJob={screen.weatherJob} units={screen.units} now={screen.now} />
+      ) : (
+        <>
+          <ForecastSection
+            id="daily"
+            index={1}
+            title={selected.length > 1 ? 'Compare resorts' : 'Day by day'}
+            meta={`Model output per resort-local day${forecasts.some((f) => f.daily.some((d) => d.trend)) ? ' · days 8–16 as a less certain trend' : ''}`}
+            actions={
+              <ModeSelect value={screen.scoringMode} pendingValue={params.mode} onChange={(m) => navigate({ mode: m === screen.scoringMode && !params.mode ? null : m })} />
+            }
+          >
+            <PendingVeil when={dataStale}>
+              <OutlookMatrix
+                forecasts={forecasts}
+                resorts={resorts}
+                potentials={screen.potentials}
+                health={screen.health}
+                focus={focus}
+                selectedDate={zone === 'beyond' || zone === 'no-forecast' ? null : detailDate}
+                metric={params.metric}
+                units={screen.units}
+                now={screen.now}
+                point={params.point}
+                onSelect={onSelectDay}
+                actions={<MetricSwitch value={params.metric} onChange={(m) => replaceLocal({ metric: m === 'snow' ? null : m })} />}
+              />
+            </PendingVeil>
+          </ForecastSection>
+
+          {focusForecast?.run ? (
             <ForecastSection
               id="hourly"
               index={2}
-              title="Next 48 hours"
+              title="Hour by hour"
               meta={
                 <span className="flex flex-wrap items-baseline gap-x-2">
                   <span>
-                    {info?.name ?? focus} · {pointLabel}
-                    {focusForecast?.hourly.length
+                    {focusName} · {pointLabelOf(focusForecast, info, params.point, screen)}
+                    {focusForecast.hourly.length
                       ? ` · times in ${zoneLabel(
                           focusForecast.timezone,
                           focusForecast.hourly.map((h) => h.validTime),
@@ -195,74 +285,30 @@ export function ForecastView({ screen }: { screen: ForecastScreen }) {
               }
             >
               <PendingVeil when={dataStale}>
-                {focusForecast?.run ? (
-                  <HourlyForecast
-                    key={`${focusForecast.resortId}|${focusForecast.shownPoint}`}
-                    forecast={focusForecast}
-                    info={info}
-                    units={screen.units}
-                    now={screen.now}
-                    health={focus ? screen.health[focus] : undefined}
-                  />
-                ) : (
-                  <EmptyState
-                    seed={`hourly-${focus}`}
-                    title={`No forecast stored for ${info?.name ?? focus}`}
-                    body={
-                      focus && screen.health[focus]?.lastFailure
-                        ? `The last fetch ${relativeLabel(screen.health[focus]!.lastFailure!.at, screen.now)} failed${screen.health[focus]!.lastFailure!.error ? ` (${screen.health[focus]!.lastFailure!.error!.replace(/^http:\s*/, '')})` : ''}. Nothing is estimated in its place.`
-                        : 'Weather has not been fetched for this resort yet. Nothing is estimated in its place.'
-                    }
-                    action={live && focus ? <RefreshWeatherButton targets={[{ id: focus, name: info?.name ?? focus }]} /> : undefined}
-                  />
-                )}
+                <HourlyForecast
+                  key={`${focusForecast.resortId}|${focusForecast.shownPoint}`}
+                  forecast={focusForecast}
+                  info={info}
+                  units={screen.units}
+                  now={screen.now}
+                  health={focusHealth}
+                />
               </PendingVeil>
             </ForecastSection>
-          </Rise>
-        </>
-      ) : (
-        <Rise index={1} className="flex flex-col gap-4">
-          <NotFetched selected={selected} resorts={resorts} health={screen.health} weatherJob={screen.weatherJob} units={screen.units} now={screen.now} />
-          {zone === 'beyond' || zone === 'no-forecast' ? (
-            <BeyondHorizon
-              date={date}
-              selected={selected}
-              resorts={resorts}
-              planning={screen.planning}
-              forecasts={forecasts}
-              now={screen.now}
-              stale={planningStale}
-            />
           ) : null}
-        </Rise>
+        </>
       )}
-
-      <ForecastSection
-        id="history"
-        index={anyForecast ? 3 : 2}
-        title="History"
-        meta={`${info?.name ?? focus} · what was forecast, reported and estimated on each resort-local day`}
-      >
-        {screen.history ? (
-          <HistoryCalendarView
-            calendar={screen.history}
-            info={focus && screen.history.resortId === focus ? info : resorts[screen.history.resortId]}
-            month={screen.historyMonth ?? requestedMonth}
-            openDate={historyStale ? null : openHistoryDate}
-            units={screen.units}
-            now={screen.now}
-            appMode={screen.mode}
-            stale={historyStale}
-            onOpenDay={(d) => replaceLocal({ date: d })}
-            onClose={() => replaceLocal({ date: null })}
-            onMonth={(m) => navigate({ month: m === focusToday.slice(0, 7) ? null : m, date: zone === 'past' ? null : undefined })}
-          />
-        ) : null}
-      </ForecastSection>
 
       <Attribution screen={screen} />
     </div>
   )
+}
+
+function pointLabelOf(f: ResortForecast, info: ResortInfo | undefined, point: PointKey, screen: ForecastScreen): string {
+  const q = chartUnits(screen.units)
+  const shown = f.shownPoint ?? point
+  const elev = f.run?.requested.elevationM ?? pointElevation(info, shown)
+  return `${POINT_LABEL[shown]}${elev !== null ? ` ${q.elevation.format(elev)}` : ''}`
 }
 
 function UnknownNotice({ ids }: { ids: string[] }) {

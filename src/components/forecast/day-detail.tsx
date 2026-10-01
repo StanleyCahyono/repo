@@ -48,14 +48,14 @@ export function DayDetail({
   const titleId = `day-${date}`
 
   return (
-    <article aria-labelledby={titleId} className="overflow-hidden rounded-[12px] border border-divider bg-surface">
-      <header className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 border-b border-divider px-4 pt-3.5 pb-3 md:px-5">
+    <article aria-labelledby={titleId} className="glass overflow-hidden rounded-[28px] md:rounded-[32px]">
+      <header className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 border-b border-divider px-5 pt-5 pb-4 md:px-6">
         <div className="min-w-0">
-          <p className="eyebrow">
+          <p className="hud text-teal">
             {info?.name ?? forecast.name} · {POINT_LABEL[shown]}
             {elev !== null ? ` ${q.elevation.format(elev)}` : ''}
           </p>
-          <h3 id={titleId} className="mt-1 font-display text-[26px] leading-none text-ink md:text-[30px]">
+          <h3 id={titleId} className="mt-1.5 text-[28px] leading-none font-light tracking-[-0.03em] text-ink md:text-[36px]">
             {dayLong(date).replace(/ \d{4}$/, '')}
           </h3>
         </div>

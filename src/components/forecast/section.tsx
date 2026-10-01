@@ -1,6 +1,6 @@
 /**
- * Numbered editorial section for the Forecast page (same language as the resort page: fine top rule, mono index,
- * sentence-case h2, one line of context). Server-renderable.
+ * Numbered section for the Forecast page in the Glass HUD language: mono index, big light sentence-case h2, one line
+ * of context. Server-renderable.
  */
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/ui/cn'
@@ -25,18 +25,16 @@ export function ForecastSection({
   const headingId = `${id}-title`
   return (
     <section id={id} aria-labelledby={headingId} className={cn('scroll-mt-20 md:scroll-mt-8', className)}>
-      <header className="mb-4 border-t border-divider-strong pt-5 md:mb-5">
+      <header className="mb-4 pt-4 md:mb-5 md:pt-6">
         <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
           <div className="min-w-0">
-            <div className="flex items-baseline gap-3">
-              <span aria-hidden className="font-mono text-[12px] tracking-wider text-ink-3 tnum">
-                {String(index).padStart(2, '0')}
-              </span>
-              <h2 id={headingId} className="text-[21px] leading-tight font-semibold text-ink md:text-[22px]">
-                {title}
-              </h2>
-            </div>
-            {meta ? <div className="mt-1 text-[13.5px] text-ink-2 md:pl-[30px]">{meta}</div> : null}
+            <span aria-hidden className="hud text-teal tnum">
+              {String(index).padStart(2, '0')} ·
+            </span>
+            <h2 id={headingId} className="mt-1 text-[30px] leading-[1.05] font-light tracking-[-0.03em] text-ink md:text-[40px]">
+              {title}
+            </h2>
+            {meta ? <div className="mt-1.5 text-[13.5px] text-ink-2">{meta}</div> : null}
           </div>
           {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
         </div>
