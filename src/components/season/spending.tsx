@@ -338,7 +338,7 @@ export function Spending({ view, expenses, trips, currency, today, demo }: { vie
   return (
     <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_400px]">
       <div className="flex min-w-0 flex-col gap-5">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 lg:grid-cols-4 xl:grid-cols-2">
+        <dl className="grid grid-cols-[repeat(2,minmax(0,1fr))] gap-x-6 gap-y-4 lg:grid-cols-[repeat(4,minmax(0,1fr))] xl:grid-cols-[repeat(2,minmax(0,1fr))]">
           <div>
             <dt className="eyebrow flex h-4 items-center gap-1">
               Actual
@@ -352,7 +352,7 @@ export function Spending({ view, expenses, trips, currency, today, demo }: { vie
           </div>
           <div>
             <dt className="eyebrow flex h-4 items-center">Planned</dt>
-            <dd className="mt-1 font-display text-[28px] leading-none whitespace-nowrap text-ink-2 tnum">{b.plannedTotal.amountMinor || b.plannedTotalMax.amountMinor ? formatMoneyRange(b.plannedTotal, b.plannedTotalMax) : '—'}</dd>
+            <dd className="mt-1 font-display text-[22px] leading-tight text-ink-2 tnum [overflow-wrap:anywhere] sm:text-[28px] sm:leading-none">{b.plannedTotal.amountMinor || b.plannedTotalMax.amountMinor ? formatMoneyRange(b.plannedTotal, b.plannedTotalMax) : '—'}</dd>
           </div>
           <div>
             <dt className="eyebrow flex h-4 items-center">Season budget</dt>

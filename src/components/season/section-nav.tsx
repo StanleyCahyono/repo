@@ -59,8 +59,8 @@ export function SeasonSectionNav({ sections }: { sections: NavSection[] }) {
   }, [active, reduce])
 
   return (
-    <nav aria-label="My Season sections" className="sticky top-14 z-20 -mx-4 mb-8 border-b border-divider bg-canvas/95 px-4 backdrop-blur-sm md:top-0 md:-mx-8 md:px-8">
-      <ul ref={listRef} className="scroll-fade-x scrollbar-thin flex gap-1 overflow-x-auto py-2">
+    <nav aria-label="My Season sections" className="sticky top-16 z-20 mb-8 min-w-0 md:top-3">
+      <ul ref={listRef} className="glass scroll-fade-x scrollbar-thin flex w-fit max-w-full gap-0.5 overflow-x-auto rounded-full p-[5px] [contain:inline-size] md:[contain:none]">
         {sections.map((s) => {
           const on = s.id === active
           return (
@@ -77,11 +77,11 @@ export function SeasonSectionNav({ sections }: { sections: NavSection[] }) {
                   setActive(s.id)
                   document.getElementById(`${s.id}-title`)?.focus({ preventScroll: true })
                 }}
-                className={cn('relative flex h-10 items-center gap-1.5 rounded-[8px] px-3 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150', on ? 'text-teal' : 'text-ink-2 hover:text-ink')}
+                className={cn('relative flex h-10 items-center gap-1.5 rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150', on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink')}
               >
-                {on ? <motion.span layoutId="season-nav-active" transition={t.select} aria-hidden className="absolute inset-0 rounded-[8px] bg-glacier" /> : null}
+                {on ? <motion.span layoutId="season-nav-active" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
                 <span className="relative">{s.label}</span>
-                {typeof s.count === 'number' && s.count > 0 ? <span className="relative text-[12px] text-ink-3 tnum">{s.count}</span> : null}
+                {typeof s.count === 'number' && s.count > 0 ? <span className={cn('relative text-[12px] tnum', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>{s.count}</span> : null}
               </a>
             </li>
           )
