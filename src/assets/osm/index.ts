@@ -53,6 +53,7 @@ import _les_arcs from './les-arcs.json'
 import _les_deux_alpes from './les-deux-alpes.json'
 import _livigno from './livigno.json'
 import _lotte_arai from './lotte-arai.json'
+import _madonna_di_campiglio from './madonna-di-campiglio.json'
 import _mayrhofen from './mayrhofen.json'
 import _megeve from './megeve.json'
 import _meribel from './meribel.json'
@@ -162,6 +163,7 @@ export const OSM_SNAPSHOTS: Record<string, OsmSnapshot> = {
   'les-deux-alpes': _les_deux_alpes as unknown as OsmSnapshot,
   'livigno': _livigno as unknown as OsmSnapshot,
   'lotte-arai': _lotte_arai as unknown as OsmSnapshot,
+  'madonna-di-campiglio': _madonna_di_campiglio as unknown as OsmSnapshot,
   'mayrhofen': _mayrhofen as unknown as OsmSnapshot,
   'megeve': _megeve as unknown as OsmSnapshot,
   'meribel': _meribel as unknown as OsmSnapshot,
