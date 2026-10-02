@@ -102,13 +102,18 @@ async function photoFor(r) {
     if (tried.has(c) || rejected.has(c)) continue
     tried.add(c)
     const info = await fileInfo(c).catch(() => null)
-    if (info) return info
+    if (info && !used.has(info.page)) {
+      used.add(info.page)
+      return info
+    }
     if (tried.size > 60) break
   }
   return null
 }
 
 const files = fs.readdirSync(CAT).filter((f) => f.endsWith('.json'))
+// One photo per resort: files already used by another resort are skipped (neighbours share geotagged files).
+const used = new Set(files.map((f) => JSON.parse(fs.readFileSync(path.join(CAT, f), 'utf8')).photo?.sourceUrl).filter(Boolean))
 const missing = []
 for (const f of files) {
   const file = path.join(CAT, f)
