@@ -1,7 +1,7 @@
 'use client'
 /**
  * Lifts & runs, the story view: a terrain map of the ski area beside glass cards for lifts by type and the runs
- * grouped by the resort's own difficulty signs. Where Piste bundles an OpenStreetMap snapshot (Greek Peak), every run
+ * grouped by the resort's own difficulty signs. Where Piste bundles an OpenStreetMap snapshot (every catalog resort), every run
  * and lift is drawn in its sign's colour with the sign's shape, and tapping a line — or a name in the list, the
  * map's text alternative — shows its name, sign and mapped length.
  *
@@ -152,7 +152,8 @@ function Schematic({
   }, [frame, size.w, imperial])
   const any = selected.size > 0
 
-  // One shape marker per named run, at the middle of its longest mapped section.
+  // One shape marker per named run, at the middle of its longest mapped section. Big areas (hundreds of runs) keep
+  // the longest runs' markers and drop any that would land within ~24 px of one already placed, so lines stay readable.
   const markers = useMemo(() => {
     if (!lines || !frame) return []
     const best = new Map<string, MappedLine>()
@@ -162,11 +163,16 @@ function Schematic({
       if (!cur || l.lengthM > cur.lengthM) best.set(l.name, l)
     }
     const [ox, oy, bw, bh] = frame.vb
-    return [...best.values()].map((l) => {
+    const placed: { l: MappedLine; left: number; top: number }[] = []
+    for (const l of [...best.values()].sort((a, b) => b.lengthM - a.lengthM)) {
       const c = l.coords[Math.floor(l.coords.length / 2)]
-      return { l, left: ((frame.x(c[0]) - ox) / bw) * 100, top: ((frame.y(c[1]) - oy) / bh) * 100 }
-    })
-  }, [lines, frame])
+      const left = ((frame.x(c[0]) - ox) / bw) * 100
+      const top = ((frame.y(c[1]) - oy) / bh) * 100
+      const clash = placed.some((m) => Math.hypot(((m.left - left) / 100) * size.w, ((m.top - top) / 100) * size.h) < 24)
+      if (!clash) placed.push({ l, left, top })
+    }
+    return placed
+  }, [lines, frame, size.w, size.h])
 
   return (
     <div ref={ref} className="absolute inset-0 overflow-hidden bg-[radial-gradient(120%_90%_at_30%_10%,var(--glacier),var(--surface-2)_70%)]">
