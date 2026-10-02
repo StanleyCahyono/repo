@@ -571,13 +571,25 @@ function pistePlugin({ routes, files, migrations, buildInfo, worker }) {
 }
 
 /** src/assets as data URLs (the Today hero art, the avatar body), for src/lib/ui/assets.ts's shim. */
+// Resort photos are re-encoded smaller for the single file (960 px, q58) so ~100 of them stay a few MB; the served
+// app keeps the 1280 px originals. Computed once before bundling (sharp is async).
+const SMALL_PHOTOS = await (async () => {
+  const { default: sharp } = await import('sharp')
+  const dir = path.join(SRC, 'assets')
+  const out = {}
+  for (const f of fs.readdirSync(dir).filter((x) => /^photo-.+\.webp$/.test(x))) {
+    out[f] = await sharp(path.join(dir, f)).resize({ width: 960 }).webp({ quality: 58 }).toBuffer()
+  }
+  return out
+})()
+
 function assetDataUrls() {
   const TYPES = { webp: 'image/webp', png: 'image/png', glb: 'model/gltf-binary', svg: 'image/svg+xml' }
   const dir = path.join(SRC, 'assets')
   const out = {}
   for (const f of fs.readdirSync(dir)) {
     const type = TYPES[f.split('.').pop()]
-    if (type) out[f] = `data:${type};base64,${fs.readFileSync(path.join(dir, f)).toString('base64')}`
+    if (type) out[f] = `data:${type};base64,${(SMALL_PHOTOS[f] ?? fs.readFileSync(path.join(dir, f))).toString('base64')}`
   }
   return out
 }

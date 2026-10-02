@@ -5,10 +5,11 @@
  *
  *   NODE_USE_ENV_PROXY=1 node scripts/build-osm-snapshots.mjs            # all resorts missing a snapshot
  *   NODE_USE_ENV_PROXY=1 node scripts/build-osm-snapshots.mjs --force zermatt alta
+ *   node scripts/build-osm-snapshots.mjs --encode      # convert older snapshots to encoded polylines (offline)
  *
  * Area: the OpenStreetMap ski areas (landuse=winter_sports) within 3 km of the resort's coordinate, as one bounding
  * box (padded 400 m); without any, a radius around the coordinate sized from the catalog's piste km. Lines are
- * simplified (≈4 m) and rounded to 5 decimals. Data © OpenStreetMap contributors, ODbL.
+ * simplified (≈4 m) and stored as encoded polylines (5 decimals). Data © OpenStreetMap contributors, ODbL.
  * Writes src/assets/osm/index.ts (the registry the app imports).
  */
 import fs from 'node:fs'
@@ -20,7 +21,8 @@ const OUT = path.join(ROOT, 'src', 'assets', 'osm')
 const ENDPOINTS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter']
 const UA = 'Piste/0.1 (personal ski planner; one-off snapshot build)'
 const LIFTS = 'cable_car|gondola|mixed_lift|chair_lift|drag_lift|t-bar|j-bar|platter|rope_tow|magic_carpet|zip_line'
-const KEEP_TAGS = ['name', 'ref', 'aerialway', 'aerialway:occupancy', 'aerialway:capacity', 'piste:type', 'piste:difficulty', 'piste:name', 'piste:grooming', 'area']
+// Only the tags the map reads (every non-lift line is a downhill piste, so piste:type is implied).
+const KEEP_TAGS = ['name', 'ref', 'aerialway', 'aerialway:occupancy', 'piste:difficulty', 'piste:name']
 
 const args = process.argv.slice(2)
 const force = args.includes('--force')
@@ -72,6 +74,30 @@ function simplify(pts, tolM = 4) {
   return pts.filter((_, i) => keep[i]).map(([lo, la]) => [+lo.toFixed(5), +la.toFixed(5)])
 }
 
+// Google encoded polyline (precision 5): about a third of the size of JSON coordinate pairs.
+function encode(pts) {
+  let out = ''
+  let pLat = 0
+  let pLon = 0
+  const enc = (v) => {
+    v = v < 0 ? ~(v << 1) : v << 1
+    while (v >= 0x20) {
+      out += String.fromCharCode((0x20 | (v & 0x1f)) + 63)
+      v >>= 5
+    }
+    out += String.fromCharCode(v + 63)
+  }
+  for (const [lon, lat] of pts) {
+    const la = Math.round(lat * 1e5)
+    const lo = Math.round(lon * 1e5)
+    enc(la - pLat)
+    enc(lo - pLon)
+    pLat = la
+    pLon = lo
+  }
+  return out
+}
+
 const pick = (tags = {}) => Object.fromEntries(KEEP_TAGS.filter((k) => tags[k] != null).map((k) => [k, tags[k]]))
 
 async function snapshot(r) {
@@ -107,7 +133,7 @@ async function snapshot(r) {
     if (el.type === 'way' && el.geometry) {
       if (el.tags?.area === 'yes' || (el.tags?.['piste:type'] === 'downhill' && el.geometry.length > 3 && el.geometry[0].lat === el.geometry.at(-1).lat && el.geometry[0].lon === el.geometry.at(-1).lon && !el.tags?.aerialway)) continue
       seen.add(el.id)
-      elements.push({ id: `w${el.id}`, tags: pick(el.tags), c: simplify(el.geometry.map((g) => [g.lon, g.lat])) })
+      elements.push({ tags: pick(el.tags), c: simplify(el.geometry.map((g) => [g.lon, g.lat])) })
     }
   }
   // Route relations: their member ways carry the relation's name and difficulty (member ways often have no tags).
@@ -116,7 +142,7 @@ async function snapshot(r) {
     for (const m of el.members) {
       if (m.type !== 'way' || !m.geometry || seen.has(m.ref) || m.role === 'outer' || m.role === 'inner') continue
       seen.add(m.ref)
-      elements.push({ id: `r${el.id}w${m.ref}`, tags: pick({ ...el.tags, type: undefined }), c: simplify(m.geometry.filter(Boolean).map((g) => [g.lon, g.lat])) })
+      elements.push({ tags: pick(el.tags), c: simplify(m.geometry.filter(Boolean).map((g) => [g.lon, g.lat])) })
     }
   }
   return {
@@ -124,7 +150,7 @@ async function snapshot(r) {
     source: 'OpenStreetMap contributors (ODbL)',
     osmTimestamp: data.osm3s?.timestamp_osm_base ?? null,
     area,
-    elements: elements.filter((x) => x.c.length >= 2),
+    elements: elements.filter((x) => x.c.length >= 2).map(({ c, ...x }) => ({ ...x, p: encode(c) })),
   }
 }
 
@@ -142,6 +168,20 @@ ${files.map((f) => `  '${id(f)}': ${ident(f)} as unknown as OsmSnapshot,`).join(
 `
   fs.writeFileSync(path.join(OUT, 'index.ts'), src)
   console.log(`index.ts: ${files.length} snapshots`)
+}
+
+// --encode: rewrite existing snapshots into the current compact format (encoded polylines, used tags only) offline.
+if (args.includes('--encode')) {
+  for (const f of fs.readdirSync(OUT).filter((x) => x.endsWith('.json'))) {
+    const snap = JSON.parse(fs.readFileSync(path.join(OUT, f), 'utf8'))
+    snap.elements = snap.elements.map(({ c, geometry, p, tags }) => ({
+      tags: pick(tags),
+      p: p ?? encode(c ?? (geometry ?? []).map((g) => [g.lon, g.lat])),
+    }))
+    fs.writeFileSync(path.join(OUT, f), JSON.stringify(snap))
+  }
+  writeIndex()
+  process.exit(0)
 }
 
 const resorts = fs

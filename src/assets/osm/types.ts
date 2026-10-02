@@ -2,7 +2,9 @@
 export interface OsmSnapshotElement {
   id?: string
   tags?: Record<string, string>
-  /** Compact line: [lon, lat] pairs (current format). */
+  /** Encoded polyline (precision 5, lat/lon order) — current format. */
+  p?: string
+  /** Older compact line: [lon, lat] pairs. */
   c?: [number, number][]
   /** Older format: {lat, lon} points. */
   geometry?: { lat: number; lon: number }[]

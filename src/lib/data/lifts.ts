@@ -36,6 +36,7 @@ import { provenance, type Provenance } from '@/lib/domain/types'
 import { greatCircleKm } from '@/lib/domain/geo'
 import { LIFT_TYPES, PISTE_DIFFICULTIES, difficultyStyle as styleOf, liftKindText, type LiftType, type PisteShape, type PisteTone, type RunDifficulty } from '@/lib/domain/lifts'
 import { OSM_SNAPSHOTS } from '@/assets/osm'
+import { decodePolyline } from '@/assets/osm/decode'
 import { isLive, type DataCtx } from './core'
 import { OSM_ADAPTER_ID, osmTargets, providerStatus, readSkiAreaExtract, type ConnectorState } from './deps'
 
@@ -188,6 +189,7 @@ export interface MappedGeometry {
 
 interface SnapshotElement {
   tags?: Record<string, string | undefined>
+  p?: string
   c?: [number, number][]
   geometry?: { lat: number; lon: number }[]
 }
@@ -213,7 +215,7 @@ export function bundledGeometry(resortId: string, country: string): MappedGeomet
   let n = -90
   snap.elements.forEach((el, i) => {
     const t = el.tags ?? {}
-    const coords = el.c ?? (el.geometry ?? []).map((g) => [g.lon, g.lat] as [number, number])
+    const coords = el.p != null ? decodePolyline(el.p) : el.c ?? (el.geometry ?? []).map((g) => [g.lon, g.lat] as [number, number])
     if (coords.length < 2) return
     for (const [lon, lat] of coords) {
       w = Math.min(w, lon)
