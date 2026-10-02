@@ -37,6 +37,10 @@ async function api(host, params) {
 
 const FREE = /^(cc0|public domain|pd|cc[- ]by(-sa)?[- ]?\d(\.\d)?|cc[- ]by(-sa)?)/i
 const SKIP = /\b(map|plan|logo|diagram|chart|locator|svg|piste ?map|trail ?map|panorama map|icon|flag|coat of arms|signage|sign)\b/i
+// Geotagged/searched files must say they are about skiing or the mountain in winter (the name alone matched a
+// family snapshot and a beetle). Files rejected on review are listed in scripts/photo-rejects.json.
+const SKI_WORDS = /\b(ski|skiing|skier|skiers|piste|pistes|slope|slopes|lift|lifts|gondola|chairlift|cable car|snow|winter|resort|summit|trail|trails)\b/i
+const REJECTS = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'photo-rejects.json'), 'utf8'))
 const strip = (html) => (html ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
 
 async function fileInfo(title) {
@@ -91,9 +95,11 @@ async function photoFor(r) {
   const tried = new Set()
   const title = await wikipediaTitle(r).catch(() => null)
   const lead = title ? await leadImage(title).catch(() => null) : null
-  const candidates = [...(lead ? [lead] : []), ...(await nearby(r).catch(() => [])), ...(await searched(r).catch(() => []))]
+  const others = [...(await nearby(r).catch(() => [])), ...(await searched(r).catch(() => []))].filter((t) => SKI_WORDS.test(t) && !/\bISS\d|view of earth/i.test(t))
+  const candidates = [...(lead ? [lead] : []), ...others]
+  const rejected = new Set(REJECTS[r.id] ?? [])
   for (const c of candidates) {
-    if (tried.has(c)) continue
+    if (tried.has(c) || rejected.has(c)) continue
     tried.add(c)
     const info = await fileInfo(c).catch(() => null)
     if (info) return info
