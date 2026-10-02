@@ -7,7 +7,7 @@
  *   NODE_USE_ENV_PROXY=1 node scripts/build-resort-photos.mjs --force alta
  *
  * Order: the resort's English Wikipedia lead image (title from the catalog's Wikipedia link, else a search), then
- * Commons files geotagged within 8 km. Only CC0, public domain, CC BY and CC BY-SA files are used; maps, logos,
+ * Commons files geotagged within 8 km, then a Commons search for "<name> ski". Only CC0, public domain, CC BY and CC BY-SA files are used; maps, logos,
  * diagrams and SVGs are skipped. The catalog photo `src` is "asset:photo-<id>.webp" (resolved by src/lib/ui/assets).
  */
 import fs from 'node:fs'
@@ -82,17 +82,22 @@ async function nearby(r) {
   return (d.query?.geosearch ?? []).map((g) => g.title).filter((t) => /\.(jpe?g|png|webp)$/i.test(t)).sort((a, b) => score(b) - score(a))
 }
 
+async function searched(r) {
+  const d = await api('commons.wikimedia.org', { action: 'query', list: 'search', srsearch: `${r.shortName || r.name} ski filetype:bitmap`, srnamespace: '6', srlimit: '30' })
+  return (d.query?.search ?? []).map((s) => s.title)
+}
+
 async function photoFor(r) {
   const tried = new Set()
   const title = await wikipediaTitle(r).catch(() => null)
   const lead = title ? await leadImage(title).catch(() => null) : null
-  const candidates = [...(lead ? [lead] : []), ...(await nearby(r).catch(() => []))]
+  const candidates = [...(lead ? [lead] : []), ...(await nearby(r).catch(() => [])), ...(await searched(r).catch(() => []))]
   for (const c of candidates) {
     if (tried.has(c)) continue
     tried.add(c)
     const info = await fileInfo(c).catch(() => null)
     if (info) return info
-    if (tried.size > 25) break
+    if (tried.size > 60) break
   }
   return null
 }

@@ -1,5 +1,6 @@
 # Downloads every resort's OpenStreetMap lifts & pistes and a freely licensed Wikimedia Commons photo ONCE, and
 # commits them to this branch (src/assets/osm/*.json, src/assets/photo-*.webp, catalog photo credits).
+# Only resorts still missing a snapshot or photo are fetched (pass --force locally to refresh).
 # Runs on a push whose commit message contains [resort-assets], or manually.
 name: Resort assets
 on:
@@ -26,7 +27,7 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - name: Lifts and pistes (OpenStreetMap)
-        run: node scripts/build-osm-snapshots.mjs --force
+        run: node scripts/build-osm-snapshots.mjs
       - name: Photos (Wikimedia Commons)
         run: node scripts/build-resort-photos.mjs
       - name: Commit
