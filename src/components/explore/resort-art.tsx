@@ -36,7 +36,7 @@ export function ResortArt({
 }) {
   const duo = DUO[id]
   const base = 'relative overflow-hidden bg-[linear-gradient(170deg,color-mix(in_srgb,var(--sky-1)_85%,var(--surface)),var(--surface-2))]'
-  if (media.photo) {
+  if (media.photo && !duo) {
     return (
       <figure className={cn(base, className)}>
         {/* eslint-disable-next-line @next/next/no-img-element -- licensed local photo from the catalog */}
