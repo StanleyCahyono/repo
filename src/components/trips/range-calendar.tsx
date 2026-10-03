@@ -1,24 +1,21 @@
 'use client'
 /**
- * Range calendar (Glass HUD): tap a start day, then an end day. The range band springs between days, the start and
- * end knobs glide to the day you tap, nights are counted, and each day carries the season marker of the resorts in
- * view — solid teal for an opened season, light teal for an announced one, a dashed copper rule after a Piste-estimated
- * opening. Markers always come with text (legend + each day's accessible name), never colour alone.
+ * Range calendar (Glass HUD): tap a start day, then an end day. Built on the shared calendar primitives
+ * (ui/date-picker-grid) so it looks and moves like every other calendar in Piste: the range band springs between
+ * days, the start and end knobs glide to the day you tap, months slide sideways, nights are counted, and each day
+ * carries the season marker of the resorts in view — solid teal for an opened season, light teal for an announced
+ * one, a dashed copper rule after a Piste-estimated opening. Markers always come with text (legend + each day's
+ * accessible name), never colour alone.
  *
- * Keyboard: arrow keys move by day / week, PageUp / PageDown by month, Home / End to the week's edges; Enter or Space
- * picks. Reduced motion: the band and knobs jump instead of springing (MotionConfig in the shell).
+ * Keyboard: arrow keys move by day / week, PageUp / PageDown by month (Shift: year), Home / End to the week's edges;
+ * Enter or Space picks. Reduced motion: the band and knobs jump instead of springing (MotionConfig in the shell).
  */
-import { useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
-import { AnimatePresence, LayoutGroup, motion } from 'motion/react'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { useCallback, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
+import { X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
-import { addDays, formatLocalDate } from '@/lib/domain/time'
 import { markOn, type SeasonTrack, type SeasonWindowKind } from '@/lib/data/trip-seasons'
-import { addMonths, bandSegment, monthGrid, monthOf, nightsOf, pickDay } from './calendar-model'
-
-const SPRING = { type: 'spring', stiffness: 420, damping: 34, mass: 0.8 } as const
-const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
-const DOW_LONG = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+import { addMonths, bandRange, daysInMonth, formatDate, monthOf, navigateDate, nightsLabel, nightsOf, pickDay, windowFor, type DateMark } from '@/components/ui/calendar-model'
+import { MarkGlyph, MonthGrid, MonthTitle, NavButton, SlidingMonths } from '@/components/ui/date-picker-grid'
 
 export const MARK_TEXT: Record<SeasonWindowKind, string> = {
   opened: 'season opened',
@@ -26,15 +23,15 @@ export const MARK_TEXT: Record<SeasonWindowKind, string> = {
   estimate: 'after estimated opening (Piste estimate)',
 }
 
+const MARK_STYLE: Record<SeasonWindowKind, Pick<DateMark, 'tone' | 'variant' | 'soft'>> = {
+  opened: { tone: 'teal', variant: 'rule' },
+  announced: { tone: 'teal', variant: 'rule', soft: true },
+  estimate: { tone: 'copper', variant: 'dashed' },
+}
+
 /** The little rule drawn under a day number (also used by legends). */
 export function SeasonMark({ kind, className, inverted }: { kind: SeasonWindowKind; className?: string; inverted?: boolean }) {
-  return (
-    <i
-      aria-hidden
-      className={cn('block h-[3px] w-3.5 rounded-full', kind === 'opened' ? (inverted ? 'bg-on-ink-chip-accent' : 'bg-teal') : kind === 'announced' ? (inverted ? 'bg-on-ink-chip-accent/60' : 'bg-teal/45') : null, className)}
-      style={kind === 'estimate' ? { background: `repeating-linear-gradient(90deg, ${inverted ? 'var(--on-ink-chip-accent)' : 'var(--copper)'} 0 2px, transparent 2px 4px)` } : undefined}
-    />
-  )
+  return <MarkGlyph {...MARK_STYLE[kind]} inverted={inverted} className={className} />
 }
 
 export interface RangeCalendarProps {
@@ -57,16 +54,26 @@ export interface RangeCalendarProps {
 export function RangeCalendar({ start, end, onChange, today, min, maxDays, tracks = [], initialMonth, label = 'Trip dates', className }: RangeCalendarProps) {
   const uid = useId()
   const floor = min ?? today
+  const minMonth = monthOf(floor)
+  const maxMonth = addMonths(monthOf(today), 18)
+  const ceiling = `${maxMonth}-${String(daysInMonth(maxMonth)).padStart(2, '0')}`
   const [month, setMonth] = useState(initialMonth ?? monthOf(start ?? (today > floor ? today : floor)))
   const [dir, setDir] = useState(1)
   const [hover, setHover] = useState<string | null>(null)
   const [focus, setFocus] = useState<string>(start ?? (today >= floor ? today : floor))
+  const [gridFocused, setGridFocused] = useState(false)
   const [note, setNote] = useState<string | null>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
-  const minMonth = monthOf(floor)
-  const maxMonth = addMonths(monthOf(today), 18)
-  const weeks = useMemo(() => monthGrid(month), [month])
-  const monthDays = weeks.flat().filter(Boolean) as string[]
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  const monthDays = useMemo(() => Array.from({ length: daysInMonth(month) }, (_, i) => `${month}-${String(i + 1).padStart(2, '0')}`), [month])
+  const isDisabled = useCallback((d: string) => d < floor, [floor])
+  const marksFor = useCallback(
+    (d: string): DateMark[] => {
+      const m = markOn(tracks, d)
+      return m ? [{ date: d, label: `${m.track.name}: ${MARK_TEXT[m.kind]}`, ...MARK_STYLE[m.kind] }] : []
+    },
+    [tracks],
+  )
 
   const go = (n: number) => {
     const next = addMonths(month, n)
@@ -84,34 +91,28 @@ export function RangeCalendar({ start, end, onChange, today, min, maxDays, track
       return
     }
     setNote(null)
+    setFocus(day)
+    if (next.end) setHover(null)
     onChange(next.start, next.end)
   }
 
-  const moveFocus = (to: string) => {
-    if (to < floor) to = floor
-    const m = monthOf(to)
-    if (m > maxMonth) return
-    if (m !== month) {
-      setDir(m > month ? 1 : -1)
-      setMonth(m)
+  const onKey = (e: KeyboardEvent<HTMLButtonElement>, day: string) => {
+    const to = navigateDate(day, e.key, { shift: e.shiftKey, min: floor, max: ceiling })
+    if (!to) return
+    e.preventDefault()
+    const nv = windowFor(to, month, 1)
+    if (nv !== month) {
+      setDir(nv > month ? 1 : -1)
+      setMonth(nv)
     }
     setFocus(to)
     // Focus after the grid re-renders with the new month.
-    requestAnimationFrame(() => gridRef.current?.querySelector<HTMLButtonElement>(`[data-day="${to}"]`)?.focus())
+    requestAnimationFrame(() => rootRef.current?.querySelector<HTMLButtonElement>(`[data-page="active"] [data-day="${to}"]`)?.focus())
   }
 
-  const onKey = (e: KeyboardEvent<HTMLButtonElement>, day: string) => {
-    const wd = (weeks.flat().indexOf(day) + 7) % 7
-    const map: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7, PageUp: -28, PageDown: 28, Home: -wd, End: 6 - wd }
-    if (!(e.key in map)) return
-    e.preventDefault()
-    moveFocus(addDays(day, map[e.key]))
-  }
-
-  // The band: the chosen range, or a preview while choosing the end day.
-  const preview = start && !end && hover && hover > start ? hover : null
-  const bandEnd = end ?? preview
-  const focusable = monthDays.includes(focus) ? focus : (monthDays.find((d) => d >= floor) ?? monthDays[0])
+  // The band: the chosen range, or a preview while choosing the end day (pointer hover or keyboard focus).
+  const band = bandRange({ start, end }, hover ?? (gridFocused && start && !end ? focus : null))
+  const tabbable = monthDays.includes(focus) ? focus : (monthDays.find((d) => d >= floor) ?? monthDays[0])
   const visibleKinds = new Map<string, { kind: SeasonWindowKind; label: string; name: string }>()
   for (const d of monthDays) {
     const m = markOn(tracks, d)
@@ -119,135 +120,67 @@ export function RangeCalendar({ start, end, onChange, today, min, maxDays, track
   }
   const multiTrack = tracks.filter((t) => t.windows.length).length > 1
 
-  const counts = start && end ? nightsOf(start, end) : null
-  const status = counts
-    ? `${formatLocalDate(start!, 'ccc d LLL')} – ${formatLocalDate(end!, 'ccc d LLL')}`
-    : start
-      ? `${formatLocalDate(start, 'ccc d LLL')} – pick the last day`
-      : 'Pick your dates'
+  // Each date stays on one line ("Thu 8 Oct – / Sun 11 Oct", never "Sun / 11 Oct").
+  const day = (d: string) => <span className="whitespace-nowrap">{formatDate(d, 'short')}</span>
+  const status =
+    start && end ? (
+      <>
+        {day(start)} – {day(end)}
+      </>
+    ) : start ? (
+      <>
+        {day(start)} – pick the last day
+      </>
+    ) : (
+      'Pick your dates'
+    )
 
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
-      <div className="flex items-center justify-between gap-3">
+    <div ref={rootRef} className={cn('flex flex-col gap-3', className)}>
+      <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="hud text-ink-2">{label}</p>
-          <p aria-live="polite" className="mt-0.5 text-[22px] leading-tight font-light tracking-[-0.02em] text-ink tnum md:text-[24px]">
+          <p aria-live="polite" className="mt-1 font-display text-[22px] leading-tight font-light tracking-[-0.02em] text-ink tnum md:text-[24px]">
             {status}
-            {counts ? (
-              <span className="mt-0.5 block text-[13px] font-normal tracking-normal text-ink-2">
-                {counts.nights ? `${counts.nights} ${counts.nights === 1 ? 'night' : 'nights'} · ` : 'Day trip · '}
-                {counts.days} {counts.days === 1 ? 'day' : 'days'}
-              </span>
-            ) : null}
+            {start && end ? <span className="mt-0.5 block font-sans text-[13px] font-normal tracking-normal text-ink-2">{nightsLabel(start, end)}</span> : null}
           </p>
         </div>
         <div className="flex shrink-0 gap-1.5">
-          <button type="button" aria-label="Previous month" disabled={month <= minMonth} onClick={() => go(-1)} className="glass-strong flex size-11 items-center justify-center rounded-full text-ink transition-transform duration-150 hover:-translate-y-px disabled:opacity-35 disabled:hover:translate-y-0">
-            <ChevronLeft aria-hidden className="size-[18px]" />
-          </button>
-          <button type="button" aria-label="Next month" disabled={month >= maxMonth} onClick={() => go(1)} className="glass-strong flex size-11 items-center justify-center rounded-full text-ink transition-transform duration-150 hover:-translate-y-px disabled:opacity-35 disabled:hover:translate-y-0">
-            <ChevronRight aria-hidden className="size-[18px]" />
-          </button>
+          <NavButton dir={-1} disabled={month <= minMonth} onClick={() => go(-1)} density="large" />
+          <NavButton dir={1} disabled={month >= maxMonth} onClick={() => go(1)} density="large" />
         </div>
       </div>
 
-      <div className="flex items-baseline justify-between gap-3">
-        <p id={`${uid}-month`} className="text-[15px] font-semibold text-ink">
-          {formatLocalDate(`${month}-01`, 'LLLL yyyy')}
-        </p>
+      <div className="flex items-center justify-between gap-3">
+        <MonthTitle month={month} id={`${uid}-month`} />
         <p className="text-right text-[12.5px] text-ink-2">{start && !end ? 'Now tap the last day' : 'Tap a start day, then an end day'}</p>
       </div>
 
-      <div className="relative overflow-hidden">
-        <div className="grid grid-cols-7 pb-1" aria-hidden>
-          {DOW.map((d, i) => (
-            <span key={i} className={cn('text-center font-mono text-[12px] tracking-[0.1em]', i >= 5 ? 'text-teal' : 'text-ink-3')}>
-              {d}
-            </span>
-          ))}
-        </div>
-        <AnimatePresence mode="popLayout" initial={false} custom={dir}>
-          <motion.div
-            key={month}
-            ref={gridRef}
-            role="grid"
-            aria-labelledby={`${uid}-month`}
-            custom={dir}
-            initial={{ opacity: 0, x: dir * 28 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: dir * -28 }}
-            transition={{ duration: 0.22, ease: [0.22, 0.8, 0.26, 1] }}
-            className="flex flex-col gap-1"
-            onMouseLeave={() => setHover(null)}
-          >
-            <LayoutGroup id={`${uid}-band`}>
-              {weeks.map((week, wi) => {
-                const seg = bandSegment(week, start, bandEnd)
-                return (
-                  <div key={wi} role="row" className="relative grid grid-cols-7">
-                    {seg ? (
-                      <motion.span
-                        layout
-                        layoutId={`${uid}-band-${wi}`}
-                        aria-hidden
-                        transition={SPRING}
-                        className={cn('absolute inset-y-0', end ? 'bg-teal/15' : 'border border-dashed border-teal/45 bg-teal/[0.07]')}
-                        style={{
-                          left: `calc(${(seg.c0 / 7) * 100}% + 2px)`,
-                          width: `calc(${((seg.c1 - seg.c0 + 1) / 7) * 100}% - 4px)`,
-                          borderRadius: 22,
-                        }}
-                      />
-                    ) : null}
-                    {week.map((day, ci) => {
-                      if (!day) return <span key={ci} role="gridcell" aria-hidden className="h-11" />
-                      const off = day < floor
-                      const isStart = day === start
-                      const isEnd = day === end
-                      const sel = isStart || isEnd
-                      const mark = markOn(tracks, day)
-                      const isToday = day === today
-                      const aria = [
-                        `${DOW_LONG[ci]} ${formatLocalDate(day, 'd LLLL yyyy')}`,
-                        isToday ? 'today' : null,
-                        isStart ? 'trip start' : null,
-                        isEnd ? 'trip end' : null,
-                        mark ? `${mark.track.name}: ${MARK_TEXT[mark.kind]}` : null,
-                      ]
-                        .filter(Boolean)
-                        .join(', ')
-                      return (
-                        <span key={ci} role="gridcell" className="relative flex justify-center">
-                          <button
-                            type="button"
-                            data-day={day}
-                            tabIndex={day === focusable ? 0 : -1}
-                            disabled={off}
-                            aria-label={aria}
-                            aria-pressed={sel}
-                            onClick={() => pick(day)}
-                            onKeyDown={(e) => onKey(e, day)}
-                            onFocus={() => setFocus(day)}
-                            onMouseEnter={() => setHover(day)}
-                            className={cn(
-                              'group/day relative flex h-11 w-full max-w-[52px] flex-col items-center justify-center rounded-full text-[14px] font-medium outline-offset-2 transition-colors duration-150 tnum',
-                              off ? 'cursor-default text-ink-3/55' : sel ? 'text-on-ink-chip' : 'text-ink hover:bg-ink/[0.06]',
-                            )}
-                          >
-                            {sel ? <motion.span layoutId={`${uid}-${isStart ? 'start' : 'end'}`} transition={SPRING} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip shadow-[0_8px_18px_-6px_rgb(19_32_44/0.45)]" /> : null}
-                            <span className={cn('relative', sel && 'font-semibold')}>{Number(day.slice(8))}</span>
-                            {mark ? <SeasonMark kind={mark.kind} inverted={sel} className={cn('absolute bottom-[6px] left-1/2 -translate-x-1/2', off && 'opacity-50')} /> : null}
-                            {isToday ? <i aria-hidden className={cn('absolute top-[6px] right-[calc(50%-12px)] size-1 rounded-full', sel ? 'bg-on-ink-chip' : 'bg-teal')} /> : null}
-                          </button>
-                        </span>
-                      )
-                    })}
-                  </div>
-                )
-              })}
-            </LayoutGroup>
-          </motion.div>
-        </AnimatePresence>
+      <div
+        onFocus={() => setGridFocused(true)}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setGridFocused(false)
+        }}
+      >
+        <SlidingMonths pageKey={month} dir={dir} scope={uid}>
+          <MonthGrid
+            month={month}
+            today={today}
+            range={{ start, end }}
+            band={band}
+            tabbable={tabbable}
+            isDisabled={isDisabled}
+            marksFor={tracks.length ? marksFor : undefined}
+            describeDay={(_, s) => [s.rangeStart ? 'trip start' : null, s.rangeEnd ? 'trip end' : null]}
+            onPick={pick}
+            onDayKeyDown={onKey}
+            onDayFocus={setFocus}
+            onDayHover={start && !end ? setHover : undefined}
+            density="regular"
+            labelledBy={`${uid}-month`}
+            fixedRows={false}
+          />
+        </SlidingMonths>
       </div>
 
       {note ? (
@@ -269,11 +202,11 @@ export function RangeCalendar({ start, end, onChange, today, min, maxDays, track
           ))}
           {!visibleKinds.size && tracks.length ? <li className="text-ink-3">No season dates on file for this month{tracks.length === 1 ? ` at ${tracks[0].name}` : ''}</li> : null}
           <li className="flex items-center gap-2 text-ink-3">
-            <i aria-hidden className="size-1 rounded-full bg-teal" /> Today
+            <i aria-hidden className="size-3 rounded-full shadow-[inset_0_0_0_1.5px_var(--teal)]" /> Today
           </li>
         </ul>
         {start ? (
-          <button type="button" onClick={() => onChange(null, null)} className="inline-flex h-9 items-center gap-1 rounded-full px-2.5 text-[13px] font-medium text-ink-2 hover:bg-ink/[0.06] hover:text-ink">
+          <button type="button" onClick={() => onChange(null, null)} className="inline-flex h-9 items-center gap-1 rounded-full px-2.5 text-[13px] font-medium text-ink-2 hover:bg-chip-hover hover:text-ink">
             <X aria-hidden className="size-3.5" /> Clear
           </button>
         ) : null}
