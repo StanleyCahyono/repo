@@ -1,0 +1,61 @@
+# Collects web pages for catalog research (searches + rendered page text) because the dev container cannot browse.
+# Runs on a push whose commit message contains [research-fetch], or manually. Output goes to the research-data branch.
+name: Research fetch
+on:
+  push:
+    branches: [claude/piste-today-glass-hud]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: research-fetch
+  cancel-in-progress: false
+jobs:
+  fetch:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[research-fetch]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/research-plan.mjs
+      - run: node scripts/research-fetch.mjs --shard ${{ matrix.shard }}/4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: research-${{ matrix.shard }}
+          path: research-out
+  publish:
+    needs: fetch
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Merge shards and push to research-data
+        run: |
+          mkdir -p out/pages
+          node -e '
+            const fs=require("fs"),path=require("path");const items={};
+            for (const d of fs.readdirSync("parts")) {
+              const f=path.join("parts",d,"index.json"); if(!fs.existsSync(f)) continue;
+              Object.assign(items, JSON.parse(fs.readFileSync(f,"utf8")).items);
+            }
+            fs.writeFileSync("out/index.json", JSON.stringify({items}, null, 1));
+            console.log(Object.keys(items).length, "items");'
+          for d in parts/*/pages; do cp -r $d/* out/pages/ 2>/dev/null || true; done
+          cd out
+          git init -q -b research-data
+          git config user.name "piste-research-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add . && git commit -qm "Research pages $(date -u +%F)"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" research-data
