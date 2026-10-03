@@ -17,6 +17,7 @@ import { cn } from '@/lib/ui/cn'
 import { BackLink } from './back-link'
 import { ResortActions, type ResortActionsProps } from './resort-actions'
 import { ART_H, ART_W, terrainArt } from './terrain-art'
+import { PhotoCredit } from '@/components/ui/photo-credit'
 
 export type HeroTone = 'positive' | 'teal' | 'copper' | 'neutral' | 'critical'
 
@@ -125,12 +126,8 @@ function PhotoArt({ art }: { art: Extract<HeroArtSpec, { kind: 'photo' }> }) {
     <figure className="absolute inset-x-4 top-2 bottom-0 m-0 overflow-hidden rounded-t-[32px] md:inset-x-8">
       {/* eslint-disable-next-line @next/next/no-img-element -- licensed local photo */}
       <img src={art.src} alt={art.alt} className="absolute inset-0 h-full w-full object-cover" />
-      <figcaption className="absolute top-3 right-3 max-w-[80%] truncate rounded-full bg-glass-strong px-3 py-1 text-[12px] text-ink-2">
-        Photo:{' '}
-        <a href={art.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
-          {art.credit}
-        </a>{' '}
-        · {art.license}
+      <figcaption className="absolute top-3 right-3">
+        <PhotoCredit credit={art.credit} license={art.license} sourceUrl={art.sourceUrl} />
       </figcaption>
     </figure>
   )
