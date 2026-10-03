@@ -97,7 +97,7 @@ offline HTML file in the browser (data stays on my computer) and also as a Next.
 1. **Honest data.**
    - Unknown stays visibly unknown ("Unknown", "Not yet announced"), never 0 and never a fake value.
    - Weather is "Modeled", never "observed"; forecast wording reads "Likely…".
-   - Researched facts carry a quiet "Researched — confirm at source" with a source drawer.
+   - Researched facts look like any other fact, with a quiet source drawer; facts with no source are not shown.
    - No sample, placeholder or made-up content anywhere (see "Real content only").
    - Scores describe suitability, never safety.
    - Estimated drive times are labelled estimates. If real road geometry isn't available, the route animation must
@@ -151,8 +151,8 @@ out of the redesign entirely (no entry point, banner or simulated day).
 - **Ikon, Epic and Mountain Collective 2026–27 prices and deadlines aren't in the catalog.** Show them as unknown,
   with the official link.
 
-**Catalog facts to use.** These come from web research checked 28–30 Sep 2026 and show as "Researched — confirm at
-source". Third-party projections show as estimates. Airport times are the transfer from that airport to the resort.
+**Catalog facts to use.** These come from web research checked 28–30 Sep 2026 and show like any other fact.
+Third-party projections show as estimates. Airport times are the transfer from that airport to the resort.
 - **Greek Peak, NY (home mountain):**
   - 33 min (32 km) from Ithaca via NY-13 and NY-392.
   - 2026–27 opening not announced. It opened on 28 Nov 2025 and on 5 Dec 2024; OnTheSnow projects 27 Nov 2026.

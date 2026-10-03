@@ -142,26 +142,25 @@ describe('honest predicates', () => {
     expect(applyFilters([facets({ id: 'x', closedOnDate: true })], f({ hideClosed: true })).results).toEqual([])
   })
 
-  it('pass family: unconfirmed affiliation is unknown, not a match', () => {
-    const confirmed = facets({ id: 'a', families: [{ id: 'ikon', confirmed: true }] })
-    const unconfirmed = facets({ id: 'b', families: [{ id: 'ikon', confirmed: false }] })
-    const other = facets({ id: 'c', families: [{ id: 'epic', confirmed: true }] })
-    const r = applyFilters([confirmed, unconfirmed, other], f({ families: ['ikon'] }))
+  it('pass family: a recorded family matches; others do not', () => {
+    const ikon = facets({ id: 'a', families: [{ id: 'ikon' }] })
+    const other = facets({ id: 'c', families: [{ id: 'epic' }] })
+    const r = applyFilters([ikon, other], f({ families: ['ikon'] }))
     expect(r.results.map((x) => x.facets.id)).toEqual(['a'])
-    expect(r.hiddenUnknown.map((x) => x.facets.id)).toEqual(['b'])
+    expect(r.hiddenUnknown).toEqual([])
   })
 
   it('exact product and "usable on the date"', () => {
-    const covered = facets({ id: 'a', products: [{ id: 'p', status: 'included', canSki: true, headline: '', confirmAtSource: false }] })
-    const blackout = facets({ id: 'b', products: [{ id: 'p', status: 'blackout', canSki: false, headline: '', confirmAtSource: false }] })
-    const unknown = facets({ id: 'c', products: [{ id: 'p', status: 'unknown', canSki: false, headline: '', confirmAtSource: true }] })
+    const covered = facets({ id: 'a', products: [{ id: 'p', status: 'included', canSki: true, headline: '' }] })
+    const blackout = facets({ id: 'b', products: [{ id: 'p', status: 'blackout', canSki: false, headline: '' }] })
+    const unknown = facets({ id: 'c', products: [{ id: 'p', status: 'unknown', canSki: false, headline: '' }] })
     const none = facets({ id: 'd' })
     const rows = [covered, blackout, unknown, none]
     expect(applyFilters(rows, f({ product: 'p' })).results.map((x) => x.facets.id)).toEqual(['a', 'b'])
     const usable = applyFilters(rows, f({ product: 'p', usable: true }))
     expect(usable.results.map((x) => x.facets.id)).toEqual(['a'])
     expect(usable.hiddenUnknown.map((x) => x.facets.id)).toEqual(['c'])
-    // Without a product, "usable" uses the owned-pass answer (null = unconfirmed/no pass → unknown).
+    // Without a product, "usable" uses the owned-pass answer (null = unknown access or no pass → unknown).
     const owned = applyFilters([facets({ id: 'x', ownedCanSki: true }), facets({ id: 'y', ownedCanSki: false }), facets({ id: 'z' })], f({ usable: true }))
     expect(owned.results.map((x) => x.facets.id)).toEqual(['x'])
     expect(owned.hiddenUnknown.map((x) => x.facets.id)).toEqual(['z'])

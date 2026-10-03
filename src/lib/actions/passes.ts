@@ -270,7 +270,7 @@ export async function logPassDay(input: LogDayForm): Promise<ActionResult<{ usag
   const warning = verdict.canSki
     ? null
     : verdict.status === 'unknown'
-      ? `Access at ${name} is not confirmed for this pass — the day is logged but no allowance is known.`
+      ? `No access is recorded at ${name} for this pass — the day is logged but no allowance is known.`
       : `The recorded rule says “${ACCESS_STATUS_LABEL[verdict.status]}” at ${name} on this date — check the rule if you used the pass.`
 
   const [row] = await db.insert(s.passUsage).values({ ownershipId: ownership.id, resortId: resort.id, date: v.date, notes: v.notes, createdAt: now }).returning({ id: s.passUsage.id })

@@ -240,7 +240,6 @@ function weightsFor(ability: AbilityLevel, hasCompanion: boolean): Record<FitCom
 
 const isPct = (v: number | null | undefined): v is number => typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 100
 const round = (v: number) => Math.round(v)
-const researchGrade = (v: VerificationLevel | null | undefined) => v == null || v === 'search-summary' || v === 'unverified'
 
 // ---------------------------------------------------------------------------
 // Terrain
@@ -250,12 +249,12 @@ export interface TerrainMatch {
   /** Terrain share used, in percent. */
   share: number | null
   note: string
-  /** The terrain split is research-grade (confirm at source). */
-  researched: boolean
 }
 
 /** How well a terrain mix suits one ability level. Pure and reusable (companion, explore filters). */
-export function terrainMatch(ability: AbilityLevel, t: FitTerrainInput | null): TerrainMatch {
+export function terrainMatch(ability: AbilityLevel, terrainIn: FitTerrainInput | null): TerrainMatch {
+  // An unverified split (no source backs it) is not known.
+  const t = terrainIn?.verification === 'unverified' ? null : terrainIn
   const b = isPct(t?.beginnerPct) ? t!.beginnerPct! : null
   const i = isPct(t?.intermediatePct) ? t!.intermediatePct! : null
   const a = isPct(t?.advancedPct) ? t!.advancedPct! : null
@@ -284,9 +283,8 @@ export function terrainMatch(ability: AbilityLevel, t: FitTerrainInput | null): 
       what = 'advanced/expert terrain'
       break
   }
-  const researched = researchGrade(t?.verification)
   if (share === null) {
-    return { value: null, share: null, note: `Terrain mix for a ${lvl} is unknown`, researched }
+    return { value: null, share: null, note: `Terrain mix for a ${lvl} is unknown` }
   }
   let value = round(evalCurve(TERRAIN_CURVES[ability], share))
   let note = `${round(share)}% ${what}`
@@ -300,7 +298,7 @@ export function terrainMatch(ability: AbilityLevel, t: FitTerrainInput | null): 
     value = Math.min(value, 30)
     note += ` — mostly beginner terrain (${round(b)}%)`
   }
-  return { value, share, note, researched }
+  return { value, share, note }
 }
 
 // ---------------------------------------------------------------------------
@@ -396,7 +394,7 @@ export function computeFit(input: FitInput): FitResult {
     terrain.value,
     terrain.value === null
       ? terrain.note
-      : `${capitalise(terrain.note)} for a ${lvl}${terrain.researched ? ' (researched split — confirm at source)' : ''}`,
+      : `${capitalise(terrain.note)} for a ${lvl}`,
   )
 
   // Learning support
@@ -491,10 +489,6 @@ export function computeFit(input: FitInput): FitResult {
   } else if (coverage < 0.9) {
     level = 1
     confidenceReasons.push(`${round(coverage * 100)}% of the fit inputs are known`)
-  }
-  if (terrain.value !== null && researchGrade(input.terrain?.verification)) {
-    level = Math.max(level, 1)
-    confidenceReasons.push('Terrain split is researched catalog data — confirm at source')
   }
   if (travel.mode === 'drive' && travel.isEstimate) {
     level = Math.max(level, 1)

@@ -16,7 +16,6 @@ import {
   type CardLearning,
   type CardPassLine,
   type LearningLevel,
-  type ResearchLevel,
   type ResortCardData,
 } from '@/components/resort/card-data'
 import { computeDayBasket, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/costs'
@@ -39,6 +38,7 @@ import {
 } from '@/lib/domain/types'
 import { REGION_GROUP_ORDER } from '@/components/explore/regions'
 import { hasSouthernResorts, isLive, loadBundle, loadResortRows, seasonLabel, type Bundle, type DataCtx } from './core'
+import { shownHotels, shownSchedules } from './shown'
 import { hoursForDate } from './resort-detail'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { ownedVerdicts, type EventView, eventView } from './views'
@@ -86,13 +86,6 @@ export function regionGroup(country: string, stateProvince: string | null): stri
 
 const GROUP_ORDER: readonly string[] = REGION_GROUP_ORDER
 
-function researchLevel(b: Bundle, id: string): ResearchLevel {
-  const method = b.byId.get(id)?.row.research?.method ?? null
-  if (method === 'reference-only') return 'reference'
-  if (method) return 'researched'
-  return null
-}
-
 const isFamily = (id: string): id is PassFamilyId => (PASS_FAMILIES as readonly string[]).includes(id)
 
 // ---------------------------------------------------------------------------
@@ -118,10 +111,10 @@ export interface ExploreFacets {
   fitScore: number | null
   fitLabel: string
   learning: LearningLevel
-  families: { id: PassFamilyId; confirmed: boolean }[]
-  /** Exact products with a rule here (not 'not-included'), evaluated for the date. */
-  products: { id: string; status: AccessStatus; canSki: boolean; headline: string; confirmAtSource: boolean }[]
-  /** Best owned-pass answer: true = usable, false = not usable, null = unconfirmed or no pass. */
+  families: { id: PassFamilyId }[]
+  /** Exact products with a shown rule here (not 'not-included'), evaluated for the date. */
+  products: { id: string; status: AccessStatus; canSki: boolean; headline: string }[]
+  /** Best owned-pass answer: true = usable, false = not usable, null = unknown or no pass. */
   ownedCanSki: boolean | null
   night: boolean | null
   lessons: boolean | null
@@ -191,7 +184,7 @@ function productVerdicts(b: Bundle, resortId: string, date: string): ExploreFace
       names: b.names,
       seasonOf: b.pass.seasonOf,
     })
-    out.push({ id: p.id, status: v.status, canSki: v.canSki, headline: v.headline, confirmAtSource: v.confirmAtSource })
+    out.push({ id: p.id, status: v.status, canSki: v.canSki, headline: v.headline })
   }
   return out
 }
@@ -226,7 +219,7 @@ function facetsFor(b: Bundle, sum: ResortSummary): ExploreFacets {
     fitScore: sum.fit.score,
     fitLabel: sum.fit.label,
     learning: learning.level,
-    families: sum.passes.filter((p) => isFamily(p.familyId)).map((p) => ({ id: p.familyId as PassFamilyId, confirmed: p.confirmed })),
+    families: sum.passes.filter((p) => isFamily(p.familyId)).map((p) => ({ id: p.familyId as PassFamilyId })),
     products: productVerdicts(b, sum.id, sum.date),
     ownedCanSki: my.status === 'covered' ? true : my.status === 'not-covered' ? false : null,
     night: f?.nightSkiing ?? null,
@@ -265,7 +258,7 @@ export async function getExploreView(ctx: DataCtx, opts: { date?: string | null;
   const summaries = await buildSummaries(b, { date, mode })
   const sl = seasonLabel(b.seasonId)
   const rows: ExploreRow[] = summaries.map((sum) => ({
-    card: toResortCardData(sum, { units: ctx.prefs.units, now: ctx.now, seasonLabel: sl, research: researchLevel(b, sum.id) }),
+    card: toResortCardData(sum, { units: ctx.prefs.units, now: ctx.now, seasonLabel: sl }),
     facets: facetsFor(b, sum),
   }))
 
@@ -365,7 +358,6 @@ export interface CompareAccessRow {
   canSki: boolean
   headline: string
   reservation: string | null
-  confirmAtSource: boolean
   reasons: string[]
   prov: Provenance | null
 }
@@ -379,7 +371,6 @@ export interface CompareCostLine {
   source: string | null
   note: string | null
   required: boolean
-  confirmAtSource: boolean
 }
 
 export interface CompareColumn {
@@ -405,7 +396,6 @@ export interface CompareColumn {
     intermediatePct: number | null
     advancedPct: number | null
     beginnerArea: string | null
-    researched: boolean
     prov: Provenance | null
   }
   learning: CardLearning
@@ -451,8 +441,6 @@ export interface CompareColumn {
     piste: string | null
     acres: number | null
     uphillPerHour: number | null
-    /** Researched by web search: show "Researched — confirm at source". */
-    researched: boolean
     prov: Provenance | null
   }
   events: { inWindow: { title: string; when: string; statusLabel: string }[]; upcoming: number; watching: number }
@@ -544,7 +532,7 @@ export async function getCompareView(
     .filter((id) => byId.has(id))
     .map((id) => {
       const sum = byId.get(id)!
-      const card = toResortCardData(sum, { units: p.units, now: ctx.now, seasonLabel: sl, research: researchLevel(b, id) })
+      const card = toResortCardData(sum, { units: p.units, now: ctx.now, seasonLabel: sl })
 
       // Score and components
       const sc = sum.score
@@ -609,7 +597,6 @@ export async function getCompareView(
               : v.canSki
                 ? 'Reservation requirement not recorded'
                 : null,
-        confirmAtSource: v.confirmAtSource,
         reasons: v.reasons.slice(0, 3),
         prov,
       }))
@@ -633,11 +620,10 @@ export async function getCompareView(
         source: l.source,
         note: l.note,
         required: l.required,
-        confirmAtSource: l.confirmAtSource,
       }))
 
       // Hours for the date (published vs live), in the resort's zone.
-      const mySchedules = schedules.filter((x) => x.resortId === id)
+      const mySchedules = shownSchedules(schedules.filter((x) => x.resortId === id))
       const forDate = hoursForDate(mySchedules, date, hemisphere)
       const dateSeason = seasonIdForHemisphere(date, hemisphere)
       const otherSeason = mySchedules.some((x) => x.seasonId && x.seasonId !== dateSeason)
@@ -652,7 +638,7 @@ export async function getCompareView(
       const practical = t.airports.find((a) => a.role !== 'closest') ?? t.airports[0] ?? null
 
       // Lodging (curated catalog hotels; never prices without a sourced quote)
-      const hotels = hotelRows.filter((h) => h.resortId === id)
+      const hotels = shownHotels(hotelRows.filter((h) => h.resortId === id))
       const tiers = ['budget', 'comfortable', 'premium'] as const
       const byTier = [
         ...tiers.map((tier) => ({ tier, count: hotels.filter((h) => h.tier === tier).length })),
@@ -690,7 +676,6 @@ export async function getCompareView(
           intermediatePct: sum.beginner.intermediatePct,
           advancedPct: sum.beginner.advancedPct,
           beginnerArea: sum.beginner.beginnerArea,
-          researched: card.learning.researched,
           prov: sum.beginner.terrainProv,
         },
         learning: card.learning,
@@ -724,8 +709,13 @@ export async function getCompareView(
           note: hoursNote,
         },
         access: {
-          rows: accessRows,
-          note: product ? null : mine.length ? null : 'No pass recorded — choose a product above to check exact access. Family badges are discovery only.',
+          // Unknown access (no usable rule recorded) is not shown as a row.
+          rows: accessRows.filter((a) => a.status !== 'unknown'),
+          note: accessRows.some((a) => a.status !== 'unknown')
+            ? null
+            : product || mine.length
+              ? 'No access recorded for this product here'
+              : 'No pass recorded — choose a product above to check exact access.',
         },
         cost: {
           lines,
@@ -802,7 +792,6 @@ export async function getCompareView(
             piste: formatDistance(tr?.pisteKm ?? null, p.units),
             acres: tr?.skiableAcres ?? null,
             uphillPerHour: tr?.liftCapacityPerHour ?? null,
-            researched: [prov, tr?.prov].some((x) => x?.verification === 'search-summary'),
             prov,
           }
         })(),
@@ -861,7 +850,7 @@ export async function getCompareView(
 export function compareCardPass(col: CompareColumn): CardPassLine | null {
   const r = col.access.rows[0]
   return r
-    ? passLineFromVerdict({ productName: r.productName, status: r.status, canSki: r.canSki, headline: r.headline, confirmAtSource: r.confirmAtSource })
+    ? passLineFromVerdict({ productName: r.productName, status: r.status, canSki: r.canSki, headline: r.headline })
     : null
 }
 

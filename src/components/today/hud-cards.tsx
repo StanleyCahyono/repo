@@ -164,14 +164,10 @@ export function PassDeadlinesCard({ card }: { card: PassCard }) {
         <Link href="/passes" className="hud rounded-full border border-divider-strong px-2.5 py-1.5 text-ink-2 hover:text-ink">
           Passes &amp; costs →
         </Link>
-        {card.confirmAtSource ? (
-          card.sourceUrl ? (
-            <a href={card.sourceUrl} target="_blank" rel="noreferrer" className="hud rounded-full border border-divider-strong px-2.5 py-1.5 text-ink-2 hover:text-ink">
-              ◇ Researched · confirm at source
-            </a>
-          ) : (
-            <span className="hud rounded-full border border-divider-strong px-2.5 py-1.5 text-ink-2">◇ Researched · confirm at source</span>
-          )
+        {card.sourceUrl ? (
+          <a href={card.sourceUrl} target="_blank" rel="noreferrer" className="hud rounded-full border border-divider-strong px-2.5 py-1.5 text-ink-2 hover:text-ink">
+            Source ↗
+          </a>
         ) : null}
       </div>
     </Card>

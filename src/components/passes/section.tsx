@@ -3,7 +3,6 @@
  * optional mono index, sentence-case h2, one line of context). Server-renderable.
  */
 import type { ReactNode } from 'react'
-import { Diamond } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 
 export function PassesSection({
@@ -61,16 +60,6 @@ export function SubHead({ id, children, aside, className, as: Tag = 'h3' }: { id
       </Tag>
       {aside ? <div className="max-w-full min-w-0 shrink-0 text-[13px]">{aside}</div> : null}
     </div>
-  )
-}
-
-/** "Researched — confirm at source" tag (research-grade or unverified facts). */
-export function ConfirmTag({ text = 'Researched — confirm at source', className }: { text?: string; className?: string }) {
-  return (
-    <span className={cn('inline-flex min-h-6 items-center gap-1.5 rounded-full border border-caution/35 bg-caution-bg/60 px-2 text-[12px] leading-tight font-medium text-caution', className)}>
-      <Diamond aria-hidden className="size-3 shrink-0" strokeWidth={2.2} />
-      {text}
-    </span>
   )
 }
 

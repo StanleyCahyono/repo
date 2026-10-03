@@ -1,6 +1,6 @@
 'use client'
 /**
- * Manual access-rule entry for one exact product at one resort. Saving inserts a NEW version (the researched record
+ * Manual access-rule entry for one exact product at one resort. Saving inserts a NEW version (the earlier record
  * and every earlier version stay in the history) labelled "Manual — you entered", with a required source link.
  * Blackouts must be answered explicitly: "no blackout dates" is a statement, so it is never the silent default.
  */

@@ -3,7 +3,7 @@
  * - pass × resort → one verdict per day (logged days and earlier days of the range consume allotments), the rule on
  *   file with its versions, the shared day pool, product notes and a route to enter a confirmed rule;
  * - pass only → where it works on those dates; resort only → which products work there.
- * Unknown is always "Not confirmed — not permission", never green.
+ * Unknown access (no usable rule recorded) is never green and never counted as included; lists leave it out.
  */
 import type { ReactNode } from 'react'
 import Link from 'next/link'
@@ -13,25 +13,19 @@ import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
 import type { CheckDay, CheckerResult, CheckerView, PoolView, ProductAnswer, ResortAnswer, RuleVersionView } from '@/lib/data/passes-screen'
 import type { AccessVerdict } from '@/lib/domain/passes/types'
 import { cn } from '@/lib/ui/cn'
+import { providerLabel } from '@/lib/domain/source-label'
 import { AccessMark } from './access-mark'
 import { ACCESS_TYPE_LABEL, dayLabel, dayNumber, dotJoin, familyId, instantDate, plural, rangeLabel, STATUS_META, TONE_TEXT, weekdayShort } from './format'
 import { checkerHref } from './params'
 import { PunchMeter } from './punch-meter'
-import { ConfirmTag, HolderTag, SubHead, YouEnteredTag } from './section'
+import { HolderTag, SubHead, YouEnteredTag } from './section'
 
-const CONFIRM_RE = /^(Researched — confirm at source\.?|Rule source not verified — confirm on the official page\.?)$/
-
-/**
- * Reasons worth showing beside a verdict. The "confirm at source" line becomes a tag, and the rule's own notes and
- * eligibility are left to the rule panel (they are the same for every day).
- */
+/** Reasons worth showing beside a verdict; the rule's own notes and eligibility are left to the rule panel. */
 function reasonsOf(v: AccessVerdict, rule: RuleVersionView | null, skipFirst = false): string[] {
-  return v.reasons
-    .slice(skipFirst ? 1 : 0)
-    .filter((r) => !CONFIRM_RE.test(r) && r !== 'This date is in the past.' && r !== rule?.notes && !r.startsWith('Eligibility: '))
+  return v.reasons.slice(skipFirst ? 1 : 0).filter((r) => r !== 'This date is in the past.' && r !== rule?.notes && !r.startsWith('Eligibility: '))
 }
 
-/** "2 included", "1 blacked out", "3 not confirmed". */
+/** "2 included", "1 blacked out", "3 with no access recorded". */
 const COUNT_WORD: Record<AccessVerdict['status'], string> = {
   included: 'included',
   'included-limited': 'included',
@@ -39,12 +33,12 @@ const COUNT_WORD: Record<AccessVerdict['status'], string> = {
   'days-exhausted': 'no days left',
   'discount-only': 'discount only',
   'not-included': 'not included',
-  unknown: 'not confirmed',
+  unknown: 'with no access recorded',
   'season-mismatch': 'other season',
 }
 
 function heroHeadline(v: AccessVerdict): string {
-  if (v.status === 'unknown') return 'Not confirmed — not permission'
+  if (v.status === 'unknown') return 'No access recorded'
   return v.headline || STATUS_META[v.status].label
 }
 
@@ -80,7 +74,6 @@ export function CheckerResults({ view, hero = false }: { view: CheckerView; hero
 function DayByDay({ r, from, to, hero }: { r: CheckerResult; from: string; to: string; hero: boolean }) {
   const single = r.days.length === 1
   const first = r.days[0]?.verdict
-  const confirm = r.days.some((d) => d.verdict.confirmAtSource)
   const fam = familyId(r.product.familyId)
   return (
     <div className="flex flex-col gap-5">
@@ -104,13 +97,6 @@ function DayByDay({ r, from, to, hero }: { r: CheckerResult; from: string; to: s
       </div>
 
       {hero ? single && first ? <Reasons v={first} rule={r.rule} /> : null : single && first ? <SingleVerdict v={first} rule={r.rule} /> : <RangeVerdict r={r} />}
-
-      {confirm ? (
-        <p className="-mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-ink-3">
-          <ConfirmTag />
-          <span>The rule behind this answer is research-grade or unverified — check the official page before you rely on it.</span>
-        </p>
-      ) : null}
 
       {!single ? <DayList r={r} /> : null}
 
@@ -215,7 +201,7 @@ function RangeVerdict({ r }: { r: CheckerResult }) {
             {r.covered}
             <span className="text-ink-3">/{n}</span>
           </span>
-          <span className="text-[14px] text-ink-2">{allUnknown ? 'days confirmed — access not confirmed' : 'days the pass can be used'}</span>
+          <span className="text-[14px] text-ink-2">{allUnknown ? 'days — no access recorded' : 'days the pass can be used'}</span>
         </p>
         <ul className="flex flex-wrap gap-1.5" aria-label="Days by status">
           {[...counts]
@@ -271,7 +257,7 @@ function DayList({ r }: { r: CheckerResult }) {
               </p>
               <div className="min-w-0">
                 <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <AccessMark status={v.status} variant="inline" label={v.status === 'unknown' ? 'Not confirmed' : v.headline || undefined} />
+                  <AccessMark status={v.status} variant="inline" label={v.status === 'unknown' ? 'No access recorded' : v.headline || undefined} />
                   {v.canSki && v.remainingAfterVisit != null ? <span className="text-[12.5px] text-ink-3 tnum">{plural(v.remainingAfterVisit, 'day')} left after</span> : null}
                   {v.alreadyCounted === 'logged' ? <span className="text-[12.5px] text-ink-3">already logged</span> : null}
                 </p>
@@ -347,8 +333,8 @@ function RuleProvenance({ rule }: { rule: RuleVersionView }) {
   return (
     <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-ink-3">
       <span className="font-medium text-ink-2">Version {rule.version}</span>
-      {rule.youEntered ? <YouEnteredTag /> : rule.confirmAtSource ? <ConfirmTag text={rule.verificationLabel} /> : <span>{rule.verificationLabel}</span>}
-      {rule.prov?.provider && !rule.youEntered ? <span>{rule.prov.provider}</span> : null}
+      {rule.youEntered ? <YouEnteredTag /> : rule.verificationLabel ? <span>{rule.verificationLabel}</span> : null}
+      {rule.prov?.provider && !rule.youEntered ? <span>{providerLabel(rule.prov.provider)}</span> : null}
       {when ? (
         <span>
           · {rule.youEntered ? 'entered' : 'recorded'} {when}
@@ -382,13 +368,12 @@ function RulePanel({ r, from }: { r: CheckerResult; from: string }) {
         </div>
       ) : (
         <p className="text-[14px] text-ink-2">
-          No rule is recorded for {r.product.name} at {r.resort.name}. Access is <strong className="font-semibold text-ink">not confirmed</strong> — Piste never
-          treats a missing rule as access.
+          No access rule is recorded for {r.product.name} at {r.resort.name}, so Piste does not count it as included.
         </p>
       )}
       {unknown ? (
         <p className="mt-3 rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-3 py-2 text-[13px] text-ink-2">
-          Check the official page, then enter what it says. Your entry is saved as a new version with its source link — the researched record stays in the history.
+          Enter the rule from the official page. It is saved as a new version with its source link.
         </p>
       ) : null}
       <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -425,7 +410,7 @@ function RulePanel({ r, from }: { r: CheckerResult; from: string }) {
                 <span className="font-medium text-ink tnum">v{h.version}</span>
                 <span className="text-ink">{ACCESS_TYPE_LABEL[h.access]}</span>
                 {h.days != null ? <span className="text-ink-2 tnum">· {plural(h.days, 'day')}</span> : null}
-                <span className="text-ink-3">· {h.verificationLabel}</span>
+                {h.verificationLabel ? <span className="text-ink-3">· {h.verificationLabel}</span> : null}
                 {h.id === r.history[0].id ? <span className="rounded-sm bg-glacier px-1.5 text-[12px] font-semibold text-teal">current</span> : null}
               </li>
             ))}
@@ -452,7 +437,7 @@ function PoolPanel({ pool, resortId }: { pool: PoolView; resortId: string }) {
                 <strong className="font-semibold tnum">{plural(pool.total, 'day')}</strong> shared between {joined}.
               </>
             ) : (
-              <>Days shared between {joined} — the pool size is not recorded, so access is not confirmed.</>
+              <>Days shared between {joined} — the pool size is not recorded, so no day is counted as included.</>
             )}
           </p>
           {pool.total != null ? (
@@ -471,7 +456,7 @@ function PoolPanel({ pool, resortId }: { pool: PoolView; resortId: string }) {
         </ul>
       </div>
       {pool.conflictingTotals ? (
-        <p className="mt-2 text-[12.5px] text-caution">Pool records disagree ({pool.conflictingTotals.join(' vs ')} days) — the smaller figure is used. Confirm at source.</p>
+        <p className="mt-2 text-[12.5px] text-caution">Pool records disagree ({pool.conflictingTotals.join(' vs ')} days) — the smaller figure is used.</p>
       ) : null}
       <p className="mt-3 text-[12.5px] text-ink-3">A day at any member resort uses a pool day; two resorts on the same date count as two days.</p>
     </section>
@@ -508,7 +493,6 @@ function ProductNotes({ r }: { r: CheckerResult }) {
           </div>
         ) : null}
       </dl>
-      {p.confirmAtSource ? <ConfirmTag className="mt-2" text={p.verificationLabel} /> : null}
     </details>
   )
 }
@@ -519,23 +503,22 @@ function ProductNotes({ r }: { r: CheckerResult }) {
 function answerLabel(a: { days: CheckDay[]; covered: number }): { status: AccessVerdict['status']; label: string } {
   const n = a.days.length
   const first = a.days[0]?.verdict
-  if (!first) return { status: 'unknown', label: 'Not confirmed' }
-  if (n === 1) return { status: first.status, label: first.status === 'unknown' ? 'Not confirmed' : first.headline || STATUS_META[first.status].label }
+  if (!first) return { status: 'unknown', label: 'No access recorded' }
+  if (n === 1) return { status: first.status, label: first.status === 'unknown' ? 'No access recorded' : first.headline || STATUS_META[first.status].label }
   if (a.covered === n) return { status: first.status, label: `All ${n} days` }
   if (a.covered > 0) return { status: 'included-limited', label: `${a.covered} of ${n} days` }
   const worst = [...a.days].sort((x, y) => (x.verdict.status === 'unknown' ? -1 : 0) - (y.verdict.status === 'unknown' ? -1 : 0))[0].verdict
-  return { status: worst.status, label: worst.status === 'unknown' ? 'Not confirmed' : STATUS_META[worst.status].label }
+  return { status: worst.status, label: worst.status === 'unknown' ? 'No access recorded' : STATUS_META[worst.status].label }
 }
 
 function group<T extends { days: CheckDay[]; covered: number }>(answers: T[]) {
   const can = answers.filter((a) => a.days.length && a.covered === a.days.length)
   const part = answers.filter((a) => a.covered > 0 && a.covered < a.days.length)
-  const unknown = answers.filter((a) => a.covered === 0 && a.days.some((d) => d.verdict.status === 'unknown'))
-  const cannot = answers.filter((a) => a.covered === 0 && !a.days.some((d) => d.verdict.status === 'unknown'))
+  // Answers with unknown access (no usable rule recorded) are not listed: they are neither usable nor a known "no".
+  const cannot = answers.filter((a) => a.covered === 0 && a.days.length && !a.days.some((d) => d.verdict.status === 'unknown'))
   return [
     { id: 'can', title: 'Can use', items: can },
     { id: 'part', title: 'Some of the days', items: part },
-    { id: 'unknown', title: 'Not confirmed — check before you go', items: unknown },
     { id: 'cannot', title: 'Can’t use', items: cannot },
   ].filter((g) => g.items.length)
 }
@@ -577,7 +560,7 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
                             a.resort.region,
                             a.rule ? ACCESS_TYPE_LABEL[a.rule.access] : null,
                             a.covered && a.rule?.reservationRequired === true ? 'Reservation required' : null,
-                            a.rule?.youEntered ? 'Manual — you entered' : a.rule?.confirmAtSource ? 'Researched' : null,
+                            a.rule?.youEntered ? 'Manual — you entered' : null,
                           )}
                         </span>
                       </span>
@@ -595,10 +578,9 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
         ))
       ) : (
         <p className="rounded-[20px] border border-dashed border-divider-strong bg-glass-soft p-4 text-[14px] text-ink-2">
-          No resort rules are recorded for {opt.name} yet — nowhere is confirmed. Choose a resort to enter the rule from the official page.
+          No resort access is recorded for {opt.name} yet. Choose a resort to enter the rule from the official page.
         </p>
       )}
-      <p className="text-[12.5px] text-ink-3">Resorts not listed have no rule for this pass: not confirmed, never assumed included.</p>
     </div>
   )
 }
@@ -636,7 +618,6 @@ function WhatWorksHere({ view, answers }: { view: CheckerView; answers: ProductA
                         <PassBadge family={familyId(a.option.familyId)} size="sm" />
                         <span className="text-[14.5px] font-medium text-ink group-hover:text-teal">{a.option.name}</span>
                         {a.option.holder ? <HolderTag holder={a.option.holder} /> : null}
-                        {!a.rule ? <span className="text-[12.5px] text-ink-3">no rule here</span> : null}
                         {a.covered && a.rule?.reservationRequired === true ? <span className="text-[12.5px] font-medium text-caution">Reservation required</span> : null}
                       </span>
                       <span className="flex shrink-0 items-center gap-2">

@@ -1,12 +1,11 @@
 /**
  * Passes & Costs read model.
  *
- * - Families and this season's exact products, with every pass price snapshot (quote kind, "confirm at source",
- *   purchase-by window) and the sales deadline with days left.
+ * - Families and this season's exact products, with every pass price snapshot (quote kind, purchase-by window) and
+ *   the sales deadline with days left. Unverified facts never reach here (see shown.ts).
  * - My owned passes (and other holders'): logged usage, remaining days per resort and per shared day pool.
  * - An access matrix product × resort for one date, answered from product-specific rules only (evaluateAccess):
- *   owned rows count that ownership's logged days; a missing or 'unknown' rule is shown as unknown, never as
- *   included. Family badges elsewhere are discovery only (BADGE_DISCLAIMER).
+ *   owned rows count that ownership's logged days; a missing rule is never counted as included.
  * - The pass-vs-tickets comparison on the resort days actually planned in upcoming trips, each day priced with
  *   its own ticket (never one resort's walk-up price multiplied out).
  */
@@ -16,9 +15,9 @@ import * as s from '@/lib/db/schema'
 import type { PassAccessRuleRow, PassProductRow, PriceSnapshotRow } from '@/lib/db/rows'
 import { comparePasses, isExpired, liftTicketFor, QUOTE_KIND_LABEL, type PassCandidate, type PassComparison } from '@/lib/domain/costs'
 import { money, type Money } from '@/lib/domain/money'
+import { cleanNote } from '@/lib/domain/source-label'
 import {
   ACCESS_STATUS_LABEL,
-  BADGE_DISCLAIMER,
   evaluateAccess,
   latestRule,
   latestRules,
@@ -32,7 +31,8 @@ import {
 } from '@/lib/domain/passes'
 import { daysBetween, hemisphereOf, isLocalDate, type SeasonOf } from '@/lib/domain/time'
 import { PASS_FAMILIES, type Provenance } from '@/lib/domain/types'
-import { groupBy, isLive, loadPassData, loadResortRows, needsConfirmation, seasonLabel, verificationLabel, type DataCtx, type OwnedPass } from './core'
+import { groupBy, isLive, loadPassData, loadResortRows, seasonLabel, verificationLabel, type DataCtx, type OwnedPass } from './core'
+import { shownPrices } from './shown'
 
 export interface PassPriceView {
   id: number
@@ -51,9 +51,8 @@ export interface PassPriceView {
   observedAt: string
   /** Sale window wording from the source, when recorded. */
   window: string | null
-  /** Research-grade or unverified: "Researched — confirm at source". */
-  confirmAtSource: boolean
-  verificationLabel: string
+  /** Quiet source tag ("Official page", "Confirmed by you"); null for researched catalog prices (shown as they are). */
+  verificationLabel: string | null
   prov: Provenance
 }
 
@@ -88,10 +87,9 @@ export interface PassProductView {
   /** Holders with this product ('me' and/or companions). */
   ownedBy: string[]
   ownedByMe: boolean
-  /** Resorts with a current rule that is not 'not-included' (incl. 'unknown' — affiliation, not confirmed access). */
+  /** Resorts with a current shown rule that is not 'not-included'. */
   resortCount: number
-  confirmAtSource: boolean
-  verificationLabel: string
+  verificationLabel: string | null
   prov: Provenance | null
 }
 
@@ -137,7 +135,7 @@ export interface AccessCellView {
   status: AccessStatus
   label: string
   canSki: boolean
-  /** A rule exists for this product at this resort (false → "Access not confirmed"). */
+  /** A shown rule exists for this product at this resort (false → no access recorded). */
   hasRule: boolean
   verdict: AccessVerdict
   ruleProv: Provenance | null
@@ -175,7 +173,6 @@ export interface PlannedDayView {
   /** That day's own adult lift ticket; null = unknown (never a guess). */
   ticket: Money | null
   ticketBasis: string | null
-  ticketConfirmAtSource: boolean
 }
 
 export interface PassComparisonView {
@@ -191,7 +188,6 @@ export interface PassesView {
   date: string
   today: string
   season: { id: string; label: string }
-  disclaimer: string
   families: FamilyView[]
   products: PassProductView[]
   owned: OwnedPassView[]
@@ -220,8 +216,7 @@ function priceView(p: PriceSnapshotRow, ctx: DataCtx): PassPriceView {
     quoteKind: p.quoteKind,
     quoteLabel: QUOTE_KIND_LABEL[p.quoteKind] ?? p.quoteKind,
     observedAt: p.observedAt,
-    window: p.prov?.note ?? null,
-    confirmAtSource: needsConfirmation(p.prov),
+    window: cleanNote(p.prov?.note),
     verificationLabel: verificationLabel(p.prov),
     prov: p.prov,
   }
@@ -283,7 +278,7 @@ export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[],
                 ? 'Discount only'
                 : a.status === 'not-included'
                   ? 'Not included'
-                  : 'Days not confirmed',
+                  : 'Days not recorded',
     })),
     byPool: remainingByPool(o.product, productRules, o.usage, seasonOf).map((p) => ({ ...p, memberNames: p.memberResortIds.map(name) })),
   }
@@ -322,7 +317,7 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
   const famName = new Map(pass.families.map((f) => [f.id, f.name]))
   const familyName = (id: string) => famName.get(id) ?? id
   const holdersBy = groupBy(pass.owned, (o) => o.product.id)
-  const pricesBy = groupBy(passPrices, (p) => p.subjectId)
+  const pricesBy = groupBy(shownPrices(passPrices), (p) => p.subjectId)
 
   // --- Products ------------------------------------------------------------------------------------------------
   const products: PassProductView[] = [...pass.products]
@@ -350,7 +345,6 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
         ownedBy: holders,
         ownedByMe: holders.includes('me'),
         resortCount: latestRules(pass.rules, p.id).filter((r) => r.access !== 'not-included').length,
-        confirmAtSource: needsConfirmation(p.prov),
         verificationLabel: verificationLabel(p.prov),
         prov: p.prov,
       }
@@ -430,7 +424,7 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
           ),
         )
     : []
-  const liftBy = groupBy(liftPrices, (p) => p.resortId ?? p.subjectId)
+  const liftBy = groupBy(shownPrices(liftPrices), (p) => p.resortId ?? p.subjectId)
   const resortById = new Map(resorts.map((r) => [r.id, r]))
   const plannedDays: PlannedDayView[] = planned.map((i) => {
     const row = resortById.get(i.refId!)
@@ -444,7 +438,6 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
       tripName: trip.name,
       ticket: t.price,
       ticketBasis: t.basis,
-      ticketConfirmAtSource: t.confirmAtSource,
     }
   })
   const comparisonNotes: string[] = []
@@ -474,21 +467,15 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
       names,
       seasonOf: pass.seasonOf,
     })
-    if (plannedDays.some((d) => d.ticketConfirmAtSource)) comparisonNotes.push('Some ticket prices are researched — confirm at source.')
-    if (products.some((p) => !p.ownedByMe && p.currentPrice?.confirmAtSource)) comparisonNotes.push('Some pass prices are researched — confirm at source.')
   }
 
-  const notes: string[] = [
-    BADGE_DISCLAIMER,
-    'Access is answered from each product’s own rules for the date; an unknown or missing rule is shown as unknown, never as included.',
-  ]
+  const notes: string[] = ['Access is answered from each product’s own rules for the date; a missing rule never counts as included.']
   if (!pass.owned.some((o) => o.ownership.holder === 'me')) notes.push('No pass recorded as yours — resort affiliation never implies ownership.')
 
   return {
     date,
     today,
     season: { id: seasonId, label: seasonLabel(seasonId) },
-    disclaimer: BADGE_DISCLAIMER,
     families,
     products,
     owned,

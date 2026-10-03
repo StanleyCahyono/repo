@@ -22,6 +22,7 @@ import { planAccess, type AccessPlan, type AccessVerdict } from '@/lib/domain/pa
 import { addDays, dateRange, daysBetween, seasonIdsForDates } from '@/lib/domain/time'
 import type { AbilityLevel, PassFamilyId, Provenance, ScoringMode, UnitPrefs } from '@/lib/domain/types'
 import { isLive, loadBundle, loadPassData, resortSeasonFor, type Bundle, type DataCtx } from './core'
+import { isUnverified, shownHotels, shownTravel } from './shown'
 import { providerStatus } from './deps'
 import { MAX_FORECAST_DAYS } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
@@ -117,19 +118,40 @@ async function pickerResorts(ctx: DataCtx): Promise<PickerResort[]> {
       .select({ id: s.resorts.id, name: s.resorts.name, shortName: s.resorts.shortName, region: s.resorts.region, locality: s.resorts.locality, stateProvince: s.resorts.stateProvince, country: s.resorts.country, priority: s.resorts.priority, lat: s.resorts.lat })
       .from(s.resorts),
     db.select().from(s.favorites),
-    db.select({ resortId: s.travelOptions.resortId, mode: s.travelOptions.mode, airportIata: s.travelOptions.airportIata, role: s.travelOptions.role, minutes: s.travelOptions.minutes }).from(s.travelOptions),
+    db
+      .select({
+        resortId: s.travelOptions.resortId,
+        mode: s.travelOptions.mode,
+        airportIata: s.travelOptions.airportIata,
+        role: s.travelOptions.role,
+        minutes: s.travelOptions.minutes,
+        notes: s.travelOptions.notes,
+        prov: s.travelOptions.prov,
+      })
+      .from(s.travelOptions)
+      .then(shownTravel),
     db
       .select({
         resortId: s.resortSeasons.resortId,
         seasonId: s.resortSeasons.seasonId,
         announcedOpening: s.resortSeasons.announcedOpening,
+        announcedOpeningProv: s.resortSeasons.announcedOpeningProv,
         estimatedOpenFrom: s.resortSeasons.estimatedOpenFrom,
         estimatedOpenTo: s.resortSeasons.estimatedOpenTo,
         actualOpening: s.resortSeasons.actualOpening,
         announcedClosing: s.resortSeasons.announcedClosing,
+        announcedClosingProv: s.resortSeasons.announcedClosingProv,
         actualClosing: s.resortSeasons.actualClosing,
       })
-      .from(s.resortSeasons),
+      .from(s.resortSeasons)
+      .then((rows) =>
+        // Unverified announced dates are not shown (see shown.ts).
+        rows.map((r) => ({
+          ...r,
+          announcedOpening: isUnverified(r.announcedOpeningProv) ? null : r.announcedOpening,
+          announcedClosing: isUnverified(r.announcedClosingProv) ? null : r.announcedClosing,
+        })),
+      ),
   ])
   const seasonsBy = new Map<string, typeof seasonRows>()
   for (const r of seasonRows) seasonsBy.set(r.resortId, [...(seasonsBy.get(r.resortId) ?? []), r])
@@ -450,7 +472,7 @@ export async function getTripPage(ctx: DataCtx, id: string, opts: { pass?: strin
   const catalogIds = b ? b.resorts.map((r) => r.row.id) : []
 
   const [hotelRows, skillRows, lessonRows, templateRows, catalog, airportRows] = await Promise.all([
-    catalogIds.length ? db.select().from(s.hotels).where(inArray(s.hotels.resortId, catalogIds)) : Promise.resolve([]),
+    catalogIds.length ? db.select().from(s.hotels).where(inArray(s.hotels.resortId, catalogIds)).then(shownHotels) : Promise.resolve([]),
     db.select().from(s.skillChecklist).orderBy(asc(s.skillChecklist.sortOrder), asc(s.skillChecklist.id)),
     db.select().from(s.lessons).where(eq(s.lessons.tripId, id)),
     db.select().from(s.checklistTemplates).orderBy(asc(s.checklistTemplates.sortOrder), asc(s.checklistTemplates.id)),

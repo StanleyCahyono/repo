@@ -12,7 +12,7 @@ import { Check, MapPin, Plus, Star } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { useToast } from '@/components/ui/toast'
 import { COMPARE_MAX, useCompareSelection } from '@/components/resort/card-compare'
-import { RESEARCH_LABEL, type CardPassLine, type ResortCardData } from '@/components/resort/card-data'
+import { type CardPassLine, type ResortCardData } from '@/components/resort/card-data'
 import type { ExploreRow } from '@/lib/data/explore'
 import type { RowGroup } from './filters'
 import { TONE_DOT, TONE_LABEL, type StageTone } from './tones'
@@ -47,7 +47,7 @@ export function metaLine(c: ResortCardData): string[] {
   else if (c.travel.mode === 'fly') parts.push(`Fly · ${c.travel.caption}`)
   else parts.push('Travel unknown')
   if (c.score.kind !== 'closed' && c.score.value !== null) parts.push(`Score ${c.score.value}${c.score.kind === 'conditions' ? '' : ' (partial)'}`)
-  if (c.passes.length) parts.push(c.passes.map((p) => (FAMILY_SHORT[p.familyId] ?? p.familyName) + (p.confirmed ? '' : '?')).join(' · '))
+  if (c.passes.length) parts.push(c.passes.map((p) => FAMILY_SHORT[p.familyId] ?? p.familyName).join(' · '))
   parts.push(c.expense.amount ? `${c.expense.label} ${c.expense.amount}` : 'Cost incomplete')
   return parts
 }
@@ -118,7 +118,7 @@ export function ResortRail({
   )
 }
 
-const PASS_TONE: Record<CardPassLine['status'], string> = { covered: 'text-positive', 'not-covered': 'text-ink-2', unconfirmed: 'text-caution' }
+const PASS_TONE: Record<CardPassLine['status'], string> = { covered: 'text-positive', 'not-covered': 'text-ink-2' }
 
 const RailRow = memo(function RailRow({
   row,
@@ -222,7 +222,6 @@ const RailRow = memo(function RailRow({
           {pass ? (
             <p className={cn('text-[12.5px] leading-snug font-medium', PASS_TONE[pass.status])}>
               {pass.productName}: {pass.headline}
-              {pass.confirmAtSource ? <span className="font-normal text-ink-3"> · confirm at source</span> : null}
             </p>
           ) : null}
           {notes?.map((n) => (
@@ -230,7 +229,6 @@ const RailRow = memo(function RailRow({
               {n}
             </p>
           ))}
-          {c.research ? <p className="text-[12px] leading-snug text-caution">◇ {RESEARCH_LABEL[c.research].short}</p> : null}
         </div>
         <ComparePill id={c.id} name={c.shortName} className="mt-0.5" />
       </article>

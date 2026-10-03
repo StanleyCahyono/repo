@@ -124,7 +124,7 @@ export function CheckerForm({
                     ))}
                   </optgroup>
                 ) : null}
-                <optgroup label="No rule recorded — not confirmed">
+                <optgroup label="Other resorts (no rule recorded)">
                   {otherResorts.map((r) => (
                     <option key={r.id} value={r.id}>
                       {r.name}

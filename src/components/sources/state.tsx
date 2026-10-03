@@ -86,7 +86,7 @@ export const CONNECTOR_HEALTH: Record<ConnectorHealth, StateSpec> = {
 export const CONNECTOR_SETUP: Record<'live' | 'needs-credentials' | 'unverified' | 'disabled' | 'manual', StateSpec & { hint: string }> = {
   live: { label: 'Documented API', tone: 'neutral', Icon: Plug, hint: 'Implemented against a documented API; no further setup needed.' },
   'needs-credentials': { label: 'Needs credentials', tone: 'caution', Icon: KeyRound, hint: 'Optional connector; its credential is not set, so nothing is called.' },
-  unverified: { label: 'Unverified parser', tone: 'caution', Icon: FileWarning, hint: 'Written without access to the live page; expect “layout not recognised” until verified.' },
+  unverified: { label: 'New parser', tone: 'caution', Icon: FileWarning, hint: 'Written without access to the live page; expect “layout not recognised” until it has run against it.' },
   disabled: { label: 'Disabled', tone: 'neutral', Icon: CircleSlash, hint: 'Turned off with PISTE_DISABLED_PROVIDERS; refresh jobs never call it.' },
   manual: { label: 'Manual', tone: 'neutral', Icon: PenLine, hint: 'No automated source: you enter it from the official page, with a source link.' },
 }
@@ -96,8 +96,8 @@ export const COVERAGE: Record<CoverageState, StateSpec & { short: string; cell: 
   official: { label: 'Official source', short: 'Official', tone: 'teal', Icon: BadgeCheck, cell: 'bg-glacier text-teal border-transparent' },
   manual: { label: 'Confirmed by you', short: 'Yours', tone: 'neutral', Icon: PenLine, cell: 'bg-surface-3 text-ink border-transparent' },
   derived: { label: 'Piste estimate', short: 'Estimate', tone: 'copper', Icon: Calculator, cell: 'bg-surface-2 text-copper border-copper/40' },
-  researched: { label: 'Researched — confirm at source', short: 'Researched', tone: 'caution', Icon: SearchCheck, cell: 'bg-caution-bg text-caution border-transparent' },
-  reference: { label: 'Reference data — confirm at source', short: 'Reference', tone: 'neutral', Icon: BookMarked, cell: 'bg-surface-2 text-ink-2 border-divider-strong border-dashed' },
+  web: { label: 'Catalog', short: 'Catalog', tone: 'neutral', Icon: SearchCheck, cell: 'bg-surface-2 text-ink-2 border-transparent' },
+  unsourced: { label: 'No source on file', short: 'No source', tone: 'neutral', Icon: BookMarked, cell: 'bg-transparent text-ink-3 border-divider-strong border-dashed' },
   stale: { label: 'Stale', short: 'Stale', tone: 'caution', Icon: Clock3, cell: 'bg-caution-bg text-caution border-caution/50' },
   failing: { label: 'Refresh failing', short: 'Failing', tone: 'critical', Icon: CloudOff, cell: 'bg-critical-bg text-critical border-transparent' },
   missing: { label: 'Missing', short: 'Missing', tone: 'neutral', Icon: Minus, cell: 'bg-transparent text-ink-3 border-divider-strong border-dashed' },
@@ -105,7 +105,7 @@ export const COVERAGE: Record<CoverageState, StateSpec & { short: string; cell: 
 }
 
 /** Order used by legends and counts: strongest evidence first, problems last. */
-export const COVERAGE_ORDER: CoverageState[] = ['live', 'official', 'manual', 'derived', 'researched', 'reference', 'stale', 'failing', 'missing', 'demo']
+export const COVERAGE_ORDER: CoverageState[] = ['live', 'official', 'manual', 'derived', 'web', 'unsourced', 'stale', 'failing', 'missing', 'demo']
 
 export function StateChip({ spec, children, className, spin }: { spec: StateSpec; children?: ReactNode; className?: string; spin?: boolean }) {
   return (

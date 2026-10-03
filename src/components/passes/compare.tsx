@@ -1,7 +1,7 @@
 /**
  * Pass vs tickets on the planned resort-day basket. Baseline = each planned day's OWN ticket price (never one resort's
  * walk-up price multiplied out). Per product: pass price + tickets for the days it cannot cover (blackout, no days
- * left, not included, discount only, not confirmed). Owned passes split into already paid (sunk) and what the plan
+ * left, not included, discount only, no access recorded). Owned passes split into already paid (sunk) and what the plan
  * still costs; the season view adds the purchase back. Break-even appears only when its assumptions fit.
  * Where a price is missing you can add your own estimate — labelled "Your estimate" wherever it is used.
  */
@@ -22,7 +22,7 @@ import { checkerHref, type CompareView, type ScenarioDayParam } from './params'
 import { GrowBar } from './rise'
 import { MoneyUp } from './count-up'
 import { RemoveAddedDay } from './scenario-editor'
-import { ConfirmTag, HolderTag } from './section'
+import { HolderTag } from './section'
 
 function totalOf(c: CandidateComparison, view: CompareView): Money | null {
   return view === 'season' || !c.owned ? c.seasonTotal : c.incremental
@@ -45,13 +45,13 @@ function Savings({ m }: { m: Money | null }) {
 
 const DAY_TYPE_SHORT: Record<string, string> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
 
-/** Why a day is a ticket day for this product: "1 blacked out, 3 not confirmed". */
+/** Why a day is a ticket day for this product: "1 blacked out, 3 with no access recorded". */
 const BLOCKED_WORD: Partial<Record<string, string>> = {
   blackout: 'blacked out',
   'days-exhausted': 'after the pass days run out',
   'not-included': 'not included',
   'discount-only': 'discount only',
-  unknown: 'not confirmed',
+  unknown: 'with no access recorded',
   'season-mismatch': 'outside the pass season',
 }
 
@@ -165,7 +165,7 @@ function DayRow({ d, view, added }: { d: ScenarioDay; view: PassCompareView; add
             />
           </span>
         ) : d.ticketBasis ? (
-          <span className={cn('ml-auto block max-w-[34ch] text-[12px] leading-snug', d.ticketConfirmAtSource ? 'text-caution' : 'text-ink-3')}>{d.ticketBasis}</span>
+          <span className="ml-auto block max-w-[34ch] text-[12px] leading-snug text-ink-3">{d.ticketBasis}</span>
         ) : (
           <span className="mt-0.5 flex justify-end">
             <EstimateButton
@@ -329,7 +329,6 @@ function CandidateRow({
         ) : meta?.priceBasis ? (
           <p className="text-[12px] text-ink-3">{meta.priceBasis}</p>
         ) : null}
-        {meta?.priceConfirmAtSource ? <ConfirmTag /> : null}
         {meta?.priceProv && !meta.priceEstimate ? (
           <SourceDrawer title={`${c.productName}: price`} label="Price source" compact={false} className="-mr-1.5" items={[{ label: `${c.productName} price`, value: dotJoin(formatMoney(c.passPriceOriginal), meta.priceBasis), prov: meta.priceProv }]} />
         ) : null}
@@ -384,10 +383,8 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
   const partial = cannot
     .filter((c) => c.coveredDays > 0 || c.owned)
     .sort((a, b) => Number(b.owned) - Number(a.owned) || b.coveredDays - a.coveredDays || a.productName.localeCompare(b.productName))
-  // No confirmed access on any planned day: not confirmed (rule unknown or missing) or not included — buying it
-  // would mean tickets for every day as far as the records go.
+  // No recorded access on any planned day (no rule, or not included) — buying it would mean tickets for every day.
   const noAccess = cannot.filter((c) => c.coveredDays === 0 && !c.owned).sort((a, b) => a.productName.localeCompare(b.productName))
-  const unconfirmed = noAccess.filter((c) => c.days.some((d) => d.verdict.status === 'unknown' && d.verdict.accessType !== null))
   const scale = Math.max(baseline?.amountMinor ?? 0, ...ranked.map((c) => (c.passPrice?.amountMinor ?? 0) + (c.uncoveredTicketCost?.amountMinor ?? 0)))
   const planned = r.baseline.dayCount
 
@@ -459,11 +456,8 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
         <details className="group glass rounded-[24px]">
           <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 select-none md:px-5">
             <span>
-              <span className="block text-[15px] font-semibold text-ink">No confirmed access on your planned days · {plural(noAccess.length, 'product')}</span>
-              <span className="block text-[12.5px] text-ink-3">
-                {unconfirmed.length ? `${plural(unconfirmed.length, 'rule')} not confirmed, the rest not recorded or not included` : 'No rule recorded or not included'} — never assumed
-                covered. Confirm a rule in the checker to compare it.
-              </span>
+              <span className="block text-[15px] font-semibold text-ink">No access on your planned days · {plural(noAccess.length, 'product')}</span>
+              <span className="block text-[12.5px] text-ink-3">No access is recorded for these days, so they are never counted as covered.</span>
             </span>
             <ChevronRight aria-hidden className="size-4 shrink-0 text-ink-3 transition-transform group-open:rotate-90" />
           </summary>
@@ -479,7 +473,7 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
                   </span>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-ink-2">
                     <DayGlyphs c={c} />
-                    {top ? <AccessMark status={top.status} variant="cell" label={top.status === 'unknown' ? (top.accessType ? 'Not confirmed' : 'No rule recorded') : undefined} /> : null}
+                    {top ? <AccessMark status={top.status} variant="cell" /> : null}
                     {firstDay ? (
                       <Link href={checkerHref({ pass: c.productId, resort: firstDay.resortId, from: firstDay.date })} className="inline-flex items-center gap-1 font-medium text-teal hover:underline max-md:min-h-11">
                         Check <ArrowRight aria-hidden className="size-3.5" />
@@ -497,7 +491,7 @@ export function CompareResults({ view, mode }: { view: PassCompareView; mode: Co
         {r.notes.map((n) => (
           <li key={n}>{n}</li>
         ))}
-        <li>Days a pass rule leaves unconfirmed are priced as tickets — never assumed covered. Discount-only days are priced at the full ticket.</li>
+        <li>Days with no recorded access are priced as tickets — never assumed covered. Discount-only days are priced at the full ticket.</li>
       </ul>
     </div>
   )

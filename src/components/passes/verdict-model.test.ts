@@ -5,7 +5,7 @@ import type { AccessVerdict } from '@/lib/domain/passes/types'
 import { seasonLine, verdictModel } from './verdict-model'
 
 const verdict = (o: Partial<AccessVerdict>): AccessVerdict =>
-  ({ date: '2026-12-12', status: 'included', canSki: true, headline: 'Included', reasons: ['Included at Kitz.'], confirmAtSource: true, pool: null, resortCap: null, remainingDays: null, ...o }) as AccessVerdict
+  ({ date: '2026-12-12', status: 'included', canSki: true, headline: 'Included', reasons: ['Included at Kitz.'], pool: null, resortCap: null, remainingDays: null, ...o }) as AccessVerdict
 
 function view(v: AccessVerdict): CheckerView {
   return {
@@ -27,10 +27,11 @@ const ctx = (o: Partial<SeasonContext>): SeasonContext => ({ state: 'inside', op
 
 describe('verdictModel', () => {
   it('never turns an unknown rule into a yes', () => {
-    const m = verdictModel(view(verdict({ status: 'unknown', canSki: false, reasons: ['Access not confirmed.'] })), ctx({}))
+    const m = verdictModel(view(verdict({ status: 'unknown', canSki: false, reasons: ['No access rule is recorded for this product here.'] })), ctx({}))
     expect(m.tone).toBe('unknown')
-    expect(m.headline).toBe('Not confirmed')
-    expect(m.detail).toContain('never permission')
+    expect(m.headline).toBe('No access recorded')
+    expect(m.detail).toContain('No access rule is recorded')
+    expect(`${m.headline} ${m.detail}`).not.toMatch(/not confirmed|confirm at source/i)
   })
   it('flags covered dates outside the announced season instead of a plain yes', () => {
     const m = verdictModel(view(verdict({})), ctx({ state: 'before', outside: true }))

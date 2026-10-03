@@ -9,7 +9,7 @@
  * - Lunch and parking, when unknown, are listed as missing and excluded from the total (stated in `excluded`).
  * - A pass that can be used that day makes lift access 0 incremental, with a "Covered by …" note.
  * - Every line says what kind of number it is (published / observed quote / your estimate / assumption / pass).
- * - Research-grade (search-summary / unverified) prices and pass rules set `confirmAtSource` and add a caveat.
+ * - Unverified prices are never used (see `selectPrice`); researched and confirmed prices are used as they are.
  * - Estimate ranges are classified at both ends (`tier` low end, `tierMax` when the high end is in a higher band).
  */
 import { allocate, formatMoney, money, sum, type Money } from '../money'
@@ -78,8 +78,6 @@ export interface BasketLine {
   note: string | null
   /** Required lines make the basket incomplete when unknown. */
   required: boolean
-  /** Research-grade/unverified price or pass rule behind this line — show "Researched — confirm at source". */
-  confirmAtSource: boolean
 }
 
 export interface BasketAssumptions {
@@ -105,7 +103,7 @@ export type ParkingFact = { status: 'free' | 'not-needed'; source?: string | nul
 
 /** The verdict fields the basket needs. When `resortId`/`date` are present they must match the basket day. */
 export type BasketPass = Pick<AccessVerdict, 'canSki' | 'status' | 'productName' | 'reservationRequired' | 'discountText'> &
-  Partial<Pick<AccessVerdict, 'resortId' | 'date' | 'confirmAtSource'>>
+  Partial<Pick<AccessVerdict, 'resortId' | 'date'>>
 
 export interface BasketDayInput {
   resortId: string
@@ -196,7 +194,6 @@ function fromSelection(
       snapshotId: null,
       note: null,
       required,
-      confirmAtSource: false,
       missingMessage: message,
     }
   }
@@ -210,7 +207,6 @@ function fromSelection(
     snapshotId: s.id ?? null,
     note: s.feesText ?? (s.includesTax === false ? 'Before tax' : null),
     required,
-    confirmAtSource: sel.confirmAtSource,
   }
 }
 
@@ -237,7 +233,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
   // Lift access
   if (day.pass?.canSki) {
     const rr = day.pass.reservationRequired
-    const research = !!day.pass.confirmAtSource
     drafts.push({
       key: 'lift',
       label: 'Lift access',
@@ -248,15 +243,14 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
       snapshotId: null,
       note:
         `Covered by ${day.pass.productName}` +
-        (rr === true ? ' — reservation required' : rr == null ? ' — reservation requirement not recorded' : '') +
-        (research ? ' — access rule not verified, confirm at source' : ''),
+        (rr === true ? ' — reservation required' : rr == null ? ' — reservation requirement not recorded' : ''),
       required: requiredKeys.has('lift'),
-      confirmAtSource: research,
     })
   } else {
     const sel = selectPrice(day.prices, { ...q, subjectType: 'lift-ticket', category })
     const line = fromSelection('lift', 'Lift ticket', sel, requiredKeys.has('lift'), `No ${dayType} lift ticket price for ${formatLocalDate(day.date)}.`)
-    if (day.pass) line.note = [notCoveredNote(day.pass), line.note].filter(Boolean).join(' ')
+    // Unknown access (no rule recorded) adds no note: it is neither covered nor a known "not included".
+    if (day.pass && day.pass.status !== 'unknown') line.note = [notCoveredNote(day.pass), line.note].filter(Boolean).join(' ')
     drafts.push(line)
   }
 
@@ -272,7 +266,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
       snapshotId: null,
       note: 'Own gear — no rental',
       required: false,
-      confirmAtSource: false,
     })
   } else {
     const option = a.rentalOption
@@ -295,7 +288,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
           snapshotId: null,
           note: null,
           required: requiredKeys.has('lunch'),
-          confirmAtSource: false,
         }
       : {
           key: 'lunch',
@@ -307,7 +299,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
           snapshotId: null,
           note: null,
           required: requiredKeys.has('lunch'),
-          confirmAtSource: false,
           missingMessage: 'No lunch estimate set.',
         },
   )
@@ -326,7 +317,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
       snapshotId: null,
       note: free ? 'Free parking' : 'No parking needed',
       required: requiredKeys.has('parking'),
-      confirmAtSource: false,
     })
   } else {
     const sel = selectPrice(day.prices, { ...q, subjectType: 'parking', category: null })
@@ -368,8 +358,6 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
   const complete = lines.every((l) => !l.required || l.amount !== null)
   const excluded = lines.filter((l) => !l.required && l.amount === null).map((l) => l.key)
   const caveats = excluded.map((k) => `Excludes ${k} (unknown)`)
-  const toCheck = lines.filter((l) => l.confirmAtSource && l.amount).map((l) => l.label.toLowerCase())
-  if (toCheck.length) caveats.push(`Researched — confirm at source: ${toCheck.join(', ')}`)
   const known = lines.filter((l) => l.display)
   const knownSubtotal = sum(known.map((l) => l.display!), currency)
   const allConverted = lines.every((l) => l.amount === null || l.display !== null)
@@ -459,7 +447,6 @@ export function liftTicketFor(
   basis: string | null
   snapshotId: number | null
   dayType: DayType
-  confirmAtSource: boolean
 } {
   const { dayType } = dayTypeFor(date, ctx.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG, ctx.country)
   const sel = selectPrice(prices, {
@@ -479,6 +466,5 @@ export function liftTicketFor(
     basis: sel.basis,
     snapshotId: s?.id ?? null,
     dayType,
-    confirmAtSource: sel.confirmAtSource,
   }
 }

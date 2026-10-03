@@ -10,10 +10,10 @@ function plan(over: Partial<RidePlan> = {}): RidePlan {
     straightKm: 6300,
     drive: null,
     origins: [
-      { iata: 'ITH', name: null, city: null, lat: 42.491, lon: -76.4584, minutes: 15, km: 11, role: 'origin', confirm: null },
-      { iata: 'SYR', name: null, city: null, lat: 43.11, lon: -76.1, minutes: 75, km: 90, role: 'origin', confirm: null },
+      { iata: 'ITH', name: null, city: null, lat: 42.491, lon: -76.4584, minutes: 15, km: 11, role: 'origin' },
+      { iata: 'SYR', name: null, city: null, lat: 43.11, lon: -76.1, minutes: 75, km: 90, role: 'origin' },
     ],
-    gateways: [{ iata: 'GVA', name: null, city: null, lat: 46.2381, lon: 6.109, minutes: 195, km: 235, role: 'practical', confirm: null }],
+    gateways: [{ iata: 'GVA', name: null, city: null, lat: 46.2381, lon: 6.109, minutes: 195, km: 235, role: 'practical' }],
     transfers: [],
     recommended: 'fly',
     verdictNote: null,
@@ -56,7 +56,7 @@ describe('buildJourney', () => {
   it('unwraps longitudes across the antimeridian', () => {
     const p = plan({
       resort: { ...plan().resort, lat: 42.86, lon: 140.7 },
-      gateways: [{ iata: 'CTS', name: null, city: null, lat: 42.7752, lon: 141.6923, minutes: 130, km: 110, role: 'practical', confirm: null }],
+      gateways: [{ iata: 'CTS', name: null, city: null, lat: 42.7752, lon: 141.6923, minutes: 130, km: 110, role: 'practical' }],
     })
     const j = buildJourney(p, { mode: 'fly', via: 'CTS', from: 'ITH' })
     const all = j.legs.flatMap((l) => l.coords)
@@ -65,7 +65,7 @@ describe('buildJourney', () => {
   })
 
   it('draws a single approximate drive leg', () => {
-    const p = plan({ drive: { minutes: 33, winterMinutes: 40, bufferPct: 20, km: 31.7, isEstimate: true, basis: null, confirm: null, directionsUrl: null }, recommended: 'drive' })
+    const p = plan({ drive: { minutes: 33, winterMinutes: 40, bufferPct: 20, km: 31.7, isEstimate: true, basis: null, directionsUrl: null }, recommended: 'drive' })
     const j = buildJourney(p, resolveSelection(p, {}))
     expect(j.mode).toBe('drive')
     expect(j.legs).toHaveLength(1)

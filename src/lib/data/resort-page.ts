@@ -18,10 +18,11 @@ import type { DriveEstimate, ReportSourceInfo, TerrainInfo, WeatherPointDef } fr
 import { addDays, isLocalDate } from '@/lib/domain/time'
 import { OPERATING_STATUS_LABEL, type OperatingStatus, type Provenance, type ScoringMode } from '@/lib/domain/types'
 import { isLive, loadResortRows, notDemoProv, resortToday, type DataCtx } from './core'
+import { shownAirport, shownReports } from './shown'
 import { providerStatus, type ConnectorState } from './deps'
 import { getHistoryCalendar, type HistoryDay } from './forecast'
 import { scanRunHistory, type AttemptOutcome } from './sources'
-import { reportView, type ReportView } from './views'
+import { reportView, statusNote, type ReportView } from './views'
 
 export interface StatusEventView {
   id: number
@@ -193,7 +194,8 @@ export async function getResortPageExtras(
       .from(s.statusEvents)
       .where(and(eq(s.statusEvents.resortId, id), lte(s.statusEvents.effectiveAt, now), live ? notDemoProv(s.statusEvents.prov) : undefined))
       .orderBy(desc(s.statusEvents.effectiveAt), desc(s.statusEvents.id))
-      .limit(12),
+      .limit(12)
+      .then((rows) => shownReports(rows)),
     db
       .select()
       .from(s.operationalReports)
@@ -209,7 +211,10 @@ export async function getResortPageExtras(
       .limit(8),
     refreshHealth(ctx, 'weather', id),
     adapter ? refreshHealth(ctx, 'reports', id) : Promise.resolve(null),
-    db.select().from(s.airports),
+    db
+      .select()
+      .from(s.airports)
+      .then((rows) => rows.map(shownAirport)),
     db
       .select()
       .from(s.trips)
@@ -273,7 +278,7 @@ export async function getResortPageExtras(
       label: OPERATING_STATUS_LABEL[e.status],
       effectiveAt: e.effectiveAt,
       localDate: e.localDate,
-      note: e.note,
+      note: statusNote(e.note),
       prov: e.prov,
     })),
     personalReports: personal.map((r) => reportView(r, now, tz)).filter((r): r is ReportView => r !== null),

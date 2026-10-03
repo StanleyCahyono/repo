@@ -30,7 +30,8 @@ import type { AlertRuleRow, ResortRow } from '@/lib/db/rows'
 import { CONDITIONS_CONFIG_V1, prepareSeries, slotsWithin } from '@/lib/domain/conditions'
 import { formatMoney } from '@/lib/domain/money'
 import { daysBetween, formatLocalDate, hoursBetween, localDateOf } from '@/lib/domain/time'
-import { DEFAULT_UNITS, SCORING_MODES, type UnitPrefs, type VerificationLevel } from '@/lib/domain/types'
+import { DEFAULT_UNITS, SCORING_MODES, type UnitPrefs } from '@/lib/domain/types'
+import { providerLabel } from '@/lib/domain/source-label'
 import { formatSnow } from '@/lib/domain/units'
 import type { ItemOutcome, JobContext, JobWorkResult } from './types'
 import { daysBefore, errorMessage, getMeta, hashJson, setMeta } from './util'
@@ -173,7 +174,8 @@ async function openingDateChanges(rule: AlertRuleRow, c: EvalCtx): Promise<Alert
       ),
     )
     .orderBy(openingDateHistory.changedAt)
-  return rows.map((h) => {
+  // A date with no source behind it ('unverified') is not shown anywhere, so it does not alert either.
+  return rows.filter((h) => h.prov?.verification !== 'unverified').map((h) => {
     const label = FIELD_LABEL[h.field]
     const name = nameOf(c, h.resortId)
     const to = h.newValue ? formatLocalDate(h.newValue, 'ccc d LLL yyyy') : 'no date'
@@ -184,17 +186,10 @@ async function openingDateChanges(rule: AlertRuleRow, c: EvalCtx): Promise<Alert
       bucket: h.newValue ?? 'removed',
       resortId: h.resortId,
       title: from ? `${name}: ${label} changed to ${to}` : `${name}: ${label} ${h.newValue ? `set to ${to}` : 'removed'}`,
-      body: `${from ? `Previously ${from}. ` : ''}${h.field === 'announcedOpening' ? 'An announced date is a target and depends on operations and weather. ' : ''}Source: ${h.prov?.provider ?? 'unknown'}${h.prov?.sourceUrl ? ` (${h.prov.sourceUrl})` : ''}.${verificationCaveat(h.prov?.verification)}`,
+      body: `${from ? `Previously ${from}. ` : ''}${h.field === 'announcedOpening' ? 'An announced date is a target and depends on operations and weather. ' : ''}Source: ${providerLabel(h.prov?.provider) ?? 'unknown'}${h.prov?.sourceUrl ? ` (${h.prov.sourceUrl})` : ''}.`,
       link: `/resorts/${h.resortId}`,
     }
   })
-}
-
-/** Dates found by research (catalog reseeds) are not official statements and must say so. */
-function verificationCaveat(v: VerificationLevel | null | undefined): string {
-  if (v === 'search-summary') return ' Researched — confirm at source: this date comes from a web search summary, not from the official page.'
-  if (v === 'unverified') return ' Unverified — confirm at the official source.'
-  return ''
 }
 
 async function resortOpenings(rule: AlertRuleRow, c: EvalCtx): Promise<AlertCandidate[]> {

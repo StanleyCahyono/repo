@@ -46,6 +46,7 @@ import {
 } from '@/lib/domain/time'
 import { provenance, type Provenance, type ScoringMode } from '@/lib/domain/types'
 import { pickPrimaryRun, runSemantics } from './deps'
+import { isUnverified, shownAirport, shownEvents, shownPassFamily, shownPassProduct, shownPrices, shownResort, shownRules, shownSeason, shownTravel } from './shown'
 
 /** What every loader needs: the per-request context from getCtx() (or an equivalent object in tests/scripts). */
 export type DataCtx = Pick<Ctx, 'db' | 'now' | 'today' | 'prefs' | 'mode'>
@@ -65,21 +66,19 @@ export function derivedProv(provider: string, fetchedAt: string | null, note: st
   return provenance({ kind, provider, fetchedAt, note })
 }
 
-/** Research-grade or unverified facts must be shown as "Researched — confirm at source". */
-export function needsConfirmation(p: Provenance | null | undefined): boolean {
-  if (!p) return true
-  const v = p.verification ?? null
-  if (p.kind === 'manual' || p.kind === 'historical') return v === null || v === 'search-summary' || v === 'unverified'
-  return v === 'search-summary' || v === 'unverified'
-}
+export { isUnverified }
 
-export function verificationLabel(p: Provenance | null | undefined): string {
-  if (!p) return 'No source recorded'
+/**
+ * A short, quiet source tag for a fact ("Official page", "Confirmed by you", "Weather model"…), or null when there is
+ * nothing to add: researched catalog facts are shown like any other fact (no caveat), and unverified facts are not
+ * shown at all (see shown.ts).
+ */
+export function verificationLabel(p: Provenance | null | undefined): string | null {
+  if (!p) return null
   switch (p.verification) {
     case 'search-summary':
-      return 'Researched — confirm at source'
     case 'unverified':
-      return 'Unverified — confirm at source'
+      return null
     case 'user-confirmed':
       return 'Confirmed by you'
     case 'official-page':
@@ -87,7 +86,7 @@ export function verificationLabel(p: Provenance | null | undefined): string {
     case 'api':
       return 'Official API'
     default:
-      return p.kind === 'modeled' ? 'Weather model' : p.kind === 'derived' ? 'Piste estimate' : p.kind === 'demo' ? 'Demo data' : 'Source not verified'
+      return p.kind === 'modeled' ? 'Weather model' : p.kind === 'derived' ? 'Piste estimate' : p.kind === 'demo' ? 'Demo data' : null
   }
 }
 
@@ -450,12 +449,15 @@ export async function loadBundle(ctx: DataCtx, opts: { ids?: readonly string[] |
   const overridesByResort = groupBy(overrideRows, (o) => o.resortId)
   const seasons = new Map<string, ResortSeasonRow>()
   const resorts: ResortRecord[] = []
-  for (const row of resortRows.sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name))) {
+  for (const raw of resortRows.sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name))) {
+    // Unverified facts are dropped before corrections apply, so a correction is shown on its own.
+    const row = shownResort(raw)
     const ovs = overridesByResort.get(row.id) ?? []
     let corrections: Correction[] = []
     let resort = row
     for (const sid of seasonIds) {
-      const srow = seasonRows.find((x) => x.resortId === row.id && x.seasonId === sid) ?? null
+      const found = seasonRows.find((x) => x.resortId === row.id && x.seasonId === sid)
+      const srow = found ? shownSeason(found) : null
       const applied = applyOverrides(row, srow, sid === seasonId ? ovs : ovs.filter((o) => !o.field.startsWith('season.')))
       if (sid === seasonId) {
         resort = applied.resort
@@ -476,12 +478,12 @@ export async function loadBundle(ctx: DataCtx, opts: { ids?: readonly string[] |
     seasons,
     favorites: new Map(favRows.map((f) => [f.resortId, f])),
     status: new Map(statusRows.map((e) => [e.resortId, e])),
-    travel: byResort(travelRows),
-    airports: new Map(airportRows.map((a) => [a.iata, a])),
-    prices: groupBy(priceRows, (p) => p.resortId ?? p.subjectId),
+    travel: byResort(shownTravel(travelRows)),
+    airports: new Map(airportRows.map((a) => [a.iata, shownAirport(a)])),
+    prices: groupBy(shownPrices(priceRows), (p) => p.resortId ?? p.subjectId),
     fx: fxRows,
     pass,
-    events: eventRows,
+    events: shownEvents(eventRows),
     alerts: groupBy(alertRows, (a) => a.resortId),
     runs,
     names: Object.fromEntries(resorts.map((r) => [r.row.id, r.row.shortName || r.row.name])),
@@ -499,7 +501,7 @@ export async function loadResortRows(ctx: Pick<DataCtx, 'db'>, ids: readonly str
     ids ? ctx.db.select().from(s.resortOverrides).where(inArray(s.resortOverrides.resortId, [...ids])) : ctx.db.select().from(s.resortOverrides),
   ])
   const byResort = groupBy(ovs, (o) => o.resortId)
-  const corrected = rows.map((r) => applyOverrides(r, null, (byResort.get(r.id) ?? []).filter((o) => !o.field.startsWith('season.'))).resort)
+  const corrected = rows.map((r) => applyOverrides(shownResort(r), null, (byResort.get(r.id) ?? []).filter((o) => !o.field.startsWith('season.'))).resort)
   if (ids) {
     const byId = new Map(corrected.map((r) => [r.id, r]))
     return ids.map((id) => byId.get(id)).filter((r): r is ResortRow => !!r)
@@ -529,13 +531,13 @@ export async function loadPassData(db: Db, seasonId: string): Promise<PassData> 
           ),
         )
     : []
-  const productById = new Map(products.map((p) => [p.id, p]))
+  const productById = new Map(products.map((p) => [p.id, shownPassProduct(p)]))
   const usageBy = groupBy(usage, (u) => u.ownershipId)
   return {
     seasonId,
-    families,
-    products,
-    rules,
+    families: families.map(shownPassFamily),
+    products: products.map(shownPassProduct),
+    rules: shownRules(rules),
     owned: ownership
       .sort((a, b) => a.id - b.id)
       .map((o) => ({ ownership: o, product: productById.get(o.productId)!, usage: usageBy.get(o.id) ?? [] }))
@@ -628,6 +630,8 @@ export async function latestStatusEvents(db: Db, now: string, live: boolean, res
     lte(t.effectiveAt, now),
     resortIds ? inArray(t.resortId, [...resortIds]) : undefined,
     live ? sql`coalesce(json_extract(${t.prov}, '$.kind'), '') <> 'demo'` : undefined,
+    // A status from a researched catalog report with no source ('unverified') is not shown.
+    sql`not (coalesce(json_extract(${t.prov}, '$.note'), '') = 'catalog-research' and coalesce(json_extract(${t.prov}, '$.verification'), '') = 'unverified')`,
   )
   const idList = await ids(
     db,
@@ -639,6 +643,9 @@ export async function latestStatusEvents(db: Db, now: string, live: boolean, res
 /** Personal feedback is stored as a manual report with prov.note 'personal'; it is never operations evidence. */
 export const NOT_PERSONAL_REPORT = sql`not (${s.operationalReports.kind} = 'manual' and coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'personal')`
 const notPersonal = NOT_PERSONAL_REPORT
+
+/** A researched catalog report with no source ('unverified') is not shown (see shown.ts `shownReports`). */
+export const NOT_UNVERIFIED_RESEARCH = sql`not (coalesce(json_extract(${s.operationalReports.prov}, '$.note'), '') = 'catalog-research' and coalesce(json_extract(${s.operationalReports.prov}, '$.verification'), '') = 'unverified')`
 
 /** Second-line demo filter for rows whose data kind lives in a JSON provenance column (null prov passes). */
 export function notDemoProv(col: SQLWrapper): SQL {
@@ -652,6 +659,7 @@ export async function latestReports(db: Db, opts: { date: string; now: string; l
     lte(t.localDate, opts.date),
     sql`(${t.reportedAt} is null or ${t.reportedAt} <= ${opts.now})`,
     notPersonal,
+    NOT_UNVERIFIED_RESEARCH,
     opts.live ? sql`${t.kind} <> 'demo'` : undefined,
     opts.resortIds ? inArray(t.resortId, [...opts.resortIds]) : undefined,
   )
@@ -689,6 +697,7 @@ export async function reportsBetween(
         lte(t.localDate, opts.to),
         sql`(${t.reportedAt} is null or ${t.reportedAt} <= ${opts.now})`,
         notPersonal,
+        NOT_UNVERIFIED_RESEARCH,
         opts.live ? sql`${t.kind} <> 'demo'` : undefined,
         opts.resortIds ? inArray(t.resortId, [...opts.resortIds]) : undefined,
       ),

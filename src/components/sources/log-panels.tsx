@@ -1,15 +1,12 @@
 /**
- * Failure log (fetch errors and parser failures from source records), link checks, and the catalog's research
- * notes. Server-renderable; long lists sit in native <details> so they stay keyboard- and screen-reader-friendly.
+ * Failure log (fetch errors and parser failures from source records) and link checks. Server-renderable; long lists sit in native <details> so they stay keyboard- and screen-reader-friendly.
  */
-import { BookMarked, ChevronDown, CircleCheck, ExternalLink, FileWarning, SearchCheck, ServerCrash } from 'lucide-react'
+import { ChevronDown, CircleCheck, ExternalLink, FileWarning, ServerCrash } from 'lucide-react'
 import type { LinksView, SourceFailureView, SourcesView } from '@/lib/data/sources'
-import type { ResearchNotes, ResearchNoteView } from '@/lib/data/sources-screen'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/ui/cn'
 import { Ago } from './ago'
 import { errorBeyondStatus, groupFailures, httpReason, shortUrl } from './format'
-import { formatLocalDate, isLocalDate } from '@/lib/domain/time'
 
 function Disclosure({ summary, children, className }: { summary: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
@@ -193,102 +190,6 @@ export function LinksPanel({ links, now, tz, demo, names }: { links: LinksView; 
           </Disclosure>
         )
       })}
-    </div>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// Research notes
-
-function NoteItem({ n }: { n: ResearchNoteView }) {
-  return (
-    <li>
-      <details className="group">
-        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 md:min-h-10 md:px-5 [&::-webkit-details-marker]:hidden">
-          <span className="min-w-0">
-            <span className="text-[14px] font-medium text-ink">{n.name}</span>
-            <span className="text-[12.5px] text-ink-3">
-              {' '}
-              · {n.region}
-              {n.openQuestions.length ? ` · ${n.openQuestions.length} open question${n.openQuestions.length === 1 ? '' : 's'}` : ''}
-              {n.conflicts.length ? ` · ${n.conflicts.length} conflict${n.conflicts.length === 1 ? '' : 's'}` : ''}
-            </span>
-          </span>
-          <ChevronDown aria-hidden className="size-4 shrink-0 text-ink-3 transition-transform duration-150 group-open:rotate-180" />
-        </summary>
-        <div className="px-4 pb-3 text-[13px] text-ink-2 md:px-5">
-          {n.confidenceNotes ? <p className="max-w-[80ch]">{n.confidenceNotes}</p> : null}
-          {n.conflicts.length ? (
-            <>
-              <p className="mt-2 font-medium text-ink">Conflicting sources</p>
-              <ul className="mt-1 list-disc pl-5">
-                {n.conflicts.map((q) => (
-                  <li key={q}>{q}</li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-          {n.openQuestions.length ? (
-            <>
-              <p className="mt-2 font-medium text-ink">Confirm at the official source</p>
-              <ul className="mt-1 list-disc pl-5">
-                {n.openQuestions.map((q) => (
-                  <li key={q}>{q}</li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-          {n.date ? <p className="mt-2 text-[12.5px] text-ink-3">Recorded {isLocalDate(n.date) ? formatLocalDate(n.date, 'd LLL yyyy') : n.date}</p> : null}
-        </div>
-      </details>
-    </li>
-  )
-}
-
-export function ResearchNotesPanel({ notes }: { notes: ResearchNotes }) {
-  return (
-    <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-      <div className="overflow-hidden glass rounded-[24px]">
-        <div className="border-b border-divider bg-surface-2 px-4 py-3 md:px-5">
-          <p className="flex items-center gap-2 text-[14.5px] font-semibold text-ink">
-            <BookMarked aria-hidden className="size-4 text-ink-3" /> Reference data only · {notes.referenceOnly.length}
-          </p>
-          <p className="mt-0.5 text-[13px] text-ink-2">
-            No research ran: identity, coordinates, elevations and homepage only. Dates, prices, hours, terrain counts and pass access are left unknown on
-            purpose.
-          </p>
-        </div>
-        <ul className="divide-y divide-divider">
-          {notes.referenceOnly.map((n) => (
-            <NoteItem key={n.resortId} n={n} />
-          ))}
-        </ul>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="overflow-hidden glass rounded-[24px]">
-          <div className="border-b border-divider bg-surface-2 px-4 py-3 md:px-5">
-            <p className="flex items-center gap-2 text-[14.5px] font-semibold text-ink">
-              <SearchCheck aria-hidden className="size-4 text-caution" /> Researched by web search · {notes.researched.length}
-            </p>
-            <p className="mt-0.5 text-[13px] text-ink-2">Search summaries, shown as “Researched — confirm at source”. Some were only partly covered before the budget ran out.</p>
-          </div>
-          <ul className="divide-y divide-divider">
-            {notes.researched.map((n) => (
-              <NoteItem key={n.resortId} n={n} />
-            ))}
-          </ul>
-        </div>
-        {notes.unrecorded.length ? (
-          <div className="overflow-hidden glass rounded-[24px]">
-            <p className="border-b border-divider bg-surface-2 px-4 py-3 text-[14.5px] font-semibold text-ink md:px-5">Added by you or unrecorded · {notes.unrecorded.length}</p>
-            <ul className="divide-y divide-divider">
-              {notes.unrecorded.map((n) => (
-                <NoteItem key={n.resortId} n={n} />
-              ))}
-            </ul>
-          </div>
-        ) : null}
-      </div>
     </div>
   )
 }

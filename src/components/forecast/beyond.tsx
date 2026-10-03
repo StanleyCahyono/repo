@@ -111,7 +111,7 @@ export function BeyondHorizon({
                     {p.passes.length ? (
                       p.passes.map((b) =>
                         (PASS_FAMILIES as readonly string[]).includes(b.familyId) ? (
-                          <PassBadge key={b.familyId} family={b.familyId as PassFamilyId} size="sm" detail={b.confirmed ? null : 'unconfirmed'} />
+                          <PassBadge key={b.familyId} family={b.familyId as PassFamilyId} size="sm" />
                         ) : (
                           <span key={b.familyId} className="text-[12.5px] text-ink-2">
                             {b.familyName}

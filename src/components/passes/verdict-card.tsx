@@ -3,7 +3,7 @@
  * The checker's answer as the hero card. Each new question lands with a spring rise, a one-off specular sheen and the
  * count-up of its number; while the next answer loads, a scan line sweeps the current one. Tone is always shape +
  * label (status chip with icon), never colour alone: teal = covered, copper = covered but outside the announced
- * season, critical = not covered, caution = discount or some days, ink = not confirmed (never permission).
+ * season, critical = not covered, caution = discount or some days, ink = no access recorded (never permission).
  */
 import type { CSSProperties, ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -116,7 +116,7 @@ export function VerdictCard({ model, children }: { model: VerdictModel; children
 
           <div className="relative mt-auto flex flex-wrap items-center justify-between gap-2 px-1 pt-1">
             <span className="hud tracking-[0.1em] opacity-80">
-              {model.tone === 'idle' ? '◇ Answers come from each product’s own rules' : model.confirm ? '◇ Researched · confirm at source' : '◇ From the rule on file'}
+              {model.tone === 'idle' ? '◇ Answers come from each product’s own rules' : '◇ From the rule on file'}
             </span>
             {pending ? (
               <span className="hud inline-flex items-center gap-1.5 opacity-90">

@@ -149,7 +149,7 @@ export function extractReport(html: string, cfg: LabelReportConfig, ctx: { now: 
 
   const supplied = FIELDS.filter((f) => (f === 'snowfall' ? snowfall.length > 0 : report[f] !== null))
   const missing = FIELDS.filter((f) => !supplied.includes(f))
-  if (cfg.maturity === 'unverified') limitations.push('Parser built without access to the live page (unverified); confirm at source.')
+  if (cfg.maturity === 'unverified') limitations.push('Parser built without access to the live page; it may fail if the page layout differs.')
   if (!x.status) limitations.push('No explicit operating status on the page; status left unknown.')
 
   const extract: Record<string, unknown> = {
@@ -245,7 +245,7 @@ export function createLabelReportProvider(cfg: LabelReportConfig, options: { htt
             staleAfter: endOfLocalDay(r.localDate, ctx.timezone),
             verification: cfg.maturity === 'verified' ? 'official-page' : 'unverified',
             originalUnit: cfg.assumedSnowUnit,
-            note: cfg.maturity === 'unverified' ? 'Parsed by an unverified adapter; confirm at source.' : null,
+            note: cfg.maturity === 'unverified' ? 'Parsed by a new adapter, built without access to the live page.' : null,
           }),
         }
       }

@@ -16,6 +16,7 @@ import type { MoneyRange } from '@/lib/domain/costs'
 import { dateRange, daysBetween } from '@/lib/domain/time'
 import type { AbilityLevel, Provenance } from '@/lib/domain/types'
 import { isLive, loadBundle, loadPassData, type DataCtx } from './core'
+import { shownAirport } from './shown'
 import { myPassCover, refineTripBudget } from './trip-budget'
 import {
   basketVerdict,
@@ -291,7 +292,7 @@ export async function getTripDetail(ctx: DataCtx, id: string): Promise<TripDetai
   })
 
   const airportRows = ctx.prefs.travel.originAirports.length
-    ? await db.select().from(s.airports).where(inArray(s.airports.iata, ctx.prefs.travel.originAirports))
+    ? (await db.select().from(s.airports).where(inArray(s.airports.iata, ctx.prefs.travel.originAirports))).map(shownAirport)
     : []
   const byIata = new Map(airportRows.map((a) => [a.iata, a]))
   const originCodes = [...new Set([...(trip.originAirport ? [trip.originAirport] : []), ...ctx.prefs.travel.originAirports])]

@@ -16,8 +16,8 @@ import type { AirportPlace, ResortPageExtras } from '@/lib/data/resort-page'
 import { addDays } from '@/lib/domain/time'
 import { directionsLink, flightSearchLinks, nwsForecastPageUrl } from '@/lib/providers/links/builders'
 import { CountUp } from './count-up'
-import { ConfirmTag, DetailDrawer, ResortSection, Src, SubHead } from './section'
-import { confirmText, dayLabel, dotJoin, hostOf, needsCheck, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
+import { DetailDrawer, ResortSection, Src, SubHead } from './section'
+import { dayLabel, dotJoin, hostOf, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
 import { TravelMap } from './travel-map'
 
 const ROLE_TEXT: Record<string, string> = {
@@ -51,9 +51,9 @@ function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
     ? `${u.duration(t.driveMinutes)} from ${x.home.name}.`
     : places.length
       ? `Fly to ${places.length > 1 ? `${places.slice(0, -1).join(', ')} or ${places[places.length - 1]}` : places[0]}. Then the road or train.`
-      : 'Getting there is not researched yet.'
+      : 'No travel information on file yet.'
   const dir = directionsLink({ lat: x.home.lat, lon: x.home.lon }, { lat: d.summary.lat, lon: d.summary.lon }, `Directions from ${x.home.name}`)
-  const transferCheck = airports.some((a) => needsCheck(a.prov))
+  const anyTransfer = airports.some((a) => a.minutes !== null)
   return (
     <div className={cn(NIGHT_CARD, 'grid gap-7 rounded-[32px] border border-[var(--card-edge)] bg-[var(--card-bg)] p-6 text-[var(--card-fg)] md:rounded-[36px] md:p-8 lg:grid-cols-2 lg:items-center')}>
       <div className="flex min-w-0 flex-col gap-3">
@@ -93,10 +93,14 @@ function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
               <div key={a.iata} className="flex items-center gap-3.5 rounded-[18px] bg-[color-mix(in_srgb,var(--card-fg)_8%,transparent)] px-4 py-3.5">
                 <span className="w-11 shrink-0 font-mono text-[13px] font-semibold">{a.iata}</span>
                 <span className="min-w-0 flex-1 truncate text-[14px] text-[var(--card-fg2)]">{a.name ?? a.city ?? 'Airport'}</span>
-                <span className="shrink-0 text-[18px] font-semibold tnum">{a.minutes !== null ? <CountUp text={`${a.minutes} min`} /> : <span className="text-[13px] font-normal italic">Unknown</span>}</span>
+                {a.minutes !== null ? (
+                  <span className="shrink-0 text-[18px] font-semibold tnum">
+                    <CountUp text={`${a.minutes} min`} />
+                  </span>
+                ) : null}
               </div>
             ))}
-            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">Airport-to-resort transfer{transferCheck ? ' · researched, confirm at source' : ''}</p>
+            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">{anyTransfer ? 'Airport-to-resort transfer' : 'Gateway airports'}</p>
           </>
         ) : drive ? (
           <>
@@ -112,7 +116,7 @@ function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
                 <span className="text-[18px] font-semibold tnum">{u.duration(t.winterMinutes)}</span>
               </div>
             ) : null}
-            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">{t.isEstimate ? 'Curated drive estimate' : 'Sourced routing'}{needsCheck(t.prov) ? ' · confirm at source' : ''}</p>
+            <p className="hud m-0 mt-1 text-[var(--card-fg2)]">{t.isEstimate ? 'Curated drive estimate' : 'Sourced routing'}</p>
           </>
         ) : (
           <p className="m-0 text-[14px] text-[var(--card-fg2)]">No drive estimate or airports are recorded for this resort.</p>
@@ -175,7 +179,6 @@ function DriveBlock({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Page
                 <Car aria-hidden className="size-3.5" />
                 {t.isEstimate ? 'Curated estimate — not live routing' : 'Sourced routing'}
               </p>
-              {needsCheck(t.prov) ? <ConfirmTag text={confirmText(t.prov)} /> : null}
             </div>
             {t.basis ? <p className="mt-2 max-w-[68ch] text-[13px] text-ink-2">{t.basis}</p> : null}
           </>

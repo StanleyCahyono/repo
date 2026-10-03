@@ -9,12 +9,13 @@ import { and, desc, eq, inArray, lte, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { HotelRow, OperatingScheduleRow, PriceSnapshotRow, ResortRow, ResortSeasonRow } from '@/lib/db/rows'
 import type { ResearchNotes, ResortLinks } from '@/lib/db/schema'
-import { isExpired, priceNeedsSourceCheck, QUOTE_KIND_LABEL, type DayBasket } from '@/lib/domain/costs'
+import { isExpired, QUOTE_KIND_LABEL, type DayBasket } from '@/lib/domain/costs'
 import { money, type Money } from '@/lib/domain/money'
 import { evaluateAccess, latestRule, type AccessVerdict } from '@/lib/domain/passes'
 import { hemisphereOf, isLocalDate, isoWeekday, localTimeToInstant, seasonIdForHemisphere, seasonIdsForDates, zoneAbbrev, type Hemisphere } from '@/lib/domain/time'
 import type { Provenance, ScheduleActivity, ScoringMode } from '@/lib/domain/types'
-import { loadBundle, needsConfirmation, NOT_PERSONAL_REPORT, resortSeasonFor, resortSeasonId, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
+import { loadBundle, NOT_PERSONAL_REPORT, NOT_UNVERIFIED_RESEARCH, resortSeasonFor, resortSeasonId, resortToday, seasonLabel, verificationLabel, type DataCtx, type LinkCheckRow } from './core'
+import { isUnverified, shownHotels, shownPrices, shownSchedules, shownSeason as visibleSeason } from './shown'
 import { getForecast, getHistoryCalendar, type HistoryCalendar, type ResortForecast } from './forecast'
 import { buildSummaries, type ResortSummary } from './resorts'
 import { basketVerdict, dayBasket, eventView, reportView, type EventView, type ReportView, type TravelView } from './views'
@@ -69,8 +70,6 @@ export interface PriceView {
   observedAt: string
   expiresAt: string | null
   expired: boolean
-  /** Research-grade price: "Researched — confirm at source". */
-  confirmAtSource: boolean
   prov: Provenance
 }
 
@@ -129,8 +128,8 @@ export interface SourceEntry {
   provider: string | null
   kind: Provenance['kind']
   verification: Provenance['verification']
-  verificationLabel: string
-  confirmAtSource: boolean
+  /** Quiet source tag ("Official page"…); null for researched catalog facts, which are shown as they are. */
+  verificationLabel: string | null
   checkedAt: string | null
 }
 
@@ -211,7 +210,6 @@ function priceView(p: PriceSnapshotRow, ctx: DataCtx): PriceView {
     observedAt: p.observedAt,
     expiresAt: p.expiresAt,
     expired: isExpired(p.expiresAt, ctx.now, ctx.today),
-    confirmAtSource: priceNeedsSourceCheck(p),
     prov: p.prov,
   }
 }
@@ -252,7 +250,8 @@ function sourcesFor(r: ResortRow, extra: { topic: string; prov: Provenance | nul
   const seen = new Set<string>()
   const out: SourceEntry[] = []
   for (const { topic, prov } of all) {
-    if (!prov) continue
+    // Unverified facts are not shown, so they list no source either.
+    if (!prov || isUnverified(prov)) continue
     const key = `${topic}|${prov.sourceUrl ?? prov.provider ?? ''}`
     if (seen.has(key)) continue
     seen.add(key)
@@ -263,7 +262,6 @@ function sourcesFor(r: ResortRow, extra: { topic: string; prov: Provenance | nul
       kind: prov.kind,
       verification: prov.verification ?? null,
       verificationLabel: verificationLabel(prov),
-      confirmAtSource: needsConfirmation(prov),
       checkedAt: prov.fetchedAt ?? prov.publishedAt ?? null,
     })
   }
@@ -285,7 +283,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
     ...(r.links.more ?? []).map((m) => m.url),
   ]
 
-  const [[summary], seasonRows, changes, schedules, reportRows, passPrices, hotelRows, linkRows, rating, skiDays, history, base, summit] = await Promise.all([
+  const [[summary], seasonRowsRaw, changesRaw, schedulesRaw, reportRows, passPricesRaw, hotelRowsRaw, linkRows, rating, skiDays, history, base, summit] = await Promise.all([
     buildSummaries(b, { date, mode }),
     db.select().from(s.resortSeasons).where(eq(s.resortSeasons.resortId, id)),
     db.select().from(s.openingDateHistory).where(eq(s.openingDateHistory.resortId, id)).orderBy(desc(s.openingDateHistory.changedAt), desc(s.openingDateHistory.id)),
@@ -299,6 +297,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
           lte(s.operationalReports.localDate, date),
           sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${now})`,
           NOT_PERSONAL_REPORT,
+          NOT_UNVERIFIED_RESEARCH,
           b.live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       )
@@ -328,7 +327,14 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
     getForecast(ctx, [id], { point: 'summit' }),
   ])
 
-  const hotelQuotes = hotelRows.length
+  // Unverified facts are not shown (see shown.ts).
+  const seasonRows = seasonRowsRaw.map(visibleSeason)
+  const changes = changesRaw.filter((c) => !isUnverified(c.prov))
+  const schedules = shownSchedules(schedulesRaw)
+  const passPrices = shownPrices(passPricesRaw)
+  const hotelRows = shownHotels(hotelRowsRaw)
+
+  const hotelQuotesRaw = hotelRows.length
     ? await db
         .select()
         .from(s.priceSnapshots)
@@ -343,6 +349,7 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
           ),
         )
     : []
+  const hotelQuotes = shownPrices(hotelQuotesRaw)
 
   // Seasons: the resort's "current or next" winter (see resortSeasonId).
   const hemisphere = hemisphereOf(r.lat)
@@ -410,6 +417,8 @@ export async function getResortDetail(ctx: DataCtx, id: string, opts: { date?: s
         ruleProv: rule?.prov ?? null,
       }
     })
+    // Unknown access (no usable rule recorded) is not shown as a row; it never counts as included either.
+    .filter((x) => x.verdict.status !== 'unknown')
     .sort((x, y) => Number(y.owned) - Number(x.owned) || x.familyName.localeCompare(y.familyName) || x.productName.localeCompare(y.productName))
 
   // Prices

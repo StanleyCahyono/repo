@@ -1,6 +1,6 @@
 /**
- * Pass families (discovery) and this season's exact products with every price snapshot: category, currency, purchase
- * window, quote kind, verification and source. A product with no price on file says "Price not recorded" and links
+ * Pass families and this season's exact products with every price snapshot: category, currency, purchase window,
+ * quote kind and source. A product with no price on file says "Price not recorded" and links
  * to the official page — never $0. Family colours are Piste's own categories, not official branding.
  */
 import Link from 'next/link'
@@ -18,7 +18,7 @@ import { checkerHref } from './params'
 import { EstimateButton } from './estimate-form'
 import { AddPassButton, type ProductChoice } from './pass-forms'
 import { MoneyUp } from './count-up'
-import { ConfirmTag, HolderTag } from './section'
+import { HolderTag } from './section'
 
 const FAMILY_LINK_LABEL: Record<string, string> = {
   official: 'Official site',
@@ -94,12 +94,11 @@ function PriceBlock({ p, est }: { p: PassProductView; est: EstimateEntry }) {
           <p className="mt-1 text-[12.5px] text-ink-2">
             {dotJoin(cur.category ?? 'Adult', cur.purchaseBy ? `buy by ${shortDate(cur.purchaseBy.slice(0, 10))}` : 'on sale now', later[0] ? `then ${formatMoney(later[0].amount)}` : null)}
           </p>
-          {cur.confirmAtSource ? <ConfirmTag className="mt-1" /> : null}
         </>
       ) : others.length ? (
         <>
           <p className="text-[15px] font-semibold text-ink">No adult price on sale</p>
-          <p className="mt-0.5 text-[12.5px] text-ink-3">Only the prices below are on file — confirm the current adult price at the source.</p>
+          <p className="mt-0.5 text-[12.5px] text-ink-3">Only the prices below are on file.</p>
         </>
       ) : (
         <>
@@ -190,15 +189,16 @@ function ProductRow({
               <HolderTag key={h} holder={h} />
             ))}
         </div>
-        <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
-          <span>{dotJoin(p.resortName ? `${p.resortName} season pass` : null, p.resortCount ? `rules at ${plural(p.resortCount, 'resort')}` : 'no resort rules recorded')}</span>
-          {p.confirmAtSource ? <ConfirmTag text={p.verificationLabel} /> : <span>· {p.verificationLabel}</span>}
-        </p>
+        {p.resortName || p.verificationLabel ? (
+          <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
+            <span>{dotJoin(p.resortName ? `${p.resortName} season pass` : null, p.verificationLabel)}</span>
+          </p>
+        ) : null}
         {notesBody ? (
           p.ownedByMe ? (
             notesBody
           ) : (
-            // Research notes repeat per product; for passes you don't hold they stay one click away.
+            // Notes repeat per product; for passes you don't hold they stay one click away.
             <Disclosure summary={notesLabel} className="mt-2">
               {notesBody}
             </Disclosure>
@@ -275,7 +275,7 @@ export function FamilySection({
             </h2>
           </div>
           <p className="mt-1 text-[13px] text-ink-3">
-            {dotJoin(f.operator, plural(products.length, 'product'), priced ? `${priced} with a current price` : 'no current prices recorded', f.prov ? (f.prov.verification === 'unverified' ? 'Unverified — confirm at source' : null) : null)}
+            {dotJoin(f.operator, plural(products.length, 'product'), priced ? `${priced} with a current price` : 'no current prices recorded')}
           </p>
         </div>
         {links.length ? (

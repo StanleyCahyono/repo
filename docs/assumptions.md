@@ -10,14 +10,14 @@ Material decisions made while building Piste. Each one can be revisited.
   - **Fully researched:** Greek Peak, Bristol, Holiday Valley and Elk Mountain.
   - **Partly researched:** Labrador and Belleayre.
   - **Reference data only:** the other 27 resorts carry only stable reference facts, labelled
-    `verification: "unverified"` and shown as "Reference — confirm". These are coordinates, elevations, official
-    homepages, and road and avalanche portals.
+    `verification: "unverified"`. These facts are not displayed (coordinates, time zones and homepages are still
+    used so maps and links work); they read as unknown until a sourced value replaces them.
   - **Never filled in from memory:** 2026–27 opening dates, prices, hours and pass access for those resorts. They
     show as unknown, with official links and a manual-edit route.
 - **How the catalog is labelled.** Researched facts come from web-search summaries and carry
-  `verification: "search-summary"` with the source URL of each fact. The UI says "Researched — confirm at source"
-  until you confirm them or a live adapter supersedes them. You can confirm them in Settings → corrections or with
-  the Passes manual-rule editor.
+  `verification: "search-summary"` with the source URL of each fact. The UI shows them like any other fact (the
+  source drawer names the source); there is no "confirm at source" labelling. Unverified facts are not shown at all.
+  You can correct any fact in Settings → corrections or with the Passes manual-rule editor.
 - **Weather and NWS.** The adapters are built against the documented APIs and tested with fixtures in the
   documented format. They run live on a networked machine. In the build environment every refresh fails, and the UI
   shows that honestly: "not fetched yet" or the failure itself, never demo data dressed up as live.

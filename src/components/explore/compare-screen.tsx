@@ -26,7 +26,6 @@ import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
 import { EmptyState, Notice } from '@/components/ui/states'
 import { OpeningTag } from '@/components/ui/status'
 import { CardPassBadges } from '@/components/resort/card-passes'
-import { RESEARCH_LABEL } from '@/components/resort/card-data'
 import { COMPARE_MAX, useCompareSelection } from '@/components/resort/card-compare'
 import type { CompareColumn, CompareView } from '@/lib/data/explore'
 import { SCORING_MODES, SCORING_MODE_LABEL, type ScoringMode } from '@/lib/domain/types'
@@ -127,7 +126,7 @@ export function CompareScreen({ view }: { view: CompareView }) {
       </div>
 
       <p className="hud text-[11.5px] leading-relaxed tracking-[0.08em] text-ink-2">
-        ◇ Catalog facts marked researched — confirm at source · Scores describe suitability for the day, not safety · Prices are Piste estimates from
+        ◇ Scores describe suitability for the day, not safety · Prices are Piste estimates from
         recorded snapshots · Unknown values are never ranked
       </p>
     </div>
@@ -692,7 +691,6 @@ function LiftsCell({ c }: { c: CompareColumn }) {
         <span className="text-[13px] text-ink-2">{m.lifts !== null ? 'lifts' : 'lift count unknown'}</span>
       </span>
       <span className="text-[13px] text-ink-2">{extra.length ? extra.join(' · ') : 'Trails and piste length not recorded'}</span>
-      {m.researched ? <span className="text-[12px] font-medium text-caution">◇ Researched — confirm at source</span> : null}
     </span>
   )
 }
@@ -813,7 +811,6 @@ function TerrainCell({ c }: { c: CompareColumn }) {
       </span>
       <span className="tnum text-[12px] text-ink-2">{parts.map((p) => `${p.k.toLowerCase()} ${p.v === null ? 'unknown' : `${p.v}%`}`).join(' · ')}</span>
       {tr.beginnerArea ? <span className="line-clamp-2 text-[12px] text-ink-3">{tr.beginnerArea}</span> : null}
-      {tr.researched ? <span className="text-[12px] font-medium text-caution">Researched split — confirm at source</span> : null}
     </span>
   )
 }
@@ -885,7 +882,7 @@ function AccessCell({ c }: { c: CompareColumn }) {
           <span
             className={cn(
               'inline-flex items-center gap-1.5 font-semibold',
-              a.canSki ? 'text-positive' : a.status === 'unknown' ? 'text-caution' : 'text-ink-2',
+              a.canSki ? 'text-positive' : 'text-ink-2',
             )}
           >
             <Ticket aria-hidden className="size-3.5 shrink-0" />
@@ -894,7 +891,6 @@ function AccessCell({ c }: { c: CompareColumn }) {
           </span>
           <span className="text-[13px]">{a.headline}</span>
           {a.reservation ? <span className="text-[12px] text-ink-3">{a.reservation}</span> : null}
-          {a.confirmAtSource ? <span className="text-[12px] font-medium text-caution">Confirm at source</span> : null}
         </li>
       ))}
     </ul>
@@ -1035,10 +1031,8 @@ function EventsCell({ c }: { c: CompareColumn }) {
 }
 
 function GapsCell({ c }: { c: CompareColumn }) {
-  const research = c.card.research
   return (
     <span className="flex flex-col gap-1">
-      {research ? <span className="text-[12.5px] font-medium text-caution">{RESEARCH_LABEL[research].short}</span> : null}
       {c.gaps.length ? (
         <ul className="flex list-disc flex-col gap-0.5 pl-4 text-[12.5px] text-ink-2 marker:text-ink-3">
           {c.gaps.slice(0, 4).map((g) => (

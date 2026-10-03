@@ -41,8 +41,10 @@ import {
   type SurfaceTag,
 } from '@/lib/domain/types'
 import type { ComponentResult } from '@/lib/db/schema'
-import { derivedProv, needsConfirmation, resortToday, seasonLabel, type Bundle, type OwnedPass, type SnowSum } from './core'
-import { reportOrigin, type ReportOrigin } from './deps'
+import { derivedProv, resortToday, seasonLabel, type Bundle, type OwnedPass, type SnowSum } from './core'
+import { isResearchedReport, reportOrigin, type ReportOrigin } from './deps'
+import { cleanCatalogText } from '@/lib/domain/source-label'
+import { shownProv } from './shown'
 
 // ---------------------------------------------------------------------------
 // Operating status
@@ -97,7 +99,7 @@ export function statusView(resort: Pick<ResortRow, 'timezone' | 'lat'>, event: S
       since: null,
       localDate: null,
       basis: 'none',
-      prov: event.prov,
+      prov: shownProv(event.prov),
       note: `Latest status (${OPERATING_STATUS_LABEL[event.status]}) is from the ${seasonLabel(eventSeason)} season`,
       lastConfirmedAt: null,
       ageHours: null,
@@ -115,11 +117,11 @@ export function statusView(resort: Pick<ResortRow, 'timezone' | 'lat'>, event: S
     since: event.effectiveAt,
     localDate: event.localDate,
     basis: event.prov?.kind === 'derived' ? 'season' : 'reported',
-    prov: event.prov,
+    prov: shownProv(event.prov),
     note:
       eventSeason !== currentSeason
         ? `Closed since the end of the ${seasonLabel(eventSeason)} season — no ${seasonLabel(currentSeason)} status reported yet`
-        : event.note,
+        : statusNote(event.note),
     lastConfirmedAt: confirmed,
     ageHours: Math.max(0, Math.round(hoursBetween(latestAt, now) * 10) / 10),
     seasonId: eventSeason,
@@ -138,10 +140,10 @@ export interface StatusStatement {
 /** Latest status statement for recommendation eligibility: the newer of the status event and the report's status. */
 export function statusStatement(event: StatusEventRow | undefined, report: OperationalReportRow | undefined): StatusStatement {
   const fromEvent: StatusStatement | null = event
-    ? { status: event.status, statusDate: event.localDate, statusAt: event.effectiveAt, source: 'event', prov: event.prov }
+    ? { status: event.status, statusDate: event.localDate, statusAt: event.effectiveAt, source: 'event', prov: shownProv(event.prov) }
     : null
   const fromReport: StatusStatement | null = report?.status
-    ? { status: report.status, statusDate: report.localDate, statusAt: report.reportedAt, source: 'report', prov: report.prov }
+    ? { status: report.status, statusDate: report.localDate, statusAt: report.reportedAt, source: 'report', prov: shownProv(report.prov) }
     : null
   if (fromReport && (!fromEvent || fromReport.statusDate! > fromEvent.statusDate!)) return fromReport
   if (fromReport && fromEvent && fromReport.statusDate === fromEvent.statusDate && fromReport.statusAt && fromReport.statusAt > fromEvent.statusAt!) return fromReport
@@ -405,8 +407,9 @@ export function reportView(r: OperationalReportRow | undefined, now: string, tz:
     openBeginnerTrails: r.openBeginnerTrails,
     totalBeginnerTrails: r.totalBeginnerTrails,
     openAcres: r.openAcres,
-    notes: r.notes,
-    prov: r.prov,
+    // A dated report from the catalog carries the researcher's wording; its caveats are not shown.
+    notes: isResearchedReport(r) ? cleanCatalogText(r.notes) : r.notes,
+    prov: shownProv(r.prov),
   }
 }
 
@@ -566,9 +569,7 @@ export interface PassBadgeView {
   familyName: string
   productIds: string[]
   accessTypes: PassAccessType[]
-  /** false when every rule behind the badge is 'unknown' — access not confirmed. */
-  confirmed: boolean
-  /** Only unknown or discount-only rules: show a muted/qualified badge. */
+  /** Only discount-only rules: show a muted/qualified badge. */
   qualifiedOnly: boolean
   discoveryOnly: true
 }
@@ -581,7 +582,6 @@ export function passBadges(b: Bundle, resortId: string): PassBadgeView[] {
     familyName: fam.get(x.familyId) ?? x.familyId,
     productIds: x.productIds,
     accessTypes: x.accessTypes,
-    confirmed: !x.accessTypes.every((a) => a === 'unknown'),
     qualifiedOnly: x.qualifiedOnly,
     discoveryOnly: true as const,
   }))
@@ -612,7 +612,7 @@ export function ownedVerdicts(b: Bundle, resortId: string, date: string): { owne
 }
 
 export interface MyPassView {
-  status: 'covered' | 'not-covered' | 'unconfirmed' | 'no-pass'
+  status: 'covered' | 'not-covered' | 'unknown' | 'no-pass'
   productName: string | null
   headline: string
   verdicts: AccessVerdict[]
@@ -624,8 +624,8 @@ export function myPassView(verdicts: readonly AccessVerdict[]): MyPassView {
   if (!verdicts.length) return { status: 'no-pass', productName: null, headline: 'No pass recorded', verdicts: [] }
   const sorted = [...verdicts].sort((a, b) => Number(b.canSki) - Number(a.canSki) || (STATUS_RANK[a.status] ?? 9) - (STATUS_RANK[b.status] ?? 9) || a.productName.localeCompare(b.productName))
   const best = sorted[0]
-  const status: MyPassView['status'] = best.canSki ? 'covered' : sorted.some((v) => v.status === 'unknown') ? 'unconfirmed' : 'not-covered'
-  const pick = status === 'unconfirmed' ? sorted.find((v) => v.status === 'unknown')! : best
+  const status: MyPassView['status'] = best.canSki ? 'covered' : sorted.some((v) => v.status === 'unknown') ? 'unknown' : 'not-covered'
+  const pick = status === 'unknown' ? sorted.find((v) => v.status === 'unknown')! : best
   return { status, productName: pick.productName, headline: `${pick.productName}: ${pick.headline}`, verdicts: sorted }
 }
 
@@ -652,7 +652,6 @@ export interface ExpenseView {
   requiredMissing: string[]
   caveats: string[]
   passCoveredBy: string | null
-  confirmAtSource: boolean
   dayType: DayBasket['dayType']
   holidayName: string | null
   lines: BasketLine[]
@@ -684,7 +683,6 @@ export function expenseView(basket: DayBasket): ExpenseView {
     requiredMissing: basket.missing.filter((m) => m.required).map((m) => m.message),
     caveats: basket.caveats,
     passCoveredBy: passLine?.source ?? null,
-    confirmAtSource: basket.lines.some((l) => l.confirmAtSource),
     dayType: basket.dayType,
     holidayName: basket.holidayName,
     lines: basket.lines,
@@ -853,15 +851,9 @@ export function alertsOverlapping(alerts: readonly WeatherAlertRow[], fromInstan
   return alerts.filter((a) => (!a.onset || a.onset < toInstant) && (!a.ends || a.ends > fromInstant))
 }
 
-// ---------------------------------------------------------------------------
-// Catalog research status
-
-export function catalogResearchGap(r: ResortRow): string | null {
-  if (r.research?.method === 'reference-only') return 'Catalog facts are Piste reference data (not web-verified) — confirm at source'
-  const open = [r.terrain?.prov, r.features?.prov, r.locationProv, r.elevationProv].filter((p): p is Provenance => !!p && needsConfirmation(p))
-  if (!open.length) return null
-  // Web-search research is "Researched — confirm at source"; unverified entries are reference data.
-  return open.some((p) => p.verification === 'search-summary')
-    ? 'Catalog facts are researched from web-search summaries — confirm at source'
-    : 'Catalog facts are reference data — confirm at source'
+/** Status notes as shown: older catalog seeds wrote "Found by catalog research for <day> — confirm at source". */
+export function statusNote(note: string | null | undefined): string | null {
+  if (!note) return null
+  const m = /^Found by catalog research for (.+?)(?: — confirm at source)?$/.exec(note)
+  return m ? `Report for ${m[1]}` : note
 }

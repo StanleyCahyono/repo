@@ -77,12 +77,11 @@ describe('familyCards', () => {
       renewalNotes: null,
       salesDeadline: null,
       prices: [],
-      currentPrice: price == null ? null : ({ amount: money(price, 'USD'), confirmAtSource: true } as PassProductView['currentPrice']),
+      currentPrice: price == null ? null : ({ amount: money(price, 'USD') } as PassProductView['currentPrice']),
       ownedBy: [],
       ownedByMe: false,
       resortCount: 0,
-      confirmAtSource: true,
-      verificationLabel: '',
+      verificationLabel: null,
       prov: null,
     }) as PassProductView
 

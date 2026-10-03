@@ -46,7 +46,6 @@ export function StatusBoard({ v }: { v: SourcesView }) {
   const jobsBad = v.jobs.filter((j) => j.state === 'failing' || j.state === 'never-succeeded' || j.state === 'partial')
   const jobsStale = v.jobs.filter((j) => j.state === 'stale' || j.state === 'nothing-fetched')
   const cells = v.coverage.rows.flatMap((r) => r.cells)
-  const confirm = cells.filter((c) => c.state === 'researched' || c.state === 'reference').length
   const missing = cells.filter((c) => c.state === 'missing').length
   const failedLinks = v.links.broken
 
@@ -82,11 +81,11 @@ export function StatusBoard({ v }: { v: SourcesView }) {
     },
     {
       href: '#coverage',
-      eyebrow: 'Facts to confirm',
-      value: confirm,
+      eyebrow: 'Facts on file',
+      value: cells.length - missing,
       unit: `of ${cells.length}`,
-      line: `${missing} missing across ${v.coverage.rows.length} resorts. Research-grade facts say “confirm at source”.`,
-      tone: confirm || missing ? 'caution' : 'positive',
+      line: `${missing} missing across ${v.coverage.rows.length} resorts.`,
+      tone: missing ? 'caution' : 'positive',
     },
     {
       href: '#links',

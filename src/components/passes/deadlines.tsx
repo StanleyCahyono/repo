@@ -10,7 +10,6 @@ import type { DeadlineItem } from '@/lib/data/passes-screen'
 import { formatMoney } from '@/lib/domain/money'
 import { cn } from '@/lib/ui/cn'
 import { dayMonth, daysAway, familyId } from './format'
-import { ConfirmTag } from './section'
 
 export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?: number }) {
   const dated = items.filter((i) => i.date)
@@ -53,7 +52,6 @@ export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?
                     )}
                   </p>
                   <p className="mt-1 flex flex-wrap items-center gap-2">
-                    {d.confirmAtSource ? <ConfirmTag /> : null}
                     <SourceDrawer title={d.productName} items={[{ label: d.kind === 'price' ? 'Advance price' : 'Sales deadline', value: d.text ?? undefined, prov: d.prov }]} />
                   </p>
                 </div>

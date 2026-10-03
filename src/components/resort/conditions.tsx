@@ -26,7 +26,7 @@ import { CountUp } from './count-up'
 import { ModeSwitch } from './mode-switch'
 import { RefreshNow } from './refresh-now'
 import { ObservationSheet, ReportEntrySheet } from './report-entry'
-import { ConfirmTag, DetailDrawer, GlassCard, ResortSection, Src, SubHead } from './section'
+import { DetailDrawer, GlassCard, ResortSection, Src, SubHead } from './section'
 import {
   ago,
   dayLabel,
@@ -48,11 +48,11 @@ import {
 
 const GATE = Math.round(CONDITIONS_CONFIG_V1.gate.minCoverage * 100)
 
-/** Where a report came from, in words. A report found by catalog research names the site it was found on. */
+/** Where a report came from, in words. A dated report from the catalog names the site it comes from. */
 function originLabel(r: Pick<ReportView, 'origin' | 'prov'>): string {
   if (!isResearchedReport(r)) return REPORT_ORIGIN_LABEL[r.origin]
   const host = hostOf(r.prov.sourceUrl)
-  return `Found by catalog research${host ? ` (${host})` : ''}`
+  return host ? `Report from ${host}` : 'Report on file'
 }
 
 /** Ends a stored note with a full stop so it can be followed by another sentence. */
@@ -163,7 +163,7 @@ function strataLayers(d: ResortDetail, v: PageView): { layers: StrataLayer[]; so
     { key: 'season', label: 'Season total', cm: season?.amountCm ?? null, value: season ? u.snow(season.amountCm) : null, note: null },
   ]
   const source = rep
-    ? `${isResearchedReport(rep) ? 'Researched — confirm at source' : REPORT_ORIGIN_LABEL[rep.origin]} · report for ${dayLabel(rep.localDate)}. Layers fill only from reports; nothing is estimated.`
+    ? `${originLabel(rep)} · report for ${dayLabel(rep.localDate)}. Layers fill only from reports; nothing is estimated.`
     : 'No snow report on file. Layers fill in as the resort reports; nothing is estimated here.'
   return { layers, source }
 }
@@ -588,8 +588,8 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
         </div>
         {rep ? (
           <div className="flex flex-wrap items-center gap-2">
-            {isResearchedReport(rep) ? <ConfirmTag text="Researched — confirm at source" /> : <KindTag kind={rep.kind} />}
-            <Freshness at={rep.reportedAt ?? rep.fetchedAt} now={v.now} staleHours={24} prefix={rep.reportedAt ? 'Published' : isResearchedReport(rep) ? 'Found' : 'Fetched'} />
+            <KindTag kind={rep.kind} />
+            <Freshness at={rep.reportedAt ?? rep.fetchedAt} now={v.now} staleHours={24} prefix={rep.reportedAt ? 'Published' : isResearchedReport(rep) ? 'Recorded' : 'Fetched'} />
             <Src title="Snow report" items={[src(`Report for ${dayLabelYear(rep.localDate)}`, rep.prov)]} />
           </div>
         ) : null}
@@ -676,7 +676,7 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
           </p>
           <p className="text-[13.5px] text-ink-2">
             {x.refresh.reportAdapter
-              ? `Piste has an ${x.refresh.reportAdapter.state === 'unverified' ? 'unverified ' : ''}reader for “${x.refresh.reportAdapter.label}”, but it has not stored a report${x.refresh.reports?.lastAttemptOutcome === 'failed' ? ' — the last fetch failed' : ''}.`
+              ? `Piste has a ${x.refresh.reportAdapter.state === 'unverified' ? 'new ' : ''}reader for “${x.refresh.reportAdapter.label}”, but it has not stored a report${x.refresh.reports?.lastAttemptOutcome === 'failed' ? ' — the last fetch failed' : ''}.`
               : 'No official report reader exists for this resort — reports come from manual entries only.'}{' '}
             Snowfall, base depth, open terrain and grooming stay unknown until a report is read or entered.
           </p>
@@ -804,7 +804,7 @@ function SurfaceTrio({ d, v }: { d: ResortDetail; v: PageView }) {
             <p className="text-[14px] text-ink-3 italic">Not reported{rep ? ' in the latest report' : ''}.</p>
           )}
           <p className="text-[12.5px] text-ink-3">
-            {snowmakingPct !== null ? `Catalog: snowmaking covers about ${snowmakingPct}% of terrain (researched). ` : ''}Machine-made snow is an origin, not a surface.
+            {snowmakingPct !== null ? `Snowmaking covers about ${snowmakingPct}% of terrain. ` : ''}Machine-made snow is an origin, not a surface.
           </p>
         </div>
       </div>
@@ -1134,7 +1134,7 @@ function FeedHealth({ x, v, reportUrl, weatherShown }: { x: ResortPageExtras; v:
           note={
             adapter ? (
               <>
-                Reader {adapter.state === 'unverified' ? 'unverified — the page layout may break it' : adapter.state}.{' '}
+                Reader {adapter.state === 'unverified' ? 'is new — the page layout may break it' : adapter.state}.{' '}
                 {reportUrl ? (
                   <a href={reportUrl} target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
                     Open the page

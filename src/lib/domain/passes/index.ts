@@ -8,4 +8,4 @@ export {
   type PoolAllowance,
   type AllowanceStatus,
 } from './allowance'
-export { familyBadges, BADGE_DISCLAIMER, type FamilyBadge } from './badges'
+export { familyBadges, type FamilyBadge } from './badges'

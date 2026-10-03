@@ -35,13 +35,12 @@ export function OwnedPassCard({
   resorts: ResortOption[]
   today: string
   seasonStart: string
-  /** How the logged days' ticket value was priced (your estimates, research-grade prices). */
+  /** How the logged days' ticket value was priced (your estimates). */
   basis?: OwnedValueBasis | null
 }) {
   const mine = p.holder === 'me'
-  // Confirmed allowances get a row each; unconfirmed resorts are summarised (never shown as access).
+  // Recorded allowances get a row each; resorts whose allowance is unknown are not listed unless days are logged there.
   const covered = p.byResort.filter((r) => r.status !== 'not-included' && (r.status !== 'unknown' || r.used > 0))
-  const unconfirmed = p.byResort.filter((r) => r.status === 'unknown' && r.used === 0)
   const notIncluded = p.byResort.filter((r) => r.status === 'not-included')
   const byId = new Map(p.byResort.map((r) => [r.resortId, r]))
   const choices: ResortChoice[] = [...resorts]
@@ -93,7 +92,7 @@ export function OwnedPassCard({
                 {r.cap != null ? (
                   <PunchMeter total={r.cap} used={Math.min(r.cap, r.used)} compact />
                 ) : r.status === 'unknown' ? (
-                  <p className="text-[12.5px] text-ink-3">{r.used ? `${plural(r.used, 'day')} logged · ` : ''}allowance not recorded — not confirmed</p>
+                  <p className="text-[12.5px] text-ink-3">{r.used ? `${plural(r.used, 'day')} logged · ` : ''}allowance not recorded</p>
                 ) : (
                   <p className="text-[12.5px] text-ink-3 tnum">
                     {dotJoin(r.used ? `${plural(r.used, 'day')} logged` : 'no days logged', r.poolId ? `shared pool: ${r.poolRemaining != null ? `${r.poolRemaining} left` : 'size not recorded'}` : null)}
@@ -102,28 +101,9 @@ export function OwnedPassCard({
               </li>
             ))}
           </ul>
-        ) : !unconfirmed.length ? (
-          <p className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-3 py-2 text-[13px] text-ink-2">No resort rules with access are recorded for this pass — nowhere is confirmed yet.</p>
-        ) : null}
-
-        {unconfirmed.length ? (
-          <div className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-3 py-2.5 text-[12.5px] text-ink-2">
-            <p className="flex flex-wrap items-center gap-x-1.5">
-              <AccessMark status="unknown" variant="cell" label={`Not confirmed at ${plural(unconfirmed.length, 'resort')}`} />
-            </p>
-            <p className="mt-0.5">
-              {unconfirmed.map((r, i) => (
-                <span key={r.resortId}>
-                  {i ? ', ' : ''}
-                  <Link href={checkerHref({ own: p.ownershipId, resort: r.resortId })} scroll={false} className="hover:text-teal hover:underline">
-                    {r.resortName}
-                  </Link>
-                </span>
-              ))}
-              <span className="text-ink-3"> — the allowance is not recorded; check it before you rely on it.</span>
-            </p>
-          </div>
-        ) : null}
+        ) : (
+          <p className="rounded-[10px] border border-dashed border-divider-strong bg-surface-2 px-3 py-2 text-[13px] text-ink-2">No resort access is recorded for this pass yet.</p>
+        )}
 
         {p.byPool.map((pool) => (
           <div key={pool.id} className="rounded-[10px] border border-divider bg-surface-2 px-3 py-2.5">
@@ -164,13 +144,8 @@ export function OwnedPassCard({
                 )}
               </dd>
             </dl>
-            {basis && (basis.estimatedDays || basis.researchedDays) && v.ticketValueKnown.amountMinor > 0 ? (
-              <p className="mt-1.5 text-[12px] font-medium text-ink-2">
-                {dotJoin(
-                  basis.estimatedDays ? `Priced with your estimates on ${plural(basis.estimatedDays, 'day')}` : null,
-                  basis.researchedDays ? `${plural(basis.researchedDays, 'researched price')} — confirm at source` : null,
-                )}
-              </p>
+            {basis?.estimatedDays && v.ticketValueKnown.amountMinor > 0 ? (
+              <p className="mt-1.5 text-[12px] font-medium text-ink-2">Priced with your estimates on {plural(basis.estimatedDays, 'day')}</p>
             ) : null}
             <p className="mt-1.5 text-[12px] text-ink-3">
               {v.cost && v.costSource ? `Purchase counted once in your season budget, from ${COST_SOURCE[v.costSource] ?? 'the pass record'} — never again as lift cash.` : 'Record the price paid to see cost per day.'} Ticket value

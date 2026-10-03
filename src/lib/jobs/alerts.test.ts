@@ -99,7 +99,7 @@ describe('alert rules', () => {
     expect(await byType('snow-threshold')).toHaveLength(1)
   })
 
-  it('labels researched opening-date changes "Researched — confirm at source"', async () => {
+  it('reports researched opening-date changes like any other, and never alerts on an unverified date', async () => {
     const { db, evaluate, byType } = await setup()
     await addResort(db, { id: 'stowe', shortName: 'Stowe', timezone: 'America/New_York' }, { favorite: true })
     await addSeason(db, 'stowe', { announcedOpening: '2026-11-13' })
@@ -117,9 +117,16 @@ describe('alert rules', () => {
     const got = await byType('opening-date-change')
     const researched = got.find((a) => a.resortId === 'alta')
     const official = got.find((a) => a.resortId === 'stowe')
-    expect(researched?.body).toMatch(/Researched — confirm at source/)
+    expect(researched?.body).toBeDefined()
+    expect(researched?.body).not.toMatch(/Researched|confirm at source|Unverified/)
     expect(official?.body).toBeDefined()
     expect(official?.body).not.toMatch(/Researched|Unverified/)
+
+    await addResort(db, { id: 'vail', shortName: 'Vail', timezone: 'America/Denver' }, { favorite: true })
+    await addSeason(db, 'vail', { announcedOpening: '2026-11-13' })
+    await change('vail', '2026-11-21', 'unverified')
+    await evaluate('2026-11-01T14:00:00.000Z')
+    expect((await byType('opening-date-change')).find((a) => a.resortId === 'vail')).toBeUndefined()
   })
 
   it('alerts once on an announced opening-date change', async () => {

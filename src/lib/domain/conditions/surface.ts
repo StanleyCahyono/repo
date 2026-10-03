@@ -175,7 +175,7 @@ function thawRefreezeRule(
   if (longest < r.minFreezeHours) return null
   if (sum(values(after, 'snowfallCm')) >= cfg.surface.freshSnow.minSnowCm) return null
   if (!snowKnown) {
-    return { skipped: 'A thaw followed by a hard freeze was modeled, but snow cover is not confirmed by a recent report, so no firm/refrozen surface is inferred' }
+    return { skipped: 'A thaw followed by a hard freeze was modeled, but no recent report shows snow cover, so no firm/refrozen surface is inferred' }
   }
   const icy = rain >= r.icyRainMm || thawHours >= r.icyThawHours
   const cause = [rain >= r.minRainMm ? `${f.rain(rain)} rain` : null, thawHours > 0 ? `${thawHours} h above ${f.temp(r.thawTempC)}` : null]

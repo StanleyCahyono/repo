@@ -192,7 +192,7 @@ export function comparePasses(input: {
       notes.push('Discount-only days are priced at the full ticket price; the discount is not applied.')
     }
     if (byStatus.unknown) {
-      notes.push(`${plural(byStatus.unknown, 'day')} with unconfirmed access are priced as tickets, not assumed covered.`)
+      notes.push(`${plural(byStatus.unknown, 'day')} with no recorded access are priced as tickets.`)
     }
 
     const seasonTotal = passPrice && uncoveredTicketCost ? sum([passPrice, uncoveredTicketCost], currency) : null

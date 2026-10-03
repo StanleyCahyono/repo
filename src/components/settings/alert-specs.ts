@@ -90,7 +90,7 @@ export const ALERT_SPECS: Record<AlertType, AlertSpec> = {
   'price-change': {
     title: 'Verified price changes',
     summary: 'A price confirmed at an official source (or by you) changes for the same product and day type.',
-    caveat: 'Researched or estimated prices never raise this alert.',
+    caveat: 'Only prices from an official source or entered by you raise this alert; estimates never do.',
     params: [{ key: 'lookbackDays', label: 'Report changes from the last', kind: 'days', min: 1, max: 365, default: 30 }],
     allScope: 'All resorts',
     resortScope: true,

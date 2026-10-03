@@ -21,12 +21,12 @@ import { dayLabel } from './format'
 const ACCESS: Record<DayResortView['access']['status'], { cls: string; Icon: typeof CircleCheck; label: string }> = {
   covered: { cls: 'bg-positive-bg text-positive border-transparent', Icon: CircleCheck, label: 'Pass covers this day' },
   'not-covered': { cls: 'bg-critical-bg text-critical border-transparent', Icon: CircleSlash, label: 'Not covered' },
-  unconfirmed: { cls: 'bg-surface text-ink-2 border-dashed border-divider-strong', Icon: CircleHelp, label: 'Access not confirmed' },
+  unknown: { cls: 'bg-surface text-ink-2 border-dashed border-divider-strong', Icon: CircleHelp, label: 'No access recorded' },
   'no-pass': { cls: 'bg-surface-3 text-ink-2 border-transparent', Icon: Ticket, label: 'No pass on file' },
 }
 
 function verdictStatus(v: AccessVerdict): DayResortView['access']['status'] {
-  return v.canSki ? 'covered' : v.status === 'unknown' ? 'unconfirmed' : 'not-covered'
+  return v.canSki ? 'covered' : v.status === 'unknown' ? 'unknown' : 'not-covered'
 }
 
 export function AccessPill({ status, product, className }: { status: DayResortView['access']['status']; product?: string | null; className?: string }) {
@@ -52,7 +52,7 @@ function Reservation({ v }: { v: AccessVerdict | undefined }) {
 
 function AccessCell({ r, chosenName }: { r: DayResortView; chosenName: string | null }) {
   const best = r.access.verdicts[0]
-  const pick = r.access.status === 'unconfirmed' ? r.access.verdicts.find((v) => v.status === 'unknown') : best
+  const pick = r.access.status === 'unknown' ? r.access.verdicts.find((v) => v.status === 'unknown') : best
   return (
     <div className="min-w-0">
       <p className="eyebrow mb-1.5">Pass access</p>

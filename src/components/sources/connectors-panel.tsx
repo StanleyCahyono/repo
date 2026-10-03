@@ -208,7 +208,7 @@ export function ManualSources({ v, reportAdapters, resortCount }: { v: SourcesVi
     {
       title: 'Catalog facts',
       scope: 'All resorts',
-      text: 'Researched or reference data from the catalog. Correct anything you have checked below — it is labelled as your correction.',
+      text: 'Curated catalog facts. Correct anything you have checked below — it is labelled as your correction.',
     },
   ]
   return (

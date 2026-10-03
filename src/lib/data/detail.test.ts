@@ -77,11 +77,8 @@ describe('getResortDetail', () => {
 
   it('lists exact pass access with my owned product first, then other products with a rule here', async () => {
     const far = (await getResortDetail(fx.ctx, 'far-west', { date: TODAY }))!
-    // Alphabetically Ikon would come first; ownership wins. Neither is confirmed at far-west.
-    expect(far.passAccess.map((p) => [p.productId, p.owned, p.verdict.status])).toEqual([
-      ['indy-base-2026-27', true, 'unknown'],
-      ['ikon-base-2026-27', false, 'unknown'],
-    ])
+    // Neither product has usable access recorded at far-west (Ikon's rule is 'unknown'): no rows, never "included".
+    expect(far.passAccess).toEqual([])
     const peak = (await getResortDetail(fx.ctx, 'test-peak', { date: TODAY }))!
     expect(peak.passAccess).toEqual([expect.objectContaining({ productId: 'indy-base-2026-27', owned: true })])
     expect(peak.passAccess[0].verdict).toMatchObject({ status: 'included-limited', canSki: true, remainingDays: 1 })

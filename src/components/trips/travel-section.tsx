@@ -13,7 +13,7 @@ import type { TripPage, TripResortInfo } from '@/lib/data/trip-plan'
 import type { TripItemRow } from '@/lib/db/rows'
 import { directionsLink, flightSearchLinks } from '@/lib/providers/links/builders'
 import { formatDistance } from '@/lib/domain/units'
-import { ConfirmTag, EmptySlot, SubHead, TripSection } from './bits'
+import { EmptySlot, SubHead, TripSection } from './bits'
 import { TRANSFER_LABEL, dayLabel, detailNumber, detailString, duration, plural } from './format'
 import { DEFAULT_AIRPORT_BUFFER_MIN, DEFAULT_ARRIVAL_BUFFER_MIN, doorToDoor, itineraryTiming, type DoorLeg, type SegmentLike } from './model'
 import { AddItemButton, QuickAdd } from './add-buttons'
@@ -387,7 +387,6 @@ function CatalogTransfers({ main, savedTitles, startDate, endDate }: { main: Tri
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="flex flex-wrap items-center gap-2">
-                    <ConfirmTag />
                     {t.url ? (
                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="text-[12.5px] font-medium text-teal hover:underline">
                         Official site<span className="sr-only"> for {title} (opens in a new tab)</span>

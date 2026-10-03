@@ -1,7 +1,7 @@
 'use client'
 /**
- * Per-resort coverage: which facts are official, yours, estimated, researched ("confirm at source"), reference-only,
- * stale, failing or missing. A resorts × facts table from 1024px (every cell an icon + state, with its own label for
+ * Per-resort coverage: which facts are official, yours, estimated, from the catalog, without a source, stale,
+ * failing or missing. A resorts × facts table from 1024px (every cell an icon + state, with its own label for
  * assistive tech), a list with a compact state strip below that. Any cell or row opens the resort's coverage sheet:
  * what is on file, how old it is, and where it comes from.
  */
@@ -58,7 +58,7 @@ export function CoverageMatrix({
   now: string
   tz: string
   seasonLabel: string
-  /** Report adapter setup per resort id: 'live' (verified), 'unverified' or 'disabled'. */
+  /** Report adapter setup per resort id: 'live' (verified), 'new' (built without the live page) or 'disabled'. */
   adapters: Record<string, string>
 }) {
   const [open, setOpen] = useState<{ resortId: string; field: CoverageField | null } | null>(null)
@@ -198,8 +198,8 @@ export function CoverageMatrix({
               <p className="text-[12.5px] text-ink-3">
                 {!current.hasReportAdapter
                   ? 'No official report adapter — manual reports only'
-                  : adapters[current.resortId] === 'unverified'
-                    ? 'Official report adapter: unverified parser'
+                  : adapters[current.resortId] === 'new'
+                    ? 'Official report adapter: new parser'
                     : adapters[current.resortId] === 'disabled'
                       ? 'Official report adapter: turned off'
                       : 'Official report adapter: verified'}
@@ -252,7 +252,6 @@ function CellDetail({ c, label, now, tz, highlight }: { c: CoverageCell; label: 
         ) : (
           <span>No date recorded</span>
         )}
-        {c.confirmAtSource ? <span className="font-medium text-caution">Confirm at source</span> : null}
         {c.sourceUrl ? (
           <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex max-w-full items-center gap-1 font-medium break-all text-teal hover:underline">
             <ExternalLink aria-hidden className="size-3 shrink-0" />

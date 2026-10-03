@@ -89,7 +89,6 @@ export interface PassCard {
   price: string | null
   priceNote: string | null
   lines: string[]
-  confirmAtSource: boolean
   sourceUrl: string | null
 }
 
@@ -265,7 +264,6 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
   const lines: string[] = []
   let price: string | null = null
   let priceNote: string | null = null
-  let confirm = false
   let sourceUrl: string | null = null
 
   // A price change that has just happened (a purchase-by tier passed in the last 14 days), home mountain first.
@@ -282,7 +280,6 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
   if (ch) {
     price = formatMoney(ch.cur.amount)
     priceNote = `${ch.p.name.replace(/ 20\d\d-\d\d$/, '')}${ch.cur.category ? ` · ${ch.cur.category.toLowerCase()}` : ''} from ${formatLocalDate(addDays(ch.prev.purchaseBy!, 1), 'd LLL')} · was ${formatMoney(ch.prev.amount)}`
-    confirm ||= ch.cur.confirmAtSource
     sourceUrl = ch.cur.prov.sourceUrl ?? null
   } else {
     // Otherwise the next purchase-by date.
@@ -293,7 +290,6 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
       price = formatMoney(next.x.amount)
       const days = daysBetween(today, next.x.purchaseBy!)
       priceNote = `${next.p.name} until ${formatLocalDate(next.x.purchaseBy!, 'd LLL')} · ${days === 0 ? 'last day' : `${days} days left`}`
-      confirm ||= next.x.confirmAtSource
       sourceUrl = next.x.prov.sourceUrl ?? null
     }
   }
@@ -307,7 +303,6 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
     if (p.familyId === 'regional' && p.resortId !== homeId) continue
     if (p.prices.some((x) => x.purchaseBy && x.purchaseBy < today) && !p.prices.some((x) => !x.purchaseClosed)) continue
     notes.set(text, [...(notes.get(text) ?? []), p.familyId === 'regional' ? (p.resortName ?? p.familyName) : p.familyName])
-    confirm ||= p.confirmAtSource
   }
   for (const [text, fams] of [...notes].slice(0, 2)) {
     const names = [...new Set(fams)]
@@ -322,7 +317,7 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
   }
   const unpriced = [...byFamily.values()].filter((f) => !f.priced).map((f) => f.name)
   if (unpriced.length) lines.push(`${unpriced.join(', ').replace(/, ([^,]*)$/, ' and $1')} prices: not in catalog.`)
-  return { price, priceNote, lines, confirmAtSource: confirm, sourceUrl }
+  return { price, priceNote, lines, sourceUrl }
 }
 
 export async function getTodayHud(ctx: Ctx): Promise<TodayHud> {

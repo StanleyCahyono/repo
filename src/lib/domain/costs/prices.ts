@@ -12,6 +12,7 @@ import { DateTime } from 'luxon'
 import { daysBetween, isLocalDate, seasonIdForHemisphere, type Hemisphere } from '../time'
 import type { Provenance } from '../types'
 import type { DayType } from './day-type'
+import { providerLabel } from '../source-label'
 
 export type QuoteKind = 'published' | 'observed-quote' | 'user-estimate' | 'demo'
 
@@ -67,17 +68,11 @@ export interface PriceSelection {
   expired: number
   /** Why this one: e.g. "published · weekend price · 2026-27". */
   basis: string | null
-  /**
-   * The chosen snapshot is research-grade (`search-summary`) or unverified — show "Researched — confirm at source",
-   * never as a verified published price.
-   */
-  confirmAtSource: boolean
 }
 
-/** Research-grade or unverified price facts must be shown with "confirm at source". */
-export function priceNeedsSourceCheck(s: Pick<PriceSnapshotInput, 'prov'>): boolean {
-  const v = s.prov?.verification ?? null
-  return v === 'search-summary' || v === 'unverified'
+/** Unverified price facts are not shown or used (no source backs them); researched and confirmed prices are. */
+export function isUnverifiedPrice(s: Pick<PriceSnapshotInput, 'prov'>): boolean {
+  return s.prov?.verification === 'unverified'
 }
 
 const QUALITY: Record<QuoteKind, number> = { published: 2, 'observed-quote': 2, 'user-estimate': 1, demo: 0 }
@@ -131,6 +126,7 @@ export function selectPrice(snapshots: readonly PriceSnapshotInput[], q: PriceQu
 
   for (const s of snapshots) {
     if (s.subjectType !== q.subjectType) continue
+    if (isUnverifiedPrice(s)) continue
     if (!(s.resortId === q.resortId || (s.resortId == null && s.subjectId === q.resortId))) continue
     if (q.item && !q.item(s.item)) continue
     const cat = s.category?.toLowerCase() ?? null
@@ -163,7 +159,6 @@ export function selectPrice(snapshots: readonly PriceSnapshotInput[], q: PriceQu
     candidates: scored.length,
     expired,
     basis: best ? describeBasis(best) : null,
-    confirmAtSource: best ? priceNeedsSourceCheck(best) : false,
   }
 }
 
@@ -174,8 +169,6 @@ function describeBasis(s: PriceSnapshotInput): string {
   if (!s.dayType) parts.push('day type not stated')
   if (s.appliesFrom && s.appliesTo) parts.push(`${s.appliesFrom.slice(0, 10)} – ${s.appliesTo.slice(0, 10)}`)
   if (s.seasonId) parts.push(s.seasonId)
-  if (s.prov?.provider) parts.push(s.prov.provider)
-  if (s.prov?.verification === 'search-summary') parts.push('Researched — confirm at source')
-  else if (s.prov?.verification === 'unverified') parts.push('Unverified — confirm at source')
+  if (s.prov?.provider) parts.push(providerLabel(s.prov.provider)!)
   return parts.join(' · ')
 }

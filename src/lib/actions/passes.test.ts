@@ -63,7 +63,7 @@ describe('your price estimates', () => {
     expect(row.prov).toMatchObject({ kind: 'manual', provider: 'You', note: 'Your estimate — last season + 5%' })
 
     const after = await liftAt('bare-hill', SAT)
-    expect(after.lift).toMatchObject({ kind: 'user-estimate', snapshotId: estimateId, amount: { amountMinor: 7000, currency: 'USD' }, confirmAtSource: false })
+    expect(after.lift).toMatchObject({ kind: 'user-estimate', snapshotId: estimateId, amount: { amountMinor: 7000, currency: 'USD' } })
     expect(after.row.estimates).toEqual([expect.objectContaining({ id: estimateId, subject: 'lift-ticket', dayType: 'weekend', amountMajor: '70.00', note: 'last season + 5%' })])
     expect(after.v.withEstimates).toBe(1)
   })
@@ -131,7 +131,7 @@ describe('your price estimates', () => {
     // A pass price has no day type.
     expect(row).toMatchObject({ subjectId: 'ikon-base-2026-27', dayType: 'any', category: 'adult' })
     const v = await getPassCompareView(fx.ctx, { added: [{ resortId: 'far-west', date: SAT }], includeTrips: false })
-    expect(v.meta['ikon-base-2026-27']).toMatchObject({ priceEstimate: expect.objectContaining({ amountMajor: '899.00' }), priceConfirmAtSource: false, priceBasis: 'Your estimate — not a published price' })
+    expect(v.meta['ikon-base-2026-27']).toMatchObject({ priceEstimate: expect.objectContaining({ amountMajor: '899.00' }), priceBasis: 'Your estimate — not a published price' })
     const ikon = v.result!.candidates.find((c) => c.productId === 'ikon-base-2026-27')!
     expect(ikon.passPrice).toEqual({ amountMinor: 89900, currency: 'USD' })
     // The rule at far-west is unknown: the day is priced as a ticket, never assumed covered.
@@ -172,7 +172,7 @@ describe('owned passes', () => {
     ok(await removeOwnedPass({ ownershipId: res.ownershipId }))
   })
 
-  it('logs only real, in-season, not-yet-logged days — and warns when the rule does not confirm access', async () => {
+  it('logs only real, in-season, not-yet-logged days — and warns when no access is recorded', async () => {
     const future = await logPassDay({ ownershipId: fx.ownershipId, resortId: 'test-peak', date: '2027-01-16' })
     expect(future.ok).toBe(false)
     const dup = await logPassDay({ ownershipId: fx.ownershipId, resortId: 'test-peak', date: '2027-01-02' })
@@ -180,7 +180,7 @@ describe('owned passes', () => {
     const otherSeason = await logPassDay({ ownershipId: fx.ownershipId, resortId: 'test-peak', date: '2026-03-01' })
     expect(otherSeason.ok).toBe(false)
     const unknown = ok(await logPassDay({ ownershipId: fx.ownershipId, resortId: 'far-west', date: '2027-01-09' }))
-    expect(unknown.warning).toMatch(/not confirmed/)
+    expect(unknown.warning).toMatch(/No access is recorded/)
     await fx.db.delete(s.passUsage).where(eq(s.passUsage.id, unknown.usageId))
   })
 })

@@ -156,8 +156,7 @@ export function CorrectionsPanel({
           title="Nothing corrected"
           body={
             <>
-              If a catalog fact is wrong or out of date — an opening date, a link, a feature — correct it with the page you checked. Researched facts stay marked
-              “confirm at source” until you do.
+              If a catalog fact is wrong or out of date — an opening date, a link, a feature — correct it with the page you checked.
             </>
           }
         />

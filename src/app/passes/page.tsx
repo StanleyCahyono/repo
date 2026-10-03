@@ -71,7 +71,7 @@ export default async function PassesPage({ searchParams }: { searchParams: Promi
               />
               {checker.selection.note ? <p className="text-[12.5px] text-caution">{checker.selection.note}</p> : null}
               <p className="mt-auto text-[12.5px] leading-[1.45] text-ink-3">
-                Answered day by day from the product’s own rules — days you have logged count. A missing or unknown rule is shown as not confirmed, never as access.
+                Answered day by day from the product’s own rules — days you have logged count. A missing rule never counts as access.
               </p>
             </div>
             <VerdictCard model={model}>

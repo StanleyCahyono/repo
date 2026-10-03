@@ -165,7 +165,7 @@ export function FilterSheet({
         <Section title="Passes">
           <ToggleChips<string>
             label="Pass family"
-            description={`Discovery only — affiliation never implies you own a pass. Unconfirmed ${view.seasonLabel} access counts as unknown.`}
+            description={`Resorts where the family has recorded ${view.seasonLabel} access.`}
             options={view.families.map((fam) => ({ value: fam.id, label: fam.name, count: count({ families: [fam.id] }) }))}
             values={f.families}
             onChange={(v) => patch({ families: v })}
@@ -315,7 +315,7 @@ function ProductPicker({
           label={product ? `Only where ${product.name} can be used on ${view.dateLabel}` : `Only where your pass can be used on ${view.dateLabel}`}
           hint={
             canUsable
-              ? `${count({ usable: true })} resorts · unconfirmed access counts as unknown`
+              ? `${count({ usable: true })} resorts`
               : 'Choose a product above, or record the pass you own in Passes & Costs.'
           }
           checked={f.usable}

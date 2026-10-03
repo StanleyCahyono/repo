@@ -11,24 +11,26 @@ import { ConnectorsPanel, ManualSources } from '@/components/sources/connectors-
 import { CorrectionsPanel } from '@/components/sources/corrections-panel'
 import { CoverageMatrix } from '@/components/sources/coverage-matrix'
 import { JobsPanel } from '@/components/sources/jobs-panel'
-import { FailuresPanel, LinksPanel, ResearchNotesPanel } from '@/components/sources/log-panels'
+import { FailuresPanel, LinksPanel } from '@/components/sources/log-panels'
 import { SchedulerPanel } from '@/components/sources/scheduler-panel'
 import { StatusBoard, schedulerSummary } from '@/components/sources/status-board'
 import { getCtx } from '@/lib/context'
 import { loadCorrections, loadResortChoices } from '@/lib/data/settings-screen'
 import { getSourcesView } from '@/lib/data/sources'
-import { loadResearchNotes } from '@/lib/data/sources-screen'
 import { formatInstant } from '@/lib/domain/time'
 
 export const metadata: Metadata = { title: 'Sources & Sync' }
 
 export default async function SourcesPage() {
   const ctx = await getCtx()
-  const [v, corrections, resorts, research] = await Promise.all([getSourcesView(ctx), loadCorrections(ctx), loadResortChoices(ctx), loadResearchNotes(ctx)])
+  const [v, corrections, resorts] = await Promise.all([getSourcesView(ctx), loadCorrections(ctx), loadResortChoices(ctx)])
   const tz = ctx.prefs.homeTimezone
   const names: Record<string, string> = Object.fromEntries(resorts.map((r) => [r.id, r.name]))
   const labels: Record<string, string> = Object.fromEntries(v.connectors.map((c) => [c.id, c.label]))
-  const adapters: Record<string, string> = Object.fromEntries(v.connectors.filter((c) => c.role === 'resort-report' && c.resortId).map((c) => [c.resortId!, c.state]))
+  // 'unverified' adapters (built without the live page) are passed on as 'new'.
+  const adapters: Record<string, string> = Object.fromEntries(
+    v.connectors.filter((c) => c.role === 'resort-report' && c.resortId).map((c) => [c.resortId!, c.state === 'unverified' ? 'new' : c.state]),
+  )
   const reportAdapters = Object.keys(adapters).length
 
   const failingConnectors = v.connectors.filter((c) => c.health === 'failing').length
@@ -42,7 +44,6 @@ export default async function SourcesPage() {
     { id: 'failures', label: 'Failures', badge: v.failures.items.length ? String(v.failures.items.length) : null, tone: 'caution' },
     { id: 'links', label: 'Link checks', short: 'Links' },
     { id: 'corrections', label: 'Corrections', badge: corrections.length ? String(corrections.length) : null, tone: 'neutral' },
-    { id: 'research', label: 'Research notes', short: 'Research' },
   ]
 
   return (
@@ -106,7 +107,7 @@ export default async function SourcesPage() {
             id="coverage"
             index={4}
             title="Coverage by resort"
-            meta={`What is on file for each resort in ${v.season.label}: official, yours, estimated, researched, reference-only, stale, failing or missing.`}
+            meta={`What is on file for each resort in ${v.season.label}: official, yours, estimated, catalog, stale, failing or missing.`}
           >
             <CoverageMatrix rows={v.coverage.rows} fields={v.coverage.fields} now={v.now} tz={tz} seasonLabel={v.season.label} adapters={adapters} />
           </SettingsSection>
@@ -118,14 +119,6 @@ export default async function SourcesPage() {
           </SettingsSection>
           <SettingsSection id="corrections" index={7} title="Corrections" meta="Catalog facts you corrected by hand, with their sources. Newest first.">
             <CorrectionsPanel items={corrections} resorts={resorts} units={ctx.prefs.units} now={v.now} tz={tz} demo={v.demo} />
-          </SettingsSection>
-          <SettingsSection
-            id="research"
-            index={8}
-            title="Research notes"
-            meta="The catalog was researched with web search only, and the search budget ran out partway through — so many resorts carry reference data only."
-          >
-            <ResearchNotesPanel notes={research} />
           </SettingsSection>
 
           <aside aria-label="How to read this page" className="flex gap-3 border-t border-divider pt-5 text-[13px] text-ink-2">

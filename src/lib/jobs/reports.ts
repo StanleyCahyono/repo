@@ -598,7 +598,7 @@ export async function addResearchedReport(db: Db, a: ResearchedReportInput, now:
       localDate: a.observedOn,
       effectiveAt: statementTime(localTimeToInstant(a.observedOn, '12:00', a.timezone), fetchedAt),
       prov,
-      note: `Found by catalog research for ${formatLocalDate(a.observedOn)} — confirm at source`,
+      note: `Report for ${formatLocalDate(a.observedOn)}`,
     })
     if (status !== 'open') await applyStatusToSeason(db, { resortId: a.resortId, status, localDate: a.observedOn, prov, now })
   }

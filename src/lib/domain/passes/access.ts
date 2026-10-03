@@ -80,13 +80,9 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
   const resortName = names?.[resortId] ?? resortId
   const seasonOf = input.seasonOf ?? northernSeasonOf
 
-  const passed = input.rule ?? null
+  // An unverified rule (no source backs it) is treated as no rule: it is neither shown nor counted.
+  const passed = input.rule && input.rule.prov?.verification !== 'unverified' ? input.rule : null
   const rule = passed && passed.productId === product.id && passed.resortId === resortId ? passed : null
-
-  const verification = rule?.prov?.verification ?? null
-  // Missing provenance or a missing verification level is not evidence of verification.
-  const confirmAtSource =
-    !!rule && (!rule.prov || verification === null || verification === 'search-summary' || verification === 'unverified')
 
   const selfKey = usageKey({ resortId, date })
   const selfUsage = usage.find((u) => usageKey(u) === selfKey)
@@ -113,7 +109,6 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
     reservationNotes: rule?.reservationNotes ?? product.reservationsSummary ?? null,
     discountText: rule?.discountText ?? null,
     eligibilityNotes: rule?.eligibilityNotes ?? null,
-    confirmAtSource,
     alreadyCounted,
     isPast: !!today && isLocalDate(today) && date < today,
   }
@@ -131,13 +126,6 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
     if (status !== 'unknown' && status !== 'season-mismatch') {
       if (v.eligibilityNotes) v.reasons.push(`Eligibility: ${v.eligibilityNotes}`)
       if (rule?.notes) v.reasons.push(rule.notes)
-      if (confirmAtSource) {
-        v.reasons.push(
-          verification === 'search-summary'
-            ? 'Researched — confirm at source.'
-            : 'Rule source not verified — confirm on the official pass page.',
-        )
-      }
     }
     if (v.isPast) v.reasons.push('This date is in the past.')
     return v
@@ -254,7 +242,7 @@ export function evaluateAccess(input: EvaluateAccessInput): AccessVerdict {
   const remainingDays = Number.isFinite(remaining) ? remaining : null
   const extra: Partial<AccessVerdict> = { resortCap, pool, remainingDays }
   const conflictNote = pool?.conflictingTotals
-    ? [`Pool records disagree on its size (${pool.conflictingTotals.join(' vs ')} days); using the smaller figure — confirm at source.`]
+    ? [`Pool records disagree on its size (${pool.conflictingTotals.join(' vs ')} days); using the smaller figure.`]
     : []
 
   if (remainingDays === null) {

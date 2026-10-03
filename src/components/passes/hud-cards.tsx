@@ -16,7 +16,6 @@ import { cn } from '@/lib/ui/cn'
 import { CountUp, MoneyUp } from './count-up'
 import { familyId, plural } from './format'
 import css from './hud.module.css'
-import { ConfirmTag } from './section'
 
 const host = (url: string) => {
   try {
@@ -60,7 +59,6 @@ export function FamilyCards({ cards }: { cards: FamilyCard[] }) {
                   : `${c.seasonLabel} prices and deadlines are not in the catalog — check the official page.`}
               </p>
               {c.salesNote ? <p className="m-0 text-[13px] leading-[1.45] text-copper">{c.salesNote}</p> : null}
-              {c.price && c.priceConfirm ? <ConfirmTag className="self-start" /> : null}
               <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
                 {c.officialUrl ? (
                   <a href={c.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center gap-1 text-[13px] font-semibold text-teal hover:underline max-md:min-h-11">
@@ -150,7 +148,6 @@ export function BreakEvenBand({ b }: { b: BreakEvenView | null }) {
           {typ != null ? <span>Break-even at {formatMoney(b.typical!.amount)}/day: {fmtDays(typ)} days</span> : <span>Day-ticket price: not on file</span>}
           {low != null ? <span>at {formatMoney(b.low!.amount)}: {fmtDays(low)} days</span> : null}
         </div>
-        {b.passConfirm ? <p className="hud m-0 pt-1 text-on-ink-chip-2">◇ Prices researched · confirm at source</p> : null}
       </div>
     </section>
   )

@@ -5,7 +5,7 @@
 /**
  * `prov.note` of a report found by catalog research (a dated `recentReports` entry in catalog/resorts/*.json). It is
  * stored as an official report with the research verification ('search-summary'), its own observation day and its
- * source — shown as "Researched — confirm at source", never as read by Piste or as live.
+ * source — shown as a dated report of its own day, never as read by Piste or as live.
  */
 export const RESEARCHED_REPORT_NOTE = 'catalog-research'
 

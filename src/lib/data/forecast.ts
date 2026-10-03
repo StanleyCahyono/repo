@@ -25,6 +25,7 @@ import {
   latestRuns,
   loadResortRows,
   NOT_PERSONAL_REPORT,
+  NOT_UNVERIFIED_RESEARCH,
   pointsForRuns,
   resortToday,
   toHourly,
@@ -266,6 +267,7 @@ async function trackingStart(ctx: DataCtx, resort: ResortRow): Promise<{ date: s
         and(
           eq(s.operationalReports.resortId, resort.id),
           NOT_PERSONAL_REPORT,
+          NOT_UNVERIFIED_RESEARCH,
           sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${ctx.now})`,
           lte(s.operationalReports.createdAt, ctx.now),
           live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
@@ -317,6 +319,7 @@ export async function getHistoryCalendar(ctx: DataCtx, resortId: string, month: 
           lte(s.operationalReports.localDate, addDays(last, 1)),
           sql`(${s.operationalReports.reportedAt} is null or ${s.operationalReports.reportedAt} <= ${now})`,
           NOT_PERSONAL_REPORT,
+          NOT_UNVERIFIED_RESEARCH,
           live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       ),

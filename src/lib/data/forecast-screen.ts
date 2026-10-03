@@ -35,6 +35,7 @@ import {
   seasonRowFor,
   type DataCtx,
 } from './core'
+import { shownSeason } from './shown'
 import { lastAttemptRun, lastSuccess } from './deps'
 import { getForecast, getHistoryCalendar, MAX_FORECAST_DAYS, type ForecastView, type HistoryCalendar, type PointKey } from './forecast'
 import {
@@ -371,7 +372,13 @@ export async function getForecastScreen(ctx: DataCtx, opts: ForecastScreenOption
     lastAttemptRun(db, 'nws-alerts', null),
     lastSuccess(db, 'nws-alerts', null),
     Promise.all(selected.map((id) => lastSuccess(db, 'nws-alerts', id))),
-    focus ? db.select().from(s.resortSeasons).where(eq(s.resortSeasons.resortId, focus)) : Promise.resolve([]),
+    focus
+      ? db
+          .select()
+          .from(s.resortSeasons)
+          .where(eq(s.resortSeasons.resortId, focus))
+          .then((rows) => rows.map(shownSeason))
+      : Promise.resolve([]),
   ])
 
   // Catalog facts per selected resort.

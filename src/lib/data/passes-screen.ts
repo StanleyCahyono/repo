@@ -47,8 +47,9 @@ import {
 } from '@/lib/domain/passes'
 import { addDays, dateRange, daysBetween, hemisphereOf, isLocalDate, nextSaturday, planningSeasonBounds, seasonBounds, type Hemisphere, type SeasonOf } from '@/lib/domain/time'
 import { PASS_FAMILIES, type DateRange, type PassAccessType, type Provenance } from '@/lib/domain/types'
-import { groupBy, hasSouthernResorts, isLive, loadPassData, loadResortRows, needsConfirmation, seasonLabel, verificationLabel, type DataCtx, type OwnedPass, type PassData } from './core'
+import { groupBy, hasSouthernResorts, isLive, loadPassData, loadResortRows, seasonLabel, verificationLabel, type DataCtx, type OwnedPass, type PassData } from './core'
 import { getPassesView, type PassProductView, type PlannedDayView } from './passes'
+import { shownPrices } from './shown'
 import { basketVerdict } from './views'
 
 /** Longest date range the checker answers day by day. */
@@ -108,8 +109,8 @@ export interface ProductBrief {
   summary: string | null
   blackoutsSummary: string | null
   reservationsSummary: string | null
-  confirmAtSource: boolean
-  verificationLabel: string
+  /** Quiet source tag ("Official page"…); null for researched catalog facts, which are shown as they are. */
+  verificationLabel: string | null
   prov: Provenance | null
   /** Official pages: the product's source and the family's pages. */
   links: LinkView[]
@@ -132,8 +133,7 @@ export interface RuleVersionView {
   notes: string | null
   /** Entered by you in the rule editor ("Manual — you entered"). */
   youEntered: boolean
-  confirmAtSource: boolean
-  verificationLabel: string
+  verificationLabel: string | null
   updatedAt: string
   prov: Provenance | null
 }
@@ -261,7 +261,6 @@ function brief(p: PassProductRow, pass: PassData): ProductBrief {
     summary: p.summary,
     blackoutsSummary: p.blackoutsSummary,
     reservationsSummary: p.reservationsSummary,
-    confirmAtSource: needsConfirmation(p.prov),
     verificationLabel: verificationLabel(p.prov),
     prov: p.prov,
     links: productLinks(p, fam?.links),
@@ -288,7 +287,6 @@ export function ruleVersionView(r: PassAccessRuleRow): RuleVersionView {
     eligibilityNotes: r.eligibilityNotes,
     notes: r.notes,
     youEntered: isYouEntered(r.prov),
-    confirmAtSource: needsConfirmation(r.prov),
     verificationLabel: isYouEntered(r.prov) ? 'Manual — you entered' : verificationLabel(r.prov),
     updatedAt: r.updatedAt,
     prov: r.prov,
@@ -628,7 +626,16 @@ export interface RuleEditorView {
 
 export async function getRuleEditorView(ctx: DataCtx, productId: string, resortId: string): Promise<RuleEditorView | null> {
   const seasonId = ctx.prefs.activeSeasonId
-  const [pass, resortRows, favorites] = await Promise.all([loadPassData(ctx.db, seasonId), loadResortRows(ctx, null), favoriteSet(ctx)])
+  const [pass, resortRows, favorites, stored] = await Promise.all([
+    loadPassData(ctx.db, seasonId),
+    loadResortRows(ctx, null),
+    favoriteSet(ctx),
+    // Every stored version (shown or not), so the next version number is the one the save will use.
+    ctx.db
+      .select({ version: s.passAccessRules.version })
+      .from(s.passAccessRules)
+      .where(and(eq(s.passAccessRules.productId, productId), eq(s.passAccessRules.resortId, resortId))),
+  ])
   const product = pass.products.find((p) => p.id === productId)
   const resorts = resortOptions(resortRows, favorites)
   const resort = resorts.find((r) => r.id === resortId)
@@ -648,7 +655,7 @@ export async function getRuleEditorView(ctx: DataCtx, productId: string, resortI
     resort,
     current: history[0] ?? null,
     history,
-    nextVersion: (history[0]?.version ?? 0) + 1,
+    nextVersion: Math.max(0, ...stored.map((r) => r.version)) + 1,
     pools: poolIds.map((id) => poolView(resolvePool(product.id, id, rules), mine?.usage ?? [], product.seasonId, names, pass.seasonOf)),
     otherRuleResorts: current
       .filter((r) => r.resortId !== resort.id)
@@ -739,7 +746,7 @@ export interface DayCostRow {
   resort: ResortOption
   basket: DayBasket
   /** The pass verdict the basket was priced with (my best pass that day), when I hold one. */
-  pass: { productName: string; status: AccessStatus; headline: string; canSki: boolean; confirmAtSource: boolean } | null
+  pass: { productName: string; status: AccessStatus; headline: string; canSki: boolean } | null
   /** Your own lift / rental / parking estimates for this resort this season (any day type), newest first. */
   estimates: EstimateView[]
   /** Provenance behind each priced line: the price snapshot used, or the pass rule that covers lift access. */
@@ -799,7 +806,7 @@ export async function getDayCostsView(ctx: DataCtx, opts: { date?: string | null
   const currency = pickCurrency(opts.currency, currencies)
   const names = namesOf(resortRows)
   const resorts = resortOptions(resortRows, favorites)
-  const pricesBy = groupBy(prices, (p) => p.resortId ?? p.subjectId)
+  const pricesBy = groupBy(shownPrices(prices), (p) => p.resortId ?? p.subjectId)
   const rulesBy = groupBy(pass.rules, (r) => r.productId)
   const mine = pass.owned.filter((o) => o.ownership.holder === 'me')
   const a = basketAssumptions(prefs)
@@ -823,7 +830,7 @@ export async function getDayCostsView(ctx: DataCtx, opts: { date?: string | null
     return {
       resort,
       basket,
-      pass: v ? { productName: v.productName, status: v.status, headline: v.headline, canSki: v.canSki, confirmAtSource: v.confirmAtSource } : null,
+      pass: v ? { productName: v.productName, status: v.status, headline: v.headline, canSki: v.canSki } : null,
       estimates: resortPrices
         .filter((p) => isUserEstimate(p) && (!p.seasonId || p.seasonId === season.id))
         .sort((x, y) => y.observedAt.localeCompare(x.observedAt) || y.id - x.id)
@@ -888,7 +895,6 @@ export interface ScenarioDay {
   tripName: string | null
   ticket: Money | null
   ticketBasis: string | null
-  ticketConfirmAtSource: boolean
   /** Kind of price behind `ticket` (published, observed quote, your estimate, demo); null when unknown. */
   ticketKind: QuoteKind | null
   /** Your estimate behind `ticket`, when that is what priced the day (editable). */
@@ -903,7 +909,6 @@ export interface CandidateMeta {
   ownedByMe: boolean
   /** Where the pass price comes from ("Price you paid", "Published price, buy by …", "Your estimate"). */
   priceBasis: string | null
-  priceConfirmAtSource: boolean
   /** Your own estimate of the pass price, when that is the price used (never for a pass you hold). */
   priceEstimate: EstimateView | null
   /** Provenance of the pass price used (null for a price you paid — that is your own record). */
@@ -973,7 +978,7 @@ export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly 
         .from(s.priceSnapshots)
         .where(and(eq(s.priceSnapshots.subjectType, 'lift-ticket'), inArray(s.priceSnapshots.subjectId, dayResorts), live ? sql`${s.priceSnapshots.quoteKind} <> 'demo'` : undefined))
     : []
-  const liftBy = groupBy(liftPrices, (p) => p.resortId ?? p.subjectId)
+  const liftBy = groupBy(shownPrices(liftPrices), (p) => p.resortId ?? p.subjectId)
   const rowById = new Map(resortRows.map((r) => [r.id, r]))
   const priced = (resortId: string, date: string) => {
     const prices = liftBy.get(resortId) ?? []
@@ -984,7 +989,6 @@ export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly 
       dayType: t.dayType,
       ticket: t.price,
       ticketBasis: t.basis,
-      ticketConfirmAtSource: t.confirmAtSource,
       ticketKind: t.kind,
       ticketEstimate: snap ? estimateView(snap) : null,
       ticketProv: snap?.prov ?? null,
@@ -1055,8 +1059,6 @@ export async function getPassCompareView(ctx: DataCtx, opts: { added?: readonly 
       familyName: view.familyName,
       ownedByMe: !!mine,
       priceBasis,
-      // Your own estimate is labelled as yours, never as research to confirm.
-      priceConfirmAtSource: !mine && !estimate && !!cur?.confirmAtSource,
       priceEstimate: estimate,
       priceProv: !mine && cur ? cur.prov : null,
       otherPricesOnFile: view.prices.filter((x) => x.quoteKind !== 'user-estimate').length - (cur && !estimate ? 1 : 0),
@@ -1109,13 +1111,11 @@ function seenOrAdd(seen: Set<string>, k: string): boolean {
 export interface OwnedValueBasis {
   /** Logged days priced with your own estimate. */
   estimatedDays: number
-  /** Logged days priced with a research-grade (confirm at source) price. */
-  researchedDays: number
 }
 
 /**
- * For each of my passes: how many logged days of this season are valued with your own estimate or a research-grade
- * price (the same per-day ticket lookup the season budget uses), so "value so far" can say so.
+ * For each of my passes: how many logged days of this season are valued with your own estimate (the same per-day
+ * ticket lookup the season budget uses), so "value so far" can say so.
  */
 export async function ownedValueBasis(ctx: DataCtx): Promise<Record<number, OwnedValueBasis>> {
   const { now, today } = ctx
@@ -1127,17 +1127,16 @@ export async function ownedValueBasis(ctx: DataCtx): Promise<Record<number, Owne
     .select()
     .from(s.priceSnapshots)
     .where(and(eq(s.priceSnapshots.subjectType, 'lift-ticket'), inArray(s.priceSnapshots.subjectId, resortIds), isLive(ctx) ? sql`${s.priceSnapshots.quoteKind} <> 'demo'` : undefined))
-  const by = groupBy(prices, (p) => p.resortId ?? p.subjectId)
+  const by = groupBy(shownPrices(prices), (p) => p.resortId ?? p.subjectId)
   const rows = new Map((await loadResortRows(ctx, resortIds)).map((r) => [r.id, r]))
   const out: Record<number, OwnedValueBasis> = {}
   for (const o of mine) {
     const days = new Map(o.usage.filter((u) => usageInSeason(u, o.product.seasonId, pass.seasonOf)).map((u) => [`${u.resortId}|${u.date}`, u]))
-    const basis: OwnedValueBasis = { estimatedDays: 0, researchedDays: 0 }
+    const basis: OwnedValueBasis = { estimatedDays: 0 }
     for (const u of days.values()) {
       const row = rows.get(u.resortId)
       const t = liftTicketFor(by.get(u.resortId) ?? [], u.resortId, u.date, { now, today, country: row ? row.country : null, hemisphere: hemisphereOf(row?.lat) })
       if (t.kind === 'user-estimate') basis.estimatedDays += 1
-      else if (t.price && t.confirmAtSource) basis.researchedDays += 1
     }
     out[o.ownership.id] = basis
   }
@@ -1161,7 +1160,6 @@ export interface DeadlineItem {
   /** The next price on file after this one ends (e.g. the regular price), when recorded. */
   nextPrice: Money | null
   text: string | null
-  confirmAtSource: boolean
   prov: Provenance | null
 }
 
@@ -1188,7 +1186,6 @@ export function buyByDates(products: readonly PassProductView[], today: string):
         category: pr.category,
         nextPrice: later?.amount ?? null,
         text: pr.window,
-        confirmAtSource: pr.confirmAtSource,
         prov: pr.prov,
       })
     }
@@ -1205,7 +1202,6 @@ export function buyByDates(products: readonly PassProductView[], today: string):
         category: null,
         nextPrice: null,
         text: d.text,
-        confirmAtSource: p.confirmAtSource,
         prov: p.prov,
       })
     }

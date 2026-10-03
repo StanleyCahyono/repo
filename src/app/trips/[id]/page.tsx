@@ -146,7 +146,7 @@ export default async function TripDetailPage({ params, searchParams }: { params:
           actions={<PassPicker products={page.pass.products} chosen={page.pass.chosen?.id ?? null} />}
           lead={
             page.pass.chosen && !page.pass.chosen.owned
-              ? `What-if: you don’t own ${page.pass.chosen.name}. Allotments are counted in date order across this trip; rules not on file stay “not confirmed” — never permission.`
+              ? `What-if: you don’t own ${page.pass.chosen.name}. Allotments are counted in date order across this trip; a day with no rule on file is never counted as covered.`
               : undefined
           }
         >

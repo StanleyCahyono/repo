@@ -84,12 +84,14 @@ describe('getExploreView', () => {
     expect(by['far-west'].facets).toMatchObject({ travelMode: 'fly', driveMinutes: null })
     expect(by['far-west'].card.travel).toMatchObject({ mode: 'fly', headline: 'Fly' })
 
-    // The owned Indy Base Pass (2 days, 1 used) is usable at test-peak today; far-west's Ikon access is unconfirmed.
+    // The owned Indy Base Pass (2 days, 1 used) is usable at test-peak today; far-west's Ikon rule is 'unknown', so it
+    // is not shown at all: no family badge, no product facet, never counted as access.
     expect(by['test-peak'].facets.ownedCanSki).toBe(true)
     expect(by['test-peak'].facets.products.find((p) => p.id === 'indy-base-2026-27')).toMatchObject({ canSki: true })
-    expect(by['far-west'].facets.families).toEqual([{ id: 'ikon', confirmed: false }])
-    expect(by['far-west'].card.passes[0]).toMatchObject({ familyId: 'ikon', confirmed: false })
-    expect(by['far-west'].card.passes[0].title).toMatch(/2026–27 access unconfirmed/)
+    expect(by['test-peak'].card.passes[0].title).toMatch(/2026–27 access recorded/)
+    expect(by['far-west'].facets.families).toEqual([])
+    expect(by['far-west'].facets.products).toEqual([])
+    expect(by['far-west'].card.passes).toEqual([])
 
     expect(v.counts).toMatchObject({ total: 4, statusUnknown: 1 })
     expect(v.preseason).toBe(false)
@@ -125,7 +127,9 @@ describe('getCompareView', () => {
     expect(mine.columns[0].access.rows[0]).toMatchObject({ productId: 'indy-base-2026-27', owned: true, canSki: true })
     const chosen = await getCompareView(fx.ctx, { ids: ['test-peak', 'far-west'], date: TODAY, productId: 'ikon-base-2026-27' })
     expect(chosen.product).toEqual({ id: 'ikon-base-2026-27', name: 'Ikon Base Pass' })
-    expect(chosen.columns[1].access.rows[0]).toMatchObject({ productId: 'ikon-base-2026-27', owned: false, status: 'unknown', canSki: false })
+    // No usable rule for Ikon at far-west: no row (never "included"), just a plain note.
+    expect(chosen.columns[1].access.rows).toEqual([])
+    expect(chosen.columns[1].access.note).toBe('No access recorded for this product here')
   })
 })
 
