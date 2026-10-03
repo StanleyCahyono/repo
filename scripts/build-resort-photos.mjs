@@ -5,6 +5,7 @@
  *
  *   NODE_USE_ENV_PROXY=1 node scripts/build-resort-photos.mjs              # resorts without a photo
  *   NODE_USE_ENV_PROXY=1 node scripts/build-resort-photos.mjs --force alta
+ *   NODE_USE_ENV_PROXY=1 node scripts/build-resort-photos.mjs --upgrade     # same photos, re-downloaded at 1920 px
  *
  * Order: the resort's English Wikipedia lead image (title from the catalog's Wikipedia link, else a search), then
  * Commons files geotagged within 8 km, then a Commons search for "<name> ski". Only CC0, public domain, CC BY and CC BY-SA files are used; maps, logos,
@@ -115,6 +116,30 @@ const files = fs.readdirSync(CAT).filter((f) => f.endsWith('.json'))
 // One photo per resort: files already used by another resort are skipped (neighbours share geotagged files).
 const used = new Set(files.map((f) => JSON.parse(fs.readFileSync(path.join(CAT, f), 'utf8')).photo?.sourceUrl).filter(Boolean))
 const missing = []
+// --upgrade: re-download every already-chosen photo (same Commons file) at full quality — 1920 px wide, q80 — without
+// searching again or touching the catalog. Used for the "as good as possible" build.
+if (args.includes('--upgrade')) {
+  for (const f of files) {
+    const r = JSON.parse(fs.readFileSync(path.join(CAT, f), 'utf8'))
+    if (!r.photo?.sourceUrl || (only.length && !only.includes(r.id))) continue
+    try {
+      const title = decodeURIComponent(r.photo.sourceUrl.split('/wiki/')[1]).replace(/_/g, ' ')
+      const d = await api('commons.wikimedia.org', { action: 'query', titles: title, prop: 'imageinfo', iiprop: 'url|size', iiurlwidth: '2400' })
+      const ii = d.query?.pages?.[0]?.imageinfo?.[0]
+      if (!ii) throw new Error('no imageinfo')
+      const res = await fetch(ii.width > 2400 ? ii.thumburl : ii.url, { headers: { 'user-agent': UA } })
+      if (!res.ok) throw new Error(`download HTTP ${res.status}`)
+      const buf = Buffer.from(await res.arrayBuffer())
+      const info = await sharp(buf).rotate().resize({ width: 1920, height: 1290, fit: 'cover', position: 'attention', withoutEnlargement: false }).webp({ quality: 80 }).toFile(path.join(OUT, `photo-${r.id}.webp`))
+      console.log(`${r.id}: upgraded from ${ii.width}px → ${(info.size / 1024).toFixed(0)} KB`)
+    } catch (e) {
+      console.warn(`${r.id}: upgrade FAILED ${e.message}`)
+    }
+    await sleep(400)
+  }
+  process.exit(0)
+}
+
 for (const f of files) {
   const file = path.join(CAT, f)
   const raw = fs.readFileSync(file, 'utf8')
