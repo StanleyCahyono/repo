@@ -24,8 +24,8 @@ const WIDTHS = arg('widths', '390,768,1440').split(',').map(Number)
 const THEMES = arg('themes', 'light').split(',')
 const MODES = arg('modes', 'live,demo').split(',')
 const DEFAULT_ROUTES = [
-  '/', '/explore', '/explore?view=compare', '/explore?view=events', '/forecast', '/ride', '/ride?to=hunter-mountain&mode=drive', '/ride?to=zermatt&mode=fly',
-  '/trips', '/passes', '/passes/products', '/passes/compare', '/passes/costs', '/season', '/settings', '/sources',
+  '/', '/explore', '/explore/compare?ids=zermatt,alta,greek-peak', '/explore/events', '/forecast', '/ride', '/ride?to=hunter-mountain&mode=drive', '/ride?to=zermatt&mode=fly',
+  '/trips', '/trips/demo-alta-presidents-day', '/passes', '/passes/products', '/passes/compare', '/passes/costs', '/season', '/settings', '/sources',
   '/resorts/zermatt', '/resorts/greek-peak', '/resorts/alta', '/resorts/niseko-united', '/resorts/whistler-blackcomb', '/resorts/ischgl',
 ]
 const ROUTES = arg('routes', null)?.split(',') ?? DEFAULT_ROUTES
