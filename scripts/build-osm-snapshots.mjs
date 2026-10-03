@@ -6,6 +6,7 @@
  *   NODE_USE_ENV_PROXY=1 node scripts/build-osm-snapshots.mjs            # all resorts missing a snapshot
  *   NODE_USE_ENV_PROXY=1 node scripts/build-osm-snapshots.mjs --force zermatt alta
  *   node scripts/build-osm-snapshots.mjs --encode      # convert older snapshots to encoded polylines (offline)
+ *   NODE_USE_ENV_PROXY=1 node scripts/build-osm-snapshots.mjs --places   # add town/village/peak/station labels
  *
  * Area: the OpenStreetMap ski areas (landuse=winter_sports) within 3 km of the resort's coordinate, as one bounding
  * box (padded 400 m); without any, a radius around the coordinate sized from the catalog's piste km. Lines are
@@ -168,6 +169,54 @@ ${files.map((f) => `  '${id(f)}': ${ident(f)} as unknown as OsmSnapshot,`).join(
 `
   fs.writeFileSync(path.join(OUT, 'index.ts'), src)
   console.log(`index.ts: ${files.length} snapshots`)
+}
+
+// --places: add named places to existing snapshots so the map can label where things are — towns and villages
+// (the area padded ~3 km, so the base village is included), named peaks and lift stations. Keeps `name:en` when set.
+// Stored as places: [{ n, en?, k, ll: [lon, lat], e? }] with k = city|town|village|hamlet|peak|station.
+async function places(snap) {
+  const m = snap.area.match(/^\(([-\d.]+),([-\d.]+),([-\d.]+),([-\d.]+)\)$/)
+  const pad = 0.027
+  const near = m
+    ? `(${(+m[1] - pad).toFixed(5)},${(+m[2] - pad * 1.4).toFixed(5)},${(+m[3] + pad).toFixed(5)},${(+m[4] + pad * 1.4).toFixed(5)})`
+    : snap.area.replace(/around:(\d+)/, (_, d) => `around:${+d + 3000}`)
+  const q = `[out:json][timeout:120];(node[place~"^(city|town|village|hamlet)$"][name]${near};node[natural=peak][name]${snap.area};node[aerialway=station][name]${snap.area};);out body;`
+  const data = await overpass(q)
+  const out = []
+  for (const el of data.elements ?? []) {
+    const t = el.tags ?? {}
+    const k = t.place ?? (t.natural === 'peak' ? 'peak' : 'station')
+    const ele = Number.parseFloat(t.ele)
+    out.push({ n: t.name, ...(t['name:en'] && t['name:en'] !== t.name ? { en: t['name:en'] } : {}), k, ll: [+el.lon.toFixed(5), +el.lat.toFixed(5)], ...(Number.isFinite(ele) ? { e: Math.round(ele) } : {}) })
+  }
+  const RANK = { city: 0, town: 1, village: 2, hamlet: 3, peak: 4, station: 5 }
+  out.sort((a, b) => RANK[a.k] - RANK[b.k] || (b.e ?? 0) - (a.e ?? 0))
+  // Keep the map legible: every city/town, then up to 40 villages, 25 hamlets, 30 peaks and 60 stations.
+  const CAP = { city: 99, town: 99, village: 40, hamlet: 25, peak: 30, station: 60 }
+  const count = {}
+  return out.filter((p) => (count[p.k] = (count[p.k] ?? 0) + 1) <= CAP[p.k])
+}
+
+if (args.includes('--places')) {
+  const failedPlaces = []
+  for (const f of fs.readdirSync(OUT).filter((x) => x.endsWith('.json'))) {
+    const id = f.replace(/\.json$/, '')
+    if (only.length && !only.includes(id)) continue
+    const file = path.join(OUT, f)
+    const snap = JSON.parse(fs.readFileSync(file, 'utf8'))
+    if (snap.places && !force) continue
+    try {
+      snap.places = await places(snap)
+      fs.writeFileSync(file, JSON.stringify(snap))
+      console.log(`${id}: ${snap.places.length} places (${snap.places.filter((p) => p.k === 'town' || p.k === 'city' || p.k === 'village').map((p) => p.n).slice(0, 6).join(', ')})`)
+    } catch (e) {
+      failedPlaces.push(id)
+      console.warn(`${id}: places FAILED ${e.message}`)
+    }
+    await sleep(1200)
+  }
+  if (failedPlaces.length) console.warn(`Places failed: ${failedPlaces.join(' ')}`)
+  process.exit(0)
 }
 
 // --encode: rewrite existing snapshots into the current compact format (encoded polylines, used tags only) offline.

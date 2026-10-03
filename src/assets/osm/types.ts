@@ -10,9 +10,23 @@ export interface OsmSnapshotElement {
   geometry?: { lat: number; lon: number }[]
 }
 
+/** A named place near the ski area (map label). k: settlement kind, peak or lift station. */
+export interface OsmPlace {
+  n: string
+  /** English name when OpenStreetMap records one that differs (e.g. Japanese resorts). */
+  en?: string
+  k: 'city' | 'town' | 'village' | 'hamlet' | 'peak' | 'station'
+  /** [lon, lat] */
+  ll: [number, number]
+  /** Elevation in metres (peaks, stations) when recorded. */
+  e?: number
+}
+
 export interface OsmSnapshot {
   fetched: string
   source: string
   osmTimestamp?: string | null
+  area?: string
   elements: OsmSnapshotElement[]
+  places?: OsmPlace[]
 }
