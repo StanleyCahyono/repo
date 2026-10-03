@@ -7,7 +7,7 @@
   "stateProvince": "Hokkaido",
   "locality": "Rusutsu village",
   "timezone": "Asia/Tokyo",
-  "operator": null,
+  "operator": "Kamori Kanko Co., Ltd.",
   "priority": 0,
   "location": {
     "lat": 42.748,
@@ -24,10 +24,10 @@
     "summitM": 994,
     "verticalM": 594,
     "source": {
-      "url": "https://en.wikipedia.org/wiki/Rusutsu_Resort",
+      "url": "https://www.skiresort.info/ski-resort/rusutsu/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: base 400 m, top 994 m, vertical 594 m"
+      "checkedOn": "2026-10-03",
+      "note": "skiresort.info: base 400 m, summit 994 m (Mt. Isola); West Mountain 715 m, East Mountain 868 m. Vertical derived"
     }
   },
   "weatherPoints": [
@@ -50,28 +50,28 @@
   ],
   "terrain": {
     "trails": 37,
-    "lifts": 19,
+    "lifts": 18,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 31,
+    "intermediatePct": 40,
+    "advancedPct": 29,
     "terrainParks": null,
     "expertPct": null,
     "pisteKm": 42,
     "liftsByType": {
       "gondolas": 4,
       "cableCars": null,
-      "chairlifts": 15,
+      "chairlifts": 14,
       "surfaceLifts": null,
       "other": null
     },
-    "liftCapacityPerHour": null,
+    "liftCapacityPerHour": 30528,
     "season": null,
     "source": {
-      "url": "https://en.wikipedia.org/wiki/Rusutsu_Resort",
+      "url": "https://www.skiresort.info/ski-resort/rusutsu/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 37 courses totalling 42 km; 19 lifts (4 gondolas, 7 quad and 8 pair chairlifts). The summary notes other sources give slightly different course and lift counts"
+      "checkedOn": "2026-10-03",
+      "note": "skiresort.info: 42 km of slopes (easy 13 km / 31%, intermediate 17 km / 40%, difficult 12 km / 29% — split by km); 18 lifts (4 gondolas, 14 chairlifts), 30,528 people/h. rusutsu.com: 37 runs on 3 peaks served by 4 gondolas and 14 lifts"
     }
   },
   "features": {
@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Scheduled to open 28 Nov 2026 (snow permitting).",
+      "text": "2026-27 winter season scheduled from Sat 28 Nov 2026 (Early Season 1: 28 Nov – 11 Dec).",
       "announcedOn": null,
       "source": {
-        "url": "https://japanskiexperience.com/blog/japan-ski-resort-opening-dates/",
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summaries (Japan 2026-27 opening-date articles). Confirm on rusutsu.com"
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com 2026-27 lift-ticket / operating-period pages via search"
       }
     },
     "announcedClosing": {
       "date": "2027-03-30",
-      "text": "Scheduled season end 30 Mar 2027 (per search summary; confirm).",
+      "text": "2026-27 winter season scheduled to end Tue 30 Mar 2027 (spring season from 15 Mar).",
       "announcedOn": null,
       "source": {
-        "url": "https://japanskiexperience.com/blog/japan-ski-resort-opening-dates/",
+        "url": "https://rusutsu.com/en/information/hotel-closed-period/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; the specific article giving the closing date was not isolated"
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com operating-period information via search"
       }
     },
     "history": [
@@ -132,11 +132,42 @@
     "typicalText": "Late November to end of March (2026-27 schedule)",
     "notes": "2026-27 regular season (pricing) runs 19 Dec 2026 – 14 Mar 2027."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "night-skiing",
+      "label": "Night skiing",
+      "days": null,
+      "opens": "16:00",
+      "closes": "20:00",
+      "season": "2026-27",
+      "note": "Mid-December 2026 to 30 Mar 2027; last lift ride 19:45.",
+      "source": {
+        "url": "https://rusutsu.com/en/rusutsu-in-winter/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com winter pages via search"
+      }
+    },
+    {
+      "activity": "ticket-office",
+      "label": "Center ticket counter",
+      "days": null,
+      "opens": "08:15",
+      "closes": "16:45",
+      "season": "2026-27",
+      "note": "West ticket counter 8:15–19:30 on night-skiing days.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com 2026-27 lift-ticket page via search"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day lift ticket (adult 19–64), regular season",
+      "item": "1 Day Ticket — Regular season (adult 19–64)",
       "category": "adult",
       "amount": 13200,
       "amountMax": 16700,
@@ -144,29 +175,176 @@
       "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-14",
       "includesTax": null,
-      "note": "Regular season 19 Dec 2026 – 14 Mar 2027: ¥13,200 online, ¥16,700 at the ticket counter. Early, spring and any peak prices were not captured.",
+      "note": "¥13,200 online, ¥16,700 at the counter. Regular season 19 Dec 2026 – 14 Mar 2027.",
       "source": {
         "url": "https://rusutsu.com/en/winter-lift-tickets/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the official winter lift-ticket page"
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Ticket — Regular season (youth 13–18)",
+      "category": "youth",
+      "amount": 9800,
+      "amountMax": 12500,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-14",
+      "includesTax": null,
+      "note": "¥9,800 online, ¥12,500 at the counter. Seniors 65+ same price.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Ticket — Regular season (senior 65+)",
+      "category": "senior",
+      "amount": 9800,
+      "amountMax": 12500,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-14",
+      "includesTax": null,
+      "note": "¥9,800 online, ¥12,500 at the counter.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Ticket — Regular season (child 4–12)",
+      "category": "child",
+      "amount": 6400,
+      "amountMax": 8300,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-14",
+      "includesTax": null,
+      "note": "¥6,400 online, ¥8,300 at the counter.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Ticket — Early Season 1 (adult 19–64)",
+      "category": "adult",
+      "amount": 7900,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-28",
+      "appliesTo": "2026-12-11",
+      "includesTax": null,
+      "note": "Early Season 1, 28 Nov – 11 Dec 2026. Youth/senior ¥5,900; child ¥4,100. Early Season 2 adult ¥10,500.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Ticket — Spring season (adult 19–64)",
+      "category": "adult",
+      "amount": 10500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2027-03-15",
+      "appliesTo": "2027-03-30",
+      "includesTax": null,
+      "note": "Spring season from 15 Mar 2027. Youth/senior ¥7,500; child ¥4,400.",
+      "source": {
+        "url": "https://rusutsu.com/en/winter-lift-tickets/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 winter lift-ticket page (via search); online vs counter not distinguished in the summary"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Standard ski set (skis + boots + poles), 1 day (adult)",
+      "category": "adult",
+      "amount": 10400,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Expert ski set ¥17,000. Season year not stated in the source summary.",
+      "source": {
+        "url": "https://rusutsu.com/en/ski-rentals/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com ski-rental page via search"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Private ski lesson, 2 hours (1–5 people) — peak",
+      "category": null,
+      "amount": 51000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-14",
+      "appliesTo": "2026-12-31",
+      "includesTax": null,
+      "note": "International Ski School peak rate (14–31 Dec 2026); 6 hours ¥106,000. Group-lesson prices not found.",
+      "source": {
+        "url": "https://rusutsu.com/en/international-ski-lessons/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "rusutsu.com international ski lessons page via search"
       }
     }
   ],
   "links": {
     "official": "https://rusutsu.com/en/",
-    "trailMap": null,
+    "trailMap": "https://rusutsu.com/en/trail-map/",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://rusutsu.com/en/lift-and-trail-status/",
     "hours": null,
     "tickets": "https://rusutsu.com/en/winter-lift-tickets/",
     "seasonPass": "https://rusutsu.com/en/winter-season-passes/",
-    "lessons": null,
-    "rentals": null,
-    "webcams": null,
+    "lessons": "https://rusutsu.com/en/international-ski-lessons/",
+    "rentals": "https://rusutsu.com/en/ski-rentals/",
+    "webcams": "https://rusutsu.com/en/live-mountain-cams/",
     "parking": null,
     "roadInfo": null,
     "lodging": null,
@@ -221,7 +399,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://rusutsu.com/en/lift-and-trail-status/",
+    "format": "html",
+    "notes": "Official Trail & Lift Status page (lifts, trails and snow depth). Existence confirmed via search; page not fetched (egress blocked)."
+  },
   "photo": {
     "src": "asset:photo-rusutsu.webp",
     "alt": "Rusutsu: Izumikawa, Rusutsu, Abuta District, Hokkaido Prefecture 048-1711, Japan",
@@ -230,18 +412,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Izumikawa,_Rusutsu,_Abuta_District,_Hokkaido_Prefecture_048-1711,_Japan_-_panoramio_(5).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (30 Mar 2027 came from a search summary).",
-      "Early-season, spring and any peak 1-day prices for 2026-27.",
-      "Operator (reference lead: Kamori Kanko) — not confirmed in this pass.",
-      "Actual 2024-25 and 2025-26 opening and closing dates.",
-      "Snow-report page URL, trail map URL, hourly lift capacity."
+      "Day-lift operating hours for 2026-27.",
+      "Group-lesson price; season year of the rental price.",
+      "Spring-season online price."
     ],
-    "conflicts": [
-      "One search summary quoted a 'regular season 1-day adult' price of ¥39,000 from rusutsu.com — implausible for one day (probably a multi-day ticket); a later search gave ¥13,200 online / ¥16,700 at the counter, which is what is recorded."
-    ],
-    "confidenceNotes": "2026-27 prices and lift-status links are from search summaries of official rusutsu.com pages; opening/closing dates from third-party opening-date articles; terrain from Wikipedia-style summaries. Coordinates and airport time are Piste reference estimates."
+    "conflicts": [],
+    "confidenceNotes": "Season dates, ticket prices, hours and links from official rusutsu.com pages (search summaries; pages could not be fetched directly). Terrain and elevation from skiresort.info. Coordinates and airport time are Piste reference estimates."
   }
 }

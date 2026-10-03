@@ -7,7 +7,7 @@
   "stateProvince": "Tyrol / Vorarlberg",
   "locality": "St. Anton am Arlberg, St. Christoph, Stuben, Zürs, Lech and Warth-Schröcken",
   "timezone": "Europe/Vienna",
-  "operator": "Several lift companies under a joint Ski Arlberg ticket (including Arlberger Bergbahnen AG in St. Anton)",
+  "operator": "Several lift companies under the joint Ski Arlberg ticket: Arlberger Bergbahnen AG (St. Anton, St. Christoph, Stuben), the Ski Arlberg West companies in Lech-Oberlech-Zürs, Skilifte Warth and Skilifte Schröcken",
   "priority": 0,
   "location": {
     "lat": 47.129,
@@ -24,10 +24,10 @@
     "summitM": 2811,
     "verticalM": 1507,
     "source": {
-      "url": "https://www.skiarlberg.at/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Lowest base St. Anton am Arlberg about 1,304 m, top lift station Valluga about 2,811 m; vertical derived as the difference"
+      "url": "https://www.skiresort.info/ski-resort/st-anton-st-christoph-stuben-lech-zuers-warth-schroecken-ski-arlberg/slope-offering/",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summary of skiresort.info: base 1,304 m (St. Anton), top 2,811 m (Valluga), vertical 1,507 m. The top Valluga station is open to skiers only with a mountain guide."
     }
   },
   "weatherPoints": [
@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.skiarlberg.at/en",
+      "url": "https://www.skiarlberg.at/en/winter/ski-resort",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary of skiarlberg.at: 300 km of ski runs, over 200 km of powder-snow (off-piste) routes, 85 cable cars and lifts. Lift types, capacity and piste difficulty split not captured; season not stated."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary: Ski Arlberg states about 300 km (301 km) of slopes, 200 km of off-piste routes and 85 lifts and cable cars (the live status page has listed 88 lifts / 306 km). Matches the 2026-09-30 search of skiarlberg.at. No difficulty split is stored: the only split found was a skiresort.info km figure, not published by Ski Arlberg."
     }
   },
   "features": {
@@ -112,29 +112,171 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "2026/27: Dec. 2, 2026 to Apr. 18, 2027 for St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs (official season-times page, via search summary). Warth-Schröcken may differ. Ticket prices are split into season periods (Wedel ski weeks, main season, sun ski weeks)."
+    "notes": "2026/27: Dec 2, 2026 to Apr 18, 2027 for St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs (official season-times page, via search summary). Warth-Schröcken may differ. Main-season ticket tariff Dec 19, 2026 – Apr 2, 2027."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts, St. Anton – St. Christoph – Stuben (typical; varies by lift)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:00",
+      "season": null,
+      "note": "Main lifts generally run from about 08:30 to 16:00–16:15; individual lifts differ (e.g. Galzigbahn 08:45–16:15 on the live page). Check live lift status.",
+      "source": {
+        "url": "https://www.skiarlberg.at/en/live-info/cable-cars-lifts",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Ski Arlberg live lift page: e.g. Albonabahn I & II 08:30–16:00, Galzigbahn 08:45–16:15, Kapallbahn 08:50–16:00."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Ski Arlberg adult day ticket (full day)",
+      "item": "Ski Arlberg 1-day ticket, adult — main season",
       "category": "adult",
       "amount": 85,
       "amountMax": null,
       "currency": "EUR",
-      "season": null,
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-02",
+      "includesTax": null,
+      "note": "Main-season tariff Dec 19, 2026 – Apr 2, 2027 (+4.3% on 2025-26, when it was EUR 81.50). Fixed published tariff; no dynamic pricing reported.",
+      "source": {
+        "url": "https://www.thelocal.at/20260922/how-much-skiing-in-vorarlberg-will-cost-this-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "The Local Austria, Sep 22, 2026: adult day ticket EUR 85 in main season (Dec 19 – Apr 2), EUR 80.50 in early/late season."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski Arlberg 1-day ticket, adult — early/late season",
+      "category": "adult",
+      "amount": 80.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Cheaper early- and late-season periods (before Dec 19, 2026 and after Apr 2, 2027).",
+      "source": {
+        "url": "https://www.thelocal.at/20260922/how-much-skiing-in-vorarlberg-will-cost-this-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "The Local Austria, Sep 22, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski Arlberg 1-day ticket, youth / senior — main season",
+      "category": "youth",
+      "amount": 78,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Youth and senior share one rate. Main-season tariff.",
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official prices page (winter 2026/27): 1-day adult EUR 85.00, youth and seniors EUR 78.00, children EUR 51.00; half day from 12:00 EUR 65 / 59 / 39."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski Arlberg 1-day ticket, senior — main season",
+      "category": "senior",
+      "amount": 78,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Same rate as youth. Main-season tariff.",
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official prices page (winter 2026/27)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski Arlberg 1-day ticket, child — main season",
+      "category": "child",
+      "amount": 51,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Main-season tariff.",
+      "source": {
+        "url": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official prices page (winter 2026/27)."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski rental (skis only), adult, 1 day — Economy to Superior class (Intersport Arlberg)",
+      "category": "adult",
+      "amount": 31,
+      "amountMax": 63,
+      "currency": "EUR",
+      "season": "2026-27",
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Adult EUR 85, youth/senior EUR 78, child EUR 51 for a full day. Prices vary by season period (Wedel weeks, main season, sun ski weeks); which period and whether this is the 2025-26 or 2026-27 rate was not stated — confirm.",
+      "note": "Economy EUR 31, Premium EUR 45, Superior EUR 63 per day; boots are extra (EUR 24/day). Online booking discounts of up to 20% reported.",
       "source": {
-        "url": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
+        "url": "https://www.intersport-arlberg.com/en/rent/rates/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ski Arlberg's prices page (\"most recent pricing information available\")."
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Intersport Arlberg rental rates, winter 2026/27."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski boots rental, adult, 1 day (Intersport Arlberg)",
+      "category": "adult",
+      "amount": 24,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.intersport-arlberg.com/en/rent/rates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Intersport Arlberg rental rates, winter 2026/27 (boots EUR 24 for 1 day)."
       }
     }
   ],
@@ -142,12 +284,12 @@
     "official": "https://www.skiarlberg.at/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
-    "hours": null,
+    "snowReport": "https://www.skiarlberg.at/en/Ski-Arlberg/Live-Info/Snow-report",
+    "hours": "https://www.skiarlberg.at/en/live-info/cable-cars-lifts",
     "tickets": "https://www.skiarlberg.at/en/tickets-season-times/prices-tickets-winter",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://www.skischule-arlberg.com/en/offer/ski-courses/",
+    "rentals": "https://www.intersport-arlberg.com/en/rent/rates/",
     "webcams": null,
     "parking": null,
     "roadInfo": null,
@@ -156,7 +298,7 @@
     "tourism": "https://www.stantonamarlberg.com/",
     "avalanche": "https://avalanche.report/",
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://www.skiarlberg.at/en/live-info/cable-cars-lifts"
   },
   "moreLinks": [
     {
@@ -244,7 +386,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.skiarlberg.at/en/Ski-Arlberg/Live-Info/Snow-report",
+    "format": "html",
+    "notes": "Official Ski Arlberg snow and avalanche report (snow depth valley/mountain, last snowfall). Sector pages exist for St. Anton, Lech-Zürs and Warth-Schröcken under /en/<sector>/live-info/snow-avalanche-report. Not fetched directly (page fetches blocked); URL from search results."
+  },
   "photo": {
     "src": "asset:photo-ski-arlberg.webp",
     "alt": "Arlberg: 500px provided description: Sonnenkopf, Ski Arlberg this Video on Youtube: youtu.be/3VGGor3awiU my Youtube Channel: www.youtube.com/maximals",
@@ -253,23 +399,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sonnenkopf_Ski_Arlberg_(203037193).jpeg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm Warth-Schröcken's 2026/27 season dates (the official summary covered St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs only).",
-      "Pass access: no 2026-27 Ikon day allowance for Ski Arlberg was found (Ikon international blackouts: Dec. 26-30, 2026; Jan. 16-17 and Feb. 13-14, 2027; validity Nov. 1, 2026 to May 31, 2027). Existing rules left as they are.",
-      "Confirm the 2026/27 adult day-ticket price per season period (only EUR 85, season unclear, is on file) and multi-day / season ticket prices.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
-      "Confirm official snow-report, lift-status and trail-map pages on skiarlberg.at.",
-      "Confirm lift types and uphill capacity (85 lifts per the summary).",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the lift companies behind the joint ticket (reference: Arlberger Bergbahnen AG in St. Anton, plus separate companies in Lech, Zürs and Warth-Schröcken).",
-      "Confirm precise base and top-station coordinates; weather points may be needed for Lech and Zürs as well, because the area spans several valleys.",
-      "Avalanche: avalanche.report covers the Tyrol side (St. Anton); record the Vorarlberg bulletin URL for Lech, Zürs and Warth-Schröcken.",
-      "Road info: find the official status source for the Arlberg road tunnel, the Arlberg pass road and the Flexen pass road (seasonal and avalanche closures).",
-      "Airport shuttle operators and 2026-27 train timetables."
+      "Warth-Schröcken 2026/27 season dates (official summary covered St. Anton, St. Christoph, Stuben, Lech, Oberlech and Zürs only).",
+      "Official per-period table for youth/senior/child early/late-season rates; group lesson price for 2026/27 from the ski school itself.",
+      "Past opening/closing dates (2024-25, 2025-26) for the estimate.",
+      "Piste difficulty split by km: one search summary of skiresort.info gave 130 km easy, 120 km intermediate, 49.7 km difficult. Not stored, because Ski Arlberg does not publish it and it could not be confirmed.",
+      "Snow-report URL https://www.skiarlberg.at/en/Ski-Arlberg/Live-Info/Snow-report could not be loaded. Its path style differs from the other skiarlberg.at URLs on file; confirm it opens."
     ],
     "conflicts": [],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: 2026/27 season dates for the main sectors, piste km and lift count, and an undated day-ticket price. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "Refreshed 2026-10-03 by web search only (page fetches were blocked by the network proxy, so no page was read directly; every fact is search-summary). Coordinates, weather points and features remain Piste reference data. Adversarial re-check 2026-10-03: WebFetch and web search were both unavailable, so no cited page could be reopened. Adult 85, youth/senior 78 and child 51 EUR were also found by the separate 2026-09-30 search of the official prices page; the season dates are from 2026-09-30. Removed: a derived difficulty split and a seasonless group-lesson \"from\" price from a booking portal. Kept but single-source: the EUR 80.50 early/late rate, Intersport rental rates and lift hours."
   }
 }

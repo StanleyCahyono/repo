@@ -26,8 +26,8 @@
     "source": {
       "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-28",
-      "note": "Base 2,025 ft (Discovery Lodge), summit 3,429 ft, vertical 1,404 ft. Sunset Lodge is at 3,325 ft and Overlook Lodge at 2,542 ft."
+      "checkedOn": "2026-10-03",
+      "note": "Base 2,025 ft (Discovery Lodge), summit 3,429 ft, vertical 1,404 ft; matches Wikipedia (re-checked 2026-10-03)."
     }
   },
   "weatherPoints": [
@@ -70,8 +70,8 @@
     "source": {
       "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-28",
-      "note": "62 trails incl. glades and parks (other official copy says 50); 8 lifts incl. the Catskill Thunder gondola and Belleayre Express detachable quad; 171 acres (other copy 174). Terrain-park count from a third-party summary. Lift types (reconciled 2026-09-30): 1 gondola (Catskill Thunder, 60 eight-person cabins), 4 chairlifts (Wikipedia count) and 3 handle-tow surface lifts = the official 8; learning-area magic carpets are not counted. Third-party lists showing 5 chairs (1 high-speed quad, 1 quad, 1 triple, 2 doubles) appear to predate the gondola. Uphill capacity 12,980/h is from the earlier official-domain search; a 2026-09-30 aggregator summary said 10,980/h."
+      "checkedOn": "2026-10-03",
+      "note": "62 trails incl. glades and parks (22% easiest, 58% more difficult, 20% most difficult); 8 lifts incl. Catskill Thunder gondola and Belleayre Express detachable quad; 171 acres; uphill capacity 12,980/h; 96% snowmaking (official stats page and Wikipedia via search summary, 2026-10-03). Lift types: 1 gondola + 4 chairlifts (Wikipedia) + 3 handle tows = official 8; carpets not counted. Terrain-park count from a third-party summary."
     }
   },
   "features": {
@@ -142,7 +142,7 @@
       }
     ],
     "typicalText": "Among the earliest openers in New York, usually mid-to-late November with snowmaking: passholders Fri Nov 21 and public Sat Nov 22, 2025; Nov 15, 2024; passholder-only Thu Nov 16, 2023 (then closed until a planned Nov 24 reopening).",
-    "notes": "OnTheSnow projects Nov 20, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No official 2026-27 opening date found as of 2026-09-28. In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the 'Swing into Spring' promotion ran Mar 30-Apr 19, 2026 'through Closing Day', suggesting about Apr 19, 2026 (https://www.belleayre.com/event/spring-savings/)."
+    "notes": "No official 2026-27 opening or closing date found as of 2026-10-03 (opening \"TBD, based on weather, conditions and snowmaking\"). OnTheSnow projects Nov 20, 2026 (third-party projection, not an announcement). In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the \"Swing into Spring\" promotion ran Mar 30-Apr 19, 2026 \"through Closing Day\" (https://www.belleayre.com/event/spring-savings/)."
   },
   "hours": [
     {
@@ -164,8 +164,8 @@
       "source": {
         "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Official stats page via search summary (2026-10-03): lifts 9:00am-4:00pm, lodges 8:00am-5:00pm."
       }
     },
     {
@@ -187,8 +187,8 @@
       "source": {
         "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Official stats page via search summary (2026-10-03): lifts 9:00am-4:00pm, lodges 8:00am-5:00pm."
       }
     },
     {
@@ -210,8 +210,8 @@
       "source": {
         "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Official stats page via search summary (2026-10-03): lifts 9:00am-4:00pm, lodges 8:00am-5:00pm."
       }
     }
   ],
@@ -229,20 +229,104 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "OnTheSnow listing via search summary (2026-09-30), labelled 2026-27 there, but the season is unconfirmed and it may be a window rate. Confirm at source.",
+      "note": "Date-based pricing: tickets are date specific with limited availability and cheaper the earlier you buy; all weekend and holiday tickets must be bought online in advance. OnTheSnow lists $119 for an adult weekday ticket; the season of that figure is not stated.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow lift-ticket listing via search summary (2026-10-03). Official page belleayre.com/tickets/lift-tickets/ does not expose prices to search."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (online, date-based)",
+      "item": "Adult 1-day lift ticket (online, date-based range)",
       "category": "adult",
       "amount": 61,
       "amountMax": 89,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "snowstash.com: from $61, peak $89 (advance online, by date). Labelled 2025-26 because the page title reads 2025/26 (a search summary called the range 2026/27, which the page title does not support); not a 2026-27 price.",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Third-party aggregator via search summary."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Adult Frequent Skier Card (ages 20-64)",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 59,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Pre-loaded card that unlocks discounted day tickets ($60 midweek, $89 weekends/holidays for adults).",
+      "source": {
+        "url": "https://www.belleayre.com/tickets/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary (2026/27 card)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, midweek",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 60,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card.",
+      "source": {
+        "url": "https://www.belleayre.com/tickets/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, weekend/holiday",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 89,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card; same rate on holidays.",
+      "source": {
+        "url": "https://www.belleayre.com/tickets/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior (65-69) 1-day ticket with Frequent Skier Card",
+      "category": "senior (Frequent Skier Card)",
+      "amount": 47,
+      "amountMax": 71,
       "currency": "USD",
       "season": null,
       "dayType": "any",
@@ -250,12 +334,96 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "snowstash.com: \"from $61, peak $89\". The summary labelled it 2026/27, but the page title in the results read 2025/26, and an earlier (2026-09-28) summary gave $41–$89 for 2025-26. Season unconfirmed.",
+      "note": "$47 midweek, $71 weekends/holidays; requires a Frequent Skier Card. Season label not shown in the search result.",
       "source": {
-        "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
+        "url": "https://www.belleayre.com/tickets/frequent-skier-cards/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior (7-12) 1-day ticket with Frequent Skier Card",
+      "category": "child (Frequent Skier Card)",
+      "amount": 40,
+      "amountMax": 59,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$40 midweek, $59 weekends/holidays; requires a Frequent Skier Card. Season label not shown in the search result.",
+      "source": {
+        "url": "https://www.belleayre.com/tickets/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "full-package",
+      "category": "adult",
+      "amount": 58,
+      "amountMax": 65,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Adult (13-64) ski or snowboard package (skis, boots, poles or board and boots; helmet included), 1 day: $58-$65 online, $65 day-of. Second day $53-$59 online. Online booking closes at noon the day before.",
+      "source": {
+        "url": "https://www.belleayre.com/tickets/ski-snowboard-rentals/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page via search summary; season not stated."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Beginner lesson package, ages 13+ (2-hour group lesson + lower-mountain ticket + rental)",
+      "category": "adult",
+      "amount": 119,
+      "amountMax": 159,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025/26: $119 online / $139 day-of for one tier and $145 online / $159 day-of for the other (likely midweek vs weekend). 9:30am or 12:30pm. Advance purchase required.",
+      "source": {
+        "url": "https://www.belleayre.com/lesson/lessons-for-ages-13-up/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lessons for Ages 13 & Up page via search summary (2025/26 prices)."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "First-time private lesson package (1-hour private + lower-mountain ticket + rental)",
+      "category": "adult",
+      "amount": 199,
+      "amountMax": 219,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$199 midweek, $219 weekends/holidays. Season not stated in the search result.",
+      "source": {
+        "url": "https://www.belleayre.com/lesson/private-lessons/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official private lessons page via search summary."
       }
     }
   ],
@@ -263,12 +431,12 @@
     "official": "https://www.belleayre.com/",
     "trailMap": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
     "interactiveMap": null,
-    "snowReport": "https://belleayre.com/mountain/snow-report",
+    "snowReport": "https://www.belleayre.com/mountain/conditions-1/",
     "hours": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
     "tickets": "https://www.belleayre.com/tickets/lift-tickets/",
     "seasonPass": "https://www.belleayre.com/seasonpasses/",
     "lessons": "https://www.belleayre.com/lessons-programs/beginners-guide/",
-    "rentals": null,
+    "rentals": "https://www.belleayre.com/tickets/ski-snowboard-rentals/",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.511ny.org/",
@@ -276,7 +444,8 @@
     "events": null,
     "tourism": "https://visitulstercountyny.com/plan-your-visit/things-to-do/belleayre-mountain/",
     "avalanche": null,
-    "openSkiMap": null
+    "openSkiMap": null,
+    "liftStatus": "https://www.belleayre.com/mountain/conditions-1/"
   },
   "moreLinks": [
     {
@@ -332,32 +501,25 @@
     "transfers": []
   },
   "reportSource": {
-    "url": "https://belleayre.com/mountain/snow-report",
+    "url": "https://www.belleayre.com/mountain/conditions-1/",
     "format": "html",
-    "notes": "Official snow report URL as seen in search results (indexed off-season under a 'Summer Attractions' title, so it may redirect in summer). ORDA runs Belleayre, Gore and Whiteface on a shared web platform, so the report format is likely shared. No JSON feed identified. Third-party mirror: https://www.onthesnow.com/new-york/belleayre/ski-resort."
+    "notes": "Official \"Snow Report\" page (indexed on belleayre.com as /mountain/conditions-1/; dated reports are also posted under /report/snow-report-<date>/). Not fetched (site blocked from this environment). No JSON feed identified."
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Adult 1-day lift ticket prices for 2026-27: 2026-09-30 summaries gave $61–$89 online by date (season label unclear) and $119 adult weekday (OnTheSnow; season unclear); an earlier summary said 2025-26 dynamic tickets were about $41–$89. Weekend/holiday rules unconfirmed.",
-      "Official 2026-27 opening date (OnTheSnow projects Nov 20, 2026).",
-      "Exact 2025-26 closing date (inferred about Apr 19, 2026).",
-      "Tubing, childcare and on-mountain lodging availability.",
-      "Webcam page URL and rentals page URL.",
-      "Road distance and a sourced drive time from Ithaca.",
-      "2026-27 SKI3 pass prices, blackout scope and Snow Pass partner benefits — tracked in passes.json.",
-      "Confirm the lift inventory by type (gondola + 4 chairs + 3 handle tows is a reconciliation of sources) and the uphill capacity (12,980 vs 10,980 per hour)."
+      "Official adult window/online day-ticket prices for 2026-27 (the official tickets page does not expose prices to search; $119 weekday and $61-$89 come from third-party listings).",
+      "Official 2026-27 opening and closing dates.",
+      "2026-27 rental and lesson prices (current figures are 2025-26 or season not stated).",
+      "Tubing, childcare and on-mountain lodging availability."
     ],
     "conflicts": [
-      "terrain.trails: 62 (including glades and parks) (https://www.belleayre.com/mountain/trail-map-and-mountain-stats/); 50 (other official-site copy) (https://www.belleayre.com/mountain/); 51 (search summary; attribution unclear). Resolution: Used 62 from the stats page. The difference seems to depend on whether glades and parks are counted.",
-      "terrain.skiableAcres: 171 (https://www.belleayre.com/mountain/trail-map-and-mountain-stats/); 174 (https://www.belleayre.com/mountain/). Resolution: Used 171.",
-      "terrain.lifts: 8 lifts including the Catskill Thunder gondola and Belleayre Express detachable quad (https://www.belleayre.com/mountain/); 4 chairlifts + 1 gondola (https://en.wikipedia.org/wiki/Belleayre_Mountain); 9 lifts: 1 gondola, 2 quads, 1 triple, 2 doubles, 3 handle tows (search summary (third-party; attribution unclear)). Resolution: Used 8. Counts differ by whether carpets and handle tows are included.",
-      "passAccess SKI3 blackouts: Blackout dates Dec 25, 2026-Jan 1, 2027; Jan 16-18, 2027; Feb 13-21, 2027 (https://www.belleayre.com/mountain-collective/); SKI3 lift access valid even on sold-out days (implies full access) (https://www.belleayre.com/seasonpasses/). Resolution: Access set to unknown pending verification.",
-      "terrain.liftCapacityPerHour: 12,980/h (earlier official-domain search) vs 10,980/h (2026-09-30 aggregator summary). Resolution: kept 12,980.",
-      "terrain.liftsByType: 1 gondola + 4 chairlifts (Wikipedia) + 3 handle tows = 8 (official total) vs third-party lists of 5 chairs (1 high-speed quad, 1 quad, 1 triple, 2 doubles) + 3 surface lifts that omit or add the gondola. Resolution: used 1/4/3."
+      "terrain.trails: 62 incl. glades and parks (stats page) vs 50 (other official copy). Used 62.",
+      "terrain.skiableAcres: 171 (stats page) vs 174 (other official copy). Used 171.",
+      "terrain.liftCapacityPerHour: 12,980/h (official stats, Wikipedia) vs 10,980/h (one aggregator). Used 12,980."
     ],
-    "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Vertical, summit and base (Discovery Lodge at 2,025 ft) were confirmed by an official-domain search that did not include those numbers in the query. Sunset Lodge is at 3,325 ft and Overlook Lodge at 2,542 ft. Uphill capacity is 12,980 skiers per hour and the longest run is 12,024 ft. The terrain-park count (3) comes from a third-party summary. Night skiing is marked false because official lift hours are 9am-4pm daily. Belleayre allows uphill travel Mon-Fri during operating hours (not weekends or holidays). Both weatherPoint coordinates are approximations for weather queries only. Whether the Wikipedia coordinate marks the summit or the ski-area centroid is unverified."
+    "confidenceNotes": "Official site and third-party pages could not be fetched from this environment (egress blocked), so every figure comes from web-search summaries of the official pages (belleayre.com) or third-party listings, each with its URL."
   },
   "photo": {
     "src": "asset:photo-belleayre.webp",

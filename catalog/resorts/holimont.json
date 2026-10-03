@@ -109,23 +109,44 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket, weekday (public)",
+      "item": "Public day ticket, weekday",
       "category": "adult",
       "amount": 100,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2024-25",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (2026-09-30): weekday adult $100, junior (7-11) $80, adult half-day after 1 pm $90, children 6 and under free; 5-day pass $390, 10-day pass $575. Public tickets are sold Mon–Fri only. Season not stated, and a 2022-23 weekday brochure also appeared in the results, so these may be older rates. Confirm at source.",
+      "note": "Public tickets Mon-Fri only (weekends are for members and invited guests). Half-day after 1 PM $90. HoliMont's published table is labelled 2024-2025; no newer rates found as of 2026-10-03.",
       "source": {
-        "url": "https://holimont.com/explore/tickets-and-passes/",
+        "url": "https://ellicottvilleoutside.com/posts/ellicottville-ski-passes-winter-2026-27.html",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Third-party guide (Ellicottville Outside, \"Holiday Valley and HoliMont Lift Tickets and Ski Passes, 2026-27\"); it reports that HoliMont's own day-rate table is still labelled 2024-2025."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Public day ticket, weekday",
+      "category": "child",
+      "amount": 80,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2024-25",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Junior, ages 7-11; half day $75. Table labelled 2024-2025.",
+      "source": {
+        "url": "https://ellicottvilleoutside.com/posts/ellicottville-ski-passes-winter-2026-27.html",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Third-party guide (Ellicottville Outside, \"Holiday Valley and HoliMont Lift Tickets and Ski Passes, 2026-27\"); it reports that HoliMont's own day-rate table is still labelled 2024-2025."
       }
     }
   ],
@@ -200,19 +221,17 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2026-27 public weekday day-ticket prices ($100 adult found without a season label; possibly older rates).",
-      "Any resort-announced 2026-27 opening date (OnTheSnow projects Dec 12, 2026) and public weekday hours.",
-      "Confirm the lift inventory (6 chairs + 2 conveyors vs \"8 chairlifts\"), base/summit elevations and coordinates (approximations).",
-      "Public lessons/rentals, snowmaking %, terrain parks, trail difficulty split and night skiing.",
-      "Pass access: none found (HoliMont is a private club; no Indy or other reciprocal listing was seen).",
-      "Official snow-report and trail-map URLs."
+      "Current (2025-26 or 2026-27) public weekday ticket prices — the only published table is labelled 2024-2025.",
+      "Any resort-announced 2026-27 opening date and public weekday hours.",
+      "Base/summit elevations, lift inventory (6 chairs + 2 conveyors vs \"8 chairlifts\"), snowmaking %, difficulty split, night skiing.",
+      "Official snow-report and trail-map URLs; operator entity (private member club)."
     ],
     "conflicts": [
       "terrain.liftsByType: 8 lifts = 6 chairs + 2 conveyors vs \"8 chairlifts\" in another result. Resolution: used 6 chairs + 2 conveyors."
     ],
-    "confidenceNotes": "Researched 2026-09-30 from one search (search summaries). Vertical, terrain (55 trails, 135 acres, 8 lifts), the weekday-only public access and a $100 weekday adult price of unconfirmed season are search-summary facts. Coordinates, the tourism link and drive/airport figures are Piste reference data or estimates; the OnTheSnow opening date is a projection."
+    "confidenceNotes": "Partially re-researched 2026-10-03: the session web-search budget ran out after one HoliMont result and page fetches were blocked by the network proxy. Prices come from a third-party 2026-27 guide quoting HoliMont's 2024-25 table. Other facts are unchanged from the 2026-09-30 search summaries."
   }
 }

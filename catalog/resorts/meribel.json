@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Savoie)",
   "locality": "Méribel (centre, Altiport, Le Villard), Méribel-Mottaret, Méribel-Village, Brides-les-Bains",
   "timezone": "Europe/Paris",
-  "operator": "Méribel Alpina, with S3V on the Mottaret side — reference, confirm",
+  "operator": "Méribel Alpina (Méribel/Les Allues side) and S3V (Mottaret side)",
   "priority": 0,
   "location": {
     "lat": 45.3967,
@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 1450,
+    "baseM": 1100,
     "summitM": 2952,
-    "verticalM": 1502,
+    "verticalM": 1852,
     "source": {
-      "url": "https://www.meribel.net/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Reference: Méribel centre about 1,450 m (the Olympe gondola starts lower, at Brides-les-Bains); top Mont du Vallon about 2,952 m — a search summary says 'nearly 3,000 m'. Vertical derived"
+      "url": "https://www.skipassmeribelmottaret.com/en/meribel-ski-area",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summary of Méribel valley guides and the official ski-pass site: lowest point about 1,100 m, highest lift-served point Mont du Vallon 2,952 m; Méribel village is at 1,450 m. Vertical derived (1,100–2,952 m)."
     }
   },
   "weatherPoints": [
@@ -64,8 +64,8 @@
     "source": {
       "url": "https://www.meribel.net/en/meribel-3-vallee-ski-passes/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Figures describe the Méribel valley (the resort's own pass). Search summary of meribel.net and OnTheSnow: 150 km of slopes, 72 runs, 43 lifts (gondolas, high-speed chairlifts and surface lifts — counts by type not found). Terrain split as published by OnTheSnow: 11% beginner, 38% intermediate, 39% advanced, 13% expert (sums to 101% from rounding). Linked Les 3 Vallées area (official 'in figures' page, search summary): 600 km of pistes, 334 pistes (53 green, 136 blue, 108 red, 37 black), 161 lifts, of which the summary itemised 34 gondolas, 3 cable cars, 57 chairlifts and 33 drag lifts (the other 34 not broken down); Wikipedia puts total uplift at about 284,500 skiers/hour in 2026 (estimate)."
+      "checkedOn": "2026-10-03",
+      "note": "Figures describe the Méribel valley (the resort's own pass). Search summary of meribel.net and OnTheSnow: 150 km of slopes, 72 runs, 43 lifts (gondolas, high-speed chairlifts and surface lifts — counts by type not found). Terrain split as published by OnTheSnow: 11% beginner, 38% intermediate, 39% advanced, 13% expert (sums to 101% from rounding). Linked Les 3 Vallées area (official 'in figures' page, search summary): 600 km of pistes, 334 pistes (53 green, 136 blue, 108 red, 37 black), 161 lifts, of which the summary itemised 34 gondolas, 3 cable cars, 57 chairlifts and 33 drag lifts (the other 34 not broken down); Wikipedia puts total uplift at about 284,500 skiers/hour in 2026 (estimate). Re-checked 2026-10-03: search summaries again give 150 km for the Méribel valley; lift count 43 vs 46 depending on source."
     }
   },
   "features": {
@@ -90,31 +90,78 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-05",
-      "text": "Ski area opens 5 Dec 2026 and closes 17 Apr 2027 (official Méribel ski-pass site, per search summary); France Montagnes' list gave 6 Dec.",
+      "text": "Lifts open full-time for the season on Saturday 5 Dec 2026.",
       "announcedOn": null,
       "source": {
         "url": "https://www.skipassmeribelmottaret.com/en/meribel-skipass-prices",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries of the official Méribel ski-pass site and Méribel guides; France Montagnes listed 6 Dec in an earlier search"
       }
     },
     "announcedClosing": {
       "date": "2027-04-17",
-      "text": "Closing 17 Apr 2027 (official Méribel ski-pass site, per search summary).",
+      "text": "Lifts close Saturday 17 Apr 2027 (some sources say 18 Apr).",
       "announcedOn": null,
       "source": {
         "url": "https://www.skipassmeribelmottaret.com/en/meribel-skipass-prices",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries of the official ski-pass site and Méribel guides"
       }
     },
     "history": [],
     "typicalText": "Usually early December to mid-April (reference; 2026-27: 5 Dec to 17 Apr).",
     "notes": "High season for pricing: 19 Dec 2026 – 2 Apr 2027 (search summary). Past seasons were not captured."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (start of season to mid-February)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "09:00",
+      "closes": "16:30",
+      "season": null,
+      "note": "Closing times vary by lift (16:00–17:30).",
+      "source": {
+        "url": "https://www.seemeribel.com/questions/what-time-do-the-lifts-open-and-close-valley-689444",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of a Méribel guide (season not stated)"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Lifts (mid-February to closing)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "09:00",
+      "closes": "17:00",
+      "season": null,
+      "note": "Closing times vary by lift.",
+      "source": {
+        "url": "https://www.seemeribel.com/questions/what-time-do-the-lifts-open-and-close-valley-689444",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of a Méribel guide (season not stated)"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -129,12 +176,96 @@
       "appliesFrom": "2026-12-19",
       "appliesTo": "2027-04-02",
       "includesTax": null,
-      "note": "Search summary: 2026-27 high season (19 Dec–2 Apr) adult day pass €71.20 for the Méribel valley. The 3 Vallées day price (separate page) was not captured.",
+      "note": "High season 19 Dec 2026 – 2 Apr 2027 (adult 18–75). Low-season adult price not captured. Under-5s and over-75s ski free on the Méribel valley pass.",
       "source": {
         "url": "https://www.skipassmeribelmottaret.com/en/meribel-skipass-prices",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 'Méribel Official Ski Pass - Winter 2026-2027 Prices'"
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Méribel ski-pass site, winter 2026-2027 prices"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Les 3 Vallées adult 1-day ski pass (high season)",
+      "category": "adult",
+      "amount": 84.2,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Whole 3 Vallées area, adult 18–75, high season 19 Dec 2026 – 9 Apr 2027. Veteran (75+) €21.",
+      "source": {
+        "url": "https://www.skipassmeribelmottaret.com/en/skipass-prices-3-vallees",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Méribel ski-pass site, 3 Vallées winter 2026-2027 rates"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Les 3 Vallées child 1-day ski pass (high season)",
+      "category": "child",
+      "amount": 69,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Child 5–18, high season.",
+      "source": {
+        "url": "https://www.skipassmeribelmottaret.com/en/skipass-prices-3-vallees",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Méribel ski-pass site, 3 Vallées winter 2026-2027 rates"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Adult ski + boots + poles rental, 1 day (Ski Higher, Blue Pack to Premium Elite)",
+      "category": "adult",
+      "amount": 26,
+      "amountMax": 65.6,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Blue Pack €26/day up to Premium Elite €65.60/day at Ski Higher (La Tania, Méribel, Courchevel); season not stated.",
+      "source": {
+        "url": "https://skihigher.com/prices/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Ski Higher price page"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "ESF Méribel adult group ski lessons, 6 mornings (beginner to Class 4)",
+      "category": "adult",
+      "amount": 237,
+      "amountMax": 291,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "6 lessons Sunday–Friday, 9:15–11:45 from €237 (longer formats from €283–€291). Season not confirmed (summary labelled it 2026-2027).",
+      "source": {
+        "url": "https://www.ski-school-meribel-mottaret.com/our-prices/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of ESF Méribel price pages"
       }
     }
   ],
@@ -142,7 +273,7 @@
     "official": "https://www.meribel.net/",
     "trailMap": "https://www.les3vallees.com/en/guide/the-world-s-largest-ski-area/ski-area-map",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.les3vallees.com/en/live/weather/meribel",
     "hours": null,
     "tickets": "https://www.skipassmeribelmottaret.com/en",
     "seasonPass": null,
@@ -237,7 +368,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.les3vallees.com/en/live/weather/meribel",
+    "format": "html",
+    "notes": "Les 3 Vallées official snow report & weather page for Méribel (found by web search; page fetch blocked in this environment)."
+  },
   "photo": {
     "src": "asset:photo-meribel.webp",
     "alt": "Méribel: Méribel in January 2014.",
@@ -246,18 +381,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:MERIBEL.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lifts by type and hourly capacity for the Méribel valley.",
-      "3 Vallées day-pass price for 2026-27.",
-      "Epic Pass 2026-27 day allowance for Les 3 Vallées (not researched).",
-      "Colour split (green/blue/red/black) for the Méribel valley.",
-      "Official snow-report page."
+      "Méribel valley low-season adult and child 1-day prices for 2026-27.",
+      "Lifts by type and hourly capacity for the Méribel valley; colour split.",
+      "Official 2026-27 hours (only a guide's general times found)."
     ],
     "conflicts": [
-      "Opening: 5 Dec 2026 (official ski-pass site) vs 6 Dec 2026 (France Montagnes list in another summary)."
+      "Closing: 17 Apr 2027 (most sources) vs 18 Apr 2027.",
+      "Méribel valley lift count: 43 vs 46."
     ],
-    "confidenceNotes": "Dates and price come from search summaries of the official ticket site (fairly solid); size and lift total from search summaries. Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "All web facts are search summaries (page fetches were blocked in this environment). Coordinates and weather points are reference data; airport times are estimates. 2026-10-03 adversarial review: no cited page could be opened (WebFetch egress-blocked for every domain tried; web-search budget exhausted), so none of the 2026-10-03 facts has been confirmed; they remain search summaries."
   }
 }

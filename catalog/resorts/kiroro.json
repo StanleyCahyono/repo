@@ -26,8 +26,8 @@
     "source": {
       "url": "https://www.kiroro.co.jp/guide_map/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: peak 1,180 m (Asari Peak), base 570 m, vertical 610 m. Attribution approximate (official guide map vs third-party guides)"
+      "checkedOn": "2026-10-03",
+      "note": "Official trail-map page (via search): peak 1,180 m (Mt. Asari), base 570 m, vertical 610 m. skiresort.info gives 520–1,180 m"
     }
   },
   "weatherPoints": [
@@ -50,28 +50,28 @@
   ],
   "terrain": {
     "trails": 23,
-    "lifts": null,
+    "lifts": 9,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 29,
+    "intermediatePct": 35,
+    "advancedPct": 36,
     "terrainParks": null,
     "expertPct": null,
-    "pisteKm": 34.4,
+    "pisteKm": 30,
     "liftsByType": {
       "gondolas": 1,
       "cableCars": null,
-      "chairlifts": null,
+      "chairlifts": 8,
       "surfaceLifts": null,
       "other": null
     },
-    "liftCapacityPerHour": null,
+    "liftCapacityPerHour": 15757,
     "season": null,
     "source": {
       "url": "https://www.kiroro.co.jp/guide_map/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 23 courses (6 beginner, 8 intermediate, 9 advanced), 34.4 km of pistes, '10 lifts and a 3,300 m gondola' — unclear whether the gondola is included in the 10, so the total is left unknown. Courses sit on Mt. Asari and Mt. Nagamine"
+      "checkedOn": "2026-10-03",
+      "note": "Official trail-map page (via search): 23 runs on Mt. Asari and Mt. Nagamine; 5 high-speed hooded lifts + 3 pair lifts + the 3,300 m Kiroro Gondola (= 9). skiresort.info: 30 km of slopes (easy 8.6 km / 29%, intermediate 10.6 km / 35%, difficult 10.8 km / 36% — split by km), 10 lifts, 15,757 people/h"
     }
   },
   "features": {
@@ -96,20 +96,25 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Scheduled to open 28 Nov 2026 (snow permitting).",
+      "text": "2026-27 season scheduled from Sat 28 Nov 2026 (season-pass validity start; early-season ticket period 28 Nov – 11 Dec).",
       "announcedOn": null,
       "source": {
-        "url": "https://japanskiexperience.com/blog/japan-ski-resort-opening-dates/",
+        "url": "https://www.kiroro.co.jp/lift_price/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Japan 2026-27 opening-date articles. Confirm on kiroro.co.jp"
+        "checkedOn": "2026-10-03",
+        "note": "kiroro.co.jp 2026-27 lift-ticket and season-pass pages via search"
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-05-05",
+      "text": "Scheduled to run to 5 May 2027 (season-pass validity \"to 5 May 2027 (scheduled)\"; spring ticket period 12 Apr – 5 May).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.kiroro.co.jp/news/2026-27-seasonpasssaleseb/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official 2026-27 season-pass announcement via search"
+      }
     },
     "history": [
       {
@@ -124,14 +129,45 @@
         }
       }
     ],
-    "typicalText": "Late November into spring (2026-27 high season 12 Dec – 11 Apr; closing date not captured)",
+    "typicalText": "Late November to early May (2026-27 schedule: 28 Nov 2026 – 5 May 2027; high season 12 Dec – 11 Apr)",
     "notes": "2026-27 pricing seasons: early season before 12 Dec 2026, high season 12 Dec 2026 – 11 Apr 2027, then spring season."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Main lifts (Nagamine No.1 Express, Center Express)",
+      "days": null,
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": "2025-26",
+      "note": "2025-26 high season (13 Dec 2025 – 5 Apr 2026): 09:00–15:30 until 13 Feb, to 16:00 from 14 Feb; Gateway Express from 08:30. 2026-27 hours not yet published.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/operating_hours/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official \"25-26 Operating Hours\" page via search"
+      }
+    },
+    {
+      "activity": "night-skiing",
+      "label": "Night operation (Center Express)",
+      "days": null,
+      "opens": null,
+      "closes": "19:00",
+      "season": "2025-26",
+      "note": "Center Express ran to 19:00 in the 2025-26 high season.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/operating_hours/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official \"25-26 Operating Hours\" page via search"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day pass (adult), high season",
+      "item": "1 Day Pass — High season (adult)",
       "category": "adult",
       "amount": 9200,
       "amountMax": null,
@@ -139,15 +175,141 @@
       "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "High season 12 Dec 2026 – 11 Apr 2027. Early and spring season ¥5,800.",
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-11",
+      "includesTax": true,
+      "note": "High season 12 Dec 2026 – 11 Apr 2027.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; attribution between the official price page and third-party guides is approximate"
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-ticket page (via search); tax included"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Pass — Early/spring season (adult)",
+      "category": "adult",
+      "amount": 5800,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": true,
+      "note": "Early season 28 Nov – 11 Dec 2026; spring season 12 Apr – 5 May 2027.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-ticket page (via search); tax included"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Pass — High season (youth 13–18)",
+      "category": "youth",
+      "amount": 8000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-11",
+      "includesTax": true,
+      "note": "Early/spring ¥5,400. Seniors 65+ same price.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-ticket page (via search); tax included"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Pass — High season (senior 65+)",
+      "category": "senior",
+      "amount": 8000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-11",
+      "includesTax": true,
+      "note": "Early/spring ¥5,400.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-ticket page (via search); tax included"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day Pass — High season (child 6–12)",
+      "category": "child",
+      "amount": 5500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-11",
+      "includesTax": true,
+      "note": "Early/spring ¥3,800.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-ticket page (via search); tax included"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard gear set, regular model, 1 day (adult)",
+      "category": "adult",
+      "amount": 9500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Until closing time. Season year not stated in the source summary.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/rental_price/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official rental-price page via search"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Private lesson, PM 2 hours (1–4 people) — International Ski & Snowboard Academy",
+      "category": null,
+      "amount": 49000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "AM 2 hours ¥55,000; full day (4 hours) ¥80,000. Lift pass and rental not included. Season year not stated; group-lesson prices not found.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/ski_international_lesson/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official international ski school page via search"
       }
     }
   ],
@@ -156,11 +318,11 @@
     "trailMap": "https://www.kiroro.co.jp/guide_map/",
     "interactiveMap": null,
     "snowReport": "https://www.kiroro.co.jp/dashboard/",
-    "hours": null,
+    "hours": "https://www.kiroro.co.jp/operating_hours/",
     "tickets": "https://www.kiroro.co.jp/lift_price/",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://www.kiroro.co.jp/ski_international_lesson/",
+    "rentals": "https://www.kiroro.co.jp/rental_price/",
     "webcams": "https://www.kiroro.co.jp/livecamera/",
     "parking": null,
     "roadInfo": null,
@@ -205,19 +367,23 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.kiroro.co.jp/dashboard/",
+    "format": "html",
+    "notes": "Official \"Kiroro Snow Report, Weather Forecast & Lift Status\" dashboard. Existence confirmed via search; page not fetched (egress blocked)."
+  },
   "photo": null,
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Total lift count (listed as '10 lifts and a gondola') and chairlift count; hourly capacity.",
-      "2026-27 closing date.",
-      "Operator/ownership (not confirmed in this pass).",
-      "Actual 2024-25 and 2025-26 opening and closing dates.",
-      "Pass access: not on the Ikon or Epic rosters in the shared notes (Mountain Collective etc. not researched)."
+      "2026-27 lift operating hours (only 2025-26 published).",
+      "Operator/ownership not confirmed.",
+      "Group-lesson price; season year of rental and lesson prices."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Terrain, elevations and the 2026-27 high-season price come from search summaries (official kiroro.co.jp pages and third-party guides). The opening date is from a third-party opening-date article. Coordinates and airport time are Piste reference estimates."
+    "conflicts": [
+      "Lift count: official trail map lists 8 chairlifts + 1 gondola (9); skiresort.info says 10. Piste length: skiresort.info 30 km vs an earlier summary of 34.4 km."
+    ],
+    "confidenceNotes": "Prices, season dates, hours and links from official kiroro.co.jp pages (search summaries; pages could not be fetched directly). Slope km, difficulty split and capacity from skiresort.info. Coordinates and airport time are Piste reference estimates."
   }
 }

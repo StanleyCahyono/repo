@@ -21,13 +21,13 @@
   },
   "elevation": {
     "baseM": 2600,
-    "summitM": 3216,
-    "verticalM": 616,
+    "summitM": 3374,
+    "verticalM": 774,
     "source": {
-      "url": "https://www.alta.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Lift-served figures: base 8,530 ft, top of lift-served terrain about 10,550 ft, vertical about 2,020 ft. Some sources quote the hike-to Mt. Baldy summit (about 11,068 ft) and a vertical near 2,538 ft instead — check which basis the official stats page uses"
+      "url": "https://www.alta.com/about",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Official About page (search summary): base elevation 8,530 ft and 2,538 vertical ft of skiing; summit = base + vertical = 11,068 ft, derived (the search summary itself stated no summit figure; Mt. Baldy hike-to basis; top of lift-served terrain is lower, Supreme ~10,595 ft). Converted to metres. Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
     }
   },
   "weatherPoints": [
@@ -50,7 +50,7 @@
   ],
   "terrain": {
     "trails": 118,
-    "lifts": 8,
+    "lifts": 6,
     "skiableAcres": 2614,
     "beginnerPct": 15,
     "intermediatePct": 30,
@@ -58,14 +58,20 @@
     "terrainParks": null,
     "expertPct": null,
     "pisteKm": null,
-    "liftsByType": null,
+    "liftsByType": {
+      "gondolas": 0,
+      "cableCars": 0,
+      "chairlifts": 5,
+      "surfaceLifts": 1,
+      "other": null
+    },
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.onthesnow.com/utah/alta-ski-area/ski-resort",
+      "url": "https://www.alta.com/about",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary (results: OnTheSnow overview, alta.com/about, Ski Utah family guide, Utah.com): 2,614 skiable acres, 118 trails, 8 lifts, vertical 2,538 ft, ability split 15% beginner / 30% intermediate / 55% advanced, no night skiing. The same summary also said \"5 chairlifts and 2 surface conveyers\", which does not add up to 8, so lifts by type are left unknown. Season of the figures not stated."
+      "checkedOn": "2026-10-03",
+      "note": "Official About page (search summary): 2,614 skiable acres, 2,538 vertical ft, terrain \"accessed by five lifts and a transfer tow\" (Collins, Wildcat, Sugarloaf, Supreme, Sunnyside + the Wildcat–Albion transfer tow; carpets not counted). Trails (118) and the 15/30/55 ability split are OnTheSnow figures (https://www.onthesnow.com/utah/alta-ski-area/ski-resort). Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
     }
   },
   "features": {
@@ -90,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-20",
-      "text": "Planned opening Nov. 20, 2026 (conditions permitting)",
+      "text": "Opening day Nov. 20, 2026 (Alta's 89th season), conditions permitting; lifts 9:15am–4:30pm, no parking reservations that day",
       "announcedOn": null,
       "source": {
-        "url": "https://www.sltrib.com/news/environment/2026/09/20/utah-ski-resort-2026-27-opening/",
+        "url": "https://www.skiutah.com/blog/authors/yeti/utah-ski-resort-opening-dates/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summaries of 2026-27 opening-date roundups (Salt Lake Tribune, 20 Sep 2026; Powder's Utah and Ikon opening-date articles; Unofficial Networks, 17 Sep 2026) agree on this date. Conditions permitting — confirm on the resort site."
+        "checkedOn": "2026-10-03",
+        "note": "Ski Utah 2026–27 opening-dates list and Salt Lake Tribune (20 Sep 2026) roundup (search summaries). Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
       }
     },
     "announcedClosing": {
@@ -119,9 +125,25 @@
       }
     ],
     "typicalText": null,
-    "notes": "2026-27: planned opening Nov. 20, 2026 per Utah and Ikon opening-date roundups (search summaries, 2026-09-30). No 2026-27 closing date was found (a summary said Alta, Snowbird and Park City closing dates are still to be announced). History holds the Ski Utah-listed 2025-26 dates."
+    "notes": "2026-27: opening day Nov. 20, 2026 (Ski Utah list, search summary 2026-10-03). No 2026-27 closing date announced as of 2026-10-03. History holds the Ski Utah-listed 2025-26 dates."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (Collins and Sunnyside)",
+      "days": null,
+      "opens": "09:15",
+      "closes": "16:30",
+      "season": null,
+      "note": "Other lifts close earlier: Sugarloaf and Wildcat 4:00pm, Supreme 3:30pm. Opening day (Nov. 20, 2026) also listed 9:15am–4:30pm.",
+      "source": {
+        "url": "https://www.alta.com/about",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official About / lift pages (search summary) list lift hours: Collins 9:15–4:30, Sunnyside 9:15–4:30, Sugarloaf 9:15–4, Wildcat 9:15–4, Supreme 9:15–3:30. Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -130,18 +152,81 @@
       "amount": 199,
       "amountMax": null,
       "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Latest published rate (2025-26); same weekday and weekend. Alta sells peak/off-peak dated tickets online — best price when bought 4+ days ahead, full price within 4 days. 2026-27 day-ticket prices not yet published. One 2026-10-03 summary called $199 the 2026-27 rate, but the OnTheSnow table it came from is headed 2025-26, so 2025-26 is kept.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/alta-ski-area/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow lift-ticket page (search summary): \"Daily Lift Tickets for 2025-2026 Season … Adult (13+): $199.00\", weekday = weekend. Advance-purchase rule from https://www.alta.com/lift-ticket-faqs."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 1-day lift ticket (12 & under)",
+      "category": "child",
+      "amount": 105,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Latest published rate (2025-26); same weekday and weekend.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/alta-ski-area/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow lift-ticket page (search summary): \"Child (0-12): $105.00\" for 2025-26."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Adult ski package (skis, boots, poles), full day",
+      "category": "adult",
+      "amount": 49,
+      "amountMax": 79,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Sport package $49; Performance $59; Demo $79 (half day $35/$45/$65). Junior sport package $30/day. Helmets on request.",
+      "source": {
+        "url": "https://shop.alta.com/rentals",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Alta rentals shop (search summary, 2025-26 rental rates). Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult beginner group lesson (2.5 hours)",
+      "category": "adult",
+      "amount": 160,
+      "amountMax": null,
+      "currency": "USD",
       "season": null,
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Undated figure: another search summary (SnowBrains 2026-27 lift-ticket prices) says Alta releases 2026-27 ticket prices in the fall, so $199 is most likely the 2025-26 rate. Confirm on alta.com.",
+      "note": "Single lesson $160; book of three $390. Afternoon class 1:30–4pm. Lift ticket not stated as included. Kids beginner all-day adventure (ages 4–12) $255.",
       "source": {
-        "url": "https://www.onthesnow.com/utah/alta-ski-area/lift-tickets",
+        "url": "https://www.alta.com/ski-school/group-lessons/beginner",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary gave \"Adult 13+: $199.00\" without a season."
+        "checkedOn": "2026-10-03",
+        "note": "Alta Ski School beginner group lessons page (search summary); season of the rate not stated. Page fetching was blocked (egress), so this comes from a web-search result summary, not a direct read of the page."
       }
     }
   ],
@@ -151,10 +236,10 @@
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.alta.com/lift-ticket-faqs",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://www.alta.com/ski-school/group-lessons/beginner",
+    "rentals": "https://shop.alta.com/rentals",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://udottraffic.utah.gov/",
@@ -226,32 +311,19 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:2015-09-29_12_50_27_Mountain_slopes_near_the_Alta_Ski_Area_in_Little_Cottonwood_Canyon,_Utah.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (not announced as of 2026-09-30) and that Nov. 20, 2026 stays the planned opening.",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days shared with Snowbird, Mountain Collective 2 days. Not found: Alta's Ikon Base allowance (Snowbird's is \"5 total days\" with blackouts — possibly shared) and any Ikon reservation rule.",
-      "2026-27 adult day-ticket prices (a summary says Alta publishes them in the fall); only an undated $199 adult (13+) figure is on file. Also the Alta-Bird day ticket and season-pass prices.",
-      "Capture the actual 2025-26 opening and closing dates (only Ski Utah-listed dates are on file) and 2024-25 dates.",
-      "Confirm the remaining official deep links on alta.com (snow report, trail map, tickets, lessons, rentals, webcams, parking); the lift and terrain status page is recorded.",
-      "Lift count and types: a summary says 8 lifts but also \"5 chairlifts and 2 surface conveyers\"; confirm, plus terrain parks (believed none), snowmaking and childcare.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Record an official source for the skiers-only policy (reference: Alta does not allow snowboards).",
-      "Confirm the operator (reference: Alta Ski Lifts Company, operating largely on Uinta-Wasatch-Cache National Forest land under a Forest Service permit).",
-      "Elevation basis: Piste stores the lift-served figures (base ~8,530 ft, top ~10,550 ft, ~2,020 ft vertical); some sources quote Mt. Baldy (~11,068 ft) and ~2,538 ft vertical. Record the official basis and precise Wildcat, Albion and upper-mountain coordinates (weather points are approximate).",
-      "Learning setup: confirm the Albion-side beginner lifts (reference: Sunnyside and Albion), any carpet, the Wildcat–Albion transfer tow, the current ski-school name (historically Alf Engen Ski School) and beginner lesson packages. Recent lift replacements may have changed lift names.",
-      "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives), price, booking platform and official URL.",
-      "Road: SR-210 (Little Cottonwood Canyon) is a UDOT road. Record the Cottonwood Canyons status page, 2026-27 traction-law rules, avalanche-control closure practice (often until mid-morning after storms), Town of Alta interlodge notices, and any tolling or bus changes from UDOT's Little Cottonwood plan.",
-      "UTA ski bus: confirm 2026-27 Little Cottonwood routes (lead: route numbers 994/953 in past seasons), schedule, fares, park-and-ride lots and whether any Alta pass includes rides.",
-      "Snow report: record the official snow-report URL and format (lead: HTML page on alta.com) so the unverified Alta report parser can be checked; record webcam URLs.",
-      "Lodging: confirm the slopeside lodges in the Town of Alta (leads: Alta Lodge, Rustler Lodge, Alta Peruvian Lodge, Snowpine Lodge, Goldminer's Daughter).",
-      "Confirm uphill-travel and backcountry-gate policy.",
-      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+      "2026-27 day-ticket prices (not yet published; 2025-26 rates on file) and 2026-27 rental and lesson rates.",
+      "2026-27 closing date (not announced as of 2026-10-03).",
+      "Official snow-report page URL could not be confirmed (page fetching blocked); the lift and terrain status page is linked.",
+      "Ticket-office, rental and lesson hours; 2026-27 parking-reservation rules."
     ],
     "conflicts": [
-      "Vertical: the OnTheSnow-based summary gives 2,538 ft (hike-to Mt. Baldy basis), while Piste stores the lift-served ~2,020 ft (616 m) from reference data. Elevation left unchanged pending the official basis.",
-      "Lifts: summary states 8 lifts but lists 5 chairlifts + 2 surface conveyors (7). Lifts by type left unknown."
+      "Trail count: OnTheSnow lists 118 trails; Alta describes \"100-plus runs\".",
+      "Lifts: the OnTheSnow overview (search summary, 2026-09-30) gave 8 lifts (\"5 chairlifts and 2 surface conveyers\"); Alta's About page (search summary) describes five lifts and a transfer tow. Stored: 6 (carpets not counted).",
+      "Day ticket: one 2026-10-03 search summary (results from OnTheSnow, Snowstash, Alta Lodge and shop.alta.com) gave \"$129 off-peak / $149 peak\" for ages 18–79 and \"$89–$125\" for 2025-26. These match neither Alta's age bands (13+ / 12 & under) nor OnTheSnow's 2025-26 table ($199), so they are not stored."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, 2025-26 history, terrain stats, an undated day-ticket price and the lift-status link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "Refreshed 2026-10-03 by web search (page fetching blocked by the network proxy, so every fact is a search-result summary with the most specific URL recorded). Elevation now uses the official About-page basis (base 8,530 ft, 2,538 ft vertical). Verification pass 2026-10-03: WebFetch and WebSearch were both unavailable (egress proxy block; session search budget spent), so no fact could be re-read at its source. Each 2026-10-03 fact was instead checked against the recorded search-result text and the earlier 2026-09-30 research; values, currencies, seasons and categories match those results except where a note or conflict says otherwise."
   }
 }

@@ -99,10 +99,10 @@
       "text": "Winter season 26 Nov 2026 – 2 May 2027",
       "announcedOn": null,
       "source": {
-        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions. The Ischgl-specific search gave the same dates (Silvrettaseilbahn winter news page)."
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ischgl.com operating-hours page: winter season 26.11.2026 – 02.05.2027 (also on the Silvretta Ski Pass price page)."
       }
     },
     "announcedClosing": {
@@ -110,37 +110,144 @@
       "text": "Season end 2 May 2027",
       "announcedOn": null,
       "source": {
-        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions."
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ischgl.com operating-hours page: winter season 26.11.2026 – 02.05.2027 (also on the Silvretta Ski Pass price page)."
       }
     },
     "history": [],
     "typicalText": null,
-    "notes": "2026-27 dates from search summaries (26 Nov 2026 – 2 May 2027). Past seasons' dates were not captured, so no estimated window is derived."
+    "notes": "2026-27 season Nov 26, 2026 – May 2, 2027 (official operating-hours page, via search summary). Past seasons' dates were not captured, so no estimated window is derived."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Silvrettabahn, Fimbabahn and Pardatschgratbahn (Nov 26 – Mar 27)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": "Last ascent 16:00, last descent 17:00. Upper lifts open later and close earlier (e.g. Flimjochbahn and Gratbahn 09:00–16:00, Gambenbahn 09:30–16:00, Höllbodenbahn 09:00–16:30).",
+      "source": {
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official operating-hours page, winter 2026/27."
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Silvrettabahn, Fimbabahn and Pardatschgratbahn (Mar 28 – May 2)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "17:30",
+      "season": "2026-27",
+      "note": "Last ascent 16:30, last descent 17:30.",
+      "source": {
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official operating-hours page, winter 2026/27."
+      }
+    },
+    {
+      "activity": "other",
+      "label": "Evening toboggan run (Silvrettabahn)",
+      "days": [
+        1,
+        4
+      ],
+      "opens": "19:00",
+      "closes": "22:00",
+      "season": "2026-27",
+      "note": "Mondays and Thursdays when weather and snow allow.",
+      "source": {
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official operating-hours page, winter 2026/27."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Silvretta Ski Pass, 1 day (Ischgl/Samnaun)",
+      "item": "Silvretta Ski Pass 1 day, adult (Ischgl/Samnaun, Galtür, Kappl, See)",
       "category": "adult",
-      "amount": 83.0,
+      "amount": 83,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": null,
+      "dayType": "any",
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
+      "appliesFrom": "2026-11-26",
+      "appliesTo": "2027-05-02",
       "includesTax": null,
-      "note": "Search summary: 1-day Silvretta Ski Pass EUR 83.00 for adults and seniors (children EUR 51.00) for 2026/27. Whether the price varies by season period was not stated.",
+      "note": "One published rate for the whole 2026/27 season; the operator reserves the right to change prices daily, especially during events. Afternoon pass from 12:30 EUR 72; trial pass from 14:00 EUR 44.",
       "source": {
         "url": "https://www.ischgl.com/en/winter/operating-times-prices/skipass-prices-silvretta",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Silvretta Ski Pass prices page, winter 2026/27 (valid Nov 26, 2026 – May 2, 2027): 1 day adult EUR 83.00, senior (65+) EUR 83.00, child (8 to under 17) EUR 51.00; afternoon from 12:30 EUR 72 / 43; trial from 14:00 EUR 44 / 26. Valid at 76 facilities in Ischgl/Samnaun, Galtür, Kappl and See. The operator reserves the right to change prices, also daily, especially during events."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Silvretta Ski Pass 1 day, senior (65+)",
+      "category": "senior",
+      "amount": 83,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-26",
+      "appliesTo": "2027-05-02",
+      "includesTax": null,
+      "note": "Same rate as adults.",
+      "source": {
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices/skipass-prices-silvretta",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Silvretta Ski Pass prices page, winter 2026/27 (valid Nov 26, 2026 – May 2, 2027): 1 day adult EUR 83.00, senior (65+) EUR 83.00, child (8 to under 17) EUR 51.00; afternoon from 12:30 EUR 72 / 43; trial from 14:00 EUR 44 / 26. Valid at 76 facilities in Ischgl/Samnaun, Galtür, Kappl and See. The operator reserves the right to change prices, also daily, especially during events."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Silvretta Ski Pass 1 day, child (8 to under 17)",
+      "category": "child",
+      "amount": 51,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-26",
+      "appliesTo": "2027-05-02",
+      "includesTax": null,
+      "note": "Children under 8 accompanied by a parent ski free. Afternoon from 12:30 EUR 43; trial from 14:00 EUR 26.",
+      "source": {
+        "url": "https://www.ischgl.com/en/winter/operating-times-prices/skipass-prices-silvretta",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official Silvretta Ski Pass prices page, winter 2026/27 (valid Nov 26, 2026 – May 2, 2027): 1 day adult EUR 83.00, senior (65+) EUR 83.00, child (8 to under 17) EUR 51.00; afternoon from 12:30 EUR 72 / 43; trial from 14:00 EUR 44 / 26. Valid at 76 facilities in Ischgl/Samnaun, Galtür, Kappl and See. The operator reserves the right to change prices, also daily, especially during events."
       }
     }
   ],
@@ -162,7 +269,7 @@
     "tourism": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/ischgl-ski-resort",
     "avalanche": "https://avalanche.report/",
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://www.ischgl.com/en/silvrettaseilbahnag/winter/slopes-facilities"
   },
   "moreLinks": [
     {
@@ -239,7 +346,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.ischgl.com/en/silvrettaseilbahnag/winter/slopes-facilities",
+    "format": "html",
+    "notes": "Official \"Open lifts & facilities\" page of Silvrettaseilbahn AG (lift and slope status). A separate official snow-depth page was not confirmed. URL from search results; not fetched directly (page fetches blocked)."
+  },
   "photo": {
     "src": "asset:photo-ischgl.webp",
     "alt": "Ischgl: Kuhstall Apres-ski bar - the most popular apres-ski location in Ischgl",
@@ -248,18 +359,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kuhstall_Apres-ski_bar.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Find the official snow report and live lift-status pages (not found in this pass).",
-      "Confirm whether the EUR 83 day pass is a single price all season or varies by period, and the Ikon Base blackout dates that apply at Ischgl.",
-      "Confirm lift total (45 vs 46) and whether the Samnaun double-deck cableway is counted among the 6 gondolas.",
-      "Blue/red/black split by km (only run counts were found).",
-      "Past opening and closing dates (2024-25, 2025-26) for an estimated window."
+      "Official snow-report (snow depth) page URL not confirmed; links.snowReport left empty.",
+      "Rental package and group-lesson prices.",
+      "Lift total (45 vs 46) and blue/red/black split by km.",
+      "Past opening and closing dates (2024-25, 2025-26)."
     ],
     "conflicts": [
       "Lift count: the Ischgl search summary gives 45 lifts (6 gondolas, 25 chairlifts, 9 T-bars, 5 conveyors) and also '46 modern lifts and cable cars' with about 97,000 persons/hour."
     ],
-    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries (not page reads) of ischgl.com and roundup pages. Coordinates, the operator name, the weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "Refreshed 2026-10-03 by web search only (page fetches blocked by the network proxy; every fact is search-summary). The web-search budget ran out during this resort. Coordinates, operator and weather points remain Piste reference data. Adversarial re-check 2026-10-03: WebFetch and web search were both unavailable, so no cited page could be reopened. Adult/senior EUR 83, child EUR 51 (2026-27) and the Nov 26, 2026 – May 2, 2027 dates were also found by the separate 2026-09-30 search. The Mar 28 switch to longer lift hours matches the 2027 daylight-saving change, which fits the 2026-27 label. Hours and the toboggan run are single-source."
   }
 }

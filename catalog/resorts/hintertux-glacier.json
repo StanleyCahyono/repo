@@ -7,7 +7,7 @@
   "stateProvince": "Tyrol",
   "locality": "Hintertux (Tux)",
   "timezone": "Europe/Vienna",
-  "operator": null,
+  "operator": "Zillertaler Gletscherbahn GmbH & Co KG",
   "priority": 0,
   "location": {
     "lat": 47.1115,
@@ -113,29 +113,116 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "The glacier closed in mid-August 2026 and is no longer open year-round (shared notes). No 2026-27 closing date was found."
+    "notes": "Autumn ski season opened Oct 2, 2026 (official, via search summary). The glacier is no longer open year-round (closed mid-August 2026). Winter Zillertal 3000 tariff runs Dec 4, 2026 – Apr 11, 2027; the glacier's own 2026-27 closing date is unclear (sources give May 7, 2027 or later)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Glacier lifts (daily)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:15",
+      "closes": "16:30",
+      "season": null,
+      "note": "Last descent from the Gefrorene Wand (3,250 m) at 16:00. The listing does not say which season these times apply to; confirm for winter 2026-27.",
+      "source": {
+        "url": "https://www.tyrol.com/activities/sport/skiing/ski-resorts/hintertux-glacier-ski-resort",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary (Tyrol tourism / operator listings): Hintertux Glacier lifts 08:15–16:30, last descent from Gefrorene Wand 16:00."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Hintertux Glacier 1-day pass",
+      "item": "Ski- & Gletscherwelt Zillertal 3000 1-day pass, adult (winter)",
       "category": "adult",
-      "amount": 82.0,
+      "amount": 82,
       "amountMax": null,
       "currency": "EUR",
-      "season": null,
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-04",
+      "appliesTo": "2027-04-11",
+      "includesTax": null,
+      "note": "Winter tariff valid Dec 4, 2026 – Apr 11, 2027 on the glacier and the wider Zillertal 3000 area (Mayrhofen included). Includes EUR 2 chip-card deposit. Later-start tickets: from 11:00 EUR 74, from 11:45 EUR 61.50, from 14:00 EUR 41. Autumn glacier-only tickets are priced separately.",
+      "source": {
+        "url": "https://www.hintertuxergletscher.at/en/tickets-rates/tickets-rates/rates-hintertux-glacier/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official rates page, winter 2026/27: 1-day pass from 08:00 adult EUR 82.00, youth (born 2008–2011) EUR 65.50, child (born 2012–2020) EUR 37.00; valid Dec 4, 2026 – Apr 11, 2027 and also in the Ski- & Gletscherwelt Zillertal 3000; prices include a EUR 2 chip-card deposit; children born after Jan 1, 2021 ski free with an adult."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski- & Gletscherwelt Zillertal 3000 1-day pass, youth (born 2008–2011)",
+      "category": "youth",
+      "amount": 65.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-04",
+      "appliesTo": "2027-04-11",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.hintertuxergletscher.at/en/tickets-rates/tickets-rates/rates-hintertux-glacier/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official rates page, winter 2026/27: 1-day pass from 08:00 adult EUR 82.00, youth (born 2008–2011) EUR 65.50, child (born 2012–2020) EUR 37.00; valid Dec 4, 2026 – Apr 11, 2027 and also in the Ski- & Gletscherwelt Zillertal 3000; prices include a EUR 2 chip-card deposit; children born after Jan 1, 2021 ski free with an adult."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski- & Gletscherwelt Zillertal 3000 1-day pass, child (born 2012–2020)",
+      "category": "child",
+      "amount": 37,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-04",
+      "appliesTo": "2027-04-11",
+      "includesTax": null,
+      "note": "Children born after Jan 1, 2021 ski free with an adult (ID needed).",
+      "source": {
+        "url": "https://www.hintertuxergletscher.at/en/tickets-rates/tickets-rates/rates-hintertux-glacier/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official rates page, winter 2026/27: 1-day pass from 08:00 adult EUR 82.00, youth (born 2008–2011) EUR 65.50, child (born 2012–2020) EUR 37.00; valid Dec 4, 2026 – Apr 11, 2027 and also in the Ski- & Gletscherwelt Zillertal 3000; prices include a EUR 2 chip-card deposit; children born after Jan 1, 2021 ski free with an adult."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult group ski lesson, full day (Skischule Tuxertal)",
+      "category": "adult",
+      "amount": 87,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2024-25",
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary listed a 1-day pass at EUR 82 under 2026/27, but the season and the ticket's scope (glacier only or the wider Ski- und Gletscherwelt Zillertal 3000) were not confirmed.",
+      "note": "Full day 10:30–12:00 and 13:30–15:30, minimum 5 participants. Latest rate seen is from winter 2024/25.",
       "source": {
-        "url": "https://www.hintertuxergletscher.at/en/tickets-rates/tickets-rates/rates-hintertux-glacier/",
+        "url": "https://www.skischule-tuxertal.at/en/rates/winter.html",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Skischule Tuxertal winter rates (shown as 2024/25)."
       }
     }
   ],
@@ -147,7 +234,7 @@
     "hours": null,
     "tickets": "https://www.hintertuxergletscher.at/en/tickets-rates/tickets-rates/rates-hintertux-glacier/",
     "seasonPass": null,
-    "lessons": null,
+    "lessons": "https://www.skischule-tuxertal.at/en/rates/winter.html",
     "rentals": null,
     "webcams": null,
     "parking": null,
@@ -239,14 +326,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zillertal3.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 day-ticket price and scope (EUR 82 found without a clear season label).",
-      "Confirm the hourly lift capacity (94,000 seems high for 21 lifts).",
-      "2026-27 closing date; official snow report and live lift-status pages; the operating company name."
+      "2026-27 glacier closing date: search summaries conflict (May 7, 2027 vs later); not recorded.",
+      "Autumn 2026 glacier-only day-ticket price (a EUR 68 adult rate appeared, but with 2025-26 age bands) — not recorded.",
+      "Hourly lift capacity (94,000 seems high for 21 lifts) and lift count (20 vs 21).",
+      "A 2026-27 rental package and lesson price.",
+      "Official snow-report and lift-status pages on hintertuxergletscher.at. Search found an Intermaps-hosted Zillertal 3000 report (https://sdds4.intermaps.com/tux/v2/skiresort_report_tux.aspx?lang=en). It is not on the resort's own site and could not be loaded, so it is not linked."
     ],
     "conflicts": [],
-    "confidenceNotes": "Terrain, lift and date facts come from web-search summaries of hintertuxergletscher.at, Wikipedia and skiresort.info; the day price is weakly labelled. Coordinates, weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "Refreshed 2026-10-03 by web search only (page fetches were blocked by the network proxy; every fact is search-summary). Coordinates, weather points and features remain Piste reference data. Adversarial re-check 2026-10-03: WebFetch and web search were both unavailable, so no cited page could be reopened. The adult EUR 82 winter pass and its Dec 4, 2026 – Apr 11, 2027 validity match the separate 2026-09-30 Mayrhofen search (Zillertal 3000, EUR 82 high season, season Dec 4 – Apr 11). The youth and child birth years (2008–2011, 2012–2020) fit 2026-27 age bands. Changed: lift-hours season label removed. Removed: the Intermaps snow-report link."
   }
 }

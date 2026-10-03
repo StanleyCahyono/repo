@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Haute-Savoie)",
   "locality": "Megève (Mont d'Arbois, Rochebrune, Le Jaillet, Cote 2000)",
   "timezone": "Europe/Paris",
-  "operator": "Megève ski-area company (forfait.megeve.com) — reference, confirm",
+  "operator": "Société des Remontées Mécaniques de Megève (Megève Domaine Skiable)",
   "priority": 0,
   "location": {
     "lat": 45.8567,
@@ -21,13 +21,13 @@
   },
   "elevation": {
     "baseM": 1113,
-    "summitM": 2353,
-    "verticalM": 1240,
+    "summitM": 2350,
+    "verticalM": 1237,
     "source": {
-      "url": "https://www.megeve.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Reference: village about 1,113 m; top of the Mont Joly lifts about 2,353 m; vertical derived. The wider Évasion Mont-Blanc area starts lower (Saint-Gervais side). Not found in this session's searches"
+      "url": "https://www.powderhounds.com/Europe/France/Megeve.aspx",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summary of Megève guides (Powderhounds, OVO Network): lift-served area from 1,113 m to 2,350 m; vertical derived. The wider Évasion Mont-Blanc area starts lower on the Saint-Gervais side."
     }
   },
   "weatherPoints": [
@@ -64,8 +64,8 @@
     "source": {
       "url": "https://www.ovonetwork.com/blog/guide-megeve-ski-area/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Figures describe Évasion Mont-Blanc, the main pass sold in Megève. Search summary of Megève guides and OnTheSnow: 400 km of slopes, 227–228 runs, 84 lifts; terrain split 19% beginner, 28% intermediate, 39% advanced, 15% expert (OnTheSnow). A by-type list in the same summary (36 chairlifts, 10 gondolas, 105 drag lifts = 151) has a different, wider scope and is not used. Individual lift capacities: Bettex-Arbois gondola 2,400/h, Chamois gondola 1,750/h, new Radaz chairlift (2026) 2,700/h, L'Alpette chairlift 3,000/h. Les Portes du Mont-Blanc (Combloux, Cordon, Le Jaillet, La Giettaz): about 100 km, 23 lifts, 63 pistes."
+      "checkedOn": "2026-10-03",
+      "note": "Figures describe Évasion Mont-Blanc, the main pass sold in Megève. Search summary of Megève guides and OnTheSnow: 400 km of slopes, 227–228 runs, 84 lifts; terrain split 19% beginner, 28% intermediate, 39% advanced, 15% expert (OnTheSnow). A by-type list in the same summary (36 chairlifts, 10 gondolas, 105 drag lifts = 151) has a different, wider scope and is not used. Individual lift capacities: Bettex-Arbois gondola 2,400/h, Chamois gondola 1,750/h, new Radaz chairlift (2026) 2,700/h, L'Alpette chairlift 3,000/h. Les Portes du Mont-Blanc (Combloux, Cordon, Le Jaillet, La Giettaz): about 100 km, 23 lifts, 63 pistes. Re-checked 2026-10-03: search summaries again give 400 km, 228 runs and 84 lifts for Évasion Mont-Blanc; Megève's own lift company area (Rochebrune, Cote 2000, Mont d'Arbois, Princesse) is described elsewhere as about 65 lifts / 158 slopes / 250 km (not used)."
     }
   },
   "features": {
@@ -89,34 +89,102 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": "2026-12-12",
-      "text": "Estimated start date 12 Dec 2026 (Megève ski-area opening-information page, per search summary).",
+      "date": "2026-12-19",
+      "text": "General opening 19 Dec 2026; partial openings the weekend of 5–6 Dec 2026 and from 12 Dec 2026, snow permitting.",
       "announcedOn": null,
       "source": {
-        "url": "https://forfait.megeve.com/hiver/en/ski-area-opening-information/",
+        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries of Tourisme Haute-Savoie's 2026/2027 opening-dates list and the Megève ski-area opening-information page (https://forfait.megeve.com/hiver/en/ski-area-opening-information/)"
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-04",
+      "text": "Season to 4 Apr 2027 (Rochebrune and Mont d'Arbois sectors and general area).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries of Tourisme Haute-Savoie's 2026/2027 list and the Megève opening-information page"
+      }
     },
     "history": [],
     "typicalText": "Usually mid-December to early/mid-April (reference; confirm).",
-    "notes": "The opening date is described as an estimate. No 2026-27 closing date was found. Past seasons were not captured."
+    "notes": "Phased opening: partial weekend 5–6 Dec, partial from 12 Dec, general 19 Dec 2026; closing 4 Apr 2027 (search summaries). Past seasons were not captured."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Évasion Mont-Blanc adult 1-day ski pass",
+      "item": "Évasion Mont-Blanc adult 1-day ski pass (high season)",
       "category": "adult",
       "amount": 65,
       "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": "Adult 15–64. High season 19 Dec 2026 – 19 Mar 2027. Early/late-season (12–18 Dec 2026 and from 20 Mar 2027) adult day price conflicts between summaries (€61.50 vs a €52 promotional rate). Valid on the whole Évasion Mont-Blanc area. 4-hour adult pass €58.50.",
+      "source": {
+        "url": "https://www.ski-megeve.com/Megeve-Ski-Forfait-Pass/megeve-ski-forfait-evasion-mont-blanc-ski-pass.html",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries of the Megève ski-pass pages and a 2026/2027 Évasion Mont-Blanc price page; the official tariff PDF in results was the 2025-26 sheet. Official page: https://forfait.megeve.com/hiver/en/our-skipass/"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Évasion Mont-Blanc child 1-day ski pass (high season)",
+      "category": "child",
+      "amount": 55.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": "Child 5–14, high season (one search summary; low-season child price €52.50 in the same summary).",
+      "source": {
+        "url": "https://forfait.megeve.com/hiver/en/our-skipass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Évasion Mont-Blanc 2026-2027 day-pass prices"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Évasion Mont-Blanc senior 1-day ski pass (high season)",
+      "category": "senior",
+      "amount": 58.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": "Senior 65–79, high season (one search summary; low-season senior price €55.50 in the same summary).",
+      "source": {
+        "url": "https://forfait.megeve.com/hiver/en/our-skipass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Évasion Mont-Blanc 2026-2027 day-pass prices"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Adult ski + boots + poles rental, 1 day (Sport 2000 Rent, 4-star pack)",
+      "category": "adult",
+      "amount": 32,
+      "amountMax": 40,
       "currency": "EUR",
       "season": null,
       "dayType": "any",
@@ -124,12 +192,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary labelled it 2026-27: Évasion Mont-Blanc adult 1 day €65, 4 hours €58.50; Portes du Mont-Blanc adult 1 day €52.50, 4 hours €49.00. The official tariff sheet among the results was for 2025-26, so the season is unconfirmed.",
+      "note": "4-star pack €32/day; 5-star €36; 6-star €40 (Sport 2000 Rent Megève, per search summary; season not stated).",
       "source": {
-        "url": "https://forfait.megeve.com/hiver/en/our-skipass/",
+        "url": "https://www.sport2000rent.com/en/skirental/destinations/france/haute-savoie/megeve",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the Megève ski-pass pages and OnTheSnow's 2026/27 price page"
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Sport 2000 Rent Megève page"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "ESF Megève adult group ski lessons, 5 mornings (2h30 a day)",
+      "category": "adult",
+      "amount": 185,
+      "amountMax": 225,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€185 outside school holidays, €225 during school holidays, for 5 mornings; afternoons €185 in holidays. Lift pass and equipment not included. Season not stated in the summary.",
+      "source": {
+        "url": "https://www.megeve-ski.com/adultes/cours-collectifs-ski",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of ESF Megève group-lesson page"
       }
     }
   ],
@@ -137,7 +226,7 @@
     "official": "https://www.megeve.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.megeve-tourisme.fr/en/informations-pratiques/infos-live/enneigement/",
     "hours": null,
     "tickets": "https://forfait.megeve.com/hiver/en/home-2/",
     "seasonPass": null,
@@ -209,7 +298,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.megeve-tourisme.fr/en/informations-pratiques/infos-live/enneigement/",
+    "format": "html",
+    "notes": "Megève Tourism snow-conditions page (found by web search; page fetch blocked in this environment). Lumiplan bulletin: https://bulletin.lumiplan.pro/bulletin.php?station=megeve&region=alpes&pays=france&lang=fr"
+  },
   "photo": {
     "src": "asset:photo-megeve.webp",
     "alt": "Megève: Village @ Rochebrune @ Megève",
@@ -218,19 +311,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Village_@_Rochebrune_@_Meg%C3%A8ve_(51037436052).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Megève-only lift count, lifts by type and hourly capacity (only Évasion Mont-Blanc totals found).",
-      "Confirm the 2026-27 day prices.",
-      "2026-27 closing date and confirmation of the estimated 12 Dec opening.",
-      "Ikon Pass 2026-27 day allowance for Megève (listed as an Ikon destination; days not researched).",
-      "Confirm the opening-information page shows live lift status."
+      "Lift and ticket-office hours for 2026-27 (only one Dec 2025 week found: 09:00–16:00 at Mont d'Arbois).",
+      "Early/late-season adult day price (€61.50 vs €52 promotional in different summaries).",
+      "Official confirmation of child/senior prices and 2026-27 rental/lesson prices."
     ],
     "conflicts": [
-      "Évasion Mont-Blanc runs: 227 vs 228; by-type list (151 lifts) vs 84 lifts total.",
-      "Day price labelled 2026-27 in the summary while the official tariff PDF in the results was 2025-26."
+      "Évasion Mont-Blanc runs: 227 vs 228; by-type list (151 lifts) vs 84 lifts total."
     ],
-    "confidenceNotes": "Area totals, the estimated opening and prices come from search summaries; lift types are unknown. Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "All web facts are search summaries (page fetches were blocked in this environment). Coordinates and weather points are reference data; airport times are estimates. 2026-10-03 adversarial review: no cited page could be opened (WebFetch egress-blocked for every domain tried; web-search budget exhausted), so none of the 2026-10-03 facts has been confirmed; they remain search summaries."
   }
 }

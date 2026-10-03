@@ -24,10 +24,10 @@
     "summitM": 3353,
     "verticalM": 988,
     "source": {
-      "url": "https://www.snowbird.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 7,760 ft (lowest base), summit 11,000 ft (Hidden Peak, top of the Aerial Tram), vertical 3,240 ft. The Snowbird Center / tram plaza sits higher than the lowest base"
+      "url": "https://www.onthesnow.com/utah/snowbird/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summary (OnTheSnow overview, SkiCentral): base 7,760 ft, summit 11,000 ft (Hidden Peak), vertical 3,240 ft; converted to metres. The 2026-10-03 query contained these figures, so the summary may echo it; they also match the earlier Piste reference figures. Snowbird's own site rounds to \"3,000 vertical feet\". Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
     }
   },
   "weatherPoints": [
@@ -68,10 +68,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.onthesnow.com/utah/snowbird/ski-resort",
+      "url": "https://www.snowbird.com/lifts-trails/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary (results: OnTheSnow overview, snowbird.com, Ski Utah family guide, displays.snowbird.com): 2,500 skiable acres, 14 lifts (1 aerial tram, 10 chairlifts, 3 conveyor lifts — conveyors counted as \"other\"), 140+ trails (stored as 140), 3,000 vertical ft (rounded marketing figure; Piste stores 3,240 ft), 8% beginner / 26% intermediate / 66% advanced-expert (advanced and expert combined in advancedPct). Season not stated."
+      "checkedOn": "2026-10-03",
+      "note": "Official site (search summary): 2,500 skiable acres, 14 lifts — 1 Aerial Tram, 10 chairlifts, 3 conveyor lifts (conveyors stored as \"other\"). Trails (140+) and the 8/26/66 ability split are OnTheSnow figures. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
     }
   },
   "features": {
@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-27",
-      "text": "Planned opening Nov. 27, 2026 (conditions permitting)",
+      "text": "Opening day tentatively Nov. 27, 2026, conditions permitting",
       "announcedOn": null,
       "source": {
-        "url": "https://www.sltrib.com/news/environment/2026/09/20/utah-ski-resort-2026-27-opening/",
+        "url": "https://www.snowbird.com/activities-events/events/events-calendar/opening-day/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summaries of 2026-27 opening-date roundups (Salt Lake Tribune, 20 Sep 2026; Powder's Utah and Ikon opening-date articles; Unofficial Networks, 17 Sep 2026) agree on this date. Conditions permitting — confirm on the resort site."
+        "checkedOn": "2026-10-03",
+        "note": "Snowbird \"Opening Day 2026-27\" events-calendar page and the Ski Utah 2026–27 opening-dates list (search summaries). One summary also quoted Nov. 26 — see research conflicts. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
       }
     },
     "announcedClosing": {
@@ -125,29 +125,71 @@
       }
     ],
     "typicalText": null,
-    "notes": "2026-27: planned opening Nov. 27, 2026 per Utah and Ikon opening-date roundups (search summaries, 2026-09-30). No 2026-27 closing date was found (to be announced). History holds the Ski Utah-listed 2025-26 opening."
+    "notes": "2026-27: opening day tentatively Nov. 27, 2026 (Snowbird events page / Ski Utah, search summaries 2026-10-03). No 2026-27 closing date announced as of 2026-10-03."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (window; online about 15% less)",
+      "item": "Adult 1-day lift ticket, peak (online / window)",
       "category": "adult",
       "amount": 215,
       "amountMax": 238,
       "currency": "USD",
       "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27 peak daily ticket: $238 at the window, $215 online. The summaries call the online price a \"15% discount\", but $215 is about 10% below $238, so one of these figures may be misstated. Dated, variable pricing: non-peak days and advance online purchases (2+ weeks ahead) cost less.",
+      "source": {
+        "url": "https://snowbrains.com/2026-27-lift-ticket-prices/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowBrains \"How Much Will it Cost to Purchase a 2026-27 Peak Daily Lift Ticket?\" (search summaries): Snowbird window $238, online $215. First found 2026-09-30 in a roundup summary (SnowBrains, TownLift, Unofficial Networks). The 2026-10-03 search had $238 in the query, so it is not independent confirmation."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard rental package, per day",
+      "category": "adult",
+      "amount": 61,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27: $238 window price; buying online gives a 15% discount ($215). Day type (peak or regular) not stated. An older undated OnTheSnow listing showed $194 for a weekday adult (13-64).",
+      "note": "Standard daily rental package; 10% off when booked 10+ days ahead. Season of the rate not stated. Age category not stated.",
       "source": {
-        "url": "https://snowbrains.com/2026-27-lift-ticket-prices/",
+        "url": "https://www.snowbird.com/dining-shopping/rentals-shopping/ski-snowboard-rentals/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 lift-ticket price roundups (SnowBrains, TownLift, Unofficial Networks)."
+        "checkedOn": "2026-10-03",
+        "note": "Snowbird rentals page (search summary). Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult Beginner Special (2.5-hour group lesson + Chickadee lift access + rentals)",
+      "category": "adult",
+      "amount": 170,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2024-25",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2024-12-14",
+      "appliesTo": "2025-04-20",
+      "includesTax": null,
+      "note": "Latest rate found (2024-25 season). Includes rentals and a Chickadee-only lift ticket.",
+      "source": {
+        "url": "https://pass.snowbird.com/adult-lessons",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Snowbird adult lessons store (search summary). Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
       }
     }
   ],
@@ -155,12 +197,12 @@
     "official": "https://www.snowbird.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.snowbird.com/the-mountain/mountain-report/current-conditions-weather/",
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.snowbird.com/tickets-passes/tickets/",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://www.snowbird.com/lessons/",
+    "rentals": "https://www.snowbird.com/dining-shopping/rentals-shopping/ski-snowboard-rentals/",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://udottraffic.utah.gov/",
@@ -215,7 +257,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.snowbird.com/the-mountain/mountain-report/current-conditions-weather/",
+    "format": "html",
+    "notes": "Official Mountain Report (current conditions & weather: overnight / 24h / season snowfall, base depth, temperatures). URL seen in search results; page fetching was blocked, so the layout is not confirmed."
+  },
   "photo": {
     "src": "asset:photo-snowbird.webp",
     "alt": "Snowbird: Twin Peaks, O'Sullivan Peak and Dromedary Peak viewed from the southeast from the Snowbird ski area in the Wasatch Range of Utah, USA.",
@@ -224,30 +270,19 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_from_Snowbird_ski_slopes.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (not announced as of 2026-09-30) and that Nov. 27, 2026 stays the planned opening.",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days shared with Alta; Ikon Base \"5 total days\" with blackouts (whether shared with Alta is unclear); Mountain Collective 2 days.",
-      "Confirm 2026-27 day-ticket day types (is $238 the peak or regular window price?) and season-pass prices.",
-      "Capture the actual 2025-26 closing date and 2024-25 opening/closing dates.",
-      "Confirm official deep links on snowbird.com (snow report, trail map, tickets, lessons, rentals, webcams, parking); the lifts & trails status display is recorded.",
-      "Confirm the exact trail count (summary: 140+), whether any surface lifts exist besides the 3 conveyors, and terrain parks.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: POWDR, owner since about 2014).",
-      "Confirm precise base and Hidden Peak coordinates and the tram-plaza elevation (weather points are approximate).",
-      "Confirm Aerial Tram hours versus chairlift hours.",
-      "Learning setup: confirm Chickadee / Baby Thunder, carpets and the ski-school name and lesson products.",
-      "Parking: confirm 2026-27 rules (lead: paid reservations on weekends/holidays in recent seasons, with carpool incentives) and the official URL.",
-      "Road and avalanche context shared with Alta: SR-210 (UDOT), traction law, avalanche-control closures, interlodge orders, and any tolling or bus changes from UDOT's Little Cottonwood plan.",
-      "UTA ski bus: confirm 2026-27 routes, schedule and fares, and whether any Snowbird pass includes rides.",
-      "Lodging: confirm resort-run slopeside lodging (leads: The Cliff Lodge, The Lodge at Snowbird, The Inn, Iron Blosam).",
-      "Record the official UDOT canyon/road-status pages and 2026-27 traction-law rules; UDOT roads and the Utah Avalanche Center links on this record are homepages only."
+      "2026-27 non-peak day-ticket prices, child/senior rates, and 2026-27 rental and lesson rates.",
+      "2026-27 closing date (not announced as of 2026-10-03).",
+      "Published lift and Aerial Tram hours.",
+      "2026-27 parking-reservation rules."
     ],
     "conflicts": [
-      "Vertical: a summary quotes \"3,000 vertical feet\" (rounded); Piste keeps the reference 3,240 ft (988 m).",
-      "Day ticket: 2026-27 roundup gives $238 window / $215 online; an undated OnTheSnow listing gives $194 weekday adult."
+      "Opening day: Snowbird events page / Ski Utah give Nov. 27, 2026 (tentative); one search summary quoted Nov. 26.",
+      "Vertical: Snowbird markets \"3,000 vertical feet\"; OnTheSnow/SkiCentral give 3,240 ft (stored).",
+      "Day ticket: SnowBrains' 2026-27 roundup gives $238 window / $215 online (peak), and calls this a 15% online discount, though $215 is about 10% below $238. A separate 2026-10-03 summary of OnTheSnow gave $194 for a weekday adult (13–64) and $182 for a half day, apparently from a November 2025 listing. The $194 figure is not stored."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, 2025-26 opening, terrain stats, the 2026-27 window/online ticket price and the lift-status link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "Refreshed 2026-10-03 by web search (page fetching blocked by the network proxy, so every fact is a search-result summary with the most specific URL recorded). Verification pass 2026-10-03: WebFetch and WebSearch were both unavailable (egress proxy block; session search budget spent), so no fact could be re-read at its source. Each 2026-10-03 fact was instead checked against the recorded search-result text and the earlier 2026-09-30 research; values, currencies, seasons and categories match those results except where a note or conflict says otherwise."
   }
 }

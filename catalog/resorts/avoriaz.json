@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Haute-Savoie)",
   "locality": "Avoriaz 1800 (Morzine); Les Prodains",
   "timezone": "Europe/Paris",
-  "operator": "SERMA (Avoriaz lift company)",
+  "operator": "SERMA (Société d'Équipement des Remontées Mécaniques d'Avoriaz)",
   "priority": 0,
   "location": {
     "lat": 46.1915,
@@ -89,26 +89,79 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-11",
+      "text": "Continuous opening 11 Dec 2026; partial weekend pre-openings from 28 Nov 2026, snow permitting. Season to 18 Apr 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Tourisme Haute-Savoie 2026-27 opening-dates list (Avoriaz 11 Dec 2026 – 18 Apr 2027, pre-opening weekends from 28 Nov); consistent with avoriaz.com pre-opening page in the same results."
+      }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-18",
+      "text": "Season ends 18 Apr 2027 (also the last day of the Portes du Soleil 2026-27 rate calendar).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Tourisme Haute-Savoie 2026-27 opening-dates list"
+      }
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-12",
+        "closed": "2026-04-19",
+        "source": {
+          "url": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/ski-area-opening-hours-and-times/",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "Search summary of the official opening-hours page: 'open from December 12, 2025, to April 19, 2026'."
+        }
+      }
+    ],
     "typicalText": "Usually mid-December to mid/late April (reference; confirm).",
-    "notes": "No 2026-27 opening date was found. One search summary gave 'December 11 to April 18' labelled as the 2025-26 season; the weekdays fit 2026-27 better, so it is not used as history — treat as unconfirmed."
+    "notes": "Pre-opening weekends depend on snow. Portes du Soleil rate periods for 2026-27: 19 Dec 2026 – 19 Mar 2027 and 20 Mar – 18 Apr 2027."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Avoriaz sector lifts (typical)",
+      "days": null,
+      "opens": "09:00",
+      "closes": null,
+      "season": "2025-26",
+      "note": "Most lifts open 09:00 (range 08:30–09:30 by lift); last ascents 16:30–17:15 and slopes close 16:45–17:15 depending on the sector (Super-Morzine, Lindarets, Arare, Chavanette, Plateau).",
+      "source": {
+        "url": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/ski-area-opening-hours-and-times/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official opening-hours page (2025-26)"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Prodains Express cable car",
+      "days": null,
+      "opens": "08:45",
+      "closes": "17:45",
+      "season": "2025-26",
+      "note": "Last lift 17:45; slopes close 17:15.",
+      "source": {
+        "url": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/ski-area-opening-hours-and-times/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official opening-hours page (2025-26)"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Avoriaz ski area adult 1-day ski pass (ticket office)",
+      "item": "Avoriaz ski area 1-day pass, adult 26–64 (ticket office)",
       "category": "adult",
       "amount": 59,
       "amountMax": null,
@@ -119,12 +172,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: Avoriaz area 1-day at the ticket office — adult €59.00; junior 16–25 €55.00; child 5–16 €46.00; senior 65+ €55.00. The Portes du Soleil day price was not captured.",
+      "note": "Ticket-office price. Online the Avoriaz-area day pass is dynamically priced, €43–55 for adults. The Avoriaz-area pass is sold only as 5 hours, 1 or 2 days; longer passes are Portes du Soleil only.",
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of avoriaz.com 'Winter ski passes rates' (2026-27); the ticket-office €59 also appears on skideals.fr"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office)",
+      "category": "adult",
+      "amount": 73,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": "Cash-desk price for 19 Dec 2026 – 19 Mar 2027; €69 when bought online. Covers the whole Portes du Soleil (FR/CH).",
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of avoriaz.com 'Winter ski passes rates' (2026-27); online €69 from a search summary of the same rate tables"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office), spring",
+      "category": "adult",
+      "amount": 62,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2027-03-20",
+      "appliesTo": "2027-04-18",
+      "includesTax": null,
+      "note": "Cash-desk price for 20 Mar – 18 Apr 2027; €59 online.",
       "source": {
         "url": "https://www.skipass-avoriaz.com/en/winter/pricing",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of SERMA's Winter 2026-27 rates"
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of SERMA Avoriaz & Portes du Soleil rates (2026-27)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, child 5–16 (ticket office), spring",
+      "category": "child",
+      "amount": 47,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2027-03-20",
+      "appliesTo": "2027-04-18",
+      "includesTax": null,
+      "note": "Cash-desk price for 20 Mar – 18 Apr 2027. Super senior 75+: €29.",
+      "source": {
+        "url": "https://www.skipass-avoriaz.com/en/winter/pricing",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of SERMA Avoriaz & Portes du Soleil rates (2026-27)"
       }
     }
   ],
@@ -132,13 +248,13 @@
     "official": "https://www.avoriaz.com/en/",
     "trailMap": "https://www.avoriaz.com/en/discover/maps--guide/ski-area-maps/",
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/avoriaz-ski-area-snow-report/",
     "hours": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/ski-area-opening-hours-and-times/",
-    "tickets": "https://www.skipass-avoriaz.com/en/winter/",
+    "tickets": "https://www.skipass-avoriaz.com/en/winter/pricing",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
-    "webcams": null,
+    "webcams": "https://www.avoriaz.com/en/discover/discover/live-ski-slope-webcams/",
     "parking": null,
     "roadInfo": null,
     "lodging": null,
@@ -210,7 +326,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.avoriaz.com/en/winter-activities/ski-et-snow/avoriaz-ski-area-snow-report/",
+    "format": "html",
+    "notes": "Official Avoriaz snow report: data from SERMA, updated every morning before 08:00; snow depth measured at 1,800 m (Lac-Intrêts departure) and 2,200 m (Lac-Intrêts arrival). Also https://www.avoriaz.com/en/weather-and-snow-reports/ and the Portes du Soleil live page https://en.portesdusoleil.com/weather/. No JSON feed identified; page found via search (not fetched — fetches blocked in this build)."
+  },
   "photo": {
     "src": "asset:photo-avoriaz.webp",
     "alt": "Avoriaz: Proclou high speed chairlif in Avoriaz, Haute-Savoie, France",
@@ -219,18 +339,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Proclou_high_speed_chairlif_in_Avoriaz_(1).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 opening and closing dates.",
-      "Avoriaz sector piste km, lifts by type and hourly capacity.",
-      "Portes du Soleil day-pass price and lift breakdown.",
-      "Official snow-report page."
+      "Avoriaz sector piste km, lifts by type and hourly capacity (elevations are still reference data).",
+      "Avoriaz-area junior/senior and Portes du Soleil high-season child/junior/senior day prices (search summaries disagreed).",
+      "Rental and lesson prices."
     ],
     "conflicts": [
-      "Avoriaz sector: 35 lifts / 54 slopes (8/27/14/6) vs 36 lifts / 49 slopes (4/26/14/6).",
+      "Avoriaz sector: 35 lifts / 54 slopes (8/27/14/6) vs 36 lifts / 49 slopes (4/26/14/6) vs 79 km and 34 lifts (third-party 2026-27 guide, search summary).",
       "Portes du Soleil: 600 km and 209 lifts (search summary) vs more than 650 km and about 200 lifts (Wikipedia)."
     ],
-    "confidenceNotes": "Sector figures and the 2026-27 day price come from search summaries (partly official). Dates are unknown. Elevations, coordinates and some features are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "Web pages could not be fetched in this build, so prices, dates, hours and the snow-report page come from search summaries of avoriaz.com, skipass-avoriaz.com (SERMA) and Tourisme Haute-Savoie. Elevations, coordinates and features are reference data; weather points approximate; airport times are estimates. Adversarial re-check on 2026-10-03 could not open any cited page (WebFetch blocked by the egress proxy on every domain tried, web-search budget exhausted), so these search-summary facts remain unconfirmed at source; only internal consistency was checked (calendar weekdays, age bands, rate windows, unit conversion)."
   }
 }

@@ -7,7 +7,7 @@
   "stateProvince": "South Tyrol (Bolzano)",
   "locality": "Ortisei/St. Ulrich, Santa Cristina/St. Christina and Selva/Wolkenstein",
   "timezone": "Europe/Rome",
-  "operator": "Val Gardena lift companies within Dolomiti Superski (reference)",
+  "operator": "Several lift companies of the Val Gardena/Gröden – Alpe di Siusi/Seiser Alm area, within the Dolomiti Superski consortium",
   "priority": 0,
   "location": {
     "lat": 46.556,
@@ -26,8 +26,8 @@
     "source": {
       "url": "https://www.skiresort.com/en/ski-resort/val-gardena-groeden/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 'between the elevations of 1,236 and 2,518 m' (lowest point Ortisei, top Seceda — Piste reference, confirm). Vertical derived as the difference."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary: the Val Gardena ski area lies 'between elevations of 1,236 and 2,518 m' (top: Seceda). Vertical is the difference."
     }
   },
   "weatherPoints": [
@@ -52,9 +52,9 @@
     "trails": null,
     "lifts": 79,
     "skiableAcres": null,
-    "beginnerPct": 28,
-    "intermediatePct": 59,
-    "advancedPct": 13,
+    "beginnerPct": 28.7,
+    "intermediatePct": 59.7,
+    "advancedPct": 11.6,
     "terrainParks": null,
     "expertPct": null,
     "pisteKm": 181,
@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.skiresort.info/ski-resort/val-gardena-groeden/slope-offering/",
+      "url": "https://www.skiresort.com/en/ski-resort/val-gardena-groeden/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary of skiresort.info: 181 km of slopes — 52 km easy (28%), 108 km intermediate (59%), 21 km difficult (13%); 79 lifts. Another listing gave 175 km of the valley's own runs and 40% blue / 51% red / 9% black. A '210 lifts' figure also appeared but does not match the valley's size and was not used. Lift types and capacity for the 79 lifts not found. Part of Dolomiti Superski (about 1,200 km in 12 areas)."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary: Val Gardena with Alpe di Siusi has 181 km of slopes (52 km easy, 108 km intermediate, 21 km difficult) and 79 lifts. Shares computed from km."
     }
   },
   "features": {
@@ -89,42 +89,223 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-04",
+      "text": "Val Gardena–Alpe di Siusi opens Friday 4 Dec 2026 (first lifts; the Sellaronda too if the connections can open)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.dolomitireview.com/apertura-impianti-dolomiti-superski-2026-2027/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Dolomiti Superski 2026-27 opening-dates article: 4 Dec 2026 announced for Val Gardena–Alpe di Siusi, Alta Badia, Val di Fassa, Arabba and others."
+      }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-04",
+      "text": "Lifts scheduled to run until 4 Apr 2027 (subject to change)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.south-tirol.com/ski-holidays-south-tyrol/skiing/opening-hours-skiing-areas",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the South Tyrol 2026-27 ski-area opening list: Val Gardena/Alpe di Siusi 04/12/26 – 04/04/27; skiresort.com lists the same dates as subject to change."
+      }
     },
     "history": [],
-    "typicalText": "Early December to early April (projected 2026-27: 4 Dec 2026 – 4 Apr 2027 — estimate)",
-    "notes": "No confirmed Val Gardena announcement. Search summaries list 4 Dec 2026 – 4 Apr 2027 (described as estimated/tentative), while Dolomiti Superski's tentative area-wide start is 28 Nov 2026 (closing 11 Apr 2027)."
+    "typicalText": "Early December to early April (2026-27: 4 Dec 2026 – 4 Apr 2027)",
+    "notes": "Dolomiti Superski pre-season prices apply from 28 Nov 2026; the first Dolomiti Superski lifts (Obereggen) start 27 Nov 2026."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (typical)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "16:30",
+      "season": null,
+      "note": "Typical daily lift times; individual lifts range from about 08:00 to 17:00 (Dolomiti Superski lift list).",
+      "source": {
+        "url": "https://www.dolomitisuperski.com/en/live-info/lifts/groden-seiser-alm",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summaries: typical hours 08:30–16:30 daily (snow-report aggregators); per-lift hours from 08:00/08:15/08:30 to 17:00 on the Dolomiti Superski Val Gardena lift list."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Dolomiti Superski 1-day pass, adult, high season",
+      "item": "Val Gardena / Alpe di Siusi 1-day pass, adult",
       "category": "adult",
-      "amount": 89,
-      "amountMax": null,
+      "amount": 72,
+      "amountMax": 80,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "peak",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: the adult Dolomiti Superski day pass in high season 2026/27 is EUR 89, valid across the whole Dolomiti Superski network. An adult Val Gardena day pass was listed at EUR 80 on a 2026/27 price page (scope and season unconfirmed).",
+      "note": "Local Val Gardena–Alpe di Siusi pass: €72 in low season, €80 in high season. Half day (from 12:00) €54–60.",
       "source": {
-        "url": "https://en.neveitalia.it/ski/civettaski/skipass/1001",
+        "url": "https://www.val-gardena.com/en/winter/ski-resort-val-gardena/ski-pass/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Result title: 'Ski pass Dolomiti Superski 2026/2027'"
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Val Gardena 2026-27 ski-pass rates."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Val Gardena / Alpe di Siusi 1-day pass, junior",
+      "category": "youth",
+      "amount": 50,
+      "amountMax": 56,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Local pass: €50 in low season, €56 in high season.",
+      "source": {
+        "url": "https://www.val-gardena.com/en/winter/ski-resort-val-gardena/ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Val Gardena 2026-27 ski-pass rates."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Val Gardena / Alpe di Siusi 1-day pass, senior",
+      "category": "senior",
+      "amount": 65,
+      "amountMax": 72,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Local pass: €65 in low season, €72 in high season.",
+      "source": {
+        "url": "https://www.val-gardena.com/en/winter/ski-resort-val-gardena/ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of Val Gardena 2026-27 ski-pass rates."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, adult",
+      "category": "adult",
+      "amount": 80,
+      "amountMax": 89,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€80 in pre-/low season, €89 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027. Valid on the whole Dolomiti Superski network.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026; the same figures appear in Il Gazzettino and AGI coverage."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, junior",
+      "category": "youth",
+      "amount": 56,
+      "amountMax": 62,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€56 in pre-/low season, €62 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, senior",
+      "category": "senior",
+      "amount": 72,
+      "amountMax": 80,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€72 in pre-/low season, €80 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski rental package, adult skis + boots, 1 day",
+      "category": "adult",
+      "amount": 43,
+      "amountMax": 55,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Sport Gardena (Ortisei): Ski Basic with boots €43, Intermediate €49, Advanced €55 for one day; multi-day discounts. Season not stated.",
+      "source": {
+        "url": "https://www.sportgardena.com/en/c/ski-snowboard-rental-prices-ortisei-val-gardena/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the shop's rental price list."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult group ski lessons, 5 days",
+      "category": "adult",
+      "amount": 281,
+      "amountMax": 331,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Scuola Sci Selva: €281 in season, €331 in high season (2025-26 high season 21 Dec 2025–10 Jan 2026 and 1 Feb–7 Mar 2026). 6 days €298.50–351.50.",
+      "source": {
+        "url": "https://www.scuolasciselva.com/en/adults.asp",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the school's adult group-lesson prices."
       }
     }
   ],
@@ -132,11 +313,11 @@
     "official": "https://www.valgardena.it/en/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.valgardena.it/en/winter-holidays-dolomites/slopes-ski-lifts/open-lifts/",
     "hours": null,
     "tickets": "https://www.valgardena.it/en/winter-holidays-dolomites/ski-passes/",
     "seasonPass": null,
-    "lessons": null,
+    "lessons": "https://www.scuolasciselva.com/en/adults.asp",
     "rentals": null,
     "webcams": null,
     "parking": null,
@@ -215,7 +396,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.valgardena.it/en/winter-holidays-dolomites/slopes-ski-lifts/open-lifts/",
+    "format": "html",
+    "notes": "Val Gardena \"Open lifts\" page (official tourism site; lifts, slopes and conditions)."
+  },
   "photo": {
     "src": "asset:photo-val-gardena.webp",
     "alt": "Val Gardena: Val Gardena",
@@ -224,18 +409,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Val_Gardena.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirmed 2026-27 opening and closing dates for Val Gardena.",
-      "Lift types and uphill capacity for the 79 lifts.",
-      "Local Val Gardena/Seiser Alm day-pass price 2026-27.",
-      "Snow report page; Ikon Pass day allowance for Dolomiti Superski (not researched)."
+      "Lift-type breakdown and uphill capacity.",
+      "2026-27 lesson and rental prices."
     ],
     "conflicts": [
-      "Lifts 79 (skiresort.info) vs a '210 lifts' listing; km 181 vs 175; difficulty 28/59/13% by km vs 40/51/9% by colour share.",
-      "Opening 4 Dec 2026 (estimate) vs Dolomiti Superski tentative start 28 Nov 2026."
+      "Some listings give 210 lifts or 175 km; the 79 lifts / 181 km figure covers Val Gardena with Alpe di Siusi."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources."
   }
 }
