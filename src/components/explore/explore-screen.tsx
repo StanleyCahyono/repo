@@ -112,8 +112,8 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
       const v = row.facets.products.find((p) => p.id === filters.product)
       const name = productName.get(filters.product) ?? filters.product
       return v
-        ? passLineFromVerdict({ productName: name, status: v.status, canSki: v.canSki, headline: v.headline, confirmAtSource: v.confirmAtSource })
-        : { status: 'not-covered', productName: name, headline: 'Not included', confirmAtSource: false }
+        ? passLineFromVerdict({ productName: name, status: v.status, canSki: v.canSki, headline: v.headline })
+        : { status: 'not-covered', productName: name, headline: 'Not included' }
     },
     [filters.product, productName],
   )

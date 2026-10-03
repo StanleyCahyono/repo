@@ -261,8 +261,8 @@ are not recreated.
 - **Snow threshold** alerts use only a forecast fetched within the last 12 hours
   (`CONDITIONS_CONFIG_V1.confidence.weatherStaleHours`); after fetches have failed for longer, the last good run is not
   presented as current news. Summit first, Open-Meteo preferred.
-- **Opening-date changes** researched by web search (catalog reseeds, verification `search-summary`) say
-  "Researched — confirm at source"; unverified ones say "Unverified — confirm at the official source".
+- **Opening-date changes** researched by web search (catalog reseeds, verification `search-summary`) alert like any
+  other change, naming the source; a change to an `unverified` date (not shown anywhere) does not alert.
 - **Cooldown:** per rule and subject (default 12 h). A new bucket inside the cooldown is held back and fires later if
   the condition still holds.
 - Price changes use verified snapshots only (`published`/`observed-quote` with verification `api`, `official-page`

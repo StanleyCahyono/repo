@@ -65,10 +65,15 @@ describe('computeFit — unknowns are never favourable', () => {
     expect(r.confidence).toBe('low')
   })
 
-  it('research-grade terrain caps confidence at medium', () => {
+  it('researched terrain counts like any other fact (no research caveat)', () => {
     const r = computeFit(input({ terrain: { beginnerPct: 35, intermediatePct: 35, advancedPct: 30, verification: 'search-summary' } }))
-    expect(r.confidence).toBe('medium')
-    expect(r.confidenceReasons.join(' ')).toMatch(/researched/)
+    expect(r.confidenceReasons.join(' ')).not.toMatch(/researched|confirm at source/i)
+    expect(r.components.find((c) => c.key === 'terrain')?.value).not.toBeNull()
+  })
+
+  it('unverified terrain is treated as unknown', () => {
+    const r = computeFit(input({ terrain: { beginnerPct: 35, intermediatePct: 35, advancedPct: 30, verification: 'unverified' } }))
+    expect(r.components.find((c) => c.key === 'terrain')?.value).toBeNull()
   })
 })
 

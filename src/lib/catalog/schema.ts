@@ -3,8 +3,8 @@
  * non-trivial fact. `scripts/seed.ts` validates these files and loads them into the database without overwriting
  * user corrections (resort_overrides) or personal records.
  *
- * Research provenance: facts gathered by web search carry verification "search-summary" and are shown in the UI as
- * "Researched — confirm at source" until confirmed.
+ * Research provenance: facts gathered by web search carry verification "search-summary" and are shown like any other
+ * fact. Facts with no source behind them ("unverified", Piste reference data) are not shown in the app at all.
  */
 import { z } from 'zod'
 

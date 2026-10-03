@@ -94,49 +94,15 @@ export function units(u: UnitPrefs) {
 }
 export type Units = ReturnType<typeof units>
 
-/** Research-grade or unverified catalog facts are "confirm at source", never presented as verified. */
-/**
- * Wording for a fact that still needs confirming: web-search research is "Researched — confirm at source"; an
- * unverified catalog entry is Piste reference data ("Reference — confirm at source").
- */
-export function confirmText(p: Provenance | null | undefined): string {
-  if (p?.verification === 'search-summary') return 'Researched — confirm at source'
-  if (p?.verification === 'unverified') return 'Reference — confirm at source'
-  return 'Confirm at source'
-}
-
-export function needsCheck(p: Provenance | null | undefined): boolean {
-  if (!p) return true
-  const v = p.verification ?? null
-  if (p.kind === 'manual' || p.kind === 'historical') return v === null || v === 'search-summary' || v === 'unverified'
-  return v === 'search-summary' || v === 'unverified'
-}
-
-export function verificationText(p: Provenance | null | undefined): string {
-  if (!p) return 'No source recorded'
-  switch (p.verification) {
-    case 'search-summary':
-      return 'Researched — confirm at source'
-    case 'unverified':
-      return 'Reference data — confirm at source'
-    case 'user-confirmed':
-      return 'Confirmed by you'
-    case 'official-page':
-      return 'Read from the official page'
-    case 'api':
-      return 'Official API'
-    default:
-      return p.kind === 'modeled' ? 'Weather model' : p.kind === 'derived' ? 'Piste estimate' : p.kind === 'demo' ? 'Demo data' : 'Not verified'
-  }
-}
-
 export function src(label: string, prov: Provenance | null | undefined, value?: SourceItem['value']): SourceItem {
   return { label, prov: prov ?? null, value }
 }
 
 /** Joins non-empty parts with a middle dot. */
+/** "a · b · c" from the parts that are set; a segment already said earlier is not repeated ("Published price · Published price"). */
 export function dotJoin(...parts: (string | null | undefined | false)[]): string {
-  return parts.filter((p): p is string => typeof p === 'string' && p.trim().length > 0).join(' · ')
+  const segments = parts.filter((p): p is string => typeof p === 'string' && p.trim().length > 0).flatMap((p) => p.split(' · '))
+  return [...new Set(segments)].join(' · ')
 }
 
 export const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`

@@ -181,11 +181,6 @@ export function EmptySlot({ title, body, action, className }: { title: string; b
   )
 }
 
-/** "Confirm at source" qualifier for research-grade catalog facts. */
-export function ConfirmTag({ text = 'Confirm at source', className }: { text?: string; className?: string }) {
-  return <span className={cn('inline-flex items-center rounded-sm border border-dashed border-caution/50 px-1.5 text-[11.5px] leading-5 font-medium text-caution', className)}>{text}</span>
-}
-
 /** External link with an explicit "opens in a new tab" label for screen readers. */
 export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
   return (

@@ -22,7 +22,10 @@ export const DATA_KINDS = [
 ] as const
 export type DataKind = (typeof DATA_KINDS)[number]
 
-/** How a curated/manual fact was verified. Search-summary research must be confirmed before trusting. */
+/**
+ * How a curated/manual fact was verified. Researched ('search-summary'), official, API and user-confirmed facts are
+ * shown normally; 'unverified' facts (no source backs them) are not shown at all (see src/lib/data/shown.ts).
+ */
 export const VERIFICATION_LEVELS = ['api', 'official-page', 'search-summary', 'user-confirmed', 'unverified'] as const
 export type VerificationLevel = (typeof VERIFICATION_LEVELS)[number]
 

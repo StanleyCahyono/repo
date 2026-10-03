@@ -190,7 +190,7 @@ describe('weather-inferred hypotheses', () => {
     const withoutSnowEvidence = interpretSurface(ctx(thawThenFreeze), CFG)
     expect(withoutSnowEvidence.surface.tags).not.toContain('icy-refrozen')
     expect(withoutSnowEvidence.surface.tags).not.toContain('firm')
-    expect(withoutSnowEvidence.notes.join(' ')).toContain('snow cover is not confirmed')
+    expect(withoutSnowEvidence.notes.join(' ')).toContain('no recent report shows snow cover')
 
     const stale = report({ localDate: '2027-01-13', reportedAt: '2027-01-13T12:10:00.000Z', baseDepthCm: 90 })
     const withSnow = interpretSurface(ctx(thawThenFreeze, { report: stale }), CFG)

@@ -16,8 +16,8 @@ import { addDays, daysBetween, skiWindow, type Hemisphere } from '@/lib/domain/t
 import { CountUp } from './count-up'
 import { RatingEditor } from './rating-editor'
 import { Disclosure } from '@/components/ui/disclosure'
-import { ConfirmTag, DetailDrawer, FactRow, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
-import { ago, confirmText, dayLabel, dayLabelYear, dotJoin, instantLabel, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
+import { DetailDrawer, FactRow, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
+import { ago, dayLabel, dayLabelYear, dotJoin, instantLabel, plural, seasonText, shortDate, src, units, type PageView } from './format'
 
 const ABILITY_TEXT: Record<string, string> = { beginner: 'beginner', novice: 'novice', intermediate: 'intermediate', advanced: 'advanced', expert: 'expert' }
 
@@ -40,7 +40,7 @@ export function OverviewSection({ d, x, v, ability }: { d: ResortDetail; x: Reso
   const research = d.research
   const r = d.summary
   const u = units(v.units)
-  const meta = research?.date ? `${research.method === 'reference-only' ? 'Reference data' : 'Researched'} ${shortDate(research.date)}` : null
+  const meta = research?.date ? `Updated ${shortDate(research.date)}` : null
   const base = u.elev(r.baseElevationM)
   const top = u.elev(r.summitElevationM)
   const verticalM = r.verticalM ?? (r.baseElevationM !== null && r.summitElevationM !== null ? r.summitElevationM - r.baseElevationM : null)
@@ -56,7 +56,7 @@ export function OverviewSection({ d, x, v, ability }: { d: ResortDetail; x: Reso
           <MyRatingCard d={d} v={v} />
         </div>
       </div>
-      <DetailDrawer summary="Resort facts, season dates and status history" hint={research?.date ? `Catalog ${meta?.toLowerCase()} — confirm at source` : 'Location, terrain, facilities, opening and closing, status'}>
+      <DetailDrawer summary="Resort facts, season dates and status history" hint="Location, terrain, facilities, opening and closing, status">
         <div className="flex flex-col gap-8">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
             <AtAGlance d={d} x={x} v={v} />
@@ -92,16 +92,20 @@ function StatStrip({ d, x, v, vertical }: { d: ResortDetail; x: ResortPageExtras
   const r = d.summary
   const u = units(v.units)
   const t = x.catalog.terrain
-  const stats: { label: string; value: string | null; sub?: string | null }[] = [
+  const all: { label: string; value: string | null; sub?: string | null }[] = [
     { label: 'Vertical', value: vertical },
-    { label: 'Summit', value: u.elev(r.summitElevationM), sub: r.baseElevationM !== null ? `Base ${u.elev(r.baseElevationM)}` : null },
+    r.summitElevationM !== null
+      ? { label: 'Summit', value: u.elev(r.summitElevationM), sub: r.baseElevationM !== null ? `Base ${u.elev(r.baseElevationM)}` : null }
+      : { label: 'Base', value: r.baseElevationM !== null ? u.elev(r.baseElevationM) : null },
     t?.pisteKm != null ? { label: 'Pistes', value: u.dist(t.pisteKm) } : { label: 'Trails', value: t?.trails != null ? t.trails.toLocaleString('en-US') : null },
     { label: 'Lifts', value: t?.lifts != null ? t.lifts.toLocaleString('en-US') : null },
   ]
-  if (t?.pisteKm != null && t.trails != null) stats.push({ label: 'Trails', value: t.trails.toLocaleString('en-US') })
-  if (t?.skiableAcres != null) stats.push({ label: 'Skiable acres', value: t.skiableAcres.toLocaleString('en-US') })
-  if (t?.liftCapacityPerHour != null) stats.push({ label: 'Skiers / hour', value: t.liftCapacityPerHour.toLocaleString('en-US') })
-  const shown = stats.slice(0, 6)
+  if (t?.pisteKm != null && t.trails != null) all.push({ label: 'Trails', value: t.trails.toLocaleString('en-US') })
+  if (t?.skiableAcres != null) all.push({ label: 'Skiable acres', value: t.skiableAcres.toLocaleString('en-US') })
+  if (t?.liftCapacityPerHour != null) all.push({ label: 'Skiers / hour', value: t.liftCapacityPerHour.toLocaleString('en-US') })
+  // Only known figures: a fact that is not on file (or has no source) leaves no placeholder tile.
+  const shown = all.filter((x) => x.value).slice(0, 6)
+  if (!shown.length) return null
   return (
     <div className="glass grid grid-cols-2 overflow-hidden rounded-[28px] sm:grid-cols-3 lg:[grid-template-columns:repeat(var(--n),minmax(0,1fr))]" style={{ ['--n' as string]: shown.length }}>
       {shown.map((s, i) => (
@@ -109,12 +113,7 @@ function StatStrip({ d, x, v, vertical }: { d: ResortDetail; x: ResortPageExtras
           <Stat {...s} />
         </div>
       ))}
-      {needsCheck(t?.prov) || needsCheck(r.elevationProv) ? (
-        <p className="hud col-span-full m-0 border-t border-divider px-4 py-2.5 text-ink-2 md:px-5">
-          {confirmText(t?.prov ?? r.elevationProv)}
-          {t?.season ? ` · ${seasonText(t.season)} figures` : ''}
-        </p>
-      ) : null}
+      {t?.season ? <p className="hud col-span-full m-0 border-t border-divider px-4 py-2.5 text-ink-2 md:px-5">{seasonText(t.season)} figures</p> : null}
     </div>
   )
 }
@@ -304,7 +303,6 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
       ].filter((b): b is string => !!b)
     : []
   const capacity = t?.liftCapacityPerHour ?? null
-  const terrainCheck = needsCheck(t?.prov) ? confirmText(t?.prov) : undefined
   const split = r.beginner
   const expertPct = t?.expertPct ?? null
   const hasSplit = split.beginnerPct !== null || split.intermediatePct !== null || split.advancedPct !== null || expertPct !== null
@@ -319,87 +317,89 @@ function AtAGlance({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
           <span className="block">{placeLine(r.locality, r.region, r.stateProvince)}</span>
           <span className="block font-mono text-[12px] text-ink-3">{coords(r.lat, r.lon)}</span>
         </FactRow>
-        <FactRow label="Elevation" source={<Src title="Elevation" items={[src('Elevation', r.elevationProv, dotJoin(base && `Base ${base}`, top && `summit ${top}`))]} />}>
-          {base || top ? (
+        {base || top ? (
+          <FactRow label="Elevation" source={<Src title="Elevation" items={[src('Elevation', r.elevationProv, dotJoin(base && `Base ${base}`, top && `summit ${top}`))]} />}>
             <span className="tnum">
               {base ?? <Missing />} <span className="text-ink-3">→</span> {top ?? <Missing />}
               {vertical ? <span className="block text-[12.5px] text-ink-3">{vertical} vertical</span> : null}
             </span>
-          ) : (
-            <Missing />
-          )}
-        </FactRow>
-        <FactRow
-          label="Terrain"
-          source={t?.prov ? <Src title="Terrain" items={[src('Terrain', t.prov, terrainBits.join(' · '))]} /> : null}
-          hint={t?.season ? `Figures from the ${seasonText(t.season)} season${needsCheck(t.prov) ? ' — researched, confirm at source' : ''}` : undefined}
-        >
-          {terrainBits.length ? <span className="tnum">{terrainBits.join(' · ')}</span> : <Missing label="Trail and lift counts unknown" />}
-        </FactRow>
+          </FactRow>
+        ) : null}
+        {terrainBits.length ? (
+          <FactRow
+            label="Terrain"
+            source={t?.prov ? <Src title="Terrain" items={[src('Terrain', t.prov, terrainBits.join(' · '))]} /> : null}
+            hint={t?.season ? `Figures from the ${seasonText(t.season)} season` : undefined}
+          >
+            <span className="tnum">{terrainBits.join(' · ')}</span>
+          </FactRow>
+        ) : null}
         {liftTypeBits.length ? (
-          <FactRow label="Lifts by type" source={<Src title="Lifts by type" items={[src('Terrain', t?.prov, liftTypeBits.join(' · '))]} />} hint={terrainCheck}>
+          <FactRow label="Lifts by type" source={<Src title="Lifts by type" items={[src('Terrain', t?.prov, liftTypeBits.join(' · '))]} />}>
             <span className="tnum">{liftTypeBits.join(' · ')}</span>
           </FactRow>
         ) : null}
         {capacity !== null ? (
-          <FactRow label="Uphill capacity" source={<Src title="Uphill capacity" items={[src('Terrain', t?.prov, `${capacity.toLocaleString('en-US')} people per hour`)]} />} hint={terrainCheck}>
+          <FactRow label="Uphill capacity" source={<Src title="Uphill capacity" items={[src('Terrain', t?.prov, `${capacity.toLocaleString('en-US')} people per hour`)]} />}>
             <span className="tnum">{capacity.toLocaleString('en-US')} people per hour</span>
           </FactRow>
         ) : null}
-        <div className="border-b border-divider py-2.5">
-          <div className="flex items-baseline justify-between gap-4">
-            <dt className="shrink-0 text-[13.5px] text-ink-2">Ability split</dt>
-            <dd className="text-right text-[13px] text-ink-2 tnum">
-              {hasSplit ? (
-                dotJoin(
+        {hasSplit ? (
+          <div className="border-b border-divider py-2.5">
+            <div className="flex items-baseline justify-between gap-4">
+              <dt className="shrink-0 text-[13.5px] text-ink-2">Ability split</dt>
+              <dd className="text-right text-[13px] text-ink-2 tnum">
+                {dotJoin(
                   split.beginnerPct !== null && `${split.beginnerPct}% beginner`,
                   split.intermediatePct !== null && `${split.intermediatePct}% intermediate`,
                   split.advancedPct !== null && `${split.advancedPct}% advanced`,
                   expertPct !== null && `${expertPct}% expert`,
-                )
-              ) : (
-                <Missing label="Unknown" />
-              )}
-            </dd>
-          </div>
-          {hasSplit ? (
+                )}
+              </dd>
+            </div>
             <dd aria-hidden className="mt-2 flex h-2 overflow-hidden rounded-full bg-surface-3">
               <span className="h-full bg-positive/80" style={{ width: `${split.beginnerPct ?? 0}%` }} />
               <span className="h-full bg-info/70" style={{ width: `${split.intermediatePct ?? 0}%` }} />
               <span className="h-full bg-ink/70" style={{ width: `${split.advancedPct ?? 0}%` }} />
               <span className="h-full bg-ink" style={{ width: `${expertPct ?? 0}%` }} />
             </dd>
-          ) : null}
-        </div>
-        <FactRow label="Snowmaking" source={f?.prov ? <Src title="Snowmaking" items={[src('Facilities', f.prov)]} /> : null}>
-          {f?.snowmakingPct != null ? <span className="tnum">{f.snowmakingPct}% of terrain</span> : <Missing />}
-        </FactRow>
-        <FactRow label="Operator">{r.operator ? <span className="line-clamp-2">{r.operator}</span> : <Missing />}</FactRow>
+          </div>
+        ) : null}
+        {f?.snowmakingPct != null ? (
+          <FactRow label="Snowmaking" source={<Src title="Snowmaking" items={[src('Facilities', f.prov)]} />}>
+            <span className="tnum">{f.snowmakingPct}% of terrain</span>
+          </FactRow>
+        ) : null}
+        {r.operator ? (
+          <FactRow label="Operator">
+            <span className="line-clamp-2">{r.operator}</span>
+          </FactRow>
+        ) : null}
         <FactRow label="Time zone">
           <span className="tnum">
             {v.tz.replace(/_/g, ' ')} <span className="text-ink-3">({v.zone})</span>
           </span>
         </FactRow>
       </dl>
-      <div className="mt-4">
-        <p className="mb-2 text-[13px] font-medium text-ink-2">Facilities</p>
-        <div className="flex flex-wrap gap-2">
-          <TriChip label="Night skiing" value={f?.nightSkiing} />
-          <TriChip label="Lessons" value={f?.lessons} />
-          <TriChip label="Rentals" value={f?.rentals} />
-          <TriChip label="Lodging on the mountain" value={f?.onMountainLodging} />
-          <TriChip label="Tubing" value={f?.tubing} />
-          <TriChip label="Childcare" value={f?.childcare} />
+      {f ? (
+        <div className="mt-4">
+          <p className="mb-2 text-[13px] font-medium text-ink-2">Facilities</p>
+          <div className="flex flex-wrap gap-2">
+            <TriChip label="Night skiing" value={f.nightSkiing} />
+            <TriChip label="Lessons" value={f.lessons} />
+            <TriChip label="Rentals" value={f.rentals} />
+            <TriChip label="Lodging on the mountain" value={f.onMountainLodging} />
+            <TriChip label="Tubing" value={f.tubing} />
+            <TriChip label="Childcare" value={f.childcare} />
+          </div>
         </div>
-        {needsCheck(f?.prov) ? <p className="mt-2 text-[12.5px] text-ink-3">Facility facts are catalog research — confirm at source. Unknown never means “not offered”.</p> : null}
-      </div>
+      ) : null}
       {learning || split.beginnerArea ? (
         <div className="mt-5 rounded-[12px] border border-divider bg-surface-2 p-4">
           <p className="eyebrow mb-1.5">Learning here</p>
           {split.beginnerArea ? <p className="text-[14px] font-medium text-ink">{split.beginnerArea}</p> : null}
           {learning ? <p className="mt-1.5 max-w-[68ch] text-[14px] text-ink-2">{learning}</p> : null}
           <div className="mt-2 flex items-center gap-2">
-            {needsCheck(split.featuresProv ?? split.terrainProv) ? <ConfirmTag text={confirmText(split.featuresProv ?? split.terrainProv)} /> : null}
             <Src title="Learning information" items={[src('Facilities', split.featuresProv), src('Terrain', split.terrainProv)]} />
           </div>
         </div>
@@ -580,11 +580,6 @@ function SeasonBlock({ d, v }: { d: ResortDetail; v: PageView }) {
               ))}
             </ul>
           </div>
-        ) : null}
-        {cur?.notes ? (
-          <Disclosure summary="Season research notes" className="mt-2 border-t border-divider pt-2">
-            <p className="mt-2 max-w-[68ch] text-[13px] text-ink-2">{cur.notes}</p>
-          </Disclosure>
         ) : null}
         <p className="mt-3 flex items-center gap-1.5 border-t border-divider pt-2.5 text-[12.5px] text-ink-3">
           <span aria-hidden className="inline-block size-2.5 rounded-full bg-teal" /> Announced

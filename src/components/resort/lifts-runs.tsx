@@ -22,7 +22,7 @@ import { LiftsExplorer, type LiftsExplorerProps, type RunChipGroup, type SignLeg
 import { PisteSymbol } from './piste-symbol'
 import { RefreshNow } from './refresh-now'
 import { DetailDrawer, ResortSection, Src, SubHead } from './section'
-import { ago, confirmText, hostOf, needsCheck, plural, seasonText, shortDate, src, units, type PageView } from './format'
+import { ago, hostOf, plural, seasonText, shortDate, src, units, type PageView } from './format'
 
 /** Lists open by default up to this many entries; larger areas show their counts and open on demand. */
 const OPEN_UP_TO = 40
@@ -88,7 +88,7 @@ function liftBars(terrain: TerrainInfo | null, lifts: LiftsRunsView, geometry: M
   const aside = cap !== null ? `${cap.toLocaleString('en-US')} skiers/h` : null
   const byType = terrain?.liftsByType ?? null
   const bars = byType ? LIFT_TYPE_BARS.map((b) => ({ label: b.label, n: byType[b.key] ?? 0 })).filter((b) => b.n > 0) : []
-  if (bars.length) return { title: 'Lifts by type', aside, bars, note: needsCheck(terrain?.prov) ? `${confirmText(terrain?.prov)}${terrain?.season ? ` · ${seasonText(terrain.season)} figures` : ''}` : null }
+  if (bars.length) return { title: 'Lifts by type', aside, bars, note: terrain?.season ? `${seasonText(terrain.season)} figures` : null }
   if (lifts.loaded?.liftGroups.length) {
     return { title: 'Lifts by type · OpenStreetMap', aside, bars: lifts.loaded.liftGroups.map((g) => ({ label: g.label.replace(' and trams', ''), n: g.lifts.length })), note: 'As mapped by OpenStreetMap contributors.' }
   }

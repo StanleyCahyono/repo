@@ -167,13 +167,13 @@ describe('presets', () => {
 })
 
 describe('evidence limitations', () => {
-  it('surfaces stale reports, unconfirmed pass access and incomplete costs beside the winner', () => {
+  it('surfaces stale reports and incomplete costs beside the winner, with no research or unknown-access caveats', () => {
     const c = cand('greek-peak', {
-      evidence: { reportAt: '2027-01-14T18:00:00.000Z', reportDate: '2027-01-14', reportKind: 'official', weatherFetchedAt: null, catalogResearched: true },
+      evidence: { reportAt: '2027-01-14T18:00:00.000Z', reportDate: '2027-01-14', reportKind: 'official', weatherFetchedAt: null },
       days: [
         day(TODAY, {
           cost: { total: null, tier: 'incomplete', missing: ['No weekday lift ticket price'] },
-          pass: { status: 'unconfirmed', productName: 'Indy Base Pass' },
+          pass: { status: 'unknown', productName: 'Indy Base Pass' },
         }),
       ],
     })
@@ -181,9 +181,9 @@ describe('evidence limitations', () => {
     const lim = r.evidenceLimitations.join(' | ')
     expect(lim).toMatch(/Snow report 20 h old/)
     expect(lim).toMatch(/Weather not fetched yet/)
-    expect(lim).toMatch(/Pass access unconfirmed for Indy Base Pass/)
+    expect(lim).not.toMatch(/unconfirmed/i)
     expect(lim).toMatch(/Cost estimate incomplete \(No weekday lift ticket price\)/)
-    expect(lim).toMatch(/researched — confirm at source/)
+    expect(lim).not.toMatch(/confirm at source|researched/i)
     const cost = r.winner!.factors.find((f) => f.key === 'cost')!
     expect(cost.known).toBe(false)
   })

@@ -29,7 +29,7 @@ export const STATUS_META: Record<MarkStatus, StatusMeta> = {
   'days-exhausted': { label: 'No days left', short: 'No days', tone: 'critical', Icon: CircleSlash },
   'discount-only': { label: 'Discount only', short: 'Discount', tone: 'caution', Icon: BadgePercent },
   'not-included': { label: 'Not included', short: 'Not incl.', tone: 'critical', Icon: CircleX },
-  unknown: { label: 'Not confirmed', short: 'Unconfirmed', tone: 'unknown', Icon: CircleHelp },
+  unknown: { label: 'No access recorded', short: 'Unknown', tone: 'unknown', Icon: CircleHelp },
   'season-mismatch': { label: 'Different season', short: 'Season', tone: 'neutral', Icon: CalendarOff },
   'no-rule': { label: 'No rule recorded', short: 'No rule', tone: 'neutral', Icon: Minus },
 }
@@ -59,7 +59,7 @@ export const ACCESS_TYPE_LABEL: Record<PassAccessType, string> = {
   'shared-pool': 'Shared day pool',
   'discount-only': 'Discount only',
   'not-included': 'Not included',
-  unknown: 'Unknown — not confirmed',
+  unknown: 'Unknown',
 }
 
 export const ACCESS_TYPE_HINT: Record<PassAccessType, string> = {
@@ -68,7 +68,7 @@ export const ACCESS_TYPE_HINT: Record<PassAccessType, string> = {
   'shared-pool': 'Days shared with other resorts on the same pass.',
   'discount-only': 'No included days — a discount on tickets.',
   'not-included': 'This pass does not include the resort.',
-  unknown: 'Keep it unconfirmed — never treated as access.',
+  unknown: 'Not known — never treated as access.',
 }
 
 export function familyId(id: string): PassFamilyId {

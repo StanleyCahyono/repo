@@ -149,7 +149,7 @@ describe('selectPrice', () => {
     expect(selectPrice(gp, { ...q, date: '2027-01-18', dayType: 'holiday' }).snapshot).toBeNull()
   })
 
-  it('marks research-grade prices "confirm at source" and says when the day type is not stated', () => {
+  it('uses researched prices as they are (no caveat) and says when the day type is not stated', () => {
     const researched = snap({
       subjectType: 'lift-ticket',
       amountMinor: 12000,
@@ -158,10 +158,20 @@ describe('selectPrice', () => {
     })
     const sel = selectPrice([researched], { ...q, date: '2027-01-18', dayType: 'holiday' })
     expect(sel.snapshot?.id).toBe(researched.id)
-    expect(sel.confirmAtSource).toBe(true)
-    expect(sel.basis).toContain('Researched — confirm at source')
+    expect(sel.basis).not.toMatch(/confirm at source|researched/i)
     expect(sel.basis).toContain('day type not stated')
-    expect(selectPrice(gp, q).confirmAtSource).toBe(false)
+  })
+
+  it('never uses an unverified price (no source behind it)', () => {
+    const unverified = snap({
+      subjectType: 'lift-ticket',
+      amountMinor: 12000,
+      dayType: null,
+      prov: provenance({ kind: 'manual', provider: 'Piste catalog', verification: 'unverified' }),
+    })
+    const sel = selectPrice([unverified], { ...q, date: '2027-01-18', dayType: 'holiday' })
+    expect(sel.snapshot).toBeNull()
+    expect(sel.candidates).toBe(0)
   })
 
   it('date-only expiry is valid through that local day, even after UTC midnight', () => {
@@ -225,7 +235,7 @@ describe('computeDayBasket', () => {
     expect(b.total).toEqual(money(4500 + 2500 + 334, 'USD'))
   })
 
-  it('carries research-grade flags into lines and caveats, and never hides an unknown reservation rule', () => {
+  it('prices researched lines without caveats, and never hides an unknown reservation rule', () => {
     const researchedLift = snap({
       subjectType: 'lift-ticket',
       amountMinor: 9900,
@@ -236,9 +246,9 @@ describe('computeDayBasket', () => {
     const b = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-16', prices }, assumptions, ctx)
     const lift = b.lines.find((l) => l.key === 'lift')!
     expect(lift.kind).toBe('published')
-    expect(lift.confirmAtSource).toBe(true)
-    expect(lift.source).toContain('Researched — confirm at source')
-    expect(b.caveats).toContain('Researched — confirm at source: lift ticket')
+    expect(lift.amount).toEqual(money(9900, 'USD'))
+    expect(lift.source ?? '').not.toMatch(/confirm at source|researched/i)
+    expect(b.caveats.join(' ')).not.toMatch(/confirm at source|researched/i)
 
     const pass: BasketPass = {
       canSki: true,
@@ -246,13 +256,11 @@ describe('computeDayBasket', () => {
       productName: 'Ikon Pass',
       reservationRequired: null,
       discountText: null,
-      confirmAtSource: true,
     }
     const covered = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-16', prices: gp, pass }, assumptions, ctx)
     const passLine = covered.lines.find((l) => l.key === 'lift')!
-    expect(passLine.confirmAtSource).toBe(true)
     expect(passLine.note).toContain('reservation requirement not recorded')
-    expect(passLine.note).toContain('confirm at source')
+    expect(passLine.note).not.toContain('confirm at source')
   })
 
   it('a pass that does not cover the day (e.g. blackout) still needs a ticket price', () => {

@@ -170,7 +170,8 @@ describe('seedCatalog: lifts, runs and dated reports found by research', () => {
     // Its status went through the status pipeline: stated at local noon of its day.
     const events = await db.select().from(s.statusEvents)
     expect(events.map((e) => [e.status, e.localDate, e.effectiveAt])).toEqual([['closed-for-season', '2026-09-13', '2026-09-13T02:00:00.000Z']])
-    expect(events[0].note).toMatch(/catalog research/)
+    expect(events[0].note).toMatch(/^Report for /)
+    expect(events[0].note).not.toMatch(/confirm at source/)
 
     // Re-seeding the same research writes nothing: no new revision, and the observation age is not reset.
     const again = await seedCatalog(db, catalog(southern(REPORTS)), '2026-10-02T02:00:00.000Z')

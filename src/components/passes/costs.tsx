@@ -114,7 +114,6 @@ function lineNote(l: BasketLine | undefined): string | null {
   if (l.kind === 'pass-covered') return l.source
   if (!l.amount) return l.required ? 'required' : 'excluded'
   if (l.key === 'rental' && l.kind === 'assumption') return 'own gear'
-  if (l.confirmAtSource) return 'researched'
   if (l.kind === 'user-estimate') return 'your estimate'
   return l.kind ? LINE_KIND_LABEL[l.kind].toLowerCase() : null
 }
@@ -132,7 +131,7 @@ function LineCell({ row, l, ctx, align = 'right' }: { row: DayCostRow; l: Basket
       ) : canAdd ? (
         <LineEstimate row={row} l={l} ctx={ctx} label="Add estimate" className="-mx-1 text-[12px]" />
       ) : note ? (
-        <span className={cn('text-[12px]', l?.confirmAtSource ? 'text-caution' : 'text-ink-3')}>{note}</span>
+        <span className="text-[12px] text-ink-3">{note}</span>
       ) : null}
     </span>
   )
@@ -225,7 +224,6 @@ export function BasketSheet({ row, ctx }: { row: DayCostRow; ctx: EstimateCtx })
                         : dotJoin(l.kind === 'user-estimate' && l.source ? null : l.kind ? LINE_KIND_LABEL[l.kind] : l.required ? 'Required — price unknown' : 'Optional — unknown', l.source, l.note)}
                     </span>
                     {mine?.note ? <span className="block text-[12px] text-ink-3">“{mine.note}”</span> : null}
-                    {l.confirmAtSource ? <span className="mt-0.5 block text-[12px] font-medium text-caution">Researched — confirm at source</span> : null}
                     {!l.amount || mine ? (
                       <span className="mt-1.5 block">
                         <LineEstimate row={row} l={l} ctx={ctx} trigger="chip" label={mine ? 'Edit your estimate' : 'Add your estimate'} />

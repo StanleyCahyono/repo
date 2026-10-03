@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { accessTone, clock, flightDates, groupErrors, linkState, linkStateDetail, needsCheck, straightLineKm, verificationText, weekdaysText } from './format'
+import { accessTone, clock, flightDates, groupErrors, linkState, linkStateDetail, straightLineKm, weekdaysText } from './format'
 
 const NOW = '2027-01-15T14:00:00.000Z'
 const check = (ok: boolean | null, httpStatus: number | null, error: string | null = null) => ({ ok, httpStatus, error, checkedAt: '2027-01-15T10:00:00.000Z' })
@@ -58,13 +58,6 @@ describe('labels', () => {
     expect(accessTone('unknown')).toBe('unknown')
     expect(accessTone('discount-only')).toBe('caution')
     expect(accessTone('blackout')).toBe('critical')
-  })
-
-  it('treats research-grade and missing provenance as "confirm at source"', () => {
-    expect(needsCheck(null)).toBe(true)
-    expect(needsCheck({ kind: 'manual', provider: null, sourceUrl: null, verification: 'search-summary' })).toBe(true)
-    expect(needsCheck({ kind: 'official', provider: null, sourceUrl: null, verification: 'official-page' })).toBe(false)
-    expect(verificationText({ kind: 'manual', provider: null, sourceUrl: null, verification: 'search-summary' })).toBe('Researched — confirm at source')
   })
 })
 

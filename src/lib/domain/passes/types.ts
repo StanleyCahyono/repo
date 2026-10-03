@@ -74,12 +74,12 @@ export const ACCESS_STATUS_LABEL: Record<AccessStatus, string> = {
   'days-exhausted': 'No days left',
   'discount-only': 'Discount only',
   'not-included': 'Not included',
-  unknown: 'Access not confirmed',
+  unknown: 'Access unknown',
   'season-mismatch': 'Different season',
 }
 
 /** Shown whenever a rule is missing or recorded as unknown. Unknown is never permission. */
-export const UNCONFIRMED_ACCESS_MESSAGE = 'Access rules not confirmed for this product — check the official page'
+export const UNCONFIRMED_ACCESS_MESSAGE = 'No access rule is recorded for this product here, so it is not counted as included'
 
 export interface PoolInfo {
   id: string
@@ -127,8 +127,6 @@ export interface AccessVerdict {
   reservationNotes: string | null
   discountText: string | null
   eligibilityNotes: string | null
-  /** The rule is research-grade or unsourced — show "confirm at source". */
-  confirmAtSource: boolean
   /** This resort/date is already in the usage list (a logged day, or earlier in the same plan). */
   alreadyCounted: 'logged' | 'planned' | null
   /** The date is before `today`. */

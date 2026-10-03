@@ -634,7 +634,7 @@ async function fireDemoAlerts(db: Db, p: PersonalInputs): Promise<void> {
     }
   }
 
-  // A pass sales deadline — the deadline itself is simulated (no researched date exists in the catalog).
+  // A pass sales deadline — the deadline itself is simulated (no dated deadline exists in the catalog).
   const passProduct = (await db.select().from(passProducts).where(eq(passProducts.id, PASS_DEADLINE_PRODUCT)))[0]
   if (passProduct) {
     const deadline = '2027-01-24'
@@ -646,7 +646,7 @@ async function fireDemoAlerts(db: Db, p: PersonalInputs): Promise<void> {
         bucket: `${deadline}|within-14d|simulated`,
         resortId: passProduct.resortId,
         title: `${passProduct.name}: sales deadline in 12 days (simulated)`,
-        body: `Deadline ${formatLocalDate(deadline, 'ccc d LLL yyyy')} — simulated for the demo, not a researched deadline. Confirm on the official pass page before buying. ${DEMO_SUFFIX}`,
+        body: `Deadline ${formatLocalDate(deadline, 'ccc d LLL yyyy')} — simulated for the demo; the real deadline is on the official pass page. ${DEMO_SUFFIX}`,
         link: '/passes',
       },
       '2027-01-12T14:00:00.000Z',

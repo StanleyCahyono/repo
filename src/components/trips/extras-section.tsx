@@ -9,7 +9,7 @@ import { SourceDrawer } from '@/components/ui/source-drawer'
 import type { EventOption, TripPage } from '@/lib/data/trip-plan'
 import { formatMoney } from '@/lib/domain/money'
 import { formatLocalDate } from '@/lib/domain/time'
-import { ConfirmTag, SubHead, TripSection } from './bits'
+import { SubHead, TripSection } from './bits'
 import { EVENT_STATUS_LABEL, dayLabel, eventIcsUrl } from './format'
 import { AddItemButton, QuickAdd } from './add-buttons'
 import { ItemRow } from './item-row'
@@ -175,7 +175,6 @@ function EventLine({ e }: { e: EventOption }) {
           {e.price ? <span className="tnum">· {e.price.amountMinor === 0 ? 'Free' : formatMoney(e.price)}</span> : <span>· <Missing label="price not stated" className="text-[12.5px]" /></span>}
         </p>
         <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px]">
-          {e.prov?.verification === 'search-summary' || e.prov?.verification === 'unverified' ? <ConfirmTag /> : null}
           {e.startDate ? (
             <a href={eventIcsUrl(e.id)} download className="inline-flex items-center gap-1 font-medium text-teal hover:underline">
               <CalendarPlus aria-hidden className="size-3.5" /> .ics

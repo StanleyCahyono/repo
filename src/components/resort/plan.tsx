@@ -15,10 +15,11 @@ import type { PassAccessRow, PriceView, ResortDetail } from '@/lib/data/resort-d
 import { describeBands, LINE_KIND_LABEL, RENTAL_LABEL } from '@/lib/domain/costs'
 import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { ACCESS_STATUS_LABEL } from '@/lib/domain/passes'
+import { shownNote } from '@/lib/domain/source-label'
 import { PASS_FAMILIES, type PassFamilyId } from '@/lib/domain/types'
 import { CountUp } from './count-up'
-import { ConfirmTag, DetailDrawer, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
-import { accessTone, ACTIVITY_LABEL, clock, confirmText, CORE_ACTIVITIES, dayLabel, dayLabelYear, dotJoin, hostOf, plural, seasonText, shortDate, src, TRANSFER_TYPE_LABEL, weekdaysText, type PageView } from './format'
+import { DetailDrawer, GlassCard, ResortSection, Src, SubHead, TriChip } from './section'
+import { accessTone, ACTIVITY_LABEL, clock, CORE_ACTIVITIES, dayLabel, dayLabelYear, dotJoin, hostOf, plural, seasonText, shortDate, src, TRANSFER_TYPE_LABEL, weekdaysText, type PageView } from './format'
 
 const DAY_TYPE_TEXT: Record<string, string> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
 
@@ -30,7 +31,7 @@ function planHeadline(d: ResortDetail, v: PageView): string {
   return `Ticket prices for ${dayLabel(v.date)} are not on file.`
 }
 
-const MY_PASS_TONE = { covered: 'text-positive', 'not-covered': 'text-critical', unconfirmed: 'text-caution', 'no-pass': 'text-ink-2' } as const
+const MY_PASS_TONE = { covered: 'text-positive', 'not-covered': 'text-critical', unknown: 'text-ink-2', 'no-pass': 'text-ink-2' } as const
 
 function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
   const lift = d.basket.lines.find((l) => l.key === 'lift') ?? null
@@ -72,13 +73,14 @@ function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
             <li className="text-[12px] text-ink-2">Other dates or seasons on file — not the price for {dayLabel(v.date)}.</li>
           </ul>
         ) : null}
-        {lift?.confirmAtSource ? <ConfirmTag text="Researched — confirm at source" className="self-start" /> : null}
         <Link href={`/passes?resort=${v.id}&from=${v.date}`} className="mt-auto text-[13px] font-semibold text-teal hover:underline">
           Check your pass for a date →
         </Link>
       </GlassCard>
       <GlassCard title="Passes" aside={products.length ? `${products.length} on file` : null}>
-        <p className={cn('m-0 text-[17px] leading-snug font-medium', MY_PASS_TONE[my.status])}>{my.status === 'no-pass' ? 'No pass recorded' : my.headline}</p>
+        <p className={cn('m-0 text-[17px] leading-snug font-medium', MY_PASS_TONE[my.status])}>
+          {my.status === 'no-pass' ? 'No pass recorded' : my.status === 'unknown' ? `No access recorded for your ${my.productName}` : my.headline}
+        </p>
         {products.length ? (
           <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
             {products.slice(0, 6).map((p) => {
@@ -94,7 +96,7 @@ function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
         ) : (
           <p className="m-0 text-[13.5px] text-ink-2">No pass products recorded for this resort.</p>
         )}
-        <p className="m-0 mt-auto text-[12.5px] text-ink-2">Exact products, not family badges. Unknown access is never permission.</p>
+        <p className="m-0 mt-auto text-[12.5px] text-ink-2">Exact products for {dayLabel(v.date)}.</p>
       </GlassCard>
       <GlassCard title="Day cost per person" aside={b.holidayName ?? DAY_TYPE_TEXT[b.dayType]} className="md:col-span-2 xl:col-span-1">
         <div className="flex items-end justify-between gap-3">
@@ -230,7 +232,7 @@ function HoursBlock({ d, v }: { d: ResortDetail; v: PageView }) {
                     <td className="py-1.5 pr-2 text-ink-2">
                       {s.label}
                       <span className="block text-ink-3">{s.exceptionDate ? dayLabelYear(s.exceptionDate) : weekdaysText(s.daysOfWeek)}</span>
-                      {s.prov?.note ? <span className="block text-ink-3 italic">{s.prov.note}</span> : null}
+                      {shownNote(s.prov) ? <span className="block text-ink-3 italic">{shownNote(s.prov)}</span> : null}
                     </td>
                     <td className="py-1.5 pr-2 text-ink tnum">{s.closed ? 'Closed' : `${clock(s.opens) ?? '?'}–${clock(s.closes) ?? '?'}`}</td>
                     <td className={cn('py-1.5', s.otherSeason ? 'text-caution' : 'text-ink-2')}>{seasonText(s.seasonId) ?? 'Any'}</td>
@@ -267,9 +269,7 @@ function AccessRow({ p }: { p: PassAccessRow }) {
   const Icon = vd.status === 'blackout' ? CalendarX2 : ACCESS_ICON[tone]
   const fam = ((PASS_FAMILIES as readonly string[]).includes(p.familyId) ? p.familyId : 'regional') as PassFamilyId
   // Everything not already on screen goes into Details (positive verdicts restate the headline in reasons[0]).
-  const extra = [...(tone === 'positive' ? vd.reasons.slice(0, 1) : []), ...vd.reasons.slice(1), ...(vd.reservationNotes ? [`Reservations: ${vd.reservationNotes}`] : [])].filter(
-    (r) => !/^Researched — confirm at source\.?$/.test(r),
-  )
+  const extra = [...(tone === 'positive' ? vd.reasons.slice(0, 1) : []), ...vd.reasons.slice(1), ...(vd.reservationNotes ? [`Reservations: ${vd.reservationNotes}`] : [])]
   return (
     <li className="flex flex-col gap-1.5 py-3 first:pt-0 last:pb-0">
       <div className="flex flex-wrap items-center gap-2">
@@ -280,7 +280,7 @@ function AccessRow({ p }: { p: PassAccessRow }) {
       </div>
       <p className={cn('flex items-center gap-1.5 text-[14px] font-semibold', ACCESS_CLS[tone])}>
         <Icon aria-hidden className="size-4 shrink-0" />
-        {tone === 'unknown' ? 'Access not confirmed — not permission' : vd.headline}
+        {vd.headline}
         <span className="sr-only">({ACCESS_STATUS_LABEL[vd.status]})</span>
       </p>
       {tone !== 'positive' ? <p className="text-[13px] text-ink-2">{vd.reasons[0]}</p> : null}
@@ -292,7 +292,6 @@ function AccessRow({ p }: { p: PassAccessRow }) {
             vd.blackout ? `Blackout ${vd.blackout.label ?? `${dayLabel(vd.blackout.from)}–${dayLabel(vd.blackout.to)}`}` : null,
           )}
         </span>
-        {vd.confirmAtSource ? <ConfirmTag text="Researched — confirm at source" /> : null}
       </p>
       {extra.length ? (
         <Disclosure summary="Details" className="text-[12.5px] text-ink-2">
@@ -307,9 +306,9 @@ function AccessRow({ p }: { p: PassAccessRow }) {
   )
 }
 
-const TONE_WORD = { positive: 'included', caution: 'discount only', critical: 'not usable', unknown: 'not confirmed' } as const
+const TONE_WORD = { positive: 'included', caution: 'discount only', critical: 'not usable', unknown: 'no access recorded' } as const
 
-/** "2 not confirmed, 1 included" — what the folded products say, so nothing important hides behind the fold. */
+/** "2 included, 1 not usable" — what the folded products say, so nothing important hides behind the fold. */
 function accessSummary(rows: readonly PassAccessRow[]): string {
   const counts = new Map<keyof typeof TONE_WORD, number>()
   for (const p of rows) counts.set(accessTone(p.verdict.status), (counts.get(accessTone(p.verdict.status)) ?? 0) + 1)
@@ -414,7 +413,6 @@ function BasketBlock({ d, v }: { d: ResortDetail; v: PageView }) {
                   <span className="block text-[12px] text-ink-3">
                     {dotJoin(l.kind === 'user-estimate' && l.source ? null : l.kind ? LINE_KIND_LABEL[l.kind] : l.required ? 'Required — price unknown' : 'Optional — unknown', l.source, l.note)}
                   </span>
-                  {l.confirmAtSource ? <ConfirmTag className="mt-1" /> : null}
                 </th>
                 <td className="py-2 text-right whitespace-nowrap tnum">
                   {l.kind === 'pass-covered' ? (
@@ -469,7 +467,7 @@ const GROUPS: { key: keyof ResortDetail['prices']; label: string }[] = [
   { key: 'other', label: 'Other' },
 ]
 
-function PriceRow({ p, planningSeason, tagConfirm }: { p: PriceView; planningSeason: string; tagConfirm: boolean }) {
+function PriceRow({ p, planningSeason }: { p: PriceView; planningSeason: string }) {
   return (
     <tr className={cn('border-b border-divider align-top last:border-b-0', p.expired && 'opacity-70')}>
       <th scope="row" className="py-2 pr-2 font-normal">
@@ -481,10 +479,7 @@ function PriceRow({ p, planningSeason, tagConfirm }: { p: PriceView; planningSea
           <span className={p.seasonId && p.seasonId !== planningSeason ? 'font-medium text-caution' : 'text-ink-2'}>{seasonText(p.seasonId) ?? 'Season not stated'}</span>
           <span className="text-ink-3"> · {p.quoteLabel}</span>
         </span>
-        <span className="mt-0.5 flex flex-wrap items-center gap-1.5">
-          {tagConfirm && p.confirmAtSource ? <ConfirmTag text={confirmText(p.prov)} /> : null}
-          {p.expired ? <span className="text-[11.5px] font-medium text-critical">Expired quote</span> : null}
-        </span>
+        {p.expired ? <span className="mt-0.5 block text-[11.5px] font-medium text-critical">Expired quote</span> : null}
       </th>
       <td className="py-2 pr-2 text-right font-medium whitespace-nowrap text-ink tnum">
         {p.amount.amountMinor === 0 && !p.amountMax ? 'Free' : formatMoneyRange(p.amount, p.amountMax)}
@@ -503,7 +498,7 @@ function PriceRow({ p, planningSeason, tagConfirm }: { p: PriceView; planningSea
 
 type PriceGroup = (typeof GROUPS)[number] & { rows: PriceView[] }
 
-function PriceTable({ groups, planningSeason, tagConfirm, caption }: { groups: PriceGroup[]; planningSeason: string; tagConfirm: boolean; caption: string }) {
+function PriceTable({ groups, planningSeason, caption }: { groups: PriceGroup[]; planningSeason: string; caption: string }) {
   return (
     <table className="w-full text-left text-[13.5px]">
       <caption className="sr-only">{caption}</caption>
@@ -523,7 +518,7 @@ function PriceTable({ groups, planningSeason, tagConfirm, caption }: { groups: P
             </th>
           </tr>
           {g.rows.map((p) => (
-            <PriceRow key={p.id} p={p} planningSeason={planningSeason} tagConfirm={tagConfirm} />
+            <PriceRow key={p.id} p={p} planningSeason={planningSeason} />
           ))}
         </tbody>
       ))}
@@ -538,10 +533,6 @@ function PricesBlock({ d, v }: { d: ResortDetail; v: PageView }) {
   const groups: PriceGroup[] = GROUPS.map((g) => ({ ...g, rows: d.prices[g.key] })).filter((g) => g.rows.length)
   const planningSeason = d.season.seasonId
   const otherSeason = groups.some((g) => g.rows.some((p) => p.seasonId && p.seasonId !== planningSeason))
-  const all = groups.flatMap((g) => g.rows)
-  const allConfirm = all.length > 0 && all.every((p) => p.confirmAtSource)
-  const wording = [...new Set(all.map((p) => confirmText(p.prov)))]
-  const allTag = wording.length === 1 && wording[0] !== 'Confirm at source' ? `All ${wording[0][0].toLowerCase()}${wording[0].slice(1)}` : 'All: confirm at source'
   const tickets = d.links.find((l) => l.key === 'tickets')
   // Keep the first few rows of the first group in view; fold the rest when that saves real space.
   const head: PriceGroup[] = groups.length ? [{ ...groups[0], rows: groups[0].rows.slice(0, PRICE_ROWS_SHOWN) }] : []
@@ -555,27 +546,26 @@ function PricesBlock({ d, v }: { d: ResortDetail; v: PageView }) {
       </SubHead>
       {groups.length ? (
         <>
-          {otherSeason || allConfirm ? (
+          {otherSeason ? (
             <div className="-mt-1 mb-3 flex flex-wrap items-center gap-2 text-[12.5px] text-caution">
-              {allConfirm ? <ConfirmTag text={allTag} /> : null}
-              {otherSeason ? <span>Some prices are from another season — shown for reference, not as {seasonText(planningSeason)} prices.</span> : null}
+              <span>Some prices are from another season — shown for reference, not as {seasonText(planningSeason)} prices.</span>
             </div>
           ) : null}
           {fold ? (
             <>
-              <PriceTable groups={head} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="Price snapshots, first rows, with season, quote kind and source" />
+              <PriceTable groups={head} planningSeason={planningSeason} caption="Price snapshots, first rows, with season, quote kind and source" />
               <Disclosure
                 variant="row"
                 className="mt-2 border-t border-divider"
                 summary={`${tailCount} more price${tailCount === 1 ? '' : 's'} on file · ${[...new Set(tail.map((g) => g.label.toLowerCase()))].join(', ')}`}
               >
                 <div className="pb-1">
-                  <PriceTable groups={tail} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="More price snapshots by group, with season, quote kind and source" />
+                  <PriceTable groups={tail} planningSeason={planningSeason} caption="More price snapshots by group, with season, quote kind and source" />
                 </div>
               </Disclosure>
             </>
           ) : (
-            <PriceTable groups={groups} planningSeason={planningSeason} tagConfirm={!allConfirm} caption="Price snapshots by group, with season, quote kind and source" />
+            <PriceTable groups={groups} planningSeason={planningSeason} caption="Price snapshots by group, with season, quote kind and source" />
           )}
         </>
       ) : (

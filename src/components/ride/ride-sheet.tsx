@@ -198,7 +198,7 @@ function Chips({ plan, sel, runKey }: { plan: RidePlan; sel: RideSelection; runK
         {origin?.iata ?? '—'} → {gw?.iata ?? '—'}
       </Chip>
       {gw?.minutes != null ? (
-        <Chip k="Transfer" note={gw.confirm ? 'Researched · confirm' : 'Recorded'}>
+        <Chip k="Transfer" note="Recorded">
           <CountUp value={gw.minutes} format={durationFmt} runKey={runKey} delay={120} />
         </Chip>
       ) : (
@@ -418,7 +418,7 @@ function Steps({ plan, journey, listId }: { plan: RidePlan; journey: Journey | n
         items.push({
           icon: tr?.type === 'train' ? <TrainFront aria-hidden className="size-4" /> : <PlaneLanding aria-hidden className="size-4" />,
           title: `Transfer ${leg.fromLabel} → ${plan.resort.short}`,
-          detail: [leg.minutes != null ? `${formatDuration(leg.minutes)} (researched)` : 'Time not recorded', tr ? tr.name : null].filter(Boolean).join(' · '),
+          detail: [leg.minutes != null ? formatDuration(leg.minutes) : 'Time not recorded', tr ? tr.name : null].filter(Boolean).join(' · '),
         })
       }
     }
@@ -471,14 +471,12 @@ function Unknowns({ plan }: { plan: RidePlan }) {
 }
 
 function Footer({ plan, sel, onReplay }: { plan: RidePlan; sel: RideSelection; onReplay: () => void }) {
-  const gw = plan.gateways.find((g) => g.iata === sel.via)
-  const confirm = sel.mode === 'drive' ? plan.drive?.confirm : gw?.confirm
   const search = sel.mode === 'fly' && sel.from && sel.via ? plan.flightSearch[`${sel.from}-${sel.via}`] : null
   const ext = sel.mode === 'drive' && plan.drive?.directionsUrl ? { label: 'Directions in Google Maps', url: plan.drive.directionsUrl } : search
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="hud text-[10.5px] text-ink-2">◇ {confirm ?? 'Recorded travel data'}</span>
+        <span className="hud text-[10.5px] text-ink-2">◇ Recorded travel data</span>
         <button
           type="button"
           onClick={onReplay}

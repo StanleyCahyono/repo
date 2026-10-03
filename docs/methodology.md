@@ -362,9 +362,10 @@ permission, never read as $0, and it never produces a tier.
 
 `canSki` is true **only** for `included` / `included-limited`, which means a day is available and the date is
 not blacked out. A reservation requirement never blocks a day. It is shown in `reservationRequired`
-(true / false / null for "not recorded") and in the reasons. A rule whose provenance is `search-summary`
-adds "Researched — confirm at source"; a rule with no provenance, no verification level or `unverified` adds
-"Rule source not verified — confirm on the official pass page". When the verdict is included, the product's
+(true / false / null for "not recorded") and in the reasons. A researched (`search-summary`) rule answers like
+any other rule, with no caveat. An `unverified` rule is treated as no rule (it is not shown and never counts as
+included), and the read models drop rules recorded as `unknown` from display (`src/lib/data/shown.ts`), so a check
+there answers "Access unknown". When the verdict is included, the product's
 own blackout summary (if recorded) is added to the reasons, because it can describe dates the per-resort rule
 does not record as ranges.
 
@@ -411,11 +412,9 @@ currency), so the tiers can be compared. Lessons, lodging and long-distance trav
 trip budget.
 
 Each line records its **kind**: published price, observed quote, your estimate, demo, assumption, or covered by
-pass. It also records its source and its original currency. A price whose provenance is `search-summary` or
-`unverified` (the catalog's research-grade prices) sets `confirmAtSource` on the line, its source text ends with
-"Researched — confirm at source", and the basket adds a caveat naming those lines. A pass-covered lift line
-does the same when the access rule is research-grade, and says when the reservation requirement is not
-recorded. Confirmed free / not-needed parking is labelled published only when a kind or a source is supplied;
+pass. It also records its source and its original currency. Researched (`search-summary`) prices are used and
+shown like any other published price; `unverified` prices are never used (`selectPrice` skips them). A
+pass-covered lift line says when the reservation requirement is not recorded. Confirmed free / not-needed parking is labelled published only when a kind or a source is supplied;
 otherwise it is an assumption.
 
 #### Day types and holidays
@@ -453,7 +452,6 @@ A snapshot is used only if all of these hold:
 Among the snapshots that apply, Piste ranks by:
 
 1. **Source quality.** Published prices and observed quotes come first, then your estimates, then demo prices.
-   (Research-grade "published" prices keep their rank but are flagged "confirm at source", see above.)
 2. **Specificity.** An exact day type ranks higher, then a dated window (a narrower window ranks higher), then a
    named season, then an exact category.
 3. **Recency.** The most recently observed snapshot wins.

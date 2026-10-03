@@ -17,6 +17,7 @@ import type { Money } from '@/lib/domain/money'
 import type { PassFamilyId } from '@/lib/domain/types'
 import { DISPLAY_CURRENCIES } from '@/components/settings/options'
 import { applyOverrides, isLive, loadPassData, seasonLabel, type DataCtx, type OverrideRow } from './core'
+import { shownAirport, shownResort, shownSeason } from './shown'
 import { lastAttemptRun, lastSuccess } from './deps'
 
 // ---------------------------------------------------------------------------
@@ -149,11 +150,16 @@ export async function loadCorrections(ctx: Pick<DataCtx, 'db' | 'prefs'>): Promi
   if (!overrides.length) return []
   const ids = [...new Set(overrides.map((o) => o.resortId))]
   const [resorts, seasons] = await Promise.all([
-    ctx.db.select().from(s.resorts).where(inArray(s.resorts.id, ids)),
+    ctx.db
+      .select()
+      .from(s.resorts)
+      .where(inArray(s.resorts.id, ids))
+      .then((rows) => rows.map(shownResort)),
     ctx.db
       .select()
       .from(s.resortSeasons)
-      .where(and(inArray(s.resortSeasons.resortId, ids), eq(s.resortSeasons.seasonId, ctx.prefs.activeSeasonId))),
+      .where(and(inArray(s.resortSeasons.resortId, ids), eq(s.resortSeasons.seasonId, ctx.prefs.activeSeasonId)))
+      .then((rows) => rows.map(shownSeason)),
   ])
   const byResort = new Map<string, OverrideRow[]>()
   for (const o of overrides) byResort.set(o.resortId, [...(byResort.get(o.resortId) ?? []), o])
@@ -235,7 +241,10 @@ export async function getSettingsView(ctx: DataCtx): Promise<SettingsView> {
   const { db } = ctx
   const [seasons, airports, pass, fx, resorts, rules, fired, recent, unread, corrections] = await Promise.all([
     db.select().from(s.seasons),
-    db.select().from(s.airports),
+    db
+      .select()
+      .from(s.airports)
+      .then((rows) => rows.map(shownAirport)),
     loadPassData(db, ctx.prefs.activeSeasonId),
     loadFx(ctx),
     loadResortChoices(ctx),

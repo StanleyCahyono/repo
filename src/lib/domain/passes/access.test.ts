@@ -165,19 +165,19 @@ describe('evaluateAccess — season and unknowns are never permission', () => {
     expect(v.reasons).toContain('Product blackout notes: Holiday blackouts apply at select resorts')
   })
 
-  it('a rule with no verification level still asks you to confirm at source', () => {
-    const r = { ...byResort('killington'), prov: provenance({ kind: 'manual' }) }
-    const v = evaluateAccess({ product: ikon, rule: r, resortId: 'killington', date: '2027-01-16' })
-    expect(v.confirmAtSource).toBe(true)
-    expect(v.reasons.some((x) => x.includes('confirm'))).toBe(true)
-  })
-
-  it('flags research-grade rules for confirmation', () => {
+  it('answers from a researched rule like any other, with no "confirm at source" caveat', () => {
     const r = { ...byResort('killington'), prov: provenance({ kind: 'manual', verification: 'search-summary' }) }
     const v = evaluateAccess({ product: ikon, rule: r, resortId: 'killington', date: '2027-01-16' })
     expect(v.canSki).toBe(true)
-    expect(v.confirmAtSource).toBe(true)
-    expect(v.reasons).toContain('Researched — confirm at source.')
+    expect(v.reasons.some((x) => /confirm at source|researched/i.test(x))).toBe(false)
+  })
+
+  it('treats an unverified rule as no rule: never included', () => {
+    const r = { ...byResort('killington'), prov: provenance({ kind: 'manual', verification: 'unverified' }) }
+    const v = evaluateAccess({ product: ikon, rule: r, resortId: 'killington', date: '2027-01-16' })
+    expect(v.status).toBe('unknown')
+    expect(v.canSki).toBe(false)
+    expect(v.ruleVersion).toBeNull()
   })
 })
 
@@ -426,16 +426,21 @@ describe('familyBadges', () => {
   const indy: PassProductInput = { id: 'indy-2026-27', familyId: 'indy', seasonId: '2026-27', name: 'Indy Pass' }
   const mcOld: PassProductInput = { id: 'mc-2025-26', familyId: 'mountain-collective', seasonId: '2025-26', name: 'MC' }
 
-  it('lists distinct families with at least one rule that is not "not-included"', () => {
+  it('lists distinct families with at least one rule that grants access or a discount', () => {
     const resortRules: PassRuleInput[] = [
       rule({ resortId: 'r', access: 'limited-days', days: 7 }),
       { ...rule({ resortId: 'r', access: 'not-included' }), productId: epic.id },
-      { ...rule({ resortId: 'r', access: 'unknown' }), productId: indy.id },
+      { ...rule({ resortId: 'r', access: 'discount-only' }), productId: indy.id },
       { ...rule({ resortId: 'r', access: 'unlimited' }), productId: mcOld.id },
     ]
     const badges = familyBadges(resortRules, [ikon, epic, indy, mcOld], { seasonId: '2026-27' })
     expect(badges.map((b) => b.familyId)).toEqual(['ikon', 'indy'])
     expect(badges.find((b) => b.familyId === 'indy')?.qualifiedOnly).toBe(true)
     expect(badges.every((b) => b.discoveryOnly)).toBe(true)
+  })
+
+  it('does not badge a family whose only rule is "unknown" (not shown)', () => {
+    const resortRules: PassRuleInput[] = [{ ...rule({ resortId: 'r', access: 'unknown' }), productId: indy.id }]
+    expect(familyBadges(resortRules, [indy], { seasonId: '2026-27' })).toEqual([])
   })
 })

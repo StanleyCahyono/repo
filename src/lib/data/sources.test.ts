@@ -152,23 +152,24 @@ describe('getSourcesView — connectors never look live when they are not', () =
 })
 
 describe('getSourcesView — coverage, failures, links, corrections, scheduler', () => {
-  it('classifies each fact by its source: official, researched, reference, yours, missing', async () => {
+  it('classifies each fact by its source: official, catalog, yours, missing', async () => {
     const v = await getSourcesView(fx.ctx)
     expect(v.coverage.fields.map((f) => f.key)).toHaveLength(16)
-    expect(cellOf(v, 'test-peak', 'liftPrices')).toMatchObject({ state: 'official', detail: '2 prices (weekday, weekend)', confirmAtSource: false })
+    expect(cellOf(v, 'test-peak', 'liftPrices')).toMatchObject({ state: 'official', detail: '2 prices (weekday, weekend)' })
     // A manual correction (beginner %) makes the terrain group "yours".
     expect(cellOf(v, 'test-peak', 'terrain')).toMatchObject({ state: 'manual' })
-    expect(cellOf(v, 'test-peak', 'drive')).toMatchObject({ state: 'reference', confirmAtSource: true })
+    expect(cellOf(v, 'test-peak', 'drive')).toMatchObject({ state: 'web', label: 'Catalog' })
     expect(cellOf(v, 'test-peak', 'drive').detail).toMatch(/curated estimate, not live routing/)
     expect(cellOf(v, 'test-peak', 'events')).toMatchObject({ state: 'missing', detail: 'No events on file — not proof there are none' })
     expect(cellOf(v, 'test-peak', 'passes')).toMatchObject({ state: 'official', detail: '1 product with a rule' })
     // A fresh official report without a connected adapter is judged by its source, never "live".
     expect(cellOf(v, 'test-peak', 'report')).toMatchObject({ state: 'official' })
     expect(cellOf(v, 'test-peak', 'report').detail).toMatch(/no report adapter, manual entries only/)
-    expect(cellOf(v, 'quiet-hill', 'opening')).toMatchObject({ state: 'researched', confirmAtSource: true, detail: 'Announced: 2027-01-10' })
+    expect(cellOf(v, 'quiet-hill', 'opening')).toMatchObject({ state: 'web', detail: 'Announced: 2027-01-10' })
     expect(cellOf(v, 'quiet-hill', 'status')).toMatchObject({ state: 'missing' })
     expect(cellOf(v, 'quiet-hill', 'report')).toMatchObject({ state: 'missing', detail: 'No official report adapter — manual entries only' })
-    expect(cellOf(v, 'far-west', 'passes')).toMatchObject({ state: 'reference', detail: '1 product with a rule, 1 with access not confirmed' })
+    // Ikon's 'unknown' rule at far-west is not shown, so no pass access is on file there.
+    expect(cellOf(v, 'far-west', 'passes')).toMatchObject({ state: 'missing', detail: 'No pass access recorded for 2026–27' })
     expect(cellOf(v, 'far-west', 'airports')).toMatchObject({ detail: 'DEN (practical)' })
     expect(v.coverage.byField.events).toEqual({ missing: 4 })
   })

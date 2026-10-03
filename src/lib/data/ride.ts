@@ -12,7 +12,8 @@ import * as s from '@/lib/db/schema'
 import type { OperatingScheduleRow, ResortRow } from '@/lib/db/rows'
 import type { Ctx } from '@/lib/context'
 import type { UnitPrefs } from '@/lib/domain/types'
-import { loadBundle, loadResortRows, needsConfirmation, pointsForRuns, floorHour, resortToday, seasonRowFor } from './core'
+import { loadBundle, loadResortRows, pointsForRuns, floorHour, resortToday, seasonRowFor } from './core'
+import { shownAirport, shownSchedules, shownTravel } from './shown'
 import { openingView, travelView } from './views'
 import { liftHoursFor } from '@/lib/jobs/assessments'
 import { addDays, addHours, formatInstant, formatLocalDate, hemisphereOf, previousSeasonId, relativeLabel, seasonIdForHemisphere, nextSaturday } from '@/lib/domain/time'
@@ -56,8 +57,6 @@ export interface RideAirport {
   minutes: number | null
   km: number | null
   role: string | null
-  /** "Reference — confirm at source" style wording when the fact needs checking, else null. */
-  confirm: string | null
 }
 
 export interface RideDrive {
@@ -67,7 +66,6 @@ export interface RideDrive {
   km: number | null
   isEstimate: boolean
   basis: string | null
-  confirm: string | null
   directionsUrl: string | null
 }
 
@@ -122,7 +120,11 @@ function whereOf(r: Pick<ResortRow, 'region' | 'country'>) {
 export async function getRideIndex(ctx: Ctx): Promise<RideIndex> {
   const [rows, drives, favs] = await Promise.all([
     loadResortRows(ctx, null),
-    ctx.db.select({ resortId: s.travelOptions.resortId, minutes: s.travelOptions.minutes }).from(s.travelOptions).where(eq(s.travelOptions.mode, 'drive-from-home')),
+    ctx.db
+      .select({ resortId: s.travelOptions.resortId, mode: s.travelOptions.mode, minutes: s.travelOptions.minutes, notes: s.travelOptions.notes, prov: s.travelOptions.prov })
+      .from(s.travelOptions)
+      .where(eq(s.travelOptions.mode, 'drive-from-home'))
+      .then(shownTravel),
     ctx.db.select().from(s.favorites),
   ])
   const driveBy = new Map(drives.map((d) => [d.resortId, d.minutes]))
@@ -179,8 +181,16 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
 
   const originCodes = p.travel.originAirports.length ? p.travel.originAirports : ['ITH']
   const [originRows, schedules] = await Promise.all([
-    ctx.db.select().from(s.airports).where(inArray(s.airports.iata, originCodes)),
-    ctx.db.select().from(s.operatingSchedules).where(and(eq(s.operatingSchedules.resortId, resortId), eq(s.operatingSchedules.activity, 'lifts'))),
+    ctx.db
+      .select()
+      .from(s.airports)
+      .where(inArray(s.airports.iata, originCodes))
+      .then((rows) => rows.map(shownAirport)),
+    ctx.db
+      .select()
+      .from(s.operatingSchedules)
+      .where(and(eq(s.operatingSchedules.resortId, resortId), eq(s.operatingSchedules.activity, 'lifts')))
+      .then(shownSchedules),
   ])
   const originBy = new Map(originRows.map((a) => [a.iata, a]))
   const origins: RideAirport[] = originCodes
@@ -195,7 +205,6 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
       minutes: a.driveFromHome?.minutes ?? null,
       km: a.driveFromHome?.km ?? null,
       role: a.role,
-      confirm: 'Estimate — confirm with a routing service',
     }))
 
   const gateways: RideAirport[] = tv.airports
@@ -211,7 +220,6 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
         minutes: a.minutes,
         km: a.km,
         role: a.role,
-        confirm: needsConfirmation(a.prov) ? (a.prov?.verification === 'search-summary' ? 'Researched — confirm at source' : 'Reference — confirm at source') : null,
       }
     })
     .filter((a): a is RideAirport => !!a)
@@ -225,7 +233,6 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
           km: tv.km,
           isEstimate: tv.isEstimate,
           basis: tv.basis,
-          confirm: needsConfirmation(tv.prov) ? (tv.prov?.verification === 'search-summary' ? 'Researched — confirm at source' : 'Estimate — confirm at source') : null,
           directionsUrl: directionsLink({ lat: home.lat, lon: home.lon }, { lat: r.lat, lon: r.lon })?.url ?? null,
         }
       : null

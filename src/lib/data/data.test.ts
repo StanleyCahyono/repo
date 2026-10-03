@@ -54,15 +54,17 @@ describe('listResortSummaries', () => {
     expect(peak.expense.total).toEqual({ amountMinor: 7000, currency: 'USD' })
     expect(peak.expense.passCoveredBy).toBe('Indy Base Pass')
     expect(peak.expense.missing.join(' ')).toMatch(/Parking/)
-    expect(peak.passes).toEqual([expect.objectContaining({ familyId: 'indy', confirmed: true })])
+    expect(peak.passes).toEqual([expect.objectContaining({ familyId: 'indy', accessTypes: ['limited-days'], qualifiedOnly: false })])
     expect(peak.myPass.status).toBe('covered')
     expect(peak.eventsInWindow).toEqual([])
     expect(peak.fit.score).not.toBeNull()
     expect(peak.dataGaps).toContain('No official report adapter — manual entries only')
 
     const far = list.find((r) => r.id === 'far-west')!
-    expect(far.passes).toEqual([expect.objectContaining({ familyId: 'ikon', confirmed: false })])
-    expect(far.dataGaps).toContain('Pass access unconfirmed for 2026–27')
+    // Ikon's rule at far-west is recorded as 'unknown': not shown, so no badge and no "not confirmed" gap.
+    expect(far.passes).toEqual([])
+    expect(far.dataGaps).toContain('No pass access recorded for 2026–27')
+    expect(far.dataGaps.join(' ')).not.toMatch(/unconfirmed|not confirmed|confirm at source/i)
     expect(far.status).toMatchObject({ status: 'open', lastConfirmedAt: '2027-01-15T13:00:00.000Z' })
     expect(far.weather.base).toBeNull()
     expect(far.dataGaps).toContain('Weather not fetched yet')

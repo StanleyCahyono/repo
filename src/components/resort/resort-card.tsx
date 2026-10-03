@@ -9,10 +9,10 @@
  * Shows, in order of decision value: name/place, operating status + opening information, conditions score (or its
  * designed missing / limited / closed state), snow (reported vs weather-model, labelled in text), day cost tier (or
  * "Incomplete estimate"), travel (drive estimate vs fly-in with the practical airport), pass-family badges
- * (unconfirmed ones dashed + "2026–27 unconfirmed"), the owned-pass answer for the date, favourite + compare
+ * (discount-only ones muted), the owned-pass answer for the date, favourite + compare
  * toggles. When there is neither a score nor any snow information, the two collapse into one honest
  * "Not reported yet" cell instead of repeating two empty ones. Secondary facts (fit reasons, features tri-state,
- * learning suitability, events, data gaps with the catalog research level, sources) sit behind the Details expander.
+ * learning suitability, events, data gaps, sources) sit behind the Details expander.
  *
  * Interaction: hover/focus 150ms border change and a 1px lift ('card'), or a left accent ('row'); `highlighted`
  * mirrors a hovered map marker; `selected` glides a teal accent between cards (shared layoutId). Optional
@@ -24,7 +24,7 @@
 import { useId, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowUpRight, CalendarDays, ChevronDown, CircleAlert, CircleCheck, CircleHelp, CircleSlash, MapPin, Siren, Ticket, TriangleAlert } from 'lucide-react'
+import { ArrowUpRight, CalendarDays, ChevronDown, CircleAlert, CircleCheck, CircleHelp, CircleSlash, MapPin, Siren, Ticket } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Badge } from '@/components/ui/badge'
@@ -35,7 +35,7 @@ import { ScoreChip } from '@/components/ui/score'
 import { SourceDrawer } from '@/components/ui/source-drawer'
 import { OpeningTag, StatusPill } from '@/components/ui/status'
 import { CompareToggle } from './card-compare'
-import { RESEARCH_LABEL, type CardPassLine, type ResortCardData } from './card-data'
+import { type CardPassLine, type ResortCardData } from './card-data'
 import { CardMedia } from './card-media'
 import { CardPassBadges } from './card-passes'
 
@@ -73,7 +73,6 @@ export interface ResortCardProps {
 const PASS_TONE: Record<CardPassLine['status'], string> = {
   covered: 'text-positive',
   'not-covered': 'text-ink-2',
-  unconfirmed: 'text-caution',
 }
 
 export function ResortCard({
@@ -224,7 +223,7 @@ export function ResortCard({
 
       <CardFacts r={r} compact={compact} />
 
-      {/* Passes, research hint, actions (stacked in narrow containers so nothing overlaps). */}
+      {/* Passes, data gaps, actions (stacked in narrow containers so nothing overlaps). */}
       <div className="flex flex-col gap-2 px-4 py-2.5 @min-[520px]:flex-row @min-[520px]:items-center @min-[520px]:gap-3">
         <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1.5">
           {r.passes.length ? (
@@ -241,19 +240,12 @@ export function ResortCard({
               </span>
             </span>
           ) : null}
-          {r.research || gapCount ? (
-            <span
-              className="inline-flex min-w-0 flex-wrap items-center gap-x-1 text-[12px] text-ink-3"
-              title={r.research ? RESEARCH_LABEL[r.research].long : undefined}
-            >
+          {gapCount ? (
+            <span className="inline-flex min-w-0 flex-wrap items-center gap-x-1 text-[12px] text-ink-3">
               <CircleAlert aria-hidden className="size-3.5 shrink-0" />
-              {r.research ? <span className="font-medium text-caution">{RESEARCH_LABEL[r.research].short}</span> : null}
-              {r.research && gapCount ? <span aria-hidden>·</span> : null}
-              {gapCount ? (
-                <span className="tnum">
-                  {gapCount} data gap{gapCount === 1 ? '' : 's'}
-                </span>
-              ) : null}
+              <span className="tnum">
+                {gapCount} data gap{gapCount === 1 ? '' : 's'}
+              </span>
             </span>
           ) : null}
         </div>
@@ -351,7 +343,7 @@ function CardFacts({ r, compact }: { r: ResortCardData; compact: boolean }) {
               <span className="font-display tnum text-[length:var(--fact-num)] leading-none text-copper">{r.expense.label}</span>
               {r.expense.amount ? <span className="tnum text-[14px] font-medium text-ink">≈ {r.expense.amount}</span> : null}
             </span>
-            <FactCaption tone={r.expense.confirmAtSource ? 'caution' : undefined}>{r.expense.caption}</FactCaption>
+            <FactCaption>{r.expense.caption}</FactCaption>
           </>
         )}
       </FactCell>
@@ -423,9 +415,9 @@ function FactCell({ label, sub, children, className }: { label: string; sub?: st
   )
 }
 
-function FactCaption({ children, tone }: { children: ReactNode; tone?: 'caution' }) {
+function FactCaption({ children }: { children: ReactNode }) {
   if (!children) return null
-  return <span className={cn('line-clamp-2 text-[12px] leading-snug', tone === 'caution' ? 'text-caution' : 'text-ink-3')}>{children}</span>
+  return <span className="line-clamp-2 text-[12px] leading-snug text-ink-3">{children}</span>
 }
 
 function TriState({ value }: { value: boolean | null }) {
@@ -515,7 +507,6 @@ function CardDetails({ r, pass, Sub }: { r: ResortCardData; pass: CardPassLine |
         <p className="text-[14px] font-semibold text-ink">{r.learning.label}</p>
         <p className="text-[13px] text-ink-2">
           {r.learning.reason}
-          {r.learning.researched && r.terrain ? <span className="text-ink-3"> · researched split, confirm at source</span> : null}
         </p>
         {r.terrain ? <TerrainBar terrain={r.terrain} /> : null}
       </section>
@@ -539,7 +530,6 @@ function CardDetails({ r, pass, Sub }: { r: ResortCardData; pass: CardPassLine |
         {pass ? (
           <p className={cn('text-[13.5px] font-medium', PASS_TONE[pass.status])}>
             {pass.productName}: {pass.headline}
-            {pass.confirmAtSource ? <span className="font-normal text-caution"> · confirm at source</span> : null}
           </p>
         ) : (
           <p className="text-[13.5px] text-ink-2">
@@ -556,7 +546,6 @@ function CardDetails({ r, pass, Sub }: { r: ResortCardData; pass: CardPassLine |
             ))}
           </ul>
         ) : null}
-        <p className="mt-1 text-[12px] text-ink-3">Family badges are for discovery — affiliation never implies you own a pass.</p>
       </section>
 
       <section>
@@ -586,14 +575,6 @@ function CardDetails({ r, pass, Sub }: { r: ResortCardData; pass: CardPassLine |
 
       <section className="@min-[540px]:col-span-2">
         <Sub className={head}>Data gaps</Sub>
-        {r.research ? (
-          <p className="mb-1.5 flex items-start gap-1.5 text-[13px] text-caution">
-            <TriangleAlert aria-hidden className="mt-0.5 size-3.5 shrink-0" />
-            <span>
-              <strong className="font-semibold">{RESEARCH_LABEL[r.research].short}.</strong> {RESEARCH_LABEL[r.research].long}.
-            </span>
-          </p>
-        ) : null}
         {r.gaps.length ? (
           <ul className="flex list-disc flex-col gap-0.5 pl-4 text-[13px] text-ink-2 marker:text-ink-3">
             {r.gaps.slice(0, 6).map((g) => (

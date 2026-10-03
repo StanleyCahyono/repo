@@ -32,6 +32,7 @@ import { latestRules } from '@/lib/domain/passes'
 import { addHours, hoursBetween } from '@/lib/domain/time'
 import type { AppMode, Provenance } from '@/lib/domain/types'
 import { currentReports, loadBundle, resortSeasonFor, resortToday, seasonLabel, verificationLabel, type Bundle, type Correction, type DataCtx } from './core'
+import { shownHotels, shownSchedules } from './shown'
 import {
   collectLinks,
   DEFAULT_CADENCES,
@@ -119,7 +120,7 @@ export interface ConnectorView extends ConnectorStatus {
   lastAttempt: RunView | null
 }
 
-export type CoverageState = 'live' | 'official' | 'manual' | 'derived' | 'researched' | 'reference' | 'stale' | 'failing' | 'missing' | 'demo'
+export type CoverageState = 'live' | 'official' | 'manual' | 'derived' | 'web' | 'unsourced' | 'stale' | 'failing' | 'missing' | 'demo'
 
 export const COVERAGE_FIELDS = [
   'location',
@@ -165,8 +166,8 @@ export const COVERAGE_STATE_LABEL: Record<CoverageState, string> = {
   official: 'Official source',
   manual: 'Confirmed by you',
   derived: 'Piste estimate',
-  researched: 'Researched — confirm at source',
-  reference: 'Reference data — confirm at source',
+  web: 'Catalog',
+  unsourced: 'No source on file',
   stale: 'Stale',
   failing: 'Refresh failing',
   missing: 'Missing',
@@ -182,8 +183,6 @@ export interface CoverageCell {
   /** Most relevant time: fetched / published / checked on / last success. */
   at: string | null
   sourceUrl: string | null
-  /** Research-grade or unsourced: "confirm at source". */
-  confirmAtSource: boolean
 }
 
 export interface CoverageRow {
@@ -499,12 +498,12 @@ function cadenceFor(job: JobName, c: Cadences): { minutes: number | null; staleA
 // ---------------------------------------------------------------------------
 // Coverage classification
 
-type SourceClass = 'official' | 'manual' | 'derived' | 'researched' | 'reference' | 'demo'
-/** Weakest-first ranking for groups of facts: one research-grade fact makes the group "confirm at source". */
-const CLASS_RANK: Record<SourceClass, number> = { official: 0, manual: 1, derived: 2, researched: 3, reference: 4, demo: 5 }
+type SourceClass = 'official' | 'manual' | 'derived' | 'web' | 'unsourced' | 'demo'
+/** Weakest-first ranking for groups of facts: the weakest source in a group labels the group. */
+const CLASS_RANK: Record<SourceClass, number> = { official: 0, manual: 1, derived: 2, web: 3, unsourced: 4, demo: 5 }
 
 export function sourceClass(p: Provenance | null | undefined): SourceClass {
-  if (!p) return 'reference'
+  if (!p) return 'unsourced'
   if (p.kind === 'demo') return 'demo'
   if (p.kind === 'derived') return 'derived'
   switch (p.verification) {
@@ -514,9 +513,9 @@ export function sourceClass(p: Provenance | null | undefined): SourceClass {
     case 'user-confirmed':
       return 'manual'
     case 'search-summary':
-      return 'researched'
+      return 'web'
     default:
-      return 'reference'
+      return 'unsourced'
   }
 }
 
@@ -528,7 +527,6 @@ function cell(field: CoverageField, state: CoverageState, detail: string | null,
     detail,
     at,
     sourceUrl,
-    confirmAtSource: state === 'researched' || state === 'reference',
   }
 }
 
@@ -538,7 +536,7 @@ const provAt = (p: Provenance | null | undefined) => p?.publishedAt ?? p?.fetche
 function provCell(field: CoverageField, present: boolean, p: Provenance | null | undefined, detail: string | null, missing: string): CoverageCell {
   if (!present) return cell(field, 'missing', missing)
   const c = sourceClass(p)
-  return cell(field, c, detail ?? (p ? verificationLabel(p) : 'No source recorded'), provAt(p), p?.sourceUrl ?? null)
+  return cell(field, c, detail ?? (p ? (verificationLabel(p) ?? COVERAGE_STATE_LABEL[c]) : 'No source recorded'), provAt(p), p?.sourceUrl ?? null)
 }
 
 /** Several facts: the weakest source class wins, with a breakdown. */
@@ -683,14 +681,14 @@ function coverageFor(e: ResortEvidence, ctx: DataCtx, demo: boolean): CoverageCe
         : origin === 'official-by-user'
           ? 'Official report entered by you'
           : isResearchedReport(rep)
-            ? 'Report found by catalog research'
+            ? 'Dated report from the catalog'
             : 'Report typed from an official source'
     const detail = `${what} for ${rep.localDate}, published ${rep.reportedAt ? `${ageText(repAge!)} ago` : 'at an unknown time'}${adapterOn ? '' : ' — no report adapter, manual entries only'}`
     // "Live" only for a fresh report from a connected adapter; anything else is judged by its own source.
     const state: CoverageState = !fresh ? 'stale' : adapterOn && origin === 'official-adapter' ? 'live' : sourceClass(rep.prov)
     cells.push(cell('report', state, detail, rep.reportedAt ?? rep.createdAt, rep.prov?.sourceUrl ?? null))
   } else if (adapterOn) {
-    cells.push(cell('report', 'missing', e.adapter!.state === 'unverified' ? 'Adapter (unverified) has not produced a report yet' : 'Adapter has not produced a report yet', e.reports?.lastSuccessAt ?? null))
+    cells.push(cell('report', 'missing', 'Adapter has not produced a report yet', e.reports?.lastSuccessAt ?? null))
   } else cells.push(cell('report', 'missing', e.adapter ? 'Report adapter disabled — manual entries only' : 'No official report adapter — manual entries only'))
 
   // Weather (model output).
@@ -728,15 +726,7 @@ function coverageFor(e: ResortEvidence, ctx: DataCtx, demo: boolean): CoverageCe
 
   // Pass access for this season's products.
   const current = [...new Set(e.rules.map((x) => x.productId))].flatMap((pid) => latestRules(e.rules, pid)).filter((x) => x.resortId === r.id)
-  const unknown = current.filter((x) => x.access === 'unknown').length
-  cells.push(
-    groupCell(
-      'passes',
-      current.map((x) => x.prov),
-      `${plural(current.length, 'product')} with a rule${unknown ? `, ${unknown} with access not confirmed` : ''}`,
-      `No pass access recorded for ${st}`,
-    ),
-  )
+  cells.push(groupCell('passes', current.map((x) => x.prov), `${plural(current.length, 'product')} with a rule`, `No pass access recorded for ${st}`))
   return cells
 }
 
@@ -786,8 +776,8 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
       ]
 
   const [schedules, hotels, reportsNow, meta, fetchStats, failureRows, linkRows, allLinks, histories] = await Promise.all([
-    db.select().from(s.operatingSchedules),
-    db.select().from(s.hotels),
+    db.select().from(s.operatingSchedules).then(shownSchedules),
+    db.select().from(s.hotels).then(shownHotels),
     currentReports(b),
     db
       .select()
@@ -873,7 +863,7 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
       ;[h, label] = ['failing', `The latest ${lastFetch && !lastFetch.ok ? 'fetch' : 'refresh'} failed${successAt ? '' : ' — it has never succeeded'}`]
     } else if (!successAt) [h, label] = ['never-succeeded', 'No successful fetch yet']
     else if (staleAfterMin !== null && hoursBetween(successAt, now) * 60 > staleAfterMin) [h, label] = ['stale', 'Last success is older than expected']
-    else [h, label] = ['ok', c.state === 'unverified' ? 'Working (adapter unverified — the parser may break if the page changes)' : 'Working']
+    else [h, label] = ['ok', c.state === 'unverified' ? 'Working (new parser — it may break if the page changes)' : 'Working']
     return {
       ...c,
       health: h,
@@ -1039,7 +1029,6 @@ export async function getSourcesView(ctx: DataCtx): Promise<SourcesView> {
     notes: [
       'Last success counts only refreshes that fetched something: a failed or empty refresh never advances it.',
       'Weather is model output for a grid cell — "refreshed recently" never means observed.',
-      'Researched catalog facts are shown as "confirm at source" until confirmed.',
     ],
   }
 }

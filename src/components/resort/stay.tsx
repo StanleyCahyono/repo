@@ -1,6 +1,6 @@
 /**
- * 06 Stay & après — the curated hotels (tier, brand, distance/transfer as researched, ski-in/ski-out only when
- * verified, parking/shuttle, official link) with "Check rates" unless a sourced dated quote exists, each savable to
+ * 06 Stay & après — the curated hotels (tier, brand, distance/transfer as stated by the source, ski-in/ski-out only
+ * when stated, parking/shuttle, official link) with "Check rates" unless a sourced dated quote exists, each savable to
  * a trip; and events, dated vs not announced (a previous edition is never rolled forward). Restaurants and venues
  * appear only when the catalog has them — it has none yet, so that block is omitted.
  */
@@ -14,9 +14,9 @@ import type { ResortPageExtras } from '@/lib/data/resort-page'
 import type { EventView } from '@/lib/data/views'
 import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { formatLocalDate } from '@/lib/domain/time'
-import { ConfirmTag, ResortSection, Src, SubHead } from './section'
+import { ResortSection, Src, SubHead } from './section'
 import { TripSheet } from './trip-sheet'
-import { clock, confirmText, dayLabel, dotJoin, EVENT_STATUS_TEXT, hostOf, HOTEL_TIER_LABEL, needsCheck, shortDate, src, type PageView } from './format'
+import { clock, dayLabel, dotJoin, EVENT_STATUS_TEXT, hostOf, HOTEL_TIER_LABEL, shortDate, src, type PageView } from './format'
 
 const TIER_ORDER = ['budget', 'comfortable', 'premium']
 
@@ -36,7 +36,7 @@ export function StaySection({ d, x, v }: { d: ResortDetail; x: ResortPageExtras;
       headline={
         d.hotels.length
           ? `${d.hotels.length} ${d.hotels.length === 1 ? 'place' : 'places'} to stay on file${d.events.upcoming.length ? `, ${d.events.upcoming.length} ${d.events.upcoming.length === 1 ? 'event' : 'events'} ahead` : ''}.`
-          : 'Lodging not researched yet.'
+          : 'No lodging on file yet.'
       }
       lead="Piste never shows ratings or reviews. Room prices appear only from a dated, sourced quote; otherwise “Check rates”."
     >
@@ -62,12 +62,11 @@ function HotelRow({ h, d, x, v }: { h: HotelView; d: ResortDetail; x: ResortPage
         </div>
         <p className="mt-1 text-[13.5px] text-ink-2">{h.distanceText ?? 'Distance to the lifts not recorded.'}</p>
         <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-          {needsCheck(h.prov) ? <ConfirmTag text={confirmText(h.prov)} /> : null}
           <span className={cn('text-[12.5px]', h.skiInOut === 'verified-yes' ? 'font-medium text-positive' : 'text-ink-3')}>
-            Ski-in/ski-out: {h.skiInOut === 'verified-yes' ? 'yes (verified)' : h.skiInOut === 'verified-no' ? 'no (verified)' : 'not verified'}
+            Ski-in/ski-out: {h.skiInOut === 'verified-yes' ? 'yes' : h.skiInOut === 'verified-no' ? 'no' : 'unknown'}
           </span>
         </div>
-        {/* Parking, shuttle and the research notes are secondary — one click away. */}
+        {/* Parking, shuttle and notes are secondary — one click away. */}
         <Disclosure summary="Parking, shuttle and notes" className="mt-1">
           <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[12.5px]">
             <dt className="text-ink-3">Parking</dt>
@@ -157,7 +156,7 @@ function Hotels({ d, x, v, lodging }: { d: ResortDetail; x: ResortPageExtras; v:
         </p>
       )}
       <p className="mt-3 text-[12.5px] text-ink-3">
-        Room prices appear only for a sourced quote with dates, occupancy, fees and currency — otherwise “Check rates”. Distances are as researched, not measured.
+        Room prices appear only for a sourced quote with dates, occupancy, fees and currency — otherwise “Check rates”.
       </p>
     </section>
   )

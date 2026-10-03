@@ -25,7 +25,7 @@ Piste is a single-user ski planning app (Next.js 16 App Router, React 19, TypeSc
 ## Data honesty rules (non-negotiable)
 - Unknown is `null` and renders via `<Missing/>` ("Unknown" vs "Not offered"). Never render 0 for unknown, never invent values, dates, prices, events, flight numbers, ratings or photos.
 - Every important mutable fact carries provenance (`Provenance` in `src/lib/domain/types.ts`): kind (official / observed / modeled / derived / manual / historical / demo), provider, sourceUrl, publishedAt, fetchedAt, staleAfter, verification.
-- Catalog facts researched by web search have `verification: 'search-summary'` and must be shown as "Researched — confirm at source", never as live or official-verified.
+- Researched catalog facts (`verification: 'search-summary'`) are shown like any other fact — no "Researched — confirm at source" chips, notes or labels — but never as live. Facts with `verification: 'unverified'` (Piste reference data, no source behind them) are not displayed at all: the read models drop them centrally (`src/lib/data/shown.ts`), so they read as unknown with no placeholder; never substitute an invented value. Coordinates, time zones, map geometry and identifiers are kept. Pass rules recorded as `access: 'unknown'` are not shown and never count as included.
 - Weather-model output is `modeled`, never "observed". Forecast-derived surfaces read "Likely …". Scores describe suitability, not safety.
 - An announced opening date never turns into "Open" automatically. Unknown operating status is never treated as open. A confirmed closure overrides any score.
 - A failed refresh must not advance "last successful update"; refetching an unchanged report must not reset its observation age.

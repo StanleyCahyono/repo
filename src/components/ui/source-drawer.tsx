@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { Sheet } from './sheet'
 import { KindTag } from './provenance'
 import type { Provenance } from '@/lib/domain/types'
+import { providerLabel, shownNote } from '@/lib/domain/source-label'
 import { cn } from '@/lib/ui/cn'
 
 export interface SourceItem {
@@ -13,12 +14,11 @@ export interface SourceItem {
   prov: Provenance | null
 }
 
+/** Shown only where it adds something; researched catalog facts carry no verification line. */
 const VERIFICATION_TEXT: Record<string, string> = {
   api: 'Retrieved from a documented API',
   'official-page': 'Read from the official page',
-  'search-summary': 'Researched via web search — confirm at the source',
   'user-confirmed': 'Confirmed by you',
-  unverified: 'Not verified',
 }
 
 function fmt(iso: string | null | undefined) {
@@ -30,72 +30,75 @@ function fmt(iso: string | null | undefined) {
 export function SourceList({ items }: { items: SourceItem[] }) {
   return (
     <ul className="flex flex-col divide-y divide-divider">
-      {items.map((it, i) => (
-        <li key={i} className="py-3.5 first:pt-0">
-          <div className="flex items-baseline justify-between gap-3">
-            <p className="min-w-0 text-[14px] font-semibold break-words text-ink">{it.label}</p>
-            {it.prov ? <KindTag kind={it.prov.kind} /> : null}
-          </div>
-          {it.value ? <div className="mt-0.5 text-[14px] text-ink">{it.value}</div> : null}
-          {it.prov ? (
-            <dl className="mt-2.5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1 rounded-[14px] bg-chip-track px-3 py-2.5 text-[12.5px]">
-              {it.prov.provider ? (
-                <>
-                  <dt className="text-ink-3">Provider</dt>
-                  <dd className="text-ink-2">{it.prov.provider}</dd>
-                </>
-              ) : null}
-              {it.prov.season ? (
-                <>
-                  <dt className="text-ink-3">Season</dt>
-                  <dd className="text-ink-2">{it.prov.season}</dd>
-                </>
-              ) : null}
-              {it.prov.publishedAt ? (
-                <>
-                  <dt className="text-ink-3">Published</dt>
-                  <dd className="tnum text-ink-2">{fmt(it.prov.publishedAt)}</dd>
-                </>
-              ) : null}
-              <dt className="text-ink-3">Retrieved</dt>
-              <dd className="tnum text-ink-2">{fmt(it.prov.fetchedAt) ?? 'Not recorded'}</dd>
-              {it.prov.staleAfter ? (
-                <>
-                  <dt className="text-ink-3">Stale after</dt>
-                  <dd className="tnum text-ink-2">{fmt(it.prov.staleAfter)}</dd>
-                </>
-              ) : null}
-              {it.prov.verification ? (
-                <>
-                  <dt className="text-ink-3">Verification</dt>
-                  <dd className={cn('text-ink-2', it.prov.verification === 'search-summary' && 'font-medium text-caution')}>
-                    {VERIFICATION_TEXT[it.prov.verification] ?? it.prov.verification}
-                  </dd>
-                </>
-              ) : null}
-              {it.prov.note ? (
-                <>
-                  <dt className="text-ink-3">Note</dt>
-                  <dd className="text-ink-2">{it.prov.note}</dd>
-                </>
-              ) : null}
-            </dl>
-          ) : (
-            <p className="mt-1 text-[12.5px] text-ink-3 italic">No source recorded.</p>
-          )}
-          {it.prov?.sourceUrl ? (
-            <a
-              href={it.prov.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex max-w-full items-center gap-1 text-[13px] font-medium break-all text-teal hover:underline"
-            >
-              <ExternalLink aria-hidden className="size-3.5 shrink-0" />
-              {it.prov.sourceUrl.replace(/^https?:\/\//, '').slice(0, 80)}
-            </a>
-          ) : null}
-        </li>
-      ))}
+      {items.map((it, i) => {
+        const provider = providerLabel(it.prov?.provider)
+        const verification = it.prov?.verification ? (VERIFICATION_TEXT[it.prov.verification] ?? null) : null
+        const note = shownNote(it.prov)
+        return (
+          <li key={i} className="py-3.5 first:pt-0">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="min-w-0 text-[14px] font-semibold break-words text-ink">{it.label}</p>
+              {it.prov ? <KindTag kind={it.prov.kind} /> : null}
+            </div>
+            {it.value ? <div className="mt-0.5 text-[14px] text-ink">{it.value}</div> : null}
+            {it.prov ? (
+              <dl className="mt-2.5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1 rounded-[14px] bg-chip-track px-3 py-2.5 text-[12.5px]">
+                {provider ? (
+                  <>
+                    <dt className="text-ink-3">Provider</dt>
+                    <dd className="text-ink-2">{provider}</dd>
+                  </>
+                ) : null}
+                {it.prov.season ? (
+                  <>
+                    <dt className="text-ink-3">Season</dt>
+                    <dd className="text-ink-2">{it.prov.season}</dd>
+                  </>
+                ) : null}
+                {it.prov.publishedAt ? (
+                  <>
+                    <dt className="text-ink-3">Published</dt>
+                    <dd className="tnum text-ink-2">{fmt(it.prov.publishedAt)}</dd>
+                  </>
+                ) : null}
+                <dt className="text-ink-3">Retrieved</dt>
+                <dd className="tnum text-ink-2">{fmt(it.prov.fetchedAt) ?? 'Not recorded'}</dd>
+                {it.prov.staleAfter ? (
+                  <>
+                    <dt className="text-ink-3">Stale after</dt>
+                    <dd className="tnum text-ink-2">{fmt(it.prov.staleAfter)}</dd>
+                  </>
+                ) : null}
+                {verification ? (
+                  <>
+                    <dt className="text-ink-3">Verification</dt>
+                    <dd className="text-ink-2">{verification}</dd>
+                  </>
+                ) : null}
+                {note ? (
+                  <>
+                    <dt className="text-ink-3">Note</dt>
+                    <dd className="text-ink-2">{note}</dd>
+                  </>
+                ) : null}
+              </dl>
+            ) : (
+              <p className="mt-1 text-[12.5px] text-ink-3 italic">No source recorded.</p>
+            )}
+            {it.prov?.sourceUrl ? (
+              <a
+                href={it.prov.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex max-w-full items-center gap-1 text-[13px] font-medium break-all text-teal hover:underline"
+              >
+                <ExternalLink aria-hidden className="size-3.5 shrink-0" />
+                {it.prov.sourceUrl.replace(/^https?:\/\//, '').slice(0, 80)}
+              </a>
+            ) : null}
+          </li>
+        )
+      })}
     </ul>
   )
 }

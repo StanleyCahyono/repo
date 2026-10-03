@@ -33,6 +33,8 @@ import {
   latestAssessments,
   loadBundle,
   NOT_PERSONAL_REPORT,
+  NOT_UNVERIFIED_RESEARCH,
+  isUnverified,
   notDemoProv,
   pointsForRuns,
   resortHemisphere,
@@ -49,7 +51,6 @@ import {
   alertsOverlapping,
   basketVerdict,
   candidateOps,
-  catalogResearchGap,
   closureView,
   dayBasket,
   eventsOverlapping,
@@ -148,8 +149,8 @@ async function buildCandidates(
       const pass = myPassView(verdicts)
       const basket = date === sum.date ? null : dayBasket(b, r.id, date, basketVerdict(verdicts))
       const cost = basket
-        ? { total: basket.total, tier: basket.tier.tier, missing: basket.missing.filter((m) => m.required).map((m) => m.message), confirmAtSource: basket.lines.some((l) => l.confirmAtSource) }
-        : { total: sum.expense.total, tier: sum.expense.tier, missing: sum.expense.requiredMissing, confirmAtSource: sum.expense.confirmAtSource }
+        ? { total: basket.total, tier: basket.tier.tier, missing: basket.missing.filter((m) => m.required).map((m) => m.message) }
+        : { total: sum.expense.total, tier: sum.expense.tier, missing: sum.expense.requiredMissing }
       return {
         date,
         conditions: Object.fromEntries(SCORING_MODES.map((m) => [m, toConditions(assessments.get(assessmentKey(r.id, date, m)))])),
@@ -174,7 +175,6 @@ async function buildCandidates(
         reportDate: report?.localDate ?? null,
         reportKind: report?.kind ?? null,
         weatherFetchedAt: sum.freshness.weatherFetchedAt,
-        catalogResearched: catalogResearchGap(r) !== null,
       },
       days,
     }
@@ -368,6 +368,7 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
           gte(s.operationalReports.createdAt, since2),
           lte(s.operationalReports.createdAt, now),
           NOT_PERSONAL_REPORT,
+          NOT_UNVERIFIED_RESEARCH,
           b.live ? sql`${s.operationalReports.kind} <> 'demo'` : undefined,
         ),
       )
@@ -385,7 +386,8 @@ async function recentChanges(b: Bundle): Promise<ChangeItem[]> {
       detail: e.note,
       prov: e.prov,
     })),
-    ...historyRows.filter((h) => b.byId.has(h.resortId)).map((h) => ({
+    // A change to an unverified (not shown) date is not shown either.
+    ...historyRows.filter((h) => b.byId.has(h.resortId) && !isUnverified(h.prov)).map((h) => ({
       at: h.changedAt,
       resortId: h.resortId,
       resortName: name(h.resortId),

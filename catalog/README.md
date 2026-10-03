@@ -19,13 +19,16 @@ The app then shows an honest **Unknown** or **Not announced** state with a link 
 
 ## Evidence levels
 
-Each `source.verification` value tells the app how to label a fact:
+Each `source.verification` value tells the app whether to show a fact (the rule lives in `src/lib/data/shown.ts`):
 
 | `verification` | Meaning | What the app shows |
 |---|---|---|
-| `search-summary` | **Researched.** The fact came from a web-search result summary on 2026-09-28, and the source URL is recorded. Page fetches were blocked in the build environment, so the pages themselves were not read. | "Researched — confirm at source" (source drawer: "Researched via web search — confirm at the source") |
-| `unverified` | **Piste reference data.** Stable facts supplied without a web check: coordinates, base/summit elevation and vertical, timezone, region, operator (as of 2025), official homepages, airport names and locations, pass-site homepages, reference-only transfer options, and prior-season pass affiliations. Deep links (sub-pages) are recorded only when research cited them; otherwise the homepage is given. Notes read "Piste reference data (not web-verified in this build) — confirm at source". | "Not verified", plus the note; pass rules add "Rule source not verified — confirm on the official pass page." |
-| `official-page` / `api` / `user-confirmed` | Not used by the build. Upgrade a fact to one of these after you check it against the official page, or after a live adapter or your own correction replaces it. | "Read from the official page" / "Retrieved from a documented API" / "Confirmed by you" |
+| `search-summary` | **Researched.** The fact came from a web-search result summary on 2026-09-28, and the source URL is recorded. Page fetches were blocked in the build environment, so the pages themselves were not read. | Shown like any other fact — no caveat label. The source drawer gives the provider, date and source link. |
+| `unverified` | **Piste reference data.** Stable facts supplied without a web check: coordinates, base/summit elevation and vertical, timezone, region, operator (as of 2025), official homepages, airport names and locations, pass-site homepages, reference-only transfer options, and prior-season pass affiliations. Deep links (sub-pages) are recorded only when research cited them; otherwise the homepage is given. Notes read "Piste reference data (not web-verified in this build) — confirm at source". | **Not shown.** The value is treated as unknown (no placeholder, no label); an unverified pass rule never counts as access. Coordinates, timezones, map geometry and identifiers (names, IATA codes, homepages) are still used so the app works. Free text starting "Reference note:" / "Reference, confirm:" is not shown either. |
+| `official-page` / `api` / `user-confirmed` | Not used by the build. Upgrade a fact to one of these after you check it against the official page, or after a live adapter or your own correction replaces it. | Shown normally; the source drawer adds "Read from the official page" / "Retrieved from a documented API" / "Confirmed by you" |
+
+Pass access rules recorded as `access: "unknown"` are not shown either (no "not confirmed" rows); with no shown rule,
+a pass check answers "Access unknown" and never counts the day as included.
 
 **Never supplied from memory**, so these fields stay unknown unless research found them: 2026-27 opening and closing
 dates, all prices, operating hours, 2026-27 pass access specifics (days, blackouts, reservations), event dates, hotel
@@ -124,7 +127,7 @@ survive re-seeding, and the catalog never overwrites them.
    - A changed access rule becomes a new rule version.
    - Opening-date changes are logged.
    - A dated report in `recentReports` is stored once, as an official report of its own `observedOn` day with its
-     source and "Researched — confirm at source" (verification from its `source`; no publish time, so it ages from
+     source, shown as a dated report of that day (verification from its `source`; no publish time, so it ages from
      that day). Re-seeding unchanged content writes nothing, so its age is never reset; changed content for the same
      day becomes a new revision. Its `operatingStatus` goes through the normal status history ("closed" = closed that
      day); an "open" snapshot never becomes the season's actual opening. A day still in the future at the resort, or

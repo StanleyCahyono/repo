@@ -33,7 +33,6 @@ import {
   applyClosure,
   basketVerdict,
   beginnerView,
-  catalogResearchGap,
   closureView,
   dayBasket,
   eventsOverlapping,
@@ -260,7 +259,7 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     if (status.status === 'unknown') gaps.push(event && status.note ? `Operating status unavailable — ${status.note}` : 'Operating status unavailable — nothing recorded yet')
     const adapter = reportAdapters.get(r.id)
     if (!adapter) gaps.push('No official report adapter — manual entries only')
-    else if (adapter.state === 'unverified') gaps.push('Official report adapter is unverified — the parser may fail')
+    else if (adapter.state === 'unverified') gaps.push('Official report reader is new — it may fail if the page changes')
     else if (adapter.state === 'disabled') gaps.push('Official report adapter is disabled')
     if (!report) gaps.push('No snow report on file')
     if (!pointRuns.size) gaps.push('Weather not fetched yet')
@@ -269,14 +268,10 @@ export async function buildSummaries(b: Bundle, opts: { date: string; mode: Scor
     else if (!score) gaps.push('No conditions score yet for this date')
     const seasonTxt = seasonLabel(b.seasonId)
     if (!badges.length) gaps.push(`No pass access recorded for ${seasonTxt}`)
-    else if (badges.some((x) => !x.confirmed)) gaps.push(`Pass access unconfirmed for ${seasonTxt}`)
-    if (myPass.status === 'unconfirmed') gaps.push(`Access with your ${myPass.productName} is not confirmed`)
     if (expense.tier === 'incomplete') gaps.push(`Cost estimate incomplete${expense.requiredMissing.length ? `: ${expense.requiredMissing.join(' ')}` : ''}`)
     if (opening.label === 'not-announced') gaps.push(`Opening date for ${seasonLabel(seasonId)} not announced`)
     if (travel.driveMinutes !== null && travel.isEstimate) gaps.push('Drive time is a curated estimate, not live routing')
     if (travel.driveMinutes === null && !travel.airports.length) gaps.push('No travel information recorded')
-    const research = catalogResearchGap(r)
-    if (research) gaps.push(research)
 
     return {
       ...identityOf(r),

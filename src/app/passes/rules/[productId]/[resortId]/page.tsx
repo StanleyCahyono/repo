@@ -8,7 +8,7 @@ import { ACCESS_TYPE_LABEL, dotJoin, familyId, instantDate, plural } from '@/com
 import { checkerHref } from '@/components/passes/params'
 import { Rise } from '@/components/passes/rise'
 import { RuleEditor } from '@/components/passes/rule-editor'
-import { ConfirmTag, PassesSection, YouEnteredTag } from '@/components/passes/section'
+import { PassesSection, YouEnteredTag } from '@/components/passes/section'
 import { getCtx } from '@/lib/context'
 import { getRuleEditorView } from '@/lib/data/passes-screen'
 
@@ -50,7 +50,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
         poolLabel: cur.poolLabel,
         blackouts: cur.blackouts.map((b) => ({ from: b.from, to: b.to, label: b.label ?? null })),
         reservationRequired: cur.reservationRequired,
-        // Free-text research notes are not carried into an entry labelled "you entered".
+        // Free-text notes from the earlier record are not carried into an entry labelled "you entered".
         reservationNotes: cur.youEntered ? cur.reservationNotes : null,
         discountText: cur.youEntered ? cur.discountText : null,
         eligibilityNotes: cur.youEntered ? cur.eligibilityNotes : null,
@@ -74,7 +74,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
         meta={
           <>
             Read the official page, then record what it says. Saving adds <strong className="font-semibold text-ink">version {view.nextVersion}</strong>
-            {cur ? ` — version ${cur.version} (${cur.verificationLabel.toLowerCase()}) stays in the history` : ''}. Your entry is shown as “Manual — you entered” with
+            {cur ? ` — version ${cur.version}${cur.verificationLabel ? ` (${cur.verificationLabel.toLowerCase()})` : ''} stays in the history` : ''}. Your entry is shown as “Manual — you entered” with
             its source link.
           </>
         }
@@ -111,13 +111,13 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
                   </p>
                   <p className="mt-1 flex flex-wrap items-center gap-2 text-[12.5px] text-ink-3">
                     <span>Version {cur.version}</span>
-                    {cur.youEntered ? <YouEnteredTag /> : cur.confirmAtSource ? <ConfirmTag text={cur.verificationLabel} /> : <span>{cur.verificationLabel}</span>}
+                    {cur.youEntered ? <YouEnteredTag /> : cur.verificationLabel ? <span>{cur.verificationLabel}</span> : null}
                     <SourceDrawer title="Current rule" items={[{ label: `Version ${cur.version}`, value: ACCESS_TYPE_LABEL[cur.access], prov: cur.prov }]} />
                   </p>
                   {cur.notes ? <p className="mt-2 text-[13px] text-ink-2">{cur.notes}</p> : null}
                 </>
               ) : (
-                <p className="text-[13.5px] text-ink-2">No rule recorded — access is not confirmed.</p>
+                <p className="text-[13.5px] text-ink-2">No rule recorded — not counted as access.</p>
               )}
               {view.history.length > 1 ? (
                 <details className="mt-3 border-t border-divider pt-2">
@@ -128,7 +128,8 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
                     {view.history.map((h) => (
                       <li key={h.id} className="text-ink-2">
                         <span className="font-medium text-ink tnum">v{h.version}</span> · {ACCESS_TYPE_LABEL[h.access]}
-                        {h.days != null ? ` · ${plural(h.days, 'day')}` : ''} · {h.verificationLabel}
+                        {h.days != null ? ` · ${plural(h.days, 'day')}` : ''}
+                        {h.verificationLabel ? ` · ${h.verificationLabel}` : ''}
                         {instantDate(h.youEntered ? h.prov?.fetchedAt : h.updatedAt) ? ` · ${instantDate(h.youEntered ? h.prov?.fetchedAt : h.updatedAt)}` : ''}
                       </li>
                     ))}

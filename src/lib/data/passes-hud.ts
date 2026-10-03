@@ -15,8 +15,9 @@ import * as s from '@/lib/db/schema'
 import type { PriceSnapshotRow, ResortSeasonRow } from '@/lib/db/rows'
 import { money, type Money } from '@/lib/domain/money'
 import { PASS_FAMILIES } from '@/lib/domain/types'
-import { applyOverrides, isLive, loadResortRows, needsConfirmation, seasonLabel, type DataCtx } from './core'
+import { applyOverrides, isLive, loadResortRows, seasonLabel, type DataCtx } from './core'
 import type { FamilyView, PassProductView } from './passes'
+import { isUnverified, shownSeason } from './shown'
 
 // ---------------------------------------------------------------------------
 // Season context for the checked dates
@@ -61,7 +62,7 @@ export async function getSeasonContext(ctx: DataCtx, resortId: string, seasonId:
     loadResortRows(ctx, [resortId]),
     ctx.db.select().from(s.resortOverrides).where(eq(s.resortOverrides.resortId, resortId)),
   ])
-  let row: ResortSeasonRow | null = rows[0] ?? null
+  let row: ResortSeasonRow | null = rows[0] ? shownSeason(rows[0]) : null
   if (row && resort[0]) row = applyOverrides(resort[0], row, ovs).season ?? row
   return seasonContextFor(row, from, to)
 }
@@ -76,9 +77,7 @@ export interface FamilyCard {
   /** Cheapest current adult price on file across the family's products; null = not recorded. */
   price: Money | null
   priceProduct: string | null
-  /** The price line is research-grade. */
-  priceConfirm: boolean
-  /** A sales statement on file (e.g. "Reports say … sold out (unconfirmed)"). */
+  /** A sales statement on file (e.g. "Reports say … sold out"). */
   salesNote: string | null
   officialUrl: string | null
   seasonLabel: string
@@ -108,7 +107,6 @@ export function familyCards(families: readonly FamilyView[], products: readonly 
         productCount: ps.length,
         price: best?.currentPrice?.amount ?? null,
         priceProduct: best?.name ?? null,
-        priceConfirm: best?.currentPrice?.confirmAtSource ?? false,
         salesNote: sales,
         officialUrl: f.links.official ?? (best?.prov?.sourceUrl ?? null),
         seasonLabel: seasonLabel(seasonId),
@@ -124,7 +122,6 @@ export interface TicketRef {
   amount: Money
   seasonId: string | null
   dayType: string | null
-  confirmAtSource: boolean
 }
 
 export interface BreakEvenView {
@@ -136,7 +133,6 @@ export interface BreakEvenView {
   passPrice: Money
   /** 'paid' when it is the price you recorded for your own pass. */
   passPriceKind: 'paid' | 'current'
-  passConfirm: boolean
   owned: boolean
   /** The adult reference ticket (or the highest adult figure), and the lowest adult day ticket when different. */
   typical: TicketRef | null
@@ -154,11 +150,13 @@ const NOT_DAY = /\b\d+\s*-?\s*day (?:pack|ticket pack)|pack|night|half[- ]day|af
 
 /** Pure: the adult single-day ticket figures that can price a ski day, newest season first. */
 export function adultDayTickets(rows: readonly Pick<PriceSnapshotRow, 'item' | 'category' | 'amountMinor' | 'currency' | 'seasonId' | 'dayType' | 'prov'>[], currency: string): TicketRef[] {
-  const ok = rows.filter((r) => r.amountMinor > 0 && r.currency === currency && !(r.category && NOT_ADULT.test(r.category)) && !NOT_ADULT.test(r.item) && !NOT_DAY.test(r.item))
+  const ok = rows.filter(
+    (r) => !isUnverified(r.prov) && r.amountMinor > 0 && r.currency === currency && !(r.category && NOT_ADULT.test(r.category)) && !NOT_ADULT.test(r.item) && !NOT_DAY.test(r.item),
+  )
   const latest = ok.reduce<string | null>((m, r) => (r.seasonId && (!m || r.seasonId > m) ? r.seasonId : m), null)
   return ok
     .filter((r) => r.seasonId === latest)
-    .map((r) => ({ label: r.item, amount: money(r.amountMinor, r.currency), seasonId: r.seasonId, dayType: r.dayType, confirmAtSource: needsConfirmation(r.prov) }))
+    .map((r) => ({ label: r.item, amount: money(r.amountMinor, r.currency), seasonId: r.seasonId, dayType: r.dayType }))
 }
 
 export async function getBreakEven(ctx: DataCtx, products: readonly PassProductView[], owned: readonly { productId: string; holder: string; pricePaid: Money | null }[], season: { id: string; start: string }): Promise<BreakEvenView | null> {
@@ -194,7 +192,6 @@ export async function getBreakEven(ctx: DataCtx, products: readonly PassProductV
     resortName: p.resortName ?? p.resortId,
     passPrice,
     passPriceKind: paid ? 'paid' : 'current',
-    passConfirm: paid ? false : (p.currentPrice?.confirmAtSource ?? false),
     owned: mine.has(p.id),
     typical,
     low: lowest && typical && lowest.amount.amountMinor < typical.amount.amountMinor ? lowest : null,

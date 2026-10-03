@@ -153,13 +153,11 @@ export interface CandidateCost {
   tier: ExpenseTier | 'incomplete'
   /** Missing required items, plain language. */
   missing: string[]
-  /** Research-grade prices were used. */
-  confirmAtSource?: boolean
 }
 
 export interface CandidatePass {
-  /** covered = an owned pass can be used; unconfirmed = access rules not confirmed; no-pass = none owned. */
-  status: 'covered' | 'not-covered' | 'unconfirmed' | 'no-pass'
+  /** covered = an owned pass can be used; unknown = no usable access rule recorded (never covered); no-pass = none owned. */
+  status: 'covered' | 'not-covered' | 'unknown' | 'no-pass'
   productName: string | null
   note?: string | null
 }
@@ -187,8 +185,6 @@ export interface CandidateEvidence {
   reportDate: string | null
   reportKind: DataKind | null
   weatherFetchedAt: string | null
-  /** Catalog facts (terrain, prices, drive times) are web research — confirm at source. */
-  catalogResearched?: boolean
 }
 
 export interface RecommendCandidate {
@@ -501,11 +497,10 @@ function costFactor(cost: CandidateCost | null): FactorBuild {
     const missing = cost?.missing.length ? ` (${cost.missing.map(clause).join('; ')})` : ''
     return { value: null, note: 'Cost estimate incomplete', limitation: `Cost estimate incomplete${missing}` }
   }
-  const lim = cost.confirmAtSource ? 'Prices are researched — confirm at source' : null
   if (cost.total && cost.total.currency === 'USD') {
-    return { value: Math.round(evalCurve(COST_CURVE_USD, cost.total.amountMinor)), note: `${formatMoney(cost.total)} per person (${cost.tier})`, limitation: lim }
+    return { value: Math.round(evalCurve(COST_CURVE_USD, cost.total.amountMinor)), note: `${formatMoney(cost.total)} per person (${cost.tier})`, limitation: null }
   }
-  return { value: COST_TIER_VALUE[cost.tier], note: `Expense tier ${cost.tier}${cost.total ? ` (${formatMoney(cost.total)} per person)` : ''}`, limitation: lim }
+  return { value: COST_TIER_VALUE[cost.tier], note: `Expense tier ${cost.tier}${cost.total ? ` (${formatMoney(cost.total)} per person)` : ''}`, limitation: null }
 }
 
 function eventsFactor(day: CandidateDay | undefined): FactorBuild {
@@ -591,8 +586,6 @@ function scoreDay(c: RecommendCandidate, day: CandidateDay | undefined, date: st
   add(evidenceLimitation(c.evidence, date, input.now))
   add(weatherLimitation(c.evidence, input.now))
   for (const k of FACTOR_KEYS) if (weights[k] > 0) add(builds[k].limitation)
-  if (day?.pass?.status === 'unconfirmed') add(`Pass access unconfirmed${day.pass.productName ? ` for ${day.pass.productName}` : ''} — check the official page`)
-  if (c.evidence.catalogResearched) add('Catalog facts (terrain, prices, drive times) are researched — confirm at source')
 
   const knownCount = factors.filter((f) => f.known).length
   return {

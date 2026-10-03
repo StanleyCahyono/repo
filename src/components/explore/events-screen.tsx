@@ -381,7 +381,7 @@ function EventRow({ e, view }: { e: EventItem; view: EventsView }) {
         </p>
         <EventWhere e={e} />
         <EventFacts e={e} />
-        {e.status === 'tentative' && !past ? <p className="text-[12.5px] text-caution">Tentative — the organiser has not confirmed these dates.</p> : null}
+        {e.status === 'tentative' && !past ? <p className="text-[12.5px] text-caution">Tentative — the organiser has not fixed these dates yet.</p> : null}
         {e.status === 'postponed' ? <p className="text-[12.5px] text-caution">Postponed — check the organiser for the new date.</p> : null}
         <EventMeta e={e} view={view} />
         <div className="mt-1 flex flex-wrap items-center gap-2">
@@ -456,11 +456,9 @@ function EventMeta({ e, view }: { e: EventItem; view: EventsView }) {
     <p className="flex flex-wrap items-center gap-x-2 text-[12px] text-ink-3">
       {e.lastVerifiedAt ? (
         <time dateTime={e.lastVerifiedAt} title={e.lastVerifiedAt}>
-          Last verified {relativeLabel(e.lastVerifiedAt, view.now)}
+          Checked {relativeLabel(e.lastVerifiedAt, view.now)}
         </time>
-      ) : (
-        <span>Never verified</span>
-      )}
+      ) : null}
       <SourceDrawer
         title={`${e.title} — source`}
         label="Source"

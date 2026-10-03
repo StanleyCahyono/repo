@@ -9,15 +9,15 @@ import { SourceDrawer } from '@/components/ui/source-drawer'
 import type { HotelOption, TripPage } from '@/lib/data/trip-plan'
 import type { TripItemRow } from '@/lib/db/rows'
 import { money } from '@/lib/domain/money'
-import { ConfirmTag, EmptySlot, SubHead, TripSection, CostKindTag, PrivateTag } from './bits'
+import { EmptySlot, SubHead, TripSection, CostKindTag, PrivateTag } from './bits'
 import { TIER_LABEL, hostOf, itemCost, nights, plural, rangeText, spanLabel } from './format'
 import { AddItemButton, QuickAdd } from './add-buttons'
 import { ItemRow } from './item-row'
 
 const SKI_IN_OUT: Record<HotelOption['skiInOut'], string> = {
-  'verified-yes': 'Ski-in/ski-out (verified)',
-  'verified-no': 'Not ski-in/ski-out (verified)',
-  unknown: 'Ski-in/ski-out not verified',
+  'verified-yes': 'Ski-in/ski-out',
+  'verified-no': 'Not ski-in/ski-out',
+  unknown: 'Ski-in/ski-out unknown',
 }
 
 function perNight(item: TripItemRow): string | null {
@@ -136,7 +136,6 @@ export function StaySection({ page, index }: { page: TripPage; index: number }) 
                                 ) : (
                                   <Missing label="No official link on file" className="text-[12.5px]" />
                                 )}
-                                {h.prov?.verification === 'search-summary' || h.prov?.verification === 'unverified' ? <ConfirmTag /> : null}
                                 {h.prov ? <SourceDrawer title={h.name} items={[{ label: h.name, value: h.distanceText ?? undefined, prov: h.prov }]} /> : null}
                               </div>
                             </div>

@@ -37,7 +37,7 @@ export function fixtureResort(id: string, over: Record<string, unknown> = {}) {
     timezone: 'America/New_York',
     priority: 1,
     location: { lat: 42.5, lon: -76.1 },
-    elevation: { baseM: 350, summitM: 640, verticalM: 290 },
+    elevation: { baseM: 350, summitM: 640, verticalM: 290, source: { url: 'https://example.org/stats' } },
     weatherPoints: [
       { key: 'base', label: 'Base', lat: 42.5, lon: -76.1, elevationM: 350 },
       { key: 'summit', label: 'Summit', lat: 42.49, lon: -76.11, elevationM: 640 },
@@ -45,10 +45,10 @@ export function fixtureResort(id: string, over: Record<string, unknown> = {}) {
     terrain: { beginnerPct: 40, intermediatePct: 35, advancedPct: 25, source: { url: 'https://example.org/stats', verification: 'official-page' } },
     features: { lessons: true, rentals: true, beginnerArea: 'Carpet area', source: { url: 'https://example.org/learn', verification: 'official-page' } },
     season: { season: '2026-27', announcedOpening: { date: '2026-11-27', source: { url: 'https://example.org/news' } }, announcedClosing: {}, history: [] },
-    hours: [{ activity: 'lifts', label: 'Daily', days: [1, 2, 3, 4, 5, 6, 7], opens: '09:00', closes: '16:00', season: '2026-27' }],
+    hours: [{ activity: 'lifts', label: 'Daily', days: [1, 2, 3, 4, 5, 6, 7], opens: '09:00', closes: '16:00', season: '2026-27', source: { url: 'https://example.org/hours' } }],
     prices: [price('Adult weekday', 60, 'weekday'), price('Adult weekend', 80, 'weekend'), price('full-package', 45, null, 'rental')],
     links: { official: 'https://example.org/', snowReport: 'https://example.org/report' },
-    travel: { driveFromIthaca: { minutes: 35, km: 32, basis: 'curated estimate' } },
+    travel: { driveFromIthaca: { minutes: 35, km: 32, basis: 'curated estimate', source: { url: 'https://example.org/drive' } } },
     research: {},
     ...over,
   })
@@ -58,13 +58,13 @@ export const FIXTURE_RESORTS = [
   fixtureResort('test-peak', { priority: 2 }),
   fixtureResort('expert-bowl', {
     terrain: { beginnerPct: 5, intermediatePct: 25, advancedPct: 70, source: { url: 'https://example.org/stats', verification: 'official-page' } },
-    travel: { driveFromIthaca: { minutes: 90, km: 120, basis: 'curated estimate' } },
+    travel: { driveFromIthaca: { minutes: 90, km: 120, basis: 'curated estimate', source: { url: 'https://example.org/drive' } } },
   }),
   fixtureResort('far-west', {
     timezone: 'America/Denver',
     region: 'Colorado',
     priority: 0,
-    travel: { driveFromIthaca: null, airports: [{ iata: 'DEN', role: 'practical', minutes: 120, km: 150, basis: 'estimate' }] },
+    travel: { driveFromIthaca: null, airports: [{ iata: 'DEN', role: 'practical', minutes: 120, km: 150, basis: 'estimate', source: { url: 'https://example.org/den' } }] },
   }),
   fixtureResort('quiet-hill', {
     season: { season: '2026-27', announcedOpening: { date: '2027-01-10', text: 'Targeting Jan 10', source: { url: 'https://example.org/news' } }, announcedClosing: {}, history: [] },
@@ -77,7 +77,15 @@ const passes = CatalogPasses.parse({
     { id: 'ikon', name: 'Ikon Pass', links: {} },
   ],
   products: [
-    { id: 'indy-base-2026-27', family: 'indy', name: 'Indy Base Pass', season: '2026-27', salesDeadline: '2027-02-10', prices: [{ category: 'adult', amount: 299, currency: 'USD' }] },
+    {
+      id: 'indy-base-2026-27',
+      family: 'indy',
+      name: 'Indy Base Pass',
+      season: '2026-27',
+      salesDeadline: '2027-02-10',
+      prices: [{ category: 'adult', amount: 299, currency: 'USD', source: { url: 'https://example.org/indy' } }],
+      source: { url: 'https://example.org/indy' },
+    },
     { id: 'ikon-base-2026-27', family: 'ikon', name: 'Ikon Base Pass', season: '2026-27', prices: [] },
   ],
   access: [

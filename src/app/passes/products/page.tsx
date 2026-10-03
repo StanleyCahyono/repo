@@ -28,8 +28,8 @@ export default async function ProductsPage() {
       title="Products & prices"
       meta={
         <>
-          Every exact {pv.season.label} product on file, with each recorded price: category, purchase window, kind of quote and source. Most multi-resort prices were
-          not researched in this build — they show as not recorded with the official page, never as $0.
+          Every exact {pv.season.label} product on file, with each recorded price: category, purchase window, kind of quote and source. A price that is not on file
+          shows as not recorded with the official page, never as $0.
         </>
       }
     >
@@ -64,7 +64,7 @@ export default async function ProductsPage() {
           </nav>
         </div>
       </Rise>
-      <p className="mb-6 text-[12.5px] text-ink-3">{pv.disclaimer} Family colours and monograms are Piste’s own categories — not official logos.</p>
+      <p className="mb-6 text-[12.5px] text-ink-3">Family colours and monograms are Piste’s own categories — not official logos.</p>
       <div className="flex flex-col gap-10">
         {families.map((f, i) => (
           <Rise key={f.id} index={i + 1}>

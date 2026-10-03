@@ -31,8 +31,6 @@ function nextSteps(page: TripPage): Step[] {
   for (const q of items.map((i) => ({ i, q: quoteState(i, page.today) })).filter((x) => x.q && x.q.state !== 'valid')) {
     steps.push({ text: q.q!.state === 'expired' ? `Quote for ${q.i.title} has expired — re-check it` : `Quote for ${q.i.title} expires ${q.q!.days <= 0 ? 'today' : q.q!.days === 1 ? 'tomorrow' : `in ${q.q!.days} days`}`, href: '#budget', tone: q.q!.state === 'expired' ? 'critical' : 'caution' })
   }
-  const unconfirmed = page.detail.dayAccess.filter((d) => d.access.status === 'unconfirmed')
-  if (unconfirmed.length) steps.push({ text: `Pass access not confirmed for ${plural(unconfirmed.length, 'ski day')} — check the official page`, href: '#itinerary', tone: 'caution' })
   if (priced.length) steps.push({ text: priced.length === 1 ? `Add a price for ${priced[0].title}` : `Add prices for ${priced.length} items`, href: '#budget-missing' })
   if (skiUnpriced) steps.push({ text: `Price lift access for ${plural(skiUnpriced, 'ski day')}`, href: '#extras' })
   if (b.unconverted.length) steps.push({ text: `Add an exchange rate for ${plural(b.unconverted.length, 'item')}`, href: '#budget-missing' })

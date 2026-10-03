@@ -119,10 +119,11 @@ export function SubHead({ children, id, className, as: Tag = 'h3', aside }: { ch
   )
 }
 
-/** Inline source trigger (small "i") for one or more facts. */
+/** Inline source trigger (small "i") for one or more facts. Facts with no source behind them list nothing. */
 export function Src({ title, items, className }: { title: string; items: SourceItem[]; className?: string }) {
-  if (!items.length) return null
-  return <SourceDrawer title={title} items={items} className={cn('-my-1 shrink-0 align-middle', className)} />
+  const shown = items.filter((it) => it.prov && it.prov.verification !== 'unverified')
+  if (!shown.length) return null
+  return <SourceDrawer title={title} items={shown} className={cn('-my-1 shrink-0 align-middle', className)} />
 }
 
 /** Definition-list row: label left, value right-aligned (or stacked on narrow screens) with its source. */
@@ -158,11 +159,3 @@ export function TriChip({ value, yes = 'Yes', no = 'Not offered', unknown = 'Unk
   )
 }
 
-/** "Researched — confirm at source" / "Reference data" inline qualifier. */
-export function ConfirmTag({ text = 'Confirm at source', className }: { text?: string; className?: string }) {
-  return (
-    <span className={cn('inline-flex items-center rounded-sm border border-dashed border-caution/50 px-1.5 text-[11.5px] leading-5 font-medium text-caution', className)}>
-      {text}
-    </span>
-  )
-}

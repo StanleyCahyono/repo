@@ -37,9 +37,6 @@ import {
 // ---------------------------------------------------------------------------
 // Types
 
-/** How the catalog facts behind a resort were gathered (brief: "Researched" vs "Reference — confirm"). */
-export type ResearchLevel = 'researched' | 'reference' | null
-
 export type LearningLevel = 'good' | 'ok' | 'limited' | 'unknown'
 
 export interface CardLearning {
@@ -48,28 +45,23 @@ export interface CardLearning {
   label: string
   /** Plain-language reason, e.g. "Lessons offered · 30% beginner terrain". */
   reason: string
-  /** The terrain split is research-grade (confirm at source). */
-  researched: boolean
 }
 
 export interface CardPassBadge {
   familyId: PassFamilyId
   familyName: string
-  /** false = every rule behind the badge is 'unknown' for the season: draw it dashed, say "unconfirmed". */
-  confirmed: boolean
-  /** Only discount-only / unknown access. */
+  /** Only discount-only access. */
   qualifiedOnly: boolean
-  /** Accessible description, e.g. "Ikon Pass — 2026–27 access unconfirmed". */
+  /** Accessible description, e.g. "Ikon Pass — 2026–27 access recorded". */
   title: string
 }
 
-/** One exact-product answer for the card's date ("Can I use my pass here?"). */
+/** One exact-product answer for the card's date ("Can I use my pass here?"). Unknown access is not shown. */
 export interface CardPassLine {
-  status: 'covered' | 'not-covered' | 'unconfirmed'
+  status: 'covered' | 'not-covered'
   productName: string
-  /** e.g. "Included (1 of 2 days left)" / "Access not confirmed". */
+  /** e.g. "Included (1 of 2 days left)" / "Blacked out". */
   headline: string
-  confirmAtSource: boolean
 }
 
 export interface ResortCardData {
@@ -90,7 +82,7 @@ export interface ResortCardData {
   /** "Mon 28 Sep". */
   dateLabel: string
   isToday: boolean
-  /** Active season label, e.g. "2026–27" (pass badges say which season is unconfirmed). */
+  /** Active season label, e.g. "2026–27" (pass badges say which season they describe). */
   seasonLabel: string
   demo: boolean
   isFavorite: boolean
@@ -162,7 +154,6 @@ export interface ResortCardData {
     /** "per person · Piste estimate" / "lift ticket price missing". */
     caption: string
     missing: string[]
-    confirmAtSource: boolean
     passCoveredBy: string | null
   }
   travel: {
@@ -196,7 +187,6 @@ export interface ResortCardData {
   }
   alerts: { count: number; headline: string | null }
   gaps: string[]
-  research: ResearchLevel
   /** Everything important on the card, with provenance, for the SourceDrawer. */
   sources: SourceItem[]
 }
@@ -207,8 +197,6 @@ export interface CardDataOptions {
   now: string
   /** "2026–27". */
   seasonLabel: string
-  /** Catalog research method when the caller knows it (Explore's loader does); inferred from provenance otherwise. */
-  research?: ResearchLevel
   /** Override the link target. Default `/resorts/<id>` (+ `?date=` when the date is not the resort's today). */
   href?: string
 }
@@ -282,28 +270,14 @@ export function learningSuitability(input: {
   else parts.push('beginner terrain share unknown')
   if (input.beginnerArea) parts.push('dedicated beginner area')
   const reason = parts.join(' · ')
-  const researched = t.researched
-  if (input.lessons === false) return { level: 'limited', label: 'Limited for learning', reason, researched }
-  if (v !== null && v < 35) return { level: 'limited', label: 'Limited for learning', reason, researched }
+  if (input.lessons === false) return { level: 'limited', label: 'Limited for learning', reason }
+  if (v !== null && v < 35) return { level: 'limited', label: 'Limited for learning', reason }
   if (input.lessons === true && ((v !== null && v >= 65) || (v === null && !!input.beginnerArea))) {
-    return { level: 'good', label: 'Good for learning', reason, researched }
+    return { level: 'good', label: 'Good for learning', reason }
   }
-  if (input.lessons === true) return { level: 'ok', label: 'Learning possible', reason, researched }
-  if (v !== null && v >= 65) return { level: 'ok', label: 'Learning possible', reason, researched }
-  return { level: 'unknown', label: 'Learning suitability unknown', reason, researched }
-}
-
-/** Infer the catalog research level from the provenance of catalog facts (when the caller does not know it). */
-export function inferResearch(provs: readonly (Provenance | null | undefined)[]): ResearchLevel {
-  const levels = provs.filter((p): p is Provenance => !!p).map((p) => p.verification ?? null)
-  if (levels.includes('search-summary')) return 'researched'
-  if (levels.some((v) => v === 'unverified' || v === null)) return 'reference'
-  return null
-}
-
-export const RESEARCH_LABEL: Record<Exclude<ResearchLevel, null>, { short: string; long: string }> = {
-  researched: { short: 'Researched — confirm', long: 'Catalog facts were researched via web search — confirm at the source' },
-  reference: { short: 'Reference — confirm', long: 'Catalog facts are Piste reference data (not web-verified) — confirm at the source' },
+  if (input.lessons === true) return { level: 'ok', label: 'Learning possible', reason }
+  if (v !== null && v >= 65) return { level: 'ok', label: 'Learning possible', reason }
+  return { level: 'unknown', label: 'Learning suitability unknown', reason }
 }
 
 const isFamily = (id: string): id is PassFamilyId => (PASS_FAMILIES as readonly string[]).includes(id)
@@ -461,40 +435,33 @@ function expenseFact(s: ResortSummary): ResortCardData['expense'] {
       amount: null,
       caption,
       missing: e.missing,
-      confirmAtSource: e.confirmAtSource,
       passCoveredBy: e.passCoveredBy,
     }
   }
   const amount = e.totalMax ? formatMoneyRange(e.total, e.totalMax) : formatMoney(e.total, { compact: true })
-  const caption = `per person${e.passCoveredBy ? ' · with pass' : ''} · ${e.confirmAtSource ? 'confirm prices' : 'Piste estimate'}`
-  return { tier: e.tier, label: e.label, amount, caption, missing: e.missing, confirmAtSource: e.confirmAtSource, passCoveredBy: e.passCoveredBy }
+  const caption = `per person${e.passCoveredBy ? ' · with pass' : ''} · Piste estimate`
+  return { tier: e.tier, label: e.label, amount, caption, missing: e.missing, passCoveredBy: e.passCoveredBy }
 }
 
 function passLine(s: ResortSummary): CardPassLine | null {
   const p = s.myPass
-  if (p.status === 'no-pass' || !p.productName) return null
+  // Unknown access (no rule recorded) is not shown: it is neither covered nor a "not confirmed" note.
+  if (p.status === 'no-pass' || p.status === 'unknown' || !p.productName) return null
   const v = p.verdicts.find((x) => x.productName === p.productName) ?? p.verdicts[0]
   return {
     status: p.status,
     productName: p.productName,
     headline: v ? v.headline : p.headline,
-    confirmAtSource: !!v?.confirmAtSource,
   }
 }
 
-/** Product verdict → card pass line (Explore's product filter, Compare). */
-export function passLineFromVerdict(v: {
-  productName: string
-  status: AccessStatus
-  canSki: boolean
-  headline: string
-  confirmAtSource: boolean
-}): CardPassLine {
+/** Product verdict → card pass line (Explore's product filter, Compare); null when access is unknown (not shown). */
+export function passLineFromVerdict(v: { productName: string; status: AccessStatus; canSki: boolean; headline: string }): CardPassLine | null {
+  if (!v.canSki && v.status === 'unknown') return null
   return {
-    status: v.canSki ? 'covered' : v.status === 'unknown' ? 'unconfirmed' : 'not-covered',
+    status: v.canSki ? 'covered' : 'not-covered',
     productName: v.productName,
     headline: v.headline,
-    confirmAtSource: v.confirmAtSource,
   }
 }
 
@@ -503,8 +470,6 @@ export function passLineFromVerdict(v: {
 
 export function toResortCardData(s: ResortSummary, opts: CardDataOptions): ResortCardData {
   const { units, now, seasonLabel } = opts
-  const research =
-    opts.research !== undefined ? opts.research : inferResearch([s.locationProv, s.elevationProv, s.beginner.terrainProv, s.beginner.featuresProv])
   const isToday = s.date === s.today
   const href = opts.href ?? `/resorts/${s.id}${isToday ? '' : `?date=${s.date}`}`
 
@@ -543,9 +508,8 @@ export function toResortCardData(s: ResortSummary, opts: CardDataOptions): Resor
     .map((p) => ({
       familyId: p.familyId as PassFamilyId,
       familyName: p.familyName,
-      confirmed: p.confirmed,
       qualifiedOnly: p.qualifiedOnly,
-      title: `${p.familyName} — ${p.confirmed ? (p.qualifiedOnly ? `${seasonLabel} discount or unconfirmed access only` : `${seasonLabel} access recorded (discovery only)`) : `${seasonLabel} access unconfirmed`}`,
+      title: `${p.familyName} — ${p.qualifiedOnly ? `${seasonLabel} discount only` : `${seasonLabel} access recorded`}`,
     }))
 
   const scoreValue = s.closure ? null : (s.score?.score ?? null)
@@ -578,15 +542,16 @@ export function toResortCardData(s: ResortSummary, opts: CardDataOptions): Resor
         value: a.minutes != null ? `${formatDuration(a.minutes)} transfer` : 'Transfer time not recorded',
         prov: a.prov,
       })),
-    { label: 'Terrain split', value: s.beginner.beginnerPct !== null ? `${s.beginner.beginnerPct}% beginner` : 'Unknown', prov: s.beginner.terrainProv },
-    { label: 'Lessons, rentals, lodging, night skiing', value: null, prov: s.beginner.featuresProv },
+    // Catalog facts appear only when shown (unverified ones are dropped upstream and list no source here).
+    ...(s.beginner.terrainProv && s.beginner.beginnerPct !== null ? [{ label: 'Terrain split', value: `${s.beginner.beginnerPct}% beginner`, prov: s.beginner.terrainProv }] : []),
+    ...(s.beginner.featuresProv ? [{ label: 'Lessons, rentals, lodging, night skiing', value: null, prov: s.beginner.featuresProv }] : []),
     { label: 'Location', value: `${s.lat.toFixed(4)}, ${s.lon.toFixed(4)}`, prov: s.locationProv },
-    { label: 'Elevation', value: summit ? `${summit} summit` : 'Unknown', prov: s.elevationProv },
+    ...(summit && s.elevationProv ? [{ label: 'Elevation', value: `${summit} summit`, prov: s.elevationProv }] : []),
     ...s.eventsInWindow
       .slice(0, 3)
       .map((e) => ({ label: `Event: ${e.title}`, value: `${eventWhen(e)} · ${EVENT_STATUS_LABEL[e.status] ?? e.status}`, prov: e.prov })),
     ...s.officialAlerts.slice(0, 2).map((a) => ({ label: `Official alert: ${a.event}`, value: a.headline, prov: a.prov })),
-  ]
+  ].filter((it) => it.prov?.verification !== 'unverified')
 
   return {
     id: s.id,
@@ -657,7 +622,6 @@ export function toResortCardData(s: ResortSummary, opts: CardDataOptions): Resor
     },
     alerts: { count: s.officialAlerts.length, headline: s.officialAlerts[0]?.headline ?? s.officialAlerts[0]?.event ?? null },
     gaps: s.dataGaps,
-    research,
     sources,
   }
 }

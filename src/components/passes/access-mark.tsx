@@ -1,6 +1,6 @@
 /**
- * Access status mark: icon + text, never colour alone. "Not confirmed" is drawn dashed and neutral so an unknown rule
- * never looks like permission. Server-renderable.
+ * Access status mark: icon + text, never colour alone. Unknown access is drawn neutral so it never looks like
+ * permission. Server-renderable.
  */
 import { cn } from '@/lib/ui/cn'
 import { STATUS_META, TONE_CHIP, TONE_TEXT, type MarkStatus } from './format'

@@ -66,17 +66,15 @@ describe('getCheckerView', () => {
   it('never treats a missing or unknown rule as permission', async () => {
     const noRule = await getCheckerView(fx.ctx, { own: fx.ownershipId, resort: 'far-west', from: SAT })
     expect(noRule.result!.rule).toBeNull()
-    expect(noRule.result!.days[0].verdict).toMatchObject({ status: 'unknown', canSki: false, headline: 'Access not confirmed' })
+    expect(noRule.result!.days[0].verdict).toMatchObject({ status: 'unknown', canSki: false, headline: 'Access unknown' })
+    // A rule recorded as 'unknown' is not shown: the checker answers as for no rule, never as included.
     const unknown = await getCheckerView(fx.ctx, { pass: 'ikon-base-2026-27', resort: 'far-west', from: SAT })
-    expect(unknown.result!.rule).toMatchObject({ access: 'unknown', version: 1, youEntered: false })
+    expect(unknown.result!.rule).toBeNull()
     expect(unknown.result!.days[0].verdict).toMatchObject({ status: 'unknown', canSki: false })
-    // Resort only: every product with a rule there, plus my pass — none can ski.
+    // Resort only: every product with a shown rule there, plus my pass — none can ski.
     const here = await getCheckerView(fx.ctx, { pass: 'none', resort: 'far-west', from: SAT })
     expect(here.mode).toBe('resort')
-    expect(here.byProduct!.map((a) => [a.option.key, a.covered])).toEqual([
-      [`own:${fx.ownershipId}`, 0],
-      ['product:ikon-base-2026-27', 0],
-    ])
+    expect(here.byProduct!.map((a) => [a.option.key, a.covered])).toEqual([[`own:${fx.ownershipId}`, 0]])
   })
 
   it('keeps dates inside the season and checks at most two weeks', async () => {

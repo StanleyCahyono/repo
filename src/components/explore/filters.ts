@@ -307,7 +307,7 @@ export function checks(x: ExploreFacets, f: ExploreFilters): Check[] {
   }
   if (f.families.length) {
     const hit = x.families.filter((fam) => f.families.includes(fam.id))
-    out.push({ what: 'pass access', verdict: hit.some((h) => h.confirmed) ? 'pass' : hit.length ? 'unknown' : 'fail' })
+    out.push({ what: 'pass access', verdict: hit.length ? 'pass' : 'fail' })
   }
   if (f.product) {
     const p = x.products.find((y) => y.id === f.product)

@@ -212,7 +212,7 @@ async function syncPassDay(a: { ownershipId: number | null; resortId: string; da
   const warning = verdict.canSki
     ? null
     : verdict.status === 'unknown'
-      ? `Access here is not confirmed for ${product.name} — the pass day is logged, but no allowance is known.`
+      ? `No access is recorded here for ${product.name} — the pass day is logged, but no allowance is known.`
       : `The recorded rule says "${verdict.headline}" for ${product.name} on this day — check the rule in Passes if you used the pass.`
   return { changed: true, warning, error: null }
 }

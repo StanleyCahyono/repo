@@ -56,7 +56,7 @@ function PassCard({ p, demo }: { p: SeasonPassView; demo: boolean }) {
               label={`${x.label ?? 'Shared days'} (${x.memberNames.join(', ')})`}
               used={x.used}
               remaining={x.remaining}
-              status={x.remaining == null ? 'days not confirmed' : x.remaining === 0 ? 'no days left' : `${x.remaining} left`}
+              status={x.remaining == null ? 'days not recorded' : x.remaining === 0 ? 'no days left' : `${x.remaining} left`}
             />
           ))}
         </ul>
