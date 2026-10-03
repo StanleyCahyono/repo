@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "piste-assets-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/assets catalog/resorts
+          git add src/assets catalog
           git diff --cached --quiet && echo "nothing new" && exit 0
           git commit -m "Bundle resort map data, place labels, road routes and photos (automated)"
           git pull --rebase origin ${GITHUB_REF_NAME}
