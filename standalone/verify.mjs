@@ -8,7 +8,8 @@
  *    log a ski day, units + currency, theme; a reload keeps everything (IndexedDB).
  * 3. Exports: a trip's ICS download and "Download my data" (a SQLite file).
  * 4. Maps: MapLibre starts from the Blob worker and draws a style (served by the test, the sandbox has no network).
- *    OpenStreetMap lifts & runs load on demand from a resort page, from Overpass fixtures served by the test.
+ *    Lifts & runs draw from the bundled OpenStreetMap snapshot offline; the full list loads on demand from Overpass
+ *    fixtures served by the test.
  * 5. Demo: generation from the UI (timed), every route in demo mode, then back to live with live data unchanged.
  * Screenshots (390 and 1440 px, light and dark) of Today, Explore, a resort, Trips and Season with --shots.
  * Expected network failures (the in-page scheduler calling weather APIs without internet) are not counted as errors.
@@ -49,7 +50,7 @@ const ROUTES = [
   '#/sources',
 ]
 const NOT_FOUND = { '#/resorts/no-such-resort': 'Resort not found', '#/trips/no-such-trip': 'Trip not found', '#/no/such/page': 'Off the map' }
-const EXPECTED_NETWORK = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|ERR_CONNECTION_|ERR_PROXY|ERR_ADDRESS_UNREACHABLE|ERR_FAILED/
+const EXPECTED_NETWORK = /ERR_TUNNEL_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_INTERNET_DISCONNECTED|ERR_CONNECTION_|ERR_PROXY|ERR_ADDRESS_UNREACHABLE|ERR_FAILED|ERR_CERT_/
 
 const results = []
 const facts = {}
@@ -175,21 +176,21 @@ async function main() {
 
   await step('Explore filters live in the URL query and survive a reload', async () => {
     const { page } = await open(ctx, '#/explore')
-    const search = page.getByPlaceholder('Search resorts, towns, regions').first()
+    const search = page.getByRole('searchbox', { name: 'Search resorts by name, town or region' }).first()
     await search.fill('alta')
     await page.waitForFunction(() => new URLSearchParams(location.search).get('q') === 'alta')
     if (!page.url().includes('#/explore')) throw new Error(`route lost: ${page.url()}`)
     await page.reload()
     await ready(page)
-    await expect(page.getByPlaceholder('Search resorts, towns, regions').first()).toHaveValue('alta')
+    await expect(page.getByRole('searchbox', { name: 'Search resorts by name, town or region' }).first()).toHaveValue('alta')
     const url = page.url()
     await done(page)
     return url.slice(url.indexOf('?'))
   })
 
-  await step('resort section nav scrolls without changing the route', async () => {
+  await step('resort chapter nav scrolls without changing the route', async () => {
     const { page } = await open(ctx, '#/resorts/alta')
-    const nav = page.getByRole('navigation', { name: 'Resort sections' })
+    const nav = page.getByRole('navigation', { name: 'Resort chapters' })
     await nav.getByRole('link', { name: /Conditions/ }).first().click()
     await page.waitForFunction(() => location.hash.startsWith('#/resorts/alta#'))
     const hash = new URL(page.url()).hash
@@ -207,7 +208,7 @@ async function main() {
     const { page } = await open(ctx, '#/sources')
     // An in-app navigation made by app code with history.pushState (translated by the runtime).
     await page.evaluate(() => window.history.pushState(null, '', '/resorts/alta'))
-    await expect(page.locator('h1').first()).toHaveText('Alta Ski Area', { timeout: 30_000 })
+    await expect(page.locator('h1').first()).toHaveText(/Alta/, { timeout: 30_000 })
     const back = page.getByRole('link', { name: /Sources/ }).filter({ has: page.locator('svg') }).first()
     await back.click()
     await expect(page.locator('h1').first()).toHaveText('Sources & Sync', { timeout: 30_000 })
@@ -222,11 +223,12 @@ async function main() {
     await page.getByRole('button', { name: /^(New trip|Plan a trip)$/ }).filter({ visible: true }).first().click()
     const sheet = page.getByRole('dialog', { name: 'New trip' })
     await expect(sheet).toBeVisible()
+    // Step 1 "Where": pick a resort. Step 2 "When & who": a weekend, a name.
+    await sheet.getByRole('textbox', { name: 'Resort' }).fill('Greek Peak')
+    await sheet.getByRole('list', { name: 'Resorts' }).getByRole('button', { name: /Greek Peak/ }).first().click()
+    await sheet.getByRole('button', { name: 'Choose dates' }).click()
     await sheet.getByRole('group', { name: 'Upcoming weekends' }).getByRole('button').first().click()
     await sheet.getByRole('textbox', { name: /^Name/ }).fill('Verify weekend')
-    await sheet.getByRole('button', { name: /Choose resorts/ }).click()
-    await sheet.getByRole('textbox', { name: /Where are you skiing/ }).fill('Greek Peak')
-    await sheet.getByRole('list', { name: 'Resorts' }).getByRole('button', { name: /Greek Peak/ }).first().click()
     await sheet.getByRole('button', { name: 'Create trip' }).click()
     await expect(page.getByRole('heading', { level: 1, name: 'Verify weekend' })).toBeVisible({ timeout: 30_000 })
     tripHash = new URL(page.url()).hash
@@ -379,19 +381,22 @@ async function main() {
     await page.route('https://tiles.openfreemap.org/**', (route) =>
       route.fulfill({ contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({ version: 8, sources: {}, layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#dcebea' } }] }) }),
     )
-    await page.goto(FILE + '?view=map#/explore')
+    await page.goto(FILE + '#/explore')
     await ready(page)
-    await page.locator('.maplibregl-canvas').first().waitFor({ state: 'attached', timeout: 20_000 })
-    await page.waitForFunction(() => document.querySelectorAll('.maplibregl-marker').length > 0, null, { timeout: 20_000 })
-    const markers = await page.locator('.maplibregl-marker').count()
-    const schematic = await page.getByText('Schematic view').count()
+    const stage = page.getByRole('region', { name: 'Resort map and results' })
+    await stage.locator('.maplibregl-canvas').first().waitFor({ state: 'attached', timeout: 20_000 })
+    // The schematic base hands over to MapLibre once the style loads: the attribution switches to OpenFreeMap.
+    await expect(stage.getByRole('link', { name: 'OpenFreeMap' })).toBeVisible({ timeout: 20_000 })
+    const markers = await stage.getByRole('group', { name: /^Map markers/ }).getByRole('button').count()
+    const schematic = await stage.getByText(/Offline · schematic/).count()
     await page.close()
     if (schematic) throw new Error('fell back to the schematic map')
+    if (!markers) throw new Error('no resort markers over the map')
     if (errors.length) throw new Error(errors[0])
-    return `${markers} markers on a live MapLibre canvas`
+    return `${markers} marker buttons over a live MapLibre canvas`
   })
 
-  await step('Lifts & runs load from OpenStreetMap on demand (Overpass served by the test)', async () => {
+  await step('Lifts & runs: bundled OSM snapshot offline, full list loads from OpenStreetMap on demand (Overpass served by the test)', async () => {
     const page = await ctx.newPage()
     const errors = watch(page)
     const fixture = (name) => fs.readFileSync(path.join(HERE, '..', 'src', 'lib', 'providers', 'osm', '__fixtures__', name), 'utf8')
@@ -409,30 +414,44 @@ async function main() {
     })
     await page.goto(FILE + '#/resorts/ski-arlberg')
     await ready(page)
-    const section = page.getByRole('region', { name: 'Lifts & runs' })
-    await expect(section.getByText(/Not loaded yet/)).toBeVisible()
-    await section.getByRole('button', { name: 'Load lifts & runs from OpenStreetMap' }).click()
-    await expect(section.getByText('Galzigbahn', { exact: true })).toBeVisible({ timeout: 60_000 })
-    await expect(section.getByText(/1 green · 2 blue · 1 red · 1 black · 2 freeride \/ itinerary/)).toBeVisible()
-    await expect(section.getByRole('link', { name: /© OpenStreetMap contributors/ })).toBeVisible()
+    const chapter = page.locator('#lifts')
+    // The built-in snapshot draws lifts and runs with no network.
+    await expect(chapter.getByRole('heading', { level: 2, name: /\blifts?\b/ })).toBeVisible()
+    await expect(chapter.getByRole('list', { name: 'Blue runs' })).toBeVisible()
+    if (asked.length) throw new Error(`the bundled snapshot asked Overpass: ${asked.join(', ')}`)
+    // The full per-lift list is loaded on demand inside the drawer.
+    await chapter.locator('summary').filter({ hasText: 'Every mapped lift and run' }).click()
+    const drawer = chapter.locator('details', { has: page.locator('summary', { hasText: 'Every mapped lift and run' }) })
+    await expect(drawer.getByText(/Not loaded yet/)).toBeVisible()
+    await drawer.getByRole('button', { name: 'Load lifts & runs from OpenStreetMap' }).click()
+    await expect(drawer.getByText('Galzigbahn', { exact: true }).first()).toBeVisible({ timeout: 60_000 })
+    await expect(drawer.getByText(/1 green · 2 blue · 1 red · 1 black · 2 freeride \/ itinerary/)).toBeVisible()
+    await expect(drawer.getByRole('link', { name: /© OpenStreetMap contributors/ })).toBeVisible()
     await page.close()
     if (errors.length) throw new Error(errors[0])
-    return `requests: ${asked.join(', ')} — lifts listed, runs in European colours, attribution shown`
+    return `snapshot drawn offline; requests: ${asked.join(', ')} — lifts listed, runs in European colours, attribution shown`
   })
 
   await screenshots(ctx, 'live')
 
   if (DEMO) {
     await step('switch to demo: generation completes and Today shows the in-season pick', async () => {
-      const { page, errors } = await open(ctx, '#/')
+      const { page, errors } = await open(ctx, '#/settings')
       const t = Date.now()
       await page.getByRole('button', { name: 'Explore demo mode' }).filter({ visible: true }).first().click()
-      await expect(page.getByRole('region', { name: 'Demo mode notice' })).toBeVisible({ timeout: 300_000 })
-      await expect(page.getByRole('dialog', { name: /demo/i })).toBeHidden({ timeout: 60_000 })
+      const building = page.getByRole('dialog', { name: /demo/i })
+      await expect(building).toBeVisible({ timeout: 30_000 })
+      await expect(building).toBeHidden({ timeout: 300_000 })
+      await expect(page.getByRole('region', { name: 'Demo mode notice' })).toBeVisible({ timeout: 30_000 })
       facts.demoGenerationMs = Date.now() - t
-      const where = page.getByRole('region', { name: /^Where to ski/ })
-      await expect(where).toContainText(/Reported open/)
-      const pick = (await where.getByRole('heading', { level: 3 }).first().innerText()).trim()
+      await page.evaluate(() => window.__piste?.flush?.())
+      await page.goto(FILE + '#/')
+      await ready(page)
+      // Today's hero names the in-season pick (demo date Fri 15 Jan 2027) and links it as open.
+      const hero = page.getByRole('main').getByRole('region').first()
+      await expect(hero.getByRole('heading', { level: 1 })).toHaveText(/is open/)
+      await expect(hero.getByRole('link', { name: / · open$/ })).toBeVisible()
+      const pick = (await hero.getByRole('heading', { level: 1 }).innerText()).trim()
       await page.close()
       if (errors.length) throw new Error(errors[0])
       return `${facts.demoGenerationMs} ms; pick: ${pick}`
