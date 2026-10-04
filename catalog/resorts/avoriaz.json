@@ -49,7 +49,7 @@
     }
   ],
   "terrain": {
-    "trails": 54,
+    "trails": 51,
     "lifts": 35,
     "skiableAcres": null,
     "beginnerPct": null,
@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.avoriaz.com/en/discover/discover/ski-area-and-maps/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Figures describe the Avoriaz sector. Search summary of avoriaz.com and guides: 35 lifts and 54 slopes (8 green, 27 blue, 14 red, 6 black — adds to 55); 4 snowparks and a boardercross; mostly chairlifts with 'just a couple of drag lifts' (counts by type not given). Another guide: 36 lifts, 49 slopes (4/26/14/6). Avoriaz's own piste km and capacity not found. Linked Portes du Soleil: 600 km, 209 lifts, 308 slopes, 12 resorts in France and Switzerland (Wikipedia: more than 650 km and about 200 lifts)."
+      "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official rates page: 'The Avoriaz ski area: 35 ski lifts, 51 runs, 4 snowparks, 4 snowcross zones; The Portes du Soleil ski area: spanning 2 countries, 12 resorts, 196 ski lifts, 286 runs.' The French 'bons plans' page says 35 lifts, 53 runs, 4 snowparks."
     }
   },
   "features": {
@@ -90,24 +90,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-11",
-      "text": "Continuous opening 11 Dec 2026; partial weekend pre-openings from 28 Nov 2026, snow permitting. Season to 18 Apr 2027.",
+      "text": "Resort opening period 11 December – 18 April (official homepage); partial opening on 28 Nov 2026 (SERMA ski-pass site).",
       "announcedOn": null,
       "source": {
-        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
-        "verification": "search-summary",
+        "url": "https://www.avoriaz.com/en/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of Tourisme Haute-Savoie 2026-27 opening-dates list (Avoriaz 11 Dec 2026 – 18 Apr 2027, pre-opening weekends from 28 Nov); consistent with avoriaz.com pre-opening page in the same results."
+        "note": "Homepage: 'Resort opening period: 11th December to 18th April' (year not printed; the page presents winter 2026-2027). skipass-avoriaz.com/en/winter/: 'PARTIAL OPENING ON NOV. 28, 2026' and 'PRE-OPENING OF THE AVORIAZ SKI AREA' on November 28, 2026."
       }
     },
     "announcedClosing": {
       "date": "2027-04-18",
-      "text": "Season ends 18 Apr 2027 (also the last day of the Portes du Soleil 2026-27 rate calendar).",
+      "text": "Resort opening period ends 18 April; Portes du Soleil 2026-27 rates run to 18 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.tourisme-haute-savoie.com/en/news-from-haute-savoie/opening-dates-of-ski-resorts-in-haute-savoie-for-the-2026-2027-season/",
-        "verification": "search-summary",
+        "url": "https://www.avoriaz.com/en/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of Tourisme Haute-Savoie 2026-27 opening-dates list"
+        "note": "Homepage: 'Resort opening period: 11th December to 18th April'. The 2026-27 PDS rate calendar on the official rates page ends Apr 18, 2027."
       }
     },
     "history": [
@@ -156,15 +156,38 @@
         "checkedOn": "2026-10-03",
         "note": "Search summary of the official opening-hours page (2025-26)"
       }
+    },
+    {
+      "activity": "ticket-office",
+      "label": "Ski-pass offices (Prodains, Super-Morzine, Ardent)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/decouvrir/les-incontournables/points-de-vente-forfaits/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Tous les jours en saison d'hiver de 08h30 à 17h00.'"
+      }
     }
   ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Avoriaz ski area 1-day pass, adult 26–64 (ticket office)",
+      "item": "Avoriaz ski area 1-day pass, adult 26–64",
       "category": "adult",
-      "amount": 59,
-      "amountMax": null,
+      "amount": 43,
+      "amountMax": 59,
       "currency": "EUR",
       "season": "2026-27",
       "dayType": "any",
@@ -172,75 +195,285 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Ticket-office price. Online the Avoriaz-area day pass is dynamically priced, €43–55 for adults. The Avoriaz-area pass is sold only as 5 hours, 1 or 2 days; longer passes are Portes du Soleil only.",
+      "note": "Avoriaz sector only. Online price is dynamic (€43–€55); €59 is the ticket-office price. Hands-free card €3 extra.",
       "source": {
         "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of avoriaz.com 'Winter ski passes rates' (2026-27); the ticket-office €59 also appears on skideals.fr"
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": 1 day ONLINE €43.00–€55.00 (dynamic, min–max); 1 day TICKET OFFICE €59.00."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office)",
+      "item": "Avoriaz ski area 1-day pass, adult 26–64, Saturday (ticket office)",
+      "category": "adult saturday",
+      "amount": 49,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": 1 day TICKET OFFICE / Saturday €49.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz ski area 5-hour pass, adult",
+      "category": "adult half-day",
+      "amount": 37,
+      "amountMax": 51,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": 5 hours ONLINE €37.00–€48.00; TICKET OFFICE €51.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz ski area 2-hour \"end of day\" pass (from 2:30 pm), all ages",
+      "category": "adult end-of-day",
+      "amount": 22.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": 2 hours \"end of day\" / from 2:30 pm €22.50."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz ski area 1-day pass, junior 16–25",
+      "category": "youth",
+      "amount": 43,
+      "amountMax": 55,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": junior 1 day online €43.00–€51.00, ticket office €55.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz ski area 1-day pass, child 5–16",
+      "category": "child",
+      "amount": 43,
+      "amountMax": 46,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": child 1 day online €43.00–€44.00, ticket office €46.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz ski area 1-day pass, senior 65+",
+      "category": "senior",
+      "amount": 43,
+      "amountMax": 55,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": senior 1 day online €43.00–€51.00, ticket office €55.00; super senior 1 day €22.50 online / €26.00 ticket office."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Avoriaz 1-day Beginner pass (beginner lifts only), all ages",
+      "category": "adult beginner",
+      "amount": 39,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": 1-day Beginner pass €39.00 (5-hour €33.00)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office), 19 Dec 2026 – 19 Mar 2027",
       "category": "adult",
       "amount": 73,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
       "appliesFrom": "2026-12-19",
       "appliesTo": "2027-03-19",
       "includesTax": null,
-      "note": "Cash-desk price for 19 Dec 2026 – 19 Mar 2027; €69 when bought online. Covers the whole Portes du Soleil (FR/CH).",
+      "note": "Whole Portes du Soleil area; cash-desk rate (online rates on skipass-avoriaz.com are lower).",
       "source": {
         "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of avoriaz.com 'Winter ski passes rates' (2026-27); online €69 from a search summary of the same rate tables"
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": Portes du Soleil rates Dec 19, 2026 to Mar 19, 2027, cash desk: 1 day adult 73.00€."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office), spring",
+      "item": "Portes du Soleil 1-day pass, adult 26–64 (ticket office), 20 Mar – 18 Apr 2027",
       "category": "adult",
       "amount": 62,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": null,
       "purchaseBy": null,
       "appliesFrom": "2027-03-20",
       "appliesTo": "2027-04-18",
       "includesTax": null,
-      "note": "Cash-desk price for 20 Mar – 18 Apr 2027; €59 online.",
+      "note": null,
       "source": {
-        "url": "https://www.skipass-avoriaz.com/en/winter/pricing",
-        "verification": "search-summary",
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of SERMA Avoriaz & Portes du Soleil rates (2026-27)"
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": Portes du Soleil rates Mar 20, 2027 to Apr 18, 2027, cash desk: 1 day adult 62.00€."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Portes du Soleil 1-day pass, child 5–16 (ticket office), spring",
-      "category": "child",
-      "amount": 47,
+      "item": "Portes du Soleil 5-hour pass, adult (ticket office), 19 Dec 2026 – 19 Mar 2027",
+      "category": "adult half-day",
+      "amount": 66,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": null,
       "purchaseBy": null,
-      "appliesFrom": "2027-03-20",
-      "appliesTo": "2027-04-18",
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
       "includesTax": null,
-      "note": "Cash-desk price for 20 Mar – 18 Apr 2027. Super senior 75+: €29.",
+      "note": null,
       "source": {
-        "url": "https://www.skipass-avoriaz.com/en/winter/pricing",
-        "verification": "search-summary",
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of SERMA Avoriaz & Portes du Soleil rates (2026-27)"
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": PDS 5 h 00 adult 66.00€ (56.00€ from 20 Mar 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, junior 16–25 (ticket office), 19 Dec 2026 – 19 Mar 2027",
+      "category": "youth",
+      "amount": 66,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": PDS 1 day junior 66.00€ (56.00€ from 20 Mar 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, child 5–16 (ticket office), 19 Dec 2026 – 19 Mar 2027",
+      "category": "child",
+      "amount": 55,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": PDS 1 day child 55.00€ (47.00€ from 20 Mar 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Portes du Soleil 1-day pass, senior 65+ (ticket office), 19 Dec 2026 – 19 Mar 2027",
+      "category": "senior",
+      "amount": 66,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.avoriaz.com/en/discover/the-essentials/winter-ski-passes-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Avoriaz.com winter ski-pass rates, \"Winter 2026 – 2027\": PDS 1 day senior 66.00€ (56.00€ from 20 Mar 2027); super senior 75+ 29.00€."
       }
     }
   ],
@@ -339,17 +572,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Proclou_high_speed_chairlif_in_Avoriaz_(1).jpg"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "Avoriaz sector piste km, lifts by type and hourly capacity (elevations are still reference data).",
-      "Avoriaz-area junior/senior and Portes du Soleil high-season child/junior/senior day prices (search summaries disagreed).",
-      "Rental and lesson prices."
+      "Avoriaz sector piste km, lifts by type, hourly capacity and elevations (still reference data).",
+      "Lift operating hours for 2026-27 (the official hours page still shows 2025-26 dates and no times in its text).",
+      "Rental and lesson prices (not on the fetched pages)."
     ],
     "conflicts": [
-      "Avoriaz sector: 35 lifts / 54 slopes (8/27/14/6) vs 36 lifts / 49 slopes (4/26/14/6) vs 79 km and 34 lifts (third-party 2026-27 guide, search summary).",
-      "Portes du Soleil: 600 km and 209 lifts (search summary) vs more than 650 km and about 200 lifts (Wikipedia)."
+      "Avoriaz run count: 51 runs (English rates page) vs 53 pistes (French 'bons plans' page), both official.",
+      "Portes du Soleil size: 196 lifts / 286 runs (official Avoriaz page) vs '600 km of slopes' (official homepage) — different measures, not a contradiction."
     ],
-    "confidenceNotes": "Web pages could not be fetched in this build, so prices, dates, hours and the snow-report page come from search summaries of avoriaz.com, skipass-avoriaz.com (SERMA) and Tourisme Haute-Savoie. Elevations, coordinates and features are reference data; weather points approximate; airport times are estimates. Adversarial re-check on 2026-10-03 could not open any cited page (WebFetch blocked by the egress proxy on every domain tried, web-search budget exhausted), so these search-summary facts remain unconfirmed at source; only internal consistency was checked (calendar weekdays, age bands, rate windows, unit conversion)."
+    "confidenceNotes": "2026-10-03: lift-ticket prices, season window and terrain counts re-read from CI-fetched official Avoriaz/SERMA pages. Elevations, operator and coordinates remain reference data."
   }
 }

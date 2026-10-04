@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-01",
-      "text": "Winter season from 1 Nov 2026 (glacier sector); Sunnegga-Rothorn and Gornergrat from 28 Nov 2026",
+      "text": "Winter season from 1 Nov 2026 (glacier sector); Sunnegga-Rothorn and Gornergrat from 28 Nov 2026.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.ikonpass.com/en/opening-closing-dates",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon Pass 2026-27 opening-dates list (via search summary) gives 1 Nov 2026 for Zermatt; a separate Zermatt search summary gave the same start plus 28 Nov 2026 for Sunnegga/Rothorn and Gornergrat"
+        "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official ski-pass price page: 'The winter season starts on 01 November 2026 (opening Sunnegga/Rothorn and Gornergrat areas: 28 November 2026) and ends on 03 May 2027 (closing Sunnegga/Rothorn: 11 April 2027 and Gornergrat areas: 18 April 2027).'"
       }
     },
     "announcedClosing": {
       "date": "2027-05-03",
-      "text": "Winter season ends 3 May 2027",
+      "text": "Winter season ends 3 May 2027; Sunnegga-Rothorn closes 11 Apr 2027 and Gornergrat 18 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.matterhornparadise.ch/en/experience/skiing",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official ski-pass price page: 'The winter season starts on 01 November 2026 (opening Sunnegga/Rothorn and Gornergrat areas: 28 November 2026) and ends on 03 May 2027 (closing Sunnegga/Rothorn: 11 April 2027 and Gornergrat areas: 18 April 2027).'"
       }
     },
     "history": [],
@@ -124,23 +124,86 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Zermatt 1-day ski pass, adult — 'from' price (dynamic)",
+      "item": "Zermatt 1-day ski pass, adult — dynamic \"from\" price",
       "category": "adult",
       "amount": 89,
       "amountMax": null,
       "currency": "CHF",
-      "season": null,
+      "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: winter ski passes 'start from CHF 89' for one day in Zermatt (dynamic online pricing). Season not stated (likely the current online shop) and scope (Zermatt only vs international with Cervinia) not stated — confirm.",
+      "note": "Dynamic pricing; the lowest price applies 1–27 Nov 2026 and 19 Apr – 2 May 2027. Peak price not stated. Zermatt area only (Sunnegga-Rothorn, Gornergrat, Schwarzsee-Matterhorn Glacier Paradise; up to 200 km).",
       "source": {
         "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Zermatt Bergbahnen ski-pass prices (winter 2026-27 table, 'DAYS / ZERMATT / INTERNATIONAL (ZERMATT-CERVINIA)'): 1 day 'from CHF 89.00°' (Zermatt). '°The lowest price is available from 01.11.2026 - 27.11.2026 and 19.04.2027 - 02.05.2027.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "International (Zermatt–Cervinia) 1-day ski pass, adult — dynamic \"from\" price",
+      "category": "adult",
+      "amount": 104,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Includes Breuil-Cervinia and Valtournenche (Italy).",
+      "source": {
+        "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Zermatt Bergbahnen ski-pass prices (winter 2026-27 table, 'DAYS / ZERMATT / INTERNATIONAL (ZERMATT-CERVINIA)'): 1 day International 'from CHF 104.00°'. '°The lowest price is available from 01.11.2026 - 27.11.2026 and 19.04.2027 - 02.05.2027.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Zermatt half-day ski pass from 12:15, adult — \"from\" price",
+      "category": "adult half-day",
+      "amount": 68,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Zermatt Bergbahnen ski-pass prices (winter 2026-27 table, 'DAYS / ZERMATT / INTERNATIONAL (ZERMATT-CERVINIA)'): '1/2 from 12.15 h* from CHF 68.00°' (Zermatt ski area only)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Zermatt season ski pass, adult (bought from 1 Oct)",
+      "category": "adult",
+      "amount": 1750,
+      "amountMax": 1960,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Price rises on 1 Nov (CHF 1,850) and 1 Dec 2026 (CHF 1,960).",
+      "source": {
+        "url": "https://www.matterhornparadise.ch/en/information/tickets-prices/ski-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Zermatt Bergbahnen ski-pass prices (winter 2026-27 table, 'DAYS / ZERMATT / INTERNATIONAL (ZERMATT-CERVINIA)'): 'Season** from CHF 1'750.00° / International CHF 1'850.00°'; '**Price from 01.10. CHF 1'750.00 / CHF 1'850.00, price from 01.11. CHF 1'850 / CHF 1'960, price from 01.12. CHF 1'960 / CHF 2'070'."
       }
     }
   ],
@@ -261,19 +324,19 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:1_zermatt_evening_2022.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Confirm Zermatt-only lift count, lift types and capacity (figures on file describe the whole international area).",
-      "Confirm the 2026-27 adult day-pass price range (Zermatt-only and international) — only a 'from CHF 89' figure was found.",
       "Find the official live lift/piste status and snow report URLs on matterhornparadise.ch.",
       "Confirm current operation of the summer ski area in late September/October 2026 and snow depths.",
-      "Ikon Pass day allowance for Zermatt (not researched)."
+      "Ikon Pass day allowance for Zermatt (not researched).",
+      "Peak (non-'from') day prices and youth/child day prices for 2026-27 (only 'from' adult prices in the page text)."
     ],
     "conflicts": [
       "Lift counts differ by source/scope: 51 (skiresort.info, whole international area, excluding people movers and carpets), 52 (Zermatt alone, one summary), 54 with 'over 90,000/h' (Matterhorn ski paradise incl. Cervinia), 72 (a Cervinia summary).",
       "Base elevation 1,524 m is the international area's lowest point; Zermatt village is about 1,620 m (reference)."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Opening/closing dates are consistent across two summaries."
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Opening/closing dates are consistent across two summaries. 2026-10-03: winter 2026-27 dates and 'from' prices re-read from the CI-fetched official matterhornparadise.ch ski-pass page."
   }
 }

@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-27",
-      "text": "Zugspitze glacier ski area expected 27 Nov 2026 – 2 May 2027; no 2026-27 date found for Garmisch-Classic",
+      "text": "Zugspitze ski season expected 27 Nov 2026 – 2 May 2027; Garmisch-Classic expected from mid-December until 29 Mar 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skiresort.info/snow-reports/seasonstart/zugspitz-region/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary ('expected to run from 27.11.2026 to 02.05.2027'); exact page not attributed"
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Bayerische Zugspitzbahn page: 'The ski season at Zugspitze is expected to run from 27.11.2026 to 02.05.2027.' and 'The Garmisch-Classic ski season is expected to run from mid-December until 29.03.2027.' Zugspitze winter rates valid from 27 Nov 2026 (tickets page)."
       }
     },
     "announcedClosing": {
       "date": "2027-05-02",
-      "text": "Zugspitze expected to run to 2 May 2027",
+      "text": "Zugspitze expected to close 2 May 2027; Garmisch-Classic 29 Mar 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skiresort.info/snow-reports/seasonstart/zugspitz-region/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary"
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official opening-hours page (expected dates)."
       }
     },
     "history": [
@@ -130,9 +130,85 @@
       }
     ],
     "typicalText": null,
-    "notes": "Dates are for the Zugspitze glacier; Garmisch-Classic depends on snow at lower altitude (it opened 13 Dec in 2024-25)."
+    "notes": "Zugspitze closed completely 9–13, 16–20 and 23–26 Nov 2026 (maintenance). Garmisch-Classic start is only 'mid-December'."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Garmisch-Classic ski lifts (Dec–Feb)",
+      "days": null,
+      "opens": "08:45",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Ski lifts Dec to Feb 8.45 a.m. – 4.00 p.m. | March to April 8.30 a.m. – 4.15 p.m. | Kandahar-Express opens 15 min later'"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Garmisch-Classic ski lifts (Mar–Apr)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:15",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Ski lifts ... March to April 8.30 a.m. – 4.15 p.m.'"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Alpspitzbahn / Kreuzeckbahn (Nov–Feb)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:30",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Alpspitzbahn Nov to Feb 8.30 a.m. – 4.30 p.m. | Mar to Apr 8.30 a.m. – 4.45 p.m.' (Kreuzeckbahn same)."
+      }
+    },
+    {
+      "activity": "other",
+      "label": "Zugspitze cable car (Sep–June)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:45",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Cable car Zugspitze Sep to June 8.30 a.m. – 4.45 p.m.'"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Gletscherbahn (glacier cable car, Sep–June)",
+      "days": null,
+      "opens": "08:45",
+      "closes": "16:25",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://zugspitze.de/en/Service-information/Opening-hours-timetables",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Gletscherbahn Sep to June 8.45 a.m. – 4.25 p.m.'"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -270,14 +346,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Skier_on_a_slope_(Unsplash).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 opening date for Garmisch-Classic and 2026-27 day prices for both areas.",
-      "Zugspitze lift types and hourly lift capacity for both areas.",
-      "Official snow report and live lift-status pages."
+      "2026-27 winter day-ticket prices (the fetched official ticket pages show summer 2026 rates; winter rates are on a linked page not fetched).",
+      "Exact Garmisch-Classic opening day ('mid-December').",
+      "Zugspitze lift types and hourly capacity.",
+      "Official snow report and live lift-status pages; rental and lesson prices."
     ],
     "conflicts": [],
-    "confidenceNotes": "Piste, lift, date and price facts come from web-search summaries of zugspitze.de and skiresort pages; totals combine two separate areas. Coordinates, weather points, the tourism link and airport times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03: expected season dates and lift hours re-read from the CI-fetched official zugspitze.de opening-hours page. Day prices (€69) remain earlier search summaries; the official pages fetched only showed summer rates (Zugspitze summer ticket €78, Garmisch-Classic €39)."
   }
 }

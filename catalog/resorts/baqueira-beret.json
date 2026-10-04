@@ -24,10 +24,10 @@
     "summitM": 2610,
     "verticalM": 1110,
     "source": {
-      "url": "https://www.baqueira.es/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Reference: Baqueira base about 1,500 m, top about 2,610 m (Bonaigua sector); vertical derived. Not found in this session's searches"
+      "url": "https://snowstash.com/europe/spain/baqueira-beret/lift-tickets",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "snowstash.com (third party): 'Set in Catalonia's Val d'Aran at elevations between 1,500m and 2,610m', 'vertical drop of 1,110m'."
     }
   },
   "weatherPoints": [
@@ -106,9 +106,21 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-12",
+        "closed": "2026-04-21",
+        "source": {
+          "url": "https://snowstash.com/europe/spain/baqueira-beret/lift-tickets",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "snowstash.com 'SEASON 2025 - 2026 Opens 12 Dec 2025 Closes 21 Apr 2026 Days open 130'."
+        }
+      }
+    ],
     "typicalText": "Usually late November or early December to early/mid-April (reference; confirm).",
-    "notes": "No 2026-27 opening date is announced in the results; OnTheSnow projects 28 Nov (a projection, not an announcement). Past seasons were not captured."
+    "notes": "No 2026-27 dates on the saved pages. 2025-26 ran 12 Dec 2025 – 21 Apr 2026 (snowstash.com, third party). The official baqueira.es page could not be fetched by the CI job."
   },
   "hours": [],
   "prices": [
@@ -125,7 +137,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2025-26 figure (most recent found): adult 1-day €69. 2026-27 prices were not in the results.",
+      "note": "2025-26 figure (most recent found): adult 1-day €69. 2026-27 prices were not in the results. The CI-fetched snowstash page (2026-10-03) now shows only 'Adult day ticket from €35 · Child from €8 · 11 ticket options' (season 2025-2026), which may be a cheapest option rather than the full-day window price; €69 kept from the earlier search summary.",
       "source": {
         "url": "https://snowstash.com/europe/spain/baqueira-beret/lift-tickets",
         "verification": "search-summary",
@@ -209,18 +221,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:VISTA_BAQUEIRA_1500.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 opening and closing dates and prices.",
-      "Reconcile run counts (127 tracks vs a 69-piste colour split).",
-      "Val d'Aran avalanche bulletin URL (not recorded).",
-      "Official live lift-status and snow-report pages.",
-      "Lleida-Alguaire airport as an alternative gateway (not in the catalog)."
+      "2026-27 opening and closing dates and day prices (official site not fetched).",
+      "Whether snowstash's 'from €35' adult price is a full-day ticket.",
+      "Official live lift-status and snow-report pages; Val d'Aran avalanche bulletin URL.",
+      "Rental and lesson prices."
     ],
     "conflicts": [
-      "Runs: 127 tracks (official technical data, per summary) vs 5 green / 33 blue / 25 red / 6 black (69) in another result."
+      "Runs: 127 tracks (official technical data, per summary) vs 5 green / 33 blue / 25 red / 6 black (69) in another result.",
+      "Size: 165 km / 114 runs / 36 lifts / >61,000 skiers per hour (snowstash.com, 2026-10-03) vs 169 km / 127 tracks / 62,013 per hour (official technical data via earlier search summary)."
     ],
-    "confidenceNotes": "Lift and capacity data come from a search summary of the official technical-data page (fairly solid). The price is 2025-26. Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: only a third-party snowstash.com page was fetched (official baqueira.es fetch failed). Elevations and 2025-26 history from snowstash; lift data from an earlier search summary of the official technical-data page."
   }
 }

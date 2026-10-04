@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 1750,
-    "summitM": 3210,
-    "verticalM": 1460,
+    "baseM": 1749,
+    "summitM": 3212,
+    "verticalM": 1463,
     "source": {
-      "url": "https://www.stubaier-gletscher.com/en/ski-area/ski-area-in-numbers/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: altitude 1,750–3,210 m; vertical derived as the difference"
+      "url": "https://www.stubaier-gletscher.com/en/stubai-live/news/detail/skiing-as-of-october-in-the-holidays-in-autumn/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official Stubai Glacier news: 'Located at an altitude of 1,749m to 3,212m'; 'At 3,212 metres, the mountain station of the Wildspitz lift is the highest point'. Vertical derived."
     }
   },
   "weatherPoints": [
@@ -96,31 +96,54 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-10-09",
-      "text": "Preliminary season start 9 Oct 2026",
+      "text": "Expected start of the 2026/27 ski season 9 Oct 2026 (subject to snow and weather).",
       "announcedOn": null,
       "source": {
-        "url": "https://www.stubaier-gletscher.com/en/stubai-live/news/detail/skiing-as-of-october-in-the-holidays-in-autumn/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Shared research notes; this agent's Stubai search also gave 9 Oct 2026"
+        "url": "https://www.stubaier-gletscher.com/en/ski-area/opening-hours/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official opening-hours page: 'Expected Start of the 2026/27 Ski Season October 9, 2026'; homepage: 'The start of the 2026/27 ski season is scheduled for October 9, 2026'. Glacier closed for maintenance 28 Sep – 8 Oct 2026."
       }
     },
     "announcedClosing": {
       "date": "2027-05-17",
-      "text": "Planned season end 17 May 2027 (also described as an estimated mid-May end)",
+      "text": "Estimated end mid-May 2027; winter 2026/27 price periods run to 17 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.stubaier-gletscher.com/en/ski-area/opening-hours/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary"
+        "url": "https://www.stubaier-gletscher.com/en/ski-area/prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official prices page 'WINTER 2026/27 - SKI PASSES': 09.10.2026 – 23.10.2026, 24.10.2026 – 16.04.2027, 17.04.2027 – 17.05.2027; opening-hours page: 'Estimated end of the 2026/27 ski season Mid-May 2027'."
       }
     },
     "history": [],
     "typicalText": null,
-    "notes": "Glacier season from 9 Oct 2026 (preliminary) to about 17 May 2027 per search summaries."
+    "notes": "Price periods 2026/27 (official): 9–23 Oct 2026, 24 Oct 2026 – 16 Apr 2027, 17 Apr – 17 May 2027. Online purchase cheaper up to 48 h ahead."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "ticket-office",
+      "label": "Neustift advance ticket office (Mon–Sat)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "opens": "07:30",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": "Closed 12:00–14:00.",
+      "source": {
+        "url": "https://www.stubaier-gletscher.com/en/ski-area/opening-hours/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Monday to Saturday 7:30 a.m. to 12 p.m. & 2 p.m. to 5 p.m.; Sundays and public holidays 7:30 a.m. to 12 p.m. & 3 p.m. to 5 p.m.'"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -252,18 +275,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stubai_Alps2.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Main-season adult day-ticket price for 2026-27.",
-      "Reconcile piste km (65 km total vs 57 km from the listed parts) and derive a split.",
-      "Official snow report and live lift-status pages; the operating company name.",
-      "Past opening and closing dates for an estimated window."
+      "2026-27 day-ticket prices (price tables not in the fetched page text; €64.20 spring tariff is an earlier search summary).",
+      "Reconcile piste km (65 vs 57).",
+      "Official snow report and live lift-status pages; operating company name."
     ],
     "conflicts": [
       "Lift capacity: 43,781 persons/hour (skiresort.info) vs 44,084 in another result.",
       "Piste km: '65 km (fall line)' total vs 57 km when the listed blue/red/black/ski-route parts are added."
     ],
-    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of stubaier-gletscher.com and skiresort.info. Coordinates, weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03: season start, price periods, ticket-office hours and elevation re-read from CI-fetched official stubaier-gletscher.com pages."
   }
 }

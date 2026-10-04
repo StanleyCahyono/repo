@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 1793,
-    "summitM": 3080,
-    "verticalM": 1287,
+    "baseM": 1800,
+    "summitM": 3030,
+    "verticalM": 1230,
     "source": {
-      "url": "https://www.skiresort.info/ski-resort/gurgl-obergurgl-hochgurgl/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summaries: 'vertical range 1,800–3,080 m' and 'between 1,793 and 3,030 m' (summit differs, see conflicts). Lowest point 1,793 m and top 3,080 m used; vertical derived"
+      "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-area-information",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official gurgl.com ski-area information: 'From 1800 to 3030 meters above sea level'; '112 kilometers of slopes'. Vertical derived. Replaces the earlier 1,793–3,080 m skiresort.info figures."
     }
   },
   "weatherPoints": [
@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-19",
-      "text": "Winter season 19 Nov 2026 – 18 Apr 2027",
+      "text": "Winter season 19 Nov 2026 – 18 Apr 2027 (pre-season prices 19 Nov – 4 Dec 2026).",
       "announcedOn": null,
       "source": {
-        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions."
+        "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com: 'From November 19, 2026 - April 18, 2027, ski passes valid for 3 to 14 days can be used across all open ski resorts in the Ötztal'; pre-season 19.11.–04.12.2026. Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'Obergurgl-Hochgurgl 19 November 2026 – 18 April 2027' ('Weather and snow conditions can shift dates at short notice')."
       }
     },
     "announcedClosing": {
       "date": "2027-04-18",
-      "text": "Season end 18 Apr 2027",
+      "text": "Season end 18 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions."
+        "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com: 'From November 19, 2026 - April 18, 2027, ski passes valid for 3 to 14 days can be used across all open ski resorts in the Ötztal'; pre-season 19.11.–04.12.2026. Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'Obergurgl-Hochgurgl 19 November 2026 – 18 April 2027' ('Weather and snow conditions can shift dates at short notice')."
       }
     },
     "history": [],
@@ -124,23 +124,86 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Gurgl day ticket",
+      "item": "Gurgl 1-day ski pass, adult — pre-season (19 Nov – 4 Dec 2026) cash-desk \"from\" price",
       "category": "adult",
-      "amount": 64.0,
-      "amountMax": 75.5,
+      "amount": 64,
+      "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
       "dayType": null,
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
+      "appliesFrom": "2026-11-19",
+      "appliesTo": "2026-12-04",
       "includesTax": null,
-      "note": "Search summary: 2026/27 adult (19–74) day ticket EUR 64 to 75.50+ depending on off-peak, peak and top season (the '+' suggests top season may cost more). Youth EUR 50–60.50+, child EUR 34.50–42.50+. Passes of 3+ days include the Ötztal Superskipass (90 lifts, 365 km).",
+      "note": "Pre-season tab only; high- and peak-season prices are on other tabs/PDF not in the page text. 1–2 day passes valid in Obergurgl-Hochgurgl only.",
       "source": {
         "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com ski pass prices, PRE-SEASON 19.11. – 04.12.2026 (current spot prices, cash desk): '1 day Gurgl from € 64,00' (youth from € 50,00, children from € 34,50). 'Prices listed are our current spot prices. If you book early, you can get discounted rates via the online ski ticket shop.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Gurgl afternoon ski pass from 12:00, adult — pre-season",
+      "category": "adult half-day",
+      "amount": 54.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-19",
+      "appliesTo": "2026-12-04",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com ski pass prices, PRE-SEASON 19.11. – 04.12.2026 (current spot prices, cash desk): 'from 12.00 noon Gurgl from € 54,50' (from 11.00 € 58,50; from 2.00 pm € 39,50)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Gurgl 1-day ski pass, youth — pre-season",
+      "category": "youth",
+      "amount": 50,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-19",
+      "appliesTo": "2026-12-04",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com ski pass prices, PRE-SEASON 19.11. – 04.12.2026 (current spot prices, cash desk): youth 1 day from € 50,00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Gurgl 1-day ski pass, child — pre-season",
+      "category": "child",
+      "amount": 34.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-19",
+      "appliesTo": "2026-12-04",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.gurgl.com/en/activities/winter/skiing-snowboarding/ski-passes-prices/ski-pass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official gurgl.com ski pass prices, PRE-SEASON 19.11. – 04.12.2026 (current spot prices, cash desk): children 1 day from € 34,50."
       }
     }
   ],
@@ -219,17 +282,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Obergurgl_2.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the summit elevation (3,080 m vs 3,030 m) and the type of the one untyped lift.",
-      "Blue/red/black split and run count.",
-      "Official snow report and live lift-status pages; the operating company names.",
-      "Past opening and closing dates for an estimated window."
+      "High- and peak-season day prices for 2026-27 (tabs/PDF not in the page text; earlier search summary gave up to €75.50).",
+      "Type of the untyped lift; blue/red/black split and run count.",
+      "Official snow report and live lift-status pages; operating company names."
     ],
     "conflicts": [
-      "Summit elevation: 3,080 m (vertical range 1,800–3,080 m) vs 3,030 m (area between 1,793 and 3,030 m) in the same search results."
+      "Summit: 3,030 m (official gurgl.com) vs 3,080 m (skiresort.info); official value used."
     ],
-    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of gurgl.com, skiresort and an Austria roundup. Coordinates, weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03: season dates, pre-season prices and elevation range re-read from CI-fetched official gurgl.com pages (dates also on Austria Tourism's list)."
   }
 }

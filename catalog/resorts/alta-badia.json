@@ -90,24 +90,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-04",
-      "text": "Alta Badia opens Friday 4 Dec 2026 (first lifts; the Sellaronda too if the connections can open)",
+      "text": "Alta Badia winter season 4 Dec 2026 – 4 Apr 2027 (Sellaronda if the connections can open).",
       "announcedOn": null,
       "source": {
-        "url": "https://www.dolomitireview.com/apertura-impianti-dolomiti-superski-2026-2027/",
-        "verification": "search-summary",
+        "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of the Dolomiti Superski 2026-27 opening-dates article: 4 Dec 2026 announced for Alta Badia, Val Gardena–Alpe di Siusi, Val di Fassa, Arabba and others."
+        "note": "Official Alta Badia 'Lifts, slopes & snow' page shows the winter season '04.12.2026 - 04.04.2027'; lift table lists e.g. Falzarego–Lagazuoi cable car 05.12.2026 – 03.04.2027, 09:00 – 16:30."
       }
     },
     "announcedClosing": {
       "date": "2027-04-04",
-      "text": "Lifts in Alta Badia and the Sellaronda run until 4 Apr 2027",
+      "text": "Season ends 4 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://goldencamping.com/alta-badia-la-stagione-sciistica-2026-27-parte-con-la-gran-risa-illuminata-di-notte/",
-        "verification": "search-summary",
+        "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of an Alta Badia 2026-27 season article; skiresort.info lists the same 4 Dec 2026 – 4 Apr 2027 window."
+        "note": "Official Alta Badia 'Lifts, slopes & snow' page shows the winter season '04.12.2026 - 04.04.2027'; lift table lists e.g. Falzarego–Lagazuoi cable car 05.12.2026 – 03.04.2027, 09:00 – 16:30."
       }
     },
     "history": [],
@@ -117,25 +117,17 @@
   "hours": [
     {
       "activity": "lifts",
-      "label": "Lifts (general opening times)",
-      "days": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
-      ],
+      "label": "Col Alto and most Alta Badia lifts (typical)",
+      "days": null,
       "opens": "08:30",
-      "closes": "16:30",
-      "season": null,
-      "note": "General Alta Badia lift times; individual lifts vary (for example 08:45–16:15).",
+      "closes": "16:15",
+      "season": "2026-27",
+      "note": "Times vary by lift (08:30–09:00 start, 16:15–16:30 close).",
       "source": {
         "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of Alta Badia's lifts page: general opening times 08:30–16:30, Monday to Sunday."
+        "note": "Official lift table: Col Alto and other lifts listed 08:30 – 16:15 (others 08:45 or 09:00 – 16:15; Falzarego–Lagazuoi 09:00 – 16:30)."
       }
     }
   ],
@@ -153,12 +145,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "€80 in pre-/low season, €89 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027. Valid on the whole Dolomiti Superski network, including Alta Badia.",
+      "note": "Whole Dolomiti Superski area, 1 adult day: €80 in the promo season (from 20 Nov 2026), €89 in high season (from 20 Dec 2026). 5% off online.",
       "source": {
-        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
-        "verification": "search-summary",
+        "url": "https://www.dolomitisuperski.com/en/plan-and-book/skipassandprices",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026; the same figures appear in Il Gazzettino and AGI coverage."
+        "note": "Official Dolomiti Superski price calculator ('In the whole Dolomiti Superski', '1 Adult', single-day prices per calendar day): 80 € per day from 20 Nov 2026 through 19 Dec 2026 (promo season), 89 € from 20 Dec 2026 (high season); January 2027 prices not rendered in the page text."
       }
     },
     {
@@ -426,7 +418,7 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alta_Badia.JPG"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
       "Alta Badia local (area-only) pass prices for 2026-27; rental and lesson prices for 2026-27.",
@@ -435,6 +427,6 @@
     "conflicts": [
       "Lift count: 53 (Alta Badia ski-area summary) vs 51 (Wikipedia: 1 funicular, 1 aerial tramway, 10 gondolas, 30 chairlifts, 11 surface lifts)."
     ],
-    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources. Dolomiti Superski 2026-27 prices and the 4 Dec 2026 opening come from news coverage of the consortium announcements."
+    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources. Dolomiti Superski 2026-27 prices and the 4 Dec 2026 opening come from news coverage of the consortium announcements. 2026-10-03: season dates and per-lift times re-read from the CI-fetched official altabadia.org lift page; official ski-pass page confirms 130 piste km and a 5% online discount (no price figures in text). Dolomiti Superski prices remain dovesciare.it search summaries."
   }
 }

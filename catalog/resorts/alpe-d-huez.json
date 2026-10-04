@@ -93,10 +93,10 @@
       "text": "Ski area open 5 Dec 2026 – 25 Apr 2027 (official ski-pass site); all linked villages (Alpe d'Huez, Auris, Oz-Vaujany, Villard-Reculas) open together.",
       "announcedOn": null,
       "source": {
-        "url": "https://skipass.alpedhuez.com/hiver/en/winter-resort-opening/",
+        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "Search summary of the official SATA site: 'from December 5, 2026, to April 25, 2027'."
+        "note": "France Montagnes 26-27 list: Alpe d'Huez opens Saturday 5 Dec 2026 ('dates announced by the resorts, subject to weather and snow conditions'). Matches the earlier search summary of the official SATA page (5 Dec 2026 – 25 Apr 2027)."
       }
     },
     "announcedClosing": {
@@ -363,17 +363,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alpe-dhuez-arrivee-tour.jpg"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
       "Reduced early/late-season day-pass rates and their exact periods (search summary said 5–12 Dec 2026 and 10–18 Apr 2027, which leaves 13–18 Dec and 19–25 Apr uncovered).",
       "Daily lift operating hours (only ticket-office hours found).",
       "Lifts by type, hourly capacity and full colour split.",
-      "Rental prices for 2026-27 (an undated MGM Sports 6–7-day pack price from a chain-wide page was removed on 2026-10-03)."
+      "Rental prices for 2026-27 (an undated MGM Sports 6–7-day pack price from a chain-wide page was removed on 2026-10-03).",
+      "CI-fetched official pages (alpedhuez.com, skipass.alpedhuez.com 'All ski passes') list products but no prices, so the 2026-27 day-pass prices remain search-summary only."
     ],
     "conflicts": [
       "Rate calendar vs season dates (search summaries of official SATA pages): the season is listed as 5 Dec 2026 – 25 Apr 2027, but the day-pass periods quoted were reduced 5–12 Dec 2026, full 19 Dec 2026 – 9 Apr 2027 and reduced 10–18 Apr 2027, leaving 13–18 Dec 2026 and 19–25 Apr 2027 without a rate. One of the two may be incomplete; confirm on skipass.alpedhuez.com."
     ],
-    "confidenceNotes": "Web pages could not be fetched in this build, so every fact is from search summaries of the named pages (mostly the official SATA ski-pass site and the tourist office). Coordinates are reference data; weather points approximate; airport times are estimates. Adversarial re-check on 2026-10-03 could not open any cited page (WebFetch blocked by the egress proxy on every domain tried, web-search budget exhausted), so these search-summary facts remain unconfirmed at source; only internal consistency was checked (calendar weekdays, age bands, rate windows, unit conversion)."
+    "confidenceNotes": "Web pages could not be fetched in this build, so every fact is from search summaries of the named pages (mostly the official SATA ski-pass site and the tourist office). Coordinates are reference data; weather points approximate; airport times are estimates. Adversarial re-check on 2026-10-03 could not open any cited page (WebFetch blocked by the egress proxy on every domain tried, web-search budget exhausted), so these search-summary facts remain unconfirmed at source; only internal consistency was checked (calendar weekdays, age bands, rate windows, unit conversion). 2026-10-03 CI-fetched pages: the France Montagnes 26-27 opening list confirms the 5 Dec 2026 opening; the official ski-pass overview page confirms 2026/27 season and annual passes (early booking before 1 Oct / 20 Nov) but shows no prices; the tourist-office homepage states 'more than 250 km of slopes'."
   }
 }

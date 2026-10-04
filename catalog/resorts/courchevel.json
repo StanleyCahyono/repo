@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Savoie)",
   "locality": "Courchevel 1850, Moriond (1650), Village (1550), Le Praz (1300), La Tania",
   "timezone": "Europe/Paris",
-  "operator": "S3V (Société des 3 Vallées) — reference, confirm",
+  "operator": "S3V (Société des 3 Vallées)",
   "priority": 0,
   "location": {
     "lat": 45.4153,
@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://theslopeguide.com/resort/courchevel",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Figures describe the Courchevel valley (with La Tania). Search summary of Courchevel guides (theslopeguide, where-to-ski, sno): 150 km of pistes and 58 lifts; the 3 Vallées 'in figures' page gives 62 lifts for Courchevel. Lift types and capacity for Courchevel alone were not found. A 3 Vallées/S3V press document listed 71 lifts (1 cable car, 14 gondolas, 24 chairlifts, 21 drag lifts, 11 carpets/rope tows); that is neither the 3 Vallées total nor clearly Courchevel-only (S3V also runs lifts on the Méribel-Mottaret side — reference), so it is not used here. Linked Les 3 Vallées area (official 'in figures' page, search summary): 600 km of pistes, 334 pistes (53 green, 136 blue, 108 red, 37 black), 161 lifts, of which the summary itemised 34 gondolas, 3 cable cars, 57 chairlifts and 33 drag lifts (the other 34 not broken down); Wikipedia puts total uplift at about 284,500 skiers/hour in 2026 (estimate)."
+      "url": "https://courchevel.com/en/le-ski-a-courchevel/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "courchevel.com: 'The Courchevel ski area offers 150 km of marked slopes for all levels. It is connected to the 3 Vallées ski area, offering 600 km of skiing.' Lift count 58 is still from the earlier theslopeguide.com search summary."
     }
   },
   "features": {
@@ -89,25 +89,25 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": "2026-12-05",
-      "text": "Listed for 5 Dec 2026 in France Montagnes' 2026-27 opening list; another result in the same search gave 4 Dec 2026 – 18 Apr 2027 — confirm the exact first day.",
+      "date": "2026-12-04",
+      "text": "Courchevel ski area open 4 Dec 2026 – 18 Apr 2027; the wider 3 Vallées from 5 Dec 2026.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "S3V ski-pass site 'Ski area opening': Courchevel from 4 December 2026 to 18 April 2027; 3 Vallées from 5 Decembre 2026 to 18 April 2027. courchevel.com: 'COURCHEVEL VOUS ACCUEILLE DU 04 DÉCEMBRE 2026 AU 18 AVRIL 2027'. France Montagnes lists Courchevel under 5 Dec 2026."
       }
     },
     "announcedClosing": {
       "date": "2027-04-18",
-      "text": "Season to 18 Apr 2027 (single search result, per search summary).",
+      "text": "Courchevel and 3 Vallées ski areas close 18 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "S3V ski-pass site 'Ski area opening': to 18 April 2027 (Courchevel and 3 Vallées); confirmed by courchevel.com homepage."
       }
     },
     "history": [],
@@ -118,7 +118,7 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Courchevel adult 1-day ski pass (high season)",
+      "item": "Courchevel Valley 1-day ski pass, adult 18–74 (high season)",
       "category": "adult",
       "amount": 77,
       "amountMax": null,
@@ -129,12 +129,75 @@
       "appliesFrom": "2026-12-19",
       "appliesTo": "2027-04-09",
       "includesTax": null,
-      "note": "Search summary: adult day pass €77 in high season (19 Dec–9 Apr) for 2026-27. Not clear whether this is the Courchevel valley pass or the 3 Vallées pass — confirm.",
+      "note": "Courchevel valley only. Low-season prices exist (\"Show dates detail\") but were not in the page text.",
       "source": {
         "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the 'Courchevel ski pass price list 2026 - 2027'"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official S3V 'Courchevel ski pass price list 2026 - 2027', Solo, High Season Dec 19 to April 9: Adult 1 day 77€ (2 days 154€, 6 days 385€)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courchevel Valley 1-day ski pass, child 5–17 (high season)",
+      "category": "child",
+      "amount": 63.1,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official S3V 'Courchevel ski pass price list 2026 - 2027', Solo, High Season Dec 19 to April 9: Child (5 /-18 yrs) 1 day 63.10€. Free under 5 and over 75."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "3 Vallées extension add-on, adult (per day, cash desk only)",
+      "category": "adult 3 Vallées add-on",
+      "amount": 49.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Added to a Courchevel pass to ski the whole 3 Vallées; 1-day 3 Vallées total = €77 + €49.50 per the listed figures.",
+      "source": {
+        "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official S3V 'Courchevel ski pass price list 2026 - 2027', Solo, High Season Dec 19 to April 9: add-on 3V* adult 49.50€, child 40.50€ ('3 Vallées extend: On sale at cash desk only')."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courchevel Minipass (beginner package), per day",
+      "category": "adult beginner",
+      "amount": 39.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.skipasscourchevel.com/en/courchevel-skipass-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official price list: 'Minipass Courchevel €39.5 / day — Would you like to learn to ski? This is the perfect package for you!'"
       }
     }
   ],
@@ -240,21 +303,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Courchevel_1850_ski_resort.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Exact 2026-27 opening day (4 vs 5 Dec 2026).",
-      "Lifts by type and hourly capacity for Courchevel alone; lift total 58 vs 62.",
-      "Whether the €77 high-season day price is the Courchevel or the 3 Vallées pass; the other pass's price.",
-      "Epic Pass 2026-27 day allowance for Les 3 Vallées (not researched).",
-      "Courchevel's own run count and colour split.",
-      "Official snow-report page (the 3 Vallées live lifts-and-trails page is linked)."
+      "Low-season Courchevel day prices (dates/amounts behind 'Show dates detail' not in page text).",
+      "Lifts by type and hourly capacity; lift total 58 vs 62 unconfirmed.",
+      "Rental and lesson prices.",
+      "Lift operating hours.",
+      "Official snow-report URL (courchevel.com shows a 'Snow report' block without a deep link in the page text)."
     ],
     "conflicts": [
-      "Opening: 5 Dec 2026 (France Montagnes list) vs 4 Dec 2026 (another result in the same search).",
-      "Lifts: 58 (guide sites) vs 62 (3 Vallées figures).",
-      "3 Vallées run split: 53 green / 141 blue / 117 red / 38 black in a guide summary vs 53 / 136 / 108 / 37 (334) on the official figures page."
+      "Opening: Courchevel 4 Dec 2026 (S3V, courchevel.com) vs 5 Dec 2026 (3 Vallées; France Montagnes list)."
     ],
-    "confidenceNotes": "Size, lift total, dates and price come from search summaries; lift types and capacity for Courchevel alone are unknown. Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: 2026-27 prices, season dates and operator (contact@s3v.com) re-read from the CI-fetched official S3V ski-pass page and courchevel.com. Elevations and coordinates remain reference data."
   }
 }

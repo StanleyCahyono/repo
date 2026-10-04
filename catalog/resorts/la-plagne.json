@@ -96,24 +96,29 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-12",
-      "text": "La Plagne opens 12 Dec 2026 (France Montagnes 2026-27 opening list, per search summary).",
+      "text": "La Plagne opens 12 Dec 2026 (official events calendar \"The Opening — On 12/12/2026\"); 2026-27 price periods run 12 Dec 2026 – 24 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://en.la-plagne.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage: 'The Opening On 12/12/2026'. Price page periods start 12/12/2026; France Montagnes also lists La Plagne on 12 Dec 2026."
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-24",
+      "text": "2026-27 price periods and season/annual passes run to 24 Apr 2027; Paradiski link open 12 Dec 2026 – 17 Apr 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.skipass-laplagne.com/en/public-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official price page: last period 'From 17/04/2027 to 24/04/2027'; 'Season and Annual passes are valid from 123 [sic] December 2026 to 24 April 2027'; 'The Paradiski link is open from 12 December 2026 to 17 April 2027, inclusive.'"
+      }
     },
     "history": [],
     "typicalText": "Usually mid-December to late April (reference; confirm).",
-    "notes": "No 2026-27 closing date was found. Past seasons were not captured."
+    "notes": "Paradiski link (Vanoise Express) open 12 Dec 2026 – 17 Apr 2027 inclusive. Closing inferred from the last price period and season-pass validity (24 Apr 2027) on the official price page."
   },
   "hours": [],
   "prices": [
@@ -125,17 +130,101 @@
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-16",
+      "includesTax": true,
+      "note": "Net prices incl. VAT; Ski card €1 on first purchase. Other periods (12–18 Dec 2026, 17–24 Apr 2027) have separate tabs not in the page text.",
+      "source": {
+        "url": "https://www.skipass-laplagne.com/en/public-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official La Plagne '2026-2027 Winter Prices', La Plagne domain (225 km), From 19/12/2026 to 16/04/2027: 1 day 13 to 64 y.o. € 72; 5 to 12 € 58; 65 to 74 € 58."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "La Plagne 4-hour ski pass, adult 13–64",
+      "category": "adult half-day",
+      "amount": 58,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-16",
+      "includesTax": true,
+      "note": null,
+      "source": {
+        "url": "https://www.skipass-laplagne.com/en/public-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official La Plagne '2026-2027 Winter Prices', La Plagne domain (225 km), From 19/12/2026 to 16/04/2027: 4 hours 13 to 64 y.o. € 58 (child/senior € 47)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "La Plagne 1-day ski pass, child 5–12",
+      "category": "child",
+      "amount": 58,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-16",
+      "includesTax": true,
+      "note": null,
+      "source": {
+        "url": "https://www.skipass-laplagne.com/en/public-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official La Plagne '2026-2027 Winter Prices', La Plagne domain (225 km), From 19/12/2026 to 16/04/2027: 1 day 5 to 12 y.o. € 58. Children under 5 free."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "La Plagne 1-day ski pass, senior 65–74",
+      "category": "senior",
+      "amount": 58,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-16",
+      "includesTax": true,
+      "note": null,
+      "source": {
+        "url": "https://www.skipass-laplagne.com/en/public-prices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official La Plagne '2026-2027 Winter Prices', La Plagne domain (225 km), From 19/12/2026 to 16/04/2027: 1 day 65 to 74 y.o. € 58. Seniors aged 75 and over: €10."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Paradiski day extension (on a valid La Plagne pass), adult",
+      "category": "adult Paradiski add-on",
+      "amount": 28,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
-      "includesTax": null,
-      "note": "Search summary: 2026-27 1-day passes from €58 (children 5–12 and seniors 65–74) to €72 (adults 13–64). Paradiski day price not captured.",
+      "includesTax": true,
+      "note": null,
       "source": {
         "url": "https://www.skipass-laplagne.com/en/public-prices",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of La Plagne ski-pass pages"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official price page: 'Paradiski extension ... Available only at points of sale, at a price of €28 for an adult or €23 for a child or senior.'"
       }
     }
   ],
@@ -241,18 +330,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plagne_Centre,_April_2017_(crop).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 closing date.",
-      "Reconcile the lift total (82 vs 77) with the by-type list (74).",
-      "Colour split for La Plagne alone.",
+      "Prices for the early (12–18 Dec 2026) and late (17–24 Apr 2027) periods and Paradiski day prices (tabs not in page text).",
+      "Reconcile the lift total (82 vs 77) with the by-type list.",
       "Official live lift-status and snow-report pages.",
-      "Paradiski day-pass price."
+      "Rental and lesson prices; lift hours."
     ],
     "conflicts": [
       "Lift total: 82 (with a by-type list adding to 74) vs 77 in another guide."
     ],
-    "confidenceNotes": "Area size, lift mix, capacity and the 2026-27 day price come from search summaries (partly the official ticket site). Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: 2026-27 day prices, season window and 225 km re-read from CI-fetched official La Plagne pages. Lift breakdown remains from the earlier search summary; elevations/coordinates are reference data."
   }
 }

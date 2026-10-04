@@ -90,27 +90,39 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Ski area open 28 Nov 2026 – 11 Apr 2027",
+      "text": "Ski area open 28 Nov 2026 – 11 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.courmayeurmontblanc.it/en/opening-of-the-courmayeur-mont-blanc-ski-area/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; the Ikon Pass 2026-27 opening-dates list also gives 28 Nov 2026. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://www.courmayeur-montblanc.com/en/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie homepage: 'OPENING SKI AREA From the 28th November 2026 to the 11th April 2027'."
       }
     },
     "announcedClosing": {
       "date": "2027-04-11",
-      "text": "Ski area closes 11 Apr 2027",
+      "text": "Ski area closes 11 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.courmayeurmontblanc.it/en/opening-of-the-courmayeur-mont-blanc-ski-area/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://www.courmayeur-montblanc.com/en/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie homepage: 'OPENING SKI AREA From the 28th November 2026 to the 11th April 2027'."
       }
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-11-29",
+        "closed": "2026-04-06",
+        "source": {
+          "url": "https://www.courmayeurmontblanc.it/en/opening-of-the-courmayeur-mont-blanc-ski-area/",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Courmayeur tourism notice dated 24 November 2025: 'From Saturday 29 November to Monday 6 April' (partial opening via Dolonne Gondola and Courmayeur Cable Car; promotional day pass €50.00)."
+        }
+      }
+    ],
     "typicalText": "Late November to mid-April (2026-27 schedule)",
     "notes": null
   },
@@ -118,23 +130,128 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Courmayeur 1-day pass, adult, high season",
+      "item": "Courmayeur 1-day ski pass, adult",
       "category": "adult",
-      "amount": 69,
+      "amount": 75,
       "amountMax": null,
       "currency": "EUR",
       "season": null,
-      "dayType": "peak",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: adult EUR 69, young (under 16) EUR 48.50, child (under 8) EUR 17.50, senior EUR 60.50 — season not stated.",
+      "note": "Season not stated on the page (dynamic \"Intelligent Pricing\" online). Courmayeur ski area only.",
       "source": {
         "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie 'Daily and multi-day' rates, VALID ONLY IN COURMAYEUR SKI RESORT (Adult / Child <8 N.C. / Young <16 / Youth <24 / Senior): 1 day € 75,00 / € 19,00 / € 53,00 / € 60,00 / € 66,00. Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courmayeur 4-hour ski pass, adult",
+      "category": "adult half-day",
+      "amount": 70,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie 'Daily and multi-day' rates, VALID ONLY IN COURMAYEUR SKI RESORT (Adult / Child <8 N.C. / Young <16 / Youth <24 / Senior): 4 hours € 70,00 (3 hours € 64,00). Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courmayeur 1-day ski pass, young (<16)",
+      "category": "child",
+      "amount": 53,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie 'Daily and multi-day' rates, VALID ONLY IN COURMAYEUR SKI RESORT (Adult / Child <8 N.C. / Young <16 / Youth <24 / Senior): 1 day Young <16 € 53,00; Child <8 € 19,00 (free with a paying adult per special offers page). Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courmayeur 1-day ski pass, youth (<24)",
+      "category": "youth",
+      "amount": 60,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie 'Daily and multi-day' rates, VALID ONLY IN COURMAYEUR SKI RESORT (Adult / Child <8 N.C. / Young <16 / Youth <24 / Senior): 1 day Youth <24 € 60,00. Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courmayeur 1-day ski pass, senior",
+      "category": "senior",
+      "amount": 66,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Courmayeur Mont Blanc Funivie 'Daily and multi-day' rates, VALID ONLY IN COURMAYEUR SKI RESORT (Adult / Child <8 N.C. / Young <16 / Youth <24 / Senior): 1 day Senior € 66,00. Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Courmayeur + Skyway Monte Bianco 1-day pass, adult",
+      "category": "adult + Skyway",
+      "amount": 90,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/daily-rates/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official daily rates, VALID IN THE COURMAYEUR SKI RESORT AND SKYWAY MONTE BIANCO: 1 day € 90,00 (adult). Season not stated on the page; it mentions a new 'Intelligent Pricing System' (best rate when buying online now)."
       }
     }
   ],
@@ -230,15 +347,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:CourmayeurAug052024_01.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Official piste km (41.5 km is an aggregator measurement), lift types and capacity.",
-      "Confirm which season the EUR 69 day price describes; live lift status page.",
-      "Aosta Valley regional avalanche bulletin URL (suggested: https://valledaostaneve.it/ — not verified; AINEVA homepage used).",
-      "Ikon Pass day allowance for Valle d'Aosta/Courmayeur (not researched)."
+      "Which season/dates the current daily rates apply to (page does not say; dynamic pricing).",
+      "Official piste km, lift types and capacity.",
+      "Aosta Valley avalanche bulletin; snow report URL."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Opening date is consistent across two sources."
+    "conflicts": [
+      "Adult day price: €69 'high season' (earlier search summary) vs €75 on the CI-fetched official daily-rates page (season not stated)."
+    ],
+    "confidenceNotes": "2026-10-03: season dates and daily rates re-read from CI-fetched official courmayeur-montblanc.com pages; 2025-26 dates from the tourism-office notice. Terrain remains a skiresort.info search summary."
   }
 }

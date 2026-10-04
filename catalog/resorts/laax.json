@@ -26,8 +26,8 @@
     "source": {
       "url": "https://www.skiresort.com/en/ski-resort/laax-flims-falera/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 'between the elevations of 1,100 and 3,018 m' (top: Vorab glacier), vertical 1,918 m."
+      "checkedOn": "2026-10-03",
+      "note": "skiresort.com: 'Elevation info 1100 m - 3018 m (Difference 1918 m)'."
     }
   },
   "weatherPoints": [
@@ -52,9 +52,9 @@
     "trails": null,
     "lifts": 29,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 48,
+    "intermediatePct": 43,
+    "advancedPct": 9,
     "terrainParks": null,
     "expertPct": null,
     "pisteKm": 176,
@@ -64,8 +64,8 @@
     "source": {
       "url": "https://www.skiresort.com/en/ski-resort/laax-flims-falera/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 176 km of slopes plus 40 km of ski routes (other sources give 176 to 220+ km); 29 lifts. Lift types, capacity, difficulty split and park count not found. Search summary did not tie this to one result; cited URL is the most likely source."
+      "checkedOn": "2026-10-03",
+      "note": "skiresort.com: '176 km of slopes and 40 km of ski routes ... 29 lifts'; Easy 85 km (48 %), Intermediate 76 km (43 %), Difficult 15 km (9 %)."
     }
   },
   "features": {
@@ -90,24 +90,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Season 28 Nov 2026 – 11 Apr 2027",
+      "text": "Winter 2026/27 feeder lifts: pre-season from 28 Nov 2026, high season 18 Dec 2026 – 29 Mar 2027, low season to 11 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skiresort.com/en/ski-resort/laax-flims-falera/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary: 'opening is on November 28, 2026 ... from 2026-11-28 to 2027-04-11'. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://www.laax.com/en/opening-hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official LAAX opening-hours page: 'Feeder Winter 2026/27 — Pre-season: 28 November – 17 December 2026; High season: 18 December 2026 – 29 March 2027; Low season: 30 March – 11 April 2027' (* subject to change). skiresort.com also lists 'Current season: 28.11.2026 - 11.04.2027'."
       }
     },
     "announcedClosing": {
       "date": "2027-04-11",
-      "text": "Season ends 11 Apr 2027",
+      "text": "Low season ends 11 Apr 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skiresort.com/en/ski-resort/laax-flims-falera/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://www.laax.com/en/opening-hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official LAAX opening-hours page: 'Feeder Winter 2026/27 — Pre-season: 28 November – 17 December 2026; High season: 18 December 2026 – 29 March 2027; Low season: 30 March – 11 April 2027' (* subject to change)."
       }
     },
     "history": [],
@@ -129,7 +129,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Dynamic pricing published in the LAAX ticket shop. Search summary: adult prices 'start from CHF 59'; an OnTheSnow-type listing showed CHF 89 weekday/weekend; a CHF 47–67 range also appeared (category unclear). Season not stated — confirm.",
+      "note": "Dynamic pricing published in the LAAX ticket shop. Search summary: adult prices 'start from CHF 59'; an OnTheSnow-type listing showed CHF 89 weekday/weekend; a CHF 47–67 range also appeared (category unclear). Season not stated — confirm. The CI-fetched official tickets page (2026-10-03) still says 'prices for the winter season 2025/26' and lists day tickets as dynamic ('dynamische Preise'), with no CHF figure for winter day passes; CHF 59–89 remains an earlier search summary.",
       "source": {
         "url": "https://www.laax.com/en/tickets",
         "verification": "search-summary",
@@ -204,17 +204,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laax_See.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lift types and uphill capacity; difficulty split; number of snow parks.",
-      "Confirm the adult day-price range and season (dynamic pricing).",
-      "Find the live lift status and snow report pages on laax.com."
+      "2026/27 winter day-ticket prices (dynamic; official tickets page still shows 2025/26 and no day figures).",
+      "Lift types and uphill capacity; number of snow parks.",
+      "Feeder lift times per period (not in page text; skiresort.com gives 08:30–16:30).",
+      "Official snow report page."
     ],
     "conflicts": [
       "Piste km 176 (+40 km ski routes) vs 220+ km in other sources.",
       "Adult day-price figures: from CHF 59, CHF 89 and a CHF 47–67 range across results."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "2026-10-03: season dates re-read from the CI-fetched official LAAX opening-hours page. skiresort.com (CI-fetched) confirms 176 km, 29 lifts, 1,100–3,018 m and 48/43/9 % easy/intermediate/difficult km."
   }
 }

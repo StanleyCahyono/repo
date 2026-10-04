@@ -49,23 +49,29 @@
     }
   ],
   "terrain": {
-    "trails": 77,
-    "lifts": 65,
+    "trails": 86,
+    "lifts": 43,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 52,
+    "intermediatePct": 31,
+    "advancedPct": 16,
     "expertPct": null,
     "terrainParks": null,
-    "pisteKm": 150,
-    "liftsByType": null,
+    "pisteKm": 110,
+    "liftsByType": {
+      "gondolas": 6,
+      "cableCars": 2,
+      "chairlifts": 14,
+      "surfaceLifts": 21,
+      "other": null
+    },
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.seechamonix.com/ski-area/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary of Chamonix ski-area guides (seechamonix.com, InTheSnow, Bergfex; exact page per figure not distinguishable): 150+ km of pistes; 77 pistes = 13 green, 28 blue, 26 red, 10 black; 65 lifts; skiable area 115 km². The figures cover the valley's separate areas (Grands Montets, Brévent-Flégère, Balme-Vallorcine, Les Houches), which are not linked by piste. Lift types and hourly capacity were not found. New for 2026-27 (chamonix.com press kit, search summary): the first section of a new lift from Argentière to the Lognan plateau (Grands Montets) opens in December 2026, with a new beginners' area at Grands Montets."
+      "url": "https://domaineschamonix.montblancnaturalresort.com/en/ticketing/chamonix-lepass",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official CHAMONIX Le Pass page (Chamonix ski areas covered by Le Pass, excl. Les Houches): '110 km of slopes', 2 cable-cars, 6 gondolas, 14 chairlifts, 21 skilifts; 15 green, 30 blue, 27 red, 14 black slopes; slopes between 1000 and 2765 m. Percentages derived from slope counts (green+blue = beginner). Mont-Blanc Unlimited area: 723 km, 71 chairlifts, 81 skilifts."
     }
   },
   "features": {
@@ -90,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Grands Montets and La Flégère from 28 Nov 2026 (snow permitting); Brévent and Balme-Vallorcine from 12 Dec 2026; general opening of the ski areas 12 Dec 2026 (chamonix.com winter 2027 press kit, per search summary; France Montagnes' 2026-27 list also gives 28 Nov).",
+      "text": "2026–2027 ski area opening forecast: Grands Montets and La Flégère 28 Nov 2026; Brévent and Balme–Vallorcine 12 Dec 2026; Les Houches–St-Gervais 19 Dec 2026 (partial opening possible in early December) — all depending on snow conditions.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.chamonix.com/sites/default/files/media/brochures/DP_CHAMONIX_FR_Hiver2027_WEB.pdf",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://en.chamonix.com/infos-live",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Chamonix tourist-office live page, '2026–2027 SKI AREA OPENING FORECAST'. Also listed on France Montagnes' 26-27 list (Chamonix-Mont-Blanc, 28 Nov 2026)."
       }
     },
     "announcedClosing": {
@@ -118,44 +124,170 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Chamonix Le Pass adult 1-day (Chamonix valley ski areas)",
+      "item": "Chamonix Le Pass 1-day, adult — high-season reference tariff",
       "category": "adult",
       "amount": 76.5,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: 2026/27 Le Pass 1-day €76.50 (about +3.6%); a 'reference high-season' figure of €74 (6 days €360) was also shown and is probably the previous price. Online prices are dynamic by date and booking lead time.",
+      "note": "Third-party guide; standard high-season ticket-office reference (the most you would pay). Online prices are dynamic and can be lower.",
       "source": {
         "url": "https://www.seechamonix.com/ski-passes/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Figures from the search summary of seechamonix.com and skibex.fr Chamonix lift-pass pages; which page gave which figure is not distinguishable"
+        "checkedOn": "2026-10-03",
+        "note": "seechamonix.com (updated 3 Oct 2026) table 'High-season Adult Prices - Winter 2026-2027': Chamonix Le Pass 1 day €76.50 (6 days '380 TBC'). Page adds 'at time of writing confirmation of the new season's rates was still to be released'."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Mont-Blanc Unlimited adult 1-day",
+      "item": "Chamonix Le Pass 1-day \"Ski in Chamonix\", adult 15–64 — early-season online (29 Nov – 19 Dec 2025)",
+      "category": "adult",
+      "amount": 47,
+      "amountMax": 59.2,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2025-11-29",
+      "appliesTo": "2025-12-19",
+      "includesTax": null,
+      "note": "Last season, early-season band only; dynamic online price range.",
+      "source": {
+        "url": "https://domaineschamonix.montblancnaturalresort.com/en/ticketing/chamonix-lepass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Le Pass rates table 'From 11/29/2025 to 12/19/2025': 1 day adult 'from 47,00€ to 59,20€'. 2026-27 rates not yet shown on the page."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Chamonix Le Pass 4-hour pass, adult (29 Nov – 19 Dec 2025)",
+      "category": "adult half-day",
+      "amount": 51.2,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2025-11-29",
+      "appliesTo": "2025-12-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://domaineschamonix.montblancnaturalresort.com/en/ticketing/chamonix-lepass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Le Pass rates table, period from 11/29/2025 to 12/19/2025: 4 hours adult 51,20€, reduced 43,50€."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Chamonix Le Pass 1-day, reduced rate (child 5–14) — early-season online (29 Nov – 19 Dec 2025)",
+      "category": "child",
+      "amount": 40,
+      "amountMax": 50.3,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2025-11-29",
+      "appliesTo": "2025-12-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://domaineschamonix.montblancnaturalresort.com/en/ticketing/chamonix-lepass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Le Pass rates table: 'Reduced (5-14 years & 65-79 years)' 1 day from 40,00€ to 50,30€ (11/29/2025–12/19/2025)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Chamonix Le Pass 1-day, reduced rate (senior 65–79) — early-season online (29 Nov – 19 Dec 2025)",
+      "category": "senior",
+      "amount": 40,
+      "amountMax": 50.3,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2025-11-29",
+      "appliesTo": "2025-12-19",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://domaineschamonix.montblancnaturalresort.com/en/ticketing/chamonix-lepass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Le Pass rates table: 'Reduced (5-14 years & 65-79 years)' 1 day from 40,00€ to 50,30€ (11/29/2025–12/19/2025)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Mont-Blanc Unlimited 1-day, adult — high-season reference tariff",
       "category": "adult",
       "amount": 104,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: 2026/27 Mont-Blanc Unlimited 1-day €104 (about +4%); a reference figure of €100 (6 days €480) was also shown. Wider pass that also covers lifts beyond the Chamonix ski areas — confirm coverage on the official page.",
+      "note": "Marked TBC on the page. Covers all Chamonix areas, Les Houches–Saint-Gervais, Evasion Mont-Blanc, Aiguille du Midi; Courmayeur from 2 days.",
+      "source": {
+        "url": "https://www.seechamonix.com/ski-passes/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "seechamonix.com (updated 3 Oct 2026) table 'High-season Adult Prices - Winter 2026-2027': Mont Blanc Unlimited 1 day '104 TBC' (6 days '500 TBC')."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Mont-Blanc Unlimited 1-day, adult 15–64 — online (15 Nov – 19 Dec 2025)",
+      "category": "adult",
+      "amount": 70,
+      "amountMax": 100,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2025-11-15",
+      "appliesTo": "2025-12-19",
+      "includesTax": null,
+      "note": null,
       "source": {
         "url": "https://www.montblancnaturalresort.com/en/ticketing/montblanc-unlimited",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official MBU rates table 'From 11/15/2025 to 12/19/2025': 1 day adult 'from 70,00€ to 100,00€' (reduced 59,50€–85,00€)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Les Houches–Saint-Gervais 1-day, adult — high-season reference tariff",
+      "category": "adult",
+      "amount": 60,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Separate Les Houches–Saint-Gervais area pass (not included in Le Pass).",
+      "source": {
+        "url": "https://www.seechamonix.com/ski-passes/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Figures from the search summary of Chamonix lift-pass pages (seechamonix.com, skibex.fr)"
+        "checkedOn": "2026-10-03",
+        "note": "seechamonix.com (updated 3 Oct 2026) table 'High-season Adult Prices - Winter 2026-2027': Les Houches–Saint-Gervais 1 day €60, 6 days €281."
       }
     }
   ],
@@ -249,7 +381,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://en.chamonix.com/infos-live",
+    "format": "html",
+    "notes": "Official Chamonix tourist-office 'Live news, weather & snow report' page (CI-fetched 2026-10-03): opening forecast plus station weather (Chamonix 1042 m, Le Tour 1500 m, Aiguilles Rouges 2365 m, Aiguille du Midi 3845 m). Lift operator's live page: https://www.montblancnaturalresort.com/en/info-live. HTML only."
+  },
   "photo": {
     "src": "asset:photo-chamonix.webp",
     "alt": "Chamonix: Chamonix valley and Mont Blanc as seen from la Flégère in the end of 2010 July.",
@@ -258,21 +394,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chamonix_valley_from_la_Fl%C3%A9g%C3%A8re,2010_07.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lifts by type (cable cars, gondolas, chairlifts, drag lifts) and total hourly capacity for the Chamonix valley areas.",
-      "Confirm the name, type and capacity of the new Argentière–Lognan lift (search summaries call it a 10-place cable car/gondola) and when the Grands Montets top section to 3,275 m will open.",
-      "Confirm Le Pass and Mont-Blanc Unlimited 2026-27 day prices by date band (dynamic pricing).",
-      "Ikon Pass 2026-27 day allowance for Chamonix Mont Blanc Valley (listed as an Ikon destination; days not researched).",
-      "Les Houches: 2026-27 dates and whether it is on Le Pass.",
-      "Official trail-map link and webcams."
+      "Official 2026-27 Le Pass and Mont-Blanc Unlimited day prices by date band (official pages still show 2025-26 tables; seechamonix marks some 2026-27 figures TBC).",
+      "Closing dates per area for 2026-27 (press-kit dates via earlier search summary; seechamonix says the season runs 19 Dec 2026 – 2 May 2027).",
+      "Rental and lesson prices.",
+      "Hourly lift capacity."
     ],
     "conflicts": [
-      "Opening: the chamonix.com press kit (search summary) and France Montagnes give 28 Nov 2026 for the first areas; another search summary gave 19 Dec 2026 – 2 May 2027 for the season.",
-      "Le Pass 1-day: €76.50 (2026/27, +3.6%) vs a €74 'reference high-season' figure; Mont-Blanc Unlimited €104 vs €100.",
-      "Top elevation: 3,842 m (Aiguille du Midi, off-piste access) vs 3,300 m (press kit, ski areas) vs 2,765–2,800 m (highest pistes today)."
+      "Season start: official forecast gives 28 Nov 2026 (Grands Montets, Flégère) while seechamonix.com says 'The Chamonix ski season runs from 19 December 2026 to 2 May 2027'.",
+      "Top elevation: 3,842 m (Aiguille du Midi, off-piste/Vallée Blanche access) vs 2,765 m (highest Le Pass piste area, Grands Montets; summit lift not due until 2027-28 per seechamonix)."
     ],
-    "confidenceNotes": "Opening/closing dates come from a search summary of the official winter 2027 press kit (fairly solid); piste and lift totals come from guide sites and have no lift-type or capacity breakdown. Coordinates, elevations and the operator are Piste reference data. Weather points are approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: opening forecast, terrain (Le Pass scope) and last-season official ticket bands re-read from CI-fetched official pages; 2026-27 high-season figures are from seechamonix.com (third party, partly TBC). Coordinates, elevations and operator remain reference data."
   }
 }

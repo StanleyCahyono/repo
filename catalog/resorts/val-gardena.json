@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.skiresort.com/en/ski-resort/val-gardena-groeden/",
-      "verification": "search-summary",
+      "url": "https://www.valgardena.it/en/winter-holidays-dolomites/ski-passes/",
+      "verification": "official-page",
       "checkedOn": "2026-10-03",
-      "note": "Search summary: Val Gardena with Alpe di Siusi has 181 km of slopes (52 km easy, 108 km intermediate, 21 km difficult) and 79 lifts. Shares computed from km."
+      "note": "Official valgardena.it ski-pass page: 'Ski pass Val Gardena/Seiser Alm — 79 lifts + 181 km ski runs' (body text says 79 lifts and 175 km). Colour split remains from the earlier skiresort.com search summary."
     }
   },
   "features": {
@@ -216,12 +216,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "€80 in pre-/low season, €89 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027. Valid on the whole Dolomiti Superski network.",
+      "note": "Whole Dolomiti Superski area, 1 adult day: €80 in the promo season (from 20 Nov 2026), €89 in high season (from 20 Dec 2026). 5% off online.",
       "source": {
-        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
-        "verification": "search-summary",
+        "url": "https://www.dolomitisuperski.com/en/plan-and-book/skipassandprices",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026; the same figures appear in Il Gazzettino and AGI coverage."
+        "note": "Official Dolomiti Superski price calculator ('In the whole Dolomiti Superski', '1 Adult', single-day prices per calendar day): 80 € per day from 20 Nov 2026 through 19 Dec 2026 (promo season), 89 € from 20 Dec 2026 (high season); January 2027 prices not rendered in the page text."
       }
     },
     {
@@ -409,15 +409,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Val_Gardena.jpg"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
       "Lift-type breakdown and uphill capacity.",
-      "2026-27 lesson and rental prices."
+      "2026-27 lesson and rental prices.",
+      "Official Val Gardena/Seiser Alm 2026-27 day prices (official page's calculator figures not in text; €72–80 remains a search summary). Official page: juniors (born 2008-2017) about 30% off, seniors (born 1960 and before) about 10% off adult prices."
     ],
     "conflicts": [
       "Some listings give 210 lifts or 175 km; the 79 lifts / 181 km figure covers Val Gardena with Alpe di Siusi."
     ],
-    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources."
+    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources. 2026-10-03: terrain (79 lifts, 181 km) re-read from the CI-fetched official valgardena.it page; Dolomiti Superski adult day (€80 promo / €89 high season) confirmed on the official Dolomiti Superski price calculator."
   }
 }

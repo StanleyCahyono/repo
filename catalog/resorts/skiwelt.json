@@ -96,24 +96,29 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-05",
-      "text": "Season starts 5 Dec 2026",
+      "text": "Skiing from 5 Dec 2026 (low season 5–18 Dec 2026).",
+      "announcedOn": null,
+      "source": {
+        "url": "https://www.skiwelt.at/en/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official skiwelt.at homepage: 'Skiing from 5 December 2026'. Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'SkiWelt Wilder Kaiser Brixental 5 December 2026 – 4 April 2027' ('Weather and snow conditions can shift dates at short notice')."
+      }
+    },
+    "announcedClosing": {
+      "date": "2027-04-04",
+      "text": "Season to 4 Apr 2027 per Austria Tourism; official price seasons end 29 Mar 2027.",
       "announcedOn": null,
       "source": {
         "url": "https://b2b.austria.info/en-gb/media/newsroom/winter-openings-austria-2026-27/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Austria opening-date results (austria.info newsroom, PlanetSKI and others); the summary did not attribute each date to one page. Dates can shift with snow conditions. SkiWelt's own pages in the SkiWelt search gave the same start."
+        "checkedOn": "2026-10-03",
+        "note": "Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'SkiWelt Wilder Kaiser Brixental 5 December 2026 – 4 April 2027' ('Weather and snow conditions can shift dates at short notice')."
       }
-    },
-    "announcedClosing": {
-      "date": null,
-      "text": null,
-      "announcedOn": null,
-      "source": null
     },
     "history": [],
     "typicalText": null,
-    "notes": "No 2026-27 closing date was found. The published low-season prices run to 29 Mar 2027 (Easter Monday), which is not an announced closing date."
+    "notes": "Official 2026/27 price seasons: low season 5–18 Dec 2026 and 13–29 Mar 2027; high season 19 Dec 2026 – 12 Mar 2027 (group-rates page). Austria Tourism gives 4 Apr 2027 as the end."
   },
   "hours": [],
   "prices": [
@@ -130,7 +135,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: adult 1-day EUR 71.50 in low season, 5–18 Dec 2026 and 13–29 Mar 2027.",
+      "note": "Search summary: adult 1-day EUR 71.50 in low season, 5–18 Dec 2026 and 13–29 Mar 2027. Individual price table was not in the CI-fetched page text; for comparison the official group rate (20+ people) 2026/27 is €62.50 low / €69.50 high season.",
       "source": {
         "url": "https://www.skiwelt.at/en/ski-passes.html",
         "verification": "search-summary",
@@ -151,12 +156,33 @@
       "appliesFrom": "2026-12-19",
       "appliesTo": "2027-03-12",
       "includesTax": null,
-      "note": "Search summary: adult 1-day EUR 79.50 in peak season, 19 Dec 2026 – 12 Mar 2027.",
+      "note": "Search summary: adult 1-day EUR 79.50 in peak season, 19 Dec 2026 – 12 Mar 2027. Individual price table was not in the CI-fetched page text; for comparison the official group rate (20+ people) 2026/27 is €62.50 low / €69.50 high season.",
       "source": {
         "url": "https://www.skiwelt.at/en/ski-passes.html",
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
         "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "SkiWelt 1-day ski pass, adult — group rate (20+ people), high season 19 Dec 2026 – 12 Mar 2027",
+      "category": "adult group",
+      "amount": 69.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-12",
+      "includesTax": null,
+      "note": "Group rate only (bus groups from 20 people).",
+      "source": {
+        "url": "https://www.skiwelt.at/en/group-rates-ski-passes.html",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official 'SkiWelt Ski passes - Winter 2026/27 (group)': 1-day ski pass ADULT €62,50 (05.–18.12.2026 / 13.–29.03.2027) and €69,50 (19.12.2026 – 12.03.2027); youth €47,00/€52,00; child €31,50/€35,00."
       }
     }
   ],
@@ -260,8 +286,8 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:SkiWelt_Wilder_Kaiser-Brixental_panorama_with_skiers_2026.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Confirm lift counts by type (two summaries disagree) and the 20 untyped lifts.",
       "Confirm the highest point (1,869 m per source; the Hohe Salve summit is about 1,829 m).",
@@ -269,8 +295,8 @@
       "Past opening and closing dates for an estimated window."
     ],
     "conflicts": [
-      "Lift types: skiresort.info gives 16 gondolas, 32 chairlifts and 13 T-bars; another search summary gave 17 gondolas, 8 chairlifts, 34 T-bars and 3 conveyors (62 lifts) for the same 81-lift area. The skiresort.info figures are stored."
+      "End of season: Austria Tourism lists 4 Apr 2027, while official 2026/27 price seasons end 29 Mar 2027."
     ],
-    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of skiwelt.at, skiresort.info and tourism pages. Coordinates, weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of skiwelt.at, skiresort.info and tourism pages. Coordinates, weather points and airport times are Piste reference data or estimates. 2026-10-03: opening, price seasons, group rates and size (275 km, 81 lifts) re-read from CI-fetched official skiwelt.at pages; individual day prices remain earlier search summaries."
   }
 }
