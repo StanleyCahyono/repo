@@ -37,6 +37,9 @@ export function ResortSection({
   const headingId = `${id}-title`
   return (
     <section id={id} aria-labelledby={headingId} data-section={id} className={cn('scroll-mt-[124px] md:scroll-mt-[88px]', className)}>
+      <style href="resort-rise" precedence="default">
+        {RISE_CSS}
+      </style>
       {header === 'none' ? null : (
       <header className="mb-7 flex flex-col gap-3 md:mb-9">
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
@@ -56,6 +59,22 @@ export function ResortSection({
     </section>
   )
 }
+
+/**
+ * Chapter entrance: chapters below the fold are marked by <ChapterReveal> after hydration and rise in (opacity and
+ * transform, staggered) as they scroll into view. Server-rendered content is visible until then, so nothing waits on
+ * hydration; reduced motion skips it entirely. The hero's art eases in once on load.
+ */
+const RISE_CSS = `
+@keyframes resort-hero-in { from { opacity: 0; transform: translateY(18px) scale(0.985); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .piste-hero-in { animation: resort-hero-in 700ms cubic-bezier(0.22, 0.8, 0.26, 1) 60ms both; }
+  [data-reveal] > :not(style) { transition: opacity 520ms cubic-bezier(0.22, 0.8, 0.26, 1), transform 620ms cubic-bezier(0.22, 0.8, 0.26, 1); }
+  [data-reveal='wait'] > :not(style) { opacity: 0; transform: translateY(16px); }
+  [data-reveal='in'] > :nth-child(3) { transition-delay: 90ms; }
+  [data-reveal='in'] > :nth-child(4) { transition-delay: 180ms; }
+}
+`
 
 /** A glass story card with a mono HUD title (the mockups' 28–32px radius cards). */
 export function GlassCard({

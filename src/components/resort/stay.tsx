@@ -36,7 +36,9 @@ export function StaySection({ d, x, v }: { d: ResortDetail; x: ResortPageExtras;
       headline={
         d.hotels.length
           ? `${d.hotels.length} ${d.hotels.length === 1 ? 'place' : 'places'} to stay on file${d.events.upcoming.length ? `, ${d.events.upcoming.length} ${d.events.upcoming.length === 1 ? 'event' : 'events'} ahead` : ''}.`
-          : 'No lodging on file yet.'
+          : lodging
+            ? `Where to stay in ${v.shortName}.`
+            : `Stay & après in ${v.shortName}.`
       }
       lead="Piste never shows ratings or reviews. Room prices appear only from a dated, sourced quote; otherwise “Check rates”."
     >
@@ -176,11 +178,11 @@ function EventRow({ e, past = false }: { e: EventView; past?: boolean }) {
     <li className={cn('grid grid-cols-[52px_minmax(0,1fr)] gap-3 px-4 py-3.5', past && 'opacity-80')}>
       {start ? (
         <span aria-hidden className="flex h-[52px] flex-col items-center justify-center rounded-md border border-divider bg-surface-2 leading-none">
-          <span className="text-[11.5px] font-semibold text-ink-3 uppercase">{formatLocalDate(start, 'LLL')}</span>
+          <span className="text-[12px] font-semibold text-ink-3 uppercase">{formatLocalDate(start, 'LLL')}</span>
           <span className="font-display text-[22px] text-ink tnum">{formatLocalDate(start, 'd')}</span>
         </span>
       ) : (
-        <span aria-hidden className="flex h-[52px] items-center justify-center rounded-md border border-dashed border-divider-strong text-[11.5px] leading-tight font-semibold text-ink-3">
+        <span aria-hidden className="flex h-[52px] items-center justify-center rounded-md border border-dashed border-divider-strong text-[12px] leading-tight font-semibold text-ink-3">
           TBA
         </span>
       )}
@@ -189,7 +191,7 @@ function EventRow({ e, past = false }: { e: EventView; past?: boolean }) {
           <span className="text-[14.5px] font-semibold text-ink">{e.title}</span>
           <span
             className={cn(
-              'inline-flex h-5 items-center rounded-sm border px-1.5 text-[11.5px] font-medium',
+              'inline-flex h-5 items-center rounded-sm border px-1.5 text-[12px] font-medium',
               e.status === 'announced' && 'border-teal/50 text-teal',
               e.status === 'tentative' && 'border-dashed border-caution/60 text-caution',
               e.status === 'not-announced' && 'border-dashed border-divider-strong text-ink-2',

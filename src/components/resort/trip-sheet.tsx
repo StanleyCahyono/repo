@@ -12,6 +12,7 @@ import { Sheet } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Checkbox, Field, TextInput } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
+import { DateRangePicker } from '@/components/ui/date-picker'
 import { Notice } from '@/components/ui/states'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
@@ -366,7 +367,7 @@ function NewTrip({
   const [endDate, setEnd] = useState(flyIn ? addDays(startDefault, 3) : startDefault)
   const [party, setParty] = useState(1)
   const [everyDay, setEveryDay] = useState(true)
-  const ids = { name: useId(), start: useId(), end: useId(), party: useId() }
+  const ids = { name: useId(), start: useId(), party: useId() }
   const nDays = daysBetween(startDate, endDate) + 1
 
   return (
@@ -381,26 +382,20 @@ function NewTrip({
       <Field label="Trip name" htmlFor={ids.name} error={fieldErrors.name}>
         <TextInput id={ids.name} value={name} onChange={(e) => setName(e.target.value)} maxLength={120} required aria-invalid={!!fieldErrors.name} />
       </Field>
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="First day" htmlFor={ids.start} error={fieldErrors.startDate}>
-          <TextInput
-            id={ids.start}
-            type="date"
-            value={startDate}
-            onChange={(e) => {
-              const v = e.target.value
-              setStart(v)
-              if (v && endDate < v) setEnd(v)
-            }}
-            required
-            className="tnum"
-            aria-invalid={!!fieldErrors.startDate}
-          />
-        </Field>
-        <Field label="Last day" htmlFor={ids.end} error={fieldErrors.endDate}>
-          <TextInput id={ids.end} type="date" value={endDate} min={startDate} onChange={(e) => setEnd(e.target.value)} required className="tnum" aria-invalid={!!fieldErrors.endDate} />
-        </Field>
-      </div>
+      <Field label="Trip dates" htmlFor={ids.start} error={fieldErrors.startDate ?? fieldErrors.endDate} hint={nDays > 0 ? plural(nDays, 'day') : undefined}>
+        <DateRangePicker
+          id={ids.start}
+          value={{ start: startDate, end: endDate }}
+          onChange={(v) => {
+            setStart(v.start)
+            setEnd(v.end)
+          }}
+          today={today}
+          maxDays={60}
+          required
+          aria-invalid={!!(fieldErrors.startDate || fieldErrors.endDate)}
+        />
+      </Field>
       <Field label="People" htmlFor={ids.party} hint="Used for per-person vs shared costs on the trip.">
         <TextInput id={ids.party} type="number" inputMode="numeric" min={1} max={20} value={party} onChange={(e) => setParty(Math.max(1, Math.min(20, Number(e.target.value) || 1)))} className="w-24 tnum" />
       </Field>

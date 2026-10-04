@@ -44,6 +44,7 @@ export default function TerrainMapGl({
   selected,
   onSelect,
   onState,
+  onCamera,
 }: {
   center: { lat: number; lon: number }
   lines: MappedLine[] | null
@@ -51,13 +52,15 @@ export default function TerrainMapGl({
   selected: string[]
   onSelect: (ids: string[]) => void
   onState: (s: 'live' | 'offline') => void
+  /** Called as the camera moves: a lon/lat → container-pixel projection and the zoom factor since the first view (place labels follow it). */
+  onCamera?: (project: (lon: number, lat: number) => [number, number], zoom: number) => void
 }) {
   const box = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MlMap | null>(null)
-  const cb = useRef({ onSelect, onState, lines })
+  const cb = useRef({ onSelect, onState, onCamera, lines })
   useEffect(() => {
-    cb.current = { onSelect, onState, lines }
-  }, [onSelect, onState, lines])
+    cb.current = { onSelect, onState, onCamera, lines }
+  }, [onSelect, onState, onCamera, lines])
 
   useEffect(() => {
     let cancelled = false
@@ -119,6 +122,24 @@ export default function TerrainMapGl({
           }
         })
         map.on('error', () => {})
+        const z0 = map.getZoom()
+        let raf = 0
+        const report = () => {
+          raf = 0
+          const m = map
+          if (!m || cancelled) return
+          cb.current.onCamera?.((lon, lat) => {
+            const p = m.project([lon, lat])
+            return [p.x, p.y]
+          }, 2 ** (m.getZoom() - z0))
+        }
+        const schedule = () => {
+          if (!raf) raf = window.requestAnimationFrame(report)
+        }
+        map.on('move', schedule)
+        map.on('load', schedule)
+        map.on('idle', schedule)
+        map.on('resize', schedule)
         map.on('click', 'hit', (e) => {
           const f = e.features?.[0]
           if (!f) return

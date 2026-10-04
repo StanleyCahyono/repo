@@ -16,6 +16,7 @@ import { Sheet } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Notice } from '@/components/ui/states'
 import { useToast } from '@/components/ui/toast'
 import { submitManualReport, submitPersonalReport, type ManualReportForm } from '@/lib/actions/resort'
@@ -315,9 +316,9 @@ export function ReportEntrySheet({
               { value: 'official', label: 'Official report I verified', hint: 'The official report itself, verified by you' },
             ]}
           />
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3 min-[420px]:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
             <Field label="Report date" htmlFor={ids.date} error={errors.localDate} hint="Resort-local date">
-              <TextInput id={ids.date} type="date" value={localDate} max={today} onChange={(e) => setLocalDate(e.target.value)} className="tnum" aria-invalid={!!errors.localDate} />
+              <DatePicker id={ids.date} value={localDate} max={today} today={today} onChange={(v) => v && setLocalDate(v)} aria-invalid={!!errors.localDate} />
             </Field>
             <Field label="Published at" htmlFor={ids.time} optional error={errors.reportedTime ?? errors.reportedAt} hint={`Resort time (${tz.split('/').pop()?.replace(/_/g, ' ')})`}>
               <TextInput id={ids.time} type="time" value={reportedTime} onChange={(e) => setReportedTime(e.target.value)} className="tnum" aria-invalid={!!(errors.reportedTime ?? errors.reportedAt)} />
@@ -511,7 +512,7 @@ export function ObservationSheet({
       >
         {error ? <Notice tone="error" title={error} /> : null}
         <Field label="Day" htmlFor={ids.date} error={errors.localDate} hint={`Today is ${dayLabelYear(today)} at the resort`}>
-          <TextInput id={ids.date} type="date" value={localDate} max={today} onChange={(e) => setLocalDate(e.target.value)} className="tnum" aria-invalid={!!errors.localDate} />
+          <DatePicker id={ids.date} value={localDate} max={today} today={today} onChange={(v) => v && setLocalDate(v)} aria-invalid={!!errors.localDate} />
         </Field>
         <TagPicker legend="Surface I found" hint="Pick any that fit." value={tags} onChange={setTags} error={errors.surfaceTags} />
         <Field label="In my words" htmlFor={ids.text} optional error={errors.surfaceText}>

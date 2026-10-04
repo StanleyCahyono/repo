@@ -220,7 +220,7 @@ function SeasonCard({ d, v }: { d: ResortDetail; v: PageView }) {
             {days !== null ? (
               <>
                 <CountUp text={String(days)} className="text-[24px] leading-none font-semibold tnum" />
-                <span className="hud mt-0.5 text-[11px] text-ink-2">{days === 1 ? 'day' : 'days'}</span>
+                <span className="hud mt-0.5 text-[12px] text-ink-2">{days === 1 ? 'day' : 'days'}</span>
               </>
             ) : openNow || o.label === 'opened' ? (
               <span className="hud text-positive">Open</span>
@@ -455,14 +455,14 @@ function SeasonTimeline({ seasonId, hemisphere, marks, band, date }: { seasonId:
       ))}
       {inSpan(date) ? (
         <span className="absolute top-0 h-9 w-0.5 -translate-x-1/2 rounded-full bg-ink" style={{ left: `${pos(date)}%` }}>
-          <span className={cn('absolute -top-0.5 text-[11.5px] leading-none font-semibold whitespace-nowrap text-ink', pos(date) > 70 ? 'right-1.5' : 'left-1.5')}>{dayLabel(date)}</span>
+          <span className={cn('absolute -top-0.5 text-[12px] leading-none font-semibold whitespace-nowrap text-ink', pos(date) > 70 ? 'right-1.5' : 'left-1.5')}>{dayLabel(date)}</span>
         </span>
       ) : (
-        <span className={cn('absolute -top-1 text-[11.5px] leading-none font-semibold whitespace-nowrap text-ink', date < span.from ? 'left-0' : 'right-0')}>
+        <span className={cn('absolute -top-1 text-[12px] leading-none font-semibold whitespace-nowrap text-ink', date < span.from ? 'left-0' : 'right-0')}>
           {date < span.from ? `◂ ${dayLabel(date)} — before the season` : `${dayLabel(date)} — after the season ▸`}
         </span>
       )}
-      <div className="absolute inset-x-0 top-7 flex justify-between text-[11.5px] text-ink-3">
+      <div className="absolute inset-x-0 top-7 flex justify-between text-[12px] text-ink-3">
         {months.map((m) => (
           <span key={m} className="tnum">
             {shortDate(m).split(' ')[1]}
