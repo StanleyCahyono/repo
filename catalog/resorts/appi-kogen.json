@@ -156,27 +156,27 @@
       {
         "iata": "HNA",
         "role": "closest",
-        "minutes": 80,
-        "km": 100,
-        "basis": "Estimate from typical routing (Tohoku Expressway north past Morioka, then local roads); not a routing-service result.",
+        "minutes": 62,
+        "km": 79.6,
+        "basis": "Road route from HNA: 79.6 km, about 62 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (HNA → resort)"
         }
       },
       {
         "iata": "SDJ",
         "role": "practical",
-        "minutes": 180,
-        "km": 250,
-        "basis": "Estimate from typical routing (Tohoku Expressway north); not a routing-service result.",
+        "minutes": 193,
+        "km": 241.8,
+        "basis": "Road route from SDJ: 241.8 km, about 193 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SDJ → resort)"
         }
       }
     ],

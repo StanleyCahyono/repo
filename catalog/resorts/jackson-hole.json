@@ -183,27 +183,27 @@
       {
         "iata": "JAC",
         "role": "both",
-        "minutes": 35,
-        "km": 35,
-        "basis": "Estimate from typical routing (US-26/89/191 S into Jackson, WY-22 W, then WY-390 N to Teton Village); not a routing-service result. JAC sits inside Grand Teton National Park; winter schedules and weather diversions are the main practical concerns (Piste reference, confirm).",
+        "minutes": 40,
+        "km": 35.7,
+        "basis": "Road route from JAC: 35.7 km, about 40 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (JAC → resort)"
         }
       },
       {
         "iata": "IDA",
         "role": "practical",
-        "minutes": 130,
-        "km": 140,
-        "basis": "Estimate from typical routing (US-26 E, ID-31 over Pine Creek Pass to Victor, then ID-33/WY-22 over Teton Pass and WY-390 N); not a routing-service result. Teton Pass can close in storms.",
+        "minutes": 127,
+        "km": 147.8,
+        "basis": "Road route from IDA: 147.8 km, about 127 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (IDA → resort)"
         }
       }
     ],

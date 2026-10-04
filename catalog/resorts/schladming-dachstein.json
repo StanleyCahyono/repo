@@ -180,27 +180,27 @@
       {
         "iata": "SZG",
         "role": "closest",
-        "minutes": 75,
-        "km": 90,
-        "basis": "Estimate from typical routing (A10 Tauern motorway south to the Enns valley junction near Eben, then the B320 east to Schladming); not a routing-service result.",
+        "minutes": 68,
+        "km": 91.4,
+        "basis": "Road route from SZG: 91.4 km, about 68 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SZG → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 160,
-        "km": 240,
-        "basis": "Estimate from typical routing (A8 to Salzburg, then the A10 and the B320); not a routing-service result.",
+        "minutes": 165,
+        "km": 259.9,
+        "basis": "Road route from MUC: 259.9 km, about 165 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

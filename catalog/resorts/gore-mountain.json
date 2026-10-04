@@ -186,28 +186,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 255,
-      "km": 405,
-      "basis": "Estimate from typical routing (NY-79 to Binghamton, I-88 E to Schenectady, I-87 N to Exit 23 (Warrensburg), then NY-28 N to North Creek); not a routing-service result. Alternative via I-81 N and the NY Thruway (I-90) to Albany is similar. Winter conditions add time.",
+      "minutes": 279,
+      "km": 314.5,
+      "basis": "Road route from Ithaca, NY: 314.5 km, about 279 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "practical",
-        "minutes": 95,
-        "km": 140,
-        "basis": "Estimate from typical routing (I-87 N to Exit 23, then US-9/NY-28 N to North Creek); not a routing-service result.",
+        "minutes": 105,
+        "km": 125.7,
+        "basis": "Road route from ALB: 125.7 km, about 105 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       }
     ],

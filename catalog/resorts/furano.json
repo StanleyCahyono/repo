@@ -165,27 +165,27 @@
       {
         "iata": "AKJ",
         "role": "closest",
-        "minutes": 60,
-        "km": 50,
-        "basis": "Estimate from typical routing (Route 237 south from Asahikawa Airport); not a routing-service result.",
+        "minutes": 47,
+        "km": 48,
+        "basis": "Road route from AKJ: 48 km, about 47 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (AKJ → resort)"
         }
       },
       {
         "iata": "CTS",
         "role": "practical",
-        "minutes": 150,
-        "km": 150,
-        "basis": "Estimate from typical routing (expressway and national roads via central Hokkaido); not a routing-service result. Main international gateway; winter roads can add time.",
+        "minutes": 107,
+        "km": 132.5,
+        "basis": "Road route from CTS: 132.5 km, about 107 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (CTS → resort)"
         }
       }
     ],

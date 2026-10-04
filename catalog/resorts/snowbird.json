@@ -183,14 +183,14 @@
       {
         "iata": "SLC",
         "role": "both",
-        "minutes": 45,
-        "km": 49,
-        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd, then SR-210 up Little Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-210 can add hours.",
+        "minutes": 52,
+        "km": 52.9,
+        "basis": "Road route from SLC: 52.9 km, about 52 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SLC → resort)"
         }
       }
     ],

@@ -164,14 +164,14 @@
       {
         "iata": "ZRH",
         "role": "both",
-        "minutes": 75,
-        "km": 100,
-        "basis": "Estimate from typical routing (A4/A14 to Lucerne, A2 to Stans, then up the Engelberg valley); not a routing-service result.",
+        "minutes": 85,
+        "km": 99.5,
+        "basis": "Road route from ZRH: 99.5 km, about 85 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       }
     ],

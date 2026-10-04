@@ -148,28 +148,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 215,
-      "km": 340,
-      "basis": "Estimate from typical routing (NY-13 to Elmira, I-86 W via Corning, Olean and Jamestown to Exit 4 (Findley Lake/Clymer)); not a routing-service result.",
+      "minutes": 266,
+      "km": 353.2,
+      "basis": "Road route from Ithaca, NY: 353.2 km, about 266 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-30",
-        "note": "Piste estimate. Unverified drive estimate."
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "BUF",
         "role": "practical",
-        "minutes": 95,
-        "km": 140,
-        "basis": "Estimate from typical routing (I-90 W to Westfield, then south to Findley Lake); not a routing-service result. Erie International (ERI, roughly 45 km) is closer but not in Piste's airport list.",
+        "minutes": 129,
+        "km": 154.4,
+        "basis": "Road route from BUF: 154.4 km, about 129 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate."
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BUF → resort)"
         }
       }
     ],

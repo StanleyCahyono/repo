@@ -421,14 +421,14 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 103,
+      "minutes": 115,
       "km": 120.7,
-      "basis": "Rome2rio driving estimate Ithaca to Bristol Mountain Ski Resort (about 1 h 43 min, 75 mi)",
+      "basis": "Road route from Ithaca, NY: 120.7 km, about 115 min without traffic (OSRM).",
       "source": {
-        "url": "https://www.rome2rio.com/s/Ithaca/Bristol-Mountain-Ski-Resort",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Third-party routing estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [],

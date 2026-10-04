@@ -144,28 +144,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 215,
-      "km": 345,
-      "basis": "Estimate from typical routing (NY-79 to Binghamton, I-88 E to Schenectady, I-87 N to Exit 18, then West Mountain Rd); not a routing-service result.",
+      "minutes": 272,
+      "km": 317.1,
+      "basis": "Road route from Ithaca, NY: 317.1 km, about 272 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-30",
-        "note": "Piste estimate. Unverified drive estimate."
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "both",
-        "minutes": 55,
-        "km": 80,
-        "basis": "Estimate from typical routing (I-87 N from Albany airport to Exit 18, then west); not a routing-service result.",
+        "minutes": 70,
+        "km": 76.2,
+        "basis": "Road route from ALB: 76.2 km, about 70 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate."
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       }
     ],

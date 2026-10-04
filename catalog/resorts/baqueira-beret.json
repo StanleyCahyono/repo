@@ -166,27 +166,27 @@
       {
         "iata": "TLS",
         "role": "closest",
-        "minutes": 140,
-        "km": 175,
-        "basis": "Estimate from typical routing (A64 to Montréjeau, then the N125/N-230 into the Val d'Aran and the C-28 to Baqueira); not a routing-service result.",
+        "minutes": 152,
+        "km": 180.7,
+        "basis": "Road route from TLS: 180.7 km, about 152 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (TLS → resort)"
         }
       },
       {
         "iata": "BCN",
         "role": "practical",
-        "minutes": 240,
-        "km": 335,
-        "basis": "Estimate from typical routing (AP-2/A-2 to Lleida, then the N-230 through the Vielha tunnel); not a routing-service result.",
+        "minutes": 246,
+        "km": 290.6,
+        "basis": "Road route from BCN: 290.6 km, about 246 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BCN → resort)"
         }
       }
     ],

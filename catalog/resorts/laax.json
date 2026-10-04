@@ -174,14 +174,14 @@
       {
         "iata": "ZRH",
         "role": "both",
-        "minutes": 120,
-        "km": 140,
-        "basis": "Estimate from typical routing (A3/A13 to Chur, then via Reichenau and Flims to Laax); not a routing-service result.",
+        "minutes": 133,
+        "km": 154.7,
+        "basis": "Road route from ZRH: 154.7 km, about 133 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       }
     ],

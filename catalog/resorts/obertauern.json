@@ -126,7 +126,7 @@
       "subjectType": "lift-ticket",
       "item": "Obertauern 1-day ski pass (Season A)",
       "category": "adult",
-      "amount": 72.0,
+      "amount": 72,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -176,27 +176,27 @@
       {
         "iata": "SZG",
         "role": "closest",
-        "minutes": 70,
-        "km": 95,
-        "basis": "Estimate from typical routing (A10 Tauern motorway south to the Radstadt/Untertauern exit, then the B99 up to Obertauern); not a routing-service result.",
+        "minutes": 69,
+        "km": 93.5,
+        "basis": "Road route from SZG: 93.5 km, about 69 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SZG → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 150,
-        "km": 240,
-        "basis": "Estimate from typical routing (A8 to Salzburg, then the A10 and the B99); not a routing-service result.",
+        "minutes": 165,
+        "km": 262,
+        "basis": "Road route from MUC: 262 km, about 165 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

@@ -184,27 +184,27 @@
       {
         "iata": "TLS",
         "role": "closest",
-        "minutes": 170,
-        "km": 195,
-        "basis": "Estimate from typical routing (A66/N20 via Foix and Ax-les-Thermes to Pas de la Casa, then over the Envalira pass to Soldeu); not a routing-service result.",
+        "minutes": 152,
+        "km": 176.3,
+        "basis": "Road route from TLS: 176.3 km, about 152 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (TLS → resort)"
         }
       },
       {
         "iata": "BCN",
         "role": "practical",
-        "minutes": 180,
-        "km": 215,
-        "basis": "Estimate from typical routing (C-16 via the Cadí tunnel and La Seu d'Urgell, then through Andorra la Vella); not a routing-service result.",
+        "minutes": 173,
+        "km": 200.2,
+        "basis": "Road route from BCN: 200.2 km, about 173 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BCN → resort)"
         }
       }
     ],

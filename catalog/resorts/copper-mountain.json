@@ -171,27 +171,27 @@
       {
         "iata": "EGE",
         "role": "closest",
-        "minutes": 60,
-        "km": 91,
-        "basis": "Estimate from typical routing (I-70 E over Vail Pass to Exit 195); not a routing-service result. Winter service at EGE is limited and seasonal (Piste reference, confirm).",
+        "minutes": 69,
+        "km": 89.2,
+        "basis": "Road route from EGE: 89.2 km, about 69 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (EGE → resort)"
         }
       },
       {
         "iata": "DEN",
         "role": "practical",
-        "minutes": 110,
-        "km": 162,
-        "basis": "Estimate from typical routing (Peña Blvd to I-70 W through the Eisenhower Tunnel to Exit 195); not a routing-service result. Winter weekend traffic and closures on I-70 (Eisenhower Tunnel, Vail Pass) can add hours.",
+        "minutes": 129,
+        "km": 163.7,
+        "basis": "Road route from DEN: 163.7 km, about 129 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (DEN → resort)"
         }
       }
     ],

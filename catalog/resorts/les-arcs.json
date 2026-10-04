@@ -178,40 +178,40 @@
       {
         "iata": "CMF",
         "role": "closest",
-        "minutes": 120,
-        "km": 130,
-        "basis": "Estimate from typical routing (A43/A430 to Albertville, then the N90 up the Tarentaise to Bourg-Saint-Maurice and the Les Arcs road); not a routing-service result.",
+        "minutes": 113,
+        "km": 121.9,
+        "basis": "Road route from CMF: 121.9 km, about 113 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (CMF → resort)"
         }
       },
       {
         "iata": "GVA",
         "role": "practical",
-        "minutes": 165,
-        "km": 170,
-        "basis": "Estimate from typical routing (A41 via Annecy, then Albertville and the N90 up the Tarentaise to Bourg-Saint-Maurice); not a routing-service result.",
+        "minutes": 173,
+        "km": 160.9,
+        "basis": "Road route from GVA: 160.9 km, about 173 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GVA → resort)"
         }
       },
       {
         "iata": "LYS",
         "role": "practical",
-        "minutes": 165,
-        "km": 215,
-        "basis": "Estimate from typical routing (A43 to Chambéry, A430/N90 to Albertville and up the Tarentaise to Bourg-Saint-Maurice); not a routing-service result.",
+        "minutes": 156,
+        "km": 200,
+        "basis": "Road route from LYS: 200 km, about 156 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (LYS → resort)"
         }
       }
     ],

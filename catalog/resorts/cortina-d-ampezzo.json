@@ -176,27 +176,27 @@
       {
         "iata": "VCE",
         "role": "both",
-        "minutes": 135,
-        "km": 160,
-        "basis": "Estimate from typical routing (A27 north via Belluno, then the SS51 Alemagna road to Cortina); not a routing-service result.",
+        "minutes": 111,
+        "km": 147,
+        "basis": "Road route from VCE: 147 km, about 111 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (VCE → resort)"
         }
       },
       {
         "iata": "INN",
         "role": "practical",
-        "minutes": 150,
-        "km": 170,
-        "basis": "Estimate from typical routing (Brenner motorway A13/A22 to Bressanone/Brixen, east through the Pustertal to Dobbiaco/Toblach, then south to Cortina); not a routing-service result.",
+        "minutes": 146,
+        "km": 166.1,
+        "basis": "Road route from INN: 166.1 km, about 146 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       }
     ],

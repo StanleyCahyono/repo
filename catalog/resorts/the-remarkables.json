@@ -193,14 +193,14 @@
       {
         "iata": "ZQN",
         "role": "both",
-        "minutes": 40,
-        "km": 30,
-        "basis": "Estimate from typical routing (SH6 from Frankton towards Kingston, then the ski-field access road); not a routing-service result. A search summary puts the ski area about 45 minutes from Queenstown.",
+        "minutes": 58,
+        "km": 16.8,
+        "basis": "Road route from ZQN: 16.8 km, about 58 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZQN → resort)"
         }
       }
     ],

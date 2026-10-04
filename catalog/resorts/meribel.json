@@ -178,40 +178,40 @@
       {
         "iata": "CMF",
         "role": "closest",
-        "minutes": 100,
-        "km": 105,
-        "basis": "Estimate from typical routing (A43/A430 to Albertville, then the N90 up the Tarentaise to Moûtiers and the Méribel road); not a routing-service result.",
+        "minutes": 86,
+        "km": 101.5,
+        "basis": "Road route from CMF: 101.5 km, about 86 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (CMF → resort)"
         }
       },
       {
         "iata": "GVA",
         "role": "practical",
-        "minutes": 145,
-        "km": 145,
-        "basis": "Estimate from typical routing (A41 via Annecy, then Albertville and the N90 up the Tarentaise to Moûtiers and the Méribel road); not a routing-service result.",
+        "minutes": 146,
+        "km": 140.5,
+        "basis": "Road route from GVA: 140.5 km, about 146 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GVA → resort)"
         }
       },
       {
         "iata": "LYS",
         "role": "practical",
-        "minutes": 145,
-        "km": 175,
-        "basis": "Estimate from typical routing (A43 to Chambéry, A430/N90 to Albertville and up the Tarentaise to Moûtiers and the Méribel road); not a routing-service result.",
+        "minutes": 130,
+        "km": 179.7,
+        "basis": "Road route from LYS: 179.7 km, about 130 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (LYS → resort)"
         }
       }
     ],

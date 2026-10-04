@@ -197,27 +197,27 @@
       {
         "iata": "CBR",
         "role": "closest",
-        "minutes": 150,
-        "km": 215,
-        "basis": "Estimate from typical routing (Monaro Highway south via Cooma to Jindabyne, then Kosciuszko Road to Perisher Valley); not a routing-service result.",
+        "minutes": 173,
+        "km": 208.1,
+        "basis": "Road route from CBR: 208.1 km, about 173 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (CBR → resort)"
         }
       },
       {
         "iata": "SYD",
         "role": "practical",
-        "minutes": 335,
-        "km": 495,
-        "basis": "Estimate from typical routing (Hume and Federal highways to Canberra, Monaro Highway to Jindabyne, then Kosciuszko Road); not a routing-service result. Main international gateway; many visitors connect to Canberra instead.",
+        "minutes": 360,
+        "km": 479,
+        "basis": "Road route from SYD: 479 km, about 360 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SYD → resort)"
         }
       }
     ],

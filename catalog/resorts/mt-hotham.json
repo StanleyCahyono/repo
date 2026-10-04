@@ -172,14 +172,14 @@
       {
         "iata": "MEL",
         "role": "practical",
-        "minutes": 270,
-        "km": 360,
-        "basis": "Estimate from typical routing (Hume Freeway to Wangaratta, Great Alpine Road via Myrtleford, Bright and Harrietville, then the mountain section to Hotham); not a routing-service result. Albury (ABX, not in Piste's airport list) is closer (reference).",
+        "minutes": 279,
+        "km": 360.1,
+        "basis": "Road route from MEL: 360.1 km, about 279 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MEL → resort)"
         }
       }
     ],

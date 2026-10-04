@@ -175,14 +175,14 @@
       {
         "iata": "BZN",
         "role": "both",
-        "minutes": 75,
-        "km": 85,
-        "basis": "Estimate from typical routing (MT-85 S to Four Corners, US-191 S through Gallatin Canyon, then the Big Sky spur road, MT-64, to Mountain Village); not a routing-service result. Gallatin Canyon is slow in storms.",
+        "minutes": 72,
+        "km": 83.4,
+        "basis": "Road route from BZN: 83.4 km, about 72 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BZN → resort)"
         }
       }
     ],

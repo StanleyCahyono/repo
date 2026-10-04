@@ -126,7 +126,7 @@
       "subjectType": "lift-ticket",
       "item": "Gurgl day ticket",
       "category": "adult",
-      "amount": 64.0,
+      "amount": 64,
       "amountMax": 75.5,
       "currency": "EUR",
       "season": "2026-27",
@@ -176,27 +176,27 @@
       {
         "iata": "INN",
         "role": "closest",
-        "minutes": 95,
-        "km": 100,
-        "basis": "Estimate from typical routing (A12 west to the Ötztal exit, then the B186 through Sölden to Obergurgl); not a routing-service result.",
+        "minutes": 80,
+        "km": 93.8,
+        "basis": "Road route from INN: 93.8 km, about 80 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 190,
-        "km": 270,
-        "basis": "Estimate from typical routing (A8/A93 to Kufstein, A12 past Innsbruck to the Ötztal exit, then the B186); not a routing-service result.",
+        "minutes": 204,
+        "km": 251.6,
+        "basis": "Road route from MUC: 251.6 km, about 204 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

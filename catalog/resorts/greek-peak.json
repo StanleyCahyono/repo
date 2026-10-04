@@ -486,13 +486,13 @@
   "travel": {
     "driveFromIthaca": {
       "minutes": 33,
-      "km": 31.7,
-      "basis": "Rome2rio: about 19.7 road miles and ~33 min from Ithaca to Greek Peak Mountain Resort (Ultimate-Ski gives ~22 mi / 30 min). Typical route: NY-13 toward Cortland, then NY-392.",
+      "km": 32.3,
+      "basis": "Road route from Ithaca, NY: 32.3 km, about 33 min without traffic (OSRM).",
       "source": {
-        "url": "https://www.rome2rio.com/s/Ithaca/Greek-Peak-Mountain-Resort",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Third-party routing estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [],

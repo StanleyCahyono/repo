@@ -126,7 +126,7 @@
       "subjectType": "lift-ticket",
       "item": "KitzSki 1-day ticket",
       "category": "adult",
-      "amount": 83.0,
+      "amount": 83,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -181,39 +181,39 @@
         "iata": "SZG",
         "role": "closest",
         "minutes": 80,
-        "km": 85,
-        "basis": "Estimate from typical routing (B21 via Bad Reichenhall, then the B178/B161 via Lofer and St. Johann in Tirol); not a routing-service result.",
+        "km": 74.9,
+        "basis": "Road route from SZG: 74.9 km, about 80 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SZG → resort)"
         }
       },
       {
         "iata": "INN",
         "role": "practical",
-        "minutes": 75,
-        "km": 100,
-        "basis": "Estimate from typical routing (A12 east to Wörgl, then the B170 via Brixen im Thale); not a routing-service result.",
+        "minutes": 87,
+        "km": 99.8,
+        "basis": "Road route from INN: 99.8 km, about 87 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 115,
-        "km": 150,
-        "basis": "Estimate from typical routing (A8/A93 to Kufstein, then the B178/B161 via St. Johann in Tirol); not a routing-service result.",
+        "minutes": 118,
+        "km": 165.7,
+        "basis": "Road route from MUC: 165.7 km, about 118 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

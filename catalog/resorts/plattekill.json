@@ -191,28 +191,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 190,
-      "km": 255,
-      "basis": "Estimate from typical routing (NY-79 to Binghamton, I-88 E to Oneonta, NY-28 via Delhi and Andes to Margaretville, then NY-30 N and Plattekill Rd); not a routing-service result. Two-lane roads for the last ~80 km; winter conditions add time.",
+      "minutes": 198,
+      "km": 213.5,
+      "basis": "Road route from Ithaca, NY: 213.5 km, about 198 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-30",
-        "note": "Piste estimate. Unverified drive estimate."
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "both",
-        "minutes": 110,
-        "km": 145,
-        "basis": "Estimate from typical routing (NY-30/NY-10 to I-88 E, then I-88/I-90 to Albany airport); not a routing-service result.",
+        "minutes": 125,
+        "km": 127.5,
+        "basis": "Road route from ALB: 127.5 km, about 125 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate."
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       }
     ],

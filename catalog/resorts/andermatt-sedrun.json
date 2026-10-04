@@ -168,27 +168,27 @@
       {
         "iata": "ZRH",
         "role": "both",
-        "minutes": 90,
-        "km": 110,
-        "basis": "Estimate from typical routing (A4/A2 via Zug or Lucerne to Göschenen, then the Schöllenen road to Andermatt); not a routing-service result.",
+        "minutes": 101,
+        "km": 123,
+        "basis": "Road route from ZRH: 123 km, about 101 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       },
       {
         "iata": "MXP",
         "role": "practical",
-        "minutes": 150,
-        "km": 190,
-        "basis": "Estimate from typical routing (A9/A2 via Lugano and Bellinzona, then the Gotthard road tunnel to Göschenen and Andermatt); not a routing-service result.",
+        "minutes": 142,
+        "km": 170.1,
+        "basis": "Road route from MXP: 170.1 km, about 142 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MXP → resort)"
         }
       }
     ],

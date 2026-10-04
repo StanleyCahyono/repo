@@ -166,27 +166,27 @@
       {
         "iata": "HDN",
         "role": "closest",
-        "minutes": 40,
-        "km": 45,
-        "basis": "Estimate from typical routing (US-40 E from Hayden to Steamboat Springs, then Mt. Werner Rd); not a routing-service result. Winter service at HDN is seasonal (Piste reference, confirm).",
+        "minutes": 38,
+        "km": 44.8,
+        "basis": "Road route from HDN: 44.8 km, about 38 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (HDN → resort)"
         }
       },
       {
         "iata": "DEN",
         "role": "practical",
-        "minutes": 195,
-        "km": 290,
-        "basis": "Estimate from typical routing (I-70 W to Silverthorne, CO-9 N to Kremmling, then US-40 W over Rabbit Ears Pass); not a routing-service result. Mountain passes and I-70 traffic can add hours in winter.",
+        "minutes": 232,
+        "km": 286.3,
+        "basis": "Road route from DEN: 286.3 km, about 232 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (DEN → resort)"
         }
       }
     ],

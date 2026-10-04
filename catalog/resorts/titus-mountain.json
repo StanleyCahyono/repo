@@ -152,28 +152,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 270,
-      "km": 395,
-      "basis": "Estimate from typical routing (NY-13/I-81 N via Syracuse to Watertown, US-11 E via Gouverneur, Canton and Potsdam to Malone, then south to the ski area); not a routing-service result. Long two-lane stretch on US-11; winter conditions add time.",
+      "minutes": 322,
+      "km": 393.3,
+      "basis": "Road route from Ithaca, NY: 393.3 km, about 322 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-30",
-        "note": "Piste estimate. Unverified drive estimate."
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "BTV",
         "role": "both",
-        "minutes": 125,
-        "km": 165,
-        "basis": "Estimate from typical routing (US-11 E to Rouses Point, US-2 across the Lake Champlain islands, I-89 S to Burlington); not a routing-service result. Closest airport among Piste's existing codes.",
+        "minutes": 159,
+        "km": 184.5,
+        "basis": "Road route from BTV: 184.5 km, about 159 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate."
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BTV → resort)"
         }
       }
     ],

@@ -271,14 +271,14 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 177,
-      "km": 251.1,
-      "basis": "Wanderlog route estimate Ithaca to Ellicottville: about 156 mi, 2 h 57 min in normal traffic",
+      "minutes": 195,
+      "km": 249.7,
+      "basis": "Road route from Ithaca, NY: 249.7 km, about 195 min without traffic (OSRM).",
       "source": {
-        "url": "https://wanderlog.com/drive/between/58461/60317/ithaca-to-ellicottville-drive",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Third-party routing estimate to the village; the resort is just south of it"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [],

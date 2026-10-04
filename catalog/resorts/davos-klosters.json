@@ -190,14 +190,14 @@
       {
         "iata": "ZRH",
         "role": "both",
-        "minutes": 135,
-        "km": 150,
-        "basis": "Estimate from typical routing (A3/A13 to Landquart, then through the Prättigau via Klosters to Davos); not a routing-service result.",
+        "minutes": 129,
+        "km": 158.7,
+        "basis": "Road route from ZRH: 158.7 km, about 129 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       }
     ],

@@ -180,40 +180,40 @@
       {
         "iata": "INN",
         "role": "closest",
-        "minutes": 75,
-        "km": 100,
-        "basis": "Estimate from typical routing (A12 west to Landeck, the B180 towards Reschen to Ried, then up to Serfaus); not a routing-service result.",
+        "minutes": 68,
+        "km": 88.8,
+        "basis": "Road route from INN: 88.8 km, about 68 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "ZRH",
         "role": "practical",
-        "minutes": 170,
-        "km": 240,
-        "basis": "Estimate from typical routing (A1/A13 and A14 to Bludenz, the S16 Arlberg road to Landeck, then the B180); not a routing-service result.",
+        "minutes": 187,
+        "km": 241.9,
+        "basis": "Road route from ZRH: 241.9 km, about 187 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 180,
-        "km": 270,
-        "basis": "Estimate from typical routing (A8/A93 to Kufstein, A12 past Innsbruck to Landeck, then the B180); not a routing-service result.",
+        "minutes": 188,
+        "km": 229.8,
+        "basis": "Road route from MUC: 229.8 km, about 188 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

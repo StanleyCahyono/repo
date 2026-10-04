@@ -169,40 +169,40 @@
       {
         "iata": "GNB",
         "role": "closest",
-        "minutes": 110,
-        "km": 115,
-        "basis": "Estimate from typical routing (A48 to Grenoble, then the N85/D1091 via Bourg-d'Oisans and the D213); not a routing-service result.",
+        "minutes": 103,
+        "km": 110.6,
+        "basis": "Road route from GNB: 110.6 km, about 103 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GNB → resort)"
         }
       },
       {
         "iata": "LYS",
         "role": "practical",
-        "minutes": 145,
-        "km": 165,
-        "basis": "Estimate from typical routing (A43/A48 to Grenoble, then via Bourg-d'Oisans); not a routing-service result.",
+        "minutes": 132,
+        "km": 158.2,
+        "basis": "Road route from LYS: 158.2 km, about 132 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (LYS → resort)"
         }
       },
       {
         "iata": "GVA",
         "role": "practical",
-        "minutes": 195,
-        "km": 225,
-        "basis": "Estimate from typical routing (A41 to Grenoble, then via Bourg-d'Oisans); not a routing-service result.",
+        "minutes": 188,
+        "km": 219.4,
+        "basis": "Road route from GVA: 219.4 km, about 188 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GVA → resort)"
         }
       }
     ],

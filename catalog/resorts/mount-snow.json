@@ -146,28 +146,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 290,
-      "km": 405,
-      "basis": "Estimate from typical routing (NY-79/I-88 to Albany, NY-7 E to Bennington, VT-9 E to Wilmington, then VT-100 N to West Dover); not a routing-service result. VT-9 over Hogback Mountain can be slow in winter.",
+      "minutes": 314,
+      "km": 370.3,
+      "basis": "Road route from Ithaca, NY: 370.3 km, about 314 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "practical",
-        "minutes": 110,
-        "km": 115,
-        "basis": "Estimate from typical routing (NY-7 E to Bennington, VT-9 E to Wilmington, VT-100 N); not a routing-service result.",
+        "minutes": 109,
+        "km": 109.6,
+        "basis": "Road route from ALB: 109.6 km, about 109 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       }
     ],

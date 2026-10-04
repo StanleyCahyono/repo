@@ -164,40 +164,40 @@
       {
         "iata": "VRN",
         "role": "closest",
-        "minutes": 135,
-        "km": 170,
-        "basis": "Estimate from typical routing (A22 north to Trento, then via Tione and Pinzolo); not a routing-service result.",
+        "minutes": 154,
+        "km": 154.5,
+        "basis": "Road route from VRN: 154.5 km, about 154 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (VRN → resort)"
         }
       },
       {
         "iata": "BGY",
         "role": "practical",
-        "minutes": 165,
-        "km": 180,
-        "basis": "Estimate from typical routing (via Brescia, Lake Idro and Tione, or via the Val Camonica and the Tonale pass); not a routing-service result.",
+        "minutes": 158,
+        "km": 173.7,
+        "basis": "Road route from BGY: 173.7 km, about 158 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BGY → resort)"
         }
       },
       {
         "iata": "MXP",
         "role": "practical",
-        "minutes": 210,
-        "km": 250,
-        "basis": "Estimate from typical routing (A4 via Bergamo and Brescia, then as from Bergamo); not a routing-service result.",
+        "minutes": 218,
+        "km": 257.8,
+        "basis": "Road route from MXP: 257.8 km, about 218 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MXP → resort)"
         }
       }
     ],

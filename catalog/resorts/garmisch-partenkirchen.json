@@ -138,7 +138,7 @@
       "subjectType": "lift-ticket",
       "item": "Garmisch-Classic day ticket",
       "category": "adult",
-      "amount": 69.0,
+      "amount": 69,
       "amountMax": null,
       "currency": "EUR",
       "season": null,
@@ -159,7 +159,7 @@
       "subjectType": "lift-ticket",
       "item": "Zugspitze day ticket",
       "category": "adult",
-      "amount": 69.0,
+      "amount": 69,
       "amountMax": null,
       "currency": "EUR",
       "season": "2025-26",
@@ -221,27 +221,27 @@
       {
         "iata": "INN",
         "role": "closest",
-        "minutes": 60,
-        "km": 60,
-        "basis": "Estimate from typical routing (B171/B177 via Zirl and Seefeld to Mittenwald, then the B2 to Garmisch-Partenkirchen); not a routing-service result.",
+        "minutes": 49,
+        "km": 50.6,
+        "basis": "Road route from INN: 50.6 km, about 49 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 80,
-        "km": 110,
-        "basis": "Estimate from typical routing (A9/A99 and the A95 Munich–Garmisch motorway, then the B2); not a routing-service result.",
+        "minutes": 95,
+        "km": 135.4,
+        "basis": "Road route from MUC: 135.4 km, about 95 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

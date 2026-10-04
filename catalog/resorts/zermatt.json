@@ -188,40 +188,40 @@
       {
         "iata": "MXP",
         "role": "closest",
-        "minutes": 165,
-        "km": 180,
-        "basis": "Estimate from typical routing (A26/SS33 via Domodossola and the Simplon Pass to Brig and Visp, then to Täsch; Zermatt is car-free — park in Täsch and take the shuttle train); not a routing-service result.",
+        "minutes": 192,
+        "km": 204.3,
+        "basis": "Road route from MXP: 204.3 km, about 192 min without traffic (OSRM). Zermatt is car-free: park in Täsch and take the shuttle train.",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MXP → resort)"
         }
       },
       {
         "iata": "GVA",
         "role": "practical",
-        "minutes": 195,
-        "km": 235,
-        "basis": "Estimate from typical routing (A1/A9 via Lausanne, Martigny and Sion to Visp, then to Täsch and the shuttle train); not a routing-service result.",
+        "minutes": 190,
+        "km": 236.4,
+        "basis": "Road route from GVA: 236.4 km, about 190 min without traffic (OSRM). Zermatt is car-free: park in Täsch and take the shuttle train.",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GVA → resort)"
         }
       },
       {
         "iata": "ZRH",
         "role": "practical",
-        "minutes": 210,
-        "km": 240,
-        "basis": "Estimate from typical routing (via Bern and the Lötschberg car-carrying train (Kandersteg–Goppenstein) to Visp and Täsch; direct rail via Visp is the usual alternative); not a routing-service result.",
+        "minutes": 232,
+        "km": 244.3,
+        "basis": "Road route from ZRH: 244.3 km, about 232 min without traffic (OSRM). Zermatt is car-free: park in Täsch and take the shuttle train.",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZRH → resort)"
         }
       }
     ],

@@ -174,28 +174,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 405,
-      "km": 600,
-      "basis": "Estimate from typical routing (NY-79/I-88 to Albany, I-87 N to Exit 20, US-4 E to Rutland and Killington, then VT-100 N via Waterbury to Stowe); not a routing-service result. Alternative via I-87 to Plattsburgh, the Lake Champlain ferry and I-89 is similar. Winter weather or ferry waits add time.",
+      "minutes": 454,
+      "km": 560,
+      "basis": "Road route from Ithaca, NY: 560 km, about 454 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "BTV",
         "role": "both",
-        "minutes": 55,
-        "km": 65,
-        "basis": "Estimate from typical routing (I-89 S to Exit 10 (Waterbury), VT-100 N to Stowe, then VT-108 to the resort); not a routing-service result. Closest airport with scheduled airline service (Piste reference, confirm).",
+        "minutes": 66,
+        "km": 65.6,
+        "basis": "Road route from BTV: 65.6 km, about 66 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BTV → resort)"
         }
       }
     ],

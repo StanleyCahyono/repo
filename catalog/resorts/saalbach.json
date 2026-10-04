@@ -126,7 +126,7 @@
       "subjectType": "lift-ticket",
       "item": "Skicircus 1-day ticket (winter start)",
       "category": "adult",
-      "amount": 74.0,
+      "amount": 74,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -147,7 +147,7 @@
       "subjectType": "lift-ticket",
       "item": "Skicircus 1-day ticket (peak season)",
       "category": "adult",
-      "amount": 82.0,
+      "amount": 82,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -168,7 +168,7 @@
       "subjectType": "lift-ticket",
       "item": "Skicircus 1-day ticket (bonus season)",
       "category": "adult",
-      "amount": 74.0,
+      "amount": 74,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -234,40 +234,40 @@
       {
         "iata": "SZG",
         "role": "closest",
-        "minutes": 85,
-        "km": 95,
-        "basis": "Estimate from typical routing (B21/B178 via Bad Reichenhall and Lofer, then the B311 via Saalfelden and Maishofen to Saalbach); not a routing-service result.",
+        "minutes": 88,
+        "km": 87.5,
+        "basis": "Road route from SZG: 87.5 km, about 88 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SZG → resort)"
         }
       },
       {
         "iata": "INN",
         "role": "practical",
-        "minutes": 120,
-        "km": 155,
-        "basis": "Estimate from typical routing (A12 east to Wörgl, the B178 to St. Johann in Tirol, then via Fieberbrunn, Leogang and Saalfelden); not a routing-service result.",
+        "minutes": 150,
+        "km": 157.5,
+        "basis": "Road route from INN: 157.5 km, about 150 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 165,
-        "km": 230,
-        "basis": "Estimate from typical routing (A8/A93 to Kufstein, the B178 via St. Johann in Tirol, then via Leogang and Saalfelden); not a routing-service result.",
+        "minutes": 171,
+        "km": 217.8,
+        "basis": "Road route from MUC: 217.8 km, about 171 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

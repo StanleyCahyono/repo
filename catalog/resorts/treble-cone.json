@@ -183,14 +183,14 @@
       {
         "iata": "ZQN",
         "role": "both",
-        "minutes": 90,
-        "km": 95,
-        "basis": "Estimate from typical routing (Crown Range Road to Wānaka, then Wanaka–Mount Aspiring Road and the ski-field access road); not a routing-service result. A search summary puts Treble Cone about 90 minutes from Queenstown and 30 minutes from Wānaka.",
+        "minutes": 105,
+        "km": 90.9,
+        "basis": "Road route from ZQN: 90.9 km, about 105 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ZQN → resort)"
         }
       }
     ],

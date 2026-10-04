@@ -146,28 +146,28 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 310,
-      "km": 445,
-      "basis": "Estimate from typical routing (NY-79/I-88 to Albany, NY-7 E to Bennington, US-7 N to Manchester, then VT-11 E and VT-100 N to Ludlow); not a routing-service result. VT-11 over the Green Mountains can be slow in winter.",
+      "minutes": 344,
+      "km": 403.1,
+      "basis": "Road route from Ithaca, NY: 403.1 km, about 344 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "practical",
-        "minutes": 135,
-        "km": 160,
-        "basis": "Estimate from typical routing (NY-7 E to Bennington, US-7 N to Manchester, VT-11/VT-100 to Ludlow); not a routing-service result.",
+        "minutes": 139,
+        "km": 142.4,
+        "basis": "Road route from ALB: 142.4 km, about 139 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       }
     ],

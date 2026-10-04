@@ -121,7 +121,7 @@
       "subjectType": "lift-ticket",
       "item": "Hintertux Glacier 1-day pass",
       "category": "adult",
-      "amount": 82.0,
+      "amount": 82,
       "amountMax": null,
       "currency": "EUR",
       "season": null,
@@ -179,27 +179,27 @@
       {
         "iata": "INN",
         "role": "closest",
-        "minutes": 80,
-        "km": 90,
-        "basis": "Estimate from typical routing (A12 east to the Zillertal exit, the B169 to Mayrhofen, then the Tux valley road); not a routing-service result.",
+        "minutes": 86,
+        "km": 94.4,
+        "basis": "Road route from INN: 94.4 km, about 86 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "MUC",
         "role": "practical",
-        "minutes": 145,
-        "km": 190,
-        "basis": "Estimate from typical routing (A8/A93 to Kufstein, A12 to the Zillertal exit, then the B169 and the Tux valley road); not a routing-service result.",
+        "minutes": 157,
+        "km": 215.6,
+        "basis": "Road route from MUC: 215.6 km, about 157 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MUC → resort)"
         }
       }
     ],

@@ -164,40 +164,40 @@
       {
         "iata": "INN",
         "role": "closest",
-        "minutes": 135,
-        "km": 150,
-        "basis": "Estimate from typical routing (Brenner motorway to Bressanone/Brixen, the Pustertal to San Lorenzo/St. Lorenzen, then south through Val Badia to Corvara); not a routing-service result.",
+        "minutes": 120,
+        "km": 135.6,
+        "basis": "Road route from INN: 135.6 km, about 120 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (INN → resort)"
         }
       },
       {
         "iata": "VCE",
         "role": "practical",
-        "minutes": 165,
-        "km": 190,
-        "basis": "Estimate from typical routing (A27 via Belluno and Agordo, or via Cortina and the Falzarego/Valparola passes); not a routing-service result.",
+        "minutes": 146,
+        "km": 172.3,
+        "basis": "Road route from VCE: 172.3 km, about 146 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (VCE → resort)"
         }
       },
       {
         "iata": "VRN",
         "role": "practical",
-        "minutes": 165,
-        "km": 230,
-        "basis": "Estimate from typical routing (A22 via Trento and Bolzano to Bressanone, then the Pustertal and Val Badia); not a routing-service result.",
+        "minutes": 181,
+        "km": 216.7,
+        "basis": "Road route from VRN: 216.7 km, about 181 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (VRN → resort)"
         }
       }
     ],

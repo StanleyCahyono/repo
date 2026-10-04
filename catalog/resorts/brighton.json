@@ -172,14 +172,14 @@
       {
         "iata": "SLC",
         "role": "both",
-        "minutes": 55,
-        "km": 57,
-        "basis": "Estimate from typical routing (I-80 E and I-215 S to Exit 6 / 6200 South, Wasatch Blvd to the canyon mouth, then SR-190 up Big Cottonwood Canyon); not a routing-service result. Storm days, traction-law enforcement and avalanche-control closures of SR-190 can add hours.",
+        "minutes": 59,
+        "km": 59.2,
+        "basis": "Road route from SLC: 59.2 km, about 59 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SLC → resort)"
         }
       }
     ],

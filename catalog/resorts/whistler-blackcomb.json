@@ -183,14 +183,14 @@
       {
         "iata": "YVR",
         "role": "both",
-        "minutes": 130,
-        "km": 135,
-        "basis": "Estimate from typical routing (through Vancouver and the Lions Gate Bridge, then the Sea-to-Sky Highway, BC-99, north to Whistler); not a routing-service result. Closest airport with regular scheduled service (Piste reference, confirm). Winter tires/chains rules apply on BC-99.",
+        "minutes": 144,
+        "km": 136.3,
+        "basis": "Road route from YVR: 136.3 km, about 144 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (YVR → resort)"
         }
       }
     ],

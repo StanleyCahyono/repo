@@ -208,27 +208,27 @@
       {
         "iata": "CBR",
         "role": "closest",
-        "minutes": 155,
-        "km": 210,
-        "basis": "Estimate from typical routing (Monaro Highway south via Cooma to Jindabyne, then the Alpine Way to Thredbo); not a routing-service result.",
+        "minutes": 176,
+        "km": 211.2,
+        "basis": "Road route from CBR: 211.2 km, about 176 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (CBR → resort)"
         }
       },
       {
         "iata": "SYD",
         "role": "practical",
-        "minutes": 340,
-        "km": 490,
-        "basis": "Estimate from typical routing (Hume and Federal highways to Canberra, Monaro Highway to Jindabyne, then the Alpine Way); not a routing-service result. Main international gateway; many visitors connect to Canberra instead.",
+        "minutes": 362,
+        "km": 482.1,
+        "basis": "Road route from SYD: 482.1 km, about 362 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (SYD → resort)"
         }
       }
     ],

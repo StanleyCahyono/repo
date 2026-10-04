@@ -190,41 +190,41 @@
   ],
   "travel": {
     "driveFromIthaca": {
-      "minutes": 320,
-      "km": 440,
-      "basis": "Estimate from typical routing (NY-13/I-81 N to Watertown, NY-3 E via Cranberry Lake and Tupper Lake to Saranac Lake, then NY-86 through Lake Placid to Wilmington); not a routing-service result. Alternatives via I-88/I-87 N to Exit 30 and NY-73, or via Utica and NY-28/NY-30, take similar time; Adirondack winter roads can add significant time.",
+      "minutes": 365,
+      "km": 416.2,
+      "basis": "Road route from Ithaca, NY: 416.2 km, about 365 min without traffic (OSRM).",
       "source": {
-        "url": null,
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste estimate"
+        "url": "https://project-osrm.org/",
+        "verification": "api",
+        "checkedOn": "2026-10-04",
+        "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (home → resort)"
       }
     },
     "airports": [
       {
         "iata": "ALB",
         "role": "practical",
-        "minutes": 155,
-        "km": 235,
-        "basis": "Estimate from typical routing (I-87 N to Exit 30, US-9/NY-73 to Keene, NY-9N/NY-86 via Jay and Wilmington); not a routing-service result.",
+        "minutes": 165,
+        "km": 206.3,
+        "basis": "Road route from ALB: 206.3 km, about 165 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (ALB → resort)"
         }
       },
       {
         "iata": "BTV",
         "role": "practical",
-        "minutes": 120,
-        "km": 100,
-        "basis": "Estimate from typical routing (US-2 to the Grand Isle–Plattsburgh ferry, I-87 S to Exit 34, NY-9N/NY-86 via Au Sable Forks); not a routing-service result. Road distance only; includes a Lake Champlain ferry crossing whose waits and schedules vary.",
+        "minutes": 121,
+        "km": 117.3,
+        "basis": "Road route from BTV: 117.3 km, about 121 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-28",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (BTV → resort)"
         }
       }
     ],

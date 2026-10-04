@@ -197,27 +197,27 @@
       {
         "iata": "GNB",
         "role": "closest",
-        "minutes": 170,
-        "km": 170,
-        "basis": "Estimate from typical routing (A48 to Grenoble, then the D1091 via Bourg-d'Oisans and the Col du Lautaret (weather closures possible); Turin, not in the catalog, is closer at roughly 110 km via Montgenèvre); not a routing-service result.",
+        "minutes": 141,
+        "km": 152.5,
+        "basis": "Road route from GNB: 152.5 km, about 141 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GNB → resort)"
         }
       },
       {
         "iata": "LYS",
         "role": "practical",
-        "minutes": 200,
-        "km": 235,
-        "basis": "Estimate from typical routing (A43/A48 to Grenoble, then over the Col du Lautaret); not a routing-service result.",
+        "minutes": 171,
+        "km": 200,
+        "basis": "Road route from LYS: 200 km, about 171 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (LYS → resort)"
         }
       }
     ],

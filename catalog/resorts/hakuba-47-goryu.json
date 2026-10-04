@@ -203,27 +203,27 @@
       {
         "iata": "HND",
         "role": "practical",
-        "minutes": 270,
-        "km": 295,
-        "basis": "Estimate from typical routing (Chuo and Nagano expressways to Azumino, then north on Route 147/148); not a routing-service result. Most visitors instead take the Hokuriku Shinkansen to Nagano and a bus.",
+        "minutes": 246,
+        "km": 274.6,
+        "basis": "Road route from HND: 274.6 km, about 246 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (HND → resort)"
         }
       },
       {
         "iata": "NRT",
         "role": "practical",
-        "minutes": 330,
-        "km": 355,
-        "basis": "Estimate from typical routing (via central Tokyo and the Chuo/Nagano expressways); not a routing-service result. Rail via Tokyo and Nagano is the usual alternative.",
+        "minutes": 294,
+        "km": 329.5,
+        "basis": "Road route from NRT: 329.5 km, about 294 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (NRT → resort)"
         }
       }
     ],

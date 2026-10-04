@@ -174,40 +174,40 @@
       {
         "iata": "GVA",
         "role": "closest",
-        "minutes": 90,
-        "km": 105,
-        "basis": "Estimate from typical routing (A40 via Chamonix and the Mont Blanc tunnel (toll)); not a routing-service result.",
+        "minutes": 107,
+        "km": 107.3,
+        "basis": "Road route from GVA: 107.3 km, about 107 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (GVA → resort)"
         }
       },
       {
         "iata": "TRN",
         "role": "practical",
-        "minutes": 120,
-        "km": 150,
-        "basis": "Estimate from typical routing (A5 via Ivrea and Aosta); not a routing-service result.",
+        "minutes": 114,
+        "km": 152.3,
+        "basis": "Road route from TRN: 152.3 km, about 114 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (TRN → resort)"
         }
       },
       {
         "iata": "MXP",
         "role": "practical",
-        "minutes": 150,
-        "km": 220,
-        "basis": "Estimate from typical routing (A26/A4 to the A5, then via Aosta); not a routing-service result.",
+        "minutes": 159,
+        "km": 212.6,
+        "basis": "Road route from MXP: 212.6 km, about 159 min without traffic (OSRM).",
         "source": {
-          "url": null,
-          "verification": "unverified",
-          "checkedOn": "2026-09-30",
-          "note": "Piste estimate — confirm with a routing service"
+          "url": "https://project-osrm.org/",
+          "verification": "api",
+          "checkedOn": "2026-10-04",
+          "note": "OSRM routing service (OpenStreetMap data), free-flow car time — no traffic or winter conditions (MXP → resort)"
         }
       }
     ],
