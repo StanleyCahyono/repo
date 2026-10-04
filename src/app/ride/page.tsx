@@ -1,6 +1,6 @@
 /**
  * Ride there — the Uber-style journey map from home to any resort (/ride?to=<resortId>&mode=drive|fly&via=&from=).
- * Data: src/lib/data/ride.ts (curated drive estimates, recorded airports and transfers, published lift hours).
+ * Data: src/lib/data/ride.ts (road-routed drives and bundled road geometry, recorded airports and transfers, published lift hours).
  */
 import type { Metadata } from 'next'
 import { RideThere } from '@/components/ride/ride-there'

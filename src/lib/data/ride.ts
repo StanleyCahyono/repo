@@ -1,10 +1,12 @@
 /**
  * "Ride there" read models: the destination picker index and one resort's journey plan from home.
  *
- * Everything comes from stored travel data — the curated drive estimate (labelled as an estimate, with the winter
- * buffer), recorded gateway airports and their transfer times, the user's departure airports and their drive from
- * home, published lift hours (for "leave by") and modeled weather when a run is stored. Flights are illustrative only:
- * no flight numbers, times or fares exist here. Costs are not estimated (no fuel or fare model), so they stay unknown.
+ * Everything comes from stored travel data — the drive from home (routed by OSRM over OpenStreetMap roads for the
+ * catalog, with the user's winter buffer on top), recorded gateway airports and their transfer times, the user's
+ * departure airports and their drive from home, published lift hours (for "leave by") and modeled weather when a run
+ * is stored. Road geometry for every drive leg comes from the bundled routes (src/assets/routes.json); the routes from
+ * home are only used while home is still where they were routed from. Flights are illustrative only: no flight
+ * numbers, times or fares exist here. Costs are not estimated (no fuel or fare model), so they stay unknown.
  */
 import 'server-only'
 import { and, eq, inArray } from 'drizzle-orm'
@@ -17,8 +19,19 @@ import { shownAirport, shownSchedules, shownTravel } from './shown'
 import { openingView, travelView } from './views'
 import { liftHoursFor } from '@/lib/jobs/assessments'
 import { addDays, addHours, formatInstant, formatLocalDate, hemisphereOf, previousSeasonId, relativeLabel, seasonIdForHemisphere, nextSaturday } from '@/lib/domain/time'
-import { leaveBy, haversineKm } from '@/lib/domain/journey'
+import { leaveBy, haversineKm, simplifyPath, pathKm, type LonLat } from '@/lib/domain/journey'
 import { flightSearchLinks, directionsLink } from '@/lib/providers/links/builders'
+import { decodePolyline } from '@/assets/osm/decode'
+import routesFile from '@/assets/routes.json'
+
+interface RoutesFile {
+  source: string
+  home: { name: string; lat: number; lon: number }
+  routes: Record<string, { p: string; km: number; min: number }>
+}
+const ROUTES = routesFile as unknown as RoutesFile
+/** Routes from home are only valid while home is within this distance of where they were routed from. */
+const HOME_ROUTE_RADIUS_KM = 3
 
 export interface RideHome {
   name: string
@@ -35,7 +48,7 @@ export interface RidePick {
   where: string
   lat: number
   lon: number
-  /** Curated one-way drive estimate from home, minutes (null: none recorded). */
+  /** One-way drive time from home, minutes (null: none recorded). */
   driveMinutes: number | null
   favorite: boolean
 }
@@ -57,6 +70,26 @@ export interface RideAirport {
   minutes: number | null
   km: number | null
   role: string | null
+  /** Google Maps directions for the road part (home → departure airport, gateway → resort). */
+  directionsUrl: string | null
+}
+
+/** Road geometry for one drive leg, from the bundled OSRM routes (OpenStreetMap roads). */
+export interface RideRoad {
+  coords: LonLat[]
+  km: number
+  minutes: number
+}
+
+export interface RideRoads {
+  /** Home → resort. */
+  drive: RideRoad | null
+  /** Home → departure airport, by IATA. */
+  origins: Record<string, RideRoad>
+  /** Gateway airport → resort, by IATA. */
+  gateways: Record<string, RideRoad>
+  /** Attribution for the road geometry. */
+  source: string
 }
 
 export interface RideDrive {
@@ -64,6 +97,7 @@ export interface RideDrive {
   winterMinutes: number | null
   bufferPct: number
   km: number | null
+  /** False when the time comes from the routing service (verification 'api'). */
   isEstimate: boolean
   basis: string | null
   directionsUrl: string | null
@@ -99,6 +133,8 @@ export interface RidePlan {
   /** Recorded gateway airports near the resort, practical first. */
   gateways: RideAirport[]
   transfers: { name: string; type: string | null; url: string | null }[]
+  /** Road geometry for the drive legs that have a bundled route. */
+  roads: RideRoads
   recommended: 'drive' | 'fly' | 'none'
   verdictNote: string | null
   leaveBy: RideLeaveBy
@@ -108,6 +144,33 @@ export interface RidePlan {
   flightSearch: Record<string, { label: string; url: string }>
   unknowns: string[]
   demo: boolean
+}
+
+/** A bundled route by key, decoded and thinned (≈25 m tolerance keeps the shape at any zoom the maps use). */
+function bundledRoad(key: string): RideRoad | null {
+  const r = ROUTES.routes[key]
+  if (!r?.p) return null
+  const coords = decodePolyline(r.p)
+  if (coords.length < 2) return null
+  const thin = simplifyPath(coords, 0.025)
+  return { coords: thin, km: r.km ?? Math.round(pathKm(coords) * 10) / 10, minutes: r.min }
+}
+
+/** Road geometry for a plan: routes from home only while home is where they were routed from. */
+export function rideRoads(home: { lat: number; lon: number }, resortId: string, origins: readonly string[], gateways: readonly string[]): RideRoads {
+  const homeOk = haversineKm([home.lon, home.lat], [ROUTES.home.lon, ROUTES.home.lat]) <= HOME_ROUTE_RADIUS_KM
+  const origin: Record<string, RideRoad> = {}
+  const gateway: Record<string, RideRoad> = {}
+  if (homeOk)
+    for (const code of origins) {
+      const r = bundledRoad(`home>apt:${code}`)
+      if (r) origin[code] = r
+    }
+  for (const code of gateways) {
+    const r = bundledRoad(`apt:${code}>resort:${resortId}`)
+    if (r) gateway[code] = r
+  }
+  return { drive: homeOk ? bundledRoad(`home>resort:${resortId}`) : null, origins: origin, gateways: gateway, source: 'Roads © OpenStreetMap contributors · OSRM' }
 }
 
 const WEEKDAY = ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -205,6 +268,7 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
       minutes: a.driveFromHome?.minutes ?? null,
       km: a.driveFromHome?.km ?? null,
       role: a.role,
+      directionsUrl: directionsLink({ lat: home.lat, lon: home.lon }, { lat: a.lat, lon: a.lon })?.url ?? null,
     }))
 
   const gateways: RideAirport[] = tv.airports
@@ -220,6 +284,7 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
         minutes: a.minutes,
         km: a.km,
         role: a.role,
+        directionsUrl: directionsLink({ lat: row.lat, lon: row.lon }, { lat: r.lat, lon: r.lon })?.url ?? null,
       }
     })
     .filter((a): a is RideAirport => !!a)
@@ -246,7 +311,7 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
   const prevSeason = previousSeasonId(seasonIdForHemisphere(rToday, hemi))
   const last = lastSeasonHours(schedules, prevSeason)
   if (!drive) {
-    lb = { state: 'unknown', reason: gateways.length ? 'Needs flight times, which Piste does not show' : 'No drive estimate recorded', short: gateways.length ? 'Needs flight times' : 'No drive estimate', lastSeason: null }
+    lb = { state: 'unknown', reason: gateways.length ? 'Needs flight times, which Piste does not show' : 'No drive time recorded', short: gateways.length ? 'Needs flight times' : 'No drive time', lastSeason: null }
   } else {
     let found: { date: string; opens: string } | null = null
     for (let i = 0; i < 14 && !found; i++) {
@@ -316,9 +381,9 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
   if (drive && lb.state === 'unknown') unknowns.push(`Leave-by time: ${lb.reason.toLowerCase()}.`)
   if (drive) unknowns.push('Road conditions and weather along the road are not modeled by Piste. Check the state road report before you go.')
   if (drive) unknowns.push('Driving cost is not estimated (no fuel or toll data).')
-  if (gateways.length) unknowns.push('Flight times, airlines and fares are not shown. The flight arc is illustrative.')
+  if (gateways.length) unknowns.push('Flight times, airlines and fares are not shown. The flight arc on the map is illustrative.')
   if (gateways.some((g) => g.minutes == null)) unknowns.push('Some airport transfer times are not recorded.')
-  if (!drive && !gateways.length) unknowns.push('No drive estimate or airport is recorded for this resort.')
+  if (!drive && !gateways.length) unknowns.push('No drive time or airport is recorded for this resort.')
 
   return {
     resort: { id: r.id, name: r.name, short: r.shortName, where: whereOf(r), lat: r.lat, lon: r.lon, tz: r.timezone, href: `/resorts/${r.id}`, country: r.country, baseM: r.baseElevationM, summitM: r.summitElevationM },
@@ -329,6 +394,7 @@ export async function getRidePlan(ctx: Ctx, resortId: string): Promise<RidePlan 
     origins,
     gateways,
     transfers: tv.transfers.filter((t) => t.name).map((t) => ({ name: t.name!, type: t.type, url: t.url })),
+    roads: rideRoads(home, r.id, origins.map((o) => o.iata), gateways.map((g) => g.iata)),
     recommended,
     verdictNote: tv.verdict.note ?? null,
     leaveBy: lb,

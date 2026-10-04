@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { angleDelta, bearingDeg, cumulativeKm, driveEffort, greatCircleArc, haversineKm, leaveBy, legDurationMs, pathKm, pointAlong, type LonLat } from './journey'
+import { angleDelta, bearingDeg, cumulativeKm, driveEffort, greatCircleArc, haversineKm, leaveBy, pathKm, pointAlong, roadDrawMs, simplifyPath, type LonLat } from './journey'
 
 const ITH: LonLat = [-76.4584, 42.491]
 const GVA: LonLat = [6.109, 46.2381]
@@ -107,9 +107,20 @@ describe('effort and timing', () => {
     expect(driveEffort(600)).toBe('very-high')
     expect(driveEffort(null)).toBeNull()
   })
-  it('keeps animations within bounds', () => {
-    expect(legDurationMs('air', 20000)).toBe(9500)
-    expect(legDurationMs('drive', 1)).toBe(3600)
-    expect(legDurationMs('ground', 10)).toBe(1800)
+  it('keeps the road draw-in within bounds', () => {
+    expect(roadDrawMs(5000)).toBe(2600)
+    expect(roadDrawMs(1)).toBe(1200)
+    expect(roadDrawMs(Number.NaN)).toBe(1200)
+  })
+})
+
+describe('simplifyPath', () => {
+  it('drops collinear points and keeps the ends', () => {
+    const line: LonLat[] = [[0, 0], [0.1, 0], [0.2, 0], [0.3, 0.0000001], [0.4, 0]]
+    expect(simplifyPath(line, 0.05)).toEqual([[0, 0], [0.4, 0]])
+  })
+  it('keeps a real corner', () => {
+    const l: LonLat[] = [[0, 0], [0.05, 0], [0.1, 0], [0.1, 0.05], [0.1, 0.1]]
+    expect(simplifyPath(l, 0.05)).toEqual([[0, 0], [0.1, 0], [0.1, 0.1]])
   })
 })

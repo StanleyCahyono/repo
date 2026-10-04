@@ -1,19 +1,22 @@
 'use client'
 /**
- * Offline / no-tiles journey map: a mission-control schematic in Web Mercator — graticule, range rings around home,
- * every catalogued resort as a faint dot, and the journey drawn with a glowing line while a car or plane glyph glides
- * along it. The camera follows the glyph (zooming out mid-leg, in at the ends) and ends on a tilted approach to the
- * resort. Lines are straight or great-circle arcs; the frame says "approximate route" and never implies roads.
+ * Offline / no-tiles journey map: a mission-control schematic in Web Mercator — land and borders (Natural Earth),
+ * graticule, range rings around home, nearby city names, every catalogued resort as a faint dot, and the journey.
  *
- * Everything per-frame is imperative (refs): React renders the static layers once per journey.
- * Reduced motion: the finished journey is drawn at once, framed, with no camera moves or tilt.
+ * The camera is static: it frames every pin and label inside the padded view (clear of the panel and the overlays),
+ * and pin labels are collision-avoided (label-layout.ts). Roads are drawn from the bundled road geometry; a drive draws
+ * itself in along the road once, with a small car travelling it. A flight is a static dashed arc, never animated. A road
+ * leg with no geometry is not drawn at all (the frame links to directions instead) — never a straight line.
+ *
+ * Reduced motion: everything is drawn at once.
  */
-import { useEffect, useMemo, useRef } from 'react'
-import { Car, Plane } from './glyphs'
-import { mercatorY, type LonLat } from '@/lib/domain/journey'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Car } from './glyphs'
+import { mercatorY, roadDrawMs, type LonLat } from '@/lib/domain/journey'
 import type { Journey, Pin } from './journey-model'
 import { journeyCoords } from './journey-model'
-import { APPROACH_SPAN_KM, followSpanKm, phaseAt, timeline } from './camera'
+import { overlapArea, placeLabels, type Rect } from './label-layout'
+import { PIN_GAP, PIN_PRIORITY, PinView } from './pin-view'
 import { cn } from '@/lib/ui/cn'
 
 export interface MapPadding {
@@ -24,10 +27,10 @@ export interface MapPadding {
 }
 
 export interface JourneyCallbacks {
-  /** Phase changes (not every frame). */
-  onPhase?: (p: { phase: 'overview' | 'leg' | 'approach' | 'done'; leg: number }) => void
-  /** Every frame while travelling: leg index and its progress 0…1. */
-  onProgress?: (leg: number, f: number) => void
+  /** Road draw-in progress 0…1 (drive only; 1 at once for flights and under reduced motion). */
+  onProgress?: (f: number) => void
+  /** How many road legs have no geometry to draw. */
+  onMissing?: (n: number) => void
 }
 
 export interface SchematicProps extends JourneyCallbacks {
@@ -44,8 +47,63 @@ export interface SchematicProps extends JourneyCallbacks {
 
 const DEG = 180 / Math.PI
 const projY = (lat: number) => -mercatorY(lat) * DEG
-const proj = (p: LonLat): [number, number] => [p[0], projY(p[1])]
 const KM_PER_DEG = 111.32
+const CITY_POOL = 12
+
+// ---------------------------------------------------------------------------
+// Geography (lazy, cached per session)
+
+interface City {
+  n: string
+  ll: [number, number]
+  z: number
+  pop: number
+}
+interface Geo {
+  land: string
+  borders: string
+  cities: City[]
+}
+let geoCache: Geo | null = null
+let geoPromise: Promise<Geo> | null = null
+
+function ringPath(r: readonly number[], close: boolean, shift: number) {
+  let d = ''
+  for (let i = 0; i + 1 < r.length; i += 2) d += `${i ? 'L' : 'M'}${(r[i] + shift).toFixed(2)} ${projY(r[i + 1]).toFixed(2)}`
+  return close ? `${d}Z` : d
+}
+
+function loadGeo(): Promise<Geo> {
+  if (geoCache) return Promise.resolve(geoCache)
+  geoPromise ??= Promise.all([import('@/assets/geo/world-land.json'), import('@/assets/geo/world-borders.json'), import('@/assets/geo/world-cities.json')]).then(([l, b, c]) => {
+    const rings = ((l as { default?: unknown }).default ?? l) as number[][]
+    const lines = ((b as { default?: unknown }).default ?? b) as number[][]
+    const cf = ((c as { default?: unknown }).default ?? c) as { cities: City[] }
+    // Antarctica's pole-wrapping ring does not survive Mercator and no journey goes there. A second copy one world west
+    // keeps journeys that are unwrapped past −180° (to Japan) over land.
+    const keep = rings.filter((r) => !r.some((v, i) => i % 2 === 1 && v < -60))
+    const land = [0, -360].map((sh) => keep.map((r) => ringPath(r, true, sh)).join('')).join('')
+    const borders = [0, -360].map((sh) => lines.map((r) => ringPath(r, false, sh)).join('')).join('')
+    geoCache = { land, borders, cities: [...cf.cities].sort((a, b) => a.z - b.z || b.pop - a.pop) }
+    return geoCache
+  })
+  return geoPromise
+}
+
+function useGeo(): Geo | null {
+  const [g, setG] = useState<Geo | null>(geoCache)
+  useEffect(() => {
+    if (g) return
+    let alive = true
+    loadGeo()
+      .then((x) => alive && setG(x))
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [g])
+  return g
+}
 
 /** Destination point (great circle) — for range rings. */
 function destination(lat: number, lon: number, bearing: number, km: number): LonLat {
@@ -61,78 +119,74 @@ function destination(lat: number, lon: number, bearing: number, km: number): Lon
   return [lonOut, p2 * DEG]
 }
 
-function pathD(pts: readonly LonLat[]): string {
+function worldD(pts: readonly LonLat[]): string {
   let d = ''
-  for (let i = 0; i < pts.length; i++) {
-    const [x, y] = proj(pts[i])
-    d += `${i ? 'L' : 'M'}${x.toFixed(4)} ${y.toFixed(4)}`
-  }
+  for (let i = 0; i < pts.length; i++) d += `${i ? 'L' : 'M'}${pts[i][0].toFixed(4)} ${projY(pts[i][1]).toFixed(4)}`
   return d
 }
 
-const RINGS_KM = [25, 50, 100, 250, 500, 1000, 2500, 5000]
-const RINGS_MI = [25, 50, 100, 250, 500, 1000, 2500]
+const RINGS_KM = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000]
+const RINGS_MI = [10, 25, 50, 100, 250, 500, 1000, 2500]
 
 interface Cam {
+  /** World centre (lon, projected y). */
   x: number
   y: number
-  /** log(px per projected unit) */
-  ls: number
-  tilt: number
+  /** px per world unit. */
+  s: number
+  /** Screen point the world centre maps to. */
+  cx: number
+  cy: number
 }
 
-/** Plane overscan so a tilted plane never shows its edges. */
-const OVER_X = 0.3
-const OVER_TOP = 0.7
-const OVER_BOTTOM = 0.15
-/** Tilt axis, as a fraction of the plane's height (a little below the view centre). */
-const ORIGIN_Y = (OVER_TOP + 0.62) / (1 + OVER_TOP + OVER_BOTTOM)
-const PERSPECTIVE = 1100
-const PERSPECTIVE_Y = 0.3
+const easeOut = (f: number) => 1 - (1 - Math.max(0, Math.min(1, f))) ** 3
+const easeInOut = (f: number) => {
+  const x = Math.max(0, Math.min(1, f))
+  return x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2
+}
 
-export function SchematicJourney({ journey, home, context, replay, reduced, padding, distanceUnit, onPhase, onProgress, className }: SchematicProps) {
+export function SchematicJourney({ journey, home, context, replay, reduced, padding, distanceUnit, onProgress, onMissing, className }: SchematicProps) {
+  const geo = useGeo()
   const root = useRef<HTMLDivElement>(null)
-  const plane = useRef<HTMLDivElement>(null)
-  const worlds = useRef<(SVGGElement | null)[]>([])
-  const legPaths = useRef<(SVGPathElement | null)[]>([])
-  const glowPaths = useRef<(SVGPathElement | null)[]>([])
+  const world = useRef<SVGGElement>(null)
+  const gratEls = useRef<(SVGPathElement | null)[]>([])
+  const bordersEl = useRef<SVGPathElement>(null)
+  const ghostEls = useRef<(SVGPathElement | null)[]>([])
+  const glowEls = useRef<(SVGPathElement | null)[]>([])
+  const lineEls = useRef<(SVGPathElement | null)[]>([])
   const pinEls = useRef<Map<string, HTMLDivElement>>(new Map())
   const glyphEl = useRef<HTMLDivElement>(null)
   const sweepEl = useRef<HTMLDivElement>(null)
   const ringLabelEls = useRef<(HTMLSpanElement | null)[]>([])
-  const gratEls = useRef<(SVGGElement | null)[]>([])
-  const reticleEl = useRef<SVGGElement | null>(null)
-  const anchorEls = useRef<Map<string, HTMLDivElement>>(new Map())
-  const cbs = useRef({ onPhase, onProgress })
+  const cityEls = useRef<(HTMLSpanElement | null)[]>([])
+  const cbs = useRef({ onProgress, onMissing })
   useEffect(() => {
-    cbs.current = { onPhase, onProgress }
-  }, [onPhase, onProgress])
+    cbs.current = { onProgress, onMissing }
+  }, [onProgress, onMissing])
 
   const rings = useMemo(() => {
     const list = distanceUnit === 'mi' ? RINGS_MI.map((v) => ({ v, km: v * 1.609344 })) : RINGS_KM.map((v) => ({ v, km: v }))
     return list.map((r) => {
       const pts: LonLat[] = []
       for (let a = 0; a <= 360; a += 5) pts.push(destination(home.lat, home.lon, a, r.km))
-      return { ...r, d: pathD(pts) + 'Z', labelAt: destination(home.lat, home.lon, 160, r.km), label: `${r.v.toLocaleString('en-US')} ${distanceUnit.toUpperCase()}` }
+      return { ...r, d: worldD(pts) + 'Z', labelAt: destination(home.lat, home.lon, 160, r.km), label: `${r.v.toLocaleString('en-US')} ${distanceUnit}` }
     })
   }, [home.lat, home.lon, distanceUnit])
 
-  // Graticule: three levels (10°, 1°, 0.1°), finer ones only around home and the journey ends.
   const graticule = useMemo(() => {
     const coarse: string[] = []
     for (let lon = -540; lon <= 540; lon += 10) coarse.push(`M${lon} ${projY(-80)}V${projY(84)}`)
     for (let lat = -80; lat <= 80; lat += 10) coarse.push(`M-540 ${projY(lat)}H540`)
-    const focus: LonLat[] = [[home.lon, home.lat], ...(journey ? journey.pins.map((p) => p.at) : [])]
     const mid: string[] = []
     const fine: string[] = []
-    const seenMid = new Set<string>()
+    const focus: LonLat[] = [[home.lon, home.lat], ...(journey ? journey.pins.map((p) => p.at) : [])]
+    const seen = new Set<string>()
     const seenFine = new Set<string>()
     for (const [lon0, lat0] of focus) {
       const bx = Math.round(lon0)
       const by = Math.round(lat0)
-      const key = `${bx}:${by}`
-      if (!seenMid.has(key)) {
-        seenMid.add(key)
+      if (!seen.has(`${bx}:${by}`)) {
+        seen.add(`${bx}:${by}`)
         for (let k = -8; k <= 8; k++) {
           mid.push(`M${bx + k} ${projY(by - 8)}V${projY(by + 8)}`)
           mid.push(`M${bx - 8} ${projY(by + k)}H${bx + 8}`)
@@ -140,13 +194,11 @@ export function SchematicJourney({ journey, home, context, replay, reduced, padd
       }
       const fx = Math.round(lon0 * 10) / 10
       const fy = Math.round(lat0 * 10) / 10
-      const fkey = `${fx}:${fy}`
-      if (!seenFine.has(fkey)) {
-        seenFine.add(fkey)
-        for (let k = -12; k <= 12; k++) {
-          fine.push(`M${(fx + k / 10).toFixed(2)} ${projY(fy - 1.2)}V${projY(fy + 1.2)}`)
-          fine.push(`M${(fx - 1.2).toFixed(2)} ${projY(fy + k / 10)}H${(fx + 1.2).toFixed(2)}`)
-        }
+      if (seenFine.has(`${fx}:${fy}`)) continue
+      seenFine.add(`${fx}:${fy}`)
+      for (let k = -12; k <= 12; k++) {
+        fine.push(`M${(fx + k / 10).toFixed(2)} ${projY(fy - 1.2)}V${projY(fy + 1.2)}`)
+        fine.push(`M${(fx - 1.2).toFixed(2)} ${projY(fy + k / 10)}H${(fx + 1.2).toFixed(2)}`)
       }
     }
     return [coarse.join(''), mid.join(''), fine.join('')]
@@ -157,448 +209,395 @@ export function SchematicJourney({ journey, home, context, replay, reduced, padd
       context
         .map((c) => {
           const lon = c.lon - home.lon > 180 ? c.lon - 360 : c.lon - home.lon < -180 ? c.lon + 360 : c.lon
-          const [x, y] = proj([lon, c.lat])
-          // Also draw the copy one world west (antimeridian journeys run west of −180).
-          const [x2] = proj([lon - 360, c.lat])
-          return `M${x.toFixed(3)} ${y.toFixed(3)}h0M${x2.toFixed(3)} ${y.toFixed(3)}h0`
+          const y = projY(c.lat)
+          return `M${lon.toFixed(3)} ${y.toFixed(3)}h0M${(lon - 360).toFixed(3)} ${y.toFixed(3)}h0`
         })
         .join(''),
     [context, home.lon],
   )
 
-  // Range reticle around the resort (2 / 5 / 10 km), drawn flat on the plane so the approach tilt reads as depth.
-  const reticle = useMemo(() => {
-    if (!journey) return null
-    const at = journey.legs[journey.legs.length - 1].to
-    const circles = [2, 5, 10].map((km) => {
-      const pts: LonLat[] = []
-      for (let a = 0; a <= 360; a += 6) pts.push(destination(at[1], at[0], a, km))
-      return pathD(pts.map((p) => [p[0] - (p[0] - at[0] > 180 ? 360 : 0), p[1]] as LonLat)) + 'Z'
-    })
-    const ticks = [0, 90, 180, 270].map((b) => pathD([destination(at[1], at[0], b, 10.6), destination(at[1], at[0], b, 13)])).join('')
-    return { circles, ticks }
-  }, [journey])
-
-  const ghostD = useMemo(() => (journey ? journey.legs.map((l) => pathD(l.coords)) : []), [journey])
   const pins: Pin[] = useMemo(() => journey?.pins ?? [{ id: 'home', at: [home.lon, home.lat], label: home.name, kind: 'home' }], [journey, home])
+  const legs = useMemo(() => journey?.legs ?? [], [journey])
 
-  // The animation loop.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = root.current
-    const pl = plane.current
-    if (!el || !pl) return
+    if (!el) return
     let raf = 0
     let alive = true
-    const tl = journey ? timeline(journey) : null
     let W = el.clientWidth
     let H = el.clientHeight
     const pad = padding
+    cbs.current.onMissing?.(legs.filter((l) => l.geometry === 'missing').length)
 
-    const viewCenter = () => ({ x: pad.left + (W - pad.left - pad.right) / 2, y: pad.top + (H - pad.top - pad.bottom) / 2 })
-    const viewW = () => Math.max(120, W - pad.left - pad.right)
-    const viewH = () => Math.max(120, H - pad.top - pad.bottom)
-
-    const fit = (pts: LonLat[]): Cam => {
-      const xs = pts.map((p) => proj(p))
-      const minX = Math.min(...xs.map((p) => p[0]))
-      const maxX = Math.max(...xs.map((p) => p[0]))
-      const minY = Math.min(...xs.map((p) => p[1]))
-      const maxY = Math.max(...xs.map((p) => p[1]))
-      const bw = Math.max(maxX - minX, 0.05)
-      const bh = Math.max(maxY - minY, 0.05)
-      const s = Math.min(viewW() / bw, viewH() / bh) * 0.78
-      return { x: (minX + maxX) / 2, y: (minY + maxY) / 2, ls: Math.log(s), tilt: 0 }
-    }
-    const spanCam = (at: LonLat, km: number, tilt: number): Cam => {
-      const [x, y] = proj(at)
-      const unitKm = KM_PER_DEG * Math.cos(at[1] / DEG)
-      const s = viewW() / Math.max(0.002, km / Math.max(1e-3, unitKm))
-      return { x, y, ls: Math.log(s), tilt }
-    }
-
-    const all = journey ? journeyCoords(journey) : []
-    const overview = journey ? fit([...all, [home.lon, home.lat]]) : spanCam([home.lon, home.lat], 1400, 0)
-    const resortAt = journey ? journey.legs[journey.legs.length - 1].to : ([home.lon, home.lat] as LonLat)
-    const finalCam = reduced || !journey ? overview : spanCam(resortAt, APPROACH_SPAN_KM, 48)
-    let cam: Cam = reduced || !journey ? { ...overview } : spanCam([home.lon, home.lat], 140, 0)
-
-    let lastPhase = ''
-    const emit = (phase: 'overview' | 'leg' | 'approach' | 'done', leg: number) => {
-      const k = `${phase}:${leg}`
-      if (k === lastPhase) return
-      lastPhase = k
-      cbs.current.onPhase?.({ phase, leg })
-    }
-
-    const render = (drawn: { leg: number; e: number; vertex: number; point: LonLat | null }, glyph: { at: LonLat; heading: number; kind: 'car' | 'plane' } | null) => {
-      const s = Math.exp(cam.ls)
-      const vc = viewCenter()
-      // Plane coordinates: the plane overscans the viewport.
-      const ox = OVER_X * W + vc.x
-      const oy = OVER_TOP * H + vc.y
-      if (![s, cam.x, cam.y, ox, oy].every(Number.isFinite)) return
-      const tf = `translate(${ox.toFixed(2)} ${oy.toFixed(2)}) scale(${s.toFixed(6)}) translate(${(-cam.x).toFixed(5)} ${(-cam.y).toFixed(5)})`
-      worlds.current[0]?.setAttribute('transform', tf)
-      pl.style.transform = `rotateX(${cam.tilt.toFixed(2)}deg)`
-      // Flat overlay positions: anchors inside the tilted plane are read back after layout, so labels sit exactly
-      // where the browser projected the point (no hand-rolled perspective maths to drift).
-      const anchorKeys: { key: string; at: LonLat }[] = [...pins.map((p) => ({ key: `pin:${p.id}`, at: p.at })), ...rings.map((r, i) => ({ key: `ring:${i}`, at: r.labelAt }))]
-      const flat = new Map<string, readonly [number, number]>()
-      const toScreen = (p: LonLat) => {
-        const [x, y] = proj(p)
-        return [(x - cam.x) * s + ox, (y - cam.y) * s + oy] as const
-      }
-      for (const a of anchorKeys) {
-        const n = anchorEls.current.get(a.key)
-        if (!n) continue
-        const [x, y] = toScreen(a.at)
-        n.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
-      }
-      const rootBox = el.getBoundingClientRect()
-      for (const a of anchorKeys) {
-        const n = anchorEls.current.get(a.key)
-        if (!n) continue
-        const r = n.getBoundingClientRect()
-        flat.set(a.key, [r.left - rootBox.left, r.top - rootBox.top])
-      }
-      const toFlat = (key: string) => flat.get(key) ?? ([-9999, -9999] as const)
-      // Graticule level opacity by on-screen spacing.
-      const steps = [10, 1, 0.1]
-      steps.forEach((st, i) => {
-        const px = st * s
-        const o = px < 14 ? 0 : px < 40 ? (px - 14) / 26 : px > 900 ? Math.max(0, 1 - (px - 900) / 600) : 1
-        gratEls.current[i]?.setAttribute('opacity', o.toFixed(3))
+    const sizes = () =>
+      pins.map((p) => {
+        const lab = pinEls.current.get(p.id)?.querySelector<HTMLElement>('[data-pin-label]')
+        return { w: lab?.offsetWidth || 80, h: lab?.offsetHeight || 26 }
       })
-      // Resort reticle: fades in once its 5 km ring is large on screen.
-      if (reticleEl.current && journey) {
-        const at = journey.legs[journey.legs.length - 1].to
-        const r5 = (5 / (KM_PER_DEG * Math.cos(at[1] / DEG))) * s
-        reticleEl.current.setAttribute('opacity', Math.max(0, Math.min(1, (r5 - 40) / 80)).toFixed(3))
+
+    // Frame: every journey coordinate inside the padded view, inset so a label above or beside any pin still fits.
+    const fit = (): { cam: Cam; view: Rect } => {
+      const sz = sizes()
+      const wMax = Math.max(60, ...sz.map((s) => s.w))
+      const hMax = Math.max(22, ...sz.map((s) => s.h))
+      const view: Rect = { x: pad.left, y: pad.top, w: Math.max(120, W - pad.left - pad.right), h: Math.max(120, H - pad.top - pad.bottom) }
+      const ix = Math.min(wMax / 2 + 10, view.w * 0.3)
+      const it = Math.min(hMax + 18, view.h * 0.3)
+      const ib = Math.min(18, view.h * 0.1)
+      const inner = { x: view.x + ix, y: view.y + it, w: view.w - 2 * ix, h: view.h - it - ib }
+      const cx = inner.x + inner.w / 2
+      const cy = inner.y + inner.h / 2
+      if (!journey) {
+        const unit = KM_PER_DEG * Math.cos(home.lat / DEG)
+        return { cam: { x: home.lon, y: projY(home.lat), s: inner.w / (1400 / unit), cx, cy }, view }
       }
-      // Ring labels.
+      const pts = [...journeyCoords(journey), ...pins.map((p) => p.at)]
+      const xs = pts.map((p) => p[0])
+      const ys = pts.map((p) => projY(p[1]))
+      const minX = Math.min(...xs)
+      const maxX = Math.max(...xs)
+      const minY = Math.min(...ys)
+      const maxY = Math.max(...ys)
+      const lat = (pins[0]?.at[1] ?? home.lat) / DEG
+      // Never closer than ~12 km across the view, so a short drive still shows its surroundings.
+      const minSpan = 12 / (KM_PER_DEG * Math.cos(lat))
+      const bw = Math.max(maxX - minX, minSpan)
+      const bh = Math.max(maxY - minY, minSpan * (inner.h / inner.w))
+      const s = Math.min(inner.w / bw, inner.h / bh)
+      return { cam: { x: (minX + maxX) / 2, y: (minY + maxY) / 2, s, cx, cy }, view }
+    }
+
+    const screenOf = (cam: Cam) => {
+      const tx = cam.cx - cam.x * cam.s
+      const ty = cam.cy - cam.y * cam.s
+      return (p: LonLat) => [p[0] * cam.s + tx, projY(p[1]) * cam.s + ty] as const
+    }
+
+    let target = fit()
+
+    // Labels: pins collision-avoided against each other and every pin; ring and city labels only where they stay clear.
+    const placeAll = () => {
+      const { cam, view } = target
+      const at = screenOf(cam)
+      const sz = sizes()
+      const order = pins.map((p, i) => ({ p, i })).sort((a, b) => PIN_PRIORITY[a.p.kind] - PIN_PRIORITY[b.p.kind])
+      const items = order.map(({ p, i }) => {
+        const [x, y] = at(p.at)
+        return { id: p.id, x, y, w: sz[i].w, h: sz[i].h, gap: PIN_GAP[p.kind] }
+      })
+      const placed = placeLabels(items, view, { pinRadius: 10, margin: 5 })
+      for (const q of placed) {
+        const lab = pinEls.current.get(q.id)?.querySelector<HTMLElement>('[data-pin-label]')
+        if (lab) lab.style.transform = `translate(${q.dx}px, ${q.dy}px)`
+      }
+      const taken: Rect[] = [...placed.map((q) => q.rect), ...items.map((it) => ({ x: it.x - 12, y: it.y - 12, w: 24, h: 24 }))]
+      const clear = (r: Rect) =>
+        r.x >= view.x && r.y >= view.y && r.x + r.w <= view.x + view.w && r.y + r.h <= view.y + view.h && !taken.some((t) => overlapArea(t, { x: r.x - 6, y: r.y - 4, w: r.w + 12, h: r.h + 8 }) > 0)
+      // Range ring labels.
+      const homeCos = Math.cos(home.lat / DEG)
       rings.forEach((r, i) => {
         const lab = ringLabelEls.current[i]
         if (!lab) return
-        const [x, y] = toFlat(`ring:${i}`)
-        const rpx = (r.km / (KM_PER_DEG * Math.cos(home.lat / DEG))) * s
-        const vis = rpx > 50 && rpx < Math.max(W, H) * 1.2
-        lab.style.opacity = vis ? '1' : '0'
-        lab.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -50%)`
+        const [x, y] = at(r.labelAt)
+        const rpx = (r.km / (KM_PER_DEG * homeCos)) * cam.s
+        const w = lab.offsetWidth
+        const h = lab.offsetHeight
+        const rect = { x: Math.round(x - w / 2), y: Math.round(y - h / 2), w, h }
+        const ok = rpx > 60 && rpx < Math.max(W, H) * 1.1 && clear(rect)
+        if (ok) taken.push(rect)
+        lab.style.opacity = ok ? '1' : '0'
       })
-      // Drawn route.
-      if (journey) {
-        journey.legs.forEach((leg, i) => {
-          let d = ''
-          // Route lines are drawn in plane pixels (not world units) so dashes and widths stay exact at any zoom.
-          const px = (pts: readonly LonLat[]) =>
-            pts
-              .map((p, k) => {
-                const [x, y] = toScreen(p)
-                return `${k ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`
-              })
-              .join('')
-          if (i < drawn.leg) d = px(leg.coords)
-          else if (i === drawn.leg && drawn.point) d = px([...leg.coords.slice(0, drawn.vertex), drawn.point])
-          legPaths.current[i]?.setAttribute('d', d || 'M0 0')
-          glowPaths.current[i]?.setAttribute('d', d || 'M0 0')
-          legPaths.current[i]?.setAttribute('visibility', d ? 'visible' : 'hidden')
-          glowPaths.current[i]?.setAttribute('visibility', d ? 'visible' : 'hidden')
-        })
+      // City names near the journey (largest first), right of their dot, skipping any that would crowd a label.
+      const pool = cityEls.current
+      for (const c of pool) {
+        if (!c) continue
+        c.style.opacity = '0'
+        c.dataset.lon = ''
       }
-      // Pins (counter-rotated so they stand up on the tilted plane).
+      if (!geo) return
+      const spanKm = (view.w / cam.s) * KM_PER_DEG * Math.cos((pins[0]?.at[1] ?? home.lat) / DEG)
+      const maxZ = spanKm > 4000 ? 3 : spanKm > 1500 ? 4 : spanKm > 600 ? 5 : spanKm > 200 ? 6 : spanKm > 80 ? 7 : 9
+      const near = items.map((it) => [it.x, it.y] as const)
+      const lonRef = (Math.min(...pins.map((p) => p.at[0])) + Math.max(...pins.map((p) => p.at[0]))) / 2
+      let k = 0
+      for (const c of geo.cities) {
+        if (k >= CITY_POOL) break
+        if (c.z > maxZ) continue
+        let lon = c.ll[0]
+        while (lon - lonRef > 180) lon -= 360
+        while (lon - lonRef < -180) lon += 360
+        const [x, y] = at([lon, c.ll[1]])
+        if (x < view.x || x > view.x + view.w || y < view.y || y > view.y + view.h) continue
+        if (near.some(([px, py]) => Math.hypot(px - x, py - y) < 26)) continue
+        const node = pool[k]
+        if (!node) break
+        const name = node.querySelector<HTMLElement>('[data-city-name]')
+        if (name) name.textContent = c.n
+        const w = node.offsetWidth
+        const h = node.offsetHeight
+        const rect = { x: Math.round(x - 3), y: Math.round(y - h / 2), w, h }
+        if (!clear(rect)) continue
+        taken.push(rect)
+        node.dataset.lon = String(lon)
+        node.dataset.lat = String(c.ll[1])
+        node.style.opacity = '1'
+        k++
+      }
+    }
+
+    const render = (cam: Cam, draw: number, glyph: boolean) => {
+      const at = screenOf(cam)
+      const tx = cam.cx - cam.x * cam.s
+      const ty = cam.cy - cam.y * cam.s
+      if (![tx, ty, cam.s].every(Number.isFinite)) return
+      world.current?.setAttribute('transform', `translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${cam.s.toFixed(6)})`)
+      // Graticule levels fade by on-screen spacing; borders only once countries are big enough to read.
+      ;[10, 1, 0.1].forEach((st, i) => {
+        const px = st * cam.s
+        const o = px < 16 ? 0 : px < 44 ? (px - 16) / 28 : px > 900 ? Math.max(0, 1 - (px - 900) / 600) : 1
+        gratEls.current[i]?.setAttribute('opacity', (o * (i ? 0.7 : 1)).toFixed(3))
+      })
+      bordersEl.current?.setAttribute('opacity', Math.max(0, Math.min(1, (cam.s - 4) / 6)).toFixed(3))
+      const px = (pts: readonly LonLat[]) => {
+        let d = ''
+        for (let k = 0; k < pts.length; k++) {
+          const [x, y] = at(pts[k])
+          d += `${k ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`
+        }
+        return d
+      }
+      let car: { x: number; y: number; heading: number } | null = null
+      legs.forEach((leg, i) => {
+        const line = lineEls.current[i]
+        const glow = glowEls.current[i]
+        const ghost = ghostEls.current[i]
+        const d = leg.geometry === 'missing' ? 'M0 0' : px(leg.coords)
+        line?.setAttribute('d', d)
+        glow?.setAttribute('d', d)
+        ghost?.setAttribute('d', d)
+        if (leg.geometry !== 'road' || !line || !glow) return
+        if (journey?.mode === 'drive' && draw < 1) {
+          const L = line.getTotalLength()
+          const shown = L * draw
+          const dash = `${shown.toFixed(1)} ${(L + 8).toFixed(1)}`
+          line.setAttribute('stroke-dasharray', dash)
+          glow.setAttribute('stroke-dasharray', dash)
+          if (glyph && L > 0) {
+            const step = Math.max(2, L * 0.01)
+            const p = line.getPointAtLength(shown)
+            const q = line.getPointAtLength(Math.min(L, shown + step))
+            const b = line.getPointAtLength(Math.max(0, shown - step))
+            car = { x: p.x, y: p.y, heading: Math.atan2(q.x - b.x, -(q.y - b.y)) * DEG }
+          }
+        } else {
+          line.removeAttribute('stroke-dasharray')
+          glow.removeAttribute('stroke-dasharray')
+        }
+      })
+      // Pins and labels in whole pixels, so text stays crisp.
       for (const p of pins) {
         const node = pinEls.current.get(p.id)
         if (!node) continue
-        const [x, y] = toFlat(`pin:${p.id}`)
-        node.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
-        node.style.visibility = x < -200 || y < -200 || x > W + 200 || y > H + 200 ? 'hidden' : 'visible'
+        const [x, y] = at(p.at)
+        node.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`
       }
-      // Radar sweep at home.
+      rings.forEach((r, i) => {
+        const lab = ringLabelEls.current[i]
+        if (!lab) return
+        const [x, y] = at(r.labelAt)
+        lab.style.transform = `translate3d(${Math.round(x - lab.offsetWidth / 2)}px, ${Math.round(y - lab.offsetHeight / 2)}px, 0)`
+      })
+      for (const c of cityEls.current) {
+        if (!c?.dataset.lon) continue
+        const [x, y] = at([Number(c.dataset.lon), Number(c.dataset.lat)])
+        c.style.transform = `translate3d(${Math.round(x - 3)}px, ${Math.round(y - c.offsetHeight / 2)}px, 0)`
+      }
       if (sweepEl.current) {
-        const [x, y] = toScreen([home.lon, home.lat])
+        const [x, y] = at([home.lon, home.lat])
         sweepEl.current.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
       }
-      // Glyph.
       const g = glyphEl.current
       if (g) {
-        if (glyph) {
-          const [x, y] = toScreen(glyph.at)
+        const c = car as { x: number; y: number; heading: number } | null
+        if (c) {
           g.style.opacity = '1'
-          g.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -50%) rotate(${glyph.heading.toFixed(1)}deg)`
-          g.dataset.kind = glyph.kind
+          g.style.transform = `translate3d(${c.x.toFixed(1)}px, ${c.y.toFixed(1)}px, 0) translate(-50%, -50%) rotate(${c.heading.toFixed(1)}deg)`
         } else g.style.opacity = '0'
       }
     }
 
-    const screenHeading = (a: LonLat, b: LonLat) => {
-      const [x1, y1] = proj(a)
-      const [x2, y2] = proj(b)
-      return Math.atan2(x2 - x1, -(y2 - y1)) * DEG
-    }
+    const road = legs.find((l) => l.geometry === 'road')
+    const animate = !reduced && journey?.mode === 'drive' && !!road
+    const drawMs = road ? roadDrawMs(road.km) : 0
+    const INTRO = 650
+    const DELAY = 260
+    let finished = !animate
 
-    if (reduced || !tl || !journey) {
-      cam = { ...finalCam }
-      // Re-render for a few frames: labels are placed from laid-out anchors, and the first layout may not be final.
-      let n = 0
-      const settle = () => {
+    const settle = () => {
+      target = fit()
+      placeAll()
+    }
+    settle()
+
+    if (!animate) {
+      render(target.cam, 1, false)
+      cbs.current.onProgress?.(1)
+    } else {
+      const from: Cam = { ...target.cam, s: target.cam.s * 0.84 }
+      const t0 = performance.now()
+      cbs.current.onProgress?.(0)
+      const step = (now: number) => {
         if (!alive) return
-        render({ leg: journey ? journey.legs.length : 0, e: 1, vertex: 0, point: null }, null)
-        if (++n < 30) raf = requestAnimationFrame(settle)
+        const t = now - t0
+        const z = easeOut(t / INTRO)
+        const cam: Cam = { ...target.cam, s: from.s + (target.cam.s - from.s) * z }
+        const f = Math.max(0, Math.min(1, (t - DELAY) / drawMs))
+        render(cam, easeInOut(f), f > 0 && f < 1)
+        cbs.current.onProgress?.(f)
+        if (t < Math.max(INTRO, DELAY + drawMs)) raf = requestAnimationFrame(step)
+        else {
+          finished = true
+          render(target.cam, 1, false)
+        }
       }
-      settle()
-      emit(journey ? 'done' : 'overview', journey ? journey.legs.length - 1 : 0)
-      if (journey) for (let i = 0; i < journey.legs.length; i++) cbs.current.onProgress?.(i, 1)
-    }
-
-    const t0 = performance.now()
-    let prev = t0
-    const step = (now: number) => {
-      if (!alive || !tl || !journey) return
-      const dt = Math.min(64, now - prev)
-      prev = now
-      const t = now - t0
-      const ph = phaseAt(tl, t)
-      let target: Cam
-      let drawn = { leg: 0, e: 0, vertex: 0, point: null as LonLat | null }
-      let glyph: { at: LonLat; heading: number; kind: 'car' | 'plane' } | null = null
-      let tau = 420
-      if (ph.phase === 'overview') {
-        target = overview
-        emit('overview', 0)
-        tau = 380
-      } else if (ph.phase === 'leg') {
-        const L = tl.legs[ph.index]
-        const leg = L.leg
-        const span = followSpanKm(leg, ph.e)
-        // Lead the camera slightly ahead of the glyph.
-        const ahead = phaseAt(tl, Math.min(L.start + L.dur - 1, t + 220))
-        const lead = ahead.phase === 'leg' && ahead.index === ph.index ? ahead.point : ph.point
-        const center: LonLat = [ph.point[0] * 0.6 + lead[0] * 0.4, ph.point[1] * 0.6 + lead[1] * 0.4]
-        target = spanCam(center, span, leg.kind === 'air' ? 22 + 10 * Math.sin(Math.PI * ph.e) : 34)
-        // Ease from the overview into the first follow.
-        // Ease in from the overview, then lock onto the glyph (a lagging camera loses fast planes).
-        const blend = ph.index === 0 ? Math.min(1, (t - L.start) / 1100) : 1
-        tau = 520 + (60 - 520) * blend
-        drawn = { leg: ph.index, e: ph.e, vertex: ph.vertex, point: ph.point }
-        const back = phaseAt(tl, Math.max(L.start, t - 120))
-        const from = back.phase === 'leg' && back.index === ph.index ? back.point : leg.coords[0]
-        const to = ahead.phase === 'leg' && ahead.index === ph.index ? ahead.point : leg.coords[Math.min(leg.coords.length - 1, 1)]
-        const heading = screenHeading(from[0] === to[0] && from[1] === to[1] ? leg.coords[0] : from, from[0] === to[0] && from[1] === to[1] ? leg.coords[leg.coords.length - 1] : to)
-        glyph = { at: ph.point, heading, kind: leg.kind === 'air' ? 'plane' : 'car' }
-        emit('leg', ph.index)
-        cbs.current.onProgress?.(ph.index, ph.f)
-        for (let i = 0; i < ph.index; i++) cbs.current.onProgress?.(i, 1)
-      } else {
-        target = finalCam
-        tau = 650
-        drawn = { leg: journey.legs.length, e: 1, vertex: 0, point: null }
-        for (let i = 0; i < journey.legs.length; i++) cbs.current.onProgress?.(i, 1)
-        emit(ph.phase === 'approach' ? 'approach' : 'done', journey.legs.length - 1)
-      }
-      const k = 1 - Math.exp(-dt / tau)
-      const ks = 1 - Math.exp(-dt / Math.max(260, tau * 1.25))
-      cam = {
-        x: cam.x + (target.x - cam.x) * k,
-        y: cam.y + (target.y - cam.y) * k,
-        ls: cam.ls + (target.ls - cam.ls) * ks,
-        tilt: cam.tilt + (target.tilt - cam.tilt) * (1 - Math.exp(-dt / 600)),
-      }
-      render(drawn, glyph)
-      if (ph.phase === 'done' && Math.abs(cam.ls - target.ls) < 0.002 && Math.abs(cam.tilt - target.tilt) < 0.05) return
-      raf = requestAnimationFrame(step)
-    }
-    if (!reduced && tl && journey) {
-      render({ leg: 0, e: 0, vertex: 0, point: null }, null)
+      render(from, 0, false)
       raf = requestAnimationFrame(step)
     }
 
-    const ro = new ResizeObserver(() => {
+    // Re-frame on resize and once web fonts settle (label sizes change).
+    const reframe = () => {
+      if (!alive) return
       W = el.clientWidth
       H = el.clientHeight
-      if (reduced || !tl) {
-        const fresh = journey ? fit([...all, [home.lon, home.lat]]) : spanCam([home.lon, home.lat], 1400, 0)
-        cam = fresh
-        render({ leg: journey ? journey.legs.length : 0, e: 1, vertex: 0, point: null }, null)
-      }
-    })
+      settle()
+      if (finished) render(target.cam, 1, false)
+    }
+    const ro = new ResizeObserver(reframe)
     ro.observe(el)
+    void document.fonts?.ready.then(reframe)
     return () => {
       alive = false
       cancelAnimationFrame(raf)
       ro.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [journey, replay, reduced, padding.left, padding.right, padding.top, padding.bottom, home.lat, home.lon, rings])
+  }, [journey, replay, reduced, padding.left, padding.right, padding.top, padding.bottom, home.lat, home.lon, rings, geo])
 
   return (
-    <div ref={root} className={cn('absolute inset-0 overflow-hidden bg-surface-2', className)} style={{ perspective: `${PERSPECTIVE}px`, perspectiveOrigin: `50% ${PERSPECTIVE_Y * 100}%` }} aria-hidden>
-      {/* Sky wash behind the plane (visible when it tilts). */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,var(--sky-1),var(--sky-3))]" />
-      <div
-        ref={plane}
-        className="absolute"
-        style={{
-          left: `${-OVER_X * 100}%`,
-          right: `${-OVER_X * 100}%`,
-          top: `${-OVER_TOP * 100}%`,
-          bottom: `${-OVER_BOTTOM * 100}%`,
-          transformStyle: 'preserve-3d',
-          transformOrigin: `50% ${ORIGIN_Y * 100}%`,
-        }}
-      >
-        <div className="absolute inset-0 bg-surface-2" />
-        <svg className="absolute inset-0 h-full w-full overflow-visible">
-          <g ref={(n) => void (worlds.current[0] = n)}>
-            <g ref={(n) => void (gratEls.current[0] = n)}>
-              <path d={graticule[0]} fill="none" stroke="var(--topo-line-strong)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
-            </g>
-            <g ref={(n) => void (gratEls.current[1] = n)}>
-              <path d={graticule[1]} fill="none" stroke="var(--topo-line)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
-            </g>
-            <g ref={(n) => void (gratEls.current[2] = n)}>
-              <path d={graticule[2]} fill="none" stroke="var(--topo-line)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
-            </g>
-            {rings.map((r) => (
-              <path key={r.v} d={r.d} fill="none" stroke="var(--teal)" strokeOpacity={0.28} strokeWidth={1} strokeDasharray="2 5" vectorEffect="non-scaling-stroke" />
-            ))}
-            <path d={contextD} stroke="var(--teal)" strokeOpacity={0.4} strokeWidth={5} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            {reticle ? (
-              <g ref={(n) => void (reticleEl.current = n)} opacity={0}>
-                {reticle.circles.map((d, i) => (
-                  <path key={i} d={d} fill="none" stroke="var(--teal)" strokeOpacity={0.55 - i * 0.12} strokeWidth={1.25} strokeDasharray={i === 2 ? '3 4' : undefined} vectorEffect="non-scaling-stroke" />
-                ))}
-                <path d={reticle.ticks} stroke="var(--teal)" strokeWidth={2} vectorEffect="non-scaling-stroke" />
-              </g>
-            ) : null}
-            {ghostD.map((d, i) => (
-              <path key={i} d={d} fill="none" stroke="var(--ink-3)" strokeOpacity={0.35} strokeWidth={1.5} strokeDasharray="1 6" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            ))}
-          </g>
-        </svg>
-        {/* Glow: a blurred copy of the drawn route (screen-space blur on the svg element). */}
-        <svg className="absolute inset-0 h-full w-full overflow-visible [filter:blur(7px)]">
-          <g>
-            {journey?.legs.map((l, i) => (
-              <path
-                key={i}
-                ref={(n) => void (glowPaths.current[i] = n)}
-                d="M0 0"
-                visibility="hidden"
-                fill="none"
-                stroke="var(--teal)"
-                strokeOpacity={0.75}
-                strokeWidth={l.kind === 'air' ? 9 : 11}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            ))}
-          </g>
-        </svg>
-        <svg className="absolute inset-0 h-full w-full overflow-visible">
-          <g>
-            {journey?.legs.map((l, i) => (
-              <path
-                key={i}
-                ref={(n) => void (legPaths.current[i] = n)}
-                d="M0 0"
-                visibility="hidden"
-                fill="none"
-                stroke="var(--teal)"
-                strokeWidth={l.kind === 'air' ? 3 : 4}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray={l.kind === 'air' ? undefined : '7 7'}
-              />
-            ))}
-          </g>
-        </svg>
+    <div ref={root} className={cn('absolute inset-0 overflow-hidden bg-surface-2', className)} aria-hidden>
+      {/* Water, land and graticule (world units, non-scaling strokes). */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--glacier)_70%,var(--surface-2)),var(--surface-2))]" />
+      <svg className="absolute inset-0 h-full w-full">
+        <g ref={world}>
+          {geo ? <path d={geo.land} fill="color-mix(in srgb, var(--surface) 88%, transparent)" fillRule="evenodd" /> : null}
+          <path ref={(n) => void (gratEls.current[0] = n)} d={graticule[0]} fill="none" stroke="var(--topo-line-strong)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
+          <path ref={(n) => void (gratEls.current[1] = n)} d={graticule[1]} fill="none" stroke="var(--topo-line)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
+          <path ref={(n) => void (gratEls.current[2] = n)} d={graticule[2]} fill="none" stroke="var(--topo-line)" strokeWidth={1} vectorEffect="non-scaling-stroke" />
+          {geo ? (
+            <>
+              <path ref={bordersEl} d={geo.borders} fill="none" stroke="var(--topo-line-strong)" strokeWidth={1} strokeDasharray="3 3" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+              <path d={geo.land} fill="none" stroke="var(--topo-line-strong)" strokeWidth={1.1} vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+            </>
+          ) : null}
+          {rings.map((r) => (
+            <path key={r.v} d={r.d} fill="none" stroke="var(--teal)" strokeOpacity={0.3} strokeWidth={1} strokeDasharray="2 5" vectorEffect="non-scaling-stroke" />
+          ))}
+          <path d={contextD} stroke="var(--teal)" strokeOpacity={0.4} strokeWidth={5} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </g>
+      </svg>
 
-        {/* Zero-size anchors for the flat overlay (see render). */}
-        {[...pins.map((p) => `pin:${p.id}`), ...rings.map((_, i) => `ring:${i}`)].map((key) => (
-          <div
-            key={key}
-            ref={(n) => {
-              if (n) anchorEls.current.set(key, n)
-              else anchorEls.current.delete(key)
-            }}
-            className="pointer-events-none absolute top-0 left-0 size-0"
+      {/* Radar sweep at home (decorative; still under reduced motion). */}
+      <div ref={sweepEl} className="pointer-events-none absolute top-0 left-0">
+        <div
+          style={{ animationDuration: '7s' }}
+          className="absolute -top-[120px] -left-[120px] size-[240px] rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,color-mix(in_srgb,var(--teal)_14%,transparent)_40deg,transparent_70deg)] [mask-image:radial-gradient(circle,#000_55%,transparent_70%)] motion-safe:animate-spin"
+        />
+      </div>
+
+      {/* The journey, in screen pixels: the full road as a faint ghost (drive), a glow, then the road or flight arc. */}
+      <svg className="absolute inset-0 h-full w-full overflow-visible">
+        {legs.map((l, i) => (
+          <path
+            key={i}
+            ref={(n) => void (ghostEls.current[i] = n)}
+            d="M0 0"
+            fill="none"
+            stroke={l.geometry === 'road' && journey?.mode === 'drive' ? 'var(--teal)' : 'none'}
+            strokeOpacity={0.22}
+            strokeWidth={4}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         ))}
-        {/* Radar sweep at home (decorative). */}
-        <div ref={sweepEl} className="pointer-events-none absolute top-0 left-0">
-          <div style={{ animationDuration: '7s' }} className="animate-spin absolute -top-[140px] -left-[140px] size-[280px] rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,color-mix(in_srgb,var(--teal)_14%,transparent)_40deg,transparent_70deg)] [mask-image:radial-gradient(circle,#000_55%,transparent_70%)]" />
-        </div>
+      </svg>
+      <svg className="absolute inset-0 h-full w-full overflow-visible [filter:blur(6px)]">
+        {legs.map((l, i) => (
+          <path
+            key={i}
+            ref={(n) => void (glowEls.current[i] = n)}
+            d="M0 0"
+            fill="none"
+            stroke={l.geometry === 'road' ? 'var(--teal)' : 'none'}
+            strokeOpacity={0.6}
+            strokeWidth={10}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        ))}
+      </svg>
+      <svg className="absolute inset-0 h-full w-full overflow-visible">
+        {legs.map((l, i) => (
+          <path
+            key={i}
+            ref={(n) => void (lineEls.current[i] = n)}
+            d="M0 0"
+            fill="none"
+            stroke={l.geometry === 'missing' ? 'none' : 'var(--teal)'}
+            strokeWidth={l.geometry === 'arc' ? 2.25 : 4}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray={l.geometry === 'arc' ? '2 7' : undefined}
+          />
+        ))}
+      </svg>
 
-        <div ref={glyphEl} className="pointer-events-none absolute top-0 left-0 opacity-0 [&[data-kind=car]_.g-plane]:hidden [&[data-kind=plane]_.g-car]:hidden">
-          <Car className="g-car" />
-          <Plane className="g-plane" />
-        </div>
+      <div ref={glyphEl} className="pointer-events-none absolute top-0 left-0 opacity-0 transition-opacity duration-200">
+        <Car />
       </div>
-      {/* Flat overlay: labels stay upright and crisp while the plane tilts. */}
+
+      {/* Labels: city names, range rings, then pins on top. */}
       <div className="pointer-events-none absolute inset-0">
-          {rings.map((r, i) => (
-            <span
-              key={r.v}
-              ref={(n) => void (ringLabelEls.current[i] = n)}
-              className="hud pointer-events-none absolute top-0 left-0 rounded-full bg-surface-2/80 px-1.5 text-[10.5px] tracking-[0.14em] whitespace-nowrap text-teal opacity-0 transition-opacity duration-300"
-            >
-              {r.label}
-            </span>
-          ))}
-
-          {pins.map((p) => (
-            <div
-              key={p.id}
-              ref={(n) => {
-                if (n) pinEls.current.set(p.id, n)
-                else pinEls.current.delete(p.id)
-              }}
-              className="pointer-events-none absolute top-0 left-0"
-              style={{ transformOrigin: '0 0' }}
-            >
-              <PinView pin={p} />
-            </div>
-          ))}
-
+        {Array.from({ length: CITY_POOL }, (_, i) => (
+          <span key={`c${i}`} ref={(n) => void (cityEls.current[i] = n)} className="absolute top-0 left-0 flex items-center gap-1.5 whitespace-nowrap opacity-0 transition-opacity duration-300">
+            <i className="block size-1.5 shrink-0 rounded-full bg-ink-3" />
+            <span data-city-name className="rounded-[6px] bg-surface-2/70 px-1 text-[12px] leading-[1.35] text-ink-2" />
+          </span>
+        ))}
+        {rings.map((r, i) => (
+          <span
+            key={r.v}
+            ref={(n) => void (ringLabelEls.current[i] = n)}
+            className="hud absolute top-0 left-0 rounded-full bg-surface-2/80 px-1.5 text-[11px] tracking-[0.12em] whitespace-nowrap text-teal opacity-0 transition-opacity duration-300"
+          >
+            {r.label}
+          </span>
+        ))}
+        {pins.map((p) => (
+          <div
+            key={`${journey?.key ?? 'home'}:${p.id}`}
+            ref={(n) => {
+              if (n) pinEls.current.set(p.id, n)
+              else if (pinEls.current.get(p.id) && !pinEls.current.get(p.id)!.isConnected) pinEls.current.delete(p.id)
+            }}
+            className="absolute top-0 left-0"
+          >
+            <PinView pin={p} />
+          </div>
+        ))}
       </div>
       {/* HUD vignette and fine scanlines. */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_55%_45%,transparent_55%,color-mix(in_srgb,var(--canvas)_70%,transparent))]" />
-      <div className="pointer-events-none absolute inset-0 opacity-40 [background:repeating-linear-gradient(0deg,transparent_0_3px,var(--topo-line)_3px_4px)]" />
-    </div>
-  )
-}
-
-export function PinView({ pin }: { pin: Pin }) {
-  if (pin.kind === 'resort') {
-    return (
-      <div className="flex -translate-x-1/2 -translate-y-[calc(100%-7px)] flex-col items-center gap-1.5">
-        <span className="flex flex-col items-center rounded-[14px] bg-ink-chip px-3 py-1.5 whitespace-nowrap text-on-ink-chip shadow-overlay">
-          <span className="text-[12.5px] leading-tight font-semibold">{pin.label}</span>
-          {pin.sub ? <span className="hud text-[9.5px] tracking-[0.1em] text-on-ink-chip-2">{pin.sub}</span> : null}
-        </span>
-        <span className="relative block size-3.5">
-          <span className="piste-beacon-ring absolute inset-0 rounded-full border-[1.5px] border-teal" style={{ animation: 'piste-beacon 2.2s ease-out infinite' }} />
-          <span className="piste-beacon-ring absolute inset-0 rounded-full border-[1.5px] border-teal" style={{ animation: 'piste-beacon 2.2s ease-out 1.1s infinite' }} />
-          <span className="absolute inset-[2px] rounded-full bg-teal shadow-[0_0_0_2px_var(--surface),0_0_14px_var(--teal)]" />
-        </span>
-      </div>
-    )
-  }
-  return (
-    <div className="flex -translate-x-1/2 -translate-y-[calc(100%-6px)] flex-col items-center gap-1.5">
-      <span
-        className={cn(
-          'glass-strong rounded-[12px] px-2.5 py-1 whitespace-nowrap text-ink',
-          pin.kind === 'airport' ? 'hud text-[11px]' : 'text-[12px] font-medium',
-        )}
-      >
-        {pin.label}
-      </span>
-      {pin.kind === 'home' ? (
-        <span className="block size-3 rounded-full border-[2.5px] border-ink bg-surface shadow-lift" />
-      ) : (
-        <span className="block size-2.5 rotate-45 border-2 border-teal bg-surface" />
-      )}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_55%_45%,transparent_60%,color-mix(in_srgb,var(--canvas)_60%,transparent))]" />
+      <div className="pointer-events-none absolute inset-0 opacity-30 [background:repeating-linear-gradient(0deg,transparent_0_3px,var(--topo-line)_3px_4px)]" />
     </div>
   )
 }

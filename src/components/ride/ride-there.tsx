@@ -10,6 +10,7 @@ import { useCallback, useId, useMemo, useState, useSyncExternalStore, useTransit
 import { useRouter } from 'next/navigation'
 import { motion, useReducedMotion } from 'motion/react'
 import type { RideIndex, RidePlan } from '@/lib/data/ride'
+import { DEFAULT_UNITS } from '@/lib/domain/types'
 import { cn } from '@/lib/ui/cn'
 import { JourneyMap } from './journey-map'
 import { RideSheet } from './ride-sheet'
@@ -81,7 +82,8 @@ export function RideThere({ plan, index = null, initial, home, className }: Ride
     [plan, sel, syncUrl],
   )
 
-  const padding = wide ? { top: 120, right: 72, bottom: 72, left: 488 } : { top: 110, right: 36, bottom: 64, left: 36 }
+  // The side panel covers the left 456px from 1024px; the map measures its own overlays for top and bottom.
+  const padding = useMemo(() => (wide ? { top: 24, right: 32, bottom: 24, left: 488 } : { top: 16, right: 16, bottom: 36, left: 16 }), [wide])
   const context = useMemo(() => (index ? index.resorts.map((r) => ({ lat: r.lat, lon: r.lon })) : []), [index])
   const homeName = plan?.home.name ?? home.name
 
@@ -101,7 +103,7 @@ export function RideThere({ plan, index = null, initial, home, className }: Ride
           replay={replay}
           reduced={reduced}
           padding={padding}
-          distanceUnit={plan?.units.distance === 'km' ? 'km' : 'mi'}
+          units={plan?.units ?? DEFAULT_UNITS}
           resortName={plan?.resort.short ?? null}
           compact={!wide}
           describedBy={journey ? listId : undefined}

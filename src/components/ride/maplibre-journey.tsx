@@ -1,22 +1,27 @@
 'use client'
 /**
- * Online journey map (MapLibre GL + OpenFreeMap vector tiles, free and keyless). Draws the journey with a glowing line
- * while a car / plane glyph glides along it; the camera follows with pitch and bearing, zooms out mid-leg and ends on
- * a tilted 3D-terrain approach (open Terrarium elevation tiles). A drive leg asks the public OSRM demo router for road
- * geometry; when that fails the line stays straight and dashed and the badge says "approximate route".
+ * Online journey map (MapLibre GL + OpenFreeMap vector tiles, free and keyless, with a soft hillshade from open
+ * Terrarium elevation tiles). The camera frames every pin and label in the padded view once; pin labels are
+ * collision-avoided (label-layout.ts) and re-laid out when the user pans or zooms.
+ *
+ * Roads come from the bundled road geometry. A road leg without it asks the public OSRM router; if that fails too,
+ * nothing is drawn for it (never a straight line) and `onMissing` lets the frame link to directions. A drive draws in
+ * along its road once with a small car; a flight is a static dashed great-circle arc, never animated.
  *
  * If the style cannot be fetched quickly (offline, blocked), `onFail` is called and the caller shows the schematic.
- * Reduced motion: the finished journey is drawn at once and framed, with no camera flights.
+ * Reduced motion: everything is drawn at once.
  */
 import { useEffect, useRef, useState } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
+import { flushSync } from 'react-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import type { GeoJSONSource, Map as MlMap, Marker as MlMarker } from 'maplibre-gl'
-import { angleDelta, bearingDeg, cumulativeKm, easeInOut, legDurationMs, pathKm, pointAlong, type LonLat } from '@/lib/domain/journey'
+import { bearingDeg, cumulativeKm, pathKm, pointAlong, roadDrawMs, type LonLat } from '@/lib/domain/journey'
 import type { Journey, Leg } from './journey-model'
-import { followSpanKm } from './camera'
-import { Car, Plane } from './glyphs'
-import { PinView, type JourneyCallbacks, type MapPadding } from './schematic-journey'
+import { placeLabels } from './label-layout'
+import { Car } from './glyphs'
+import { PIN_GAP, PIN_PRIORITY, PinView } from './pin-view'
+import type { JourneyCallbacks, MapPadding } from './schematic-journey'
 
 const LIGHT_STYLE = 'https://tiles.openfreemap.org/styles/positron'
 const DARK_STYLE = 'https://tiles.openfreemap.org/styles/dark'
@@ -31,8 +36,6 @@ export interface MapLibreJourneyProps extends JourneyCallbacks {
   reduced: boolean
   padding: MapPadding
   onFail: (reason: string) => void
-  /** Status line for the map badge (approximate route, road geometry, illustrative flight). */
-  onBadge: (text: string) => void
 }
 
 async function fetchJson(url: string, ms: number): Promise<unknown> {
@@ -67,7 +70,8 @@ function thin(coords: LonLat[], max = 1200): LonLat[] {
   return out
 }
 
-async function roadGeometry(from: LonLat, to: LonLat): Promise<LonLat[] | null> {
+/** Road geometry from the public OSRM router (only for legs without a bundled route). */
+async function routedGeometry(from: LonLat, to: LonLat): Promise<LonLat[] | null> {
   try {
     const j = (await fetchJson(`${OSRM}/${from[0]},${from[1]};${to[0]},${to[1]}?overview=full&geometries=geojson`, 6000)) as {
       routes?: { geometry?: { coordinates?: LonLat[] } }[]
@@ -79,22 +83,23 @@ async function roadGeometry(from: LonLat, to: LonLat): Promise<LonLat[] | null> 
   }
 }
 
-/** MapLibre zoom (512px tiles) that shows `km` across `px` pixels at latitude `lat`. */
-function zoomForSpan(km: number, px: number, lat: number) {
-  return Math.max(1, Math.min(16, Math.log2((78271.517 * Math.cos((lat * Math.PI) / 180) * px) / Math.max(1, km * 1000))))
+const easeInOut = (f: number) => {
+  const x = Math.max(0, Math.min(1, f))
+  return x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2
 }
 
-const sleep = (ms: number) => new Promise((r) => window.setTimeout(r, ms))
+type LineFeature = { type: 'Feature'; properties: { kind: 'road' | 'arc' }; geometry: { type: 'LineString'; coordinates: LonLat[] } }
+const feature = (leg: Leg, coords: LonLat[]): LineFeature => ({ type: 'Feature', properties: { kind: leg.geometry === 'arc' ? 'arc' : 'road' }, geometry: { type: 'LineString', coordinates: coords } })
 
-export default function MapLibreJourney({ journey, home, replay, reduced, padding, onFail, onBadge, onPhase, onProgress }: MapLibreJourneyProps) {
+export default function MapLibreJourney({ journey, home, replay, reduced, padding, onFail, onProgress, onMissing }: MapLibreJourneyProps) {
   const box = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MlMap | null>(null)
   const mlRef = useRef<typeof import('maplibre-gl') | null>(null)
   const [ready, setReady] = useState(false)
-  const cbs = useRef({ onFail, onBadge, onPhase, onProgress })
+  const cbs = useRef({ onFail, onProgress, onMissing })
   useEffect(() => {
-    cbs.current = { onFail, onBadge, onPhase, onProgress }
-  }, [onFail, onBadge, onPhase, onProgress])
+    cbs.current = { onFail, onProgress, onMissing }
+  }, [onFail, onProgress, onMissing])
 
   // Create the map once (style fetched first so an offline device falls back fast).
   useEffect(() => {
@@ -129,9 +134,10 @@ export default function MapLibreJourney({ journey, home, replay, reduced, paddin
         style: style as never,
         center: [home.lon, home.lat],
         zoom: 6,
-        maxPitch: 75,
         attributionControl: false,
         fadeDuration: 0,
+        pitchWithRotate: false,
+        dragRotate: false,
       })
       map.addControl(new ml.AttributionControl({ compact: true }), 'bottom-right')
       let loaded = false
@@ -146,21 +152,47 @@ export default function MapLibreJourney({ journey, home, replay, reduced, paddin
         window.clearTimeout(loadTimer)
         const m = map!
         const teal = token('--teal', 'teal')
-        const ink3 = token('--ink-3', 'gray')
         try {
-          m.addSource('dem', { type: 'raster-dem', tiles: [DEM_TILES], encoding: 'terrarium', tileSize: 256, maxzoom: 14 })
           m.addSource('dem-h', { type: 'raster-dem', tiles: [DEM_TILES], encoding: 'terrarium', tileSize: 256, maxzoom: 14 })
           const firstSymbol = m.getStyle().layers.find((l) => l.type === 'symbol')?.id
-          m.addLayer({ id: 'ride-hill', type: 'hillshade', source: 'dem-h', paint: { 'hillshade-exaggeration': 0.4 } }, firstSymbol)
+          m.addLayer({ id: 'ride-hill', type: 'hillshade', source: 'dem-h', paint: { 'hillshade-exaggeration': 0.35 } }, firstSymbol)
         } catch {
-          /* terrain is decoration; the journey works without it */
+          /* terrain shading is decoration; the journey works without it */
         }
-        m.addSource('ride-ghost', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } })
-        m.addLayer({ id: 'ride-ghost', type: 'line', source: 'ride-ghost', layout: { 'line-cap': 'round' }, paint: { 'line-color': ink3, 'line-opacity': 0.45, 'line-width': 2, 'line-dasharray': [0.3, 2.4] } })
-        m.addSource('ride', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, lineMetrics: true })
-        m.addLayer({ id: 'ride-glow', type: 'line', source: 'ride', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': teal, 'line-width': 16, 'line-opacity': 0.32, 'line-blur': 8 } })
-        m.addLayer({ id: 'ride-line', type: 'line', source: 'ride', filter: ['!=', ['get', 'dash'], 1], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': teal, 'line-width': 4.5 } })
-        m.addLayer({ id: 'ride-dash', type: 'line', source: 'ride', filter: ['==', ['get', 'dash'], 1], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': teal, 'line-width': 4, 'line-dasharray': [1.2, 1.6] } })
+        const empty = { type: 'FeatureCollection' as const, features: [] }
+        m.addSource('ride-ghost', { type: 'geojson', data: empty })
+        m.addLayer({
+          id: 'ride-ghost',
+          type: 'line',
+          source: 'ride-ghost',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': teal, 'line-opacity': 0.22, 'line-width': 4 },
+        })
+        m.addSource('ride', { type: 'geojson', data: empty })
+        m.addLayer({
+          id: 'ride-glow',
+          type: 'line',
+          source: 'ride',
+          filter: ['==', ['get', 'kind'], 'road'],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': teal, 'line-width': 12, 'line-opacity': 0.3, 'line-blur': 6 },
+        })
+        m.addLayer({
+          id: 'ride-line',
+          type: 'line',
+          source: 'ride',
+          filter: ['==', ['get', 'kind'], 'road'],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': teal, 'line-width': 4.5 },
+        })
+        m.addLayer({
+          id: 'ride-arc',
+          type: 'line',
+          source: 'ride',
+          filter: ['==', ['get', 'kind'], 'arc'],
+          layout: { 'line-cap': 'round' },
+          paint: { 'line-color': teal, 'line-width': 2.5, 'line-dasharray': [0.6, 2.6] },
+        })
         setReady(true)
       })
       mapRef.current = map
@@ -174,176 +206,158 @@ export default function MapLibreJourney({ journey, home, replay, reduced, paddin
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Run the journey.
+  // Draw the journey.
   useEffect(() => {
     const map = mapRef.current
     const ml = mlRef.current
     if (!ready || !map || !ml) return
     let alive = true
     let raf = 0
-    let userMoved = false
-    const markers: { m: MlMarker; root: Root }[] = []
-    const onUser = (e: { originalEvent?: unknown }) => {
-      if (e.originalEvent) userMoved = true
-    }
-    map.on('dragstart', onUser)
-    map.on('wheel', onUser)
+    const markers: { m: MlMarker; root: Root; el: HTMLElement; id: string; kind: 'home' | 'airport' | 'resort' | 'car' }[] = []
     const route = map.getSource('ride') as GeoJSONSource | undefined
     const ghost = map.getSource('ride-ghost') as GeoJSONSource | undefined
-    const feature = (leg: Leg, coords: LonLat[]) => ({ type: 'Feature' as const, properties: { dash: leg.approx ? 1 : 0 }, geometry: { type: 'LineString' as const, coordinates: coords } })
-    const setRoute = (fs: ReturnType<typeof feature>[]) => route?.setData({ type: 'FeatureCollection', features: fs })
+    const setRoute = (fs: LineFeature[]) => route?.setData({ type: 'FeatureCollection', features: fs })
     const pad = padding
-    const viewW = () => Math.max(200, map.getContainer().clientWidth - pad.left - pad.right)
-    const marker = (el: HTMLElement, at: LonLat, node: React.ReactNode, opts: { anchor?: 'bottom' | 'center'; rotate?: boolean } = {}) => {
+    const addMarker = (at: LonLat, node: React.ReactNode, id: string, kind: (typeof markers)[number]['kind'], rotate = false) => {
+      const el = document.createElement('div')
+      el.style.width = '0'
+      el.style.height = '0'
+      // Pins (and their labels) stay above the travelling car.
+      el.style.zIndex = kind === 'car' ? '1' : '2'
       const root = createRoot(el)
-      root.render(node)
-      const m = new ml.Marker({ element: el, anchor: opts.anchor ?? 'bottom', rotationAlignment: opts.rotate ? 'map' : 'viewport', pitchAlignment: opts.rotate ? 'map' : 'viewport' }).setLngLat(at).addTo(map)
-      markers.push({ m, root })
+      flushSync(() => root.render(node))
+      const m = new ml.Marker({ element: el, anchor: 'center', rotationAlignment: rotate ? 'map' : 'viewport', pitchAlignment: 'viewport' }).setLngLat(at).addTo(map)
+      markers.push({ m, root, el, id, kind })
       return m
     }
-
-    try {
-      map.setTerrain(null)
-    } catch {
-      /* no terrain yet */
-    }
-    setRoute([])
-    ghost?.setData({ type: 'FeatureCollection', features: [] })
-
-    if (!journey) {
-      const el = document.createElement('div')
-      marker(el, [home.lon, home.lat], <PinView pin={{ id: 'home', at: [home.lon, home.lat], label: home.name, kind: 'home' }} />)
-      map.jumpTo({ center: [home.lon, home.lat], zoom: 5.2, pitch: 0, bearing: 0, padding: pad })
-      cbs.current.onBadge('Home · pick a resort to ride there')
-      cbs.current.onPhase?.({ phase: 'overview', leg: 0 })
-      return () => {
-        alive = false
-        map.off('dragstart', onUser)
-        map.off('wheel', onUser)
-        markers.forEach(({ m, root }) => {
-          m.remove()
-          window.setTimeout(() => root.unmount(), 0)
-        })
-      }
-    }
-
-    const run = async () => {
-      // Road geometry for the drive leg (falls back to the straight, dashed line).
-      const legs: Leg[] = journey.legs.map((l) => ({ ...l }))
-      const drive = legs.find((l) => l.kind === 'drive')
-      if (drive) {
-        cbs.current.onBadge('Finding road geometry…')
-        const road = await roadGeometry(drive.from, drive.to)
-        if (!alive) return
-        if (road) {
-          drive.coords = road
-          drive.approx = false
-          drive.km = pathKm(road)
-          cbs.current.onBadge('Road geometry · OpenStreetMap via OSRM · time is Piste’s estimate')
-        } else cbs.current.onBadge('Approximate route · straight line, not roads')
-      } else cbs.current.onBadge('Illustrative flight arc · no times or fares · ground legs approximate')
-
-      for (const p of journey.pins) {
-        const el = document.createElement('div')
-        marker(el, p.at, <PinView pin={p} />)
-      }
-      ghost?.setData({ type: 'FeatureCollection', features: legs.map((l) => feature(l, l.coords)) })
-      const all = legs.flatMap((l) => l.coords)
-      const bounds = all.reduce((b, c) => b.extend(c), new ml.LngLatBounds(all[0], all[0]))
-      const resort = legs[legs.length - 1].to
-
-      if (reduced) {
-        setRoute(legs.map((l) => feature(l, l.coords)))
-        map.fitBounds(bounds, { padding: pad, duration: 0, pitch: 0, bearing: 0, maxZoom: 11 })
-        legs.forEach((_, i) => cbs.current.onProgress?.(i, 1))
-        cbs.current.onPhase?.({ phase: 'done', leg: legs.length - 1 })
-        return
-      }
-
-      cbs.current.onPhase?.({ phase: 'overview', leg: 0 })
-      map.fitBounds(bounds, { padding: pad, duration: 1600, pitch: 0, bearing: 0, maxZoom: 11 })
-      await sleep(1700)
-      if (!alive) return
-      const first = legs[0]
-      let brg = bearingDeg(first.coords[0], first.coords[Math.min(first.coords.length - 1, 8)])
-      if (!userMoved) {
-        map.easeTo({ center: first.from, zoom: zoomForSpan(followSpanKm(first, 0), viewW(), first.from[1]), pitch: 55, bearing: brg, padding: pad, duration: 1500, essential: true })
-        await sleep(1500)
-      }
-      const done: ReturnType<typeof feature>[] = []
-      for (let i = 0; i < legs.length; i++) {
-        if (!alive) return
-        const leg = legs[i]
-        cbs.current.onPhase?.({ phase: 'leg', leg: i })
-        if (i === legs.length - 1) {
-          try {
-            map.setTerrain({ source: 'dem', exaggeration: 1.4 })
-          } catch {
-            /* terrain unavailable */
-          }
-        }
-        const cum = cumulativeKm(leg.coords)
-        const glyphEl = document.createElement('div')
-        const glyph = marker(glyphEl, leg.from, leg.kind === 'air' ? <Plane /> : <Car />, { anchor: 'center', rotate: true })
-        const dur = legDurationMs(leg.kind, leg.km)
-        const t0 = performance.now()
-        await new Promise<void>((resolve) => {
-          const step = () => {
-            if (!alive) return resolve()
-            const f = Math.min(1, (performance.now() - t0) / dur)
-            const e = easeInOut(f)
-            const at = pointAlong(leg.coords, cum, e)
-            setRoute([...done, feature(leg, [...leg.coords.slice(0, at.index), at.point])])
-            const ahead = pointAlong(leg.coords, cum, Math.min(1, e + 0.02)).point
-            const behind = pointAlong(leg.coords, cum, Math.max(0, e - 0.01)).point
-            const heading = bearingDeg(behind, ahead)
-            glyph.setLngLat(at.point)
-            glyph.setRotation(heading)
-            if (!userMoved) {
-              brg += angleDelta(brg, heading) * 0.05
-              const arc = Math.sin(Math.PI * e)
-              map.jumpTo({
-                center: at.point,
-                zoom: zoomForSpan(followSpanKm(leg, e), viewW(), at.point[1]),
-                bearing: brg,
-                pitch: leg.kind === 'air' ? 52 - 26 * arc : 56 - 8 * arc,
-                padding: pad,
-              })
-            }
-            cbs.current.onProgress?.(i, f)
-            if (f < 1) raf = requestAnimationFrame(step)
-            else resolve()
-          }
-          step()
-        })
-        done.push(feature(leg, leg.coords))
-        const gi = markers.findIndex((x) => x.m === glyph)
-        if (gi >= 0) {
-          markers[gi].m.remove()
-          const r = markers[gi].root
-          window.setTimeout(() => r.unmount(), 0)
-          markers.splice(gi, 1)
-        }
-      }
-      if (!alive) return
-      setRoute(done)
-      cbs.current.onPhase?.({ phase: 'approach', leg: legs.length - 1 })
-      if (!userMoved) map.flyTo({ center: resort, zoom: 12.8, pitch: 64, bearing: -28, padding: pad, duration: 4200, curve: 1.5, essential: true })
-      await sleep(4200)
-      if (alive) cbs.current.onPhase?.({ phase: 'done', leg: legs.length - 1 })
-    }
-    void run()
-
-    return () => {
+    const cleanup = () => {
       alive = false
       cancelAnimationFrame(raf)
-      map.off('dragstart', onUser)
-      map.off('wheel', onUser)
       map.stop()
       markers.forEach(({ m, root }) => {
         m.remove()
         window.setTimeout(() => root.unmount(), 0)
       })
+    }
+
+    // Pin labels: collision-avoided in the current view (padded view while framed, whole map once the user moves).
+    let framed = true
+    const relayout = () => {
+      const pins = markers.filter((x) => x.kind !== 'car')
+      const c = map.getContainer()
+      const bounds = framed
+        ? { x: pad.left, y: pad.top, w: Math.max(120, c.clientWidth - pad.left - pad.right), h: Math.max(120, c.clientHeight - pad.top - pad.bottom) }
+        : { x: 8, y: 8, w: c.clientWidth - 16, h: c.clientHeight - 16 }
+      const items = pins
+        .map((x) => {
+          const lab = x.el.querySelector<HTMLElement>('[data-pin-label]')
+          const p = map.project(x.m.getLngLat())
+          return { id: x.id, kind: x.kind as 'home' | 'airport' | 'resort', x: p.x, y: p.y, w: lab?.offsetWidth || 80, h: lab?.offsetHeight || 26, gap: PIN_GAP[x.kind as 'home'], lab }
+        })
+        .sort((a, b) => PIN_PRIORITY[a.kind] - PIN_PRIORITY[b.kind])
+      for (const q of placeLabels(items, bounds, { pinRadius: 10, margin: 5 })) {
+        const it = items.find((i) => i.id === q.id)
+        if (it?.lab) it.lab.style.transform = `translate(${q.dx}px, ${q.dy}px)`
+      }
+    }
+    const onUserMove = (e: { originalEvent?: unknown }) => {
+      if (e.originalEvent) framed = false
+      relayout()
+    }
+    map.on('move', onUserMove)
+
+    setRoute([])
+    ghost?.setData({ type: 'FeatureCollection', features: [] })
+
+    if (!journey) {
+      addMarker([home.lon, home.lat], <PinView pin={{ id: 'home', at: [home.lon, home.lat], label: home.name, kind: 'home' }} />, 'home', 'home')
+      map.jumpTo({ center: [home.lon, home.lat], zoom: 5.2, pitch: 0, bearing: 0, padding: pad })
+      relayout()
+      cbs.current.onMissing?.(0)
+      return () => {
+        cleanup()
+        map.off('move', onUserMove)
+      }
+    }
+
+    const run = async () => {
+      const legs: Leg[] = journey.legs.map((l) => ({ ...l }))
+      // Road legs without bundled geometry: ask the router; never fall back to a straight line.
+      await Promise.all(
+        legs.map(async (l) => {
+          if (l.geometry !== 'missing') return
+          const road = await routedGeometry(l.from, l.to)
+          if (road) {
+            l.coords = road
+            l.geometry = 'road'
+            l.km = pathKm(road)
+          }
+        }),
+      )
+      if (!alive) return
+      cbs.current.onMissing?.(legs.filter((l) => l.geometry === 'missing').length)
+
+      for (const p of journey.pins) addMarker(p.at, <PinView pin={p} />, p.id, p.kind)
+
+      // Frame every coordinate, inset by the largest label so labels fit beside any pin.
+      const labs = markers.map((x) => x.el.querySelector<HTMLElement>('[data-pin-label]'))
+      const wMax = Math.max(60, ...labs.map((l) => l?.offsetWidth ?? 0))
+      const hMax = Math.max(22, ...labs.map((l) => l?.offsetHeight ?? 0))
+      const all = journey.legs.flatMap((l) => l.coords).concat(legs.flatMap((l) => (l.geometry === 'road' ? l.coords : [])))
+      const bounds = all.reduce((b, c) => b.extend(c), new ml.LngLatBounds(all[0], all[0]))
+      const fitPad = { top: pad.top + hMax + 18, bottom: pad.bottom + 18, left: pad.left + wMax / 2 + 10, right: pad.right + wMax / 2 + 10 }
+      const drive = journey.mode === 'drive' ? legs.find((l) => l.geometry === 'road') : undefined
+      const animate = !reduced && !!drive
+      map.fitBounds(bounds, { padding: fitPad, duration: animate ? 700 : 0, pitch: 0, bearing: 0, maxZoom: 11.5 })
+      framed = true
+      relayout()
+
+      const drawn = legs.filter((l) => l.geometry !== 'missing')
+      if (!animate || !drive) {
+        if (journey.mode === 'drive') ghost?.setData({ type: 'FeatureCollection', features: [] })
+        setRoute(drawn.map((l) => feature(l, l.coords)))
+        cbs.current.onProgress?.(1)
+        return
+      }
+
+      // Drive: the full road as a faint ghost, then the road draws in along it with a car at its head.
+      ghost?.setData({ type: 'FeatureCollection', features: [feature(drive, drive.coords)] })
+      cbs.current.onProgress?.(0)
+      const cum = cumulativeKm(drive.coords)
+      const car = addMarker(drive.from, <Car />, 'car', 'car', true)
+      const dur = roadDrawMs(drive.km)
+      const t0 = performance.now() + 300
+      await new Promise<void>((resolve) => {
+        const step = () => {
+          if (!alive) return resolve()
+          const f = Math.max(0, Math.min(1, (performance.now() - t0) / dur))
+          const e = easeInOut(f)
+          const at = pointAlong(drive.coords, cum, e)
+          setRoute([feature(drive, [...drive.coords.slice(0, at.index), at.point])])
+          const ahead = pointAlong(drive.coords, cum, Math.min(1, e + 0.01)).point
+          const behind = pointAlong(drive.coords, cum, Math.max(0, e - 0.01)).point
+          car.setLngLat(at.point)
+          car.setRotation(bearingDeg(behind, ahead))
+          cbs.current.onProgress?.(f)
+          if (f < 1) raf = requestAnimationFrame(step)
+          else resolve()
+        }
+        step()
+      })
+      if (!alive) return
+      setRoute(drawn.map((l) => feature(l, l.coords)))
+      const ci = markers.findIndex((x) => x.m === car)
+      if (ci >= 0) {
+        const [gone] = markers.splice(ci, 1)
+        gone.m.remove()
+        window.setTimeout(() => gone.root.unmount(), 0)
+      }
+    }
+    void run()
+
+    return () => {
+      cleanup()
+      map.off('move', onUserMove)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, journey, replay, reduced, padding.left, padding.right, padding.top, padding.bottom])
@@ -351,7 +365,7 @@ export default function MapLibreJourney({ journey, home, replay, reduced, paddin
   return (
     <div className="absolute inset-0">
       <div ref={box} style={{ position: 'absolute', inset: 0 }} />
-      {!ready ? <div className="absolute inset-0 animate-pulse bg-surface-3/50" aria-hidden /> : null}
+      {!ready ? <div className="absolute inset-0 bg-surface-2" aria-hidden /> : null}
     </div>
   )
 }

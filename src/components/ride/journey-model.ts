@@ -1,17 +1,18 @@
 /**
- * Builds the animated journey (legs + pins) for a plan and the chosen way to go. Pure: no DOM, no network.
+ * Builds the journey (legs + pins) for a plan and the chosen way to go. Pure: no DOM, no network.
  *
- * Drive: one leg home → resort. Its geometry starts as a straight line flagged `approx`; the online map may swap in
- * road geometry from a routing service, and says so. Fly: ground leg to the chosen departure airport (straight,
- * approximate), an illustrative great-circle arc to the gateway, then the transfer to the resort (straight,
- * approximate). Longitudes after the arc are unwrapped so a journey across the antimeridian stays continuous.
+ * Every drive leg (home → resort, home → departure airport, gateway → resort) uses the bundled road geometry when the
+ * plan carries it (`geometry: 'road'`). Without it the leg is `missing`: its coordinates are only the two endpoints,
+ * used to frame the camera, and the maps never draw a straight line for it (the online map may still fetch a route).
+ * The flight is a static, illustrative great-circle arc. Longitudes after the arc are unwrapped so a journey across the
+ * antimeridian stays continuous (the transfer road is shifted with it).
  */
-import type { RideAirport, RidePlan } from '@/lib/data/ride'
-import { greatCircleArc, pathKm, type LonLat } from '@/lib/domain/journey'
-import { formatElevation } from '@/lib/domain/units'
+import type { RideAirport, RidePlan, RideRoad } from '@/lib/data/ride'
+import { greatCircleArc, haversineKm, pathKm, type LonLat } from '@/lib/domain/journey'
 
 export type RideMode = 'drive' | 'fly'
 export type LegKind = 'drive' | 'ground' | 'air' | 'transfer'
+export type LegGeometry = 'road' | 'arc' | 'missing'
 
 export interface Leg {
   kind: LegKind
@@ -20,18 +21,20 @@ export interface Leg {
   coords: LonLat[]
   fromLabel: string
   toLabel: string
-  /** Recorded minutes for the leg (estimate), null when unknown or (flights) never shown. */
+  /** Minutes for the leg (routed or recorded), null when unknown or (flights) never shown. */
   minutes: number | null
-  /** Straight line or illustrative arc rather than real geometry. */
-  approx: boolean
+  /** Road geometry, an illustrative flight arc, or no geometry (endpoints only — never drawn as a line). */
+  geometry: LegGeometry
   km: number
+  /** External directions for a road leg (shown when its geometry is missing offline). */
+  directionsUrl: string | null
 }
 
 export interface Pin {
   id: string
   at: LonLat
   label: string
-  /** Second line (resort: summit elevation when recorded). */
+  /** Second, quieter part of the label (airport city). */
   sub?: string
   kind: 'home' | 'airport' | 'resort'
 }
@@ -51,7 +54,7 @@ export interface RideSelection {
   from: string | null
 }
 
-/** What can actually be shown for a plan: drive needs a drive estimate or at least no airports; fly needs a gateway. */
+/** What can actually be shown for a plan: drive needs a drive time or at least no airports; fly needs a gateway. */
 export function availableModes(plan: RidePlan): RideMode[] {
   const out: RideMode[] = []
   if (plan.drive || !plan.gateways.length) out.push('drive')
@@ -62,7 +65,7 @@ export function availableModes(plan: RidePlan): RideMode[] {
 /** Resolve a requested selection against the plan (invalid or missing parts fall back to the recommended option). */
 export function resolveSelection(plan: RidePlan, req: Partial<RideSelection>): RideSelection {
   const modes = availableModes(plan)
-  const preferred: RideMode = plan.recommended === 'fly' && modes.includes('fly') ? 'fly' : modes[0] ?? 'drive'
+  const preferred: RideMode = plan.recommended === 'fly' && modes.includes('fly') ? 'fly' : (modes[0] ?? 'drive')
   const mode = req.mode && modes.includes(req.mode) ? req.mode : preferred
   const via = plan.gateways.find((g) => g.iata === req.via)?.iata ?? plan.gateways[0]?.iata ?? null
   const from = plan.origins.find((o) => o.iata === req.from)?.iata ?? plan.origins[0]?.iata ?? null
@@ -79,13 +82,20 @@ function unwrapTo(ref: number, lon: number): number {
 }
 
 function resortPin(plan: RidePlan, at: LonLat): Pin {
-  const summit = formatElevation(plan.resort.summitM, plan.units)
-  return { id: 'resort', at, label: plan.resort.short, sub: summit ? `Summit ${summit}` : undefined, kind: 'resort' }
+  return { id: 'resort', at, label: plan.resort.short, kind: 'resort' }
 }
 
-function straight(kind: LegKind, from: LonLat, to: LonLat, fromLabel: string, toLabel: string, minutes: number | null): Leg {
-  const coords: LonLat[] = [from, to]
-  return { kind, from, to, coords, fromLabel, toLabel, minutes, approx: true, km: pathKm(coords) }
+/** A road leg: the bundled geometry joined to the pins (a road starts where it meets the network), or `missing`. */
+function roadLeg(kind: LegKind, from: LonLat, to: LonLat, fromLabel: string, toLabel: string, minutes: number | null, road: RideRoad | null | undefined, directionsUrl: string | null): Leg {
+  if (!road || road.coords.length < 2) {
+    return { kind, from, to, coords: [from, to], fromLabel, toLabel, minutes, geometry: 'missing', km: haversineKm(from, to), directionsUrl }
+  }
+  // Shift the road into the same longitude window as its endpoints (journeys unwrapped across the antimeridian).
+  const shift = unwrapTo(from[0], road.coords[0][0]) - road.coords[0][0]
+  const coords: LonLat[] = road.coords.map((c) => [c[0] + shift, c[1]])
+  if (haversineKm(from, coords[0]) > 0.05) coords.unshift(from)
+  if (haversineKm(coords[coords.length - 1], to) > 0.05) coords.push(to)
+  return { kind, from, to, coords, fromLabel, toLabel, minutes: minutes ?? road.minutes, geometry: 'road', km: road.km || pathKm(coords), directionsUrl }
 }
 
 export function buildJourney(plan: RidePlan, sel: RideSelection): Journey {
@@ -97,33 +107,51 @@ export function buildJourney(plan: RidePlan, sel: RideSelection): Journey {
     const gw = plan.gateways.find((g) => g.iata === sel.via) ?? plan.gateways[0]
     if (origin && gw) return flyJourney(plan, origin, gw, homePin)
   }
-  const leg = straight('drive', home, [unwrapTo(home[0], resort[0]), resort[1]], plan.home.name, plan.resort.short, plan.drive?.minutes ?? null)
+  const to: LonLat = [unwrapTo(home[0], resort[0]), resort[1]]
+  const leg = roadLeg('drive', home, to, plan.home.name, plan.resort.short, plan.drive?.minutes ?? null, plan.roads.drive, plan.drive?.directionsUrl ?? null)
   return {
     key: `drive:${plan.resort.id}`,
     mode: 'drive',
     legs: [leg],
-    pins: [homePin, resortPin(plan, leg.to)],
+    pins: [homePin, resortPin(plan, to)],
   }
+}
+
+/** The city an airport serves: the recorded "(Zurich)" note when present, else the first part of its city. */
+export function airportCity(a: Pick<RideAirport, 'city' | 'name' | 'iata'>): string {
+  const served = a.city
+    ?.match(/\(([^)]+)\)/)?.[1]
+    ?.replace(/\s+area$/i, '')
+    .trim()
+  return served || a.city?.split(',')[0].trim() || a.name || a.iata
+}
+
+/** A short city name for an airport label (none when it would repeat the code or home, or run long). */
+function airportSub(a: RideAirport, homeName: string): string | undefined {
+  const c = airportCity(a)
+  if (!c || c.length > 16 || c.toUpperCase() === a.iata) return undefined
+  return homeName.toLowerCase().startsWith(c.toLowerCase()) ? undefined : c
 }
 
 function flyJourney(plan: RidePlan, origin: RideAirport, gw: RideAirport, homePin: Pin): Journey {
   const home = homePin.at
   const dep: LonLat = [unwrapTo(home[0], origin.lon), origin.lat]
-  const ground = straight('ground', home, dep, plan.home.name, origin.iata, origin.minutes)
+  const ground = roadLeg('ground', home, dep, plan.home.name, origin.iata, origin.minutes, plan.roads.origins[origin.iata], origin.directionsUrl)
   const arc = greatCircleArc(dep, [gw.lon, gw.lat], 160)
   const arr = arc[arc.length - 1]
-  const air: Leg = { kind: 'air', from: dep, to: arr, coords: arc, fromLabel: origin.iata, toLabel: gw.iata, minutes: null, approx: true, km: pathKm(arc) }
+  const air: Leg = { kind: 'air', from: dep, to: arr, coords: arc, fromLabel: origin.iata, toLabel: gw.iata, minutes: null, geometry: 'arc', km: pathKm(arc), directionsUrl: null }
   const resort: LonLat = [unwrapTo(arr[0], plan.resort.lon), plan.resort.lat]
-  const transfer = straight('transfer', arr, resort, gw.iata, plan.resort.short, gw.minutes)
-  const legs = ground.km < 0.3 ? [air, transfer] : [ground, air, transfer]
+  const transfer = roadLeg('transfer', arr, resort, gw.iata, plan.resort.short, gw.minutes, plan.roads.gateways[gw.iata], gw.directionsUrl)
+  const atAirport = haversineKm(home, dep) < 0.3
+  const legs = atAirport ? [air, transfer] : [ground, air, transfer]
   return {
     key: `fly:${plan.resort.id}:${origin.iata}:${gw.iata}`,
     mode: 'fly',
     legs,
     pins: [
       homePin,
-      ...(ground.km < 0.3 ? [] : [{ id: `dep-${origin.iata}`, at: dep, label: origin.iata, kind: 'airport' as const }]),
-      { id: `arr-${gw.iata}`, at: arr, label: gw.iata, kind: 'airport' },
+      ...(atAirport ? [] : [{ id: `dep-${origin.iata}`, at: dep, label: origin.iata, sub: airportSub(origin, plan.home.name), kind: 'airport' as const }]),
+      { id: `arr-${gw.iata}`, at: arr, label: gw.iata, sub: airportSub(gw, plan.home.name), kind: 'airport' },
       resortPin(plan, resort),
     ],
   }
@@ -134,9 +162,14 @@ export function journeyCoords(j: Journey): LonLat[] {
   return j.legs.flatMap((l) => l.coords)
 }
 
+/** Road legs with no geometry (the maps say so and link to directions instead of drawing a line). */
+export function missingRoads(j: Journey | null): Leg[] {
+  return j ? j.legs.filter((l) => l.geometry === 'missing') : []
+}
+
 export const LEG_TITLE: Record<LegKind, string> = {
   drive: 'Drive',
   ground: 'To the airport',
-  air: 'Flight · illustrative',
+  air: 'Flight',
   transfer: 'Transfer',
 }
