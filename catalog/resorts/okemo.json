@@ -24,10 +24,10 @@
     "summitM": 1019,
     "verticalM": 671,
     "source": {
-      "url": "https://www.okemo.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit ~3,344 ft and advertised vertical ~2,200 ft; base derived as summit minus vertical Vertical (2,200 ft) matches the Vail Resorts 2025-26 Vermont tip sheet (search summary, 2026-09-30)."
+      "url": "https://www.onthesnow.com/vermont/okemo-mountain-resort/ski-resort",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "OnTheSnow resort overview (fetched 2026-10-03): base 1,144', summit 3,344', vertical drop 2,200' (also \"southern Vermont's highest vertical drop of 2,200 feet\")."
     }
   },
   "weatherPoints": [
@@ -102,7 +102,7 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No confirmed 2026-27 opening date on file as of 2026-09-30. OnTheSnow projects Nov 20, 2026 (a third-party projection, not an announcement). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Okemo's date — check the release (More links). For reference, Okemo, Stowe and Mount Snow targeted Sat Nov 22, 2025 for 2025-26 (announced Oct 29, 2025) — a target, not a confirmed opening day."
+    "notes": "No confirmed 2026-27 opening date on file as of 2026-09-30. OnTheSnow projects Nov 20, 2026 (a third-party projection, not an announcement). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Okemo's date — check the release (More links). For reference, Okemo, Stowe and Mount Snow targeted Sat Nov 22, 2025 for 2025-26 (announced Oct 29, 2025) — a target, not a confirmed opening day. OnTheSnow (fetched 2026-10-03) shows a projected opening Nov 20 and projected closing Apr 11 (third-party projection, not an announcement). Official site promotes the \"Okemo 70th Anniversary Season\"."
   },
   "hours": [],
   "prices": [],
@@ -182,21 +182,22 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chairlift_-_panoramio.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "No confirmed 2026-27 opening or closing date (OnTheSnow projects Nov 20, 2026; check the Vail Resorts 18 Aug 2026 opening-dates release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm the operator (Vail Resorts since 2018 — reference) and which 2026-27 Epic products include Okemo, with any holiday restrictions.",
       "Confirm 2026-27 adult day-ticket prices (none captured).",
+      "Rental and lesson prices (official pages not fetched).",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm that the snow-report, lift-status and trail-map links (standard Vail Resorts site pattern) resolve.",
       "Confirm lifts by type (only the two high-speed six-packs were named), trail difficulty split, learning areas, childcare, tubing and night skiing.",
       "Confirm elevations (base here is derived) and base/summit coordinates (approximations; the summit point is ~3.6 km from the base)."
     ],
     "conflicts": [
-      "terrain.trails: \"123 trails and glades\" vs \"122 trails\" in the same tip sheet. Resolution: used 123."
+      "terrain.trails: \"123 trails and glades\" vs \"122 trails\" in the same tip sheet. Resolution: used 123.",
+      "Terrain size: 123 trails / 20 lifts / 632 acres (Vail tip sheet 2025-26, stored) vs \"120 trails, 20 chairlifts\" (okemo.com Experience page, 2026-10-03) vs 127 runs / 21 lifts (1 six, 4 high-speed quads, 5 quads, 3 triples, 8 surface) / 667 acres, 33% beginner / 38% intermediate / 21% advanced / 9% expert, 5 terrain parks (OnTheSnow)."
     ],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (632 acres, 123 trails/glades, 20 lifts) and 98% snowmaking come from Vail's 2025-26 Vermont tip sheet; the vertical matches it. Coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. Deep links follow the standard Vail site pattern. No price was found. The OnTheSnow date is a projection; drive/airport times are Piste estimates."
+    "confidenceNotes": "Elevation from OnTheSnow (third party) fetched 2026-10-03; operator confirmed by the Vail Resorts footer on okemo.com. No day-ticket price was found on fetched pages (Vail sites show prices only in the booking flow)."
   }
 }

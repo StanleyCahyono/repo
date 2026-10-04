@@ -105,7 +105,47 @@
     "typicalText": null,
     "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 12, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived. Public skiing is weekdays only (Mon–Fri); weekends are members and guests only."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Mon-Fri, all lifts",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "opens": "09:30",
+      "closes": "16:30",
+      "season": null,
+      "note": "Winter hours; season not stated.",
+      "source": {
+        "url": "https://holimont.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official site lift-hours footer (fetched 2026-10-03)"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Sat-Sun, Exhibition, Cascade and Sunset lifts",
+      "days": [
+        6,
+        7
+      ],
+      "opens": "08:00",
+      "closes": "16:30",
+      "season": null,
+      "note": "All other lifts 9am-4:30pm. Christmas week Dec 26-Jan 1 and MLK/Presidents Day holidays follow weekend hours; Christmas Day 12pm-4pm. Season not stated.",
+      "source": {
+        "url": "https://holimont.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official site lift-hours footer (fetched 2026-10-03)"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -147,6 +187,69 @@
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
         "note": "Third-party guide (Ellicottville Outside, \"Holiday Valley and HoliMont Lift Tickets and Ski Passes, 2026-27\"); it reports that HoliMont's own day-rate table is still labelled 2024-2025."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "5-Day Experience Pack (5 weekday ski/ride passes, full mountain)",
+      "category": "adult 5-day pack",
+      "amount": 405,
+      "amountMax": 420,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$405, $420 after Columbus Day (\"$81 per day\"). Season not stated on the page.",
+      "source": {
+        "url": "https://holimont.com/explore/tickets-and-passes/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & passes page (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "10-Day Experience Pack (10 weekday ski/ride passes, full mountain)",
+      "category": "adult 10-day pack",
+      "amount": 625,
+      "amountMax": 650,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$625, $650 after Columbus Day (\"$62.50 per day, lowest weekday rate\"). Season not stated on the page.",
+      "source": {
+        "url": "https://holimont.com/explore/tickets-and-passes/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & passes page (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Adult one-day ski rental",
+      "category": "adult",
+      "amount": 45,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated. Snowboard $45, demo ski $55, youth $35, helmet $16.",
+      "source": {
+        "url": "https://holimont.com/rental-repair-pricing/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rental & repair pricing page (fetched 2026-10-03)"
       }
     }
   ],
@@ -221,17 +324,17 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "Current (2025-26 or 2026-27) public weekday ticket prices — the only published table is labelled 2024-2025.",
-      "Any resort-announced 2026-27 opening date and public weekday hours.",
-      "Base/summit elevations, lift inventory (6 chairs + 2 conveyors vs \"8 chairlifts\"), snowmaking %, difficulty split, night skiing.",
-      "Official snow-report and trail-map URLs; operator entity (private member club)."
+      "Current (2025-26 or 2026-27) public weekday day-ticket price: only the third-party-quoted 2024-25 table; the official page lists only 5/10-day experience packs.",
+      "Resort-announced 2026-27 opening date.",
+      "Base/summit elevations, lift inventory, difficulty split.",
+      "Official slope-report URL (site has a \"Slope Report\" menu item, URL not captured)."
     ],
     "conflicts": [
       "terrain.liftsByType: 8 lifts = 6 chairs + 2 conveyors vs \"8 chairlifts\" in another result. Resolution: used 6 chairs + 2 conveyors."
     ],
-    "confidenceNotes": "Partially re-researched 2026-10-03: the session web-search budget ran out after one HoliMont result and page fetches were blocked by the network proxy. Prices come from a third-party 2026-27 guide quoting HoliMont's 2024-25 table. Other facts are unchanged from the 2026-09-30 search summaries."
+    "confidenceNotes": "Experience packs, rentals and lift hours read 2026-10-03 from holimont.com (no season label). Day-ticket rates come from a third-party guide quoting HoliMont's 2024-25 table. Other facts are earlier search summaries."
   }
 }

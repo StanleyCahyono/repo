@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 488,
-    "summitM": 975,
+    "baseM": null,
+    "summitM": null,
     "verticalM": 488,
     "source": {
       "url": "https://www.huntermtn.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,600 ft, summit ~3,200 ft, vertical ~1,600 ft) The ~1,600 ft vertical matches a 2026-09-30 search summary."
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official homepage (fetched 2026-10-03): \"1,600 feet of vertical\" (488 m). Base/summit not stated on fetched pages (earlier Piste reference values ~1,600 ft / ~3,200 ft, unverified)."
     }
   },
   "weatherPoints": [
@@ -108,50 +108,113 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 21, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Hunter's date — check the release (More links). Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 21, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Hunter's date — check the release (More links). Past opening dates were not captured, so no estimated window is derived. OnTheSnow (third party, fetched 2026-10-03) gives an \"estimated start date of 2026 Nov 21 and a tentative end date of 2027 Apr 04\" - a projection, not an announcement."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket, weekday",
+      "item": "1-day lift ticket, weekday (window)",
       "category": "adult",
       "amount": 128,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Aggregator listing via search summary (\"weekday $97 child to $128 adult\"); season not stated. Hunter sells date-based tickets online. Confirm at source.",
+      "note": "Window price; \"Dec 22 & 23 sample pricing\". Ticket pricing is date-specific; buying online in advance is cheaper.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 23, 2025\" (fetched 2026-10-03)"
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket, weekend",
+      "item": "1-day lift ticket, weekend (window)",
       "category": "adult",
       "amount": 179,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekend",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Aggregator listing via search summary (\"weekend $136 child to $179 adult\"); season not stated. Confirm at source.",
+      "note": "Window price; \"Dec 22 & 23 sample pricing\". Ticket pricing is date-specific; buying online in advance is cheaper.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 23, 2025\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Two day pass (window)",
+      "category": "adult 2-day",
+      "amount": 256,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Window price; \"Dec 22 & 23 sample pricing\". Ticket pricing is date-specific; buying online in advance is cheaper. Week pass $861.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 23, 2025\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, child 7-17 (window)",
+      "category": "child",
+      "amount": 97,
+      "amountMax": 136,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$97 weekday, $136 weekend. Window price; \"Dec 22 & 23 sample pricing\". Ticket pricing is date-specific; buying online in advance is cheaper.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 23, 2025\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, senior 65+ (window)",
+      "category": "senior",
+      "amount": 113,
+      "amountMax": 158,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$113 weekday, $158 weekend. Window price; \"Dec 22 & 23 sample pricing\". Ticket pricing is date-specific; buying online in advance is cheaper.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/hunter-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 23, 2025\" (fetched 2026-10-03)"
       }
     }
   ],
@@ -227,16 +290,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hunter_(360270812).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "No resort-announced 2026-27 opening or closing date as of 2026-09-30 (OnTheSnow projects Nov 21, 2026; check the Vail Resorts 18 Aug 2026 release).",
+      "2026-27 day-ticket prices (only OnTheSnow 2025-26 window prices; official lift-ticket page not fetched). Rental and lesson prices not found.",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
-      "Confirm 2026-27 adult day-ticket prices: an aggregator summary gave $128 weekday / $179 weekend with no season stated.",
       "Resolve the lift inventory: 13 lifts stated, but the listed types (1 six-pack, 2 quads, 2 triples, 5 doubles, 2 surface) sum to 12.",
       "Confirm trail difficulty split, terrain parks, learning area, childcare, tubing and any night skiing.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (Vail Resorts since its 2019 purchase of Peak Resorts — reference) and which 2026-27 Epic products include Hunter, with any holiday restrictions or reservation rules.",
       "Confirm that the snow-report, lift-status and trail-map links (standard Vail Resorts site pattern) resolve.",
       "Confirm elevations and base/summit coordinates (approximations).",
       "Check weekend ski-bus options from the NYC area, if relevant."
@@ -244,6 +306,6 @@
     "conflicts": [
       "terrain.liftsByType: 13 lifts stated, but the listed types (1 six-pack, 2 quads, 2 triples, 5 doubles, 2 surface lifts) sum to 12. Resolution: kept 13 and the listed types; one lift is unaccounted for."
     ],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries; page fetches blocked). Terrain totals (320 acres, 67 trails, 13 lifts), 100% snowmaking and the lift types (which sum to 12) are search-summary facts; the $128/$179 adult prices come from an aggregator with no season stated. Coordinates, elevations, operator and the lessons/rentals/lodging flags remain Piste reference data. Deep links follow the standard Vail site pattern. The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
+    "confidenceNotes": "Ticket prices from the OnTheSnow 2025-26 table (third party); vertical and operator (Vail Resorts footer) from huntermtn.com pages fetched 2026-10-03. Other facts are reference data or earlier search summaries."
   }
 }

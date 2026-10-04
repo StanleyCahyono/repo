@@ -114,44 +114,191 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult all-day lift ticket, weekday",
+      "item": "All Day lift ticket, weekday",
       "category": "adult",
       "amount": 65,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2026-27",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (2026-09-30) gave $65 weekdays and attributed it to 2026-27, but the source page was not isolated (swain.com tickets page and OnTheSnow listing both in results). Season unconfirmed.",
+      "note": "Holiday pricing 12/26-1/3, 1/18 and 2/15. Weekend pricing starts Friday at 3:45pm. Online purchases non-refundable.",
       "source": {
         "url": "https://swain.com/tickets-and-rentals/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Adult all-day lift ticket, weekend/holiday",
+      "item": "All Day lift ticket, weekend/holiday",
       "category": "adult",
       "amount": 84,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2026-27",
       "dayType": "weekend",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (2026-09-30) gave $84 weekends/holidays and attributed it to 2026-27; source page not isolated. Season unconfirmed.",
+      "note": "Holiday pricing 12/26-1/3, 1/18 and 2/15. Weekend pricing starts Friday at 3:45pm. Online purchases non-refundable.",
       "source": {
         "url": "https://swain.com/tickets-and-rentals/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4 Hour lift ticket, weekday",
+      "category": "adult half-day",
+      "amount": 60,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Not offered weekends/holidays.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Twilight (4pm-close)",
+      "category": "adult night",
+      "amount": 39,
+      "amountMax": 48,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$39 weekday, $48 weekend/holiday.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior/Senior All Day (juniors 7-12, seniors 65-74)",
+      "category": "junior/senior",
+      "amount": 52,
+      "amountMax": 72,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$52 weekday, $72 weekend/holiday; 4-hour weekday $48.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-Pack lift tickets",
+      "category": "adult 8-pack",
+      "amount": 475,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekday specials (Buddy Monday, Teacher Tuesday, Wacky Wednesday, Throwback Thursday 65+)",
+      "category": "adult special",
+      "amount": 34,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Valid 1-9 pm; rentals $30; excluded on holiday dates; College Nights Sun-Thu 4pm-close $29 (rental $25). Subject to change.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski/Snowboard rental (includes boots)",
+      "category": "adult",
+      "amount": 40,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Junior $34, twilight $30, helmet $10, season-long rental $159. Poles not guaranteed.",
+      "source": {
+        "url": "https://swain.com/tickets-and-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets & rentals page (fetched 2026-10-03); holiday dates 12/26/26-1/3/27, 1/18/27, 2/15/27 tie the table to 2026-27"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Quad 2 Package: first-timer group lesson + lift ticket + rental",
+      "category": "adult",
+      "amount": 69,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated. All-Mountain Package (all-day ticket, rentals, 90-minute group lesson) $109; private lessons from $109; Lil' Penguins (3-6) $49.",
+      "source": {
+        "url": "https://swain.com/lessons/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lessons page (fetched 2026-10-03)"
       }
     }
   ],
@@ -163,7 +310,7 @@
     "hours": null,
     "tickets": "https://swain.com/tickets-and-rentals/",
     "seasonPass": "https://swain.com/season-passes/",
-    "lessons": null,
+    "lessons": "https://swain.com/lessons/",
     "rentals": null,
     "webcams": null,
     "parking": null,
@@ -230,25 +377,24 @@
     "notes": "No official snow-report URL appeared in research; check swain.com. OnTheSnow carries a third-party page."
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Owner/operator name.",
       "Base and summit elevations and precise coordinates. The location and weather points are approximate.",
       "Trail count (35 vs 30), difficulty split, terrain parks.",
-      "Night skiing, lessons and beginner programs, rentals, tubing, childcare.",
       "Operating hours for 2025-26 and 2026-27.",
-      "2026-27 season pass products and prices; confirm the season of the $65 weekday / $84 weekend adult all-day tickets found 2026-09-30.",
       "Official snow-report and trail-map URLs on swain.com (ticket and season-pass pages found).",
       "Historical opening dates and any resort-announced 2026-27 opening date.",
-      "Confirmation directly from indyskipass.com that Swain remains a 2026-27 Indy partner, and its blackout dates."
+      "Confirmation directly from indyskipass.com that Swain remains a 2026-27 Indy partner, and its blackout dates.",
+      "Lift operating hours (not on the pages fetched)."
     ],
     "conflicts": [
       "Trail count: 35 runs (Indy Pass resort page) vs 30 trails (OnTheSnow). 35 was used.",
       "Lift count: 4 chairlifts + 1 magic carpet = 5 (Indy Pass). No conflicting figure seen.",
       "Region: one search summary called Swain 'northwestern New York'. It is in Allegany County (Southern Tier / Western NY), and 'Western New York' was used."
     ],
-    "confidenceNotes": "Updated 2026-09-30: lift types (3 quads, 1 double, 1 surface/carpet) and adult all-day prices of unconfirmed season come from search summaries. The web-search budget ran out before Swain-specific searches beyond the Indy results, so coverage is thin. Medium confidence: vertical 650 ft, 4 chairs + 1 carpet and 35 runs (Indy Pass page); 100 acres and 97% snowmaking (OnTheSnow); the Indy partnership. The coordinates and summit point are unsourced approximations for weather-model use only. Drive time is a Piste estimate."
+    "confidenceNotes": "Lift tickets, rentals and specials read 2026-10-03 from the official tickets page (2026-27 holiday dates); lesson packages from the official lessons page; 2026-27 season pass rates are on swain.com/season-passes. Other facts are earlier search summaries."
   },
   "photo": {
     "src": "asset:photo-swain.webp",

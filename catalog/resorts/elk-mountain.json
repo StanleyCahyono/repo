@@ -107,6 +107,17 @@
           "checkedOn": "2026-09-28",
           "note": "From NBC Pocono opening-date guides; per-year attribution is approximate."
         }
+      },
+      {
+        "season": "2025-26",
+        "opened": null,
+        "closed": null,
+        "source": {
+          "url": "https://www.elkskier.com/conditions/",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official conditions page dated 03/23/2026: \"Now closed for the 25/26 season.\" Exact closing day not stated."
+        }
       }
     ],
     "typicalText": "Typically opens in mid-December. Opened Dec 14, 2022; Dec 13 was the estimated/tentative first day in both 2023-24 and 2024-25. The 2025-26 opening date was not found.",
@@ -128,9 +139,9 @@
       "note": "Sunday-Wednesday. Official lift-ticket page updated Oct 2025.",
       "source": {
         "url": "https://www.elkskier.com/lift-ticket/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03): lifts load 8:30 a.m.; close 4:30 p.m. Sun-Wed and 9:00 p.m. Thu-Sat with night skiing"
       }
     },
     {
@@ -147,9 +158,9 @@
       "note": "Thursday-Saturday.",
       "source": {
         "url": "https://www.elkskier.com/lift-ticket/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03): lifts load 8:30 a.m.; close 4:30 p.m. Sun-Wed and 9:00 p.m. Thu-Sat with night skiing"
       }
     },
     {
@@ -166,9 +177,9 @@
       "note": "Thursday-Saturday.",
       "source": {
         "url": "https://www.elkskier.com/lift-ticket/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03): lifts load 8:30 a.m.; close 4:30 p.m. Sun-Wed and 9:00 p.m. Thu-Sat with night skiing"
       }
     },
     {
@@ -181,9 +192,9 @@
       "note": "Ticket sales, rentals, ski school and cafeteria open at 08:00; closing times not stated.",
       "source": {
         "url": "https://www.elkskier.com/lift-ticket/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03): lifts load 8:30 a.m.; close 4:30 p.m. Sun-Wed and 9:00 p.m. Thu-Sat with night skiing"
       }
     },
     {
@@ -196,13 +207,224 @@
       "note": "Closing time not stated.",
       "source": {
         "url": "https://www.elkskier.com/lift-ticket/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03): lifts load 8:30 a.m.; close 4:30 p.m. Sun-Wed and 9:00 p.m. Thu-Sat with night skiing"
       }
     }
   ],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour all-area ticket (ages 18-64), weekend/holiday",
+      "category": "adult",
+      "amount": 98,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Reload price; first purchase adds a $5 media charge. Holiday rates 12/24/25-1/1/26, 1/19/26, 2/16/26.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour all-area ticket (ages 18-64), midweek",
+      "category": "adult",
+      "amount": 81,
+      "amountMax": 86,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Thursday $81, Friday $86 (no Mon-Wed 8-hour price listed). Reload price; first purchase adds a $5 media charge. Holiday rates 12/24/25-1/1/26, 1/19/26, 2/16/26.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4-hour all-area ticket (18-64)",
+      "category": "adult half-day",
+      "amount": 71,
+      "amountMax": 85,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Mon-Thu $71, Fri $77, weekend/holiday $85. Reload price; first purchase adds a $5 media charge. Holiday rates 12/24/25-1/1/26, 1/19/26, 2/16/26.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Extended ticket 8:30 am-9:00 pm (Thu-Sat)",
+      "category": "adult extended",
+      "amount": 92,
+      "amountMax": 104,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Thu/Fri $92, Sat $104.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night ticket 4:30-9:00 pm (Thu-Sat)",
+      "category": "adult night",
+      "amount": 44,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2 consecutive days open to close",
+      "category": "adult 2-day",
+      "amount": 150,
+      "amountMax": 182,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$150 purchased Sun-Thu (non-holiday), $167 Fri-Sat, $182 Sat-Sun/holidays.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, junior (12-17) / senior (65-74)",
+      "category": "junior/senior",
+      "amount": 67,
+      "amountMax": 85,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Mon-Thu $67, Fri $71, weekend/holiday $85; 4-hour $58-$71; night $44.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, child (6-11) / super senior (75+)",
+      "category": "child",
+      "amount": 56,
+      "amountMax": 73,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Mon-Thu $56, Fri $61, weekend/holiday $73; night $38. Under 5 free with a paying adult (windows only).",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Beginner lift ticket (\"A\" lift only), day, adult 18-64",
+      "category": "adult beginner area",
+      "amount": 37,
+      "amountMax": 42,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Midweek $37, weekend/holiday $42; child/senior $32/$37; night $25. Windows only.",
+      "source": {
+        "url": "https://www.elkskier.com/lift-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page \"prices updated October 2025\" (fetched 2026-10-03); holiday rates 12/24/25-1/1/26"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "1-hour group lesson (ages 8+, min 3 participants)",
+      "category": "adult",
+      "amount": 85,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated. 10:00 a.m. and 1:00 p.m. (5:45 p.m. on night-skiing days). 1-hour private $140.",
+      "source": {
+        "url": "https://www.elkskier.com/ski-school/adult-ski-snowboarding-lessons/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official adult lessons page (fetched 2026-10-03)"
+      }
+    }
+  ],
   "links": {
     "official": "https://www.elkskier.com/",
     "trailMap": "https://www.elkskier.com/trail-maps/",
@@ -265,20 +487,22 @@
     "notes": "Official HTML conditions page; a conditions + webcam page also exists (https://elkskier.com/conditions-web-cam). No structured feed identified. Third-party mirror: https://www.onthesnow.com/pennsylvania/elk-mountain-ski-resort/skireport."
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-28",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Adult 1-day lift ticket prices (official page updated Oct 2025, but figures were not visible in search results).",
+      "2026-27 lift-ticket prices (official page still shows prices updated October 2025, 2025-26 holiday dates).",
       "Official 2026-27 opening date (only an OnTheSnow projection of Dec 11, 2026).",
       "2025-26 actual opening and closing dates; 2023-24 and 2024-25 actual openings.",
       "Whether there is on-mountain lodging, tubing or childcare.",
       "Whether College Wednesdays and Senior Tuesdays continue in 2026-27.",
-      "2026-27 season-pass prices — tracked in passes.json."
+      "2026-27 season-pass prices — tracked in passes.json.",
+      "Rental package price (rentals page not fetched)."
     ],
     "conflicts": [
-      "elevation.verticalFt: 925 (https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area); 1,000 ft ('1,000 feet of vertical' phrasing in resort/tourism listing copy; exact page among elkskier.com / discovernepa.com / visitnepa.org unclear) (https://www.elkskier.com/). Resolution: Used 925 ft so it stays consistent with the 1,742/2,667 ft base/summit figures. Resort marketing says 1,000 ft."
+      "elevation.verticalFt: 925 (https://en.wikipedia.org/wiki/Elk_Mountain_Ski_Area); 1,000 ft ('1,000 feet of vertical' phrasing in resort/tourism listing copy; exact page among elkskier.com / discovernepa.com / visitnepa.org unclear) (https://www.elkskier.com/). Resolution: Used 925 ft so it stays consistent with the 1,742/2,667 ft base/summit figures. Resort marketing says 1,000 ft.",
+      "Junior/senior table lists MLK holiday as 1/16/26 while the adult table says 1/19/26."
     ],
-    "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Terrain stats come from Wikipedia and a SKI Mag / SnowBrains summary: 27 trails, 180 acres, 6 chairs + 1 rope tow, 100% snowmaking, 2 parks, 25/30/45 split. The ability split's category labels were ambiguous in one summary ('easy/difficult/more difficult'), but SnowBrains gives beginner/intermediate/expert. Hours come from the official lift-ticket page, which was updated Oct 2025. The 2025-26 holiday-rate dates were Dec 24, 2025 to Jan 1, 2026, Jan 19, 2026 and Feb 16, 2026. Opening-date history comes from NBC Pocono opening-date guides, and the exact attribution per year is approximate. Ownership comes from Unofficial Networks (Dec 2025) and First Tracks!! (2014). The summit coordinate is an estimate for weather queries only."
+    "confidenceNotes": "Lift-ticket prices (2025-26), hours and group-lesson price read 2026-10-03 from elkskier.com. Terrain/elevation are earlier search summaries (homepage confirms 180 acres, 27 trails)."
   },
   "photo": {
     "src": "asset:photo-elk-mountain.webp",

@@ -110,12 +110,12 @@
       {
         "season": "2025-26",
         "opened": "2025-12-05",
-        "closed": null,
+        "closed": "2026-03-29",
         "source": {
           "url": "https://www.wkbw.com/news/local-news/cattaraugus-county/what-we-have-all-been-waiting-for-holiday-valley-opens-for-the-2025-26-ski-and-snowboard-season",
           "verification": "search-summary",
           "checkedOn": "2026-09-28",
-          "note": "Had targeted Nov 28, 2025 (weather permitting); opened Fri Dec 5, 2025 with day and night skiing 9am-10pm. Closing date not found."
+          "note": "Had targeted Nov 28, 2025 (weather permitting); opened Fri Dec 5, 2025 with day and night skiing 9am-10pm. Closing date not found. Closed Mar 29, 2026 per SnowStash (https://snowstash.com/usa/new-york/holiday-valley/lift-tickets, fetched 2026-10-03)."
         }
       },
       {
@@ -131,7 +131,7 @@
       }
     ],
     "typicalText": "Usually targets the day after Thanksgiving and opens late November to early December depending on weather: Fri Dec 5, 2025 (after a Nov 28 target) and Fri Dec 6, 2024. Night skiing usually ends in mid-March.",
-    "notes": "No resort-announced 2026-27 opening date found as of 2026-10-03. The resort aims to open the day after Thanksgiving each year (it opened Fri Dec 5, 2025; 20-year average opening Dec 5). OnTheSnow (third party) projects 2026-11-27 to 2027-04-04; projections, not announcements. The official lift-tickets page says lift tickets went on sale Thu Oct 1, 2026 (search summary)."
+    "notes": "No resort-announced 2026-27 opening date found as of 2026-10-03. The resort aims to open the day after Thanksgiving each year (it opened Fri Dec 5, 2025; 20-year average opening Dec 5). OnTheSnow (third party) projects 2026-11-27 to 2027-04-04; projections, not announcements. The official lift-tickets page says lift tickets went on sale Thu Oct 1, 2026 (search summary). No 2026-27 opening/closing date on the official pages fetched 2026-10-03 (snow report: \"closed for the season\")."
   },
   "hours": [
     {
@@ -193,7 +193,7 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "All-day lift ticket, weekday non-holiday",
+      "item": "Weekday All Day (non-holiday)",
       "category": "adult",
       "amount": 100,
       "amountMax": null,
@@ -204,17 +204,17 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "4-hour $88, 8-hour $96, 2-day $156. Season not stated next to the rates. The page also says lift tickets went on sale Thu Oct 1, 2026, and the rates are about $5 above an undated Ellicottville Outside table (weekday all-day $98, weekend 8-hour $110 / all-day $115), so they are probably the 2026-27 rates, but that is not confirmed. One-time $5 RFID card fee.",
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
       "source": {
         "url": "https://www.holidayvalley.com/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page, which states lift tickets went on sale Thu Oct 1, 2026"
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "All-day lift ticket, weekend/holiday",
+      "item": "Weekend / Holiday All Day",
       "category": "adult",
       "amount": 120,
       "amountMax": null,
@@ -225,18 +225,144 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "8-hour $115; Saturday+Sunday all-day $190; Sunday 4-hour $105. Season not stated next to the rates. The page also says lift tickets went on sale Thu Oct 1, 2026, and the rates are about $5 above an undated Ellicottville Outside table (weekday all-day $98, weekend 8-hour $110 / all-day $115), so they are probably the 2026-27 rates, but that is not confirmed. One-time $5 RFID card fee.",
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Weekend/holiday 8-hour $115; Saturday & Sunday all day (2 days) $190.",
       "source": {
         "url": "https://www.holidayvalley.com/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page, which states lift tickets went on sale Thu Oct 1, 2026"
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "All-day lift ticket, weekday non-holiday",
-      "category": "child",
+      "item": "8 Hour Weekday (non-holiday)",
+      "category": "adult 8-hour",
+      "amount": 96,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekend / Holiday 8-Hour",
+      "category": "adult 8-hour",
+      "amount": 115,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4 Hour Weekday (non-holiday)",
+      "category": "adult half-day",
+      "amount": 88,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Sunday 4 Hours",
+      "category": "adult half-day",
+      "amount": 105,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night ticket (weekday 3:30 PM-close; weekend 3:30-10 PM)",
+      "category": "adult night",
+      "amount": 53,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Same $53 price weekday and weekend nights.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2-Day Weekday (non-holiday), consecutive days",
+      "category": "adult 2-day",
+      "amount": 156,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekday All Day (non-holiday)",
+      "category": "junior",
       "amount": 81,
       "amountMax": null,
       "currency": "USD",
@@ -246,18 +372,18 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Junior. 4-hour $69, 8-hour $77, 2-day $112. Season not stated next to the rates. The page also says lift tickets went on sale Thu Oct 1, 2026, and the rates are about $5 above an undated Ellicottville Outside table (weekday all-day $98, weekend 8-hour $110 / all-day $115), so they are probably the 2026-27 rates, but that is not confirmed. One-time $5 RFID card fee.",
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Junior 8-hour $77, 4-hour $69, 2-day weekday $112, night $43.",
       "source": {
         "url": "https://www.holidayvalley.com/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page, which states lift tickets went on sale Thu Oct 1, 2026"
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "All-day lift ticket, weekend/holiday",
-      "category": "child",
+      "item": "Weekend / Holiday All Day",
+      "category": "junior",
       "amount": 95,
       "amountMax": null,
       "currency": "USD",
@@ -267,40 +393,19 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Junior. 8-hour $89; Saturday+Sunday all-day $156; Sunday 4-hour $80. Season not stated next to the rates. The page also says lift tickets went on sale Thu Oct 1, 2026, and the rates are about $5 above an undated Ellicottville Outside table (weekday all-day $98, weekend 8-hour $110 / all-day $115), so they are probably the 2026-27 rates, but that is not confirmed. One-time $5 RFID card fee.",
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Junior weekend 8-hour $89, Sunday 4 hours $80, Sat & Sun all day $156, night $43.",
       "source": {
         "url": "https://www.holidayvalley.com/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page, which states lift tickets went on sale Thu Oct 1, 2026"
-      }
-    },
-    {
-      "subjectType": "lift-ticket",
-      "item": "Night ticket (3:30 PM-close), weekday",
-      "category": "adult",
-      "amount": 53,
-      "amountMax": null,
-      "currency": "USD",
-      "season": null,
-      "dayType": "weekday",
-      "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "Junior $43. Season not stated next to the rates. The page also says lift tickets went on sale Thu Oct 1, 2026, and the rates are about $5 above an undated Ellicottville Outside table (weekday all-day $98, weekend 8-hour $110 / all-day $115), so they are probably the 2026-27 rates, but that is not confirmed. One-time $5 RFID card fee.",
-      "source": {
-        "url": "https://www.holidayvalley.com/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page, which states lift tickets went on sale Thu Oct 1, 2026"
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
       }
     },
     {
       "subjectType": "rental",
-      "item": "Ski or snowboard rental, all day",
+      "item": "Ski (or snowboard) rental, all day",
       "category": "adult",
-      "amount": 42,
+      "amount": 52,
       "amountMax": null,
       "currency": "USD",
       "season": null,
@@ -309,19 +414,19 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Season not stated on the page. Junior $34; night rental $33 adult / $25 junior; unlimited season rental $135.",
+      "note": "Season not stated on the page. 8-hour $46, 4-hour $41, night $37, all weekend $101. Junior (11 and under) all day $43. Helmet all day $16.",
       "source": {
-        "url": "https://www.holidayvalley.com/lessons/learn-to-ski-or-ride/",
-        "verification": "search-summary",
+        "url": "https://www.holidayvalley.com/rentals/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lessons pages"
+        "note": "Official rentals page (fetched 2026-10-03)"
       }
     },
     {
       "subjectType": "lesson",
-      "item": "Learn to Ski/Ride package (1.5 h lesson + 8-hour beginner-area ticket + 8-hour rental), day",
+      "item": "Learn to Ski Package, daytime (first-time 1.5 h group lesson + School Haus area ticket + rentals, ages 12+)",
       "category": "adult",
-      "amount": 89,
+      "amount": 92,
       "amountMax": null,
       "currency": "USD",
       "season": null,
@@ -330,12 +435,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Season not stated on the page. Night package $67. Adult group lesson only: $50 day, $33 night.",
+      "note": "Season not stated on the page. Nighttime package (50-minute lesson) $69. Day lessons 10:30 AM and 1:30 PM.",
       "source": {
         "url": "https://www.holidayvalley.com/lessons/learn-to-ski-or-ride/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official learn-to-ski page"
+        "note": "Official learn-to-ski page (fetched 2026-10-03)"
       }
     }
   ],
@@ -409,19 +514,20 @@
     "notes": "Official HTML snow report page. No structured feed identified. The webcams page includes a view from the top of Cindy's Run over the Resort Center. Third-party mirror: https://www.onthesnow.com/new-york/holiday-valley/ski-resort."
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
       "Official 2026-27 opening target and closing date.",
-      "Senior day-ticket price; season of the lift-ticket, rental and lesson prices (none is labelled with a season on the pages).",
-      "Terrain split by ability and number of terrain parks (4 vs 5); 2026-27 hours."
+      "Season label of the lift-ticket, rental and lesson prices (none is labelled; tickets on sale Oct 1, 2026); senior price not published.",
+      "Regular 2026-27 lift hours (official hours page fetched without times; stored hours are 2025-26 search summaries).",
+      "Terrain split and number of terrain parks."
     ],
     "conflicts": [
       "Trails: 60 (official) vs 58 (Wikipedia). Official used.",
-      "Skiable acres: 290 (Wikipedia/NYSkiBlog) vs \"300 acres\" (holidayvalley.com snowmaking statement).",
-      "Terrain parks: 5 (OnTheSnow) vs 4 (snow-online). Left null."
+      "Skiable acres: 290 vs \"300 acres\" (holidayvalley.com snowmaking statement).",
+      "Vertical: 750 ft (Wikipedia, SnowStash text) vs 820 ft (SnowStash stat box)."
     ],
-    "confidenceNotes": "Researched 2026-10-03 with web search only (page fetches were blocked by the network proxy), so every fact is a search summary of the cited page. Lift-ticket rates carry no season label on the page; they are probably 2026-27 (the page announces the Oct 1, 2026 on-sale date and the rates are higher than an older table), but that is not confirmed, so the season is left blank. A follow-up audit on 2026-10-03 could not re-open any source (proxy and search budget), so nothing here is upgraded beyond a search summary."
+    "confidenceNotes": "Lift tickets, rentals and the learn-to-ski package read 2026-10-03 from the official pages (no season label). Elevation, terrain and hours are earlier search summaries."
   },
   "photo": null
 }

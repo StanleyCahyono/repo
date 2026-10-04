@@ -106,31 +106,285 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
-    "typicalText": null,
-    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 11, 2026 (a third-party projection, not an announcement). Killington publishes its historical opening and closing dates (see More links), but they were not captured in this research, so no estimated window is derived."
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-11-12",
+        "closed": "2026-05-25",
+        "source": {
+          "url": "https://killington.com/hours",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official hours page historical open/close table (fetched 2026-10-03)"
+        }
+      },
+      {
+        "season": "2024-25",
+        "opened": "2024-11-14",
+        "closed": "2025-05-11",
+        "source": {
+          "url": "https://killington.com/hours",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official hours page historical open/close table (fetched 2026-10-03)"
+        }
+      },
+      {
+        "season": "2023-24",
+        "opened": "2023-11-03",
+        "closed": "2024-06-01",
+        "source": {
+          "url": "https://killington.com/hours",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official hours page historical open/close table (fetched 2026-10-03)"
+        }
+      },
+      {
+        "season": "2022-23",
+        "opened": "2022-11-17",
+        "closed": "2023-06-01",
+        "source": {
+          "url": "https://killington.com/hours",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official hours page historical open/close table (fetched 2026-10-03)"
+        }
+      },
+      {
+        "season": "2021-22",
+        "opened": "2021-11-05",
+        "closed": "2022-06-04",
+        "source": {
+          "url": "https://killington.com/hours",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official hours page historical open/close table (fetched 2026-10-03)"
+        }
+      }
+    ],
+    "typicalText": "Opens early-to-mid November and closes in May or early June (official history: 2025-26 Nov 12-May 25; 2024-25 Nov 14-May 11; 2023-24 Nov 3-Jun 1).",
+    "notes": "Killington does not set an opening or closing date (\"Unlike most resorts, we don't set an opening date\"); winter lift tickets are available starting November 7 (official pages fetched 2026-10-03). OnTheSnow projects 2026-11-11 to 2027-05-24 (third-party projection)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Regular season Mon-Fri",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": "Regular season mid-November through early May, once top-to-bottom skiing is established.",
+      "source": {
+        "url": "https://killington.com/hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours page (fetched 2026-10-03), with \"Winter 26/27 Peak dates\""
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Regular season Sat, Sun & peak days",
+      "days": [
+        6,
+        7
+      ],
+      "opens": "08:00",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": "Peak dates 2026-27: Nov 26-29, 2026; Dec 25, 2026-Jan 3, 2027; Jan 16-18; Feb 13-15, 2027. Bear Mountain Quad opens 7:30 a.m. Saturdays MLK weekend through March.",
+      "source": {
+        "url": "https://killington.com/hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours page (fetched 2026-10-03), with \"Winter 26/27 Peak dates\""
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Early season (first days open)",
+      "days": null,
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": "Opens 7 days a week 9-4; last gondola up 3:00 p.m.; first day typically passholders only.",
+      "source": {
+        "url": "https://killington.com/hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours page (fetched 2026-10-03), with \"Winter 26/27 Peak dates\""
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Late season Saturday (May-early June)",
+      "days": [
+        6
+      ],
+      "opens": "08:00",
+      "closes": "17:00",
+      "season": null,
+      "note": "Late season: Fri 9:00-16:00, Sat 8:00-17:00, Sun 8:00-16:00; closed Mon-Thu. Season not stated.",
+      "source": {
+        "url": "https://killington.com/hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours page (fetched 2026-10-03), with \"Winter 26/27 Peak dates\""
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (18-64) 1-day lift ticket, weekday",
+      "item": "1-day lift ticket, weekday (Dec 23 sample price)",
       "category": "adult",
       "amount": 205,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "OnTheSnow listing described as the \"most recent\" adult weekday price; the season was not stated. Killington prices are date-specific and cheaper when bought early. Confirm at source.",
+      "note": "Adult 18-64. Killington prices are date-specific and cheaper when booked early (official page lists no standard rate). Two-day $294.52 and week $799.98 as listed by OnTheSnow.",
       "source": {
         "url": "https://www.onthesnow.com/vermont/killington-resort/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 7, 2025\", \"Dec 23 sample pricing\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, junior 7-17 (Dec 23 sample)",
+      "category": "junior",
+      "amount": 158,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Children 6 and under and super seniors 80+ ski free (official page).",
+      "source": {
+        "url": "https://www.onthesnow.com/vermont/killington-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 7, 2025\", \"Dec 23 sample pricing\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, senior 65-79 (Dec 23 sample)",
+      "category": "senior",
+      "amount": 174,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/vermont/killington-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift-ticket table, \"last updated Oct 7, 2025\", \"Dec 23 sample pricing\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "VT/NH resident day ticket, Tuesday & Wednesday (all ages, online only)",
+      "category": "VT/NH resident",
+      "amount": 69,
+      "amountMax": 92,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$69 opening-Dec 18, 2026 and Apr 4, 2027-closing; $92 Dec 19, 2026-Apr 4, 2027. Proof of residency required. Not valid Nov 29; Dec 27, 29, 30, 2026; Jan 3, 17; Feb 14, 2027.",
+      "source": {
+        "url": "https://killington.com/lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"2026/27 VT/NH Day Ticket Rates\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "VT/NH resident day ticket, Sunday (all ages, online only)",
+      "category": "VT/NH resident",
+      "amount": 87,
+      "amountMax": 116,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$87 early/late season; $116 Dec 19, 2026-Apr 4, 2027.",
+      "source": {
+        "url": "https://killington.com/lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"2026/27 VT/NH Day Ticket Rates\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "1-Day Adult Package (18+), includes helmet",
+      "category": "adult",
+      "amount": 101,
+      "amountMax": 115,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$101 pre-purchase, $115 day-of; online reservation required (no walk-ins). Youth 1-day $81/$92; 2-day adult $190/$215; 3-day adult $278/$316.",
+      "source": {
+        "url": "https://killington.com/ski-and-snowboard-rentals",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page, \"2026/27 Pricing\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult Learn To Lesson (2-hour first-timer lesson, ages 16+)",
+      "category": "adult",
+      "amount": 287,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Starting at\" price; season not stated. Adult group lesson (2 hours, 16+) from $129.",
+      "source": {
+        "url": "https://killington.com/about-ski-snowboard-lessons",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lessons page \"Lesson Finder\" starting prices (fetched 2026-10-03)"
       }
     }
   ],
@@ -139,11 +393,11 @@
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
-    "hours": null,
+    "hours": "https://killington.com/hours",
     "tickets": "https://killington.com/lift-tickets",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://killington.com/about-ski-snowboard-lessons",
+    "rentals": "https://killington.com/ski-and-snowboard-rentals",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://newengland511.org/",
@@ -219,22 +473,21 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_from_Mount_Killington_with_skis,_near_where_the_K1_gondola_disembarks.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "No resort-announced 2026-27 opening or closing date found as of 2026-09-30 (OnTheSnow projects Nov 11, 2026).",
+      "2026-27 standard adult day-ticket price: official page is date-specific with no rate in its text; only OnTheSnow 2025-26 Dec 23 sample ($205) and 2026-27 VT/NH resident rates.",
       "Confirm 2026-27 Ikon Pass / Ikon Base terms (lead from earlier seasons: days shared with Pico) and Killington's own pass products.",
-      "Confirm 2026-27 adult day-ticket prices: OnTheSnow lists $205 adult (18-64) weekday with no season stated; prices are date-specific.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm the current owner/operator (POWDR sold Killington and Pico to a local ownership group in 2024 — reference).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates from the official historical open/close page (More links) so an estimated window can be derived.",
       "Confirm official deep links on killington.com (snow report, lift status, trail map, lessons, webcams, parking) and the snow-report format.",
       "Resolve the lift count (20 vs 22; the 22-lift breakdown sums to 21) and confirm skiable acres (1,526 in the summary), trail difficulty split, snowmaking %, childcare and tubing.",
       "Transit leads to confirm: Amtrak's Ethan Allen Express serves Rutland; a local bus has served Killington Road. Rutland (RUT) is the closest airport."
     ],
     "conflicts": [
-      "terrain.lifts: 20 lifts (one search result) vs 22 lifts listed as 2 gondolas, 14 chairlifts, 1 T-bar, 1 rope tow and 3 magic carpets (Vermont Vacations), which sum to 21. Resolution: used 22 with the listed types; total unconfirmed."
+      "terrain.lifts: 20 lifts (one search result) vs 22 lifts listed as 2 gondolas, 14 chairlifts, 1 T-bar, 1 rope tow and 3 magic carpets (Vermont Vacations), which sum to 21. Resolution: used 22 with the listed types; total unconfirmed.",
+      "Official \"2026/27 Military Lift Ticket Rates\" table uses 2025-26 date ranges (Dec 19, 2025 / Apr 5, 2026); not stored.",
+      "OnTheSnow multi-day prices (adult 2-day $294.52 < junior $316) look inconsistent."
     ],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries only; page fetches blocked). Terrain (1,526 acres, 155 trails, 20–22 lifts by source) and a $205 weekday adult price of unstated season are search-summary facts. Identity, coordinates, elevations, owner, homepage and the few features set remain Piste reference data (unverified). The OnTheSnow opening date is a projection. Drive and airport times are Piste estimates. Pass access was not re-researched."
+    "confidenceNotes": "Hours, history, rentals (2026/27), lessons and VT/NH rates read 2026-10-03 from killington.com; adult day price from OnTheSnow (2025-26 sample). Elevation/terrain remain earlier data."
   }
 }

@@ -111,17 +111,207 @@
     "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 12, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, midweek (Mon-Fri non-holiday), ages 19-64",
+      "category": "adult",
+      "amount": 58,
+      "amountMax": 64,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, weekend/holiday, ages 19-64",
+      "category": "adult",
+      "amount": 80,
+      "amountMax": 89,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. Holiday periods 2025-26: Dec 20-Jan 5, Jan 17-19, Feb 14-22.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4-hour ticket, midweek, ages 19-64",
+      "category": "adult half-day",
+      "amount": 49,
+      "amountMax": 54,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. 2-hour midweek $40/$44.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4-hour ticket, weekend/holiday, ages 19-64",
+      "category": "adult half-day",
+      "amount": 71,
+      "amountMax": 79,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2-day 8-hour ticket, midweek, ages 19-64",
+      "category": "adult 2-day",
+      "amount": 105,
+      "amountMax": 115,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. Weekend/holiday 2-day $150/$160.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, youth (7-12)",
+      "category": "child",
+      "amount": 40,
+      "amountMax": 59,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. Midweek $40/$44; weekend/holiday $53/$59. Ages 6 and under free with an adult ticket.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, teen (13-18)",
+      "category": "teen",
+      "amount": 49,
+      "amountMax": 69,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. Midweek $49/$54; weekend/holiday $62/$69.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8-hour ticket, senior (65+)",
+      "category": "senior",
+      "amount": 49,
+      "amountMax": 69,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic pricing in effect; lower = rate with 2-week or more advance purchase, higher = published rate. RFID card fee extra. Midweek $49/$54; weekend/holiday $62/$69. Active college/military midweek $44/$49.",
+      "source": {
+        "url": "https://westmountain.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, \"25-26 ... Published Ticket Rates\" tables (fetched 2026-10-03); page says 26-27 tickets will be available in the fall"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Daily rental package, 8 hours (skis, boots, poles, helmet or snowboard, boots, helmet), 13+",
+      "category": "adult",
+      "amount": 54,
+      "amountMax": 60,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$54 with 2-week advance purchase, $60 otherwise; 4-hour $45/$50; youth 8-hour $45/$50. 26-27 seasonal rental: adult $199, youth $149.",
+      "source": {
+        "url": "https://westmountain.com/rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page, \"25-26 Daily Rental Packages\" (fetched 2026-10-03)"
+      }
+    }
+  ],
   "links": {
     "official": "https://westmountain.com/",
     "trailMap": "https://westmountain.com/trail-maps/",
     "interactiveMap": null,
     "snowReport": null,
-    "hours": null,
-    "tickets": null,
-    "seasonPass": null,
+    "hours": "https://westmountain.com/hours/",
+    "tickets": "https://westmountain.com/lift-tickets/",
+    "seasonPass": "https://westmountain.com/season-passes/",
     "lessons": null,
-    "rentals": null,
+    "rentals": "https://westmountain.com/rentals/",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.511ny.org/",
@@ -181,16 +371,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Base_area_pic.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Any resort-announced 2026-27 opening date (OnTheSnow projects Dec 12, 2026) and day/night hours.",
-      "2026-27 adult day-ticket prices (not found).",
+      "2026-27 day-ticket prices: official page says 26-27 tickets and pricing \"will be available soon\" (2025-26 published rates stored).",
       "Confirm 2026-27 Indy Pass terms (day allowance, Indy Base blackouts); membership was stated without a season.",
       "Trail difficulty split, terrain parks, lessons, rentals and tubing.",
-      "Confirm coordinates (approximations) and snow-report / lift-status URLs."
+      "Confirm coordinates (approximations) and snow-report / lift-status URLs.",
+      "Beginner group-lesson price (not on the pages fetched); winter lift hours (hours page in fall mode)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Researched 2026-09-30 from one search (search summaries). Elevations, terrain (35 trails, 130 acres, 5 lifts by type), night skiing, 100% snowmaking and Indy/Indy+ membership are search-summary facts. Coordinates, homepage and drive/airport figures are Piste reference data or estimates; the OnTheSnow opening date is a projection; no price was found."
+    "confidenceNotes": "2025-26 ticket and rental rates read 2026-10-03 from westmountain.com. Elevation and terrain facts are earlier search summaries."
   }
 }

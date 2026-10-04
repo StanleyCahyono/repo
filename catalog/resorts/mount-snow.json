@@ -110,7 +110,7 @@
     "official": "https://www.mountsnow.com/",
     "trailMap": "https://www.mountsnow.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": "https://www.mountsnow.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    "snowReport": null,
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -173,7 +173,11 @@
     ],
     "transfers": []
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": null,
+    "format": "unknown",
+    "notes": "The Vail-pattern snow report URL (https://www.mountsnow.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx) returned \"Page Not Found - 404\" when fetched 2026-10-03; current conditions URL not captured."
+  },
   "photo": {
     "src": "asset:photo-mount-snow.webp",
     "alt": "Mount Snow: Mount Snow Winter",
@@ -182,8 +186,8 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:MountSnowWinter.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "No confirmed 2026-27 opening or closing date (OnTheSnow projects Nov 21, 2026; check the Vail Resorts 18 Aug 2026 opening-dates release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
@@ -192,9 +196,11 @@
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm that the snow-report, lift-status and trail-map links (standard Vail Resorts site pattern) resolve.",
       "Confirm lifts by type (six high-speed detachable chairs named), trail difficulty split, snowmaking %, learning area, childcare, tubing and night skiing.",
-      "Confirm elevations and base/summit coordinates (approximations)."
+      "Confirm elevations and base/summit coordinates (approximations).",
+      "Official snow report URL (Vail-pattern URL is a 404 as of 2026-10-03).",
+      "Elevation, terrain, prices and hours: the official homepage fetched 2026-10-03 had none in its text (\"Pass prices go up October 7\")."
     ],
     "conflicts": [],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (601 acres, 86 trails, 19 lifts incl. six high-speed detachables) is from Wikipedia via search; Carinthia details from Vail's 2025-26 tip sheet. Coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. Deep links follow the standard Vail site pattern. No price was found. The OnTheSnow date is a projection; drive/airport times are Piste estimates."
+    "confidenceNotes": "Only the homepage and a 404 snow-report page were fetched 2026-10-03; searches returned no Mount Snow results. Facts remain earlier reference data/search summaries; the dead snow-report link was removed."
   }
 }

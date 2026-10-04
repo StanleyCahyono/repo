@@ -108,20 +108,84 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 5, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived."
+    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 5, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived. Official hours page (fetched 2026-10-03) lists holiday dates Dec 26-Jan 3, Jan 17-20, Feb 14-22 (year not stated; closed Christmas Day) but no opening date or daily hours in its text."
   },
   "hours": [],
-  "prices": [],
+  "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "College Fridays all-day lift ticket (valid student ID, in person)",
+      "category": "college",
+      "amount": 30,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Not available on holidays. Military Fridays (active/retired) also $30. Military and college students get $5 off standard pricing (non-holiday). One free \"5 & under\" ticket with each adult ticket.",
+      "source": {
+        "url": "https://www.titusmountain.com/rates",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official \"2025-2026 Lift Ticket Rates\" page (fetched 2026-10-03); standard rates not in the page text"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "\"Skin & Ski\" uphill ticket (any age, any day, daylight only)",
+      "category": "uphill",
+      "amount": 15,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated.",
+      "source": {
+        "url": "https://www.titusmountain.com/xc-uphill-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official XC & uphill tickets page (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard only (component rental)",
+      "category": "adult ski/board only",
+      "amount": 25,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated. Boots $20, poles $5 sold separately; no package price listed. Seasonal ski/board package $229. No helmet rentals.",
+      "source": {
+        "url": "https://www.titusmountain.com/rentals",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page (fetched 2026-10-03)"
+      }
+    }
+  ],
   "links": {
     "official": "https://www.titusmountain.com/",
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
-    "hours": null,
-    "tickets": null,
-    "seasonPass": null,
+    "hours": "https://www.titusmountain.com/hours-of-operation",
+    "tickets": "https://www.titusmountain.com/rates",
+    "seasonPass": "https://www.titusmountain.com/seasonpasses",
     "lessons": null,
-    "rentals": null,
+    "rentals": "https://www.titusmountain.com/rentals",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.511ny.org/",
@@ -183,18 +247,19 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Any resort-announced 2026-27 opening date (OnTheSnow projects Dec 5, 2026) and operating days/hours (night skiing?).",
-      "2026-27 adult day-ticket prices (not found).",
+      "Standard adult day-ticket price: the official 2025-2026 rates page lists the rates in a format not captured in its text; only College/Military Friday $30 and the $15 uphill ticket were readable. 2026-27 day rates not found.",
       "Confirm 2026-27 Indy Pass terms (day allowance, Indy Base blackouts); membership was stated without a season.",
       "Confirm skiable acres (380 is stated as the area size), trail count (52 vs 53), snowmaking %, difficulty split, lessons and rentals.",
-      "Confirm coordinates (approximations), the official homepage and snow-report / lift-status / trail-map URLs."
+      "Confirm coordinates (approximations), the official homepage and snow-report / lift-status / trail-map URLs.",
+      "Rental package price and beginner group-lesson price (lessons pages had no prices in their text)."
     ],
     "conflicts": [
       "terrain.trails: 52 trails and glades vs 53 runs in another result. Resolution: used 52."
     ],
-    "confidenceNotes": "Researched 2026-09-30 from one search (search summaries). Elevations, terrain (52 trails, 10 lifts by type, 380 acres), the tubing hill and Indy/Indy+ membership are search-summary facts. Coordinates, homepage and drive/airport figures are Piste reference data or estimates; the OnTheSnow opening date is a projection; no price was found."
+    "confidenceNotes": "Ticket deals, rentals and the uphill ticket read 2026-10-03 from titusmountain.com pages. Elevation, terrain and pass facts are earlier search summaries. Searches returned no relevant results."
   }
 }

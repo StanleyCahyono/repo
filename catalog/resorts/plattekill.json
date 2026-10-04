@@ -27,7 +27,7 @@
       "url": "https://nyskiblog.com/directory/ny-ski-areas/catskills/plattekill-mountain/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30): summit 3,500 ft, base 2,400 ft, vertical 1,100 ft (converted to metres). Page-level attribution not isolated (NYSkiBlog/iSkiNY/Wikipedia results)."
+      "note": "Search summary (2026-09-30): summit 3,500 ft, base 2,400 ft, vertical 1,100 ft (converted to metres). Page-level attribution not isolated (NYSkiBlog/iSkiNY/Wikipedia results). Official homepage (fetched 2026-10-03) confirms \"41 exciting trails and 1100′ of vertical\"."
     }
   },
   "weatherPoints": [
@@ -95,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-12",
+      "text": "Tentative opening day is slated for Saturday, December 12 (2026/27 season).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://plattekill.com/on-the-trail/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official trail report page (fetched 2026-10-03): \"gearing up for another AWESOME SEASON on the mountain for 2026/27 ... Tentative opening day is slated for Saturday, December 12.\""
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -114,44 +119,170 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (18+) 1-day lift ticket, weekend (non-holiday)",
+      "item": "1-day lift ticket, weekend (non-holiday)",
       "category": "adult",
       "amount": 102,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekend",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (2026-09-30) of the resort's ticket pricing: weekends (non-holiday) adult $102, youth (7-17) and senior (65+) $78. Season not stated. Confirm at source.",
+      "note": "Adult 18+. \"Buy in advance & save\"; \"Earlier you buy, cheaper the lift tickets!\"",
       "source": {
         "url": "https://plattekill.com/tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (18+) 1-day lift ticket, Friday (non-holiday)",
+      "item": "1-day lift ticket, holiday",
+      "category": "adult",
+      "amount": 107,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "holiday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Adult 18+. \"Buy in advance & save\"; \"Earlier you buy, cheaper the lift tickets!\"",
+      "source": {
+        "url": "https://plattekill.com/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, Friday (non-holiday)",
       "category": "adult",
       "amount": 80,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (2026-09-30): Fridays (non-holiday) adult $80, youth and senior $70. Season not stated; which other weekdays operate was not captured. Confirm at source.",
+      "note": "Adult 18+. \"Buy in advance & save\"; \"Earlier you buy, cheaper the lift tickets!\"",
       "source": {
         "url": "https://plattekill.com/tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, youth (7-17)",
+      "category": "youth",
+      "amount": 70,
+      "amountMax": 82,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Friday $70, weekend $78, holiday $82. Senior (65+) same prices.",
+      "source": {
+        "url": "https://plattekill.com/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, senior (65+)",
+      "category": "senior",
+      "amount": 70,
+      "amountMax": 82,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Friday $70, weekend $78, holiday $82.",
+      "source": {
+        "url": "https://plattekill.com/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, child (6 & under)",
+      "category": "child",
+      "amount": 15,
+      "amountMax": 17,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Friday/weekend $15, holiday $17.",
+      "source": {
+        "url": "https://plattekill.com/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Beginner area only (carpet lift)",
+      "category": "adult beginner area",
+      "amount": 42,
+      "amountMax": 45,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$42 Friday/weekend, $45 holiday.",
+      "source": {
+        "url": "https://plattekill.com/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official tickets page, \"2025 | 26 Lift Tickets\" table (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Daily rental package (skis or board)",
+      "category": "adult",
+      "amount": 59,
+      "amountMax": 62,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$59 bought in advance, $62 same day & holidays; 10% off when added to an online lesson booking. Age 6 & under package $49/$52. Season rental $199.",
+      "source": {
+        "url": "https://plattekill.com/equipment-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official equipment rentals page, \"2025 | 26 Daily Rentals\" (fetched 2026-10-03)"
       }
     }
   ],
@@ -228,17 +359,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fullsizeoutput_41a.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm any resort-announced 2026-27 opening date and operating schedule (OnTheSnow projects Dec 12, 2026; which weekdays operate was not captured).",
-      "Confirm 2026-27 day-ticket prices (weekend $102 / Friday $80 adult found without a season label).",
+      "Operating days/hours for 2026-27; the Dec 12, 2026 opening is \"tentative\".",
+      "2026-27 ticket, rental and lesson prices: official page says they \"will be available online soon\" (2025-26 rates stored). Beginner lesson price not found.",
       "Pass access: Indy Pass membership was NOT confirmed by the search (only Indy product prices surfaced); check for Indy or reciprocal passes.",
       "Confirm the lift types (two lifts to the peaks, believed chairlifts) and the trail difficulty split, terrain parks, lessons and rentals.",
       "Confirm coordinates of the base lodge and summit (approximations) and the operator.",
       "Official trail-map URL; the Conditions + Trail Report page is used for both snow report and lift status."
     ],
     "conflicts": [],
-    "confidenceNotes": "Researched 2026-09-30 from one search (search summaries only; page fetches blocked). Elevations, terrain (41 trails, 110 acres, 4 lifts), 75% snowmaking and weekend/Friday adult prices (season not stated) are search-summary facts. Coordinates, homepage and the ALB/drive figures are Piste reference data or estimates. The OnTheSnow opening date is a projection. No pass affiliation was confirmed."
+    "confidenceNotes": "2025-26 tickets and rentals and the tentative Dec 12 (2026/27) opening read 2026-10-03 from plattekill.com. Elevation/terrain are earlier search summaries."
   }
 }
