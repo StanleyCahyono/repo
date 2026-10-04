@@ -89,7 +89,7 @@ export function ResortActions({ variant, className, ...p }: ResortActionsProps &
   }
   return (
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
-      <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel className="h-11! rounded-full! border-glass-strong! bg-glass-strong! px-4! backdrop-blur-[14px]" />
+      <FavoriteButton resortId={p.resortId} name={p.shortName} initial={p.isFavorite} withLabel className="h-11! rounded-full! px-4! backdrop-blur-[14px] aria-[pressed=false]:border-glass-strong! aria-[pressed=false]:bg-glass-strong!" />
       {compare}
       {trip}
     </div>

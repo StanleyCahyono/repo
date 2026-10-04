@@ -6,11 +6,10 @@
  * labelled as not routes (plus a list alternative), and winter-road / safety links.
  */
 import Link from 'next/link'
-import { ArrowUpRight, Car, Navigation, CloudSnow, ExternalLink, Mountain, Plane, PlaneTakeoff, TriangleAlert } from 'lucide-react'
+import { ArrowUpRight, Car, Navigation, CloudSnow, ExternalLink, Plane, PlaneTakeoff, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { Disclosure } from '@/components/ui/disclosure'
 import { KindTag, Missing } from '@/components/ui/provenance'
-import type { MapLine, MapMarker } from '@/components/map'
 import type { ResortDetail } from '@/lib/data/resort-detail'
 import type { AirportPlace, ResortPageExtras } from '@/lib/data/resort-page'
 import { addDays } from '@/lib/domain/time'
@@ -18,7 +17,8 @@ import { directionsLink, flightSearchLinks, nwsForecastPageUrl } from '@/lib/pro
 import { CountUp } from './count-up'
 import { DetailDrawer, ResortSection, Src, SubHead } from './section'
 import { dayLabel, dotJoin, hostOf, src, straightLineKm, TRANSFER_TYPE_LABEL, units, type PageView } from './format'
-import { TravelMap } from './travel-map'
+import { RouteMap } from './travel-map'
+import { routeMapData, type RouteLeg, type RouteMapData } from './travel-geo'
 
 const ROLE_TEXT: Record<string, string> = {
   both: 'Closest and most practical',
@@ -38,7 +38,7 @@ const NIGHT_CARD = [
   '[@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-bg:var(--surface-2)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-fg:var(--ink)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-fg2:var(--ink-2)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-acc:var(--teal)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--card-edge:var(--divider-strong)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--btn-bg:var(--ink-chip)] [@media(prefers-color-scheme:dark)]:[:root:not([data-theme=light])_&]:[--btn-fg:var(--on-ink-chip)]',
 ].join(' ')
 
-function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
+function TravelStory({ d, x, v, route }: { d: ResortDetail; x: ResortPageExtras; v: PageView; route: RouteMapData | null }) {
   const t = d.travel
   const u = units(v.units)
   const drive = t.driveMinutes !== null
@@ -122,17 +122,53 @@ function TravelStory({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: Pag
           <p className="m-0 text-[14px] text-[var(--card-fg2)]">No drive estimate or airports are recorded for this resort.</p>
         )}
       </div>
+      {route ? (
+        <div className="flex min-w-0 flex-col gap-3 lg:col-span-2">
+          <RouteMap data={route} label={routeLabel(route, d.summary.shortName, u)} />
+          <ul className="m-0 flex list-none flex-wrap gap-x-5 gap-y-1.5 p-0 text-[13px] text-[var(--card-fg2)]" aria-label="Routes on the map">
+            {route.legs.map((l) => (
+              <li key={l.id} className="flex items-baseline gap-1.5">
+                <span className="font-medium text-[var(--card-fg)]">{l.from.key === 'home' ? l.from.name : l.from.key}</span>
+                <span aria-hidden>→</span>
+                <span className="tnum">{legText(l, u)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   )
+}
+
+/** '235 km by road · about 3 h 5 min' (routing estimate, no traffic) or 'straight line, not a route'. */
+function legText(l: RouteLeg, u: ReturnType<typeof units>): string {
+  if (!l.road) return 'straight line, not a route'
+  return dotJoin(l.km !== null ? `${u.dist(l.km)} by road` : 'by road', l.min !== null ? `about ${u.duration(l.min)}` : null)
+}
+
+function routeLabel(r: RouteMapData, name: string, u: ReturnType<typeof units>): string {
+  return `Route map to ${name}: ${r.legs.map((l) => `from ${l.from.key === 'home' ? l.from.name : l.from.name} (${l.from.key}), ${legText(l, u)}`).join('; ')}. Nearby: ${r.cities
+    .slice(0, 6)
+    .map((c) => c.name)
+    .join(', ')}.`
 }
 
 export function TravelSection({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageView }) {
   const t = d.travel
   const fly = t.airports.length > 0
+  const wanted = new Set(t.airports.slice(0, 4).map((a) => a.iata))
+  const gateways = x.destinationAirports.filter((a) => wanted.has(a.iata))
+  const route = routeMapData({
+    resortId: d.summary.id,
+    resort: { name: d.summary.shortName, lon: d.summary.lon, lat: d.summary.lat },
+    home: x.home,
+    airports: (gateways.length ? gateways : x.destinationAirports.slice(0, 4)).map((a) => ({ iata: a.iata, name: a.name, lon: a.lon, lat: a.lat })),
+    fly,
+  })
   return (
     <ResortSection id="getting-there" index={5} title="Getting there" header="none">
-      <TravelStory d={d} x={x} v={v} />
-      <DetailDrawer id="travel-detail" summary="Routes, airports, flight search and the map" hint={dotJoin(t.verdict.note, 'straight lines are labelled as straight lines')}>
+      <TravelStory d={d} x={x} v={v} route={route} />
+      <DetailDrawer id="travel-detail" summary="Drive, airports, flight search and transfers" hint={dotJoin(t.verdict.note, 'links to book, never fares')}>
         <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div className="flex min-w-0 flex-col gap-8">
             <DriveBlock d={d} x={x} v={v} />
@@ -328,7 +364,7 @@ function FlightTable({ origins, first, dests, depart, ret, v }: { origins: Airpo
                 <span className="flex items-center gap-2">
                   <PlaneTakeoff aria-hidden className={cn('size-4', i === 0 ? 'text-teal' : 'text-ink-3')} />
                   <span className="font-semibold text-ink">{o.iata}</span>
-                  {i === 0 ? <span className="text-[11.5px] font-medium text-teal">default</span> : null}
+                  {i === 0 ? <span className="text-[12px] font-medium text-teal">default</span> : null}
                 </span>
                 <span className="block text-[12px] text-ink-3">{o.city ?? o.name}</span>
               </th>
@@ -408,36 +444,27 @@ function MapBlock({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageVi
   const u = units(v.units)
   const r = d.summary
   const dests = x.destinationAirports
-  const fly = d.travel.airports.length > 0
-  const markers: MapMarker[] = [
-    { id: 'resort', lat: r.lat, lon: r.lon, label: r.shortName, sublabel: 'resort', tone: 'default' },
-    ...dests.map((a) => ({ id: `apt-${a.iata}`, lat: a.lat, lon: a.lon, label: a.iata, sublabel: a.name, tone: 'airport' as const })),
-    { id: 'home', lat: x.home.lat, lon: x.home.lon, label: 'Home', sublabel: x.home.name, tone: 'home' },
-  ]
-  const lines: MapLine[] = fly
-    ? dests.map((a) => ({ from: [a.lon, a.lat], to: [r.lon, r.lat], label: `${a.iata} to ${r.shortName}: straight line, not a route` }))
-    : [{ from: [x.home.lon, x.home.lat], to: [r.lon, r.lat], label: `${x.home.name} to ${r.shortName}: straight line, not a route` }]
-  const fitIds = fly ? ['resort', ...dests.map((a) => `apt-${a.iata}`)] : ['resort', 'home']
   const listed = [
-    { key: 'resort', label: `${r.shortName} (resort)`, lat: r.lat, lon: r.lon, dist: null as number | null },
-    ...dests.map((a) => ({ key: a.iata, label: `${a.iata} — ${a.name}`, lat: a.lat, lon: a.lon, dist: straightLineKm(a, r) })),
-    { key: 'home', label: `Home — ${x.home.name}`, lat: x.home.lat, lon: x.home.lon, dist: straightLineKm(x.home, r) },
+    ...dests.map((a) => ({ key: a.iata, label: `${a.iata} — ${a.name}`, dist: straightLineKm(a, r) })),
+    { key: 'home', label: `Home — ${x.home.name}`, dist: straightLineKm(x.home, r) },
   ]
   return (
-    <section aria-labelledby="map-title" className="min-w-0">
-      <SubHead id="map-title" aside="Straight lines, not routes">
-        Map
+    <section aria-labelledby="map-title" className="min-w-0 rounded-[12px] border border-divider bg-surface p-5">
+      <SubHead id="map-title" aside="As the crow flies">
+        Distances to {r.shortName}
       </SubHead>
-      <TravelMap markers={markers} lines={lines} fitIds={fitIds} label={`Map of ${r.shortName}${fly ? ', its airports' : ''} and home`} />
-      <ul className="mt-3 flex flex-col gap-1 text-[12.5px] text-ink-2" aria-label="Map points (list alternative)">
+      <ul className="flex flex-col gap-1.5 text-[13px] text-ink-2" aria-label="Places and straight-line distances">
         {listed.map((p) => (
-          <li key={p.key} className="flex flex-wrap items-baseline gap-x-2">
-            {p.key === 'resort' ? <Mountain aria-hidden className="size-3.5 translate-y-0.5 text-teal" /> : p.key === 'home' ? <Car aria-hidden className="size-3.5 translate-y-0.5 text-ink-3" /> : <Plane aria-hidden className="size-3.5 translate-y-0.5 text-info" />}
-            <span className="font-medium text-ink">{p.label}</span>
-            {p.dist !== null ? <span className="text-ink-3 tnum">{u.dist(p.dist)} in a straight line — not a driving distance</span> : null}
+          <li key={p.key} className="flex items-baseline justify-between gap-3">
+            <span className="flex min-w-0 items-baseline gap-2">
+              {p.key === 'home' ? <Car aria-hidden className="size-3.5 shrink-0 translate-y-0.5 text-ink-3" /> : <Plane aria-hidden className="size-3.5 shrink-0 translate-y-0.5 text-info" />}
+              <span className="min-w-0 font-medium text-ink">{p.label}</span>
+            </span>
+            {p.dist !== null ? <span className="shrink-0 text-ink-3 tnum">{u.dist(p.dist)}</span> : null}
           </li>
         ))}
       </ul>
+      <p className="mt-3 text-[12px] text-ink-3">Straight-line distances, not driving distances — the road routes are on the map above.</p>
     </section>
   )
 }

@@ -37,6 +37,7 @@ import { greatCircleKm } from '@/lib/domain/geo'
 import { LIFT_TYPES, PISTE_DIFFICULTIES, difficultyStyle as styleOf, liftKindText, type LiftType, type PisteShape, type PisteTone, type RunDifficulty } from '@/lib/domain/lifts'
 import { OSM_SNAPSHOTS } from '@/assets/osm'
 import { decodePolyline } from '@/assets/osm/decode'
+import type { OsmPlace } from '@/assets/osm/types'
 import { isLive, type DataCtx } from './core'
 import { OSM_ADAPTER_ID, osmTargets, providerStatus, readSkiAreaExtract, type ConnectorState } from './deps'
 
@@ -178,10 +179,23 @@ export interface MappedLine {
   coords: [number, number][]
 }
 
+/** A named place near the ski area (map label): a settlement, a peak or a lift station from the snapshot. */
+export interface MappedPlace {
+  /** English name when OpenStreetMap records one, else the local name. */
+  name: string
+  kind: 'city' | 'town' | 'village' | 'hamlet' | 'peak' | 'station'
+  lon: number
+  lat: number
+  /** Metres, when recorded (peaks, stations). */
+  ele: number | null
+}
+
 export interface MappedGeometry {
   /** When the snapshot was taken from OpenStreetMap. */
   fetchedAt: string
   lines: MappedLine[]
+  /** Place labels bundled with the snapshot (empty when the snapshot has none). */
+  places: MappedPlace[]
   /** [west, south, east, north] */
   bbox: [number, number, number, number]
   prov: Provenance
@@ -196,6 +210,25 @@ interface SnapshotElement {
 interface Snapshot {
   fetched: string
   elements: SnapshotElement[]
+  places?: OsmPlace[]
+}
+
+const PLACE_KINDS = new Set<MappedPlace['kind']>(['city', 'town', 'village', 'hamlet', 'peak', 'station'])
+
+function placesOf(snap: Snapshot): MappedPlace[] {
+  const out: MappedPlace[] = []
+  const seen = new Set<string>()
+  for (const p of snap.places ?? []) {
+    const name = (p.en ?? p.n ?? '').trim()
+    if (!name || !PLACE_KINDS.has(p.k) || !Array.isArray(p.ll) || p.ll.length !== 2) continue
+    const [lon, lat] = p.ll
+    if (!Number.isFinite(lon) || !Number.isFinite(lat)) continue
+    const key = `${p.k}|${name}|${lon.toFixed(3)}|${lat.toFixed(3)}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    out.push({ name, kind: p.k, lon, lat, ele: typeof p.e === 'number' && Number.isFinite(p.e) ? Math.round(p.e) : null })
+  }
+  return out
 }
 
 const SNAPSHOTS = OSM_SNAPSHOTS as unknown as Record<string, Snapshot>
@@ -247,6 +280,7 @@ export function bundledGeometry(resortId: string, country: string): MappedGeomet
   return {
     fetchedAt: snap.fetched,
     lines,
+    places: placesOf(snap),
     bbox: [w, so, e, n],
     prov: provenance({
       kind: 'manual',

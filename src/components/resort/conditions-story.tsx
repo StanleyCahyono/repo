@@ -171,8 +171,10 @@ export function SnowfallWeek({ days, point, empty }: { days: SnowDayDatum[]; poi
                 )}
                 {x.cm !== null && x.cm > 0.2 ? <Flakes n={Math.min(6, Math.ceil(x.cm / 1.5))} seed={i} /> : null}
               </div>
-              <span className="text-[12px] font-semibold text-ink tnum">{x.cm === null ? '—' : x.text}</span>
-              <span className="font-mono text-[11.5px] tracking-[0.06em] text-ink-2">{x.dow}</span>
+              <span className="flex max-w-full flex-wrap items-baseline justify-center gap-x-[3px] text-center text-[12px] leading-tight font-semibold text-ink tnum">
+                {x.cm === null || !x.text ? '—' : x.text.split(' ').map((part, k) => (k ? <span key={k} className="font-normal text-ink-2">{part}</span> : <span key={k}>{part}</span>))}
+              </span>
+              <span className="font-mono text-[12px] tracking-[0.04em] text-ink-2">{x.dow}</span>
             </div>
           )
         })}

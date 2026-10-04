@@ -87,20 +87,22 @@ function Tile({ item, link, url, now, built }: { item: ShelfItem; link: LinkView
 }
 
 /** Expected links with no URL on file, folded into one line instead of a grid of empty tiles. */
-export function LinksSection({ d, v }: { d: ResortDetail; v: PageView }) {
+export function LinksSection({ d, v, reportUrl = null }: { d: ResortDetail; v: PageView; reportUrl?: string | null }) {
   const link = d.links.find((l) => l.key === 'snowReport') ?? null
+  // The catalog's report source (the page Piste reads the report from) when no snow-report link is recorded.
+  const url = link?.url ?? reportUrl
   return (
     <ResortSection
       id="links"
       index={7}
       title="Snow report"
       meta={link?.check ? `checked ${shortDate(link.check.checkedAt.slice(0, 10))}` : null}
-      headline={link ? 'The official snow report.' : 'No snow report link on file.'}
-      lead={link ? 'Opens the resort’s own report in a new tab.' : 'Piste has no official snow report page recorded for this resort yet.'}
+      headline={url ? 'The official snow report.' : 'No snow report link on file.'}
+      lead={url ? 'Opens the resort’s own report in a new tab.' : 'Piste has no official snow report page recorded for this resort yet.'}
     >
-      {link ? (
+      {url ? (
         <ul className="grid max-w-md grid-cols-1">
-          <Tile item={{ key: 'snowReport', label: 'Snow report', icon: Snowflake, expected: true }} link={link} url={link.url} now={v.now} />
+          <Tile item={{ key: 'snowReport', label: 'Snow report', icon: Snowflake, expected: true }} link={link} url={url} now={v.now} />
         </ul>
       ) : null}
     </ResortSection>

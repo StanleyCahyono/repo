@@ -27,11 +27,29 @@ function planHeadline(d: ResortDetail, v: PageView): string {
   const lift = d.basket.lines.find((l) => l.key === 'lift')
   if (lift?.kind === 'pass-covered') return `Your pass covers the lift on ${dayLabel(v.date)}.`
   const shown = lift ? (lift.display ?? lift.amount) : null
-  if (lift && shown) return `Day ticket ${formatMoneyRange(shown, lift.displayMax ?? lift.amountMax)}.`
+  const snap = lift?.snapshotId ? d.prices.tickets.find((p) => p.id === lift.snapshotId) : null
+  if (lift && shown) return `Day ticket ${snap && /dynamic|\bfrom\b/i.test(snap.item) ? 'from ' : ''}${formatMoneyRange(shown, lift.displayMax ?? lift.amountMax)}.`
   return `Ticket prices for ${dayLabel(v.date)} are not on file.`
 }
 
-const MY_PASS_TONE = { covered: 'text-positive', 'not-covered': 'text-critical', unknown: 'text-ink-2', 'no-pass': 'text-ink-2' } as const
+const MY_PASS_TONE = { covered: 'text-positive', 'not-covered': 'text-ink', unknown: 'text-ink', 'no-pass': 'text-ink' } as const
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+const priceText = (p: PriceView) => (p.amount.amountMinor === 0 && !p.amountMax ? 'Free' : formatMoneyRange(p.amount, p.amountMax))
+/** A price row's season, only when it is not the planning season ("2025-26 price"). */
+const otherSeason = (p: PriceView, planning: string) => (p.seasonId && p.seasonId !== planning ? `${p.seasonId} price` : null)
+
+function PriceLine({ label, value, note }: { label: string; value: string | null; note?: string | null }) {
+  return (
+    <li className="flex items-baseline justify-between gap-3">
+      <span className="min-w-0 text-ink-2">
+        {label}
+        {note ? <span className="text-ink-3"> · {note}</span> : null}
+      </span>
+      <span className="shrink-0 font-medium text-ink tnum">{value}</span>
+    </li>
+  )
+}
 
 function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
   const lift = d.basket.lines.find((l) => l.key === 'lift') ?? null
@@ -39,92 +57,134 @@ function PlanStory({ d, v }: { d: ResortDetail; v: PageView }) {
   const b = d.basket
   const incomplete = b.tier.tier === 'incomplete'
   const my = d.summary.myPass
+  const planning = d.season.seasonId
   const lifts = d.hours.forDate.filter((f) => f.activity === 'lifts')
-  const night = d.hours.forDate.filter((f) => f.activity === 'night-skiing')
-  const hoursText = (fs: typeof lifts) => fs.map((f) => (f.closed ? 'Closed' : f.opens || f.closes ? `${clock(f.opens) ?? '?'}–${clock(f.closes) ?? '?'}` : 'Times not stated')).join(', ')
-  const products = d.passAccess
-  const others = d.prices.tickets.filter((p) => !p.expired || p.seasonId).slice(0, 3)
+  const hoursText = (fs: typeof lifts) => fs.map((f) => (f.closed ? 'Closed' : f.opens || f.closes ? `${clock(f.opens) ?? '?'}–${clock(f.closes) ?? '?'}` : null)).filter(Boolean).join(', ')
+  const liftHours = hoursText(lifts)
+
+  // The adult day ticket behind the basket line, and what else is on file.
+  const snap = lift?.snapshotId ? (d.prices.tickets.find((p) => p.id === lift.snapshotId) ?? null) : null
+  const varies = !!snap && /dynamic|\bfrom\b/i.test(snap.item)
+  const ticket = lift && shown && lift.kind !== 'pass-covered' ? formatMoneyRange(shown, lift.displayMax ?? lift.amountMax) : null
+  const atResort = lift?.display && lift.amount && lift.display.currency !== lift.amount.currency ? formatMoneyRange(lift.amount, lift.amountMax) : null
+  const otherTickets = d.prices.tickets.filter((p) => p.id !== snap?.id && !p.expired && (!snap || (p.category ?? '').toLowerCase() !== 'adult')).slice(0, 4)
+  const rental = d.prices.rentals.find((p) => !p.expired) ?? null
+  const lesson = d.prices.lessons.find((p) => !p.expired) ?? null
+  const pricesLink = d.links.find((l) => l.key === 'tickets') ?? null
+
+  // Pass or ticket: one plain answer for the day.
+  const works = d.passAccess.filter((p) => p.verdict.canSki)
+  const ticketHint = ticket ? `A day ticket is ${varies ? 'from ' : ''}${ticket}.` : 'The day-ticket price is not on file.'
+  const answer =
+    my.status === 'covered'
+      ? { head: `Your ${my.productName} covers ${dayLabel(v.date)}`, sub: 'No lift ticket needed.' }
+      : my.status === 'not-covered'
+        ? { head: `Your ${my.productName} doesn’t work here on ${dayLabel(v.date)}`, sub: `Buy a lift ticket. ${ticketHint}` }
+        : my.status === 'unknown'
+          ? { head: `Your ${my.productName} isn’t listed for ${d.summary.shortName}`, sub: `Plan on a lift ticket unless the pass says otherwise. ${ticketHint}` }
+          : { head: works.length ? 'A pass can cover this day' : 'Buy a lift ticket', sub: works.length ? `You have no pass on file. ${ticketHint}` : ticketHint }
+
   return (
     <div className="grid gap-[18px] md:grid-cols-2 xl:grid-cols-3">
       <GlassCard title="Lift ticket" aside={dayLabel(v.date)}>
         {lift?.kind === 'pass-covered' ? (
           <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-positive">Covered</p>
-        ) : shown ? (
-          <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-ink tnum">
-            <CountUp text={formatMoneyRange(shown, lift?.displayMax ?? lift?.amountMax ?? null) ?? "—"} />
-          </p>
+        ) : ticket ? (
+          <div className="flex flex-col gap-1.5">
+            <p className="m-0 flex items-baseline gap-2 text-[44px] leading-none font-light tracking-[-0.03em] text-ink tnum">
+              {varies ? <span className="text-[15px] font-normal tracking-normal text-ink-2">from</span> : null}
+              <CountUp text={ticket} />
+            </p>
+            <p className="m-0 text-[13.5px] text-ink-2">{dotJoin(snap?.category ? `${cap(snap.category)} day ticket` : 'Day ticket', varies ? 'price varies by date' : null, snap ? otherSeason(snap, planning) : null, atResort ? `${atResort} at the resort` : null)}</p>
+          </div>
         ) : (
           <p className="m-0 text-[30px] leading-none font-light text-ink-3">Not on file</p>
         )}
-        <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">
-          {lift ? dotJoin(lift.kind ? LINE_KIND_LABEL[lift.kind] : 'Price unknown', lift.source, lift.note) : 'No ticket price recorded.'}
-        </p>
-        {!shown && lift?.kind !== 'pass-covered' && others.length ? (
+        {otherTickets.length || rental || lesson ? (
           <ul className="m-0 flex list-none flex-col gap-1.5 border-t border-divider p-0 pt-3 text-[13px]">
-            {others.map((p) => (
-              <li key={p.id} className="flex items-baseline justify-between gap-3">
-                <span className="min-w-0 text-ink-2">
-                  {p.item}
-                  {p.seasonId ? <span className="text-ink-2"> · {seasonText(p.seasonId)}</span> : null}
-                </span>
-                <span className="shrink-0 font-medium text-ink tnum">{formatMoneyRange(p.amount, p.amountMax)}</span>
-              </li>
+            {otherTickets.map((p) => (
+              <PriceLine key={p.id} label={p.category && !/adult/i.test(p.category) ? cap(p.category) : p.item} value={priceText(p)} note={otherSeason(p, planning)} />
             ))}
-            <li className="text-[12px] text-ink-2">Other dates or seasons on file — not the price for {dayLabel(v.date)}.</li>
+            {rental ? <PriceLine label="Rental" value={priceText(rental)} note={otherSeason(rental, planning) ?? (rental.item.length <= 28 ? rental.item : null)} /> : null}
+            {lesson ? <PriceLine label="Lesson" value={priceText(lesson)} note={otherSeason(lesson, planning) ?? (lesson.item.length <= 28 ? lesson.item : null)} /> : null}
           </ul>
         ) : null}
-        <Link href={`/passes?resort=${v.id}&from=${v.date}`} className="mt-auto text-[13px] font-semibold text-teal hover:underline">
-          Check your pass for a date →
+        <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[13px] font-semibold">
+          {pricesLink ? (
+            <a href={pricesLink.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-teal hover:underline">
+              Prices <ExternalLink aria-hidden className="size-3.5" />
+              <span className="sr-only"> on {hostOf(pricesLink.url) ?? 'the resort site'} (opens a new tab)</span>
+            </a>
+          ) : null}
+        </div>
+      </GlassCard>
+
+      <GlassCard title="Pass or ticket?" aside={dayLabel(v.date)}>
+        <div className="flex flex-col gap-1.5">
+          <p className={cn('m-0 text-[19px] leading-snug font-medium', MY_PASS_TONE[my.status])}>{answer.head}</p>
+          <p className="m-0 text-[13.5px] leading-[1.5] text-ink-2">{answer.sub}</p>
+        </div>
+        {works.length ? (
+          <div className="flex flex-col gap-2 border-t border-divider pt-3">
+            <p className="m-0 text-[12.5px] text-ink-2">Passes that cover {dayLabel(v.date)}</p>
+            <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+              {works.slice(0, 6).map((p) => {
+                const fam = ((PASS_FAMILIES as readonly string[]).includes(p.familyId) ? p.familyId : 'regional') as PassFamilyId
+                return (
+                  <li key={p.productId} className="flex min-w-0 items-center gap-1.5 rounded-full bg-[color-mix(in_srgb,var(--ink)_5%,transparent)] py-1 pr-2.5 pl-1 text-[12.5px] text-ink">
+                    <PassBadge family={fam} size="sm" />
+                    <span className="truncate">{p.productName}</span>
+                    {p.verdict.status === 'included-limited' ? <span className="shrink-0 text-ink-2">· limited days</span> : null}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ) : null}
+        <Link href={`/passes?resort=${v.id}&from=${v.date}`} className="mt-auto inline-flex items-center gap-1 text-[13px] font-semibold text-teal hover:underline">
+          Compare passes for {d.summary.shortName} <ArrowRight aria-hidden className="size-3.5" />
         </Link>
       </GlassCard>
-      <GlassCard title="Passes" aside={products.length ? `${products.length} on file` : null}>
-        <p className={cn('m-0 text-[17px] leading-snug font-medium', MY_PASS_TONE[my.status])}>
-          {my.status === 'no-pass' ? 'No pass recorded' : my.status === 'unknown' ? `No access recorded for your ${my.productName}` : my.headline}
-        </p>
-        {products.length ? (
-          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
-            {products.slice(0, 6).map((p) => {
-              const fam = ((PASS_FAMILIES as readonly string[]).includes(p.familyId) ? p.familyId : 'regional') as PassFamilyId
-              return (
-                <li key={p.productId} className="flex items-center gap-1.5 rounded-full bg-[color-mix(in_srgb,var(--ink)_5%,transparent)] py-1 pr-2.5 pl-1 text-[12.5px] text-ink">
-                  <PassBadge family={fam} size="sm" />
-                  <span className="truncate">{ACCESS_STATUS_LABEL[p.verdict.status]}</span>
-                </li>
-              )
-            })}
-          </ul>
-        ) : (
-          <p className="m-0 text-[13.5px] text-ink-2">No pass products recorded for this resort.</p>
-        )}
-        <p className="m-0 mt-auto text-[12.5px] text-ink-2">Exact products for {dayLabel(v.date)}.</p>
-      </GlassCard>
+
       <GlassCard title="Day cost per person" aside={b.holidayName ?? DAY_TYPE_TEXT[b.dayType]} className="md:col-span-2 xl:col-span-1">
         <div className="flex items-end justify-between gap-3">
           {incomplete ? (
-            <p className="m-0 text-[28px] leading-none font-light text-caution">Incomplete estimate</p>
+            <p className="m-0 flex flex-col gap-1">
+              <span className="text-[30px] leading-none font-light text-ink-2">Not complete</span>
+            </p>
           ) : (
             <p className="m-0 text-[44px] leading-none font-light tracking-[-0.03em] text-ink tnum">
-              <CountUp text={formatMoneyRange(b.total, b.totalMax) ?? "—"} />
+              <CountUp text={formatMoneyRange(b.total, b.totalMax) ?? '—'} />
             </p>
           )}
           {!incomplete ? (
-            <span className="rounded-full border border-copper/50 px-2.5 py-1 text-[18px] leading-none text-copper tnum" title="Expense tier (UI band)">
+            <span className="rounded-full border border-copper/50 px-2.5 py-1 text-[18px] leading-none text-copper tnum" title="Expense tier">
               {b.tier.tier}
               {b.tierMax ? `–${b.tierMax}` : ''}
             </span>
           ) : null}
         </div>
-        <p className="m-0 text-[13.5px] text-ink-2">{b.missing.find((m) => m.required)?.message ?? b.caveats[0] ?? `Lift + ${RENTAL_LABEL[b.assumptions.rentalOption].toLowerCase()} + lunch + parking.`}</p>
-        <dl className="m-0 mt-auto grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 border-t border-divider pt-3 text-[13px]">
-          <dt className="text-ink-2">Lifts</dt>
-          <dd className="m-0 text-right text-ink tnum">{lifts.length ? hoursText(lifts) : <span className="text-ink-2 italic">Hours not recorded</span>}</dd>
-          {night.length ? (
-            <>
-              <dt className="text-ink-2">Night skiing</dt>
-              <dd className="m-0 text-right text-ink tnum">{hoursText(night)}</dd>
-            </>
-          ) : null}
-        </dl>
+        <ul className="m-0 flex list-none flex-col gap-1.5 border-t border-divider p-0 pt-3 text-[13px]">
+          {b.lines.map((l) => {
+            const amt = l.display ?? l.amount
+            return (
+              <li key={l.key} className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0 text-ink-2">{l.key === 'rental' ? 'Rental' : l.key === 'lift' ? 'Lift ticket' : cap(l.label)}</span>
+                {l.kind === 'pass-covered' ? (
+                  <span className="shrink-0 font-medium text-positive">Covered</span>
+                ) : amt ? (
+                  <span className="shrink-0 font-medium text-ink tnum">{formatMoneyRange(amt, l.displayMax ?? l.amountMax)}</span>
+                ) : (
+                  <span className="shrink-0 text-ink-3 italic">Not on file</span>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+        <p className="m-0 mt-auto text-[12.5px] text-ink-2">
+          {incomplete ? 'Shown once every required price is on file — never estimated.' : `${RENTAL_LABEL[b.assumptions.rentalOption]} · your settings.`}
+          {liftHours ? ` Lifts ${liftHours}.` : ''}
+        </p>
       </GlassCard>
     </div>
   )
@@ -275,7 +335,7 @@ function AccessRow({ p }: { p: PassAccessRow }) {
       <div className="flex flex-wrap items-center gap-2">
         <PassBadge family={fam} size="sm" />
         <span className="text-[14.5px] font-medium text-ink">{p.productName}</span>
-        {p.owned ? <span className="inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[11.5px] font-semibold text-copper">Your pass</span> : null}
+        {p.owned ? <span className="inline-flex h-5 items-center rounded-sm bg-copper/12 px-1.5 text-[12px] font-semibold text-copper">Your pass</span> : null}
         <Src title={`${p.productName} at this resort`} items={[src(`Access rule: ${p.productName}`, p.ruleProv, vd.headline)]} className="ml-auto" />
       </div>
       <p className={cn('flex items-center gap-1.5 text-[14px] font-semibold', ACCESS_CLS[tone])}>
@@ -423,7 +483,7 @@ function BasketBlock({ d, v }: { d: ResortDetail; v: PageView }) {
                     <Missing label="Unknown" />
                   )}
                   {l.fx && l.amount && l.display && l.amount.currency !== l.display.currency ? (
-                    <span className="block text-[11.5px] text-ink-3">
+                    <span className="block text-[12px] text-ink-3">
                       from {formatMoney(l.amount)} · rate {l.fx.rate}
                       {l.fx.rateDate ? ` (${shortDate(l.fx.rateDate)})` : ''}
                     </span>
@@ -479,11 +539,11 @@ function PriceRow({ p, planningSeason }: { p: PriceView; planningSeason: string 
           <span className={p.seasonId && p.seasonId !== planningSeason ? 'font-medium text-caution' : 'text-ink-2'}>{seasonText(p.seasonId) ?? 'Season not stated'}</span>
           <span className="text-ink-3"> · {p.quoteLabel}</span>
         </span>
-        {p.expired ? <span className="mt-0.5 block text-[11.5px] font-medium text-critical">Expired quote</span> : null}
+        {p.expired ? <span className="mt-0.5 block text-[12px] font-medium text-critical">Expired quote</span> : null}
       </th>
       <td className="py-2 pr-2 text-right font-medium whitespace-nowrap text-ink tnum">
         {p.amount.amountMinor === 0 && !p.amountMax ? 'Free' : formatMoneyRange(p.amount, p.amountMax)}
-        {p.includesTax === false ? <span className="block text-[11.5px] font-normal text-ink-3">before tax</span> : null}
+        {p.includesTax === false ? <span className="block text-[12px] font-normal text-ink-3">before tax</span> : null}
       </td>
       <td className={cn('hidden py-2 pr-2 text-[12.5px] sm:table-cell', p.seasonId && p.seasonId !== planningSeason ? 'font-medium text-caution' : 'text-ink-2')}>{seasonText(p.seasonId) ?? '—'}</td>
       <td className="py-2 text-right">

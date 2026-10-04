@@ -17,6 +17,7 @@ import { useScrollEdges } from '@/lib/ui/use-scroll-edges'
 import { addDays, formatLocalDate } from '@/lib/domain/time'
 import { SECTIONS, dayLabel, dayLabelYear, type SectionId } from './format'
 import { ResortActions, type ResortActionsProps } from './resort-actions'
+import { DatePicker } from '@/components/ui/date-picker'
 
 /** '15 Jan' — the compact planning-date label on phones. */
 const shortDay = (date: string) => formatLocalDate(date, 'd LLL')
@@ -171,7 +172,6 @@ export function DateControl({ date, today, className }: { date: string; today: s
   const pathname = usePathname()
   const params = useSearchParams()
   const [pending, start] = useTransition()
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const setDate = (d: string) => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return
@@ -192,38 +192,25 @@ export function DateControl({ date, today, className }: { date: string; today: s
       >
         <ChevronLeft aria-hidden className="size-4" />
       </button>
-      <div className="relative">
-        <button
-          type="button"
-          onClick={() => {
-            const el = inputRef.current
-            if (!el) return
-            try {
-              el.showPicker()
-            } catch {
-              el.focus()
-            }
-          }}
-          className={cn(
-            'inline-flex h-[42px] items-center gap-1.5 rounded-full border px-3 text-[13.5px] font-medium whitespace-nowrap tnum transition-colors duration-150',
-            date === today ? 'border-transparent bg-transparent text-ink hover:bg-surface-3' : 'border-teal/60 bg-glacier/60 text-teal',
-          )}
-          aria-label={`Planning date: ${dayLabelYear(date)}${date === today ? ' (today)' : ''}. Change date`}
-        >
-          {pending ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <CalendarDays aria-hidden className="size-4" />}
-          <span className="sm:hidden">{date === today ? 'Today' : shortDay(date)}</span>
-          <span className="hidden sm:inline">{date === today ? `Today · ${dayLabel(date)}` : dayLabel(date)}</span>
-        </button>
-        <input
-          ref={inputRef}
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          tabIndex={-1}
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full opacity-0"
-        />
-      </div>
+      <DatePicker
+        value={date}
+        today={today}
+        onChange={setDate}
+        size="compact"
+        align="end"
+        aria-label={`Planning date: ${dayLabelYear(date)}${date === today ? ' (today)' : ''}. Change date`}
+        icon={pending ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <CalendarDays aria-hidden className="size-4" />}
+        renderValue={(d) => (
+          <>
+            <span className="sm:hidden">{d === today ? 'Today' : shortDay(d)}</span>
+            <span className="hidden sm:inline">{d === today ? `Today · ${dayLabel(d)}` : dayLabel(d)}</span>
+          </>
+        )}
+        triggerClassName={cn(
+          'border-transparent shadow-none backdrop-blur-none',
+          date === today ? 'bg-transparent hover:bg-surface-3' : 'border-teal/60 bg-glacier/60 text-teal',
+        )}
+      />
       <button
         type="button"
         onClick={() => setDate(addDays(date, 1))}

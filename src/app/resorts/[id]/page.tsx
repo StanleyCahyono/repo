@@ -12,6 +12,7 @@
  */
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { ChapterReveal } from '@/components/resort/chapter-reveal'
 import { ConditionsSection } from '@/components/resort/conditions'
 import { SECTIONS, type PageView } from '@/components/resort/format'
 import { LiftsSection } from '@/components/resort/lifts-runs'
@@ -123,9 +124,10 @@ export default async function ResortPage({ params, searchParams }: { params: Par
         <PlanSection d={detail} v={view} />
         <TravelSection d={detail} x={extras} v={view} />
         <StaySection d={detail} x={extras} v={view} />
-        <LinksSection d={detail} v={view} />
+        <LinksSection d={detail} v={view} reportUrl={extras.catalog.reportSource?.url ?? null} />
       </div>
       <MobileActionBar actions={actions} />
+      <ChapterReveal />
     </>
   )
 }

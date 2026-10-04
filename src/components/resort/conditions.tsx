@@ -130,7 +130,7 @@ function ScoreStar({ d, x, v }: { d: ResortDetail; x: ResortPageExtras; v: PageV
   }
   return (
     <GlassCard strong title="Conditions score · suitability" aside={s && !r.closure ? <KindTag kind={s.kind === 'demo' ? 'demo' : 'derived'} compact /> : null} className="bg-[linear-gradient(160deg,var(--glass-strong),color-mix(in_srgb,var(--glacier)_70%,var(--glass)))]">
-      <p className="m-0 text-[clamp(88px,10vw,128px)] leading-[0.9] font-extralight tracking-[-0.06em] text-ink tnum">{big}</p>
+      <p className="m-0 py-[0.1em] text-[clamp(88px,10vw,128px)] leading-none font-extralight tracking-[-0.06em] text-ink tnum">{big}</p>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <span className="text-[15px] font-medium text-ink">{word}</span>
         {s && !r.closure ? <ConfidenceTag confidence={s.confidence} /> : null}
@@ -631,7 +631,7 @@ function SnowReportPanel({ d, x, v, reportUrl }: { d: ResortDetail; x: ResortPag
                       <tr key={sf.window} className="border-b border-divider last:border-b-0">
                         <th scope="row" className="py-2 pr-2 font-normal text-ink-2">
                           {WINDOW_LABEL[sf.window] ?? sf.window}
-                          <span className="block text-[11.5px] text-ink-3 tnum sm:hidden">{windowText(sf, v.tz) ?? 'Period not stated'}</span>
+                          <span className="block text-[12px] text-ink-3 tnum sm:hidden">{windowText(sf, v.tz) ?? 'Period not stated'}</span>
                         </th>
                         <td className="py-2 pr-2 text-right font-display text-[20px] leading-none text-ink tnum">{sf.amountCm !== null ? u.snow(sf.amountCm) : <Missing />}</td>
                         <td className="hidden py-2 pr-2 text-[12.5px] text-ink-3 tnum sm:table-cell">{windowText(sf, v.tz) ?? 'Not stated'}</td>
@@ -1267,7 +1267,7 @@ function HistoryStrip({ x, v }: { x: ResortPageExtras; v: PageView }) {
                       selected && 'border-teal ring-1 ring-teal',
                     )}
                   >
-                    <span className={cn('text-[11.5px] leading-none font-medium', day.state === 'today' ? 'text-teal' : 'text-ink-3')}>
+                    <span className={cn('text-[12px] leading-none font-medium', day.state === 'today' ? 'text-teal' : 'text-ink-3')}>
                       {dayLabel(day.date).split(' ')[0]}
                       <span className="ml-0.5 text-ink-2 tnum">{day.date.slice(8).replace(/^0/, '')}</span>
                     </span>

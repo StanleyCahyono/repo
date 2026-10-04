@@ -20,6 +20,7 @@ import { cn } from '@/lib/ui/cn'
 import { CountUp } from './count-up'
 import { LiftsExplorer, type LiftsExplorerProps, type RunChipGroup, type SignLegend } from './lifts-explorer'
 import { PisteSymbol } from './piste-symbol'
+import { baseVillageName } from './map-labels'
 import { RefreshNow } from './refresh-now'
 import { DetailDrawer, ResortSection, Src, SubHead } from './section'
 import { ago, hostOf, plural, seasonText, shortDate, src, units, type PageView } from './format'
@@ -168,6 +169,16 @@ export function LiftsSection({ d, lifts, v, terrain, geometry }: { d: ResortDeta
         ? { url: snowReportUrl, label: `Official snow report on ${hostOf(snowReportUrl) ?? 'the resort site'}` }
         : null,
     units: v.units.distance === 'mi' ? 'imperial' : 'metric',
+    places: (geometry?.places ?? []).map((pl, i) => ({
+      id: `p${i}`,
+      name: pl.name,
+      kind: pl.kind,
+      lon: pl.lon,
+      lat: pl.lat,
+      ele: pl.kind === 'peak' || pl.kind === 'station' ? units(v.units).elev(pl.ele) : null,
+      eleM: pl.ele,
+    })),
+    baseVillage: baseVillageName(r.locality),
   }
   const meta = loaded ? `${plural(loaded.totals.lifts, 'lift')} · ${plural(loaded.totals.runs, 'named run')} mapped` : geometry ? 'OpenStreetMap, built in' : 'OpenStreetMap'
   return (

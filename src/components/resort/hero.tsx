@@ -261,7 +261,7 @@ export function ResortHero({ hero, actions }: { hero: HeroData; actions: ResortA
         </motion.h1>
 
         {/* The free height below the title is a size container: the art fits it (and overhangs on phones). */}
-        <div className="relative z-[2] min-h-0 flex-1 [container-type:size]">
+        <div className="piste-hero-in relative z-[2] min-h-0 flex-1 [container-type:size]">
           <motion.div style={{ scale: artScale }} className="absolute inset-0 origin-bottom">
             {hero.art.kind === 'photo' ? (
               <PhotoArt art={hero.art} />
@@ -275,26 +275,26 @@ export function ResortHero({ hero, actions }: { hero: HeroData; actions: ResortA
           </motion.div>
           {/* Phones: the peak label sits as a HUD tag at the top of the scene (the picture overhangs the screen). */}
           {hero.art.kind === 'matterhorn' || (hero.art.kind === 'terrain' && hero.art.topLabel) ? (
-            <p className="glass-strong hud absolute top-1 left-4 z-[3] m-0 rounded-[12px] px-2.5 py-1.5 text-[10.5px] text-ink sm:hidden">
+            <p className="glass-strong hud absolute top-1 left-4 z-[3] m-0 rounded-[12px] px-2.5 py-1.5 text-[12px] text-ink sm:hidden">
               {hero.art.kind === 'matterhorn' ? hero.art.peakLabel : hero.art.topLabel}
             </p>
           ) : null}
           {hero.art.kind === 'terrain' ? (
-            <p className="hud pointer-events-none absolute right-3 bottom-2 z-[3] m-0 rounded-full bg-glass-strong px-2.5 py-1 text-[11px] text-ink-2 md:right-8 md:text-[12px] lg:bottom-[104px]">
+            <p className="hud pointer-events-none absolute right-3 bottom-2 z-[3] m-0 rounded-full bg-glass-strong px-2.5 py-1 text-[12px] text-ink-2 md:right-8 md:text-[12px] lg:bottom-[104px]">
               Illustrative terrain · not a map
             </p>
           ) : null}
         </div>
 
         <div className="relative z-[4] mx-4 mb-3 flex flex-wrap items-end justify-between gap-x-4 gap-y-3 md:mx-8 md:mb-6 lg:absolute lg:inset-x-8 lg:bottom-7 lg:m-0">
-          <div className="glass-strong flex max-w-[540px] min-w-0 flex-col gap-2 rounded-[24px] px-5 py-4 md:rounded-[28px] md:px-[22px] md:py-5">
+          <div className="piste-rise glass-strong flex max-w-[540px] min-w-0 flex-col gap-2 rounded-[24px] px-5 py-4 [--rise-delay:180ms] md:rounded-[28px] md:px-[22px] md:py-5">
             <p className="m-0 flex items-start gap-2.5 text-[14px] leading-snug font-semibold text-ink">
               <i aria-hidden className={cn('mt-[5px] size-[9px] shrink-0 rounded-full', DOT[hero.status.tone])} />
               <span>{hero.status.text}</span>
             </p>
             {hero.status.sub ? <p className="m-0 line-clamp-2 text-[14px] leading-[1.5] text-ink-2 md:line-clamp-3 md:text-[15px]">{hero.status.sub}</p> : null}
             {hero.status.note ? <p className="m-0 text-[12.5px] leading-snug font-medium text-caution">{hero.status.note}</p> : null}
-            <p className="hud m-0 text-ink-2 max-md:text-[11.5px]">{hero.hud}</p>
+            <p className="hud m-0 text-ink-2 max-md:text-[12px]">{hero.hud}</p>
           </div>
           <div className="hidden flex-col items-end gap-3 md:flex">
             <ResortActions variant="header" {...actions} />
