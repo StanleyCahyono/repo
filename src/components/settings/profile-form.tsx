@@ -26,11 +26,13 @@ function AbilityLadder({ value, onChange, labelledBy }: { value: AbilityLevel; o
   const layout = useId()
   const at = ABILITY_LEVELS.indexOf(value)
   return (
-    <div>
+    // Container query, not viewport: the five steps sit side by side only when the control column itself is wide
+    // enough for "Intermediate" (at 768px the row's label column leaves too little); narrower, it is a vertical ladder.
+    <div className="@container">
       <div
         role="radiogroup"
         aria-labelledby={labelledBy}
-        className="grid grid-cols-1 gap-1.5 sm:grid-cols-5 sm:gap-1 sm:rounded-[20px] sm:border sm:border-glass-line sm:bg-chip-track sm:p-1"
+        className="grid grid-cols-1 gap-1.5 @[34rem]:grid-cols-5 @[34rem]:gap-1 @[34rem]:rounded-[20px] @[34rem]:border @[34rem]:border-glass-line @[34rem]:bg-chip-track @[34rem]:p-1"
         onKeyDown={(e) => {
           const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
           if (!step) return
@@ -52,8 +54,8 @@ function AbilityLadder({ value, onChange, labelledBy }: { value: AbilityLevel; o
               data-level={lvl}
               onClick={() => onChange(lvl)}
               className={cn(
-                'relative flex min-h-11 min-w-0 items-center gap-3 rounded-[16px] border px-3 text-left text-[14px] font-medium transition-colors duration-150 sm:flex-col sm:items-start sm:justify-center sm:gap-1.5 sm:border-0 sm:py-2.5',
-                on ? 'border-ink-chip text-on-ink-chip' : 'border-glass-line text-ink-2 hover:bg-chip-hover hover:text-ink max-sm:bg-chip-track',
+                'relative flex min-h-11 min-w-0 items-center gap-3 rounded-[16px] border px-3 text-left text-[14px] font-medium transition-colors duration-150 @[34rem]:flex-col @[34rem]:items-start @[34rem]:justify-center @[34rem]:gap-1.5 @[34rem]:border-0 @[34rem]:py-2.5',
+                on ? 'border-ink-chip text-on-ink-chip' : 'border-glass-line bg-chip-track text-ink-2 hover:bg-chip-hover hover:text-ink @[34rem]:bg-transparent',
               )}
             >
               {on ? <motion.span layoutId={`ladder-${layout}`} transition={t.select} aria-hidden className="absolute inset-0 rounded-[16px] bg-ink-chip shadow-[0_6px_16px_-8px_rgb(19_32_44/0.55)]" /> : null}
@@ -62,7 +64,7 @@ function AbilityLadder({ value, onChange, labelledBy }: { value: AbilityLevel; o
                   <span key={j} className={cn('h-2.5 w-[5px] rounded-[2px]', j <= i ? (on ? 'bg-on-ink-chip' : 'bg-ink-3') : on ? 'bg-on-ink-chip/30' : 'bg-divider-strong')} />
                 ))}
               </span>
-              <span className="relative min-w-0 truncate">{ABILITY_TEXT[lvl].label}</span>
+              <span className="relative block max-w-full min-w-0 truncate">{ABILITY_TEXT[lvl].label}</span>
             </button>
           )
         })}

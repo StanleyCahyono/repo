@@ -10,10 +10,11 @@
  * Everything writes to the URL through the forecast nav.
  */
 import { useId, useRef, type KeyboardEvent, type ReactNode } from 'react'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { CloudOff, X } from 'lucide-react'
 import type { PickerResort, ResortInfo } from '@/lib/data/forecast-screen'
 import { chartUnits } from '@/components/charts/units'
+import { DatePicker, type DateMark } from '@/components/ui/date-picker'
 import { formatLocalDate } from '@/lib/domain/time'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { cn } from '@/lib/ui/cn'
@@ -113,6 +114,7 @@ export function ForecastControls({
   point,
   units,
   today,
+  marks,
   children,
 }: {
   resorts: Record<string, ResortInfo>
@@ -121,6 +123,8 @@ export function ForecastControls({
   units: UnitPrefs
   /** Reference today for the date input (the focus resort's local today). */
   today: string
+  /** Calendar marks for the date jump (forecast window, season dates). */
+  marks?: readonly DateMark[]
   /** Extra content at the start of the bar. */
   children?: ReactNode
 }) {
@@ -156,13 +160,13 @@ export function ForecastControls({
             }))}
           />
         </div>
-        <DateJump value={params.date} today={today} onChange={(d) => navigate({ date: d, month: null })} />
+        <DateJump value={params.date} today={today} marks={marks} onChange={(d) => navigate({ date: d, month: null })} />
       </div>
     </div>
   )
 }
 
-function DateJump({ value, today, onChange }: { value: string | null; today: string; onChange: (d: string | null) => void }) {
+function DateJump({ value, today, marks, onChange }: { value: string | null; today: string; marks?: readonly DateMark[]; onChange: (d: string | null) => void }) {
   const id = useId()
   return (
     <div className="flex min-w-0 items-center gap-3">
@@ -170,27 +174,39 @@ function DateJump({ value, today, onChange }: { value: string | null; today: str
         Go to date
       </label>
       <div className="flex min-w-0 flex-1 items-center gap-1.5">
-        <input
+        <DatePicker
           id={id}
-          type="date"
+          size="compact"
           value={value ?? ''}
-          onChange={(e) => {
-            const d = validDate(e.target.value)
-            if (d) onChange(d)
-          }}
+          today={today}
+          marks={marks}
+          presets
+          align="end"
+          placeholder={`Today · ${formatLocalDate(today, 'ccc d LLL')}`}
           aria-describedby={`${id}-hint`}
-          className="h-10 w-full min-w-0 rounded-full border border-[color-mix(in_srgb,var(--ink)_12%,transparent)] bg-surface/80 px-3.5 text-[13.5px] text-ink tnum transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 sm:w-[168px]"
+          onChange={(v) => {
+            const d = validDate(v)
+            onChange(d && d !== today ? d : null)
+          }}
+          className="min-w-0"
         />
-        {value ? (
-          <button
-            type="button"
-            onClick={() => onChange(null)}
-            className="inline-flex h-10 shrink-0 items-center gap-1 rounded-full px-3 text-[13px] font-medium text-ink-2 transition-colors duration-150 hover:bg-surface hover:text-ink"
-          >
-            <X aria-hidden className="size-4" />
-            Today
-          </button>
-        ) : null}
+        <AnimatePresence initial={false}>
+          {value ? (
+            <motion.button
+              key="today"
+              type="button"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={t.hover}
+              onClick={() => onChange(null)}
+              className="inline-flex h-10 shrink-0 items-center gap-1 rounded-full px-3 text-[13px] font-medium text-ink-2 transition-colors duration-150 hover:bg-surface hover:text-ink"
+            >
+              <X aria-hidden className="size-4" />
+              Today
+            </motion.button>
+          ) : null}
+        </AnimatePresence>
       </div>
       <p id={`${id}-hint`} className="sr-only">
         A past date opens its history; a date within the forecast shows that day; a later date shows planning information. Today is {formatLocalDate(today, 'cccc d LLLL yyyy')}.

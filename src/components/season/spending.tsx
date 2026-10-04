@@ -16,6 +16,7 @@ import { ArrowRight, CircleAlert, Info, PencilLine, Plus, Receipt, Trash2 } from
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { KindTag } from '@/components/ui/provenance'
 import { SourceDrawer } from '@/components/ui/source-drawer'
@@ -27,7 +28,10 @@ import type { SeasonView } from '@/lib/data/season'
 import type { ExpenseItem, PickerTrip } from '@/lib/data/season-screen'
 import { BUDGET_CATEGORIES, normalizeCategory, type BudgetCategory } from '@/lib/domain/costs'
 import { formatMoneyRange, money as mk, type Money } from '@/lib/domain/money'
-import { formatLocalDate } from '@/lib/domain/time'
+import { addDays, formatLocalDate } from '@/lib/domain/time'
+import { useDateMarks } from './date-marks'
+import { CountUp } from './count-up'
+import { useReveal } from './reveal'
 import { CATEGORY_LABEL, budgetProvenance, currencies, majorString, money, plural, rangeLabel, tripHref } from './format'
 
 /** Actual so far against the season's plan (which includes trips still to come). */
@@ -37,13 +41,24 @@ function signed(m: Money): string {
   return m.amountMinor > 0 ? `${abs} over plan` : `${abs} left in plan`
 }
 
+/** Count-up text for an amount: whole units while counting, the exact amount at the end. */
+const countMoney = (m: Money) => (n: number) => money(Math.abs(n - m.amountMinor) < 0.5 ? m : mk(Math.round(n / 100) * 100, m.currency)) ?? ''
+
 function CategoryTable({ budget }: { budget: SeasonView['budget'] }) {
+  // Bars grow when the table scrolls into view (they are drawn full on the server and the first paint).
+  const [ref, phase] = useReveal<HTMLDivElement>()
+  const grow = (k: number) =>
+    ({
+      initial: false,
+      animate: phase === 'armed' ? { scaleX: 0 } : { scaleX: 1 },
+      transition: phase === 'armed' ? { duration: 0 } : { ...t.bars, delay: 0.1 + 0.05 * k },
+    }) as const
   const rows = budget.categories.filter((c) => c.actual.amountMinor > 0 || c.planned.amountMinor > 0 || c.plannedMax.amountMinor > 0)
   const top = Math.max(1, ...rows.map((r) => Math.max(r.actual.amountMinor, r.plannedMax.amountMinor)))
   const w = (m: Money) => `${Math.min(100, (m.amountMinor / top) * 100)}%`
   if (!rows.length) return <p className="rounded-[12px] border border-dashed border-divider-strong bg-surface-2 px-4 py-4 text-[13.5px] text-ink-2">Nothing spent or planned yet this season.</p>
   return (
-    <div className="overflow-hidden rounded-[12px] border border-divider bg-surface">
+    <div ref={ref} className="overflow-hidden rounded-[12px] border border-divider bg-surface">
       <table className="w-full text-[13.5px]">
         <caption className="sr-only">Spending by category: actual so far and planned, in {budget.currency}</caption>
         <thead>
@@ -76,13 +91,13 @@ function CategoryTable({ budget }: { budget: SeasonView['budget'] }) {
                   {/* Narrow screens: the bar sits under the label. */}
                   <span aria-hidden className="relative mt-2 block h-2 w-full overflow-hidden rounded-full bg-surface-3 lg:hidden">
                     <span className="absolute inset-y-0 left-0 rounded-full border border-teal/50" style={{ width: w(r.plannedMax) }} />
-                    <motion.span className="absolute inset-y-0 left-0 rounded-full bg-teal" style={{ width: w(r.actual), originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ ...t.bars, delay: 0.04 * k }} />
+                    <motion.span className="absolute inset-y-0 left-0 rounded-full bg-teal" style={{ width: w(r.actual), originX: 0 }} {...grow(k)} />
                   </span>
                 </th>
                 <td aria-hidden className="hidden w-[34%] px-2 py-3 align-middle lg:table-cell">
                   <div className="relative h-2.5 w-full rounded-full bg-surface-3">
                     <div className="absolute inset-y-0 left-0 rounded-full border border-teal/50 bg-[repeating-linear-gradient(135deg,var(--divider)_0_1px,transparent_1px_5px)]" style={{ width: w(r.plannedMax) }} />
-                    <motion.div className="absolute inset-y-0 left-0 rounded-full bg-teal" style={{ width: w(r.actual), originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ ...t.bars, delay: 0.04 * k }} />
+                    <motion.div className="absolute inset-y-0 left-0 rounded-full bg-teal" style={{ width: w(r.actual), originX: 0 }} {...grow(k)} />
                   </div>
                 </td>
                 <td className="px-2 py-3 text-right align-top font-semibold whitespace-nowrap text-ink tnum lg:align-middle">{r.actual.amountMinor ? money(r.actual) : <span className="font-normal text-ink-3">—</span>}</td>
@@ -153,6 +168,7 @@ function ExpenseSheet({
   const toast = useToast()
   const formId = useId()
   const ids = { date: useId(), label: useId(), cat: useId(), amount: useId(), cur: useId(), trip: useId(), notes: useId() }
+  const marks = useDateMarks()
   const [f, setF] = useState<ExpenseForm>(() =>
     expense
       ? { date: expense.date, label: expense.label, category: normalizeCategory(expense.category), amount: majorString(expense.amount), currency: expense.amount.currency, tripId: expense.tripId ?? '', notes: expense.notes ?? '' }
@@ -205,7 +221,7 @@ function ExpenseSheet({
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Date" htmlFor={ids.date} error={errors.date}>
-            <TextInput id={ids.date} type="date" value={f.date} onChange={(e) => set('date', e.target.value)} className="tnum" aria-invalid={!!errors.date} />
+            <DatePicker id={ids.date} value={f.date} today={today} marks={marks} presets={['today', { label: 'Yesterday', date: addDays(today, -1) }]} onChange={(v) => set('date', v)} aria-invalid={!!errors.date} />
           </Field>
           <Field label="Category" htmlFor={ids.cat} error={errors.category} hint={f.category === 'pass' ? 'Add passes in Passes & Costs so their days count; an unlinked pass expense of the same price is still counted once.' : undefined}>
             <Select id={ids.cat} value={f.category} onChange={(e) => set('category', e.target.value as BudgetCategory)}>
@@ -254,7 +270,7 @@ function ExpenseRow({ e, onEdit, demo }: { e: ExpenseItem; onEdit: (e: ExpenseIt
   const [pending, start] = useTransition()
   const cat = normalizeCategory(e.passOwnershipId != null ? 'pass' : e.category)
   return (
-    <li className="grid grid-cols-[52px_minmax(0,1fr)_auto] items-start gap-x-3 px-4 py-3">
+    <li className="grid grid-cols-[52px_minmax(0,1fr)_auto] items-start gap-x-3 px-4 py-3 transition-colors duration-150 hover:bg-surface-2/60">
       <span className="pt-0.5 text-[12.5px] font-medium text-ink-2 tnum">{formatLocalDate(e.date, 'd LLL')}</span>
       <div className="min-w-0">
         <p className="text-[14px] font-medium text-ink">{e.label}</p>
@@ -345,7 +361,9 @@ export function Spending({ view, expenses, trips, currency, today, demo }: { vie
               <SourceDrawer className="-my-1" title="How spending is counted" items={[{ label: 'Actual spending', value: expenses.length ? money(b.actualTotal) : 'Nothing recorded', prov: budgetProvenance(view.season.label) }]} />
             </dt>
             {expenses.length ? (
-              <dd className="mt-1 font-display text-[28px] leading-none text-ink tnum">{money(b.actualTotal)}</dd>
+              <dd className="mt-1 font-display text-[28px] leading-none text-ink tnum">
+                <CountUp value={b.actualTotal.amountMinor} format={countMoney(b.actualTotal)} />
+              </dd>
             ) : (
               <dd className="mt-1 font-display text-[24px] leading-none text-ink-3">None yet</dd>
             )}
@@ -372,7 +390,9 @@ export function Spending({ view, expenses, trips, currency, today, demo }: { vie
           </div>
           <div>
             <dt className="eyebrow flex h-4 items-center">Per ski day</dt>
-            <dd className="mt-1 font-display text-[28px] leading-none text-ink tnum">{b.costPerSkiDay ? money(b.costPerSkiDay) : '—'}</dd>
+            <dd className="mt-1 font-display text-[28px] leading-none text-ink tnum">
+              {b.costPerSkiDay ? <CountUp value={b.costPerSkiDay.amountMinor} format={countMoney(b.costPerSkiDay)} /> : '—'}
+            </dd>
             <dd className="mt-1 text-[12.5px] text-ink-3 tnum">{b.onSnowCostPerSkiDay ? `${money(b.onSnowCostPerSkiDay)} on snow · ${plural(b.skiDays, 'day')}` : 'No ski days yet'}</dd>
           </div>
         </dl>

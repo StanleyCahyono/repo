@@ -13,6 +13,8 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ButtonLink } from '@/components/ui/button'
+import type { DateMark } from '@/components/ui/date-picker'
+import { Select } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
 import { EmptyState, Notice } from '@/components/ui/states'
 import type { ResortForecast } from '@/lib/data/forecast'
@@ -77,6 +79,9 @@ export function ForecastView({ screen, actions }: { screen: ForecastScreen; acti
     if (resortId !== focus) navigate({ focus: resortId, date: value })
     else replaceLocal({ date: value })
   }
+
+  // The date jump's calendar shows what each day leads to: the modeled days, the less certain trend and season dates.
+  const jumpMarks = dateJumpMarks(focusForecast, screen.seasonMarkers)
 
   const onMonth = (m: string) => navigate({ month: m === focusToday.slice(0, 7) ? null : m, date: zone === 'past' ? null : undefined })
 
@@ -154,7 +159,7 @@ export function ForecastView({ screen, actions }: { screen: ForecastScreen; acti
       <Rise index={0}>{hero}</Rise>
 
       <Rise index={1} className="flex flex-col gap-3">
-        <ForecastControls resorts={resorts} focus={focus} point={params.point} units={screen.units} today={focusToday} />
+        <ForecastControls resorts={resorts} focus={focus} point={params.point} units={screen.units} today={focusToday} marks={jumpMarks} />
         {screen.unknownIds.length ? <UnknownNotice ids={screen.unknownIds} /> : null}
         <OfficialAlerts alerts={screen.alerts} resorts={resorts} selected={selected} job={screen.alertsJob} now={screen.now} mode={screen.mode} />
       </Rise>
@@ -236,6 +241,7 @@ export function ForecastView({ screen, actions }: { screen: ForecastScreen; acti
           <ForecastSection
             id="daily"
             index={1}
+            eyebrow="Daily outlook"
             title={selected.length > 1 ? 'Compare resorts' : 'Day by day'}
             meta={`Model output per resort-local day${forecasts.some((f) => f.daily.some((d) => d.trend)) ? ' · days 8–16 as a less certain trend' : ''}`}
             actions={
@@ -264,6 +270,7 @@ export function ForecastView({ screen, actions }: { screen: ForecastScreen; acti
             <ForecastSection
               id="hourly"
               index={2}
+              eyebrow="Hourly"
               title="Hour by hour"
               meta={
                 <span className="flex flex-wrap items-baseline gap-x-2">
@@ -304,6 +311,26 @@ export function ForecastView({ screen, actions }: { screen: ForecastScreen; acti
   )
 }
 
+function dateJumpMarks(f: ResortForecast | null, markers: ForecastScreen['seasonMarkers']): DateMark[] {
+  const out: DateMark[] = []
+  const days = f?.run ? f.daily : []
+  const firm = days.filter((d) => !d.trend)
+  const trend = days.filter((d) => d.trend)
+  if (firm.length) out.push({ date: firm[0].date, to: firm[firm.length - 1].date, label: 'Forecast (modeled)', tone: 'teal', variant: 'rule' })
+  if (trend.length) out.push({ date: trend[0].date, to: trend[trend.length - 1].date, label: 'Less certain trend', tone: 'teal', variant: 'dashed', soft: true })
+  for (const m of markers) {
+    out.push({
+      date: m.date,
+      to: m.to ?? undefined,
+      label: m.basis === 'estimate' ? `${m.label} (Piste estimate)` : m.label,
+      tone: m.basis === 'estimate' ? 'copper' : m.basis === 'actual' ? 'ink' : 'teal',
+      variant: 'dot',
+      soft: m.basis === 'estimate',
+    })
+  }
+  return out
+}
+
 function pointLabelOf(f: ResortForecast, info: ResortInfo | undefined, point: PointKey, screen: ForecastScreen): string {
   const q = chartUnits(screen.units)
   const shown = f.shownPoint ?? point
@@ -334,19 +361,15 @@ function MetricSwitch({ value, onChange }: { value: OutlookMetric; onChange: (m:
 
 function ModeSelect({ value, pendingValue, onChange }: { value: ScoringMode; pendingValue: ScoringMode | null; onChange: (m: ScoringMode) => void }) {
   return (
-    <label className="inline-flex items-center gap-2 text-[13px] text-ink-2">
-      <span>Score for</span>
-      <select
-        value={pendingValue ?? value}
-        onChange={(e) => onChange(e.target.value as ScoringMode)}
-        className="h-10 rounded-[10px] border border-divider-strong bg-surface px-2.5 text-[13.5px] font-medium text-ink transition-colors duration-150 hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-9"
-      >
+    <label className="inline-flex items-center gap-2.5 text-[13px] text-ink-2">
+      <span className="hud whitespace-nowrap text-ink-2">Score for</span>
+      <Select value={pendingValue ?? value} onChange={(e) => onChange(e.target.value as ScoringMode)} className="w-auto min-w-[11.5rem] font-medium">
         {SCORING_MODES.map((m) => (
           <option key={m} value={m}>
             {SCORING_MODE_LABEL[m]}
           </option>
         ))}
-      </select>
+      </Select>
     </label>
   )
 }

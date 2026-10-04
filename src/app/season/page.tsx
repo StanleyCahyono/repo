@@ -6,6 +6,7 @@ import { SeasonUiProvider, LogDayButton, type DayIntent, type SeasonUiData } fro
 import { SeasonTimeline } from '@/components/season/overview'
 import { SeasonSectionNav } from '@/components/season/section-nav'
 import { SeasonSection } from '@/components/season/section'
+import { ScrollRise } from '@/components/season/scroll-rise'
 import { Journal, type PassOnlyDay } from '@/components/season/journal'
 import { PassUsage } from '@/components/season/pass-usage'
 import { Destinations } from '@/components/season/destinations'
@@ -158,9 +159,9 @@ export default async function SeasonPage({ searchParams }: { searchParams: Promi
           </div>
         </div>
 
-        <div className="mt-7">
+        <ScrollRise className="mt-7">
           <GearLocker items={locker.items} coverage={locker.coverage} rentalOption={ctx.prefs.gear.rentalOption} />
-        </div>
+        </ScrollRise>
 
         <div className="mt-10">
           <SeasonSectionNav
@@ -173,57 +174,67 @@ export default async function SeasonPage({ searchParams }: { searchParams: Promi
             ]}
           />
           <div className="flex flex-col gap-14">
-            <SeasonSection
-              id="journal"
-              index={1}
-              title="Ski-day journal"
-              meta={v.skiDays.length ? `${plural(v.skiDays.length, 'day')} logged${v.totals.hoursSkied != null ? ` · ${v.totals.hoursSkied} h recorded` : ''}` : 'Nothing logged yet'}
-              actions={v.skiDays.length ? <LogDayButton variant="secondary">Log a day</LogDayButton> : null}
-            >
-              <div className="mb-8">
-                <SeasonTimeline tl={data.timeline} demo={demo} seasonLabel={v.season.label} />
-              </div>
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
-                <Journal passOnly={passOnly} />
-                <aside aria-label="Pass usage and destinations" className="grid min-w-0 content-start items-start gap-6 md:grid-cols-2 lg:grid-cols-1">
-                  <PassUsage passes={v.passes} demo={demo} />
-                  <Destinations destinations={v.destinations} home={data.home.name} />
-                </aside>
-              </div>
-            </SeasonSection>
+            <ScrollRise>
+              <SeasonSection
+                id="journal"
+                index={1}
+                title="Ski-day journal"
+                meta={v.skiDays.length ? `${plural(v.skiDays.length, 'day')} logged${v.totals.hoursSkied != null ? ` · ${v.totals.hoursSkied} h recorded` : ''}` : 'Nothing logged yet'}
+                actions={v.skiDays.length ? <LogDayButton variant="secondary">Log a day</LogDayButton> : null}
+              >
+                <div className="mb-8">
+                  <SeasonTimeline tl={data.timeline} demo={demo} seasonLabel={v.season.label} />
+                </div>
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
+                  <Journal passOnly={passOnly} />
+                  <aside aria-label="Pass usage and destinations" className="grid min-w-0 content-start items-start gap-6 md:grid-cols-2 lg:grid-cols-1">
+                    <PassUsage passes={v.passes} demo={demo} />
+                    <Destinations destinations={v.destinations} home={data.home.name} />
+                  </aside>
+                </div>
+              </SeasonSection>
+            </ScrollRise>
 
-            <SeasonSection
-              id="spending"
-              index={2}
-              title="Spending"
-              meta={
-                data.expenses.length
-                  ? `${money(v.budget.actualTotal)} spent · ${plural(data.expenses.length, 'expense')} · in ${v.budget.currency}`
-                  : `No expenses recorded yet · amounts in ${v.budget.currency}`
-              }
-              lead="Actual is what you recorded as expenses; planned is your share of priced items on your trips. A season pass is counted once, and days skied on it add no lift cost."
-            >
-              <Spending view={v} expenses={data.expenses} trips={data.trips} currency={data.currency} today={data.today} demo={demo} />
-            </SeasonSection>
+            <ScrollRise>
+              <SeasonSection
+                id="spending"
+                index={2}
+                title="Spending"
+                meta={
+                  data.expenses.length
+                    ? `${money(v.budget.actualTotal)} spent · ${plural(data.expenses.length, 'expense')} · in ${v.budget.currency}`
+                    : `No expenses recorded yet · amounts in ${v.budget.currency}`
+                }
+                lead="Actual is what you recorded as expenses; planned is your share of priced items on your trips. A season pass is counted once, and days skied on it add no lift cost."
+              >
+                <Spending view={v} expenses={data.expenses} trips={data.trips} currency={data.currency} today={data.today} demo={demo} />
+              </SeasonSection>
+            </ScrollRise>
 
-            <SeasonSection id="learning" index={3} title="Learning checklist" meta={`${v.skills.confirmed} of ${plural(v.skills.total, 'skill')} confirmed · ${v.skills.practicing} practising`}>
-              <Skills skills={data.skills} categories={data.skillCategories} today={data.today} note={v.skills.note} />
-            </SeasonSection>
+            <ScrollRise>
+              <SeasonSection id="learning" index={3} title="Learning checklist" meta={`${v.skills.confirmed} of ${plural(v.skills.total, 'skill')} confirmed · ${v.skills.practicing} practising`}>
+                <Skills skills={data.skills} categories={data.skillCategories} today={data.today} note={v.skills.note} />
+              </SeasonSection>
+            </ScrollRise>
 
-            <SeasonSection
-              id="lessons"
-              index={4}
-              title="Lessons"
-              meta={
-                lessonCount ? `${v.lessons.upcoming.length} coming up · ${v.lessons.past.length} past${v.lessons.undated.length ? ` · ${v.lessons.undated.length} not scheduled` : ''}` : 'None yet'
-              }
-            >
-              <Lessons lessons={v.lessons} resorts={data.resorts} skills={data.skills} currency={data.currency} demo={demo} />
-            </SeasonSection>
+            <ScrollRise>
+              <SeasonSection
+                id="lessons"
+                index={4}
+                title="Lessons"
+                meta={
+                  lessonCount ? `${v.lessons.upcoming.length} coming up · ${v.lessons.past.length} past${v.lessons.undated.length ? ` · ${v.lessons.undated.length} not scheduled` : ''}` : 'None yet'
+                }
+              >
+                <Lessons lessons={v.lessons} resorts={data.resorts} skills={data.skills} currency={data.currency} demo={demo} />
+              </SeasonSection>
+            </ScrollRise>
 
-            <SeasonSection id="export" index={5} title="Export & backup" meta={demo ? 'Demo mode — downloads contain demo data only' : 'Your records, in open formats'}>
-              <ExportPanel demo={demo} trips={data.trips} />
-            </SeasonSection>
+            <ScrollRise>
+              <SeasonSection id="export" index={5} title="Export & backup" meta={demo ? 'Demo mode — downloads contain demo data only' : 'Your records, in open formats'}>
+                <ExportPanel demo={demo} trips={data.trips} />
+              </SeasonSection>
+            </ScrollRise>
           </div>
         </div>
       </ProfileProvider>

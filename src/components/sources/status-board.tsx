@@ -6,6 +6,7 @@ import type { ReactNode } from 'react'
 import type { SourcesView } from '@/lib/data/sources'
 import { cn } from '@/lib/ui/cn'
 import { relativeLabel } from '@/lib/domain/time'
+import { CountUp } from '@/components/season/count-up'
 import { linkCheckerBlocked } from './connectors-panel'
 import { TONE_TEXT, type Tone } from './state'
 
@@ -64,7 +65,7 @@ export function StatusBoard({ v }: { v: SourcesView }) {
           eyebrow: 'Scheduled sources working',
           value: (
             <>
-              {working}
+              <CountUp value={working} />
               <span className="text-[22px] text-ink-3"> / {scheduled.length}</span>
             </>
           ),
@@ -103,11 +104,11 @@ export function StatusBoard({ v }: { v: SourcesView }) {
         <a
           key={t.href}
           href={t.href}
-          className={cn('group flex flex-col gap-1 border-divider px-4 py-3.5 transition-colors duration-150 hover:bg-surface-2 md:px-5 md:py-4', BORDERS[i])}
+          className={cn('group flex flex-col gap-1 border-divider px-4 py-3.5 transition-[background-color,transform] duration-150 ease-[var(--ease-out-soft)] hover:bg-surface-2 md:px-5 md:py-4 [&:hover_.tile-value]:-translate-y-px', BORDERS[i])}
         >
           <span className="eyebrow">{t.eyebrow}</span>
-          <span className="flex items-baseline gap-1.5">
-            <span className={cn('font-display text-[32px] leading-none tnum', TONE_TEXT[t.tone])}>{t.value}</span>
+          <span className="tile-value flex items-baseline gap-1.5 transition-transform duration-150 ease-[var(--ease-out-soft)]">
+            <span className={cn('font-display text-[32px] leading-none tnum', TONE_TEXT[t.tone])}>{typeof t.value === 'number' ? <CountUp value={t.value} /> : t.value}</span>
             {t.unit ? <span className="text-[13px] text-ink-3 tnum">{t.unit}</span> : null}
           </span>
           <span className="text-[13px] leading-snug text-ink-2 group-hover:text-ink">{t.line}</span>

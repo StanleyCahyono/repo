@@ -95,7 +95,7 @@ function DayEntry({ day, index, saved, fresh, demo }: { day: SkiDayView; index: 
       {fresh ? (
         <motion.span aria-hidden initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ duration: 1.6, ease: 'easeOut', delay: 0.5 }} className="pointer-events-none absolute inset-0 bg-glacier/70" />
       ) : null}
-      <article aria-labelledby={`day-${day.id}`} className="relative grid grid-cols-[44px_minmax(0,1fr)_auto] gap-x-3 px-4 py-5 sm:gap-x-4 md:grid-cols-[64px_minmax(0,1fr)_auto] md:gap-x-5 md:px-5">
+      <article aria-labelledby={`day-${day.id}`} className="relative grid grid-cols-[44px_minmax(0,1fr)_auto] gap-x-3 px-4 py-5 transition-colors duration-150 hover:bg-surface-2/60 sm:gap-x-4 md:grid-cols-[64px_minmax(0,1fr)_auto] md:gap-x-5 md:px-5">
         <div className="relative">
           <DateBlock date={day.date} />
           {fresh ? (
@@ -137,8 +137,8 @@ function DayEntry({ day, index, saved, fresh, demo }: { day: SkiDayView; index: 
             ) : null}
           </p>
 
-          <dl className="mt-3 grid grid-cols-[76px_minmax(0,1fr)] gap-x-3 gap-y-2.5 text-[13.5px] sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-x-5">
-            <dt className="pt-1 text-ink-3">Surface</dt>
+          <dl className="mt-3 grid grid-cols-1 gap-y-1 text-[13.5px] sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-x-5 sm:gap-y-2.5 [&>dd]:mb-2 sm:[&>dd]:mb-0 [&>dt]:text-[12px] [&>dt]:font-medium [&>dt]:tracking-[0.06em] [&>dt]:uppercase sm:[&>dt]:text-[13.5px] sm:[&>dt]:font-normal sm:[&>dt]:tracking-normal sm:[&>dt]:normal-case">
+            <dt className="text-ink-3 sm:pt-1">Surface</dt>
             <dd className="min-w-0">
               {day.surfaceFeedback.length ? (
                 <>

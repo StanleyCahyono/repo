@@ -10,14 +10,17 @@ import { Check, Star, Trash2 } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { Sheet } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Notice } from '@/components/ui/states'
 import { useToast } from '@/components/ui/toast'
 import { deleteSkiDay, restoreSkiDay, saveSkiDay } from '@/lib/actions/season'
 import type { SkiDayView } from '@/lib/data/season'
+import { addDays } from '@/lib/domain/time'
 import { SURFACE_LABEL, SURFACE_TAGS, type SurfaceTag } from '@/lib/domain/types'
 import { CROWD_PRESETS, RATING_WORDS, TIME_PRESETS, currencies, dayLabel, majorString, rangeLabel } from './format'
 import type { SeasonUiData } from './season-ui'
+import { useDateMarks } from './date-marks'
 
 export interface DayPrefill {
   resortId?: string | null
@@ -216,6 +219,8 @@ export function DaySheet({
   }, [data.skills])
   const pass = data.passOptions
   const resortName = resort?.shortName ?? 'this resort'
+  // The calendar shows what is already on file: days in the journal and trip windows.
+  const dateMarks = useDateMarks({ exceptDayId: day?.id })
 
   const submit = () => {
     const errs: Record<string, string> = {}
@@ -318,9 +323,9 @@ export function DaySheet({
         {error ? <Notice tone="error" title={error} /> : null}
 
         <Group title="The day">
-          <div className="grid gap-4 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]">
+          <div className="grid gap-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]">
             <Field label="Date" htmlFor={ids.date} error={errors.date} hint={resort ? `Up to ${dayLabel(maxDate)} at ${resortName}` : undefined}>
-              <TextInput id={ids.date} type="date" required value={f.date} max={maxDate} onChange={(e) => set('date', e.target.value)} className="tnum" aria-invalid={!!errors.date} />
+              <DatePicker id={ids.date} required value={f.date} max={maxDate} today={data.today} marks={dateMarks} presets={['today', { label: 'Yesterday', date: addDays(data.today, -1) }]} onChange={(v) => set('date', v)} aria-invalid={!!errors.date} />
             </Field>
             <Field label="Resort" htmlFor={ids.resort} error={errors.resortId}>
               <Select id={ids.resort} required value={f.resortId} onChange={(e) => set('resortId', e.target.value)} aria-invalid={!!errors.resortId}>

@@ -8,6 +8,7 @@ import { cn } from '@/lib/ui/cn'
 export function ForecastSection({
   id,
   index,
+  eyebrow,
   title,
   meta,
   actions,
@@ -16,6 +17,8 @@ export function ForecastSection({
 }: {
   id: string
   index: number
+  /** Short HUD word after the index ("01 · Outlook"). */
+  eyebrow?: string
   title: string
   meta?: ReactNode
   actions?: ReactNode
@@ -29,7 +32,8 @@ export function ForecastSection({
         <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
           <div className="min-w-0">
             <span aria-hidden className="hud text-teal tnum">
-              {String(index).padStart(2, '0')} ·
+              {String(index).padStart(2, '0')}
+              {eyebrow ? ` · ${eyebrow}` : null}
             </span>
             <h2 id={headingId} className="mt-1 text-[30px] leading-[1.05] font-light tracking-[-0.03em] text-ink md:text-[40px]">
               {title}
