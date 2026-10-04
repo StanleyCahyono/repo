@@ -1,7 +1,7 @@
 # Downloads every resort's OpenStreetMap lifts & pistes, nearby place names, road routes (OSRM) and a freely licensed
-# Wikimedia Commons photo ONCE, and commits them to this branch (src/assets, catalog).
-# Only resorts still missing a snapshot or photo are fetched (pass --force locally to refresh).
-# Runs on a push whose commit message contains [resort-assets], or manually.
+# Wikimedia Commons photo ONCE, and commits them to this branch (src/assets, catalog). Each step commits its own
+# results, so a slow or failing step never loses the others. Only missing data is fetched (pass --force locally to
+# refresh). Runs on a push whose commit message contains [resort-assets], or manually.
 name: Resort assets
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
   fetch:
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[resort-assets]')
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,22 +26,31 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Lifts and pistes (OpenStreetMap)
-        run: node scripts/build-osm-snapshots.mjs
-      - name: Place labels (OpenStreetMap towns, peaks, lift stations)
-        run: node scripts/build-osm-snapshots.mjs --places
-      - name: Road routes (OSRM)
-        run: node scripts/build-drive-routes.mjs --catalog
-      - name: Photos (Wikimedia Commons)
-        run: node scripts/build-resort-photos.mjs
-      - name: Photos at full quality
-        run: node scripts/build-resort-photos.mjs --upgrade
-      - name: Commit
+      - name: Commit helper
         run: |
+          cat > /tmp/save.sh <<'SH'
+          set -e
           git config user.name "piste-assets-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/assets catalog
-          git diff --cached --quiet && echo "nothing new" && exit 0
-          git commit -m "Bundle resort map data, place labels, road routes and photos (automated)"
-          git pull --rebase origin ${GITHUB_REF_NAME}
-          git push origin HEAD:${GITHUB_REF_NAME}
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -qm "$1 (automated)"
+          for i in 1 2 3 4; do git pull -q --rebase -X theirs origin ${GITHUB_REF_NAME} && git push -q origin HEAD:${GITHUB_REF_NAME} && exit 0; sleep $((i*5)); done
+          exit 1
+          SH
+          chmod +x /tmp/save.sh
+      - name: Road routes (OSRM)
+        continue-on-error: true
+        timeout-minutes: 60
+        run: node scripts/build-drive-routes.mjs --catalog
+      - run: /tmp/save.sh "Bundle road routes for every drive (OSRM)"
+      - name: Place labels (OpenStreetMap towns, peaks, lift stations)
+        continue-on-error: true
+        timeout-minutes: 150
+        run: node scripts/build-osm-snapshots.mjs --places
+      - run: /tmp/save.sh "Bundle place labels for every resort map (OpenStreetMap)"
+      - name: Photos at full quality
+        continue-on-error: true
+        timeout-minutes: 60
+        run: node scripts/build-resort-photos.mjs --upgrade
+      - run: /tmp/save.sh "Resort photos at 1920 px (Wikimedia Commons)"

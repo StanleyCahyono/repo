@@ -180,7 +180,7 @@ async function places(snap) {
   const near = m
     ? `(${(+m[1] - pad).toFixed(5)},${(+m[2] - pad * 1.4).toFixed(5)},${(+m[3] + pad).toFixed(5)},${(+m[4] + pad * 1.4).toFixed(5)})`
     : snap.area.replace(/around:(\d+)/, (_, d) => `around:${+d + 3000}`)
-  const q = `[out:json][timeout:120];(node[place~"^(city|town|village|hamlet)$"][name]${near};node[natural=peak][name]${snap.area};node[aerialway=station][name]${snap.area};);out body;`
+  const q = `[out:json][timeout:60];(node[place~"^(city|town|village|hamlet)$"][name]${near};node[natural=peak][name]${snap.area};node[aerialway=station][name]${snap.area};);out body;`
   const data = await overpass(q)
   const out = []
   for (const el of data.elements ?? []) {
