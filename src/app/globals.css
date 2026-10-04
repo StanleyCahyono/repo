@@ -661,3 +661,9 @@
   .piste-beacon-ring { animation: none !important; opacity: 0 !important; }
   .piste-beacon-dot { animation: none !important; }
 }
+
+/* No sideways page scroll on phones, even for a frame while an entrance animation scales art (clip keeps sticky headers working). */
+html,
+body {
+  overflow-x: clip;
+}
