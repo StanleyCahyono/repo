@@ -177,12 +177,13 @@ function DateJump({ value, today, marks, onChange }: { value: string | null; tod
         <DatePicker
           id={id}
           size="compact"
-          value={value ?? ''}
+          value={value ?? today}
           today={today}
           marks={marks}
           presets
           align="end"
           placeholder={`Today · ${formatLocalDate(today, 'ccc d LLL')}`}
+          renderValue={(v) => (v === today ? `Today · ${formatLocalDate(today, 'ccc d LLL')}` : formatLocalDate(v, 'ccc d LLL yyyy'))}
           aria-describedby={`${id}-hint`}
           onChange={(v) => {
             const d = validDate(v)

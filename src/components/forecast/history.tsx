@@ -177,15 +177,15 @@ export function HistoryCalendarView({
       className={cn('flex min-w-0 flex-col gap-3.5 transition-opacity duration-200', stale && 'pointer-events-none opacity-55')}
       aria-busy={stale || undefined}
     >
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex min-w-0 flex-col gap-0.5">
+      <div className="flex items-end justify-between gap-3">
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <span className="hud text-ink-2">Calendar · forecast then vs reported</span>
-          <h2 id="calendar-title" className="m-0 text-[32px] leading-[1.05] font-light tracking-[-0.03em] text-ink md:text-[40px]" aria-live="polite">
+          <h2 id="calendar-title" className="m-0 text-[28px] leading-[1.05] font-light tracking-[-0.03em] text-ink sm:text-[32px] md:text-[40px]" aria-live="polite">
             {mName} <span className="text-ink-3">{mYear}</span>
             <span className="sr-only"> — {name}</span>
           </h2>
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex shrink-0 gap-1.5">
           {(
             [
               [-1, canPrev, ChevronLeft, 'Previous month'],

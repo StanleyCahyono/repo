@@ -125,7 +125,7 @@ export function CoverageMatrix({
                 <th scope="row" className="sticky left-0 z-10 bg-surface px-4 py-1.5 text-left font-normal group-hover:bg-surface-2">
                   <button type="button" onClick={show(r.resortId, null)} className="flex max-w-[210px] items-center gap-1.5 rounded-sm text-left text-[13.5px] font-medium text-ink hover:text-teal">
                     {r.isFavorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 fill-copper text-copper" /> : null}
-                    <span className="truncate">{r.shortName || r.name}</span>
+                    <span className="min-w-0 leading-snug [overflow-wrap:anywhere]">{r.shortName || r.name}</span>
                   </button>
                 </th>
                 {GROUPS.map((g) =>
@@ -162,7 +162,7 @@ export function CoverageMatrix({
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-[14.5px] font-medium text-ink">
                     {r.isFavorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 fill-copper text-copper" /> : null}
-                    <span className="truncate">{r.name}</span>
+                    <span className="min-w-0 leading-snug [overflow-wrap:anywhere]">{r.name}</span>
                   </span>
                   <span aria-hidden className="mt-1.5 grid max-w-[22rem] grid-cols-[repeat(16,minmax(0,1fr))] gap-[3px]">
                     {ORDERED.map((f) => {
