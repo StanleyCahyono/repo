@@ -2,8 +2,8 @@
 /**
  * Facts for one planned ski day: lift access in one line — your pass covers it, a lift ticket in the plan covers it,
  * or it needs a lift ticket (one tap adds one); a chosen "what if" product is checked too. Rules that are not on file
- * are never shown or counted as included, conditions or weather potential inside the forecast horizon (modeled, "likely"), and the
- * per-person day basket as a Piste estimate for reference (not part of the trip total).
+ * are never shown or counted as included. Then conditions or weather potential inside the forecast horizon (modeled,
+ * "likely"), and the per-person day basket as a Piste estimate for reference (not part of the trip total).
  */
 import { Ban, CalendarClock, CircleCheck, CloudOff, History, Plus, Ticket, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'

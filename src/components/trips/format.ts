@@ -266,3 +266,14 @@ export function itemFacts(i: Pick<TripItemRow, 'type' | 'refId' | 'date' | 'endD
   add(detailString(d, 'bookingRef') ? `Ref ${detailString(d, 'bookingRef')}` : null)
   return out
 }
+
+/** A resort's town for a one-line list: "Union Dale (Herrick Township, …), PA, PA" → "Union Dale, PA" (no notes in brackets, no repeats). */
+export function placeLine(place: string | null | undefined, region?: string | null): string {
+  const parts: string[] = []
+  for (const raw of (place ?? '').replace(/\s*\([^)]*\)/g, '').split(',')) {
+    const x = raw.trim()
+    if (x && !parts.some((p) => p.toLowerCase() === x.toLowerCase())) parts.push(x)
+  }
+  const town = parts.join(', ')
+  return [town, region && !town.toLowerCase().includes(region.toLowerCase()) ? region : null].filter(Boolean).join(' · ')
+}

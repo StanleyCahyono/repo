@@ -58,7 +58,7 @@ export function RoutePanel({ data }: { data: RouteData }) {
       : `Map: ${data.homeName} to ${fly?.origin}, flight to ${fly?.dest ?? 'an airport not yet set'}, then ground transfer to ${data.resortName}. No flight times or fares shown.`
 
   return (
-    <section aria-labelledby="route-title" className="glass relative flex min-h-[440px] flex-col overflow-hidden rounded-[32px] md:min-h-[480px]">
+    <section aria-labelledby="route-title" className="glass @container relative flex min-h-[440px] flex-col overflow-hidden rounded-[32px] md:min-h-[480px]">
       <h2 id="route-title" className="sr-only">
         How you get there
       </h2>
@@ -87,7 +87,7 @@ export function RoutePanel({ data }: { data: RouteData }) {
 
       {/* Ride options */}
       <div className="relative m-3 flex flex-col gap-1 rounded-[24px] bg-glass-strong p-1.5 shadow-[0_10px_30px_-12px_rgb(19_32_44/0.35)] md:m-4">
-        <div role="radiogroup" aria-label="Show route" className="grid gap-1 sm:grid-cols-2">
+        <div role="radiogroup" aria-label="Show route" className="grid gap-1 @[520px]:grid-cols-2">
           <Option on={mode === 'drive'} onClick={() => setMode('drive')} Icon={Car} title="Drive" value={(canDrive ? duration(data.drive.winterMinutes) : null) ?? 'Unknown'} note={canDrive ? `one way · incl. ${data.winterPct}% winter buffer · estimate` : 'no drive estimate on file'} />
           <Option
             on={mode === 'fly'}
@@ -126,8 +126,8 @@ function Option({ on, disabled, onClick, Icon, title, value, note }: { on: boole
       </span>
       <span className="relative min-w-0 flex-1">
         <span className="flex items-baseline justify-between gap-2">
-          <span className="text-[14px] font-semibold">{title}</span>
-          <span className="text-[15px] font-semibold tnum">{value}</span>
+          <span className="min-w-0 truncate text-[14px] font-semibold">{title}</span>
+          <span className="shrink-0 text-[15px] font-semibold whitespace-nowrap tnum">{value}</span>
         </span>
         <span className={cn('block text-[12px] leading-snug', on ? 'text-on-ink-chip-2' : 'text-ink-2')}>{note}</span>
       </span>

@@ -19,7 +19,7 @@ import { addDays, daysBetween, formatLocalDate, isLocalDate, nextSaturday } from
 import type { PickerResort } from '@/lib/data/trip-plan'
 import { createTrip } from '@/lib/actions/trips'
 import { useRunAction } from './use-run'
-import { dayLabel, duration, plural, tripDays } from './format'
+import { dayLabel, duration, placeLine, plural, tripDays } from './format'
 import { RangeCalendar, SeasonMark } from './range-calendar'
 
 const MAX_DAYS = 30
@@ -224,7 +224,7 @@ function NewTripForm({ resorts, today, templateCount, prefill, onDone }: { resor
                             {r.favorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 text-copper" fill="currentColor" /> : null}
                             <span className="truncate">{r.name}</span>
                           </span>
-                          {r.place || r.region ? <span className="block truncate text-[12.5px] leading-snug text-ink-3">{[r.place, r.region].filter(Boolean).join(' · ')}</span> : null}
+                          {r.place || r.region ? <span className="block truncate text-[12.5px] leading-snug text-ink-3">{placeLine(r.place, r.region)}</span> : null}
                           <span className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[12.5px] leading-snug text-ink-2 tnum">
                             {r.driveMinutes !== null ? (
                               <span className="inline-flex items-center gap-1 whitespace-nowrap">

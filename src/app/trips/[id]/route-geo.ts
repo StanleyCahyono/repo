@@ -121,6 +121,23 @@ function citiesIn(b: Box, resortIds: readonly string[], limit: number): MapCity[
   return out.sort((a, c) => a.rank - c.rank).slice(0, limit)
 }
 
+const km = (a: LonLat, b: LonLat) => {
+  const dLat = (b[1] - a[1]) * (Math.PI / 180)
+  const dLon = (b[0] - a[0]) * (Math.PI / 180) * Math.cos(((a[1] + b[1]) / 2) * (Math.PI / 180))
+  return 6371 * Math.hypot(dLat, dLon)
+}
+
+/** Up to `limit` notable cities (Natural Earth zoom ≤ 7) within `maxKm` of any anchor, nearest first. */
+function nearbyCities(anchors: readonly LonLat[], skip: readonly string[], limit: number, maxKm: number): LonLat[] {
+  const names = new Set(skip.map((x) => x.toLowerCase()))
+  return CITIES.filter((c) => c.z <= 7 && !names.has(c.n.toLowerCase()))
+    .map((c) => ({ ll: c.ll as LonLat, d: Math.min(...anchors.map((a) => km(a, c.ll))) }))
+    .filter((c) => c.d <= maxKm && c.d > 3)
+    .sort((a, b) => a.d - b.d)
+    .slice(0, limit)
+    .map((c) => c.ll)
+}
+
 export interface RouteGeoInput {
   home: { name: string; lat: number; lon: number }
   resort: { id: string; name: string; lat: number; lon: number }
@@ -146,8 +163,10 @@ export async function routeGeo(ctx: DataCtx, input: RouteGeoInput): Promise<Trip
     dest ? road(`apt:${dest.label}>resort:${input.resort.id}`) : Promise.resolve(null),
   ])
 
-  // Drive: towns around home and the resort. Fly: cities along the way, plus coastlines and borders for context.
-  const drivePts: LonLat[] = [home.ll, resort.ll, ...(drive ?? [])]
+  // Drive: towns around home and the resort — the nearest few cities are kept in view so a short drive still has
+  // named places around it. Fly: cities along the way, plus coastlines and borders for context.
+  const nearby = nearbyCities([home.ll, resort.ll], [home.label, resort.label], 3, 80)
+  const drivePts: LonLat[] = [home.ll, resort.ll, ...(drive ?? []), ...nearby]
   const flyPts: LonLat[] = [home.ll, resort.ll, ...(origin ? [origin.ll] : []), ...(dest ? [dest.ll] : [])]
   const driveBox = boxOf(drivePts, 0.9, 0.6)
   const flyBox = boxOf(flyPts, 1.5, 0.35)
@@ -159,6 +178,7 @@ export async function routeGeo(ctx: DataCtx, input: RouteGeoInput): Promise<Trip
     origin,
     dest,
     roads: { drive, toOrigin, fromDest },
+    context: { drive: nearby },
     cities: { drive: citiesIn(driveBox, [input.resort.id], 40), fly: hasFly ? citiesIn(flyBox, [input.resort.id], 60) : [] },
     land: hasFly ? clipRings(worldLand as unknown as number[][], flyBox, flySpan / 220) : [],
     borders: hasFly ? clipRings(worldBorders as unknown as number[][], flyBox, flySpan / 220) : [],

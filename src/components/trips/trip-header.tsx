@@ -282,7 +282,7 @@ function DuplicateSheet({ open, onOpenChange, trip }: { open: boolean; onOpenCha
             onChange={setStart}
             today={today}
             openTo={trip.startDate}
-            presets={[{ label: 'Same dates', date: trip.startDate }, { label: 'A week later', date: addDays(trip.startDate, 7) }, { label: 'Next year, same weekday', date: addDays(trip.startDate, 364) }]}
+            presets={[{ label: 'Same dates', date: trip.startDate }, { label: 'A week later', date: addDays(trip.startDate, 7) }, { label: 'Next season', date: addDays(trip.startDate, 364) }]}
             marks={[{ date: trip.startDate, to: trip.endDate, label: 'Original trip', tone: 'ink', variant: 'rule', soft: true }]}
           />
         </Field>

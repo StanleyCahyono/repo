@@ -41,6 +41,8 @@ export interface TripMapGeo {
   origin: MapNode | null
   dest: MapNode | null
   roads: { drive: LonLat[] | null; toOrigin: LonLat[] | null; fromDest: LonLat[] | null }
+  /** Extra points kept in view (the nearest cities around a short drive), so the map always has named places. */
+  context?: { drive: LonLat[] }
   cities: { drive: MapCity[]; fly: MapCity[] }
   /** Coastline rings and border lines (flat lon,lat arrays) around a fly-in route. */
   land: number[][]
@@ -222,7 +224,7 @@ export function TripMap({ geo, mode, className, label }: { geo: TripMapGeo; mode
     const fly = mode === 'fly' && geo.origin && geo.dest
     const nodes: MapNode[] = fly ? [geo.home, geo.origin!, geo.dest!, geo.resort] : [geo.home, geo.resort]
     const roads = fly ? [geo.roads.toOrigin, geo.roads.fromDest] : [geo.roads.drive]
-    const fitPts: LonLat[] = [...nodes.map((n) => n.ll), ...roads.flatMap((r) => r ?? [])]
+    const fitPts: LonLat[] = [...nodes.map((n) => n.ll), ...roads.flatMap((r) => r ?? []), ...(fly ? [] : (geo.context?.drive ?? []))]
     const project = fitProjection(fitPts, w, h, { x: Math.min(96, w * 0.2), top: fly ? 64 : 52, bottom: 44 }, fly ? 0.02 : 0.011)
 
     // Key places, merged when they would sit on top of each other (e.g. home and its airport on a continental map).
