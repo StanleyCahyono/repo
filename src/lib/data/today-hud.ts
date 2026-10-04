@@ -8,8 +8,9 @@
  *   unless an opening or an open statement is on record.
  * - Opening countdown: the next openings worldwide (announced first-class, estimates labelled "est.").
  * - 7-day snow at the home mountain: stored modeled snowfall (the same strip engine as before), or "not fetched".
- * - Pass deadlines: a price change that just happened or the next purchase-by date, research notes on sales, and the
- *   pass families whose prices are not in the catalog.
+ * - Pass deadlines: a price change that just happened, else the next purchase-by date, else the home mountain's
+ *   current pass price; other current adult prices on file; and dated notes on sales. Families with no price on file
+ *   are simply not listed (nothing is invented in their place).
  */
 import 'server-only'
 import { and, count, gte, lt } from 'drizzle-orm'
@@ -18,9 +19,9 @@ import type { Ctx } from '@/lib/context'
 import { getFreshness, type FreshnessView } from '@/lib/data/freshness'
 import { getPassesView, type PassProductView } from '@/lib/data/passes'
 import { greatCircleKm } from '@/lib/domain/geo'
-import { formatMoney } from '@/lib/domain/money'
+import { formatMoney, type Money } from '@/lib/domain/money'
 import { addDays, daysBetween, formatLocalDate, hemisphereOf } from '@/lib/domain/time'
-import { formatDistance, formatElevation, formatSnow, formatTemp } from '@/lib/domain/units'
+import { formatDistance, formatDuration, formatElevation, formatSnow, formatTemp, snowValue } from '@/lib/domain/units'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { currentReports, loadBundle, resortSeasonFor, type Bundle } from './core'
 import { buildSummaries, type ResortSummary } from './resorts'
@@ -59,6 +60,8 @@ export interface WorldSeason {
   todayTitle: string
   /** "Open worldwide: … · Next: Hintertux, tomorrow" */
   todayDetail: string
+  /** "Next: Hintertux, tomorrow" (the soonest opening in the countdown), or null. */
+  nextLabel: string | null
 }
 
 export interface Countdown {
@@ -80,16 +83,54 @@ export interface SnowDay {
   /** Larger of base/summit modeled snowfall; null = not fetched for that day. */
   snowCm: number | null
   snow: string | null
+  /** The amount without a spaced unit, for narrow day columns: "1.2″" (inches) or "12" (cm; the unit is in the legend). */
+  snowShort: string | null
   partial: boolean
+  /** "27° / 13°" (for the detail line). */
   temps: string | null
+  /** "27°" / "13°" — stacked high over low in the day column. */
+  hi: string | null
+  lo: string | null
+}
+
+export interface PassPriceLine {
+  productId: string
+  /** "Ikon Pass", "Greek Peak Unlimited Season Pass" */
+  name: string
+  /** "$999" */
+  price: string
+  /** "Adult · until 9 Oct" */
+  note: string | null
+}
+
+export interface PassTier {
+  price: string
+  /** "Until 30 Sep" / "From 1 Oct" */
+  label: string
+  /** The step on sale today. */
+  current: boolean
+  /** Its purchase-by date has passed. */
+  past: boolean
 }
 
 export interface PassCard {
-  /** Headline number (a current price), or null when no dated price is on file. */
-  price: string | null
-  priceNote: string | null
-  lines: string[]
-  sourceUrl: string | null
+  /**
+   * The headline price: a change that just happened ('change'), the next purchase-by deadline ('deadline'), or the
+   * home mountain's (else the first) current adult price ('current'). Null when no current price is on file.
+   */
+  headline:
+    | (PassPriceLine & {
+        kind: 'change' | 'deadline' | 'current'
+        detail: string | null
+        sourceUrl: string | null
+        /** The product's dated price steps for that category ("$799 until 30 Sep → $999 from 1 Oct"), when it has two or more. */
+        tiers: PassTier[]
+      })
+    | null
+  /** Other current adult prices on file (owned and the big families first), at most three. */
+  others: PassPriceLine[]
+  /** Dated notes on sales ("Indy Pass: sold out in Sept 2026."), at most two. */
+  notes: string[]
 }
 
 export interface HomeMountain {
@@ -112,10 +153,12 @@ export interface TodayHud {
   home: HomeMountain | null
   world: WorldSeason
   countdowns: Countdown[]
-  snow: { resortName: string | null; days: SnowDay[]; fetchedAt: string | null }
+  snow: { resortName: string | null; days: SnowDay[]; fetchedAt: string | null; snowUnit: 'in' | 'cm'; tempUnit: '°F' | '°C' }
   passes: PassCard
   freshness: FreshnessView | null
   units: UnitPrefs
+  /** Resorts open now (status statement or an actual opening on record), nearest by drive first, at most six. */
+  openNow: { id: string; name: string; place: string; drive: string | null }[]
   /** Avatar caption facts: ability and ski days logged this season (real records only). */
   ability: string
   daysLogged: number
@@ -139,6 +182,12 @@ function relDays(days: number): string {
 }
 
 const short = (d: string) => formatLocalDate(d, 'd LLL')
+
+/** The resort with the shortest drive (name only). */
+const nearestName = (list: ResortSummary[]) => {
+  const s = [...list].sort((a, b) => (a.travel.driveMinutes ?? Infinity) - (b.travel.driveMinutes ?? Infinity))[0]
+  return s.shortName || s.name
+}
 
 /** The planning season's window: 1 Sep of its first year to 1 Jul of the next. */
 function windowOf(seasonId: string): { from: string; to: string } {
@@ -190,16 +239,15 @@ function worldRow(b: Bundle, s: ResortSummary, homeId: string | null, win: { fro
       // Opened (on record) and not running now: closed since.
     } else if (row.announcedOpening) {
       const days = daysBetween(today, row.announcedOpening)
-      if (row.announcedClosing) {
-        spans.push(seg('announced', row.announcedOpening, row.announcedClosing))
-        notes.push(days <= 1 ? `Opens ${short(row.announcedOpening)} · ${relDays(days)}` : `${short(row.announcedOpening)} – ${short(row.announcedClosing)}`)
-      } else {
-        spans.push(seg('fade', row.announcedOpening, addDays(row.announcedOpening, 80)))
-        notes.push(`Opens ${short(row.announcedOpening)}${days <= 7 ? ` · ${relDays(days)}` : ''}`)
-      }
+      if (row.announcedClosing) spans.push(seg('announced', row.announcedOpening, row.announcedClosing))
+      else spans.push(seg('fade', row.announcedOpening, addDays(row.announcedOpening, 80)))
+      // An announced date that has passed never turns into "Open": without an open statement it stays announced.
+      if (days < 0) notes.push(`Announced ${short(row.announcedOpening)} · no status yet`)
+      else if (row.announcedClosing && days > 1) notes.push(`${short(row.announcedOpening)} – ${short(row.announcedClosing)}`)
+      else notes.push(`Opens ${short(row.announcedOpening)}${days <= 7 ? ` · ${relDays(days)}` : ''}`)
     } else if (row.estimatedOpenFrom) {
       spans.push(seg('estimate', row.estimatedOpenFrom, addDays(row.estimatedOpenFrom, 55)))
-      notes.push(`${south ? `${row.estimatedOpenFrom.slice(0, 4)} est.` : 'Est.'} ${short(row.estimatedOpenFrom)} · not announced`)
+      notes.push(south ? `Est. ${formatLocalDate(row.estimatedOpenFrom, 'd LLL yyyy')}` : `Est. ${short(row.estimatedOpenFrom)} · not announced`)
     } else if (!openNow) notes.push('Not announced')
   } else if (!row && !openNow) notes.push('Not announced')
 
@@ -208,7 +256,7 @@ function worldRow(b: Bundle, s: ResortSummary, homeId: string | null, win: { fro
     name: s.shortName || s.name,
     place: s.id === homeId ? `${placeOf(s)} · HOME` : placeOf(s),
     home: s.id === homeId,
-    note: notes.join(' · '),
+    note: notes.map((n, i) => (i > 0 && n.startsWith('Est.') ? `est.${n.slice(4)}` : n)).join(' · '),
     spans: spans.filter((x): x is SeasonSpan => !!x),
   }
 }
@@ -260,11 +308,29 @@ function countdowns(summaries: ResortSummary[], today: string): Countdown[] {
     })
 }
 
+const BIG_FAMILIES = ['ikon', 'epic', 'indy', 'mountain-collective']
+/** A stored amount as display text (amounts here are never null). */
+const price = (m: Money) => formatMoney(m) ?? ''
+const productName = (p: PassProductView) => p.name.replace(/ 20\d\d-\d\d$/, '')
+const categoryLabel = (c: string | null) => (c ? c[0].toUpperCase() + c.slice(1).toLowerCase() : 'Adult')
+
+/** A product's price steps for one category, in purchase-by order (open-ended last); empty with fewer than two. */
+function tiersOf(p: PassProductView, category: string | null, currentId: number | null): PassTier[] {
+  const same = p.prices
+    .filter((x) => (x.category ?? '').toLowerCase() === (category ?? '').toLowerCase() && !x.expired && x.quoteKind !== 'demo')
+    .sort((a, b) => (a.purchaseBy ?? '9999-12-31').localeCompare(b.purchaseBy ?? '9999-12-31'))
+  if (same.length < 2) return []
+  return same.map((x, i) => {
+    const prevBy = i > 0 ? same[i - 1].purchaseBy : null
+    const label = x.purchaseBy ? `Until ${formatLocalDate(x.purchaseBy, 'd LLL')}` : prevBy ? `From ${formatLocalDate(addDays(prevBy, 1), 'd LLL')}` : 'Later'
+    return { price: price(x.amount), label, current: x.id === currentId, past: x.purchaseClosed }
+  })
+}
+
+const HEARSAY = /^(reports?|rumou?rs?|sources)\s+(say|said|suggest|indicate)|\breportedly\b|\bunconfirmed\b/i
+
 function passCard(products: PassProductView[], homeId: string | null, today: string): PassCard {
-  const lines: string[] = []
-  let price: string | null = null
-  let priceNote: string | null = null
-  let sourceUrl: string | null = null
+  let headline: PassCard['headline'] = null
 
   // A price change that has just happened (a purchase-by tier passed in the last 14 days), home mountain first.
   const changes = products.flatMap((p) => {
@@ -278,46 +344,87 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
   changes.sort((a, b) => Number(b.p.resortId === homeId) - Number(a.p.resortId === homeId) || Number(b.p.ownedByMe) - Number(a.p.ownedByMe))
   const ch = changes[0]
   if (ch) {
-    price = formatMoney(ch.cur.amount)
-    priceNote = `${ch.p.name.replace(/ 20\d\d-\d\d$/, '')}${ch.cur.category ? ` · ${ch.cur.category.toLowerCase()}` : ''} from ${formatLocalDate(addDays(ch.prev.purchaseBy!, 1), 'd LLL')} · was ${formatMoney(ch.prev.amount)}`
-    sourceUrl = ch.cur.prov.sourceUrl ?? null
+    headline = {
+      kind: 'change',
+      productId: ch.p.id,
+      name: productName(ch.p),
+      price: price(ch.cur.amount),
+      note: categoryLabel(ch.cur.category),
+      detail: `New price from ${formatLocalDate(addDays(ch.prev.purchaseBy!, 1), 'd LLL')} · was ${formatMoney(ch.prev.amount)}`,
+      sourceUrl: ch.cur.prov.sourceUrl ?? null,
+      tiers: tiersOf(ch.p, ch.cur.category, ch.cur.id),
+    }
   } else {
     // Otherwise the next purchase-by date.
     const next = products
-      .flatMap((p) => p.prices.filter((x) => x.purchaseBy && x.purchaseBy >= today && !x.purchaseClosed).map((x) => ({ p, x })))
+      .flatMap((p) => p.prices.filter((x) => x.purchaseBy && x.purchaseBy >= today && !x.purchaseClosed && !x.expired && x.quoteKind !== 'demo').map((x) => ({ p, x })))
       .sort((a, b) => a.x.purchaseBy!.localeCompare(b.x.purchaseBy!))[0]
     if (next) {
-      price = formatMoney(next.x.amount)
       const days = daysBetween(today, next.x.purchaseBy!)
-      priceNote = `${next.p.name} until ${formatLocalDate(next.x.purchaseBy!, 'd LLL')} · ${days === 0 ? 'last day' : `${days} days left`}`
-      sourceUrl = next.x.prov.sourceUrl ?? null
+      headline = {
+        kind: 'deadline',
+        productId: next.p.id,
+        name: productName(next.p),
+        price: price(next.x.amount),
+        note: categoryLabel(next.x.category),
+        detail: `Until ${formatLocalDate(next.x.purchaseBy!, 'd LLL')} · ${days === 0 ? 'last day' : days === 1 ? '1 day left' : `${days} days left`}`,
+        sourceUrl: next.x.prov.sourceUrl ?? null,
+        tiers: tiersOf(next.p, next.x.category, next.x.id),
+      }
+    } else {
+      // Otherwise the price you could buy at today: your own pass first, then the home mountain's, then a big family's.
+      const cur = products
+        .filter((p) => p.currentPrice)
+        .sort(
+          (a, b) =>
+            Number(b.ownedByMe) - Number(a.ownedByMe) ||
+            Number(b.resortId === homeId && !!homeId) - Number(a.resortId === homeId && !!homeId) ||
+            Number(BIG_FAMILIES.includes(b.familyId)) - Number(BIG_FAMILIES.includes(a.familyId)),
+        )[0]
+      if (cur?.currentPrice) {
+        headline = {
+          kind: 'current',
+          productId: cur.id,
+          name: productName(cur),
+          price: price(cur.currentPrice.amount),
+          note: categoryLabel(cur.currentPrice.category),
+          detail: 'Current price',
+          sourceUrl: cur.currentPrice.prov.sourceUrl ?? null,
+          tiers: tiersOf(cur, cur.currentPrice.category, cur.currentPrice.id),
+        }
+      }
     }
   }
 
-  // Sales notes (deduplicated wording), then families whose products carry no price at all.
-  const notes = new Map<string, string[]>()
+  // Other current adult prices: your passes, then the big families, then the home mountain's, then other resorts'.
+  const rank = (p: PassProductView) => (p.ownedByMe ? 0 : BIG_FAMILIES.includes(p.familyId) ? 1 : p.resortId === homeId && homeId ? 2 : 3)
+  const others: PassPriceLine[] = products
+    .filter((p) => p.currentPrice && p.id !== headline?.productId)
+    .sort((a, b) => rank(a) - rank(b) || a.currentPrice!.amount.amountMinor - b.currentPrice!.amount.amountMinor)
+    .slice(0, 3)
+    .map((p) => ({
+      productId: p.id,
+      name: productName(p),
+      price: price(p.currentPrice!.amount),
+      note: [categoryLabel(p.currentPrice!.category), p.currentPrice!.purchaseBy ? `until ${formatLocalDate(p.currentPrice!.purchaseBy, 'd LLL')}` : null].filter(Boolean).join(' · '),
+    }))
+
+  // Sales notes (deduplicated wording) — the big families always, resort passes only for the home mountain.
+  const byText = new Map<string, string[]>()
   for (const p of products) {
     const text = p.salesDeadline?.text?.trim()
-    if (!text || (ch && p.resortId === ch.p.resortId)) continue
-    // Resort passes only for the home mountain; the big families always.
+    if (!text || p.id === headline?.productId) continue
+    // Hearsay ("Reports say …", flagged unconfirmed in the catalog) is not a verified fact, so Today leaves it out.
+    if (HEARSAY.test(text)) continue
     if (p.familyId === 'regional' && p.resortId !== homeId) continue
     if (p.prices.some((x) => x.purchaseBy && x.purchaseBy < today) && !p.prices.some((x) => !x.purchaseClosed)) continue
-    notes.set(text, [...(notes.get(text) ?? []), p.familyId === 'regional' ? (p.resortName ?? p.familyName) : p.familyName])
+    byText.set(text, [...(byText.get(text) ?? []), p.familyId === 'regional' ? (p.resortName ?? p.familyName) : p.familyName])
   }
-  for (const [text, fams] of [...notes].slice(0, 2)) {
+  const notes = [...byText].slice(0, 2).map(([text, fams]) => {
     const names = [...new Set(fams)]
-    lines.push(names.some((n) => text.includes(n.replace(/ Pass$/, ''))) ? text : `${names.join(', ')}: ${text}`)
-  }
-  const byFamily = new Map<string, { name: string; priced: boolean }>()
-  for (const p of products) {
-    if (p.familyId === 'regional') continue
-    const f = byFamily.get(p.familyId) ?? { name: p.familyName, priced: false }
-    f.priced ||= p.prices.length > 0
-    byFamily.set(p.familyId, f)
-  }
-  const unpriced = [...byFamily.values()].filter((f) => !f.priced).map((f) => f.name)
-  if (unpriced.length) lines.push(`${unpriced.join(', ').replace(/, ([^,]*)$/, ' and $1')} prices: not in catalog.`)
-  return { price, priceNote, lines, sourceUrl }
+    return names.some((n) => text.includes(n.replace(/ Pass$/, ''))) ? text : `${names.join(', ')}: ${text}`
+  })
+  return { headline, others, notes }
 }
 
 export async function getTodayHud(ctx: Ctx): Promise<TodayHud> {
@@ -384,14 +491,42 @@ export async function getTodayHud(ctx: Ctx): Promise<TodayHud> {
     shown: northRows.length + southRows.length,
     total: summaries.length,
     open: openAll.map((s) => ({ id: s.id, name: s.shortName || s.name })),
-    todayTitle: nearOpen.length ? `Driving range: ${nearOpen.map((s) => s.shortName || s.name).join(', ')} open` : 'Driving range: nothing open',
+    todayTitle: !nearOpen.length
+      ? 'Driving range: nothing open'
+      : nearOpen.length === 1
+        ? `Driving range: ${nearOpen[0].shortName || nearOpen[0].name} open`
+        : `Driving range: ${nearOpen.length} open · ${nearestName(nearOpen)} nearest`,
     todayDetail: [
       openAll.length ? `Open worldwide: ${openAll.map((s) => s.shortName || s.name).join(', ')}` : 'No open status on record worldwide',
       next ? `Next: ${next.name}, ${relDays(next.days)}` : null,
     ]
       .filter(Boolean)
       .join(' · '),
+    nextLabel: next ? `Next: ${next.name}, ${relDays(next.days)}` : null,
   }
+
+  // Seven-day snow at the home mountain.
+  const dates7 = Array.from({ length: 7 }, (_, i) => addDays(today, i))
+  const strip = homeId ? await stripFor(b, [homeId], dates7, new Set(), ctx.prefs.scoringMode, reportsNow) : []
+  const days: SnowDay[] = dates7.map((date, i) => {
+    const c = strip[i]?.cells[0]
+    const vals = c ? [c.snowfallCm.base, c.snowfallCm.summit].filter((x): x is number => x != null) : []
+    const cm = vals.length ? Math.max(...vals) : null
+    const hi = formatTemp(c?.tempMaxC, units)?.replace(/[CF]$/, '') ?? null
+    const lo = formatTemp(c?.tempMinC, units)?.replace(/[CF]$/, '') ?? null
+    const sv = snowValue(cm, units)
+    return {
+      date,
+      label: formatLocalDate(date, 'ccc d').toUpperCase(),
+      snowCm: cm,
+      snow: cm != null ? formatSnow(cm, units) : null,
+      snowShort: sv == null ? null : units.snow === 'in' ? `${sv}″` : String(sv),
+      partial: !!c?.partial,
+      temps: hi && lo ? `${hi} / ${lo}` : null,
+      hi,
+      lo,
+    }
+  })
 
   // Hero copy.
   const headline = nearOpen.length
@@ -407,25 +542,12 @@ export async function getTodayHud(ctx: Ctx): Promise<TodayHud> {
     if (home.chipTone === 'estimate' || home.chipTone === 'unknown') leadParts.push(`${home.name} hasn’t announced its opening.`)
     else if (home.chipTone === 'announced' && hs.opening.date) leadParts.push(`${home.name} opens ${formatLocalDate(hs.opening.date, 'ccc d LLL')}.`)
   }
-
-  // Seven-day snow at the home mountain.
-  const dates7 = Array.from({ length: 7 }, (_, i) => addDays(today, i))
-  const strip = homeId ? await stripFor(b, [homeId], dates7, new Set(), ctx.prefs.scoringMode, reportsNow) : []
-  const days: SnowDay[] = dates7.map((date, i) => {
-    const c = strip[i]?.cells[0]
-    const vals = c ? [c.snowfallCm.base, c.snowfallCm.summit].filter((x): x is number => x != null) : []
-    const cm = vals.length ? Math.max(...vals) : null
-    const hi = formatTemp(c?.tempMaxC, units)
-    const lo = formatTemp(c?.tempMinC, units)
-    return {
-      date,
-      label: formatLocalDate(date, 'ccc d').toUpperCase(),
-      snowCm: cm,
-      snow: cm != null ? formatSnow(cm, units) : null,
-      partial: !!c?.partial,
-      temps: hi && lo ? `${hi.replace(/[CF]$/, '')} / ${lo.replace(/[CF]$/, '')}` : null,
-    }
-  })
+  if (!leadParts.length && openAll.length) leadParts.push(`${openAll.length} ${openAll.length === 1 ? 'resort is' : 'resorts are'} open worldwide.`)
+  // The snowiest of the next seven days at the home mountain (modeled, so "Likely"), when it is worth a sentence.
+  const snowiest = days.reduce<SnowDay | null>((best, d) => (d.snowCm != null && d.snowCm >= 1 && (!best || d.snowCm > (best.snowCm ?? 0)) ? d : best), null)
+  if (snowiest && home && leadParts.length < 3) {
+    leadParts.push(`Likely ${snowiest.partial ? 'at least ' : ''}${snowiest.snow} of snow at ${home.name} ${snowiest.date === today ? 'today' : `on ${formatLocalDate(snowiest.date, 'cccc')}`}.`)
+  }
 
   const phase = rec.preseason ? 'PRESEASON' : 'IN SEASON'
   return {
@@ -436,10 +558,26 @@ export async function getTodayHud(ctx: Ctx): Promise<TodayHud> {
     home,
     world,
     countdowns: cds,
-    snow: { resortName: home?.name ?? null, days, fetchedAt: hs?.freshness.weatherFetchedAt ?? null },
+    snow: {
+      resortName: home?.name ?? null,
+      days,
+      fetchedAt: hs?.freshness.weatherFetchedAt ?? null,
+      snowUnit: units.snow === 'in' ? 'in' : 'cm',
+      tempUnit: units.temperature === 'F' ? '°F' : '°C',
+    },
     passes: passCard(pv.products, homeId, today),
     freshness,
     units,
+    openNow: openAll
+      .map((s) => ({ s, minutes: s.travel.driveMinutes }))
+      .sort((a, b2) => (a.minutes ?? Infinity) - (b2.minutes ?? Infinity) || a.s.name.localeCompare(b2.s.name))
+      .slice(0, 6)
+      .map(({ s, minutes }) => ({
+        id: s.id,
+        name: s.shortName || s.name,
+        place: placeOf(s),
+        drive: minutes != null ? `${s.travel.isEstimate ? '~' : ''}${formatDuration(minutes)} drive` : null,
+      })),
     ability: ctx.prefs.ability,
     daysLogged: logged?.n ?? 0,
   }

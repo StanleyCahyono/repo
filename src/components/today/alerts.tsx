@@ -75,7 +75,7 @@ export function UnreadAlerts({ alerts, demo }: { alerts: AlertItem[]; demo: bool
             <button
               type="button"
               onClick={() => mark(shown.map((a) => a.id))}
-              className="inline-flex h-11 items-center gap-1.5 rounded-md px-2 text-[13.5px] font-medium text-teal hover:bg-glacier/60 md:h-9"
+              className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-[13.5px] font-medium text-teal transition-colors duration-150 hover:bg-chip-hover md:h-9"
             >
               <CheckCheck aria-hidden className="size-4" /> Mark all read
             </button>
@@ -115,7 +115,7 @@ export function UnreadAlerts({ alerts, demo }: { alerts: AlertItem[]; demo: bool
                     aria-label={`Mark read: ${a.title}`}
                     title="Mark read"
                     className={cn(
-                      'inline-flex size-11 shrink-0 items-center justify-center rounded-md border border-divider-strong bg-surface text-ink-2 transition-colors duration-150 hover:border-teal hover:text-teal md:size-9',
+                      'glass-strong inline-flex size-11 shrink-0 items-center justify-center rounded-full text-ink-2 transition-[color,transform] duration-150 hover:-translate-y-px hover:text-teal md:size-9',
                     )}
                   >
                     <Check aria-hidden className="size-4" />

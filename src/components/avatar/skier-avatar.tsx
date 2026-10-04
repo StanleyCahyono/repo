@@ -63,10 +63,15 @@ export function SkierAvatar({ label, className, ...opts }: Partial<SkierOptions>
       ref={host}
       role="img"
       aria-label={label}
-      className={cn('relative h-full w-full', merged.drag && 'cursor-grab touch-pan-y active:cursor-grabbing', className)}
+      className={cn(
+        // The canvas fades in once the model is ready (opacity only).
+        'relative h-full w-full [&>canvas]:animate-[piste-fade-in_520ms_cubic-bezier(0.22,0.8,0.26,1)_both]',
+        merged.drag && 'cursor-grab touch-pan-y active:cursor-grabbing',
+        className,
+      )}
     >
       {state !== 'ready' ? (
-        <div className="hud absolute inset-0 flex items-center justify-center text-ink-2" aria-hidden>
+        <div className={cn('hud absolute inset-0 flex items-center justify-center text-ink-2', state !== 'failed' && 'piste-skeleton')} aria-hidden>
           {state === 'failed' ? 'Avatar unavailable on this device' : 'Loading avatar…'}
         </div>
       ) : null}

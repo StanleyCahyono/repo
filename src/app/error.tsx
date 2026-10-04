@@ -18,7 +18,7 @@ export default function AppError({ error, retry }: { error: Error & { digest?: s
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-48 opacity-60 [mask-image:linear-gradient(to_bottom,#000,transparent)]">
         <TopoArt seed="app-error" density={0.5} />
       </div>
-      <div className="relative">
+      <div className="piste-rise relative">
         <p className="eyebrow-hud mb-3">Something went wrong</p>
         <h1 className="title-hud text-[40px] text-ink md:text-[60px]">This page could not be loaded</h1>
         <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-ink-2 md:text-[16px]">
