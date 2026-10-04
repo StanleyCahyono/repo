@@ -95,8 +95,8 @@
       "source": {
         "url": "https://www.winterinsight.com/resorts/davos-klosters-2026-27/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; 13 Nov 2026 is a Friday, consistent with the stated weekday. Search summary did not tie this to one result; cited URL is the most likely source."
+        "checkedOn": "2026-10-03",
+        "note": "winterinsight.com 'DAVOS KLOSTERS 2026/27' (updated 01/09/2026): 'Friday 13 November is opening day for downhill skiing at Davos Klosters. The Parsenn lifts will be in operation that weekend, then daily from 20 November'."
       }
     },
     "announcedClosing": {
@@ -158,7 +158,7 @@
     "official": "https://www.davosklostersmountains.ch/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": "https://www.davos.ch/en/discover/mountains/winter-sports-report/lifts-and-piste-report",
+    "snowReport": "https://www.davos.ch/en/discover/mountains-in-davos-klosters/winter-sports-report/lifts-and-piste-report",
     "hours": null,
     "tickets": "https://www.davosklostersmountains.ch/en/mountains/winter/rates-tickets/ski-regional-tickets",
     "seasonPass": null,
@@ -211,7 +211,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.davos.ch/en/discover/mountains-in-davos-klosters/winter-sports-report/lifts-and-piste-report",
+    "format": "html",
+    "notes": "Official Davos Klosters Tourism 'Lifts and Piste Report' page (CI-fetched 2026-10-03; off-season, no data in the text). HTML only."
+  },
   "photo": {
     "src": "asset:photo-davos-klosters.webp",
     "alt": "Davos Klosters: Davos – Evang. –ref. Kirche und Skistürze-Brunnen",
@@ -220,17 +224,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Davos_%E2%80%93_Evang._%E2%80%93ref._Kirche_und_Skist%C3%BCrze-Brunnen_-_panoramio.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Confirm the lift count (50 vs 46), lift types and uphill capacity.",
       "Difficulty split for the five areas.",
       "Closing date 2026-27 and opening dates for Jakobshorn, Madrisa, Rinerhorn and Pischa.",
-      "Confirm which season the CHF 87/93 day prices describe."
+      "Confirm which season the CHF 87/93 day prices describe.",
+      "2026-27 day-ticket prices: the CI-fetched official tickets page lists products but its prices are in a PDF / widgets not in the page text ('All prices are in CHF and include 8.1 % VAT'), so CHF 93 / 87 remain earlier search summaries without a season label."
     ],
     "conflicts": [
       "Lift count 50 vs 46; piste km 266–300 by source (about 270 km incl. ski routes on the pass page)."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "2026-10-03: opening confirmed on the CI-fetched winterinsight.com page; snow-report URL confirmed by the CI fetch of davos.ch. Day prices and lift data remain earlier search summaries."
   }
 }

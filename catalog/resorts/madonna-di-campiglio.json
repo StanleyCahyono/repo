@@ -126,6 +126,27 @@
         "checkedOn": "2026-09-30",
         "note": "Official 2025/2026 ski-pass price list (PDF)"
       }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Daily upgrade to the whole SkiArea Madonna di Campiglio (for Folgarida-Marilleva or Pinzolo pass holders), adult",
+      "category": "adult upgrade",
+      "amount": 41,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page; add-on to a local pass, not a full day ticket.",
+      "source": {
+        "url": "https://www.ski.it/en/ski-pass/purchase-lift-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official ski.it: 'Folgarida-Marilleva and Pinzolo ski pass holders can purchase a daily upgrade to access the entire SkiArea Madonna di Campiglio ... Adults € 41,00; Juniors € 29,00'."
+      }
     }
   ],
   "links": {
@@ -220,18 +241,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Madonna_di_Campiglio,_Italy_(Unsplash).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Announced 2026-27 opening and closing dates.",
-      "2026-27 day-pass prices.",
-      "Lift types, capacity and difficulty split; confirm the top elevation (2,600 m in the summary).",
-      "Live lift status and snow report pages.",
-      "Epic Pass (Skirama Dolomiti) day allowance (not researched)."
+      "Announced 2026-27 opening and closing dates (official pages say only 'From November to April'; live schedule on ski.it).",
+      "2026-27 day-pass prices (official 'Skipass prices 2026/27' page and ski.it use dynamic pricing; figures not in the fetched page text; the 2025-26 price-list PDF now returns 404).",
+      "Lift types, capacity and difficulty split; official page shows '0 / 63 Ski lifts' vs 57 on file.",
+      "Live lift status and snow report pages."
     ],
     "conflicts": [
-      "Piste km 150 vs 156 (interconnected with Pinzolo, Folgarida and Marilleva)."
+      "Lift count: 63 (official campigliodolomiti.it live counter '0 / 63 Ski lifts', 2026-10-03) vs 57 (earlier search summary)."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. 2026-10-03: CI-fetched official pages confirm dynamic pricing (no fixed figures in text) and the €41 upgrade; the €74–85 range remains the 2025-26 search summary."
   }
 }

@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Savoie)",
   "locality": "Val d'Isère (village, La Daille, Le Fornet)",
   "timezone": "Europe/Paris",
-  "operator": "STVI (Société des Téléphériques de Val d'Isère) — reference, confirm",
+  "operator": "Val d'Isère Téléphériques (STVI)",
   "priority": 0,
   "location": {
     "lat": 45.4481,
@@ -96,32 +96,121 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Val d'Isère opens 28 Nov 2026 (France Montagnes 2026-27 opening list, per search summary); Tignes' official page says the link with Val d'Isère opens from 28 Nov.",
+      "text": "Winter season 28 Nov 2026 – 2 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.valdisere.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official valdisere.com: 'Saison hiver : du 28 novembre 2026 au 2 mai 2027'. France Montagnes also lists Val d'Isère on 28 Nov 2026; Tignes' page: link with Val d'Isère from 28 November."
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-05-02",
+      "text": "Winter season ends 2 May 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.valdisere.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official valdisere.com: 'Saison hiver : du 28 novembre 2026 au 2 mai 2027'. France Montagnes also lists Val d'Isère on 28 Nov 2026; Tignes' page: link with Val d'Isère from 28 November."
+      }
     },
     "history": [],
     "typicalText": "Usually late November or early December to early May (reference; confirm).",
-    "notes": "No 2026-27 closing date was found. Tignes, on the same pass, runs to 2 May 2027. Past seasons were not captured."
+    "notes": "Tignes (same pass) opens its own sector from 21 Nov 2026."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Tignes–Val d'Isère (Espace Killy) adult 1-day ski pass",
-      "category": "adult (19–64)",
-      "amount": 70,
+      "item": "Tignes – Val d'Isère 1-day ski pass, adult 19–64 (12 Dec 2026 – 23 Apr 2027)",
+      "category": "adult",
+      "amount": 78,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-23",
+      "includesTax": null,
+      "note": "Whole linked Tignes–Val d'Isère area. Free under 8 and 75+.",
+      "source": {
+        "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tignes ski-pass page, WINTER 2026-2027 'From 12 December 2026 to 23 April 2027', Tignes – Val d'Isère ski area: 1 DAY adult 78,00€, child/senior 63,00€; 1/2 day (afternoon) 63,00€/51,00€; 6 days = 7 days 468,00€/378,00€. valdisere.ski also shows 'Pass 1 day Tignes - Val d'Isère Adult 78,00 €'."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Tignes – Val d'Isère half-day (afternoon) pass, adult (12 Dec 2026 – 23 Apr 2027)",
+      "category": "adult half-day",
+      "amount": 63,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-23",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tignes ski-pass page, WINTER 2026-2027 'From 12 December 2026 to 23 April 2027', 1/2 DAY (AFTERNOON) adult 63,00€, child/senior 51,00€."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Tignes – Val d'Isère 1-day pass, child 8–18 (12 Dec 2026 – 23 Apr 2027)",
+      "category": "child",
+      "amount": 63,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-23",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tignes ski-pass page, WINTER 2026-2027 'From 12 December 2026 to 23 April 2027', CHILD / SENIOR (8 – 18 and 65 – 74) 1 DAY 63,00€."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Tignes – Val d'Isère 1-day pass, senior 65–74 (12 Dec 2026 – 23 Apr 2027)",
+      "category": "senior",
+      "amount": 63,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-12",
+      "appliesTo": "2027-04-23",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://en.tignes.net/skiing/ski-pass-you-need",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tignes ski-pass page, WINTER 2026-2027 'From 12 December 2026 to 23 April 2027', CHILD / SENIOR (8 – 18 and 65 – 74) 1 DAY 63,00€; free from 75."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Tignes – Val d'Isère 1-day pass, adult — avant-première (28 Nov – 11 Dec 2026) and closing week (24 Apr – 2 May 2027)",
+      "category": "adult",
+      "amount": 67,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -130,12 +219,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: Winter 2026-2027 1-day €70.00 for adults 19–64; €57.00 for ages 8–18 and 65–74. May be a standard or 'from' price — confirm on valdisere.ski.",
+      "note": "Early and late-season reduced rate.",
       "source": {
         "url": "https://en.tignes.net/skiing/ski-pass-you-need",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Tignes / Val d'Isère ski-pass pages"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tignes ski-pass page: AVANT-PREMIÈRE 28 Nov – 11 Dec 2026 and CLOSING LAST WEEK 24 Apr – 2 May 2027, Tignes – Val d'Isère 1 DAY adult 67,00€ (child/senior 54,00€; afternoon 54,00€/44,00€)."
       }
     }
   ],
@@ -237,19 +326,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Espace_Killy.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 closing date.",
-      "Val d'Isère-only piste km and lift breakdown (only '42 lifts, 15 drag lifts' found).",
-      "Official live lift-status and snow-report pages.",
-      "Date of the 64,480 skiers/hour capacity figure (stated for 87 lifts).",
-      "Whether the €70 day price is a flat or 'from' (dynamic) price."
+      "Val d'Isère-only piste km and lift breakdown (valdisere.ski: '76 ski lifts', two glaciers).",
+      "Official snow-report and live lift-status URLs.",
+      "Val d'Isère-only day-pass price; rental and lesson prices; lift hours."
     ],
     "conflicts": [
       "Espace Killy runs: 155 (22 green, 68 blue, 39 red, 26 black) in one summary vs 156 (23, 66, 40, 27) in another.",
       "Lift count 90 (by-type list) vs 87 (capacity statement)."
     ],
-    "confidenceNotes": "Espace Killy size, lift mix and the 2026-27 day price come from search summaries; the opening date comes from France Montagnes' list. Base elevation, coordinates and operator are reference data. The summit weather point (Bellevarde) is approximate and differs from the Espace Killy top used in the elevation block."
+    "confidenceNotes": "2026-10-03: season dates (valdisere.com) and Tignes–Val d'Isère 2026-27 prices (valdisere.ski 'Pass 1 day Adult 78,00 €'; full table on en.tignes.net) re-read from CI-fetched official pages. Operator per '© 2026 Val d'Isère Téléphériques'. Lift breakdown remains an earlier search summary."
   }
 }

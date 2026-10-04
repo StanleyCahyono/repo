@@ -124,7 +124,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Dynamic 'Snow-Deal' pricing by date (search summary presented it as 2026/27; season not independently confirmed).",
+      "note": "Dynamic 'Snow-Deal' pricing by date (search summary presented it as 2026/27; season not independently confirmed). CI-fetched booking.stmoritz.com page (2026-10-03) shows a dynamic 'Snow-Deal' calendar starting at CHF 56.50 from 21 Nov 2026 (CHF 0 / unavailable before), but the selected area and age category are not identifiable in the page text, so the stored range was not changed.",
       "source": {
         "url": "https://booking.stmoritz.com/en/ski-tickets/day-and-multi-day-ski-tickets",
         "verification": "search-summary",
@@ -145,7 +145,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Dynamic 'Snow-Deal' pricing: from CHF 53.50 early season to CHF 99.50 on peak holiday dates (search summary; season not independently confirmed).",
+      "note": "Dynamic 'Snow-Deal' pricing: from CHF 53.50 early season to CHF 99.50 on peak holiday dates (search summary; season not independently confirmed). CI-fetched booking.stmoritz.com page (2026-10-03) shows a dynamic 'Snow-Deal' calendar starting at CHF 56.50 from 21 Nov 2026 (CHF 0 / unavailable before), but the selected area and age category are not identifiable in the page text, so the stored range was not changed.",
       "source": {
         "url": "https://booking.stmoritz.com/en/ski-tickets/day-and-multi-day-ski-tickets",
         "verification": "search-summary",
@@ -250,18 +250,19 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exterior_Winter_2016_17_Fotograf_Romano_Salis_(21).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Total lift count, lift types and capacity for Corviglia + Corvatsch + Diavolezza/Lagalb.",
       "Closing dates 2026-27 for Corvatsch and Diavolezza (Corviglia: 4 Apr 2027).",
       "Confirm that the Snow-Deal price ranges are 2026-27 prices.",
       "Find snow report pages for each area.",
-      "Ikon Pass day allowance for St. Moritz (not researched)."
+      "Ikon Pass day allowance for St. Moritz (not researched).",
+      "2026-27 Snow-Deal day prices per area and age (booking calendar values not attributable from page text)."
     ],
     "conflicts": [
       "Corviglia lift count 23 vs 24 depending on source."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Terrain on file is the regional km total; per-area lift data is only known for Corviglia."
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Terrain on file is the regional km total; per-area lift data is only known for Corviglia. 2026-10-03: CI-fetched pages (mountains.ch, booking.stmoritz.com, Ikon dates page) did not render usable winter dates or attributable prices; earlier search-summary facts kept."
   }
 }

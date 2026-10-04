@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Isère)",
   "locality": "Les Deux Alpes (Mont-de-Lans and Venosc)",
   "timezone": "Europe/Paris",
-  "operator": "Deux Alpes Loisirs — reference, confirm",
+  "operator": "SATA Group (SATA 2 Alpes)",
   "priority": 0,
   "location": {
     "lat": 45.0075,
@@ -24,10 +24,10 @@
     "summitM": 3600,
     "verticalM": 2300,
     "source": {
-      "url": "https://www.skipass-2alpes.com/en/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: ski area from about 1,300 m to 3,600 m (glacier), 'more than 2,300 m of vertical'"
+      "url": "https://www.les2alpes.com/hiver/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "les2alpes.com: 'un domaine skiable atteignant 3600 mètres d'altitude'. Base 1,300 m and vertical remain from the earlier skipass-2alpes.com search summary."
     }
   },
   "weatherPoints": [
@@ -90,24 +90,29 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Les 2 Alpes opens 28 Nov 2026 (France Montagnes 2026-27 opening list, per search summary).",
+      "text": "Winter season 28 Nov 2026 – 2 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.les2alpes.com/hiver/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official les2alpes.com winter page: 'SAISON D'HIVER 28 NOVEMBRE 2026 - 2 MAI 2027'. France Montagnes also lists Les 2 Alpes on 28 Nov 2026."
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-05-02",
+      "text": "Winter season ends 2 May 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.les2alpes.com/hiver/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official les2alpes.com winter page: 'SAISON D'HIVER 28 NOVEMBRE 2026 - 2 MAI 2027'. France Montagnes also lists Les 2 Alpes on 28 Nov 2026."
+      }
     },
     "history": [],
     "typicalText": "Usually late November or early December to late April, plus glacier skiing in summer (reference; confirm).",
-    "notes": "No 2026-27 closing date was found. Past seasons were not captured."
+    "notes": "Autumn glacier opening 17 Oct – 1 Nov 2026 and summer 2027 periods (3 May – 4 Jul; 12 Jun – 29 Aug 2027) per the official ski-pass site."
   },
   "hours": [],
   "prices": [
@@ -225,18 +230,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Les2Alpes.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Lifts by type (the 42 total and the 51-lift by-type list disagree) and hourly capacity.",
-      "2026-27 closing date.",
       "Colour split.",
       "Scope of the €51 and €63.50 day products.",
-      "Official live lift-status and snow-report pages."
+      "Official live lift-status and snow-report pages.",
+      "2026-27 winter day-pass prices on an official page (the CI-fetched pricing page showed only autumn 17 Oct – 1 Nov 2026 rates)."
     ],
     "conflicts": [
       "Lift total 42 vs a by-type list adding to 51 (8 cable cars/gondolas, 24 chairlifts, 19 ski tows)."
     ],
-    "confidenceNotes": "Size, elevations, lift total and the 'from' day price come from search summaries; the opening date from France Montagnes' list. Coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: season dates and summit re-read from the CI-fetched official les2alpes.com page; the €68 day price is still from an earlier search summary. Early Booking season pass €939.50 (instead of €1215.50) until 20 Nov 2026 per skipass-2alpes.com."
   }
 }

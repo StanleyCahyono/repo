@@ -7,7 +7,7 @@
   "stateProvince": "Provence-Alpes-Côte d'Azur (Hautes-Alpes)",
   "locality": "Briançon, Chantemerle (Saint-Chaffrey), Villeneuve (La Salle-les-Alpes), Le Monêtier-les-Bains",
   "timezone": "Europe/Paris",
-  "operator": "SCV Domaine Skiable — reference, confirm",
+  "operator": "SCV Domaine Skiable (Compagnie des Alpes)",
   "priority": 0,
   "location": {
     "lat": 44.936,
@@ -24,10 +24,10 @@
     "summitM": 2800,
     "verticalM": 1600,
     "source": {
-      "url": "https://www.serre-chevalier.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Reference: lowest lift base at Briançon about 1,200 m, top about 2,800 m; vertical derived. A search summary gave 1,400 m as the bottom lift height and about 2,800 m at the top"
+      "url": "https://www.inthesnow.com/resort/serre-chevalier/",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summaries of InTheSnow, Club Med and Wikipedia: altitude range 1,200 m (Briançon) to 2,800 m; vertical derived. Official site: 80% of runs above 1,800 m."
     }
   },
   "weatherPoints": [
@@ -49,29 +49,23 @@
     }
   ],
   "terrain": {
-    "trails": 82,
-    "lifts": 74,
-    "skiableAcres": null,
+    "trails": 80,
+    "lifts": 60,
+    "skiableAcres": 1013,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
     "expertPct": null,
     "terrainParks": null,
     "pisteKm": 250,
-    "liftsByType": {
-      "gondolas": 9,
-      "cableCars": null,
-      "chairlifts": 19,
-      "surfaceLifts": 46,
-      "other": null
-    },
-    "liftCapacityPerHour": 73000,
+    "liftsByType": null,
+    "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.serre-chevalier.com/en/ski-area/ski-area",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary of Serre Chevalier's official ski-area page and guides (InTheSnow, Ski Club): 250 km of pistes, 82 runs = 15 green, 26 blue, 28 red, 13 black; 74 lifts = 9 gondolas/cable cars (counted together by the source; recorded under gondolas), 19 chairlifts, 46 drag lifts; uphill capacity 73,000 skiers/hour."
+      "url": "https://booking.serre-chevalier.com/buy-your-serre-chevalier-ski-pass.html",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official Serre Chevalier Réservation ski-pass page, 'The ski area in figures': 410 hectares of marked ski area (skiableAcres ≈ 1,013 acres converted); 60 ski lifts including the Serre Chevalier cable car; 80 runs (13 black, 28 red, 25 blue, 14 green); 80% of runs above 2,000 m. 250 km of slopes from the official ski-area page (serre-chevalier.com/en/ski-area). Corrected 2026-10-03 from 58 lifts / 82 runs (earlier search summary of the official ski-area page); OnTheSnow says 82 slopes and 59 lifts."
     }
   },
   "features": {
@@ -96,58 +90,145 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-05",
-      "text": "Season 5 Dec 2026 – 18 Apr 2027 (per search summary of Serre Chevalier pages).",
+      "text": "Open daily from 5 Dec 2026: Chantemerle, Villeneuve and Monêtier sectors on Saturday 5 Dec 2026; Briançon sector on Saturday 12 Dec 2026 (subject to change and snow conditions).",
       "announcedOn": null,
       "source": {
         "url": "https://www.serre-chevalier.com/en/ski-area",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Serre Chevalier ski-area page: 'Open daily from December 5, 2026, to April 18, 2027 (subject to change and snow conditions)'; same dates on the French home page FAQ 'Hiver 2026-2027'"
       }
     },
     "announcedClosing": {
       "date": "2027-04-18",
-      "text": "Season to 18 Apr 2027 (per search summary).",
+      "text": "Briançon sector closes 4 Apr 2027; Chantemerle, Villeneuve and Monêtier sectors close 18 Apr 2027.",
       "announcedOn": null,
       "source": {
         "url": "https://www.serre-chevalier.com/en/ski-area",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Serre Chevalier ski-area page: 'Open daily from December 5, 2026, to April 18, 2027 (subject to change and snow conditions)'; same dates on the French home page FAQ 'Hiver 2026-2027'"
       }
     },
     "history": [],
     "typicalText": "Usually early December to mid-April (reference; 2026-27: 5 Dec to 18 Apr).",
-    "notes": "Past seasons were not captured."
+    "notes": "Official: open daily 5 Dec 2026 – 18 Apr 2027 with staggered sector openings/closings. Price periods (official 2026-27 multi-day table): reduced rate opening–18 Dec 2026 and 27 Mar 2027–closing."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (general hours)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "09:00",
+      "closes": "16:30",
+      "season": null,
+      "note": "Generally 09:00–16:15/16:30; individual lifts vary between 09:00 and 17:00 (season PDF and app give per-lift times).",
+      "source": {
+        "url": "https://www.serre-chevalier.com/en/schedules-mechanical-lifts",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official lift-timetable page and guides (season not stated)"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Serre Chevalier adult 1-day ski pass (peak season, weekday)",
+      "item": "Serre Chevalier adult 1-day ski pass (main season)",
       "category": "adult",
-      "amount": 65.5,
+      "amount": 68,
       "amountMax": null,
       "currency": "EUR",
-      "season": null,
+      "season": "2026-27",
       "dayType": "peak",
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-26",
       "includesTax": null,
-      "note": "Search summary: peak-season weekday day pass — adult €65.50, senior 65–74 €59.50, child 6–11 €53.50. Season not stated (possibly 2025-26).",
+      "note": "Adult 12–64; weekday and weekend both €68. Child 6–11 €56, senior 65–74 €62. Main-season window inferred from the official 2026-27 multi-day tables: full rate 19 Dec 2026 – 26 Mar 2027, reduced (≈80%) from opening to 18 Dec 2026 and from 27 Mar 2027 to closing; OnTheSnow gives one day price with no period, and its 6-day price equals the official main-season 6-day price. Earlier third-party guides (guide-ski.fr) gave the same €68.",
       "source": {
-        "url": null,
+        "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Serre Chevalier lift-pass pages (eurekaski, snowstash, OnTheSnow); the exact page for this figure was not identified"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow 'Serre Chevalier Ski Pass Prices 2026/27' (prices last updated 14 Sept 2026, supplied by the resort per OnTheSnow); its 6-day prices match the official 2026-27 booking-site table"
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Serre Chevalier adult 1-day ski pass (OnTheSnow listing)",
+      "item": "Serre Chevalier adult 1-day ski pass (early/late season)",
       "category": "adult",
-      "amount": 50,
+      "amount": 54.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Start and end of season (search summary; exact dates not given there). The official 2026-27 multi-day tables apply reduced rates from opening to 18 Dec 2026 and from 27 Mar 2027 to closing.",
+      "source": {
+        "url": "https://guide-ski.fr/stations-de-ski-france/serre-chevalier-hiver/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of 2026-2027 Serre Chevalier price guides"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier child 1-day ski pass (main season)",
+      "category": "child",
+      "amount": 56,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-26",
+      "includesTax": null,
+      "note": "Child 6–11, weekday and weekend. Early/late season €44.50 (earlier search summary). Main-season window inferred from the official 2026-27 multi-day tables: full rate 19 Dec 2026 – 26 Mar 2027, reduced (≈80%) from opening to 18 Dec 2026 and from 27 Mar 2027 to closing; OnTheSnow gives one day price with no period, and its 6-day price equals the official main-season 6-day price.",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow 'Serre Chevalier Ski Pass Prices 2026/27' (prices last updated 14 Sept 2026, supplied by the resort per OnTheSnow); its 6-day prices match the official 2026-27 booking-site table"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier senior 1-day ski pass (main season)",
+      "category": "senior",
+      "amount": 62,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-26",
+      "includesTax": null,
+      "note": "Senior 65–74, weekday and weekend. Main-season window inferred from the official 2026-27 multi-day tables: full rate 19 Dec 2026 – 26 Mar 2027, reduced (≈80%) from opening to 18 Dec 2026 and from 27 Mar 2027 to closing; OnTheSnow gives one day price with no period, and its 6-day price equals the official main-season 6-day price.",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow 'Serre Chevalier Ski Pass Prices 2026/27' (prices last updated 14 Sept 2026, supplied by the resort per OnTheSnow); its 6-day prices match the official 2026-27 booking-site table"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier adult half-day ski pass (3 consecutive hours)",
+      "category": "adult half-day",
+      "amount": 58,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -156,12 +237,159 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "As listed per the search summary: adult €50, child 6–11 €40, senior 65+ €46. This looks like an off-peak or 'from' figure — confirm on the official booking site.",
+      "note": "Half-day = 3 consecutive hours. Child €47.50, senior €53.",
       "source": {
         "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of OnTheSnow's 'Serre Chevalier Ski Pass Prices 2026/27' page"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow 'Serre Chevalier Ski Pass Prices 2026/27' (prices last updated 14 Sept 2026, supplied by the resort per OnTheSnow); its 6-day prices match the official 2026-27 booking-site table"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier adult 2-day ski pass",
+      "category": "adult 2-day",
+      "amount": 131,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Child €107.50, senior €119.",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow 'Serre Chevalier Ski Pass Prices 2026/27' (prices last updated 14 Sept 2026, supplied by the resort per OnTheSnow); its 6-day prices match the official 2026-27 booking-site table"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier adult 3-day ski pass",
+      "category": "adult 3-day",
+      "amount": 154,
+      "amountMax": 192.5,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Standard price €192.50 from 19 Dec 2026 to 26 Mar 2027; €154 from opening to 18 Dec 2026 and from 27 Mar 2027 to closing. Senior (65–74) €140.10–€175; child (6–11) €126.30–€158. Booked with Serre Chevalier Réservation accommodation: 4–20% off depending on week (e.g. €123.20–€184.80 adult).",
+      "source": {
+        "url": "https://booking.serre-chevalier.com/buy-your-serre-chevalier-ski-pass.html",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Serre Chevalier Réservation page, 'Discounted rates – Serre Chevalier ski pass – Winter 2026-2027' (first column = standard price, second = with-accommodation discount)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier adult 6-day ski pass",
+      "category": "adult 6-day",
+      "amount": 276,
+      "amountMax": 345,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Standard price €345 from 19 Dec 2026 to 26 Mar 2027; €276 from opening to 18 Dec 2026 and from 27 Mar 2027 to closing. Senior €251.20–€314; child €226.30–€283. With accommodation booked via Serre Chevalier Réservation: €220.80–€331.20 adult. 6-day passes include one free day at each 'Grande Galaxie' partner resort (Alpe d'Huez, Les Deux Alpes, Puy Saint-Vincent, Montgenèvre, Sestrières) per the official ski-area page.",
+      "source": {
+        "url": "https://booking.serre-chevalier.com/buy-your-serre-chevalier-ski-pass.html",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Serre Chevalier Réservation page, 'Discounted rates – Serre Chevalier ski pass – Winter 2026-2027' (first column = standard price, second = with-accommodation discount)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Serre Chevalier adult 1-day ski pass",
+      "category": "adult",
+      "amount": 65.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Previous-season adult (12–64) day price; 6 consecutive days €335.",
+      "source": {
+        "url": "https://booking.serre-chevalier.com/buy-your-serre-chevalier-ski-pass.html",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary referring to the official ski-pass sales pages, 2025-2026"
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Serre Chevalier adult season pass",
+      "category": "adult",
+      "amount": 1058,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025-26 prices: child (6–20) €843, adult (21–64) €1,058, senior (65–74) €963. 2026-27 season-pass prices not on the saved pages (the official site says 'Buy your 2026–27 season pass now!').",
+      "source": {
+        "url": "https://www.onthesnow.co.uk/southern-alps/serre-chevalier/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table, 2025-2026 (price expired 19 Apr 2026; last updated 19 Aug 2025)"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Adult ski + boots rental, 1 day (Pack Rouge)",
+      "category": "adult",
+      "amount": 27,
+      "amountMax": 38,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Pack Rouge €27/day, Pack Noir €33, Pack Or / Prestige €38 (one Serre Chevalier rental shop; season not stated).",
+      "source": {
+        "url": "http://www.ski-experience.org/Serre-Chevalier/Location-Ski/Tarifs-location-ski.html",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of a Serre Chevalier rental price list"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "ESF Serre Chevalier adult group ski lessons, 5–6 mornings (2h30)",
+      "category": "adult",
+      "amount": 205,
+      "amountMax": 207,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "From €207 at ESF Monêtier (6th day free) and from €205 at ESF Chantemerle, 5–6 mornings; lift pass not included. Season not stated.",
+      "source": {
+        "url": "https://www.esf-serrechevalier1500.com/adultes/cours-ski/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of ESF Serre Chevalier lesson pages"
       }
     }
   ],
@@ -231,7 +459,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.serre-chevalier.com/en/ski-area",
+    "format": "html",
+    "notes": "Official 'Ski area: trails, passes & live updates' page (fetched 2026-10-03; it carries season dates and links to 'Opening of slopes and lifts', weather and webcams). A dedicated official snow-report URL was not among the saved pages."
+  },
   "photo": {
     "src": "asset:photo-serre-chevalier.webp",
     "alt": "Serre Chevalier: Our house",
@@ -240,18 +472,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Snow_Covered_House_-_Flickr_-_robmcm.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 adult day price with a clear season label (two conflicting figures found).",
-      "Confirm the lowest lift altitude (1,200 m Briançon vs 1,400 m in one summary).",
-      "Split the 9 'gondolas/cable cars' into gondolas and cable cars.",
-      "Official snow-report page."
+      "Official 2026-27 1-day prices on the resort's own booking site (online sales open early October per OnTheSnow); day prices are from OnTheSnow.",
+      "Exact early/late-season 1-day prices (€54.50 adult / €44.50 child are earlier search summaries).",
+      "2026-27 season-pass prices; lift operating hours for 2026-27 (official page only states daily operation).",
+      "2026-27 rental and ESF lesson prices (no saved pages; current values are search summaries).",
+      "Lifts by type and uphill capacity; summit/base elevations (not on saved pages)."
     ],
     "conflicts": [
-      "Day price: €65.50 peak weekday (season not stated) vs €50 on OnTheSnow's 2026/27 page.",
-      "Bottom lift height: 1,400 m in one summary vs about 1,200 m at Briançon (reference)."
+      "Lift/run count: 60 lifts / 80 runs (official booking page) vs 58 / 82 (earlier summary of the official ski-area page) vs 59 / 82 (OnTheSnow) vs 61 (Wikipedia)."
     ],
-    "confidenceNotes": "Area, lift and capacity figures and the season dates come from search summaries (including the official site); prices are ambiguous. Elevations, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: season dates and 2026-27 3-/6-day prices read from CI-fetched official pages (serre-chevalier.com, booking.serre-chevalier.com); 2026-27 1-day, half-day and 2-day prices from OnTheSnow (third party, consistent with the official 6-day prices). Rental, lessons, elevation and hours remain search summaries. Coordinates and weather points are reference data; airport times are estimates."
   }
 }

@@ -107,29 +107,92 @@
     },
     "history": [],
     "typicalText": "Glacier skiing from autumn (2026: from 3 Oct); winter season to around April (search summary: October to April)",
-    "notes": "Only the partial glacier reopening is on file; the main winter-season opening and the 2026-27 closing date were not found."
+    "notes": "Only the partial glacier reopening (3 Oct 2026, earlier search summary) is on file. The official homepage advertises a 'Pre-Season Special 31.10. – 18.12.2026' and the Sleep & Ski Deal 2026/27, but no main-season dates. The Saas-Fee season pass is included in the Magic Pass."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Saas-Fee Pass 1-day (Saas-Fee & Saas-Almagell), adult",
+      "item": "Saas-Fee Pass 1-day (Saas-Fee & Saas-Almagell), adult 20+",
       "category": "adult",
       "amount": 84,
       "amountMax": null,
       "currency": "CHF",
-      "season": null,
+      "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: adult CHF 84, youth CHF 72, child CHF 43 (presented as winter prices; season not explicit — confirm). Another source gave about CHF 79.",
+      "note": null,
       "source": {
         "url": "https://www.saas-fee.ch/en/winter-in-the-saas-valley/ski-pass-prices/saas-fee",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official saas-fee.ch 'Saas-Fee Pass (Saas-Fee & Saas-Almagell) Tariffs Winter 2026/27': 1 day Adults CHF 84.-, Youth (16–19.99) CHF 72.-, Children (6–15.99) CHF 43.-."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Saas-Fee Pass half-day from 12:00, adult",
+      "category": "adult half-day",
+      "amount": 68,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.saas-fee.ch/en/winter-in-the-saas-valley/ski-pass-prices/saas-fee",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official saas-fee.ch 'Saas-Fee Pass (Saas-Fee & Saas-Almagell) Tariffs Winter 2026/27': from 12.00 Adults CHF 68.- (from 11.00 CHF 72.-); youth CHF 58.-, children CHF 35.-."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Saas-Fee Pass 1-day, youth 16–19",
+      "category": "youth",
+      "amount": 72,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.saas-fee.ch/en/winter-in-the-saas-valley/ski-pass-prices/saas-fee",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official saas-fee.ch 'Saas-Fee Pass (Saas-Fee & Saas-Almagell) Tariffs Winter 2026/27': 1 day Youth CHF 72.-."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Saas-Fee Pass 1-day, child 6–15",
+      "category": "child",
+      "amount": 43,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.saas-fee.ch/en/winter-in-the-saas-valley/ski-pass-prices/saas-fee",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official saas-fee.ch 'Saas-Fee Pass (Saas-Fee & Saas-Almagell) Tariffs Winter 2026/27': 1 day Children CHF 43.-."
       }
     }
   ],
@@ -246,17 +309,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saas-Fee_Ort,_Januar_2009.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm Saas-Fee-only piste km (150 km may be the whole Saas valley), lift types and capacity.",
       "Main winter-season opening and 2026-27 closing dates.",
-      "Confirm the day price (CHF 84 vs about CHF 79) and its season.",
-      "Find the live lift status and snow report pages on saas-fee.ch."
+      "Saas-Fee-only piste km, lift types and capacity.",
+      "Official snow report page; rentals and lessons."
     ],
     "conflicts": [
       "Adult day price CHF 84 (Saas-Fee Pass) vs about CHF 79 in another source."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. The 3 Oct 2026 glacier reopening is consistent across two sources."
+    "confidenceNotes": "2026-10-03: 2026/27 day-pass prices re-read from the CI-fetched official saas-fee.ch tariff page. Elevations/terrain remain earlier search summaries."
   }
 }

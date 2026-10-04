@@ -24,10 +24,10 @@
     "summitM": 945,
     "verticalM": 488,
     "source": {
-      "url": "https://www.windhammountainclub.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Commonly advertised figures (base ~1,500 ft, summit ~3,100 ft, vertical ~1,600 ft)"
+      "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "SnowStash: summit 3,100 ft, 1,601 ft vertical, base 1,499 ft."
     }
   },
   "weatherPoints": [
@@ -52,26 +52,26 @@
     "trails": 54,
     "lifts": 11,
     "skiableAcres": 285,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 20,
+    "intermediatePct": 48,
+    "advancedPct": 19,
     "terrainParks": null,
-    "expertPct": null,
+    "expertPct": 13,
     "pisteKm": null,
     "liftsByType": {
-      "gondolas": null,
-      "cableCars": null,
+      "gondolas": 0,
+      "cableCars": 0,
       "chairlifts": 6,
       "surfaceLifts": 5,
-      "other": null
+      "other": 0
     },
     "liftCapacityPerHour": null,
     "season": "2025-26",
     "source": {
-      "url": "https://en.wikipedia.org/wiki/Windham_Mountain_Club",
+      "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30; attribution not isolated): 285 skiable acres, 54 trails, 11 lifts including four high-speed detachables (1 six-pack, 3 quads) and 5 surface lifts. Chairlifts = 6 is derived (11 total minus 5 surface lifts); the types of the two other chairs were not stated."
+      "checkedOn": "2026-10-03",
+      "note": "SnowStash: 54 runs, 285 acres; 20% beginner / 48% intermediate / 19% advanced / 13% expert; 11 lifts = one six-person, two quads, two triples, one double, five surface lifts. Matches the earlier Wikipedia search summary (54 trails, 285 acres, 11 lifts)."
     }
   },
   "features": {
@@ -106,7 +106,19 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-11-28",
+        "closed": "2026-03-29",
+        "source": {
+          "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "SnowStash: \"The 2025-26 season at Windham Mountain ran from 28 November 2025 to 29 March 2026.\""
+        }
+      }
+    ],
     "typicalText": null,
     "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Dec 4, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). Past opening dates were not captured, so no estimated window is derived."
   },
@@ -114,23 +126,86 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (date-based)",
+      "item": "Adult Daily Ticket (18-64)",
       "category": "adult",
       "amount": 99,
       "amountMax": 149,
       "currency": "USD",
-      "season": "2026-27",
+      "season": null,
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Aggregator (snowstash.com): 2026/27 day tickets from $99, peak $149. The official Double Diamond Pass page lists products from $99 (Adult/Youth/70+); terms not captured. Confirm at source.",
+      "note": "Season not clearly stated (see source note). \"Day passes start from US$79, with peak rates up to US$149.\" Peak up to $149.",
       "source": {
         "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Mar 29, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Youth Daily Ticket (13-17)",
+      "category": "youth",
+      "amount": 89,
+      "amountMax": 129,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note). \"Day passes start from US$79, with peak rates up to US$149.\"",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Mar 29, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child Daily Ticket (6-12)",
+      "category": "child",
+      "amount": 79,
+      "amountMax": 119,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note). \"Day passes start from US$79, with peak rates up to US$149.\"",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Mar 29, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Two-Day Minimum (peak days), adult 13-99",
+      "category": "adult 2-day",
+      "amount": 198,
+      "amountMax": 298,
+      "currency": "USD",
+      "season": null,
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "A two-day minimum applies during peak periods. Season not clearly stated (see source note). \"Day passes start from US$79, with peak rates up to US$149.\"",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/windham/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Mar 29, 2026 and to \"check back for next season's opening date and ticket pricing\"."
       }
     }
   ],
@@ -196,20 +271,22 @@
   "reportSource": null,
   "photo": null,
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
+      "2026-27 day-ticket prices and season label: official windhammountainclub.com lift-ticket page shows no prices in its text; SnowStash prices ($99-$149 adult) carry a 2026/27 title but a 2025-26 body. Rental and lesson prices not found.",
       "KEY: confirm the public access model under the Windham Mountain Club branding for 2026-27. Day tickets are listed ($99–$149, snowstash; official lift-ticket and Double Diamond Pass pages exist), but caps, member-only dates or reservation rules were not captured.",
       "Confirm the operator/owner (not recorded) and the official homepage (windhammountainclub.com is Piste reference data).",
       "No resort-announced 2026-27 opening or closing date as of 2026-09-30 (OnTheSnow projects Dec 4, 2026).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
       "Pass affiliations for 2026-27: Windham appeared on the Ikon Pass in some earlier seasons (low-confidence lead); its 2026-27 status is unknown.",
-      "Confirm the types of the two chairlifts beyond the four high-speed detachables (6 chairlifts is derived from 11 total minus 5 surface lifts).",
       "Confirm night skiing, trail difficulty split, terrain parks, snowmaking %, learning area, childcare, tubing and on-mountain lodging.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
       "Confirm elevations, base/summit coordinates (approximations) and official deep links (snow report, lift status, trail map)."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (285 acres, 54 trails, 11 lifts with four high-speed detachables and five surface lifts) comes from a combined summary; the chairlift count is derived. The 2026/27 $99–$149 range is from an aggregator. Identity, coordinates, elevations and homepage remain Piste reference data; the OnTheSnow date is a projection; drive/airport times are Piste estimates."
+    "conflicts": [
+      "SnowStash title \"Lift Tickets 2026/27\" vs page body \"2025-26 season closed ... check back for next season's ticket pricing\"; season left null."
+    ],
+    "confidenceNotes": "Prices, elevation, terrain split and 2025-26 dates from SnowStash (third party) fetched 2026-10-03; official windhammountainclub.com pages had no prices, stats or hours in their text."
   }
 }

@@ -21,13 +21,13 @@
   },
   "elevation": {
     "baseM": 457,
-    "summitM": 686,
-    "verticalM": 229,
+    "summitM": 685,
+    "verticalM": 228,
     "source": {
-      "url": "https://en.wikipedia.org/wiki/Holiday_Valley_(ski_resort)",
+      "url": "https://www.skiresort.info/ski-resort/holiday-valley/test-result/size/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-28",
-      "note": "Base 1,500 ft, summit 2,250 ft, vertical 750 ft (Wikipedia/NYSkiBlog; the search query that returned them contained 750 and 2,250, so no independent official stats page was seen)."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary 2026-10-03: skiresort.info base 457 m, top 685 m, 228 m vertical; Wikipedia/NYSkiBlog 1,500 ft / 2,250 ft / 750 ft."
     }
   },
   "weatherPoints": [
@@ -70,8 +70,8 @@
     "source": {
       "url": "https://www.holidayvalley.com/blog/your-winter-escape/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-28",
-      "note": "Trails (60) and lifts (13) from the official site; Wikipedia gives 58 trails (11 chairs + 2 surface lifts). Acreage from Wikipedia/NYSkiBlog. Terrain parks 4 vs 5 across third-party sources, left unknown. Lift types (search summary 2026-09-30; skiresort.info https://www.skiresort.info/ski-resort/holiday-valley/ski-lifts/): 11 chairs and 2 carpets (Boardwalk, Slippery Streets; stored as other), 27,700/h. Named chairs: Mardi Gras Express six (2023); Morning Star (2010), Tannenbaum Express (2003) and Yodeler Express (2021) high-speed quads; Spruce Lake, Creekside, Chute, Sunrise, Cindy's and Eagle fixed quads (one more chair not named in the summary). A 2027 chairlift replacement was announced (https://unofficialnetworks.com/2026/09/15/holiday-valley-new-chairlift/)."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary 2026-10-03 of holidayvalley.com: \"60 slopes and trails, 13 lifts, and 3 base lodges\"; snowmaking on 95% of \"300 acres\" (stored acres 290 from Wikipedia/NYSkiBlog). Wikipedia gives 58 trails (11 chairs + 2 surface lifts). Acreage from Wikipedia/NYSkiBlog. Terrain parks 4 vs 5 across third-party sources, left unknown. Lift types (search summary 2026-09-30; skiresort.info https://www.skiresort.info/ski-resort/holiday-valley/ski-lifts/): 11 chairs and 2 carpets (Boardwalk, Slippery Streets; stored as other), 27,700/h. Named chairs: Mardi Gras Express six (2023); Morning Star (2010), Tannenbaum Express (2003) and Yodeler Express (2021) high-speed quads; Spruce Lake, Creekside, Chute, Sunrise, Cindy's and Eagle fixed quads (one more chair not named in the summary). A 2027 chairlift replacement was announced (https://unofficialnetworks.com/2026/09/15/holiday-valley-new-chairlift/)."
     }
   },
   "features": {
@@ -110,12 +110,12 @@
       {
         "season": "2025-26",
         "opened": "2025-12-05",
-        "closed": null,
+        "closed": "2026-03-29",
         "source": {
           "url": "https://www.wkbw.com/news/local-news/cattaraugus-county/what-we-have-all-been-waiting-for-holiday-valley-opens-for-the-2025-26-ski-and-snowboard-season",
           "verification": "search-summary",
           "checkedOn": "2026-09-28",
-          "note": "Had targeted Nov 28, 2025 (weather permitting); opened Fri Dec 5, 2025 with day and night skiing 9am-10pm. Closing date not found."
+          "note": "Had targeted Nov 28, 2025 (weather permitting); opened Fri Dec 5, 2025 with day and night skiing 9am-10pm. Closing date not found. Closed Mar 29, 2026 per SnowStash (https://snowstash.com/usa/new-york/holiday-valley/lift-tickets, fetched 2026-10-03)."
         }
       },
       {
@@ -131,92 +131,316 @@
       }
     ],
     "typicalText": "Usually targets the day after Thanksgiving and opens late November to early December depending on weather: Fri Dec 5, 2025 (after a Nov 28 target) and Fri Dec 6, 2024. Night skiing usually ends in mid-March.",
-    "notes": "No official 2026-27 opening date found as of 2026-09-28; in past seasons the resort announced a day-after-Thanksgiving target in the fall. OnTheSnow (third party) projects an opening of 2026-11-27 and closing of 2027-04-04; these are projections, not announcements (https://www.onthesnow.com/new-york/holiday-valley/ski-resort). 2026-27 lift tickets go on sale Thu Oct 1, 2026 (https://www.holidayvalley.com/lift-tickets/)."
+    "notes": "No resort-announced 2026-27 opening date found as of 2026-10-03. The resort aims to open the day after Thanksgiving each year (it opened Fri Dec 5, 2025; 20-year average opening Dec 5). OnTheSnow (third party) projects 2026-11-27 to 2027-04-04; projections, not announcements. The official lift-tickets page says lift tickets went on sale Thu Oct 1, 2026 (search summary). No 2026-27 opening/closing date on the official pages fetched 2026-10-03 (snow report: \"closed for the season\")."
   },
   "hours": [
     {
       "activity": "lifts",
-      "label": "Day session (Classic Day Pass validity, opening to 4:30 PM)",
-      "days": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
-      ],
-      "opens": "09:00",
-      "closes": "16:30",
-      "season": "2026-27",
-      "note": "Derived from 2026-27 season-pass validity windows, not a published lift schedule; the 9 AM start matches the 2025 opening-day report.",
-      "source": {
-        "url": "https://www.holidayvalley.com/season-passes/classic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
-      "activity": "night-skiing",
-      "label": "Night session Mon-Wed (Classic Night Pass validity)",
+      "label": "Mon-Wed (day + night)",
       "days": [
         1,
         2,
         3
       ],
-      "opens": "15:30",
+      "opens": "09:00",
       "closes": "21:00",
-      "season": "2026-27",
-      "note": "Derived from season-pass validity windows. Night skiing usually ends in mid-March.",
+      "season": "2025-26",
+      "note": "Regular winter hours; night skiing ended Sat Mar 14, 2026.",
       "source": {
-        "url": "https://www.holidayvalley.com/season-passes/classic-pass/",
+        "url": "https://www.holidayvalley.com/hours/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summary 2026-10-03 of the official hours page"
       }
     },
     {
-      "activity": "night-skiing",
-      "label": "Night session Thu-Sun (Classic Night Pass validity)",
+      "activity": "lifts",
+      "label": "Thu-Fri (day + night)",
       "days": [
         4,
-        5,
+        5
+      ],
+      "opens": "09:00",
+      "closes": "22:00",
+      "season": "2025-26",
+      "note": "Regular winter hours; night skiing usually ends mid-March.",
+      "source": {
+        "url": "https://www.holidayvalley.com/hours/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary 2026-10-03 of the official hours page"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Sat-Sun (day + night)",
+      "days": [
         6,
         7
       ],
-      "opens": "15:30",
+      "opens": "08:30",
       "closes": "22:00",
-      "season": "2026-27",
-      "note": "Derived from season-pass validity windows. Night skiing usually ends in mid-March.",
+      "season": "2025-26",
+      "note": "Regular winter hours. Holiday hours 2025-26: Dec 24 9:00-16:30, Dec 25 12:00-22:00, Dec 26-Jan 2 8:30-22:00.",
       "source": {
-        "url": "https://www.holidayvalley.com/season-passes/classic-pass/",
+        "url": "https://www.holidayvalley.com/hours/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "Search summary 2026-10-03 of the official hours page and the Holiday Hours 2025-26 post"
       }
     }
   ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day lift ticket (weekend)",
-      "category": "Adult",
-      "amount": 115,
+      "item": "Weekday All Day (non-holiday)",
+      "category": "adult",
+      "amount": 100,
       "amountMax": null,
       "currency": "USD",
-      "season": "2025-26",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekend / Holiday All Day",
+      "category": "adult",
+      "amount": 120,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
       "dayType": "weekend",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2025-26 weekend rate. The official page also lists adult tiers of $120 and others without labels. A one-time $5 RFID card fee applies. 2026-27 tickets go on sale Oct 1, 2026.",
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Weekend/holiday 8-hour $115; Saturday & Sunday all day (2 days) $190.",
       "source": {
-        "url": "https://snowstash.com/usa/new-york/holiday-valley/lift-tickets",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Third-party listing (SnowStash); the figure also appears on the official page"
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "8 Hour Weekday (non-holiday)",
+      "category": "adult 8-hour",
+      "amount": 96,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekend / Holiday 8-Hour",
+      "category": "adult 8-hour",
+      "amount": 115,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4 Hour Weekday (non-holiday)",
+      "category": "adult half-day",
+      "amount": 88,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Sunday 4 Hours",
+      "category": "adult half-day",
+      "amount": 105,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night ticket (weekday 3:30 PM-close; weekend 3:30-10 PM)",
+      "category": "adult night",
+      "amount": 53,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Same $53 price weekday and weekend nights.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2-Day Weekday (non-holiday), consecutive days",
+      "category": "adult 2-day",
+      "amount": 156,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekday All Day (non-holiday)",
+      "category": "junior",
+      "amount": 81,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Junior 8-hour $77, 4-hour $69, 2-day weekday $112, night $43.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Weekend / Holiday All Day",
+      "category": "junior",
+      "amount": 95,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated next to the rates (page says lift tickets go on sale Thu Oct 1, 2026, so likely 2026-27). One-time $5 RFID card fee. Junior weekend 8-hour $89, Sunday 4 hours $80, Sat & Sun all day $156, night $43.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (fetched 2026-10-03). No season label; page says lift tickets go on sale Thu Oct 1, 2026."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski (or snowboard) rental, all day",
+      "category": "adult",
+      "amount": 52,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page. 8-hour $46, 4-hour $41, night $37, all weekend $101. Junior (11 and under) all day $43. Helmet all day $16.",
+      "source": {
+        "url": "https://www.holidayvalley.com/rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Learn to Ski Package, daytime (first-time 1.5 h group lesson + School Haus area ticket + rentals, ages 12+)",
+      "category": "adult",
+      "amount": 92,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page. Nighttime package (50-minute lesson) $69. Day lessons 10:30 AM and 1:30 PM.",
+      "source": {
+        "url": "https://www.holidayvalley.com/lessons/learn-to-ski-or-ride/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official learn-to-ski page (fetched 2026-10-03)"
       }
     }
   ],
@@ -290,23 +514,20 @@
     "notes": "Official HTML snow report page. No structured feed identified. The webcams page includes a view from the top of Cindy's Run over the Resort Center. Third-party mirror: https://www.onthesnow.com/new-york/holiday-valley/ski-resort."
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-28",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 adult day ticket prices (on sale Oct 1, 2026).",
-      "Official 2026-27 opening target.",
-      "Terrain split by ability and number of terrain parks (4 vs 5).",
-      "2025-26 closing date.",
-      "Rentals page URL (rentals are at the Main Lodge rental shop).",
-      "2026-27 season-pass prices (Classic, Ultimate, College) — tracked in passes.json; official pages show unlabelled figures."
+      "Official 2026-27 opening target and closing date.",
+      "Season label of the lift-ticket, rental and lesson prices (none is labelled; tickets on sale Oct 1, 2026); senior price not published.",
+      "Regular 2026-27 lift hours (official hours page fetched without times; stored hours are 2025-26 search summaries).",
+      "Terrain split and number of terrain parks."
     ],
     "conflicts": [
-      "terrain.trails: 60 (https://www.holidayvalley.com/blog/your-winter-escape/); 58 (https://en.wikipedia.org/wiki/Holiday_Valley_(ski_resort)). Resolution: Used official 60.",
-      "terrain.lifts: 13 (https://www.holidayvalley.com/blog/your-winter-escape/); 11 chairs + 2 surface lifts (=13) (https://en.wikipedia.org/wiki/Holiday_Valley_(ski_resort)). Resolution: Consistent: 13 lifts total.",
-      "terrain.terrainParks: 5 (including Mardi Gras Rail Park and main park Fiddler's Elbow) (search summary of OnTheSnow / snow-online results (exact attribution unclear): https://www.onthesnow.com/new-york/holiday-valley/ski-resort); 4 (beginner, advanced, rails-only park + half pipe) (search summary of OnTheSnow / snow-online results (exact attribution unclear): https://www.snow-online.com/ski-resort/holiday-valley-resort.html). Resolution: Left null.",
-      "prices (adult day ticket): $115 weekend (2025-26) (https://snowstash.com/usa/new-york/holiday-valley/lift-tickets); starts around $69; range $35-$99 (third-party summaries, exact attribution unclear) (https://www.onthesnow.com/new-york/holiday-valley/lift-tickets). Resolution: Kept $115 weekend, which also appears on the official page."
+      "Trails: 60 (official) vs 58 (Wikipedia). Official used.",
+      "Skiable acres: 290 vs \"300 acres\" (holidayvalley.com snowmaking statement).",
+      "Vertical: 750 ft (Wikipedia, SnowStash text) vs 820 ft (SnowStash stat box)."
     ],
-    "confidenceNotes": "WebFetch was blocked, so every figure comes from search-result summaries. Base, summit, vertical and acreage come from Wikipedia and NYSkiBlog, not an official stats page. Trail and lift counts come from the official site. Hours are derived from the 2026-27 Classic Pass validity definitions and match the 9am-10pm opening-day hours reported in 2025. Operator from an FCC license record and news coverage. The summit coordinate is an estimate for weather queries only. Ultimate White/Flex pass prices were moved out of this file (season-pass products belong in passes.json)."
+    "confidenceNotes": "Lift tickets, rentals and the learn-to-ski package read 2026-10-03 from the official pages (no season label). Elevation, terrain and hours are earlier search summaries."
   },
   "photo": null
 }

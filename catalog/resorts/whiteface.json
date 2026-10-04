@@ -24,10 +24,10 @@
     "summitM": 1417,
     "verticalM": 1045,
     "source": {
-      "url": "https://whiteface.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Advertised figures: 1,220 ft base, 3,430 ft vertical measured to the top of hike-to terrain (~4,650 ft). The lift-served top is ~4,386 ft (1,337 m), used for the summit weather point Search summary (2026-09-30): 3,166 ft lift-served vertical, 3,430 ft including The Slides (hike-to); the verticalM here (1,045 m ≈ 3,430 ft) is the Slides figure."
+      "url": "https://whiteface.com/mountain/mountain-stats/",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Official stats: base 1,220 ft; vertical 3,430 ft (greatest in the East, includes hike-to terrain; 3,166 ft lift-serviced). Summit stored as base + vertical (~4,650 ft, top of hike-to terrain); the mountain peak is 4,867 ft (1,483 m)."
     }
   },
   "weatherPoints": [
@@ -49,9 +49,9 @@
     }
   ],
   "terrain": {
-    "trails": 96,
-    "lifts": 12,
-    "skiableAcres": null,
+    "trails": 94,
+    "lifts": 11,
+    "skiableAcres": 299,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
@@ -61,22 +61,22 @@
     "liftsByType": {
       "gondolas": 1,
       "cableCars": 0,
-      "chairlifts": 9,
+      "chairlifts": 8,
       "surfaceLifts": 2,
       "other": 0
     },
     "liftCapacityPerHour": null,
-    "season": "2025-26",
+    "season": "2026-27",
     "source": {
-      "url": "https://www.skicentral.com/whiteface.html",
+      "url": "https://whiteface.com/mountain/mountain-stats/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30): 96 trails, 12 lifts and \"nearly 300\" skiable acres (acres left null as not exact); 3,166 ft vertical (3,430 ft with The Slides). Lift types (SkiCentral-style listing, may lag recent lift replacements): 1 gondola, 1 high-speed quad, 1 quad, 2 triples, 5 doubles, 2 surface lifts = 12."
+      "checkedOn": "2026-10-03",
+      "note": "Official Mountain Stats page via search summary (2026-10-03): 94 trails; 299 skiable acres plus 35 acres of in-bounds off-piste double-black terrain on The Slides; lifts: 1 eight-passenger gondola, 2 high-speed detachable quads, 3 fixed quads, 1 triple, 2 doubles and 2 conveyors (= 11). The official Mountain page (fetched 2026-10-03) confirms 94 trails over 25 miles on three peaks."
     }
   },
   "features": {
     "nightSkiing": null,
-    "snowmakingPct": null,
+    "snowmakingPct": 98,
     "lessons": true,
     "rentals": true,
     "onMountainLodging": null,
@@ -84,10 +84,10 @@
     "childcare": null,
     "beginnerArea": "Bear Den area by the main base",
     "source": {
-      "url": "https://whiteface.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Only features Piste is confident about are set; everything else is unknown (null), not 'not offered'"
+      "url": "https://whiteface.com/mountain/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official Mountain page (fetched 2026-10-03): \"98% snowmaking coverage\"; Rossignol Experience Center rentals; Lessons & Programs; terrain parks; Bear Den Lodge. beginnerArea wording and the remaining fields are Piste reference data."
     }
   },
   "character": "A state-owned Adirondack ski mountain near Lake Placid, run by ORDA, with one of the largest vertical drops in the eastern US and steep, often wind-exposed upper terrain. It hosted the alpine events of the 1980 Winter Olympics.",
@@ -108,29 +108,349 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "OnTheSnow projects Nov 21, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Whiteface date itself and past actual opening dates were not captured."
+    "notes": "No official 2026-27 opening or closing date found as of 2026-10-03. OnTheSnow gives an estimated start of Nov 21, 2026 and a tentative end of Apr 18, 2027 (third-party projection, not an announcement). ORDA typically announces opening dates in November (2025-26 dates were announced 2025-11-21)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (winter, daily)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "16:00",
+      "season": null,
+      "note": "Spring operations can differ (e.g. April: lower mountain 10:00-16:00, upper mountain 10:30-15:30).",
+      "source": {
+        "url": "https://whiteface.com/mountain/hours-of-operation/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours-of-operation page via search summary; season year not stated."
+      }
+    },
+    {
+      "activity": "rentals",
+      "label": "Rentals",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:00",
+      "closes": "16:30",
+      "season": null,
+      "note": null,
+      "source": {
+        "url": "https://whiteface.com/mountain/hours-of-operation/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official hours-of-operation page via search summary."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (20-64) 1-day lift ticket, peak",
+      "item": "Adult (20-64) 1-day lift ticket, peak-season window rate",
       "category": "adult",
       "amount": 134,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
-      "dayType": "peak",
+      "season": "2025-26",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary labelled this the 2026-27 peak adult rate, but it comes from third-party listings whose season is unclear (a snowstash page in the same results was titled 2025/26). Confirm at source.",
+      "note": "Peak-season window rate, same weekday and weekend (OnTheSnow, last updated Nov 4, 2025, alongside 2025-2026 season-pass prices). Online advance tickets are date-based and cheaper. 2026-27 day-ticket prices not yet found.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (online, date-based range)",
+      "category": "adult",
+      "amount": 79,
+      "amountMax": 109,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "snowstash.com 2025/26 range $79-$109 (advance online, by date). From an earlier search summary; the SnowStash page was not among the saved pages.",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/whiteface/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Third-party aggregator via search summary (page titled 2025/26)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior (7-12) 1-day lift ticket, peak-season window rate",
+      "category": "child",
+      "amount": 89,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Same weekday and weekend.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior (65-69) 1-day lift ticket, peak-season window rate",
+      "category": "senior",
+      "amount": 104,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Same weekday and weekend. OnTheSnow: \"Ages 70+ $50 one day ticket.\"",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior (70+) 1-day lift ticket",
+      "category": "senior 70+",
+      "amount": 50,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow special note: \"Ages 70+ $50 one day ticket.\"",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child (0-6) 1-day lift ticket, window rate",
+      "category": "child 0-6",
+      "amount": 15,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 2-day lift ticket, peak-season window rate",
+      "category": "adult 2-day",
+      "amount": 268,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Two-day pass: junior $178, senior (65-69) $208, child (0-6) $30.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/whiteface-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Nov 4, 2025: \"Peak season window rates shown.\" The same update lists 2025-2026 season-pass prices."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Adult Frequent Skier Card (ages 20-64)",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 59,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-12-10",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "On sale through Dec 10, 2026; discounted tickets usable all season. 50% off midweek and 25% off weekend/holiday tickets.",
+      "source": {
+        "url": "https://whiteface.com/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, midweek",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 67,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card.",
+      "source": {
+        "url": "https://whiteface.com/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, weekend/holiday",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 101,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card; same rate on holidays.",
+      "source": {
+        "url": "https://whiteface.com/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Learn to Ski/Snowboard Levels 1-3, ages 13+ (lift ticket + 2-hour group lesson + rental)",
+      "category": "adult",
+      "amount": 179,
+      "amountMax": 199,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$179 midweek non-holiday, $199 weekends and holidays. Season not stated in the search result.",
+      "source": {
+        "url": "https://whiteface.com/lessons-programs/adults-teens/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Adults & Teens page via search summary."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, adult (30-69)",
+      "category": "adult",
+      "amount": 1259,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-2027 SKI3 listing (via Gore): child (4-6) $130, junior (7-12) $669, adult (30-69) $1,259, senior (70+) $539. Whiteface's own OnTheSnow page still shows 2025-2026 SKI3 prices (adult $1,239, junior $649, senior $539, child $130; price expired Dec 3, 2025).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Gore Mountain season-pass table (fetched 2026-10-03): 2026-2027, \"SKI3 Full Season Pass include daily access to Gore, Whiteface, and Belleayre Mountains\"; last update Apr 6, 2026."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, junior (7-12)",
+      "category": "child",
+      "amount": 669,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Gore Mountain season-pass table: 2026-2027 SKI3."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, senior (70+)",
+      "category": "senior",
+      "amount": 539,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Gore Mountain season-pass table: 2026-2027 SKI3."
       }
     }
   ],
@@ -138,12 +458,12 @@
     "official": "https://whiteface.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": "https://whiteface.com/mountain/snow-report",
-    "hours": null,
-    "tickets": null,
+    "snowReport": "https://whiteface.com/mountain/conditions/",
+    "hours": "https://whiteface.com/mountain/hours-of-operation/",
+    "tickets": "https://whiteface.com/tickets-passes/lift-tickets/",
     "seasonPass": "https://whiteface.com/seasonpasses/",
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://whiteface.com/lessons-programs/adults-teens/",
+    "rentals": "https://whiteface.com/mountain/rentals/",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.511ny.org/",
@@ -152,7 +472,7 @@
     "tourism": null,
     "avalanche": null,
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://whiteface.com/mountain/conditions/"
   },
   "moreLinks": [
     {
@@ -231,9 +551,9 @@
     "transfers": []
   },
   "reportSource": {
-    "url": null,
-    "format": "unknown",
-    "notes": "The Whiteface snow-report URL was not found in research. Sibling Belleayre research found ORDA runs Belleayre, Gore and Whiteface on a shared web platform with an HTML snow report, so this one is probably HTML too — unverified. No JSON feed identified."
+    "url": "https://whiteface.com/mountain/conditions/",
+    "format": "html",
+    "notes": "Official \"Whiteface Snow Report - Weather, Lift & Trail Conditions\" page (the Mountain page links it as the Daily Anticipated Conditions Report). Not fetched itself; the saved /report/snow-report/ URL is an old post titled \"Snow Report 2024/25 Season\". No JSON feed identified."
   },
   "photo": {
     "src": "asset:photo-whiteface.webp",
@@ -243,24 +563,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Whiteface_Mountain_from_Lake_Placid_Airport.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (ORDA announced 2025-26 dates on 2025-11-21; 2026-27 dates likely around November 2026). Also capture the actual 2024-25 and 2025-26 opening dates.",
-      "Confirm 2026-27 pass access: SKI3 terms and prices (prices rose 2026-05-01; a later deadline of 2026-08-05 applied), whether Whiteface stays on the Mountain Collective for 2026-27 (joined for 2025-26) and its day count, Frequent Skier Card terms, and the Snow Pass partner benefit.",
-      "Resolve whether the listed blackout dates apply to SKI3 itself or only to the Mountain Collective discount perk.",
-      "Confirm whether Whiteface is on any Ikon, Epic or Indy product for 2026-27 (believed not, unverified).",
-      "Confirm 2026-27 adult day-ticket prices: a summary gave $134 as the peak adult (20-64) rate, labelled 2026-27 but from listings of unclear season.",
-      "Confirm daily lift hours and whether there is any night skiing.",
-      "Confirm official deep links on whiteface.com (trail map, lift status, tickets, lessons, rentals, webcams, parking); the snow-report link follows the shared ORDA site pattern and should be checked.",
-      "Confirm skiable acres (\"nearly 300\" in the search summary — left null), snowmaking %, childcare, tubing and on-mountain lodging; the lift-type breakdown is SkiCentral-style and may lag lift replacements.",
-      "Confirm elevations and base/summit coordinates (currently reference data and approximations).",
-      "Get a sourced drive time from Ithaca (current value is a Piste estimate)."
+      "Official 2026-27 adult day-ticket prices (OnTheSnow's Whiteface table still shows 2025-26 peak window rates; whiteface.com homepage returned a Cloudflare check).",
+      "Official 2026-27 opening and closing dates.",
+      "Daily rental package price.",
+      "Whether Whiteface stays on the Mountain Collective for 2026-27 (tracked in passes.json)."
     ],
     "conflicts": [
-      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research).",
-      "prices: the $134 peak adult ticket was labelled 2026-27 in the search summary, but its source listings have unclear seasons. Resolution: season left null."
+      "terrain: older listings give 96 trails and 12 lifts; the official stats page gives 94 trails and 11 lifts (incl. 2 conveyors). Used the official figures.",
+      "elevation: official \"peak elevation\" 4,867 ft is the mountain top; the skiable summit (base + 3,430 ft vertical) is ~4,650 ft and lift-served top ~4,386 ft. Stored ~4,650 ft."
     ],
-    "confidenceNotes": "Updated 2026-09-30: terrain (96 trails, 12 lifts by type, \"nearly 300\" acres), the 3,166/3,430 ft vertical and a $134 peak adult price of uncertain season come from search summaries; the snow-report link is inferred from the shared ORDA site pattern. Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and its perks, Frequent Skier Card, Mountain Collective membership for 2025-26, Snow Pass partner listing and the 2025-11-21 opening-dates release — these are links/notes only; pass rules belong in passes.json. Everything else (coordinates, elevations, homepage, lessons/rentals, Bear Den beginner area) is Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
+    "confidenceNotes": "CI-fetched pages (2026-10-03): the official Mountain page, an old official snow-report post and OnTheSnow's lift-ticket page; the whiteface.com homepage returned a Cloudflare check. Elevation, lift inventory, hours, Frequent Skier Card and lesson figures come from earlier search summaries of whiteface.com pages."
   }
 }

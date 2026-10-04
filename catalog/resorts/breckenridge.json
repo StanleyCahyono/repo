@@ -71,7 +71,7 @@
       "url": "https://en.wikipedia.org/wiki/Breckenridge_Ski_Resort",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary (results: Wikipedia, breckenridge.com \"Breck Mountain Information & Stats\", OnTheSnow, GoBreck): 2,908 skiable acres; trails 187 (14% beginner / 31% intermediate / 19% advanced / 36% expert); 20 aerial lifts (1 gondola, 5 detachable six-seat, 8 detachable quad, 1 fixed-grip quad, 1 fixed-grip triple, 4 fixed-grip double chairs) plus 15 surface lifts (4 bar lifts, 1 tow rope, 10 magic carpets; carpets counted as \"other\"). Total 35 is the sum. Season of the figures not stated."
+      "note": "Search summary (results: Wikipedia, breckenridge.com \"Breck Mountain Information & Stats\", OnTheSnow, GoBreck): 2,908 skiable acres; trails 187 (14% beginner / 31% intermediate / 19% advanced / 36% expert); 20 aerial lifts (1 gondola, 5 detachable six-seat, 8 detachable quad, 1 fixed-grip quad, 1 fixed-grip triple, 4 fixed-grip double chairs) plus 15 surface lifts (4 bar lifts, 1 tow rope, 10 magic carpets; carpets counted as \"other\"). Total 35 is the sum. Season of the figures not stated. Official breckenridge.com homepage (2026-10-03) confirms \"Lifts: 35 · Runs: 187 · Elevation: Up to 12,998 feet\" and \"nearly 3,000 acres\"."
     }
   },
   "features": {
@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-06",
-      "text": "Planned opening Nov. 6, 2026 (subject to weather and conditions)",
+      "text": "The Kingdom Opens Nov 6th!",
       "announcedOn": null,
       "source": {
-        "url": "https://investors.vailresorts.com/news-releases/news-release-details/winter-about-show-vail-resorts-announces-202627-opening-dates",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Vail Resorts 2026-27 opening-dates release (reported by Unofficial Networks on 18 Aug 2026; also Denver7, Summit Daily, SnowBrains): opening dates are subject to change based on weather and conditions."
+        "url": "https://www.breckenridge.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage (read 2026-10-03): \"The Kingdom Opens Nov 6th!\". Matches the Vail Resorts 2026-27 opening-dates release (search summaries; release page failed to load)."
       }
     },
     "announcedClosing": {
@@ -119,6 +119,27 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (13-64), online, 2026-11-06",
+      "category": "adult",
+      "amount": 153,
+      "amountMax": 180,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-06",
+      "appliesTo": "2026-11-06",
+      "includesTax": true,
+      "note": "Online price for 2026-11-06 (opening day) $153; $180 = same-day price shown struck through (\"SAVE $27 OVER SAME DAY PRICES\"). Prices vary by date.",
+      "source": {
+        "url": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/06/2026: adult (13-64) $153 per day online vs $180 struck-through; child (5-12) $99 vs $117; \"Prices include applicable fees\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
       "item": "Adult 1-day lift ticket (peak day)",
       "category": "adult",
       "amount": 332,
@@ -130,12 +151,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27 peak adult ticket $332. Dynamic pricing; cheaper when bought 4+ weeks ahead.",
+      "note": "2026-27 peak (ceiling) adult day price from a third-party 2026-27 roundup; Vail Resorts prices dynamically.",
       "source": {
         "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 price roundups (TownLift, SnowBrains, Unofficial Networks, Sep 2026)."
+        "checkedOn": "2026-10-03",
+        "note": "TownLift (Sep 4, 2026, read 2026-10-03): \"On the 2026-27 list, Beaver Creek tops the chart at $392, followed by Vail at $374 ... Steamboat at $344, Breckenridge at $332\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 1-day lift ticket (5-12), online, 2026-11-06",
+      "category": "child",
+      "amount": 99,
+      "amountMax": 117,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-06",
+      "appliesTo": "2026-11-06",
+      "includesTax": true,
+      "note": "Online $99, same-day $117.",
+      "source": {
+        "url": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/06/2026: adult (13-64) $153 per day online vs $180 struck-through; child (5-12) $99 vs $117; \"Prices include applicable fees\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, advance purchase (7+ days)",
+      "category": "adult advance",
+      "amount": 299,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Card price; the date it applies to is not shown (up to 10% below peak window price). Season not stated on the card.",
+      "source": {
+        "url": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page product card: \"1-DAY LIFT TICKET (ADVANCE PURCHASE) $299 ADULT (AGES 13+) ... Buy online 7 days in advance and save up to 10% vs. Peak Window Price\"."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Epic 1-Day Pass (restricted), adult 13+",
+      "category": "adult",
+      "amount": 144,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Bundle up to 7 days across up to 39 resorts; restricted dates; sold for a limited time. Season not stated on the card.",
+      "source": {
+        "url": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page: \"EPIC 1-DAY PASS (RESTRICTED) $144 ADULT (AGES 13+) ... Sold for a limited time\"."
       }
     },
     {
@@ -145,18 +229,18 @@
       "amount": 179,
       "amountMax": 269,
       "currency": "USD",
-      "season": "2026-27",
+      "season": null,
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Adult daily tickets from $179 to $269 on a third-party reseller (Snowstash) — not the resort's own price; the range does not reach the $332 peak price. Confirm on breckenridge.com.",
+      "note": "SnowStash: adult (19-64) daily ticket US$179, \"up to US$269 peak\"; teen/child/senior US$159 up to US$249; kids 4 & under free. The page title says 2026/27 but its body says the 2025-26 season closed May 10, 2026 and to \"check back for next season's ... ticket pricing\", so the season is unclear.",
       "source": {
         "url": "https://snowstash.com/usa/colorado/breckenridge/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of a third-party reseller page titled \"Breckenridge Lift Tickets 2026/27 - From $179\"."
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash Breckenridge lift tickets page (read 2026-10-03)."
       }
     }
   ],
@@ -166,7 +250,7 @@
     "interactiveMap": null,
     "snowReport": "https://www.breckenridge.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -249,7 +333,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.breckenridge.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    "format": "html",
+    "notes": "Official Snow & Weather Report page (read 2026-10-03): base depth, season total, daytime/overnight snow and forecasts."
+  },
   "photo": {
     "src": "asset:photo-breckenridge.webp",
     "alt": "Breckenridge: View of Breckenridge Ski Area from the west peak of Dercum Mountain, as the start of Ranger run just west of the Summit House",
@@ -258,22 +346,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Breckenridge_Ski_Area_from_Dercum_Mountain,_Keystone_Ski_Area.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (OnTheSnow projects Apr. 24, 2027; not announced).",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local unlimited (no holiday restriction listed for Breckenridge in the 2026-27 summary — confirm).",
-      "Confirm official advance-purchase and non-peak 2026-27 day-ticket prices (peak $332 and a reseller range are on file).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
-      "Confirm the number of terrain parks and snowmaking coverage.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Vail Resorts).",
-      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Learning setup: confirm ski-school bases (leads: Peak 8 and Peak 9 / Beaver Run), children's programs and carpets.",
-      "Parking: confirm 2026-27 rules (lead: mostly paid, some lots needing reservations on peak days).",
-      "Snow report: record the official conditions page and whether any structured feed exists."
+      "2026-27 closing date not announced on saved pages.",
+      "Rental and lesson prices not on saved pages.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local unlimited (no holiday restriction listed for Breckenridge in the 2026-27 summary — confirm)."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats, 2026-27 prices, a projected closing (notes only) and the lift-status link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it. Snow-report, lift-status and trail-map links follow the URL pattern shared by all Vail Resorts sites (the terrain-and-lift-status and mountain-info pages were seen in results for Breckenridge itself); they were not individually opened."
+    "conflicts": [
+      "SnowStash adult range ($179–$269) is labelled 2026/27 in its title but the body points to next season's pricing as not yet posted — season unclear."
+    ],
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: breckenridge.com homepage (opening Nov 6, stats), Snow & Weather Report, Lift Tickets (opening-day online prices, advance and Epic 1-Day cards), SnowStash and TownLift. Elevation remains reference data (summit 12,998 ft matches the homepage)."
   }
 }

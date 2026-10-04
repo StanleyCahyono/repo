@@ -102,7 +102,7 @@
         "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site. The official steamboat.com homepage (2026-10-03) shows a \"WINTER SCHEDULED OPENING DAY\" countdown (01 months, 02 weeks, 03 days, 19 hours at fetch time) without printing the date; that countdown is consistent with Nov. 21, 2026."
       }
     },
     "announcedClosing": {
@@ -130,12 +130,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27 peak adult ticket $344. An undated OnTheSnow listing shows $199 weekday / $279 weekend (dynamic pricing).",
+      "note": "2026-27 peak (ceiling) adult day price from a third-party roundup; dynamic pricing. An undated OnTheSnow listing (earlier search summary) showed $199 weekday / $279 weekend.",
       "source": {
         "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 price roundups (TownLift, SnowBrains, Unofficial Networks, Sep 2026)."
+        "checkedOn": "2026-10-03",
+        "note": "TownLift (Sep 4, 2026, read 2026-10-03): \"Deer Valley's $349 puts it ahead of Steamboat at $344\" on the 2026-27 peak-price list."
       }
     }
   ],
@@ -145,7 +145,7 @@
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.steamboat.com/plan-your-trip/lift-tickets-ski-pass",
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
@@ -220,26 +220,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Steamboat_springs_ski_resort.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Resolve the 2026-27 opening date (Nov. 21 in Ikon roundups; Nov. 20 and Nov. 26 elsewhere) and the closing date (Apr. 4, 2027 in one roundup) on steamboat.com.",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass unlimited with no holiday blackouts. Not found: Ikon Base terms.",
-      "Confirm non-peak and advance 2026-27 day-ticket prices (only the $344 peak price is on file).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates (9News reported a 2025-26 closing announcement after a dry winter; date not captured).",
-      "Confirm official snow-report, lift-status and trail-map pages on steamboat.com (only third-party pages were found).",
-      "Confirm terrain parks and the current gondola set-up (2 gondolas listed).",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Alterra Mountain Company).",
-      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Learning setup: confirm Greenhorn Ranch access, surface lifts and lesson products.",
-      "HDN 2026-27 winter flight schedule; Go Alpine and any CDOT Snowstang service.",
-      "Snow report: record the official conditions page and whether any structured feed exists."
+      "2026-27 opening: official homepage shows only a countdown (consistent with Nov. 21); closing date not announced.",
+      "Non-peak/advance 2026-27 day-ticket prices, rental and lesson prices — all steamboat.com sub-pages came back empty in the CI fetch.",
+      "Official snow-report page URL not found in the saved pages.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass unlimited with no holiday blackouts. Not found: Ikon Base terms."
     ],
     "conflicts": [
       "Opening: Ikon roundups (Powder) say Nov. 21, 2026 (stored); Uncover Colorado's roundup says Nov. 20, 2026; a third-party snow-report page says Nov. 26, 2026.",
       "Day ticket: 2026-27 peak $344 (roundups) vs an undated OnTheSnow listing of $199 weekday / $279 weekend."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats and the 2026-27 peak ticket price. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "2026-10-03 CI fetch: steamboat.com homepage (opening countdown, 40% off winter products to Oct 8) and TownLift 2026-27 peak price read directly; every other steamboat.com page was empty. Other facts remain earlier search summaries."
   }
 }

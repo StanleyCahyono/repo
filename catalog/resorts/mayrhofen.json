@@ -65,7 +65,7 @@
       "url": "https://www.skiresort.info/ski-resort/mayrhofen-penken-ahorn-rastkogel-eggalm-mountopolis/test-result/slope-offering/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 142 km of slopes (44 km easy 31%, 66 km intermediate 46%, 32 km difficult 23%); 61 lifts with a total capacity of 96,281 persons/hour (skiresort.info lifts page, https://www.skiresort.info/ski-resort/mayrhofen-penken-ahorn-rastkogel-eggalm-mountopolis/test-result/lifts-cable-cars/). Counts by lift type were not given; named examples include the Penkenbahn, Horbergbahn and Ahornbahn gondolas, the Kombibahn Penken chair/gondola and the Babylift Penken T-bar."
+      "note": "Search summary: 142 km of slopes (44 km easy 31%, 66 km intermediate 46%, 32 km difficult 23%); 61 lifts with a total capacity of 96,281 persons/hour (skiresort.info lifts page, https://www.skiresort.info/ski-resort/mayrhofen-penken-ahorn-rastkogel-eggalm-mountopolis/test-result/lifts-cable-cars/). Counts by lift type were not given; named examples include the Penkenbahn, Horbergbahn and Ahornbahn gondolas, the Kombibahn Penken chair/gondola and the Babylift Penken T-bar. Official mayrhofen.at (2026-10-03): '142 kilometres of impeccably groomed pistes and 61 state-of-the-art lifts'."
     }
   },
   "features": {
@@ -90,51 +90,204 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-04",
-      "text": "Estimated season start 4 Dec 2026 (tentative); Ahornbahn from 12 Dec 2026",
+      "text": "Horbergbahn and Penkenbahn from 4 Dec 2026; Ahornbahn and Möslbahn from 12 Dec 2026.",
       "announcedOn": null,
       "source": {
         "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official page: 'HORBERGBAHN + PENKENBAHN 4th of December 2026 until 24th of December 2026 from 8.30 am until 5.00 pm; 25th of December 2026 until 11th of April 2027 from 8.00 am until 5.00 pm; AHORNBAHN 12th of December 2026 until 4th of April 2027'."
       }
     },
     "announcedClosing": {
       "date": "2027-04-11",
-      "text": "Tentative season end 11 Apr 2027",
+      "text": "Horbergbahn and Penkenbahn to 11 Apr 2027; Ahornbahn and Möslbahn to 4 Apr 2027.",
       "announcedOn": null,
       "source": {
         "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official page: 'HORBERGBAHN + PENKENBAHN 4th of December 2026 until 24th of December 2026 from 8.30 am until 5.00 pm; 25th of December 2026 until 11th of April 2027 from 8.00 am until 5.00 pm; AHORNBAHN 12th of December 2026 until 4th of April 2027'."
       }
     },
     "history": [],
     "typicalText": null,
-    "notes": "The operator calls both dates estimated/tentative (search summary)."
+    "notes": "Zillertaler Superskipass valid 4 Dec 2026 – 11 Apr 2027 (official)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Ski-area lifts (general)",
+      "days": null,
+      "opens": "08:00",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": "Valley cable cars run longer (see next entries); last ascent of cable cars 16:30.",
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'The lifts in the ski resort in the ski season are generally open from 8.00 am until 4.00 pm; Last ascent of the cable cars at 4.30 pm'."
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Horbergbahn + Penkenbahn (25 Dec 2026 – 11 Apr 2027)",
+      "days": null,
+      "opens": "08:00",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": "4–24 Dec 2026: 08:30–17:00.",
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official page: 'HORBERGBAHN + PENKENBAHN 4th of December 2026 until 24th of December 2026 from 8.30 am until 5.00 pm; 25th of December 2026 until 11th of April 2027 from 8.00 am until 5.00 pm; AHORNBAHN 12th of December 2026 until 4th of April 2027'."
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Ahornbahn (12 Dec 2026 – 4 Apr 2027)",
+      "days": null,
+      "opens": "07:30",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'AHORNBAHN 12th of December 2026 until 4th of April 2027 from 7.30 am until 5.00 pm'"
+      }
+    },
+    {
+      "activity": "ticket-office",
+      "label": "Ski-pass cash desks",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:00",
+      "closes": "17:00",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "'Our cash desks are daily open from 8.00 am to 5.00 pm'"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Mayrhofner Bergbahnen 1-day ticket (high season)",
+      "item": "Skipass Mayrhofen 1 day from 08:00, adult",
       "category": "adult",
       "amount": 82,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "peak",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: 2026/27 high-season adult 1-day EUR 82.00 (regular hours); other times of day are priced differently. The valley-wide Zillertal Superskipass is sold separately (2 days EUR 163.50 adult per the same search).",
+      "note": null,
       "source": {
         "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mayrhofner Bergbahnen 'Prices and opening hours winter — Season 2026/27', 'Skipass Mayrhofen (Valid in Mayrhofen, Eggalm, Rastkogel, Finkenberg, Hintertuxer Gletscher)': 1 day from 08.00 a.m. Adults € 82.00, Youth (2008-2011) € 65.50, Children (2012-2020) € 37.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Skipass Mayrhofen 1 day from 12:00, adult",
+      "category": "adult half-day",
+      "amount": 61.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mayrhofner Bergbahnen 'Prices and opening hours winter — Season 2026/27', 'Skipass Mayrhofen (Valid in Mayrhofen, Eggalm, Rastkogel, Finkenberg, Hintertuxer Gletscher)': 1 day from 12.00 p.m. Adults € 61.50 (from 11.00 € 74.00; from 02.00 p.m. € 41.00)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Skipass Mayrhofen 1 day, youth (born 2008–2011)",
+      "category": "youth",
+      "amount": 65.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mayrhofner Bergbahnen 'Prices and opening hours winter — Season 2026/27', 'Skipass Mayrhofen (Valid in Mayrhofen, Eggalm, Rastkogel, Finkenberg, Hintertuxer Gletscher)': Youth € 65.50."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Skipass Mayrhofen 1 day, child (born 2012–2020)",
+      "category": "child",
+      "amount": 37,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mayrhofner Bergbahnen 'Prices and opening hours winter — Season 2026/27', 'Skipass Mayrhofen (Valid in Mayrhofen, Eggalm, Rastkogel, Finkenberg, Hintertuxer Gletscher)': Children € 37.00."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Zillertaler Superskipass 2 days (all Zillertal lifts), adult",
+      "category": "adult 2-day",
+      "amount": 163.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-04",
+      "appliesTo": "2027-04-11",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.mayrhofen.at/en/stories/mountopolis-prices-and-opening-hours-winter",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official page: 'Zillertaler Superskipass (2 - 21 days / Valid for all lifts in Zillertal from 04.12.2026 bis 11.04.2027)': 2 days Adults € 163.50, Youth € 130.50, Children € 73.50."
       }
     }
   ],
@@ -221,15 +374,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mayrhofen.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lift counts by type (not found in two searches).",
-      "Confirm the estimated 4 Dec 2026 start and 11 Apr 2027 end.",
-      "Official snow report and live lift-status pages.",
-      "Past opening and closing dates for an estimated window."
+      "Lift counts by type.",
+      "Official snow report page (live lift status shown on the prices page).",
+      "Rental and lesson prices."
     ],
     "conflicts": [],
-    "confidenceNotes": "Terrain, capacity, price and date facts come from web-search summaries of mayrhofen.at and skiresort.info. Coordinates, weather points and airport times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03: 2026/27 prices, dates and hours re-read from the CI-fetched official Mayrhofner Bergbahnen page. Elevations remain an earlier skiresort.com search summary."
   }
 }

@@ -27,7 +27,7 @@
       "url": "https://www.skiresort.com/en/ski-resort/falls-creek/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: ski area between 1,500 m and 1,780 m; vertical derived as the difference."
+      "note": "Search summary: ski area between 1,500 m and 1,780 m; vertical derived as the difference. Confirmed on the CI-fetched skiresort.com page (2026-10-03)."
     }
   },
   "weatherPoints": [
@@ -65,7 +65,7 @@
       "url": "https://www.skiresort.com/en/ski-resort/falls-creek/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 15 lifts and 49 km of slopes. Hectares, run count, lift types and capacity not found. Figures as listed in 2026 (season id 2025-26)."
+      "note": "Search summary: 15 lifts and 49 km of slopes. Hectares, run count, lift types and capacity not found. Figures as listed in 2026 (season id 2025-26). Re-read 2026-10-03 on skiresort.com: \"49 km of slopes ... 15 lifts ... between the elevations of 1,500 and 1,780 m\"; easy 6 km / intermediate 35 km / difficult 8 km."
     }
   },
   "features": {
@@ -114,9 +114,25 @@
       }
     ],
     "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (6 Jun 2026); in the very poor 2026 season the lifts closed on 6 Sep.",
-    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts also charge a resort entry fee (a Falls Creek entry-price cut was reported by https://www.snowsbest.com/resort-entry-falls-creek/)."
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts also charge a resort entry fee (a Falls Creek entry-price cut was reported by https://www.snowsbest.com/resort-entry-falls-creek/). skiresort.com (read 2026-10-03) lists the next season as 05.06.2027 – 12.09.2027 (third-party listing, not an announcement; general season early June – late September)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lift operating times",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:30",
+      "season": null,
+      "note": "Third-party listing of resort-provided times; may vary by day and holidays.",
+      "source": {
+        "url": "https://www.skiresort.com/en/ski-resort/falls-creek/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "skiresort.com Falls Creek (read 2026-10-03): \"Opening times: 08:30 - 16:30 ... provided by the ski resort Falls Creek and can vary\"."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -131,12 +147,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Main-season adult day price per the search summary; the season was not stated (most likely the 2026 winter). Snowstash lists 2026 Falls Creek lift passes at A$97–A$221 (product mix not stated), so treat this as indicative. Date-based pricing applies online.",
+      "note": "Main-season adult day price per the search summary; the season was not stated (most likely the 2026 winter). Snowstash lists 2026 Falls Creek lift passes at A$97–A$221 (product mix not stated), so treat this as indicative. Date-based pricing applies online. The skiresort.com page read on 2026-10-03 shows the day ticket only as a currency-converted \"approx. € 158\" (adult), youth/children approx. € 87, so the AUD amount could not be re-read there.",
       "source": {
         "url": "https://www.skiresort.com/en/ski-resort/falls-creek/",
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
-        "note": "Search summary (attribution uncertain; may be https://www.onthesnow.com/australia/falls-creek-alpine-resort/lift-tickets)"
+        "note": "Search summary (attribution uncertain; may be https://www.onthesnow.com/australia/falls-creek-alpine-resort/lift-tickets) Re-checked 2026-10-03 against the CI-fetched skiresort.com page (EUR approximation only)."
+      }
+    },
+    {
+      "subjectType": "other",
+      "item": "Mountain Access Card (reloadable lift-ticket card)",
+      "category": "any",
+      "amount": 6,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Required when buying lift tickets and lesson products; replacement $6.",
+      "source": {
+        "url": "https://www.fallscreek.com.au/plan-your-trip-winter/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03): \"A Mountain Access Card costs $6, however, these cards can be reloaded (not only this season, but also in future seasons).\""
       }
     }
   ],
@@ -229,11 +266,11 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:St_Falls_ski_lodge_2012.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
+      "Winter 2027 lift-ticket, rental and lesson prices — official ticket pages point to skifalls.com.au, which was not fetched.",
       "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
       "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
       "Confirm published lift and ticket-office hours for 2027.",
       "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
@@ -241,8 +278,9 @@
       "Confirm the resort entry fee for 2027 and the over-snow transport arrangements."
     ],
     "conflicts": [
-      "Adult day price: AU$256 main season (skiresort.com-style listing, season not stated) vs Snowstash's 2026 range A$97–A$221 — the products behind each figure are unclear."
+      "Adult day price: AU$256 main season (skiresort.com-style listing, season not stated) vs Snowstash's 2026 range A$97–A$221 — the products behind each figure are unclear.",
+      "Adult day price: stored A$256 (earlier search summary) cannot be re-read on skiresort.com, which now shows only \"approx. € 158\"."
     ],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, lift count, km of slopes, 2026 opening/closing and the day price come from search summaries (confirm at source); the village car-free/over-snow note, coordinates, operator and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI fetch: fallscreek.com.au homepage, Lift Tickets and Single/Multiday Passes pages (no prices; refer to skifalls.com.au), older news posts (2019/2024/2025), and skiresort.com (stats, EUR price approximation, operating times, next-season listing) were read directly."
   }
 }

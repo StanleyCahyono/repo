@@ -102,29 +102,71 @@
     },
     "history": [],
     "typicalText": "Titlis glacier often opens in October (projected 10 Oct 2026 — estimate, not an announcement)",
-    "notes": "No announced 2026-27 opening or closing found. A projected-openings listing (estimate) gives 10 Oct 2026 for the glacier."
+    "notes": "No announced 2026-27 dates on the saved pages. OnTheSnow gives an estimated start of 10 Oct 2026 and tentative end of 2 May 2027 (estimates, not announcements). titlis.ch could not be fetched by the CI job."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Engelberg-Titlis 1-day ski pass, adult (20–63)",
+      "item": "Engelberg-Titlis 1-day ski pass, adult 20–63",
       "category": "adult",
       "amount": 69,
       "amountMax": null,
       "currency": "CHF",
-      "season": null,
+      "season": "2025-26",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "OnTheSnow-type listing via search summary: CHF 69 weekday and weekend; dynamic pricing applies. Season not stated — confirm.",
+      "note": "Last season (OnTheSnow data updated 10 Nov 2025). Dynamic pricing on titlis.ch.",
       "source": {
         "url": "https://www.onthesnow.co.uk/central-switzerland/engelberg/skipass",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary did not tie this to one result; cited URL is the most likely source."
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Engelberg ski pass page (prices 'LAST UPDATED: 10 NOV 2025'; season pass table labelled 2025-2026, expiring 3 May 2026): day ticket ADULT 20-63 Weekday 69.00 / Weekend 69.00; CHILD 6-15 23.00. 'Die Skitageskarten für das Skigebiet Engelberg-Titlis sind über ein dynamisches Preismodell buchbar.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Engelberg-Titlis 1-day ski pass, child 6–15",
+      "category": "child",
+      "amount": 23,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.co.uk/central-switzerland/engelberg/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Engelberg ski pass page (prices 'LAST UPDATED: 10 NOV 2025'; season pass table labelled 2025-2026, expiring 3 May 2026): day ticket ADULT 20-63 Weekday 69.00 / Weekend 69.00; CHILD 6-15 23.00. 'Die Skitageskarten für das Skigebiet Engelberg-Titlis sind über ein dynamisches Preismodell buchbar.'"
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Engelberg-Titlis season pass, adult 20–63",
+      "category": "adult",
+      "amount": 949,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.co.uk/central-switzerland/engelberg/skipass",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Engelberg ski pass page (prices 'LAST UPDATED: 10 NOV 2025'; season pass table labelled 2025-2026, expiring 3 May 2026): day ticket ADULT 20-63 Weekday 69.00 / Weekend 69.00; CHILD 6-15 23.00. 'Die Skitageskarten für das Skigebiet Engelberg-Titlis sind über ein dynamisches Preismodell buchbar.' Season pass 2025-2026: child 340, junior 645, adult 949, senior 765."
       }
     }
   ],
@@ -194,14 +236,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Engelberg.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the lift count (37, single source), lift types and capacity.",
       "Announced 2026-27 opening (glacier) and closing dates.",
-      "Confirm the adult day price and season; find the live lift status page on titlis.ch."
+      "2026-27 dynamic day prices on titlis.ch (not fetched).",
+      "Lift types and capacity (OnTheSnow: 22 slopes, 37 lifts); live lift status and snow report."
     ],
     "conflicts": [],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "2026-10-03: day and season prices re-read from the CI-fetched OnTheSnow page (2025-26 data). Official titlis.ch pages were not fetched. Elevations/lifts remain earlier search summaries."
   }
 }

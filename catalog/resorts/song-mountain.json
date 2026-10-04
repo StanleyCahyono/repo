@@ -103,15 +103,222 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "OnTheSnow projects Dec 12, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening date and no historical opening dates found in research. 2026-27 SkiCNY season passes (valid at Song and Labrador, '2 mountains for 1 price') went on sale in spring 2026; spring pricing ran through Wed Apr 15, 2026 with a Buddy Pass and a $25 voucher for Heuga's Alpine; an 'Early Fall 2026-27' rate page exists. After Toggenburg closed in 2021, reporting described longer lift lines at Song. The operator lost a NY antitrust case in 2025 over buying and closing Toggenburg; remedies were pending as of Aug 2025."
+    "notes": "OnTheSnow projects Dec 12, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening date and no historical opening dates found in research. 2026-27 SkiCNY season passes (valid at Song and Labrador, '2 mountains for 1 price') went on sale in spring 2026; spring pricing ran through Wed Apr 15, 2026 with a Buddy Pass and a $25 voucher for Heuga's Alpine; an 'Early Fall 2026-27' rate page exists. After Toggenburg closed in 2021, reporting described longer lift lines at Song. The operator lost a NY antitrust case in 2025 over buying and closing Toggenburg; remedies were pending as of Aug 2025. Official ski report (Apr 10-11, 2026): \"Song & Labrador are now closed for the season\"; 2025-26 gave \"95 days\". No 2026-27 opening date announced on skicny.com as of 2026-10-03 (2026-27 season passes on sale, early-bird 20% off through Mon Oct 12, 2026)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Tue-Fri (day + night)",
+      "days": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "opens": "10:00",
+      "closes": "21:00",
+      "season": "2025-26",
+      "note": "Closed non-holiday Mondays.",
+      "source": {
+        "url": "https://www.skicny.com/song/hours-of-operation/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY hours page (fetched 2026-10-03); holiday list is for 2025-26"
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Sat-Sun",
+      "days": [
+        6,
+        7
+      ],
+      "opens": "09:00",
+      "closes": "16:30",
+      "season": "2025-26",
+      "note": "Opens 9am on holidays (2025-26: Nov 28; Dec 22-Jan 4; Jan 19; Feb 16-22; Apr 3). Closes 4:30pm Christmas Eve/New Year's Eve; closed Thanksgiving, Christmas, Easter Sunday.",
+      "source": {
+        "url": "https://www.skicny.com/song/hours-of-operation/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY hours page (fetched 2026-10-03); holiday list is for 2025-26"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (13-64) 8-hour lift ticket (Song-Labrador)",
+      "item": "Adult (13-64) 8-hour lift ticket",
       "category": "adult",
-      "amount": 89,
+      "amount": 92,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "SkiCNY 2026-27 daily rate, valid at Song or Labrador. Day-type rules not stated.",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (13-64) 4-hour lift ticket",
+      "category": "adult half-day",
+      "amount": 86,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult night ticket (4 PM to closing)",
+      "category": "adult night",
+      "amount": 53,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior (6-12) 8-hour lift ticket",
+      "category": "child",
+      "amount": 79,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Junior night $45; Tiny Tot (<6) 8-hour $20, night $15.",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior w/ID (65+) 8-hour lift ticket",
+      "category": "senior",
+      "amount": 86,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Senior 2-hour $69, night $45.",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "College w/ID (<25) 8-hour lift ticket",
+      "category": "college",
+      "amount": 75,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "College night $45. Active military and law enforcement 8-hour $75.",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "3-Pac of non-transferable 8-hour lift tickets (Song or Labrador)",
+      "category": "adult 3-day pack",
+      "amount": 239,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Same price by and after 12/1/26; 6-Pac of transferable 8-hour tickets $450. The text above the table still says \"valid ... during the 2025-26 season\" while the price columns read \"By 12/1/26 / After 12/1/26\".",
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Beginner area 8-hour ticket (Song \"Gunshy\" double chair)",
+      "category": "adult beginner area",
+      "amount": 49,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.skicny.com/daily-lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY \"Daily Lift Ticket Rates 2026-27\" table (fetched 2026-10-03); valid at Song or Labrador"
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Complete rental package (skis, boots & poles or snowboard & boots)",
+      "category": "adult",
+      "amount": 47,
       "amountMax": null,
       "currency": "USD",
       "season": "2025-26",
@@ -120,12 +327,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "SkiCNY 2025-26 daily rate, valid at Song and Labrador (4-hour adult ticket $84). Day-type rules not stated. 2026-27 rates not found.",
+      "note": "Plus 8% NYS sales tax; optional $1 damage waiver. Junior (6-12) $41, Tiny Tot $19, helmet add $12.",
       "source": {
-        "url": "https://www.skicny.com/daily-lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.skicny.com/equipment-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiCNY equipment rentals page, labelled 2025-26 (fetched 2026-10-03)"
       }
     }
   ],
@@ -134,7 +341,7 @@
     "trailMap": null,
     "interactiveMap": null,
     "snowReport": null,
-    "hours": null,
+    "hours": "https://www.skicny.com/song/hours-of-operation/",
     "tickets": "https://www.skicny.com/daily-lift-tickets/",
     "seasonPass": "https://www.skicny.com/season-passes-early-fall/",
     "lessons": null,
@@ -199,20 +406,19 @@
     "notes": "Song's conditions are presumably on the SkiCNY site (Labrador's are at skicny.com/labrador/ski-report/), but no Song-specific report URL appeared in research, so none is recorded."
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Song's own page URLs on skicny.com (conditions, hours, trail map).",
       "Base and summit elevations, snowmaking %, terrain parks and trail difficulty split (vertical 700 ft, 24 trails, 100 acres and 5 lifts were found 2026-09-30).",
-      "Day and night hours for 2026-27 (night skiing likely but unconfirmed).",
       "Lessons and learning-area details, rentals, tubing.",
-      "2026-27 day-ticket prices (2025-26 SkiCNY adult 13-64: $89 8-hour, $84 4-hour) and SkiCNY season-pass prices.",
       "Historical opening dates and any resort-announced 2026-27 opening (OnTheSnow projects Dec 12, 2026).",
       "Exact coordinates (location and weather points are unsourced approximations).",
-      "Indy Pass, SANY Gold Pass or other reciprocal access for 2026-27."
+      "Indy Pass, SANY Gold Pass or other reciprocal access for 2026-27.",
+      "2026-27 rental and lesson prices (rentals page labelled 2025-26; no single group-lesson price found)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Updated 2026-09-30: vertical (700 ft), terrain (24 trails, 100 acres, 5 lifts = 2 chairs + 3 surface) and the 2025-26 SkiCNY adult rate come from search summaries. The web-search budget ran out before Song-specific searches could run, so this record is mostly unknowns. Included facts come from shared SkiCNY and ownership sources: the Intermountain operator, the combined Song+Labrador 2026-27 pass and the Heuga's Alpine restaurant. Stats were deliberately left null rather than filled from memory. Coordinates are approximate estimates for weather-model use only; drive time is a Piste estimate."
+    "confidenceNotes": "2026-27 day-ticket rates read 2026-10-03 from the official SkiCNY daily-lift-tickets page; rentals (2025-26) and hours (2025-26 holiday list) from official SkiCNY pages. Other facts are earlier search summaries."
   },
   "photo": null
 }

@@ -21,13 +21,13 @@
   },
   "elevation": {
     "baseM": 2300,
-    "summitM": 3200,
-    "verticalM": 900,
+    "summitM": 3230,
+    "verticalM": 930,
     "source": {
-      "url": "https://www.valthorens.com/en/nouveautes-station-domaine-skiable-hiver-2025-2026/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Village about 2,300 m (reference). Summit: Cime Caron, 'the highest point of the resort at 3,200 m' (search summary of Val Thorens' 2025/26 news and Cime Caron articles); the Orelle side reaches about 3,230 m at Pointe du Bouchet (reference). Pistes also run down towards Les Menuires and Orelle; vertical here is village to Cime Caron"
+      "url": "https://www.valthorens.com/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "valthorens.com: Val Thorens 'ALTITUDE 2300m à 3230m', 150 km; 3 Vallées '1100m à 3230m', 600 km. Vertical derived."
     }
   },
   "weatherPoints": [
@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-21",
-      "text": "Val Thorens and Orelle open 21 Nov 2026 and run to 2 May 2027 (France Montagnes 2026-27 list and Val Thorens day-pass price bands, per search summaries).",
+      "text": "Ski area open 21 Nov 2026 – 2 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.valthorens.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official valthorens.com homepage: 'Le domaine skiable est ouvert du 21 novembre 2026 au 2 mai 2027'. France Montagnes also lists Val Thorens on 21 Nov 2026."
       }
     },
     "announcedClosing": {
       "date": "2027-05-02",
-      "text": "Season to 2 May 2027 (per search summaries; day-pass price bands run to 2 May).",
+      "text": "Ski area open to 2 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.valthorens.com/en/ski/forfaits/forfait-journee/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.valthorens.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official valthorens.com homepage: 'Le domaine skiable est ouvert du 21 novembre 2026 au 2 mai 2027'. France Montagnes also lists Val Thorens on 21 Nov 2026."
       }
     },
     "history": [],
@@ -250,8 +250,8 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ski_lift_people_on_snow_mountains_(Unsplash).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Remaining lift types (cable cars, surface lifts) and total hourly capacity for Val Thorens–Orelle.",
       "3 Vallées adult day-pass price for 2026-27.",
@@ -259,8 +259,9 @@
       "Official snow-report page (the 3 Vallées live lifts-and-trails page is linked)."
     ],
     "conflicts": [
-      "Val Thorens–Orelle runs: 85 (12/35/30/8) in the resort search vs 88 (11/39/30/8) in the 3 Vallées figures."
+      "Val Thorens–Orelle runs: 85 (12/35/30/8) in the resort search vs 88 (11/39/30/8) in the 3 Vallées figures.",
+      "Summit: 3,230 m (official homepage, 2026-10-03) replaces the earlier 3,200 m reference value."
     ],
-    "confidenceNotes": "Season dates and day prices come from search summaries of official pages (fairly solid). Lift mix is partial. Coordinates, village altitude and operator are reference data; weather points approximate; airport times are estimates."
+    "confidenceNotes": "2026-10-03: season dates, altitude range and 150 km re-read from the CI-fetched official homepage. The day-pass page was blocked (Cloudflare) in the CI fetch, so the €66.10–€73.50 day price remains an earlier search summary."
   }
 }

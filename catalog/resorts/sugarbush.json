@@ -24,10 +24,10 @@
     "summitM": 1244,
     "verticalM": 792,
     "source": {
-      "url": "https://www.sugarbush.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit is Mount Ellen (4,083 ft); Lincoln Peak is ~3,975 ft. Advertised vertical ~2,600 ft; base derived as summit minus vertical"
+      "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "SnowStash: base 1,483 ft, summit 4,082 ft, roughly 2,599 ft vertical (also shows 2,598 ft)."
     }
   },
   "weatherPoints": [
@@ -52,11 +52,11 @@
     "trails": 111,
     "lifts": 15,
     "skiableAcres": 581,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 24,
+    "intermediatePct": 42,
+    "advancedPct": 27,
     "terrainParks": null,
-    "expertPct": null,
+    "expertPct": 7,
     "pisteKm": null,
     "liftsByType": null,
     "liftCapacityPerHour": null,
@@ -65,7 +65,7 @@
       "url": "https://www.skiresort.info/ski-resort/sugarbush/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30): 581 acres of skiable terrain and 111 runs across two peaks; \"15 lifts\" (skiresort.info wording), while another result mentioned 16 lifts. Lift types not captured."
+      "note": "Search summary (2026-09-30): 581 acres of skiable terrain and 111 runs across two peaks; \"15 lifts\" (skiresort.info wording), while another result mentioned 16 lifts. Lift types not captured. Difficulty split 24% beginner / 42% intermediate / 27% advanced / 7% expert from SnowStash (https://snowstash.com/usa/vermont/sugarbush/lift-tickets, fetched 2026-10-03), which also gives 111 runs / 581 acres."
     }
   },
   "features": {
@@ -100,7 +100,19 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-06",
+        "closed": "2026-05-03",
+        "source": {
+          "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "SnowStash: \"The 2025-26 season at Sugarbush ran from 6 December 2025 to 3 May 2026.\""
+        }
+      }
+    ],
     "typicalText": null,
     "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-09-30. OnTheSnow projects Nov 21, 2026 (a third-party projection, not an announcement). Past opening dates were not captured, so no estimated window is derived."
   },
@@ -108,29 +120,71 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (date-based)",
+      "item": "All Mountain Adult Ticket (18-99)",
       "category": "adult",
       "amount": 135,
       "amountMax": 195,
       "currency": "USD",
-      "season": "2026-27",
+      "season": null,
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Aggregator (snowstash.com): 2026/27 adult day tickets from $135 to $195 depending on date and advance purchase. An OnTheSnow listing showed $129 weekday / $199 weekend with no season stated.",
+      "note": "Season not clearly stated (see source note). Up to $195 peak. An earlier OnTheSnow listing showed $129 weekday / $199 weekend (season not stated).",
       "source": {
         "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed May 3, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Mt. Ellen Only Ticket (Mon-Fri non-holiday and daily late season)",
+      "category": "adult Mt. Ellen only",
+      "amount": 49,
+      "amountMax": 79,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note).",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed May 3, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Beginner Area Ticket (Village Quad, Welcome Mat, Sunshine Quad), ages 6-99",
+      "category": "adult beginner area",
+      "amount": 69,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note).",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/sugarbush/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed May 3, 2026 and to \"check back for next season's opening date and ticket pricing\"."
       }
     },
     {
       "subjectType": "lift-ticket",
       "item": "TBD (\"Third Best Deal\") ticket, any day, no blackout dates",
-      "category": null,
+      "category": "adult deal",
       "amount": 99,
       "amountMax": null,
       "currency": "USD",
@@ -142,10 +196,10 @@
       "includesTax": null,
       "note": "Search summary of the official TBD page: $99 tickets valid any day of the 2026-27 winter with no blackout dates. Age category and purchase deadline not captured.",
       "source": {
-        "url": "https://www.sugarbush.com/plan-your-trip/deals-and-packages/third-best-deal-ticket",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.sugarbush.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage banner (fetched 2026-10-03): \"$99 lift tickets (plus a free day) for 26/27.\" Details (any day, no blackouts) from an earlier search summary of the TBD page."
       }
     },
     {
@@ -242,10 +296,11 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Upper_Jester_Ski_trail,_Sugarbush_Resort,_Warren_-_panoramio.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "No resort-announced 2026-27 opening or closing date (OnTheSnow projects Nov 21, 2026).",
+      "2026-27 standard adult day price: official lift-ticket page was not readable by the CI fetcher; SnowStash $135-$195 carries a 2026/27 title but a 2025-26 body. Rental and lesson prices not found.",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
       "Confirm the operator (Alterra Mountain Company since 2019 — reference) and 2026-27 Ikon Pass / Ikon Base terms (lead: unlimited on Ikon in earlier seasons; low-confidence lead on Mountain Collective).",
       "Confirm purchase deadlines and age categories for the 2026-27 TBD ($99) and Quad Pack ($109/ticket) deals; aggregator adult day tickets run $135–$195.",
@@ -255,8 +310,9 @@
       "Confirm elevations (base here is derived) and base/summit coordinates (approximations). Consider a Mount Ellen weather point."
     ],
     "conflicts": [
-      "terrain.lifts: 15 lifts (skiresort.info-style summary) vs 16 lifts (another result). Resolution: used 15."
+      "terrain.lifts: 15 lifts (skiresort.info-style summary) vs 16 lifts (another result). Resolution: used 15.",
+      "SnowStash title \"Lift Tickets 2026/27\" vs body \"2025-26 season closed ... check back for next season's ticket pricing\"; day-ticket season left null."
     ],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Terrain (581 acres, 111 runs, 15–16 lifts) and 2026-27 prices (aggregator $135–$195; official TBD $99 and Quad Pack $109/ticket) are search-summary facts. Identity, coordinates, elevations, operator and the few features set remain Piste reference data. The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
+    "confidenceNotes": "Official homepage confirms \"$99 lift tickets (plus a free day) for 26/27\" (fetched 2026-10-03). Day-ticket prices, elevation, difficulty split and 2025-26 dates from SnowStash (third party). Other sugarbush.com pages could not be fetched."
   }
 }

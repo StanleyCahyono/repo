@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-20",
-      "text": "Planned opening Nov. 20, 2026 (subject to weather and conditions)",
-      "announcedOn": null,
+      "text": "Opening day, November 20th!",
+      "announcedOn": "2026-08-18",
       "source": {
-        "url": "https://www.piquenewsmagazine.com/local-news/whistler-blackcomb-targets-nov-20-opening-as-powerful-el-nino-looms-12678244",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Pique Newsmagazine: \"Whistler Blackcomb targets Nov. 20 opening as powerful El Niño looms\"; the same date is in the Vail Resorts 2026-27 opening-dates release (reported 18 Aug 2026)."
+        "url": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Snow & Weather Report page (read 2026-10-03): \"Opening day, November 20th!\". Pique (Aug 18, 2026): targeting \"Friday, Nov. 20 to kick off its 2026-27 ski and snowboard season\"; Vail Resorts announced the date Aug. 18."
       }
     },
     "announcedClosing": {
@@ -115,14 +115,93 @@
     "typicalText": null,
     "notes": "2026-27: planned opening Nov. 20, 2026. Closing not announced; OnTheSnow \"projected closing\" listing (https://www.onthesnow.com/british-columbia/projected-closing), a projection, not an announcement — May 16, 2027 projected. Confirm."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Most valley and alpine lifts (opening day to Jan. 15)",
+      "days": null,
+      "opens": "09:00",
+      "closes": "15:30",
+      "season": "2026-27",
+      "note": "Traditional hours expected to return around B.C. Family Day / Presidents' Day.",
+      "source": {
+        "url": "https://www.piquenewsmagazine.com/local-news/whistler-blackcomb-targets-nov-20-opening-as-powerful-el-nino-looms-12678244",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Pique Newsmagazine (Aug 18, 2026): \"Whistler Blackcomb plans to operate most valley and alpine lifts from 9 a.m. to 3:30 p.m. from opening day through Jan. 15, rather than the traditional 8:30 a.m. start\" (B.C. permanent daylight time)."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (restricted / unrestricted)",
+      "item": "Adult 1-day lift ticket (19-64), online, 2026-11-20",
+      "category": "adult",
+      "amount": 202,
+      "amountMax": 238,
+      "currency": "CAD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-20",
+      "appliesTo": "2026-11-20",
+      "includesTax": null,
+      "note": "Online price for opening day (Nov 20, 2026) CAD 202; CAD 238 = same-day price. Prices vary by date.",
+      "source": {
+        "url": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/20/2026: adult (19-64) $202 CAD per day vs $238 CAD struck through; child (7-12) $101 CAD vs $119 CAD; \"SAVE $36 CAD OVER SAME DAY PRICES\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 1-day lift ticket (7-12), online, 2026-11-20",
+      "category": "child",
+      "amount": 101,
+      "amountMax": 119,
+      "currency": "CAD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-20",
+      "appliesTo": "2026-11-20",
+      "includesTax": null,
+      "note": "Online CAD 101, same-day CAD 119.",
+      "source": {
+        "url": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/20/2026: adult (19-64) $202 CAD per day vs $238 CAD struck through; child (7-12) $101 CAD vs $119 CAD; \"SAVE $36 CAD OVER SAME DAY PRICES\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, advance purchase (7+ days)",
+      "category": "adult advance",
+      "amount": 329,
+      "amountMax": null,
+      "currency": "CAD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Card price; date not shown (up to 10% below peak window price).",
+      "source": {
+        "url": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page card: \"1-DAY LIFT TICKET (ADVANCE PURCHASE) $329 CAD ADULT (AGES 19+) ... save up to 10% vs. Peak Window Price\"."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Whistler Blackcomb 1-Day Pass (restricted), adult 19+",
       "category": "adult",
       "amount": 156,
-      "amountMax": 183,
+      "amountMax": null,
       "currency": "CAD",
       "season": "2026-27",
       "dayType": null,
@@ -130,12 +209,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27: adult 1-day CAD 156 (restricted) or CAD 183 (unrestricted); child 7-12 CAD 79/93. These look like advance-purchase prices (\"restricted\" presumably excludes holiday/peak dates); window rates are likely higher — confirm on whistlerblackcomb.com.",
+      "note": "Bundle up to 7 days, any time in the season (restricted dates excluded); non-refundable. Sold for a limited time. Earlier search summary (whistler.com, 2026-09-30) also gave an unrestricted version at CAD 183 and child 7-12 CAD 79/93 — not on the CI-fetched pages.",
       "source": {
-        "url": "https://www.whistler.com/skiing/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Tourism Whistler's lift-ticket page (whistler.com)."
+        "url": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page card: \"WHISTLER BLACKCOMB 1-DAY PASS (RESTRICTED) $156 CAD ADULT (AGES 19+) ... Sold for a limited time: Commit early and save up to 57% vs. Peak Window Price\"."
       }
     }
   ],
@@ -145,7 +224,7 @@
     "interactiveMap": null,
     "snowReport": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/tickets.aspx",
     "seasonPass": "https://www.whistlerblackcomb.com/plan-your-trip/lift-access/season-passes.aspx",
     "lessons": null,
     "rentals": null,
@@ -215,7 +294,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    "format": "html",
+    "notes": "Official Snow & Weather Report page (read 2026-10-03): snowfall, base depth and forecasts."
+  },
   "photo": {
     "src": "asset:photo-whistler-blackcomb.webp",
     "alt": "Whistler: Blackcomb gondola",
@@ -224,25 +307,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blackcomb_gondola_(48762927487).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing dates for Whistler and Blackcomb (OnTheSnow projects May 16, 2027; not announced).",
+      "2026-27 closing dates not announced.",
+      "Rental and lesson prices not on saved pages; date-specific day-ticket prices beyond opening day not captured.",
       "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local 10 days combined with Vail and Beaver Creek, with peak-date restrictions (WB-specific holiday dates to confirm on its holiday-restricted-dates page).",
-      "Confirm the 2026-27 window day-ticket price (only whistler.com's CAD 156/183 advance-style prices are on file).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates (a 2025-26 opening-day post exists on blog.whistlerblackcomb.com).",
-      "Resolve the lift count (34 stated vs 36 in the breakdown) and run count (200+ vs 241 marked runs) from the official page; confirm terrain parks and snowmaking.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Vail Resorts, owner since 2016).",
-      "Confirm precise village, Roundhouse and peak coordinates; the summit weather point is about 5 km from the village because the gondola climbs that far.",
-      "Learning setup: confirm Olympic Station and Blackcomb base learning zones and lesson products.",
-      "YVR coach operators and schedules for 2026-27; BC-99 winter-tire rule dates.",
-      "Avalanche Canada forecast region for the Sea-to-Sky area (out-of-bounds travel).",
-      "Snow report: record the official conditions page and whether any structured feed exists."
+      "Resolve the lift count (34 stated vs 36 in the breakdown) and run count (200+ vs 241 marked runs) from the official page; confirm terrain parks and snowmaking."
     ],
     "conflicts": [
       "Lifts: 34 stated, but the listed breakdown sums to 36. Runs: 200+ vs 241 marked runs in another result. Stored 34 lifts / 200 runs with the breakdown as listed."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain/lift stats and uphill capacity, 2026-27 advance-style prices and season-pass link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it. Snow-report, lift-status and trail-map links follow the URL pattern shared by all Vail Resorts sites (terrain-and-lift-status.aspx and mountain-info.aspx were seen in results for sister resorts); they were not individually opened."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: whistlerblackcomb.com homepage, Snow & Weather Report (opening day Nov 20), Lift Tickets (opening-day prices, 1-Day Pass, advance card), whistler.com lift-ticket page (no prices in the saved text) and Pique (Aug 18, 2026: opening and early-season lift hours)."
   }
 }

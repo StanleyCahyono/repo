@@ -96,31 +96,77 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-27",
-      "text": "Planned operating period 27 Nov 2026 – 4 Apr 2027",
+      "text": "Planned ski operation 27 Nov 2026 – 4 Apr 2027.",
       "announcedOn": null,
       "source": {
         "url": "https://www.saalbach.com/en/winter/ski-resort/operating-hours",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; the Austria opening-dates roundup gives the same dates"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Skicircus operating-hours page: 'Planned operating times winter 2026/27: 27.11.2026 - 04.04.2027: Ski operation in the Skicircus Saalbach Hinterglemm Leogang Fieberbrunn*'. Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'Saalbach-Hinterglemm 27 November 2026 – 4 Apri 2027' ('Weather and snow conditions can shift dates at short notice')."
       }
     },
     "announcedClosing": {
       "date": "2027-04-04",
-      "text": "Planned end 4 Apr 2027",
+      "text": "Planned end of ski operation 4 Apr 2027.",
       "announcedOn": null,
       "source": {
         "url": "https://www.saalbach.com/en/winter/ski-resort/operating-hours",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Skicircus operating-hours page: 'Planned operating times winter 2026/27: 27.11.2026 - 04.04.2027: Ski operation in the Skicircus Saalbach Hinterglemm Leogang Fieberbrunn*'. Austria Tourism newsroom 'Winter is Coming: Ski Opening Dates in Austria' (8 Sept 2026): 'Saalbach-Hinterglemm 27 November 2026 – 4 Apri 2027' ('Weather and snow conditions can shift dates at short notice')."
       }
     },
     "history": [],
     "typicalText": null,
     "notes": "Ticket price periods: winter start 27 Nov – 18 Dec 2026, peak 19 Dec 2026 – 12 Mar 2027, bonus season 13 Mar – 4 Apr 2027."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Schattberg X-press I+II (Saalbach)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:00",
+      "season": "2026-27",
+      "note": "Hours vary by lift (08:00–16:30); single lifts start at 08:00.",
+      "source": {
+        "url": "https://www.saalbach.com/en/winter/ski-resort/operating-hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Lift table: 'A1+A2 Schattberg X-press I+II 08:30 - 16:00'."
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "12er KOGEL II (Hinterglemm)",
+      "days": null,
+      "opens": "08:00",
+      "closes": "16:15",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://www.saalbach.com/en/winter/ski-resort/operating-hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Lift table: 'B2 12er KOGEL II 08:00 - 16:15'."
+      }
+    },
+    {
+      "activity": "lifts",
+      "label": "Hasenauer 8-seater",
+      "days": null,
+      "opens": "08:00",
+      "closes": "16:15",
+      "season": "2026-27",
+      "note": null,
+      "source": {
+        "url": "https://www.saalbach.com/en/winter/ski-resort/operating-hours",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Lift table: 'D2 Hasenauer 8-seater 08:00 - 16:15'."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -135,7 +181,7 @@
       "appliesFrom": "2026-11-27",
       "appliesTo": "2026-12-18",
       "includesTax": null,
-      "note": "Search summary: adult EUR 74.00, 27 Nov – 18 Dec 2026.",
+      "note": "Search summary: adult EUR 74.00, 27 Nov – 18 Dec 2026. Price periods confirmed on the CI-fetched official ticket page (WINTER START 27.11.–18.12.2026, PEAK SEASON 19.12.2026–12.03.2027, BONUS SEASON 13.03.–04.04.2027); the amounts themselves were not in the page text.",
       "source": {
         "url": "https://www.saalbach.com/en/winter/skitickets/skitickets-shlf",
         "verification": "search-summary",
@@ -156,7 +202,7 @@
       "appliesFrom": "2026-12-19",
       "appliesTo": "2027-03-12",
       "includesTax": null,
-      "note": "Search summary: adult EUR 82.00, 19 Dec 2026 – 12 Mar 2027.",
+      "note": "Search summary: adult EUR 82.00, 19 Dec 2026 – 12 Mar 2027. Price periods confirmed on the CI-fetched official ticket page (WINTER START 27.11.–18.12.2026, PEAK SEASON 19.12.2026–12.03.2027, BONUS SEASON 13.03.–04.04.2027); the amounts themselves were not in the page text.",
       "source": {
         "url": "https://www.saalbach.com/en/winter/skitickets/skitickets-shlf",
         "verification": "search-summary",
@@ -177,7 +223,7 @@
       "appliesFrom": "2027-03-13",
       "appliesTo": "2027-04-04",
       "includesTax": null,
-      "note": "Search summary: adult EUR 74.00, 13 Mar – 4 Apr 2027.",
+      "note": "Search summary: adult EUR 74.00, 13 Mar – 4 Apr 2027. Price periods confirmed on the CI-fetched official ticket page (WINTER START 27.11.–18.12.2026, PEAK SEASON 19.12.2026–12.03.2027, BONUS SEASON 13.03.–04.04.2027); the amounts themselves were not in the page text.",
       "source": {
         "url": "https://www.saalbach.com/en/winter/skitickets/skitickets-shlf",
         "verification": "search-summary",
@@ -290,14 +336,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saalbach_hinterglemm.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "Official snow report and live lift-status pages.",
       "Confirm which point is the 2,096 m summit (weather point placed near the Schattberg as a reference).",
       "Past opening and closing dates for an estimated window."
     ],
     "conflicts": [],
-    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of saalbach.com and skiresort pages. Coordinates, weather points, operator description and airport times are Piste reference data or estimates."
+    "confidenceNotes": "Terrain, lift, price and date facts come from web-search summaries of saalbach.com and skiresort pages. Coordinates, weather points, operator description and airport times are Piste reference data or estimates. 2026-10-03: planned season dates, price periods and per-lift hours re-read from CI-fetched official saalbach.com pages (270 km of slopes confirmed). Day prices remain earlier search summaries."
   }
 }

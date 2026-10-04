@@ -7,7 +7,7 @@
   "stateProvince": "Iwate",
   "locality": "Hachimantai city (Appi Kogen)",
   "timezone": "Asia/Tokyo",
-  "operator": null,
+  "operator": "Iwate Hotel and Resort Co., Ltd. (株式会社岩手ホテルアンドリゾート)",
   "priority": 0,
   "location": {
     "lat": 40.003,
@@ -27,7 +27,7 @@
       "url": "https://en.wikipedia.org/wiki/Appi_Kogen_Ski_Resort",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: base 500 m, top 1,328 m, vertical 828 m. The same summary describes Maemoriyama as 1,304 m"
+      "note": "Search summary: base 500 m, top 1,328 m, vertical 828 m. The same summary describes Maemoriyama as 1,304 m. Official site (2026-10-03): gondola to \"the summit of Mt. Maemori at an elevation of 1,304 meters\"."
     }
   },
   "weatherPoints": [
@@ -57,7 +57,7 @@
     "advancedPct": null,
     "terrainParks": null,
     "expertPct": null,
-    "pisteKm": null,
+    "pisteKm": 43,
     "liftsByType": {
       "gondolas": 2,
       "cableCars": null,
@@ -71,7 +71,7 @@
       "url": "https://en.wikipedia.org/wiki/Appi_Kogen_Ski_Resort",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 21 courses on Maemoriyama and Nishimoriyama, half over 2 km long, longest 5.5 km; lift system 16 (2 gondolas, 3 high-speed quad and 11 pair chairlifts). Piste km not stated"
+      "note": "Search summary: 21 courses on Maemoriyama and Nishimoriyama, half over 2 km long, longest 5.5 km; lift system 16 (2 gondolas, 3 high-speed quad and 11 pair chairlifts). Piste km not stated. pisteKm 43 from the official appi.co.jp homepage (read 2026-10-03): \"総滑走距離約43kmを誇る20以上のコース\" / \"over 20 slopes and 43km of skiable terrain\"."
     }
   },
   "features": {
@@ -120,7 +120,7 @@
       }
     ],
     "typicalText": "Opens early December (2025-26 scheduled 5 Dec 2025)",
-    "notes": "No 2026-27 opening date was found."
+    "notes": "No 2026-27 opening or closing date on the saved official pages (2026-10-03); the site sells \"2026-27 Winter Season – Early Bird Plans\" (lodging plans with early-bird lift tickets, prices not shown)."
   },
   "hours": [],
   "prices": [],
@@ -134,7 +134,7 @@
     "seasonPass": null,
     "lessons": null,
     "rentals": null,
-    "webcams": null,
+    "webcams": "https://www.appi.co.jp/live-camera/",
     "parking": null,
     "roadInfo": null,
     "lodging": null,
@@ -199,17 +199,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Appi_Cable_Cars.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Standard 2026-27 adult 1-day price (only the premium BLACK PASS, ¥33,000 for one day, was found for 2026-27). A recent-season day ticket was reported as ¥9,500 regular / ¥4,500 low season, season not stated, so it is not recorded.",
-      "2026-27 opening/closing dates; actual 2025-26 opening and closing dates.",
-      "Live lift-status, snow-report, ticket and trail-map URLs; operator.",
+      "2026-27 adult 1-day lift price, rental and lesson prices — not on any saved page (official site lists early-bird lodging+lift plans only).",
+      "2026-27 opening/closing dates.",
+      "Snow-report, ticket and trail-map URLs (only the live-camera page was found).",
       "Pass access: not on the Ikon or Epic rosters in the shared notes."
     ],
     "conflicts": [
       "Summit: Wikipedia-style top elevation 1,328 m vs Maemoriyama described as 1,304 m; which peak or lift top is 1,328 m was not confirmed."
     ],
-    "confidenceNotes": "Terrain and elevations come from Wikipedia-style search summaries; the 2025-26 opening is a scheduled date. No standard price is recorded. Official homepage, coordinates and airport times are Piste reference data/estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: appi.co.jp homepage (JA/EN), white/green season activity pages and live camera page. They give the operator (copyright line), 43 km / 20+ courses and Mt. Maemori 1,304 m, but no lift prices or 2026-27 dates. Elevation and lift counts remain Wikipedia-style search summaries."
   }
 }

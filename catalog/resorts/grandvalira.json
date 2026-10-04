@@ -24,10 +24,10 @@
     "summitM": 2640,
     "verticalM": 930,
     "source": {
-      "url": "https://www.skiresort.info/ski-resort/grandvalira-pas-de-la-casa-grau-roig-soldeu-el-tarter-canillo-encamp/",
+      "url": "https://www.caranvasports.com/products/grandvalira-lift-pass/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 'situated between the elevations of 1,710 and 2,640 m'; vertical derived"
+      "checkedOn": "2026-10-03",
+      "note": "Caranva Sports: 'over 200 km of skiable slopes between 1,710 and 2,640 metres'. Vertical derived. Matches the earlier skiresort.info summary."
     }
   },
   "weatherPoints": [
@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-04",
-      "text": "Opening of the 2026/2027 season scheduled for 4 Dec 2026, weather permitting (per search summary of Grandvalira's opening/closing FAQ and esquiades.com).",
+      "text": "2026-27 season from 4 December to 4 April (season-pass validity), weather permitting.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.grandvalira.com/en/faqs/general-information/opening-closing-station",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.grandvalira.com/en/ski-pass/season-andorra-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Andorra Pass page: 'Ski all season long, from 4 December to 4 April, and take advantage of the promo price until 9 December' (2026-27 Andorra Pass)."
       }
     },
     "announcedClosing": {
       "date": "2027-04-04",
-      "text": "Planned closing 4 Apr 2027, depending on weather and snow (per search summary).",
+      "text": "Season to 4 April 2027 (season-pass validity).",
       "announcedOn": null,
       "source": {
-        "url": "https://www.grandvalira.com/en/faqs/general-information/opening-closing-station",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.grandvalira.com/en/ski-pass/season-andorra-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Andorra Pass page: 'Ski all season long, from 4 December to 4 April, and take advantage of the promo price until 9 December' (2026-27 Andorra Pass)."
       }
     },
     "history": [],
@@ -124,23 +124,86 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Grandvalira adult 1-day ski pass",
-      "category": "adult (18–64)",
-      "amount": 72,
+      "item": "Grandvalira 1-day ski pass, adult",
+      "category": "adult",
+      "amount": 69,
       "amountMax": null,
       "currency": "EUR",
-      "season": "2026-27",
+      "season": null,
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: 2026/27 adult 18–64 €72; junior 12–17 €61; child 6–11 €47. Official prices may vary by date — confirm on grandvalira.com.",
+      "note": "Season label conflicts on the page (table says 2025/2026, FAQ says 2026/27). Reseller price; official day-pass page not fetched.",
       "source": {
         "url": "https://www.caranvasports.com/products/grandvalira-lift-pass/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of a 2026/27 Grandvalira lift-pass price page (reseller)"
+        "checkedOn": "2026-10-03",
+        "note": "Caranva Sports (reseller) page: table 'GRANDVALIRA LIFT PASS PRICES 2025/2026': Adult €69.00, Junior (12-17) €59.00, Child (6-11) €45.50; its FAQ says 'These are the prices on this page for the 2026/27 season.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Grandvalira 1-day ski pass, junior 12–17",
+      "category": "youth",
+      "amount": 59,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.caranvasports.com/products/grandvalira-lift-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Caranva Sports (reseller) page: table 'GRANDVALIRA LIFT PASS PRICES 2025/2026': Adult €69.00, Junior (12-17) €59.00, Child (6-11) €45.50; its FAQ says 'These are the prices on this page for the 2026/27 season.'"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Grandvalira 1-day ski pass, child 6–11",
+      "category": "child",
+      "amount": 45.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.caranvasports.com/products/grandvalira-lift-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Caranva Sports (reseller) page: table 'GRANDVALIRA LIFT PASS PRICES 2025/2026': Adult €69.00, Junior (12-17) €59.00, Child (6-11) €45.50; its FAQ says 'These are the prices on this page for the 2026/27 season.'"
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Andorra Pass 2026-27 season pass (Grandvalira, Pal Arinsal, Ordino Arcalís), adult 18–64, non-resident promo price",
+      "category": "adult",
+      "amount": 1019,
+      "amountMax": 1433,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€1,019 until 9 Dec 2026, then €1,433 RRP.",
+      "source": {
+        "url": "https://www.grandvalira.com/en/ski-pass/season-andorra-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Andorra Pass page: 'Promo price ... 1.019 € Price valid until 9 December'; 'RRP 1.433 € Price valid from 10 December'; early booking 885 € (until 30 June, sold out). 2026-27 season prices: Adult 1.019€, Junior 930 €, Children 732 €, Senior 65–69 495 €."
       }
     }
   ],
@@ -227,16 +290,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slope_Avet_Soldeu_2024_SL_(2).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Surface lifts and carpets (41 lifts not broken down).",
-      "Official 2026-27 price list (the found price is from a reseller).",
-      "Ikon Pass 2026-27 day allowance for Grandvalira Resorts (listed as an Ikon destination; days not researched).",
-      "Andorra avalanche bulletin URL (not recorded).",
-      "Official live lift-status and snow-report pages."
+      "Official 2026-27 day-pass prices (only a reseller page was fetched; season label unclear).",
+      "Surface lifts and carpets breakdown.",
+      "Official snow report/live status URL.",
+      "Rental and lesson prices."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Area, lift, capacity and season-date figures come from search summaries (dates from the official FAQ). The price is from a reseller page. Coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "conflicts": [
+      "Day pass €72 (earlier search summary of the reseller page) vs €69 on the CI-fetched reseller page (2026-10-03); corrected to €69."
+    ],
+    "confidenceNotes": "2026-10-03: season dates and Andorra Pass prices from the CI-fetched official grandvalira.com pages; day prices from a reseller page. Lift data remains a skiresort.info search summary."
   }
 }

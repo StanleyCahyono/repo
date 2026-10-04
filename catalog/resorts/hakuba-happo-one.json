@@ -106,9 +106,21 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-01",
+        "closed": "2026-05-06",
+        "source": {
+          "url": "https://www.japan-guide.com/e/e6090.html",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "japan-guide.com: Happoone season \"(December 1, 2025 to May 6, 2026)\" — published season dates; actual days may have differed."
+        }
+      }
+    ],
     "typicalText": "Lifts usually start turning in early December, with the full valley open by mid-December; seasons end between late March and early May depending on the resort",
-    "notes": "As of the search, Hakuba 2026-27 opening dates had not been announced. OnTheSnow projects about 4 Dec 2026 for Hakuba Valley (a projection, not an announcement). A 2025-26 opening-dates list gave 1 Dec 2025 for 'Hakuba' without naming the resort. The resort published a separate 2025-26 opening notice (see links)."
+    "notes": "As of the search, Hakuba 2026-27 opening dates had not been announced. OnTheSnow projects about 4 Dec 2026 for Hakuba Valley (a projection, not an announcement). A 2025-26 opening-dates list gave 1 Dec 2025 for 'Hakuba' without naming the resort. The resort published a separate 2025-26 opening notice (see links). skiresort.com (third-party, read 2026-10-03) lists Happo-One 2026-12-04 – 2027-04-18 — a listing, not an announcement."
   },
   "hours": [],
   "prices": [
@@ -125,18 +137,39 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2025-26 figure; the 2026-27 Happo-One price had not been published when searched (to be added by December 2026).",
+      "note": "2025-26 figure (japan-guide lists the 2025-26 season). Happo-One's own ticket page failed to load in the CI fetch; the 2026-27 price was not captured.",
       "source": {
-        "url": "https://japanuncharted.com/nagano/ski/happo-one-lift-tickets",
+        "url": "https://www.japan-guide.com/e/e6090.html",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; attribution approximate (third-party price guides)"
+        "checkedOn": "2026-10-03",
+        "note": "japan-guide.com Hakuba guide (read 2026-10-03, CI page saved under Hakuba 47): Happoone season \"Early December to early May (December 1, 2025 to May 6, 2026)\", 19 lifts, full day 8700 yen, half day 7200 yen, nighter n/a."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Happo-One half-day lift ticket (adult)",
+      "category": "adult half-day",
+      "amount": 7200,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.japan-guide.com/e/e6090.html",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "japan-guide.com Hakuba guide (read 2026-10-03, CI page saved under Hakuba 47): Happoone season \"Early December to early May (December 1, 2025 to May 6, 2026)\", 19 lifts, full day 8700 yen, half day 7200 yen, nighter n/a."
       }
     },
     {
       "subjectType": "lift-ticket",
       "item": "Hakuba Valley Ticket, 1 day, all 10 resorts (adult)",
-      "category": "adult",
+      "category": "adult valley pass",
       "amount": 11100,
       "amountMax": null,
       "currency": "JPY",
@@ -145,13 +178,13 @@
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
-      "includesTax": null,
+      "includesTax": true,
       "note": "Valid at all ten Hakuba Valley resorts. Child ¥6,400. Valid from each resort's opening day (around December 2026) to its closing day (March to early May 2027).",
       "source": {
         "url": "https://www.hakubavalley.com/en/ticket_en/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the official Hakuba Valley lift-ticket page"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Hakuba Valley official Lift Ticket Info (read 2026-10-03, CI page saved under Hakuba 47): \"2026 – 27 SEASON 1day pass Adult 11,100 yen Child 6,400 yen\"; rates include consumption tax; adult 13+; on sale around November."
       }
     }
   ],
@@ -245,7 +278,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.hakubavalley.com/en/weather_en/",
+    "format": "html",
+    "notes": "Hakuba Valley official Weather & Lift status page (read 2026-10-03 via the CI page saved under Hakuba 47; per-resort operation state)."
+  },
   "photo": {
     "src": "asset:photo-hakuba-happo-one.webp",
     "alt": "Happo-One: Hakuba Happoone Winter Resort in Hakuba, Nagano, Japan.",
@@ -254,11 +291,11 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hakuba_Happo-one_Winter_Resort.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "2026-27 opening and closing dates (not announced as of 2026-09-30).",
-      "2026-27 Happo-One single-resort day-ticket price.",
+      "2026-27 Happo-One single-resort day-ticket price, rentals and lessons (happo-one.jp pages timed out in the CI fetch).",
       "Total lift count and chairlift count ('20 lifts and 1 gondola' is ambiguous); Happo-One's own km and course figures.",
       "Actual 2024-25 and 2025-26 opening and closing dates (the 2025-26 opening notice exists but its date was not captured).",
       "Trail map, webcam and avalanche-bulletin URLs."
@@ -266,6 +303,6 @@
     "conflicts": [
       "One search summary claimed Happo-One 'opened December 4, 2026'; a later search showed 4 Dec is OnTheSnow's projection for Hakuba Valley, and other sources say 2026-27 dates are not yet announced. Not recorded as announced."
     ],
-    "confidenceNotes": "Prices (Hakuba Valley 2026-27 official; Happo 2025-26 third-party), elevations and terrain come from search summaries; terrain figures are from third-party listings and partly ambiguous. No 2026-27 date is recorded. Coordinates and airport times are Piste reference estimates."
+    "confidenceNotes": "2026-10-03: all Happo-One CI fetches timed out; facts re-read from pages saved under Hakuba 47 & Goryu — Hakuba Valley Lift Ticket Info (2026-27 valley pass, official) and japan-guide (2025-26 Happo-One prices and season dates). Elevation/terrain remain earlier search summaries."
   }
 }

@@ -62,10 +62,10 @@
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://aresweden.com/skidomraden-liftkort-i-are/",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summaries of Åre tourism, SkiStar and guide pages: 89 runs and 47 lifts across three areas (other results: 90–91 runs, 'around 41–50' lifts); about 100 km of pistes. Lifts include a nearly 3 km aerial tramway to the Åreskutan top area and the historic Bergbanan funicular from the village centre, plus gondolas, chairlifts and drag lifts (counts by type not found). Capacity not found."
+      "url": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official SkiStar Åre page: 'Here you'll find 89 slopes and 47 lifts spread across three unique yet equally fantastic ski areas'; 420 cm annual snowfall. Piste km (100) remains from the earlier aresweden.com search summary."
     }
   },
   "features": {
@@ -90,24 +90,29 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-11",
-      "text": "Official season opening planned with the Ski Test Weekend from 11 Dec 2026; the Bergbanan funicular opens 18 Dec 2026 (SkiStar 2026/27 season-opening page, per search summary).",
+      "text": "Åre by opens 11 Dec 2026 with Ski Test Weekend (earlier if snow permits); Gondolen, Björnen and Duved & Tegefjäll from 18 Dec 2026.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skistar.com/sv/inspiration/nu-oppnar-vara-skidorter/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "url": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/weather-and-slopes/opening-hours-lifts/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiStar Åre lift opening-hours page, 'Dates season 2026/27': Åre by 11 December* – 2 May; Gondolen (H23) 18 December – 25 April; Högzon 8 February – 2 May; Björnen 18 December – 11 April; Duved & Tegefjäll 18 December – 4 April. *Opening in connection with Ski Test Weekend, earlier if snow conditions permit. SkiStar season-opening page: 'Officiell öppning är planerad i samband med Ski Test Weekend från den 11 december.'"
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-05-02",
+      "text": "Åre by and Högzon close 2 May 2027; Gondolen 25 Apr, Björnen 11 Apr, Duved & Tegefjäll 4 Apr 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/weather-and-slopes/opening-hours-lifts/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official SkiStar Åre lift opening-hours page, 'Dates season 2026/27': Åre by 11 December* – 2 May; Gondolen (H23) 18 December – 25 April; Högzon 8 February – 2 May; Björnen 18 December – 11 April; Duved & Tegefjäll 18 December – 4 April. *Opening in connection with Ski Test Weekend, earlier if snow conditions permit."
+      }
     },
     "history": [],
     "typicalText": "Usually December to early May (reference; confirm).",
-    "notes": "News for 2026/27 (SkiStar, per search summary): a new SkiPass for Duved and Tegefjäll, an improved snow guarantee and the return of the '1000-metersliften'. No 2026-27 closing date was found. Past seasons were not captured."
+    "notes": "Staggered sector dates (official SkiStar 2026/27 table). Lift hours are split into 'start of season – 7 February' and '8 February – end of season' tables whose times were not in the page text."
   },
   "hours": [],
   "prices": [
@@ -128,8 +133,8 @@
       "source": {
         "url": "https://www.freeride.se/liftkortspriser-sverige-fjallen/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of a Swedish lift-price comparison (freeride.se)"
+        "checkedOn": "2026-10-03",
+        "note": "freeride.se table 'SVERIGE SKIDORTER LIFTKORTSPRISER 2025/2026': Åre 1 DAG 801 kr, 6 DAGAR 3935 kr ('Dyraste dagskortet kostar 801 kronor')."
       }
     }
   ],
@@ -209,17 +214,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%85re_skistar_-_20260116_-_07.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
+      "2026-27 SkiPass day prices (SEK) on skistar.com (not in the fetched pages).",
+      "Lift times per period (tables collapsed in the page text).",
       "Lifts by type and hourly capacity.",
-      "2026-27 day-pass prices (SEK) and closing date.",
-      "Official English snow-report and live lift-status pages.",
-      "Trondheim (Norway) as an alternative gateway (not in the catalog)."
+      "Official snow-report page; rental and lesson prices."
     ],
     "conflicts": [
       "Runs: 89 vs 90–91; lifts: 47 vs 'around 41–50'."
     ],
-    "confidenceNotes": "Opening date and the (2025-26) price come from search summaries of SkiStar and a Swedish price comparison; size figures from guide summaries. Coordinates are reference data; weather points approximate; the airport time is an estimate."
+    "confidenceNotes": "2026-10-03: 2026/27 sector dates, slope and lift counts re-read from CI-fetched official SkiStar pages; the day price is the 2025/26 figure from freeride.se. Elevations remain an inthesnow.com search summary."
   }
 }

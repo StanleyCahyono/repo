@@ -24,10 +24,10 @@
     "summitM": 1855,
     "verticalM": 1124,
     "source": {
-      "url": "https://www.powderhounds.com/Japan/Honshu/Suginohara.aspx",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: between 731 m and 1,855 m, 1,124 m vertical — the highest resort in Myoko"
+      "url": "https://www.princehotels.com/en/ski/myoko_kogen/",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official Prince Snow Resorts Myoko Suginohara page (read 2026-10-03): \"Peak 1,855m · Vertical Descent 1,124m · Base 731m\"."
     }
   },
   "weatherPoints": [
@@ -71,7 +71,7 @@
       "url": "https://www.powderhounds.com/Japan/Honshu/Suginohara.aspx",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 16 courses served by 1 gondola (8-seat, 3,074 m) and 4 lifts (stored as chairlifts); beginner 40% / intermediate 40% / advanced 20%; longest run 8.5 km. Piste km not stated"
+      "note": "Search summary: 16 courses served by 1 gondola (8-seat, 3,074 m) and 4 lifts (stored as chairlifts); beginner 40% / intermediate 40% / advanced 20%; longest run 8.5 km. Piste km not stated. Official page (2026-10-03) confirms an 8.5 km run."
     }
   },
   "features": {
@@ -95,10 +95,15 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-12",
+      "text": "2026-2027 Season: Scheduled to open on December 12, 2026 (Sat) (tentative)",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.princehotels.com/en/ski/myoko_kogen/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Prince Snow Resorts Myoko Suginohara page (read 2026-10-03): \"2026-2027 Season Scheduled to open on December 12, 2026 (Sat) (tentative)\"."
+      }
     },
     "announcedClosing": {
       "date": null,
@@ -120,7 +125,7 @@
       }
     ],
     "typicalText": "Usually the first half of December to the end of March",
-    "notes": "No 2026-27 opening date was found. Gondola hours reported as 8:30–15:30 (season not stated)."
+    "notes": "2026-27: scheduled to open Dec. 12, 2026 (tentative, official). No closing date published. Gondola hours reported as 8:30–15:30 (earlier search summary; season not stated)."
   },
   "hours": [],
   "prices": [
@@ -221,15 +226,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Snowy_Sugi_trees_(49819552811).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 opening/closing dates.",
-      "Confirm the 1-day price is the 2026-27 figure (season label came from the search summary).",
-      "Piste km, hourly capacity, live lift-status and snow-report URLs.",
-      "Ikon Pass 2026-27 day allowance (listed as an Ikon destination; allowance not researched)."
+      "2026-27 closing date.",
+      "Confirm the ¥8,000 1-day price is the 2026-27 figure (season label came from an earlier search summary; no saved page shows prices).",
+      "Rental and lesson prices; piste km, live lift-status and snow-report URLs.",
+      "Pass access: the official page says the resort \"will be included in Ikon Pass\" (allowance not researched; passes.json not updated by this batch)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Terrain, elevations, price and the 2025-26 opening come from search summaries (Prince Hotels and third-party guides). Coordinates and airport times are Piste reference estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: Prince Snow Resorts Myoko Suginohara page (opening Dec. 12, 2026 tentative; elevation; 8.5 km run; Ikon mention) and Seibu Prince corporate pages. The price and terrain counts remain earlier search summaries."
   }
 }

@@ -153,6 +153,27 @@
         "checkedOn": "2026-09-30",
         "note": null
       }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard package (adults 16+)",
+      "category": "adult",
+      "amount": 75,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Juniors (6-15) $55, toddlers (5 & under) $30; helmet $20. Duration not stated (presumably per day).",
+      "source": {
+        "url": "https://jaypeakresort.com/skiing-riding/rentals-repair/equipment-rentals",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official equipment rentals page, \"2026+27 Rental Equipment\" (fetched 2026-10-03)"
+      }
     }
   ],
   "links": {
@@ -164,7 +185,7 @@
     "tickets": null,
     "seasonPass": "https://jaypeakresort.com/skiing-riding/tickets-passes/202627-season-passes",
     "lessons": null,
-    "rentals": null,
+    "rentals": "https://jaypeakresort.com/skiing-riding/rentals-repair/equipment-rentals",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://newengland511.org/",
@@ -231,24 +252,24 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jay_Peak_Summit_Panorama_-_panoramio.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
       "No resort-announced 2026-27 opening or closing date (OnTheSnow projects Nov 22, 2026).",
       "Confirm Jay Peak's 2026-27 Indy Pass terms (day allowance, Indy Base blackout dates, reservations); it is listed among Indy resorts in 2026-27 coverage (search summary).",
-      "Confirm 2026-27 adult day-ticket prices: $119 weekday / $135 weekend were labelled 2026-27 in a summary, but the official page in the results was the 2025+26 ticket page.",
+      "Confirm 2026-27 adult day-ticket prices: $119 weekday / $135 weekend come from an earlier search summary; the official 2025+26 lift-ticket URL now shows \"Well, this is awkward\" (unpublished) and no 2026+27 lift-ticket page was fetched.",
       "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (Pacific Group Resorts since the 2022 sale out of receivership — reference).",
       "Resolve the summit elevation (advertised vs mapped) and confirm base/summit coordinates (approximations).",
       "Confirm official deep links on jaypeakresort.com (snow report, trail map, tickets, lessons, webcams, parking) and the snow-report format.",
       "Confirm snowmaking %, trail difficulty split, learning area, childcare, tubing and night skiing.",
-      "Montreal-Trudeau (YUL) is a possible alternative airport but involves a border crossing — add with sourced ground times if useful."
+      "Montreal-Trudeau (YUL) is a possible alternative airport but involves a border crossing — add with sourced ground times if useful.",
+      "Beginner group-lesson price (lessons page shows only \"CLOSED\" off-season)."
     ],
     "conflicts": [
       "Summit elevation: the commonly quoted resort summit (~3,968 ft) is higher than the mapped elevation of Jay Peak (~3,858 ft); summitM left null and the summit weather point uses the mapped peak elevation (approx. 1,176 m).",
       "Summit elevation (2026-09-30 search): 3,968 ft summit (consistent with 2,153 ft vertical above a 1,815 ft base) vs a 3,862 ft top elevation in another result (close to the mapped 3,858 ft). Resolution: summitM still null; the summit weather point keeps the mapped elevation.",
       "terrain.trails: 81 vs 80 in different results. Resolution: used 81."
     ],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Base and vertical, terrain (385 acres, 81 trails, 9 lifts incl. the aerial tram) and the Indy Pass listing are search-summary facts; day-ticket prices are recorded with no season because their season label is doubtful. Coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. The OnTheSnow date is a projection; drive/airport times are Piste estimates."
+    "confidenceNotes": "2026+27 rental prices read 2026-10-03 from jaypeakresort.com; the 2026+27 season-pass page lists PGRI sister resorts (operator). Day-ticket prices remain earlier search summaries."
   }
 }

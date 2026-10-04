@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 324,
+    "baseM": 304,
     "summitM": 1097,
     "verticalM": 773,
     "source": {
-      "url": "https://goremountain.com/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Summit ~3,600 ft and vertical ~2,537 ft as commonly advertised; base derived as summit minus vertical (the low point is at the North Creek Ski Bowl; the main base lodge sits higher) The 773 m vertical matches the 2,537 ft found in a 2026-09-30 search summary."
+      "url": "https://goremountain.com/the-mountain/",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Official stats: Gore summit 3,600 ft; Gore base area 1,500 ft (457 m); North Creek Ski Bowl base 998 ft (stored as base); vertical drop 2,537 ft as published (3,600 - 998 would be 2,602 ft, so the published vertical likely uses a different low point)."
     }
   },
   "weatherPoints": [
@@ -49,13 +49,13 @@
     }
   ],
   "terrain": {
-    "trails": 107,
+    "trails": 109,
     "lifts": 14,
-    "skiableAcres": 439,
+    "skiableAcres": 453,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
-    "terrainParks": 7,
+    "terrainParks": 6,
     "expertPct": null,
     "pisteKm": null,
     "liftsByType": {
@@ -66,12 +66,12 @@
       "other": null
     },
     "liftCapacityPerHour": null,
-    "season": "2025-26",
+    "season": "2026-27",
     "source": {
-      "url": "https://en.wikipedia.org/wiki/Gore_Mountain_(ski_resort)",
+      "url": "https://goremountain.com/the-mountain/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30): 107 trails plus 27 glades, 7 freestyle areas (stored as terrain parks) and 11 cross-country/snowshoe loops; 439 skiable acres; 2,537 ft vertical. Lift system stated as 14 total: 1 eight-passenger gondola, 3 high-speed quads, 5 quads, 1 triple and 3 surface lifts — these sum to 13."
+      "checkedOn": "2026-10-03",
+      "note": "Official \"14 Lifts & 108 Trails\" page via search summary (2026-10-03): 109 alpine trails incl. 27 glades and 6 freestyle areas (43 miles), plus 7 cross-country/snowshoe loops; 453 skiable acres; 14 lifts incl. the 8-passenger Northwoods Gondola; longest run 4.4 miles. Lift types (1 gondola, 3 high-speed quads, 5 quads, 1 triple, 3 surface) are from an earlier summary and sum to 13."
     }
   },
   "features": {
@@ -108,13 +108,37 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "OnTheSnow projects Nov 20, 2026 for 2026-27 (a third-party projection, not an announcement; checked 2026-09-30). No 2026-27 opening or closing date found in research as of 2026-09-28. ORDA announced its 2025-26 opening dates for Belleayre, Gore and Whiteface only on 2025-11-21 (see the ORDA release in More links), so 2026-27 dates may not appear until around November 2026. The 2025-26 Gore date itself and past actual opening dates were not captured."
+    "notes": "No official 2026-27 opening or closing date found as of 2026-10-03 (the official report page covers fall gondola rides through Oct 11, 2026 and notes 2026/27 season passes are already valid for scenic skyrides). OnTheSnow gives an estimated start of Nov 20, 2026 and a tentative end of Apr 11, 2027 (third-party projection, not an announcement). ORDA typically announces opening dates in November (2025-26 dates were announced 2025-11-21)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Lifts (snow sports season, late November to mid-April)",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "opens": "08:30",
+      "closes": "16:00",
+      "season": null,
+      "note": "Lifts spin daily 8:30am-4pm.",
+      "source": {
+        "url": "https://goremountain.com/spend-a-snow-day-with-us/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official site via search summary; season year not stated."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (20-64) 1-day lift ticket",
+      "item": "Adult (20-64) 1-day lift ticket, window price",
       "category": "adult",
       "amount": 124,
       "amountMax": null,
@@ -125,25 +149,319 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "OnTheSnow listing: $124 weekday and weekend. The search summary called it 2026-27 but said the listing was last updated Oct 2025, so it may be a 2025-26 rate. ORDA uses date-based pricing; confirm at source.",
+      "note": "Window ticket price, same weekday and weekend. Last updated Oct 21, 2025; season not stated on the page (likely 2025-26). Online advance tickets are date-based and cheaper.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Oct 21, 2025; \"Window Ticket pricing\"; prices supplied to OnTheSnow by the resort."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior (7-12) 1-day lift ticket, window price",
+      "category": "child",
+      "amount": 79,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Window ticket price, same weekday and weekend. Last updated Oct 21, 2025; season not stated on the page (likely 2025-26).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Oct 21, 2025; \"Window Ticket pricing\"; prices supplied to OnTheSnow by the resort."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior (65-69) 1-day lift ticket, window price",
+      "category": "senior",
+      "amount": 99,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Window ticket price, same weekday and weekend. Last updated Oct 21, 2025; season not stated on the page (likely 2025-26).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Oct 21, 2025; \"Window Ticket pricing\"; prices supplied to OnTheSnow by the resort."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child (0-6) 1-day lift ticket, window price",
+      "category": "child 0-6",
+      "amount": 15,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Window ticket price, same weekday and weekend. Last updated Oct 21, 2025; season not stated on the page (likely 2025-26).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Oct 21, 2025; \"Window Ticket pricing\"; prices supplied to OnTheSnow by the resort."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 2-day lift ticket, window price",
+      "category": "adult 2-day",
+      "amount": 248,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Two-day pass: junior $158, senior $130, child (0-6) $30. Last updated Oct 21, 2025; season not stated on the page.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table (fetched 2026-10-03), last updated Oct 21, 2025; \"Window Ticket pricing\"; prices supplied to OnTheSnow by the resort."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day lift ticket, date-based range (advance online to window)",
+      "category": "adult",
+      "amount": 69,
+      "amountMax": 124,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025-26: $124 at the window / same day; $69-$99 when bought online in advance (date-based pricing, cheaper further ahead). The $69-$99 online figures come from an earlier search summary of SkiCentral/SnowStash listings; OnTheSnow's saved page shows the $124 window price. 2026-27 day-ticket prices not found.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow / SkiCentral / SnowStash listings via search summary (2026-10-03), labelled 2025-26."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Adult Frequent Skier Card (ages 20-64)",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 59,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-12-10",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "On sale while supplies last through Dec 10, 2026. 50% off midweek and 25% off weekend/holiday tickets at Gore, Whiteface and Belleayre.",
+      "source": {
+        "url": "https://goremountain.com/tickets-passes/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, midweek",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 62,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card (non-holiday Mon-Fri).",
+      "source": {
+        "url": "https://goremountain.com/tickets-passes/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (20-64) 1-day ticket with Frequent Skier Card, weekend/holiday",
+      "category": "adult (Frequent Skier Card)",
+      "amount": 93,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekend",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Requires the $59 Frequent Skier Card; same rate daily during holiday periods.",
+      "source": {
+        "url": "https://goremountain.com/tickets-passes/frequent-skier-cards/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Frequent Skier Cards page via search summary."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard package incl. helmet, ages 13-64 (1 day)",
+      "category": "adult",
+      "amount": 73,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Adult/teen (13-64) ski or snowboard package incl. helmet: $73 1 day, $139 2 days, $205 3 days, $271 4 days, $337 5 days.",
+      "source": {
+        "url": "https://goremountain.com/tickets-passes/ski-snowboard-rentals/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page via search summary; season not stated."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult & teen 2-hour group lesson, beginner (Levels 1-2), lesson only",
+      "category": "adult",
+      "amount": 99,
+      "amountMax": 119,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$99 midweek, $109 weekends, $119 holidays. Lesson + Learning Area ticket + rental package: $159 / $169 / $179. Novice (Level 3) lesson + all-mountain ticket + rental: $199 / $209 / $219.",
+      "source": {
+        "url": "https://goremountain.com/lesson/class-lessons/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Official Adult & Teen Daily Lessons page via search summary (summary labelled the prices 2026/27)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, adult (30-69)",
+      "category": "adult",
+      "amount": 1259,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "SKI3 Full Season Pass (daily access to Gore, Whiteface and Belleayre). 2026-2027 listing: child (4-6) $130, junior (7-12) $669, adult (30-69) $1,259, senior (70+) $539. OnTheSnow: \"Visit resort website for most up-to-date season pass pricing.\"",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table (fetched 2026-10-03): 2026-2027, \"Price expires: Apr 11, 2027\"; last update Apr 6, 2026."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, junior (7-12)",
+      "category": "child",
+      "amount": 669,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table: 2026-2027."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, senior (70+)",
+      "category": "senior",
+      "amount": 539,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table: 2026-2027."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "SKI3 Full Season Pass, child (4-6)",
+      "category": "child 4-6",
+      "amount": 130,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/gore-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table: 2026-2027."
       }
     }
   ],
   "links": {
     "official": "https://goremountain.com/",
-    "trailMap": null,
+    "trailMap": "https://goremountain.com/the-mountain/trail-maps/",
     "interactiveMap": null,
-    "snowReport": "https://goremountain.com/mountain/snow-report",
+    "snowReport": "https://goremountain.com/the-mountain/conditions/",
     "hours": null,
     "tickets": null,
     "seasonPass": "https://goremountain.com/seasonpasses/",
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://goremountain.com/lesson/class-lessons/",
+    "rentals": "https://goremountain.com/tickets-passes/ski-snowboard-rentals/",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.511ny.org/",
@@ -152,7 +470,7 @@
     "tourism": null,
     "avalanche": null,
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://goremountain.com/the-mountain/conditions/"
   },
   "moreLinks": [
     {
@@ -214,9 +532,9 @@
     "transfers": []
   },
   "reportSource": {
-    "url": null,
-    "format": "unknown",
-    "notes": "The Gore snow-report URL was not found in research. Sibling Belleayre research found ORDA runs Belleayre, Gore and Whiteface on a shared web platform with an HTML snow report, so this one is probably HTML too — unverified. No JSON feed identified."
+    "url": "https://goremountain.com/the-mountain/conditions/",
+    "format": "html",
+    "notes": "Official report page (fetched 2026-10-03; in the off-season it is the \"Activities Report\" with a dated daily report, e.g. \"Updated: 10:00 AM, October 3, 2026\"). In winter it carries trails and lifts open, surface, base depth and weather; printable version at /the-mountain/conditions/print/. No JSON feed identified."
   },
   "photo": {
     "src": "asset:photo-gore-mountain.webp",
@@ -226,24 +544,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ski_003.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2026-27 announced opening and closing dates (ORDA announced 2025-26 dates on 2025-11-21; 2026-27 dates likely around November 2026). Also capture the actual 2024-25 and 2025-26 opening dates.",
-      "Confirm 2026-27 pass access: SKI3 terms and prices, Frequent Skier Card terms, the Snow Pass partner benefit, and whether Gore has any Mountain Collective, Ikon, Epic or Indy access (only Whiteface was named in the ORDA Mountain Collective release).",
-      "Resolve whether the listed SKI3 blackout dates apply to the pass itself or only to the Mountain Collective discount perk.",
-      "Confirm 2026-27 adult day-ticket prices: OnTheSnow lists $124 (ages 20-64, weekday and weekend), but the listing was last updated Oct 2025.",
-      "Confirm daily lift hours, and whether the North Creek Ski Bowl offers night skiing and/or tubing in 2026-27.",
-      "Confirm official deep links on goremountain.com (trail map, lift status, tickets, lessons, webcams, parking); the snow-report link follows the shared ORDA site pattern (as on belleayre.com) and should be checked.",
-      "Resolve the lift inventory (14 stated vs 13 by type) and confirm snowmaking %, learning area, childcare and on-mountain lodging.",
-      "Confirm elevations (base here is derived) and base/summit coordinates (approximations).",
-      "Get a sourced drive time from Ithaca (current value is a Piste estimate)."
+      "Official 2026-27 adult day-ticket prices (OnTheSnow's window prices were last updated Oct 21, 2025; the goremountain.com homepage returned a Cloudflare check).",
+      "Official 2026-27 opening and closing dates.",
+      "Lift inventory by type (14 stated vs 13 by listed type).",
+      "Whether the North Creek Ski Bowl offers night skiing or tubing in 2026-27."
     ],
     "conflicts": [
-      "SKI3 blackouts: a search summary of belleayre.com/mountain-collective listed 2026-12-25–2027-01-01, 2027-01-16–18 and 2027-02-13–21 as blackout dates, while belleayre.com/seasonpasses describes SKI3 as valid even on sold-out days. Unclear whether the dates apply to SKI3 itself or only to the Mountain Collective discount perk; left unresolved (carried over from Belleayre research).",
-      "terrain.liftsByType: 14 lifts stated, but the listed types (1 gondola, 3 high-speed quads, 5 quads, 1 triple, 3 surface lifts) sum to 13. Resolution: kept 14 and the listed types.",
-      "prices: the $124 adult ticket was labelled 2026-27 in the search summary, but the OnTheSnow listing was last updated Oct 2025. Resolution: season left null."
+      "elevation: published vertical 2,537 ft vs summit 3,600 ft minus Ski Bowl base 998 ft = 2,602 ft. Stored the published figures.",
+      "terrain.trails: page title says 108 trails (OnTheSnow also 108), body says 109 alpine trails. Used 109."
     ],
-    "confidenceNotes": "Updated 2026-09-30: terrain (439 acres, 107 trails + 27 glades, 7 freestyle areas, 14 lifts incl. an eight-passenger gondola; types sum to 13) and a $124 adult ticket of uncertain season come from search summaries; the snow-report link is inferred from the shared ORDA site pattern. Low coverage. Researched (search-summary, via sibling Belleayre research, not re-verified): the ORDA operator, SKI3 pass and perks, Frequent Skier Card, Snow Pass partner listing and the 2025-11-21 opening-dates release — links/notes only; pass rules belong in passes.json. Coordinates, elevations (base derived), homepage and lessons/rentals are Piste reference data marked 'unverified'. Weather points are approximate. Drive and airport times are Piste estimates. Dates, prices, hours and terrain counts are deliberately unknown."
+    "confidenceNotes": "CI-fetched pages (2026-10-03): the official report page and OnTheSnow's lift-ticket page; the goremountain.com homepage returned a Cloudflare check. Elevation, terrain, hours, Frequent Skier Card, rental and lesson figures come from earlier search summaries of goremountain.com pages."
   }
 }

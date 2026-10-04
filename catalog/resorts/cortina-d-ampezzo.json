@@ -120,23 +120,65 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Dolomiti Superski 1-day pass, adult, high season",
+      "item": "Dolomiti Superski 1-day pass, adult",
       "category": "adult",
-      "amount": 89,
-      "amountMax": null,
+      "amount": 80,
+      "amountMax": 89,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "peak",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: the adult Dolomiti Superski day pass in high season 2026/27 is EUR 89, valid across the whole Dolomiti Superski network. Local Cortina-only passes were not researched.",
+      "note": "Whole Dolomiti Superski area, 1 adult day: €80 in the promo season (from 20 Nov 2026), €89 in high season (from 20 Dec 2026). 5% off online.",
       "source": {
-        "url": "https://en.neveitalia.it/ski/civettaski/skipass/1001",
+        "url": "https://www.dolomitisuperski.com/en/plan-and-book/skipassandprices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Dolomiti Superski price calculator ('In the whole Dolomiti Superski', '1 Adult', single-day prices per calendar day): 80 € per day from 20 Nov 2026 through 19 Dec 2026 (promo season), 89 € from 20 Dec 2026 (high season); January 2027 prices not rendered in the page text."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, junior",
+      "category": "youth",
+      "amount": 56,
+      "amountMax": 62,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€56 in pre-/low season, €62 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Result title: 'Ski pass Dolomiti Superski 2026/2027'"
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, senior",
+      "category": "senior",
+      "amount": 72,
+      "amountMax": 80,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€72 in pre-/low season, €80 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
       }
     }
   ],
@@ -219,19 +261,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Faloria_Cortina_d%27Ampezzo_10.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Official Cortina ski-area homepage and live lift status page (the Dolomiti Superski live page is general).",
-      "Confirmed 2026-27 opening and closing dates for Cortina.",
-      "Lift types, capacity and difficulty split; confirm the top elevation.",
-      "Veneto avalanche bulletin direct URL (AINEVA homepage and ARPA Veneto homepage on file).",
-      "Ikon Pass day allowance for Dolomiti Superski, and whether days are shared across its areas (not researched)."
+      "Official Cortina ski-area homepage, snow report and live lift status pages.",
+      "Confirmed 2026-27 opening and closing dates for Cortina (the Dolomiti Superski opening list seen covered other valleys).",
+      "Cortina-only day-pass price; rental and lesson prices; lift hours.",
+      "Verify elevation, piste km, lift count, lift types and difficulty split against an official source."
     ],
     "conflicts": [
       "Top elevation 2,930 m vs 'about 1,000 to 2,000 m' in the same summary.",
       "2026-27 opening: 21 Nov, 28 Nov (Dolomiti Superski), 29 Nov and 4 Dec 2026 all appear across search summaries."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. Season dates are unresolved."
+    "confidenceNotes": "On 2026-10-03 only the Dolomiti Superski 2026-27 prices were refreshed (news coverage of the consortium price list); the web-search budget ran out before Cortina-specific dates, stats, hours and links could be checked, so those keep their earlier 2026-09-30 search-summary or unverified sources. 2026-10-03: Dolomiti Superski adult day price (€80 promo / €89 high season) confirmed on the CI-fetched official price calculator."
   }
 }

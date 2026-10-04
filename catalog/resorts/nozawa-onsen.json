@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "Season opening period 28 Nov (Sat) – 18 Dec (Fri) 2026 with 'First Ride' prices; regular season from 19 Dec 2026. Opening depends on snow.",
+      "text": "Winter Fares – Season 2026-2027, Period: November 28th (Sat) – May 5th (Wed); Season's First Ride Nov 28 – Dec 18, 2026",
       "announcedOn": null,
       "source": {
         "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the official ticket-price page. The same search summary (source not isolated) says the resort aims to open on the last weekend of November and managed to in each of the last 3 seasons"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
       }
     },
     "announcedClosing": {
-      "date": "2027-05-06",
-      "text": "skiresort.info lists the 2026-27 season as 28 Nov 2026 – 6 May 2027 (third-party listing; confirm).",
+      "date": "2027-05-05",
+      "text": "Season 2026-2027 period ends May 5th (Wed), 2027; All Season Pass valid to May 5th",
       "announcedOn": null,
       "source": {
-        "url": "https://www.skiresort.info/snow-reports/seasonstart/japan/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of skiresort.info's Japan season-start listing"
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page: \"Period : November 28th (Sat) – May 5th (Wed)\"; Special tickets: \"Spring Season Period: 2027 March 29th (Mon) ～ May 5th (Wed)\"."
       }
     },
     "history": [
@@ -130,13 +130,29 @@
       }
     ],
     "typicalText": "Aims to open on the last weekend of November (managed in each of the last 3 seasons); season listed to early May",
-    "notes": "Regular-season pricing runs 19 Dec 2026 – 28 Mar 2027."
+    "notes": "2026-27 (official): Nov 28, 2026 – May 5, 2027. First Ride Nov 28 – Dec 18; regular Dec 19 – Mar 28; spring Mar 29 – May 5. Season passes ship about a week before resort opening."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "night-skiing",
+      "label": "Night skiing",
+      "days": null,
+      "opens": "17:00",
+      "closes": "20:00",
+      "season": "2026-27",
+      "note": "Night-skiing ticket valid 5 PM to 8 PM on the day of purchase.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day lift ticket (adult), regular season",
+      "item": "1 Day lift ticket (adult), regular season",
       "category": "adult",
       "amount": 7800,
       "amountMax": null,
@@ -144,15 +160,183 @@
       "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-03-28",
+      "includesTax": null,
+      "note": "Regular tickets Dec 19, 2026 – Mar 28, 2027; includes gondola & lifts, not night skiing.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day lift ticket (adult), Season's First Ride",
+      "category": "adult early-season",
+      "amount": 5600,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-28",
+      "appliesTo": "2026-12-18",
+      "includesTax": null,
+      "note": "Early-season special rate (regular ￥7,800).",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/special-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Special & Discount Tickets page (read 2026-10-03): \"Season 2026-27\" — Season's First Ride Nov 28 – Dec 18, 2026: 1 Day adult ￥7,800 → ￥5,600 (child ￥3,400, senior ￥4,500); Spring Mar 29 – May 5, 2027: adult ￥6,100 (child ￥3,600, senior ￥4,900)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day lift ticket (adult), spring season",
+      "category": "adult spring",
+      "amount": 6100,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": "2027-03-29",
+      "appliesTo": "2027-05-05",
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/special-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Special & Discount Tickets page (read 2026-10-03): \"Season 2026-27\" — Season's First Ride Nov 28 – Dec 18, 2026: 1 Day adult ￥7,800 → ￥5,600 (child ￥3,400, senior ￥4,500); Spring Mar 29 – May 5, 2027: adult ￥6,100 (child ￥3,600, senior ￥4,900)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day lift ticket (child, under 15), regular season",
+      "category": "child",
+      "amount": 4700,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Regular season 19 Dec 2026 – 28 Mar 2027. Child (under 15) ¥4,700; senior (over 60) ¥6,300. Discounted 'First Ride' prices apply 28 Nov – 18 Dec 2026 (amounts not captured).",
+      "note": "Junior high school and below; one child up to 5 free per paying adult. First Ride ￥3,400; spring ￥3,600.",
       "source": {
         "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the official ticket-price page"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1 Day lift ticket (senior, 60+), regular season",
+      "category": "senior",
+      "amount": 6300,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "First Ride ￥4,500; spring ￥4,900.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "4 Hours lift ticket (adult)",
+      "category": "adult half-day",
+      "amount": 6700,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Child ￥4,000; senior ￥5,350.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night skiing ticket (adult, 5–8 PM)",
+      "category": "adult night",
+      "amount": 2850,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Child ￥1,700.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2 Days lift ticket (adult, consecutive)",
+      "category": "adult 2-day",
+      "amount": 14500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "3 Days ￥21,200.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/ticket-prices/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ticket Prices page (read 2026-10-03): \"Winter Fares – Season 2026-2027 Period: November 28th (Sat) – May 5th (Wed); Regular Tickets – December 19th (Sat) – March 28 (Sun)\"; 1 Day adult ￥7,800, child (under 15) ￥4,700, senior (over 60) ￥6,300; 4 Hours ￥6,700/4,000/5,350; Night skiing ￥2,850/1,700 (5–8 PM)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "All Season Pass 2026/27 (adult)",
+      "category": "adult",
+      "amount": 102500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Night ski included. Child ￥62,000; senior ￥83,000. Early-bird price (Sep 1–30, 2026) adult ￥93,000 incl. deposit.",
+      "source": {
+        "url": "https://en.nozawaski.com/the-mountain/lift-ticket/season-ticket/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Season Pass page (read 2026-10-03): \"Individual Season Pass – 2026/27 SEASON ... All Season Pass ￥102,500 (￥103,000 with deposit) ... Valid from opening to May 5th\"; early-bird (Sep 1–30, 2026) adult ￥93,000."
       }
     }
   ],
@@ -245,17 +429,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nozawa_Onsen_Dosojin-jinja.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the closing date (6 May 2027 is a skiresort.info listing).",
-      "'First Ride' early-season prices.",
+      "Rental and lesson prices (rental shop pages list shops but no prices).",
       "Live lift-status and snow-report URLs on nozawaski.com.",
-      "Current lift inventory (the 20-lift split is from Wikipedia and may be dated); piste km; hourly capacity.",
-      "Operator (reference lead: the village-backed Nozawa Onsen company) — not confirmed in this pass.",
+      "Current lift inventory (some chairlifts closed definitively: Karasawa Pair, Mizunashi Triple, Yunomine Pair); piste km; capacity.",
+      "Operator not confirmed.",
       "Pass access: not on the Ikon or Epic rosters in the shared notes."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Opening period, 2026-27 prices and elevations come from search summaries of the official en.nozawaski.com pages (weekday check: 28 Nov 2026 is a Saturday, 18 Dec a Friday, consistent with the source). Lift split is from Wikipedia. Coordinates and airport times are Piste reference estimates."
+    "conflicts": [
+      "Closing: official 2026-27 period ends May 5, 2027 (stored); an earlier skiresort.info listing said May 6, 2027."
+    ],
+    "confidenceNotes": "2026-10-03 CI-fetched official en.nozawaski.com pages read directly: portal home, Ticket Prices (2026-27 period and fares), Special & Discount Tickets (2026-27 First Ride / spring), Season Pass (2026/27), IC tickets and rental shops. Elevation/terrain remain earlier search summaries."
   }
 }

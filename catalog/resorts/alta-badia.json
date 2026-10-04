@@ -7,7 +7,7 @@
   "stateProvince": "South Tyrol (Bolzano)",
   "locality": "Corvara, Colfosco, La Villa, San Cassiano, Badia and La Val",
   "timezone": "Europe/Rome",
-  "operator": "Alta Badia lift companies within Dolomiti Superski (reference)",
+  "operator": "Consorzio Impianti a Fune Alta Badia (consortium of the local lift companies; part of Dolomiti Superski)",
   "priority": 0,
   "location": {
     "lat": 46.55,
@@ -24,10 +24,10 @@
     "summitM": 2778,
     "verticalM": 1454,
     "source": {
-      "url": "https://www.skiresort.com/en/ski-resort/alta-badia/",
+      "url": "https://www.alta-badia.org/en/leisure-activities/winter-sports/alta-badia-skiing-area/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 'between the elevations of 1,324 and 2,778 m'. Wikipedia (via search) gives 2,550 m on the Sella group as the lift-served summit around Corvara. Vertical derived as the difference."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary: 130 km of slopes 'between 1,324 and 2,778 m a.s.l.'; the same range appears on skiresort.com. Vertical is the difference."
     }
   },
   "weatherPoints": [
@@ -52,9 +52,9 @@
     "trails": null,
     "lifts": 53,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 57,
+    "intermediatePct": 36,
+    "advancedPct": 7,
     "terrainParks": null,
     "expertPct": null,
     "pisteKm": 130,
@@ -64,8 +64,8 @@
     "source": {
       "url": "https://www.skiresort.com/en/ski-resort/alta-badia/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: 130 km of slopes and 53 lifts. Lift types, capacity and difficulty split not found. Part of the Sella Ronda and Dolomiti Superski. Search summary did not tie this to one result; cited URL is the most likely source."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary: 130 km of slopes (74 km blue, 47 km red, 9 km black) and 53 lifts; the same 130 km / 53 lifts figure appears in the Alta Badia ski-area summary. Difficulty shares computed from km by colour."
     }
   },
   "features": {
@@ -89,42 +89,236 @@
   "season": {
     "season": "2026-27",
     "announcedOpening": {
-      "date": null,
-      "text": null,
+      "date": "2026-12-04",
+      "text": "Alta Badia winter season 4 Dec 2026 – 4 Apr 2027 (Sellaronda if the connections can open).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Alta Badia 'Lifts, slopes & snow' page shows the winter season '04.12.2026 - 04.04.2027'; lift table lists e.g. Falzarego–Lagazuoi cable car 05.12.2026 – 03.04.2027, 09:00 – 16:30."
+      }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-04",
+      "text": "Season ends 4 Apr 2027.",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Alta Badia 'Lifts, slopes & snow' page shows the winter season '04.12.2026 - 04.04.2027'; lift table lists e.g. Falzarego–Lagazuoi cable car 05.12.2026 – 03.04.2027, 09:00 – 16:30."
+      }
     },
     "history": [],
-    "typicalText": "Early December to early April (projected 2026-27: 4 Dec 2026 – 4 Apr 2027 — estimate)",
-    "notes": "No confirmed Alta Badia announcement. Search summaries list 4 Dec 2026 – 4 Apr 2027 (described as estimated/tentative), while Dolomiti Superski's tentative area-wide start is 28 Nov 2026 (closing 11 Apr 2027)."
+    "typicalText": "Early December to early April (2026-27: 4 Dec 2026 – 4 Apr 2027)",
+    "notes": "Dolomiti Superski pre-season prices apply from 28 Nov 2026; the first Dolomiti Superski lifts (Obereggen) start 27 Nov 2026. FIS World Cup on the Gran Risa 20–21 Dec 2026."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Col Alto and most Alta Badia lifts (typical)",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:15",
+      "season": "2026-27",
+      "note": "Times vary by lift (08:30–09:00 start, 16:15–16:30 close).",
+      "source": {
+        "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift table: Col Alto and other lifts listed 08:30 – 16:15 (others 08:45 or 09:00 – 16:15; Falzarego–Lagazuoi 09:00 – 16:30)."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Dolomiti Superski 1-day pass, adult, high season",
+      "item": "Dolomiti Superski 1-day pass, adult",
       "category": "adult",
-      "amount": 89,
-      "amountMax": null,
+      "amount": 80,
+      "amountMax": 89,
       "currency": "EUR",
       "season": "2026-27",
-      "dayType": "peak",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: the adult Dolomiti Superski day pass in high season 2026/27 is EUR 89, valid across the whole Dolomiti Superski network. An Alta Badia-only adult day pass was EUR 77 in 2024-25 (older figure; 2026-27 local price not found).",
+      "note": "Whole Dolomiti Superski area, 1 adult day: €80 in the promo season (from 20 Nov 2026), €89 in high season (from 20 Dec 2026). 5% off online.",
       "source": {
-        "url": "https://en.neveitalia.it/ski/civettaski/skipass/1001",
+        "url": "https://www.dolomitisuperski.com/en/plan-and-book/skipassandprices",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Dolomiti Superski price calculator ('In the whole Dolomiti Superski', '1 Adult', single-day prices per calendar day): 80 € per day from 20 Nov 2026 through 19 Dec 2026 (promo season), 89 € from 20 Dec 2026 (high season); January 2027 prices not rendered in the page text."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, junior",
+      "category": "youth",
+      "amount": 56,
+      "amountMax": 62,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€56 in pre-/low season, €62 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Result title: 'Ski pass Dolomiti Superski 2026/2027'"
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Dolomiti Superski 1-day pass, senior",
+      "category": "senior",
+      "amount": 72,
+      "amountMax": 80,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "€72 in pre-/low season, €80 in high season. Pre-/low season: 28 Nov–19 Dec 2026, 10–30 Jan 2027 and from 21 Mar 2027; high season: 20 Dec 2026–9 Jan 2027 and 31 Jan–20 Mar 2027.",
+      "source": {
+        "url": "https://www.dovesciare.it/news/2026-10-02/dolomiti-superski-ecco-i-prezzi-degli-skipass-linverno-20262027",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Dolomiti Superski 2026-27 price list as reported 2 Oct 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alta Badia local 1-day pass, adult",
+      "category": "adult",
+      "amount": 70,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Alta Badia-only pass, 2025-26 rate (2026-27 local rates not yet found). Half day €56.",
+      "source": {
+        "url": "https://funivie.it/en/ski-passes/alta-badia/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Alta Badia 2025-26 rate table."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alta Badia local 1-day pass, child",
+      "category": "child",
+      "amount": 49,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Alta Badia-only pass, 2025-26 children's rate.",
+      "source": {
+        "url": "https://funivie.it/en/ski-passes/alta-badia/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Alta Badia 2025-26 rate table."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alta Badia local 1-day pass, senior",
+      "category": "senior",
+      "amount": 63,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Alta Badia-only pass, 2025-26 senior rate.",
+      "source": {
+        "url": "https://funivie.it/en/ski-passes/alta-badia/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the Alta Badia 2025-26 rate table."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski rental, adult skis, 1 day",
+      "category": "adult",
+      "amount": 25,
+      "amountMax": 59,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Alta Badia Sport (San Cassiano / La Villa): skis from €25 (Base) to €59 (Stöckli) per day; boots (€19/day) and poles (€3/day) are priced separately. Season not stated.",
+      "source": {
+        "url": "https://altabadiasport.it/en/ski-rental-alta-badia/rental-prices",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the shop's rental price list (per-item day rates). Second-pass check on 2026-10-03 could not re-open the page."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski boot rental, adult, 1 day",
+      "category": "adult",
+      "amount": 19,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Alta Badia Sport (San Cassiano / La Villa): boots €19 per day, rented separately from skis. Season not stated.",
+      "source": {
+        "url": "https://altabadiasport.it/en/ski-rental-alta-badia/rental-prices",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the shop's rental price list (per-item day rates). Second-pass check on 2026-10-03 could not re-open the page."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Adult group ski lessons, 5 days",
+      "category": "adult",
+      "amount": 290,
+      "amountMax": 300,
+      "currency": "EUR",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Ski & Snowboard School La Villa; price depends on the season period. Season not stated.",
+      "source": {
+        "url": "https://www.scuolascilavilla.it/en/group-lessons-for-adults-ski-school-la-villa-alta-badia.php",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the school's adult group-lesson page."
       }
     }
   ],
@@ -136,7 +330,7 @@
     "hours": null,
     "tickets": "https://www.altabadia.org/en/alta-badia-skipass-prices/skipass-dolomites",
     "seasonPass": null,
-    "lessons": null,
+    "lessons": "https://www.altabadia.org/en/ski-school-alta-badia-dolomites",
     "rentals": null,
     "webcams": null,
     "parking": null,
@@ -211,7 +405,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.altabadia.org/en/open-lifts-snow-report-dolomites",
+    "format": "html",
+    "notes": "Alta Badia \"Lifts, slopes & snow\" page (open lifts, slopes and snow)."
+  },
   "photo": {
     "src": "asset:photo-alta-badia.webp",
     "alt": "Alta Badia: Alta badia, Alto Adige, Italia.",
@@ -220,17 +418,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alta_Badia.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirmed 2026-27 opening and closing dates for Alta Badia.",
-      "Lift types, capacity and difficulty split; confirm the top elevation.",
-      "Local Alta Badia day-pass price for 2026-27; Ikon Pass day allowance for Dolomiti Superski (not researched)."
+      "Alta Badia local (area-only) pass prices for 2026-27; rental and lesson prices for 2026-27.",
+      "Lift-type breakdown and uphill capacity."
     ],
     "conflicts": [
-      "Top elevation 2,778 m (skiresort.com) vs 2,550 m (Wikipedia).",
-      "Opening 4 Dec 2026 (estimate) vs Dolomiti Superski tentative start 28 Nov 2026."
+      "Lift count: 53 (Alta Badia ski-area summary) vs 51 (Wikipedia: 1 funicular, 1 aerial tramway, 10 gondolas, 30 chairlifts, 11 surface lifts)."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "Researched 2026-10-03 by web search; resort pages could not be opened directly from the build environment, so facts carry search-summary sources. Dolomiti Superski 2026-27 prices and the 4 Dec 2026 opening come from news coverage of the consortium announcements. 2026-10-03: season dates and per-lift times re-read from the CI-fetched official altabadia.org lift page; official ski-pass page confirms 130 piste km and a 5% online discount (no price figures in text). Dolomiti Superski prices remain dovesciare.it search summaries."
   }
 }

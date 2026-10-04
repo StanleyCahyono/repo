@@ -108,23 +108,23 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Via Lattea 1-day pass, adult",
+      "item": "Via Lattea 1-day pass, adult (high season, online)",
       "category": "adult",
       "amount": 58.5,
       "amountMax": null,
       "currency": "EUR",
-      "season": null,
-      "dayType": "any",
+      "season": "2026-27",
+      "dayType": "peak",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: EUR 58.50 for a single adult day (described as valid for Sauze d'Oulx, Sansicario and Sestriere); season and exact scope not confirmed.",
+      "note": "Third-party guide citing Vialattea; ticket office about €2 more. Whole Via Lattea (400 km, 70 lifts).",
       "source": {
-        "url": "https://monsguide.com/guides/resort-guides/sauze-doulx/ski-area-and-lift-passes/",
+        "url": "https://monsguide.com/guides/resort-guides/sauze-doulx/lift-passes-ski-area/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary did not tie this to one result; cited URL is the most likely source."
+        "checkedOn": "2026-10-03",
+        "note": "monsguide.com 'Sauze d'Oulx & Via Lattea Lift Pass Prices 2026/27' (last updated August 2026): '1 day €58.50'; 'they are 2026/27 season prices, published by Vialattea and checked in August 2026 — adult, high season, bought online'; 'Buying online saves a flat two euros per day against the ticket office'; 'one tariff across the whole Milky Way, so these are the same prices you would pay in Sestriere'."
       }
     }
   ],
@@ -220,16 +220,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sestriere_at_Vialattea.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Announced 2026-27 opening (28 Nov 2026 unconfirmed) and closing dates.",
+      "Announced 2026-27 opening (28 Nov 2026 unconfirmed) and closing dates (vialattea.it returned 'Access Denied' to the CI fetch).",
       "Lift types, capacity and difficulty split; Sestriere-sector-only figures.",
-      "Confirm the day price, season and scope; live lift status and snow report pages on vialattea.it.",
-      "Piedmont avalanche bulletin direct URL (AINEVA and ARPA Piemonte homepages on file).",
-      "Pass access: Via Lattea is not in the Ikon or Epic rosters on file."
+      "Low/mid-season and child/senior prices; live lift status and snow report."
     ],
     "conflicts": [],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'. 2026-10-03: €58.50 adult day (2026/27, high season, online) confirmed on the CI-fetched monsguide.com page; official site blocked."
   }
 }

@@ -131,13 +131,50 @@
       }
     ],
     "typicalText": "Usually mid-June to mid-October; in 2026 the opening slipped to 27 Jun because of a late start to winter.",
-    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30 (NZSki's 2027 3 Peak Pass was still listed as 'Coming Soon' — https://www.theremarkables.co.nz/passes-packages/). OnTheSnow labels the 2026 NZ winter '2026/2027', so its 'projected' dates describe winter 2026, not 2027. "
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30 (NZSki's 2027 3 Peak Pass was still listed as 'Coming Soon' — https://www.theremarkables.co.nz/passes-packages/). OnTheSnow labels the 2026 NZ winter '2026/2027', so its 'projected' dates describe winter 2026, not 2027.  Official homepage (2026-10-03) lists a \"Closing Day & Pond Skim\" to send off the 2026 season and a 2027 Season Pass Super Early Bird sale; 2027 dates not announced. The proposed Doolans expansion would add 262 ha (to 711 ha)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Superpass full-day access",
+      "days": null,
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": null,
+      "note": "Lift-pass access window 9am-4pm (Superpass / OnTheSnow).",
+      "source": {
+        "url": "https://www.theremarkables.co.nz/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage https://www.theremarkables.co.nz/ (read 2026-10-03): SUPERPASS \"9am-4pm ... A full day, all-access Lift Pass. Choose to ski at Coronet Peak, The Remarkables, Mt Hutt and 9 more New Zealand ski areas ... $180 Per Day ($180 Total | Adult)\"."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day adult lift pass (16–64)",
+      "item": "Superpass full-day lift pass (9am-4pm), adult 16-64, 1 day",
+      "category": "adult",
+      "amount": 180,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Valid at Coronet Peak, The Remarkables, Mt Hutt and 9 more NZ ski areas; no bookings, no holiday blackouts; per-day rate falls with more days. Season not stated beside the price (winter 2026 has just ended; OnTheSnow lists the same $180 for Winter 2026).",
+      "source": {
+        "url": "https://www.theremarkables.co.nz/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage https://www.theremarkables.co.nz/ (read 2026-10-03): SUPERPASS \"9am-4pm ... A full day, all-access Lift Pass. Choose to ski at Coronet Peak, The Remarkables, Mt Hutt and 9 more New Zealand ski areas ... $180 Per Day ($180 Total | Adult)\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Superpass 1-day, adult 16-64 (OnTheSnow)",
       "category": "adult",
       "amount": 180,
       "amountMax": null,
@@ -148,12 +185,117 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Winter 2026 (season id 2025-26) per the 2026-season section of the search summary; same price weekday and weekend. 2-day adult NZ$340.",
+      "note": "Winter 2026 (OnTheSnow labels it 2025-2026). Same weekday and weekend. (Coronet Peak OnTheSnow page, which states the Superpass covers The Remarkables; The Remarkables OnTheSnow page timed out.)",
       "source": {
-        "url": "https://www.onthesnow.com/new-zealand/the-remarkables/lift-tickets",
+        "url": "https://www.onthesnow.com/new-zealand/coronet-peak/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (may come from the resort's own page https://www.theremarkables.co.nz/all-passes/lift-passes)"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 14, 2026\": adult (16-64) weekday/weekend NZ$180, half day 135, two-day 340, week 720 — \"Superpass Full-day lift pass (9am - 4pm) - for Coronet Peak, The Remarkables and Mt Hutt\". Season-pass table labelled 2025-2026 (3 Peak adult $1,595)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Half-day lift pass, adult 16-64",
+      "category": "adult half-day",
+      "amount": 135,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/coronet-peak/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 14, 2026\": adult (16-64) weekday/weekend NZ$180, half day 135, two-day 340, week 720 — \"Superpass Full-day lift pass (9am - 4pm) - for Coronet Peak, The Remarkables and Mt Hutt\". Season-pass table labelled 2025-2026 (3 Peak adult $1,595)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2-day Superpass, adult 16-64",
+      "category": "adult 2-day",
+      "amount": 340,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Week pass $720.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/coronet-peak/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 14, 2026\": adult (16-64) weekday/weekend NZ$180, half day 135, two-day 340, week 720 — \"Superpass Full-day lift pass (9am - 4pm) - for Coronet Peak, The Remarkables and Mt Hutt\". Season-pass table labelled 2025-2026 (3 Peak adult $1,595)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "2027 3 Peak Season Pass (Coronet Peak, The Remarkables, Mt Hutt), adult — Super Earlybird",
+      "category": "adult",
+      "amount": 1095,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-10-31",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2027 pass (catalog season 2026-27); Super Earlybird price, sale ends 31 Oct 2026. The Winter 2026 equivalent was $1,595 adult (OnTheSnow).",
+      "source": {
+        "url": "https://www.mthutt.co.nz/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official NZSki Mt Hutt homepage (read 2026-10-03): \"Sale Ends 31 Oct — 2027 3 PEAK SEASON PASS ... Over 1100ha of terrain across Coronet Peak, The Remarkables & Mt Hutt ... No holiday blackouts ... FREE Night Skiing at Coronet Peak ... $1095 Per Pass\"."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "First Timer Package (learner lift pass + group lesson 10am-3:30pm + rentals), Coronet & Remarkables",
+      "category": "adult",
+      "amount": 270,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated beside the price.",
+      "source": {
+        "url": "https://www.theremarkables.co.nz/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage https://www.theremarkables.co.nz/ (read 2026-10-03): FIRST TIMER PACKAGE (Coronet & Remarkables) — Learner Area Lift Pass, Group Lesson 10am-3:30pm, equipment rentals (skis/boots, poles/wrist guards, helmet) \"$270 Per Package\"; LIFT, LESSON & RENTAL PACKAGE \"$390 Per Day Package ($390 Total | Adult)\"."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Lift, Lesson & Rental Package (full-day lift + group lesson + rentals), adult, 1 day",
+      "category": "adult",
+      "amount": 390,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Per day; more days cheaper. Season not stated beside the price.",
+      "source": {
+        "url": "https://www.theremarkables.co.nz/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage https://www.theremarkables.co.nz/ (read 2026-10-03): FIRST TIMER PACKAGE (Coronet & Remarkables) — Learner Area Lift Pass, Group Lesson 10am-3:30pm, equipment rentals (skis/boots, poles/wrist guards, helmet) \"$270 Per Package\"; LIFT, LESSON & RENTAL PACKAGE \"$390 Per Day Package ($390 Total | Adult)\"."
       }
     }
   ],
@@ -246,11 +388,11 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Remarkables_(1126885451).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
+      "Winter 2027 day-ticket, rental and lesson prices (most NZSki sub-pages were blocked by a Cloudflare check in the CI fetch).",
+      "2027 season dates (not announced on saved pages).",
       "Confirm which official page is the live lift/run status page (the 'mountain info' page is used as the snow report link).",
       "Confirm published lift hours, access-road rules (chains) and shuttle operators for 2027.",
       "Confirm the official snow-report / lift-status page (likely an NZSki 'mountain info' page).",
@@ -261,6 +403,6 @@
       "Lift count: 8 (4 chairlifts + 4 magic carpets) vs 7 lifts in another result.",
       "Opening 2026: OnTheSnow projected 21 Jun vs the announced 27 Jun opening (SnowBrains) — 27 Jun used."
     ],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, area, lifts, 2026 opening/closing, 2025 dates and the day price come from search summaries (confirm at source); coordinates, operator and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI fetch: the official homepage(s) (https://www.theremarkables.co.nz/; Mt Hutt homepage for the 2027 passes) and OnTheSnow were read directly; all other NZSki sub-pages returned a Cloudflare \"Just a moment...\" page. Elevation and terrain remain earlier search summaries."
   }
 }

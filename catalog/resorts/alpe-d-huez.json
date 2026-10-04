@@ -7,7 +7,7 @@
   "stateProvince": "Auvergne-Rhône-Alpes (Isère)",
   "locality": "Alpe d'Huez, Auris-en-Oisans, Oz-en-Oisans, Vaujany, Villard-Reculas",
   "timezone": "Europe/Paris",
-  "operator": "SATA group — reference, confirm",
+  "operator": "SATA Group (Société d'Aménagement Touristique de l'Alpe d'Huez et des Grandes Rousses)",
   "priority": 0,
   "location": {
     "lat": 45.0922,
@@ -20,14 +20,14 @@
     }
   },
   "elevation": {
-    "baseM": 1860,
+    "baseM": 1135,
     "summitM": 3330,
-    "verticalM": 1470,
+    "verticalM": 2200,
     "source": {
-      "url": "https://skipass.alpedhuez.com/hiver/en/home-2/",
-      "verification": "unverified",
-      "checkedOn": "2026-09-30",
-      "note": "Piste reference data — confirm at source. Base = Alpe d'Huez village about 1,860 m (reference); summit 3,330 m (Pic Blanc) per search summary of the official ski-pass site. Vertical is village to summit; the satellite villages (Oz-en-Oisans, Vaujany and others) sit several hundred metres lower — confirm the lowest lift altitude"
+      "url": "https://www.alpedhuez.com/en/summer/types-apidae/domaine-skiable-types-apidae/alpe-dhuez-grand-domaine-ski-4/",
+      "verification": "search-summary",
+      "checkedOn": "2026-10-03",
+      "note": "Search summary of the Alpe d'Huez tourist-office ski-area page: 2,200 m vertical from Pic Blanc (3,330 m) down to l'Enversin d'Oz (1,135 m), the lowest point of the Grand Domaine; vertical is the published round figure (3,330 − 1,135 = 2,195). Alpe d'Huez village itself sits at about 1,860 m."
     }
   },
   "weatherPoints": [
@@ -51,7 +51,7 @@
   "terrain": {
     "trails": 111,
     "lifts": 67,
-    "skiableAcres": null,
+    "skiableAcres": 2076,
     "beginnerPct": null,
     "intermediatePct": null,
     "advancedPct": null,
@@ -60,12 +60,12 @@
     "pisteKm": 250,
     "liftsByType": null,
     "liftCapacityPerHour": null,
-    "season": null,
+    "season": "2026-27",
     "source": {
-      "url": "https://skipass.alpedhuez.com/hiver/en/home-2/",
+      "url": "https://skipass.alpedhuez.com/hiver/en/discover-alpe-dhuez-ski-resort/",
       "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Figures describe the Alpe d'Huez Grand Domaine (5 villages). Search summary of the official ski-pass site: 250 km of slopes, 111 runs, 67 lifts, top 3,330 m. Lift types, hourly capacity and the colour split were not found; skiresort.info describes mainly gondolas and chairlifts, with a few drag lifts as practice lifts in the valleys."
+      "checkedOn": "2026-10-03",
+      "note": "Search summary of the official SATA ski-area pages: 250 km of slopes, 111 runs, 67 lifts, top at Pic Blanc 3,330 m. Skiable area 840 ha (tourist-office ski-area page, search summary), converted to acres (840 ha ≈ 2,076 acres). Lift types, hourly capacity and a complete colour split were not published in the results (a summary listed 36 green, 29 blue and 16 black runs without the red count)."
     }
   },
   "features": {
@@ -90,32 +90,149 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-12-05",
-      "text": "Alpe d'Huez opens 5 Dec 2026 (France Montagnes 2026-27 opening list, per search summary).",
+      "text": "Ski area open 5 Dec 2026 – 25 Apr 2027 (official ski-pass site); all linked villages (Alpe d'Huez, Auris, Oz-Vaujany, Villard-Reculas) open together.",
       "announcedOn": null,
       "source": {
         "url": "https://www.france-montagnes.com/en/experiences/ski-areas-opening-dates-season-26-27/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "France Montagnes 26-27 list: Alpe d'Huez opens Saturday 5 Dec 2026 ('dates announced by the resorts, subject to weather and snow conditions'). Matches the earlier search summary of the official SATA page (5 Dec 2026 – 25 Apr 2027)."
       }
     },
     "announcedClosing": {
-      "date": null,
-      "text": null,
+      "date": "2027-04-25",
+      "text": "Ski area closes 25 Apr 2027 (official ski-pass site).",
       "announcedOn": null,
-      "source": null
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/winter-resort-opening/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official SATA site: 'from December 5, 2026, to April 25, 2027'."
+      }
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-06",
+        "closed": "2026-04-19",
+        "source": {
+          "url": "https://skipass.alpedhuez.com/hiver/en/opening-hours/",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "Search summary of the official opening-hours page: 'December 6, 2025 to April 19, 2026'."
+        }
+      }
+    ],
     "typicalText": "Usually early December to late April (reference; confirm).",
-    "notes": "No 2026-27 closing date was found. Past seasons were not captured."
+    "notes": "Previous season (2025-26) ran 6 Dec 2025 – 19 Apr 2026 per the official opening-hours page (search summary). Day-pass rates: full rate 19 Dec 2026 – 9 Apr 2027; the search summary also mentioned reduced early- and late-season rates (amounts not captured, exact periods unconfirmed — see research conflicts)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "ticket-office",
+      "label": "Main ski-pass offices (Grandes Rousses, Bergers)",
+      "days": null,
+      "opens": "08:45",
+      "closes": "16:45",
+      "season": "2025-26",
+      "note": "Times vary with visitor numbers; village sales points (Villard-Reculas, Auris, Allemond, Oz 3300, Vaujany) keep their own hours (about 08:25–08:45 to 15:45–16:45). Lift hours were not stated on the official pages found.",
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/opening-hours/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official opening-hours page (2025-26 season)"
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Alpe d'Huez Grand Domaine adult 1-day ski pass",
-      "category": "adult (13–64)",
+      "item": "Alpe d'Huez Grand Domaine 1-day ski pass, adult 13–64",
+      "category": "adult",
       "amount": 68,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Official full rate, valid 19 Dec 2026 – 9 Apr 2027; reduced rates apply 5–12 Dec 2026 and 10–18 Apr 2027 (not captured). Other day products: half day €59.00, from 3 pm €42.50.",
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/day-or-half-day-ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ski-pass site (2026-27 day passes)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alpe d'Huez Grand Domaine 1-day ski pass, child 5–12",
+      "category": "child",
+      "amount": 56.5,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Official full rate, valid 19 Dec 2026 – 9 Apr 2027.",
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/day-or-half-day-ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ski-pass site (2026-27 day passes)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alpe d'Huez Grand Domaine 1-day ski pass, senior 65–71",
+      "category": "senior",
+      "amount": 62,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Official full rate, valid 19 Dec 2026 – 9 Apr 2027. Grand senior 72+: €23.50.",
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/day-or-half-day-ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ski-pass site (2026-27 day passes)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Alpe d'Huez Grand Domaine half-day ski pass, adult",
+      "category": "adult (half day)",
+      "amount": 59,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-19",
+      "appliesTo": "2027-04-09",
+      "includesTax": null,
+      "note": "Half-day pass; an end-of-day pass from 3 pm costs €42.50. Category kept distinct from \"adult\" so the day-cost estimate never uses this half-day price as a full-day ticket.",
+      "source": {
+        "url": "https://skipass.alpedhuez.com/hiver/en/day-or-half-day-ski-pass/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of the official ski-pass site (2026-27 day passes)"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "ESF adult group ski lessons, 6 mornings (2h45 a day), low season",
+      "category": "adult",
+      "amount": 260,
       "amountMax": null,
       "currency": "EUR",
       "season": "2026-27",
@@ -124,12 +241,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary (labelled 2026-27): adult 13–64 €68.00; child 5–12 €56.50; senior 65–71 €62.00; 72+ €23.50; half day €59.00; from 3 pm €42.50. Confirm the season on the official site.",
+      "note": "'From' price; low season = whole season except Christmas (20 Dec 2026 – 2 Jan 2027) and February holidays (7 Feb – 6 Mar 2027), when 6 mornings of 2h30 cost from €275. Beginner to advanced levels; lift pass and rental not included.",
       "source": {
-        "url": "https://skipass.alpedhuez.com/hiver/en/all-skipasses/",
+        "url": "https://www.esf-alpedhuez.com/ski-alpin/adultes/cours-collectifs/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the official ski-pass site (Alpe d'Huez)"
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of ESF Alpe d'Huez adult group-lesson page (2026-27)"
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "ESF adult group ski lessons, 6 mornings (2h30 a day), Christmas holidays",
+      "category": "adult",
+      "amount": 275,
+      "amountMax": null,
+      "currency": "EUR",
+      "season": "2026-27",
+      "dayType": "holiday",
+      "purchaseBy": null,
+      "appliesFrom": "2026-12-20",
+      "appliesTo": "2027-01-02",
+      "includesTax": null,
+      "note": "'From' price; the same €275 applies in the February holidays (7 Feb – 6 Mar 2027).",
+      "source": {
+        "url": "https://www.esf-alpedhuez.com/ski-alpin/adultes/cours-collectifs/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Search summary of ESF Alpe d'Huez adult group-lesson page (2026-27)"
       }
     }
   ],
@@ -137,13 +275,13 @@
     "official": "https://www.alpedhuez.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
-    "hours": null,
-    "tickets": "https://skipass.alpedhuez.com/hiver/en/all-skipasses/",
+    "snowReport": "https://www.alpedhuez.com/en/weather/",
+    "hours": "https://skipass.alpedhuez.com/hiver/en/opening-hours/",
+    "tickets": "https://skipass.alpedhuez.com/hiver/en/day-or-half-day-ski-pass/",
     "seasonPass": "https://skipass.alpedhuez.com/hiver/en/new-annual-pass/",
-    "lessons": null,
+    "lessons": "https://www.esf-alpedhuez.com/ski-alpin/adultes/cours-collectifs/",
     "rentals": null,
-    "webcams": null,
+    "webcams": "https://skipass.alpedhuez.com/hiver/en/webcams/",
     "parking": null,
     "roadInfo": null,
     "lodging": null,
@@ -151,7 +289,7 @@
     "tourism": null,
     "avalanche": "https://meteofrance.com/meteo-montagne",
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://skipass.alpedhuez.com/hiver/en/ski-area-opening/"
   },
   "moreLinks": [
     {
@@ -212,7 +350,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.alpedhuez.com/en/weather/",
+    "format": "html",
+    "notes": "Official Alpe d'Huez tourist-office weather and snow page (snow depth, fresh snow, last snowfall), found via search; open runs and lifts are on the SATA 'Zones open for skiing' page (https://skipass.alpedhuez.com/hiver/en/ski-area-opening/). No JSON feed identified. Page not fetched directly (fetches blocked in this build)."
+  },
   "photo": {
     "src": "asset:photo-alpe-d-huez.webp",
     "alt": "Alpe d'Huez: L'Alpe d'Huez",
@@ -221,16 +363,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alpe-dhuez-arrivee-tour.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lifts by type, hourly capacity and colour split for the Grand Domaine.",
-      "2026-27 closing date.",
-      "Lowest lift altitude in the linked villages (for base elevation and vertical).",
-      "Confirm the day prices are 2026-27 (the summary labelled them so).",
-      "Official live lift-status and snow-report pages."
+      "Reduced early/late-season day-pass rates and their exact periods (search summary said 5–12 Dec 2026 and 10–18 Apr 2027, which leaves 13–18 Dec and 19–25 Apr uncovered).",
+      "Daily lift operating hours (only ticket-office hours found).",
+      "Lifts by type, hourly capacity and full colour split.",
+      "Rental prices for 2026-27 (an undated MGM Sports 6–7-day pack price from a chain-wide page was removed on 2026-10-03).",
+      "CI-fetched official pages (alpedhuez.com, skipass.alpedhuez.com 'All ski passes') list products but no prices, so the 2026-27 day-pass prices remain search-summary only."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Size, lift total, top elevation and day price come from a search summary of the official ski-pass site; the opening date from France Montagnes' list. Base elevation, coordinates and operator are reference data; weather points approximate; airport times are estimates."
+    "conflicts": [
+      "Rate calendar vs season dates (search summaries of official SATA pages): the season is listed as 5 Dec 2026 – 25 Apr 2027, but the day-pass periods quoted were reduced 5–12 Dec 2026, full 19 Dec 2026 – 9 Apr 2027 and reduced 10–18 Apr 2027, leaving 13–18 Dec 2026 and 19–25 Apr 2027 without a rate. One of the two may be incomplete; confirm on skipass.alpedhuez.com."
+    ],
+    "confidenceNotes": "Web pages could not be fetched in this build, so every fact is from search summaries of the named pages (mostly the official SATA ski-pass site and the tourist office). Coordinates are reference data; weather points approximate; airport times are estimates. Adversarial re-check on 2026-10-03 could not open any cited page (WebFetch blocked by the egress proxy on every domain tried, web-search budget exhausted), so these search-summary facts remain unconfirmed at source; only internal consistency was checked (calendar weekdays, age bands, rate windows, unit conversion). 2026-10-03 CI-fetched pages: the France Montagnes 26-27 opening list confirms the 5 Dec 2026 opening; the official ski-pass overview page confirms 2026/27 season and annual passes (early booking before 1 Oct / 20 Nov) but shows no prices; the tourist-office homepage states 'more than 250 km of slopes'."
   }
 }

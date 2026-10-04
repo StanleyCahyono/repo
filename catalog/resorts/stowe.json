@@ -27,7 +27,7 @@
       "url": "https://www.stowe.com/the-mountain/about-the-mountain/mountain-info.aspx",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary (2026-09-30): highest lift-served skiing 3,625 ft (1,105 m) and 2,360 ft (719 m) vertical; Mt. Mansfield summit 4,395 ft (Vermont's highest). Base (386 m) derived as top minus vertical."
+      "note": "Search summary (2026-09-30): highest lift-served skiing 3,625 ft (1,105 m) and 2,360 ft (719 m) vertical; Mt. Mansfield summit 4,395 ft (Vermont's highest). Base (386 m) derived as top minus vertical. SnowStash (fetched 2026-10-03) agrees: summit 3,625 ft, 2,360 ft vertical, base 1,266 ft."
     }
   },
   "weatherPoints": [
@@ -106,7 +106,19 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-11-28",
+        "closed": "2026-04-26",
+        "source": {
+          "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "SnowStash: \"The 2025-26 season at Stowe ran from 28 November 2025 to 26 April 2026.\""
+        }
+      }
+    ],
     "typicalText": null,
     "notes": "No confirmed 2026-27 opening date on file as of 2026-09-30. OnTheSnow projects Nov 20, 2026 (a third-party projection, not an announcement). Vail Resorts released its 2026/27 opening dates on Aug 18, 2026, but the search summary did not show Stowe's date — check the release (More links). For reference, Okemo, Stowe and Mount Snow targeted Sat Nov 22, 2025 for 2025-26 (announced Oct 29, 2025) — a target, not a confirmed opening day."
   },
@@ -114,23 +126,86 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (date-based)",
+      "item": "Adult Daily Ticket (18-64)",
       "category": "adult",
       "amount": 169,
       "amountMax": 239,
       "currency": "USD",
-      "season": "2026-27",
+      "season": null,
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Aggregator (snowstash.com): 2026/27 day tickets from $169, peak $239. Vail prices vary by date and advance purchase. Confirm at source.",
+      "note": "Season not clearly stated (see source note). Vail prices vary by date and advance purchase. Up to $239 peak.",
       "source": {
         "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": null
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Apr 26, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Half-Day Afternoon Ticket (from 12:30 PM), ages 13-99",
+      "category": "adult half-day",
+      "amount": 139,
+      "amountMax": 199,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note). Vail prices vary by date and advance purchase.",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Apr 26, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Youth Daily Ticket (13-17)",
+      "category": "youth",
+      "amount": 159,
+      "amountMax": 229,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note). Vail prices vary by date and advance purchase.",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Apr 26, 2026 and to \"check back for next season's opening date and ticket pricing\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child Daily Ticket (6-12)",
+      "category": "child",
+      "amount": 149,
+      "amountMax": 219,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not clearly stated (see source note). Vail prices vary by date and advance purchase.",
+      "source": {
+        "url": "https://snowstash.com/usa/vermont/stowe/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash (third party, fetched 2026-10-03). Title says 2026/27 but the page says the 2025-26 season closed Apr 26, 2026 and to \"check back for next season's opening date and ticket pricing\"."
       }
     }
   ],
@@ -210,9 +285,10 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ski_Grab_(3373142977).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
+      "2026-27 day-ticket prices and season label: SnowStash ($169-$239 adult) has a 2026/27 title but a 2025-26 body; official ticket prices not in fetched page text. Rental and lesson prices not found.",
       "No confirmed 2026-27 opening or closing date (OnTheSnow projects Nov 20, 2026; check the Vail Resorts 18 Aug 2026 opening-dates release).",
       "Confirm 2026-27 pass access (which products include this resort, day limits, blackouts, reservations).",
       "Confirm the operator (Vail Resorts since 2017 — reference) and which 2026-27 Epic products include Stowe, with any holiday restrictions or reservation rules.",
@@ -224,7 +300,11 @@
       "Transit leads to confirm: a free Mountain Road shuttle between Stowe village and the resort; Amtrak's Vermonter stops at Waterbury.",
       "VT-108 through Smugglers' Notch closes in winter — relevant for any routing from the north."
     ],
-    "conflicts": [],
-    "confidenceNotes": "Partly researched on 2026-09-30 (search summaries). Elevations, terrain (116 trails, 12 lifts by type, 485 acres, 16/55/29 split), 83% snowmaking and the 2026/27 $169–$239 aggregator day-ticket range are search-summary facts. Identity, coordinates, operator and the lessons/rentals/lodging flags remain Piste reference data. Snow-report and trail-map links follow the standard Vail site pattern (lift-status page seen in results). The OnTheSnow date is a projection; drive/airport times are Piste estimates; pass access was not re-researched."
+    "conflicts": [
+      "SnowStash title \"Lift Tickets 2026/27\" vs body \"2025-26 season closed ... check back for next season's ticket pricing\"; season left null.",
+      "Trail count: 116 runs (SnowStash text, stored) vs 126 trails (SnowStash ticket blurbs).",
+      "Difficulty: SnowStash gives 16/55/15/14 (beginner/intermediate/advanced/expert); stored advanced 29% equals advanced + expert."
+    ],
+    "confidenceNotes": "Prices and 2025-26 dates from SnowStash (third party) fetched 2026-10-03; stowe.com pages (homepage, snow report: \"closed for the winter season\") confirm the Vail Resorts operator and report URL. Elevation/terrain are earlier search summaries of the official mountain-info page."
   }
 }

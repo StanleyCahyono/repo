@@ -136,12 +136,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27 peak-day adult ticket $369. Vail Resorts prices dynamically and sells cheaper tickets 4+ weeks ahead; non-peak and advance prices were not captured.",
+      "note": "2026-27 peak-day adult ticket $369 — \"better understood as the ceiling for a peak ski day\"; Park City prices dynamically and advance/non-peak dates are cheaper (not captured). 2025-26 peak was about $354 after fees.",
       "source": {
         "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of TownLift (Sep 2026) and other 2026-27 price roundups."
+        "checkedOn": "2026-10-03",
+        "note": "TownLift (Sep 4, 2026, read 2026-10-03): \"For the 2026-27 season, a peak-day adult lift ticket at Park City Mountain will cost $369\"."
       }
     }
   ],
@@ -149,7 +149,7 @@
     "official": "https://www.parkcitymountain.com/",
     "trailMap": "https://www.parkcitymountain.com/the-mountain/about-the-mountain/trail-map.aspx",
     "interactiveMap": null,
-    "snowReport": "https://www.parkcitymountain.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    "snowReport": "https://www.parkcitymountain.com/the-mountain/mountain-conditions/weather-report.aspx",
     "hours": null,
     "tickets": null,
     "seasonPass": null,
@@ -209,7 +209,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.parkcitymountain.com/the-mountain/mountain-conditions/weather-report.aspx",
+    "format": "html",
+    "notes": "Official Weather & Snow Report page (read 2026-10-03): base depth, current season total, daytime/overnight snow and forecasts for Canyons Village and Mountain Village base/mid-mountain."
+  },
   "photo": {
     "src": "asset:photo-park-city-mountain.webp",
     "alt": "Park City: The Eagle Race Arena at Park City Mountain Resort, this area was the GS and snowboard halfpipe venue at the Salt Lake 2002 Olympics. CB's Ru",
@@ -218,22 +222,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eagle_Race_Arena_at_Park_City_Resort.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing dates (per base area) — not found as of 2026-09-30.",
+      "2026-27 closing dates (not announced on saved pages).",
+      "Non-peak and advance-purchase 2026-27 day-ticket prices, child/senior, rental and lesson prices — no Park City ticket page was among the CI-fetched pages.",
+      "Opening date Nov. 20, 2026 rests on search summaries of the Vail Resorts release (the release page failed to load in the CI fetch).",
       "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local unlimited with holiday restrictions (Nov. 27-28, Dec. 26-31, 2026; Jan. 16, Feb. 13-14, 2027).",
-      "Confirm non-peak and advance-purchase 2026-27 day-ticket prices (only the $369 peak price is on file).",
-      "Capture the actual 2025-26 closing dates (Mountain Village and Canyons) and 2024-25 dates.",
       "Confirm the trail count, lift types and ability split (only acres and 41 lifts were captured), plus terrain parks, snowmaking, night skiing and tubing.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Vail Resorts, owner since 2014).",
-      "Learning setup: confirm the First Time lift area, Canyons Village learning terrain, carpets and lesson products.",
-      "Labor: a ski-patrol strike in late Dec 2024 to early Jan 2025 limited terrain (reference); check whether any labor issue affects 2026-27.",
-      "Park City Transit 2026-27 routes and SLC shuttle operators; parking rules and prices at both bases.",
-      "Snow report: record the official conditions page and whether any structured feed exists."
+      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27."
     ],
     "conflicts": [],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, 2025-26 opening, acreage and lift count, the 2026-27 peak ticket price and the stats page. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it. Snow-report, lift-status and trail-map links follow the URL pattern shared by all Vail Resorts sites (terrain-and-lift-status.aspx and mountain-info.aspx were seen in results for sister resorts); they were not individually opened."
+    "confidenceNotes": "2026-10-03 CI fetch: parkcitymountain.com homepage and Weather & Snow Report page, plus TownLift (Sep 4, 2026) 2026-27 peak price, read directly. The Vail Resorts opening-dates release failed to load; the Nov. 20 opening remains a search summary."
   }
 }

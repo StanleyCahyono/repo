@@ -90,35 +90,35 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-21",
-      "text": "Grindelwald-Wengen 21 Nov 2026 – 25 Apr 2027; Grindelwald-First 19 Dec 2026 – 29 Mar 2027",
+      "text": "Grindelwald-Wengen (Männlichen) open daily 21 Nov 2026 – 25 Apr 2027; Grindelwald-First 19 Dec 2026 – 29 Mar 2027; Mürren-Schilthorn 21 Nov 2026 – 2 May 2027.",
       "announcedOn": null,
       "source": {
-        "url": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/grindelwald-wengen/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://grindelwald.swiss/en/service/operating-status/winter-sports-report.html",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Grindelwald Tourismus winter sports report: 'Grindelwald-Männlichen: open daily from 21 November 2026 to 25 April 2027; Grindelwald-First: open daily from 19 December 2026 to 29 March 2027; Mürren-Schilthorn: open daily from 21 November 2026 to 2 May 2027. Subject to change.' jungfrau.ch Grindelwald-Wengen page: 'Closed — opens 21.11.2026'."
       }
     },
     "announcedClosing": {
       "date": "2027-04-25",
-      "text": "Grindelwald-Wengen closes 25 Apr 2027 (Grindelwald-First 29 Mar 2027)",
+      "text": "Grindelwald-Wengen closes 25 Apr 2027 (First 29 Mar 2027; Mürren-Schilthorn 2 May 2027).",
       "announcedOn": null,
       "source": {
-        "url": "https://www.jungfrau.ch/en-gb/jungfrau-ski-region/grindelwald-wengen/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary. Search summary did not tie this to one result; cited URL is the most likely source."
+        "url": "https://grindelwald.swiss/en/service/operating-status/winter-sports-report.html",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Grindelwald Tourismus winter sports report: 'Grindelwald-Männlichen: open daily from 21 November 2026 to 25 April 2027; Grindelwald-First: open daily from 19 December 2026 to 29 March 2027; Mürren-Schilthorn: open daily from 21 November 2026 to 2 May 2027. Subject to change.' jungfrau.ch Grindelwald-Wengen page: 'Closed — opens 21.11.2026'."
       }
     },
     "history": [],
     "typicalText": "Late November to late April for Grindelwald-Wengen (2026-27 schedule); First mid-December to late March",
-    "notes": "Mürren-Schilthorn dates not captured."
+    "notes": "Mürren-Schilthorn: 21 Nov 2026 – 2 May 2027 (official). Ski-region pass sold for 21.11.2026–25.04.2027."
   },
   "hours": [],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Jungfrau Ski Region day pass, adult — 'from' price",
+      "item": "Jungfrau Ski Region ski pass (1 day), adult — \"from\" price",
       "category": "adult",
       "amount": 79,
       "amountMax": null,
@@ -129,12 +129,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Search summary: Jungfrau Ski Region passes start from CHF 79 for 2026-27 (dynamic). Multi-day adult 2026/27 examples: 4 days CHF 299 (high season), 5 days CHF 354, 6 days CHF 404, 7 days CHF 450 (tour-operator listing).",
+      "note": "Dynamic 'from' price; window/peak price not stated. Covers Grindelwald-Wengen, Grindelwald-First and Mürren-Schilthorn.",
+      "source": {
+        "url": "https://www.jungfrau.ch/de-ch/preise-und-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official jungfrau.ch 'Preise und Tickets': 'Skipass Jungfrau Ski Region 21.11.2026 – 25.04.2027 ab CHF 79.–' (211 piste km in Grindelwald, Wengen and Mürren). English Grindelwald-Wengen page: 'from CHF 79.– Jungfrau Ski Region ski pass'."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Jungfrau Ski Pass (3+ days), adult — \"from\" price",
+      "category": "adult multi-day",
+      "amount": 165,
+      "amountMax": null,
+      "currency": "CHF",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
       "source": {
         "url": "https://www.jungfrau.ch/en-gb/prices-and-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary did not tie this to one result; cited URL is the most likely source. Multi-day figures likely from https://www.swissholidayco.com/Ski/Jungfrau-Lift-Passes"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official 'Prices and tickets': 'Jungfrau Ski Pass (3+ days) from CHF 165'."
       }
     }
   ],
@@ -208,7 +229,11 @@
     ]
   },
   "recentReports": [],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://grindelwald.swiss/en/service/operating-status/winter-sports-report.html",
+    "format": "html",
+    "notes": "Official Grindelwald Tourismus winter sports report (CI-fetched 2026-10-03): lifts (x/62), piste km (x/200.41), snow report, toboggan runs and season dates; off-season at fetch. HTML only."
+  },
   "photo": {
     "src": "asset:photo-grindelwald-wengen.webp",
     "alt": "Grindelwald-Wengen: Wengen, Switzerland, from the train, 2012",
@@ -217,16 +242,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:1_wengen_2012.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Lift types and capacity for Grindelwald-Wengen; totals for the whole Jungfrau Ski Region.",
-      "Confirm the top elevation (2,400 m in the summary) and Mürren-Schilthorn dates/figures.",
-      "English version of the live piste data page (German page on file)."
+      "Window/peak and child/senior day prices (only 'from CHF 79' in the page text).",
+      "Lift types and capacity for Grindelwald-Wengen; whole-region totals (62 lifts and 200.41 km on the winter report; '211 Pistenkilometer' on jungfrau.ch).",
+      "Lift hours for 2026-27 (report still shows 13.12.2024 – 06.04.2026)."
     ],
     "conflicts": [
       "Jungfrau Ski Region total given as 210 or 211 km."
     ],
-    "confidenceNotes": "Built from web-search summaries only (page fetches blocked). Lift, piste and elevation figures come largely from aggregator listings (skiresort.info/.com, OnTheSnow and similar) and can differ from official figures. Coordinates, operator, features and airport transfer times are Piste reference data or estimates marked 'unverified'."
+    "confidenceNotes": "2026-10-03: season dates, 'from' day price and snow-report URL re-read from CI-fetched official jungfrau.ch and grindelwald.swiss pages. Elevations/terrain remain earlier skiresort.info search summaries."
   }
 }
