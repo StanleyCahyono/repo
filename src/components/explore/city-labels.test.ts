@@ -45,4 +45,19 @@ describe('city labels', () => {
     const many = Array.from({ length: 200 }, (_, i) => city(`C${i}`, 5 + (i % 20) * 0.5, 44 + Math.floor(i / 20) * 0.5, 5))
     expect(layoutCities(many, cam, W, H, { blockers: [], max: 10 }).length).toBeLessThanOrEqual(10)
   })
+
+  it('always labels the home city beside the home marker, ahead of bigger places', () => {
+    const home = project(10, 46.5, cam, W, H)
+    const cities = [city('Bigcity', 10.6, 46.5, 3, 5e6), city('Hometown', 10, 46.5, 7, 5e4)]
+    const out = layoutCities(cities, cam, W, H, { blockers: [], max: 1, home })
+    expect(out).toHaveLength(1)
+    expect(out[0]).toMatchObject({ name: 'Hometown', atHome: true })
+  })
+
+  it('ranks towns near a resort ahead of farther places of the same importance', () => {
+    const near = project(11.41, 47.28, cam, W, H)
+    const cities = [city('Farville', 7, 45.2, 6, 9e5), city('Innsbruck', 11.41, 47.28, 6, 1.5e5)]
+    const out = layoutCities(cities, cam, W, H, { blockers: [], max: 1, resorts: [{ x: near.x + 30, y: near.y + 20 }] })
+    expect(out.map((c) => c.name)).toEqual(['Innsbruck'])
+  })
 })

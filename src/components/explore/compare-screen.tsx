@@ -13,7 +13,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Award, CalendarDays, CircleCheck, CircleHelp, CircleSlash, LoaderCircle, Plane, Car, Ticket, X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
@@ -127,7 +127,7 @@ export function CompareScreen({ view }: { view: CompareView }) {
         <CompareColumns view={view} sections={sections} onRemove={removeColumn} />
       </div>
 
-      <p className="hud text-[11.5px] leading-relaxed tracking-[0.08em] text-ink-2">
+      <p className="hud text-[12px] leading-relaxed tracking-[0.08em] text-ink-2">
         ◇ Scores describe suitability for the day, not safety · Prices are Piste estimates from
         recorded snapshots · Unknown values are never ranked
       </p>
@@ -252,6 +252,8 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
 
 /** The decision in one line: who leads on score, cost, drive and beginner terrain (only when known and distinct). */
 function Highlights({ view }: { view: CompareView }) {
+  // Reduced motion: no reveal at all, so content below the fold is never waiting to be scrolled to.
+  const reduced = useReducedMotion()
   const name = (id: string | null) => (id ? (view.columns.find((c) => c.id === id)?.card.shortName ?? id) : null)
   const items: { label: string; value: string | null; detail: string | null }[] = [
     {
@@ -280,11 +282,11 @@ function Highlights({ view }: { view: CompareView }) {
       {items.map((i, k) => (
         <motion.div
           key={i.label}
-          initial={{ opacity: 0, y: 14 }}
+          initial={reduced ? false : { opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...t.pageIn, delay: k * 0.06 }}
-          className={cn('flex min-w-0 flex-col gap-1.5 rounded-[24px] px-5 py-4', i.value ? 'glass' : 'border border-dashed border-divider-strong')}
+          className={cn('flex min-w-0 flex-col gap-1.5 rounded-[24px] px-5 py-4 motion-reduce:transform-none! motion-reduce:opacity-100!', i.value ? 'glass' : 'border border-dashed border-divider-strong')}
         >
           <span className="hud text-ink-2">{i.label}</span>
           {i.value ? (
@@ -316,7 +318,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
     <div className="flex min-w-0 flex-col gap-2.5">
       <div className="group/art relative">
         <ResortArt id={r.id} name={r.name} media={r.media} variant="banner" className="h-[120px] rounded-[20px] transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover/art:scale-[1.015]" />
-        <span aria-hidden className="hud absolute top-2.5 left-3 rounded-full bg-glass-strong px-2 py-0.5 text-[11px] text-ink-2">
+        <span aria-hidden className="hud absolute top-2.5 left-3 rounded-full bg-glass-strong px-2 py-0.5 text-[12px] text-ink-2">
           {String(index + 1).padStart(2, '0')}
         </span>
         <button
@@ -333,7 +335,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
         <Link href={r.href} className="text-[20px] leading-tight font-semibold tracking-[-0.01em] text-ink decoration-teal/60 underline-offset-[3px] hover:text-teal hover:underline">
           {r.shortName}
         </Link>
-        <p className="hud mt-1 text-[11.5px] text-ink-2">{r.place}</p>
+        <p className="hud mt-1 text-[12px] text-ink-2">{r.place}</p>
       </div>
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="inline-flex items-center gap-1.5 text-[12.5px] text-ink-2">
@@ -352,6 +354,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
 }
 
 function CompareTable({ view, sections, onRemove }: { view: CompareView; sections: SectionDef[]; onRemove: (id: string) => void }) {
+  const reduced = useReducedMotion()
   const cols = view.columns
   const [hover, setHover] = useState<number | null>(null)
   const colTint = (ci: number) => (hover === ci ? 'bg-[color-mix(in_srgb,var(--teal)_6%,transparent)]' : '')
@@ -384,7 +387,7 @@ function CompareTable({ view, sections, onRemove }: { view: CompareView; section
           </tr>
         </thead>
         {sections.map((sec) => (
-          <motion.tbody key={sec.key} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -60px 0px' }} transition={t.pageIn}>
+          <motion.tbody key={sec.key} initial={reduced ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -60px 0px' }} transition={t.pageIn} className="motion-reduce:transform-none! motion-reduce:opacity-100!">
             <tr>
               <th colSpan={cols.length + 1} scope="colgroup" className="border-t border-divider px-5 pt-6 pb-2 text-left">
                 <span className="hud text-teal">{sec.title}</span>
@@ -394,7 +397,7 @@ function CompareTable({ view, sections, onRemove }: { view: CompareView; section
             {sec.rows.map((row) => (
               <tr key={row.key} className="align-top">
                 <th scope="row" className="border-t border-[color-mix(in_srgb,var(--ink)_7%,transparent)] px-5 py-4 text-left font-normal">
-                  <span className="hud text-[11.5px] text-ink-2">{row.label}</span>
+                  <span className="hud text-[12px] text-ink-2">{row.label}</span>
                 </th>
                 {cols.map((c, ci) => (
                   <td
@@ -511,7 +514,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
                 <dl className="flex flex-col gap-3">
                   {s.rows.map((row) => (
                     <div key={row.key} className="flex flex-col gap-1">
-                      <dt className="hud text-[11.5px] text-ink-2">{row.label}</dt>
+                      <dt className="hud text-[12px] text-ink-2">{row.label}</dt>
                       <dd className="text-[14px] text-ink">
                         <Cell row={row} c={c} view={view} />
                       </dd>
@@ -655,6 +658,7 @@ function buildSections(view: CompareView): SectionDef[] {
 }
 
 function ElevationCell({ c, max }: { c: CompareColumn; max: number }) {
+  const reduced = useReducedMotion()
   const m = c.mountain
   if (m.baseM === null && m.summitM === null) return <Missing label="Elevation unknown" />
   const base = m.baseM ?? 0
@@ -664,7 +668,7 @@ function ElevationCell({ c, max }: { c: CompareColumn; max: number }) {
       {/* The track (which has a size) watches the viewport; the bar grows from its base once it is in view. */}
       <motion.span
         aria-hidden
-        initial="hidden"
+        initial={reduced ? 'show' : 'hidden'}
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
         className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]"

@@ -74,7 +74,7 @@ export function ResortArt({
     <div className={cn(base, className)}>
       <TopoArt seed={id} density={variant === 'thumb' ? 0.7 : 1} />
       {variant === 'banner' ? (
-        <span aria-hidden className="hud absolute bottom-2.5 left-3 text-[11px] text-ink-2">
+        <span aria-hidden className="hud absolute bottom-2.5 left-3 text-[12px] text-ink-2">
           Terrain art · no photo
         </span>
       ) : null}

@@ -19,6 +19,7 @@ import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Button } from '@/components/ui/button'
 import { EmptyState } from '@/components/ui/states'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { useToast } from '@/components/ui/toast'
 import { passLineFromVerdict, type CardPassLine } from '@/components/resort/card-data'
 import { COMPARE_MAX, COMPARE_MIN, useCompareSelection } from '@/components/resort/card-compare'
@@ -505,8 +506,10 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
 
 function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; label: string }; count: number }[]; current: string; onPick: (key: string) => void }) {
   return (
-    <div role="group" aria-label="Jump to region" className="glass-strong pointer-events-auto flex max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]">
-      {jumps.map(({ def, count }) => {
+    // The glass pill clips; the row inside scrolls and fades whichever edge has more regions past it.
+    <div className="glass-strong pointer-events-auto max-w-full overflow-hidden rounded-full p-1.5">
+      <ScrollRow role="group" aria-label="Jump to region" className="flex max-w-full gap-1 rounded-full [scrollbar-width:none]">
+        {jumps.map(({ def, count }) => {
         const on = def.key === current
         return (
           <button
@@ -522,7 +525,7 @@ function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; lab
             {on ? <motion.span layoutId="explore-jump" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
             <span className="relative">{def.label}</span>
             {def.key !== 'world' ? (
-              <span className={cn('tnum relative text-[11.5px]', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>
+              <span className={cn('tnum relative text-[12px]', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>
                 <span className="sr-only">, </span>
                 {count}
                 <span className="sr-only"> resorts</span>
@@ -530,7 +533,8 @@ function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; lab
             ) : null}
           </button>
         )
-      })}
+        })}
+      </ScrollRow>
     </div>
   )
 }
@@ -808,6 +812,8 @@ function CompareBar({ scenario }: { scenario: { date: string; mode: string; prod
 /** How much of the day's evidence exists — mission-control tiles that count up as they enter. */
 function Evidence({ view }: { view: ExploreView }) {
   const c = view.counts
+  // Reduced motion: the tiles are simply there (no reveal waiting for the viewport).
+  const reduced = usePrefersReducedMotion()
   const items = [
     { label: 'Status reported', n: c.total - c.statusUnknown },
     { label: 'Scored for the day', n: c.withScore },
@@ -819,11 +825,11 @@ function Evidence({ view }: { view: ExploreView }) {
       {items.map((i, k) => (
         <motion.div
           key={i.label}
-          initial="hidden"
+          initial={reduced ? 'show' : 'hidden'}
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
           variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { ...t.pageIn, delay: k * 0.06 } } }}
-          className="glass flex min-w-0 flex-col gap-2 rounded-[22px] px-4 py-3.5 md:px-5 md:py-4"
+          className="glass flex min-w-0 flex-col gap-2 rounded-[22px] px-4 py-3.5 motion-reduce:transform-none! motion-reduce:opacity-100! md:px-5 md:py-4"
         >
           <span className="hud text-ink-2">{i.label}</span>
           <span className="flex items-baseline gap-1.5">

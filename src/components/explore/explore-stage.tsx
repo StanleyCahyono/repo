@@ -353,7 +353,14 @@ export function ExploreStage({
   )
   useEffect(() => () => void (anim.current && cancelAnimationFrame(anim.current)), [])
 
-  const framed = useMemo<Bounds>(() => frame ?? boundsOf(points) ?? [home.lon - 3, home.lat - 2, home.lon + 3, home.lat + 2], [frame, points, home.lon, home.lat])
+  // A region frame keeps a little context around its resorts (10% each side), so the nearby cities and the coast
+  // around the edge resorts are on screen too.
+  const framed = useMemo<Bounds>(() => {
+    const b = frame ?? boundsOf(points) ?? [home.lon - 3, home.lat - 2, home.lon + 3, home.lat + 2]
+    const dx = Math.max(0.6, (b[2] - b[0]) * 0.1)
+    const dy = Math.max(0.4, (b[3] - b[1]) * 0.1)
+    return [Math.max(-180, b[0] - dx), Math.max(-80, b[1] - dy), Math.min(180, b[2] + dx), Math.min(84, b[3] + dy)]
+  }, [frame, points, home.lon, home.lat])
   const padRef = useRef(padding)
   useEffect(() => {
     padRef.current = padding
@@ -630,7 +637,6 @@ export function ExploreStage({
       const { x, y } = project(p.lon, p.lat, settled, w, h)
       return { id: p.id, name: p.name, x, y, priority: p.id === selectedId ? 3 : p.favorite ? 1 : 0, extra: p.favorite ? STAR_W : 0, p }
     })
-    ;(window as unknown as { __dbg: unknown }).__dbg = { list: list.map((m) => ({ id: m.id, name: m.name, x: m.x, y: m.y, priority: m.priority, extra: m.extra })), obstacles, w, h }
     return clusterPoints(list, { minX: 8, maxX: w - 8, obstacles, measure: measurers.marker, measureBubble: measurers.bubble })
   }, [points, settled, w, h, selectedId, obstacles, measurers])
 
@@ -653,8 +659,9 @@ export function ExploreStage({
   const cityLabels = useMemo<CityLabel[]>(() => {
     if (!cities || !w || !h || tiles === 'ready') return []
     const blockers = [...markerRects, ...obstacles]
-    return layoutCities(cities, settled, w, h, { blockers, max: cityBudget(w, h), measure: measurers.city, home: homeSettled })
-  }, [cities, settled, w, h, tiles, markerRects, obstacles, measurers, homeSettled])
+    const resorts = points.map((p) => project(p.lon, p.lat, settled, w, h))
+    return layoutCities(cities, settled, w, h, { blockers, max: cityBudget(w, h), measure: measurers.city, home: homeSettled, resorts })
+  }, [cities, points, settled, w, h, tiles, markerRects, obstacles, measurers, homeSettled])
   const cityRects = useMemo(
     () =>
       cityLabels.map((c) => {
@@ -663,6 +670,21 @@ export function ExploreStage({
       }),
     [cityLabels, settled, w, h, measurers],
   )
+  /**
+   * A bare-dot marker shows its name in a chip above the dot while it is hovered, focused or selected: city labels
+   * under that chip step aside for as long as it shows, so its name never sits on top of a city's.
+   */
+  const tipRects = useMemo(() => {
+    const out: Rect[] = []
+    for (const c of clusters) {
+      if (c.side !== 'dot' || c.members.length !== 1) continue
+      const m = c.members[0]
+      if (m.id !== selectedId && m.id !== highlightedId) continue
+      const tw = measurers.marker(m.name) + 22
+      out.push({ l: c.x - tw / 2 - 4, r: c.x + tw / 2 + 4, t: c.y - 12 - 26 - 4, b: c.y - 8 })
+    }
+    return out
+  }, [clusters, selectedId, highlightedId, measurers])
   /** City labels fade out while the zoom is changing (wheel, fly) and come back once the camera settles. */
   const zooming = Math.abs(cam.zoom - settled.zoom) > 0.2
 
@@ -729,7 +751,8 @@ export function ExploreStage({
         className={cn('pointer-events-none absolute inset-0 transition-opacity duration-200 ease-out', zooming || tiles === 'ready' ? 'opacity-0' : 'opacity-100')}
       >
         <AnimatePresence initial={false}>
-          {cityLabels.map((c) => {
+          {cityLabels.map((c, i) => {
+            if (tipRects.length && tipRects.some((t) => rectsHit(t, cityRects[i]))) return null
             const q = project(c.lon, c.lat, cam, w, h)
             return <CityMark key={c.key} c={c} x={q.x} y={q.y} />
           })}
@@ -870,7 +893,7 @@ export function ExploreStage({
               </span>
             </>
           ) : null}
-          <span className="hud text-[11px] leading-snug tracking-[0.08em] text-ink-2">
+          <span className="hud text-[12px] leading-snug tracking-[0.08em] text-ink-2">
             {tiles === 'ready' ? (
               <>
                 ©{' '}
@@ -956,7 +979,7 @@ function Schematic({ geo, cam, w, h, hidden, blockers }: { geo: Geo | null; cam:
         ) : null}
       </svg>
       {latLabels.map((q) => (
-        <span key={`lal${q.l}`} className="hud absolute left-3 -translate-y-1/2 text-[11px] tracking-[0.1em] text-ink-3" style={{ top: q.y }}>
+        <span key={`lal${q.l}`} className="hud absolute left-3 -translate-y-1/2 text-[12px] tracking-[0.1em] text-ink-3" style={{ top: q.y }}>
           {formatLat(q.l, 0)}
         </span>
       ))}
@@ -990,9 +1013,9 @@ function CityMark({ c, x, y }: { c: CityLabel; x: number; y: number }) {
         )}
         style={
           c.side === 'above'
-            ? { left: 0, top: -21, translate: '-50% 0' }
+            ? { left: 0, top: c.atHome ? -HOME_CLEAR - 18 : -21, translate: '-50% 0' }
             : c.side === 'below'
-              ? { left: 0, top: 5, translate: '-50% 0' }
+              ? { left: 0, top: c.atHome ? HOME_CLEAR + 2 : 5, translate: '-50% 0' }
               : c.side === 'right'
                 ? { left: c.atHome ? HOME_CLEAR + 2 : 7 }
                 : { right: c.atHome ? HOME_CLEAR + 2 : 7 }
@@ -1231,7 +1254,7 @@ function ClusterBubble({
           active && 'ring-2 ring-teal ring-offset-2 ring-offset-transparent',
         )}
       >
-        <b className={cn('tnum flex h-[22px] min-w-[22px] items-center justify-center rounded-full px-1 text-[11.5px]', badgeOnly ? 'text-on-ink-chip' : 'bg-surface text-ink')}>{n}</b>
+        <b className={cn('tnum flex h-[22px] min-w-[22px] items-center justify-center rounded-full px-1 text-[12px]', badgeOnly ? 'text-on-ink-chip' : 'bg-surface text-ink')}>{n}</b>
         {badgeOnly ? null : <span>{caption}</span>}
       </motion.button>
 
