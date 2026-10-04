@@ -6,13 +6,18 @@
       "operator": "Vail Resorts",
       "links": {
         "official": "https://www.epicpass.com/",
+        "epicPass": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "epicLocalPass": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "epicDayPass": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "northeastValuePass": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "northeastMidweekPass": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
         "restrictedDates": "https://www.epicpass.com/info/peak-restricted-dates.aspx"
       },
       "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source. Official homepage only; deep links were not captured by research. Operator is Piste reference data (as of 2025)."
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 pass pages read 2026-10-03; footer \"© 2026 Vail Resorts Management Company\"."
       }
     },
     {
@@ -21,14 +26,15 @@
       "operator": null,
       "links": {
         "official": "https://www.indyskipass.com/",
+        "resorts": "https://www.indyskipass.com/our-resorts",
         "blackouts": "https://www.indyskipass.com/blackout-dates-reservations",
-        "resorts": "https://www.indyskipass.com/our-resorts"
+        "terms": "https://www.indyskipass.com/terms-conditions"
       },
       "source": {
         "url": "https://www.indyskipass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source. Official homepage only; deep links were not captured by research except the Indy blackout/reservations page, which research cites. Operator not recorded."
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "indyskipass.com read 2026-10-03: the 26/27 Indy Pass is sold out (off sale, waitlist). Operator not stated on the saved pages."
       }
     }
   ],
@@ -39,18 +45,71 @@
       "resortId": null,
       "name": "Epic Pass",
       "season": "2026-27",
-      "summary": "Vail Resorts' full season pass for 2026-27: unlimited, unrestricted skiing at Vail Resorts' own North American resorts (including Vail, Breckenridge, Park City and Whistler Blackcomb) and at Perisher, Falls Creek and Hotham for the June–October 2027 Australian winter, plus a limited number of consecutive days at partner resorts in Europe and Japan (search summaries of OnTheSnow's 2026-27 buyer's guide). Price and sales deadline not found.",
-      "blackoutsSummary": "No blackout dates at Vail Resorts' own North American resorts (\"unlimited, unrestricted\", search summary). Partner resorts in Europe and Japan allow a limited number of consecutive days instead.",
-      "reservationsSummary": null,
-      "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": null,
-      "prices": [],
+      "summary": "Vail Resorts' full 2026/27 season pass: unlimited, unrestricted skiing at its own resorts (e.g. Vail, Breckenridge, Park City, Whistler Blackcomb, Stowe, Okemo, Mount Snow, Hunter, Andermatt-Sedrun and Crans-Montana; Perisher, Falls Creek and Hotham for the 2027 Australian season), 7 days at Telluride and the Resorts of the Canadian Rockies, 5 consecutive days each at Hakuba Valley and Rusutsu, and access to 36 European partner resorts. $1,145 adult (31+); prices go up October 7, 2026.",
+      "blackoutsSummary": "No restricted dates at the unlimited resorts (\"every day of the season, including peak dates\").",
+      "reservationsSummary": "No reservation requirement stated on epicpass.com. A physical pass card (not Mobile Pass) is needed at Telluride, the Canadian Rockies resorts, Hakuba Valley, Rusutsu and all European resorts.",
+      "salesDeadline": "2026-10-06",
+      "salesDeadlineText": "Prices go up October 7, 2026 (epicpass.com, fetched 2026-10-03: \"Prices go up October 7\" / \"Pass prices go up in 4 days\").",
+      "renewalNotes": "Auto-renew option offered at checkout; renewal pricing not stated.",
+      "prices": [
+        {
+          "category": "adult",
+          "amount": 1145,
+          "currency": "USD",
+          "window": "Ages 31+; current 2026/27 price until prices go up Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "young adult",
+          "amount": 909,
+          "currency": "USD",
+          "window": "Ages 18–30 (new young adult pricing, age verified); until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "teen",
+          "amount": 909,
+          "currency": "USD",
+          "window": "Ages 13–17 (new teen pricing); until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "child",
+          "amount": 585,
+          "currency": "USD",
+          "window": "Ages 5–12; until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
       "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Summarised from the 2026-27 search summaries recorded on 2026-09-30 (OnTheSnow buyer's guide, Undercover Tourist, SnowBrains resort list); not re-checked on 2026-10-03 because the pass sites were unreachable. Price and sales deadline not found."
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
       }
     },
     {
@@ -59,18 +118,71 @@
       "resortId": null,
       "name": "Epic Local Pass",
       "season": "2026-27",
-      "summary": "Vail Resorts' lower-priced season pass for 2026-27 (search summaries of Undercover Tourist and OnTheSnow): unlimited, unrestricted skiing at resorts such as Breckenridge and Keystone; unlimited skiing at Park City except on holiday-restricted dates; holiday restrictions also listed for Heavenly, Northstar, Kirkwood and Stowe; and 10 days in total, with peak-date restrictions, shared by Vail, Beaver Creek and Whistler Blackcomb. Price and sales deadline not found.",
-      "blackoutsSummary": "Holiday-restricted dates for 2026-27: Nov 27–28, 2026; Dec 26–31, 2026; Jan 16, 2027; Feb 13–14, 2027 (search summary). Whistler Blackcomb publishes its own holiday-restricted dates, so check its page.",
-      "reservationsSummary": null,
-      "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": null,
-      "prices": [],
+      "summary": "Lower-priced 2026/27 Vail Resorts pass: unlimited at Breckenridge, Keystone, Crested Butte, Okemo, Mount Snow, Hunter and others; unlimited except peak dates at Park City, Heavenly, Northstar, Kirkwood and Stowe; 10 days total (no peak dates) at Vail, Beaver Creek and Whistler Blackcomb; 5 days each at Andermatt-Sedrun and Crans-Montana; 5 consecutive days at Verbier, Hakuba Valley and Rusutsu. No Telluride or Canadian Rockies. $849 adult (31+); prices go up October 7, 2026.",
+      "blackoutsSummary": "Restricted peak dates (no access at Vail, Beaver Creek, Whistler Blackcomb, Park City, Heavenly, Northstar, Kirkwood, Stowe): Nov 27–28, 2026; Dec 26–31, 2026; Jan 16, 2027; Feb 13–14, 2027. Verbier also restricted Feb 6–20, 2027. Half-price tickets at Park City, Heavenly, Northstar, Kirkwood and Stowe on restricted dates.",
+      "reservationsSummary": "No reservation requirement stated on epicpass.com.",
+      "salesDeadline": "2026-10-06",
+      "salesDeadlineText": "Prices go up October 7, 2026 (epicpass.com, fetched 2026-10-03: \"Prices go up October 7\" / \"Pass prices go up in 4 days\").",
+      "renewalNotes": "Auto-renew option offered at checkout; renewal pricing not stated.",
+      "prices": [
+        {
+          "category": "adult",
+          "amount": 849,
+          "currency": "USD",
+          "window": "Ages 31+; until prices go up Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "young adult",
+          "amount": 675,
+          "currency": "USD",
+          "window": "Ages 18–30 (new young adult pricing); until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "teen",
+          "amount": 675,
+          "currency": "USD",
+          "window": "Ages 13–17; until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "child",
+          "amount": 445,
+          "currency": "USD",
+          "window": "Ages 5–12; until Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
       "source": {
-        "url": "https://www.undercovertourist.com/blog/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Summarised from the 2026-27 search summaries recorded on 2026-09-30 (Undercover Tourist, OnTheSnow buyer's guide, epicpass.com restricted peak dates page); not re-checked on 2026-10-03 because the pass sites were unreachable. Price and sales deadline not found."
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
       }
     },
     {
@@ -79,18 +191,191 @@
       "resortId": null,
       "name": "Epic Day Pass",
       "season": "2026-27",
-      "summary": "Not researched for 2026-27 in this build: web research could not reach the pass site. The product name is carried over from earlier seasons. 2026-27 availability, price, blackout, reservation and destination terms are unconfirmed, so check the official page.",
-      "blackoutsSummary": null,
-      "reservationsSummary": null,
-      "salesDeadline": null,
-      "salesDeadlineText": null,
+      "summary": "A prepaid 1–7 day pass for 2026/27, usable on any days at the listed resorts (e.g. Vail, Breckenridge, Park City, Whistler, Stowe, Okemo, Mount Snow, Hunter, Andermatt-Sedrun, Crans-Montana); 4- to 7-day All Resorts passes add Telluride and the Canadian Rockies. Priced by days and resort tier (All, 32 or 22 resorts) with a +$85 peak-dates option; the page's default adult selection is $471 (All Resorts, $118/day). Prices go up October 7, 2026.",
+      "blackoutsSummary": "Restricted peak dates unless the \"Peak Dates: Yes\" option (+$85 on the displayed selection) is chosen; Day Pass peak-date list not shown on the saved page.",
+      "reservationsSummary": "No reservation requirement stated on epicpass.com.",
+      "salesDeadline": "2026-10-06",
+      "salesDeadlineText": "Prices go up October 7, 2026 (epicpass.com, fetched 2026-10-03: \"Prices go up October 7\" / \"Pass prices go up in 4 days\"). Epic Day Passes are sold for a limited time before the season.",
       "renewalNotes": null,
-      "prices": [],
+      "prices": [
+        {
+          "category": "adult (default selection, All Resorts)",
+          "amount": 471,
+          "currency": "USD",
+          "window": "Ages 13+; page's default selection for All Resorts without peak dates, shown as \"$118 per day\" (≈4 days; the day count is not printed). 32-resort tier $367, 22-resort tier $223 for the same selection; +$85 for peak dates",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "adult (default selection, 32 resorts)",
+          "amount": 367,
+          "currency": "USD",
+          "window": "Ages 13+; same default day selection, 32-resort tier",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "adult (default selection, 22 resorts)",
+          "amount": 223,
+          "currency": "USD",
+          "window": "Ages 13+; same default day selection, 22-resort tier",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "child (default selection, All Resorts)",
+          "amount": 245,
+          "currency": "USD",
+          "window": "Ages 5–12; \"$62 per day\" for the default All Resorts selection",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "adult 1-day (restricted)",
+          "amount": 144,
+          "currency": "USD",
+          "window": "Epic 1-Day Pass (Restricted), ages 13+, as shown on Breckenridge's lift-ticket page (2026/27); \"sold for a limited time\"",
+          "purchaseBy": null,
+          "source": {
+            "url": "https://www.breckenridge.com/plan-your-trip/lift-access/tickets.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
       "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Product name from the Piste product brief (earlier seasons); 2026-27 terms not web-verified in this build — confirm at source"
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "id": "epic-northeast-value-pass-2026-27",
+      "family": "epic",
+      "resortId": null,
+      "name": "Northeast Value Pass",
+      "season": "2026-27",
+      "summary": "Vail Resorts' 2026/27 Northeast pass: unlimited at 17 smaller Northeast, Mid-Atlantic and Midwest resorts, unlimited except peak dates at Okemo, Mount Snow and Hunter, and 10 days (no peak dates) at Stowe. $690 adult (18–64); a college version exists. Prices go up October 7, 2026.",
+      "blackoutsSummary": "Restricted peak dates at Okemo, Mount Snow, Hunter and Stowe: Nov 27–28, 2026; Dec 26–31, 2026; Jan 16–17, 2027; Feb 13–14, 2027.",
+      "reservationsSummary": "No reservation requirement stated on epicpass.com.",
+      "salesDeadline": "2026-10-06",
+      "salesDeadlineText": "Prices go up October 7, 2026 (epicpass.com, fetched 2026-10-03: \"Prices go up October 7\" / \"Pass prices go up in 4 days\").",
+      "renewalNotes": "Auto-renew option offered at checkout.",
+      "prices": [
+        {
+          "category": "adult",
+          "amount": 690,
+          "currency": "USD",
+          "window": "Ages 18–64; until prices go up Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "teen",
+          "amount": 518,
+          "currency": "USD",
+          "window": "Ages 13–17",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "senior",
+          "amount": 518,
+          "currency": "USD",
+          "window": "Ages 65–79",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "id": "epic-northeast-midweek-pass-2026-27",
+      "family": "epic",
+      "resortId": null,
+      "name": "Northeast Midweek Pass",
+      "season": "2026-27",
+      "summary": "Vail Resorts' 2026/27 weekday-only (Mon–Fri) Northeast pass: weekdays at 17 smaller resorts, weekdays except peak dates at Okemo, Mount Snow and Hunter, and 5 weekdays (no peak dates) at Stowe. $518 adult (18–64). Prices go up October 7, 2026.",
+      "blackoutsSummary": "Weekdays only. Restricted peak dates at Okemo, Mount Snow, Hunter and Stowe: Nov 27, 2026; Dec 28–31, 2026.",
+      "reservationsSummary": "No reservation requirement stated on epicpass.com.",
+      "salesDeadline": "2026-10-06",
+      "salesDeadlineText": "Prices go up October 7, 2026 (epicpass.com, fetched 2026-10-03: \"Prices go up October 7\" / \"Pass prices go up in 4 days\").",
+      "renewalNotes": "Auto-renew option offered at checkout.",
+      "prices": [
+        {
+          "category": "adult",
+          "amount": 518,
+          "currency": "USD",
+          "window": "Ages 18–64; weekday pass; until prices go up Oct 7, 2026",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "senior",
+          "amount": 392,
+          "currency": "USD",
+          "window": "Ages 65+",
+          "purchaseBy": "2026-10-06",
+          "source": {
+            "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
       }
     },
     {
@@ -99,18 +384,18 @@
       "resortId": null,
       "name": "Indy Base Pass",
       "season": "2026-27",
-      "summary": "Indy Pass with blackout dates (the Indy+ Pass has none), named as a 2026-27 product on Greek Peak's Indy page. Greek Peak and Swain give 2 days each, and Jay Peak is listed in 2026-27 Indy coverage (days not found). Titus Mountain, West Mountain and Peek'n Peak appear as Indy resorts without a season, so their 2026-27 status is unconfirmed. Bristol, Holiday Valley, Belleayre and Elk Mountain are not on the 2026-27 Indy list. Price, sales deadline and full partner list not found.",
-      "blackoutsSummary": "Indy Base Pass (and the Base Add-On) carry blackout dates. The 2026-27 dates were due in fall 2026 and are not recorded here yet, so check the Indy blackout page before a holiday-period visit.",
-      "reservationsSummary": "Varies by resort. Greek Peak strongly encourages reserving 48+ h ahead through its redemptions desk (not required). See the Indy reservations page for other resorts.",
+      "summary": "Indy Base Pass for 2026-27: 2 days at each of 300+ independent resorts (e.g. Greek Peak, Swain, West Mountain, Jay Peak). Sold out: indyskipass.com (2026-10-03) says \"The 26/27 Indy Pass is now off sale\" (waitlist only). Prices were not shown on the saved pages. Unlike Indy+, it has blackout dates.",
+      "blackoutsSummary": "Indy Base Pass is subject to blackout dates (Indy terms, updated Sept 24, 2026); the 2026-27 dates page could not be read (403), so dates are not recorded.",
+      "reservationsSummary": "Some partners require reservations (e.g. Magic Mountain's Indy page says \"Reservations required\"); check each resort's Indy page.",
       "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": null,
+      "salesDeadlineText": "Sold out: indyskipass.com (2026-10-03) says \"The 26/27 Indy Pass is now off sale\" (waitlist only). Refund terms: refund requests before Dec 1, 2026 if Indy has fewer than 300 partners by Nov 1, 2026.",
+      "renewalNotes": "Indy passes auto-renew each year at the guaranteed lowest price unless cancelled (Indy terms). Kids passes upgrade to adult if 13+ on March 1.",
       "prices": [],
       "source": {
-        "url": "https://www.greekpeak.net/ski-ride/indy-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Product named on Greek Peak's Indy page (search summary); price and full partner list not researched"
+        "url": "https://www.indyskipass.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "indyskipass.com homepage and terms & conditions, read 2026-10-03."
       }
     },
     {
@@ -119,22 +404,1500 @@
       "resortId": null,
       "name": "Indy+ Pass",
       "season": "2026-27",
-      "summary": "Indy Pass without blackout dates, named as a 2026-27 product on Greek Peak's Indy page; otherwise it works like the Indy Base Pass. Greek Peak and Swain give 2 days each, and Jay Peak is listed in 2026-27 Indy coverage (days not found). Titus Mountain, West Mountain and Peek'n Peak appear as Indy resorts without a season, so their 2026-27 status is unconfirmed. Bristol, Holiday Valley, Belleayre and Elk Mountain are not on the 2026-27 Indy list. Price, sales deadline and full partner list not found.",
-      "blackoutsSummary": "No blackout dates (per Greek Peak's and Swain's Indy pages, search summaries).",
-      "reservationsSummary": "Varies by resort. Greek Peak strongly encourages reserving 48+ h ahead through its redemptions desk (not required).",
+      "summary": "Indy+ Pass for 2026-27: 2 days at each of 300+ independent resorts (e.g. Greek Peak, Swain, West Mountain, Jay Peak). Sold out: indyskipass.com (2026-10-03) says \"The 26/27 Indy Pass is now off sale\" (waitlist only). Prices were not shown on the saved pages. Unlike the Indy Base Pass, it has no blackout dates.",
+      "blackoutsSummary": "No blackout dates (the Indy terms list blackouts only for the Indy Base, Employee and Learn to Turn passes).",
+      "reservationsSummary": "Some partners require reservations (e.g. Magic Mountain's Indy page says \"Reservations required\"); check each resort's Indy page.",
       "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": null,
+      "salesDeadlineText": "Sold out: indyskipass.com (2026-10-03) says \"The 26/27 Indy Pass is now off sale\" (waitlist only). Refund terms: refund requests before Dec 1, 2026 if Indy has fewer than 300 partners by Nov 1, 2026.",
+      "renewalNotes": "Indy passes auto-renew each year at the guaranteed lowest price unless cancelled (Indy terms). Kids passes upgrade to adult if 13+ on March 1.",
       "prices": [],
       "source": {
-        "url": "https://www.greekpeak.net/ski-ride/indy-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Product named on Greek Peak's Indy page (search summary); price and full partner list not researched"
+        "url": "https://www.indyskipass.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "indyskipass.com homepage and terms & conditions, read 2026-10-03."
       }
     }
   ],
   "access": [
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "vail",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Vail: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "breckenridge",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Breckenridge: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "park-city-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Park City: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "whistler-blackcomb",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Whistler Blackcomb: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "stowe",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Stowe: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "okemo",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Okemo: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "mount-snow",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mount Snow: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "hunter-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Hunter Mountain: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "andermatt-sedrun",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Andermatt-Sedrun-Disentis: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "crans-montana",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Crans-Montana: unlimited access on the 2026/27 Epic Pass, every day of the season including peak dates. Crans-Montana's own site: \"Only the standard 'Epic Pass' offers unlimited access to the Crans-Montana ski area.\"",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "perisher",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Perisher: listed under unlimited access on the 2026/27 Epic Pass as \"2027 Access\" (the June–Oct 2027 Australian season).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "falls-creek",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Falls Creek: listed under unlimited access on the 2026/27 Epic Pass as \"2027 Access\" (the June–Oct 2027 Australian season).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "mt-hotham",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Hotham: listed under unlimited access on the 2026/27 Epic Pass as \"2027 Access\" (the June–Oct 2027 Australian season).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "hakuba-happo-one",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-pass-2026-27:hakuba-valley",
+      "poolLabel": "Hakuba Valley: 5 consecutive days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Hakuba Valley's ten ski resorts on the 2026/27 Epic Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "hakuba-happo-one",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-local-pass-2026-27:hakuba-valley",
+      "poolLabel": "Hakuba Valley: 5 consecutive days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Hakuba Valley's ten ski resorts on the 2026/27 Epic Local Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "hakuba-47-goryu",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-pass-2026-27:hakuba-valley",
+      "poolLabel": "Hakuba Valley: 5 consecutive days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Hakuba Valley's ten ski resorts on the 2026/27 Epic Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "hakuba-47-goryu",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-local-pass-2026-27:hakuba-valley",
+      "poolLabel": "Hakuba Valley: 5 consecutive days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Hakuba Valley's ten ski resorts on the 2026/27 Epic Local Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "rusutsu",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Rusutsu Resort on the 2026/27 Epic Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "rusutsu",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Five consecutive days at Rusutsu Resort on the 2026/27 Epic Local Pass; physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "verbier",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Verbier 4 Vallées: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "courchevel",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Les 3 Vallées: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "meribel",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Les 3 Vallées: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "val-thorens",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Les 3 Vallées: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "ski-arlberg",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ski Arlberg: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required. Ski Arlberg's own FAQ asks \"Why is my Epic Pass not valid here?\" (answer not captured), so check validity per Arlberg area.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "saalbach",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Saalbach & Zell am See-Kaprun: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "kitzsteinhorn",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Saalbach & Zell am See-Kaprun: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required. Kitzsteinhorn (Kaprun) is part of Zell am See-Kaprun.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "soelden",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Sölden: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "madonna-di-campiglio",
+      "access": "limited-days",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Skirama Dolomiti: Listed under \"Access to 36 European partner resorts\" on the 2026/27 Epic Pass page; the day allowance is not stated on the saved page (\"Learn more\" link not captured). Physical pass card required.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "mayrhofen",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-zillertal-2026-27",
+      "poolLabel": "Zillertal Valley — 5 consecutive days total (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen, Spieljoch)",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zillertal is listed among the 2026/27 Epic Pass European partners (epicpass.com). Up to five total consecutive days across the Zillertal Valley ski areas (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen and Spieljoch) on the 2026-27 Epic Pass and Epic Adaptive Pass; valid 1 Oct 2026 – 15 May 2027. Mayrhofen and Hintertux joined Epic in May 2025; the other four were added for 2026-27. Epic Local/Day pass access not researched.",
+      "source": {
+        "url": "https://www.epicpass.com/regions/europe/austria/mayrhofen-hintertux.aspx",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (epicpass.com Zillertal page; snowbrains.com/epic-pass-expands-access-zillertal)"
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "hintertux-glacier",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "epic-zillertal-2026-27",
+      "poolLabel": "Zillertal Valley — 5 consecutive days total (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen, Spieljoch)",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zillertal is listed among the 2026/27 Epic Pass European partners (epicpass.com). Up to five total consecutive days across the Zillertal Valley ski areas (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen and Spieljoch) on the 2026-27 Epic Pass and Epic Adaptive Pass; valid 1 Oct 2026 – 15 May 2027. Mayrhofen and Hintertux joined Epic in May 2025; the other four were added for 2026-27. Epic Local/Day pass access not researched.",
+      "source": {
+        "url": "https://www.epicpass.com/regions/europe/austria/mayrhofen-hintertux.aspx",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary (epicpass.com Zillertal page; snowbrains.com/epic-pass-expands-access-zillertal)"
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "vail",
+      "access": "shared-pool",
+      "days": 10,
+      "poolId": "epic-local-pass-2026-27:vail-beaver-creek-whistler",
+      "poolLabel": "Vail + Beaver Creek + Whistler Blackcomb: 10 days total",
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-16",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Epic Local restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "10 days total combined at Vail, Beaver Creek and Whistler Blackcomb on the 2026/27 Epic Local Pass; no access on restricted peak dates (Advanced Lift Ticket Rate available those days).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "whistler-blackcomb",
+      "access": "shared-pool",
+      "days": 10,
+      "poolId": "epic-local-pass-2026-27:vail-beaver-creek-whistler",
+      "poolLabel": "Vail + Beaver Creek + Whistler Blackcomb: 10 days total",
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-16",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Epic Local restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "10 days total combined at Vail, Beaver Creek and Whistler Blackcomb on the 2026/27 Epic Local Pass; no access on restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "park-city-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-16",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Epic Local restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": "Half-price passholder tickets on restricted peak dates",
+      "eligibilityNotes": null,
+      "notes": "Park City: unlimited on the 2026/27 Epic Local Pass except restricted peak dates (half-price passholder tickets on those dates).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "stowe",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-16",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Epic Local restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": "Half-price passholder tickets on restricted peak dates",
+      "eligibilityNotes": null,
+      "notes": "Stowe: unlimited on the 2026/27 Epic Local Pass except restricted peak dates (half-price passholder tickets on those dates).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "breckenridge",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Breckenridge: unlimited on the 2026/27 Epic Local Pass, every day including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "okemo",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Okemo: unlimited on the 2026/27 Epic Local Pass, every day including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "mount-snow",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mount Snow: unlimited on the 2026/27 Epic Local Pass, every day including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "hunter-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Hunter Mountain: unlimited on the 2026/27 Epic Local Pass, every day including peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "andermatt-sedrun",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Andermatt-Sedrun-Disentis: 5 days on the 2026/27 Epic Local Pass.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "crans-montana",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Crans-Montana: 5 days on the 2026/27 Epic Local Pass.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "verbier",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-16",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Epic Local restricted peak date"
+        },
+        {
+          "from": "2027-02-06",
+          "to": "2027-02-20",
+          "label": "Verbier additional restricted period"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Verbier 4 Vallées: 5 consecutive days on the 2026/27 Epic Local Pass, excluding the restricted peak dates and an additional restricted period Feb 6–20, 2027.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-local-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "vail",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Vail: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "breckenridge",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Breckenridge: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "park-city-mountain",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Park City: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "whistler-blackcomb",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Whistler Blackcomb: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "stowe",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Stowe: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "okemo",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Okemo: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "mount-snow",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mount Snow: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "hunter-mountain",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Hunter Mountain: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "andermatt-sedrun",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Andermatt-Sedrun-Disentis: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "crans-montana",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "epic-day-pass-2026-27:total",
+      "poolLabel": "Epic Day Pass: 1–7 days total across its resorts",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Crans-Montana: one of the resorts where Epic Day Pass days (1–7 total, depending on the pass bought) can be used in 2026/27. Which resorts belong to the cheaper 32- and 22-resort tiers is not shown on the saved page; restricted peak dates need the Peak Dates option.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/epic-day-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-value-pass-2026-27",
+      "resortId": "okemo",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Northeast Value restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Okemo: unlimited on the 2026/27 Northeast Value Pass except restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-midweek-pass-2026-27",
+      "resortId": "okemo",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-27",
+          "label": "Northeast Midweek restricted peak date"
+        },
+        {
+          "from": "2026-12-28",
+          "to": "2026-12-31",
+          "label": "Northeast Midweek restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": "Weekdays (Mon–Fri) only",
+      "notes": "Okemo: Monday–Friday access on the 2026/27 Northeast Midweek Pass, excluding restricted peak dates (no weekends).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-value-pass-2026-27",
+      "resortId": "mount-snow",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Northeast Value restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mount Snow: unlimited on the 2026/27 Northeast Value Pass except restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-midweek-pass-2026-27",
+      "resortId": "mount-snow",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-27",
+          "label": "Northeast Midweek restricted peak date"
+        },
+        {
+          "from": "2026-12-28",
+          "to": "2026-12-31",
+          "label": "Northeast Midweek restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": "Weekdays (Mon–Fri) only",
+      "notes": "Mount Snow: Monday–Friday access on the 2026/27 Northeast Midweek Pass, excluding restricted peak dates (no weekends).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-value-pass-2026-27",
+      "resortId": "hunter-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Northeast Value restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Hunter Mountain: unlimited on the 2026/27 Northeast Value Pass except restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-midweek-pass-2026-27",
+      "resortId": "hunter-mountain",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-27",
+          "label": "Northeast Midweek restricted peak date"
+        },
+        {
+          "from": "2026-12-28",
+          "to": "2026-12-31",
+          "label": "Northeast Midweek restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": "Weekdays (Mon–Fri) only",
+      "notes": "Hunter Mountain: Monday–Friday access on the 2026/27 Northeast Midweek Pass, excluding restricted peak dates (no weekends).",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-value-pass-2026-27",
+      "resortId": "stowe",
+      "access": "limited-days",
+      "days": 10,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-28",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-31",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Northeast Value restricted peak date"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Northeast Value restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Stowe: 10 days total on the 2026/27 Northeast Value Pass, not usable on restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-value-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-northeast-midweek-pass-2026-27",
+      "resortId": "stowe",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-11-27",
+          "to": "2026-11-27",
+          "label": "Northeast Midweek restricted peak date"
+        },
+        {
+          "from": "2026-12-28",
+          "to": "2026-12-31",
+          "label": "Northeast Midweek restricted peak date"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": "Weekdays (Mon–Fri) only",
+      "notes": "Stowe: 5 total weekdays on the 2026/27 Northeast Midweek Pass, not usable on restricted peak dates.",
+      "source": {
+        "url": "https://www.epicpass.com/passes/northeast-midweek-pass.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "epicpass.com 2026/27 page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "epic-pass-2026-27",
+      "resortId": "elk-mountain",
+      "access": "not-included",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
+      "source": {
+        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "productId": "epic-local-pass-2026-27",
+      "resortId": "elk-mountain",
+      "access": "not-included",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
+      "source": {
+        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "productId": "epic-day-pass-2026-27",
+      "resortId": "elk-mountain",
+      "access": "not-included",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
+      "source": {
+        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
     {
       "productId": "indy-base-pass-2026-27",
       "resortId": "greek-peak",
@@ -336,66 +2099,6 @@
       }
     },
     {
-      "productId": "epic-pass-2026-27",
-      "resortId": "elk-mountain",
-      "access": "not-included",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
-      "source": {
-        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "elk-mountain",
-      "access": "not-included",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
-      "source": {
-        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
-      "productId": "epic-day-pass-2026-27",
-      "resortId": "elk-mountain",
-      "access": "not-included",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Elk is reported as one of only three Pennsylvania public chairlift ski areas not on Epic, Ikon or Indy for 2026-27 (Storm Skiing, search summary).",
-      "source": {
-        "url": "https://www.stormskiing.com/p/indy-shores-up-new-england-east-coast",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
       "productId": "indy-base-pass-2026-27",
       "resortId": "elk-mountain",
       "access": "not-included",
@@ -433,548 +2136,6 @@
         "verification": "search-summary",
         "checkedOn": "2026-09-28",
         "note": null
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "hunter-mountain",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "hunter-mountain",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "mount-snow",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "mount-snow",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "okemo",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "okemo",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "stowe",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "stowe",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Epic Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.epicpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "vail",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary (OnTheSnow 2026-27 buyer's guide): the full Epic Pass gives unlimited, unrestricted access at Vail Resorts' owned North American resorts, explicitly including this resort.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Pass results (OnTheSnow buyer's guide, Undercover Tourist, SnowBrains resort list)."
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "vail",
-      "access": "shared-pool",
-      "days": 10,
-      "poolId": "epic-local-pass-2026-27:vail-beaver-creek-whistler",
-      "poolLabel": "Vail + Beaver Creek + Whistler Blackcomb: 10 days combined",
-      "blackouts": [
-        {
-          "from": "2026-11-27",
-          "to": "2026-11-28",
-          "label": "Epic Local restricted (Thanksgiving)"
-        },
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-31",
-          "label": "Epic Local restricted (holidays)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-16",
-          "label": "Epic Local restricted (MLK weekend)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Epic Local restricted (Presidents' weekend)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Epic Local Pass gives \"10 days combined with peak date restrictions at Vail, Beaver Creek and Whistler\"; restricted dates Nov. 27-28, 2026; Dec. 26-31, 2026; Jan. 16, 2027; Feb. 13-14, 2027. Beaver Creek is not in the Piste catalog but shares the 10 days.",
-      "source": {
-        "url": "https://www.undercovertourist.com/blog/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Local results (Undercover Tourist, OnTheSnow buyer's guide, epicpass.com restricted peak dates page)."
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "breckenridge",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary (OnTheSnow 2026-27 buyer's guide): the full Epic Pass gives unlimited, unrestricted access at Vail Resorts' owned North American resorts, explicitly including this resort.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Pass results (OnTheSnow buyer's guide, Undercover Tourist, SnowBrains resort list)."
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "breckenridge",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Epic Local Pass \"delivers unlimited, unrestricted skiing at mountains like Breckenridge, Keystone\". Breckenridge is not in the summary's holiday-restricted list (Vail, Beaver Creek, Whistler Blackcomb, Park City, Heavenly, Northstar, Kirkwood, Stowe).",
-      "source": {
-        "url": "https://www.undercovertourist.com/blog/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Local results (Undercover Tourist, OnTheSnow buyer's guide)."
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "park-city-mountain",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary (OnTheSnow 2026-27 buyer's guide): the full Epic Pass gives unlimited, unrestricted access at Vail Resorts' owned North American resorts, explicitly including this resort.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Pass results (OnTheSnow buyer's guide, Undercover Tourist, SnowBrains resort list)."
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "park-city-mountain",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-11-27",
-          "to": "2026-11-28",
-          "label": "Epic Local restricted (Thanksgiving)"
-        },
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-31",
-          "label": "Epic Local restricted (holidays)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-16",
-          "label": "Epic Local restricted (MLK weekend)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Epic Local restricted (Presidents' weekend)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: unlimited on the 2026-27 Epic Local Pass, with holiday restrictions at Park City (restricted dates Nov. 27-28, 2026; Dec. 26-31, 2026; Jan. 16, 2027; Feb. 13-14, 2027).",
-      "source": {
-        "url": "https://www.undercovertourist.com/blog/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Local results (Undercover Tourist, OnTheSnow buyer's guide, epicpass.com restricted peak dates page)."
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "whistler-blackcomb",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary (OnTheSnow 2026-27 buyer's guide): the full Epic Pass gives unlimited, unrestricted access at Vail Resorts' owned North American resorts, explicitly including this resort.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Pass results (OnTheSnow buyer's guide, Undercover Tourist, SnowBrains resort list)."
-      }
-    },
-    {
-      "productId": "epic-local-pass-2026-27",
-      "resortId": "whistler-blackcomb",
-      "access": "shared-pool",
-      "days": 10,
-      "poolId": "epic-local-pass-2026-27:vail-beaver-creek-whistler",
-      "poolLabel": "Vail + Beaver Creek + Whistler Blackcomb: 10 days combined",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Epic Local Pass gives \"10 days combined with peak date restrictions at Vail, Beaver Creek and Whistler\". Whistler Blackcomb publishes its own holiday-restricted dates (https://www.whistlerblackcomb.com/info/holiday-restricted-dates.aspx); they are not recorded here, so check that page. Beaver Creek is not in the Piste catalog but shares the 10 days.",
-      "source": {
-        "url": "https://www.undercovertourist.com/blog/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Epic Local results (Undercover Tourist, OnTheSnow buyer's guide, epicpass.com restricted peak dates page)."
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "mayrhofen",
-      "access": "shared-pool",
-      "days": 5,
-      "poolId": "epic-zillertal-2026-27",
-      "poolLabel": "Zillertal Valley — 5 consecutive days total (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen, Spieljoch)",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Up to five total consecutive days across the Zillertal Valley ski areas (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen and Spieljoch) on the 2026-27 Epic Pass and Epic Adaptive Pass; valid 1 Oct 2026 – 15 May 2027. Mayrhofen and Hintertux joined Epic in May 2025; the other four were added for 2026-27. Epic Local/Day pass access not researched.",
-      "source": {
-        "url": "https://www.epicpass.com/regions/europe/austria/mayrhofen-hintertux.aspx",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (epicpass.com Zillertal page; snowbrains.com/epic-pass-expands-access-zillertal)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "hintertux-glacier",
-      "access": "shared-pool",
-      "days": 5,
-      "poolId": "epic-zillertal-2026-27",
-      "poolLabel": "Zillertal Valley — 5 consecutive days total (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen, Spieljoch)",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Up to five total consecutive days across the Zillertal Valley ski areas (Mayrhofen, Hintertux, Zillertal Arena, Hochzillertal, Hochfügen and Spieljoch) on the 2026-27 Epic Pass and Epic Adaptive Pass; valid 1 Oct 2026 – 15 May 2027. Mayrhofen and Hintertux joined Epic in May 2025; the other four were added for 2026-27. Epic Local/Day pass access not researched.",
-      "source": {
-        "url": "https://www.epicpass.com/regions/europe/austria/mayrhofen-hintertux.aspx",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (epicpass.com Zillertal page; snowbrains.com/epic-pass-expands-access-zillertal)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "soelden",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Sölden is listed as a 2026-27 Epic Pass partner (epicpass.com has a Sölden region page and soelden.com an Epic Pass page); day allowance not researched, and it is a separate allowance from the Zillertal pool.",
-      "source": {
-        "url": "https://www.epicpass.com/regions/europe/austria/soelden.aspx",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary; day allowance not researched"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "courchevel",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Les 3 Vallées is an Epic Pass 2026-27 European partner (limited consecutive days, varies by pass type). Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Shared research notes (notes.md): Epic Pass 2026-27 European partners; also onthesnow.com Epic buyers guide"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "meribel",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Les 3 Vallées is an Epic Pass 2026-27 European partner (limited consecutive days, varies by pass type). Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Shared research notes (notes.md): Epic Pass 2026-27 European partners; also onthesnow.com Epic buyers guide"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "val-thorens",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Les 3 Vallées is an Epic Pass 2026-27 European partner (limited consecutive days, varies by pass type). Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Shared research notes (notes.md): Epic Pass 2026-27 European partners; also onthesnow.com Epic buyers guide"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "hakuba-happo-one",
-      "access": "shared-pool",
-      "days": 5,
-      "poolId": "epic-hakuba-valley-2026-27",
-      "poolLabel": "Hakuba Valley (5 consecutive days)",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Full Epic Pass: 5 consecutive days at Hakuba Valley, shared across the valley's resorts (including Happo-One and Hakuba 47/Goryu).",
-      "source": {
-        "url": "https://www.epicpass.com/regions/japan/hakuba-valley.aspx",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Epic 2026-27 roster from the shared research notes (also onthesnow.com Epic buyers guide)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "hakuba-47-goryu",
-      "access": "shared-pool",
-      "days": 5,
-      "poolId": "epic-hakuba-valley-2026-27",
-      "poolLabel": "Hakuba Valley (5 consecutive days)",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Full Epic Pass: 5 consecutive days at Hakuba Valley, shared across the valley's resorts (including Hakuba 47 and Hakuba Goryu).",
-      "source": {
-        "url": "https://www.epicpass.com/regions/japan/hakuba-valley.aspx",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Epic 2026-27 roster from the shared research notes (also onthesnow.com Epic buyers guide)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "rusutsu",
-      "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Full Epic Pass: 5 consecutive days at Rusutsu.",
-      "source": {
-        "url": "https://rusutsu.com/en/epic-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Epic 2026-27 roster from the shared research notes (also onthesnow.com Epic buyers guide)"
       }
     },
     {
@@ -1020,21 +2181,21 @@
     {
       "productId": "indy-base-pass-2026-27",
       "resortId": "west-mountain",
-      "access": "unknown",
-      "days": null,
+      "access": "limited-days",
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "25% off a lift ticket for the third day",
       "eligibilityNotes": null,
-      "notes": "West Mountain is listed as an Indy Pass and Indy+ Pass member on a regional listing that states no season (search summary), so 2026-27 inclusion is not confirmed. Day allowance not found. Check the Indy resort list.",
+      "notes": "West Mountain's 2026/27 season-pass page: Indy Pass holders get 2 complimentary tickets (holiday and non-holiday) at the ticket window, plus 25% off a third-day lift ticket; an RFID card fee applies. Indy Pass Add-On also offered to West Mountain pass holders.",
       "source": {
-        "url": "https://www.experienceouradirondacks.com/alpine-skiing/west-mountain",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (2026-09-30) of an Adirondack regional listing."
+        "url": "https://westmountain.com/season-passes/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "West Mountain season passes page (2026/2027), read 2026-10-03."
       }
     },
     {
@@ -1100,21 +2261,21 @@
     {
       "productId": "indy-plus-pass-2026-27",
       "resortId": "west-mountain",
-      "access": "unknown",
-      "days": null,
+      "access": "limited-days",
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "25% off a lift ticket for the third day",
       "eligibilityNotes": null,
-      "notes": "West Mountain is listed as an Indy Pass and Indy+ Pass member on a regional listing that states no season (search summary), so 2026-27 inclusion is not confirmed. Day allowance not found. Check the Indy resort list.",
+      "notes": "West Mountain's 2026/27 season-pass page: Indy Pass holders get 2 complimentary tickets (holiday and non-holiday) at the ticket window, plus 25% off a third-day lift ticket; an RFID card fee applies. Indy Pass Add-On also offered to West Mountain pass holders.",
       "source": {
-        "url": "https://www.experienceouradirondacks.com/alpine-skiing/west-mountain",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (2026-09-30) of an Adirondack regional listing."
+        "url": "https://westmountain.com/season-passes/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "West Mountain season passes page (2026/2027), read 2026-10-03."
       }
     },
     {
@@ -1135,146 +2296,6 @@
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
         "note": "Search summary (2026-09-30) of the Indy Pass resort page."
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "perisher",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Vail-owned Australian resort; unlimited on the Epic Pass per the shared roster. Blackouts, reservations and Epic Local / Day access not researched.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "From the shared research notes (Epic 2026-27 roster; also https://snowbrains.com/epic-pass-list-of-resorts-2026-27/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "falls-creek",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Vail-owned Australian resort; unlimited on the Epic Pass per the shared roster. Blackouts, reservations and Epic Local / Day access not researched.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "From the shared research notes (Epic 2026-27 roster; also https://snowbrains.com/epic-pass-list-of-resorts-2026-27/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "mt-hotham",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Vail-owned Australian resort; unlimited on the Epic Pass per the shared roster. Blackouts, reservations and Epic Local / Day access not researched.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/epic-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "From the shared research notes (Epic 2026-27 roster; also https://snowbrains.com/epic-pass-list-of-resorts-2026-27/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "verbier",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Verbier 4Vallées listed among 2026-27 Epic Pass European partners with limited consecutive days that vary by pass type; day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Epic Pass European partners roster (shared research notes; also https://www.onthesnow.com/news/epic-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "andermatt-sedrun",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Andermatt-Sedrun is listed among the 2026-27 Epic Pass European resorts (SnowBrains roster, search summary). The roster groups European resorts under limited consecutive days, but Andermatt-Sedrun is operated by Vail Resorts rather than a partner, so whether Epic Pass access is unlimited or limited days is not confirmed. Check the Epic Pass resort page.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Epic Pass European partners roster (shared research notes; also https://www.onthesnow.com/news/epic-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "crans-montana",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Crans-Montana is listed among the 2026-27 Epic Pass European resorts (SnowBrains roster, search summary). The roster groups European resorts under limited consecutive days, but Crans-Montana is operated by Vail Resorts rather than a partner, so whether Epic Pass access is unlimited or limited days is not confirmed. Check the Epic Pass resort page.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Epic Pass European partners roster (shared research notes; also https://www.onthesnow.com/news/epic-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "epic-pass-2026-27",
-      "resortId": "madonna-di-campiglio",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Included via Skirama Dolomiti, listed among 2026-27 Epic Pass European partners with limited consecutive days that vary by pass type; day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/epic-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Epic Pass European partners roster (shared research notes; also https://www.onthesnow.com/news/epic-pass-buyers-guide/)"
       }
     }
   ]

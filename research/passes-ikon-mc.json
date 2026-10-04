@@ -6,13 +6,17 @@
       "operator": "Alterra Mountain Company",
       "links": {
         "official": "https://www.ikonpass.com/",
-        "compare": "https://www.ikonpass.com/en/compare-passes"
+        "compare": "https://www.ikonpass.com/en/compare-passes",
+        "ikonPass": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "ikonBasePass": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+        "ikonSessionPass": "https://www.ikonpass.com/en/shop-passes/ikon-session-pass",
+        "destinations": "https://www.ikonpass.com/en/destinations"
       },
       "source": {
         "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source. Official homepage only; deep links were not captured by research. Operator is Piste reference data (as of 2025)."
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com 26/27 shop pages read 2026-10-03. Operator is Piste reference data (Alterra Mountain Company); a Prince Hotels page (Furano) also names Alterra as operator."
       }
     },
     {
@@ -20,13 +24,15 @@
       "name": "Mountain Collective",
       "operator": null,
       "links": {
-        "official": "https://mountaincollective.com/"
+        "official": "https://mountaincollective.com/",
+        "pass": "https://mountaincollective.com/pass/",
+        "faq": "https://mountaincollective.com/faq/"
       },
       "source": {
         "url": "https://mountaincollective.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source. Official homepage only; deep links were not captured by research. Operator not confirmed, so left blank."
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com read 2026-10-03 (26/27 on sale). Operator not stated on the saved pages."
       }
     }
   ],
@@ -37,24 +43,24 @@
       "resortId": null,
       "name": "Ikon Pass",
       "season": "2026-27",
-      "summary": "The full Ikon Pass for 2026-27: unlimited skiing at 18 resorts (for example Steamboat) and up to 7 days at many others (for example Alta and Snowbird combined, Big Sky, Brighton, Deer Valley, Jackson Hole, Kitzbühel and Ischgl), with no holiday blackout dates. Reported starting price $1,449 for adults 23+ ($1,349 to renew); price tiers and the sales deadline were not captured — check ikonpass.com.",
-      "blackoutsSummary": "No holiday blackout dates on the full Ikon Pass.",
-      "reservationsSummary": "Deer Valley requires reservations for Ikon Pass holders. A summary also mentioned reservations at Jackson Hole, possibly from an earlier season. Other destinations not confirmed.",
-      "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": "Existing passholders renew for less: $1,349 for the Ikon Pass (search summary, 2026-10-03). Renewal deadline not captured.",
+      "summary": "The full 2026-27 Ikon Pass: unlimited skiing at 18 destinations (e.g. Copper, Solitude, Steamboat, Sugarbush) and up to 7 days at each other destination, including Alta, Deer Valley, Jackson Hole and the European, Japanese and Oceania partners, with no blackout dates. From $1,449 for adults 23+; the current price ends October 8, 2026. ikonpass.com also advertises Child Pass savings (as low as $299 per additional child 5–12, up to $100 off with an adult Ikon Pass).",
+      "blackoutsSummary": "No blackout dates at Ikon destinations. The Ikon Pass page lists blackout dates (Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027) beneath its Bonus Mountains section (2 free days at each of 11 Bonus Mountains, none of them in this catalog).",
+      "reservationsSummary": "ikonpass.com marks some 7-day destinations \"Lift Reservations Required\" (the per-destination markers are icons not captured in the saved text). Priority reservations are an Ikon Pass benefit. Jackson Hole requires lift reservations for all Ikon Pass holders in 2026-27.",
+      "salesDeadline": "2026-10-08",
+      "salesDeadlineText": "Prices increase after October 8, 2026: ikonpass.com (fetched 2026-10-03) says \"last day to save is October 8\" with a \"prices increase in\" countdown.",
+      "renewalNotes": "Renewal price $1,349 (earlier search summary, Teton Gravity; not shown on the saved ikonpass.com pages). Renewal deadline not stated.",
       "prices": [
         {
-          "category": "Adult",
+          "category": "adult",
           "amount": 1449,
           "currency": "USD",
-          "window": "Ages 23+. Reported 2026-27 starting price ($70 more than 2025-26); later price tiers and deadlines not captured — confirm the current price at ikonpass.com",
-          "purchaseBy": null,
+          "window": "Ages 23+. \"From $1,449\" on the 26/27 Ikon Pass page; current price until prices increase after Oct 8, 2026",
+          "purchaseBy": "2026-10-08",
           "source": {
-            "url": "https://www.tetongravity.com/ikon-pass-2026-27/",
-            "verification": "search-summary",
+            "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+            "verification": "official-page",
             "checkedOn": "2026-10-03",
-            "note": "Web search summary for 'Ikon Pass 2026-27 price adult' (2026-10-03). The summary did not attribute the figure to one page; results included this Teton Gravity article, Yahoo, the ikonpass.com 26/27 shop pages and OnTheSnow."
+            "note": null
           }
         },
         {
@@ -72,10 +78,10 @@
         }
       ],
       "source": {
-        "url": "https://www.onthesnow.com/news/ikon-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon results (OnTheSnow buyer's guide, alta.com, Undercover Tourist, ikonpass.com compare page). Prices not captured."
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "26/27 Ikon Pass page and ikonpass.com/en/compare-passes, read 2026-10-03."
       }
     },
     {
@@ -84,24 +90,50 @@
       "resortId": null,
       "name": "Ikon Base Pass",
       "season": "2026-27",
-      "summary": "The Ikon Base Pass for 2026-27: unlimited access at 14 destinations (for example Copper Mountain and Solitude) and 5 days at many others (for example Big Sky, Brighton, Snowbird, Kitzbühel and Ischgl), with holiday blackout dates. Reported starting price $1,019 for adults 23+ ($924 to renew); price tiers and the sales deadline were not captured — check ikonpass.com.",
-      "blackoutsSummary": "Ikon Base blackout dates for 2026-27: Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027. Whether they apply at every Base destination was not confirmed (Solitude has no restrictions).",
-      "reservationsSummary": null,
-      "salesDeadline": null,
-      "salesDeadlineText": null,
-      "renewalNotes": "Existing passholders renew for less: $924 for the Ikon Base Pass (search summary, 2026-10-03). Renewal deadline not captured.",
+      "summary": "The 2026-27 Ikon Base Pass: unlimited skiing at 15 destinations (e.g. Copper, Solitude, Sugarbush) and up to 5 days at most others (e.g. Steamboat, Big Sky, Brighton, Snowbird, Killington, Europe and Japan), with blackout dates; no access at Alta, Deer Valley or Jackson Hole. From $1,019 for adults 23+ until October 8, 2026; a refundable version starts at $1,222.80 and the Squad Pack gives riders 23–28 a Base Pass for $800 when one person buys 5.",
+      "blackoutsSummary": "Blackout dates apply: Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027 (listed on the Ikon Base Pass page for both its unlimited and 5-day sections; the page flags which destinations they apply to with icons not captured in the saved text).",
+      "reservationsSummary": "ikonpass.com marks some 5-day destinations \"Lift Reservations Required\" (per-destination icons not captured). No priority reservations on the Base Pass.",
+      "salesDeadline": "2026-10-08",
+      "salesDeadlineText": "Prices increase after October 8, 2026: ikonpass.com (fetched 2026-10-03) says \"last day to save is October 8\" with a \"prices increase in\" countdown.",
+      "renewalNotes": "Renewal price $924 (earlier search summary, Teton Gravity; not shown on the saved ikonpass.com pages). Renewal deadline not stated.",
       "prices": [
         {
-          "category": "Adult",
+          "category": "adult",
           "amount": 1019,
           "currency": "USD",
-          "window": "Ages 23+. Reported 2026-27 starting price; later price tiers and deadlines not captured — confirm the current price at ikonpass.com",
+          "window": "Ages 23+. \"From $1,019\" on the 26/27 Ikon Base Pass page; current price until prices increase after Oct 8, 2026",
+          "purchaseBy": "2026-10-08",
+          "source": {
+            "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "adult refundable option",
+          "amount": 1222.8,
+          "currency": "USD",
+          "window": "\"New refundable Ikon Pass and Ikon Base Pass products starting from $1,222.80\" (lowest refundable product)",
+          "purchaseBy": "2026-10-08",
+          "source": {
+            "url": "https://www.ikonpass.com/",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "young adult squad pack (ages 23-28)",
+          "amount": 800,
+          "currency": "USD",
+          "window": "Squad Pack: riders 23–28 get an Ikon Base Pass for $800 when one person buys 5 passes for the group ($219 savings per pass)",
           "purchaseBy": null,
           "source": {
-            "url": "https://www.tetongravity.com/ikon-pass-2026-27/",
-            "verification": "search-summary",
+            "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+            "verification": "official-page",
             "checkedOn": "2026-10-03",
-            "note": "Web search summary for 'Ikon Pass 2026-27 price adult' (2026-10-03). The summary did not attribute the figure to one page; results included this Teton Gravity article, Yahoo, the ikonpass.com 26/27 shop pages and OnTheSnow."
+            "note": null
           }
         },
         {
@@ -119,10 +151,10 @@
         }
       ],
       "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ikon 2026-27 Base Pass results (ikonpass.com compare and Base Pass pages, OnTheSnow, Powder, Ski Mag). Prices not captured."
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "26/27 Ikon Base Pass page and compare page, read 2026-10-03."
       }
     },
     {
@@ -131,32 +163,32 @@
       "resortId": null,
       "name": "Ikon Session Pass",
       "season": "2026-27",
-      "summary": "A 2026-27 Ikon Session Pass is sold: a search summary lists it among the 2026-27 Ikon options, starting at $319. Its day options, destinations, blackouts and reservation terms were not captured — check ikonpass.com.",
-      "blackoutsSummary": null,
-      "reservationsSummary": null,
-      "salesDeadline": null,
-      "salesDeadlineText": null,
+      "summary": "The 2026-27 Ikon Session Pass gives 2, 3 or 4 days in total, usable at any of its destinations (e.g. Copper, Solitude, Steamboat, Sugarbush, Big Sky, Brighton, Killington, Niseko, Mt Buller, Coronet Peak/Remarkables/Mt Hutt); no access at Alta, Snowbird, Deer Valley, Jackson Hole or the European destinations. From $319 for adults 23+ (lowest option); prices increase after October 8, 2026.",
+      "blackoutsSummary": "Blackout dates apply (stated on the Session Pass page); the dates for the Session Pass are not listed on the saved page.",
+      "reservationsSummary": "Lift reservations required at some destinations (stated on the Session Pass page; per-destination markers not captured).",
+      "salesDeadline": "2026-10-08",
+      "salesDeadlineText": "Prices increase after October 8, 2026: ikonpass.com (fetched 2026-10-03) says \"last day to save is October 8\" with a \"prices increase in\" countdown.",
       "renewalNotes": null,
       "prices": [
         {
-          "category": "Starting price (lowest option)",
+          "category": "adult (lowest option)",
           "amount": 319,
           "currency": "USD",
-          "window": "Reported as \"starts at $319\"; the day option and age category were not stated",
-          "purchaseBy": null,
+          "window": "Ages 23+. \"From $319\" — the lowest of the 2-, 3- and 4-day options (which option is not stated); current price until prices increase after Oct 8, 2026",
+          "purchaseBy": "2026-10-08",
           "source": {
-            "url": "https://www.tetongravity.com/ikon-pass-2026-27/",
-            "verification": "search-summary",
+            "url": "https://www.ikonpass.com/en/shop-passes/ikon-session-pass",
+            "verification": "official-page",
             "checkedOn": "2026-10-03",
-            "note": "Web search summary for 'Ikon Pass 2026-27 price adult' (2026-10-03). The summary did not attribute the figure to one page; results included this Teton Gravity article, Yahoo, the ikonpass.com 26/27 shop pages and OnTheSnow."
+            "note": null
           }
         }
       ],
       "source": {
-        "url": "https://www.tetongravity.com/ikon-pass-2026-27/",
-        "verification": "search-summary",
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-session-pass",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Web search summary for 'Ikon Pass 2026-27 price adult' (2026-10-03). The summary did not attribute the figure to one page; results included this Teton Gravity article, Yahoo, the ikonpass.com 26/27 shop pages and OnTheSnow. Confirms only that a Session Pass is offered for 2026-27 and its starting price."
+        "note": "26/27 Ikon Session Pass page and compare page, read 2026-10-03."
       }
     },
     {
@@ -165,26 +197,66 @@
       "resortId": null,
       "name": "Mountain Collective Pass",
       "season": "2026-27",
-      "summary": "A multi-resort pass with two days at each partner resort plus 50% off additional days, with no blackout dates. Partners for 2026-27 include Alta, Snowbird, Big Sky and Jackson Hole. Prices and deadlines were not captured — check mountaincollective.com. Belleayre says Mountain Collective holders get no benefits there.",
+      "summary": "The 2026-27 Mountain Collective Pass (on sale now) gives 2 days at each of 27 destinations plus unlimited 50%-off additional days, with no blackout dates. $729 for adults 19+, $594 for teens, $304 for kids; no price deadline is shown on the saved page.",
       "blackoutsSummary": "No blackout dates.",
-      "reservationsSummary": null,
+      "reservationsSummary": "\"Some resorts require advance reservations.\" Jackson Hole requires lift reservations for all Mountain Collective holders in 2026-27.",
       "salesDeadline": null,
-      "salesDeadlineText": null,
+      "salesDeadlineText": "Not stated on mountaincollective.com (fetched 2026-10-03).",
       "renewalNotes": null,
-      "prices": [],
+      "prices": [
+        {
+          "category": "adult",
+          "amount": 729,
+          "currency": "USD",
+          "window": "Adults 19+; 26/27 price on mountaincollective.com (2026-10-03); price deadline not stated",
+          "purchaseBy": null,
+          "source": {
+            "url": "https://mountaincollective.com/",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "teen",
+          "amount": 594,
+          "currency": "USD",
+          "window": "26/27 price on mountaincollective.com (2026-10-03); teen age range not stated",
+          "purchaseBy": null,
+          "source": {
+            "url": "https://mountaincollective.com/",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        },
+        {
+          "category": "child",
+          "amount": 304,
+          "currency": "USD",
+          "window": "\"Kids\" price on mountaincollective.com (2026-10-03); age range not stated",
+          "purchaseBy": null,
+          "source": {
+            "url": "https://mountaincollective.com/",
+            "verification": "official-page",
+            "checkedOn": "2026-10-03",
+            "note": null
+          }
+        }
+      ],
       "source": {
-        "url": "https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Mountain Collective results (mountaincollective.com on-sale post, OnTheSnow buyer's guide, jacksonhole.com). Prices not captured."
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage (\"Now on sale for the 26/27 season\"), read 2026-10-03."
       }
     }
   ],
   "access": [
     {
-      "productId": "mountain-collective-2026-27",
-      "resortId": "belleayre",
-      "access": "not-included",
+      "productId": "ikon-pass-2026-27",
+      "resortId": "copper-mountain",
+      "access": "unlimited",
       "days": null,
       "poolId": null,
       "poolLabel": null,
@@ -193,18 +265,18 @@
       "reservationNotes": null,
       "discountText": null,
       "eligibilityNotes": null,
-      "notes": "Belleayre's own Mountain Collective page says Mountain Collective passholders get no benefits at Belleayre. The link runs the other way: SKI3 Full Season holders get 50% off tickets at Mountain Collective resorts.",
+      "notes": "Copper Mountain is one of the 18 unlimited destinations on the 2026-27 Ikon Pass; no blackouts.",
       "source": {
-        "url": "https://www.belleayre.com/mountain-collective/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
       }
     },
     {
-      "productId": "mountain-collective-2026-27",
-      "resortId": "whiteface",
-      "access": "unknown",
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "copper-mountain",
+      "access": "unlimited",
       "days": null,
       "poolId": null,
       "poolLabel": null,
@@ -213,12 +285,2016 @@
       "reservationNotes": null,
       "discountText": null,
       "eligibilityNotes": null,
-      "notes": "ORDA announced in July 2025 that Whiteface was joining the Mountain Collective roster from 2025-26. Days per pass, blackouts and whether the partnership continues in 2026-27 were not confirmed. Check mountaincollective.com.",
+      "notes": "Copper Mountain is one of the 15 unlimited destinations on the 2026-27 Ikon Base Pass. The Base Pass page lists blackout dates (Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027) under its unlimited section with per-destination icons not captured, so whether they apply here is not confirmed.",
       "source": {
-        "url": "https://orda.org/2025/07/22/whiteface-mountain-joins-mountain-collective-pass-roster-for-2025-2026-season/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Research dates from 2025-26; 2026-27 not confirmed"
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "copper-mountain",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "solitude",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Solitude Mountain Resort is one of the 18 unlimited destinations on the 2026-27 Ikon Pass; no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "solitude",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Solitude Mountain Resort is one of the 15 unlimited destinations on the 2026-27 Ikon Base Pass. The Base Pass page lists blackout dates (Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027) under its unlimited section with per-destination icons not captured, so whether they apply here is not confirmed. Solitude was earlier reported to have no restrictions on the Base Pass (search summary).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "solitude",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "sugarbush",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Sugarbush Resort is one of the 18 unlimited destinations on the 2026-27 Ikon Pass; no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "sugarbush",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Sugarbush Resort is one of the 15 unlimited destinations on the 2026-27 Ikon Base Pass. The Base Pass page lists blackout dates (Dec 26–30, 2026; Jan 16–17, 2027; Feb 13–14, 2027) under its unlimited section with per-destination icons not captured, so whether they apply here is not confirmed.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-base-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "sugarbush",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "steamboat",
+      "access": "unlimited",
+      "days": null,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Steamboat is one of the 18 unlimited destinations on the 2026-27 Ikon Pass; no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/shop-passes/ikon-pass",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "steamboat",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "5 days on the 2026-27 Ikon Base Pass (compare page). Base Pass blackout dates apply to its 5-day destinations.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "steamboat",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "big-sky",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Big Sky Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "big-sky",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Big Sky Resort: 5 days on the 2026-27 Ikon Base Pass, with Base blackout dates.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "big-sky",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "brighton",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Brighton: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "brighton",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Brighton: 5 days on the 2026-27 Ikon Base Pass, with Base blackout dates.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "brighton",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "killington",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Killington-Pico: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "killington",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Killington-Pico: 5 days on the 2026-27 Ikon Base Pass, with Base blackout dates.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "killington",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "alta",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:alta-snowbird",
+      "poolLabel": "Alta + Snowbird: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "7 days on the 2026-27 Ikon Pass (ikonpass.com lists 7 days at Alta and 7 at Snowbird without saying whether they are shared). An earlier search summary of alta.com/Ikon says the pass \"provides seven days of skiing between Alta and Snowbird\", so a combined pool is kept — confirm.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "snowbird",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:alta-snowbird",
+      "poolLabel": "Alta + Snowbird: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "7 days on the 2026-27 Ikon Pass (ikonpass.com lists 7 days at Alta and 7 at Snowbird without saying whether they are shared). An earlier search summary of alta.com/Ikon says the pass \"provides seven days of skiing between Alta and Snowbird\", so a combined pool is kept — confirm.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "snowbird",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "5 days on the 2026-27 Ikon Base Pass, with Base blackout dates. Alta is not on the Base Pass.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "deer-valley",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": true,
+      "reservationNotes": "Search summary: \"Deer Valley Resort, Utah offers 7 days with reservations required\". Reservation window and process not captured.",
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "7 days on the 2026-27 Ikon Pass only (a Premium Destination; not on Base or Session). Reservations: an earlier search summary (Undercover Tourist) said reservations are required.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "jackson-hole",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": true,
+      "reservationNotes": "Jackson Hole: \"we will require lift reservations for all Ikon Pass and Mountain Collective passholders for the 2026-27 season.\" (jacksonhole.com/lift-tickets)",
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "7 days on the 2026-27 Ikon Pass only (a Premium Destination; not on Base or Session). Reservations required (jacksonhole.com).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "chamonix",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Chamonix Mont-Blanc Valley: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "chamonix",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Chamonix Mont-Blanc Valley: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "grandvalira",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Grandvalira Resorts: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "grandvalira",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Grandvalira Resorts: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "ischgl",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ischgl: 7 days on the 2026-27 Ikon Pass, no blackouts. Days are shared between Ischgl and Samnaun (earlier search summary of ischgl.com's Ikon page).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "ischgl",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ischgl: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section. Days are shared between Ischgl and Samnaun (earlier search summary of ischgl.com's Ikon page).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "kitzbuehel",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Kitzbühel: 7 days on the 2026-27 Ikon Pass, no blackouts. Days are shared between Kitzbühel, Kirchberg and Mittersill (earlier search summary).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "kitzbuehel",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Kitzbühel: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section. Days are shared between Kitzbühel, Kirchberg and Mittersill (earlier search summary).",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "megeve",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Megève Ski Area: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "megeve",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Megève Ski Area: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "st-moritz",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "St. Moritz: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "st-moritz",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "St. Moritz: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "zermatt",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zermatt Matterhorn: 7 days on the 2026-27 Ikon Pass, no blackouts. Whether Cervinia/Valtournenche can be skied on Zermatt days is asked on matterhornparadise.ch but the answer was not captured; no Zermatt–Cervinia pool is set.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "zermatt",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zermatt Matterhorn: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section. Whether Cervinia/Valtournenche can be skied on Zermatt days is asked on matterhornparadise.ch but the answer was not captured; no Zermatt–Cervinia pool is set.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "thredbo",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Thredbo: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "thredbo",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Thredbo: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "appi-kogen",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "APPI Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "appi-kogen",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "APPI Resort: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "lotte-arai",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Arai Mountain Resort (Arai Snow Resort): 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "lotte-arai",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Arai Mountain Resort (Arai Snow Resort): 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "furano",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Furano Ski Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "furano",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Furano Ski Resort: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "myoko-suginohara",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Myoko Suginohara Ski Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "myoko-suginohara",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Myoko Suginohara Ski Resort: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "shiga-kogen",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Shiga Kogen Mountain Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "shiga-kogen",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Shiga Kogen Mountain Resort: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "zao-onsen",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zao Onsen Ski Resort: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "zao-onsen",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Zao Onsen Ski Resort: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "mt-buller",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mt Buller: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "mt-buller",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Mt Buller: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "mt-buller",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "niseko-united",
+      "access": "limited-days",
+      "days": 7,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Niseko United: 7 days on the 2026-27 Ikon Pass, no blackouts.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "niseko-united",
+      "access": "limited-days",
+      "days": 5,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Niseko United: 5 days on the 2026-27 Ikon Base Pass; Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "niseko-united",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "cortina-d-ampezzo",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 7 days on the Ikon Pass; the days cover the whole Dolomiti Superski area.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "val-gardena",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 7 days on the Ikon Pass; the days cover the whole Dolomiti Superski area.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "alta-badia",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 7 days on the Ikon Pass; the days cover the whole Dolomiti Superski area.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "cervinia",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:valle-d-aosta",
+      "poolLabel": "Valle d'Aosta: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Valle d'Aosta: 'up to 7 days of access to the destination' across the ski areas of Valle d'Aosta on the Ikon Pass (Courmayeur's Ikon page; ikonpass.com compare page lists Valle d'Aosta with 7/5 days). Valid Nov 1–May 31 depending on opening; direct-to-lift.",
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/ikon-pass/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Courmayeur Mont Blanc Funivie Ikon Pass page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "courmayeur",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:valle-d-aosta",
+      "poolLabel": "Valle d'Aosta: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Valle d'Aosta: 'up to 7 days of access to the destination' across the ski areas of Valle d'Aosta on the Ikon Pass (Courmayeur's Ikon page; ikonpass.com compare page lists Valle d'Aosta with 7/5 days). Valid Nov 1–May 31 depending on opening; direct-to-lift.",
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/ikon-pass/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Courmayeur Mont Blanc Funivie Ikon Pass page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "coronet-peak",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 7 days on the Ikon Pass.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "the-remarkables",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 7 days on the Ikon Pass.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-pass-2026-27",
+      "resortId": "mt-hutt",
+      "access": "shared-pool",
+      "days": 7,
+      "poolId": "ikon-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 7 days total",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 7 days on the Ikon Pass.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "cortina-d-ampezzo",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 5 days on the Ikon Base Pass; the days cover the whole Dolomiti Superski area. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "val-gardena",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 5 days on the Ikon Base Pass; the days cover the whole Dolomiti Superski area. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "alta-badia",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:dolomiti-superski",
+      "poolLabel": "Dolomiti Superski: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Dolomiti Superski, which ikonpass.com lists as one destination with 5 days on the Ikon Base Pass; the days cover the whole Dolomiti Superski area. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "cervinia",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:valle-d-aosta",
+      "poolLabel": "Valle d'Aosta: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Valle d'Aosta: 'up to 5 days of access to the destination' across the ski areas of Valle d'Aosta on the Ikon Base Pass (Courmayeur's Ikon page; ikonpass.com compare page lists Valle d'Aosta with 7/5 days). Valid Nov 1–May 31 depending on opening; direct-to-lift. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/ikon-pass/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Courmayeur Mont Blanc Funivie Ikon Pass page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "courmayeur",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:valle-d-aosta",
+      "poolLabel": "Valle d'Aosta: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Included via Valle d'Aosta: 'up to 5 days of access to the destination' across the ski areas of Valle d'Aosta on the Ikon Base Pass (Courmayeur's Ikon page; ikonpass.com compare page lists Valle d'Aosta with 7/5 days). Valid Nov 1–May 31 depending on opening; direct-to-lift. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.courmayeur-montblanc.com/en/skipass-rates/ikon-pass/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Courmayeur Mont Blanc Funivie Ikon Pass page, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "coronet-peak",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 5 days on the Ikon Base Pass. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "the-remarkables",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 5 days on the Ikon Base Pass. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-base-pass-2026-27",
+      "resortId": "mt-hutt",
+      "access": "shared-pool",
+      "days": 5,
+      "poolId": "ikon-base-pass-2026-27:nzski",
+      "poolLabel": "Coronet Peak + The Remarkables + Mt Hutt: 5 days total",
+      "blackouts": [
+        {
+          "from": "2026-12-26",
+          "to": "2026-12-30",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-01-16",
+          "to": "2027-01-17",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        },
+        {
+          "from": "2027-02-13",
+          "to": "2027-02-14",
+          "label": "Ikon Base blackout (listed on the Base Pass page; confirm it applies here)"
+        }
+      ],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "ikonpass.com lists \"Coronet Peak, The Remarkables & Mt Hutt, New Zealand\" as one destination with 5 days on the Ikon Base Pass. Base blackout dates apply to its 5-day section.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "coronet-peak",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "the-remarkables",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
+      }
+    },
+    {
+      "productId": "ikon-session-pass-2026-27",
+      "resortId": "mt-hutt",
+      "access": "shared-pool",
+      "days": null,
+      "poolId": "ikon-session-pass-2026-27:total",
+      "poolLabel": "Ikon Session Pass: 2, 3 or 4 days total across all Session destinations",
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": null,
+      "eligibilityNotes": null,
+      "notes": "Ikon Session Pass: 2, 3 or 4 total days (depending on the option bought) shared across all Session destinations; blackout dates apply. Listed with \"2, 3 or 4 Total Days\" on the compare page.",
+      "source": {
+        "url": "https://www.ikonpass.com/en/compare-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "ikonpass.com compare page (26/27), read 2026-10-03."
       }
     },
     {
@@ -282,969 +2358,229 @@
       }
     },
     {
-      "productId": "ikon-pass-2026-27",
+      "productId": "mountain-collective-2026-27",
       "resortId": "alta",
-      "access": "shared-pool",
-      "days": 7,
-      "poolId": "ikon-pass-2026-27:alta-snowbird",
-      "poolLabel": "Alta + Snowbird: 7 days total",
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary (2026-09-30): the 2026-27 Ikon Pass \"provides seven days of skiing between Alta and Snowbird\"; the full Ikon Pass has no holiday blackout dates.",
-      "source": {
-        "url": "https://www.alta.com/Ikon",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (alta.com \"Ikon and Alta\", ikonpass.com compare page, Undercover Tourist, OnTheSnow buyer's guide)."
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "alta",
-      "access": "unknown",
-      "days": null,
+      "access": "limited-days",
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page. In past seasons, Ikon days at Alta and Snowbird were one combined allotment (reference note, unverified). No shared pool is modelled until that is confirmed for 2026–27.",
+      "notes": "Alta Ski Area is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
       "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "snowbird",
-      "access": "shared-pool",
-      "days": 7,
-      "poolId": "ikon-pass-2026-27:alta-snowbird",
-      "poolLabel": "Alta + Snowbird: 7 days total",
+      "productId": "mountain-collective-2026-27",
+      "resortId": "big-sky",
+      "access": "limited-days",
+      "days": 2,
+      "poolId": null,
+      "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "Search summary (2026-09-30): the 2026-27 Ikon Pass \"provides seven days of skiing between Alta and Snowbird\"; the full Ikon Pass has no holiday blackout dates.",
+      "notes": "Big Sky Resort is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
       "source": {
-        "url": "https://www.alta.com/Ikon",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (alta.com \"Ikon and Alta\", ikonpass.com compare page, Undercover Tourist, OnTheSnow buyer's guide)."
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-base-pass-2026-27",
+      "productId": "mountain-collective-2026-27",
       "resortId": "snowbird",
       "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-30",
-          "label": "Ikon Base blackout (holidays)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-17",
-          "label": "Ikon Base blackout (MLK weekend)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Ikon Base blackout (Presidents' weekend)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: Snowbird \"receives 5 total days with blackout dates\" on the Ikon Base Pass. Whether these 5 days are shared with Alta (as on the full pass) was not stated, and Alta's own Base allowance was not found, so no pool is set. Ikon Base blackout dates for 2026-27 per search summary: Dec. 26-30, 2026; Jan. 16-17, 2027; Feb. 13-14, 2027.",
-      "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ikon 2026-27 Base Pass results (ikonpass.com compare and Base Pass pages, OnTheSnow, Powder)."
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "brighton",
-      "access": "limited-days",
-      "days": 7,
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "Search summary: \"Brighton offers 7 days on the Ikon Pass\" (2026-27); the full Ikon Pass has no holiday blackout dates.",
+      "notes": "Snowbird is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
       "source": {
-        "url": "https://www.undercovertourist.com/blog/ikon-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (Undercover Tourist, ikonpass.com compare page, OnTheSnow)."
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "brighton",
+      "productId": "mountain-collective-2026-27",
+      "resortId": "whiteface",
       "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-30",
-          "label": "Ikon Base blackout (holidays)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-17",
-          "label": "Ikon Base blackout (MLK weekend)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Ikon Base blackout (Presidents' weekend)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: Brighton \"receives 5 days with blackout dates\" on the Ikon Base Pass. Ikon Base blackout dates for 2026-27 per search summary: Dec. 26-30, 2026; Jan. 16-17, 2027; Feb. 13-14, 2027.",
-      "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ikon 2026-27 Base Pass results (ikonpass.com compare and Base Pass pages, OnTheSnow, Powder)."
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "solitude",
-      "access": "unknown",
-      "days": null,
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page. Research found the Ikon Base Pass unlimited here for 2026-27, but no source stated the full Ikon Pass terms.",
+      "notes": "Whiteface is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com). Whiteface is marked \"new this season\".",
       "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "solitude",
-      "access": "unlimited",
-      "days": null,
+      "productId": "mountain-collective-2026-27",
+      "resortId": "chamonix",
+      "access": "limited-days",
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "Search summary: \"Solitude Mountain Resort has no restrictions on the Base Pass\" (2026-27), i.e. unlimited without blackout dates.",
+      "notes": "Chamonix is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
       "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ikon 2026-27 Base Pass results (ikonpass.com compare page, OnTheSnow, Powder)."
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "deer-valley",
+      "productId": "mountain-collective-2026-27",
+      "resortId": "megeve",
       "access": "limited-days",
-      "days": 7,
+      "days": 2,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": "50% off additional days",
+      "eligibilityNotes": null,
+      "notes": "Megève is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
+      "source": {
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "mountain-collective-2026-27",
+      "resortId": "niseko-united",
+      "access": "limited-days",
+      "days": 2,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": "50% off additional days",
+      "eligibilityNotes": null,
+      "notes": "Niseko United is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
+      "source": {
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "mountain-collective-2026-27",
+      "resortId": "mt-buller",
+      "access": "limited-days",
+      "days": 2,
+      "poolId": null,
+      "poolLabel": null,
+      "blackouts": [],
+      "reservationRequired": null,
+      "reservationNotes": null,
+      "discountText": "50% off additional days",
+      "eligibilityNotes": null,
+      "notes": "Mt Buller is listed on mountaincollective.com's 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
+      "source": {
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
+      }
+    },
+    {
+      "productId": "mountain-collective-2026-27",
+      "resortId": "jackson-hole",
+      "access": "limited-days",
+      "days": 2,
       "poolId": null,
       "poolLabel": null,
       "blackouts": [],
       "reservationRequired": true,
-      "reservationNotes": "Search summary: \"Deer Valley Resort, Utah offers 7 days with reservations required\". Reservation window and process not captured.",
-      "discountText": null,
+      "reservationNotes": "Jackson Hole: \"we will require lift reservations for all Ikon Pass and Mountain Collective passholders for the 2026-27 season.\" mountaincollective.com/pass also marks Jackson Hole \"Reservations Required\".",
+      "discountText": "50% off additional days",
       "eligibilityNotes": null,
-      "notes": "2026-27 Ikon Pass: 7 days with reservations required (search summary).",
+      "notes": "Jackson Hole Mountain Resort is on the 26/27 roster. Mountain Collective 2026-27: 2 days at each resort plus 50% off additional days, no blackout dates (mountaincollective.com).",
       "source": {
-        "url": "https://www.undercovertourist.com/blog/ikon-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (Undercover Tourist, ikonpass.com compare page)."
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "deer-valley",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "jackson-hole",
-      "access": "limited-days",
-      "days": 7,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": "A search summary said JHMR \"is requiring reservations for Ikon Pass holders\"; this may describe an earlier season, so reservationRequired is left unknown — confirm.",
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "2026-27 Ikon Pass: 7 days at Jackson Hole (search summary).",
-      "source": {
-        "url": "https://www.jacksonhole.com/ikon-pass",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (jacksonhole.com Ikon page, Undercover Tourist, ikonpass.com compare page)."
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "jackson-hole",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "big-sky",
-      "access": "limited-days",
-      "days": 7,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: \"Big Sky Resort offers seven days on the full Ikon Pass with no blackout dates\" (2026-27).",
-      "source": {
-        "url": "https://www.undercovertourist.com/blog/ikon-pass/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access results (Undercover Tourist, ikonpass.com compare page, OnTheSnow)."
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "big-sky",
-      "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-30",
-          "label": "Ikon Base blackout (holidays)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-17",
-          "label": "Ikon Base blackout (MLK weekend)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Ikon Base blackout (Presidents' weekend)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: \"Big Sky Resort offers 5 days with blackout dates on the Ikon Base Pass\" (2026-27). Ikon Base blackout dates for 2026-27 per search summary: Dec. 26-30, 2026; Jan. 16-17, 2027; Feb. 13-14, 2027.",
-      "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Ikon 2026-27 Base Pass results (ikonpass.com compare and Base Pass pages, OnTheSnow)."
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "steamboat",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: the full 2026-27 Ikon Pass \"includes unlimited skiing and snowboarding at destinations like Steamboat\" and has no holiday blackout dates.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/ikon-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of the 2026-27 Ikon buyer's guide (OnTheSnow), Powder and ikonpass.com results."
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "steamboat",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "copper-mountain",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page. Research found the Ikon Base Pass unlimited here for 2026-27, but no source stated the full Ikon Pass terms.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "copper-mountain",
-      "access": "unlimited",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Search summary: the Ikon Base Pass \"offers unlimited access at 14 destinations like Copper Mountain\" (2026-27). Whether the Base blackout dates (Dec. 26-30, 2026; Jan. 16-17, Feb. 13-14, 2027) apply at Copper was not stated — confirm; none recorded.",
-      "source": {
-        "url": "https://www.onthesnow.com/news/ikon-pass-buyers-guide/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon Base results (OnTheSnow buyer's guide, Powder, ikonpass.com)."
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "killington",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page. In past seasons, Ikon days here were shared with neighbouring Pico, which is not in this catalog (reference note, unverified).",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "killington",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page. In past seasons, Ikon days here were shared with neighbouring Pico, which is not in this catalog (reference note, unverified).",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "sugarbush",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "sugarbush",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "ski-arlberg",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "ski-arlberg",
-      "access": "unknown",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed with Ikon Pass in 2025–26 (Piste reference data, unverified). 2026–27 access not confirmed — check the official pass page.",
-      "source": {
-        "url": "https://www.ikonpass.com/",
-        "verification": "unverified",
-        "checkedOn": "2026-09-28",
-        "note": "Piste reference data (not web-verified in this build) — confirm at source"
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage and jacksonhole.com/lift-tickets, read 2026-10-03."
       }
     },
     {
       "productId": "mountain-collective-2026-27",
-      "resortId": "alta",
-      "access": "limited-days",
-      "days": 2,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": "50% off additional days",
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Mountain Collective includes two days at each partner resort plus 50% off unlimited additional days, with no blackout dates; partners include Alta, Big Sky, Jackson Hole and Snowbird (Alta and Snowbird are separate partners).",
-      "source": {
-        "url": "https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Mountain Collective results (mountaincollective.com, OnTheSnow buyer's guide, jacksonhole.com)."
-      }
-    },
-    {
-      "productId": "mountain-collective-2026-27",
-      "resortId": "snowbird",
-      "access": "limited-days",
-      "days": 2,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": "50% off additional days",
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Mountain Collective includes two days at each partner resort plus 50% off unlimited additional days, with no blackout dates; partners include Alta, Big Sky, Jackson Hole and Snowbird (Alta and Snowbird are separate partners).",
-      "source": {
-        "url": "https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Mountain Collective results (mountaincollective.com, OnTheSnow buyer's guide, jacksonhole.com)."
-      }
-    },
-    {
-      "productId": "mountain-collective-2026-27",
-      "resortId": "jackson-hole",
-      "access": "limited-days",
-      "days": 2,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": "50% off additional days",
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Mountain Collective includes two days at each partner resort plus 50% off unlimited additional days, with no blackout dates; partners include Alta, Big Sky, Jackson Hole and Snowbird (Alta and Snowbird are separate partners).",
-      "source": {
-        "url": "https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Mountain Collective results (mountaincollective.com, OnTheSnow buyer's guide, jacksonhole.com)."
-      }
-    },
-    {
-      "productId": "mountain-collective-2026-27",
-      "resortId": "big-sky",
-      "access": "limited-days",
-      "days": 2,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": "50% off additional days",
-      "eligibilityNotes": null,
-      "notes": "Search summary: the 2026-27 Mountain Collective includes two days at each partner resort plus 50% off unlimited additional days, with no blackout dates; partners include Alta, Big Sky, Jackson Hole and Snowbird (Alta and Snowbird are separate partners).",
-      "source": {
-        "url": "https://mountaincollective.com/2026-27-mountain-collective-passes-now-on-sale-2/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Mountain Collective results (mountaincollective.com, OnTheSnow buyer's guide, jacksonhole.com)."
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "kitzbuehel",
-      "access": "limited-days",
-      "days": 7,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "7 days on the 2026-27 Ikon Pass, no blackouts; days are shared between Kitzbühel, Kirchberg and Mittersill (all KitzSki).",
-      "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access (ikonpass.com compare page, skimag, onthesnow)"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "kitzbuehel",
-      "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-30",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-17",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "5 days on the 2026-27 Ikon Base Pass, with blackouts; days shared between Kitzbühel, Kirchberg and Mittersill. Blackout dates are the 2026-27 Ikon Base Pass dates given in the same search (26–30 Dec 2026, 16–17 Jan 2027, 13–14 Feb 2027; skimag.com/news/ikon-pass-2026-2027-details); the summary said this resort's Base access has blackouts but did not list resort-specific dates, so confirm them.",
-      "source": {
-        "url": "https://www.ikonpass.com/en/compare-passes",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "ischgl",
-      "access": "limited-days",
-      "days": 7,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "7 days on the 2026-27 Ikon Pass, no blackouts; days are shared between Ischgl and Samnaun.",
-      "source": {
-        "url": "https://www.ischgl.com/en/winter/operating-times-prices/ski-network-tickets/ikon-pass",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access (Ischgl's Ikon page, ikonpass.com)"
-      }
-    },
-    {
-      "productId": "ikon-base-pass-2026-27",
-      "resortId": "ischgl",
-      "access": "limited-days",
-      "days": 5,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [
-        {
-          "from": "2026-12-26",
-          "to": "2026-12-30",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        },
-        {
-          "from": "2027-01-16",
-          "to": "2027-01-17",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        },
-        {
-          "from": "2027-02-13",
-          "to": "2027-02-14",
-          "label": "Ikon Base Pass blackout (2026-27 Base Pass dates; confirm they apply here)"
-        }
-      ],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "5 days on the 2026-27 Ikon Base Pass, with blackouts; days shared between Ischgl and Samnaun. Blackout dates are the 2026-27 Ikon Base Pass dates given in the same search (26–30 Dec 2026, 16–17 Jan 2027, 13–14 Feb 2027; skimag.com/news/ikon-pass-2026-2027-details); the summary said this resort's Base access has blackouts but did not list resort-specific dates, so confirm them.",
-      "source": {
-        "url": "https://www.ischgl.com/en/winter/operating-times-prices/ski-network-tickets/ikon-pass",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 Ikon access"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "chamonix",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed among Ikon Pass 2026-27 international destinations as 'Chamonix Mont Blanc Valley'. Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon Pass 2026-27 international destinations; also onthesnow.com Ikon buyers guide, powder.com and alterramtn.co"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "megeve",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed among Ikon Pass 2026-27 international destinations (France: Megève). Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon Pass 2026-27 international destinations; also onthesnow.com Ikon buyers guide, powder.com and alterramtn.co"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "grandvalira",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed among Ikon Pass 2026-27 international destinations as 'Grandvalira Resorts'. Day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon Pass 2026-27 international destinations; also onthesnow.com Ikon buyers guide, powder.com and alterramtn.co"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "niseko-united",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Niseko United is a 2026-27 Ikon Pass destination in Japan; day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 international roster (also onthesnow.com Ikon buyers guide, powder.com, alterramtn.co)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "lotte-arai",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Listed as Lotte Arai Resort on 2026-27 Ikon destination lists (ikonpass.com now calls it Arai Mountain Resort); day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 international roster (also onthesnow.com Ikon buyers guide, powder.com, alterramtn.co)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "shiga-kogen",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Shiga Kogen Mountain Resort is a 2026-27 Ikon Pass destination; day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 international roster (also onthesnow.com Ikon buyers guide, powder.com, alterramtn.co)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "myoko-suginohara",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Myoko Suginohara is a 2026-27 Ikon Pass destination; day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 international roster (also onthesnow.com Ikon buyers guide, powder.com, alterramtn.co)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "thredbo",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Listed among the Ikon Pass 2026-27 Australia & New Zealand destinations; day allowance not researched. Blackouts, reservations and Ikon Base / Session access not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 destinations roster; also https://www.onthesnow.com/news/ikon-pass-buyers-guide/"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "mt-buller",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Listed among the Ikon Pass 2026-27 Australia & New Zealand destinations; day allowance not researched. Blackouts, reservations and Ikon Base / Session access not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 destinations roster; also https://www.onthesnow.com/news/ikon-pass-buyers-guide/"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
       "resortId": "coronet-peak",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
+      "access": "shared-pool",
+      "days": 2,
+      "poolId": "mountain-collective-2026-27:coronet-remarkables",
+      "poolLabel": "Coronet Peak + The Remarkables: 2 days total",
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Listed among the Ikon Pass 2026-27 Australia & New Zealand destinations; day allowance not researched. Blackouts, reservations and Ikon Base / Session access not researched.",
+      "discountText": "50% off additional days",
+      "eligibilityNotes": null,
+      "notes": "mountaincollective.com lists \"Coronet Peak + The Remarkables\" as one of its 27 destinations (2 days each, 54 days total), so the 2 days cover both. 50% off additional days, no blackouts.",
       "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 destinations roster; also https://www.onthesnow.com/news/ikon-pass-buyers-guide/"
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-pass-2026-27",
+      "productId": "mountain-collective-2026-27",
       "resortId": "the-remarkables",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
+      "access": "shared-pool",
+      "days": 2,
+      "poolId": "mountain-collective-2026-27:coronet-remarkables",
+      "poolLabel": "Coronet Peak + The Remarkables: 2 days total",
       "blackouts": [],
       "reservationRequired": null,
       "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Listed among the Ikon Pass 2026-27 Australia & New Zealand destinations; day allowance not researched. Blackouts, reservations and Ikon Base / Session access not researched.",
+      "discountText": "50% off additional days",
+      "eligibilityNotes": null,
+      "notes": "mountaincollective.com lists \"Coronet Peak + The Remarkables\" as one of its 27 destinations (2 days each, 54 days total), so the 2 days cover both. 50% off additional days, no blackouts.",
       "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 destinations roster; also https://www.onthesnow.com/news/ikon-pass-buyers-guide/"
+        "url": "https://mountaincollective.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "mountaincollective.com homepage, read 2026-10-03."
       }
     },
     {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "mt-hutt",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": "Southern Hemisphere: the 2026-27 pass covers the June–October 2027 winter.",
-      "notes": "Listed among the Ikon Pass 2026-27 Australia & New Zealand destinations; day allowance not researched. Blackouts, reservations and Ikon Base / Session access not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Ikon 2026-27 destinations roster; also https://www.onthesnow.com/news/ikon-pass-buyers-guide/"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "zermatt",
-      "access": "limited-days",
+      "productId": "mountain-collective-2026-27",
+      "resortId": "belleayre",
+      "access": "not-included",
       "days": null,
       "poolId": null,
       "poolLabel": null,
@@ -1253,132 +2589,12 @@
       "reservationNotes": null,
       "discountText": null,
       "eligibilityNotes": null,
-      "notes": "Zermatt is listed as a 2026-27 Ikon Pass destination (Switzerland); day allowance not researched.",
+      "notes": "Belleayre's own Mountain Collective page says Mountain Collective passholders get no benefits at Belleayre. The link runs the other way: SKI3 Full Season holders get 50% off tickets at Mountain Collective resorts.",
       "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
+        "url": "https://www.belleayre.com/mountain-collective/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "st-moritz",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "St. Moritz is listed as a 2026-27 Ikon Pass destination (Switzerland); day allowance not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "cortina-d-ampezzo",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Included via Dolomiti Superski on the 2026-27 Ikon Pass roster; day allowance not researched, and whether days are shared across Dolomiti Superski areas was not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "val-gardena",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Included via Dolomiti Superski on the 2026-27 Ikon Pass roster; day allowance not researched, and whether days are shared across Dolomiti Superski areas was not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "alta-badia",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Included via Dolomiti Superski on the 2026-27 Ikon Pass roster; day allowance not researched, and whether days are shared across Dolomiti Superski areas was not researched.",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "cervinia",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Cervino (Breuil-Cervinia) listed under Valle d'Aosta on the 2026-27 Ikon Pass roster; day allowance not researched (shared allowance across Valle d'Aosta resorts not researched).",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
-      }
-    },
-    {
-      "productId": "ikon-pass-2026-27",
-      "resortId": "courmayeur",
-      "access": "limited-days",
-      "days": null,
-      "poolId": null,
-      "poolLabel": null,
-      "blackouts": [],
-      "reservationRequired": null,
-      "reservationNotes": null,
-      "discountText": null,
-      "eligibilityNotes": null,
-      "notes": "Courmayeur Mont Blanc listed under Valle d'Aosta on the 2026-27 Ikon Pass roster; day allowance not researched (shared allowance across Valle d'Aosta resorts not researched).",
-      "source": {
-        "url": "https://snowbrains.com/ikon-pass-list-of-resorts-2026-27/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "2026-27 Ikon Pass international roster (also https://www.onthesnow.com/news/ikon-pass-buyers-guide/)"
+        "checkedOn": "2026-09-28",
+        "note": null
       }
     }
   ]
