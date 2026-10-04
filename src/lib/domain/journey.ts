@@ -1,8 +1,9 @@
 /**
  * Journey geometry and timing for "Ride there". Pure, framework-free.
  *
- * - Great-circle arcs (flight legs are illustrative: an arc between two airports, never a flight path or schedule).
- * - Distance along a polyline, the point and heading at a fraction of it (for gliding car / plane glyphs).
+ * - Great-circle arcs (flight legs are illustrative: a static arc between two airports, never a flight path or schedule).
+ * - Distance along a polyline, the point and heading at a fraction of it (for the car glyph on a road draw-in).
+ * - Road path simplification (bundled road geometry is thinned before it reaches the browser).
  * - "Leave by": the resort's published first-lift time minus the drive estimate (with the winter buffer).
  * - A plain effort label derived from a drive estimate.
  */
@@ -117,13 +118,55 @@ export function mercatorY(lat: number): number {
 }
 
 /**
- * How long the animation of a leg should take (ms) from its length: short drives are quick, long flights take longer
- * but are capped so the whole journey stays watchable.
+ * How long a road takes to draw in on the map (ms): short drives are quick, long ones a little slower, capped so the
+ * reveal stays a flourish rather than a wait. Flights are never animated.
  */
-export function legDurationMs(kind: 'drive' | 'ground' | 'transfer' | 'air', km: number): number {
-  if (kind === 'air') return Math.round(Math.max(5200, Math.min(9500, 3800 + km / 1.6)))
-  if (kind === 'drive') return Math.round(Math.max(3600, Math.min(8000, 2800 + km * 11)))
-  return Math.round(Math.max(1800, Math.min(4200, 1600 + km * 18)))
+export function roadDrawMs(km: number): number {
+  if (!Number.isFinite(km) || km <= 0) return 1200
+  return Math.round(Math.max(1200, Math.min(2600, 1000 + km * 4)))
+}
+
+/**
+ * Douglas–Peucker simplification of a [lon, lat] path, tolerance in km (local equirectangular approximation, fine at
+ * road scale). Keeps the first and last point; never returns fewer than two points for a path of two or more.
+ */
+export function simplifyPath(coords: readonly LonLat[], toleranceKm: number): LonLat[] {
+  if (coords.length <= 2) return coords.slice()
+  const lat0 = rad(coords[0][1])
+  const kx = 111.32 * Math.cos(lat0)
+  const ky = 110.57
+  const xy = coords.map((c) => [c[0] * kx, c[1] * ky] as const)
+  const keep = new Uint8Array(coords.length)
+  keep[0] = 1
+  keep[coords.length - 1] = 1
+  const stack: [number, number][] = [[0, coords.length - 1]]
+  const tol2 = toleranceKm * toleranceKm
+  while (stack.length) {
+    const [a, b] = stack.pop()!
+    const [ax, ay] = xy[a]
+    const [bx, by] = xy[b]
+    const dx = bx - ax
+    const dy = by - ay
+    const len2 = dx * dx + dy * dy
+    let worst = -1
+    let worstD = tol2
+    for (let i = a + 1; i < b; i++) {
+      const [px, py] = xy[i]
+      const t = len2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) : 0
+      const ex = ax + t * dx - px
+      const ey = ay + t * dy - py
+      const d = ex * ex + ey * ey
+      if (d > worstD) {
+        worstD = d
+        worst = i
+      }
+    }
+    if (worst > 0) {
+      keep[worst] = 1
+      stack.push([a, worst], [worst, b])
+    }
+  }
+  return coords.filter((_, i) => keep[i])
 }
 
 // ---------------------------------------------------------------------------

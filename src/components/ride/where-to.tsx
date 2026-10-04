@@ -4,16 +4,15 @@
  * Escape closes. An empty query lists the quick picks first, then everything A–Z.
  */
 import { useId, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { Loader2, Search, X } from 'lucide-react'
+import { t } from '@/lib/ui/motion'
 import { formatDuration } from '@/lib/domain/units'
 import type { RidePick } from '@/lib/data/ride'
 import { cn } from '@/lib/ui/cn'
 
 function norm(s: string) {
-  return s
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 }
 
 export function WhereTo({
@@ -132,43 +131,45 @@ export function WhereTo({
           <Search aria-hidden className="size-4 shrink-0 text-ink-3" />
         )}
       </div>
-      {open ? (
-        <ul
-          id={listId}
-          role="listbox"
-          aria-label="Resorts"
-          className="glass-strong scrollbar-thin absolute top-[calc(100%+10px)] right-[-16px] left-[-42px] z-30 max-h-[min(360px,52vh)] overflow-y-auto rounded-[18px] p-1.5 shadow-overlay"
-        >
-          {shown.length ? (
-            shown.map((r, i) => (
-              <li
-                key={r.id}
-                id={`${id}-opt-${r.id}`}
-                role="option"
-                aria-selected={i === active}
-                onMouseDown={(e) => e.preventDefault()}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => pick(r)}
-                className={cn(
-                  'flex min-h-11 cursor-pointer items-center gap-3 rounded-[12px] px-3 py-2',
-                  i === active ? 'bg-glacier' : '',
-                )}
-              >
-                <span className="flex min-w-0 flex-1 flex-col">
-                  <span className="truncate text-[14.5px] font-medium text-ink">{r.name}</span>
-                  <span className="truncate text-[12.5px] text-ink-2">{r.where}</span>
-                </span>
-                <span className="hud shrink-0 text-[11px] text-ink-2">
-                  {r.driveMinutes != null ? `${formatDuration(r.driveMinutes)} est.` : 'No drive est.'}
-                </span>
-              </li>
-            ))
-          ) : (
-            <li className="px-3 py-3 text-[13.5px] text-ink-2">No resort matches “{query}”.</li>
-          )}
-          {results.length > shown.length ? <li className="hud px-3 py-2 text-[11px] text-ink-3">{results.length - shown.length} more · keep typing</li> : null}
-        </ul>
-      ) : null}
+      <AnimatePresence>
+        {open ? (
+          <motion.ul
+            initial={{ opacity: 0, y: -6, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -4, transition: { duration: 0.12 } }}
+            transition={t.sheet}
+            style={{ transformOrigin: 'top center' }}
+            id={listId}
+            role="listbox"
+            aria-label="Resorts"
+            className="glass-strong scrollbar-thin absolute top-[calc(100%+10px)] right-[-16px] left-[-42px] z-30 max-h-[min(360px,52vh)] overflow-y-auto rounded-[18px] p-1.5 shadow-overlay"
+          >
+            {shown.length ? (
+              shown.map((r, i) => (
+                <li
+                  key={r.id}
+                  id={`${id}-opt-${r.id}`}
+                  role="option"
+                  aria-selected={i === active}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => pick(r)}
+                  className={cn('flex min-h-11 cursor-pointer items-center gap-3 rounded-[12px] px-3 py-2', i === active ? 'bg-glacier' : '')}
+                >
+                  <span className="flex min-w-0 flex-1 flex-col">
+                    <span className="truncate text-[14.5px] font-medium text-ink">{r.name}</span>
+                    <span className="text-[12.5px] leading-snug text-ink-2">{r.where}</span>
+                  </span>
+                  {r.driveMinutes != null ? <span className="hud shrink-0 text-[11px] text-ink-2">{formatDuration(r.driveMinutes)} drive</span> : null}
+                </li>
+              ))
+            ) : (
+              <li className="px-3 py-3 text-[13.5px] text-ink-2">No resort matches “{query}”.</li>
+            )}
+            {results.length > shown.length ? <li className="hud px-3 py-2 text-[11px] text-ink-3">{results.length - shown.length} more · keep typing</li> : null}
+          </motion.ul>
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }
