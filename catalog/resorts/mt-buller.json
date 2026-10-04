@@ -114,9 +114,28 @@
       }
     ],
     "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (Buller opened a day early on 5 Jun 2026); the 2026 season ended on 27 Sep.",
-    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference)."
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference). Official site (2026-10-03): ski school \"Closed for Winter 2026. See you in 2027!\"; 2027 Season Membership early-bird sale ends 31 October; no 2027 dates announced on saved pages."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "night-skiing",
+      "label": "Twilight Sessions (Wed & Sat, July–August)",
+      "days": [
+        3,
+        6
+      ],
+      "opens": "17:00",
+      "closes": "20:30",
+      "season": null,
+      "note": "Season year not stated (current page in Oct 2026). Full-day tickets valid until 5pm; afternoon tickets from 1pm.",
+      "source": {
+        "url": "https://www.mtbuller.com.au/winter/lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03): \"Full Day Tickets - Valid until 5pm each day ... Twilight Sessions - Valid from 5pm until 8:30pm when Twilight Sessions are operational (Wed & Sat during July & Aug); Afternoon Tickets - Valid from 1pm\". Calendar showed no passes available for Sep–Nov 2026; age groups Kids 5-18, Adults 19-64, 65-69, 70+."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
@@ -126,17 +145,38 @@
       "amountMax": null,
       "currency": "AUD",
       "season": "2025-26",
-      "dayType": "weekday",
+      "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Winter 2026 (season id 2025-26): 'adults can ski this season from just $121 a day' on weekdays with date-based pricing — a lowest price, booked in advance; window and peak-day prices are higher.",
+      "note": "Winter 2026 (catalog season 2025-26): lowest dated price, \"from just $121 a day\"; window and peak-day prices are higher. Adults are 19-64.",
       "source": {
         "url": "https://www.mtbuller.com.au/winter/news/details/2026-snow-season-on-sale",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (also https://snowstash.com/australia/victoria/mt-buller/lift-tickets 'From A$121 Adult Daily')"
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mt Buller news \"2026 snow season - on sale!\" (30 March 2026, read 2026-10-03): \"Adults can ski at Mt Buller this season from just $121 a day and children up to 18 from $73\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift ticket, kids 5-18 (from)",
+      "category": "child",
+      "amount": 73,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 lowest dated price.",
+      "source": {
+        "url": "https://www.mtbuller.com.au/winter/news/details/2026-snow-season-on-sale",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Mt Buller news \"2026 snow season - on sale!\" (30 March 2026, read 2026-10-03): \"Adults can ski at Mt Buller this season from just $121 a day and children up to 18 from $73\"."
       }
     },
     {
@@ -167,7 +207,7 @@
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": "https://www.mtbuller.com.au/winter/lift-passes/lift-passes-overview",
+    "tickets": "https://www.mtbuller.com.au/winter/lift-tickets",
     "seasonPass": "https://www.mtbuller.com.au/winter/lift-passes/season-memberships",
     "lessons": null,
     "rentals": null,
@@ -250,11 +290,10 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blue_Bullet_chairlift,_Mount_Buller,_2007.JPG"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
+      "2027 season dates and 2027 day-ticket, rental and lesson prices (lift-ticket calendar showed no passes for Sep–Nov 2026; no prices on saved pages).",
       "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
       "Confirm published lift and ticket-office hours for 2027.",
       "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
@@ -263,6 +302,6 @@
       "Confirm Ikon Pass 2026-27 day allowance at Mt Buller (and Ikon Base / Session access)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, terrain figures, 2026 opening/closing and 2026 prices come from search summaries (confirm at source); coordinates, operator, features and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched official mtbuller.com.au pages read directly: homepage, Lift Tickets (ticket types, hours, age groups; no prices), 2026 season on-sale news (from $121 adult / $73 kids), Hours, ski school and rental shop pages. The $187 weekend price remains an earlier search summary."
   }
 }

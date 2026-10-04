@@ -27,7 +27,7 @@
       "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: ski area between 1,450 m and 1,845 m; vertical derived as the difference. Hotham is an 'upside-down' resort — the village sits high on the ridge and many runs drop below it (reference)."
+      "note": "Search summary: ski area between 1,450 m and 1,845 m; vertical derived as the difference. Hotham is an 'upside-down' resort — the village sits high on the ridge and many runs drop below it (reference). Confirmed on the CI-fetched skiresort.com page (2026-10-03)."
     }
   },
   "weatherPoints": [
@@ -57,7 +57,7 @@
     "advancedPct": null,
     "terrainParks": null,
     "expertPct": null,
-    "pisteKm": null,
+    "pisteKm": 30,
     "liftsByType": null,
     "liftCapacityPerHour": null,
     "season": "2025-26",
@@ -65,7 +65,7 @@
       "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 14 lifts and 320 hectares (hectares kept in this note; skiableAcres is for North America only). The run count was contradictory in the summary (72 runs vs '105 slopes') and is left unknown. Lift types, km and capacity not found. Season id 2025-26."
+      "note": "Search summary: 14 lifts and 320 hectares (hectares kept in this note; skiableAcres is for North America only). The run count was contradictory in the summary (72 runs vs '105 slopes') and is left unknown. Lift types, km and capacity not found. Season id 2025-26. 2026-10-03: CI-fetched skiresort.com page: \"30 km of slopes ... 14 lifts ... between the elevations of 1,450 and 1,845 m\" (easy 6 km / intermediate 12 km / difficult 12 km); official lift-ticket page: \"With 320 hectares to explore\"."
     }
   },
   "features": {
@@ -109,12 +109,12 @@
           "url": "https://www.mthotham.com.au/",
           "verification": "search-summary",
           "checkedOn": "2026-09-30",
-          "note": "Winter 2026: resort announcement 'Sunday 6 September will be our last day of skiing and boarding for winter' (search summary; exact news page not captured). Opening: operating from Sat 6 Jun 2026 with the Summit Trainer carpet (https://snowbrains.com/australia-ski-season-2026-opening-weekend-perisher-thredbo-buller-falls-hotham/). skiresort.info had listed a tentative 6 Jun – 4 Oct 2026 season."
+          "note": "Winter 2026: resort announcement 'Sunday 6 September will be our last day of skiing and boarding for winter' (search summary; exact news page not captured). Opening: operating from Sat 6 Jun 2026 with the Summit Trainer carpet (https://snowbrains.com/australia-ski-season-2026-opening-weekend-perisher-thredbo-buller-falls-hotham/). skiresort.info had listed a tentative 6 Jun – 4 Oct 2026 season. Official homepage (read 2026-10-03): \"1 September - ... our final day of skiing and boarding for winter will be Sunday 6 September\"; \"6 September - That's a wrap on winter at Hotham.\""
         }
       }
     ],
     "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (6 Jun 2026) and was scheduled to run to early October; in the very poor 2026 season the last day was 6 Sep.",
-    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference)."
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). Victorian alpine resorts charge a resort entry fee (reference). skiresort.com lists the next season as 05.06.2027 – 12.09.2027 (third-party listing, not an announcement)."
   },
   "hours": [],
   "prices": [
@@ -131,12 +131,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Main-season adult full-day price per the search summary; the season was not stated (most likely the 2026 winter). Date-based pricing applies online (see Snowstash 'Mt Hotham Lift Tickets 2026').",
+      "note": "Main-season adult full-day price per the search summary; the season was not stated (most likely the 2026 winter). Date-based pricing applies online (see Snowstash 'Mt Hotham Lift Tickets 2026'). The CI-fetched skiresort.com page (2026-10-03) shows the day ticket only as a converted \"approx. € 158\"; Hotham's own lift-ticket page shows no day prices (\"Price is dependent on your intended start date and duration\").",
       "source": {
         "url": "https://www.skiresort.info/ski-resort/mount-hotham/",
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
         "note": "Search summary (attribution uncertain; may be https://www.onthesnow.com/australia/mt-hotham/lift-tickets)"
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "2027 Epic Australia Pass (unlimited at Hotham), adult",
+      "category": "adult",
+      "amount": 1099,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-10-14",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2027 (catalog season 2026-27); lowest price ends 14 Oct 2026; $49 upfront. Epic Australia Pass also covers Falls Creek and Perisher (Falls Creek site).",
+      "source": {
+        "url": "https://www.mthotham.com.au/lift-passes/lift-passes/lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Hotham Lift Tickets page (read 2026-10-03): \"Secure your next season with the 2027 Epic Australia Pass. Lock in your Pass now for $1,099 with just $49 upfront for unlimited laps at Hotham next season. Lowest price for 2027 ends 14 October.\""
       }
     }
   ],
@@ -144,13 +165,13 @@
     "official": "https://www.mthotham.com.au/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": null,
+    "snowReport": "https://www.mthotham.com.au/mountain-conditions/snow-reports",
     "hours": null,
     "tickets": "https://www.mthotham.com.au/lift-passes/lift-passes/lift-tickets",
     "seasonPass": "https://www.mthotham.com.au/passes",
-    "lessons": null,
+    "lessons": "https://www.mthotham.com.au/lessons/lessons/adult-lessons",
     "rentals": null,
-    "webcams": null,
+    "webcams": "https://www.mthotham.com.au/mountain-conditions/snow-cams",
     "parking": null,
     "roadInfo": "https://traffic.vicroads.vic.gov.au/",
     "lodging": null,
@@ -158,7 +179,7 @@
     "tourism": null,
     "avalanche": null,
     "openSkiMap": null,
-    "liftStatus": null
+    "liftStatus": "https://www.mthotham.com.au/mountain-conditions/lifts-terrain"
   },
   "moreLinks": [
     {
@@ -216,7 +237,11 @@
       }
     }
   ],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.mthotham.com.au/mountain-conditions/snow-reports",
+    "format": "html",
+    "notes": "Official Snow Reports page (read 2026-10-03): natural snowfall last 24 h / 7 days / season total / depth and current conditions via WeatherZone; currently showing the end-of-season report."
+  },
   "photo": {
     "src": "asset:photo-mt-hotham.webp",
     "alt": "Mt Hotham: View of Mt Hotham ski fields after 20 cm fresh snowfall, featuring the notable ski run \"Mary's Slide\".",
@@ -225,21 +250,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:MarysSlide.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
-      "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
+      "2027 season dates and 2027 day-ticket, rental and lesson prices (Hotham is closed; pages show no day prices).",
       "Confirm published lift and ticket-office hours for 2027.",
       "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
-      "Confirm the run count (72 vs 105 in search results), km of runs, lift split and capacity.",
-      "Confirm the official snow-report / lift-status page and the resort entry fee for 2027."
+      "Confirm the run count (72 vs 105 in search results), km of runs, lift split and capacity."
     ],
     "conflicts": [
       "Run count: 72 runs vs '105 slopes' in the same search summary — left unknown.",
       "Season end: skiresort.info's tentative end 4 Oct 2026 vs the resort's actual last day Sun 6 Sep 2026 (the season ended early)."
     ],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, lift count, area, 2026 opening/closing and the day price come from search summaries (confirm at source); coordinates, operator, features and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: mthotham.com.au homepage (season wrap 6 Sep 2026), Lift Tickets (2027 Epic Australia Pass $1,099; 320 ha), Snow Reports, Weather & Roads, Snow Cams, Lifts & Terrain, lesson pages, skiresort.com and snow-forecast.com. Adult day price remains an earlier search summary."
   }
 }

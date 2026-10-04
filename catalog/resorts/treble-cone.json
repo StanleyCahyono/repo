@@ -7,7 +7,7 @@
   "stateProvince": "Otago",
   "locality": "Above the Matukituki Valley road, near Wānaka",
   "timezone": "Pacific/Auckland",
-  "operator": "RealNZ, run together with Cardrona (reference — confirm)",
+  "operator": "Treble Cone Investments Ltd, owned by Cardrona Alpine Resort (RealNZ group); Cardrona & Treble Cone brand",
   "priority": 0,
   "location": {
     "lat": -44.633,
@@ -24,10 +24,10 @@
     "summitM": 1960,
     "verticalM": 700,
     "source": {
-      "url": "https://cardrona-treblecone.com/mountains",
-      "verification": "search-summary",
-      "checkedOn": "2026-09-30",
-      "note": "Search summary: base 1,260 m, top lift 1,960 m, lift-served vertical 700 m; the summit of Treble Cone itself is 2,088 m. summitM uses the top lift, not the peak. Attribution uncertain."
+      "url": "https://cardrona-treblecone.com/passes/lift-passes",
+      "verification": "official-page",
+      "checkedOn": "2026-10-03",
+      "note": "Official Lift Passes page (read 2026-10-03): \"Treble Cone is famous for its steeps, with a 4km longest run, a lift elevation of 1960m, and a 700m vertical\". Base 1,260 m is from an earlier search summary (1,960 − 700)."
     }
   },
   "weatherPoints": [
@@ -131,23 +131,212 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day adult lift pass (18–64)",
+      "item": "Single Day Pass, adult (18-64), online",
       "category": "adult",
-      "amount": 199,
-      "amountMax": null,
+      "amount": 184,
+      "amountMax": 199,
       "currency": "NZD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Weekday and weekend adult (18–64) day price per the search summary; the season was not stated (most likely the 2026 winter). Combined Cardrona–Treble Cone multi-day passes from NZ$120/day were also quoted.",
+      "note": "Online \"from\" price NZ$184 (\"save up to $15\" vs. buying later/on the day); NZ$199 = OnTheSnow peak adult day price. Valid at Cardrona or Treble Cone. Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/passes/lift-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Cardrona & Treble Cone Lift Passes page (read 2026-10-03): SINGLE DAY PASS \"$ 184 Adult price starting from ... Choose to ride at Cardrona or Treble Cone ... Buy online and save up to $15\"; HALF DAY PASS from $145 (from 12.30pm); LEARNERS PASS $99/day; multi-day adult (18-64) 2 days $349 … 7 days $840 ($120/day); child (6-17) 2 days $199."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day adult lift pass (18-64), peak",
+      "category": "adult",
+      "amount": 199,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 (OnTheSnow labels the season 2025-2026).",
       "source": {
         "url": "https://www.onthesnow.com/new-zealand/treble-cone/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (attribution uncertain)"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 18, 2026\": adult (18-64) weekday/weekend NZ$199, child (6-17) 109, senior (65-74) 145; two-day 349; week 840. Season-pass table labelled \"2025-2026\" (price expires Oct 2026), i.e. Winter 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift pass, child (6-17)",
+      "category": "child",
+      "amount": 109,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Under 6 ski free.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/treble-cone/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 18, 2026\": adult (18-64) weekday/weekend NZ$199, child (6-17) 109, senior (65-74) 145; two-day 349; week 840. Season-pass table labelled \"2025-2026\" (price expires Oct 2026), i.e. Winter 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day lift pass, senior (65-74)",
+      "category": "senior",
+      "amount": 145,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-zealand/treble-cone/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table (read 2026-10-03), \"LAST UPDATED: MAY 18, 2026\": adult (18-64) weekday/weekend NZ$199, child (6-17) 109, senior (65-74) 145; two-day 349; week 840. Season-pass table labelled \"2025-2026\" (price expires Oct 2026), i.e. Winter 2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Half Day Pass, adult (from 12.30pm)",
+      "category": "adult half-day",
+      "amount": 145,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Adult prices starting from\". Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/passes/lift-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Cardrona & Treble Cone Lift Passes page (read 2026-10-03): SINGLE DAY PASS \"$ 184 Adult price starting from ... Choose to ride at Cardrona or Treble Cone ... Buy online and save up to $15\"; HALF DAY PASS from $145 (from 12.30pm); LEARNERS PASS $99/day; multi-day adult (18-64) 2 days $349 … 7 days $840 ($120/day); child (6-17) 2 days $199."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Multi-Day Pass, adult, 2 days (Cardrona + Treble Cone)",
+      "category": "adult 2-day",
+      "amount": 349,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "$175/day; 7 days $840 ($120/day). Spring Pass (from 1 September) from $105/day. Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/passes/lift-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Cardrona & Treble Cone Lift Passes page (read 2026-10-03): SINGLE DAY PASS \"$ 184 Adult price starting from ... Choose to ride at Cardrona or Treble Cone ... Buy online and save up to $15\"; HALF DAY PASS from $145 (from 12.30pm); LEARNERS PASS $99/day; multi-day adult (18-64) 2 days $349 … 7 days $840 ($120/day); child (6-17) 2 days $199."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Learners Pass, adult (beginner area)",
+      "category": "beginner area",
+      "amount": 99,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/passes/lift-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Cardrona & Treble Cone Lift Passes page (read 2026-10-03): SINGLE DAY PASS \"$ 184 Adult price starting from ... Choose to ride at Cardrona or Treble Cone ... Buy online and save up to $15\"; HALF DAY PASS from $145 (from 12.30pm); LEARNERS PASS $99/day; multi-day adult (18-64) 2 days $349 … 7 days $840 ($120/day); child (6-17) 2 days $199."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Unlimited Season Pass, adult (18-64), Drop Four / final release",
+      "category": "adult",
+      "amount": 1849,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2026 pass (Cardrona + Treble Cone). Child $639; senior $1,189 (OnTheSnow). Winter 2027 passes not yet on the saved pages.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/passes/season-passes",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Season Passes page (read 2026-10-03): Unlimited, \"Drop Four Final release\" adult $1,849, child $639 (FAQ refers to Winter '26). OnTheSnow labels these 2025-2026, price expires Oct 2026."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Core Rental Bundle — skis or snowboard + boots, adult, 1 day",
+      "category": "adult",
+      "amount": 63,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Poles not mentioned in the bundle name. Complete bundle (gear + clothing + accessories) $141; premium $99. Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/rentals",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Rentals page pricing breakdown (read 2026-10-03): 1 Day — Core Rental Bundle adult $63, child $51; Complete Rental Bundle adult $141; Premium adult $99; helmet $20."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "First Timer Core Package at Treble Cone (4.5-hour group lesson + rental + learner lift access), adult",
+      "category": "adult",
+      "amount": 215,
+      "amountMax": null,
+      "currency": "NZD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Child $169; Complete Package with clothing $265. Winter 2026 (Southern Hemisphere) price — the site sells these as \"Winter '26\" lift passes (Hours page); catalog season label 2025-26, as OnTheSnow uses.",
+      "source": {
+        "url": "https://cardrona-treblecone.com/lessons/first-timer-lessons",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official First Timer Lessons page (read 2026-10-03): Treble Cone First Timer Core Package adult $215, child $169; Complete Package (incl. clothing) adult $265."
       }
     }
   ],
@@ -155,12 +344,12 @@
     "official": "https://cardrona-treblecone.com/",
     "trailMap": null,
     "interactiveMap": null,
-    "snowReport": "https://cardrona-treblecone.com/mountains",
+    "snowReport": "https://cardrona-treblecone.com/snow-report",
     "hours": "https://cardrona-treblecone.com/mountains/opening-hours",
     "tickets": "https://cardrona-treblecone.com/passes/lift-passes",
     "seasonPass": "https://cardrona-treblecone.com/passes/season-passes",
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://cardrona-treblecone.com/lessons/first-timer-lessons",
+    "rentals": "https://cardrona-treblecone.com/rentals",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.journeys.nzta.govt.nz/",
@@ -227,7 +416,11 @@
       }
     }
   ],
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://cardrona-treblecone.com/snow-report",
+    "format": "html",
+    "notes": "Official Snow Report & Conditions page for Cardrona and Treble Cone (read 2026-10-03): daily report text, natural snow base at the 1,800 m weather station, lifts and roads."
+  },
   "photo": {
     "src": "asset:photo-treble-cone.webp",
     "alt": "Treble Cone: Entrance to Treble Cone ski area in July 2025",
@@ -236,12 +429,11 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Treble_Cone_entrance.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
+      "Winter 2027 lift-pass, season-pass, rental and lesson prices (only Winter 2026 prices on saved pages).",
       "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) and season-pass prices.",
-      "Confirm which official page is the live lift/run status page (the 'mountain info' page is used as the snow report link).",
       "Confirm published lift hours, access-road rules (chains) and shuttle operators for 2027.",
       "Confirm lift count and types (a summary said 8 lifts 'including gondolas'; Treble Cone is not known to have one) and the trail count (59?).",
       "Confirm whether Treble Cone opened on its scheduled 27 Jun 2026 date.",
@@ -250,6 +442,6 @@
     "conflicts": [
       "Lifts: a search summary said '8 lifts, including gondolas'; reference knowledge says Treble Cone has no gondola — lift count left unknown."
     ],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). Elevations, area, 2026 and 2025 season dates and the day price come from search summaries (confirm at source); coordinates, operator and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched official cardrona-treblecone.com pages read directly: home/mountains, Lift Passes, Season Passes, Rentals, First Timer and Private Lessons, Opening Hours, Snow Report and About Us (RealNZ ownership), plus OnTheSnow (Winter 2026 table). Elevation and terrain remain earlier search summaries (stats sections are collapsed in the saved text)."
   }
 }

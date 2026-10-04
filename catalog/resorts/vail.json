@@ -27,7 +27,7 @@
       "url": "https://www.vail.com/",
       "verification": "unverified",
       "checkedOn": "2026-09-28",
-      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 8,120 ft, summit 11,570 ft, vertical 3,450 ft (resort-published figures as remembered; confirm)"
+      "note": "Piste reference data (not web-verified in this build) — confirm at source. Base 8,120 ft, summit 11,570 ft, vertical 3,450 ft (resort-published figures as remembered; confirm) The official homepage (2026-10-03) confirms \"Elevation: Up to 11,570 feet\" (summit only)."
     }
   },
   "weatherPoints": [
@@ -49,8 +49,8 @@
     }
   ],
   "terrain": {
-    "trails": 195,
-    "lifts": 31,
+    "trails": 278,
+    "lifts": 32,
     "skiableAcres": 5317,
     "beginnerPct": 18,
     "intermediatePct": 29,
@@ -71,7 +71,7 @@
       "url": "https://en.wikipedia.org/wiki/Vail_Ski_Resort",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary (results: Wikipedia, OnTheSnow, PeakVisor, vail.com, Epic Pass pages): 5,317 skiable acres (seven Back Bowls); trails 195 (18% beginner / 29% intermediate / 53% advanced); lift system \"31 total\" listed as 2 gondolas (12- and 10-person), 4 high-speed six-seat, 14 high-speed quad, 1 fixed-grip quad and 2 fixed-grip triple chairs, and 9 surface lifts — which adds up to 32, not 31. Another result in the same summary said 277 trails and 33 lifts. Season of the figures not stated."
+      "note": "Search summary (results: Wikipedia, OnTheSnow, PeakVisor, vail.com, Epic Pass pages): 5,317 skiable acres (seven Back Bowls); trails 195 (18% beginner / 29% intermediate / 53% advanced); lift system \"31 total\" listed as 2 gondolas (12- and 10-person), 4 high-speed six-seat, 14 high-speed quad, 1 fixed-grip quad and 2 fixed-grip triple chairs, and 9 surface lifts — which adds up to 32, not 31. Another result in the same summary said 277 trails and 33 lifts. Season of the figures not stated. Updated 2026-10-03 from the official vail.com homepage stats (read directly): \"Lifts: 32 · Runs: 278 · Elevation: Up to 11,570 feet\". The ability split comes from the older 195-trail count."
     }
   },
   "features": {
@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-13",
-      "text": "Planned opening Nov. 13, 2026 (subject to weather and conditions)",
+      "text": "OPENING DAY IS NOV. 13TH!",
       "announcedOn": null,
       "source": {
-        "url": "https://investors.vailresorts.com/news-releases/news-release-details/winter-about-show-vail-resorts-announces-202627-opening-dates",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Vail Resorts 2026-27 opening-dates release (reported by Unofficial Networks on 18 Aug 2026; also Denver7, Summit Daily, SnowBrains): opening dates are subject to change based on weather and conditions."
+        "url": "https://www.vail.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage (read 2026-10-03): \"OPENING DAY IS NOV. 13TH!\". Matches the Vail Resorts 2026-27 opening-dates release (search summaries; release page failed to load)."
       }
     },
     "announcedClosing": {
@@ -119,6 +119,27 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (13-64), online, 2026-11-13",
+      "category": "adult",
+      "amount": 202,
+      "amountMax": 239,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-13",
+      "appliesTo": "2026-11-13",
+      "includesTax": true,
+      "note": "Online price for 2026-11-13 (opening day) $202; $239 = same-day price shown struck through (\"SAVE $37 OVER SAME DAY PRICES\"). Prices vary by date.",
+      "source": {
+        "url": "https://www.vail.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/13/2026: adult (13-64) $202 per day online vs $239 struck-through; child (5-12) $139 vs $165; \"Prices include applicable fees\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
       "item": "Adult 1-day lift ticket (peak day)",
       "category": "adult",
       "amount": 374,
@@ -130,12 +151,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27 peak adult ticket $374 (Beaver Creek $392 is the only higher one in the roundup). An undated OnTheSnow listing shows $307 weekday / $335 weekend. Vail Resorts sells cheaper tickets 4+ weeks ahead (policy announced Dec 2025); advance prices were not captured.",
+      "note": "2026-27 peak (ceiling) adult day price from a third-party 2026-27 roundup; Vail Resorts prices dynamically.",
       "source": {
         "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 price roundups (TownLift, SnowBrains, Unofficial Networks, Sep 2026)."
+        "checkedOn": "2026-10-03",
+        "note": "TownLift (Sep 4, 2026, read 2026-10-03): \"On the 2026-27 list, Beaver Creek tops the chart at $392, followed by Vail at $374 ... Steamboat at $344, Breckenridge at $332\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 1-day lift ticket (5-12), online, 2026-11-13",
+      "category": "child",
+      "amount": 139,
+      "amountMax": 165,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": "2026-11-13",
+      "appliesTo": "2026-11-13",
+      "includesTax": true,
+      "note": "Online $139, same-day $165.",
+      "source": {
+        "url": "https://www.vail.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03), date picker on 11/13/2026: adult (13-64) $202 per day online vs $239 struck-through; child (5-12) $139 vs $165; \"Prices include applicable fees\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, advance purchase (7+ days)",
+      "category": "adult advance",
+      "amount": 335,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Card price; the date it applies to is not shown (up to 10% below peak window price). Season not stated on the card.",
+      "source": {
+        "url": "https://www.vail.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page product card: \"1-DAY LIFT TICKET (ADVANCE PURCHASE) $335 ADULT (AGES 13+) ... Buy online 7 days in advance and save up to 10% vs. Peak Window Price\"."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Epic 1-Day Pass (restricted), adult 13+",
+      "category": "adult",
+      "amount": 144,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Bundle up to 7 days across up to 39 resorts; restricted dates; sold for a limited time. Season not stated on the card.",
+      "source": {
+        "url": "https://www.vail.com/plan-your-trip/lift-access/tickets.aspx",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page: \"EPIC 1-DAY PASS (RESTRICTED) $144 ADULT (AGES 13+) ... Sold for a limited time\"."
       }
     }
   ],
@@ -217,7 +301,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.vail.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    "format": "html",
+    "notes": "Official Snow & Weather Report page (read 2026-10-03): base depth, season total, daytime/overnight snow and forecasts."
+  },
   "photo": {
     "src": "asset:photo-vail.webp",
     "alt": "Vail: View from the trail on the mountains of Vail Ski Resort in Vail, Colorado (CO), United States (USA). #vail #colorado #usa #mountains",
@@ -226,25 +314,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vail_Ski_Resort_I_(33672235356).jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (OnTheSnow projects Apr. 11, 2027; not announced).",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local 10 days combined with Beaver Creek and Whistler Blackcomb, with peak-date restrictions.",
-      "Confirm advance-purchase and non-peak 2026-27 day-ticket prices (only the $374 peak price is on file).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
-      "Resolve the lift and trail count (31 vs 33 lifts; 195 vs 277 trails) from the official mountain-info page; confirm terrain parks and snowmaking.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Vail Resorts; the resort operates largely on White River National Forest land).",
-      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Parking: confirm 2026-27 rates and rules at the town parking structures (Vail Village, Lionshead).",
-      "Transfers: confirm Epic Mountain Express, Bustang and Eagle County regional bus operators and schedules.",
-      "Snow report: record the official conditions page and whether any structured feed exists (lead: Vail Resorts pages have embedded report data in the page source)."
+      "2026-27 closing date not announced on saved pages.",
+      "Rental and lesson prices not on saved pages.",
+      "Date-specific online prices beyond opening day not captured.",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Epic Pass unlimited; Epic Local 10 days combined with Beaver Creek and Whistler Blackcomb, with peak-date restrictions."
     ],
     "conflicts": [
-      "Lifts: 31 stated, but the listed breakdown sums to 32; another result says 33 lifts. Trails: 195 vs 277 in another result. Stored 195 trails / 31 lifts with the breakdown as listed.",
-      "Day ticket: 2026-27 peak $374 (roundups) vs an undated OnTheSnow listing of $307 weekday / $335 weekend (different day types or seasons)."
+      "Day ticket: 2026-27 peak $374 (roundups) vs an undated OnTheSnow listing of $307 weekday / $335 weekend (different day types or seasons).",
+      "Trails: official homepage says 278 runs (stored) while the official snow-report text says \"195+ trails\"; ability split is based on 195."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain stats, the 2026-27 peak ticket price, a projected closing (notes only) and the tickets link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it. Snow-report, lift-status and trail-map links follow the URL pattern shared by all Vail Resorts sites (terrain-and-lift-status.aspx and mountain-info.aspx were seen in results for sister resorts); they were not individually opened."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: vail.com homepage (opening day Nov. 13, stats), Snow & Weather Report, Lift Tickets (opening-day online prices, advance and Epic 1-Day cards) and TownLift 2026-27 peak price. The Vail Resorts release failed to load. Elevation base/vertical remain reference data."
   }
 }

@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-06",
-      "text": "Planned opening Nov. 6, 2026 (conditions permitting)",
+      "text": "26/27 Opening Day is set for Nov. 6!",
       "announcedOn": null,
       "source": {
-        "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+        "url": "https://www.coppercolorado.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage (read 2026-10-03): \"26/27 Opening Day is set for Nov. 6!\" and \"Winter opening day is November 6!\". OnTheSnow also gives an estimated start of 2026 Nov 06."
       }
     },
     "announcedClosing": {
@@ -113,7 +113,7 @@
         "url": "https://www.uncovercolorado.com/colorado-ski-resorts-season-opening-closing-dates/",
         "verification": "search-summary",
         "checkedOn": "2026-09-30",
-        "note": "Search summary of Uncover Colorado's \"2026-27 Colorado Ski Resorts Season Opening and Closing Dates\": Copper opens Nov. 6, 2026 and closes May 2, 2027. Third-party roundup — confirm on coppercolorado.com."
+        "note": "Search summary of Uncover Colorado's \"2026-27 Colorado Ski Resorts Season Opening and Closing Dates\": Copper opens Nov. 6, 2026 and closes May 2, 2027. Third-party roundup — confirm on coppercolorado.com. OnTheSnow (CI-fetched 2026-10-03) also gives a \"tentative end date of 2027 May 02\" (estimate). Not on the official site."
       }
     },
     "history": [],
@@ -124,10 +124,73 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (weekday–weekend)",
+      "item": "Adult 1-day lift ticket (13+), weekday",
       "category": "adult",
       "amount": 264,
       "amountMax": 274,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow 2025-26 promo rates for Dec 16-21, 2025: weekday $264, weekend $274. The official page shows no day-ticket price yet (\"Buy Early & Save\").",
+      "source": {
+        "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 3, 2025\": \"Prices from Dec 16-21, 2025, promo rates as of this writing.\""
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 2-day lift ticket (13+)",
+      "category": "adult 2-day",
+      "amount": 334,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Week pass adult $1,035.",
+      "source": {
+        "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 3, 2025\": \"Prices from Dec 16-21, 2025, promo rates as of this writing.\""
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 1-day lift ticket (5-12), weekday",
+      "category": "child",
+      "amount": 164,
+      "amountMax": 174,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekend $174; two-day $236; week $738.",
+      "source": {
+        "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 3, 2025\": \"Prices from Dec 16-21, 2025, promo rates as of this writing.\""
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Play Forever Thursdays lift ticket (select Thursdays)",
+      "category": "adult select-day",
+      "amount": 99,
+      "amountMax": null,
       "currency": "USD",
       "season": null,
       "dayType": null,
@@ -135,12 +198,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Weekday $264, weekend $274; dynamic pricing varies by date and advance purchase. Season not stated (the summary labelled it 2026-27 only because the query asked) — may be the 2025-26 listing.",
+      "note": "Online, in advance; 2026/27 dates not announced.",
+      "source": {
+        "url": "https://www.coppercolorado.com/tickets-passes/lift-tickets/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"Lift Tickets  Buy Early & Save\" (no price shown); Play Forever Thursdays $99 (2026/27 dates not announced); Green Acres $55; Foot Passenger from $30."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Green Acres Learning Area lift ticket",
+      "category": "beginner area",
+      "amount": 55,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Green Acres Learning Area only; on sale opening day.",
+      "source": {
+        "url": "https://www.coppercolorado.com/tickets-passes/lift-tickets/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"Lift Tickets  Buy Early & Save\" (no price shown); Play Forever Thursdays $99 (2026/27 dates not announced); Green Acres $55; Foot Passenger from $30."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Copper Season Pass, adult (18+)",
+      "category": "adult",
+      "amount": 699,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-11-01",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Child (5-12) $389; junior (13-17) $534.",
       "source": {
         "url": "https://www.onthesnow.com/colorado/copper-mountain-resort/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of OnTheSnow's Copper lift-ticket listing."
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table \"2026-2027 Price expires: Nov 1, 2026\": child 389, junior 534, adult 699 (Copper Season Pass pricing; last update 2026 Mar 31)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Unlimited & unrestricted season pass offer (adult, with one free kid's pass)",
+      "category": "adult",
+      "amount": 899,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"This winter\" (2026-27 per the same homepage, which announces 26/27 opening day). Not the same price as the OnTheSnow Copper Season Pass figure ($699); product names differ.",
+      "source": {
+        "url": "https://www.coppercolorado.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official homepage banner (read 2026-10-03): \"Unlimited & unrestricted access this winter for $899. Plus, receive one free kid's pass, for ages 17 or under, with the purchase of an adult pass.\""
       }
     }
   ],
@@ -225,26 +351,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:C2023_A3_Tsuchinshan-ATLAS_over_Copper_Mountain_Colorado.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 opening (Nov. 6) and closing (May 2, 2027) on coppercolorado.com; the closing comes from a third-party roundup.",
-      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Base unlimited; full Ikon Pass unlimited (inferred from the Base terms). Base blackout dates at Copper not confirmed.",
-      "Confirm 2026-27 day-ticket prices (only an undated $264–$274 OnTheSnow range is on file).",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
-      "Confirm official snow-report, lift-status and trail-map pages on coppercolorado.com (only third-party snow reports were found).",
-      "Confirm the lift classification (the listing counts 1 gondola) and terrain parks.",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: POWDR, owner since about 2009).",
-      "Confirm precise base and upper-mountain coordinates (weather points are approximate).",
-      "Parking: confirm 2026-27 rules (lead: paid close-in lots with reservations on peak days, free remote lots with shuttles, carpool incentives).",
-      "Transfers: confirm which shuttle operators and CDOT services (Bustang/Snowstang) reach Copper in 2026-27.",
-      "Snow report: record the official conditions page and whether any structured feed exists."
+      "2026-27 closing date: only third-party (Uncover Colorado; OnTheSnow tentative May 2, 2027), not on coppercolorado.com.",
+      "Official 2026-27 day-ticket prices (not yet shown: \"Buy Early & Save\"), rental and lesson prices.",
+      "Snow-report page URL (homepage links \"View full snow report\" but the URL is not in the saved text).",
+      "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Base unlimited; full Ikon Pass unlimited (inferred from the Base terms). Base blackout dates at Copper not confirmed."
     ],
     "conflicts": [
-      "Opening: a third-party snow-report page listed a planned start of Nov. 7, 2026; the Ikon and Colorado roundups say Nov. 6, 2026 (stored).",
-      "Elevation: summit 12,441 ft / vertical 2,738 ft (search summary, stored) vs reference lift-served 12,313 ft / 2,601 ft."
+      "Elevation: summit 12,441 ft / vertical 2,738 ft (search summary, stored) vs reference lift-served 12,313 ft / 2,601 ft.",
+      "Season pass price: OnTheSnow lists the 2026-27 Copper Season Pass at $699 (expires Nov 1, 2026); the official homepage advertises unlimited & unrestricted access \"this winter for $899\" with a free kid's pass — possibly different products."
     ],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening and closing, terrain and lift stats, elevations, an undated day-ticket range and the tickets link. Still Piste reference data (unverified): identity, coordinates and weather points, operator, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: coppercolorado.com homepage (26/27 opening Nov. 6), Winter Lift Tickets page and OnTheSnow lift-ticket page (2025-26 daily table, 2026-27 season pass). Elevation and terrain remain earlier search summaries."
   }
 }

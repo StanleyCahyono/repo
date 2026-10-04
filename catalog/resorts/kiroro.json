@@ -7,7 +7,7 @@
   "stateProvince": "Hokkaido",
   "locality": "Akaigawa village",
   "timezone": "Asia/Tokyo",
-  "operator": null,
+  "operator": "Godo Kaisha Kiroro Resort",
   "priority": 0,
   "location": {
     "lat": 43.078,
@@ -96,24 +96,24 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-28",
-      "text": "2026-27 season scheduled from Sat 28 Nov 2026 (season-pass validity start; early-season ticket period 28 Nov – 11 Dec).",
+      "text": "2026/2027 Season Pass valid November 28, 2026 (Saturday) to May 5, 2027 *Scheduled; early season Nov. 28 – Dec. 11, 2026",
       "announcedOn": null,
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "kiroro.co.jp 2026-27 lift-ticket and season-pass pages via search"
+        "note": "Official Lift Price page (read 2026-10-03): season pass period \"November 28, 2026 (Saturday) to May 5, 2027 *Scheduled\"; early/spring ticket season \"Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027\"."
       }
     },
     "announcedClosing": {
       "date": "2027-05-05",
-      "text": "Scheduled to run to 5 May 2027 (season-pass validity \"to 5 May 2027 (scheduled)\"; spring ticket period 12 Apr – 5 May).",
+      "text": "Season pass valid to May 5, 2027 (scheduled); spring ticket period Apr. 12 – May 5, 2027",
       "announcedOn": null,
       "source": {
-        "url": "https://www.kiroro.co.jp/news/2026-27-seasonpasssaleseb/",
-        "verification": "search-summary",
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official 2026-27 season-pass announcement via search"
+        "note": "Official Lift Price page (read 2026-10-03): \"November 28, 2026 (Saturday) to May 5, 2027 *Scheduled\"."
       }
     },
     "history": [
@@ -143,9 +143,9 @@
       "note": "2025-26 high season (13 Dec 2025 – 5 Apr 2026): 09:00–15:30 until 13 Feb, to 16:00 from 14 Feb; Gateway Express from 08:30. 2026-27 hours not yet published.",
       "source": {
         "url": "https://www.kiroro.co.jp/operating_hours/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official \"25-26 Operating Hours\" page via search"
+        "note": "Official \"25-26 Operating Hours\" page (read 2026-10-03)."
       }
     },
     {
@@ -158,137 +158,242 @@
       "note": "Center Express ran to 19:00 in the 2025-26 high season.",
       "source": {
         "url": "https://www.kiroro.co.jp/operating_hours/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official \"25-26 Operating Hours\" page via search"
+        "note": "Official \"25-26 Operating Hours\" page (read 2026-10-03)."
       }
     }
   ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1 Day Pass — High season (adult)",
+      "item": "1 Day Pass — high season (adult)",
       "category": "adult",
       "amount": 9200,
       "amountMax": null,
       "currency": "JPY",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
       "appliesFrom": "2026-12-12",
       "appliesTo": "2027-04-11",
       "includesTax": true,
-      "note": "High season 12 Dec 2026 – 11 Apr 2027.",
+      "note": "High season Dec. 12, 2026 – Apr. 11, 2027. The table heading still reads \"2025-26\" but its dates are 2026-27.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official lift-ticket page (via search); tax included"
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "1 Day Pass — Early/spring season (adult)",
+      "item": "1 Day Pass — early/spring season (adult)",
       "category": "adult",
       "amount": 5800,
       "amountMax": null,
       "currency": "JPY",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": null,
       "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
+      "appliesFrom": "2026-11-28",
+      "appliesTo": "2027-05-05",
       "includesTax": true,
-      "note": "Early season 28 Nov – 11 Dec 2026; spring season 12 Apr – 5 May 2027.",
+      "note": "Early season Nov. 28 – Dec. 11, 2026 and spring Apr. 12 – May 5, 2027.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official lift-ticket page (via search); tax included"
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "1 Day Pass — High season (youth 13–18)",
+      "item": "1 Day Pass — high season (youth 13–18)",
       "category": "youth",
       "amount": 8000,
       "amountMax": null,
       "currency": "JPY",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
-      "appliesFrom": "2026-12-12",
-      "appliesTo": "2027-04-11",
+      "appliesFrom": null,
+      "appliesTo": null,
       "includesTax": true,
-      "note": "Early/spring ¥5,400. Seniors 65+ same price.",
+      "note": "Early/spring ¥5,400.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official lift-ticket page (via search); tax included"
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "1 Day Pass — High season (senior 65+)",
+      "item": "1 Day Pass — high season (senior 65+)",
       "category": "senior",
       "amount": 8000,
       "amountMax": null,
       "currency": "JPY",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
-      "appliesFrom": "2026-12-12",
-      "appliesTo": "2027-04-11",
+      "appliesFrom": null,
+      "appliesTo": null,
       "includesTax": true,
       "note": "Early/spring ¥5,400.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official lift-ticket page (via search); tax included"
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "1 Day Pass — High season (child 6–12)",
+      "item": "1 Day Pass — high season (child 6–12)",
       "category": "child",
       "amount": 5500,
       "amountMax": null,
       "currency": "JPY",
       "season": "2026-27",
-      "dayType": "any",
+      "dayType": "peak",
       "purchaseBy": null,
-      "appliesFrom": "2026-12-12",
-      "appliesTo": "2027-04-11",
+      "appliesFrom": null,
+      "appliesTo": null,
       "includesTax": true,
       "note": "Early/spring ¥3,800.",
       "source": {
         "url": "https://www.kiroro.co.jp/lift_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official lift-ticket page (via search); tax included"
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
       }
     },
     {
-      "subjectType": "rental",
-      "item": "Ski or snowboard gear set, regular model, 1 day (adult)",
-      "category": "adult",
-      "amount": 9500,
+      "subjectType": "lift-ticket",
+      "item": "4 Hours Pass (adult)",
+      "category": "adult half-day",
+      "amount": 7800,
       "amountMax": null,
       "currency": "JPY",
-      "season": null,
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": true,
+      "note": "High season ¥7,800; early/spring ¥5,500.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night Skiing Pass (adult)",
+      "category": "adult night",
+      "amount": 3000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": true,
+      "note": "High season only; child ¥2,000.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2 Day Pass (adult), high season",
+      "category": "adult 2-day",
+      "amount": 18400,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": true,
+      "note": "Early/spring ¥11,600; 3-day ¥27,600; 7-day ¥64,400.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Price page (read 2026-10-03), table headed \"2025-26 Kiroro Snow World Lift Price (Tax Included)\" but with periods HIGH SEASON (Dec. 12, 2026 – Apr. 11, 2027) and EARLY/SPRING SEASON (Nov. 28 – Dec. 11, 2026 / Apr. 12 – May. 5, 2027): 1 Day Pass adult ¥9,200 / ¥5,800; senior and youth ¥8,000 / ¥5,400; child ¥5,500 / ¥3,800."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "2026/2027 Season Pass (adult)",
+      "category": "adult",
+      "amount": 103000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Until closing time. Season year not stated in the source summary.",
+      "note": "Senior ¥98,000; youth ¥66,000; child ¥47,000.",
+      "source": {
+        "url": "https://www.kiroro.co.jp/lift_price/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Price page: \"2026/2027 Season Pass ... November 28, 2026 (Saturday) to May 5, 2027 *Scheduled ... Adult ¥103,000; Senior ¥98,000; Youth ¥66,000; Child ¥47,000\"."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski/Snowboard Gear Set, regular model, 1 day (adult)",
+      "category": "adult",
+      "amount": 9500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Ski + boots + poles (or board + boots). With wear: ¥14,900. 5% off on the Webstore.",
       "source": {
         "url": "https://www.kiroro.co.jp/rental_price/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official rental-price page via search"
+        "note": "Official Rental Price page (read 2026-10-03): \"Period: 2026-27 Winter Season\"; Regular Model (for adult) 1 Day: ①Wear and Gear Set ¥14,900, ②Gear Set ¥9,500; gear set = ski, boots and poles or snowboard and boots."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Ski/Snowboard beginner group lesson, full day (10:00–12:00 / 13:30–15:30)",
+      "category": "adult",
+      "amount": 11000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "AM-only beginner lesson ¥7,500. Taught in Japanese. Kids Academy group lessons ¥12,000 full day / ¥8,000 half day (lift pass and helmet included).",
+      "source": {
+        "url": "https://www.kiroro.co.jp/ski_lessons/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Ski Lessons page (read 2026-10-03): \"Full Day Beginner Lesson ¥11,000; AM Beginner Lesson ¥7,500; Lesson Date: Everyday Dec 1st, 2026 – Mar 31st, 2027\"; group of 5–10; taught in Japanese."
       }
     },
     {
@@ -370,20 +475,20 @@
   "reportSource": {
     "url": "https://www.kiroro.co.jp/dashboard/",
     "format": "html",
-    "notes": "Official \"Kiroro Snow Report, Weather Forecast & Lift Status\" dashboard. Existence confirmed via search; page not fetched (egress blocked)."
+    "notes": "Official \"Kiroro Snow Report, Weather Forecast & Lift Status\" dashboard (read 2026-10-03): course data at 8:00 each morning, lift operation info updated around 7:15 AM."
   },
   "photo": null,
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 lift operating hours (only 2025-26 published).",
-      "Operator/ownership not confirmed.",
-      "Group-lesson price; season year of rental and lesson prices."
+      "2026-27 lift operating hours (only the 25-26 page is published).",
+      "Season of the private-lesson price."
     ],
     "conflicts": [
-      "Lift count: official trail map lists 8 chairlifts + 1 gondola (9); skiresort.info says 10. Piste length: skiresort.info 30 km vs an earlier summary of 34.4 km."
+      "Lift count: official trail map lists 8 chairlifts + 1 gondola (9); skiresort.info says 10. Piste length: skiresort.info 30 km vs an earlier summary of 34.4 km.",
+      "Lift price table heading says \"2025-26\" while its season periods are Nov. 28, 2026 – May 5, 2027 (labelled 2026-27 here)."
     ],
-    "confidenceNotes": "Prices, season dates, hours and links from official kiroro.co.jp pages (search summaries; pages could not be fetched directly). Slope km, difficulty split and capacity from skiresort.info. Coordinates and airport time are Piste reference estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched official kiroro.co.jp pages read directly: Lift Price (2026-27 periods and prices, season pass), Rental Price (2026-27), Ski Lessons and Kids Lessons (26-27 calendar), Operating Hours (25-26), Dashboard, About Us (Godo Kaisha Kiroro Resort). Elevation/terrain remain earlier search summaries of the official trail map and skiresort.info."
   }
 }

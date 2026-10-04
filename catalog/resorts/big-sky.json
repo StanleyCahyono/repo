@@ -96,13 +96,13 @@
     "season": "2026-27",
     "announcedOpening": {
       "date": "2026-11-25",
-      "text": "Planned opening Nov. 25, 2026 (conditions permitting)",
+      "text": "Opening for Winter Nov 25",
       "announcedOn": null,
       "source": {
-        "url": "https://www.powder.com/news/ikon-pass-reveals-resort-opening-dates-2026",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of 2026-27 opening-date roundups (Powder, \"Ikon Pass Reveals Ski Resort Opening Dates for 2026-27 Season\"; Freeskier; Unofficial Networks, 10 and 17 Sep 2026). Conditions permitting — confirm on the resort site."
+        "url": "https://www.bigskyresort.com/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official site banner on every page (read 2026-10-03): \"Opening for Winter Nov 25\". Earlier Ikon opening-date roundups (Powder, Sep 2026) give Nov. 25, 2026."
       }
     },
     "announcedClosing": {
@@ -113,29 +113,129 @@
     },
     "history": [],
     "typicalText": null,
-    "notes": "2026-27: planned opening Nov. 25, 2026 per Ikon opening-date roundups and snow-report listings. No 2026-27 closing date was found."
+    "notes": "2026-27: \"Opening for Winter Nov 25\" (official site banner, 2026-10-03). No 2026-27 closing date found."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Full-day lift access",
+      "days": null,
+      "opens": "09:00",
+      "closes": "16:00",
+      "season": null,
+      "note": "Lift-ticket full-day access 9am-4pm; half-day tickets from 12:30pm.",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03): \"Current Price: From $84 ... Adult (15-69) · 1 Day\"; \"Full-day access, 9 AM to 4 PM ... including the Lone Peak Tram\"; \"The earlier you buy, the more you save.\""
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (lowest advance to peak window)",
+      "item": "Adult 1-day lift ticket (15-69), advance online",
       "category": "adult",
       "amount": 84,
-      "amountMax": 289,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Lowest dated online price (\"From $84\"); prices rise closer to the date. Tram and Kircliff included. Season not stated next to the price (page sells winter tickets in Oct 2026; an add-on is \"Coming soon for winter 2026-27\"). Half-day 12:30pm tickets sold in person; no price shown.",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page (read 2026-10-03): \"Current Price: From $84 ... Adult (15-69) · 1 Day\"; \"Full-day access, 9 AM to 4 PM ... including the Lone Peak Tram\"; \"The earlier you buy, the more you save.\""
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket, peak window",
+      "category": "adult",
+      "amount": 289,
+      "amountMax": null,
       "currency": "USD",
       "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27 peak window ticket $289 per earlier search summaries of 2026-27 price roundups (not on the CI-fetched pages).",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
+        "verification": "search-summary",
+        "checkedOn": "2026-09-30",
+        "note": "Search summary of 2026-27 price roundups (Unofficial Networks, SnowBrains, Sep 2026); not re-read."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 6 & under lift ticket (winter)",
+      "category": "child 6 & under",
+      "amount": 1,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27: single-day tickets from $84 on select dates (advance) up to a $289 peak window ticket.",
+      "note": "Per day; one-time $5 Sky Card required.",
       "source": {
         "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of Big Sky's lift-ticket page and 2026-27 price roundups (Unofficial Networks, SnowBrains, Sep 2026)."
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets FAQ: \"In winter, lift tickets for ages 6 & under are $1/day\" (plus one-time $5 Sky Card)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Freestyle Season Pass, adult 3-day",
+      "category": "adult",
+      "amount": 429,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "3-7 days with blackout days; valid at all Boyne Resorts. Season not stated next to the price.",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/lift-ticket",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Lift Tickets page: \"FREESTYLE SEASON PASS Three to seven days at Big Sky, with blackout days ... Valid at every Boyne Resort ... $429 Adult 3-Day Pass\"."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard rental (from, 1 day)",
+      "category": "adult",
+      "amount": 78,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Lowest listed (\"from\") rental price; package contents and season not stated. Rental delivery $49/skier (free for some resort hotels).",
+      "source": {
+        "url": "https://www.bigskyresort.com/winter-tickets/military-lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Big Sky page \"Related products\": \"SKI & SNOWBOARD RENTALS High-performance rental skis and snowboards for all ages ... $78\"."
       }
     }
   ],
@@ -207,7 +307,11 @@
       }
     ]
   },
-  "reportSource": null,
+  "reportSource": {
+    "url": "https://www.bigskyresort.com/current-conditions",
+    "format": "html",
+    "notes": "Official Current Conditions (lifts and trails, snow report) page; Big Sky reports base depth rather than season-to-date snowfall (Snow Report FAQs)."
+  },
   "photo": {
     "src": "asset:photo-big-sky.webp",
     "alt": "Big Sky: Photo of a resort at Big Sky, Montana.",
@@ -216,22 +320,16 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big_Sky_resort.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the 2026-27 closing date (not found) and that Nov. 25, 2026 stays the planned opening.",
+      "2026-27 closing date not found.",
+      "Junior/senior day prices, adult beginner group-lesson price and rental package contents not on saved pages.",
+      "$289 peak window price rests on earlier search summaries only.",
       "Pass access: search-summary rules for 2026-27 were written to the existing-west access fragment (scratchpad/research/fragments/existing-west-access.json); found: Ikon Pass 7 days with no blackouts; Ikon Base 5 days with blackouts; Mountain Collective 2 days.",
-      "Confirm whether the Lone Peak Tram needs a separate upgrade or reservation in 2026-27.",
-      "Capture actual 2024-25 and 2025-26 opening and closing dates.",
-      "Confirm official lift-status and trail-map pages (the current-conditions page is recorded).",
-      "Confirm published lift, ticket-office, rental and lesson hours for 2026-27.",
-      "Confirm the operator (reference: Boyne Resorts).",
-      "Confirm the official base elevation basis and precise Mountain Village and Lone Peak coordinates (weather points are approximate).",
-      "Lone Peak Tram: confirm hours and whether it needs a separate reservation or upgrade.",
-      "Skyline bus 2026-27 schedule; BZN shuttle operators.",
-      "Record the official Montana road-conditions page (MDT traveler information / 511) for US-191 and MT-64; the road link on this record is the MDT homepage only."
+      "Confirm the official base elevation basis and precise Mountain Village and Lone Peak coordinates (weather points are approximate)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Upgraded on 2026-09-30 from reference-only using batched web searches (search-result summaries; page fetching is blocked, so no official page was read directly). Search-summary facts: planned 2026-27 opening, terrain and lift stats, the 2026-27 ticket range and conditions/tickets links. Still Piste reference data (unverified): identity, coordinates and weather points, operator, elevations, features, airport drive estimates and transfers. Summaries sometimes blend several result pages, so the source URL on each fact group is the most specific result that carried it — confirm at source before relying on it."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: bigskyresort.com homepage (opening banner), Current Conditions, Lift Tickets (from $84, 9am-4pm, $1 kids, Freestyle pass), Military tickets page (rentals $78), Rental Delivery, Snow Report FAQs, Adult Seasonal Programs. Elevation and terrain remain earlier data."
   }
 }

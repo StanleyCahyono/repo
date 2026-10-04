@@ -104,23 +104,39 @@
       {
         "season": "2025-26",
         "opened": "2026-06-06",
-        "closed": null,
+        "closed": "2026-09-25",
         "source": {
-          "url": "https://www.perisher.com.au/perisher-news/perisher-now/1887-welcome-to-winter-2026",
-          "verification": "search-summary",
-          "checkedOn": "2026-09-30",
-          "note": "Winter 2026: opened Sat 6 Jun 2026 (Perisher news 'Welcome to winter'). Closing: scheduled for Sun 4 Oct 2026 (shared research notes, https://www.onthesnow.com/australia/projected-closing) — still a scheduled date on 2026-09-30. Planned closing day 2026-10-04 (not yet happened as of 2026-09-30)."
+          "url": "https://www.perisher.com.au/",
+          "verification": "official-page",
+          "checkedOn": "2026-10-03",
+          "note": "Official homepage news (read 2026-10-03): \"25 September 2026 Today marks the final day of Winter 2026 at Perisher.\" Opening Sat 6 Jun 2026 from Perisher news \"Welcome to winter 2026\" (earlier search summary)."
         }
       }
     ],
     "typicalText": "The season traditionally starts on the King's Birthday long weekend in early June (6 Jun 2026) and runs to early October (scheduled close 4 Oct 2026).",
-    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). In the very poor 2026 season Perisher was one of the last Australian resorts still operating in September."
+    "notes": "Southern Hemisphere: Piste season id 2026-27 is the June–October 2027 winter (the one the 2026-27 Ikon and Epic passes cover); 2025-26 is the 2026 winter and 2024-25 the 2025 winter. No 2027 opening or closing date was found as of 2026-09-30. Australian resorts traditionally open on the King's Birthday long weekend — in 2027 that is Sat 12 – Mon 14 June (calendar inference, not an announcement). In the very poor 2026 season Perisher was one of the last Australian resorts still operating in September. Winter 2026 ended 25 Sep 2026 (official), earlier than the scheduled 4 Oct. OnTheSnow gives an estimated 2027 season 5 Jun – 3 Oct 2027 (estimate, not an announcement)."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Half-day lift tickets: morning to 1pm / afternoon from 12pm",
+      "days": null,
+      "opens": null,
+      "closes": null,
+      "season": null,
+      "note": "Daily lift opening/closing times not stated on saved pages. Adult lessons: 9am or 11am at Perisher, 10:30am at Smiggin Holes.",
+      "source": {
+        "url": "https://www.perisher.com.au/tickets-passes/perisher-shop",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Tickets page: \"A morning half day lift ticket will grant you access to all Perisher lifts from lift opening until 1pm ... An afternoon half day ticket ... from 12pm until lift closing.\""
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day adult lift ticket, weekday",
+      "item": "1-day adult lift ticket (15-64), weekday, on-the-day",
       "category": "adult",
       "amount": 270,
       "amountMax": null,
@@ -131,17 +147,17 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Winter 2026 adult day price (season id 2025-26) per the search summary. Perisher uses date-based pricing, so advance online prices can be lower and peak days higher. A $99 beginner lift ticket was offered on opening weekend 2026.",
+      "note": "Winter 2026 on-the-day sample price (June 24, 2026); date-based pricing — advance online prices can be lower.",
       "source": {
         "url": "https://www.onthesnow.com/australia/perisher/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (results included OnTheSnow and Snowstash 'Perisher Lift Pass Prices 2026'; attribution uncertain)"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Perisher daily table (read 2026-10-03), \"LAST UPDATED: MAY 12, 2026\": junior (5-14) / adult (15-64) / senior (65+) — weekday 149 / 270 / 216; weekend 153 / 278 / 222; two-day 289 / 526 / 421; week 988 / 1,796 / 1,437. \"Sample On-the-day pricing shown: Weekday ... June 24; Weekend ... June 27 or 28\". Season-pass table labelled 2025-2026."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "1-day adult lift ticket, weekend",
+      "item": "1-day adult lift ticket (15-64), weekend, on-the-day",
       "category": "adult",
       "amount": 278,
       "amountMax": null,
@@ -152,12 +168,96 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Winter 2026 adult day price (season id 2025-26) per the search summary; date-based pricing.",
+      "note": "Winter 2026 on-the-day sample (June 27/28, 2026).",
       "source": {
         "url": "https://www.onthesnow.com/australia/perisher/lift-tickets",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary (results included OnTheSnow and Snowstash; attribution uncertain)"
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Perisher daily table (read 2026-10-03), \"LAST UPDATED: MAY 12, 2026\": junior (5-14) / adult (15-64) / senior (65+) — weekday 149 / 270 / 216; weekend 153 / 278 / 222; two-day 289 / 526 / 421; week 988 / 1,796 / 1,437. \"Sample On-the-day pricing shown: Weekday ... June 24; Weekend ... June 27 or 28\". Season-pass table labelled 2025-2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day junior lift ticket (5-14), weekday",
+      "category": "child",
+      "amount": 149,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekend $153.",
+      "source": {
+        "url": "https://www.onthesnow.com/australia/perisher/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Perisher daily table (read 2026-10-03), \"LAST UPDATED: MAY 12, 2026\": junior (5-14) / adult (15-64) / senior (65+) — weekday 149 / 270 / 216; weekend 153 / 278 / 222; two-day 289 / 526 / 421; week 988 / 1,796 / 1,437. \"Sample On-the-day pricing shown: Weekday ... June 24; Weekend ... June 27 or 28\". Season-pass table labelled 2025-2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "1-day senior lift ticket (65+), weekday",
+      "category": "senior",
+      "amount": 216,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Weekend $222.",
+      "source": {
+        "url": "https://www.onthesnow.com/australia/perisher/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Perisher daily table (read 2026-10-03), \"LAST UPDATED: MAY 12, 2026\": junior (5-14) / adult (15-64) / senior (65+) — weekday 149 / 270 / 216; weekend 153 / 278 / 222; two-day 289 / 526 / 421; week 988 / 1,796 / 1,437. \"Sample On-the-day pricing shown: Weekday ... June 24; Weekend ... June 27 or 28\". Season-pass table labelled 2025-2026."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "2-day adult lift ticket (15-64)",
+      "category": "adult 2-day",
+      "amount": 526,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Week pass $1,796.",
+      "source": {
+        "url": "https://www.onthesnow.com/australia/perisher/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow Perisher daily table (read 2026-10-03), \"LAST UPDATED: MAY 12, 2026\": junior (5-14) / adult (15-64) / senior (65+) — weekday 149 / 270 / 216; weekend 153 / 278 / 222; two-day 289 / 526 / 421; week 988 / 1,796 / 1,437. \"Sample On-the-day pricing shown: Weekday ... June 24; Weekend ... June 27 or 28\". Season-pass table labelled 2025-2026."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "2027 Epic Australia Pass (unlimited at Perisher), adult",
+      "category": "adult",
+      "amount": 1099,
+      "amountMax": null,
+      "currency": "AUD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-10-14",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Winter 2027 (catalog season 2026-27). Winter 2026 equivalent was $1,285 adult before 27 May 2026 (OnTheSnow).",
+      "source": {
+        "url": "https://www.perisher.com.au/tickets-passes/perisher-shop",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Perisher Tickets page (read 2026-10-03): \"Lock in your Pass at the lowest price now for $1,099 with just $49 upfront for unlimited laps of Perisher in 2027. Lowest price for 2027 ends 14 October.\""
       }
     }
   ],
@@ -167,10 +267,10 @@
     "interactiveMap": null,
     "snowReport": null,
     "hours": null,
-    "tickets": null,
+    "tickets": "https://www.perisher.com.au/tickets-passes/perisher-shop",
     "seasonPass": null,
-    "lessons": null,
-    "rentals": null,
+    "lessons": "https://www.perisher.com.au/tickets-passes/snowsports-school/snowsports-school-adult-lessons",
+    "rentals": "https://www.perisher.com.au/tickets-passes/rental/snowsports-rental",
     "webcams": null,
     "parking": null,
     "roadInfo": "https://www.livetraffic.com/",
@@ -263,18 +363,15 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Skitube_at_Perisher.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm 2027 season dates (opening and closing) once announced — none found as of 2026-09-30.",
-      "Confirm 2027 adult day-ticket prices (dynamic online vs window) — only 2026 or unlabelled prices are on file.",
-      "Confirm the official live lift-status and snow-report pages, trail map, webcams and lesson/rental pages.",
-      "Confirm published lift and ticket-office hours for 2027.",
+      "2027 season dates and 2027 day-ticket, rental and lesson prices (resort closed; no prices on official pages).",
+      "Daily lift operating hours; official snow-report and lift-status pages (not among saved pages).",
       "Capture 2025 opening and closing dates (history 2024-25) — not found in this pass.",
-      "Confirm whether Perisher actually operated to 4 Oct 2026 and on how much terrain.",
       "Confirm lift split by type, km of runs and the resort's published vertical (45 lifts per search summary)."
     ],
     "conflicts": [],
-    "confidenceNotes": "Researched by web search on 2026-09-30 (shared 16-search budget; page fetches blocked). 2026 opening, lift count, area, elevations and 2026 prices come from search summaries (confirm at source); coordinates, operator, features and drive times are Piste reference data or estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: perisher.com.au homepage (Winter 2026 ended 25 Sep), Tickets (2027 Epic Australia Pass $1,099; half-day ticket times), Adult/Kids/Private Lessons and Rental pages (no prices; resort closed), and OnTheSnow (Winter 2026 table)."
   }
 }

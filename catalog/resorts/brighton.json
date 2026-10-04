@@ -120,7 +120,7 @@
       }
     ],
     "typicalText": null,
-    "notes": "No official 2026-27 opening date as of 2026-10-03 (Brighton lists opening day as TBD; OnTheSnow projects Dec. 4, 2026, which is an estimate, not an announcement). 2025-26 ran Dec. 2, 2025 – May 10, 2026 (extended)."
+    "notes": "No official 2026-27 opening date on the saved pages (2026-10-03); Go Cards are \"Valid Opening Day 2026 through Closing Day, April 2027\". OnTheSnow gives an \"estimated start date of 2026 Dec 04 and a tentative end date of 2027 May 09\" (third-party estimate, not an announcement). 2025-26 ran Dec. 2, 2025 – May 10, 2026 (extended)."
   },
   "hours": [
     {
@@ -164,23 +164,212 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (weekday, window)",
+      "item": "Adult 1-day all-day lift ticket (13-64, 9am-close), online",
+      "category": "adult",
+      "amount": 72,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Dynamic online price, lowest date \"from $72\"; up to 50% off window rates. Season not stated on the page (on sale in Oct 2026 for the coming winter). Afternoon (12pm-close) and Night (4pm-close) tickets are also sold; no prices shown.",
+      "source": {
+        "url": "https://www.brightonresort.com/lift-tickets/winter-lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"Current Price: From $72 ... All-Day (9am - Close) · Adult (13-64) · 1 Day\"; \"Up to 50% off Window Rates\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (13-64), weekday",
       "category": "adult",
       "amount": 149,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Weekday adult window rate on OnTheSnow (two-day $295, from the 2026-09-30 summary). The season is not reliable: the summary called it 2026-27, but OnTheSnow pages pair a current-season boilerplate line with price tables that can carry the previous season (Alta's table is headed 2025-26), so this may be the 2025-26 rate. Brighton uses dated pricing; its lift-ticket page advertises winter tickets \"from $72\" online.",
+      "note": "OnTheSnow 2025-26 sample online price for Dec 23 (peak).",
       "source": {
         "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "OnTheSnow Brighton lift-ticket listing (search summary). \"From $72\" from https://www.brightonresort.com/lift-tickets (search summary)."
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 6, 2025\", \"Dec 23 Sample online pricing\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 2-day lift ticket (13-64)",
+      "category": "adult 2-day",
+      "amount": 295,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow \"Two day pass\" 2025-26.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 6, 2025\", \"Dec 23 Sample online pricing\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Junior 1-day lift ticket (7-12), weekday",
+      "category": "child",
+      "amount": 70,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 6, 2025\", \"Dec 23 Sample online pricing\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior 1-day lift ticket (65+), weekday",
+      "category": "senior",
+      "amount": 94,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 6, 2025\", \"Dec 23 Sample online pricing\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 6 & under lift ticket (with adult/senior ticket)",
+      "category": "child 6 & under",
+      "amount": 0,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.brightonresort.com/lift-tickets/winter-lift-tickets",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page: \"Child Freebie (Ages 6 & Under) | + $0 ... up to two free lift tickets for kids 6 & under with any Adult or Senior ticket.\""
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Winter Go Card (3-day, adult 13-64)",
+      "category": "adult",
+      "amount": 299,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Pre-loaded days, no blackouts; up to 40% off 2026/27 full-day window rates.",
+      "source": {
+        "url": "https://www.brightonresort.com/winter-ticket-packs-go-cards/winter-go-cards",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Go Cards page: \"From $299 ... Adult (13-64) · 3 Day Go Card\"; \"Valid Opening Day 2026 through Closing Day, April 2027\"."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "10-Ticket Pack (transferable)",
+      "category": "any",
+      "amount": 1199,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.brightonresort.com/winter-ticket-packs-go-cards/winter-10-ticket-pack",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official 10 Ticket Pack page: \"Buy - $1,199\" (Winter 2026/27 packs page)."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Unlimited season pass, adult (28-64)",
+      "category": "adult",
+      "amount": 1239,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-05-10",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Early price that expired May 10, 2026. Child (7-12) $199, junior (13-18) $519, senior (65+) $839 at the same deadline.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/brighton-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table \"2026-2027 Price expires: May 10, 2026\": child 199, junior 519, adult 1,239, senior 839 (last update 2026 Mar 31)."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard rental, standard (adult, 1 day)",
+      "category": "adult",
+      "amount": 60,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Starting at\" price; package or ski/board-only options at checkout. Helmet rental +$22. Season not stated.",
+      "source": {
+        "url": "https://www.brightonresort.com/rentals",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Rentals page: \"Standard and Performance Rentals ... Adult Starting At $60\"; winter ticket page: \"Ski & Snowboard Rentals | Starting at $60\", helmet +$22."
       }
     },
     {
@@ -196,12 +385,33 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Equipment not included. The Intro Package (2-hour group lesson + full-day rental + learner lift ticket) is sold separately (advertised from $87.50 at 50% off in early season). Season of the rate not stated.",
+      "note": "Equipment not included. Season of the rate not stated.",
       "source": {
         "url": "https://www.brightonresort.com/ski-school/group-lessons/adult-group-lesson",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
         "note": "Brighton Ski School group-lesson pages (search summary). Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+      }
+    },
+    {
+      "subjectType": "lesson",
+      "item": "Early-Season Intro Package (2-hr group lesson + full-day rental + Learner lift ticket), 50% off",
+      "category": "adult",
+      "amount": 87.5,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "50% early-season discount valid through December 18 (year not stated on the page; lessons \"now available for the 2026/27 winter season\" per homepage).",
+      "source": {
+        "url": "https://www.brightonresort.com/deals-and-packages/early-season-intro-package",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Early-Season Intro Package page: \"Through December 18, get 50% off beginner Intro Packages ... STARTING AT $87.50\"."
       }
     }
   ],
@@ -272,7 +482,7 @@
   "reportSource": {
     "url": "https://www.brightonresort.com/conditions",
     "format": "html",
-    "notes": "Official conditions page (snow and lift report, current weather, cams). URL seen in search results; page fetching was blocked, so the layout is not confirmed."
+    "notes": "Official conditions page (snow and lift report, current weather, cams). URL from earlier search results; not among the CI-fetched pages."
   },
   "photo": {
     "src": "asset:photo-brighton.webp",
@@ -282,17 +492,20 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:2015-09-29_12_02_47_View_north_along_the_Brighton_Loop_(Utah_State_Route_190)_about_16.5_miles_east_of_Interstate_215_in_Salt_Lake_County,_Utah.jpg"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 opening and closing dates (TBD as of 2026-10-03).",
-      "Official 2026-27 day-ticket prices by date, child/senior rates, and rental package prices."
+      "2026-27 opening and closing dates (not announced on saved pages; Go Cards valid to \"Closing Day, April 2027\").",
+      "2026-27 day-ticket window rates and child/senior rates (official page shows only adult \"from $72\"; OnTheSnow table is 2025-26).",
+      "Night and afternoon ticket prices not shown."
     ],
     "conflicts": [
       "Vertical: published 1,875 ft vs. 1,745 ft implied by the 8,755 ft base and 10,500 ft top.",
+      "Night riding size: lift-tickets page says \"32 lit runs and 5 lifts, six nights a week\"; homepage stats say 30 night-riding trails.",
+      "Lifts/runs: OnTheSnow lift-ticket page says 67 slopes and 9 lifts; stored 66 trails / 8 lifts from earlier summaries.",
       "Night riding days: Brighton's own pages (search summary, 2026-10-03) give Wednesday–Monday, 4–9pm. An earlier third-party summary (2026-09-30: Visit Utah, Visit Salt Lake, Ski Utah) said Monday to Saturday nights. Stored: Brighton's own schedule.",
       "The same 2026-10-03 hours summary said \"Brighton is closed Tuesdays for scheduled maintenance\". It is unclear whether this means the whole day or night riding only, so the day-lift days are left unset."
     ],
-    "confidenceNotes": "Refreshed 2026-10-03 by web search (page fetching blocked by the network proxy, so every fact is a search-result summary with the most specific URL recorded). Verification pass 2026-10-03: WebFetch and WebSearch were both unavailable (egress proxy block; session search budget spent), so no fact could be re-read at its source. Each 2026-10-03 fact was instead checked against the recorded search-result text and the earlier 2026-09-30 research; values, currencies, seasons and categories match those results except where a note or conflict says otherwise."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: brightonresort.com homepage (1,050 acres, 1,875 vertical ft), Winter Lift Tickets (adult from $72), Rentals (from $60), Go Cards / 10-pack (2026/27), Early-Season Intro Package ($87.50), and OnTheSnow lift-ticket page (2025-26 daily table, 2026-27 season-pass table). Elevation base/summit, hours and the $100 group lesson remain from earlier search summaries."
   }
 }

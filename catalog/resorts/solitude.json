@@ -102,7 +102,7 @@
         "url": "https://www.solitudemountain.com/things-to-do/events-and-activities/opening-day-dj-and-donuts",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "Solitude \"DJ + Donuts Opening Day Party\" event page (search summary): lifts open Nov. 20, 2026, conditions permitting; also on the Ski Utah 2026–27 opening-dates list. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+        "note": "Solitude \"DJ + Donuts Opening Day Party\" event page (search summary): lifts open Nov. 20, 2026, conditions permitting; also on the Ski Utah 2026–27 opening-dates list. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page. Confirmed by the Salt Lake Tribune 2026-27 tentative list (Sep. 20, 2026; CI-fetched): \"Solitude Mountain Resort: Nov. 20.\" The official blog (Sep. 16, 2026) says Solitude \"has announced its planned opening date, conditions permitting\"."
       }
     },
     "announcedClosing": {
@@ -125,7 +125,7 @@
       }
     ],
     "typicalText": null,
-    "notes": "2026-27: opening day Nov. 20, 2026 (Solitude event page, search summary 2026-10-03). No 2026-27 closing date announced as of 2026-10-03."
+    "notes": "2026-27: opening day Nov. 20, 2026 (Solitude event page, search summary; Salt Lake Tribune list, Sep. 20, 2026). No 2026-27 closing date announced; OnTheSnow gives an estimated start Nov 20, 2026 and \"tentative end date of 2027 May 23\" (third-party estimate)."
   },
   "hours": [
     {
@@ -186,23 +186,128 @@
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (weekday)",
+      "item": "Adult 1-day lift ticket, peak day",
+      "category": "adult",
+      "amount": 199,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "peak",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2026-27 peak (ceiling) price from a third-party 2026-27 pricing roundup; dynamic pricing, cheaper dates/advance purchase not captured.",
+      "source": {
+        "url": "https://townlift.com/2026/09/park-city-deer-valley-among-the-countrys-priciest-ski-days-as-2026-27-tickets-climb-again/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "TownLift (Sep 4, 2026), on the 2026-27 peak-price list: \"Solitude's peak ticket is $199\"."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 1-day lift ticket (13-64), weekday",
       "category": "adult",
       "amount": 195,
       "amountMax": null,
       "currency": "USD",
-      "season": null,
+      "season": "2025-26",
       "dayType": "weekday",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Weekday adult window rate on OnTheSnow (half day $117). Season not stated. The same listing (2026-09-30 summary) showed a two-day price of $262, well below two single days ($390), so it may be out of date or mixing products. Solitude uses dated, variable pricing. Confirm on solitudemountain.com.",
+      "note": "OnTheSnow 2025-26 dynamic sample price for Dec 23. 2026-27 day-ticket prices were not on any saved page (Solitude ticket pages failed to load).",
       "source": {
         "url": "https://www.onthesnow.com/utah/solitude-mountain-resort/lift-tickets",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "OnTheSnow Solitude lift-ticket listing (search summary, re-checked 2026-10-03): adult weekday day pass $195."
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 9, 2025\": \"Dynamic pricing. Sample pricing for Dec 23 (Start date)\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult half-day lift ticket (13-64)",
+      "category": "adult half-day",
+      "amount": 117,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/utah/solitude-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 9, 2025\": \"Dynamic pricing. Sample pricing for Dec 23 (Start date)\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult 2-day lift ticket (13-64)",
+      "category": "adult 2-day",
+      "amount": 262,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/utah/solitude-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 9, 2025\": \"Dynamic pricing. Sample pricing for Dec 23 (Start date)\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior 1-day lift ticket (65+), weekday",
+      "category": "senior",
+      "amount": 140,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Senior two-day $188.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/solitude-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 9, 2025\": \"Dynamic pricing. Sample pricing for Dec 23 (Start date)\" (2025-26 season)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child 2-day lift ticket",
+      "category": "child 2-day",
+      "amount": 144,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow lists child half day $0.00 and no child 1-day price.",
+      "source": {
+        "url": "https://www.onthesnow.com/utah/solitude-mountain-resort/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily table \"LAST UPDATED: OCT 9, 2025\": \"Dynamic pricing. Sample pricing for Dec 23 (Start date)\" (2025-26 season)."
       }
     },
     {
@@ -308,16 +413,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solitude_Mountain_Resort_Summit_Chair.JPG"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "Official 2026-27 day-ticket prices by date (only an undated OnTheSnow weekday rate is on file), adult group-lesson and rental package prices.",
-      "2026-27 closing date (not announced as of 2026-10-03).",
-      "Regular-season (non-early-season) lift hours."
+      "Official 2026-27 day-ticket prices (Solitude ticket, rental and hours pages failed to load in the CI fetch; only the OnTheSnow 2025-26 table is on file).",
+      "Adult group-lesson and rental package prices.",
+      "2026-27 closing date (not announced).",
+      "Regular-season lift hours."
     ],
     "conflicts": [
-      "2025-26 closing: a search summary listed Solitude closing on May 17, 2026. It is not recorded because no source page was identified. The earlier reason given for doubting it (a warm, early-closing Utah season, with Deer Valley closing Mar. 29) is weak: neighbouring Brighton, in the same canyon, extended its 2025-26 season to May 10, 2026 after late snowfall (TownLift; Brighton press release). Confirm."
+      "2025-26 closing: a search summary listed Solitude closing on May 17, 2026. It is not recorded because no source page was identified. The earlier reason given for doubting it (a warm, early-closing Utah season, with Deer Valley closing Mar. 29) is weak: neighbouring Brighton, in the same canyon, extended its 2025-26 season to May 10, 2026 after late snowfall (TownLift; Brighton press release). Confirm.",
+      "OnTheSnow 2025-26 two-day adult price ($262) is well below two single days ($390) — dynamic sample prices; confirm."
     ],
-    "confidenceNotes": "Refreshed 2026-10-03 by web search (page fetching blocked by the network proxy, so every fact is a search-result summary with the most specific URL recorded). Search budget ran out during this resort. Verification pass 2026-10-03: WebFetch and WebSearch were both unavailable (egress proxy block; session search budget spent), so no fact could be re-read at its source. Each 2026-10-03 fact was instead checked against the recorded search-result text and the earlier 2026-09-30 research; values, currencies, seasons and categories match those results except where a note or conflict says otherwise."
+    "confidenceNotes": "2026-10-03 CI fetch: Solitude homepage (blog only), OnTheSnow lift-ticket page (2025-26 daily table, read directly) and the Salt Lake Tribune 2026-27 opening list were read; all other solitudemountain.com pages came back empty. Lesson prices and the official opening-event source remain earlier search summaries. The 2026-27 peak price ($199) comes from a TownLift article (Sep 4, 2026) saved under Deer Valley."
   }
 }

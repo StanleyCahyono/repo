@@ -52,11 +52,11 @@
     "trails": 14,
     "lifts": 5,
     "skiableAcres": null,
-    "beginnerPct": null,
-    "intermediatePct": null,
-    "advancedPct": null,
+    "beginnerPct": 36,
+    "intermediatePct": 36,
+    "advancedPct": 21,
     "terrainParks": null,
-    "expertPct": null,
+    "expertPct": 7,
     "pisteKm": null,
     "liftsByType": {
       "gondolas": 1,
@@ -71,7 +71,7 @@
       "url": "https://steep.jp/en/ski-area/lotte-arai/",
       "verification": "search-summary",
       "checkedOn": "2026-09-30",
-      "note": "Search summary: 14 courses plus 10 freeride zones (avalanche terrain), 4 lifts and one gondola (the 4 lifts stored as chairlifts), longest run 7 km. Piste km not stated"
+      "note": "Search summary: 14 courses plus 10 freeride zones (avalanche terrain), 4 lifts and one gondola (the 4 lifts stored as chairlifts), longest run 7 km. Piste km not stated. Ability split 36/36/21/7 (beginner/intermediate/advanced/expert) and 14 courses, longest run 7 km, top 1,280 m from Yukiguni Journey 2025-2026 (read 2026-10-03)."
     }
   },
   "features": {
@@ -106,15 +106,58 @@
       "announcedOn": null,
       "source": null
     },
-    "history": [],
+    "history": [
+      {
+        "season": "2025-26",
+        "opened": "2025-12-13",
+        "closed": "2026-05-10",
+        "source": {
+          "url": "https://www.yukiguni-journey.jp/en/37891/",
+          "verification": "search-summary",
+          "checkedOn": "2026-10-03",
+          "note": "Yukiguni Journey 2025-2026: \"Operating Period: December 13 (Saturday) to May 10, 2026 (Sunday)\" — published operating period; actual days may have differed."
+        }
+      }
+    ],
     "typicalText": "Opens around mid-December (the 2025-26 season opened in mid-December)",
     "notes": "No 2026-27 opening date was found; 2026-27 season information was to be added by December 2026."
   },
-  "hours": [],
+  "hours": [
+    {
+      "activity": "lifts",
+      "label": "Day operation",
+      "days": null,
+      "opens": "08:30",
+      "closes": "16:00",
+      "season": "2025-26",
+      "note": null,
+      "source": {
+        "url": "https://www.yukiguni-journey.jp/en/37891/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
+      }
+    },
+    {
+      "activity": "night-skiing",
+      "label": "Night operation (until Mar 21)",
+      "days": null,
+      "opens": "18:00",
+      "closes": "22:00",
+      "season": "2025-26",
+      "note": null,
+      "source": {
+        "url": "https://www.yukiguni-journey.jp/en/37891/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
+      }
+    }
+  ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-day lift ticket (ages 19–49)",
+      "item": "Economy Class Lift One-Day Pass (ages 19+)",
       "category": "adult",
       "amount": 7500,
       "amountMax": null,
@@ -125,12 +168,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2025-26 figure. Ages 50+ ¥7,000; ages 7–18 ¥5,000. 2026-27 prices had not been published when searched.",
+      "note": "2025-26 figure. Ages 50+ ¥7,000; ages 7–18 ¥5,000. 2026-27 day prices not on saved pages (the official site sells \"2026-2027 シーズン エコノミークラスリフト券付きプラン\" lodging plans).",
       "source": {
         "url": "https://www.yukiguni-journey.jp/en/37891/",
         "verification": "search-summary",
-        "checkedOn": "2026-09-30",
-        "note": "Search summary of a 2025-2026 resort-information page"
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Economy Class Lift One-Day Pass (ages 7–18)",
+      "category": "youth",
+      "amount": 5000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.yukiguni-journey.jp/en/37891/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Economy Class Lift One-Day Pass (ages 50+)",
+      "category": "senior",
+      "amount": 7000,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.yukiguni-journey.jp/en/37891/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Full set rental, 1 day (ages 13+; skis/board, boots, poles)",
+      "category": "adult",
+      "amount": 5500,
+      "amountMax": null,
+      "currency": "JPY",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Ages 12 and under ¥4,000.",
+      "source": {
+        "url": "https://www.yukiguni-journey.jp/en/37891/",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Yukiguni Journey \"<Ski Resort Information 2025-2026> Arai Mountain Resort\" (read 2026-10-03): operating period Dec 13 (Sat) to May 10, 2026; hours 8:30 AM–4:00 PM, night 6:00–10:00 PM (night until Mar 21); Economy Class Lift One-Day Pass ages 19+ ¥7,500, 50+ ¥7,000, 7–18 ¥5,000; full set rental (1 day) ¥5,500 13+, ¥4,000 12 and under."
       }
     }
   ],
@@ -230,18 +336,18 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mt._OhKenashi_of_ARAI_MOUNTAIN_%26_SPA_(%E5%A4%A7%E6%AF%9B%E7%84%A1%E5%B1%B1)_-_panoramio.jpg"
   },
   "research": {
-    "method": "web-search",
-    "date": "2026-09-30",
+    "method": "web-research (CI-fetched pages)",
+    "date": "2026-10-03",
     "openQuestions": [
-      "Confirm the current official name, operator and official website (search summary: 'Arai Mountain Resort, formerly Lotte Arai Resort'; the official link given was lottehotel.com).",
-      "2026-27 opening/closing dates and 2026-27 day-ticket prices.",
-      "Piste km, hourly capacity, live lift-status and snow-report URLs.",
-      "Ikon Pass 2026-27 day allowance (listed as an Ikon destination; allowance not researched).",
-      "Confirm the base elevation (329 m came from a single source)."
+      "2026-27 opening/closing dates and 2026-27 day-ticket prices (not on saved pages).",
+      "Operator and official name (official site still at lottehotel.com as \"ロッテアライリゾート\"; 2025-26 listings say \"Arai Mountain Resort\").",
+      "Piste km, live lift-status and snow-report URLs.",
+      "Ikon Pass 2026-27 day allowance.",
+      "Confirm the base elevation (329 m from a single source)."
     ],
     "conflicts": [
       "Name: the shared Ikon roster lists 'Lotte Arai Resort' while 2025-26 listings and the Ikon destination page use 'Arai Mountain Resort'."
     ],
-    "confidenceNotes": "Terrain, elevations and the 2025-26 price come from search summaries of third-party pages; the rename is reported by several listings. No 2026-27 date or price was found. Coordinates and airport times are Piste reference estimates."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: lottehotel.com Arai Resort (JA) homepage (2026-27 lodging+lift plans, no prices) and Yukiguni Journey 2025-2026 resort info (prices, hours, operating period, ability split)."
   }
 }
