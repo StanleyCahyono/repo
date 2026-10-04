@@ -19,6 +19,7 @@ import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Button } from '@/components/ui/button'
 import { EmptyState } from '@/components/ui/states'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { useToast } from '@/components/ui/toast'
 import { passLineFromVerdict, type CardPassLine } from '@/components/resort/card-data'
 import { COMPARE_MAX, COMPARE_MIN, useCompareSelection } from '@/components/resort/card-compare'
@@ -78,10 +79,14 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
     const el = toolbarRef.current
     const root = rootRef.current
     if (!el || !root || typeof ResizeObserver === 'undefined') return
-    const ro = new ResizeObserver(() => root.style.setProperty('--explore-toolbar-h', `${el.offsetHeight}px`))
+    const ro = new ResizeObserver(() => {
+      // A detached toolbar (the pre-hydration copy) reports 0: keep the last real height.
+      if (el.isConnected && el.offsetHeight) root.style.setProperty('--explore-toolbar-h', `${el.offsetHeight}px`)
+    })
     ro.observe(el)
     return () => ro.disconnect()
-  }, [desktop])
+    // The toolbar element is replaced when the hydrated layout takes over from the CSS-only one.
+  }, [desktop, hydrated])
 
   // Region jumps (only regions the catalog has). Unknown keys fall back to World.
   const jumps = useMemo(() => availableJumps(view.rows.map((r) => r.facets.regionGroup)), [view.rows])
@@ -137,9 +142,10 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
     return m
   }, [results, notesFor])
 
+  // Markers in list order (the current sort), so a cluster bubble is named after the resort the list ranks first.
   const points = useMemo<StagePoint[]>(
     () =>
-      results.map((r) => {
+      sortRows(results, filters.sort).map((r) => {
         const c = r.card
         return {
           id: c.id,
@@ -151,7 +157,7 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
           description: [statusLine(c), ...metaLine(c), c.isFavorite ? 'favourite' : null].filter(Boolean).join(', '),
         }
       }),
-    [results],
+    [results, filters.sort],
   )
 
   /** Bring a row into view inside the desktop rail (without scrolling the page). */
@@ -187,6 +193,13 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
       if (Math.abs(window.scrollY - top) > 1) window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' })
     })
   }, [setView, reduced])
+  // Phones opening a link with the map view (or coming back to it): bring the map under the toolbar once.
+  const scrolledToMap = useRef(false)
+  useEffect(() => {
+    if (!hydrated || desktop || url.view !== 'map' || scrolledToMap.current) return
+    scrolledToMap.current = true
+    showMap()
+  }, [hydrated, desktop, url.view, showMap])
   const locate = useCallback(
     (id: string) => {
       setSelectedId(id)
@@ -257,7 +270,7 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
     <ScenarioBar
       date={view.date}
       dateLabel={view.dateLabel}
-      quickDates={view.quickDates}
+      today={view.today}
       bounds={view.seasonBounds}
       mode={view.mode}
       pending={url.pending}
@@ -369,6 +382,7 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
             /> : <StagePlaceholder />}
             <aside
               aria-label="Results"
+              data-stage-obstacle
               className="glass-strong absolute top-3 right-3 bottom-3 z-30 flex flex-col overflow-hidden rounded-[26px]"
               style={{ width: ASIDE_W }}
             >
@@ -492,8 +506,10 @@ export function ExploreScreen({ view, eyebrow }: { view: ExploreView; eyebrow?: 
 
 function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; label: string }; count: number }[]; current: string; onPick: (key: string) => void }) {
   return (
-    <div role="group" aria-label="Jump to region" className="glass-strong pointer-events-auto flex max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]">
-      {jumps.map(({ def, count }) => {
+    // The glass pill clips; the row inside scrolls and fades whichever edge has more regions past it.
+    <div className="glass-strong pointer-events-auto max-w-full overflow-hidden rounded-full p-1.5">
+      <ScrollRow role="group" aria-label="Jump to region" className="flex max-w-full gap-1 rounded-full [scrollbar-width:none]">
+        {jumps.map(({ def, count }) => {
         const on = def.key === current
         return (
           <button
@@ -509,7 +525,7 @@ function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; lab
             {on ? <motion.span layoutId="explore-jump" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
             <span className="relative">{def.label}</span>
             {def.key !== 'world' ? (
-              <span className={cn('tnum relative text-[11.5px]', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>
+              <span className={cn('tnum relative text-[12px]', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>
                 <span className="sr-only">, </span>
                 {count}
                 <span className="sr-only"> resorts</span>
@@ -517,7 +533,8 @@ function JumpPill({ jumps, current, onPick }: { jumps: { def: { key: string; lab
             ) : null}
           </button>
         )
-      })}
+        })}
+      </ScrollRow>
     </div>
   )
 }
@@ -685,7 +702,7 @@ function SearchBox({ value, onChange }: { value: string; onChange: (q: string) =
         id="explore-search"
         type="search"
         value={text}
-        placeholder="Search resorts, towns, regions"
+        placeholder="Search resorts"
         autoComplete="off"
         onChange={(e) => {
           setText(e.target.value)
@@ -795,6 +812,8 @@ function CompareBar({ scenario }: { scenario: { date: string; mode: string; prod
 /** How much of the day's evidence exists — mission-control tiles that count up as they enter. */
 function Evidence({ view }: { view: ExploreView }) {
   const c = view.counts
+  // Reduced motion: the tiles are simply there (no reveal waiting for the viewport).
+  const reduced = usePrefersReducedMotion()
   const items = [
     { label: 'Status reported', n: c.total - c.statusUnknown },
     { label: 'Scored for the day', n: c.withScore },
@@ -806,11 +825,11 @@ function Evidence({ view }: { view: ExploreView }) {
       {items.map((i, k) => (
         <motion.div
           key={i.label}
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '0px 0px -40px 0px' }}
-          transition={{ ...t.pageIn, delay: k * 0.06 }}
-          className="glass flex min-w-0 flex-col gap-2 rounded-[22px] px-4 py-3.5 md:px-5 md:py-4"
+          initial={reduced ? 'show' : 'hidden'}
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { ...t.pageIn, delay: k * 0.06 } } }}
+          className="glass flex min-w-0 flex-col gap-2 rounded-[22px] px-4 py-3.5 motion-reduce:transform-none! motion-reduce:opacity-100! md:px-5 md:py-4"
         >
           <span className="hud text-ink-2">{i.label}</span>
           <span className="flex items-baseline gap-1.5">
@@ -820,10 +839,7 @@ function Evidence({ view }: { view: ExploreView }) {
           <span aria-hidden className="h-1 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--ink)_7%,transparent)]">
             <motion.span
               className="block h-full rounded-full bg-teal"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: Math.max(0.015, i.n / Math.max(1, c.total)) }}
-              viewport={{ once: true }}
-              transition={{ ...t.bars, delay: 0.15 + k * 0.06 }}
+              variants={{ hidden: { scaleX: 0 }, show: { scaleX: Math.max(0.015, i.n / Math.max(1, c.total)), transition: { ...t.bars, delay: 0.15 + k * 0.06 } } }}
               style={{ originX: 0 }}
             />
           </span>
@@ -859,6 +875,7 @@ function Preview({
     <motion.div
       ref={ref}
       tabIndex={-1}
+      data-stage-obstacle
       role="region"
       aria-label={`Preview: ${row.card.name}`}
       onKeyDown={(e) => {

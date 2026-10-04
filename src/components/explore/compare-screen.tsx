@@ -13,13 +13,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Award, CalendarDays, CircleCheck, CircleHelp, CircleSlash, LoaderCircle, Plane, Car, Ticket, X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { ButtonLink } from '@/components/ui/button'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { Badge } from '@/components/ui/badge'
 import { Select } from '@/components/ui/form'
+import { DatePicker } from '@/components/ui/date-picker'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import { ConfidenceTag, ScoreChip } from '@/components/ui/score'
 import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
@@ -125,7 +127,7 @@ export function CompareScreen({ view }: { view: CompareView }) {
         <CompareColumns view={view} sections={sections} onRemove={removeColumn} />
       </div>
 
-      <p className="hud text-[11.5px] leading-relaxed tracking-[0.08em] text-ink-2">
+      <p className="hud text-[12px] leading-relaxed tracking-[0.08em] text-ink-2">
         ◇ Scores describe suitability for the day, not safety · Prices are Piste estimates from
         recorded snapshots · Unknown values are never ranked
       </p>
@@ -183,14 +185,14 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
           <label htmlFor="cmp-date" className={label}>
             Day
           </label>
-          <input
+          <DatePicker
             id="cmp-date"
-            type="date"
+            value={view.date}
             min={view.seasonBounds.min}
             max={view.seasonBounds.max}
-            value={view.date}
-            onChange={(e) => /^\d{4}-\d{2}-\d{2}$/.test(e.target.value) && onChange({ date: e.target.value === view.today ? null : e.target.value })}
-            className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+            today={view.today}
+            presets={['today', 'tomorrow', 'this-weekend', 'next-weekend']}
+            onChange={(v) => /^\d{4}-\d{2}-\d{2}$/.test(v) && v !== view.date && onChange({ date: v === view.today ? null : v })}
           />
         </div>
         <div className={field}>
@@ -250,6 +252,8 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
 
 /** The decision in one line: who leads on score, cost, drive and beginner terrain (only when known and distinct). */
 function Highlights({ view }: { view: CompareView }) {
+  // Reduced motion: no reveal at all, so content below the fold is never waiting to be scrolled to.
+  const reduced = useReducedMotion()
   const name = (id: string | null) => (id ? (view.columns.find((c) => c.id === id)?.card.shortName ?? id) : null)
   const items: { label: string; value: string | null; detail: string | null }[] = [
     {
@@ -278,11 +282,11 @@ function Highlights({ view }: { view: CompareView }) {
       {items.map((i, k) => (
         <motion.div
           key={i.label}
-          initial={{ opacity: 0, y: 14 }}
+          initial={reduced ? false : { opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ ...t.pageIn, delay: k * 0.06 }}
-          className={cn('flex min-w-0 flex-col gap-1.5 rounded-[24px] px-5 py-4', i.value ? 'glass' : 'border border-dashed border-divider-strong')}
+          className={cn('flex min-w-0 flex-col gap-1.5 rounded-[24px] px-5 py-4 motion-reduce:transform-none! motion-reduce:opacity-100!', i.value ? 'glass' : 'border border-dashed border-divider-strong')}
         >
           <span className="hud text-ink-2">{i.label}</span>
           {i.value ? (
@@ -314,7 +318,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
     <div className="flex min-w-0 flex-col gap-2.5">
       <div className="group/art relative">
         <ResortArt id={r.id} name={r.name} media={r.media} variant="banner" className="h-[120px] rounded-[20px] transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover/art:scale-[1.015]" />
-        <span aria-hidden className="hud absolute top-2.5 left-3 rounded-full bg-glass-strong px-2 py-0.5 text-[11px] text-ink-2">
+        <span aria-hidden className="hud absolute top-2.5 left-3 rounded-full bg-glass-strong px-2 py-0.5 text-[12px] text-ink-2">
           {String(index + 1).padStart(2, '0')}
         </span>
         <button
@@ -331,7 +335,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
         <Link href={r.href} className="text-[20px] leading-tight font-semibold tracking-[-0.01em] text-ink decoration-teal/60 underline-offset-[3px] hover:text-teal hover:underline">
           {r.shortName}
         </Link>
-        <p className="hud mt-1 text-[11.5px] text-ink-2">{r.place}</p>
+        <p className="hud mt-1 text-[12px] text-ink-2">{r.place}</p>
       </div>
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="inline-flex items-center gap-1.5 text-[12.5px] text-ink-2">
@@ -350,6 +354,7 @@ function ColumnHead({ c, onRemove, index }: { c: CompareColumn; onRemove: (id: s
 }
 
 function CompareTable({ view, sections, onRemove }: { view: CompareView; sections: SectionDef[]; onRemove: (id: string) => void }) {
+  const reduced = useReducedMotion()
   const cols = view.columns
   const [hover, setHover] = useState<number | null>(null)
   const colTint = (ci: number) => (hover === ci ? 'bg-[color-mix(in_srgb,var(--teal)_6%,transparent)]' : '')
@@ -382,7 +387,7 @@ function CompareTable({ view, sections, onRemove }: { view: CompareView; section
           </tr>
         </thead>
         {sections.map((sec) => (
-          <motion.tbody key={sec.key} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -60px 0px' }} transition={t.pageIn}>
+          <motion.tbody key={sec.key} initial={reduced ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px 0px -60px 0px' }} transition={t.pageIn} className="motion-reduce:transform-none! motion-reduce:opacity-100!">
             <tr>
               <th colSpan={cols.length + 1} scope="colgroup" className="border-t border-divider px-5 pt-6 pb-2 text-left">
                 <span className="hud text-teal">{sec.title}</span>
@@ -392,7 +397,7 @@ function CompareTable({ view, sections, onRemove }: { view: CompareView; section
             {sec.rows.map((row) => (
               <tr key={row.key} className="align-top">
                 <th scope="row" className="border-t border-[color-mix(in_srgb,var(--ink)_7%,transparent)] px-5 py-4 text-left font-normal">
-                  <span className="hud text-[11.5px] text-ink-2">{row.label}</span>
+                  <span className="hud text-[12px] text-ink-2">{row.label}</span>
                 </th>
                 {cols.map((c, ci) => (
                   <td
@@ -438,7 +443,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
   return (
     <div className="lg:hidden">
       <div className="glass sticky top-14 z-10 -mx-4 flex items-center gap-2 rounded-none border-x-0 border-t-0 px-4 py-2 md:top-0 md:-mx-8 md:px-8">
-        <div role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 overflow-x-auto scrollbar-thin [mask-image:linear-gradient(to_right,#000_calc(100%-28px),transparent)] pr-6">
+        <ScrollRow role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 scrollbar-thin">
           {cols.map((c, i) => (
             <button
               key={c.id}
@@ -448,7 +453,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
               aria-controls={`cmp-col-${c.id}`}
               onClick={() => go(i)}
               className={cn(
-                'relative inline-flex h-11 shrink-0 items-center rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150',
+                'relative inline-flex h-11 shrink-0 items-center rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150 max-[480px]:px-3',
                 i === active ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
               )}
             >
@@ -458,11 +463,12 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
               <span className="relative">{c.card.shortName}</span>
             </button>
           ))}
-        </div>
-        <span className="hud tnum shrink-0 text-ink-2" aria-hidden>
+        </ScrollRow>
+        <span className="hud tnum shrink-0 text-ink-2 max-[480px]:hidden" aria-hidden>
           {active + 1}/{cols.length}
         </span>
-        <div className="flex shrink-0 gap-1">
+        {/* Narrow phones: the tabs (and a swipe) move between columns, so the names get the room. */}
+        <div className="flex shrink-0 gap-1 max-[480px]:hidden">
           <button
             type="button"
             onClick={() => go(Math.max(0, active - 1))}
@@ -508,7 +514,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
                 <dl className="flex flex-col gap-3">
                   {s.rows.map((row) => (
                     <div key={row.key} className="flex flex-col gap-1">
-                      <dt className="hud text-[11.5px] text-ink-2">{row.label}</dt>
+                      <dt className="hud text-[12px] text-ink-2">{row.label}</dt>
                       <dd className="text-[14px] text-ink">
                         <Cell row={row} c={c} view={view} />
                       </dd>
@@ -652,24 +658,29 @@ function buildSections(view: CompareView): SectionDef[] {
 }
 
 function ElevationCell({ c, max }: { c: CompareColumn; max: number }) {
+  const reduced = useReducedMotion()
   const m = c.mountain
   if (m.baseM === null && m.summitM === null) return <Missing label="Elevation unknown" />
   const base = m.baseM ?? 0
   const top = m.summitM ?? base
   return (
     <span className="flex items-end gap-3.5">
-      <span aria-hidden className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]">
+      {/* The track (which has a size) watches the viewport; the bar grows from its base once it is in view. */}
+      <motion.span
+        aria-hidden
+        initial={reduced ? 'show' : 'hidden'}
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]"
+      >
         {m.summitM !== null && m.baseM !== null ? (
           <motion.span
             className="absolute inset-x-0 rounded-[8px] bg-[linear-gradient(180deg,var(--snow-top),var(--teal))]"
             style={{ bottom: `${(base / max) * 100}%`, height: `${Math.max(2, ((top - base) / max) * 100)}%`, originY: 1 }}
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 0.8, 0.26, 1] }}
+            variants={{ hidden: { scaleY: 0 }, show: { scaleY: 1, transition: { ...t.bars, duration: 0.45 } } }}
           />
         ) : null}
-      </span>
+      </motion.span>
       <span className="flex min-w-0 flex-col gap-1">
         <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em]">{m.vertical ?? '—'}</span>
         <span className="text-[12.5px] text-ink-2">{m.vertical ? 'vertical' : 'vertical unknown'}</span>
@@ -810,7 +821,7 @@ function TerrainCell({ c }: { c: CompareColumn }) {
         {parts.map((p) => (p.v !== null ? <span key={p.k} className={cn('h-full', p.cls)} style={{ width: `${p.v}%` }} /> : null))}
       </span>
       <span className="tnum text-[12px] text-ink-2">{parts.map((p) => `${p.k.toLowerCase()} ${p.v === null ? 'unknown' : `${p.v}%`}`).join(' · ')}</span>
-      {tr.beginnerArea ? <span className="line-clamp-2 text-[12px] text-ink-3">{tr.beginnerArea}</span> : null}
+      {tr.beginnerArea ? <span className="text-[12px] text-ink-3">{tr.beginnerArea}</span> : null}
     </span>
   )
 }

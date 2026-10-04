@@ -76,12 +76,12 @@ export function ExploreTabs({ className }: { className?: string }) {
                 onClick={go(tab.id)}
                 aria-current={on ? 'page' : undefined}
                 className={cn(
-                  'relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150',
+                  'relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150 max-[380px]:px-3',
                   on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
                 )}
               >
                 {on ? <motion.span layoutId="explore-tab" transition={t.select} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
-                <tab.Icon aria-hidden className="relative size-4" strokeWidth={1.8} />
+                <tab.Icon aria-hidden className="relative size-4 max-[380px]:hidden" strokeWidth={1.8} />
                 <span className="relative">{tab.label}</span>
                 {count ? (
                   <span
