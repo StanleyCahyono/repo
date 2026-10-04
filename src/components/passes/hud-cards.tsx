@@ -7,7 +7,7 @@
  */
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Grid3x3 } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Tags } from 'lucide-react'
 import { PassBadge } from '@/components/ui/badge'
 import type { BreakEvenView, FamilyCard } from '@/lib/data/passes-hud'
 import { breakEvenDays } from '@/lib/data/passes-hud'
@@ -65,8 +65,8 @@ export function FamilyCards({ cards }: { cards: FamilyCard[] }) {
                     {host(c.officialUrl)} <ArrowUpRight aria-hidden className="size-3.5" />
                   </a>
                 ) : null}
-                <Link href={`/passes/matrix?family=${c.id}`} className="inline-flex min-h-9 items-center gap-1 text-[13px] font-medium text-ink-2 hover:text-teal max-md:min-h-11">
-                  <Grid3x3 aria-hidden className="size-3.5" /> Coverage
+                <Link href={`/passes/products#family-${c.id}`} className="inline-flex min-h-9 items-center gap-1 text-[13px] font-medium text-ink-2 hover:text-teal max-md:min-h-11">
+                  <Tags aria-hidden className="size-3.5" /> All prices
                 </Link>
               </div>
             </article>

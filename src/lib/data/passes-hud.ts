@@ -13,6 +13,7 @@ import 'server-only'
 import { and, eq, gte, lte, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { PriceSnapshotRow, ResortSeasonRow } from '@/lib/db/rows'
+import { isAdultDayLiftTicket } from '@/lib/domain/costs/items'
 import { money, type Money } from '@/lib/domain/money'
 import { PASS_FAMILIES } from '@/lib/domain/types'
 import { applyOverrides, isLive, loadResortRows, seasonLabel, type DataCtx } from './core'
@@ -145,14 +146,9 @@ export interface BreakEvenView {
   sourceUrl: string | null
 }
 
-const NOT_ADULT = /child|kid|junior|youth|senior|college|student|club|military|group|under|teen/i
-const NOT_DAY = /\b\d+\s*-?\s*day (?:pack|ticket pack)|pack|night|half[- ]day|afternoon|multi/i
-
 /** Pure: the adult single-day ticket figures that can price a ski day, newest season first. */
 export function adultDayTickets(rows: readonly Pick<PriceSnapshotRow, 'item' | 'category' | 'amountMinor' | 'currency' | 'seasonId' | 'dayType' | 'prov'>[], currency: string): TicketRef[] {
-  const ok = rows.filter(
-    (r) => !isUnverified(r.prov) && r.amountMinor > 0 && r.currency === currency && !(r.category && NOT_ADULT.test(r.category)) && !NOT_ADULT.test(r.item) && !NOT_DAY.test(r.item),
-  )
+  const ok = rows.filter((r) => !isUnverified(r.prov) && r.amountMinor > 0 && r.currency === currency && isAdultDayLiftTicket(r))
   const latest = ok.reduce<string | null>((m, r) => (r.seasonId && (!m || r.seasonId > m) ? r.seasonId : m), null)
   return ok
     .filter((r) => r.seasonId === latest)

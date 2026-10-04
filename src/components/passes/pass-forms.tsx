@@ -6,13 +6,14 @@
 import { useId, useState, useTransition, type FormEvent, type ReactNode } from 'react'
 import { CalendarPlus, Plus, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
 import { Sheet } from '@/components/ui/sheet'
 import { useToast } from '@/components/ui/toast'
 import { addOwnedPass, logPassDay, removeOwnedPass, removePassDay, restoreOwnedPass, restorePassDay } from '@/lib/actions/passes'
 import { cn } from '@/lib/ui/cn'
-import { dayLabel } from './format'
+import { shiftDate } from './params'
 
 export interface ProductChoice {
   id: string
@@ -193,7 +194,7 @@ function AddPassForm({
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Purchase date" optional htmlFor={`${id}-date`} error={errors.purchasedOn}>
-          <TextInput id={`${id}-date`} type="date" value={purchasedOn} max={today} onChange={(e) => setPurchasedOn(e.target.value)} aria-invalid={!!errors.purchasedOn} />
+          <DatePicker id={`${id}-date`} value={purchasedOn} max={today} today={today} onChange={setPurchasedOn} clearable placeholder="Not recorded" aria-invalid={!!errors.purchasedOn} />
         </Field>
         <Field label="Price paid" optional htmlFor={`${id}-price`} error={errors.price ?? errors.currency}>
           <div className="flex gap-2">
@@ -207,13 +208,15 @@ function AddPassForm({
               aria-invalid={!!errors.price}
               aria-describedby={`${id}-price-note`}
             />
-            <Select aria-label="Currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className="w-[92px] shrink-0">
+            <div className="w-[92px] shrink-0">
+              <Select aria-label="Currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
               {currencies.map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>
               ))}
             </Select>
+            </div>
           </div>
         </Field>
       </div>
@@ -339,8 +342,11 @@ function LogDayForm({ ownershipId, resorts, today, seasonStart, onDone }: { owne
           </optgroup>
         </Select>
       </Field>
-      <Field label="Date skied" htmlFor={`${id}-date`} error={errors.date} hint={`${dayLabel(date || today, true)} · today or earlier`}>
-        <TextInput id={`${id}-date`} type="date" value={date} min={seasonStart} max={today} onChange={(e) => setDate(e.target.value)} aria-invalid={!!errors.date} required />
+      <Field label="Date skied" htmlFor={`${id}-date`} error={errors.date} hint="Today or earlier">
+        <DatePicker id={`${id}-date`} value={date} min={seasonStart} max={today} today={today} onChange={(v) => v && setDate(v)} presets={[
+            { label: 'Today', date: today },
+            { label: 'Yesterday', date: shiftDate(today, -1) },
+          ]} aria-invalid={!!errors.date} required />
       </Field>
       <Field label="Notes" optional htmlFor={`${id}-notes`}>
         <TextInput id={`${id}-notes`} value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={300} />

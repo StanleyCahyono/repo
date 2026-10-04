@@ -16,8 +16,8 @@
 }
 
 .rise {
-  animation: rise 260ms cubic-bezier(0.22, 0.8, 0.26, 1) both;
-  animation-delay: calc(var(--i, 0) * 50ms);
+  animation: rise 220ms cubic-bezier(0.22, 0.8, 0.26, 1) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
 }
 
 /* Specular sheen that crosses the verdict card once when a new answer lands. */
@@ -95,7 +95,7 @@
 
 .grow {
   transform-origin: left center;
-  animation: grow 700ms cubic-bezier(0.22, 0.8, 0.26, 1) 200ms both;
+  animation: grow 420ms cubic-bezier(0.22, 0.8, 0.26, 1) 160ms both;
 }
 
 /* Blinking HUD beacon dot. */
@@ -114,16 +114,72 @@
   animation: blink 2.4s ease-in-out infinite;
 }
 
-/* Hover lift for cards (transform only). */
+/* Hover lift for cards (transform only, ≤ 2px). */
 .lift {
   transition:
-    transform 220ms cubic-bezier(0.3, 1.4, 0.5, 1),
-    box-shadow 220ms ease;
+    transform 160ms cubic-bezier(0.22, 0.8, 0.26, 1),
+    box-shadow 160ms ease;
 }
 .lift:hover,
 .lift:focus-within {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: inset 0 1px 0 var(--glass-shine), var(--glass-shadow-lg);
+}
+
+/* Days slider (Pass vs tickets, step 3): a chip-track rail filled teal up to the thumb, a tick at the break-even day. */
+.range {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(var(--teal), var(--teal)) left / calc(11px + (100% - 22px) * var(--fill, 0)) 100% no-repeat, var(--chip-track);
+}
+.range::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--chip-track);
+}
+.range::-moz-range-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--teal);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -7px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 2px solid var(--teal);
+  box-shadow: 0 4px 12px -4px rgb(19 32 44 / 0.45);
+  transition: transform 140ms cubic-bezier(0.22, 0.8, 0.26, 1);
+}
+.range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 2px solid var(--teal);
+  box-shadow: 0 4px 12px -4px rgb(19 32 44 / 0.45);
+}
+.range:active::-webkit-slider-thumb,
+.range:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+.range:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -137,5 +193,8 @@
   .lift:hover,
   .lift:focus-within {
     transform: none;
+  }
+  .range::-webkit-slider-thumb {
+    transition: none;
   }
 }

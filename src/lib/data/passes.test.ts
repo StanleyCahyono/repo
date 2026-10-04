@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it, vi } from 'vitest'
 vi.mock('server-only', () => ({}))
 
 import * as s from '@/lib/db/schema'
-import { buildFixture, NOW, TODAY, type Fixture } from './fixtures.test-helpers'
+import { buildFixture, NOW, type Fixture } from './fixtures.test-helpers'
 import { getPassesView } from './passes'
 
 let fx: Fixture
@@ -12,46 +12,22 @@ beforeAll(async () => {
 })
 
 describe('getPassesView', () => {
-  it('answers access from each exact product: a rule recorded as unknown is not shown, and never counts as included', async () => {
-    const v = await getPassesView(fx.ctx, { date: TODAY })
-    // Columns: resorts with a shown rule, catalog order (Ikon's 'unknown' rule at far-west is not shown).
-    expect(v.matrix.resorts.map((r) => r.id)).toEqual(['test-peak'])
-    expect(v.matrix.resortsWithoutRules.map((r) => r.id).sort()).toEqual(['expert-bowl', 'far-west', 'quiet-hill'])
-    // Rows: my owned Indy first, then discovery rows for products I don't own (Indy is not repeated).
-    expect(v.matrix.rows.map((r) => [r.key, r.owned])).toEqual([
-      [`own-${fx.ownershipId}`, true],
-      ['product-ikon-base-2026-27', false],
-    ])
-    const ikon = v.matrix.rows[1]
-    expect(ikon.cells.find((c) => c.resortId === 'far-west')).toBeUndefined()
-    const ikonPeak = ikon.cells.find((c) => c.resortId === 'test-peak')!
-    expect(ikonPeak).toMatchObject({ status: 'unknown', label: 'Access unknown', canSki: false, hasRule: false })
-    expect(ikonPeak.verdict.reasons.join(' ')).not.toMatch(/not confirmed|confirm at source/i)
-    expect(ikon.counts).toEqual({ unknown: 1 })
-  })
-
-  it("counts my logged days: owned Indy has 1 of 2 days left at test-peak (per resort, in the matrix and in 'owned')", async () => {
-    const v = await getPassesView(fx.ctx, { date: TODAY })
+  it("counts my logged days: owned Indy has 1 of 2 days left at test-peak (per resort, in 'owned')", async () => {
+    const v = await getPassesView(fx.ctx)
     const mine = v.owned[0]
     expect(mine).toMatchObject({ ownershipId: fx.ownershipId, holder: 'me', productId: 'indy-base-2026-27', daysUsed: 1, pricePaid: { amountMinor: 29900, currency: 'USD' } })
     expect(mine.usage).toEqual([expect.objectContaining({ date: '2027-01-02', resortId: 'test-peak', inSeason: true })])
     expect(mine.byResort).toEqual([expect.objectContaining({ resortId: 'test-peak', status: 'available', cap: 2, used: 1, remaining: 1, statusLabel: '1 day left' })])
-    const cell = v.matrix.rows[0].cells.find((c) => c.resortId === 'test-peak')!
-    expect(cell).toMatchObject({ status: 'included-limited', canSki: true })
-    expect(cell.verdict).toMatchObject({ remainingDays: 1, remainingAfterVisit: 0, reservationRequired: false })
-    // No product has a shown rule at far-west, so it is not a matrix column.
-    expect(v.matrix.rows[0].cells.find((c) => c.resortId === 'far-west')).toBeUndefined()
   })
 
   it('lists products with their current price, sales deadline and ownership', async () => {
     const v = await getPassesView(fx.ctx)
     const indy = v.products.find((p) => p.id === 'indy-base-2026-27')!
-    expect(indy).toMatchObject({ familyName: 'Indy Pass', ownedByMe: true, ownedBy: ['me'], resortCount: 1, salesDeadline: { date: '2027-02-10', daysLeft: 26, passed: false } })
+    expect(indy).toMatchObject({ familyName: 'Indy Pass', ownedByMe: true, ownedBy: ['me'], salesDeadline: { date: '2027-02-10', daysLeft: 26, passed: false } })
     expect(indy.currentPrice).toMatchObject({ amount: { amountMinor: 29900, currency: 'USD' }, category: 'adult', quoteLabel: 'Published price' })
     const ikon = v.products.find((p) => p.id === 'ikon-base-2026-27')!
     // No price on file → null ("Price not recorded"), never $0.
-    // Its only rule ('unknown' at far-west) is not shown, so it counts no resorts.
-    expect(ikon).toMatchObject({ currentPrice: null, prices: [], ownedByMe: false, salesDeadline: null, resortCount: 0 })
+    expect(ikon).toMatchObject({ currentPrice: null, prices: [], ownedByMe: false, salesDeadline: null })
     expect(v.families.map((f) => f.id)).toEqual(['ikon', 'indy'])
     expect(v.comparison).toMatchObject({ plannedDays: [], result: null })
     expect(v.comparison.notes[0]).toMatch(/No upcoming resort days/)

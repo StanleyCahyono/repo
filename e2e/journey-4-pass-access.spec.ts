@@ -10,7 +10,7 @@ test.use({ mode: 'demo' })
 
 test('the pass checker answers from exact product rules and never counts unknown as access @mobile', async ({ page }) => {
   await page.goto('/passes')
-  await expect(page.getByRole('heading', { level: 1, name: 'Passes & Costs' })).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1, name: 'Can I use my pass there?' })).toBeVisible()
 
   // The owned pass shows its remaining days per resort (two logged at Greek Peak).
   const owned = page.getByRole('region', { name: 'Your passes' }).getByRole('article', { name: 'Indy Base Pass' })
@@ -57,9 +57,12 @@ test('the pass checker answers from exact product rules and never counts unknown
   // 4. The pass I own at Greek Peak on Saturday: limited days, all used — the restriction applies.
   await pass.selectOption({ label: 'Indy Base Pass (yours)' })
   await expect(page).toHaveURL(/[?&]own=/)
-  await checker.getByRole('button', { name: 'Single day' }).click()
+  // One day in the range calendar: pick Saturday twice (start and end on the same day).
+  await checker.getByRole('button', { name: /^Dates/ }).click()
+  await page.locator('button[data-day="2027-01-16"]').first().click()
+  await page.locator('button[data-day="2027-01-16"]').first().click()
   await expect(page).not.toHaveURL(/[?&]to=/)
-  await expect(checker.getByRole('textbox', { name: 'From' })).toHaveValue('2027-01-16')
+  await expect(checker.locator('input[name="from"]')).toHaveValue('2027-01-16')
   await expect(checker).toContainText(/No days left/)
   await expect(checker.getByRole('img', { name: /2 of 2 days used, 0 left/ })).toBeVisible()
   await expect(definition(rule, 'Access')).toHaveText('Limited days')

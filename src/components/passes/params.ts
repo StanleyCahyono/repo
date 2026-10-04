@@ -4,9 +4,8 @@
  * dates to the season). Client-safe (no Luxon).
  *
  *   /passes            ?own=3 | ?pass=<productId|none>  &resort=alta  &from=2027-02-14  &to=2027-02-16
- *   /passes/matrix     ?date=2027-02-14  &family=ikon
  *   /passes/costs      ?date=2027-01-16  &show=all|favorites|complete  &cur=CAD
- *   /passes/compare    ?days=alta.2027-02-14,snowbird.2027-02-15  &trips=0  &cur=CAD  &view=season
+ *   /passes/compare    ?days=alta.2027-02-14,snowbird.2027-02-15  &trips=0  &cur=CAD
  */
 
 export type RawParams = Record<string, string | string[] | undefined> | URLSearchParams
@@ -94,18 +93,6 @@ export function checkerHref(q: { pass?: string | null; own?: number | null; reso
 }
 
 // ---------------------------------------------------------------------------
-// Matrix
-
-export interface MatrixQuery {
-  date: string | null
-  family: string | null
-}
-
-export function parseMatrix(sp: RawParams): MatrixQuery {
-  return { date: validDate(first(sp, 'date')), family: validId(first(sp, 'family')) }
-}
-
-// ---------------------------------------------------------------------------
 // Day costs
 
 export type CostsShow = 'all' | 'favorites' | 'complete'
@@ -136,13 +123,10 @@ export interface ScenarioDayParam {
   date: string
 }
 
-export type CompareView = 'incremental' | 'season'
-
 export interface CompareQuery {
   days: ScenarioDayParam[]
   trips: boolean
   cur: string | null
-  view: CompareView
 }
 
 /** 'alta.2027-02-14,snowbird.2027-02-15' → rows; invalid or duplicate entries are skipped. */
@@ -178,7 +162,6 @@ export function parseCompare(sp: RawParams): CompareQuery {
     days: parseDays(first(sp, 'days')),
     trips: first(sp, 'trips') !== '0',
     cur: cur && CUR_RE.test(cur) ? cur.toUpperCase() : null,
-    view: first(sp, 'view') === 'season' ? 'season' : 'incremental',
   }
 }
 

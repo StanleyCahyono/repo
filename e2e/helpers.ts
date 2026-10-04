@@ -12,7 +12,6 @@ export const PRIMARY_ROUTES = [
   '/trips',
   '/passes',
   '/passes/products',
-  '/passes/matrix',
   '/passes/costs',
   '/passes/compare',
   '/passes/rules/ikon-pass-2026-27/alta',

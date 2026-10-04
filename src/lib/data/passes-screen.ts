@@ -1,6 +1,6 @@
 /**
  * Passes & Costs screen loaders (the /passes routes). Builds on the passes read model (families, products, owned
- * passes, access matrix) with:
+ * passes) with:
  *
  * - the access checker: an exact product or one of my ownerships × a resort × a date range → one verdict per day from
  *   planAccess (logged usage and earlier days of the range consume allotments), the rule on file and its versions;
