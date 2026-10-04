@@ -241,7 +241,7 @@ describe('demo reports', () => {
 
   it('say exactly which terrain totals are simulated (catalog counts always win)', () => {
     const totalsOf = (id: string) => terrainTotals(catalog.resorts.find((x) => x.id === id)!.terrain, demoProfile(id))
-    expect(totalsOf('greek-peak')).toMatchObject({ trails: 55, lifts: 8, simulated: false, simulatedFields: [] })
+    expect(totalsOf('greek-peak')).toMatchObject({ trails: 56, lifts: 8, simulated: false, simulatedFields: [] })
     expect(totalsOf('labrador-mountain')).toMatchObject({ trails: 22, lifts: 4, simulated: true, simulatedFields: ['beginnerTrails'] })
     expect(totalsOf('killington').simulatedFields).toEqual(['beginnerTrails'])
     const firstNotes = (id: string) => reportsFor(id)[0].report.notes
