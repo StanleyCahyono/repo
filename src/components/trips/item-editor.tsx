@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Field, Select, TextInput, Textarea, Checkbox } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
 import { Notice } from '@/components/ui/states'
+import { DatePicker } from '@/components/ui/date-picker'
 import { cn } from '@/lib/ui/cn'
 import type { TripItemRow } from '@/lib/db/rows'
 import type { TripItemType } from '@/lib/db/schema'
@@ -31,8 +32,8 @@ import {
   detailNumbers,
   detailString,
   majorString,
-  tripDays,
 } from './format'
+import { DateTimeField, TimeField, TripDateField } from './date-fields'
 import { DEFAULT_AIRPORT_BUFFER_MIN, DEFAULT_ARRIVAL_BUFFER_MIN } from './model'
 import type { EditorTarget, TripUiData } from './trip-ui'
 import type { Run } from './use-run'
@@ -272,7 +273,7 @@ export function ItemEditor({
   const set = <K extends keyof Draft>(k: K, v: Draft[K]) => setF((p) => ({ ...p, [k]: v }))
   const editing = target.mode === 'edit'
   const item = editing ? target.item : null
-  const days = useMemo(() => tripDays(data.startDate, data.endDate), [data.startDate, data.endDate])
+  const span = useMemo(() => ({ startDate: data.startDate, endDate: data.endDate, today: data.today }), [data.startDate, data.endDate, data.today])
   const [d1, d2] = DATE_LABEL[f.type] ?? ['Date', 'Until']
   const foreign = f.priced && f.currency && f.currency !== data.currency
   const stored = foreign ? data.rates.find((r) => r.currency === f.currency) : undefined
@@ -464,11 +465,11 @@ export function ItemEditor({
         <Group title="When">
           <div className="grid gap-3 sm:grid-cols-2">
             <Field label={d1} htmlFor={id('date')} error={err('date')} optional={f.type !== 'resort-day'}>
-              <DateInput id={id('date')} value={f.date} onChange={(v) => set('date', v)} days={days} invalid={!!err('date')} />
+              <TripDateField id={id('date')} value={f.date} onChange={(v) => setF((p) => ({ ...p, date: v, endDate: p.endDate && v && p.endDate < v ? '' : p.endDate }))} trip={span} invalid={!!err('date')} />
             </Field>
             {f.type !== 'resort-day' && f.type !== 'lesson' ? (
               <Field label={d2} htmlFor={id('end')} error={err('endDate')} optional>
-                <DateInput id={id('end')} value={f.endDate} onChange={(v) => set('endDate', v)} days={days} min={f.date} invalid={!!err('endDate')} />
+                <TripDateField id={id('end')} value={f.endDate} onChange={(v) => set('endDate', v)} trip={span} min={f.date || null} invalid={!!err('endDate')} />
               </Field>
             ) : null}
           </div>
@@ -534,7 +535,7 @@ export function ItemEditor({
               />
               {f.kind === 'quote' ? (
                 <Field label="Quote valid until" htmlFor={id('qe')} optional hint="Piste warns you as it approaches and after it passes." error={err('quoteExpiresAt')}>
-                  <TextInput id={id('qe')} type="date" value={f.quoteExpiresAt} onChange={(e) => set('quoteExpiresAt', e.target.value)} />
+                  <DatePicker id={id('qe')} value={f.quoteExpiresAt} onChange={(v) => set('quoteExpiresAt', v)} today={data.today} openTo={data.today} clearable aria-invalid={err('quoteExpiresAt') ? true : undefined} />
                 </Field>
               ) : null}
               {foreign ? (
@@ -554,7 +555,7 @@ export function ItemEditor({
                         <TextInput id={id('fx')} inputMode="decimal" className="tnum" value={f.fxRate} placeholder="0.7300" onChange={(e) => set('fxRate', e.target.value.replace(/[^\d.]/g, ''))} />
                       </Field>
                       <Field label="Rate date" htmlFor={id('fxd')} optional>
-                        <TextInput id={id('fxd')} type="date" value={f.fxDate} onChange={(e) => set('fxDate', e.target.value)} />
+                        <DatePicker id={id('fxd')} value={f.fxDate} onChange={(v) => set('fxDate', v)} today={data.today} max={data.today} presets={['today']} clearable />
                       </Field>
                     </div>
                   ) : null}
@@ -598,24 +599,11 @@ function Group({ title, aside, children }: { title: string; aside?: ReactNode; c
   )
 }
 
-function DateInput({ id, value, onChange, days, min, invalid }: { id: string; value: string; onChange: (v: string) => void; days: string[]; min?: string; invalid?: boolean }) {
-  const listId = `${id}-days`
-  return (
-    <>
-      <TextInput id={id} type="date" value={value} min={min || undefined} list={listId} onChange={(e) => onChange(e.target.value)} aria-invalid={invalid} />
-      <datalist id={listId}>
-        {days.map((d) => (
-          <option key={d} value={d} label={dayLabel(d)} />
-        ))}
-      </datalist>
-    </>
-  )
-}
-
 type FieldsProps = { f: Draft; set: <K extends keyof Draft>(k: K, v: Draft[K]) => void; id: (k: string) => string; err: (k: string) => string | undefined }
 
 function FlightFields({ f, set, id, err, data }: FieldsProps & { data: TripUiData }) {
   const airports = data.airports
+  const span = { startDate: data.startDate, endDate: data.endDate, today: data.today }
   const seg = (k: number, key: keyof Seg, v: string) => set('segments', f.segments.map((x, j) => (j === k ? { ...x, [key]: key === 'from' || key === 'to' || key === 'carrier' ? v.toUpperCase() : v } : x)))
   const move = (k: number, dir: -1 | 1) => {
     const next = [...f.segments]
@@ -684,12 +672,12 @@ function FlightFields({ f, set, id, err, data }: FieldsProps & { data: TripUiDat
                 <TextInput id={id(`t${k}`)} value={x.to} maxLength={3} className="uppercase" list={id('ap')} onChange={(e) => seg(k, 'to', e.target.value)} aria-invalid={!!err(`segments.${k}.to`)} />
               </Field>
             </div>
-            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+            <div className="mt-3 grid gap-3">
               <Field label={<>Departs (local)<span className="sr-only"> segment {k + 1}</span></>} htmlFor={id(`d${k}`)} error={err(`segments.${k}.departLocal`)}>
-                <TextInput id={id(`d${k}`)} type="datetime-local" value={x.departLocal} onChange={(e) => seg(k, 'departLocal', e.target.value)} />
+                <DateTimeField id={id(`d${k}`)} value={x.departLocal} onChange={(v) => seg(k, 'departLocal', v)} trip={span} invalid={!!err(`segments.${k}.departLocal`)} timeLabel={`Departure time, segment ${k + 1}`} />
               </Field>
               <Field label={<>Arrives (local)<span className="sr-only"> segment {k + 1}</span></>} htmlFor={id(`a${k}`)} error={err(`segments.${k}.arriveLocal`)}>
-                <TextInput id={id(`a${k}`)} type="datetime-local" value={x.arriveLocal} onChange={(e) => seg(k, 'arriveLocal', e.target.value)} />
+                <DateTimeField id={id(`a${k}`)} value={x.arriveLocal} onChange={(v) => seg(k, 'arriveLocal', v)} trip={span} invalid={!!err(`segments.${k}.arriveLocal`)} timeLabel={`Arrival time, segment ${k + 1}`} />
               </Field>
             </div>
           </div>
@@ -771,12 +759,14 @@ function LessonFields({ f, set, id, err, data }: FieldsProps & { data: TripUiDat
                       onClick={() => toggle(k.id)}
                       title={SKILL_STATUS_LABEL[k.status] ?? k.status}
                       className={cn(
-                        'inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3 py-1 text-left text-[13px] transition-colors duration-150',
+                        'inline-flex min-h-9 max-w-full items-center rounded-[18px] border px-3 py-1.5 text-left text-[13px] leading-snug transition-[background-color,border-color,color,transform] duration-150 active:scale-[0.97]',
                         on ? 'border-teal bg-glacier text-teal' : 'border-divider-strong bg-surface text-ink-2 hover:border-teal hover:text-ink',
                       )}
                     >
-                      {k.label}
-                      {k.status !== 'not-started' ? <span className="text-[11.5px] text-ink-3">· {SKILL_STATUS_LABEL[k.status]}</span> : null}
+                      <span className="min-w-0">
+                        {k.label}
+                        {k.status !== 'not-started' ? <span className="whitespace-nowrap text-[12px] text-ink-3"> · {SKILL_STATUS_LABEL[k.status]}</span> : null}
+                      </span>
                     </button>
                   )
                 })}
@@ -933,12 +923,12 @@ function TypeFields({ f, set, id, err }: FieldsProps) {
     case 'event':
       return (
         <Group title="Event">
-          <div className="grid gap-3 sm:grid-cols-[1fr_120px]">
+          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_11rem]">
             <Field label="Venue" htmlFor={id('ve')} optional>
               <TextInput id={id('ve')} value={f.venue} maxLength={160} onChange={(e) => set('venue', e.target.value)} />
             </Field>
-            <Field label="Starts (local)" htmlFor={id('st')} optional error={err('startTime')}>
-              <TextInput id={id('st')} type="time" value={f.startTime} onChange={(e) => set('startTime', e.target.value)} />
+            <Field label="Start time" htmlFor={id('st')} optional hint="Local time at the venue" error={err('startTime')}>
+              <TimeField id={id('st')} value={f.startTime} onChange={(v) => set('startTime', v)} invalid={!!err('startTime')} />
             </Field>
           </div>
           <Field label="Link" htmlFor={id('eu')} optional error={err('url')}>

@@ -86,10 +86,11 @@ export function LessonsSection({ page, index }: { page: TripPage; index: number 
                         {p.skills.length ? (
                           <ul className="flex flex-wrap gap-1.5">
                             {p.skills.map((k) => (
-                              <li key={k.id} className="inline-flex min-h-7 items-center gap-1.5 rounded-full border border-teal/40 bg-glacier/60 px-2.5 text-[12.5px] text-ink">
-                                <GraduationCap aria-hidden className="size-3.5 text-teal" />
-                                {k.label}
-                                <span className="text-ink-3">· {SKILL_STATUS_LABEL[k.status] ?? k.status}</span>
+                              <li key={k.id} className="flex max-w-full min-h-7 items-start gap-1.5 rounded-[14px] border border-teal/40 bg-glacier/60 px-2.5 py-1 text-[12.5px] leading-snug text-ink">
+                                <GraduationCap aria-hidden className="mt-0.5 size-3.5 shrink-0 text-teal" />
+                                <span className="min-w-0">
+                                  {k.label} <span className="whitespace-nowrap text-ink-3">· {SKILL_STATUS_LABEL[k.status] ?? k.status}</span>
+                                </span>
                               </li>
                             ))}
                           </ul>

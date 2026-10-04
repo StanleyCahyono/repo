@@ -42,6 +42,9 @@ export function Itinerary({
   chosenName: string | null
 }) {
   const [announce, setAnnounce] = useState('')
+  // Lift tickets in the plan (a multi-day ticket is listed on its first day but covers every day of its span).
+  const tickets = days.flatMap((d) => d.items).filter((i) => i.type === 'lift-ticket' && i.refId && i.date)
+  const ticketFor = (resortId: string, date: string) => tickets.find((i) => i.refId === resortId && date >= i.date! && date <= (i.endDate && i.endDate >= i.date! ? i.endDate : i.date!)) ?? null
   return (
     <div>
       <p aria-live="polite" className="sr-only">
@@ -49,7 +52,7 @@ export function Itinerary({
       </p>
       <ol className="flex flex-col">
         {days.map((d, k) => (
-          <DayBlock key={d.date} day={d} last={k === days.length - 1 && !unscheduled.length && !outside.length} units={units} now={now} chosenName={chosenName} onAnnounce={setAnnounce} />
+          <DayBlock key={d.date} day={d} last={k === days.length - 1 && !unscheduled.length && !outside.length} units={units} now={now} chosenName={chosenName} onAnnounce={setAnnounce} ticketFor={ticketFor} />
         ))}
         {outside.length ? (
           <ExtraBlock
@@ -82,7 +85,23 @@ function DateColumn({ date, n }: { date: string; n: number }) {
   )
 }
 
-function DayBlock({ day, last, units, now, chosenName, onAnnounce }: { day: TripDayView; last: boolean; units: UnitPrefs; now: string; chosenName: string | null; onAnnounce: (s: string) => void }) {
+function DayBlock({
+  day,
+  last,
+  units,
+  now,
+  chosenName,
+  onAnnounce,
+  ticketFor,
+}: {
+  day: TripDayView
+  last: boolean
+  units: UnitPrefs
+  now: string
+  chosenName: string | null
+  onAnnounce: (s: string) => void
+  ticketFor: (resortId: string, date: string) => TripItemRow | null
+}) {
   const { openEditor } = useTripUi()
   const headingId = `day-${day.date}`
   const resortNames = [...new Map(day.resorts.map((r) => [r.resortId, r])).values()]
@@ -156,6 +175,7 @@ function DayBlock({ day, last, units, now, chosenName, onAnnounce }: { day: Trip
                   date={day.date}
                   now={now}
                   chosenName={chosenName}
+                  ticket={ticketFor(r.resortId, day.date)}
                   header={
                     a ? (
                       <>

@@ -36,7 +36,8 @@ export function Ring({ value, size = 56, children, tone = 'teal', className }: {
   const r = 15.5
   const stroke = tone === 'positive' ? 'var(--positive)' : tone === 'copper' ? 'var(--copper)' : 'var(--teal)'
   return (
-    <span className={cn('relative inline-flex shrink-0 items-center justify-center', className)} style={{ width: size, height: size }}>
+    // The wrapper observes the viewport (an SVG stroke drawn to zero length is easy for the observer to miss).
+    <motion.span initial="hidden" whileInView="show" viewport={{ once: true }} className={cn('relative inline-flex shrink-0 items-center justify-center', className)} style={{ width: size, height: size }}>
       <svg viewBox="0 0 36 36" aria-hidden className="absolute inset-0 -rotate-90">
         <circle cx="18" cy="18" r={r} fill="none" stroke="var(--ink)" strokeOpacity={0.08} strokeWidth={3} />
         <motion.circle
@@ -47,13 +48,10 @@ export function Ring({ value, size = 56, children, tone = 'teal', className }: {
           stroke={stroke}
           strokeWidth={3}
           strokeLinecap="round"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: Math.max(0, Math.min(1, value)) }}
-          viewport={{ once: true }}
-          transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+          variants={{ hidden: { pathLength: 0 }, show: { pathLength: Math.max(0, Math.min(1, value)), transition: { type: 'spring', stiffness: 90, damping: 18 } } }}
         />
       </svg>
       <span className="relative text-[13px] font-semibold text-ink tnum">{children}</span>
-    </span>
+    </motion.span>
   )
 }

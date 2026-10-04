@@ -124,7 +124,7 @@ export function StaySection({ page, index }: { page: TripPage; index: number }) 
                             <div className="min-w-0">
                               <p className="text-[14.5px] font-medium text-ink">
                                 {h.name}
-                                {h.tier ? <span className="ml-2 inline-flex h-5 items-center rounded-sm border border-divider px-1.5 align-middle text-[11.5px] font-medium text-ink-2">{TIER_LABEL[h.tier]}</span> : null}
+                                {h.tier ? <span className="ml-2 inline-flex h-5 items-center rounded-sm border border-divider px-1.5 align-middle text-[12px] font-medium text-ink-2">{TIER_LABEL[h.tier]}</span> : null}
                               </p>
                               {h.distanceText ? <p className="mt-0.5 line-clamp-2 text-[12.5px] text-ink-2">{h.distanceText}</p> : null}
                               <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px]">

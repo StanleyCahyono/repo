@@ -7,6 +7,7 @@
 import { motion } from 'motion/react'
 import { formatMoney, formatMoneyRange, money } from '@/lib/domain/money'
 import { t } from '@/lib/ui/motion'
+import { cn } from '@/lib/ui/cn'
 
 export interface BarRow {
   key: string
@@ -14,6 +15,17 @@ export interface BarRow {
   lines: number
   min: number
   max: number
+}
+
+/** The two-step bar; it grows once when it scrolls into view (the track is observed — a zero-width bar has no area). */
+function Bar({ min, max, top, k, className }: { min: number; max: number; top: number; k: number; className?: string }) {
+  const grow = { hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { ...t.bars, delay: 0.05 * k } } }
+  return (
+    <motion.div aria-hidden initial="hidden" whileInView="show" viewport={{ once: true, margin: '0px 0px -40px 0px' }} className={cn('relative h-2.5 overflow-hidden rounded-r-[4px] bg-surface-3', className)}>
+      <motion.div className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal/30" style={{ width: `${(max / top) * 100}%`, originX: 0 }} variants={grow} />
+      <motion.div className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal" style={{ width: `${(min / top) * 100}%`, originX: 0 }} variants={grow} />
+    </motion.div>
+  )
 }
 
 export function BudgetBars({ rows, currency, caption }: { rows: BarRow[]; currency: string; caption: string }) {
@@ -34,10 +46,7 @@ export function BudgetBars({ rows, currency, caption }: { rows: BarRow[]; curren
               <span className="ml-2 text-[12.5px] text-ink-3">{pct(r)}%<span className="sr-only"> of the known total</span></span>
             </span>
           </div>
-          <div aria-hidden className="relative mt-1.5 h-2.5 overflow-hidden rounded-r-[4px] bg-surface-3">
-            <motion.div className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal/30" style={{ width: `${(r.max / top) * 100}%`, originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ ...t.bars, delay: 0.04 * k }} />
-            <motion.div className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal" style={{ width: `${(r.min / top) * 100}%`, originX: 0 }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ ...t.bars, delay: 0.04 * k }} />
-          </div>
+          <Bar min={r.min} max={r.max} top={top} k={k} className="mt-1.5" />
         </li>
       ))}
       <li className="flex items-baseline justify-between border-t border-divider pt-2 text-[13px]">
@@ -66,22 +75,7 @@ export function BudgetBars({ rows, currency, caption }: { rows: BarRow[]; curren
               </th>
               <td className="align-middle">
                 <div className="flex items-center gap-3">
-                  <div aria-hidden className="relative h-2.5 min-w-[40px] flex-1 overflow-hidden rounded-r-[4px] bg-surface-3">
-                    <motion.div
-                      className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal/30"
-                      style={{ width: `${(r.max / top) * 100}%`, originX: 0 }}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ ...t.bars, delay: 0.04 * k }}
-                    />
-                    <motion.div
-                      className="absolute inset-y-0 left-0 rounded-r-[4px] bg-teal"
-                      style={{ width: `${(r.min / top) * 100}%`, originX: 0 }}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ ...t.bars, delay: 0.04 * k }}
-                    />
-                  </div>
+                  <Bar min={r.min} max={r.max} top={top} k={k} className="min-w-[40px] flex-1" />
                   <span className="w-[112px] shrink-0 text-right font-semibold text-ink tnum sm:w-[128px]">{range}</span>
                 </div>
               </td>
