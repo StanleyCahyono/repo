@@ -26,7 +26,7 @@ npm run standalone:verify   # re-check it in headless Chromium from its file:// 
 ## What works
 
 - **Every screen, in live and demo mode:** Today, Explore (list, map, compare, events), resort pages, Forecast, Trips,
-  Passes & Costs (products, matrix, costs, compare, rule editor), My Season, Settings and Sources & Sync. Unknown
+  Passes & Costs (products, costs, compare, rule editor), My Season, Settings and Sources & Sync. Unknown
   resorts, trips and addresses show the app's own not-found pages.
 - **Your data stays in this browser.** Live and demo data are two separate SQLite databases (SQLite compiled to
   WebAssembly). Your changes are saved in IndexedDB within a second, the in-page scheduler's writes at most every

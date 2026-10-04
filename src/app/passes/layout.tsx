@@ -30,9 +30,6 @@ export default async function PassesLayout({ children }: { children: ReactNode }
           </p>
         </div>
         <PassesTitle />
-        <p className="m-0 max-w-[62ch] text-[15px] leading-[1.5] text-ink-2 md:text-[16px]">
-          Exact access for your pass on your dates, the days you have left, and what a ski day really costs. Unknown stays unknown — never permission, never $0.
-        </p>
       </header>
       <Suspense fallback={<div aria-hidden className="h-[62px]" />}>
         <PassesTabs />

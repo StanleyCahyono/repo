@@ -357,4 +357,48 @@ describe('computeDayBasket', () => {
     expect(liftTicketFor(gp, 'greek-peak', '2027-01-23', { now: NOW }).price).toEqual(money(9900, 'USD'))
     expect(liftTicketFor(gp, 'greek-peak', '2027-01-18', { now: NOW }).price).toBeNull() // MLK Day: no holiday price
   })
+
+  it('liftTicketFor and the basket pick the adult full-day ticket, never half-day, twilight, multi-day or club rates', () => {
+    const prices = [
+      snap({ subjectType: 'lift-ticket', item: 'Adult lift ticket', category: 'adult (half day)', amountMinor: 5900, dayType: 'weekday' }),
+      snap({ subjectType: 'lift-ticket', item: 'Twilight ticket (4 PM-close)', category: 'Adult', amountMinor: 3900, dayType: null }),
+      snap({ subjectType: 'lift-ticket', item: '3-day lift ticket pack', category: null, amountMinor: 6500, dayType: null }),
+      snap({ subjectType: 'lift-ticket', item: 'Ski-club group rate, adult 1-day', category: 'Adult (club member)', amountMinor: 4500, dayType: null }),
+      snap({ subjectType: 'lift-ticket', item: 'Full-day lift ticket, weekday non-holiday', category: 'Adult (13-69)', amountMinor: 8900, dayType: 'weekday' }),
+    ]
+    const t = liftTicketFor(prices, 'greek-peak', '2027-01-20', { now: NOW })
+    expect(t.price).toEqual(money(8900, 'USD'))
+    const b = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-20', prices }, { ...assumptions, rentalOption: 'none' }, ctx)
+    const lift = b.lines.find((l) => l.key === 'lift')!
+    expect(lift.amount).toEqual(money(8900, 'USD'))
+    expect(lift.note).toContain('Full-day lift ticket')
+    // With only part-day and special rates on file the day stays unknown — nothing is stretched to fit.
+    expect(liftTicketFor(prices.slice(0, 4), 'greek-peak', '2027-01-20', { now: NOW }).price).toBeNull()
+  })
+
+  it('matches readable rental names to the rental option, standard gear before premium, and keeps lessons out of the total', () => {
+    const prices = [
+      snap({ subjectType: 'lift-ticket', amountMinor: 7900, dayType: 'weekday' }),
+      snap({ subjectType: 'rental', item: 'Premium demo ski package', amountMinor: 8500, dayType: 'any' }),
+      snap({ subjectType: 'rental', item: 'Adult ski + boots + poles, per day', amountMinor: 4900, dayType: 'any' }),
+      snap({ subjectType: 'rental', item: 'Junior ski package (7-12)', category: 'child', amountMinor: 2900, dayType: 'any' }),
+      snap({ subjectType: 'rental', item: 'Adult skis only', amountMinor: 3500, dayType: 'any' }),
+      snap({ subjectType: 'lesson', item: 'Private lesson (1 hour)', amountMinor: 15000, dayType: 'any' }),
+      snap({ subjectType: 'lesson', item: 'Adult group lesson, 2 hours', amountMinor: 7000, dayType: 'any' }),
+    ]
+    const full = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-20', prices }, { ...assumptions, partySize: 1 }, ctx)
+    const rental = full.lines.find((l) => l.key === 'rental')!
+    expect(rental.amount).toEqual(money(4900, 'USD'))
+    expect(rental.note).toContain('Adult ski + boots + poles')
+    // Lift 79 + rental 49 + lunch 25 (parking unknown, excluded) — the lesson is listed, never added.
+    expect(full.total).toEqual(money(15300, 'USD'))
+    expect(full.lesson?.label).toBe('Group lesson')
+    expect(full.lesson?.amount).toEqual(money(7000, 'USD'))
+    expect(full.lines.some((l) => (l.key as string) === 'lesson')).toBe(false)
+    const skis = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-20', prices }, { ...assumptions, rentalOption: 'skis-only' }, ctx)
+    expect(skis.lines.find((l) => l.key === 'rental')!.amount).toEqual(money(3500, 'USD'))
+    const boots = computeDayBasket({ resortId: 'greek-peak', date: '2027-01-20', prices }, { ...assumptions, rentalOption: 'boots-only' }, ctx)
+    expect(boots.lines.find((l) => l.key === 'rental')!.amount).toBeNull()
+    expect(boots.complete).toBe(false)
+  })
 })

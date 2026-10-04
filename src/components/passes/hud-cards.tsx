@@ -1,13 +1,13 @@
 /**
  * Passes HUD cards under the checker:
  * - FamilyCards: one glass card per pass family (Ikon, Epic, Indy, Mountain Collective, resort & regional) with the
- *   cheapest current adult price on file — or "Price not recorded" and the official link. Never $0, never a guess.
+ *   cheapest current adult price on file — or "No price yet" and the official link. Never $0, never a guess.
  * - BreakEvenBand: a resort season pass against that resort's own adult day-ticket figures, as a dark HUD band with a
  *   break-even meter. Ticket figures from an earlier season are labelled as a reference, not this season's price.
  */
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Grid3x3 } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Tags } from 'lucide-react'
 import { PassBadge } from '@/components/ui/badge'
 import type { BreakEvenView, FamilyCard } from '@/lib/data/passes-hud'
 import { breakEvenDays } from '@/lib/data/passes-hud'
@@ -45,18 +45,19 @@ export function FamilyCards({ cards }: { cards: FamilyCard[] }) {
               </div>
               {c.price ? (
                 <p className="m-0 flex flex-wrap items-baseline gap-x-2">
+                  {c.id === 'regional' ? null : <span className="text-[13px] text-ink-2">from</span>}
                   <MoneyUp amountMinor={c.price.amountMinor} currency={c.price.currency} className="tnum text-[32px] leading-[1.1] font-light tracking-[-0.02em] text-ink" />
-                  <span className="text-[13px] text-ink-2">{c.id === 'regional' ? 'adult' : 'from, adult'}</span>
+                  <span className="text-[13px] text-ink-2">adult</span>
                 </p>
               ) : (
-                <p className="m-0 text-[28px] leading-[1.1] font-light tracking-[-0.02em] text-ink-3">Price not recorded</p>
+                <p className="m-0 text-[28px] leading-[1.1] font-light tracking-[-0.02em] text-ink-3">No price yet</p>
               )}
               <p className="m-0 text-[13px] leading-[1.45] text-ink-2">
                 {c.price
                   ? c.id === 'regional'
                     ? 'Current adult price on file for your favourite resort’s pass.'
                     : `Cheapest current adult price across ${plural(c.productCount, 'product')}.`
-                  : `${c.seasonLabel} prices and deadlines are not in the catalog — check the official page.`}
+                  : `No ${c.seasonLabel} price on file yet — the official site has the latest.`}
               </p>
               {c.salesNote ? <p className="m-0 text-[13px] leading-[1.45] text-copper">{c.salesNote}</p> : null}
               <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-1">
@@ -65,8 +66,8 @@ export function FamilyCards({ cards }: { cards: FamilyCard[] }) {
                     {host(c.officialUrl)} <ArrowUpRight aria-hidden className="size-3.5" />
                   </a>
                 ) : null}
-                <Link href={`/passes/matrix?family=${c.id}`} className="inline-flex min-h-9 items-center gap-1 text-[13px] font-medium text-ink-2 hover:text-teal max-md:min-h-11">
-                  <Grid3x3 aria-hidden className="size-3.5" /> Coverage
+                <Link href={`/passes/products#family-${c.id}`} className="inline-flex min-h-9 items-center gap-1 text-[13px] font-medium text-ink-2 hover:text-teal max-md:min-h-11">
+                  <Tags aria-hidden className="size-3.5" /> All prices
                 </Link>
               </div>
             </article>
@@ -103,9 +104,9 @@ export function BreakEvenBand({ b }: { b: BreakEvenView | null }) {
         <p className="m-0 text-[14px] leading-[1.5] text-on-ink-chip-2">
           {typ != null && b.typical ? (
             <>
-              {passText} divided by {formatMoney(b.typical.amount)} day tickets — “{b.typical.label}”{b.ticketsThisSeason ? '' : `, the resort’s ${ticketSeason} figure`}.
-              {low != null && b.low ? ` At ${formatMoney(b.low.amount)} (“${b.low.label}”) it takes about ${Math.round(low)}.` : ''}{' '}
-              {b.ticketsThisSeason ? 'Estimate only.' : `Estimate only — ${b.seasonLabel} ticket prices aren’t on file.`}
+              {passText} ÷ a {formatMoney(b.typical.amount)} adult day ticket{b.ticketsThisSeason ? '' : ` (${ticketSeason} price)`}.
+              {low != null && b.low ? ` On cheaper days (${formatMoney(b.low.amount)}) it takes about ${Math.round(low)}.` : ''}{' '}
+              {b.ticketsThisSeason ? 'A rough guide.' : `A rough guide until ${b.seasonLabel} ticket prices are out.`}
             </>
           ) : (
             <>

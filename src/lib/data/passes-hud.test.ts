@@ -80,7 +80,6 @@ describe('familyCards', () => {
       currentPrice: price == null ? null : ({ amount: money(price, 'USD') } as PassProductView['currentPrice']),
       ownedBy: [],
       ownedByMe: false,
-      resortCount: 0,
       verificationLabel: null,
       prov: null,
     }) as PassProductView

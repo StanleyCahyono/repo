@@ -2,7 +2,7 @@
  * Labels and small formatters for the Passes & Costs screens. Client-safe: dates are formatted with Intl in UTC
  * (local dates are timezone-free strings), no Luxon.
  */
-import { BadgePercent, CalendarOff, CalendarX2, CircleCheck, CircleHelp, CircleSlash, CircleX, Minus, type LucideIcon } from 'lucide-react'
+import { BadgePercent, CalendarOff, CalendarX2, CircleCheck, CircleHelp, CircleSlash, CircleX, type LucideIcon } from 'lucide-react'
 import type { EstimateDayType, EstimateRental, EstimateSubject, EstimateView } from '@/lib/data/passes-screen'
 import { formatMoneyRange } from '@/lib/domain/money'
 import type { AccessStatus } from '@/lib/domain/passes/types'
@@ -10,8 +10,7 @@ import { PASS_FAMILIES, type PassAccessType, type PassFamilyId } from '@/lib/dom
 
 export type AccessTone = 'positive' | 'caution' | 'critical' | 'unknown' | 'neutral'
 
-/** 'no-rule' = nothing recorded for this product at this resort (matrix cells). */
-export type MarkStatus = AccessStatus | 'no-rule'
+export type MarkStatus = AccessStatus
 
 export interface StatusMeta {
   /** Full label for text and screen readers. */
@@ -31,11 +30,10 @@ export const STATUS_META: Record<MarkStatus, StatusMeta> = {
   'not-included': { label: 'Not included', short: 'Not incl.', tone: 'critical', Icon: CircleX },
   unknown: { label: 'No access recorded', short: 'Unknown', tone: 'unknown', Icon: CircleHelp },
   'season-mismatch': { label: 'Different season', short: 'Season', tone: 'neutral', Icon: CalendarOff },
-  'no-rule': { label: 'No rule recorded', short: 'No rule', tone: 'neutral', Icon: Minus },
 }
 
 /** Legend order. */
-export const STATUS_ORDER: MarkStatus[] = ['included', 'included-limited', 'discount-only', 'blackout', 'days-exhausted', 'not-included', 'unknown', 'no-rule']
+export const STATUS_ORDER: MarkStatus[] = ['included', 'included-limited', 'discount-only', 'blackout', 'days-exhausted', 'not-included', 'unknown']
 
 export const TONE_TEXT: Record<AccessTone, string> = {
   positive: 'text-positive',

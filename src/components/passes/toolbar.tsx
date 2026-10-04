@@ -1,11 +1,13 @@
 'use client'
 /**
- * Toolbars for the matrix, day-cost and calculator routes: a date (inside the season) with quick shortcuts, filter
+ * Toolbars for the day-cost and calculator routes: a date (inside the season) with quick shortcuts, filter
  * chips and a display-currency switch. Every change writes to the URL through PassesNav.
  */
 import { useId } from 'react'
 import { cn } from '@/lib/ui/cn'
-import { Select, TextInput } from '@/components/ui/form'
+import { DatePicker } from '@/components/ui/date-picker'
+import { Select } from '@/components/ui/form'
+import { dayLabel } from './format'
 import { usePassesNav } from './nav'
 import { saturdayFrom, shiftDate } from './params'
 
@@ -16,6 +18,7 @@ export function DateField({
   season,
   label = 'Date',
   shortcuts = true,
+  hint,
 }: {
   param?: string
   value: string
@@ -23,6 +26,8 @@ export function DateField({
   season: { start: string; end: string }
   label?: string
   shortcuts?: boolean
+  /** A short note under the field ("weekday prices"). */
+  hint?: string | null
 }) {
   const id = useId()
   const { navigate } = usePassesNav()
@@ -34,14 +39,22 @@ export function DateField({
     { label: 'Sunday', date: shiftDate(sat, 1) },
   ].filter((p, i, xs) => p.date >= season.start && p.date <= season.end && xs.findIndex((x) => x.date === p.date) === i)
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex min-w-0 flex-col gap-1.5">
       <label htmlFor={id} className="hud tracking-[0.12em] text-ink-2">
         {label}
       </label>
       <div className="flex flex-wrap items-center gap-2">
-        <div className="w-[176px] shrink-0">
-          <TextInput className="rounded-[14px]" id={id} type="date" value={value} min={season.start} max={season.end} onChange={(e) => e.target.value && navigate({ [param]: e.target.value })} />
-        </div>
+        <DatePicker
+          id={id}
+          size="pill"
+          value={value}
+          onChange={(v) => v && navigate({ [param]: v })}
+          min={season.start}
+          max={season.end}
+          today={today}
+          presets={presets.map((p) => ({ label: p.label, date: p.date }))}
+          renderValue={(v) => dayLabel(v, true)}
+        />
         {shortcuts ? (
           <div role="group" aria-label="Date shortcuts" className="flex flex-wrap gap-1.5">
             {presets.map((p) => (
@@ -61,6 +74,7 @@ export function DateField({
           </div>
         ) : null}
       </div>
+      {hint ? <p className="m-0 text-[12.5px] text-ink-3">{hint}</p> : null}
     </div>
   )
 }

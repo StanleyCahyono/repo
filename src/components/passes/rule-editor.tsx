@@ -8,6 +8,7 @@ import { useId, useState, useTransition, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, X } from 'lucide-react'
 import { Button, ButtonLink } from '@/components/ui/button'
+import { DateRangePicker } from '@/components/ui/date-picker'
 import { Field, Select, Textarea, TextInput } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
 import { useToast } from '@/components/ui/toast'
@@ -41,6 +42,7 @@ export function RuleEditor({
   initial,
   pools,
   season,
+  today,
   links,
   returnHref,
 }: {
@@ -52,6 +54,8 @@ export function RuleEditor({
   initial: Initial | null
   pools: { id: string; label: string | null; total: number | null; members: string[] }[]
   season: { start: string; end: string; label: string }
+  /** The app's today (rings today in the calendar). */
+  today: string
   links: { label: string; url: string }[]
   returnHref: string
 }) {
@@ -227,32 +231,20 @@ export function RuleEditor({
             <div className="flex flex-col gap-2">
               {blackouts.map((b, i) => (
                 <div key={b.key} className="flex flex-wrap items-end gap-2 rounded-[10px] bg-surface-2 p-2.5">
-                  <div className="flex w-[160px] flex-col gap-1">
-                    <label htmlFor={`${id}-bo-${b.key}-from`} className="text-[12px] text-ink-2">
-                      From
+                  <div className="flex min-w-[220px] flex-1 flex-col gap-1">
+                    <label htmlFor={`${id}-bo-${b.key}-dates`} className="text-[12px] text-ink-2">
+                      Dates (inclusive)
                     </label>
-                    <TextInput
-                      id={`${id}-bo-${b.key}-from`}
-                      type="date"
+                    <DateRangePicker
+                      id={`${id}-bo-${b.key}-dates`}
+                      value={{ start: b.from, end: b.to }}
                       min={season.start}
                       max={season.end}
-                      value={b.from}
-                      onChange={(e) => setBlackouts((xs) => xs.map((x) => (x.key === b.key ? { ...x, from: e.target.value, to: x.to || e.target.value } : x)))}
-                      aria-invalid={!!errors[`blackouts.${i}.from`]}
-                    />
-                  </div>
-                  <div className="flex w-[160px] flex-col gap-1">
-                    <label htmlFor={`${id}-bo-${b.key}-to`} className="text-[12px] text-ink-2">
-                      To (inclusive)
-                    </label>
-                    <TextInput
-                      id={`${id}-bo-${b.key}-to`}
-                      type="date"
-                      min={b.from || season.start}
-                      max={season.end}
-                      value={b.to}
-                      onChange={(e) => setBlackouts((xs) => xs.map((x) => (x.key === b.key ? { ...x, to: e.target.value } : x)))}
-                      aria-invalid={!!errors[`blackouts.${i}.to`]}
+                      presets={false}
+                      today={today}
+                      placeholder="Pick the blacked-out days"
+                      onChange={(v) => setBlackouts((xs) => xs.map((x) => (x.key === b.key ? { ...x, from: v.start, to: v.end || v.start } : x)))}
+                      aria-invalid={!!errors[`blackouts.${i}.from`] || !!errors[`blackouts.${i}.to`]}
                     />
                   </div>
                   <div className="flex min-w-[140px] flex-1 flex-col gap-1">

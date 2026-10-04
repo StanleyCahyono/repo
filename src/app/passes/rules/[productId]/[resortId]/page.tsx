@@ -90,6 +90,7 @@ export default async function RuleEditorPage({ params, searchParams }: { params:
               initial={initial}
               pools={view.pools.map((p) => ({ id: p.id, label: p.label, total: p.total, members: p.members.map((m) => m.name) }))}
               season={view.season}
+              today={ctx.today}
               links={view.product.links}
               returnHref={returnHref}
             />

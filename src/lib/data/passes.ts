@@ -4,8 +4,6 @@
  * - Families and this season's exact products, with every pass price snapshot (quote kind, purchase-by window) and
  *   the sales deadline with days left. Unverified facts never reach here (see shown.ts).
  * - My owned passes (and other holders'): logged usage, remaining days per resort and per shared day pool.
- * - An access matrix product × resort for one date, answered from product-specific rules only (evaluateAccess):
- *   owned rows count that ownership's logged days; a missing rule is never counted as included.
  * - The pass-vs-tickets comparison on the resort days actually planned in upcoming trips, each day priced with
  *   its own ticket (never one resort's walk-up price multiplied out).
  */
@@ -13,22 +11,10 @@ import 'server-only'
 import { and, eq, inArray, ne, sql } from 'drizzle-orm'
 import * as s from '@/lib/db/schema'
 import type { PassAccessRuleRow, PassProductRow, PriceSnapshotRow } from '@/lib/db/rows'
-import { comparePasses, isExpired, liftTicketFor, QUOTE_KIND_LABEL, type PassCandidate, type PassComparison } from '@/lib/domain/costs'
+import { adultRank, audienceOf, comparePasses, isExpired, liftTicketFor, QUOTE_KIND_LABEL, type PassCandidate, type PassComparison } from '@/lib/domain/costs'
 import { money, type Money } from '@/lib/domain/money'
 import { cleanNote } from '@/lib/domain/source-label'
-import {
-  ACCESS_STATUS_LABEL,
-  evaluateAccess,
-  latestRule,
-  latestRules,
-  remainingByPool,
-  remainingByResort,
-  usageInSeason,
-  type AccessStatus,
-  type AccessVerdict,
-  type PoolAllowance,
-  type ResortAllowance,
-} from '@/lib/domain/passes'
+import { remainingByPool, remainingByResort, usageInSeason, type PoolAllowance, type ResortAllowance } from '@/lib/domain/passes'
 import { daysBetween, hemisphereOf, isLocalDate, type SeasonOf } from '@/lib/domain/time'
 import { PASS_FAMILIES, type Provenance } from '@/lib/domain/types'
 import { groupBy, isLive, loadPassData, loadResortRows, seasonLabel, verificationLabel, type DataCtx, type OwnedPass } from './core'
@@ -87,8 +73,6 @@ export interface PassProductView {
   /** Holders with this product ('me' and/or companions). */
   ownedBy: string[]
   ownedByMe: boolean
-  /** Resorts with a current shown rule that is not 'not-included'. */
-  resortCount: number
   verificationLabel: string | null
   prov: Provenance | null
 }
@@ -130,40 +114,6 @@ export interface OwnedPassView {
   byPool: (PoolAllowance & { memberNames: string[] })[]
 }
 
-export interface AccessCellView {
-  resortId: string
-  status: AccessStatus
-  label: string
-  canSki: boolean
-  /** A shown rule exists for this product at this resort (false → no access recorded). */
-  hasRule: boolean
-  verdict: AccessVerdict
-  ruleProv: Provenance | null
-}
-
-export interface AccessRowView {
-  /** `own-<ownershipId>` for an owned pass, `product-<productId>` for discovery rows. */
-  key: string
-  productId: string
-  productName: string
-  familyId: string
-  familyName: string
-  ownershipId: number | null
-  holder: string | null
-  owned: boolean
-  /** Aligned with `matrix.resorts`. */
-  cells: AccessCellView[]
-  counts: Partial<Record<AccessStatus, number>>
-}
-
-export interface MatrixResort {
-  id: string
-  name: string
-  shortName: string
-  region: string
-  isFavorite: boolean
-}
-
 export interface PlannedDayView {
   date: string
   resortId: string
@@ -184,14 +134,11 @@ export interface PassComparisonView {
 }
 
 export interface PassesView {
-  /** Resort-local date the matrix answers for. */
-  date: string
   today: string
   season: { id: string; label: string }
   families: FamilyView[]
   products: PassProductView[]
   owned: OwnedPassView[]
-  matrix: { date: string; resorts: MatrixResort[]; rows: AccessRowView[]; resortsWithoutRules: { id: string; name: string }[] }
   comparison: PassComparisonView
   notes: string[]
   demo: boolean
@@ -224,10 +171,14 @@ function priceView(p: PriceSnapshotRow, ctx: DataCtx): PassPriceView {
 
 /** The adult price still on sale today: earliest purchase-by that has not passed, else the newest open-ended one. */
 export function currentPassPrice(prices: readonly PassPriceView[]): PassPriceView | null {
-  const open = prices.filter((p) => !p.expired && !p.purchaseClosed && p.quoteKind !== 'demo' && (!p.category || p.category.toLowerCase() === 'adult'))
+  // Adult wording with ages ("Adult (23+)") counts as adult; a price whose age category was not recorded is accepted too
+  // (its category text is shown with it); child, senior, college and family-member prices are not the headline.
+  const open = prices.filter((p) => !p.expired && !p.purchaseClosed && p.quoteKind !== 'demo' && audienceOf(p.category) !== 'other')
   const sorted = [...open].sort(
     (a, b) =>
       (a.purchaseBy ?? '9999-12-31').localeCompare(b.purchaseBy ?? '9999-12-31') ||
+      // The standard adult price ("Adult", "Adult (23+)") before "Young adult" or one whose age category isn't recorded.
+      adultRank(a.category) - adultRank(b.category) ||
       (a.quoteKind === 'user-estimate' ? 1 : 0) - (b.quoteKind === 'user-estimate' ? 1 : 0) ||
       b.observedAt.localeCompare(a.observedAt) ||
       b.id - a.id,
@@ -284,15 +235,13 @@ export function ownedPassView(o: OwnedPass, rules: readonly PassAccessRuleRow[],
   }
 }
 
-export async function getPassesView(ctx: DataCtx, opts: { date?: string | null } = {}): Promise<PassesView> {
+export async function getPassesView(ctx: DataCtx): Promise<PassesView> {
   const { db, now, today } = ctx
   const live = isLive(ctx)
-  const date = opts.date && isLocalDate(opts.date) ? opts.date : today
   const seasonId = ctx.prefs.activeSeasonId
-  const [pass, resorts, favRows, trips] = await Promise.all([
+  const [pass, resorts, trips] = await Promise.all([
     loadPassData(db, seasonId),
     loadResortRows(ctx, null),
-    db.select().from(s.favorites),
     db.select().from(s.trips).where(ne(s.trips.status, 'cancelled')),
   ])
   const tripIds = trips.map((t) => t.id)
@@ -344,7 +293,6 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
         currentPrice: currentPassPrice(prices),
         ownedBy: holders,
         ownedByMe: holders.includes('me'),
-        resortCount: latestRules(pass.rules, p.id).filter((r) => r.access !== 'not-included').length,
         verificationLabel: verificationLabel(p.prov),
         prov: p.prov,
       }
@@ -357,53 +305,7 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
   const ownedSorted = [...pass.owned].sort((a, b) => Number(b.ownership.holder === 'me') - Number(a.ownership.holder === 'me') || a.ownership.id - b.ownership.id)
   const owned = ownedSorted.map((o) => ownedPassView(o, pass.rules, names, familyName(o.product.familyId), pass.seasonOf))
 
-  // --- Access matrix -------------------------------------------------------------------------------------------
-  const ruleResorts = new Set([...pass.rules.map((r) => r.resortId), ...pass.products.filter((p) => p.resortId).map((p) => p.resortId!)])
-  const favIds = new Set(favRows.map((f) => f.resortId))
-  const matrixResorts: MatrixResort[] = resorts
-    .filter((r) => ruleResorts.has(r.id))
-    .map((r) => ({ id: r.id, name: r.name, shortName: r.shortName, region: r.region, isFavorite: favIds.has(r.id) }))
-  const resortsWithoutRules = resorts.filter((r) => !ruleResorts.has(r.id)).map((r) => ({ id: r.id, name: r.name }))
   const rulesBy = groupBy(pass.rules, (r) => r.productId)
-
-  const row = (product: PassProductRow, ownership: OwnedPass | null): AccessRowView => {
-    const productRules = rulesBy.get(product.id) ?? []
-    const cells = matrixResorts.map((mr): AccessCellView => {
-      const rule = latestRule(productRules, product.id, mr.id)
-      const verdict = evaluateAccess({
-        product,
-        rule,
-        resortId: mr.id,
-        date,
-        usage: ownership?.usage ?? [],
-        poolRules: productRules,
-        today,
-        names,
-        seasonOf: pass.seasonOf,
-      })
-      return { resortId: mr.id, status: verdict.status, label: ACCESS_STATUS_LABEL[verdict.status], canSki: verdict.canSki, hasRule: !!rule, verdict, ruleProv: rule?.prov ?? null }
-    })
-    const counts: Partial<Record<AccessStatus, number>> = {}
-    for (const c of cells) counts[c.status] = (counts[c.status] ?? 0) + 1
-    return {
-      key: ownership ? `own-${ownership.ownership.id}` : `product-${product.id}`,
-      productId: product.id,
-      productName: product.name,
-      familyId: product.familyId,
-      familyName: familyName(product.familyId),
-      ownershipId: ownership?.ownership.id ?? null,
-      holder: ownership?.ownership.holder ?? null,
-      owned: !!ownership,
-      cells,
-      counts,
-    }
-  }
-  const mineIds = new Set(pass.owned.filter((o) => o.ownership.holder === 'me').map((o) => o.product.id))
-  const productById = new Map(pass.products.map((p) => [p.id, p]))
-  const rows: AccessRowView[] = [
-    ...ownedSorted.map((o) => row(o.product, o)),
-    ...products.filter((p) => !mineIds.has(p.id)).map((p) => row(productById.get(p.id)!, null)),
-  ]
 
   // --- Pass vs tickets on the planned days ---------------------------------------------------------------------
   const tripById = new Map(trips.map((t) => [t.id, t]))
@@ -473,13 +375,11 @@ export async function getPassesView(ctx: DataCtx, opts: { date?: string | null }
   if (!pass.owned.some((o) => o.ownership.holder === 'me')) notes.push('No pass recorded as yours — resort affiliation never implies ownership.')
 
   return {
-    date,
     today,
     season: { id: seasonId, label: seasonLabel(seasonId) },
     families,
     products,
     owned,
-    matrix: { date, resorts: matrixResorts, rows, resortsWithoutRules },
     comparison: { plannedDays, result, notes: comparisonNotes },
     notes,
     demo: !live,

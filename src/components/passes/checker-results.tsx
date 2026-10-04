@@ -258,7 +258,6 @@ function DayList({ r }: { r: CheckerResult }) {
               <div className="min-w-0">
                 <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <AccessMark status={v.status} variant="inline" label={v.status === 'unknown' ? 'No access recorded' : v.headline || undefined} />
-                  {v.canSki && v.remainingAfterVisit != null ? <span className="text-[12.5px] text-ink-3 tnum">{plural(v.remainingAfterVisit, 'day')} left after</span> : null}
                   {v.alreadyCounted === 'logged' ? <span className="text-[12.5px] text-ink-3">already logged</span> : null}
                 </p>
                 {!v.canSki && v.reasons[0] ? <p className="mt-0.5 text-[13px] text-ink-2">{v.reasons[0]}</p> : null}
@@ -536,7 +535,7 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
           {opt.holder ? <HolderTag holder={opt.holder} /> : null}
         </p>
         <p className="mt-1 text-[13.5px] text-ink-2">
-          {rangeLabel(from, to)} · every resort with a recorded rule, each checked on its own. Choose one for the day-by-day answer.
+          {rangeLabel(from, to)} · pick a resort for the day-by-day answer.
         </p>
       </div>
       {groups.length ? (
@@ -554,7 +553,7 @@ function WhereItWorks({ view, answers }: { view: CheckerView; answers: ResortAns
                       className="group flex min-h-12 items-center justify-between gap-3 px-4 py-2.5 transition-colors duration-150 hover:bg-surface-2"
                     >
                       <span className="min-w-0">
-                        <span className="block truncate text-[14.5px] font-medium text-ink group-hover:text-teal">{a.resort.name}</span>
+                        <span className="block text-[14.5px] leading-snug font-medium text-ink group-hover:text-teal">{a.resort.name}</span>
                         <span className="block text-[12.5px] text-ink-3">
                           {dotJoin(
                             a.resort.region,
@@ -597,7 +596,7 @@ function WhatWorksHere({ view, answers }: { view: CheckerView; answers: ProductA
           Passes at {resort.name}
         </p>
         <p className="mt-1 text-[13.5px] text-ink-2">
-          {rangeLabel(from, to)} · your passes first, then every product with a recorded rule here. Choose one for the day-by-day answer.
+          {rangeLabel(from, to)} · your passes first. Pick one for the day-by-day answer.
         </p>
       </div>
       {groups.length ? (

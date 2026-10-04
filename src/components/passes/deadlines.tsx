@@ -5,6 +5,7 @@
 import Link from 'next/link'
 import { ArrowRight, CalendarClock } from 'lucide-react'
 import { PassBadge } from '@/components/ui/badge'
+import { Disclosure } from '@/components/ui/disclosure'
 import { SourceDrawer } from '@/components/ui/source-drawer'
 import type { DeadlineItem } from '@/lib/data/passes-screen'
 import { formatMoney } from '@/lib/domain/money'
@@ -40,19 +41,17 @@ export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?
                   <p className="flex flex-wrap items-center gap-1.5">
                     <PassBadge family={familyId(d.familyId)} size="sm" />
                     <span className="text-[14px] font-medium text-ink">{d.productName}</span>
+                    <SourceDrawer title={d.productName} className="-my-1" items={[{ label: d.kind === 'price' ? 'Advance price' : 'Sales deadline', value: d.text ?? undefined, prov: d.prov }]} />
                   </p>
                   <p className="mt-0.5 text-[13px] text-ink-2">
                     {d.kind === 'price' && d.price ? (
                       <>
                         <span className="font-medium text-ink tnum">{formatMoney(d.price)}</span>
-                        {d.category ? ` ${d.category.toLowerCase()}` : ''} price ends{d.nextPrice ? <> — then <span className="tnum">{formatMoney(d.nextPrice)}</span></> : ''}
+                        {d.category ? ` ${d.category.toLowerCase()}` : ''} price ends{d.nextPrice ? <>, then <span className="tnum">{formatMoney(d.nextPrice)}</span></> : ''}
                       </>
                     ) : (
                       (d.text ?? 'Sales deadline')
                     )}
-                  </p>
-                  <p className="mt-1 flex flex-wrap items-center gap-2">
-                    <SourceDrawer title={d.productName} items={[{ label: d.kind === 'price' ? 'Advance price' : 'Sales deadline', value: d.text ?? undefined, prov: d.prov }]} />
                   </p>
                 </div>
               </li>
@@ -60,11 +59,10 @@ export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?
           })}
         </ol>
       ) : (
-        <p className="px-4 py-4 text-[13.5px] text-ink-2">No upcoming buy-by dates are recorded. Prices and deadlines that are not recorded stay unknown — check the official pages.</p>
+        <p className="px-4 py-4 text-[13.5px] text-ink-2">No upcoming buy-by dates yet — check the official pages for sale deadlines.</p>
       )}
       {undated.length ? (
-        <details className="border-t border-divider px-4 py-3">
-          <summary className="cursor-pointer text-[13px] font-medium text-teal select-none hover:underline">Stated without a date ({undated.length})</summary>
+        <Disclosure summary={`Notes without a date (${undated.length})`} className="border-t border-divider px-4 py-3">
           <ul className="mt-2 flex flex-col gap-2 text-[13px]">
             {undated.map((d) => (
               <li key={`${d.productId}-u`}>
@@ -73,7 +71,7 @@ export function BuyByDates({ items, limit = 5 }: { items: DeadlineItem[]; limit?
               </li>
             ))}
           </ul>
-        </details>
+        </Disclosure>
       ) : null}
     </section>
   )

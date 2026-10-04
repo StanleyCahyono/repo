@@ -2,23 +2,22 @@
 /**
  * Passes & Costs section tabs. Real links with aria-current; the active marker glides between tabs (shared layoutId).
  * Each tab remembers the query you left it with (sessionStorage, per browser tab), so switching to Products and back
- * to the matrix keeps its date and family filter. The strip scrolls horizontally on narrow screens and keeps the
+ * to Day costs keeps its date and filter. The strip scrolls horizontally on narrow screens and keeps the
  * active tab in view.
  */
 import { useEffect, useRef, type MouseEvent } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'motion/react'
-import { Calculator, Grid3x3, ReceiptText, Tags, Ticket } from 'lucide-react'
+import { Calculator, ReceiptText, Tags, Ticket } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { ScrollRow } from '@/components/ui/scroll-row'
 
-type TabId = 'mine' | 'products' | 'matrix' | 'costs' | 'compare'
+type TabId = 'mine' | 'products' | 'costs' | 'compare'
 
 const TABS: { id: TabId; href: string; label: string; short: string; Icon: typeof Ticket }[] = [
   { id: 'mine', href: '/passes', label: 'My passes', short: 'My passes', Icon: Ticket },
-  { id: 'products', href: '/passes/products', label: 'Products & prices', short: 'Products', Icon: Tags },
-  { id: 'matrix', href: '/passes/matrix', label: 'Access matrix', short: 'Matrix', Icon: Grid3x3 },
+  { id: 'products', href: '/passes/products', label: 'Products & prices', short: 'Prices', Icon: Tags },
   { id: 'costs', href: '/passes/costs', label: 'Day costs', short: 'Day costs', Icon: ReceiptText },
   { id: 'compare', href: '/passes/compare', label: 'Pass vs tickets', short: 'Vs tickets', Icon: Calculator },
 ]
@@ -26,7 +25,6 @@ const TABS: { id: TabId; href: string; label: string; short: string; Icon: typeo
 function activeTab(pathname: string): TabId {
   if (pathname.startsWith('/passes/products')) return 'products'
   // The rule editor is opened from the checker ("Enter the rule") and returns to it.
-  if (pathname.startsWith('/passes/matrix')) return 'matrix'
   if (pathname.startsWith('/passes/costs')) return 'costs'
   if (pathname.startsWith('/passes/compare')) return 'compare'
   return 'mine'
@@ -90,7 +88,7 @@ export function PassesTabs({ className }: { className?: string }) {
                 onClick={go(tab)}
                 aria-current={on ? 'page' : undefined}
                 className={cn(
-                  'relative flex h-10 items-center gap-2 rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150 max-md:h-11 lg:px-4',
+                  'relative flex h-10 items-center gap-2 rounded-full px-3 text-[13px] font-medium whitespace-nowrap outline-offset-2 transition-colors duration-150 max-md:h-11 sm:px-3.5 sm:text-[14px] lg:px-4',
                   on ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
                 )}
               >

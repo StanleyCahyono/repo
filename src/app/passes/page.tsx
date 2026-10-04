@@ -69,10 +69,7 @@ export default async function PassesPage({ searchParams }: { searchParams: Promi
                 season={checker.season}
                 today={checker.today}
               />
-              {checker.selection.note ? <p className="text-[12.5px] text-caution">{checker.selection.note}</p> : null}
-              <p className="mt-auto text-[12.5px] leading-[1.45] text-ink-3">
-                Answered day by day from the product’s own rules — days you have logged count. A missing rule never counts as access.
-              </p>
+              {checker.selection.note ? <p className="m-0 text-[12.5px] text-caution">{checker.selection.note}</p> : null}
             </div>
             <VerdictCard model={model}>
               {checker.mode === 'empty' && favorites.length ? (
@@ -96,7 +93,7 @@ export default async function PassesPage({ searchParams }: { searchParams: Promi
 
         {checker.mode !== 'empty' ? (
           <Rise index={1}>
-            <PassesSection id="check" rule={false} title="The detail" meta="The rule on file, the shared day pool and the product’s own notes behind the answer.">
+            <PassesSection id="check" rule={false} title={checker.mode === 'both' ? 'Day by day' : checker.mode === 'pass' ? 'Where it works' : 'Passes here'}>
               <PendingVeil className="glass rounded-[28px] px-4 py-5 md:px-6 md:py-6">
                 <CheckerResults view={checker} hero />
               </PendingVeil>
@@ -114,9 +111,9 @@ export default async function PassesPage({ searchParams }: { searchParams: Promi
                 {owned.length ? addPass({ variant: 'secondary', size: 'sm', label: 'Add' }) : null}
               </div>
               {owned.length ? (
-                <div className="grid gap-4 xl:grid-cols-2">
+                <div className={cn('grid gap-4', owned.length > 1 && 'xl:grid-cols-2')}>
                   {owned.map((p) => (
-                    <OwnedPassCard key={p.ownershipId} p={p} resorts={checker.resorts} today={ctx.today} seasonStart={checker.season.start} basis={basis[p.ownershipId] ?? null} />
+                    <OwnedPassCard key={p.ownershipId} p={p} resorts={checker.resorts} today={ctx.today} seasonStart={checker.season.start} basis={basis[p.ownershipId] ?? null} wide={owned.length === 1} />
                   ))}
                 </div>
               ) : (

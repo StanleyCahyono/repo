@@ -17,6 +17,7 @@ import { formatLocalDate, type Hemisphere } from '../time'
 import { ACCESS_STATUS_LABEL, type AccessStatus, type AccessVerdict } from '../passes/types'
 import { DEFAULT_DAY_TYPE_CONFIG, dayTypeFor, type DayType, type DayTypeConfig } from './day-type'
 import { convertMoney, convertWith, type FxRateRecord, type FxRateUsed } from './fx'
+import { adultRank, isAdultDayLiftTicket, lessonKindOf, rentalItemMatches, rentalTier } from './items'
 import { selectPrice, type PriceSelection, type PriceSnapshotInput, type QuoteKind } from './prices'
 import {
   classifyTier,
@@ -49,18 +50,6 @@ export const RENTAL_LABEL: Record<RentalOption, string> = {
   none: 'Own gear',
 }
 
-const RENTAL_ALIASES: Record<Exclude<RentalOption, 'none'>, string[]> = {
-  'full-package': ['full-package', 'package', 'ski-package', 'full-rental', 'full', 'ski-boot-pole-package'],
-  'skis-only': ['skis-only', 'skis', 'ski-only'],
-  'boots-only': ['boots-only', 'boots', 'boot-only'],
-}
-
-/** Rental snapshots are matched by `item` = the option id (a few plain aliases accepted). */
-export function rentalItemMatches(item: string, option: Exclude<RentalOption, 'none'>): boolean {
-  const norm = item.trim().toLowerCase().replace(/[\s_]+/g, '-')
-  return RENTAL_ALIASES[option].includes(norm)
-}
-
 export interface BasketLine {
   key: BasketLineKey
   label: string
@@ -78,6 +67,11 @@ export interface BasketLine {
   note: string | null
   /** Required lines make the basket incomplete when unknown. */
   required: boolean
+}
+
+/** A price shown beside the basket but never added to it (lessons). */
+export interface BasketExtraLine extends Omit<BasketLine, 'key' | 'required'> {
+  key: 'lesson'
 }
 
 export interface BasketAssumptions {
@@ -163,6 +157,11 @@ export interface DayBasket {
   tierMax: ExpenseTier | null
   /** Tier symbol or "Incomplete estimate". */
   label: string
+  /**
+   * An adult lesson price on file for the day (group before private, cheapest first) — information only: lessons are
+   * never part of the basket's total or tier. null when none applies.
+   */
+  lesson: BasketExtraLine | null
   assumptions: Omit<BasketAssumptions, 'dayTypeConfig' | 'bands' | 'required'> & { required: BasketLineKey[] }
 }
 
@@ -210,6 +209,11 @@ function fromSelection(
   }
 }
 
+/** A researched item name worth showing ("Adult ski + boots + poles, per day"), not an option id or your estimate's label. */
+function readableItem(item: string): boolean {
+  return /\s/.test(item.trim()) && !/^your /i.test(item.trim())
+}
+
 function notCoveredNote(pass: BasketPass): string {
   const status = ACCESS_STATUS_LABEL[pass.status as AccessStatus] ?? pass.status
   if (pass.status === 'discount-only') {
@@ -247,8 +251,16 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
       required: requiredKeys.has('lift'),
     })
   } else {
-    const sel = selectPrice(day.prices, { ...q, subjectType: 'lift-ticket', category })
+    // The adult full-day ticket: half-day, twilight, multi-day, packs and club or college rates never price a day.
+    const sel = selectPrice(day.prices, {
+      ...q,
+      subjectType: 'lift-ticket',
+      category,
+      accept: (s) => category !== 'adult' || isAdultDayLiftTicket(s, day.date),
+      prefer: (s) => (category === 'adult' ? adultRank(s.category) : 0),
+    })
     const line = fromSelection('lift', 'Lift ticket', sel, requiredKeys.has('lift'), `No ${dayType} lift ticket price for ${formatLocalDate(day.date)}.`)
+    if (line.amount && sel.snapshot && readableItem(sel.snapshot.item)) line.note = [sel.snapshot.item, line.note].filter(Boolean).join(' · ')
     // Unknown access (no rule recorded) adds no note: it is neither covered nor a known "not included".
     if (day.pass && day.pass.status !== 'unknown') line.note = [notCoveredNote(day.pass), line.note].filter(Boolean).join(' ')
     drafts.push(line)
@@ -269,10 +281,17 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
     })
   } else {
     const option = a.rentalOption
-    const sel = selectPrice(day.prices, { ...q, subjectType: 'rental', category, item: (i) => rentalItemMatches(i, option) })
-    drafts.push(
-      fromSelection('rental', RENTAL_LABEL[option], sel, requiredKeys.has('rental'), `No price for ${RENTAL_LABEL[option].toLowerCase()}.`),
-    )
+    // Readable items ("Adult ski + boots + poles, per day") are matched by what they contain; standard gear before premium.
+    const sel = selectPrice(day.prices, {
+      ...q,
+      subjectType: 'rental',
+      category,
+      accept: (s) => rentalItemMatches(s.item, option, s.category),
+      prefer: (s) => rentalTier(s.item),
+    })
+    const line = fromSelection('rental', RENTAL_LABEL[option], sel, requiredKeys.has('rental'), `No price for ${RENTAL_LABEL[option].toLowerCase()}.`)
+    if (line.amount && sel.snapshot && readableItem(sel.snapshot.item)) line.note = [sel.snapshot.item, line.note].filter(Boolean).join(' · ')
+    drafts.push(line)
   }
 
   // Lunch — always the user's own estimate, labelled as such.
@@ -398,6 +417,36 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
     }
   }
 
+  // Lessons: listed beside the basket, never in it.
+  const lessonSel = selectPrice(day.prices, {
+    ...q,
+    subjectType: 'lesson',
+    // Audience is checked by lessonKindOf ("Adult group lesson" is not a group *rate*).
+    category: null,
+    accept: (s) => lessonKindOf(s.item, s.category) !== null && !/\bhalf\b|\b(?:[2-9])\s*-?\s*(?:days?|weeks?)\b/i.test(s.item),
+    prefer: (s) => (lessonKindOf(s.item, s.category) === 'group' ? 0 : 1_000_000) + s.amountMinor,
+  })
+  let lesson: BasketExtraLine | null = null
+  const ls = lessonSel.snapshot
+  if (ls) {
+    const amount = money(ls.amountMinor, ls.currency)
+    const amountMax = ls.amountMaxMinor != null && ls.amountMaxMinor > ls.amountMinor ? money(ls.amountMaxMinor, ls.currency) : null
+    const conv = convertMoney(amount, currency, ctx.rates, { asOf: ctx.today })
+    lesson = {
+      key: 'lesson',
+      label: lessonKindOf(ls.item, ls.category) === 'private' ? 'Private lesson' : 'Group lesson',
+      amount,
+      amountMax,
+      display: conv?.converted ?? null,
+      displayMax: conv && amountMax ? convertWith(amountMax, conv.fx).converted : null,
+      fx: conv && conv.fx.path !== 'identity' ? conv.fx : null,
+      kind: ls.quoteKind,
+      source: lessonSel.basis,
+      snapshotId: ls.id ?? null,
+      note: ls.item,
+    }
+  }
+
   return {
     resortId: day.resortId,
     date: day.date,
@@ -415,6 +464,7 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
     tier,
     tierMax,
     label: tier.tier === 'incomplete' ? INCOMPLETE_ESTIMATE : tier.tier,
+    lesson,
     assumptions: {
       currency,
       rentalOption: a.rentalOption,
@@ -426,7 +476,7 @@ export function computeDayBasket(day: BasketDayInput, a: BasketAssumptions, ctx:
   }
 }
 
-/** One day's own lift-ticket price (used by the pass calculator's baseline). */
+/** One day's own adult full-day lift-ticket price (the pass calculator's baseline, trip and season budgets). */
 export function liftTicketFor(
   prices: readonly PriceSnapshotInput[],
   resortId: string,
@@ -449,12 +499,15 @@ export function liftTicketFor(
   dayType: DayType
 } {
   const { dayType } = dayTypeFor(date, ctx.dayTypeConfig ?? DEFAULT_DAY_TYPE_CONFIG, ctx.country)
+  const category = ctx.category ?? 'adult'
   const sel = selectPrice(prices, {
     subjectType: 'lift-ticket',
     resortId,
     date,
     dayType,
-    category: ctx.category ?? 'adult',
+    category,
+    accept: (s) => category !== 'adult' || isAdultDayLiftTicket(s, date),
+    prefer: (s) => (category === 'adult' ? adultRank(s.category) : 0),
     now: ctx.now,
     today: ctx.today ?? null,
     hemisphere: ctx.hemisphere,

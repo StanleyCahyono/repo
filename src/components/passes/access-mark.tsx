@@ -48,16 +48,3 @@ export function AccessMark({
     </span>
   )
 }
-
-/** Legend of access marks (text + glyph for each status shown). */
-export function AccessLegend({ statuses, className }: { statuses: MarkStatus[]; className?: string }) {
-  return (
-    <ul aria-label="Access legend" className={cn('flex flex-wrap gap-x-4 gap-y-1.5', className)}>
-      {statuses.map((s) => (
-        <li key={s}>
-          <AccessMark status={s} variant="cell" label={STATUS_META[s].label} />
-        </li>
-      ))}
-    </ul>
-  )
-}

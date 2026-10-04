@@ -13,6 +13,7 @@ import { daysBetween, isLocalDate, seasonIdForHemisphere, type Hemisphere } from
 import type { Provenance } from '../types'
 import type { DayType } from './day-type'
 import { providerLabel } from '../source-label'
+import { audienceOf, categoryFits, normItem } from './items'
 
 export type QuoteKind = 'published' | 'observed-quote' | 'user-estimate' | 'demo'
 
@@ -49,6 +50,10 @@ export interface PriceQuery {
   category?: string | null
   /** Optional item filter (e.g. a rental option). */
   item?: (item: string) => boolean
+  /** Optional row filter (e.g. "an adult full-day lift ticket for this date", see items.ts). */
+  accept?: (s: PriceSnapshotInput) => boolean
+  /** Optional preference among equally trustworthy rows: lower wins (e.g. standard rental gear before premium). */
+  prefer?: (s: PriceSnapshotInput) => number
   /** ISO instant — for expiry. */
   now: string
   /** Home-local date — for date-only expiry / purchase-by. Defaults to the UTC date of `now`. */
@@ -120,17 +125,19 @@ function dayTypeScore(s: PriceSnapshotInput, dayType: DayType): number | null {
 
 export function selectPrice(snapshots: readonly PriceSnapshotInput[], q: PriceQuery): PriceSelection {
   const season = seasonIdForHemisphere(q.date, q.hemisphere ?? 'north')
-  const category = q.category?.toLowerCase() ?? null
+  const category = q.category ? normItem(q.category) : null
   let expired = 0
-  const scored: { s: PriceSnapshotInput; quality: number; spec: number; span: number }[] = []
+  const scored: { s: PriceSnapshotInput; quality: number; pref: number; spec: number; span: number }[] = []
 
   for (const s of snapshots) {
     if (s.subjectType !== q.subjectType) continue
     if (isUnverifiedPrice(s)) continue
     if (!(s.resortId === q.resortId || (s.resortId == null && s.subjectId === q.resortId))) continue
     if (q.item && !q.item(s.item)) continue
-    const cat = s.category?.toLowerCase() ?? null
-    if (cat && category && cat !== category) continue
+    if (q.accept && !q.accept(s)) continue
+    const cat = s.category ? normItem(s.category) : null
+    // "Adult (19–64)" is an adult price; a child, senior or club rate is not (see categoryFits).
+    if (category && !categoryFits(cat, s.item, category)) continue
     if (s.seasonId && s.seasonId !== season) continue
     if (!inWindow(s, q.date)) continue
     const dt = dayTypeScore(s, q.dayType)
@@ -140,14 +147,16 @@ export function selectPrice(snapshots: readonly PriceSnapshotInput[], q: PriceQu
       continue
     }
     const windowed = !!(s.appliesFrom && s.appliesTo)
-    const spec = dt + (windowed ? 2 : 0) + (s.seasonId ? 1 : 0) + (cat && category ? 1 : 0)
+    const statedCategory = !!cat && !!category && (category !== 'adult' || audienceOf(cat) === 'adult')
+    const spec = dt + (windowed ? 2 : 0) + (s.seasonId ? 1 : 0) + (statedCategory ? 1 : 0)
     const span = windowed ? daysBetween(s.appliesFrom!.slice(0, 10), s.appliesTo!.slice(0, 10)) : Number.MAX_SAFE_INTEGER
-    scored.push({ s, quality: QUALITY[s.quoteKind] ?? 0, spec, span })
+    scored.push({ s, quality: QUALITY[s.quoteKind] ?? 0, pref: q.prefer?.(s) ?? 0, spec, span })
   }
 
   scored.sort(
     (a, b) =>
       b.quality - a.quality ||
+      a.pref - b.pref ||
       b.spec - a.spec ||
       a.span - b.span ||
       (a.s.observedAt < b.s.observedAt ? 1 : a.s.observedAt > b.s.observedAt ? -1 : 0) ||

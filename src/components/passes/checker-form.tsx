@@ -5,8 +5,9 @@
  * (the `pick` field carries the pass choice).
  */
 import { useId, type FormEvent } from 'react'
-import { CalendarRange, RotateCcw } from 'lucide-react'
-import { Select, TextInput } from '@/components/ui/form'
+import { CalendarRange } from 'lucide-react'
+import { DateRangePicker } from '@/components/ui/date-picker'
+import { Select } from '@/components/ui/form'
 import { cn } from '@/lib/ui/cn'
 import type { PassOption, ResortOption } from '@/lib/data/passes-screen'
 import { PendingNote, usePassesNav } from './nav'
@@ -14,6 +15,8 @@ import { saturdayFrom, shiftDate } from './params'
 import { dayLabel } from './format'
 
 const LABEL = 'hud tracking-[0.12em] text-ink-2'
+/** Longest range the checker answers day by day (MAX_CHECK_DAYS on the server). */
+const MAX_DAYS = 14
 const FIELD = 'h-[52px] rounded-[16px] border-divider-strong/80 bg-surface pl-3.5 text-[16px] md:h-[52px]'
 
 export function CheckerForm({
@@ -64,8 +67,7 @@ export function CheckerForm({
     { label: today === sat ? 'This weekend' : 'Sat–Sun', from: sat, to: shiftDate(sat, 1) },
     { label: 'Next weekend', from: shiftDate(sat, 7), to: shiftDate(sat, 8) },
     { label: 'A week', from: selection.from, to: shiftDate(selection.from, 6) },
-  ].filter((p) => p.from >= season.start && (p.to ?? p.from) <= season.end)
-  const isSingle = selection.from === selection.to
+  ].filter((p) => p.from >= season.start && (p.to ?? p.from) <= season.end && p.from >= today)
 
   return (
     <form action="/passes" method="get" onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -116,7 +118,7 @@ export function CheckerForm({
             {hasProduct ? (
               <>
                 {ruleResorts.length ? (
-                  <optgroup label="Rules recorded for this pass">
+                  <optgroup label="Where this pass works">
                     {ruleResorts.map((r) => (
                       <option key={r.id} value={r.id}>
                         {r.name}
@@ -124,7 +126,7 @@ export function CheckerForm({
                     ))}
                   </optgroup>
                 ) : null}
-                <optgroup label="Other resorts (no rule recorded)">
+                <optgroup label="Other resorts">
                   {otherResorts.map((r) => (
                     <option key={r.id} value={r.id}>
                       {r.name}
@@ -156,57 +158,24 @@ export function CheckerForm({
         </div>
       </div>
 
-      <fieldset className="flex min-w-0 flex-col gap-2">
-        <legend className={cn(LABEL, 'mb-1.5 flex items-center gap-1.5')}>
+      <div className="flex min-w-0 flex-col gap-2">
+        <label htmlFor={`${id}-dates`} className={cn(LABEL, 'flex items-center gap-1.5')}>
           <CalendarRange aria-hidden className="size-3.5" />
           Dates
-          <span className="tracking-[0.06em] text-ink-3 normal-case">· {season.label} season, up to 14 days</span>
-        </legend>
-        <div className="flex flex-wrap items-end gap-x-3 gap-y-2">
-          <div className="flex min-w-[150px] flex-1 flex-col gap-1">
-            <label htmlFor={`${id}-from`} className="text-[12.5px] text-ink-2">
-              From
-            </label>
-            <TextInput
-              className={FIELD}
-              id={`${id}-from`}
-              name="from"
-              type="date"
-              value={selection.from}
-              min={season.start}
-              max={season.end}
-              onChange={(e) => {
-                const v = e.target.value
-                if (!v) return
-                setDates(v, selection.to < v ? null : isSingle ? null : selection.to)
-              }}
-            />
-          </div>
-          <div className="flex min-w-[150px] flex-1 flex-col gap-1">
-            <label htmlFor={`${id}-to`} className="text-[12.5px] text-ink-2">
-              To <span className="text-ink-3">(optional)</span>
-            </label>
-            <TextInput
-              className={FIELD}
-              id={`${id}-to`}
-              name="to"
-              type="date"
-              value={isSingle ? '' : selection.to}
-              min={selection.from}
-              max={season.end}
-              onChange={(e) => setDates(selection.from, e.target.value || null)}
-            />
-          </div>
-          {!isSingle ? (
-            <button
-              type="button"
-              onClick={() => setDates(selection.from, null)}
-              className="inline-flex h-[52px] items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-teal hover:bg-glacier/60"
-            >
-              <RotateCcw aria-hidden className="size-3.5" /> Single day
-            </button>
-          ) : null}
-        </div>
+        </label>
+        <DateRangePicker
+          id={`${id}-dates`}
+          value={{ start: selection.from, end: selection.to }}
+          onChange={(v) => v.start && setDates(v.start, v.end && v.end !== v.start ? v.end : null)}
+          startName="from"
+          endName="to"
+          min={season.start}
+          max={season.end}
+          today={today}
+          maxDays={MAX_DAYS}
+          presets={presets.map((p) => ({ label: p.label, start: p.from, end: p.to ?? p.from }))}
+          triggerClassName="h-[52px] rounded-[16px] text-[16px] md:h-[52px]"
+        />
         <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Date shortcuts">
           {presets.map((p) => {
             const on = p.from === selection.from && (p.to ?? p.from) === selection.to
@@ -228,7 +197,7 @@ export function CheckerForm({
           })}
           <PendingNote className="ml-1" />
         </div>
-      </fieldset>
+      </div>
       <noscript>
         <button type="submit" className="h-10 rounded-md border border-divider-strong px-4 text-[14px] font-medium">
           Check access

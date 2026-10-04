@@ -135,8 +135,7 @@ export function AssumptionsForm({
         </p>
       ) : null}
       <p id={`${id}-note`} className="text-[12.5px] text-ink-3">
-        Saved to your preferences: resort pages, Explore and Today use the same rental option and lunch estimate; party size splits parking here. Lessons,
-        lodging and long-distance travel are itemised in trips, not in the day basket.
+        Saved to your preferences and used across Piste. Lessons, lodging and travel are left out of a day’s cost.
       </p>
     </form>
   )

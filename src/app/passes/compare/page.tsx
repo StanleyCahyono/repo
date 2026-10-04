@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
-import { CompareResults, PlannedDays } from '@/components/passes/compare'
+import { CalendarPlus } from 'lucide-react'
+import { CheapestWay, DayList, StepHead } from '@/components/passes/compare'
+import { compareModel } from '@/components/passes/compare-model'
 import { plural } from '@/components/passes/format'
 import { PassesNav, PendingNote, PendingVeil } from '@/components/passes/nav'
 import { parseCompare } from '@/components/passes/params'
+import { Payoff } from '@/components/passes/payoff'
 import { Rise } from '@/components/passes/rise'
-import { AddDayForm, ClearAddedDays, TripDaysToggle, ViewSwitch } from '@/components/passes/scenario-editor'
-import { PassesSection } from '@/components/passes/section'
-import { CurrencySelect } from '@/components/passes/toolbar'
+import { AddDayForm, ClearAddedDays, CurrencyPill } from '@/components/passes/scenario-editor'
 import { getCtx } from '@/lib/context'
 import { getPassCompareView } from '@/lib/data/passes-screen'
 
@@ -17,79 +18,77 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
   const ctx = await getCtx()
   const v = await getPassCompareView(ctx, { added: q.days, includeTrips: q.trips, currency: q.cur })
   const added = v.days.filter((d) => d.source === 'added').map((d) => ({ resortId: d.resortId, date: d.date }))
-  const convertedFx = v.fx.filter((f) => f.rate)
-  const missingFx = v.fx.filter((f) => !f.rate)
+  const model = compareModel(v)
 
   return (
     <PassesNav>
-      <PassesSection
-        id="compare"
-        rule={false}
-        title="Pass vs tickets"
-        meta={
-          <>
-            Your planned resort-days, each priced with that day’s own lift ticket, against every {v.season.label} product: the pass price plus tickets for the days it
-            can’t cover. Lodging, travel, rentals and lessons are the same either way and left out.
-          </>
-        }
-      >
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:items-start">
-          <Rise index={0} className="flex min-w-0 flex-col gap-4">
-            <section aria-labelledby="days-title" className="glass rounded-[24px] px-4 py-4 md:px-5">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <h3 id="days-title" className="text-[16px] font-semibold text-ink">
-                  Planned days <span className="font-normal text-ink-3 tnum">({v.days.length})</span>
-                </h3>
-                <TripDaysToggle include={v.includeTrips} count={v.tripDayCount} />
-              </div>
-              <AddDayForm added={added} resorts={v.resorts} today={v.today} seasonEnd={v.season.end} />
-              {v.dropped ? <p className="mt-2 text-[12.5px] text-caution">{plural(v.dropped, 'day')} from the link were skipped (past, outside the season, unknown resort or a duplicate).</p> : null}
-            </section>
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:items-start">
+        <Rise index={0} className="min-w-0">
+          <section aria-labelledby="days-title" className="glass rounded-[28px] p-4 sm:p-5 md:p-6">
+            <StepHead n={1} id="days-title" title="Your ski days" aside={v.days.length ? <span className="hud tracking-[0.1em] text-ink-2 tnum">{plural(v.days.length, 'day')}</span> : null}>
+              Pick a resort and a day — or a few. Each day is priced with that resort’s own lift ticket.
+            </StepHead>
+            <AddDayForm added={added} resorts={v.resorts} today={v.today} seasonEnd={v.season.end} includeTrips={v.includeTrips} tripDayCount={v.tripDayCount} />
+            {v.dropped ? <p className="m-0 mt-2 text-[12.5px] text-caution">{plural(v.dropped, 'day')} from the link were skipped (past, outside the season, unknown resort or a repeat).</p> : null}
             {v.days.length ? (
-              <PendingVeil>
-                <PlannedDays view={v} added={added} />
+              <PendingVeil className="mt-5 border-t border-divider pt-4">
+                <DayList view={v} model={model} added={added} />
                 {added.length ? <ClearAddedDays className="mt-2" /> : null}
               </PendingVeil>
-            ) : null}
-          </Rise>
-
-          <Rise index={1} className="flex min-w-0 flex-col gap-4">
-            <div className="flex flex-col gap-4 glass rounded-[24px] px-4 py-4 md:flex-row md:flex-wrap md:items-end md:justify-between md:px-5">
-              <ViewSwitch value={q.view} />
-              <CurrencySelect value={v.currency} choices={v.currencies} preferred={ctx.prefs.currency.toUpperCase()} />
-            </div>
-            {convertedFx.length || missingFx.length ? (
-              <p className="-mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] text-ink-3">
-                {convertedFx.map((f) => (
-                  <span key={f.from} className="tnum">
-                    {f.rate} · {f.rateDate}
-                    {f.demo ? ' · demo rate' : f.provider ? ` · ${f.provider}` : ''}
-                  </span>
-                ))}
-                {missingFx.map((f) => (
-                  <span key={f.from} className="text-caution">
-                    No stored {f.from}→{f.to} rate — those amounts can’t be totalled in {f.to}
-                  </span>
-                ))}
+            ) : (
+              <p className="m-0 mt-5 flex items-start gap-2.5 rounded-[18px] border border-dashed border-divider-strong bg-glass-soft px-4 py-3.5 text-[14px] text-ink-2">
+                <CalendarPlus aria-hidden className="mt-0.5 size-4 shrink-0 text-ink-3" />
+                <span>No days yet. Add one above{v.tripDayCount ? ', or switch on your trips' : ', or plan them in Trips'}.</span>
               </p>
-            ) : null}
-            <PendingNote />
+            )}
+          </section>
+        </Rise>
+
+        <Rise index={1} className="min-w-0">
+          <section aria-labelledby="cheapest-title" className="glass rounded-[28px] p-4 sm:p-5 md:p-6">
+            <StepHead
+              n={2}
+              id="cheapest-title"
+              title="Cheapest way"
+              aside={
+                <>
+                  <PendingNote />
+                  <CurrencyPill value={v.currency} choices={v.currencies} preferred={ctx.prefs.currency.toUpperCase()} />
+                </>
+              }
+            />
             <PendingVeil>
-              {v.result ? (
-                <CompareResults view={v} mode={q.view} />
+              {model ? (
+                <CheapestWay model={model} view={v} />
               ) : (
-                <div className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft px-5 py-6">
-                  <p className="text-[15px] font-semibold text-ink">No planned days yet</p>
-                  <p className="mt-1 max-w-[60ch] text-[14px] text-ink-2">
-                    Add the resort-days you expect to ski — or plan them in Trips — and each pass is compared with buying that day’s own ticket. Nothing is
-                    assumed: a day without a recorded ticket price stays unknown and blocks the total rather than being guessed.
-                  </p>
-                </div>
+                <p className="m-0 rounded-[18px] border border-dashed border-divider-strong bg-glass-soft px-4 py-4 text-[14px] text-ink-2">
+                  Add your ski days and the cheapest way to pay for them shows up here — lift tickets or a pass. Lodging, travel, rentals and lessons are the same either way and
+                  are left out.
+                </p>
               )}
             </PendingVeil>
-          </Rise>
-        </div>
-      </PassesSection>
+          </section>
+        </Rise>
+      </div>
+
+      {model ? (
+        <Rise index={2} className="mt-6 min-w-0">
+          <section aria-labelledby="payoff-title" className="glass rounded-[28px] p-4 sm:p-5 md:p-6">
+            <StepHead n={3} id="payoff-title" title="When does a pass pay off?" />
+            <PendingVeil>
+              {model.payoff.length ? (
+                <Payoff key={`${model.dayCount}:${model.payoff.map((p) => p.id).join(',')}`} passes={model.payoff} dayCount={model.dayCount} />
+              ) : (
+                <p className="m-0 max-w-[70ch] text-[14px] leading-[1.5] text-ink-2">
+                  {model.payoffNeedsTickets.length
+                    ? `The ${model.payoffNeedsTickets.slice(0, 2).join(' and the ')} ${model.payoffNeedsTickets.length === 1 ? 'covers' : 'cover'} some of your days, but those days have no ticket price yet. Add your estimate for them in step 1 to see when a pass pays off.`
+                    : 'No pass with a published price covers these days yet, so there is no break-even to show. Add what you expect to pay for a pass in step 2 to see it.'}
+                </p>
+              )}
+            </PendingVeil>
+          </section>
+        </Rise>
+      ) : null}
     </PassesNav>
   )
 }

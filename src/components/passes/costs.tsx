@@ -185,6 +185,8 @@ function Total({ row }: { row: DayCostRow }) {
 export function BasketSheet({ row, ctx }: { row: DayCostRow; ctx: EstimateCtx }) {
   const b = row.basket
   const date = ctx.date
+  // "Excludes parking (unknown)" repeats the missing line above it.
+  const caveats = b.caveats.filter((c) => !b.missing.some((m) => !m.required && c === `Excludes ${m.key} (unknown)`))
   // Lines backed by a recorded price or a pass rule; assumptions (lunch, own gear) are explained in the table above.
   const sources = b.lines
     .filter((l) => row.lineProv[l.key])
@@ -221,7 +223,11 @@ export function BasketSheet({ row, ctx }: { row: DayCostRow; ctx: EstimateCtx })
                     <span className="block text-[12px] text-ink-3">
                       {mine
                         ? estimateSummary(mine)
-                        : dotJoin(l.kind === 'user-estimate' && l.source ? null : l.kind ? LINE_KIND_LABEL[l.kind] : l.required ? 'Required — price unknown' : 'Optional — unknown', l.source, l.note)}
+                        : dotJoin(
+                            (l.kind === 'user-estimate' && l.source) || (l.kind && l.source?.startsWith(LINE_KIND_LABEL[l.kind])) ? null : l.kind ? LINE_KIND_LABEL[l.kind] : l.required ? 'Required — price unknown' : 'Optional — unknown',
+                            l.source,
+                            l.note,
+                          )}
                     </span>
                     {mine?.note ? <span className="block text-[12px] text-ink-3">“{mine.note}”</span> : null}
                     {!l.amount || mine ? (
@@ -244,17 +250,30 @@ export function BasketSheet({ row, ctx }: { row: DayCostRow; ctx: EstimateCtx })
             })}
           </tbody>
         </table>
-        {b.missing.length || b.caveats.length ? (
-          <ul className="flex flex-col gap-1 rounded-md bg-surface-2 px-3 py-2 text-[12.5px] text-ink-2">
+        {b.missing.length || caveats.length ? (
+          <ul className="flex flex-col gap-1 rounded-[12px] bg-surface-2 px-3 py-2 text-[12.5px] text-ink-2">
             {b.missing.map((m) => (
               <li key={m.message} className={m.required ? 'font-medium text-caution' : undefined}>
                 {m.message}
               </li>
             ))}
-            {b.caveats.map((c) => (
+            {caveats.map((c) => (
               <li key={c}>{c}</li>
             ))}
           </ul>
+        ) : null}
+        {b.lesson ? (
+          <div className="rounded-[14px] border border-divider px-3 py-2.5">
+            <p className="eyebrow m-0 mb-1">Not in the total</p>
+            <p className="m-0 flex items-baseline justify-between gap-3 text-[13.5px]">
+              <span className="min-w-0 text-ink">
+                {b.lesson.label}
+                {b.lesson.note ? <span className="block text-[12px] text-ink-3">{b.lesson.note}</span> : null}
+              </span>
+              <span className="shrink-0 font-medium text-ink tnum">{formatMoneyRange(b.lesson.display ?? b.lesson.amount, b.lesson.displayMax ?? b.lesson.amountMax)}</span>
+            </p>
+            {b.lesson.source ? <p className="m-0 mt-1 text-[12px] text-ink-3">{b.lesson.source}</p> : null}
+          </div>
         ) : null}
         {row.pass ? (
           <p className="text-[12.5px] text-ink-2">
@@ -425,8 +444,8 @@ export function BandRuler({ bands, rows, currency }: { bands: { tier: string; ra
           </li>
         ))}
       </ol>
-      <p className="text-[12px] text-ink-3">
-        UI classification thresholds in {currency}, per person per day — not price estimates. {incomplete ? `${plural(incomplete, 'resort')} without the required prices get no tier.` : ''}
+      <p className="m-0 text-[12px] text-ink-3">
+        Bands per person per day, in {currency}.{incomplete ? ` ${plural(incomplete, 'resort')} missing a price get no band.` : ''}
       </p>
     </div>
   )

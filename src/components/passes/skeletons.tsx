@@ -13,7 +13,7 @@ function Heading() {
   )
 }
 
-/** Toolbar + table (matrix, day costs). */
+/** Toolbar + table (day costs). */
 export function TableSkeleton({ label, panels = false }: { label: string; panels?: boolean }) {
   return (
     <div aria-busy="true" aria-label={label}>

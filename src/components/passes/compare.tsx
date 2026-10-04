@@ -1,498 +1,426 @@
 /**
- * Pass vs tickets on the planned resort-day basket. Baseline = each planned day's OWN ticket price (never one resort's
- * walk-up price multiplied out). Per product: pass price + tickets for the days it cannot cover (blackout, no days
- * left, not included, discount only, no access recorded). Owned passes split into already paid (sunk) and what the plan
- * still costs; the season view adds the purchase back. Break-even appears only when its assumptions fit.
- * Where a price is missing you can add your own estimate — labelled "Your estimate" wherever it is used.
+ * Pass vs tickets, in three plain steps:
+ *   01 Your ski days — the resort-days you plan (trip days and days added here), each with that day's own ticket price;
+ *   02 Cheapest way — one answer, then every way to pay for those days ranked by ONE total on a shared scale, each with
+ *      a disclosure holding the per-day breakdown, price source and estimate controls;
+ *   03 When does a pass pay off? — see payoff.tsx.
+ * A day without a ticket price says so and is never guessed; a pass without a published price gets one quiet line.
  */
+import type { CSSProperties, ReactNode } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronRight } from 'lucide-react'
+import { ArrowRight, Check, ChevronDown, Ticket } from 'lucide-react'
 import { PassBadge } from '@/components/ui/badge'
-import { Missing } from '@/components/ui/provenance'
 import { SourceDrawer } from '@/components/ui/source-drawer'
-import { Legend } from '@/components/charts/legend'
-import type { CandidateMeta, PassCompareView, ScenarioDay } from '@/lib/data/passes-screen'
-import type { CandidateComparison } from '@/lib/domain/costs'
+import type { PassCompareView, ScenarioDay } from '@/lib/data/passes-screen'
 import { formatMoney, type Money } from '@/lib/domain/money'
 import { cn } from '@/lib/ui/cn'
-import { AccessMark } from './access-mark'
-import { EstimateButton } from './estimate-form'
-import { DAY_TYPE_LABEL, dayLabel, dotJoin, familyId, plural, STATUS_META, TONE_TEXT } from './format'
-import { checkerHref, type CompareView, type ScenarioDayParam } from './params'
-import { GrowBar } from './rise'
 import { MoneyUp } from './count-up'
+import type { CompareModel, CompareOption, QuietProduct } from './compare-model'
+import { EstimateButton } from './estimate-form'
+import { DAY_TYPE_LABEL, dayLabel, dayMonth, dotJoin, familyId, plural, weekdayShort } from './format'
+import css from './hud.module.css'
+import { checkerHref, type ScenarioDayParam } from './params'
+import { GrowBar } from './rise'
 import { RemoveAddedDay } from './scenario-editor'
 import { HolderTag } from './section'
 
-function totalOf(c: CandidateComparison, view: CompareView): Money | null {
-  return view === 'season' || !c.owned ? c.seasonTotal : c.incremental
-}
+// ---------------------------------------------------------------------------------------------------------------------
+// Step heading
 
-function savingsOf(c: CandidateComparison, view: CompareView): Money | null {
-  return view === 'season' || !c.owned ? c.seasonSavingsVsTickets : c.savingsVsTickets
-}
-
-function Savings({ m }: { m: Money | null }) {
-  if (!m) return <span className="text-[12.5px] text-ink-3">vs tickets: not comparable</span>
-  if (m.amountMinor === 0) return <span className="text-[12.5px] text-ink-2">same as tickets only</span>
-  const saves = m.amountMinor > 0
+export function StepHead({ n, id, title, aside, children }: { n: number; id: string; title: ReactNode; aside?: ReactNode; children?: ReactNode }) {
   return (
-    <span className={cn('text-[12.5px] font-medium tnum', saves ? 'text-positive' : 'text-ink-2')}>
-      {saves ? `${formatMoney(m)} less than tickets` : `${formatMoney({ amountMinor: -m.amountMinor, currency: m.currency })} more than tickets`}
+    <header className="mb-4 flex flex-col gap-1.5">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div className="flex min-w-0 items-center gap-3">
+          <span aria-hidden className="hud inline-flex h-7 shrink-0 items-center rounded-full bg-ink-chip px-2.5 tracking-[0.1em] text-on-ink-chip tnum">
+            {String(n).padStart(2, '0')}
+          </span>
+          <h2 id={id} className="m-0 min-w-0 text-[24px] leading-[1.15] font-light tracking-[-0.03em] text-ink md:text-[28px]">
+            {title}
+          </h2>
+        </div>
+        {aside ? <div className="flex min-w-0 flex-wrap items-center gap-2">{aside}</div> : null}
+      </div>
+      {children ? <div className="max-w-[62ch] text-[14px] leading-[1.5] text-ink-2">{children}</div> : null}
+    </header>
+  )
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Step 1 — the days
+
+const DAY_TYPE_SHORT: Record<string, 'weekday' | 'weekend' | 'holiday'> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
+
+function DateTile({ date }: { date: string }) {
+  return (
+    <span aria-hidden className="flex w-12 shrink-0 flex-col items-center rounded-[14px] border border-divider bg-surface py-1.5 leading-none">
+      <span className="hud text-[11px] tracking-[0.12em] text-ink-3">{weekdayShort(date)}</span>
+      <span className="mt-1 text-[20px] font-light tracking-[-0.02em] text-ink tnum">{Number(date.slice(8, 10))}</span>
+      <span className="mt-0.5 text-[11px] text-ink-3">{dayMonth(date).split(' ')[1]}</span>
     </span>
   )
 }
 
-const DAY_TYPE_SHORT: Record<string, string> = { weekday: 'weekday', weekend: 'weekend', holiday: 'holiday' }
-
-/** Why a day is a ticket day for this product: "1 blacked out, 3 with no access recorded". */
-const BLOCKED_WORD: Partial<Record<string, string>> = {
-  blackout: 'blacked out',
-  'days-exhausted': 'after the pass days run out',
-  'not-included': 'not included',
-  'discount-only': 'discount only',
-  unknown: 'with no access recorded',
-  'season-mismatch': 'outside the pass season',
-}
-
-// ---------------------------------------------------------------------------
-// Planned days (the basket) — also the table view of the baseline.
-
-export function PlannedDays({ view, added }: { view: PassCompareView; added: ScenarioDayParam[] }) {
+export function DayList({ view, model, added }: { view: PassCompareView; model: CompareModel | null; added: ScenarioDayParam[] }) {
+  const shownBy = new Map((model?.options.find((o) => o.kind === 'tickets')?.days ?? []).map((d) => [d.key, d.ticket]))
   const b = view.result?.baseline
-  const unknown = view.days.filter((d) => !d.ticket).length
   return (
-    <div className="overflow-hidden glass rounded-[24px]">
-      <table className="w-full text-left text-[13.5px]">
-        <caption className="sr-only">Planned resort-days and each day’s own lift-ticket price ({view.currency})</caption>
-        <thead className="bg-surface-2 text-[12px] font-semibold tracking-[0.06em] text-ink-2 uppercase">
-          <tr>
-            <th scope="col" className="px-4 py-2.5">
-              Day and resort
-            </th>
-            <th scope="col" className="px-3 py-2.5 text-right whitespace-nowrap">
-              Ticket<span className="max-sm:sr-only"> that day</span>
-            </th>
-            {added.length ? (
-              <th scope="col" className="w-11 px-1 py-2.5">
-                <span className="sr-only">Remove</span>
-              </th>
-            ) : null}
-          </tr>
-        </thead>
-        <tbody>
-          {view.days.map((d) => (
-            <DayRow key={d.key} d={d} view={view} added={added} />
-          ))}
-        </tbody>
-        {b ? (
-          <tfoot>
-            <tr className="border-t border-divider-strong bg-surface-2">
-              <th scope="row" className="px-4 py-3 font-semibold text-ink">
-                Tickets only · {plural(b.dayCount, 'day')}
-              </th>
-              <td className="px-3 py-3 text-right">
-                {b.total ? (
-                  <span className="font-display text-[22px] leading-none text-ink tnum">{formatMoney(b.total)}</span>
-                ) : (
-                  <span className="flex flex-col items-end">
-                    <span className="text-[13px] font-medium text-caution">Incomplete</span>
-                    <span className="text-[12px] text-ink-3 tnum">
-                      {formatMoney(b.knownTotal)} known · {plural(b.unknownDays.length, 'day')} unknown
-                    </span>
-                  </span>
-                )}
-              </td>
-              {added.length ? <td /> : null}
-            </tr>
-          </tfoot>
-        ) : null}
-      </table>
-      {unknown ? (
-        <p className="border-t border-divider px-4 py-2.5 text-[12.5px] text-ink-3">
-          No {view.season.label} ticket price is on file for {unknown === 1 ? 'one day' : `${unknown} days`} — nothing is guessed. Add your own estimate to total them; it stays
-          labelled “Your estimate”.
-        </p>
+    <div className="flex flex-col">
+      <ol className="flex flex-col divide-y divide-divider" aria-label="Your ski days">
+        {view.days.map((d, i) => (
+          <li key={d.key} style={{ '--i': Math.min(i, 8) } as CSSProperties} className={cn(css.rise, 'py-2.5 first:pt-0')}>
+            <DayRow d={d} view={view} shown={shownBy.get(`${d.resortId}|${d.date}`) ?? null} added={added} />
+          </li>
+        ))}
+      </ol>
+      {b ? (
+        <div className="mt-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-divider-strong pt-3">
+          <span className="text-[14px] font-medium text-ink">Tickets for {plural(b.dayCount, 'day')}</span>
+          {b.total ? (
+            <span className="text-[22px] leading-none font-light tracking-[-0.02em] text-ink tnum">{formatMoney(b.total)}</span>
+          ) : (
+            <span className="text-right text-[13.5px] text-ink-2 tnum">
+              {formatMoney(b.knownTotal)} so far · {plural(b.unknownDays.length, 'day')} without a price
+            </span>
+          )}
+        </div>
       ) : null}
     </div>
   )
 }
 
-function DayRow({ d, view, added }: { d: ScenarioDay; view: PassCompareView; added: ScenarioDayParam[] }) {
-  const calc = view.result?.candidates[0]?.days.find((x) => x.resortId === d.resortId && x.date === d.date)
-  const shown = calc?.ticket ?? null
+function DayRow({ d, view, shown, added }: { d: ScenarioDay; view: PassCompareView; shown: Money | null; added: ScenarioDayParam[] }) {
   const est = d.ticketEstimate
-  const estimateProps = {
+  const price = shown ?? d.ticket
+  const estimate = {
     subject: 'lift-ticket' as const,
     subjectId: d.resortId,
     subjectName: d.resortName,
-    dayType: (DAY_TYPE_SHORT[d.dayType] ?? 'any') as 'weekday' | 'weekend' | 'holiday',
+    dayType: DAY_TYPE_SHORT[d.dayType] ?? ('any' as const),
     currencies: view.entryCurrencies,
     defaultCurrency: view.currencies[0],
     seasonLabel: view.season.label,
   }
   return (
-    <tr className="border-t border-divider align-top">
-      <th scope="row" className="px-4 py-2.5 font-normal">
-        <span className="block font-medium text-ink tnum">{dayLabel(d.date)}</span>
-        <Link href={`/resorts/${d.resortId}`} className="text-ink hover:text-teal hover:underline">
-          {d.resortName}
-        </Link>
-        <span className="block text-[12px] text-ink-3">{dotJoin(d.dayType, d.source === 'trip' ? `Trip: ${d.tripName}` : 'Added here')}</span>
-      </th>
-      <td className="px-3 py-2.5 text-right">
-        <span className="inline-flex items-center justify-end gap-0.5">
-          {shown ? <span className="font-medium text-ink tnum">{formatMoney(shown)}</span> : d.ticket ? <span className="font-medium text-ink tnum">{formatMoney(d.ticket)}</span> : <Missing label="Price unknown" />}
-          {d.ticketProv && !est ? (
-            <SourceDrawer title={`${d.resortName}: lift ticket`} className="-mr-1.5" items={[{ label: `Lift ticket for ${dayLabel(d.date, true)}`, value: dotJoin(formatMoney(d.ticket), d.ticketBasis), prov: d.ticketProv }]} />
-          ) : null}
-        </span>
-        {d.ticket && !shown ? <span className="block text-[12px] text-caution">no stored rate to {view.currency}</span> : null}
-        {d.ticket && shown && d.ticket.currency !== shown.currency ? <span className="block text-[12px] text-ink-3 tnum">from {formatMoney(d.ticket)}</span> : null}
-        {est ? (
-          <span className="mt-0.5 flex items-center justify-end">
-            <EstimateButton
-              {...estimateProps}
-              existing={est}
-              label="Your estimate"
-              className="-mr-1 text-[12px] font-normal text-ink-2 hover:text-teal"
-              context={
-                <>
-                  Prices {d.resortName} on {dayLabel(d.date, true)} — and on every {est.dayType === 'any' ? 'day' : `${DAY_TYPE_LABEL[est.dayType].toLowerCase().replace(/s$/, '')} day`} this
-                  season.
-                </>
-              }
-            />
-          </span>
-        ) : d.ticketBasis ? (
-          <span className="ml-auto block max-w-[34ch] text-[12px] leading-snug text-ink-3">{d.ticketBasis}</span>
-        ) : (
-          <span className="mt-0.5 flex justify-end">
-            <EstimateButton
-              {...estimateProps}
-              className="-mr-1 text-[12px]"
-              context={
-                <>
-                  No {d.dayType} lift ticket price for the {view.season.label} season is on file for {d.resortName}, so {dayLabel(d.date, true)} can’t be totalled.
-                </>
-              }
-            />
-          </span>
-        )}
-      </td>
-      {added.length ? (
-        <td className="px-1 py-1.5 text-right">
-          {d.source === 'added' ? <RemoveAddedDay added={added} day={{ resortId: d.resortId, date: d.date }} label={`${d.resortName}, ${dayLabel(d.date)}`} /> : null}
-        </td>
-      ) : null}
-    </tr>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// Candidates
-
-function DayGlyphs({ c }: { c: CandidateComparison }) {
-  return (
-    <ol className="flex flex-wrap gap-0.5" aria-label="Planned days">
-      {c.days.map((d) => {
-        const m = STATUS_META[d.verdict.status]
-        return (
-          <li key={`${d.resortId}-${d.date}`} title={`${dayLabel(d.date)} · ${m.label}`}>
-            <m.Icon aria-hidden className={cn('size-3.5', TONE_TEXT[m.tone])} strokeWidth={2} />
-            <span className="sr-only">
-              {dayLabel(d.date)}: {m.label}
-            </span>
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
-
-function CostBar({ c, view, scale, baseline }: { c: CandidateComparison; view: CompareView; scale: number; baseline: Money | null }) {
-  const showPass = !(c.owned && view === 'incremental')
-  const pass = showPass ? (c.passPrice?.amountMinor ?? 0) : 0
-  const tickets = c.uncoveredTicketCost?.amountMinor ?? 0
-  const pct = (n: number) => (scale > 0 ? (n / scale) * 100 : 0)
-  return (
-    <div className="relative h-4" aria-hidden>
-      <div className="absolute inset-y-1 right-0 left-0 rounded-full bg-surface-3" />
-      <div className="absolute inset-y-0 left-0 flex w-full gap-[2px]">
-        {pass > 0 ? (
-          <GrowBar
-            pct={pct(pass)}
-            className={cn('h-4 rounded-l-[4px]', tickets > 0 ? '' : 'rounded-r-[4px]', c.owned ? 'bg-[repeating-linear-gradient(135deg,var(--teal)_0_3px,transparent_3px_6px)] ring-1 ring-teal ring-inset' : 'bg-teal')}
-          />
-        ) : null}
-        {tickets > 0 ? <GrowBar pct={pct(tickets)} delay={0.05} className={cn('h-4 rounded-r-[4px] bg-copper', pass > 0 ? '' : 'rounded-l-[4px]')} /> : null}
+    <div className="flex items-center gap-3">
+      <DateTile date={d.date} />
+      <div className="min-w-0 flex-1">
+        <p className="m-0 text-[15px] leading-snug font-medium text-ink">
+          <span className="sr-only">{dayLabel(d.date, true)}: </span>
+          <Link href={`/resorts/${d.resortId}`} className="hover:text-teal hover:underline">
+            {d.resortName}
+          </Link>
+        </p>
+        <p className="m-0 text-[12.5px] leading-snug text-ink-3">{d.source === 'trip' ? `Trip · ${d.tripName}` : `Added · ${d.dayType}`}</p>
       </div>
-      {baseline && scale > 0 ? <span className="absolute -top-1 -bottom-1 w-[2px] rounded-full bg-ink" style={{ left: `calc(${pct(baseline.amountMinor)}% - 1px)` }} /> : null}
+      <div className="flex shrink-0 flex-col items-end gap-0.5 text-right">
+        {price ? (
+          <span className="flex items-center gap-0.5">
+            <span className="text-[16px] font-medium text-ink tnum">{formatMoney(price)}</span>
+            {d.ticketProv && !est ? (
+              <SourceDrawer title={`${d.resortName}: lift ticket`} className="-mr-1.5" items={[{ label: `Lift ticket for ${dayLabel(d.date, true)}`, value: dotJoin(formatMoney(d.ticket), d.ticketBasis), prov: d.ticketProv }]} />
+            ) : null}
+          </span>
+        ) : (
+          <span className="text-[13.5px] text-ink-2">No ticket price</span>
+        )}
+        {est ? (
+          <EstimateButton
+            {...estimate}
+            existing={est}
+            label="Your estimate"
+            className="-mr-1 text-[12px] font-normal text-ink-2 hover:text-teal"
+            context={
+              <>
+                Prices {d.resortName} on {dayLabel(d.date, true)} — and every {est.dayType === 'any' ? 'day' : `${DAY_TYPE_LABEL[est.dayType].toLowerCase().replace(/s$/, '')} day`} this season.
+              </>
+            }
+          />
+        ) : !d.ticket ? (
+          <EstimateButton
+            {...estimate}
+            className="-mr-1 text-[12px]"
+            context={
+              <>
+                No {d.dayType} lift ticket price for {view.season.label} is on file for {d.resortName}, so {dayLabel(d.date, true)} can’t be added up. Your estimate stays labelled as yours.
+              </>
+            }
+          />
+        ) : !shown ? (
+          <span className="text-[12px] text-ink-3">not converted to {view.currency}</span>
+        ) : null}
+      </div>
+      {d.source === 'added' ? (
+        <RemoveAddedDay added={added} day={{ resortId: d.resortId, date: d.date }} label={`${d.resortName}, ${dayLabel(d.date)}`} />
+      ) : (
+        <span aria-hidden className="w-9 shrink-0 max-md:w-11" />
+      )}
     </div>
   )
 }
 
-/** Pass price estimate control for a product you don't hold (add when missing, edit when it is yours). */
-function PassPriceEstimate({ c, meta, view, trigger = 'chip' }: { c: CandidateComparison; meta: CandidateMeta | undefined; view: PassCompareView; trigger?: 'chip' | 'link' }) {
-  if (c.owned) return null
-  const existing = meta?.priceEstimate ?? null
-  if (!existing && c.passPriceOriginal) return null
+// ---------------------------------------------------------------------------------------------------------------------
+// Step 2 — the answer and the ranked options
+
+const ANSWER_TONE: Record<CompareModel['answer']['tone'], string> = {
+  pass: 'bg-teal text-on-teal',
+  owned: 'bg-teal text-on-teal',
+  tickets: 'bg-ink-chip text-on-ink-chip',
+  unknown: 'border border-dashed border-divider-strong bg-glass-soft text-ink',
+}
+
+export function Answer({ model }: { model: CompareModel }) {
+  const a = model.answer
   return (
-    <EstimateButton
-      subject="pass-product"
-      subjectId={c.productId}
-      subjectName={c.productName}
-      currencies={view.entryCurrencies}
-      defaultCurrency={view.currencies[0]}
-      seasonLabel={view.season.label}
-      existing={existing}
-      trigger={trigger}
-      label={existing ? 'Edit your estimate' : 'Add your price estimate'}
-      context={
-        existing ? (
-          <>Used as the {c.productName} price in this comparison, labelled “Your estimate”.</>
+    <section aria-labelledby="answer-title" aria-live="polite" className={cn(css.rise, 'relative overflow-hidden rounded-[24px] px-5 py-5 md:px-6', ANSWER_TONE[a.tone])}>
+      {a.tone !== 'unknown' ? <span aria-hidden className={css.sheen} /> : null}
+      <p className="hud relative m-0 tracking-[0.14em] opacity-80">{a.tone === 'unknown' ? 'Not enough prices yet' : `Cheapest for ${plural(model.dayCount, 'day')}`}</p>
+      <h3 id="answer-title" className="relative m-0 mt-2 text-[22px] leading-[1.2] font-normal tracking-[-0.02em] text-balance md:text-[26px]">
+        {a.headline}
+      </h3>
+      {a.amount ? (
+        <p className="relative m-0 mt-2 text-[44px] leading-none font-light tracking-[-0.04em] md:text-[56px]">
+          <MoneyUp amountMinor={a.amount.amountMinor} currency={a.amount.currency} className="tnum" />
+        </p>
+      ) : null}
+      <p className="relative m-0 mt-2 max-w-[56ch] text-[14.5px] leading-[1.5] opacity-90">{a.detail}</p>
+    </section>
+  )
+}
+
+function CostBar({ o, scale }: { o: CompareOption; scale: number }) {
+  const pass = o.passPart?.amountMinor ?? 0
+  const tickets = (o.ticketPart ?? o.knownSoFar)?.amountMinor ?? 0
+  const pct = (n: number) => (scale > 0 ? (n / scale) * 100 : 0)
+  return (
+    <div className="relative h-3 overflow-hidden rounded-full bg-chip-track" aria-hidden>
+      <div className="absolute inset-0 flex gap-[2px]">
+        {pass > 0 ? <GrowBar pct={pct(pass)} className={cn('h-3 bg-teal', tickets > 0 ? 'rounded-l-full' : 'rounded-full')} /> : null}
+        {tickets > 0 ? <GrowBar pct={pct(tickets)} delay={0.06} className={cn('h-3 bg-copper', pass > 0 ? 'rounded-r-full' : 'rounded-full', o.total ? '' : 'opacity-60')} /> : null}
+      </div>
+    </div>
+  )
+}
+
+function Savings({ o }: { o: CompareOption }) {
+  if (o.kind === 'tickets' || !o.savings) return null
+  const v = o.savings.amountMinor
+  if (v === 0) return <span className="text-[13px] text-ink-2">same as tickets</span>
+  return v > 0 ? (
+    <span className="text-[13px] font-medium text-positive tnum">saves {formatMoney(o.savings)}</span>
+  ) : (
+    <span className="text-[13px] text-ink-2 tnum">{formatMoney({ amountMinor: -v, currency: o.savings.currency })} more</span>
+  )
+}
+
+function OptionDetails({ o, view }: { o: CompareOption; view: PassCompareView }) {
+  const meta = o.kind === 'tickets' ? null : view.meta[o.id]
+  const c = o.kind === 'tickets' ? null : view.result?.candidates.find((x) => x.productId === o.id)
+  const firstUncovered = o.days.find((d) => !d.covered) ?? o.days[0]
+  return (
+    <details className="group mt-2">
+      <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1.5 rounded-full text-[13px] font-medium text-teal select-none hover:underline max-md:min-h-11 [&::-webkit-details-marker]:hidden">
+        <ChevronDown aria-hidden className="size-4 transition-transform duration-200 group-open:rotate-180" />
+        <span className="group-open:hidden">Details</span>
+        <span className="hidden group-open:inline">Hide details</span>
+        <span className="sr-only"> for {o.name}</span>
+      </summary>
+      <div className="mt-2 flex flex-col gap-3 rounded-[18px] border border-divider bg-surface px-3.5 py-3 md:px-4">
+        <table className="w-full text-left text-[13.5px]">
+          <caption className="sr-only">Day by day for {o.name}</caption>
+          <tbody>
+            {o.days.map((d) => (
+              <tr key={d.key} className="border-b border-divider align-top last:border-b-0">
+                <th scope="row" className="py-1.5 pr-3 font-normal">
+                  <span className="text-ink tnum">{dayLabel(d.date)}</span> <span className="text-ink-3">· {d.resortName}</span>
+                </th>
+                <td className="py-1.5 text-right">
+                  {d.covered ? (
+                    <span className="inline-flex items-center gap-1 font-medium text-positive">
+                      <Check aria-hidden className="size-3.5" strokeWidth={2.4} /> Covered
+                    </span>
+                  ) : d.ticket ? (
+                    <span className="text-ink tnum">
+                      {formatMoney(d.ticket)}
+                      {d.why ? <span className="text-ink-3"> · {d.why}</span> : null}
+                    </span>
+                  ) : (
+                    <span className="text-ink-2">
+                      No ticket price{d.why ? <span className="text-ink-3"> · {d.why}</span> : null}
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {o.kind === 'tickets' ? (
+          <p className="m-0 text-[12.5px] text-ink-3">Each day at that resort’s own adult full-day ticket for the date.</p>
         ) : (
-          <>
-            No {view.season.label} adult price for {c.productName} is recorded — check the official page, then enter what you expect to pay. It stays labelled “Your estimate” and a
-            published price replaces it once recorded.
-          </>
-        )
-      }
-    />
+          <div className="flex flex-col gap-1.5 text-[12.5px] text-ink-2">
+            {o.kind === 'owned' ? (
+              <p className="m-0">{o.alreadyPaid ? `You paid ${formatMoney(o.alreadyPaid)} — already spent, so it isn’t counted again.` : 'The price you paid isn’t recorded — it isn’t counted.'}</p>
+            ) : c?.passPrice ? (
+              <p className="m-0 flex flex-wrap items-center gap-x-2">
+                <span>
+                  Pass price <span className="font-medium text-ink tnum">{formatMoney(c.passPrice)}</span>
+                  {c.passPriceOriginal && c.passPriceOriginal.currency !== c.passPrice.currency ? <span className="tnum"> (from {formatMoney(c.passPriceOriginal)})</span> : null}
+                  {meta?.priceBasis ? <span className="text-ink-3"> · {meta.priceBasis}</span> : null}
+                </span>
+                {meta?.priceProv && !meta.priceEstimate ? (
+                  <SourceDrawer title={`${o.name}: price`} items={[{ label: `${o.name} price`, value: dotJoin(formatMoney(c.passPriceOriginal), meta.priceBasis), prov: meta.priceProv }]} />
+                ) : null}
+              </p>
+            ) : null}
+            {meta?.salesClosed ? <p className="m-0 font-medium text-caution">The sales deadline has passed.</p> : null}
+            {c && c.breakEven.status === 'reached' ? <p className="m-0">{c.breakEven.explanation}</p> : null}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              {meta?.priceEstimate && c ? (
+                <EstimateButton
+                  subject="pass-product"
+                  subjectId={o.id}
+                  subjectName={o.name}
+                  currencies={view.entryCurrencies}
+                  defaultCurrency={view.currencies[0]}
+                  seasonLabel={view.season.label}
+                  existing={meta.priceEstimate}
+                  label="Edit your price estimate"
+                  context={<>Used as the {o.name} price here, labelled as your estimate.</>}
+                />
+              ) : null}
+              {firstUncovered ? (
+                <Link href={checkerHref({ pass: o.id, resort: firstUncovered.resortId, from: firstUncovered.date })} className="inline-flex min-h-9 items-center gap-1 font-medium text-teal hover:underline max-md:min-h-11">
+                  Where it works <ArrowRight aria-hidden className="size-3.5" />
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        )}
+      </div>
+    </details>
   )
 }
 
-function CandidateRow({
-  c,
-  meta,
-  view,
-  mode,
-  scale,
-  baseline,
-  index,
-}: {
-  c: CandidateComparison
-  meta: CandidateMeta | undefined
-  view: PassCompareView
-  mode: CompareView
-  scale: number
-  baseline: Money | null
-  index: number
-}) {
-  const total = totalOf(c, mode)
-  const n = c.days.length
-  const blocked = Object.entries(c.uncovered.byStatus) as [keyof typeof STATUS_META, number][]
+function OptionRow({ o, scale, view, index }: { o: CompareOption; scale: number; view: PassCompareView; index: number }) {
+  const meta = o.kind === 'tickets' ? null : view.meta[o.id]
   return (
-    <li className="grid gap-x-6 gap-y-2 px-4 py-4 md:grid-cols-[minmax(0,1fr)_200px] md:px-5">
-      <div className="min-w-0">
-        <p className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-[12px] text-ink-3 tnum" aria-hidden>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <PassBadge family={familyId(c.familyId)} size="sm" />
-          <Link href={checkerHref({ pass: c.productId })} className="text-[15px] font-semibold text-ink hover:text-teal hover:underline">
-            {c.productName}
-          </Link>
-          {c.owned ? <HolderTag holder="me" /> : null}
-        </p>
-        <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-2">
-          <span className="tnum">
-            Covers <strong className="font-semibold text-ink">{c.coveredDays}</strong> of {n} planned {n === 1 ? 'day' : 'days'}
-          </span>
-          <DayGlyphs c={c} />
-        </div>
-        {blocked.length ? (
-          <p className="mt-0.5 text-[12.5px] text-ink-3">
-            Tickets on {plural(c.uncovered.count, 'day')}: {blocked.map(([st, k]) => `${k} ${BLOCKED_WORD[st] ?? STATUS_META[st].label.toLowerCase()}`).join(', ')}
-            {c.uncoveredUnknownDays ? ` · ${plural(c.uncoveredUnknownDays, 'ticket price')} unknown` : ''}
-          </p>
-        ) : null}
-        <div className="mt-2.5">
-          <CostBar c={c} view={mode} scale={scale} baseline={baseline} />
-        </div>
-        <p className="mt-2 text-[12.5px] text-ink-2">
-          {c.breakEven.status === 'reached' ? <span className="font-medium text-positive">Break-even: </span> : <span className="text-ink-3">Break-even: </span>}
-          {c.breakEven.explanation}
-        </p>
-      </div>
-      <div className="flex flex-col items-start gap-1 md:items-end md:text-right">
-        {total ? <p className="text-[32px] leading-none font-light tracking-[-0.03em] text-ink tnum"><MoneyUp amountMinor={total.amountMinor} currency={total.currency} /></p> : <p className="text-[15px] font-medium text-caution">Can’t total</p>}
-        <p className="text-[12.5px] text-ink-3 tnum">
-          {dotJoin(
-            c.owned && mode === 'incremental' ? (c.alreadyPaid ? `+ ${formatMoney(c.alreadyPaid)} already paid` : 'price paid not recorded') : c.passPrice ? `pass ${formatMoney(c.passPrice)}` : 'pass price not recorded',
-            c.uncoveredTicketCost ? `tickets ${formatMoney(c.uncoveredTicketCost)}` : c.uncovered.count ? 'tickets unknown' : null,
-          )}
-        </p>
-        <Savings m={savingsOf(c, mode)} />
-        {meta?.priceEstimate ? (
-          <p className="text-[12px] font-medium text-ink-2">Pass price: your estimate — not a published price</p>
-        ) : meta?.priceBasis ? (
-          <p className="text-[12px] text-ink-3">{meta.priceBasis}</p>
-        ) : null}
-        {meta?.priceProv && !meta.priceEstimate ? (
-          <SourceDrawer title={`${c.productName}: price`} label="Price source" compact={false} className="-mr-1.5" items={[{ label: `${c.productName} price`, value: dotJoin(formatMoney(c.passPriceOriginal), meta.priceBasis), prov: meta.priceProv }]} />
-        ) : null}
-        {meta?.salesClosed ? <p className="text-[12px] font-medium text-caution">Sales deadline passed</p> : null}
-        {meta?.priceEstimate ? <PassPriceEstimate c={c} meta={meta} view={view} trigger="link" /> : null}
-      </div>
-    </li>
-  )
-}
-
-/** Why a product can't be totalled yet, in one line. */
-function cantTotalReason(c: CandidateComparison): string {
-  const reasons: string[] = []
-  if (!c.passPrice) reasons.push(c.owned ? 'price paid not recorded' : c.passPriceOriginal ? 'no stored exchange rate for the pass price' : 'pass price not recorded')
-  if (c.uncoveredUnknownDays) reasons.push(`ticket price unknown on ${plural(c.uncoveredUnknownDays, 'day')} it doesn’t cover`)
-  return reasons.join(' · ')
-}
-
-function CantTotalRow({ c, meta, view }: { c: CandidateComparison; meta: CandidateMeta | undefined; view: PassCompareView }) {
-  return (
-    <li className="flex flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:justify-between md:px-5">
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <PassBadge family={familyId(c.familyId)} size="sm" />
-          <Link href={checkerHref({ pass: c.productId })} className="text-[14px] font-medium text-ink hover:text-teal hover:underline">
-            {c.productName}
-          </Link>
-          {c.owned ? <HolderTag holder="me" /> : null}
-        </div>
-        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-ink-2">
-          <span className="tnum">
-            covers {c.coveredDays}/{c.days.length}
-          </span>
-          <DayGlyphs c={c} />
-          <span className="text-ink-3">{cantTotalReason(c)}</span>
-        </div>
-      </div>
-      <PassPriceEstimate c={c} meta={meta} view={view} />
-    </li>
-  )
-}
-
-export function CompareResults({ view, mode }: { view: PassCompareView; mode: CompareView }) {
-  const r = view.result
-  if (!r) return null
-  const baseline = r.baseline.total
-  const ranked = r.candidates
-    .filter((c) => totalOf(c, mode))
-    .sort((a, b) => Number(b.owned) - Number(a.owned) || totalOf(a, mode)!.amountMinor - totalOf(b, mode)!.amountMinor || a.productName.localeCompare(b.productName))
-  const cannot = r.candidates.filter((c) => !totalOf(c, mode))
-  // Can't total but the product covers some planned days (a price is the only gap) — worth an estimate.
-  const partial = cannot
-    .filter((c) => c.coveredDays > 0 || c.owned)
-    .sort((a, b) => Number(b.owned) - Number(a.owned) || b.coveredDays - a.coveredDays || a.productName.localeCompare(b.productName))
-  // No recorded access on any planned day (no rule, or not included) — buying it would mean tickets for every day.
-  const noAccess = cannot.filter((c) => c.coveredDays === 0 && !c.owned).sort((a, b) => a.productName.localeCompare(b.productName))
-  const scale = Math.max(baseline?.amountMinor ?? 0, ...ranked.map((c) => (c.passPrice?.amountMinor ?? 0) + (c.uncoveredTicketCost?.amountMinor ?? 0)))
-  const planned = r.baseline.dayCount
-
-  return (
-    <div className="flex flex-col gap-5">
-      <section aria-labelledby="baseline-title" className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 glass rounded-[24px] px-4 py-4 md:px-5">
-        <div>
-          <h3 id="baseline-title" className="text-[13.5px] font-medium text-ink-2">
-            Tickets only · {plural(planned, 'planned day')}
-          </h3>
-          {baseline ? (
-            <p className="mt-1 text-[40px] leading-none font-light tracking-[-0.03em] text-ink tnum"><MoneyUp amountMinor={baseline.amountMinor} currency={baseline.currency} /></p>
-          ) : (
-            <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
-              <span className="font-display text-[28px] leading-none text-caution">Incomplete</span>
-              <span className="text-[13px] text-ink-3 tnum">
-                {formatMoney(r.baseline.knownTotal)} known · {plural(r.baseline.unknownDays.length, 'day')} without a ticket price
+    <li style={{ '--i': Math.min(index + 1, 6) } as CSSProperties} className={cn(css.rise, 'relative py-4')}>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-1">
+        <div className="min-w-0">
+          <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1">
+            {o.kind === 'tickets' ? (
+              <span aria-hidden className="inline-flex size-6 items-center justify-center rounded-full bg-copper/15 text-copper">
+                <Ticket className="size-3.5" />
               </span>
-            </p>
-          )}
+            ) : (
+              <PassBadge family={familyId(o.familyId ?? 'regional')} size="sm" />
+            )}
+            <span className="text-[16px] leading-snug font-semibold text-ink">{o.name}</span>
+            {o.kind === 'owned' ? <HolderTag holder="me" /> : null}
+            {o.best ? <span className="hud inline-flex h-6 items-center rounded-full bg-ink-chip px-2 tracking-[0.08em] text-on-ink-chip">Cheapest</span> : null}
+            {meta?.priceEstimate ? <span className="text-[12px] font-medium text-ink-2">· your price estimate</span> : null}
+          </p>
+          <p className="m-0 mt-0.5 text-[13.5px] text-ink-2">{o.line}</p>
         </div>
-        <p className="max-w-[46ch] text-[12.5px] text-ink-3">Each planned day at its own ticket price for that resort and date — the line every pass is measured against.</p>
-      </section>
-
-      {ranked.length ? (
-        <section aria-labelledby="ranked-title" className="glass rounded-[24px]">
-          <header className="flex flex-col gap-2 border-b border-divider px-4 py-3 md:px-5">
-            <h3 id="ranked-title" className="text-[16px] font-semibold text-ink">
-              {mode === 'season' ? 'Season total' : 'What the plan still costs'} · {plural(ranked.length, 'option')}
-            </h3>
-            <Legend
-              items={[
-                { label: 'Pass price', tone: 'teal', shape: 'bar' },
-                { label: 'Tickets on days it doesn’t cover', tone: 'copper', shape: 'bar' },
-                { label: 'Tickets only', tone: 'ink', shape: 'rule' },
-              ]}
-            />
-          </header>
-          <ol className="divide-y divide-divider">
-            {ranked.map((c, i) => (
-              <CandidateRow key={c.productId} c={c} meta={view.meta[c.productId]} view={view} mode={mode} scale={scale} baseline={baseline} index={i} />
-            ))}
-          </ol>
-        </section>
-      ) : (
-        <p className="rounded-[22px] border border-dashed border-divider-strong bg-glass-soft px-4 py-4 text-[13.5px] text-ink-2 md:px-5">
-          No option can be totalled yet: every product is missing its price or a ticket price for a day it doesn’t cover. Add your own estimates below and in Planned days —
-          nothing is filled in for you.
-        </p>
-      )}
-
-      {partial.length ? (
-        <section aria-labelledby="partial-title" className="glass rounded-[24px]">
-          <header className="border-b border-divider px-4 py-3 md:px-5">
-            <h3 id="partial-title" className="text-[15px] font-semibold text-ink">
-              Can’t total yet · {plural(partial.length, 'product')}
-            </h3>
-            <p className="text-[12.5px] text-ink-3">Covers some of your planned days, but a price is missing — coverage is shown, the total is not guessed.</p>
-          </header>
-          <ul className="divide-y divide-divider">
-            {partial.map((c) => (
-              <CantTotalRow key={c.productId} c={c} meta={view.meta[c.productId]} view={view} />
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      {noAccess.length ? (
-        <details className="group glass rounded-[24px]">
-          <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 px-4 py-3 select-none md:px-5">
-            <span>
-              <span className="block text-[15px] font-semibold text-ink">No access on your planned days · {plural(noAccess.length, 'product')}</span>
-              <span className="block text-[12.5px] text-ink-3">No access is recorded for these days, so they are never counted as covered.</span>
+        <div className="flex flex-col items-end text-right">
+          {o.total ? (
+            <span className="text-[26px] leading-none font-light tracking-[-0.03em] text-ink md:text-[30px]">
+              <MoneyUp amountMinor={o.total.amountMinor} currency={o.total.currency} className="tnum" />
             </span>
-            <ChevronRight aria-hidden className="size-4 shrink-0 text-ink-3 transition-transform group-open:rotate-90" />
-          </summary>
-          <ul className="divide-y divide-divider border-t border-divider">
-            {noAccess.map((c) => {
-              const firstDay = c.days[0]
-              const top = firstDay?.verdict
-              return (
-                <li key={c.productId} className="flex flex-col gap-1.5 px-4 py-2.5 md:flex-row md:items-center md:justify-between md:px-5">
-                  <span className="flex min-w-0 flex-wrap items-center gap-2">
-                    <PassBadge family={familyId(c.familyId)} size="sm" />
-                    <span className="text-[14px] font-medium text-ink">{c.productName}</span>
-                  </span>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-ink-2">
-                    <DayGlyphs c={c} />
-                    {top ? <AccessMark status={top.status} variant="cell" /> : null}
-                    {firstDay ? (
-                      <Link href={checkerHref({ pass: c.productId, resort: firstDay.resortId, from: firstDay.date })} className="inline-flex items-center gap-1 font-medium text-teal hover:underline max-md:min-h-11">
-                        Check <ArrowRight aria-hidden className="size-3.5" />
-                      </Link>
-                    ) : null}
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-        </details>
-      ) : null}
+          ) : o.knownSoFar ? (
+            <span className="flex flex-col items-end">
+              <span className="text-[20px] leading-none font-light text-ink-2 tnum">{formatMoney(o.knownSoFar)}+</span>
+              <span className="mt-1 text-[12px] text-ink-3">{plural(o.unknownDays, 'day')} unpriced</span>
+            </span>
+          ) : (
+            <span className="text-[13.5px] text-ink-2">Can’t add up yet</span>
+          )}
+          <span className="mt-1">
+            <Savings o={o} />
+          </span>
+        </div>
+      </div>
+      <div className="mt-2.5">
+        <CostBar o={o} scale={scale} />
+      </div>
+      <OptionDetails o={o} view={view} />
+    </li>
+  )
+}
 
-      <ul className="flex flex-col gap-1 text-[12.5px] text-ink-3">
-        {r.notes.map((n) => (
-          <li key={n}>{n}</li>
-        ))}
-        <li>Days with no recorded access are priced as tickets — never assumed covered. Discount-only days are priced at the full ticket.</li>
-      </ul>
+function QuietLine({ items, view }: { items: QuietProduct[]; view: PassCompareView }) {
+  if (!items.length) return null
+  const noPrice = items.filter((q) => q.missing === 'price')
+  const noTickets = items.filter((q) => q.missing === 'tickets')
+  return (
+    <div className="flex flex-col gap-2 text-[13px] leading-[1.5] text-ink-3">
+      {noPrice.length ? (
+        <div className="flex flex-col gap-1.5">
+          <p className="m-0">No published price yet for these — add what you expect to pay to compare them:</p>
+          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+            {noPrice.map((q) => (
+              <li key={q.id}>
+                <EstimateButton
+                  subject="pass-product"
+                  subjectId={q.id}
+                  subjectName={q.name}
+                  currencies={view.entryCurrencies}
+                  defaultCurrency={view.currencies[0]}
+                  seasonLabel={view.season.label}
+                  trigger="chip"
+                  label={`${q.name} · ${plural(q.coveredDays, 'day')}`}
+                  context={
+                    <>
+                      No {view.season.label} adult price for {q.name} is published yet. Enter what you expect to pay from the official page — it stays labelled as your estimate, and a
+                      published price replaces it once recorded.
+                    </>
+                  }
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      {noTickets.length ? (
+        <p className="m-0">
+          Can’t add up {noTickets.map((q) => q.name).join(', ')} — a day {noTickets.length === 1 ? 'it doesn’t' : 'they don’t'} cover has no ticket price.
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+export function CheapestWay({ model, view }: { model: CompareModel; view: PassCompareView }) {
+  const fx = view.fx.filter((f) => f.rate)
+  return (
+    <div className="flex flex-col gap-4">
+      <Answer model={model} />
+      <div>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-divider pb-2">
+          <h3 className="m-0 text-[15px] font-semibold text-ink">Every way to pay, cheapest first</h3>
+          <p className="m-0 flex items-center gap-3 text-[12px] text-ink-3" aria-hidden>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-teal" /> pass
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-2.5 rounded-full bg-copper" /> lift tickets
+            </span>
+          </p>
+        </div>
+        <ol className="flex flex-col divide-y divide-divider" aria-label="Ways to pay, cheapest first">
+          {model.options.map((o, i) => (
+            <OptionRow key={o.id} o={o} scale={model.scale} view={view} index={i} />
+          ))}
+        </ol>
+      </div>
+      <QuietLine items={model.quiet} view={view} />
+      {model.ownedUnused.length || model.noCoverage ? (
+        <p className="m-0 text-[13px] text-ink-3">
+          {model.ownedUnused.length ? `Your ${model.ownedUnused.join(' and ')} ${model.ownedUnused.length === 1 ? 'doesn’t' : 'don’t'} cover any of these days. ` : ''}
+          {model.noCoverage ? `${model.noCoverage === 1 ? '1 other pass doesn’t' : `${model.noCoverage} other passes don’t`} cover any of them.` : ''}
+        </p>
+      ) : null}
+      {fx.length ? <p className="m-0 text-[12px] text-ink-3 tnum">Converted at {fx.map((f) => `${f.rate} (${f.rateDate}${f.demo ? ', demo rate' : ''})`).join(' · ')}</p> : null}
     </div>
   )
 }
