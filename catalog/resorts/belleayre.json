@@ -25,9 +25,9 @@
     "verticalM": 428,
     "source": {
       "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
-      "verification": "search-summary",
+      "verification": "official-page",
       "checkedOn": "2026-10-03",
-      "note": "Base 2,025 ft (Discovery Lodge), summit 3,429 ft, vertical 1,404 ft; matches Wikipedia (re-checked 2026-10-03)."
+      "note": "Official stats page (fetched 2026-10-03): summit 3,429 ft, Discovery Lodge (lower mountain lodge) 2,025 ft, vertical drop 1,404 ft."
     }
   },
   "weatherPoints": [
@@ -66,12 +66,12 @@
       "other": null
     },
     "liftCapacityPerHour": 12980,
-    "season": "2025-26",
+    "season": null,
     "source": {
       "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
-      "verification": "search-summary",
+      "verification": "official-page",
       "checkedOn": "2026-10-03",
-      "note": "62 trails incl. glades and parks (22% easiest, 58% more difficult, 20% most difficult); 8 lifts incl. Catskill Thunder gondola and Belleayre Express detachable quad; 171 acres; uphill capacity 12,980/h; 96% snowmaking (official stats page and Wikipedia via search summary, 2026-10-03). Lift types: 1 gondola + 4 chairlifts (Wikipedia) + 3 handle tows = official 8; carpets not counted. Terrain-park count from a third-party summary."
+      "note": "Official stats page (fetched 2026-10-03, undated): 62 trails incl. glades and parks; 22% easiest, 58% more difficult, 20% most difficult; 171 skiable acres; 96% snowmaking; uphill capacity 12,980/h; longest run 12,024 ft. 8 lifts per the official Mountain page. Lift types (1 gondola, 3 quads + 1 triple, 3 surface lifts) from SnowStash; terrain-park count from an earlier third-party summary."
     }
   },
   "features": {
@@ -142,7 +142,7 @@
       }
     ],
     "typicalText": "Among the earliest openers in New York, usually mid-to-late November with snowmaking: passholders Fri Nov 21 and public Sat Nov 22, 2025; Nov 15, 2024; passholder-only Thu Nov 16, 2023 (then closed until a planned Nov 24 reopening).",
-    "notes": "No official 2026-27 opening or closing date found as of 2026-10-03 (opening \"TBD, based on weather, conditions and snowmaking\"). OnTheSnow projects Nov 20, 2026 (third-party projection, not an announcement). In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the \"Swing into Spring\" promotion ran Mar 30-Apr 19, 2026 \"through Closing Day\" (https://www.belleayre.com/event/spring-savings/)."
+    "notes": "No official 2026-27 opening or closing date found as of 2026-10-03 (the official lift-ticket page says 2026/27 lift tickets are on sale but gives no dates). OnTheSnow gives an estimated start of Nov 20, 2026 and a tentative end of Apr 11, 2027 (third-party projection, not an announcement). In 2025 ORDA announced opening dates via a Governor's press release on Nov 21. The 2025-26 closing date was not confirmed: the \"Swing into Spring\" promotion ran Mar 30-Apr 19, 2026 \"through Closing Day\" (https://www.belleayre.com/event/spring-savings/); SnowStash says the season closed Apr 12, 2026."
   },
   "hours": [
     {
@@ -193,7 +193,7 @@
     },
     {
       "activity": "rentals",
-      "label": "Rentals",
+      "label": "Rental shop (Discovery Lodge, lower level)",
       "days": [
         1,
         2,
@@ -204,21 +204,21 @@
         7
       ],
       "opens": "08:00",
-      "closes": "16:30",
-      "season": "2025-26",
-      "note": null,
+      "closes": "16:15",
+      "season": null,
+      "note": "Daily during the snow season. Corrects an earlier 4:30pm figure from a search summary.",
       "source": {
-        "url": "https://www.belleayre.com/mountain/trail-map-and-mountain-stats/",
-        "verification": "search-summary",
+        "url": "https://www.belleayre.com/tickets/",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Official stats page via search summary (2026-10-03): lifts 9:00am-4:00pm, lodges 8:00am-5:00pm."
+        "note": "Official Tickets & Passes page (fetched 2026-10-03): \"Our Rental Shop is located in the lower level of the Discovery Lodge, open 8am-4:15pm daily during the snow season.\""
       }
     }
   ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "Adult (20-64) 1-day lift ticket, weekday",
+      "item": "Adult (20-64) 1-day lift ticket, weekday (mid-season online rate)",
       "category": "adult",
       "amount": 119,
       "amountMax": null,
@@ -229,17 +229,80 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Date-based pricing: tickets are date specific with limited availability and cheaper the earlier you buy; all weekend and holiday tickets must be bought online in advance. OnTheSnow lists $119 for an adult weekday ticket; the season of that figure is not stated.",
+      "note": "OnTheSnow: \"Prices indicated are mid-season online rates.\" Last updated Oct 13, 2025; season not stated on the page (likely 2025-26). Tickets are date-specific; the official site says the earlier you buy the better the price, and 2026/27 lift tickets are on sale.",
       "source": {
         "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "OnTheSnow lift-ticket listing via search summary (2026-10-03). Official page belleayre.com/tickets/lift-tickets/ does not expose prices to search."
+        "note": "OnTheSnow daily lift tickets table (page fetched 2026-10-03), last updated Oct 13, 2025; prices supplied to OnTheSnow by the resort."
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Adult 1-day lift ticket (online, date-based range)",
+      "item": "Junior (13-19) 1-day lift ticket, weekday (mid-season online rate)",
+      "category": "youth",
+      "amount": 94,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page (prices last updated Oct 13, 2025).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table, last updated Oct 13, 2025."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child (7-12) 1-day lift ticket, weekday (mid-season online rate)",
+      "category": "child",
+      "amount": 79,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page (prices last updated Oct 13, 2025).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table, last updated Oct 13, 2025."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior (65-69) 1-day lift ticket, weekday (mid-season online rate)",
+      "category": "senior",
+      "amount": 94,
+      "amountMax": null,
+      "currency": "USD",
+      "season": null,
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Season not stated on the page (prices last updated Oct 13, 2025).",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow daily lift tickets table, last updated Oct 13, 2025."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult (18-64) daily ticket, date-based range",
       "category": "adult",
       "amount": 61,
       "amountMax": 89,
@@ -250,12 +313,54 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "snowstash.com: from $61, peak $89 (advance online, by date). Labelled 2025-26 because the page title reads 2025/26 (a search summary called the range 2026/27, which the page title does not support); not a 2026-27 price.",
+      "note": "SnowStash: from US$61, up to US$89 peak. The page title says 2026/27, but its ticket panel says the 2025-26 season closed Apr 12, 2026 and to \"check back for next season's opening date and ticket pricing\", so these are treated as 2025-26 prices.",
       "source": {
         "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "Third-party aggregator via search summary."
+        "note": "SnowStash lift-ticket page (fetched 2026-10-03)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Youth (13-17) daily ticket, date-based range",
+      "category": "youth",
+      "amount": 51,
+      "amountMax": 79,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "From US$51, up to US$79 peak; treated as 2025-26 (see adult entry).",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash lift-ticket page (fetched 2026-10-03)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Child (7-12) daily ticket, date-based range",
+      "category": "child",
+      "amount": 41,
+      "amountMax": 69,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "From US$41, up to US$69 peak; children 6 and under ski free (bought in person at the ticket window with the child present). Treated as 2025-26 (see adult entry).",
+      "source": {
+        "url": "https://snowstash.com/usa/new-york/belleayre-mountain/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "SnowStash lift-ticket page (fetched 2026-10-03)."
       }
     },
     {
@@ -365,7 +470,7 @@
     },
     {
       "subjectType": "rental",
-      "item": "full-package",
+      "item": "Ski + boots + poles or snowboard + boots, helmet included (1 day)",
       "category": "adult",
       "amount": 58,
       "amountMax": 65,
@@ -424,6 +529,69 @@
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
         "note": "Official private lessons page via search summary."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Season pass, adult (30-69)",
+      "category": "adult",
+      "amount": 799,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-08-05",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "OnTheSnow lists 2026-2027 season pass prices: child (7-12) $369, junior (13-19) $469, adult (30-69) $799, \"price expires Aug 5, 2026\". SnowStash lists the SKI3 Season Pass (Belleayre + Gore + Whiteface) at US$799, up to US$899 peak.",
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table (fetched 2026-10-03): 2026-2027, price expires Aug 5, 2026; last update Apr 1, 2026."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Season pass, junior (13-19)",
+      "category": "youth",
+      "amount": 469,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-08-05",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table: 2026-2027, price expires Aug 5, 2026."
+      }
+    },
+    {
+      "subjectType": "pass-product",
+      "item": "Season pass, child (7-12)",
+      "category": "child",
+      "amount": 369,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": null,
+      "purchaseBy": "2026-08-05",
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.onthesnow.com/new-york/belleayre/lift-tickets",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "OnTheSnow season-pass table: 2026-2027, price expires Aug 5, 2026."
       }
     }
   ],
@@ -506,20 +674,21 @@
     "notes": "Official \"Snow Report\" page (indexed on belleayre.com as /mountain/conditions-1/; dated reports are also posted under /report/snow-report-<date>/). Not fetched (site blocked from this environment). No JSON feed identified."
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "Official adult window/online day-ticket prices for 2026-27 (the official tickets page does not expose prices to search; $119 weekday and $61-$89 come from third-party listings).",
-      "Official 2026-27 opening and closing dates.",
+      "Official 2026-27 day-ticket prices: belleayre.com says 2026/27 lift tickets are on sale with date-based pricing but the fetched pages show no amounts; the stored figures are third-party (OnTheSnow, last updated Oct 13, 2025; SnowStash 2025-26).",
+      "Official 2026-27 opening and closing dates (not announced as of 2026-10-03).",
       "2026-27 rental and lesson prices (current figures are 2025-26 or season not stated).",
       "Tubing, childcare and on-mountain lodging availability."
     ],
     "conflicts": [
-      "terrain.trails: 62 incl. glades and parks (stats page) vs 50 (other official copy). Used 62.",
-      "terrain.skiableAcres: 171 (stats page) vs 174 (other official copy). Used 171.",
-      "terrain.liftCapacityPerHour: 12,980/h (official stats, Wikipedia) vs 10,980/h (one aggregator). Used 12,980."
+      "Adult day price: OnTheSnow lists $119 as the adult weekday mid-season online rate (updated Oct 13, 2025), above SnowStash's $61-$89 adult range for 2025-26.",
+      "terrain.trails: 62 incl. glades and parks (official stats page) vs 50 (official Mountain page) and 61 (Mountain page teaser). Used 62.",
+      "terrain.skiableAcres: 171 (official stats page) vs 174 (official Mountain page) and 175 (SnowStash). Used 171.",
+      "2025-26 season: SnowStash says it ran Dec 6, 2025 to Apr 12, 2026, but ORDA announced a public opening on Nov 22, 2025; the history keeps the ORDA date."
     ],
-    "confidenceNotes": "Official site and third-party pages could not be fetched from this environment (egress blocked), so every figure comes from web-search summaries of the official pages (belleayre.com) or third-party listings, each with its URL."
+    "confidenceNotes": "CI-fetched pages (2026-10-03): the official lift-ticket, tickets, stats and mountain pages (no prices shown on them), OnTheSnow and SnowStash lift-ticket pages; the belleayre.com homepage returned a Cloudflare check. Frequent Skier Card, rental and lesson figures come from earlier search summaries of official pages."
   },
   "photo": {
     "src": "asset:photo-belleayre.webp",

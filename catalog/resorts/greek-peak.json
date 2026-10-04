@@ -131,7 +131,7 @@
       }
     ],
     "typicalText": "Usually starts around Thanksgiving weekend to early December, weather and snowmaking permitting (NYSkiBlog). Opened Fri Nov 28, 2025 (Black Friday) and Thu Dec 5, 2024; the 2023-24 season started around Dec 21, 2023 (WBNG). Seasons ran about 108 days (2024-25) and 114 days (2025-26).",
-    "notes": "No resort-announced 2026-27 opening or closing date found as of 2026-10-03; OnTheSnow (third party) projects 2026-11-27 to 2027-03-28, a projection, not an announcement. For 2026-27 the resort fast-tracked a $3M \"Greek Peak East\" snowmaking project (announced 2026-03-20): about 250 HKD snow guns, ~33,000 ft of new pipe and a 450 hp pump, extending snowmaking to east-side trails including the double-black Olympian (https://www.iskiny.com/news/greek-peak-mountain-resort-accelerate-current-four-year-snow-making-plan-one-year). In 2025-26 all lift tickets had to be bought online before arrival."
+    "notes": "No resort-announced 2026-27 opening or closing date on the official pages fetched 2026-10-03 (hours page: ski lifts \"Closed for the season\"; the Bike Park closes for 2026 at 3pm Mon Oct 12). OnTheSnow (third party) projected 2026-11-27 to 2027-03-28 in earlier research, a projection, not an announcement. For 2026-27 the resort fast-tracked a $3M \"Greek Peak East\" snowmaking project (announced 2026-03-20; https://www.iskiny.com/news/greek-peak-mountain-resort-accelerate-current-four-year-snow-making-plan-one-year); the conditions page (Oct 2026) shows snowmaking projects in progress on the Olympian/east side. Greek Peak has no ticket windows: all tickets must be bought online before arrival. The 2025-26 season ran 114 days (Greek Peak blog)."
   },
   "hours": [
     {
@@ -175,99 +175,120 @@
       "days": null,
       "opens": "15:30",
       "closes": null,
-      "season": "2025-26",
-      "note": "Close time and which nights run were not stated. The resort advertises day and night skiing 7 days a week, weather permitting. Unattributed summaries gave other night times; not used.",
+      "season": "2026-27",
+      "note": "Close time and which nights run are not stated. Stated with the 2026/2027 ticket prices.",
       "source": {
         "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page (2026/2027 pricing)"
       }
     }
   ],
   "prices": [
     {
       "subjectType": "lift-ticket",
-      "item": "1-Day Lift Ticket (ages 7+)",
+      "item": "1-Day Lift Ticket",
       "category": "adult",
       "amount": 125,
       "amountMax": null,
       "currency": "USD",
-      "season": "2025-26",
+      "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Full mountain, open to close; bought online before arrival (no ticket windows in 2025-26). Shown on the lift-tickets page as of 2026-10-03 alongside 2025-26 specials (e.g. a Feb 17, 2026 blackout), so labelled 2025-26; 2026-27 pricing not separately confirmed. \"Subject to change\".",
+      "note": "Full mountain, open to close (day and night). Listed under \"2026/2027 Pricing – Subject to Change\". No ticket windows: all tickets must be bought online before arrival. No separate youth/senior price listed; ages 6 and under ski free. \"Pricing and specials may vary during holiday time periods.\"",
       "source": {
         "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page"
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
       }
     },
     {
       "subjectType": "lift-ticket",
-      "item": "Beginner Area Pass (learning slopes + Chair #3)",
-      "category": "adult",
-      "amount": 68,
-      "amountMax": null,
-      "currency": "USD",
-      "season": "2025-26",
-      "dayType": "any",
-      "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "Gentle beginner slopes and Chair #3 only.",
-      "source": {
-        "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page"
-      }
-    },
-    {
-      "subjectType": "lift-ticket",
-      "item": "All-day lift ticket, Tuesdays",
-      "category": null,
-      "amount": 48,
-      "amountMax": null,
-      "currency": "USD",
-      "season": "2025-26",
-      "dayType": "weekday",
-      "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "Every Tuesday, online purchase (one blackout Tuesday: Feb 17, 2026). Age category not stated.",
-      "source": {
-        "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page"
-      }
-    },
-    {
-      "subjectType": "lift-ticket",
-      "item": "3-Day Pass",
-      "category": "adult",
+      "item": "3-Day Pass (any three days this season)",
+      "category": "adult 3-day",
       "amount": 249,
       "amountMax": null,
       "currency": "USD",
-      "season": "2025-26",
+      "season": "2026-27",
       "dayType": null,
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "About $83/day. A Greek Peak blog post cites \"$77/day\" for a 3-day pass (possibly a different season or sale).",
+      "note": "Any three days in the season, full mountain; the page says \"$83 Per Day!\".",
       "source": {
         "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page"
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Night Ticket (3:30 PM to close)",
+      "category": "adult night",
+      "amount": 79,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Full mountain from 3:30 PM to close.",
+      "source": {
+        "url": "https://www.greekpeak.net/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "College Night (Monday night ticket)",
+      "category": "college night",
+      "amount": 29,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Mondays, starting in January (exact start date not stated). In 2025-26 the Monday night price was $26 (Onondaga Ski Club page).",
+      "source": {
+        "url": "https://www.greekpeak.net/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Beginner Area Pass (beginner slopes + Chair #3)",
+      "category": "adult beginner area",
+      "amount": 68,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Beginner area only (gentle slopes and Chair #3), one day.",
+      "source": {
+        "url": "https://www.greekpeak.net/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
       }
     },
     {
@@ -277,23 +298,86 @@
       "amount": 0,
       "amountMax": null,
       "currency": "USD",
-      "season": "2025-26",
+      "season": "2026-27",
       "dayType": "any",
       "purchaseBy": null,
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Complimentary for children 6 and under.",
+      "note": "\"Under 7 Ski Free\": complimentary; the comparison table says free with a paying adult.",
+      "source": {
+        "url": "https://www.greekpeak.net/lift-tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official lift-tickets page, headed \"2026/2027 Pricing – Subject to Change\" (fetched 2026-10-03)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "All-day lift ticket, Tuesdays",
+      "category": "adult",
+      "amount": 48,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025-26 special: \"Tuesdays all day $48\" (Ski & Ride ticket priced $48 when Tuesday is selected). Not listed on the 2026/27 lift-tickets page as of 2026-10-03.",
+      "source": {
+        "url": "https://onondagaskiclub.org/SkiHotDeals_Members/6883331",
+        "verification": "search-summary",
+        "checkedOn": "2026-10-03",
+        "note": "Onondaga Ski Club page \"Greek Peak Ski Area 2025-26\" (third party)"
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "College Wednesday lift ticket",
+      "category": "college",
+      "amount": 50,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": "weekday",
+      "purchaseBy": null,
+      "appliesFrom": "2026-01-07",
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "2025-26 special: Wednesdays from Jan 7, 2026 through season end; current college photo ID required. Not listed on the 2026/27 lift-tickets page as of 2026-10-03.",
       "source": {
         "url": "https://www.greekpeak.net/lift-tickets/",
         "verification": "search-summary",
+        "checkedOn": "2026-09-28",
+        "note": null
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Ski-club group rate, 1-day (Onondaga Ski Club members, Wed-Sun)",
+      "category": "adult (club member)",
+      "amount": 92,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "Discounted day ticket Wednesday to Sunday for OSC members only (club membership required).",
+      "source": {
+        "url": "https://onondagaskiclub.org/SkiHotDeals_Members/6883331",
+        "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official lift-tickets page"
+        "note": "Onondaga Ski Club page \"Greek Peak Ski Area 2025-26\" (third party)"
       }
     },
     {
       "subjectType": "rental",
-      "item": "Ski or snowboard rental package, 1 day (skis/boots/poles + helmet, or board/boots + helmet)",
+      "item": "Ski or snowboard package, 1 day (skis/boots/poles/helmet or board/boots/helmet)",
       "category": "adult",
       "amount": 65,
       "amountMax": null,
@@ -304,12 +388,75 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2025-26 basic package. 3-day package $160; season package $370. Boots only $22, poles only $8.",
+      "note": "Sport package. Ski packages include skis, boots, helmet and poles; snowboard packages include board, boots and helmet. 2026-27 rental prices not yet posted (page still shows 2025-2026).",
       "source": {
         "url": "https://www.greekpeak.net/ski-ride/gear-rentals/",
-        "verification": "search-summary",
+        "verification": "official-page",
         "checkedOn": "2026-10-03",
-        "note": "Search summary 2026-10-03 of the official rentals pages"
+        "note": "Official rentals page, table headed \"Rental Pricing 2025-2026\" (fetched 2026-10-03); \"All Pricing Subject to Change\""
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard package, 3 days",
+      "category": "adult 3-day",
+      "amount": 160,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.greekpeak.net/ski-ride/gear-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page, table headed \"Rental Pricing 2025-2026\" (fetched 2026-10-03); \"All Pricing Subject to Change\""
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "Ski or snowboard package, full season",
+      "category": "adult season",
+      "amount": 370,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": null,
+      "source": {
+        "url": "https://www.greekpeak.net/ski-ride/gear-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page, table headed \"Rental Pricing 2025-2026\" (fetched 2026-10-03); \"All Pricing Subject to Change\""
+      }
+    },
+    {
+      "subjectType": "rental",
+      "item": "High Performance package upgrade (on-site), 1 day",
+      "category": "adult performance",
+      "amount": 85,
+      "amountMax": 100,
+      "currency": "USD",
+      "season": "2025-26",
+      "dayType": null,
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "High Performance package $85; High Performance Stokli package $100 (on-site upgrade, ask a technician).",
+      "source": {
+        "url": "https://www.greekpeak.net/ski-ride/gear-rentals/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official rentals page, table headed \"Rental Pricing 2025-2026\" (fetched 2026-10-03); \"All Pricing Subject to Change\""
       }
     },
     {
@@ -334,31 +481,10 @@
       }
     },
     {
-      "subjectType": "lift-ticket",
-      "item": "College Wednesday lift ticket",
-      "category": "College",
-      "amount": 50,
-      "amountMax": null,
-      "currency": "USD",
-      "season": "2025-26",
-      "dayType": "weekday",
-      "purchaseBy": null,
-      "appliesFrom": "2026-01-07",
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "Wednesdays from Jan 7, 2026 through season end; current college photo ID required.",
-      "source": {
-        "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
-      "subjectType": "lift-ticket",
-      "item": "Red Jug Pub College Night (Monday night ticket)",
-      "category": "College",
-      "amount": 26,
+      "subjectType": "lesson",
+      "item": "Master Trax Program (skiers 45+, 1.5-hour lesson, 8 Thursdays)",
+      "category": "adult 45+",
+      "amount": 120,
       "amountMax": null,
       "currency": "USD",
       "season": "2025-26",
@@ -367,33 +493,12 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "Mondays starting in January 2026 (exact start date not captured). A free weekly OurBus ran from Ithaca on Monday College Night.",
-      "source": {
-        "url": "https://www.greekpeak.net/lift-tickets/",
-        "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": null
-      }
-    },
-    {
-      "subjectType": "lift-ticket",
-      "item": "Ski-club group rate, adult 1-day (Onondaga Ski Club members)",
-      "category": "Adult (club member)",
-      "amount": 92,
-      "amountMax": null,
-      "currency": "USD",
-      "season": "2025-26",
-      "dayType": null,
-      "purchaseBy": null,
-      "appliesFrom": null,
-      "appliesTo": null,
-      "includesTax": null,
-      "note": "Club membership required; the club says the rate is taken from Greek Peak's 2025-26 pricing.",
+      "note": "Thursdays 10 a.m., began Jan 8 (2026); 1.5-hour lesson only; $120 for 8 weeks.",
       "source": {
         "url": "https://onondagaskiclub.org/SkiHotDeals_Members/6883331",
         "verification": "search-summary",
-        "checkedOn": "2026-09-28",
-        "note": "Third-party (ski club) page"
+        "checkedOn": "2026-10-03",
+        "note": "Onondaga Ski Club page \"Greek Peak Ski Area 2025-26\" (third party)"
       }
     }
   ],
@@ -580,13 +685,14 @@
     "notes": "Official conditions page lists open/closed trails and lifts, surfaces and grooming, updated daily in season. Printable version at https://greekpeak.net/conditions-print. Phone hotline (800) 365-7669. No official JSON feed found. Third-party mirrors: OnTheSnow, OpenSnow."
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "Official 2026-27 opening/closing dates (only an OnTheSnow projection of 2026-11-27 to 2027-03-28).",
-      "2026-27 lift-ticket, rental and lesson prices (latest found are 2025-26: $125 1-day, $68 beginner area, $65 rental, $170 group lesson).",
-      "Regular 2026-27 day and night lift hours (only opening-weekend 2025 times and \"night ticket 3:30 PM to close\").",
-      "Senior and junior day-ticket prices; childcare; updated snowmaking % after the Greek Peak East project."
+      "Official 2026-27 opening/closing dates (not announced on greekpeak.net as of 2026-10-03).",
+      "2026-27 rental and lesson prices (rental page still shows 2025-2026; lessons page not fetched, $170 group lesson is an older search summary).",
+      "Regular 2026-27 day and night lift hours (hours page is in fall mode; only \"night ticket 3:30 PM to close\").",
+      "Whether 2025-26 specials (Tuesday $48, College Wednesday $50) return for 2026-27; no senior/youth day price is published (under 7 free).",
+      "Childcare; updated snowmaking % after the Greek Peak East project."
     ],
     "conflicts": [
       "Summit elevation: 2,100 ft / 640 m (skiresort.info, Indy Pass, NYSkiBlog) vs 2,200 ft (Wikipedia). 640 m used.",
@@ -594,7 +700,7 @@
       "Snowmaking coverage ~83% vs 80% (NYSkiBlog); pre-dates the 2026 expansion.",
       "Terrain parks: 3 (Wikipedia) vs 4 (NYSkiBlog)."
     ],
-    "confidenceNotes": "Researched 2026-10-03 with web search only (page fetches were blocked by the network proxy), so every fact is a search summary of the cited page. Prices are the latest the official pages show (2025-26 labels)."
+    "confidenceNotes": "Lift-ticket prices read 2026-10-03 from the official lift-tickets page (labelled \"2026/2027 Pricing – Subject to Change\"); rental prices from the official rentals page (2025-2026 table); club rates and the Master Trax lesson from the Onondaga Ski Club 2025-26 page. Elevation, terrain, lesson and history facts are carried from earlier search-summary research."
   },
   "photo": {
     "src": "asset:photo-greek-peak.webp",

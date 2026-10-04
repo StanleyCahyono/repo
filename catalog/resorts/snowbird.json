@@ -22,12 +22,12 @@
   "elevation": {
     "baseM": 2365,
     "summitM": 3353,
-    "verticalM": 988,
+    "verticalM": 914,
     "source": {
       "url": "https://www.onthesnow.com/utah/snowbird/ski-resort",
       "verification": "search-summary",
       "checkedOn": "2026-10-03",
-      "note": "Search summary (OnTheSnow overview, SkiCentral): base 7,760 ft, summit 11,000 ft (Hidden Peak), vertical 3,240 ft; converted to metres. The 2026-10-03 query contained these figures, so the summary may echo it; they also match the earlier Piste reference figures. Snowbird's own site rounds to \"3,000 vertical feet\". Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+      "note": "OnTheSnow overview page (read 2026-10-03): base 7,760 ft, summit 11,000 ft. Vertical uses Snowbird's own \"3,000 vertical feet\" (snowbird.com search-result snippet); the same OnTheSnow page states a 2,900 ft vertical drop, while summit minus base is 3,240 ft. Converted to metres."
     }
   },
   "weatherPoints": [
@@ -49,29 +49,29 @@
     }
   ],
   "terrain": {
-    "trails": 140,
-    "lifts": 14,
+    "trails": 149,
+    "lifts": 12,
     "skiableAcres": 2500,
     "beginnerPct": 8,
-    "intermediatePct": 26,
-    "advancedPct": 66,
+    "intermediatePct": 22,
+    "advancedPct": 43,
     "terrainParks": null,
-    "expertPct": null,
+    "expertPct": 27,
     "pisteKm": null,
     "liftsByType": {
-      "gondolas": null,
+      "gondolas": 0,
       "cableCars": 1,
-      "chairlifts": 10,
+      "chairlifts": 9,
       "surfaceLifts": null,
-      "other": 3
+      "other": 2
     },
     "liftCapacityPerHour": null,
     "season": null,
     "source": {
-      "url": "https://www.snowbird.com/lifts-trails/",
+      "url": "https://www.onthesnow.com/utah/snowbird/ski-resort",
       "verification": "search-summary",
       "checkedOn": "2026-10-03",
-      "note": "Official site (search summary): 2,500 skiable acres, 14 lifts — 1 Aerial Tram, 10 chairlifts, 3 conveyor lifts (conveyors stored as \"other\"). Trails (140+) and the 8/26/66 ability split are OnTheSnow figures. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+      "note": "OnTheSnow overview page (read 2026-10-03): 149 runs; 8% beginner, 22% intermediate, 43% advanced, 27% expert; 2,500 acres; 203 acres of snowmaking. Lifts follow Snowbird's own Winter Lift Tickets page (read 2026-10-03): \"access to 9 lifts, 2 conveyors and The Tram\" (conveyors stored as \"other\"). OnTheSnow counts 14 lifts (1 tram, 7 high-speed quads, 3 doubles, 3 surface lifts)."
     }
   },
   "features": {
@@ -102,7 +102,7 @@
         "url": "https://www.snowbird.com/activities-events/events/events-calendar/opening-day/",
         "verification": "search-summary",
         "checkedOn": "2026-10-03",
-        "note": "Snowbird \"Opening Day 2026-27\" events-calendar page and the Ski Utah 2026–27 opening-dates list (search summaries). One summary also quoted Nov. 26 — see research conflicts. Page fetching was blocked (egress), so this is a web-search result summary, not a direct read of the page."
+        "note": "Snowbird \"Opening Day 2026-27\" events-calendar page (search summary, 2026-10-03 earlier pass). The Salt Lake Tribune's tentative 2026-27 list (Sep 20, 2026; page read 2026-10-03) also gives \"Snowbird: Nov. 27.\" and OnTheSnow projects Nov 27, 2026."
       }
     },
     "announcedClosing": {
@@ -125,10 +125,178 @@
       }
     ],
     "typicalText": null,
-    "notes": "2026-27: opening day tentatively Nov. 27, 2026 (Snowbird events page / Ski Utah, search summaries 2026-10-03). No 2026-27 closing date announced as of 2026-10-03."
+    "notes": "2026-27: opening day tentatively Nov. 27, 2026 (Snowbird events page; Salt Lake Tribune list). No closing date announced; OnTheSnow's \"projected closing date May 09, 2027\" is a third-party estimate, not an announcement. As of 2026-10-03 the site says Snowbird is closed for lift-served skiing for the 2025/26 season; scenic Tram rides run to Oct. 11."
   },
   "hours": [],
   "prices": [
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult full-day lift ticket (13–64), online from",
+      "category": "adult",
+      "amount": 195,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Full Day Lift Tickets starting at $195\". Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar. Includes 9 lifts, 2 conveyors and the Aerial Tram.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Adult half-day lift ticket (13–64), online from",
+      "category": "adult half-day",
+      "amount": 166,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Half Day Lift Tickets starting at $166\". Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Military full-day lift ticket, online from",
+      "category": "adult military",
+      "amount": 146,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Military Lift Tickets starting at $146\". Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Youth full-day lift ticket (7–12), online from",
+      "category": "youth",
+      "amount": 117,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Full Day Lift Tickets starting at $117\"; half day from $99; 6 & under free. Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Youth half-day lift ticket (7–12), online from",
+      "category": "youth half-day",
+      "amount": 99,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Half Day Lift Tickets starting at $99\". Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior full-day lift ticket (65+), online from",
+      "category": "senior",
+      "amount": 166,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Full Day Lift Tickets starting at $166\"; half day from $141. Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Senior half-day lift ticket (65+), online from",
+      "category": "senior half-day",
+      "amount": 141,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Half Day Lift Tickets starting at $141\". Dynamic, date-based pricing (\"starting at\" = lowest online price); window prices are higher. Season inferred from the page's 2026-27 rate calendar.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
+    {
+      "subjectType": "lift-ticket",
+      "item": "Chickadee-only full-day lift ticket (beginner lift)",
+      "category": "adult beginner-area",
+      "amount": 42,
+      "amountMax": null,
+      "currency": "USD",
+      "season": "2026-27",
+      "dayType": "any",
+      "purchaseBy": null,
+      "appliesFrom": null,
+      "appliesTo": null,
+      "includesTax": null,
+      "note": "\"Chickadee-Only Full Day Lift Tickets $42\"; 6 & under free.",
+      "source": {
+        "url": "https://www.snowbird.com/tickets-passes/tickets/",
+        "verification": "official-page",
+        "checkedOn": "2026-10-03",
+        "note": "Official Winter Lift Tickets page (read 2026-10-03): \"starting at\" online prices; \"Purchase your tickets online, 2 or more weeks in advance, and save up to 15% off what you'd pay at the Ticket Window.\" No season named, but its rate calendar (Holiday: Dec. 24–Jan. 1; Jan. 16–17; Feb. 13–15. Peak: Dec. 21–23; Feb. 16–17 & Fri–Sun from Dec. 11–April 4) fits 2026-27 (Fri Dec 11, 2026; MLK weekend Jan 16–17, 2027; Presidents' Day Feb 15, 2027)."
+      }
+    },
     {
       "subjectType": "lift-ticket",
       "item": "Adult 1-day lift ticket, peak (online / window)",
@@ -142,7 +310,7 @@
       "appliesFrom": null,
       "appliesTo": null,
       "includesTax": null,
-      "note": "2026-27 peak daily ticket: $238 at the window, $215 online. The summaries call the online price a \"15% discount\", but $215 is about 10% below $238, so one of these figures may be misstated. Dated, variable pricing: non-peak days and advance online purchases (2+ weeks ahead) cost less.",
+      "note": "2026-27 peak daily ticket per SnowBrains: $238 at the window, $215 online (it calls the online price a \"15% discount\", though $215 is about 10% below $238). Snowbird's own page lists adult full-day tickets \"starting at $195\" and up to 15% off the window price when bought online 2+ weeks ahead.",
       "source": {
         "url": "https://snowbrains.com/2026-27-lift-ticket-prices/",
         "verification": "search-summary",
@@ -270,19 +438,20 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_from_Snowbird_ski_slopes.jpg"
   },
   "research": {
-    "method": "web-research",
+    "method": "web-research (CI-fetched pages)",
     "date": "2026-10-03",
     "openQuestions": [
-      "2026-27 non-peak day-ticket prices, child/senior rates, and 2026-27 rental and lesson rates.",
-      "2026-27 closing date (not announced as of 2026-10-03).",
-      "Published lift and Aerial Tram hours.",
-      "2026-27 parking-reservation rules."
+      "2026-27 window (non-online) day-ticket prices by date; only \"starting at\" online prices are on the official page.",
+      "2026-27 rental and beginner-lesson rates (stored rental $61 is undated; lesson $170 is 2024-25).",
+      "2026-27 closing date (not announced; OnTheSnow projects May 9, 2027).",
+      "Winter lift and Aerial Tram hours."
     ],
     "conflicts": [
-      "Opening day: Snowbird events page / Ski Utah give Nov. 27, 2026 (tentative); one search summary quoted Nov. 26.",
-      "Vertical: Snowbird markets \"3,000 vertical feet\"; OnTheSnow/SkiCentral give 3,240 ft (stored).",
-      "Day ticket: SnowBrains' 2026-27 roundup gives $238 window / $215 online (peak), and calls this a 15% online discount, though $215 is about 10% below $238. A separate 2026-10-03 summary of OnTheSnow gave $194 for a weekday adult (13–64) and $182 for a half day, apparently from a November 2025 listing. The $194 figure is not stored."
+      "Opening day: Snowbird events page / Ski Utah / Salt Lake Tribune give Nov. 27, 2026 (tentative); one earlier search summary quoted Nov. 26.",
+      "Vertical: Snowbird markets \"3,000 vertical feet\" (stored); OnTheSnow states 2,900 ft, and its base/summit (7,760 / 11,000 ft) imply 3,240 ft.",
+      "Lifts: Snowbird's ticket page says 9 lifts, 2 conveyors and the Tram (stored: 12); OnTheSnow lists 14.",
+      "Peak day ticket: SnowBrains gives $238 window / $215 online and calls it a 15% discount, though $215 is about 10% below $238."
     ],
-    "confidenceNotes": "Refreshed 2026-10-03 by web search (page fetching blocked by the network proxy, so every fact is a search-result summary with the most specific URL recorded). Verification pass 2026-10-03: WebFetch and WebSearch were both unavailable (egress proxy block; session search budget spent), so no fact could be re-read at its source. Each 2026-10-03 fact was instead checked against the recorded search-result text and the earlier 2026-09-30 research; values, currencies, seasons and categories match those results except where a note or conflict says otherwise."
+    "confidenceNotes": "2026-10-03 CI-fetched pages read directly: snowbird.com homepage and Winter Lift Tickets page (2026-27 \"starting at\" prices by age), OnTheSnow overview (terrain, elevation, projected dates) and the Salt Lake Tribune 2026-27 opening list. The SnowBrains 2026-27 page could not be rendered, so the $215/$238 peak figures remain search-summary facts. Rental, lesson and snow-report URL remain from earlier search summaries."
   }
 }
