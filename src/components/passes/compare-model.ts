@@ -98,6 +98,8 @@ export interface CompareModel {
   /** Largest bar on the shared scale (minor units). */
   scale: number
   payoff: PayoffPass[]
+  /** Passes with a price that cover planned days, but none of those days has a ticket price — no break-even yet. */
+  payoffNeedsTickets: string[]
 }
 
 const WHY: Partial<Record<AccessStatus, string>> = {
@@ -239,6 +241,9 @@ export function compareModel(view: PassCompareView): CompareModel | null {
     ownedUnused,
     scale,
     payoff: payoffPasses(r.candidates),
+    payoffNeedsTickets: r.candidates
+      .filter((c) => !c.owned && c.passPrice && c.coveredDays > 0 && !c.days.some((d) => d.covered && d.ticket))
+      .map((c) => c.productName),
   }
 }
 

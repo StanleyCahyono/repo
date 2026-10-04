@@ -41,7 +41,13 @@ export default async function CostsPage({ searchParams }: { searchParams: Promis
     if (at != null && bt != null) return at - bt
     if (at != null) return -1
     if (bt != null) return 1
-    return Number(b.resort.isFavorite) - Number(a.resort.isFavorite)
+    // Incomplete baskets: favourites, then the ones missing the fewest prices, then a known lift price first.
+    const fav = Number(b.resort.isFavorite) - Number(a.resort.isFavorite)
+    if (fav) return fav
+    const miss = a.basket.missing.length - b.basket.missing.length
+    if (miss) return miss
+    const lift = (r: DayCostRow) => (r.basket.lines.find((l) => l.key === 'lift')?.amount ? 0 : 1)
+    return lift(a) - lift(b) || a.resort.name.localeCompare(b.resort.name)
   })
   // "All resorts": complete baskets and favourites up front; the rest (still missing a required price) folded away.
   const lead = q.show === 'all' ? shown.filter((r) => r.basket.total || r.resort.isFavorite) : shown

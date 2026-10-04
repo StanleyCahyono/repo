@@ -122,7 +122,7 @@ export function verdictModel(view: CheckerView, season: SeasonContext | null): V
       count: { value: can },
       headline: can === 1 ? 'resort covers it' : 'resorts cover it',
       detail: known
-        ? `${plural(known, 'resort')} with recorded access. Pick a resort for the day-by-day answer.`
+        ? `${can === known ? `${known === 1 ? 'The one resort' : `All ${known} resorts`} on file for this pass ${known === 1 ? 'is' : 'are'} open to you then.` : `${can} of the ${plural(known, 'resort')} on file for this pass ${can === 1 ? 'is' : 'are'} open to you then.`} Pick a resort for the day-by-day answer.`
         : `No resort access is recorded for ${opt.name} yet.`,
     }
   }
@@ -138,7 +138,7 @@ export function verdictModel(view: CheckerView, season: SeasonContext | null): V
       count: { value: can },
       headline: can === 1 ? 'pass works here' : 'passes work here',
       detail: known
-        ? `${plural(known, 'product')} with recorded access at ${resort.shortName}. Pick one for the day-by-day answer.`
+        ? `${can === known ? `${known === 1 ? 'The one pass' : `All ${known} passes`} on file for ${resort.shortName} ${known === 1 ? 'works' : 'work'} then.` : `${can} of the ${plural(known, 'pass', 'passes')} on file for ${resort.shortName} ${can === 1 ? 'works' : 'work'} then.`} Pick one for the day-by-day answer.`
         : `No pass product is recorded for ${resort.shortName} — lift tickets are the only known option.`,
       season: seasonLine(season, resort.shortName, selection.from === selection.to),
     }

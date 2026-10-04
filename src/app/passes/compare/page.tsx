@@ -79,8 +79,10 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
               {model.payoff.length ? (
                 <Payoff key={`${model.dayCount}:${model.payoff.map((p) => p.id).join(',')}`} passes={model.payoff} dayCount={model.dayCount} />
               ) : (
-                <p className="m-0 text-[14px] text-ink-2">
-                  No pass with a published price covers these days yet, so there is no break-even to show. Add your own price for a pass in step 2 to see it.
+                <p className="m-0 max-w-[70ch] text-[14px] leading-[1.5] text-ink-2">
+                  {model.payoffNeedsTickets.length
+                    ? `The ${model.payoffNeedsTickets.slice(0, 2).join(' and the ')} ${model.payoffNeedsTickets.length === 1 ? 'covers' : 'cover'} some of your days, but those days have no ticket price yet. Add your estimate for them in step 1 to see when a pass pays off.`
+                    : 'No pass with a published price covers these days yet, so there is no break-even to show. Add what you expect to pay for a pass in step 2 to see it.'}
                 </p>
               )}
             </PendingVeil>

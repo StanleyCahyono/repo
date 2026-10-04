@@ -109,4 +109,11 @@ describe('compareModel', () => {
     expect(m.ownedUnused).toEqual(['epic'])
     expect(m.payoff).toEqual([])
   })
+
+  it('names a priced pass whose covered days have no ticket price, instead of a break-even', () => {
+    const v = view([gp('2027-01-23', null), alta('2027-02-20')], [{ product: product('gpu', 'regional'), rules: [rule('gpu', 'greek-peak')], price: usd('999') }])
+    const m = compareModel(v)!
+    expect(m.payoff).toEqual([])
+    expect(m.payoffNeedsTickets).toEqual(['gpu'])
+  })
 })

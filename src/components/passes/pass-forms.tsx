@@ -192,7 +192,7 @@ function AddPassForm({
           </Field>
         ) : null}
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4">
         <Field label="Purchase date" optional htmlFor={`${id}-date`} error={errors.purchasedOn}>
           <DatePicker id={`${id}-date`} value={purchasedOn} max={today} today={today} onChange={setPurchasedOn} clearable placeholder="Not recorded" aria-invalid={!!errors.purchasedOn} />
         </Field>
