@@ -327,6 +327,8 @@ function tiersOf(p: PassProductView, category: string | null, currentId: number 
   })
 }
 
+const HEARSAY = /^(reports?|rumou?rs?|sources)\s+(say|said|suggest|indicate)|\breportedly\b|\bunconfirmed\b/i
+
 function passCard(products: PassProductView[], homeId: string | null, today: string): PassCard {
   let headline: PassCard['headline'] = null
 
@@ -412,6 +414,8 @@ function passCard(products: PassProductView[], homeId: string | null, today: str
   for (const p of products) {
     const text = p.salesDeadline?.text?.trim()
     if (!text || p.id === headline?.productId) continue
+    // Hearsay ("Reports say …", flagged unconfirmed in the catalog) is not a verified fact, so Today leaves it out.
+    if (HEARSAY.test(text)) continue
     if (p.familyId === 'regional' && p.resortId !== homeId) continue
     if (p.prices.some((x) => x.purchaseBy && x.purchaseBy < today) && !p.prices.some((x) => !x.purchaseClosed)) continue
     byText.set(text, [...(byText.get(text) ?? []), p.familyId === 'regional' ? (p.resortName ?? p.familyName) : p.familyName])

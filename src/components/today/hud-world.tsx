@@ -123,19 +123,19 @@ export function WorldSeasonCard({ world, range, tucked = true }: { world: WorldS
             <Globe2 aria-hidden className="size-[18px] text-teal" strokeWidth={1.8} />
             World season
           </h2>
-          {/* Phones: title + toggle, then the range, then the status. 640–1279px: title, range and toggle, the status
-              below. From 1280px: one row. (A zero-height full-width item forces the wrap.) */}
+          {/* Below 1024px: title + toggle, then the range and the status. 1024–1279px: title, range and toggle, the
+              status below. From 1280px: one row. (A zero-height full-width item forces the wrap.) */}
           <span className="order-1 ml-auto flex shrink-0 items-center gap-2 rounded-full py-0.5 pr-0.5 pl-3 text-[13px] font-medium text-ink-2 xl:order-last">
             <span className="max-sm:sr-only">{open ? 'Hide timeline' : 'Show timeline'}</span>
             <span className={cn('glass-strong grid size-8 place-items-center rounded-full text-ink transition-transform duration-300 ease-[var(--ease-out-soft)]', open && 'rotate-180')}>
               <ChevronDown aria-hidden className="size-4" />
             </span>
           </span>
-          <span className="hud order-2 text-ink-2 max-sm:basis-full sm:order-none">
+          <span className="hud order-3 text-ink-2 max-sm:basis-full lg:order-none">
             {range} · {world.shown} of {world.total} resorts
           </span>
-          <span aria-hidden className="order-3 h-0 basis-full max-sm:hidden sm:order-2 xl:hidden" />
-          <span className="order-4 flex min-w-0 items-center gap-2 rounded-[16px] bg-[color-mix(in_srgb,var(--teal)_10%,transparent)] px-3 py-1.5 text-[13px] leading-snug font-medium text-ink sm:order-3 xl:order-none">
+          <span aria-hidden className="order-2 h-0 basis-full xl:hidden" />
+          <span className="order-4 flex min-w-0 items-center gap-2 rounded-[16px] bg-[color-mix(in_srgb,var(--teal)_10%,transparent)] px-3 py-1.5 text-[13px] leading-snug font-medium text-ink xl:order-none">
             <i aria-hidden className={cn('size-[7px] shrink-0 rounded-full', world.open.length ? 'bg-positive' : 'bg-teal')} />
             <span className="min-w-0">{status}</span>
           </span>

@@ -240,7 +240,7 @@ export function SnowCard({
       icon={<Snowflake />}
       aside={<span className={cn('hud text-right', fetched ? 'text-ink-2' : 'text-copper')}>{status}</span>}
     >
-      <ol className="m-0 grid list-none grid-cols-7 gap-1 p-0 @min-[340px]:gap-1.5 @min-[420px]:gap-2.5">
+      <ol className="m-0 grid flex-1 list-none grid-cols-7 gap-1 p-0 @min-[340px]:gap-1.5 @min-[420px]:gap-2.5">
         {days.map((x, i) => {
           const on = hd === i
           const dim = hd !== null && !on
@@ -260,7 +260,7 @@ export function SnowCard({
               <div
                 aria-hidden
                 className={cn(
-                  'relative h-16 w-full overflow-hidden rounded-[12px] transition-[background-color,box-shadow] duration-200',
+                  'relative min-h-16 w-full flex-1 overflow-hidden rounded-[12px] transition-[background-color,box-shadow] duration-200 max-h-44',
                   on ? 'bg-[color-mix(in_srgb,var(--teal)_14%,transparent)] shadow-[0_10px_22px_-8px_color-mix(in_srgb,var(--teal)_45%,transparent)]' : 'bg-[color-mix(in_srgb,var(--ink)_5%,transparent)]',
                 )}
               >
