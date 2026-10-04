@@ -152,12 +152,12 @@ function FxInfo({ fx, now, tz, demo, display }: { fx: FxView; now: string; tz: s
             </span>
           </li>
         ))}
-        {fx.missing.map((to) => (
-          <li key={to} className="px-3 py-2">
-            <span className="font-medium text-ink tnum">USD ⇄ {to}</span>
-            <span className="text-ink-2"> — no stored rate. Amounts stay in their quoted currency; nothing is converted with a guessed rate.</span>
+        {fx.missing.length ? (
+          <li className="px-3 py-2">
+            <span className="font-medium text-ink tnum">No stored USD rate for {fx.missing.join(', ')}</span>
+            <span className="text-ink-2"> — amounts stay in their quoted currency; nothing is converted with a guessed rate.</span>
           </li>
-        ))}
+        ) : null}
       </ul>
       {!demo ? (
         <p className="border-t border-divider px-3 py-2 text-[12.5px] text-ink-3">

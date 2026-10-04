@@ -13,6 +13,7 @@ import { AccessPanel, ExportPanel, PassesShortcut, type AccessState } from '@/co
 import { THEMES, type Theme } from '@/components/settings/options'
 import { ProfileForm } from '@/components/settings/profile-form'
 import { Rise } from '@/components/settings/rise'
+import { ScrollRise } from '@/components/season/scroll-rise'
 import { SettingsSection } from '@/components/settings/section'
 import { SettingsNav, type NavSection } from '@/components/settings/settings-nav'
 import { TravelForm } from '@/components/settings/travel-form'
@@ -79,7 +80,10 @@ export default async function SettingsPage() {
           <>
             <span>Personal defaults</span>
             {demo ? (
-              <DemoBadge>Demo data — changes stay in the demo database</DemoBadge>
+              <DemoBadge>
+                <span className="sm:hidden">Demo data</span>
+                <span className="max-sm:hidden">Demo data — changes stay in the demo database</span>
+              </DemoBadge>
             ) : null}
           </>
         }
@@ -119,39 +123,55 @@ export default async function SettingsPage() {
               <TravelForm saved={p.travel} airports={view.airports} homeName={p.homeName} />
             </SettingsSection>
           </Rise>
-          <SettingsSection id="costs" index={5} title="Gear, budget & lodging" meta="What day and trip costs assume.">
-            <CostsForm gear={p.gear} budget={p.budget} lodgingStyle={p.lodgingStyle} />
-          </SettingsSection>
-          <SettingsSection id="weights" index={6} title="Recommendations" meta="How much each factor counts when the weekend finder ranks with your weights.">
-            <WeightsForm saved={p.weights} />
-          </SettingsSection>
-          <SettingsSection id="passes" index={7} title="Passes" meta={`Passes you own for ${seasonLabel(p.activeSeasonId)}.`}>
-            <PassesShortcut owned={view.ownedPasses} seasonLabel={seasonLabel(p.activeSeasonId)} />
-          </SettingsSection>
-          <SettingsSection
-            id="alerts"
-            index={8}
-            title="Alerts"
-            meta={
-              <>
-                In-app alerts from your rules — {rulesOn} of {view.alerts.rules.length} on{demo ? '. Demo alerts never reach your live data' : ''}.
-              </>
-            }
-          >
-            <AlertsPanel rules={view.alerts.rules} recent={view.alerts.recent} unread={view.alerts.unread} resorts={view.resorts} units={p.units} now={view.now} tz={tz} />
-          </SettingsSection>
-          <SettingsSection id="corrections" index={9} title="Catalog corrections" meta="Fix a wrong or outdated catalog fact, with the source you checked. Also listed on Sources & Sync.">
-            <CorrectionsPanel items={view.corrections} resorts={view.resorts} units={p.units} now={view.now} tz={tz} demo={demo} />
-          </SettingsSection>
-          <SettingsSection id="appearance" index={10} title="Appearance & data" meta="Light or dark, and live or demo data.">
-            <AppearancePanel theme={theme} mode={view.mode} />
-          </SettingsSection>
-          <SettingsSection id="export" index={11} title="Export & backup" meta="Your records are yours — take them anywhere.">
-            <ExportPanel demo={demo} />
-          </SettingsSection>
-          <SettingsSection id="access" index={12} title="Sign-in" meta="Optional passcode protection for a Piste reachable from other devices.">
-            <AccessPanel access={access} tz={tz} />
-          </SettingsSection>
+          <ScrollRise>
+            <SettingsSection id="costs" index={5} title="Gear, budget & lodging" meta="What day and trip costs assume.">
+              <CostsForm gear={p.gear} budget={p.budget} lodgingStyle={p.lodgingStyle} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="weights" index={6} title="Recommendations" meta="How much each factor counts when the weekend finder ranks with your weights.">
+              <WeightsForm saved={p.weights} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="passes" index={7} title="Passes" meta={`Passes you own for ${seasonLabel(p.activeSeasonId)}.`}>
+              <PassesShortcut owned={view.ownedPasses} seasonLabel={seasonLabel(p.activeSeasonId)} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection
+              id="alerts"
+              index={8}
+              title="Alerts"
+              meta={
+                <>
+                  In-app alerts from your rules — {rulesOn} of {view.alerts.rules.length} on{demo ? '. Demo alerts never reach your live data' : ''}.
+                </>
+              }
+            >
+              <AlertsPanel rules={view.alerts.rules} recent={view.alerts.recent} unread={view.alerts.unread} resorts={view.resorts} units={p.units} now={view.now} tz={tz} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="corrections" index={9} title="Catalog corrections" meta="Fix a wrong or outdated catalog fact, with the source you checked. Also listed on Sources & Sync.">
+              <CorrectionsPanel items={view.corrections} resorts={view.resorts} units={p.units} now={view.now} tz={tz} demo={demo} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="appearance" index={10} title="Appearance & data" meta="Light or dark, and live or demo data.">
+              <AppearancePanel theme={theme} mode={view.mode} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="export" index={11} title="Export & backup" meta="Your records are yours — take them anywhere.">
+              <ExportPanel demo={demo} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="access" index={12} title="Sign-in" meta="Optional passcode protection for a Piste reachable from other devices.">
+              <AccessPanel access={access} tz={tz} />
+            </SettingsSection>
+          </ScrollRise>
         </div>
       </div>
     </>

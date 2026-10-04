@@ -55,7 +55,7 @@ export const ALERT_SPECS: Record<AlertType, AlertSpec> = {
   'pass-deadline': {
     title: 'Pass sales deadline',
     summary: 'A pass product’s published sales deadline is getting close.',
-    caveat: 'Only deadlines on file are watched — confirm on the official pass page before buying.',
+    caveat: 'Watches the sales deadlines on file for each pass product.',
     params: [{ key: 'withinDays', label: 'Warn when the deadline is within', kind: 'days', min: 1, max: 60, default: 14 }],
     allScope: 'Every pass product with a deadline',
     resortScope: false,

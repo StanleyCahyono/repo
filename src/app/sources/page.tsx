@@ -5,6 +5,7 @@ import { DemoBadge } from '@/components/ui/badge'
 import { OfflineBanner } from '@/components/ui/offline-banner'
 import { PageHeader } from '@/components/ui/page-header'
 import { Rise } from '@/components/settings/rise'
+import { ScrollRise } from '@/components/season/scroll-rise'
 import { SettingsSection } from '@/components/settings/section'
 import { SettingsNav, type NavSection } from '@/components/settings/settings-nav'
 import { ConnectorsPanel, ManualSources } from '@/components/sources/connectors-panel'
@@ -103,23 +104,31 @@ export default async function SourcesPage() {
               <JobsPanel v={v} tz={tz} />
             </SettingsSection>
           </Rise>
-          <SettingsSection
-            id="coverage"
-            index={4}
-            title="Coverage by resort"
-            meta={`What is on file for each resort in ${v.season.label}: official, yours, estimated, catalog, stale, failing or missing.`}
-          >
-            <CoverageMatrix rows={v.coverage.rows} fields={v.coverage.fields} now={v.now} tz={tz} seasonLabel={v.season.label} adapters={adapters} />
-          </SettingsSection>
-          <SettingsSection id="failures" index={5} title="Failures" meta={`Fetch errors and parser failures from the source log, last ${v.failures.windowDays} days.`}>
-            <FailuresPanel v={v} tz={tz} labels={labels} />
-          </SettingsSection>
-          <SettingsSection id="links" index={6} title="Link checks" meta="Every external link Piste shows is checked in the background.">
-            <LinksPanel links={v.links} now={v.now} tz={tz} demo={v.demo} names={names} />
-          </SettingsSection>
-          <SettingsSection id="corrections" index={7} title="Corrections" meta="Catalog facts you corrected by hand, with their sources. Newest first.">
-            <CorrectionsPanel items={corrections} resorts={resorts} units={ctx.prefs.units} now={v.now} tz={tz} demo={v.demo} />
-          </SettingsSection>
+          <ScrollRise>
+            <SettingsSection
+              id="coverage"
+              index={4}
+              title="Coverage by resort"
+              meta={`What is on file for each resort in ${v.season.label}: official, yours, estimated, catalog, stale, failing or missing.`}
+            >
+              <CoverageMatrix rows={v.coverage.rows} fields={v.coverage.fields} now={v.now} tz={tz} seasonLabel={v.season.label} adapters={adapters} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="failures" index={5} title="Failures" meta={`Fetch errors and parser failures from the source log, last ${v.failures.windowDays} days.`}>
+              <FailuresPanel v={v} tz={tz} labels={labels} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="links" index={6} title="Link checks" meta="Every external link Piste shows is checked in the background.">
+              <LinksPanel links={v.links} now={v.now} tz={tz} demo={v.demo} names={names} />
+            </SettingsSection>
+          </ScrollRise>
+          <ScrollRise>
+            <SettingsSection id="corrections" index={7} title="Corrections" meta="Catalog facts you corrected by hand, with their sources. Newest first.">
+              <CorrectionsPanel items={corrections} resorts={resorts} units={ctx.prefs.units} now={v.now} tz={tz} demo={v.demo} />
+            </SettingsSection>
+          </ScrollRise>
 
           <aside aria-label="How to read this page" className="flex gap-3 border-t border-divider pt-5 text-[13px] text-ink-2">
             <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-ink-3" />

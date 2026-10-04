@@ -13,6 +13,7 @@ import { Camera, Check, PencilLine, Plus, Shirt, Trash2, X } from 'lucide-react'
 import { SLOT_LABEL, SLOT_SWATCHES } from '@/components/avatar/presets'
 import { RENTAL_TEXT } from '@/components/settings/options'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Sheet } from '@/components/ui/sheet'
 import { useToast } from '@/components/ui/toast'
@@ -181,7 +182,7 @@ function GearForm({ id, initial, itemId = null, onSaved, compact }: { id: string
         />
       </Field>
       <Field label="Bought on" htmlFor={ids.bought} optional error={errors.boughtOn}>
-        <TextInput id={ids.bought} type="date" max={data.today} value={f.boughtOn} onChange={(e) => set('boughtOn', e.target.value)} className="tnum" aria-invalid={!!errors.boughtOn} />
+        <DatePicker id={ids.bought} max={data.today} today={data.today} clearable placeholder="Not recorded" value={f.boughtOn} onChange={(v) => set('boughtOn', v)} aria-invalid={!!errors.boughtOn} />
       </Field>
       <Field label="Notes" htmlFor={ids.notes} optional error={errors.notes} className="sm:col-span-2">
         <Textarea id={ids.notes} rows={2} maxLength={1000} value={f.notes} onChange={(e) => set('notes', e.target.value)} className="min-h-16" />
@@ -322,7 +323,7 @@ function GearCard({ g, onEdit, index }: { g: GearItemView; onEdit: (g: GearItemV
             // eslint-disable-next-line @next/next/no-img-element -- a local data URL made on this device
             <img src={g.photo} alt="" className="size-14 shrink-0 rounded-[12px] object-cover" />
           ) : (
-            <span aria-hidden className="relative flex size-14 shrink-0 items-center justify-center rounded-[12px] bg-glacier font-mono text-[11px] font-semibold tracking-[0.08em] text-teal">
+            <span aria-hidden className="relative flex size-14 shrink-0 items-center justify-center rounded-[12px] bg-glacier font-mono text-[12px] font-semibold tracking-[0.08em] text-teal">
               {g.code}
               {g.color ? (
                 <span className="absolute right-1.5 bottom-1.5 size-2.5 rounded-full ring-1 ring-[color-mix(in_srgb,var(--ink)_25%,transparent)]" style={{ backgroundColor: g.color }} />
@@ -330,10 +331,10 @@ function GearCard({ g, onEdit, index }: { g: GearItemView; onEdit: (g: GearItemV
             </span>
           )}
           <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-            <h3 className="m-0 truncate text-[14.5px] font-semibold text-ink" title={g.brandModel}>
+            <h3 className="m-0 text-[14.5px] leading-snug font-semibold text-ink [overflow-wrap:anywhere]">
               {g.brandModel}
             </h3>
-            <p className="hud m-0 text-[11px] leading-snug tracking-[0.08em] text-ink-2">{meta}</p>
+            <p className="hud m-0 text-[12px] leading-snug tracking-[0.08em] text-ink-2">{meta}</p>
             {g.notes ? <p className="m-0 mt-1 line-clamp-2 text-[12.5px] text-ink-2">{g.notes}</p> : null}
           </div>
         </div>

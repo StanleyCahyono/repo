@@ -58,7 +58,7 @@ export function Sheet({
           ? 'piste-dialog left-1/2 top-1/2 w-[min(94vw,560px)] max-h-[86dvh] -translate-x-1/2 -translate-y-1/2 rounded-[24px]'
           : cn(
               'piste-responsive inset-x-0 bottom-0 max-h-[88dvh] rounded-t-[28px] border-b-0 safe-bottom',
-              'md:inset-y-3 md:right-3 md:left-auto md:bottom-auto md:h-auto md:max-h-[calc(100dvh-24px)] md:max-w-[calc(100vw-24px)] md:rounded-[24px] md:border-b',
+              'md:inset-y-3 md:right-3 md:left-auto md:bottom-3 md:h-auto md:max-h-[calc(100dvh-24px)] md:max-w-[calc(100vw-24px)] md:rounded-[24px] md:border-b',
               widthClass,
             )
   return (

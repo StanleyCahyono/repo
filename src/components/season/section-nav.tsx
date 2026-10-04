@@ -60,7 +60,7 @@ export function SeasonSectionNav({ sections }: { sections: NavSection[] }) {
 
   return (
     <nav aria-label="My Season sections" className="sticky top-16 z-20 mb-8 min-w-0 md:top-3">
-      <ul ref={listRef} className="glass scroll-fade-x scrollbar-thin flex w-fit max-w-full gap-0.5 overflow-x-auto rounded-full p-[5px] [contain:inline-size] md:[contain:none]">
+      <ul ref={listRef} className="glass scroll-fade-x flex max-w-full gap-0.5 overflow-x-auto rounded-full p-[5px] [scrollbar-width:none] md:w-fit [&::-webkit-scrollbar]:hidden">
         {sections.map((s) => {
           const on = s.id === active
           return (

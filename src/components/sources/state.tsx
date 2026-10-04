@@ -6,7 +6,7 @@
 import type { ReactNode } from 'react'
 import {
   BadgeCheck,
-  BookMarked,
+  BookOpen,
   Calculator,
   CircleCheck,
   CircleDashed,
@@ -17,12 +17,12 @@ import {
   FlaskConical,
   Hand,
   KeyRound,
+  Link2Off,
   LoaderCircle,
   Minus,
   PenLine,
   Plug,
   Radio,
-  SearchCheck,
   TriangleAlert,
   type LucideIcon,
 } from 'lucide-react'
@@ -96,8 +96,8 @@ export const COVERAGE: Record<CoverageState, StateSpec & { short: string; cell: 
   official: { label: 'Official source', short: 'Official', tone: 'teal', Icon: BadgeCheck, cell: 'bg-glacier text-teal border-transparent' },
   manual: { label: 'Confirmed by you', short: 'Yours', tone: 'neutral', Icon: PenLine, cell: 'bg-surface-3 text-ink border-transparent' },
   derived: { label: 'Piste estimate', short: 'Estimate', tone: 'copper', Icon: Calculator, cell: 'bg-surface-2 text-copper border-copper/40' },
-  web: { label: 'Catalog', short: 'Catalog', tone: 'neutral', Icon: SearchCheck, cell: 'bg-surface-2 text-ink-2 border-transparent' },
-  unsourced: { label: 'No source on file', short: 'No source', tone: 'neutral', Icon: BookMarked, cell: 'bg-transparent text-ink-3 border-divider-strong border-dashed' },
+  web: { label: 'Catalog', short: 'Catalog', tone: 'neutral', Icon: BookOpen, cell: 'bg-surface-2 text-ink-2 border-transparent' },
+  unsourced: { label: 'No source on file', short: 'No source', tone: 'neutral', Icon: Link2Off, cell: 'bg-transparent text-ink-3 border-divider-strong border-dashed' },
   stale: { label: 'Stale', short: 'Stale', tone: 'caution', Icon: Clock3, cell: 'bg-caution-bg text-caution border-caution/50' },
   failing: { label: 'Refresh failing', short: 'Failing', tone: 'critical', Icon: CloudOff, cell: 'bg-critical-bg text-critical border-transparent' },
   missing: { label: 'Missing', short: 'Missing', tone: 'neutral', Icon: Minus, cell: 'bg-transparent text-ink-3 border-divider-strong border-dashed' },

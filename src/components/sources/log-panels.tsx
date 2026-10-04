@@ -5,6 +5,7 @@ import { ChevronDown, CircleCheck, ExternalLink, FileWarning, ServerCrash } from
 import type { LinksView, SourceFailureView, SourcesView } from '@/lib/data/sources'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/ui/cn'
+import { CountUp } from '@/components/season/count-up'
 import { Ago } from './ago'
 import { errorBeyondStatus, groupFailures, httpReason, shortUrl } from './format'
 
@@ -147,11 +148,13 @@ export function LinksPanel({ links, now, tz, demo, names }: { links: LinksView; 
   return (
     <div className="flex flex-col gap-4">
       <div className="glass rounded-[24px]">
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-t-[12px] bg-divider sm:grid-cols-4 lg:grid-cols-7">
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-t-[24px] bg-divider sm:grid-cols-4 lg:grid-cols-7">
           {stats.map((s) => (
-            <div key={s.label} className="bg-surface px-4 py-3">
+            <div key={s.label} className="flex flex-col justify-between gap-1 bg-surface px-4 py-3">
               <dt className="text-[12.5px] text-ink-2">{s.label}</dt>
-              <dd className={cn('mt-0.5 font-display text-[26px] leading-none tnum', s.tone ?? 'text-ink')}>{s.value}</dd>
+              <dd className={cn('font-display text-[26px] leading-none tnum', s.tone ?? 'text-ink')}>
+                <CountUp value={s.value} />
+              </dd>
             </div>
           ))}
         </dl>

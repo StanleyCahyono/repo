@@ -19,8 +19,8 @@ export function PassesShortcut({ owned, seasonLabel }: { owned: OwnedPassView[];
           {owned.map((p) => (
             <li key={p.id} className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-4 py-3 md:px-5">
               {p.familyId ? <PassBadge family={p.familyId} /> : <Ticket aria-hidden className="size-4 text-ink-3" />}
-              <span className="min-w-0 flex-1 text-[14.5px] font-medium text-ink">{p.productName}</span>
-              <span className="text-[13px] text-ink-2 tnum">
+              <span className="min-w-[10rem] flex-1 text-[14.5px] font-medium text-ink">{p.productName}</span>
+              <span className="text-[13px] text-ink-2 tnum max-sm:basis-full">
                 {p.holder === 'me' ? 'You' : p.holder} · {p.daysLogged} day{p.daysLogged === 1 ? '' : 's'} logged
                 {p.pricePaid ? ` · paid ${formatMoney(p.pricePaid)}` : ''}
               </span>

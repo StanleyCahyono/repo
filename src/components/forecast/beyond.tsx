@@ -14,6 +14,7 @@ import type { PlanningView, ResortInfo } from '@/lib/data/forecast-screen'
 import { daysBetween, relativeLabel } from '@/lib/domain/time'
 import { PASS_FAMILIES, type PassFamilyId } from '@/lib/domain/types'
 import { cn } from '@/lib/ui/cn'
+import { DateLeaf } from './hud'
 import { dayMedium, dayYear, lastForecastDate, PROVIDER_MAX_DAYS } from './model'
 
 export function BeyondHorizon({
@@ -57,18 +58,22 @@ export function BeyondHorizon({
       className={cn('glass scroll-mt-20 overflow-hidden rounded-[28px] md:rounded-[32px] transition-opacity duration-200', stale && 'opacity-55')}
       aria-busy={stale || undefined}
     >
-      <header className="border-b border-divider bg-surface-2 px-4 pt-3.5 pb-3 md:px-5">
-        <p className="eyebrow flex items-center gap-1.5">
-          <CalendarClock aria-hidden className="size-3.5" />
-          {farOut ? 'Beyond the forecast horizon' : withRun.length ? 'Beyond the stored forecast' : 'No forecast stored for this date'}
-        </p>
-        <h3 id="beyond-title" className="mt-1 font-display text-[26px] leading-none text-ink md:text-[30px]">
-          {dayYear(date)}
-        </h3>
-        <p className="mt-1.5 max-w-[72ch] text-[14px] text-ink-2">
-          {ahead !== null && ahead > 0 ? <span className="font-medium text-ink tnum">{ahead} days ahead. </span> : null}
-          {why}
-        </p>
+      <header className="flex items-start gap-4 border-b border-divider bg-surface-2 px-4 pt-4 pb-3.5 md:px-5">
+        {/* The chosen day as a calendar leaf: the date picker's dark selection chip. */}
+        <DateLeaf date={date} tone="selected" size="lg" />
+        <div className="min-w-0">
+          <p className="eyebrow flex items-center gap-1.5">
+            <CalendarClock aria-hidden className="size-3.5" />
+            {farOut ? 'Beyond the forecast horizon' : withRun.length ? 'Beyond the stored forecast' : 'No forecast stored for this date'}
+          </p>
+          <h3 id="beyond-title" className="mt-1 font-display text-[26px] leading-none font-light tracking-[-0.02em] text-ink md:text-[30px]">
+            {dayYear(date)}
+          </h3>
+          <p className="mt-1.5 max-w-[72ch] text-[14px] text-ink-2">
+            {ahead !== null && ahead > 0 ? <span className="font-medium text-ink tnum">{ahead} days ahead. </span> : null}
+            {why}
+          </p>
+        </div>
       </header>
 
       <div className="px-4 py-4 md:px-5">

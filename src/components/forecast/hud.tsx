@@ -135,3 +135,38 @@ export function GlassPanel({
 
 /** Hatched fill for "less certain" or "no record" areas (token colours only). */
 export const HATCH = 'repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 9%, transparent) 0 1.5px, transparent 1.5px 6px)'
+
+/**
+ * A date as a calendar leaf (mono month over a light day number), in the date picker's language: `selected` is the
+ * dark HUD chip, `today` is ringed in teal, `announced` is teal-tinted, `estimate` is dashed copper.
+ */
+export type LeafTone = 'selected' | 'today' | 'announced' | 'estimate' | 'reported'
+const LEAF_TONE: Record<LeafTone, string> = {
+  selected: 'bg-ink-chip text-on-ink-chip border-transparent shadow-[0_10px_22px_-12px_rgb(19_32_44/0.6)]',
+  reported: 'bg-ink-chip text-on-ink-chip border-transparent shadow-[0_8px_18px_-10px_rgb(19_32_44/0.6)]',
+  today: 'bg-surface text-teal border-teal shadow-[inset_0_0_0_1px_var(--teal)]',
+  announced: 'bg-[color-mix(in_srgb,var(--teal)_14%,var(--surface))] text-teal border-teal/40',
+  estimate: 'bg-surface text-copper border-dashed border-copper',
+}
+export function DateLeaf({ date, tone, size = 'md', className }: { date: string; tone: LeafTone; size?: 'md' | 'lg'; className?: string }) {
+  const [, m, d] = date.split('-').map(Number)
+  const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]
+  return (
+    <motion.span
+      key={`${date}-${tone}`}
+      aria-hidden
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={t.spring}
+      className={cn(
+        'flex shrink-0 flex-col items-center border leading-none',
+        size === 'lg' ? 'w-[58px] rounded-[16px] py-2' : 'w-[52px] rounded-[14px] py-1.5',
+        LEAF_TONE[tone],
+        className,
+      )}
+    >
+      <span className="font-mono text-[12px] tracking-[0.08em] uppercase opacity-80">{month}</span>
+      <span className={cn('mt-1 font-display font-light tracking-[-0.02em] tnum', size === 'lg' ? 'text-[26px]' : 'text-[22px]')}>{d}</span>
+    </motion.span>
+  )
+}

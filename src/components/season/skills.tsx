@@ -9,6 +9,7 @@ import { useId, useState, useTransition, type ReactNode } from 'react'
 import { BadgeCheck, ChevronDown, ChevronRight, ChevronUp, Circle, CircleCheck, CircleDashed, Plus, Trash2, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { Button, IconButton } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Sheet } from '@/components/ui/sheet'
 import { Notice } from '@/components/ui/states'
@@ -18,6 +19,7 @@ import type { ChecklistSkill } from '@/lib/data/season-screen'
 import { formatLocalDate } from '@/lib/domain/time'
 import { plural } from './format'
 import { useSeasonUi } from './season-ui'
+import { useDateMarks } from './date-marks'
 
 type Status = ChecklistSkill['status']
 
@@ -64,6 +66,7 @@ function StatusSheet({ skill, today, open, onOpenChange, onCloseAutoFocus }: { s
   const formId = useId()
   const name = useId()
   const ids = { date: useId(), note: useId() }
+  const marks = useDateMarks()
   const [status, setStatus] = useState<Status>(skill?.status ?? 'not-started')
   const [date, setDate] = useState(skill?.confirmedOn ?? today)
   const [note, setNote] = useState(skill?.notes ?? '')
@@ -143,7 +146,7 @@ function StatusSheet({ skill, today, open, onOpenChange, onCloseAutoFocus }: { s
         </fieldset>
         {confirmed ? (
           <Field label={status === 'instructor-confirmed' ? 'Confirmed on' : 'Since'} htmlFor={ids.date} error={errors.confirmedOn}>
-            <TextInput id={ids.date} type="date" value={date} max={today} onChange={(e) => setDate(e.target.value)} className="tnum sm:max-w-[12rem]" aria-invalid={!!errors.confirmedOn} />
+            <DatePicker id={ids.date} value={date} max={today} today={today} marks={marks} presets={['today']} onChange={setDate} className="sm:max-w-[16rem]" aria-invalid={!!errors.confirmedOn} />
           </Field>
         ) : null}
         <Field

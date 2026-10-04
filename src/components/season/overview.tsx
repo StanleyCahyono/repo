@@ -4,31 +4,16 @@
  * ("Show as list"), so nothing is colour- or position-only.
  */
 import { GraduationCap } from 'lucide-react'
-import { cn } from '@/lib/ui/cn'
 import { KindTag } from '@/components/ui/provenance'
 import type { SeasonTimeline as Timeline } from '@/lib/data/season-screen'
-import { addDays, daysBetween, formatLocalDate } from '@/lib/domain/time'
+import { formatLocalDate } from '@/lib/domain/time'
 import { dayLabel, plural, rangeLabel } from './format'
-import { TimelineTrips } from './timeline-trips'
+import { TimelineCanvas } from './timeline-canvas'
 
 // ---------------------------------------------------------------------------
 // Timeline
 
-function monthStarts(from: string, to: string): string[] {
-  const out: string[] = []
-  let m = `${from.slice(0, 7)}-01`
-  while (m <= to) {
-    out.push(m)
-    m = `${addDays(m, 32).slice(0, 7)}-01`
-  }
-  return out
-}
-
 export function SeasonTimeline({ tl, demo, seasonLabel }: { tl: Timeline; demo: boolean; seasonLabel: string }) {
-  const total = daysBetween(tl.from, tl.to) + 1
-  const pos = (d: string) => (Math.min(Math.max(daysBetween(tl.from, d), 0), total - 1) + 0.5) / total
-  const pct = (v: number) => `${(v * 100).toFixed(3)}%`
-  const months = monthStarts(tl.from, tl.to)
   const days = tl.marks.filter((m) => m.kind === 'day')
   const lessons = tl.marks.filter((m) => m.kind === 'lesson')
   const showToday = tl.today >= tl.from && tl.today <= tl.to
@@ -54,75 +39,38 @@ export function SeasonTimeline({ tl, demo, seasonLabel }: { tl: Timeline; demo: 
         </p>
       </div>
 
-      <div aria-hidden className="relative mt-4 h-[96px] select-none">
-        {/* Month columns */}
-        {months.map((m, i) => (
-          <div key={m} className={cn('absolute inset-y-0 border-l border-divider', i === 0 && 'border-l-divider-strong')} style={{ left: pct(Math.max(0, daysBetween(tl.from, m)) / total) }}>
-            <span className="absolute bottom-0 left-1.5 text-[12px] font-medium text-ink-3">{formatLocalDate(m, 'LLL')}</span>
-          </div>
-        ))}
-        {/* Trips lane */}
-        <TimelineTrips trips={tl.trips} from={tl.from} total={total} today={tl.today} />
-        {/* Ski days lane */}
-        <div className="absolute inset-x-0 top-[34px] h-3 border-t border-dashed border-divider" />
-        {days.map((d) => (
-          <span
-            key={`${d.date}-${d.resortId}`}
-            title={`${dayLabel(d.date)} · ${d.label}`}
-            className={cn(
-              'absolute top-[28px] size-3 -translate-x-1/2 rounded-full border-2',
-              d.kind === 'day' && d.logId === null ? 'border-teal bg-surface' : 'border-surface bg-teal',
-              d.kind === 'day' && d.pass && d.logId !== null && 'ring-2 ring-teal/35',
-            )}
-            style={{ left: pct(pos(d.date)) }}
-          />
-        ))}
-        {/* Lessons lane */}
-        {lessons.map((l) => (
-          <span
-            key={`${l.date}-${l.resortId}`}
-            title={`Lesson · ${dayLabel(l.date)} · ${l.label}`}
-            className={cn('absolute top-[52px] inline-flex size-[18px] -translate-x-1/2 items-center justify-center rounded-[5px] border', l.kind === 'lesson' && l.upcoming ? 'border-dashed border-copper bg-surface text-copper' : 'border-copper/60 bg-surface text-copper')}
-            style={{ left: pct(pos(l.date)) }}
-          >
+      <TimelineCanvas tl={tl} />
+
+      <ul className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] text-ink-2">
+        <li className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="size-3.5 rounded-full border-2 border-surface bg-teal shadow-[0_0_0_1px_var(--divider)]" /> Ski day
+        </li>
+        <li className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="size-3.5 rounded-full border-2 border-surface bg-teal ring-2 ring-teal/35" /> Pass day
+        </li>
+        {days.some((d) => d.kind === 'day' && d.logId === null) ? (
+          <li className="inline-flex items-center gap-1.5">
+            <span aria-hidden className="size-3.5 rounded-full border-2 border-teal bg-surface" /> Pass day, not in the journal
+          </li>
+        ) : null}
+        <li className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="inline-flex size-[20px] items-center justify-center rounded-[6px] border border-copper/60 text-copper">
             <GraduationCap className="size-3" strokeWidth={2} />
           </span>
-        ))}
-        {/* Today */}
+          Lesson
+        </li>
+        <li className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="h-3.5 w-6 rounded-full bg-teal/[0.16] shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--teal)_45%,transparent)]" /> Booked trip
+        </li>
+        <li className="inline-flex items-center gap-1.5">
+          <span aria-hidden className="h-3.5 w-6 rounded-full border border-dashed border-teal/50 bg-teal/[0.06]" /> Draft trip
+        </li>
         {showToday ? (
-          <div className="absolute top-0 bottom-5 w-px bg-ink" style={{ left: pct(pos(tl.today)) }}>
-            <span className="absolute -top-1 -left-[3px] size-[7px] rounded-full bg-ink" />
-          </div>
+          <li className="inline-flex items-center gap-1.5">
+            <span aria-hidden className="h-3.5 w-[1.5px] rounded-full bg-teal" /> Today, {formatLocalDate(tl.today, 'd LLL')}
+          </li>
         ) : null}
-      </div>
-
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] text-ink-2">
-          <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="size-3 rounded-full border-2 border-surface bg-teal ring-1 ring-divider" /> Ski day
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="size-3 rounded-full border-2 border-surface bg-teal ring-2 ring-teal/35" /> Pass day
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="inline-flex size-[18px] items-center justify-center rounded-[5px] border border-copper/60 text-copper">
-              <GraduationCap className="size-3" strokeWidth={2} />
-            </span>
-            Lesson
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="h-3 w-5 rounded-[3px] border border-teal/60 bg-glacier" /> Booked trip
-          </li>
-          <li className="inline-flex items-center gap-1.5">
-            <span aria-hidden className="h-3 w-5 rounded-[3px] border border-dashed border-divider-strong bg-surface-2" /> Draft trip
-          </li>
-          {showToday ? (
-            <li className="inline-flex items-center gap-1.5">
-              <span aria-hidden className="h-3 w-px bg-ink" /> Today, {formatLocalDate(tl.today, 'd LLL')}
-            </li>
-          ) : null}
-        </ul>
-      </div>
+      </ul>
       {empty ? <p className="mt-2 text-[13px] text-ink-3">Nothing logged or planned for {seasonLabel} yet — logged days, lessons and trips appear here.</p> : null}
       <TimelineList items={items} count={{ days: days.length, lessons: lessons.length, trips: tl.trips.length }} />
     </figure>

@@ -10,6 +10,7 @@ import { addCorrection, deleteCorrectionRow, loadCorrectableValues, type Correct
 import type { ResortChoice } from '@/lib/data/settings-screen'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Checkbox, Select, TextInput, Textarea } from '@/components/ui/form'
 import { Segmented } from '@/components/ui/segmented'
 import { Sheet } from '@/components/ui/sheet'
@@ -33,6 +34,7 @@ export function CorrectionSheet({
   resorts,
   units,
   initialResortId,
+  today,
   onCloseAutoFocus,
 }: {
   open: boolean
@@ -40,6 +42,8 @@ export function CorrectionSheet({
   resorts: ResortChoice[]
   units: UnitPrefs
   initialResortId?: string | null
+  /** The app's today ('YYYY-MM-DD', home zone) for the date calendar. */
+  today?: string
   onCloseAutoFocus?: (e: Event) => void
 }) {
   return (
@@ -62,12 +66,12 @@ export function CorrectionSheet({
         </div>
       }
     >
-      {open ? <CorrectionBody resorts={resorts} units={units} initialResortId={initialResortId ?? null} close={() => onOpenChange(false)} /> : null}
+      {open ? <CorrectionBody resorts={resorts} units={units} initialResortId={initialResortId ?? null} today={today} close={() => onOpenChange(false)} /> : null}
     </Sheet>
   )
 }
 
-function CorrectionBody({ resorts, units, initialResortId, close }: { resorts: ResortChoice[]; units: UnitPrefs; initialResortId: string | null; close: () => void }) {
+function CorrectionBody({ resorts, units, initialResortId, today, close }: { resorts: ResortChoice[]; units: UnitPrefs; initialResortId: string | null; today?: string; close: () => void }) {
   const [d, setD] = useState<Draft>({
     resortId: initialResortId ?? resorts[0]?.id ?? '',
     field: 'season.announcedOpening',
@@ -221,7 +225,7 @@ function CorrectionBody({ resorts, units, initialResortId, close }: { resorts: R
         <label htmlFor="corr-value" className="text-[13.5px] font-medium text-ink">
           Correct value
         </label>
-        <ValueInput spec={spec} d={d} set={set} error={errors.raw} />
+        <ValueInput spec={spec} d={d} set={set} error={errors.raw} today={today} />
         {nullable(spec.kind) && spec.kind !== 'bool?' ? (
           <Checkbox label="Set to unknown" hint="Use when the published value was withdrawn or is wrong and nothing replaces it." checked={d.unknown} onChange={(e) => set({ unknown: e.target.checked }, ['raw'])} className="mt-1" />
         ) : null}
@@ -260,7 +264,7 @@ function CorrectionBody({ resorts, units, initialResortId, close }: { resorts: R
   )
 }
 
-function ValueInput({ spec, d, set, error }: { spec: NonNullable<ReturnType<typeof correctionField>>; d: Draft; set: (p: Partial<Draft>, clear?: string[]) => void; error?: string }) {
+function ValueInput({ spec, d, set, error, today }: { spec: NonNullable<ReturnType<typeof correctionField>>; d: Draft; set: (p: Partial<Draft>, clear?: string[]) => void; error?: string; today?: string }) {
   const common = {
     id: 'corr-value',
     'aria-invalid': !!error,
@@ -279,7 +283,7 @@ function ValueInput({ spec, d, set, error }: { spec: NonNullable<ReturnType<type
     case 'longtext?':
       return <Textarea {...common} value={d.raw} maxLength={2000} onChange={(e) => set({ raw: e.target.value }, ['raw'])} />
     case 'date?':
-      return <TextInput {...common} type="date" value={d.raw} onChange={(e) => set({ raw: e.target.value }, ['raw'])} className="max-w-[12rem] tnum" />
+      return <DatePicker {...common} today={today} clearable value={d.raw} onChange={(v) => set({ raw: v }, ['raw'])} className="max-w-[16rem]" />
     case 'url?':
       return <TextInput {...common} type="url" inputMode="url" placeholder="https://" value={d.raw} onChange={(e) => set({ raw: e.target.value }, ['raw'])} />
     case 'elevation?':

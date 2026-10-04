@@ -104,7 +104,7 @@ export function TravelForm({ saved, airports, homeName }: { saved: TravelPrefs; 
           {announce}
         </p>
         {v.originAirports.length ? (
-          <ol aria-labelledby="origins-label" className="max-w-xl divide-y divide-divider rounded-[14px] border border-divider">
+          <ol aria-labelledby="origins-label" className="max-w-xl divide-y divide-divider overflow-hidden rounded-[14px] border border-divider">
             <AnimatePresence initial={false}>
               {v.originAirports.map((code, i) => {
                 const a = byCode.get(code)
@@ -116,14 +116,14 @@ export function TravelForm({ saved, airports, homeName }: { saved: TravelPrefs; 
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={t.spring}
-                    className="grid grid-cols-[1rem_2.75rem_minmax(0,1fr)] items-center gap-x-3 bg-surface py-2 pr-1.5 pl-3 first:rounded-t-[10px] last:rounded-b-[10px] sm:grid-cols-[1rem_2.75rem_minmax(0,1fr)_auto] sm:py-1.5"
+                    className="grid grid-cols-[1rem_2.75rem_minmax(0,1fr)] items-center gap-x-3 bg-surface py-2 pr-1.5 pl-3 sm:grid-cols-[1rem_2.75rem_minmax(0,1fr)_auto] sm:py-1.5"
                   >
                     <span aria-hidden className="font-mono text-[12px] text-ink-3 tnum">
                       {i + 1}
                     </span>
                     <span className="font-mono text-[14px] font-medium text-ink">{code}</span>
                     <span className="min-w-0">
-                      <span className="block text-[13.5px] text-ink sm:truncate">{a?.city ?? a?.name ?? 'Unknown airport'}</span>
+                      <span className="block text-[13.5px] leading-snug text-ink [overflow-wrap:anywhere]">{a?.city ?? a?.name ?? 'Unknown airport'}</span>
                       <span className="block text-[12.5px] text-ink-3 tnum">
                         {a?.driveMinutes != null ? `${formatDuration(a.driveMinutes)} drive · estimate` : 'Drive time unknown'}
                       </span>

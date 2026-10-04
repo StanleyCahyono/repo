@@ -8,7 +8,7 @@
  * Without a stored forecast the same frame shows the real dates as empty columns under a "Not fetched yet" card —
  * nothing is drawn that the model did not return.
  */
-import { useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { CloudOff } from 'lucide-react'
 import { ChartTable } from '@/components/charts/chart-table'
@@ -28,6 +28,14 @@ const BARS_H = 120
 const finite = (v: number | null | undefined): v is number => typeof v === 'number' && Number.isFinite(v)
 
 type Range = '7' | '16'
+
+const PHONE = '(max-width: 639px)'
+const subscribePhone = (cb: () => void) => {
+  const m = window.matchMedia(PHONE)
+  m.addEventListener('change', cb)
+  return () => m.removeEventListener('change', cb)
+}
+const isPhone = () => window.matchMedia(PHONE).matches
 
 export function OutlookStrip({
   forecast,
@@ -53,7 +61,10 @@ export function OutlookStrip({
 }) {
   const q = useMemo(() => chartUnits(units), [units])
   const [view, setView] = useState<'chart' | 'table'>('chart')
-  const [range, setRange] = useState<Range>('16')
+  // Phones open on the next 7 days, which fit without sideways scrolling; the 16-day view stays one tap away.
+  const phone = useSyncExternalStore(subscribePhone, isPhone, () => false)
+  const [picked, setRange] = useState<Range | null>(null)
+  const range: Range = picked ?? (phone ? '7' : '16')
   const all = forecast?.run ? forecast.daily : []
   const days = range === '7' ? all.slice(0, 7) : all
   const has = days.length > 0
@@ -227,6 +238,14 @@ function StripChart({
 
   const pct = (y: number) => `${(y / H) * 100}%`
   const zeroLabel = q.temp.format(0)
+  // The freezing label sits top-left on the dashed line; an active value label in the first columns near the line
+  // would cover it, so it steps aside then (the legend still names the line).
+  const zeroCrowded =
+    !!geo &&
+    geo.zeroY !== null &&
+    active !== null &&
+    active < Math.max(2, n * 0.15) &&
+    [his[active], los[active]].some((v) => finite(v) && (Math.abs(geo.y(v) - geo.zeroY!) / H) * 260 < 30)
 
   return (
     <div className="flex flex-col gap-3">
@@ -236,7 +255,7 @@ function StripChart({
             {/* Less-certain trend band */}
             {firstTrend > 0 ? (
               <div aria-hidden className="absolute inset-y-0 right-0 rounded-[16px]" style={{ left: `${(firstTrend / n) * 100}%`, backgroundImage: HATCH }}>
-                <span className="hud absolute top-1.5 right-2 text-ink-3 max-sm:hidden">Less certain trend</span>
+                <span className="hud glass-strong absolute top-1.5 right-2 z-[1] rounded-full px-2 py-0.5 text-ink-2 max-sm:hidden">Less certain trend</span>
               </div>
             ) : null}
             {/* Hovered / selected column */}
@@ -284,31 +303,41 @@ function StripChart({
                 />
               </motion.svg>
             ) : null}
-            {geo && geo.zeroY !== null ? (
+            {geo && geo.zeroY !== null && !zeroCrowded ? (
               <span aria-hidden className="absolute left-1 -translate-y-[120%] font-mono text-[12px] text-teal" style={{ top: pct(geo.zeroY) }}>
                 {zeroLabel}
               </span>
             ) : null}
-            {/* Dots + values on the active day */}
+            {/* Dots + values on the active day: labels sit beside the dot (to the left near the right edge) and are
+                pushed apart when high and low are close, so the two values never overlap each other. */}
             {geo && active !== null
-              ? (
-                  [
+              ? (() => {
+                  const vals = [
                     [his[active], 'bg-copper', q.temp.short(days[active].tempMaxC)],
                     [los[active], 'bg-teal', q.temp.short(days[active].tempMinC)],
                   ] as const
-                ).map(([v, tone, txt], k) =>
-                  finite(v) ? (
-                    <span
-                      key={k}
-                      aria-hidden
-                      className="pointer-events-none absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 transition-[left,top] duration-200"
-                      style={{ left: `${((active + 0.5) / n) * 100}%`, top: pct(geo.y(v)) }}
-                    >
-                      <span className={cn('size-2.5 rounded-full shadow-[0_0_0_3px_var(--surface)]', tone)} />
-                      <span className="glass-strong absolute left-3 rounded-full px-1.5 font-mono text-[12px] whitespace-nowrap text-ink tnum">{txt}</span>
-                    </span>
-                  ) : null,
-                )
+                  const gapPx = finite(his[active]) && finite(los[active]) ? (Math.abs(geo.y(his[active]) - geo.y(los[active])) / H) * 260 : 99
+                  const push = gapPx < 24 ? (24 - gapPx) / 2 : 0
+                  const leftSide = active >= n * 0.72
+                  return vals.map(([v, tone, txt], k) =>
+                    finite(v) ? (
+                      <span
+                        key={k}
+                        aria-hidden
+                        className="pointer-events-none absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 transition-[left,top] duration-200"
+                        style={{ left: `${((active + 0.5) / n) * 100}%`, top: pct(geo.y(v)) }}
+                      >
+                        <span className={cn('size-2.5 rounded-full shadow-[0_0_0_3px_var(--surface)]', tone)} />
+                        <span
+                          className={cn('glass-strong absolute rounded-full px-1.5 font-mono text-[12px] whitespace-nowrap text-ink tnum', leftSide ? 'right-3' : 'left-3')}
+                          style={push ? { transform: `translateY(${k === 0 ? -push : push}px)` } : undefined}
+                        >
+                          {txt}
+                        </span>
+                      </span>
+                    ) : null,
+                  )
+                })()
               : null}
 
             {/* Snowfall bars */}

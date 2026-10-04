@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, GraduationCap, PencilLine, Plus, Trash2 } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Field, Select, TextInput, Textarea } from '@/components/ui/form'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import { Sheet } from '@/components/ui/sheet'
@@ -21,6 +22,8 @@ import type { ChecklistSkill, PickerResort } from '@/lib/data/season-screen'
 import { formatLocalDate } from '@/lib/domain/time'
 import { COST_KIND_LABEL, LESSON_KINDS, LESSON_KIND_LABEL, currencies, majorString, money, resortHref, tripHref } from './format'
 import { Rise } from './rise'
+import { useSeasonUi } from './season-ui'
+import { useDateMarks } from './date-marks'
 
 function host(url: string): string {
   try {
@@ -65,6 +68,8 @@ function LessonSheet({
 }) {
   const toast = useToast()
   const formId = useId()
+  const { today } = useSeasonUi().data
+  const marks = useDateMarks()
   const ids = { resort: useId(), date: useId(), kind: useId(), instructor: useId(), ref: useId(), url: useId(), cost: useId(), cur: useId(), costKind: useId(), notes: useId() }
   const [f, setF] = useState<LessonForm>(() =>
     lesson
@@ -168,7 +173,7 @@ function LessonSheet({
         }}
       >
         {error ? <Notice tone="error" title={error} /> : null}
-        <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,11rem)]">
+        <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)]">
           <Field label="Resort" htmlFor={ids.resort} error={errors.resortId}>
             <Select id={ids.resort} value={f.resortId} onChange={(e) => set('resortId', e.target.value)} aria-invalid={!!errors.resortId}>
               <option value="">Choose a resort…</option>
@@ -180,7 +185,7 @@ function LessonSheet({
             </Select>
           </Field>
           <Field label="Date" htmlFor={ids.date} optional error={errors.date} hint="Leave empty if not scheduled yet.">
-            <TextInput id={ids.date} type="date" value={f.date} onChange={(e) => set('date', e.target.value)} className="tnum" aria-invalid={!!errors.date} />
+            <DatePicker id={ids.date} value={f.date} today={today} marks={marks} clearable placeholder="Not scheduled" onChange={(v) => set('date', v)} aria-invalid={!!errors.date} />
           </Field>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -261,7 +266,7 @@ function LessonSheet({
 function LessonRow({ l, index, demo, onEdit }: { l: LessonView; index: number; demo: boolean; onEdit: (l: LessonView, from: HTMLElement) => void }) {
   const title = l.kind ? (LESSON_KIND_LABEL[l.kind] ?? l.kind) : 'Lesson'
   return (
-    <Rise as="li" index={index} className="grid grid-cols-[48px_minmax(0,1fr)] gap-x-4 px-4 py-4 md:grid-cols-[56px_minmax(0,1fr)_auto] md:px-5">
+    <Rise as="li" index={index} className="grid grid-cols-[48px_minmax(0,1fr)] gap-x-4 px-4 py-4 transition-colors duration-150 hover:bg-surface-2/60 md:grid-cols-[56px_minmax(0,1fr)_auto] md:px-5">
       <div className="leading-none">
         {l.date ? (
           <>

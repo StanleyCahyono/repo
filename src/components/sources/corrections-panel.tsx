@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ArrowRight, ExternalLink, PenLine, Plus, RotateCcw, TriangleAlert } from 'lucide-react'
 import { restoreCorrections, revertCorrection } from '@/lib/actions/sources'
 import type { CorrectionItem, ResortChoice } from '@/lib/data/settings-screen'
-import { formatInstant, relativeLabel } from '@/lib/domain/time'
+import { formatInstant, localDateOf, relativeLabel } from '@/lib/domain/time'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { Button } from '@/components/ui/button'
 import { EmptyState } from '@/components/ui/states'
@@ -173,6 +173,7 @@ export function CorrectionsPanel({
         onOpenChange={setOpen}
         resorts={resorts}
         units={units}
+        today={localDateOf(now, tz)}
         onCloseAutoFocus={(e) => {
           if (opener.current?.isConnected) {
             e.preventDefault()

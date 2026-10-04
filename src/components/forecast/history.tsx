@@ -177,15 +177,15 @@ export function HistoryCalendarView({
       className={cn('flex min-w-0 flex-col gap-3.5 transition-opacity duration-200', stale && 'pointer-events-none opacity-55')}
       aria-busy={stale || undefined}
     >
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex min-w-0 flex-col gap-0.5">
+      <div className="flex items-end justify-between gap-3">
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <span className="hud text-ink-2">Calendar · forecast then vs reported</span>
-          <h2 id="calendar-title" className="m-0 text-[32px] leading-[1.05] font-light tracking-[-0.03em] text-ink md:text-[40px]" aria-live="polite">
+          <h2 id="calendar-title" className="m-0 text-[28px] leading-[1.05] font-light tracking-[-0.03em] text-ink sm:text-[32px] md:text-[40px]" aria-live="polite">
             {mName} <span className="text-ink-3">{mYear}</span>
             <span className="sr-only"> — {name}</span>
           </h2>
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex shrink-0 gap-1.5">
           {(
             [
               [-1, canPrev, ChevronLeft, 'Previous month'],
@@ -214,11 +214,11 @@ export function HistoryCalendarView({
 
       <div role="grid" aria-label={`Calendar for ${name}, ${monthLong(calendar.month)}`} className="flex flex-col gap-1 md:gap-1.5">
         <div role="row" className="grid grid-cols-7 gap-1 md:gap-1.5">
-          {WEEKDAYS.map((w) => (
-            <div key={w} role="columnheader" aria-label={w} className="pb-1 text-center font-mono text-[12px] tracking-[0.1em] text-ink-3 uppercase">
+          {WEEKDAYS.map((w, i) => (
+            <div key={w} role="columnheader" aria-label={w} className={cn('hud pb-1 text-center', i >= 5 ? 'text-teal' : 'text-ink-3')}>
               <span className="max-sm:hidden">{w}</span>
               <span className="sm:hidden" aria-hidden>
-                {w.slice(0, 1)}
+                {w.slice(0, 2)}
               </span>
             </div>
           ))}
@@ -399,17 +399,21 @@ function DayCell({
   const a = day.assessmentThen
   const ft = day.forecastThen.base ?? day.forecastThen.summit
   const mv = modeled && !past ? q.snow.toDisplay(modeled.snowfallCm) : null
-  const tint = finite(mv) && mv > 0 && !isToday ? Math.min(30, 6 + (mv / snowMax) * 26) : 0
+  const tint = finite(mv) && mv > 0 && !isOpen && !isSelected ? Math.min(30, 6 + (mv / snowMax) * 26) : 0
   const dot = finite(mv) ? 6 + Math.min(10, (mv / snowMax) * 10) : 0
   const unit = inches ? '″' : ''
 
-  const bg = isToday
+  // The date picker's language: the chosen day is the dark HUD chip, today is ringed in teal.
+  const dark = isOpen || isSelected
+  const bg = dark
     ? 'bg-ink-chip text-on-ink-chip border-ink-chip shadow-[0_10px_24px_rgb(19_32_44/0.25)]'
-    : day.state === 'before-tracking'
-      ? 'bg-glass-soft border-[color-mix(in_srgb,var(--ink)_6%,transparent)]'
-      : day.gap
-        ? 'bg-glass-soft border-dashed border-ink-3/70'
-        : 'bg-glass-strong border-[color-mix(in_srgb,var(--ink)_7%,transparent)]'
+    : isToday
+      ? 'bg-glass-strong border-teal shadow-[inset_0_0_0_1px_var(--teal)]'
+      : day.state === 'before-tracking'
+        ? 'bg-glass-soft border-[color-mix(in_srgb,var(--ink)_6%,transparent)]'
+        : day.gap
+          ? 'bg-glass-soft border-dashed border-ink-3/70'
+          : 'bg-glass-strong border-[color-mix(in_srgb,var(--ink)_7%,transparent)]'
 
   return (
     <div role="gridcell" aria-selected={isOpen || isSelected}>
@@ -426,11 +430,11 @@ function DayCell({
         onMouseEnter={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
         className={cn(
-          'group relative flex min-h-[58px] w-full flex-col items-stretch gap-1 overflow-hidden rounded-[12px] border p-1.5 text-left outline-offset-2 md:min-h-[78px] md:rounded-[14px] md:px-2 md:py-[7px]',
+          'group @container relative flex min-h-[58px] w-full flex-col items-stretch gap-1 overflow-hidden rounded-[12px] border p-1.5 text-left outline-offset-2 md:min-h-[78px] md:rounded-[14px] md:px-2 md:py-[7px]',
           'transition-[transform,box-shadow] duration-[350ms] ease-[cubic-bezier(.3,1.4,.5,1)] hover:z-[1] hover:-translate-y-[3px] focus-visible:-translate-y-[3px]',
-          !isToday && 'hover:shadow-[0_12px_26px_rgb(19_32_44/0.14)]',
+          !dark && 'hover:shadow-[0_12px_26px_rgb(19_32_44/0.14)]',
           bg,
-          (isOpen || isSelected) && !isToday && 'ring-2 ring-teal',
+          dark && isToday && 'ring-2 ring-teal ring-offset-2 ring-offset-surface',
         )}
         style={{
           backgroundImage: day.state === 'before-tracking' ? HATCH : undefined,
@@ -438,8 +442,16 @@ function DayCell({
         }}
       >
         <span className="flex items-start justify-between gap-1">
-          <span className={cn('text-[13px] leading-none tnum', isToday ? 'font-semibold' : past ? 'font-medium text-ink-3' : 'font-medium text-ink')}>{n}</span>
-          {isToday ? <span className="hud text-[12px] leading-none tracking-[0.08em] text-on-ink-chip-accent max-md:hidden">Today</span> : null}
+          <span
+            className={cn(
+              '-mt-0.5 -ml-0.5 inline-flex size-[22px] shrink-0 items-center justify-center rounded-full text-[13px] leading-none tnum md:size-6',
+              dark ? 'font-semibold' : isToday ? 'font-semibold text-teal shadow-[inset_0_0_0_1.5px_var(--teal)]' : past ? 'font-medium text-ink-3' : 'font-medium text-ink',
+            )}
+          >
+            {n}
+          </span>
+          {/* The word only where the cell has room for it (the teal ring alone marks today in narrow cells). */}
+          {isToday ? <span className={cn('hud mt-0.5 hidden text-[12px] leading-none tracking-[0.08em] @min-[76px]:inline', dark ? 'text-on-ink-chip-accent' : 'text-teal')}>Today</span> : null}
           {isStart && !isToday ? <Flag aria-hidden className="size-3 shrink-0 text-teal" /> : null}
         </span>
 
@@ -449,13 +461,13 @@ function DayCell({
             <span className="flex min-w-0 items-center gap-1">
               <motion.i
                 aria-hidden
-                className={cn('block shrink-0 rounded-full max-sm:hidden', isToday ? 'bg-on-ink-chip-accent' : mv > 0 ? 'bg-teal' : 'bg-ink-3/40')}
+                className={cn('block shrink-0 rounded-full max-sm:hidden', dark ? 'bg-on-ink-chip-accent' : mv > 0 ? 'bg-teal' : 'bg-ink-3/40')}
                 style={{ width: dot, height: dot }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', stiffness: 420, damping: 22, delay: 0.15 + index * 0.012 }}
               />
-              <span className={cn('text-[12px] leading-none font-semibold whitespace-nowrap tnum max-sm:tracking-[-0.03em]', isToday ? 'text-on-ink-chip' : modeled?.trend ? 'text-ink-2' : 'text-ink')}>
+              <span className={cn('text-[12px] leading-none font-semibold whitespace-nowrap tnum max-sm:tracking-[-0.03em]', dark ? 'text-on-ink-chip' : modeled?.trend ? 'text-ink-2' : 'text-ink')}>
                 {mv > 0 ? `${modeled?.partial ? '≥' : ''}${q.snow.short(modeled?.snowfallCm)}${unit}` : '0'}
                 <span className="font-normal max-md:hidden">{mv > 0 && !inches ? ' cm' : ''}</span>
               </span>
@@ -463,14 +475,14 @@ function DayCell({
           ) : null}
           {/* Past: reported vs forecast then */}
           {snow ? (
-            <span className={cn('inline-flex items-center gap-0.5 text-[12px] leading-none font-semibold tnum', isToday ? 'text-on-ink-chip' : 'text-ink')}>
-              <BadgeCheck aria-hidden className={cn('size-3 shrink-0', isToday ? 'text-on-ink-chip-accent' : 'text-teal')} />
+            <span className={cn('inline-flex items-center gap-0.5 text-[12px] leading-none font-semibold tnum', dark ? 'text-on-ink-chip' : 'text-ink')}>
+              <BadgeCheck aria-hidden className={cn('size-3 shrink-0', dark ? 'text-on-ink-chip-accent' : 'text-teal')} />
               {q.snow.short(snow.amountCm)}
               {unit}
             </span>
           ) : null}
           {past && ft && finite(ft.snowfallCm) ? (
-            <span className="inline-flex items-center gap-1 text-[12px] leading-none text-ink-2 tnum max-sm:hidden">
+            <span className={cn('inline-flex items-center gap-1 text-[12px] leading-none tnum max-sm:hidden', dark ? 'text-on-ink-chip-2' : 'text-ink-2')}>
               <i aria-hidden className="size-2 shrink-0 rounded-full border-[1.5px] border-teal" />
               {q.snow.short(ft.snowfallCm)}
               {unit}
@@ -498,7 +510,7 @@ function DayCell({
                   : k.basis === 'actual'
                     ? 'bg-ink-chip text-on-ink-chip'
                     : 'bg-teal text-on-teal',
-                isToday && 'bg-on-ink-chip text-ink-chip',
+                dark && 'bg-on-ink-chip text-ink-chip',
               )}
             >
               {k.label}

@@ -1,7 +1,7 @@
 'use client'
 /**
  * Per-resort coverage: which facts are official, yours, estimated, from the catalog, without a source, stale,
- * failing or missing. A resorts × facts table from 1024px (every cell an icon + state, with its own label for
+ * failing or missing. A resorts × facts table from 1280px (every cell an icon + state, with its own label for
  * assistive tech), a list with a compact state strip below that. Any cell or row opens the resort's coverage sheet:
  * what is on file, how old it is, and where it comes from.
  */
@@ -90,8 +90,8 @@ export function CoverageMatrix({
         })}
       </ul>
 
-      {/* Table (≥1024px) */}
-      <div className="hidden overflow-x-auto glass rounded-[24px] lg:block">
+      {/* Table (≥1280px, where all sixteen columns fit) */}
+      <div className="hidden overflow-x-auto glass rounded-[24px] xl:block">
         <table className="w-full border-collapse text-left">
           <caption className="sr-only">
             Coverage of {rows.length} resorts across {ORDERED.length} kinds of fact for {seasonLabel}. Each cell names its state; activate it for details and sources.
@@ -125,7 +125,7 @@ export function CoverageMatrix({
                 <th scope="row" className="sticky left-0 z-10 bg-surface px-4 py-1.5 text-left font-normal group-hover:bg-surface-2">
                   <button type="button" onClick={show(r.resortId, null)} className="flex max-w-[210px] items-center gap-1.5 rounded-sm text-left text-[13.5px] font-medium text-ink hover:text-teal">
                     {r.isFavorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 fill-copper text-copper" /> : null}
-                    <span className="truncate">{r.shortName || r.name}</span>
+                    <span className="min-w-0 leading-snug [overflow-wrap:anywhere]">{r.shortName || r.name}</span>
                   </button>
                 </th>
                 {GROUPS.map((g) =>
@@ -152,17 +152,17 @@ export function CoverageMatrix({
         </table>
       </div>
 
-      {/* List (<1024px) */}
-      <ul className="divide-y divide-divider overflow-hidden glass rounded-[24px] lg:hidden">
+      {/* List (<1280px) */}
+      <ul className="divide-y divide-divider overflow-hidden glass rounded-[24px] md:grid md:grid-cols-2 md:divide-y-0 xl:hidden">
         {rows.map((r) => {
           const counts = COVERAGE_ORDER.filter((s) => r.counts[s]).map((s) => `${r.counts[s]} ${COVERAGE[s].short.toLowerCase()}`)
           return (
-            <li key={r.resortId}>
-              <button type="button" onClick={show(r.resortId, null)} className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-surface-2 md:px-5">
+            <li key={r.resortId} className="min-w-0 border-divider md:border-b md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0">
+              <button type="button" onClick={show(r.resortId, null)} className="flex h-full w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-150 hover:bg-surface-2 md:px-5">
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-[14.5px] font-medium text-ink">
                     {r.isFavorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 fill-copper text-copper" /> : null}
-                    <span className="truncate">{r.name}</span>
+                    <span className="min-w-0 leading-snug [overflow-wrap:anywhere]">{r.name}</span>
                   </span>
                   <span aria-hidden className="mt-1.5 grid max-w-[22rem] grid-cols-[repeat(16,minmax(0,1fr))] gap-[3px]">
                     {ORDERED.map((f) => {
