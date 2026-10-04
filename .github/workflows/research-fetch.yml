@@ -35,7 +35,7 @@ jobs:
           path: research-out
   publish:
     needs: fetch
-    if: always()
+    if: ${{ !cancelled() && needs.fetch.result != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
