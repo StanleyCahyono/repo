@@ -587,6 +587,22 @@
   .piste-skeleton { animation: none !important; }
 }
 
+/* Today: a ring that draws its arc once (stroke-dashoffset from empty to its own value, pathLength 100) and bars that
+   grow from their baseline once (transform only). Both settle on their own final state (fill: backwards), so a hover
+   transform still applies afterwards; reduced motion shows the final state at once. */
+@keyframes piste-ring-fill {
+  from { stroke-dashoffset: 100; }
+}
+.piste-ring-fill { animation: piste-ring-fill 450ms var(--ease-out-soft) var(--rise-delay, 0ms) backwards; }
+@keyframes piste-grow-y {
+  from { transform: scaleY(0); }
+  to { transform: none; }
+}
+.piste-grow-y { transform-origin: 50% 100%; animation: piste-grow-y 380ms var(--ease-out-soft) var(--rise-delay, 0ms) backwards; }
+/* Entrance that leaves no transform behind, for elements that also lift on hover (`.piste-rise` keeps its end state). */
+.piste-rise-soft { animation: piste-rise 240ms var(--ease-out-soft) var(--rise-delay, 0ms) backwards; }
+.piste-fade { animation: piste-fade-in 320ms var(--ease-out-soft) var(--rise-delay, 0ms) backwards; }
+
 /* Sheet / drawer / dialog motion (Radix data-state driven; 220–300ms, transform + opacity only). Openings use a
    soft spring overshoot; closings ease out quickly. */
 @keyframes piste-fade-in {

@@ -91,12 +91,12 @@ function DemoBanner({ todayLabel }: { todayLabel: string }) {
       action={setMode.bind(null, 'live', pathname)}
       role="region"
       aria-label="Demo mode notice"
-      className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-demo/30 bg-demo-bg px-4 py-2 text-[13px] text-ink md:mx-8 md:mt-4 md:rounded-full md:border md:px-5 lg:mx-12"
+      className="piste-rise flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-demo/30 bg-demo-bg px-4 py-2 text-[13px] text-ink md:mx-8 md:mt-4 md:rounded-[22px] md:border md:px-5 lg:mx-12"
     >
       <FlaskConical aria-hidden className="size-4 text-demo" />
       <p className="min-w-0 flex-1">
-        <strong className="font-semibold">Demo mode.</strong> Simulated data for {todayLabel}. Nothing here is live, and it never mixes with your
-        records, exports or alerts.
+        <strong className="font-semibold">Demo mode.</strong> Simulated data for {todayLabel}.{' '}
+        <span className="max-sm:sr-only">Nothing here is live, and it never mixes with your records, exports or alerts.</span>
       </p>
       <button type="submit" className="inline-flex min-h-9 items-center rounded-full px-2 font-semibold text-teal underline-offset-2 hover:underline">
         Switch to live

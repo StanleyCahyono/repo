@@ -9,7 +9,7 @@ export default function Loading() {
   return (
     <div aria-busy="true" aria-live="polite">
       <p className="sr-only">Loading…</p>
-      <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">
+      <div className="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(240px,300px)] lg:grid-cols-[minmax(0,1fr)_minmax(300px,400px)]">
         <div className="min-w-0 pt-2 md:pt-6">
           <Skeleton className="h-3 w-56 max-w-full" />
           <Skeleton className="mt-5 h-11 w-[min(520px,92%)] rounded-[14px] md:h-16" />
@@ -21,8 +21,8 @@ export default function Loading() {
             <Skeleton className="h-10 w-28 rounded-full" />
           </div>
         </div>
-        <div aria-hidden className="hidden h-[300px] items-end justify-center lg:flex">
-          <Skeleton className="h-16 w-[320px] rounded-[50%]" />
+        <div aria-hidden className="hidden h-[340px] items-end justify-center md:flex lg:h-[420px]">
+          <Skeleton className="h-16 w-[min(320px,100%)] rounded-[50%]" />
         </div>
       </div>
       <div className="glass-soft mt-10 flex h-16 items-center gap-4 rounded-[24px] px-6 md:mt-14">
@@ -30,13 +30,13 @@ export default function Loading() {
         <Skeleton className="hidden h-3 w-56 md:block" />
         <Skeleton className="ml-auto h-7 w-[min(280px,40%)] rounded-full" />
       </div>
-      <div className="mt-5 grid gap-5 md:grid-cols-3">
+      <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {[0, 1, 2].map((k) => (
-          <div key={k} className="glass-soft flex flex-col gap-4 rounded-[28px] px-[22px] py-5">
+          <div key={k} className={`glass-soft flex flex-col gap-4 rounded-[28px] px-[22px] py-5 ${k === 0 ? 'md:col-span-2 xl:col-span-1' : ''}`}>
             <Skeleton className="h-3 w-40" />
             <div className="flex justify-between gap-2">
               {[0, 1, 2, 3, 4].map((i) => (
-                <Skeleton key={i} className="size-12 rounded-full" />
+                <Skeleton key={i} className="size-[52px] shrink-0 rounded-full" />
               ))}
             </div>
             <Skeleton className="h-10 w-full rounded-[14px]" />
