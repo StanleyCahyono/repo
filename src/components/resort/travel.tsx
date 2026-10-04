@@ -140,9 +140,9 @@ function TravelStory({ d, x, v, route }: { d: ResortDetail; x: ResortPageExtras;
   )
 }
 
-/** '235 km by road · about 3 h 5 min' (routing estimate, no traffic) or 'straight line, not a route'. */
+/** '235 km by road · about 3 h 5 min' (routing estimate, no traffic) or 'road route not on file'. */
 function legText(l: RouteLeg, u: ReturnType<typeof units>): string {
-  if (!l.road) return 'straight line, not a route'
+  if (!l.road) return 'road route not on file'
   return dotJoin(l.km !== null ? `${u.dist(l.km)} by road` : 'by road', l.min !== null ? `about ${u.duration(l.min)}` : null)
 }
 

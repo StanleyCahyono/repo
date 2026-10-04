@@ -3,7 +3,7 @@
  * src/assets/routes.json) for the legs that are driven, Natural Earth land, borders and city labels around them.
  * Everything is cropped to the map's frame so only what is drawn is sent to the page.
  *
- * A leg without a bundled route is drawn as a straight dashed line and labelled as such — never as a road.
+ * A leg without a bundled route keeps only its end points (for framing); the map does not draw it.
  */
 import 'server-only'
 import ROUTES from '@/assets/routes.json'
@@ -18,7 +18,7 @@ export interface RouteLeg {
   id: string
   /** Where the leg starts: an airport code or 'home'. */
   from: { key: string; name: string; lon: number; lat: number }
-  /** Road geometry ([lon, lat]); two points when no road route is bundled (drawn dashed, labelled straight). */
+  /** Road geometry ([lon, lat]); two end points when no road route is bundled (not drawn). */
   coords: LonLat[]
   road: boolean
   /** Road distance and routing estimate (OSRM, no traffic), when bundled. */

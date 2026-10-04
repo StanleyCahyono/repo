@@ -3,7 +3,7 @@
  * Getting there, the route map: the roads you drive — from home, or from each gateway airport — drawn along the
  * bundled road routes (OSRM over OpenStreetMap), over Natural Earth land and borders with nearby city names so the
  * area is easy to place. Airports are marked, not flown to: no flight arcs, no animation beyond the roads drawing in
- * once. A leg without a bundled route is a straight dashed line and says so. Works offline (no tiles).
+ * once. A leg without a bundled route is not drawn (never a straight line); its card says the road route is not on file. Works offline (no tiles).
  *
  * Colours come from the night card's local tokens (--card-*) so it sits inside the dark journey card in both themes.
  */
@@ -105,7 +105,7 @@ export function RouteMap({ data, label }: { data: RouteMapData; label: string })
                 <path key={i} d={d} />
               ))}
             </g>
-            {view.legs.map((l, i) => (
+            {view.legs.filter((l) => l.road).map((l, i) => (
               <g key={l.id}>
                 <path d={l.d} fill="none" stroke="var(--card-bg)" strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" className="rm-fade" />
                 <path
@@ -155,7 +155,7 @@ export function RouteMap({ data, label }: { data: RouteMapData; label: string })
           </div>
         </>
       ) : null}
-      <p className="hud absolute top-3 left-3.5 m-0 text-[var(--card-fg2)]">{data.legs.some((l) => l.road) ? 'Road routes' : 'Straight lines, not routes'}</p>
+      <p className="hud absolute top-3 left-3.5 m-0 text-[var(--card-fg2)]">{data.legs.some((l) => l.road) ? 'Road routes' : 'Road routes not on file'}</p>
     </div>
   )
 }
