@@ -9,10 +9,10 @@
  * the venue is the resort, otherwise "not recorded"; prices show only when published; age and booking rules only
  * when stated. Add to calendar exists only for dated, non-cancelled events.
  */
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import {
   Ban,
   CalendarCheck2,
@@ -20,8 +20,6 @@ import {
   CalendarDays,
   CalendarSearch,
   CalendarX2,
-  ChevronLeft,
-  ChevronRight,
   Download,
   ExternalLink,
   Eye,
@@ -31,6 +29,8 @@ import {
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { Select } from '@/components/ui/form'
+import { DateRangePicker, type DateMark } from '@/components/ui/date-picker'
+import { MonthTitle, NavButton, SlidingMonths } from '@/components/ui/date-picker-grid'
 import { SourceDrawer } from '@/components/ui/source-drawer'
 import { EmptyState } from '@/components/ui/states'
 import type { EventItem, EventsView } from '@/lib/data/explore'
@@ -141,6 +141,20 @@ function FilterPanel({
   catCounts: Map<string, number>
 }) {
   const label = 'text-[12.5px] font-medium text-ink-2'
+  // Days with dated events, drawn under the day numbers of the date picker (announced vs tentative, with text).
+  const marks = useMemo<DateMark[]>(
+    () =>
+      view.events
+        .filter((e) => e.startDate && e.status !== 'cancelled' && e.status !== 'not-announced')
+        .map((e) => ({
+          date: e.startDate!,
+          to: e.endDate && e.endDate > e.startDate! ? e.endDate : undefined,
+          label: e.status === 'announced' ? 'Event (announced)' : 'Event (tentative or postponed)',
+          tone: e.status === 'announced' ? ('positive' as const) : ('caution' as const),
+          soft: e.status !== 'announced',
+        })),
+    [view.events],
+  )
   return (
     <section aria-labelledby="events-filters" className="glass rounded-[24px] p-4 md:px-6 md:py-5">
       <h2 id="events-filters" className="sr-only">
@@ -184,24 +198,21 @@ function FilterPanel({
           </div>
         ) : null}
         {f.when === 'custom' ? (
-          <>
-            <DateField
-              id="ev-from"
-              label="From"
-              value={f.from ?? view.today}
+          <div className="col-span-2 flex flex-col gap-1.5 xl:col-span-1">
+            <label htmlFor="ev-dates" className={label}>
+              Dates
+            </label>
+            <DateRangePicker
+              id="ev-dates"
+              value={{ start: f.from ?? view.today, end: f.to ?? view.seasonBounds.max }}
               min={view.seasonBounds.min}
               max={view.seasonBounds.max}
-              onChange={(v) => setFilters({ from: v })}
+              today={view.today}
+              marks={marks}
+              presets={['this-weekend', 'next-weekend', 'next-7-days']}
+              onChange={(v) => v.start && v.end && setFilters({ from: v.start, to: v.end })}
             />
-            <DateField
-              id="ev-to"
-              label="To"
-              value={f.to ?? view.seasonBounds.max}
-              min={view.seasonBounds.min}
-              max={view.seasonBounds.max}
-              onChange={(v) => setFilters({ to: v })}
-            />
-          </>
+          </div>
         ) : null}
         <div className="flex flex-col gap-1.5">
           <label htmlFor="ev-resort" className={label}>
@@ -239,39 +250,6 @@ function FilterPanel({
         />
       ) : null}
     </section>
-  )
-}
-
-function DateField({
-  id,
-  label,
-  value,
-  min,
-  max,
-  onChange,
-}: {
-  id: string
-  label: string
-  value: string
-  min: string
-  max: string
-  onChange: (v: string) => void
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-[12.5px] font-medium text-ink-2">
-        {label}
-      </label>
-      <input
-        id={id}
-        type="date"
-        value={value}
-        min={min}
-        max={max}
-        onChange={(e) => /^\d{4}-\d{2}-\d{2}$/.test(e.target.value) && onChange(e.target.value)}
-        className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
-      />
-    </div>
   )
 }
 
@@ -320,8 +298,13 @@ function Timeline({ events, view }: { events: EventItem[]; view: EventsView }) {
   const months = groupByMonth(events)
   return (
     <div className="flex flex-col gap-6">
-      {months.map((m) => (
-        <section key={m.month} aria-labelledby={`ev-month-${m.month}`}>
+      {months.map((m, i) => (
+        <section
+          key={m.month}
+          aria-labelledby={`ev-month-${m.month}`}
+          className="piste-rise"
+          style={i < 4 ? ({ '--rise-delay': `${i * 60}ms` } as CSSProperties) : undefined}
+        >
           <h2 id={`ev-month-${m.month}`} className="hud mb-2.5 flex items-baseline gap-2 px-2 text-teal">
             {m.label}
             <span className="tnum text-ink-2">{m.events.length}</span>
@@ -551,129 +534,156 @@ function EventCalendar({
   const inMonth = dated.filter((e) => e.startDate! <= `${month}-31` && (e.endDate ?? e.startDate!) >= `${month}-01`)
   const firstWithEvents = weeks.flat().find((d) => d.inMonth && eventsOn(dated, d.date).length)?.date ?? null
   const [picked, setPicked] = useState<string | null>(null)
+  // Paging direction for the month slide (previous month slides in from the left).
+  const [shown, setShown] = useState({ month, dir: 1 })
+  if (shown.month !== month) setShown({ month, dir: month > shown.month ? 1 : -1 })
   const day = picked && picked.slice(0, 7) === month ? picked : firstWithEvents
   const dayEvents = day ? eventsOn(dated, day) : []
   const label = formatLocalDate(`${month}-01`, 'LLLL yyyy')
+  const go = (d: -1 | 1) => {
+    const next = shiftMonth(month, d)
+    if (next >= minMonth && next <= maxMonth) onMonth(next)
+  }
 
   return (
     <section aria-labelledby="ev-cal-title" className="flex flex-col gap-4">
-      <div className="glass overflow-hidden rounded-[24px]">
-        <div className="flex items-center justify-between gap-2 border-b border-divider px-4 py-2.5">
-          <button
-            type="button"
-            onClick={() => onMonth(shiftMonth(month, -1))}
-            disabled={month <= minMonth}
-            aria-label="Previous month"
-            className="inline-flex size-11 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
-          >
-            <ChevronLeft aria-hidden className="size-5" />
-          </button>
-          <h2 id="ev-cal-title" className="text-[20px] font-light tracking-[-0.02em] text-ink" aria-live="polite">
-            {label}
-            <span className="tnum ml-2 text-[13px] font-medium text-ink-3">
+      <div className="glass rounded-[28px] p-3 md:p-5">
+        <div className="flex items-center justify-between gap-3 px-1 pb-3 md:px-2">
+          <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1" aria-live="polite">
+            <h2 id="ev-cal-title" className="sr-only">
+              {label}
+            </h2>
+            <MonthTitle month={month} className="md:text-[24px]" />
+            <span className="hud tnum text-ink-2">
               {inMonth.length} {inMonth.length === 1 ? 'event' : 'events'}
             </span>
-          </h2>
-          <button
-            type="button"
-            onClick={() => onMonth(shiftMonth(month, 1))}
-            disabled={month >= maxMonth}
-            aria-label="Next month"
-            className="inline-flex size-11 items-center justify-center rounded-full text-ink-2 hover:bg-surface-3 hover:text-ink disabled:opacity-40 md:size-9"
-          >
-            <ChevronRight aria-hidden className="size-5" />
-          </button>
+          </div>
+          <div className="flex shrink-0 gap-1.5">
+            <NavButton dir={-1} disabled={month <= minMonth} onClick={() => go(-1)} density="large" />
+            <NavButton dir={1} disabled={month >= maxMonth} onClick={() => go(1)} density="large" />
+          </div>
         </div>
-        <table className="w-full table-fixed border-collapse">
-          <caption className="sr-only">
-            Dated events in {label} ({win.label}). The list below the calendar shows the selected day.
-          </caption>
-          <thead>
-            <tr>
-              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-                <th key={d} scope="col" className="py-2 text-[12px] font-semibold tracking-[0.06em] text-ink-3 uppercase">
-                  <abbr title={d} className="no-underline">
-                    {d}
-                  </abbr>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {weeks.map((w) => (
-              <tr key={w[0].date}>
-                {w.map((d) => {
-                  const evs = d.inMonth ? eventsOn(dated, d.date) : []
-                  const isToday = d.date === view.today
-                  const on = d.date === day
-                  return (
-                    <td key={d.date} className={cn('h-16 border-t border-divider p-0 align-top md:h-24', !d.inMonth && 'bg-[color-mix(in_srgb,var(--ink)_3%,transparent)]')}>
-                      {evs.length ? (
-                        <button
-                          type="button"
-                          aria-pressed={on}
-                          onClick={() => setPicked(d.date)}
-                          aria-label={`${formatLocalDate(d.date, 'cccc d LLLL')}: ${evs.length} ${evs.length === 1 ? 'event' : 'events'}`}
-                          className={cn(
-                            'flex h-full w-full flex-col items-stretch gap-1 p-1.5 text-left transition-colors duration-150 hover:bg-glacier/40',
-                            on && 'bg-glacier/60 ring-2 ring-teal ring-inset',
-                          )}
-                        >
-                          <DayNumber date={d.date} today={isToday} />
-                          <span className="hidden flex-col gap-0.5 md:flex">
-                            {evs.slice(0, 2).map((e) => (
-                              <span key={e.id} className={cn('truncate rounded-sm px-1 py-0.5 text-[12px] font-medium', STATUS_STYLE[e.status].cls)}>
-                                {e.title}
-                              </span>
-                            ))}
-                            {evs.length > 2 ? <span className="text-[12px] text-ink-3">+{evs.length - 2} more</span> : null}
-                          </span>
-                          <span aria-hidden className="flex gap-0.5 md:hidden">
-                            {evs.slice(0, 3).map((e) => (
-                              <span
-                                key={e.id}
-                                className={cn(
-                                  'size-2 rounded-full',
-                                  e.status === 'announced' ? 'bg-positive' : e.status === 'cancelled' ? 'bg-critical' : 'bg-caution',
-                                )}
-                              />
-                            ))}
-                          </span>
-                        </button>
-                      ) : (
-                        <div className={cn('p-1.5', !d.inMonth && 'opacity-60')}>
-                          <DayNumber date={d.date} today={isToday} muted={!d.inMonth} />
-                        </div>
-                      )}
-                    </td>
-                  )
-                })}
+        <SlidingMonths pageKey={month} dir={shown.dir} scope="ev-cal" onSwipe={go}>
+          <table className="w-full table-fixed border-separate border-spacing-1">
+            <caption className="sr-only">
+              Dated events in {label} ({win.label}). The list below the calendar shows the selected day.
+            </caption>
+            <thead>
+              <tr>
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d, i) => (
+                  <th key={d} scope="col" className={cn('hud pb-1 text-center font-normal', i >= 5 ? 'text-teal' : 'text-ink-3')}>
+                    <abbr title={d} className="no-underline">
+                      {d.slice(0, 2)}
+                    </abbr>
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {weeks.map((w) => (
+                <tr key={w[0].date}>
+                  {w.map((d) => {
+                    const evs = d.inMonth ? eventsOn(dated, d.date) : []
+                    const isToday = d.date === view.today
+                    const on = d.date === day
+                    return (
+                      <td key={d.date} className="h-14 p-0 align-top md:h-[104px]">
+                        {evs.length ? (
+                          <button
+                            type="button"
+                            aria-pressed={on}
+                            onClick={() => setPicked(d.date)}
+                            aria-label={`${formatLocalDate(d.date, 'cccc d LLLL')}: ${evs.length} ${evs.length === 1 ? 'event' : 'events'}`}
+                            className={cn(
+                              'group/day relative flex h-full w-full flex-col items-stretch gap-1 rounded-[14px] p-1.5 text-left',
+                              'bg-[color-mix(in_srgb,var(--surface)_62%,transparent)] transition-[background-color,translate,box-shadow] duration-150 ease-out',
+                              'hover:-translate-y-px hover:bg-surface hover:shadow-[0_8px_20px_-10px_rgb(19_32_44/0.35)] active:scale-[0.98]',
+                            )}
+                          >
+                            {on ? (
+                              <motion.span
+                                layoutId="ev-cal-knob"
+                                transition={t.spring}
+                                aria-hidden
+                                className="absolute inset-0 rounded-[14px] bg-glacier/70 shadow-[inset_0_0_0_2px_var(--teal)]"
+                              />
+                            ) : null}
+                            <DayNumber date={d.date} today={isToday} />
+                            <span className="relative hidden min-w-0 flex-col gap-0.5 md:flex">
+                              {evs.slice(0, 2).map((e) => (
+                                <span key={e.id} className={cn('block truncate rounded-full px-2 py-[3px] text-[12px] leading-tight font-medium', STATUS_STYLE[e.status].cls)}>
+                                  {e.title}
+                                </span>
+                              ))}
+                              {evs.length > 2 ? <span className="px-1 text-[12px] text-ink-2">+{evs.length - 2} more</span> : null}
+                            </span>
+                            <span aria-hidden className="relative flex gap-0.5 px-1 md:hidden">
+                              {evs.slice(0, 3).map((e) => (
+                                <span
+                                  key={e.id}
+                                  className={cn('size-1.5 rounded-full', e.status === 'announced' ? 'bg-positive' : e.status === 'cancelled' ? 'bg-critical' : 'bg-caution')}
+                                />
+                              ))}
+                            </span>
+                          </button>
+                        ) : (
+                          <div className={cn('h-full rounded-[14px] p-1.5', d.inMonth ? 'bg-[color-mix(in_srgb,var(--surface)_28%,transparent)]' : 'opacity-50')}>
+                            <DayNumber date={d.date} today={isToday} muted={!d.inMonth} />
+                          </div>
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </SlidingMonths>
+        <ul className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 px-2 text-[12px] text-ink-2" aria-label="Calendar key">
+          <li className="inline-flex items-center gap-1.5">
+            <i aria-hidden className="size-2 rounded-full bg-positive" /> Announced
+          </li>
+          <li className="inline-flex items-center gap-1.5">
+            <i aria-hidden className="size-2 rounded-full bg-caution" /> Tentative or postponed
+          </li>
+          <li className="inline-flex items-center gap-1.5">
+            <i aria-hidden className="size-2 rounded-full bg-critical" /> Cancelled
+          </li>
+          <li className="inline-flex items-center gap-1.5">
+            <i aria-hidden className="size-2.5 rounded-full shadow-[inset_0_0_0_1.5px_var(--teal)]" /> Today
+          </li>
+        </ul>
       </div>
 
-      {day && dayEvents.length ? (
-        <section aria-labelledby="ev-day-title">
-          <h2 id="ev-day-title" className="hud mb-2.5 px-2 text-teal">
-            {formatLocalDate(day, 'cccc d LLLL yyyy')}
-          </h2>
-          <ul className="glass divide-y divide-divider overflow-hidden rounded-[24px]">
-            {dayEvents.map((e) => (
-              <li key={e.id}>
-                <EventRow e={e} view={view} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : (
-        <p className="rounded-[18px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">
-          No dated events in {label}
-          {dated.length ? ' — use the arrows to find the months that have some.' : '.'} Events without an announced date are listed under “Watching for dates”,
-          never placed on the calendar.
-        </p>
-      )}
+      <AnimatePresence mode="wait" initial={false}>
+        {day && dayEvents.length ? (
+          <motion.section
+            key={day}
+            aria-labelledby="ev-day-title"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4, transition: { duration: 0.12 } }}
+            transition={t.pageIn}
+          >
+            <h2 id="ev-day-title" className="hud mb-2.5 px-2 text-teal">
+              {formatLocalDate(day, 'cccc d LLLL yyyy')}
+            </h2>
+            <ul className="glass divide-y divide-divider overflow-hidden rounded-[24px]">
+              {dayEvents.map((e) => (
+                <li key={e.id}>
+                  <EventRow e={e} view={view} />
+                </li>
+              ))}
+            </ul>
+          </motion.section>
+        ) : (
+          <p key="none" className="rounded-[18px] border border-dashed border-divider-strong px-4 py-3 text-[13.5px] text-ink-2">
+            No dated events in {label}
+            {dated.length ? ' — use the arrows to find the months that have some.' : '.'} Events without an announced date are listed under “Watching for dates”,
+            never placed on the calendar.
+          </p>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
@@ -682,8 +692,8 @@ function DayNumber({ date, today, muted }: { date: string; today: boolean; muted
   return (
     <span
       className={cn(
-        'tnum inline-flex size-6 items-center justify-center rounded-full text-[12.5px] font-medium',
-        today ? 'bg-teal text-on-teal' : muted ? 'text-ink-3' : 'text-ink',
+        'tnum relative inline-flex size-7 items-center justify-center rounded-full text-[13px] font-medium',
+        today ? 'font-semibold text-teal shadow-[inset_0_0_0_1.5px_var(--teal)]' : muted ? 'text-ink-3' : 'text-ink',
       )}
     >
       {Number(date.slice(8, 10))}
@@ -711,11 +721,11 @@ function Watching({ events, view }: { events: EventItem[]; view: EventsView }) {
         </p>
       </div>
       <ul className="grid gap-3 md:grid-cols-2">
-        {events.map((e) => (
-          <li key={e.id}>
+        {events.map((e, i) => (
+          <li key={e.id} className="piste-rise" style={i < 6 ? ({ '--rise-delay': `${i * 45}ms` } as CSSProperties) : undefined}>
             <article
               aria-labelledby={`ev-${e.id}`}
-              className="flex h-full flex-col gap-1.5 rounded-[24px] border border-dashed border-divider-strong bg-[color-mix(in_srgb,var(--surface)_50%,transparent)] p-5 transition-transform duration-200 hover:-translate-y-0.5"
+              className="flex h-full flex-col gap-1.5 rounded-[24px] border border-dashed border-divider-strong bg-[color-mix(in_srgb,var(--surface)_50%,transparent)] p-5 transition-[translate,box-shadow,border-color] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-teal/40 hover:shadow-[0_14px_30px_-18px_rgb(19_32_44/0.45)]"
             >
               <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
                 <h3 id={`ev-${e.id}`} className="text-[16px] leading-snug font-semibold text-ink">

@@ -4,6 +4,7 @@ import {
   boundsOf,
   clampCamera,
   clusterCaption,
+  clusterRect,
   clusterPoints,
   fitCamera,
   flyFrame,
@@ -11,7 +12,6 @@ import {
   formatLon,
   inJump,
   jumpOf,
-  labelBox,
   latOf,
   lonOf,
   mx,
@@ -119,12 +119,8 @@ describe('clusterPoints', () => {
     const pts = Array.from({ length: 60 }, (_, i) => pt(`r${i}`, (i * 37) % 500, (i * 53) % 300, `Resort number ${i}`))
     const c = clusterPoints(pts)
     expect(c.reduce((a, x) => a + x.members.length, 0)).toBe(60)
-    const boxes = c.map((x) => {
-      const w = x.members.length === 1 ? labelBox(x.members[0].name).w : 44 + clusterCaption(x.members.map((m) => m.name)).length * 6.9
-      const inset = x.members.length === 1 ? 14 : 17
-      const l = x.flip ? x.x + inset - w : x.x - inset
-      return { l, r: l + w, t: x.y - 17, b: x.y + 17 }
-    })
+    // Only labels and count badges are solid; a bare dot (a marker that gave up its label) may sit under a label.
+    const boxes = c.filter((x) => !(x.members.length === 1 && x.side === 'dot')).map((x) => clusterRect(x)!)
     for (let i = 0; i < boxes.length; i++)
       for (let j = i + 1; j < boxes.length; j++) {
         const a = boxes[i]
@@ -137,10 +133,59 @@ describe('clusterPoints', () => {
   it('flips labels that would cross the right edge', () => {
     const [c] = clusterPoints([pt('edge', 790, 100, 'Edge resort')], { maxX: 800 })
     expect(c.flip).toBe(true)
+    expect(c.side).toBe('left')
   })
 
-  it('captions clusters with the first two names', () => {
-    expect(clusterCaption(['Zermatt', 'Val Thorens', 'Kitzbühel'])).toBe('Zermatt, Val…')
+  it('captions a bubble with its lead name, both names when two short ones fit', () => {
+    expect(clusterCaption(['Zermatt', 'Val Thorens', 'Kitzbühel'])).toBe('Zermatt')
+    expect(clusterCaption(['Alta', 'Snowbird'])).toBe('Alta · Snowbird')
+    expect(clusterCaption(['Garmisch-Partenkirchen', 'Kitzsteinhorn'])).toBe('Garmisch-Partenkirchen')
+  })
+
+  it('names a bubble after its highest-priority member, then the list order', () => {
+    const c = clusterPoints([pt('b', 100, 100, 'Bbb'), { ...pt('a', 110, 104, 'Aaa'), priority: 1 }, pt('c', 120, 98, 'Ccc')])
+    expect(c).toHaveLength(1)
+    expect(c[0].lead.id).toBe('a')
+    const d = clusterPoints([pt('b', 100, 100, 'Bbb'), pt('a', 110, 104, 'Aaa')])
+    expect(d[0].lead.id).toBe('b')
+  })
+
+  it('moves labels off panels, or drops them to a dot, and hides markers under a panel', () => {
+    const panel = { l: 200, t: 0, r: 400, b: 400 }
+    const [flipped] = clusterPoints([pt('a', 150, 100, 'Long resort name')], { obstacles: [panel] })
+    expect(flipped.side).toBe('left')
+    const [dot] = clusterPoints([pt('b', 150, 100, 'Long resort name')], { obstacles: [panel, { l: 0, t: 0, r: 130, b: 400 }] })
+    expect(dot.side).toBe('dot')
+    const [hidden] = clusterPoints([pt('c', 300, 100, 'Under the panel')], { obstacles: [panel] })
+    expect(hidden.side).toBe('hidden')
+    expect(clusterRect(hidden)).toBeNull()
+  })
+
+  it('never merges the selection into a bubble', () => {
+    const c = clusterPoints([{ ...pt('sel', 100, 100, 'Selected'), priority: 3 }, pt('n1', 112, 104, 'Neighbour one'), pt('n2', 118, 96, 'Neighbour two')])
+    const sel = c.find((x) => x.members.some((m) => m.id === 'sel'))!
+    expect(sel.members).toHaveLength(1)
+    expect(sel.side).toBe('right')
+    for (const x of c.filter((x) => x !== sel)) expect(x.side).toBe('dot')
+  })
+
+  it('groups markers crowded by a far-away label into one count badge instead of a pile of dots', () => {
+    // A long label running right from x=0 covers a tight group of five points 120 px away.
+    const far = { ...pt('far', 0, 100, 'A very very long resort label'), priority: 1 }
+    const group = Array.from({ length: 5 }, (_, i) => pt(`g${i}`, 120 + i * 3, 104 + i * 2, `Group resort ${i}`))
+    const c = clusterPoints([far, ...group])
+    const g = c.find((x) => x.members.some((m) => m.id === 'g0'))!
+    expect(g.members).toHaveLength(5)
+    expect(['dot', 'right', 'left']).toContain(g.side)
+    expect(c.find((x) => x.members[0].id === 'far')!.members).toHaveLength(1)
+  })
+
+  it('does not merge far-apart markers whose labels collide: the later one drops its label', () => {
+    // Two long labels on one row, 150 px apart: they collide, but a bubble halfway between them would be wrong.
+    const c = clusterPoints([pt('a', 100, 100, 'A very long resort name here'), pt('b', 250, 102, 'Another long resort name')])
+    expect(c).toHaveLength(2)
+    expect(c.find((x) => x.members[0].id === 'a')!.side).toBe('right')
+    expect(c.find((x) => x.members[0].id === 'b')!.side).toBe('dot')
   })
 })
 

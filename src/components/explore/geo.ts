@@ -163,99 +163,346 @@ export interface ClusterInput {
   name: string
   x: number
   y: number
-  /** Higher keeps its own label first (selected, highlighted, favourites). */
+  /** Higher keeps its own label first (selected, highlighted, favourites). 3+ = pinned: never merged into a bubble. */
   priority?: number
+  /** Extra label width in px (e.g. a favourite star after the name). */
+  extra?: number
 }
+
+/** Where a marker's label goes: right of the point, left of it, no label (dot / count only), or not drawn at all. */
+export type LabelSide = 'right' | 'left' | 'dot' | 'hidden'
 
 export interface Cluster<T extends ClusterInput> {
   key: string
   x: number
   y: number
   members: T[]
-  /** The label runs to the left of the point (it would cross `maxX` otherwise). */
+  /** The label runs to the left of the point (it would cross `maxX` or a panel otherwise). */
   flip: boolean
+  /** Final label placement (see LabelSide). */
+  side: LabelSide
+  /** The member whose name captions the bubble (highest priority, then input order). */
+  lead: T
 }
 
-/** Approximate pill size for a single marker label (dot + name) at 12px Geist. */
-export function labelBox(name: string): { w: number; h: number } {
-  return { w: 30 + Math.min(name.length, 26) * 6.9, h: 28 }
-}
-
-/** Approximate bubble size for a cluster ("[4] Zermatt, Val…"). */
-export function bubbleBox(caption: string): { w: number; h: number } {
-  return { w: 44 + caption.length * 6.9, h: 34 }
-}
-
-export function clusterCaption(names: readonly string[]): string {
-  const first = names.slice(0, 2).map((n) => n.split(/[\s-]/)[0])
-  return first.join(', ') + (names.length > 2 ? '…' : '')
-}
-
-interface Box {
+/** Screen rectangle (px): left, top, right, bottom. */
+export interface Rect {
   l: number
-  r: number
   t: number
+  r: number
   b: number
 }
 
-const hit = (a: Box, b: Box, gap: number) => a.l < b.r + gap && b.l < a.r + gap && a.t < b.b + gap && b.t < a.b + gap
+/** Text width in px for a marker label; the stage passes a canvas measurer, tests use the estimate. */
+export type MeasureText = (text: string) => number
 
-/** Label box around an anchor: the dot sits on the point and the label runs right — or left when it would cross maxX. */
-function anchoredBox(x: number, y: number, w: number, h: number, inset: number, maxX: number): Box & { flip: boolean } {
-  const flip = x - inset + w > maxX
-  return flip ? { l: x + inset - w, r: x + inset, t: y - h / 2, b: y + h / 2, flip } : { l: x - inset, r: x - inset + w, t: y - h / 2, b: y + h / 2, flip }
+export const estimateText: MeasureText = (text) => Math.min(text.length, 32) * 6.9
+
+/** Pill size for a single marker label: dot + name (+ extra) at 12.5px Geist. */
+export function labelBox(name: string, measure: MeasureText = estimateText, extra = 0): { w: number; h: number } {
+  return { w: 38 + measure(name) + extra, h: 28 }
 }
 
-function singleBox(p: ClusterInput, maxX: number) {
-  const { w, h } = labelBox(p.name)
-  return anchoredBox(p.x, p.y, w, h, 14, maxX)
+/** Bubble size for a cluster: count badge + the lead name ("[36] Greek Peak"). */
+export function bubbleBox(caption: string, count = 2, measure: MeasureText = estimateText): { w: number; h: number } {
+  return { w: 26 + Math.max(22, String(count).length * 7.5 + 8) + measure(caption), h: 34 }
 }
 
-function clusterBox<T extends ClusterInput>(c: Cluster<T>, maxX: number) {
-  if (c.members.length === 1) return singleBox(c.members[0], maxX)
-  const { w, h } = bubbleBox(clusterCaption(c.members.map((m) => m.name)))
-  return anchoredBox(c.x, c.y, w, h, 17, maxX)
+/** Count badge alone (a bubble whose caption has no room). */
+export const BADGE = 34
+/** A single marker without its label: the dot and its halo. */
+export const DOT = 16
+
+/**
+ * Bubble caption: the lead resort's full name — never cut mid-word. Two short names both fit ("Alta · Snowbird");
+ * the count badge says how many more, the hover list names them all.
+ */
+export function clusterCaption(names: readonly string[]): string {
+  if (!names.length) return ''
+  if (names.length === 2 && names[0].length + names[1].length <= 22) return `${names[0]} · ${names[1]}`
+  return names[0]
+}
+
+/** The member that names a bubble: highest priority, then the order the points came in (the list order). */
+export function clusterLead<T extends ClusterInput>(members: readonly T[], rank: ReadonlyMap<string, number>): T {
+  let best = members[0]
+  for (const m of members) {
+    const dp = (m.priority ?? 0) - (best.priority ?? 0)
+    if (dp > 0 || (dp === 0 && (rank.get(m.id) ?? 0) < (rank.get(best.id) ?? 0))) best = m
+  }
+  return best
+}
+
+const hit = (a: Rect, b: Rect, gap: number) => a.l < b.r + gap && b.l < a.r + gap && a.t < b.b + gap && b.t < a.b + gap
+
+export function rectsHit(a: Rect, b: Rect, gap = 0): boolean {
+  return hit(a, b, gap)
+}
+
+interface Placed {
+  box: Rect | null
+  side: LabelSide
+}
+
+interface PlaceOpts {
+  maxX: number
+  minX: number
+  obstacles: readonly Rect[]
 }
 
 /**
- * Greedy, label-aware clustering in screen space. Points are placed in priority order; a point whose label box
- * collides with an existing marker joins it (the cluster re-centres on its members). Deterministic for a given input.
+ * Label box around an anchor: the dot sits on the point and the label runs right — or left when the right side
+ * crosses `maxX` or a panel. When neither side is clear of the panels the marker drops its label (`dot`), and a
+ * marker whose dot is itself under a panel is not drawn (`hidden`).
  */
-export function clusterPoints<T extends ClusterInput>(points: readonly T[], opts: { gap?: number; maxX?: number } = {}): Cluster<T>[] {
+function placeBox(x: number, y: number, w: number, h: number, inset: number, dot: number, o: PlaceOpts): Placed {
+  const right: Rect = { l: x - inset, r: x - inset + w, t: y - h / 2, b: y + h / 2 }
+  const left: Rect = { l: x + inset - w, r: x + inset, t: y - h / 2, b: y + h / 2 }
+  const clearR = !o.obstacles.some((b) => hit(right, b, 2))
+  const clearL = !o.obstacles.some((b) => hit(left, b, 2))
+  const fitsR = right.r <= o.maxX
+  const fitsL = left.l >= o.minX
+  if (clearR && fitsR) return { box: right, side: 'right' }
+  if (clearL && fitsL) return { box: left, side: 'left' }
+  // Neither side fits the edges but one is clear of panels: keep the roomier clear side (the stage clips the rest).
+  if (clearR && clearL) return o.maxX - x >= x - o.minX ? { box: right, side: 'right' } : { box: left, side: 'left' }
+  if (clearR) return { box: right, side: 'right' }
+  if (clearL) return { box: left, side: 'left' }
+  const d: Rect = { l: x - dot / 2, r: x + dot / 2, t: y - dot / 2, b: y + dot / 2 }
+  if (o.obstacles.some((b) => hit(d, b, 0))) return { box: null, side: 'hidden' }
+  return { box: d, side: 'dot' }
+}
+
+/** Markers closer than this (px, anchor to anchor) merge into one bubble when their labels collide. */
+export const MERGE_RADIUS = 84
+
+type Work<T extends ClusterInput> = Cluster<T> & {
+  /** A single marker drawn as a bare dot (next to the selection, or crowded by a far-away label). */
+  dotOnly?: boolean
+  /** Crowded by a far-away label (not by the selection): may group with crowded neighbours, may get a label back. */
+  crowded?: boolean
+  /** A bubble that gave up its caption: just the count badge. */
+  compact?: boolean
+  /** A label (or caption) given back on the side that turned out to be free. */
+  forceSide?: 'right' | 'left'
+}
+
+/**
+ * Greedy, label-aware clustering in screen space. Points are placed in priority order. When two labels collide:
+ * markers that are close together (≤ MERGE_RADIUS) merge into one count bubble that re-centres on its members;
+ * markers that are far apart keep their own spot and the later one gives up its label (a bare dot, or a count badge
+ * for a group), so a bubble never sits halfway between two distant places. Crowded neighbours still group into a
+ * badge, and any marker or badge whose label fits on a free side gets it back at the end. A pinned point
+ * (priority ≥ 3, the selection) is never merged: neighbours that would cover its label keep only their dot. Panels
+ * over the map (`obstacles`) push labels to the other side, or drop them. Deterministic for a given input.
+ */
+export function clusterPoints<T extends ClusterInput>(
+  points: readonly T[],
+  opts: { gap?: number; maxX?: number; minX?: number; obstacles?: readonly Rect[]; measure?: MeasureText; measureBubble?: MeasureText; mergeRadius?: number } = {},
+): Cluster<T>[] {
   const gap = opts.gap ?? 4
-  const maxX = opts.maxX ?? Infinity
+  const po: PlaceOpts = { maxX: opts.maxX ?? Infinity, minX: opts.minX ?? -Infinity, obstacles: opts.obstacles ?? [] }
+  const measure = opts.measure ?? estimateText
+  const measureBubble = opts.measureBubble ?? measure
+  const mergeR = opts.mergeRadius ?? MERGE_RADIUS
+  const rank = new Map(points.map((p, i) => [p.id, i]))
+  const pinned = (c: Work<T>) => c.members.length === 1 && !c.dotOnly && (c.members[0].priority ?? 0) >= 3
+  const labelSize = (c: Work<T>) => {
+    if (c.members.length === 1) return { ...labelBox(c.members[0].name, measure, c.members[0].extra ?? 0), inset: 14 }
+    const lead = clusterLead(c.members, rank)
+    const names = [lead.name, ...c.members.filter((m) => m !== lead).map((m) => m.name)]
+    return { ...bubbleBox(clusterCaption(names), c.members.length, measureBubble), inset: 17 }
+  }
+  const sideBox = (c: Work<T>, side: 'right' | 'left'): Rect => {
+    const { w, h, inset } = labelSize(c)
+    return side === 'right' ? { l: c.x - inset, r: c.x - inset + w, t: c.y - h / 2, b: c.y + h / 2 } : { l: c.x + inset - w, r: c.x + inset, t: c.y - h / 2, b: c.y + h / 2 }
+  }
+  const badgeBox = (c: Work<T>): Rect => ({ l: c.x - BADGE / 2, r: c.x + BADGE / 2, t: c.y - BADGE / 2, b: c.y + BADGE / 2 })
+  const place = (c: Work<T>): Placed => {
+    if (c.forceSide && !c.dotOnly && !c.compact) return { box: sideBox(c, c.forceSide), side: c.forceSide }
+    if (c.members.length === 1) {
+      if (c.dotOnly) return { box: null, side: 'dot' }
+      const { w, h } = labelSize(c)
+      return placeBox(c.x, c.y, w, h, 14, DOT, po)
+    }
+    if (c.compact) {
+      const d = badgeBox(c)
+      return po.obstacles.some((o) => hit(d, o, 0)) ? { box: null, side: 'hidden' } : { box: d, side: 'dot' }
+    }
+    const { w, h } = labelSize(c)
+    return placeBox(c.x, c.y, w, h, 17, BADGE, po)
+  }
+  // Boxes that take part in collisions: labels and count badges. A bare dot never pushes anything around.
+  const solid = (c: Work<T>, p: Placed) => p.box !== null && !(c.members.length === 1 && p.side === 'dot')
+  const centre = (c: Work<T>) => {
+    c.x = c.members.reduce((a, m) => a + m.x, 0) / c.members.length
+    c.y = c.members.reduce((a, m) => a + m.y, 0) / c.members.length
+    c.forceSide = undefined
+  }
+  const near = (a: { x: number; y: number }, b: { x: number; y: number }) => Math.hypot(a.x - b.x, a.y - b.y) <= mergeR
+  const make = (p: T, how: 'label' | 'pinned-neighbour' | 'crowded' = 'label'): Work<T> => ({
+    key: p.id,
+    x: p.x,
+    y: p.y,
+    members: [p],
+    flip: false,
+    side: 'right',
+    lead: p,
+    dotOnly: how !== 'label',
+    crowded: how === 'crowded',
+  })
+  /** Give up the label: a single becomes a crowded dot, a group a count badge. */
+  const yieldLabel = (c: Work<T>) => {
+    c.forceSide = undefined
+    if (c.members.length === 1) {
+      c.dotOnly = true
+      c.crowded = true
+    } else c.compact = true
+  }
+
   const order = [...points].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0) || a.y - b.y || a.x - b.x || a.id.localeCompare(b.id))
-  const clusters: Cluster<T>[] = []
+  const clusters: Work<T>[] = []
+  /** Join a nearby crowd (crowded dots, or the badge they formed): the crowd becomes one count badge. */
+  const joinCrowd = (p: T): boolean => {
+    const crowd = clusters.find((c) => c.crowded && near(c, p))
+    if (!crowd) return false
+    crowd.members.push(p)
+    crowd.dotOnly = false
+    crowd.compact = true
+    centre(crowd)
+    return true
+  }
   for (const p of order) {
-    const box = singleBox(p, maxX)
-    const target = clusters.find((c) => hit(box, clusterBox(c, maxX), gap))
+    const me = make(p)
+    const mine = place(me)
+    if (!mine.box) {
+      clusters.push(me)
+      continue
+    }
+    if (mine.side === 'dot') {
+      // Both label sides run into a panel: stack with the crowded dots / badge right here, else a bare dot.
+      if (!joinCrowd(p)) clusters.push(make(p, 'crowded'))
+      continue
+    }
+    const hits = clusters.filter((c) => {
+      const q = place(c)
+      return solid(c, q) && hit(mine.box!, q.box!, gap)
+    })
+    if (!hits.length) {
+      clusters.push(me)
+      continue
+    }
+    if (hits.some(pinned)) {
+      // Next to the selection: keep only the dot, under the selected label.
+      clusters.push(make(p, 'pinned-neighbour'))
+      continue
+    }
+    const target = hits.find((c) => near(c, p))
     if (target) {
       target.members.push(p)
-      target.x = target.members.reduce((a, m) => a + m.x, 0) / target.members.length
-      target.y = target.members.reduce((a, m) => a + m.y, 0) / target.members.length
-    } else {
-      clusters.push({ key: p.id, x: p.x, y: p.y, members: [p], flip: false })
+      centre(target)
+      continue
     }
+    // Crowded by a far-away label: group with crowded neighbours (a count badge), else stay a bare dot.
+    if (!joinCrowd(p)) clusters.push(make(p, 'crowded'))
   }
-  // Merged bubbles are wider than single labels: keep merging until no two markers collide.
-  for (let changed = true; changed; ) {
+  // Merged bubbles are wider than single labels: resolve until no two solid boxes collide.
+  for (let guard = 0, changed = true; changed && guard < 4000; guard++) {
     changed = false
     outer: for (let i = 0; i < clusters.length; i++) {
+      const pi = place(clusters[i])
+      if (!solid(clusters[i], pi)) continue
       for (let j = i + 1; j < clusters.length; j++) {
-        if (!hit(clusterBox(clusters[i], maxX), clusterBox(clusters[j], maxX), gap)) continue
+        const pj = place(clusters[j])
+        if (!solid(clusters[j], pj) || !hit(pi.box!, pj.box!, gap)) continue
         const a = clusters[i]
-        a.members.push(...clusters[j].members)
-        a.x = a.members.reduce((acc, m) => acc + m.x, 0) / a.members.length
-        a.y = a.members.reduce((acc, m) => acc + m.y, 0) / a.members.length
-        clusters.splice(j, 1)
+        const b = clusters[j]
+        if (pinned(a) || pinned(b)) {
+          // Never cover the selection: the other marker's members become bare dots.
+          const other = pinned(a) ? b : a
+          clusters.splice(clusters.indexOf(other), 1, ...other.members.map((m) => make(m, 'pinned-neighbour')))
+        } else if (near(a, b)) {
+          a.members.push(...b.members)
+          a.compact = !!(a.compact && b.compact)
+          a.dotOnly = false
+          a.crowded = false
+          centre(a)
+          clusters.splice(j, 1)
+        } else if (pj.side !== 'dot') {
+          // Far apart: the later (lower-priority) marker gives up its label first…
+          yieldLabel(b)
+        } else if (pi.side !== 'dot') {
+          // …and if its badge still collides, the earlier one gives up its caption too.
+          yieldLabel(a)
+        } else {
+          // Two badges touching are close anyway: one badge.
+          a.members.push(...b.members)
+          a.compact = true
+          centre(a)
+          clusters.splice(j, 1)
+        }
         changed = true
         break outer
       }
     }
   }
-  for (const c of clusters) c.flip = clusterBox(c, maxX).flip
-  for (const c of clusters) if (c.members.length > 1) c.key = `c:${c.members.map((m) => m.id).sort().join(',')}`
+  // Give labels back where a side turned out to be free (clear of every label, badge, panel and edge), in order.
+  const taken: Rect[] = []
+  for (const c of clusters) {
+    const q = place(c)
+    if (solid(c, q)) taken.push(q.box!)
+  }
+  for (const c of clusters) {
+    const single = c.members.length === 1
+    if (single ? !(c.dotOnly && c.crowded) : !c.compact) continue
+    const own = single ? null : badgeBox(c)
+    for (const side of ['right', 'left'] as const) {
+      const was = { dotOnly: c.dotOnly, compact: c.compact }
+      c.dotOnly = false
+      c.compact = false
+      const box = sideBox(c, side)
+      const free =
+        box.r <= po.maxX &&
+        box.l >= po.minX &&
+        !po.obstacles.some((o) => hit(box, o, 2)) &&
+        !taken.some((t) => t !== own && !(own && t.l === own.l && t.t === own.t && t.r === own.r && t.b === own.b) && hit(box, t, gap))
+      if (free) {
+        c.forceSide = side
+        taken.push(box)
+        break
+      }
+      c.dotOnly = was.dotOnly
+      c.compact = was.compact
+    }
+  }
+  for (const c of clusters) {
+    const p = place(c)
+    c.side = p.side
+    c.flip = p.side === 'left'
+    c.lead = clusterLead(c.members, rank)
+    if (c.members.length > 1) c.key = `c:${c.members.map((m) => m.id).sort().join(',')}`
+    else if (c.dotOnly) c.key = `d:${c.members[0].id}`
+    delete c.dotOnly
+    delete c.crowded
+    delete c.compact
+    delete c.forceSide
+  }
   return clusters
+}
+
+/** Screen box a placed cluster occupies (for other labels to avoid); null when it draws nothing. */
+export function clusterRect<T extends ClusterInput>(c: Cluster<T>, measure: MeasureText = estimateText, measureBubble: MeasureText = measure): Rect | null {
+  if (c.side === 'hidden') return null
+  if (c.members.length === 1) {
+    const p = c.members[0]
+    if (c.side === 'dot') return { l: c.x - DOT / 2, r: c.x + DOT / 2, t: c.y - DOT / 2, b: c.y + DOT / 2 }
+    const { w, h } = labelBox(p.name, measure, p.extra ?? 0)
+    return c.side === 'left' ? { l: c.x + 14 - w, r: c.x + 14, t: c.y - h / 2, b: c.y + h / 2 } : { l: c.x - 14, r: c.x - 14 + w, t: c.y - h / 2, b: c.y + h / 2 }
+  }
+  if (c.side === 'dot') return { l: c.x - BADGE / 2, r: c.x + BADGE / 2, t: c.y - BADGE / 2, b: c.y + BADGE / 2 }
+  const names = [c.lead.name, ...c.members.filter((m) => m !== c.lead).map((m) => m.name)]
+  const { w, h } = bubbleBox(clusterCaption(names), c.members.length, measureBubble)
+  return c.side === 'left' ? { l: c.x + 17 - w, r: c.x + 17, t: c.y - h / 2, b: c.y + h / 2 } : { l: c.x - 17, r: c.x - 17 + w, t: c.y - h / 2, b: c.y + h / 2 }
 }
 
 // ---------------------------------------------------------------------------

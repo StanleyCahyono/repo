@@ -18,8 +18,10 @@ import { ArrowLeft, ArrowRight, Award, CalendarDays, CircleCheck, CircleHelp, Ci
 import { cn } from '@/lib/ui/cn'
 import { t } from '@/lib/ui/motion'
 import { ButtonLink } from '@/components/ui/button'
+import { ScrollRow } from '@/components/ui/scroll-row'
 import { Badge } from '@/components/ui/badge'
 import { Select } from '@/components/ui/form'
+import { DatePicker } from '@/components/ui/date-picker'
 import { KindTag, Missing } from '@/components/ui/provenance'
 import { ConfidenceTag, ScoreChip } from '@/components/ui/score'
 import { SourceDrawer, type SourceItem } from '@/components/ui/source-drawer'
@@ -183,14 +185,14 @@ function ScenarioForm({ view, pending, onChange }: { view: CompareView; pending:
           <label htmlFor="cmp-date" className={label}>
             Day
           </label>
-          <input
+          <DatePicker
             id="cmp-date"
-            type="date"
+            value={view.date}
             min={view.seasonBounds.min}
             max={view.seasonBounds.max}
-            value={view.date}
-            onChange={(e) => /^\d{4}-\d{2}-\d{2}$/.test(e.target.value) && onChange({ date: e.target.value === view.today ? null : e.target.value })}
-            className="tnum h-11 w-full rounded-md border border-divider-strong bg-surface px-3 text-[15px] text-ink hover:border-ink-3 focus:border-teal focus-visible:outline-2 focus-visible:outline-offset-1 md:h-10"
+            today={view.today}
+            presets={['today', 'tomorrow', 'this-weekend', 'next-weekend']}
+            onChange={(v) => /^\d{4}-\d{2}-\d{2}$/.test(v) && v !== view.date && onChange({ date: v === view.today ? null : v })}
           />
         </div>
         <div className={field}>
@@ -438,7 +440,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
   return (
     <div className="lg:hidden">
       <div className="glass sticky top-14 z-10 -mx-4 flex items-center gap-2 rounded-none border-x-0 border-t-0 px-4 py-2 md:top-0 md:-mx-8 md:px-8">
-        <div role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 overflow-x-auto scrollbar-thin [mask-image:linear-gradient(to_right,#000_calc(100%-28px),transparent)] pr-6">
+        <ScrollRow role="tablist" aria-label="Resorts in this comparison" className="flex min-w-0 flex-1 gap-1 scrollbar-thin">
           {cols.map((c, i) => (
             <button
               key={c.id}
@@ -448,7 +450,7 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
               aria-controls={`cmp-col-${c.id}`}
               onClick={() => go(i)}
               className={cn(
-                'relative inline-flex h-11 shrink-0 items-center rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150',
+                'relative inline-flex h-11 shrink-0 items-center rounded-full px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors duration-150 max-[480px]:px-3',
                 i === active ? 'text-on-ink-chip' : 'text-ink-2 hover:text-ink',
               )}
             >
@@ -458,11 +460,12 @@ function CompareColumns({ view, sections, onRemove }: { view: CompareView; secti
               <span className="relative">{c.card.shortName}</span>
             </button>
           ))}
-        </div>
-        <span className="hud tnum shrink-0 text-ink-2" aria-hidden>
+        </ScrollRow>
+        <span className="hud tnum shrink-0 text-ink-2 max-[480px]:hidden" aria-hidden>
           {active + 1}/{cols.length}
         </span>
-        <div className="flex shrink-0 gap-1">
+        {/* Narrow phones: the tabs (and a swipe) move between columns, so the names get the room. */}
+        <div className="flex shrink-0 gap-1 max-[480px]:hidden">
           <button
             type="button"
             onClick={() => go(Math.max(0, active - 1))}
@@ -658,18 +661,22 @@ function ElevationCell({ c, max }: { c: CompareColumn; max: number }) {
   const top = m.summitM ?? base
   return (
     <span className="flex items-end gap-3.5">
-      <span aria-hidden className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]">
+      {/* The track (which has a size) watches the viewport; the bar grows from its base once it is in view. */}
+      <motion.span
+        aria-hidden
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative h-[150px] w-11 shrink-0 overflow-hidden rounded-[12px] bg-[color-mix(in_srgb,var(--ink)_6%,transparent)]"
+      >
         {m.summitM !== null && m.baseM !== null ? (
           <motion.span
             className="absolute inset-x-0 rounded-[8px] bg-[linear-gradient(180deg,var(--snow-top),var(--teal))]"
             style={{ bottom: `${(base / max) * 100}%`, height: `${Math.max(2, ((top - base) / max) * 100)}%`, originY: 1 }}
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 0.8, 0.26, 1] }}
+            variants={{ hidden: { scaleY: 0 }, show: { scaleY: 1, transition: { ...t.bars, duration: 0.45 } } }}
           />
         ) : null}
-      </span>
+      </motion.span>
       <span className="flex min-w-0 flex-col gap-1">
         <span className="tnum text-[28px] leading-none font-light tracking-[-0.03em]">{m.vertical ?? '—'}</span>
         <span className="text-[12.5px] text-ink-2">{m.vertical ? 'vertical' : 'vertical unknown'}</span>
@@ -810,7 +817,7 @@ function TerrainCell({ c }: { c: CompareColumn }) {
         {parts.map((p) => (p.v !== null ? <span key={p.k} className={cn('h-full', p.cls)} style={{ width: `${p.v}%` }} /> : null))}
       </span>
       <span className="tnum text-[12px] text-ink-2">{parts.map((p) => `${p.k.toLowerCase()} ${p.v === null ? 'unknown' : `${p.v}%`}`).join(' · ')}</span>
-      {tr.beginnerArea ? <span className="line-clamp-2 text-[12px] text-ink-3">{tr.beginnerArea}</span> : null}
+      {tr.beginnerArea ? <span className="text-[12px] text-ink-3">{tr.beginnerArea}</span> : null}
     </span>
   )
 }

@@ -6,7 +6,9 @@
  * - Markers are real <button>s (keyboard + screen-reader reachable); every map has a list alternative elsewhere.
  * - Explicit selection flies to the marker in ~550ms (jump under reduced motion). No automatic camera motion.
  * - If the style or tiles cannot load (offline, blocked), a schematic SVG fallback keeps markers usable.
- * - Straight lines are labelled as straight lines — never presented as routes or driving times.
+ * - Lines: a drive with recorded road geometry (`path`) follows the road (solid); a flight (`kind: 'flight'`) is a
+ *   static great-circle arc between the airports (dashed, never animated); anything else is a straight dashed line and
+ *   is labelled as one — never presented as a route or a driving time.
  * Tile provider: OpenFreeMap (free, no key; attribution required and shown). Override with NEXT_PUBLIC_MAP_STYLE_URL.
  */
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -27,6 +29,71 @@ export interface MapLine {
   from: [number, number] // [lon, lat]
   to: [number, number]
   label: string
+  /** Road geometry ([lon, lat] points, e.g. a bundled OSM route): drawn along the road instead of a straight line. */
+  path?: readonly [number, number][]
+  /** 'road' (needs `path`), 'flight' (a static arc between airports) or 'straight' (default: a labelled straight line). */
+  kind?: 'road' | 'flight' | 'straight'
+}
+
+type LineKind = 'road' | 'flight' | 'straight'
+
+function kindOf(l: MapLine): LineKind {
+  if (l.path && l.path.length > 1) return 'road'
+  return l.kind === 'flight' ? 'flight' : 'straight'
+}
+
+/** Great-circle arc between two points ([lon, lat]), longitudes unwrapped so it never jumps across the map. */
+function flightArc(a: [number, number], b: [number, number], steps = 48): [number, number][] {
+  const rad = Math.PI / 180
+  const toV = ([lon, lat]: [number, number]) => [Math.cos(lat * rad) * Math.cos(lon * rad), Math.cos(lat * rad) * Math.sin(lon * rad), Math.sin(lat * rad)]
+  const va = toV(a)
+  const vb = toV(b)
+  const dot = Math.min(1, Math.max(-1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2]))
+  const ang = Math.acos(dot)
+  if (ang < 1e-6) return [a, b]
+  const out: [number, number][] = []
+  let prev = a[0]
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps
+    const ka = Math.sin((1 - t) * ang) / Math.sin(ang)
+    const kb = Math.sin(t * ang) / Math.sin(ang)
+    const x = ka * va[0] + kb * vb[0]
+    const y = ka * va[1] + kb * vb[1]
+    const z = ka * va[2] + kb * vb[2]
+    let lon = Math.atan2(y, x) / rad
+    const lat = Math.atan2(z, Math.hypot(x, y)) / rad
+    while (lon - prev > 180) lon -= 360
+    while (lon - prev < -180) lon += 360
+    prev = lon
+    out.push([lon, lat])
+  }
+  return out
+}
+
+/** The points a line is drawn through. */
+function lineCoords(l: MapLine): [number, number][] {
+  const k = kindOf(l)
+  if (k === 'road') return l.path!.map((p) => [p[0], p[1]] as [number, number])
+  if (k === 'flight') return flightArc(l.from, l.to)
+  return [l.from, l.to]
+}
+
+/** The note under a map with lines: says what the lines are (only for the kinds present). */
+function linesNote(lines: readonly MapLine[] | undefined): string | null {
+  if (!lines?.length) return null
+  const kinds = new Set(lines.map(kindOf))
+  const parts: string[] = []
+  if (kinds.has('road')) parts.push('Solid: the road route')
+  if (kinds.has('flight')) parts.push('dashed arc: flight, airport to airport')
+  if (kinds.has('straight')) parts.push(kinds.size > 1 ? 'dashed: straight line, not a route' : 'Dashed lines are straight lines, not routes')
+  const text = parts.join(' · ')
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+/** A CSS colour token resolved for MapLibre paint (which cannot read CSS variables). */
+function cssColor(name: string, fallback: string): string {
+  if (typeof document === 'undefined') return fallback
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback
 }
 
 export interface ResortMapProps {
@@ -165,9 +232,17 @@ function SchematicMap({ markers, selectedId, onSelect, lines, reason, highlighte
       <div className="absolute inset-4 bottom-14">
         {lines?.length ? (
           <svg className="absolute inset-0 h-full w-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100" aria-hidden>
-            {lines.map((l, i) => (
-              <line key={i} x1={x(l.from[0])} y1={y(l.from[1])} x2={x(l.to[0])} y2={y(l.to[1])} stroke="var(--teal)" strokeWidth={0.4} strokeDasharray="1.2 1" vectorEffect="non-scaling-stroke" />
-            ))}
+            {lines.map((l, i) => {
+              const k = kindOf(l)
+              const pts = lineCoords(l)
+                .map(([lo, la]) => `${x(lo).toFixed(2)},${y(la).toFixed(2)}`)
+                .join(' ')
+              return k === 'road' ? (
+                <polyline key={i} points={pts} fill="none" stroke="var(--teal)" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+              ) : (
+                <polyline key={i} points={pts} fill="none" stroke="var(--teal)" strokeWidth={k === 'flight' ? 1.6 : 2} strokeDasharray="5 4" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+              )
+            })}
           </svg>
         ) : null}
         {shown.map((m) => {
@@ -328,16 +403,42 @@ export default function ResortMap(props: ResortMapProps) {
       } else if (fit.length === 1) {
         map.jumpTo({ center: [fit[0].lon, fit[0].lat], zoom: 10 })
       }
-      // Straight-line overlays (explicitly labelled as not a route).
+      // Line overlays: roads follow their geometry (solid); flights are static arcs and straight lines are dashed
+      // (both labelled in the note below the map). Nothing here animates.
       const src = map.getSource('piste-lines') as { setData?: (d: unknown) => void } | undefined
       const data = {
         type: 'FeatureCollection',
-        features: (lines ?? []).map((l) => ({ type: 'Feature', properties: { label: l.label }, geometry: { type: 'LineString', coordinates: [l.from, l.to] } })),
+        features: (lines ?? []).map((l) => ({ type: 'Feature', properties: { label: l.label, kind: kindOf(l) }, geometry: { type: 'LineString', coordinates: lineCoords(l) } })),
       }
       if (src?.setData) src.setData(data)
       else if (lines?.length) {
+        const teal = cssColor('--teal', 'rgb(36 93 101)')
+        const halo = cssColor('--surface', 'rgb(255 255 255)')
         map.addSource('piste-lines', { type: 'geojson', data: data as never })
-        map.addLayer({ id: 'piste-lines', type: 'line', source: 'piste-lines', paint: { 'line-color': '#245d65', 'line-width': 2, 'line-dasharray': [2, 1.5] } })
+        map.addLayer({
+          id: 'piste-lines-road-halo',
+          type: 'line',
+          source: 'piste-lines',
+          filter: ['==', ['get', 'kind'], 'road'],
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: { 'line-color': halo, 'line-width': 6, 'line-opacity': 0.85 },
+        })
+        map.addLayer({
+          id: 'piste-lines-road',
+          type: 'line',
+          source: 'piste-lines',
+          filter: ['==', ['get', 'kind'], 'road'],
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: { 'line-color': teal, 'line-width': 3 },
+        })
+        map.addLayer({
+          id: 'piste-lines',
+          type: 'line',
+          source: 'piste-lines',
+          filter: ['!=', ['get', 'kind'], 'road'],
+          layout: { 'line-cap': 'round' },
+          paint: { 'line-color': teal, 'line-width': ['match', ['get', 'kind'], 'flight', 1.6, 2], 'line-dasharray': [2, 1.6] },
+        })
       }
     })
     return () => {
@@ -382,8 +483,8 @@ export default function ResortMap(props: ResortMapProps) {
         style={{ position: 'absolute', inset: 0 }}
         className={cn('absolute inset-0', dark && '[&_.maplibregl-canvas]:[filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)_brightness(0.95)]')} />
       {!ready ? <div className="absolute inset-0 animate-pulse bg-surface-3/60" aria-hidden /> : null}
-      {lines?.length ? (
-        <p className="absolute top-2 left-2 rounded-sm bg-surface/90 px-2 py-1 text-[11.5px] text-ink-2">Dashed lines are straight lines, not routes.</p>
+      {linesNote(lines) ? (
+        <p className="absolute top-2 left-2 max-w-[calc(100%-64px)] rounded-[8px] bg-surface/90 px-2 py-1 text-[12px] leading-snug text-ink-2">{linesNote(lines)}.</p>
       ) : null}
     </div>
   )

@@ -197,8 +197,8 @@ const RailRow = memo(function RailRow({
           </div>
         )}
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <h3 id={`rail-${c.id}`} className="flex min-w-0 items-start gap-1.5 text-[15px] leading-snug font-semibold text-ink">
-            <Link href={c.href} title={c.name} className="min-w-0 rounded-sm decoration-teal/60 underline-offset-[3px] hover:text-teal hover:underline">
+          <h3 id={`rail-${c.id}`} className="flex min-w-0 flex-wrap items-start gap-x-1.5 gap-y-0.5 text-[15px] leading-snug font-semibold text-ink">
+            <Link href={c.href} title={c.name} className="min-w-0 rounded-sm [overflow-wrap:anywhere] decoration-teal/60 underline-offset-[3px] transition-colors duration-150 hover:text-teal hover:underline">
               {c.shortName}
               {c.shortName !== c.name ? <span className="sr-only"> ({c.name})</span> : null}
             </Link>

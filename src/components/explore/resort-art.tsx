@@ -3,6 +3,7 @@
  * (Greek Peak, the Matterhorn above Zermatt), a licensed catalog photo when one exists, otherwise the decorative
  * contour placeholder — clearly not a photo and not the resort's terrain. Never a fetched or invented picture.
  */
+import { PhotoCredit } from '@/components/ui/photo-credit'
 import { TopoArt } from '@/components/ui/topo'
 import { assetUrl, type AssetFile } from '@/lib/ui/assets'
 import { cn } from '@/lib/ui/cn'
@@ -18,8 +19,9 @@ export function hasResortPhoto(id: string, media: ResortCardData['media']): bool
 }
 
 /**
- * `variant="thumb"`: small square (list rows). `variant="banner"`: wide header (compare columns) with a caption
- * for the placeholder.
+ * `variant="thumb"`: small square (list rows) — the photo credit stays in the accessible name only.
+ * `variant="banner"`: wide header (compare columns) — the credit is the compact © chip in the corner (opens to the
+ * full credit on hover / focus), and the placeholder says it is not a photo.
  */
 export function ResortArt({
   id,
@@ -41,9 +43,15 @@ export function ResortArt({
       <figure className={cn(base, className)}>
         {/* eslint-disable-next-line @next/next/no-img-element -- licensed local photo from the catalog */}
         <img src={media.photo.src} alt={media.photo.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-        <figcaption className="sr-only">
-          Photo: {media.photo.credit} ({media.photo.license})
-        </figcaption>
+        {variant === 'banner' ? (
+          <figcaption className="absolute right-2 bottom-2 flex max-w-[calc(100%-16px)] justify-end">
+            <PhotoCredit credit={media.photo.credit} license={media.photo.license} sourceUrl={media.photo.sourceUrl} />
+          </figcaption>
+        ) : (
+          <figcaption className="sr-only">
+            Photo: {media.photo.credit} ({media.photo.license})
+          </figcaption>
+        )}
       </figure>
     )
   }
