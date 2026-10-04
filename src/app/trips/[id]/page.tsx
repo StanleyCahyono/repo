@@ -32,6 +32,7 @@ import { PartyAndCompanions, TripNotes } from '@/components/trips/people'
 import { FitList } from '@/components/trips/fit-list'
 import { Rise } from '@/components/trips/rise'
 import { plural } from '@/components/trips/format'
+import { routeGeo } from './route-geo'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
@@ -105,7 +106,7 @@ export default async function TripDetailPage({ params, searchParams }: { params:
     const c = page.catalog.find((x) => x.id === r.id)
     return { resortId: r.id, name: c?.shortName || r.name, windows: c?.seasons ?? [] }
   })
-  const route = routeData(page)
+  const route = await routeData(ctx, page)
 
   return (
     <TripUiProvider data={ui}>
@@ -142,11 +143,17 @@ export default async function TripDetailPage({ params, searchParams }: { params:
           id="itinerary"
           index={1}
           title="Itinerary"
-          meta={page.pass.chosen ? `Pass access shown for your passes and, as a what-if, ${page.pass.chosen.name}` : page.pass.ownsAny ? 'Pass access for the passes you own' : 'No pass on file — choose one to check access day by day'}
+          meta={
+            page.pass.chosen
+              ? `Lift access for your passes and, as a what-if, ${page.pass.chosen.name}`
+              : page.pass.ownsAny
+                ? 'Each ski day shows whether your pass or a lift ticket covers it'
+                : 'No pass on file — each ski day shows the lift ticket it needs'
+          }
           actions={<PassPicker products={page.pass.products} chosen={page.pass.chosen?.id ?? null} />}
           lead={
             page.pass.chosen && !page.pass.chosen.owned
-              ? `What-if: you don’t own ${page.pass.chosen.name}. Allotments are counted in date order across this trip; a day with no rule on file is never counted as covered.`
+              ? `What-if: you don’t own ${page.pass.chosen.name}. Its days are counted in date order across this trip.`
               : undefined
           }
         >
@@ -193,7 +200,7 @@ function NoRoute() {
 }
 
 /** Hero route data for the main resort: drive (estimate + winter buffer) and fly (door to door, flight leg from your itinerary only). */
-function routeData(page: NonNullable<Awaited<ReturnType<typeof getTripPage>>>): RouteData | null {
+async function routeData(ctx: Awaited<ReturnType<typeof getCtx>>, page: NonNullable<Awaited<ReturnType<typeof getTripPage>>>): Promise<RouteData | null> {
   const main = mainResort(page)
   if (!main) return null
   const pct = page.travelPrefs.winterBufferPct
@@ -225,6 +232,7 @@ function routeData(page: NonNullable<Awaited<ReturnType<typeof getTripPage>>>): 
   const drives = page.detail.items.some((i) => i.type === 'drive')
   const maxDrive = page.travelPrefs.maxDriveHours
   const preferFly = hasFlight || (!drives && (main.drive.minutes === null || (maxDrive !== null && main.drive.minutes > maxDrive * 60)) && main.airports.length > 0)
+  const geo = await routeGeo(ctx, { home: page.home, resort: { id: main.id, name: main.shortName, lat: main.lat, lon: main.lon }, origin: d2d ? origin : null, dest: d2d ? dest : null })
   return {
     homeName: page.home.name.split(',')[0],
     resortId: main.id,
@@ -244,5 +252,6 @@ function routeData(page: NonNullable<Awaited<ReturnType<typeof getTripPage>>>): 
       : { tone: 'unknown', text: 'Opening not announced' },
     initial: preferFly ? 'fly' : 'drive',
     winterPct: pct,
+    geo,
   }
 }

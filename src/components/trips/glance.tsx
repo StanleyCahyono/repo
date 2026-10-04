@@ -128,7 +128,7 @@ export function BudgetCard({ page }: { page: TripPage }) {
               <span className="min-w-0 text-[14px] text-ink group-hover/b:text-teal">{r.label}</span>
               <span className="text-right">
                 <span className={r.muted ? 'block text-[14px] font-medium text-ink-2' : 'block text-[14px] font-semibold text-ink tnum'}>{r.value}</span>
-                <span className="block font-mono text-[11px] tracking-[0.08em] text-ink-2 uppercase">{r.note}</span>
+                <span className="block font-mono text-[12px] tracking-[0.08em] text-ink-2 uppercase">{r.note}</span>
               </span>
             </a>
             {r.high > 0 ? <GrowBar low={r.low} high={r.high} delay={0.05 * k} className="mt-1.5" /> : null}

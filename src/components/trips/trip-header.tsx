@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { DemoBadge } from '@/components/ui/badge'
 import { Sheet } from '@/components/ui/sheet'
 import { Checkbox, Field, TextInput } from '@/components/ui/form'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Notice } from '@/components/ui/states'
 import { addDays, daysBetween } from '@/lib/domain/time'
 import type { TripRow } from '@/lib/db/rows'
@@ -233,7 +234,8 @@ function EditTripSheet({ open, onOpenChange, trip, tracks }: { open: boolean; on
 }
 
 function DuplicateSheet({ open, onOpenChange, trip }: { open: boolean; onOpenChange: (o: boolean) => void; trip: Pick<TripRow, 'id' | 'name' | 'startDate' | 'endDate'> }) {
-  const { run, pending } = useTripUi()
+  const { data, run, pending } = useTripUi()
+  const today = data.today
   const router = useRouter()
   const uid = useId()
   const [name, setName] = useState(`${trip.name} (copy)`)
@@ -273,8 +275,16 @@ function DuplicateSheet({ open, onOpenChange, trip }: { open: boolean; onOpenCha
         <Field label="Name" htmlFor={`${uid}-n`}>
           <TextInput id={`${uid}-n`} value={name} maxLength={120} onChange={(e) => setName(e.target.value)} />
         </Field>
-        <Field label="Starts" htmlFor={`${uid}-s`} hint={start ? `Ends ${tripDateLabel(addDays(start, len), addDays(start, len))} · every dated item moves with it` : undefined}>
-          <TextInput id={`${uid}-s`} type="date" value={start} onChange={(e) => setStart(e.target.value)} />
+        <Field label="Starts" htmlFor={`${uid}-s`} hint={start ? `Ends ${tripDateLabel(addDays(start, len), addDays(start, len))} · every dated item moves with it` : 'Pick the new first day'}>
+          <DatePicker
+            id={`${uid}-s`}
+            value={start}
+            onChange={setStart}
+            today={today}
+            openTo={trip.startDate}
+            presets={[{ label: 'Same dates', date: trip.startDate }, { label: 'A week later', date: addDays(trip.startDate, 7) }, { label: 'Next year, same weekday', date: addDays(trip.startDate, 364) }]}
+            marks={[{ date: trip.startDate, to: trip.endDate, label: 'Original trip', tone: 'ink', variant: 'rule', soft: true }]}
+          />
         </Field>
       </div>
     </Sheet>

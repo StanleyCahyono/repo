@@ -1,43 +1,68 @@
 'use client'
 /**
- * Facts for one planned ski day: pass access (your owned products, or a chosen "what if" product — unknown rules are
- * never permission), conditions or weather potential inside the forecast horizon (modeled, "likely"), and the
+ * Facts for one planned ski day: lift access in one line — your pass covers it, a lift ticket in the plan covers it,
+ * or it needs a lift ticket (one tap adds one); a chosen "what if" product is checked too. Rules that are not on file
+ * are never shown or counted as included, conditions or weather potential inside the forecast horizon (modeled, "likely"), and the
  * per-person day basket as a Piste estimate for reference (not part of the trip total).
  */
-import Link from 'next/link'
-import { Ban, CalendarClock, CircleCheck, CircleHelp, CircleSlash, CloudOff, History, Ticket, TriangleAlert } from 'lucide-react'
+import { Ban, CalendarClock, CircleCheck, CloudOff, History, Plus, Ticket, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
 import { ScoreChip, ConfidenceTag } from '@/components/ui/score'
 import { Freshness, KindTag } from '@/components/ui/provenance'
 import { SourceDrawer } from '@/components/ui/source-drawer'
 import type { DayResortView } from '@/lib/data/trip-plan'
+import type { TripItemRow } from '@/lib/db/rows'
 import type { AccessVerdict } from '@/lib/domain/passes'
 import type { UnitPrefs } from '@/lib/domain/types'
 import { addDays } from '@/lib/domain/time'
 import { formatSnow, formatSpeed, formatTemp } from '@/lib/domain/units'
 import { formatMoney, formatMoneyRange } from '@/lib/domain/money'
 import { dayLabel } from './format'
+import { useTripUi } from './trip-ui'
 
-const ACCESS: Record<DayResortView['access']['status'], { cls: string; Icon: typeof CircleCheck; label: string }> = {
-  covered: { cls: 'bg-positive-bg text-positive border-transparent', Icon: CircleCheck, label: 'Pass covers this day' },
-  'not-covered': { cls: 'bg-critical-bg text-critical border-transparent', Icon: CircleSlash, label: 'Not covered' },
-  unknown: { cls: 'bg-surface text-ink-2 border-dashed border-divider-strong', Icon: CircleHelp, label: 'No access recorded' },
-  'no-pass': { cls: 'bg-surface-3 text-ink-2 border-transparent', Icon: Ticket, label: 'No pass on file' },
+type AccessStatus = DayResortView['access']['status']
+
+const ACCESS: Record<AccessStatus | 'ticket', { cls: string; Icon: typeof CircleCheck; label: string }> = {
+  covered: { cls: 'bg-positive-bg text-positive border-transparent', Icon: CircleCheck, label: 'Pass covers it' },
+  ticket: { cls: 'bg-glacier text-teal border-transparent', Icon: Ticket, label: 'Lift ticket planned' },
+  'not-covered': { cls: 'bg-surface text-ink-2 border-divider-strong', Icon: Ticket, label: 'Needs a lift ticket' },
+  // A rule that is not on file is never shown or counted: to you it reads like any day your pass does not cover.
+  unknown: { cls: 'bg-surface text-ink-2 border-divider-strong', Icon: Ticket, label: 'Needs a lift ticket' },
+  'no-pass': { cls: 'bg-surface text-ink-2 border-divider-strong', Icon: Ticket, label: 'Needs a lift ticket' },
 }
 
-function verdictStatus(v: AccessVerdict): DayResortView['access']['status'] {
+function verdictStatus(v: AccessVerdict): AccessStatus {
   return v.canSki ? 'covered' : v.status === 'unknown' ? 'unknown' : 'not-covered'
 }
 
-export function AccessPill({ status, product, className }: { status: DayResortView['access']['status']; product?: string | null; className?: string }) {
+/** Why a pass does not cover the day, in a few words — only for rules that are on file. */
+function notCoveredWhy(v: AccessVerdict | undefined): string | null {
+  if (!v) return null
+  switch (v.status) {
+    case 'blackout':
+      return `${v.productName}: blacked out on this date`
+    case 'days-exhausted':
+      return `${v.productName}: no days left by this date`
+    case 'discount-only':
+      return `${v.productName}: discount only${v.discountText ? ` — ${v.discountText}` : ''}`
+    case 'not-included':
+      return `Not included in ${v.productName}`
+    case 'season-mismatch':
+      return `${v.productName} is for another season`
+    default:
+      return null
+  }
+}
+
+export function AccessPill({ status, product, className }: { status: AccessStatus | 'ticket'; product?: string | null; className?: string }) {
   const a = ACCESS[status]
   return (
-    <span className={cn('inline-flex flex-wrap items-center gap-x-2 gap-y-1', className)}>
-      <span className={cn('inline-flex h-6 items-center gap-1.5 rounded-full border px-2 text-[12.5px] font-medium whitespace-nowrap', a.cls)}>
+    <span className={cn('inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1', className)}>
+      <span className={cn('inline-flex h-7 items-center gap-1.5 rounded-full border px-2.5 text-[12.5px] font-semibold whitespace-nowrap', a.cls)}>
         <a.Icon aria-hidden className="size-3.5 shrink-0" strokeWidth={2} />
         {a.label}
       </span>
-      {product && status !== 'no-pass' ? <span className="text-[12.5px] font-medium text-ink-2">{product}</span> : null}
+      {product ? <span className="min-w-0 text-[12.5px] font-medium text-ink-2">{product}</span> : null}
     </span>
   )
 }
@@ -45,30 +70,53 @@ export function AccessPill({ status, product, className }: { status: DayResortVi
 function Reservation({ v }: { v: AccessVerdict | undefined }) {
   if (!v) return null
   if (v.reservationRequired === true) return <p className="mt-1 text-[12.5px] font-medium text-caution">Reservation required{v.reservationNotes ? ` — ${v.reservationNotes}` : ''}</p>
-  if (v.reservationRequired === false) return <p className="mt-1 text-[12.5px] text-ink-2">No reservation required{v.reservationNotes ? ` — ${v.reservationNotes}` : ''}</p>
+  if (v.reservationRequired === false) return <p className="mt-1 text-[12.5px] text-ink-2">No reservation needed</p>
   if (v.reservationNotes) return <p className="mt-1 line-clamp-2 text-[12.5px] text-ink-2">Reservations: {v.reservationNotes}</p>
   return null
 }
 
-function AccessCell({ r, chosenName }: { r: DayResortView; chosenName: string | null }) {
-  const best = r.access.verdicts[0]
-  const pick = r.access.status === 'unknown' ? r.access.verdicts.find((v) => v.status === 'unknown') : best
+function AccessCell({ r, date, ticket, chosenName }: { r: DayResortView; date: string; ticket: TripItemRow | null; chosenName: string | null }) {
+  const { data, openEditor } = useTripUi()
+  const covered = r.access.status === 'covered'
+  const best = covered ? r.access.verdicts.find((v) => v.canSki) : undefined
+  const why = covered ? null : (r.access.verdicts.map(notCoveredWhy).find(Boolean) ?? null)
+  const addTicket = () => openEditor({ mode: 'add', type: 'lift-ticket', defaults: { date, refId: r.resortId, title: `${r.shortName} lift ticket` } })
   return (
     <div className="min-w-0">
-      <p className="eyebrow mb-1.5">Pass access</p>
-      <AccessPill status={r.access.status} product={r.access.productName} />
-      {pick ? <p className="mt-1.5 text-[12.5px] text-ink-2">{pick.reasons[0]}</p> : <p className="mt-1.5 text-[12.5px] text-ink-3">Record a pass in Passes &amp; Costs, or pick one below to check.</p>}
-      {pick && pick.remainingAfterVisit !== null && pick.canSki ? <p className="text-[12.5px] text-ink-3 tnum">{pick.remainingAfterVisit} day{pick.remainingAfterVisit === 1 ? '' : 's'} left after this visit</p> : null}
-      <Reservation v={pick} />
-      <Link href="/passes" className="mt-1.5 inline-flex text-[12.5px] font-medium text-teal underline-offset-2 hover:underline">
-        Exact rules in Passes &amp; Costs
-      </Link>
+      <p className="eyebrow mb-1.5">Lift access</p>
+      {covered ? (
+        <>
+          <AccessPill status="covered" product={best?.productName ?? r.access.productName} />
+          {best && best.remainingAfterVisit !== null ? <p className="mt-1.5 text-[12.5px] text-ink-2 tnum">{best.remainingAfterVisit} day{best.remainingAfterVisit === 1 ? '' : 's'} left after this visit</p> : null}
+          <Reservation v={best} />
+        </>
+      ) : ticket ? (
+        <>
+          <AccessPill status="ticket" />
+          <button type="button" onClick={() => openEditor({ mode: 'edit', item: ticket })} className="mt-1.5 block max-w-full text-left text-[12.5px] font-medium text-ink underline-offset-2 hover:text-teal hover:underline">
+            {ticket.title}
+          </button>
+        </>
+      ) : (
+        <>
+          <AccessPill status={r.access.status} />
+          <p className="mt-1.5 text-[12.5px] text-ink-2">{why ?? (r.access.status === 'no-pass' ? 'No pass on file for this day.' : 'Your passes don’t cover this day.')}</p>
+          {data.status !== 'cancelled' ? (
+            <button
+              type="button"
+              onClick={addTicket}
+              className="mt-2 inline-flex h-9 items-center gap-1.5 rounded-full border border-divider-strong bg-surface px-3 text-[13px] font-medium text-ink transition-[transform,border-color,color] duration-150 hover:-translate-y-px hover:border-teal hover:text-teal"
+            >
+              <Plus aria-hidden className="size-3.5" /> Add a lift ticket
+            </button>
+          ) : null}
+        </>
+      )}
       {r.chosen ? (
         <div className="mt-2.5 border-t border-dashed border-divider pt-2">
           <p className="text-[12px] font-semibold text-ink-3">What if · {chosenName}</p>
           <AccessPill className="mt-1" status={verdictStatus(r.chosen)} />
-          <p className="mt-1 text-[12.5px] text-ink-2">{r.chosen.reasons[0]}</p>
-          <Reservation v={r.chosen} />
+          {r.chosen.canSki ? <Reservation v={r.chosen} /> : notCoveredWhy(r.chosen) ? <p className="mt-1 text-[12.5px] text-ink-2">{notCoveredWhy(r.chosen)}</p> : null}
         </div>
       ) : null}
     </div>
@@ -192,19 +240,19 @@ function BasketCell({ r }: { r: DayResortView }) {
       {b ? (
         <p className="mt-1.5 flex flex-wrap items-center gap-x-1.5 text-[12px] text-ink-3">
           <KindTag kind={b.lines.some((l) => l.kind === 'demo') ? 'demo' : 'derived'} />
-          <span>· reference only</span>
+          <span>· for reference, not in your budget</span>
         </p>
       ) : null}
     </div>
   )
 }
 
-export function DayResortFacts({ r, units, date, now, chosenName, header }: { r: DayResortView; units: UnitPrefs; date: string; now: string; chosenName: string | null; header?: React.ReactNode }) {
+export function DayResortFacts({ r, units, date, now, chosenName, ticket = null, header }: { r: DayResortView; units: UnitPrefs; date: string; now: string; chosenName: string | null; ticket?: TripItemRow | null; header?: React.ReactNode }) {
   return (
     <div className="rounded-[16px] border border-divider bg-ink/[0.03]">
       {header ? <div className="flex flex-wrap items-center justify-between gap-2 border-b border-divider px-3.5 py-2">{header}</div> : null}
       <div className="grid gap-4 p-3.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-        <AccessCell r={r} chosenName={chosenName} />
+        <AccessCell r={r} date={date} ticket={ticket} chosenName={chosenName} />
         <ConditionsCell r={r} units={units} date={date} now={now} />
         <div className="sm:col-span-2 lg:col-span-1">
           <BasketCell r={r} />

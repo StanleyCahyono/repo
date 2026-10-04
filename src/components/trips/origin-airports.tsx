@@ -55,7 +55,7 @@ export function OriginAirports({ rows, selected, dest, depart, ret, winterPct, h
                 <div className="flex min-w-0 items-center gap-3 lg:order-1">
                   <span className="w-12 shrink-0 font-light tracking-[-0.03em] text-[26px] leading-none text-ink">{r.iata}</span>
                   <div className="min-w-0">
-                    <p className="line-clamp-2 text-[13.5px] leading-snug font-medium text-ink">{r.name ?? r.iata}</p>
+                    <p className="text-[13.5px] leading-snug font-medium text-pretty text-ink">{r.name ?? r.iata}</p>
                     <p className="text-[12.5px] text-ink-3">
                       {r.iata === 'ITH' ? 'Default origin' : 'Nearby alternative'}
                       {r.iata === fastest && rows.length > 1 && r.iata !== 'ITH' ? ' · closest to home' : ''}

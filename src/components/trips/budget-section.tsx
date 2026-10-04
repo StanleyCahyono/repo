@@ -130,10 +130,14 @@ export function BudgetSection({ page, index }: { page: TripPage; index: number }
             <p className="text-[13.5px] text-ink-3 italic">Nothing priced yet.</p>
           )}
           {rows.some((r) => r.max !== r.min) ? (
-            <p className="mt-1 flex items-center gap-2 text-[12px] text-ink-3">
-              <span aria-hidden className="inline-block h-2 w-5 rounded-r-[3px] bg-teal" /> low end
-              <span aria-hidden className="ml-2 inline-block h-2 w-5 rounded-r-[3px] bg-teal/30" /> up to the high end of your range
-            </p>
+            <ul className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-ink-3">
+              <li className="inline-flex items-center gap-2 whitespace-nowrap">
+                <span aria-hidden className="inline-block h-2 w-5 shrink-0 rounded-r-[3px] bg-teal" /> Low end
+              </li>
+              <li className="inline-flex items-center gap-2 whitespace-nowrap">
+                <span aria-hidden className="inline-block h-2 w-5 shrink-0 rounded-r-[3px] bg-teal/30" /> Up to your high end
+              </li>
+            </ul>
           ) : null}
         </div>
       </div>

@@ -81,7 +81,7 @@ export function TripSectionNav({ sections }: { sections: NavSection[] }) {
               >
                 {on ? <motion.span layoutId="trip-nav-active" transition={t.spring} aria-hidden className="absolute inset-0 rounded-full bg-ink-chip" /> : null}
                 <span className="relative">{s.label}</span>
-                {typeof s.count === 'number' && s.count > 0 ? <span className={cn('relative font-mono text-[11.5px] tnum', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>{s.count}</span> : null}
+                {typeof s.count === 'number' && s.count > 0 ? <span className={cn('relative font-mono text-[12px] tnum', on ? 'text-on-ink-chip-2' : 'text-ink-3')}>{s.count}</span> : null}
               </a>
             </li>
           )

@@ -11,8 +11,10 @@
  * Enter or Space picks. Reduced motion: the band and knobs jump instead of springing (MotionConfig in the shell).
  */
 import { useCallback, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/ui/cn'
+import { t } from '@/lib/ui/motion'
 import { markOn, type SeasonTrack, type SeasonWindowKind } from '@/lib/data/trip-seasons'
 import { addMonths, bandRange, daysInMonth, formatDate, monthOf, navigateDate, nightsLabel, nightsOf, pickDay, windowFor, type DateMark } from '@/components/ui/calendar-model'
 import { MarkGlyph, MonthGrid, MonthTitle, NavButton, SlidingMonths } from '@/components/ui/date-picker-grid'
@@ -122,38 +124,41 @@ export function RangeCalendar({ start, end, onChange, today, min, maxDays, track
 
   // Each date stays on one line ("Thu 8 Oct – / Sun 11 Oct", never "Sun / 11 Oct").
   const day = (d: string) => <span className="whitespace-nowrap">{formatDate(d, 'short')}</span>
-  const status =
+  const headline =
     start && end ? (
       <>
         {day(start)} – {day(end)}
       </>
     ) : start ? (
-      <>
-        {day(start)} – pick the last day
-      </>
+      <>{day(start)} – …</>
     ) : (
       'Pick your dates'
     )
+  const sub = start && end ? nightsLabel(start, end) : start ? `Now tap the last day${maxDays ? ` · up to ${maxDays} days` : ''}` : 'Tap a start day, then an end day'
+  const headKey = `${start ?? ''}|${end ?? ''}`
 
   return (
     <div ref={rootRef} className={cn('flex flex-col gap-3', className)}>
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="hud text-ink-2">{label}</p>
-          <p aria-live="polite" className="mt-1 font-display text-[22px] leading-tight font-light tracking-[-0.02em] text-ink tnum md:text-[24px]">
-            {status}
-            {start && end ? <span className="mt-0.5 block font-sans text-[13px] font-normal tracking-normal text-ink-2">{nightsLabel(start, end)}</span> : null}
-          </p>
-        </div>
-        <div className="flex shrink-0 gap-1.5">
-          <NavButton dir={-1} disabled={month <= minMonth} onClick={() => go(-1)} density="large" />
-          <NavButton dir={1} disabled={month >= maxMonth} onClick={() => go(1)} density="large" />
-        </div>
+      <div className="min-w-0" aria-live="polite">
+        <p className="hud text-ink-2">{label}</p>
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div key={headKey} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={t.select}>
+            <p className="mt-1 font-display text-[22px] leading-tight font-light tracking-[-0.02em] text-balance text-ink tnum md:text-[24px]">{headline}</p>
+            <p className="mt-0.5 text-[13px] text-ink-2 tnum">{sub}</p>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <div className="flex items-center justify-between gap-3">
-        <MonthTitle month={month} id={`${uid}-month`} />
-        <p className="text-right text-[12.5px] text-ink-2">{start && !end ? 'Now tap the last day' : 'Tap a start day, then an end day'}</p>
+      <div className="mt-1 flex items-center justify-between gap-3">
+        <AnimatePresence mode="popLayout" initial={false} custom={dir}>
+          <motion.div key={month} initial={{ opacity: 0, x: dir * 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: dir * -12 }} transition={t.pageIn}>
+            <MonthTitle month={month} id={`${uid}-month`} density="regular" />
+          </motion.div>
+        </AnimatePresence>
+        <div className="flex shrink-0 gap-1.5">
+          <NavButton dir={-1} disabled={month <= minMonth} onClick={() => go(-1)} density="regular" />
+          <NavButton dir={1} disabled={month >= maxMonth} onClick={() => go(1)} density="regular" />
+        </div>
       </div>
 
       <div

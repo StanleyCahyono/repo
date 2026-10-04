@@ -29,11 +29,11 @@ function MiniMonth({ start, end, today }: { start: string; end: string; today: s
     <div aria-hidden className="glass-strong w-[272px] rounded-[24px] p-4">
       <p className="mb-2 flex items-baseline justify-between text-[13px] font-semibold text-ink">
         {formatLocalDate(`${ym}-01`, 'LLLL yyyy')}
-        {end.slice(0, 7) !== ym ? <span className="hud text-[11px] text-ink-2">continues →</span> : null}
+        {end.slice(0, 7) !== ym ? <span className="hud text-[12px] text-ink-2">continues →</span> : null}
       </p>
       <div className="grid grid-cols-7 pb-1">
         {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
-          <span key={i} className={cn('text-center font-mono text-[11px]', i >= 5 ? 'text-teal' : 'text-ink-3')}>
+          <span key={i} className={cn('text-center font-mono text-[12px]', i >= 5 ? 'text-teal' : 'text-ink-3')}>
             {d}
           </span>
         ))}
@@ -118,7 +118,7 @@ function Meters({ t }: { t: TripRowView }) {
 
 function NextUp({ t, today, demo }: { t: TripRowView; today: string; demo: boolean }) {
   return (
-    <section aria-labelledby="next-up-title" className="glass group relative overflow-hidden rounded-[32px] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[var(--glass-shadow-lg)]">
+    <section aria-labelledby="next-up-title" className="glass lift group relative overflow-hidden rounded-[32px]">
       <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-[60%] opacity-90 [mask-image:linear-gradient(to_left,black_45%,transparent)] max-md:hidden">
         <TopoArt seed={t.resorts[0]?.id ?? t.id} density={1} />
       </div>
@@ -176,7 +176,7 @@ function TripCard({ t, today, demo, index }: { t: TripRowView; today: string; de
     <Rise as="li" index={index} className="min-w-0">
       <Link
         href={`/trips/${t.id}`}
-        className="glass group flex h-full flex-col gap-4 rounded-[28px] p-5 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[var(--glass-shadow-lg)] md:p-6"
+        className="glass lift group flex h-full flex-col gap-4 rounded-[28px] p-5 md:p-6"
       >
         <div className="flex items-start justify-between gap-3">
           <DateBlock start={t.startDate} end={t.endDate} />
@@ -365,7 +365,7 @@ function Folded({ title, trips, today, demo }: { title: string; trips: TripRowVi
         </span>
         <ChevronRight aria-hidden className="size-5 text-ink-3 transition-transform duration-200 group-open:rotate-90" />
       </summary>
-      <ol className="divide-y divide-divider border-t border-divider">
+      <ol className="divide-y divide-divider border-t border-divider group-open:[animation:piste-rise_220ms_var(--ease-out-soft)_both]">
         {trips.map((t) => (
           <li key={t.id}>
             <Link href={`/trips/${t.id}`} className="group/row flex min-h-14 items-center justify-between gap-4 px-5 py-3 transition-colors duration-150 hover:bg-ink/[0.03] md:px-6">

@@ -5,7 +5,7 @@
  * and costs. Opens from the button or from the URL (/trips?new=1&resort=alta&start=2027-02-13&end=2027-02-17) so
  * other screens can link straight into it.
  */
-import { useId, useMemo, useState, type ReactNode } from 'react'
+import { useId, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Car, Check, Minus, Plane, Plus, Search, Star } from 'lucide-react'
@@ -64,7 +64,7 @@ export function NewTripSheet({ resorts, today, templateCount }: { resorts: Picke
       open={open}
       onOpenChange={(o) => (o ? null : close())}
       title="New trip"
-      description="Pick where, then when. Add travel, lodging, lessons and costs next — nothing is booked from here."
+      description="Where, then when. Nothing is booked from here."
       widthClass="md:w-[560px]"
     >
       {open ? <NewTripForm resorts={resorts} today={today} templateCount={templateCount} prefill={params} onDone={(id) => router.push(`/trips/${id}`)} /> : null}
@@ -210,41 +210,37 @@ function NewTripForm({ resorts, today, templateCount, prefill, onDone }: { resor
                 <TextInput id={`${uid}-q`} value={query} placeholder="Search resorts, towns, regions" className="h-12 rounded-[14px] pl-10" onChange={(e) => setQuery(e.target.value)} />
               </div>
               <ul className="max-h-[min(46dvh,380px)] overflow-y-auto rounded-[18px] border border-divider bg-surface/70 scrollbar-thin" aria-label="Resorts">
-                {filtered.map((r) => {
+                {filtered.map((r, k) => {
                   const on = picked.some((p) => p.id === r.id)
                   const first = r.seasons[0]
                   return (
-                    <li key={r.id} className="border-b border-divider last:border-0">
+                    <li key={r.id} className={cn('border-b border-divider last:border-0', k < 10 && 'piste-rise')} style={k < 10 ? ({ '--rise-delay': `${60 + k * 22}ms` } as CSSProperties) : undefined}>
                       <button type="button" aria-pressed={on} onClick={() => toggleResort(r.id)} className={cn('flex min-h-14 w-full items-center gap-3 px-3.5 py-2 text-left transition-colors duration-150', on ? 'bg-teal/10' : 'hover:bg-ink/[0.04]')}>
                         <span aria-hidden className={cn('flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors duration-150', on ? 'border-ink-chip bg-ink-chip text-on-ink-chip' : 'border-divider-strong bg-surface')}>
                           {on ? <Check className="size-3.5" strokeWidth={3} /> : null}
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span className="flex items-center gap-1.5 text-[14px] font-medium text-ink">
+                          <span className="flex items-center gap-1.5 text-[14px] leading-snug font-medium text-ink">
                             {r.favorite ? <Star aria-label="Favourite" className="size-3.5 shrink-0 text-copper" fill="currentColor" /> : null}
                             <span className="truncate">{r.name}</span>
                           </span>
-                          <span className="flex items-center gap-1.5 truncate text-[12.5px] text-ink-3">
-                            <span className="truncate">{[r.place, r.region].filter(Boolean).join(' · ')}</span>
+                          {r.place || r.region ? <span className="block truncate text-[12.5px] leading-snug text-ink-3">{[r.place, r.region].filter(Boolean).join(' · ')}</span> : null}
+                          <span className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[12.5px] leading-snug text-ink-2 tnum">
+                            {r.driveMinutes !== null ? (
+                              <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                                <Car aria-hidden className="size-3.5 shrink-0 text-ink-3" /> {duration(r.driveMinutes)} drive
+                              </span>
+                            ) : r.flyVia.length ? (
+                              <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                                <Plane aria-hidden className="size-3.5 shrink-0 text-ink-3" /> Fly to {r.flyVia.slice(0, 2).join(' or ')}
+                              </span>
+                            ) : null}
                             {first ? (
-                              <span className="inline-flex shrink-0 items-center gap-1">
-                                · <SeasonMark kind={first.kind} className="w-2.5" /> {first.kind === 'estimate' ? 'est.' : first.kind === 'announced' ? 'from' : 'opened'} {formatLocalDate(first.from, 'd LLL')}
+                              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                                <SeasonMark kind={first.kind} className="w-2.5" /> {first.kind === 'estimate' ? 'Opening est.' : first.kind === 'announced' ? 'Opens' : 'Opened'} {formatLocalDate(first.from, 'd LLL')}
                               </span>
                             ) : null}
                           </span>
-                        </span>
-                        <span className="shrink-0 text-right text-[12.5px] text-ink-2 tnum">
-                          {r.driveMinutes !== null ? (
-                            <span className="inline-flex items-center gap-1">
-                              <Car aria-hidden className="size-3.5 text-ink-3" /> {duration(r.driveMinutes)}
-                            </span>
-                          ) : r.flyVia.length ? (
-                            <span className="inline-flex items-center gap-1">
-                              <Plane aria-hidden className="size-3.5 text-ink-3" /> {r.flyVia.slice(0, 2).join(', ')}
-                            </span>
-                          ) : (
-                            <span className="text-ink-3 italic">travel unknown</span>
-                          )}
                         </span>
                       </button>
                     </li>
@@ -252,7 +248,7 @@ function NewTripForm({ resorts, today, templateCount, prefill, onDone }: { resor
                 })}
                 {!filtered.length ? <li className="px-3.5 py-4 text-[13.5px] text-ink-3">No resort matches “{query}”.</li> : null}
               </ul>
-              <p className="text-[12px] text-ink-3">Drive times are curated one-way estimates from home, not live routing. Season dates: opened, announced or a labelled Piste estimate.</p>
+              <p className="text-[12px] text-ink-3">Drive times are one-way estimates from home. Season dates are opened, announced or a Piste estimate.</p>
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2">
               {!picked.length ? (

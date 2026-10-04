@@ -196,6 +196,8 @@ interface PanelProps {
   headerAction?: ReactNode
   /** Readout above the months (selection + relative day / nights). Default: on for ranges and phone sheets. */
   readout?: boolean
+  /** Day the calendar opens on while nothing is picked (default: today). */
+  openTo?: string | null
 }
 
 function CalendarPanel({
@@ -219,11 +221,12 @@ function CalendarPanel({
   autoFocus,
   headerAction,
   readout = presentation === 'sheet',
+  openTo,
 }: PanelProps) {
   const uid = useId()
   const density: CalendarDensity = presentation === 'sheet' ? 'large' : presentation === 'inline' ? 'regular' : 'compact'
   const c = constraints
-  const anchor = draft.start
+  const anchor = draft.start ?? (isISODate(openTo) ? openTo : null)
   const [view, setView] = useState(() => {
     const m = initialMonth(anchor, today, c)
     // Two months: keep a range that ends next month in view, and never open on a month past `max`.
@@ -617,6 +620,8 @@ export interface DatePickerCommonProps {
   /** Popover alignment against the trigger (md+). */
   align?: 'start' | 'center' | 'end'
   onOpenChange?: (open: boolean) => void
+  /** Day the calendar opens on while the field is empty (default: today) — e.g. a trip's first day. */
+  openTo?: string | null
 }
 
 export interface DatePickerProps extends DatePickerCommonProps {
@@ -691,6 +696,7 @@ function PickerShell(props: ShellProps) {
     icon,
     align = 'start',
     onOpenChange,
+    openTo,
     maxDays,
     months,
     display,
@@ -818,6 +824,7 @@ function PickerShell(props: ShellProps) {
       onDone={done}
       escapeRef={escapeRef}
       autoFocus
+      openTo={openTo}
       headerAction={
         p === 'sheet' ? (
           <Dialog.Close aria-label="Close" className="-mt-1 -mr-1 inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-chip-track text-ink-2 transition-colors duration-150 hover:bg-chip-hover hover:text-ink">
